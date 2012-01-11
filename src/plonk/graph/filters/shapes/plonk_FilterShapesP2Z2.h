@@ -1,0 +1,397 @@
+/*
+ -------------------------------------------------------------------------------
+ This file is part of the Plink, Plonk, Plank libraries
+  by Martin Robinson
+ 
+ Copyright University of the West of England, Bristol 2011-12
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ 
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+ * Neither the name of University of the West of England, Bristol nor 
+   the names of its contributors may be used to endorse or promote products
+   derived from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE 
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
+ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ -------------------------------------------------------------------------------
+ */
+
+#ifndef PLONK_FILTERSHAPESP2Z2_H
+#define PLONK_FILTERSHAPESP2Z2_H
+
+#include "../plonk_FilterShapes.h"
+
+//------------------------------------------------------------------------------
+
+/** Two-pole, two-zero, resonant low-pass filter shape. */
+template<class SampleType>
+class FilterShapeRLPF
+:   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::LPF>
+{
+public:
+    enum Params
+    {
+        Frequency,
+        Q,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P2Z2>                 FormType;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Frequency, 
+                             IOKey::Q);
+        return keys;
+    }
+        
+    static inline void calculate (Data& data) throw()
+    {
+        const CalcType one (Math<CalcType>::get1());
+        const CalcType half (Math<CalcType>::get0_5());
+        const CalcType two (Math<CalcType>::get2());
+        const CalcType w0 =  Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
+        const CalcType cos_w0 = plonk::cos (w0);
+        const CalcType sin_w0 = plonk::sin (w0);		
+        const CalcType alpha = sin_w0 * half / data.params[Q];
+        const CalcType temp1 = one / (one + alpha);
+        const CalcType temp2 = one - cos_w0;
+        
+        data.coeffs[FormType::CoeffA0] = temp2 * half * temp1;
+        data.coeffs[FormType::CoeffA1] = temp2 * temp1;
+        data.coeffs[FormType::CoeffA2] = data.coeffs[FormType::CoeffA0];
+        data.coeffs[FormType::CoeffB1] = two * cos_w0 * temp1;
+        data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
+    }
+};
+
+
+//------------------------------------------------------------------------------
+
+/** Two-pole, two-zero, resonant high-pass filter shape. */
+template<class SampleType>
+class FilterShapeRHPF
+:   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::HPF>
+{
+public:
+    enum Params
+    {
+        Frequency,
+        Q,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P2Z2>                 FormType;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Frequency, 
+                             IOKey::Q);
+        return keys;
+    }
+    
+    static inline void calculate (Data& data) throw()
+    {        
+        const CalcType one (Math<CalcType>::get1());
+        const CalcType half (Math<CalcType>::get0_5());
+        const CalcType two (Math<CalcType>::get2());
+        const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
+        const CalcType cos_w0 = plonk::cos (w0);
+        const CalcType sin_w0 = plonk::sin (w0);		
+        const CalcType alpha = sin_w0 * half / data.params[Q];
+        const CalcType temp1 = one / (one + alpha);
+        const CalcType temp2 = one + cos_w0;
+        
+        data.coeffs[FormType::CoeffA0] = temp2 * half * temp1;
+        data.coeffs[FormType::CoeffA1] = -temp2 * temp1;
+        data.coeffs[FormType::CoeffA2] = data.coeffs[FormType::CoeffA0];
+        data.coeffs[FormType::CoeffB1] = two * cos_w0 * temp1;
+        data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
+    }
+};
+
+//------------------------------------------------------------------------------
+
+/** Two-pole, two-zero, low-shelving filter shape. */
+template<class SampleType>
+class FilterShapeLowShelf
+:   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::LowShelf>
+{
+public:
+    enum Params
+    {
+        Frequency,
+        S,
+        Gain,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P2Z2>                 FormType;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Frequency, 
+                             IOKey::S,
+                             IOKey::Gain);
+        return keys;
+    }
+    
+    static inline void calculate (Data& data) throw()
+    {
+        const CalcType one (Math<CalcType>::get1());
+        const CalcType half (Math<CalcType>::get0_5());
+        const CalcType two (Math<CalcType>::get2());
+        const CalcType ten (Math<CalcType>::get10());
+                
+        const CalcType a = plonk::pow(ten, data.params[Gain] * (Math<CalcType>::get1_40()));
+        const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
+        const CalcType cos_w0 = plonk::cos (w0);
+        const CalcType sin_w0 = plonk::sin (w0);		
+
+        const CalcType r2ss = half / plonk::squared (data.params[S]);
+        const CalcType alpha = sin_w0 * plonk::sqrt (a) * r2ss;
+        const CalcType ap1 = a + one;
+        const CalcType am1 = a - one;
+        const CalcType temp1 = ap1 * cos_w0;
+        const CalcType temp2 = am1 * cos_w0;
+        const CalcType temp3 = temp2 + alpha;
+        const CalcType temp4 = temp2 - alpha;
+        const CalcType temp5 = one / (ap1 + temp3);
+
+        data.coeffs[FormType::CoeffA0] = a * (ap1 - temp3) * temp5;
+        data.coeffs[FormType::CoeffA1] = two * a * (am1 - temp1) * temp5;
+        data.coeffs[FormType::CoeffA2] = a * (ap1 - temp4) * temp5;
+        data.coeffs[FormType::CoeffB1] = two * (am1 + temp1) * temp5;
+        data.coeffs[FormType::CoeffB2] = -(ap1 + temp4) * temp5;        
+    }
+};
+
+//------------------------------------------------------------------------------
+
+/** Two-pole, two-zero, high-shelving filter shape. */
+template<class SampleType>
+class FilterShapeHighShelf
+:   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::HighShelf>
+{
+public:
+    enum Params
+    {
+        Frequency,
+        S,
+        Gain,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P2Z2>                 FormType;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Frequency, 
+                             IOKey::S,
+                             IOKey::Gain);
+        return keys;
+    }
+    
+    static inline void calculate (Data& data) throw()
+    {        
+        const CalcType one (Math<CalcType>::get1());
+        const CalcType half (Math<CalcType>::get0_5());
+        const CalcType two (Math<CalcType>::get2());
+        const CalcType ten (Math<CalcType>::get10());
+        
+        const CalcType a = plonk::pow(ten, data.params[Gain] * (Math<CalcType>::get1_40()));
+        const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
+        const CalcType cos_w0 = plonk::cos (w0);
+        const CalcType sin_w0 = plonk::sin (w0);		
+        
+        const CalcType r2ss = half / plonk::squared (data.params[S]);
+        const CalcType alpha = sin_w0 * plonk::sqrt (a) * r2ss;
+        const CalcType ap1 = (a + one);
+        const CalcType am1 = (a - one);
+        const CalcType temp1 = ap1 * cos_w0;
+        const CalcType temp2 = am1 * cos_w0;
+        const CalcType temp3 = one / (ap1 - temp2 + alpha);
+        
+        // more refactoring seems to inexplicably blow the filter
+        
+        data.coeffs[FormType::CoeffA0] = a * (ap1 + temp2 + alpha) * temp3;
+        data.coeffs[FormType::CoeffA1] = -two * a * (am1 + temp1) * temp3;
+        data.coeffs[FormType::CoeffA2] = a * (ap1 + temp2 - alpha) * temp3;
+        data.coeffs[FormType::CoeffB1] = -two * (am1 - temp1) * temp3;
+        data.coeffs[FormType::CoeffB2] = -(ap1 - temp2 - alpha) * temp3;   
+    }
+    
+    
+};
+
+
+//------------------------------------------------------------------------------
+
+/** Two-pole, two-zero, notch EQ filter shape. */
+template<class SampleType>
+class FilterShapeNotch
+:   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::Notch>
+{
+public:
+    enum Params
+    {
+        Frequency,
+        Q,
+        Gain,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P2Z2>                 FormType;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Frequency, 
+                             IOKey::Q, 
+                             IOKey::Gain);
+        return keys;
+    }
+        
+    static inline void calculate (Data& data) throw()
+    {
+        const CalcType one (Math<CalcType>::get1());
+        const CalcType half (Math<CalcType>::get0_5());
+        const CalcType two (Math<CalcType>::get2());
+        const CalcType ten (Math<CalcType>::get10());
+                
+        const CalcType a = plonk::pow(ten, data.params[Gain] * (Math<CalcType>::get1_40()));
+        const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
+        const CalcType cos_w0 = plonk::cos (w0);
+        const CalcType sin_w0 = plonk::sin (w0);		
+        const CalcType alpha = sin_w0 * half / data.params[Q];
+        const CalcType temp1 = alpha * a;
+        const CalcType temp2 = alpha / a;
+        const CalcType temp3 = one / (one + temp2);	
+        
+        data.coeffs[FormType::CoeffB1] = two * temp3 * cos_w0; 
+        data.coeffs[FormType::CoeffA0] = (one + temp1) * temp3; 
+        data.coeffs[FormType::CoeffA1] = -data.coeffs[FormType::CoeffB1];
+        data.coeffs[FormType::CoeffA2] = (one - temp1) * temp3; 
+        data.coeffs[FormType::CoeffB2] = (one - temp2) * -temp3; 
+    }
+};
+
+//------------------------------------------------------------------------------
+
+/** Two-pole, two-zero, band-pass filter shape. */
+template<class SampleType>
+class FilterShapeBPF
+:   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::BPF>
+{
+public:
+    enum Params
+    {
+        Frequency,
+        Bandwidth,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P2Z2>                 FormType;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Frequency, 
+                             IOKey::Bandwidth);
+        return keys;
+    }
+    
+    static inline void calculate (Data& data) throw()
+    {   
+        const CalcType zero (Math<CalcType>::get0());
+        const CalcType one (Math<CalcType>::get1());
+        const CalcType two (Math<CalcType>::get2());
+        const CalcType logSqrt2 (Math<CalcType>::getLogSqrt2());
+        const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
+        const CalcType cos_w0 = plonk::cos (w0);
+        const CalcType sin_w0 = plonk::sin (w0);		
+        const CalcType alpha = sin_w0 * plonk::sinh (logSqrt2 * (data.params[Bandwidth] * w0) / sin_w0);
+        const CalcType temp1 = one / (one + alpha);
+                
+        data.coeffs[FormType::CoeffA0] = alpha * temp1;
+        data.coeffs[FormType::CoeffA1] = zero;
+        data.coeffs[FormType::CoeffA2] = -data.coeffs[FormType::CoeffA0];
+        data.coeffs[FormType::CoeffB1] = two * cos_w0 * temp1;
+        data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
+    }
+};
+
+//------------------------------------------------------------------------------
+
+/** Two-pole, two-zero, band-reject filter shape. */
+template<class SampleType>
+class FilterShapeBRF
+:   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::BRF>
+{
+public:
+    enum Params
+    {
+        Frequency,
+        Bandwidth,
+        NumParams
+    };
+    
+    typedef FilterForm<SampleType,FilterFormType::P2Z2>                 FormType;
+    typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
+    typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    
+    static IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Frequency, 
+                             IOKey::Bandwidth);
+        return keys;
+    }
+    
+    static inline void calculate (Data& data) throw()
+    {   
+        const CalcType one (Math<CalcType>::get1());
+        const CalcType two (Math<CalcType>::get2());
+        const CalcType logSqrt2 (Math<CalcType>::getLogSqrt2());
+        const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
+        const CalcType cos_w0 = plonk::cos (w0);
+        const CalcType sin_w0 = plonk::sin (w0);		
+        const CalcType alpha = sin_w0 * plonk::sinh (logSqrt2 * (data.params[Bandwidth] * w0) / sin_w0);
+        const CalcType temp1 = one / (one + alpha);
+        const CalcType temp2 = two * cos_w0 * temp1;
+        
+        data.coeffs[FormType::CoeffA0] = temp1;
+        data.coeffs[FormType::CoeffA1] = -temp2;
+        data.coeffs[FormType::CoeffA2] = temp1;
+        data.coeffs[FormType::CoeffB1] = temp2;
+        data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
+    }
+};
+
+
+
+#endif // PLONK_FILTERSHAPESP2Z2_H
