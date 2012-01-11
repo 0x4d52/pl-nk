@@ -34,13 +34,6 @@
 #ifndef PLANK_H
 #define PLANK_H
 
-/*
- Initialise Init
- Deinitialise DeInit
- PlankResult
- @return PlankResult_OK if successful, otherwise an error code.
- */
-
 /* 10/1/2012
  http://cloc.sourceforge.net v 1.52  T=1.0 s (89.0 files/s, 16517.0 lines/s)
  -------------------------------------------------------------------------------
