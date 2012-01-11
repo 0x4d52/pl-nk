@@ -1,0 +1,15 @@
+\form#0:$ \frac{1}{a} $
+\form#1:$ a + b $
+\form#2:$ a - b $
+\form#3:$ a \times b $
+\form#4:$ \frac{a}{b} $
+\form#5:$ \sqrt{ a^2 + b^2 } $
+\form#6:$ atan2(a,b) $
+\form#7:$ a * a + b * b $
+\form#8:$ a * a - b * b $
+\form#9:$ (a + b) * (a + b) $
+\form#10:$ (a - b) * (a - b) $
+\form#11:$ inHigh = inLow + inRange $
+\form#12:$ outHigh = outLow + outRange $
+\form#13:$ a + (frac \times (b - a)) $
+\form#14:$ io = io * mul + add $
