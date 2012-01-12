@@ -188,8 +188,9 @@ PlankResult pl_SimpleMap_Clear (PlankSimpleMapRef p)
             
             if (mapElement != PLANK_NULL)
             {
-                if ((result = (p->freeFunction) (mapElement->ptr)) != PlankResult_OK)
-                    goto exit;
+                if (mapElement->ptr != PLANK_NULL)
+                    if ((result = (p->freeFunction) (mapElement->ptr)) != PlankResult_OK)
+                        goto exit;
 
                 if ((result = pl_SimpleMapElement_Destroy (mapElement)) != PlankResult_OK)
                     goto exit;
@@ -288,9 +289,15 @@ PlankResult pl_SimpleMap_SetKey (PlankSimpleMapRef p, const PlankLL key, PlankP 
             mapElement = pl_SimpleLinkedListElement_GetData (listElement);
             
             if (mapElement != PLANK_NULL)
-            {
+            {                
                 if (mapElement->key == key)
                 {
+                    if ((mapElement->ptr != PLANK_NULL) &&
+                        (mapElement->ptr != data) &&
+                        (p->freeFunction != PLANK_NULL))
+                        if ((result = (p->freeFunction) (mapElement->ptr)) != PlankResult_OK)
+                            goto exit;
+                    
                     mapElement->ptr = data;
                     goto exit;
                 }

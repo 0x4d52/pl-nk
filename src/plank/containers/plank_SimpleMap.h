@@ -50,9 +50,39 @@ PlankResult pl_SimpleMap_DeInit (PlankSimpleMapRef p);
 PlankResult pl_SimpleMap_Destroy (PlankSimpleMapRef p);
 PlankResult pl_SimpleMap_Clear (PlankSimpleMapRef p);
 PlankResult pl_SimpleMap_SetFreeElementDataFunction (PlankSimpleMapRef p, PlankSimpleMapFreeElementDataFunction freeFunction);
+
+/** Determines whether the map already contains a specified key.
+ @param p The map object. 
+ @param key The key to use. 
+ @param flag On return will contain @true if the map contains the specified key. 
+ @return PlankResult_OK if the operation was successful. */
 PlankResult pl_SimpleMap_ContainsKey (PlankSimpleMapRef p, const PlankLL key, PlankB* flag);
+
+/** Sets a key to associate with a pointer.
+ If a pointer is already associated with the key and the free function has been
+ set (with pl_SimpleMap_SetFreeElementDataFunction()) then the old pointer will be 
+ deallocated before setting the new one. 
+ @param p The map object. 
+ @param key The key to use. 
+ @param data The pointer to asscoiate with the key (map be PLANK_NULL). 
+ @return PlankResult_OK if the operation was successful. */
 PlankResult pl_SimpleMap_SetKey (PlankSimpleMapRef p, const PlankLL key, PlankP data);
+
+/** Get a pointer associated with the specified key.
+ @param p The map object. 
+ @param key The key to use. 
+ @param data On return will contain the pointer associated with the key (or PLANK_NULL
+             if the map doesn't contain the key.
+ @return PlankResult_OK if the operation was successful. */
 PlankResult pl_SimpleMap_GetKey (PlankSimpleMapRef p, const PlankLL key, PlankP* data);
+
+/** Get a pointer associated with the specified key and remove it from the map.
+ @param p The map object. 
+ @param key The key to use. 
+ @param data On return will contain the pointer associated with the key (or PLANK_NULL
+             if the map doesn't contain the key.  It is the caller's resposibility to 
+             free this pointer if necessary.
+ @return PlankResult_OK if the operation was successful. */
 PlankResult pl_SimpleMap_RemoveKey (PlankSimpleMapRef p, const PlankLL key, PlankP* data);
 PlankLL     pl_SimpleMap_GetSize (PlankSimpleMapRef p);
 
