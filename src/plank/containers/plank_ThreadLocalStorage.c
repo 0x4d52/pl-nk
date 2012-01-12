@@ -35,6 +35,15 @@
 #include "plank_ThreadLocalStorage.h"
 #include "plank_Atomic.h"
 
+/*
+ Windows TLS stuff...
+ 
+ void __cdecl on_process_enter(void);
+ void __cdecl on_process_exit(void);
+ void __cdecl on_thread_enter(void);
+ void __cdecl on_thread_exit(void);
+ 
+ */
 
 // private functions
 void pl_ThreadLocalStorageFree (PlankP ptr);
