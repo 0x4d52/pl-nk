@@ -67,7 +67,7 @@ void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier)
 #if PLANK_WIN
 PlankUL pl_ThreadLocalStorageCreateIdentifier()
 {
-    return (PlankUL)TlsAlloc();
+    return (PlankUL)TlsAlloc(); // FlsAlloc() (W7 onwards) has a free function but not TlsAlloc!!
 }
 
 void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier)
@@ -241,7 +241,10 @@ PlankP pl_ThreadLocalStorage_GetData (PlankThreadLocalStorageRef p)
             goto exit;
         
         if (! TlsSetValue ((DWORD)p->identifier, returnValue))
+        {
+            pl_Memory_Free (m, returnValue);
             returnValue = PLANK_NULL;
+        }
     }
     
 exit:
