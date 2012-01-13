@@ -2,6 +2,8 @@
  -------------------------------------------------------------------------------
  This file is part of the Plink, Plonk, Plank libraries
   by Martin Robinson
+
+ http://code.google.com/p/pl-nk/
  
  Copyright University of the West of England, Bristol 2011-12
  All rights reserved.
@@ -28,6 +30,10 @@
  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ 
+ This software makes use of third party libraries. For more information see:
+ doc/license.txt included in the distribution.
+  
  -------------------------------------------------------------------------------
  */
 

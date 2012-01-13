@@ -3,6 +3,8 @@
  This file is part of the Plink, Plonk, Plank libraries
   by Martin Robinson
  
+ http://code.google.com/p/pl-nk/
+ 
  Copyright University of the West of England, Bristol 2011-12
  All rights reserved.
  
@@ -28,6 +30,9 @@
  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ 
+ This software makes use of third party libraries. For more information see:
+ doc/license.txt included in the distribution.
  -------------------------------------------------------------------------------
  */
 
@@ -43,6 +48,10 @@
  void __cdecl on_thread_enter(void);
  void __cdecl on_thread_exit(void);
  
+ http://stackoverflow.com/questions/3802244/hooking-thread-creation-termination
+ The best way is to call WaitForSingleObject with the HANDLE of the thread (call OpenThread using the thread id to get the HANDLE).
+ - how will one know the thread exists in the first place!
+
  */
 
 // private functions
