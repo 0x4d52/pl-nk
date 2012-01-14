@@ -92,7 +92,7 @@ public:
 #endif        
     }
     
-    static inline void zero (void* ptr, const UnsignedLong numBytes) throw()
+    static inline void zero (void* const ptr, const UnsignedLong numBytes) throw()
     {
         const ResultCode result = pl_MemoryZero (ptr, numBytes);
         plonk_assert (result == PlankResult_OK);
@@ -101,7 +101,7 @@ public:
 #endif
     }
     
-    static inline void copy (void* dst, const void* src, const UnsignedLong numBytes) throw()
+    static inline void copy (void* const dst, const void* const src, const UnsignedLong numBytes) throw()
     {
         const ResultCode result = pl_MemoryCopy (dst, src, numBytes);
         plonk_assert (result == PlankResult_OK);

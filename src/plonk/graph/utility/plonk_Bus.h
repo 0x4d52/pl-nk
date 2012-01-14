@@ -290,6 +290,11 @@ public:
     {
     }
     
+    explicit BusBuffer (const int number) throw()
+    :   Base (getBus (Text (number)))
+    {
+    }
+    
     explicit BusBuffer (const char* name) throw()
     :   Base (getBus (Text (name)))
     {
@@ -416,7 +421,6 @@ private:
     
     BusBuffer (const double) throw();
     BusBuffer (const float) throw();
-    BusBuffer (const int) throw();
 };
 
 

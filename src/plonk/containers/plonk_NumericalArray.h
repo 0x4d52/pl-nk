@@ -133,6 +133,16 @@ public:
 		return null;
 	}	        
     
+    static inline void copyData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems)
+    {
+        Memory::copy (dst, src, numItems * sizeof (NumericalType));
+    }
+    
+    static inline void zeroData (NumericalType* const dst, const UnsignedLong numItems)
+    {
+        Memory::zero (dst, numItems * sizeof (NumericalType));
+    }
+    
     NumericalArray (NumericalArray const& copy) throw()
 	:	Base (static_cast<Base const&> (copy))
 	{
