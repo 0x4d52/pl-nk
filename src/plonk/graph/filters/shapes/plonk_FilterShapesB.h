@@ -59,11 +59,24 @@ public:
     typedef FilterForm<SampleType,FilterFormType::B2>                   FormType;
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
+    typedef NumericalArray<CalcType>                                    CalcTypes;
+    typedef FilterUnit<FormType>                                        Filter;
 
     static IntArray getInputKeys() throw()
     {
         const IntArray keys (IOKey::Frequency);
         return keys;
+    }
+    
+    static CalcTypes calculate (const CalcType frequency, 
+                                const double sampleRate = SampleRate::getDefault()) throw()
+    {
+        Data data;
+        data.params[Frequency] = frequency;
+        data.filterSampleRate = sampleRate;
+        data.filterSampleDuration = 1.0 / sampleRate;
+        calculate (data);
+        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
     }
             
     static inline void calculate (Data& data) throw()
@@ -84,8 +97,8 @@ public:
         data.coeffs[FormType::CoeffB2] = -(one - temp3 + temp2) * data.coeffs[FormType::CoeffA0];
         
     }
-
 };
+typedef FilterShapeLPF<PLONK_TYPE_DEFAULT> ShapeLPF;
 
 //------------------------------------------------------------------------------
 
@@ -104,11 +117,24 @@ public:
     typedef FilterForm<SampleType,FilterFormType::B2>                   FormType;
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
-    
+    typedef NumericalArray<CalcType>                                    CalcTypes;
+    typedef FilterUnit<FormType>                                        Filter;
+
     static IntArray getInputKeys() throw()
     {
         const IntArray keys (IOKey::Frequency);
         return keys;
+    }
+    
+    static inline CalcTypes calculate (const CalcType frequency, 
+                                       const double sampleRate = SampleRate::getDefault()) throw()
+    {
+        Data data;
+        data.params[Frequency] = frequency;
+        data.filterSampleRate = sampleRate;
+        data.filterSampleDuration = 1.0 / sampleRate;
+        calculate (data);
+        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
     }
         
     static inline void calculate (Data& data) throw()
@@ -129,6 +155,7 @@ public:
         data.coeffs[FormType::CoeffB2] = -(one - temp3 + temp2) * data.coeffs[FormType::CoeffA0];
     }
 };
+typedef FilterShapeHPF<PLONK_TYPE_DEFAULT> ShapeHPF;
 
 
 
