@@ -59,6 +59,12 @@ public:
 	{
 	}
 	
+    DictionaryInternal (const int initialCapacity) throw()
+    :   values (ObjectArray<ValueType>::emptyWithAllocatedSize (initialCapacity)),
+        keys (ObjectArray<KeyType>::emptyWithAllocatedSize (initialCapacity))
+	{
+	}
+    
 	~DictionaryInternal()
 	{
 	}
@@ -140,6 +146,11 @@ public:
 	{
 	}
 	
+    explicit Dictionary (const int initialCapacity) throw()
+	:	Base (new Internal (initialCapacity))
+	{
+	}
+    
     explicit Dictionary (Internal* internalToUse) throw() 
 	:	Base (internalToUse)
 	{
@@ -184,7 +195,7 @@ public:
 	{
 		put (pairs);
 	}
-		
+    
 	/** Returns the array of values. */
 	const ObjectArray<ValueType>& getValues() const throw()
 	{ 

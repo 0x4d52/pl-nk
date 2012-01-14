@@ -43,6 +43,7 @@ BEGIN_PLONK_NAMESPACE
 #include "../../core/plonk_Headers.h"
 
 InputDictionary::InputDictionary() throw()
+:   Base (8)
 {
 }
 

@@ -170,11 +170,11 @@ public:
 	static void roundCopy (const double inValue, char& outValue) throw()    { outValue = char (inValue + 0.5); }
 	static void roundCopy (const double inValue, short& outValue) throw()   { outValue = short (inValue + 0.5); }
 	static void roundCopy (const double inValue, int& outValue) throw()     { outValue = int (inValue + 0.5); }
-    static void roundCopy (const double inValue, long& outValue) throw()    { outValue = long (inValue + 0.5); }    
+    static void roundCopy (const double inValue, Long& outValue) throw()    { outValue = Long (inValue + 0.5); }    
     static void roundCopy (const float inValue, char& outValue) throw()     { outValue = char (inValue + 0.5f); }
 	static void roundCopy (const float inValue, short& outValue) throw()    { outValue = short (inValue + 0.5f); }
 	static void roundCopy (const float inValue, int& outValue) throw()      { outValue = int (inValue + 0.5f); }
-    static void roundCopy (const float inValue, long& outValue) throw()     { outValue = long (inValue + 0.5f); }
+    static void roundCopy (const float inValue, Long& outValue) throw()     { outValue = Long (inValue + 0.5f); }
     
     template<class Type1, class Type2>
     static void roundCopy (const Type1 inValue, Type2& outValue) throw()    { outValue = Type2 (inValue); }	

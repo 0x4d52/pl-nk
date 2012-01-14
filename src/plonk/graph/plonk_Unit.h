@@ -45,11 +45,6 @@
 #include "utility/plonk_SampleRate.h"
 #include "info/plonk_InfoHeaders.h"
 
-//class UnitBase : public UNITBASETYPE<ChannelBase<SampleType> >
-
-
-//------------------------------------------------------------------------------
-
 /**  A Unit is effectively an array of Channel objects. 
  A Unit effective IS a Unit graph since each Channel of each Unit may be in turn
  connected to more Unit objects via its inputs. 
