@@ -241,7 +241,7 @@ public:
         this->getInternal()->push (value);
     }
     
-    ValueType pop () throw()
+    ValueType pop() throw()
     {
         return this->getInternal()->pop();
     }

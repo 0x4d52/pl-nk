@@ -172,7 +172,7 @@ public:
         UnitType result (UnitType::withSize (numOutputChannels));
         
         Data data;
-        Memory::zero (&data, sizeof (data));
+        Memory::zero (data);
         data.base.sampleRate = -1.0;        
         data.base.sampleDuration = -1.0;
 

@@ -170,7 +170,7 @@ public:
     
     /** Creates a null object. 
      This can't be used for reading or writing. */
-    BinaryFile () throw()
+    BinaryFile() throw()
     :   Base (new Internal())
     {
     }

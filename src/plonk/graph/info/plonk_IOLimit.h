@@ -68,7 +68,7 @@ public:
     static bool hasMinimum (const IOLimit::LimitType type) throw();
     static bool hasMaximum (const IOLimit::LimitType type) throw();
     
-    const Text getName () const throw();
+    const Text getName() const throw();
     const Measure::Name getMeasure() const throw();
     bool isNone() const throw();
     bool isClipped() const throw();

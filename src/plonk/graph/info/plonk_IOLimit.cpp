@@ -55,7 +55,7 @@ IOLimit::IOLimit (const IOLimit::LimitType typeToUse,
 {
 }
 
-IOLimit IOLimit::createNone () throw()
+IOLimit IOLimit::createNone() throw()
 {
     return IOLimit (IOLimit::None, Measure::None, 0.0, 0.0); // 0.0s to be ingored
 }

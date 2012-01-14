@@ -56,7 +56,7 @@ public:
     typedef SmartPointerContainer<WeakPointer,false>    Base;
     typedef typename OriginalType::Internal             OriginalInternal;
 
-    WeakPointerContainer () throw()
+    WeakPointerContainer() throw()
     :   Base (0)
     {
     }        

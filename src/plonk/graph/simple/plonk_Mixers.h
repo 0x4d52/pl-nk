@@ -94,9 +94,9 @@ public:
     {
         const UnitType& input = this->getInputAsUnit (IOKey::Signal);
         
-        this->setBlockSize (BlockSize::decide (input.getMaxBlockSize (),
+        this->setBlockSize (BlockSize::decide (input.getMaxBlockSize(),
                                                this->getBlockSize()));
-        this->setSampleRate (SampleRate::decide (input.getMaxSampleRate (),
+        this->setSampleRate (SampleRate::decide (input.getMaxSampleRate(),
                                                  this->getSampleRate()));      
                 
         const int numChannels = input.getNumChannels();

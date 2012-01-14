@@ -103,7 +103,7 @@ public:
 
     /** Default constructor.
      This creates a Unit with a single null Channel. */
-    UnitBase () throw()
+    UnitBase() throw()
     :   Base (ChannelType())
     {
     }

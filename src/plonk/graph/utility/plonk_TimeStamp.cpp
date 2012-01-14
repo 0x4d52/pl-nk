@@ -318,7 +318,7 @@ TimeStamp TimeStamp::fromSamples (const double samples, const double sampleRate)
     return fromSeconds (samples / sampleRate);    
 }
 
-const TimeStamp& TimeStamp::getZero () throw()
+const TimeStamp& TimeStamp::getZero() throw()
 {
     static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
     return *timeZero;

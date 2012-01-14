@@ -101,6 +101,12 @@ public:
 #endif
     }
     
+    template<class Type>
+    static inline void zero (Type& object) throw()
+    {
+        Memory::zero (&object, sizeof (Type));
+    }
+    
     static inline void copy (void* const dst, const void* const src, const UnsignedLong numBytes) throw()
     {
         const ResultCode result = pl_MemoryCopy (dst, src, numBytes);

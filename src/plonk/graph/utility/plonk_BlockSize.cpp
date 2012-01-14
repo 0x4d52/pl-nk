@@ -42,7 +42,7 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../../core/plonk_Headers.h"
 
-BlockSize::BlockSize () throw()
+BlockSize::BlockSize() throw()
 :   Base (0)
 {
 }

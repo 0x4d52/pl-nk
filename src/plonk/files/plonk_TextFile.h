@@ -97,7 +97,7 @@ public:
     
     /** Creates a null object. 
      This can't be used for reading or writing. */
-    TextFile () throw()
+    TextFile() throw()
     :   Base (new Internal())
     {
     }
