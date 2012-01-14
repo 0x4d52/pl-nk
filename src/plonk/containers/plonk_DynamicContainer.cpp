@@ -217,29 +217,29 @@ Dynamic Dynamic::getChannel (const int index) throw()
     
     switch (typeCode) 
     {
-        case TypeCode::FloatUnit:       return reinterpret_cast<FloatUnit&>     (this->getItem()).getChannel (index);
-        case TypeCode::FloatUnits:      return reinterpret_cast<FloatUnits&>    (this->getItem()).columnWrapAt (index); // to FloatUnit
-        case TypeCode::FloatBusses:     return reinterpret_cast<FloatBusses&>   (this->getItem()).wrapAt (index);       // to FloatBus
+        case TypeCode::FloatUnit:       return reinterpret_cast<FloatUnit&> (this->getItem()).getChannel (index);
+        case TypeCode::FloatUnits:      return FloatUnits (reinterpret_cast<FloatUnits&> (this->getItem()).columnWrapAt (index));
+        case TypeCode::FloatBusses:     return FloatBusses (reinterpret_cast<FloatBusses&> (this->getItem()).wrapAt (index));
             
-        case TypeCode::ShortUnit:       return reinterpret_cast<ShortUnit&>     (this->getItem()).getChannel (index);
-        case TypeCode::ShortUnits:      return reinterpret_cast<ShortUnits&>    (this->getItem()).columnWrapAt (index); // to ShortUnit
-        case TypeCode::ShortBusses:     return reinterpret_cast<ShortBusses&>   (this->getItem()).wrapAt (index);       // to ShortBus
+        case TypeCode::ShortUnit:       return reinterpret_cast<ShortUnit&> (this->getItem()).getChannel (index);
+        case TypeCode::ShortUnits:      return ShortUnits (reinterpret_cast<ShortUnits&> (this->getItem()).columnWrapAt (index));
+        case TypeCode::ShortBusses:     return ShortBusses (reinterpret_cast<ShortBusses&> (this->getItem()).wrapAt (index));
             
-        case TypeCode::DoubleUnit:      return reinterpret_cast<DoubleUnit&>    (this->getItem()).getChannel (index);
-        case TypeCode::DoubleUnits:     return reinterpret_cast<DoubleUnits&>   (this->getItem()).columnWrapAt (index); // to DoubleUnit
-        case TypeCode::DoubleBusses:    return reinterpret_cast<DoubleBusses&>  (this->getItem()).wrapAt (index);       // to DoubleBus
+        case TypeCode::DoubleUnit:      return reinterpret_cast<DoubleUnit&> (this->getItem()).getChannel (index);
+        case TypeCode::DoubleUnits:     return DoubleUnits (reinterpret_cast<DoubleUnits&> (this->getItem()).columnWrapAt (index));
+        case TypeCode::DoubleBusses:    return DoubleBusses (reinterpret_cast<DoubleBusses&> (this->getItem()).wrapAt (index));
             
-        case TypeCode::IntUnit:         return reinterpret_cast<IntUnit&>       (this->getItem()).getChannel (index);
-        case TypeCode::IntUnits:        return reinterpret_cast<IntUnits&>      (this->getItem()).columnWrapAt (index); // to IntUnit
-        case TypeCode::IntBusses:       return reinterpret_cast<IntBusses&>     (this->getItem()).wrapAt (index);       // to IntBus
+        case TypeCode::IntUnit:         return reinterpret_cast<IntUnit&> (this->getItem()).getChannel (index);
+        case TypeCode::IntUnits:        return IntUnits (reinterpret_cast<IntUnits&> (this->getItem()).columnWrapAt (index));
+        case TypeCode::IntBusses:       return IntBusses (reinterpret_cast<IntBusses&> (this->getItem()).wrapAt (index));
 
-        case TypeCode::Int24Unit:       return reinterpret_cast<Int24Unit&>     (this->getItem()).getChannel (index);
-        case TypeCode::Int24Units:      return reinterpret_cast<Int24Units&>    (this->getItem()).columnWrapAt (index); // to IntUnit
-        case TypeCode::Int24Busses:     return reinterpret_cast<Int24Busses&>   (this->getItem()).wrapAt (index);       // to IntBus            
+        case TypeCode::Int24Unit:       return reinterpret_cast<Int24Unit&> (this->getItem()).getChannel (index);
+        case TypeCode::Int24Units:      return Int24Units (reinterpret_cast<Int24Units&> (this->getItem()).columnWrapAt (index));
+        case TypeCode::Int24Busses:     return Int24Busses (reinterpret_cast<Int24Busses&> (this->getItem()).wrapAt (index));            
             
-        case TypeCode::LongUnit:        return reinterpret_cast<LongUnit&>      (this->getItem()).getChannel (index);
-        case TypeCode::LongUnits:       return reinterpret_cast<LongUnits&>     (this->getItem()).columnWrapAt (index); // to LongUnit
-        case TypeCode::LongBusses:      return reinterpret_cast<LongBusses&>    (this->getItem()).wrapAt (index);       // to LongBus
+        case TypeCode::LongUnit:        return reinterpret_cast<LongUnit&> (this->getItem()).getChannel (index);
+        case TypeCode::LongUnits:       return LongUnits (reinterpret_cast<LongUnits&> (this->getItem()).columnWrapAt (index));
+        case TypeCode::LongBusses:      return LongBusses (reinterpret_cast<LongBusses&> (this->getItem()).wrapAt (index));
 
         default:
             plonk_assertfalse;
