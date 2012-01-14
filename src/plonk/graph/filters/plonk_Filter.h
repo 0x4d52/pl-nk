@@ -57,6 +57,7 @@ public:
     typedef ChannelInternal<SampleType,Data>                        Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
     typedef UnitBase<SampleType>                                    UnitType;
+    typedef NumericalArray2D<ChannelType,UnitType>                  UnitsType;
     typedef InputDictionary                                         Inputs;
     typedef NumericalArray<SampleType>                              Buffer;
         
@@ -80,8 +81,21 @@ public:
     }    
     
     InternalBase* getChannel (const int index) throw()
-    {
-        return this; // must hange this if the channels are resolved at render time
+    {        
+        Inputs channelInputs;
+        
+        channelInputs.put (IOKey::Signal, 
+                           this->getInputAsUnit (IOKey::Signal).getChannel (index));
+        
+        const UnitType& coeffs = this->getInputAsUnit (IOKey::Coeffs);
+        UnitsType groupedCoeffs = coeffs.group (FormType::NumCoeffs);
+        channelInputs.put (IOKey::Coeffs, 
+                           groupedCoeffs.wrapAt (index));
+        
+        return new FilterChannelInternal (channelInputs, 
+                                          this->getState(), 
+                                          this->getBlockSize(), 
+                                          this->getSampleRate());        
     }
     
     void initChannel (const int channel) throw()
