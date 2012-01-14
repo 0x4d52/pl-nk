@@ -81,7 +81,7 @@ public:
     
     InternalBase* getChannel (const int index) throw()
     {
-        return this;
+        return this; // must hange this if the channels are resolved at render time
     }
     
     void initChannel (const int channel) throw()
@@ -153,7 +153,7 @@ public:
                          IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
                          IOKey::End);
     }
-        
+                
     /** Create a generic filter from the coefficients. */
     static UnitType ar (UnitType const& input,
                         UnitType const& coeffs, 
@@ -164,7 +164,7 @@ public:
     {             
         const int requiredCoeffs = FormType::NumCoeffs;
         const int numCoeffChannels = coeffs.getNumChannels();
-
+        
         plonk_assert(numCoeffChannels > 0);
         plonk_assert((numCoeffChannels % requiredCoeffs) == 0);
         
@@ -175,27 +175,25 @@ public:
         Memory::zero (data);
         data.base.sampleRate = -1.0;        
         data.base.sampleDuration = -1.0;
-
-        UnitsType groupedCoeffs = coeffs.group (requiredCoeffs);
-        
+                
         for (int i = 0; i < numOutputChannels; ++i)
         {
             Inputs inputs;
-            inputs.put (IOKey::Signal, input[i]);
-            inputs.put (IOKey::Coeffs, groupedCoeffs.wrapAt (i));
-                        
+            inputs.put (IOKey::Signal, input);
+            inputs.put (IOKey::Coeffs, coeffs);
+            
             ChannelInternalType* internal = new FilterInternal (inputs, 
                                                                 data, 
                                                                 preferredBlockSize, 
                                                                 preferredSampleRate);
             internal->initChannel (i);
-
+            
             result.put (i, ChannelType (internal));
         }
         
         return UnitType::applyMulAdd (result, mul, add);
     }
-        
+
 };
 
 
