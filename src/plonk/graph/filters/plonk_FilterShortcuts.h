@@ -100,7 +100,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
         
         if (frequency.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -162,7 +163,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
 
         if (duration.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -223,7 +225,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
 
         if (frequency.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -285,7 +288,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
 
         if (duration.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -352,7 +356,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
 
         if ((frequency.isConstant() == false) || (q.isConstant() == false))
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -416,7 +421,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
         
         if ((frequency.isConstant() == false) || (q.isConstant() == false))
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -485,7 +491,8 @@ public:
         if ((frequency.isConstant() == false) || 
             (s.isConstant() == false) ||
             (gain.isConstant() == false))
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -554,7 +561,8 @@ public:
         if ((frequency.isConstant() == false) || 
             (s.isConstant() == false) ||
             (gain.isConstant() == false))
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -623,7 +631,8 @@ public:
         if ((frequency.isConstant() == false) || 
             (q.isConstant() == false) ||
             (gain.isConstant() == false))
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -687,7 +696,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
         
         if (frequency.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -751,7 +761,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
         
         if (frequency.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -816,7 +827,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
 
         if (frequency.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -878,7 +890,8 @@ public:
         UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
         
         if (frequency.isConstant() == false)
-            coeffs = ResampleType::ar (coeffs);
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::ar (coeffs[i]));
         
         return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }

@@ -449,6 +449,16 @@ public:
      channel has in turn stripped out the other multiple channels during the process. */    
     UnitBase operator[] (const int index) const throw() { return this->getChannel (index); }
     
+    UnitBase& put (const int index, UnitBase const& channel) throw()
+    {
+        plonk_assert(channel.getNumChannels() == 1); // channel MUST be only a single channel
+        plonk_assert(index >= 0);
+        plonk_assert(index < this->getNumChannels());
+        
+        this->getArray() [index] = channel.atUnchecked (0);
+        return *this;
+    }
+    
     /** Get the minimum block size in the array of channels in this unit. */
     BlockSize getMinBlockSize() const throw();
     
