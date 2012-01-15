@@ -46,7 +46,7 @@
 
 /** Butterworth 2nd order low-pass filter shape. */
 template<class SampleType>
-class FilterShapeLPF
+class FilterShapeLPFBase
 :   public FilterShape<SampleType, FilterFormType::B2, FilterShapeType::LPF>
 {
 public:
@@ -98,13 +98,13 @@ public:
         
     }
 };
-typedef FilterShapeLPF<PLONK_TYPE_DEFAULT> ShapeLPF;
+typedef FilterShapeLPFBase<PLONK_TYPE_DEFAULT> ShapeLPF;
 
 //------------------------------------------------------------------------------
 
 /** Butterworth 2nd order high-pass filter shape. */
 template<class SampleType>
-class FilterShapeHPF
+class FilterShapeHPFBase
 :   public FilterShape<SampleType, FilterFormType::B2, FilterShapeType::HPF>
 {
 public:
@@ -155,7 +155,7 @@ public:
         data.coeffs[FormType::CoeffB2] = -(one - temp3 + temp2) * data.coeffs[FormType::CoeffA0];
     }
 };
-typedef FilterShapeHPF<PLONK_TYPE_DEFAULT> ShapeHPF;
+typedef FilterShapeHPFBase<PLONK_TYPE_DEFAULT> ShapeHPF;
 
 
 

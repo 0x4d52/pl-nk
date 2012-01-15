@@ -53,7 +53,7 @@ class LPFP1Unit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeLPFP1<SampleType>                    FilterShape;
+    typedef FilterShapeLPFP1Base<SampleType>                FilterShape;
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -116,7 +116,7 @@ class LagUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeLag<SampleType>                      FilterShape;
+    typedef FilterShapeLagBase<SampleType>                  FilterShape;
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -178,7 +178,7 @@ class HPFP1Unit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeHPFP1<SampleType>                    FilterShape;
+    typedef FilterShapeHPFP1Base<SampleType>                FilterShape;
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -241,7 +241,7 @@ class DecayUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeDecay<SampleType>                    FilterShape;
+    typedef FilterShapeDecayBase<SampleType>                FilterShape;
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -306,7 +306,7 @@ class RLPFUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeRLPF<SampleType>                     FilterShape;
+    typedef FilterShapeRLPFBase<SampleType>                 FilterShape;
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -371,7 +371,7 @@ class RHPFUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeRHPF<SampleType>                     FilterShape;
+    typedef FilterShapeRHPFBase<SampleType>                 FilterShape;
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -436,7 +436,7 @@ class LowShelfUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeLowShelf<SampleType>                 FilterShape;
+    typedef FilterShapeLowShelfBase<SampleType>             FilterShape;
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -506,7 +506,7 @@ class HighShelfUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeHighShelf<SampleType>                FilterShape;
+    typedef FilterShapeHighShelfBase<SampleType>            FilterShape;
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -576,7 +576,7 @@ class NotchUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeNotch<SampleType>                    FilterShape;
+    typedef FilterShapeNotchBase<SampleType>                FilterShape;
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -646,7 +646,7 @@ class BPFUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeBPF<SampleType>                      FilterShape;
+    typedef FilterShapeBPFBase<SampleType>                  FilterShape;
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -711,7 +711,7 @@ class BRFUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeBRF<SampleType>                      FilterShape;
+    typedef FilterShapeBRFBase<SampleType>                  FilterShape;
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -780,7 +780,7 @@ class LPFUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeLPF<SampleType>                      FilterShape;
+    typedef FilterShapeLPFBase<SampleType>                  FilterShape;
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
@@ -843,7 +843,7 @@ class HPFUnit
 {
 public:
     typedef UnitBase<SampleType>                            UnitType;
-    typedef FilterShapeHPF<SampleType>                      FilterShape;
+    typedef FilterShapeHPFBase<SampleType>                  FilterShape;
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;

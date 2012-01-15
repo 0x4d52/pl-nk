@@ -45,7 +45,7 @@
 
 /** Two-pole, two-zero, resonant low-pass filter shape. */
 template<class SampleType>
-class FilterShapeRLPF
+class FilterShapeRLPFBase
 :   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::LPF>
 {
 public:
@@ -100,14 +100,14 @@ public:
         data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
     }
 };
-typedef FilterShapeRLPF<PLONK_TYPE_DEFAULT> ShapeRLPF;
+typedef FilterShapeRLPFBase<PLONK_TYPE_DEFAULT> ShapeRLPF;
 
 
 //------------------------------------------------------------------------------
 
 /** Two-pole, two-zero, resonant high-pass filter shape. */
 template<class SampleType>
-class FilterShapeRHPF
+class FilterShapeRHPFBase
 :   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::HPF>
 {
 public:
@@ -162,14 +162,14 @@ public:
         data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
     }
 };
-typedef FilterShapeRHPF<PLONK_TYPE_DEFAULT> ShapeRHPF;
+typedef FilterShapeRHPFBase<PLONK_TYPE_DEFAULT> ShapeRHPF;
 
 
 //------------------------------------------------------------------------------
 
 /** Two-pole, two-zero, low-shelving filter shape. */
 template<class SampleType>
-class FilterShapeLowShelf
+class FilterShapeLowShelfBase
 :   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::LowShelf>
 {
 public:
@@ -237,13 +237,13 @@ public:
         data.coeffs[FormType::CoeffB2] = -(ap1 + temp4) * temp5;        
     }
 };
-typedef FilterShapeLowShelf<PLONK_TYPE_DEFAULT> ShapeLowShelf;
+typedef FilterShapeLowShelfBase<PLONK_TYPE_DEFAULT> ShapeLowShelf;
 
 //------------------------------------------------------------------------------
 
 /** Two-pole, two-zero, high-shelving filter shape. */
 template<class SampleType>
-class FilterShapeHighShelf
+class FilterShapeHighShelfBase
 :   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::HighShelf>
 {
 public:
@@ -309,14 +309,14 @@ public:
         data.coeffs[FormType::CoeffB2] = -(ap1 - temp2 - alpha) * temp3;   
     }
 };
-typedef FilterShapeHighShelf<PLONK_TYPE_DEFAULT> ShapeHighShelf;
+typedef FilterShapeHighShelfBase<PLONK_TYPE_DEFAULT> ShapeHighShelf;
 
 
 //------------------------------------------------------------------------------
 
 /** Two-pole, two-zero, notch EQ filter shape. */
 template<class SampleType>
-class FilterShapeNotch
+class FilterShapeNotchBase
 :   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::Notch>
 {
 public:
@@ -378,13 +378,13 @@ public:
         data.coeffs[FormType::CoeffB2] = (one - temp2) * -temp3; 
     }
 };
-typedef FilterShapeNotch<PLONK_TYPE_DEFAULT> ShapeNotch;
+typedef FilterShapeNotchBase<PLONK_TYPE_DEFAULT> ShapeNotch;
 
 //------------------------------------------------------------------------------
 
 /** Two-pole, two-zero, band-pass filter shape. */
 template<class SampleType>
-class FilterShapeBPF
+class FilterShapeBPFBase
 :   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::BPF>
 {
 public:
@@ -439,13 +439,13 @@ public:
         data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
     }
 };
-typedef FilterShapeBPF<PLONK_TYPE_DEFAULT> ShapeBPF;
+typedef FilterShapeBPFBase<PLONK_TYPE_DEFAULT> ShapeBPF;
 
 //------------------------------------------------------------------------------
 
 /** Two-pole, two-zero, band-reject filter shape. */
 template<class SampleType>
-class FilterShapeBRF
+class FilterShapeBRFBase
 :   public FilterShape<SampleType, FilterFormType::P2Z2, FilterShapeType::BRF>
 {
 public:
@@ -500,7 +500,7 @@ public:
         data.coeffs[FormType::CoeffB2] = (one - alpha) * -temp1;
     }
 };
-typedef FilterShapeBRF<PLONK_TYPE_DEFAULT> ShapeBRF;
+typedef FilterShapeBRFBase<PLONK_TYPE_DEFAULT> ShapeBRF;
 
 
 

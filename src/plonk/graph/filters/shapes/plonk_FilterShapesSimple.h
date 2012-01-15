@@ -47,7 +47,7 @@
 
 /** One-pole low-pass filter shape. */
 template<class SampleType>
-class FilterShapeLPFP1
+class FilterShapeLPFP1Base
 :   public FilterShape<SampleType, FilterFormType::P1a, FilterShapeType::LPF>
 {
 public:
@@ -90,12 +90,12 @@ public:
         data.coeffs[FormType::CoeffB1] = temp;
     }
 };
-typedef FilterShapeLPFP1<PLONK_TYPE_DEFAULT> ShapeLPFP1;
+typedef FilterShapeLPFP1Base<PLONK_TYPE_DEFAULT> ShapeLPFP1;
 
 
 /** One-pole lag shape. */
 template<class SampleType>
-class FilterShapeLag
+class FilterShapeLagBase
 :   public FilterShape<SampleType, FilterFormType::P1a, FilterShapeType::LPF>
 {
 public:
@@ -141,12 +141,12 @@ public:
         data.coeffs[FormType::CoeffB1] = temp;
     }
 };
-typedef FilterShapeLag<PLONK_TYPE_DEFAULT> ShapeLag;
+typedef FilterShapeLagBase<PLONK_TYPE_DEFAULT> ShapeLag;
 
 
 /** One-pole high-pass filter shape. */
 template<class SampleType>
-class FilterShapeHPFP1
+class FilterShapeHPFP1Base
 :   public FilterShape<SampleType, FilterFormType::P1, FilterShapeType::HPF>
 {
 public:
@@ -196,12 +196,12 @@ public:
         data.coeffs[FormType::CoeffB1] = temp1;
     }
 };
-typedef FilterShapeHPFP1<PLONK_TYPE_DEFAULT> ShapeHPFP1;
+typedef FilterShapeHPFP1Base<PLONK_TYPE_DEFAULT> ShapeHPFP1;
 
 
 /** One-pole decay shape. */
 template<class SampleType>
-class FilterShapeDecay 
+class FilterShapeDecayBase 
 :   public FilterShape<SampleType, FilterFormType::P1, FilterShapeType::Other>
 {
 public:
@@ -250,7 +250,7 @@ public:
         data.coeffs[FormType::CoeffB1] = temp;
     }
 };
-typedef FilterShapeDecay<PLONK_TYPE_DEFAULT> ShapeDecay;
+typedef FilterShapeDecayBase<PLONK_TYPE_DEFAULT> ShapeDecay;
 
 
 
