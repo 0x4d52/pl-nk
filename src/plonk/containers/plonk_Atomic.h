@@ -124,6 +124,14 @@ class AtomicExtended : public AtomicBase<Type>
             return *this;\
         }\
         \
+        inline bool compareAndSwap (const Plank##NUMCODE oldValue, const Plank##NUMCODE newValue) throw() {\
+            return pl_Atomic##FUNCCODE##_CompareAndSwap (getAtomicRef(), oldValue, newValue);\
+        }\
+        \
+        inline Plank##NUMCODE swap (const Plank##NUMCODE newValue) throw() {\
+            return pl_Atomic##FUNCCODE##_Swap (getAtomicRef(), newValue);\
+        }\
+        \
         inline void setValue (const Plank##TYPECODE other) throw() { pl_Atomic##FUNCCODE##_Set (getAtomicRef(), other); }\
         inline Plank##TYPECODE getValue() const throw() { return pl_Atomic##FUNCCODE##_Get (getAtomicRef()); }\
         inline operator Plank##TYPECODE () const throw() { return pl_Atomic##FUNCCODE##_Get (getAtomicRef()); }\
@@ -157,7 +165,6 @@ PLONK_ATOMIC_DEFINE_SIMPLE(L);
 PLONK_ATOMIC_DEFINE_SIMPLE(LL);
 PLONK_ATOMIC_DEFINE_SIMPLE(F);
 PLONK_ATOMIC_DEFINE_SIMPLE(D);
-//PLONK_ATOMIC_DEFINE(AtomicValue,P,P,L);
 
 template<class Type>
 class AtomicValue<Type*> : public AtomicBase<Type*>
@@ -211,6 +218,16 @@ public:
         return *this;
     }        
         
+    inline bool compareAndSwap (const Type* oldValue, const Type* newValue) throw() 
+    {
+        return pl_AtomicP_CompareAndSwap (getAtomicRef(), oldValue, newValue);
+    }
+    
+    inline Type* swap (const Type* newValue) throw() 
+    {
+        return pl_AtomicP_Swap (getAtomicRef(), newValue);
+    }
+    
     inline void setValue (const Type* other) throw()    { pl_AtomicP_Set (getAtomicRef(), const_cast<Type*> (other)); }
     inline void setPtr (const Type* other) throw()      { pl_AtomicP_Set (getAtomicRef(), const_cast<Type*> (other)); }
     inline const Type* getValue() const throw()         { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
@@ -332,6 +349,21 @@ public:
         pl_AtomicPX_SetAll (getAtomicRef(), const_cast<Type*> (other), extra); 
     }
     
+    inline bool compareAndSwap (const Type* oldValue, const Long oldExtra, const Type* newValue, const Long newExtra) throw() 
+    {
+        return pl_AtomicPX_CompareAndSwap (getAtomicRef(), oldValue, oldExtra, newValue, newExtra);
+    }
+    
+    inline Type* swap (const Type* newValue) throw() 
+    {
+        return pl_AtomicPX_Swap (getAtomicRef(), newValue);
+    }
+    
+    Type* swapAll (const Type* newValue, const Long newExtra, Type* oldExtraPtr = 0) throw() 
+    {
+        return pl_AtomicPX_SwapAll (getAtomicRef(), newValue, newExtra, oldExtraPtr);
+    }
+    
     inline void setValue (const Type* other) throw()    { pl_AtomicPX_Set (getAtomicRef(), const_cast<Type*> (other)); }
     inline void setPtr (const Type* other) throw()      { pl_AtomicPX_Set (getAtomicRef(), const_cast<Type*> (other)); }
     inline const Type* getValue() const throw()         { return static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
@@ -442,6 +474,21 @@ public:
         pl_AtomicLX_SetAll (getAtomicRef(), other, extra); 
     }
     
+    inline bool compareAndSwap (const Long oldValue, const Long oldExtra, const Long newValue, const Long newExtra) throw() 
+    {
+        return pl_AtomicLX_CompareAndSwap (getAtomicRef(), oldValue, oldExtra, newValue, newExtra);
+    }
+    
+    inline Long swap (const Long newValue) throw() 
+    {
+        return pl_AtomicLX_Swap (getAtomicRef(), newValue);
+    }
+    
+    Long swapAll (const Long newValue, const Long newExtra, Long* oldExtraPtr = 0) throw() 
+    {
+        return pl_AtomicLX_SwapAll (getAtomicRef(), newValue, newExtra, oldExtraPtr);
+    }
+    
     inline void setValue (const Long other) throw() { pl_AtomicLX_Set (getAtomicRef(), other); }
     inline Long getValue() const throw() { return pl_AtomicLX_Get (getAtomicRef()); }
     inline Long getExtra() const throw() { return pl_AtomicLX_GetExtra (getAtomicRef()); }
@@ -472,16 +519,16 @@ public:
     
     inline Long operator++ (int) throw() 
     { 
-        const Long oldPtr = pl_AtomicLX_Get (getAtomicRef()); 
+        const Long oldValue = pl_AtomicLX_Get (getAtomicRef()); 
         ++(*this); 
-        return oldPtr; 
+        return oldValue; 
     }
     
     inline Long operator-- (int) throw() 
     { 
-        const Long oldPtr = pl_AtomicLX_Get (getAtomicRef()); 
+        const Long oldValue = pl_AtomicLX_Get (getAtomicRef()); 
         --(*this); 
-        return oldPtr; 
+        return oldValue; 
     }
     
 private:
