@@ -61,7 +61,7 @@ public:
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;    
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
-    typedef FilterUnit<FormType>                                        Filter;
+    typedef FilterUnit<FormType>                                        Unit;
 
     static IntArray getInputKeys() throw()
     {
@@ -90,7 +90,7 @@ public:
         data.coeffs[FormType::CoeffB1] = temp;
     }
 };
-typedef FilterShapeLPFP1Base<PLONK_TYPE_DEFAULT> ShapeLPFP1;
+typedef FilterShapeLPFP1Base<PLONK_TYPE_DEFAULT> FilterShapeLPFP1;
 
 
 /** One-pole lag shape. */
@@ -109,7 +109,7 @@ public:
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
-    typedef FilterUnit<FormType>                                        Filter;
+    typedef FilterUnit<FormType>                                        Unit;
 
     static IntArray getInputKeys() throw()
     {
@@ -141,7 +141,7 @@ public:
         data.coeffs[FormType::CoeffB1] = temp;
     }
 };
-typedef FilterShapeLagBase<PLONK_TYPE_DEFAULT> ShapeLag;
+typedef FilterShapeLagBase<PLONK_TYPE_DEFAULT> FilterShapeLag;
 
 
 /** One-pole high-pass filter shape. */
@@ -160,7 +160,7 @@ public:
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
-    typedef FilterUnit<FormType>                                        Filter;
+    typedef FilterUnit<FormType>                                        Unit;
 
     static IntArray getInputKeys() throw()
     {
@@ -196,7 +196,7 @@ public:
         data.coeffs[FormType::CoeffB1] = temp1;
     }
 };
-typedef FilterShapeHPFP1Base<PLONK_TYPE_DEFAULT> ShapeHPFP1;
+typedef FilterShapeHPFP1Base<PLONK_TYPE_DEFAULT> FilterShapeHPFP1;
 
 
 /** One-pole decay shape. */
@@ -215,7 +215,7 @@ public:
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
-    typedef FilterUnit<FormType>                                        Filter;
+    typedef FilterUnit<FormType>                                        Unit;
 
     static IntArray getInputKeys() throw()
     {
@@ -250,7 +250,7 @@ public:
         data.coeffs[FormType::CoeffB1] = temp;
     }
 };
-typedef FilterShapeDecayBase<PLONK_TYPE_DEFAULT> ShapeDecay;
+typedef FilterShapeDecayBase<PLONK_TYPE_DEFAULT> FilterShapeDecay;
 
 
 

@@ -60,7 +60,7 @@ public:
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
-    typedef FilterUnit<FormType>                                        Filter;
+    typedef FilterUnit<FormType>                                        Unit;
 
     static IntArray getInputKeys() throw()
     {
@@ -98,7 +98,7 @@ public:
         
     }
 };
-typedef FilterShapeLPFBase<PLONK_TYPE_DEFAULT> ShapeLPF;
+typedef FilterShapeLPFBase<PLONK_TYPE_DEFAULT> FilterShapeLPF;
 
 //------------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ public:
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
-    typedef FilterUnit<FormType>                                        Filter;
+    typedef FilterUnit<FormType>                                        Unit;
 
     static IntArray getInputKeys() throw()
     {
@@ -155,7 +155,7 @@ public:
         data.coeffs[FormType::CoeffB2] = -(one - temp3 + temp2) * data.coeffs[FormType::CoeffA0];
     }
 };
-typedef FilterShapeHPFBase<PLONK_TYPE_DEFAULT> ShapeHPF;
+typedef FilterShapeHPFBase<PLONK_TYPE_DEFAULT> FilterShapeHPF;
 
 
 
