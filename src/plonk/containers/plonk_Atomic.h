@@ -124,6 +124,12 @@ class AtomicExtended : public AtomicBase<Type>
             return *this;\
         }\
         \
+        template<class OtherType>\
+        inline ATOMIC_CLASS& operator= (const OtherType other) throw() {\
+            pl_Atomic##FUNCCODE##_Set (getAtomicRef(), static_cast<const Plank##TYPECODE> (other));\
+            return *this;\
+        }\
+        \
         inline bool compareAndSwap (const Plank##NUMCODE oldValue, const Plank##NUMCODE newValue) throw() {\
             return pl_Atomic##FUNCCODE##_CompareAndSwap (getAtomicRef(), oldValue, newValue);\
         }\
@@ -134,6 +140,8 @@ class AtomicExtended : public AtomicBase<Type>
         \
         inline void setValue (const Plank##TYPECODE other) throw() { pl_Atomic##FUNCCODE##_Set (getAtomicRef(), other); }\
         inline Plank##TYPECODE getValue() const throw() { return pl_Atomic##FUNCCODE##_Get (getAtomicRef()); }\
+        \
+        template<class OtherType> operator OtherType () const throw() { return static_cast<OtherType> (pl_Atomic##FUNCCODE##_Get (getAtomicRef())); }\
         inline operator Plank##TYPECODE () const throw() { return pl_Atomic##FUNCCODE##_Get (getAtomicRef()); }\
         inline Plank##NUMCODE getExtra() const throw() { return pl_Atomic##FUNCCODE##_GetExtra (getAtomicRef()); }\
         inline ATOMIC_CLASS& operator+= (const Plank##NUMCODE operand) throw() { pl_Atomic##FUNCCODE##_Add (getAtomicRef(), operand); return *this; }\
