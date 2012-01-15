@@ -101,16 +101,19 @@ public:
                 
         // one larger for interpolation
         resizeTempBuffer (input.getBlockSize (channel).getValue() + 1);
+        tempBuffer.zero(); // was a bug on interpolation here..
         tempBufferPos = tempBufferPosMax;
         
         tempBuffer.put (tempBufferPos, sourceValue);
     }    
     
-    inline void resizeTempBuffer(const int inputBufferLength) throw()
+    inline void resizeTempBuffer (const int inputBufferLength) throw()
     {
-        tempBuffer.setSize (inputBufferLength, false);
-        tempBuffer.zero(); // was a bug on interpolation here..
-        tempBufferPosMax = IndexType (inputBufferLength) - Math<IndexType>::get1();
+        if (inputBufferLength != tempBuffer.length())
+        {
+            tempBuffer.setSize (inputBufferLength, false);
+            tempBufferPosMax = IndexType (inputBufferLength) - Math<IndexType>::get1();
+        }
     }
     
     void process (ProcessInfo& info, const int channel) throw()
