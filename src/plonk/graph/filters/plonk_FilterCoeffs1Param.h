@@ -246,7 +246,7 @@ public:
     }
     
     
-    /** Filter coefficents from one control parameters. */
+    /** Filter coefficients from one control parameter. */
     static UnitType ar (UnitType const& param0,
                         SampleRate const filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),

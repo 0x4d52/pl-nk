@@ -251,7 +251,7 @@ public:
     }
     
     
-    /** Filter coefficents from three control parameters. 
+    /** Filter coefficients from three control parameters. 
      This will generally be for some of the second order filters (e.g., peak notch or the shelving filters). */
     static UnitType ar (UnitType const& param0,
                         UnitType const& param1,

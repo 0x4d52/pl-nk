@@ -279,7 +279,7 @@ public:
     }
     
     
-    /** Filter coefficents from two control parameters. 
+    /** Filter coefficients from two control parameters. 
      This will generally be for some of the second order filters (e.g., with frequency and Q controls). */
     static UnitType ar (UnitType const& param0,
                         UnitType const& param1,

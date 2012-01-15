@@ -89,13 +89,22 @@ public:
         
         const UnitType& coeffs = this->getInputAsUnit (IOKey::Coeffs);
         UnitsType groupedCoeffs = coeffs.group (FormType::NumCoeffs);
+        UnitType channelCoeffs = groupedCoeffs.wrapAt (index);
+        
+//        plonk_assert(channelCoeffs.getNumChannels() == FormType::NumCoeffs);
+//        
+//        for (int i = 0; i < FormType::NumCoeffs; ++i)
+//            channelCoeffs.put (i, channelCoeffs.atUnchecked (i).getChannel (index));
+        
         channelInputs.put (IOKey::Coeffs, 
-                           groupedCoeffs.wrapAt (index));
+                           channelCoeffs);
         
         return new FilterChannelInternal (channelInputs, 
                                           this->getState(), 
                                           this->getBlockSize(), 
-                                          this->getSampleRate());        
+                                          this->getSampleRate());     
+        
+//        return this;
     }
     
     void initChannel (const int channel) throw()
@@ -207,6 +216,48 @@ public:
         
         return UnitType::applyMulAdd (result, mul, add);
     }
+    
+//    /** Create a generic filter from the coefficients. */
+//    static UnitType ar (UnitType const& input,
+//                        UnitType const& coeffs, 
+//                        UnitType const& mul = SampleType (1),
+//                        UnitType const& add = SampleType (0),
+//                        BlockSize const& preferredBlockSize = BlockSize::noPreference(),
+//                        SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
+//    {             
+//        const int requiredCoeffs = FormType::NumCoeffs;
+//        const int numCoeffChannels = coeffs.getNumChannels();
+//        
+//        plonk_assert(numCoeffChannels > 0);
+//        plonk_assert((numCoeffChannels % requiredCoeffs) == 0);
+//        
+//        const int numOutputChannels = plonk::max (input.getNumChannels(), numCoeffChannels / requiredCoeffs);
+//        UnitType result (UnitType::withSize (numOutputChannels));
+//        
+//        Data data;
+//        Memory::zero (data);
+//        data.base.sampleRate = -1.0;        
+//        data.base.sampleDuration = -1.0;
+//        
+//        UnitsType groupedCoeffs = coeffs.group (requiredCoeffs);
+//        
+//        for (int i = 0; i < numOutputChannels; ++i)
+//        {
+//            Inputs inputs;
+//            inputs.put (IOKey::Signal, input[i]);
+//            inputs.put (IOKey::Coeffs, groupedCoeffs.wrapAt (i));
+//            
+//            ChannelInternalType* internal = new FilterInternal (inputs, 
+//                                                                data, 
+//                                                                preferredBlockSize, 
+//                                                                preferredSampleRate);
+//            internal->initChannel (i);
+//            
+//            result.put (i, ChannelType (internal));
+//        }
+//        
+//        return UnitType::applyMulAdd (result, mul, add);
+//    }
 
 };
 
