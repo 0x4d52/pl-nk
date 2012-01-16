@@ -59,14 +59,14 @@ template<class Type>
 class AtomicBase<Type*> : public AtomicOps
 {
 public:
-    static Long incrementSize() { return sizeof (Type); }
+    static inline Long incrementSize() { return sizeof (Type); }
 };
 
 template<>
 class AtomicBase<void*> : public AtomicOps
 {
 public:
-    static Long incrementSize() { return 1; }
+    static inline Long incrementSize() { return 1; }
 };
 
 

@@ -60,6 +60,7 @@
 #include "../containers/plonk_SimpleArray.h"
 #include "../containers/plonk_SimpleStack.h"
 #include "../containers/plonk_SimpleQueue.h"
+#include "../containers/plonk_SimpleLinkedList.h"
 #include "../containers/plonk_ObjectArray.h"
 #include "../containers/plonk_ObjectArray2D.h"
 #include "../containers/plonk_NumericalArray.h"
