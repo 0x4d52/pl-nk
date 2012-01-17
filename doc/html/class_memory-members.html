@@ -68,14 +68,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 This is the complete list of members for <a class="el" href="class_memory.html">Memory</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a3a8118255f6a282c552e4b997368c942">allocateBytes</a>(const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#affc53937a8e8e0216d915571d51f7327">AllocateBytesFunction</a> typedef</td><td><a class="el" href="class_memory.html">Memory</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_memory.html#aa59a912435f11278eed835021ad80950">copy</a>(void *dst, const void *src, const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#acced1962b50c14708b61a1c82bfefed2">copy</a>(void *const dst, const void *const src, const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a3387f660bfd2a95ebb319d2ed80e1b28">free</a>(void *ptr)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a4519c2975ebeb4264139cfdffa0558af">FreeFunction</a> typedef</td><td><a class="el" href="class_memory.html">Memory</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#ad523c3c897146ea7c0906f63b1360cc6">global</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a585d7bb6fc6f2237bcebf94a86b7dd99">Memory</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a20012bc65834da280f78b477fd7f9b33">realTime</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a7a757c7c084b64be333fb7e97786c2b1">setFunctions</a>(AllocateBytesFunction allocateFunction, FreeFunction freeFunction)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_memory.html#a127111db02fc9004f843f74ecb9802cc">zero</a>(void *ptr, const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#ac7521d0acb6823daa4578779b2ee8833">zero</a>(void *const ptr, const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a0d35343b0393b4ae99ac70d88de8925f">zero</a>(Type &amp;object)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -91,7 +92,7 @@ This is the complete list of members for <a class="el" href="class_memory.html">
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:32 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:19 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

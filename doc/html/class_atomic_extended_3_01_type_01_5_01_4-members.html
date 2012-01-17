@@ -70,6 +70,7 @@ This is the complete list of members for <a class="el" href="class_atomic_extend
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#aa993ac4b0f92640a7eb6cc679739ea7d">AtomicExtended</a>(Type *initialPtr)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a30bf44770aa5dbf7376ee64089fb6b6f">AtomicExtended</a>(const Type *initialPtr)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a6f72b14e3e1505526252634bb32f5a22">AtomicExtended</a>(AtomicExtended const &amp;copy)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a6580f7595975ab98dbfb1d8af4640cd7">compareAndSwap</a>(const Type *oldValue, const Long oldExtra, const Type *newValue, const Long newExtra)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a966fe1ee156520db3a826e8194cf31ff">getExtra</a>() const </td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a9a6bdc818d2a1f284888e6267cb674b3">getPtr</a>() const </td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#afa76ace64d71822ade320b6bc1bb084e">getPtr</a>()</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
@@ -98,6 +99,8 @@ This is the complete list of members for <a class="el" href="class_atomic_extend
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#abe42932efb5409ffb01317865390c884">setAll</a>(const Type *other, const Long extra)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a4be29e09de2bb78a44a7a5aa9a5beb30">setPtr</a>(const Type *other)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a6b74a5675734d848b5cad9d5c96cc788">setValue</a>(const Type *other)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a54724ba6f39d61f33111b50347f2641e">swap</a>(const Type *newValue)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#ae69961d4eb2dbcf9d0ce0f6c14ee0aa1">swapAll</a>(const Type *newValue, const Long newExtra, Type *oldExtraPtr=0)</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#aed38f6f8657f162a75a524c89c9798b9">~AtomicExtended</a>()</td><td><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html">AtomicExtended&lt; Type * &gt;</a></td><td><code> [inline]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
@@ -114,7 +117,7 @@ This is the complete list of members for <a class="el" href="class_atomic_extend
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:26 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:13 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

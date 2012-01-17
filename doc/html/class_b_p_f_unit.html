@@ -79,10 +79,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a4b9addc78ec4cdb198db9736e1479dd8">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_shape_b_p_f.html">FilterShapeBPF</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a7eee79507f1f44983fcf951a20a4f600">FilterShape</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_shape_b_p_f_base.html">FilterShapeBPFBase</a><br class="typebreak"/>
+&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a134bfba66c667c60ee515714c41733bc">FilterShape</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_shape_b_p_f.html">FilterShape</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a49556ac30ce4ccea94ebc11d6cf83f72">FilterCoeffsType</a></td></tr>
+&lt; <a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a49556ac30ce4ccea94ebc11d6cf83f72">FilterCoeffsType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs2_param_unit.html#adfd61f5163669e9821abd72bcfc9ccf1">FilterCoeffsType::FormType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt; <a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#a33e97f55eb0edb80187444305650978f">FilterType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_p_f_unit.html#abdfa9c385c4102f95a8ee7e798bb0ef2">ResampleType</a></td></tr>
@@ -105,7 +105,7 @@ class BPFUnit&lt; SampleType &gt;</h3>
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit</a>&lt;<a class="el" href="class_filter_shape_b_p_f.html">FilterShape</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit</a>&lt;<a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffsType</a></td>
         </tr>
       </table>
 </div>
@@ -113,14 +113,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7eee79507f1f44983fcf951a20a4f600"></a><!-- doxytag: member="BPFUnit::FilterShape" ref="a7eee79507f1f44983fcf951a20a4f600" args="" -->
+<a class="anchor" id="a134bfba66c667c60ee515714c41733bc"></a><!-- doxytag: member="BPFUnit::FilterShape" ref="a134bfba66c667c60ee515714c41733bc" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_shape_b_p_f.html">FilterShapeBPF</a>&lt;SampleType&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_shape_b_p_f.html">FilterShape</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_shape_b_p_f_base.html">FilterShapeBPFBase</a>&lt;SampleType&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a></td>
         </tr>
       </table>
 </div>
@@ -305,7 +305,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:27 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:14 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

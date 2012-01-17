@@ -316,6 +316,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a unit with the single channel specified.  <a href="#a51d3e16937b30c0469661261e6acb42d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#afd08e14c94c1e344a05b957308caa472">operator[]</a> (const int index) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a unit with the single channel specified.  <a href="#afd08e14c94c1e344a05b957308caa472"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a336e560bdcb43adae1b83f1dc9f3d114">put</a> (const int index, <a class="el" href="class_unit_base.html">UnitBase</a> const &amp;channel)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aa7027499885c3206dee0b8b95f6e4fa2">getMinBlockSize</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the minimum block size in the array of channels in this unit.  <a href="#aa7027499885c3206dee0b8b95f6e4fa2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a357165ca134a47f7204169b469e80b00">getMaxBlockSize</a> () const   throw ()</td></tr>
@@ -1546,27 +1547,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a955a5aea58d79f8cde2b8ed080342acd"></a><!-- doxytag: member="UnitBase::getBlockSize" ref="a955a5aea58d79f8cde2b8ed080342acd" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getBlockSize </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the block size of a specific channel in this unit. </p>
-
-</div>
-</div>
 <a class="anchor" id="ad7156eb1df81d39faa613cc37dcd7687"></a><!-- doxytag: member="UnitBase::getBlockSize" ref="ad7156eb1df81d39faa613cc37dcd7687" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1579,6 +1559,27 @@ template&lt;class SampleType &gt; </div>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the block size of a specific channel in this unit. </p>
+
+</div>
+</div>
+<a class="anchor" id="a955a5aea58d79f8cde2b8ed080342acd"></a><!-- doxytag: member="UnitBase::getBlockSize" ref="a955a5aea58d79f8cde2b8ed080342acd" args="(const int index)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getBlockSize </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -1851,28 +1852,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a43faf13fd6fba7d41104578862a65863"></a><!-- doxytag: member="UnitBase::getOutputSamples" ref="a43faf13fd6fba7d41104578862a65863" args="(const int index) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const SampleType* <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getOutputSamples </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get a pointer to the raw samples of a specific channel. </p>
-<p>Indices out of range will be wrapped to the available channels. </p>
-
-</div>
-</div>
 <a class="anchor" id="a52d71e0871badee91a8e565107e55936"></a><!-- doxytag: member="UnitBase::getOutputSamples" ref="a52d71e0871badee91a8e565107e55936" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1895,22 +1874,25 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a5903a71f02960ca268b94e2d481f8af9"></a><!-- doxytag: member="UnitBase::getOverlap" ref="a5903a71f02960ca268b94e2d481f8af9" args="(const int index)" -->
+<a class="anchor" id="a43faf13fd6fba7d41104578862a65863"></a><!-- doxytag: member="UnitBase::getOutputSamples" ref="a43faf13fd6fba7d41104578862a65863" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">DoubleVariable</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getOverlap </td>
+          <td class="memname">const SampleType* <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getOutputSamples </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Get a pointer to the raw samples of a specific channel. </p>
+<p>Indices out of range will be wrapped to the available channels. </p>
 
 </div>
 </div>
@@ -1926,6 +1908,25 @@ template&lt;class SampleType &gt; </div>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5903a71f02960ca268b94e2d481f8af9"></a><!-- doxytag: member="UnitBase::getOverlap" ref="a5903a71f02960ca268b94e2d481f8af9" args="(const int index)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">DoubleVariable</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getOverlap </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -1970,28 +1971,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a71526cc54801d1c5d2f312b47090618d"></a><!-- doxytag: member="UnitBase::getSampleRate" ref="a71526cc54801d1c5d2f312b47090618d" args="(const int index) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getSampleRate </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the sample rate of a specific channel in this unit. </p>
-<p>Indices out of range will be wrapped to the available channels. </p>
-
-</div>
-</div>
 <a class="anchor" id="a5d3580e278cb7e0d6ffc232f7c0fca2c"></a><!-- doxytag: member="UnitBase::getSampleRate" ref="a5d3580e278cb7e0d6ffc232f7c0fca2c" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
@@ -2004,6 +1983,28 @@ template&lt;class SampleType &gt; </div>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the sample rate of a specific channel in this unit. </p>
+<p>Indices out of range will be wrapped to the available channels. </p>
+
+</div>
+</div>
+<a class="anchor" id="a71526cc54801d1c5d2f312b47090618d"></a><!-- doxytag: member="UnitBase::getSampleRate" ref="a71526cc54801d1c5d2f312b47090618d" args="(const int index) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getSampleRate </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2851,6 +2852,28 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="abc6b6d450e027fba5242bf9985eb614c"></a><!-- doxytag: member="UnitBase::operator&#45;" ref="abc6b6d450e027fba5242bf9985eb614c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary '-' operator to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a403fa7e62e11b0315fcf1d573a6c86b4">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aa00cdc04e68728d2892ba17b6efae5c2"></a><!-- doxytag: member="UnitBase::operator&#45;" ref="aa00cdc04e68728d2892ba17b6efae5c2" args="(RightType const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -2873,28 +2896,6 @@ template&lt;class RightType &gt; </div>
 <p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '-' operator to this and the <em>right</em> argument. </p>
 
 <p>Reimplemented from <a class="el" href="class_numerical_array.html#ad8c78788dec82a15c338319174e891c2">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abc6b6d450e027fba5242bf9985eb614c"></a><!-- doxytag: member="UnitBase::operator&#45;" ref="abc6b6d450e027fba5242bf9985eb614c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator- </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary '-' operator to this one. </p>
-
-<p>Reimplemented from <a class="el" href="class_numerical_array.html#a403fa7e62e11b0315fcf1d573a6c86b4">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -3061,27 +3062,6 @@ template&lt;class RightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7d7469eeee1b574d5299762f8a3d7036"></a><!-- doxytag: member="UnitBase::operator=" ref="a7d7469eeee1b574d5299762f8a3d7036" args="(UnitBase const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Assignment operator. </p>
-
-</div>
-</div>
 <a class="anchor" id="ac5d6ddf8691c78944d448529f37006bb"></a><!-- doxytag: member="UnitBase::operator=" ref="ac5d6ddf8691c78944d448529f37006bb" args="(ChannelType const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
@@ -3142,6 +3122,27 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Assignment operator from an array of channels. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7d7469eeee1b574d5299762f8a3d7036"></a><!-- doxytag: member="UnitBase::operator=" ref="a7d7469eeee1b574d5299762f8a3d7036" args="(UnitBase const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
 
 </div>
 </div>
@@ -3407,6 +3408,35 @@ template&lt;class ProxyOwnerChannelInternalClassType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a336e560bdcb43adae1b83f1dc9f3d114"></a><!-- doxytag: member="UnitBase::put" ref="a336e560bdcb43adae1b83f1dc9f3d114" args="(const int index, UnitBase const &amp;channel)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::put </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>channel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="abd8eaab7d56faed695675c0e98e4cd0f"></a><!-- doxytag: member="UnitBase::r2d" ref="abd8eaab7d56faed695675c0e98e4cd0f" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -3515,6 +3545,27 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a5971dc08c2dc28db827df3b7ea671e94"></a><!-- doxytag: member="UnitBase::setOutputBuffer" ref="a5971dc08c2dc28db827df3b7ea671e94" args="(BufferArrayType const &amp;externalBuffer)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::setOutputBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array2_d.html">BufferArrayType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>externalBuffer</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the output buffers of this unit's channels to use external buffers. </p>
+
+</div>
+</div>
 <a class="anchor" id="aed36ad8bca094f3fa98d0a134cb2d36f"></a><!-- doxytag: member="UnitBase::setOutputBuffer" ref="aed36ad8bca094f3fa98d0a134cb2d36f" args="(const int index, Buffer const &amp;externalBuffer)" -->
 <div class="memitem">
 <div class="memproto">
@@ -3543,27 +3594,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Set the output buffer of a specific channel to use an external buffer. </p>
-
-</div>
-</div>
-<a class="anchor" id="a5971dc08c2dc28db827df3b7ea671e94"></a><!-- doxytag: member="UnitBase::setOutputBuffer" ref="a5971dc08c2dc28db827df3b7ea671e94" args="(BufferArrayType const &amp;externalBuffer)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::setOutputBuffer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array2_d.html">BufferArrayType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>externalBuffer</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set the output buffers of this unit's channels to use external buffers. </p>
 
 </div>
 </div>
@@ -3950,7 +3980,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:37 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:25 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

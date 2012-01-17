@@ -75,87 +75,92 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
-<a name="l00006"></a>00006 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
-<a name="l00007"></a>00007 <span class="comment"> All rights reserved.</span>
-<a name="l00008"></a>00008 <span class="comment"> </span>
-<a name="l00009"></a>00009 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
-<a name="l00010"></a>00010 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
-<a name="l00011"></a>00011 <span class="comment"> </span>
-<a name="l00012"></a>00012 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
-<a name="l00013"></a>00013 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
-<a name="l00014"></a>00014 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
-<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
-<a name="l00016"></a>00016 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
-<a name="l00017"></a>00017 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
-<a name="l00018"></a>00018 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
-<a name="l00019"></a>00019 <span class="comment">   derived from this software without specific prior written permission.</span>
-<a name="l00020"></a>00020 <span class="comment"> </span>
-<a name="l00021"></a>00021 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
-<a name="l00022"></a>00022 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
-<a name="l00023"></a>00023 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
-<a name="l00024"></a>00024 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
-<a name="l00025"></a>00025 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
-<a name="l00026"></a>00026 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
-<a name="l00027"></a>00027 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
-<a name="l00028"></a>00028 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
-<a name="l00029"></a>00029 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
-<a name="l00030"></a>00030 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
-<a name="l00031"></a>00031 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032 <span class="comment"> */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#ifndef PLANK_IFFFILEREADER_H</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_IFFFILEREADER_H</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;<a class="code" href="plank___iff_file_common_8h.html">plank_IffFileCommon.h</a>&quot;</span>
-<a name="l00038"></a>00038 <span class="preprocessor">#include &quot;<a class="code" href="plank___file_8h.html">plank_File.h</a>&quot;</span>
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
-<a name="l00041"></a>00041 
-<a name="l00050"></a><a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">00050</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileReader* <a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a>; 
-<a name="l00051"></a>00051 
-<a name="l00054"></a>00054 <a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> <a class="code" href="group___plank_iff_file_reader_class.html#gad8b686899f4ce9390290569e1774a11f" title="Create and initialise a Plank IffFileReader object and return an oqaque reference to it...">pl_IffFileReader_CreateAndInit</a>();
-<a name="l00055"></a>00055 
-<a name="l00058"></a>00058 <a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga3f42bc71541ad07401d2e7e1d34fa2fa" title="Create a Plank IffFileReader object and return an oqaque reference to it.">pl_IffFileReader_Create</a>();
-<a name="l00059"></a>00059 
-<a name="l00063"></a>00063 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga1d3aa86bd74b5091bac3787bf63816b5" title="Initialise a Plank IffFileReader object.">pl_IffFileReader_Init</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
+<a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
+<a name="l00007"></a>00007 <span class="comment"> </span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
+<a name="l00010"></a>00010 <span class="comment"> </span>
+<a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
+<a name="l00012"></a>00012 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
+<a name="l00013"></a>00013 <span class="comment"> </span>
+<a name="l00014"></a>00014 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
+<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
+<a name="l00016"></a>00016 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
+<a name="l00017"></a>00017 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
+<a name="l00018"></a>00018 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
+<a name="l00019"></a>00019 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
+<a name="l00020"></a>00020 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
+<a name="l00021"></a>00021 <span class="comment">   derived from this software without specific prior written permission.</span>
+<a name="l00022"></a>00022 <span class="comment"> </span>
+<a name="l00023"></a>00023 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<a name="l00024"></a>00024 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<a name="l00025"></a>00025 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
+<a name="l00026"></a>00026 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
+<a name="l00027"></a>00027 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
+<a name="l00028"></a>00028 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
+<a name="l00029"></a>00029 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
+<a name="l00030"></a>00030 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
+<a name="l00031"></a>00031 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
+<a name="l00032"></a>00032 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
+<a name="l00033"></a>00033 <span class="comment"> </span>
+<a name="l00034"></a>00034 <span class="comment"> This software makes use of third party libraries. For more information see:</span>
+<a name="l00035"></a>00035 <span class="comment"> doc/license.txt included in the distribution.</span>
+<a name="l00036"></a>00036 <span class="comment"> -------------------------------------------------------------------------------</span>
+<a name="l00037"></a>00037 <span class="comment"> */</span>
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_IFFFILEREADER_H</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_IFFFILEREADER_H</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plank___iff_file_common_8h.html">plank_IffFileCommon.h</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plank___file_8h.html">plank_File.h</a>&quot;</span>
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
+<a name="l00046"></a>00046 
+<a name="l00055"></a><a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">00055</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileReader* <a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a>; 
+<a name="l00056"></a>00056 
+<a name="l00059"></a>00059 <a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> <a class="code" href="group___plank_iff_file_reader_class.html#gad8b686899f4ce9390290569e1774a11f" title="Create and initialise a Plank IffFileReader object and return an oqaque reference to it...">pl_IffFileReader_CreateAndInit</a>();
+<a name="l00060"></a>00060 
+<a name="l00063"></a>00063 <a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga3f42bc71541ad07401d2e7e1d34fa2fa" title="Create a Plank IffFileReader object and return an oqaque reference to it.">pl_IffFileReader_Create</a>();
 <a name="l00064"></a>00064 
-<a name="l00068"></a>00068 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#gaafebab2c787458fc5adf793cb98e46b7" title="Deinitialise a Plank IffFileReader object.">pl_IffFileReader_DeInit</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
+<a name="l00068"></a>00068 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga1d3aa86bd74b5091bac3787bf63816b5" title="Initialise a Plank IffFileReader object.">pl_IffFileReader_Init</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
 <a name="l00069"></a>00069 
-<a name="l00073"></a>00073 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga7326ad8d98497c015930167a772cd1ba" title="Destroy a Plank IffFileReader object.">pl_IffFileReader_Destroy</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
+<a name="l00073"></a>00073 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#gaafebab2c787458fc5adf793cb98e46b7" title="Deinitialise a Plank IffFileReader object.">pl_IffFileReader_DeInit</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
 <a name="l00074"></a>00074 
-<a name="l00079"></a>00079 <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> <a class="code" href="group___plank_iff_file_reader_class.html#gadfbf398a4a19991b47639c1d6a2ff245" title="Gets the underlying Plank File object.">pl_IffFileReader_GetFile</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
-<a name="l00080"></a>00080 
-<a name="l00084"></a>00084 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga5ac68294a1adf847195937a1ba30d03e">pl_IffFileReader_Open</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath);
+<a name="l00078"></a>00078 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga7326ad8d98497c015930167a772cd1ba" title="Destroy a Plank IffFileReader object.">pl_IffFileReader_Destroy</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
+<a name="l00079"></a>00079 
+<a name="l00084"></a>00084 <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> <a class="code" href="group___plank_iff_file_reader_class.html#gadfbf398a4a19991b47639c1d6a2ff245" title="Gets the underlying Plank File object.">pl_IffFileReader_GetFile</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
 <a name="l00085"></a>00085 
-<a name="l00089"></a>00089 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#gab10f618aa45bae084bf7940c0259ac58">pl_IffFileReader_Close</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
+<a name="l00089"></a>00089 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga5ac68294a1adf847195937a1ba30d03e">pl_IffFileReader_Open</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath);
 <a name="l00090"></a>00090 
-<a name="l00094"></a>00094 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga53be155f8cd9b67c32f6185a5de56c42">pl_IffFileReader_GetMainID</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>* mainID);
+<a name="l00094"></a>00094 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#gab10f618aa45bae084bf7940c0259ac58">pl_IffFileReader_Close</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p);
 <a name="l00095"></a>00095 
-<a name="l00099"></a>00099 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga70f5e5cc3c47c0ce3b1c2904c7bc50dd">pl_IffFileReader_GetFormatID</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>* formatID);
+<a name="l00099"></a>00099 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga53be155f8cd9b67c32f6185a5de56c42">pl_IffFileReader_GetMainID</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>* mainID);
 <a name="l00100"></a>00100 
-<a name="l00104"></a>00104 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga939b89df2a91581946031d814a59bbee">pl_IffFileReader_GetMainLength</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* mainLength);
+<a name="l00104"></a>00104 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga70f5e5cc3c47c0ce3b1c2904c7bc50dd">pl_IffFileReader_GetFormatID</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>* formatID);
 <a name="l00105"></a>00105 
-<a name="l00109"></a>00109 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga6b687552c44f6cbe6ad1b489831bc1eb">pl_IffFileReader_GetMainEnd</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* mainEnd);
+<a name="l00109"></a>00109 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga939b89df2a91581946031d814a59bbee">pl_IffFileReader_GetMainLength</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* mainLength);
 <a name="l00110"></a>00110 
-<a name="l00114"></a>00114 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga088184f65ec9225e61b889363b1a92cb">pl_IffFileReader_IsBigEndian</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>* isBigEndian);
+<a name="l00114"></a>00114 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga6b687552c44f6cbe6ad1b489831bc1eb">pl_IffFileReader_GetMainEnd</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* mainEnd);
 <a name="l00115"></a>00115 
-<a name="l00119"></a>00119 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#gafe00a67e7166da700d577793f672991d">pl_IffFileReader_SetEndian</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> isBigEndian);
+<a name="l00119"></a>00119 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga088184f65ec9225e61b889363b1a92cb">pl_IffFileReader_IsBigEndian</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>* isBigEndian);
 <a name="l00120"></a>00120 
-<a name="l00124"></a>00124 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga9e93f08a4312a22bb79a58366651e715">pl_IffFileReader_SeekChunk</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> chunkID, <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>* chunkLength, <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* chunkDataPos);
+<a name="l00124"></a>00124 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#gafe00a67e7166da700d577793f672991d">pl_IffFileReader_SetEndian</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> isBigEndian);
 <a name="l00125"></a>00125 
-<a name="l00126"></a>00126 
-<a name="l00129"></a>00129 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00129"></a>00129 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_iff_file_reader_class.html#ga9e93f08a4312a22bb79a58366651e715">pl_IffFileReader_SeekChunk</a> (<a class="code" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd" title="An opaque reference to the Plank IffFileReader object.">PlankIffFileReaderRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> chunkID, <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>* chunkLength, <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* chunkDataPos);
 <a name="l00130"></a>00130 
-<a name="l00131"></a>00131 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00132"></a>00132 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileReader
-<a name="l00133"></a>00133 {
-<a name="l00134"></a>00134     PlankFile file;
-<a name="l00135"></a>00135     <a class="code" href="struct_plank_iff_file_header_info.html">PlankIffFileHeaderInfo</a> headerInfo;
-<a name="l00136"></a>00136     
-<a name="l00137"></a>00137 } PlankIffFileReader;
-<a name="l00138"></a>00138 <span class="preprocessor">#endif</span>
-<a name="l00139"></a>00139 <span class="preprocessor"></span>
-<a name="l00140"></a>00140 <span class="preprocessor">#endif // PLANK_IFFFILEREADER_H</span>
+<a name="l00131"></a>00131 
+<a name="l00134"></a>00134 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00137"></a>00137 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankIffFileReader
+<a name="l00138"></a>00138 {
+<a name="l00139"></a>00139     PlankFile file;
+<a name="l00140"></a>00140     <a class="code" href="struct_plank_iff_file_header_info.html">PlankIffFileHeaderInfo</a> headerInfo;
+<a name="l00141"></a>00141     
+<a name="l00142"></a>00142 } PlankIffFileReader;
+<a name="l00143"></a>00143 <span class="preprocessor">#endif</span>
+<a name="l00144"></a>00144 <span class="preprocessor"></span>
+<a name="l00145"></a>00145 <span class="preprocessor">#endif // PLANK_IFFFILEREADER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -172,7 +177,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:10 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -76,94 +76,99 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
-<a name="l00006"></a>00006 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
-<a name="l00007"></a>00007 <span class="comment"> All rights reserved.</span>
-<a name="l00008"></a>00008 <span class="comment"> </span>
-<a name="l00009"></a>00009 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
-<a name="l00010"></a>00010 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
-<a name="l00011"></a>00011 <span class="comment"> </span>
-<a name="l00012"></a>00012 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
-<a name="l00013"></a>00013 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
-<a name="l00014"></a>00014 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
-<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
-<a name="l00016"></a>00016 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
-<a name="l00017"></a>00017 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
-<a name="l00018"></a>00018 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
-<a name="l00019"></a>00019 <span class="comment">   derived from this software without specific prior written permission.</span>
-<a name="l00020"></a>00020 <span class="comment"> </span>
-<a name="l00021"></a>00021 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
-<a name="l00022"></a>00022 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
-<a name="l00023"></a>00023 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
-<a name="l00024"></a>00024 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
-<a name="l00025"></a>00025 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
-<a name="l00026"></a>00026 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
-<a name="l00027"></a>00027 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
-<a name="l00028"></a>00028 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
-<a name="l00029"></a>00029 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
-<a name="l00030"></a>00030 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
-<a name="l00031"></a>00031 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032 <span class="comment"> */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#ifndef PLONK_BLOCKSIZE_H</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_BLOCKSIZE_H</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;../../containers/variables/plonk_VariableForwardDeclarations.h&quot;</span>
-<a name="l00038"></a>00038 <span class="preprocessor">#include &quot;../../containers/variables/plonk_Variable.h&quot;</span>
-<a name="l00039"></a>00039 <span class="preprocessor">#include &quot;../../core/plonk_Receiver.h&quot;</span>
-<a name="l00040"></a>00040 <span class="preprocessor">#include &quot;../../maths/plonk_InlineCommonOps.h&quot;</span>
-<a name="l00041"></a>00041 
-<a name="l00055"></a><a class="code" href="class_block_size.html">00055</a> <span class="keyword">class </span><a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> : <span class="keyword">public</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a>
-<a name="l00056"></a>00056 {
-<a name="l00057"></a>00057 <span class="keyword">public</span>:
-<a name="l00058"></a><a class="code" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">00058</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable_internal.html">VariableInternal&lt;int&gt;</a>           <a class="code" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">Internal</a>;
-<a name="l00059"></a><a class="code" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">00059</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a>                     <a class="code" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">Base</a>;    
-<a name="l00060"></a><a class="code" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">00060</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;BlockSize&gt;</a> <a class="code" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">Weak</a>;
-<a name="l00061"></a>00061     
-<a name="l00062"></a>00062     <a class="code" href="class_block_size.html#aa81bb81e71d19d12b506ef3caf3bd714">BlockSize</a>() throw();
-<a name="l00063"></a>00063     
-<a name="l00065"></a>00065     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; sampleRate) throw();
+<a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
+<a name="l00007"></a>00007 <span class="comment"> </span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
+<a name="l00010"></a>00010 <span class="comment"> </span>
+<a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
+<a name="l00012"></a>00012 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
+<a name="l00013"></a>00013 <span class="comment"> </span>
+<a name="l00014"></a>00014 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
+<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
+<a name="l00016"></a>00016 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
+<a name="l00017"></a>00017 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
+<a name="l00018"></a>00018 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
+<a name="l00019"></a>00019 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
+<a name="l00020"></a>00020 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
+<a name="l00021"></a>00021 <span class="comment">   derived from this software without specific prior written permission.</span>
+<a name="l00022"></a>00022 <span class="comment"> </span>
+<a name="l00023"></a>00023 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<a name="l00024"></a>00024 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<a name="l00025"></a>00025 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
+<a name="l00026"></a>00026 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
+<a name="l00027"></a>00027 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
+<a name="l00028"></a>00028 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
+<a name="l00029"></a>00029 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
+<a name="l00030"></a>00030 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
+<a name="l00031"></a>00031 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
+<a name="l00032"></a>00032 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
+<a name="l00033"></a>00033 <span class="comment"> </span>
+<a name="l00034"></a>00034 <span class="comment"> This software makes use of third party libraries. For more information see:</span>
+<a name="l00035"></a>00035 <span class="comment"> doc/license.txt included in the distribution.</span>
+<a name="l00036"></a>00036 <span class="comment"> -------------------------------------------------------------------------------</span>
+<a name="l00037"></a>00037 <span class="comment"> */</span>
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_BLOCKSIZE_H</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_BLOCKSIZE_H</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../../containers/variables/plonk_VariableForwardDeclarations.h&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;../../containers/variables/plonk_Variable.h&quot;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;../../core/plonk_Receiver.h&quot;</span>
+<a name="l00045"></a>00045 <span class="preprocessor">#include &quot;../../maths/plonk_InlineCommonOps.h&quot;</span>
+<a name="l00046"></a>00046 
+<a name="l00060"></a><a class="code" href="class_block_size.html">00060</a> <span class="keyword">class </span><a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> : <span class="keyword">public</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a>
+<a name="l00061"></a>00061 {
+<a name="l00062"></a>00062 <span class="keyword">public</span>:
+<a name="l00063"></a><a class="code" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">00063</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable_internal.html">VariableInternal&lt;int&gt;</a>           <a class="code" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">Internal</a>;
+<a name="l00064"></a><a class="code" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">00064</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a>                     <a class="code" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">Base</a>;    
+<a name="l00065"></a><a class="code" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">00065</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;BlockSize&gt;</a> <a class="code" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">Weak</a>;
 <a name="l00066"></a>00066     
-<a name="l00068"></a>00068     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (const <span class="keywordtype">int</span> initValue) throw();
-<a name="l00069"></a>00069     
-<a name="l00071"></a>00071     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; initValue) throw();
-<a name="l00072"></a>00072     
-<a name="l00074"></a>00074     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; copy) throw();
-<a name="l00075"></a>00075         
-<a name="l00080"></a>00080     template&lt;class OtherType&gt;
-<a name="l00081"></a><a class="code" href="class_block_size.html#a38a8b440dbc0e857af8b3ec993ccc7e6">00081</a>     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (OtherType const&amp; initValue) throw()
-<a name="l00082"></a>00082     :   <a class="code" href="class_sender_container.html">Base</a> (initValue)
-<a name="l00083"></a>00083     {
-<a name="l00084"></a>00084     }
-<a name="l00085"></a>00085     
-<a name="l00093"></a>00093     <span class="keyword">static</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#afd3ecabf268e1394d82b690551c949ea" title="Gets the default block size.">getDefault</a>() throw();
-<a name="l00094"></a>00094     
-<a name="l00097"></a>00097     static <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a6da00bc268f96d88975655fcd3cdd681" title="Gets the default control rate block size.">getControlRateBlockSize</a>() throw();
-<a name="l00098"></a>00098     
-<a name="l00101"></a>00101     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a692b89b56a9004c70c1aeaf8f6cb1d09" title="Create a block size that is a fraction of the default block size.">getFractionOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; divisor) throw();
-<a name="l00102"></a>00102     
-<a name="l00105"></a>00105     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; factor) throw();    
-<a name="l00106"></a><a class="code" href="class_block_size.html#a78aaaf5a6aacd02ecaaf51af8c25f2fe">00106</a>     inline static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (const <span class="keywordtype">int</span> factor) throw() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a78aaaf5a6aacd02ecaaf51af8c25f2fe">getMultipleOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> (factor)); }
-<a name="l00107"></a>00107    
-<a name="l00108"></a>00108     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">DoubleVariable</a> <span class="keyword">const</span>&amp; factor) <span class="keywordflow">throw</span>();    
-<a name="l00109"></a><a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">00109</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">getMultipleOfDefault</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> factor) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">DoubleVariable</a> (factor)); }
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111     
-<a name="l00115"></a>00115     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&amp; <a class="code" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84" title="A dummy block size used to indicate no preference.">noPreference</a>() throw();
+<a name="l00067"></a>00067     <a class="code" href="class_block_size.html#aa81bb81e71d19d12b506ef3caf3bd714">BlockSize</a>() throw();
+<a name="l00068"></a>00068     
+<a name="l00070"></a>00070     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; sampleRate) throw();
+<a name="l00071"></a>00071     
+<a name="l00073"></a>00073     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (const <span class="keywordtype">int</span> initValue) throw();
+<a name="l00074"></a>00074     
+<a name="l00076"></a>00076     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; initValue) throw();
+<a name="l00077"></a>00077     
+<a name="l00079"></a>00079     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; copy) throw();
+<a name="l00080"></a>00080         
+<a name="l00085"></a>00085     template&lt;class OtherType&gt;
+<a name="l00086"></a><a class="code" href="class_block_size.html#a38a8b440dbc0e857af8b3ec993ccc7e6">00086</a>     <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> (OtherType const&amp; initValue) throw()
+<a name="l00087"></a>00087     :   <a class="code" href="class_sender_container.html">Base</a> (initValue)
+<a name="l00088"></a>00088     {
+<a name="l00089"></a>00089     }
+<a name="l00090"></a>00090     
+<a name="l00098"></a>00098     <span class="keyword">static</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#afd3ecabf268e1394d82b690551c949ea" title="Gets the default block size.">getDefault</a>() throw();
+<a name="l00099"></a>00099     
+<a name="l00102"></a>00102     static <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a6da00bc268f96d88975655fcd3cdd681" title="Gets the default control rate block size.">getControlRateBlockSize</a>() throw();
+<a name="l00103"></a>00103     
+<a name="l00106"></a>00106     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a692b89b56a9004c70c1aeaf8f6cb1d09" title="Create a block size that is a fraction of the default block size.">getFractionOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; divisor) throw();
+<a name="l00107"></a>00107     
+<a name="l00110"></a>00110     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> const&amp; factor) throw();    
+<a name="l00111"></a><a class="code" href="class_block_size.html#a78aaaf5a6aacd02ecaaf51af8c25f2fe">00111</a>     inline static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (const <span class="keywordtype">int</span> factor) throw() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a78aaaf5a6aacd02ecaaf51af8c25f2fe">getMultipleOfDefault</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> (factor)); }
+<a name="l00112"></a>00112    
+<a name="l00113"></a>00113     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">DoubleVariable</a> <span class="keyword">const</span>&amp; factor) <span class="keywordflow">throw</span>();    
+<a name="l00114"></a><a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">00114</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">getMultipleOfDefault</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> factor) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> <a class="code" href="class_block_size.html#a4677711209117060b10dfb120c18d410">getMultipleOfDefault</a> (<a class="code" href="class_variable.html">DoubleVariable</a> (factor)); }
+<a name="l00115"></a>00115 
 <a name="l00116"></a>00116     
-<a name="l00120"></a>00120     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&amp; <a class="code" href="class_block_size.html#a908f1f70af4835dfe259c9f914c563b9" title="Get a block size of 1.">getBlockSize1</a>() throw();
+<a name="l00120"></a>00120     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&amp; <a class="code" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84" title="A dummy block size used to indicate no preference.">noPreference</a>() throw();
 <a name="l00121"></a>00121     
-<a name="l00126"></a>00126     static <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">decide</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; inputBlockSize, 
-<a name="l00127"></a>00127                              <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; preferredBlockSize) throw();
-<a name="l00128"></a>00128     
-<a name="l00129"></a>00129 private:
-<a name="l00130"></a>00130     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; factor) throw();    
-<a name="l00131"></a>00131 };
-<a name="l00132"></a>00132 
-<a name="l00133"></a><a class="code" href="plonk___block_size_8h.html#af6a3c25e69d5ee74664deec2b5d2e859">00133</a> typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&gt; <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">BlockSizes</a>;
-<a name="l00134"></a>00134 
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137 <span class="preprocessor">#endif // PLONK_BLOCKSIZE_H</span>
+<a name="l00125"></a>00125     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&amp; <a class="code" href="class_block_size.html#a908f1f70af4835dfe259c9f914c563b9" title="Get a block size of 1.">getBlockSize1</a>() throw();
+<a name="l00126"></a>00126     
+<a name="l00131"></a>00131     static <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">decide</a> (<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; inputBlockSize, 
+<a name="l00132"></a>00132                              <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> const&amp; preferredBlockSize) throw();
+<a name="l00133"></a>00133     
+<a name="l00134"></a>00134 private:
+<a name="l00135"></a>00135     static const <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <a class="code" href="class_block_size.html#a5130faee8cc5b8862d39ecfecca4c16c" title="Create a block size that is a multiple of the default block size.">getMultipleOfDefault</a> (<a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> const&amp; factor) throw();    
+<a name="l00136"></a>00136 };
+<a name="l00137"></a>00137 
+<a name="l00138"></a><a class="code" href="plonk___block_size_8h.html#af6a3c25e69d5ee74664deec2b5d2e859">00138</a> typedef <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;<a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a>&gt; <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">BlockSizes</a>;
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142 <span class="preprocessor">#endif // PLONK_BLOCKSIZE_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -180,7 +185,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:11 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

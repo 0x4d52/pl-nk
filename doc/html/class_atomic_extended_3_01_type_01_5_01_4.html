@@ -93,6 +93,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_extended.html">AtomicExtended</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a5cd161c8f8b86fc6de386aed904ee723">operator=</a> (Type *other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_extended.html">AtomicExtended</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a19beb2a5e6cb8877737596c02f88e034">operator=</a> (const Type *other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#abe42932efb5409ffb01317865390c884">setAll</a> (const Type *other, const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> extra)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a6580f7595975ab98dbfb1d8af4640cd7">compareAndSwap</a> (const Type *oldValue, const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> oldExtra, const Type *newValue, const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> newExtra)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a54724ba6f39d61f33111b50347f2641e">swap</a> (const Type *newValue)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#ae69961d4eb2dbcf9d0ce0f6c14ee0aa1">swapAll</a> (const Type *newValue, const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> newExtra, Type *oldExtraPtr=0)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a6b74a5675734d848b5cad9d5c96cc788">setValue</a> (const Type *other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a4be29e09de2bb78a44a7a5aa9a5beb30">setPtr</a> (const Type *other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a18c9ca367b2df628401f240f771fffb8">getValue</a> () const   throw ()</td></tr>
@@ -220,6 +223,47 @@ template&lt;class Type &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a6580f7595975ab98dbfb1d8af4640cd7"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::compareAndSwap" ref="a6580f7595975ab98dbfb1d8af4640cd7" args="(const Type *oldValue, const Long oldExtra, const Type *newValue, const Long newExtra)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::compareAndSwap </td>
+          <td>(</td>
+          <td class="paramtype">const Type *&#160;</td>
+          <td class="paramname"><em>oldValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a>&#160;</td>
+          <td class="paramname"><em>oldExtra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Type *&#160;</td>
+          <td class="paramname"><em>newValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a>&#160;</td>
+          <td class="paramname"><em>newExtra</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a966fe1ee156520db3a826e8194cf31ff"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::getExtra" ref="a966fe1ee156520db3a826e8194cf31ff" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -228,6 +272,24 @@ template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::getExtra </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9a6bdc818d2a1f284888e6267cb674b3"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::getPtr" ref="a9a6bdc818d2a1f284888e6267cb674b3" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const Type* <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::getPtr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -249,24 +311,6 @@ template&lt;class Type &gt; </div>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9a6bdc818d2a1f284888e6267cb674b3"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::getPtr" ref="a9a6bdc818d2a1f284888e6267cb674b3" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const Type* <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::getPtr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -539,6 +583,25 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a19beb2a5e6cb8877737596c02f88e034"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::operator=" ref="a19beb2a5e6cb8877737596c02f88e034" args="(const Type *other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_atomic_extended.html">AtomicExtended</a>&amp; <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const Type *&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="af525c1abd571545ea310103dd4f5b2cf"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::operator=" ref="af525c1abd571545ea310103dd4f5b2cf" args="(AtomicExtended const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
@@ -568,25 +631,6 @@ template&lt;class Type &gt; </div>
           <td class="memname"><a class="el" href="class_atomic_extended.html">AtomicExtended</a>&amp; <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype">Type *&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a19beb2a5e6cb8877737596c02f88e034"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::operator=" ref="a19beb2a5e6cb8877737596c02f88e034" args="(const Type *other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_atomic_extended.html">AtomicExtended</a>&amp; <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
@@ -726,6 +770,60 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a54724ba6f39d61f33111b50347f2641e"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::swap" ref="a54724ba6f39d61f33111b50347f2641e" args="(const Type *newValue)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type* <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype">const Type *&#160;</td>
+          <td class="paramname"><em>newValue</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae69961d4eb2dbcf9d0ce0f6c14ee0aa1"></a><!-- doxytag: member="AtomicExtended&lt; Type * &gt;::swapAll" ref="ae69961d4eb2dbcf9d0ce0f6c14ee0aa1" args="(const Type *newValue, const Long newExtra, Type *oldExtraPtr=0)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type* <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; Type * &gt;::swapAll </td>
+          <td>(</td>
+          <td class="paramtype">const Type *&#160;</td>
+          <td class="paramname"><em>newValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a>&#160;</td>
+          <td class="paramname"><em>newExtra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Type *&#160;</td>
+          <td class="paramname"><em>oldExtraPtr</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___atomic_8h_source.html">plonk_Atomic.h</a></li>
 </ul>
@@ -744,7 +842,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:26 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:13 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

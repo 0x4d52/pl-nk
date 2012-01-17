@@ -79,10 +79,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#a3c639fef347dda589e5e1e7c273f8bea">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_shape_notch.html">FilterShapeNotch</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#ac3ea4f553b089c371f6637cdd5aeb86d">FilterShape</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_shape_notch_base.html">FilterShapeNotchBase</a><br class="typebreak"/>
+&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#a463e812a14ab3bd2f989318624a93eef">FilterShape</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_shape_notch.html">FilterShape</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#a925f2fe421903f9c725f87e5395b8926">FilterCoeffsType</a></td></tr>
+&lt; <a class="el" href="class_filter_shape_notch_base.html">FilterShape</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#a925f2fe421903f9c725f87e5395b8926">FilterCoeffsType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_coeffs3_param_unit.html#af85960c23385bb3df1bfae797e4adfb5">FilterCoeffsType::FormType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#adad839430e9579b4c130ebb51dd413e2">FormType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt; <a class="el" href="class_notch_unit.html#adad839430e9579b4c130ebb51dd413e2">FormType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#ad70dd4b779033589fec326fc0d370515">FilterType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_notch_unit.html#afc974f4e17308075925674b4f5bc7d5e">ResampleType</a></td></tr>
@@ -105,7 +105,7 @@ class NotchUnit&lt; SampleType &gt;</h3>
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit</a>&lt;<a class="el" href="class_filter_shape_notch.html">FilterShape</a>&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit</a>&lt;<a class="el" href="class_filter_shape_notch_base.html">FilterShape</a>&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffsType</a></td>
         </tr>
       </table>
 </div>
@@ -113,14 +113,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac3ea4f553b089c371f6637cdd5aeb86d"></a><!-- doxytag: member="NotchUnit::FilterShape" ref="ac3ea4f553b089c371f6637cdd5aeb86d" args="" -->
+<a class="anchor" id="a463e812a14ab3bd2f989318624a93eef"></a><!-- doxytag: member="NotchUnit::FilterShape" ref="a463e812a14ab3bd2f989318624a93eef" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_shape_notch.html">FilterShapeNotch</a>&lt;SampleType&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_shape_notch.html">FilterShape</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_shape_notch_base.html">FilterShapeNotchBase</a>&lt;SampleType&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_shape_notch_base.html">FilterShape</a></td>
         </tr>
       </table>
 </div>
@@ -312,7 +312,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:32 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:19 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

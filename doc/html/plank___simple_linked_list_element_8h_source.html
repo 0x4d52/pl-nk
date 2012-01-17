@@ -75,82 +75,87 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
-<a name="l00006"></a>00006 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
-<a name="l00007"></a>00007 <span class="comment"> All rights reserved.</span>
-<a name="l00008"></a>00008 <span class="comment"> </span>
-<a name="l00009"></a>00009 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
-<a name="l00010"></a>00010 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
-<a name="l00011"></a>00011 <span class="comment"> </span>
-<a name="l00012"></a>00012 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
-<a name="l00013"></a>00013 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
-<a name="l00014"></a>00014 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
-<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
-<a name="l00016"></a>00016 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
-<a name="l00017"></a>00017 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
-<a name="l00018"></a>00018 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
-<a name="l00019"></a>00019 <span class="comment">   derived from this software without specific prior written permission.</span>
-<a name="l00020"></a>00020 <span class="comment"> </span>
-<a name="l00021"></a>00021 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
-<a name="l00022"></a>00022 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
-<a name="l00023"></a>00023 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
-<a name="l00024"></a>00024 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
-<a name="l00025"></a>00025 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
-<a name="l00026"></a>00026 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
-<a name="l00027"></a>00027 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
-<a name="l00028"></a>00028 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
-<a name="l00029"></a>00029 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
-<a name="l00030"></a>00030 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
-<a name="l00031"></a>00031 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032 <span class="comment"> */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#ifndef PLANK_SIMPLELINKEDLISTELEMENT_H</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_SIMPLELINKEDLISTELEMENT_H</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a>00037 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
+<a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
+<a name="l00007"></a>00007 <span class="comment"> </span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
+<a name="l00010"></a>00010 <span class="comment"> </span>
+<a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
+<a name="l00012"></a>00012 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
+<a name="l00013"></a>00013 <span class="comment"> </span>
+<a name="l00014"></a>00014 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
+<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
+<a name="l00016"></a>00016 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
+<a name="l00017"></a>00017 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
+<a name="l00018"></a>00018 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
+<a name="l00019"></a>00019 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
+<a name="l00020"></a>00020 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
+<a name="l00021"></a>00021 <span class="comment">   derived from this software without specific prior written permission.</span>
+<a name="l00022"></a>00022 <span class="comment"> </span>
+<a name="l00023"></a>00023 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<a name="l00024"></a>00024 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<a name="l00025"></a>00025 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
+<a name="l00026"></a>00026 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
+<a name="l00027"></a>00027 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
+<a name="l00028"></a>00028 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
+<a name="l00029"></a>00029 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
+<a name="l00030"></a>00030 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
+<a name="l00031"></a>00031 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
+<a name="l00032"></a>00032 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
+<a name="l00033"></a>00033 <span class="comment"> </span>
+<a name="l00034"></a>00034 <span class="comment"> This software makes use of third party libraries. For more information see:</span>
+<a name="l00035"></a>00035 <span class="comment"> doc/license.txt included in the distribution.</span>
+<a name="l00036"></a>00036 <span class="comment"> -------------------------------------------------------------------------------</span>
+<a name="l00037"></a>00037 <span class="comment"> */</span>
 <a name="l00038"></a>00038 
-<a name="l00039"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">00039</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankSimpleLinkedListElement*   <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a>;
-<a name="l00040"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ace3fdeef4cf11a1d3f51c449cf446a05">00040</a> <span class="keyword">typedef</span> <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8h.html#ace3fdeef4cf11a1d3f51c449cf446a05">PlankSimpleQueueElementRef</a>;
-<a name="l00041"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a1be2966c6c1d12502b1923c8da2f8d91">00041</a> <span class="keyword">typedef</span> <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8h.html#a1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a>;
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8c.html#ac27324338d1492320c218b85b86c7b84">pl_SimpleLinkedListElement_CreateAndInit</a>();
-<a name="l00044"></a>00044 <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8c.html#aca0f74261bb478c5c626c8c39019075d">pl_SimpleLinkedListElement_Create</a>();
-<a name="l00045"></a>00045 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_linked_list_element_8c.html#a451cfda670e013246e685538ce976c24">pl_SimpleLinkedListElement_Init</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
-<a name="l00046"></a>00046 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_linked_list_element_8c.html#a94ce6f31951ced660a0813f042a12046">pl_SimpleLinkedListElement_DeInit</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
-<a name="l00047"></a>00047 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_linked_list_element_8c.html#ac6ac3283f18a4ccfdac40dcc6b3ee806">pl_SimpleLinkedListElement_Destroy</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
-<a name="l00048"></a>00048 <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> <a class="code" href="plank___simple_linked_list_element_8c.html#a28d35b1818f5c42f407551ab1baf1d6c">pl_SimpleLinkedListElement_GetData</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
-<a name="l00049"></a>00049 <span class="keywordtype">void</span> <a class="code" href="plank___simple_linked_list_element_8c.html#a744d82a73d0fb35a1bb15db621971f61">pl_SimpleLinkedListElement_SetData</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> data);
-<a name="l00050"></a>00050 <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8c.html#ae35533ec59caedc61c8951750fec3649">pl_SimpleLinkedListElement_GetNext</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
-<a name="l00051"></a>00051 <span class="keywordtype">void</span> <a class="code" href="plank___simple_linked_list_element_8c.html#a3642958e29385b36d9a4c29772cf925e">pl_SimpleLinkedListElement_SetNext</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> next);
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a2f35c7cdc1e90ae214e0bc431898a98f">00055</a> <span class="preprocessor">#define PLANK_INLINING_FUNCTIONS 1</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="plank___simple_linked_list_element_inline_8h.html">plank_SimpleLinkedListElementInline.h</a>&quot;</span>
-<a name="l00057"></a>00057 <span class="preprocessor">#undef PLANK_INLINING_FUNCTIONS</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span>
-<a name="l00059"></a>00059 <span class="comment">// make these inline at some point..</span>
-<a name="l00060"></a>00060 
-<a name="l00061"></a><a class="code" href="plank___simple_linked_list_element_8h.html#afa8be81919b019084b84cdf71cbc24bb">00061</a> <span class="preprocessor">#define pl_SimpleQueueElement_CreateAndInit  pl_SimpleLinkedListElement_CreateAndInit</span>
-<a name="l00062"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a52e88a3179d128c2f77281f9933730c1">00062</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_Create  pl_SimpleLinkedListElement_Create</span>
-<a name="l00063"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a7ea4ec037e2c8c6bdcea91a77c0b453a">00063</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_Init  pl_SimpleLinkedListElement_Init</span>
-<a name="l00064"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ae0df97f15757ad4bd63ce2e9d85609a4">00064</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_DeInit  pl_SimpleLinkedListElement_DeInit</span>
-<a name="l00065"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a6161284c6e4cf540dd3fa464024b055f">00065</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_Destroy pl_SimpleLinkedListElement_Destroy</span>
-<a name="l00066"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a21d207f67d0b1d2880a63ddc95e609af">00066</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_GetData pl_SimpleLinkedListElement_GetData</span>
-<a name="l00067"></a><a class="code" href="plank___simple_linked_list_element_8h.html#aa65ff26607999b4e47975c5923b1d9a5">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_SetData pl_SimpleLinkedListElement_SetData</span>
-<a name="l00068"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a1fac671aba7bc59d2eae43c02a9a62f9">00068</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_GetNext pl_SimpleLinkedListElement_GetNext</span>
-<a name="l00069"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ad7571e3f185879d34128a5d27c748822">00069</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_SetNext pl_SimpleLinkedListElement_SetNext</span>
-<a name="l00070"></a>00070 <span class="preprocessor"></span>
-<a name="l00071"></a><a class="code" href="plank___simple_linked_list_element_8h.html#af71f1006a16395dd19cd1e0327e7064b">00071</a> <span class="preprocessor">#define pl_SimpleStackElement_CreateAndInit  pl_SimpleLinkedListElement_CreateAndInit</span>
-<a name="l00072"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a98f7b572c157165e6cbb2d31f8c0a81c">00072</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_Create  pl_SimpleLinkedListElement_Create</span>
-<a name="l00073"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ac3ee97ee39d5beadde97131d12a7fd4a">00073</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_Init  pl_SimpleLinkedListElement_Init</span>
-<a name="l00074"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ad26ef2f3816b753c0cd4ad286a8606a8">00074</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_DeInit  pl_SimpleLinkedListElement_DeInit</span>
-<a name="l00075"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ae973f4a734fabc516213026069b2d417">00075</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_Destroy pl_SimpleLinkedListElement_Destroy</span>
-<a name="l00076"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a7bf9219d0bddcc42a054aae8f1ecb677">00076</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_GetData pl_SimpleLinkedListElement_GetData</span>
-<a name="l00077"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a055200413861ff2f8d7fe7ee6bb15d79">00077</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_SetData pl_SimpleLinkedListElement_SetData</span>
-<a name="l00078"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a09650daaf2875c2e05474809b1d4cb3a">00078</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_GetNext pl_SimpleLinkedListElement_GetNext</span>
-<a name="l00079"></a><a class="code" href="plank___simple_linked_list_element_8h.html#abc45be32a8c370a80541b1087c8da335">00079</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_SetNext pl_SimpleLinkedListElement_SetNext</span>
-<a name="l00080"></a>00080 <span class="preprocessor"></span>
-<a name="l00081"></a>00081 <span class="preprocessor">#endif // PLANK_SIMPLELINKEDLISTELEMENT_H</span>
+<a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_SIMPLELINKEDLISTELEMENT_H</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_SIMPLELINKEDLISTELEMENT_H</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a>00042 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">00044</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankSimpleLinkedListElement*   <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a>;
+<a name="l00045"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ace3fdeef4cf11a1d3f51c449cf446a05">00045</a> <span class="keyword">typedef</span> <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8h.html#ace3fdeef4cf11a1d3f51c449cf446a05">PlankSimpleQueueElementRef</a>;
+<a name="l00046"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a1be2966c6c1d12502b1923c8da2f8d91">00046</a> <span class="keyword">typedef</span> <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8h.html#a1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a>;
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8c.html#ac27324338d1492320c218b85b86c7b84">pl_SimpleLinkedListElement_CreateAndInit</a>();
+<a name="l00049"></a>00049 <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8c.html#aca0f74261bb478c5c626c8c39019075d">pl_SimpleLinkedListElement_Create</a>();
+<a name="l00050"></a>00050 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_linked_list_element_8c.html#a451cfda670e013246e685538ce976c24">pl_SimpleLinkedListElement_Init</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
+<a name="l00051"></a>00051 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_linked_list_element_8c.html#a94ce6f31951ced660a0813f042a12046">pl_SimpleLinkedListElement_DeInit</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
+<a name="l00052"></a>00052 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_linked_list_element_8c.html#ac6ac3283f18a4ccfdac40dcc6b3ee806">pl_SimpleLinkedListElement_Destroy</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
+<a name="l00053"></a>00053 <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> <a class="code" href="plank___simple_linked_list_element_8c.html#a28d35b1818f5c42f407551ab1baf1d6c">pl_SimpleLinkedListElement_GetData</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
+<a name="l00054"></a>00054 <span class="keywordtype">void</span> <a class="code" href="plank___simple_linked_list_element_8c.html#a744d82a73d0fb35a1bb15db621971f61">pl_SimpleLinkedListElement_SetData</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> data);
+<a name="l00055"></a>00055 <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> <a class="code" href="plank___simple_linked_list_element_8c.html#ae35533ec59caedc61c8951750fec3649">pl_SimpleLinkedListElement_GetNext</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p);
+<a name="l00056"></a>00056 <span class="keywordtype">void</span> <a class="code" href="plank___simple_linked_list_element_8c.html#a3642958e29385b36d9a4c29772cf925e">pl_SimpleLinkedListElement_SetNext</a> (<a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___simple_linked_list_element_8h.html#a7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> next);
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00059"></a>00059 
+<a name="l00060"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a2f35c7cdc1e90ae214e0bc431898a98f">00060</a> <span class="preprocessor">#define PLANK_INLINING_FUNCTIONS 1</span>
+<a name="l00061"></a>00061 <span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="plank___simple_linked_list_element_inline_8h.html">plank_SimpleLinkedListElementInline.h</a>&quot;</span>
+<a name="l00062"></a>00062 <span class="preprocessor">#undef PLANK_INLINING_FUNCTIONS</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span>
+<a name="l00064"></a>00064 <span class="comment">// make these inline at some point..</span>
+<a name="l00065"></a>00065 
+<a name="l00066"></a><a class="code" href="plank___simple_linked_list_element_8h.html#afa8be81919b019084b84cdf71cbc24bb">00066</a> <span class="preprocessor">#define pl_SimpleQueueElement_CreateAndInit  pl_SimpleLinkedListElement_CreateAndInit</span>
+<a name="l00067"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a52e88a3179d128c2f77281f9933730c1">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_Create  pl_SimpleLinkedListElement_Create</span>
+<a name="l00068"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a7ea4ec037e2c8c6bdcea91a77c0b453a">00068</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_Init  pl_SimpleLinkedListElement_Init</span>
+<a name="l00069"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ae0df97f15757ad4bd63ce2e9d85609a4">00069</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_DeInit  pl_SimpleLinkedListElement_DeInit</span>
+<a name="l00070"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a6161284c6e4cf540dd3fa464024b055f">00070</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_Destroy pl_SimpleLinkedListElement_Destroy</span>
+<a name="l00071"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a21d207f67d0b1d2880a63ddc95e609af">00071</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_GetData pl_SimpleLinkedListElement_GetData</span>
+<a name="l00072"></a><a class="code" href="plank___simple_linked_list_element_8h.html#aa65ff26607999b4e47975c5923b1d9a5">00072</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_SetData pl_SimpleLinkedListElement_SetData</span>
+<a name="l00073"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a1fac671aba7bc59d2eae43c02a9a62f9">00073</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_GetNext pl_SimpleLinkedListElement_GetNext</span>
+<a name="l00074"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ad7571e3f185879d34128a5d27c748822">00074</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleQueueElement_SetNext pl_SimpleLinkedListElement_SetNext</span>
+<a name="l00075"></a>00075 <span class="preprocessor"></span>
+<a name="l00076"></a><a class="code" href="plank___simple_linked_list_element_8h.html#af71f1006a16395dd19cd1e0327e7064b">00076</a> <span class="preprocessor">#define pl_SimpleStackElement_CreateAndInit  pl_SimpleLinkedListElement_CreateAndInit</span>
+<a name="l00077"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a98f7b572c157165e6cbb2d31f8c0a81c">00077</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_Create  pl_SimpleLinkedListElement_Create</span>
+<a name="l00078"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ac3ee97ee39d5beadde97131d12a7fd4a">00078</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_Init  pl_SimpleLinkedListElement_Init</span>
+<a name="l00079"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ad26ef2f3816b753c0cd4ad286a8606a8">00079</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_DeInit  pl_SimpleLinkedListElement_DeInit</span>
+<a name="l00080"></a><a class="code" href="plank___simple_linked_list_element_8h.html#ae973f4a734fabc516213026069b2d417">00080</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_Destroy pl_SimpleLinkedListElement_Destroy</span>
+<a name="l00081"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a7bf9219d0bddcc42a054aae8f1ecb677">00081</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_GetData pl_SimpleLinkedListElement_GetData</span>
+<a name="l00082"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a055200413861ff2f8d7fe7ee6bb15d79">00082</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_SetData pl_SimpleLinkedListElement_SetData</span>
+<a name="l00083"></a><a class="code" href="plank___simple_linked_list_element_8h.html#a09650daaf2875c2e05474809b1d4cb3a">00083</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_GetNext pl_SimpleLinkedListElement_GetNext</span>
+<a name="l00084"></a><a class="code" href="plank___simple_linked_list_element_8h.html#abc45be32a8c370a80541b1087c8da335">00084</a> <span class="preprocessor"></span><span class="preprocessor">#define pl_SimpleStackElement_SetNext pl_SimpleLinkedListElement_SetNext</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span>
+<a name="l00086"></a>00086 <span class="preprocessor">#endif // PLANK_SIMPLELINKEDLISTELEMENT_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -167,7 +172,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:10 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

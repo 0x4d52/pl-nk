@@ -76,95 +76,100 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
-<a name="l00006"></a>00006 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
-<a name="l00007"></a>00007 <span class="comment"> All rights reserved.</span>
-<a name="l00008"></a>00008 <span class="comment"> </span>
-<a name="l00009"></a>00009 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
-<a name="l00010"></a>00010 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
-<a name="l00011"></a>00011 <span class="comment"> </span>
-<a name="l00012"></a>00012 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
-<a name="l00013"></a>00013 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
-<a name="l00014"></a>00014 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
-<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
-<a name="l00016"></a>00016 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
-<a name="l00017"></a>00017 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
-<a name="l00018"></a>00018 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
-<a name="l00019"></a>00019 <span class="comment">   derived from this software without specific prior written permission.</span>
-<a name="l00020"></a>00020 <span class="comment"> </span>
-<a name="l00021"></a>00021 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
-<a name="l00022"></a>00022 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
-<a name="l00023"></a>00023 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
-<a name="l00024"></a>00024 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
-<a name="l00025"></a>00025 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
-<a name="l00026"></a>00026 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
-<a name="l00027"></a>00027 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
-<a name="l00028"></a>00028 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
-<a name="l00029"></a>00029 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
-<a name="l00030"></a>00030 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
-<a name="l00031"></a>00031 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032 <span class="comment"> */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#ifndef PLANK_AUDIOFILEREADER_H</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_AUDIOFILEREADER_H</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_common_8h.html">plank_AudioFileCommon.h</a>&quot;</span>
+<a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
+<a name="l00007"></a>00007 <span class="comment"> </span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
+<a name="l00010"></a>00010 <span class="comment"> </span>
+<a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
+<a name="l00012"></a>00012 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
+<a name="l00013"></a>00013 <span class="comment"> </span>
+<a name="l00014"></a>00014 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
+<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
+<a name="l00016"></a>00016 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
+<a name="l00017"></a>00017 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
+<a name="l00018"></a>00018 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
+<a name="l00019"></a>00019 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
+<a name="l00020"></a>00020 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
+<a name="l00021"></a>00021 <span class="comment">   derived from this software without specific prior written permission.</span>
+<a name="l00022"></a>00022 <span class="comment"> </span>
+<a name="l00023"></a>00023 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<a name="l00024"></a>00024 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<a name="l00025"></a>00025 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
+<a name="l00026"></a>00026 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
+<a name="l00027"></a>00027 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
+<a name="l00028"></a>00028 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
+<a name="l00029"></a>00029 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
+<a name="l00030"></a>00030 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
+<a name="l00031"></a>00031 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
+<a name="l00032"></a>00032 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
+<a name="l00033"></a>00033 <span class="comment"> </span>
+<a name="l00034"></a>00034 <span class="comment"> This software makes use of third party libraries. For more information see:</span>
+<a name="l00035"></a>00035 <span class="comment"> doc/license.txt included in the distribution.</span>
+<a name="l00036"></a>00036 <span class="comment"> -------------------------------------------------------------------------------</span>
+<a name="l00037"></a>00037 <span class="comment"> */</span>
 <a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
-<a name="l00040"></a>00040 
-<a name="l00049"></a><a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">00049</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileReader* <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a>; 
-<a name="l00050"></a>00050 
-<a name="l00053"></a>00053 <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga8784ba3b844756be7837c8f8bd1ab7a2" title="Create and initialise a Plank AudioFileReader object and return an oqaque reference to it...">pl_AudioFileReader_CreateAndInit</a>();
-<a name="l00054"></a>00054 
-<a name="l00057"></a>00057 <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga64b8041841db62479bd26a6ada614a94" title="Create a Plank AudioFileReader object and return an oqaque reference to it.">pl_AudioFileReader_Create</a>();
-<a name="l00058"></a>00058 
-<a name="l00062"></a>00062 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga7efa09693c7ccea6568df64fe5cddbd5" title="Initialise a Plank AudioFileReader object.">pl_AudioFileReader_Init</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
+<a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_AUDIOFILEREADER_H</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_AUDIOFILEREADER_H</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plank___audio_file_common_8h.html">plank_AudioFileCommon.h</a>&quot;</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
+<a name="l00045"></a>00045 
+<a name="l00054"></a><a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">00054</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileReader* <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a>; 
+<a name="l00055"></a>00055 
+<a name="l00058"></a>00058 <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga8784ba3b844756be7837c8f8bd1ab7a2" title="Create and initialise a Plank AudioFileReader object and return an oqaque reference to it...">pl_AudioFileReader_CreateAndInit</a>();
+<a name="l00059"></a>00059 
+<a name="l00062"></a>00062 <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga64b8041841db62479bd26a6ada614a94" title="Create a Plank AudioFileReader object and return an oqaque reference to it.">pl_AudioFileReader_Create</a>();
 <a name="l00063"></a>00063 
-<a name="l00067"></a>00067 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga89cc49dad0e1b2cf3b0e3598733f52c1" title="Deinitialise a Plank AudioFileReader object.">pl_AudioFileReader_DeInit</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
+<a name="l00067"></a>00067 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga7efa09693c7ccea6568df64fe5cddbd5" title="Initialise a Plank AudioFileReader object.">pl_AudioFileReader_Init</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
 <a name="l00068"></a>00068 
-<a name="l00072"></a>00072 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga6d715deee494b0c2c13bf2ba636d5075" title="Destroy a Plank AudioFileReader object.">pl_AudioFileReader_Destroy</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
+<a name="l00072"></a>00072 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga89cc49dad0e1b2cf3b0e3598733f52c1" title="Deinitialise a Plank AudioFileReader object.">pl_AudioFileReader_DeInit</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
 <a name="l00073"></a>00073 
-<a name="l00078"></a>00078 <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga5a6e10f2b61bfd8ab9f289a5a76e8f53" title="Gets the underlying Plank File object.">pl_AudioFileReader_GetFile</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
-<a name="l00079"></a>00079 
-<a name="l00083"></a>00083 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gaa85d094267a8f606f6f82e9f40447bd6">pl_AudioFileReader_Open</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath);
+<a name="l00077"></a>00077 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga6d715deee494b0c2c13bf2ba636d5075" title="Destroy a Plank AudioFileReader object.">pl_AudioFileReader_Destroy</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
+<a name="l00078"></a>00078 
+<a name="l00083"></a>00083 <a class="code" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59" title="An opaque reference to the Plank File object.">PlankFileRef</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga5a6e10f2b61bfd8ab9f289a5a76e8f53" title="Gets the underlying Plank File object.">pl_AudioFileReader_GetFile</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
 <a name="l00084"></a>00084 
-<a name="l00088"></a>00088 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gaa2de7a4772b24bdacc792a38ccfcc971">pl_AudioFileReader_Close</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
+<a name="l00088"></a>00088 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gaa85d094267a8f606f6f82e9f40447bd6">pl_AudioFileReader_Open</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">char</span>* filepath);
 <a name="l00089"></a>00089 
-<a name="l00093"></a>00093 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga3f14cbe2ba096761fb06d9dd7704e3e3">pl_AudioFileReader_GetFormat</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *format);
+<a name="l00093"></a>00093 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gaa2de7a4772b24bdacc792a38ccfcc971">pl_AudioFileReader_Close</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
 <a name="l00094"></a>00094 
-<a name="l00098"></a>00098 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga6ba1c8ba7650576efcc962f5aadc33df">pl_AudioFileReader_GetEncoding</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *encoding);
+<a name="l00098"></a>00098 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga3f14cbe2ba096761fb06d9dd7704e3e3">pl_AudioFileReader_GetFormat</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *format);
 <a name="l00099"></a>00099 
-<a name="l00104"></a>00104 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gaf42f83e7a2f5b6c3a561e141335ff24c" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBitsPerSample</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *bitsPerSample);
-<a name="l00105"></a>00105 
-<a name="l00109"></a>00109 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0b169539564da5e656f4843bca46d730">pl_AudioFileReader_GetNumChannels</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numChannels);
+<a name="l00103"></a>00103 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga6ba1c8ba7650576efcc962f5aadc33df">pl_AudioFileReader_GetEncoding</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *encoding);
+<a name="l00104"></a>00104 
+<a name="l00109"></a>00109 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gaf42f83e7a2f5b6c3a561e141335ff24c" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBitsPerSample</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *bitsPerSample);
 <a name="l00110"></a>00110 
-<a name="l00114"></a>00114 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gafc6121f2efff0f0696cd430b92697371">pl_AudioFileReader_GetSampleRate</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">double</span> *sampleRate);
+<a name="l00114"></a>00114 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0b169539564da5e656f4843bca46d730">pl_AudioFileReader_GetNumChannels</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numChannels);
 <a name="l00115"></a>00115 
-<a name="l00119"></a>00119 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga72c00c51c3fcaa3fc2f0a60f65d7f61d">pl_AudioFileReader_GetNumFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numFrames);
+<a name="l00119"></a>00119 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gafc6121f2efff0f0696cd430b92697371">pl_AudioFileReader_GetSampleRate</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">double</span> *sampleRate);
 <a name="l00120"></a>00120 
-<a name="l00124"></a>00124 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga85749687029ce642263b50d34979a7ee">pl_AudioFileReader_SetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> frameIndex);
+<a name="l00124"></a>00124 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga72c00c51c3fcaa3fc2f0a60f65d7f61d">pl_AudioFileReader_GetNumFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numFrames);
 <a name="l00125"></a>00125 
-<a name="l00129"></a>00129 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gac726281037e5e992ba936fb24f807487">pl_AudioFileReader_ResetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
+<a name="l00129"></a>00129 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga85749687029ce642263b50d34979a7ee">pl_AudioFileReader_SetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> frameIndex);
 <a name="l00130"></a>00130 
-<a name="l00134"></a>00134 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0687de26ac936f805f3349a236dcf9df">pl_AudioFileReader_GetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *frameIndex);
+<a name="l00134"></a>00134 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gac726281037e5e992ba936fb24f807487">pl_AudioFileReader_ResetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
 <a name="l00135"></a>00135 
-<a name="l00139"></a>00139 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0806b3ae5096a516e0a9fe188130ee7e">pl_AudioFileReader_ReadFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> numFrames, <span class="keywordtype">void</span>* data);
+<a name="l00139"></a>00139 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0687de26ac936f805f3349a236dcf9df">pl_AudioFileReader_GetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *frameIndex);
 <a name="l00140"></a>00140 
-<a name="l00141"></a>00141 
-<a name="l00144"></a>00144 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00144"></a>00144 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0806b3ae5096a516e0a9fe188130ee7e">pl_AudioFileReader_ReadFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> numFrames, <span class="keywordtype">void</span>* data);
 <a name="l00145"></a>00145 
-<a name="l00146"></a>00146 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00147"></a>00147 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileReader
-<a name="l00148"></a>00148 {
-<a name="l00149"></a>00149     PlankIffFileReader iff;    
-<a name="l00150"></a>00150     <a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a> formatInfo;
-<a name="l00151"></a>00151     
-<a name="l00152"></a>00152     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataLength;
-<a name="l00153"></a>00153     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> numFrames;
-<a name="l00154"></a>00154     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataPosition;
-<a name="l00155"></a>00155 } PlankAudioFileReader;
-<a name="l00156"></a>00156 <span class="preprocessor">#endif</span>
-<a name="l00157"></a>00157 <span class="preprocessor"></span>
-<a name="l00158"></a>00158 <span class="preprocessor">#endif // PLANK_AUDIOFILEREADER_H</span>
+<a name="l00146"></a>00146 
+<a name="l00149"></a>00149 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00152"></a>00152 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileReader
+<a name="l00153"></a>00153 {
+<a name="l00154"></a>00154     PlankIffFileReader iff;    
+<a name="l00155"></a>00155     <a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a> formatInfo;
+<a name="l00156"></a>00156     
+<a name="l00157"></a>00157     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataLength;
+<a name="l00158"></a>00158     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> numFrames;
+<a name="l00159"></a>00159     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataPosition;
+<a name="l00160"></a>00160 } PlankAudioFileReader;
+<a name="l00161"></a>00161 <span class="preprocessor">#endif</span>
+<a name="l00162"></a>00162 <span class="preprocessor"></span>
+<a name="l00163"></a>00163 <span class="preprocessor">#endif // PLANK_AUDIOFILEREADER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -181,7 +186,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:10 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

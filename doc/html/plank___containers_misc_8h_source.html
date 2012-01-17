@@ -75,330 +75,335 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
-<a name="l00006"></a>00006 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
-<a name="l00007"></a>00007 <span class="comment"> All rights reserved.</span>
-<a name="l00008"></a>00008 <span class="comment"> </span>
-<a name="l00009"></a>00009 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
-<a name="l00010"></a>00010 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
-<a name="l00011"></a>00011 <span class="comment"> </span>
-<a name="l00012"></a>00012 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
-<a name="l00013"></a>00013 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
-<a name="l00014"></a>00014 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
-<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
-<a name="l00016"></a>00016 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
-<a name="l00017"></a>00017 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
-<a name="l00018"></a>00018 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
-<a name="l00019"></a>00019 <span class="comment">   derived from this software without specific prior written permission.</span>
-<a name="l00020"></a>00020 <span class="comment"> </span>
-<a name="l00021"></a>00021 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
-<a name="l00022"></a>00022 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
-<a name="l00023"></a>00023 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
-<a name="l00024"></a>00024 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
-<a name="l00025"></a>00025 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
-<a name="l00026"></a>00026 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
-<a name="l00027"></a>00027 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
-<a name="l00028"></a>00028 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
-<a name="l00029"></a>00029 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
-<a name="l00030"></a>00030 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
-<a name="l00031"></a>00031 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032 <span class="comment"> */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#ifndef PLANK_CONTAINERSMISC_H</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_CONTAINERSMISC_H</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a><a class="code" href="plank___containers_misc_8h.html#a0f3fa263197913edaa8b4972a0a0d11a">00037</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="plank___containers_misc_8h.html#a0f3fa263197913edaa8b4972a0a0d11a">pl_SwapP</a> (<a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>* a, <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>* b)
-<a name="l00038"></a>00038 {
-<a name="l00039"></a>00039     <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> temp;
-<a name="l00040"></a>00040     temp = *a;
-<a name="l00041"></a>00041     *a = *b;
-<a name="l00042"></a>00042     *b = temp;
-<a name="l00043"></a>00043 }
-<a name="l00044"></a>00044 
-<a name="l00046"></a><a class="code" href="struct_plank_u_i24.html">00046</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>
-<a name="l00047"></a>00047 {
-<a name="l00048"></a><a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">00048</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[3];
-<a name="l00049"></a>00049 } <a class="code" href="plank___containers_misc_8h.html#a50af2be6b84ee996f887bfc0b5caa2bf" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>;
-<a name="l00050"></a>00050 
-<a name="l00052"></a><a class="code" href="struct_plank_i24.html">00052</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>
-<a name="l00053"></a>00053 {
-<a name="l00054"></a><a class="code" href="struct_plank_i24.html#aacf8c068717b99d7416b24ad806f5f1c">00054</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_i24.html#aacf8c068717b99d7416b24ad806f5f1c">data</a>[3];
-<a name="l00055"></a>00055 } <a class="code" href="plank___containers_misc_8h.html#afcb23424a8d4f3370b509524a88f0d70" title="Storage for a 24-bit integer.">PlankI24</a>;
-<a name="l00056"></a>00056 
-<a name="l00060"></a><a class="code" href="struct_plank_f80.html">00060</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a>
-<a name="l00061"></a>00061 {
-<a name="l00062"></a><a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">00062</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[10];
-<a name="l00063"></a>00063 } <a class="code" href="plank___containers_misc_8h.html#ac517609443d32e0e2fdc8104b8e39303" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a>;
-<a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="plank___containers_misc_8h.html#a3c3644021b8519b18783110a39778cf3">00065</a> <span class="preprocessor">#define PLANK_INT24_MAX 0x7fffff</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span>
-<a name="l00068"></a><a class="code" href="struct_plank_pascal_string255.html">00068</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_pascal_string255.html" title="Storage for a 255 character Pascal string.">PlankPascalString255</a>
-<a name="l00069"></a>00069 {
-<a name="l00070"></a><a class="code" href="struct_plank_pascal_string255.html#aa0a164cd36ad36890953526c80fbf37d">00070</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_pascal_string255.html#aa0a164cd36ad36890953526c80fbf37d">data</a>[256];
-<a name="l00071"></a>00071 } <a class="code" href="plank___containers_misc_8h.html#a93361ab34c020e60e810651413c9d5da" title="Storage for a 255 character Pascal string.">PlankPascalString255</a>;
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073 
-<a name="l00076"></a><a class="code" href="group___plank_misc_functions.html#ga12d4aea1c2eccf219229930a7d7b2d1b">00076</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> <a class="code" href="group___plank_misc_functions.html#ga12d4aea1c2eccf219229930a7d7b2d1b" title="Convert an unsigned 32-bit int into to an unsigned 24-bit int.">pl_ConvertUIToUI24</a> (<span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> i32)
-<a name="l00077"></a>00077 {
-<a name="l00078"></a>00078 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
-<a name="l00079"></a>00079 <span class="preprocessor"></span>    <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> i24;
-<a name="l00080"></a>00080     i24 = *(<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)&amp;i32;
-<a name="l00081"></a>00081     <span class="keywordflow">return</span> i24;
-<a name="l00082"></a>00082 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
-<a name="l00083"></a>00083 <span class="preprocessor"></span>    <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> i24;
-<a name="l00084"></a>00084     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bits;
-<a name="l00085"></a>00085     
-<a name="l00086"></a>00086     bits = (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*)&amp;i32;
-<a name="l00087"></a>00087     i24 = *(<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)(bits + 1);
-<a name="l00088"></a>00088     <span class="keywordflow">return</span> i24;
-<a name="l00089"></a>00089 <span class="preprocessor">#else</span>
-<a name="l00090"></a>00090 <span class="preprocessor"></span><span class="preprocessor">        #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
-<a name="l00091"></a>00091 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00092"></a>00092 <span class="preprocessor"></span>}
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094 
-<a name="l00097"></a><a class="code" href="group___plank_misc_functions.html#gaa379ad95d94bc0bac21cd19e41a13ba9">00097</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="group___plank_misc_functions.html#gaa379ad95d94bc0bac21cd19e41a13ba9" title="Convert an unsigned 24-bit int into to an unsigned 32-bit int.">pl_ConvertUI24ToUI</a> (<span class="keyword">const</span> <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> i24)
-<a name="l00098"></a>00098 {
-<a name="l00099"></a>00099 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
-<a name="l00100"></a>00100 <span class="preprocessor"></span>    <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> i32;
-<a name="l00101"></a>00101     i32 = *(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)&amp;i24 &amp; 0xffffff;
-<a name="l00102"></a>00102     <span class="keywordflow">return</span> i32;
-<a name="l00103"></a>00103 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
-<a name="l00104"></a>00104 <span class="preprocessor"></span>        <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> i32;
-<a name="l00105"></a>00105     i32 = (*(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)&amp;i24 &gt;&gt; 8) &amp; 0xffffff;
-<a name="l00106"></a>00106     <span class="keywordflow">return</span> i32;
-<a name="l00107"></a>00107 <span class="preprocessor">#else</span>
-<a name="l00108"></a>00108 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
-<a name="l00109"></a>00109 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00110"></a>00110 <span class="preprocessor"></span>}
-<a name="l00111"></a>00111 
-<a name="l00114"></a><a class="code" href="group___plank_misc_functions.html#ga4cc22ee75977dccf974b63af39d9df5d">00114</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> <a class="code" href="group___plank_misc_functions.html#ga4cc22ee75977dccf974b63af39d9df5d" title="Convert a 32-bit int into to a 24-bit int.">pl_ConvertIToI24</a> (<span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> i32)
-<a name="l00115"></a>00115 {
-<a name="l00116"></a>00116 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
-<a name="l00117"></a>00117 <span class="preprocessor"></span>    <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> i24;
-<a name="l00118"></a>00118     i24 = *(<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>*)&amp;i32;
-<a name="l00119"></a>00119     <span class="keywordflow">return</span> i24;
-<a name="l00120"></a>00120 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
-<a name="l00121"></a>00121 <span class="preprocessor"></span>    <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> i24;
-<a name="l00122"></a>00122     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bits;
-<a name="l00123"></a>00123     
-<a name="l00124"></a>00124     bits = (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*)&amp;i32;
-<a name="l00125"></a>00125     i24 = *(<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>*)(bits + 1);
-<a name="l00126"></a>00126     <span class="keywordflow">return</span> i24;    
-<a name="l00127"></a>00127 <span class="preprocessor">#else</span>
-<a name="l00128"></a>00128 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
-<a name="l00129"></a>00129 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00130"></a>00130 <span class="preprocessor"></span>}
-<a name="l00131"></a>00131 
-<a name="l00134"></a><a class="code" href="group___plank_misc_functions.html#ga849950922a5ac6275b060f7dccd3d7af">00134</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="group___plank_misc_functions.html#ga849950922a5ac6275b060f7dccd3d7af" title="Convert a 24-bit int into to a 32-bit int.">pl_ConvertI24ToI</a> (<span class="keyword">const</span> <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> i24)
-<a name="l00135"></a>00135 {
-<a name="l00136"></a>00136 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
-<a name="l00137"></a>00137 <span class="preprocessor"></span>    <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> i32;
-<a name="l00138"></a>00138     i32 = *(<a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>*)&amp;i24 &amp; 0xffffff;
-<a name="l00139"></a>00139             
-<a name="l00140"></a>00140     <span class="keywordflow">if</span> (i32 &amp; 0x00800000)
-<a name="l00141"></a>00141         <span class="keywordflow">return</span> i32 | 0xff000000;
-<a name="l00142"></a>00142     <span class="keywordflow">else</span>
-<a name="l00143"></a>00143         <span class="keywordflow">return</span> i32;
-<a name="l00144"></a>00144 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
-<a name="l00145"></a>00145 <span class="preprocessor"></span>        <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> i32;
-<a name="l00146"></a>00146     i32 = (*(<a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>*)&amp;i24 &gt;&gt; 8) &amp; 0xffffff;
-<a name="l00147"></a>00147         
-<a name="l00148"></a>00148     <span class="keywordflow">if</span> (i32 &amp; 0x00800000)
-<a name="l00149"></a>00149         <span class="keywordflow">return</span> i32 | 0xff000000;
-<a name="l00150"></a>00150     <span class="keywordflow">else</span>
-<a name="l00151"></a>00151         <span class="keywordflow">return</span> i32;
-<a name="l00152"></a>00152 <span class="preprocessor">#else</span>
-<a name="l00153"></a>00153 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
-<a name="l00154"></a>00154 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00155"></a>00155 <span class="preprocessor"></span>}
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157 
-<a name="l00164"></a><a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52">00164</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52" title="Swap the byte order of the unisgned short pointed to by bits.">pl_SwapEndianUS</a> (<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> *bits)
-<a name="l00165"></a>00165 {
-<a name="l00166"></a>00166     *bits = (*bits &gt;&gt; 8) | (*bits &lt;&lt; 8);
-<a name="l00167"></a>00167 }
-<a name="l00168"></a>00168 
-<a name="l00170"></a><a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0">00170</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0" title="Swap the byte order of the 24-bit int pointed to by bits.">pl_SwapEndianUI24</a> (<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> *bits)
-<a name="l00171"></a>00171 {
-<a name="l00172"></a>00172     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> temp = bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[0];
-<a name="l00173"></a>00173     bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[0] = bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[2];
-<a name="l00174"></a>00174     bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[2] = temp;
-<a name="l00175"></a>00175 }
-<a name="l00176"></a>00176 
-<a name="l00178"></a><a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd">00178</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *bits)
-<a name="l00179"></a>00179 {
-<a name="l00180"></a>00180     *bits = (*bits &gt;&gt; 24) | ((*bits &lt;&lt; 8) &amp; 0x00ff0000) | ((*bits &gt;&gt; 8) &amp; 0x0000ff00) | (*bits &lt;&lt; 24);
-<a name="l00181"></a>00181 }
-<a name="l00182"></a>00182 
-<a name="l00184"></a><a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d">00184</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> (<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> *bits)
-<a name="l00185"></a>00185 {    
-<a name="l00186"></a>00186     *bits = (*bits &gt;&gt; 56) | 
-<a name="l00187"></a>00187             ((*bits &lt;&lt; 40) &amp; 0x00ff000000000000ULL) |
-<a name="l00188"></a>00188             ((*bits &lt;&lt; 24) &amp; 0x0000ff0000000000ULL) |
-<a name="l00189"></a>00189             ((*bits &lt;&lt; 8)  &amp; 0x000000ff00000000ULL) |
-<a name="l00190"></a>00190             ((*bits &gt;&gt; 8)  &amp; 0x00000000ff000000ULL) |
-<a name="l00191"></a>00191             ((*bits &gt;&gt; 24) &amp; 0x0000000000ff0000ULL) |
-<a name="l00192"></a>00192             ((*bits &gt;&gt; 40) &amp; 0x000000000000ff00ULL) |
-<a name="l00193"></a>00193             (*bits &lt;&lt; 56);
-<a name="l00194"></a>00194 }
-<a name="l00195"></a>00195 
-<a name="l00196"></a><a class="code" href="group___plank_endian_functions.html#gacc9809c1baebce7729a069c1636927e1">00196</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gacc9809c1baebce7729a069c1636927e1">pl_SwapEndianF80</a> (<a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> *bits)
-<a name="l00197"></a>00197 {
-<a name="l00198"></a>00198     <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> temp = *bits;
-<a name="l00199"></a>00199     
-<a name="l00200"></a>00200     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[9];
-<a name="l00201"></a>00201     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[1] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[8];
-<a name="l00202"></a>00202     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[2] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[7];
-<a name="l00203"></a>00203     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[3] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[6];
-<a name="l00204"></a>00204     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[4] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[5];
-<a name="l00205"></a>00205     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[5] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[4];
-<a name="l00206"></a>00206     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[6] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[3];
-<a name="l00207"></a>00207     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[7] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[2];
-<a name="l00208"></a>00208     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[8] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[1];
-<a name="l00209"></a>00209     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[9] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0];
-<a name="l00210"></a>00210 }
-<a name="l00211"></a>00211 
-<a name="l00213"></a><a class="code" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba">00213</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba" title="Swap the byte order of the unisgned long pointed to by data.">pl_SwapEndianUL</a> (<a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> *data)
-<a name="l00214"></a>00214 {
-<a name="l00215"></a>00215 <span class="preprocessor">#if PLANK_32BIT</span>
-<a name="l00216"></a>00216 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
-<a name="l00217"></a>00217 <span class="preprocessor">#elif PLANK_64BIT</span>
-<a name="l00218"></a>00218 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
-<a name="l00219"></a>00219 <span class="preprocessor">#else</span>
-<a name="l00220"></a>00220 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_32BIT or PLANK_64BIT are set to 1</span>
-<a name="l00221"></a>00221 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00222"></a>00222 <span class="preprocessor"></span>}
-<a name="l00223"></a>00223 
-<a name="l00225"></a><a class="code" href="group___plank_endian_functions.html#gacbd1eb291c50b32d9798bb2ec3588063">00225</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gacbd1eb291c50b32d9798bb2ec3588063" title="Swap the byte order of the short pointed to by data.">pl_SwapEndianS</a> (<span class="keywordtype">short</span> *data)
-<a name="l00226"></a>00226 {
-<a name="l00227"></a>00227     <a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52" title="Swap the byte order of the unisgned short pointed to by bits.">pl_SwapEndianUS</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span>*)data);
-<a name="l00228"></a>00228 }
-<a name="l00229"></a>00229 
-<a name="l00231"></a><a class="code" href="group___plank_endian_functions.html#ga1778a274a1b8c68d8066b40e59cbe265">00231</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga1778a274a1b8c68d8066b40e59cbe265" title="Swap the byte order of the int pointed to by data.">pl_SwapEndianI</a> (<span class="keywordtype">int</span> *data)
-<a name="l00232"></a>00232 {
-<a name="l00233"></a>00233     <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
-<a name="l00234"></a>00234 }
-<a name="l00235"></a>00235 
-<a name="l00237"></a><a class="code" href="group___plank_endian_functions.html#gac92e5c02813dd30dc9377f3f9ead4376">00237</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac92e5c02813dd30dc9377f3f9ead4376" title="Swap the byte order of the 24-bit int pointed to by data.">pl_SwapEndianI24</a> (<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> *data)
-<a name="l00238"></a>00238 {
-<a name="l00239"></a>00239     <a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0" title="Swap the byte order of the 24-bit int pointed to by bits.">pl_SwapEndianUI24</a> ((<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)data);
-<a name="l00240"></a>00240 }
-<a name="l00241"></a>00241 
-<a name="l00243"></a><a class="code" href="group___plank_endian_functions.html#ga064fa00018ad8477203f12e4babf39eb">00243</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga064fa00018ad8477203f12e4babf39eb" title="Swap the byte order of the long pointed to by data.">pl_SwapEndianL</a> (<span class="keywordtype">long</span> *data)
-<a name="l00244"></a>00244 {
-<a name="l00245"></a>00245 <span class="preprocessor">#if PLANK_32BIT</span>
-<a name="l00246"></a>00246 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
-<a name="l00247"></a>00247 <span class="preprocessor">#elif PLANK_64BIT</span>
-<a name="l00248"></a>00248 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
-<a name="l00249"></a>00249 <span class="preprocessor">#else</span>
-<a name="l00250"></a>00250 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_32BIT or PLANK_64BIT are set to 1</span>
-<a name="l00251"></a>00251 <span class="preprocessor"></span><span class="preprocessor">#endif    </span>
-<a name="l00252"></a>00252 <span class="preprocessor"></span>}
-<a name="l00253"></a>00253 
-<a name="l00255"></a><a class="code" href="group___plank_endian_functions.html#gae1c304d7d3a6a976febed64933563ccd">00255</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gae1c304d7d3a6a976febed64933563ccd" title="Swap the byte order of the long long pointed to by data.">pl_SwapEndianLL</a> (<a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *data)
-<a name="l00256"></a>00256 {
-<a name="l00257"></a>00257     <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
-<a name="l00258"></a>00258 }
-<a name="l00259"></a>00259 
-<a name="l00261"></a><a class="code" href="group___plank_endian_functions.html#gac654560c74f2e97495eeee74e84502e1">00261</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac654560c74f2e97495eeee74e84502e1" title="Swap the byte order of the float pointed to by data.">pl_SwapEndianF</a> (<span class="keywordtype">float</span> *data)
-<a name="l00262"></a>00262 {
-<a name="l00263"></a>00263     <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
-<a name="l00264"></a>00264 }
-<a name="l00265"></a>00265 
-<a name="l00267"></a><a class="code" href="group___plank_endian_functions.html#ga7c9224f7d4c4e4f65adfe844a90345e5">00267</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga7c9224f7d4c4e4f65adfe844a90345e5" title="Swap the byte order of the double pointed to by data.">pl_SwapEndianD</a> (<span class="keywordtype">double</span> *data)
-<a name="l00268"></a>00268 {
-<a name="l00269"></a>00269     <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
-<a name="l00270"></a>00270 }
-<a name="l00271"></a>00271 
-<a name="l00273"></a>00273 
-<a name="l00274"></a>00274 
-<a name="l00277"></a><a class="code" href="group___plank_misc_functions.html#gadf1a3d67636994e54900cb2cc1a3d54f">00277</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> <a class="code" href="group___plank_misc_functions.html#gadf1a3d67636994e54900cb2cc1a3d54f" title="Convert four characters to a int as used by IFF file formats to identify data chunks.">pl_FourCharCode</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* data)
-<a name="l00278"></a>00278 {
-<a name="l00279"></a>00279 <span class="preprocessor">#if PLANK_BIGENDIAN</span>
-<a name="l00280"></a>00280 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1778a274a1b8c68d8066b40e59cbe265" title="Swap the byte order of the int pointed to by data.">pl_SwapEndianI</a> ((<span class="keywordtype">int</span>*)data);
-<a name="l00281"></a>00281 <span class="preprocessor">#endif</span>
-<a name="l00282"></a>00282 <span class="preprocessor"></span>    <span class="keywordflow">return</span> *(<a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>*)data;
-<a name="l00283"></a>00283 }
-<a name="l00284"></a>00284 
-<a name="l00286"></a><a class="code" href="plank___containers_misc_8h.html#a3604209cf1fe2617b09283b07e54e29e">00286</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="plank___containers_misc_8h.html#a3604209cf1fe2617b09283b07e54e29e" title="Convert a positive 80-bit extended float value to an unsigned integer.">pl_F802I</a> (<span class="keyword">const</span> <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> extended)
-<a name="l00287"></a>00287 {
-<a name="l00288"></a>00288     <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> mantissa;
-<a name="l00289"></a>00289     <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> last = 0;
-<a name="l00290"></a>00290     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="plonk___unit_8h.html#aa3c8c6b69244988a526d4d25a7b4e4ad" title="Create a new UnitBase by applying the unary &#39;exp&#39; function to operand.">exp</a>;
-<a name="l00291"></a>00291     
-<a name="l00292"></a>00292 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
-<a name="l00293"></a>00293 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2));
-<a name="l00294"></a>00294 <span class="preprocessor">#endif</span>
-<a name="l00295"></a>00295 <span class="preprocessor"></span>    
-<a name="l00296"></a>00296     mantissa = *(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2);
-<a name="l00297"></a>00297     exp = 30 - *(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 1);
-<a name="l00298"></a>00298     
-<a name="l00299"></a>00299     <span class="keywordflow">while</span> (exp)
-<a name="l00300"></a>00300     {
-<a name="l00301"></a>00301         last = mantissa;
-<a name="l00302"></a>00302         mantissa = mantissa &gt;&gt; 1;
-<a name="l00303"></a>00303         --<a class="code" href="plonk___unit_8h.html#aa3c8c6b69244988a526d4d25a7b4e4ad" title="Create a new UnitBase by applying the unary &#39;exp&#39; function to operand.">exp</a>;
-<a name="l00304"></a>00304     }
-<a name="l00305"></a>00305     
-<a name="l00306"></a>00306     <span class="keywordflow">if</span> (last &amp; 0x00000001) 
-<a name="l00307"></a>00307         ++mantissa;
-<a name="l00308"></a>00308     
-<a name="l00309"></a>00309     <span class="keywordflow">return</span> mantissa;
-<a name="l00310"></a>00310 }
-<a name="l00311"></a>00311 
-<a name="l00313"></a><a class="code" href="plank___containers_misc_8h.html#a12d0503f229f1ecfb731575935c922d2">00313</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> <a class="code" href="plank___containers_misc_8h.html#a12d0503f229f1ecfb731575935c922d2" title="Convert an unsigned integer to an 80-bit extended float value.">pl_I2F80</a> (<span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> value)
-<a name="l00314"></a>00314 {
-<a name="l00315"></a>00315     <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> extended;
-<a name="l00316"></a>00316     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> temp = value;
-<a name="l00317"></a>00317     <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="plonk___unit_8h.html#aa3c8c6b69244988a526d4d25a7b4e4ad" title="Create a new UnitBase by applying the unary &#39;exp&#39; function to operand.">exp</a>;
-<a name="l00318"></a>00318     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> i;
-<a name="l00319"></a>00319     
-<a name="l00320"></a>00320     <a class="code" href="plank___memory_8h.html#a5870f741f51e5662497890173fe74afb">pl_MemoryZero</a> (&amp;extended, <span class="keyword">sizeof</span> (<a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a>));
-<a name="l00321"></a>00321     
-<a name="l00322"></a>00322     <span class="keywordflow">if</span> (value == 0)
-<a name="l00323"></a>00323         <span class="keywordflow">goto</span> exit;
+<a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
+<a name="l00007"></a>00007 <span class="comment"> </span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
+<a name="l00010"></a>00010 <span class="comment"> </span>
+<a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
+<a name="l00012"></a>00012 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
+<a name="l00013"></a>00013 <span class="comment"> </span>
+<a name="l00014"></a>00014 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
+<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
+<a name="l00016"></a>00016 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
+<a name="l00017"></a>00017 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
+<a name="l00018"></a>00018 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
+<a name="l00019"></a>00019 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
+<a name="l00020"></a>00020 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
+<a name="l00021"></a>00021 <span class="comment">   derived from this software without specific prior written permission.</span>
+<a name="l00022"></a>00022 <span class="comment"> </span>
+<a name="l00023"></a>00023 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<a name="l00024"></a>00024 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<a name="l00025"></a>00025 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
+<a name="l00026"></a>00026 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
+<a name="l00027"></a>00027 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
+<a name="l00028"></a>00028 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
+<a name="l00029"></a>00029 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
+<a name="l00030"></a>00030 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
+<a name="l00031"></a>00031 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
+<a name="l00032"></a>00032 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
+<a name="l00033"></a>00033 <span class="comment"> </span>
+<a name="l00034"></a>00034 <span class="comment"> This software makes use of third party libraries. For more information see:</span>
+<a name="l00035"></a>00035 <span class="comment"> doc/license.txt included in the distribution.</span>
+<a name="l00036"></a>00036 <span class="comment"> -------------------------------------------------------------------------------</span>
+<a name="l00037"></a>00037 <span class="comment"> */</span>
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_CONTAINERSMISC_H</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_CONTAINERSMISC_H</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a><a class="code" href="plank___containers_misc_8h.html#a0f3fa263197913edaa8b4972a0a0d11a">00042</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="plank___containers_misc_8h.html#a0f3fa263197913edaa8b4972a0a0d11a">pl_SwapP</a> (<a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>* a, <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>* b)
+<a name="l00043"></a>00043 {
+<a name="l00044"></a>00044     <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> temp;
+<a name="l00045"></a>00045     temp = *a;
+<a name="l00046"></a>00046     *a = *b;
+<a name="l00047"></a>00047     *b = temp;
+<a name="l00048"></a>00048 }
+<a name="l00049"></a>00049 
+<a name="l00051"></a><a class="code" href="struct_plank_u_i24.html">00051</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>
+<a name="l00052"></a>00052 {
+<a name="l00053"></a><a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">00053</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[3];
+<a name="l00054"></a>00054 } <a class="code" href="plank___containers_misc_8h.html#a50af2be6b84ee996f887bfc0b5caa2bf" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>;
+<a name="l00055"></a>00055 
+<a name="l00057"></a><a class="code" href="struct_plank_i24.html">00057</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>
+<a name="l00058"></a>00058 {
+<a name="l00059"></a><a class="code" href="struct_plank_i24.html#aacf8c068717b99d7416b24ad806f5f1c">00059</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_i24.html#aacf8c068717b99d7416b24ad806f5f1c">data</a>[3];
+<a name="l00060"></a>00060 } <a class="code" href="plank___containers_misc_8h.html#afcb23424a8d4f3370b509524a88f0d70" title="Storage for a 24-bit integer.">PlankI24</a>;
+<a name="l00061"></a>00061 
+<a name="l00065"></a><a class="code" href="struct_plank_f80.html">00065</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a>
+<a name="l00066"></a>00066 {
+<a name="l00067"></a><a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">00067</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[10];
+<a name="l00068"></a>00068 } <a class="code" href="plank___containers_misc_8h.html#ac517609443d32e0e2fdc8104b8e39303" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a>;
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="plank___containers_misc_8h.html#a3c3644021b8519b18783110a39778cf3">00070</a> <span class="preprocessor">#define PLANK_INT24_MAX 0x7fffff</span>
+<a name="l00071"></a>00071 <span class="preprocessor"></span>
+<a name="l00073"></a><a class="code" href="struct_plank_pascal_string255.html">00073</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_pascal_string255.html" title="Storage for a 255 character Pascal string.">PlankPascalString255</a>
+<a name="l00074"></a>00074 {
+<a name="l00075"></a><a class="code" href="struct_plank_pascal_string255.html#aa0a164cd36ad36890953526c80fbf37d">00075</a>     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="struct_plank_pascal_string255.html#aa0a164cd36ad36890953526c80fbf37d">data</a>[256];
+<a name="l00076"></a>00076 } <a class="code" href="plank___containers_misc_8h.html#a93361ab34c020e60e810651413c9d5da" title="Storage for a 255 character Pascal string.">PlankPascalString255</a>;
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 
+<a name="l00081"></a><a class="code" href="group___plank_misc_functions.html#ga12d4aea1c2eccf219229930a7d7b2d1b">00081</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> <a class="code" href="group___plank_misc_functions.html#ga12d4aea1c2eccf219229930a7d7b2d1b" title="Convert an unsigned 32-bit int into to an unsigned 24-bit int.">pl_ConvertUIToUI24</a> (<span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> i32)
+<a name="l00082"></a>00082 {
+<a name="l00083"></a>00083 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
+<a name="l00084"></a>00084 <span class="preprocessor"></span>    <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> i24;
+<a name="l00085"></a>00085     i24 = *(<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)&amp;i32;
+<a name="l00086"></a>00086     <span class="keywordflow">return</span> i24;
+<a name="l00087"></a>00087 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
+<a name="l00088"></a>00088 <span class="preprocessor"></span>    <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> i24;
+<a name="l00089"></a>00089     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bits;
+<a name="l00090"></a>00090     
+<a name="l00091"></a>00091     bits = (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*)&amp;i32;
+<a name="l00092"></a>00092     i24 = *(<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)(bits + 1);
+<a name="l00093"></a>00093     <span class="keywordflow">return</span> i24;
+<a name="l00094"></a>00094 <span class="preprocessor">#else</span>
+<a name="l00095"></a>00095 <span class="preprocessor"></span><span class="preprocessor">        #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
+<a name="l00096"></a>00096 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00097"></a>00097 <span class="preprocessor"></span>}
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 
+<a name="l00102"></a><a class="code" href="group___plank_misc_functions.html#gaa379ad95d94bc0bac21cd19e41a13ba9">00102</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="group___plank_misc_functions.html#gaa379ad95d94bc0bac21cd19e41a13ba9" title="Convert an unsigned 24-bit int into to an unsigned 32-bit int.">pl_ConvertUI24ToUI</a> (<span class="keyword">const</span> <a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> i24)
+<a name="l00103"></a>00103 {
+<a name="l00104"></a>00104 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span>    <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> i32;
+<a name="l00106"></a>00106     i32 = *(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)&amp;i24 &amp; 0xffffff;
+<a name="l00107"></a>00107     <span class="keywordflow">return</span> i32;
+<a name="l00108"></a>00108 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
+<a name="l00109"></a>00109 <span class="preprocessor"></span>        <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> i32;
+<a name="l00110"></a>00110     i32 = (*(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)&amp;i24 &gt;&gt; 8) &amp; 0xffffff;
+<a name="l00111"></a>00111     <span class="keywordflow">return</span> i32;
+<a name="l00112"></a>00112 <span class="preprocessor">#else</span>
+<a name="l00113"></a>00113 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
+<a name="l00114"></a>00114 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span>}
+<a name="l00116"></a>00116 
+<a name="l00119"></a><a class="code" href="group___plank_misc_functions.html#ga4cc22ee75977dccf974b63af39d9df5d">00119</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> <a class="code" href="group___plank_misc_functions.html#ga4cc22ee75977dccf974b63af39d9df5d" title="Convert a 32-bit int into to a 24-bit int.">pl_ConvertIToI24</a> (<span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> i32)
+<a name="l00120"></a>00120 {
+<a name="l00121"></a>00121 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
+<a name="l00122"></a>00122 <span class="preprocessor"></span>    <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> i24;
+<a name="l00123"></a>00123     i24 = *(<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>*)&amp;i32;
+<a name="l00124"></a>00124     <span class="keywordflow">return</span> i24;
+<a name="l00125"></a>00125 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
+<a name="l00126"></a>00126 <span class="preprocessor"></span>    <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> i24;
+<a name="l00127"></a>00127     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bits;
+<a name="l00128"></a>00128     
+<a name="l00129"></a>00129     bits = (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*)&amp;i32;
+<a name="l00130"></a>00130     i24 = *(<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>*)(bits + 1);
+<a name="l00131"></a>00131     <span class="keywordflow">return</span> i24;    
+<a name="l00132"></a>00132 <span class="preprocessor">#else</span>
+<a name="l00133"></a>00133 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
+<a name="l00134"></a>00134 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00135"></a>00135 <span class="preprocessor"></span>}
+<a name="l00136"></a>00136 
+<a name="l00139"></a><a class="code" href="group___plank_misc_functions.html#ga849950922a5ac6275b060f7dccd3d7af">00139</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="group___plank_misc_functions.html#ga849950922a5ac6275b060f7dccd3d7af" title="Convert a 24-bit int into to a 32-bit int.">pl_ConvertI24ToI</a> (<span class="keyword">const</span> <a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> i24)
+<a name="l00140"></a>00140 {
+<a name="l00141"></a>00141 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
+<a name="l00142"></a>00142 <span class="preprocessor"></span>    <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> i32;
+<a name="l00143"></a>00143     i32 = *(<a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>*)&amp;i24 &amp; 0xffffff;
+<a name="l00144"></a>00144             
+<a name="l00145"></a>00145     <span class="keywordflow">if</span> (i32 &amp; 0x00800000)
+<a name="l00146"></a>00146         <span class="keywordflow">return</span> i32 | 0xff000000;
+<a name="l00147"></a>00147     <span class="keywordflow">else</span>
+<a name="l00148"></a>00148         <span class="keywordflow">return</span> i32;
+<a name="l00149"></a>00149 <span class="preprocessor">#elif PLANK_BIGENDIAN</span>
+<a name="l00150"></a>00150 <span class="preprocessor"></span>        <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> i32;
+<a name="l00151"></a>00151     i32 = (*(<a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>*)&amp;i24 &gt;&gt; 8) &amp; 0xffffff;
+<a name="l00152"></a>00152         
+<a name="l00153"></a>00153     <span class="keywordflow">if</span> (i32 &amp; 0x00800000)
+<a name="l00154"></a>00154         <span class="keywordflow">return</span> i32 | 0xff000000;
+<a name="l00155"></a>00155     <span class="keywordflow">else</span>
+<a name="l00156"></a>00156         <span class="keywordflow">return</span> i32;
+<a name="l00157"></a>00157 <span class="preprocessor">#else</span>
+<a name="l00158"></a>00158 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1</span>
+<a name="l00159"></a>00159 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00160"></a>00160 <span class="preprocessor"></span>}
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162 
+<a name="l00169"></a><a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52">00169</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52" title="Swap the byte order of the unisgned short pointed to by bits.">pl_SwapEndianUS</a> (<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> *bits)
+<a name="l00170"></a>00170 {
+<a name="l00171"></a>00171     *bits = (*bits &gt;&gt; 8) | (*bits &lt;&lt; 8);
+<a name="l00172"></a>00172 }
+<a name="l00173"></a>00173 
+<a name="l00175"></a><a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0">00175</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0" title="Swap the byte order of the 24-bit int pointed to by bits.">pl_SwapEndianUI24</a> (<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a> *bits)
+<a name="l00176"></a>00176 {
+<a name="l00177"></a>00177     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> temp = bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[0];
+<a name="l00178"></a>00178     bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[0] = bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[2];
+<a name="l00179"></a>00179     bits-&gt;<a class="code" href="struct_plank_u_i24.html#a16cfae8edf4abf8ee02cb29a390a67b6">data</a>[2] = temp;
+<a name="l00180"></a>00180 }
+<a name="l00181"></a>00181 
+<a name="l00183"></a><a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd">00183</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *bits)
+<a name="l00184"></a>00184 {
+<a name="l00185"></a>00185     *bits = (*bits &gt;&gt; 24) | ((*bits &lt;&lt; 8) &amp; 0x00ff0000) | ((*bits &gt;&gt; 8) &amp; 0x0000ff00) | (*bits &lt;&lt; 24);
+<a name="l00186"></a>00186 }
+<a name="l00187"></a>00187 
+<a name="l00189"></a><a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d">00189</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> (<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> *bits)
+<a name="l00190"></a>00190 {    
+<a name="l00191"></a>00191     *bits = (*bits &gt;&gt; 56) | 
+<a name="l00192"></a>00192             ((*bits &lt;&lt; 40) &amp; 0x00ff000000000000ULL) |
+<a name="l00193"></a>00193             ((*bits &lt;&lt; 24) &amp; 0x0000ff0000000000ULL) |
+<a name="l00194"></a>00194             ((*bits &lt;&lt; 8)  &amp; 0x000000ff00000000ULL) |
+<a name="l00195"></a>00195             ((*bits &gt;&gt; 8)  &amp; 0x00000000ff000000ULL) |
+<a name="l00196"></a>00196             ((*bits &gt;&gt; 24) &amp; 0x0000000000ff0000ULL) |
+<a name="l00197"></a>00197             ((*bits &gt;&gt; 40) &amp; 0x000000000000ff00ULL) |
+<a name="l00198"></a>00198             (*bits &lt;&lt; 56);
+<a name="l00199"></a>00199 }
+<a name="l00200"></a>00200 
+<a name="l00201"></a><a class="code" href="group___plank_endian_functions.html#gacc9809c1baebce7729a069c1636927e1">00201</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gacc9809c1baebce7729a069c1636927e1">pl_SwapEndianF80</a> (<a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> *bits)
+<a name="l00202"></a>00202 {
+<a name="l00203"></a>00203     <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> temp = *bits;
+<a name="l00204"></a>00204     
+<a name="l00205"></a>00205     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[9];
+<a name="l00206"></a>00206     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[1] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[8];
+<a name="l00207"></a>00207     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[2] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[7];
+<a name="l00208"></a>00208     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[3] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[6];
+<a name="l00209"></a>00209     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[4] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[5];
+<a name="l00210"></a>00210     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[5] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[4];
+<a name="l00211"></a>00211     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[6] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[3];
+<a name="l00212"></a>00212     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[7] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[2];
+<a name="l00213"></a>00213     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[8] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[1];
+<a name="l00214"></a>00214     bits-&gt;<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[9] = temp.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0];
+<a name="l00215"></a>00215 }
+<a name="l00216"></a>00216 
+<a name="l00218"></a><a class="code" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba">00218</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba" title="Swap the byte order of the unisgned long pointed to by data.">pl_SwapEndianUL</a> (<a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> *data)
+<a name="l00219"></a>00219 {
+<a name="l00220"></a>00220 <span class="preprocessor">#if PLANK_32BIT</span>
+<a name="l00221"></a>00221 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
+<a name="l00222"></a>00222 <span class="preprocessor">#elif PLANK_64BIT</span>
+<a name="l00223"></a>00223 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
+<a name="l00224"></a>00224 <span class="preprocessor">#else</span>
+<a name="l00225"></a>00225 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_32BIT or PLANK_64BIT are set to 1</span>
+<a name="l00226"></a>00226 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00227"></a>00227 <span class="preprocessor"></span>}
+<a name="l00228"></a>00228 
+<a name="l00230"></a><a class="code" href="group___plank_endian_functions.html#gacbd1eb291c50b32d9798bb2ec3588063">00230</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gacbd1eb291c50b32d9798bb2ec3588063" title="Swap the byte order of the short pointed to by data.">pl_SwapEndianS</a> (<span class="keywordtype">short</span> *data)
+<a name="l00231"></a>00231 {
+<a name="l00232"></a>00232     <a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52" title="Swap the byte order of the unisgned short pointed to by bits.">pl_SwapEndianUS</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span>*)data);
+<a name="l00233"></a>00233 }
+<a name="l00234"></a>00234 
+<a name="l00236"></a><a class="code" href="group___plank_endian_functions.html#ga1778a274a1b8c68d8066b40e59cbe265">00236</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga1778a274a1b8c68d8066b40e59cbe265" title="Swap the byte order of the int pointed to by data.">pl_SwapEndianI</a> (<span class="keywordtype">int</span> *data)
+<a name="l00237"></a>00237 {
+<a name="l00238"></a>00238     <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
+<a name="l00239"></a>00239 }
+<a name="l00240"></a>00240 
+<a name="l00242"></a><a class="code" href="group___plank_endian_functions.html#gac92e5c02813dd30dc9377f3f9ead4376">00242</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac92e5c02813dd30dc9377f3f9ead4376" title="Swap the byte order of the 24-bit int pointed to by data.">pl_SwapEndianI24</a> (<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a> *data)
+<a name="l00243"></a>00243 {
+<a name="l00244"></a>00244     <a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0" title="Swap the byte order of the 24-bit int pointed to by bits.">pl_SwapEndianUI24</a> ((<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)data);
+<a name="l00245"></a>00245 }
+<a name="l00246"></a>00246 
+<a name="l00248"></a><a class="code" href="group___plank_endian_functions.html#ga064fa00018ad8477203f12e4babf39eb">00248</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga064fa00018ad8477203f12e4babf39eb" title="Swap the byte order of the long pointed to by data.">pl_SwapEndianL</a> (<span class="keywordtype">long</span> *data)
+<a name="l00249"></a>00249 {
+<a name="l00250"></a>00250 <span class="preprocessor">#if PLANK_32BIT</span>
+<a name="l00251"></a>00251 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
+<a name="l00252"></a>00252 <span class="preprocessor">#elif PLANK_64BIT</span>
+<a name="l00253"></a>00253 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
+<a name="l00254"></a>00254 <span class="preprocessor">#else</span>
+<a name="l00255"></a>00255 <span class="preprocessor"></span><span class="preprocessor">    #error Neither PLANK_32BIT or PLANK_64BIT are set to 1</span>
+<a name="l00256"></a>00256 <span class="preprocessor"></span><span class="preprocessor">#endif    </span>
+<a name="l00257"></a>00257 <span class="preprocessor"></span>}
+<a name="l00258"></a>00258 
+<a name="l00260"></a><a class="code" href="group___plank_endian_functions.html#gae1c304d7d3a6a976febed64933563ccd">00260</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gae1c304d7d3a6a976febed64933563ccd" title="Swap the byte order of the long long pointed to by data.">pl_SwapEndianLL</a> (<a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *data)
+<a name="l00261"></a>00261 {
+<a name="l00262"></a>00262     <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
+<a name="l00263"></a>00263 }
+<a name="l00264"></a>00264 
+<a name="l00266"></a><a class="code" href="group___plank_endian_functions.html#gac654560c74f2e97495eeee74e84502e1">00266</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac654560c74f2e97495eeee74e84502e1" title="Swap the byte order of the float pointed to by data.">pl_SwapEndianF</a> (<span class="keywordtype">float</span> *data)
+<a name="l00267"></a>00267 {
+<a name="l00268"></a>00268     <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>*)data);
+<a name="l00269"></a>00269 }
+<a name="l00270"></a>00270 
+<a name="l00272"></a><a class="code" href="group___plank_endian_functions.html#ga7c9224f7d4c4e4f65adfe844a90345e5">00272</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga7c9224f7d4c4e4f65adfe844a90345e5" title="Swap the byte order of the double pointed to by data.">pl_SwapEndianD</a> (<span class="keywordtype">double</span> *data)
+<a name="l00273"></a>00273 {
+<a name="l00274"></a>00274     <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data);
+<a name="l00275"></a>00275 }
+<a name="l00276"></a>00276 
+<a name="l00278"></a>00278 
+<a name="l00279"></a>00279 
+<a name="l00282"></a><a class="code" href="group___plank_misc_functions.html#gadf1a3d67636994e54900cb2cc1a3d54f">00282</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> <a class="code" href="group___plank_misc_functions.html#gadf1a3d67636994e54900cb2cc1a3d54f" title="Convert four characters to a int as used by IFF file formats to identify data chunks.">pl_FourCharCode</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* data)
+<a name="l00283"></a>00283 {
+<a name="l00284"></a>00284 <span class="preprocessor">#if PLANK_BIGENDIAN</span>
+<a name="l00285"></a>00285 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1778a274a1b8c68d8066b40e59cbe265" title="Swap the byte order of the int pointed to by data.">pl_SwapEndianI</a> ((<span class="keywordtype">int</span>*)data);
+<a name="l00286"></a>00286 <span class="preprocessor">#endif</span>
+<a name="l00287"></a>00287 <span class="preprocessor"></span>    <span class="keywordflow">return</span> *(<a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>*)data;
+<a name="l00288"></a>00288 }
+<a name="l00289"></a>00289 
+<a name="l00291"></a><a class="code" href="plank___containers_misc_8h.html#a3604209cf1fe2617b09283b07e54e29e">00291</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="plank___containers_misc_8h.html#a3604209cf1fe2617b09283b07e54e29e" title="Convert a positive 80-bit extended float value to an unsigned integer.">pl_F802I</a> (<span class="keyword">const</span> <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> extended)
+<a name="l00292"></a>00292 {
+<a name="l00293"></a>00293     <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> mantissa;
+<a name="l00294"></a>00294     <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> last = 0;
+<a name="l00295"></a>00295     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="plonk___unit_8h.html#aa3c8c6b69244988a526d4d25a7b4e4ad" title="Create a new UnitBase by applying the unary &#39;exp&#39; function to operand.">exp</a>;
+<a name="l00296"></a>00296     
+<a name="l00297"></a>00297 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
+<a name="l00298"></a>00298 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2));
+<a name="l00299"></a>00299 <span class="preprocessor">#endif</span>
+<a name="l00300"></a>00300 <span class="preprocessor"></span>    
+<a name="l00301"></a>00301     mantissa = *(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2);
+<a name="l00302"></a>00302     exp = 30 - *(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 1);
+<a name="l00303"></a>00303     
+<a name="l00304"></a>00304     <span class="keywordflow">while</span> (exp)
+<a name="l00305"></a>00305     {
+<a name="l00306"></a>00306         last = mantissa;
+<a name="l00307"></a>00307         mantissa = mantissa &gt;&gt; 1;
+<a name="l00308"></a>00308         --<a class="code" href="plonk___unit_8h.html#aa3c8c6b69244988a526d4d25a7b4e4ad" title="Create a new UnitBase by applying the unary &#39;exp&#39; function to operand.">exp</a>;
+<a name="l00309"></a>00309     }
+<a name="l00310"></a>00310     
+<a name="l00311"></a>00311     <span class="keywordflow">if</span> (last &amp; 0x00000001) 
+<a name="l00312"></a>00312         ++mantissa;
+<a name="l00313"></a>00313     
+<a name="l00314"></a>00314     <span class="keywordflow">return</span> mantissa;
+<a name="l00315"></a>00315 }
+<a name="l00316"></a>00316 
+<a name="l00318"></a><a class="code" href="plank___containers_misc_8h.html#a12d0503f229f1ecfb731575935c922d2">00318</a> <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> <a class="code" href="plank___containers_misc_8h.html#a12d0503f229f1ecfb731575935c922d2" title="Convert an unsigned integer to an 80-bit extended float value.">pl_I2F80</a> (<span class="keyword">const</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> value)
+<a name="l00319"></a>00319 {
+<a name="l00320"></a>00320     <a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a> extended;
+<a name="l00321"></a>00321     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> temp = value;
+<a name="l00322"></a>00322     <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="plonk___unit_8h.html#aa3c8c6b69244988a526d4d25a7b4e4ad" title="Create a new UnitBase by applying the unary &#39;exp&#39; function to operand.">exp</a>;
+<a name="l00323"></a>00323     <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> i;
 <a name="l00324"></a>00324     
-<a name="l00325"></a>00325     exp = temp;
-<a name="l00326"></a>00326     exp = exp &gt;&gt; 1;
-<a name="l00327"></a>00327     
-<a name="l00328"></a>00328     <span class="keywordflow">for</span> (i = 0; i &lt; 32; ++i) 
-<a name="l00329"></a>00329     { 
-<a name="l00330"></a>00330         exp = exp &gt;&gt; 1;
-<a name="l00331"></a>00331         
-<a name="l00332"></a>00332         <span class="keywordflow">if</span> (!exp) 
-<a name="l00333"></a>00333             <span class="keywordflow">break</span>;
-<a name="l00334"></a>00334     }
-<a name="l00335"></a>00335     
-<a name="l00336"></a>00336     <span class="keywordflow">if</span> (value == -1)
-<a name="l00337"></a>00337         extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = 191;
-<a name="l00338"></a>00338     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value == 1)
-<a name="l00339"></a>00339         extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = 63;
-<a name="l00340"></a>00340 <span class="comment">//    else if (value &lt; 0)</span>
-<a name="l00341"></a>00341 <span class="comment">//        extended.data[0] = 192;</span>
-<a name="l00342"></a>00342     <span class="keywordflow">else</span>
-<a name="l00343"></a>00343         extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = 64;
-<a name="l00344"></a>00344     
-<a name="l00345"></a>00345     extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[1] = i;
-<a name="l00346"></a>00346     
-<a name="l00347"></a>00347     <span class="keywordflow">for</span> (i = 32; i &gt; 0; --i)
-<a name="l00348"></a>00348     {
-<a name="l00349"></a>00349         <span class="keywordflow">if</span> (temp &amp; 0x80000000) 
-<a name="l00350"></a>00350             <span class="keywordflow">break</span>;
-<a name="l00351"></a>00351         
-<a name="l00352"></a>00352         temp &lt;&lt;= 1; 
-<a name="l00353"></a>00353     } 
-<a name="l00354"></a>00354         
-<a name="l00355"></a>00355     *(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2) = temp;
-<a name="l00356"></a>00356     
-<a name="l00357"></a>00357 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
-<a name="l00358"></a>00358 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2));
-<a name="l00359"></a>00359 <span class="preprocessor">#endif </span>
-<a name="l00360"></a>00360 <span class="preprocessor"></span>    
-<a name="l00361"></a>00361 exit:
-<a name="l00362"></a>00362     <span class="keywordflow">return</span> extended;
-<a name="l00363"></a>00363 } 
-<a name="l00364"></a>00364 
-<a name="l00365"></a>00365 <span class="preprocessor">#endif // PLANK_CONTAINERSMISC_H</span>
+<a name="l00325"></a>00325     <a class="code" href="plank___memory_8h.html#a5870f741f51e5662497890173fe74afb">pl_MemoryZero</a> (&amp;extended, <span class="keyword">sizeof</span> (<a class="code" href="struct_plank_f80.html" title="Storage for an 80-bit extended floating-point value in big endian format.">PlankF80</a>));
+<a name="l00326"></a>00326     
+<a name="l00327"></a>00327     <span class="keywordflow">if</span> (value == 0)
+<a name="l00328"></a>00328         <span class="keywordflow">goto</span> exit;
+<a name="l00329"></a>00329     
+<a name="l00330"></a>00330     exp = temp;
+<a name="l00331"></a>00331     exp = exp &gt;&gt; 1;
+<a name="l00332"></a>00332     
+<a name="l00333"></a>00333     <span class="keywordflow">for</span> (i = 0; i &lt; 32; ++i) 
+<a name="l00334"></a>00334     { 
+<a name="l00335"></a>00335         exp = exp &gt;&gt; 1;
+<a name="l00336"></a>00336         
+<a name="l00337"></a>00337         <span class="keywordflow">if</span> (!exp) 
+<a name="l00338"></a>00338             <span class="keywordflow">break</span>;
+<a name="l00339"></a>00339     }
+<a name="l00340"></a>00340     
+<a name="l00341"></a>00341     <span class="keywordflow">if</span> (value == -1)
+<a name="l00342"></a>00342         extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = 191;
+<a name="l00343"></a>00343     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (value == 1)
+<a name="l00344"></a>00344         extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = 63;
+<a name="l00345"></a>00345 <span class="comment">//    else if (value &lt; 0)</span>
+<a name="l00346"></a>00346 <span class="comment">//        extended.data[0] = 192;</span>
+<a name="l00347"></a>00347     <span class="keywordflow">else</span>
+<a name="l00348"></a>00348         extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[0] = 64;
+<a name="l00349"></a>00349     
+<a name="l00350"></a>00350     extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a>[1] = i;
+<a name="l00351"></a>00351     
+<a name="l00352"></a>00352     <span class="keywordflow">for</span> (i = 32; i &gt; 0; --i)
+<a name="l00353"></a>00353     {
+<a name="l00354"></a>00354         <span class="keywordflow">if</span> (temp &amp; 0x80000000) 
+<a name="l00355"></a>00355             <span class="keywordflow">break</span>;
+<a name="l00356"></a>00356         
+<a name="l00357"></a>00357         temp &lt;&lt;= 1; 
+<a name="l00358"></a>00358     } 
+<a name="l00359"></a>00359         
+<a name="l00360"></a>00360     *(<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2) = temp;
+<a name="l00361"></a>00361     
+<a name="l00362"></a>00362 <span class="preprocessor">#if PLANK_LITTLEENDIAN</span>
+<a name="l00363"></a>00363 <span class="preprocessor"></span>    <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> ((<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)(extended.<a class="code" href="struct_plank_f80.html#ae6b20113d25bafc7afdf0ef6ade9171e">data</a> + 2));
+<a name="l00364"></a>00364 <span class="preprocessor">#endif </span>
+<a name="l00365"></a>00365 <span class="preprocessor"></span>    
+<a name="l00366"></a>00366 exit:
+<a name="l00367"></a>00367     <span class="keywordflow">return</span> extended;
+<a name="l00368"></a>00368 } 
+<a name="l00369"></a>00369 
+<a name="l00370"></a>00370 <span class="preprocessor">#endif // PLANK_CONTAINERSMISC_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -415,7 +420,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:10 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

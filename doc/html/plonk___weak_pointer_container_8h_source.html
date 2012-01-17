@@ -75,110 +75,115 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="comment"> This file is part of the Plink, Plonk, Plank libraries</span>
 <a name="l00004"></a>00004 <span class="comment">  by Martin Robinson</span>
 <a name="l00005"></a>00005 <span class="comment"> </span>
-<a name="l00006"></a>00006 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
-<a name="l00007"></a>00007 <span class="comment"> All rights reserved.</span>
-<a name="l00008"></a>00008 <span class="comment"> </span>
-<a name="l00009"></a>00009 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
-<a name="l00010"></a>00010 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
-<a name="l00011"></a>00011 <span class="comment"> </span>
-<a name="l00012"></a>00012 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
-<a name="l00013"></a>00013 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
-<a name="l00014"></a>00014 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
-<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
-<a name="l00016"></a>00016 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
-<a name="l00017"></a>00017 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
-<a name="l00018"></a>00018 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
-<a name="l00019"></a>00019 <span class="comment">   derived from this software without specific prior written permission.</span>
-<a name="l00020"></a>00020 <span class="comment"> </span>
-<a name="l00021"></a>00021 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
-<a name="l00022"></a>00022 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
-<a name="l00023"></a>00023 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
-<a name="l00024"></a>00024 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
-<a name="l00025"></a>00025 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
-<a name="l00026"></a>00026 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
-<a name="l00027"></a>00027 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
-<a name="l00028"></a>00028 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
-<a name="l00029"></a>00029 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
-<a name="l00030"></a>00030 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
-<a name="l00031"></a>00031 <span class="comment"> -------------------------------------------------------------------------------</span>
-<a name="l00032"></a>00032 <span class="comment"> */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#ifndef PLONK_WEAKPOINTERCONTAINER_H</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_WEAKPOINTERCONTAINER_H</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;<a class="code" href="plonk___core_forward_declarations_8h.html">plonk_CoreForwardDeclarations.h</a>&quot;</span>
-<a name="l00038"></a>00038 <span class="preprocessor">#include &quot;<a class="code" href="plonk___smart_pointer_8h.html">plonk_SmartPointer.h</a>&quot;</span>
-<a name="l00039"></a>00039 <span class="preprocessor">#include &quot;<a class="code" href="plonk___smart_pointer_container_8h.html">plonk_SmartPointerContainer.h</a>&quot;</span>
-<a name="l00040"></a>00040 
-<a name="l00047"></a>00047 <span class="keyword">template</span>&lt;<span class="keyword">class</span> OriginalType&gt;
-<a name="l00048"></a><a class="code" href="class_weak_pointer_container.html">00048</a> <span class="keyword">class </span><a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;WeakPointer,false&gt;
-<a name="l00049"></a>00049 {
-<a name="l00050"></a>00050 <span class="keyword">public</span>:
-<a name="l00051"></a><a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">00051</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;WeakPointer,false&gt;</a>    <a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">Base</a>;
-<a name="l00052"></a><a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">00052</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> OriginalType::Internal             <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>;
-<a name="l00053"></a>00053 
-<a name="l00054"></a><a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">00054</a>     <a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">WeakPointerContainer</a> () throw()
-<a name="l00055"></a>00055     :   <a class="code" href="class_smart_pointer_container.html">Base</a> (0)
-<a name="l00056"></a>00056     {
-<a name="l00057"></a>00057     }        
-<a name="l00058"></a>00058     
-<a name="l00061"></a><a class="code" href="class_weak_pointer_container.html#aff51da46d7d9c2350a79ab0f98b7f977">00061</a>         <a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">WeakPointerContainer</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
-<a name="l00062"></a>00062         :       <a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
-<a name="l00063"></a>00063         {
-<a name="l00064"></a>00064         }
-<a name="l00065"></a>00065     
-<a name="l00067"></a><a class="code" href="class_weak_pointer_container.html#a7cc4fd4a750be063bb921930ca43f6e0">00067</a>     <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a>&amp; <a class="code" href="class_weak_pointer_container.html#a7cc4fd4a750be063bb921930ca43f6e0" title="Assignment operator.">operator= </a>(<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00006"></a>00006 <span class="comment"> http://code.google.com/p/pl-nk/</span>
+<a name="l00007"></a>00007 <span class="comment"> </span>
+<a name="l00008"></a>00008 <span class="comment"> Copyright University of the West of England, Bristol 2011-12</span>
+<a name="l00009"></a>00009 <span class="comment"> All rights reserved.</span>
+<a name="l00010"></a>00010 <span class="comment"> </span>
+<a name="l00011"></a>00011 <span class="comment"> Redistribution and use in source and binary forms, with or without</span>
+<a name="l00012"></a>00012 <span class="comment"> modification, are permitted provided that the following conditions are met:</span>
+<a name="l00013"></a>00013 <span class="comment"> </span>
+<a name="l00014"></a>00014 <span class="comment"> * Redistributions of source code must retain the above copyright</span>
+<a name="l00015"></a>00015 <span class="comment">   notice, this list of conditions and the following disclaimer.</span>
+<a name="l00016"></a>00016 <span class="comment"> * Redistributions in binary form must reproduce the above copyright</span>
+<a name="l00017"></a>00017 <span class="comment">   notice, this list of conditions and the following disclaimer in the</span>
+<a name="l00018"></a>00018 <span class="comment">   documentation and/or other materials provided with the distribution.</span>
+<a name="l00019"></a>00019 <span class="comment"> * Neither the name of University of the West of England, Bristol nor </span>
+<a name="l00020"></a>00020 <span class="comment">   the names of its contributors may be used to endorse or promote products</span>
+<a name="l00021"></a>00021 <span class="comment">   derived from this software without specific prior written permission.</span>
+<a name="l00022"></a>00022 <span class="comment"> </span>
+<a name="l00023"></a>00023 <span class="comment"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span>
+<a name="l00024"></a>00024 <span class="comment"> ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<a name="l00025"></a>00025 <span class="comment"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE </span>
+<a name="l00026"></a>00026 <span class="comment"> DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE </span>
+<a name="l00027"></a>00027 <span class="comment"> LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR </span>
+<a name="l00028"></a>00028 <span class="comment"> CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE </span>
+<a name="l00029"></a>00029 <span class="comment"> GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
+<a name="l00030"></a>00030 <span class="comment"> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT </span>
+<a name="l00031"></a>00031 <span class="comment"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT </span>
+<a name="l00032"></a>00032 <span class="comment"> OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span>
+<a name="l00033"></a>00033 <span class="comment"> </span>
+<a name="l00034"></a>00034 <span class="comment"> This software makes use of third party libraries. For more information see:</span>
+<a name="l00035"></a>00035 <span class="comment"> doc/license.txt included in the distribution.</span>
+<a name="l00036"></a>00036 <span class="comment"> -------------------------------------------------------------------------------</span>
+<a name="l00037"></a>00037 <span class="comment"> */</span>
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_WEAKPOINTERCONTAINER_H</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_WEAKPOINTERCONTAINER_H</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plonk___core_forward_declarations_8h.html">plonk_CoreForwardDeclarations.h</a>&quot;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plonk___smart_pointer_8h.html">plonk_SmartPointer.h</a>&quot;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="plonk___smart_pointer_container_8h.html">plonk_SmartPointerContainer.h</a>&quot;</span>
+<a name="l00045"></a>00045 
+<a name="l00052"></a>00052 <span class="keyword">template</span>&lt;<span class="keyword">class</span> OriginalType&gt;
+<a name="l00053"></a><a class="code" href="class_weak_pointer_container.html">00053</a> <span class="keyword">class </span><a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;WeakPointer,false&gt;
+<a name="l00054"></a>00054 {
+<a name="l00055"></a>00055 <span class="keyword">public</span>:
+<a name="l00056"></a><a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">00056</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;WeakPointer,false&gt;</a>    <a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">Base</a>;
+<a name="l00057"></a><a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">00057</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> OriginalType::Internal             <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>;
+<a name="l00058"></a>00058 
+<a name="l00059"></a><a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">00059</a>     <a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">WeakPointerContainer</a>() throw()
+<a name="l00060"></a>00060     :   <a class="code" href="class_smart_pointer_container.html">Base</a> (0)
+<a name="l00061"></a>00061     {
+<a name="l00062"></a>00062     }        
+<a name="l00063"></a>00063     
+<a name="l00066"></a><a class="code" href="class_weak_pointer_container.html#aff51da46d7d9c2350a79ab0f98b7f977">00066</a>         <a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">WeakPointerContainer</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00067"></a>00067         :       <a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
 <a name="l00068"></a>00068         {
-<a name="l00069"></a>00069                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00070"></a>00070             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
-<a name="l00071"></a>00071         
-<a name="l00072"></a>00072         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00073"></a>00073     }
-<a name="l00074"></a>00074     
-<a name="l00075"></a><a class="code" href="class_weak_pointer_container.html#a93b505a54bac4d5a367dcb3911dc16f6">00075</a>     <a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">WeakPointerContainer</a> (OriginalType <span class="keyword">const</span>&amp; original) <span class="keywordflow">throw</span>()
-<a name="l00076"></a>00076     :   <a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">Base</a> (original.getWeakPointer())
-<a name="l00077"></a>00077     {
+<a name="l00069"></a>00069         }
+<a name="l00070"></a>00070     
+<a name="l00072"></a><a class="code" href="class_weak_pointer_container.html#a7cc4fd4a750be063bb921930ca43f6e0">00072</a>     <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a>&amp; <a class="code" href="class_weak_pointer_container.html#a7cc4fd4a750be063bb921930ca43f6e0" title="Assignment operator.">operator= </a>(<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00073"></a>00073         {
+<a name="l00074"></a>00074                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
+<a name="l00075"></a>00075             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
+<a name="l00076"></a>00076         
+<a name="l00077"></a>00077         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00078"></a>00078     }
 <a name="l00079"></a>00079     
-<a name="l00080"></a><a class="code" href="class_weak_pointer_container.html#aba200a2c00f7f4019c4cf1a3ac0eb95c">00080</a>     <span class="keywordtype">void</span> <a class="code" href="class_weak_pointer_container.html#aba200a2c00f7f4019c4cf1a3ac0eb95c">setWeakPointer</a> (<a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* smartPointer) <span class="keywordflow">throw</span>()
-<a name="l00081"></a>00081     {
-<a name="l00082"></a>00082         <a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>* weakPointer = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>();
-<a name="l00083"></a>00083         
-<a name="l00084"></a>00084         <span class="keywordflow">if</span>(weakPointer != 0)
-<a name="l00085"></a>00085             weakPointer-&gt;<a class="code" href="class_weak_pointer.html#af0da7b77be58a80485e5389d254ee418">setWeakPointer</a> (smartPointer);
-<a name="l00086"></a>00086     }
-<a name="l00087"></a>00087     
-<a name="l00088"></a><a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">00088</a>     <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* <a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">getWeakPointer</a>() <span class="keyword">const</span> throw()
-<a name="l00089"></a>00089     {
-<a name="l00090"></a>00090         <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* smartPointer = 0;
-<a name="l00091"></a>00091         <span class="keyword">const</span> <a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>* weakPointer = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>();
-<a name="l00092"></a>00092         
-<a name="l00093"></a>00093         <span class="keywordflow">if</span> (weakPointer != 0)
-<a name="l00094"></a>00094             smartPointer = <span class="keyword">reinterpret_cast&lt;</span><a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>*<span class="keyword">&gt;</span> (weakPointer-&gt;<a class="code" href="class_weak_pointer.html#a82b46043d7e7769a73afa6f038381368">getWeakPointer</a>());
-<a name="l00095"></a>00095         
-<a name="l00096"></a>00096         <span class="keywordflow">return</span> smartPointer;
-<a name="l00097"></a>00097     }
-<a name="l00098"></a>00098     
-<a name="l00099"></a><a class="code" href="class_weak_pointer_container.html#ad769bf41b8835787ddf4ceb34e1dba52">00099</a>     <span class="keywordtype">bool</span> <a class="code" href="class_weak_pointer_container.html#ad769bf41b8835787ddf4ceb34e1dba52">isAlve</a>() <span class="keyword">const</span> throw()
-<a name="l00100"></a>00100     {
-<a name="l00101"></a>00101         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">getWeakPointer</a>() != 0;
+<a name="l00080"></a><a class="code" href="class_weak_pointer_container.html#a93b505a54bac4d5a367dcb3911dc16f6">00080</a>     <a class="code" href="class_weak_pointer_container.html#afd82ebdddf280992805de44026fb0761">WeakPointerContainer</a> (OriginalType <span class="keyword">const</span>&amp; original) <span class="keywordflow">throw</span>()
+<a name="l00081"></a>00081     :   <a class="code" href="class_weak_pointer_container.html#af14de2adf4b7d8a5ccac86777458eb7a">Base</a> (original.getWeakPointer())
+<a name="l00082"></a>00082     {
+<a name="l00083"></a>00083     }
+<a name="l00084"></a>00084     
+<a name="l00085"></a><a class="code" href="class_weak_pointer_container.html#aba200a2c00f7f4019c4cf1a3ac0eb95c">00085</a>     <span class="keywordtype">void</span> <a class="code" href="class_weak_pointer_container.html#aba200a2c00f7f4019c4cf1a3ac0eb95c">setWeakPointer</a> (<a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* smartPointer) <span class="keywordflow">throw</span>()
+<a name="l00086"></a>00086     {
+<a name="l00087"></a>00087         <a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>* weakPointer = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>();
+<a name="l00088"></a>00088         
+<a name="l00089"></a>00089         <span class="keywordflow">if</span>(weakPointer != 0)
+<a name="l00090"></a>00090             weakPointer-&gt;<a class="code" href="class_weak_pointer.html#af0da7b77be58a80485e5389d254ee418">setWeakPointer</a> (smartPointer);
+<a name="l00091"></a>00091     }
+<a name="l00092"></a>00092     
+<a name="l00093"></a><a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">00093</a>     <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* <a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">getWeakPointer</a>() <span class="keyword">const</span> throw()
+<a name="l00094"></a>00094     {
+<a name="l00095"></a>00095         <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* smartPointer = 0;
+<a name="l00096"></a>00096         <span class="keyword">const</span> <a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>* weakPointer = this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>();
+<a name="l00097"></a>00097         
+<a name="l00098"></a>00098         <span class="keywordflow">if</span> (weakPointer != 0)
+<a name="l00099"></a>00099             smartPointer = <span class="keyword">reinterpret_cast&lt;</span><a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>*<span class="keyword">&gt;</span> (weakPointer-&gt;<a class="code" href="class_weak_pointer.html#a82b46043d7e7769a73afa6f038381368">getWeakPointer</a>());
+<a name="l00100"></a>00100         
+<a name="l00101"></a>00101         <span class="keywordflow">return</span> smartPointer;
 <a name="l00102"></a>00102     }
 <a name="l00103"></a>00103     
-<a name="l00104"></a><a class="code" href="class_weak_pointer_container.html#a1a2a9be892a44fbb1d0e2c8657e61629">00104</a>     OriginalType <a class="code" href="class_weak_pointer_container.html#a1a2a9be892a44fbb1d0e2c8657e61629">fromWeak</a>() <span class="keyword">const</span> throw()
+<a name="l00104"></a><a class="code" href="class_weak_pointer_container.html#ad769bf41b8835787ddf4ceb34e1dba52">00104</a>     <span class="keywordtype">bool</span> <a class="code" href="class_weak_pointer_container.html#ad769bf41b8835787ddf4ceb34e1dba52">isAlve</a>() <span class="keyword">const</span> throw()
 <a name="l00105"></a>00105     {
-<a name="l00106"></a>00106         <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* smartPointer = this-&gt;<a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">getWeakPointer</a>();
-<a name="l00107"></a>00107         
-<a name="l00108"></a>00108         <span class="keywordflow">if</span> (smartPointer != 0)
-<a name="l00109"></a>00109             <span class="keywordflow">return</span> OriginalType (smartPointer);
-<a name="l00110"></a>00110         <span class="keywordflow">else</span>
-<a name="l00111"></a>00111             <span class="keywordflow">return</span> OriginalType();
-<a name="l00112"></a>00112     }
-<a name="l00113"></a>00113     
-<a name="l00114"></a>00114 <span class="keyword">private</span>:
-<a name="l00115"></a>00115 };
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117 
-<a name="l00118"></a>00118 <span class="preprocessor">#endif // PLONK_WEAKPOINTERCONTAINER_H</span>
+<a name="l00106"></a>00106         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">getWeakPointer</a>() != 0;
+<a name="l00107"></a>00107     }
+<a name="l00108"></a>00108     
+<a name="l00109"></a><a class="code" href="class_weak_pointer_container.html#a1a2a9be892a44fbb1d0e2c8657e61629">00109</a>     OriginalType <a class="code" href="class_weak_pointer_container.html#a1a2a9be892a44fbb1d0e2c8657e61629">fromWeak</a>() <span class="keyword">const</span> throw()
+<a name="l00110"></a>00110     {
+<a name="l00111"></a>00111         <a class="code" href="class_weak_pointer_container.html#a07948c8f778175c3db5d90e427171f88">OriginalInternal</a>* smartPointer = this-&gt;<a class="code" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">getWeakPointer</a>();
+<a name="l00112"></a>00112         
+<a name="l00113"></a>00113         <span class="keywordflow">if</span> (smartPointer != 0)
+<a name="l00114"></a>00114             <span class="keywordflow">return</span> OriginalType (smartPointer);
+<a name="l00115"></a>00115         <span class="keywordflow">else</span>
+<a name="l00116"></a>00116             <span class="keywordflow">return</span> OriginalType();
+<a name="l00117"></a>00117     }
+<a name="l00118"></a>00118     
+<a name="l00119"></a>00119 <span class="keyword">private</span>:
+<a name="l00120"></a>00120 };
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 <span class="preprocessor">#endif // PLONK_WEAKPOINTERCONTAINER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -195,7 +200,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Jan 11 2012 19:17:25 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:12 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
