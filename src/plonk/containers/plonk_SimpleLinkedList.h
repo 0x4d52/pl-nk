@@ -92,7 +92,7 @@ public:
     
     ValueType atIndex (const LongLong index) throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_AtIndex (&list, index, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -103,7 +103,7 @@ public:
     
     ValueType getFirst() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_GetFirst (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -114,7 +114,7 @@ public:
     
     ValueType getLast() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_GetLast (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -125,7 +125,7 @@ public:
     
     ValueType removeAtIndex (const LongLong index) throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_RemoveAtIndex (&list, index, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -136,7 +136,7 @@ public:
     
     ValueType removeFirst() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_RemoveFirst (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -147,7 +147,7 @@ public:
 
     ValueType removeLast() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_RemoveLast (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -158,7 +158,7 @@ public:
     
     LongLong indexOf (ValueType const& value) throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_GetFirst (&list, &element);
         plonk_assert (result == PlankResult_OK);
         
@@ -189,15 +189,15 @@ public:
 private:
     PlankSimpleLinkedList list;
     
-    inline PlankSimpleQueueElementRef createElement (ValueType const& value) throw()
+    inline PlankSimpleLinkedListElementRef createElement (ValueType const& value) throw()
     {
-        PlankSimpleQueueElementRef element = pl_SimpleLinkedListElement_CreateAndInit();
+        PlankSimpleLinkedListElementRef element = pl_SimpleLinkedListElement_CreateAndInit();
         plonk_assert (element != 0);
         pl_SimpleLinkedListElement_SetData (element, new ValueType (value));
         return element;
     }
     
-    inline ValueType getValueFromElement (PlankSimpleQueueElementRef element) throw()
+    inline ValueType getValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return ValueType();
@@ -210,7 +210,7 @@ private:
             return ValueType();
     }
     
-    inline ValueType removeValueFromElement (PlankSimpleQueueElementRef element) throw()
+    inline ValueType removeValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return ValueType();
@@ -281,7 +281,7 @@ public:
     
     ValueType* atIndex (const LongLong index) throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_AtIndex (&list, index, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -292,7 +292,7 @@ public:
     
     ValueType* getFirst() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_GetFirst (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -303,7 +303,7 @@ public:
     
     ValueType* getLast() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_GetLast (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -314,7 +314,7 @@ public:
     
     ValueType* removeAtIndex (const LongLong index) throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_RemoveAtIndex (&list, index, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -325,7 +325,7 @@ public:
     
     ValueType* removeFirst() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_RemoveFirst (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -336,7 +336,7 @@ public:
     
     ValueType* removeLast() throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_RemoveLast (&list, &element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -347,7 +347,7 @@ public:
     
     LongLong indexOf (ValueType* const& value) throw()
     {
-        PlankSimpleQueueElementRef element;
+        PlankSimpleLinkedListElementRef element;
         ResultCode result = pl_SimpleLinkedList_GetFirst (&list, &element);
         plonk_assert (result == PlankResult_OK);
         
@@ -378,15 +378,15 @@ public:
 private:
     PlankSimpleLinkedList list;    
     
-    PlankSimpleQueueElementRef createElement (ValueType* const& value) throw()
+    PlankSimpleLinkedListElementRef createElement (ValueType* const& value) throw()
     {
-        PlankSimpleQueueElementRef element = pl_SimpleLinkedListElement_CreateAndInit();
+        PlankSimpleLinkedListElementRef element = pl_SimpleLinkedListElement_CreateAndInit();
         plonk_assert (element != 0);
         pl_SimpleLinkedListElement_SetData (element, value);
         return element;
     }
     
-    inline ValueType* getValueFromElement (PlankSimpleQueueElementRef element) throw()
+    inline ValueType* getValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return 0;
@@ -394,7 +394,7 @@ private:
         return static_cast<ValueType*> (pl_SimpleLinkedListElement_GetData (element));        
     }
     
-    inline ValueType removeValueFromElement (PlankSimpleQueueElementRef element) throw()
+    inline ValueType removeValueFromElement (PlankSimpleLinkedListElementRef element) throw()
     {
         if (element == 0)
             return ValueType();
