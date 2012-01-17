@@ -44,7 +44,6 @@ BEGIN_PLONK_NAMESPACE
 
 
 const char Text::space = ' ';
-//const Text Text::empty = "";
 
 Text::Text() throw()
 :	Base (NumericalArraySpec (1, true), true)
