@@ -261,7 +261,9 @@ typedef TableUnit<PLONK_TYPE_DEFAULT> Table;
 
 //------------------------------------------------------------------------------
 
-/** Sine oscillator. */
+/** Sine oscillator. 
+ @see TableUnit
+ @ingroup OscillatorUnits ControlUnits */
 template<class SampleType>
 class SineUnit
 {
@@ -317,6 +319,134 @@ public:
 
 typedef SineUnit<PLONK_TYPE_DEFAULT> Sine;
 
+/** Harmonic sawtooth wave oscillator. 
+ @see TableUnit
+ @ingroup OscillatorUnits */
+template<class SampleType>
+class HarmonicSawUnit
+{
+public:    
+    typedef TableChannelInternal<SampleType>        TableInternal;
+    typedef typename TableInternal::Data            Data;
+    typedef ChannelBase<SampleType>                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>        Internal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;
+    typedef WavetableBase<SampleType>               WavetableType;
+    typedef TableUnit<SampleType>                   TableType;
+    typedef NumericalArray<SampleType>              WeightsType;
+    
+    static inline UnitInfos getInfo() throw()
+    {
+        const double blockSize = (double)BlockSize::getDefault().getValue();
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("HarmonicSaw", "A wavetable-based sawtooth oscillator.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount, 
+                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Frequency,      Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
+                         IOKey::Multiply,       Measure::Factor,    1.0,        IOLimit::None,
+                         IOKey::Add,            Measure::None,      0.0,        IOLimit::None,
+                         IOKey::HarmonicCount,  Measure::Count,     21,         IOLimit::Minimum,   Measure::Count,             1,
+                         IOKey::BlockSize,      Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
+                         IOKey::SampleRate,     Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::End);
+    }
+    
+    /** Create an audio rate sawtooth oscillator. */
+    static UnitType ar (UnitType const& frequency = SampleType (440), 
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        const int numHarmonics = 21,
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    {                
+        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal();
+        return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
+    }
+    
+    /** Create a control rate sawtooth oscillator. */
+    static UnitType kr (UnitType const& frequency, 
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        const int numHarmonics = 21) throw()
+    {
+        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal();
+        return TableType::kr (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add);
+    }        
+};
+
+typedef HarmonicSawUnit<PLONK_TYPE_DEFAULT> HarmonicSaw;
+
+
+/** Harmonic square wave oscillator. 
+ @see TableUnit
+ @ingroup OscillatorUnits */
+template<class SampleType>
+class HarmonicSquareUnit
+{
+public:    
+    typedef TableChannelInternal<SampleType>        TableInternal;
+    typedef typename TableInternal::Data            Data;
+    typedef ChannelBase<SampleType>                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>        Internal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;
+    typedef WavetableBase<SampleType>               WavetableType;
+    typedef TableUnit<SampleType>                   TableType;
+    typedef NumericalArray<SampleType>              WeightsType;
+    
+    static inline UnitInfos getInfo() throw()
+    {
+        const double blockSize = (double)BlockSize::getDefault().getValue();
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("HarmonicSquare", "A wavetable-based square wave oscillator.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount, 
+                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Frequency,      Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
+                         IOKey::Multiply,       Measure::Factor,    1.0,        IOLimit::None,
+                         IOKey::Add,            Measure::None,      0.0,        IOLimit::None,
+                         IOKey::HarmonicCount,  Measure::Count,     21,         IOLimit::Minimum,   Measure::Count,             1,
+                         IOKey::BlockSize,      Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
+                         IOKey::SampleRate,     Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::End);
+    }
+    
+    /** Create an audio rate sawtooth oscillator. */
+    static UnitType ar (UnitType const& frequency = SampleType (440), 
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        const int numHarmonics = 21,
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    {                
+        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
+        return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
+    }
+    
+    /** Create a control rate sawtooth oscillator. */
+    static UnitType kr (UnitType const& frequency, 
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        const int numHarmonics = 21) throw()
+    {
+        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
+        return TableType::kr (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add);
+    }        
+};
+
+typedef HarmonicSquareUnit<PLONK_TYPE_DEFAULT> HarmonicSquare;
 
 
 #endif // PLONK_TABLE_H

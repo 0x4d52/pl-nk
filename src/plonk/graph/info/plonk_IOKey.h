@@ -107,6 +107,7 @@ public:
         Breakpoints,    ///< Breakpoints (i.e., an envelope specification)
         
         AutoDeleteFlag, ///< To control the auto deletion
+        HarmonicCount,
 
         NumNames
     };

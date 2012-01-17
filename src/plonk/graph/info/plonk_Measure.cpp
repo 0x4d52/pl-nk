@@ -67,7 +67,8 @@ Measure::Name Measure::fromInt (const int value) throw()
         Measure::Degrees,
         Measure::Real,
         Measure::Imaginary,
-        Measure::Coeffs
+        Measure::Coeffs,
+        Measure::Count
     };
     
     if (value < 0 || value >= Measure::NumNames)
@@ -110,7 +111,8 @@ Text Measure::getName (const int index) throw()
         "Degrees",
         "Real",
         "Imaginary",
-        "Coeffs"
+        "Coeffs",
+        "Count"
     };
     
     if (index < 0 || index >= Measure::NumNames)
@@ -143,7 +145,8 @@ Text Measure::getSymbol (const int index) throw()
         "o",        //"Degrees" maybe do this in Unicode?
         "",         //"Real"
         "i",        //"Imaginary"
-        ""
+        "",         //"Coeffs"
+        ""          //"Count"
     };
     
     if (index < 0 || index >= Measure::NumNames)

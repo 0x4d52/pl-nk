@@ -139,11 +139,17 @@ public:
         tableSamples[index + tableLength] = value;
     }
     
+    WavetableBase& normalise() throw()
+    {
+        Buffer::normalise();
+        return *this;
+    }
+    
     static WavetableBase sineTable (const int size, const double repeats = 1.0) throw()
 	{
 		return WavetableBase (Buffer::sineTable (size, repeats));
 	}
-	
+    	
 	/** Creates a Wavetable with a given size (length) containing one or more cosine tables. */
 	static WavetableBase cosineTable (const int size, const double repeats = 1.0) throw()
 	{
@@ -198,6 +204,15 @@ public:
         return table;        
     }    
     
+    static WavetableBase harmonic (const int size, Buffer const& weights) throw()
+	{
+		return WavetableBase (Buffer::harmonicTable (size, weights));
+	}
+
+    static WavetableBase harmonic8192 (Buffer const& weights) throw()
+	{
+		return WavetableBase (Buffer::harmonicTable (8192, weights));
+	}
     
 };
 

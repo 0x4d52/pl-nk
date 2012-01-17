@@ -70,6 +70,7 @@ public:
         Real,
         Imaginary,
         Coeffs,
+        Count,
         
         NumNames
     };

@@ -416,6 +416,22 @@ public:
 		return NumericalArray<double>::line (size, 0.0, Math<double>::get2Pi() * repeats).sin() * peak;
 	}
 	
+    static NumericalArray<NumericalType> harmonicTable (const int size, 
+                                                        NumericalArray<NumericalType> const& weights) throw()
+	{
+		plonk_assert(weights.length() > 0);
+        
+        NumericalArray<double> result = NumericalArray<double>::newClear (size);
+        
+        for (int i = 0; i < weights.length(); ++i)
+        {
+            const int harmonic = i + 1;
+            result += NumericalArray<double>::line (size, 0.0, Math<double>::get2Pi() * harmonic).sin() * weights.atUnchecked (i);
+        }
+        
+		return result;
+	}
+    
 	/** Creates a NumericalArray with a given size (length) containing one or more cosine tables. */
 	static NumericalArray<NumericalType> cosineTable (const int size, 
 													  const double repeats = 1.0, 
@@ -426,7 +442,7 @@ public:
 		return NumericalArray<double>::line (size, 0.0, Math<double>::get2Pi() * repeats).cos() * actualPeak;
 	}
 	
-	/** Creates a NumericalArray with a given size (length) containing one or more cosine window. */
+	/** Creates a NumericalArray with a given size (length) containing one or more cosine windows. */
 	static NumericalArray<NumericalType> cosineWindow (const int size, 
 													   const double repeats = 1.0, 
 													   const NumericalType peak = TypeUtility<NumericalType>::getTypePeak()) throw()
@@ -908,6 +924,28 @@ public:
         return result;
     }
     
+    NumericalType findMaximumAbs() const throw()
+    {
+		const NumericalType *array = this->getArray();
+		NumericalType result (0);
+        
+		if (array != 0)
+		{            
+			const int length = this->length();
+			
+            if (length > 0)
+                result = array[0];
+            
+            for (int i = 1; i < length; ++i)
+            {
+                result = plonk::max (result, plonk::abs (array[i]));
+            }            
+		}		
+        
+        return result;
+    }
+
+    
     NumericalType findMinimum() const throw()
     {
 		const NumericalType *array = this->getArray();
@@ -986,7 +1024,27 @@ public:
         
         return index;
     }
+    
+    NumericalArray& normalise() throw()
+    {
+        NumericalType *array = this->getArray();
+		
+		if (array != 0)
+		{
+            const NumericalType maximum = this->findMaximumAbs();
+            
+            if (maximum > NumericalType (0))
+            {
+                const NumericalType factor = plonk::reciprocal (maximum);
+                const int size = this->size();
+                
+                for (int i = 0; i < size; ++i)
+                    array[i] *= factor;
+            }
+		}		
         
+        return *this;
+    }
 	
 	bool contains (const NumericalType* items) const throw()
 	{
