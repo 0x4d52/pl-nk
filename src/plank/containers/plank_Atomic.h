@@ -785,11 +785,10 @@ PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL old
 
 //------------------------------------------------------------------------------
 
-/** Extended atomic pointer.
+/** Extended atomic long.
  
- This combines a pointer and an extra "tag" which can be written in a single atomic
- operation. This can help avoid the "ABA problem" in certain lock-free data
- structures. 
+ This combines a long and an extra "tag" which can be written in a single atomic
+ operation.
  
  The default is to use the extra tag as a counter such that the counter is incremented
  each time the stored pointer us set.
@@ -797,7 +796,7 @@ PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL old
  On PPC on Mac OS these are not a truly lock-free operations, it
  uses a lock due to the absence of 64-bit atomic operations.
  
- @defgroup PlankAtomicPXClass Plank AtomicPX class
+ @defgroup PlankAtomicLXClass Plank AtomicLX class
  @ingroup PlankAtomicClasses
  @{
  */

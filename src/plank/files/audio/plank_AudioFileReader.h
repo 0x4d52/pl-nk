@@ -109,6 +109,12 @@ PlankResult pl_AudioFileReader_GetEncoding (PlankAudioFileReaderRef p, int *enco
 PlankResult pl_AudioFileReader_GetBitsPerSample (PlankAudioFileReaderRef p, int *bitsPerSample);
 
 /** 
+ The result of this will be invalid if the file is a compressed format.
+ @param p The <i>Plank AudioFileReader</i> object. 
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_AudioFileReader_GetBytesPerFrame (PlankAudioFileReaderRef p, int *bytesPerFrame);
+
+/** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_AudioFileReader_GetNumChannels (PlankAudioFileReaderRef p, int *numChannels);

@@ -49,7 +49,7 @@ PLANK_BEGIN_C_LINKAGE
  @code
  PlankRNGRef rng;
  float value;
- rng = pl_RNG_Create();
+ rng = pl_RNG_CreateAndInit();
  value = pl_RNG_NextFloat (rng);
  pl_RNG_Destroy (rng);
  @endcode

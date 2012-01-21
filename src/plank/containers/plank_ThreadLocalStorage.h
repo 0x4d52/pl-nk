@@ -44,6 +44,15 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** Manages data that should be thread-local.
+ 
+ Each thread has its own version of the data.
+ 
+ @defgroup PlankThreadLocalStorageClass Plank ThreadLocalStorage class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankThreadLocalStorage* PlankThreadLocalStorageRef; 
 
 PlankThreadLocalStorageRef pl_ThreadLocalStorage_CreateAndInit();
@@ -54,6 +63,8 @@ PlankResult pl_ThreadLocalStorage_DeInit (PlankThreadLocalStorageRef p);
 PlankResult pl_ThreadLocalStorage_Destroy (PlankThreadLocalStorageRef p);
 PlankUL pl_ThreadLocalStorage_GetNumBytes (PlankThreadLocalStorageRef p);
 PlankP pl_ThreadLocalStorage_GetData (PlankThreadLocalStorageRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

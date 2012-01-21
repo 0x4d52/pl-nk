@@ -43,6 +43,15 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A simple map.
+ 
+ Data elements are stored against 64-bit integer keys.
+ 
+ @defgroup PlankSimpleMapClass Plank SimpleMap class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankSimpleMap* PlankSimpleMapRef; 
 
 typedef PlankResult (*PlankSimpleMapFreeElementDataFunction)(PlankP);
@@ -90,6 +99,8 @@ PlankResult pl_SimpleMap_GetKey (PlankSimpleMapRef p, const PlankLL key, PlankP*
  @return PlankResult_OK if the operation was successful. */
 PlankResult pl_SimpleMap_RemoveKey (PlankSimpleMapRef p, const PlankLL key, PlankP* data);
 PlankLL     pl_SimpleMap_GetSize (PlankSimpleMapRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

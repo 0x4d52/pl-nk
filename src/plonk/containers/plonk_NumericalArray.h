@@ -47,6 +47,7 @@
 #include "../maths/plonk_InlineBinaryOps.h"
 #include "../maths/plonk_InlineMiscOps.h"
 #include "../random/plonk_RNG.h"
+#include "plonk_Int24.h"
 
     
 /** For specificying the initial state of a NumericalArray. */
@@ -133,12 +134,19 @@ public:
 		return null;
 	}	        
     
-    static inline void copyData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems)
+    static inline void copyData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         Memory::copy (dst, src, numItems * sizeof (NumericalType));
     }
     
-    static inline void zeroData (NumericalType* const dst, const UnsignedLong numItems)
+    template<class OtherType>
+    static inline void convertData (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    {
+        for (int i = 0; i < numItems; ++i)
+            roundCopy (src[i], dst[i]);
+    }
+    
+    static inline void zeroData (NumericalType* const dst, const UnsignedLong numItems) throw()
     {
         Memory::zero (dst, numItems * sizeof (NumericalType));
     }
@@ -167,17 +175,22 @@ public:
     {
     }    
     
-	static void roundCopy (const double inValue, char& outValue) throw()    { outValue = char (inValue + 0.5); }
-	static void roundCopy (const double inValue, short& outValue) throw()   { outValue = short (inValue + 0.5); }
-	static void roundCopy (const double inValue, int& outValue) throw()     { outValue = int (inValue + 0.5); }
-    static void roundCopy (const double inValue, Long& outValue) throw()    { outValue = Long (inValue + 0.5); }    
-    static void roundCopy (const float inValue, char& outValue) throw()     { outValue = char (inValue + 0.5f); }
-	static void roundCopy (const float inValue, short& outValue) throw()    { outValue = short (inValue + 0.5f); }
-	static void roundCopy (const float inValue, int& outValue) throw()      { outValue = int (inValue + 0.5f); }
-    static void roundCopy (const float inValue, Long& outValue) throw()     { outValue = Long (inValue + 0.5f); }
+	static inline void roundCopy (const double inValue, char& outValue) throw()        { outValue = char (inValue + 0.5); }
+	static inline void roundCopy (const double inValue, short& outValue) throw()       { outValue = short (inValue + 0.5); }
+	static inline void roundCopy (const double inValue, int& outValue) throw()         { outValue = int (inValue + 0.5); }
+	static inline void roundCopy (const double inValue, Int24& outValue) throw()       { outValue = Int24 (inValue + 0.5); }
+    static inline void roundCopy (const double inValue, Long& outValue) throw()        { outValue = Long (inValue + 0.5); }    
+    static inline void roundCopy (const double inValue, LongLong& outValue) throw()    { outValue = LongLong (inValue + 0.5); }    
+
+    static inline void roundCopy (const float inValue, char& outValue) throw()         { outValue = char (inValue + 0.5f); }
+	static inline void roundCopy (const float inValue, short& outValue) throw()        { outValue = short (inValue + 0.5f); }
+	static inline void roundCopy (const float inValue, int& outValue) throw()          { outValue = int (inValue + 0.5f); }
+    static inline void roundCopy (const float inValue, Int24& outValue) throw()        { outValue = Int24 (inValue + 0.5f); }
+    static inline void roundCopy (const float inValue, Long& outValue) throw()         { outValue = Long (inValue + 0.5f); }
+    static inline void roundCopy (const float inValue, LongLong& outValue) throw()     { outValue = LongLong (inValue + 0.5f); }
     
-    template<class Type1, class Type2>
-    static void roundCopy (const Type1 inValue, Type2& outValue) throw()    { outValue = Type2 (inValue); }	
+    template<class InType, class OutType>
+    static inline void roundCopy (const InType inValue, OutType& outValue) throw()     { outValue = OutType (inValue); }	
     
 	
 public:
@@ -190,30 +203,20 @@ public:
 		const CopyType *copyArray = copy.getArray();
 		
 		if (thisArray != 0 && copyArray != 0)
-		{
-			const int size = this->size();
-            
-			for (int i = 0; i < size; ++i)
-				roundCopy (copyArray[i], thisArray[i]);
-		}		
+            NumericalArray::convertData (thisArray, copyArray, this->size());
 	}
 	
 	/** Construct a NumericalArray by copying a ObjectArray of a different type.
 	 This would need to be a numerical type. */
 	template<class CopyType>
 	NumericalArray (ObjectArray<CopyType> const& copy) throw()
-	: Base (copy.size(), copy.isNullTerminated())
+	:   Base (copy.size(), copy.isNullTerminated())
 	{		
 		NumericalType *thisArray = this->getArray();
 		const CopyType *copyArray = copy.getArray();
 		
 		if (thisArray != 0 && copyArray != 0)
-		{
-			const int size = this->size();
-            
-			for (int i = 0; i < size; ++i)
-				roundCopy (copyArray[i], thisArray[i]);
-		}		
+            NumericalArray::convertData (thisArray, copyArray, this->size());
 	}
 	
 	/** Concatenate two arrays into one. */
@@ -379,33 +382,33 @@ public:
 		
 		for (int i = 0; i < numValues; i++)
 		{
-			outputValues[i] = plonk::rand (lower, upper);
+			outputValues[i] = plonk::exprand (lower, upper);
 		}
 		
 		return newArray;
 	}
 	
-	/** Creates a NumericalArray with a given size (length) with a linear random distribution. */
-	static NumericalArray<NumericalType> linrand (const int size, 
-												  const NumericalType lower, 
-												  const NumericalType upper) throw()
-	{
-		plonk_assert(size > 0);
-		
-		const int numValues = size < 1 ? 1 : size;
-		
-		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
-		NumericalType *outputValues = newArray.getArray();
-		NumericalType diff = upper-lower;
-		
-		for (int i = 0; i < numValues; i++)
-		{
-            NumericalType value = plonk::rand (diff);
-			outputValues[i] = plonk::rand (value) + lower;
-		}
-		
-		return newArray;
-	}
+//	/** Creates a NumericalArray with a given size (length) with a linear random distribution. */
+//	static NumericalArray<NumericalType> linrand (const int size, 
+//												  const NumericalType lower, 
+//												  const NumericalType upper) throw()
+//	{
+//		plonk_assert(size > 0);
+//		
+//		const int numValues = size < 1 ? 1 : size;
+//		
+//		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
+//		NumericalType *outputValues = newArray.getArray();
+//		NumericalType diff = upper-lower;
+//		
+//		for (int i = 0; i < numValues; i++)
+//		{
+//            NumericalType value = plonk::rand (diff);
+//			outputValues[i] = plonk::rand (value) + lower;
+//		}
+//		
+//		return newArray;
+//	}
 	
 	/** Creates a NumericalArray with a given size (length) containing one or more sine tables. */
 	static NumericalArray<NumericalType> sineTable (const int size, 

@@ -43,6 +43,17 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A lock-free linked list element.
+ 
+ Also used as the elements for the @link PlankLockFreeQueueClass 
+ lock-free queue @endlink and @link PlankLockFreeStackClass 
+ lock-free stack. @endlink
+ 
+ @defgroup PlankLockFreeLinkedListElementClass Plank LockFreeLinkedListElement class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankLockFreeLinkedListElement*   PlankLockFreeLinkedListElementRef;
 typedef PlankLockFreeLinkedListElementRef PlankLockFreeQueueElementRef;
 typedef PlankLockFreeLinkedListElementRef PlankLockFreeStackElementRef;
@@ -59,6 +70,8 @@ void pl_LockFreeLinkedListElement_SetNext (PlankLockFreeLinkedListElementRef p, 
 
 PlankAtomicPXRef pl_LockFreeLinkedListElement_GetDataAtom (PlankLockFreeLinkedListElementRef p);
 PlankAtomicPXRef pl_LockFreeLinkedListElement_GetNextAtom (PlankLockFreeLinkedListElementRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

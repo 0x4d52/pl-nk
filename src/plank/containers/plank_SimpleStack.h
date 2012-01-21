@@ -43,6 +43,13 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A simple stack.
+ 
+ @defgroup PlankSimpleStackClass Plank SimpleStack class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankSimpleStack* PlankSimpleStackRef; 
 
 typedef PlankResult (*PlankSimpleStackFreeElementDataFunction)(PlankP);
@@ -57,6 +64,8 @@ PlankResult pl_SimpleStack_SetFreeElementDataFunction (PlankSimpleStackRef p, Pl
 PlankResult pl_SimpleStack_Push (PlankSimpleStackRef p, const PlankSimpleStackElementRef element);
 PlankResult pl_SimpleStack_Pop (PlankSimpleStackRef p, PlankSimpleStackElementRef* element);
 PlankLL pl_SimpleStack_GetSize (PlankSimpleStackRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

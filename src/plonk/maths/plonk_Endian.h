@@ -162,7 +162,7 @@ public:
 };
 
 
-/** A utility class to swap the endiannes (byte-order) of one or more data elements. 
+/** A utility class to swap the endianness (byte-order) of one or more data elements. 
  @ingroup PlonkOtherUserClasses */
 class Endian
 {
@@ -205,7 +205,7 @@ public:
     
 };
 
-/** A utility class to swap the endiannes (byte-order) of one or more data elements. 
+/** A utility class to swap the endianness (byte-order) of one or more data elements. 
  The swap functions here only swap the data if the code is running on a big endian architecture. */
 class EndianIfBig : public Endian
 {
@@ -233,7 +233,7 @@ public:
 #endif
 };
 
-/** A utility class to swap the endiannes (byte-order) of one or more data elements. 
+/** A utility class to swap the endianness (byte-order) of one or more data elements. 
  The swap functions here only swap the data if the code is running on a little endian architecture. */
 class EndianIfLittle : public Endian
 {

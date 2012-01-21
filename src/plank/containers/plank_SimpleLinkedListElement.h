@@ -41,6 +41,16 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A simple linked list.
+ 
+ Also used as the elements for the @link PlankSimpleQueueClass 
+ simple queue @endlink and @link PlankSimpleStackClass simple stack. @endlink
+
+ @defgroup PlankSimpleLinkedListElementClass Plank SimpleLinkedListElement class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankSimpleLinkedListElement*   PlankSimpleLinkedListElementRef;
 typedef PlankSimpleLinkedListElementRef PlankSimpleQueueElementRef;
 typedef PlankSimpleLinkedListElementRef PlankSimpleStackElementRef;
@@ -54,6 +64,8 @@ PlankP pl_SimpleLinkedListElement_GetData (PlankSimpleLinkedListElementRef p);
 void pl_SimpleLinkedListElement_SetData (PlankSimpleLinkedListElementRef p, const PlankP data);
 PlankSimpleLinkedListElementRef pl_SimpleLinkedListElement_GetNext (PlankSimpleLinkedListElementRef p);
 void pl_SimpleLinkedListElement_SetNext (PlankSimpleLinkedListElementRef p, const PlankSimpleLinkedListElementRef next);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

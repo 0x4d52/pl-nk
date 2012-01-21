@@ -314,6 +314,20 @@ private:
 //------------------------------------------------------------------------------
 
 /** A non-bandlimted sawtooth oscillator. 
+ 
+ <em>Examples:</em>
+ @code Unit test()
+ {
+    return Saw::ar (440, 0.1); // 440Hz, amplitude 0.1
+ } @endcode
+ 
+ @code Unit test()
+ {
+    // Modulated frequency rising 600-900Hz, amplitude 0.1
+    return Saw::ar (Saw::ar (1, 300, 600), 0.1); 
+ } @endcode
+
+ 
  @ingroup OscillatorUnits ControlUnits */
 template<class SampleType>
 class SawUnit

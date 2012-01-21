@@ -86,8 +86,12 @@
 #include "../maths/plonk_Endian.h"
 
 #include "../random/plonk_RNG.h"
+
 #include "../files/plonk_TextFile.h"
 #include "../files/plonk_BinaryFile.h"
+
+#include "../files/audio/plonk_AudioFileReader.h"
+
 #include "../fft/plonk_FFTEngine.h"
 #include "../fft/plonk_FFTEngineInternal.h"
 

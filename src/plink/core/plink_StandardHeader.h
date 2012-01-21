@@ -70,7 +70,7 @@
 
 
 // other std lib headers...
-//..
+//.. no.. just do this in plank
 
 
 #define PLINK_MAJOR_VERSION      0

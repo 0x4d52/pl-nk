@@ -43,6 +43,13 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A simple queue.
+ 
+ @defgroup PlankSimpleMapClass Plank SimpleMap class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankSimpleQueue* PlankSimpleQueueRef; 
 
 typedef PlankResult (*PlankSimpleQueueFreeElementDataFunction)(PlankP);
@@ -58,6 +65,8 @@ PlankResult pl_SimpleQueue_SetFreeElementDataFunction (PlankSimpleQueueRef p, Pl
 PlankResult pl_SimpleQueue_Push (PlankSimpleQueueRef p, const PlankSimpleQueueElementRef element);
 PlankResult pl_SimpleQueue_Pop (PlankSimpleQueueRef p, PlankSimpleQueueElementRef* element);
 PlankLL pl_SimpleQueue_GetSize (PlankSimpleQueueRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

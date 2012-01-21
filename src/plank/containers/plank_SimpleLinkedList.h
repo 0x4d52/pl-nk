@@ -43,6 +43,13 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A simple linked list.
+ 
+ @defgroup PlankSimpleLinkedListClass Plank SimpleLinkedList class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankSimpleLinkedList* PlankSimpleLinkedListRef; 
 
 typedef PlankResult (*PlankSimpleLinkedListFreeElementDataFunction)(PlankP);
@@ -65,6 +72,8 @@ PlankResult pl_SimpleLinkedList_RemoveFirst (PlankSimpleLinkedListRef p, PlankSi
 PlankResult pl_SimpleLinkedList_RemoveLast (PlankSimpleLinkedListRef p, PlankSimpleLinkedListElementRef* element);
 PlankResult pl_SimpleLinkedList_IndexOf (PlankSimpleLinkedListRef p, const PlankSimpleLinkedListElementRef element, PlankLL* index);
 PlankLL     pl_SimpleLinkedList_GetSize (PlankSimpleLinkedListRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

@@ -50,7 +50,7 @@
 
 #define BINARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the binary '##OP##' function to this one and the @e right argument. */\
-        CLASSNAME OP (CLASSNAME const& right) const throw() { return binary<plonk::OP> (right); }
+        inline CLASSNAME OP (CLASSNAME const& right) const throw() { return binary<plonk::OP> (right); }
 
 
 #define BINARYOPS(CLASSNAME) \

@@ -43,6 +43,13 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A lock-free queue (FIFO).
+ 
+ @defgroup PlankLockFreeQueueClass Plank LockFreeQueue class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankLockFreeQueue* PlankLockFreeQueueRef; 
 
 PlankLockFreeQueueRef pl_LockFreeQueue_CreateAndInit();
@@ -54,6 +61,8 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element);
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element);
 PlankLL pl_LockFreeQueue_GetSize (PlankLockFreeQueueRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 

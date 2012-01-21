@@ -48,7 +48,7 @@
 
 #define UNARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the unary '##OP##' function to this one. */\
-        CLASSNAME OP() const throw() { return unary<plonk::OP>(); }
+        inline CLASSNAME OP() const throw() { return unary<plonk::OP>(); }
 
 
 #define UNARYOPS(CLASSNAME) \

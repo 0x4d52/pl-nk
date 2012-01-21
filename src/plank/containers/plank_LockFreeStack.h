@@ -43,6 +43,13 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+/** A lock-free stack (LIFO).
+ 
+ @defgroup PlankLockFreeStackClass Plank LockFreeStack class
+ @ingroup PlankClasses
+ @{
+ */
+
 typedef struct PlankLockFreeStack* PlankLockFreeStackRef; 
 
 PlankLockFreeStackRef pl_LockFreeStack_CreateAndInit();
@@ -53,6 +60,8 @@ PlankResult pl_LockFreeStack_Destroy (PlankLockFreeStackRef p);
 PlankResult pl_LockFreeStack_Push (PlankLockFreeStackRef p, const PlankLockFreeStackElementRef element);
 PlankResult pl_LockFreeStack_Pop (PlankLockFreeStackRef p, PlankLockFreeStackElementRef* element);
 PlankLL pl_LockFreeStack_GetSize (PlankLockFreeStackRef p);
+
+/** @} */
 
 PLANK_END_C_LINKAGE
 
