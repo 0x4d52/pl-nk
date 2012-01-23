@@ -44,43 +44,43 @@
 #define PLONK_BIGENDIAN     PLANK_BIGENDIAN
 #define PLONK_LITTLEENDIAN  PLANK_LITTLEENDIAN
 
-#ifdef PLANK_WIN
+#if PLANK_WIN
 #define PLONK_WIN 1
 #endif
 
-#ifdef PLANK_APPLE
+#if PLANK_APPLE
 #define PLONK_APPLE 1
 #endif
 
-#ifdef PLANK_GCC
+#if PLANK_GCC
 #define PLONK_GCC 1
 #endif
 
-#ifdef PLANK_LLVN
+#if PLANK_LLVN
 #define PLONK_LLVM 1
 #endif
 
-#ifdef PLANK_APPLE_LLVM
+#if PLANK_APPLE_LLVM
 #define PLONK_APPLE_LLVM 1
 #endif
 
-#ifdef PLANK_ARM
+#if PLANK_ARM
 #define PLONK_ARM 1
 #endif
 
-#ifdef PLANK_X86
+#if PLANK_X86
 #define PLONK_X86 1
 #endif
 
-#ifdef PLANK_PPC
+#if PLANK_PPC
 #define PLONK_PPC 1
 #endif
 
-#ifdef PLANK_32BIT
+#if PLANK_32BIT
 #define PLONK_32BIT 1
 #endif
 
-#ifdef PLANK_64BIT
+#if PLANK_64BIT
 #define PLONK_64BIT 1
 #endif
 

@@ -296,10 +296,10 @@ exit:
 }
 
 
-PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data)
+PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead)
 {
     PlankResult result = PlankResult_OK;
-    int startFrame, endFrame, framesToRead, bytesToRead;
+    int startFrame, endFrame, framesToRead, bytesToRead, bytesRead;
     
     if ((p->dataPosition < 0) || (p->formatInfo.bytesPerFrame <= 0))
     {
@@ -320,7 +320,10 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
     framesToRead = (endFrame > p->numFrames) ? (p->numFrames - startFrame) : (numFrames);
     bytesToRead = framesToRead * p->formatInfo.bytesPerFrame;
     
-    if ((result = pl_File_Read ((PlankFileRef)p, data, bytesToRead)) != PlankResult_OK) goto exit;
+    result = pl_File_Read ((PlankFileRef)p, data, bytesToRead, &bytesRead);
+    
+    if (framesRead != PLANK_NULL)
+        *framesRead = bytesRead / p->formatInfo.bytesPerFrame;
 
     // should zero if framesToRead < numFrames
     
@@ -399,7 +402,7 @@ PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, cons
     if ((result = pl_File_ReadS ((PlankFileRef)p, &numChannels)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)p, &numFrames)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadS ((PlankFileRef)p, &bitsPerSample)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_Read ((PlankFileRef)p, sampleRate.data, sizeof (sampleRate))) != PlankResult_OK) goto exit;    
+    if ((result = pl_File_Read ((PlankFileRef)p, sampleRate.data, sizeof (sampleRate), PLANK_NULL)) != PlankResult_OK) goto exit;    
     
     p->formatInfo.bitsPerSample = (PlankI) bitsPerSample;
     p->formatInfo.bytesPerFrame = (PlankI) (((bitsPerSample + 0x00000008) & ~0x00000008) * numChannels / 8); // round up to whole bytes

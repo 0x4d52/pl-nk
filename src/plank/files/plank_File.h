@@ -250,8 +250,9 @@ PlankResult pl_File_SetEndian (PlankFileRef p, const PlankB isBigEndian);
  @param p The <i>Plank %File</i> object. 
  @param data A pointer to the memory location that will receive the data.
  @param maximumBytes The number of bytes to read.
+ @param bytesRead On return contains the number of bytes read (pass PLANK_NULL to ignore this).
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_File_Read (PlankFileRef p, void* data, const int maximumBytes);
+PlankResult pl_File_Read (PlankFileRef p, void* data, const int maximumBytes, int* bytesRead);
 
 /** Read one signed byte from the file.
  @param p The <i>Plank %File</i> object. 

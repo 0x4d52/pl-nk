@@ -41,10 +41,10 @@
 
 #include "../core/plonk_CoreForwardDeclarations.h"
 
-#if PLANK_WIN
+#if PLONK_WIN
     #pragma pack (push, 1)
     #define PLONK_PACKED
-#elif PLONK_GCC || PLONK_LLVM
+#elif PLONK_GCC || PLONK_LLVM || PLANK_APPLE_LLVM
     #define PLONK_PACKED __attribute__((packed))
 #else
     #warning Data packing macros haven't been handled for this build system
@@ -80,7 +80,11 @@ public:
         return *this;        
     }
 
+    operator char() const throw();
+    operator short() const throw();
     operator int() const throw();
+    operator Long() const throw();
+    operator LongLong() const throw();
     operator float() const throw();
     operator double() const throw();
     operator Internal() const throw();

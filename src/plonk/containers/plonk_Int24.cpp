@@ -70,7 +70,26 @@ Int24& Int24::operator= (Int24 const& other) throw()
     return *this;
 }
 
+Int24::operator char() const throw()
+{
+    return pl_ConvertI24ToI (data);
+}
+
+Int24::operator short() const throw()
+{
+    return pl_ConvertI24ToI (data);
+}
+
 Int24::operator int() const throw()
+{
+    return pl_ConvertI24ToI (data);
+}
+
+Int24::operator Long() const throw()
+{
+    return pl_ConvertI24ToI (data);
+}
+Int24::operator LongLong() const throw()
 {
     return pl_ConvertI24ToI (data);
 }

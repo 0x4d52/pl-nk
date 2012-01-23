@@ -66,7 +66,7 @@ public:
     bool isLittleEndian() const throw();
     bool isNativeEndian() const throw();
 
-    void read (void* data, const int maximumBytes) throw();
+    int read (void* data, const int maximumBytes) throw();
     void read (char& value) throw();
 	void read (short& value) throw();
     void read (int& value) throw();
@@ -82,7 +82,7 @@ public:
 	void read (double& value) throw();
     
     template<class NumericalType>
-    void read (NumericalArray<NumericalType>& array) throw();
+    int read (NumericalArray<NumericalType>& array) throw();
     
     void write (void* data, const int maximumBytes) throw();
 	void write (const char value) throw();
@@ -110,15 +110,17 @@ private:
 };
 
 template<class NumericalType>
-void BinaryFileInternal::read (NumericalArray<NumericalType>& array) throw()
+int BinaryFileInternal::read (NumericalArray<NumericalType>& array) throw()
 {
+    int bytesRead;
     plonk_assert (array.length() > 0);
     
     ResultCode result = pl_File_Read (getPeerRef(), 
                                       reinterpret_cast<void*> (array.getArray()), 
-                                      sizeof (NumericalType) * array.length());
+                                      sizeof (NumericalType) * array.length()
+                                      &bytesRead);
     
-    plonk_assert (result == PlankResult_OK); 
+    plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF); 
     
     if (! isNativeEndian())
         Endian::swap (array);
@@ -126,6 +128,8 @@ void BinaryFileInternal::read (NumericalArray<NumericalType>& array) throw()
 #ifndef PLONK_DEBUG
     (void)result;
 #endif    
+    
+    return bytesRead;
 }
 
 template<class NumericalType>

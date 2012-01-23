@@ -130,14 +130,17 @@ bool BinaryFileInternal::isNativeEndian() const throw()
     return pl_File_IsNativeEndian (getPeerRef());
 }
 
-void BinaryFileInternal::read (void* data, const int maximumBytes) throw()
-{
-    const ResultCode result = pl_File_Read (getPeerRef(), data, maximumBytes);
-    plonk_assert (result == PlankResult_OK);
+int BinaryFileInternal::read (void* data, const int maximumBytes) throw()
+{   
+    int bytesRead;
+    const ResultCode result = pl_File_Read (getPeerRef(), data, maximumBytes, &bytesRead);
+    plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF); 
     
 #ifndef PLONK_DEBUG
     (void)result;
 #endif        
+    
+    return bytesRead;
 }
 
 void BinaryFileInternal::read (char& value) throw()

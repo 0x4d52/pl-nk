@@ -68,6 +68,18 @@ public:
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
+    
+    template<class Type>
+    inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
+    {
+#if PLONK_BIGENDIAN
+        if (! dataIsBigEndian) Endian::swap (data, numItems);
+#endif
+        
+#if PLONK_LITTLEENDIAN
+        if (dataIsBigEndian) Endian::swap (data, numItems);
+#endif
+    }
 
     PlankAudioFileReader peer;
     Chars readBuffer;
@@ -107,45 +119,63 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
     
     bytesPerSample = bytesPerFrame / channels;
     
+    const bool isPCM = encoding & PLANKAUDIOFILE_ENCODING_PCM_FLAG;
+    const bool isFloat = encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG;
+    const bool isBigEndian = encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG;
+    
     int dataIndex = 0;
     
-    while (dataIndex < dataLength)
+    while (dataIndex < dataLength && result != PlankResult_FileEOF)
     {
-        result = pl_AudioFileReader_ReadFrames (getPeerRef(), numFramesPerBuffer, readBufferArray);
-        plonk_assert (result == PlankResult_OK);
+        int framesRead, samplesRead;
+        result = pl_AudioFileReader_ReadFrames (getPeerRef(), numFramesPerBuffer, readBufferArray, &framesRead);
+        plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF);
 
-        if (encoding & PLANKAUDIOFILE_ENCODING_PCM_FLAG)
+        samplesRead = framesRead * channels;
+        
+        if (isPCM)
         {            
-            if (bytesPerSample == 16)
+            if (bytesPerSample == 2)
             {
                 Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
+                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
             }
-            else if (bytesPerSample == 24)
+            else if (bytesPerSample == 3)
             {
                 Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
+                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
             }
-            else if (bytesPerSample == 32)
+            else if (bytesPerSample == 4)
             {
                 Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
+                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+            }
+            else if (bytesPerSample == 1)
+            {
+                Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
+                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+            }
+            else
+            {
+                plonk_assertfalse;
+            }
+        }
+        else if (isFloat)
+        {
+            if (bytesPerSample == 4)
+            {
+                Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
+                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
             }
             else if (bytesPerSample == 8)
             {
-                Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
-            }
-            else
-            {
-                plonk_assertfalse;
-            }
-        }
-        else if (encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG)
-        {
-            if (bytesPerSample == 32)
-            {
-                Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
-            }
-            else if (bytesPerSample == 64)
-            {
                 Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
+                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
             }
             else
             {
@@ -153,17 +183,12 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
             }
         }
         
-#if PLONK_LITTLEENDIAN
-        const bool shouldSwapEndian = (encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG);
-#elif PLONK_BIGENDIAN
-        const bool shouldSwapEndian = ! (encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG);
-#endif
-        
-        if (shouldSwapEndian)
-        {
-            
-        }
+        dataArray += samplesRead;
+        dataIndex += samplesRead;
     }
+    
+    if (dataIndex < dataLength)
+        data.setSize (dataIndex, true);
    
 #ifndef PLONK_DEBUG
     (void)result;
@@ -225,6 +250,12 @@ public:
     {
         return weak.fromWeak();
     }    
+    
+    template<class SampleType>
+    void readFrames (NumericalArray<SampleType>& data) throw()
+    {
+        getInternal()->readFrames (data);
+    }
     	
 //    /** Gets the position of the file stream. */
 //    LongLong getPosition() throw()

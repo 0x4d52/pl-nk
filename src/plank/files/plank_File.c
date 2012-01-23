@@ -442,7 +442,7 @@ PlankResult pl_File_SetEndian (PlankFileRef p, const PlankB isBigEndian)
     return PlankResult_OK;
 }
 
-PlankResult pl_File_Read (PlankFileRef p, void* data, const int maximumBytes)
+PlankResult pl_File_Read (PlankFileRef p, void* data, const int maximumBytes, int* bytesRead)
 {
     int size, err;
         
@@ -453,6 +453,9 @@ PlankResult pl_File_Read (PlankFileRef p, void* data, const int maximumBytes)
         return PlankResult_FileReadError;
     
     size = (int)fread (data, 1, maximumBytes, p->file);
+    
+    if (bytesRead != PLANK_NULL)
+        *bytesRead = size;
     
     if (size != maximumBytes)
     {
@@ -475,7 +478,7 @@ PlankResult pl_File_Read (PlankFileRef p, void* data, const int maximumBytes)
 PlankResult pl_File_ReadC (PlankFileRef p, char* data)
 {
     PlankResult result;
-    result = pl_File_Read (p, data, sizeof (char));
+    result = pl_File_Read (p, data, sizeof (char), PLANK_NULL);
     return result;
 }
 
@@ -483,7 +486,7 @@ PlankResult pl_File_ReadS (PlankFileRef p, short* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (short));
+    result = pl_File_Read (p, data, sizeof (short), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianS (data);
@@ -495,7 +498,7 @@ PlankResult pl_File_ReadI (PlankFileRef p, int* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (int));
+    result = pl_File_Read (p, data, sizeof (int), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianI (data);
@@ -507,7 +510,7 @@ PlankResult pl_File_ReadI24 (PlankFileRef p, PlankI24* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankI24));
+    result = pl_File_Read (p, data, sizeof (PlankI24), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianI24 (data);
@@ -519,7 +522,7 @@ PlankResult pl_File_ReadL (PlankFileRef p, PlankL* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankL));
+    result = pl_File_Read (p, data, sizeof (PlankL), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianL (data);
@@ -531,7 +534,7 @@ PlankResult pl_File_ReadLL (PlankFileRef p, PlankLL* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankLL));
+    result = pl_File_Read (p, data, sizeof (PlankLL), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianLL (data);
@@ -542,7 +545,7 @@ PlankResult pl_File_ReadLL (PlankFileRef p, PlankLL* data)
 PlankResult pl_File_ReadUC (PlankFileRef p, unsigned char* data)
 {
     PlankResult result;
-    result = pl_File_Read (p, data, sizeof (unsigned char));
+    result = pl_File_Read (p, data, sizeof (unsigned char), PLANK_NULL);
     return result;    
 }
 
@@ -550,7 +553,7 @@ PlankResult pl_File_ReadUS (PlankFileRef p, unsigned short* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (unsigned short));
+    result = pl_File_Read (p, data, sizeof (unsigned short), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianUS (data);
@@ -562,7 +565,7 @@ PlankResult pl_File_ReadUI (PlankFileRef p, unsigned int* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (unsigned int));
+    result = pl_File_Read (p, data, sizeof (unsigned int), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianUI (data);
@@ -574,7 +577,7 @@ PlankResult pl_File_ReadUI24 (PlankFileRef p, PlankUI24* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankUI24));
+    result = pl_File_Read (p, data, sizeof (PlankUI24), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianUI24 (data);
@@ -586,7 +589,7 @@ PlankResult pl_File_ReadUL (PlankFileRef p, PlankUL* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankUL));
+    result = pl_File_Read (p, data, sizeof (PlankUL), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianUL (data);
@@ -598,7 +601,7 @@ PlankResult pl_File_ReadULL (PlankFileRef p, PlankULL* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankULL));
+    result = pl_File_Read (p, data, sizeof (PlankULL), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianULL (data);
@@ -610,7 +613,7 @@ PlankResult pl_File_ReadF (PlankFileRef p, float* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (float));
+    result = pl_File_Read (p, data, sizeof (float), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianF (data);
@@ -622,7 +625,7 @@ PlankResult pl_File_ReadD (PlankFileRef p, double* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (double));
+    result = pl_File_Read (p, data, sizeof (double), PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianD (data);
@@ -634,7 +637,7 @@ PlankResult pl_File_ReadFourCharCode (PlankFileRef p, PlankFourCharCode* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankFourCharCode));
+    result = pl_File_Read (p, data, sizeof (PlankFourCharCode), PLANK_NULL);
     
 #if PLANK_BIGENDIAN
     pl_SwapEndianI ((PlankI) data);
@@ -652,7 +655,7 @@ PlankResult pl_File_ReadPascalString255 (PlankFileRef p, PlankPascalString255* s
     
     string->data[0] = length;
     
-    if ((result = pl_File_Read (p, &string->data[1], length)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Read (p, &string->data[1], length, PLANK_NULL)) != PlankResult_OK) goto exit;
    
 exit:
     return result;        
