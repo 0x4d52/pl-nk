@@ -86,7 +86,7 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
     const int dataLength = data.length();
     
     SampleType* dataArray = data.getArray();
-    void* readBufferArray = readBuffer.getArray();
+    void* const readBufferArray = readBuffer.getArray();
     
     int encoding, bits, channels, bytesPerFrame, bytesPerSample;;
     result = pl_AudioFileReader_GetEncoding (getPeerRef(), &encoding);
@@ -118,19 +118,19 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
         {            
             if (bytesPerSample == 16)
             {
-                
+                Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
             }
             else if (bytesPerSample == 24)
             {
-                
+                Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
             }
             else if (bytesPerSample == 32)
             {
-                
+                Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
             }
             else if (bytesPerSample == 8)
             {
-                
+                Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
             }
             else
             {
@@ -141,11 +141,11 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
         {
             if (bytesPerSample == 32)
             {
-                
+                Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
             }
             else if (bytesPerSample == 64)
             {
-                
+                Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
             }
             else
             {

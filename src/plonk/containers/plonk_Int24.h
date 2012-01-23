@@ -41,6 +41,15 @@
 
 #include "../core/plonk_CoreForwardDeclarations.h"
 
+#if PLANK_WIN
+    #pragma pack (push, 1)
+    #define PLONK_PACKED
+#elif PLONK_GCC || PLONK_LLVM
+    #define PLONK_PACKED __attribute__((packed))
+#else
+    #warning Data packing macros haven't been handled for this build system
+#endif
+
 /** An emulated 24-bit integer type.
  This overloads all the required operators and function to behave like
  an integer type but uses only 24 bits of storage.
@@ -134,7 +143,13 @@ public:
 private:
     
     Internal data;
-};
+} PLONK_PACKED;
+
+#if PLANK_WIN
+    #pragma pack (pop)
+#endif
+
+#undef PLONK_PACKED
 
 std::istream& operator>> (std::istream &inputStream, Int24& value);
 std::ostream& operator<< (std::ostream &outputStream, Int24 const& value);

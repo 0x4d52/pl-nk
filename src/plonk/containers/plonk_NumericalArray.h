@@ -139,6 +139,11 @@ public:
         Memory::copy (dst, src, numItems * sizeof (NumericalType));
     }
     
+    static inline void convertData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    {
+        Memory::copy (dst, src, numItems * sizeof (NumericalType));
+    }
+    
     template<class OtherType>
     static inline void convertData (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
