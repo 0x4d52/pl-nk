@@ -101,6 +101,10 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
     result = pl_AudioFileReader_GetBytesPerFrame (getPeerRef(), &bytesPerFrame);
     plonk_assert (result == PlankResult_OK);
     
+    plonk_assert (bits > 0);
+    plonk_assert (channels > 0);
+    plonk_assert (bytesPerFrame > 0);
+    
     bytesPerSample = bytesPerFrame / channels;
     
     int dataIndex = 0;
@@ -110,17 +114,54 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), numFramesPerBuffer, readBufferArray);
         plonk_assert (result == PlankResult_OK);
 
-        if (encoding == PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN)
-        {
+        if (encoding & PLANKAUDIOFILE_ENCODING_PCM_FLAG)
+        {            
+            if (bytesPerSample == 16)
+            {
+                
+            }
+            else if (bytesPerSample == 24)
+            {
+                
+            }
+            else if (bytesPerSample == 32)
+            {
+                
+            }
+            else if (bytesPerSample == 8)
+            {
+                
+            }
+            else
+            {
+                plonk_assertfalse;
+            }
         }
-        else if (encoding == PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN)
+        else if (encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG)
         {
+            if (bytesPerSample == 32)
+            {
+                
+            }
+            else if (bytesPerSample == 64)
+            {
+                
+            }
+            else
+            {
+                plonk_assertfalse;
+            }
         }
-        else if (encoding == PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN)
+        
+#if PLONK_LITTLEENDIAN
+        const bool shouldSwapEndian = (encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG);
+#elif PLONK_BIGENDIAN
+        const bool shouldSwapEndian = ! (encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG);
+#endif
+        
+        if (shouldSwapEndian)
         {
-        }
-        else if (encoding == PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN)
-        {
+            
         }
     }
    
