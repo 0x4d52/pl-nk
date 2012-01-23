@@ -69,7 +69,7 @@ AudioFileReaderInternal::~AudioFileReaderInternal()
     pl_AudioFileReader_DeInit (getPeerRef());
 }
 
-int AudioFileReaderInternal::getBitsPerSample() throw()
+int AudioFileReaderInternal::getBitsPerSample() const throw()
 {
     int value;
     ResultCode result = pl_AudioFileReader_GetBitsPerSample (getPeerRef(), &value);
@@ -80,7 +80,7 @@ int AudioFileReaderInternal::getBitsPerSample() throw()
     return value;
 }
 
-int AudioFileReaderInternal::getBytesPerFrame() throw()
+int AudioFileReaderInternal::getBytesPerFrame() const throw()
 {
     int value;
     ResultCode result = pl_AudioFileReader_GetBytesPerFrame (getPeerRef(), &value);
@@ -91,7 +91,7 @@ int AudioFileReaderInternal::getBytesPerFrame() throw()
     return value;
 }
 
-int AudioFileReaderInternal::getNumChannels() throw()
+int AudioFileReaderInternal::getNumChannels() const throw()
 {
     int value;
     ResultCode result = pl_AudioFileReader_GetNumChannels (getPeerRef(), &value);
@@ -102,7 +102,7 @@ int AudioFileReaderInternal::getNumChannels() throw()
     return value;
 }
 
-double AudioFileReaderInternal::getSampleRate() throw()
+double AudioFileReaderInternal::getSampleRate() const throw()
 {
     double value;
     ResultCode result = pl_AudioFileReader_GetSampleRate (getPeerRef(), &value);
@@ -113,7 +113,7 @@ double AudioFileReaderInternal::getSampleRate() throw()
     return value;
 }
 
-int AudioFileReaderInternal::getNumFrames() throw()
+int AudioFileReaderInternal::getNumFrames() const throw()
 {
     int value;
     ResultCode result = pl_AudioFileReader_GetNumFrames (getPeerRef(), &value);
@@ -124,7 +124,7 @@ int AudioFileReaderInternal::getNumFrames() throw()
     return value;
 }
 
-int AudioFileReaderInternal::getFramePosition() throw()
+int AudioFileReaderInternal::getFramePosition() const throw()
 {
     int value;
     ResultCode result = pl_AudioFileReader_GetFramePosition (getPeerRef(), &value);

@@ -440,6 +440,29 @@ public:
         
         return result;
     }
+    
+    ObjectArrayType interleave() throw()
+    {
+        int i, j;
+        
+        plonk_assert (isMatrix());
+        
+        const int numRows = this->numRows();
+        const int numColumns = this->numColumns();
+        
+        ObjectArrayType result = ObjectArrayType::withSize (numRows * numColumns);
+        
+        for (i = 0; i < numRows; ++i)
+        {
+            ArrayType* resultArray = result.getArray() + i;
+            ArrayType* sourceArray = this->atUnchecked (i).getArray();
+            
+            for (j = 0; j < numColumns; ++j, resultArray += numRows)
+                *resultArray = sourceArray[j];
+        }
+        
+        return result;
+    }
 	
 	
 	//ObjectArrayConcatOperatorsDefine(ObjectArray2DBase, ArrayType);

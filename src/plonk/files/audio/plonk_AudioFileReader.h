@@ -53,12 +53,12 @@ public:
     AudioFileReaderInternal (Text const& path, const int bufferSize = 32768) throw();
     ~AudioFileReaderInternal();
     
-    int getBitsPerSample() throw();
-    int getBytesPerFrame() throw();
-    int getNumChannels() throw();
-    double getSampleRate() throw();
-    int getNumFrames() throw();
-    int getFramePosition() throw();
+    int getBitsPerSample() const throw();
+    int getBytesPerFrame() const throw();
+    int getNumChannels() const throw();
+    double getSampleRate() const throw();
+    int getNumFrames() const throw();
+    int getFramePosition() const throw();
     void setFramePosition (const int position) throw();
     void resetFramePosition() throw();
     
@@ -70,7 +70,7 @@ private:
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
     
     template<class Type>
-    inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
+    static inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
     {
 #if PLONK_BIGENDIAN
         if (! dataIsBigEndian) Endian::swap (data, numItems);
@@ -251,77 +251,61 @@ public:
         return weak.fromWeak();
     }    
     
+    int getBitsPerSample() const throw()
+    {
+        return getInternal()->getBitsPerSample();
+    }
+    
+    int getBytesPerFrame() const throw()
+    {
+        return getInternal()->getBytesPerFrame();
+    }
+    
+    int getNumChannels() const throw()
+    {
+        return getInternal()->getNumChannels();
+    }
+    
+    double getSampleRate() const throw()
+    {
+        return getInternal()->getSampleRate();
+    }
+    
+    int getNumFrames() const throw()
+    {
+        return getInternal()->getNumFrames();
+    }
+    
+    int getFramePosition() const throw()
+    {
+        return getInternal()->getFramePosition();
+    }
+    
+    void setFramePosition (const int position) throw()
+    {
+        return getInternal()->setFramePosition (position);
+    }
+    
+    void resetFramePosition() throw()
+    {
+        return getInternal()->resetFramePosition();
+    }
+    
     template<class SampleType>
     void readFrames (NumericalArray<SampleType>& data) throw()
     {
         getInternal()->readFrames (data);
     }
-    	
-//    /** Gets the position of the file stream. */
-//    LongLong getPosition() throw()
-//    {
-//        return getInternal()->getPosition();
-//    }
-//    
-//    /** Sets the position of the file stream. 
-//     0 is the start of the stream. */
-//    void setPosition (const LongLong position) throw()
-//    {
-//        getInternal()->setPosition (position);
-//    }
-//
-//    /** Sets the position of the file stream to the end of the file. */
-//    void setEof() throw()
-//    {
-//        getInternal()->setEof();
-//    }    
-//    
-//    /** Determines if the file stream is positioned at its end. */
-//	bool isEof() const throw()
-//	{
-//		return getInternal()->isEof();
-//	}
-//    
-//    /** Reads a numerical value from the file.
-//     This must be one of: char, short, int, long or LongLong 
-//     (and their unsigned versions). This is read in the endian format
-//     specified in the constructor. */    
-//    template<class ValueType>
-//    ValueType read() throw()
-//    {
-//        ValueType value;
-//        getInternal()->read (value);
-//        return value;
-//    }    
-//    
-//    /** Reads a value or array from the file.
-//     This must be one of: char, short, int, long or LongLong 
-//     (and their unsigned versions) or a NumericalArray of a built-in type. 
-//     This is read in the endian format specified in the constructor. */        
-//    template<class ValueType>
-//    void read (ValueType& value) throw()
-//    {
-//        getInternal()->read (value);
-//    }    
-//    
-//    /** Write a numerical value to the file.
-//     This must be one of: char, short, int, long or LongLong 
-//     (and their unsigned versions). This is written in the endian format
-//     specified in the constructor. */    
-//    template<class ValueType>
-//    void write (const ValueType value) throw()
-//    {
-//        getInternal()->write (value);
-//    }
-//	        
-//    /** Creates a chunk name identifier.
-//     A convenience function for creating an interger to write to a file
-//     for chunk IDs in many IFF-type files. */
-//    static inline int chunkID (const char* const fourCharCode) throw()
-//    {
-//        plonk_assert (Text (fourCharCode).length() == 4);
-//        return pl_FourCharCode (fourCharCode);
-//    }
+    
+    template<class SampleType>
+    NumericalArray<SampleType> readFrames() throw()
+    {
+        typedef NumericalArray<SampleType> SampleArray;
+        SampleArray data = SampleArray::withSize (getNumFrames() * getNumChannels());
+        getInternal()->readFrames (data);
+        return data;
+    }
+
 };
 
 

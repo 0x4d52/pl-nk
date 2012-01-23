@@ -143,6 +143,20 @@ typedef NumericalArray<UnsignedLong>	UnsignedLongs;
 typedef NumericalArray<Float>			Floats;
 typedef NumericalArray<Double>			Doubles;
 
+typedef NumericalArray<Bool>			Bool1D;
+typedef NumericalArray<Char>			Char1D;
+typedef NumericalArray<Short>			Short1D;
+typedef NumericalArray<Int>				Int1D;
+typedef NumericalArray<Int24>			Int241D;
+typedef NumericalArray<Long>			Long1D;
+typedef NumericalArray<UnsignedChar>	Unsigned1D;
+typedef UnsignedCharArray				Byte1D;
+typedef NumericalArray<UnsignedShort>	UnsignedShort1D;
+typedef NumericalArray<UnsignedInt>     UnsignedInt1D;
+typedef NumericalArray<UnsignedLong>	UnsignedLong1D;
+typedef NumericalArray<Float>			Float1D;
+typedef NumericalArray<Double>			Double1D;
+
 typedef NumericalArray2D<Char>				CharArray2D;
 typedef NumericalArray2D<Short>				ShortArray2D;
 typedef NumericalArray2D<Int>				IntArray2D;
