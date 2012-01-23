@@ -103,7 +103,7 @@ public:
         const Buffer& buffer = this->getInputAsBuffer (IOKey::Buffer);
         const SampleType* const bufferSamples = buffer.getArray();
         
-        plonk_assert(outputBufferLength == buffer.length());
+        plonk_assert (outputBufferLength == buffer.length());
         
         for (int i = 0; i < outputBufferLength; ++i)
             outputSamples[i] = bufferSamples[i];

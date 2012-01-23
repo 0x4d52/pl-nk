@@ -94,7 +94,7 @@ SenderInternal<SenderContainerBaseType>::~SenderInternal()
 template<class SenderContainerBaseType>
 void SenderInternal<SenderContainerBaseType>::addReceiver(Receiver* const receiver) throw()
 {
-    plonk_assert(receiver != 0);
+    plonk_assert (receiver != 0);
     
     if (rawReceivers.getInternal()->indexOf (receiver) < 0)
         rawReceivers.getInternal()->add (receiver);
@@ -103,7 +103,7 @@ void SenderInternal<SenderContainerBaseType>::addReceiver(Receiver* const receiv
 template<class SenderContainerBaseType>
 void SenderInternal<SenderContainerBaseType>::removeReceiver(Receiver* const receiver) throw()
 {
-    plonk_assert(receiver != 0);
+    plonk_assert (receiver != 0);
     
     int index = rawReceivers.getInternal()->indexOf (receiver);
     
@@ -114,13 +114,13 @@ void SenderInternal<SenderContainerBaseType>::removeReceiver(Receiver* const rec
 template<class SenderContainerBaseType>
 void SenderInternal<SenderContainerBaseType>::addReceiver(WeakPointer* const owner, Receiver* const receiver) throw()
 {    
-    plonk_assert(receiver != 0);
-    plonk_assert(owner != 0);
-    plonk_assert(owner->getWeakPointer() != 0);
+    plonk_assert (receiver != 0);
+    plonk_assert (owner != 0);
+    plonk_assert (owner->getWeakPointer() != 0);
             
     if (weakReceivers.getInternal()->indexOf (receiver) < 0)
     {
-        plonk_assert(weakReceiverOwners.getInternal()->indexOf (owner) < 0);
+        plonk_assert (weakReceiverOwners.getInternal()->indexOf (owner) < 0);
         
         owner->incrementRefCount();
         weakReceiverOwners.getInternal()->add (owner);
@@ -131,14 +131,14 @@ void SenderInternal<SenderContainerBaseType>::addReceiver(WeakPointer* const own
 template<class SenderContainerBaseType>
 void SenderInternal<SenderContainerBaseType>::removeReceiver(WeakPointer* const owner, Receiver* const receiver) throw()
 {
-    plonk_assert(receiver != 0);
-    plonk_assert(owner != 0);
+    plonk_assert (receiver != 0);
+    plonk_assert (owner != 0);
 
     int index = weakReceivers.getInternal()->indexOf (receiver);
     
     if (index >= 0)
     {
-        plonk_assert(weakReceiverOwners.getInternal()->indexOf (owner) == index);
+        plonk_assert (weakReceiverOwners.getInternal()->indexOf (owner) == index);
         
         weakReceivers.getInternal()->remove (index);
         weakReceiverOwners.getInternal()->remove (index);
@@ -157,7 +157,7 @@ template<class SenderContainerBaseType>
 void SenderInternal<SenderContainerBaseType>::updateRaw() throw()
 {    
     RawReceiverArrayInternal* arrayInternal = rawReceivers.getInternal();
-    plonk_assert(arrayInternal != 0);
+    plonk_assert (arrayInternal != 0);
     
     const int numReceivers = arrayInternal->length();
     if (numReceivers > 0)
@@ -176,14 +176,14 @@ template<class SenderContainerBaseType>
 void SenderInternal<SenderContainerBaseType>::updateWeak() throw()
 {    
     WeakReceiverOwnerArrayInternal* ownerArray = weakReceiverOwners.getInternal();
-    plonk_assert(ownerArray != 0);
+    plonk_assert (ownerArray != 0);
 
     const int numReceivers = ownerArray->length();
         
     if (numReceivers > 0)
     {     
-        plonk_assert(weakReceivers.getInternal() != 0);
-        plonk_assert(weakReceivers.getInternal()->length() == numReceivers);
+        plonk_assert (weakReceivers.getInternal() != 0);
+        plonk_assert (weakReceivers.getInternal()->length() == numReceivers);
         
         RawReceiverArrayInternal* reveiverArray = weakReceivers.getInternal();
         

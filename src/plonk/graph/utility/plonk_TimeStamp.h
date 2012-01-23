@@ -75,7 +75,7 @@ public:
     
     inline double getValue() const throw() 
     { 
-        plonk_assert(((double (time) + 1.0) - (double (time))) == 1.0); // lost precision
+        plonk_assert (((double (time) + 1.0) - (double (time))) == 1.0); // lost precision
         return double (time) + fraction; 
     }
     

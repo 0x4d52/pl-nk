@@ -183,8 +183,8 @@ template<class ObjectType, class BaseType>
 void ObjectArrayInternalBase<ObjectType,BaseType>
 ::setSizeInternal (const int newSize, const bool keepContents) throw()
 {    
-    plonk_assert(newSize >= 0);
-    plonk_assert(ownsTheData);
+    plonk_assert (newSize >= 0);
+    plonk_assert (ownsTheData);
     
     ObjectType* oldArray = array;
     
@@ -231,7 +231,7 @@ template<class ObjectType, class BaseType>
 void ObjectArrayInternalBase<ObjectType,BaseType>
 ::add (ObjectType const& item) throw()
 {
-    plonk_assert(ownsTheData);
+    plonk_assert (ownsTheData);
     
     setSizeIfNeeded (sizeUsed + 1, true);
     
@@ -245,8 +245,8 @@ template<class ObjectType, class BaseType>
 void ObjectArrayInternalBase<ObjectType,BaseType>
 ::add (const int numItems, const ObjectType* items) throw()
 {
-    plonk_assert(ownsTheData);
-    plonk_assert(numItems > 0);
+    plonk_assert (ownsTheData);
+    plonk_assert (numItems > 0);
     
     const int originalLength = this->length();    
     const int newSize = sizeUsed + numItems;
@@ -263,7 +263,7 @@ template<class ObjectType, class BaseType>
 void ObjectArrayInternalBase<ObjectType,BaseType>
 ::remove (const int index) throw()
 {		
-    plonk_assert(ownsTheData);
+    plonk_assert (ownsTheData);
     
     if (index < 0 || index >= sizeUsed) 
         return;

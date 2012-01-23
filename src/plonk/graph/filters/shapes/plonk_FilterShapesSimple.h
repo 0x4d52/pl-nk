@@ -85,7 +85,7 @@ public:
         const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;        
         const CalcType temp = plonk::exp (-w0);
         
-        plonk_assert(temp > CalcType (0));
+        plonk_assert (temp > CalcType (0));
         
         data.coeffs[FormType::CoeffB1] = temp;
     }
@@ -136,7 +136,7 @@ public:
         const CalcType lag = data.params[Duration];
         const CalcType temp = (lag == zero) ? zero : plonk::exp (log0_001 / (lag * data.filterSampleRate));
         
-        plonk_assert(temp >= CalcType (0));
+        plonk_assert (temp >= CalcType (0));
         
         data.coeffs[FormType::CoeffB1] = temp;
     }
@@ -187,7 +187,7 @@ public:
         
         const CalcType temp1 = plonk::exp (-w0);
         
-        plonk_assert(temp1 > CalcType (0));
+        plonk_assert (temp1 > CalcType (0));
         
         const CalcType temp2 = (one + temp1) * half;
         
@@ -243,7 +243,7 @@ public:
         const CalcType decay = data.params[Duration];
         const CalcType temp = (decay == zero) ? zero : plonk::exp (log0_001 / (decay * data.filterSampleRate));
         
-        plonk_assert(temp >= CalcType (0));
+        plonk_assert (temp >= CalcType (0));
         
         data.coeffs[FormType::CoeffA0] = one;
         data.coeffs[FormType::CoeffA1] = zero;

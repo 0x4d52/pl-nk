@@ -80,7 +80,7 @@ public:
             p = 0; // just an extra line to ease stepping through
         }
         
-//        plonk_assert(allocations->size() == 0);
+//        plonk_assert (allocations->size() == 0);
         
         delete allocations;
     }
@@ -94,7 +94,7 @@ public:
     { 
         int index = allocations->indexOf (p);
         
-        plonk_assert(index >= 0);
+        plonk_assert (index >= 0);
         
         if (index >= 0)
             allocations->remove (index);
@@ -160,7 +160,7 @@ SmartPointer::~SmartPointer()
   #endif
 #endif
     
-	plonk_assert(refCount >= 0);
+	plonk_assert (refCount >= 0);
     
     if (weakPointer != 0)
     {
@@ -215,7 +215,7 @@ bool SmartPointer::decrementRefCount()  throw()
 
 	if (active)
 	{
-		plonk_assert(refCount > 0);
+		plonk_assert (refCount > 0);
 
         //pl_AtomicL_Increment((PlankAtomicLRef)&refCount);        
         --refCount;
@@ -224,7 +224,7 @@ bool SmartPointer::decrementRefCount()  throw()
 		{
             //pl_AtomicL_Increment((PlankAtomicLRef)&refCount);   
             --refCount;
-			plonk_assert(refCount == 0); // once we use a deferred Deleter this may not be the case?
+			plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
         }
 		
         if (refCount <= 0) 

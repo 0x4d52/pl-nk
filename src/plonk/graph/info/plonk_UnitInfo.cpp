@@ -67,7 +67,7 @@ void UnitInfo::parseInputs (va_list& args) throw()
 void UnitInfo::parseOutputs (va_list& args) throw()
 {
     numOutputs = va_arg(args, int);
-    plonk_assert(numOutputs >= -1); // -1 means variable and there will be one info
+    plonk_assert (numOutputs >= -1); // -1 means variable and there will be one info
 
     parseIO (args, outputInfos);
 }

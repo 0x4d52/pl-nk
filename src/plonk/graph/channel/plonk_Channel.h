@@ -108,7 +108,7 @@ public:
 //        if (this->getInternal() == 0)
 //            operator= (ChannelBase());
 //        else
-//            plonk_assert(other.getTypeCode() == TypeUtility<ChannelBase>::getTypeCode());
+//            plonk_assert (other.getTypeCode() == TypeUtility<ChannelBase>::getTypeCode());
 //    }            
         
     /** Get a weakly linked copy of this object. 

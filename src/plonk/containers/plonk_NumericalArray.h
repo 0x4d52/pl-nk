@@ -262,7 +262,7 @@ public:
 	NumericalArray (const int size, NumericalType* dataToUse, const bool needsNullTermination) throw()
 	:	Base (size, dataToUse, needsNullTermination)
 	{
-		plonk_assert(size > 0);
+		plonk_assert (size > 0);
 	}
 	
 	/** Creates a NumericalArray with a given size (length). */
@@ -280,7 +280,7 @@ public:
 	/** Creates a NumericalArray with a given size (length) ramping from one value to another. */
 	static NumericalArray<NumericalType> line (const int size, const NumericalType start, const NumericalType end) throw()
 	{
-		plonk_assert(size >= 2);
+		plonk_assert (size >= 2);
 		
 		const int numValues = size < 2 ? 2 : size;
 		
@@ -304,7 +304,7 @@ public:
 												 const NumericalType start, 
 												 const NumericalType grow) throw()
 	{
-		plonk_assert(size >= 2);
+		plonk_assert (size >= 2);
 		
 		const int numValues = size < 2 ? 2 : size;
 		
@@ -328,7 +328,7 @@ public:
 											   const NumericalType start, 
 											   const NumericalType grow) throw()
 	{
-		plonk_assert(size >= 2);
+		plonk_assert (size >= 2);
 		
 		const int numValues = size < 2 ? 2 : size;
 		
@@ -351,7 +351,7 @@ public:
 											   const NumericalType lower, 
 											   const NumericalType upper) throw()
 	{
-		plonk_assert(size > 0);
+		plonk_assert (size > 0);
 		
 		const int numValues = size < 1 ? 1 : size;
 		
@@ -378,7 +378,7 @@ public:
 												  const NumericalType lower, 
 												  const NumericalType upper) throw()
 	{
-		plonk_assert(size > 0);
+		plonk_assert (size > 0);
 		
 		const int numValues = size < 1 ? 1 : size;
 		
@@ -398,7 +398,7 @@ public:
 //												  const NumericalType lower, 
 //												  const NumericalType upper) throw()
 //	{
-//		plonk_assert(size > 0);
+//		plonk_assert (size > 0);
 //		
 //		const int numValues = size < 1 ? 1 : size;
 //		
@@ -420,14 +420,14 @@ public:
 												    const double repeats = 1.0, 
 												    const NumericalType peak = TypeUtility<NumericalType>::getTypePeak()) throw()
 	{
-		plonk_assert(repeats > 0.f);
+		plonk_assert (repeats > 0.f);
 		return NumericalArray<double>::line (size, 0.0, Math<double>::get2Pi() * repeats).sin() * peak;
 	}
 	
     static NumericalArray<NumericalType> harmonicTable (const int size, 
                                                         NumericalArray<NumericalType> const& weights) throw()
 	{
-		plonk_assert(weights.length() > 0);
+		plonk_assert (weights.length() > 0);
         
         NumericalArray<double> result = NumericalArray<double>::newClear (size);
         
@@ -445,7 +445,7 @@ public:
 													  const double repeats = 1.0, 
 													  const NumericalType peak = NumericalType(0)) throw()
 	{
-		plonk_assert(repeats > 0.f);
+		plonk_assert (repeats > 0.f);
         NumericalType actualPeak = peak == NumericalType(0) ? TypeUtility<NumericalType>::getTypePeak() : peak;
 		return NumericalArray<double>::line (size, 0.0, Math<double>::get2Pi() * repeats).cos() * actualPeak;
 	}
@@ -455,7 +455,7 @@ public:
 													   const double repeats = 1.0, 
 													   const NumericalType peak = TypeUtility<NumericalType>::getTypePeak()) throw()
 	{
-		plonk_assert(repeats > 0.f);
+		plonk_assert (repeats > 0.f);
 		return NumericalArray<double>::line (size, 0.0, Math<double>::getPi() * repeats).sin() * peak;
 	}
 	
@@ -502,7 +502,7 @@ public:
 	
 	static int sourceLength (const NumericalType* nullTerminatedSourceArray) throw()
 	{
-		plonk_assert(nullTerminatedSourceArray != 0);
+		plonk_assert (nullTerminatedSourceArray != 0);
 		
 		int size = 0;
 		
@@ -522,7 +522,7 @@ public:
 	NumericalArray (const NumericalType* nullTerminatedSourceArray) throw()
 	:	ObjectArray<NumericalType> (sourceSize (nullTerminatedSourceArray), true)
 	{
-		plonk_assert(nullTerminatedSourceArray != 0);
+		plonk_assert (nullTerminatedSourceArray != 0);
 		
 		NumericalType *thisArray = this->getArray();
 		
@@ -541,7 +541,7 @@ public:
 												    const NumericalType* sourceArray, 
 												    const bool needsNullTermination = false) throw()
 	{
-		plonk_assert(sourceArray != 0);
+		plonk_assert (sourceArray != 0);
 		
 		NumericalArray<NumericalType> result = NumericalArray<NumericalType> (NumericalArraySpec (size, false), 
 																			  needsNullTermination);
@@ -578,7 +578,7 @@ public:
 														  NumericalType* sourceArray, 
 														  const bool needsNullTermination = false) throw()
 	{
-		plonk_assert(sourceArray != 0);
+		plonk_assert (sourceArray != 0);
 		return NumericalArray<NumericalType> (size, sourceArray, needsNullTermination);
 	}
 	
@@ -1056,7 +1056,7 @@ public:
 	
 	bool contains (const NumericalType* items) const throw()
 	{
-		plonk_assert(items != 0);
+		plonk_assert (items != 0);
 		return Base::contains (NumericalArray (items));
 	}
 	
@@ -1078,47 +1078,47 @@ public:
 	/** Search for a particular sub sequence withing the array. */
 	int indexOf (const NumericalType* items, const int startIndex = 0) const throw()
 	{
-		plonk_assert(items != 0);
-		plonk_assert(startIndex >= 0);
+		plonk_assert (items != 0);
+		plonk_assert (startIndex >= 0);
 		return Base::indexOf (NumericalArray (items), startIndex);
 	}
 	
 	/** Search for any items in a given array. */
 	int indexOfAny (const NumericalType *items, const int startIndex = 0) const throw()
 	{
-		plonk_assert(items != 0);
-		plonk_assert(startIndex >= 0);
+		plonk_assert (items != 0);
+		plonk_assert (startIndex >= 0);
 		return Base::indexOfAny (NumericalArray (items), startIndex);
 	}
 	
 	Base replace (NumericalArray const& find, const NumericalType *substitute) const throw()
 	{
-		plonk_assert(substitute != 0);
+		plonk_assert (substitute != 0);
 		return Base::replace (find, NumericalArray (substitute));
 	}
 	
 	Base replace (const NumericalType *find, NumericalArray const& substitute) const throw()
 	{
-		plonk_assert(find != 0);
+		plonk_assert (find != 0);
 		return Base::replace(NumericalArray (find), substitute);
 	}
 	
 	Base replace (const NumericalType *find, const NumericalType *substitute) const throw()
 	{
-		plonk_assert(find != 0);
-		plonk_assert(substitute != 0);
+		plonk_assert (find != 0);
+		plonk_assert (substitute != 0);
 		return Base::replace (NumericalArray (find), NumericalArray (substitute));
 	}
 	
 	ObjectArray2DType split(const NumericalType *delimiters) const throw()
 	{
-		plonk_assert(delimiters != 0);
+		plonk_assert (delimiters != 0);
 		return Base::split (NumericalArray(delimiters));
 	}
 
 	ObjectArray2DType splitSequence(const NumericalType *delimitingSequence) const throw()
 	{
-		plonk_assert(delimitingSequence != 0);
+		plonk_assert (delimitingSequence != 0);
 		return Base::splitSequence (NumericalArray (delimitingSequence));
 	}	
 	

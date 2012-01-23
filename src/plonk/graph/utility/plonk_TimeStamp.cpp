@@ -58,7 +58,7 @@ TimeStamp::TimeStamp (LongLong initialTime, double initialFraction) throw()
 :   time (initialTime),
     fraction (initialFraction)
 {
-    plonk_assert(fractionIsValid(this->fraction));
+    plonk_assert (fractionIsValid(this->fraction));
 }
 
 TimeStamp::TimeStamp (TimeStamp const& other) throw()
@@ -108,7 +108,7 @@ TimeStamp& TimeStamp::operator+= (const double offset) throw()
             this->fraction += 1.0;
         }
         
-        plonk_assert(fractionIsValid (this->fraction));
+        plonk_assert (fractionIsValid (this->fraction));
     }
     
     return *this;
@@ -183,9 +183,9 @@ TimeStamp TimeStamp::operator- (TimeStamp const& other) const throw()
 
 void TimeStamp::set (LongLong newTime, double newFraction) throw()
 {
-    plonk_assert(newTime >= 0);
-    plonk_assert(newFraction >= 0.0);
-    plonk_assert(newFraction < 1.0);
+    plonk_assert (newTime >= 0);
+    plonk_assert (newFraction >= 0.0);
+    plonk_assert (newFraction < 1.0);
     
     time = newTime;
     fraction = newFraction;
@@ -193,31 +193,31 @@ void TimeStamp::set (LongLong newTime, double newFraction) throw()
 
 double TimeStamp::toSamples(const double sampleRate) const throw()
 {
-    plonk_assert(sampleRate > 0.0);
+    plonk_assert (sampleRate > 0.0);
     const double seconds = this->toSeconds();
     return seconds * sampleRate;
 }
 
 bool TimeStamp::operator== (TimeStamp const& other) const throw()
 {    
-    plonk_assert(fractionIsValid (this->fraction));
-    plonk_assert(fractionIsValid (other.fraction));
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
     
     return (time == other.time) && (fraction == other.fraction);
 }
 
 bool TimeStamp::operator!= (TimeStamp const& other) const throw()
 {
-    plonk_assert(fractionIsValid (this->fraction));
-    plonk_assert(fractionIsValid (other.fraction));
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
 
     return (time != other.time) || (fraction != other.fraction);
 }
 
 bool TimeStamp::operator< (TimeStamp const& other) const throw()
 {    
-    plonk_assert(fractionIsValid (this->fraction));
-    plonk_assert(fractionIsValid (other.fraction));
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
 
     if (other.isInfinite())
         if (this->isInfinite())
@@ -234,8 +234,8 @@ bool TimeStamp::operator< (TimeStamp const& other) const throw()
 
 bool TimeStamp::operator<= (TimeStamp const& other) const throw()
 {
-    plonk_assert(fractionIsValid (this->fraction));
-    plonk_assert(fractionIsValid (other.fraction));
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
     
     if (other.isInfinite())
         if (this->isInfinite())
@@ -252,8 +252,8 @@ bool TimeStamp::operator<= (TimeStamp const& other) const throw()
 
 bool TimeStamp::operator> (TimeStamp const& other) const throw()
 {
-    plonk_assert(fractionIsValid (this->fraction));
-    plonk_assert(fractionIsValid (other.fraction));
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
     
     if (this->isInfinite())
         if (other.isInfinite())
@@ -270,8 +270,8 @@ bool TimeStamp::operator> (TimeStamp const& other) const throw()
 
 bool TimeStamp::operator>= (TimeStamp const& other) const throw()
 {
-    plonk_assert(fractionIsValid (this->fraction));
-    plonk_assert(fractionIsValid (other.fraction));
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
     
     if (this->isInfinite())
         if (other.isInfinite())

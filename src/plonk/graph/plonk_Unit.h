@@ -254,7 +254,7 @@ public:
                                                                           data, 
                                                                           preferredBlockSize, 
                                                                           preferredSampleRate);
-            plonk_assert(internal->isProxyOwner() == false);
+            plonk_assert (internal->isProxyOwner() == false);
 
             internal->initChannel (i);
                         
@@ -282,7 +282,7 @@ public:
                                                       preferredBlockSize, 
                                                       preferredSampleRate);
         
-        plonk_assert(proxyOwner->isProxyOwner() == true);
+        plonk_assert (proxyOwner->isProxyOwner() == true);
         
         const int numChannels = proxyOwner->getNumChannels();
         UnitBase result (UnitBase::withSize (numChannels));
@@ -451,9 +451,9 @@ public:
     
     UnitBase& put (const int index, UnitBase const& channel) throw()
     {
-        plonk_assert(channel.getNumChannels() == 1); // channel MUST be only a single channel
-        plonk_assert(index >= 0);
-        plonk_assert(index < this->getNumChannels());
+        plonk_assert (channel.getNumChannels() == 1); // channel MUST be only a single channel
+        plonk_assert (index >= 0);
+        plonk_assert (index < this->getNumChannels());
         
         this->getArray() [index] = channel.atUnchecked (0);
         return *this;
@@ -514,7 +514,7 @@ public:
     inline bool channelsHaveSameOverlap() throw()
     {
         const int numChannels = this->getNumChannels();
-        plonk_assert(numChannels > 0);
+        plonk_assert (numChannels > 0);
 
         ChannelType* channels = this->getArray();
                 

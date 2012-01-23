@@ -152,16 +152,16 @@ public:
     template<class ContainerType>
     inline const ContainerType& asUnchecked() const throw()
     {              
-        plonk_assert(this->isItemNotNull());
-        plonk_assert(TypeUtility<ContainerType>::getTypeCode() == this->getTypeCode());
+        plonk_assert (this->isItemNotNull());
+        plonk_assert (TypeUtility<ContainerType>::getTypeCode() == this->getTypeCode());
         return reinterpret_cast<const ContainerType&> (this->getItem());
     }
     
     template<class ContainerType>
     inline ContainerType& asUnchecked() throw()
     {              
-        plonk_assert(this->isItemNotNull());
-        plonk_assert(TypeUtility<ContainerType>::getTypeCode() == this->getTypeCode());
+        plonk_assert (this->isItemNotNull());
+        plonk_assert (TypeUtility<ContainerType>::getTypeCode() == this->getTypeCode());
         return reinterpret_cast<ContainerType&> (this->getItem());
     }
     

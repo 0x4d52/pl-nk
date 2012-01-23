@@ -95,8 +95,8 @@ public:
                                                      this->getSampleRate()));      
         }
         
-        plonk_assert(input.getOverlap (0) == DoubleVariable::getOne());
-        plonk_assert(position.getOverlap (0) == DoubleVariable::getOne());
+        plonk_assert (input.getOverlap (0) == DoubleVariable::getOne());
+        plonk_assert (position.getOverlap (0) == DoubleVariable::getOne());
 
         const SampleType inputValue = input.getValue (0);        
         const SampleType mulAdd (0.5);

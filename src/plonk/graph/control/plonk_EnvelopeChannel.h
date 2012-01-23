@@ -125,7 +125,7 @@ public:
         {
             const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
 
-            plonk_assert(index >= 0);
+            plonk_assert (index >= 0);
             
             if(index >= breakpoints.getNumBreakpoints())
             {
@@ -328,7 +328,7 @@ public:
                          BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                          SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
-        plonk_assert(gate.getNumChannels() == 1);
+        plonk_assert (gate.getNumChannels() == 1);
         
         Inputs inputs;
         inputs.put (IOKey::Breakpoints, breakpoints);

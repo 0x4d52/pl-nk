@@ -67,7 +67,7 @@ public:
         tempBufferPos (0),
         nextInputTimeStamp (TimeStamp::getZero())
     {
-        plonk_assert(sampleRate.getValue() > 0.0);       // no need to resample a DC signal
+        plonk_assert (sampleRate.getValue() > 0.0);       // no need to resample a DC signal
     }
     
     Text getName() const throw()
@@ -94,7 +94,7 @@ public:
     {        
         const UnitType& input = this->getInputAsUnit (IOKey::Signal);
                 
-        plonk_assert(input.getOverlap (channel) == DoubleVariable::getOne());
+        plonk_assert (input.getOverlap (channel) == DoubleVariable::getOne());
         
         const SampleType sourceValue = input.getValue (channel);
         this->initValue (sourceValue);        
@@ -225,7 +225,7 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                
-        plonk_assert(preferredSampleRate.getValue() > 0.0); // no  need to resample a DC signal
+        plonk_assert (preferredSampleRate.getValue() > 0.0); // no  need to resample a DC signal
                 
         Inputs inputs;
         inputs.put (IOKey::Signal, input);

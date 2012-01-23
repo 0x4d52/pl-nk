@@ -78,7 +78,7 @@ public:
         ready (false),
         fullyInitialised (false)
     {
-        plonk_assert(numOutputs >= 1);
+        plonk_assert (numOutputs >= 1);
         
         proxies.getInternal()->setSize (numOutputs, false);
         ChannelType* proxiesArray = proxies.getInternal()->getArray();
@@ -115,32 +115,32 @@ public:
     
     inline const SampleType* getOutputSamples (const int index) const throw() 
     {         
-        plonk_assert(index >= 0);
-        plonk_assert(index < proxies.getInternal()->length());
+        plonk_assert (index >= 0);
+        plonk_assert (index < proxies.getInternal()->length());
         const ChannelType* proxiesArray = proxies.getInternal()->getArray();
         return proxiesArray[index].getOutputSamples();
     }
     
     inline SampleType* getOutputSamples (const int index) throw() 
     {        
-        plonk_assert(index >= 0);
-        plonk_assert(index < proxies.getInternal()->length());
+        plonk_assert (index >= 0);
+        plonk_assert (index < proxies.getInternal()->length());
         ChannelType* proxiesArray = proxies.getInternal()->getArray();
         return proxiesArray[index].getOutputSamples();
     }
     
     inline const Buffer getOutputBuffer (const int index) const throw() 
     {         
-        plonk_assert(index >= 0);
-        plonk_assert(index < proxies.getInternal()->length());
+        plonk_assert (index >= 0);
+        plonk_assert (index < proxies.getInternal()->length());
         const ChannelType* proxiesArray = proxies.getInternal()->getArray();
         return proxiesArray[index].getOutputBuffer();
     }
     
     inline Buffer getOutputBuffer (const int index) throw() 
     {                 
-        plonk_assert(index >= 0);
-        plonk_assert(index < proxies.getInternal()->length());
+        plonk_assert (index >= 0);
+        plonk_assert (index < proxies.getInternal()->length());
         ChannelType* proxiesArray = proxies.getInternal()->getArray();
         return proxiesArray[index].getOutputBuffer();
     }    
@@ -152,16 +152,16 @@ public:
     
     void initProxyValue (const int index, SampleType const& value)
     {
-        plonk_assert(index >= 0);
-        plonk_assert(index < proxies.getInternal()->length());
+        plonk_assert (index >= 0);
+        plonk_assert (index < proxies.getInternal()->length());
         ChannelType* proxiesArray = proxies.getInternal()->getArray();
         return proxiesArray[index].initValue (value);
     }
     
     ChannelType& getProxy (const int index) throw()
     {
-        plonk_assert(index >= 0);
-        plonk_assert(index < proxies.getInternal()->length());
+        plonk_assert (index >= 0);
+        plonk_assert (index < proxies.getInternal()->length());
         ChannelType* proxiesArray = proxies.getInternal()->getArray();
         return proxiesArray[index];
     }

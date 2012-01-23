@@ -103,21 +103,21 @@ unsigned int RNG::uniform (const unsigned int max) throw()
 unsigned int RNG::uniform (const unsigned int min, 
                            const unsigned int max) throw()
 {
-    plonk_assert(max > min);    
+    plonk_assert (max > min);    
     return pl_RNG_NextInt (this->getInternal()->getRNGRef(), max - min) + min;
 }
 
 int RNG::uniform (const int max) throw()
 {
-    plonk_assert(max > 0);
+    plonk_assert (max > 0);
     return pl_RNG_NextInt (this->getInternal()->getRNGRef(), max);
 }
 
 int RNG::uniform (const int min, const int max) throw()
 {
-    plonk_assert(min >= 0);
-    plonk_assert(max > 0);
-    plonk_assert(max > min);    
+    plonk_assert (min >= 0);
+    plonk_assert (max > 0);
+    plonk_assert (max > min);    
     return pl_RNG_NextInt (this->getInternal()->getRNGRef(), max - min) + min;
 }
 

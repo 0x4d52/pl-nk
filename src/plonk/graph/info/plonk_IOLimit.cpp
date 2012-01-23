@@ -72,7 +72,7 @@ IOLimit IOLimit::createMaximum (Measure::Name measure, const double maximum) thr
 
 IOLimit IOLimit::createClipped (Measure::Name measure, const double minimum, const double maximum) throw()
 {
-    plonk_assert(minimum < maximum);
+    plonk_assert (minimum < maximum);
     return IOLimit (IOLimit::Clipped, measure, minimum, maximum);
 }
 
@@ -163,13 +163,13 @@ bool IOLimit::hasMaximum() const throw()
 
 double IOLimit::getMinimum() const throw()
 {
-    plonk_assert(hasMinimum());
+    plonk_assert (hasMinimum());
     return minimum;
 }
 
 double IOLimit::getMaximum() const throw()
 {
-    plonk_assert(hasMaximum());
+    plonk_assert (hasMaximum());
     return maximum;
 }
 

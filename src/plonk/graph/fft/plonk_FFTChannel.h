@@ -104,7 +104,7 @@ public:
         SampleType* const imagOutputSamples = this->getOutputSamples (ImagOutput);
         const int outputBufferLength = this->getOutputBuffer (0).length();
         
-        plonk_assert(outputBufferLength == inputBuffer.length());
+        plonk_assert (outputBufferLength == inputBuffer.length());
         
         if (outputBufferLength != this->fft.length())
             this->fft = FFTEngineType (outputBufferLength);

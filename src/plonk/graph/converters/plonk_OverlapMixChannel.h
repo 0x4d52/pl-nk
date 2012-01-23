@@ -139,7 +139,7 @@ public:
                 const SampleType* const inputSamples = inputBuffer.getArray();
                 const int inputBufferLength = inputBuffer.length();
 
-                plonk_assert(inputBufferLength == outputBufferLength);
+                plonk_assert (inputBufferLength == outputBufferLength);
                                 
                 for (i = 0; i < inputBufferLength; ++i)
                     tempBufferSamples[tempBufferPos++] += inputSamples[i];
@@ -163,7 +163,7 @@ public:
             const Buffer inputBuffer (inputUnit.process (info, channel));            
             const SampleType* const inputSamples = inputBuffer.getArray();
             
-            plonk_assert(outputBufferLength == inputBuffer.length());
+            plonk_assert (outputBufferLength == inputBuffer.length());
             
             for (i = 0; i < outputBufferLength; ++i)
                 outputSamples[i] = inputSamples[i];
@@ -213,8 +213,8 @@ public:
     static UnitType ar (UnitType const& input, 
                         DoubleVariable const& overlap = DoubleVariable::getHalf()) throw()
     {                        
-        plonk_assert(overlap.getValue() >= TypeUtility<double>::getTypeEpsilon());
-        plonk_assert(overlap.getValue() <= 1.0);
+        plonk_assert (overlap.getValue() >= TypeUtility<double>::getTypeEpsilon());
+        plonk_assert (overlap.getValue() <= 1.0);
         
         Inputs inputs;
         inputs.put (IOKey::Signal, input);

@@ -97,7 +97,7 @@ SampleRate SampleRate::getDefaultBlockRate() throw()
 
 const SampleRate SampleRate::getFractionOfDefault(IntVariable const& divisor) throw()
 {
-    plonk_assert(divisor.getValue() > 0);
+    plonk_assert (divisor.getValue() > 0);
     return getDefault() / divisor;
 }
 

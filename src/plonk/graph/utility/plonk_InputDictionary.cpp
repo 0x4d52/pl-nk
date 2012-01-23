@@ -107,7 +107,7 @@ InputDictionary InputDictionary::getChannel (const int index) throw()
     const IntArray& keys = this->getKeys();
     const int numKeys = keys.length();
     
-    plonk_assert(numKeys == this->length());
+    plonk_assert (numKeys == this->length());
     
     for (int i = 0; i < numKeys; ++i)
     {

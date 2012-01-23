@@ -104,8 +104,8 @@ public:
                             nextGateOn,
                             nextGateOff))
 	{
-        plonk_assert(nextGateOn >= -2);  // must be a special code or a real index, >=0
-        plonk_assert(nextGateOff >= -1); // not the only infinite loop but one of them!
+        plonk_assert (nextGateOn >= -2);  // must be a special code or a real index, >=0
+        plonk_assert (nextGateOff >= -1); // not the only infinite loop but one of them!
 	}
 	
     explicit BreakpointBase (Internal* internalToUse) throw() 
@@ -181,9 +181,9 @@ public:
                         NextArray const& nextGateOffs) throw()
     :   breakpoints (BreakpointArrayType::withSize (times.length()))
 	{
-        plonk_assert(levels.length() >= 2);
-        plonk_assert(times.length() == (levels.length() - 1));
-        plonk_assert(((nextGateOns.length() == 0) && (nextGateOffs.length() == 0)) || 
+        plonk_assert (levels.length() >= 2);
+        plonk_assert (times.length() == (levels.length() - 1));
+        plonk_assert (((nextGateOns.length() == 0) && (nextGateOffs.length() == 0)) || 
                      ((nextGateOns.length() == (levels.length() - 1))) && ((nextGateOffs.length() == (levels.length() - 1))));
 
         

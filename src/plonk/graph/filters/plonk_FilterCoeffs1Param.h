@@ -69,7 +69,7 @@ public:
     :   Internal (FormType::NumCoeffs, inputs, data, blockSize, sampleRate),
         inputKeys (ShapeType::getInputKeys())
     {
-        plonk_assert(ShapeType::NumParams == 1);
+        plonk_assert (ShapeType::NumParams == 1);
 
         SampleRate& filterSampleRate = this->getInputAsSampleRate (IOKey::FilterSampleRate);
         filterSampleRate.addReceiver (this);
@@ -95,10 +95,10 @@ public:
         
     void initChannel (const int channel) throw()
     {        
-        plonk_assert(ShapeType::NumParams == 1);
+        plonk_assert (ShapeType::NumParams == 1);
 
         UnitType& param0Unit = this->getInputAsUnit (inputKeys.atUnchecked (0));
-        plonk_assert(param0Unit.getOverlap (0) == DoubleVariable::getOne());
+        plonk_assert (param0Unit.getOverlap (0) == DoubleVariable::getOne());
 
         if ((channel % this->getNumChannels()) == 0)
         {
@@ -254,7 +254,7 @@ public:
     {                
         const IntArray inputKeys = ShapeType::getInputKeys();
         
-        plonk_assert(inputKeys.length() == 1);
+        plonk_assert (inputKeys.length() == 1);
         
         const int numInputChannels = param0.getNumChannels();
         UnitType result (UnitType::emptyWithAllocatedSize (numInputChannels * FormType::NumCoeffs));

@@ -95,8 +95,8 @@ public:
      This can't be performed in-place (i.e., input and output must not point to the same data or overlap). */
     inline void forward (Buffer& output, Buffer const& input) throw()
     {
-        plonk_assert(output.length() >= this->length());
-        plonk_assert(input.length() >= this->length());
+        plonk_assert (output.length() >= this->length());
+        plonk_assert (input.length() >= this->length());
         this->getInternal()->forward (output.getArray(), input.getArray());
     }    
     
@@ -111,8 +111,8 @@ public:
      This can't be performed in-place (i.e., input and output must not point to the same data or overlap). */
     inline void inverse (Buffer& output, Buffer const& input) throw()
     {
-        plonk_assert(output.length() >= this->length());
-        plonk_assert(input.length() >= this->length());
+        plonk_assert (output.length() >= this->length());
+        plonk_assert (input.length() >= this->length());
         this->getInternal()->inverse (output.getArray(), input.getArray());
     }        
     

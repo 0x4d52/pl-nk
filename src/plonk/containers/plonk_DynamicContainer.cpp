@@ -73,7 +73,7 @@ Dynamic Dynamic::fromWeak (Weak const& weak) throw()
 
 Dynamic Dynamic::getMaxBlockSize() const throw()
 {
-    plonk_assert(this->isItemNotNull());
+    plonk_assert (this->isItemNotNull());
     const int typeCode = this->getTypeCode();
     
     switch (typeCode) 
@@ -93,7 +93,7 @@ Dynamic Dynamic::getMaxBlockSize() const throw()
 
 Dynamic Dynamic::getMaxSampleRate() const throw()
 {
-    plonk_assert(this->isItemNotNull());
+    plonk_assert (this->isItemNotNull());
     const int typeCode = this->getTypeCode();
     
     switch (typeCode) 
@@ -113,7 +113,7 @@ Dynamic Dynamic::getMaxSampleRate() const throw()
 
 int Dynamic::getNumChannels() const throw()
 {
-    plonk_assert(this->isItemNotNull());
+    plonk_assert (this->isItemNotNull());
     const int typeCode = this->getTypeCode();
     
     switch (typeCode) 
@@ -212,7 +212,7 @@ int Dynamic::getNumChannels() const throw()
 
 Dynamic Dynamic::getChannel (const int index) throw()
 {
-    plonk_assert(this->isItemNotNull());
+    plonk_assert (this->isItemNotNull());
     const int typeCode = this->getTypeCode();
     
     switch (typeCode) 

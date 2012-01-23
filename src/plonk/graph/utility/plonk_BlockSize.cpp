@@ -59,13 +59,13 @@ BlockSize::BlockSize (SampleRate const& sampleRate) throw()
 BlockSize::BlockSize (const int initValue) throw()
 :   Base (initValue)
 {
-    plonk_assert(this->getValue() > 0);
+    plonk_assert (this->getValue() > 0);
 }
 
 BlockSize::BlockSize (IntVariable const& initValue) throw()
 :   Base (initValue)
 {
-    plonk_assert(this->getValue() > 0);
+    plonk_assert (this->getValue() > 0);
 }
 
 BlockSize::BlockSize (BlockSize const& copy) throw()

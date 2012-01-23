@@ -780,7 +780,7 @@ public:
 	 You must make sure that the array index is in range when using this version. */		
 	inline ObjectType& atUnchecked (const int index) throw()
 	{
-		plonk_assert((index >= 0) && (index < this->getInternal()->size()));
+		plonk_assert ((index >= 0) && (index < this->getInternal()->size()));
 		return this->getInternal()->getArray()[index];
 	}
 
@@ -788,7 +788,7 @@ public:
 	 You must make sure that the array index is in range when using this version. */		
 	inline const ObjectType& atUnchecked (const int index) const throw()
 	{
-		plonk_assert((index >= 0) && (index < this->getInternal()->size()));
+		plonk_assert ((index >= 0) && (index < this->getInternal()->size()));
 		return this->getInternal()->getArray()[index];
 	}	
 	
@@ -1004,7 +1004,7 @@ public:
 	/** Compares whether the contents of two arrays are the same. */
 	bool operator== (const ObjectType* otherArray) const throw()
 	{		
-		plonk_assert(otherArray != 0);
+		plonk_assert (otherArray != 0);
 		
 		const ObjectType *thisArray = this->getArray();
 		

@@ -112,14 +112,14 @@ public:
     inline const SampleType& getValue() const throw() 
     { 
         // the underlying Channel or Unit may not have called initValue()
-        plonk_assert(hasInitialisedValue == true); 
+        plonk_assert (hasInitialisedValue == true); 
         return outputBuffer.last();
     }
     
     inline void setOutputBuffer (Buffer const& externalBuffer) throw()
     {
-        plonk_assert(this->canUseExternalBuffer());
-        plonk_assert(externalBuffer.length() == this->getBlockSize().getValue());
+        plonk_assert (this->canUseExternalBuffer());
+        plonk_assert (externalBuffer.length() == this->getBlockSize().getValue());
         usingExternalBuffer = true;
         outputBuffer = externalBuffer;
     }
@@ -128,7 +128,7 @@ public:
     
     inline void removeExternalBuffer() throw()
     {
-        plonk_assert(usingExternalBuffer == true);
+        plonk_assert (usingExternalBuffer == true);
         usingExternalBuffer = false;
         outputBuffer = Buffer::newClear (this->getBlockSize().getValue());
     }
@@ -137,7 +137,7 @@ public:
     {        
         if (newBlockSize != this->getBlockSize())
         {
-            plonk_assert(newBlockSize.getValue() > 0);
+            plonk_assert (newBlockSize.getValue() > 0);
 
             this->getBlockSize().removeReceiver (this);
             this->setBlockSizeInternal (newBlockSize);
@@ -154,7 +154,7 @@ public:
     virtual void initValue (SampleType const& value) throw()
     {
 #ifdef PLONK_DEBUG
-        plonk_assert(outputBuffer.length() > 0);
+        plonk_assert (outputBuffer.length() > 0);
         hasInitialisedValue = true;
 #endif                
         outputBuffer.last() = value;

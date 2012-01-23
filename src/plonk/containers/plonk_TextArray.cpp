@@ -196,7 +196,7 @@ TextArray::TextArray (TextArray const& array0,
 
 int TextArray::indexOf(Text const& item, const int startIndex) const throw()
 {
-	plonk_assert(startIndex >= 0);
+	plonk_assert (startIndex >= 0);
 	
 	const Text *array = this->getArray();
 	
@@ -215,7 +215,7 @@ int TextArray::indexOf(Text const& item, const int startIndex) const throw()
 
 int TextArray::indexOfIgnoreCase (Text const& item, const int startIndex) const throw()
 {
-	plonk_assert(startIndex >= 0);
+	plonk_assert (startIndex >= 0);
 	
 	const Text *array = this->getArray();
 	

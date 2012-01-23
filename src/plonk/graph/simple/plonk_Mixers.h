@@ -122,7 +122,7 @@ public:
         
         for (int channel = 0; channel < numChannels; ++channel)
         {
-            plonk_assert(inputUnit.getOverlap (channel) == DoubleVariable::getOne());
+            plonk_assert (inputUnit.getOverlap (channel) == DoubleVariable::getOne());
             
             const Buffer inputBuffer (inputUnit.process (info, channel));
             const SampleType* const inputSamples = inputBuffer.getArray();
@@ -258,7 +258,7 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                plonk_assert(inputUnit.getOverlap (channel) == DoubleVariable::getOne());
+                plonk_assert (inputUnit.getOverlap (channel) == DoubleVariable::getOne());
                 
                 const Buffer inputBuffer (inputUnit.process (info, channel));
                 const SampleType* const inputSamples = inputBuffer.getArray();

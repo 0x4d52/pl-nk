@@ -138,7 +138,7 @@
     #define plonk_assert        assert
 	#define plonk_assertfalse	(assert (false))
 #else
-	#define plonk_assert(x)		{ }
+	#define plonk_assert (x)	{ }
 	#define plonk_assertfalse	{ }
 #endif
 
@@ -209,7 +209,7 @@ struct PlinkProcess
     
     static void init (PlinkProcess* pp, void* userData, int numOutputs, int numInputs)
     {
-        plonk_assert(N >= (numInputs + numOutputs));
+        plonk_assert (N >= (numInputs + numOutputs));
         
         pp->base.userData = userData;
         pp->base.numOutputs = numOutputs;

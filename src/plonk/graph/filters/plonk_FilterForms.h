@@ -128,7 +128,7 @@ public:
         const int inputLength = inputBuffer.length();
         const int a0Length = a0Buffer.length();
         
-        plonk_assert((a0Length == a1Buffer.length()) &&
+        plonk_assert ((a0Length == a1Buffer.length()) &&
                      (a0Length == b1Buffer.length()));  // coeff buffers need to be the same length
         
         SampleType y0;
@@ -344,7 +344,7 @@ public:
         const int inputLength = inputBuffer.length();
         const int a0Length = a0Buffer.length();
         
-        plonk_assert((a0Length == a1Buffer.length()) &&
+        plonk_assert ((a0Length == a1Buffer.length()) &&
                      (a0Length == a2Buffer.length()) &&
                      (a0Length == b1Buffer.length()) &&
                      (a0Length == b2Buffer.length()));;  // coeff buffers need to be the same length
@@ -488,7 +488,7 @@ public:
         const int inputLength = inputBuffer.length();
         const int a0Length = a0Buffer.length();
         
-        plonk_assert((a0Length == a1Buffer.length()) &&
+        plonk_assert ((a0Length == a1Buffer.length()) &&
                      (a0Length == a2Buffer.length()) &&
                      (a0Length == b1Buffer.length()) &&
                      (a0Length == b2Buffer.length()));;  // coeff buffers need to be the same length

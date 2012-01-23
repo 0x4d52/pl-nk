@@ -90,7 +90,7 @@ public:
     {
         if (newSampleRate != this->getSampleRate())
         {
-            plonk_assert(newSampleRate.getValue() >= 0.0);
+            plonk_assert (newSampleRate.getValue() >= 0.0);
 
             this->getSampleRate().removeReceiver (this);
             this->setSampleRateInternal (newSampleRate);
@@ -104,8 +104,8 @@ public:
     {        
         if (newOverlap != this->getOverlap())
         {
-            plonk_assert(newOverlap.getValue() > 0.0);
-            plonk_assert(newOverlap.getValue() <= 1.0);
+            plonk_assert (newOverlap.getValue() > 0.0);
+            plonk_assert (newOverlap.getValue() <= 1.0);
 
             this->getOverlap().removeReceiver (this);
             this->setOverlapInternal (newOverlap);

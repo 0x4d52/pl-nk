@@ -124,7 +124,7 @@ public:
         Busses& busses (this->getInputAsBusses (IOKey::Busses));
         Bus& bus = busses.wrapAt (channel);
         
-        plonk_assert(bus.getSampleRate() == this->getSampleRate());
+        plonk_assert (bus.getSampleRate() == this->getSampleRate());
         
         bus.read (nextValidReadTime, 
                   outputBufferLength, 

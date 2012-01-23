@@ -114,7 +114,7 @@ public:
         this->setBlockSize (BlockSize::decide (input.getBlockSize (channel),
                                                this->getBlockSize()));
         
-        plonk_assert(input.getOverlap (channel) == DoubleVariable::getOne());
+        plonk_assert (input.getOverlap (channel) == DoubleVariable::getOne());
         
         this->initValue (SampleType (0));
     }    
@@ -129,7 +129,7 @@ public:
         Busses& busses (this->getInputAsBusses (IOKey::Busses));
         Bus& bus = busses.wrapAt (channel);
 
-        plonk_assert(bus.getSampleRate() == this->getSampleRate());
+        plonk_assert (bus.getSampleRate() == this->getSampleRate());
 
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Signal));
         

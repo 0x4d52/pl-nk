@@ -91,7 +91,7 @@ public:
         
         if (blockSizeSource == bufferSize)
         {
-            plonk_assert(bufferSize.getValue() > buffer.length()); // code assumes the buffer will only grow at the moment
+            plonk_assert (bufferSize.getValue() > buffer.length()); // code assumes the buffer will only grow at the moment
             
             buffer.setSize (bufferSize.getValue(), true); // copies existing data and zeros extra space too
             bufferEndTime = bufferStartTime + TimeStamp::fromSamples (bufferSize.getValue(), sampleRate);
@@ -136,7 +136,7 @@ public:
             shouldMix = true;
             
             // if mixing on a bus the write size must match the write size set for this bus on this block
-            plonk_assert(numWriteSamples == firstWriteSize); 
+            plonk_assert (numWriteSamples == firstWriteSize); 
         }
         else
         {
@@ -208,7 +208,7 @@ public:
             if (bufferOffsetSamples < 0)
                 bufferOffsetSamples += currentBufferSize - 1; // -1 due to being rounded in the wrong direction above when negative
             
-            plonk_assert(bufferOffsetSamples < currentBufferSize);
+            plonk_assert (bufferOffsetSamples < currentBufferSize);
             
             SampleType* const bufferSamples = buffer.getArray();
             
@@ -323,7 +323,7 @@ public:
 //        if (this->getInternal() == 0)
 //            operator= (BusBuffer());
 //        else
-//            plonk_assert(other.getTypeCode() == TypeUtility<BusBuffer>::getTypeCode());
+//            plonk_assert (other.getTypeCode() == TypeUtility<BusBuffer>::getTypeCode());
 //    }       
         
     static const BusBuffer& getNull() throw()
@@ -384,7 +384,7 @@ public:
     {
         BusDictionary& dictionary = getBusDictionary();
         
-        plonk_assert(dictionary.getKeys().contains (name) == false);
+        plonk_assert (dictionary.getKeys().contains (name) == false);
 
         BusBuffer newBusBuffer (bufferSize, writeBlockSize, sampleRate);
         dictionary.put (name, newBusBuffer);

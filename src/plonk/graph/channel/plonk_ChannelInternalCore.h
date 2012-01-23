@@ -60,7 +60,7 @@ struct ChannelData<ChannelInternalCore>
 
 /** The base, core class for all internal channel processes. 
  Contains the core functionality for an audio processing channel independent 
- of sample type (float, int etc).*/
+ of sample type (float, short, Int24, int etc).*/
 class ChannelInternalCore
 {
 public:
@@ -84,7 +84,7 @@ public:
     bool shouldBeDeletedNow (TimeStamp const& time) const throw();
         
     inline Inputs getInputs() const throw()                                             { return this->inputs; }
-    template<class Type> inline const Type& getInputAs (const int key) const throw()    { return this->inputs[key].asUnchecked<Type>();}
+    template<class Type> inline const Type& getInputAs (const int key) const throw()    { return this->inputs[key].asUnchecked<Type>(); }
     template<class Type> inline Type& getInputAs (const int key) throw()                { return this->inputs[key].asUnchecked<Type>(); }
     
     BlockSize getBlockSize() const throw()    { return blockSize; }
@@ -100,8 +100,8 @@ public:
     virtual bool isProxyOwner() const throw()           { return false; }
     virtual bool isProxy() const throw()                { return false; }
     virtual bool isTypeConverter() const throw()        { return false; }
-    virtual bool canUseExternalBuffer() const throw()   { return true; }
-    virtual double getLatency() const throw()           { return 0.0; }
+    virtual bool canUseExternalBuffer() const throw()   { return true;  }
+    virtual double getLatency() const throw()           { return 0.0;   }
     
     virtual Text getLabel() const throw()               { return identifier; }  // virtual due to proxies
     virtual void setLabel (Text const& newId) throw();                          // virtual due to proxies

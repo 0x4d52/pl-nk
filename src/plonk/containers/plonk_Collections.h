@@ -394,7 +394,7 @@ public:
 	{
 		ObjectArray<ValueType> const& values = getValues();
 		
-		plonk_assert(values.length() == getKeys().length()); // these should be the same length!
+		plonk_assert (values.length() == getKeys().length()); // these should be the same length!
 		
 		return values.length();
 	}
@@ -405,7 +405,7 @@ public:
 		ObjectArray<ValueType> const& values = getValues();
 		ObjectArray<KeyType> const& keys = getKeys();
 		
-		plonk_assert(values.size() == keys.size()); // these should be the same size!
+		plonk_assert (values.size() == keys.size()); // these should be the same size!
 		
 		return values.size();
 	}

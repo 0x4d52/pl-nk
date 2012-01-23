@@ -106,7 +106,7 @@ public:
         const Buffer realBuffer (inputUnit.process (info, realIndex));
         const Buffer imagBuffer (inputUnit.process (info, imagIndex));
         
-        plonk_assert(realBuffer.length() == imagBuffer.length());
+        plonk_assert (realBuffer.length() == imagBuffer.length());
         
         const SampleType* const realInputSamples = realBuffer.getArray();
         const SampleType* const imagInputSamples = imagBuffer.getArray();
@@ -114,7 +114,7 @@ public:
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
         
-        plonk_assert(outputBufferLength == realBuffer.length());
+        plonk_assert (outputBufferLength == realBuffer.length());
         
         if (outputBufferLength != this->fft.length())
             this->fft = FFTEngineType (outputBufferLength);
@@ -175,14 +175,14 @@ public:
     /** IFFTs a signal. */
     static inline UnitType ar (UnitType const& input) throw()
     {        
-        plonk_assert((input.getNumChannels() % 2) == 0); // must be real and imag pairs
+        plonk_assert ((input.getNumChannels() % 2) == 0); // must be real and imag pairs
         
         // need to put these asserts in the initChannel
-//        plonk_assert(input.getBlockSize (0) == input.getBlockSize (1));
-//        plonk_assert(input.getSampleRate (0) == input.getSampleRate (1));
+//        plonk_assert (input.getBlockSize (0) == input.getBlockSize (1));
+//        plonk_assert (input.getSampleRate (0) == input.getSampleRate (1));
         
         const int numOutputChannels = input.getNumChannels() / 2;
-        plonk_assert(numOutputChannels > 0);
+        plonk_assert (numOutputChannels > 0);
         
         UnitType result (UnitType::emptyWithAllocatedSize (numOutputChannels));
         Data data = { -1.0, -1.0 };

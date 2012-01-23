@@ -91,7 +91,7 @@ public:
         UnitsType groupedCoeffs = coeffs.group (FormType::NumCoeffs);
         UnitType channelCoeffs = groupedCoeffs.wrapAt (index);
         
-//        plonk_assert(channelCoeffs.getNumChannels() == FormType::NumCoeffs);
+//        plonk_assert (channelCoeffs.getNumChannels() == FormType::NumCoeffs);
 //        
 //        for (int i = 0; i < FormType::NumCoeffs; ++i)
 //            channelCoeffs.put (i, channelCoeffs.atUnchecked (i).getChannel (index));
@@ -188,8 +188,8 @@ public:
         const int requiredCoeffs = FormType::NumCoeffs;
         const int numCoeffChannels = coeffs.getNumChannels();
         
-        plonk_assert(numCoeffChannels > 0);
-        plonk_assert((numCoeffChannels % requiredCoeffs) == 0);
+        plonk_assert (numCoeffChannels > 0);
+        plonk_assert ((numCoeffChannels % requiredCoeffs) == 0);
         
         const int numOutputChannels = plonk::max (input.getNumChannels(), numCoeffChannels / requiredCoeffs);
         UnitType result (UnitType::withSize (numOutputChannels));
@@ -228,8 +228,8 @@ public:
 //        const int requiredCoeffs = FormType::NumCoeffs;
 //        const int numCoeffChannels = coeffs.getNumChannels();
 //        
-//        plonk_assert(numCoeffChannels > 0);
-//        plonk_assert((numCoeffChannels % requiredCoeffs) == 0);
+//        plonk_assert (numCoeffChannels > 0);
+//        plonk_assert ((numCoeffChannels % requiredCoeffs) == 0);
 //        
 //        const int numOutputChannels = plonk::max (input.getNumChannels(), numCoeffChannels / requiredCoeffs);
 //        UnitType result (UnitType::withSize (numOutputChannels));

@@ -53,24 +53,23 @@ ChannelInternalCore::ChannelInternalCore (Inputs const& inputsToUse,
     blockSize (blockSizeToUse),
     sampleRate (sampleRateToUse),
     overlap (inputs.containsKey (IOKey::OverlapMake) ? getInputAs<DoubleVariable> (IOKey::OverlapMake) : DoubleVariable::getOne())
-
 {
     cacheSampleDurationTicks();
     
-    plonk_assert(blockSize.getValue() >= 0);
-    plonk_assert(overlap.getValue() > 0.0);
-    plonk_assert(overlap.getValue() <= 1.0);
+    plonk_assert (blockSize.getValue() >= 0);
+    plonk_assert (overlap.getValue() > 0.0);
+    plonk_assert (overlap.getValue() <= 1.0);
 }
 
 void ChannelInternalCore::setNextTimeStamp (TimeStamp const& time) throw()
 {
-    plonk_assert((nextTimeStamp.isInfinite() && time.isInfinite()) || (time > nextTimeStamp)); // gone backwards or wraparound
+    plonk_assert ((nextTimeStamp.isInfinite() && time.isInfinite()) || (time > nextTimeStamp)); // gone backwards or wraparound
     nextTimeStamp = time;
 }
 
 void ChannelInternalCore::setLastTimeStamp (TimeStamp const& time) throw()
 {
-    plonk_assert(time.isFinite());
+    plonk_assert (time.isFinite());
     lastTimeStamp = time;
 }
 

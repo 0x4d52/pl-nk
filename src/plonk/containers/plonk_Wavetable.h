@@ -60,7 +60,7 @@ public:
     :   Buffer (Buffer::withSize (buffer.length() * 2, false))
     {
         const int bufferLength = buffer.length();
-        plonk_assert(bufferLength > 0);
+        plonk_assert (bufferLength > 0);
         
         const SampleType* const bufferSamples = buffer.getArray();     
         SampleType* tableSamples = Buffer::getArray();
@@ -126,14 +126,14 @@ public:
     
     SampleType atUnchecked (const int index) const throw()
     {
-        plonk_assert((index >= 0) && (index < this->length()));
+        plonk_assert ((index >= 0) && (index < this->length()));
         return this->getArray()[index];
     }
 
     void put (const int index, SampleType const& value) throw()
     {
         const int tableLength = this->length();
-        plonk_assert((index >= 0) && (index < tableLength));
+        plonk_assert ((index >= 0) && (index < tableLength));
         SampleType* const tableSamples = Buffer::getArray();
         tableSamples[index] = value;
         tableSamples[index + tableLength] = value;
