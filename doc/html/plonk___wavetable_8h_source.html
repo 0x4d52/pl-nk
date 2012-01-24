@@ -215,7 +215,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00147"></a>00147     
 <a name="l00148"></a><a class="code" href="class_wavetable_base.html#af5120a4f019ecc5bde53314ddd471e65">00148</a>     <span class="keyword">static</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a> <a class="code" href="class_wavetable_base.html#af5120a4f019ecc5bde53314ddd471e65">sineTable</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_wavetable_base.html#a1d94a8a4afa129cc74829b06c258ba96" title="Size is the actual number of elements of storage needed for the array.">size</a>, <span class="keyword">const</span> <span class="keywordtype">double</span> repeats = 1.0) throw()
 <a name="l00149"></a>00149         {
-<a name="l00150"></a>00150                 <span class="keywordflow">return</span> <a class="code" href="class_wavetable_base.html#a4b6ed02af8eddc47752a40b75b8fe4fe">WavetableBase</a> (<a class="code" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958" title="Creates a NumericalArray with a given size (length) containing one or more sine tables.">Buffer::sineTable</a> (size, repeats));
+<a name="l00150"></a>00150                 <span class="keywordflow">return</span> <a class="code" href="class_wavetable_base.html#a4b6ed02af8eddc47752a40b75b8fe4fe">WavetableBase</a> (<a class="code" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958" title="Creates a NumericalArray with a given size (length) with a linear random distribution.">Buffer::sineTable</a> (size, repeats));
 <a name="l00151"></a>00151         }
 <a name="l00152"></a>00152         
 <a name="l00154"></a><a class="code" href="class_wavetable_base.html#a0db8507548709b2b6955f8ff3118759d">00154</a>         <span class="keyword">static</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a> <a class="code" href="class_wavetable_base.html#a0db8507548709b2b6955f8ff3118759d" title="Creates a Wavetable with a given size (length) containing one or more cosine tables.">cosineTable</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_wavetable_base.html#a1d94a8a4afa129cc74829b06c258ba96" title="Size is the actual number of elements of storage needed for the array.">size</a>, <span class="keyword">const</span> <span class="keywordtype">double</span> repeats = 1.0) throw()
@@ -255,13 +255,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00194"></a>00194     
 <a name="l00195"></a><a class="code" href="class_wavetable_base.html#ac119f4a663444522a8638d7a73a1d7d7">00195</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="code" href="class_wavetable_base.html#ac119f4a663444522a8638d7a73a1d7d7">sine512</a>() throw()
 <a name="l00196"></a>00196     {
-<a name="l00197"></a>00197         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a> table (<a class="code" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958" title="Creates a NumericalArray with a given size (length) containing one or more sine tables.">Buffer::sineTable</a> (512, 1.0));
+<a name="l00197"></a>00197         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a> table (<a class="code" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958" title="Creates a NumericalArray with a given size (length) with a linear random distribution.">Buffer::sineTable</a> (512, 1.0));
 <a name="l00198"></a>00198         <span class="keywordflow">return</span> table;
 <a name="l00199"></a>00199     }    
 <a name="l00200"></a>00200         
 <a name="l00201"></a><a class="code" href="class_wavetable_base.html#aa463735968275e3be8472b75bcb35cab">00201</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="code" href="class_wavetable_base.html#aa463735968275e3be8472b75bcb35cab">sine8192</a>() throw()
 <a name="l00202"></a>00202     {
-<a name="l00203"></a>00203         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a> table (<a class="code" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958" title="Creates a NumericalArray with a given size (length) containing one or more sine tables.">Buffer::sineTable</a> (8192, 1.0));        
+<a name="l00203"></a>00203         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_wavetable_base.html">WavetableBase</a> table (<a class="code" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958" title="Creates a NumericalArray with a given size (length) with a linear random distribution.">Buffer::sineTable</a> (8192, 1.0));        
 <a name="l00204"></a>00204         <span class="keywordflow">return</span> table;        
 <a name="l00205"></a>00205     }    
 <a name="l00206"></a>00206     
@@ -294,7 +294,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:12 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

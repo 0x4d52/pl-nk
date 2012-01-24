@@ -115,33 +115,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00043"></a>00043 
 <a name="l00044"></a>00044 <a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">PLANK_BEGIN_C_LINKAGE</a>
 <a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">00046</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankSimpleStack* <a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>; 
-<a name="l00047"></a>00047 
-<a name="l00048"></a><a class="code" href="plank___simple_stack_8h.html#a453a1ce7007b4c00676449802a07c6f9">00048</a> <span class="keyword">typedef</span> <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> (*<a class="code" href="plank___simple_stack_8h.html#a453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a>)(<a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>);
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050 <a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> <a class="code" href="plank___simple_stack_8c.html#ab5f7b15c3e776be779eb2ccf3ce68aa0">pl_SimpleStack_CreateAndInit</a>();
-<a name="l00051"></a>00051 <a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> <a class="code" href="plank___simple_stack_8c.html#ab3a9ec5d2ff6b2bef1f522b0a460b364">pl_SimpleStack_Create</a>();
-<a name="l00052"></a>00052 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_stack_8c.html#a10f9dadc0aeba73ec4e51558c5f5a83e">pl_SimpleStack_Init</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
-<a name="l00053"></a>00053 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_stack_8c.html#a332b23d369815b64577ddb178f3ce9ae">pl_SimpleStack_DeInit</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
-<a name="l00054"></a>00054 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_stack_8c.html#a189375561640d6ed89759e1bb668b8bb">pl_SimpleStack_Destroy</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
-<a name="l00055"></a>00055 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_stack_8c.html#a6124b576a0f7beb83c148cf95a7debc4">pl_SimpleStack_Clear</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
-<a name="l00056"></a>00056 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_stack_8c.html#a56f117ee5f19c873ed2ec5648eca56f0">pl_SimpleStack_SetFreeElementDataFunction</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p, <a class="code" href="plank___simple_stack_8h.html#a453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a> freeFunction);
-<a name="l00057"></a>00057 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_stack_8c.html#a877405ddb4c83e3d5e96824a0f10b4a0">pl_SimpleStack_Push</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p, <span class="keyword">const</span> <a class="code" href="plank___simple_linked_list_element_8h.html#a1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a> element);
-<a name="l00058"></a>00058 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plank___simple_stack_8c.html#ac55e55178661cd3ecc3455141ced807e">pl_SimpleStack_Pop</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p, <a class="code" href="plank___simple_linked_list_element_8h.html#a1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a>* element);
-<a name="l00059"></a>00059 <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="plank___simple_stack_8c.html#a26c6edc1169459d9e8e337b9258a0596">pl_SimpleStack_GetSize</a> (<a class="code" href="plank___simple_stack_8h.html#a739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankSimpleStack
-<a name="l00065"></a>00065 {
-<a name="l00066"></a>00066         <a class="code" href="plank___simple_linked_list_element_8h.html#a1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a>      head;
-<a name="l00067"></a>00067     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> count;
-<a name="l00068"></a>00068     <a class="code" href="plank___simple_stack_8h.html#a453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a> freeFunction;
-<a name="l00069"></a>00069 } PlankSimpleStack;
-<a name="l00070"></a>00070 <span class="preprocessor">#endif</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span>
-<a name="l00072"></a>00072 <span class="preprocessor">#endif // PLANK_SIMPLESTACK_H</span>
+<a name="l00053"></a><a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">00053</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankSimpleStack* <a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>; 
+<a name="l00054"></a>00054 
+<a name="l00055"></a><a class="code" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">00055</a> <span class="keyword">typedef</span> <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> (*<a class="code" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a>)(<a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 <a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> <a class="code" href="group___plank_simple_stack_class.html#gab5f7b15c3e776be779eb2ccf3ce68aa0">pl_SimpleStack_CreateAndInit</a>();
+<a name="l00058"></a>00058 <a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> <a class="code" href="group___plank_simple_stack_class.html#gab3a9ec5d2ff6b2bef1f522b0a460b364">pl_SimpleStack_Create</a>();
+<a name="l00059"></a>00059 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_simple_stack_class.html#ga10f9dadc0aeba73ec4e51558c5f5a83e">pl_SimpleStack_Init</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
+<a name="l00060"></a>00060 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_simple_stack_class.html#ga332b23d369815b64577ddb178f3ce9ae">pl_SimpleStack_DeInit</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
+<a name="l00061"></a>00061 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_simple_stack_class.html#ga189375561640d6ed89759e1bb668b8bb">pl_SimpleStack_Destroy</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
+<a name="l00062"></a>00062 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_simple_stack_class.html#ga6124b576a0f7beb83c148cf95a7debc4">pl_SimpleStack_Clear</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
+<a name="l00063"></a>00063 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_simple_stack_class.html#ga56f117ee5f19c873ed2ec5648eca56f0">pl_SimpleStack_SetFreeElementDataFunction</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p, <a class="code" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a> freeFunction);
+<a name="l00064"></a>00064 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_simple_stack_class.html#ga877405ddb4c83e3d5e96824a0f10b4a0">pl_SimpleStack_Push</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p, <span class="keyword">const</span> <a class="code" href="group___plank_simple_linked_list_element_class.html#ga1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a> element);
+<a name="l00065"></a>00065 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_simple_stack_class.html#gac55e55178661cd3ecc3455141ced807e">pl_SimpleStack_Pop</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p, <a class="code" href="group___plank_simple_linked_list_element_class.html#ga1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a>* element);
+<a name="l00066"></a>00066 <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="group___plank_simple_stack_class.html#ga26c6edc1169459d9e8e337b9258a0596">pl_SimpleStack_GetSize</a> (<a class="code" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> p);
+<a name="l00067"></a>00067 
+<a name="l00070"></a>00070 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00073"></a>00073 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankSimpleStack
+<a name="l00074"></a>00074 {
+<a name="l00075"></a>00075         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a>      head;
+<a name="l00076"></a>00076     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> count;
+<a name="l00077"></a>00077     <a class="code" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a> freeFunction;
+<a name="l00078"></a>00078 } PlankSimpleStack;
+<a name="l00079"></a>00079 <span class="preprocessor">#endif</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span>
+<a name="l00081"></a>00081 <span class="preprocessor">#endif // PLANK_SIMPLESTACK_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -158,7 +158,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:10 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:23 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -361,11 +361,8 @@ Static Public Member Functions</h2></td></tr>
 &lt; NumericalType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numerical_array.html#a91f325eeff8bd44e9774cf92b1bb438e">exprand</a> (const int size, const NumericalType lower, const NumericalType upper)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with an exponential random distribution.  <a href="#a91f325eeff8bd44e9774cf92b1bb438e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; NumericalType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numerical_array.html#aa12ab6dee4f3473e15c2998b098c5573">linrand</a> (const int size, const NumericalType lower, const NumericalType upper)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with a linear random distribution.  <a href="#aa12ab6dee4f3473e15c2998b098c5573"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; NumericalType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958">sineTable</a> (const int size, const double repeats=1.0, const NumericalType peak=<a class="el" href="class_type_utility.html">TypeUtility</a>&lt; NumericalType &gt;::getTypePeak())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) containing one or more sine tables.  <a href="#aa474beef987896c1d5122828b433a958"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with a linear random distribution.  <a href="#aa474beef987896c1d5122828b433a958"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; NumericalType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numerical_array.html#a976120d5601920958fe730ae306fd0fe">harmonicTable</a> (const int size, <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; const &amp;weights)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
@@ -2392,35 +2389,6 @@ template&lt;class NumericalType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a84e08a1f1226e157834a04aec27155ba"></a><!-- doxytag: member="NumericalArray::indexOfAny" ref="a84e08a1f1226e157834a04aec27155ba" args="(NumericalArray const &amp;itemsToSearchFor, const int startIndex=0) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class NumericalType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::indexOfAny </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>itemsToSearchFor</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a101ace1e49b4d50bc0f7c42be825ab2d"></a><!-- doxytag: member="NumericalArray::indexOfAny" ref="a101ace1e49b4d50bc0f7c42be825ab2d" args="(const NumericalType *items, const int startIndex=0) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -2449,6 +2417,35 @@ template&lt;class NumericalType&gt; </div>
 <div class="memdoc">
 
 <p>Search for any items in a given array. </p>
+
+</div>
+</div>
+<a class="anchor" id="a84e08a1f1226e157834a04aec27155ba"></a><!-- doxytag: member="NumericalArray::indexOfAny" ref="a84e08a1f1226e157834a04aec27155ba" args="(NumericalArray const &amp;itemsToSearchFor, const int startIndex=0) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NumericalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::indexOfAny </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>itemsToSearchFor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -2648,43 +2645,6 @@ template&lt;class NumericalType&gt; </div>
 <div class="memdoc">
 
 <p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) ramping from one value to another. </p>
-
-</div>
-</div>
-<a class="anchor" id="aa12ab6dee4f3473e15c2998b098c5573"></a><!-- doxytag: member="NumericalArray::linrand" ref="aa12ab6dee4f3473e15c2998b098c5573" args="(const int size, const NumericalType lower, const NumericalType upper)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class NumericalType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;NumericalType&gt; <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::linrand </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const NumericalType&#160;</td>
-          <td class="paramname"><em>lower</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const NumericalType&#160;</td>
-          <td class="paramname"><em>upper</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with a linear random distribution. </p>
 
 </div>
 </div>
@@ -3484,7 +3444,7 @@ template&lt;class NumericalType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a525d70c5ea4fe326a8c5b713d718e4f2"></a><!-- doxytag: member="NumericalArray::replace" ref="a525d70c5ea4fe326a8c5b713d718e4f2" args="(const NumericalType *find, const NumericalType *substitute) const " -->
+<a class="anchor" id="a1fe382c1f8389217ddc8476830128ecb"></a><!-- doxytag: member="NumericalArray::replace" ref="a1fe382c1f8389217ddc8476830128ecb" args="(const NumericalType *find, NumericalArray const &amp;substitute) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -3499,7 +3459,7 @@ template&lt;class NumericalType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const NumericalType *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; const &amp;&#160;</td>
           <td class="paramname"><em>substitute</em>&#160;</td>
         </tr>
         <tr>
@@ -3542,7 +3502,7 @@ template&lt;class NumericalType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1fe382c1f8389217ddc8476830128ecb"></a><!-- doxytag: member="NumericalArray::replace" ref="a1fe382c1f8389217ddc8476830128ecb" args="(const NumericalType *find, NumericalArray const &amp;substitute) const " -->
+<a class="anchor" id="a525d70c5ea4fe326a8c5b713d718e4f2"></a><!-- doxytag: member="NumericalArray::replace" ref="a525d70c5ea4fe326a8c5b713d718e4f2" args="(const NumericalType *find, const NumericalType *substitute) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -3557,7 +3517,7 @@ template&lt;class NumericalType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; const &amp;&#160;</td>
+          <td class="paramtype">const NumericalType *&#160;</td>
           <td class="paramname"><em>substitute</em>&#160;</td>
         </tr>
         <tr>
@@ -3592,7 +3552,7 @@ template&lt;class NumericalType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af42a73822d0316c376d11e59bf80e8cf"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="af42a73822d0316c376d11e59bf80e8cf" args="(const double inValue, Long &amp;outValue)" -->
+<a class="anchor" id="ac7300fdd2d6f0d04e89832ef6ba9d493"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="ac7300fdd2d6f0d04e89832ef6ba9d493" args="(const double inValue, int &amp;outValue)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -3607,36 +3567,7 @@ template&lt;class NumericalType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> &amp;&#160;</td>
-          <td class="paramname"><em>outValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4b4a9858074371371a3311fabf9b5025"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="a4b4a9858074371371a3311fabf9b5025" args="(const float inValue, char &amp;outValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class NumericalType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::roundCopy </td>
-          <td>(</td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>inValue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char &amp;&#160;</td>
+          <td class="paramtype">int &amp;&#160;</td>
           <td class="paramname"><em>outValue</em>&#160;</td>
         </tr>
         <tr>
@@ -3679,36 +3610,7 @@ template&lt;class NumericalType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a869f68459c7a8f8891fbded90c51e7d4"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="a869f68459c7a8f8891fbded90c51e7d4" args="(const float inValue, int &amp;outValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class NumericalType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::roundCopy </td>
-          <td>(</td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>inValue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>outValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac7300fdd2d6f0d04e89832ef6ba9d493"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="ac7300fdd2d6f0d04e89832ef6ba9d493" args="(const double inValue, int &amp;outValue)" -->
+<a class="anchor" id="af42a73822d0316c376d11e59bf80e8cf"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="af42a73822d0316c376d11e59bf80e8cf" args="(const double inValue, Long &amp;outValue)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -3723,7 +3625,65 @@ template&lt;class NumericalType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> &amp;&#160;</td>
+          <td class="paramname"><em>outValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acf5e468cc0f12e99eaf0336b25ac9010"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="acf5e468cc0f12e99eaf0336b25ac9010" args="(const float inValue, short &amp;outValue)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NumericalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::roundCopy </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>inValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short &amp;&#160;</td>
+          <td class="paramname"><em>outValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4b4a9858074371371a3311fabf9b5025"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="a4b4a9858074371371a3311fabf9b5025" args="(const float inValue, char &amp;outValue)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NumericalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::roundCopy </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>inValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char &amp;&#160;</td>
           <td class="paramname"><em>outValue</em>&#160;</td>
         </tr>
         <tr>
@@ -3768,35 +3728,6 @@ template&lt;class Type1 , class Type2 &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="acded185d2f74a21d93428a25a67ef204"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="acded185d2f74a21d93428a25a67ef204" args="(const double inValue, char &amp;outValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class NumericalType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::roundCopy </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>inValue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char &amp;&#160;</td>
-          <td class="paramname"><em>outValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ac739318d229021913df80446ff450317"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="ac739318d229021913df80446ff450317" args="(const float inValue, Long &amp;outValue)" -->
 <div class="memitem">
 <div class="memproto">
@@ -3826,7 +3757,7 @@ template&lt;class NumericalType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="acf5e468cc0f12e99eaf0336b25ac9010"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="acf5e468cc0f12e99eaf0336b25ac9010" args="(const float inValue, short &amp;outValue)" -->
+<a class="anchor" id="a869f68459c7a8f8891fbded90c51e7d4"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="a869f68459c7a8f8891fbded90c51e7d4" args="(const float inValue, int &amp;outValue)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -3841,7 +3772,36 @@ template&lt;class NumericalType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">short &amp;&#160;</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>outValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acded185d2f74a21d93428a25a67ef204"></a><!-- doxytag: member="NumericalArray::roundCopy" ref="acded185d2f74a21d93428a25a67ef204" args="(const double inValue, char &amp;outValue)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NumericalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt;::roundCopy </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>inValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char &amp;&#160;</td>
           <td class="paramname"><em>outValue</em>&#160;</td>
         </tr>
         <tr>
@@ -3969,6 +3929,7 @@ template&lt;class NumericalType&gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with a linear random distribution. </p>
 <p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) containing one or more sine tables. </p>
 
 </div>
@@ -4533,7 +4494,7 @@ template&lt;class NumericalType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:19 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:34 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

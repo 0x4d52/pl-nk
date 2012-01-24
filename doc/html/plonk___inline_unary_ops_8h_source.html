@@ -120,7 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00048"></a>00048 <span class="preprocessor"></span>
 <a name="l00049"></a><a class="code" href="plonk___inline_unary_ops_8h.html#aa4108bfb97462ad80b0dbd2d01b8a329">00049</a> <span class="preprocessor">#define UNARYOP(CLASSNAME, OP) \</span>
 <a name="l00050"></a>00050 <span class="preprocessor">\</span>
-<a name="l00051"></a>00051 <span class="preprocessor">        CLASSNAME OP() const throw() { return unary&lt;plonk::OP&gt;(); }</span>
+<a name="l00051"></a>00051 <span class="preprocessor">        inline CLASSNAME OP() const throw() { return unary&lt;plonk::OP&gt;(); }</span>
 <a name="l00052"></a>00052 <span class="preprocessor"></span>
 <a name="l00053"></a>00053 
 <a name="l00054"></a><a class="code" href="plonk___inline_unary_ops_8h.html#a106ef270f26be3687236ef8e7ae254a5">00054</a> <span class="preprocessor">#define UNARYOPS(CLASSNAME) \</span>
@@ -294,7 +294,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:11 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

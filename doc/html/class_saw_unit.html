@@ -99,7 +99,17 @@ Static Public Member Functions</h2></td></tr>
 class SawUnit&lt; SampleType &gt;</h3>
 
 <p>A non-bandlimted sawtooth oscillator. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
+<p><em>Examples:</em> </p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> test()
+ {
+    <span class="keywordflow">return</span> <a class="code" href="class_saw_unit.html#a117599b8e474043532baf590507a8429" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (440, 0.1); <span class="comment">// 440Hz, amplitude 0.1</span>
+ } 
+</pre></div><div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> test()
+ {
+    <span class="comment">// Modulated frequency rising 600-900Hz, amplitude 0.1</span>
+    <span class="keywordflow">return</span> <a class="code" href="class_saw_unit.html#a117599b8e474043532baf590507a8429" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (<a class="code" href="class_saw_unit.html#a117599b8e474043532baf590507a8429" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (1, 300, 600), 0.1); 
+ } 
+</pre></div> </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="adbca77440aa624402e03f1c940e55979"></a><!-- doxytag: member="SawUnit::ChannelType" ref="adbca77440aa624402e03f1c940e55979" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -313,7 +323,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jan 17 2012 18:41:21 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:36 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
