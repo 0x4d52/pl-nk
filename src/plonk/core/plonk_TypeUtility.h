@@ -1991,5 +1991,36 @@ PLONK_BINARYOPTYPEUTILITY_DEFINE(int,LongLong,LongLong);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(Long,int,LongLong);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(LongLong,int,LongLong);
 
+// getting the calc type for ternary ops (or two chained binary ops)
+template<class TypeA, class TypeB, class TypeC>
+class TernaryOpTypeUtility
+{
+public:
+    typedef typename BinaryOpTypeUtility<TypeA,TypeB>::CalcType TypeD;
+    typedef typename BinaryOpTypeUtility<TypeD,TypeC>::CalcType CalcType;
+};
+
+// getting the calc type for quaternary ops (or three chained binary ops)
+template<class TypeA, class TypeB, class TypeC, class TypeD>
+class QuaternaryOpTypeUtility
+{
+public:
+    typedef typename BinaryOpTypeUtility<TypeA,TypeB>::CalcType TypeE;
+    typedef typename BinaryOpTypeUtility<TypeE,TypeC>::CalcType TypeF;
+    typedef typename BinaryOpTypeUtility<TypeF,TypeD>::CalcType CalcType;
+};
+
+// getting the calc type for quinary ops (or four chained binary ops)
+template<class TypeA, class TypeB, class TypeC, class TypeD, class TypeE>
+class QuinaryOpTypeUtility
+{
+public:
+    typedef typename BinaryOpTypeUtility<TypeA,TypeB>::CalcType TypeF;
+    typedef typename BinaryOpTypeUtility<TypeF,TypeC>::CalcType TypeG;
+    typedef typename BinaryOpTypeUtility<TypeG,TypeD>::CalcType TypeH;
+    typedef typename BinaryOpTypeUtility<TypeH,TypeE>::CalcType CalcType;
+};
+
+
 
 #endif // PLONK_TYPEUTILITY_H
