@@ -42,6 +42,7 @@
 #include <math.h>
 #include "plonk_Constants.h"
 
+
 // common unary
 
 /** Returns the absolute of the input argument. 

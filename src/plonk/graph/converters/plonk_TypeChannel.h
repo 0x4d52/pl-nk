@@ -272,7 +272,7 @@ typedef TypeUnit<Int24,PLONK_TYPE_DEFAULT>      TypeDefault2Int24;
 
 // this provides quick returns for conversions to the same type of units
 
-#define TYPEUNIT_SAMEIOTYPES_DEFINE(SampleType)\
+#define PLONK_TYPEUNIT_SAMEIOTYPES_DEFINE(SampleType)\
     template<> class TypeUnit<SampleType,SampleType>\
     {\
     public:\
@@ -291,11 +291,11 @@ typedef TypeUnit<Int24,PLONK_TYPE_DEFAULT>      TypeDefault2Int24;
         }\
     }
 
-TYPEUNIT_SAMEIOTYPES_DEFINE(float);
-TYPEUNIT_SAMEIOTYPES_DEFINE(double);
-TYPEUNIT_SAMEIOTYPES_DEFINE(int);
-TYPEUNIT_SAMEIOTYPES_DEFINE(short);
-TYPEUNIT_SAMEIOTYPES_DEFINE(Int24);
+PLONK_TYPEUNIT_SAMEIOTYPES_DEFINE(float);
+PLONK_TYPEUNIT_SAMEIOTYPES_DEFINE(double);
+PLONK_TYPEUNIT_SAMEIOTYPES_DEFINE(int);
+PLONK_TYPEUNIT_SAMEIOTYPES_DEFINE(short);
+PLONK_TYPEUNIT_SAMEIOTYPES_DEFINE(Int24);
 
 
 #endif // PLONK_TYPECONVERTCHANNEL_H
