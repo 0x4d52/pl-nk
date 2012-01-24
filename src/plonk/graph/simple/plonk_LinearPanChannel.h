@@ -211,7 +211,11 @@ public:
                         UnitType const& position = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
-    {                
+    {               
+        /*
+         for full templating we'd need to add template params for position unit types possibly not for this type though
+         */
+
         const int numInputChannels = plonk::max (input.getNumChannels(), position.getNumChannels());
         UnitType result (UnitType::emptyWithAllocatedSize (numInputChannels * 2));
         Data data = { -1.0, -1.0 };

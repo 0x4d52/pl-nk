@@ -89,14 +89,6 @@ CHANNELDATA_SPECIAL(SawChannelInternal,int)
     LongLong peak2peak;
 };        
 
-CHANNELDATA_SPECIAL(SawChannelInternal,LongLong)
-{    
-    ChannelInternalCore::Data base;
-    
-    LongLong currentValue;
-    LongLong peak;
-    LongLong peak2peak; //?
-};        
 
 
 //------------------------------------------------------------------------------
@@ -107,6 +99,10 @@ class SawChannelInternal
 :   public ChannelInternal<SampleType, CHANNELDATA_NAME(SawChannelInternal,SampleType)>
 {
 public:
+    /*
+     for full templating we'd need to add template params for frequency unit type
+     */
+
     typedef CHANNELDATA_NAME(SawChannelInternal,SampleType)     Data;
     typedef ChannelBase<SampleType>                             ChannelType;
     typedef SawChannelInternal<SampleType>                      SawInternal;
@@ -233,6 +229,10 @@ template<>
 class SawChannelInternal<float> :   public ChannelInternal<float, SawProcessStateF>
 {
 public:
+    /*
+     for full templating we'd need to add specialisation for frequency unit type too
+     */
+
     typedef SawProcessStateF            Data;
     typedef ChannelBase<float>          ChannelType;
     typedef SawChannelInternal<float>   SawInternal;
@@ -315,6 +315,9 @@ private:
 
 /** A non-bandlimted sawtooth oscillator. 
  
+ Although the template class name is SawUnit the abbreviated name Saw may be
+ used when employing the deafult sample type (which defaults to float).
+ 
  <em>Examples:</em>
  @code Unit test()
  {
@@ -369,6 +372,11 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                
+        /*
+         for full templating we'd need to add template params for 3x unit types
+         same in kr
+         */
+
         Inputs inputs;
         inputs.put (IOKey::Frequency, frequency);
         inputs.put (IOKey::Multiply, mul);

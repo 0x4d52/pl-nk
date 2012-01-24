@@ -81,7 +81,6 @@ class UnitBase : public NumericalArray<ChannelBase<SampleType> >
 protected:
     typedef ChannelBase<SampleType>                 ChannelType;
     typedef ChannelInternalBase<SampleType>         ChannelInternalType;
-    //typedef UNITBASETYPE<ChannelType>               UnitType;
     typedef NumericalArray<ChannelType>             UnitType;
     typedef NumericalArray2D<ChannelType,UnitType>  UnitArray;
     typedef NumericalArray2D<SampleType>            BufferArrayType;
@@ -241,6 +240,10 @@ public:
                                              BlockSize const& preferredBlockSize,
                                              SampleRate const& preferredSampleRate) throw()
     {        
+        /*
+         for full templating we'd need to add template params for the mul and add unit types
+        */
+        
         Inputs mainInputs = inputs;
         const Dynamic add = mainInputs.remove (IOKey::Add);
         const Dynamic mul = mainInputs.remove (IOKey::Multiply);
@@ -272,6 +275,10 @@ public:
                                               BlockSize const& preferredBlockSize,
                                               SampleRate const& preferredSampleRate) throw()
     {        
+        /*
+         for full templating we'd need to add template params for the mul and add unit types
+         */
+
         Inputs mainInputs = inputs;
         const Dynamic add = mainInputs.remove (IOKey::Add);
         const Dynamic mul = mainInputs.remove (IOKey::Multiply);
@@ -307,6 +314,10 @@ public:
                                         UnitBase const& mul,
                                         UnitBase const& add) throw()
     {
+        /*
+         for full templating we'd need to add template params for the mul and add unit types
+         */
+
         UnitBase result = mainUnit;
         
         bool hasMul = true;
@@ -371,6 +382,10 @@ public:
     template<BINARYOPFUNCTION(SampleType, op)>
     UnitBase binary (UnitBase const& rightOperand) const throw() 
     {        
+        /*
+         for full templating we'd need to add template param for the rightop unit types
+         */
+
         typedef BinaryOpChannelInternal<SampleType,op>      ChannelInternalClassType;
         typedef typename ChannelInternalClassType::Data     Data;
                 

@@ -108,6 +108,10 @@ class BinaryOpChannelInternal
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
+    /*
+     for full templating we'd need to add template params for rightop unit type
+     */
+
     typedef typename ChannelInternalCore::Data      Data;
 
     typedef ChannelBase<SampleType>                 ChannelType;

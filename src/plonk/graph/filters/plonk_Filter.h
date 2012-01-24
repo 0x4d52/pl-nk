@@ -185,6 +185,8 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {             
+        // re: full templating - could say that filters are only supported with float or double types?
+        
         const int requiredCoeffs = FormType::NumCoeffs;
         const int numCoeffChannels = coeffs.getNumChannels();
         
@@ -217,48 +219,6 @@ public:
         return UnitType::applyMulAdd (result, mul, add);
     }
     
-//    /** Create a generic filter from the coefficients. */
-//    static UnitType ar (UnitType const& input,
-//                        UnitType const& coeffs, 
-//                        UnitType const& mul = SampleType (1),
-//                        UnitType const& add = SampleType (0),
-//                        BlockSize const& preferredBlockSize = BlockSize::noPreference(),
-//                        SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
-//    {             
-//        const int requiredCoeffs = FormType::NumCoeffs;
-//        const int numCoeffChannels = coeffs.getNumChannels();
-//        
-//        plonk_assert (numCoeffChannels > 0);
-//        plonk_assert ((numCoeffChannels % requiredCoeffs) == 0);
-//        
-//        const int numOutputChannels = plonk::max (input.getNumChannels(), numCoeffChannels / requiredCoeffs);
-//        UnitType result (UnitType::withSize (numOutputChannels));
-//        
-//        Data data;
-//        Memory::zero (data);
-//        data.base.sampleRate = -1.0;        
-//        data.base.sampleDuration = -1.0;
-//        
-//        UnitsType groupedCoeffs = coeffs.group (requiredCoeffs);
-//        
-//        for (int i = 0; i < numOutputChannels; ++i)
-//        {
-//            Inputs inputs;
-//            inputs.put (IOKey::Signal, input[i]);
-//            inputs.put (IOKey::Coeffs, groupedCoeffs.wrapAt (i));
-//            
-//            ChannelInternalType* internal = new FilterInternal (inputs, 
-//                                                                data, 
-//                                                                preferredBlockSize, 
-//                                                                preferredSampleRate);
-//            internal->initChannel (i);
-//            
-//            result.put (i, ChannelType (internal));
-//        }
-//        
-//        return UnitType::applyMulAdd (result, mul, add);
-//    }
-
 };
 
 

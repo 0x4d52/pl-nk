@@ -175,6 +175,8 @@ public:
     /** IFFTs a signal. */
     static inline UnitType ar (UnitType const& input) throw()
     {        
+        // re: full templating - could say that FFT/IFTT are only supported with float (and eventually double)?
+
         plonk_assert ((input.getNumChannels() % 2) == 0); // must be real and imag pairs
         
         // need to put these asserts in the initChannel

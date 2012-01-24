@@ -159,7 +159,9 @@ public:
     
     /** FFTs a signal. */
     static inline UnitType ar (UnitType const& input) throw()
-    {                        
+    {                     
+        // re: full templating - could say that FFT/IFTT are only supported with float (and eventually double)?
+
         const int numInputChannels = input.getNumChannels();
         UnitType result (UnitType::emptyWithAllocatedSize (numInputChannels * 2));
         Data data = { -1.0, -1.0 };

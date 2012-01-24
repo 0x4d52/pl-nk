@@ -46,8 +46,10 @@ template<class SampleType> class TableChannelInternal;
 
 CHANNELDATA_DECLARE(TableChannelInternal,SampleType)
 {    
+    typedef typename TypeUtility<SampleType>::IndexType IndexType;
+
     ChannelInternalCore::Data base;
-    SampleType currentPosition;
+    IndexType currentPosition;
 };      
 
 //------------------------------------------------------------------------------
@@ -58,6 +60,10 @@ class TableChannelInternal
 :   public ChannelInternal<SampleType, CHANNELDATA_NAME(TableChannelInternal,SampleType)>
 {
 public:
+    /*
+     for full templating we'd need to add template params for wavetable type and frequency unit type
+     */
+
     typedef CHANNELDATA_NAME(TableChannelInternal,SampleType)   Data;
     typedef ChannelBase<SampleType>                             ChannelType;
     typedef TableChannelInternal<SampleType>                    TableInternal;
@@ -67,6 +73,7 @@ public:
     typedef InputDictionary                                     Inputs;
     typedef NumericalArray<SampleType>                          Buffer;
     typedef WavetableBase<SampleType>                           WavetableType;
+    typedef typename TypeUtility<SampleType>::IndexType         IndexType;
 
     TableChannelInternal (Inputs const& inputs, 
                           Data const& data, 
@@ -148,7 +155,7 @@ public:
         }
         else if (frequencyBufferLength == 1)
         {
-            const SampleType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
+            const IndexType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
@@ -230,7 +237,12 @@ public:
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {                
+    {             
+        /*
+         for full templating we'd need to add template params for wavetable type, and 3x unit types
+         same in kr
+         */
+
         Inputs inputs;
         inputs.put (IOKey::Wavetable, table);
         inputs.put (IOKey::Frequency, frequency);
@@ -304,7 +316,12 @@ public:
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {                
+    {     
+        /*
+         for full templating we'd need to add template params 3x unit types
+         same in kr
+         */
+
         return TableType::ar (WavetableType::sine8192(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
@@ -365,7 +382,12 @@ public:
                         const int numHarmonics = 21,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {                
+    {          
+        /*
+         for full templating we'd need to add template params 3x unit types
+         same in kr
+         */
+
         WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal();
         return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
@@ -430,7 +452,12 @@ public:
                         const int numHarmonics = 21,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {                
+    {            
+        /*
+         for full templating we'd need to add template params 3x unit types
+         same in kr
+         */
+
         WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
         return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }

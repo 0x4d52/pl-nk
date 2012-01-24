@@ -356,7 +356,11 @@ public:
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {                
+    {           
+        /*
+         for full templating we'd need to add template params for mul + add unit types
+         */
+
         typedef CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType) Data;
 
         Inputs inputs;
@@ -379,7 +383,11 @@ public:
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {            
+    {        
+        /*
+         for full templating we'd need to add template params for mul + add unit types
+         */
+
         typedef CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType) Data;
 
         Inputs inputs;
