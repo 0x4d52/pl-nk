@@ -61,7 +61,14 @@ public:
     typedef PlankI24 Internal;
     
     Int24() throw();
+    Int24 (const char value) throw();
+    Int24 (const short value) throw();
     Int24 (const int value) throw();
+    Int24 (const Long value) throw();
+    Int24 (const LongLong value) throw();
+    Int24 (const float value) throw();
+    Int24 (const double value) throw();
+
     Int24 (const Internal value) throw();
     
     template<class OtherType>

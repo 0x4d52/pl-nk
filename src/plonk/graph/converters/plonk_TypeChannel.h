@@ -178,11 +178,13 @@ public:
 private:
 };
 
+
+
 /** Convert from one sample type to another.
  E.g., from float to short (i.e, 16bit)
  @ingroup ConverterUnits */
 template<class OutputSampleType, class InputSampleType>
-class TypeUnit
+class TypeUnitBase
 {
 public:
     typedef typename ChannelInternalCore::Data  Data;
@@ -240,6 +242,12 @@ public:
 };
 
 
+template<class OutputSampleType, class InputSampleType>
+class TypeUnit : public TypeUnitBase<OutputSampleType,InputSampleType>
+{
+};
+
+
 typedef TypeUnit<float,int>     TypeInt2Float;
 typedef TypeUnit<int,float>     TypeFloat2Int;
 typedef TypeUnit<float,double>  TypeDouble2Float;
@@ -248,7 +256,6 @@ typedef TypeUnit<float,short>   TypeShort2Float;
 typedef TypeUnit<short,float>   TypeFloat2Short;
 typedef TypeUnit<float,Int24>   TypeInt242Float;
 typedef TypeUnit<Int24,float>   TypeFloat2In24;
-
 
 typedef TypeUnit<PLONK_TYPE_DEFAULT,float>      TypeFloat2Default;
 typedef TypeUnit<PLONK_TYPE_DEFAULT,double>     TypeDouble2Default;
@@ -261,6 +268,34 @@ typedef TypeUnit<double,PLONK_TYPE_DEFAULT>     TypeDefault2Double;
 typedef TypeUnit<int,PLONK_TYPE_DEFAULT>        TypeDefault2Int;
 typedef TypeUnit<short,PLONK_TYPE_DEFAULT>      TypeDefault2Short;
 typedef TypeUnit<Int24,PLONK_TYPE_DEFAULT>      TypeDefault2Int24;
+
+
+// this provides quick returns for conversions to the same type of units
+
+#define TYPEUNIT_SAMEIOTYPES_DEFINE(SampleType)\
+    template<> class TypeUnit<SampleType,SampleType>\
+    {\
+    public:\
+        typedef UnitBase<SampleType> UnitType;\
+        \
+        static inline UnitType ar (UnitType const& input) throw() {\
+            return input;\
+        }\
+        \
+        static inline UnitType ar (UnitType const& input, BlockSize const& blockSize) throw() {\
+            return TypeUnitBase<SampleType,SampleType>::ar (input, blockSize, SampleRate::noPreference());\
+        }\
+        \
+        static inline UnitType ar (UnitType const& input, BlockSize const& blockSize, SampleRate const& sampleRate) throw() {\
+            return TypeUnitBase<SampleType,SampleType>::ar (input, blockSize, sampleRate);\
+        }\
+    }
+
+TYPEUNIT_SAMEIOTYPES_DEFINE(float);
+TYPEUNIT_SAMEIOTYPES_DEFINE(double);
+TYPEUNIT_SAMEIOTYPES_DEFINE(int);
+TYPEUNIT_SAMEIOTYPES_DEFINE(short);
+TYPEUNIT_SAMEIOTYPES_DEFINE(Int24);
 
 
 #endif // PLONK_TYPECONVERTCHANNEL_H

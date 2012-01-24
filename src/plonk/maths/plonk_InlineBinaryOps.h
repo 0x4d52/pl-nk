@@ -201,7 +201,7 @@ template<class Type> inline Type thresh (Type a, Type b) throw() { return (a < b
 template<class Type>
 inline Type round (Type a, Type b) throw()
 {
-	const Type offset = a < 0 ? Type (-0.5) : Type (0.5);
+	const Type offset = a < Type (0) ? Type (-0.5) : Type (0.5);
 	const int n = int (a / b + offset);
 	return b * Type (n);
 }

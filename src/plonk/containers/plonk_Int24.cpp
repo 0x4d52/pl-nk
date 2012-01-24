@@ -52,6 +52,36 @@ Int24::Int24 (const int value) throw()
 {
 }
 
+Int24::Int24 (const char value) throw()
+:   data (pl_ConvertIToI24 (int (value)))
+{
+}
+
+Int24::Int24 (const short value) throw()
+:   data (pl_ConvertIToI24 (int (value)))
+{
+}
+
+Int24::Int24 (const Long value) throw()
+:   data (pl_ConvertIToI24 (int (value)))
+{
+}
+
+Int24::Int24 (const LongLong value) throw()
+:   data (pl_ConvertIToI24 (int (value)))
+{
+}
+
+Int24::Int24 (const float value) throw()
+:   data (pl_ConvertIToI24 (int (value)))
+{
+}
+
+Int24::Int24 (const double value) throw()
+:   data (pl_ConvertIToI24 (int (value)))
+{
+}
+
 Int24::Int24 (const Internal value) throw()
 :   data (value)
 {

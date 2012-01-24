@@ -304,25 +304,62 @@ public:
         return applyMulAdd (result, UnitBase (mul), UnitBase (add));
     }        
     
+//    /** Apply multiply and addition operators to another unit.
+//     Here @c mul will be ignored (not applied) if the value is a single channel 
+//     constant equal to 1 (or null rather than just a constant 0). And @c add 
+//     will be ignored (not applied) if it is a single channel constant equal to
+//     0 (or null). On some platforms this might be implemented as a single
+//     multiply-and-add operation. */
+//    static inline UnitBase applyMulAdd (UnitBase const& mainUnit, 
+//                                        UnitBase const& mul,
+//                                        UnitBase const& add) throw()
+//    {
+//        /*
+//         for full templating we'd need to add template params for the mul and add unit types
+//         */
+//
+//        UnitBase result = mainUnit;
+//        
+//        bool hasMul = true;
+//        bool hasAdd = true;
+//                                
+//        if (mul.isNull() || (mul.isConstant() && (mul.getValue (0) == SampleType (1))))
+//            hasMul = false;
+//        
+//        if (add.isNull() || (add.isConstant() && (add.getValue (0) == SampleType (0))))
+//            hasAdd = false;
+//        
+//        // could apply an all-in-one muladd if we had one...
+//        
+//        if (hasMul)
+//            result *= mul;
+//        
+//        if (hasAdd)
+//            result += add;
+//            
+//        return result;        
+//    }
+    
     /** Apply multiply and addition operators to another unit.
      Here @c mul will be ignored (not applied) if the value is a single channel 
      constant equal to 1 (or null rather than just a constant 0). And @c add 
      will be ignored (not applied) if it is a single channel constant equal to
      0 (or null). On some platforms this might be implemented as a single
      multiply-and-add operation. */
+    template<class MulUnitType, class AddUnitType>
     static inline UnitBase applyMulAdd (UnitBase const& mainUnit, 
-                                        UnitBase const& mul,
-                                        UnitBase const& add) throw()
+                                        MulUnitType const& mul,
+                                        AddUnitType const& add) throw()
     {
         /*
          for full templating we'd need to add template params for the mul and add unit types
          */
-
+        
         UnitBase result = mainUnit;
         
         bool hasMul = true;
         bool hasAdd = true;
-                                
+        
         if (mul.isNull() || (mul.isConstant() && (mul.getValue (0) == SampleType (1))))
             hasMul = false;
         
@@ -336,9 +373,10 @@ public:
         
         if (hasAdd)
             result += add;
-            
+        
         return result;        
     }
+
     
     /** Resamples this unit to a different sample rate and/or block size. */
     inline UnitBase ar (BlockSize const& preferredBlockSize = BlockSize::getDefault(),
@@ -400,7 +438,7 @@ public:
                                                            BlockSize::noPreference(), 
                                                            SampleRate::noPreference());
     }
-    
+
     /** Templated unary operator Unit creator. */
     template<UNARYOPFUNCTION(SampleType, op)>
     UnitBase unary() const throw() 
