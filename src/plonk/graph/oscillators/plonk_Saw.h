@@ -186,7 +186,7 @@ public:
         }
         else if (frequencyBufferLength == 1)
         {
-            const SampleType valueIncrement (frequencySamples[0] * factor);
+            const FrequencyType valueIncrement (frequencySamples[0] * factor);
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
