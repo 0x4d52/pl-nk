@@ -77,7 +77,7 @@ template<class OwnerType>                                       struct ChannelDa
 template<class SampleType>                                      class ConstantChannelInternal;
 template<class SampleType>                                      class NullChannelInternal;
 
-template<class SampleType, BINARYOPFUNCTION(SampleType, op)>    class BinaryOpChannelInternal; /// full templating need update
+template<class SampleType, BINARYOPFUNCTION(SampleType, op)>    class BinaryOpChannelInternal;
 template<class SampleType, UNARYOPFUNCTION(SampleType, op)>     class UnaryOpChannelInternal;
 
 // common units

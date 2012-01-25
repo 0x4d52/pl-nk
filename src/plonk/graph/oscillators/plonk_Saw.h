@@ -99,19 +99,19 @@ class SawChannelInternal
 :   public ChannelInternal<SampleType, CHANNELDATA_NAME(SawChannelInternal,SampleType)>
 {
 public:
-    /*
-     for full templating we'd need to add template params for frequency unit type
-     */
-
     typedef CHANNELDATA_NAME(SawChannelInternal,SampleType)     Data;
+    typedef InputDictionary                                     Inputs;
+
     typedef ChannelBase<SampleType>                             ChannelType;
     typedef SawChannelInternal<SampleType>                      SawInternal;
     typedef ChannelInternal<SampleType,Data>                    Internal;
     typedef ChannelInternalBase<SampleType>                     InternalBase;
     typedef UnitBase<SampleType>                                UnitType;
-    typedef InputDictionary                                     Inputs;
-    typedef NumericalArray<SampleType>                          Buffer;
-        
+    
+    typedef typename TypeUtility<SampleType>::IndexType         FrequencyType;
+    typedef UnitBase<FrequencyType>                             FrequencyUnitType;
+    typedef NumericalArray<FrequencyType>                       FrequencyBufferType;
+
     SawChannelInternal (Inputs const& inputs, 
                         Data const& data, 
                         BlockSize const& blockSize,
@@ -141,8 +141,8 @@ public:
     }
     
     void initChannel (const int channel) throw()
-    {        
-        const UnitType& frequencyUnit = this->getInputAsUnit (IOKey::Frequency);
+    {                
+        const FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
         
         this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
                                                this->getBlockSize()));
@@ -160,9 +160,10 @@ public:
         const double sampleDuration = this->getState().base.sampleDuration;
         const double factor = data.peak2peak * sampleDuration;
 
-        UnitType& frequencyUnit (this->getInputAsUnit (IOKey::Frequency));
-        const Buffer frequencyBuffer (frequencyUnit.process (info, channel));
-        const SampleType* const frequencySamples = frequencyBuffer.getArray();
+        FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
+
+        const FrequencyBufferType frequencyBuffer (frequencyUnit.process (info, channel));
+        const FrequencyType* const frequencySamples = frequencyBuffer.getArray();
         const int frequencyBufferLength = frequencyBuffer.length();
         
         SampleType* const outputSamples = this->getOutputSamples();
@@ -233,14 +234,18 @@ public:
      for full templating we'd need to add specialisation for frequency unit type too
      */
 
-    typedef SawProcessStateF            Data;
-    typedef ChannelBase<float>          ChannelType;
-    typedef SawChannelInternal<float>   SawInternal;
-    typedef ChannelInternal<float,Data> Internal;
-    typedef ChannelInternalBase<float>  InternalBase;
-    typedef UnitBase<float>             UnitType;
-    typedef InputDictionary             Inputs;
-    typedef NumericalArray<float>       Buffer;
+    typedef SawProcessStateF                Data;
+    typedef InputDictionary                 Inputs;
+    typedef ChannelBase<float>              ChannelType;
+    typedef SawChannelInternal<float>       SawInternal;
+    typedef ChannelInternal<float,Data>     Internal;
+    typedef ChannelInternalBase<float>      InternalBase;
+    typedef UnitBase<float>                 UnitType;
+    
+    typedef float                           FrequencyType;
+    typedef UnitBase<float>                 FrequencyUnitType;
+    typedef NumericalArray<float>           FrequencyBufferType;
+
     
     enum Outputs { Output, NumOutputs };
     enum InputIndices  { Frequency, NumInputs };
@@ -281,7 +286,7 @@ public:
     
     void initChannel (const int channel) throw()
     {        
-        const UnitType& frequencyUnit = this->getInputAsUnit (IOKey::Frequency);
+        const FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
 
         this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
                                                this->getBlockSize()));
@@ -293,9 +298,9 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {                
-        UnitType& frequencyUnit (this->getInputAsUnit (IOKey::Frequency));
+        FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
 
-        const Buffer frequencyBuffer (frequencyUnit.process (info, channel));
+        const FrequencyBufferType frequencyBuffer (frequencyUnit.process (info, channel));
                         
         p.buffers[0].bufferSize = this->getOutputBuffer().length();;
         p.buffers[0].buffer     = this->getOutputSamples();
@@ -338,10 +343,15 @@ class SawUnit
 public:    
     typedef SawChannelInternal<SampleType>          SawInternal;
     typedef typename SawInternal::Data              Data;
+    typedef InputDictionary                         Inputs;
     typedef ChannelBase<SampleType>                 ChannelType;
     typedef ChannelInternal<SampleType,Data>        Internal;
     typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;
+    
+    typedef typename SawInternal::FrequencyType         FrequencyType;
+    typedef typename SawInternal::FrequencyUnitType     FrequencyUnitType;
+    typedef typename SawInternal::FrequencyBufferType   FrequencyBufferType;
+
     
     static inline UnitInfos getInfo() throw()
     {
@@ -366,17 +376,12 @@ public:
     }
     
     /** Create an audio rate sawtooth oscillator. */
-    static UnitType ar (UnitType const& frequency = SampleType (440), 
+    static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                
-        /*
-         for full templating we'd need to add template params for 3x unit types
-         same in kr
-         */
-
         Inputs inputs;
         inputs.put (IOKey::Frequency, frequency);
         inputs.put (IOKey::Multiply, mul);
@@ -393,7 +398,7 @@ public:
     }
     
     /** Create a control rate sawtooth oscillator. */
-    static UnitType kr (UnitType const& frequency, 
+    static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0)) throw()
     {
