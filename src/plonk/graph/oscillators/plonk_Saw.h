@@ -46,9 +46,11 @@ template<class SampleType> class SawChannelInternal;
 
 CHANNELDATA_DECLARE(SawChannelInternal,SampleType)
 {    
+    typedef typename TypeUtility<SampleType>::IndexType FrequencyType;
+
     ChannelInternalCore::Data base;
     
-    SampleType currentValue;
+    FrequencyType currentValue;
     LongLong peak;
     LongLong peak2peak;
 };      
@@ -73,18 +75,22 @@ CHANNELDATA_SPECIAL(SawChannelInternal,double)
 
 CHANNELDATA_SPECIAL(SawChannelInternal,short)
 {    
+    typedef TypeUtility<short>::IndexType FrequencyType;
+
     ChannelInternalCore::Data base;
     
-    short currentValue;
+    FrequencyType currentValue;
     short peak;
     int peak2peak;
 };      
 
 CHANNELDATA_SPECIAL(SawChannelInternal,int)
 {    
+    typedef TypeUtility<int>::IndexType FrequencyType;
+
     ChannelInternalCore::Data base;
     
-    int currentValue;
+    FrequencyType currentValue;
     int peak;
     LongLong peak2peak;
 };        
@@ -157,7 +163,7 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {        
         Data& data = this->getState();
-        const double sampleDuration = this->getState().base.sampleDuration;
+        const double sampleDuration = data.base.sampleDuration;
         const double factor = data.peak2peak * sampleDuration;
 
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
@@ -175,7 +181,7 @@ public:
         {
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                outputSamples[i] = data.currentValue;
+                outputSamples[i] = SampleType (data.currentValue);
                 data.currentValue += frequencySamples[i] * factor;
                 
                 if (data.currentValue >= data.peak)
@@ -190,7 +196,7 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                outputSamples[i] = data.currentValue;
+                outputSamples[i] = SampleType (data.currentValue);
                 data.currentValue += valueIncrement;
                 
                 if (data.currentValue >= data.peak)
@@ -206,7 +212,7 @@ public:
                                 
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                outputSamples[i] = data.currentValue;
+                outputSamples[i] = SampleType (data.currentValue);
                 data.currentValue += frequencySamples[int (frequencyPosition)] * factor;
 
                 if (data.currentValue >= data.peak)
