@@ -87,6 +87,31 @@ template<class SampleType>                                      class OverlapMak
 template<class SampleType>                                      class OverlapMixUnit;
 template<class SampleType>                                      class VariableUnit;
 
+// type conversion units
+template<class OutputSampleType, class InputSampleType>         class TypeUnit;
+
+typedef TypeUnit<float,int>     TypeInt2Float;
+typedef TypeUnit<int,float>     TypeFloat2Int;
+typedef TypeUnit<float,double>  TypeDouble2Float;
+typedef TypeUnit<double,float>  TypeFloat2Double;
+typedef TypeUnit<float,short>   TypeShort2Float;
+typedef TypeUnit<short,float>   TypeFloat2Short;
+typedef TypeUnit<float,Int24>   TypeInt242Float;
+typedef TypeUnit<Int24,float>   TypeFloat2In24;
+
+typedef TypeUnit<PLONK_TYPE_DEFAULT,float>      TypeFloat2Default;
+typedef TypeUnit<PLONK_TYPE_DEFAULT,double>     TypeDouble2Default;
+typedef TypeUnit<PLONK_TYPE_DEFAULT,int>        TypeInt2Default;
+typedef TypeUnit<PLONK_TYPE_DEFAULT,short>      TypeShort2Default;
+typedef TypeUnit<PLONK_TYPE_DEFAULT,Int24>      TypeInt242Default;
+
+typedef TypeUnit<float,PLONK_TYPE_DEFAULT>      TypeDefault2Float;
+typedef TypeUnit<double,PLONK_TYPE_DEFAULT>     TypeDefault2Double;
+typedef TypeUnit<int,PLONK_TYPE_DEFAULT>        TypeDefault2Int;
+typedef TypeUnit<short,PLONK_TYPE_DEFAULT>      TypeDefault2Short;
+typedef TypeUnit<Int24,PLONK_TYPE_DEFAULT>      TypeDefault2Int24;
+
+
 // sampletype typedefs
 typedef ChannelBase<float>              FloatChannel;
 typedef ChannelBase<double>             DoubleChannel;

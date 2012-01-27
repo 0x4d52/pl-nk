@@ -180,6 +180,13 @@ public:
 	{
 	}                
     
+    
+    template<template <typename> class OtherUnitType, class OtherSampleType>
+    UnitBase (OtherUnitType<OtherSampleType> const& other)
+    :   UnitType (TypeUnit<SampleType,OtherSampleType>::ar (other)) // should be ar??
+    {
+    }
+    
 //    UnitBase (InitialUnit const& i00,
 //              InitialUnit const& i01,
 //              InitialUnit const& i02,

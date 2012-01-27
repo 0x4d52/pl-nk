@@ -248,28 +248,6 @@ class TypeUnit : public TypeUnitBase<OutputSampleType,InputSampleType>
 };
 
 
-typedef TypeUnit<float,int>     TypeInt2Float;
-typedef TypeUnit<int,float>     TypeFloat2Int;
-typedef TypeUnit<float,double>  TypeDouble2Float;
-typedef TypeUnit<double,float>  TypeFloat2Double;
-typedef TypeUnit<float,short>   TypeShort2Float;
-typedef TypeUnit<short,float>   TypeFloat2Short;
-typedef TypeUnit<float,Int24>   TypeInt242Float;
-typedef TypeUnit<Int24,float>   TypeFloat2In24;
-
-typedef TypeUnit<PLONK_TYPE_DEFAULT,float>      TypeFloat2Default;
-typedef TypeUnit<PLONK_TYPE_DEFAULT,double>     TypeDouble2Default;
-typedef TypeUnit<PLONK_TYPE_DEFAULT,int>        TypeInt2Default;
-typedef TypeUnit<PLONK_TYPE_DEFAULT,short>      TypeShort2Default;
-typedef TypeUnit<PLONK_TYPE_DEFAULT,Int24>      TypeInt242Default;
-
-typedef TypeUnit<float,PLONK_TYPE_DEFAULT>      TypeDefault2Float;
-typedef TypeUnit<double,PLONK_TYPE_DEFAULT>     TypeDefault2Double;
-typedef TypeUnit<int,PLONK_TYPE_DEFAULT>        TypeDefault2Int;
-typedef TypeUnit<short,PLONK_TYPE_DEFAULT>      TypeDefault2Short;
-typedef TypeUnit<Int24,PLONK_TYPE_DEFAULT>      TypeDefault2Int24;
-
-
 // this provides quick returns for conversions to the same type of units
 
 #define PLONK_TYPEUNIT_SAMEIOTYPES_DEFINE(SampleType)\
