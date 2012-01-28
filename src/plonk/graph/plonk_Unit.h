@@ -183,7 +183,7 @@ public:
     
     template<template <typename> class OtherUnitType, class OtherSampleType>
     UnitBase (OtherUnitType<OtherSampleType> const& other)
-    :   UnitType (TypeUnit<SampleType,OtherSampleType>::ar (other)) // should be ar??
+    :   UnitType (TypeUnit<SampleType,OtherSampleType>::ar (other)) // should be ar?? yes because really ar here just means "original rate"
     {
     }
     
