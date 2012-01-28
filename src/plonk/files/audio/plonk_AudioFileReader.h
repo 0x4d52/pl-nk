@@ -100,19 +100,13 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
     SampleType* dataArray = data.getArray();
     void* const readBufferArray = readBuffer.getArray();
     
-    int encoding, bits, channels, bytesPerFrame, bytesPerSample;;
-    result = pl_AudioFileReader_GetEncoding (getPeerRef(), &encoding);
-    plonk_assert (result == PlankResult_OK);
+    int encoding, bits, channels, bytesPerFrame, bytesPerSample;
+    result = pl_AudioFileReader_GetEncoding (getPeerRef(), &encoding);              plonk_assert (result == PlankResult_OK);
+    result = pl_AudioFileReader_GetBitsPerSample (getPeerRef(), &bits);             plonk_assert (result == PlankResult_OK);
+    result = pl_AudioFileReader_GetNumChannels (getPeerRef(), &channels);           plonk_assert (result == PlankResult_OK);
+    result = pl_AudioFileReader_GetBytesPerFrame (getPeerRef(), &bytesPerFrame);    plonk_assert (result == PlankResult_OK);
     
-    result = pl_AudioFileReader_GetBitsPerSample (getPeerRef(), &bits);
-    plonk_assert (result == PlankResult_OK);
-    
-    result = pl_AudioFileReader_GetNumChannels (getPeerRef(), &channels);
-    plonk_assert (result == PlankResult_OK);
-
-    result = pl_AudioFileReader_GetBytesPerFrame (getPeerRef(), &bytesPerFrame);
-    plonk_assert (result == PlankResult_OK);
-    
+    plonk_assert ((encoding >= PLANKAUDIOFILE_ENCODING_MIN) && (encoding <= PLANKAUDIOFILE_ENCODING_MAX));
     plonk_assert (bits > 0);
     plonk_assert (channels > 0);
     plonk_assert (bytesPerFrame > 0);
@@ -251,61 +245,67 @@ public:
         return weak.fromWeak();
     }    
     
-    int getBitsPerSample() const throw()
+    inline int getBitsPerSample() const throw()
     {
         return getInternal()->getBitsPerSample();
     }
     
-    int getBytesPerFrame() const throw()
+    inline int getBytesPerFrame() const throw()
     {
         return getInternal()->getBytesPerFrame();
     }
     
-    int getNumChannels() const throw()
+    inline int getNumChannels() const throw()
     {
         return getInternal()->getNumChannels();
     }
     
-    double getSampleRate() const throw()
+    inline double getSampleRate() const throw()
     {
         return getInternal()->getSampleRate();
     }
     
-    int getNumFrames() const throw()
+    inline int getNumFrames() const throw()
     {
         return getInternal()->getNumFrames();
     }
     
-    int getFramePosition() const throw()
+    inline int getFramePosition() const throw()
     {
         return getInternal()->getFramePosition();
     }
     
-    void setFramePosition (const int position) throw()
+    inline void setFramePosition (const int position) throw()
     {
         return getInternal()->setFramePosition (position);
     }
     
-    void resetFramePosition() throw()
+    inline void resetFramePosition() throw()
     {
         return getInternal()->resetFramePosition();
     }
     
     template<class SampleType>
-    void readFrames (NumericalArray<SampleType>& data) throw()
+    inline void readFrames (NumericalArray<SampleType>& data) throw()
     {
         getInternal()->readFrames (data);
     }
     
     template<class SampleType>
-    NumericalArray<SampleType> readFrames() throw()
+    inline NumericalArray<SampleType> readAllFrames() throw()
     {
         typedef NumericalArray<SampleType> SampleArray;
         SampleArray data = SampleArray::withSize (getNumFrames() * getNumChannels());
+        resetFramePosition();
         getInternal()->readFrames (data);
         return data;
     }
 
+    template<template <typename> class SampleArray, class SampleType>
+    inline operator SampleArray<SampleType> () throw()
+    {
+        return readAllFrames<SampleType>();
+    }
 };
 
 

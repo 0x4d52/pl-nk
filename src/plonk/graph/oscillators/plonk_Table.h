@@ -46,10 +46,10 @@ template<class SampleType> class TableChannelInternal;
 
 CHANNELDATA_DECLARE(TableChannelInternal,SampleType)
 {    
-    typedef typename TypeUtility<SampleType>::IndexType IndexType;
+    typedef typename TypeUtility<SampleType>::IndexType FrequencyType;
 
     ChannelInternalCore::Data base;
-    IndexType currentPosition;
+    FrequencyType currentPosition;
 };      
 
 //------------------------------------------------------------------------------
@@ -60,9 +60,6 @@ class TableChannelInternal
 :   public ChannelInternal<SampleType, CHANNELDATA_NAME(TableChannelInternal,SampleType)>
 {
 public:
-    /*
-     for full templating we'd need to add template params for wavetable type and frequency unit type
-     */
 
     typedef CHANNELDATA_NAME(TableChannelInternal,SampleType)   Data;
     typedef ChannelBase<SampleType>                             ChannelType;
@@ -73,7 +70,11 @@ public:
     typedef InputDictionary                                     Inputs;
     typedef NumericalArray<SampleType>                          Buffer;
     typedef WavetableBase<SampleType>                           WavetableType;
-    typedef typename TypeUtility<SampleType>::IndexType         IndexType;
+    
+    typedef typename TypeUtility<SampleType>::IndexType         FrequencyType;
+    typedef UnitBase<FrequencyType>                             FrequencyUnitType;
+    typedef NumericalArray<FrequencyType>                       FrequencyBufferType;
+
 
     TableChannelInternal (Inputs const& inputs, 
                           Data const& data, 
@@ -106,7 +107,7 @@ public:
     
     void initChannel (const int channel) throw()
     {        
-        const UnitType& frequencyUnit = this->getInputAsUnit (IOKey::Frequency);
+        const FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
         
         this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
                                                this->getBlockSize()));
@@ -121,20 +122,20 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {        
         Data& data = this->getState();
-        const double sampleRate = this->getState().base.sampleRate;
+        const double sampleRate = data.base.sampleRate;
         
-        UnitType& frequencyUnit (this->getInputAsUnit (IOKey::Frequency));
-        const Buffer frequencyBuffer (frequencyUnit.process (info, channel));
+        FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
+        const FrequencyBufferType frequencyBuffer (frequencyUnit.process (info, channel));
         
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
         
-        const SampleType* const frequencySamples = frequencyBuffer.getArray();
+        const FrequencyType* const frequencySamples = frequencyBuffer.getArray();
         const int frequencyBufferLength = frequencyBuffer.length();
         
         const WavetableType& table (this->getInputAsWavetable (IOKey::Wavetable));
         const SampleType* const tableSamples = table.getArray();
-        const SampleType tableLength = SampleType (table.length());
+        const FrequencyType tableLength = FrequencyType (table.length());
         
         double tableLengthOverSampleRate = tableLength / sampleRate;
 
@@ -155,7 +156,7 @@ public:
         }
         else if (frequencyBufferLength == 1)
         {
-            const IndexType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
+            const FrequencyType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
@@ -208,6 +209,10 @@ public:
     typedef InputDictionary                         Inputs;
     typedef WavetableBase<SampleType>               WavetableType;
     
+    typedef typename TableInternal::FrequencyType         FrequencyType;
+    typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
+    typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
+    
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -232,7 +237,7 @@ public:
     
     /** Create an audio rate sawtooth oscillator. */
     static UnitType ar (WavetableType const& table, 
-                        UnitType const& frequency = SampleType (440), 
+                        FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
@@ -259,7 +264,7 @@ public:
     
     /** Create a control rate sawtooth oscillator. */
     static UnitType kr (WavetableType const& table,
-                        UnitType const& frequency, 
+                        FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0)) throw()
     {
@@ -289,6 +294,10 @@ public:
     typedef WavetableBase<SampleType>               WavetableType;
     typedef TableUnit<SampleType>                   TableType;
     
+    typedef typename TableInternal::FrequencyType         FrequencyType;
+    typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
+    typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
+
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -311,7 +320,7 @@ public:
     }
     
     /** Create an audio rate sawtooth oscillator. */
-    static UnitType ar (UnitType const& frequency = SampleType (440), 
+    static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
@@ -326,7 +335,7 @@ public:
     }
     
     /** Create a control rate sawtooth oscillator. */
-    static UnitType kr (UnitType const& frequency, 
+    static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0)) throw()
     {
@@ -353,6 +362,10 @@ public:
     typedef TableUnit<SampleType>                   TableType;
     typedef NumericalArray<SampleType>              WeightsType;
     
+    typedef typename TableInternal::FrequencyType         FrequencyType;
+    typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
+    typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
+
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -376,7 +389,7 @@ public:
     }
     
     /** Create an audio rate sawtooth oscillator. */
-    static UnitType ar (UnitType const& frequency = SampleType (440), 
+    static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         const int numHarmonics = 21,
@@ -393,7 +406,7 @@ public:
     }
     
     /** Create a control rate sawtooth oscillator. */
-    static UnitType kr (UnitType const& frequency, 
+    static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         const int numHarmonics = 21) throw()
@@ -423,6 +436,10 @@ public:
     typedef TableUnit<SampleType>                   TableType;
     typedef NumericalArray<SampleType>              WeightsType;
     
+    typedef typename TableInternal::FrequencyType         FrequencyType;
+    typedef typename TableInternal::FrequencyUnitType     FrequencyUnitType;
+    typedef typename TableInternal::FrequencyBufferType   FrequencyBufferType;
+
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -446,7 +463,7 @@ public:
     }
     
     /** Create an audio rate sawtooth oscillator. */
-    static UnitType ar (UnitType const& frequency = SampleType (440), 
+    static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         const int numHarmonics = 21,
@@ -463,7 +480,7 @@ public:
     }
     
     /** Create a control rate sawtooth oscillator. */
-    static UnitType kr (UnitType const& frequency, 
+    static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         const int numHarmonics = 21) throw()
