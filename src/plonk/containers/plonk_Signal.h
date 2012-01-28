@@ -57,14 +57,14 @@ class SignalInternal : public SmartPointer
 {
 public:
     typedef NumericalArray<SampleType>      Buffer;
-    typedef NumericalArray2D<SampleType>    MultiBuffer;
+    typedef NumericalArray2D<SampleType>    Buffers;
     
     inline SignalInternal() throw()
     :   numInterleavedChannels (1)
     {
     }
    
-    inline SignalInternal (MultiBuffer const& buffersToUse, 
+    inline SignalInternal (Buffers const& buffersToUse, 
                            SampleRate const& sampleRateToUse) throw()
     :   buffers (buffersToUse),
         sampleRate (sampleRateToUse),
@@ -102,10 +102,23 @@ public:
         }
     }
     
+    inline Buffer getInterleaved() const throw()
+    {
+        return (numInterleavedChannels > 1) ? buffers.first() : buffers.interleave();
+    }
+    
+    inline Buffers getDeinterleaved() const throw()
+    {        
+        if (numInterleavedChannels > 1) 
+            return buffers.first().deinterleave (numInterleavedChannels);
+        else
+            return buffers;
+    }
+    
     friend class SignalBase<SampleType>;
     
 private:
-    MultiBuffer buffers;
+    Buffers buffers;
     SampleRate sampleRate;
     const int numInterleavedChannels;
 };
@@ -122,14 +135,14 @@ public:
     typedef WeakPointerContainer<SignalBase>    Weak;    
     
     typedef typename Internal::Buffer           Buffer;
-    typedef typename Internal::MultiBuffer      MultiBuffer;
+    typedef typename Internal::Buffers          Buffers;
     
-	SignalBase() throw()
-	:	Base (new Internal ())
-	{
-	}
+    SignalBase() throw()
+    :   Base (new Internal ())
+    {
+    }
     
-    SignalBase (MultiBuffer const& buffers, 
+    SignalBase (Buffers const& buffers, 
                 SampleRate const& sampleRate = SampleRate::getDefault()) throw()
     :   Base (new Internal (buffers, sampleRate))
     {
@@ -143,14 +156,14 @@ public:
     }
 	
     explicit SignalBase (Internal* internalToUse) throw() 
-	:	Base (internalToUse)
-	{
-	} 
+    :   Base (internalToUse)
+    {
+    } 
     
     SignalBase (SignalBase const& copy) throw()
-	:	Base (static_cast<Base const&> (copy))
-	{
-	}    
+    :   Base (static_cast<Base const&> (copy))
+    {
+    }    
     
     SignalBase (Dynamic const& other) throw()
     :   Base (other.as<SignalBase>().getInternal())
@@ -160,7 +173,7 @@ public:
     /** Assignment operator. */
     SignalBase& operator= (SignalBase const& other) throw()
 	{
-		if (this != &other)
+        if (this != &other)
             this->setInternal (other.containerCopy().getInternal());
         
         return *this;
@@ -175,17 +188,17 @@ public:
     }    
     
     static const SignalBase& getNull() throw()
-	{
-		static SignalBase null;        
-		return null;
-	}	           
+    {
+        static SignalBase null;        
+        return null;
+    }	           
     
-    inline const MultiBuffer& getBuffers() const throw()
+    inline const Buffers& getBuffers() const throw()
     {
         return this->getInternal()->buffers;
     }
 
-    inline MultiBuffer& getBuffers() throw()
+    inline Buffers& getBuffers() throw()
     {
         return this->getInternal()->buffers;
     }
@@ -208,6 +221,21 @@ public:
     inline int getNumChannels() const throw()
     {
         return this->getInternal()->getNumChannels();
+    }
+    
+    inline bool isInterleaved() const throw()
+    {
+        return this->getInternal()->numInterleavedChannels > 1;
+    }
+
+    inline Buffer getInterleaved() const throw()
+    {
+        return this->getInternal()->getInterleaved();
+    }
+    
+    inline Buffers getDeinterleaved() const throw()
+    {
+        return this->getInternal()->getDeinterleaved();
     }
 
     

@@ -138,7 +138,7 @@
     #define plonk_assert        assert
 	#define plonk_assertfalse	(assert (false))
 #else
-	#define plonk_assert (x)	{ }
+	#define plonk_assert(x)     { }
 	#define plonk_assertfalse	{ }
 #endif
 
