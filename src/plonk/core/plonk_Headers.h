@@ -70,6 +70,7 @@
 #include "../containers/plonk_TextArray.h"
 #include "../containers/plonk_BreakPoints.h"
 #include "../containers/plonk_Wavetable.h"
+#include "../containers/plonk_Signal.h"
 #include "../containers/plonk_Int24.h"
 #include "../containers/plonk_Function.h"
 #include "../containers/plonk_LockFreeQueue.h"

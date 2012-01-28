@@ -116,12 +116,12 @@ public:
     void setLabel(Text const& newId) throw()                        { identifier = newId; }
 
     
-    void write(TimeStamp writeStartTime, 
-               const int numWriteSamples, 
-               const SampleType* sourceData) throw()
+    void write (TimeStamp writeStartTime, 
+                const int numWriteSamples, 
+                const SampleType* sourceData) throw()
     {        
         const int currentBufferSize = bufferSize.getValue();
-        const int currentSampleRate = sampleRate.getValue();
+        const double currentSampleRate = sampleRate.getValue(); // should it be double, was int??
                                     
         SampleType* const bufferSamples = buffer.getArray();
         
@@ -158,7 +158,7 @@ public:
             else
             {
                 const TimeStamp bufferOffsetTime = writeStartTime - bufferStartTime;
-                bufferOffsetSamples = int (bufferOffsetTime.toSamples (sampleRate) + 0.5);
+                bufferOffsetSamples = int (bufferOffsetTime.toSamples (currentSampleRate) + 0.5);
                 
                 if (bufferOffsetSamples >= currentBufferSize)
                     bufferOffsetSamples -= currentBufferSize;
@@ -203,7 +203,7 @@ public:
             (readStartTime < latestValidTime) && 
             (readEndTime <= latestValidTime))
         {
-            int bufferOffsetSamples = int ((readStartTime - bufferStartTime).toSamples (sampleRate) + 0.5);
+            int bufferOffsetSamples = int ((readStartTime - bufferStartTime).toSamples (currentSampleRate) + 0.5);
             
             if (bufferOffsetSamples < 0)
                 bufferOffsetSamples += currentBufferSize - 1; // -1 due to being rounded in the wrong direction above when negative
@@ -362,7 +362,7 @@ public:
         return getBusDictionary().keyForValue (*this);
     }
 
-    static BusBuffer getBus(Text const& name) throw()
+    static BusBuffer getBus (Text const& name) throw()
     {
         BusDictionary& dictionary = getBusDictionary();
         
@@ -390,7 +390,7 @@ public:
         dictionary.put (name, newBusBuffer);
     }
     
-    static void removeBus(Text const& name) throw()
+    static void removeBus (Text const& name) throw()
     {
         getBusDictionary().remove (name);
     }

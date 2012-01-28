@@ -301,11 +301,19 @@ public:
         return data;
     }
 
-    template<template <typename> class SampleArray, class SampleType>
-    inline operator SampleArray<SampleType> () throw()
+    template<class SampleType>
+    inline operator NumericalArray<SampleType> () throw()
     {
         return readAllFrames<SampleType>();
     }
+    
+    template<class SampleType>
+    inline operator SignalBase<SampleType> () throw()
+    {
+        NumericalArray<SampleType> data = readAllFrames<SampleType>();
+        return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
+    }
+
 };
 
 

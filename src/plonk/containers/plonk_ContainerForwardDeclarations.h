@@ -79,6 +79,7 @@ template<class SampleType>                                              class Br
 template<class SampleType>                                              class BreakpointsInternal;
 template<class SampleType>                                              class BreakpointsBase;
 template<class SampleType>                                              class WavetableBase;
+template<class SampleType>                                              class SignalBase;
 
 template<class ReturnType,
          class ArgType1 = void, 
@@ -202,6 +203,14 @@ typedef WavetableBase<Int>                   IntWavetable;
 typedef WavetableBase<Int24>                 Int24Wavetable;
 typedef WavetableBase<Long>                  LongWavetable;
 typedef WavetableBase<PLONK_TYPE_DEFAULT>    Wavetable;
+
+typedef SignalBase<Float>                 FloatSignal;
+typedef SignalBase<Double>                DoubleSignal;
+typedef SignalBase<Short>                 ShortSignal;
+typedef SignalBase<Int>                   IntSignal;
+typedef SignalBase<Int24>                 Int24Signal;
+typedef SignalBase<Long>                  LongSignal;
+typedef SignalBase<PLONK_TYPE_DEFAULT>    Signal;
 
 typedef AtomicValue<Int>        AtomicInt;
 typedef AtomicValue<Long>       AtomicLong;
