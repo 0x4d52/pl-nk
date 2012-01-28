@@ -1,7 +1,7 @@
 pl-nk : plonk|plink|plank
 http://code.google.com/p/pl-nk/
 
- -------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
  This file is part of the Plink, Plonk, Plank libraries
   by Martin Robinson
  
