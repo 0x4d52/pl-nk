@@ -114,21 +114,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00042"></a>00042 <span class="preprocessor">#include &lt;math.h&gt;</span>
 <a name="l00043"></a>00043 <span class="preprocessor">#include &quot;<a class="code" href="plonk___constants_8h.html">plonk_Constants.h</a>&quot;</span>
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045 <span class="comment">// common unary</span>
-<a name="l00046"></a>00046 
-<a name="l00049"></a><a class="code" href="group___plonk_unary_op_functions.html#ga034aed3ce092405a2133cd4f937845cc">00049</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#a1f6669f719750c5a261cc5e12ab8e240" title="Create a new UnitBase by applying the unary &#39;abs&#39; function to operand.">abs</a> (Type a) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &lt; Type (0)) ? -a : a; }
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051 <span class="comment">// common binary</span>
-<a name="l00052"></a>00052 
-<a name="l00055"></a><a class="code" href="group___plonk_binary_op_functions.html#gaf41fefb02cb3cfd70cfde9443c4ab45b">00055</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#ad75960a00019d4fb16a1418cf2815a62" title="Create a new UnitBase by applying the binary &#39;min&#39; function to the left and right inputs...">min</a> (Type a, Type b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &gt; b) ? b : a; }
-<a name="l00056"></a>00056 
-<a name="l00059"></a><a class="code" href="group___plonk_binary_op_functions.html#ga23c16e00d1829a14b7a21e8f7f0ee5b3">00059</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">max</a> (Type a, Type b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &lt; b) ? b : a; }
-<a name="l00060"></a>00060 
-<a name="l00063"></a><a class="code" href="group___plonk_binary_op_functions.html#gaa5eb167d627d4422993e07a86edfb54b">00063</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#a2ce4c3976ab78b740fceddfaac0aa468" title="Create a new UnitBase by applying the binary &#39;pow&#39; function to the left and right inputs...">pow</a> (Type a, Type b) <span class="keywordflow">throw</span>() { <a class="code" href="plonk___unit_8h.html#a2ce4c3976ab78b740fceddfaac0aa468" title="Create a new UnitBase by applying the binary &#39;pow&#39; function to the left and right inputs...">return ::pow</a> ((<span class="keywordtype">double</span>)a, (<span class="keywordtype">double</span>)b);    }
-<a name="l00064"></a>00064     
-<a name="l00065"></a>00065 
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="comment">// common unary</span>
+<a name="l00047"></a>00047 
+<a name="l00050"></a><a class="code" href="group___plonk_unary_op_functions.html#ga034aed3ce092405a2133cd4f937845cc">00050</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#a1f6669f719750c5a261cc5e12ab8e240" title="Create a new UnitBase by applying the unary &#39;abs&#39; function to operand.">abs</a> (Type a) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &lt; Type (0)) ? -a : a; }
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 <span class="comment">// common binary</span>
+<a name="l00053"></a>00053 
+<a name="l00056"></a><a class="code" href="group___plonk_binary_op_functions.html#gaf41fefb02cb3cfd70cfde9443c4ab45b">00056</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#ad75960a00019d4fb16a1418cf2815a62" title="Create a new UnitBase by applying the binary &#39;min&#39; function to the left and right inputs...">min</a> (Type a, Type b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &gt; b) ? b : a; }
+<a name="l00057"></a>00057 
+<a name="l00060"></a><a class="code" href="group___plonk_binary_op_functions.html#ga23c16e00d1829a14b7a21e8f7f0ee5b3">00060</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">max</a> (Type a, Type b) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> (a &lt; b) ? b : a; }
+<a name="l00061"></a>00061 
+<a name="l00064"></a><a class="code" href="group___plonk_binary_op_functions.html#gaa5eb167d627d4422993e07a86edfb54b">00064</a> <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt; <span class="keyword">inline</span> Type <a class="code" href="plonk___unit_8h.html#a2ce4c3976ab78b740fceddfaac0aa468" title="Create a new UnitBase by applying the binary &#39;pow&#39; function to the left and right inputs...">pow</a> (Type a, Type b) <span class="keywordflow">throw</span>() { <a class="code" href="plonk___unit_8h.html#a2ce4c3976ab78b740fceddfaac0aa468" title="Create a new UnitBase by applying the binary &#39;pow&#39; function to the left and right inputs...">return ::pow</a> ((<span class="keywordtype">double</span>)a, (<span class="keywordtype">double</span>)b);    }
+<a name="l00065"></a>00065     
 <a name="l00066"></a>00066 
-<a name="l00067"></a>00067 <span class="preprocessor">#endif // PLONK_INLINECOMMONOPS_H</span>
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 <span class="preprocessor">#endif // PLONK_INLINECOMMONOPS_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -145,7 +146,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:13 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

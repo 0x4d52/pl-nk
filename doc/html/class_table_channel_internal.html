@@ -109,6 +109,8 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#a961757d09df6cdbe120620fbff8f5928">Buffer</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#a30ecd0128d67e1b5bc55ca275e361cac">WavetableType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_type_utility.html">TypeUtility</a><br class="typebreak"/>
+&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#acb6b43eef4bc54983c09b8f4c19ebdac">TableChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
@@ -177,6 +179,21 @@ template&lt;class SampleType &gt; </div>
 <p>Sublasses should inherit from this, add their own members, and store an instance. Where applicable the structure should match the equivalents in the Plink library. </p>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab06b51653c5bb6fa39554f8be22b5dfb"></a><!-- doxytag: member="TableChannelInternal::IndexType" ref="ab06b51653c5bb6fa39554f8be22b5dfb" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt;::<a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a> <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -458,7 +475,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:38 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:26 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

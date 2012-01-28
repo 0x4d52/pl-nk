@@ -140,36 +140,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00104"></a>00104 
 <a name="l00109"></a>00109 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gaf42f83e7a2f5b6c3a561e141335ff24c" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBitsPerSample</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *bitsPerSample);
 <a name="l00110"></a>00110 
-<a name="l00114"></a>00114 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0b169539564da5e656f4843bca46d730">pl_AudioFileReader_GetNumChannels</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numChannels);
-<a name="l00115"></a>00115 
-<a name="l00119"></a>00119 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gafc6121f2efff0f0696cd430b92697371">pl_AudioFileReader_GetSampleRate</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">double</span> *sampleRate);
-<a name="l00120"></a>00120 
-<a name="l00124"></a>00124 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga72c00c51c3fcaa3fc2f0a60f65d7f61d">pl_AudioFileReader_GetNumFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numFrames);
-<a name="l00125"></a>00125 
-<a name="l00129"></a>00129 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga85749687029ce642263b50d34979a7ee">pl_AudioFileReader_SetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> frameIndex);
-<a name="l00130"></a>00130 
-<a name="l00134"></a>00134 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gac726281037e5e992ba936fb24f807487">pl_AudioFileReader_ResetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
-<a name="l00135"></a>00135 
-<a name="l00139"></a>00139 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0687de26ac936f805f3349a236dcf9df">pl_AudioFileReader_GetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *frameIndex);
-<a name="l00140"></a>00140 
-<a name="l00144"></a>00144 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0806b3ae5096a516e0a9fe188130ee7e">pl_AudioFileReader_ReadFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> numFrames, <span class="keywordtype">void</span>* data);
-<a name="l00145"></a>00145 
+<a name="l00115"></a>00115 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga085db5b740e6d508232ee5707fdf3b1e" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBytesPerFrame</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *bytesPerFrame);
+<a name="l00116"></a>00116 
+<a name="l00120"></a>00120 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0b169539564da5e656f4843bca46d730">pl_AudioFileReader_GetNumChannels</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numChannels);
+<a name="l00121"></a>00121 
+<a name="l00125"></a>00125 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gafc6121f2efff0f0696cd430b92697371">pl_AudioFileReader_GetSampleRate</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">double</span> *sampleRate);
+<a name="l00126"></a>00126 
+<a name="l00130"></a>00130 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga72c00c51c3fcaa3fc2f0a60f65d7f61d">pl_AudioFileReader_GetNumFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *numFrames);
+<a name="l00131"></a>00131 
+<a name="l00135"></a>00135 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga85749687029ce642263b50d34979a7ee">pl_AudioFileReader_SetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> frameIndex);
+<a name="l00136"></a>00136 
+<a name="l00140"></a>00140 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#gac726281037e5e992ba936fb24f807487">pl_AudioFileReader_ResetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p);
+<a name="l00141"></a>00141 
+<a name="l00145"></a>00145 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga0687de26ac936f805f3349a236dcf9df">pl_AudioFileReader_GetFramePosition</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keywordtype">int</span> *frameIndex);
 <a name="l00146"></a>00146 
-<a name="l00149"></a>00149 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
-<a name="l00150"></a>00150 
-<a name="l00151"></a>00151 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00152"></a>00152 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileReader
-<a name="l00153"></a>00153 {
-<a name="l00154"></a>00154     PlankIffFileReader iff;    
-<a name="l00155"></a>00155     <a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a> formatInfo;
-<a name="l00156"></a>00156     
-<a name="l00157"></a>00157     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataLength;
-<a name="l00158"></a>00158     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> numFrames;
-<a name="l00159"></a>00159     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataPosition;
-<a name="l00160"></a>00160 } PlankAudioFileReader;
-<a name="l00161"></a>00161 <span class="preprocessor">#endif</span>
-<a name="l00162"></a>00162 <span class="preprocessor"></span>
-<a name="l00163"></a>00163 <span class="preprocessor">#endif // PLANK_AUDIOFILEREADER_H</span>
+<a name="l00150"></a>00150 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_audio_file_reader_class.html#ga11507022a82e7b9ab39e460b399f1139">pl_AudioFileReader_ReadFrames</a> (<a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> p, <span class="keyword">const</span> <span class="keywordtype">int</span> numFrames, <span class="keywordtype">void</span>* data, <span class="keywordtype">int</span>* framesRead);
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152 
+<a name="l00155"></a>00155 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00158"></a>00158 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankAudioFileReader
+<a name="l00159"></a>00159 {
+<a name="l00160"></a>00160     PlankIffFileReader iff;    
+<a name="l00161"></a>00161     <a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a> formatInfo;
+<a name="l00162"></a>00162     
+<a name="l00163"></a>00163     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataLength;
+<a name="l00164"></a>00164     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> numFrames;
+<a name="l00165"></a>00165     <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> dataPosition;
+<a name="l00166"></a>00166 } PlankAudioFileReader;
+<a name="l00167"></a>00167 <span class="preprocessor">#endif</span>
+<a name="l00168"></a>00168 <span class="preprocessor"></span>
+<a name="l00169"></a>00169 <span class="preprocessor">#endif // PLANK_AUDIOFILEREADER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -186,7 +188,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:23 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:12 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

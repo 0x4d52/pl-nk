@@ -116,199 +116,240 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a><a class="code" href="plonk___standard_header_8h.html#ad1a89b073a7338ade15375f0a3d9b913">00044</a> <span class="preprocessor">#define PLONK_BIGENDIAN     PLANK_BIGENDIAN</span>
 <a name="l00045"></a><a class="code" href="plonk___standard_header_8h.html#a1521d3dff28b203a2364a8dc60028fdf">00045</a> <span class="preprocessor"></span><span class="preprocessor">#define PLONK_LITTLEENDIAN  PLANK_LITTLEENDIAN</span>
 <a name="l00046"></a>00046 <span class="preprocessor"></span>
-<a name="l00047"></a><a class="code" href="plonk___standard_header_8h.html#a274e1ceca82eb2dcc2182ef9a1859bc2">00047</a> <span class="preprocessor">#define PLONK_USEPLINK</span>
-<a name="l00048"></a>00048 <span class="preprocessor"></span><span class="preprocessor">#ifdef PLONK_USEPLINK</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span><span class="preprocessor">    #include &quot;../../plink/plink.h&quot;</span>
-<a name="l00050"></a>00050 <span class="preprocessor">#endif</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span>
-<a name="l00052"></a><a class="code" href="plonk___standard_header_8h.html#a4e8887426d70c86c03e83afc06df909e">00052</a> <span class="preprocessor">#define PLONK_NAMESPACE plonk</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span>
-<a name="l00054"></a>00054 <span class="preprocessor">#ifdef PLONK_NAMESPACE</span>
-<a name="l00055"></a><a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">00055</a> <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLONK_NAMESPACE    namespace PLONK_NAMESPACE {</span>
-<a name="l00056"></a><a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">00056</a> <span class="preprocessor"></span><span class="preprocessor">    #define END_PLONK_NAMESPACE      }</span>
-<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLONK_NAMESPACE </span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="preprocessor">    #define END_PLONK_NAMESPACE   </span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00061"></a>00061 <span class="preprocessor"></span>
-<a name="l00062"></a>00062 <span class="preprocessor">#if !defined(_NDEBUG) &amp;&amp; !defined(NDEBUG) &amp;&amp; !defined(_DEBUG) &amp;&amp; !defined(DEBUG)</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span><span class="preprocessor">    #warning You should define appropriate preprocessor macros in Debug (_DEBUG=1 DEBUG=1) and Release (_NDEBUG=1 NDEBUG=1)</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span>
-<a name="l00066"></a>00066 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span><span class="preprocessor">    #if !defined(NDEBUG) || defined(_DEBUG)</span>
-<a name="l00068"></a><a class="code" href="plonk___standard_header_8h.html#a98d17fab1f9e5707673cb72052a208d7">00068</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLONK_DEBUG 1</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00070"></a>00070 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span><span class="preprocessor">    #if !PLONK_DEBUG</span>
-<a name="l00072"></a>00072 <span class="preprocessor"></span><span class="preprocessor">        #undef PLONK_DEBUG</span>
-<a name="l00073"></a>00073 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00074"></a>00074 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00075"></a>00075 <span class="preprocessor"></span>
-<a name="l00076"></a>00076 
-<a name="l00077"></a>00077 <span class="preprocessor">#include &lt;cstdlib&gt;</span>
-<a name="l00078"></a>00078 <span class="preprocessor">#include &lt;cstdarg&gt;</span>
-<a name="l00079"></a>00079 <span class="preprocessor">#include &lt;climits&gt;</span>
-<a name="l00080"></a>00080 <span class="preprocessor">#include &lt;cfloat&gt;</span>
-<a name="l00081"></a>00081 <span class="preprocessor">#include &lt;cmath&gt;</span>
-<a name="l00082"></a>00082 <span class="preprocessor">#include &lt;cwchar&gt;</span>
-<a name="l00083"></a>00083 <span class="preprocessor">#include &lt;stdexcept&gt;</span>
-<a name="l00084"></a>00084 <span class="preprocessor">#include &lt;typeinfo&gt;</span>
-<a name="l00085"></a>00085 <span class="preprocessor">#include &lt;cstring&gt;</span>
-<a name="l00086"></a>00086 <span class="preprocessor">#include &lt;cstdio&gt;</span>
-<a name="l00087"></a>00087 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089 
-<a name="l00090"></a><a class="code" href="plonk___standard_header_8h.html#a7e006da163c38524a4d1ec8c89a121e8">00090</a> <span class="preprocessor">#define PLONK_MAJOR_VERSION      0</span>
-<a name="l00091"></a><a class="code" href="plonk___standard_header_8h.html#ad88b0d32fb593a1a6c122ced0508d4cc">00091</a> <span class="preprocessor"></span><span class="preprocessor">#define PLONK_MINOR_VERSION      1</span>
-<a name="l00092"></a><a class="code" href="plonk___standard_header_8h.html#abb65ddbe5fcb269972720417ad495604">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define PLONK_BUILDNUMBER        1</span>
-<a name="l00093"></a>00093 <span class="preprocessor"></span>
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <span class="preprocessor">#ifdef PLONK_DEBUG</span>
-<a name="l00096"></a>00096 <span class="preprocessor"></span><span class="preprocessor">    #include &lt;cassert&gt;</span>
-<a name="l00097"></a><a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">00097</a> <span class="preprocessor">    #define plonk_assert        assert</span>
-<a name="l00098"></a><a class="code" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">00098</a> <span class="preprocessor"></span><span class="preprocessor">        #define plonk_assertfalse       (assert (false))</span>
-<a name="l00099"></a>00099 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00100"></a>00100 <span class="preprocessor"></span><span class="preprocessor">        #define plonk_assert(x)         { }</span>
-<a name="l00101"></a>00101 <span class="preprocessor"></span><span class="preprocessor">        #define plonk_assertfalse       { }</span>
-<a name="l00102"></a>00102 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00103"></a>00103 <span class="preprocessor"></span>
-<a name="l00104"></a>00104 <span class="comment">/* if you&#39;re getting your first compile error here on iOS</span>
-<a name="l00105"></a>00105 <span class="comment"> it&#39;s probably because the file your compiling which includes</span>
-<a name="l00106"></a>00106 <span class="comment"> plonk headers is not a C++ file. To make an Obj-C file (.m) </span>
-<a name="l00107"></a>00107 <span class="comment"> an Obj-C++ file use .mm as the file extension. */</span>
-<a name="l00108"></a>00108 <a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>
-<a name="l00109"></a>00109 
-<a name="l00110"></a><a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">00110</a> <span class="keyword">typedef</span> <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>;
-<a name="l00111"></a>00111 
-<a name="l00112"></a><a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">00112</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">PlankF</a> <a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>;
-<a name="l00113"></a><a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">00113</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a> <a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>;
-<a name="l00114"></a>00114 
-<a name="l00115"></a><a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">00115</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a> <a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>;
-<a name="l00116"></a><a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">00116</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>; 
-<a name="l00117"></a><a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">00117</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">PlankS</a> <a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>;
-<a name="l00118"></a><a class="code" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">00118</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a> <a class="code" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a>;
-<a name="l00119"></a><a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">00119</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a>;
-<a name="l00120"></a>00120 
-<a name="l00121"></a><a class="code" href="plonk___standard_header_8h.html#af4452281f6181e246e8a051b90ad0420">00121</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="plonk___standard_header_8h.html#af4452281f6181e246e8a051b90ad0420">UnsignedChar</a>;
-<a name="l00122"></a><a class="code" href="plonk___standard_header_8h.html#a175ebcaaac40ddaff0cadac455dc38f7">00122</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="plonk___standard_header_8h.html#a175ebcaaac40ddaff0cadac455dc38f7">UnsignedInt</a>; 
-<a name="l00123"></a><a class="code" href="plonk___standard_header_8h.html#ad68bab4b7c44312dbcffe6e9b7477a78">00123</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a> <a class="code" href="plonk___standard_header_8h.html#ad68bab4b7c44312dbcffe6e9b7477a78">UnsignedShort</a>;
-<a name="l00124"></a><a class="code" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">00124</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> <a class="code" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a>;
-<a name="l00125"></a><a class="code" href="plonk___standard_header_8h.html#a0f512a8c1725d76e0c731d6f346821e5">00125</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> <a class="code" href="plonk___standard_header_8h.html#a0f512a8c1725d76e0c731d6f346821e5">UnsignedLongLong</a>;
-<a name="l00126"></a>00126 
-<a name="l00127"></a><a class="code" href="plonk___standard_header_8h.html#a76a8b016e5ad61faf9062cc387df5016">00127</a> <span class="keyword">typedef</span> <span class="keywordtype">bool</span> <a class="code" href="plonk___standard_header_8h.html#a76a8b016e5ad61faf9062cc387df5016">Bool</a>;
-<a name="l00128"></a><a class="code" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">00128</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> <a class="code" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a>;
+<a name="l00047"></a>00047 <span class="preprocessor">#if PLANK_WIN</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_WIN 1</span>
+<a name="l00049"></a>00049 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span>
+<a name="l00051"></a>00051 <span class="preprocessor">#if PLANK_APPLE</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_APPLE 1</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span>
+<a name="l00055"></a>00055 <span class="preprocessor">#if PLANK_GCC</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_GCC 1</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span>
+<a name="l00059"></a>00059 <span class="preprocessor">#if PLANK_LLVN</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_LLVM 1</span>
+<a name="l00061"></a>00061 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00062"></a>00062 <span class="preprocessor"></span>
+<a name="l00063"></a>00063 <span class="preprocessor">#if PLANK_APPLE_LLVM</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_APPLE_LLVM 1</span>
+<a name="l00065"></a>00065 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00066"></a>00066 <span class="preprocessor"></span>
+<a name="l00067"></a>00067 <span class="preprocessor">#if PLANK_ARM</span>
+<a name="l00068"></a>00068 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_ARM 1</span>
+<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00070"></a>00070 <span class="preprocessor"></span>
+<a name="l00071"></a>00071 <span class="preprocessor">#if PLANK_X86</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_X86 1</span>
+<a name="l00073"></a>00073 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00074"></a>00074 <span class="preprocessor"></span>
+<a name="l00075"></a>00075 <span class="preprocessor">#if PLANK_PPC</span>
+<a name="l00076"></a>00076 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_PPC 1</span>
+<a name="l00077"></a>00077 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00078"></a>00078 <span class="preprocessor"></span>
+<a name="l00079"></a>00079 <span class="preprocessor">#if PLANK_32BIT</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_32BIT 1</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00082"></a>00082 <span class="preprocessor"></span>
+<a name="l00083"></a>00083 <span class="preprocessor">#if PLANK_64BIT</span>
+<a name="l00084"></a>00084 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_64BIT 1</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00086"></a>00086 <span class="preprocessor"></span>
+<a name="l00087"></a>00087 
+<a name="l00088"></a><a class="code" href="plonk___standard_header_8h.html#a274e1ceca82eb2dcc2182ef9a1859bc2">00088</a> <span class="preprocessor">#define PLONK_USEPLINK</span>
+<a name="l00089"></a>00089 <span class="preprocessor"></span><span class="preprocessor">#ifdef PLONK_USEPLINK</span>
+<a name="l00090"></a>00090 <span class="preprocessor"></span><span class="preprocessor">    #include &quot;../../plink/plink.h&quot;</span>
+<a name="l00091"></a>00091 <span class="preprocessor">#endif</span>
+<a name="l00092"></a>00092 <span class="preprocessor"></span>
+<a name="l00093"></a><a class="code" href="plonk___standard_header_8h.html#a4e8887426d70c86c03e83afc06df909e">00093</a> <span class="preprocessor">#define PLONK_NAMESPACE plonk</span>
+<a name="l00094"></a>00094 <span class="preprocessor"></span>
+<a name="l00095"></a>00095 <span class="preprocessor">#ifdef PLONK_NAMESPACE</span>
+<a name="l00096"></a><a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">00096</a> <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLONK_NAMESPACE    namespace PLONK_NAMESPACE {</span>
+<a name="l00097"></a><a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">00097</a> <span class="preprocessor"></span><span class="preprocessor">    #define END_PLONK_NAMESPACE      }</span>
+<a name="l00098"></a>00098 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00099"></a>00099 <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLONK_NAMESPACE </span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span><span class="preprocessor">    #define END_PLONK_NAMESPACE   </span>
+<a name="l00101"></a>00101 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span>
+<a name="l00103"></a>00103 <span class="preprocessor">#if !defined(_NDEBUG) &amp;&amp; !defined(NDEBUG) &amp;&amp; !defined(_DEBUG) &amp;&amp; !defined(DEBUG)</span>
+<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="preprocessor">    #warning You should define appropriate preprocessor macros in Debug (_DEBUG=1 DEBUG=1) and Release (_NDEBUG=1 NDEBUG=1)</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span>
+<a name="l00107"></a>00107 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
+<a name="l00108"></a>00108 <span class="preprocessor"></span><span class="preprocessor">    #if !defined(NDEBUG) || defined(_DEBUG)</span>
+<a name="l00109"></a><a class="code" href="plonk___standard_header_8h.html#a98d17fab1f9e5707673cb72052a208d7">00109</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLONK_DEBUG 1</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00111"></a>00111 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00112"></a>00112 <span class="preprocessor"></span><span class="preprocessor">    #if !PLONK_DEBUG</span>
+<a name="l00113"></a>00113 <span class="preprocessor"></span><span class="preprocessor">        #undef PLONK_DEBUG</span>
+<a name="l00114"></a>00114 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00116"></a>00116 <span class="preprocessor"></span>
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118 <span class="preprocessor">#include &lt;cstdlib&gt;</span>
+<a name="l00119"></a>00119 <span class="preprocessor">#include &lt;cstdarg&gt;</span>
+<a name="l00120"></a>00120 <span class="preprocessor">#include &lt;climits&gt;</span>
+<a name="l00121"></a>00121 <span class="preprocessor">#include &lt;cfloat&gt;</span>
+<a name="l00122"></a>00122 <span class="preprocessor">#include &lt;cmath&gt;</span>
+<a name="l00123"></a>00123 <span class="preprocessor">#include &lt;cwchar&gt;</span>
+<a name="l00124"></a>00124 <span class="preprocessor">#include &lt;stdexcept&gt;</span>
+<a name="l00125"></a>00125 <span class="preprocessor">#include &lt;typeinfo&gt;</span>
+<a name="l00126"></a>00126 <span class="preprocessor">#include &lt;cstring&gt;</span>
+<a name="l00127"></a>00127 <span class="preprocessor">#include &lt;cstdio&gt;</span>
+<a name="l00128"></a>00128 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00129"></a>00129 
-<a name="l00130"></a><a class="code" href="plonk___standard_header_8h.html#a47783a6c888e6afe7b64637737daed64">00130</a> <span class="preprocessor">#define PLONK_INT24_MAX PLANK_INT24_MAX</span>
-<a name="l00131"></a>00131 <span class="preprocessor"></span>
-<a name="l00132"></a>00132 <span class="preprocessor">#if (defined (_WIN32) || defined (_WIN64))</span>
-<a name="l00133"></a>00133 <span class="preprocessor"></span><span class="comment">//    typedef __int64 LongLong;</span>
-<a name="l00134"></a>00134 <span class="comment">//    typedef unsigned __int64 UnsignedLongLong;</span>
-<a name="l00135"></a>00135 <span class="preprocessor">        #pragma warning(disable : 4244) // loss of precision</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span><span class="preprocessor">        #pragma warning(disable : 4996) // security of snprintf etc</span>
-<a name="l00137"></a>00137 <span class="preprocessor"></span><span class="preprocessor">        #pragma warning(disable : 4800) // bool performance warning</span>
-<a name="l00138"></a>00138 <span class="preprocessor"></span><span class="preprocessor">        #define _CRT_SECURE_NO_WARNINGS</span>
-<a name="l00139"></a>00139 <span class="preprocessor"></span><span class="comment">//#else</span>
-<a name="l00140"></a>00140 <span class="comment">//    typedef long long LongLong;</span>
-<a name="l00141"></a>00141 <span class="comment">//      typedef unsigned long long UnsignedLongLong;</span>
-<a name="l00142"></a>00142 <span class="preprocessor">#endif</span>
-<a name="l00143"></a>00143 <span class="preprocessor"></span>
-<a name="l00144"></a>00144 
-<a name="l00150"></a><a class="code" href="struct_force_error_struct.html#a4f4bb77104134d255d33bde9ace69636">00150</a> <span class="keyword">struct </span><a class="code" href="struct_force_error_struct.html" title="To help raise compiler errors when function prototypes change.">ForceErrorStruct</a> { <span class="keywordtype">int</span> <a class="code" href="struct_force_error_struct.html#a4f4bb77104134d255d33bde9ace69636">dummy</a>; };
-<a name="l00151"></a><a class="code" href="plonk___standard_header_8h.html#a86663fab7fab4217e835ad45b326c8f1">00151</a> <span class="preprocessor">#define FORCE_COMPILER_ERROR_FUNCTION_PROTOTYPE_CHANGED ForceErrorStruct</span>
-<a name="l00152"></a>00152 <span class="preprocessor"></span>
-<a name="l00153"></a>00153 
-<a name="l00154"></a>00154 <span class="preprocessor">#ifdef PLONK_USEPLINK</span>
-<a name="l00155"></a>00155 <span class="preprocessor"></span>
-<a name="l00156"></a>00156 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType = <span class="keywordtype">float</span>&gt;
-<a name="l00157"></a><a class="code" href="struct_plink_buffer.html">00157</a> <span class="keyword">struct </span><a class="code" href="struct_plink_buffer.html">PlinkBuffer</a>
-<a name="l00158"></a>00158 {
-<a name="l00159"></a><a class="code" href="struct_plink_buffer.html#a5f3d9f5dd912032a3649e9040747ae41">00159</a>     <span class="keywordtype">int</span> <a class="code" href="struct_plink_buffer.html#a5f3d9f5dd912032a3649e9040747ae41">bufferSize</a>;
-<a name="l00160"></a><a class="code" href="struct_plink_buffer.html#af162b6618d6bd51a577fe1f6f0e5a33e">00160</a>     <span class="keyword">const</span> SampleType* <a class="code" href="struct_plink_buffer.html#af162b6618d6bd51a577fe1f6f0e5a33e">buffer</a>;
-<a name="l00161"></a>00161 };
-<a name="l00162"></a>00162 
-<a name="l00163"></a>00163 <span class="keyword">template</span>&lt;<span class="keywordtype">int</span> N, <span class="keyword">class</span> SampleType = <span class="keywordtype">float</span>&gt;
-<a name="l00164"></a><a class="code" href="struct_plink_process.html">00164</a> <span class="keyword">struct </span><a class="code" href="struct_plink_process.html">PlinkProcess</a>
-<a name="l00165"></a>00165 {        
-<a name="l00166"></a><a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">00166</a>     <a class="code" href="struct_plink_process_base.html">PlinkProcessBase</a> <a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>;
-<a name="l00167"></a><a class="code" href="struct_plink_process.html#a6aa54cdbd3b2c477a85f6146ae607ff2">00167</a>     <a class="code" href="struct_plink_buffer.html">PlinkBuffer&lt;SampleType&gt;</a> <a class="code" href="struct_plink_process.html#a6aa54cdbd3b2c477a85f6146ae607ff2">buffers</a>[N];
-<a name="l00168"></a>00168     
-<a name="l00169"></a><a class="code" href="struct_plink_process.html#aee8a203876acd65d6abb5c1b418485bd">00169</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="struct_plink_process.html#aee8a203876acd65d6abb5c1b418485bd">init</a> (<a class="code" href="struct_plink_process.html">PlinkProcess</a>* pp, <span class="keywordtype">void</span>* userData, <span class="keywordtype">int</span> numOutputs, <span class="keywordtype">int</span> numInputs)
-<a name="l00170"></a>00170     {
-<a name="l00171"></a>00171         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(N &gt;= (numInputs + numOutputs));
-<a name="l00172"></a>00172         
-<a name="l00173"></a>00173         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#a3d7179dc7d11c54601f02aade89fde24">userData</a> = userData;
-<a name="l00174"></a>00174         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#aa070a75ca71551481e2b4f2869eaba17">numOutputs</a> = numOutputs;
-<a name="l00175"></a>00175         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#a0a77350359df5f02157170453cf1a5ad">numInputs</a> = numInputs;
-<a name="l00176"></a>00176         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#a18cede34b310d3cdb6661c69d96c4472">numBuffers</a> = N;        
-<a name="l00177"></a>00177     }
-<a name="l00178"></a>00178 };
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180 <span class="preprocessor">#endif</span>
-<a name="l00181"></a>00181 <span class="preprocessor"></span>
-<a name="l00182"></a>00182 <span class="preprocessor">#include &quot;<a class="code" href="plonk___memory_8h.html">plonk_Memory.h</a>&quot;</span>
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184 <a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>
+<a name="l00130"></a>00130 
+<a name="l00131"></a><a class="code" href="plonk___standard_header_8h.html#a7e006da163c38524a4d1ec8c89a121e8">00131</a> <span class="preprocessor">#define PLONK_MAJOR_VERSION      0</span>
+<a name="l00132"></a><a class="code" href="plonk___standard_header_8h.html#ad88b0d32fb593a1a6c122ced0508d4cc">00132</a> <span class="preprocessor"></span><span class="preprocessor">#define PLONK_MINOR_VERSION      1</span>
+<a name="l00133"></a><a class="code" href="plonk___standard_header_8h.html#abb65ddbe5fcb269972720417ad495604">00133</a> <span class="preprocessor"></span><span class="preprocessor">#define PLONK_BUILDNUMBER        1</span>
+<a name="l00134"></a>00134 <span class="preprocessor"></span>
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136 <span class="preprocessor">#ifdef PLONK_DEBUG</span>
+<a name="l00137"></a>00137 <span class="preprocessor"></span><span class="preprocessor">    #include &lt;cassert&gt;</span>
+<a name="l00138"></a><a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">00138</a> <span class="preprocessor">    #define plonk_assert        assert</span>
+<a name="l00139"></a><a class="code" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">00139</a> <span class="preprocessor"></span><span class="preprocessor">        #define plonk_assertfalse       (assert (false))</span>
+<a name="l00140"></a>00140 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00141"></a>00141 <span class="preprocessor"></span><span class="preprocessor">        #define plonk_assert (x)        { }</span>
+<a name="l00142"></a>00142 <span class="preprocessor"></span><span class="preprocessor">        #define plonk_assertfalse       { }</span>
+<a name="l00143"></a>00143 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00144"></a>00144 <span class="preprocessor"></span>
+<a name="l00145"></a>00145 <span class="comment">/* if you&#39;re getting your first compile error here on iOS</span>
+<a name="l00146"></a>00146 <span class="comment"> it&#39;s probably because the file your compiling which includes</span>
+<a name="l00147"></a>00147 <span class="comment"> plonk headers is not a C++ file. To make an Obj-C file (.m) </span>
+<a name="l00148"></a>00148 <span class="comment"> an Obj-C++ file use .mm as the file extension. */</span>
+<a name="l00149"></a>00149 <a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>
+<a name="l00150"></a>00150 
+<a name="l00151"></a><a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">00151</a> <span class="keyword">typedef</span> <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>;
+<a name="l00152"></a>00152 
+<a name="l00153"></a><a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">00153</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">PlankF</a> <a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>;
+<a name="l00154"></a><a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">00154</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a> <a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>;
+<a name="l00155"></a>00155 
+<a name="l00156"></a><a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">00156</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a> <a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>;
+<a name="l00157"></a><a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">00157</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>; 
+<a name="l00158"></a><a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">00158</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">PlankS</a> <a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>;
+<a name="l00159"></a><a class="code" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">00159</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a> <a class="code" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a>;
+<a name="l00160"></a><a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">00160</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a>;
+<a name="l00161"></a>00161 
+<a name="l00162"></a><a class="code" href="plonk___standard_header_8h.html#af4452281f6181e246e8a051b90ad0420">00162</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a> <a class="code" href="plonk___standard_header_8h.html#af4452281f6181e246e8a051b90ad0420">UnsignedChar</a>;
+<a name="l00163"></a><a class="code" href="plonk___standard_header_8h.html#a175ebcaaac40ddaff0cadac455dc38f7">00163</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> <a class="code" href="plonk___standard_header_8h.html#a175ebcaaac40ddaff0cadac455dc38f7">UnsignedInt</a>; 
+<a name="l00164"></a><a class="code" href="plonk___standard_header_8h.html#ad68bab4b7c44312dbcffe6e9b7477a78">00164</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a> <a class="code" href="plonk___standard_header_8h.html#ad68bab4b7c44312dbcffe6e9b7477a78">UnsignedShort</a>;
+<a name="l00165"></a><a class="code" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">00165</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> <a class="code" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a>;
+<a name="l00166"></a><a class="code" href="plonk___standard_header_8h.html#a0f512a8c1725d76e0c731d6f346821e5">00166</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> <a class="code" href="plonk___standard_header_8h.html#a0f512a8c1725d76e0c731d6f346821e5">UnsignedLongLong</a>;
+<a name="l00167"></a>00167 
+<a name="l00168"></a><a class="code" href="plonk___standard_header_8h.html#a76a8b016e5ad61faf9062cc387df5016">00168</a> <span class="keyword">typedef</span> <span class="keywordtype">bool</span> <a class="code" href="plonk___standard_header_8h.html#a76a8b016e5ad61faf9062cc387df5016">Bool</a>;
+<a name="l00169"></a><a class="code" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">00169</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> <a class="code" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a>;
+<a name="l00170"></a>00170 
+<a name="l00171"></a><a class="code" href="plonk___standard_header_8h.html#a47783a6c888e6afe7b64637737daed64">00171</a> <span class="preprocessor">#define PLONK_INT24_MAX PLANK_INT24_MAX</span>
+<a name="l00172"></a>00172 <span class="preprocessor"></span>
+<a name="l00173"></a>00173 <span class="preprocessor">#if (defined (_WIN32) || defined (_WIN64))</span>
+<a name="l00174"></a>00174 <span class="preprocessor"></span><span class="comment">//    typedef __int64 LongLong;</span>
+<a name="l00175"></a>00175 <span class="comment">//    typedef unsigned __int64 UnsignedLongLong;</span>
+<a name="l00176"></a>00176 <span class="preprocessor">        #pragma warning(disable : 4244) // loss of precision</span>
+<a name="l00177"></a>00177 <span class="preprocessor"></span><span class="preprocessor">        #pragma warning(disable : 4996) // security of snprintf etc</span>
+<a name="l00178"></a>00178 <span class="preprocessor"></span><span class="preprocessor">        #pragma warning(disable : 4800) // bool performance warning</span>
+<a name="l00179"></a>00179 <span class="preprocessor"></span><span class="preprocessor">        #define _CRT_SECURE_NO_WARNINGS</span>
+<a name="l00180"></a>00180 <span class="preprocessor"></span><span class="comment">//#else</span>
+<a name="l00181"></a>00181 <span class="comment">//    typedef long long LongLong;</span>
+<a name="l00182"></a>00182 <span class="comment">//      typedef unsigned long long UnsignedLongLong;</span>
+<a name="l00183"></a>00183 <span class="preprocessor">#endif</span>
+<a name="l00184"></a>00184 <span class="preprocessor"></span>
 <a name="l00185"></a>00185 
-<a name="l00186"></a>00186 <span class="preprocessor">#if 0//!PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE</span>
-<a name="l00187"></a>00187 <span class="preprocessor"></span><span class="keyword">inline</span> <span class="keywordtype">void</span>* operator new (<span class="keywordtype">size_t</span> size)
-<a name="l00188"></a>00188 {
-<a name="l00189"></a>00189     <span class="keywordtype">void</span> *ptr = plonk::Memory::global().allocateBytes (size);
-<a name="l00190"></a>00190     
-<a name="l00191"></a>00191     <span class="keywordflow">if</span> (ptr == 0)
-<a name="l00192"></a>00192         <span class="keywordflow">throw</span> std::bad_alloc();
-<a name="l00193"></a>00193     
-<a name="l00194"></a>00194     <span class="keywordflow">return</span> ptr;
-<a name="l00195"></a>00195 }
-<a name="l00196"></a>00196 
-<a name="l00197"></a>00197 <span class="keyword">inline</span> <span class="keywordtype">void</span> operator delete (<span class="keywordtype">void</span> *ptr)
-<a name="l00198"></a>00198 {
-<a name="l00199"></a>00199     plonk::Memory::global().free (ptr);
-<a name="l00200"></a>00200 }
-<a name="l00201"></a>00201 <span class="preprocessor">#endif</span>
-<a name="l00202"></a>00202 <span class="preprocessor"></span>
-<a name="l00203"></a>00203 <span class="preprocessor">#ifndef INFINITY</span>
-<a name="l00204"></a><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">00204</a> <span class="preprocessor"></span><span class="keyword">union </span><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html" title="PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE.">MSVC_EVIL_FLOAT_HACK</a>
-<a name="l00205"></a>00205 {
-<a name="l00206"></a><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#a00c78dd8362763564e01156daf83055e">00206</a>    <span class="keywordtype">unsigned</span> __int8 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Bytes</a>[4];
-<a name="l00207"></a><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#a30da8c6a076b2dbefcb3db653d4c264b">00207</a>    <span class="keywordtype">float</span> <a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#a30da8c6a076b2dbefcb3db653d4c264b">Value</a>;
-<a name="l00208"></a>00208 };
-<a name="l00209"></a><a class="code" href="plonk___standard_header_8h.html#a8aff929b6a08666384871ef05da6b150">00209</a> <span class="keyword">static</span> <span class="keyword">union </span><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html" title="PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE.">MSVC_EVIL_FLOAT_HACK</a> <a class="code" href="plonk___standard_header_8h.html#a8aff929b6a08666384871ef05da6b150">INFINITY_HACK</a> = {{0x00, 0x00, 0x80, 0x7F}};
-<a name="l00210"></a><a class="code" href="plonk___standard_header_8h.html#a956e2723d559858d08644ac99146e910">00210</a> <span class="preprocessor">#define INFINITY (INFINITY_HACK.Value)</span>
-<a name="l00211"></a>00211 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00212"></a>00212 <span class="preprocessor"></span>
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214 <span class="comment">//inline int quantiseUp(const int a, const int q) </span>
-<a name="l00215"></a>00215 <span class="comment">//{ </span>
-<a name="l00216"></a>00216 <span class="comment">//      if(a % q)</span>
-<a name="l00217"></a>00217 <span class="comment">//              return a / q * q + q;</span>
-<a name="l00218"></a>00218 <span class="comment">//      else</span>
-<a name="l00219"></a>00219 <span class="comment">//              return a / q * q;</span>
-<a name="l00220"></a>00220 <span class="comment">//}</span>
-<a name="l00221"></a>00221 <span class="comment">//</span>
-<a name="l00222"></a>00222 <span class="comment">//inline int quantiseDown(const int a, const int q) </span>
-<a name="l00223"></a>00223 <span class="comment">//{ </span>
-<a name="l00224"></a>00224 <span class="comment">//      return a / q * q; </span>
-<a name="l00225"></a>00225 <span class="comment">//}</span>
+<a name="l00191"></a><a class="code" href="struct_force_error_struct.html#a4f4bb77104134d255d33bde9ace69636">00191</a> <span class="keyword">struct </span><a class="code" href="struct_force_error_struct.html" title="To help raise compiler errors when function prototypes change.">ForceErrorStruct</a> { <span class="keywordtype">int</span> <a class="code" href="struct_force_error_struct.html#a4f4bb77104134d255d33bde9ace69636">dummy</a>; };
+<a name="l00192"></a><a class="code" href="plonk___standard_header_8h.html#a86663fab7fab4217e835ad45b326c8f1">00192</a> <span class="preprocessor">#define FORCE_COMPILER_ERROR_FUNCTION_PROTOTYPE_CHANGED ForceErrorStruct</span>
+<a name="l00193"></a>00193 <span class="preprocessor"></span>
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195 <span class="preprocessor">#ifdef PLONK_USEPLINK</span>
+<a name="l00196"></a>00196 <span class="preprocessor"></span>
+<a name="l00197"></a>00197 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType = <span class="keywordtype">float</span>&gt;
+<a name="l00198"></a><a class="code" href="struct_plink_buffer.html">00198</a> <span class="keyword">struct </span><a class="code" href="struct_plink_buffer.html">PlinkBuffer</a>
+<a name="l00199"></a>00199 {
+<a name="l00200"></a><a class="code" href="struct_plink_buffer.html#a5f3d9f5dd912032a3649e9040747ae41">00200</a>     <span class="keywordtype">int</span> <a class="code" href="struct_plink_buffer.html#a5f3d9f5dd912032a3649e9040747ae41">bufferSize</a>;
+<a name="l00201"></a><a class="code" href="struct_plink_buffer.html#af162b6618d6bd51a577fe1f6f0e5a33e">00201</a>     <span class="keyword">const</span> SampleType* <a class="code" href="struct_plink_buffer.html#af162b6618d6bd51a577fe1f6f0e5a33e">buffer</a>;
+<a name="l00202"></a>00202 };
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204 <span class="keyword">template</span>&lt;<span class="keywordtype">int</span> N, <span class="keyword">class</span> SampleType = <span class="keywordtype">float</span>&gt;
+<a name="l00205"></a><a class="code" href="struct_plink_process.html">00205</a> <span class="keyword">struct </span><a class="code" href="struct_plink_process.html">PlinkProcess</a>
+<a name="l00206"></a>00206 {        
+<a name="l00207"></a><a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">00207</a>     <a class="code" href="struct_plink_process_base.html">PlinkProcessBase</a> <a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>;
+<a name="l00208"></a><a class="code" href="struct_plink_process.html#a6aa54cdbd3b2c477a85f6146ae607ff2">00208</a>     <a class="code" href="struct_plink_buffer.html">PlinkBuffer&lt;SampleType&gt;</a> <a class="code" href="struct_plink_process.html#a6aa54cdbd3b2c477a85f6146ae607ff2">buffers</a>[N];
+<a name="l00209"></a>00209     
+<a name="l00210"></a><a class="code" href="struct_plink_process.html#aee8a203876acd65d6abb5c1b418485bd">00210</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="struct_plink_process.html#aee8a203876acd65d6abb5c1b418485bd">init</a> (<a class="code" href="struct_plink_process.html">PlinkProcess</a>* pp, <span class="keywordtype">void</span>* userData, <span class="keywordtype">int</span> numOutputs, <span class="keywordtype">int</span> numInputs)
+<a name="l00211"></a>00211     {
+<a name="l00212"></a>00212         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (N &gt;= (numInputs + numOutputs));
+<a name="l00213"></a>00213         
+<a name="l00214"></a>00214         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#a3d7179dc7d11c54601f02aade89fde24">userData</a> = userData;
+<a name="l00215"></a>00215         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#aa070a75ca71551481e2b4f2869eaba17">numOutputs</a> = numOutputs;
+<a name="l00216"></a>00216         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#a0a77350359df5f02157170453cf1a5ad">numInputs</a> = numInputs;
+<a name="l00217"></a>00217         pp-&gt;<a class="code" href="struct_plink_process.html#a9c85c2f9686549e7759c215de11291f4">base</a>.<a class="code" href="struct_plink_process_base.html#a18cede34b310d3cdb6661c69d96c4472">numBuffers</a> = N;        
+<a name="l00218"></a>00218     }
+<a name="l00219"></a>00219 };
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221 <span class="preprocessor">#endif</span>
+<a name="l00222"></a>00222 <span class="preprocessor"></span>
+<a name="l00223"></a>00223 <span class="preprocessor">#include &quot;<a class="code" href="plonk___memory_8h.html">plonk_Memory.h</a>&quot;</span>
+<a name="l00224"></a>00224 
+<a name="l00225"></a>00225 <a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>
 <a name="l00226"></a>00226 
-<a name="l00227"></a>00227 <span class="comment">//#ifndef numElementsInArray</span>
-<a name="l00228"></a>00228 <span class="comment">//      #define numElementsInArray(a)   ((int) (sizeof (a) / sizeof ((a)[0])))</span>
-<a name="l00229"></a>00229 <span class="comment">//#endif</span>
-<a name="l00230"></a>00230 
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232 <span class="preprocessor">#ifndef PLONK_ALIGN</span>
-<a name="l00233"></a><a class="code" href="plonk___standard_header_8h.html#ae28d36bca47f86ea4c9a726e390dac1d">00233</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLONK_ALIGN PLANK_ALIGN</span>
-<a name="l00234"></a>00234 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00235"></a>00235 <span class="preprocessor"></span>
-<a name="l00236"></a>00236 <span class="preprocessor">#ifndef PLONK_TYPE_DEFAULT</span>
-<a name="l00237"></a><a class="code" href="plonk___standard_header_8h.html#a47753ad235252bcb3337d2e4563afe24">00237</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLONK_TYPE_DEFAULT Float</span>
-<a name="l00238"></a>00238 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00239"></a>00239 <span class="preprocessor"></span>
-<a name="l00240"></a>00240 <span class="preprocessor">#ifndef LONG_LONG_MAX</span>
-<a name="l00241"></a><a class="code" href="plonk___standard_header_8h.html#a383fc2c0c24436c812cc22289504a151">00241</a> <span class="preprocessor"></span><span class="preprocessor">        #define LONG_LONG_MAX LLONG_MAX</span>
-<a name="l00242"></a>00242 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00227"></a>00227 <span class="preprocessor">#if 0//!PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE</span>
+<a name="l00228"></a>00228 <span class="preprocessor"></span><span class="keyword">inline</span> <span class="keywordtype">void</span>* operator new (<span class="keywordtype">size_t</span> size)
+<a name="l00229"></a>00229 {
+<a name="l00230"></a>00230     <span class="keywordtype">void</span> *ptr = plonk::Memory::global().allocateBytes (size);
+<a name="l00231"></a>00231     
+<a name="l00232"></a>00232     <span class="keywordflow">if</span> (ptr == 0)
+<a name="l00233"></a>00233         <span class="keywordflow">throw</span> std::bad_alloc();
+<a name="l00234"></a>00234     
+<a name="l00235"></a>00235     <span class="keywordflow">return</span> ptr;
+<a name="l00236"></a>00236 }
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238 <span class="keyword">inline</span> <span class="keywordtype">void</span> operator delete (<span class="keywordtype">void</span> *ptr)
+<a name="l00239"></a>00239 {
+<a name="l00240"></a>00240     plonk::Memory::global().free (ptr);
+<a name="l00241"></a>00241 }
+<a name="l00242"></a>00242 <span class="preprocessor">#endif</span>
 <a name="l00243"></a>00243 <span class="preprocessor"></span>
-<a name="l00244"></a>00244 <span class="preprocessor">#endif // PLONK_STANDARDHEADER_H</span>
+<a name="l00244"></a>00244 <span class="preprocessor">#ifndef INFINITY</span>
+<a name="l00245"></a><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">00245</a> <span class="preprocessor"></span><span class="keyword">union </span><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html" title="PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE.">MSVC_EVIL_FLOAT_HACK</a>
+<a name="l00246"></a>00246 {
+<a name="l00247"></a><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#a00c78dd8362763564e01156daf83055e">00247</a>    <span class="keywordtype">unsigned</span> __int8 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Bytes</a>[4];
+<a name="l00248"></a><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#a30da8c6a076b2dbefcb3db653d4c264b">00248</a>    <span class="keywordtype">float</span> <a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#a30da8c6a076b2dbefcb3db653d4c264b">Value</a>;
+<a name="l00249"></a>00249 };
+<a name="l00250"></a><a class="code" href="plonk___standard_header_8h.html#a8aff929b6a08666384871ef05da6b150">00250</a> <span class="keyword">static</span> <span class="keyword">union </span><a class="code" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html" title="PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE.">MSVC_EVIL_FLOAT_HACK</a> <a class="code" href="plonk___standard_header_8h.html#a8aff929b6a08666384871ef05da6b150">INFINITY_HACK</a> = {{0x00, 0x00, 0x80, 0x7F}};
+<a name="l00251"></a><a class="code" href="plonk___standard_header_8h.html#a956e2723d559858d08644ac99146e910">00251</a> <span class="preprocessor">#define INFINITY (INFINITY_HACK.Value)</span>
+<a name="l00252"></a>00252 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00253"></a>00253 <span class="preprocessor"></span>
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255 <span class="comment">//inline int quantiseUp(const int a, const int q) </span>
+<a name="l00256"></a>00256 <span class="comment">//{ </span>
+<a name="l00257"></a>00257 <span class="comment">//      if(a % q)</span>
+<a name="l00258"></a>00258 <span class="comment">//              return a / q * q + q;</span>
+<a name="l00259"></a>00259 <span class="comment">//      else</span>
+<a name="l00260"></a>00260 <span class="comment">//              return a / q * q;</span>
+<a name="l00261"></a>00261 <span class="comment">//}</span>
+<a name="l00262"></a>00262 <span class="comment">//</span>
+<a name="l00263"></a>00263 <span class="comment">//inline int quantiseDown(const int a, const int q) </span>
+<a name="l00264"></a>00264 <span class="comment">//{ </span>
+<a name="l00265"></a>00265 <span class="comment">//      return a / q * q; </span>
+<a name="l00266"></a>00266 <span class="comment">//}</span>
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268 <span class="comment">//#ifndef numElementsInArray</span>
+<a name="l00269"></a>00269 <span class="comment">//      #define numElementsInArray(a)   ((int) (sizeof (a) / sizeof ((a)[0])))</span>
+<a name="l00270"></a>00270 <span class="comment">//#endif</span>
+<a name="l00271"></a>00271 
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273 <span class="preprocessor">#ifndef PLONK_ALIGN</span>
+<a name="l00274"></a><a class="code" href="plonk___standard_header_8h.html#ae28d36bca47f86ea4c9a726e390dac1d">00274</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLONK_ALIGN PLANK_ALIGN</span>
+<a name="l00275"></a>00275 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00276"></a>00276 <span class="preprocessor"></span>
+<a name="l00277"></a>00277 <span class="preprocessor">#ifndef PLONK_TYPE_DEFAULT</span>
+<a name="l00278"></a><a class="code" href="plonk___standard_header_8h.html#a47753ad235252bcb3337d2e4563afe24">00278</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLONK_TYPE_DEFAULT Float</span>
+<a name="l00279"></a>00279 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00280"></a>00280 <span class="preprocessor"></span>
+<a name="l00281"></a>00281 <span class="preprocessor">#ifndef LONG_LONG_MAX</span>
+<a name="l00282"></a><a class="code" href="plonk___standard_header_8h.html#a383fc2c0c24436c812cc22289504a151">00282</a> <span class="preprocessor"></span><span class="preprocessor">        #define LONG_LONG_MAX LLONG_MAX</span>
+<a name="l00283"></a>00283 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00284"></a>00284 <span class="preprocessor"></span>
+<a name="l00285"></a>00285 <span class="preprocessor">#endif // PLONK_STANDARDHEADER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -325,7 +366,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:14 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

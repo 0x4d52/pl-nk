@@ -119,6 +119,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ad639860274c7d3ee6170e4340edaeff0">UnitBase</a> (<a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; <a class="el" href="class_variable.html">VariableType</a> &gt; const &amp;variables)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#adeaf8e9083b75f03df0ef28ccd6432cd">UnitBase</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor from the base array type.  <a href="#adeaf8e9083b75f03df0ef28ccd6432cd"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; class OtherUnitType, class OtherSampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a7dc14511c86052bec32050a51e8bdadf">UnitBase</a> (OtherUnitType&lt; OtherSampleType &gt; const &amp;other)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a5843bc2a5db8af9e33b1cde20e769a4e">UnitBase</a> (<a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt; const &amp;copy)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a7d7469eeee1b574d5299762f8a3d7036">operator=</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#a7d7469eeee1b574d5299762f8a3d7036"></a><br/></td></tr>
@@ -129,7 +131,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aab0d06b9df0c6d0a56f469b2ee572c09">operator=</a> (<a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt; const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator from an array of channels.  <a href="#aab0d06b9df0c6d0a56f469b2ee572c09"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab18b0bf950a219fb07257aca3a5e5b76">ar</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resamples this unit to a different sample rate and/or block size.  <a href="#ab18b0bf950a219fb07257aca3a5e5b76"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply multiply and addition operators to another unit.  <a href="#ab18b0bf950a219fb07257aca3a5e5b76"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab9204dbea9636ed67d40fd663333ee44">kr</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resamples this unit to the default control rate sample rate and block size.  <a href="#ab9204dbea9636ed67d40fd663333ee44"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a612cb53496d3ceb671bed8a632b77156">mix</a> ()  throw ()</td></tr>
@@ -809,6 +811,27 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a7dc14511c86052bec32050a51e8bdadf"></a><!-- doxytag: member="UnitBase::UnitBase" ref="a7dc14511c86052bec32050a51e8bdadf" args="(OtherUnitType&lt; OtherSampleType &gt; const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename &gt; class OtherUnitType, class OtherSampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitBase</a> </td>
+          <td>(</td>
+          <td class="paramtype">OtherUnitType&lt; OtherSampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a5843bc2a5db8af9e33b1cde20e769a4e"></a><!-- doxytag: member="UnitBase::UnitBase" ref="a5843bc2a5db8af9e33b1cde20e769a4e" args="(ObjectArray&lt; ChannelType &gt; const &amp;copy)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1002,7 +1025,8 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Resamples this unit to a different sample rate and/or block size. </p>
+<p>Apply multiply and addition operators to another unit. </p>
+<p>Here <code>mul</code> will be ignored (not applied) if the value is a single channel constant equal to 1 (or null rather than just a constant 0). And <code>add</code> will be ignored (not applied) if it is a single channel constant equal to 0 (or null). On some platforms this might be implemented as a single multiply-and-add operation. Resamples this unit to a different sample rate and/or block size. </p>
 
 </div>
 </div>
@@ -3980,7 +4004,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:40 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:27 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

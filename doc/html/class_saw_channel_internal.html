@@ -97,6 +97,7 @@ Public Types</h2></td></tr>
 &lt; <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a><br class="typebreak"/>
 &lt; SampleType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a5235ef70e3b410a5fc636fbd9b3e6313">Data</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#a5235ef70e3b410a5fc636fbd9b3e6313"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#aaaacc965611abeb62bf081e838bea0f2">Inputs</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a58eb974d86ccda7a3044efe354a7f552">ChannelType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a5f61d3c501aecf836e225d2629170d01">SawInternal</a></td></tr>
@@ -105,9 +106,11 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#ab44b165ed8c3c691b6037838a05538e4">InternalBase</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a8e983ff3261968b13523b750764e0d22">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#aaaacc965611abeb62bf081e838bea0f2">Inputs</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_type_utility.html">TypeUtility</a><br class="typebreak"/>
+&lt; SampleType &gt;::IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">FrequencyType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; <a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">FrequencyType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a1138e1e26a6d8b0f6dc10bfa296e5eeb">FrequencyUnitType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#af061f1f958b0ca580f7bbb39174cf47b">Buffer</a></td></tr>
+&lt; <a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">FrequencyType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a49b8ff25a19af9eda184d9634812182c">FrequencyBufferType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a319126a27a5076e688124c188f448f46">SawChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
@@ -125,23 +128,6 @@ class SawChannelInternal&lt; SampleType &gt;</h3>
 
 <p>Sawtooth wave generator. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="af061f1f958b0ca580f7bbb39174cf47b"></a><!-- doxytag: member="SawChannelInternal::Buffer" ref="af061f1f958b0ca580f7bbb39174cf47b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a58eb974d86ccda7a3044efe354a7f552"></a><!-- doxytag: member="SawChannelInternal::ChannelType" ref="a58eb974d86ccda7a3044efe354a7f552" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,6 +162,51 @@ template&lt;class SampleType &gt; </div>
 <p>Sublasses should inherit from this, add their own members, and store an instance. Where applicable the structure should match the equivalents in the Plink library. </p>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a49b8ff25a19af9eda184d9634812182c"></a><!-- doxytag: member="SawChannelInternal::FrequencyBufferType" ref="a49b8ff25a19af9eda184d9634812182c" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">FrequencyType</a>&gt; <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac292318d308ddfb7cba06a774f3bdf28"></a><!-- doxytag: member="SawChannelInternal::FrequencyType" ref="ac292318d308ddfb7cba06a774f3bdf28" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt;::IndexType <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">FrequencyType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1138e1e26a6d8b0f6dc10bfa296e5eeb"></a><!-- doxytag: member="SawChannelInternal::FrequencyUnitType" ref="a1138e1e26a6d8b0f6dc10bfa296e5eeb" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">FrequencyType</a>&gt; <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">FrequencyUnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -440,7 +471,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:36 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:23 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

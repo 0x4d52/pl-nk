@@ -238,6 +238,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_object_array.html">ObjectArray2DType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array.html#a1b9f73b45869002f410e320c68d8c068">split</a> (<a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt; delimiters) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Split the array into a 2D using delimiters.  <a href="#a1b9f73b45869002f410e320c68d8c068"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_object_array.html">ObjectArray2DType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array.html#a664370848338525597ca379ce6da43de">splitSequence</a> (<a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt; delimitingSequence) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_object_array.html">ObjectArray2DType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748">deinterleave</a> (const int numGroups) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinternleave this array into a 2D array with a particular number of groups.  <a href="#ae4f769c721e3b332257513b88e8ed748"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">ObjectArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array.html#a3b26fc025b8c7874d8dd9727cc430592">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -279,7 +281,7 @@ template&lt;class ObjectType&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Text</a>, <a class="el" href="class_text_array.html#a8d408f4f51410b6562659e2d7b5ee5ac">TextArray</a>, <a class="el" href="class_unit_base.html#aa3f11dbf214bdfaebf74fa89dbb3ac70">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Text</a>, <a class="el" href="class_text_array.html#a8d408f4f51410b6562659e2d7b5ee5ac">TextArray</a>, <a class="el" href="class_unit_base.html#aa3f11dbf214bdfaebf74fa89dbb3ac70">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; Char &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
 
 </div>
 </div>
@@ -298,7 +300,7 @@ template&lt;class ObjectType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType &gt; &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#afc6362bda6a2fa179b3f16c91ba50089">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#ad8251c75a6aff77fc497241a07d4ae67">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#a2728647a7c540f8a2305b3d7ebeaa9c3">Text</a>, <a class="el" href="class_text_array.html#a3bbc84b163e44b223ed1528944fc5a8c">TextArray</a>, <a class="el" href="class_unit_base.html#a6555cf2c5d7f1cc1aaaece05a1207565">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#afc6362bda6a2fa179b3f16c91ba50089">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#ad8251c75a6aff77fc497241a07d4ae67">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#a2728647a7c540f8a2305b3d7ebeaa9c3">Text</a>, <a class="el" href="class_text_array.html#a3bbc84b163e44b223ed1528944fc5a8c">TextArray</a>, <a class="el" href="class_unit_base.html#a6555cf2c5d7f1cc1aaaece05a1207565">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; Char &gt;</a>, <a class="el" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
 
 </div>
 </div>
@@ -315,7 +317,7 @@ template&lt;class ObjectType&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#afb24269ea2a87c3820774bed41d0e5a8">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#afb24269ea2a87c3820774bed41d0e5a8">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a432b023b9d98366c92ac76082aad18d4">NumericalArray&lt; Char &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
 
 </div>
 </div>
@@ -332,7 +334,7 @@ template&lt;class ObjectType&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a893dd64856651aa02ce21cba787e6691">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#a8d99d21cb7cb69c657200fe52ab30144">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a893dd64856651aa02ce21cba787e6691">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#a8d99d21cb7cb69c657200fe52ab30144">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a1fd7c92b30e14319dbd38a22acf24321">NumericalArray&lt; Char &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
 
 </div>
 </div>
@@ -349,7 +351,7 @@ template&lt;class ObjectType&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#a34387565e8e74e2e94e434ea1eeaad46">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#afd854044a3d1320c2fd0c604040623ad">Text</a>, <a class="el" href="class_unit_base.html#a81fc09ea2199ab96ae945946bda07574">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#a34387565e8e74e2e94e434ea1eeaad46">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#afd854044a3d1320c2fd0c604040623ad">Text</a>, <a class="el" href="class_unit_base.html#a81fc09ea2199ab96ae945946bda07574">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; FormType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#af615467ede36a9cf6410a92bb27cad41">NumericalArray&lt; Char &gt;</a>, <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; NumericalType, RowType &gt;</a>, and <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
 
 </div>
 </div>
@@ -1436,6 +1438,27 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ae4f769c721e3b332257513b88e8ed748"></a><!-- doxytag: member="ObjectArray::deinterleave" ref="ae4f769c721e3b332257513b88e8ed748" args="(const int numGroups) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_object_array.html">ObjectArray2DType</a> <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::deinterleave </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>numGroups</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Deinternleave this array into a 2D array with a particular number of groups. </p>
+
+</div>
+</div>
 <a class="anchor" id="afc0c8de5e14b9b5257f072c26fe7a5b5"></a><!-- doxytag: member="ObjectArray::emptyWithAllocatedSize" ref="afc0c8de5e14b9b5257f072c26fe7a5b5" args="(const int size)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1542,27 +1565,7 @@ template&lt;class ObjectType&gt; </div>
 <p>Get a weakly linked copy of this object. </p>
 <p>This will return a blank/empty/null object of this type if the original has already been deleted. </p>
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_object_array2_d.html#add78e9b1c4d4c397b5158dc40a5fdeaf">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#ab00905939be3c3f26e0f82f386eeb994">Text</a>, <a class="el" href="class_unit_base.html#ad918f5ddca5ca251ffa25864e0b742a4">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; Int &gt;</a>, and <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; FormType::SampleDataType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a49f3b9719cdeefc07c0ac52f1735d93d"></a><!-- doxytag: member="ObjectArray::getArray" ref="a49f3b9719cdeefc07c0ac52f1735d93d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ObjectType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ObjectType* <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::getArray </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns a pointer to the raw array. </p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_object_array2_d.html#add78e9b1c4d4c397b5158dc40a5fdeaf">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#ab00905939be3c3f26e0f82f386eeb994">Text</a>, <a class="el" href="class_unit_base.html#ad918f5ddca5ca251ffa25864e0b742a4">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; FormType::SampleDataType &gt;</a>, and <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; Char &gt;</a>.</p>
 
 </div>
 </div>
@@ -1588,6 +1591,26 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a49f3b9719cdeefc07c0ac52f1735d93d"></a><!-- doxytag: member="ObjectArray::getArray" ref="a49f3b9719cdeefc07c0ac52f1735d93d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">ObjectType* <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::getArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a pointer to the raw array. </p>
+
+</div>
+</div>
 <a class="anchor" id="a715e318d82d3ecd17b4a0ca64b5e3222"></a><!-- doxytag: member="ObjectArray::getNull" ref="a715e318d82d3ecd17b4a0ca64b5e3222" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -1604,7 +1627,7 @@ template&lt;class ObjectType&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_object_array2_d.html#ae2b57af76bb0e493bb0747389dfd815a">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#a4fb99e6125742dab2e2c3738891e27d5">Text</a>, <a class="el" href="class_text_array.html#a22abdfacc5926d2503a1ebd5e6425e1f">TextArray</a>, <a class="el" href="class_unit_base.html#a2a48b6e82bb1a93ee0b0ecd309688ff0">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; Int &gt;</a>, and <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; FormType::SampleDataType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_object_array2_d.html#ae2b57af76bb0e493bb0747389dfd815a">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text.html#a4fb99e6125742dab2e2c3738891e27d5">Text</a>, <a class="el" href="class_text_array.html#a22abdfacc5926d2503a1ebd5e6425e1f">TextArray</a>, <a class="el" href="class_unit_base.html#a2a48b6e82bb1a93ee0b0ecd309688ff0">UnitBase&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; FormType::SampleDataType &gt;</a>, and <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; Char &gt;</a>.</p>
 
 </div>
 </div>
@@ -1647,37 +1670,6 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a48849d83a5c0c3e9f4968c8faab347da"></a><!-- doxytag: member="ObjectArray::indexOf" ref="a48849d83a5c0c3e9f4968c8faab347da" args="(ObjectArray&lt; ObjectType &gt; const &amp;itemsToSearchFor, const int startIndex=0) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ObjectType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::indexOf </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>itemsToSearchFor</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Search for a particular sub sequence withing the array. </p>
-
-</div>
-</div>
 <a class="anchor" id="ad2065d1c59f281fb17c78cce33f62b41"></a><!-- doxytag: member="ObjectArray::indexOf" ref="ad2065d1c59f281fb17c78cce33f62b41" args="(ObjectType const &amp;itemToSearchFor, const int startIndex=0) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1715,7 +1707,38 @@ template&lt;class ObjectType&gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The index of the item or -1 if it is not found. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_text_array.html#ade0a7ad154327ffa37687ad2ea6cca6c">TextArray</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; Int &gt;</a>, and <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; FormType::SampleDataType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; NumericalType &gt;</a>, <a class="el" href="class_text_array.html#ade0a7ad154327ffa37687ad2ea6cca6c">TextArray</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; ShapeType::SampleDataType &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; SampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; OutputSampleType &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; Int &gt;</a>, <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; FormType::SampleDataType &gt;</a>, and <a class="el" href="class_numerical_array.html#a2916344f07e5860c87819dbcf735cb58">NumericalArray&lt; Char &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a48849d83a5c0c3e9f4968c8faab347da"></a><!-- doxytag: member="ObjectArray::indexOf" ref="a48849d83a5c0c3e9f4968c8faab347da" args="(ObjectArray&lt; ObjectType &gt; const &amp;itemsToSearchFor, const int startIndex=0) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::indexOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>itemsToSearchFor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Search for a particular sub sequence withing the array. </p>
 
 </div>
 </div>
@@ -2112,28 +2135,6 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4d6c495b62d477184230022511cee67a"></a><!-- doxytag: member="ObjectArray::range" ref="a4d6c495b62d477184230022511cee67a" args="(const int startIndex) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ObjectType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_object_array.html">ObjectArray</a>&lt;ObjectType&gt; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::range </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>startIndex</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Return a new array which is a subarray of this one. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>An array from startIndex (inclusive) to the end of the array. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="ae735443d708a74182544016f89523de2"></a><!-- doxytag: member="ObjectArray::range" ref="ae735443d708a74182544016f89523de2" args="(const int startIndex, const int endIndex) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -2163,6 +2164,28 @@ template&lt;class ObjectType&gt; </div>
 
 <p>Return a new array which is a subarray of this one. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>An array from startIndex (inclusive) to endIndex (exclusive). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4d6c495b62d477184230022511cee67a"></a><!-- doxytag: member="ObjectArray::range" ref="a4d6c495b62d477184230022511cee67a" args="(const int startIndex) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_object_array.html">ObjectArray</a>&lt;ObjectType&gt; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::range </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>startIndex</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Return a new array which is a subarray of this one. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>An array from startIndex (inclusive) to the end of the array. </dd></dl>
 
 </div>
 </div>
@@ -2461,7 +2484,7 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6a31fdbb9c69ec92cf4ebe5916ccbba0"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a6a31fdbb9c69ec92cf4ebe5916ccbba0" args="(ObjectArray&lt; WeightType &gt; const &amp;weights)" -->
+<a class="anchor" id="a99b0248ecc196629fab2f6ba3984b1d4"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a99b0248ecc196629fab2f6ba3984b1d4" args="(ObjectArray&lt; WeightType &gt; const &amp;weights) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -2470,11 +2493,11 @@ template&lt;class ObjectType&gt; </div>
 template&lt;class WeightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
+          <td class="memname">const ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; WeightType &gt; const &amp;&#160;</td>
           <td class="paramname"><em>weights</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2491,7 +2514,7 @@ template&lt;class WeightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a99b0248ecc196629fab2f6ba3984b1d4"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a99b0248ecc196629fab2f6ba3984b1d4" args="(ObjectArray&lt; WeightType &gt; const &amp;weights) const " -->
+<a class="anchor" id="a6a31fdbb9c69ec92cf4ebe5916ccbba0"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a6a31fdbb9c69ec92cf4ebe5916ccbba0" args="(ObjectArray&lt; WeightType &gt; const &amp;weights)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -2500,11 +2523,11 @@ template&lt;class ObjectType&gt; </div>
 template&lt;class WeightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
+          <td class="memname">ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; WeightType &gt; const &amp;&#160;</td>
           <td class="paramname"><em>weights</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2605,7 +2628,7 @@ template&lt;class ObjectType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:34 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:21 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

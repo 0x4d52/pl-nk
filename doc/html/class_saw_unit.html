@@ -81,33 +81,39 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#aee43a5c8c126af28d95fe292b1678951">SawInternal</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01_sample_type_01_4_01_4.html">SawInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#a080269c83b830ae5ed7bfa2d05f6b0b0">Data</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#ab814263a282598f4353cfbf12a949d7d">Inputs</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#adbca77440aa624402e03f1c940e55979">ChannelType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
 &lt; SampleType, <a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#adddf585903c82bf87c7a5ec451a60787">Internal</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#a68e523660ebf7cb46771fb89ec4ab9d9">UnitType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#ab814263a282598f4353cfbf12a949d7d">Inputs</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">SawInternal::FrequencyType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#ab576b086ca388ecbe911e49acec4737e">FrequencyType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
+<a class="el" href="class_unit_base.html">SawInternal::FrequencyUnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#aaee322ebbb49817d4073fe5dab3887d5">FrequencyUnitType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
+<a class="el" href="class_numerical_array.html">SawInternal::FrequencyBufferType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#a824b7cb8d09de8ad377dd23483c05501">FrequencyBufferType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#ae4dc6a8bfae15d03a9773b5c805ae363">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#a117599b8e474043532baf590507a8429">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate sawtooth oscillator.  <a href="#a117599b8e474043532baf590507a8429"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#a7b275d3427e0d51e3ce55d6158bac1d0">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0))  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate sawtooth oscillator.  <a href="#a7b275d3427e0d51e3ce55d6158bac1d0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d">ar</a> (<a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=<a class="el" href="class_saw_unit.html#ab576b086ca388ecbe911e49acec4737e">FrequencyType</a>(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate sawtooth oscillator.  <a href="#ac227416ad5260b17557db86b03762e5d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_unit.html#abe23c3c05371f372fea7606b83e02eee">kr</a> (<a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0))  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate sawtooth oscillator.  <a href="#abe23c3c05371f372fea7606b83e02eee"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
 class SawUnit&lt; SampleType &gt;</h3>
 
 <p>A non-bandlimted sawtooth oscillator. </p>
+<p>Although the template class name is <a class="el" href="class_saw_unit.html" title="A non-bandlimted sawtooth oscillator.">SawUnit</a> the abbreviated name Saw may be used when employing the deafult sample type (which defaults to float).</p>
 <p><em>Examples:</em> </p>
 <div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> test()
  {
-    <span class="keywordflow">return</span> <a class="code" href="class_saw_unit.html#a117599b8e474043532baf590507a8429" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (440, 0.1); <span class="comment">// 440Hz, amplitude 0.1</span>
+    <span class="keywordflow">return</span> <a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (440, 0.1); <span class="comment">// 440Hz, amplitude 0.1</span>
  } 
 </pre></div><div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> test()
  {
     <span class="comment">// Modulated frequency rising 600-900Hz, amplitude 0.1</span>
-    <span class="keywordflow">return</span> <a class="code" href="class_saw_unit.html#a117599b8e474043532baf590507a8429" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (<a class="code" href="class_saw_unit.html#a117599b8e474043532baf590507a8429" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (1, 300, 600), 0.1); 
+    <span class="keywordflow">return</span> <a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (<a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (1, 300, 600), 0.1); 
  } 
 </pre></div> </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="adbca77440aa624402e03f1c940e55979"></a><!-- doxytag: member="SawUnit::ChannelType" ref="adbca77440aa624402e03f1c940e55979" args="" -->
@@ -133,6 +139,51 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01_sample_type_01_4_01_4.html">SawInternal::Data</a> <a class="el" href="class_saw_unit.html">SawUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a824b7cb8d09de8ad377dd23483c05501"></a><!-- doxytag: member="SawUnit::FrequencyBufferType" ref="a824b7cb8d09de8ad377dd23483c05501" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">SawInternal::FrequencyBufferType</a> <a class="el" href="class_saw_unit.html">SawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab576b086ca388ecbe911e49acec4737e"></a><!-- doxytag: member="SawUnit::FrequencyType" ref="ab576b086ca388ecbe911e49acec4737e" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">SawInternal::FrequencyType</a> <a class="el" href="class_saw_unit.html">SawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_saw_unit.html#ab576b086ca388ecbe911e49acec4737e">FrequencyType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaee322ebbb49817d4073fe5dab3887d5"></a><!-- doxytag: member="SawUnit::FrequencyUnitType" ref="aaee322ebbb49817d4073fe5dab3887d5" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">SawInternal::FrequencyUnitType</a> <a class="el" href="class_saw_unit.html">SawUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">FrequencyUnitType</a></td>
         </tr>
       </table>
 </div>
@@ -201,7 +252,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a117599b8e474043532baf590507a8429"></a><!-- doxytag: member="SawUnit::ar" ref="a117599b8e474043532baf590507a8429" args="(UnitType const &amp;frequency=SampleType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
+<a class="anchor" id="ac227416ad5260b17557db86b03762e5d"></a><!-- doxytag: member="SawUnit::ar" ref="ac227416ad5260b17557db86b03762e5d" args="(FrequencyUnitType const &amp;frequency=FrequencyType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -210,8 +261,8 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_saw_unit.html">SawUnit</a>&lt; SampleType &gt;::ar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>frequency</em> = <code>SampleType&#160;(440)</code>, </td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>frequency</em> = <code><a class="el" href="class_saw_unit.html#ab576b086ca388ecbe911e49acec4737e">FrequencyType</a>&#160;(440)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -268,7 +319,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7b275d3427e0d51e3ce55d6158bac1d0"></a><!-- doxytag: member="SawUnit::kr" ref="a7b275d3427e0d51e3ce55d6158bac1d0" args="(UnitType const &amp;frequency, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0))" -->
+<a class="anchor" id="abe23c3c05371f372fea7606b83e02eee"></a><!-- doxytag: member="SawUnit::kr" ref="abe23c3c05371f372fea7606b83e02eee" args="(FrequencyUnitType const &amp;frequency, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0))" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -277,7 +328,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_saw_unit.html">SawUnit</a>&lt; SampleType &gt;::kr </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;&#160;</td>
           <td class="paramname"><em>frequency</em>, </td>
         </tr>
         <tr>
@@ -323,7 +374,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:36 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:23 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

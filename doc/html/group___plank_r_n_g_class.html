@@ -97,7 +97,7 @@ Functions</h2></td></tr>
 <p>The following code snippet creates a <em>Plank RNG</em> object, generates a random float, then destroys the <em>Plank RNG</em> object.</p>
 <div class="fragment"><pre class="fragment"> <a class="code" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb" title="An opaque reference to the Plank RNG object.">PlankRNGRef</a> rng;
  <span class="keywordtype">float</span> value;
- rng = <a class="code" href="group___plank_r_n_g_class.html#gaf8c9d1bec2fe0ab8c5568e8917197209" title="Create a Plank RNG object and return an oqaque reference to it.">pl_RNG_Create</a>();
+ rng = <a class="code" href="group___plank_r_n_g_class.html#ga86aca40f3469cb412b633883f65f25dc" title="Create and initialise a Plank RNG object and return an oqaque reference to it.">pl_RNG_CreateAndInit</a>();
  value = <a class="code" href="group___plank_r_n_g_class.html#gac6ef1b374d35ae518fc6e8f253903b2e" title="Generate a random float between 0 and 1.">pl_RNG_NextFloat</a> (rng);
  <a class="code" href="group___plank_r_n_g_class.html#gabf41c3146297725bd10f022b0121927b" title="Destroy a Plank RNG object.">pl_RNG_Destroy</a> (rng);
 </pre></div> <hr/><h2>Typedef Documentation</h2>
@@ -415,7 +415,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:26 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:15 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

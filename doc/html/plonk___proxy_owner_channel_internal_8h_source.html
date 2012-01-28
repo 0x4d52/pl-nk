@@ -138,7 +138,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00078"></a>00078         ready (<span class="keyword">false</span>),
 <a name="l00079"></a>00079         fullyInitialised (<span class="keyword">false</span>)
 <a name="l00080"></a>00080     {
-<a name="l00081"></a>00081         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(numOutputs &gt;= 1);
+<a name="l00081"></a>00081         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (numOutputs &gt;= 1);
 <a name="l00082"></a>00082         
 <a name="l00083"></a>00083         proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;setSize (numOutputs, <span class="keyword">false</span>);
 <a name="l00084"></a>00084         <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>* proxiesArray = proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getArray();
@@ -175,32 +175,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00115"></a>00115     
 <a name="l00116"></a><a class="code" href="class_proxy_owner_channel_internal.html#ae46492bac1707a7a1ea7f7d77111a305">00116</a>     <span class="keyword">inline</span> <span class="keyword">const</span> SampleType* <a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>() 
 <a name="l00117"></a>00117     {         
-<a name="l00118"></a>00118         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &gt;= 0);
-<a name="l00119"></a>00119         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
+<a name="l00118"></a>00118         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &gt;= 0);
+<a name="l00119"></a>00119         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
 <a name="l00120"></a>00120         <span class="keyword">const</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>* proxiesArray = proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getArray();
 <a name="l00121"></a>00121         <span class="keywordflow">return</span> proxiesArray[index].getOutputSamples();
 <a name="l00122"></a>00122     }
 <a name="l00123"></a>00123     
 <a name="l00124"></a><a class="code" href="class_proxy_owner_channel_internal.html#a7a69eb72da9e7368a7e3ad0b90e1673f">00124</a>     <span class="keyword">inline</span> SampleType* <a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>() 
 <a name="l00125"></a>00125     {        
-<a name="l00126"></a>00126         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &gt;= 0);
-<a name="l00127"></a>00127         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
+<a name="l00126"></a>00126         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &gt;= 0);
+<a name="l00127"></a>00127         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
 <a name="l00128"></a>00128         <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>* proxiesArray = proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getArray();
 <a name="l00129"></a>00129         <span class="keywordflow">return</span> proxiesArray[index].getOutputSamples();
 <a name="l00130"></a>00130     }
 <a name="l00131"></a>00131     
 <a name="l00132"></a><a class="code" href="class_proxy_owner_channel_internal.html#af0043514ac536634ad2e3c20225cd51d">00132</a>     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">Buffer</a> <a class="code" href="class_channel_internal_base.html#a6a2abcf8641b00549e4ed81a5693e90d">getOutputBuffer</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>() 
 <a name="l00133"></a>00133     {         
-<a name="l00134"></a>00134         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &gt;= 0);
-<a name="l00135"></a>00135         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
+<a name="l00134"></a>00134         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &gt;= 0);
+<a name="l00135"></a>00135         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
 <a name="l00136"></a>00136         <span class="keyword">const</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>* proxiesArray = proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getArray();
 <a name="l00137"></a>00137         <span class="keywordflow">return</span> proxiesArray[index].getOutputBuffer();
 <a name="l00138"></a>00138     }
 <a name="l00139"></a>00139     
 <a name="l00140"></a><a class="code" href="class_proxy_owner_channel_internal.html#ab6bd6cd0e9e5f4f0c13042868051db65">00140</a>     <span class="keyword">inline</span> <a class="code" href="class_numerical_array.html">Buffer</a> <a class="code" href="class_channel_internal_base.html#a6a2abcf8641b00549e4ed81a5693e90d">getOutputBuffer</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>() 
 <a name="l00141"></a>00141     {                 
-<a name="l00142"></a>00142         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &gt;= 0);
-<a name="l00143"></a>00143         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
+<a name="l00142"></a>00142         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &gt;= 0);
+<a name="l00143"></a>00143         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
 <a name="l00144"></a>00144         <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>* proxiesArray = proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getArray();
 <a name="l00145"></a>00145         <span class="keywordflow">return</span> proxiesArray[index].getOutputBuffer();
 <a name="l00146"></a>00146     }    
@@ -212,16 +212,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00152"></a>00152     
 <a name="l00153"></a><a class="code" href="class_proxy_owner_channel_internal.html#ab7136ee4e6c3d8751202a0e583114df5">00153</a>     <span class="keywordtype">void</span> <a class="code" href="class_proxy_owner_channel_internal.html#ab7136ee4e6c3d8751202a0e583114df5">initProxyValue</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index, SampleType <span class="keyword">const</span>&amp; value)
 <a name="l00154"></a>00154     {
-<a name="l00155"></a>00155         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &gt;= 0);
-<a name="l00156"></a>00156         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
+<a name="l00155"></a>00155         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &gt;= 0);
+<a name="l00156"></a>00156         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
 <a name="l00157"></a>00157         <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>* proxiesArray = proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getArray();
 <a name="l00158"></a>00158         <span class="keywordflow">return</span> proxiesArray[index].initValue (value);
 <a name="l00159"></a>00159     }
 <a name="l00160"></a>00160     
 <a name="l00161"></a><a class="code" href="class_proxy_owner_channel_internal.html#a64e2c06a3fd0aeb46faac973747e104d">00161</a>     <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>&amp; <a class="code" href="class_proxy_owner_channel_internal.html#a64e2c06a3fd0aeb46faac973747e104d">getProxy</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
 <a name="l00162"></a>00162     {
-<a name="l00163"></a>00163         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &gt;= 0);
-<a name="l00164"></a>00164         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
+<a name="l00163"></a>00163         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &gt;= 0);
+<a name="l00164"></a>00164         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (index &lt; proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;length());
 <a name="l00165"></a>00165         <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelType</a>* proxiesArray = proxies.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getArray();
 <a name="l00166"></a>00166         <span class="keywordflow">return</span> proxiesArray[index];
 <a name="l00167"></a>00167     }
@@ -328,7 +328,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:14 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

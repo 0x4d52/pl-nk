@@ -131,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00060"></a>00060     :   <a class="code" href="class_wavetable_base.html#a934d0d263a1eac22143da282e7bb19fc">Buffer</a> (<a class="code" href="class_numerical_array.html#ada7cd40ff1de921243a1ba6d0a73fe5d" title="Creates a NumericalArray with a given size (length).">Buffer::withSize</a> (buffer.length() * 2, <span class="keyword">false</span>))
 <a name="l00061"></a>00061     {
 <a name="l00062"></a>00062         <span class="keyword">const</span> <span class="keywordtype">int</span> bufferLength = buffer.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00063"></a>00063         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(bufferLength &gt; 0);
+<a name="l00063"></a>00063         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (bufferLength &gt; 0);
 <a name="l00064"></a>00064         
 <a name="l00065"></a>00065         <span class="keyword">const</span> SampleType* <span class="keyword">const</span> bufferSamples = buffer.getArray();     
 <a name="l00066"></a>00066         SampleType* tableSamples = <a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">Buffer::getArray</a>();
@@ -194,14 +194,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00126"></a>00126     
 <a name="l00127"></a><a class="code" href="class_wavetable_base.html#a58303a9b8149814f0a4a97349c471e7d">00127</a>     SampleType <a class="code" href="class_wavetable_base.html#a58303a9b8149814f0a4a97349c471e7d" title="Returns a refernce to an itemn at the specified index.">atUnchecked</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00128"></a>00128     {
-<a name="l00129"></a>00129         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>((index &gt;= 0) &amp;&amp; (index &lt; this-&gt;<a class="code" href="class_wavetable_base.html#a241b111cbfc895bc0056064677fe27d8" title="Length is the number of real elements of storage available.">length</a>()));
+<a name="l00129"></a>00129         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((index &gt;= 0) &amp;&amp; (index &lt; this-&gt;<a class="code" href="class_wavetable_base.html#a241b111cbfc895bc0056064677fe27d8" title="Length is the number of real elements of storage available.">length</a>()));
 <a name="l00130"></a>00130         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_wavetable_base.html#a123079cd06c41edc4a25eb86efc82bc8" title="Returns a pointer to the raw array for read-only ops.">getArray</a>()[index];
 <a name="l00131"></a>00131     }
 <a name="l00132"></a>00132 
 <a name="l00133"></a><a class="code" href="class_wavetable_base.html#add764b9a04c287dc694fff7afaa2f639">00133</a>     <span class="keywordtype">void</span> <a class="code" href="class_wavetable_base.html#add764b9a04c287dc694fff7afaa2f639" title="Places an item at the given index.">put</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index, SampleType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00134"></a>00134     {
 <a name="l00135"></a>00135         <span class="keyword">const</span> <span class="keywordtype">int</span> tableLength = this-&gt;<a class="code" href="class_wavetable_base.html#a241b111cbfc895bc0056064677fe27d8" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00136"></a>00136         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>((index &gt;= 0) &amp;&amp; (index &lt; tableLength));
+<a name="l00136"></a>00136         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((index &gt;= 0) &amp;&amp; (index &lt; tableLength));
 <a name="l00137"></a>00137         SampleType* <span class="keyword">const</span> tableSamples = <a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">Buffer::getArray</a>();
 <a name="l00138"></a>00138         tableSamples[index] = value;
 <a name="l00139"></a>00139         tableSamples[index + tableLength] = value;
@@ -294,7 +294,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:14 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

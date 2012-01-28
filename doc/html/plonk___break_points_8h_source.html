@@ -175,8 +175,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00104"></a>00104                             nextGateOn,
 <a name="l00105"></a>00105                             nextGateOff))
 <a name="l00106"></a>00106         {
-<a name="l00107"></a>00107         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(nextGateOn &gt;= -2);  <span class="comment">// must be a special code or a real index, &gt;=0</span>
-<a name="l00108"></a>00108         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(nextGateOff &gt;= -1); <span class="comment">// not the only infinite loop but one of them!</span>
+<a name="l00107"></a>00107         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (nextGateOn &gt;= -2);  <span class="comment">// must be a special code or a real index, &gt;=0</span>
+<a name="l00108"></a>00108         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (nextGateOff &gt;= -1); <span class="comment">// not the only infinite loop but one of them!</span>
 <a name="l00109"></a>00109         }
 <a name="l00110"></a>00110         
 <a name="l00111"></a><a class="code" href="class_breakpoint_base.html#ab71d3f07aacaf0b6421a578a4273635c">00111</a>     <span class="keyword">explicit</span> <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a> (<a class="code" href="class_breakpoint_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
@@ -248,9 +248,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00181"></a>00181                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOffs) <span class="keywordflow">throw</span>()
 <a name="l00182"></a>00182     :   breakpoints (<a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">BreakpointArrayType::withSize</a> (times.length()))
 <a name="l00183"></a>00183         {
-<a name="l00184"></a>00184         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(levels.length() &gt;= 2);
-<a name="l00185"></a>00185         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(times.length() == (levels.length() - 1));
-<a name="l00186"></a>00186         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(((nextGateOns.length() == 0) &amp;&amp; (nextGateOffs.length() == 0)) || 
+<a name="l00184"></a>00184         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (levels.length() &gt;= 2);
+<a name="l00185"></a>00185         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (times.length() == (levels.length() - 1));
+<a name="l00186"></a>00186         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (((nextGateOns.length() == 0) &amp;&amp; (nextGateOffs.length() == 0)) || 
 <a name="l00187"></a>00187                      ((nextGateOns.length() == (levels.length() - 1))) &amp;&amp; ((nextGateOffs.length() == (levels.length() - 1))));
 <a name="l00188"></a>00188 
 <a name="l00189"></a>00189         
@@ -422,7 +422,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:13 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

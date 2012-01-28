@@ -129,6 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="class_object_array_internal_base.html">ObjectArrayInternalBase&lt; Text, BaseType &gt;</a></li>
 </ul>
 </li>
+<li><a class="el" href="class_binary_op_type_utility.html">BinaryOpTypeUtility&lt; TypeA, TypeB &gt;</a></li>
 <li><a class="el" href="class_binary_op_utility.html">BinaryOpUtility&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_block_unit.html">BlockUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_b_p_f_unit.html">BPFUnit&lt; SampleType &gt;</a></li>
@@ -143,7 +144,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01double_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; double &gt; &gt;</a></li>
 <li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01float_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; float &gt; &gt;</a></li>
 <li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01int_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; int &gt; &gt;</a></li>
-<li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01_long_long_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; LongLong &gt; &gt;</a></li>
 <li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt;</a></li>
 <li><a class="el" href="struct_channel_data_3_01_saw_channel_internal_3_01short_01_4_01_4.html">ChannelData&lt; SawChannelInternal&lt; short &gt; &gt;</a></li>
 <li><a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; TableChannelInternal&lt; SampleType &gt; &gt;</a></li>
@@ -393,6 +393,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="struct_plink_process_base.html">PlinkProcessBase</a></li>
 <li><a class="el" href="struct_plink_process_f.html">PlinkProcessF</a></li>
 <li><a class="el" href="struct_plink_state.html">PlinkState</a></li>
+<li><a class="el" href="class_quaternary_op_type_utility.html">QuaternaryOpTypeUtility&lt; TypeA, TypeB, TypeC, TypeD &gt;</a></li>
+<li><a class="el" href="class_quinary_op_type_utility.html">QuinaryOpTypeUtility&lt; TypeA, TypeB, TypeC, TypeD, TypeE &gt;</a></li>
 <li><a class="el" href="class_receiver_internal.html">ReceiverInternal&lt; SenderContainerBaseType &gt;</a><ul>
 <li><a class="el" href="class_binary_op_variable_internal.html">BinaryOpVariableInternal&lt; Type, op &gt;</a></li>
 <li><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></li>
@@ -417,11 +419,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="class_resample_unit.html">ResampleUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_r_h_p_f_unit.html">RHPFUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_r_l_p_f_unit.html">RLPFUnit&lt; SampleType &gt;</a></li>
-<li><a class="el" href="class_sample_rate.html">SampleRate</a></li>
 <li><a class="el" href="struct_saw_process_state_f.html">SawProcessStateF</a></li>
 <li><a class="el" href="class_saw_unit.html">SawUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_sine_unit.html">SineUnit&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_smart_pointer.html">SmartPointer</a><ul>
+<li><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></li>
 <li><a class="el" href="class_binary_file_internal.html">BinaryFileInternal</a></li>
 <li><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></li>
 <li><a class="el" href="class_dictionary_internal.html">DictionaryInternal&lt; ValueType, KeyType &gt;</a></li>
@@ -519,6 +521,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 </li>
 <li><a class="el" href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html">SmartPointerContainer&lt; SmartPointerType, true &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; AudioFileReaderInternal &gt;</a><ul>
+<li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; AudioFileReaderInternal &gt;</a><ul>
+<li><a class="el" href="class_audio_file_reader.html">AudioFileReader</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a><ul>
@@ -788,10 +797,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="class_smart_pointer_container_base.html">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; NumericalType &gt; &gt;</a><ul>
 <li><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; ObjectArrayInternal&lt; NumericalType &gt; &gt;</a><ul>
 <li><a class="el" href="class_object_array.html">ObjectArray&lt; NumericalType &gt;</a><ul>
-<li><a class="el" href="class_numerical_array.html">NumericalArray&lt; NumericalType &gt;</a><ul>
-<li><a class="el" href="class_text.html">Text</a></li>
-</ul>
-</li>
+<li><a class="el" href="class_numerical_array.html">NumericalArray&lt; NumericalType &gt;</a></li>
 </ul>
 </li>
 </ul>
@@ -954,6 +960,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a class="el" href="class_sender_container.html">SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;</a><ul>
 <li><a class="el" href="class_variable.html">Variable&lt; Type &gt;</a><ul>
 <li><a class="el" href="class_block_size.html">BlockSize</a></li>
+<li><a class="el" href="class_sample_rate.html">SampleRate</a></li>
 </ul>
 </li>
 </ul>
@@ -970,11 +977,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 </li>
 <li><a class="el" href="class_table_unit.html">TableUnit&lt; SampleType &gt;</a></li>
+<li><a class="el" href="class_ternary_op_type_utility.html">TernaryOpTypeUtility&lt; TypeA, TypeB, TypeC &gt;</a></li>
+<li><a class="el" href="class_text.html">Text</a></li>
 <li><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></li>
 <li><a class="el" href="class_threading.html">Threading</a></li>
 <li><a class="el" href="class_time_stamp.html">TimeStamp</a></li>
 <li><a class="el" href="class_type_code.html">TypeCode</a></li>
+<li><a class="el" href="class_type_unit_base.html">TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</a><ul>
 <li><a class="el" href="class_type_unit.html">TypeUnit&lt; OutputSampleType, InputSampleType &gt;</a></li>
+</ul>
+</li>
 <li><a class="el" href="class_type_utility_base.html">TypeUtilityBase&lt; Type &gt;</a><ul>
 <li><a class="el" href="class_type_utility.html">TypeUtility&lt; Type &gt;</a></li>
 </ul>
@@ -1148,7 +1160,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:26 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:15 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

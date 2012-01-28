@@ -166,8 +166,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00095"></a>00095                                                      this-&gt;<a class="code" href="class_channel_internal_core.html#afd271ba08b388a2132c8d73a6ec3259f">getSampleRate</a>()));      
 <a name="l00096"></a>00096         }
 <a name="l00097"></a>00097         
-<a name="l00098"></a>00098         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(input.<a class="code" href="class_unit_base.html#a2a7a1b5cbe1b247e20d48927ec5fb676">getOverlap</a> (0) == <a class="code" href="class_variable.html#a53f757bb8f27e00dc844597b4a2e6ca9">DoubleVariable::getOne</a>());
-<a name="l00099"></a>00099         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(position.<a class="code" href="class_unit_base.html#a2a7a1b5cbe1b247e20d48927ec5fb676">getOverlap</a> (0) == <a class="code" href="class_variable.html#a53f757bb8f27e00dc844597b4a2e6ca9">DoubleVariable::getOne</a>());
+<a name="l00098"></a>00098         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (input.<a class="code" href="class_unit_base.html#a2a7a1b5cbe1b247e20d48927ec5fb676">getOverlap</a> (0) == <a class="code" href="class_variable.html#a53f757bb8f27e00dc844597b4a2e6ca9">DoubleVariable::getOne</a>());
+<a name="l00099"></a>00099         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (position.<a class="code" href="class_unit_base.html#a2a7a1b5cbe1b247e20d48927ec5fb676">getOverlap</a> (0) == <a class="code" href="class_variable.html#a53f757bb8f27e00dc844597b4a2e6ca9">DoubleVariable::getOne</a>());
 <a name="l00100"></a>00100 
 <a name="l00101"></a>00101         <span class="keyword">const</span> SampleType inputValue = input.<a class="code" href="class_unit_base.html#a0abca48d077f3f49b5c9639ac64eec5a" title="Get the current value of a specific channel in this unit.">getValue</a> (0);        
 <a name="l00102"></a>00102         <span class="keyword">const</span> SampleType mulAdd (0.5);
@@ -282,32 +282,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00211"></a>00211                         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; position = SampleType (0),
 <a name="l00212"></a>00212                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84" title="A dummy block size used to indicate no preference.">BlockSize::noPreference</a>(),
 <a name="l00213"></a>00213                         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate = <a class="code" href="class_sample_rate.html#a2c73817f04514911a2a8993ea10b3a31">SampleRate::noPreference</a>()) throw()
-<a name="l00214"></a>00214     {                
-<a name="l00215"></a>00215         <span class="keyword">const</span> <span class="keywordtype">int</span> numInputChannels = <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (input.<a class="code" href="class_unit_base.html#a1f8d49c0651e927f3583fa6458a5b908" title="Gets the number of channels in this unit.">getNumChannels</a>(), position.getNumChannels());
-<a name="l00216"></a>00216         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> result (<a class="code" href="class_object_array.html#afc0c8de5e14b9b5257f072c26fe7a5b5" title="Returns an empty array with a given size of allocated storage.">UnitType::emptyWithAllocatedSize</a> (numInputChannels * 2));
-<a name="l00217"></a>00217         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> data = { -1.0, -1.0 };
+<a name="l00214"></a>00214     {               
+<a name="l00215"></a>00215         <span class="comment">/*</span>
+<a name="l00216"></a>00216 <span class="comment">         for full templating we&#39;d need to add template params for position unit types possibly not for this type though</span>
+<a name="l00217"></a>00217 <span class="comment">         */</span>
 <a name="l00218"></a>00218 
-<a name="l00219"></a>00219         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numInputChannels; ++i)
-<a name="l00220"></a>00220         {
-<a name="l00221"></a>00221             <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
-<a name="l00222"></a>00222             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5698ab43cec4e3a53e3ba0fff75fa8bb" title="A generic signal (commonly used where there is only one input or output).">IOKey::Signal</a>, input[i]);
-<a name="l00223"></a>00223             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ad827ce15ab60425e9de488b6c3bc349b" title="Position, e.g., pan position.">IOKey::Position</a>, position[i]);
-<a name="l00224"></a>00224 
-<a name="l00225"></a>00225             result.add (UnitType::template proxiesFromInputs&lt;LinearPanInternal&gt; (inputs, 
-<a name="l00226"></a>00226                                                                                  data, 
-<a name="l00227"></a>00227                                                                                  preferredBlockSize, 
-<a name="l00228"></a>00228                                                                                  preferredSampleRate));
-<a name="l00229"></a>00229         }
-<a name="l00230"></a>00230         
-<a name="l00231"></a>00231         <span class="keywordflow">return</span> result;
-<a name="l00232"></a>00232     }
-<a name="l00233"></a>00233         
-<a name="l00234"></a>00234 };
-<a name="l00235"></a>00235 
-<a name="l00236"></a><a class="code" href="plonk___linear_pan_channel_8h.html#a02767498492bf2a24ff74677dfec922a">00236</a> <span class="keyword">typedef</span> <a class="code" href="class_linear_pan_unit.html">LinearPanUnit&lt;PLONK_TYPE_DEFAULT&gt;</a> <a class="code" href="plonk___linear_pan_channel_8h.html#a02767498492bf2a24ff74677dfec922a">LinearPan</a>;
-<a name="l00237"></a>00237 
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239 <span class="preprocessor">#endif // PLONK_LINEARPAN_H</span>
+<a name="l00219"></a>00219         <span class="keyword">const</span> <span class="keywordtype">int</span> numInputChannels = <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (input.<a class="code" href="class_unit_base.html#a1f8d49c0651e927f3583fa6458a5b908" title="Gets the number of channels in this unit.">getNumChannels</a>(), position.getNumChannels());
+<a name="l00220"></a>00220         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> result (<a class="code" href="class_object_array.html#afc0c8de5e14b9b5257f072c26fe7a5b5" title="Returns an empty array with a given size of allocated storage.">UnitType::emptyWithAllocatedSize</a> (numInputChannels * 2));
+<a name="l00221"></a>00221         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> data = { -1.0, -1.0 };
+<a name="l00222"></a>00222 
+<a name="l00223"></a>00223         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numInputChannels; ++i)
+<a name="l00224"></a>00224         {
+<a name="l00225"></a>00225             <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
+<a name="l00226"></a>00226             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5698ab43cec4e3a53e3ba0fff75fa8bb" title="A generic signal (commonly used where there is only one input or output).">IOKey::Signal</a>, input[i]);
+<a name="l00227"></a>00227             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ad827ce15ab60425e9de488b6c3bc349b" title="Position, e.g., pan position.">IOKey::Position</a>, position[i]);
+<a name="l00228"></a>00228 
+<a name="l00229"></a>00229             result.add (UnitType::template proxiesFromInputs&lt;LinearPanInternal&gt; (inputs, 
+<a name="l00230"></a>00230                                                                                  data, 
+<a name="l00231"></a>00231                                                                                  preferredBlockSize, 
+<a name="l00232"></a>00232                                                                                  preferredSampleRate));
+<a name="l00233"></a>00233         }
+<a name="l00234"></a>00234         
+<a name="l00235"></a>00235         <span class="keywordflow">return</span> result;
+<a name="l00236"></a>00236     }
+<a name="l00237"></a>00237         
+<a name="l00238"></a>00238 };
+<a name="l00239"></a>00239 
+<a name="l00240"></a><a class="code" href="plonk___linear_pan_channel_8h.html#a02767498492bf2a24ff74677dfec922a">00240</a> <span class="keyword">typedef</span> <a class="code" href="class_linear_pan_unit.html">LinearPanUnit&lt;PLONK_TYPE_DEFAULT&gt;</a> <a class="code" href="plonk___linear_pan_channel_8h.html#a02767498492bf2a24ff74677dfec922a">LinearPan</a>;
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242 
+<a name="l00243"></a>00243 <span class="preprocessor">#endif // PLONK_LINEARPAN_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -324,7 +328,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:13 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

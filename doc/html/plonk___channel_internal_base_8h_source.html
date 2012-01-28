@@ -182,14 +182,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00112"></a><a class="code" href="class_channel_internal_base.html#a7023081abf6a915cffb50aa76b868226">00112</a>     <span class="keyword">inline</span> <span class="keyword">const</span> SampleType&amp; <a class="code" href="class_channel_internal_base.html#a7023081abf6a915cffb50aa76b868226">getValue</a>() <span class="keyword">const</span> throw() 
 <a name="l00113"></a>00113     { 
 <a name="l00114"></a>00114         <span class="comment">// the underlying Channel or Unit may not have called initValue()</span>
-<a name="l00115"></a>00115         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(hasInitialisedValue == <span class="keyword">true</span>); 
+<a name="l00115"></a>00115         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (hasInitialisedValue == <span class="keyword">true</span>); 
 <a name="l00116"></a>00116         <span class="keywordflow">return</span> outputBuffer.<a class="code" href="class_object_array.html#a29533c8074caba9a86dc7a2482b759f6" title="Returns the last item in the array.">last</a>();
 <a name="l00117"></a>00117     }
 <a name="l00118"></a>00118     
 <a name="l00119"></a><a class="code" href="class_channel_internal_base.html#aacb1ff84d0396cd791651a43f7dc8d7f">00119</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_channel_internal_base.html#aacb1ff84d0396cd791651a43f7dc8d7f">setOutputBuffer</a> (<a class="code" href="class_numerical_array.html">Buffer</a> <span class="keyword">const</span>&amp; externalBuffer) <span class="keywordflow">throw</span>()
 <a name="l00120"></a>00120     {
-<a name="l00121"></a>00121         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(this-&gt;<a class="code" href="class_channel_internal_core.html#a30c2976be76027e42d6e018a9fa5240b">canUseExternalBuffer</a>());
-<a name="l00122"></a>00122         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(externalBuffer.length() == this-&gt;<a class="code" href="class_channel_internal_core.html#a358bc6511d582450b6cabdbf1bc63b8a">getBlockSize</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>());
+<a name="l00121"></a>00121         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (this-&gt;<a class="code" href="class_channel_internal_core.html#a30c2976be76027e42d6e018a9fa5240b">canUseExternalBuffer</a>());
+<a name="l00122"></a>00122         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (externalBuffer.length() == this-&gt;<a class="code" href="class_channel_internal_core.html#a358bc6511d582450b6cabdbf1bc63b8a">getBlockSize</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>());
 <a name="l00123"></a>00123         usingExternalBuffer = <span class="keyword">true</span>;
 <a name="l00124"></a>00124         outputBuffer = externalBuffer;
 <a name="l00125"></a>00125     }
@@ -198,7 +198,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00128"></a>00128     
 <a name="l00129"></a><a class="code" href="class_channel_internal_base.html#a54bb9e85fab30c89b97f158dd818d95c">00129</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_channel_internal_base.html#a54bb9e85fab30c89b97f158dd818d95c">removeExternalBuffer</a>() throw()
 <a name="l00130"></a>00130     {
-<a name="l00131"></a>00131         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(usingExternalBuffer == <span class="keyword">true</span>);
+<a name="l00131"></a>00131         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (usingExternalBuffer == <span class="keyword">true</span>);
 <a name="l00132"></a>00132         usingExternalBuffer = <span class="keyword">false</span>;
 <a name="l00133"></a>00133         outputBuffer = <a class="code" href="class_numerical_array.html#a35333c3e01ef69f3a2915165c2d3ab83" title="Creates a NumericalArray with a given size (length) with all items set to zero.">Buffer::newClear</a> (this-&gt;<a class="code" href="class_channel_internal_core.html#a358bc6511d582450b6cabdbf1bc63b8a">getBlockSize</a>().<a class="code" href="class_channel_internal_base.html#a7023081abf6a915cffb50aa76b868226">getValue</a>());
 <a name="l00134"></a>00134     }
@@ -207,7 +207,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00137"></a>00137     {        
 <a name="l00138"></a>00138         <span class="keywordflow">if</span> (newBlockSize != this-&gt;<a class="code" href="class_channel_internal_core.html#a358bc6511d582450b6cabdbf1bc63b8a">getBlockSize</a>())
 <a name="l00139"></a>00139         {
-<a name="l00140"></a>00140             <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(newBlockSize.getValue() &gt; 0);
+<a name="l00140"></a>00140             <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (newBlockSize.getValue() &gt; 0);
 <a name="l00141"></a>00141 
 <a name="l00142"></a>00142             this-&gt;<a class="code" href="class_channel_internal_core.html#a358bc6511d582450b6cabdbf1bc63b8a">getBlockSize</a>().<a class="code" href="class_sender_container.html#ad67bb1ee11503fce1810369f87d77720">removeReceiver</a> (<span class="keyword">this</span>);
 <a name="l00143"></a>00143             this-&gt;<a class="code" href="class_channel_internal_core.html#a805137d0a10f0aa09b091c4910ba8a21">setBlockSizeInternal</a> (newBlockSize);
@@ -224,7 +224,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00154"></a><a class="code" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">00154</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue</a> (SampleType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00155"></a>00155     {
 <a name="l00156"></a>00156 <span class="preprocessor">#ifdef PLONK_DEBUG</span>
-<a name="l00157"></a>00157 <span class="preprocessor"></span>        <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(outputBuffer.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &gt; 0);
+<a name="l00157"></a>00157 <span class="preprocessor"></span>        <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (outputBuffer.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &gt; 0);
 <a name="l00158"></a>00158         hasInitialisedValue = <span class="keyword">true</span>;
 <a name="l00159"></a>00159 <span class="preprocessor">#endif                </span>
 <a name="l00160"></a>00160 <span class="preprocessor"></span>        outputBuffer.<a class="code" href="class_object_array.html#a29533c8074caba9a86dc7a2482b759f6" title="Returns the last item in the array.">last</a>() = value;
@@ -288,7 +288,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:13 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

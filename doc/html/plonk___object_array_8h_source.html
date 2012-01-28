@@ -767,13 +767,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00778"></a>00778         
 <a name="l00781"></a><a class="code" href="class_object_array.html#a9ec04e1862ebea9767bbbf45a169792d">00781</a>         <span class="keyword">inline</span> ObjectType&amp; <a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
 <a name="l00782"></a>00782         {
-<a name="l00783"></a>00783                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>((index &gt;= 0) &amp;&amp; (index &lt; this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>()));
+<a name="l00783"></a>00783                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((index &gt;= 0) &amp;&amp; (index &lt; this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>()));
 <a name="l00784"></a>00784                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array_internal_base.html#a127cc1ba168cf7c07b180b59968336c0">getArray</a>()[index];
 <a name="l00785"></a>00785         }
 <a name="l00786"></a>00786 
 <a name="l00789"></a><a class="code" href="class_object_array.html#a7b01a9b2e82501caa5bb01c7626d5232">00789</a>         <span class="keyword">inline</span> <span class="keyword">const</span> ObjectType&amp; <a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00790"></a>00790         {
-<a name="l00791"></a>00791                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>((index &gt;= 0) &amp;&amp; (index &lt; this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>()));
+<a name="l00791"></a>00791                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((index &gt;= 0) &amp;&amp; (index &lt; this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>()));
 <a name="l00792"></a>00792                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array_internal_base.html#a127cc1ba168cf7c07b180b59968336c0">getArray</a>()[index];
 <a name="l00793"></a>00793         }       
 <a name="l00794"></a>00794         
@@ -949,7 +949,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01003"></a>01003         
 <a name="l01005"></a><a class="code" href="class_object_array.html#a19bf576e39e283a2af2cb60d8726ae8b">01005</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(<span class="keyword">const</span> ObjectType* otherArray) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l01006"></a>01006         {               
-<a name="l01007"></a>01007                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(otherArray != 0);
+<a name="l01007"></a>01007                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (otherArray != 0);
 <a name="l01008"></a>01008                 
 <a name="l01009"></a>01009                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
 <a name="l01010"></a>01010                 
@@ -1197,7 +1197,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01275"></a>01275                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l01276"></a>01276         }
 <a name="l01277"></a>01277         
-<a name="l01279"></a><a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf">01279</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf" title="Group this array into a 2D array with a particular group size.">group</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> groupSize) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01279"></a><a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf">01279</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf" title="Group this array into a 2D array with a particular group size.">group</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> groupSize) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l01280"></a>01280         {
 <a name="l01281"></a>01281                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l01282"></a>01282         
@@ -1322,12 +1322,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01403"></a>01403                 <span class="keywordflow">return</span> result;          
 <a name="l01404"></a>01404         }     
 <a name="l01405"></a>01405         
-<a name="l01406"></a>01406 };
-<a name="l01407"></a>01407 
-<a name="l01408"></a>01408 
-<a name="l01409"></a>01409 
-<a name="l01410"></a>01410 
-<a name="l01411"></a>01411 <span class="preprocessor">#endif // PLONK_OBJECTARRAY_H</span>
+<a name="l01407"></a><a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748">01407</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="Deinternleave this array into a 2D array with a particular number of groups.">deinterleave</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> numGroups) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01408"></a>01408         {
+<a name="l01409"></a>01409         <span class="keywordtype">int</span> i, j;
+<a name="l01410"></a>01410         
+<a name="l01411"></a>01411         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (!this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>()); <span class="comment">// could be done but need this for audio de-interleaving for now..</span>
+<a name="l01412"></a>01412 
+<a name="l01413"></a>01413                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01414"></a>01414         
+<a name="l01415"></a>01415         <span class="keywordflow">if</span> (length == 0) 
+<a name="l01416"></a>01416             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
+<a name="l01417"></a>01417 
+<a name="l01418"></a>01418         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (numGroups &gt; 0);
+<a name="l01419"></a>01419         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((length % numGroups) == 0);
+<a name="l01420"></a>01420         
+<a name="l01421"></a>01421         <span class="keywordflow">if</span> (numGroups == 1)
+<a name="l01422"></a>01422             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a1a434ddf2302f5be2f1bfa6e1d6f3ebe">ObjectArray2DType</a> (*<span class="keyword">this</span>);
+<a name="l01423"></a>01423         
+<a name="l01424"></a>01424         <span class="keyword">const</span> <span class="keywordtype">int</span> subLength = length / numGroups;
+<a name="l01425"></a>01425         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> result = <a class="code" href="class_object_array.html#afc0c8de5e14b9b5257f072c26fe7a5b5" title="Returns an empty array with a given size of allocated storage.">ObjectArray2DType::emptyWithAllocatedSize</a> (numGroups);
+<a name="l01426"></a>01426         
+<a name="l01427"></a>01427         <span class="keywordflow">for</span> (i = 0; i &lt; numGroups; ++i)
+<a name="l01428"></a>01428         {
+<a name="l01429"></a>01429             <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a> sub = <a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">ObjectArray::withSize</a> (subLength);
+<a name="l01430"></a>01430          
+<a name="l01431"></a>01431             <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>() + i;
+<a name="l01432"></a>01432             ObjectType* <span class="keyword">const</span> subArray = sub.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01433"></a>01433             
+<a name="l01434"></a>01434             <span class="keywordflow">for</span> (j = 0; j &lt; subLength; ++j, thisArray += numGroups)
+<a name="l01435"></a>01435                 subArray[j] = *thisArray;
+<a name="l01436"></a>01436             
+<a name="l01437"></a>01437             result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (sub);
+<a name="l01438"></a>01438         }               
+<a name="l01439"></a>01439                 
+<a name="l01440"></a>01440                 <span class="keywordflow">return</span> result;
+<a name="l01441"></a>01441         }
+<a name="l01442"></a>01442 
+<a name="l01443"></a>01443 };
+<a name="l01444"></a>01444 
+<a name="l01445"></a>01445 
+<a name="l01446"></a>01446 
+<a name="l01447"></a>01447 
+<a name="l01448"></a>01448 <span class="preprocessor">#endif // PLONK_OBJECTARRAY_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -1344,7 +1380,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:25 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:14 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

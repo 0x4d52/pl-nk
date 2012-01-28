@@ -223,16 +223,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00152"></a>00152     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ContainerType&gt;
 <a name="l00153"></a><a class="code" href="class_dynamic.html#a3619a764eec1b9e8f3a7289886f3a899">00153</a>     <span class="keyword">inline</span> <span class="keyword">const</span> ContainerType&amp; <a class="code" href="class_dynamic.html#a3619a764eec1b9e8f3a7289886f3a899">asUnchecked</a>() <span class="keyword">const</span> throw()
 <a name="l00154"></a>00154     {              
-<a name="l00155"></a>00155         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(this-&gt;<a class="code" href="class_dynamic.html#aee94235a28180a24f5101910105c096c">isItemNotNull</a>());
-<a name="l00156"></a>00156         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;ContainerType&gt;::getTypeCode</a>() == this-&gt;<a class="code" href="class_dynamic.html#ac28f81a26685cb3af5df42b25faabb38">getTypeCode</a>());
+<a name="l00155"></a>00155         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (this-&gt;<a class="code" href="class_dynamic.html#aee94235a28180a24f5101910105c096c">isItemNotNull</a>());
+<a name="l00156"></a>00156         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;ContainerType&gt;::getTypeCode</a>() == this-&gt;<a class="code" href="class_dynamic.html#ac28f81a26685cb3af5df42b25faabb38">getTypeCode</a>());
 <a name="l00157"></a>00157         <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>ContainerType&amp;<span class="keyword">&gt;</span> (this-&gt;<a class="code" href="class_dynamic.html#a5ba4a31183451ac94b41fc8d02e7af7f">getItem</a>());
 <a name="l00158"></a>00158     }
 <a name="l00159"></a>00159     
 <a name="l00160"></a>00160     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ContainerType&gt;
 <a name="l00161"></a><a class="code" href="class_dynamic.html#a31cd8597c909a6b1d2e0359d7465fa90">00161</a>     <span class="keyword">inline</span> ContainerType&amp; <a class="code" href="class_dynamic.html#a3619a764eec1b9e8f3a7289886f3a899">asUnchecked</a>() throw()
 <a name="l00162"></a>00162     {              
-<a name="l00163"></a>00163         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(this-&gt;<a class="code" href="class_dynamic.html#aee94235a28180a24f5101910105c096c">isItemNotNull</a>());
-<a name="l00164"></a>00164         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;ContainerType&gt;::getTypeCode</a>() == this-&gt;<a class="code" href="class_dynamic.html#ac28f81a26685cb3af5df42b25faabb38">getTypeCode</a>());
+<a name="l00163"></a>00163         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (this-&gt;<a class="code" href="class_dynamic.html#aee94235a28180a24f5101910105c096c">isItemNotNull</a>());
+<a name="l00164"></a>00164         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;ContainerType&gt;::getTypeCode</a>() == this-&gt;<a class="code" href="class_dynamic.html#ac28f81a26685cb3af5df42b25faabb38">getTypeCode</a>());
 <a name="l00165"></a>00165         <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>ContainerType&amp;<span class="keyword">&gt;</span> (this-&gt;<a class="code" href="class_dynamic.html#a5ba4a31183451ac94b41fc8d02e7af7f">getItem</a>());
 <a name="l00166"></a>00166     }
 <a name="l00167"></a>00167     
@@ -272,7 +272,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 13:47:24 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:13 for plinkplonk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
