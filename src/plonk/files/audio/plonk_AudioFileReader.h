@@ -63,7 +63,7 @@ public:
     void resetFramePosition() throw();
     
     template<class SampleType>
-    void readFrames (NumericalArray<SampleType>& data) throw();
+    void readFrames (NumericalArray<SampleType>& data, const bool applyScaling) throw();
     
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
@@ -87,7 +87,7 @@ private:
 };
 
 template<class SampleType>
-void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) throw()
+void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, const bool applyScaling) throw()
 {
     // this needs to do many more checks...
     
@@ -133,24 +133,24 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
             {
                 Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
             }
             else if (bytesPerSample == 3)
             {
                 Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
             }
             else if (bytesPerSample == 4)
             {
                 Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
             }
             else if (bytesPerSample == 1)
             {
                 Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
-                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
             }
             else
             {
@@ -163,13 +163,13 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data) thro
             {
                 Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
             }
             else if (bytesPerSample == 8)
             {
                 Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convertData (dataArray, convertBuffer, samplesRead);
+                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
             }
             else
             {
@@ -288,29 +288,36 @@ public:
     template<class SampleType>
     inline void readFrames (NumericalArray<SampleType>& data) throw()
     {
-        getInternal()->readFrames (data);
+        getInternal()->readFrames (data, true);
     }
     
     template<class SampleType>
-    inline NumericalArray<SampleType> readAllFrames() throw()
+    inline void readFramesDirect (NumericalArray<SampleType>& data) throw()
+    {
+        getInternal()->readFrames (data, false);
+    }
+
+    
+    template<class SampleType>
+    inline NumericalArray<SampleType> readAllFrames (const bool applyScaling) throw()
     {
         typedef NumericalArray<SampleType> SampleArray;
         SampleArray data = SampleArray::withSize (getNumFrames() * getNumChannels());
         resetFramePosition();
-        getInternal()->readFrames (data);
+        getInternal()->readFrames (data, applyScaling);
         return data;
     }
 
     template<class SampleType>
     inline operator NumericalArray<SampleType> () throw()
     {
-        return readAllFrames<SampleType>();
+        return readAllFrames<SampleType> (true);
     }
     
     template<class SampleType>
     inline operator SignalBase<SampleType> () throw()
     {
-        NumericalArray<SampleType> data = readAllFrames<SampleType>();
+        NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
         return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
     }
 

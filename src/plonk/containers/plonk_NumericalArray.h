@@ -139,16 +139,67 @@ public:
         Memory::copy (dst, src, numItems * sizeof (NumericalType));
     }
     
-    static inline void convertData (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    static inline void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
         Memory::copy (dst, src, numItems * sizeof (NumericalType));
     }
     
+    static inline void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    {
+        Memory::copy (dst, src, numItems * sizeof (NumericalType));
+    }
+
     template<class OtherType>
-    static inline void convertData (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    static inline void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
         for (int i = 0; i < numItems; ++i)
             roundCopy (src[i], dst[i]);
+    }
+    
+    template<class OtherType>
+    static inline void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    {
+        typedef typename BinaryOpTypeUtility<NumericalType, OtherType>::CalcType CalcType;
+        
+        CalcType typePeak (TypeUtility<NumericalType>::getTypePeak());
+        CalcType otherTypePeak (TypeUtility<OtherType>::getTypePeak());
+        CalcType otherTypePeakFactor = CalcType (1) / otherTypePeak;
+        
+        if (typePeak == CalcType (1))
+        {
+            for (int i = 0; i < numItems; ++i)
+            {
+                NumericalType temp;
+                roundCopy (src[i], temp);
+                dst[i] = CalcType (temp) * otherTypePeakFactor;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < numItems; ++i)
+            {
+                NumericalType temp;
+                roundCopy (src[i], temp);
+                
+                CalcType calc = temp;
+                calc *= typePeak;
+                calc *= otherTypePeakFactor;
+                
+                dst[i] = NumericalType (calc);
+            }
+        }
+    }
+    
+    template<class OtherType>
+    static inline void convert (NumericalType* const dst, 
+                                const OtherType* const src, 
+                                const UnsignedLong numItems,
+                                const bool applyScaling) throw()
+    {
+        if (applyScaling)
+            convertScaled (dst, src, numItems);
+        else
+            convertDirect (dst, src, numItems);
     }
     
     static inline void zeroData (NumericalType* const dst, const UnsignedLong numItems) throw()
@@ -208,7 +259,7 @@ public:
 		const CopyType *copyArray = copy.getArray();
 		
 		if (thisArray != 0 && copyArray != 0)
-            NumericalArray::convertData (thisArray, copyArray, this->size());
+            NumericalArray::convertDirect (thisArray, copyArray, this->size());
 	}
 	
 	/** Construct a NumericalArray by copying a ObjectArray of a different type.

@@ -211,9 +211,9 @@ struct PlinkProcess
     {
         plonk_assert (N >= (numInputs + numOutputs));
         
-        pp->base.userData = userData;
+        pp->base.userData   = userData;
         pp->base.numOutputs = numOutputs;
-        pp->base.numInputs = numInputs;
+        pp->base.numInputs  = numInputs;
         pp->base.numBuffers = N;        
     }
 };
