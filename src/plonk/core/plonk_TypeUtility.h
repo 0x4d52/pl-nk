@@ -84,9 +84,11 @@ public:
         FloatBusses, DoubleBusses, IntBusses, ShortBusses, Int24Busses, LongBusses, 
     // breakpoints (70)
         FloatBreakpoints, DoubleBreakpoints, IntBreakpoints, ShortBreakpoints, Int24Breakpoints, LongBreakpoints,
-    // breakpoints (76)
+    // wavetables (76)
         FloatWavetable, DoubleWavetable, IntWavetable, ShortWavetable, Int24Wavetable, LongWavetable,
-    // count (82)
+    // signals (82)
+        FloatSignal, DoubleSignal, IntSignal, ShortSignal, Int24Signal, LongSignal,
+    // count (88)
         NumTypeCodes
     };    
     
@@ -120,7 +122,9 @@ public:
             
             "FloatBreakpoints", "DoubleBreakpoints", "IntBreakpoints", "ShortBreakpoints", "Int24Breakpoints", "LongBreakpoints",
             
-            "FloatWavetable", "DoubleWavetable", "IntWavetable", "ShortWavetable", "Int24Wavetable", "LongWavetable"
+            "FloatWavetable", "DoubleWavetable", "IntWavetable", "ShortWavetable", "Int24Wavetable", "LongWavetable",
+            
+            "FloatSignal", "DoubleSignal", "IntSignal", "ShortSignal", "Int24Signal", "LongSignal"
         };
         
         if ((code >= 0) && (code < TypeCode::NumTypeCodes))
@@ -177,6 +181,7 @@ public:
     static inline bool isBusses (const int code) throw()            { return (code >= TypeCode::FloatBusses) && (code <= TypeCode::LongBusses); }
     static inline bool isBreakpoints (const int code) throw()       { return (code >= TypeCode::FloatBreakpoints) && (code <= TypeCode::LongBreakpoints); }
     static inline bool isWavetable (const int code) throw()         { return (code >= TypeCode::FloatWavetable) && (code <= TypeCode::LongWavetable); }
+    static inline bool isSignal (const int code) throw()            { return (code >= TypeCode::FloatSignal) && (code <= TypeCode::LongSignal); }
 
     // could replace these later by designing the enum to be bit-mask based
     
@@ -1891,6 +1896,138 @@ public:
     static inline int  getTypeCode() { return TypeCode::LongWavetable; }
 };
 
+template<>
+class TypeUtilityBase<FloatSignal>
+{
+public:
+    typedef FloatSignal              TypeName;
+    typedef FloatSignal              OriginalType;
+    typedef FloatSignal const&       PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatSignal; }
+};
+
+template<>
+class TypeUtilityBase<const FloatSignal>
+{
+public:
+    typedef const FloatSignal        TypeName;
+    typedef FloatSignal              OriginalType;
+    typedef FloatSignal const&       PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatSignal; }
+};
+
+template<>
+class TypeUtilityBase<DoubleSignal>
+{
+public:
+    typedef DoubleSignal             TypeName;
+    typedef DoubleSignal             OriginalType;
+    typedef DoubleSignal const&      PassType;
+    typedef double                   IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
+};
+
+template<>
+class TypeUtilityBase<const DoubleSignal>
+{
+public:
+    typedef const DoubleSignal       TypeName;
+    typedef DoubleSignal             OriginalType;
+    typedef DoubleSignal const&      PassType;
+    typedef double                   IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
+};
+
+template<>
+class TypeUtilityBase<IntSignal>
+{
+public:
+    typedef IntSignal            TypeName;
+    typedef IntSignal            OriginalType;
+    typedef IntSignal const&     PassType;
+    typedef float                IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntSignal; }
+};
+
+template<>
+class TypeUtilityBase<const IntSignal>
+{
+public:
+    typedef const IntSignal      TypeName;
+    typedef IntSignal            OriginalType;
+    typedef IntSignal const&     PassType;
+    typedef float                IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntSignal; }
+};
+
+template<>
+class TypeUtilityBase<ShortSignal>
+{
+public:
+    typedef ShortSignal              TypeName;
+    typedef ShortSignal              OriginalType;
+    typedef ShortSignal const&       PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortSignal; }
+};
+
+template<>
+class TypeUtilityBase<const ShortSignal>
+{
+public:
+    typedef const ShortSignal        TypeName;
+    typedef ShortSignal              OriginalType;
+    typedef ShortSignal const&       PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortSignal; }
+};
+
+template<>
+class TypeUtilityBase<Int24Signal>
+{
+public:
+    typedef Int24Signal              TypeName;
+    typedef Int24Signal              OriginalType;
+    typedef Int24Signal const&       PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24Signal; }
+};
+
+template<>
+class TypeUtilityBase<const Int24Signal>
+{
+public:
+    typedef const Int24Signal        TypeName;
+    typedef Int24Signal              OriginalType;
+    typedef Int24Signal const&       PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24Signal; }
+};
+
+template<>
+class TypeUtilityBase<LongSignal>
+{
+public:
+    typedef LongSignal               TypeName;
+    typedef LongSignal               OriginalType;
+    typedef LongSignal const&        PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongSignal; }
+};
+
+template<>
+class TypeUtilityBase<const LongSignal>
+{
+public:
+    typedef const LongSignal         TypeName;
+    typedef LongSignal               OriginalType;
+    typedef LongSignal const&        PassType;
+    typedef float                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongSignal; }
+};
+
 
 //------------------------------------------------------------------------------
 
@@ -1922,6 +2059,7 @@ public:
     static inline bool isUnits() throw()             { return TypeCode::isUnits (TypeUtility<Type>::getTypeCode()); }
     static inline bool isBusses() throw()            { return TypeCode::isBusses (TypeUtility<Type>::getTypeCode()); }
     static inline bool isWavetable() throw()         { return TypeCode::isWavetable (TypeUtility<Type>::getTypeCode()); }
+    static inline bool isSignal() throw()            { return TypeCode::isSignal (TypeUtility<Type>::getTypeCode()); }
     
     static inline bool isFloatType() throw()         { return TypeCode::isFloatType (TypeUtility<Type>::getTypeCode()); }
     static inline bool isDoubleType() throw()        { return TypeCode::isDoubleType (TypeUtility<Type>::getTypeCode()); }

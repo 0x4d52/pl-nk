@@ -136,6 +136,7 @@
 
 #include "../graph/generators/plonk_Saw.h"
 #include "../graph/generators/plonk_Table.h"
+#include "../graph/generators/plonk_SignalPlay.h"
 
 #include "../graph/filters/plonk_FilterForwardDeclarations.h"
 #include "../graph/filters/plonk_FilterTypes.h"

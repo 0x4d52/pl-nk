@@ -236,10 +236,6 @@ template<>
 class SawChannelInternal<float> :   public ChannelInternal<float, SawProcessStateF>
 {
 public:
-    /*
-     for full templating we'd need to add specialisation for frequency unit type too
-     */
-
     typedef SawProcessStateF                Data;
     typedef InputDictionary                 Inputs;
     typedef ChannelBase<float>              ChannelType;
