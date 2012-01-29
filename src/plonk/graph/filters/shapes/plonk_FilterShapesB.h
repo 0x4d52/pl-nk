@@ -126,8 +126,8 @@ public:
         return keys;
     }
     
-    static inline CalcTypes calculate (const CalcType frequency, 
-                                       const double sampleRate = SampleRate::getDefault()) throw()
+    static CalcTypes calculate (const CalcType frequency, 
+                                const double sampleRate = SampleRate::getDefault()) throw()
     {
         Data data;
         data.params[Frequency] = frequency;

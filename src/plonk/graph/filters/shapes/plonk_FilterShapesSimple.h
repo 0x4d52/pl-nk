@@ -69,8 +69,8 @@ public:
         return keys;
     }
         
-    static inline CalcTypes calculate (const CalcType frequency, 
-                                       const double sampleRate = SampleRate::getDefault()) throw()
+    static CalcTypes calculate (const CalcType frequency, 
+                                const double sampleRate = SampleRate::getDefault()) throw()
     {
         Data data;
         data.params[Frequency] = frequency;
@@ -117,8 +117,8 @@ public:
         return keys;
     }
     
-    static inline CalcTypes calculate (const CalcType duration, 
-                                       const double sampleRate = SampleRate::getDefault()) throw()
+    static CalcTypes calculate (const CalcType duration, 
+                                const double sampleRate = SampleRate::getDefault()) throw()
     {
         Data data;
         data.params[Duration] = duration;
@@ -168,8 +168,8 @@ public:
         return keys;
     }
     
-    static inline CalcTypes calculate (const CalcType frequency, 
-                                       const double sampleRate = SampleRate::getDefault()) throw()
+    static CalcTypes calculate (const CalcType frequency, 
+                                const double sampleRate = SampleRate::getDefault()) throw()
     {
         Data data;
         data.params[Frequency] = frequency;
@@ -223,8 +223,8 @@ public:
         return keys;
     }
     
-    static inline CalcTypes calculate (const CalcType duration, 
-                                       const double sampleRate = SampleRate::getDefault()) throw()
+    static CalcTypes calculate (const CalcType duration, 
+                                const double sampleRate = SampleRate::getDefault()) throw()
     {
         Data data;
         data.params[Duration] = duration;
