@@ -63,7 +63,25 @@ public:
     void resetFramePosition() throw();
     
     template<class SampleType>
-    void readFrames (NumericalArray<SampleType>& data, const bool applyScaling) throw();
+    void readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave) throw();
+    
+    template<class SampleType>
+    inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) throw()
+    {
+        const int numChannels = getNumChannels();
+        const int length = (numFrames > 0) ? numFrames * numChannels : getNumFrames() * numChannels;
+        NumericalArray<SampleType> buffer = NumericalArray<SampleType>::withSize (length);
+        signal = SignalBase<SampleType> (buffer, getSampleRate(), numChannels);
+    }
+    
+    template<class SampleType>
+    inline void readSignal (SignalBase<SampleType>& signal, const bool applyScaling) throw()
+    {
+        // would need to decide in here to deinterleave..
+        
+        signal.getSampleRate().setValue (getSampleRate());
+        readFrames (signal.getBuffers().first, applyScaling);
+    }
     
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
@@ -87,7 +105,9 @@ private:
 };
 
 template<class SampleType>
-void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, const bool applyScaling) throw()
+void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, 
+                                          const bool applyScaling, 
+                                          const bool deinterleave) throw()
 {
     // this needs to do many more checks...
     
@@ -134,23 +154,27 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, cons
                 Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 3)
             {
                 Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 4)
             {
                 Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 1)
             {
                 Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                // could deinterleve here using the temp readBufferArray 
             }
             else
             {
@@ -164,12 +188,14 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, cons
                 Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 8)
             {
                 Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                // could deinterleve here using the temp readBufferArray 
             }
             else
             {
@@ -288,15 +314,34 @@ public:
     template<class SampleType>
     inline void readFrames (NumericalArray<SampleType>& data) throw()
     {
-        getInternal()->readFrames (data, true);
+        getInternal()->readFrames (data, true, false);
     }
     
     template<class SampleType>
     inline void readFramesDirect (NumericalArray<SampleType>& data) throw()
     {
-        getInternal()->readFrames (data, false);
+        getInternal()->readFrames (data, false, false);
     }
-
+    
+    template<class SampleType>
+    void initSignal (SignalBase<SampleType>& signal, const int numFrames = 0) throw()
+    {
+        getInternal()->initSignal (signal, numFrames);
+    }
+    
+    template<class SampleType>
+    inline void readSignal (SignalBase<SampleType>& signal) throw()
+    {
+        plonk_assert (signal.isInterleaved());
+        getInternal()->readSignal (signal, true);
+    }
+    
+    template<class SampleType>
+    inline void readSignalDirect (SignalBase<SampleType>& signal) throw()
+    {
+        plonk_assert (signal.isInterleaved());
+        getInternal()->readSignal (signal, false);
+    }
     
     template<class SampleType>
     inline NumericalArray<SampleType> readAllFrames (const bool applyScaling) throw()
@@ -304,7 +349,7 @@ public:
         typedef NumericalArray<SampleType> SampleArray;
         SampleArray data = SampleArray::withSize (getNumFrames() * getNumChannels());
         resetFramePosition();
-        getInternal()->readFrames (data, applyScaling);
+        getInternal()->readFrames (data, applyScaling, false);
         return data;
     }
 
@@ -320,7 +365,12 @@ public:
         NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
         return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
     }
-
+    
+    SignalBase<PLONK_TYPE_DEFAULT> getSignal() throw()
+    {
+        NumericalArray<PLONK_TYPE_DEFAULT> data = readAllFrames<PLONK_TYPE_DEFAULT> (true);
+        return SignalBase<PLONK_TYPE_DEFAULT> (data, getSampleRate(), getNumChannels());
+    }
 };
 
 

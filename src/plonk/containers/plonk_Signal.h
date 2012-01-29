@@ -102,14 +102,19 @@ public:
         }
     }
     
+    inline bool isInterleaved() const throw()
+    {
+        return (numInterleavedChannels > 1) || (buffers.numRows() == 1);
+    }
+    
     inline Buffer getInterleaved() const throw()
     {
-        return (numInterleavedChannels > 1) ? buffers.first() : buffers.interleave();
+        return (isInterleaved()) ? buffers.first() : buffers.interleave();
     }
     
     inline Buffers getDeinterleaved() const throw()
     {        
-        if (numInterleavedChannels > 1) 
+        if (isInterleaved()) 
             return buffers.first().deinterleave (numInterleavedChannels);
         else
             return buffers;
@@ -203,15 +208,15 @@ public:
         return this->getInternal()->buffers;
     }
     
-    inline const SampleRate& getSampleRate() const throw()
+    inline SampleRate& getSampleRate() throw()
     {
         return this->getInternal()->sampleRate;
     }
     
-    inline void setSampleRate (SampleRate const& sampleRate) throw()
-    {
-        this->getInternal()->sampleRate = sampleRate;
-    }
+//    inline void setSampleRate (SampleRate const& sampleRate) throw()
+//    {
+//        this->getInternal()->sampleRate = sampleRate;
+//    }
 
     inline int getNumFrames() const throw()
     {
@@ -225,7 +230,7 @@ public:
     
     inline bool isInterleaved() const throw()
     {
-        return this->getInternal()->numInterleavedChannels > 1;
+        return this->getInternal()->isInterleaved();
     }
 
     inline Buffer getInterleaved() const throw()
