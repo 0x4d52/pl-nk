@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: plank_AudioFileCommon.h Source File</title>
+<title>pl-nk: plank_AudioFileCommon.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -125,30 +125,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00052"></a><a class="code" href="plank___audio_file_common_8h.html#ac9a05bded7511255121affa7ab3b58dd">00052</a> <span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_INVALID              -1</span>
 <a name="l00053"></a><a class="code" href="plank___audio_file_common_8h.html#a6f83532c2a3313333d8b3f2422185dc8">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_UNKNOWN               0</span>
 <a name="l00054"></a><a class="code" href="plank___audio_file_common_8h.html#a4c82abc421a83cb564c234da6ea9722b">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_UNUSED1               1</span>
-<a name="l00055"></a><a class="code" href="plank___audio_file_common_8h.html#af3b7696a27cf91a5505d230bed0d469b">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN      2</span>
-<a name="l00056"></a><a class="code" href="plank___audio_file_common_8h.html#ad1b0504cb2c86fe0e68bf0b5d8f31bde">00056</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN         3</span>
-<a name="l00057"></a><a class="code" href="plank___audio_file_common_8h.html#a95b7215ea8d99f6250c5eeace31b3869">00057</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN    4</span>
-<a name="l00058"></a><a class="code" href="plank___audio_file_common_8h.html#a5ac3f08265ca5cc7afb8a92e123c021d">00058</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN       5</span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span>
-<a name="l00060"></a><a class="code" href="plank___audio_file_common_8h.html#a81d4284d4138e0f7723f04bda41f55b4">00060</a> <span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_PCM          0x0001</span>
-<a name="l00061"></a><a class="code" href="plank___audio_file_common_8h.html#a0146400db5c3099e76f3ae99c8ac837b">00061</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT        0x0003</span>
-<a name="l00062"></a><a class="code" href="plank___audio_file_common_8h.html#afa0fa8bdeadd026f9085c7e6aa3144dc">00062</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE   0xFFFE</span>
+<a name="l00055"></a>00055 <span class="preprocessor"></span>
+<a name="l00056"></a><a class="code" href="plank___audio_file_common_8h.html#af3b7696a27cf91a5505d230bed0d469b">00056</a> <span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN      2</span>
+<a name="l00057"></a><a class="code" href="plank___audio_file_common_8h.html#ad1b0504cb2c86fe0e68bf0b5d8f31bde">00057</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN         3</span>
+<a name="l00058"></a><a class="code" href="plank___audio_file_common_8h.html#a95b7215ea8d99f6250c5eeace31b3869">00058</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN    4</span>
+<a name="l00059"></a><a class="code" href="plank___audio_file_common_8h.html#a5ac3f08265ca5cc7afb8a92e123c021d">00059</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN       5</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span>
+<a name="l00061"></a><a class="code" href="plank___audio_file_common_8h.html#aa1e2775d5778a2cc3b4833f0e75ee953">00061</a> <span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_MIN                   PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN</span>
+<a name="l00062"></a><a class="code" href="plank___audio_file_common_8h.html#acac6d9a676516aa7b2c2fd7c79baca1e">00062</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_MAX                   PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN</span>
 <a name="l00063"></a>00063 <span class="preprocessor"></span>
-<a name="l00064"></a><a class="code" href="plank___audio_file_common_8h.html#aac98b9da5e0dd8569027bf9b71c663d8">00064</a> <span class="preprocessor">#define PLANKAUDIOFILE_AIFC_VERSION 0xA2805140</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span>
-<a name="l00066"></a><a class="code" href="struct_plank_audio_file_format_info.html">00066</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a>
-<a name="l00067"></a>00067 {
-<a name="l00068"></a><a class="code" href="struct_plank_audio_file_format_info.html#aa49ff2aaf407ef99032494ee1f7284ed">00068</a>     <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a> <a class="code" href="struct_plank_audio_file_format_info.html#aa49ff2aaf407ef99032494ee1f7284ed">format</a>;
-<a name="l00069"></a><a class="code" href="struct_plank_audio_file_format_info.html#ae542df68b0ef47aa5c3121be2cc88114">00069</a>     <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a> <a class="code" href="struct_plank_audio_file_format_info.html#ae542df68b0ef47aa5c3121be2cc88114">encoding</a>;
-<a name="l00070"></a>00070     
-<a name="l00071"></a><a class="code" href="struct_plank_audio_file_format_info.html#a7888181eeab54dd4f167687af1c82730">00071</a>     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="struct_plank_audio_file_format_info.html#a7888181eeab54dd4f167687af1c82730">bitsPerSample</a>;
-<a name="l00072"></a><a class="code" href="struct_plank_audio_file_format_info.html#af6050d9619e3d69e5fb641cca6d9f817">00072</a>     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="struct_plank_audio_file_format_info.html#af6050d9619e3d69e5fb641cca6d9f817">bytesPerFrame</a>;
-<a name="l00073"></a><a class="code" href="struct_plank_audio_file_format_info.html#ae2fc442f2b2984091e647f70f22a68cd">00073</a>     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="struct_plank_audio_file_format_info.html#ae2fc442f2b2984091e647f70f22a68cd">numChannels</a>;
-<a name="l00074"></a><a class="code" href="struct_plank_audio_file_format_info.html#ad4847975186654c214731cd1d2425e3b">00074</a>     <a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a> <a class="code" href="struct_plank_audio_file_format_info.html#ad4847975186654c214731cd1d2425e3b">sampleRate</a>;
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076 } <a class="code" href="plank___audio_file_common_8h.html#ac08772a98078994d4f7f02041b993ae8">PlankAudioFileFormatInfo</a>;
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078 <span class="preprocessor">#endif // PLANK_AUDIOFILECOMMON_H</span>
+<a name="l00064"></a>00064 
+<a name="l00065"></a><a class="code" href="plank___audio_file_common_8h.html#a81d4284d4138e0f7723f04bda41f55b4">00065</a> <span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_PCM          0x0001</span>
+<a name="l00066"></a><a class="code" href="plank___audio_file_common_8h.html#a0146400db5c3099e76f3ae99c8ac837b">00066</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT        0x0003</span>
+<a name="l00067"></a><a class="code" href="plank___audio_file_common_8h.html#afa0fa8bdeadd026f9085c7e6aa3144dc">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE   0xFFFE</span>
+<a name="l00068"></a>00068 <span class="preprocessor"></span>
+<a name="l00069"></a><a class="code" href="plank___audio_file_common_8h.html#aac98b9da5e0dd8569027bf9b71c663d8">00069</a> <span class="preprocessor">#define PLANKAUDIOFILE_AIFC_VERSION 0xA2805140</span>
+<a name="l00070"></a>00070 <span class="preprocessor"></span>
+<a name="l00071"></a><a class="code" href="struct_plank_audio_file_format_info.html">00071</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a>
+<a name="l00072"></a>00072 {
+<a name="l00073"></a><a class="code" href="struct_plank_audio_file_format_info.html#aa49ff2aaf407ef99032494ee1f7284ed">00073</a>     <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a> <a class="code" href="struct_plank_audio_file_format_info.html#aa49ff2aaf407ef99032494ee1f7284ed">format</a>;
+<a name="l00074"></a><a class="code" href="struct_plank_audio_file_format_info.html#ae542df68b0ef47aa5c3121be2cc88114">00074</a>     <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a> <a class="code" href="struct_plank_audio_file_format_info.html#ae542df68b0ef47aa5c3121be2cc88114">encoding</a>;
+<a name="l00075"></a>00075     
+<a name="l00076"></a><a class="code" href="struct_plank_audio_file_format_info.html#a7888181eeab54dd4f167687af1c82730">00076</a>     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="struct_plank_audio_file_format_info.html#a7888181eeab54dd4f167687af1c82730">bitsPerSample</a>;
+<a name="l00077"></a><a class="code" href="struct_plank_audio_file_format_info.html#af6050d9619e3d69e5fb641cca6d9f817">00077</a>     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="struct_plank_audio_file_format_info.html#af6050d9619e3d69e5fb641cca6d9f817">bytesPerFrame</a>;
+<a name="l00078"></a><a class="code" href="struct_plank_audio_file_format_info.html#ae2fc442f2b2984091e647f70f22a68cd">00078</a>     <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="struct_plank_audio_file_format_info.html#ae2fc442f2b2984091e647f70f22a68cd">numChannels</a>;
+<a name="l00079"></a><a class="code" href="struct_plank_audio_file_format_info.html#ad4847975186654c214731cd1d2425e3b">00079</a>     <a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a> <a class="code" href="struct_plank_audio_file_format_info.html#ad4847975186654c214731cd1d2425e3b">sampleRate</a>;
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 } <a class="code" href="plank___audio_file_common_8h.html#ac08772a98078994d4f7f02041b993ae8">PlankAudioFileFormatInfo</a>;
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="preprocessor">#endif // PLANK_AUDIOFILECOMMON_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -165,7 +170,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:12 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:58 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

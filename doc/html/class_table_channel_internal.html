@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: TableChannelInternal&lt; SampleType &gt; Class Template Reference</title>
+<title>pl-nk: TableChannelInternal&lt; SampleType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -110,7 +110,10 @@ Public Types</h2></td></tr>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#a961757d09df6cdbe120620fbff8f5928">Buffer</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#a30ecd0128d67e1b5bc55ca275e361cac">WavetableType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_type_utility.html">TypeUtility</a><br class="typebreak"/>
-&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a></td></tr>
+&lt; SampleType &gt;::IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">FrequencyType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; <a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">FrequencyType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#adaba1de829448dc195db59d8e94bc290">FrequencyUnitType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
+&lt; <a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">FrequencyType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#a9fc17ca181efa4dd4081e28a4572069a">FrequencyBufferType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_table_channel_internal.html#acb6b43eef4bc54983c09b8f4c19ebdac">TableChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
@@ -182,14 +185,44 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab06b51653c5bb6fa39554f8be22b5dfb"></a><!-- doxytag: member="TableChannelInternal::IndexType" ref="ab06b51653c5bb6fa39554f8be22b5dfb" args="" -->
+<a class="anchor" id="a9fc17ca181efa4dd4081e28a4572069a"></a><!-- doxytag: member="TableChannelInternal::FrequencyBufferType" ref="a9fc17ca181efa4dd4081e28a4572069a" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt;::<a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a> <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html#ab06b51653c5bb6fa39554f8be22b5dfb">IndexType</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">FrequencyType</a>&gt; <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7f53c1b05bd5faa13e3de103ffbda551"></a><!-- doxytag: member="TableChannelInternal::FrequencyType" ref="a7f53c1b05bd5faa13e3de103ffbda551" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt;::IndexType <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">FrequencyType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adaba1de829448dc195db59d8e94bc290"></a><!-- doxytag: member="TableChannelInternal::FrequencyUnitType" ref="adaba1de829448dc195db59d8e94bc290" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">FrequencyType</a>&gt; <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">FrequencyUnitType</a></td>
         </tr>
       </table>
 </div>
@@ -475,7 +508,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:26 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:13 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

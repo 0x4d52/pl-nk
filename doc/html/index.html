@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: Plink/Plonk/Plank Documentation</title>
+<title>pl-nk: Plonk|Plink|Plank Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -54,18 +54,78 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Plink/Plonk/Plank Documentation </div>  </div>
+<div class="title">Plonk|Plink|Plank Documentation </div>  </div>
 </div>
 <div class="contents">
 <div class="textblock"><h2><a class="anchor" id="Introduction"></a>
 Introduction</h2>
-<p>Plink/Plonk/Plank implements a set of resuable functions and DSP for audio application development.</p>
+<p>Plonk|Plink|Plank implements a set of resuable functions and DSP for audio software development.</p>
 <h2><a class="anchor" id="Installation"></a>
 Installation</h2>
-<p>tba...</p>
+<p>Currently there are no example projects, these are comming soon.</p>
+<p>In the meantime <em>Plonk|Plink|Plank</em> are easy to include in a project. Just add all the files in the <code>/src</code> directory (recursively) to a project. To use Plonk just include <code><a class="el" href="plonk_8h.html">plonk/plonk.h</a></code> (this automatically includes <code><a class="el" href="plank_8h.html">plank/plank.h</a></code> as Plonk is dependent on Plank).</p>
 <h2><a class="anchor" id="GettingStarted"></a>
 Getting started</h2>
-<p>tba... </p>
+<p><em>Plonk|Plink|Plank</em> are designed to be used with a wide range of audio I/O systems. It has been tested primarily with 32-bit floating point audio I/O although should work at double precision and even integer-based formats too. The following assume the use of standard 32-bit floating point processing.</p>
+<p>The following class should act as pseudocode for the required operations need to get basic synthesis working.</p>
+<div class="fragment"><pre class="fragment"> <span class="keyword">class </span>TestPlonk
+ {
+ <span class="keyword">public</span>:
+    TestPlonk()
+    {
+    }
+ 
+    <span class="comment">// set up sample rate and block size and construct process graph</span>
+    <span class="keywordtype">void</span> init (<span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate, <span class="keyword">const</span> <span class="keywordtype">int</span> blockSize)
+    {
+        <a class="code" href="class_sample_rate.html#ab8f9226a01308b2e18951c2b83faccec">SampleRate::getDefault</a>().<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a> (sampleRate);
+        <a class="code" href="class_block_size.html#afd3ecabf268e1394d82b690551c949ea" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a> (blockSize);
+ 
+        graph = constructGraph();
+    }
+ 
+    <span class="comment">// construct the graph of processing objects</span>
+    <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> constructGraph()
+    {
+        <span class="comment">// just a 1kHz test tone at amplitude 0.25 (-12dB)</span>
+        <span class="keywordflow">return</span> <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sawtooth oscillator.">Sine::ar</a> (1000, 0.25);
+    }
+ 
+    <span class="comment">// assumes outputs is an array of pointers to output channel buffers</span>
+    <span class="keywordtype">void</span> render (<span class="keywordtype">float</span>** outputs, <span class="keywordtype">int</span> numOutputs, <span class="keywordtype">int</span> blockSize)
+    {
+        <span class="comment">// update block size just in case it changed</span>
+        <a class="code" href="class_block_size.html#afd3ecabf268e1394d82b690551c949ea" title="Gets the default block size.">BlockSize::getDefault</a>().<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a> (blockSize);
+ 
+        <span class="comment">// process the graph </span>
+        graph.process (info);
+        
+        <span class="comment">// pull the data out of the root of the graph </span>
+        <span class="keywordflow">for</span> (i = 0; i &lt; numOutputs; ++i)
+        {
+            <span class="keywordtype">float</span>* <span class="keyword">const</span> output = outputs[i];
+            <span class="keyword">const</span> <span class="keywordtype">float</span>* <span class="keyword">const</span> graphOutput = graph.getOutputSamples (i);
+            <a class="code" href="class_numerical_array.html#a151d9b282cb98c7041002a612235cb4c">Float1D::copyData</a> (output, graphOutput, blockSize);            
+        }
+    }
+ 
+ <span class="keyword">private</span>:
+    <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> graph;
+    <a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a> info;
+ };
+</pre></div><p>The following assumes you then have an instance of this <code>TestPlonk</code> class accessible to your code i.e.,</p>
+<div class="fragment"><pre class="fragment"> ...
+ TestPlonk testPlonk;
+ ...
+</pre></div><p>Once you know the sample rate and processing block size for the system you're using you need to set these as the defaults in Plonk. E.g., if the sample rate is 44.1kHz using a block size of 512 samples you would need to use something like the following code before audio rendering starts (this is commonly available before starting an audio device driver running).</p>
+<div class="fragment"><pre class="fragment"> ...
+ testPlonk.init (44100.0, 512);
+ ...
+</pre></div><p>Then you'd need to call the <code>render()</code> function for each block of audio requested by the audio device.</p>
+<div class="fragment"><pre class="fragment"> ...
+ testPlonk.render (outputs, numOutputs, blockSize);
+ ...
+</pre></div><p>This assumes <code>outputs</code> is an array of pointers to floating point arrays of samples that are all <code>blockSize</code> in length. There should be <code>numOutputs</code> pointers in the <code>outputs</code> array. </p>
 </div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -81,7 +141,7 @@ Getting started</h2>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:12 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:58 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: AudioFileReader Class Reference</title>
+<title>pl-nk: AudioFileReader Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -116,7 +116,20 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a612ed7973ca7e40e5d2a80631e5b9c04">readFrames</a> (<a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;data)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a0213762859ad2eb3d3eac4ab0a081c4d">readFrames</a> ()  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a857c568a30c1841efa31b28c553399e4">readFramesDirect</a> (<a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;data)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#ab1b88bf2945f90f8a6447a60e33136bb">initSignal</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal, const int numFrames=0)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a6e1323184695ecfb5037095e2bcd9df7">readSignal</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a7ca098839bbf0e3faeaa99a923d6c69c">readSignalDirect</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a637f0571dad789053ce27c34f15b560f">readAllFrames</a> (const bool applyScaling)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#abf56fb8289381f145c25416f8bcc7668">operator NumericalArray&lt; SampleType &gt;</a> ()  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#ab1a712b784b24e83fd5630ce16e3437e">operator SignalBase&lt; SampleType &gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a3c7594f805fe65648eb79dfb73aa59c2">getSignal</a> ()  throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_audio_file_reader.html">AudioFileReader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -366,6 +379,87 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a3c7594f805fe65648eb79dfb73aa59c2"></a><!-- doxytag: member="AudioFileReader::getSignal" ref="a3c7594f805fe65648eb79dfb73aa59c2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_signal_base.html">SignalBase</a>&lt;PLONK_TYPE_DEFAULT&gt; AudioFileReader::getSignal </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab1b88bf2945f90f8a6447a60e33136bb"></a><!-- doxytag: member="AudioFileReader::initSignal" ref="ab1b88bf2945f90f8a6447a60e33136bb" args="(SignalBase&lt; SampleType &gt; &amp;signal, const int numFrames=0)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioFileReader::initSignal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>signal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>numFrames</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abf56fb8289381f145c25416f8bcc7668"></a><!-- doxytag: member="AudioFileReader::operator NumericalArray&lt; SampleType &gt;" ref="abf56fb8289381f145c25416f8bcc7668" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioFileReader::operator <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab1a712b784b24e83fd5630ce16e3437e"></a><!-- doxytag: member="AudioFileReader::operator SignalBase&lt; SampleType &gt;" ref="ab1a712b784b24e83fd5630ce16e3437e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioFileReader::operator <a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a7afa4ad6506034a5a46fa4b56f82dcfa"></a><!-- doxytag: member="AudioFileReader::operator=" ref="a7afa4ad6506034a5a46fa4b56f82dcfa" args="(AudioFileReader const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
@@ -382,6 +476,25 @@ Static Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Assignment operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a637f0571dad789053ce27c34f15b560f"></a><!-- doxytag: member="AudioFileReader::readAllFrames" ref="a637f0571dad789053ce27c34f15b560f" args="(const bool applyScaling)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; AudioFileReader::readAllFrames </td>
+          <td>(</td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>applyScaling</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -404,16 +517,55 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0213762859ad2eb3d3eac4ab0a081c4d"></a><!-- doxytag: member="AudioFileReader::readFrames" ref="a0213762859ad2eb3d3eac4ab0a081c4d" args="()" -->
+<a class="anchor" id="a857c568a30c1841efa31b28c553399e4"></a><!-- doxytag: member="AudioFileReader::readFramesDirect" ref="a857c568a30c1841efa31b28c553399e4" args="(NumericalArray&lt; SampleType &gt; &amp;data)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; AudioFileReader::readFrames </td>
+          <td class="memname">void AudioFileReader::readFramesDirect </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6e1323184695ecfb5037095e2bcd9df7"></a><!-- doxytag: member="AudioFileReader::readSignal" ref="a6e1323184695ecfb5037095e2bcd9df7" args="(SignalBase&lt; SampleType &gt; &amp;signal)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioFileReader::readSignal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>signal</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7ca098839bbf0e3faeaa99a923d6c69c"></a><!-- doxytag: member="AudioFileReader::readSignalDirect" ref="a7ca098839bbf0e3faeaa99a923d6c69c" args="(SignalBase&lt; SampleType &gt; &amp;signal)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioFileReader::readSignalDirect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>signal</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
@@ -473,7 +625,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:16 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

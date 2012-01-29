@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: plonk_Bus.h Source File</title>
+<title>pl-nk: plonk_Bus.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -189,12 +189,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00116"></a><a class="code" href="class_bus_buffer_internal.html#a5fc988bbbfd7afd7386fd70cdc5c3e1b">00116</a>     <span class="keywordtype">void</span> <a class="code" href="class_bus_buffer_internal.html#a5fc988bbbfd7afd7386fd70cdc5c3e1b">setLabel</a>(<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; newId) <span class="keywordflow">throw</span>()                        { identifier = newId; }
 <a name="l00117"></a>00117 
 <a name="l00118"></a>00118     
-<a name="l00119"></a><a class="code" href="class_bus_buffer_internal.html#a4924453568d5231345f834a52e63c89e">00119</a>     <span class="keywordtype">void</span> <a class="code" href="class_bus_buffer_internal.html#a4924453568d5231345f834a52e63c89e">write</a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> writeStartTime, 
-<a name="l00120"></a>00120                <span class="keyword">const</span> <span class="keywordtype">int</span> numWriteSamples, 
-<a name="l00121"></a>00121                <span class="keyword">const</span> SampleType* sourceData) <span class="keywordflow">throw</span>()
+<a name="l00119"></a><a class="code" href="class_bus_buffer_internal.html#a4924453568d5231345f834a52e63c89e">00119</a>     <span class="keywordtype">void</span> <a class="code" href="class_bus_buffer_internal.html#a4924453568d5231345f834a52e63c89e">write</a> (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> writeStartTime, 
+<a name="l00120"></a>00120                 <span class="keyword">const</span> <span class="keywordtype">int</span> numWriteSamples, 
+<a name="l00121"></a>00121                 <span class="keyword">const</span> SampleType* sourceData) <span class="keywordflow">throw</span>()
 <a name="l00122"></a>00122     {        
 <a name="l00123"></a>00123         <span class="keyword">const</span> <span class="keywordtype">int</span> currentBufferSize = bufferSize.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
-<a name="l00124"></a>00124         <span class="keyword">const</span> <span class="keywordtype">int</span> currentSampleRate = sampleRate.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
+<a name="l00124"></a>00124         <span class="keyword">const</span> <span class="keywordtype">double</span> currentSampleRate = sampleRate.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>(); <span class="comment">// should it be double, was int??</span>
 <a name="l00125"></a>00125                                     
 <a name="l00126"></a>00126         SampleType* <span class="keyword">const</span> bufferSamples = buffer.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
 <a name="l00127"></a>00127         
@@ -231,7 +231,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00158"></a>00158             <span class="keywordflow">else</span>
 <a name="l00159"></a>00159             {
 <a name="l00160"></a>00160                 <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> bufferOffsetTime = writeStartTime - bufferStartTime;
-<a name="l00161"></a>00161                 bufferOffsetSamples = int (bufferOffsetTime.<a class="code" href="class_time_stamp.html#a87d1c72796a49c111ce0e7107f980c66">toSamples</a> (sampleRate) + 0.5);
+<a name="l00161"></a>00161                 bufferOffsetSamples = int (bufferOffsetTime.<a class="code" href="class_time_stamp.html#a87d1c72796a49c111ce0e7107f980c66">toSamples</a> (currentSampleRate) + 0.5);
 <a name="l00162"></a>00162                 
 <a name="l00163"></a>00163                 <span class="keywordflow">if</span> (bufferOffsetSamples &gt;= currentBufferSize)
 <a name="l00164"></a>00164                     bufferOffsetSamples -= currentBufferSize;
@@ -276,7 +276,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00203"></a>00203             (readStartTime &lt; latestValidTime) &amp;&amp; 
 <a name="l00204"></a>00204             (readEndTime &lt;= latestValidTime))
 <a name="l00205"></a>00205         {
-<a name="l00206"></a>00206             <span class="keywordtype">int</span> bufferOffsetSamples = int ((readStartTime - bufferStartTime).toSamples (sampleRate) + 0.5);
+<a name="l00206"></a>00206             <span class="keywordtype">int</span> bufferOffsetSamples = int ((readStartTime - bufferStartTime).toSamples (currentSampleRate) + 0.5);
 <a name="l00207"></a>00207             
 <a name="l00208"></a>00208             <span class="keywordflow">if</span> (bufferOffsetSamples &lt; 0)
 <a name="l00209"></a>00209                 bufferOffsetSamples += currentBufferSize - 1; <span class="comment">// -1 due to being rounded in the wrong direction above when negative</span>
@@ -427,7 +427,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00362"></a>00362         <span class="keywordflow">return</span> getBusDictionary().<a class="code" href="class_dictionary.html#ac15f5b7945d4fc918e098015f11c0136" title="Return the key for a particular value.">keyForValue</a> (*<span class="keyword">this</span>);
 <a name="l00363"></a>00363     }
 <a name="l00364"></a>00364 
-<a name="l00365"></a><a class="code" href="class_bus_buffer.html#a79cd7a86daa1b82ba15cb151bcb9bb2d">00365</a>     <span class="keyword">static</span> <a class="code" href="class_bus_buffer.html" title="Enables the storage of globally accessible buffers to be used as signal busses.">BusBuffer</a> <a class="code" href="class_bus_buffer.html#a79cd7a86daa1b82ba15cb151bcb9bb2d">getBus</a>(<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; name) <span class="keywordflow">throw</span>()
+<a name="l00365"></a><a class="code" href="class_bus_buffer.html#a79cd7a86daa1b82ba15cb151bcb9bb2d">00365</a>     <span class="keyword">static</span> <a class="code" href="class_bus_buffer.html" title="Enables the storage of globally accessible buffers to be used as signal busses.">BusBuffer</a> <a class="code" href="class_bus_buffer.html#a79cd7a86daa1b82ba15cb151bcb9bb2d">getBus</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; name) <span class="keywordflow">throw</span>()
 <a name="l00366"></a>00366     {
 <a name="l00367"></a>00367         <a class="code" href="class_dictionary.html" title="A dictionary class for storing key/value pairs.">BusDictionary</a>&amp; dictionary = getBusDictionary();
 <a name="l00368"></a>00368         
@@ -455,7 +455,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00390"></a>00390         dictionary.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (name, newBusBuffer);
 <a name="l00391"></a>00391     }
 <a name="l00392"></a>00392     
-<a name="l00393"></a><a class="code" href="class_bus_buffer.html#a1464583e6e1d5eb9c1ff3cd7440e9165">00393</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_bus_buffer.html#a1464583e6e1d5eb9c1ff3cd7440e9165">removeBus</a>(<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; name) <span class="keywordflow">throw</span>()
+<a name="l00393"></a><a class="code" href="class_bus_buffer.html#a1464583e6e1d5eb9c1ff3cd7440e9165">00393</a>     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_bus_buffer.html#a1464583e6e1d5eb9c1ff3cd7440e9165">removeBus</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; name) <span class="keywordflow">throw</span>()
 <a name="l00394"></a>00394     {
 <a name="l00395"></a>00395         getBusDictionary().<a class="code" href="class_dictionary.html#aee8b8fb99e32739a8c9f55a81c6ca01b" title="Remove and return an item at the specified key.">remove</a> (name);
 <a name="l00396"></a>00396     }
@@ -509,7 +509,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:13 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: HarmonicSquareUnit&lt; SampleType &gt; Class Template Reference</title>
+<title>pl-nk: HarmonicSquareUnit&lt; SampleType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -90,13 +90,19 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_table_unit.html">TableUnit</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#af7773fad5c7c518a5d5fefc84fe82c18">TableType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#a1158fd380b37a7a32094798a5cceb0a2">WeightsType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
+<a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">TableInternal::FrequencyType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#a48f8e9148ae8c7b4ec5cf78fee88a067">FrequencyType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
+<a class="el" href="class_unit_base.html">TableInternal::FrequencyUnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#a767b9576f0dd8c51e47ee0fcdfeb8067">FrequencyUnitType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
+<a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#a7e7cc09c8bb5b72caf80f46b0b5696ed">FrequencyBufferType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#aed2144451f248e37dcfb997779c22e28">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#ae8bad4a8d9754c2d06df2e8b6a6dbe77">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), const int numHarmonics=21, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate sawtooth oscillator.  <a href="#ae8bad4a8d9754c2d06df2e8b6a6dbe77"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#a5aa4861bab880a17923805a11832aa05">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), const int numHarmonics=21)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate sawtooth oscillator.  <a href="#a5aa4861bab880a17923805a11832aa05"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#abdf9409fa8958b1bed53e08387131a5e">ar</a> (<a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency=<a class="el" href="class_harmonic_square_unit.html#a48f8e9148ae8c7b4ec5cf78fee88a067">FrequencyType</a>(440), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), const int numHarmonics=21, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate sawtooth oscillator.  <a href="#abdf9409fa8958b1bed53e08387131a5e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_harmonic_square_unit.html#a5fe0c0c4671d095c0cac7e273fbf47ec">kr</a> (<a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;frequency, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), const int numHarmonics=21)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate sawtooth oscillator.  <a href="#a5fe0c0c4671d095c0cac7e273fbf47ec"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -128,6 +134,51 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">TableInternal::Data</a> <a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e7cc09c8bb5b72caf80f46b0b5696ed"></a><!-- doxytag: member="HarmonicSquareUnit::FrequencyBufferType" ref="a7e7cc09c8bb5b72caf80f46b0b5696ed" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a> <a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a48f8e9148ae8c7b4ec5cf78fee88a067"></a><!-- doxytag: member="HarmonicSquareUnit::FrequencyType" ref="a48f8e9148ae8c7b4ec5cf78fee88a067" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_table_channel_internal.html#a7f53c1b05bd5faa13e3de103ffbda551">TableInternal::FrequencyType</a> <a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit</a>&lt; SampleType &gt;::<a class="el" href="class_harmonic_square_unit.html#a48f8e9148ae8c7b4ec5cf78fee88a067">FrequencyType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a767b9576f0dd8c51e47ee0fcdfeb8067"></a><!-- doxytag: member="HarmonicSquareUnit::FrequencyUnitType" ref="a767b9576f0dd8c51e47ee0fcdfeb8067" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">TableInternal::FrequencyUnitType</a> <a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">FrequencyUnitType</a></td>
         </tr>
       </table>
 </div>
@@ -241,7 +292,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ae8bad4a8d9754c2d06df2e8b6a6dbe77"></a><!-- doxytag: member="HarmonicSquareUnit::ar" ref="ae8bad4a8d9754c2d06df2e8b6a6dbe77" args="(UnitType const &amp;frequency=SampleType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), const int numHarmonics=21, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
+<a class="anchor" id="abdf9409fa8958b1bed53e08387131a5e"></a><!-- doxytag: member="HarmonicSquareUnit::ar" ref="abdf9409fa8958b1bed53e08387131a5e" args="(FrequencyUnitType const &amp;frequency=FrequencyType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), const int numHarmonics=21, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -250,8 +301,8 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit</a>&lt; SampleType &gt;::ar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>frequency</em> = <code>SampleType&#160;(440)</code>, </td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>frequency</em> = <code><a class="el" href="class_harmonic_square_unit.html#a48f8e9148ae8c7b4ec5cf78fee88a067">FrequencyType</a>&#160;(440)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -314,7 +365,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a5aa4861bab880a17923805a11832aa05"></a><!-- doxytag: member="HarmonicSquareUnit::kr" ref="a5aa4861bab880a17923805a11832aa05" args="(UnitType const &amp;frequency, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), const int numHarmonics=21)" -->
+<a class="anchor" id="a5fe0c0c4671d095c0cac7e273fbf47ec"></a><!-- doxytag: member="HarmonicSquareUnit::kr" ref="a5fe0c0c4671d095c0cac7e273fbf47ec" args="(FrequencyUnitType const &amp;frequency, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), const int numHarmonics=21)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -323,7 +374,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_harmonic_square_unit.html">HarmonicSquareUnit</a>&lt; SampleType &gt;::kr </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">FrequencyUnitType</a> const &amp;&#160;</td>
           <td class="paramname"><em>frequency</em>, </td>
         </tr>
         <tr>
@@ -375,7 +426,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:21 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:08 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

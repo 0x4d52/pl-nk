@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: plonk_AudioFileReader.h Source File</title>
+<title>pl-nk: plonk_AudioFileReader.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -136,240 +136,305 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader_internal.html#af947c7141df270549b7bf585e472ae77">resetFramePosition</a>() <span class="keywordflow">throw</span>();
 <a name="l00064"></a>00064     
 <a name="l00065"></a>00065     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader_internal.html#af0e256f3ebac633df5af908a3c0ef34d">readFrames</a> (<a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>&amp; data) <span class="keywordflow">throw</span>();
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">readFrames</a> (<a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>&amp; data, <span class="keyword">const</span> <span class="keywordtype">bool</span> applyScaling, <span class="keyword">const</span> <span class="keywordtype">bool</span> deinterleave) <span class="keywordflow">throw</span>();
 <a name="l00067"></a>00067     
-<a name="l00068"></a>00068 <span class="keyword">private</span>:
-<a name="l00069"></a>00069     <span class="keyword">inline</span> <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> getPeerRef() { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a><span class="keyword">&gt;</span> (&amp;peer); }
-<a name="l00070"></a>00070     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> getPeerRef()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span><span class="keyword">const </span><a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a><span class="keyword">&gt;</span> (&amp;peer); }
-<a name="l00071"></a>00071     
-<a name="l00072"></a>00072     <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
-<a name="l00073"></a>00073     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> swapEndianIfNotNative (Type* data, <span class="keyword">const</span> <span class="keywordtype">int</span> numItems, <span class="keyword">const</span> <span class="keywordtype">bool</span> dataIsBigEndian) <span class="keywordflow">throw</span>()
-<a name="l00074"></a>00074     {
-<a name="l00075"></a>00075 <span class="preprocessor">#if PLONK_BIGENDIAN</span>
-<a name="l00076"></a>00076 <span class="preprocessor"></span>        <span class="keywordflow">if</span> (! dataIsBigEndian) <a class="code" href="plonk___smart_pointer_container_8h.html#a6b263c7a668e5ae72e56daa0c29bd498">Endian::swap</a> (data, numItems);
-<a name="l00077"></a>00077 <span class="preprocessor">#endif</span>
-<a name="l00078"></a>00078 <span class="preprocessor"></span>        
-<a name="l00079"></a>00079 <span class="preprocessor">#if PLONK_LITTLEENDIAN</span>
-<a name="l00080"></a>00080 <span class="preprocessor"></span>        <span class="keywordflow">if</span> (dataIsBigEndian) <a class="code" href="plonk___smart_pointer_container_8h.html#a6b263c7a668e5ae72e56daa0c29bd498">Endian::swap</a> (data, numItems);
-<a name="l00081"></a>00081 <span class="preprocessor">#endif</span>
-<a name="l00082"></a>00082 <span class="preprocessor"></span>    }
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084     PlankAudioFileReader peer;
-<a name="l00085"></a>00085     <a class="code" href="class_numerical_array.html">Chars</a> readBuffer;
-<a name="l00086"></a>00086     <span class="keywordtype">int</span> numFramesPerBuffer;
-<a name="l00087"></a>00087 };
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00090"></a><a class="code" href="class_audio_file_reader_internal.html#af0e256f3ebac633df5af908a3c0ef34d">00090</a> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader_internal.html#af0e256f3ebac633df5af908a3c0ef34d">AudioFileReaderInternal::readFrames</a> (<a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>&amp; data) <span class="keywordflow">throw</span>()
-<a name="l00091"></a>00091 {
-<a name="l00092"></a>00092     <span class="comment">// this needs to do many more checks...</span>
-<a name="l00093"></a>00093     
-<a name="l00094"></a>00094     <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result;
-<a name="l00095"></a>00095     
-<a name="l00096"></a>00096     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> SampleArray;
-<a name="l00097"></a>00097     
-<a name="l00098"></a>00098     <span class="keyword">const</span> <span class="keywordtype">int</span> dataLength = data.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00099"></a>00099     
-<a name="l00100"></a>00100     SampleType* dataArray = data.getArray();
-<a name="l00101"></a>00101     <span class="keywordtype">void</span>* <span class="keyword">const</span> readBufferArray = readBuffer.getArray();
-<a name="l00102"></a>00102     
-<a name="l00103"></a>00103     <span class="keywordtype">int</span> encoding, bits, channels, bytesPerFrame, bytesPerSample;;
-<a name="l00104"></a>00104     result = <a class="code" href="group___plank_audio_file_reader_class.html#ga6ba1c8ba7650576efcc962f5aadc33df">pl_AudioFileReader_GetEncoding</a> (getPeerRef(), &amp;encoding);
-<a name="l00105"></a>00105     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
-<a name="l00106"></a>00106     
-<a name="l00107"></a>00107     result = <a class="code" href="group___plank_audio_file_reader_class.html#gaf42f83e7a2f5b6c3a561e141335ff24c" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBitsPerSample</a> (getPeerRef(), &amp;bits);
-<a name="l00108"></a>00108     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
-<a name="l00109"></a>00109     
-<a name="l00110"></a>00110     result = <a class="code" href="group___plank_audio_file_reader_class.html#ga0b169539564da5e656f4843bca46d730">pl_AudioFileReader_GetNumChannels</a> (getPeerRef(), &amp;channels);
-<a name="l00111"></a>00111     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113     result = <a class="code" href="group___plank_audio_file_reader_class.html#ga085db5b740e6d508232ee5707fdf3b1e" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBytesPerFrame</a> (getPeerRef(), &amp;bytesPerFrame);
-<a name="l00114"></a>00114     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
+<a name="l00068"></a>00068     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00069"></a><a class="code" href="class_audio_file_reader_internal.html#a7c8e502f67505235eb7db99dc4b90cce">00069</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader_internal.html#a7c8e502f67505235eb7db99dc4b90cce">initSignal</a> (<a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a>&amp; signal, <span class="keyword">const</span> <span class="keywordtype">int</span> numFrames) <span class="keywordflow">throw</span>()
+<a name="l00070"></a>00070     {
+<a name="l00071"></a>00071         <span class="keyword">const</span> <span class="keywordtype">int</span> numChannels = <a class="code" href="class_audio_file_reader_internal.html#aa606f14fd216447b5f79a6d304e575ea">getNumChannels</a>();
+<a name="l00072"></a>00072         <span class="keyword">const</span> <span class="keywordtype">int</span> length = (numFrames &gt; 0) ? numFrames * numChannels : <a class="code" href="class_audio_file_reader_internal.html#a5419dd37a2aa79a27793637e501c13ea">getNumFrames</a>() * numChannels;
+<a name="l00073"></a>00073         <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> buffer = <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;SampleType&gt;::withSize</a> (length);
+<a name="l00074"></a>00074         signal = <a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a> (buffer, <a class="code" href="class_audio_file_reader_internal.html#af9de6ebcf61fdc5648684bbfe596907b">getSampleRate</a>(), numChannels);
+<a name="l00075"></a>00075     }
+<a name="l00076"></a>00076     
+<a name="l00077"></a>00077     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00078"></a><a class="code" href="class_audio_file_reader_internal.html#a1a7f8a74adf25ececf27fa2beccd5a41">00078</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader_internal.html#a1a7f8a74adf25ececf27fa2beccd5a41">readSignal</a> (<a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a>&amp; signal, <span class="keyword">const</span> <span class="keywordtype">bool</span> applyScaling) <span class="keywordflow">throw</span>()
+<a name="l00079"></a>00079     {
+<a name="l00080"></a>00080         <span class="comment">// would need to decide in here to deinterleave..</span>
+<a name="l00081"></a>00081         
+<a name="l00082"></a>00082         signal.getSampleRate().setValue (<a class="code" href="class_audio_file_reader_internal.html#af9de6ebcf61fdc5648684bbfe596907b">getSampleRate</a>());
+<a name="l00083"></a>00083         <a class="code" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">readFrames</a> (signal.getBuffers().first, applyScaling);
+<a name="l00084"></a>00084     }
+<a name="l00085"></a>00085     
+<a name="l00086"></a>00086 <span class="keyword">private</span>:
+<a name="l00087"></a>00087     <span class="keyword">inline</span> <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> getPeerRef() { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a><span class="keyword">&gt;</span> (&amp;peer); }
+<a name="l00088"></a>00088     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a> getPeerRef()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span><span class="keyword">const </span><a class="code" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a" title="An opaque reference to the Plank AudioFileReader object.">PlankAudioFileReaderRef</a><span class="keyword">&gt;</span> (&amp;peer); }
+<a name="l00089"></a>00089     
+<a name="l00090"></a>00090     <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
+<a name="l00091"></a>00091     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> swapEndianIfNotNative (Type* data, <span class="keyword">const</span> <span class="keywordtype">int</span> numItems, <span class="keyword">const</span> <span class="keywordtype">bool</span> dataIsBigEndian) <span class="keywordflow">throw</span>()
+<a name="l00092"></a>00092     {
+<a name="l00093"></a>00093 <span class="preprocessor">#if PLONK_BIGENDIAN</span>
+<a name="l00094"></a>00094 <span class="preprocessor"></span>        <span class="keywordflow">if</span> (! dataIsBigEndian) <a class="code" href="plonk___smart_pointer_container_8h.html#a6b263c7a668e5ae72e56daa0c29bd498">Endian::swap</a> (data, numItems);
+<a name="l00095"></a>00095 <span class="preprocessor">#endif</span>
+<a name="l00096"></a>00096 <span class="preprocessor"></span>        
+<a name="l00097"></a>00097 <span class="preprocessor">#if PLONK_LITTLEENDIAN</span>
+<a name="l00098"></a>00098 <span class="preprocessor"></span>        <span class="keywordflow">if</span> (dataIsBigEndian) <a class="code" href="plonk___smart_pointer_container_8h.html#a6b263c7a668e5ae72e56daa0c29bd498">Endian::swap</a> (data, numItems);
+<a name="l00099"></a>00099 <span class="preprocessor">#endif</span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span>    }
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     PlankAudioFileReader peer;
+<a name="l00103"></a>00103     <a class="code" href="class_numerical_array.html">Chars</a> readBuffer;
+<a name="l00104"></a>00104     <span class="keywordtype">int</span> numFramesPerBuffer;
+<a name="l00105"></a>00105 };
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00108"></a><a class="code" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">00108</a> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">AudioFileReaderInternal::readFrames</a> (<a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>&amp; data, 
+<a name="l00109"></a>00109                                           <span class="keyword">const</span> <span class="keywordtype">bool</span> applyScaling, 
+<a name="l00110"></a>00110                                           <span class="keyword">const</span> <span class="keywordtype">bool</span> deinterleave) <span class="keywordflow">throw</span>()
+<a name="l00111"></a>00111 {
+<a name="l00112"></a>00112     <span class="comment">// this needs to do many more checks...</span>
+<a name="l00113"></a>00113     
+<a name="l00114"></a>00114     <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result;
 <a name="l00115"></a>00115     
-<a name="l00116"></a>00116     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (bits &gt; 0);
-<a name="l00117"></a>00117     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (channels &gt; 0);
-<a name="l00118"></a>00118     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (bytesPerFrame &gt; 0);
+<a name="l00116"></a>00116     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> SampleArray;
+<a name="l00117"></a>00117     
+<a name="l00118"></a>00118     <span class="keyword">const</span> <span class="keywordtype">int</span> dataLength = data.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l00119"></a>00119     
-<a name="l00120"></a>00120     bytesPerSample = bytesPerFrame / channels;
-<a name="l00121"></a>00121     
-<a name="l00122"></a>00122     <span class="keyword">const</span> <span class="keywordtype">bool</span> isPCM = encoding &amp; <a class="code" href="plank___audio_file_common_8h.html#a0ab39aca1a3cdc840b10132b51b6c65a">PLANKAUDIOFILE_ENCODING_PCM_FLAG</a>;
-<a name="l00123"></a>00123     <span class="keyword">const</span> <span class="keywordtype">bool</span> isFloat = encoding &amp; <a class="code" href="plank___audio_file_common_8h.html#abf9d4eee1126e3e03e931744e7fbc7b2">PLANKAUDIOFILE_ENCODING_FLOAT_FLAG</a>;
-<a name="l00124"></a>00124     <span class="keyword">const</span> <span class="keywordtype">bool</span> isBigEndian = encoding &amp; <a class="code" href="plank___audio_file_common_8h.html#a5523d1a743ecf56afd461e3612586a13">PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG</a>;
-<a name="l00125"></a>00125     
-<a name="l00126"></a>00126     <span class="keywordtype">int</span> dataIndex = 0;
-<a name="l00127"></a>00127     
-<a name="l00128"></a>00128     <span class="keywordflow">while</span> (dataIndex &lt; dataLength &amp;&amp; result != <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afe910f4a80bc5604a95905ead7794b2e" title="A file position pointer hit the end of the file.">PlankResult_FileEOF</a>)
-<a name="l00129"></a>00129     {
-<a name="l00130"></a>00130         <span class="keywordtype">int</span> framesRead, samplesRead;
-<a name="l00131"></a>00131         result = <a class="code" href="group___plank_audio_file_reader_class.html#ga11507022a82e7b9ab39e460b399f1139">pl_AudioFileReader_ReadFrames</a> (getPeerRef(), numFramesPerBuffer, readBufferArray, &amp;framesRead);
-<a name="l00132"></a>00132         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a> || result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afe910f4a80bc5604a95905ead7794b2e" title="A file position pointer hit the end of the file.">PlankResult_FileEOF</a>);
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134         samplesRead = framesRead * channels;
-<a name="l00135"></a>00135         
-<a name="l00136"></a>00136         <span class="keywordflow">if</span> (isPCM)
-<a name="l00137"></a>00137         {            
-<a name="l00138"></a>00138             <span class="keywordflow">if</span> (bytesPerSample == 2)
-<a name="l00139"></a>00139             {
-<a name="l00140"></a>00140                 <a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>*<span class="keyword">&gt;</span> (readBufferArray); 
-<a name="l00141"></a>00141                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-<a name="l00142"></a>00142                 SampleArray::convertData (dataArray, convertBuffer, samplesRead);
-<a name="l00143"></a>00143             }
-<a name="l00144"></a>00144             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 3)
-<a name="l00145"></a>00145             {
-<a name="l00146"></a>00146                 <a class="code" href="class_int24.html" title="An emulated 24-bit integer type.">Int24</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="class_int24.html" title="An emulated 24-bit integer type.">Int24</a>*<span class="keyword">&gt;</span> (readBufferArray); 
-<a name="l00147"></a>00147                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-<a name="l00148"></a>00148                 SampleArray::convertData (dataArray, convertBuffer, samplesRead);
-<a name="l00149"></a>00149             }
-<a name="l00150"></a>00150             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 4)
-<a name="l00151"></a>00151             {
-<a name="l00152"></a>00152                 <a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>*<span class="keyword">&gt;</span> (readBufferArray); 
-<a name="l00153"></a>00153                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-<a name="l00154"></a>00154                 SampleArray::convertData (dataArray, convertBuffer, samplesRead);
-<a name="l00155"></a>00155             }
-<a name="l00156"></a>00156             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 1)
-<a name="l00157"></a>00157             {
-<a name="l00158"></a>00158                 <a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>*<span class="keyword">&gt;</span> (readBufferArray); 
-<a name="l00159"></a>00159                 SampleArray::convertData (dataArray, convertBuffer, samplesRead);
-<a name="l00160"></a>00160             }
-<a name="l00161"></a>00161             <span class="keywordflow">else</span>
-<a name="l00162"></a>00162             {
-<a name="l00163"></a>00163                 <a class="code" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">plonk_assertfalse</a>;
-<a name="l00164"></a>00164             }
-<a name="l00165"></a>00165         }
-<a name="l00166"></a>00166         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (isFloat)
-<a name="l00167"></a>00167         {
-<a name="l00168"></a>00168             <span class="keywordflow">if</span> (bytesPerSample == 4)
-<a name="l00169"></a>00169             {
-<a name="l00170"></a>00170                 <a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>*<span class="keyword">&gt;</span> (readBufferArray); 
-<a name="l00171"></a>00171                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-<a name="l00172"></a>00172                 SampleArray::convertData (dataArray, convertBuffer, samplesRead);
-<a name="l00173"></a>00173             }
-<a name="l00174"></a>00174             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 8)
-<a name="l00175"></a>00175             {
-<a name="l00176"></a>00176                 <a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>*<span class="keyword">&gt;</span> (readBufferArray); 
-<a name="l00177"></a>00177                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-<a name="l00178"></a>00178                 SampleArray::convertData (dataArray, convertBuffer, samplesRead);
-<a name="l00179"></a>00179             }
-<a name="l00180"></a>00180             <span class="keywordflow">else</span>
-<a name="l00181"></a>00181             {
-<a name="l00182"></a>00182                 <a class="code" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">plonk_assertfalse</a>;
-<a name="l00183"></a>00183             }
-<a name="l00184"></a>00184         }
-<a name="l00185"></a>00185         
-<a name="l00186"></a>00186         dataArray += samplesRead;
-<a name="l00187"></a>00187         dataIndex += samplesRead;
-<a name="l00188"></a>00188     }
-<a name="l00189"></a>00189     
-<a name="l00190"></a>00190     <span class="keywordflow">if</span> (dataIndex &lt; dataLength)
-<a name="l00191"></a>00191         data.setSize (dataIndex, <span class="keyword">true</span>);
-<a name="l00192"></a>00192    
-<a name="l00193"></a>00193 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
-<a name="l00194"></a>00194 <span class="preprocessor"></span>    (void)result;
-<a name="l00195"></a>00195 <span class="preprocessor">#endif</span>
-<a name="l00196"></a>00196 <span class="preprocessor"></span>}
-<a name="l00197"></a>00197 
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199 
-<a name="l00203"></a><a class="code" href="class_audio_file_reader.html">00203</a> <span class="keyword">class </span><a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;AudioFileReaderInternal&gt;
-<a name="l00204"></a>00204 {
-<a name="l00205"></a>00205 <span class="keyword">public</span>:
-<a name="l00206"></a><a class="code" href="class_audio_file_reader.html#a14beef3798589cddc359d67b6c6a61fa">00206</a>     <span class="keyword">typedef</span> <a class="code" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a>                 <a class="code" href="class_audio_file_reader.html#a14beef3798589cddc359d67b6c6a61fa">Internal</a>;
-<a name="l00207"></a><a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">00207</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;Internal&gt;</a>         <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a>;
-<a name="l00208"></a><a class="code" href="class_audio_file_reader.html#a02d11a20c3ceee3e5fcdd293bccae8bf">00208</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;AudioFileReader&gt;</a>   <a class="code" href="class_audio_file_reader.html#a02d11a20c3ceee3e5fcdd293bccae8bf">Weak</a>;
+<a name="l00120"></a>00120     SampleType* dataArray = data.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l00121"></a>00121     <span class="keywordtype">void</span>* <span class="keyword">const</span> readBufferArray = readBuffer.getArray();
+<a name="l00122"></a>00122     
+<a name="l00123"></a>00123     <span class="keywordtype">int</span> encoding, bits, channels, bytesPerFrame, bytesPerSample;
+<a name="l00124"></a>00124     result = <a class="code" href="group___plank_audio_file_reader_class.html#ga6ba1c8ba7650576efcc962f5aadc33df">pl_AudioFileReader_GetEncoding</a> (getPeerRef(), &amp;encoding);              <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
+<a name="l00125"></a>00125     result = <a class="code" href="group___plank_audio_file_reader_class.html#gaf42f83e7a2f5b6c3a561e141335ff24c" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBitsPerSample</a> (getPeerRef(), &amp;bits);             <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
+<a name="l00126"></a>00126     result = <a class="code" href="group___plank_audio_file_reader_class.html#ga0b169539564da5e656f4843bca46d730">pl_AudioFileReader_GetNumChannels</a> (getPeerRef(), &amp;channels);           <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
+<a name="l00127"></a>00127     result = <a class="code" href="group___plank_audio_file_reader_class.html#ga085db5b740e6d508232ee5707fdf3b1e" title="The result of this will be invalid if the file is a compressed format.">pl_AudioFileReader_GetBytesPerFrame</a> (getPeerRef(), &amp;bytesPerFrame);    <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
+<a name="l00128"></a>00128     
+<a name="l00129"></a>00129     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((encoding &gt;= <a class="code" href="plank___audio_file_common_8h.html#aa1e2775d5778a2cc3b4833f0e75ee953">PLANKAUDIOFILE_ENCODING_MIN</a>) &amp;&amp; (encoding &lt;= <a class="code" href="plank___audio_file_common_8h.html#acac6d9a676516aa7b2c2fd7c79baca1e">PLANKAUDIOFILE_ENCODING_MAX</a>));
+<a name="l00130"></a>00130     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (bits &gt; 0);
+<a name="l00131"></a>00131     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (channels &gt; 0);
+<a name="l00132"></a>00132     <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (bytesPerFrame &gt; 0);
+<a name="l00133"></a>00133     
+<a name="l00134"></a>00134     bytesPerSample = bytesPerFrame / channels;
+<a name="l00135"></a>00135     
+<a name="l00136"></a>00136     <span class="keyword">const</span> <span class="keywordtype">bool</span> isPCM = encoding &amp; <a class="code" href="plank___audio_file_common_8h.html#a0ab39aca1a3cdc840b10132b51b6c65a">PLANKAUDIOFILE_ENCODING_PCM_FLAG</a>;
+<a name="l00137"></a>00137     <span class="keyword">const</span> <span class="keywordtype">bool</span> isFloat = encoding &amp; <a class="code" href="plank___audio_file_common_8h.html#abf9d4eee1126e3e03e931744e7fbc7b2">PLANKAUDIOFILE_ENCODING_FLOAT_FLAG</a>;
+<a name="l00138"></a>00138     <span class="keyword">const</span> <span class="keywordtype">bool</span> isBigEndian = encoding &amp; <a class="code" href="plank___audio_file_common_8h.html#a5523d1a743ecf56afd461e3612586a13">PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG</a>;
+<a name="l00139"></a>00139     
+<a name="l00140"></a>00140     <span class="keywordtype">int</span> dataIndex = 0;
+<a name="l00141"></a>00141     
+<a name="l00142"></a>00142     <span class="keywordflow">while</span> (dataIndex &lt; dataLength &amp;&amp; result != <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afe910f4a80bc5604a95905ead7794b2e" title="A file position pointer hit the end of the file.">PlankResult_FileEOF</a>)
+<a name="l00143"></a>00143     {
+<a name="l00144"></a>00144         <span class="keywordtype">int</span> framesRead, samplesRead;
+<a name="l00145"></a>00145         result = <a class="code" href="group___plank_audio_file_reader_class.html#ga11507022a82e7b9ab39e460b399f1139">pl_AudioFileReader_ReadFrames</a> (getPeerRef(), numFramesPerBuffer, readBufferArray, &amp;framesRead);
+<a name="l00146"></a>00146         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a> || result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50afe910f4a80bc5604a95905ead7794b2e" title="A file position pointer hit the end of the file.">PlankResult_FileEOF</a>);
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148         samplesRead = framesRead * channels;
+<a name="l00149"></a>00149         
+<a name="l00150"></a>00150         <span class="keywordflow">if</span> (isPCM)
+<a name="l00151"></a>00151         {            
+<a name="l00152"></a>00152             <span class="keywordflow">if</span> (bytesPerSample == 2)
+<a name="l00153"></a>00153             {
+<a name="l00154"></a>00154                 <a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00155"></a>00155                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+<a name="l00156"></a>00156                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+<a name="l00157"></a>00157                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
+<a name="l00158"></a>00158             }
+<a name="l00159"></a>00159             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 3)
+<a name="l00160"></a>00160             {
+<a name="l00161"></a>00161                 <a class="code" href="class_int24.html" title="An emulated 24-bit integer type.">Int24</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="class_int24.html" title="An emulated 24-bit integer type.">Int24</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00162"></a>00162                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+<a name="l00163"></a>00163                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+<a name="l00164"></a>00164                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
+<a name="l00165"></a>00165             }
+<a name="l00166"></a>00166             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 4)
+<a name="l00167"></a>00167             {
+<a name="l00168"></a>00168                 <a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00169"></a>00169                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+<a name="l00170"></a>00170                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+<a name="l00171"></a>00171                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
+<a name="l00172"></a>00172             }
+<a name="l00173"></a>00173             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 1)
+<a name="l00174"></a>00174             {
+<a name="l00175"></a>00175                 <a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00176"></a>00176                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+<a name="l00177"></a>00177                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
+<a name="l00178"></a>00178             }
+<a name="l00179"></a>00179             <span class="keywordflow">else</span>
+<a name="l00180"></a>00180             {
+<a name="l00181"></a>00181                 <a class="code" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">plonk_assertfalse</a>;
+<a name="l00182"></a>00182             }
+<a name="l00183"></a>00183         }
+<a name="l00184"></a>00184         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (isFloat)
+<a name="l00185"></a>00185         {
+<a name="l00186"></a>00186             <span class="keywordflow">if</span> (bytesPerSample == 4)
+<a name="l00187"></a>00187             {
+<a name="l00188"></a>00188                 <a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00189"></a>00189                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+<a name="l00190"></a>00190                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+<a name="l00191"></a>00191                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
+<a name="l00192"></a>00192             }
+<a name="l00193"></a>00193             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 8)
+<a name="l00194"></a>00194             {
+<a name="l00195"></a>00195                 <a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00196"></a>00196                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+<a name="l00197"></a>00197                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+<a name="l00198"></a>00198                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
+<a name="l00199"></a>00199             }
+<a name="l00200"></a>00200             <span class="keywordflow">else</span>
+<a name="l00201"></a>00201             {
+<a name="l00202"></a>00202                 <a class="code" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">plonk_assertfalse</a>;
+<a name="l00203"></a>00203             }
+<a name="l00204"></a>00204         }
+<a name="l00205"></a>00205         
+<a name="l00206"></a>00206         dataArray += samplesRead;
+<a name="l00207"></a>00207         dataIndex += samplesRead;
+<a name="l00208"></a>00208     }
 <a name="l00209"></a>00209     
-<a name="l00212"></a><a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4">00212</a>     <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a>() throw()
-<a name="l00213"></a>00213     :   <a class="code" href="class_smart_pointer_container.html">Base</a> (new <a class="code" href="class_audio_file_reader_internal.html">Internal</a>())
-<a name="l00214"></a>00214     {
-<a name="l00215"></a>00215     }
-<a name="l00216"></a>00216     
-<a name="l00219"></a><a class="code" href="class_audio_file_reader.html#acd5197ab6a5633d282b00ee8ca115cce">00219</a>         <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; path) <span class="keywordflow">throw</span>()
-<a name="l00220"></a>00220         :       <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a> (<span class="keyword">new</span> <a class="code" href="class_audio_file_reader_internal.html">Internal</a> (path))
-<a name="l00221"></a>00221         {
-<a name="l00222"></a>00222         }
-<a name="l00223"></a>00223            
-<a name="l00225"></a><a class="code" href="class_audio_file_reader.html#ac03a68a6f1ca8274c77c2ded0511981f">00225</a>     <span class="keyword">explicit</span> <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a> (<a class="code" href="class_audio_file_reader_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
-<a name="l00226"></a>00226         :       <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a> (internalToUse)
-<a name="l00227"></a>00227         {
-<a name="l00228"></a>00228         }    
+<a name="l00210"></a>00210     <span class="keywordflow">if</span> (dataIndex &lt; dataLength)
+<a name="l00211"></a>00211         data.<a class="code" href="class_object_array.html#a33721e5dd4e7ed9374073ca2b8b6f750" title="Sets a new size for the array.">setSize</a> (dataIndex, <span class="keyword">true</span>);
+<a name="l00212"></a>00212    
+<a name="l00213"></a>00213 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
+<a name="l00214"></a>00214 <span class="preprocessor"></span>    (void)result;
+<a name="l00215"></a>00215 <span class="preprocessor">#endif</span>
+<a name="l00216"></a>00216 <span class="preprocessor"></span>}
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219 
+<a name="l00223"></a><a class="code" href="class_audio_file_reader.html">00223</a> <span class="keyword">class </span><a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;AudioFileReaderInternal&gt;
+<a name="l00224"></a>00224 {
+<a name="l00225"></a>00225 <span class="keyword">public</span>:
+<a name="l00226"></a><a class="code" href="class_audio_file_reader.html#a14beef3798589cddc359d67b6c6a61fa">00226</a>     <span class="keyword">typedef</span> <a class="code" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a>                 <a class="code" href="class_audio_file_reader.html#a14beef3798589cddc359d67b6c6a61fa">Internal</a>;
+<a name="l00227"></a><a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">00227</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;Internal&gt;</a>         <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a>;
+<a name="l00228"></a><a class="code" href="class_audio_file_reader.html#a02d11a20c3ceee3e5fcdd293bccae8bf">00228</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;AudioFileReader&gt;</a>   <a class="code" href="class_audio_file_reader.html#a02d11a20c3ceee3e5fcdd293bccae8bf">Weak</a>;
 <a name="l00229"></a>00229     
-<a name="l00232"></a><a class="code" href="class_audio_file_reader.html#a8e00d73442c7b991373949eefe477425">00232</a>     <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a> (<a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
-<a name="l00233"></a>00233     :   <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
+<a name="l00232"></a><a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4">00232</a>     <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a>() throw()
+<a name="l00233"></a>00233     :   <a class="code" href="class_smart_pointer_container.html">Base</a> (new <a class="code" href="class_audio_file_reader_internal.html">Internal</a>())
 <a name="l00234"></a>00234     {
 <a name="l00235"></a>00235     }
 <a name="l00236"></a>00236     
-<a name="l00238"></a><a class="code" href="class_audio_file_reader.html#a7afa4ad6506034a5a46fa4b56f82dcfa">00238</a>     <a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a>&amp; <a class="code" href="class_audio_file_reader.html#a7afa4ad6506034a5a46fa4b56f82dcfa" title="Assignment operator.">operator= </a>(<a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00239"></a>00239         {
-<a name="l00240"></a>00240                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00241"></a>00241             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
-<a name="l00242"></a>00242         
-<a name="l00243"></a>00243         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00244"></a>00244         }
-<a name="l00245"></a>00245         
-<a name="l00249"></a><a class="code" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f">00249</a>     <span class="keyword">static</span> <a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> <a class="code" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
-<a name="l00250"></a>00250     {
-<a name="l00251"></a>00251         <span class="keywordflow">return</span> weak.<a class="code" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f" title="Get a weakly linked copy of this object.">fromWeak</a>();
-<a name="l00252"></a>00252     }    
-<a name="l00253"></a>00253     
-<a name="l00254"></a><a class="code" href="class_audio_file_reader.html#afff578970ab52d7f1c1cdf09bd345ccd">00254</a>     <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#afff578970ab52d7f1c1cdf09bd345ccd">getBitsPerSample</a>() <span class="keyword">const</span> throw()
-<a name="l00255"></a>00255     {
-<a name="l00256"></a>00256         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#acfcf5ce29a7b3e2442ce12e2d1f564c8">getBitsPerSample</a>();
-<a name="l00257"></a>00257     }
-<a name="l00258"></a>00258     
-<a name="l00259"></a><a class="code" href="class_audio_file_reader.html#a68677a87177469263d6b9cd3eb13afd8">00259</a>     <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a68677a87177469263d6b9cd3eb13afd8">getBytesPerFrame</a>() <span class="keyword">const</span> throw()
-<a name="l00260"></a>00260     {
-<a name="l00261"></a>00261         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a1203a7265cd57f7e2c32e8c084a0126d">getBytesPerFrame</a>();
-<a name="l00262"></a>00262     }
-<a name="l00263"></a>00263     
-<a name="l00264"></a><a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">00264</a>     <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">getNumChannels</a>() <span class="keyword">const</span> throw()
-<a name="l00265"></a>00265     {
-<a name="l00266"></a>00266         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#aa606f14fd216447b5f79a6d304e575ea">getNumChannels</a>();
-<a name="l00267"></a>00267     }
-<a name="l00268"></a>00268     
-<a name="l00269"></a><a class="code" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">00269</a>     <span class="keywordtype">double</span> <a class="code" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">getSampleRate</a>() <span class="keyword">const</span> throw()
+<a name="l00239"></a><a class="code" href="class_audio_file_reader.html#acd5197ab6a5633d282b00ee8ca115cce">00239</a>         <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; path) <span class="keywordflow">throw</span>()
+<a name="l00240"></a>00240         :       <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a> (<span class="keyword">new</span> <a class="code" href="class_audio_file_reader_internal.html">Internal</a> (path))
+<a name="l00241"></a>00241         {
+<a name="l00242"></a>00242         }
+<a name="l00243"></a>00243            
+<a name="l00245"></a><a class="code" href="class_audio_file_reader.html#ac03a68a6f1ca8274c77c2ded0511981f">00245</a>     <span class="keyword">explicit</span> <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a> (<a class="code" href="class_audio_file_reader_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
+<a name="l00246"></a>00246         :       <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a> (internalToUse)
+<a name="l00247"></a>00247         {
+<a name="l00248"></a>00248         }    
+<a name="l00249"></a>00249     
+<a name="l00252"></a><a class="code" href="class_audio_file_reader.html#a8e00d73442c7b991373949eefe477425">00252</a>     <a class="code" href="class_audio_file_reader.html#a91c6f09f07144b27a3c471cac221fef4" title="Creates a null object.">AudioFileReader</a> (<a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00253"></a>00253     :   <a class="code" href="class_audio_file_reader.html#aec321289551bf9f7535524939951fa0e">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
+<a name="l00254"></a>00254     {
+<a name="l00255"></a>00255     }
+<a name="l00256"></a>00256     
+<a name="l00258"></a><a class="code" href="class_audio_file_reader.html#a7afa4ad6506034a5a46fa4b56f82dcfa">00258</a>     <a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a>&amp; <a class="code" href="class_audio_file_reader.html#a7afa4ad6506034a5a46fa4b56f82dcfa" title="Assignment operator.">operator= </a>(<a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00259"></a>00259         {
+<a name="l00260"></a>00260                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
+<a name="l00261"></a>00261             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
+<a name="l00262"></a>00262         
+<a name="l00263"></a>00263         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00264"></a>00264         }
+<a name="l00265"></a>00265         
+<a name="l00269"></a><a class="code" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f">00269</a>     <span class="keyword">static</span> <a class="code" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a> <a class="code" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
 <a name="l00270"></a>00270     {
-<a name="l00271"></a>00271         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#af9de6ebcf61fdc5648684bbfe596907b">getSampleRate</a>();
-<a name="l00272"></a>00272     }
+<a name="l00271"></a>00271         <span class="keywordflow">return</span> weak.<a class="code" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f" title="Get a weakly linked copy of this object.">fromWeak</a>();
+<a name="l00272"></a>00272     }    
 <a name="l00273"></a>00273     
-<a name="l00274"></a><a class="code" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">00274</a>     <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">getNumFrames</a>() <span class="keyword">const</span> throw()
+<a name="l00274"></a><a class="code" href="class_audio_file_reader.html#afff578970ab52d7f1c1cdf09bd345ccd">00274</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#afff578970ab52d7f1c1cdf09bd345ccd">getBitsPerSample</a>() <span class="keyword">const</span> throw()
 <a name="l00275"></a>00275     {
-<a name="l00276"></a>00276         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a5419dd37a2aa79a27793637e501c13ea">getNumFrames</a>();
+<a name="l00276"></a>00276         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#acfcf5ce29a7b3e2442ce12e2d1f564c8">getBitsPerSample</a>();
 <a name="l00277"></a>00277     }
 <a name="l00278"></a>00278     
-<a name="l00279"></a><a class="code" href="class_audio_file_reader.html#a8c074dc10caa68d401b4a8449f3cffa9">00279</a>     <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a8c074dc10caa68d401b4a8449f3cffa9">getFramePosition</a>() <span class="keyword">const</span> throw()
+<a name="l00279"></a><a class="code" href="class_audio_file_reader.html#a68677a87177469263d6b9cd3eb13afd8">00279</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a68677a87177469263d6b9cd3eb13afd8">getBytesPerFrame</a>() <span class="keyword">const</span> throw()
 <a name="l00280"></a>00280     {
-<a name="l00281"></a>00281         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#ad7ff4644688cdb32ed6dcde99059a4aa">getFramePosition</a>();
+<a name="l00281"></a>00281         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a1203a7265cd57f7e2c32e8c084a0126d">getBytesPerFrame</a>();
 <a name="l00282"></a>00282     }
 <a name="l00283"></a>00283     
-<a name="l00284"></a><a class="code" href="class_audio_file_reader.html#addc624424d28a63cb9eeade229c0e878">00284</a>     <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#addc624424d28a63cb9eeade229c0e878">setFramePosition</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> position) <span class="keywordflow">throw</span>()
+<a name="l00284"></a><a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">00284</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">getNumChannels</a>() <span class="keyword">const</span> throw()
 <a name="l00285"></a>00285     {
-<a name="l00286"></a>00286         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#acb5ffc05a2bed9d605bbf6f3713dbf19">setFramePosition</a> (position);
+<a name="l00286"></a>00286         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#aa606f14fd216447b5f79a6d304e575ea">getNumChannels</a>();
 <a name="l00287"></a>00287     }
 <a name="l00288"></a>00288     
-<a name="l00289"></a><a class="code" href="class_audio_file_reader.html#af578e0ff6a4847b0b22640ef2ae92890">00289</a>     <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#af578e0ff6a4847b0b22640ef2ae92890">resetFramePosition</a>() throw()
+<a name="l00289"></a><a class="code" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">00289</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">getSampleRate</a>() <span class="keyword">const</span> throw()
 <a name="l00290"></a>00290     {
-<a name="l00291"></a>00291         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#af947c7141df270549b7bf585e472ae77">resetFramePosition</a>();
+<a name="l00291"></a>00291         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#af9de6ebcf61fdc5648684bbfe596907b">getSampleRate</a>();
 <a name="l00292"></a>00292     }
 <a name="l00293"></a>00293     
-<a name="l00294"></a>00294     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00295"></a><a class="code" href="class_audio_file_reader.html#a612ed7973ca7e40e5d2a80631e5b9c04">00295</a>     <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#a0213762859ad2eb3d3eac4ab0a081c4d">readFrames</a> (<a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>&amp; data) <span class="keywordflow">throw</span>()
-<a name="l00296"></a>00296     {
-<a name="l00297"></a>00297         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#af0e256f3ebac633df5af908a3c0ef34d">readFrames</a> (data);
-<a name="l00298"></a>00298     }
-<a name="l00299"></a>00299     
-<a name="l00300"></a>00300     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00301"></a><a class="code" href="class_audio_file_reader.html#a0213762859ad2eb3d3eac4ab0a081c4d">00301</a>     <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> <a class="code" href="class_audio_file_reader.html#a0213762859ad2eb3d3eac4ab0a081c4d">readFrames</a>() throw()
-<a name="l00302"></a>00302     {
-<a name="l00303"></a>00303         <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> SampleArray;
-<a name="l00304"></a>00304         SampleArray data = SampleArray::withSize (<a class="code" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">getNumFrames</a>() * <a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">getNumChannels</a>());
-<a name="l00305"></a>00305         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#af0e256f3ebac633df5af908a3c0ef34d">readFrames</a> (data);
-<a name="l00306"></a>00306         <span class="keywordflow">return</span> data;
+<a name="l00294"></a><a class="code" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">00294</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">getNumFrames</a>() <span class="keyword">const</span> throw()
+<a name="l00295"></a>00295     {
+<a name="l00296"></a>00296         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a5419dd37a2aa79a27793637e501c13ea">getNumFrames</a>();
+<a name="l00297"></a>00297     }
+<a name="l00298"></a>00298     
+<a name="l00299"></a><a class="code" href="class_audio_file_reader.html#a8c074dc10caa68d401b4a8449f3cffa9">00299</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_audio_file_reader.html#a8c074dc10caa68d401b4a8449f3cffa9">getFramePosition</a>() <span class="keyword">const</span> throw()
+<a name="l00300"></a>00300     {
+<a name="l00301"></a>00301         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#ad7ff4644688cdb32ed6dcde99059a4aa">getFramePosition</a>();
+<a name="l00302"></a>00302     }
+<a name="l00303"></a>00303     
+<a name="l00304"></a><a class="code" href="class_audio_file_reader.html#addc624424d28a63cb9eeade229c0e878">00304</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#addc624424d28a63cb9eeade229c0e878">setFramePosition</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> position) <span class="keywordflow">throw</span>()
+<a name="l00305"></a>00305     {
+<a name="l00306"></a>00306         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#acb5ffc05a2bed9d605bbf6f3713dbf19">setFramePosition</a> (position);
 <a name="l00307"></a>00307     }
-<a name="l00308"></a>00308 
-<a name="l00309"></a>00309 };
-<a name="l00310"></a>00310 
-<a name="l00311"></a>00311 
-<a name="l00312"></a>00312 
-<a name="l00313"></a>00313 <span class="preprocessor">#endif // PLONK_AUDIOFILEREADER_H</span>
+<a name="l00308"></a>00308     
+<a name="l00309"></a><a class="code" href="class_audio_file_reader.html#af578e0ff6a4847b0b22640ef2ae92890">00309</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#af578e0ff6a4847b0b22640ef2ae92890">resetFramePosition</a>() throw()
+<a name="l00310"></a>00310     {
+<a name="l00311"></a>00311         <span class="keywordflow">return</span> <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#af947c7141df270549b7bf585e472ae77">resetFramePosition</a>();
+<a name="l00312"></a>00312     }
+<a name="l00313"></a>00313     
+<a name="l00314"></a>00314     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00315"></a><a class="code" href="class_audio_file_reader.html#a612ed7973ca7e40e5d2a80631e5b9c04">00315</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#a612ed7973ca7e40e5d2a80631e5b9c04">readFrames</a> (<a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>&amp; data) <span class="keywordflow">throw</span>()
+<a name="l00316"></a>00316     {
+<a name="l00317"></a>00317         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">readFrames</a> (data, <span class="keyword">true</span>, <span class="keyword">false</span>);
+<a name="l00318"></a>00318     }
+<a name="l00319"></a>00319     
+<a name="l00320"></a>00320     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00321"></a><a class="code" href="class_audio_file_reader.html#a857c568a30c1841efa31b28c553399e4">00321</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#a857c568a30c1841efa31b28c553399e4">readFramesDirect</a> (<a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>&amp; data) <span class="keywordflow">throw</span>()
+<a name="l00322"></a>00322     {
+<a name="l00323"></a>00323         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">readFrames</a> (data, <span class="keyword">false</span>, <span class="keyword">false</span>);
+<a name="l00324"></a>00324     }
+<a name="l00325"></a>00325     
+<a name="l00326"></a>00326     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00327"></a><a class="code" href="class_audio_file_reader.html#ab1b88bf2945f90f8a6447a60e33136bb">00327</a>     <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#ab1b88bf2945f90f8a6447a60e33136bb">initSignal</a> (<a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a>&amp; signal, <span class="keyword">const</span> <span class="keywordtype">int</span> numFrames = 0) throw()
+<a name="l00328"></a>00328     {
+<a name="l00329"></a>00329         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a7c8e502f67505235eb7db99dc4b90cce">initSignal</a> (signal, numFrames);
+<a name="l00330"></a>00330     }
+<a name="l00331"></a>00331     
+<a name="l00332"></a>00332     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00333"></a><a class="code" href="class_audio_file_reader.html#a6e1323184695ecfb5037095e2bcd9df7">00333</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#a6e1323184695ecfb5037095e2bcd9df7">readSignal</a> (<a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a>&amp; signal) <span class="keywordflow">throw</span>()
+<a name="l00334"></a>00334     {
+<a name="l00335"></a>00335         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (signal.isInterleaved());
+<a name="l00336"></a>00336         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a1a7f8a74adf25ececf27fa2beccd5a41">readSignal</a> (signal, <span class="keyword">true</span>);
+<a name="l00337"></a>00337     }
+<a name="l00338"></a>00338     
+<a name="l00339"></a>00339     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00340"></a><a class="code" href="class_audio_file_reader.html#a7ca098839bbf0e3faeaa99a923d6c69c">00340</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_audio_file_reader.html#a7ca098839bbf0e3faeaa99a923d6c69c">readSignalDirect</a> (<a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a>&amp; signal) <span class="keywordflow">throw</span>()
+<a name="l00341"></a>00341     {
+<a name="l00342"></a>00342         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (signal.isInterleaved());
+<a name="l00343"></a>00343         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a1a7f8a74adf25ececf27fa2beccd5a41">readSignal</a> (signal, <span class="keyword">false</span>);
+<a name="l00344"></a>00344     }
+<a name="l00345"></a>00345     
+<a name="l00346"></a>00346     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00347"></a><a class="code" href="class_audio_file_reader.html#a637f0571dad789053ce27c34f15b560f">00347</a>     <span class="keyword">inline</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> <a class="code" href="class_audio_file_reader.html#a637f0571dad789053ce27c34f15b560f">readAllFrames</a> (<span class="keyword">const</span> <span class="keywordtype">bool</span> applyScaling) <span class="keywordflow">throw</span>()
+<a name="l00348"></a>00348     {
+<a name="l00349"></a>00349         <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> SampleArray;
+<a name="l00350"></a>00350         SampleArray data = SampleArray::withSize (<a class="code" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">getNumFrames</a>() * <a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">getNumChannels</a>());
+<a name="l00351"></a>00351         <a class="code" href="class_audio_file_reader.html#af578e0ff6a4847b0b22640ef2ae92890">resetFramePosition</a>();
+<a name="l00352"></a>00352         <a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">readFrames</a> (data, applyScaling, <span class="keyword">false</span>);
+<a name="l00353"></a>00353         <span class="keywordflow">return</span> data;
+<a name="l00354"></a>00354     }
+<a name="l00355"></a>00355 
+<a name="l00356"></a>00356     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00357"></a><a class="code" href="class_audio_file_reader.html#abf56fb8289381f145c25416f8bcc7668">00357</a>     <span class="keyword">inline</span> <a class="code" href="class_audio_file_reader.html#abf56fb8289381f145c25416f8bcc7668">operator NumericalArray&lt;SampleType&gt; </a>() throw()
+<a name="l00358"></a>00358     {
+<a name="l00359"></a>00359         <span class="keywordflow">return</span> readAllFrames&lt;SampleType&gt; (<span class="keyword">true</span>);
+<a name="l00360"></a>00360     }
+<a name="l00361"></a>00361     
+<a name="l00362"></a>00362     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00363"></a><a class="code" href="class_audio_file_reader.html#ab1a712b784b24e83fd5630ce16e3437e">00363</a>     <span class="keyword">inline</span> <a class="code" href="class_audio_file_reader.html#ab1a712b784b24e83fd5630ce16e3437e">operator SignalBase&lt;SampleType&gt; </a>() throw()
+<a name="l00364"></a>00364     {
+<a name="l00365"></a>00365         <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> data = readAllFrames&lt;SampleType&gt; (<span class="keyword">true</span>);
+<a name="l00366"></a>00366         <span class="keywordflow">return</span> <a class="code" href="class_signal_base.html">SignalBase&lt;SampleType&gt;</a> (data, <a class="code" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">getSampleRate</a>(), <a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">getNumChannels</a>());
+<a name="l00367"></a>00367     }
+<a name="l00368"></a>00368     
+<a name="l00369"></a><a class="code" href="class_audio_file_reader.html#a3c7594f805fe65648eb79dfb73aa59c2">00369</a>     <a class="code" href="class_signal_base.html">SignalBase&lt;PLONK_TYPE_DEFAULT&gt;</a> <a class="code" href="class_audio_file_reader.html#a3c7594f805fe65648eb79dfb73aa59c2">getSignal</a>() throw()
+<a name="l00370"></a>00370     {
+<a name="l00371"></a>00371         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;PLONK_TYPE_DEFAULT&gt;</a> data = readAllFrames&lt;PLONK_TYPE_DEFAULT&gt; (<span class="keyword">true</span>);
+<a name="l00372"></a>00372         <span class="keywordflow">return</span> <a class="code" href="class_signal_base.html">SignalBase&lt;PLONK_TYPE_DEFAULT&gt;</a> (data, <a class="code" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">getSampleRate</a>(), <a class="code" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">getNumChannels</a>());
+<a name="l00373"></a>00373     }
+<a name="l00374"></a>00374 };
+<a name="l00375"></a>00375 
+<a name="l00376"></a>00376 
+<a name="l00377"></a>00377 
+<a name="l00378"></a>00378 <span class="preprocessor">#endif // PLONK_AUDIOFILEREADER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -386,7 +451,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:12 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

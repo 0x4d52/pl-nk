@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>plinkplonk: Member List</title>
+<title>pl-nk: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">plinkplonk</div>
+   <div id="projectname">pl-nk</div>
   </td>
  </tr>
  </tbody>
@@ -81,11 +81,13 @@ This is the complete list of members for <a class="el" href="class_audio_file_re
   <tr class="memlist"><td><a class="el" href="class_audio_file_reader_internal.html#af9de6ebcf61fdc5648684bbfe596907b">getSampleRate</a>() const </td><td><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ab5e9a656c806bcc764321c90f3218ff6">getWeak</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ad9196fe14d4e4d9b1c28982738436544">incrementRefCount</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_audio_file_reader_internal.html#a7c8e502f67505235eb7db99dc4b90cce">initSignal</a>(SignalBase&lt; SampleType &gt; &amp;signal, const int numFrames)</td><td><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ad9b847814db1a98672a6e1c3be4d3076">isActive</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#aef931304501097e3eec855f358daf2e7">operator delete</a>(void *ptr)</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a57e3da1ca0d5afe12fc44112c1ff1d74">operator new</a>(size_t size)</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a5b72285db1aea82f398b106f6f319313">operator=</a>(const SmartPointer &amp;)</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_audio_file_reader_internal.html#af0e256f3ebac633df5af908a3c0ef34d">readFrames</a>(NumericalArray&lt; SampleType &gt; &amp;data)</td><td><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_audio_file_reader_internal.html#a48f519e12e44c546ed30a5195b4202a5">readFrames</a>(NumericalArray&lt; SampleType &gt; &amp;data, const bool applyScaling, const bool deinterleave)</td><td><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_audio_file_reader_internal.html#a1a7f8a74adf25ececf27fa2beccd5a41">readSignal</a>(SignalBase&lt; SampleType &gt; &amp;signal, const bool applyScaling)</td><td><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a87c671981d16ad14ce2fbf12478dd394">refCount</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_audio_file_reader_internal.html#af947c7141df270549b7bf585e472ae77">resetFramePosition</a>()</td><td><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_audio_file_reader_internal.html#acb5ffc05a2bed9d605bbf6f3713dbf19">setFramePosition</a>(const int position)</td><td><a class="el" href="class_audio_file_reader_internal.html">AudioFileReaderInternal</a></td><td></td></tr>
@@ -110,7 +112,7 @@ This is the complete list of members for <a class="el" href="class_audio_file_re
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 07:56:16 for plinkplonk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
