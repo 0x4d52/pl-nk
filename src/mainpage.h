@@ -19,10 +19,12 @@
  processing.
  
 
- The following class should act as pseudocode for the required operations need to get
+ The following class should act as pseudocode for the required operations needed to get
  basic synthesis working.
  
  @code
+ #include "plonk/plonk.h"
+ 
  class TestPlonk
  {
  public:

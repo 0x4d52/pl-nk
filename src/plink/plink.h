@@ -80,6 +80,71 @@
 
 //------------------------------------------------------------plink/fundamentals
 /** An outline of the core concepts used in Plink.
+ 
+ Plink has the concept of processes, which are data structures that contain audio 
+ and control data buffers and information about the buffers such as size and the 
+ number of input and/or output buffers.
+
+ @code
+ typedef struct PlinkBufferF
+ {
+    int bufferSize;
+    float* buffer;
+ } PlinkBufferF;
+ 
+ typedef struct PlinkProcessBase
+ {
+    void* userData;
+    int numOutputs;
+    int numInputs;
+    int numBuffers;
+ } PlinkProcessBase;
+ 
+ typedef struct PlinkProcessF
+ {
+    PlinkProcessBase base;
+    PlinkBufferF buffers[1];
+ } PlinkProcessF;
+ 
+ typedef struct PlinkState
+ {
+    double sampleRate;
+    double sampleDuration;
+ } PlinkState;
+ @endcode
+ 
+ <b>Processing functions</b>
+ 
+ Processing functions operate on process structs. Processing is achieved using a 
+ primary function, which branches into subfunctions according to the input and 
+ output block sizes specified in the process struct. Thus for a sawtooth 
+ generator we have the following prototypes:
+ 
+ @code
+ void plink_SawProcessF_NN (void* pp, SawProcessStateF* state);
+ void plink_SawProcessF_N1 (void* pp, SawProcessStateF* state);
+ void plink_SawProcessF_Nn (void* pp, SawProcessStateF* state);
+ void plink_SawProcessF    (void* pp, SawProcessStateF* state);
+ @endcode
+ 
+ plink_SawProcessF() is the primary function. The subfunctions use a function 
+ suffix notation to indicate the number and size of the buffers they expect to 
+ process.
+ 
+ - @c N indicates the output buffer's block size in samples.
+ -    1 indicates block size is 1 sample.
+ - @c n indicates some other arbitrary blocksize that is neither @c N nor 1. 
+        @c n appearing in the list more than once might be a different value 
+        of @c n, @c n could be larger than @c N.
+ 
+ So in the above plink_SawProcessF() example, we can see that the function 
+ expects to have 2 buffers to process. NN indicates that both buffers have the 
+ same size. @c N1 indicates that the input buffer is of size 1, and @c Nn 
+ indicates that the input buffer is of some arbitrary size. e.g. for N=512:
+ 
+ - Nn could be 512, 64
+ - NN would be 512, 512
+
  @defgroup PlinkCoreConcepts	Core Plink concepts. 
  @ingroup PlinkFundamentals */
 //------------------------------------------------------------plink/fundamentals
