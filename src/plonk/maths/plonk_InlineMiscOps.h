@@ -164,6 +164,25 @@ inline Type linsin2(Type input,
 	return cosInPhase * outRange + outLow;	
 }
 
+//template<class Type>
+//inline Type linexp(Type input, 
+//                   Type inLow, Type inHigh,
+//                   Type outLow, Type outHigh) throw()
+//{
+//	Type outRatio = outHigh / outLow;
+//	Type reciprocalInRange = Type (1) / (inHigh - inLow);
+//	Type inLowOverInRange = reciprocalInRange * inLow;
+//	return outLow * plonk::pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
+//}
+//
+//template<class Type>
+//inline Type linexp2(Type input, 
+//                    Type reciprocalInRange, Type inLowOverInRange,
+//                    Type outLow, Type outRatio) throw()
+//{
+//	return outLow * plonk::pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
+//}
+
 template<class Type>
 inline Type linexp(Type input, 
                    Type inLow, Type inHigh,
@@ -172,7 +191,7 @@ inline Type linexp(Type input,
 	Type outRatio = outHigh / outLow;
 	Type reciprocalInRange = Type (1) / (inHigh - inLow);
 	Type inLowOverInRange = reciprocalInRange * inLow;
-	return outLow * plonk::pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
+	return outLow * pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
 }
 
 template<class Type>
@@ -180,7 +199,7 @@ inline Type linexp2(Type input,
                     Type reciprocalInRange, Type inLowOverInRange,
                     Type outLow, Type outRatio) throw()
 {
-	return outLow * plonk::pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
+	return outLow * pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
 }
 
 template<class Type>

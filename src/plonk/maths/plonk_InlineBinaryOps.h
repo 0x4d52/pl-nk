@@ -104,9 +104,14 @@
         template<class RightType> inline CLASSNAME operator>=  (RightType const& right) const throw() { return binary<plonk::isGreaterThanOrEqualTo> (CLASSNAME (right)); }
 
 
+//#define BINARYOPGLOBAL(CLASSNAME,OP)\
+//    /** Create a new CLASSNAME by applying the binary '##OP##' function to the @e left and @e right inputs. */\
+//    template<class T> CLASSNAME<T> OP (CLASSNAME<T> const& left, CLASSNAME<T> const& right) throw() { return left.binary<plonk::OP> (right); }
+
 #define BINARYOPGLOBAL(CLASSNAME,OP)\
     /** Create a new CLASSNAME by applying the binary '##OP##' function to the @e left and @e right inputs. */\
-    template<class T> CLASSNAME<T> OP (CLASSNAME<T> const& left, CLASSNAME<T> const& right) throw() { return left.binary<plonk::OP> (right); }
+    template<class T> CLASSNAME<T> OP (CLASSNAME<T> const& left, CLASSNAME<T> const& right) throw() { return left.OP (right); }
+
 
 #define BINARYOPGLOBALS(CLASSNAME) \
         BINARYOPGLOBAL(CLASSNAME, addop)\
