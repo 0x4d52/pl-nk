@@ -150,7 +150,7 @@ public:
                 
                 if (data.currentPosition >= tableLength)
                     data.currentPosition -= tableLength;
-                else if (data.currentPosition < SampleType (0))	
+                else if (data.currentPosition < FrequencyType (0))	
                     data.currentPosition += tableLength;                
             }                    
         }
@@ -165,7 +165,7 @@ public:
                 
                 if (data.currentPosition >= tableLength)
                     data.currentPosition -= tableLength;
-                else if (data.currentPosition < SampleType (0))	
+                else if (data.currentPosition < FrequencyType (0))	
                     data.currentPosition += tableLength;                
             }                    
         }
@@ -181,7 +181,7 @@ public:
                 
                 if (data.currentPosition >= tableLength)
                     data.currentPosition -= tableLength;
-                else if (data.currentPosition < SampleType (0))	
+                else if (data.currentPosition < FrequencyType (0))	
                     data.currentPosition += tableLength;                
                 
                 frequencyPosition += frequencyIncrement;
@@ -222,7 +222,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,    Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
@@ -249,7 +249,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
                         
-        Data data = { { -1.0, -1.0 }, 0 };
+        Data data = { { -1.0, -1.0 }, FrequencyType (0) };
         
         return UnitType::template createFromInputs<TableInternal> (inputs, 
                                                                    data, 
@@ -302,7 +302,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,    Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
@@ -365,7 +365,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,        Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
@@ -434,7 +434,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,        Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs

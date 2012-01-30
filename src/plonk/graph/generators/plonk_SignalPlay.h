@@ -70,7 +70,9 @@ public:
     typedef InputDictionary                                         Inputs;
     typedef NumericalArray<SampleType>                              Buffer;
     typedef SignalBase<SampleType>                                  SignalType;
-    
+//    typedef NumericalArray<SampleType>                              SignalBufferType;
+//    typedef NumericalArray2D<SampleType>                            SignalBuffersType;
+
     typedef typename TypeUtility<SampleType>::IndexType             RateType;
     typedef UnitBase<RateType>                                      RateUnitType;
     typedef NumericalArray<RateType>                                RateBufferType;
@@ -122,7 +124,7 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {        
         Data& data = this->getState();
-        const double sampleRate = data.base.sampleRate;
+//        const double sampleRate = data.base.sampleRate;
         
         RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         const RateBufferType rateBuffer (rateUnit.process (info, channel));
@@ -133,8 +135,10 @@ public:
         const RateType* const rateSamples = rateBuffer.getArray();
         const int rateBufferLength = rateBuffer.length();
         
-        const SignalType& signal (this->getInputAsWavetable (IOKey::Signal));
-        //...
+        const SignalType& signal (this->getInputAsSignal (IOKey::Signal));
+        const SampleType* const signalSamples = signal.getSamples (channel);         
+        const int signalFrameStride = signal.getFrameStride();
+        const RateType numSignalFrames (signal.getNumFrames());
         
         int i;
         
@@ -142,12 +146,42 @@ public:
         {
             for (i = 0; i < outputBufferLength; ++i) 
             {
-
+                const int sampleA (data.currentPosition);
+                const int sampleB (sampleA + 1);
+                const RateType frac (data.currentPosition - RateType (sampleA));
+                
+                outputSamples[i] = plonk::lininterp (signalSamples[sampleA * signalFrameStride], 
+                                                     signalSamples[sampleB * signalFrameStride], 
+                                                     frac);
+                
+                data.currentPosition += rateSamples[i];
+                
+                if (data.currentPosition >= numSignalFrames)
+                    data.currentPosition -= numSignalFrames;
+                else if (data.currentPosition < RateType (0))	
+                    data.currentPosition += numSignalFrames;
             }                    
         }
         else if (rateBufferLength == 1)
         {
+            const RateType increment = rateSamples[0];
             
+            for (i = 0; i < outputBufferLength; ++i) 
+            {
+                const int sampleA (data.currentPosition);
+                const int sampleB (sampleA + 1);
+                const RateType frac (data.currentPosition - RateType (sampleA));
+                
+                outputSamples[i] = plonk::lininterp (signalSamples[sampleA * signalFrameStride], 
+                                                     signalSamples[sampleB * signalFrameStride], 
+                                                     frac);
+                data.currentPosition += increment;
+                
+                if (data.currentPosition >= numSignalFrames)
+                    data.currentPosition -= numSignalFrames;
+                else if (data.currentPosition < RateType (0))	
+                    data.currentPosition += numSignalFrames;                
+            }                    
         }
         else
         {
@@ -156,10 +190,23 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
-//                outputSamples[i] = plonk::lookup (SignalPlaySamples, data.currentPosition);
-//                data.currentPosition += frequencySamples[int (frequencyPosition)] * SignalPlayLengthOverSampleRate;
+                const int sampleA (data.currentPosition);
+                const int sampleB (sampleA + 1);
+                const RateType frac (data.currentPosition - RateType (sampleA));
                 
-            }        
+                outputSamples[i] = plonk::lininterp (signalSamples[sampleA * signalFrameStride], 
+                                                     signalSamples[sampleB * signalFrameStride], 
+                                                     frac);
+                
+                data.currentPosition += rateSamples[int (ratePosition)];
+                
+                if (data.currentPosition >= numSignalFrames)
+                    data.currentPosition -= numSignalFrames;
+                else if (data.currentPosition < RateType (0))	
+                    data.currentPosition += numSignalFrames;
+                
+                ratePosition += rateIncrement;
+            }                    
         }
         
     }
@@ -196,7 +243,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,    Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
@@ -223,7 +270,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
                         
-        Data data = { { -1.0, -1.0 }, 0 };
+        Data data = { { -1.0, -1.0 }, RateType (0) };
         
         return UnitType::template createFromInputs<SignalPlayInternal> (inputs, 
                                                                         data, 

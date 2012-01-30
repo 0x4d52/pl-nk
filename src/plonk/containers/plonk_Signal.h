@@ -70,7 +70,7 @@ public:
         sampleRate (sampleRateToUse),
         numInterleavedChannels (1)
     {
-        plonk_assert (buffers.isMatrix()); // each channel must be the same length
+        plonk_assert ((buffers.length() == 1) || buffers.isMatrix()); // each channel must be the same length
     }
     
     inline SignalInternal (Buffer const& buffer, 
@@ -102,20 +102,48 @@ public:
         }
     }
     
+    inline int getFrameStride() const throw()
+    {
+        return isInterleaved() ? getNumChannels() : 1;
+    }
+    
+    SampleType* getSamples (const int channel) throw()
+    {
+        const int wrappedChannel = plonk::wrap (channel, 0, getNumChannels());
+        return isInterleaved() 
+               ? 
+               buffers.atUnchecked (0).getArray() + wrappedChannel
+               :
+               buffers.atUnchecked (wrappedChannel).getArray();
+    }
+    
+    const SampleType* getSamples (const int channel) const throw()
+    {
+        const int wrappedChannel = plonk::wrap (channel, 0, getNumChannels());
+        return isInterleaved() 
+               ? 
+               buffers.atUnchecked (0).getArray() + wrappedChannel
+               :
+               buffers.atUnchecked (wrappedChannel).getArray();
+    }
+
     inline bool isInterleaved() const throw()
     {
+        plonk_assert(buffers.length() > 0);
         return (numInterleavedChannels > 1) || (buffers.numRows() == 1);
     }
     
     inline Buffer getInterleaved() const throw()
     {
-        return (isInterleaved()) ? buffers.first() : buffers.interleave();
+        plonk_assert(buffers.length() > 0);
+        return (isInterleaved()) ? buffers.atUnchecked (0) : buffers.interleave();
     }
     
     inline Buffers getDeinterleaved() const throw()
     {        
+        plonk_assert(buffers.length() > 0);
         if (isInterleaved()) 
-            return buffers.first().deinterleave (numInterleavedChannels);
+            return buffers.atUnchecked (0).deinterleave (numInterleavedChannels);
         else
             return buffers;
     }
@@ -226,6 +254,21 @@ public:
     inline int getNumChannels() const throw()
     {
         return this->getInternal()->getNumChannels();
+    }
+    
+    inline int getFrameStride() const throw()
+    {
+        return this->getInternal()->getFrameStride();
+    }
+    
+    SampleType* getSamples (const int channel) throw()
+    {
+        return this->getInternal()->getSamples (channel);
+    }
+    
+    const SampleType* getSamples (const int channel) const throw()
+    {
+        return this->getInternal()->getSamples (channel);
     }
     
     inline bool isInterleaved() const throw()
