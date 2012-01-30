@@ -116,6 +116,8 @@ public:
     Int24 operator| (Int24 const& leftOperand) const throw();
     Int24 operator& (Int24 const& leftOperand) const throw();
     Int24 operator^ (Int24 const& leftOperand) const throw();
+
+    Int24 pow (Int24 const& leftOperand) const throw();
     
     Int24& operator+= (Int24 const& leftOperand) throw();
     Int24& operator-= (Int24 const& leftOperand) throw();

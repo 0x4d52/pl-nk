@@ -41,6 +41,7 @@
 BEGIN_PLONK_NAMESPACE
 
 #include "plonk_Int24.h"
+#include "../maths/plonk_InlineBinaryOps.h"
 
 Int24::Int24() throw()
 :   data (getZero().data)
@@ -252,6 +253,13 @@ Int24 Int24::operator^ (Int24 const& leftOperand) const throw()
 {
     Int24 result;
     result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) ^ pl_ConvertI24ToI (leftOperand.data));
+    return result;            
+}
+
+Int24 Int24::pow (Int24 const& leftOperand) const throw()
+{
+    Int24 result;
+    result.data = pl_ConvertIToI24 (plonk::pow (pl_ConvertI24ToI (data), pl_ConvertI24ToI (leftOperand.data)));
     return result;            
 }
 
