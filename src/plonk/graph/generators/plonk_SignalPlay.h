@@ -70,8 +70,6 @@ public:
     typedef InputDictionary                                         Inputs;
     typedef NumericalArray<SampleType>                              Buffer;
     typedef SignalBase<SampleType>                                  SignalType;
-//    typedef NumericalArray<SampleType>                              SignalBufferType;
-//    typedef NumericalArray2D<SampleType>                            SignalBuffersType;
 
     typedef typename TypeUtility<SampleType>::IndexType             RateType;
     typedef UnitBase<RateType>                                      RateUnitType;
@@ -124,7 +122,6 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {        
         Data& data = this->getState();
-//        const double sampleRate = data.base.sampleRate;
         
         RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         const RateBufferType rateBuffer (rateUnit.process (info, channel));
@@ -139,6 +136,7 @@ public:
         const SampleType* const signalSamples = signal.getSamples (channel);         
         const int signalFrameStride = signal.getFrameStride();
         const RateType numSignalFrames (signal.getNumFrames());
+        const RateType rateScale (signal.getSampleRate().getValue() * data.base.sampleDuration);
         
         int i;
         
@@ -154,7 +152,7 @@ public:
                                                      signalSamples[sampleB * signalFrameStride], 
                                                      frac);
                 
-                data.currentPosition += rateSamples[i];
+                data.currentPosition += rateSamples[i] * rateScale;
                 
                 if (data.currentPosition >= numSignalFrames)
                     data.currentPosition -= numSignalFrames;
@@ -164,7 +162,7 @@ public:
         }
         else if (rateBufferLength == 1)
         {
-            const RateType increment = rateSamples[0];
+            const RateType increment = rateSamples[0] * rateScale;
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
@@ -198,7 +196,7 @@ public:
                                                      signalSamples[sampleB * signalFrameStride], 
                                                      frac);
                 
-                data.currentPosition += rateSamples[int (ratePosition)];
+                data.currentPosition += rateSamples[int (ratePosition)] * rateScale;
                 
                 if (data.currentPosition >= numSignalFrames)
                     data.currentPosition -= numSignalFrames;

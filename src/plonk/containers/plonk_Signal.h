@@ -235,17 +235,17 @@ public:
     {
         return this->getInternal()->buffers;
     }
+
+    inline const SampleRate& getSampleRate() const throw()
+    {
+        return this->getInternal()->sampleRate;
+    }
     
     inline SampleRate& getSampleRate() throw()
     {
         return this->getInternal()->sampleRate;
     }
     
-//    inline void setSampleRate (SampleRate const& sampleRate) throw()
-//    {
-//        this->getInternal()->sampleRate = sampleRate;
-//    }
-
     inline int getNumFrames() const throw()
     {
         return this->getInternal()->getNumFrames();
