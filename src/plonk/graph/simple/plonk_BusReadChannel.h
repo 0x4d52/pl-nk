@@ -168,7 +168,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      IOInfo::NoDefault,   IOLimit::None, 
+                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,   IOLimit::None, 
                          IOKey::End,
                          
                          // inputs

@@ -67,11 +67,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,                IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -130,11 +130,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Duration,           Measure::Seconds,   0.2,                IOLimit::Minimum,   Measure::Seconds,   0.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -192,11 +192,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -255,11 +255,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Duration,           Measure::Seconds,   0.2,                IOLimit::Minimum,   Measure::Seconds,   0.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -320,11 +320,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,                IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Q,                  Measure::Q,         1.0,                IOLimit::Clipped,   Measure::Q,                 0.01, 100.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -385,11 +385,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,                IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Q,                  Measure::Q,         1.0,                IOLimit::Clipped,   Measure::Q,                 0.01, 100.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -450,11 +450,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::S,                  Measure::Slope,     1.0,                IOLimit::Clipped,   Measure::Slope,             0.01, 100.0,
                          IOKey::Gain,               Measure::Decibels,  0.0,                IOLimit::None,
@@ -520,11 +520,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::S,                  Measure::Slope,     1.0,                IOLimit::Clipped,   Measure::Slope,             0.01, 100.0,
                          IOKey::Gain,               Measure::Decibels,  0.0,                IOLimit::None,
@@ -590,11 +590,11 @@ public:
                      
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Q,                  Measure::Q,         1.0,                IOLimit::Clipped,   Measure::Q,                 0.01, 100.0,
                          IOKey::Gain,               Measure::Decibels,  0.0,                IOLimit::None,
@@ -660,11 +660,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Bandwidth,          Measure::Octaves,   1.0,                IOLimit::Clipped,   Measure::Octaves,           0.001, 10.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -725,11 +725,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Bandwidth,          Measure::Octaves,   1.0,                IOLimit::Clipped,   Measure::Octaves,           0.001, 10.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -794,11 +794,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -857,11 +857,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,

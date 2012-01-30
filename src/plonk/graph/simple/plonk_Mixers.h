@@ -81,7 +81,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal);
+        const IntArray keys (IOKey::Generic);
         return keys;
     }    
     
@@ -92,7 +92,7 @@ public:
     
     void initChannel (const int /*channel*/) throw()
     {
-        const UnitType& input = this->getInputAsUnit (IOKey::Signal);
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
         
         this->setBlockSize (BlockSize::decide (input.getMaxBlockSize(),
                                                this->getBlockSize()));
@@ -116,7 +116,7 @@ public:
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
 
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Signal));
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         
         const int numChannels = inputUnit.getNumChannels();
         
@@ -321,10 +321,10 @@ public:
                                     
                                     // output
                                     1, 
-                                    IOKey::Signal,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
+                                    IOKey::Generic,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
                                     
                                     // inputs
-                                    IOKey::Signal,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                                    IOKey::Generic,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,
                                     IOKey::AutoDeleteFlag,  Measure::Bool,      IOInfo::True,       IOLimit::None,
                                     IOKey::Multiply,        Measure::Factor,    1.0,                IOLimit::None,
                                     IOKey::Add,             Measure::None,      0.0,                IOLimit::None,
@@ -336,7 +336,7 @@ public:
                                     
                                     // output
                                     ChannelCount::VariableChannelCount,     
-                                    IOKey::Signal,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
+                                    IOKey::Generic,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
 
                                     // inputs
                                     IOKey::Units,           Measure::None,
@@ -364,7 +364,7 @@ public:
         typedef CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType) Data;
 
         Inputs inputs;
-        inputs.put (IOKey::Signal, input);
+        inputs.put (IOKey::Generic, input);
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
         

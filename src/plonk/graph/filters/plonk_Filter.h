@@ -76,7 +76,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal, IOKey::Coeffs);
+        const IntArray keys (IOKey::Generic, IOKey::Coeffs);
         return keys;
     }    
     
@@ -84,8 +84,8 @@ public:
     {        
         Inputs channelInputs;
         
-        channelInputs.put (IOKey::Signal, 
-                           this->getInputAsUnit (IOKey::Signal).getChannel (index));
+        channelInputs.put (IOKey::Generic, 
+                           this->getInputAsUnit (IOKey::Generic).getChannel (index));
         
         const UnitType& coeffs = this->getInputAsUnit (IOKey::Coeffs);
         UnitsType groupedCoeffs = coeffs.group (FormType::NumCoeffs);
@@ -109,7 +109,7 @@ public:
     
     void initChannel (const int channel) throw()
     {        
-        const UnitType& inputUnit = this->getInputAsUnit (IOKey::Signal);
+        const UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
         
         this->setBlockSize (BlockSize::decide (inputUnit.getBlockSize (channel),
                                                this->getBlockSize()));
@@ -125,7 +125,7 @@ public:
     {                
         FormType::process (this->getOutputSamples(),
                            this->getOutputBuffer().length(), 
-                           this->getInputAsUnit (IOKey::Signal), 
+                           this->getInputAsUnit (IOKey::Generic), 
                            this->getInputAsUnit (IOKey::Coeffs), 
                            this->getState(),
                            info, 
@@ -166,11 +166,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,     Measure::None,
+                         IOKey::Generic,     Measure::None,
                          IOKey::Coeffs,     Measure::Coeffs,
                          IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
                          IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
@@ -204,7 +204,7 @@ public:
         for (int i = 0; i < numOutputChannels; ++i)
         {
             Inputs inputs;
-            inputs.put (IOKey::Signal, input);
+            inputs.put (IOKey::Generic, input);
             inputs.put (IOKey::Coeffs, coeffs);
             
             ChannelInternalType* internal = new FilterInternal (inputs, 

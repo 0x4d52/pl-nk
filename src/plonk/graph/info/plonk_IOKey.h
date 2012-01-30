@@ -77,7 +77,7 @@ public:
         AtomicVariable, ///< An atomic variable.
         Multiply,       ///< A multiplier.
         Add,            ///< An offset.
-        Signal,         ///< A generic signal (commonly used where there is only one input or output).
+        Generic,        ///< A generic audio (commonly used where there is only one input or output).
         Control,        ///< A generic control (e.g., used for the gate input of envelope).
         LeftOperand,    ///< Left operand of a binary operation or stereo signal.
         RightOperand,   ///< Right operand of a binary operation or stereo signal.
@@ -103,7 +103,7 @@ public:
         Bus,            ///< A bus.
         Busses,         ///< An array of busses.
         Buffer,         ///< A single buffer.
-        Wavetable,
+        Wavetable,      ///< A wavetable
         Breakpoints,    ///< Breakpoints (i.e., an envelope specification)
         
         AutoDeleteFlag, ///< To control the auto deletion

@@ -75,14 +75,14 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal,
+        const IntArray keys (IOKey::Generic,
                              IOKey::Position);
         return keys;
     }    
     
     void initChannel (const int channel) throw()
     {        
-        const UnitType& input = this->getInputAsUnit (IOKey::Signal);
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
         const UnitType& position = this->getInputAsUnit (IOKey::Position);
                 
         if ((channel % this->getNumChannels()) == 0)
@@ -123,7 +123,7 @@ public:
     
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {                
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Signal));
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         UnitType& positionUnit (this->getInputAsUnit (IOKey::Position));
         
         const Buffer inputBuffer (inputUnit.process (info, 0));
@@ -200,7 +200,7 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,     Measure::None,              IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,     Measure::None,              IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Position,   Measure::NormalisedBipolar, 0.0,                IOLimit::Clipped, Measure::NormalisedBipolar,  -peak, peak,
                          IOKey::BlockSize,  Measure::Samples,           blockSize,          IOLimit::Minimum, Measure::Samples,             1.0,
                          IOKey::SampleRate, Measure::Hertz,             sampleRate,         IOLimit::Minimum, Measure::Hertz,               0.0,
@@ -223,7 +223,7 @@ public:
         for (int i = 0; i < numInputChannels; ++i)
         {
             Inputs inputs;
-            inputs.put (IOKey::Signal, input[i]);
+            inputs.put (IOKey::Generic, input[i]);
             inputs.put (IOKey::Position, position[i]);
 
             result.add (UnitType::template proxiesFromInputs<LinearPanInternal> (inputs, 

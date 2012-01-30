@@ -241,9 +241,9 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
-                         IOKey::Signal,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::FilterSampleRate,   Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,             0.0,
                          IOKey::BlockSize,          Measure::Samples,   0.0,                IOLimit::Minimum,   Measure::Samples,           1.0,
                          IOKey::SampleRate,         Measure::Hertz,     -1.0,               IOLimit::Minimum,   Measure::Hertz,             0.0,

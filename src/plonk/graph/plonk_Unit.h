@@ -454,7 +454,7 @@ public:
         typedef typename ChannelInternalClassType::Data     Data;
         
         Inputs inputs;
-        inputs.put (IOKey::Signal, *this);
+        inputs.put (IOKey::Generic, *this);
         
         Data data = { -1.0, -1.0 }; // dummy sample rate data
         

@@ -76,7 +76,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal);
+        const IntArray keys (IOKey::Generic);
         return keys;
     }
     
@@ -91,7 +91,7 @@ public:
     
     void initChannel(const int channel) throw()
     {        
-        const UnitType& input = this->getInputAsUnit (IOKey::Signal);
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
         this->setBlockSize (input.getBlockSize (channel));
         this->setSampleRate (input.getSampleRate (channel));
 
@@ -105,7 +105,7 @@ public:
         
     void process (ProcessInfo& info, const int channel) throw()
     {                
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Signal));
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
                 
         const int outputBufferLength = this->getOutputBuffer().length();
         SampleType* const outputSamples = this->getOutputSamples();
@@ -204,10 +204,10 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,         Measure::None,      IOInfo::NoDefault,   IOLimit::None,      IOKey::End,
+                         IOKey::Generic,         Measure::None,      IOInfo::NoDefault,   IOLimit::None,      IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,         Measure::None,      IOInfo::NoDefault,   IOLimit::None,
+                         IOKey::Generic,         Measure::None,      IOInfo::NoDefault,   IOLimit::None,
                          IOKey::OverlapMake,    Measure::Factor,    0.5,                 IOLimit::Clipped,   Measure::Factor,     minOverlap, 1.0,
                          IOKey::End);
     }    
@@ -220,7 +220,7 @@ public:
         plonk_assert (overlap.getValue() <= 1.0);
         
         Inputs inputs;
-        inputs.put (IOKey::Signal, input);
+        inputs.put (IOKey::Generic, input);
         inputs.put (IOKey::OverlapMake, overlap);
         
         Data data = { -1.0, -1.0 };

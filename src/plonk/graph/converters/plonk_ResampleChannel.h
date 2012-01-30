@@ -77,7 +77,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal);
+        const IntArray keys (IOKey::Generic);
         return keys;
     }
     
@@ -92,7 +92,7 @@ public:
     
     void initChannel (const int channel) throw()
     {        
-        const UnitType& input = this->getInputAsUnit (IOKey::Signal);
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
                 
         plonk_assert (input.getOverlap (channel) == DoubleVariable::getOne());
         
@@ -122,7 +122,7 @@ public:
         
         const Data& data = this->getState();
         
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Signal));
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
 
         const IndexType inputSampleRate = IndexType (inputUnit.getSampleRate (channel));
         
@@ -211,10 +211,10 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,     IOInfo::NoDefault,   IOLimit::None,      IOKey::End,
+                         IOKey::Generic,     Measure::None,     IOInfo::NoDefault,   IOLimit::None,      IOKey::End,
 
                          // inputs
-                         IOKey::Signal,     Measure::None,     IOInfo::NoDefault,   IOLimit::None,
+                         IOKey::Generic,     Measure::None,     IOInfo::NoDefault,   IOLimit::None,
                          IOKey::BlockSize,  Measure::Samples,  blockSize,           IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::SampleRate, Measure::Hertz,    sampleRate,          IOLimit::Minimum,   Measure::Hertz,     0.0,
                          IOKey::End);
@@ -228,7 +228,7 @@ public:
         plonk_assert (preferredSampleRate.getValue() > 0.0); // no  need to resample a DC signal
                 
         Inputs inputs;
-        inputs.put (IOKey::Signal, input);
+        inputs.put (IOKey::Generic, input);
         
         Data data = { -1.0, -1.0 };
                 

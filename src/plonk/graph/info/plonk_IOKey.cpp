@@ -52,7 +52,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::AtomicVariable,
         IOKey::Multiply,
         IOKey::Add,
-        IOKey::Signal,
+        IOKey::Generic,
         IOKey::Control,
         IOKey::LeftOperand,
         IOKey::RightOperand,
@@ -111,7 +111,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "Atomic Variable",
         "Multiply",
         "Add",
-        "Signal",
+        "Generic",
         "Control",
         "Left Operand",
         "Right Operand",
@@ -160,7 +160,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeAtomicVariable,  //"AtomicVariable"
         IOKey::TypeUnit,            //"Multiply",
         IOKey::TypeUnit,            //"Add",
-        IOKey::TypeUnit,            //"Signal",
+        IOKey::TypeUnit,            //"Generic",
         IOKey::TypeUnit,            //"Control"
         IOKey::TypeUnit,            //"LeftOperand",
         IOKey::TypeUnit,            //"RightOperand",
@@ -208,7 +208,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "AtomicVariable",   //"AtomicVariable"
         "Unit",             //"Multiply",
         "Unit",             //"Add",
-        "Unit",             //"Signal",
+        "Unit",             //"Generic",
         "Unit",             //"Control"
         "Unit",             //"LeftOperand",
         "Unit",             //"RightOperand",

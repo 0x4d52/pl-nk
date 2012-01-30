@@ -74,7 +74,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal);
+        const IntArray keys (IOKey::Generic);
         return keys;
     }    
             
@@ -82,7 +82,7 @@ public:
     {
         if ((channel % this->getNumChannels()) == 0)
         {
-            const UnitType& input = this->getInputAsUnit (IOKey::Signal);
+            const UnitType& input = this->getInputAsUnit (IOKey::Generic);
 
             this->setBlockSize (input.getBlockSize (0));
             this->setSampleRate (input.getSampleRate (0));    
@@ -96,7 +96,7 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {                
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Signal));
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const Buffer inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
         
@@ -153,7 +153,7 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,         Measure::None,
+                         IOKey::Generic,         Measure::None,
                          IOKey::End);
     }    
     
@@ -169,7 +169,7 @@ public:
         for (int i = 0; i < numInputChannels; ++i)
         {
             Inputs inputs;
-            inputs.put (IOKey::Signal, input[i]);
+            inputs.put (IOKey::Generic, input[i]);
             
             result.add (UnitType::template proxiesFromInputs<FFTInternal> (inputs, 
                                                                            data, 

@@ -149,7 +149,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal);
+        const IntArray keys (IOKey::Generic);
         return keys;
     }    
     
@@ -164,7 +164,7 @@ public:
     
     void initChannel (const int channel) throw()
     {
-        const UnitType& input = this->getInputAsUnit (IOKey::Signal);
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
         const SampleType sourceValue = input.getValue (channel);
         
         this->setBlockSize (BlockSize::decide (input.getBlockSize (channel),
@@ -179,7 +179,7 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {
-        UnitType& operandUnit (this->getInputAsUnit (IOKey::Signal));
+        UnitType& operandUnit (this->getInputAsUnit (IOKey::Generic));
         const Buffer operandBuffer (operandUnit.process (info, channel));
         
         SampleType* const outputSamples = this->getOutputSamples();

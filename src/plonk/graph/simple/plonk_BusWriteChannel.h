@@ -91,7 +91,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal,
+        const IntArray keys (IOKey::Generic,
                        IOKey::Busses);
         return keys;
     }    
@@ -110,7 +110,7 @@ public:
         const Busses& busses (this->getInputAsBusses (IOKey::Busses));
         this->setSampleRate (busses.wrapAt (channel).getSampleRate());
 
-        const UnitType& input = this->getInputAsUnit (IOKey::Signal);
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
         this->setBlockSize (BlockSize::decide (input.getBlockSize (channel),
                                                this->getBlockSize()));
         
@@ -131,7 +131,7 @@ public:
 
         plonk_assert (bus.getSampleRate() == this->getSampleRate());
 
-        UnitType& inputUnit (this->getInputAsUnit (IOKey::Signal));
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         
         const Buffer inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
@@ -187,11 +187,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
+                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
                          
                          // inputs
                          IOKey::Busses,     Measure::None,
-                         IOKey::Signal,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
                          IOKey::BlockSize,  Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::End);
     }    
@@ -203,7 +203,7 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::noPreference()) throw()
     {                
         Inputs inputs;
-        inputs.put (IOKey::Signal, input);   
+        inputs.put (IOKey::Generic, input);   
         inputs.put (IOKey::Busses, busses);
         
         Data data = { -1.0, -1.0 };

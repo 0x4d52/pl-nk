@@ -222,7 +222,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
@@ -302,7 +302,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
@@ -365,7 +365,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs
@@ -434,7 +434,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
                          IOKey::End,
                          
                          // inputs

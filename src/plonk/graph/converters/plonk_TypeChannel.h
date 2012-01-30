@@ -88,7 +88,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Signal);
+        const IntArray keys (IOKey::Generic);
         return keys;
     }    
     
@@ -109,7 +109,7 @@ public:
     
     InputUnitType getInputUnit() const throw()
     {
-        const InputUnitType& input (this->template getInputAs<InputUnitType> (IOKey::Signal));
+        const InputUnitType& input (this->template getInputAs<InputUnitType> (IOKey::Generic));
         return input;
     }
     
@@ -124,7 +124,7 @@ public:
     
     void initChannel (const int channel) throw()
     {        
-        InputUnitType& input (this->template getInputAs<InputUnitType> (IOKey::Signal));
+        InputUnitType& input (this->template getInputAs<InputUnitType> (IOKey::Generic));
 
         this->setBlockSize (BlockSize::decide (input.getBlockSize (channel),
                                                this->getBlockSize()));
@@ -139,7 +139,7 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {
-        InputUnitType& input (this->template getInputAs<InputUnitType> (IOKey::Signal));
+        InputUnitType& input (this->template getInputAs<InputUnitType> (IOKey::Generic));
         const InputBuffer& inputBuffer (input.process (info, channel));
         
         OutputSampleType* const outputSamples = this->getOutputSamples();
@@ -207,11 +207,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
                          IOKey::End,
 
                          // inputs
-                         IOKey::Signal,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
                          IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,     0.0,
                          IOKey::End);
@@ -223,7 +223,7 @@ public:
                               SampleRate const& sampleRate = SampleRate::noPreference()) throw()
     {        
         Inputs inputs;
-        inputs.put (IOKey::Signal, input);
+        inputs.put (IOKey::Generic, input);
         
         Data data = { -1.0, -1.0 };
         

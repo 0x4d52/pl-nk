@@ -365,7 +365,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Signal,     Measure::None,      0.0,        IOLimit::Clipped,   Measure::NormalisedBipolar, -peak, peak,
+                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::Clipped,   Measure::NormalisedBipolar, -peak, peak,
                          IOKey::End,
                          
                          // inputs

@@ -136,7 +136,7 @@ public:
                          
                          // output
                          1, 
-                         IOKey::Signal,             Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
+                         IOKey::Generic,             Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
                          IOKey::End,
                          
                          // inputs
