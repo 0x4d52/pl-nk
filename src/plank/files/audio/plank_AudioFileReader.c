@@ -367,7 +367,7 @@ PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const
     
     // set these last so that if the format is not recognised everything remains uninitialised
     p->formatInfo.bitsPerSample = (PlankI) bitsPerSample;
-    p->formatInfo.bytesPerFrame = (PlankI) (((bitsPerSample + 0x00000008) & ~0x00000008) * numChannels / 8); // round up to whole bytes
+    p->formatInfo.bytesPerFrame = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8); // round up to whole bytes
     p->formatInfo.numChannels   = (PlankI) numChannels;
     p->formatInfo.sampleRate    = (PlankD) sampleRate;
 
@@ -405,7 +405,7 @@ PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, cons
     if ((result = pl_File_Read ((PlankFileRef)p, sampleRate.data, sizeof (sampleRate), PLANK_NULL)) != PlankResult_OK) goto exit;    
     
     p->formatInfo.bitsPerSample = (PlankI) bitsPerSample;
-    p->formatInfo.bytesPerFrame = (PlankI) (((bitsPerSample + 0x00000008) & ~0x00000008) * numChannels / 8); // round up to whole bytes
+    p->formatInfo.bytesPerFrame = (PlankI) (((bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * numChannels / 8); // round up to whole bytes
     p->formatInfo.numChannels   = (PlankI) numChannels;
     p->formatInfo.sampleRate    = (PlankD) pl_F802I (sampleRate);
     p->numFrames                = (PlankLL) numFrames;
