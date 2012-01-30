@@ -466,6 +466,30 @@ public:
      
     BINARYOPS(UnitBase);
     UNARYOPS(UnitBase);
+    
+    UnitBase linlin (UnitBase const& inLow, UnitBase const& inHigh, 
+                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        return plonk::linlin (*this, inLow, inHigh, outLow, outHigh);
+    }
+    
+    UnitBase linlin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        const SampleType peak (TypeUtility<SampleType>::getTypePeak());
+        return plonk::linlin (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
+    }
+    
+    UnitBase linexp (UnitBase const& inLow, UnitBase const& inHigh, 
+                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        return plonk::linexp (*this, inLow, inHigh, outLow, outHigh);
+    }
+    
+    UnitBase linexp (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        const SampleType peak (TypeUtility<SampleType>::getTypePeak());
+        return plonk::linlin (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
+    }
         
     const UnitArray operator<< (UnitType const& other) const throw()   { return UnitArray (*this, other); }
 	const UnitArray operator<< (UnitBase const& other) const throw()   { return UnitArray (*this, other); }

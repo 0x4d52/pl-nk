@@ -366,10 +366,16 @@ public:
         return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
     }
     
-    SignalBase<PLONK_TYPE_DEFAULT> getSignal() throw()
+    template<class SampleType>
+    inline SignalBase<SampleType> getOtherSignal() throw()
     {
-        NumericalArray<PLONK_TYPE_DEFAULT> data = readAllFrames<PLONK_TYPE_DEFAULT> (true);
-        return SignalBase<PLONK_TYPE_DEFAULT> (data, getSampleRate(), getNumChannels());
+        NumericalArray<SampleType> data = readAllFrames<SampleType> (true);
+        return SignalBase<SampleType> (data, getSampleRate(), getNumChannels());
+    }
+    
+    inline SignalBase<PLONK_TYPE_DEFAULT> getSignal() throw()
+    {
+        return getOtherSignal<PLONK_TYPE_DEFAULT>();
     }
 };
 
