@@ -114,7 +114,7 @@ using namespace PLONK_NAMESPACE;
 
 //-------------------------------------------------------------------plonk/units
 /** A list of all oscillator unit classes and their brief descriptions.
- @defgroup OscillatorUnits	Oscillator unit classes. 
+ @defgroup GeneratorUnits	Oscillator unit classes. 
  @ingroup PlonkUnitCategogies */
 
 /** A list of all filtering unit classes and their brief descriptions.

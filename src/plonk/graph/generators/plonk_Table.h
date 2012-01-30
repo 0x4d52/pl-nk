@@ -196,7 +196,7 @@ private:
 //------------------------------------------------------------------------------
 
 /** Wavetable oscillator. 
-  @ingroup OscillatorUnits ControlUnits */
+  @ingroup GeneratorUnits ControlUnits */
 template<class SampleType>
 class TableUnit
 {
@@ -235,7 +235,7 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate sawtooth oscillator. */
+    /** Create an audio rate wavetable oscillator. */
     static UnitType ar (WavetableType const& table, 
                         FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
@@ -257,7 +257,7 @@ public:
                                                                    preferredSampleRate);
     }
     
-    /** Create a control rate sawtooth oscillator. */
+    /** Create a control rate wavetable oscillator. */
     static UnitType kr (WavetableType const& table,
                         FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
@@ -275,7 +275,7 @@ typedef TableUnit<PLONK_TYPE_DEFAULT> Table;
 
 /** Sine oscillator. 
  @see TableUnit
- @ingroup OscillatorUnits ControlUnits */
+ @ingroup GeneratorUnits ControlUnits */
 template<class SampleType>
 class SineUnit
 {
@@ -314,7 +314,7 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate sawtooth oscillator. */
+    /** Create an audio rate sine oscillator. */
     static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -324,7 +324,7 @@ public:
         return TableType::ar (WavetableType::sine8192(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
-    /** Create a control rate sawtooth oscillator. */
+    /** Create a control rate sine oscillator. */
     static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0)) throw()
@@ -337,7 +337,7 @@ typedef SineUnit<PLONK_TYPE_DEFAULT> Sine;
 
 /** Harmonic sawtooth wave oscillator. 
  @see TableUnit
- @ingroup OscillatorUnits */
+ @ingroup GeneratorUnits */
 template<class SampleType>
 class HarmonicSawUnit
 {
@@ -378,7 +378,7 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate sawtooth oscillator. */
+    /** Create an audio rate harmonic sawtooth oscillator. */
     static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -390,7 +390,7 @@ public:
         return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
-    /** Create a control rate sawtooth oscillator. */
+    /** Create a control rate harmonic sawtooth oscillator. */
     static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -406,7 +406,7 @@ typedef HarmonicSawUnit<PLONK_TYPE_DEFAULT> HarmonicSaw;
 
 /** Harmonic square wave oscillator. 
  @see TableUnit
- @ingroup OscillatorUnits */
+ @ingroup GeneratorUnits */
 template<class SampleType>
 class HarmonicSquareUnit
 {
@@ -447,7 +447,7 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate sawtooth oscillator. */
+    /** Create an audio rate harmonic square wave oscillator. */
     static UnitType ar (FrequencyUnitType const& frequency = FrequencyType (440), 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -459,7 +459,7 @@ public:
         return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
-    /** Create a control rate sawtooth oscillator. */
+    /** Create a control rate harmonic square wave oscillator. */
     static UnitType kr (FrequencyUnitType const& frequency, 
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),

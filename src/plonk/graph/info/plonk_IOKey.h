@@ -58,6 +58,7 @@ public:
         TypeBusses,
         TypeBuffer,
         TypeWavetable,
+        TypeSignal,
         TypeBreakpoints,
         TypeBlockSize,
         TypeSampleRate,
@@ -82,7 +83,8 @@ public:
         LeftOperand,    ///< Left operand of a binary operation or stereo signal.
         RightOperand,   ///< Right operand of a binary operation or stereo signal.
         Position,       ///< Position, e.g., pan position.
-        Frequency,      ///< Frequency or rate e.g., for oscillators, filters or pitch detectors.
+        Frequency,      ///< Frequency e.g., for oscillators, filters or pitch detectors.
+        Rate,           ///< Relative speed where 1 = normal
         Q,              ///< Q factor for filters.
         S,              ///< S factor for filters.
         Gain,           ///< Gain specifically (usually in dB as opposed to Multiply).
@@ -104,6 +106,7 @@ public:
         Busses,         ///< An array of busses.
         Buffer,         ///< A single buffer.
         Wavetable,      ///< A wavetable
+        Signal,         ///< A stored signal buffer
         Breakpoints,    ///< Breakpoints (i.e., an envelope specification)
         
         AutoDeleteFlag, ///< To control the auto deletion

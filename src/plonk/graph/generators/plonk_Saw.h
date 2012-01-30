@@ -338,7 +338,7 @@ private:
  } @endcode
 
  
- @ingroup OscillatorUnits ControlUnits */
+ @ingroup GeneratorUnits ControlUnits */
 template<class SampleType>
 class SawUnit
 {

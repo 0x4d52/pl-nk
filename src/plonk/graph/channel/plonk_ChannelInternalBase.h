@@ -63,6 +63,7 @@ public:
     typedef Variable<SampleType>                    VariableType;
     typedef BreakpointsBase<SampleType>             BreakpointsType;
     typedef WavetableBase<SampleType>               WavetableType;
+    typedef SignalBase<SampleType>                  SignalType;
 
     ChannelInternalBase (Inputs const& inputDictionary, 
                          BlockSize const& blockSize, 
@@ -90,6 +91,7 @@ public:
     inline const VariableType& getInputAsVariable (const int key) const throw()         { return this->getInputAs<VariableType> (key); }
     inline const BreakpointsType& getInputAsBreakpoints (const int key) const throw()   { return this->getInputAs<BreakpointsType> (key); }
     inline const WavetableType& getInputAsWavetable (const int key) const throw()       { return this->getInputAs<WavetableType> (key); }
+    inline const SignalType& getInputAsSignal (const int key) const throw()             { return this->getInputAs<SignalType> (key); }
     inline const SampleRate& getInputAsSampleRate (const int key) const throw()         { return this->getInputAs<SampleRate> (key); }
     inline const BlockSize& getInputAsBlockSize (const int key) const throw()           { return this->getInputAs<BlockSize> (key); }
 
@@ -101,6 +103,7 @@ public:
     inline VariableType& getInputAsVariable (const int key) throw()                     { return this->getInputAs<VariableType> (key); }
     inline BreakpointsType& getInputAsBreakpoints (const int key) throw()               { return this->getInputAs<BreakpointsType> (key); }
     inline WavetableType& getInputAsWavetable (const int key) throw()                   { return this->getInputAs<WavetableType> (key); }
+    inline SignalType& getInputAsSignal (const int key) throw()                         { return this->getInputAs<SignalType> (key); }
     inline SampleRate& getInputAsSampleRate (const int key) throw()                     { return this->getInputAs<SampleRate> (key); }
     inline BlockSize& getInputAsBlockSize (const int key) throw()                       { return this->getInputAs<BlockSize> (key); }
 

@@ -58,6 +58,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::RightOperand,
         IOKey::Position,
         IOKey::Frequency,
+        IOKey::Rate,
         IOKey::Q,
         IOKey::S,
         IOKey::Gain,
@@ -77,6 +78,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Busses,
         IOKey::Buffer,
         IOKey::Wavetable,
+        IOKey::Signal,
         IOKey::Breakpoints,
         IOKey::AutoDeleteFlag,
         IOKey::HarmonicCount
@@ -117,6 +119,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "Right Operand",
         "Position",
         "Frequency",
+        "Rate",
         "Q", 
         "S",
         "Gain",
@@ -139,6 +142,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "Busses",
         "Buffer",
         "Wavetable",
+        "Signal",
         "Breakpoints",
         
         "Auto Delete Flag",
@@ -166,6 +170,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeUnit,            //"RightOperand",
         IOKey::TypeUnit,            //"Position",
         IOKey::TypeUnit,            //"Frequency",
+        IOKey::TypeUnit,            //"Rate",
         IOKey::TypeUnit,            //"Q",
         IOKey::TypeUnit,            //"S",
         IOKey::TypeUnit,            //"Gain",
@@ -187,6 +192,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeBusses,          //"Busses",
         IOKey::TypeBuffer,          //"Buffer",
         IOKey::TypeWavetable,       //"Wavetable",
+        IOKey::TypeSignal,          //"Signal",
         IOKey::TypeBreakpoints,     //"Breakpoints"
         
         IOKey::TypeBool,            //"Auto Delete Flag"
@@ -214,6 +220,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Unit",             //"RightOperand",
         "Unit",             //"Position",
         "Unit",             //"Frequency",
+        "Unit",             //"Rate",
         "Unit",             //"Q",
         "Unit",             //"S",
         "Unit",             //"Gain",
@@ -235,6 +242,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Busses",           //"Busses",
         "Buffer",           //"Buffer",
         "Wavetable",        //"Wavetable",
+        "Signal",           //"Signal",
         "Breakpoints",      //"Breakpoints"
         
         "Bool",             //"Auto Delete Flag"
