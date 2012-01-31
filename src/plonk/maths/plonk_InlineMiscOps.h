@@ -55,7 +55,7 @@
  @{
  */
 
-template<class Type> inline Type clip(Type value, Type lower, Type upper) throw() { return min (max (lower, value), upper); }
+template<class Type> inline Type clip (Type const& value, Type const& lower, Type const& upper) throw() { return min (max (lower, value), upper); }
 
 inline int wrap (int value, int lower, int upper) throw()
 {
@@ -89,7 +89,7 @@ inline int wrap (int value, int lower, int upper) throw()
 }
 
 template<class Type>
-inline Type wrap (Type value, Type lower, Type upper) throw()
+inline Type wrap (Type const& value, Type const& lower, Type const& upper) throw()
 {
 	Type range;
     
@@ -123,9 +123,9 @@ inline Type wrap (Type value, Type lower, Type upper) throw()
 
 
 template<class Type>
-inline Type linlin(Type input, 
-                   Type inLow, Type inHigh,
-                   Type outLow, Type outHigh) throw()
+inline Type linlin (Type const& input, 
+                    Type const& inLow, Type const& inHigh,
+                    Type const& outLow, Type const& outHigh) throw()
 {
 	Type inRange = inHigh - inLow;
 	Type outRange = outHigh - outLow;
@@ -133,92 +133,75 @@ inline Type linlin(Type input,
 }
 
 template<class Type>
-inline Type linlin2(Type input, 
-                    Type inLow, Type inRange,
-                    Type outLow, Type outRange) throw()
+inline Type linlin2 (Type const& input, 
+                     Type const& inLow, Type const& inRange,
+                     Type const& outLow, Type const& outRange) throw()
 {
 	return (input - inLow) * outRange / inRange + outLow;
 }
 
 template<class Type>
-inline Type linsin(Type input, 
-                   Type inLow, Type inHigh,
-                   Type outLow, Type outHigh) throw()
+inline Type linsin (Type const& input, 
+                    Type const& inLow, Type const& inHigh,
+                    Type const& outLow, Type const& outHigh) throw()
 {
 	Type inRange = inHigh - inLow;
 	Type outRange = outHigh - outLow;
     
 	Type inPhase = (input - inLow) * Math<Type>::getPi() / inRange + Math<Type>::getPi();
-	Type cosInPhase = plonk::cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
+	Type cosInPhase = cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
 	
 	return cosInPhase * outRange + outLow;	
 }
 
 template<class Type>
-inline Type linsin2(Type input, 
-                    Type inLow, Type inRange,
-                    Type outLow, Type outRange) throw()
+inline Type linsin2 (Type const& input, 
+                     Type const& inLow, Type const& inRange,
+                     Type const& outLow, Type const& outRange) throw()
 {	
 	Type inPhase = (input - inLow) * Math<Type>::getPi() / inRange + Math<Type>::getPi();
-	Type cosInPhase = plonk::cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
+	Type cosInPhase = cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
 	return cosInPhase * outRange + outLow;	
 }
 
-//template<class Type>
-//inline Type linexp(Type input, 
-//                   Type inLow, Type inHigh,
-//                   Type outLow, Type outHigh) throw()
-//{
-//	Type outRatio = outHigh / outLow;
-//	Type reciprocalInRange = Type (1) / (inHigh - inLow);
-//	Type inLowOverInRange = reciprocalInRange * inLow;
-//	return outLow * plonk::pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
-//}
-//
-//template<class Type>
-//inline Type linexp2(Type input, 
-//                    Type reciprocalInRange, Type inLowOverInRange,
-//                    Type outLow, Type outRatio) throw()
-//{
-//	return outLow * plonk::pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
-//}
-
 template<class Type>
-inline Type linexp(Type input, 
-                   Type inLow, Type inHigh,
-                   Type outLow, Type outHigh) throw()
+inline Type linexp (Type const& input, 
+                    Type const& inLow, Type const& inHigh,
+                    Type const& outLow, Type const& outHigh) throw()
 {
 	Type outRatio = outHigh / outLow;
-	Type reciprocalInRange = Type (1) / (inHigh - inLow);
+	Type reciprocalInRange = Math<Type>::get1() / (inHigh - inLow);
 	Type inLowOverInRange = reciprocalInRange * inLow;
 	return outLow * pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
 }
 
 template<class Type>
-inline Type linexp2(Type input, 
-                    Type reciprocalInRange, Type inLowOverInRange,
-                    Type outLow, Type outRatio) throw()
+inline Type linexp2 (Type const& input, 
+                     Type const& reciprocalInRange, Type const& inLowOverInRange,
+                     Type const& outLow, Type const& outRatio) throw()
 {
 	return outLow * pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
 }
 
 template<class Type>
-inline Type linwelch (Type input, 
-                      Type inLow, Type inHigh,
-                      Type outLow, Type outHigh) throw()
+inline Type linwelch (Type const& input, 
+                      Type const& inLow, Type const& inHigh,
+                      Type const& outLow, Type const& outHigh) throw()
 {
 	Type inRange = inHigh - inLow;
 	Type outRange = outHigh - outLow;
 	Type inPos = (input - inLow) / inRange;
     
 	if (outLow < outHigh)
-		return outLow + outRange * plonk::sin (Math<Type>::getPi_2() * inPos);
+		return outLow + outRange * sin (Math<Type>::getPi_2() * inPos);
 	else
-		return outHigh - outRange * plonk::sin (Math<Type>::getPi_2() - Math<Type>::getPi_2() * inPos);
+		return outHigh - outRange * sin (Math<Type>::getPi_2() - Math<Type>::getPi_2() * inPos);
 }
 
 template<class Type>
-inline Type explin (Type input, Type inLow, Type inHigh, Type outLow, Type outHigh)
+inline Type explin (Type const& input, 
+                    Type const& inLow, Type const& inHigh, 
+                    Type const& outLow, Type const& outHigh)
 {
     if (input <= inLow) 
         return outLow;
@@ -226,17 +209,17 @@ inline Type explin (Type input, Type inLow, Type inHigh, Type outLow, Type outHi
     if (input >= inHigh) 
         return outHigh;
     
-    return plonk::log (input / inLow) / plonk::log (inHigh / inLow) * (outHigh - outLow) + outLow;
+    return log (input / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
 }
 
 template<class ValueType, class IndexType>
-inline ValueType lininterp (const ValueType value0, const ValueType value1, const IndexType frac) throw()
+inline ValueType lininterp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
 {
     return value0 + ValueType (frac * (value1 - value0));
 }
 
 template<class ValueType, class IndexType>
-inline ValueType lookup (const ValueType* table, const IndexType index) throw()
+inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
 {
     const int index0 = int (index);
     const int index1 = index0 + 1;

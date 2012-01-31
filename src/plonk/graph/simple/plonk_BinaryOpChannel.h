@@ -47,7 +47,7 @@ template<class SampleType>
 class BinaryOpUtility
 {
 private:
-    typedef SampleType (*Function)(SampleType,SampleType);
+    typedef SampleType (*Function)(SampleType const&,SampleType const&);
     
     BinaryOpUtility() throw()
     {
@@ -78,7 +78,7 @@ private:
     }
     
 public:
-    inline Text getName(Function function) const throw()
+    inline Text getName (Function function) const throw()
     {
         return names[function];
     }
@@ -108,10 +108,6 @@ class BinaryOpChannelInternal
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
-    /*
-     for full templating we'd need to add template params for rightop unit type
-     */
-
     typedef typename ChannelInternalCore::Data      Data;
 
     typedef ChannelBase<SampleType>                 ChannelType;

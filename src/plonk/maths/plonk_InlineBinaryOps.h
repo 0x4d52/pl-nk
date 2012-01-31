@@ -46,7 +46,7 @@
 
 //------------------------------------------------------------------------------
 
-#define BINARYOPFUNCTION(TYPE,NAME) TYPE (*NAME)(TYPE, TYPE)
+#define BINARYOPFUNCTION(TYPE,NAME) TYPE (*NAME)(TYPE const&, TYPE const&)
 
 #define BINARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the binary '##OP##' function to this one and the @e right argument. */\
@@ -104,16 +104,14 @@
         template<class RightType> inline CLASSNAME operator>=  (RightType const& right) const throw() { return binary<plonk::isGreaterThanOrEqualTo> (CLASSNAME (right)); }
 
 
-//#define BINARYOPGLOBAL(CLASSNAME,OP)\
-//    /** Create a new CLASSNAME by applying the binary '##OP##' function to the @e left and @e right inputs. */\
-//    template<class T> CLASSNAME<T> OP (CLASSNAME<T> const& left, CLASSNAME<T> const& right) throw() { return left.binary<plonk::OP> (right); }
-
-#define BINARYOPGLOBAL(CLASSNAME,OP)\
+#define PLONK_BINARYOPGLOBAL(CLASSNAME,OP)\
     /** Create a new CLASSNAME by applying the binary '##OP##' function to the @e left and @e right inputs. */\
-    template<class T> CLASSNAME<T> OP (CLASSNAME<T> const& left, CLASSNAME<T> const& right) throw() { return left.OP (right); }
+    CLASSNAME OP (CLASSNAME const& left, CLASSNAME const& right) throw() { return left.OP (right); }
 
+#define PLONK_BINARYOPGLOBAL_TEMPLATE(CLASSNAME,OP)\
+    template<class T> PLONK_BINARYOPGLOBAL(CLASSNAME<T>,OP)
 
-#define BINARYOPGLOBALS(CLASSNAME) \
+#define PLONK_BINARYOPGLOBALS_DEFINE(BINARYOPGLOBAL,CLASSNAME) \
         BINARYOPGLOBAL(CLASSNAME, addop)\
         BINARYOPGLOBAL(CLASSNAME, subop)\
         BINARYOPGLOBAL(CLASSNAME, mulop)\
@@ -139,6 +137,9 @@
         BINARYOPGLOBAL(CLASSNAME, trunc)\
         BINARYOPGLOBAL(CLASSNAME, clip2)
 
+#define PLONK_BINARYOPGLOBALS(CLASSNAME) PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME)
+#define PLONK_BINARYOPGLOBALS_TEMPLATE(CLASSNAME) PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL_TEMPLATE,CLASSNAME)
+
 
 //------------------------------------------------------------------------------
 
@@ -150,61 +151,61 @@
  */
 
 /** Convenient inline function for the '+' operator. */
-template<class Type> inline Type addop (Type a, Type b) throw() { return a + b; }
+template<class Type> inline Type addop (Type const& a, Type const& b) throw() { return a + b; }
 
 /** Convenient inline function for the '-' operator. */
-template<class Type> inline Type subop (Type a, Type b) throw() { return a - b; }
+template<class Type> inline Type subop (Type const& a, Type const& b) throw() { return a - b; }
 
 /** Convenient inline function for the '*' operator. */
-template<class Type> inline Type mulop (Type a, Type b) throw() { return a * b; }
+template<class Type> inline Type mulop (Type const& a, Type const& b) throw() { return a * b; }
 
 /** Convenient inline function for the '/' operator. */
-template<class Type> inline Type divop (Type a, Type b) throw() { return a / b; }
+template<class Type> inline Type divop (Type const& a, Type const& b) throw() { return a / b; }
 
 /** Returns 1 if the inputs are equal otherwise returns 0.  */
-template<class Type> inline Type isEqualTo              (Type a, Type b) throw()    { return (a == b) ? Type (1) : Type (0); }
+template<class Type> inline Type isEqualTo              (Type const& a, Type const& b) throw()    { return (a == b) ? Type (1) : Type (0); }
 
 /** Returns 1 if the inputs are not equal otherwise returns 0.  */
-template<class Type> inline Type isNotEqualTo           (Type a, Type b) throw()	{ return (a != b) ? Type (1) : Type (0); }
+template<class Type> inline Type isNotEqualTo           (Type const& a, Type const& b) throw()	{ return (a != b) ? Type (1) : Type (0); }
 
 /** Returns 1 if the @e a is greater than @e b otherwise returns 0.  */
-template<class Type> inline Type isGreaterThan          (Type a, Type b) throw()	{ return (a > b)  ? Type (1) : Type (0); }
+template<class Type> inline Type isGreaterThan          (Type const& a, Type const& b) throw()	{ return (a > b)  ? Type (1) : Type (0); }
 
 /** Returns 1 if the @e a is greater than or equal to @e b otherwise returns 0.  */
-template<class Type> inline Type isGreaterThanOrEqualTo (Type a, Type b) throw()	{ return (a >= b) ? Type (1) : Type (0); }
+template<class Type> inline Type isGreaterThanOrEqualTo (Type const& a, Type const& b) throw()	{ return (a >= b) ? Type (1) : Type (0); }
 
 /** Returns 1 if the @e a is less than @e b otherwise returns 0.  */
-template<class Type> inline Type isLessThan             (Type a, Type b) throw()	{ return (a < b)  ? Type (1) : Type (0); }
+template<class Type> inline Type isLessThan             (Type const& a, Type const& b) throw()	{ return (a < b)  ? Type (1) : Type (0); }
 
 /** Returns 1 if the @e a is less than or equal to @e b otherwise returns 0.  */
-template<class Type> inline Type isLessThanOrEqualTo    (Type a, Type b) throw()	{ return (a <= b) ? Type (1) : Type (0); }
+template<class Type> inline Type isLessThanOrEqualTo    (Type const& a, Type const& b) throw()	{ return (a <= b) ? Type (1) : Type (0); }
 
 /** Returns @f$ \sqrt{ a^2 + b^2 } @f$.  */
-template<class Type> inline Type hypot  (Type a, Type b) throw() { return static_cast<Type> (::hypot (double (a), double (b))); }
+template<class Type> inline Type hypot  (Type const& a, Type const& b) throw() { return static_cast<Type> (::hypot (double (a), double (b))); }
 
 /** Returns @f$ atan2(a,b) @f$.  */
-template<class Type> inline Type atan2  (Type a, Type b) throw() { return static_cast<Type> (::atan2 (double (a), double (b))); }
+template<class Type> inline Type atan2  (Type const& a, Type const& b) throw() { return static_cast<Type> (::atan2 (double (a), double (b))); }
 
 /** Returns @f$ a * a + b * b @f$.  */
-template<class Type> inline Type sumsqr (Type a, Type b) throw() { return a * a + b * b; }
+template<class Type> inline Type sumsqr (Type const& a, Type const& b) throw() { return a * a + b * b; }
 
 /** Returns @f$ a * a - b * b @f$.  */
-template<class Type> inline Type difsqr (Type a, Type b) throw() { return a * a - b * b; }
+template<class Type> inline Type difsqr (Type const& a, Type const& b) throw() { return a * a - b * b; }
 
 /** Returns @f$ (a + b) * (a + b) @f$.  */
-template<class Type> inline Type sqrsum (Type a, Type b) throw() { const Type c = a + b; return c * c; }
+template<class Type> inline Type sqrsum (Type const& a, Type const& b) throw() { const Type c = a + b; return c * c; }
 
 /** Returns @f$ (a - b) * (a - b) @f$.  */
-template<class Type> inline Type sqrdif (Type a, Type b) throw() { const Type c = a - b; return c * c; }
+template<class Type> inline Type sqrdif (Type const& a, Type const& b) throw() { const Type c = a - b; return c * c; }
 
 /** Returns the absolute difference between the input arguments.  */
-template<class Type> inline Type absdif (Type a, Type b) throw() { return abs (a - b); }
+template<class Type> inline Type absdif (Type const& a, Type const& b) throw() { return abs (a - b); }
 
 /** If @e a is less than @e b returns 0 otherwise return @e a. */
-template<class Type> inline Type thresh (Type a, Type b) throw() { return (a < b) ? Type (0) : a; }
+template<class Type> inline Type thresh (Type const& a, Type const& b) throw() { return (a < b) ? Type (0) : a; }
 
 template<class Type>
-inline Type round (Type a, Type b) throw()
+inline Type round (Type const& a, Type const& b) throw()
 {
 	const Type offset = a < Type (0) ? Type (-0.5) : Type (0.5);
 	const int n = int (a / b + offset);
@@ -212,14 +213,14 @@ inline Type round (Type a, Type b) throw()
 }
 
 template<class Type>
-inline Type trunc (Type a, Type b) throw()
+inline Type trunc (Type const& a, Type const& b) throw()
 {
 	const int n = int (a / b);
 	return b * Type (n);
 }
 
-template<class Type> inline Type clip2 (Type value, Type range) throw()		{ return clip<Type> (value, -range, range); }
-template<class Type> inline Type wrap (Type value, Type upper) throw()      { return wrap (value, Type (0), upper); }
+template<class Type> inline Type clip2 (Type const& value, Type const& range) throw()     { return clip<Type> (value, -range, range); }
+template<class Type> inline Type wrap (Type const& value, Type const& upper) throw()      { return wrap (value, Type (0), upper); }
 
 /// @}
 

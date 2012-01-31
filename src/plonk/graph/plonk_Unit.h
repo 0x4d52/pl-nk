@@ -846,8 +846,8 @@ private:
     }        
 };
 
-BINARYOPGLOBALS(UnitBase); // declares global functions with the same name as the binary operators
-UNARYOPGLOBALS(UnitBase);  // declares global functions with the same name as the unary operators
+PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase); // declares global functions with the same name as the binary operators
+PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase);  // declares global functions with the same name as the unary operators
 
 //------------------------------------------------------------------------------
 

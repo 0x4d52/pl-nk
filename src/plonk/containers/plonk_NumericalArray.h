@@ -1210,5 +1210,9 @@ public:
     }
 };
 
+PLONK_BINARYOPGLOBALS_TEMPLATE(NumericalArray); // declares global functions with the same name as the binary operators
+PLONK_UNARYOPGLOBALS_TEMPLATE(NumericalArray);  // declares global functions with the same name as the unary operators
+
+
 
 #endif // PLONK_NUMERICALARRAY_H

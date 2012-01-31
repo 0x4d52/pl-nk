@@ -47,7 +47,7 @@ template<class SampleType>
 class UnaryOpUtility
 {
 private:
-    typedef SampleType (*Function)(SampleType);
+    typedef SampleType (*Function)(SampleType const&);
     
     UnaryOpUtility() throw()
     {

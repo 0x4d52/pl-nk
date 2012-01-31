@@ -47,28 +47,21 @@
 
 /** Returns the absolute of the input argument. 
  @ingroup PlonkUnaryOpFunctions*/
-template<class Type> inline Type abs (Type a) throw() { return (a < Type (0)) ? -a : a; }
+template<class Type> inline Type abs (Type const& a) throw() { return (a < Type (0)) ? -a : a; }
 
 // common binary
 
 /** Returns minimum of @e a and @e b. 
  @ingroup PlonkBinaryOpFunctions*/
-template<class Type> inline Type min (Type a, Type b) throw() { return (a > b) ? b : a; }
+template<class Type> inline Type min (Type const& a, Type const& b) throw() { return (a > b) ? b : a; }
 
 /** Returns maximum of @e a and @e b. 
  @ingroup PlonkBinaryOpFunctions*/
-template<class Type> inline Type max (Type a, Type b) throw() { return (a < b) ? b : a; }
+template<class Type> inline Type max (Type const& a, Type const& b) throw() { return (a < b) ? b : a; }
 
 /** Returns @e a raised to the power @e b. 
  @ingroup PlonkBinaryOpFunctions*/
-template<class Type> inline Type pow (Type a, Type b) throw() { return ::pow ((double)a, (double)b);    }
-
-//inline float pow (float a, float b) throw() { return ::powf (a, b);    }
-//inline double pow (double a, double b) throw() { return ::pow (a, b);    }
-//inline int pow (int a, int b) throw() { return ::pow (double (a), double (b));    }
-//inline short pow (short a, short b) throw() { return ::pow (double (a), double (b));    }
-//inline Long pow (Long a, Long b) throw() { return ::pow (double (a), double (b));    }
-//template<class Type> inline Type pow (Type const& a, Type const& b) throw() { return a.pow (b);    }
+template<class Type> inline Type pow (Type const& a, Type const& b) throw() { return ::pow ((double)a, (double)b);    }
 
 
 
