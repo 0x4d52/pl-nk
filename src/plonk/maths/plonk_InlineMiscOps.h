@@ -198,19 +198,29 @@ inline Type linwelch (Type const& input,
 		return outHigh - outRange * sin (Math<Type>::getPi_2() - Math<Type>::getPi_2() * inPos);
 }
 
+//template<class Type>
+//inline Type explin (Type const& input, 
+//                    Type const& inLow, Type const& inHigh, 
+//                    Type const& outLow, Type const& outHigh)
+//{
+//    if (input <= inLow) 
+//        return outLow;
+//    
+//    if (input >= inHigh) 
+//        return outHigh;
+//    
+//    return log (input / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
+//}
+
 template<class Type>
 inline Type explin (Type const& input, 
                     Type const& inLow, Type const& inHigh, 
                     Type const& outLow, Type const& outHigh)
-{
-    if (input <= inLow) 
-        return outLow;
-    
-    if (input >= inHigh) 
-        return outHigh;
-    
-    return log (input / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
+{    
+    Type clipped = clip (input, inLow, inHigh);
+    return log (clipped / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
 }
+
 
 template<class ValueType, class IndexType>
 inline ValueType lininterp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()

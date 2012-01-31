@@ -886,14 +886,14 @@ private:
 PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase); // declares global functions with the same name as the binary operators
 PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase);  // declares global functions with the same name as the unary operators
 
-template<class SampleType>
-inline UnitBase<SampleType> explin (UnitBase<SampleType> const& input, 
-                                    UnitBase<SampleType> const& inLow, UnitBase<SampleType> const& inHigh, 
-                                    UnitBase<SampleType> const& outLow, UnitBase<SampleType> const& outHigh)
-{
-    const UnitBase<SampleType> clipped (input.clip (input, inLow, inHigh));
-    return log (clipped / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
-}
+//template<class SampleType>
+//inline UnitBase<SampleType> explin (UnitBase<SampleType> const& input, 
+//                                    UnitBase<SampleType> const& inLow, UnitBase<SampleType> const& inHigh, 
+//                                    UnitBase<SampleType> const& outLow, UnitBase<SampleType> const& outHigh) throw()
+//{
+//    const UnitBase<SampleType> clipped (clip (input, inLow, inHigh));
+//    return log (clipped / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
+//}
 
 
 //------------------------------------------------------------------------------
