@@ -214,17 +214,24 @@ public:
         return *this;
     }
     
+//    inline AtomicValue& operator= (void* other) throw() 
+//    {
+//        plonk_assert (other == 0);
+//        pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (other));
+//        return *this;
+//    }    
+    
     inline AtomicValue& operator= (Type* other) throw() 
     {
         pl_AtomicP_Set (getAtomicRef(), other);
         return *this;
     }    
     
-    inline AtomicValue& operator= (const Type* other) throw() 
-    {
-        pl_AtomicP_Set (getAtomicRef(), const_cast<Type*> (other));
-        return *this;
-    }        
+//    inline AtomicValue& operator= (const Type* other) throw() 
+//    {
+//        pl_AtomicP_Set (getAtomicRef(), const_cast<Type*> (other));
+//        return *this;
+//    }        
         
     inline bool compareAndSwap (const Type* oldValue, const Type* newValue) throw() 
     {
@@ -246,13 +253,20 @@ public:
     inline operator const Type* () const throw()        { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
     inline operator Type* () const throw()              { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
     
-    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValue() == other; }
-    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValue() != other; }
-    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValue() <  other; }
-    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValue() <= other; }
-    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValue() >  other; }
-    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValue() >= other; }
-    
+//    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValue() == other; }
+//    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValue() != other; }
+//    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValue() <  other; }
+//    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValue() <= other; }
+//    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValue() >  other; }
+//    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValue() >= other; }
+
+    bool operator== (const Type* other) const throw() { return this->getValue() == other; }
+    bool operator!= (const Type* other) const throw() { return this->getValue() != other; }
+    bool operator<  (const Type* other) const throw() { return this->getValue() <  other; }
+    bool operator<= (const Type* other) const throw() { return this->getValue() <= other; }
+    bool operator>  (const Type* other) const throw() { return this->getValue() >  other; }
+    bool operator>= (const Type* other) const throw() { return this->getValue() >= other; }
+
     inline AtomicValue& operator+= (const Long operand) throw() 
     { 
         pl_AtomicP_Add (getAtomicRef(), operand * AtomicValue::incrementSize()); 
@@ -340,17 +354,24 @@ public:
         return *this;
     }
     
+//    inline AtomicExtended& operator= (void* other) throw() 
+//    {
+//        plonk_assert (other == 0);
+//        pl_AtomicPX_Set (getAtomicRef(), static_cast<Type*> (other));
+//        return *this;
+//    }    
+//    
     inline AtomicExtended& operator= (Type* other) throw() 
     {
         pl_AtomicPX_Set (getAtomicRef(), other);
         return *this;
     }    
-    
-    inline AtomicExtended& operator= (const Type* other) throw() 
-    {
-        pl_AtomicPX_Set (getAtomicRef(), const_cast<Type*> (other));
-        return *this;
-    }        
+//    
+//    inline AtomicExtended& operator= (const Type* other) throw() 
+//    {
+//        pl_AtomicPX_Set (getAtomicRef(), const_cast<Type*> (other));
+//        return *this;
+//    }        
     
     inline void setAll (const Type* other, const Long extra) throw() 
     { 
@@ -383,13 +404,20 @@ public:
     inline operator Type* () const throw()              { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
     inline Long getExtra() const throw()                { return pl_AtomicPX_GetExtra (getAtomicRef()); }
     
-    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValue() == other; }
-    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValue() != other; }
-    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValue() <  other; }
-    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValue() <= other; }
-    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValue() >  other; }
-    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValue() >= other; }
+//    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValue() == other; }
+//    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValue() != other; }
+//    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValue() <  other; }
+//    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValue() <= other; }
+//    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValue() >  other; }
+//    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValue() >= other; }
     
+    bool operator== (const Type* other) const throw() { return this->getValue() == other; }
+    bool operator!= (const Type* other) const throw() { return this->getValue() != other; }
+    bool operator<  (const Type* other) const throw() { return this->getValue() <  other; }
+    bool operator<= (const Type* other) const throw() { return this->getValue() <= other; }
+    bool operator>  (const Type* other) const throw() { return this->getValue() >  other; }
+    bool operator>= (const Type* other) const throw() { return this->getValue() >= other; }
+
     inline AtomicExtended& operator+= (const Long operand) throw() 
     { 
         pl_AtomicPX_Add (getAtomicRef(), operand * AtomicExtended::incrementSize()); 

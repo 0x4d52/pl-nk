@@ -53,109 +53,6 @@
  (which is a subclass of SmartPointer) and 'external' (which is a subclass of 
  SmartPointerContainer) representation. 
  @see SenderContainer */
-//template<class SmartPointerType>
-//class SmartPointerContainerBase
-//{
-//public:         
-//    typedef SmartPointerType Internal;
-//    
-//	SmartPointerContainerBase (SmartPointerType* internalToUse = 0) throw() 
-//	:	internal (internalToUse)
-//	{
-//        if (internal.getPtr() != 0)
-//            internal.getPtr()->incrementRefCount();
-//	}
-//    
-//	~SmartPointerContainerBase()
-//	{        
-//		if (internal.getPtr() != 0) 
-//			internal.getPtr()->decrementRefCount();
-//		
-//		internal.setPtr (0);        
-//	}
-//    
-//	inline SmartPointerType* getInternal() throw() 
-//	{
-//		return internal.getPtr();
-//	}
-//	
-//	inline SmartPointerType* operator->() throw() 
-//	{
-//		return internal.getPtr();
-//	}
-//	
-//	inline const SmartPointerType* getInternal() const throw() 
-//	{
-//		return internal.getPtr();
-//	}
-//    
-//	inline const SmartPointerType* operator->() const throw() 
-//	{
-//		return internal.getPtr();
-//	}
-//    
-//    SmartPointerContainerBase containerCopy() const throw()
-//    {
-//        return *this;
-//    }
-//    
-//	bool isNull() const throw()
-//	{
-//		return internal.getPtr() == 0;
-//	}
-//	
-//	bool isNotNull() const throw()
-//	{
-//		return internal.getPtr() != 0;
-//	}
-//	
-//	inline void setInternal (SmartPointerType* newInternal) throw()
-//	{
-//        if (newInternal != 0)
-//            newInternal->incrementRefCount();
-//        
-//        if (internal != 0)
-//            internal.getPtr()->decrementRefCount();
-//        
-//        internal.setPtr (newInternal);        
-//	}
-//    
-//    void swapWith (SmartPointerContainerBase const& other) throw()
-//    {
-//        const Internal* const otherInternal = other.internal.getPtr();
-//        other.internal.setPtr (internal.getPtr());
-//        internal.setPtr (otherInternal);
-//    }
-//	
-//	SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
-//	:	internal (copy.internal)
-//	{
-//		if (internal != 0) 
-//            internal.getPtr()->incrementRefCount();
-//	}
-//    
-//	SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
-//	{
-//		if (this != &other)
-//            this->setInternal (other.internal);
-//		
-//		return *this;		
-//	}    
-//    
-//	bool operator== (SmartPointerContainerBase const& other) const throw()
-//	{
-//		return internal.getPtr() == other.internal.getPtr();
-//	}
-//	
-//	bool operator!= (SmartPointerContainerBase const& other) const throw()
-//	{
-//		return internal.getPtr() != other.internal.getPtr();
-//	}
-//    
-//private:
-//	AtomicExtended<SmartPointerType*> internal;
-//};
-
 template<class SmartPointerType>
 class SmartPointerContainerBase
 {
@@ -255,9 +152,9 @@ public:
 		return internal != other.internal;
 	}
     
-	
 private:
-	SmartPointerType* internal;
+    //AtomicValue<SmartPointerType*> internal;
+    SmartPointerType* internal;
 };
 
 
