@@ -476,7 +476,10 @@ public:
     UnitBase linlin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
-        return plonk::linlin (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
+        const SampleType peak2peak (peak * Math<SampleType>::get2());
+        return plonk::linlin2 (*this, 
+                               UnitBase (-peak), UnitBase (peak2peak), 
+                               outLow, (outHigh - outLow));
     }
     
     UnitBase linexp (UnitBase const& inLow, UnitBase const& inHigh, 
@@ -488,7 +491,35 @@ public:
     UnitBase linexp (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
-        return plonk::linexp (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
+        const SampleType peak2peak (peak * Math<SampleType>::get2());
+        const SampleType reciprocalInRange (plonk::reciprocal (peak2peak));
+        return plonk::linexp (*this, 
+                              UnitBase (reciprocalInRange), UnitBase (-peak * reciprocalInRange ), 
+                              outLow, (outHigh / outLow));
+    }
+    
+    UnitBase linsin (UnitBase const& inLow, UnitBase const& inHigh, 
+                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        return plonk::linsin (*this, inLow, inHigh, outLow, outHigh);
+    }
+    
+    UnitBase linsin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        const SampleType peak (TypeUtility<SampleType>::getTypePeak());
+        return plonk::linsin (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
+    }
+    
+    UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
+                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        return plonk::linwelch (*this, inLow, inHigh, outLow, outHigh);
+    }
+    
+    UnitBase linwelch (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        const SampleType peak (TypeUtility<SampleType>::getTypePeak());
+        return plonk::linwelch (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
     }
         
     const UnitArray operator<< (UnitType const& other) const throw()   { return UnitArray (*this, other); }

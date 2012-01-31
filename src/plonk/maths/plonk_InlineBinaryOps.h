@@ -163,22 +163,22 @@ template<class Type> inline Type mulop (Type const& a, Type const& b) throw() { 
 template<class Type> inline Type divop (Type const& a, Type const& b) throw() { return a / b; }
 
 /** Returns 1 if the inputs are equal otherwise returns 0.  */
-template<class Type> inline Type isEqualTo              (Type const& a, Type const& b) throw()    { return (a == b) ? Type (1) : Type (0); }
+template<class Type> inline Type isEqualTo              (Type const& a, Type const& b) throw()  { return (a == b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the inputs are not equal otherwise returns 0.  */
-template<class Type> inline Type isNotEqualTo           (Type const& a, Type const& b) throw()	{ return (a != b) ? Type (1) : Type (0); }
+template<class Type> inline Type isNotEqualTo           (Type const& a, Type const& b) throw()	{ return (a != b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is greater than @e b otherwise returns 0.  */
-template<class Type> inline Type isGreaterThan          (Type const& a, Type const& b) throw()	{ return (a > b)  ? Type (1) : Type (0); }
+template<class Type> inline Type isGreaterThan          (Type const& a, Type const& b) throw()	{ return (a > b)  ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is greater than or equal to @e b otherwise returns 0.  */
-template<class Type> inline Type isGreaterThanOrEqualTo (Type const& a, Type const& b) throw()	{ return (a >= b) ? Type (1) : Type (0); }
+template<class Type> inline Type isGreaterThanOrEqualTo (Type const& a, Type const& b) throw()	{ return (a >= b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is less than @e b otherwise returns 0.  */
-template<class Type> inline Type isLessThan             (Type const& a, Type const& b) throw()	{ return (a < b)  ? Type (1) : Type (0); }
+template<class Type> inline Type isLessThan             (Type const& a, Type const& b) throw()	{ return (a < b)  ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns 1 if the @e a is less than or equal to @e b otherwise returns 0.  */
-template<class Type> inline Type isLessThanOrEqualTo    (Type const& a, Type const& b) throw()	{ return (a <= b) ? Type (1) : Type (0); }
+template<class Type> inline Type isLessThanOrEqualTo    (Type const& a, Type const& b) throw()	{ return (a <= b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
 /** Returns @f$ \sqrt{ a^2 + b^2 } @f$.  */
 template<class Type> inline Type hypot  (Type const& a, Type const& b) throw() { return static_cast<Type> (::hypot (double (a), double (b))); }
@@ -187,27 +187,27 @@ template<class Type> inline Type hypot  (Type const& a, Type const& b) throw() {
 template<class Type> inline Type atan2  (Type const& a, Type const& b) throw() { return static_cast<Type> (::atan2 (double (a), double (b))); }
 
 /** Returns @f$ a * a + b * b @f$.  */
-template<class Type> inline Type sumsqr (Type const& a, Type const& b) throw() { return a * a + b * b; }
+template<class Type> inline Type sumsqr (Type const& a, Type const& b) throw() { return squared (a) + squared (b); }
 
 /** Returns @f$ a * a - b * b @f$.  */
-template<class Type> inline Type difsqr (Type const& a, Type const& b) throw() { return a * a - b * b; }
+template<class Type> inline Type difsqr (Type const& a, Type const& b) throw() { return squared (a) - squared (b);  }
 
 /** Returns @f$ (a + b) * (a + b) @f$.  */
-template<class Type> inline Type sqrsum (Type const& a, Type const& b) throw() { const Type c = a + b; return c * c; }
+template<class Type> inline Type sqrsum (Type const& a, Type const& b) throw() { const Type c (a + b); return squared (c); }
 
 /** Returns @f$ (a - b) * (a - b) @f$.  */
-template<class Type> inline Type sqrdif (Type const& a, Type const& b) throw() { const Type c = a - b; return c * c; }
+template<class Type> inline Type sqrdif (Type const& a, Type const& b) throw() { const Type c (a - b); return squared (c); }
 
 /** Returns the absolute difference between the input arguments.  */
 template<class Type> inline Type absdif (Type const& a, Type const& b) throw() { return abs (a - b); }
 
 /** If @e a is less than @e b returns 0 otherwise return @e a. */
-template<class Type> inline Type thresh (Type const& a, Type const& b) throw() { return (a < b) ? Type (0) : a; }
+template<class Type> inline Type thresh (Type const& a, Type const& b) throw() { return (a < b) ? Math<Type>::get0() : a; }
 
 template<class Type>
 inline Type round (Type const& a, Type const& b) throw()
 {
-	const Type offset = a < Type (0) ? Type (-0.5) : Type (0.5);
+	const Type offset = a < Math<Type>::get0() ? Math<Type>::get_0_5() : Math<Type>::get0_5();
 	const int n = int (a / b + offset);
 	return b * Type (n);
 }
@@ -220,7 +220,7 @@ inline Type trunc (Type const& a, Type const& b) throw()
 }
 
 template<class Type> inline Type clip2 (Type const& value, Type const& range) throw()     { return clip<Type> (value, -range, range); }
-template<class Type> inline Type wrap (Type const& value, Type const& upper) throw()      { return wrap (value, Type (0), upper); }
+template<class Type> inline Type wrap (Type const& value, Type const& upper) throw()      { return wrap (value, Math<Type>::get0(), upper); }
 
 /// @}
 

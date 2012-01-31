@@ -42,9 +42,9 @@
 #include "plonk_Constants.h"
 #include "plonk_InlineUnaryOps.h"
 
-#define TERNARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE,TYPE,TYPE)
-#define QUATERNARYOPFUNCTION(TYPE,NAME)    TYPE (*NAME)(TYPE,TYPE,TYPE,TYPE)
-#define QUINARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE,TYPE,TYPE,TYPE,TYPE)
+#define TERNARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&)
+#define QUATERNARYOPFUNCTION(TYPE,NAME)    TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&)
+#define QUINARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&, TYPE const&)
 
 //------------------------------------------------------------------------------
 

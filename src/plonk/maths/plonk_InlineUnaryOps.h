@@ -161,7 +161,7 @@ template<class Type> inline Type log2 (Type const& a) throw()          { return 
 template<class Type> inline Type neg (Type const& a) throw()           { return -a; }
 
 /** Returns the reciprocal of the input argument (i.e, @f$ \frac{1}{a} @f$). */
-template<class Type> inline Type reciprocal (Type const& a) throw()    { return Type (1) / a; }
+template<class Type> inline Type reciprocal (Type const& a) throw()    { return Math<Type>::get1() / a; }
 
 /** Returns the sine of the input argument. */
 template<class Type> inline Type sin (Type const& a) throw()           { return static_cast<Type> (::sin (double (a))); }
@@ -202,12 +202,6 @@ template<class Type> inline Type log10 (Type const& a) throw()         { return 
 /** Returns the exponent of the input argument. */
 template<class Type> inline Type exp (Type const& a) throw()           { return static_cast<Type> (::exp (double (a))); }
 
-/** Returns the input argument squared. */
-template<class Type> inline Type squared (Type const& a) throw()       { return a * a; }
-
-/** Returns the input argument cubed. */
-template<class Type> inline Type cubed (Type const& a) throw()         { return a * a * a;	}
-
 /** Returns the input argument rounded up to the next highest integer. */
 template<class Type> inline Type ceil (Type const& a) throw()          { const long n = long (a); return Type (n + 1); }
 
@@ -227,10 +221,10 @@ template<class Type> inline Type m2f (Type const& a) throw()           { return 
 template<class Type> inline Type f2m (Type const& a) throw()           { return log2 (a * Math<Type>::get1_440()) * Math<Type>::get12() + Math<Type>::get69(); }
 
 /** Returns the input argument converted from linear amplitude to decibels where 0dB is an amplitude of 1. */
-template<class Type> inline Type a2dB (Type const& amp) throw()        { return log10 (amp) * Type (20); }
+template<class Type> inline Type a2dB (Type const& amp) throw()        { return log10 (amp) * Math<Type>::get20(); }
 
 /** Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1. */
-template<class Type> inline Type dB2a (Type const& db) throw()         { return pow (Type (10), db / Type (20)); }
+template<class Type> inline Type dB2a (Type const& db) throw()         { return pow (Math<Type>::get10(), db / Math<Type>::get20()); }
 
 /** Returns the input argument converted from degrees to radians. */
 template<class Type> inline Type d2r (Type const& deg) throw()         { return deg * Math<Type>::get1_360() * Math<Type>::get2Pi(); }
@@ -246,8 +240,10 @@ template<class Type> inline Type distort (Type const& a) throw()       { return 
 template<class Type>
 inline Type zap (Type const& x) throw()
 {
+    static const Type min (1e-15);
+    static const Type max (1e15);
     const Type absx = abs (x);
-    return (absx > Type (1e-15) && absx < Type (1e15)) ? x : Type (0);
+    return ((absx > min) && (absx < max)) ? x : Math<Type>::get0();
 }
 
 /// @}

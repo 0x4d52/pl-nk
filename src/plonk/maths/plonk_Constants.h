@@ -51,9 +51,11 @@ public:
     static const Type& get2() throw()          { static const Type v (2); return v; }
     static const Type& get4() throw()          { static const Type v (4); return v; }
     static const Type& get10() throw()         { static const Type v (10); return v; }
+    static const Type& get20() throw()         { static const Type v (20); return v; }
 
     static const Type& get_1() throw()         { static const Type v (-1); return v; }
     static const Type& get0_5() throw()        { static const Type v (0.5); return v; }
+    static const Type& get_0_5() throw()       { static const Type v (-0.5); return v; }
     static const Type& get0_25() throw()       { static const Type v (0.25); return v; }
     static const Type& get1_5() throw()        { static const Type v (1.5); return v; }
     

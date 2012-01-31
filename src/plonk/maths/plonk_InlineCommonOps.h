@@ -47,7 +47,7 @@
 
 /** Returns the absolute of the input argument. 
  @ingroup PlonkUnaryOpFunctions*/
-template<class Type> inline Type abs (Type const& a) throw() { return (a < Type (0)) ? -a : a; }
+template<class Type> inline Type abs (Type const& a) throw() { return (a < Math<Type>::get0()) ? -a : a; }
 
 // common binary
 
@@ -63,6 +63,11 @@ template<class Type> inline Type max (Type const& a, Type const& b) throw() { re
  @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type pow (Type const& a, Type const& b) throw() { return ::pow ((double)a, (double)b);    }
 
+/** Returns the input argument squared. */
+template<class Type> inline Type squared (Type const& a) throw()       { return a * a; }
+
+/** Returns the input argument cubed. */
+template<class Type> inline Type cubed (Type const& a) throw()         { return a * a * a;	}
 
 
 #endif // PLONK_INLINECOMMONOPS_H
