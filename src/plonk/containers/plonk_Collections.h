@@ -230,7 +230,7 @@ public:
 
 		int index = keys.indexOf (key);
 		
-		if(index >= 0)
+		if (index >= 0)
 		{
 			ValueType oldValue = values[index];
 			values.put (index, value);
@@ -342,7 +342,7 @@ public:
 		
 		const int index = keys.indexOf (key);
 		
-		if(index >= 0)
+		if (index >= 0)
 		{
 			ValueType removed = values[index];
 			keys.remove (index);

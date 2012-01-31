@@ -73,7 +73,7 @@ public:
     
     ~SmartPointerCounter()
     {        
-        for(int i = allocations->size(); --i >= 0;)
+        for (int i = allocations->size(); --i >= 0;)
         {
             SmartPointer* p = allocations->getArray()[i];
             (void)p;
@@ -133,7 +133,7 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
 #if DEBUG_SmartPointer
     SmartPointerCounter::global().add (this);
     
-    if((long)this == 0) 
+    if ((long)this == 0) 
     {
         printf("stop\n");
     }
@@ -141,7 +141,7 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
   #if DEBUB_SmartPointerLog
 	printf("+++++++, %p, %d\n", this, SmartPointerCounter::global().size());
     
-    if(SmartPointerCounter::global().size() == -1)
+    if (SmartPointerCounter::global().size() == -1)
     {
         printf("stop\n");
     }

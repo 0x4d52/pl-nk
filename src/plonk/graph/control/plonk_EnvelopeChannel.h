@@ -127,7 +127,7 @@ public:
 
             plonk_assert (index >= 0);
             
-            if(index >= breakpoints.getNumBreakpoints())
+            if (index >= breakpoints.getNumBreakpoints())
             {
                 // finished...
                 data.targetPointIndex = breakpoints.getNumBreakpoints();

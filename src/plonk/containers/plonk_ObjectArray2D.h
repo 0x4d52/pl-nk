@@ -96,7 +96,7 @@ private:
 	static int countValidInitialisers (RowType const& i03) throw()
 	{
 		int size = 3;
-		if(i03.length() > 0) size++; else return size;
+		if (i03.length() > 0) size++; else return size;
 		return size;
 	}	
     
@@ -535,7 +535,7 @@ public:
 	{
 		if (columns > 0 && rows > 0)
 		{
-			for(int i = 0; i < rows; i++)
+			for (int i = 0; i < rows; i++)
 			{
 				this->put (i, RowType (columns, false));
 			}

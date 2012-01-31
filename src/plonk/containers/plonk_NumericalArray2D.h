@@ -203,7 +203,7 @@ public:
 		{
 			for (int row = 0; row < this->size(); ++row)
 			{
-				if(prefix) std::cout << prefix;
+				if (prefix) std::cout << prefix;
 				
 				std::cout << "[" << row << "]: ";
 								

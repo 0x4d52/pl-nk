@@ -183,7 +183,7 @@ public:
     
     template<template <typename> class OtherUnitType, class OtherSampleType>
     UnitBase (OtherUnitType<OtherSampleType> const& other)
-    :   UnitType (TypeUnit<SampleType,OtherSampleType>::ar (other)) // should be ar?? yes because really ar here just means "original rate"
+    :   UnitType (TypeUnit<SampleType,OtherSampleType>::ar (other))
     {
     }
     
@@ -467,12 +467,14 @@ public:
     PLONK_BINARYOPS(UnitBase);
     PLONK_UNARYOPS(UnitBase);
     
+    /** Linear to linear mapping. */
     UnitBase linlin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linlin (*this, inLow, inHigh, outLow, outHigh);
     }
     
+    /** Linear to linear mapping assuming the input is in the range -1...+1. */
     UnitBase linlin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
@@ -482,12 +484,16 @@ public:
                                outLow, (outHigh - outLow));
     }
     
+    /** Linear to exponential mapping. 
+     Note that the output range must not cross or meet zero. */
     UnitBase linexp (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linexp (*this, inLow, inHigh, outLow, outHigh);
     }
     
+    /** Linear to exponential mapping assuming the input is in the range -1...+1. 
+     Note that the output range must not cross or meet zero. */
     UnitBase linexp (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
@@ -498,45 +504,55 @@ public:
                                outLow, (outHigh / outLow));
     }
     
+    /** Linear to sinusoidal mapping. */
     UnitBase linsin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linsin (*this, inLow, inHigh, outLow, outHigh);
     }
     
+    /** Linear to sinusoidal mapping assuming the input is in the range -1...+1. */
     UnitBase linsin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         return plonk::linsin2 (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
     }
     
+    /** Linear to Welch curve mapping. */
     UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linwelch (*this, inLow, inHigh, outLow, outHigh);
     }
     
+    /** Linear to Welch curve mapping assuming the input is in the range -1...+1. */
     UnitBase linwelch (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         return plonk::linwelch (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
     }
     
+    /** Exponential to linear mapping. 
+     Note that the intput range must not cross or meet zero. */
     UnitBase explin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::explin (*this, inLow, inHigh, outLow, outHigh);
     }
         
+    /** Create a array of units by concatenation. */
     const UnitArray operator<< (UnitType const& other) const throw()   { return UnitArray (*this, other); }
+    
+    /** Create a array of units by concatenation. */
 	const UnitArray operator<< (UnitBase const& other) const throw()   { return UnitArray (*this, other); }
     
+    /** Concatenate. */
     UnitBase operator, (UnitType const& other) const throw();
     UnitBase operator, (UnitBase const& other) const throw();
     
     /** Enables a custom name to be set.
      This conventiently returns this unit so it can be used in nested graph construction functions. */
-    UnitBase& setLabel(Text const& unitId) throw()
+    UnitBase& setLabel (Text const& unitId) throw()
     {
         const int numChannels = this->getNumChannels();
         ChannelType* channels = this->getArray();
@@ -570,6 +586,8 @@ public:
      channel has in turn stripped out the other multiple channels during the process. */    
     UnitBase operator[] (const int index) const throw() { return this->getChannel (index); }
     
+    /** Set a particular channel.
+     Note that the input channel here must contain only one channel. */
     UnitBase& put (const int index, UnitBase const& channel) throw()
     {
         plonk_assert (channel.getNumChannels() == 1); // channel MUST be only a single channel

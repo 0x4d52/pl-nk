@@ -86,7 +86,7 @@ public:
     {
         WeakPointer* weakPointer = this->getInternal();
         
-        if(weakPointer != 0)
+        if (weakPointer != 0)
             weakPointer->setWeakPointer (smartPointer);
     }
     

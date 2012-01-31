@@ -643,7 +643,7 @@ private:
 	static int countValidInitialisers (InitialNumber const& i03) throw()
 	{
 		int size = 3;
-		if(i03.valid) size++; else return size;
+		if (i03.valid) size++; else return size;
 		return size;
 	}	
 
@@ -872,9 +872,7 @@ public:
 		if (i30.valid) thisArray[30] = i30.value; else return;
 		if (i31.valid) thisArray[31] = i31.value; else return;
 	}
-	
-	// perhaps use a var args thing for more than 32, with an END tag at the end of the list?
-	
+		
 	NumericalArray& operator= (ObjectArray<NumericalType> const& other) throw()
 	{
 		return operator= (static_cast<NumericalArray const&> (other) );
@@ -1044,7 +1042,7 @@ public:
             
             for (int i = 1; i < length; ++i)
             {
-                if(array[i] > currentMax)
+                if (array[i] > currentMax)
                 {
                     currentMax = array[i];
                     index = i;
@@ -1073,7 +1071,7 @@ public:
             
             for (int i = 1; i < length; ++i)
             {
-                if(array[i] < currentMin)
+                if (array[i] < currentMin)
                 {
                     currentMin = array[i];
                     index = i;
@@ -1190,7 +1188,7 @@ public:
 		}
 		else
 		{
-			for(i = 0; i < this->size(); i++)
+			for (i = 0; i < this->size(); i++)
 			{
 				if (prefix) std::cout << prefix;
 				

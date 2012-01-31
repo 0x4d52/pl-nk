@@ -278,7 +278,7 @@ public:
 		
 		ObjectArray<ObjectType> result (length, false);
 		
-		for(int i = 0; i < length; ++i)
+		for (int i = 0; i < length; ++i)
 			result.put (i, ObjectType (collection1.wrapAt (i), 
 								 	   collection2.wrapAt (i),
 									   collection3.wrapAt (i),
@@ -314,7 +314,7 @@ private:
 	static int countValidInitialisers (InitialObject const& i03) throw()
 	{
 		int size = 3;
-		if(i03.valid) size++; else return size;
+		if (i03.valid) size++; else return size;
 		return size;
 	}	
 	
@@ -581,7 +581,7 @@ public:
 					array[newIndex++] = arrayPtr1[i];
 				}
 				
-				if(eitherNullTerminated)
+				if (eitherNullTerminated)
 					array[newIndex] = getNullObject();
 			}
 		}
@@ -746,7 +746,7 @@ public:
 			resultArray[i] = index < 0 || index >= thisSize ? getNullObject() : thisArray[index];
 		}
 		
-		if(needsNull)
+		if (needsNull)
 			resultArray[length] = getNullObject();
 		
 		return result;
@@ -798,7 +798,7 @@ public:
 	 the item at index 2, if the index is -1 the item returned will be at index 9 and so on. */		
 	ObjectType& wrapAt (const int index) throw()
 	{
-		if(this->getInternal()->size() == 0) { return getNullObject(); }
+		if (this->getInternal()->size() == 0) { return getNullObject(); }
 		
 		int indexToUse = index;
 		while (indexToUse < 0)
@@ -813,10 +813,10 @@ public:
 	 the item at index 2, if the index is -1 the item returned will be at index 9 and so on. */			
 	const ObjectType& wrapAt (const int index) const throw()
 	{
-		if(this->getInternal()->size() == 0) { return getNullObject(); }
+		if (this->getInternal()->size() == 0) { return getNullObject(); }
 		
 		int indexToUse = index;
-		while(indexToUse < 0)
+		while (indexToUse < 0)
 			indexToUse += this->size();
 		
 		return this->getArray()[(unsigned int)indexToUse % (unsigned int)this->size()];
@@ -1014,7 +1014,7 @@ public:
 		const int size = this->size();
         
 		for (int i = 0; i < size; ++i)
-			if(thisArray[i] != otherArray[i])
+			if (thisArray[i] != otherArray[i])
 				return false;
 		
 		return true;
@@ -1116,7 +1116,7 @@ public:
 		const ObjectType *array = this->getArray();
 		const ObjectType *items = itemsToSearchFor.getArray();
 
-		if(array != 0 && items != 0)
+		if (array != 0 && items != 0)
 		{
 			const int length = this->length();
 			int itemsToFind = itemsToSearchFor.length();
@@ -1269,7 +1269,7 @@ public:
 	/** Remove several items in-place. */
 	ObjectArray<ObjectType>& removeItems (ObjectArray<ObjectType> const& items) throw()
 	{
-		for(int i = 0; i < items.length(); i++)
+		for (int i = 0; i < items.length(); i++)
 			this->removeItem (items[i]);
 		
 		return *this;
@@ -1280,7 +1280,7 @@ public:
 	{
 		const int length = this->length();
         
-		if(length == 0) 
+		if (length == 0) 
             return ObjectArray<ObjectType>();
 		
 		const int groupSizeChecked = groupSize < 1 ? 1 : groupSize;

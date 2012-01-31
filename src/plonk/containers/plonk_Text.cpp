@@ -251,7 +251,7 @@ Text Text::toUpper() const throw()
 	{
 		char c = thisArray[i];
 		
-		if(c >= 'a' && c <= 'z')
+		if (c >= 'a' && c <= 'z')
 			c -= 32;
 		
 		newArray[i] = c;
