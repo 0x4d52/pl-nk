@@ -101,9 +101,9 @@ public:
         UnitType& param1Unit = this->getInputAsUnit (inputKeys.atUnchecked (1));
         UnitType& param2Unit = this->getInputAsUnit (inputKeys.atUnchecked (2));
         
-        plonk_assert (param0Unit.getOverlap (0) == DoubleVariable::getOne());
-        plonk_assert (param1Unit.getOverlap (0) == DoubleVariable::getOne());
-        plonk_assert (param2Unit.getOverlap (0) == DoubleVariable::getOne());
+        plonk_assert (param0Unit.getOverlap (0) == Math<DoubleVariable>::get1());
+        plonk_assert (param1Unit.getOverlap (0) == Math<DoubleVariable>::get1());
+        plonk_assert (param2Unit.getOverlap (0) == Math<DoubleVariable>::get1());
 
         if ((channel % this->getNumChannels()) == 0)
         {

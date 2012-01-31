@@ -44,48 +44,48 @@
 
 //------------------------------------------------------------------------------
 
-#define UNARYOPFUNCTION(TYPE,NAME) TYPE (*NAME)(TYPE const&)
+#define PLONK_UNARYOPFUNCTION(TYPE,NAME) TYPE (*NAME)(TYPE const&)
 
-#define UNARYOP(CLASSNAME, OP) \
+#define PLONK_UNARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the unary '##OP##' function to this one. */\
         inline CLASSNAME OP() const throw() { return unary<plonk::OP>(); }
 
 
-#define UNARYOPS(CLASSNAME) \
-        UNARYOP(CLASSNAME, move)\
-        UNARYOP(CLASSNAME, inc)\
-        UNARYOP(CLASSNAME, dec)\
-        UNARYOP(CLASSNAME, abs)\
-        UNARYOP(CLASSNAME, log2)\
-        UNARYOP(CLASSNAME, neg)\
-        UNARYOP(CLASSNAME, reciprocal)\
-        UNARYOP(CLASSNAME, sin)\
-        UNARYOP(CLASSNAME, cos)\
-        UNARYOP(CLASSNAME, tan)\
-        UNARYOP(CLASSNAME, asin)\
-        UNARYOP(CLASSNAME, acos)\
-        UNARYOP(CLASSNAME, atan)\
-        UNARYOP(CLASSNAME, sinh)\
-        UNARYOP(CLASSNAME, cosh)\
-        UNARYOP(CLASSNAME, tanh)\
-        UNARYOP(CLASSNAME, sqrt)\
-        UNARYOP(CLASSNAME, log)\
-        UNARYOP(CLASSNAME, log10)\
-        UNARYOP(CLASSNAME, exp)\
-        UNARYOP(CLASSNAME, squared)\
-        UNARYOP(CLASSNAME, cubed)\
-        UNARYOP(CLASSNAME, ceil)\
-        UNARYOP(CLASSNAME, floor)\
-        UNARYOP(CLASSNAME, frac)\
-        UNARYOP(CLASSNAME, sign)\
-        UNARYOP(CLASSNAME, m2f)\
-        UNARYOP(CLASSNAME, f2m)\
-        UNARYOP(CLASSNAME, a2dB)\
-        UNARYOP(CLASSNAME, dB2a)\
-        UNARYOP(CLASSNAME, d2r)\
-        UNARYOP(CLASSNAME, r2d)\
-        UNARYOP(CLASSNAME, distort)\
-        UNARYOP(CLASSNAME, zap)\
+#define PLONK_UNARYOPS(CLASSNAME) \
+        PLONK_UNARYOP(CLASSNAME, move)\
+        PLONK_UNARYOP(CLASSNAME, inc)\
+        PLONK_UNARYOP(CLASSNAME, dec)\
+        PLONK_UNARYOP(CLASSNAME, abs)\
+        PLONK_UNARYOP(CLASSNAME, log2)\
+        PLONK_UNARYOP(CLASSNAME, neg)\
+        PLONK_UNARYOP(CLASSNAME, reciprocal)\
+        PLONK_UNARYOP(CLASSNAME, sin)\
+        PLONK_UNARYOP(CLASSNAME, cos)\
+        PLONK_UNARYOP(CLASSNAME, tan)\
+        PLONK_UNARYOP(CLASSNAME, asin)\
+        PLONK_UNARYOP(CLASSNAME, acos)\
+        PLONK_UNARYOP(CLASSNAME, atan)\
+        PLONK_UNARYOP(CLASSNAME, sinh)\
+        PLONK_UNARYOP(CLASSNAME, cosh)\
+        PLONK_UNARYOP(CLASSNAME, tanh)\
+        PLONK_UNARYOP(CLASSNAME, sqrt)\
+        PLONK_UNARYOP(CLASSNAME, log)\
+        PLONK_UNARYOP(CLASSNAME, log10)\
+        PLONK_UNARYOP(CLASSNAME, exp)\
+        PLONK_UNARYOP(CLASSNAME, squared)\
+        PLONK_UNARYOP(CLASSNAME, cubed)\
+        PLONK_UNARYOP(CLASSNAME, ceil)\
+        PLONK_UNARYOP(CLASSNAME, floor)\
+        PLONK_UNARYOP(CLASSNAME, frac)\
+        PLONK_UNARYOP(CLASSNAME, sign)\
+        PLONK_UNARYOP(CLASSNAME, m2f)\
+        PLONK_UNARYOP(CLASSNAME, f2m)\
+        PLONK_UNARYOP(CLASSNAME, a2dB)\
+        PLONK_UNARYOP(CLASSNAME, dB2a)\
+        PLONK_UNARYOP(CLASSNAME, d2r)\
+        PLONK_UNARYOP(CLASSNAME, r2d)\
+        PLONK_UNARYOP(CLASSNAME, distort)\
+        PLONK_UNARYOP(CLASSNAME, zap)\
         /** Create a new CLASSNAME by applying the unary '-' operator to this one. **/\
         inline CLASSNAME operator-() const throw()  { return unary<plonk::neg>(); }
 

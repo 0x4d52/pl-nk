@@ -103,7 +103,7 @@ private:
 
 
 /** For applying binary operators. */
-template<class SampleType, BINARYOPFUNCTION(SampleType, op)>
+template<class SampleType, PLONK_BINARYOPFUNCTION(SampleType, op)>
 class BinaryOpChannelInternal 
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {

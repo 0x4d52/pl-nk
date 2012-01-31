@@ -86,7 +86,7 @@ Dynamic Dynamic::getMaxBlockSize() const throw()
         case TypeCode::LongUnit:    return reinterpret_cast<const LongUnit&>   (this->getItem()).getMaxBlockSize();
         default:
             plonk_assertfalse;
-            return BlockSize::getZero();//0;
+            return Math<BlockSize>::get0();//return BlockSize::getZero();//0;
     }    
 }
 
@@ -106,7 +106,7 @@ Dynamic Dynamic::getMaxSampleRate() const throw()
         case TypeCode::LongUnit:    return reinterpret_cast<const LongUnit&>   (this->getItem()).getMaxSampleRate();
         default:
             plonk_assertfalse;
-            return SampleRate::getZero();//0;
+            return Math<SampleRate>::get0();//return SampleRate::getZero();//0;
     }    
 }
 

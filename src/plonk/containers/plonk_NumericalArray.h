@@ -880,7 +880,7 @@ public:
 		return operator= (static_cast<NumericalArray const&> (other) );
 	}
     
-    template<BINARYOPFUNCTION(NumericalType, op)>
+    template<PLONK_BINARYOPFUNCTION(NumericalType, op)>
     NumericalArray binary (NumericalArray const& rightOperand) const throw() 
     {
         const unsigned int leftSize = this->size();														
@@ -923,7 +923,7 @@ public:
         return result;        
     }    
 	
-    template<UNARYOPFUNCTION(NumericalType, op)>
+    template<PLONK_UNARYOPFUNCTION(NumericalType, op)>
     NumericalArray unary() const throw() 
     {
         const int newSize = this->size();
@@ -946,8 +946,8 @@ public:
         return result;
     }    
     
-    BINARYOPS(NumericalArray);
-    UNARYOPS(NumericalArray);
+    PLONK_BINARYOPS(NumericalArray);
+    PLONK_UNARYOPS(NumericalArray);
 	
 	inline void zero() throw()
 	{

@@ -100,8 +100,8 @@ public:
         UnitType& param0Unit = this->getInputAsUnit (inputKeys.atUnchecked (0));
         UnitType& param1Unit = this->getInputAsUnit (inputKeys.atUnchecked (1));
 
-        plonk_assert (param0Unit.getOverlap (0) == DoubleVariable::getOne());
-        plonk_assert (param1Unit.getOverlap (0) == DoubleVariable::getOne());
+        plonk_assert (param0Unit.getOverlap (0) == Math<DoubleVariable>::get1());
+        plonk_assert (param1Unit.getOverlap (0) == Math<DoubleVariable>::get1());
 
         if ((channel % this->getNumChannels()) == 0)
         {

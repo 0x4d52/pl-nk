@@ -211,7 +211,7 @@ public:
     
     /**  */
     static UnitType ar (UnitType const& input, 
-                        DoubleVariable const& overlap = DoubleVariable::getHalf()) throw()
+                        DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) throw()
     {                        
         plonk_assert (overlap.getValue() >= TypeUtility<double>::getTypeEpsilon());
         plonk_assert (overlap.getValue() <= 1.0);

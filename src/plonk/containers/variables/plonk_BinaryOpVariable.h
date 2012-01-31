@@ -42,7 +42,7 @@
 #include "plonk_VariableInternal.h"
 
 
-template<class Type, BINARYOPFUNCTION(Type, op)>
+template<class Type, PLONK_BINARYOPFUNCTION(Type, op)>
 class BinaryOpVariableInternal : public VariableInternalBase<Type>,
                                  public Variable<Type>::Receiver
 {

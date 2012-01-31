@@ -45,13 +45,13 @@
 #include "../plonk_ContainerForwardDeclarations.h"
 #include "../plonk_Atomic.h"
 
-template<class Type>                                class Variable;
-template<class Type>                                class VariableInternalBase;
-template<class Type>                                class VariableInternal;
+template<class Type>                                        class Variable;
+template<class Type>                                        class VariableInternalBase;
+template<class Type>                                        class VariableInternal;
 
-template<class Type, BINARYOPFUNCTION(Type, op)>    class BinaryOpVariableInternal;
-template<class Type, UNARYOPFUNCTION(Type, op)>     class UnaryOpVariableInternal;
-template<class Type, class OtherType>               class TypeVariableInternal;
+template<class Type, PLONK_BINARYOPFUNCTION(Type, op)>      class BinaryOpVariableInternal;
+template<class Type, PLONK_UNARYOPFUNCTION(Type, op)>       class UnaryOpVariableInternal;
+template<class Type, class OtherType>                       class TypeVariableInternal;
 
 typedef Variable<float>     FloatVariable;
 typedef Variable<double>    DoubleVariable;

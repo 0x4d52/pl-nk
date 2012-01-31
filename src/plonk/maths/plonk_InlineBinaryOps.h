@@ -46,38 +46,38 @@
 
 //------------------------------------------------------------------------------
 
-#define BINARYOPFUNCTION(TYPE,NAME) TYPE (*NAME)(TYPE const&, TYPE const&)
+#define PLONK_BINARYOPFUNCTION(TYPE,NAME) TYPE (*NAME)(TYPE const&, TYPE const&)
 
-#define BINARYOP(CLASSNAME, OP) \
+#define PLONK_BINARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the binary '##OP##' function to this one and the @e right argument. */\
         inline CLASSNAME OP (CLASSNAME const& right) const throw() { return binary<plonk::OP> (right); }
 
 
-#define BINARYOPS(CLASSNAME) \
-        BINARYOP(CLASSNAME, addop)\
-        BINARYOP(CLASSNAME, subop)\
-        BINARYOP(CLASSNAME, mulop)\
-        BINARYOP(CLASSNAME, divop)\
-        BINARYOP(CLASSNAME, isEqualTo)\
-        BINARYOP(CLASSNAME, isNotEqualTo)\
-        BINARYOP(CLASSNAME, isGreaterThan)\
-        BINARYOP(CLASSNAME, isGreaterThanOrEqualTo)\
-        BINARYOP(CLASSNAME, isLessThan)\
-        BINARYOP(CLASSNAME, isLessThanOrEqualTo)\
-        BINARYOP(CLASSNAME, hypot)\
-        BINARYOP(CLASSNAME, pow)\
-        BINARYOP(CLASSNAME, atan2)\
-        BINARYOP(CLASSNAME, min)\
-        BINARYOP(CLASSNAME, max)\
-        BINARYOP(CLASSNAME, sumsqr)\
-        BINARYOP(CLASSNAME, difsqr)\
-        BINARYOP(CLASSNAME, sqrsum)\
-        BINARYOP(CLASSNAME, sqrdif)\
-        BINARYOP(CLASSNAME, absdif)\
-        BINARYOP(CLASSNAME, thresh)\
-        BINARYOP(CLASSNAME, round)\
-        BINARYOP(CLASSNAME, trunc)\
-        BINARYOP(CLASSNAME, clip2)\
+#define PLONK_BINARYOPS(CLASSNAME) \
+        PLONK_BINARYOP(CLASSNAME, addop)\
+        PLONK_BINARYOP(CLASSNAME, subop)\
+        PLONK_BINARYOP(CLASSNAME, mulop)\
+        PLONK_BINARYOP(CLASSNAME, divop)\
+        PLONK_BINARYOP(CLASSNAME, isEqualTo)\
+        PLONK_BINARYOP(CLASSNAME, isNotEqualTo)\
+        PLONK_BINARYOP(CLASSNAME, isGreaterThan)\
+        PLONK_BINARYOP(CLASSNAME, isGreaterThanOrEqualTo)\
+        PLONK_BINARYOP(CLASSNAME, isLessThan)\
+        PLONK_BINARYOP(CLASSNAME, isLessThanOrEqualTo)\
+        PLONK_BINARYOP(CLASSNAME, hypot)\
+        PLONK_BINARYOP(CLASSNAME, pow)\
+        PLONK_BINARYOP(CLASSNAME, atan2)\
+        PLONK_BINARYOP(CLASSNAME, min)\
+        PLONK_BINARYOP(CLASSNAME, max)\
+        PLONK_BINARYOP(CLASSNAME, sumsqr)\
+        PLONK_BINARYOP(CLASSNAME, difsqr)\
+        PLONK_BINARYOP(CLASSNAME, sqrsum)\
+        PLONK_BINARYOP(CLASSNAME, sqrdif)\
+        PLONK_BINARYOP(CLASSNAME, absdif)\
+        PLONK_BINARYOP(CLASSNAME, thresh)\
+        PLONK_BINARYOP(CLASSNAME, round)\
+        PLONK_BINARYOP(CLASSNAME, trunc)\
+        PLONK_BINARYOP(CLASSNAME, clip2)\
         /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME operator+   (RightType const& right) const throw() { return binary<plonk::addop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\

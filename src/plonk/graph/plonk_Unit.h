@@ -412,19 +412,19 @@ public:
     }
     
     /** Create an overlapping process from this unit's contrinuous stream. */
-    inline UnitBase overlapMake (DoubleVariable const& overlap = DoubleVariable::getHalf()) throw()
+    inline UnitBase overlapMake (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) throw()
     {
         return OverlapMakeUnit<SampleType>::ar (*this, overlap);
     }
     
     /** Mix down overlapping process to a continuous stream. */
-    inline UnitBase overlapMix (DoubleVariable const& overlap = DoubleVariable::getHalf()) throw()
+    inline UnitBase overlapMix (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) throw()
     {
         return OverlapMixUnit<SampleType>::ar (*this, overlap);
     }
     
     /** Templated binary operator Unit creator. */
-    template<BINARYOPFUNCTION(SampleType, op)>
+    template<PLONK_BINARYOPFUNCTION(SampleType, op)>
     UnitBase binary (UnitBase const& rightOperand) const throw() 
     {        
         /*
@@ -447,7 +447,7 @@ public:
     }
 
     /** Templated unary operator Unit creator. */
-    template<UNARYOPFUNCTION(SampleType, op)>
+    template<PLONK_UNARYOPFUNCTION(SampleType, op)>
     UnitBase unary() const throw() 
     {        
         typedef UnaryOpChannelInternal<SampleType,op>       ChannelInternalClassType;
@@ -464,8 +464,8 @@ public:
                                                            SampleRate::noPreference());
     }
      
-    BINARYOPS(UnitBase);
-    UNARYOPS(UnitBase);
+    PLONK_BINARYOPS(UnitBase);
+    PLONK_UNARYOPS(UnitBase);
     
     UnitBase linlin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
@@ -493,9 +493,9 @@ public:
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         const SampleType peak2peak (peak * Math<SampleType>::get2());
         const SampleType reciprocalInRange (plonk::reciprocal (peak2peak));
-        return plonk::linexp (*this, 
-                              UnitBase (reciprocalInRange), UnitBase (-peak * reciprocalInRange ), 
-                              outLow, (outHigh / outLow));
+        return plonk::linexp2 (*this, 
+                               UnitBase (reciprocalInRange), UnitBase (-peak * reciprocalInRange ), 
+                               outLow, (outHigh / outLow));
     }
     
     UnitBase linsin (UnitBase const& inLow, UnitBase const& inHigh, 
@@ -507,7 +507,7 @@ public:
     UnitBase linsin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
-        return plonk::linsin (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
+        return plonk::linsin2 (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
     }
     
     UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
@@ -520,6 +520,12 @@ public:
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         return plonk::linwelch (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
+    }
+    
+    UnitBase explin (UnitBase const& inLow, UnitBase const& inHigh, 
+                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    {
+        return plonk::explin (*this, inLow, inHigh, outLow, outHigh);
     }
         
     const UnitArray operator<< (UnitType const& other) const throw()   { return UnitArray (*this, other); }
@@ -811,41 +817,41 @@ public:
         }
     }
     
-    inline static const UnitBase& getZero() throw()  
-    { 
-        static const UnitBase v (Math<SampleType>::get0()); 
-        return v; 
-    }
-    
-    inline static const UnitBase& getOne() throw()   
-    {         
-        static const UnitBase v (Math<SampleType>::get1()); 
-        return v; 
-    }
-    
-    inline static const UnitBase& getTwo() throw()   
-    {         
-        static const UnitBase v (Math<SampleType>::get2()); 
-        return v; 
-    }
-    
-    inline static const UnitBase& getHalf() throw()  
-    {         
-        static const UnitBase v (Math<SampleType>::get0_5()); 
-        return v; 
-    }
-    
-    inline static const UnitBase& getPi() throw()    
-    {         
-        static const UnitBase v (Math<SampleType>::getPi()); 
-        return v; 
-    }
-    
-    inline static const UnitBase& getTwoPi() throw() 
-    {         
-        static const UnitBase v (Math<SampleType>::get2Pi()); 
-        return v; 
-    }        
+//    inline static const UnitBase& getZero() throw()  
+//    { 
+//        static const UnitBase v (Math<SampleType>::get0()); 
+//        return v; 
+//    }
+//    
+//    inline static const UnitBase& getOne() throw()   
+//    {         
+//        static const UnitBase v (Math<SampleType>::get1()); 
+//        return v; 
+//    }
+//    
+//    inline static const UnitBase& getTwo() throw()   
+//    {         
+//        static const UnitBase v (Math<SampleType>::get2()); 
+//        return v; 
+//    }
+//    
+//    inline static const UnitBase& getHalf() throw()  
+//    {         
+//        static const UnitBase v (Math<SampleType>::get0_5()); 
+//        return v; 
+//    }
+//    
+//    inline static const UnitBase& getPi() throw()    
+//    {         
+//        static const UnitBase v (Math<SampleType>::getPi()); 
+//        return v; 
+//    }
+//    
+//    inline static const UnitBase& getTwoPi() throw() 
+//    {         
+//        static const UnitBase v (Math<SampleType>::get2Pi()); 
+//        return v; 
+//    }        
     
     int getTypeCode() const throw()
     {
@@ -879,6 +885,16 @@ private:
 
 PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase); // declares global functions with the same name as the binary operators
 PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase);  // declares global functions with the same name as the unary operators
+
+template<class SampleType>
+inline UnitBase<SampleType> explin (UnitBase<SampleType> const& input, 
+                                    UnitBase<SampleType> const& inLow, UnitBase<SampleType> const& inHigh, 
+                                    UnitBase<SampleType> const& outLow, UnitBase<SampleType> const& outHigh)
+{
+    const UnitBase<SampleType> clipped (input.clip (input, inLow, inHigh));
+    return log (clipped / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
+}
+
 
 //------------------------------------------------------------------------------
 

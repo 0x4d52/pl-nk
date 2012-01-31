@@ -44,7 +44,7 @@ BEGIN_PLONK_NAMESPACE
 #include "../maths/plonk_InlineBinaryOps.h"
 
 Int24::Int24() throw()
-:   data (getZero().data)
+:   data (Math<Int24>::get0().data)
 {
 }
 
@@ -377,41 +377,41 @@ Int24& Int24::operator>>= (const int shift) throw()
     return *this;
 }                             
 
-const Int24& Int24::getZero() throw()
-{
-    static Int24 v (0);
-    return v;
-}
-
-const Int24& Int24::getOne() throw()
-{
-    static Int24 v (1);
-    return v;
-}
-
-const Int24& Int24::getTwo() throw()
-{
-    static Int24 v (2);
-    return v;
-}
-
-const Int24& Int24::getHalf() throw()
-{
-    static Int24 v (0);
-    return v;
-}
-
-const Int24& Int24::getPi() throw()
-{
-    static Int24 v (3);
-    return v;
-}
-
-const Int24& Int24::getTwoPi() throw()
-{
-    static Int24 v (6);
-    return v;
-}
+//const Int24& Int24::getZero() throw()
+//{
+//    static Int24 v (0);
+//    return v;
+//}
+//
+//const Int24& Int24::getOne() throw()
+//{
+//    static Int24 v (1);
+//    return v;
+//}
+//
+//const Int24& Int24::getTwo() throw()
+//{
+//    static Int24 v (2);
+//    return v;
+//}
+//
+//const Int24& Int24::getHalf() throw()
+//{
+//    static Int24 v (0);
+//    return v;
+//}
+//
+//const Int24& Int24::getPi() throw()
+//{
+//    static Int24 v (3);
+//    return v;
+//}
+//
+//const Int24& Int24::getTwoPi() throw()
+//{
+//    static Int24 v (6);
+//    return v;
+//}
 
 std::istream& operator>> (std::istream &inputStream, Int24& value)
 {

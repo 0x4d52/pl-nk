@@ -169,7 +169,7 @@ public:
     }    
                 
     /** Builds a binary operation from two source Variables. */
-    template<BINARYOPFUNCTION(Type, op)>
+    template<PLONK_BINARYOPFUNCTION(Type, op)>
     const Variable binary (Variable const& rightOperand) const throw()
     {
         Internal* internal = new BinaryOpVariableInternal<Type,op> (*this, 
@@ -178,15 +178,15 @@ public:
     }
     
     /** Builds a unary operation from a source Variable. */
-    template<UNARYOPFUNCTION(Type, op)>
+    template<PLONK_UNARYOPFUNCTION(Type, op)>
     const Variable unary() const throw()
     {
         Internal* internal = new UnaryOpVariableInternal<Type,op> (*this);
         return Variable (internal);
     }
     
-    BINARYOPS(Variable)
-    UNARYOPS(Variable)    
+    PLONK_BINARYOPS(Variable)
+    PLONK_UNARYOPS(Variable)    
     
     const Variable selectMin (Variable const& other) const throw()
     {
@@ -198,41 +198,41 @@ public:
         return (this->getValue() < other.getValue()) ? other : *this;
     }
         
-    inline static const Variable& getZero() throw()  
-    { 
-        static const Variable v (Math<Type>::get0() ); 
-        return v; 
-    }
-    
-    inline static const Variable& getOne() throw()   
-    {         
-        static const Variable v (Math<Type>::get1() ); 
-        return v; 
-    }
-    
-    inline static const Variable& getTwo() throw()   
-    {         
-        static const Variable v (Math<Type>::get2() ); 
-        return v; 
-    }
-    
-    inline static const Variable& getHalf() throw()  
-    {         
-        static const Variable v (Math<Type>::get0_5()); 
-        return v; 
-    }
-    
-    inline static const Variable& getPi() throw()    
-    {         
-        static const Variable v (Math<Type>::getPi()); 
-        return v; 
-    }
-    
-    inline static const Variable& getTwoPi() throw() 
-    {         
-        static const Variable v (Math<Type>::get2Pi() ); 
-        return v; 
-    }    
+//    inline static const Variable& getZero() throw()  
+//    { 
+//        static const Variable v (Math<Type>::get0() ); 
+//        return v; 
+//    }
+//    
+//    inline static const Variable& getOne() throw()   
+//    {         
+//        static const Variable v (Math<Type>::get1() ); 
+//        return v; 
+//    }
+//    
+//    inline static const Variable& getTwo() throw()   
+//    {         
+//        static const Variable v (Math<Type>::get2() ); 
+//        return v; 
+//    }
+//    
+//    inline static const Variable& getHalf() throw()  
+//    {         
+//        static const Variable v (Math<Type>::get0_5()); 
+//        return v; 
+//    }
+//    
+//    inline static const Variable& getPi() throw()    
+//    {         
+//        static const Variable v (Math<Type>::getPi()); 
+//        return v; 
+//    }
+//    
+//    inline static const Variable& getTwoPi() throw() 
+//    {         
+//        static const Variable v (Math<Type>::get2Pi() ); 
+//        return v; 
+//    }    
     
     int getTypeCode() const throw()
     {

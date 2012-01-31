@@ -113,7 +113,7 @@ private:
 
 
 /** For applying unary operators. */
-template<class SampleType, UNARYOPFUNCTION(SampleType, op)>
+template<class SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)>
 class UnaryOpChannelInternal
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {

@@ -64,31 +64,31 @@ typedef ObjectArray<IOInfo>     IOInfos;
 typedef ObjectArray<UnitInfo>   UnitInfos;
 
 // core templated graph types
-template<class SampleType>                                      class BusBuffer;
-template<class SampleType>                                      class ChannelBase;
-template<class SampleType>                                      class ChannelInternalBase;
-template<class SampleType, class DataType>                      class ChannelInternal;
-template<class SampleType>                                      class UnitBase;
-template<class SampleType, class DataType>                      class ProxyOwnerChannelInternal;
-template<class SampleType>                                      class ProxyChannelInternal;
-template<class OwnerType>                                       struct ChannelData;
-
+template<class SampleType>                                              class BusBuffer;
+template<class SampleType>                                              class ChannelBase;
+template<class SampleType>                                              class ChannelInternalBase;
+template<class SampleType, class DataType>                              class ChannelInternal;
+template<class SampleType>                                              class UnitBase;
+template<class SampleType, class DataType>                              class ProxyOwnerChannelInternal;
+template<class SampleType>                                              class ProxyChannelInternal;
+template<class OwnerType>                                               struct ChannelData;
+        
 // common channels
-template<class SampleType>                                      class ConstantChannelInternal;
-template<class SampleType>                                      class NullChannelInternal;
+template<class SampleType>                                              class ConstantChannelInternal;
+template<class SampleType>                                              class NullChannelInternal;
 
-template<class SampleType, BINARYOPFUNCTION(SampleType, op)>    class BinaryOpChannelInternal;
-template<class SampleType, UNARYOPFUNCTION(SampleType, op)>     class UnaryOpChannelInternal;
+template<class SampleType, PLONK_BINARYOPFUNCTION(SampleType, op)>      class BinaryOpChannelInternal;
+template<class SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)>       class UnaryOpChannelInternal;
 
 // common units
-template<class SampleType>                                      class ResampleUnit;
-template<class SampleType>                                      class MixerUnit;
-template<class SampleType>                                      class OverlapMakeUnit;
-template<class SampleType>                                      class OverlapMixUnit;
-template<class SampleType>                                      class VariableUnit;
+template<class SampleType>                                              class ResampleUnit;
+template<class SampleType>                                              class MixerUnit;
+template<class SampleType>                                              class OverlapMakeUnit;
+template<class SampleType>                                              class OverlapMixUnit;
+template<class SampleType>                                              class VariableUnit;
 
 // type conversion units
-template<class OutputSampleType, class InputSampleType>         class TypeUnit;
+template<class OutputSampleType, class InputSampleType>                 class TypeUnit;
 
 typedef TypeUnit<float,int>     TypeInt2Float;
 typedef TypeUnit<int,float>     TypeFloat2Int;

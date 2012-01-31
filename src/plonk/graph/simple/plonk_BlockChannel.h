@@ -159,7 +159,7 @@ public:
     
     /** Create an audio rate block generator. */
     static inline UnitType ar (Buffer const& buffer,
-                               DoubleVariable const& overlap = DoubleVariable::getOne(),
+                               DoubleVariable const& overlap = Math<DoubleVariable>::get1(),
                                BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                                SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
@@ -176,7 +176,7 @@ public:
     }
         
     static inline UnitType kr (Buffer const& buffer,                                
-                               DoubleVariable const& overlap = DoubleVariable::getOne()) throw()
+                               DoubleVariable const& overlap = Math<DoubleVariable>::get1()) throw()
     {
         return ar (buffer, 
                    overlap,

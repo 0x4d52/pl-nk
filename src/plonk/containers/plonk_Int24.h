@@ -143,12 +143,12 @@ public:
     Int24& operator<<= (const int shift) throw();
     Int24& operator>>= (const int shift) throw();
 
-    static const Int24& getZero() throw();
-    static const Int24& getOne() throw();
-    static const Int24& getTwo() throw();
-    static const Int24& getHalf() throw();
-    static const Int24& getPi() throw();
-    static const Int24& getTwoPi() throw();
+//    static const Int24& getZero() throw();
+//    static const Int24& getOne() throw();
+//    static const Int24& getTwo() throw();
+//    static const Int24& getHalf() throw();
+//    static const Int24& getPi() throw();
+//    static const Int24& getTwoPi() throw();
     
     friend std::istream& operator>> (std::istream &inputStream, Int24& value);
     friend std::ostream& operator<< (std::ostream &outputStream, Int24 const& value);

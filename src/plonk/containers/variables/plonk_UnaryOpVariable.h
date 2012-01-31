@@ -42,7 +42,7 @@
 #include "plonk_VariableInternal.h"
 
 
-template<class Type, UNARYOPFUNCTION(Type, op)>
+template<class Type, PLONK_UNARYOPFUNCTION(Type, op)>
 class UnaryOpVariableInternal : public VariableInternalBase<Type>,
                                 public Variable<Type>::Receiver
 {

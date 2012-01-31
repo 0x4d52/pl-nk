@@ -52,7 +52,7 @@ ChannelInternalCore::ChannelInternalCore (Inputs const& inputsToUse,
     inputs (inputsToUse),
     blockSize (blockSizeToUse),
     sampleRate (sampleRateToUse),
-    overlap (inputs.containsKey (IOKey::OverlapMake) ? getInputAs<DoubleVariable> (IOKey::OverlapMake) : DoubleVariable::getOne())
+    overlap (inputs.containsKey (IOKey::OverlapMake) ? getInputAs<DoubleVariable> (IOKey::OverlapMake) : Math<DoubleVariable>::get1())
 {
     cacheSampleDurationTicks();
     

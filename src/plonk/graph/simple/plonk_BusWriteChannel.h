@@ -114,7 +114,7 @@ public:
         this->setBlockSize (BlockSize::decide (input.getBlockSize (channel),
                                                this->getBlockSize()));
         
-        plonk_assert (input.getOverlap (channel) == DoubleVariable::getOne());
+        plonk_assert (input.getOverlap (channel) == Math<DoubleVariable>::get1());
         
         this->initValue (SampleType (0));
     }    

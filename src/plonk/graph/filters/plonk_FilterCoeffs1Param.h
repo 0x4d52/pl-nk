@@ -98,7 +98,7 @@ public:
         plonk_assert (ShapeType::NumParams == 1);
 
         UnitType& param0Unit = this->getInputAsUnit (inputKeys.atUnchecked (0));
-        plonk_assert (param0Unit.getOverlap (0) == DoubleVariable::getOne());
+        plonk_assert (param0Unit.getOverlap (0) == Math<DoubleVariable>::get1());
 
         if ((channel % this->getNumChannels()) == 0)
         {

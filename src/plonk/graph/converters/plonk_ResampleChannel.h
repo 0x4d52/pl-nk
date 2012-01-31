@@ -94,7 +94,7 @@ public:
     {        
         const UnitType& input = this->getInputAsUnit (IOKey::Generic);
                 
-        plonk_assert (input.getOverlap (channel) == DoubleVariable::getOne());
+        plonk_assert (input.getOverlap (channel) == Math<DoubleVariable>::get1());
         
         const SampleType sourceValue = input.getValue (channel);
         this->initValue (sourceValue);        
