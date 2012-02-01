@@ -250,6 +250,10 @@ public:
     inline Type* getPtr() throw()                       { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
     inline const Type* operator->() const throw()       { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
     inline Type* operator->() throw()                   { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
+
+//    inline const Type* operator->() const throw()       { return static_cast<const Type*> (atomic.ptr); }
+//    inline Type* operator->() throw()                   { return static_cast<Type*> (atomic.ptr); }
+
     inline operator const Type* () const throw()        { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
     inline operator Type* () const throw()              { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
     

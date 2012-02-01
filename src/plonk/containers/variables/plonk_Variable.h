@@ -107,7 +107,7 @@ public:
         
         return *this;
 	}
-
+    
     /** Get a weakly linked copy of this object. 
      This will return a blank/empty/null object of this type if
      the original has already been deleted. */
@@ -141,6 +141,15 @@ public:
         this->setValue (newValue);
         return *this;
     }
+
+//    /** A convenience for setValue() mainly for atomic types. */
+//    template<template <typename> class OuterType, class InnerType>
+//    Variable& operator= (InnerType const& newValue) throw()
+//    {
+//        this->setValue (newValue);
+//        return *this;
+//    }
+
     
     /** Returns the current value. */
     const Type getValue() const throw()

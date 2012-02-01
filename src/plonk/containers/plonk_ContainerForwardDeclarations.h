@@ -212,12 +212,13 @@ typedef SignalBase<Int24>                 Int24Signal;
 typedef SignalBase<Long>                  LongSignal;
 typedef SignalBase<PLONK_TYPE_DEFAULT>    Signal;
 
-typedef AtomicValue<Int>        AtomicInt;
-typedef AtomicValue<Long>       AtomicLong;
-typedef AtomicValue<LongLong>   AtomicLongLong;
-typedef AtomicValue<Float>      AtomicFloat;
-typedef AtomicValue<Double>     AtomicDouble;
-typedef AtomicValue<Pointer>    AtomicPointer;
-typedef AtomicExtended<Pointer> AtomicExtendedPointer;
+typedef AtomicValue<Int>                AtomicInt;
+typedef AtomicValue<Long>               AtomicLong;
+typedef AtomicValue<LongLong>           AtomicLongLong;
+typedef AtomicValue<Float>              AtomicFloat;
+typedef AtomicValue<Double>             AtomicDouble;
+typedef AtomicValue<Pointer>            AtomicPointer;
+typedef AtomicExtended<Pointer>         AtomicExtendedPointer;
+typedef AtomicExtended<Dynamic*>        AtomicDynamicPointer;
 
 #endif // PLONK_CONTAINERFORWARDDECLARATIONS_H

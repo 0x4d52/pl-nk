@@ -62,33 +62,35 @@ public:
     // built-in types (2)
         Float, Double, Int, Short, Int24, Long, LongLong, Char, Bool,
     // atomic types (11)    
-        AtomicFloat, AtomicDouble, AtomicInt, AtomicLong, AtomicLongLong, AtomicPointer, AtomicExtendedPointer,
-    // variables (18)
+        AtomicFloat, AtomicDouble, 
+        AtomicInt, AtomicLong, AtomicLongLong, AtomicPointer, AtomicExtendedPointer, AtomicDynamicPointer,
+    // variables (19)
         FloatVariable, DoubleVariable, 
         IntVariable, ShortVariable, Int24Variable, LongVariable, CharVariable, BoolVariable,
-    // atomic variables (26)
-        AtomicFloatVariable, AtomicDoubleVariable, AtomicIntVariable, AtomicLongVariable,
-    // arrays (30)
+    // atomic variables (27)
+        AtomicFloatVariable, AtomicDoubleVariable, AtomicIntVariable, AtomicLongVariable, 
+            // add AtomicPointerVariable, AtomicExtendedPointerVariable, AtomicDynamicPointerVariable
+    // arrays (31)  // + 3
         FloatArray, DoubleArray, IntArray, ShortArray, Int24Array, LongArray, CharArray, BoolArray,
     // other
         Text, TextArray,
-    // channels (40)
+    // channels (41)
         FloatChannel, DoubleChannel, IntChannel, ShortChannel, Int24Channel, LongChannel,
-    // units (46)
+    // units (47)
         FloatUnit, DoubleUnit, IntUnit, ShortUnit, Int24Unit, LongUnit,
-    // bus (52)
+    // bus (53)
         FloatBus, DoubleBus, IntBus, ShortBus, Int24Bus, LongBus, 
-    // unit arrays (58)
+    // unit arrays (59)
         FloatUnits, DoubleUnits, IntUnits, ShortUnits, Int24Units, LongUnits,
-    // bus arrays (64)
+    // bus arrays (65)
         FloatBusses, DoubleBusses, IntBusses, ShortBusses, Int24Busses, LongBusses, 
-    // breakpoints (70)
+    // breakpoints (71)
         FloatBreakpoints, DoubleBreakpoints, IntBreakpoints, ShortBreakpoints, Int24Breakpoints, LongBreakpoints,
-    // wavetables (76)
+    // wavetables (77)
         FloatWavetable, DoubleWavetable, IntWavetable, ShortWavetable, Int24Wavetable, LongWavetable,
-    // signals (82)
+    // signals (83)
         FloatSignal, DoubleSignal, IntSignal, ShortSignal, Int24Signal, LongSignal,
-    // count (88)
+    // count (89)
         NumTypeCodes
     };    
     
@@ -100,12 +102,14 @@ public:
             
             "Float", "Double", "Int", "Short", "Int24", "Long", "LongLong", "Char", "Bool",
             
-            "AtomicFloat", "AtomicDouble", "AtomicInt", "AtomicLong", "AtomicLongLong", "AtomicPointer", "AtomicExtendedPointer",
+            "AtomicFloat", "AtomicDouble", 
+            "AtomicInt", "AtomicLong", "AtomicLongLong", "AtomicPointer", "AtomicExtendedPointer", "AtomicDynamicPointer",
             
             "FloatVariable", "DoubleVariable", 
             "IntVariable", "ShortVariable", "Int24Variable", "LongVariable", "CharVariable", "BoolVariable",
             
             "AtomicFloatVariable", "AtomicDoubleVariable", "AtomicIntVariable", "AtomicLongVariable",
+            //add AtomicPointerVariable, AtomicExtendedPointerVariable, AtomicDynamicPointerVariable
             
             "FloatArray", "DoubleArray", "IntArray", "ShortArray", "Int24Array", "LongArray", "CharArray", "BoolArray",
             "Text", "TextArray", 
@@ -170,9 +174,9 @@ public:
     static inline bool isDynamic (const int code) throw()           { return (code == TypeCode::Dynamic); }
     
     static inline bool isBuiltIn (const int code) throw()           { return (code >= TypeCode::Float) && (code <= TypeCode::Bool) && code != TypeCode::Int24; }
-    static inline bool isAtomic (const int code) throw()            { return (code >= TypeCode::AtomicFloat) && (code <= TypeCode::AtomicExtendedPointer); }
+    static inline bool isAtomic (const int code) throw()            { return (code >= TypeCode::AtomicFloat) && (code <= TypeCode::AtomicDynamicPointer); }
     static inline bool isVariable (const int code) throw()          { return (code >= TypeCode::FloatVariable) && (code <= TypeCode::BoolVariable); }
-    static inline bool isAtomicVariable (const int code) throw()    { return (code >= TypeCode::AtomicFloatVariable) && (code <= TypeCode::AtomicLongVariable); }
+    static inline bool isAtomicVariable (const int code) throw()    { return (code >= TypeCode::AtomicFloatVariable) && (code <= TypeCode::AtomicLongVariable); } // AtomicDynamicPointerVariable
     static inline bool isArray (const int code) throw()             { return (code >= TypeCode::FloatArray) && (code <= TypeCode::TextArray); }
     static inline bool isChannel (const int code) throw()           { return (code >= TypeCode::FloatChannel) && (code <= TypeCode::LongChannel); }
     static inline bool isUnit (const int code) throw()              { return (code >= TypeCode::FloatUnit) && (code <= TypeCode::LongUnit); }
@@ -226,6 +230,8 @@ public:
                 TypeCode::isCharType (code)  ||
                 TypeCode::isBoolType (code);
     }
+    
+    // add isPointerType?
                                                                                                                                    
 };
 
@@ -500,6 +506,72 @@ public:
 };
 
 template<>
+class TypeUtilityBase<AtomicPointer>
+{
+public:
+    typedef AtomicPointer          TypeName;
+    typedef AtomicPointer          OriginalType;
+    typedef AtomicPointer const&   PassType;
+    typedef int                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
+};
+
+template<>
+class TypeUtilityBase<const AtomicPointer>
+{
+public:
+    typedef const AtomicPointer    TypeName;
+    typedef AtomicPointer          OriginalType;
+    typedef AtomicPointer const&   PassType;
+    typedef int                    IndexType;
+    static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
+};
+
+template<>
+class TypeUtilityBase<AtomicExtendedPointer>
+{
+public:
+    typedef AtomicExtendedPointer          TypeName;
+    typedef AtomicExtendedPointer          OriginalType;
+    typedef AtomicExtendedPointer const&   PassType;
+    typedef int                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
+};
+
+template<>
+class TypeUtilityBase<const AtomicExtendedPointer>
+{
+public:
+    typedef const AtomicExtendedPointer    TypeName;
+    typedef AtomicExtendedPointer          OriginalType;
+    typedef AtomicExtendedPointer const&   PassType;
+    typedef int                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
+};
+
+template<>
+class TypeUtilityBase<AtomicDynamicPointer>
+{
+public:
+    typedef AtomicDynamicPointer          TypeName;
+    typedef AtomicDynamicPointer          OriginalType;
+    typedef AtomicDynamicPointer const&   PassType;
+    typedef int                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
+};
+
+template<>
+class TypeUtilityBase<const AtomicDynamicPointer>
+{
+public:
+    typedef const AtomicDynamicPointer    TypeName;
+    typedef AtomicDynamicPointer          OriginalType;
+    typedef AtomicDynamicPointer const&   PassType;
+    typedef int                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
+};
+
+template<>
 class TypeUtilityBase<FloatVariable>
 {
 public:
@@ -762,6 +834,8 @@ public:
     typedef float IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongVariable; }
 };
+
+//<---AtomicPointerVariable, AtomicExtendedPointerVariable, AtomicDynamicPointerVariable
 
 template<>
 class TypeUtilityBase<FloatArray>
