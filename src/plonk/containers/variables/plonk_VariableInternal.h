@@ -82,11 +82,17 @@ public:
     {
     }
     
+//    template<class OtherType>
+//    VariableInternal (OtherType const& initValue) throw()
+//    :   value (initValue)
+//    {
+//    }
+
     VariableInternal (Type const& initValue) throw()
     :   value (initValue)
     {
     }
-    
+
     const Type getValue() const throw()
     {
         return value;

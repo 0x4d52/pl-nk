@@ -283,7 +283,7 @@ public:
     typedef SmartPointerContainer<Internal> Base;
     
     Variable()
-    :   Base (new Internal (0))
+    :   Base (new Internal (Type()))
     {
     }
     

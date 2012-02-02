@@ -217,8 +217,8 @@ typedef AtomicValue<Long>               AtomicLong;
 typedef AtomicValue<LongLong>           AtomicLongLong;
 typedef AtomicValue<Float>              AtomicFloat;
 typedef AtomicValue<Double>             AtomicDouble;
-typedef AtomicValue<Pointer>            AtomicPointer;
-typedef AtomicExtended<Pointer>         AtomicExtendedPointer;
+typedef AtomicValue<char*>              AtomicPointer;
+typedef AtomicExtended<char*>           AtomicExtendedPointer;
 typedef AtomicExtended<Dynamic*>        AtomicDynamicPointer;
 
 #endif // PLONK_CONTAINERFORWARDDECLARATIONS_H
