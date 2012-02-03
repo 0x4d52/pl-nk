@@ -62,7 +62,7 @@ template<class SampleType>
 class ChannelBase : public SmartPointerContainer< ChannelInternalBase<SampleType> >
 {
 protected:
-    typedef UNITBASETYPE<ChannelBase>                   UnitType;
+    typedef PLONK_UNITBASETYPE<ChannelBase>             UnitType;
 
 public:
     typedef ChannelInternalBase<SampleType>             Internal;

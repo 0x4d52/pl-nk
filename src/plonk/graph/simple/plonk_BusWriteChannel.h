@@ -59,7 +59,7 @@ public:
     typedef InputDictionary                                     Inputs;
     typedef NumericalArray<SampleType>                          Buffer;
     typedef BusBuffer<SampleType>                               Bus;
-    typedef BUSARRAYBASETYPE<Bus>                               Busses;
+    typedef PLONK_BUSARRAYBASETYPE<Bus>                         Busses;
         
     BusWriteChannelInternal (Inputs const& inputs, 
                              Data const& data, 
@@ -177,7 +177,7 @@ public:
     typedef InputDictionary                         Inputs;
     typedef NumericalArray<SampleType>              Buffer;
     typedef BusBuffer<SampleType>                   Bus;
-    typedef BUSARRAYBASETYPE<Bus>                   Busses;
+    typedef PLONK_BUSARRAYBASETYPE<Bus>             Busses;
     
     static inline UnitInfos getInfo() throw()
     {

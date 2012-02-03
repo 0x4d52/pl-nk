@@ -74,7 +74,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Variable);
+        const IntArray keys (IOKey::AtomicVariable);
         return keys;
     }    
     
@@ -132,11 +132,11 @@ public:
         const double blockSize = (double)BlockSize::getDefault().getValue();
 //        const double sampleRate = SampleRate::getDefault().getValue();
 
-        return UnitInfo ("Variable", "A variable value.",
+        return UnitInfo ("Atomic Variable", "An atomic variable value.",
                          
                          // output
                          1, 
-                         IOKey::Generic,             Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
+                         IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
                          IOKey::End,
                          
                          // inputs

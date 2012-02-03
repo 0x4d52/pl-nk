@@ -55,7 +55,7 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef NumericalArray2D<ChannelType,UnitType>  UnitsType;
     typedef BusBuffer<SampleType>                   BusType;
-    typedef BUSARRAYBASETYPE<BusType>               BussesType;
+    typedef PLONK_BUSARRAYBASETYPE<BusType>         BussesType;
 
     typedef NumericalArray<SampleType>              Buffer;
     typedef InputDictionary                         Inputs;    

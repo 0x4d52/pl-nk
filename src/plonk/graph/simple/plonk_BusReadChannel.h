@@ -58,7 +58,7 @@ public:
     typedef InputDictionary                                     Inputs;
     typedef NumericalArray<SampleType>                          Buffer;
     typedef BusBuffer<SampleType>                               Bus;
-    typedef BUSARRAYBASETYPE<Bus>                               Busses;
+    typedef PLONK_BUSARRAYBASETYPE<Bus>                         Busses;
     
     BusReadChannelInternal (Inputs const& inputs, 
                             Data const& data, 
@@ -158,7 +158,7 @@ public:
     typedef InputDictionary                         Inputs;
     typedef NumericalArray<SampleType>              Buffer;
     typedef BusBuffer<SampleType>                   Bus;
-    typedef BUSARRAYBASETYPE<Bus>                   Busses;
+    typedef PLONK_BUSARRAYBASETYPE<Bus>             Busses;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -168,7 +168,7 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,   IOLimit::None, 
+                         IOKey::Generic,    Measure::None,      IOInfo::NoDefault,   IOLimit::None, 
                          IOKey::End,
                          
                          // inputs

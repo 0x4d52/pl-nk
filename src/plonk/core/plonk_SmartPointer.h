@@ -79,10 +79,10 @@ public:
 	/// @name Miscellaneous
 	/// @{
 	
-	Long getRefCount() const throw()	{ return refCount; } //pl_AtomicL_Get((PlankAtomicLRef)&refCount); }
-	bool isActive() const throw() { return active != 0; }
+	Long getRefCount() const throw()	{ return refCount; }
+	bool isActive() const throw()       { return active != 0; }
     void update() throw() { }
-    void* getWeak() const throw() { return weakPointer; }
+    void* getWeak() const throw()       { return weakPointer; }
         
 	/// @} <!-- end Miscellaneous -->
 		
@@ -91,7 +91,6 @@ protected:
     
     AtomicValue<Long> refCount;
     void *weakPointer;
-    //bool active : 1;
 	unsigned int active;
 	
 	SmartPointer (const SmartPointer&);
