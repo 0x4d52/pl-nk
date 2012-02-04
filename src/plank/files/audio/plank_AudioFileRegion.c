@@ -44,11 +44,12 @@
 
 PlankAudioFileRegionRef pl_AudioFileRegion_Create()
 {
-    return PLANK_NULL;
+    return (PlankAudioFileRegionRef)PLANK_NULL;
 }
 
 void pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p)
 {
+	(void)p;
 }
 
 

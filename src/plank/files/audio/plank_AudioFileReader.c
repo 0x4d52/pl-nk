@@ -100,7 +100,6 @@ PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
     p->numFrames                   = 0;
     p->dataPosition                = -1;
     
-exit:
     return result;
 }
 
@@ -371,6 +370,9 @@ PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const
     p->formatInfo.numChannels   = (PlankI) numChannels;
     p->formatInfo.sampleRate    = (PlankD) sampleRate;
 
+	(void)chunkDataPos;
+	(void)chunkLength;
+
 exit:
     return result;
 }
@@ -387,7 +389,6 @@ PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const P
     if ((chunkLength % p->formatInfo.bytesPerFrame) != 0)
         result = PlankResult_AudioFileReaderDataChunkInvalid;
   
-exit:
     return result;
 }
 
@@ -410,6 +411,9 @@ PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, cons
     p->formatInfo.sampleRate    = (PlankD) pl_F802I (sampleRate);
     p->numFrames                = (PlankLL) numFrames;
 
+	(void)chunkDataPos;
+	(void)chunkLength;
+
 exit:
     return PlankResult_OK;
 }
@@ -426,6 +430,9 @@ PlankResult pl_AudioFileReader_AIFF_ParseData (PlankAudioFileReaderRef p, const 
     
     p->dataPosition = pos;
         
+	(void)chunkDataPos;
+	(void)chunkLength;
+
 exit:
     return result;
 }
@@ -441,6 +448,9 @@ PlankResult pl_AudioFileReader_AIFC_ParseVersion (PlankAudioFileReaderRef p, con
     
     result = PlankResult_AudioFileReaderInavlidType;
     
+	(void)chunkDataPos;
+	(void)chunkLength;
+
 exit:
     return result;
 }

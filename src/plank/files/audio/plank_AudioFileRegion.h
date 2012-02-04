@@ -69,6 +69,7 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileRegion
 {
+	int dummy;
 } PlankAudioFileRegion;
 #endif
 

@@ -54,16 +54,17 @@ PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit()
             return p;
     }
     
-    return PLANK_NULL;
+    return (PlankAudioFileWriterRef)PLANK_NULL;
 }
 
 PlankAudioFileWriterRef pl_AudioFileWriter_Create()
 {
-    return PLANK_NULL;
+    return (PlankAudioFileWriterRef)PLANK_NULL;
 }
 
 PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p)
 {
+	(void)p;
     return PlankResult_UnknownError;
 }
 
@@ -110,11 +111,14 @@ PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p)
 
 PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath)
 {
+	(void)p;
+	(void)filepath;
     return PlankResult_OK;
 }
 
 PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
 {
+	(void)p;
     return PlankResult_OK;
 }
 

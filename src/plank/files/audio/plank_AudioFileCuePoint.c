@@ -41,10 +41,11 @@
 
 PlankAudioFileCuePointRef pl_AudioFileCuePoint_Create()
 {
-    return PLANK_NULL;
+    return (PlankAudioFileCuePointRef)PLANK_NULL;
 }
 
 void pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p)
 {
+	(void)p;
 }
 

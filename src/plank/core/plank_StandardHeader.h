@@ -103,6 +103,15 @@
     #include <float.h>
     #include <intrin.h>
 
+	#undef min
+	#undef max
+
+
+	#pragma warning(disable : 4244) // loss of precision
+	#pragma warning(disable : 4996) // security of snprintf etc
+	#pragma warning(disable : 4324) // structure padding / alignment
+	#pragma warning(disable : 4214) // bit field types other than int.. must revisit this
+
     #define PLANK_WIN 1
     #define PLANK_X86 1
 
@@ -120,11 +129,12 @@
 
 	typedef signed __int64 PlankLL;
 	typedef unsigned __int64 PlankULL;
+	typedef PlankULL PlankBits;
     #define snprintf _snprintf
     //#define strncpy _strncpy
     #define PLANK_LITTLEENDIAN  1
     #define PLANK_BIGENDIAN     0
-    #define PLANK_ALIGN(amount) __declspec (align (amount))
+    #define PLANK_ALIGN(amount) __declspec(align(amount))
 #else
     // assume unix and Apple 
 	#include <unistd.h>
@@ -133,6 +143,7 @@
     typedef unsigned long PlankUL;
     typedef signed long long PlankLL;
     typedef unsigned long long PlankULL;
+	typedef PlankULL PlankBits;
 
     #if defined (__APPLE_CPP__) || defined(__APPLE_CC__)
         #define PLANK_APPLE 1

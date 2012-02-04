@@ -145,10 +145,6 @@ PlankThreadLocalStorageRef pl_ThreadLocalStorage_Create()
         pl_MemoryZero (p, sizeof (PlankThreadLocalStorage));
     
     return p;
-    
-exit:
-    pl_ThreadLocalStorage_Destroy (p);
-    return PLANK_NULL;
 }
 
 PlankResult pl_ThreadLocalStorage_Init (PlankThreadLocalStorageRef p)

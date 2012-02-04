@@ -210,6 +210,8 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     if (dataIndex < dataLength)
         data.setSize (dataIndex, true);
    
+	(void)deinterleave; // until implemented...
+
 #ifndef PLONK_DEBUG
     (void)result;
 #endif

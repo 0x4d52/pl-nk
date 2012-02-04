@@ -232,7 +232,7 @@ PlankLL pl_AtomicLL_GetExtra (PlankAtomicLLRef p)
 
 
 #if PLANK_APPLE && PLANK_PPC
-inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
+ PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
 {    
     if (! pl_Lock_TryLock (p->lock))
         return PLANK_FALSE;
@@ -440,6 +440,7 @@ PlankResult pl_AtomicP_Destroy (PlankAtomicPRef p)
 
 PlankL pl_AtomicP_GetExtra (PlankAtomicPRef p)
 {
+	(void)p;
     return (PlankL)0;
 }
 
@@ -525,7 +526,7 @@ exit:
     return result;
 }
 
-inline PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
+PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
 {
     return pl_AtomicP_Get ((PlankAtomicPRef)p);
 }
@@ -535,7 +536,7 @@ PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
     return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
-inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
+PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
 {
     PlankP oldPtr;
     PlankL oldExtra;
@@ -553,7 +554,7 @@ inline PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL new
     return oldPtr;        
 }
 
-inline PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
+PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
     PlankL oldExtra;
@@ -568,12 +569,12 @@ inline PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
     return oldPtr;            
 }
 
-inline void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
+void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
 {
-    pl_AtomicPX_SwapAll (p, newPtr, newExtra, PLANK_NULL);
+    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankL*)PLANK_NULL);
 }
 
-inline void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
+void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
 {
     PlankP oldPtr;
     PlankL oldExtra;
@@ -586,7 +587,7 @@ inline void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
     } while (!success);
 }
 
-inline PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
+PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
 {
     PlankP newPtr, oldPtr;
     PlankL oldExtra;
@@ -602,17 +603,17 @@ inline PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
     return newPtr;    
 }
 
-inline PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand)
+PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand)
 {
     return pl_AtomicPX_Add (p, -operand);
 }
 
-inline PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p)
+PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p)
 {
     return pl_AtomicPX_Add (p, (PlankL)1);
 }
 
-inline PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
+PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
 {
     return pl_AtomicPX_Add (p, (PlankL)(-1));
 }
@@ -690,19 +691,26 @@ inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, Pla
 
 #if PLANK_WIN
 #if PLANK_32BIT
-inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
 {
-    PlankAtomicPX oldAll = { oldPtr, oldExtra };
-    PlankAtomicPX newAll = { newPtr, newExtra };
-    PlankULL oldValue = *(PlankULL*)&oldAll;
-    PlankULL newValue = *(PlankULL*)&newAll;
+    PlankAtomicPX oldAll; // = { oldPtr, oldExtra };
+    PlankAtomicPX newAll; // = { newPtr, newExtra };
+    PlankULL oldAllValue; // = *(PlankULL*)&oldAll;
+    PlankULL newAllValue; // = *(PlankULL*)&newAll;
     
-    return oldValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newValue, oldValue);
+	oldAll.ptr   = oldPtr; 
+	oldAll.extra = oldExtra;
+	newAll.ptr   = newPtr; 
+	newAll.extra = newExtra;
+    oldAllValue  = *(PlankULL*)&oldAll;
+	newAllValue  = *(PlankULL*)&newAll;
+
+	return oldAllValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newAllValue, oldAllValue);
 }
 #endif
 
 #if PLANK_64BIT
-inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
 {
     // Can't check this as I only have the MSVC 32-bit version, 
     // I might have newPtr and newExtra the wrong way round.
@@ -798,7 +806,7 @@ exit:
     return result;
 }
 
-inline PlankL pl_AtomicLX_Get (PlankAtomicLXRef p)
+PlankL pl_AtomicLX_Get (PlankAtomicLXRef p)
 {
     return pl_AtomicL_Get ((PlankAtomicLRef)p);
 }
@@ -808,7 +816,7 @@ PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
     return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
-inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtraPtr)
+PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtraPtr)
 {
     PlankL oldValue;
     PlankL oldExtra;
@@ -826,7 +834,7 @@ inline PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL n
     return oldValue;        
 }
 
-inline PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue)
+PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue)
 {
     PlankL oldValue;
     PlankL oldExtra;
@@ -841,12 +849,12 @@ inline PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue)
     return oldValue;            
 }
 
-inline void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra)
+void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra)
 {
-    pl_AtomicLX_SwapAll (p, newValue, newExtra, PLANK_NULL);
+    pl_AtomicLX_SwapAll (p, newValue, newExtra, (PlankL*)PLANK_NULL);
 }
 
-inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
+void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
 {
     PlankL oldValue;
     PlankL oldExtra;
@@ -859,7 +867,7 @@ inline void pl_AtomicLX_Set (PlankAtomicLXRef p, PlankL newValue)
     } while (!success);
 }
 
-inline PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand)
+PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand)
 {
     PlankL newValue, oldValue;
     PlankL oldExtra;
@@ -875,17 +883,17 @@ inline PlankL pl_AtomicLX_Add (PlankAtomicLXRef p, PlankL operand)
     return newValue;    
 }
 
-inline PlankL pl_AtomicLX_Subtract (PlankAtomicLXRef p, PlankL operand)
+PlankL pl_AtomicLX_Subtract (PlankAtomicLXRef p, PlankL operand)
 {
     return pl_AtomicLX_Add (p, -operand);
 }
 
-inline PlankL pl_AtomicLX_Increment (PlankAtomicLXRef p)
+PlankL pl_AtomicLX_Increment (PlankAtomicLXRef p)
 {
     return pl_AtomicLX_Add (p, (PlankL)1);
 }
 
-inline PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p)
+PlankL pl_AtomicLX_Decrement (PlankAtomicLXRef p)
 {
     return pl_AtomicLX_Add (p, (PlankL)(-1));
 }
@@ -963,19 +971,26 @@ inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, P
 
 #if PLANK_WIN
 #if PLANK_32BIT
-inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
+PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
 {
-    PlankAtomicLX oldAll = { oldValue, oldExtra };
-    PlankAtomicLX newAll = { newValue, newExtra };
-    PlankULL oldValue = *(PlankULL*)&oldAll;
-    PlankULL newValue = *(PlankULL*)&newAll;
-    
-    return oldValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newValue, oldValue);
+    PlankAtomicLX oldAll; // = { oldValue, oldExtra };
+    PlankAtomicLX newAll; // = { newValue, newExtra };
+    PlankULL oldAllValue; // = *(PlankULL*)&oldAll;
+    PlankULL newAllValue; // = *(PlankULL*)&newAll;
+
+	oldAll.value = oldValue; 
+	oldAll.extra = oldExtra;
+    newAll.value = newValue; 
+	newAll.extra = newExtra;
+	oldAllValue  = *(PlankULL*)&oldAll;
+    newAllValue  = *(PlankULL*)&newAll;
+
+	return oldAllValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newAllValue, oldAllValue);
 }
 #endif
 
 #if PLANK_64BIT
-inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
+PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
 {
     // Can't check this as I only have the MSVC 32-bit version, 
     // I might have newPtr and newExtra the wrong way round.

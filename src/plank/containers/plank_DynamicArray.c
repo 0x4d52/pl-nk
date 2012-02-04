@@ -169,7 +169,7 @@ PlankResult pl_DynamicArray_AddItem (PlankDynamicArrayRef p, const PlankP item)
             goto exit;
     }
     
-    memcpy (p->data + index * p->itemSize, item, p->itemSize);
+    memcpy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
     
 exit:
     return result;
@@ -185,7 +185,7 @@ PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankLL index
         goto exit;
     }
     
-    memcpy (p->data + index * p->itemSize, item, p->itemSize);
+    memcpy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
     
 exit:
     return result;        
@@ -207,8 +207,8 @@ PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankLL in
     
     if (index < p->usedItems)
     {
-        src = p->data + index * p->itemSize;
-        dst = p->data + (index + 1) * p->itemSize;
+        src = (unsigned char*)p->data + index * p->itemSize;
+        dst = (unsigned char*)p->data + (index + 1) * p->itemSize;
         size = p->itemSize * (p->usedItems - index);
         memcpy (dst, src, size);
     
@@ -219,7 +219,7 @@ PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankLL in
     }
     else
     {
-        dst = p->data + p->usedItems * p->itemSize;
+        dst = (unsigned char*)p->data + p->usedItems * p->itemSize;
         src = item;
         size = p->itemSize;
         memcpy (dst, src, size);        
@@ -241,7 +241,7 @@ PlankResult pl_DynamicArray_GetItem (PlankDynamicArrayRef p, const PlankLL index
         goto exit;
     }
     
-    memcpy (item, p->data + index * p->itemSize, p->itemSize);
+    memcpy (item, (unsigned char*)p->data + index * p->itemSize, p->itemSize);
     
 exit:
     return result;    
@@ -263,8 +263,8 @@ PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankLL in
     
     if (p->usedItems > 0)
     {
-        dst = p->data + index * p->itemSize;
-        src = p->data + (index + 1) * p->itemSize;
+        dst = (unsigned char*)p->data + index * p->itemSize;
+        src = (unsigned char*)p->data + (index + 1) * p->itemSize;
         size = p->itemSize * (p->usedItems - index);
         memcpy (dst, src, size);
     }

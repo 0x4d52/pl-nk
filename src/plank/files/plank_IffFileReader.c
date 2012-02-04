@@ -196,7 +196,7 @@ PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB is
 {
     PlankUI chunkLength;
     
-    if (pl_File_IsBigEndian (&p->file) != (!!isBigEndian))
+    if (pl_File_IsBigEndian (&p->file) != (PlankB)(!!isBigEndian))
     {
         pl_File_SetEndian (&p->file, isBigEndian);
         

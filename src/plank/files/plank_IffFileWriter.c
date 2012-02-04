@@ -105,6 +105,7 @@ exit:
 
 PlankResult pl_IffFileWriter_DeInit (PlankIffFileWriterRef p)
 {
+	(void)p;
     return PlankResult_UnknownError;
 }
 
@@ -185,7 +186,7 @@ exit:
 PlankResult pl_IffFileWriter_WriteHeader (PlankIffFileWriterRef p)
 {
     PlankResult result = PlankResult_OK;
-    PlankUI length = p->headerInfo.mainLength; // should rewrite to cope with RF64
+    PlankUI length = (PlankUI)p->headerInfo.mainLength; // should rewrite to cope with RF64
     
     if ((result = pl_File_SetPosition (&p->file, 0)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteFourCharCode (&p->file, p->headerInfo.mainID)) != PlankResult_OK) goto exit;

@@ -172,8 +172,6 @@ PlankResult pl_SimpleQueue_SetFreeElementDataFunction (PlankSimpleQueueRef p,
 {
     PlankResult result = PlankResult_OK;
     p->freeFunction = freeFunction;
-    
-exit:
     return result;
 }
 

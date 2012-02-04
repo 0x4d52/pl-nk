@@ -39,7 +39,7 @@
 #ifndef PLANK_LOCKFREEMEMORY_H
 #define PLANK_LOCKFREEMEMORY_H
 
-#include "plank_LockFreeStack.h"
+#include "../containers/plank_LockFreeStack.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -103,18 +103,18 @@ typedef struct PlankLockFreeMemoryProcessHeap*      PlankLockFreeMemoryProcessHe
 
 typedef struct PlankLockFreeMemoryDescriptorQueue 
 {
-	PlankULL descriptoAvailable:46;
-    PlankULL tag:18;
+	PlankBits descriptoAvailable:46;
+    PlankBits tag:18;
 } PlankLockFreeMemoryDescriptorQueue;
 
 /* Superblock descriptor structure. We bumped avail and count 
  * to 24 bits to support larger superblock sizes. */
 typedef struct PlankLockFreeMemoryAnchor 
 {
-	PlankULL 	avail:24;
-    PlankULL    count:24;
-    PlankULL    state:2;
-    PlankULL    tag:14;
+	PlankBits 	 avail:24;
+    PlankBits    count:24;
+    PlankBits    state:2;
+    PlankBits    tag:14;
 } PlankLockFreeMemoryAnchor;
 
 typedef struct PlankLockFreeMemoryDescriptor 
@@ -137,8 +137,8 @@ typedef struct PlankLockFreeMemorySizeClass
 
 typedef struct PlankLockFreeMemoryActive
 {
-	PlankULL ptr:58;
-    PlankULL credits:6;
+	PlankBits ptr:58;
+    PlankBits credits:6;
 } PlankLockFreeMemoryActive;
 
 typedef struct PlankLockFreeMemoryProcessHeap 

@@ -75,7 +75,7 @@ PlankFFTFRef pl_FFTF_CreateAndInit()
             return p;
     }
     
-    return PLANK_NULL;
+    return (PlankFFTFRef)PLANK_NULL;
 }
 
 PlankFFTFRef pl_FFTF_Create()
@@ -90,10 +90,6 @@ PlankFFTFRef pl_FFTF_Create()
         pl_MemoryZero (p, sizeof (PlankFFTF));
     
     return p;
-    
-exit:
-    pl_FFTF_Destroy (p);
-    return PLANK_NULL;
 }
 
 PlankResult pl_FFTF_Init (PlankFFTFRef p)

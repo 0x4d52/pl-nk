@@ -145,7 +145,6 @@ PlankResult pl_Thread_Init (PlankThreadRef p)
         
     pl_Thread_Reset (p);
     
-exit:
     return result;
 }
 
@@ -157,7 +156,6 @@ PlankResult pl_Thread_DeInit (PlankThreadRef p)
     pl_AtomicI_DeInit (&p->isRunningAtom);
     pl_AtomicPX_DeInit (&p->userDataAtom);
 
-exit:
     return result;    
 }
 
@@ -245,12 +243,12 @@ PlankResult pl_Thread_Cancel (PlankThreadRef p)
         return PlankResult_OK;
     }
     
+	return PlankResult_ThreadCancelFailed;
+
 #elif PLANK_WIN   
     TerminateThread ((HANDLE)p->thread, 0);
     return PlankResult_OK;
-
 #endif
-    return PlankResult_ThreadCancelFailed;
 }
 
 PlankResult pl_Thread_Wait (PlankThreadRef p)

@@ -172,8 +172,6 @@ PlankResult pl_SimpleLinkedList_SetFreeElementDataFunction (PlankSimpleLinkedLis
 {
     PlankResult result = PlankResult_OK;
     p->freeFunction = freeFunction;
-    
-exit:
     return result;
 }
 
@@ -192,7 +190,6 @@ PlankResult pl_SimpleLinkedList_Add (PlankSimpleLinkedListRef p, const PlankSimp
         pl_SimpleLinkedListElement_SetNext (last, element);
     }
 
-exit:
     return result;    
 }
 
@@ -377,7 +374,6 @@ PlankResult pl_SimpleLinkedList_RemoveFirst (PlankSimpleLinkedListRef p, PlankSi
     if (p->first != PLANK_NULL)
         p->first = pl_SimpleLinkedListElement_GetNext (p->first);
     
-exit:
     return result;    
 }
 
@@ -411,7 +407,6 @@ PlankResult pl_SimpleLinkedList_RemoveLast (PlankSimpleLinkedListRef p, PlankSim
         *element = curr;
     }
 
-exit:
     return result;    
 }
 

@@ -93,6 +93,7 @@ protected:
     void *weakPointer;
 	unsigned int active;
 	
+private:
 	SmartPointer (const SmartPointer&);
     const SmartPointer& operator= (const SmartPointer&);
 };

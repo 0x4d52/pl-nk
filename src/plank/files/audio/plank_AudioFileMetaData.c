@@ -43,11 +43,12 @@
 
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_Create()
 {
-    return PLANK_NULL;
+    return (PlankAudioFileMetaDataRef)PLANK_NULL;
 }
 
 void pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p)
 {
+	(void)p;
 }
 
 

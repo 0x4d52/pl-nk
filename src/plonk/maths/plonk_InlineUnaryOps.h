@@ -240,10 +240,10 @@ template<class Type> inline Type distort (Type const& a) throw()       { return 
 template<class Type>
 inline Type zap (Type const& x) throw()
 {
-    static const Type min (1e-15);
-    static const Type max (1e15);
+    static const Type smallest (static_cast<Type> (1e-15));
+    static const Type biggest (static_cast<Type> (1e15));
     const Type absx = abs (x);
-    return ((absx > min) && (absx < max)) ? x : Math<Type>::get0();
+    return ((absx > smallest) && (absx < biggest)) ? x : Math<Type>::get0();
 }
 
 /// @}

@@ -75,8 +75,7 @@ PlankLockFreeDynamicArrayRef pl_LockFreeDynamicArray_Create()
     
     if (p != PLANK_NULL)
         pl_MemoryZero (p, sizeof (PlankLockFreeDynamicArray));
-    
-exit:
+
     return p;    
 }
 
@@ -179,7 +178,7 @@ PlankResult pl_LockFreeDynamicArray_AddItem (PlankLockFreeDynamicArrayRef p, con
             goto exit;
     }
     
-    memcpy (p->data + index * p->itemSize, item, p->itemSize);
+    memcpy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
     
 exit:
     return result;
@@ -195,7 +194,7 @@ PlankResult pl_LockFreeDynamicArray_SetItem (PlankLockFreeDynamicArrayRef p, con
         goto exit;
     }
     
-    memcpy (p->data + index * p->itemSize, item, p->itemSize);
+    memcpy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
     
 exit:
     return result;        
@@ -217,8 +216,8 @@ PlankResult pl_LockFreeDynamicArray_InsertItem (PlankLockFreeDynamicArrayRef p, 
     
     if (index < p->usedItems)
     {
-        src = p->data + index * p->itemSize;
-        dst = p->data + (index + 1) * p->itemSize;
+        src = (unsigned char*)p->data + index * p->itemSize;
+        dst = (unsigned char*)p->data + (index + 1) * p->itemSize;
         size = p->itemSize * (p->usedItems - index);
         memcpy (dst, src, size);
     
@@ -229,7 +228,7 @@ PlankResult pl_LockFreeDynamicArray_InsertItem (PlankLockFreeDynamicArrayRef p, 
     }
     else
     {
-        dst = p->data + p->usedItems * p->itemSize;
+        dst = (unsigned char*)p->data + p->usedItems * p->itemSize;
         src = item;
         size = p->itemSize;
         memcpy (dst, src, size);        
@@ -251,7 +250,7 @@ PlankResult pl_LockFreeDynamicArray_GetItem (PlankLockFreeDynamicArrayRef p, con
         goto exit;
     }
     
-    memcpy (item, p->data + index * p->itemSize, p->itemSize);
+    memcpy (item, (unsigned char*)p->data + index * p->itemSize, p->itemSize);
     
 exit:
     return result;    
@@ -273,8 +272,8 @@ PlankResult pl_LockFreeDynamicArray_RemoveItem (PlankLockFreeDynamicArrayRef p, 
     
     if (p->usedItems > 0)
     {
-        dst = p->data + index * p->itemSize;
-        src = p->data + (index + 1) * p->itemSize;
+        dst = (unsigned char*)p->data + index * p->itemSize;
+        src = (unsigned char*)p->data + (index + 1) * p->itemSize;
         size = p->itemSize * (p->usedItems - index);
         memcpy (dst, src, size);
     }

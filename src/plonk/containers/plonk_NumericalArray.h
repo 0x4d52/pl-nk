@@ -102,6 +102,13 @@ public:
             valid (true) 
 		{ 
 		}
+
+		template<class OtherType>
+		InitialNumber (OtherType initialValue) throw()
+		:	value (static_cast<NumericalType> (initialValue)), 
+            valid (true) 
+		{ 
+		}
 		
 		const NumericalType value;
 		const bool valid;
@@ -152,7 +159,7 @@ public:
     template<class OtherType>
     static inline void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
-        for (int i = 0; i < numItems; ++i)
+        for (UnsignedLong i = 0; i < numItems; ++i)
             roundCopy (src[i], dst[i]);
     }
     
@@ -165,9 +172,11 @@ public:
         CalcType otherTypePeak (TypeUtility<OtherType>::getTypePeak());
         CalcType otherTypePeakFactor = CalcType (1) / otherTypePeak;
         
+		UnsignedLong i;
+
         if (typePeak == CalcType (1))
         {
-            for (int i = 0; i < numItems; ++i)
+            for (i = 0; i < numItems; ++i)
             {
                 NumericalType temp;
                 roundCopy (src[i], temp);
@@ -176,7 +185,7 @@ public:
         }
         else
         {
-            for (int i = 0; i < numItems; ++i)
+            for (i = 0; i < numItems; ++i)
             {
                 NumericalType temp;
                 roundCopy (src[i], temp);

@@ -171,8 +171,6 @@ PlankResult pl_SimpleStack_SetFreeElementDataFunction (PlankSimpleStackRef p,
 {
     PlankResult result = PlankResult_OK;    
     p->freeFunction = freeFunction;
-    
-exit:
     return result;
 }
 
@@ -203,7 +201,6 @@ PlankResult pl_SimpleStack_Pop (PlankSimpleStackRef p, PlankSimpleStackElementRe
     
     *element = headElement;
     
-exit:
     return result;    
 }
 

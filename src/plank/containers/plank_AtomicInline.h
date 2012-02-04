@@ -323,9 +323,9 @@ static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
 
 static inline PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
 {    
-    return oldValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
-                                                        *(PlankULL*)&newValue, 
-                                                        *(PlankULL*)&oldValue);
+    return oldValue == (PlankLL)pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
+							   						             *(PlankULL*)&newValue, 
+																 *(PlankULL*)&oldValue);
 }
 #endif
 

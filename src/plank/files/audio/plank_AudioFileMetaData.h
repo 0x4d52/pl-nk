@@ -68,6 +68,7 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileMetaData
 {
+	int dummy;
 } PlankAudioFileMetaData;
 #endif 
 

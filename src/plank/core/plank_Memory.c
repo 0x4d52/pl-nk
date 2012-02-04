@@ -52,7 +52,7 @@ PlankMemoryRef pl_Memory_CreateAndInit()
             return p;
     }
     
-    return PLANK_NULL;
+    return (PlankMemoryRef)PLANK_NULL;
 }
 
 PlankMemoryRef pl_Memory_Create()
@@ -70,7 +70,7 @@ PlankResult pl_Memory_Init (PlankMemoryRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
 
-    p->alloc = malloc;
+    p->alloc = (PlankMemoryAllocateBytesFunction)malloc;
     p->free = free;
     return PlankResult_OK;
 }

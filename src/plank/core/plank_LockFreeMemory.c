@@ -81,8 +81,7 @@ PlankResult pl_LockFreeMemory_Init (PlankLockFreeMemoryRef p)
         sizeClass->size = size;
         sizeClass->superBlockSize = PLANKLOCKFREEMEMORY_SUPERBLOCKSIZE;
     }
-    
-exit:
+
     return result;
 }
 
@@ -129,10 +128,14 @@ exit:
 
 void* pl_LockFreeMemory_AllocateBytes (PlankLockFreeMemoryRef p, PlankUL numBytes)
 {
+	(void)p;
+	(void)numBytes;
     return PLANK_NULL;
 }
 
 PlankResult pl_LockFreeMemory_Free (PlankLockFreeMemoryRef p, void* ptr)
 {
+	(void)p;
+	(void)ptr;
     return PlankResult_UnknownError;
 }

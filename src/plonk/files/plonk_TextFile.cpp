@@ -116,7 +116,7 @@ bool TextFileInternal::isEof() const throw()
 
 Text TextFileInternal::readLine (const int maximumLength) throw()
 {
-    char buffer[maximumLength];
+    Text buffer (Text::withSize (maximumLength));
     
     const ResultCode result = pl_File_ReadLine (getPeerRef(), buffer, maximumLength);
     plonk_assert ((result == PlankResult_OK) || (result == PlankResult_FileEOF));
@@ -125,7 +125,7 @@ Text TextFileInternal::readLine (const int maximumLength) throw()
     (void)result;
 #endif
     
-    return buffer;
+    return buffer.getArray(); // copies, reducing size
 }
 
 void TextFileInternal::writeValue (const char value) throw()

@@ -158,12 +158,15 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
     PlankAtomicPXRef tailElementNextAtom;
     PlankB success = PLANK_FALSE;
     
+	tailExtra = 0;
+	tailElement = 0;
+
     pl_LockFreeQueueElement_SetNext (element, (PlankLockFreeQueueElementRef)p);
     
     while (!success)
     {
         tailExtra = pl_AtomicPX_GetExtra ((PlankAtomicPXRef)&(p->tail));
-        tailElement = pl_AtomicPX_Get ((PlankAtomicPXRef)&(p->tail));
+        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_Get ((PlankAtomicPXRef)&(p->tail));
         
         tailElementNextAtom = pl_LockFreeQueueElement_GetNextAtom (tailElement);
         success = pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)tailElementNextAtom, 
@@ -183,7 +186,6 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
     
     pl_AtomicLL_Increment (&p->count);
     
-exit:
     return result;
 }
 
@@ -194,6 +196,8 @@ PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueEle
 	PlankLockFreeQueueElementRef headElement, nextElement;
     PlankB success = PLANK_FALSE;
     
+	headElement = 0;
+
     while (!success)
     {
         headExtra = pl_AtomicPX_GetExtra ((PlankAtomicPXRef)&(p->head));

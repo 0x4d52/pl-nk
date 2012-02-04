@@ -238,8 +238,6 @@ PlankResult pl_SimpleMap_SetFreeElementDataFunction (PlankSimpleMapRef p,
 {
     PlankResult result = PlankResult_OK;
     p->freeFunction = freeFunction;
-    
-exit:
     return result;
 }
 
