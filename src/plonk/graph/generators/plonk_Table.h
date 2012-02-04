@@ -44,7 +44,7 @@
 
 template<class SampleType> class TableChannelInternal;
 
-CHANNELDATA_DECLARE(TableChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(TableChannelInternal,SampleType)
 {    
     typedef typename TypeUtility<SampleType>::IndexType FrequencyType;
 
@@ -57,11 +57,11 @@ CHANNELDATA_DECLARE(TableChannelInternal,SampleType)
 /** Wavetable oscillator. */
 template<class SampleType>
 class TableChannelInternal 
-:   public ChannelInternal<SampleType, CHANNELDATA_NAME(TableChannelInternal,SampleType)>
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(TableChannelInternal,SampleType)>
 {
 public:
 
-    typedef CHANNELDATA_NAME(TableChannelInternal,SampleType)   Data;
+    typedef PLONK_CHANNELDATA_NAME(TableChannelInternal,SampleType)   Data;
     typedef ChannelBase<SampleType>                             ChannelType;
     typedef TableChannelInternal<SampleType>                    TableInternal;
     typedef ChannelInternal<SampleType,Data>                    Internal;

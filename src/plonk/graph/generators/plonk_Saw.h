@@ -44,7 +44,7 @@
 
 template<class SampleType> class SawChannelInternal;
 
-CHANNELDATA_DECLARE(SawChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(SawChannelInternal,SampleType)
 {    
     typedef typename TypeUtility<SampleType>::IndexType FrequencyType;
 
@@ -55,7 +55,7 @@ CHANNELDATA_DECLARE(SawChannelInternal,SampleType)
     LongLong peak2peak;
 };      
 
-CHANNELDATA_SPECIAL(SawChannelInternal,float)
+PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,float)
 {    
     ChannelInternalCore::Data base;
     
@@ -64,7 +64,7 @@ CHANNELDATA_SPECIAL(SawChannelInternal,float)
     float peak2peak;
 };        
 
-CHANNELDATA_SPECIAL(SawChannelInternal,double)
+PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,double)
 {    
     ChannelInternalCore::Data base;
     
@@ -73,7 +73,7 @@ CHANNELDATA_SPECIAL(SawChannelInternal,double)
     double peak2peak;
 };        
 
-CHANNELDATA_SPECIAL(SawChannelInternal,short)
+PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,short)
 {    
     typedef TypeUtility<short>::IndexType FrequencyType;
 
@@ -84,7 +84,7 @@ CHANNELDATA_SPECIAL(SawChannelInternal,short)
     int peak2peak;
 };      
 
-CHANNELDATA_SPECIAL(SawChannelInternal,int)
+PLONK_CHANNELDATA_SPECIAL(SawChannelInternal,int)
 {    
     typedef TypeUtility<int>::IndexType FrequencyType;
 
@@ -102,10 +102,10 @@ CHANNELDATA_SPECIAL(SawChannelInternal,int)
 /** Sawtooth wave generator. */
 template<class SampleType>
 class SawChannelInternal 
-:   public ChannelInternal<SampleType, CHANNELDATA_NAME(SawChannelInternal,SampleType)>
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal,SampleType)>
 {
 public:
-    typedef CHANNELDATA_NAME(SawChannelInternal,SampleType)     Data;
+    typedef PLONK_CHANNELDATA_NAME(SawChannelInternal,SampleType)     Data;
     typedef InputDictionary                                     Inputs;
 
     typedef ChannelBase<SampleType>                             ChannelType;

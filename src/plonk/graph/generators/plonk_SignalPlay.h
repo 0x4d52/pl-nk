@@ -44,7 +44,7 @@
 
 template<class SampleType> class SignalPlayChannelInternal;
 
-CHANNELDATA_DECLARE(SignalPlayChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(SignalPlayChannelInternal,SampleType)
 {    
     typedef typename TypeUtility<SampleType>::IndexType RateType;
 
@@ -57,11 +57,11 @@ CHANNELDATA_DECLARE(SignalPlayChannelInternal,SampleType)
 /** Signal player generator. */
 template<class SampleType>
 class SignalPlayChannelInternal 
-:   public ChannelInternal<SampleType, CHANNELDATA_NAME(SignalPlayChannelInternal,SampleType)>
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(SignalPlayChannelInternal,SampleType)>
 {
 public:
 
-    typedef CHANNELDATA_NAME(SignalPlayChannelInternal,SampleType)  Data;
+    typedef PLONK_CHANNELDATA_NAME(SignalPlayChannelInternal,SampleType)  Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
     typedef SignalPlayChannelInternal<SampleType>                   SignalPlayInternal;
     typedef ChannelInternal<SampleType,Data>                        Internal;

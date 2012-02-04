@@ -45,7 +45,7 @@
 
 template<class SampleType> class EnvelopeChannelInternal;
 
-CHANNELDATA_DECLARE(EnvelopeChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(EnvelopeChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     
@@ -63,10 +63,10 @@ CHANNELDATA_DECLARE(EnvelopeChannelInternal,SampleType)
 /** Envelope channel performs a series of breakpoints. */
 template<class SampleType>
 class EnvelopeChannelInternal 
-:   public ChannelInternal<SampleType, CHANNELDATA_NAME(EnvelopeChannelInternal,SampleType)>
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(EnvelopeChannelInternal,SampleType)>
 {
 public:
-    typedef CHANNELDATA_NAME(EnvelopeChannelInternal,SampleType)    Data;
+    typedef PLONK_CHANNELDATA_NAME(EnvelopeChannelInternal,SampleType)    Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
     typedef EnvelopeChannelInternal<SampleType>                     EnvelopeInternal;
     typedef ChannelInternal<SampleType,Data>                        Internal;

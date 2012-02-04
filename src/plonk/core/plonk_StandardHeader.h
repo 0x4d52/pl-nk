@@ -241,14 +241,16 @@ inline void operator delete (void *ptr)
 }
 #endif
 
-#ifndef INFINITY
-union MSVC_EVIL_FLOAT_HACK
-{
-   unsigned __int8 Bytes[4];
-   float Value;
-};
-static union MSVC_EVIL_FLOAT_HACK INFINITY_HACK = {{0x00, 0x00, 0x80, 0x7F}};
-#define INFINITY (INFINITY_HACK.Value)
+#ifdef INFINITY
+    #define PLONK_INFINITY (INFINITY)
+#else
+    union PLONK_MSVC_EVIL_FLOAT_HACK
+    {
+       unsigned __int8 Bytes[4];
+       float Value;
+    };
+    static union PLONK_MSVC_EVIL_FLOAT_HACK PLONK_INFINITY_HACK = {{0x00, 0x00, 0x80, 0x7F}};
+#define PLONK_INFINITY (PLONK_INFINITY_HACK.Value)
 #endif
 
 

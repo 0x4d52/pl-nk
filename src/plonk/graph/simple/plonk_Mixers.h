@@ -44,7 +44,7 @@
 
 template<class SampleType> class ChannelMixerChannelInternal;
 
-CHANNELDATA_DECLARE(ChannelMixerChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(ChannelMixerChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     bool allowAutoDelete:1;
@@ -54,10 +54,10 @@ CHANNELDATA_DECLARE(ChannelMixerChannelInternal,SampleType)
 /** Mix all channels in a single unit to a single channel. */
 template<class SampleType>
 class ChannelMixerChannelInternal
-:   public ChannelInternal<SampleType, CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)>
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)>
 {
 public:
-    typedef CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)    Data;
+    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)    Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
     typedef ChannelMixerChannelInternal<SampleType>                     ChannelMixerInternal;
     typedef ChannelInternal<SampleType,Data>                            Internal;
@@ -164,7 +164,7 @@ public:
 
 template<class SampleType> class UnitMixerChannelInternal;
 
-CHANNELDATA_DECLARE(UnitMixerChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(UnitMixerChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     bool allowAutoDelete:1;
@@ -174,10 +174,10 @@ CHANNELDATA_DECLARE(UnitMixerChannelInternal,SampleType)
 /** Mix an array of units to a multichannel unit. */
 template<class SampleType>
 class UnitMixerChannelInternal
-:   public ProxyOwnerChannelInternal<SampleType, CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)>
+:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)>
 {
 public:
-    typedef CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)   Data;
+    typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)   Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
     typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
     typedef UnitBase<SampleType>                                    UnitType;
@@ -361,7 +361,7 @@ public:
          for full templating we'd need to add template params for mul + add unit types
          */
 
-        typedef CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType) Data;
+        typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType) Data;
 
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
@@ -388,7 +388,7 @@ public:
          for full templating we'd need to add template params for mul + add unit types
          */
 
-        typedef CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType) Data;
+        typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType) Data;
 
         Inputs inputs;
         inputs.put (IOKey::Units, array);
