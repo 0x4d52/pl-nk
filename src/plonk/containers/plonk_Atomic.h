@@ -39,7 +39,7 @@
 #ifndef PLONK_ATOMIC_H
 #define PLONK_ATOMIC_H
 
-
+/** Type-independent atomic operations. */
 class AtomicOps
 {
 public:
