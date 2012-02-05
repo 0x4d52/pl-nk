@@ -64,7 +64,7 @@ public:
     Int24 (const char value) throw();
     Int24 (const short value) throw();
     Int24 (const int value) throw();
-    Int24 (const Long value) throw();
+//    Int24 (const Long value) throw();
     Int24 (const LongLong value) throw();
     Int24 (const float value) throw();
     Int24 (const double value) throw();
@@ -90,7 +90,7 @@ public:
     operator char() const throw();
     operator short() const throw();
     operator int() const throw();
-    operator Long() const throw();
+//    operator Long() const throw();
     operator LongLong() const throw();
     operator float() const throw();
     operator double() const throw();

@@ -348,6 +348,7 @@ public:
     static inline int  getTypeCode() { return TypeCode::Int24; }
 };
 
+/*
 template<>
 class TypeUtilityBase<Long>
 {
@@ -358,6 +359,7 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Long; }
 };
+*/
 
 template<>
 class TypeUtilityBase<LongLong>
@@ -458,6 +460,7 @@ public:
     static inline int  getTypeCode() { return TypeCode::AtomicInt; }
 };
 
+/*
 template<>
 class TypeUtilityBase<AtomicLong>
 {
@@ -479,6 +482,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLong; }
 };
+*/
 
 template<>
 class TypeUtilityBase<AtomicLongLong>
@@ -2230,8 +2234,8 @@ PLONK_BINARYOPTYPEUTILITY_DEFINE(float,short,float);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(short,float,float);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(float,char,float);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(char,float,float);
-PLONK_BINARYOPTYPEUTILITY_DEFINE(float,Long,float);
-PLONK_BINARYOPTYPEUTILITY_DEFINE(Long,float,float);
+//PLONK_BINARYOPTYPEUTILITY_DEFINE(float,Long,float);
+//PLONK_BINARYOPTYPEUTILITY_DEFINE(Long,float,float);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(float,LongLong,float);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(LongLong,float,float);
 
@@ -2242,8 +2246,8 @@ PLONK_BINARYOPTYPEUTILITY_DEFINE(double,short,double);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(short,double,double);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(double,char,double);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(char,double,double);
-PLONK_BINARYOPTYPEUTILITY_DEFINE(double,Long,double);
-PLONK_BINARYOPTYPEUTILITY_DEFINE(Long,double,double);
+//PLONK_BINARYOPTYPEUTILITY_DEFINE(double,Long,double);
+//PLONK_BINARYOPTYPEUTILITY_DEFINE(Long,double,double);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(double,LongLong,double);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(LongLong,double,double);
 
@@ -2259,9 +2263,9 @@ PLONK_BINARYOPTYPEUTILITY_DEFINE(short,int,LongLong);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(int,short,LongLong);
 
 PLONK_BINARYOPTYPEUTILITY_DEFINE(int,int,LongLong);
-PLONK_BINARYOPTYPEUTILITY_DEFINE(int,Long,LongLong);
+//PLONK_BINARYOPTYPEUTILITY_DEFINE(int,Long,LongLong);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(int,LongLong,LongLong);
-PLONK_BINARYOPTYPEUTILITY_DEFINE(Long,int,LongLong);
+//PLONK_BINARYOPTYPEUTILITY_DEFINE(Long,int,LongLong);
 PLONK_BINARYOPTYPEUTILITY_DEFINE(LongLong,int,LongLong);
 
 // getting the calc type for ternary ops (or two chained binary ops)

@@ -97,7 +97,7 @@
 #include <time.h>
 #include <limits.h>
 
-#if (defined (_WIN32) || defined (_WIN64))
+#if (defined (_WIN32) || defined (_WIN64) || defined (WIN64))
     #include <windows.h>
     #include <process.h>
     #include <float.h>
@@ -115,16 +115,14 @@
     #define PLANK_WIN 1
     #define PLANK_X86 1
 
-    #ifdef _WIN32
-        #define PLANK_32BIT 1
-        typedef signed long PlankL;
-        typedef unsigned long PlankUL;
-    #endif
-
-    #ifdef _WIN64
+	#if defined(_WIN64) || defined(WIN64)
         typedef signed __int64 PlankL;
         typedef unsigned __int64 PlankUL;
         #define PLANK_64BIT 1
+    #elif defined(_WIN32)
+        #define PLANK_32BIT 1
+        typedef signed long PlankL;
+        typedef unsigned long PlankUL;
     #endif
 
 	typedef signed __int64 PlankLL;

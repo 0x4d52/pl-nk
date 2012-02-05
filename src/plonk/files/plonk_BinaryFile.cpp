@@ -184,6 +184,7 @@ void BinaryFileInternal::read (Int24& value) throw()
 #endif                    
 }
 
+/*
 void BinaryFileInternal::read (long& value) throw()
 {
     const ResultCode result = pl_File_ReadL (getPeerRef(), &value);
@@ -193,6 +194,7 @@ void BinaryFileInternal::read (long& value) throw()
     (void)result;
 #endif                
 }
+*/
 
 void BinaryFileInternal::read (LongLong& value) throw()
 {
@@ -234,6 +236,7 @@ void BinaryFileInternal::read (unsigned int& value) throw()
 #endif                
 }
 
+/*
 void BinaryFileInternal::read (unsigned long& value) throw()
 {
     const ResultCode result = pl_File_ReadUL (getPeerRef(), &value);
@@ -243,6 +246,7 @@ void BinaryFileInternal::read (unsigned long& value) throw()
     (void)result;
 #endif                
 }
+*/
 
 void BinaryFileInternal::read (UnsignedLongLong& value) throw()
 {
@@ -324,6 +328,7 @@ void BinaryFileInternal::write (const Int24 value) throw()
 #endif    
 }
 
+/*
 void BinaryFileInternal::write (const long value) throw()
 {
     const ResultCode result = pl_File_WriteL (getPeerRef(), value);
@@ -333,6 +338,7 @@ void BinaryFileInternal::write (const long value) throw()
     (void)result;
 #endif
 }
+*/
 
 void BinaryFileInternal::write (const LongLong value) throw()
 {
@@ -374,6 +380,7 @@ void BinaryFileInternal::write (const unsigned int value) throw()
 #endif
 }
 
+/*
 void BinaryFileInternal::write (const unsigned long value) throw()
 {
     const ResultCode result = pl_File_WriteUL (getPeerRef(), value);
@@ -383,6 +390,7 @@ void BinaryFileInternal::write (const unsigned long value) throw()
     (void)result;
 #endif
 }
+*/
 
 void BinaryFileInternal::write (const UnsignedLongLong value) throw()
 {

@@ -56,7 +56,7 @@ PLANK_BEGIN_C_LINKAGE
 typedef struct PlankThread* PlankThreadRef; 
 
 /** Thread ID. */
-typedef void* PlankThreadID;
+typedef long PlankThreadID;
 
 /** The Thread run function.
  This should have the declaration:
@@ -209,7 +209,7 @@ typedef void* PlankThreadNativeReturn;
 #endif // PLANK_APPLE
 
 #if PLANK_WIN
-typedef unsigned long PlankThreadNativeHandle;
+typedef uintptr_t PlankThreadNativeHandle;
 typedef unsigned PlankThreadNativeReturn;
 #define PLANK_THREADCALL __stdcall
 #endif // PLANK_WINDOWS

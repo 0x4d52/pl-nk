@@ -170,7 +170,7 @@ typedef PlankP Pointer;
 
 #define PLONK_INT24_MAX PLANK_INT24_MAX
 
-#if (defined (_WIN32) || defined (_WIN64))
+#if PLONK_WIN
 //    typedef __int64 LongLong;
 //    typedef unsigned __int64 UnsignedLongLong;
 	#pragma warning(disable : 4244) // loss of precision

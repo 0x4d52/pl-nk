@@ -177,6 +177,7 @@ public:
     static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
 };
 
+#if ! (PLANK_WIN && PLANK_64BIT)
 template<>
 class ArrayAllocator<LongLong>
 {
@@ -185,6 +186,7 @@ public:
     static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
     static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
 };
+#endif
 
 template<>
 class ArrayAllocator<Char>

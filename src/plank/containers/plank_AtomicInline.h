@@ -49,6 +49,8 @@ static inline void pl_AtomicMemoryBarrier()
 }
 
 #if PLANK_WIN
+
+#if PLANK_32BIT
 #pragma warning(disable:4035)
 static inline PlankULL pl_InterlockedCompareExchange64 (volatile PlankULL *value, 
                                                         PlankULL newValue, 
@@ -68,6 +70,19 @@ static inline PlankULL pl_InterlockedCompareExchange64 (volatile PlankULL *value
     }
 }
 #pragma warning(default:4035)
+#endif
+
+#if PLANK_64BIT
+static inline PlankULL pl_InterlockedCompareExchange64 (volatile PlankULL *value, 
+                                                        PlankULL newValue, 
+                                                        PlankULL oldValue) 
+{
+	return (PlankULL)_InterlockedCompareExchange64 ((volatile __int64*)value, 
+												    *(__int64*)&newValue, 
+												    *(__int64*)&oldValue);
+}
+#endif
+
 #endif
 
 //------------------------------------------------------------------------------
@@ -226,9 +241,9 @@ static inline PlankL pl_AtomicL_Add (PlankAtomicLRef p, PlankL operand)
 
 static inline PlankB  pl_AtomicL_CompareAndSwap (PlankAtomicLRef p, PlankL oldValue, PlankL newValue)
 {    
-    return oldValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
-                                                        *(PlankULL*)&newValue, 
-                                                        *(PlankULL*)&oldValue);
+    return (*(PlankULL*)&oldValue) == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p,
+									  					               *(PlankULL*)&newValue, 
+                                                                       *(PlankULL*)&oldValue);
 }
 #endif //PLANK_64BIT
 #endif //PLANK_WIN

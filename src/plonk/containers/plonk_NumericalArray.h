@@ -244,14 +244,14 @@ public:
 	static inline void roundCopy (const double inValue, short& outValue) throw()       { outValue = short (inValue + 0.5); }
 	static inline void roundCopy (const double inValue, int& outValue) throw()         { outValue = int (inValue + 0.5); }
 	static inline void roundCopy (const double inValue, Int24& outValue) throw()       { outValue = Int24 (inValue + 0.5); }
-    static inline void roundCopy (const double inValue, Long& outValue) throw()        { outValue = Long (inValue + 0.5); }    
+//    static inline void roundCopy (const double inValue, Long& outValue) throw()        { outValue = Long (inValue + 0.5); }    
     static inline void roundCopy (const double inValue, LongLong& outValue) throw()    { outValue = LongLong (inValue + 0.5); }    
 
     static inline void roundCopy (const float inValue, char& outValue) throw()         { outValue = char (inValue + 0.5f); }
 	static inline void roundCopy (const float inValue, short& outValue) throw()        { outValue = short (inValue + 0.5f); }
 	static inline void roundCopy (const float inValue, int& outValue) throw()          { outValue = int (inValue + 0.5f); }
     static inline void roundCopy (const float inValue, Int24& outValue) throw()        { outValue = Int24 (inValue + 0.5f); }
-    static inline void roundCopy (const float inValue, Long& outValue) throw()         { outValue = Long (inValue + 0.5f); }
+//    static inline void roundCopy (const float inValue, Long& outValue) throw()         { outValue = Long (inValue + 0.5f); }
     static inline void roundCopy (const float inValue, LongLong& outValue) throw()     { outValue = LongLong (inValue + 0.5f); }
     
     template<class InType, class OutType>
