@@ -693,10 +693,11 @@ inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, Pla
 #if PLANK_32BIT
 PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
 {
-    PlankAtomicPX oldAll; // = { oldPtr, oldExtra };
-    PlankAtomicPX newAll; // = { newPtr, newExtra };
-    PlankULL oldAllValue; // = *(PlankULL*)&oldAll;
-    PlankULL newAllValue; // = *(PlankULL*)&newAll;
+    // can't use static init as MSVC C is C89
+    PlankAtomicPX oldAll;
+    PlankAtomicPX newAll;
+    PlankULL oldAllValue;
+    PlankULL newAllValue;
     
 	oldAll.ptr   = oldPtr; 
 	oldAll.extra = oldExtra;
@@ -975,10 +976,10 @@ inline PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, P
 #if PLANK_32BIT
 PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
 {
-    PlankAtomicLX oldAll; // = { oldValue, oldExtra };
-    PlankAtomicLX newAll; // = { newValue, newExtra };
-    PlankULL oldAllValue; // = *(PlankULL*)&oldAll;
-    PlankULL newAllValue; // = *(PlankULL*)&newAll;
+    PlankAtomicLX oldAll;
+    PlankAtomicLX newAll;
+    PlankULL oldAllValue;
+    PlankULL newAllValue;
 
 	oldAll.value = oldValue; 
 	oldAll.extra = oldExtra;
@@ -997,7 +998,7 @@ PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL o
     // Can't check this as I only have the MSVC 32-bit version, 
     // I might have newPtr and newExtra the wrong way round.
     
-    PlankAtomicLX oldAll; // = { oldValue, oldExtra };
+    PlankAtomicLX oldAll
 	oldAll.value = oldValue;
 	oldAll.extra = oldExtra;
     return _InterlockedCompareExchange128 ((volatile __int64*)p,
