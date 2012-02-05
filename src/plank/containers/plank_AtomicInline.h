@@ -289,7 +289,7 @@ static inline void pl_AtomicLL_Set (PlankAtomicLLRef p, PlankLL newValue)
 }
 
 #if PLANK_APPLE
-#if PLANK_X86 // and PLANK_APPLE
+#if PLANK_X86 || PLANK_ARM // and PLANK_APPLE
 static inline PlankLL pl_AtomicLL_Add (PlankAtomicLLRef p, PlankLL operand)
 {
     return OSAtomicAdd64Barrier (*(int64_t*)&operand, 
@@ -475,7 +475,7 @@ static inline PlankD pl_AtomicD_Add (PlankAtomicDRef p, PlankD operand)
 }
 
 #if PLANK_APPLE
-#if PLANK_X86 // and PLANK_APPLE
+#if PLANK_X86 || PLANK_ARM // and PLANK_APPLE
 static inline PlankB pl_AtomicD_CompareAndSwap (PlankAtomicDRef p, PlankD oldValue, PlankD newValue)
 {    
     return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldValue, 
