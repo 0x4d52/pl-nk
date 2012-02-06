@@ -114,12 +114,12 @@ PlankResult pl_FFTF_InitWithLength (PlankFFTFRef p, const PlankL length)
     if (p->length <= 0)
         p->length = PLANKFFTF_DEFAULTLENGTH;
     else if (p->length < 16)
-        p->length = 1L << p->length; // less than 16 use it as a power of 2
+        p->length = (PlankL)1 << p->length; // less than 16 use it as a power of 2
     
     p->halfLength = p->length / 2;
     
     p->lengthLog2 = 4;
-    while ((1 << p->lengthLog2) < p->length)
+    while (((PlankL)1 << p->lengthLog2) < p->length)
         PLANK_INC (p->lengthLog2);
     
     p->buffer = (float*)pl_Memory_AllocateBytes (m, sizeof (float) * p->length);

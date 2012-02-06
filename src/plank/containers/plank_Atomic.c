@@ -712,16 +712,13 @@ PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL old
 
 #if PLANK_64BIT
 PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    // Can't check this as I only have the MSVC 32-bit version, 
-    // I might have newPtr and newExtra the wrong way round.
-    
+{ 
     PlankAtomicPX oldAll; // = { oldPtr, oldExtra };
 	oldAll.ptr = oldPtr;
 	oldAll.extra = oldExtra;
     return _InterlockedCompareExchange128 ((volatile __int64*)p,
-                                           *(__int64*)&newPtr,
                                            *(__int64*)&newExtra,
+                                           *(__int64*)&newPtr,
                                            (__int64*)&oldAll);    
 }
 #endif
@@ -995,15 +992,12 @@ PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL o
 #if PLANK_64BIT
 PlankB pl_AtomicLX_CompareAndSwap (PlankAtomicLXRef p, PlankL oldValue, PlankL oldExtra, PlankL newValue, PlankL newExtra)
 {
-    // Can't check this as I only have the MSVC 32-bit version, 
-    // I might have newPtr and newExtra the wrong way round.
-    
-    PlankAtomicLX oldAll
+    PlankAtomicLX oldAll;
 	oldAll.value = oldValue;
 	oldAll.extra = oldExtra;
     return _InterlockedCompareExchange128 ((volatile __int64*)p,
-                                           *(__int64*)&newValue,
                                            *(__int64*)&newExtra,
+                                           *(__int64*)&newValue,
                                            (__int64*)&oldAll);    
 }
 #endif

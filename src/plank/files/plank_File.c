@@ -518,23 +518,25 @@ PlankResult pl_File_ReadI24 (PlankFileRef p, PlankI24* data)
     return result;            
 }
 
+/*
 PlankResult pl_File_ReadL (PlankFileRef p, PlankL* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankL), PLANK_NULL);
+    result = pl_File_Read (p, data, sizeof (PlankL), (int*)PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianL (data);
     
     return result;        
 }
+*/
 
 PlankResult pl_File_ReadLL (PlankFileRef p, PlankLL* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankLL), PLANK_NULL);
+    result = pl_File_Read (p, data, sizeof (PlankLL), (int*)PLANK_NULL);
     
     if (! pl_File_IsNativeEndian (p))
         pl_SwapEndianLL (data);
@@ -761,6 +763,7 @@ PlankResult pl_File_WriteI24 (PlankFileRef p, PlankI24 data)
     return result;            
 }
 
+/*
 PlankResult pl_File_WriteL (PlankFileRef p, PlankL data)
 {
     PlankResult result;
@@ -772,6 +775,7 @@ PlankResult pl_File_WriteL (PlankFileRef p, PlankL data)
     
     return result;            
 }
+*/
 
 PlankResult pl_File_WriteLL (PlankFileRef p, PlankLL data)
 {

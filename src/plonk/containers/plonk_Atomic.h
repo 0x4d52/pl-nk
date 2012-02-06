@@ -193,10 +193,11 @@ public:
         pl_AtomicP_Set (getAtomicRef(), (void*)&initialValue);
     }
     
-    inline AtomicValue (Type* initialPtr) throw() 
+	template<class OtherType>
+    inline AtomicValue (OtherType* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), initialPtr);
+        pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
     }
     
     inline AtomicValue (const Type* initialPtr) throw() 
@@ -231,9 +232,10 @@ public:
 //        return *this;
 //    }    
     
-    inline AtomicValue& operator= (Type* other) throw() 
+	template<class OtherType>
+    inline AtomicValue& operator= (OtherType* other) throw() 
     {
-        pl_AtomicP_Set (getAtomicRef(), other);
+        pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (other));
         return *this;
     }    
 
@@ -358,10 +360,11 @@ public:
         pl_AtomicPX_Set (getAtomicRef(), (void*)&initialValue);
     }
     
-    inline AtomicExtended (Type* initialPtr) throw() 
+	template<class OtherType>
+    inline AtomicExtended (OtherType* initialPtr) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), initialPtr);
+        pl_AtomicPX_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
     }
     
     inline AtomicExtended (const Type* initialPtr) throw() 
@@ -396,9 +399,11 @@ public:
 //        return *this;
 //    }    
 //    
-    inline AtomicExtended& operator= (Type* other) throw() 
+
+	template<class OtherType>
+    inline AtomicExtended& operator= (OtherType* other) throw() 
     {
-        pl_AtomicPX_Set (getAtomicRef(), other);
+        pl_AtomicPX_Set (getAtomicRef(), static_cast<Type*> (other));
         return *this;
     }    
     

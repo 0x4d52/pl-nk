@@ -278,6 +278,7 @@ PlankResult pl_File_ReadI (PlankFileRef p, int* data);
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_File_ReadI24 (PlankFileRef p, PlankI24* data);
 
+
 /** Read a long from the file.
  This will be a 32-bit int on 32-bit systems (i.e., 4 bytes) and a 64-bit int on
  64-bit systems (i.e., 8 bytes) even on Windows where a 'long' is normally 32 bits
@@ -285,7 +286,7 @@ PlankResult pl_File_ReadI24 (PlankFileRef p, PlankI24* data);
  @param p The <i>Plank %File</i> object. 
  @param data A pointer to the memory location that will receive the data.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_File_ReadL (PlankFileRef p, PlankL* data);
+//PlankResult pl_File_ReadL (PlankFileRef p, PlankL* data);
 
 /** Read a 64-bit int from the file (i.e. 8 bytes).
  @param p The <i>Plank %File</i> object. 
@@ -398,7 +399,7 @@ PlankResult pl_File_WriteI24 (PlankFileRef p, PlankI24 data);
  @param p The <i>Plank %File</i> object. 
  @param data The value to write.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_File_WriteL (PlankFileRef p, PlankL data);
+//PlankResult pl_File_WriteL (PlankFileRef p, PlankL data);
 
 /** Write a 64-bit int to the file.
  @param p The <i>Plank %File</i> object. 
