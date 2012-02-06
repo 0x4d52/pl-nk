@@ -136,38 +136,51 @@ public:
         const WavetableType& table (this->getInputAsWavetable (IOKey::Wavetable));
         const SampleType* const tableSamples = table.getArray();
         const FrequencyType tableLength = FrequencyType (table.length());
-        
-        double tableLengthOverSampleRate = tableLength / sampleRate;
+        const FrequencyType table0 (0);
+        const FrequencyType tableLengthOverSampleRate = tableLength / sampleRate; // was double, could be precision issue?
 
+        FrequencyType currentPosition = data.currentPosition;
         int i;
         
         if (frequencyBufferLength == outputBufferLength)
         {
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                outputSamples[i] = plonk::lookup (tableSamples, data.currentPosition);
-                data.currentPosition += frequencySamples[i] * tableLengthOverSampleRate;
+                outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                currentPosition += frequencySamples[i] * tableLengthOverSampleRate;
                 
-                if (data.currentPosition >= tableLength)
-                    data.currentPosition -= tableLength;
-                else if (data.currentPosition < FrequencyType (0))	
-                    data.currentPosition += tableLength;                
+                if (currentPosition >= tableLength)
+                    currentPosition -= tableLength;
+                else if (currentPosition < table0)	
+                    currentPosition += tableLength;                
             }                    
         }
         else if (frequencyBufferLength == 1)
         {
             const FrequencyType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
             
-            for (i = 0; i < outputBufferLength; ++i) 
+            if (valueIncrement > table0)
             {
-                outputSamples[i] = plonk::lookup (tableSamples, data.currentPosition);
-                data.currentPosition += valueIncrement;
-                
-                if (data.currentPosition >= tableLength)
-                    data.currentPosition -= tableLength;
-                else if (data.currentPosition < FrequencyType (0))	
-                    data.currentPosition += tableLength;                
-            }                    
+                for (i = 0; i < outputBufferLength; ++i) 
+                {
+                    outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                    currentPosition += valueIncrement;
+                    
+                    if (currentPosition >= tableLength)
+                        currentPosition -= tableLength;
+                }            
+            }
+            else
+            {
+                for (i = 0; i < outputBufferLength; ++i) 
+                {
+                    outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                    currentPosition += valueIncrement;
+                    
+                    if (currentPosition < table0)	
+                        currentPosition += tableLength;                
+                }            
+            }
         }
         else
         {
@@ -176,21 +189,20 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                outputSamples[i] = plonk::lookup (tableSamples, data.currentPosition);
-                data.currentPosition += frequencySamples[int (frequencyPosition)] * tableLengthOverSampleRate;
+                outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                currentPosition += frequencySamples[int (frequencyPosition)] * tableLengthOverSampleRate;
                 
-                if (data.currentPosition >= tableLength)
-                    data.currentPosition -= tableLength;
-                else if (data.currentPosition < FrequencyType (0))	
-                    data.currentPosition += tableLength;                
+                if (currentPosition >= tableLength)
+                    currentPosition -= tableLength;
+                else if (currentPosition < table0)	
+                    currentPosition += tableLength;                
                 
                 frequencyPosition += frequencyIncrement;
             }        
         }
         
+        data.currentPosition = currentPosition;
     }
-    
-private:
 };
 
 //------------------------------------------------------------------------------
