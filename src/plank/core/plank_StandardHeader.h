@@ -41,9 +41,12 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-//#define PLANK_FFT_VDSP 1
-//#define PLANK_FFT_VDSP_FLIPIMAG 1
-//#define PLANK_VEC_VDSP 1
+/*
+ config - define these in preprocessor macros to enable special options
+ PLANK_FFT_VDSP=1           -   use vDSP on Mac OS X for FFT routines
+ PLANK_FFT_VDSP_FLIPIMAG=1  -   flip the imag part of the FFT to match FFTReal data closely
+ PLANK_VEC_VDSP 1           -   use vDSP on Mac OS X for vector ops
+*/
 
 #ifndef PLANK_API
 #define PLANK_API

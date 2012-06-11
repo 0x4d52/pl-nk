@@ -166,7 +166,7 @@ typedef NumericalArray2D<Channel,Unit>                      Units;
 typedef NumericalArray<PLONK_TYPE_DEFAULT>                  Buffer;
 typedef NumericalArray2D<PLONK_TYPE_DEFAULT>                Buffers;
 typedef BusBuffer<PLONK_TYPE_DEFAULT>                       Bus;
-typedef PLONK_BUSARRAYBASETYPE<Bus>                               Busses;
+typedef PLONK_BUSARRAYBASETYPE<Bus>                         Busses;
 
 
 

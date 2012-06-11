@@ -84,8 +84,6 @@
 #define PLONK_64BIT 1
 #endif
 
-
-#define PLONK_USEPLINK
 #ifdef PLONK_USEPLINK
     #include "../../plink/plink.h"
 #endif

@@ -51,6 +51,10 @@
  -------------------------------------------------------------------------------
  */ 
 
+/* config macors
+ PLONK_USEPLINK=1   -   Use Plink for float processes where implemented (also uses optimisations if enabled in Plank)
+ */
+
 // this must be before the standard header incase we want it different in user code?
 #define PLONK_API 
 
