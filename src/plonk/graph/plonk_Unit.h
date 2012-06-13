@@ -520,7 +520,7 @@ public:
     
     /** Linear to Welch curve mapping. */
     UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
-                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+                       UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linwelch (*this, inLow, inHigh, outLow, outHigh);
     }

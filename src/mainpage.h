@@ -17,7 +17,7 @@
  has been tested primarily with 32-bit floating point audio I/O although should work at double precision
  and even integer-based formats too. The following assume the use of standard 32-bit floating point 
  processing.
- 
+
 
  The following class should act as pseudocode for the required operations needed to get
  basic synthesis working.
