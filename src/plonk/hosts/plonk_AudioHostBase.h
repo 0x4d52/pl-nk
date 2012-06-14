@@ -52,8 +52,8 @@ public:
     AudioHostBase() { }
     virtual ~AudioHostBase() { }
     
-    BufferArray getInputs() const throw() { return inputs; }
-    BufferArray getOutputs() const throw() { return outputs; }
+    inline BufferArray getInputs() const throw() { return this->inputs; }
+    inline BufferArray getOutputs() const throw() { return this->outputs; }
     
     virtual void startHost()    = 0;
     virtual void stopHost()     = 0;
@@ -62,39 +62,89 @@ public:
     virtual void hostStarting() { }
 
     virtual UnitType constructGraph() = 0;
-        
-    void setup (const int numInputs, const int numOutputs)
+    
+    inline int getNumInputs() const throw()  { return this->inputs.length(); }
+    inline int getNumOutputs() const throw() { return this->outputs.length(); }
+    
+    void setNumInputs (const int numInputs) throw()
     {
         plonk_assert (numInputs >= 0);
         
-        busses.clear();
-        
-        int i;
-        
-        if (numInputs > 0)
+        if (numInputs != this->getNumInputs())
         {
-            inputs = BufferArray (numInputs);
-            
-            for (i = 0; i < numInputs; ++i)
+            this->busses.clear();
+
+            if (numInputs != 0)
             {
-                inputs.atUnchecked (i).referTo (0, 0);
+                inputs = BufferArray (numInputs);
                 
-                Text busName = Text::fromValue (i);
-                busses.add (busName);
+                for (int i = 0; i < numInputs; ++i)
+                {
+                    this->inputs.atUnchecked (i).referTo (0, 0);
+                    
+                    Text busName = Text::fromValue (i);
+                    this->busses.add (busName);
+                }
             }
+            else this->inputs.clear();
         }
+    }
+    
+    void setNumOutputs (const int numOutputs) throw()
+    {
+        plonk_assert (numOutputs >= 0);
         
-        if (numOutputs > 0)
-        {
-            outputs = BufferArray (numOutputs);
-            
-            for (i = 0; i < numOutputs; ++i)
-                outputs.atUnchecked (i).referTo (0, 0);
+        if (numOutputs != this->getNumOutputs())
+        {            
+            if (numOutputs != 0)
+            {
+                outputs = BufferArray (numOutputs);
+                
+                for (int i = 0; i < numOutputs; ++i)
+                    this->outputs.atUnchecked (i).referTo (0, 0);
+            }
+            else this->outputs.clear();
         }
-        
+    }
+    
+    void startHostInternal() throw()
+    {
         outputUnit = constructGraph();
         hostStarting();
     }
+        
+//    void setup (const int numInputs, const int numOutputs)
+//    {
+//        plonk_assert (numInputs >= 0);
+//        
+//        busses.clear();
+//        
+//        int i;
+//        
+//        if (numInputs > 0)
+//        {
+//            inputs = BufferArray (numInputs);
+//            
+//            for (i = 0; i < numInputs; ++i)
+//            {
+//                inputs.atUnchecked (i).referTo (0, 0);
+//                
+//                Text busName = Text::fromValue (i);
+//                busses.add (busName);
+//            }
+//        }
+//        
+//        if (numOutputs > 0)
+//        {
+//            outputs = BufferArray (numOutputs);
+//            
+//            for (i = 0; i < numOutputs; ++i)
+//                outputs.atUnchecked (i).referTo (0, 0);
+//        }
+//        
+//        outputUnit = constructGraph();
+//        hostStarting();
+//    }
     
     inline void process() throw()
     {
