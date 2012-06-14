@@ -339,7 +339,9 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         ownsTheData = false;
         
         needsUpdate = true;
-        array[this->length()] = ObjectType();
+        
+        if (array)
+            array[this->length()] = ObjectType();
     }
     
     if (needsUpdate)

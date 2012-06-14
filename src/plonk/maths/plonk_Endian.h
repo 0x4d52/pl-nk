@@ -60,7 +60,7 @@ public:
     }    
     
     static inline void swap (void* bits, 
-                             const unsigned int itemSize, 
+                             const unsigned int itemSize, // hmm, isn't itemSize the same as the tparam length?
                              const unsigned long numItems) throw()
     {
         unsigned char* data = reinterpret_cast<unsigned char*> (bits);

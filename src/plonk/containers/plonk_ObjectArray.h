@@ -592,7 +592,7 @@ public:
      additionally allocated space is cleared. Otherwise the data is left
      unitialised.
      @return True the buffer was resized. */
-    inline bool setSize(const int newSize, const bool keepContents) throw() 
+    inline bool setSize (const int newSize, const bool keepContents) throw() 
     { 
         return this->getInternal()->setSize (newSize, keepContents);
     }
@@ -645,7 +645,7 @@ public:
      this ObjectArray has been deleted and that the size argument is correct. */
     void referTo (const int size, ObjectType *dataToUse, const bool needsNullTermination = false)
     {
-        this->getInternal()->referTo(size, dataToUse, needsNullTermination);
+        this->getInternal()->referTo (size, dataToUse, needsNullTermination);
     }
 	
 	/** Adds an item in-place. */

@@ -156,4 +156,6 @@
 #include "../graph/fft/plonk_FFTChannel.h"
 #include "../graph/fft/plonk_IFFTChannel.h"
 
+#include "../hosts/plonk_AudioHostBase.h"
+
 #endif // PLONKHEADERS_H

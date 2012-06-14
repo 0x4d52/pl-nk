@@ -295,7 +295,7 @@ public:
 		
 	/** Constructa a NumericalArray using a NumericalArraySpec.
 	 A better idiom for most usages would be to use withSize() or newClear(). */
-	NumericalArray(NumericalArraySpec const& spec) throw()
+	NumericalArray (NumericalArraySpec const& spec) throw()
 	:	Base (spec.size_, false)
 	{
 		if (spec.zeroData_) 
