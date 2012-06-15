@@ -55,16 +55,14 @@ public:
     inline BufferArray getInputs() const throw() { return this->inputs; }
     inline BufferArray getOutputs() const throw() { return this->outputs; }
     
-    virtual void startHost()    = 0;
-    virtual void stopHost()     = 0;
-    
-    virtual void hostStopped()  { }
-    virtual void hostStarting() { }
-
-    virtual UnitType constructGraph() = 0;
-    
     inline int getNumInputs() const throw()  { return this->inputs.length(); }
     inline int getNumOutputs() const throw() { return this->outputs.length(); }
+    
+    inline double getPreferredSampleRate() const throw() { return preferredSampleRate; }
+    inline int getPreferredBlockSize() const throw() { return preferredBlockSize; }
+    
+    inline void setPreferredSampleRate (const double newRate) throw() { preferredSampleRate = newRate; }
+    inline void setPreferredBlockSize (const int newSize) throw() {  preferredBlockSize = newSize; }
     
     void setNumInputs (const int numInputs) throw()
     {
@@ -112,40 +110,16 @@ public:
         outputUnit = constructGraph();
         hostStarting();
     }
-        
-//    void setup (const int numInputs, const int numOutputs)
-//    {
-//        plonk_assert (numInputs >= 0);
-//        
-//        busses.clear();
-//        
-//        int i;
-//        
-//        if (numInputs > 0)
-//        {
-//            inputs = BufferArray (numInputs);
-//            
-//            for (i = 0; i < numInputs; ++i)
-//            {
-//                inputs.atUnchecked (i).referTo (0, 0);
-//                
-//                Text busName = Text::fromValue (i);
-//                busses.add (busName);
-//            }
-//        }
-//        
-//        if (numOutputs > 0)
-//        {
-//            outputs = BufferArray (numOutputs);
-//            
-//            for (i = 0; i < numOutputs; ++i)
-//                outputs.atUnchecked (i).referTo (0, 0);
-//        }
-//        
-//        outputUnit = constructGraph();
-//        hostStarting();
-//    }
+            
+protected:
+    virtual void startHost()    = 0;
+    virtual void stopHost()     = 0;
     
+    virtual void hostStopped()  { }
+    virtual void hostStarting() { }
+
+    virtual UnitType constructGraph() = 0;
+
     inline void process() throw()
     {
         const int blockSize = BlockSize::getDefault().getValue();
@@ -185,6 +159,8 @@ private:
     UnitType outputUnit;  
     BussesType busses;
     BufferArray inputs, outputs;
+    double preferredSampleRate;
+    int preferredBlockSize;
     Lock lock;
 };
 
