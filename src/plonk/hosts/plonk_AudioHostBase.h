@@ -56,10 +56,7 @@ public:
     }
     
     virtual ~AudioHostBase() { }
-    
-    inline BufferArray getInputs() const throw() { return this->inputs; }
-    inline BufferArray getOutputs() const throw() { return this->outputs; }
-    
+        
     inline int getNumInputs() const throw()  { return this->inputs.length(); }
     inline int getNumOutputs() const throw() { return this->outputs.length(); }
     
@@ -111,6 +108,9 @@ public:
     }
                 
 protected:
+    inline BufferArray getInputs() const throw() { return this->inputs; }
+    inline BufferArray getOutputs() const throw() { return this->outputs; }
+
     virtual void startHost()    = 0;
     virtual void stopHost()     = 0;
     

@@ -1,0 +1,307 @@
+/*
+ -------------------------------------------------------------------------------
+ This file is part of the Plink, Plonk, Plank libraries
+ by Martin Robinson
+ 
+ http://code.google.com/p/pl-nk/
+ 
+ Copyright University of the West of England, Bristol 2011-12
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ 
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+ * Neither the name of University of the West of England, Bristol nor 
+   the names of its contributors may be used to endorse or promote products
+   derived from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE 
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
+ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ 
+ This software makes use of third party libraries. For more information see:
+ doc/license.txt included in the distribution.
+ -------------------------------------------------------------------------------
+ */
+
+#include "../../core/plonk_StandardHeader.h"
+
+BEGIN_PLONK_NAMESPACE
+
+#include "../../core/plonk_Headers.h"
+#include "plonk_IOSAudioHost.h"
+
+//------------------------------------------------------------------------------
+
+static inline OSStatus Render (void							*inRefCon, 
+                               AudioUnitRenderActionFlags 	*ioActionFlags, 
+                               const AudioTimeStamp         *inTimeStamp, 
+                               UInt32 						inBusNumber, 
+                               UInt32 						inNumberFrames, 
+                               AudioBufferList				*ioData)
+{	
+	IOSAudioHost *host = (IOSAudioHost *)inRefCon;
+	const OSStatus result =  host->renderCallback (inNumberFrames, 
+                                                   ioActionFlags, 
+                                                   inTimeStamp, 
+                                                   ioData);
+	return result;
+}
+
+static inline void PropertyListener (void *                  inClientData,
+                                     AudioSessionPropertyID  inID,
+                                     UInt32                  inDataSize,
+                                     const void *            inPropertyValue)
+{	
+	IOSAudioHost *host = (IOSAudioHost *)inClientData;
+    host->propertyCallback (inID, inDataSize, inPropertyValue);
+}
+
+static inline void InterruptionListener (void *inClientData, 
+                                         UInt32 inInterruption)
+{	
+	IOSAudioHost *host = (IOSAudioHost *)inClientData;
+    host->interruptionCallback (inInterruption);
+}
+
+static inline void audioFloatToShort(float *src, short* dst, unsigned int length)
+{
+	static const float scale = 32767.f;
+    pl_VectorMulF_N1N (src, scale, src, length);
+    pl_VectorConvertF2S_NN (dst, src, length);
+}
+
+static inline void audioFloatToShortChannels(float *src[], AudioBufferList* dst, unsigned int length, unsigned int numChannels)
+{
+	for (UInt32 channel = 0; channel < numChannels; channel++)
+	{
+		AudioSampleType *audioUnitBuffer = (AudioSampleType*)dst->mBuffers[channel].mData;		
+		audioFloatToShort (src[channel], audioUnitBuffer, length);
+	}
+}
+
+static inline void audioShortToFloat(short *src, float* dst, unsigned int length)
+{
+	static const float scale = 1.f / 32767.f;	
+	pl_VectorConvertS2F_NN (dst, src, length);
+    pl_VectorMulF_N1N (dst, scale, dst, length);
+}
+
+static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[], unsigned int length, unsigned int numChannels)
+{
+	for (UInt32 channel = 0; channel < numChannels; channel++)
+	{
+		AudioSampleType *audioUnitBuffer = (AudioSampleType*)src->mBuffers[0].mData; // need this other than 0?...		
+		audioShortToFloat (audioUnitBuffer, dst[channel], length);
+	}	
+}
+
+//------------------------------------------------------------------------------
+
+IOSAudioHost::IOSAudioHost()
+:   hwSampleRate (0.0),         // let the hardware choose
+    cpuUsage (0.f),
+    audioCategory (kAudioSessionCategory_PlayAndRecord)
+{    
+}
+
+IOSAudioHost::~IOSAudioHost()
+{
+    stopHost();
+}
+
+void IOSAudioHost::stopHost()
+{
+    // stop the AU?
+}
+
+void IOSAudioHost::startHost()
+{
+    // start the AU
+    // need to know numchans, sr and blocksize in advance
+    
+    UInt32 size;
+    
+	// render proc
+	inputProc.inputProc = Render;
+	inputProc.inputProcRefCon = this;
+		
+	// session
+	AudioSessionInitialize (NULL, NULL, InterruptionListener, this);
+	AudioSessionSetActive (true);
+	
+	AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof(audioCategory), &audioCategory);
+	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, PropertyListener, this);
+	
+	fixAudioRouteIfSetToReceiver();
+	
+    const double preferredSampleRate = getPreferredSampleRate();
+    size = sizeof (preferredSampleRate);
+    
+	if (hwSampleRate > 0.0)
+	{
+		AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareSampleRate, size, &preferredSampleRate);
+	}		
+    
+    size = sizeof (hwSampleRate);
+    AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareSampleRate, &size, &hwSampleRate);
+	
+	bufferDuration = getPreferredBlockSize() / hwSampleRate;
+	AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(bufferDuration), &bufferDuration);
+	
+	size = sizeof (UInt32);
+	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
+	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
+	AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
+    
+    setNumInputs (numInputChannels);
+    setNumOutputs (numOutputChannels);
+    	
+	rioUnit = NULL;
+	isRunning = true;
+	restart();
+	
+	size = sizeof (format);
+	AudioUnitGetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, &size);
+	
+	size = sizeof(bufferDuration);
+	AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareIOBufferDuration, &size, &bufferDuration);
+	
+	reciprocalBufferDuration = 1.f / bufferDuration; 
+	
+	bufferSize = (int)(hwSampleRate * bufferDuration + 0.5);
+	floatBuffer = new float[bufferSize * plonk::max(getNumOutputs(), getNumInputs())];
+    
+	printf("IOSAudioHost: SR=%f buffer=%fs (%d samples)\n", hwSampleRate, bufferDuration, bufferSize);
+    
+    SampleRate::getDefault().setValue (hwSampleRate);
+    BlockSize::getDefault().setValue (bufferSize); 
+    startHostInternal();
+}
+
+
+// need to call hostStopped()
+
+void IOSAudioHost::setFormat() throw()
+{
+	memset (&format, 0, sizeof (AudioStreamBasicDescription));
+	format.mSampleRate = hwSampleRate;
+	format.mFormatID = kAudioFormatLinearPCM;
+	int sampleSize = sizeof (AudioSampleType);
+	format.mFormatFlags = kAudioFormatFlagsCanonical;
+	format.mBitsPerChannel = 8 * sampleSize;
+	format.mChannelsPerFrame = getNumOutputs();
+	format.mFramesPerPacket = 1;
+	format.mBytesPerPacket = format.mBytesPerFrame = sampleSize;
+	format.mFormatFlags |= kAudioFormatFlagIsNonInterleaved;		
+}
+
+int IOSAudioHost::setupRemoteIO() throw()
+{	
+	// Open the output unit
+	AudioComponentDescription desc;
+	desc.componentType = kAudioUnitType_Output;
+	desc.componentSubType = kAudioUnitSubType_RemoteIO;
+	desc.componentManufacturer = kAudioUnitManufacturer_Apple;
+	desc.componentFlags = 0;
+	desc.componentFlagsMask = 0;
+	
+	AudioComponent comp = AudioComponentFindNext (NULL, &desc);
+	AudioComponentInstanceNew (comp, &rioUnit);
+	
+	const UInt32 one = 1;
+	AudioUnitSetProperty (rioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &one, sizeof (one));	
+	AudioUnitSetProperty (rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &inputProc, sizeof (inputProc));
+	
+	AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &format, sizeof (format));
+	AudioUnitSetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, sizeof (format));
+    
+	AudioUnitInitialize (rioUnit);
+	
+	return 0;	
+}
+
+void IOSAudioHost::restart() throw()
+{
+    UInt32 size = sizeof(UInt32);
+	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
+	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
+	AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
+	
+	printf ("inputs=%d outputs=%d audioInputIsAvailable=%d\n", (int)numInputChannels, (int)numOutputChannels, (int)audioInputIsAvailable);
+	
+	if (rioUnit)	
+        AudioComponentInstanceDispose (rioUnit);
+        
+    rioUnit = NULL;
+        
+    setFormat();
+	setupRemoteIO();
+	
+	AudioSessionSetActive (true);
+	AudioOutputUnitStart (rioUnit);
+}
+
+void IOSAudioHost::fixAudioRouteIfSetToReceiver() throw()
+{
+	CFStringRef audioRoute = 0;
+	UInt32 propertySize = sizeof (audioRoute);
+    
+	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &audioRoute) == noErr)
+	{
+		NSString* route = (NSString*) audioRoute;
+        
+		if ([route hasPrefix: @"Receiver"])
+		{
+			UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+			AudioSessionSetProperty (kAudioSessionProperty_OverrideAudioRoute, sizeof (audioRouteOverride), &audioRouteOverride);
+		}
+		
+		CFRelease (audioRoute);
+	}
+}
+
+OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames,
+                                       AudioUnitRenderActionFlags *ioActionFlags, 
+                                       const AudioTimeStamp       *inTimeStamp, 
+                                       AudioBufferList            *ioData)
+{
+    // todo..
+}
+
+void IOSAudioHost::propertyCallback (AudioSessionPropertyID inID,
+                                     UInt32                 inDataSize,
+                                     const void *           inPropertyValue)
+{
+    
+}
+
+void IOSAudioHost::interruptionCallback (UInt32 inInterruption)
+{
+    if (inInterruption == kAudioSessionEndInterruption) 
+    {
+		// make sure we are again the active session
+		AudioSessionSetActive(true);
+		isRunning = true;
+		AudioOutputUnitStart (rioUnit);
+	}
+}
+
+//------------------------------------------------------------------------------
+
+
+
+
+END_PLONK_NAMESPACE
