@@ -49,7 +49,12 @@ public:
     typedef BusBuffer<SampleType>           BusType;
     typedef PLONK_BUSARRAYBASETYPE<BusType> BussesType;
 
-    AudioHostBase() { }
+    AudioHostBase() throw()
+    :   preferredSampleRate (0.0),
+        preferredBlockSize (0)
+    { 
+    }
+    
     virtual ~AudioHostBase() { }
     
     inline BufferArray getInputs() const throw() { return this->inputs; }
@@ -104,63 +109,67 @@ public:
             else this->outputs.clear();
         }
     }
-    
-    void startHostInternal() throw()
-    {
-        outputUnit = constructGraph();
-        hostStarting();
-    }
-            
+                
 protected:
     virtual void startHost()    = 0;
     virtual void stopHost()     = 0;
     
-    virtual void hostStopped()  { }
-    virtual void hostStarting() { }
+    virtual void hostStopped() throw()  { }
+    virtual void hostStarting() throw() { }
 
     virtual UnitType constructGraph() = 0;
 
     inline void process() throw()
     {
         const int blockSize = BlockSize::getDefault().getValue();
-        const int numInputs = inputs.length();
-        const int numOutputs = outputs.length();
+        const int numInputs = this->inputs.length();
+        const int numOutputs = this->outputs.length();
         
         int i;
         
         for (i = 0; i < numInputs; ++i)
-            busses[i].write (info.getTimeStamp(), blockSize, inputs.atUnchecked (i).getArray());
+            this->busses[i].write (this->info.getTimeStamp(), 
+                                   blockSize, 
+                                   this->inputs.atUnchecked (i).getArray());
         
-        lock.lock();
-        outputUnit.process (info);
-        lock.unlock();
+        this->lock.lock();
+        this->outputUnit.process (info);
+        this->lock.unlock();
         
-        if (outputUnit.isNotNull())
+        if (this->outputUnit.isNotNull())
         {
             for (i = 0; i < numOutputs; ++i)
             {
-                float* const output = outputs.atUnchecked (i).getArray();
-                const float* const unitOutput = outputUnit.getOutputSamples (i);
+                float* const output = this->outputs.atUnchecked (i).getArray();
+                const float* const unitOutput = this->outputUnit.getOutputSamples (i);
                 Floats::copyData (output, unitOutput, blockSize);            
             }
         }
         else if (numOutputs > 0)
         {
-            float* const output = outputs.atUnchecked (0).getArray();
+            float* const output = this->outputs.atUnchecked (0).getArray();
             for (i = 0; i < numOutputs; ++i)
                 Floats::zeroData (output, blockSize);         
         }
         
-        info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * blockSize);
+        this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * blockSize);
     }
     
+    void startHostInternal() throw()
+    {
+        outputUnit = constructGraph();
+        hostStarting();
+    }
+
+    
 private:
+    double preferredSampleRate;
+    int preferredBlockSize;
+
     ProcessInfo info;
     UnitType outputUnit;  
     BussesType busses;
     BufferArray inputs, outputs;
-    double preferredSampleRate;
-    int preferredBlockSize;
     Lock lock;
 };
 
