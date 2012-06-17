@@ -57,6 +57,8 @@ public:
     
     virtual ~AudioHostBase() { }
         
+    inline const UnitType& getOutputUnit() const throw() { return outputUnit; }
+    
     inline int getNumInputs() const throw()  { return this->inputs.length(); }
     inline int getNumOutputs() const throw() { return this->outputs.length(); }
     

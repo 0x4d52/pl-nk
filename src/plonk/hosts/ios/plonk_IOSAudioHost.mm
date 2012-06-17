@@ -157,7 +157,7 @@ void IOSAudioHost::startHost()
     const double preferredSampleRate = getPreferredSampleRate();
     size = sizeof (preferredSampleRate);
     
-	if (hwSampleRate > 0.0)
+	if (preferredSampleRate > 0.0)
 	{
 		AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareSampleRate, size, &preferredSampleRate);
 	}		
@@ -165,9 +165,12 @@ void IOSAudioHost::startHost()
     size = sizeof (hwSampleRate);
     AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareSampleRate, &size, &hwSampleRate);
 	
-	bufferDuration = getPreferredBlockSize() / hwSampleRate;
-	AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(bufferDuration), &bufferDuration);
-	
+    if (getPreferredBlockSize() > 0)
+    {
+        bufferDuration = getPreferredBlockSize() / hwSampleRate;
+        AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(bufferDuration), &bufferDuration);
+	}
+    
 	size = sizeof (UInt32);
 	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
 	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
@@ -285,14 +288,80 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
                                        const AudioTimeStamp       *inTimeStamp, 
                                        AudioBufferList            *ioData)
 {
-    // todo..
+    OSStatus err = 0;
+    int i;
+   
+	double renderTime = CFAbsoluteTimeGetCurrent();
+	
+	if (inNumberFrames > bufferSize)
+	{
+		delete [] floatBuffer;
+		bufferSize = inNumberFrames;
+		
+		floatBuffer = new float[inNumberFrames * plonk::max (getNumInputs(), getNumOutputs())];
+	}
+	
+    BlockSize::getDefault().setValue (inNumberFrames);
+	
+	float *floatBufferData[2];
+	floatBufferData[0] = floatBuffer;
+	floatBufferData[1] = floatBufferData[0] + inNumberFrames;	
+    
+	if (audioInputIsAvailable)
+	{
+		err = AudioUnitRender (rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
+		
+        if (err) 
+        { 
+            printf ("renderCallback: error %d %s\n", (int)err, (err == -10863) ? "(harmless)" : ""); 
+            return err; 
+        }
+		
+		audioShortToFloatChannels (ioData, floatBufferData, inNumberFrames, numInputChannels);				
+	}
+	else memset (floatBuffer, 0, numInputChannels * inNumberFrames * sizeof (float));
+	        
+    for (i = 0; i < numInputChannels; ++i)
+        getInputs().atUnchecked (i).referTo (inNumberFrames, floatBufferData[i]);
+    
+    for (i = 0; i < numOutputChannels; ++i)
+        getOutputs().atUnchecked (i).referTo (inNumberFrames, floatBufferData[i]);
+
+    process();
+        
+	audioFloatToShortChannels (floatBufferData, ioData, inNumberFrames, ioData->mNumberBuffers);
+    
+	renderTime = CFAbsoluteTimeGetCurrent() - renderTime;
+	
+	const float timeRatio = renderTime * reciprocalBufferDuration;
+	cpuUsage += 0.2f * (timeRatio - cpuUsage); 
+	
+	return err;	
 }
 
 void IOSAudioHost::propertyCallback (AudioSessionPropertyID inID,
                                      UInt32                 inDataSize,
                                      const void *           inPropertyValue)
 {
-    
+    if (!isRunning) return;
+	
+	if (inPropertyValue)
+	{
+		CFDictionaryRef routeChangeDictionary = (CFDictionaryRef)inPropertyValue;
+		CFNumberRef routeChangeReasonRef = 
+            (CFNumberRef)CFDictionaryGetValue (routeChangeDictionary, CFSTR (kAudioSession_AudioRouteChangeKey_Reason));
+		
+		SInt32 routeChangeReason;
+		CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, &routeChangeReason);
+		
+		CFStringRef newAudioRoute;
+		UInt32 propertySize = sizeof (CFStringRef);
+		AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &newAudioRoute);
+		
+		printf ("route=%s\n", CFStringGetCStringPtr (newAudioRoute, CFStringGetSystemEncoding()));
+    }
+	
+    restart();
 }
 
 void IOSAudioHost::interruptionCallback (UInt32 inInterruption)
