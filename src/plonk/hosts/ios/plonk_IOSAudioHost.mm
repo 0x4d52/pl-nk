@@ -37,11 +37,18 @@
  */
 
 #include "../../core/plonk_StandardHeader.h"
+#include <AudioToolbox/AudioQueue.h>
+#include <AudioToolbox/AudioServices.h>
+#include <AudioToolbox/AudioToolbox.h>
+#include <AudioUnit/AudioUnit.h>
 
 BEGIN_PLONK_NAMESPACE
 
 #include "../../core/plonk_Headers.h"
+
+END_PLONK_NAMESPACE
 #include "plonk_IOSAudioHost.h"
+BEGIN_PLONK_NAMESPACE
 
 //------------------------------------------------------------------------------
 

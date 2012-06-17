@@ -44,6 +44,8 @@
 #include <AudioToolbox/AudioToolbox.h>
 #include <AudioUnit/AudioUnit.h>
 
+BEGIN_PLONK_NAMESPACE
+
 class IOSAudioHost : public AudioHostBase<float>
 {
 public:
@@ -89,5 +91,6 @@ private:
     UInt32                      audioCategory;
 };
 
+END_PLONK_NAMESPACE
 
 #endif  // PLONK_IOSAUDIOHOST_H
