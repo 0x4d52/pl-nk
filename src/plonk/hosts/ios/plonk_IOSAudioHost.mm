@@ -36,6 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
+#ifdef PLONK_AUDIOHOST_IOS
+
 #include "../../core/plonk_StandardHeader.h"
 
 BEGIN_PLONK_NAMESPACE
@@ -374,6 +376,7 @@ void IOSAudioHost::interruptionCallback (UInt32 inInterruption)
 //------------------------------------------------------------------------------
 
 
-
-
 END_PLONK_NAMESPACE
+
+#endif // PLONK_AUDIOHOST_IOS
+

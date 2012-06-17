@@ -36,6 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
+#ifdef PLONK_AUDIOHOST_JUCE
+
 #include "../../core/plonk_StandardHeader.h"
 
 BEGIN_PLONK_NAMESPACE
@@ -139,3 +141,5 @@ void JuceAudioHost::audioDeviceStopped()
 }
 
 END_PLONK_NAMESPACE
+
+#endif // PLONK_AUDIOHOST_JUCE
