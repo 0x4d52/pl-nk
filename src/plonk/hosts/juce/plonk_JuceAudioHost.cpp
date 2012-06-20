@@ -50,7 +50,7 @@ BEGIN_PLONK_NAMESPACE
 
 
 
-JuceAudioHost::JuceAudioHost ()
+JuceAudioHost::JuceAudioHost()
 {    
     setNumInputs (2);
     setNumOutputs (2);

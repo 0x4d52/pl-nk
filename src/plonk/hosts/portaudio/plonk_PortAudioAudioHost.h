@@ -36,33 +36,31 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_JUCEAUDIOHOST_H
-#define PLONK_JUCEAUDIOHOST_H
+#ifndef PLONK_PORTAUDIOAUDIOHOST_H
+#define PLONK_PORTAUDIOAUDIOHOST_H
 
-#include "JuceHeader.h"
+#include "portaudio.h"
 
 BEGIN_PLONK_NAMESPACE
 
-class JuceAudioHost :   public AudioHostBase<float>,
-                        public AudioIODeviceCallback
+class PortAudioAudioHost : public AudioHostBase<float>
 {
 public:
-    JuceAudioHost();
-    ~JuceAudioHost();
+    PortAudioAudioHost();
+    ~PortAudioAudioHost();
     
     void startHost();
     void stopHost();
-        
-    void audioDeviceIOCallback (const float** inputs, int numInputs, 
-                                float** outputs, int numOutputs, 
-                                int blockSize);
-	void audioDeviceAboutToStart (AudioIODevice* device);
-	void audioDeviceStopped();
-        
+    
+    int callback (const float** inputData, float** outputData,
+                  unsigned long frameCount,
+                  const PaStreamCallbackTimeInfo* timeInfo,
+                  PaStreamCallbackFlags statusFlags);
+                
 private:
-    AudioDeviceManager audioDeviceManager;
+    PaStream* stream;
 };
 
 END_PLONK_NAMESPACE
 
-#endif  // PLONK_JUCEAUDIOHOST_H
+#endif  // PLONK_PORTAUDIOAUDIOHOST_H
