@@ -49,13 +49,11 @@ BEGIN_PLONK_NAMESPACE
 class IOSAudioHost : public AudioHostBase<float>
 {
 public:
-    IOSAudioHost ();
+    IOSAudioHost();
     ~IOSAudioHost();
     
     void startHost();
     void stopHost();
-    
-    
 
     OSStatus renderCallback (UInt32                     inNumberFrames,
                              AudioUnitRenderActionFlags *ioActionFlags, 

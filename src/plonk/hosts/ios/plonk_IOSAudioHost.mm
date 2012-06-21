@@ -117,6 +117,7 @@ static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[],
 
 IOSAudioHost::IOSAudioHost()
 :   hwSampleRate (0.0),         // let the hardware choose
+    isRunning (false),
     cpuUsage (0.f),
     audioCategory (kAudioSessionCategory_PlayAndRecord)
 {    
@@ -124,7 +125,8 @@ IOSAudioHost::IOSAudioHost()
 
 IOSAudioHost::~IOSAudioHost()
 {
-    stopHost();
+    if (isRunning)
+        stopHost();
 }
 
 void IOSAudioHost::stopHost()
@@ -174,29 +176,30 @@ void IOSAudioHost::startHost()
 	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
 	AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
     
+    rioUnit = NULL;
+
     setNumInputs (numInputChannels);
     setNumOutputs (numOutputChannels);
     	
-	rioUnit = NULL;
-	isRunning = true;
-	restart();
-	
-	size = sizeof (format);
-	AudioUnitGetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, &size);
-	
-	size = sizeof(bufferDuration);
-	AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareIOBufferDuration, &size, &bufferDuration);
+	size = sizeof (bufferDuration);
+	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareIOBufferDuration, &size, &bufferDuration);
 	
 	reciprocalBufferDuration = 1.f / bufferDuration; 
 	
 	bufferSize = (int)(hwSampleRate * bufferDuration + 0.5);
-	floatBuffer = new float[bufferSize * plonk::max(getNumOutputs(), getNumInputs())];
+	floatBuffer = new float[bufferSize * plonk::max (getNumOutputs(), getNumInputs())];
     
 	printf("IOSAudioHost: SR=%f buffer=%fs (%d samples)\n", hwSampleRate, bufferDuration, bufferSize);
     
     SampleRate::getDefault().setValue (hwSampleRate);
     BlockSize::getDefault().setValue (bufferSize); 
     startHostInternal();
+    
+	isRunning = true;    
+    restart();
+    
+    size = sizeof (format);
+	AudioUnitGetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, &size);
 }
 
 
@@ -269,7 +272,7 @@ void IOSAudioHost::fixAudioRouteIfSetToReceiver() throw()
     
 	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &audioRoute) == noErr)
 	{
-		NSString* route = (NSString*) audioRoute;
+		NSString* route = (NSString*)audioRoute;
         
 		if ([route hasPrefix: @"Receiver"])
 		{

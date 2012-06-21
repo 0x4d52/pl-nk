@@ -83,9 +83,7 @@ public:
                 for (int i = 0; i < numInputs; ++i)
                 {
                     this->inputs.atUnchecked (i).referTo (0, 0);
-                    
-                    Text busName = Text::fromValue (i);
-                    this->busses.add (busName);
+                    this->busses.add (BusType (i));
                 }
             }
             else this->inputs.clear();
@@ -127,12 +125,14 @@ protected:
         const int numInputs = this->inputs.length();
         const int numOutputs = this->outputs.length();
         
+        plonk_assert (this->busses.length() == numInputs);
+        
         int i;
         
         for (i = 0; i < numInputs; ++i)
-            this->busses[i].write (this->info.getTimeStamp(), 
-                                   blockSize, 
-                                   this->inputs.atUnchecked (i).getArray());
+            this->busses.atUnchecked (i).write (this->info.getTimeStamp(), 
+                                                blockSize, 
+                                                this->inputs.atUnchecked (i).getArray());
         
         this->lock.lock();
         this->outputUnit.process (info);

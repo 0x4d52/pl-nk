@@ -67,21 +67,42 @@ static inline void paCheckError (PaError err)
         printf ("paerror '%s' (%d)\n", Pa_GetErrorText (err), err);
 }
 
+static inline void paGetInfo()
+{
+    const PaDeviceIndex inputDeviceId = Pa_GetDefaultInputDevice();
+    const PaDeviceIndex outputDeviceId = Pa_GetDefaultOutputDevice();
+    
+    const PaDeviceInfo* inputInfo = Pa_GetDeviceInfo (inputDeviceId);
+    const PaDeviceInfo* outputInfo = Pa_GetDeviceInfo (outputDeviceId);
+    
+
+}
+
 //------------------------------------------------------------------------------
 
 PortAudioAudioHost::PortAudioAudioHost()
 :   stream (0)
 {    
-    setNumInputs (2);
+    PaError err;
+	err = Pa_Initialize();
+    paCheckError (err);
+
+    setNumInputs (1);
     setNumOutputs (2);
     setPreferredBlockSize (512);
     setPreferredSampleRate (44100.0);
+    
+    paGetInfo();
 }
 
 PortAudioAudioHost::~PortAudioAudioHost()
 {
     if (stream)
         stopHost();
+    
+    PaError err;
+    err = Pa_Terminate();
+    paCheckError (err);
 }
 
 void PortAudioAudioHost::stopHost()
@@ -95,17 +116,11 @@ void PortAudioAudioHost::stopHost()
     paCheckError (err);
     
     stream = NULL;
-    
-    err = Pa_Terminate();
-    paCheckError (err);
 }
 
 void PortAudioAudioHost::startHost()
-{    
+{        
     PaError err;
-	err = Pa_Initialize();
-    paCheckError (err);
-    
     err = Pa_OpenDefaultStream (&stream, 
                                 getNumInputs(), getNumOutputs(),                     // ins, outs
                                 paFloat32 | paNonInterleaved,
@@ -127,6 +142,9 @@ int PortAudioAudioHost::callback (const float **inputData, float **outputData,
                                   const PaStreamCallbackTimeInfo* timeInfo,
                                   PaStreamCallbackFlags statusFlags)
 {
+    (void)timeInfo;
+    (void)statusFlags;
+    
     BlockSize::getDefault().setValue (frameCount);
     
     const int numInputs = getInputs().length();

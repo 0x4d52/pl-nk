@@ -281,7 +281,7 @@ public:
     typedef Dictionary<BusType>             BusDictionary;
     
     BusBuffer () throw()
-    :   Base (new Internal ())
+    :   Base (new Internal())
     {
     }            
         
