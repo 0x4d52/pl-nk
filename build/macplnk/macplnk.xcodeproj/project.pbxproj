@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A81A8D6015949081004D7C99 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A81A8D5F15949081004D7C99 /* libportaudio.a */; };
 		A82416C91590B95A004CA012 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82416C81590B95A004CA012 /* Cocoa.framework */; };
 		A82416D31590B95A004CA012 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A82416D11590B95A004CA012 /* InfoPlist.strings */; };
 		A82416D51590B95A004CA012 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A82416D41590B95A004CA012 /* main.mm */; };
 		A82416D91590B95A004CA012 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A82416D71590B95A004CA012 /* Credits.rtf */; };
 		A82416DC1590B95A004CA012 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A82416DB1590B95A004CA012 /* AppDelegate.mm */; };
 		A82416DF1590B95A004CA012 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82416DD1590B95A004CA012 /* MainMenu.xib */; };
-		A82416E91590BA4F004CA012 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A82416E71590BA4F004CA012 /* libportaudio.a */; };
 		A82416F11590BB4A004CA012 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82416EE1590BB4A004CA012 /* CoreAudio.framework */; };
 		A82416F21590BB4A004CA012 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82416EF1590BB4A004CA012 /* AudioUnit.framework */; };
 		A82416F31590BB4A004CA012 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82416F01590BB4A004CA012 /* AudioToolbox.framework */; };
@@ -83,11 +83,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A81A8D5D15949081004D7C99 /* portaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = portaudio.h; sourceTree = "<group>"; };
+		A81A8D5F15949081004D7C99 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libportaudio.a; sourceTree = "<group>"; };
 		A82416C41590B95A004CA012 /* macplnk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macplnk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82416C81590B95A004CA012 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		A82416CB1590B95A004CA012 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		A82416CC1590B95A004CA012 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		A82416CD1590B95A004CA012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A82416D01590B95A004CA012 /* macplnk-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "macplnk-Info.plist"; sourceTree = "<group>"; };
 		A82416D21590B95A004CA012 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A82416D41590B95A004CA012 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -96,11 +95,9 @@
 		A82416DA1590B95A004CA012 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A82416DB1590B95A004CA012 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		A82416DE1590B95A004CA012 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		A82416E71590BA4F004CA012 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libportaudio.a; sourceTree = "<group>"; };
-		A82416E81590BA4F004CA012 /* portaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = portaudio.h; sourceTree = "<group>"; };
-		A82416EE1590BB4A004CA012 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = DEVELOPER_DIR; };
-		A82416EF1590BB4A004CA012 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/AudioUnit.framework; sourceTree = DEVELOPER_DIR; };
-		A82416F01590BB4A004CA012 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		A82416EE1590BB4A004CA012 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		A82416EF1590BB4A004CA012 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		A82416F01590BB4A004CA012 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A82416F915911595004CA012 /* mainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainpage.h; sourceTree = "<group>"; };
 		A82416FC15911595004CA012 /* plank_Atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Atomic.c; sourceTree = "<group>"; };
 		A82416FD15911595004CA012 /* plank_Atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Atomic.h; sourceTree = "<group>"; };
@@ -356,16 +353,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				A82416C91590B95A004CA012 /* Cocoa.framework in Frameworks */,
-				A82416E91590BA4F004CA012 /* libportaudio.a in Frameworks */,
 				A82416F11590BB4A004CA012 /* CoreAudio.framework in Frameworks */,
 				A82416F21590BB4A004CA012 /* AudioUnit.framework in Frameworks */,
 				A82416F31590BB4A004CA012 /* AudioToolbox.framework in Frameworks */,
+				A81A8D6015949081004D7C99 /* libportaudio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A81A8D5B15949081004D7C99 /* portaudio */ = {
+			isa = PBXGroup;
+			children = (
+				A81A8D5C15949081004D7C99 /* include */,
+				A81A8D5E15949081004D7C99 /* lib */,
+			);
+			name = portaudio;
+			path = ../../../ext/portaudio;
+			sourceTree = "<group>";
+		};
+		A81A8D5C15949081004D7C99 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A81A8D5D15949081004D7C99 /* portaudio.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		A81A8D5E15949081004D7C99 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				A81A8D5F15949081004D7C99 /* libportaudio.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		A82416B91590B95A004CA012 = {
 			isa = PBXGroup;
 			children = (
@@ -390,25 +413,14 @@
 				A82416EF1590BB4A004CA012 /* AudioUnit.framework */,
 				A82416F01590BB4A004CA012 /* AudioToolbox.framework */,
 				A82416C81590B95A004CA012 /* Cocoa.framework */,
-				A82416CA1590B95A004CA012 /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A82416CA1590B95A004CA012 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A82416CB1590B95A004CA012 /* AppKit.framework */,
-				A82416CC1590B95A004CA012 /* CoreData.framework */,
-				A82416CD1590B95A004CA012 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		A82416CE1590B95A004CA012 /* macplnk */ = {
 			isa = PBXGroup;
 			children = (
-				A82416E61590BA4F004CA012 /* portaudio */,
+				A81A8D5B15949081004D7C99 /* portaudio */,
 				A82416F815911595004CA012 /* src */,
 				A8241855159265F9004CA012 /* AudioHost.cpp */,
 				A8241856159265F9004CA012 /* AudioHost.h */,
@@ -431,16 +443,6 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
-		};
-		A82416E61590BA4F004CA012 /* portaudio */ = {
-			isa = PBXGroup;
-			children = (
-				A82416E71590BA4F004CA012 /* libportaudio.a */,
-				A82416E81590BA4F004CA012 /* portaudio.h */,
-			);
-			name = portaudio;
-			path = ../../ext/portaudio;
-			sourceTree = PORTAUDIO_LIB;
 		};
 		A82416F815911595004CA012 /* src */ = {
 			isa = PBXGroup;
@@ -1236,13 +1238,10 @@
 		A82416E31590B95A004CA012 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macplnk/macplnk-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(PORTAUDIO_LIB)";
+				HEADER_SEARCH_PATHS = "$(PORTAUDIO_LIB)/../include/";
 				INFOPLIST_FILE = "macplnk/macplnk-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1256,13 +1255,10 @@
 		A82416E41590B95A004CA012 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macplnk/macplnk-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(PORTAUDIO_LIB)";
+				HEADER_SEARCH_PATHS = "$(PORTAUDIO_LIB)/../include/";
 				INFOPLIST_FILE = "macplnk/macplnk-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1292,6 +1288,7 @@
 				A82416E41590B95A004CA012 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
