@@ -67,20 +67,20 @@ static inline void paCheckError (PaError err)
         printf ("paerror '%s' (%d)\n", Pa_GetErrorText (err), err);
 }
 
-static inline void paGetInfo()
-{
-    const PaDeviceIndex inputDeviceId = Pa_GetDefaultInputDevice();
-    const PaDeviceIndex outputDeviceId = Pa_GetDefaultOutputDevice();
-    
-    const PaDeviceInfo* inputInfo = Pa_GetDeviceInfo (inputDeviceId);
-    const PaDeviceInfo* outputInfo = Pa_GetDeviceInfo (outputDeviceId);
-    
-
-}
+//static inline void paGetInfo()
+//{
+//    const PaDeviceIndex inputDeviceId = Pa_GetDefaultInputDevice();
+//    const PaDeviceIndex outputDeviceId = Pa_GetDefaultOutputDevice();
+//    
+//    const PaDeviceInfo* inputInfo = Pa_GetDeviceInfo (inputDeviceId);
+//    const PaDeviceInfo* outputInfo = Pa_GetDeviceInfo (outputDeviceId);
+//    
+//
+//}
 
 //------------------------------------------------------------------------------
 
-PortAudioAudioHost::PortAudioAudioHost()
+PortAudioAudioHost::PortAudioAudioHost() throw() 
 :   stream (0)
 {    
     PaError err;
@@ -90,9 +90,7 @@ PortAudioAudioHost::PortAudioAudioHost()
     setNumInputs (1);
     setNumOutputs (2);
     setPreferredBlockSize (512);
-    setPreferredSampleRate (44100.0);
-    
-    paGetInfo();
+    setPreferredSampleRate (44100.0);    
 }
 
 PortAudioAudioHost::~PortAudioAudioHost()
@@ -105,7 +103,39 @@ PortAudioAudioHost::~PortAudioAudioHost()
     paCheckError (err);
 }
 
-void PortAudioAudioHost::stopHost()
+Text PortAudioAudioHost::getHostName() const throw()
+{
+    return "PortAudio";
+}
+
+Text PortAudioAudioHost::getNativeHostName() const throw()
+{
+    const PaHostApiIndex paHostIndex = Pa_GetDefaultHostApi();
+    const PaHostApiInfo* info = Pa_GetHostApiInfo (paHostIndex);
+    return info->name;
+}
+
+Text PortAudioAudioHost::getInputName() const throw()
+{
+    const PaDeviceIndex deviceId = Pa_GetDefaultInputDevice();    
+    const PaDeviceInfo* info = Pa_GetDeviceInfo (deviceId);
+    return info->name;
+}
+
+Text PortAudioAudioHost::getOutputName() const throw()
+{
+    const PaDeviceIndex deviceId = Pa_GetDefaultOutputDevice();    
+    const PaDeviceInfo* info = Pa_GetDeviceInfo (deviceId);
+    return info->name;
+}
+
+double PortAudioAudioHost::getCpuUsage() const throw()
+{
+    if (!stream) return 0.0;
+    return Pa_GetStreamCpuLoad (stream);
+}
+
+void PortAudioAudioHost::stopHost() throw()
 {
     PaError err;
     
@@ -116,9 +146,10 @@ void PortAudioAudioHost::stopHost()
     paCheckError (err);
     
     stream = NULL;
+    setIsRunning (false);
 }
 
-void PortAudioAudioHost::startHost()
+void PortAudioAudioHost::startHost() throw()
 {        
     PaError err;
     err = Pa_OpenDefaultStream (&stream, 
@@ -134,13 +165,13 @@ void PortAudioAudioHost::startHost()
     startHostInternal();
     
     err = Pa_StartStream (stream);
-    paCheckError (err);
+    paCheckError (err);    
 }
 
 int PortAudioAudioHost::callback (const float **inputData, float **outputData,
                                   unsigned long frameCount,
                                   const PaStreamCallbackTimeInfo* timeInfo,
-                                  PaStreamCallbackFlags statusFlags)
+                                  PaStreamCallbackFlags statusFlags) throw()
 {
     (void)timeInfo;
     (void)statusFlags;

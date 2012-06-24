@@ -49,22 +49,28 @@ BEGIN_PLONK_NAMESPACE
 class IOSAudioHost : public AudioHostBase<float>
 {
 public:
-    IOSAudioHost();
+    IOSAudioHost() throw();
     ~IOSAudioHost();
     
-    void startHost();
-    void stopHost();
+    Text getHostName() const throw();
+    Text getNativeHostName() const throw();
+    Text getInputName() const throw();
+    Text getOutputName() const throw();
+    double getCpuUsage() const throw() { return cpuUsage; }
+    
+    void startHost() throw();
+    void stopHost() throw();
 
     OSStatus renderCallback (UInt32                     inNumberFrames,
                              AudioUnitRenderActionFlags *ioActionFlags, 
                              const AudioTimeStamp 		*inTimeStamp, 
-                             AudioBufferList            *ioData);
+                             AudioBufferList            *ioData) throw();
     
     void propertyCallback (AudioSessionPropertyID   inID,
                            UInt32                   inDataSize,
-                           const void *             inPropertyValue);
+                           const void *             inPropertyValue) throw();
     
-    void interruptionCallback (UInt32 inInterruption);
+    void interruptionCallback (UInt32 inInterruption) throw();
         
 private:
     void setFormat() throw();    
@@ -79,13 +85,13 @@ private:
     
     int							bufferSize;
 	float						bufferDuration;
-	float						reciprocalBufferDuration;
+	double						reciprocalBufferDuration;
 	float						*floatBuffer;
 	UInt32						audioInputIsAvailable;
 	UInt32						numInputChannels;
 	UInt32						numOutputChannels;
-	bool						isRunning;    
-	float						cpuUsage;
+//	bool						isRunning;    
+	double						cpuUsage;
     UInt32                      audioCategory;
 };
 

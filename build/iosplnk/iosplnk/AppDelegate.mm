@@ -49,6 +49,19 @@
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
 
+- (id)init
+{
+    if (self = [super init])
+    {
+        host.getHostName().print ("Host");
+        host.getNativeHostName().print ("Native");
+        host.getInputName().print ("Input");
+        host.getOutputName().print ("Output");
+    }
+    
+    return self;
+}
+
 - (void)dealloc
 {
     [_window release];
@@ -75,8 +88,8 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
-    audio.setPreferredBlockSize (2048);
-    audio.startHost();
+    host.setPreferredBlockSize (2048);
+    host.startHost();
     
     return YES;
 }

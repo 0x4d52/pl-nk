@@ -348,8 +348,6 @@
 		A80D19061585EC0500AAB01B /* plonk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk.h; sourceTree = "<group>"; };
 		A80D19081585EC0500AAB01B /* plonk_RNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_RNG.cpp; sourceTree = "<group>"; };
 		A80D19091585EC0500AAB01B /* plonk_RNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_RNG.h; sourceTree = "<group>"; };
-		A80D19471586325500AAB01B /* NSIOSAudioHost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSIOSAudioHost.h; sourceTree = "<group>"; };
-		A80D19481586325500AAB01B /* NSIOSAudioHost.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSIOSAudioHost.mm; sourceTree = "<group>"; };
 		A80D1949158633CF00AAB01B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A80D19511587819500AAB01B /* AudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHost.h; sourceTree = "<group>"; };
 		A80D19521587819500AAB01B /* AudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioHost.cpp; sourceTree = "<group>"; };
@@ -415,7 +413,6 @@
 				A80D17E01585EAB500AAB01B /* SecondViewController.mm */,
 				A80D19511587819500AAB01B /* AudioHost.h */,
 				A80D19521587819500AAB01B /* AudioHost.cpp */,
-				A80D19501587816600AAB01B /* audiohostbase */,
 				A80D17F81585EC0500AAB01B /* src */,
 				A80D17CD1585EAB500AAB01B /* Supporting Files */,
 				A80D17F71585EBCA00AAB01B /* Resources */,
@@ -981,15 +978,6 @@
 				A80D19091585EC0500AAB01B /* plonk_RNG.h */,
 			);
 			path = random;
-			sourceTree = "<group>";
-		};
-		A80D19501587816600AAB01B /* audiohostbase */ = {
-			isa = PBXGroup;
-			children = (
-				A80D19471586325500AAB01B /* NSIOSAudioHost.h */,
-				A80D19481586325500AAB01B /* NSIOSAudioHost.mm */,
-			);
-			name = audiohostbase;
 			sourceTree = "<group>";
 		};
 		A824167D1588C0FF004CA012 /* hosts */ = {

@@ -50,7 +50,7 @@ BEGIN_PLONK_NAMESPACE
 
 
 
-JuceAudioHost::JuceAudioHost()
+JuceAudioHost::JuceAudioHost() throw()
 {    
     setNumInputs (2);
     setNumOutputs (2);
@@ -61,7 +61,64 @@ JuceAudioHost::~JuceAudioHost()
     stopHost();
 }
 
-void JuceAudioHost::stopHost()
+Text JuceAudioHost::getHostName() const throw()
+{
+    return "Juce";
+}
+
+Text JuceAudioHost::getNativeHostName() const throw()
+{
+    return static_cast<const char*> (audioDeviceManager.getCurrentAudioDeviceType().toUTF8());
+}
+
+Text JuceAudioHost::getInputName() const throw()
+{
+    Text result;
+    AudioDeviceManager::AudioDeviceSetup setup;
+	
+    if (getIsRunning())
+    {
+        audioDeviceManager.getAudioDeviceSetup (setup);
+        result = static_cast<const char*> (setup.inputDeviceName.toUTF8());
+    }
+    else
+    {
+        AudioDeviceManager dummyDevice;
+        dummyDevice.initialise (getNumInputs(), getNumOutputs(), 0, true);
+        dummyDevice.getAudioDeviceSetup (setup);
+        result = static_cast<const char*> (setup.inputDeviceName.toUTF8());
+    }
+    
+    return result;
+}
+
+Text JuceAudioHost::getOutputName() const throw()
+{
+    Text result;
+    AudioDeviceManager::AudioDeviceSetup setup;
+	
+    if (getIsRunning())
+    {
+        audioDeviceManager.getAudioDeviceSetup (setup);
+        result = static_cast<const char*> (setup.outputDeviceName.toUTF8());
+    }
+    else
+    {
+        AudioDeviceManager dummyDevice;
+        dummyDevice.initialise (getNumInputs(), getNumOutputs(), 0, true);
+        dummyDevice.getAudioDeviceSetup (setup);
+        result = static_cast<const char*> (setup.outputDeviceName.toUTF8());
+    }
+    
+    return result;
+}
+
+double JuceAudioHost::getCpuUsage() const throw()
+{
+    return audioDeviceManager.getCpuUsage();
+}
+
+void JuceAudioHost::stopHost() throw()
 {
     audioDeviceManager.getAudioCallbackLock().enter();
     audioDeviceManager.removeAudioCallback(this);
@@ -69,7 +126,7 @@ void JuceAudioHost::stopHost()
     audioDeviceManager.closeAudioDevice();
 }
 
-void JuceAudioHost::startHost()
+void JuceAudioHost::startHost() throw()
 {
     String error = audioDeviceManager.initialise (getNumInputs(), 
                                                   getNumOutputs(), 
@@ -110,7 +167,7 @@ void JuceAudioHost::startHost()
 
 void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInputs, 
                                            float** outputData, int numOutputs, 
-                                           int blockSize)
+                                           int blockSize) throw()
 {
     BlockSize::getDefault().setValue (blockSize);
     
@@ -128,15 +185,16 @@ void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInput
     process();
 }
 
-void JuceAudioHost::audioDeviceAboutToStart (AudioIODevice* device)
+void JuceAudioHost::audioDeviceAboutToStart (AudioIODevice* device) throw()
 {
     SampleRate::getDefault().setValue (device->getCurrentSampleRate());
     BlockSize::getDefault().setValue (device->getCurrentBufferSizeSamples()); 
     startHostInternal();
 }
 
-void JuceAudioHost::audioDeviceStopped()
+void JuceAudioHost::audioDeviceStopped() throw()
 {
+    setIsRunning (false);
     hostStopped();
 }
 

@@ -51,12 +51,16 @@ public:
 
     AudioHostBase() throw()
     :   preferredSampleRate (0.0),
-        preferredBlockSize (0)
+        preferredBlockSize (0),
+        isRunning (false)
     { 
     }
     
     virtual ~AudioHostBase() { }
         
+    inline bool getIsRunning() const throw() { return isRunning; }
+    inline void setIsRunning (const bool state) throw() { isRunning = state; }
+    
     inline const UnitType& getOutputUnit() const throw() { return outputUnit; }
     
     inline int getNumInputs() const throw()  { return this->inputs.length(); }
@@ -111,6 +115,12 @@ protected:
     inline BufferArray getInputs() const throw() { return this->inputs; }
     inline BufferArray getOutputs() const throw() { return this->outputs; }
 
+    virtual Text getHostName() const       = 0;
+    virtual Text getNativeHostName() const = 0;
+    virtual Text getInputName() const      = 0;
+    virtual Text getOutputName() const     = 0;
+    virtual double getCpuUsage() const     = 0;
+
     virtual void startHost()    = 0;
     virtual void stopHost()     = 0;
     
@@ -161,12 +171,14 @@ protected:
     {
         outputUnit = constructGraph();
         hostStarting();
+        setIsRunning (true);
     }
-
+    
     
 private:
     double preferredSampleRate;
     int preferredBlockSize;
+	bool isRunning;    
 
     ProcessInfo info;
     UnitType outputUnit;  

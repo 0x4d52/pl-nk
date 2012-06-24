@@ -39,7 +39,7 @@
 #ifndef PLONK_JUCEAUDIOHOST_H
 #define PLONK_JUCEAUDIOHOST_H
 
-#include "JuceHeader.h"
+#include "JuceHeader.h" // assumes you're using a Jucer-created project with a JuceHeader.h file
 
 BEGIN_PLONK_NAMESPACE
 
@@ -47,20 +47,26 @@ class JuceAudioHost :   public AudioHostBase<float>,
                         public AudioIODeviceCallback
 {
 public:
-    JuceAudioHost();
+    JuceAudioHost() throw();
     ~JuceAudioHost();
     
-    void startHost();
-    void stopHost();
+    Text getHostName() const throw();
+    Text getNativeHostName() const throw();
+    Text getInputName() const throw();
+    Text getOutputName() const throw();
+    double getCpuUsage() const throw();
+
+    void startHost() throw();
+    void stopHost() throw();
         
     void audioDeviceIOCallback (const float** inputs, int numInputs, 
                                 float** outputs, int numOutputs, 
-                                int blockSize);
-	void audioDeviceAboutToStart (AudioIODevice* device);
-	void audioDeviceStopped();
+                                int blockSize) throw();
+	void audioDeviceAboutToStart (AudioIODevice* device) throw();
+	void audioDeviceStopped() throw();
         
 private:
-    AudioDeviceManager audioDeviceManager;
+    mutable AudioDeviceManager audioDeviceManager;
 };
 
 END_PLONK_NAMESPACE

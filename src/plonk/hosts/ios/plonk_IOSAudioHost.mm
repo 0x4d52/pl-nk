@@ -81,14 +81,14 @@ static inline void InterruptionListener (void *inClientData,
     host->interruptionCallback (inInterruption);
 }
 
-static inline void audioFloatToShort(float *src, short* dst, unsigned int length)
+static inline void audioFloatToShort(float *src, short* dst, unsigned int length) throw()
 {
 	static const float scale = 32767.f;
     pl_VectorMulF_N1N (src, scale, src, length);
     pl_VectorConvertF2S_NN (dst, src, length);
 }
 
-static inline void audioFloatToShortChannels(float *src[], AudioBufferList* dst, unsigned int length, unsigned int numChannels)
+static inline void audioFloatToShortChannels(float *src[], AudioBufferList* dst, unsigned int length, unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; channel++)
 	{
@@ -97,14 +97,14 @@ static inline void audioFloatToShortChannels(float *src[], AudioBufferList* dst,
 	}
 }
 
-static inline void audioShortToFloat(short *src, float* dst, unsigned int length)
+static inline void audioShortToFloat(short *src, float* dst, unsigned int length) throw()
 {
 	static const float scale = 1.f / 32767.f;	
 	pl_VectorConvertS2F_NN (dst, src, length);
     pl_VectorMulF_N1N (dst, scale, dst, length);
 }
 
-static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[], unsigned int length, unsigned int numChannels)
+static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[], unsigned int length, unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; channel++)
 	{
@@ -115,26 +115,49 @@ static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[],
 
 //------------------------------------------------------------------------------
 
-IOSAudioHost::IOSAudioHost()
+IOSAudioHost::IOSAudioHost() throw()
 :   hwSampleRate (0.0),         // let the hardware choose
-    isRunning (false),
-    cpuUsage (0.f),
+    cpuUsage (0.0),
     audioCategory (kAudioSessionCategory_PlayAndRecord)
 {    
 }
 
 IOSAudioHost::~IOSAudioHost()
 {
-    if (isRunning)
+    if (getIsRunning())
         stopHost();
 }
 
-void IOSAudioHost::stopHost()
+Text IOSAudioHost::getHostName() const throw()
 {
-    // stop the AU?
+    return "iOS";
 }
 
-void IOSAudioHost::startHost()
+Text IOSAudioHost::getNativeHostName() const throw()
+{
+    return "RemoteIO";
+}
+
+Text IOSAudioHost::getInputName() const throw()
+{
+    return "";
+}
+
+Text IOSAudioHost::getOutputName() const throw()
+{
+    return "";
+}
+
+void IOSAudioHost::stopHost() throw()
+{
+    if (getIsRunning())
+    {
+        AudioOutputUnitStop (rioUnit);
+        setIsRunning (false);
+    }
+}
+
+void IOSAudioHost::startHost() throw()
 {
     // start the AU
     // need to know numchans, sr and blocksize in advance
@@ -184,7 +207,7 @@ void IOSAudioHost::startHost()
 	size = sizeof (bufferDuration);
 	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareIOBufferDuration, &size, &bufferDuration);
 	
-	reciprocalBufferDuration = 1.f / bufferDuration; 
+	reciprocalBufferDuration = 1.0 / double (bufferDuration); 
 	
 	bufferSize = (int)(hwSampleRate * bufferDuration + 0.5);
 	floatBuffer = new float[bufferSize * plonk::max (getNumOutputs(), getNumInputs())];
@@ -195,7 +218,6 @@ void IOSAudioHost::startHost()
     BlockSize::getDefault().setValue (bufferSize); 
     startHostInternal();
     
-	isRunning = true;    
     restart();
     
     size = sizeof (format);
@@ -287,7 +309,7 @@ void IOSAudioHost::fixAudioRouteIfSetToReceiver() throw()
 OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames,
                                        AudioUnitRenderActionFlags *ioActionFlags, 
                                        const AudioTimeStamp       *inTimeStamp, 
-                                       AudioBufferList            *ioData)
+                                       AudioBufferList            *ioData) throw()
 {
     OSStatus err = 0;
     int i;
@@ -334,17 +356,17 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
     
 	renderTime = CFAbsoluteTimeGetCurrent() - renderTime;
 	
-	const float timeRatio = renderTime * reciprocalBufferDuration;
-	cpuUsage += 0.2f * (timeRatio - cpuUsage); 
+	const double timeRatio = renderTime * reciprocalBufferDuration;
+	cpuUsage += 0.2 * (timeRatio - cpuUsage); 
 	
 	return err;	
 }
 
 void IOSAudioHost::propertyCallback (AudioSessionPropertyID inID,
                                      UInt32                 inDataSize,
-                                     const void *           inPropertyValue)
+                                     const void *           inPropertyValue) throw()
 {
-    if (!isRunning) return;
+    if (getIsRunning()) return;
 	
 	if (inPropertyValue)
 	{
@@ -365,13 +387,13 @@ void IOSAudioHost::propertyCallback (AudioSessionPropertyID inID,
     restart();
 }
 
-void IOSAudioHost::interruptionCallback (UInt32 inInterruption)
+void IOSAudioHost::interruptionCallback (UInt32 inInterruption) throw()
 {
     if (inInterruption == kAudioSessionEndInterruption) 
     {
 		// make sure we are again the active session
 		AudioSessionSetActive(true);
-		isRunning = true;
+		setIsRunning (true);
 		AudioOutputUnitStart (rioUnit);
 	}
 }

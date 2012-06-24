@@ -61,11 +61,18 @@ AudioHost::AudioHost()
 
 Unit AudioHost::constructGraph()
 {
-    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
-    Unit mod = Sine::ar (500);              // 500Hz sine
-    return input * mod;                     // ringmod
+//    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
+//    Unit mod = Sine::ar (500);              // 500Hz sine
+//    return input * mod;                     // ringmod
     
 //    return Sine::ar (1000, 0.25);
+    
+    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
+    Unit mod = Sine::ar (500);              // 500Hz sine
+    Unit ringmod = input * mod;             // ringmod
+    Unit fmod = Sine::ar (0.2).linexp (500, 7500); 
+    Unit filter = RLPF::ar (ringmod, fmod, 5);
+    return filter;
 }
 
 

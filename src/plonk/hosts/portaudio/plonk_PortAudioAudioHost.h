@@ -46,16 +46,22 @@ BEGIN_PLONK_NAMESPACE
 class PortAudioAudioHost : public AudioHostBase<float>
 {
 public:
-    PortAudioAudioHost();
+    PortAudioAudioHost() throw();
     ~PortAudioAudioHost();
     
-    void startHost();
-    void stopHost();
+    Text getHostName() const throw();
+    Text getNativeHostName() const throw();
+    Text getInputName() const throw();
+    Text getOutputName() const throw();
+    double getCpuUsage() const throw();
+
+    void startHost() throw();
+    void stopHost() throw();
     
     int callback (const float** inputData, float** outputData,
                   unsigned long frameCount,
                   const PaStreamCallbackTimeInfo* timeInfo,
-                  PaStreamCallbackFlags statusFlags);
+                  PaStreamCallbackFlags statusFlags) throw();
                 
 private:
     PaStream* stream;

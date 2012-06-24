@@ -18,6 +18,10 @@
 {
     if (self = [super init])
     {
+        host.getHostName().print ("Host");
+        host.getNativeHostName().print ("Native");
+        host.getInputName().print ("Input");
+        host.getOutputName().print ("Output");
     }
     
     return self;

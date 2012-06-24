@@ -500,7 +500,7 @@ public:
         const SampleType peak2peak (peak * Math<SampleType>::get2());
         const SampleType reciprocalInRange (plonk::reciprocal (peak2peak));
         return plonk::linexp2 (*this, 
-                               UnitBase (reciprocalInRange), UnitBase (-peak * reciprocalInRange ), 
+                               UnitBase (reciprocalInRange), UnitBase (-peak * reciprocalInRange), 
                                outLow, (outHigh / outLow));
     }
     
