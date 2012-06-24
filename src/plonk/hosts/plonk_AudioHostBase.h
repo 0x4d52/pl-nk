@@ -39,6 +39,8 @@
 #ifndef PLONK_AUDIOHOSTBASE_H
 #define PLONK_AUDIOHOSTBASE_H
 
+/** An abstract class to interface with audio devices.
+ @see PortAudioAudioHost, IOSAudioHost, JuceAudioHost */
 template<class SampleType>
 class AudioHostBase
 {
@@ -49,6 +51,7 @@ public:
     typedef BusBuffer<SampleType>           BusType;
     typedef PLONK_BUSARRAYBASETYPE<BusType> BussesType;
 
+    /** Constructor */
     AudioHostBase() throw()
     :   preferredSampleRate (0.0),
         preferredBlockSize (0),
@@ -56,79 +59,79 @@ public:
     { 
     }
     
+    /** Destructor */
     virtual ~AudioHostBase() { }
         
+    /** Determine whether the audio device is runnging. */
     inline bool getIsRunning() const throw() { return isRunning; }
-    inline void setIsRunning (const bool state) throw() { isRunning = state; }
     
+    /** Get a reference to the output unit. */
     inline const UnitType& getOutputUnit() const throw() { return outputUnit; }
     
+    /** Get the number of audio inputs. */
     inline int getNumInputs() const throw()  { return this->inputs.length(); }
+    
+    /** Get the number of audio outputs. */
     inline int getNumOutputs() const throw() { return this->outputs.length(); }
     
+    /** Get the current preferred sample rate for the host. */
     inline double getPreferredSampleRate() const throw() { return preferredSampleRate; }
+    
+    /** Get the current preferred block size for the host. */
     inline int getPreferredBlockSize() const throw() { return preferredBlockSize; }
     
+    /** Set the host's preferred sample rate.
+     This must be called before startHost() to have any effect. */
     inline void setPreferredSampleRate (const double newRate) throw() { preferredSampleRate = newRate; }
+    
+    /** Set the host's preferred block size.
+     This must be called before startHost() to have any effect. */
     inline void setPreferredBlockSize (const int newSize) throw() {  preferredBlockSize = newSize; }
     
-    void setNumInputs (const int numInputs) throw()
-    {
-        plonk_assert (numInputs >= 0);
-        
-        if (numInputs != this->getNumInputs())
-        {
-            this->busses.clear();
-
-            if (numInputs != 0)
-            {
-                inputs = BufferArray (numInputs);
-                
-                for (int i = 0; i < numInputs; ++i)
-                {
-                    this->inputs.atUnchecked (i).referTo (0, 0);
-                    this->busses.add (BusType (i));
-                }
-            }
-            else this->inputs.clear();
-        }
-    }
+    /** Set the number of audio inputs required.
+     This must be called before startHost() to have any effect. */
+    void setNumInputs (const int numInputs) throw();
     
-    void setNumOutputs (const int numOutputs) throw()
-    {
-        plonk_assert (numOutputs >= 0);
-        
-        if (numOutputs != this->getNumOutputs())
-        {            
-            if (numOutputs != 0)
-            {
-                outputs = BufferArray (numOutputs);
-                
-                for (int i = 0; i < numOutputs; ++i)
-                    this->outputs.atUnchecked (i).referTo (0, 0);
-            }
-            else this->outputs.clear();
-        }
-    }
+    /** Set the number of audio inputs required.
+     This must be called before startHost() to have any effect. */
+    void setNumOutputs (const int numOutputs) throw();
                 
 protected:
+    /** Get the input buffers. @internal */
     inline BufferArray getInputs() const throw() { return this->inputs; }
+    
+    /** Get the output buffers. @internal */
     inline BufferArray getOutputs() const throw() { return this->outputs; }
 
+    /** Get the name of the audio host. */
     virtual Text getHostName() const       = 0;
+    
+    /** Get the name of the native host audio API. */
     virtual Text getNativeHostName() const = 0;
+    
+    /** Get the name of the audio input device. */
     virtual Text getInputName() const      = 0;
+    
+    /** Get the name of the audio output device. */
     virtual Text getOutputName() const     = 0;
+    
+    /** Get the current CPU usage for the DSP loop. */
     virtual double getCpuUsage() const     = 0;
 
+    /** Start the host. */
     virtual void startHost()    = 0;
+    
+    /** Stop the host. */
     virtual void stopHost()     = 0;
     
     virtual void hostStopped() throw()  { }
     virtual void hostStarting() throw() { }
 
+    /** This must be implemented by you application.
+     It should return the audio graph that is rendered to the host. */
     virtual UnitType constructGraph() = 0;
 
+    /** @internal */
     inline void process() throw()
     {
         const int blockSize = BlockSize::getDefault().getValue();
@@ -167,6 +170,7 @@ protected:
         this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * blockSize);
     }
     
+    /** @internal */
     void startHostInternal() throw()
     {
         outputUnit = constructGraph();
@@ -174,6 +178,11 @@ protected:
         setIsRunning (true);
     }
     
+    /** Set a flag to indicate the audio host is running.
+     NB This does not start or stop the host use startHost() and stopHost() 
+     respectively. */
+    inline void setIsRunning (const bool state) throw() { isRunning = state; }
+
     
 private:
     double preferredSampleRate;
@@ -186,5 +195,49 @@ private:
     BufferArray inputs, outputs;
     Lock lock;
 };
+
+//------------------------------------------------------------------------------
+
+template<class SampleType>
+void AudioHostBase<SampleType>::setNumInputs (const int numInputs) throw()
+{
+    plonk_assert (numInputs >= 0);
+    
+    if (numInputs != this->getNumInputs())
+    {
+        this->busses.clear();
+        
+        if (numInputs != 0)
+        {
+            inputs = BufferArray (numInputs);
+            
+            for (int i = 0; i < numInputs; ++i)
+            {
+                this->inputs.atUnchecked (i).referTo (0, 0);
+                this->busses.add (BusType (i));
+            }
+        }
+        else this->inputs.clear();
+    }
+}
+
+template<class SampleType>
+void AudioHostBase<SampleType>::setNumOutputs (const int numOutputs) throw()
+{
+    plonk_assert (numOutputs >= 0);
+    
+    if (numOutputs != this->getNumOutputs())
+    {            
+        if (numOutputs != 0)
+        {
+            outputs = BufferArray (numOutputs);
+            
+            for (int i = 0; i < numOutputs; ++i)
+                this->outputs.atUnchecked (i).referTo (0, 0);
+        }
+        else this->outputs.clear();
+    }
+}
+
 
 #endif // PLONK_AUDIOHOSTBASE_H
