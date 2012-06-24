@@ -184,7 +184,7 @@ int PortAudioAudioHost::callback (const float **inputData, float **outputData,
     int i;
     
     for (i = 0; i < numInputs; ++i)
-        getInputs().atUnchecked (i).referTo (frameCount, (float*)inputData[i]); // uggh!
+        getInputs().atUnchecked (i).referTo (frameCount, const_cast<float*> (inputData[i]));
 
     for (i = 0; i < numOutputs; ++i)
         getOutputs().atUnchecked (i).referTo (frameCount, outputData[i]);

@@ -45,11 +45,13 @@ template<class SampleType>
 class AudioHostBase
 {
 public:
-    typedef NumericalArray<SampleType>      Buffer;
-    typedef NumericalArray2D<SampleType>    BufferArray;
-    typedef UnitBase<SampleType>            UnitType;
-    typedef BusBuffer<SampleType>           BusType;
-    typedef PLONK_BUSARRAYBASETYPE<BusType> BussesType;
+    typedef NumericalArray<SampleType>          Buffer;
+    typedef NumericalArray2D<SampleType>        BufferArray;
+//    typedef NumericalArray<const SampleType>    ConstBuffer;
+//    typedef NumericalArray2D<const SampleType>  ConstBufferArray;
+    typedef UnitBase<SampleType>                UnitType;
+    typedef BusBuffer<SampleType>               BusType;
+    typedef PLONK_BUSARRAYBASETYPE<BusType>     BussesType;
 
     /** Constructor */
     AudioHostBase() throw()
@@ -104,30 +106,30 @@ protected:
     inline BufferArray getOutputs() const throw() { return this->outputs; }
 
     /** Get the name of the audio host. */
-    virtual Text getHostName() const       = 0;
+    virtual Text getHostName() const = 0;
     
     /** Get the name of the native host audio API. */
     virtual Text getNativeHostName() const = 0;
     
     /** Get the name of the audio input device. */
-    virtual Text getInputName() const      = 0;
+    virtual Text getInputName() const = 0;
     
     /** Get the name of the audio output device. */
-    virtual Text getOutputName() const     = 0;
+    virtual Text getOutputName() const = 0;
     
     /** Get the current CPU usage for the DSP loop. */
-    virtual double getCpuUsage() const     = 0;
+    virtual double getCpuUsage() const = 0;
 
     /** Start the host. */
-    virtual void startHost()    = 0;
+    virtual void startHost() = 0;
     
     /** Stop the host. */
-    virtual void stopHost()     = 0;
+    virtual void stopHost() = 0;
     
     virtual void hostStopped() throw()  { }
     virtual void hostStarting() throw() { }
 
-    /** This must be implemented by you application.
+    /** This must be implemented by your application.
      It should return the audio graph that is rendered to the host. */
     virtual UnitType constructGraph() = 0;
 
@@ -192,7 +194,8 @@ private:
     ProcessInfo info;
     UnitType outputUnit;  
     BussesType busses;
-    BufferArray inputs, outputs;
+    BufferArray inputs;
+    BufferArray outputs;
     Lock lock;
 };
 

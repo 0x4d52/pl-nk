@@ -135,7 +135,7 @@ void JuceAudioHost::startHost() throw()
 	if (error.isNotEmpty())
 	{
 		AlertWindow::showMessageBox (AlertWindow::WarningIcon, 
-									 "JucePlonkTest", 
+									 "JuceAudioHost", 
 									 "AudioDeviceManager init failed \n\n" + error);
 		
 		return;
@@ -155,7 +155,7 @@ void JuceAudioHost::startHost() throw()
 	if (error.isNotEmpty())
 	{
 		AlertWindow::showMessageBox (AlertWindow::WarningIcon, 
-									 "JucePlonkTest", 
+									 "JuceAudioHost", 
 									 "AudioDeviceManager setup failed \n\n" + error);
 		
 		return;
@@ -177,7 +177,7 @@ void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInput
     int i;
     
     for (i = 0; i < numInputs; ++i)
-        getInputs().atUnchecked (i).referTo (blockSize, (float*)inputData[i]); // uggh!
+        getInputs().atUnchecked (i).referTo (blockSize, const_cast<float*> (inputData[i]));
 
     for (i = 0; i < numOutputs; ++i)
         getOutputs().atUnchecked (i).referTo (blockSize, outputData[i]);
