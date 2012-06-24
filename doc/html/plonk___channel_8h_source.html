@@ -130,7 +130,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00062"></a><a class="code" href="class_channel_base.html">00062</a> <span class="keyword">class </span><a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt; ChannelInternalBase&lt;SampleType&gt; &gt;
 <a name="l00063"></a>00063 {
 <a name="l00064"></a>00064 <span class="keyword">protected</span>:
-<a name="l00065"></a><a class="code" href="class_channel_base.html#a12faeeef00b1dbd883a3fba380acce07">00065</a>     <span class="keyword">typedef</span> UNITBASETYPE&lt;ChannelBase&gt;                   <a class="code" href="class_channel_base.html#a12faeeef00b1dbd883a3fba380acce07">UnitType</a>;
+<a name="l00065"></a><a class="code" href="class_channel_base.html#a8cd96d9312c86b20ea926973794568ae">00065</a>     <span class="keyword">typedef</span> PLONK_UNITBASETYPE&lt;ChannelBase&gt;             <a class="code" href="class_channel_base.html#a8cd96d9312c86b20ea926973794568ae">UnitType</a>;
 <a name="l00066"></a>00066 
 <a name="l00067"></a>00067 <span class="keyword">public</span>:
 <a name="l00068"></a><a class="code" href="class_channel_base.html#a423ef691ba3afd8b0108c9b8c56dd4e3">00068</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">ChannelInternalBase&lt;SampleType&gt;</a>             <a class="code" href="class_channel_base.html#a423ef691ba3afd8b0108c9b8c56dd4e3">Internal</a>;
@@ -146,7 +146,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00080"></a>00080     { 
 <a name="l00081"></a>00081     }
 <a name="l00082"></a>00082     
-<a name="l00084"></a><a class="code" href="class_channel_base.html#a3151beffa0f9c901b9100666bbd1e188">00084</a>     <a class="code" href="class_channel_base.html#ab7eaf4e3fd5527c073278b4dbe4c0452" title="Default constructor.">ChannelBase</a> (<a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">Internal</a> *<span class="keyword">internal</span>) throw()
+<a name="l00084"></a><a class="code" href="class_channel_base.html#a3151beffa0f9c901b9100666bbd1e188">00084</a>     <a class="code" href="class_channel_base.html#ab7eaf4e3fd5527c073278b4dbe4c0452" title="Default constructor.">ChannelBase</a> (<a class="code" href="class_channel_internal_base.html">Internal</a> *<span class="keyword">internal</span>) throw()
 <a name="l00085"></a>00085     :   <a class="code" href="class_smart_pointer_container.html">Base</a> (internal)
 <a name="l00086"></a>00086     {
 <a name="l00087"></a>00087     }
@@ -279,7 +279,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:29 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

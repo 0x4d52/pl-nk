@@ -132,7 +132,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00060"></a>00060     }    
 <a name="l00061"></a>00061     
 <a name="l00062"></a><a class="code" href="class_endian_utility.html#a84a9f060dafb4436c426cc840a6e0b1a">00062</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_endian_utility.html#a3138515db51d1b6c92eab331e98fda55">swap</a> (<span class="keywordtype">void</span>* bits, 
-<a name="l00063"></a>00063                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> itemSize, 
+<a name="l00063"></a>00063                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> itemSize, <span class="comment">// hmm, isn&#39;t itemSize the same as the tparam length?</span>
 <a name="l00064"></a>00064                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> numItems) <span class="keywordflow">throw</span>()
 <a name="l00065"></a>00065     {
 <a name="l00066"></a>00066         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data = <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*<span class="keyword">&gt;</span> (bits);
@@ -346,7 +346,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:29 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

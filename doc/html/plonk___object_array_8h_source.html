@@ -270,7 +270,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00231"></a><a class="code" href="class_object_array.html#a5f2358dc074c3031505283f81a6201dd">00231</a>         <span class="keyword">static</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#abd760cd8df87fe7470d4ac9c34a39cdf" title="Collect a new array based on the contents of another array.">collect</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CollectionType1&gt;</a> <span class="keyword">const</span>&amp; collection1,
 <a name="l00232"></a>00232                                                                                     <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CollectionType2&gt;</a> <span class="keyword">const</span>&amp; collection2) <span class="keywordflow">throw</span>()
 <a name="l00233"></a>00233         {
-<a name="l00234"></a>00234                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (collection1.length(), collection2.length());
+<a name="l00234"></a>00234                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (collection1.length(), collection2.length());
 <a name="l00235"></a>00235                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> result (length, <span class="keyword">false</span>);
 <a name="l00236"></a>00236                 
 <a name="l00237"></a>00237                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
@@ -287,7 +287,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00248"></a>00248                                                                                     <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CollectionType2&gt;</a> <span class="keyword">const</span>&amp; collection2,
 <a name="l00249"></a>00249                                                                                     <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CollectionType3&gt;</a> <span class="keyword">const</span>&amp; collection3) <span class="keywordflow">throw</span>()
 <a name="l00250"></a>00250         {
-<a name="l00251"></a>00251                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (<a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (collection1.length(), 
+<a name="l00251"></a>00251                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (collection1.length(), 
 <a name="l00252"></a>00252                                                    collection2.length()), 
 <a name="l00253"></a>00253                                                    collection3.length());
 <a name="l00254"></a>00254                 
@@ -310,14 +310,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00271"></a>00271                                                                                     <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CollectionType3&gt;</a> <span class="keyword">const</span>&amp; collection3,
 <a name="l00272"></a>00272                                                                                     <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CollectionType4&gt;</a> <span class="keyword">const</span>&amp; collection4) <span class="keywordflow">throw</span>()
 <a name="l00273"></a>00273         {
-<a name="l00274"></a>00274                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (<a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (<a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">plonk::max</a> (collection1.length(), 
+<a name="l00274"></a>00274                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (<a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (collection1.length(), 
 <a name="l00275"></a>00275                                                                collection2.length()), 
 <a name="l00276"></a>00276                                                                collection3.length()),
 <a name="l00277"></a>00277                                                                collection4.length());
 <a name="l00278"></a>00278                 
 <a name="l00279"></a>00279                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> result (length, <span class="keyword">false</span>);
 <a name="l00280"></a>00280                 
-<a name="l00281"></a>00281                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
+<a name="l00281"></a>00281                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
 <a name="l00282"></a>00282                         result.put (i, ObjectType (collection1.wrapAt (i), 
 <a name="l00283"></a>00283                                                                            collection2.wrapAt (i),
 <a name="l00284"></a>00284                                                                            collection3.wrapAt (i),
@@ -349,7 +349,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00314"></a>00314         <span class="keyword">static</span> <span class="keywordtype">int</span> countValidInitialisers (InitialObject <span class="keyword">const</span>&amp; i03) <span class="keywordflow">throw</span>()
 <a name="l00315"></a>00315         {
 <a name="l00316"></a>00316                 <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a> = 3;
-<a name="l00317"></a>00317                 <span class="keywordflow">if</span>(i03.valid) size++; <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>;
+<a name="l00317"></a>00317                 <span class="keywordflow">if</span> (i03.valid) size++; <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>;
 <a name="l00318"></a>00318                 <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>;
 <a name="l00319"></a>00319         }       
 <a name="l00320"></a>00320         
@@ -615,13 +615,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00581"></a>00581                                         array[newIndex++] = arrayPtr1[i];
 <a name="l00582"></a>00582                                 }
 <a name="l00583"></a>00583                                 
-<a name="l00584"></a>00584                                 <span class="keywordflow">if</span>(eitherNullTerminated)
+<a name="l00584"></a>00584                                 <span class="keywordflow">if</span> (eitherNullTerminated)
 <a name="l00585"></a>00585                                         array[newIndex] = <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>();
 <a name="l00586"></a>00586                         }
 <a name="l00587"></a>00587                 }
 <a name="l00588"></a>00588         }
 <a name="l00589"></a>00589     
-<a name="l00595"></a><a class="code" href="class_object_array.html#a33721e5dd4e7ed9374073ca2b8b6f750">00595</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a33721e5dd4e7ed9374073ca2b8b6f750" title="Sets a new size for the array.">setSize</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> newSize, <span class="keyword">const</span> <span class="keywordtype">bool</span> keepContents) <span class="keywordflow">throw</span>() 
+<a name="l00595"></a><a class="code" href="class_object_array.html#a33721e5dd4e7ed9374073ca2b8b6f750">00595</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a33721e5dd4e7ed9374073ca2b8b6f750" title="Sets a new size for the array.">setSize</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> newSize, <span class="keyword">const</span> <span class="keywordtype">bool</span> keepContents) <span class="keywordflow">throw</span>() 
 <a name="l00596"></a>00596     { 
 <a name="l00597"></a>00597         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array_internal_base.html#ab3c874932198baa23e4b85351654e816">setSize</a> (newSize, keepContents);
 <a name="l00598"></a>00598     }
@@ -654,7 +654,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00641"></a>00641     
 <a name="l00646"></a><a class="code" href="class_object_array.html#ae2236515507f1cfe0f9e44ecb63dabd4">00646</a>     <span class="keywordtype">void</span> <a class="code" href="class_object_array.html#ae2236515507f1cfe0f9e44ecb63dabd4" title="Force the internal array to refer to other data.">referTo</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> size, ObjectType *dataToUse, <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNullTermination = <span class="keyword">false</span>)
 <a name="l00647"></a>00647     {
-<a name="l00648"></a>00648         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array_internal_base.html#a46688c6bb1ac321c047860b0ab2c0507">referTo</a>(size, dataToUse, needsNullTermination);
+<a name="l00648"></a>00648         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array_internal_base.html#a46688c6bb1ac321c047860b0ab2c0507">referTo</a> (size, dataToUse, needsNullTermination);
 <a name="l00649"></a>00649     }
 <a name="l00650"></a>00650         
 <a name="l00652"></a><a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af">00652</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>&amp; <a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (ObjectType <span class="keyword">const</span>&amp; item) <span class="keywordflow">throw</span>()
@@ -736,7 +736,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00746"></a>00746                         resultArray[i] = index &lt; 0 || index &gt;= thisSize ? <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>() : thisArray[index];
 <a name="l00747"></a>00747                 }
 <a name="l00748"></a>00748                 
-<a name="l00749"></a>00749                 <span class="keywordflow">if</span>(needsNull)
+<a name="l00749"></a>00749                 <span class="keywordflow">if</span> (needsNull)
 <a name="l00750"></a>00750                         resultArray[<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>] = <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>();
 <a name="l00751"></a>00751                 
 <a name="l00752"></a>00752                 <span class="keywordflow">return</span> result;
@@ -779,7 +779,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00794"></a>00794         
 <a name="l00799"></a><a class="code" href="class_object_array.html#a7f8923e3ea4e9737e04a0b35100db841">00799</a>         ObjectType&amp; <a class="code" href="class_object_array.html#a7f8923e3ea4e9737e04a0b35100db841" title="Returns a reference to an item at the specified index.">wrapAt</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>()
 <a name="l00800"></a>00800         {
-<a name="l00801"></a>00801                 <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>() == 0) { <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>(); }
+<a name="l00801"></a>00801                 <span class="keywordflow">if</span> (this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>() == 0) { <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>(); }
 <a name="l00802"></a>00802                 
 <a name="l00803"></a>00803                 <span class="keywordtype">int</span> indexToUse = index;
 <a name="l00804"></a>00804                 <span class="keywordflow">while</span> (indexToUse &lt; 0)
@@ -790,10 +790,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00809"></a>00809         
 <a name="l00814"></a><a class="code" href="class_object_array.html#ad4aaf1341f5ababca4afcc0830a7da1e">00814</a>         <span class="keyword">const</span> ObjectType&amp; <a class="code" href="class_object_array.html#a7f8923e3ea4e9737e04a0b35100db841" title="Returns a reference to an item at the specified index.">wrapAt</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00815"></a>00815         {
-<a name="l00816"></a>00816                 <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>() == 0) { <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>(); }
+<a name="l00816"></a>00816                 <span class="keywordflow">if</span> (this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>() == 0) { <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>(); }
 <a name="l00817"></a>00817                 
 <a name="l00818"></a>00818                 <span class="keywordtype">int</span> indexToUse = index;
-<a name="l00819"></a>00819                 <span class="keywordflow">while</span>(indexToUse &lt; 0)
+<a name="l00819"></a>00819                 <span class="keywordflow">while</span> (indexToUse &lt; 0)
 <a name="l00820"></a>00820                         indexToUse += this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
 <a name="l00821"></a>00821                 
 <a name="l00822"></a>00822                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>()[(<span class="keywordtype">unsigned</span> int)indexToUse % (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>()];
@@ -959,7 +959,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01014"></a>01014                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
 <a name="l01015"></a>01015         
 <a name="l01016"></a>01016                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
-<a name="l01017"></a>01017                         <span class="keywordflow">if</span>(thisArray[i] != otherArray[i])
+<a name="l01017"></a>01017                         <span class="keywordflow">if</span> (thisArray[i] != otherArray[i])
 <a name="l01018"></a>01018                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l01019"></a>01019                 
 <a name="l01020"></a>01020                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
@@ -1051,7 +1051,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01116"></a>01116                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
 <a name="l01117"></a>01117                 <span class="keyword">const</span> ObjectType *items = itemsToSearchFor.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
 <a name="l01118"></a>01118 
-<a name="l01119"></a>01119                 <span class="keywordflow">if</span>(array != 0 &amp;&amp; items != 0)
+<a name="l01119"></a>01119                 <span class="keywordflow">if</span> (array != 0 &amp;&amp; items != 0)
 <a name="l01120"></a>01120                 {
 <a name="l01121"></a>01121                         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l01122"></a>01122                         <span class="keywordtype">int</span> itemsToFind = itemsToSearchFor.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
@@ -1191,7 +1191,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01268"></a>01268         
 <a name="l01270"></a><a class="code" href="class_object_array.html#a4c9d17a3269ab9904a4fb2219c367b6f">01270</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>&amp; <a class="code" href="class_object_array.html#a4c9d17a3269ab9904a4fb2219c367b6f" title="Remove several items in-place.">removeItems</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; items) <span class="keywordflow">throw</span>()
 <a name="l01271"></a>01271         {
-<a name="l01272"></a>01272                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; items.length(); i++)
+<a name="l01272"></a>01272                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; items.length(); i++)
 <a name="l01273"></a>01273                         this-&gt;<a class="code" href="class_object_array.html#a691f1805e81bbe042bcc07d84d7eb8e0" title="Remove an item in-place.">removeItem</a> (items[i]);
 <a name="l01274"></a>01274                 
 <a name="l01275"></a>01275                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
@@ -1201,7 +1201,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01280"></a>01280         {
 <a name="l01281"></a>01281                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
 <a name="l01282"></a>01282         
-<a name="l01283"></a>01283                 <span class="keywordflow">if</span>(length == 0) 
+<a name="l01283"></a>01283                 <span class="keywordflow">if</span> (length == 0) 
 <a name="l01284"></a>01284             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
 <a name="l01285"></a>01285                 
 <a name="l01286"></a>01286                 <span class="keyword">const</span> <span class="keywordtype">int</span> groupSizeChecked = groupSize &lt; 1 ? 1 : groupSize;
@@ -1380,7 +1380,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:30 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

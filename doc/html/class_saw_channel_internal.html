@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SawChannelInternal&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="SawChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;" -->
+<!-- doxytag: class="SawChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal, SampleType)&gt;" -->
 <p>Sawtooth wave generator.  
  <a href="class_saw_channel_internal.html#details">More...</a></p>
 
@@ -79,13 +79,13 @@ Inheritance diagram for SawChannelInternal&lt; SampleType &gt;:</div>
  <div class="center">
   <img src="class_saw_channel_internal.png" usemap="#SawChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="SawChannelInternal&lt; SampleType &gt;_map" name="SawChannelInternal&lt; SampleType &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="774,168,1280,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="516,112,1022,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1032,112,1538,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,506,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="516,56,1022,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1032,56,1538,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,506,24"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal, SampleType)&gt;" shape="rect" coords="891,168,1475,192"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="594,112,1178,136"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1188,112,1772,136"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,584,80"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="594,56,1178,80"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1188,56,1772,80"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,584,24"/>
 </map>
  </div></div>
 
@@ -93,10 +93,6 @@ Inheritance diagram for SawChannelInternal&lt; SampleType &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data.html">ChannelData</a><br class="typebreak"/>
-&lt; <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a5235ef70e3b410a5fc636fbd9b3e6313">Data</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#a5235ef70e3b410a5fc636fbd9b3e6313"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#aaaacc965611abeb62bf081e838bea0f2">Inputs</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a58eb974d86ccda7a3044efe354a7f552">ChannelType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a><br class="typebreak"/>
@@ -113,6 +109,7 @@ Public Types</h2></td></tr>
 &lt; <a class="el" href="class_saw_channel_internal.html#ac292318d308ddfb7cba06a774f3bdf28">FrequencyType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a49b8ff25a19af9eda184d9634812182c">FrequencyBufferType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#aa2bcf880629ee53a206403ea45f962fa">PLONK_CHANNELDATA_NAME</a> (<a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>, SampleType) <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#a319126a27a5076e688124c188f448f46">SawChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#addff9557b53437ac8941c72cd07932af">getName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_saw_channel_internal.html#adac51f5b9e15ee1be7e6ee5fdb719f25">getInputKeys</a> () const   throw ()</td></tr>
@@ -141,27 +138,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5235ef70e3b410a5fc636fbd9b3e6313"></a><!-- doxytag: member="SawChannelInternal::Data" ref="a5235ef70e3b410a5fc636fbd9b3e6313" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a> &lt; SampleType &gt; &gt; <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>To store channel state data. </p>
-<p>Sublasses should inherit from this, add their own members, and store an instance. Where applicable the structure should match the equivalents in the Plink library. </p>
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">ChannelInternalCore</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -223,7 +200,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -240,7 +217,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -287,7 +264,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, ChannelData&lt; SawChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(SawChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -419,6 +396,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aa2bcf880629ee53a206403ea45f962fa"></a><!-- doxytag: member="SawChannelInternal::PLONK_CHANNELDATA_NAME" ref="aa2bcf880629ee53a206403ea45f962fa" args="(SawChannelInternal, SampleType) Data" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>&lt; SampleType &gt;::PLONK_CHANNELDATA_NAME </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_saw_channel_internal.html">SawChannelInternal</a>&lt; SampleType &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a518b15242470c04baa97d3609fe0f4c0"></a><!-- doxytag: member="SawChannelInternal::process" ref="a518b15242470c04baa97d3609fe0f4c0" args="(ProcessInfo &amp;info, const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -471,7 +477,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:11 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:40 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">UnitMixerChannelInternal&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="UnitMixerChannelInternal" --><!-- doxytag: inherits="ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" -->
+<!-- doxytag: class="UnitMixerChannelInternal" --><!-- doxytag: inherits="ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;" -->
 <p>Mix an array of units to a multichannel unit.  
  <a href="class_unit_mixer_channel_internal.html#details">More...</a></p>
 
@@ -79,14 +79,14 @@ Inheritance diagram for UnitMixerChannelInternal&lt; SampleType &gt;:</div>
  <div class="center">
   <img src="class_unit_mixer_channel_internal.png" usemap="#UnitMixerChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="UnitMixerChannelInternal&lt; SampleType &gt;_map" name="UnitMixerChannelInternal&lt; SampleType &gt;_map">
-<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="924,224,1530,248"/>
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="924,168,1530,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="616,112,1222,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1232,112,1838,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,606,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="616,56,1222,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1232,56,1838,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,606,24"/>
+<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;" shape="rect" coords="1041,224,1725,248"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType) &gt;" shape="rect" coords="1041,168,1725,192"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="694,112,1378,136"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1388,112,2072,136"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,684,80"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="694,56,1378,80"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1388,56,2072,80"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,684,24"/>
 </map>
  </div></div>
 
@@ -94,10 +94,6 @@ Inheritance diagram for UnitMixerChannelInternal&lt; SampleType &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data.html">ChannelData</a><br class="typebreak"/>
-&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a><br class="typebreak"/>
-&lt; SampleType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#ad7cb37537a5fd4961cd2528c44b4da5b">Data</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#ad7cb37537a5fd4961cd2528c44b4da5b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a95afee6e27c4ddf5ea37a8af4f949749">ChannelType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
 <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a><br class="typebreak"/>
@@ -110,6 +106,7 @@ Public Types</h2></td></tr>
 &lt; <a class="el" href="class_channel_base.html">ChannelType</a>, <a class="el" href="class_unit_base.html">UnitType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#adf683b7c5b892103c1ec0e886858af02">UnitsType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a69bd216348a4ed07477e71240612a2dd">PLONK_CHANNELDATA_NAME</a> (<a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>, SampleType) <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a7f4e77c86fd44ea0adeee2b1368264f6">UnitMixerChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#af7a98ce1ab30a0b83aeecd81c642dd7c">getName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html#a752d6f45f61710185210be7e88abe819">getInputKeys</a> () const   throw ()</td></tr>
@@ -137,7 +134,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -154,27 +151,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad7cb37537a5fd4961cd2528c44b4da5b"></a><!-- doxytag: member="UnitMixerChannelInternal::Data" ref="ad7cb37537a5fd4961cd2528c44b4da5b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a> &lt; SampleType &gt; &gt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>To store channel state data. </p>
-<p>Sublasses should inherit from this, add their own members, and store an instance. Where applicable the structure should match the equivalents in the Plink library. </p>
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">ChannelInternalCore</a>.</p>
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -191,7 +168,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -208,7 +185,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -242,7 +219,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a9135c6d7afca6dbda99167e84c27586d">ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;</a>.</p>
 
 </div>
 </div>
@@ -353,6 +330,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a69bd216348a4ed07477e71240612a2dd"></a><!-- doxytag: member="UnitMixerChannelInternal::PLONK_CHANNELDATA_NAME" ref="a69bd216348a4ed07477e71240612a2dd" args="(UnitMixerChannelInternal, SampleType) Data" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;::PLONK_CHANNELDATA_NAME </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a9f40889dc26b61f8fa8340ce4d2d6f50"></a><!-- doxytag: member="UnitMixerChannelInternal::process" ref="a9f40889dc26b61f8fa8340ce4d2d6f50" args="(ProcessInfo &amp;info, const int)" -->
 <div class="memitem">
 <div class="memproto">
@@ -405,7 +411,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:14 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:45 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

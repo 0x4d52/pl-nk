@@ -93,9 +93,9 @@ Public Types</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_unit.html#ae9b2a1d73cd1ee176ce5a33aa358f57b">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_unit.html#a6e6afacda50ba507d2ffcca76b912e17">ar</a> (<a class="el" href="class_numerical_array.html">Buffer</a> const &amp;buffer, <a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=DoubleVariable::getOne(), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate block generator.  <a href="#a6e6afacda50ba507d2ffcca76b912e17"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_unit.html#ab760279a1e20c1f47a9fd821d74d60ad">kr</a> (<a class="el" href="class_numerical_array.html">Buffer</a> const &amp;buffer, <a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=DoubleVariable::getOne())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_unit.html#a1586e4455c2dcec6c70a0f3d1bf8e2e0">ar</a> (<a class="el" href="class_numerical_array.html">Buffer</a> const &amp;buffer, <a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get1(), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate block generator.  <a href="#a1586e4455c2dcec6c70a0f3d1bf8e2e0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_block_unit.html#a1252bdcc5c06b9750935326afd3e2775">kr</a> (<a class="el" href="class_numerical_array.html">Buffer</a> const &amp;buffer, <a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get1())  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -225,7 +225,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a6e6afacda50ba507d2ffcca76b912e17"></a><!-- doxytag: member="BlockUnit::ar" ref="a6e6afacda50ba507d2ffcca76b912e17" args="(Buffer const &amp;buffer, DoubleVariable const &amp;overlap=DoubleVariable::getOne(), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
+<a class="anchor" id="a1586e4455c2dcec6c70a0f3d1bf8e2e0"></a><!-- doxytag: member="BlockUnit::ar" ref="a1586e4455c2dcec6c70a0f3d1bf8e2e0" args="(Buffer const &amp;buffer, DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get1(), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -241,7 +241,7 @@ template&lt;class SampleType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>overlap</em> = <code>DoubleVariable::getOne()</code>, </td>
+          <td class="paramname"><em>overlap</em> = <code><a class="el" href="class_math.html">Math</a>&lt;<a class="el" href="class_variable.html">DoubleVariable</a>&gt;::get1()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -286,7 +286,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab760279a1e20c1f47a9fd821d74d60ad"></a><!-- doxytag: member="BlockUnit::kr" ref="ab760279a1e20c1f47a9fd821d74d60ad" args="(Buffer const &amp;buffer, DoubleVariable const &amp;overlap=DoubleVariable::getOne())" -->
+<a class="anchor" id="a1252bdcc5c06b9750935326afd3e2775"></a><!-- doxytag: member="BlockUnit::kr" ref="a1252bdcc5c06b9750935326afd3e2775" args="(Buffer const &amp;buffer, DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get1())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -302,7 +302,7 @@ template&lt;class SampleType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>overlap</em> = <code>DoubleVariable::getOne()</code>&#160;</td>
+          <td class="paramname"><em>overlap</em> = <code><a class="el" href="class_math.html">Math</a>&lt;<a class="el" href="class_variable.html">DoubleVariable</a>&gt;::get1()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -333,7 +333,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:02 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:33 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

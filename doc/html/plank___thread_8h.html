@@ -81,8 +81,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct PlankThread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An opaque reference to the <em>Plank Thread</em> object.  <a href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga05e09466eea4259df2341ad833ce991b">PlankThreadID</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread ID.  <a href="group___plank_thread_class.html#ga05e09466eea4259df2341ad833ce991b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread ID.  <a href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gaea51d83e80774e4dd3ae98da1105eddc">PlankThreadFunction</a> )(<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The Thread run function.  <a href="group___plank_thread_class.html#gaea51d83e80774e4dd3ae98da1105eddc"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
@@ -91,7 +91,7 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps the calling thread.  <a href="group___plank_thread_class.html#gae36320b30104e9ff93c9fd762e0add53"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga7f201cf30774cf30ff06f006ad661d89">pl_ThreadYield</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Yield the calling thread.  <a href="group___plank_thread_class.html#ga7f201cf30774cf30ff06f006ad661d89"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#ga05e09466eea4259df2341ad833ce991b">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga961e5eee58364f31cfc4d28e97bdf249">pl_ThreadCurrentID</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga961e5eee58364f31cfc4d28e97bdf249">pl_ThreadCurrentID</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the thread ID of the calling thread.  <a href="group___plank_thread_class.html#ga961e5eee58364f31cfc4d28e97bdf249"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga5d8b8d89d5e9d33d7ff2b76b89c9ba21">pl_Thread_CreateAndInit</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialise a <em>Plank Thread</em> object and return an oqaque reference to it.  <a href="group___plank_thread_class.html#ga5d8b8d89d5e9d33d7ff2b76b89c9ba21"></a><br/></td></tr>
@@ -103,7 +103,7 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialise a <em>Plank Thread</em> object.  <a href="group___plank_thread_class.html#ga6035c458003182397300f5b7e4085b60"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga328bb5e57b769e08b1c43941a60a703c">pl_Thread_Destroy</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <em>Plank Thread</em> object.  <a href="group___plank_thread_class.html#ga328bb5e57b769e08b1c43941a60a703c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#ga05e09466eea4259df2341ad833ce991b">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gab489859d981e8b61dc68e203abcc2960">pl_Thread_GetID</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gab489859d981e8b61dc68e203abcc2960">pl_Thread_GetID</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the thread ID.  <a href="group___plank_thread_class.html#gab489859d981e8b61dc68e203abcc2960"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gad1a2f4dda5278e78ce0147862450268b">pl_Thread_SetFunction</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p, <a class="el" href="group___plank_thread_class.html#gaea51d83e80774e4dd3ae98da1105eddc">PlankThreadFunction</a> function)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the thread run function.  <a href="group___plank_thread_class.html#gad1a2f4dda5278e78ce0147862450268b"></a><br/></td></tr>
@@ -139,7 +139,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

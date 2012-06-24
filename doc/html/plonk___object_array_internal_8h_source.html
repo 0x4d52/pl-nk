@@ -273,7 +273,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00201"></a>00201         
 <a name="l00202"></a>00202         <span class="keywordflow">if</span> (keepContents)
 <a name="l00203"></a>00203         {
-<a name="l00204"></a>00204             <span class="keyword">const</span> <span class="keywordtype">int</span> overlapSize = <a class="code" href="plonk___unit_8h.html#ad75960a00019d4fb16a1418cf2815a62" title="Create a new UnitBase by applying the binary &#39;min&#39; function to the left and right inputs...">plonk::min</a> (allocatedSize, newSize);
+<a name="l00204"></a>00204             <span class="keyword">const</span> <span class="keywordtype">int</span> overlapSize = <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">plonk::min</a> (allocatedSize, newSize);
 <a name="l00205"></a>00205             
 <a name="l00206"></a>00206             <span class="keywordtype">int</span> i;
 <a name="l00207"></a>00207             
@@ -411,52 +411,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00339"></a>00339         ownsTheData = <span class="keyword">false</span>;
 <a name="l00340"></a>00340         
 <a name="l00341"></a>00341         needsUpdate = <span class="keyword">true</span>;
-<a name="l00342"></a>00342         array[this-&gt;<a class="code" href="class_object_array_internal_base.html#abeb6614d276d380752653fe1c0240421">length</a>()] = ObjectType();
-<a name="l00343"></a>00343     }
-<a name="l00344"></a>00344     
-<a name="l00345"></a>00345     <span class="keywordflow">if</span> (needsUpdate)
-<a name="l00346"></a>00346         this-&gt;update();
-<a name="l00347"></a>00347 }
-<a name="l00348"></a>00348 
-<a name="l00349"></a>00349 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ObjectType, <span class="keyword">class</span> BaseType&gt;
-<a name="l00350"></a>00350 <span class="keywordtype">void</span> <a class="code" href="class_object_array_internal_base.html#a91d77ca21f72781adaf5f16027d4a78a">ObjectArrayInternalBase&lt;ObjectType,BaseType&gt;</a>
-<a name="l00351"></a><a class="code" href="class_object_array_internal_base.html#a91d77ca21f72781adaf5f16027d4a78a">00351</a> <a class="code" href="class_object_array_internal_base.html#a91d77ca21f72781adaf5f16027d4a78a">::clear</a>() throw()
-<a name="l00352"></a>00352 {
-<a name="l00353"></a>00353     <span class="keywordflow">if</span> (allocatedSize == 0)
-<a name="l00354"></a>00354         <span class="keywordflow">return</span>;
-<a name="l00355"></a>00355         
-<a name="l00356"></a>00356     <span class="keywordflow">if</span> (ownsTheData)
-<a name="l00357"></a>00357         <a class="code" href="class_array_allocator.html">ArrayAllocator&lt;ObjectType&gt;::free</a> (array);
-<a name="l00358"></a>00358         <span class="comment">//delete [] array;</span>
-<a name="l00359"></a>00359     
-<a name="l00360"></a>00360     allocatedSize = 0;
-<a name="l00361"></a>00361     sizeUsed = 0;
-<a name="l00362"></a>00362     array = 0;    
-<a name="l00363"></a>00363     ownsTheData = <span class="keyword">true</span>;
-<a name="l00364"></a>00364     
-<a name="l00365"></a>00365     this-&gt;update();
-<a name="l00366"></a>00366 }
-<a name="l00367"></a>00367 
-<a name="l00368"></a>00368 
-<a name="l00369"></a>00369 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ObjectType, <span class="keyword">class</span> BaseType&gt;
-<a name="l00370"></a><a class="code" href="class_object_array_internal.html">00370</a> <span class="keyword">class </span><a class="code" href="class_object_array_internal.html">ObjectArrayInternal</a> : <span class="keyword">public</span> <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBase</a>&lt;ObjectType,BaseType&gt;
-<a name="l00371"></a>00371 {
-<a name="l00372"></a>00372 <span class="keyword">public</span>:
-<a name="l00373"></a><a class="code" href="class_object_array_internal.html#a3bb6be485bee719c8a908cf6af8a74ba">00373</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBase&lt;ObjectType,BaseType&gt;</a> <a class="code" href="class_object_array_internal.html#a3bb6be485bee719c8a908cf6af8a74ba">ObjectArrayInternalBaseType</a>;
-<a name="l00374"></a>00374     
-<a name="l00375"></a><a class="code" href="class_object_array_internal.html#ac7d975778762539e1f4194ee35a05386">00375</a>     <a class="code" href="class_object_array_internal.html">ObjectArrayInternal</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>) <span class="keywordflow">throw</span>()
-<a name="l00376"></a>00376     :   <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBaseType</a> (<a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>)
-<a name="l00377"></a>00377     {
-<a name="l00378"></a>00378     }
-<a name="l00379"></a>00379     
-<a name="l00380"></a><a class="code" href="class_object_array_internal.html#acf24adf0e56a501504ae6862e3d0a9c7">00380</a>         <a class="code" href="class_object_array_internal.html">ObjectArrayInternal</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, ObjectType *dataToUse, <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>) <span class="keywordflow">throw</span>()
-<a name="l00381"></a>00381     :   <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBaseType</a> (<a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, dataToUse, <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>)
-<a name="l00382"></a>00382     {
-<a name="l00383"></a>00383     }
-<a name="l00384"></a>00384 
-<a name="l00385"></a>00385 };
+<a name="l00342"></a>00342         
+<a name="l00343"></a>00343         <span class="keywordflow">if</span> (array)
+<a name="l00344"></a>00344             array[this-&gt;<a class="code" href="class_object_array_internal_base.html#abeb6614d276d380752653fe1c0240421">length</a>()] = ObjectType();
+<a name="l00345"></a>00345     }
+<a name="l00346"></a>00346     
+<a name="l00347"></a>00347     <span class="keywordflow">if</span> (needsUpdate)
+<a name="l00348"></a>00348         this-&gt;update();
+<a name="l00349"></a>00349 }
+<a name="l00350"></a>00350 
+<a name="l00351"></a>00351 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ObjectType, <span class="keyword">class</span> BaseType&gt;
+<a name="l00352"></a>00352 <span class="keywordtype">void</span> <a class="code" href="class_object_array_internal_base.html#a91d77ca21f72781adaf5f16027d4a78a">ObjectArrayInternalBase&lt;ObjectType,BaseType&gt;</a>
+<a name="l00353"></a><a class="code" href="class_object_array_internal_base.html#a91d77ca21f72781adaf5f16027d4a78a">00353</a> <a class="code" href="class_object_array_internal_base.html#a91d77ca21f72781adaf5f16027d4a78a">::clear</a>() throw()
+<a name="l00354"></a>00354 {
+<a name="l00355"></a>00355     <span class="keywordflow">if</span> (allocatedSize == 0)
+<a name="l00356"></a>00356         <span class="keywordflow">return</span>;
+<a name="l00357"></a>00357         
+<a name="l00358"></a>00358     <span class="keywordflow">if</span> (ownsTheData)
+<a name="l00359"></a>00359         <a class="code" href="class_array_allocator.html">ArrayAllocator&lt;ObjectType&gt;::free</a> (array);
+<a name="l00360"></a>00360         <span class="comment">//delete [] array;</span>
+<a name="l00361"></a>00361     
+<a name="l00362"></a>00362     allocatedSize = 0;
+<a name="l00363"></a>00363     sizeUsed = 0;
+<a name="l00364"></a>00364     array = 0;    
+<a name="l00365"></a>00365     ownsTheData = <span class="keyword">true</span>;
+<a name="l00366"></a>00366     
+<a name="l00367"></a>00367     this-&gt;update();
+<a name="l00368"></a>00368 }
+<a name="l00369"></a>00369 
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ObjectType, <span class="keyword">class</span> BaseType&gt;
+<a name="l00372"></a><a class="code" href="class_object_array_internal.html">00372</a> <span class="keyword">class </span><a class="code" href="class_object_array_internal.html">ObjectArrayInternal</a> : <span class="keyword">public</span> <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBase</a>&lt;ObjectType,BaseType&gt;
+<a name="l00373"></a>00373 {
+<a name="l00374"></a>00374 <span class="keyword">public</span>:
+<a name="l00375"></a><a class="code" href="class_object_array_internal.html#a3bb6be485bee719c8a908cf6af8a74ba">00375</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBase&lt;ObjectType,BaseType&gt;</a> <a class="code" href="class_object_array_internal.html#a3bb6be485bee719c8a908cf6af8a74ba">ObjectArrayInternalBaseType</a>;
+<a name="l00376"></a>00376     
+<a name="l00377"></a><a class="code" href="class_object_array_internal.html#ac7d975778762539e1f4194ee35a05386">00377</a>     <a class="code" href="class_object_array_internal.html">ObjectArrayInternal</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>) <span class="keywordflow">throw</span>()
+<a name="l00378"></a>00378     :   <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBaseType</a> (<a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>)
+<a name="l00379"></a>00379     {
+<a name="l00380"></a>00380     }
+<a name="l00381"></a>00381     
+<a name="l00382"></a><a class="code" href="class_object_array_internal.html#acf24adf0e56a501504ae6862e3d0a9c7">00382</a>         <a class="code" href="class_object_array_internal.html">ObjectArrayInternal</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, ObjectType *dataToUse, <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>) <span class="keywordflow">throw</span>()
+<a name="l00383"></a>00383     :   <a class="code" href="class_object_array_internal_base.html">ObjectArrayInternalBaseType</a> (<a class="code" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">size</a>, dataToUse, <a class="code" href="class_object_array_internal_base.html#a776416000861c86359e4d68a1d482693">isNullTerminated</a>)
+<a name="l00384"></a>00384     {
+<a name="l00385"></a>00385     }
 <a name="l00386"></a>00386 
-<a name="l00387"></a>00387 <span class="preprocessor">#endif // PLONK_OBJECTARRAYINTERNAL_H</span>
+<a name="l00387"></a>00387 };
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389 <span class="preprocessor">#endif // PLONK_OBJECTARRAYINTERNAL_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -473,7 +475,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:30 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

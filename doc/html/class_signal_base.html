@@ -106,9 +106,13 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#acf554dee1fecca632b7d903015eea50c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array2_d.html">Buffers</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a324d546983767e4812895263f9ea6aa1">getBuffers</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array2_d.html">Buffers</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#afde1b6e1d8b7d32b7a142986b2163b53">getBuffers</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_sample_rate.html">SampleRate</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a60aff6d5eeb77cb50b41c5037dcde125">getSampleRate</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sample_rate.html">SampleRate</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a3f07a7b90ee77d88934b8a4c59e4aeae">getSampleRate</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#ac8fbaa071d5860ec54c29e357d235187">getNumFrames</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#ac32675e7c0bcb0d4941356dd2aaaaa51">getNumChannels</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a54e5d4fe8787f1198a5086215a6dce98">getFrameStride</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a390d52b58e445f9768c80216f7459e58">getSamples</a> (const int channel)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a19ce8609e82a3217d4ee15f8b0b14939">getSamples</a> (const int channel) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a8a3f60a8ec9bbc1eba131b72b6e95caf">isInterleaved</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#add8d2db46b117001ec72230e4378aa1c">getInterleaved</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array2_d.html">Buffers</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signal_base.html#a23969fa8a2d54f39304b990e179b5c6e">getDeinterleaved</a> () const   throw ()</td></tr>
@@ -416,6 +420,24 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a54e5d4fe8787f1198a5086215a6dce98"></a><!-- doxytag: member="SignalBase::getFrameStride" ref="a54e5d4fe8787f1198a5086215a6dce98" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt;::getFrameStride </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="add8d2db46b117001ec72230e4378aa1c"></a><!-- doxytag: member="SignalBase::getInterleaved" ref="add8d2db46b117001ec72230e4378aa1c" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -506,6 +528,62 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a60aff6d5eeb77cb50b41c5037dcde125"></a><!-- doxytag: member="SignalBase::getSampleRate" ref="a60aff6d5eeb77cb50b41c5037dcde125" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a>&amp; <a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt;::getSampleRate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a19ce8609e82a3217d4ee15f8b0b14939"></a><!-- doxytag: member="SignalBase::getSamples" ref="a19ce8609e82a3217d4ee15f8b0b14939" args="(const int channel) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const SampleType* <a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt;::getSamples </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a390d52b58e445f9768c80216f7459e58"></a><!-- doxytag: member="SignalBase::getSamples" ref="a390d52b58e445f9768c80216f7459e58" args="(const int channel)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SampleType* <a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt;::getSamples </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8a3f60a8ec9bbc1eba131b72b6e95caf"></a><!-- doxytag: member="SignalBase::isInterleaved" ref="a8a3f60a8ec9bbc1eba131b72b6e95caf" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -563,7 +641,7 @@ template&lt;class SampleType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:11 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:41 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -76,7 +76,7 @@ Inheritance diagram for AtomicValue&lt; Type * &gt;:</div>
   <img src="class_atomic_value_3_01_type_01_5_01_4.png" usemap="#AtomicValue&lt; Type * &gt;_map" alt=""/>
   <map id="AtomicValue&lt; Type * &gt;_map" name="AtomicValue&lt; Type * &gt;_map">
 <area href="class_atomic_base_3_01_type_01_5_01_4.html" alt="AtomicBase&lt; Type * &gt;" shape="rect" coords="0,56,147,80"/>
-<area href="class_atomic_ops.html" alt="AtomicOps" shape="rect" coords="0,0,147,24"/>
+<area href="class_atomic_ops.html" title="Type-independent atomic operations." alt="AtomicOps" shape="rect" coords="0,0,147,24"/>
 </map>
  </div></div>
 
@@ -85,36 +85,39 @@ Inheritance diagram for AtomicValue&lt; Type * &gt;:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#afa08ec1454aed88f6ae17eaf3095872b">AtomicValue</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a0b7079448a6d400a792cedaa98604bc8">AtomicValue</a> (Type *initialPtr)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a56bcadffa5e47bb9e788bc1fe0a972ab">AtomicValue</a> (Type const &amp;initialValue)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a14e25d8a45b23394c9aa092c9e22325f">AtomicValue</a> (OtherType *initialPtr)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a5b3bf0fce2d58de01addcda96b235e7d">AtomicValue</a> (const Type *initialPtr)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#ae64bd041582b7214847e30c18c7ec61a">AtomicValue</a> (<a class="el" href="class_atomic_value.html">AtomicValue</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a0ab0c1c43a5e4b89dbf8aff4f490c786">~AtomicValue</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aa0d73b4851d4e0df10066dd91813d528">operator=</a> (<a class="el" href="class_atomic_value.html">AtomicValue</a> const &amp;other)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aec54b58ac37db83061da5bd34f9e9a36">operator=</a> (Type *other)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aa662b99c1ea35ca4f5902fcc48ff3aca">operator=</a> (const Type *other)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a19e83d63781aacac3d0cf8cc78674fad">operator=</a> (OtherType *other)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a32de092f8aadf4211d75a1f002678dd8">operator=</a> (Type const &amp;other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a054785103290d7832d76ff3b6212382f">compareAndSwap</a> (const Type *oldValue, const Type *newValue)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a97f66821fa59aa4759d56f906a864924">swap</a> (const Type *newValue)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aaf3ccca5be5c8e930ff957e278ae709c">setObject</a> (Type const &amp;other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aec612bc290fa6ff8872805dd9711a00a">setValue</a> (const Type *other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aa1aa459f79ad9bb9da6204caaf5d1a16">setPtr</a> (const Type *other)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const Type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a71c35dc03539edab3221d3a29a340d47">getObject</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aab2196e69d3c513a63e02eda4cf71654">getObject</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aea5d60ab7b9cc582a117bf355602357d">getValue</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a40619e1aabf2c000858e00467f316c1a">getValue</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a7196856c9887aa24ee399a505ba1165d">getPtr</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a2523701f856048e9212cef20faa91116">getPtr</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aaedb091ebd490dbe1dfa61d5c54d7cfd">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a1deb340d582fac35ef449a00c9440ab0">operator-&gt;</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#ac486feb0749a238137929a19a10d3eef">operator const Type *</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a605ead476f2508698b50d7dcfc29aa49">operator Type *</a> () const   throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a51c0b619aeec354b9cafce5bbc84b00e">operator==</a> (OtherType const &amp;other) const   throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aa4d241d0b298c1f3617d709cad55a2be">operator!=</a> (OtherType const &amp;other) const   throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a57f385f4002016f729827741b6e4be16">operator&lt;</a> (OtherType const &amp;other) const   throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aca7018d861e89811ab240c1e9e031589">operator&lt;=</a> (OtherType const &amp;other) const   throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aea797adf332ac642de39412bb31faad2">operator&gt;</a> (OtherType const &amp;other) const   throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#ac6ad997819708a565a149a1bc705479e">operator&gt;=</a> (OtherType const &amp;other) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a79f1ff939eb89e03169fd8e017cbe53a">operator Type *</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a9f7007c6863d99d8f02c78a66d35ba5c">operator const Type</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a0c3db657ab15732450948038806319a2">operator Type</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aaedd0f2400ce4cd797eebf84b7569c43">operator==</a> (const Type *other) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a8e55a833c43b62003ccdb2c401891397">operator!=</a> (const Type *other) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#ab774bdbb3ac7f740dcb296a03d2f29f1">operator&lt;</a> (const Type *other) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#abbe7cc048526d42643c845d2fbc156b7">operator&lt;=</a> (const Type *other) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aa4262872183176910f6700d1b56e928b">operator&gt;</a> (const Type *other) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#af291bdeedd6c9dde62adeeeb02be8277">operator&gt;=</a> (const Type *other) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a6a5a8538e69cff39915e9988ad92a73b">operator+=</a> (const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> operand)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#ab376dedf858816020eb6157087f86cab">operator-=</a> (const <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> operand)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aeab42ed418533e58f9c6831d3a7edf93">operator++</a> ()  throw ()</td></tr>
@@ -144,7 +147,7 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0b7079448a6d400a792cedaa98604bc8"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::AtomicValue" ref="a0b7079448a6d400a792cedaa98604bc8" args="(Type *initialPtr)" -->
+<a class="anchor" id="a56bcadffa5e47bb9e788bc1fe0a972ab"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::AtomicValue" ref="a56bcadffa5e47bb9e788bc1fe0a972ab" args="(Type const &amp;initialValue)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -153,7 +156,28 @@ template&lt;class Type &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::<a class="el" href="class_atomic_value.html">AtomicValue</a> </td>
           <td>(</td>
-          <td class="paramtype">Type *&#160;</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>initialValue</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a14e25d8a45b23394c9aa092c9e22325f"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::AtomicValue" ref="a14e25d8a45b23394c9aa092c9e22325f" args="(OtherType *initialPtr)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+<div class="memtemplate">
+template&lt;class OtherType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::<a class="el" href="class_atomic_value.html">AtomicValue</a> </td>
+          <td>(</td>
+          <td class="paramtype">OtherType *&#160;</td>
           <td class="paramname"><em>initialPtr</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
@@ -249,6 +273,42 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a71c35dc03539edab3221d3a29a340d47"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::getObject" ref="a71c35dc03539edab3221d3a29a340d47" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const Type&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::getObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aab2196e69d3c513a63e02eda4cf71654"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::getObject" ref="aab2196e69d3c513a63e02eda4cf71654" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::getObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a7196856c9887aa24ee399a505ba1165d"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::getPtr" ref="a7196856c9887aa24ee399a505ba1165d" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -303,6 +363,42 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a40619e1aabf2c000858e00467f316c1a"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::getValue" ref="a40619e1aabf2c000858e00467f316c1a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type* <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::getValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9f7007c6863d99d8f02c78a66d35ba5c"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator const Type" ref="a9f7007c6863d99d8f02c78a66d35ba5c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator const Type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac486feb0749a238137929a19a10d3eef"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator const Type *" ref="ac486feb0749a238137929a19a10d3eef" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +417,25 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a605ead476f2508698b50d7dcfc29aa49"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator Type *" ref="a605ead476f2508698b50d7dcfc29aa49" args="() const " -->
+<a class="anchor" id="a0c3db657ab15732450948038806319a2"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator Type" ref="a0c3db657ab15732450948038806319a2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator Type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a79f1ff939eb89e03169fd8e017cbe53a"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator Type *" ref="a79f1ff939eb89e03169fd8e017cbe53a" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -331,7 +445,7 @@ template&lt;class Type &gt; </div>
           <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator Type * </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -339,18 +453,16 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa4d241d0b298c1f3617d709cad55a2be"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator!=" ref="aa4d241d0b298c1f3617d709cad55a2be" args="(OtherType const &amp;other) const " -->
+<a class="anchor" id="a8e55a833c43b62003ccdb2c401891397"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator!=" ref="a8e55a833c43b62003ccdb2c401891397" args="(const Type *other) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class OtherType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator!= </td>
           <td>(</td>
-          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
@@ -416,24 +528,6 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a01892b0dbbe3a334d9f852fefd9d842f"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&#45;&#45;" ref="a01892b0dbbe3a334d9f852fefd9d842f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator-- </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a1f118930c4d562890a3a94befd7f510f"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&#45;&#45;" ref="a1f118930c4d562890a3a94befd7f510f" args="(int)" -->
 <div class="memitem">
 <div class="memproto">
@@ -444,6 +538,24 @@ template&lt;class Type &gt; </div>
           <td class="memname">Type* <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator-- </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a01892b0dbbe3a334d9f852fefd9d842f"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&#45;&#45;" ref="a01892b0dbbe3a334d9f852fefd9d842f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator-- </td>
+          <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
@@ -508,18 +620,16 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a57f385f4002016f729827741b6e4be16"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&lt;" ref="a57f385f4002016f729827741b6e4be16" args="(OtherType const &amp;other) const " -->
+<a class="anchor" id="ab774bdbb3ac7f740dcb296a03d2f29f1"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&lt;" ref="ab774bdbb3ac7f740dcb296a03d2f29f1" args="(const Type *other) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class OtherType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator&lt; </td>
           <td>(</td>
-          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
@@ -529,18 +639,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aca7018d861e89811ab240c1e9e031589"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&lt;=" ref="aca7018d861e89811ab240c1e9e031589" args="(OtherType const &amp;other) const " -->
+<a class="anchor" id="abbe7cc048526d42643c845d2fbc156b7"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&lt;=" ref="abbe7cc048526d42643c845d2fbc156b7" args="(const Type *other) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class OtherType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator&lt;= </td>
           <td>(</td>
-          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
@@ -569,56 +677,56 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aec54b58ac37db83061da5bd34f9e9a36"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator=" ref="aec54b58ac37db83061da5bd34f9e9a36" args="(Type *other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">Type *&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa662b99c1ea35ca4f5902fcc48ff3aca"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator=" ref="aa662b99c1ea35ca4f5902fcc48ff3aca" args="(const Type *other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const Type *&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a51c0b619aeec354b9cafce5bbc84b00e"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator==" ref="a51c0b619aeec354b9cafce5bbc84b00e" args="(OtherType const &amp;other) const " -->
+<a class="anchor" id="a19e83d63781aacac3d0cf8cc78674fad"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator=" ref="a19e83d63781aacac3d0cf8cc78674fad" args="(OtherType *other)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
 <div class="memtemplate">
 template&lt;class OtherType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">OtherType *&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a32de092f8aadf4211d75a1f002678dd8"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator=" ref="a32de092f8aadf4211d75a1f002678dd8" args="(Type const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&amp; <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaedd0f2400ce4cd797eebf84b7569c43"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator==" ref="aaedd0f2400ce4cd797eebf84b7569c43" args="(const Type *other) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator== </td>
           <td>(</td>
-          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
@@ -628,18 +736,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aea797adf332ac642de39412bb31faad2"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&gt;" ref="aea797adf332ac642de39412bb31faad2" args="(OtherType const &amp;other) const " -->
+<a class="anchor" id="aa4262872183176910f6700d1b56e928b"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&gt;" ref="aa4262872183176910f6700d1b56e928b" args="(const Type *other) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class OtherType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator&gt; </td>
           <td>(</td>
-          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
@@ -649,20 +755,37 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac6ad997819708a565a149a1bc705479e"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&gt;=" ref="ac6ad997819708a565a149a1bc705479e" args="(OtherType const &amp;other) const " -->
+<a class="anchor" id="af291bdeedd6c9dde62adeeeb02be8277"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::operator&gt;=" ref="af291bdeedd6c9dde62adeeeb02be8277" args="(const Type *other) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
-<div class="memtemplate">
-template&lt;class OtherType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::operator&gt;= </td>
           <td>(</td>
-          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramtype">const Type *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaf3ccca5be5c8e930ff957e278ae709c"></a><!-- doxytag: member="AtomicValue&lt; Type * &gt;::setObject" ref="aaf3ccca5be5c8e930ff957e278ae709c" args="(Type const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Type * &gt;::setObject </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -745,7 +868,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:02 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:32 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

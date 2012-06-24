@@ -165,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00107"></a>00107         
 <a name="l00108"></a>00108         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00109"></a>00109         }
-<a name="l00110"></a>00110 
+<a name="l00110"></a>00110     
 <a name="l00114"></a><a class="code" href="class_variable.html#ac6051f1df5e6fa73a0ea5a9c015ee901">00114</a>     <span class="keyword">static</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#ac6051f1df5e6fa73a0ea5a9c015ee901" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
 <a name="l00115"></a>00115     {
 <a name="l00116"></a>00116         <span class="keywordflow">return</span> weak.<a class="code" href="class_variable.html#ac6051f1df5e6fa73a0ea5a9c015ee901" title="Get a weakly linked copy of this object.">fromWeak</a>();
@@ -193,190 +193,199 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00141"></a>00141         this-&gt;<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a> (newValue);
 <a name="l00142"></a>00142         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00143"></a>00143     }
-<a name="l00144"></a>00144     
-<a name="l00146"></a><a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360">00146</a>     <span class="keyword">const</span> Type <a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>() <span class="keyword">const</span> throw()
-<a name="l00147"></a>00147     {
-<a name="l00148"></a>00148         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
-<a name="l00149"></a>00149     }
-<a name="l00150"></a>00150     
-<a name="l00152"></a><a class="code" href="class_variable.html#a704a01abccce524ea67757560b52515a">00152</a>     <a class="code" href="class_variable.html#a704a01abccce524ea67757560b52515a" title="Returns the current value.">operator Type </a>() <span class="keyword">const</span> throw()
-<a name="l00153"></a>00153     {
-<a name="l00154"></a>00154         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
-<a name="l00155"></a>00155     }
-<a name="l00156"></a>00156     
-<a name="l00160"></a><a class="code" href="class_variable.html#a547e48952c1ffe3c0833fc6f5830162a">00160</a>     <span class="keyword">const</span> Type <a class="code" href="class_variable.html#a547e48952c1ffe3c0833fc6f5830162a" title="Returns the next value.">nextValue</a>() throw()
-<a name="l00161"></a>00161     {
-<a name="l00162"></a>00162         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;nextValue();
-<a name="l00163"></a>00163     }
-<a name="l00164"></a>00164     
-<a name="l00166"></a><a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9">00166</a>     <span class="keywordtype">void</span> <a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a>(Type <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
-<a name="l00167"></a>00167     {
-<a name="l00168"></a>00168         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;setValue (newValue);
-<a name="l00169"></a>00169     }    
-<a name="l00170"></a>00170                 
-<a name="l00172"></a>00172     <span class="keyword">template</span>&lt;BINARYOPFUNCTION(Type, op)&gt;
-<a name="l00173"></a><a class="code" href="class_variable.html#a89fbfb288dd1a08dc268756ac3da4fac">00173</a>     <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#a89fbfb288dd1a08dc268756ac3da4fac" title="Builds a binary operation from two source Variables.">binary</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <span class="keyword">const</span>&amp; rightOperand) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00174"></a>00174     {
-<a name="l00175"></a>00175         <a class="code" href="class_variable_internal_base.html">Internal</a>* <span class="keyword">internal</span> = <span class="keyword">new</span> <a class="code" href="class_binary_op_variable_internal.html">BinaryOpVariableInternal&lt;Type,op&gt;</a> (*<span class="keyword">this</span>, 
-<a name="l00176"></a>00176                                                                     rightOperand);
-<a name="l00177"></a>00177         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (<span class="keyword">internal</span>);
-<a name="l00178"></a>00178     }
-<a name="l00179"></a>00179     
-<a name="l00181"></a>00181     <span class="keyword">template</span>&lt;UNARYOPFUNCTION(Type, op)&gt;
-<a name="l00182"></a><a class="code" href="class_variable.html#aeeed31e594cdf5ee0468e6ed15ee8a7d">00182</a>     <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#aeeed31e594cdf5ee0468e6ed15ee8a7d" title="Builds a unary operation from a source Variable.">unary</a>() <span class="keyword">const</span> throw()
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145 <span class="comment">//    /** A convenience for setValue() mainly for atomic types. */</span>
+<a name="l00146"></a>00146 <span class="comment">//    template&lt;template &lt;typename&gt; class OuterType, class InnerType&gt;</span>
+<a name="l00147"></a>00147 <span class="comment">//    Variable&amp; operator= (InnerType const&amp; newValue) throw()</span>
+<a name="l00148"></a>00148 <span class="comment">//    {</span>
+<a name="l00149"></a>00149 <span class="comment">//        this-&gt;setValue (newValue);</span>
+<a name="l00150"></a>00150 <span class="comment">//        return *this;</span>
+<a name="l00151"></a>00151 <span class="comment">//    }</span>
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153     
+<a name="l00155"></a><a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360">00155</a>     <span class="keyword">const</span> Type <a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>() <span class="keyword">const</span> throw()
+<a name="l00156"></a>00156     {
+<a name="l00157"></a>00157         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
+<a name="l00158"></a>00158     }
+<a name="l00159"></a>00159     
+<a name="l00161"></a><a class="code" href="class_variable.html#a704a01abccce524ea67757560b52515a">00161</a>     <a class="code" href="class_variable.html#a704a01abccce524ea67757560b52515a" title="Returns the current value.">operator Type </a>() <span class="keyword">const</span> throw()
+<a name="l00162"></a>00162     {
+<a name="l00163"></a>00163         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
+<a name="l00164"></a>00164     }
+<a name="l00165"></a>00165     
+<a name="l00169"></a><a class="code" href="class_variable.html#a547e48952c1ffe3c0833fc6f5830162a">00169</a>     <span class="keyword">const</span> Type <a class="code" href="class_variable.html#a547e48952c1ffe3c0833fc6f5830162a" title="Returns the next value.">nextValue</a>() throw()
+<a name="l00170"></a>00170     {
+<a name="l00171"></a>00171         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;nextValue();
+<a name="l00172"></a>00172     }
+<a name="l00173"></a>00173     
+<a name="l00175"></a><a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9">00175</a>     <span class="keywordtype">void</span> <a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a>(Type <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
+<a name="l00176"></a>00176     {
+<a name="l00177"></a>00177         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;setValue (newValue);
+<a name="l00178"></a>00178     }    
+<a name="l00179"></a>00179                 
+<a name="l00181"></a>00181     <span class="keyword">template</span>&lt;PLONK_BINARYOPFUNCTION(Type, op)&gt;
+<a name="l00182"></a><a class="code" href="class_variable.html#a89fbfb288dd1a08dc268756ac3da4fac">00182</a>     <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#a89fbfb288dd1a08dc268756ac3da4fac" title="Builds a binary operation from two source Variables.">binary</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <span class="keyword">const</span>&amp; rightOperand) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00183"></a>00183     {
-<a name="l00184"></a>00184         <a class="code" href="class_variable_internal_base.html">Internal</a>* <span class="keyword">internal</span> = <span class="keyword">new</span> <a class="code" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal&lt;Type,op&gt;</a> (*this);
-<a name="l00185"></a>00185         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (<span class="keyword">internal</span>);
-<a name="l00186"></a>00186     }
-<a name="l00187"></a>00187     
-<a name="l00188"></a><a class="code" href="class_variable.html#a0c86a2084bc6b339f47b1667764751b7">00188</a>     <a class="code" href="plonk___inline_binary_ops_8h.html#a609b3bcf2850f4892599d710f7c1ac57">BINARYOPS</a>(<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>)
-<a name="l00189"></a><a class="code" href="class_variable.html#a963d555c799f560766b64874694e2455">00189</a>     <a class="code" href="plonk___inline_unary_ops_8h.html#a106ef270f26be3687236ef8e7ae254a5">UNARYOPS</a>(<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>)    
-<a name="l00190"></a>00190     
-<a name="l00191"></a><a class="code" href="class_variable.html#ad849a67249fa3240aee1b63336380555">00191</a>     const <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#ad849a67249fa3240aee1b63336380555">selectMin</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> const&amp; other) const throw()
+<a name="l00184"></a>00184         <a class="code" href="class_variable_internal_base.html">Internal</a>* <span class="keyword">internal</span> = <span class="keyword">new</span> <a class="code" href="class_binary_op_variable_internal.html">BinaryOpVariableInternal&lt;Type,op&gt;</a> (*<span class="keyword">this</span>, 
+<a name="l00185"></a>00185                                                                     rightOperand);
+<a name="l00186"></a>00186         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (<span class="keyword">internal</span>);
+<a name="l00187"></a>00187     }
+<a name="l00188"></a>00188     
+<a name="l00190"></a>00190     <span class="keyword">template</span>&lt;PLONK_UNARYOPFUNCTION(Type, op)&gt;
+<a name="l00191"></a><a class="code" href="class_variable.html#aeeed31e594cdf5ee0468e6ed15ee8a7d">00191</a>     <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#aeeed31e594cdf5ee0468e6ed15ee8a7d" title="Builds a unary operation from a source Variable.">unary</a>() <span class="keyword">const</span> throw()
 <a name="l00192"></a>00192     {
-<a name="l00193"></a>00193         <span class="keywordflow">return</span> (this-&gt;<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>() &gt; other.getValue()) ? other : *<span class="keyword">this</span>;
-<a name="l00194"></a>00194     }    
-<a name="l00195"></a>00195     
-<a name="l00196"></a><a class="code" href="class_variable.html#a9414bbb949835fb4396eb221958b26c2">00196</a>     <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#a9414bbb949835fb4396eb221958b26c2">selectMax</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00197"></a>00197     {
-<a name="l00198"></a>00198         <span class="keywordflow">return</span> (this-&gt;<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>() &lt; other.getValue()) ? other : *<span class="keyword">this</span>;
-<a name="l00199"></a>00199     }
-<a name="l00200"></a>00200         
-<a name="l00201"></a><a class="code" href="class_variable.html#a3f83fb4869850520ed649bded32ecb33">00201</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#a3f83fb4869850520ed649bded32ecb33">getZero</a>() throw()  
-<a name="l00202"></a>00202     { 
-<a name="l00203"></a>00203         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> v (<a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;Type&gt;::get0</a>() ); 
-<a name="l00204"></a>00204         <span class="keywordflow">return</span> v; 
-<a name="l00205"></a>00205     }
-<a name="l00206"></a>00206     
-<a name="l00207"></a><a class="code" href="class_variable.html#a53f757bb8f27e00dc844597b4a2e6ca9">00207</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#a53f757bb8f27e00dc844597b4a2e6ca9">getOne</a>() throw()   
-<a name="l00208"></a>00208     {         
-<a name="l00209"></a>00209         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> v (<a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;Type&gt;::get1</a>() ); 
-<a name="l00210"></a>00210         <span class="keywordflow">return</span> v; 
-<a name="l00211"></a>00211     }
-<a name="l00212"></a>00212     
-<a name="l00213"></a><a class="code" href="class_variable.html#af99691c2d7f37234de52c8176958e343">00213</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#af99691c2d7f37234de52c8176958e343">getTwo</a>() throw()   
-<a name="l00214"></a>00214     {         
-<a name="l00215"></a>00215         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> v (<a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;Type&gt;::get2</a>() ); 
-<a name="l00216"></a>00216         <span class="keywordflow">return</span> v; 
-<a name="l00217"></a>00217     }
-<a name="l00218"></a>00218     
-<a name="l00219"></a><a class="code" href="class_variable.html#a5dd9ada432c6ccd2bad3c5569dc0a7bd">00219</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#a5dd9ada432c6ccd2bad3c5569dc0a7bd">getHalf</a>() throw()  
-<a name="l00220"></a>00220     {         
-<a name="l00221"></a>00221         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> v (<a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;Type&gt;::get0_5</a>()); 
-<a name="l00222"></a>00222         <span class="keywordflow">return</span> v; 
-<a name="l00223"></a>00223     }
-<a name="l00224"></a>00224     
-<a name="l00225"></a><a class="code" href="class_variable.html#a16ad8969042f59fdb8d07c12c8fcfa17">00225</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#a16ad8969042f59fdb8d07c12c8fcfa17">getPi</a>() throw()    
-<a name="l00226"></a>00226     {         
-<a name="l00227"></a>00227         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> v (<a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;Type&gt;::getPi</a>()); 
-<a name="l00228"></a>00228         <span class="keywordflow">return</span> v; 
-<a name="l00229"></a>00229     }
-<a name="l00230"></a>00230     
-<a name="l00231"></a><a class="code" href="class_variable.html#a1411741fad5c587918fda8f259e5d2d5">00231</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#a1411741fad5c587918fda8f259e5d2d5">getTwoPi</a>() throw() 
-<a name="l00232"></a>00232     {         
-<a name="l00233"></a>00233         <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> v (<a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;Type&gt;::get2Pi</a>() ); 
-<a name="l00234"></a>00234         <span class="keywordflow">return</span> v; 
-<a name="l00235"></a>00235     }    
-<a name="l00236"></a>00236     
-<a name="l00237"></a><a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">00237</a>     <span class="keywordtype">int</span> <a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">getTypeCode</a>() <span class="keyword">const</span> throw()
-<a name="l00238"></a>00238     {
-<a name="l00239"></a>00239         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">TypeUtility&lt;Variable&gt;::getTypeCode</a>();
-<a name="l00240"></a>00240     }
-<a name="l00241"></a>00241     
-<a name="l00242"></a><a class="code" href="class_variable.html#a5a1841278390d071d56d99ade1969de3">00242</a>     <span class="keywordtype">int</span> <a class="code" href="class_variable.html#a5a1841278390d071d56d99ade1969de3">getValueTypeCode</a>() <span class="keyword">const</span> throw()
-<a name="l00243"></a>00243     {
-<a name="l00244"></a>00244         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">TypeUtility&lt;Type&gt;::getTypeCode</a>();
-<a name="l00245"></a>00245     }        
-<a name="l00246"></a>00246 };
-<a name="l00247"></a>00247 
-<a name="l00248"></a>00248 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
-<a name="l00249"></a><a class="code" href="plonk___variable_8h.html#a3d64e67bbae9030c17cf8d4ba61e036d">00249</a> std::istream&amp; <a class="code" href="plonk___int24_8cpp.html#a10a0267afbb35836bfca4da4c91427b0">operator&gt;&gt; </a>(std::istream &amp;inputStream, <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a>&amp; variable)
-<a name="l00250"></a>00250 {
-<a name="l00251"></a>00251     Type value;
-<a name="l00252"></a>00252     inputStream &gt;&gt; value;
-<a name="l00253"></a>00253     
-<a name="l00254"></a>00254     variable = <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a> (value);
-<a name="l00255"></a>00255     
-<a name="l00256"></a>00256     <span class="keywordflow">return</span> inputStream;
-<a name="l00257"></a>00257 }
-<a name="l00258"></a>00258 
-<a name="l00259"></a>00259 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
-<a name="l00260"></a><a class="code" href="plonk___variable_8h.html#a17e58f5f36eba9f1a031d36ac70836e8">00260</a> std::ostream&amp; operator&lt;&lt; (std::ostream &amp;outputStream, Variable&lt;Type&gt; <span class="keyword">const</span>&amp; variable)
-<a name="l00261"></a>00261 {
-<a name="l00262"></a>00262     outputStream &lt;&lt; variable.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
-<a name="l00263"></a>00263     <span class="keywordflow">return</span> outputStream;
-<a name="l00264"></a>00264 }
-<a name="l00265"></a>00265 
-<a name="l00266"></a>00266 <span class="comment">//BINARYOPGLOBALS(Variable) // declares global functions with the same name as the binary operators</span>
-<a name="l00267"></a>00267 <span class="comment">//UNARYOPGLOBALS(Variable)  // declares global functions with the same name as the unary operators</span>
-<a name="l00268"></a>00268 
-<a name="l00269"></a>00269 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
-<a name="l00270"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html">00270</a> <span class="keyword">class </span><a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&lt;Type&amp;&gt; : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt; VariableInternal&lt;Type&amp;&gt;</a> &gt;
-<a name="l00271"></a>00271 {
-<a name="l00272"></a>00272 <span class="keyword">public</span>:
-<a name="l00273"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a4c3b39b4cf19ebbfaf961ba2256e3f57">00273</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html">VariableInternal&lt;Type&amp;&gt;</a>         <a class="code" href="class_variable_3_01_type_01_6_01_4.html#a4c3b39b4cf19ebbfaf961ba2256e3f57">Internal</a>;
-<a name="l00274"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a79f642f7a1e26e7987a8621fc884a4a1">00274</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;Internal&gt;</a> <a class="code" href="class_variable_3_01_type_01_6_01_4.html#a79f642f7a1e26e7987a8621fc884a4a1">Base</a>;
-<a name="l00275"></a>00275     
-<a name="l00276"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a8b131173d84a4b2a302eeea8453705e8">00276</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a>()
-<a name="l00277"></a>00277     :   Base (new Internal (0))
-<a name="l00278"></a>00278     {
-<a name="l00279"></a>00279     }
-<a name="l00280"></a>00280     
-<a name="l00281"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a499997fa9a606b270f492d7f558c1f50">00281</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
-<a name="l00282"></a>00282         :       <a class="code" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
-<a name="l00283"></a>00283         {
-<a name="l00284"></a>00284         }        
-<a name="l00285"></a>00285     
-<a name="l00286"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#af87376557641b973d2611f26d763e1b7">00286</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (Type&amp; initValue) <span class="keywordflow">throw</span>()
-<a name="l00287"></a>00287     :   <a class="code" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Base</a> (<span class="keyword">new</span> Internal (initValue))
-<a name="l00288"></a>00288     {
-<a name="l00289"></a>00289     }
-<a name="l00290"></a>00290     
-<a name="l00291"></a>00291     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
-<a name="l00292"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a544af2175fd266f98d9b2f0a1e4435ee">00292</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (ValueType <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>()
-<a name="l00293"></a>00293     :   <a class="code" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Base</a> (<span class="keyword">new</span> Internal (initValue))
-<a name="l00294"></a>00294     {
-<a name="l00295"></a>00295     }    
-<a name="l00296"></a>00296         
-<a name="l00297"></a>00297 <span class="comment">//    inline Variable&amp; operator= (Type&amp; newValue) throw()</span>
-<a name="l00298"></a>00298 <span class="comment">//    {</span>
-<a name="l00299"></a>00299 <span class="comment">//        this-&gt;setValue (newValue);</span>
-<a name="l00300"></a>00300 <span class="comment">//        return *this;</span>
-<a name="l00301"></a>00301 <span class="comment">//    }</span>
-<a name="l00302"></a>00302     
-<a name="l00303"></a>00303     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
-<a name="l00304"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#ad2e28b9b3d3712d5194361664b6f896d">00304</a>     <span class="keyword">inline</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#a607f32d2dfcdfeef6d5ea68d42328136" title="Assignment operator.">operator= </a>(ValueType <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
-<a name="l00305"></a>00305     {
-<a name="l00306"></a>00306         this-&gt;<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a> (newValue);
-<a name="l00307"></a>00307         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00308"></a>00308     }    
-<a name="l00309"></a>00309     
-<a name="l00310"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a80a7732e5de85ace6ea7600b0b5f9fa8">00310</a>     <span class="keyword">inline</span> Type&amp; <a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>() throw()
-<a name="l00311"></a>00311     {
-<a name="l00312"></a>00312         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
-<a name="l00313"></a>00313     }
-<a name="l00314"></a>00314     
-<a name="l00315"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a4b344e862fde7266bb566811bffcbad5">00315</a>     <span class="keyword">inline</span> operator Type&amp; () throw()
-<a name="l00316"></a>00316     {
-<a name="l00317"></a>00317         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
-<a name="l00318"></a>00318     }
-<a name="l00319"></a>00319     
-<a name="l00320"></a>00320     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
-<a name="l00321"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#ad71d4ea882851e62583db715727cf84b">00321</a>     <span class="keyword">inline</span> operator ValueType() throw()
-<a name="l00322"></a>00322     {
-<a name="l00323"></a>00323         <span class="keywordflow">return</span> ValueType (this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>());
-<a name="l00324"></a>00324     }
-<a name="l00325"></a>00325     
-<a name="l00326"></a>00326     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
-<a name="l00327"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a5651990d1dab951184978b5b493d7b54">00327</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a>(ValueType <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
-<a name="l00328"></a>00328     {
-<a name="l00329"></a>00329         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;setValue (newValue);
-<a name="l00330"></a>00330     }    
-<a name="l00331"></a>00331     
-<a name="l00332"></a>00332 };
-<a name="l00333"></a>00333 
-<a name="l00334"></a>00334 
-<a name="l00335"></a>00335 <span class="preprocessor">#endif // PLONK_VARIABLE_H</span>
+<a name="l00193"></a>00193         <a class="code" href="class_variable_internal_base.html">Internal</a>* <span class="keyword">internal</span> = <span class="keyword">new</span> <a class="code" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal&lt;Type,op&gt;</a> (*this);
+<a name="l00194"></a>00194         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (<span class="keyword">internal</span>);
+<a name="l00195"></a>00195     }
+<a name="l00196"></a>00196     
+<a name="l00197"></a><a class="code" href="class_variable.html#a63499826ee108428ba59b3f7ff198f8f">00197</a>     <a class="code" href="class_variable.html#a63499826ee108428ba59b3f7ff198f8f">PLONK_BINARYOPS</a>(<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>)
+<a name="l00198"></a>00198     <a class="code" href="plonk___inline_unary_ops_8h.html#a5c928c9cb907b6055bc6b42d3ba281e6">PLONK_UNARYOPS</a>(<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>)    
+<a name="l00199"></a>00199     
+<a name="l00200"></a>00200     const <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> selectMin (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> const&amp; other) const throw()
+<a name="l00201"></a>00201     {
+<a name="l00202"></a>00202         <span class="keywordflow">return</span> (this-&gt;<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>() &gt; other.getValue()) ? other : *<span class="keyword">this</span>;
+<a name="l00203"></a>00203     }    
+<a name="l00204"></a>00204     
+<a name="l00205"></a><a class="code" href="class_variable.html#a9414bbb949835fb4396eb221958b26c2">00205</a>     <span class="keyword">const</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <a class="code" href="class_variable.html#a9414bbb949835fb4396eb221958b26c2">selectMax</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00206"></a>00206     {
+<a name="l00207"></a>00207         <span class="keywordflow">return</span> (this-&gt;<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>() &lt; other.getValue()) ? other : *<span class="keyword">this</span>;
+<a name="l00208"></a>00208     }
+<a name="l00209"></a>00209         
+<a name="l00210"></a>00210 <span class="comment">//    inline static const Variable&amp; getZero() throw()  </span>
+<a name="l00211"></a>00211 <span class="comment">//    { </span>
+<a name="l00212"></a>00212 <span class="comment">//        static const Variable v (Math&lt;Type&gt;::get0() ); </span>
+<a name="l00213"></a>00213 <span class="comment">//        return v; </span>
+<a name="l00214"></a>00214 <span class="comment">//    }</span>
+<a name="l00215"></a>00215 <span class="comment">//    </span>
+<a name="l00216"></a>00216 <span class="comment">//    inline static const Variable&amp; getOne() throw()   </span>
+<a name="l00217"></a>00217 <span class="comment">//    {         </span>
+<a name="l00218"></a>00218 <span class="comment">//        static const Variable v (Math&lt;Type&gt;::get1() ); </span>
+<a name="l00219"></a>00219 <span class="comment">//        return v; </span>
+<a name="l00220"></a>00220 <span class="comment">//    }</span>
+<a name="l00221"></a>00221 <span class="comment">//    </span>
+<a name="l00222"></a>00222 <span class="comment">//    inline static const Variable&amp; getTwo() throw()   </span>
+<a name="l00223"></a>00223 <span class="comment">//    {         </span>
+<a name="l00224"></a>00224 <span class="comment">//        static const Variable v (Math&lt;Type&gt;::get2() ); </span>
+<a name="l00225"></a>00225 <span class="comment">//        return v; </span>
+<a name="l00226"></a>00226 <span class="comment">//    }</span>
+<a name="l00227"></a>00227 <span class="comment">//    </span>
+<a name="l00228"></a>00228 <span class="comment">//    inline static const Variable&amp; getHalf() throw()  </span>
+<a name="l00229"></a>00229 <span class="comment">//    {         </span>
+<a name="l00230"></a>00230 <span class="comment">//        static const Variable v (Math&lt;Type&gt;::get0_5()); </span>
+<a name="l00231"></a>00231 <span class="comment">//        return v; </span>
+<a name="l00232"></a>00232 <span class="comment">//    }</span>
+<a name="l00233"></a>00233 <span class="comment">//    </span>
+<a name="l00234"></a>00234 <span class="comment">//    inline static const Variable&amp; getPi() throw()    </span>
+<a name="l00235"></a>00235 <span class="comment">//    {         </span>
+<a name="l00236"></a>00236 <span class="comment">//        static const Variable v (Math&lt;Type&gt;::getPi()); </span>
+<a name="l00237"></a>00237 <span class="comment">//        return v; </span>
+<a name="l00238"></a>00238 <span class="comment">//    }</span>
+<a name="l00239"></a>00239 <span class="comment">//    </span>
+<a name="l00240"></a>00240 <span class="comment">//    inline static const Variable&amp; getTwoPi() throw() </span>
+<a name="l00241"></a>00241 <span class="comment">//    {         </span>
+<a name="l00242"></a>00242 <span class="comment">//        static const Variable v (Math&lt;Type&gt;::get2Pi() ); </span>
+<a name="l00243"></a>00243 <span class="comment">//        return v; </span>
+<a name="l00244"></a>00244 <span class="comment">//    }    </span>
+<a name="l00245"></a>00245     
+<a name="l00246"></a><a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">00246</a>     <span class="keywordtype">int</span> <a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">getTypeCode</a>() <span class="keyword">const</span> throw()
+<a name="l00247"></a>00247     {
+<a name="l00248"></a>00248         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">TypeUtility&lt;Variable&gt;::getTypeCode</a>();
+<a name="l00249"></a>00249     }
+<a name="l00250"></a>00250     
+<a name="l00251"></a><a class="code" href="class_variable.html#a5a1841278390d071d56d99ade1969de3">00251</a>     <span class="keywordtype">int</span> <a class="code" href="class_variable.html#a5a1841278390d071d56d99ade1969de3">getValueTypeCode</a>() <span class="keyword">const</span> throw()
+<a name="l00252"></a>00252     {
+<a name="l00253"></a>00253         <span class="keywordflow">return</span> <a class="code" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">TypeUtility&lt;Type&gt;::getTypeCode</a>();
+<a name="l00254"></a>00254     }        
+<a name="l00255"></a>00255 };
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
+<a name="l00258"></a><a class="code" href="plonk___variable_8h.html#a3d64e67bbae9030c17cf8d4ba61e036d">00258</a> std::istream&amp; <a class="code" href="plonk___int24_8cpp.html#a10a0267afbb35836bfca4da4c91427b0">operator&gt;&gt; </a>(std::istream &amp;inputStream, <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a>&amp; variable)
+<a name="l00259"></a>00259 {
+<a name="l00260"></a>00260     Type value;
+<a name="l00261"></a>00261     inputStream &gt;&gt; value;
+<a name="l00262"></a>00262     
+<a name="l00263"></a>00263     variable = <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a> (value);
+<a name="l00264"></a>00264     
+<a name="l00265"></a>00265     <span class="keywordflow">return</span> inputStream;
+<a name="l00266"></a>00266 }
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
+<a name="l00269"></a><a class="code" href="plonk___variable_8h.html#a17e58f5f36eba9f1a031d36ac70836e8">00269</a> std::ostream&amp; operator&lt;&lt; (std::ostream &amp;outputStream, Variable&lt;Type&gt; <span class="keyword">const</span>&amp; variable)
+<a name="l00270"></a>00270 {
+<a name="l00271"></a>00271     outputStream &lt;&lt; variable.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>();
+<a name="l00272"></a>00272     <span class="keywordflow">return</span> outputStream;
+<a name="l00273"></a>00273 }
+<a name="l00274"></a>00274 
+<a name="l00275"></a>00275 <span class="comment">//BINARYOPGLOBALS(Variable) // declares global functions with the same name as the binary operators</span>
+<a name="l00276"></a>00276 <span class="comment">//UNARYOPGLOBALS(Variable)  // declares global functions with the same name as the unary operators</span>
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;
+<a name="l00279"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html">00279</a> <span class="keyword">class </span><a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&lt;Type&amp;&gt; : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt; VariableInternal&lt;Type&amp;&gt;</a> &gt;
+<a name="l00280"></a>00280 {
+<a name="l00281"></a>00281 <span class="keyword">public</span>:
+<a name="l00282"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a4c3b39b4cf19ebbfaf961ba2256e3f57">00282</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable_internal_3_01_type_01_6_01_4.html">VariableInternal&lt;Type&amp;&gt;</a>         <a class="code" href="class_variable_3_01_type_01_6_01_4.html#a4c3b39b4cf19ebbfaf961ba2256e3f57">Internal</a>;
+<a name="l00283"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a79f642f7a1e26e7987a8621fc884a4a1">00283</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;Internal&gt;</a> <a class="code" href="class_variable_3_01_type_01_6_01_4.html#a79f642f7a1e26e7987a8621fc884a4a1">Base</a>;
+<a name="l00284"></a>00284     
+<a name="l00285"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a8b131173d84a4b2a302eeea8453705e8">00285</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a>()
+<a name="l00286"></a>00286     :   Base (new Internal (Type()))
+<a name="l00287"></a>00287     {
+<a name="l00288"></a>00288     }
+<a name="l00289"></a>00289     
+<a name="l00290"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a499997fa9a606b270f492d7f558c1f50">00290</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00291"></a>00291         :       <a class="code" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
+<a name="l00292"></a>00292         {
+<a name="l00293"></a>00293         }        
+<a name="l00294"></a>00294     
+<a name="l00295"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#af87376557641b973d2611f26d763e1b7">00295</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (Type&amp; initValue) <span class="keywordflow">throw</span>()
+<a name="l00296"></a>00296     :   <a class="code" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Base</a> (<span class="keyword">new</span> Internal (initValue))
+<a name="l00297"></a>00297     {
+<a name="l00298"></a>00298     }
+<a name="l00299"></a>00299     
+<a name="l00300"></a>00300     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
+<a name="l00301"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a544af2175fd266f98d9b2f0a1e4435ee">00301</a>     <a class="code" href="class_variable.html#a9fcee0807002dc5b1b28422631ab512c" title="Default constructor.">Variable</a> (ValueType <span class="keyword">const</span>&amp; initValue) <span class="keywordflow">throw</span>()
+<a name="l00302"></a>00302     :   <a class="code" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Base</a> (<span class="keyword">new</span> Internal (initValue))
+<a name="l00303"></a>00303     {
+<a name="l00304"></a>00304     }    
+<a name="l00305"></a>00305         
+<a name="l00306"></a>00306 <span class="comment">//    inline Variable&amp; operator= (Type&amp; newValue) throw()</span>
+<a name="l00307"></a>00307 <span class="comment">//    {</span>
+<a name="l00308"></a>00308 <span class="comment">//        this-&gt;setValue (newValue);</span>
+<a name="l00309"></a>00309 <span class="comment">//        return *this;</span>
+<a name="l00310"></a>00310 <span class="comment">//    }</span>
+<a name="l00311"></a>00311     
+<a name="l00312"></a>00312     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
+<a name="l00313"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#ad2e28b9b3d3712d5194361664b6f896d">00313</a>     <span class="keyword">inline</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&amp; <a class="code" href="class_variable.html#a607f32d2dfcdfeef6d5ea68d42328136" title="Assignment operator.">operator= </a>(ValueType <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
+<a name="l00314"></a>00314     {
+<a name="l00315"></a>00315         this-&gt;<a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a> (newValue);
+<a name="l00316"></a>00316         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00317"></a>00317     }    
+<a name="l00318"></a>00318     
+<a name="l00319"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a80a7732e5de85ace6ea7600b0b5f9fa8">00319</a>     <span class="keyword">inline</span> Type&amp; <a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>() throw()
+<a name="l00320"></a>00320     {
+<a name="l00321"></a>00321         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
+<a name="l00322"></a>00322     }
+<a name="l00323"></a>00323     
+<a name="l00324"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a4b344e862fde7266bb566811bffcbad5">00324</a>     <span class="keyword">inline</span> operator Type&amp; () throw()
+<a name="l00325"></a>00325     {
+<a name="l00326"></a>00326         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getValue();
+<a name="l00327"></a>00327     }
+<a name="l00328"></a>00328     
+<a name="l00329"></a>00329     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
+<a name="l00330"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#ad71d4ea882851e62583db715727cf84b">00330</a>     <span class="keyword">inline</span> operator ValueType() throw()
+<a name="l00331"></a>00331     {
+<a name="l00332"></a>00332         <span class="keywordflow">return</span> ValueType (this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>());
+<a name="l00333"></a>00333     }
+<a name="l00334"></a>00334     
+<a name="l00335"></a>00335     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ValueType&gt;
+<a name="l00336"></a><a class="code" href="class_variable_3_01_type_01_6_01_4.html#a5651990d1dab951184978b5b493d7b54">00336</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue</a>(ValueType <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
+<a name="l00337"></a>00337     {
+<a name="l00338"></a>00338         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;setValue (newValue);
+<a name="l00339"></a>00339     }    
+<a name="l00340"></a>00340     
+<a name="l00341"></a>00341 };
+<a name="l00342"></a>00342 
+<a name="l00343"></a>00343 
+<a name="l00344"></a>00344 <span class="preprocessor">#endif // PLONK_VARIABLE_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -393,7 +402,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

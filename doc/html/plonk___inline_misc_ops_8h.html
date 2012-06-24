@@ -80,44 +80,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_misc_ops_8h.html#a1d21634c0d8f3d51f46ac6f56fb58f24">TERNARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE,TYPE,TYPE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_misc_ops_8h.html#a4d097dd24bf84a117aca5e38887f4fb5">QUATERNARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE,TYPE,TYPE,TYPE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_misc_ops_8h.html#a5c2c18c21e225dcf68ce004d52f2293f">QUINARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE,TYPE,TYPE,TYPE,TYPE)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_misc_ops_8h.html#a87fe87a9156d401ede07c00f0d3bcd6b">PLONK_TERNARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;, TYPE const&amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_misc_ops_8h.html#adc474644fcce37ee779a1acae276c5da">PLONK_QUATERNARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;, TYPE const&amp;, TYPE const&amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_misc_ops_8h.html#aee205d96ef9f8f8d92cdc8af3d51a592">PLONK_QUINARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;, TYPE const&amp;, TYPE const&amp;, TYPE const&amp;)</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga37922143de485a4effd1cc0889e312fd">clip</a> (Type value, Type lower, Type upper)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gac08306b2956063f45cebc82cc80004d3">clip</a> (Type const &amp;value, Type const &amp;lower, Type const &amp;upper)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga6a1b5d392d414c786fa1ab174002a96e">wrap</a> (int value, int lower, int upper)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga6f251f68be3961da0ec9b4c8d3c305eb">wrap</a> (Type value, Type lower, Type upper)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga56c581e95402e9529c2018dcdfa6b72a">wrap</a> (Type const &amp;value, Type const &amp;lower, Type const &amp;upper)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gaa2585fb5c8a892087c04db46b7786466">linlin</a> (Type input, Type inLow, Type inHigh, Type outLow, Type outHigh)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gaa19c984c156500ac98f5186ac33edad7">linlin</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inHigh, Type const &amp;outLow, Type const &amp;outHigh)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gaeebd42516ac6f4e06fb31878fb1ccd49">linlin2</a> (Type input, Type inLow, Type inRange, Type outLow, Type outRange)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gaac2f256b6fd974d31d80c00490295754">linlin2</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inRange, Type const &amp;outLow, Type const &amp;outRange)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gaae253ab02a16074ea4f61720307b1028">linsin</a> (Type input, Type inLow, Type inHigh, Type outLow, Type outHigh)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gadf0929ff2ceb8f0b4aa1d234d2f63fea">linsin</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inHigh, Type const &amp;outLow, Type const &amp;outHigh)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gadbc5472a38c6cb421bc688a299700eb5">linsin2</a> (Type input, Type inLow, Type inRange, Type outLow, Type outRange)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gaa95dce7d5da00808bfdae784b79ef7f2">linsin2</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inRange, Type const &amp;outLow, Type const &amp;outRange)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gab4f0f41142e28eb7d37eb4a31e9ef2ee">linexp</a> (Type input, Type inLow, Type inHigh, Type outLow, Type outHigh)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gaec012a3e779a211426db71730727d81e">linexp</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inHigh, Type const &amp;outLow, Type const &amp;outHigh)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga81520af7fa3ee862191175a07bd1b856">linexp2</a> (Type input, Type reciprocalInRange, Type inLowOverInRange, Type outLow, Type outRatio)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#gada138c36e1a6be6a27cd974c376cfc83">linexp2</a> (Type const &amp;input, Type const &amp;reciprocalInRange, Type const &amp;inLowOverInRange, Type const &amp;outLow, Type const &amp;outRatio)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga60554956a3b3af87395f659410e456f9">linwelch</a> (Type input, Type inLow, Type inHigh, Type outLow, Type outHigh)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga08bacb44ae03c11271b63a6d69b4ef7b">linwelch</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inHigh, Type const &amp;outLow, Type const &amp;outHigh)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga8832e30990adf744111dfc98b8f3dee8">explin</a> (Type input, Type inLow, Type inHigh, Type outLow, Type outHigh)</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga7ab9bbff1532f41caa902d3038cc9152">explin</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inHigh, Type const &amp;outLow, Type const &amp;outHigh)</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class ValueType , class IndexType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga348e1edbe32a4503b74df19a4ee06896">lininterp</a> (const ValueType value0, const ValueType value1, const IndexType frac)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga0c7c3b1f52e020ab274f686ad542c3d1">lininterp</a> (ValueType const &amp;value0, ValueType const &amp;value1, IndexType const &amp;frac)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class ValueType , class IndexType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga5cb3e3349d313bc9fc5c0595013e0eaf">lookup</a> (const ValueType *table, const IndexType index)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga54ae245006623c1646099189284078ca">lookup</a> (const ValueType *table, IndexType const &amp;index)  throw ()</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="a4d097dd24bf84a117aca5e38887f4fb5"></a><!-- doxytag: member="plonk_InlineMiscOps.h::QUATERNARYOPFUNCTION" ref="a4d097dd24bf84a117aca5e38887f4fb5" args="(TYPE, NAME)" -->
+<a class="anchor" id="adc474644fcce37ee779a1acae276c5da"></a><!-- doxytag: member="plonk_InlineMiscOps.h::PLONK_QUATERNARYOPFUNCTION" ref="adc474644fcce37ee779a1acae276c5da" args="(TYPE, NAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define QUATERNARYOPFUNCTION</td>
+          <td class="memname">#define PLONK_QUATERNARYOPFUNCTION</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">TYPE, </td>
@@ -131,7 +131,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE,TYPE,TYPE,TYPE)</td>
+          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;, TYPE const&amp;, TYPE const&amp;)</td>
         </tr>
       </table>
 </div>
@@ -139,12 +139,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5c2c18c21e225dcf68ce004d52f2293f"></a><!-- doxytag: member="plonk_InlineMiscOps.h::QUINARYOPFUNCTION" ref="a5c2c18c21e225dcf68ce004d52f2293f" args="(TYPE, NAME)" -->
+<a class="anchor" id="aee205d96ef9f8f8d92cdc8af3d51a592"></a><!-- doxytag: member="plonk_InlineMiscOps.h::PLONK_QUINARYOPFUNCTION" ref="aee205d96ef9f8f8d92cdc8af3d51a592" args="(TYPE, NAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define QUINARYOPFUNCTION</td>
+          <td class="memname">#define PLONK_QUINARYOPFUNCTION</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">TYPE, </td>
@@ -158,7 +158,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE,TYPE,TYPE,TYPE,TYPE)</td>
+          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;, TYPE const&amp;, TYPE const&amp;, TYPE const&amp;)</td>
         </tr>
       </table>
 </div>
@@ -166,12 +166,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1d21634c0d8f3d51f46ac6f56fb58f24"></a><!-- doxytag: member="plonk_InlineMiscOps.h::TERNARYOPFUNCTION" ref="a1d21634c0d8f3d51f46ac6f56fb58f24" args="(TYPE, NAME)" -->
+<a class="anchor" id="a87fe87a9156d401ede07c00f0d3bcd6b"></a><!-- doxytag: member="plonk_InlineMiscOps.h::PLONK_TERNARYOPFUNCTION" ref="a87fe87a9156d401ede07c00f0d3bcd6b" args="(TYPE, NAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TERNARYOPFUNCTION</td>
+          <td class="memname">#define PLONK_TERNARYOPFUNCTION</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">TYPE, </td>
@@ -185,7 +185,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE,TYPE,TYPE)</td>
+          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;, TYPE const&amp;)</td>
         </tr>
       </table>
 </div>
@@ -208,7 +208,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

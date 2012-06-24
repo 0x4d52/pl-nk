@@ -115,39 +115,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;<a class="code" href="plonk___variable_internal_8h.html">plonk_VariableInternal.h</a>&quot;</span>
 <a name="l00043"></a>00043 
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type, UNARYOPFUNCTION(Type, op)&gt;
+<a name="l00045"></a>00045 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type, PLONK_UNARYOPFUNCTION(Type, op)&gt;
 <a name="l00046"></a><a class="code" href="class_unary_op_variable_internal.html">00046</a> <span class="keyword">class </span><a class="code" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal</a> : <span class="keyword">public</span> <a class="code" href="class_variable_internal_base.html">VariableInternalBase</a>&lt;Type&gt;,
 <a name="l00047"></a>00047                                 <span class="keyword">public</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>&lt;Type&gt;::<a class="code" href="class_receiver_internal.html">Receiver</a>
 <a name="l00048"></a>00048 {
 <a name="l00049"></a>00049 <span class="keyword">public</span>:
-<a name="l00050"></a><a class="code" href="class_unary_op_variable_internal.html#a2b49929ca5c1e75b43a4308331ba0372">00050</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a>                 <a class="code" href="class_unary_op_variable_internal.html#a2b49929ca5c1e75b43a4308331ba0372">VariableType</a>;
-<a name="l00051"></a><a class="code" href="class_unary_op_variable_internal.html#aa864386baec9f2f3594d1fde5c4cb509">00051</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">VariableType::Sender</a>  <a class="code" href="class_unary_op_variable_internal.html#aa864386baec9f2f3594d1fde5c4cb509">Sender</a>;
+<a name="l00050"></a><a class="code" href="class_unary_op_variable_internal.html#a82a984644cd0d232dd9bec922617f6bf">00050</a>     <span class="keyword">typedef</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">Variable&lt;Type&gt;</a>                 <a class="code" href="class_unary_op_variable_internal.html#a82a984644cd0d232dd9bec922617f6bf">VariableType</a>;
+<a name="l00051"></a><a class="code" href="class_unary_op_variable_internal.html#ab1d0e93d5fd1c4279c9159cc62ffd81c">00051</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">VariableType::Sender</a>  <a class="code" href="class_unary_op_variable_internal.html#ab1d0e93d5fd1c4279c9159cc62ffd81c">Sender</a>;
 <a name="l00052"></a>00052 
-<a name="l00053"></a><a class="code" href="class_unary_op_variable_internal.html#ab4f8b16296a362bf815efbd38f0cb3b4">00053</a>     <a class="code" href="class_unary_op_variable_internal.html#ab4f8b16296a362bf815efbd38f0cb3b4">UnaryOpVariableInternal</a>(<a class="code" href="class_variable.html" title="A template class for storing any variable type.">VariableType</a> <span class="keyword">const</span>&amp; input) <span class="keywordflow">throw</span>()
+<a name="l00053"></a><a class="code" href="class_unary_op_variable_internal.html#a7b95b4874f4f0f04a9f0a5c15e2354b4">00053</a>     <a class="code" href="class_unary_op_variable_internal.html#a7b95b4874f4f0f04a9f0a5c15e2354b4">UnaryOpVariableInternal</a>(<a class="code" href="class_variable.html" title="A template class for storing any variable type.">VariableType</a> <span class="keyword">const</span>&amp; input) <span class="keywordflow">throw</span>()
 <a name="l00054"></a>00054     :   operand (input),
 <a name="l00055"></a>00055         cachedValue (op (input.getValue()))
 <a name="l00056"></a>00056     {
 <a name="l00057"></a>00057         operand.addReceiver (<span class="keyword">this</span>);
 <a name="l00058"></a>00058     }
 <a name="l00059"></a>00059     
-<a name="l00060"></a><a class="code" href="class_unary_op_variable_internal.html#af50b005c328868a9ff9f91184411079f">00060</a>     <a class="code" href="class_unary_op_variable_internal.html#af50b005c328868a9ff9f91184411079f">~UnaryOpVariableInternal</a>()
+<a name="l00060"></a><a class="code" href="class_unary_op_variable_internal.html#a2cba0d3b7f645eccf19daf5591e29021">00060</a>     <a class="code" href="class_unary_op_variable_internal.html#a2cba0d3b7f645eccf19daf5591e29021">~UnaryOpVariableInternal</a>()
 <a name="l00061"></a>00061     {
 <a name="l00062"></a>00062         operand.removeReceiver (<span class="keyword">this</span>);
 <a name="l00063"></a>00063     }
 <a name="l00064"></a>00064     
-<a name="l00065"></a><a class="code" href="class_unary_op_variable_internal.html#a47e546cfd6aa1f5915c3cd48919080fa">00065</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_variable_internal.html#a47e546cfd6aa1f5915c3cd48919080fa">changed</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Sender</a> <span class="keyword">const</span>&amp; sender) <span class="keywordflow">throw</span>()
+<a name="l00065"></a><a class="code" href="class_unary_op_variable_internal.html#ae0e4dbbc2854c2b5ec6d83cecd2b3bbe">00065</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_variable_internal.html#ae0e4dbbc2854c2b5ec6d83cecd2b3bbe">changed</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">Sender</a> <span class="keyword">const</span>&amp; sender) <span class="keywordflow">throw</span>()
 <a name="l00066"></a>00066     {
 <a name="l00067"></a>00067         (void)sender;
 <a name="l00068"></a>00068         this-&gt;<a class="code" href="class_sender_internal.html#a3c1c3d0839c682179b82ef1b93dd6ec1">update</a>(); <span class="comment">// transmit the change down the chain..</span>
 <a name="l00069"></a>00069     }    
 <a name="l00070"></a>00070     
-<a name="l00071"></a><a class="code" href="class_unary_op_variable_internal.html#ab32125b91f71835730ce3a045888df0f">00071</a>     <span class="keyword">const</span> Type <a class="code" href="class_unary_op_variable_internal.html#ab32125b91f71835730ce3a045888df0f">getValue</a>() <span class="keyword">const</span> throw()
+<a name="l00071"></a><a class="code" href="class_unary_op_variable_internal.html#ac84af9617cc7c6a828fee68c31e07a4a">00071</a>     <span class="keyword">const</span> Type <a class="code" href="class_unary_op_variable_internal.html#ac84af9617cc7c6a828fee68c31e07a4a">getValue</a>() <span class="keyword">const</span> throw()
 <a name="l00072"></a>00072     {
 <a name="l00073"></a>00073         this-&gt;cachedValue = op (operand.getValue());
 <a name="l00074"></a>00074         <span class="keywordflow">return</span> this-&gt;cachedValue;
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076     
-<a name="l00077"></a><a class="code" href="class_unary_op_variable_internal.html#a4d1e3fc0ccc3e9b89981b3af1a9b112c">00077</a>     <span class="keyword">const</span> Type <a class="code" href="class_unary_op_variable_internal.html#a4d1e3fc0ccc3e9b89981b3af1a9b112c">nextValue</a>() throw()
+<a name="l00077"></a><a class="code" href="class_unary_op_variable_internal.html#af92d901b59c8916b0d4c201b9640fb0f">00077</a>     <span class="keyword">const</span> Type <a class="code" href="class_unary_op_variable_internal.html#af92d901b59c8916b0d4c201b9640fb0f">nextValue</a>() throw()
 <a name="l00078"></a>00078     {
 <a name="l00079"></a>00079         <span class="keyword">const</span> Type result = op (operand.nextValue());
 <a name="l00080"></a>00080         
@@ -160,7 +160,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00087"></a>00087         <span class="keywordflow">return</span> result;
 <a name="l00088"></a>00088     }
 <a name="l00089"></a>00089     
-<a name="l00090"></a><a class="code" href="class_unary_op_variable_internal.html#ae1c98137f0d5edcb1c596d4b1df75ba9">00090</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_variable_internal.html#ae1c98137f0d5edcb1c596d4b1df75ba9">setValue</a>(Type <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
+<a name="l00090"></a><a class="code" href="class_unary_op_variable_internal.html#a2ed93e001a304a744b9a347b1fc2f595">00090</a>     <span class="keywordtype">void</span> <a class="code" href="class_unary_op_variable_internal.html#a2ed93e001a304a744b9a347b1fc2f595">setValue</a>(Type <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
 <a name="l00091"></a>00091     {
 <a name="l00092"></a>00092         <a class="code" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">plonk_assertfalse</a>;
 <a name="l00093"></a>00093     }    
@@ -187,7 +187,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

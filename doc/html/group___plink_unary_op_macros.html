@@ -162,9 +162,9 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _N1 (<span class="keywordtype">void</span>* ppv, <a class="code" href="struct_plink_state.html">UnaryState</a>* state) {\
-        <a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N; Plank##TYPECODE* output; Plank##TYPECODE value;\
+        PlinkProcess##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N; Plank##TYPECODE* output; Plank##TYPECODE value;\
         (void)state;\
-        pp = (<a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE*)ppv;\
+        pp = (PlinkProcess##TYPECODE*)ppv;\
         N = pp-&gt;buffers[0].bufferSize;\
         output = pp-&gt;buffers[0].buffer;\
         value = pl_##OPNAME##TYPECODE (pp-&gt;buffers[1].buffer[0]);\
@@ -198,9 +198,9 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (<span class="keywordtype">void</span>* ppv, <a class="code" href="struct_plink_state.html">UnaryState</a>* state) {\
-        <a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N; Plank##TYPECODE* output; <span class="keyword">const</span> Plank##TYPECODE* input;\
+        PlinkProcess##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N; Plank##TYPECODE* output; <span class="keyword">const</span> Plank##TYPECODE* input;\
         (void)state;\
-        pp = (<a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE*)ppv;\
+        pp = (PlinkProcess##TYPECODE*)ppv;\
         N = pp-&gt;buffers[0].bufferSize;\
         output = pp-&gt;buffers[0].buffer;\
         input = pp-&gt;buffers[1].buffer;\
@@ -234,10 +234,10 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _Nn (<span class="keywordtype">void</span>* ppv, <a class="code" href="struct_plink_state.html">UnaryState</a>* state) {\
-        <a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N, i; Plank##TYPECODE* output; <span class="keyword">const</span> Plank##TYPECODE* input;\
+        PlinkProcess##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N, i; Plank##TYPECODE* output; <span class="keyword">const</span> Plank##TYPECODE* input;\
         <span class="keywordtype">double</span> inputPos, inputInc;\
         (void)state;\
-        pp = (<a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE*)ppv;\
+        pp = (PlinkProcess##TYPECODE*)ppv;\
         N = pp-&gt;buffers[0].bufferSize;\
         output = pp-&gt;buffers[0].buffer;\
         input = pp-&gt;buffers[1].buffer;\
@@ -276,9 +276,9 @@ Defines</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> plink_UnaryOpProcess ## OPNAME ## TYPECODE (<span class="keywordtype">void</span>* ppv, <a class="code" href="struct_plink_state.html">UnaryState</a>* state) {\
-        <a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N, n;\
+        PlinkProcess##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N, n;\
         (void)state;\
-        pp = (<a class="code" href="struct_plink_process.html">PlinkProcess</a>##TYPECODE*)ppv;\
+        pp = (PlinkProcess##TYPECODE*)ppv;\
         N = pp-&gt;buffers[0].bufferSize;\
         n = pp-&gt;buffers[1].bufferSize;\
         <span class="keywordflow">if</span> (n == N)         plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (ppv, 0);\
@@ -303,7 +303,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:32 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

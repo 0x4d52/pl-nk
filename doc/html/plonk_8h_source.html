@@ -122,42 +122,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00051"></a>00051 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00052"></a>00052 <span class="comment"> */</span> 
 <a name="l00053"></a>00053 
-<a name="l00054"></a>00054 <span class="comment">// this must be before the standard header incase we want it different in user code?</span>
-<a name="l00055"></a><a class="code" href="plonk_8h.html#af4b3ffe0c303bb4ff8eaeae5206375a6">00055</a> <span class="preprocessor">#define PLONK_API </span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>
-<a name="l00057"></a>00057 <span class="preprocessor">#include &quot;<a class="code" href="plonk___standard_header_8h.html">core/plonk_StandardHeader.h</a>&quot;</span>
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061 <span class="preprocessor">#include &quot;<a class="code" href="plonk___headers_8h.html">core/plonk_Headers.h</a>&quot;</span>
+<a name="l00054"></a>00054 <span class="comment">/* config macors</span>
+<a name="l00055"></a>00055 <span class="comment"> PLONK_USEPLINK=1   -   Use Plink for float processes where implemented (also uses optimisations if enabled in Plank)</span>
+<a name="l00056"></a>00056 <span class="comment"> */</span>
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="comment">// this must be before the standard header incase we want it different in user code?</span>
+<a name="l00059"></a><a class="code" href="plonk_8h.html#af4b3ffe0c303bb4ff8eaeae5206375a6">00059</a> <span class="preprocessor">#define PLONK_API </span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span>
+<a name="l00061"></a>00061 <span class="preprocessor">#include &quot;<a class="code" href="plonk___standard_header_8h.html">core/plonk_StandardHeader.h</a>&quot;</span>
 <a name="l00062"></a>00062 
-<a name="l00063"></a>00063 <span class="preprocessor">#ifdef PLONK_USEPLINK</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">    #include &quot;<a class="code" href="plonk___binary_op_plink_8h.html">graph/simple/plonk_BinaryOpPlink.h</a>&quot;</span>
-<a name="l00065"></a>00065 <span class="preprocessor">    #include &quot;<a class="code" href="plonk___unary_op_plink_8h.html">graph/simple/plonk_UnaryOpPlink.h</a>&quot;</span>
-<a name="l00066"></a>00066 <span class="preprocessor">#endif</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>
-<a name="l00068"></a>00068 <a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070 <span class="keyword">using namespace </span><a class="code" href="plonk___standard_header_8h.html#a4e8887426d70c86c03e83afc06df909e">PLONK_NAMESPACE</a>;
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 
+<a name="l00063"></a>00063 <a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065 <span class="preprocessor">#include &quot;<a class="code" href="plonk___headers_8h.html">core/plonk_Headers.h</a>&quot;</span>
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 <span class="preprocessor">#ifdef PLONK_USEPLINK</span>
+<a name="l00068"></a>00068 <span class="preprocessor"></span><span class="preprocessor">    #include &quot;<a class="code" href="plonk___binary_op_plink_8h.html">graph/simple/plonk_BinaryOpPlink.h</a>&quot;</span>
+<a name="l00069"></a>00069 <span class="preprocessor">    #include &quot;<a class="code" href="plonk___unary_op_plink_8h.html">graph/simple/plonk_UnaryOpPlink.h</a>&quot;</span>
+<a name="l00070"></a>00070 <span class="preprocessor">#endif</span>
+<a name="l00071"></a>00071 <span class="preprocessor"></span>
+<a name="l00072"></a>00072 <a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>
 <a name="l00073"></a>00073 
-<a name="l00074"></a>00074 
-<a name="l00078"></a>00078 <span class="comment">//-------------------------------------------------------------------------plonk</span>
-<a name="l00103"></a>00103 <span class="comment"></span><span class="comment">//-------------------------------------------------------------------------plonk</span>
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107 <span class="comment">//------------------------------------------------------------plonk/fundamentals</span>
-<a name="l00111"></a>00111 <span class="comment"></span><span class="comment">//------------------------------------------------------------plonk/fundamentals</span>
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115 <span class="comment">//-------------------------------------------------------------------plonk/units</span>
-<a name="l00165"></a>00165 <span class="comment"></span><span class="comment">//-------------------------------------------------------------------plonk/units</span>
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167 
-<a name="l00168"></a>00168 <span class="preprocessor">#endif // PLONK_H</span>
+<a name="l00074"></a>00074 <span class="keyword">using namespace </span><a class="code" href="plonk___standard_header_8h.html#a4e8887426d70c86c03e83afc06df909e">PLONK_NAMESPACE</a>;
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 
+<a name="l00082"></a>00082 <span class="comment">//-------------------------------------------------------------------------plonk</span>
+<a name="l00107"></a>00107 <span class="comment"></span><span class="comment">//-------------------------------------------------------------------------plonk</span>
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111 <span class="comment">//------------------------------------------------------------plonk/fundamentals</span>
+<a name="l00115"></a>00115 <span class="comment"></span><span class="comment">//------------------------------------------------------------plonk/fundamentals</span>
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119 <span class="comment">//-------------------------------------------------------------------plonk/units</span>
+<a name="l00169"></a>00169 <span class="comment"></span><span class="comment">//-------------------------------------------------------------------plonk/units</span>
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172 <span class="preprocessor">#endif // PLONK_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -174,7 +178,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:29 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

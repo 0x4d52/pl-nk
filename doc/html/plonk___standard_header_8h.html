@@ -88,7 +88,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;cstdio&gt;</code><br/>
 <code>#include &lt;iostream&gt;</code><br/>
 <code>#include &quot;<a class="el" href="plonk___memory_8h_source.html">plonk_Memory.h</a>&quot;</code><br/>
-<code>#include &quot;../../plink/plink.h&quot;</code><br/>
 <code>#include &lt;cassert&gt;</code><br/>
 </div>
 <p><a href="plonk___standard_header_8h_source.html">Go to the source code of this file.</a></p>
@@ -97,15 +96,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_force_error_struct.html">ForceErrorStruct</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To help raise compiler errors when function prototypes change.  <a href="struct_force_error_struct.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_plink_buffer.html">PlinkBuffer&lt; SampleType &gt;</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_plink_process.html">PlinkProcess&lt; N, SampleType &gt;</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">MSVC_EVIL_FLOAT_HACK</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE.  <a href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="union_p_l_o_n_k___m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">PLONK_MSVC_EVIL_FLOAT_HACK</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE.  <a href="union_p_l_o_n_k___m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#ad1a89b073a7338ade15375f0a3d9b913">PLONK_BIGENDIAN</a>&#160;&#160;&#160;PLANK_BIGENDIAN</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a1521d3dff28b203a2364a8dc60028fdf">PLONK_LITTLEENDIAN</a>&#160;&#160;&#160;PLANK_LITTLEENDIAN</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a274e1ceca82eb2dcc2182ef9a1859bc2">PLONK_USEPLINK</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a4e8887426d70c86c03e83afc06df909e">PLONK_NAMESPACE</a>&#160;&#160;&#160;plonk</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>&#160;&#160;&#160;namespace PLONK_NAMESPACE {</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>&#160;&#160;&#160;}</td></tr>
@@ -117,7 +113,7 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a79f33d7d0515d07c2ef97a0ded37b87e">plonk_assertfalse</a>&#160;&#160;&#160;(assert (false))</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a47783a6c888e6afe7b64637737daed64">PLONK_INT24_MAX</a>&#160;&#160;&#160;PLANK_INT24_MAX</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a86663fab7fab4217e835ad45b326c8f1">FORCE_COMPILER_ERROR_FUNCTION_PROTOTYPE_CHANGED</a>&#160;&#160;&#160;<a class="el" href="struct_force_error_struct.html">ForceErrorStruct</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a956e2723d559858d08644ac99146e910">INFINITY</a>&#160;&#160;&#160;(INFINITY_HACK.Value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a36a5bf30b8b9f7cbde34b8a729a6c084">PLONK_INFINITY</a>&#160;&#160;&#160;(PLONK_INFINITY_HACK.Value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#ae28d36bca47f86ea4c9a726e390dac1d">PLONK_ALIGN</a>&#160;&#160;&#160;PLANK_ALIGN</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a47753ad235252bcb3337d2e4563afe24">PLONK_TYPE_DEFAULT</a>&#160;&#160;&#160;<a class="el" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a383fc2c0c24436c812cc22289504a151">LONG_LONG_MAX</a>&#160;&#160;&#160;LLONG_MAX</td></tr>
@@ -140,7 +136,8 @@ Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static union <a class="el" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">MSVC_EVIL_FLOAT_HACK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#a8aff929b6a08666384871ef05da6b150">INFINITY_HACK</a> = {{0x00, 0x00, 0x80, 0x7F}}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static union <br class="typebreak"/>
+<a class="el" href="union_p_l_o_n_k___m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">PLONK_MSVC_EVIL_FLOAT_HACK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___standard_header_8h.html#aa7c27a721a964619f3531c2f5b85ff2d">PLONK_INFINITY_HACK</a> = {{0x00, 0x00, 0x80, 0x7F}}</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a354c7e075ff01d6be5f26b53c752e8d5"></a><!-- doxytag: member="plonk_StandardHeader.h::BEGIN_PLONK_NAMESPACE" ref="a354c7e075ff01d6be5f26b53c752e8d5" args="" -->
@@ -175,19 +172,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define FORCE_COMPILER_ERROR_FUNCTION_PROTOTYPE_CHANGED&#160;&#160;&#160;<a class="el" href="struct_force_error_struct.html">ForceErrorStruct</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a956e2723d559858d08644ac99146e910"></a><!-- doxytag: member="plonk_StandardHeader.h::INFINITY" ref="a956e2723d559858d08644ac99146e910" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define INFINITY&#160;&#160;&#160;(INFINITY_HACK.Value)</td>
         </tr>
       </table>
 </div>
@@ -286,6 +270,19 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a36a5bf30b8b9f7cbde34b8a729a6c084"></a><!-- doxytag: member="plonk_StandardHeader.h::PLONK_INFINITY" ref="a36a5bf30b8b9f7cbde34b8a729a6c084" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_INFINITY&#160;&#160;&#160;(PLONK_INFINITY_HACK.Value)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a47783a6c888e6afe7b64637737daed64"></a><!-- doxytag: member="plonk_StandardHeader.h::PLONK_INT24_MAX" ref="a47783a6c888e6afe7b64637737daed64" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -357,19 +354,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define PLONK_TYPE_DEFAULT&#160;&#160;&#160;<a class="el" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a274e1ceca82eb2dcc2182ef9a1859bc2"></a><!-- doxytag: member="plonk_StandardHeader.h::PLONK_USEPLINK" ref="a274e1ceca82eb2dcc2182ef9a1859bc2" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLONK_USEPLINK</td>
         </tr>
       </table>
 </div>
@@ -574,12 +558,12 @@ Variables</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="a8aff929b6a08666384871ef05da6b150"></a><!-- doxytag: member="plonk_StandardHeader.h::INFINITY_HACK" ref="a8aff929b6a08666384871ef05da6b150" args="" -->
+<a class="anchor" id="aa7c27a721a964619f3531c2f5b85ff2d"></a><!-- doxytag: member="plonk_StandardHeader.h::PLONK_INFINITY_HACK" ref="aa7c27a721a964619f3531c2f5b85ff2d" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">union <a class="el" href="union_m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">MSVC_EVIL_FLOAT_HACK</a> <a class="el" href="plonk___standard_header_8h.html#a8aff929b6a08666384871ef05da6b150">INFINITY_HACK</a> = {{0x00, 0x00, 0x80, 0x7F}}<code> [static]</code></td>
+          <td class="memname">union <a class="el" href="union_p_l_o_n_k___m_s_v_c___e_v_i_l___f_l_o_a_t___h_a_c_k.html">PLONK_MSVC_EVIL_FLOAT_HACK</a> <a class="el" href="plonk___standard_header_8h.html#aa7c27a721a964619f3531c2f5b85ff2d">PLONK_INFINITY_HACK</a> = {{0x00, 0x00, 0x80, 0x7F}}<code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -602,7 +586,7 @@ Variables</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:32 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

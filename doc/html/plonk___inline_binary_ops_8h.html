@@ -82,83 +82,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a8c577669b48898679bc00077e0a9ac35">BINARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE, TYPE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a89b894779aa354e944d642567382a601">BINARYOP</a>(CLASSNAME, OP)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a609b3bcf2850f4892599d710f7c1ac57">BINARYOPS</a>(CLASSNAME)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, OP)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#ad00ec56261ca866a891eabd9382a7410">BINARYOPGLOBALS</a>(CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a44db665205781565d0a31f11d866d5a6">PLONK_BINARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#ac2f12bd387c71732728103c236426458">PLONK_BINARYOP</a>(CLASSNAME, OP)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a4f71baec43eb9c50fdb76acede4f5eb9">PLONK_BINARYOPS</a>(CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a3367e6afefcc8f313608823eaead5628">PLONK_BINARYOPGLOBAL</a>(CLASSNAME, OP)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a850e1e3923461fd9ab1c4d9615c2375a">PLONK_BINARYOPGLOBAL_TEMPLATE</a>(CLASSNAME, OP)&#160;&#160;&#160;template&lt;class T&gt; PLONK_BINARYOPGLOBAL(CLASSNAME&lt;T&gt;,OP)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a300bcf138cf4a735f5b0b02b3ac0a6f2">PLONK_BINARYOPGLOBALS_DEFINE</a>(BINARYOPGLOBAL, CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#aba40c34626fdc5160fa2b4ed21dfa8ca">PLONK_BINARYOPGLOBALS</a>(CLASSNAME)&#160;&#160;&#160;PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_binary_ops_8h.html#a5a42a6a313eda2b881d30cf5dde08506">PLONK_BINARYOPGLOBALS_TEMPLATE</a>(CLASSNAME)&#160;&#160;&#160;PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL_TEMPLATE,CLASSNAME)</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga4ad9403e9c63380b4901f8b8a4fc5f36">addop</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '+' operator.  <a href="group___plonk_binary_op_functions.html#ga4ad9403e9c63380b4901f8b8a4fc5f36"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga8aed5431429725b65a406ad5cd4c4d59">addop</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '+' operator.  <a href="group___plonk_binary_op_functions.html#ga8aed5431429725b65a406ad5cd4c4d59"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaf60ca51338a72b2bf045083108b3d9c1">subop</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '-' operator.  <a href="group___plonk_binary_op_functions.html#gaf60ca51338a72b2bf045083108b3d9c1"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gae83e120cc4ef16930adcfa5225dd8e22">subop</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '-' operator.  <a href="group___plonk_binary_op_functions.html#gae83e120cc4ef16930adcfa5225dd8e22"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga1dec1562f9d796645f88920b7e4f068f">mulop</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '*' operator.  <a href="group___plonk_binary_op_functions.html#ga1dec1562f9d796645f88920b7e4f068f"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga19d5763435e67473c6d33bd68e8ab84b">mulop</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '*' operator.  <a href="group___plonk_binary_op_functions.html#ga19d5763435e67473c6d33bd68e8ab84b"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga9f4dd8b7e77a3d5a9e30c5d327777472">divop</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '/' operator.  <a href="group___plonk_binary_op_functions.html#ga9f4dd8b7e77a3d5a9e30c5d327777472"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga2d1760b9a86fa164a4138d8653375646">divop</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient inline function for the '/' operator.  <a href="group___plonk_binary_op_functions.html#ga2d1760b9a86fa164a4138d8653375646"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga016e95b9ef4c0d86a8f2157a5500673c">isEqualTo</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the inputs are equal otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#ga016e95b9ef4c0d86a8f2157a5500673c"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga4fede61eeb7c6df5cf700c59267ff483">isEqualTo</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the inputs are equal otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#ga4fede61eeb7c6df5cf700c59267ff483"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gab285c6dc6452732f3adeefebe64d3212">isNotEqualTo</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the inputs are not equal otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#gab285c6dc6452732f3adeefebe64d3212"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gab96605a7aafbad650ce77b525fa21426">isNotEqualTo</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the inputs are not equal otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#gab96605a7aafbad650ce77b525fa21426"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga4ba97066df5ba36ee8544cb29f7a361a">isGreaterThan</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is greater than <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#ga4ba97066df5ba36ee8544cb29f7a361a"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga592c0921ce238e5178ae0e55a8ef80ba">isGreaterThan</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is greater than <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#ga592c0921ce238e5178ae0e55a8ef80ba"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gab80e854d392d8166c3cfd843d697df72">isGreaterThanOrEqualTo</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is greater than or equal to <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#gab80e854d392d8166c3cfd843d697df72"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gad044dff716c0cf73eab922c838a55829">isGreaterThanOrEqualTo</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is greater than or equal to <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#gad044dff716c0cf73eab922c838a55829"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga5e5424438723c538e823bfae95a734a2">isLessThan</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is less than <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#ga5e5424438723c538e823bfae95a734a2"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga8b5df4a62179fe535aa6365f5a1b8c41">isLessThan</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is less than <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#ga8b5df4a62179fe535aa6365f5a1b8c41"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga541b0c50a1d1e3be29b4b2402c03ecda">isLessThanOrEqualTo</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is less than or equal to <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#ga541b0c50a1d1e3be29b4b2402c03ecda"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaf43825d912a328a5d349ba3c36fd75bf">isLessThanOrEqualTo</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 1 if the <em>a</em> is less than or equal to <em>b</em> otherwise returns 0.  <a href="group___plonk_binary_op_functions.html#gaf43825d912a328a5d349ba3c36fd75bf"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gabf812e03b6cab75e9da2c725acb51c29">hypot</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ \sqrt{ a^2 + b^2 } $" src="form_5.png"/>.  <a href="group___plonk_binary_op_functions.html#gabf812e03b6cab75e9da2c725acb51c29"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gad11e580e7a49db13e0b8fcd6babc4841">hypot</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ \sqrt{ a^2 + b^2 } $" src="form_5.png"/>.  <a href="group___plonk_binary_op_functions.html#gad11e580e7a49db13e0b8fcd6babc4841"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gafb0607a9b7b2cb183b0a90638d5915e9">atan2</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ atan2(a,b) $" src="form_6.png"/>.  <a href="group___plonk_binary_op_functions.html#gafb0607a9b7b2cb183b0a90638d5915e9"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga8c0089d2d96d98ca8394950fc062f1f8">atan2</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ atan2(a,b) $" src="form_6.png"/>.  <a href="group___plonk_binary_op_functions.html#ga8c0089d2d96d98ca8394950fc062f1f8"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga3eaa27fba99ead4880f54b4d44de8ac6">sumsqr</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ a * a + b * b $" src="form_7.png"/>.  <a href="group___plonk_binary_op_functions.html#ga3eaa27fba99ead4880f54b4d44de8ac6"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga1ecf161d4fc9111638e590270e05163c">sumsqr</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ a * a + b * b $" src="form_7.png"/>.  <a href="group___plonk_binary_op_functions.html#ga1ecf161d4fc9111638e590270e05163c"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga0d9e6b67cea876da0c798618eed4a0d3">difsqr</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ a * a - b * b $" src="form_8.png"/>.  <a href="group___plonk_binary_op_functions.html#ga0d9e6b67cea876da0c798618eed4a0d3"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga84eca012c2ffbe3375630ea38f38fd30">difsqr</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ a * a - b * b $" src="form_8.png"/>.  <a href="group___plonk_binary_op_functions.html#ga84eca012c2ffbe3375630ea38f38fd30"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaa50acb8353818360862f6cb55d6a6b59">sqrsum</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ (a + b) * (a + b) $" src="form_9.png"/>.  <a href="group___plonk_binary_op_functions.html#gaa50acb8353818360862f6cb55d6a6b59"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaa8816d0ec4c2bfd0de5603a9b6c9badc">sqrsum</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ (a + b) * (a + b) $" src="form_9.png"/>.  <a href="group___plonk_binary_op_functions.html#gaa8816d0ec4c2bfd0de5603a9b6c9badc"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaca52300a11bea265656c6fc0707552a9">sqrdif</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ (a - b) * (a - b) $" src="form_10.png"/>.  <a href="group___plonk_binary_op_functions.html#gaca52300a11bea265656c6fc0707552a9"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gabed19764b5f97b7ca5f6c29fb706ce23">sqrdif</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ (a - b) * (a - b) $" src="form_10.png"/>.  <a href="group___plonk_binary_op_functions.html#gabed19764b5f97b7ca5f6c29fb706ce23"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga1554d17471ea9fe8cffd61c72b2a34ac">absdif</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the absolute difference between the input arguments.  <a href="group___plonk_binary_op_functions.html#ga1554d17471ea9fe8cffd61c72b2a34ac"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga01a457334184e3bbf13e3fbc60819a1a">absdif</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the absolute difference between the input arguments.  <a href="group___plonk_binary_op_functions.html#ga01a457334184e3bbf13e3fbc60819a1a"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga7bd6971d1287d1de6f4500c9c3b849aa">thresh</a> (Type a, Type b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">If <em>a</em> is less than <em>b</em> returns 0 otherwise return <em>a</em>.  <a href="group___plonk_binary_op_functions.html#ga7bd6971d1287d1de6f4500c9c3b849aa"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga76b312f2fe7db734a1165f47a998f34c">thresh</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">If <em>a</em> is less than <em>b</em> returns 0 otherwise return <em>a</em>.  <a href="group___plonk_binary_op_functions.html#ga76b312f2fe7db734a1165f47a998f34c"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga3ca66d6cc1b065a25d4a1321aad4b327">round</a> (Type a, Type b)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga324267060ce21c18f1255e69f823edc3">round</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga7fbac5f71eb22dd571ee09fe04fa73c0">trunc</a> (Type a, Type b)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga75d8fa9b7b406f54c8aa0d0d9bc3199a">trunc</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga2b8c1b5864e8be6da6a97b02a7ecc476">clip2</a> (Type value, Type range)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaa90f158fd60651ace12bf4e2e170332d">clip2</a> (Type const &amp;value, Type const &amp;range)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga73a3813f1096ae99db05eec7585bfb84">wrap</a> (Type value, Type upper)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gadbd2cee522ab1adcf5fd33508931d47b">wrap</a> (Type const &amp;value, Type const &amp;upper)  throw ()</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="a89b894779aa354e944d642567382a601"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::BINARYOP" ref="a89b894779aa354e944d642567382a601" args="(CLASSNAME, OP)" -->
+<a class="anchor" id="ac2f12bd387c71732728103c236426458"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOP" ref="ac2f12bd387c71732728103c236426458" args="(CLASSNAME, OP)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BINARYOP</td>
+          <td class="memname">#define PLONK_BINARYOP</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CLASSNAME, </td>
@@ -182,12 +185,12 @@ Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a8c577669b48898679bc00077e0a9ac35"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::BINARYOPFUNCTION" ref="a8c577669b48898679bc00077e0a9ac35" args="(TYPE, NAME)" -->
+<a class="anchor" id="a44db665205781565d0a31f11d866d5a6"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPFUNCTION" ref="a44db665205781565d0a31f11d866d5a6" args="(TYPE, NAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BINARYOPFUNCTION</td>
+          <td class="memname">#define PLONK_BINARYOPFUNCTION</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">TYPE, </td>
@@ -201,7 +204,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE, TYPE)</td>
+          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;)</td>
         </tr>
       </table>
 </div>
@@ -209,12 +212,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1ca3ff7b1c726c80639188c37734fe2e"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::BINARYOPGLOBAL" ref="a1ca3ff7b1c726c80639188c37734fe2e" args="(CLASSNAME, OP)" -->
+<a class="anchor" id="a3367e6afefcc8f313608823eaead5628"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBAL" ref="a3367e6afefcc8f313608823eaead5628" args="(CLASSNAME, OP)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BINARYOPGLOBAL</td>
+          <td class="memname">#define PLONK_BINARYOPGLOBAL</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CLASSNAME, </td>
@@ -234,57 +237,128 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; CLASSNAME&lt;T&gt; OP (CLASSNAME&lt;T&gt; <span class="keyword">const</span>&amp; left, CLASSNAME&lt;T&gt; <span class="keyword">const</span>&amp; right) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> left.binary&lt;plonk::OP&gt; (right); }
+    CLASSNAME OP (CLASSNAME <span class="keyword">const</span>&amp; left, CLASSNAME <span class="keyword">const</span>&amp; right) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> left.OP (right); }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ad00ec56261ca866a891eabd9382a7410"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::BINARYOPGLOBALS" ref="ad00ec56261ca866a891eabd9382a7410" args="(CLASSNAME)" -->
+<a class="anchor" id="a850e1e3923461fd9ab1c4d9615c2375a"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBAL_TEMPLATE" ref="a850e1e3923461fd9ab1c4d9615c2375a" args="(CLASSNAME, OP)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BINARYOPGLOBALS</td>
+          <td class="memname">#define PLONK_BINARYOPGLOBAL_TEMPLATE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td class="paramname">CLASSNAME, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;template&lt;class T&gt; PLONK_BINARYOPGLOBAL(CLASSNAME&lt;T&gt;,OP)</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a02f025eff695f3aefc030e0dee43bcb9" title="Create a new UnitBase by applying the binary &#39;addop&#39; function to the left and right inputs...">addop</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a30b83938853b60cf401326adaa0cdb15" title="Create a new UnitBase by applying the binary &#39;subop&#39; function to the left and right inputs...">subop</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#aebe8e46ccfa320819a15c2e764276456" title="Create a new UnitBase by applying the binary &#39;mulop&#39; function to the left and right inputs...">mulop</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a714dd3065382b4721689426396a1cc5b" title="Create a new UnitBase by applying the binary &#39;divop&#39; function to the left and right inputs...">divop</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#ae781c61e5d683f7ee3e79ba11019cb67" title="Create a new UnitBase by applying the binary &#39;isEqualTo&#39; function to the left and right inputs...">isEqualTo</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#ad3108aeb700cc7a4daf9cff82b4cf862" title="Create a new UnitBase by applying the binary &#39;isNotEqualTo&#39; function to the left and right inputs...">isNotEqualTo</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a84d17f6f3fc0165f84b750f1044415e5" title="Create a new UnitBase by applying the binary &#39;isGreaterThan&#39; function to the left and right inputs...">isGreaterThan</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a6f3c31b74b7dcf1dba8889b5a3ef1611" title="Create a new UnitBase by applying the binary &#39;isGreaterThanOrEqualTo&#39; function to the left and right ...">isGreaterThanOrEqualTo</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#ae23bacf7d26a766d4e17fc86ac5a9270" title="Create a new UnitBase by applying the binary &#39;isLessThan&#39; function to the left and right inputs...">isLessThan</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a6f577470e366b1b374177625b53d4faf" title="Create a new UnitBase by applying the binary &#39;isLessThanOrEqualTo&#39; function to the left and right inp...">isLessThanOrEqualTo</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a1c834b6e685bfb78bd2e443c83d7ae26" title="Create a new UnitBase by applying the binary &#39;hypot&#39; function to the left and right inputs...">hypot</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a2ce4c3976ab78b740fceddfaac0aa468" title="Create a new UnitBase by applying the binary &#39;pow&#39; function to the left and right inputs...">pow</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a33f3e25d26b2b8bcfb95f6474cddfce4" title="Create a new UnitBase by applying the binary &#39;atan2&#39; function to the left and right inputs...">atan2</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#ad75960a00019d4fb16a1418cf2815a62" title="Create a new UnitBase by applying the binary &#39;min&#39; function to the left and right inputs...">min</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a1912cd883f06617b41abdd6e0fb13894" title="Create a new UnitBase by applying the binary &#39;max&#39; function to the left and right inputs...">max</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a2105deed9cc6c8ed9b9f2de9522f72fe" title="Create a new UnitBase by applying the binary &#39;sumsqr&#39; function to the left and right inputs...">sumsqr</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a00a5fb4d2646f1c031e541a0a652420a" title="Create a new UnitBase by applying the binary &#39;difsqr&#39; function to the left and right inputs...">difsqr</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#ab4d34b725ba77674b83114875ab2a4ef" title="Create a new UnitBase by applying the binary &#39;sqrsum&#39; function to the left and right inputs...">sqrsum</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#ad8fbe23d8816316bd17df38618a86b16" title="Create a new UnitBase by applying the binary &#39;sqrdif&#39; function to the left and right inputs...">sqrdif</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a80008f9e361f9cb434e099819c1a6de8" title="Create a new UnitBase by applying the binary &#39;absdif&#39; function to the left and right inputs...">absdif</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a432fdec95551a478ccfab3624ee2aac9" title="Create a new UnitBase by applying the binary &#39;thresh&#39; function to the left and right inputs...">thresh</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a9fbc3c5ffc46e6fe6b52656f81fbef13" title="Create a new UnitBase by applying the binary &#39;round&#39; function to the left and right inputs...">round</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a9712c5cfb89c631e9cc899395e8782b1" title="Create a new UnitBase by applying the binary &#39;trunc&#39; function to the left and right inputs...">trunc</a>)\
-        <a class="code" href="plonk___inline_binary_ops_8h.html#a1ca3ff7b1c726c80639188c37734fe2e">BINARYOPGLOBAL</a>(CLASSNAME, <a class="code" href="plonk___unit_8h.html#a33188debdb3a68f007dfdc4cbc84d0c3" title="Create a new UnitBase by applying the binary &#39;clip2&#39; function to the left and right inputs...">clip2</a>)
-</pre></div>
+
 </div>
 </div>
-<a class="anchor" id="a609b3bcf2850f4892599d710f7c1ac57"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::BINARYOPS" ref="a609b3bcf2850f4892599d710f7c1ac57" args="(CLASSNAME)" -->
+<a class="anchor" id="aba40c34626fdc5160fa2b4ed21dfa8ca"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBALS" ref="aba40c34626fdc5160fa2b4ed21dfa8ca" args="(CLASSNAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BINARYOPS</td>
+          <td class="memname">#define PLONK_BINARYOPGLOBALS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td>&#160;&#160;&#160;PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a300bcf138cf4a735f5b0b02b3ac0a6f2"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBALS_DEFINE" ref="a300bcf138cf4a735f5b0b02b3ac0a6f2" args="(BINARYOPGLOBAL, CLASSNAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_BINARYOPGLOBALS_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">BINARYOPGLOBAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga8aed5431429725b65a406ad5cd4c4d59" title="Convenient inline function for the &#39;+&#39; operator.">addop</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gae83e120cc4ef16930adcfa5225dd8e22" title="Convenient inline function for the &#39;-&#39; operator.">subop</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga19d5763435e67473c6d33bd68e8ab84b" title="Convenient inline function for the &#39;*&#39; operator.">mulop</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga2d1760b9a86fa164a4138d8653375646" title="Convenient inline function for the &#39;/&#39; operator.">divop</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga4fede61eeb7c6df5cf700c59267ff483" title="Returns 1 if the inputs are equal otherwise returns 0.">isEqualTo</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gab96605a7aafbad650ce77b525fa21426" title="Returns 1 if the inputs are not equal otherwise returns 0.">isNotEqualTo</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga592c0921ce238e5178ae0e55a8ef80ba" title="Returns 1 if the a is greater than b otherwise returns 0.">isGreaterThan</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gad044dff716c0cf73eab922c838a55829" title="Returns 1 if the a is greater than or equal to b otherwise returns 0.">isGreaterThanOrEqualTo</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga8b5df4a62179fe535aa6365f5a1b8c41" title="Returns 1 if the a is less than b otherwise returns 0.">isLessThan</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gaf43825d912a328a5d349ba3c36fd75bf" title="Returns 1 if the a is less than or equal to b otherwise returns 0.">isLessThanOrEqualTo</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gad11e580e7a49db13e0b8fcd6babc4841" title="Returns .">hypot</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62" title="Returns a raised to the power b.">pow</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga8c0089d2d96d98ca8394950fc062f1f8" title="Returns .">atan2</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a" title="Returns minimum of a and b.">min</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">max</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga1ecf161d4fc9111638e590270e05163c" title="Returns .">sumsqr</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga84eca012c2ffbe3375630ea38f38fd30" title="Returns .">difsqr</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gaa8816d0ec4c2bfd0de5603a9b6c9badc" title="Returns .">sqrsum</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gabed19764b5f97b7ca5f6c29fb706ce23" title="Returns .">sqrdif</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga01a457334184e3bbf13e3fbc60819a1a" title="Returns the absolute difference between the input arguments.">absdif</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga76b312f2fe7db734a1165f47a998f34c" title="If a is less than b returns 0 otherwise return a.">thresh</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga324267060ce21c18f1255e69f823edc3">round</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#ga75d8fa9b7b406f54c8aa0d0d9bc3199a">trunc</a>)\
+        BINARYOPGLOBAL(CLASSNAME, <a class="code" href="group___plonk_binary_op_functions.html#gaa90f158fd60651ace12bf4e2e170332d">clip2</a>)
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a5a42a6a313eda2b881d30cf5dde08506"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBALS_TEMPLATE" ref="a5a42a6a313eda2b881d30cf5dde08506" args="(CLASSNAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_BINARYOPGLOBALS_TEMPLATE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td>&#160;&#160;&#160;PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL_TEMPLATE,CLASSNAME)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4f71baec43eb9c50fdb76acede4f5eb9"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPS" ref="a4f71baec43eb9c50fdb76acede4f5eb9" args="(CLASSNAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_BINARYOPS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CLASSNAME</td><td>)</td>
@@ -311,7 +385,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

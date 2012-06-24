@@ -80,120 +80,117 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#af554c4795446bb9e4e2a4e295dff3543">UNARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#aa4108bfb97462ad80b0dbd2d01b8a329">UNARYOP</a>(CLASSNAME, OP)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#a106ef270f26be3687236ef8e7ae254a5">UNARYOPS</a>(CLASSNAME)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#abdce73c887163c04e28333bd9f4f377c">UNARYOPGLOBAL</a>(CLASSNAME, OP)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#aeb572265a9dac28e2b3cc8f2dc1410af">UNARYOPGLOBALS</a>(CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#a5a68a90f3b0781caa877c9790beb1474">PLONK_UNARYOPFUNCTION</a>(TYPE, NAME)&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#a2b584aee5fdaae6bbe5e4a3717e4c748">PLONK_UNARYOP</a>(CLASSNAME, OP)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#a5c928c9cb907b6055bc6b42d3ba281e6">PLONK_UNARYOPS</a>(CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#af226ba1c461a1e23490992bf346da466">PLONK_UNARYOPGLOBAL</a>(CLASSNAME, OP)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#a9d69e9bf13cb4c7f8c5a2b37591e6c10">PLONK_UNARYOPGLOBAL_TEMPLATE</a>(CLASSNAME, OP)&#160;&#160;&#160;template&lt;class T&gt; PLONK_UNARYOPGLOBAL(CLASSNAME&lt;T&gt;,OP)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#ab806085d762c89b3ab90eb88f092dccf">PLONK_UNARYOPGLOBALS_DEFINE</a>(UNARYOPGLOBAL, CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#a932ab61f2ce97b93841679f788bcdb68">PLONK_UNARYOPGLOBALS</a>(CLASSNAME)&#160;&#160;&#160;PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL,CLASSNAME)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___inline_unary_ops_8h.html#a48ab31ee693f8a0ebff3be47decdf1ae">PLONK_UNARYOPGLOBALS_TEMPLATE</a>(CLASSNAME)&#160;&#160;&#160;PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL_TEMPLATE,CLASSNAME)</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga509e21fdccb2a5fafe5cc0c7e0a3571c">move</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Just returns the input argument.  <a href="group___plonk_unary_op_functions.html#ga509e21fdccb2a5fafe5cc0c7e0a3571c"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gad5313447396d37207a9d8531fda5bc34">move</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Just returns the input argument.  <a href="group___plonk_unary_op_functions.html#gad5313447396d37207a9d8531fda5bc34"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga35f7f094442eccc5a6b8651f84532627">inc</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment by 1.  <a href="group___plonk_unary_op_functions.html#ga35f7f094442eccc5a6b8651f84532627"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gade67f9737af203712eb3750f6be0a033">inc</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment by 1.  <a href="group___plonk_unary_op_functions.html#gade67f9737af203712eb3750f6be0a033"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga03e6e33fdfc12d17ca82e4bd045a7573">dec</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrement by 1.  <a href="group___plonk_unary_op_functions.html#ga03e6e33fdfc12d17ca82e4bd045a7573"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gabffd643a6de922fc4b6fca4da69ae666">dec</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrement by 1.  <a href="group___plonk_unary_op_functions.html#gabffd643a6de922fc4b6fca4da69ae666"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gad2b59ed23ebd8591b4a90fda26c70535">log2</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the logarithm base 2 of the input argument.  <a href="group___plonk_unary_op_functions.html#gad2b59ed23ebd8591b4a90fda26c70535"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga6ada25a93b42c22935c7045ea5b2c7a5">log2</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the logarithm base 2 of the input argument.  <a href="group___plonk_unary_op_functions.html#ga6ada25a93b42c22935c7045ea5b2c7a5"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga107696b3d522ad63c571db28eb6b16b9">neg</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the negative of the input argument.  <a href="group___plonk_unary_op_functions.html#ga107696b3d522ad63c571db28eb6b16b9"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga599553e9c1629dba5ed1cf8f189bc2c4">neg</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the negative of the input argument.  <a href="group___plonk_unary_op_functions.html#ga599553e9c1629dba5ed1cf8f189bc2c4"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga6f06ea1f29a09d28412d639c16090cd6">reciprocal</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the reciprocal of the input argument (i.e, <img class="formulaInl" alt="$ \frac{1}{a} $" src="form_0.png"/>).  <a href="group___plonk_unary_op_functions.html#ga6f06ea1f29a09d28412d639c16090cd6"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga3409b1ec9b0184b70f506b20d904e08a">reciprocal</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the reciprocal of the input argument (i.e, <img class="formulaInl" alt="$ \frac{1}{a} $" src="form_0.png"/>).  <a href="group___plonk_unary_op_functions.html#ga3409b1ec9b0184b70f506b20d904e08a"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gacd8e2d07befdb4792893b896c003929a">sin</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sine of the input argument.  <a href="group___plonk_unary_op_functions.html#gacd8e2d07befdb4792893b896c003929a"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga731baf3de4ee31dbd113dc6dd30e03b9">sin</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga731baf3de4ee31dbd113dc6dd30e03b9"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga08b6160b456a6fa242c06ecfa274ca48">cos</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the cosine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga08b6160b456a6fa242c06ecfa274ca48"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gaab9a616ae79e3254e55525c49ca0dfc2">cos</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the cosine of the input argument.  <a href="group___plonk_unary_op_functions.html#gaab9a616ae79e3254e55525c49ca0dfc2"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gacb57c04eb33c3e7656d59e4f368bd495">tan</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the tangent of the input argument.  <a href="group___plonk_unary_op_functions.html#gacb57c04eb33c3e7656d59e4f368bd495"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga115f75881b696f375ed1503c9d9df9ec">tan</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the tangent of the input argument.  <a href="group___plonk_unary_op_functions.html#ga115f75881b696f375ed1503c9d9df9ec"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga8e966f27710c1117d43a24d363f025ff">asin</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the arcsine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga8e966f27710c1117d43a24d363f025ff"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga6cc0d4479a73f33ae482260da3d289c2">asin</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the arcsine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga6cc0d4479a73f33ae482260da3d289c2"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gad8a465f80eae0c59a87a0bbffec23da8">acos</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the arcosine of the input argument.  <a href="group___plonk_unary_op_functions.html#gad8a465f80eae0c59a87a0bbffec23da8"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga018fb854e657a002746727f991b69e85">acos</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the arcosine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga018fb854e657a002746727f991b69e85"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga1ffced159795877284d877d0869bb046">atan</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the arctangent of the input argument.  <a href="group___plonk_unary_op_functions.html#ga1ffced159795877284d877d0869bb046"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gaac91c8110b3619165da582eaed03d760">atan</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the arctangent of the input argument.  <a href="group___plonk_unary_op_functions.html#gaac91c8110b3619165da582eaed03d760"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga003bac7d9aa91ee101cf29855f96599c">sinh</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the hyperbolic sine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga003bac7d9aa91ee101cf29855f96599c"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gaa8a751a153620f9ed886270064f8e8e3">sinh</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the hyperbolic sine of the input argument.  <a href="group___plonk_unary_op_functions.html#gaa8a751a153620f9ed886270064f8e8e3"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga433accdbc5679cda9763a6bd57bdfe28">cosh</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the hyperbolic cosine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga433accdbc5679cda9763a6bd57bdfe28"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga5c5e2f5e148871472711b32aee8875e2">cosh</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the hyperbolic cosine of the input argument.  <a href="group___plonk_unary_op_functions.html#ga5c5e2f5e148871472711b32aee8875e2"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gae9488d05996bfa5ada345f7d3eab1aef">tanh</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the hyperbolic tangent of the input argument.  <a href="group___plonk_unary_op_functions.html#gae9488d05996bfa5ada345f7d3eab1aef"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga5d74e407f13c2b5df5b3909e6c61b3f2">tanh</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the hyperbolic tangent of the input argument.  <a href="group___plonk_unary_op_functions.html#ga5d74e407f13c2b5df5b3909e6c61b3f2"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga2161259ab700012743e33f077c53819e">sqrt</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the square root of the input argument.  <a href="group___plonk_unary_op_functions.html#ga2161259ab700012743e33f077c53819e"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gae19ace5e774d8e4be6541f7da421b07d">sqrt</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the square root of the input argument.  <a href="group___plonk_unary_op_functions.html#gae19ace5e774d8e4be6541f7da421b07d"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga3028c8e48a2465b7ad8f369f31c91d07">log</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the natural logarithm of the input argument.  <a href="group___plonk_unary_op_functions.html#ga3028c8e48a2465b7ad8f369f31c91d07"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gae53dc6c1396bbeb7af2d1e428ecf533b">log</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the natural logarithm of the input argument.  <a href="group___plonk_unary_op_functions.html#gae53dc6c1396bbeb7af2d1e428ecf533b"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga12c835e1de93ad65b7c3b6ac8af61b1e">log10</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the logarithm base 10 of the input argument.  <a href="group___plonk_unary_op_functions.html#ga12c835e1de93ad65b7c3b6ac8af61b1e"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga1deca0817cf680d015c518b306541d85">log10</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the logarithm base 10 of the input argument.  <a href="group___plonk_unary_op_functions.html#ga1deca0817cf680d015c518b306541d85"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga43fcc3669247298f7a76188bbe3ecaf4">exp</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the exponent of the input argument.  <a href="group___plonk_unary_op_functions.html#ga43fcc3669247298f7a76188bbe3ecaf4"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gab29841e04677e978e08b70b8ca71d26d">exp</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the exponent of the input argument.  <a href="group___plonk_unary_op_functions.html#gab29841e04677e978e08b70b8ca71d26d"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga0b3bdab1569f16dcf152ba503d2ee0b6">squared</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument squared.  <a href="group___plonk_unary_op_functions.html#ga0b3bdab1569f16dcf152ba503d2ee0b6"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gafa342560d0e1548479d7c925b1cd5471">ceil</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument rounded up to the next highest integer.  <a href="group___plonk_unary_op_functions.html#gafa342560d0e1548479d7c925b1cd5471"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga75460c44c3f3e14ce3f707a918d9b6a0">cubed</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument cubed.  <a href="group___plonk_unary_op_functions.html#ga75460c44c3f3e14ce3f707a918d9b6a0"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gabca294f6c49287f58c83d1762f63a634">floor</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument rounded down to the next lowest integer.  <a href="group___plonk_unary_op_functions.html#gabca294f6c49287f58c83d1762f63a634"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gac68a7614566fdeb1dbf6073200bddc55">ceil</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument rounded up to the next highest integer.  <a href="group___plonk_unary_op_functions.html#gac68a7614566fdeb1dbf6073200bddc55"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6">frac</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the fractional part of the input argument.  <a href="group___plonk_unary_op_functions.html#ga8574f6b212e32701381d2e070c8707b6"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga693ef42f3716804b7301c06021714bfb">floor</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument rounded down to the next lowest integer.  <a href="group___plonk_unary_op_functions.html#ga693ef42f3716804b7301c06021714bfb"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga44d7723c080a9bc8577e4e264db52549">sign</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 0 if the input is 0, -1 if the input is negative or 1 if the input argument is positive.  <a href="group___plonk_unary_op_functions.html#ga44d7723c080a9bc8577e4e264db52549"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gab34539799b5fa260eb6028f088614b4f">frac</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the fractional part of the input argument.  <a href="group___plonk_unary_op_functions.html#gab34539799b5fa260eb6028f088614b4f"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga181f59f1188049529a16a2cf5f508501">m2f</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from MIDI note numbers to frequency (in Hz).  <a href="group___plonk_unary_op_functions.html#ga181f59f1188049529a16a2cf5f508501"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga100673920eff400d665f178520753bb5">sign</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 0 if the input is 0, -1 if the input is negative or 1 if the input argument is positive.  <a href="group___plonk_unary_op_functions.html#ga100673920eff400d665f178520753bb5"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga3bbc54f534126badd26fbd42d57a1c82">f2m</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from frequency (in Hz) to MIDI note numbers.  <a href="group___plonk_unary_op_functions.html#ga3bbc54f534126badd26fbd42d57a1c82"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga3124e7b384b5aec0cfd8521f76228168">m2f</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from MIDI note numbers to frequency (in Hz).  <a href="group___plonk_unary_op_functions.html#ga3124e7b384b5aec0cfd8521f76228168"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gaecb823fdaad20c335c43527670afd1d7">a2dB</a> (Type const &amp;amp)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from linear amplitude to decibels where 0dB is an amplitude of 1.  <a href="group___plonk_unary_op_functions.html#gaecb823fdaad20c335c43527670afd1d7"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga01c8cec9ebce55151b51cbdbb47da39c">f2m</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from frequency (in Hz) to MIDI note numbers.  <a href="group___plonk_unary_op_functions.html#ga01c8cec9ebce55151b51cbdbb47da39c"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga0a730e2e046bf1e584745ce86d4e834b">dB2a</a> (Type const &amp;db)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1.  <a href="group___plonk_unary_op_functions.html#ga0a730e2e046bf1e584745ce86d4e834b"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gafe9ff470f854de30899c0b793a9fe07c">a2dB</a> (Type amp)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from linear amplitude to decibels where 0dB is an amplitude of 1.  <a href="group___plonk_unary_op_functions.html#gafe9ff470f854de30899c0b793a9fe07c"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga549ae4182588d64654a5f948c20017b6">d2r</a> (Type const &amp;deg)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from degrees to radians.  <a href="group___plonk_unary_op_functions.html#ga549ae4182588d64654a5f948c20017b6"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga5df405cdbf917bf030670d46a84b1ead">dB2a</a> (Type db)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1.  <a href="group___plonk_unary_op_functions.html#ga5df405cdbf917bf030670d46a84b1ead"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga7a02abc6cfbf80e5dd88f306ac5f2efc">r2d</a> (Type const &amp;deg)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from radians to degrees.  <a href="group___plonk_unary_op_functions.html#ga7a02abc6cfbf80e5dd88f306ac5f2efc"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga436362298de521016262f0474aa130da">d2r</a> (Type deg)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from degrees to radians.  <a href="group___plonk_unary_op_functions.html#ga436362298de521016262f0474aa130da"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga988f86caa5764c14dd3d8612bd87d4f8">distort</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument distorted.  <a href="group___plonk_unary_op_functions.html#ga988f86caa5764c14dd3d8612bd87d4f8"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga506d6777594b7f7fb05c693bfee76c22">r2d</a> (Type deg)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument converted from radians to degrees.  <a href="group___plonk_unary_op_functions.html#ga506d6777594b7f7fb05c693bfee76c22"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#ga536572bf1efcb1e6b6bd2b9d3b030e23">distort</a> (Type a)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument distorted.  <a href="group___plonk_unary_op_functions.html#ga536572bf1efcb1e6b6bd2b9d3b030e23"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gae107d39405a747eb21b971b67a341c94">zap</a> (Type x)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument with infinities, NaNs and denormallised numbers removed.  <a href="group___plonk_unary_op_functions.html#gae107d39405a747eb21b971b67a341c94"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_unary_op_functions.html#gae8df018eed382aa92946ec1320864aa5">zap</a> (Type const &amp;x)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument with infinities, NaNs and denormallised numbers removed.  <a href="group___plonk_unary_op_functions.html#gae8df018eed382aa92946ec1320864aa5"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="aa4108bfb97462ad80b0dbd2d01b8a329"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::UNARYOP" ref="aa4108bfb97462ad80b0dbd2d01b8a329" args="(CLASSNAME, OP)" -->
+<a class="anchor" id="a2b584aee5fdaae6bbe5e4a3717e4c748"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOP" ref="a2b584aee5fdaae6bbe5e4a3717e4c748" args="(CLASSNAME, OP)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UNARYOP</td>
+          <td class="memname">#define PLONK_UNARYOP</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CLASSNAME, </td>
@@ -217,12 +214,12 @@ Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="af554c4795446bb9e4e2a4e295dff3543"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::UNARYOPFUNCTION" ref="af554c4795446bb9e4e2a4e295dff3543" args="(TYPE, NAME)" -->
+<a class="anchor" id="a5a68a90f3b0781caa877c9790beb1474"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOPFUNCTION" ref="a5a68a90f3b0781caa877c9790beb1474" args="(TYPE, NAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UNARYOPFUNCTION</td>
+          <td class="memname">#define PLONK_UNARYOPFUNCTION</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">TYPE, </td>
@@ -236,7 +233,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE)</td>
+          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;)</td>
         </tr>
       </table>
 </div>
@@ -244,12 +241,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abdce73c887163c04e28333bd9f4f377c"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::UNARYOPGLOBAL" ref="abdce73c887163c04e28333bd9f4f377c" args="(CLASSNAME, OP)" -->
+<a class="anchor" id="af226ba1c461a1e23490992bf346da466"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOPGLOBAL" ref="af226ba1c461a1e23490992bf346da466" args="(CLASSNAME, OP)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UNARYOPGLOBAL</td>
+          <td class="memname">#define PLONK_UNARYOPGLOBAL</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CLASSNAME, </td>
@@ -269,20 +266,30 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; CLASSNAME&lt;T&gt; OP (CLASSNAME&lt;T&gt; <span class="keyword">const</span>&amp; operand) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> operand.OP(); }
+    CLASSNAME OP (CLASSNAME <span class="keyword">const</span>&amp; operand) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> operand.OP(); }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="aeb572265a9dac28e2b3cc8f2dc1410af"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::UNARYOPGLOBALS" ref="aeb572265a9dac28e2b3cc8f2dc1410af" args="(CLASSNAME)" -->
+<a class="anchor" id="a9d69e9bf13cb4c7f8c5a2b37591e6c10"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOPGLOBAL_TEMPLATE" ref="a9d69e9bf13cb4c7f8c5a2b37591e6c10" args="(CLASSNAME, OP)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UNARYOPGLOBALS</td>
+          <td class="memname">#define PLONK_UNARYOPGLOBAL_TEMPLATE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td class="paramname">CLASSNAME, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;template&lt;class T&gt; PLONK_UNARYOPGLOBAL(CLASSNAME&lt;T&gt;,OP)</td>
         </tr>
       </table>
 </div>
@@ -290,12 +297,73 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a106ef270f26be3687236ef8e7ae254a5"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::UNARYOPS" ref="a106ef270f26be3687236ef8e7ae254a5" args="(CLASSNAME)" -->
+<a class="anchor" id="a932ab61f2ce97b93841679f788bcdb68"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOPGLOBALS" ref="a932ab61f2ce97b93841679f788bcdb68" args="(CLASSNAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UNARYOPS</td>
+          <td class="memname">#define PLONK_UNARYOPGLOBALS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td>&#160;&#160;&#160;PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL,CLASSNAME)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab806085d762c89b3ab90eb88f092dccf"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOPGLOBALS_DEFINE" ref="ab806085d762c89b3ab90eb88f092dccf" args="(UNARYOPGLOBAL, CLASSNAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_UNARYOPGLOBALS_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">UNARYOPGLOBAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a48ab31ee693f8a0ebff3be47decdf1ae"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOPGLOBALS_TEMPLATE" ref="a48ab31ee693f8a0ebff3be47decdf1ae" args="(CLASSNAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_UNARYOPGLOBALS_TEMPLATE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td>&#160;&#160;&#160;PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL_TEMPLATE,CLASSNAME)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5c928c9cb907b6055bc6b42d3ba281e6"></a><!-- doxytag: member="plonk_InlineUnaryOps.h::PLONK_UNARYOPS" ref="a5c928c9cb907b6055bc6b42d3ba281e6" args="(CLASSNAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_UNARYOPS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CLASSNAME</td><td>)</td>
@@ -322,7 +390,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

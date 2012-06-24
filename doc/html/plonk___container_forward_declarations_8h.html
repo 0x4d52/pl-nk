@@ -197,8 +197,9 @@ Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; <a class="el" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#afd9d47586f2e3db4fb2aea16102e955a">AtomicLongLong</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; <a class="el" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#a9a11ae670f589892d28eaa5de54e4639">AtomicFloat</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; <a class="el" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#a9e115ddc4ce550f9d2be688708472997">AtomicDouble</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; <a class="el" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#a0d06bba33d94ca6612eef4bb6914229e">AtomicPointer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; <a class="el" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#aed4e4317d80e0d38bb1f8637bc80def8">AtomicExtendedPointer</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; char * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#ae7aa7d9191da56a91b1250264db5e61e">AtomicPointer</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; char * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#af233065f641085d61504827483a56f05">AtomicExtendedPointer</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt; <a class="el" href="class_dynamic.html">Dynamic</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___container_forward_declarations_8h.html#ae0e9701f2eb3c62c79a0af508e1ad6e3">AtomicDynamicPointer</a></td></tr>
 </table>
 <hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="a9e115ddc4ce550f9d2be688708472997"></a><!-- doxytag: member="plonk_ContainerForwardDeclarations.h::AtomicDouble" ref="a9e115ddc4ce550f9d2be688708472997" args="" -->
@@ -214,12 +215,25 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aed4e4317d80e0d38bb1f8637bc80def8"></a><!-- doxytag: member="plonk_ContainerForwardDeclarations.h::AtomicExtendedPointer" ref="aed4e4317d80e0d38bb1f8637bc80def8" args="" -->
+<a class="anchor" id="ae0e9701f2eb3c62c79a0af508e1ad6e3"></a><!-- doxytag: member="plonk_ContainerForwardDeclarations.h::AtomicDynamicPointer" ref="ae0e9701f2eb3c62c79a0af508e1ad6e3" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt;<a class="el" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a>&gt; <a class="el" href="class_atomic_extended.html">AtomicExtendedPointer</a></td>
+          <td class="memname">typedef <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt;<a class="el" href="class_dynamic.html">Dynamic</a>*&gt; <a class="el" href="class_atomic_extended.html">AtomicDynamicPointer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af233065f641085d61504827483a56f05"></a><!-- doxytag: member="plonk_ContainerForwardDeclarations.h::AtomicExtendedPointer" ref="af233065f641085d61504827483a56f05" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_atomic_extended.html">AtomicExtended</a>&lt;char*&gt; <a class="el" href="class_atomic_extended.html">AtomicExtendedPointer</a></td>
         </tr>
       </table>
 </div>
@@ -279,12 +293,12 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0d06bba33d94ca6612eef4bb6914229e"></a><!-- doxytag: member="plonk_ContainerForwardDeclarations.h::AtomicPointer" ref="a0d06bba33d94ca6612eef4bb6914229e" args="" -->
+<a class="anchor" id="ae7aa7d9191da56a91b1250264db5e61e"></a><!-- doxytag: member="plonk_ContainerForwardDeclarations.h::AtomicPointer" ref="ae7aa7d9191da56a91b1250264db5e61e" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;<a class="el" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a>&gt; <a class="el" href="class_atomic_value.html">AtomicPointer</a></td>
+          <td class="memname">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;char*&gt; <a class="el" href="class_atomic_value.html">AtomicPointer</a></td>
         </tr>
       </table>
 </div>
@@ -1451,7 +1465,7 @@ Typedefs</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

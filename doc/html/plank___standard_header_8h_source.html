@@ -113,206 +113,218 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a><a class="code" href="plank___standard_header_8h.html#af08ec37a8c99d747fb60fa15bc28678b">00042</a> <span class="preprocessor">#define _CRT_SECURE_NO_WARNINGS</span>
 <a name="l00043"></a>00043 <span class="preprocessor"></span>
-<a name="l00044"></a>00044 <span class="comment">//#define PLANK_FFT_VDSP 1</span>
-<a name="l00045"></a>00045 <span class="comment">//#define PLANK_FFT_VDSP_FLIPIMAG 1</span>
-<a name="l00046"></a>00046 <span class="comment">//#define PLANK_VEC_VDSP 1</span>
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048 <span class="preprocessor">#ifndef PLANK_API</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_API</span>
-<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span>
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_UNUSED(a) (void)a</span>
-<a name="l00055"></a>00055 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_BEGIN_C_LINKAGE extern &quot;C&quot; {</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_END_C_LINKAGE }</span>
-<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span><span class="preprocessor">    #if (defined (_WIN32) || defined (_WIN64))</span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="preprocessor">        #define inline __inline</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_UNUSED(a) (void)a</span>
-<a name="l00061"></a>00061 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
-<a name="l00062"></a><a class="code" href="plank___standard_header_8h.html#a6b4e6d92be5ba256114b2d8d507c2582">00062</a> <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_UNUSED(a)</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<a name="l00064"></a><a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">00064</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_BEGIN_C_LINKAGE</span>
-<a name="l00065"></a><a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">00065</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_END_C_LINKAGE</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span><span class="preprocessor">#endif        </span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>
-<a name="l00068"></a><a class="code" href="plank___standard_header_8h.html#a60a20b39f264e8cff94cb9de57520a63">00068</a> <span class="preprocessor">#define PLANK_NAMESPACE plank</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span>
-<a name="l00070"></a>00070 <span class="preprocessor">#ifdef PLANK_NAMESPACE</span>
-<a name="l00071"></a><a class="code" href="plank___standard_header_8h.html#aea0fdc58b04b2d024b53efe75a07d600">00071</a> <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLANK_NAMESPACE    namespace PLANK_NAMESPACE {</span>
-<a name="l00072"></a><a class="code" href="plank___standard_header_8h.html#a8917e5dd99de83e376953c8719abc717">00072</a> <span class="preprocessor"></span><span class="preprocessor">    #define END_PLANK_NAMESPACE      }</span>
-<a name="l00073"></a>00073 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00074"></a>00074 <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLANK_NAMESPACE </span>
-<a name="l00075"></a>00075 <span class="preprocessor"></span><span class="preprocessor">    #define END_PLANK_NAMESPACE   </span>
-<a name="l00076"></a>00076 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00077"></a>00077 <span class="preprocessor"></span>
-<a name="l00078"></a>00078 <span class="preprocessor">#if !defined(_NDEBUG) &amp;&amp; !defined(NDEBUG) &amp;&amp; !defined(_DEBUG) &amp;&amp; !defined(DEBUG)</span>
-<a name="l00079"></a>00079 <span class="preprocessor"></span><span class="preprocessor">    #warning You should define appropriate preprocessor macros in Debug (_DEBUG=1 DEBUG=1) and Release (_NDEBUG=1 NDEBUG=1)</span>
-<a name="l00080"></a>00080 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00081"></a>00081 <span class="preprocessor"></span>
-<a name="l00082"></a>00082 <span class="preprocessor">#ifndef PLANK_DEBUG</span>
-<a name="l00083"></a>00083 <span class="preprocessor"></span><span class="preprocessor">    #if !defined(NDEBUG) || defined(_DEBUG)</span>
-<a name="l00084"></a><a class="code" href="plank___standard_header_8h.html#ab02a4257a79bf2787865f6e421255bdb">00084</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_DEBUG 1</span>
-<a name="l00085"></a>00085 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00086"></a>00086 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00087"></a>00087 <span class="preprocessor"></span><span class="preprocessor">    #if !PLANK_DEBUG</span>
-<a name="l00088"></a>00088 <span class="preprocessor"></span><span class="preprocessor">        #undef PLANK_DEBUG</span>
-<a name="l00089"></a>00089 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00090"></a>00090 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00091"></a>00091 <span class="preprocessor"></span>
-<a name="l00092"></a>00092 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<a name="l00093"></a>00093 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
-<a name="l00094"></a>00094 <span class="preprocessor">#include &lt;stdint.h&gt;</span>
-<a name="l00095"></a>00095 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00096"></a>00096 <span class="preprocessor">#include &lt;math.h&gt;</span>
-<a name="l00097"></a>00097 <span class="preprocessor">#include &lt;time.h&gt;</span>
-<a name="l00098"></a>00098 <span class="preprocessor">#include &lt;limits.h&gt;</span>
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100 <span class="preprocessor">#if (defined (_WIN32) || defined (_WIN64))</span>
-<a name="l00101"></a>00101 <span class="preprocessor"></span><span class="preprocessor">    #include &lt;windows.h&gt;</span>
-<a name="l00102"></a>00102 <span class="preprocessor">    #include &lt;process.h&gt;</span>
-<a name="l00103"></a>00103 <span class="preprocessor">    #include &lt;float.h&gt;</span>
-<a name="l00104"></a>00104 <span class="preprocessor">    #include &lt;intrin.h&gt;</span>
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106 <span class="preprocessor">    #define PLANK_WIN 1</span>
-<a name="l00107"></a>00107 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_X86 1</span>
-<a name="l00108"></a>00108 <span class="preprocessor"></span>
-<a name="l00109"></a>00109 <span class="preprocessor">    #ifdef _WIN32</span>
-<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_32BIT 1</span>
-<a name="l00111"></a>00111 <span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>;
-<a name="l00112"></a>00112         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>;
-<a name="l00113"></a>00113 <span class="preprocessor">    #endif</span>
-<a name="l00114"></a>00114 <span class="preprocessor"></span>
-<a name="l00115"></a>00115 <span class="preprocessor">    #ifdef _WIN64</span>
-<a name="l00116"></a>00116 <span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">signed</span> __int64 <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>;
-<a name="l00117"></a>00117         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> __int64 <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>;
-<a name="l00118"></a>00118 <span class="preprocessor">        #define PLANK_64BIT 1</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00044"></a>00044 <span class="comment">/*</span>
+<a name="l00045"></a>00045 <span class="comment"> config - define these in preprocessor macros to enable special options</span>
+<a name="l00046"></a>00046 <span class="comment"> PLANK_FFT_VDSP=1           -   use vDSP on Mac OS X for FFT routines</span>
+<a name="l00047"></a>00047 <span class="comment"> PLANK_FFT_VDSP_FLIPIMAG=1  -   flip the imag part of the FFT to match FFTReal data closely</span>
+<a name="l00048"></a>00048 <span class="comment"> PLANK_VEC_VDSP 1           -   use vDSP on Mac OS X for vector ops</span>
+<a name="l00049"></a>00049 <span class="comment">*/</span>
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="preprocessor">#ifndef PLANK_API</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_API</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span>
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_UNUSED(a) (void)a</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_BEGIN_C_LINKAGE extern &quot;C&quot; {</span>
+<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_END_C_LINKAGE }</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00061"></a>00061 <span class="preprocessor"></span><span class="preprocessor">    #if (defined (_WIN32) || defined (_WIN64))</span>
+<a name="l00062"></a>00062 <span class="preprocessor"></span><span class="preprocessor">        #define inline __inline</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_UNUSED(a) (void)a</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
+<a name="l00065"></a><a class="code" href="plank___standard_header_8h.html#a6b4e6d92be5ba256114b2d8d507c2582">00065</a> <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_UNUSED(a)</span>
+<a name="l00066"></a>00066 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
+<a name="l00067"></a><a class="code" href="plank___standard_header_8h.html#a04d6b0df91a3ec64f89589fab47dff92">00067</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_BEGIN_C_LINKAGE</span>
+<a name="l00068"></a><a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">00068</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_END_C_LINKAGE</span>
+<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="preprocessor">#endif        </span>
+<a name="l00070"></a>00070 <span class="preprocessor"></span>
+<a name="l00071"></a><a class="code" href="plank___standard_header_8h.html#a60a20b39f264e8cff94cb9de57520a63">00071</a> <span class="preprocessor">#define PLANK_NAMESPACE plank</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span>
+<a name="l00073"></a>00073 <span class="preprocessor">#ifdef PLANK_NAMESPACE</span>
+<a name="l00074"></a><a class="code" href="plank___standard_header_8h.html#aea0fdc58b04b2d024b53efe75a07d600">00074</a> <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLANK_NAMESPACE    namespace PLANK_NAMESPACE {</span>
+<a name="l00075"></a><a class="code" href="plank___standard_header_8h.html#a8917e5dd99de83e376953c8719abc717">00075</a> <span class="preprocessor"></span><span class="preprocessor">    #define END_PLANK_NAMESPACE      }</span>
+<a name="l00076"></a>00076 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00077"></a>00077 <span class="preprocessor"></span><span class="preprocessor">    #define BEGIN_PLANK_NAMESPACE </span>
+<a name="l00078"></a>00078 <span class="preprocessor"></span><span class="preprocessor">    #define END_PLANK_NAMESPACE   </span>
+<a name="l00079"></a>00079 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span>
+<a name="l00081"></a>00081 <span class="preprocessor">#if !defined(_NDEBUG) &amp;&amp; !defined(NDEBUG) &amp;&amp; !defined(_DEBUG) &amp;&amp; !defined(DEBUG)</span>
+<a name="l00082"></a>00082 <span class="preprocessor"></span><span class="preprocessor">    #warning You should define appropriate preprocessor macros in Debug (_DEBUG=1 DEBUG=1) and Release (_NDEBUG=1 NDEBUG=1)</span>
+<a name="l00083"></a>00083 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00084"></a>00084 <span class="preprocessor"></span>
+<a name="l00085"></a>00085 <span class="preprocessor">#ifndef PLANK_DEBUG</span>
+<a name="l00086"></a>00086 <span class="preprocessor"></span><span class="preprocessor">    #if !defined(NDEBUG) || defined(_DEBUG)</span>
+<a name="l00087"></a><a class="code" href="plank___standard_header_8h.html#ab02a4257a79bf2787865f6e421255bdb">00087</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_DEBUG 1</span>
+<a name="l00088"></a>00088 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00089"></a>00089 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00090"></a>00090 <span class="preprocessor"></span><span class="preprocessor">    #if !PLANK_DEBUG</span>
+<a name="l00091"></a>00091 <span class="preprocessor"></span><span class="preprocessor">        #undef PLANK_DEBUG</span>
+<a name="l00092"></a>00092 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00093"></a>00093 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00094"></a>00094 <span class="preprocessor"></span>
+<a name="l00095"></a>00095 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00096"></a>00096 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00097"></a>00097 <span class="preprocessor">#include &lt;stdint.h&gt;</span>
+<a name="l00098"></a>00098 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00099"></a>00099 <span class="preprocessor">#include &lt;math.h&gt;</span>
+<a name="l00100"></a>00100 <span class="preprocessor">#include &lt;time.h&gt;</span>
+<a name="l00101"></a>00101 <span class="preprocessor">#include &lt;limits.h&gt;</span>
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103 <span class="preprocessor">#if (defined (_WIN32) || defined (_WIN64) || defined (WIN64))</span>
+<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="preprocessor">    #include &lt;windows.h&gt;</span>
+<a name="l00105"></a>00105 <span class="preprocessor">    #include &lt;process.h&gt;</span>
+<a name="l00106"></a>00106 <span class="preprocessor">    #include &lt;float.h&gt;</span>
+<a name="l00107"></a>00107 <span class="preprocessor">    #include &lt;intrin.h&gt;</span>
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 <span class="preprocessor">        #undef min</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">        #undef max</span>
+<a name="l00111"></a>00111 <span class="preprocessor"></span>
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113 <span class="preprocessor">        #pragma warning(disable : 4244) // loss of precision</span>
+<a name="l00114"></a>00114 <span class="preprocessor"></span><span class="preprocessor">        #pragma warning(disable : 4996) // security of snprintf etc</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span><span class="preprocessor">        #pragma warning(disable : 4324) // structure padding / alignment</span>
+<a name="l00116"></a>00116 <span class="preprocessor"></span><span class="preprocessor">        #pragma warning(disable : 4214) // bit field types other than int.. must revisit this</span>
+<a name="l00117"></a>00117 <span class="preprocessor"></span>
+<a name="l00118"></a>00118 <span class="preprocessor">    #define PLANK_WIN 1</span>
+<a name="l00119"></a>00119 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_X86 1</span>
 <a name="l00120"></a>00120 <span class="preprocessor"></span>
-<a name="l00121"></a>00121         <span class="keyword">typedef</span> <span class="keywordtype">signed</span> __int64 <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>;
-<a name="l00122"></a>00122         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> __int64 <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>;
-<a name="l00123"></a>00123 <span class="preprocessor">    #define snprintf _snprintf</span>
-<a name="l00124"></a>00124 <span class="preprocessor"></span>    <span class="comment">//#define strncpy _strncpy</span>
-<a name="l00125"></a>00125 <span class="preprocessor">    #define PLANK_LITTLEENDIAN  1</span>
-<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_BIGENDIAN     0</span>
-<a name="l00127"></a>00127 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_ALIGN(amount) __declspec (align (amount))</span>
-<a name="l00128"></a>00128 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00129"></a>00129 <span class="preprocessor"></span>    <span class="comment">// assume unix and Apple </span>
-<a name="l00130"></a>00130 <span class="preprocessor">        #include &lt;unistd.h&gt;</span>
-<a name="l00131"></a>00131 
-<a name="l00132"></a><a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">00132</a>     <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>;
-<a name="l00133"></a><a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">00133</a>     <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>;
-<a name="l00134"></a><a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">00134</a>     <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>;
-<a name="l00135"></a><a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">00135</a>     <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>;
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137 <span class="preprocessor">    #if defined (__APPLE_CPP__) || defined(__APPLE_CC__)</span>
-<a name="l00138"></a>00138 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_APPLE 1</span>
-<a name="l00139"></a>00139 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;CoreFoundation/CoreFoundation.h&gt;</span> 
-<a name="l00140"></a>00140 <span class="preprocessor">        #include &lt;libkern/OSAtomic.h&gt;</span>
-<a name="l00141"></a>00141 <span class="preprocessor">        #include &lt;pthread.h&gt;</span>
+<a name="l00121"></a>00121 <span class="preprocessor">        #if defined(_WIN64) || defined(WIN64)</span>
+<a name="l00122"></a>00122 <span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">signed</span> __int64 <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>;
+<a name="l00123"></a>00123         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> __int64 <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>;
+<a name="l00124"></a>00124 <span class="preprocessor">        #define PLANK_64BIT 1</span>
+<a name="l00125"></a>00125 <span class="preprocessor"></span><span class="preprocessor">    #elif defined(_WIN32)</span>
+<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_32BIT 1</span>
+<a name="l00127"></a>00127 <span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>;
+<a name="l00128"></a>00128         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>;
+<a name="l00129"></a>00129 <span class="preprocessor">    #endif</span>
+<a name="l00130"></a>00130 <span class="preprocessor"></span>
+<a name="l00131"></a>00131         <span class="keyword">typedef</span> <span class="keywordtype">signed</span> __int64 <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>;
+<a name="l00132"></a>00132         <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> __int64 <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>;
+<a name="l00133"></a>00133         <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> <a class="code" href="plank___standard_header_8h.html#a0054c5afcfca2e6a4fc84cd25600ce93">PlankBits</a>;
+<a name="l00134"></a>00134 <span class="preprocessor">    #define snprintf _snprintf</span>
+<a name="l00135"></a>00135 <span class="preprocessor"></span>    <span class="comment">//#define strncpy _strncpy</span>
+<a name="l00136"></a>00136 <span class="preprocessor">    #define PLANK_LITTLEENDIAN  1</span>
+<a name="l00137"></a>00137 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_BIGENDIAN     0</span>
+<a name="l00138"></a>00138 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_ALIGN(amount) __declspec(align(amount))</span>
+<a name="l00139"></a>00139 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00140"></a>00140 <span class="preprocessor"></span>    <span class="comment">// assume unix and Apple </span>
+<a name="l00141"></a>00141 <span class="preprocessor">        #include &lt;unistd.h&gt;</span>
 <a name="l00142"></a>00142 
-<a name="l00143"></a>00143 <span class="preprocessor">        #ifdef __llvm__</span>
-<a name="l00144"></a>00144 <span class="preprocessor"></span><span class="preprocessor">            #ifdef __clang__</span>
-<a name="l00145"></a>00145 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_APPLE_LLVM 1</span>
-<a name="l00146"></a>00146 <span class="preprocessor"></span><span class="preprocessor">            #else</span>
-<a name="l00147"></a>00147 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_GCC 1</span>
-<a name="l00148"></a>00148 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_LLVM 1</span>
-<a name="l00149"></a>00149 <span class="preprocessor"></span><span class="preprocessor">            #endif</span>
-<a name="l00150"></a>00150 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
-<a name="l00151"></a>00151 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_GCC 1</span>
-<a name="l00152"></a>00152 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<a name="l00153"></a>00153 <span class="preprocessor"></span>
-<a name="l00154"></a>00154 <span class="preprocessor">        #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR</span>
-<a name="l00155"></a>00155 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_IOS 1</span>
-<a name="l00156"></a>00156 <span class="preprocessor"></span>
-<a name="l00157"></a>00157 <span class="preprocessor">            #if defined(__arm__)</span>
-<a name="l00158"></a>00158 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_ARM 1</span>
-<a name="l00159"></a>00159 <span class="preprocessor"></span><span class="preprocessor">            #else</span>
-<a name="l00160"></a>00160 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_X86 1</span>
+<a name="l00143"></a><a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">00143</a>     <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>;
+<a name="l00144"></a><a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">00144</a>     <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>;
+<a name="l00145"></a><a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">00145</a>     <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>;
+<a name="l00146"></a><a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">00146</a>     <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>;
+<a name="l00147"></a><a class="code" href="plank___standard_header_8h.html#a0054c5afcfca2e6a4fc84cd25600ce93">00147</a>         <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a> <a class="code" href="plank___standard_header_8h.html#a0054c5afcfca2e6a4fc84cd25600ce93">PlankBits</a>;
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149 <span class="preprocessor">    #if defined (__APPLE_CPP__) || defined(__APPLE_CC__)</span>
+<a name="l00150"></a>00150 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_APPLE 1</span>
+<a name="l00151"></a>00151 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;CoreFoundation/CoreFoundation.h&gt;</span> 
+<a name="l00152"></a>00152 <span class="preprocessor">        #include &lt;libkern/OSAtomic.h&gt;</span>
+<a name="l00153"></a>00153 <span class="preprocessor">        #include &lt;pthread.h&gt;</span>
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155 <span class="preprocessor">        #ifdef __llvm__</span>
+<a name="l00156"></a>00156 <span class="preprocessor"></span><span class="preprocessor">            #ifdef __clang__</span>
+<a name="l00157"></a>00157 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_APPLE_LLVM 1</span>
+<a name="l00158"></a>00158 <span class="preprocessor"></span><span class="preprocessor">            #else</span>
+<a name="l00159"></a>00159 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_GCC 1</span>
+<a name="l00160"></a>00160 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_LLVM 1</span>
 <a name="l00161"></a>00161 <span class="preprocessor"></span><span class="preprocessor">            #endif</span>
 <a name="l00162"></a>00162 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
-<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_MAC 1</span>
-<a name="l00164"></a>00164 <span class="preprocessor"></span>
-<a name="l00165"></a>00165 <span class="preprocessor">            #if defined (__ppc__) || defined (__ppc64__)</span>
-<a name="l00166"></a>00166 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_PPC 1</span>
-<a name="l00167"></a>00167 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_NOATOMIC64BIT 1</span>
-<a name="l00168"></a>00168 <span class="preprocessor"></span><span class="preprocessor">            #else</span>
-<a name="l00169"></a>00169 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_X86 1</span>
-<a name="l00170"></a>00170 <span class="preprocessor"></span><span class="preprocessor">            #endif</span>
-<a name="l00171"></a>00171 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<a name="l00172"></a>00172 <span class="preprocessor"></span>
-<a name="l00173"></a>00173 <span class="preprocessor">        #if LONG_MAX == 0x7fffffff</span>
-<a name="l00174"></a>00174 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_32BIT 1</span>
-<a name="l00175"></a>00175 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
-<a name="l00176"></a>00176 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_64BIT 1</span>
-<a name="l00177"></a>00177 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<a name="l00178"></a>00178 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00179"></a><a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">00179</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_ALIGN(amount)   __attribute__ ((aligned (amount)))</span>
-<a name="l00180"></a>00180 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00181"></a>00181 <span class="preprocessor"></span>
-<a name="l00182"></a><a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">00182</a> <span class="keyword">typedef</span> <span class="keywordtype">float</span> <a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">PlankF</a>;
-<a name="l00183"></a><a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">00183</a> <span class="keyword">typedef</span> <span class="keywordtype">double</span> <a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a>;
-<a name="l00184"></a>00184 
-<a name="l00185"></a><a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">00185</a> <span class="keyword">typedef</span> <span class="keywordtype">char</span> <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a>;
-<a name="l00186"></a><a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">00186</a> <span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>;
-<a name="l00187"></a><a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">00187</a> <span class="keyword">typedef</span> <span class="keywordtype">short</span> <a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">PlankS</a>;
-<a name="l00188"></a>00188 
-<a name="l00189"></a><a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">00189</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a>;
-<a name="l00190"></a><a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">00190</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>;
-<a name="l00191"></a><a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">00191</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a>;
-<a name="l00192"></a>00192 
-<a name="l00193"></a><a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">00193</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>;
-<a name="l00194"></a><a class="code" href="plank___standard_header_8h.html#adbbcbc6e38d8ee22ce905b125709b01c">00194</a> <span class="preprocessor">#define PLANK_FALSE ((PlankB)0)</span>
-<a name="l00195"></a><a class="code" href="plank___standard_header_8h.html#a887e193eb8be6ca64251225cd970dcfd">00195</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_TRUE ((PlankB)(!0))</span>
-<a name="l00196"></a>00196 <span class="preprocessor"></span>
-<a name="l00197"></a><a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">00197</a> <span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>;
-<a name="l00198"></a><a class="code" href="plank___standard_header_8h.html#a7000576d0ca505b484564ed79dc526c0">00198</a> <span class="keyword">typedef</span> <span class="keyword">const</span> <span class="keywordtype">void</span>* <a class="code" href="plank___standard_header_8h.html#a7000576d0ca505b484564ed79dc526c0">PlankConstantP</a>;
-<a name="l00199"></a><a class="code" href="plank___standard_header_8h.html#ae458838c7aece4e4cb7867853b20fea1">00199</a> <span class="preprocessor">#define PLANK_NULL ((PlankP)0)</span>
-<a name="l00200"></a>00200 <span class="preprocessor"></span>
-<a name="l00201"></a><a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">00201</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>;
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203 <span class="preprocessor">#include &quot;<a class="code" href="plank___result_8h.html">plank_Result.h</a>&quot;</span>
+<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_GCC 1</span>
+<a name="l00164"></a>00164 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
+<a name="l00165"></a>00165 <span class="preprocessor"></span>
+<a name="l00166"></a>00166 <span class="preprocessor">        #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR</span>
+<a name="l00167"></a>00167 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_IOS 1</span>
+<a name="l00168"></a>00168 <span class="preprocessor"></span>
+<a name="l00169"></a>00169 <span class="preprocessor">            #if defined(__arm__)</span>
+<a name="l00170"></a>00170 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_ARM 1</span>
+<a name="l00171"></a>00171 <span class="preprocessor"></span><span class="preprocessor">            #else</span>
+<a name="l00172"></a>00172 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_X86 1</span>
+<a name="l00173"></a>00173 <span class="preprocessor"></span><span class="preprocessor">            #endif</span>
+<a name="l00174"></a>00174 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
+<a name="l00175"></a>00175 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_MAC 1</span>
+<a name="l00176"></a>00176 <span class="preprocessor"></span>
+<a name="l00177"></a>00177 <span class="preprocessor">            #if defined (__ppc__) || defined (__ppc64__)</span>
+<a name="l00178"></a>00178 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_PPC 1</span>
+<a name="l00179"></a>00179 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_NOATOMIC64BIT 1</span>
+<a name="l00180"></a>00180 <span class="preprocessor"></span><span class="preprocessor">            #else</span>
+<a name="l00181"></a>00181 <span class="preprocessor"></span><span class="preprocessor">                #define PLANK_X86 1</span>
+<a name="l00182"></a>00182 <span class="preprocessor"></span><span class="preprocessor">            #endif</span>
+<a name="l00183"></a>00183 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
+<a name="l00184"></a>00184 <span class="preprocessor"></span>
+<a name="l00185"></a>00185 <span class="preprocessor">        #if LONG_MAX == 0x7fffffff</span>
+<a name="l00186"></a>00186 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_32BIT 1</span>
+<a name="l00187"></a>00187 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
+<a name="l00188"></a>00188 <span class="preprocessor"></span><span class="preprocessor">            #define PLANK_64BIT 1</span>
+<a name="l00189"></a>00189 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
+<a name="l00190"></a>00190 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00191"></a><a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">00191</a> <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_ALIGN(amount)   __attribute__ ((aligned (amount)))</span>
+<a name="l00192"></a>00192 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00193"></a>00193 <span class="preprocessor"></span>
+<a name="l00194"></a><a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">00194</a> <span class="keyword">typedef</span> <span class="keywordtype">float</span> <a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">PlankF</a>;
+<a name="l00195"></a><a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">00195</a> <span class="keyword">typedef</span> <span class="keywordtype">double</span> <a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a>;
+<a name="l00196"></a>00196 
+<a name="l00197"></a><a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">00197</a> <span class="keyword">typedef</span> <span class="keywordtype">char</span> <a class="code" href="plank___standard_header_8h.html#a5310c6b3fc8ca859506373d71afdd89a">PlankC</a>;
+<a name="l00198"></a><a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">00198</a> <span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>;
+<a name="l00199"></a><a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">00199</a> <span class="keyword">typedef</span> <span class="keywordtype">short</span> <a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">PlankS</a>;
+<a name="l00200"></a>00200 
+<a name="l00201"></a><a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">00201</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="plank___standard_header_8h.html#a907eb1cbfd2c4c5c42175f30adbbbd22">PlankUC</a>;
+<a name="l00202"></a><a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">00202</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>;
+<a name="l00203"></a><a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">00203</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a>;
 <a name="l00204"></a>00204 
-<a name="l00205"></a>00205 
-<a name="l00206"></a>00206 <span class="preprocessor">#ifdef PLANK_32BIT</span>
-<a name="l00207"></a>00207 <span class="preprocessor"></span><span class="comment">//#warning PLANK_32BIT</span>
-<a name="l00208"></a>00208 <span class="preprocessor">#endif</span>
-<a name="l00209"></a>00209 <span class="preprocessor"></span>
-<a name="l00210"></a>00210 <span class="preprocessor">#ifdef PLANK_64BIT</span>
-<a name="l00211"></a>00211 <span class="preprocessor"></span><span class="comment">//#warning PLANK_64BIT</span>
-<a name="l00212"></a>00212 <span class="preprocessor">#endif</span>
-<a name="l00213"></a>00213 <span class="preprocessor"></span>
-<a name="l00214"></a>00214 <span class="preprocessor">#ifndef PLANK_LITTLEENDIAN</span>
-<a name="l00215"></a>00215 <span class="preprocessor"></span><span class="preprocessor">    #ifdef __LITTLE_ENDIAN__</span>
-<a name="l00216"></a>00216 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  1</span>
-<a name="l00217"></a>00217 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     0</span>
-<a name="l00218"></a>00218 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
-<a name="l00219"></a><a class="code" href="plank___standard_header_8h.html#ad1ea5874a35da801d80b80c98258a1a6">00219</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  0</span>
-<a name="l00220"></a><a class="code" href="plank___standard_header_8h.html#adebe0b7e9b5a43ca0fccfad6a2c73d5a">00220</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     1</span>
-<a name="l00221"></a>00221 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00222"></a>00222 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00223"></a>00223 <span class="preprocessor"></span>
-<a name="l00224"></a>00224 <span class="preprocessor">#include &quot;<a class="code" href="plank___memory_8h.html">plank_Memory.h</a>&quot;</span>
-<a name="l00225"></a>00225 
-<a name="l00226"></a>00226 <span class="comment">// this must be after the PLANK_LITTLEENDIAN / PLANK_BIGENDIAN defs</span>
-<a name="l00227"></a>00227 <span class="preprocessor">#include &quot;../containers/plank_ContainersMisc.h&quot;</span>
-<a name="l00228"></a>00228 
-<a name="l00229"></a><a class="code" href="plank___standard_header_8h.html#a3f7c6d61206f23beaa3f91a4a2ba105a">00229</a> <span class="preprocessor">#define PLANK_NAMEJOININTERNAL2(a,b)        a ## b</span>
-<a name="l00230"></a><a class="code" href="plank___standard_header_8h.html#a6683914fdf30bc8768d97fa2af369b63">00230</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL3(a,b,c)      a ## b ## c</span>
-<a name="l00231"></a><a class="code" href="plank___standard_header_8h.html#a17e56482e0f199203edd6c6934fbf489">00231</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL4(a,b,c,d)    a ## b ## c ## d</span>
-<a name="l00232"></a>00232 <span class="preprocessor"></span>
-<a name="l00233"></a><a class="code" href="plank___standard_header_8h.html#a22117047ca1658c456074c0ec341e6f7">00233</a> <span class="preprocessor">#define PLANK_NAMEJOIN2(a,b)       PLANK_NAMEJOININTERNAL2(a,b)</span>
-<a name="l00234"></a><a class="code" href="plank___standard_header_8h.html#a496b19b2391a61788fddfe3ce2eff2fc">00234</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN3(a,b,c)     PLANK_NAMEJOININTERNAL3(a,b,c)</span>
-<a name="l00235"></a><a class="code" href="plank___standard_header_8h.html#aac511e7d63fd338847a334f8d8095b52">00235</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN4(a,b,c,d)   PLANK_NAMEJOININTERNAL4(a,b,c,d)</span>
-<a name="l00236"></a>00236 <span class="preprocessor"></span>
-<a name="l00237"></a><a class="code" href="plank___standard_header_8h.html#ac55a1abfe9d28e22767c9d8fc80406c5">00237</a> <span class="preprocessor">#define PLANK_MAJOR_VERSION      0</span>
-<a name="l00238"></a><a class="code" href="plank___standard_header_8h.html#aa23fd3ea9705a4372f00e38fade23d19">00238</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_MINOR_VERSION      1</span>
-<a name="l00239"></a><a class="code" href="plank___standard_header_8h.html#a619b528c0d7bff67e8467cd033b9e890">00239</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_BUILDNUMBER        1</span>
-<a name="l00240"></a>00240 <span class="preprocessor"></span>
-<a name="l00241"></a>00241 
-<a name="l00242"></a>00242 
-<a name="l00243"></a>00243 <span class="preprocessor">#endif // PLANK_STANDARDHEADER_H</span>
+<a name="l00205"></a><a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">00205</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> <a class="code" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>;
+<a name="l00206"></a><a class="code" href="plank___standard_header_8h.html#adbbcbc6e38d8ee22ce905b125709b01c">00206</a> <span class="preprocessor">#define PLANK_FALSE ((PlankB)0)</span>
+<a name="l00207"></a><a class="code" href="plank___standard_header_8h.html#a887e193eb8be6ca64251225cd970dcfd">00207</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_TRUE ((PlankB)(!0))</span>
+<a name="l00208"></a>00208 <span class="preprocessor"></span>
+<a name="l00209"></a><a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">00209</a> <span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>;
+<a name="l00210"></a><a class="code" href="plank___standard_header_8h.html#a7000576d0ca505b484564ed79dc526c0">00210</a> <span class="keyword">typedef</span> <span class="keyword">const</span> <span class="keywordtype">void</span>* <a class="code" href="plank___standard_header_8h.html#a7000576d0ca505b484564ed79dc526c0">PlankConstantP</a>;
+<a name="l00211"></a><a class="code" href="plank___standard_header_8h.html#ae458838c7aece4e4cb7867853b20fea1">00211</a> <span class="preprocessor">#define PLANK_NULL ((PlankP)0)</span>
+<a name="l00212"></a>00212 <span class="preprocessor"></span>
+<a name="l00213"></a><a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">00213</a> <span class="keyword">typedef</span> <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a>;
+<a name="l00214"></a>00214 
+<a name="l00215"></a>00215 <span class="preprocessor">#include &quot;<a class="code" href="plank___result_8h.html">plank_Result.h</a>&quot;</span>
+<a name="l00216"></a>00216 
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218 <span class="preprocessor">#ifdef PLANK_32BIT</span>
+<a name="l00219"></a>00219 <span class="preprocessor"></span><span class="comment">//#warning PLANK_32BIT</span>
+<a name="l00220"></a>00220 <span class="preprocessor">#endif</span>
+<a name="l00221"></a>00221 <span class="preprocessor"></span>
+<a name="l00222"></a>00222 <span class="preprocessor">#ifdef PLANK_64BIT</span>
+<a name="l00223"></a>00223 <span class="preprocessor"></span><span class="comment">//#warning PLANK_64BIT</span>
+<a name="l00224"></a>00224 <span class="preprocessor">#endif</span>
+<a name="l00225"></a>00225 <span class="preprocessor"></span>
+<a name="l00226"></a>00226 <span class="preprocessor">#ifndef PLANK_LITTLEENDIAN</span>
+<a name="l00227"></a>00227 <span class="preprocessor"></span><span class="preprocessor">    #ifdef __LITTLE_ENDIAN__</span>
+<a name="l00228"></a>00228 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  1</span>
+<a name="l00229"></a>00229 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     0</span>
+<a name="l00230"></a>00230 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
+<a name="l00231"></a><a class="code" href="plank___standard_header_8h.html#ad1ea5874a35da801d80b80c98258a1a6">00231</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  0</span>
+<a name="l00232"></a><a class="code" href="plank___standard_header_8h.html#adebe0b7e9b5a43ca0fccfad6a2c73d5a">00232</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     1</span>
+<a name="l00233"></a>00233 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00234"></a>00234 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00235"></a>00235 <span class="preprocessor"></span>
+<a name="l00236"></a>00236 <span class="preprocessor">#include &quot;<a class="code" href="plank___memory_8h.html">plank_Memory.h</a>&quot;</span>
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238 <span class="comment">// this must be after the PLANK_LITTLEENDIAN / PLANK_BIGENDIAN defs</span>
+<a name="l00239"></a>00239 <span class="preprocessor">#include &quot;../containers/plank_ContainersMisc.h&quot;</span>
+<a name="l00240"></a>00240 
+<a name="l00241"></a><a class="code" href="plank___standard_header_8h.html#a3f7c6d61206f23beaa3f91a4a2ba105a">00241</a> <span class="preprocessor">#define PLANK_NAMEJOININTERNAL2(a,b)        a ## b</span>
+<a name="l00242"></a><a class="code" href="plank___standard_header_8h.html#a6683914fdf30bc8768d97fa2af369b63">00242</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL3(a,b,c)      a ## b ## c</span>
+<a name="l00243"></a><a class="code" href="plank___standard_header_8h.html#a17e56482e0f199203edd6c6934fbf489">00243</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL4(a,b,c,d)    a ## b ## c ## d</span>
+<a name="l00244"></a>00244 <span class="preprocessor"></span>
+<a name="l00245"></a><a class="code" href="plank___standard_header_8h.html#a22117047ca1658c456074c0ec341e6f7">00245</a> <span class="preprocessor">#define PLANK_NAMEJOIN2(a,b)       PLANK_NAMEJOININTERNAL2(a,b)</span>
+<a name="l00246"></a><a class="code" href="plank___standard_header_8h.html#a496b19b2391a61788fddfe3ce2eff2fc">00246</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN3(a,b,c)     PLANK_NAMEJOININTERNAL3(a,b,c)</span>
+<a name="l00247"></a><a class="code" href="plank___standard_header_8h.html#aac511e7d63fd338847a334f8d8095b52">00247</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN4(a,b,c,d)   PLANK_NAMEJOININTERNAL4(a,b,c,d)</span>
+<a name="l00248"></a>00248 <span class="preprocessor"></span>
+<a name="l00249"></a><a class="code" href="plank___standard_header_8h.html#ac55a1abfe9d28e22767c9d8fc80406c5">00249</a> <span class="preprocessor">#define PLANK_MAJOR_VERSION      0</span>
+<a name="l00250"></a><a class="code" href="plank___standard_header_8h.html#aa23fd3ea9705a4372f00e38fade23d19">00250</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_MINOR_VERSION      1</span>
+<a name="l00251"></a><a class="code" href="plank___standard_header_8h.html#a619b528c0d7bff67e8467cd033b9e890">00251</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_BUILDNUMBER        1</span>
+<a name="l00252"></a>00252 <span class="preprocessor"></span>
+<a name="l00253"></a>00253 
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255 <span class="preprocessor">#endif // PLANK_STANDARDHEADER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -329,7 +341,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:01:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:29 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

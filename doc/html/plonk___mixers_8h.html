@@ -69,7 +69,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">plonk_Mixers.h File Reference</div>  </div>
 </div>
@@ -81,10 +82,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_channel_mixer_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt;</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal&lt; SampleType &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mix all channels in a single unit to a single channel.  <a href="class_channel_mixer_channel_internal.html#details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html">ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal&lt; SampleType &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mix an array of units to a multichannel unit.  <a href="class_unit_mixer_channel_internal.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mixer_unit.html">MixerUnit&lt; SampleType &gt;</a></td></tr>
@@ -93,6 +92,10 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_mixer_unit.html">MixerUnit</a><br class="typebreak"/>
 &lt; PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___mixers_8h.html#a99c7bbf5e77564cf8d657411267dd329">Mixer</a></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___mixers_8h.html#afa3f5b18969a26bb88581daf63abb70f">PLONK_CHANNELDATA_DECLARE</a> (<a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a>, SampleType)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___mixers_8h.html#a1bcc3fe7ff55664ca3431a681cb49c22">PLONK_CHANNELDATA_DECLARE</a> (<a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>, SampleType)</td></tr>
 </table>
 <hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="a99c7bbf5e77564cf8d657411267dd329"></a><!-- doxytag: member="plonk_Mixers.h::Mixer" ref="a99c7bbf5e77564cf8d657411267dd329" args="" -->
@@ -101,6 +104,61 @@ Typedefs</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt;PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_mixer_unit.html">Mixer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="afa3f5b18969a26bb88581daf63abb70f"></a><!-- doxytag: member="plonk_Mixers.h::PLONK_CHANNELDATA_DECLARE" ref="afa3f5b18969a26bb88581daf63abb70f" args="(ChannelMixerChannelInternal, SampleType)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PLONK_CHANNELDATA_DECLARE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1bcc3fe7ff55664ca3431a681cb49c22"></a><!-- doxytag: member="plonk_Mixers.h::PLONK_CHANNELDATA_DECLARE" ref="a1bcc3fe7ff55664ca3431a681cb49c22" args="(UnitMixerChannelInternal, SampleType)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PLONK_CHANNELDATA_DECLARE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -123,7 +181,7 @@ Typedefs</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Jan 29 2012 12:02:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 24 2012 15:56:31 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
