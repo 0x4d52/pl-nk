@@ -49,6 +49,8 @@ BEGIN_PLONK_NAMESPACE
 class IOSAudioHost : public AudioHostBase<float>
 {
 public:
+    typedef AudioHostBase<float>::UnitType UnitType;
+    
     IOSAudioHost() throw();
     ~IOSAudioHost();
     
@@ -96,5 +98,41 @@ private:
 };
 
 END_PLONK_NAMESPACE
+
+#ifdef __OBJC__
+
+#define PLUNIT plonk::IOSAudioHost::UnitType
+
+@protocol PLAudioGraph <NSObject>
+@required
+- (PLUNIT)constructGraph;
+@end
+
+@interface PLAudioHost : NSObject  
+{
+    void* peer;
+    id<PLAudioGraph> delegate;
+}
+
+@property (nonatomic, retain) id delegate;
+@property (nonatomic, readonly) NSString* hostName; 
+@property (nonatomic, readonly) NSString* nativeHostName; 
+@property (nonatomic, readonly) NSString* inputName;
+@property (nonatomic, readonly) NSString* outputName; 
+@property (nonatomic, readonly) double cpuUsage;
+@property (nonatomic, readonly) BOOL isRunning;
+@property (nonatomic, readonly) PLUNIT outputUnit;
+@property (nonatomic) int numInputs;
+@property (nonatomic) int numOutputs;
+@property (nonatomic) int preferredBlockSize;
+@property (nonatomic) double preferredSampleRate;
+
+- (void)startHost;
+- (void)stopHost;
+
+@end
+
+#endif
+
 
 #endif  // PLONK_IOSAUDIOHOST_H

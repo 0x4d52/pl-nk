@@ -49,12 +49,21 @@
 #include "../../../src/plonk/plonk.h"
 #include "../../../src/plonk/hosts/ios/plonk_IOSAudioHost.h"
 
-class AudioHost : public IOSAudioHost
+//class AudioHost : public IOSAudioHost
+//{
+//public:
+//    AudioHost();
+//    
+//    Unit constructGraph();
+//};
+
+
+@interface AudioHost : PLAudioHost<PLAudioGraph>
 {
-public:
-    AudioHost();
-    
-    Unit constructGraph();
-};
+}
+
+- (Unit)constructGraph;
+
+@end
 
 #endif // AUDIOHOST_H

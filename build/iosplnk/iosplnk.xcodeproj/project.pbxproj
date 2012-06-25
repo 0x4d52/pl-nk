@@ -82,7 +82,7 @@
 		A80D19421585EC0500AAB01B /* plonk_TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80D18FD1585EC0500AAB01B /* plonk_TimeStamp.cpp */; };
 		A80D19431585EC0500AAB01B /* plonk_RNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80D19081585EC0500AAB01B /* plonk_RNG.cpp */; };
 		A80D194A158633CF00AAB01B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80D1949158633CF00AAB01B /* AudioToolbox.framework */; };
-		A80D19531587819500AAB01B /* AudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80D19521587819500AAB01B /* AudioHost.cpp */; };
+		A80D19531587819500AAB01B /* AudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A80D19521587819500AAB01B /* AudioHost.mm */; };
 		A82416811588C10C004CA012 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = A82416801588C10C004CA012 /* notes.txt */; };
 		A8241691158C77AF004CA012 /* plonk_IOSAudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A824168F158C77AF004CA012 /* plonk_IOSAudioHost.mm */; };
 		A82416B7158E4CF3004CA012 /* plonk_JuceAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82416B5158E4CF3004CA012 /* plonk_JuceAudioHost.cpp */; };
@@ -350,7 +350,7 @@
 		A80D19091585EC0500AAB01B /* plonk_RNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_RNG.h; sourceTree = "<group>"; };
 		A80D1949158633CF00AAB01B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A80D19511587819500AAB01B /* AudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHost.h; sourceTree = "<group>"; };
-		A80D19521587819500AAB01B /* AudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioHost.cpp; sourceTree = "<group>"; };
+		A80D19521587819500AAB01B /* AudioHost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHost.mm; sourceTree = "<group>"; };
 		A82416801588C10C004CA012 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
 		A82416821588C13A004CA012 /* plonk_AudioHostBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_AudioHostBase.h; sourceTree = "<group>"; };
 		A824168F158C77AF004CA012 /* plonk_IOSAudioHost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = plonk_IOSAudioHost.mm; sourceTree = "<group>"; };
@@ -412,7 +412,7 @@
 				A80D17DF1585EAB500AAB01B /* SecondViewController.h */,
 				A80D17E01585EAB500AAB01B /* SecondViewController.mm */,
 				A80D19511587819500AAB01B /* AudioHost.h */,
-				A80D19521587819500AAB01B /* AudioHost.cpp */,
+				A80D19521587819500AAB01B /* AudioHost.mm */,
 				A80D17F81585EC0500AAB01B /* src */,
 				A80D17CD1585EAB500AAB01B /* Supporting Files */,
 				A80D17F71585EBCA00AAB01B /* Resources */,
@@ -1148,7 +1148,7 @@
 				A80D19411585EC0500AAB01B /* plonk_SampleRate.cpp in Sources */,
 				A80D19421585EC0500AAB01B /* plonk_TimeStamp.cpp in Sources */,
 				A80D19431585EC0500AAB01B /* plonk_RNG.cpp in Sources */,
-				A80D19531587819500AAB01B /* AudioHost.cpp in Sources */,
+				A80D19531587819500AAB01B /* AudioHost.mm in Sources */,
 				A8241691158C77AF004CA012 /* plonk_IOSAudioHost.mm in Sources */,
 				A82416B7158E4CF3004CA012 /* plonk_JuceAudioHost.cpp in Sources */,
 			);

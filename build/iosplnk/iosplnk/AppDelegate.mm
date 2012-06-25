@@ -53,10 +53,12 @@
 {
     if (self = [super init])
     {
-        host.getHostName().print ("Host");
-        host.getNativeHostName().print ("Native");
-        host.getInputName().print ("Input");
-        host.getOutputName().print ("Output");
+//        host.getHostName().print ("Host");
+//        host.getNativeHostName().print ("Native");
+//        host.getInputName().print ("Input");
+//        host.getOutputName().print ("Output");
+        
+        host = [[AudioHost alloc] init];
     }
     
     return self;
@@ -66,7 +68,8 @@
 {
     [_window release];
     [_tabBarController release];
-        
+    [host release];
+    
     [super dealloc];
 }
 
@@ -88,8 +91,10 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
-    host.setPreferredBlockSize (2048);
-    host.startHost();
+//    host.setPreferredBlockSize (2048);
+//    host.startHost();
+    
+    [host startHost];
     
     return YES;
 }

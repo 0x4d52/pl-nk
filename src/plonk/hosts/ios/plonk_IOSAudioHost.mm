@@ -403,5 +403,149 @@ void IOSAudioHost::interruptionCallback (UInt32 inInterruption) throw()
 
 END_PLONK_NAMESPACE
 
+#ifdef __OBJC__
+
+BEGIN_PLONK_NAMESPACE
+
+class IOAudioHostPeer : public IOSAudioHost
+{
+public:
+    typedef IOSAudioHost::UnitType UnitType;
+    
+    IOAudioHostPeer (PLAudioHost* peerToUse)
+    :   peer (peerToUse)
+    {
+    }
+    
+    UnitType constructGraph() throw()
+    {
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraph];
+    }
+    
+private:
+    PLAudioHost* peer; // no need to retain as the Obj-C peer owns this object
+    
+    IOAudioHostPeer();
+};
+
+END_PLONK_NAMESPACE
+
+#define PLPEERTYPE plonk::IOAudioHostPeer
+#define PLPEER  ((PLPEERTYPE*)peer)
+
+@implementation PLAudioHost
+
+@synthesize delegate;
+
+- (id)init
+{
+    if (self = [super init])
+    {
+        peer = new PLPEERTYPE (self);
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    delete PLPEER;
+    [super dealloc];
+}
+
+- (NSString*)hostName
+{
+    return [NSString stringWithUTF8String:PLPEER->getHostName().getArray()];
+}
+
+- (NSString*)nativeHostName
+{
+    return [NSString stringWithUTF8String:PLPEER->getNativeHostName().getArray()];
+}
+
+- (NSString*)inputName
+{
+    return [NSString stringWithUTF8String:PLPEER->getInputName().getArray()];
+}
+
+- (NSString*)outputName
+{
+    return [NSString stringWithUTF8String:PLPEER->getOutputName().getArray()];
+}
+
+- (double)cpuUsage
+{
+    return PLPEER->getCpuUsage();
+}
+
+- (BOOL)isRunning
+{
+    return PLPEER->getIsRunning() ? YES : NO;
+}
+
+- (PLUNIT)outputUnit
+{
+    return PLPEER->getOutputUnit();
+}
+
+- (int)numInputs
+{
+    return PLPEER->getNumInputs();
+}
+
+- (void)setNumInputs:(int)numInputs
+{
+    PLPEER->setNumInputs (numInputs);
+}
+
+- (int)numOutputs
+{
+    return PLPEER->getNumOutputs();
+}
+
+- (void)setNumOutputs:(int)numOutputs
+{
+    PLPEER->setNumOutputs (numOutputs);
+}
+
+- (int)preferredBlockSize
+{
+    return PLPEER->getPreferredBlockSize();
+}
+
+- (void)setPreferredBlockSize:(int)preferredBlockSize
+{
+    PLPEER->setPreferredBlockSize (preferredBlockSize);
+}
+
+- (double)preferredSampleRate
+{
+    return PLPEER->getPreferredSampleRate();
+}
+
+- (void)setPreferredSampleRate:(double)preferredSampleRate
+{
+    PLPEER->setPreferredSampleRate (preferredSampleRate);
+}
+
+- (void)startHost
+{
+    PLPEER->startHost();
+}
+
+- (void)stopHost
+{
+    PLPEER->stopHost();
+}
+
+@end
+
+#undef PLPEERTYPE
+#undef PLPEER
+
+#endif
+
+
 #endif // PLONK_AUDIOHOST_IOS
 

@@ -45,7 +45,7 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 {
-    AudioHost host;
+    AudioHost* host;
 }
 
 @property (strong, nonatomic) UIWindow *window;
