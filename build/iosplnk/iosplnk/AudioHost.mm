@@ -77,7 +77,6 @@
 
 #import "AudioHost.h"
 
-
 @implementation AudioHost
 
 - (id)init
@@ -85,6 +84,11 @@
     if (self = [super init])
     {
         self.delegate = self;
+        
+        freq = 500.f;
+        amp = 0.2f;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"update" object:self];
     }
     
     return self;
@@ -92,7 +96,27 @@
 
 - (Unit)constructGraph
 {
-    return Sine::ar (1000, 0.2);
+    return Sine::ar (freq, amp);
+}
+
+- (float)freq
+{
+    return freq.getValue();
+}
+
+- (void)setFreq:(float)value
+{
+    freq.setValue (value);
+}
+
+- (float)amp
+{
+    return amp.getValue();
+}
+
+- (void)setAmp:(float)value
+{
+    amp.setValue (value);
 }
 
 @end

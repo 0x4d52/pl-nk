@@ -37,6 +37,8 @@
  -------------------------------------------------------------------------------
  */
 #import "FirstViewController.h"
+#import "AppDelegate.h"
+#import "AudioHost.h"
 
 @interface FirstViewController ()
 
@@ -57,13 +59,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(updateNotify) 
+                                                 name:@"update" 
+                                               object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self updateParameters];
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -74,5 +84,21 @@
         return YES;
     }
 }
+
+- (IBAction)sliderMoved:(UISlider*)sender
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AudioHost* host = app.host;
+    host.freq = slider.value;
+}
+
+-(void)updateParameters
+{
+    // update the view from the audio settings
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AudioHost* host = app.host;
+    slider.value = host.freq;
+}
+
 
 @end

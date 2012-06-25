@@ -39,5 +39,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SecondViewController : UIViewController
+{
+    IBOutlet UISlider* slider;
+}
+
+- (IBAction)sliderMoved:(UISlider*)sender;
 
 @end

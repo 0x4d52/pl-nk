@@ -37,6 +37,8 @@
  -------------------------------------------------------------------------------
  */
 #import "SecondViewController.h"
+#import "AppDelegate.h"
+#import "AudioHost.h"
 
 @interface SecondViewController ()
 
@@ -57,7 +59,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(updateNotify) 
+                                                 name:@"update" 
+                                               object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self updateParameters];
 }
 
 - (void)viewDidUnload
@@ -74,5 +84,21 @@
         return YES;
     }
 }
+
+- (IBAction)sliderMoved:(UISlider*)sender
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AudioHost* host = app.host;
+    host.amp = slider.value;
+}
+
+-(void)updateParameters
+{
+    // update the view from the audio settings
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AudioHost* host = app.host;
+    slider.value = host.amp;
+}
+
 
 @end

@@ -432,7 +432,7 @@ private:
 END_PLONK_NAMESPACE
 
 #define PLPEERTYPE plonk::IOAudioHostPeer
-#define PLPEER  ((PLPEERTYPE*)peer)
+#define PLPEER ((PLPEERTYPE*)peer)
 
 @implementation PLAudioHost
 

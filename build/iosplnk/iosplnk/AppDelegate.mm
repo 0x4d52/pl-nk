@@ -48,6 +48,7 @@
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
+@synthesize host;
 
 - (id)init
 {

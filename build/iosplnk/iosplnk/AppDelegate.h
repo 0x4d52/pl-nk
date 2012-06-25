@@ -50,5 +50,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UITabBarController *tabBarController;
+@property (nonatomic, retain) AudioHost *host;
 
 @end

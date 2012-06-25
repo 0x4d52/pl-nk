@@ -172,7 +172,7 @@ public:
     }
     
     /** Sets the current value. */
-    void setValue(Type const& newValue) throw()
+    void setValue (Type const& newValue) throw()
     {
         this->getInternal()->setValue (newValue);
     }    

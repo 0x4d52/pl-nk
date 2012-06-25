@@ -40,5 +40,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FirstViewController : UIViewController
+{
+    IBOutlet UISlider* slider;
+}
+
+- (IBAction)sliderMoved:(UISlider*)sender;
 
 @end

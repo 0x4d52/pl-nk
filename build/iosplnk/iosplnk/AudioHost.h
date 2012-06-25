@@ -49,18 +49,15 @@
 #include "../../../src/plonk/plonk.h"
 #include "../../../src/plonk/hosts/ios/plonk_IOSAudioHost.h"
 
-//class AudioHost : public IOSAudioHost
-//{
-//public:
-//    AudioHost();
-//    
-//    Unit constructGraph();
-//};
-
 
 @interface AudioHost : PLAudioHost<PLAudioGraph>
 {
+    FloatVariable freq;
+    FloatVariable amp;
 }
+
+@property (nonatomic) float freq;
+@property (nonatomic) float amp;
 
 - (Unit)constructGraph;
 
