@@ -164,9 +164,11 @@ protected:
         }
         else if (numOutputs > 0)
         {
-            float* const output = this->outputs.atUnchecked (0).getArray();
             for (i = 0; i < numOutputs; ++i)
+            {
+                float* const output = this->outputs.atUnchecked (i).getArray();
                 Floats::zeroData (output, blockSize);         
+            }
         }
         
         this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * blockSize);
