@@ -145,7 +145,18 @@ Text IOSAudioHost::getInputName() const throw()
 
 Text IOSAudioHost::getOutputName() const throw()
 {
-    return "";
+    Text result;
+    CFStringRef audioRoute = 0;
+	UInt32 propertySize = sizeof (audioRoute);
+    
+	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &audioRoute) == noErr)
+	{
+		NSString* route = (NSString*)audioRoute;
+        result = [route UTF8String];
+		CFRelease (audioRoute);
+	}
+
+    return result;
 }
 
 void IOSAudioHost::stopHost() throw()

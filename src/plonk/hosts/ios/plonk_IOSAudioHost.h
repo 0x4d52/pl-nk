@@ -101,7 +101,7 @@ private:
 
 END_PLONK_NAMESPACE
 
-#ifdef __OBJC__
+#if defined(__OBJC__) || DOXYGEN 
 
 #define PLUNIT plonk::IOSAudioHost::UnitType
 

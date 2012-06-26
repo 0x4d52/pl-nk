@@ -53,12 +53,7 @@
 - (id)init
 {
     if (self = [super init])
-    {
-//        host.getHostName().print ("Host");
-//        host.getNativeHostName().print ("Native");
-//        host.getInputName().print ("Input");
-//        host.getOutputName().print ("Output");
-        
+    {        
         host = [[AudioHost alloc] init];
     }
     
@@ -91,11 +86,15 @@
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2, nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
-    
-//    host.setPreferredBlockSize (2048);
-//    host.startHost();
-    
+        
     [host startHost];
+    
+    NSLog(@"Host: %@", host.hostName);
+    NSLog(@"Native: %@", host.nativeHostName);
+    NSLog(@"Input: %@", host.inputName);
+    NSLog(@"Output: %@", host.outputName);
+    
+
     
     return YES;
 }
