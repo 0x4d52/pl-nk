@@ -46,6 +46,8 @@
 
 BEGIN_PLONK_NAMESPACE
 
+/** An audio host for the iOS platform.
+ @see PLAudioHost */
 class IOSAudioHost : public AudioHostBase<float>
 {
 public:
@@ -103,31 +105,48 @@ END_PLONK_NAMESPACE
 
 #define PLUNIT plonk::IOSAudioHost::UnitType
 
+/** A protocol for a PLAudioHost delegate.
+ This class should contain a constructGraph method that returns a Unit 
+ conatining the audio graph to render at runtime. 
+ @see PLAudioHost */
 @protocol PLAudioGraph <NSObject>
 @required
 - (PLUNIT)constructGraph;
 @end
 
+/** An Objective-C audio host for the iOS platform.
+ This is simply an adapter for the C++ IOSAudioHost. You need to set an object
+ that implements the PLAudioGraph protocol in the init method of your derived 
+ class.
+ 
+ When running in the simulator the preferred sample rate and block size
+ properties may be ignored and default to the hardware settings of the Mac
+ hosting the simulator.
+ 
+ @see PLAudioGraph */
 @interface PLAudioHost : NSObject  
 {
     void* peer;
     id<PLAudioGraph> delegate;
 }
 
-@property (nonatomic, retain) id delegate;
-@property (nonatomic, readonly) NSString* hostName; 
-@property (nonatomic, readonly) NSString* nativeHostName; 
-@property (nonatomic, readonly) NSString* inputName;
-@property (nonatomic, readonly) NSString* outputName; 
-@property (nonatomic, readonly) double cpuUsage;
-@property (nonatomic, readonly) BOOL isRunning;
-@property (nonatomic, readonly) PLUNIT outputUnit;
-@property (nonatomic) int numInputs;
-@property (nonatomic) int numOutputs;
-@property (nonatomic) int preferredBlockSize;
-@property (nonatomic) double preferredSampleRate;
+@property (nonatomic, retain) id delegate;                  ///< The delegat that contains the constructGraph method.
+@property (nonatomic, readonly) NSString* hostName;         ///< The host name - always "iOS".
+@property (nonatomic, readonly) NSString* nativeHostName;   ///< The native host name - currently always "RemoteIO".
+@property (nonatomic, readonly) NSString* inputName;        ///< The name of the input device.
+@property (nonatomic, readonly) NSString* outputName;       ///< The name of the output device.
+@property (nonatomic, readonly) double cpuUsage;            ///< The current CPU usage of the DSP loop.
+@property (nonatomic, readonly) BOOL isRunning;             ///< Is the host running.
+@property (nonatomic, readonly) PLUNIT outputUnit;          ///< The output unit of the host.
+@property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
+@property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.
+@property (nonatomic) int preferredBlockSize;               ///< The preferred block size, only set this BEFORE sending the startHost message.
+@property (nonatomic) double preferredSampleRate;           ///< The preferred sample rate, only set this BEFORE sending the startHost message
 
+/** Start the host running. */
 - (void)startHost;
+
+/** Stop the host running. */
 - (void)stopHost;
 
 @end
