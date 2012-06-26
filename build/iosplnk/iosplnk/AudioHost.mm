@@ -89,7 +89,7 @@
         self.preferredSampleRate = 22050.0;
         
         freq = 500.f;
-        amp = 0.2f;
+        amp = 0.1f;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"update" object:self];
     }

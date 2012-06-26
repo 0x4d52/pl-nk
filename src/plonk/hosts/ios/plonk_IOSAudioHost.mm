@@ -117,8 +117,8 @@ static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[],
 
 IOSAudioHost::IOSAudioHost() throw()
 :   hwSampleRate (0.0),         // let the hardware choose
-    cpuUsage (0.0),
-    audioCategory (kAudioSessionCategory_PlayAndRecord)
+cpuUsage (0.0)//,
+//    audioCategory (kAudioSessionCategory_PlayAndRecord)
 {    
 }
 
@@ -140,22 +140,68 @@ Text IOSAudioHost::getNativeHostName() const throw()
 
 Text IOSAudioHost::getInputName() const throw()
 {
-    return "";
+    Text result = "Default Input";
+    
+    CFDictionaryRef dictionary = 0;
+	UInt32 propertySize = sizeof (dictionary);
+    
+	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRouteDescription, &propertySize, &dictionary) == noErr)
+	{
+        CFArrayRef array = (CFArrayRef)CFDictionaryGetValue (dictionary, kAudioSession_AudioRouteKey_Inputs);
+        
+        if (array != nil)
+        {
+            for (int i = 0; i < CFArrayGetCount (array); ++i)
+            {  
+                CFDictionaryRef dictionary2 = (CFDictionaryRef)CFArrayGetValueAtIndex (array, i);
+                NSString* name = (NSString*)CFDictionaryGetValue (dictionary2, kAudioSession_AudioRouteKey_Type);
+                result = [name UTF8String];
+            }
+        }
+        
+		CFRelease (dictionary);
+	}
+    
+    return result;
 }
 
 Text IOSAudioHost::getOutputName() const throw()
 {
-    Text result;
-    CFStringRef audioRoute = 0;
-	UInt32 propertySize = sizeof (audioRoute);
+//    Text result;
+//    CFStringRef audioRoute = 0;
+//	UInt32 propertySize = sizeof (audioRoute);
+//    
+//	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &audioRoute) == noErr)
+//	{
+//		NSString* route = (NSString*)audioRoute;
+//        result = [route UTF8String];
+//		CFRelease (audioRoute);
+//	}
+//
+//    return result;
     
-	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &audioRoute) == noErr)
+    Text result = "Default Output";
+    
+    CFDictionaryRef dictionary = 0;
+	UInt32 propertySize = sizeof (dictionary);
+    
+	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRouteDescription, &propertySize, &dictionary) == noErr)
 	{
-		NSString* route = (NSString*)audioRoute;
-        result = [route UTF8String];
-		CFRelease (audioRoute);
+        CFArrayRef array = (CFArrayRef)CFDictionaryGetValue (dictionary, kAudioSession_AudioRouteKey_Outputs);
+        
+        if (array != nil)
+        {
+            for (int i = 0; i < CFArrayGetCount (array); ++i)
+            {  
+                CFDictionaryRef dictionary2 = (CFDictionaryRef)CFArrayGetValueAtIndex (array, i);
+                NSString* name = (NSString*)CFDictionaryGetValue (dictionary2, kAudioSession_AudioRouteKey_Type);
+                result = [name UTF8String];
+            }
+        }
+        
+		CFRelease (dictionary);
 	}
-
+    
     return result;
 }
 
@@ -182,6 +228,13 @@ void IOSAudioHost::startHost() throw()
 	// session
 	AudioSessionInitialize (NULL, NULL, InterruptionListener, this);
 	AudioSessionSetActive (true);
+    
+    UInt32 audioCategory = kAudioSessionCategory_PlayAndRecord; 
+    
+    const Text audioCategoryKey ("audioCategory");
+    
+    if (getOtherOptions().containsKey (audioCategoryKey))
+        audioCategory = (UInt32)getOtherOptions().at (audioCategoryKey).asUnchecked<IntVariable>();
 	
 	AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof(audioCategory), &audioCategory);
 	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, PropertyListener, this);
@@ -379,23 +432,26 @@ void IOSAudioHost::propertyCallback (AudioSessionPropertyID inID,
 {
     if (getIsRunning()) return;
 	
-	if (inPropertyValue)
-	{
-		CFDictionaryRef routeChangeDictionary = (CFDictionaryRef)inPropertyValue;
-		CFNumberRef routeChangeReasonRef = 
-            (CFNumberRef)CFDictionaryGetValue (routeChangeDictionary, CFSTR (kAudioSession_AudioRouteChangeKey_Reason));
-		
-		SInt32 routeChangeReason;
-		CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, &routeChangeReason);
-		
-		CFStringRef newAudioRoute;
-		UInt32 propertySize = sizeof (CFStringRef);
-		AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &newAudioRoute);
-		
-		printf ("route=%s\n", CFStringGetCStringPtr (newAudioRoute, CFStringGetSystemEncoding()));
+    if (inID == kAudioSessionProperty_AudioRouteChange)
+    {
+        if (inPropertyValue)
+        {
+            CFDictionaryRef routeChangeDictionary = (CFDictionaryRef)inPropertyValue;
+            CFNumberRef routeChangeReasonRef = 
+                (CFNumberRef)CFDictionaryGetValue (routeChangeDictionary, CFSTR (kAudioSession_AudioRouteChangeKey_Reason));
+            
+            SInt32 routeChangeReason;
+            CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, &routeChangeReason);
+            
+            CFStringRef newAudioRoute;
+            UInt32 propertySize = sizeof (CFStringRef);
+            AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &newAudioRoute);
+            
+            printf ("route=%s\n", CFStringGetCStringPtr (newAudioRoute, CFStringGetSystemEncoding()));
+        }
+
+        restart();
     }
-	
-    restart();
 }
 
 void IOSAudioHost::interruptionCallback (UInt32 inInterruption) throw()
@@ -538,6 +594,29 @@ END_PLONK_NAMESPACE
 - (void)setPreferredSampleRate:(double)preferredSampleRate
 {
     PLPEER->setPreferredSampleRate (preferredSampleRate);
+}
+
+- (UInt32)audioCategory
+{
+    const plonk::Text audioCategoryKey ("audioCategory");
+    
+    if (PLPEER->getOtherOptions().containsKey (audioCategoryKey))
+    {
+        return (UInt32)PLPEER->getOtherOptions().at (audioCategoryKey).asUnchecked<plonk::IntVariable>().getValue();
+    }
+    else 
+    {
+        UInt32 audioCategory;
+        UInt32 size = sizeof (audioCategory); 
+        AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &audioCategory);
+        return audioCategory;
+    }
+}
+
+- (void)setAudioCategory:(UInt32)audioCategory
+{
+    const plonk::Text audioCategoryKey ("audioCategory");
+    PLPEER->getOtherOptions().at (audioCategoryKey) = plonk::IntVariable ((int)audioCategory);
 }
 
 - (void)startHost

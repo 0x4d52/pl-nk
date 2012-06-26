@@ -93,8 +93,63 @@
     NSLog(@"Native: %@", host.nativeHostName);
     NSLog(@"Input: %@", host.inputName);
     NSLog(@"Output: %@", host.outputName);
-    
 
+//	CFArrayRef array = 0;
+//	UInt32 propertySize = sizeof (array);
+//    
+//	if (AudioSessionGetProperty (kAudioSessionProperty_InputSources, &propertySize, &array) == noErr)
+//	{
+//        for (int i = 0; i < CFArrayGetCount (array); i++)
+//        {
+//            CFDictionaryRef dictionary = (CFDictionaryRef)CFArrayGetValueAtIndex (array, i);
+//            
+//            /*
+//             Available with iOS 5.0 or greater
+//             For use with certain accessories, such as some USB audio devices, that support input source selection.  
+//             If the attached accessory supports source selection, provides a description of the available sources.
+//             Not to be confused with kAudioSessionProperty_AudioRouteDescription, which provides a description
+//             of the current audio route.  
+//             A CFArray of CFDictionaries with the keys listed below.  If no input sources are 
+//             available, a valid CFArray with 0 entries will be returned by a get operation.
+//             Key = kAudioSession_InputSourceKey_ID; value is a CFNumberRef representing a system-defined identifier
+//             for the input source.  This is the identifier to be used when setting the input source.  
+//             Key = kAudioSession_InputSourceKey_Description; value is a CFStringRef description of the input source 
+//             suitable for displaying in a user interface.  Examples: "Internal Mic", "External Mic", 
+//             "Ext 48V Mic", "Instrument", "External Line Connector"
+//             */
+//            
+//            if (CFDictionaryContainsKey (dictionary, kAudioSession_InputSourceKey_Description))
+//            {
+//                NSString* name = (NSString*)CFDictionaryGetValue (dictionary, kAudioSession_InputSourceKey_Description);
+//                
+//                NSLog(@"Input source [%d]: %@", i, name);
+//            }
+//        }
+//        
+//		CFRelease (array);
+//	}
+
+//    CFDictionaryRef dictionary = 0;
+//	UInt32 propertySize = sizeof (dictionary);
+//    
+//	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRouteDescription, &propertySize, &dictionary) == noErr)
+//	{
+//        CFArrayRef array = (CFArrayRef)CFDictionaryGetValue (dictionary, kAudioSession_AudioRouteKey_Inputs);
+//        
+//        if (array != nil)
+//        {
+//            for (int i = 0; i < CFArrayGetCount (array); ++i)
+//            {  
+//                CFDictionaryRef dictionary2 = (CFDictionaryRef)CFArrayGetValueAtIndex (array, i);
+//                
+//                NSString* name = (NSString*)CFDictionaryGetValue (dictionary2, kAudioSession_AudioRouteKey_Type);
+//                
+//                NSLog(@"inputs [%d]: %@", i, name);
+//            }
+//        }
+//        
+//		CFRelease (dictionary);
+//	}
     
     return YES;
 }

@@ -96,7 +96,7 @@ private:
 	UInt32						numOutputChannels;
 //	bool						isRunning;    
 	double						cpuUsage;
-    UInt32                      audioCategory;
+//    UInt32                      audioCategory;
 };
 
 END_PLONK_NAMESPACE
@@ -141,7 +141,8 @@ END_PLONK_NAMESPACE
 @property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int preferredBlockSize;               ///< The preferred block size, only set this BEFORE sending the startHost message.
-@property (nonatomic) double preferredSampleRate;           ///< The preferred sample rate, only set this BEFORE sending the startHost message
+@property (nonatomic) double preferredSampleRate;           ///< The preferred sample rate, only set this BEFORE sending the startHost message.
+@property (nonatomic) UInt32 audioCategory;                 ///< The audio session category, only set this BEFORE sending the startHost message.
 
 /** Start the host running. */
 - (void)startHost;

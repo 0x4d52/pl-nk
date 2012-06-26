@@ -52,7 +52,8 @@ public:
     typedef UnitBase<SampleType>                UnitType;
     typedef BusBuffer<SampleType>               BusType;
     typedef PLONK_BUSARRAYBASETYPE<BusType>     BussesType;
-
+    typedef Dictionary<Dynamic>                 OptionDictionary;
+    
     /** Constructor */
     AudioHostBase() throw()
     :   preferredSampleRate (0.0),
@@ -97,6 +98,9 @@ public:
     /** Set the number of audio inputs required.
      This must be called before startHost() to have any effect. */
     void setNumOutputs (const int numOutputs) throw();
+    
+    /** Get other (normally platform dependent) options. */
+    OptionDictionary getOtherOptions() const throw() { return otherOptions; }
                 
 protected:
     /** Get the input buffers. @internal */
@@ -192,6 +196,7 @@ private:
     double preferredSampleRate;
     int preferredBlockSize;
 	bool isRunning;    
+    OptionDictionary otherOptions;
 
     ProcessInfo info;
     UnitType outputUnit;  
