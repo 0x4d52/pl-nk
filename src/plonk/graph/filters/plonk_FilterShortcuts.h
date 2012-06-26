@@ -105,6 +105,23 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef LPFP1Unit<PLONK_TYPE_DEFAULT> LPFP1;
 
@@ -168,6 +185,23 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& duration = SampleType (0.2),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
+        
+        if (duration.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef LagUnit<PLONK_TYPE_DEFAULT> Lag;
 
@@ -230,6 +264,23 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef HPFP1Unit<PLONK_TYPE_DEFAULT> HPFP1;
 
@@ -293,6 +344,23 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& duration = SampleType (0.2),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
+        
+        if (duration.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef DecayUnit<PLONK_TYPE_DEFAULT> Decay;
 
@@ -361,6 +429,24 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& q = SampleType (1),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef RLPFUnit<PLONK_TYPE_DEFAULT> RLPF;
 
@@ -426,6 +512,24 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& q = SampleType (1),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef RHPFUnit<PLONK_TYPE_DEFAULT> RHPF;
 
@@ -496,6 +600,25 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& s = SampleType (1),
+                        UnitType const& gain = SampleType (0),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef LowShelfUnit<PLONK_TYPE_DEFAULT> LowShelf;
 
@@ -566,6 +689,25 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& s = SampleType (1),
+                        UnitType const& gain = SampleType (0),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef HighShelfUnit<PLONK_TYPE_DEFAULT> HighShelf;
 
@@ -636,6 +778,25 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& q = SampleType (1),
+                        UnitType const& gain = SampleType (0),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, gain, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef NotchUnit<PLONK_TYPE_DEFAULT> Notch;
 
@@ -701,6 +862,24 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& bandwidth = SampleType (1),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef BPFUnit<PLONK_TYPE_DEFAULT> BPF;
 
@@ -766,6 +945,24 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& bandwidth = SampleType (1),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef BRFUnit<PLONK_TYPE_DEFAULT> BRF;
 
@@ -832,6 +1029,23 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef LPFUnit<PLONK_TYPE_DEFAULT> LPF;
 
@@ -895,6 +1109,23 @@ public:
         
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
+    
+    static UnitType kr (UnitType const& input,
+                        UnitType const& frequency = SampleType (1200),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+    {
+        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        
+        if (frequency.isConstant() == false)
+            for (int i = 0; i < coeffs.getNumChannels(); ++i)
+                coeffs.put (i, ResampleType::kr (coeffs[i]));
+        
+        return FilterType::ar (input.kr(), coeffs, mul, add, 
+                               BlockSize::getControlRateBlockSize(), 
+                               SampleRate::getControlRate());
+    }    
 };
 typedef HPFUnit<PLONK_TYPE_DEFAULT> HPF;
 
