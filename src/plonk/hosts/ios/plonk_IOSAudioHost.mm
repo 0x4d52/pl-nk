@@ -46,6 +46,8 @@ BEGIN_PLONK_NAMESPACE
 
 END_PLONK_NAMESPACE
 #include "plonk_IOSAudioHost.h"
+static const plonk::Text categoryKey    = "category";
+static const plonk::Text modeKey        = "mode";
 BEGIN_PLONK_NAMESPACE
 
 //------------------------------------------------------------------------------
@@ -166,20 +168,7 @@ Text IOSAudioHost::getInputName() const throw()
 }
 
 Text IOSAudioHost::getOutputName() const throw()
-{
-//    Text result;
-//    CFStringRef audioRoute = 0;
-//	UInt32 propertySize = sizeof (audioRoute);
-//    
-//	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &audioRoute) == noErr)
-//	{
-//		NSString* route = (NSString*)audioRoute;
-//        result = [route UTF8String];
-//		CFRelease (audioRoute);
-//	}
-//
-//    return result;
-    
+{    
     Text result = "Default Output";
     
     CFDictionaryRef dictionary = 0;
@@ -215,10 +204,7 @@ void IOSAudioHost::stopHost() throw()
 }
 
 void IOSAudioHost::startHost() throw()
-{
-    // start the AU
-    // need to know numchans, sr and blocksize in advance
-    
+{    
     UInt32 size;
     
 	// render proc
@@ -230,15 +216,19 @@ void IOSAudioHost::startHost() throw()
 	AudioSessionSetActive (true);
     
     UInt32 audioCategory = kAudioSessionCategory_PlayAndRecord; 
-    
-    const Text audioCategoryKey ("audioCategory");
-    
-    if (getOtherOptions().containsKey (audioCategoryKey))
-        audioCategory = (UInt32)getOtherOptions().at (audioCategoryKey).asUnchecked<IntVariable>();
+        
+    if (getOtherOptions().containsKey (categoryKey))
+        audioCategory = (UInt32)getOtherOptions().at (categoryKey).asUnchecked<IntVariable>();
 	
-	AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof(audioCategory), &audioCategory);
+	AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (audioCategory), &audioCategory);
+    
+    if (getOtherOptions().containsKey (modeKey))
+    {
+        UInt32 mode = (UInt32)getOtherOptions().at (modeKey).asUnchecked<IntVariable>();
+        AudioSessionSetProperty (kAudioSessionProperty_Mode, sizeof (mode), &mode);
+    }
+    
 	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, PropertyListener, this);
-	
 	fixAudioRouteIfSetToReceiver();
 	
     const double preferredSampleRate = getPreferredSampleRate();
@@ -255,7 +245,7 @@ void IOSAudioHost::startHost() throw()
     if (getPreferredBlockSize() > 0)
     {
         bufferDuration = getPreferredBlockSize() / hwSampleRate;
-        AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(bufferDuration), &bufferDuration);
+        AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof (bufferDuration), &bufferDuration);
 	}
     
 	size = sizeof (UInt32);
@@ -276,7 +266,7 @@ void IOSAudioHost::startHost() throw()
 	bufferSize = (int)(hwSampleRate * bufferDuration + 0.5);
 	floatBuffer = new float[bufferSize * plonk::max (getNumOutputs(), getNumInputs())];
     
-	printf("IOSAudioHost: SR=%f buffer=%fs (%d samples)\n", hwSampleRate, bufferDuration, bufferSize);
+//	printf("IOSAudioHost: SR=%f buffer=%fs (%d samples)\n", hwSampleRate, bufferDuration, bufferSize);
     
     SampleRate::getDefault().setValue (hwSampleRate);
     BlockSize::getDefault().setValue (bufferSize); 
@@ -289,7 +279,7 @@ void IOSAudioHost::startHost() throw()
 }
 
 
-// need to call hostStopped()
+// need to call hostStopped() - may be in the property listener?
 
 void IOSAudioHost::setFormat() throw()
 {
@@ -337,7 +327,7 @@ void IOSAudioHost::restart() throw()
 	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
 	AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
 	
-	printf ("inputs=%d outputs=%d audioInputIsAvailable=%d\n", (int)numInputChannels, (int)numOutputChannels, (int)audioInputIsAvailable);
+//	printf ("inputs=%d outputs=%d audioInputIsAvailable=%d\n", (int)numInputChannels, (int)numOutputChannels, (int)audioInputIsAvailable);
 	
 	if (rioUnit)	
         AudioComponentInstanceDispose (rioUnit);
@@ -398,11 +388,11 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
 	{
 		err = AudioUnitRender (rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
 		
-        if (err) 
-        { 
-            printf ("renderCallback: error %d %s\n", (int)err, (err == -10863) ? "(harmless)" : ""); 
-            return err; 
-        }
+//        if (err) 
+//        { 
+//            printf ("renderCallback: error %d %s\n", (int)err, (err == -10863) ? "(harmless)" : ""); 
+//            return err; 
+//        }
 		
 		audioShortToFloatChannels (ioData, floatBufferData, inNumberFrames, numInputChannels);				
 	}
@@ -498,7 +488,9 @@ private:
 
 END_PLONK_NAMESPACE
 
-#define PLPEERTYPE plonk::IOAudioHostPeer
+using namespace plonk;
+
+#define PLPEERTYPE IOAudioHostPeer
 #define PLPEER ((PLPEERTYPE*)peer)
 
 @implementation PLAudioHost
@@ -596,27 +588,44 @@ END_PLONK_NAMESPACE
     PLPEER->setPreferredSampleRate (preferredSampleRate);
 }
 
-- (UInt32)audioCategory
-{
-    const plonk::Text audioCategoryKey ("audioCategory");
-    
-    if (PLPEER->getOtherOptions().containsKey (audioCategoryKey))
+- (UInt32)category
+{    
+    if (PLPEER->getOtherOptions().containsKey (categoryKey))
     {
-        return (UInt32)PLPEER->getOtherOptions().at (audioCategoryKey).asUnchecked<plonk::IntVariable>().getValue();
+        return (UInt32)PLPEER->getOtherOptions().at (categoryKey).asUnchecked<IntVariable>().getValue();
     }
     else 
     {
-        UInt32 audioCategory;
-        UInt32 size = sizeof (audioCategory); 
-        AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &audioCategory);
-        return audioCategory;
+        UInt32 property;
+        UInt32 size = sizeof (property); 
+        AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &property);
+        return property;
     }
 }
 
-- (void)setAudioCategory:(UInt32)audioCategory
+- (void)setCategory:(UInt32)category
 {
-    const plonk::Text audioCategoryKey ("audioCategory");
-    PLPEER->getOtherOptions().at (audioCategoryKey) = plonk::IntVariable ((int)audioCategory);
+    PLPEER->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
+}
+
+- (UInt32)mode
+{    
+    if (PLPEER->getOtherOptions().containsKey (categoryKey))
+    {
+        return (UInt32)PLPEER->getOtherOptions().at (modeKey).asUnchecked<IntVariable>().getValue();
+    }
+    else 
+    {
+        UInt32 property;
+        UInt32 size = sizeof (property); 
+        AudioSessionGetProperty (kAudioSessionProperty_Mode, &size, &property);
+        return property;
+    }
+}
+
+- (void)setMode:(UInt32)mode
+{
+    PLPEER->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
 }
 
 - (void)startHost

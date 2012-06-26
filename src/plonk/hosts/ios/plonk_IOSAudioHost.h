@@ -94,9 +94,7 @@ private:
 	UInt32						audioInputIsAvailable;
 	UInt32						numInputChannels;
 	UInt32						numOutputChannels;
-//	bool						isRunning;    
 	double						cpuUsage;
-//    UInt32                      audioCategory;
 };
 
 END_PLONK_NAMESPACE
@@ -133,16 +131,17 @@ END_PLONK_NAMESPACE
 @property (nonatomic, retain) id delegate;                  ///< The delegat that contains the constructGraph method.
 @property (nonatomic, readonly) NSString* hostName;         ///< The host name - always "iOS".
 @property (nonatomic, readonly) NSString* nativeHostName;   ///< The native host name - currently always "RemoteIO".
-@property (nonatomic, readonly) NSString* inputName;        ///< The name of the input device.
-@property (nonatomic, readonly) NSString* outputName;       ///< The name of the output device.
+@property (nonatomic, readonly) NSString* inputName;        ///< The name of the input device. May be "Default Input" on the simulator.
+@property (nonatomic, readonly) NSString* outputName;       ///< The name of the output device. May be "Default Output" on the simulator.
 @property (nonatomic, readonly) double cpuUsage;            ///< The current CPU usage of the DSP loop.
-@property (nonatomic, readonly) BOOL isRunning;             ///< Is the host running.
+@property (nonatomic, readonly) BOOL isRunning;             ///< Is the host running?
 @property (nonatomic, readonly) PLUNIT outputUnit;          ///< The output unit of the host.
 @property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int preferredBlockSize;               ///< The preferred block size, only set this BEFORE sending the startHost message.
 @property (nonatomic) double preferredSampleRate;           ///< The preferred sample rate, only set this BEFORE sending the startHost message.
-@property (nonatomic) UInt32 audioCategory;                 ///< The audio session category, only set this BEFORE sending the startHost message.
+@property (nonatomic) UInt32 category;                      ///< The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.
+@property (nonatomic) UInt32 mode;                          ///< The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.
 
 /** Start the host running. */
 - (void)startHost;
