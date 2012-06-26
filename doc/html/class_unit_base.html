@@ -131,18 +131,18 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator from the base array type.  <a href="#ae9d0d472add7bdcb4aec4baf35c52cc8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aab0d06b9df0c6d0a56f469b2ee572c09">operator=</a> (<a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt; const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator from an array of channels.  <a href="#aab0d06b9df0c6d0a56f469b2ee572c09"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab18b0bf950a219fb07257aca3a5e5b76">ar</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply multiply and addition operators to another unit.  <a href="#ab18b0bf950a219fb07257aca3a5e5b76"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab9204dbea9636ed67d40fd663333ee44">kr</a> ()  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resamples this unit to the default control rate sample rate and block size.  <a href="#ab9204dbea9636ed67d40fd663333ee44"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a612cb53496d3ceb671bed8a632b77156">mix</a> ()  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes this unit down to a single channel.  <a href="#a612cb53496d3ceb671bed8a632b77156"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a4f336f25723b5330c64b24fb964d568b">mixBarrier</a> ()  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes this unit down to a single channel with and auto-deletion prevention barrier.  <a href="#a4f336f25723b5330c64b24fb964d568b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a923aa69ecd5c1934d2eac11b8ed09cd4">overlapMake</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get0_5())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an overlapping process from this unit's contrinuous stream.  <a href="#a923aa69ecd5c1934d2eac11b8ed09cd4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a048c405d5b729647722c4d0da5c2076f">overlapMix</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get0_5())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mix down overlapping process to a continuous stream.  <a href="#a048c405d5b729647722c4d0da5c2076f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a0abf59b828ae052c3ae83594295e64d2">ar</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault()) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply multiply and addition operators to another unit.  <a href="#a0abf59b828ae052c3ae83594295e64d2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aed961676c5ecaa5d53538debb3fea7fc">kr</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resamples this unit to the default control rate sample rate and block size.  <a href="#aed961676c5ecaa5d53538debb3fea7fc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#afd8d0797e935d3c384910a8090f0202b">mix</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes this unit down to a single channel.  <a href="#afd8d0797e935d3c384910a8090f0202b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a1db2a7d91b1e53bed30f49d3c1186c7f">mixBarrier</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes this unit down to a single channel with and auto-deletion prevention barrier.  <a href="#a1db2a7d91b1e53bed30f49d3c1186c7f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a170d8b94e06f8c8b3c318892d0533cbf">overlapMake</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get0_5()) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an overlapping process from this unit's contrinuous stream.  <a href="#a170d8b94e06f8c8b3c318892d0533cbf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab3a20c72aae6c5f580937fd580e52c78">overlapMix</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get0_5()) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mix down overlapping process to a continuous stream.  <a href="#ab3a20c72aae6c5f580937fd580e52c78"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;PLONK_BINARYOPFUNCTION(SampleType, op) &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a35419f9d20253e5d52de37d4367c7311">binary</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;rightOperand) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Templated binary operator Unit creator.  <a href="#a35419f9d20253e5d52de37d4367c7311"></a><br/></td></tr>
@@ -755,7 +755,7 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab18b0bf950a219fb07257aca3a5e5b76"></a><!-- doxytag: member="UnitBase::ar" ref="ab18b0bf950a219fb07257aca3a5e5b76" args="(BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
+<a class="anchor" id="a0abf59b828ae052c3ae83594295e64d2"></a><!-- doxytag: member="UnitBase::ar" ref="a0abf59b828ae052c3ae83594295e64d2" args="(BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault()) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -776,7 +776,7 @@ template&lt;class SampleType&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
+          <td></td><td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -1614,7 +1614,7 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab9204dbea9636ed67d40fd663333ee44"></a><!-- doxytag: member="UnitBase::kr" ref="ab9204dbea9636ed67d40fd663333ee44" args="()" -->
+<a class="anchor" id="aed961676c5ecaa5d53538debb3fea7fc"></a><!-- doxytag: member="UnitBase::kr" ref="aed961676c5ecaa5d53538debb3fea7fc" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -1624,7 +1624,7 @@ template&lt;class SampleType&gt; </div>
           <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::kr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -1932,7 +1932,7 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a612cb53496d3ceb671bed8a632b77156"></a><!-- doxytag: member="UnitBase::mix" ref="a612cb53496d3ceb671bed8a632b77156" args="()" -->
+<a class="anchor" id="afd8d0797e935d3c384910a8090f0202b"></a><!-- doxytag: member="UnitBase::mix" ref="afd8d0797e935d3c384910a8090f0202b" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -1942,7 +1942,7 @@ template&lt;class SampleType&gt; </div>
           <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::mix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -1952,7 +1952,7 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4f336f25723b5330c64b24fb964d568b"></a><!-- doxytag: member="UnitBase::mixBarrier" ref="a4f336f25723b5330c64b24fb964d568b" args="()" -->
+<a class="anchor" id="a1db2a7d91b1e53bed30f49d3c1186c7f"></a><!-- doxytag: member="UnitBase::mixBarrier" ref="a1db2a7d91b1e53bed30f49d3c1186c7f" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -1962,7 +1962,7 @@ template&lt;class SampleType&gt; </div>
           <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::mixBarrier </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2187,7 +2187,7 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a923aa69ecd5c1934d2eac11b8ed09cd4"></a><!-- doxytag: member="UnitBase::overlapMake" ref="a923aa69ecd5c1934d2eac11b8ed09cd4" args="(DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get0_5())" -->
+<a class="anchor" id="a170d8b94e06f8c8b3c318892d0533cbf"></a><!-- doxytag: member="UnitBase::overlapMake" ref="a170d8b94e06f8c8b3c318892d0533cbf" args="(DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get0_5()) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -2198,7 +2198,7 @@ template&lt;class SampleType&gt; </div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
           <td class="paramname"><em>overlap</em> = <code><a class="el" href="class_math.html">Math</a>&lt;<a class="el" href="class_variable.html">DoubleVariable</a>&gt;::get0_5()</code></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2208,7 +2208,7 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a048c405d5b729647722c4d0da5c2076f"></a><!-- doxytag: member="UnitBase::overlapMix" ref="a048c405d5b729647722c4d0da5c2076f" args="(DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get0_5())" -->
+<a class="anchor" id="ab3a20c72aae6c5f580937fd580e52c78"></a><!-- doxytag: member="UnitBase::overlapMix" ref="ab3a20c72aae6c5f580937fd580e52c78" args="(DoubleVariable const &amp;overlap=Math&lt; DoubleVariable &gt;::get0_5()) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -2219,7 +2219,7 @@ template&lt;class SampleType&gt; </div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
           <td class="paramname"><em>overlap</em> = <code><a class="el" href="class_math.html">Math</a>&lt;<a class="el" href="class_variable.html">DoubleVariable</a>&gt;::get0_5()</code></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2576,7 +2576,7 @@ template&lt;PLONK_UNARYOPFUNCTION(SampleType, op) &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 07:24:39 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

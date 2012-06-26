@@ -67,11 +67,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,                IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -106,6 +106,12 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create control rate a one-pole low-pass filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point cut-off frequency. 
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
@@ -146,12 +152,12 @@ public:
         return UnitInfo ("Lag", "One-pole exponential lag filter.",
                          
                          // output
-                         ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
+                         ChannelCount::VariableChannelCount,  
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Duration,           Measure::Seconds,   0.2,                IOLimit::Minimum,   Measure::Seconds,   0.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -186,6 +192,12 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Creates a control rate exponential lag filter (one-pole low-pass filter).
+     @param input The input signal to filter.
+     @param duration  The -60dB lag time. 
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& duration = SampleType (0.2),
                         UnitType const& mul = SampleType (1),
@@ -226,11 +238,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -265,6 +277,12 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate one-pole high-pass filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point cut-off frequency. 
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
@@ -306,11 +324,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,    0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Duration,           Measure::Seconds,   0.2,                IOLimit::Minimum,   Measure::Seconds,   0.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -345,6 +363,12 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Creates a control rate exponential deacy filter.
+     @param input The input signal to filter.
+     @param duration  The -60dB decay time. 
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& duration = SampleType (0.2),
                         UnitType const& mul = SampleType (1),
@@ -388,11 +412,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,                IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Q,                  Measure::Q,         1.0,                IOLimit::Clipped,   Measure::Q,                 0.01, 100.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -430,6 +454,13 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate resonant low-pass filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point cut-off frequency. 
+     @param q The Q factor.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& q = SampleType (1),
@@ -471,11 +502,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,                IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Q,                  Measure::Q,         1.0,                IOLimit::Clipped,   Measure::Q,                 0.01, 100.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -513,6 +544,13 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate resonant high-pass filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point cut-off frequency. 
+     @param q The Q factor.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& q = SampleType (1),
@@ -554,11 +592,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,               IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::S,                  Measure::Slope,     1.0,                IOLimit::Clipped,   Measure::Slope,             0.01, 100.0,
                          IOKey::Gain,               Measure::Decibels,  0.0,                IOLimit::None,
@@ -601,6 +639,14 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate low-shelving filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point turnover frequency. 
+     @param s The slope factor (keep to 1 or below for no strange resonances).
+     @param gain The boost/cut gain in dB.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& s = SampleType (1),
@@ -643,11 +689,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::S,                  Measure::Slope,     1.0,                IOLimit::Clipped,   Measure::Slope,             0.01, 100.0,
                          IOKey::Gain,               Measure::Decibels,  0.0,                IOLimit::None,
@@ -690,6 +736,14 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate high-shelving filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point turnover frequency. 
+     @param s The slope factor (keep to 1 or below for no strange resonances).
+     @param gain The boost/cut gain in dB.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& s = SampleType (1),
@@ -732,11 +786,11 @@ public:
                      
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Q,                  Measure::Q,         1.0,                IOLimit::Clipped,   Measure::Q,                 0.01, 100.0,
                          IOKey::Gain,               Measure::Decibels,  0.0,                IOLimit::None,
@@ -779,6 +833,14 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate notch filter.
+     @param input The input signal to filter.
+     @param frequency  The centre frequency. 
+     @param q The Q factor.
+     @param gain The boost/cut gain in dB.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& q = SampleType (1),
@@ -821,11 +883,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Bandwidth,          Measure::Octaves,   1.0,                IOLimit::Clipped,   Measure::Octaves,           0.001, 10.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -863,6 +925,13 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate bandpass filter.
+     @param input The input signal to filter.
+     @param frequency  The centre frequency. 
+     @param bandwidth The bandwidth of the passband in octaves.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& bandwidth = SampleType (1),
@@ -904,11 +973,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Bandwidth,          Measure::Octaves,   1.0,                IOLimit::Clipped,   Measure::Octaves,           0.001, 10.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
@@ -946,6 +1015,13 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a control rate bandreject filter.
+     @param input The input signal to filter.
+     @param frequency  The centre frequency. 
+     @param bandwidth The bandwidth of the stopband in octaves.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& bandwidth = SampleType (1),
@@ -991,11 +1067,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -1030,6 +1106,12 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a simple control rate Butterworth 2nd-order low-pass filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point cut-off frequency. 
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
@@ -1071,11 +1153,11 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,             Measure::Unknown,   0.0,               IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Frequency,          Measure::Hertz,     1200.0,             IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -1110,6 +1192,12 @@ public:
         return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
+    /** Create a simple control rate Butterworth 2nd-order high-pass filter.
+     @param input The input signal to filter.
+     @param frequency  The -3dB point cut-off frequency. 
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),

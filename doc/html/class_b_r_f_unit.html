@@ -92,6 +92,8 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_r_f_unit.html#a9f6437a4244ab60cf63624086e218a84">getInfo</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_r_f_unit.html#a5f44b5915285b6efb8abb40f8a4847f8">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;bandwidth=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;filterSampleRate=SampleRate::getDefault(), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::noPreference())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a bandreject filter.  <a href="#a5f44b5915285b6efb8abb40f8a4847f8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_r_f_unit.html#a77a13ca766942e45ac81097830d1a107">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;bandwidth=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;filterSampleRate=SampleRate::getControlRate())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate bandreject filter.  <a href="#a77a13ca766942e45ac81097830d1a107"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -288,6 +290,72 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a77a13ca766942e45ac81097830d1a107"></a><!-- doxytag: member="BRFUnit::kr" ref="a77a13ca766942e45ac81097830d1a107" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;bandwidth=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), SampleRate const &amp;filterSampleRate=SampleRate::getControlRate())" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_b_r_f_unit.html">BRFUnit</a>&lt; SampleType &gt;::kr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>frequency</em> = <code>SampleType&#160;(1200)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>bandwidth</em> = <code>SampleType&#160;(1)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>mul</em> = <code>SampleType&#160;(1)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>add</em> = <code>SampleType&#160;(0)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
+          <td class="paramname"><em>filterSampleRate</em> = <code>SampleRate::getControlRate()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a control rate bandreject filter. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The input signal to filter. </td></tr>
+    <tr><td class="paramname">frequency</td><td>The centre frequency. </td></tr>
+    <tr><td class="paramname">bandwidth</td><td>The bandwidth of the stopband in octaves. </td></tr>
+    <tr><td class="paramname">mul</td><td>An optional multiplier. </td></tr>
+    <tr><td class="paramname">add</td><td>An optional offset. </td></tr>
+    <tr><td class="paramname">filterSampleRate</td><td>(Optional) The sample rate of the signal being filtered. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_shortcuts_8h_source.html">plonk_FilterShortcuts.h</a></li>
 </ul>
@@ -306,7 +374,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 07:24:25 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:43 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

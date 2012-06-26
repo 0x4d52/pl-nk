@@ -85,8 +85,8 @@
     {
         self.delegate = self; // set which class contains the constructGraph method
         
-        self.preferredBlockSize = 512;
-        self.preferredSampleRate = 22050.0;
+//        self.preferredBlockSize = 512;
+//        self.preferredSampleRate = 22050.0;
         
         freq = 500.f;
         amp = 0.1f;

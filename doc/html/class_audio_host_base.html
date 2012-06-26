@@ -88,6 +88,7 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#aaf535d143eb5e6949946653d3ebea504">BusType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef PLONK_BUSARRAYBASETYPE<br class="typebreak"/>
 &lt; <a class="el" href="class_bus_buffer.html">BusType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a0028759fad5318a19fdeb9f5c6c4f42a">BussesType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_dictionary.html">Dictionary</a>&lt; <a class="el" href="class_dynamic.html">Dynamic</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a3b7b67fbc1b6fa57149505d955794665">OptionDictionary</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a9d258693a850ff3916ff2a800dd1d99e">AudioHostBase</a> ()  throw ()</td></tr>
@@ -114,6 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the number of audio inputs required.  <a href="#a97e22b16e99cf8c2b3c3223441e9ceea"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a3b86efabd19949082d704f54aa1362db">setNumOutputs</a> (const int numOutputs)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the number of audio inputs required.  <a href="#a3b86efabd19949082d704f54aa1362db"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dictionary.html">OptionDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a5233dc06e3164004226e8ff61f4ab6eb">getOtherOptions</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get other (normally platform dependent) options.  <a href="#a5233dc06e3164004226e8ff61f4ab6eb"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array2_d.html">BufferArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a69984e3427c16ef8ebdaa77f8e7aab31">getInputs</a> () const   throw ()</td></tr>
@@ -203,6 +206,21 @@ template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;SampleType&gt; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">BusType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3b7b67fbc1b6fa57149505d955794665"></a><!-- doxytag: member="AudioHostBase::OptionDictionary" ref="a3b7b67fbc1b6fa57149505d955794665" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_dictionary.html">Dictionary</a>&lt;<a class="el" href="class_dynamic.html">Dynamic</a>&gt; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::<a class="el" href="class_dictionary.html">OptionDictionary</a></td>
         </tr>
       </table>
 </div>
@@ -455,6 +473,26 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Get the number of audio outputs. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5233dc06e3164004226e8ff61f4ab6eb"></a><!-- doxytag: member="AudioHostBase::getOtherOptions" ref="a5233dc06e3164004226e8ff61f4ab6eb" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_dictionary.html">OptionDictionary</a> <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getOtherOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get other (normally platform dependent) options. </p>
 
 </div>
 </div>
@@ -804,7 +842,7 @@ template&lt;class SampleType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 07:24:24 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:43 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

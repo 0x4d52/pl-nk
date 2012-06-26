@@ -92,6 +92,8 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#ae8042412117c7d6f571efa64a45e856c">getInfo</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#ab3b5e5b77fc12399164505b358d2497c">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;filterSampleRate=SampleRate::getDefault(), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::noPreference())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple Butterworth 2nd-order low-pass filter.  <a href="#ab3b5e5b77fc12399164505b358d2497c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_p_f_unit.html#a6978f0a846aeff51c69e252dee9d79b3">kr</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;frequency=SampleType(1200), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;filterSampleRate=SampleRate::getControlRate())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple control rate Butterworth 2nd-order low-pass filter.  <a href="#a6978f0a846aeff51c69e252dee9d79b3"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -282,6 +284,65 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a6978f0a846aeff51c69e252dee9d79b3"></a><!-- doxytag: member="LPFUnit::kr" ref="a6978f0a846aeff51c69e252dee9d79b3" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), SampleRate const &amp;filterSampleRate=SampleRate::getControlRate())" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_l_p_f_unit.html">LPFUnit</a>&lt; SampleType &gt;::kr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>frequency</em> = <code>SampleType&#160;(1200)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>mul</em> = <code>SampleType&#160;(1)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>add</em> = <code>SampleType&#160;(0)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
+          <td class="paramname"><em>filterSampleRate</em> = <code>SampleRate::getControlRate()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a simple control rate Butterworth 2nd-order low-pass filter. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The input signal to filter. </td></tr>
+    <tr><td class="paramname">frequency</td><td>The -3dB point cut-off frequency. </td></tr>
+    <tr><td class="paramname">mul</td><td>An optional multiplier. </td></tr>
+    <tr><td class="paramname">add</td><td>An optional offset. </td></tr>
+    <tr><td class="paramname">filterSampleRate</td><td>(Optional) The sample rate of the signal being filtered. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_shortcuts_8h_source.html">plonk_FilterShortcuts.h</a></li>
 </ul>
@@ -300,7 +361,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 07:24:32 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

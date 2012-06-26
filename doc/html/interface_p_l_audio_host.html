@@ -97,13 +97,13 @@ Properties</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ae1f9428528fa57ef31ad54ec4ead601e">nativeHostName</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The native host name - currently always "RemoteIO".  <a href="#ae1f9428528fa57ef31ad54ec4ead601e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a49667880f969d2d7a4d225f213e61d5f">inputName</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the input device.  <a href="#a49667880f969d2d7a4d225f213e61d5f"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the input device. May be "Default Input" on the simulator.  <a href="#a49667880f969d2d7a4d225f213e61d5f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">NSString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a801abb70ea4f0e485f3d6dab29e00133">outputName</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the output device.  <a href="#a801abb70ea4f0e485f3d6dab29e00133"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the output device. May be "Default Output" on the simulator.  <a href="#a801abb70ea4f0e485f3d6dab29e00133"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ac52aba0de2bc5fe5e917a27d3e146bdd">cpuUsage</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The current CPU usage of the DSP loop.  <a href="#ac52aba0de2bc5fe5e917a27d3e146bdd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a2e2383bea16877af6d26e8e9be8b371b">isRunning</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the host running.  <a href="#a2e2383bea16877af6d26e8e9be8b371b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the host running?  <a href="#a2e2383bea16877af6d26e8e9be8b371b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">PLUNIT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#aca2f44cee58c26663034a25f869ec552">outputUnit</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The output unit of the host.  <a href="#aca2f44cee58c26663034a25f869ec552"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a2d99079f809dd7669d0a818cd0fe9292">numInputs</a></td></tr>
@@ -114,6 +114,10 @@ Properties</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred block size, only set this BEFORE sending the startHost message.  <a href="#ab5947e54205d567c6e3c90a28744f113"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a8ea6a37f5fc152939306b77636669552">preferredSampleRate</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred sample rate, only set this BEFORE sending the startHost message.  <a href="#a8ea6a37f5fc152939306b77636669552"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UInt32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a0d6e194b401bb33f632da21c37a0fa64">category</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.  <a href="#a0d6e194b401bb33f632da21c37a0fa64"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">UInt32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ad1f823296fe6ab0b28d983f75556a24c">mode</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.  <a href="#ad1f823296fe6ab0b28d983f75556a24c"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>An Objective-C audio host for the iOS platform. </p>
@@ -185,6 +189,21 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Property Documentation</h2>
+<a class="anchor" id="a0d6e194b401bb33f632da21c37a0fa64"></a><!-- doxytag: member="PLAudioHost::category" ref="a0d6e194b401bb33f632da21c37a0fa64" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (UInt32) category<code> [read, write, assign]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message. </p>
+
+</div>
+</div>
 <a class="anchor" id="ac52aba0de2bc5fe5e917a27d3e146bdd"></a><!-- doxytag: member="PLAudioHost::cpuUsage" ref="ac52aba0de2bc5fe5e917a27d3e146bdd" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -241,7 +260,7 @@ Properties</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>The name of the input device. </p>
+<p>The name of the input device. May be "Default Input" on the simulator. </p>
 
 </div>
 </div>
@@ -256,7 +275,22 @@ Properties</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Is the host running. </p>
+<p>Is the host running? </p>
+
+</div>
+</div>
+<a class="anchor" id="ad1f823296fe6ab0b28d983f75556a24c"></a><!-- doxytag: member="PLAudioHost::mode" ref="ad1f823296fe6ab0b28d983f75556a24c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (UInt32) mode<code> [read, write, assign]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message. </p>
 
 </div>
 </div>
@@ -316,7 +350,7 @@ Properties</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>The name of the output device. </p>
+<p>The name of the output device. May be "Default Output" on the simulator. </p>
 
 </div>
 </div>
@@ -383,7 +417,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 07:24:33 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
