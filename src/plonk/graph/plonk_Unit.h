@@ -387,38 +387,38 @@ public:
     
     /** Resamples this unit to a different sample rate and/or block size. */
     inline UnitBase ar (BlockSize const& preferredBlockSize = BlockSize::getDefault(),
-                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) const throw()
     {
         return ResampleUnit<SampleType>::ar (*this, preferredBlockSize, preferredSampleRate);
     }    
     
     /** Resamples this unit to the default control rate sample rate and block size. */
-    inline UnitBase kr() throw()
+    inline UnitBase kr() const throw()
     {
         return ResampleUnit<SampleType>::kr (*this);
     }
     
     /** Mixes this unit down to a single channel. */
-    inline UnitBase mix() throw()
+    inline UnitBase mix() const throw()
     {
         return MixerUnit<SampleType>::ar (*this, true);
     }
     
     /** Mixes this unit down to a single channel with and auto-deletion prevention barrier. 
      This prevents things like envelopes from releasing the mixer that contains this unit. */
-    inline UnitBase mixBarrier() throw()
+    inline UnitBase mixBarrier() const throw()
     {
         return MixerUnit<SampleType>::ar (*this, false);
     }
     
     /** Create an overlapping process from this unit's contrinuous stream. */
-    inline UnitBase overlapMake (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) throw()
+    inline UnitBase overlapMake (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) const throw()
     {
         return OverlapMakeUnit<SampleType>::ar (*this, overlap);
     }
     
     /** Mix down overlapping process to a continuous stream. */
-    inline UnitBase overlapMix (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) throw()
+    inline UnitBase overlapMix (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) const throw()
     {
         return OverlapMixUnit<SampleType>::ar (*this, overlap);
     }

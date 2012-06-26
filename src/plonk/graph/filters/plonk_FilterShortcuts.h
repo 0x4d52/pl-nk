@@ -103,7 +103,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef LPFP1Unit<PLONK_TYPE_DEFAULT> LPFP1;
@@ -166,7 +166,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef LagUnit<PLONK_TYPE_DEFAULT> Lag;
@@ -228,7 +228,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef HPFP1Unit<PLONK_TYPE_DEFAULT> HPFP1;
@@ -291,7 +291,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef DecayUnit<PLONK_TYPE_DEFAULT> Decay;
@@ -359,7 +359,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef RLPFUnit<PLONK_TYPE_DEFAULT> RLPF;
@@ -424,7 +424,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef RHPFUnit<PLONK_TYPE_DEFAULT> RHPF;
@@ -494,7 +494,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef LowShelfUnit<PLONK_TYPE_DEFAULT> LowShelf;
@@ -564,7 +564,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef HighShelfUnit<PLONK_TYPE_DEFAULT> HighShelf;
@@ -634,7 +634,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef NotchUnit<PLONK_TYPE_DEFAULT> Notch;
@@ -699,7 +699,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef BPFUnit<PLONK_TYPE_DEFAULT> BPF;
@@ -764,7 +764,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef BRFUnit<PLONK_TYPE_DEFAULT> BRF;
@@ -830,7 +830,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef LPFUnit<PLONK_TYPE_DEFAULT> LPF;
@@ -893,7 +893,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
 };
 typedef HPFUnit<PLONK_TYPE_DEFAULT> HPF;

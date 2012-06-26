@@ -99,10 +99,10 @@
 
 - (Unit)constructGraph
 {
-//    return Sine::ar (Lag::ar (Unit (freq).ar(), 0.5), amp);
+    return Sine::ar (Lag::ar (freq, 0.5), amp);
     
-    Unit freqUnit = freq;
-    return Sine::ar (Lag::ar (freqUnit, 0.5, 1, 0, freqUnit.getSampleRate (0)), amp);
+//    Unit freqUnit = freq;
+//    return Sine::ar (Lag::ar (freqUnit, 0.5, 1, 0, freqUnit.getSampleRate (0)), amp);
 
 }
 
