@@ -604,11 +604,11 @@ public:
     /** Get the maximum block size in the array of channels in this unit. */
     BlockSize getMaxBlockSize() const throw();
     
-    /** Get the block size of a specific channel in this unit. */
-    inline const BlockSize getBlockSize (const int index) const throw()    { return this->wrapAt (index).getBlockSize(); }
+//    /** Get the block size of a specific channel in this unit. */
+//    inline const BlockSize getBlockSize (const int index) const throw()    { return this->wrapAt (index).getBlockSize(); }
     
     /** Get the block size of a specific channel in this unit. */
-    inline BlockSize getBlockSize (const int index) throw()                { return this->wrapAt (index).getBlockSize(); }
+    inline BlockSize getBlockSize (const int index) const throw()            { return this->wrapAt (index).getBlockSize(); }
 
     /** Set the block size of all channels in this unit. */
     void setBlockSize (BlockSize const& newBlockSize) throw()
@@ -620,19 +620,30 @@ public:
             channels[i].setBlockSize (newBlockSize);        
     }
     
+    /** Get an array of block sizes for the channels in the unit. */
+    BlockSizes getBlockSizes() const throw()
+    {
+        BlockSizes result (BlockSizes::withSize (this->getNumChannels()));
+        
+        for (int i = 0; i < this->getNumChannels(); ++i)
+            result.put (i, this->getBlockSize (i));
+        
+        return result;
+    }
+    
     /** Get the minimum sample rate in the array of channels in this unit. */
     SampleRate getMinSampleRate() const throw();
     
     /** Get the maximum sample rate in the array of channels in this unit. */
     SampleRate getMaxSampleRate() const throw();
     
-    /** Get the sample rate of a specific channel in this unit. 
-     Indices out of range will be wrapped to the available channels. */
-    inline const SampleRate getSampleRate (const int index) const throw()  { return this->wrapAt (index).getSampleRate(); }
+//    /** Get the sample rate of a specific channel in this unit. 
+//     Indices out of range will be wrapped to the available channels. */
+//    inline const SampleRate getSampleRate (const int index) const throw()  { return this->wrapAt (index).getSampleRate(); }
     
     /** Get the sample rate of a specific channel in this unit.  
      Indices out of range will be wrapped to the available channels. */
-    inline SampleRate getSampleRate (const int index) throw()              { return this->wrapAt (index).getSampleRate(); }
+    inline SampleRate getSampleRate (const int index) const throw()          { return this->wrapAt (index).getSampleRate(); }
     
     /** Set the sample rate of all channels in this unit. */
     void setSampleRate (SampleRate const& newSampleRate) throw()
@@ -642,7 +653,18 @@ public:
         
         for (int i = 0; i < numChannels; ++i) 
             channels[i].setSampleRate (newSampleRate);        
-    }    
+    }   
+    
+    /** Get an array of sample rates for the channels in the unit. */
+    SampleRates getSampleRates() const throw()
+    {
+        SampleRates result (SampleRates::withSize (this->getNumChannels()));
+        
+        for (int i = 0; i < this->getNumChannels(); ++i)
+            result.put (i, this->getSampleRate (i));
+        
+        return result;
+    }
     
     inline double getSampleDurationInTicks(const int index) const throw()          { return this->wrapAt (index)->getSampleDurationInTicks(); }
     inline double getBlockDurationInTicks(const int index) const throw()           { return this->wrapAt (index)->getBlockDurationInTicks(); }
