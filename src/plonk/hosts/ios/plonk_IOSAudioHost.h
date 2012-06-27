@@ -103,13 +103,18 @@ END_PLONK_NAMESPACE
 
 #define PLUNIT plonk::IOSAudioHost::UnitType
 
+@class PLAudioHost;
+
 /** A protocol for a PLAudioHost delegate.
  This class should contain a constructGraph method that returns a Unit 
  conatining the audio graph to render at runtime. 
  @see PLAudioHost */
-@protocol PLAudioGraph <NSObject>
+@protocol PLAudioHostDelegate <NSObject>
 @required
-- (PLUNIT)constructGraph;
+- (PLUNIT)constructGraph:(PLAudioHost*)host;
+@optional
+- (void)hostStarting:(PLAudioHost*)host;
+- (void)hostStopped:(PLAudioHost*)host;
 @end
 
 /** An Objective-C audio host for the iOS platform.
@@ -125,7 +130,7 @@ END_PLONK_NAMESPACE
 @interface PLAudioHost : NSObject  
 {
     void* peer;
-    id<PLAudioGraph> delegate;
+    id<PLAudioHostDelegate> delegate;
 }
 
 @property (nonatomic, retain) id delegate;                  ///< The delegat that contains the constructGraph method.

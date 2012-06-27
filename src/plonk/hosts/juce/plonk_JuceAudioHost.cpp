@@ -120,10 +120,13 @@ double JuceAudioHost::getCpuUsage() const throw()
 
 void JuceAudioHost::stopHost() throw()
 {
-    audioDeviceManager.getAudioCallbackLock().enter();
-    audioDeviceManager.removeAudioCallback(this);
-    audioDeviceManager.getAudioCallbackLock().exit();
-    audioDeviceManager.closeAudioDevice();
+    if (getIsRunning())
+    {
+        audioDeviceManager.getAudioCallbackLock().enter();
+        audioDeviceManager.removeAudioCallback(this);
+        audioDeviceManager.getAudioCallbackLock().exit();
+        audioDeviceManager.closeAudioDevice();
+    }
 }
 
 void JuceAudioHost::startHost() throw()

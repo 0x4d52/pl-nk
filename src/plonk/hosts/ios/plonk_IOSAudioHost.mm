@@ -126,8 +126,7 @@ cpuUsage (0.0)//,
 
 IOSAudioHost::~IOSAudioHost()
 {
-    if (getIsRunning())
-        stopHost();
+    stopHost();
 }
 
 Text IOSAudioHost::getHostName() const throw()
@@ -200,6 +199,7 @@ void IOSAudioHost::stopHost() throw()
     {
         AudioOutputUnitStop (rioUnit);
         setIsRunning (false);
+        hostStopped();
     }
 }
 
@@ -477,7 +477,19 @@ public:
     UnitType constructGraph() throw()
     {
         plonk_assert (peer.delegate != nil);
-        return [peer.delegate constructGraph];
+        return [peer.delegate constructGraph:peer];
+    }
+    
+    void hostStarting() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostStarting:)])
+            [peer.delegate hostStarting:peer];
+    }
+    
+    void hostStopped() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostStopped:)])
+            [peer.delegate hostStopped:peer];
     }
     
 private:

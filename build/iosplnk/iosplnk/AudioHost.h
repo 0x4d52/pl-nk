@@ -50,7 +50,7 @@
 #include "../../../src/plonk/hosts/ios/plonk_IOSAudioHost.h"
 
 
-@interface AudioHost : PLAudioHost<PLAudioGraph>
+@interface AudioHost : PLAudioHost<PLAudioHostDelegate>
 {
     FloatVariable freq;
     FloatVariable amp;
@@ -59,7 +59,8 @@
 @property (nonatomic) float freq;
 @property (nonatomic) float amp;
 
-- (Unit)constructGraph;
+//-(void)hostStopped:(PLAudioHost *)host;
+//-(void)hostStarting:(PLAudioHost *)host;
 
 @end
 

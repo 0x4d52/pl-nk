@@ -87,7 +87,6 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
         
-    [host startHost];
     
     NSLog(@"Host: %@", host.hostName);
     NSLog(@"Native: %@", host.nativeHostName);
@@ -99,6 +98,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    [host stopHost];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -111,6 +111,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [host startHost];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

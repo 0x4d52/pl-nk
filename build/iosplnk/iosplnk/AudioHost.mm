@@ -97,14 +97,9 @@
     return self;
 }
 
-- (Unit)constructGraph
+- (Unit)constructGraph:(PLAudioHost*)host
 {
-//    return Sine::ar (Lag::ar (freq, 0.5), amp);
     return Sine::ar (Lag::kr (freq, 0.5), amp);
-    
-//    Unit freqUnit = freq;
-//    return Sine::ar (Lag::ar (freqUnit, 0.5, 1, 0, freqUnit.getSampleRate (0)), amp);
-
 }
 
 - (float)freq
@@ -127,6 +122,15 @@
     amp.setValue (value);
 }
 
+-(void)hostStopped:(PLAudioHost *)host
+{
+    NSLog(@"hostStopped!!");
+}
+
+-(void)hostStarting:(PLAudioHost *)host
+{
+    NSLog(@"hostStarting!!");
+}
 @end
 
 
