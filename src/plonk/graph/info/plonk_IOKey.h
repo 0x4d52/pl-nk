@@ -62,6 +62,8 @@ public:
         TypeBreakpoints,
         TypeBlockSize,
         TypeSampleRate,
+//        TypeBlockSizes,
+//        TypeSampleRates,
         TypeBool,
         
         NumIOTypes
@@ -97,7 +99,7 @@ public:
         
         BlockSize,          ///< Audio processing block size.
         SampleRate,         ///< Audio processing sample rate.
-        FilterSampleRate,   ///< Sample rate of a filter
+        FilterSampleRate,   ///< Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates
         OverlapMake,
         OverlapMix,
         

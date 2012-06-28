@@ -243,7 +243,8 @@ public:
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
-    static inline int getTypeCode() { return TypeCode::Unknown; }
+    static inline int getTypeCode()     { return TypeCode::Unknown; }
+    static inline const Type& getNull() { static Type null; return null; }
 };
 
 template<class Type>
@@ -254,7 +255,8 @@ public:
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
-    static inline int getTypeCode() { return TypeCode::Unknown; }
+    static inline int getTypeCode()     { return TypeCode::Unknown; }
+    static inline const Type& getNull() { TypeUtilityBase<Type>::getNull(); }
 };
 
 template<class Type>
@@ -265,11 +267,14 @@ public:
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
-    static inline int getTypeCode() { return TypeCode::Unknown; }
+    static inline int getTypeCode()     { return TypeCode::Unknown; }
+    static inline const Type& getNull() { TypeUtilityBase<Type>::getNull(); }
 };
 
 
 //------------------------------------------------------------------------------
+
+//todo add getNull() to these...
 
 template<>
 class TypeUtilityBase<Dynamic>

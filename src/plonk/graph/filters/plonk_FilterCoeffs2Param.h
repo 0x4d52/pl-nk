@@ -270,8 +270,8 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
-                         IOKey::Generic,             Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
                          IOKey::FilterSampleRate,   Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,             0.0,
                          IOKey::BlockSize,          Measure::Samples,   0.0,                IOLimit::Minimum,   Measure::Samples,           1.0,
                          IOKey::SampleRate,         Measure::Hertz,     -1.0,               IOLimit::Minimum,   Measure::Hertz,             0.0,
@@ -283,7 +283,7 @@ public:
      This will generally be for some of the second order filters (e.g., with frequency and Q controls). */
     static UnitType ar (UnitType const& param0,
                         UnitType const& param1,
-                        SampleRate const filterSampleRate = SampleRate::getDefault(),
+                        SampleRates const filterSampleRates = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {                
@@ -292,19 +292,21 @@ public:
         plonk_assert (inputKeys.length() == 2);
         
         const int numInputChannels = plonk::max (param0.getNumChannels(), param1.getNumChannels());
-        UnitType result (UnitType::emptyWithAllocatedSize (numInputChannels * FormType::NumCoeffs));
+        const int numSampleRates = filterSampleRates.length();
+        const int numChannels = filterSampleRates.areAllEqual() ? numInputChannels : plonk::max (numInputChannels, numSampleRates);
+        UnitType result (UnitType::emptyWithAllocatedSize (numChannels * FormType::NumCoeffs));
         
         Data data;
         Memory::zero (data);
         data.base.sampleRate = -1.0;
         data.base.sampleDuration = -1.0;
 
-        for (int i = 0; i < numInputChannels; ++i)
+        for (int i = 0; i < numChannels; ++i)
         {
             Inputs inputs;
             inputs.put (inputKeys.atUnchecked (0), param0[i]);
             inputs.put (inputKeys.atUnchecked (1), param1[i]);
-            inputs.put (IOKey::FilterSampleRate, filterSampleRate);
+            inputs.put (IOKey::FilterSampleRate, filterSampleRates.wrapAt (i));
             
             result.add (UnitType::template proxiesFromInputs<FilterCoeffsInternal> (inputs, 
                                                                                     data, 

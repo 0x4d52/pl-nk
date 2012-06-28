@@ -963,6 +963,23 @@ public:
 			return this->getArray()[length-1];
 		}
 	}
+    
+    /** Determine if each item in the array is equal to the others. 
+     If the array is empty it will return true. */
+    bool areAllEqual() const throw()
+    {
+        if (this->length() > 0)
+        {
+            const ObjectType *thisArray = this->getArray();
+            const ObjectType first = thisArray[0];
+            
+            for (int i = 1; i < this->length(); ++i)
+                if (thisArray[i] != first)
+                    return false;
+        }
+        
+        return true;
+    }
 	    
     static const ObjectArray& getNull() throw()
 	{

@@ -86,45 +86,41 @@ public:
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */
     static UnitType ar (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create control rate a one-pole low-pass filter.
      @param input The input signal to filter.
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -172,39 +168,35 @@ public:
      @param duration  The -60dB lag time. 
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */    
     static UnitType ar (UnitType const& input,
                         UnitType const& duration = SampleType (0.2),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (duration, input.getSampleRates());
 
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Creates a control rate exponential lag filter (one-pole low-pass filter).
      @param input The input signal to filter.
      @param duration  The -60dB lag time. 
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& duration = SampleType (0.2),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (duration, input.getSampleRates());
         
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
@@ -257,45 +249,41 @@ public:
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */    
     static UnitType ar (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
 
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate one-pole high-pass filter.
      @param input The input signal to filter.
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -343,45 +331,41 @@ public:
      @param duration  The -60dB decay time. 
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */        
     static UnitType ar (UnitType const& input,
                         UnitType const& duration = SampleType (0.2),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (duration, input.getSampleRates());
 
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Creates a control rate exponential deacy filter.
      @param input The input signal to filter.
      @param duration  The -60dB decay time. 
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& duration = SampleType (0.2),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (duration, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (duration, input.getSampleRates());
         
         if (duration.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -433,7 +417,6 @@ public:
      @param q The Q factor.
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */        
     static UnitType ar (UnitType const& input,
@@ -441,17 +424,16 @@ public:
                         UnitType const& q = SampleType (1),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, input.getSampleRates());
 
         if ((frequency.isConstant() == false) || (q.isConstant() == false))
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate resonant low-pass filter.
@@ -459,22 +441,20 @@ public:
      @param frequency  The -3dB point cut-off frequency. 
      @param q The Q factor.
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& q = SampleType (1),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -523,7 +503,6 @@ public:
      @param q The Q factor.
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */            
     static UnitType ar (UnitType const& input,
@@ -531,17 +510,16 @@ public:
                         UnitType const& q = SampleType (1),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, input.getSampleRates());
         
         if ((frequency.isConstant() == false) || (q.isConstant() == false))
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate resonant high-pass filter.
@@ -549,22 +527,20 @@ public:
      @param frequency  The -3dB point cut-off frequency. 
      @param q The Q factor.
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& q = SampleType (1),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, q, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -615,7 +591,6 @@ public:
      @param gain The boost/cut gain in dB.
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */                
     static UnitType ar (UnitType const& input,
@@ -624,11 +599,10 @@ public:
                         UnitType const& gain = SampleType (0),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, input.getSampleRates());
         
         if ((frequency.isConstant() == false) || 
             (s.isConstant() == false) ||
@@ -636,7 +610,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate low-shelving filter.
@@ -645,23 +619,21 @@ public:
      @param s The slope factor (keep to 1 or below for no strange resonances).
      @param gain The boost/cut gain in dB.
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& s = SampleType (1),
                         UnitType const& gain = SampleType (0),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -712,7 +684,6 @@ public:
      @param gain The boost/cut gain in dB.
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */                    
     static UnitType ar (UnitType const& input,
@@ -721,11 +692,10 @@ public:
                         UnitType const& gain = SampleType (0),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, input.getSampleRates());
         
         if ((frequency.isConstant() == false) || 
             (s.isConstant() == false) ||
@@ -733,7 +703,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate high-shelving filter.
@@ -742,23 +712,21 @@ public:
      @param s The slope factor (keep to 1 or below for no strange resonances).
      @param gain The boost/cut gain in dB.
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& s = SampleType (1),
                         UnitType const& gain = SampleType (0),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, s, gain, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -809,7 +777,6 @@ public:
      @param gain The boost/cut gain in dB.
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */                
     static UnitType ar (UnitType const& input,
@@ -818,11 +785,10 @@ public:
                         UnitType const& gain = SampleType (0),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, q, gain, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, gain, input.getSampleRates());
 
         if ((frequency.isConstant() == false) || 
             (q.isConstant() == false) ||
@@ -830,7 +796,7 @@ public:
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate notch filter.
@@ -839,23 +805,21 @@ public:
      @param q The Q factor.
      @param gain The boost/cut gain in dB.
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& q = SampleType (1),
                         UnitType const& gain = SampleType (0),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, q, gain, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, q, gain, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -904,7 +868,6 @@ public:
      @param bandwidth The bandwidth of the passband in octaves.
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */                    
     static UnitType ar (UnitType const& input,
@@ -912,17 +875,16 @@ public:
                         UnitType const& bandwidth = SampleType (1),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate bandpass filter.
@@ -930,22 +892,20 @@ public:
      @param frequency  The centre frequency. 
      @param bandwidth The bandwidth of the passband in octaves.
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& bandwidth = SampleType (1),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -994,7 +954,6 @@ public:
      @param bandwidth The bandwidth of the stopband in octaves.
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */                        
     static UnitType ar (UnitType const& input,
@@ -1002,17 +961,16 @@ public:
                         UnitType const& bandwidth = SampleType (1),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a control rate bandreject filter.
@@ -1020,22 +978,20 @@ public:
      @param frequency  The centre frequency. 
      @param bandwidth The bandwidth of the stopband in octaves.
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& bandwidth = SampleType (1),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, bandwidth, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -1086,45 +1042,41 @@ public:
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */    
     static UnitType ar (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
 
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a simple control rate Butterworth 2nd-order low-pass filter.
      @param input The input signal to filter.
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    
@@ -1172,45 +1124,41 @@ public:
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
      @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered.
      @param preferredBlockSize (Optional) The preferred block size for the process.
      @param preferredSampleRate (Optional) The preferred sample rate for the process. */        
     static UnitType ar (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getDefault(),
                         BlockSize const& preferredBlockSize = BlockSize::noPreference(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::ar (coeffs[i]));
         
-        return FilterType::ar (input.ar(), coeffs, mul, add, preferredBlockSize, preferredSampleRate);
+        return FilterType::ar (input, coeffs, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
     /** Create a simple control rate Butterworth 2nd-order high-pass filter.
      @param input The input signal to filter.
      @param frequency  The -3dB point cut-off frequency. 
      @param mul An optional multiplier.
-     @param add An optional offset.
-     @param filterSampleRate (Optional) The sample rate of the signal being filtered. */
+     @param add An optional offset. */
     static UnitType kr (UnitType const& input,
                         UnitType const& frequency = SampleType (1200),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0),
-                        SampleRate const& filterSampleRate = SampleRate::getControlRate()) throw()
+                        UnitType const& add = SampleType (0)) throw()
     {
-        UnitType coeffs = FilterCoeffsType::ar (frequency, filterSampleRate);
+        UnitType coeffs = FilterCoeffsType::ar (frequency, input.getSampleRates());
         
         if (frequency.isConstant() == false)
             for (int i = 0; i < coeffs.getNumChannels(); ++i)
                 coeffs.put (i, ResampleType::kr (coeffs[i]));
         
-        return FilterType::ar (input.kr(), coeffs, mul, add, 
+        return FilterType::ar (input, coeffs, mul, add, 
                                BlockSize::getControlRateBlockSize(), 
                                SampleRate::getControlRate());
     }    

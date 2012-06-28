@@ -99,7 +99,7 @@
 
 - (Unit)constructGraph:(PLAudioHost*)host
 {
-    return Sine::ar (Lag::kr (freq, 0.5), amp);
+    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq, 0.5), amp), freq * 2 + 200, 3);
 }
 
 - (float)freq
