@@ -994,6 +994,11 @@ public:
 		return null;
 	}	
     
+//    static const ObjectType& getNullObject() throw()
+//	{
+//		return TypeUtility<ObjectType>::getNull();
+//	}	
+    
 	/** Compares whether the contents of two arrays are the same. */
 	bool operator== (ObjectArray<ObjectType> const& other) const throw()
 	{		

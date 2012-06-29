@@ -103,17 +103,17 @@ public:
     }
     
     inline void growBufferSize() throw()                            { bufferSize.setValue (bufferSize.getValue() * 2); }
-    inline const BlockSize getBufferSize() const throw()            { return bufferSize; }
-    inline BlockSize getBufferSize() throw()                        { return bufferSize; }
-    inline const BlockSize getWriteBlockSize() const throw()        { return writeBlockSize; }
-    inline BlockSize getWriteBlockSize() throw()                    { return writeBlockSize; }
-    inline const SampleRate getSampleRate() const throw()           { return sampleRate; }
-    inline SampleRate getSampleRate() throw()                       { return sampleRate; }
+//    inline const BlockSize getBufferSize() const throw()            { return bufferSize; }
+    inline BlockSize getBufferSize() const throw()                  { return bufferSize; }
+//    inline const BlockSize getWriteBlockSize() const throw()        { return writeBlockSize; }
+    inline BlockSize getWriteBlockSize() const throw()              { return writeBlockSize; }
+//    inline const SampleRate getSampleRate() const throw()           { return sampleRate; }
+    inline SampleRate getSampleRate() const throw()                 { return sampleRate; }
     inline double getDuration() const throw()                       { return (bufferEndTime - bufferStartTime).getValue(); }
     inline const TimeStamp& getLatestValidTime() const throw()      { return latestValidTime; }
     inline const TimeStamp getEarliestValidTime() const throw()     { return latestValidTime - this->getDuration(); }
     Text getLabel() const throw()                                   { return identifier; }
-    void setLabel(Text const& newId) throw()                        { identifier = newId; }
+    void setLabel (Text const& newId) throw()                       { identifier = newId; }
 
     
     void write (TimeStamp writeStartTime, 
@@ -280,7 +280,7 @@ public:
     typedef BusBuffer<SampleType>           BusType;
     typedef Dictionary<BusType>             BusDictionary;
     
-    BusBuffer () throw()
+    BusBuffer() throw()
     :   Base (new Internal())
     {
     }            
@@ -371,7 +371,8 @@ public:
             BusBuffer newBusBuffer (BusBuffer::getDefaultBufferSize(), 
                                     BlockSize::getDefault(), 
                                     SampleRate::getDefault());
-            dictionary.put (name, newBusBuffer);        
+            dictionary.put (name, newBusBuffer);  
+            return newBusBuffer;
         }        
         
         return dictionary[name];

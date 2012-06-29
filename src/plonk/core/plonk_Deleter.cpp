@@ -51,7 +51,7 @@ Deleter::~Deleter() throw()
 {
 }
 
-void Deleter::deleteInternal(SmartPointer* internalToDelete) throw()
+void Deleter::deleteInternal (SmartPointer* internalToDelete) throw()
 {
 	//if(internalToDelete->getRefCount() >= 0)  // hack for some other bug?
 		delete internalToDelete;

@@ -64,7 +64,7 @@ class Deleter
 public:
 	Deleter() throw();
 	virtual ~Deleter() throw();
-	virtual void deleteInternal(SmartPointer* internalToDelete) throw();
+	virtual void deleteInternal (SmartPointer* internalToDelete) throw();
 	virtual void flush() throw() { };
 };
 
@@ -80,7 +80,7 @@ public:
 class LeakingDeleter : public Deleter
 {
 public:
-	void deleteInternal(SmartPointer* internalToDelete) throw() { (void)internalToDelete; } // just leak!
+	void deleteInternal (SmartPointer* internalToDelete) throw() { (void)internalToDelete; } // just leak!
 };
 
 

@@ -43,7 +43,7 @@
 #include "plonk_FilterForwardDeclarations.h"
 
 
-/** A generic IIR filter. */
+/** A generic FIR/IIR filter. */
 template<class FormType>
 class FilterChannelInternal 
 :   public ChannelInternal<typename FormType::SampleDataType, 
@@ -137,7 +137,7 @@ private:
 
 //------------------------------------------------------------------------------
 
-/** A generic filter. 
+/** A generic FIR/IIR filter. 
  This is broadly for internal use. It is employed by the various standard filters.
  @see LPFUnit LPFP1Unit RLPFUnit HPFUnit HPFP1Unit RHPFUnit BPFUnit BRFUnit LowShelfUnit HighShelfUnit NotchUnit LagUnit DecayUnit
  @ingroup FilterUnits */

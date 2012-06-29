@@ -61,15 +61,15 @@ class TableChannelInternal
 {
 public:
 
-    typedef PLONK_CHANNELDATA_NAME(TableChannelInternal,SampleType)   Data;
-    typedef ChannelBase<SampleType>                             ChannelType;
-    typedef TableChannelInternal<SampleType>                    TableInternal;
-    typedef ChannelInternal<SampleType,Data>                    Internal;
-    typedef ChannelInternalBase<SampleType>                     InternalBase;
-    typedef UnitBase<SampleType>                                UnitType;
-    typedef InputDictionary                                     Inputs;
-    typedef NumericalArray<SampleType>                          Buffer;
-    typedef WavetableBase<SampleType>                           WavetableType;
+    typedef PLONK_CHANNELDATA_NAME(TableChannelInternal,SampleType)     Data;
+    typedef ChannelBase<SampleType>                                     ChannelType;
+    typedef TableChannelInternal<SampleType>                            TableInternal;
+    typedef ChannelInternal<SampleType,Data>                            Internal;
+    typedef ChannelInternalBase<SampleType>                             InternalBase;
+    typedef UnitBase<SampleType>                                        UnitType;
+    typedef InputDictionary                                             Inputs;
+    typedef NumericalArray<SampleType>                                  Buffer;
+    typedef WavetableBase<SampleType>                                   WavetableType;
     
     typedef typename TypeUtility<SampleType>::IndexType         FrequencyType;
     typedef UnitBase<FrequencyType>                             FrequencyUnitType;

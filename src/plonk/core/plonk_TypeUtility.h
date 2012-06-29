@@ -43,7 +43,6 @@
 #include "../containers/plonk_ContainerForwardDeclarations.h"
 #include "../containers/variables/plonk_VariableForwardDeclarations.h"
 #include "../graph/plonk_GraphForwardDeclarations.h"
-
 #include "../containers/plonk_Text.h"
 
 /** Used to determine information about some types.
@@ -244,7 +243,7 @@ public:
     typedef Type const&     PassType;
     typedef float           IndexType;
     static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const Type& getNull() { static Type null; return null; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<class Type>
@@ -256,7 +255,7 @@ public:
     typedef Type const&     PassType;
     typedef float           IndexType;
     static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const Type& getNull() { TypeUtilityBase<Type>::getNull(); }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<OriginalType>::getNull(); }
 };
 
 template<class Type>
@@ -268,7 +267,7 @@ public:
     typedef Type const&     PassType;
     typedef float           IndexType;
     static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const Type& getNull() { TypeUtilityBase<Type>::getNull(); }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<OriginalType>::getNull(); }
 };
 
 
@@ -285,6 +284,7 @@ public:
     typedef Dynamic const&  PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Dynamic; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -296,6 +296,7 @@ public:
     typedef Dynamic const&  PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Dynamic; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -307,6 +308,7 @@ public:
     typedef float           PassType;
     typedef float           IndexType;
     static inline int getTypeCode() { return TypeCode::Float; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -318,6 +320,7 @@ public:
     typedef double           PassType;
     typedef double           IndexType;
     static inline int getTypeCode() { return TypeCode::Double; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -329,6 +332,7 @@ public:
     typedef int             PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Int; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -340,6 +344,7 @@ public:
     typedef short           PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Short; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -351,6 +356,7 @@ public:
     typedef Int24           PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 /*
@@ -362,7 +368,8 @@ public:
     typedef Long            OriginalType;
     typedef Long            PassType;
     typedef float           IndexType;
-    static inline int  getTypeCode() { return TypeCode::Long; }
+ static inline int  getTypeCode() { return TypeCode::Long; }
+ static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 */
 
@@ -375,6 +382,7 @@ public:
     typedef LongLong        PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::LongLong; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -386,6 +394,7 @@ public:
     typedef char            PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Char; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -397,6 +406,7 @@ public:
     typedef bool            PassType;
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Bool; }
+    static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
 };
 
 template<>
@@ -408,6 +418,7 @@ public:
     typedef AtomicFloat const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloat; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -419,6 +430,7 @@ public:
     typedef AtomicFloat const&     PassType;
     typedef float IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloat; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -430,6 +442,7 @@ public:
     typedef AtomicDouble const&     PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDouble; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -441,6 +454,7 @@ public:
     typedef AtomicDouble const& PassType;
     typedef double              IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDouble; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -452,6 +466,7 @@ public:
     typedef AtomicInt const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicInt; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -463,6 +478,7 @@ public:
     typedef AtomicInt const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicInt; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 /*
@@ -474,7 +490,8 @@ public:
     typedef AtomicLong          OriginalType;
     typedef AtomicLong const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicLong; }
+ static inline int  getTypeCode() { return TypeCode::AtomicLong; }
+ static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -485,7 +502,8 @@ public:
     typedef AtomicLong          OriginalType;
     typedef AtomicLong const&   PassType;
     typedef float               IndexType;
-    static inline int  getTypeCode() { return TypeCode::AtomicLong; }
+ static inline int  getTypeCode() { return TypeCode::AtomicLong; }
+ static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 */
 
@@ -498,6 +516,7 @@ public:
     typedef AtomicLongLong const&   PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongLong; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -509,6 +528,7 @@ public:
     typedef AtomicLongLong const&   PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongLong; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -520,6 +540,7 @@ public:
     typedef AtomicPointer const&   PassType;
     typedef int                    IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -531,6 +552,7 @@ public:
     typedef AtomicPointer const&   PassType;
     typedef int                    IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -542,6 +564,7 @@ public:
     typedef AtomicExtendedPointer const&   PassType;
     typedef int                            IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -553,6 +576,7 @@ public:
     typedef AtomicExtendedPointer const&   PassType;
     typedef int                            IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -564,6 +588,7 @@ public:
     typedef AtomicDynamicPointer const&   PassType;
     typedef int                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -575,6 +600,7 @@ public:
     typedef AtomicDynamicPointer const&   PassType;
     typedef int                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<>
@@ -586,6 +612,7 @@ public:
     typedef FloatVariable const&    PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -597,6 +624,7 @@ public:
     typedef FloatVariable const&    PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -608,6 +636,7 @@ public:
     typedef DoubleVariable const&   PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -619,6 +648,7 @@ public:
     typedef DoubleVariable const&   PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -630,6 +660,7 @@ public:
     typedef IntVariable const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -641,6 +672,7 @@ public:
     typedef IntVariable const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -652,6 +684,7 @@ public:
     typedef ShortVariable const&    PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -663,6 +696,7 @@ public:
     typedef ShortVariable const&    PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -674,6 +708,7 @@ public:
     typedef Int24Variable const&    PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Variable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -685,6 +720,7 @@ public:
     typedef Int24Variable const&    PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Variable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -696,6 +732,7 @@ public:
     typedef LongVariable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -707,6 +744,7 @@ public:
     typedef LongVariable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -718,6 +756,7 @@ public:
     typedef CharVariable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::CharVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -729,6 +768,7 @@ public:
     typedef CharVariable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::CharVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -740,6 +780,7 @@ public:
     typedef BoolVariable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -751,6 +792,7 @@ public:
     typedef BoolVariable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -762,6 +804,7 @@ public:
     typedef AtomicFloatVariable const&      PassType;
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -773,6 +816,7 @@ public:
     typedef AtomicFloatVariable const&      PassType;
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -784,6 +828,7 @@ public:
     typedef AtomicDoubleVariable const&     PassType;
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -795,6 +840,7 @@ public:
     typedef AtomicDoubleVariable const&     PassType;
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -806,6 +852,7 @@ public:
     typedef AtomicIntVariable const&        PassType;
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicIntVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -817,6 +864,7 @@ public:
     typedef AtomicIntVariable const&        PassType;
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicIntVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -828,6 +876,7 @@ public:
     typedef AtomicLongVariable const&       PassType;
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -839,6 +888,7 @@ public:
     typedef AtomicLongVariable const&       PassType;
     typedef float IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -850,6 +900,7 @@ public:
     typedef AtomicPointerVariable const&       PassType;
     typedef int                                IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -861,6 +912,7 @@ public:
     typedef AtomicPointerVariable const&       PassType;
     typedef int                                IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -872,6 +924,7 @@ public:
     typedef AtomicExtendedPointerVariable const&       PassType;
     typedef int                                        IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -883,6 +936,7 @@ public:
     typedef AtomicExtendedPointerVariable const&       PassType;
     typedef int                                        IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -894,6 +948,7 @@ public:
     typedef AtomicDynamicPointerVariable const&       PassType;
     typedef int                                       IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -905,6 +960,7 @@ public:
     typedef AtomicDynamicPointerVariable const&       PassType;
     typedef int                                       IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -916,6 +972,7 @@ public:
     typedef FloatArray const&       PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -927,6 +984,7 @@ public:
     typedef DoubleArray const&      PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -938,6 +996,7 @@ public:
     typedef DoubleArray const&      PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -949,6 +1008,7 @@ public:
     typedef IntArray const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -960,6 +1020,7 @@ public:
     typedef IntArray const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -971,6 +1032,7 @@ public:
     typedef ShortArray const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -982,6 +1044,7 @@ public:
     typedef ShortArray const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -993,6 +1056,7 @@ public:
     typedef Int24Array const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Array; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1004,6 +1068,7 @@ public:
     typedef Int24Array const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Array; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1015,6 +1080,7 @@ public:
     typedef LongArray const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1026,6 +1092,7 @@ public:
     typedef LongArray const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1037,6 +1104,7 @@ public:
     typedef CharArray const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::CharArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1048,6 +1116,7 @@ public:
     typedef CharArray const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::CharArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1059,6 +1128,7 @@ public:
     typedef BoolArray const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1070,6 +1140,7 @@ public:
     typedef BoolArray const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1081,6 +1152,7 @@ public:
     typedef plonk::Text const&  PassType;
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::Text; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1092,6 +1164,7 @@ public:
     typedef plonk::Text const&  PassType;
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::Text; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1103,6 +1176,7 @@ public:
     typedef TextArray const&    PassType;
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::TextArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1114,6 +1188,7 @@ public:
     typedef TextArray const&    PassType;
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::TextArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1125,6 +1200,7 @@ public:
     typedef FloatChannel const& PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1136,6 +1212,7 @@ public:
     typedef FloatChannel const& PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1147,6 +1224,7 @@ public:
     typedef DoubleChannel const&    PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1158,6 +1236,7 @@ public:
     typedef DoubleChannel const&    PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1169,6 +1248,7 @@ public:
     typedef IntChannel const&       PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1180,6 +1260,7 @@ public:
     typedef IntChannel const&       PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1191,6 +1272,7 @@ public:
     typedef ShortChannel const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1202,6 +1284,7 @@ public:
     typedef ShortChannel const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1213,6 +1296,7 @@ public:
     typedef Int24Channel const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Channel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1224,6 +1308,7 @@ public:
     typedef Int24Channel const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Channel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1235,6 +1320,7 @@ public:
     typedef LongChannel const&      PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1246,6 +1332,7 @@ public:
     typedef LongChannel const&      PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongChannel; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1257,6 +1344,7 @@ public:
     typedef FloatUnit const&        PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1268,6 +1356,7 @@ public:
     typedef FloatUnit const&        PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1279,6 +1368,7 @@ public:
     typedef DoubleUnit const&       PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1290,6 +1380,7 @@ public:
     typedef DoubleUnit const&       PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1301,6 +1392,7 @@ public:
     typedef IntUnit const&      PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1312,6 +1404,7 @@ public:
     typedef IntUnit const&      PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1323,6 +1416,7 @@ public:
     typedef ShortUnit const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1334,6 +1428,7 @@ public:
     typedef ShortUnit const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1345,6 +1440,7 @@ public:
     typedef Int24Unit const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Unit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1356,6 +1452,7 @@ public:
     typedef Int24Unit const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Unit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1367,6 +1464,7 @@ public:
     typedef LongUnit const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1378,6 +1476,7 @@ public:
     typedef LongUnit const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnit; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1389,6 +1488,7 @@ public:
     typedef FloatBus const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1400,6 +1500,7 @@ public:
     typedef FloatBus const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1411,6 +1512,7 @@ public:
     typedef DoubleBus const&    PassType;
     typedef double              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1422,6 +1524,7 @@ public:
     typedef DoubleBus const&    PassType;
     typedef double              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1433,6 +1536,7 @@ public:
     typedef IntBus const&       PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1444,6 +1548,7 @@ public:
     typedef IntBus const&       PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1455,6 +1560,7 @@ public:
     typedef ShortBus const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1466,6 +1572,7 @@ public:
     typedef ShortBus const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1477,6 +1584,7 @@ public:
     typedef Int24Bus const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Bus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1488,6 +1596,7 @@ public:
     typedef Int24Bus const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Bus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1499,6 +1608,7 @@ public:
     typedef LongBus const&      PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1510,6 +1620,7 @@ public:
     typedef LongBus const&      PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBus; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1521,6 +1632,7 @@ public:
     typedef FloatUnits const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1532,6 +1644,7 @@ public:
     typedef FloatUnits const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1543,6 +1656,7 @@ public:
     typedef DoubleUnits const&      PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1554,6 +1668,7 @@ public:
     typedef DoubleUnits const&      PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1565,6 +1680,7 @@ public:
     typedef IntUnits const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1576,6 +1692,7 @@ public:
     typedef IntUnits const&     PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1587,6 +1704,7 @@ public:
     typedef ShortUnits const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1598,6 +1716,7 @@ public:
     typedef ShortUnits const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1609,6 +1728,7 @@ public:
     typedef Int24Units const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Units; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1620,6 +1740,7 @@ public:
     typedef Int24Units const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Units; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1631,6 +1752,7 @@ public:
     typedef LongUnits const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1642,6 +1764,7 @@ public:
     typedef LongUnits const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnits; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1653,6 +1776,7 @@ public:
     typedef FloatBusses const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1664,6 +1788,7 @@ public:
     typedef FloatBusses const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1675,6 +1800,7 @@ public:
     typedef DoubleBusses const&     PassType;
     typedef double IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1686,6 +1812,7 @@ public:
     typedef DoubleBusses const&     PassType;
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1697,6 +1824,7 @@ public:
     typedef IntBusses const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1708,6 +1836,7 @@ public:
     typedef IntBusses const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1719,6 +1848,7 @@ public:
     typedef ShortBusses const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1730,6 +1860,7 @@ public:
     typedef ShortBusses const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1741,6 +1872,7 @@ public:
     typedef Int24Busses const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Busses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1752,6 +1884,7 @@ public:
     typedef Int24Busses const&  PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Busses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1763,6 +1896,7 @@ public:
     typedef LongBusses const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1774,6 +1908,7 @@ public:
     typedef LongBusses const&   PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBusses; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1785,6 +1920,7 @@ public:
     typedef FloatBreakpoints const&     PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1796,6 +1932,7 @@ public:
     typedef FloatBreakpoints const&     PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1807,6 +1944,7 @@ public:
     typedef DoubleBreakpoints const&    PassType;
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1818,6 +1956,7 @@ public:
     typedef DoubleBreakpoints const&    PassType;
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1829,6 +1968,7 @@ public:
     typedef IntBreakpoints const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1840,6 +1980,7 @@ public:
     typedef IntBreakpoints const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1851,6 +1992,7 @@ public:
     typedef ShortBreakpoints const&     PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1862,6 +2004,7 @@ public:
     typedef ShortBreakpoints const&     PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1873,6 +2016,7 @@ public:
     typedef Int24Breakpoints const&     PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Breakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1884,6 +2028,7 @@ public:
     typedef Int24Breakpoints const&     PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Breakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1895,6 +2040,7 @@ public:
     typedef LongBreakpoints const&      PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1906,6 +2052,7 @@ public:
     typedef LongBreakpoints const&      PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBreakpoints; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1917,6 +2064,7 @@ public:
     typedef FloatWavetable const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1928,6 +2076,7 @@ public:
     typedef FloatWavetable const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1939,6 +2088,7 @@ public:
     typedef DoubleWavetable const&      PassType;
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1950,6 +2100,7 @@ public:
     typedef DoubleWavetable const&      PassType;
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1961,6 +2112,7 @@ public:
     typedef IntWavetable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1972,6 +2124,7 @@ public:
     typedef IntWavetable const&     PassType;
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1983,6 +2136,7 @@ public:
     typedef ShortWavetable const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -1994,6 +2148,7 @@ public:
     typedef ShortWavetable const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2005,6 +2160,7 @@ public:
     typedef Int24Wavetable const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Wavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2016,6 +2172,7 @@ public:
     typedef Int24Wavetable const&       PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Wavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2027,6 +2184,7 @@ public:
     typedef LongWavetable const&        PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2038,6 +2196,7 @@ public:
     typedef LongWavetable const&        PassType;
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongWavetable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2049,6 +2208,7 @@ public:
     typedef FloatSignal const&       PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2060,6 +2220,7 @@ public:
     typedef FloatSignal const&       PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2071,6 +2232,7 @@ public:
     typedef DoubleSignal const&      PassType;
     typedef double                   IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2082,6 +2244,7 @@ public:
     typedef DoubleSignal const&      PassType;
     typedef double                   IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2093,6 +2256,7 @@ public:
     typedef IntSignal const&     PassType;
     typedef float                IndexType;
     static inline int  getTypeCode() { return TypeCode::IntSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2104,6 +2268,7 @@ public:
     typedef IntSignal const&     PassType;
     typedef float                IndexType;
     static inline int  getTypeCode() { return TypeCode::IntSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2115,6 +2280,7 @@ public:
     typedef ShortSignal const&       PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2126,6 +2292,7 @@ public:
     typedef ShortSignal const&       PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2137,6 +2304,7 @@ public:
     typedef Int24Signal const&       PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Signal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2148,6 +2316,7 @@ public:
     typedef Int24Signal const&       PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Signal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2159,6 +2328,7 @@ public:
     typedef LongSignal const&        PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::LongSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>
@@ -2170,6 +2340,7 @@ public:
     typedef LongSignal const&        PassType;
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::LongSignal; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 

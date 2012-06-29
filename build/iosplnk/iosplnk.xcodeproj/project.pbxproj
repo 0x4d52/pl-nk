@@ -357,6 +357,7 @@
 		A8241690158C77AF004CA012 /* plonk_IOSAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOSAudioHost.h; sourceTree = "<group>"; };
 		A82416B5158E4CF3004CA012 /* plonk_JuceAudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_JuceAudioHost.cpp; sourceTree = "<group>"; };
 		A82416B6158E4CF3004CA012 /* plonk_JuceAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_JuceAudioHost.h; sourceTree = "<group>"; };
+		A86AD4B4159DB0700064EA76 /* plonk_Delay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_Delay.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -993,6 +994,7 @@
 		A824167F1588C10C004CA012 /* delay */ = {
 			isa = PBXGroup;
 			children = (
+				A86AD4B4159DB0700064EA76 /* plonk_Delay.h */,
 				A82416801588C10C004CA012 /* notes.txt */,
 			);
 			path = delay;

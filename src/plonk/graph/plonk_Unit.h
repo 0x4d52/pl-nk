@@ -856,43 +856,7 @@ public:
                 this->setToNull();
         }
     }
-    
-//    inline static const UnitBase& getZero() throw()  
-//    { 
-//        static const UnitBase v (Math<SampleType>::get0()); 
-//        return v; 
-//    }
-//    
-//    inline static const UnitBase& getOne() throw()   
-//    {         
-//        static const UnitBase v (Math<SampleType>::get1()); 
-//        return v; 
-//    }
-//    
-//    inline static const UnitBase& getTwo() throw()   
-//    {         
-//        static const UnitBase v (Math<SampleType>::get2()); 
-//        return v; 
-//    }
-//    
-//    inline static const UnitBase& getHalf() throw()  
-//    {         
-//        static const UnitBase v (Math<SampleType>::get0_5()); 
-//        return v; 
-//    }
-//    
-//    inline static const UnitBase& getPi() throw()    
-//    {         
-//        static const UnitBase v (Math<SampleType>::getPi()); 
-//        return v; 
-//    }
-//    
-//    inline static const UnitBase& getTwoPi() throw() 
-//    {         
-//        static const UnitBase v (Math<SampleType>::get2Pi()); 
-//        return v; 
-//    }        
-    
+        
     int getTypeCode() const throw()
     {
         return TypeUtility<UnitBase>::getTypeCode();

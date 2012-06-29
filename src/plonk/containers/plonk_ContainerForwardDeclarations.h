@@ -187,7 +187,6 @@ typedef NumericalArray2D<Double>			Double2D;
 typedef ObjectArray2D<Text,TextArray>       TextArray2D;
 typedef ObjectArray2D<Text,TextArray>       Text2D;
 
-
 typedef BreakpointsBase<Float>                 FloatBreakpoints;
 typedef BreakpointsBase<Double>                DoubleBreakpoints;
 typedef BreakpointsBase<Short>                 ShortBreakpoints;
