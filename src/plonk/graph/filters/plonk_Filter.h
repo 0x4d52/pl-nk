@@ -53,7 +53,7 @@ public:
     typedef typename FormType::SampleDataType                       SampleType;
     typedef typename FormType::Data                                 Data;
     typedef ChannelBase<SampleType>                                 ChannelType;
-    typedef FilterChannelInternal<FilterFormType>                   FilterInternal;
+    typedef FilterChannelInternal<FormType>                         FilterInternal;
     typedef ChannelInternal<SampleType,Data>                        Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
     typedef UnitBase<SampleType>                                    UnitType;

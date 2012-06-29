@@ -36,44 +36,50 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_FILTERSHAPES_H
-#define PLONK_FILTERSHAPES_H
+#ifndef PLONK_DELAYTYPES_H
+#define PLONK_DELAYTYPES_H
 
-#include "plonk_FilterForwardDeclarations.h"
 
-template<class SampleType, int NumCoeffs, int NumParams>
-struct FilterShapeData
-{    
-    typedef typename TypeUtility<SampleType>::IndexType CalcType;
-    
-    ChannelInternalCore::Data base;
-    
-    CalcType filterSampleRate;
-    CalcType filterSampleDuration;
-    
-    CalcType coeffs[NumCoeffs];
-    CalcType params[NumParams];
-};          
-
-template<class SampleType, signed Form, signed Shape>
-class FilterShape
+class DelayFormType
 {
-public:    
-    typedef SampleType SampleDataType;
-
-    static Text getFormName() throw()
+public:
+    enum Name
     {
-        return FilterFormType::getName (Form);
-    }    
+        Unknown = 0,
+        Delay,
+        NumNames
+    };
     
-    static Text getShapeName() throw()
-    {
-        return FilterShapeType::getName (Shape);
-    }    
+    static DelayFormType::Name fromInt (const int value) throw();
+    static Text getName (const int index) throw();
 };
 
+//------------------------------------------------------------------------------
+
+
+//class FilterShapeType
+//{
+//public:
+//    enum Name
+//    {
+//        Unknown = 0,
+//        LPF,
+//        HPF,
+//        BPF,
+//        BRF,
+//        LowShelf,
+//        HighShelf,
+//        Notch,
+//        Allpass,
+//        Other,
+//        NumNames
+//    };
+//   
+//    static FilterShapeType::Name fromInt (const int value) throw();
+//    static Text getName (const int index) throw();
+//};
 
 
 
 
-#endif // PLONK_FILTERSHAPES_H
+#endif // PLONK_DELAYTYPES_H
