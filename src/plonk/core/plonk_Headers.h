@@ -151,6 +151,8 @@
 #include "../graph/filters/shapes/plonk_FilterShapesP2Z2.h"
 #include "../graph/filters/shapes/plonk_FilterShapesB.h"
 
+#include "../graph/delay/plonk_Delay.h"
+
 #include "../graph/control/plonk_EnvelopeChannel.h"
 
 #include "../graph/fft/plonk_FFTChannel.h"

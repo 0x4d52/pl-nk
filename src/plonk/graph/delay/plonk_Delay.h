@@ -46,7 +46,11 @@ template<class SampleType> class DelayChannelInternal;
 
 PLONK_CHANNELDATA_DECLARE(DelayChannelInternal,SampleType)
 {        
+    typedef typename TypeUtility<SampleType>::IndexType DurationType;
+
     ChannelInternalCore::Data base;
+    
+    DurationType maximumDuration;
     int writePosition;
 };      
 
@@ -88,7 +92,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Buffer);
+        const IntArray keys (IOKey::Generic, IOKey::Duration);
         return keys;
     }    
     
@@ -113,13 +117,15 @@ public:
         this->setOverlap (inputUnit.getOverlap (channel));
         
         this->initValue (SampleType (0));
+        
+        Data& data = this->getState();
+        this->buffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5));
     }    
     
     void process (ProcessInfo& info, const int channel) throw()
     {        
         Data& data = this->getState();
         const double sampleRate = data.base.sampleRate;
-        const double sampleDuration = data.base.sampleDuration;
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const Buffer inputBuffer (inputUnit.process (info, channel));
@@ -127,20 +133,17 @@ public:
         const int inputBufferLength = inputBuffer.length();
 
         DurationUnitType& durationUnit = ChannelInternalCore::getInputAs<DurationUnitType> (IOKey::Duration);
-        const DurationBufferType frequencyBuffer (durationUnit.process (info, channel));
+        const DurationBufferType durationBuffer (durationUnit.process (info, channel));
+        const DurationType* const durationSamples = durationBuffer.getArray();
+        const int durationBufferLength = durationBuffer.length();
         
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
         
-        const DurationType* const durationSamples = durationBuffer.getArray();
-        const int durationBufferLength = durationBuffer.length();
-        
-        const Buffer& buffer (this->getInputAsBuffer (IOKey::Buffer));
-        const SampleType* const bufferSamples = buffer.getArray();
+        SampleType* const bufferSamples = buffer.getArray();
         const int bufferLength = buffer.length();
         const DurationType bufferLengthIndex = DurationType (bufferLength);
         const DurationType buffer0 (0);
-        const DurationType bufferLengthOverSampleRate = DurationType (bufferLength * sampleDuration); // was double, could be precision issue?
         
         int writePosition = data.writePosition;
         int i;
@@ -155,10 +158,10 @@ public:
 
                 const SampleType inputValue = inputSamples[i];
                 
-                const DurationType readPosition = DurationType (writePosition) - durationInSamples;
+                DurationType readPosition = DurationType (writePosition) - durationInSamples;
                 if (readPosition < buffer0)
                     readPosition += bufferLengthIndex;
-                const SampleType delayedValue = plonk::lookup (buffer, readPosition);
+                const SampleType delayedValue = plonk::lookup (bufferSamples, readPosition);
                 
                 const SampleType writeValue = inputValue;
                 bufferSamples[writePosition] = writeValue;
@@ -182,10 +185,10 @@ public:
             {
                 const SampleType inputValue = inputSamples[i];
                 
-                const DurationType readPosition = DurationType (writePosition) - durationInSamples;
+                DurationType readPosition = DurationType (writePosition) - durationInSamples;
                 if (readPosition < buffer0)
                     readPosition += bufferLengthIndex;
-                const SampleType delayedValue = plonk::lookup (buffer, readPosition);
+                const SampleType delayedValue = plonk::lookup (bufferSamples, readPosition);
                 
                 const SampleType writeValue = inputValue;
                 bufferSamples[writePosition] = writeValue;
@@ -210,10 +213,10 @@ public:
                 
                 const SampleType inputValue = inputSamples[i];
                 
-                const DurationType readPosition = DurationType (writePosition) - durationInSamples;
+                DurationType readPosition = DurationType (writePosition) - durationInSamples;
                 if (readPosition < buffer0)
                     readPosition += bufferLengthIndex;
-                const SampleType delayedValue = plonk::lookup (buffer, readPosition);
+                const SampleType delayedValue = plonk::lookup (bufferSamples, readPosition);
                 
                 const SampleType writeValue = inputValue;
                 bufferSamples[writePosition] = writeValue;
@@ -232,7 +235,77 @@ public:
         
         data.writePosition = writePosition;
     }
+    
+private:
+    Buffer buffer;
 };
+
+//------------------------------------------------------------------------------
+
+/** Delay processor. */
+template<class SampleType>
+class DelayUnit
+{
+public:    
+    typedef DelayChannelInternal<SampleType>        DelayInternal;
+    typedef typename DelayInternal::Data            Data;
+    typedef ChannelBase<SampleType>                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>        Internal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;
+    typedef NumericalArray<SampleType>              Buffer;
+    
+    typedef typename DelayInternal::DurationType         DurationType;
+    typedef typename DelayInternal::DurationUnitType     DurationUnitType;
+    typedef typename DelayInternal::DurationBufferType   DurationBufferType;
+    
+//    static inline UnitInfos getInfo() throw()
+//    {
+//        const double blockSize = (double)BlockSize::getDefault().getValue();
+//        const double sampleRate = SampleRate::getDefault().getValue();
+//        
+//        return UnitInfo ("Table", "A wavetable oscillator.",
+//                         
+//                         // output
+//                         ChannelCount::VariableChannelCount, 
+//                         IOKey::Generic,    Measure::None,      0.0,        IOLimit::None,
+//                         IOKey::End,
+//                         
+//                         // inputs
+//                         IOKey::Wavetable,  Measure::None,
+//                         IOKey::Frequency,  Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
+//                         IOKey::Multiply,   Measure::Factor,    1.0,        IOLimit::None,
+//                         IOKey::Add,        Measure::None,      0.0,        IOLimit::None,
+//                         IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
+//                         IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+//                         IOKey::End);
+//    }
+    
+    /** Create an audio rate wavetable oscillator. */
+    static UnitType ar (UnitType const& input,
+                        DurationUnitType const& duration = DurationType (0.5),
+                        const DurationType maximumDuration = DurationType (1.0),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    {             
+        Inputs inputs;
+        inputs.put (IOKey::Generic, input);
+        inputs.put (IOKey::Duration, duration);
+        inputs.put (IOKey::Multiply, mul);
+        inputs.put (IOKey::Add, add);
+        
+        Data data = { { -1.0, -1.0 }, maximumDuration, 0 };
+        
+        return UnitType::template createFromInputs<DelayInternal> (inputs, 
+                                                                   data, 
+                                                                   preferredBlockSize, 
+                                                                   preferredSampleRate);
+    }
+};
+
+typedef DelayUnit<PLONK_TYPE_DEFAULT> Delay;
 
 
 

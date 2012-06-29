@@ -122,7 +122,6 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {        
         Data& data = this->getState();
-        const double sampleRate = data.base.sampleRate;
         const double sampleDuration = data.base.sampleDuration;
 
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);

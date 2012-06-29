@@ -100,7 +100,12 @@
 - (Unit)constructGraph:(PLAudioHost*)host
 {
 //    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq, 0.5), amp), freq * 2 + 200, 3);
-    return RLPF::ar (HarmonicSaw::ar (Lag::kr (freq).ar(), amp), freq * 2 + 200, 3);
+//    return RLPF::ar (HarmonicSaw::ar (Lag::kr (freq).ar(), amp), freq * 2 + 200, 3);
+    
+    Unit input = BusRead::ar (Bus ("0"));
+    Unit delay = Delay::ar (input, 0.25, 0.5);
+    
+    return input + delay * 0.5;
 }
 
 - (float)freq
