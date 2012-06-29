@@ -41,7 +41,7 @@
 
 #include "plonk_FilterForwardDeclarations.h"
 
-template<class SampleType, FilterFormType::Name Form>
+template<class SampleType, signed Form>
 struct FilterFormData
 {    
     ChannelInternalCore::Data base;
@@ -68,7 +68,7 @@ struct FilterFormData<SampleType, FilterFormType::B2>
 
 //------------------------------------------------------------------------------
 
-template<class SampleType, FilterFormType::Name Form>
+template<class SampleType, signed Form>
 class FilterFormBase
 {
 public:    
@@ -78,7 +78,7 @@ public:
     }        
 };
 
-template<class SampleType, FilterFormType::Name Form>
+template<class SampleType, signed Form>
 class FilterForm : public FilterFormBase<SampleType, Form>
 {
 };
