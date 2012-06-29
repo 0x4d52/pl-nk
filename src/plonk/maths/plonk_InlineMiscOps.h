@@ -221,21 +221,67 @@ inline Type explin (Type const& input,
     return log (clipped / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
 }
 
+//------------------------------------------------------------------------------
 
 template<class ValueType, class IndexType>
-inline ValueType lininterp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
+class InterpBase
 {
-    return value0 + ValueType (frac * (value1 - value0));
-}
+};
 
 template<class ValueType, class IndexType>
-inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+class InterpLinear
 {
-    const int index0 = int (index);
-    const int index1 = index0 + 1;
-    const IndexType frac = index - IndexType (index0);
-    return lininterp (table[index0], table[index1], frac);
-}
+public:
+    static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
+    {
+        return value0 + ValueType (frac * (value1 - value0));
+    }
+    
+    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    {
+        const int index0 = int (index);
+        const int index1 = index0 + 1;
+        const IndexType frac = index - IndexType (index0);
+        return interp (table[index0], table[index1], frac);
+    }
+};
+
+template<class ValueType>
+class InterpLinear<ValueType,int>
+{
+public:
+    typedef int IndexType;
+    
+    static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
+    {
+        (void)value1;
+        (void)frac;
+        return value0;
+    }
+    
+    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    {
+        return table[index];
+    }
+};
+
+
+
+
+//template<class ValueType, class IndexType>
+//inline ValueType lininterp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
+//{
+//    return value0 + ValueType (frac * (value1 - value0));
+//}
+//
+//template<class ValueType, class IndexType>
+//inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+//{
+//    const int index0 = int (index);
+//    const int index1 = index0 + 1;
+//    const IndexType frac = index - IndexType (index0);
+//    return lininterp (table[index0], table[index1], frac);
+//}
 
 /// @}
 

@@ -75,7 +75,7 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType     DurationType;
     typedef UnitBase<DurationType>                          DurationUnitType;
     typedef NumericalArray<DurationType>                    DurationBufferType;
-    
+    typedef InterpLinear<SampleType,DurationType>           InterpType;
     
     DelayChannelInternal (Inputs const& inputs, 
                           Data const& data, 
@@ -155,13 +155,14 @@ public:
             for (i = 0; i < outputBufferLength; ++i) 
             {
                 const DurationType durationInSamples = DurationType (durationSamples[i] * sampleRate);
+                plonk_assert (durationInSamples <= bufferLength);
 
                 const SampleType inputValue = inputSamples[i];
                 
                 DurationType readPosition = DurationType (writePosition) - durationInSamples;
                 if (readPosition < buffer0)
                     readPosition += bufferLengthIndex;
-                const SampleType delayedValue = plonk::lookup (bufferSamples, readPosition);
+                const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
                 
                 const SampleType writeValue = inputValue;
                 bufferSamples[writePosition] = writeValue;
@@ -188,7 +189,7 @@ public:
                 DurationType readPosition = DurationType (writePosition) - durationInSamples;
                 if (readPosition < buffer0)
                     readPosition += bufferLengthIndex;
-                const SampleType delayedValue = plonk::lookup (bufferSamples, readPosition);
+                const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
                 
                 const SampleType writeValue = inputValue;
                 bufferSamples[writePosition] = writeValue;
@@ -210,13 +211,14 @@ public:
             for (i = 0; i < outputBufferLength; ++i) 
             {
                 const DurationType durationInSamples = DurationType (durationSamples[int (durationPosition)] * sampleRate);
-                
+                plonk_assert (durationInSamples <= bufferLength);
+
                 const SampleType inputValue = inputSamples[i];
                 
                 DurationType readPosition = DurationType (writePosition) - durationInSamples;
                 if (readPosition < buffer0)
                     readPosition += bufferLengthIndex;
-                const SampleType delayedValue = plonk::lookup (bufferSamples, readPosition);
+                const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
                 
                 const SampleType writeValue = inputValue;
                 bufferSamples[writePosition] = writeValue;

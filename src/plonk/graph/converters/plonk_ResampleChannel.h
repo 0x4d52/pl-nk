@@ -58,6 +58,7 @@ public:
     typedef InputDictionary                             Inputs;
     typedef NumericalArray<SampleType>                  Buffer;
     typedef typename TypeUtility<SampleType>::IndexType IndexType;
+    typedef InterpLinear<SampleType,IndexType>          InterpType;
         
     ResampleChannelInternal (Inputs const& inputs, 
                              Data const& data, 
@@ -171,7 +172,7 @@ public:
                             
                 while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
                 {
-                    *outputSamples++ = plonk::lookup (tempBufferSamples, tempBufferPos);
+                    *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
                     tempBufferPos += tempBufferIncrement;
                 }
             }

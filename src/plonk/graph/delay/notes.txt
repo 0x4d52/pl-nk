@@ -7,3 +7,6 @@ it needs to be able to implement:
 - multitap delay (using single delay buffer)
 - multitap delay with individual feedback controls (using single delay buffer)
 - allpass delay
+
+
+- make the delay unit a proxy?

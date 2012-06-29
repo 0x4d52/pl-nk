@@ -74,6 +74,7 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType         FrequencyType;
     typedef UnitBase<FrequencyType>                             FrequencyUnitType;
     typedef NumericalArray<FrequencyType>                       FrequencyBufferType;
+    typedef InterpLinear<SampleType,FrequencyType>              InterpType;
 
 
     TableChannelInternal (Inputs const& inputs, 
@@ -146,7 +147,7 @@ public:
         {
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
                 currentPosition += frequencySamples[i] * tableLengthOverSampleRate;
                 
                 if (currentPosition >= tableLength)
@@ -163,7 +164,7 @@ public:
             {
                 for (i = 0; i < outputBufferLength; ++i) 
                 {
-                    outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                    outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
                     currentPosition += valueIncrement;
                     
                     if (currentPosition >= tableLength)
@@ -174,7 +175,7 @@ public:
             {
                 for (i = 0; i < outputBufferLength; ++i) 
                 {
-                    outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                    outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
                     currentPosition += valueIncrement;
                     
                     if (currentPosition < table0)	
@@ -189,7 +190,7 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
+                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
                 currentPosition += frequencySamples[int (frequencyPosition)] * tableLengthOverSampleRate;
                 
                 if (currentPosition >= tableLength)

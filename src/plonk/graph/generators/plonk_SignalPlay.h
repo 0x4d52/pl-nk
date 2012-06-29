@@ -74,7 +74,7 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType             RateType;
     typedef UnitBase<RateType>                                      RateUnitType;
     typedef NumericalArray<RateType>                                RateBufferType;
-
+    typedef InterpLinear<SampleType,RateType>                       InterpType;
 
     SignalPlayChannelInternal (Inputs const& inputs, 
                                Data const& data, 
@@ -148,9 +148,9 @@ public:
                 const int sampleB (sampleA + 1);
                 const RateType frac (data.currentPosition - RateType (sampleA));
                 
-                outputSamples[i] = plonk::lininterp (signalSamples[sampleA * signalFrameStride], 
-                                                     signalSamples[sampleB * signalFrameStride], 
-                                                     frac);
+                outputSamples[i] = InterpType::interp (signalSamples[sampleA * signalFrameStride], 
+                                                       signalSamples[sampleB * signalFrameStride], 
+                                                       frac);
                 
                 data.currentPosition += rateSamples[i] * rateScale;
                 
@@ -170,9 +170,9 @@ public:
                 const int sampleB (sampleA + 1);
                 const RateType frac (data.currentPosition - RateType (sampleA));
                 
-                outputSamples[i] = plonk::lininterp (signalSamples[sampleA * signalFrameStride], 
-                                                     signalSamples[sampleB * signalFrameStride], 
-                                                     frac);
+                outputSamples[i] = InterpType::interp (signalSamples[sampleA * signalFrameStride], 
+                                                       signalSamples[sampleB * signalFrameStride], 
+                                                       frac);
                 data.currentPosition += increment;
                 
                 if (data.currentPosition >= numSignalFrames)
@@ -192,9 +192,9 @@ public:
                 const int sampleB (sampleA + 1);
                 const RateType frac (data.currentPosition - RateType (sampleA));
                 
-                outputSamples[i] = plonk::lininterp (signalSamples[sampleA * signalFrameStride], 
-                                                     signalSamples[sampleB * signalFrameStride], 
-                                                     frac);
+                outputSamples[i] = InterpType::interp (signalSamples[sampleA * signalFrameStride], 
+                                                       signalSamples[sampleB * signalFrameStride], 
+                                                       frac);
                 
                 data.currentPosition += rateSamples[int (ratePosition)] * rateScale;
                 
