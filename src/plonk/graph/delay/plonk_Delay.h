@@ -92,28 +92,28 @@ public:
         return keys;
     }    
     
-//    InternalBase* getChannel (const int index) throw()
-//    {
-//        const Inputs channelInputs = this->getInputs().getChannel (index);
-//        return new TableInternal (channelInputs, 
-//                                  this->getState(), 
-//                                  this->getBlockSize(), 
-//                                  this->getSampleRate());
-//    }
+    InternalBase* getChannel (const int index) throw()
+    {
+        const Inputs channelInputs = this->getInputs().getChannel (index);
+        return new DelayInternal (channelInputs, 
+                                  this->getState(), 
+                                  this->getBlockSize(), 
+                                  this->getSampleRate());
+    }
     
-//    void initChannel (const int channel) throw()
-//    {        
-//        const FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
-//        
-//        this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
-//                                               this->getBlockSize()));
-//        this->setSampleRate (SampleRate::decide (frequencyUnit.getSampleRate (channel),
-//                                                 this->getSampleRate()));
-//        
-//        this->setOverlap (frequencyUnit.getOverlap (channel));
-//        
-//        this->initValue (this->getState().currentPosition);
-//    }    
+    void initChannel (const int channel) throw()
+    {        
+        const UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
+        
+        this->setBlockSize (BlockSize::decide (inputUnit.getBlockSize (channel),
+                                               this->getBlockSize()));
+        this->setSampleRate (SampleRate::decide (inputUnit.getSampleRate (channel),
+                                                 this->getSampleRate()));
+        
+        this->setOverlap (inputUnit.getOverlap (channel));
+        
+        this->initValue (SampleType (0));
+    }    
     
     void process (ProcessInfo& info, const int channel) throw()
     {        
@@ -121,8 +121,11 @@ public:
         const double sampleRate = data.base.sampleRate;
         const double sampleDuration = data.base.sampleDuration;
         
-        // get the input unit...
-        
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const SampleType* const inputSamples = inputBuffer.getArray();
+        const int inputBufferLength = inputBuffer.length();
+
         DurationUnitType& durationUnit = ChannelInternalCore::getInputAs<DurationUnitType> (IOKey::Duration);
         const DurationBufferType frequencyBuffer (durationUnit.process (info, channel));
         
@@ -134,25 +137,40 @@ public:
         
         const Buffer& buffer (this->getInputAsBuffer (IOKey::Buffer));
         const SampleType* const bufferSamples = buffer.getArray();
-        const DurationType bufferLength = DurationType (buffer.length());
+        const int bufferLength = buffer.length();
+        const DurationType bufferLengthIndex = DurationType (bufferLength);
         const DurationType buffer0 (0);
         const DurationType bufferLengthOverSampleRate = DurationType (bufferLength * sampleDuration); // was double, could be precision issue?
         
         int writePosition = data.writePosition;
         int i;
         
+        plonk_assert (inputBufferLength == outputBufferLength);
+        
         if (durationBufferLength == outputBufferLength)
         {
-//            for (i = 0; i < outputBufferLength; ++i) 
-//            {
-//                outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
-//                currentPosition += frequencySamples[i] * tableLengthOverSampleRate;
-//                
-//                if (currentPosition >= tableLength)
-//                    currentPosition -= tableLength;
-//                else if (currentPosition < table0)	
-//                    currentPosition += tableLength;                
-//            }                    
+            for (i = 0; i < outputBufferLength; ++i) 
+            {
+                const DurationType durationInSamples = DurationType (durationSamples[i] * sampleRate);
+
+                const SampleType inputValue = inputSamples[i];
+                
+                const DurationType readPosition = DurationType (writePosition) - durationInSamples;
+                if (readPosition < buffer0)
+                    readPosition += bufferLengthIndex;
+                const SampleType delayedValue = plonk::lookup (buffer, readPosition);
+                
+                const SampleType writeValue = inputValue;
+                bufferSamples[writePosition] = writeValue;
+                
+                const SampleType outputValue = delayedValue;
+                
+                outputSamples[i] = outputValue;
+                
+                writePosition++;
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }            
         }
         else if (durationBufferLength == 1)
         {
@@ -162,31 +180,54 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
+                const SampleType inputValue = inputSamples[i];
+                
                 const DurationType readPosition = DurationType (writePosition) - durationInSamples;
-                
                 if (readPosition < buffer0)
-                    readPosition += bufferLength;
+                    readPosition += bufferLengthIndex;
+                const SampleType delayedValue = plonk::lookup (buffer, readPosition);
                 
+                const SampleType writeValue = inputValue;
+                bufferSamples[writePosition] = writeValue;
+                
+                const SampleType outputValue = delayedValue;
+                
+                outputSamples[i] = outputValue;
+                
+                writePosition++;
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
             }            
-         
         }
         else
-        {
-//            double frequencyPosition = 0.0;
-//            const double frequencyIncrement = double (frequencyBufferLength) / double (outputBufferLength);
-//            
-//            for (i = 0; i < outputBufferLength; ++i) 
-//            {
-//                outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
-//                currentPosition += frequencySamples[int (frequencyPosition)] * tableLengthOverSampleRate;
-//                
-//                if (currentPosition >= tableLength)
-//                    currentPosition -= tableLength;
-//                else if (currentPosition < table0)	
-//                    currentPosition += tableLength;                
-//                
-//                frequencyPosition += frequencyIncrement;
-//            }        
+        {            
+            double durationPosition = 0.0;
+            const double durationIncrement = double (durationBufferLength) / double (outputBufferLength);
+
+            for (i = 0; i < outputBufferLength; ++i) 
+            {
+                const DurationType durationInSamples = DurationType (durationSamples[int (durationPosition)] * sampleRate);
+                
+                const SampleType inputValue = inputSamples[i];
+                
+                const DurationType readPosition = DurationType (writePosition) - durationInSamples;
+                if (readPosition < buffer0)
+                    readPosition += bufferLengthIndex;
+                const SampleType delayedValue = plonk::lookup (buffer, readPosition);
+                
+                const SampleType writeValue = inputValue;
+                bufferSamples[writePosition] = writeValue;
+                
+                const SampleType outputValue = delayedValue;
+                
+                outputSamples[i] = outputValue;
+                
+                writePosition++;
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+                
+                durationPosition += durationIncrement;
+            }            
         }
         
         data.writePosition = writePosition;
