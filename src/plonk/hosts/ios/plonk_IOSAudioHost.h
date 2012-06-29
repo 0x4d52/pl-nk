@@ -101,6 +101,73 @@ END_PLONK_NAMESPACE
 
 #if defined(__OBJC__) || DOXYGEN 
 
+/** Convenience macro for adding member variables to Objective-C classes. 
+ This helps declare the appropriate type of Plonk Variable<> e.g., for 
+ providing an interface between a GUI and the audio engine. You then need to 
+ declare the property using PLONK_OBJC_PROPERTY_DECLARE and synthesise the 
+ getter and setter methods using PLONK_OBJC_PROPERTY_SYNTH.
+
+ For example:
+ 
+ @code
+ @interface MyClass : NSObject
+ {
+    PLONK_OBJC_PROPERTY_MEMBER(float,frequency);
+    PLONK_OBJC_PROPERTY_MEMBER(float,amplitude);
+ }
+ ...
+ @endcode
+ 
+ @see PLONK_OBJC_PROPERTY_DECLARE, PLONK_OBJC_PROPERTY_SYNTH */
+#define PLONK_OBJC_PROPERTY_MEMBER(Type,Name)\
+    Variable<Type> Name
+
+/** Convenience macro for declaring Objective-C properites.
+ This helps make the appropriate property declaration for a Plonk
+ member variable declared using PLONK_OBJC_PROPERTY_MEMBER.
+ 
+ For example:
+
+ @code
+ @interface MyClass : NSObject
+ {
+    PLONK_OBJC_PROPERTY_MEMBER(float,frequency);
+    PLONK_OBJC_PROPERTY_MEMBER(float,amplitude);
+ }
+ PLONK_OBJC_PROPERTY_DECLARE(float,frequency); // instead of @property ..etc
+ PLONK_OBJC_PROPERTY_DECLARE(float,amplitude); // instead of @property ..etc
+ @end
+ @endcode
+ 
+ @see PLONK_OBJC_PROPERTY_MEMBER, PLONK_OBJC_PROPERTY_SYNTH */
+#define PLONK_OBJC_PROPERTY_DECLARE(Type,Name)\
+    @property (nonatomic,getter=get##Name,setter=set##Name:) Type Name
+
+/** Convenience macro for synthesising properity methods.
+ This helps synthesise the getter and setter methods for properties declared
+ using PLONK_OBJC_PROPERTY_MEMBER and PLONK_OBJC_PROPERTY_DECLARE. 
+  
+ For example:
+ 
+ @code
+ @implementation AudioHost
+ 
+ PLONK_OBJC_PROPERTY_SYNTH (float,frequency); // instead of @synthesize frequency;
+ PLONK_OBJC_PROPERTY_SYNTH (float,amplitude); // instead of @synthesize amplitude;
+ ...
+ @end
+ @endcode
+ 
+ @see PLONK_OBJC_PROPERTY_MEMBER, PLONK_OBJC_PROPERTY_DECLARE */
+#define PLONK_OBJC_PROPERTY_SYNTH(Type,Name)\
+    - (Type)get##Name {\
+        return Name.getValue();\
+    }\
+    - (void)set##Name:(Type)value {\
+        Name.setValue (value);\
+    }
+
+
 #define PLUNIT plonk::IOSAudioHost::UnitType
 
 @class PLAudioHost;

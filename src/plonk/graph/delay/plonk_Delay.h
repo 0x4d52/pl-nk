@@ -58,7 +58,7 @@
 
 /** Delay processor. */
 template<class FormType>
-class DelayChannelInternal 
+class DelayBaseChannelInternal 
 :   public ChannelInternal<typename FormType::SampleDataType, 
                            typename FormType::Data>
 {
@@ -67,7 +67,7 @@ public:
     typedef typename FormType::Data                         Data;
     
     typedef ChannelBase<SampleType>                         ChannelType;
-    typedef DelayChannelInternal<FormType>                  DelayInternal;
+    typedef DelayBaseChannelInternal<FormType>              DelayInternal;
     typedef ChannelInternal<SampleType,Data>                Internal;
     typedef ChannelInternalBase<SampleType>                 InternalBase;
     typedef UnitBase<SampleType>                            UnitType;
@@ -79,10 +79,10 @@ public:
     typedef NumericalArray<DurationType>                    DurationBufferType;
     typedef InterpLinear<SampleType,DurationType>           InterpType;
     
-    DelayChannelInternal (Inputs const& inputs, 
-                          Data const& data, 
-                          BlockSize const& blockSize,
-                          SampleRate const& sampleRate) throw()
+    DelayBaseChannelInternal (Inputs const& inputs, 
+                              Data const& data, 
+                              BlockSize const& blockSize,
+                              SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
     }
@@ -260,12 +260,12 @@ private:
 
 /** Delay processor. */
 template<class FormType>
-class DelayUnit
+class DelayBaseUnit
 {
 public:    
     typedef typename FormType::SampleDataType       SampleType;
 
-    typedef DelayChannelInternal<FormType>          DelayInternal;
+    typedef DelayBaseChannelInternal<FormType>      DelayInternal;
     typedef typename DelayInternal::Data            Data;
     typedef ChannelBase<SampleType>                 ChannelType;
     typedef ChannelInternal<SampleType,Data>        Internal;
@@ -324,7 +324,7 @@ public:
 };
 
 typedef DelayForm<PLONK_TYPE_DEFAULT,DelayFormType::Delay> DelayFormDelay;
-typedef DelayUnit<DelayFormDelay> SimpleDelay;
+typedef DelayBaseUnit<DelayFormDelay> Delay;
 
 
 

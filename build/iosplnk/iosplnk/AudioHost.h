@@ -49,18 +49,14 @@
 #include "../../../src/plonk/plonk.h"
 #include "../../../src/plonk/hosts/ios/plonk_IOSAudioHost.h"
 
-
 @interface AudioHost : PLAudioHost<PLAudioHostDelegate>
 {
-    FloatVariable freq;
-    FloatVariable amp;
+    PLONK_OBJC_PROPERTY_MEMBER (float,freq);
+    PLONK_OBJC_PROPERTY_MEMBER (float,amp);
 }
 
-@property (nonatomic) float freq;
-@property (nonatomic) float amp;
-
-//-(void)hostStopped:(PLAudioHost *)host;
-//-(void)hostStarting:(PLAudioHost *)host;
+PLONK_OBJC_PROPERTY_DECLARE (float,freq);
+PLONK_OBJC_PROPERTY_DECLARE (float,amp);
 
 @end
 
