@@ -103,11 +103,8 @@ public:
     }
     
     inline void growBufferSize() throw()                            { bufferSize.setValue (bufferSize.getValue() * 2); }
-//    inline const BlockSize getBufferSize() const throw()            { return bufferSize; }
     inline BlockSize getBufferSize() const throw()                  { return bufferSize; }
-//    inline const BlockSize getWriteBlockSize() const throw()        { return writeBlockSize; }
     inline BlockSize getWriteBlockSize() const throw()              { return writeBlockSize; }
-//    inline const SampleRate getSampleRate() const throw()           { return sampleRate; }
     inline SampleRate getSampleRate() const throw()                 { return sampleRate; }
     inline double getDuration() const throw()                       { return (bufferEndTime - bufferStartTime).getValue(); }
     inline const TimeStamp& getLatestValidTime() const throw()      { return latestValidTime; }

@@ -42,7 +42,7 @@
 #include "plonk_FilterForwardDeclarations.h"
 
 template<class SampleType, signed Form>
-struct FilterFormData
+struct FilterData
 {    
     ChannelInternalCore::Data base;
     
@@ -50,7 +50,7 @@ struct FilterFormData
 };      
 
 template<class SampleType>
-struct FilterFormData<SampleType, FilterFormType::P2Z2>
+struct FilterData<SampleType, FilterFormType::P2Z2>
 {    
     ChannelInternalCore::Data base;
     
@@ -58,7 +58,7 @@ struct FilterFormData<SampleType, FilterFormType::P2Z2>
 };      
 
 template<class SampleType>
-struct FilterFormData<SampleType, FilterFormType::B2>
+struct FilterData<SampleType, FilterFormType::B2>
 {    
     ChannelInternalCore::Data base;
     
@@ -95,7 +95,7 @@ public:
     typedef SampleType                                      SampleDataType;
     typedef UnitBase<SampleType>                            UnitType;
     typedef NumericalArray<SampleType>                      Buffer;
-    typedef FilterFormData<SampleType, FilterFormType::P1>  Data;
+    typedef FilterData<SampleType, FilterFormType::P1>      Data;
     
     enum Coeffs
     {
@@ -104,7 +104,26 @@ public:
         CoeffB1, 
         NumCoeffs
     };
-        
+            
+    static inline SampleType process (SampleType const& input,
+                                      SampleType const& a0,     
+                                      SampleType const& a1,
+                                      SampleType const& b1,
+                                      SampleType& y1) throw()
+    {
+        const SampleType y0 = input + b1 * y1; 
+        const SampleType output = a0 * y0 + a1 * y1;
+        y1 = y0;
+        return output;
+    }
+    
+    static inline SampleType process (SampleType const& input,
+                                      const SampleType* coeffs,     
+                                      SampleType& y1) throw()
+    {
+        return process (input, coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffB1], y1);
+    }
+
     static void process (SampleType* const outputSamples,
                          const int outputLength,
                          UnitType& inputUnit, 
@@ -131,7 +150,6 @@ public:
         plonk_assert ((a0Length == a1Buffer.length()) &&
                      (a0Length == b1Buffer.length()));  // coeff buffers need to be the same length
         
-        SampleType y0;
         SampleType y1 = data.y1;
         int i;
         
@@ -140,11 +158,9 @@ public:
             if (a0Length == inputLength)
             {
                 for (i = 0; i < outputLength; ++i)
-                {
-                    y0 = inputSamples[i] + b1Samples[i] * y1; 
-                    outputSamples[i] = a0Samples[i] * y0 + a1Samples[i] * y1;
-                    y1 = y0;                    
-                }
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0Samples[i], a1Samples[i], b1Samples[i], 
+                                                y1);
             }
             else if (a0Length == 1)
             {
@@ -153,11 +169,9 @@ public:
                 const SampleType b1 = b1Samples[0];
                 
                 for (i = 0; i < outputLength; ++i)
-                {                    
-                    y0 = inputSamples[i] + b1 * y1; 
-                    outputSamples[i] = a0 * y0 + a1 * y1;                    
-                    y1 = y0;                    
-                }
+                    for (i = 0; i < outputLength; ++i)
+                        outputSamples[i] = process (inputSamples[i], 
+                                                    a0, a1, b1, y1);
             }
             else
             {
@@ -167,9 +181,9 @@ public:
                 for (i = 0; i < outputLength; ++i)
                 {
                     const int pos (coeffPosition);
-                    y0 = inputSamples[i] + b1Samples[pos] * y1; 
-                    outputSamples[i] = a0Samples[pos] * y0 + a1Samples[pos] * y1;
-                    y1 = y0;
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0Samples[pos], a1Samples[pos], b1Samples[pos], 
+                                                y1);
                     coeffPosition += coeffIncrement;
                 }
             }
@@ -185,9 +199,8 @@ public:
             
             for (i = 0; i < outputLength; ++i)
             {
-                y0 = inputSamples[int (inputPosition)] + b1 * y1; 
-                outputSamples[i] = a0 * y0 + a1 * y1;
-                y1 = y0;
+                outputSamples[i] = process (inputSamples[int (inputPosition)], 
+                                            a0, a1, b1, y1);
                 inputPosition += inputIncrement;
             }            
         }
@@ -208,13 +221,22 @@ public:
     typedef SampleType                                          SampleDataType;
     typedef UnitBase<SampleType>                                UnitType;
     typedef NumericalArray<SampleType>                          Buffer;
-    typedef FilterFormData<SampleType, FilterFormType::P1a>     Data;
+    typedef FilterData<SampleType, FilterFormType::P1a>         Data;
 
     enum Coeffs
     {
         CoeffB1, 
         NumCoeffs
     };
+    
+    static inline SampleType process (SampleType const& input,
+                                      SampleType const& b1,
+                                      SampleType& y1) throw()
+    {
+        const SampleType y0 = input;
+        y1 = y0 + b1 * (y1 - y0);
+        return y1;
+    }
         
     static void process (SampleType* const outputSamples,
                          const int outputLength,
@@ -233,7 +255,6 @@ public:
         const int b1Length = b1Buffer.length();
         const int inputLength = inputBuffer.length();
                 
-        SampleType y0;
         SampleType y1 = data.y1;
         int i;
         
@@ -242,22 +263,14 @@ public:
             if (b1Length == inputLength)
             {
                 for (i = 0; i < outputLength; ++i)
-                {                    
-                    y0 = inputSamples[i];
-                    y1 = y0 + b1Samples[i] * (y1 - y0);
-                    outputSamples[i] = y1;
-                }
+                    outputSamples[i] = process (inputSamples[i], b1Samples[i], y1);
             }
             else if (b1Length == 1)
             {
                 const SampleType b1 = b1Samples[0];
                 
                 for (i = 0; i < outputLength; ++i)
-                {                                        
-                    y0 = inputSamples[i];
-                    y1 = y0 + b1 * (y1 - y0);
-                    outputSamples[i] = y1;
-                }
+                    outputSamples[i] = process(inputSamples[i], b1, y1);
             }
             else
             {
@@ -266,9 +279,7 @@ public:
                 
                 for (i = 0; i < outputLength; ++i)
                 {
-                    y0 = inputSamples[i];
-                    y1 = y0 + b1Samples[int (coeffPosition)] * (y1 - y0);
-                    outputSamples[i] = y1;
+                    outputSamples[i] = process(inputSamples[i], b1Samples[int (coeffPosition)], y1);
                     coeffPosition += coeffIncrement;
                 }
             }
@@ -282,9 +293,7 @@ public:
             
             for (i = 0; i < outputLength; ++i)
             {
-                y0 = inputSamples[int (inputPosition)];
-                y1 = y0 + b1 * (y1 - y0);
-                outputSamples[i] = y1;
+                outputSamples[i] = process(inputSamples[int (inputPosition)], b1, y1);
                 inputPosition += inputIncrement;
             }            
         }
@@ -305,7 +314,7 @@ public:
     typedef SampleType                                          SampleDataType;
     typedef UnitBase<SampleType>                                UnitType;
     typedef NumericalArray<SampleType>                          Buffer;
-    typedef FilterFormData<SampleType, FilterFormType::P2Z2>    Data;
+    typedef FilterData<SampleType, FilterFormType::P2Z2>        Data;
 
     enum Coeffs
     {
@@ -317,6 +326,22 @@ public:
         NumCoeffs
     };
             
+    static inline SampleType process (SampleType const& input,
+                                      SampleType const& a0,     
+                                      SampleType const& a1,
+                                      SampleType const& a2,
+                                      SampleType const& b1,
+                                      SampleType const& b2,
+                                      SampleType& y1,
+                                      SampleType& y2) throw()
+    {
+        const SampleType y0 = input + b1 * y1 + b2 * y2; 
+        const SampleType output = a0 * y0 + a1 * y1 + a2 * y2;
+        y2 = y1; 
+        y1 = y0;
+        return output;
+    }
+    
     static void process (SampleType* const outputSamples,
                          const int outputLength,
                          UnitType& inputUnit, 
@@ -349,7 +374,6 @@ public:
                      (a0Length == b1Buffer.length()) &&
                      (a0Length == b2Buffer.length()));;  // coeff buffers need to be the same length
         
-        SampleType y0;
         SampleType y1 = data.y1;
         SampleType y2 = data.y2;
         int i;
@@ -359,25 +383,10 @@ public:
             if (a0Length == inputLength)
             {
                 for (i = 0; i < outputLength; ++i)
-                {
-                    const SampleType inputSample = inputSamples[i];
-                    const SampleType a0 = a0Samples[i];
-                    const SampleType a1 = a1Samples[i];
-                    const SampleType a2 = a2Samples[i];
-                    const SampleType b1 = b1Samples[i];
-                    const SampleType b2 = b2Samples[i];
-                    
-                    y0 = inputSample + b1 * y1 + b2 * y2; 
-                    outputSamples[i] = a0 * y0 + a1 * y1 + a2 * y2;
-                    y2 = y1; 
-                    y1 = y0;
-
-
-//                    y0 = inputSamples[i] + b1Samples[i] * y1 + b2Samples[i] * y2; 
-//                    outputSamples[i] = a0Samples[i] * y0 + a1Samples[i] * y1 + a2Samples[i] * y2;
-//                    y2 = y1; 
-//                    y1 = y0;
-                }
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0Samples[i], a1Samples[i], a2Samples[i], 
+                                                b1Samples[i], b2Samples[i], 
+                                                y1, y2);
             }
             else if (a0Length == 1)
             {
@@ -388,12 +397,10 @@ public:
                 const SampleType b2 = b2Samples[0];
                 
                 for (i = 0; i < outputLength; ++i)
-                {
-                    y0 = inputSamples[i] + b1 * y1 + b2 * y2; 
-                    outputSamples[i] = a0 * y0 + a1 * y1 + a2 * y2;
-                    y2 = y1; 
-                    y1 = y0;
-                }
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0, a1, a2, 
+                                                b1, b2, 
+                                                y1, y2);
             }
             else
             {
@@ -403,10 +410,10 @@ public:
                 for (i = 0; i < outputLength; ++i)
                 {
                     const int pos (coeffPosition);
-                    y0 = inputSamples[i] + b1Samples[pos] * y1 + b2Samples[pos] * y2; 
-                    outputSamples[i] = a0Samples[pos] * y0 + a1Samples[pos] * y1 + a2Samples[pos] * y2;
-                    y2 = y1; 
-                    y1 = y0;
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0Samples[pos], a1Samples[pos], a2Samples[pos], 
+                                                b1Samples[pos], b2Samples[pos], 
+                                                y1, y2);
                     coeffPosition += coeffIncrement;
                 }
             }
@@ -424,10 +431,10 @@ public:
             
             for (i = 0; i < outputLength; ++i)
             {
-                y0 = inputSamples[int (inputPosition)] + b1 * y1 + b2 * y2; 
-                outputSamples[i] = a0 * y0 + a1 * y1 + a2 * y2;
-                y2 = y1; 
-                y1 = y0;
+                outputSamples[i] = process (inputSamples[int (inputPosition)], 
+                                            a0, a1, a2, 
+                                            b1, b2, 
+                                            y1, y2);
                 inputPosition += inputIncrement;
             }            
         }
@@ -449,7 +456,7 @@ public:
     typedef SampleType                                          SampleDataType;
     typedef UnitBase<SampleType>                                UnitType;
     typedef NumericalArray<SampleType>                          Buffer;
-    typedef FilterFormData<SampleType, FilterFormType::B2>      Data;
+    typedef FilterData<SampleType, FilterFormType::B2>      Data;
 
     enum Coeffs
     {
@@ -461,6 +468,22 @@ public:
         NumCoeffs
     };
         
+    static inline SampleType process (SampleType const& input,
+                                      SampleType const& a0,     
+                                      SampleType const& a1,
+                                      SampleType const& a2,
+                                      SampleType const& b1,
+                                      SampleType const& b2,
+                                      SampleType& y1,
+                                      SampleType& y2) throw()
+    {
+        const SampleType y0 = input + b1 * y1 + b2 * y2; 
+        const SampleType output = a0 * (y0 + a1 * y1 + a2 * y2);
+        y2 = y1; 
+        y1 = y0;
+        return output;
+    }
+    
     static void process (SampleType* const outputSamples,
                          const int outputLength,
                          UnitType& inputUnit, 
@@ -493,7 +516,6 @@ public:
                      (a0Length == b1Buffer.length()) &&
                      (a0Length == b2Buffer.length()));;  // coeff buffers need to be the same length
         
-        SampleType y0;
         SampleType y1 = data.y1;
         SampleType y2 = data.y2;
         int i;
@@ -503,24 +525,10 @@ public:
             if (a0Length == inputLength)
             {
                 for (i = 0; i < outputLength; ++i)
-                {
-                    const SampleType inputSample = inputSamples[i];
-                    const SampleType a0 = a0Samples[i];
-                    const SampleType a1 = a1Samples[i];
-                    const SampleType a2 = a2Samples[i];
-                    const SampleType b1 = b1Samples[i];
-                    const SampleType b2 = b2Samples[i];
-
-                    y0 = inputSample + b1 * y1 + b2 * y2; 
-                    outputSamples[i] = a0 * (y0 + a1 * y1 + a2 * y2);
-                    y2 = y1; 
-                    y1 = y0;
-
-//                    y0 = inputSamples[i] + b1Samples[i] * y1 + b2Samples[i] * y2; 
-//                    outputSamples[i] = a0Samples[i] * (y0 + a1Samples[i] * y1 + a2Samples[i] * y2);
-//                    y2 = y1; 
-//                    y1 = y0;
-                }
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0Samples[i], a1Samples[i], a2Samples[i], 
+                                                b1Samples[i], b2Samples[i], 
+                                                y1, y2);
             }
             else if (a0Length == 1)
             {
@@ -531,12 +539,10 @@ public:
                 const SampleType b2 = b2Samples[0];
                 
                 for (i = 0; i < outputLength; ++i)
-                {
-                    y0 = inputSamples[i] + b1 * y1 + b2 * y2; 
-                    outputSamples[i] = a0 * (y0 + a1 * y1 + a2 * y2);
-                    y2 = y1; 
-                    y1 = y0;
-                }
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0, a1, a2, 
+                                                b1, b2, 
+                                                y1, y2);
             }
             else
             {
@@ -546,10 +552,10 @@ public:
                 for (i = 0; i < outputLength; ++i)
                 {
                     const int pos (coeffPosition);
-                    y0 = inputSamples[i] + b1Samples[pos] * y1 + b2Samples[pos] * y2; 
-                    outputSamples[i] = a0Samples[pos] * (y0 + a1Samples[pos] * y1 + a2Samples[pos] * y2);
-                    y2 = y1; 
-                    y1 = y0;
+                    outputSamples[i] = process (inputSamples[i], 
+                                                a0Samples[pos], a1Samples[pos], a2Samples[pos], 
+                                                b1Samples[pos], b2Samples[pos], 
+                                                y1, y2);
                     coeffPosition += coeffIncrement;
                 }
             }
@@ -567,10 +573,10 @@ public:
             
             for (i = 0; i < outputLength; ++i)
             {
-                y0 = inputSamples[int (inputPosition)] + b1 * y1 + b2 * y2; 
-                outputSamples[i] = a0 * (y0 + a1 * y1 + a2 * y2);
-                y2 = y1; 
-                y1 = y0;
+                outputSamples[i] = process (inputSamples[int (inputPosition)], 
+                                            a0, a1, a2, 
+                                            b1, b2, 
+                                            y1, y2);
                 inputPosition += inputIncrement;
             }            
         }

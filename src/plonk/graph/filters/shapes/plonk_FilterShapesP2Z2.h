@@ -69,17 +69,17 @@ public:
         return keys;
     }
         
-    static CalcTypes calculate (const CalcType frequency, const CalcType q, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.params[Q] = q;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, const CalcType q, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.params[Q] = q;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
 
     static inline void calculate (Data& data) throw()
     {
@@ -131,17 +131,17 @@ public:
         return keys;
     }
     
-    static CalcTypes calculate (const CalcType frequency, const CalcType q, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.params[Q] = q;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, const CalcType q, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.params[Q] = q;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
     
     static inline void calculate (Data& data) throw()
     {        
@@ -195,18 +195,18 @@ public:
         return keys;
     }
     
-    static CalcTypes calculate (const CalcType frequency, const CalcType s, const CalcType gain, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.params[S] = s;
-        data.params[Gain] = gain;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, const CalcType s, const CalcType gain, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.params[S] = s;
+//        data.params[Gain] = gain;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
     
     static inline void calculate (Data& data) throw()
     {
@@ -342,18 +342,18 @@ public:
         return keys;
     }
         
-    static CalcTypes calculate (const CalcType frequency, const CalcType q, const CalcType gain, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.params[Q] = q;
-        data.params[Gain] = gain;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, const CalcType q, const CalcType gain, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.params[Q] = q;
+//        data.params[Gain] = gain;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
 
     static inline void calculate (Data& data) throw()
     {
@@ -408,17 +408,17 @@ public:
         return keys;
     }
     
-    static CalcTypes calculate (const CalcType frequency, const CalcType bandwidth, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.params[Bandwidth] = bandwidth;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, const CalcType bandwidth, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.params[Bandwidth] = bandwidth;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
     
     static inline void calculate (Data& data) throw()
     {   
@@ -469,17 +469,17 @@ public:
         return keys;
     }
     
-    static CalcTypes calculate (const CalcType frequency, const CalcType bandwidth, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.params[Bandwidth] = bandwidth;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, const CalcType bandwidth, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.params[Bandwidth] = bandwidth;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
     
     static inline void calculate (Data& data) throw()
     {   

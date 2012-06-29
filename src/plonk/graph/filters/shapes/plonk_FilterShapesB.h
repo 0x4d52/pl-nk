@@ -68,16 +68,16 @@ public:
         return keys;
     }
     
-    static CalcTypes calculate (const CalcType frequency, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
             
     static inline void calculate (Data& data) throw()
     {        
@@ -126,16 +126,16 @@ public:
         return keys;
     }
     
-    static CalcTypes calculate (const CalcType frequency, 
-                                const double sampleRate = SampleRate::getDefault()) throw()
-    {
-        Data data;
-        data.params[Frequency] = frequency;
-        data.filterSampleRate = sampleRate;
-        data.filterSampleDuration = 1.0 / sampleRate;
-        calculate (data);
-        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-    }
+//    static CalcTypes calculate (const CalcType frequency, 
+//                                const double sampleRate = SampleRate::getDefault()) throw()
+//    {
+//        Data data;
+//        data.params[Frequency] = frequency;
+//        data.filterSampleRate = sampleRate;
+//        data.filterSampleDuration = 1.0 / sampleRate;
+//        calculate (data);
+//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
+//    }
         
     static inline void calculate (Data& data) throw()
     {
