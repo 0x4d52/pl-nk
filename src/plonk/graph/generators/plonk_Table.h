@@ -123,7 +123,8 @@ public:
     {        
         Data& data = this->getState();
         const double sampleRate = data.base.sampleRate;
-        
+        const double sampleDuration = data.base.sampleDuration;
+
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
         const FrequencyBufferType frequencyBuffer (frequencyUnit.process (info, channel));
         
@@ -137,8 +138,8 @@ public:
         const SampleType* const tableSamples = table.getArray();
         const FrequencyType tableLength = FrequencyType (table.length());
         const FrequencyType table0 (0);
-        const FrequencyType tableLengthOverSampleRate = tableLength / sampleRate; // was double, could be precision issue?
-
+        const FrequencyType tableLengthOverSampleRate = FrequencyType (tableLength * sampleDuration); 
+        
         FrequencyType currentPosition = data.currentPosition;
         int i;
         

@@ -88,8 +88,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Buffer, 
-                             IOKey::Duration);
+        const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Buffer);
         return keys;
     }    
     
@@ -120,6 +119,9 @@ public:
     {        
         Data& data = this->getState();
         const double sampleRate = data.base.sampleRate;
+        const double sampleDuration = data.base.sampleDuration;
+        
+        // get the input unit...
         
         DurationUnitType& durationUnit = ChannelInternalCore::getInputAs<DurationUnitType> (IOKey::Duration);
         const DurationBufferType frequencyBuffer (durationUnit.process (info, channel));
@@ -134,7 +136,7 @@ public:
         const SampleType* const bufferSamples = buffer.getArray();
         const DurationType bufferLength = DurationType (buffer.length());
         const DurationType buffer0 (0);
-        const DurationType bufferLengthOverSampleRate = bufferLength / sampleRate; // was double, could be precision issue?
+        const DurationType bufferLengthOverSampleRate = DurationType (bufferLength * sampleDuration); // was double, could be precision issue?
         
         int writePosition = data.writePosition;
         int i;
@@ -154,30 +156,19 @@ public:
         }
         else if (durationBufferLength == 1)
         {
-//            const FrequencyType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
-//            
-//            if (valueIncrement > table0)
-//            {
-//                for (i = 0; i < outputBufferLength; ++i) 
-//                {
-//                    outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
-//                    currentPosition += valueIncrement;
-//                    
-//                    if (currentPosition >= tableLength)
-//                        currentPosition -= tableLength;
-//                }            
-//            }
-//            else
-//            {
-//                for (i = 0; i < outputBufferLength; ++i) 
-//                {
-//                    outputSamples[i] = plonk::lookup (tableSamples, currentPosition);
-//                    currentPosition += valueIncrement;
-//                    
-//                    if (currentPosition < table0)	
-//                        currentPosition += tableLength;                
-//                }            
-//            }
+            const DurationType durationInSamples = DurationType (durationSamples[0] * sampleRate);
+            
+            plonk_assert (durationInSamples <= bufferLength);
+            
+            for (i = 0; i < outputBufferLength; ++i) 
+            {
+                const DurationType readPosition = DurationType (writePosition) - durationInSamples;
+                
+                if (readPosition < buffer0)
+                    readPosition += bufferLength;
+                
+            }            
+         
         }
         else
         {
