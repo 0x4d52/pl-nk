@@ -97,12 +97,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a811e7b4e826dfcc545eb8dd0b85dc418">~BusBufferInternal</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a195515fc95b95eef315cb8e87104ec8b">changed</a> (<a class="el" href="class_variable.html">BlockSize::Sender</a> const &amp;source)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a9f2efbe27a1e527013492e2c731c6b67">growBufferSize</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#ac19cbbbf7fd6f71e67b9d8473dbae377">getBufferSize</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a50a10eff08fc633e0cee23b6116499a9">getBufferSize</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#ac1dedc138058a758adc9f3caaf57a365">getWriteBlockSize</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a6c22ca272af0847f9d19163390304884">getWriteBlockSize</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_sample_rate.html">SampleRate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a90a255be9a7024433f8e4572302a2029">getSampleRate</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sample_rate.html">SampleRate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#af6bb493694451398c8814c000f45d68e">getSampleRate</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a49b525e8ce88a9ce1cbd1acc879c8ce7">getBufferSize</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a64e2faf392b8190006f17b53c12375e3">getWriteBlockSize</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sample_rate.html">SampleRate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#addd54ae25b62c50b843079da4c108620">getSampleRate</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a184accc96de2fb55e5b054fada95e05b">getDuration</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_time_stamp.html">TimeStamp</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a4b86e32ed9cccb6698047f7748506564">getLatestValidTime</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_time_stamp.html">TimeStamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_buffer_internal.html#a366e018b7cfbcb9bdee8c4251bba13dc">getEarliestValidTime</a> () const   throw ()</td></tr>
@@ -252,7 +249,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a50a10eff08fc633e0cee23b6116499a9"></a><!-- doxytag: member="BusBufferInternal::getBufferSize" ref="a50a10eff08fc633e0cee23b6116499a9" args="()" -->
+<a class="anchor" id="a49b525e8ce88a9ce1cbd1acc879c8ce7"></a><!-- doxytag: member="BusBufferInternal::getBufferSize" ref="a49b525e8ce88a9ce1cbd1acc879c8ce7" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -260,24 +257,6 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a>&lt; SampleType &gt;::getBufferSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac19cbbbf7fd6f71e67b9d8473dbae377"></a><!-- doxytag: member="BusBufferInternal::getBufferSize" ref="ac19cbbbf7fd6f71e67b9d8473dbae377" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a>&lt; SampleType &gt;::getBufferSize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -360,7 +339,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af6bb493694451398c8814c000f45d68e"></a><!-- doxytag: member="BusBufferInternal::getSampleRate" ref="af6bb493694451398c8814c000f45d68e" args="()" -->
+<a class="anchor" id="addd54ae25b62c50b843079da4c108620"></a><!-- doxytag: member="BusBufferInternal::getSampleRate" ref="addd54ae25b62c50b843079da4c108620" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -370,24 +349,6 @@ template&lt;class SampleType &gt; </div>
           <td class="memname"><a class="el" href="class_sample_rate.html">SampleRate</a> <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a>&lt; SampleType &gt;::getSampleRate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a90a255be9a7024433f8e4572302a2029"></a><!-- doxytag: member="BusBufferInternal::getSampleRate" ref="a90a255be9a7024433f8e4572302a2029" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_sample_rate.html">SampleRate</a> <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a>&lt; SampleType &gt;::getSampleRate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
@@ -396,25 +357,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac1dedc138058a758adc9f3caaf57a365"></a><!-- doxytag: member="BusBufferInternal::getWriteBlockSize" ref="ac1dedc138058a758adc9f3caaf57a365" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a>&lt; SampleType &gt;::getWriteBlockSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6c22ca272af0847f9d19163390304884"></a><!-- doxytag: member="BusBufferInternal::getWriteBlockSize" ref="a6c22ca272af0847f9d19163390304884" args="()" -->
+<a class="anchor" id="a64e2faf392b8190006f17b53c12375e3"></a><!-- doxytag: member="BusBufferInternal::getWriteBlockSize" ref="a64e2faf392b8190006f17b53c12375e3" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -424,7 +367,7 @@ template&lt;class SampleType &gt; </div>
           <td class="memname"><a class="el" href="class_block_size.html">BlockSize</a> <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal</a>&lt; SampleType &gt;::getWriteBlockSize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -557,7 +500,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:43 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:14 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

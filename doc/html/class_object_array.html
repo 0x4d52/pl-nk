@@ -202,6 +202,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class WeightType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">const ObjectType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_object_array.html#a99b0248ecc196629fab2f6ba3984b1d4">wchoose</a> (<a class="el" href="class_object_array.html">ObjectArray</a>&lt; WeightType &gt; const &amp;weights) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an item from the array using a weighted random choice.  <a href="#a99b0248ecc196629fab2f6ba3984b1d4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array.html#a76434f8adfca2a2241c39ad67dfa7566">areAllEqual</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if each item in the array is equal to the others.  <a href="#a76434f8adfca2a2241c39ad67dfa7566"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396">operator==</a> (<a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt; const &amp;other) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares whether the contents of two arrays are the same.  <a href="#a3476b7debbb42f1277d7df5b0d591396"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array.html#a19bf576e39e283a2af2cb60d8726ae8b">operator==</a> (const ObjectType *otherArray) const   throw ()</td></tr>
@@ -1041,6 +1043,27 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a76434f8adfca2a2241c39ad67dfa7566"></a><!-- doxytag: member="ObjectArray::areAllEqual" ref="a76434f8adfca2a2241c39ad67dfa7566" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::areAllEqual </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Determine if each item in the array is equal to the others. </p>
+<p>If the array is empty it will return true. </p>
+
+</div>
+</div>
 <a class="anchor" id="ad0ddd1b46e1b7ae32dd0e232ebcece5f"></a><!-- doxytag: member="ObjectArray::at" ref="ad0ddd1b46e1b7ae32dd0e232ebcece5f" args="(ObjectArray&lt; int &gt; const &amp;indices) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1173,27 +1196,6 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad605ca1eed55acef9ac9d10fc03a54e4"></a><!-- doxytag: member="ObjectArray::choose" ref="ad605ca1eed55acef9ac9d10fc03a54e4" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ObjectType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::choose </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns an item from the array chosen at random. </p>
-<p>The weighting for the random choice should be roughtly equally distributed. If the array is empty it returns a "null" ersion of the object. </p>
-
-</div>
-</div>
 <a class="anchor" id="afc4b30484f09212831b2de869ae9f9d7"></a><!-- doxytag: member="ObjectArray::choose" ref="afc4b30484f09212831b2de869ae9f9d7" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1205,6 +1207,27 @@ template&lt;class ObjectType&gt; </div>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns an item from the array chosen at random. </p>
+<p>The weighting for the random choice should be roughtly equally distributed. If the array is empty it returns a "null" ersion of the object. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad605ca1eed55acef9ac9d10fc03a54e4"></a><!-- doxytag: member="ObjectArray::choose" ref="ad605ca1eed55acef9ac9d10fc03a54e4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::choose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -1570,6 +1593,26 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a49f3b9719cdeefc07c0ac52f1735d93d"></a><!-- doxytag: member="ObjectArray::getArray" ref="a49f3b9719cdeefc07c0ac52f1735d93d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">ObjectType* <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::getArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a pointer to the raw array. </p>
+
+</div>
+</div>
 <a class="anchor" id="adf43b8f7395f9fbc7c904c307059659f"></a><!-- doxytag: member="ObjectArray::getArray" ref="adf43b8f7395f9fbc7c904c307059659f" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1589,26 +1632,6 @@ template&lt;class ObjectType&gt; </div>
 <p>Returns a pointer to the raw array for read-only ops. </p>
 
 <p>Reimplemented in <a class="el" href="class_wavetable_base.html#a123079cd06c41edc4a25eb86efc82bc8">WavetableBase&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a49f3b9719cdeefc07c0ac52f1735d93d"></a><!-- doxytag: member="ObjectArray::getArray" ref="a49f3b9719cdeefc07c0ac52f1735d93d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ObjectType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ObjectType* <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::getArray </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns a pointer to the raw array. </p>
 
 </div>
 </div>
@@ -2485,7 +2508,7 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a99b0248ecc196629fab2f6ba3984b1d4"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a99b0248ecc196629fab2f6ba3984b1d4" args="(ObjectArray&lt; WeightType &gt; const &amp;weights) const " -->
+<a class="anchor" id="a6a31fdbb9c69ec92cf4ebe5916ccbba0"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a6a31fdbb9c69ec92cf4ebe5916ccbba0" args="(ObjectArray&lt; WeightType &gt; const &amp;weights)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -2494,11 +2517,11 @@ template&lt;class ObjectType&gt; </div>
 template&lt;class WeightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
+          <td class="memname">ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; WeightType &gt; const &amp;&#160;</td>
           <td class="paramname"><em>weights</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2515,7 +2538,7 @@ template&lt;class WeightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6a31fdbb9c69ec92cf4ebe5916ccbba0"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a6a31fdbb9c69ec92cf4ebe5916ccbba0" args="(ObjectArray&lt; WeightType &gt; const &amp;weights)" -->
+<a class="anchor" id="a99b0248ecc196629fab2f6ba3984b1d4"></a><!-- doxytag: member="ObjectArray::wchoose" ref="a99b0248ecc196629fab2f6ba3984b1d4" args="(ObjectArray&lt; WeightType &gt; const &amp;weights) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -2524,11 +2547,11 @@ template&lt;class ObjectType&gt; </div>
 template&lt;class WeightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
+          <td class="memname">const ObjectType&amp; <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ObjectType &gt;::wchoose </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; WeightType &gt; const &amp;&#160;</td>
           <td class="paramname"><em>weights</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -2629,7 +2652,7 @@ template&lt;class ObjectType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:47 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:18 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

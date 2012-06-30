@@ -110,6 +110,8 @@ Public Types</h2></td></tr>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resample_channel_internal.html#ac2cf99da24985e0140555ae41dfc7e34">Buffer</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_type_utility.html">TypeUtility</a><br class="typebreak"/>
 &lt; SampleType &gt;::<a class="el" href="class_resample_channel_internal.html#a9cfeef3426bf89fa8dcc7e5cd335ac68">IndexType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resample_channel_internal.html#a9cfeef3426bf89fa8dcc7e5cd335ac68">IndexType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_interp_linear.html">InterpLinear</a><br class="typebreak"/>
+&lt; SampleType, <a class="el" href="class_resample_channel_internal.html#a9cfeef3426bf89fa8dcc7e5cd335ac68">IndexType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resample_channel_internal.html#a730b30229e3b94156e6d5f3fcfaf2f8a">InterpType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resample_channel_internal.html#a5734545c995435a378456a4ae3408fd5">ResampleChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
@@ -239,6 +241,21 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_resample_channel_internal.html">ResampleChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternalBase</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a730b30229e3b94156e6d5f3fcfaf2f8a"></a><!-- doxytag: member="ResampleChannelInternal::InterpType" ref="a730b30229e3b94156e6d5f3fcfaf2f8a" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_interp_linear.html">InterpLinear</a>&lt;SampleType,<a class="el" href="class_resample_channel_internal.html#a9cfeef3426bf89fa8dcc7e5cd335ac68">IndexType</a>&gt; <a class="el" href="class_resample_channel_internal.html">ResampleChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_interp_linear.html">InterpType</a></td>
         </tr>
       </table>
 </div>
@@ -477,7 +494,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:49 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:19 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

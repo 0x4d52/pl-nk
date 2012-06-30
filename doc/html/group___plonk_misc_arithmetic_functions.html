@@ -55,6 +55,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Miscellaneous arithmetic functions</div>  </div>
@@ -64,6 +65,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Miscellaneous arithmetic functions.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_interp_base.html">InterpBase&lt; ValueType, IndexType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_interp_linear.html">InterpLinear&lt; ValueType, IndexType &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_interp_linear_3_01_value_type_00_01int_01_4.html">InterpLinear&lt; ValueType, int &gt;</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
@@ -87,10 +93,6 @@ Functions</h2></td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga08bacb44ae03c11271b63a6d69b4ef7b">linwelch</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inHigh, Type const &amp;outLow, Type const &amp;outHigh)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga7ab9bbff1532f41caa902d3038cc9152">explin</a> (Type const &amp;input, Type const &amp;inLow, Type const &amp;inHigh, Type const &amp;outLow, Type const &amp;outHigh)</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class ValueType , class IndexType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga0c7c3b1f52e020ab274f686ad542c3d1">lininterp</a> (ValueType const &amp;value0, ValueType const &amp;value1, IndexType const &amp;frac)  throw ()</td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class ValueType , class IndexType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_misc_arithmetic_functions.html#ga54ae245006623c1646099189284078ca">lookup</a> (const ValueType *table, IndexType const &amp;index)  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Miscellaneous arithmetic functions. </p>
@@ -259,41 +261,6 @@ template&lt;class Type &gt; </div>
           <td></td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>outRatio</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga0c7c3b1f52e020ab274f686ad542c3d1"></a><!-- doxytag: member="plonk_InlineMiscOps.h::lininterp" ref="ga0c7c3b1f52e020ab274f686ad542c3d1" args="(ValueType const &amp;value0, ValueType const &amp;value1, IndexType const &amp;frac)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType , class IndexType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ValueType lininterp </td>
-          <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>value0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>value1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">IndexType const &amp;&#160;</td>
-          <td class="paramname"><em>frac</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -541,35 +508,6 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ga54ae245006623c1646099189284078ca"></a><!-- doxytag: member="plonk_InlineMiscOps.h::lookup" ref="ga54ae245006623c1646099189284078ca" args="(const ValueType *table, IndexType const &amp;index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType , class IndexType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ValueType lookup </td>
-          <td>(</td>
-          <td class="paramtype">const ValueType *&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">IndexType const &amp;&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga56c581e95402e9529c2018dcdfa6b72a"></a><!-- doxytag: member="plonk_InlineMiscOps.h::wrap" ref="ga56c581e95402e9529c2018dcdfa6b72a" args="(Type const &amp;value, Type const &amp;lower, Type const &amp;upper)" -->
 <div class="memitem">
 <div class="memproto">
@@ -653,7 +591,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:42 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:12 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -95,12 +95,12 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html#a31ecf4d1385ecd072fdaa698e6f6229f">UnitType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html#a37824429941415d6ecb60c628f3bd0af">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_filter_form_data.html">FilterFormData</a><br class="typebreak"/>
-&lt; SampleType, <br class="typebreak"/>
-FilterFormType::P1a &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html#a4ad34501ed7ddf2d3b3a6e9eac631ba8">Data</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_filter_data.html">FilterData</a>&lt; SampleType, <br class="typebreak"/>
+FilterFormType::P1a &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html#af9b1f643972268eedbbbd2f0c6905e20">Data</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html#a2ffe947ba096750341d5ce15bf467dc9">process</a> (SampleType *const outputSamples, const int outputLength, <a class="el" href="class_unit_base.html">UnitType</a> &amp;inputUnit, <a class="el" href="class_unit_base.html">UnitType</a> &amp;coeffsUnit, <a class="el" href="struct_filter_form_data.html">Data</a> &amp;data, <a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int channel)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static SampleType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html#af4c6b4b700f37532f7d6ba68a25a3a0b">process</a> (SampleType const &amp;input, SampleType const &amp;b1, SampleType &amp;y1)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1a_01_4.html#a2ffe947ba096750341d5ce15bf467dc9">process</a> (SampleType *const outputSamples, const int outputLength, <a class="el" href="class_unit_base.html">UnitType</a> &amp;inputUnit, <a class="el" href="class_unit_base.html">UnitType</a> &amp;coeffsUnit, <a class="el" href="struct_filter_data.html">Data</a> &amp;data, <a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int channel)  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -124,14 +124,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4ad34501ed7ddf2d3b3a6e9eac631ba8"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1a &gt;::Data" ref="a4ad34501ed7ddf2d3b3a6e9eac631ba8" args="" -->
+<a class="anchor" id="af9b1f643972268eedbbbd2f0c6905e20"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1a &gt;::Data" ref="af9b1f643972268eedbbbd2f0c6905e20" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="struct_filter_form_data.html">FilterFormData</a>&lt;SampleType, FilterFormType::P1a&gt; <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1a &gt;::<a class="el" href="struct_filter_form_data.html">Data</a></td>
+          <td class="memname">typedef <a class="el" href="struct_filter_data.html">FilterData</a>&lt;SampleType, FilterFormType::P1a&gt; <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1a &gt;::<a class="el" href="struct_filter_data.html">Data</a></td>
         </tr>
       </table>
 </div>
@@ -194,6 +194,41 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af4c6b4b700f37532f7d6ba68a25a3a0b"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1a &gt;::process" ref="af4c6b4b700f37532f7d6ba68a25a3a0b" args="(SampleType const &amp;input, SampleType const &amp;b1, SampleType &amp;y1)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static SampleType <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1a &gt;::process </td>
+          <td>(</td>
+          <td class="paramtype">SampleType const &amp;&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType const &amp;&#160;</td>
+          <td class="paramname"><em>b1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType &amp;&#160;</td>
+          <td class="paramname"><em>y1</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a2ffe947ba096750341d5ce15bf467dc9"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1a &gt;::process" ref="a2ffe947ba096750341d5ce15bf467dc9" args="(SampleType *const outputSamples, const int outputLength, UnitType &amp;inputUnit, UnitType &amp;coeffsUnit, Data &amp;data, ProcessInfo &amp;info, const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +262,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_filter_form_data.html">Data</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_filter_data.html">Data</a> &amp;&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -271,7 +306,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:45 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:16 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

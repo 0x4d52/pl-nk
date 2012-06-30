@@ -911,460 +911,480 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00963"></a>00963                         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>()[length-1];
 <a name="l00964"></a>00964                 }
 <a name="l00965"></a>00965         }
-<a name="l00966"></a>00966             
-<a name="l00967"></a><a class="code" href="class_object_array.html#a715e318d82d3ecd17b4a0ca64b5e3222">00967</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a>&amp; <a class="code" href="class_object_array.html#a715e318d82d3ecd17b4a0ca64b5e3222">getNull</a>() throw()
-<a name="l00968"></a>00968         {
-<a name="l00969"></a>00969                 <span class="keyword">static</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a> null;
-<a name="l00970"></a>00970                 <span class="keywordflow">return</span> null;
-<a name="l00971"></a>00971         }               
-<a name="l00972"></a>00972         
-<a name="l00973"></a><a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">00973</a>     <span class="keyword">static</span> ObjectType&amp; <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>() throw()
-<a name="l00974"></a>00974         {
-<a name="l00975"></a>00975                 <span class="keyword">static</span> ObjectType null;
-<a name="l00976"></a>00976         null = ObjectType();
-<a name="l00977"></a>00977                 <span class="keywordflow">return</span> null;
-<a name="l00978"></a>00978         }       
-<a name="l00979"></a>00979     
-<a name="l00981"></a><a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396">00981</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00982"></a>00982         {               
-<a name="l00983"></a>00983                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l00984"></a>00984                 <span class="keyword">const</span> ObjectType *otherArray = other.getArray();
-<a name="l00985"></a>00985 
-<a name="l00986"></a>00986                 <span class="keywordflow">if</span> (thisArray == otherArray) 
-<a name="l00987"></a>00987             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00988"></a>00988                 
-<a name="l00989"></a>00989                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
-<a name="l00990"></a>00990         
-<a name="l00991"></a>00991                 <span class="keywordflow">if</span> (size != other.size()) 
-<a name="l00992"></a>00992             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00993"></a>00993         
-<a name="l00994"></a>00994                 <span class="keywordflow">if</span> (size == 0) 
-<a name="l00995"></a>00995             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00996"></a>00996                 
-<a name="l00997"></a>00997                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
-<a name="l00998"></a>00998                         <span class="keywordflow">if</span> (thisArray[i] != otherArray[i])
-<a name="l00999"></a>00999                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l01000"></a>01000                 
-<a name="l01001"></a>01001                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l01002"></a>01002         }
-<a name="l01003"></a>01003         
-<a name="l01005"></a><a class="code" href="class_object_array.html#a19bf576e39e283a2af2cb60d8726ae8b">01005</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(<span class="keyword">const</span> ObjectType* otherArray) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01006"></a>01006         {               
-<a name="l01007"></a>01007                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (otherArray != 0);
-<a name="l01008"></a>01008                 
-<a name="l01009"></a>01009                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l00966"></a>00966     
+<a name="l00969"></a><a class="code" href="class_object_array.html#a76434f8adfca2a2241c39ad67dfa7566">00969</a>     <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a76434f8adfca2a2241c39ad67dfa7566" title="Determine if each item in the array is equal to the others.">areAllEqual</a>() <span class="keyword">const</span> throw()
+<a name="l00970"></a>00970     {
+<a name="l00971"></a>00971         <span class="keywordflow">if</span> (this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &gt; 0)
+<a name="l00972"></a>00972         {
+<a name="l00973"></a>00973             <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l00974"></a>00974             <span class="keyword">const</span> ObjectType <a class="code" href="class_object_array.html#a05befffe91bfd0e853230bc5df784f65" title="Returns the first item in the array.">first</a> = thisArray[0];
+<a name="l00975"></a>00975             
+<a name="l00976"></a>00976             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>(); ++i)
+<a name="l00977"></a>00977                 <span class="keywordflow">if</span> (thisArray[i] != first)
+<a name="l00978"></a>00978                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00979"></a>00979         }
+<a name="l00980"></a>00980         
+<a name="l00981"></a>00981         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00982"></a>00982     }
+<a name="l00983"></a>00983             
+<a name="l00984"></a><a class="code" href="class_object_array.html#a715e318d82d3ecd17b4a0ca64b5e3222">00984</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a>&amp; <a class="code" href="class_object_array.html#a715e318d82d3ecd17b4a0ca64b5e3222">getNull</a>() throw()
+<a name="l00985"></a>00985         {
+<a name="l00986"></a>00986                 <span class="keyword">static</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a> null;
+<a name="l00987"></a>00987                 <span class="keywordflow">return</span> null;
+<a name="l00988"></a>00988         }               
+<a name="l00989"></a>00989         
+<a name="l00990"></a><a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">00990</a>     <span class="keyword">static</span> ObjectType&amp; <a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>() throw()
+<a name="l00991"></a>00991         {
+<a name="l00992"></a>00992                 <span class="keyword">static</span> ObjectType null;
+<a name="l00993"></a>00993         null = ObjectType();
+<a name="l00994"></a>00994                 <span class="keywordflow">return</span> null;
+<a name="l00995"></a>00995         }       
+<a name="l00996"></a>00996     
+<a name="l00997"></a>00997 <span class="comment">//    static const ObjectType&amp; getNullObject() throw()</span>
+<a name="l00998"></a>00998 <span class="comment">//      {</span>
+<a name="l00999"></a>00999 <span class="comment">//              return TypeUtility&lt;ObjectType&gt;::getNull();</span>
+<a name="l01000"></a>01000 <span class="comment">//      }       </span>
+<a name="l01001"></a>01001     
+<a name="l01003"></a><a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396">01003</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01004"></a>01004         {               
+<a name="l01005"></a>01005                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01006"></a>01006                 <span class="keyword">const</span> ObjectType *otherArray = other.getArray();
+<a name="l01007"></a>01007 
+<a name="l01008"></a>01008                 <span class="keywordflow">if</span> (thisArray == otherArray) 
+<a name="l01009"></a>01009             <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l01010"></a>01010                 
-<a name="l01011"></a>01011                 <span class="keywordflow">if</span> (thisArray == otherArray) 
-<a name="l01012"></a>01012             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l01013"></a>01013                 
-<a name="l01014"></a>01014                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01011"></a>01011                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01012"></a>01012         
+<a name="l01013"></a>01013                 <span class="keywordflow">if</span> (size != other.size()) 
+<a name="l01014"></a>01014             <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l01015"></a>01015         
-<a name="l01016"></a>01016                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
-<a name="l01017"></a>01017                         <span class="keywordflow">if</span> (thisArray[i] != otherArray[i])
-<a name="l01018"></a>01018                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l01019"></a>01019                 
-<a name="l01020"></a>01020                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l01021"></a>01021         }
-<a name="l01022"></a>01022         
-<a name="l01024"></a><a class="code" href="class_object_array.html#a768e3730d2076b1d5eade90b0593397e">01024</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a768e3730d2076b1d5eade90b0593397e" title="Compares whether the contents of two arrays are the different.">operator!= </a>(<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01025"></a>01025         {
-<a name="l01026"></a>01026                 <span class="keywordflow">return</span> !<a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(other);
-<a name="l01027"></a>01027         }
-<a name="l01028"></a>01028         
-<a name="l01030"></a><a class="code" href="class_object_array.html#a2424be9a3c5826f508b73e007dfe5b0a">01030</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a768e3730d2076b1d5eade90b0593397e" title="Compares whether the contents of two arrays are the different.">operator!= </a>(<span class="keyword">const</span> ObjectType* otherArray) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01031"></a>01031         {
-<a name="l01032"></a>01032                 <span class="keywordflow">return</span> !<a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(otherArray);
-<a name="l01033"></a>01033         }
-<a name="l01034"></a>01034         
-<a name="l01036"></a><a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e">01036</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e" title="Returns whether the array contains a particular item.">contains</a> (ObjectType <span class="keyword">const</span>&amp; itemToSearchFor) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01037"></a>01037         {
-<a name="l01038"></a>01038                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01039"></a>01039                 
-<a name="l01040"></a>01040                 <span class="keywordflow">if</span> (array != 0)
-<a name="l01041"></a>01041                 {
-<a name="l01042"></a>01042                         <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
-<a name="l01043"></a>01043             
-<a name="l01044"></a>01044                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
-<a name="l01045"></a>01045                                 <span class="keywordflow">if</span> (array[i] == itemToSearchFor)
-<a name="l01046"></a>01046                                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l01047"></a>01047                 }               
-<a name="l01048"></a>01048                 
-<a name="l01049"></a>01049                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l01050"></a>01050         }
-<a name="l01051"></a>01051                 
-<a name="l01054"></a><a class="code" href="class_object_array.html#a4f36d45789d499b691b59fb59294e1b3">01054</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e" title="Returns whether the array contains a particular item.">contains</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; itemsToSearchFor) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01055"></a>01055         {
-<a name="l01056"></a>01056                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01057"></a>01057                 <span class="keyword">const</span> ObjectType *items = itemsToSearchFor.getArray();
-<a name="l01058"></a>01058                 
-<a name="l01059"></a>01059                 <span class="keywordflow">if</span> (array != 0 &amp;&amp; items != 0)
-<a name="l01060"></a>01060                 {
-<a name="l01061"></a>01061                         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01062"></a>01062                         <span class="keywordtype">int</span> itemsToFind = itemsToSearchFor.length();
-<a name="l01063"></a>01063                         
-<a name="l01064"></a>01064                         <span class="keywordflow">if</span> (length == 0 || itemsToFind == 0)
-<a name="l01065"></a>01065                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l01066"></a>01066                         
-<a name="l01067"></a>01067                         <span class="keywordtype">int</span> nextIndexToFind = 0;
-<a name="l01068"></a>01068                         
-<a name="l01069"></a>01069                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
-<a name="l01070"></a>01070                         {
-<a name="l01071"></a>01071                                 <span class="keywordflow">if</span> (array[i] == items[nextIndexToFind])
-<a name="l01072"></a>01072                                 {
-<a name="l01073"></a>01073                                         itemsToFind--;
-<a name="l01074"></a>01074                                         
-<a name="l01075"></a>01075                                         <span class="keywordflow">while</span> (itemsToFind &gt; 0)
-<a name="l01076"></a>01076                                         {
-<a name="l01077"></a>01077                                                 i++;
-<a name="l01078"></a>01078                                                 nextIndexToFind++;
-<a name="l01079"></a>01079                                                 
-<a name="l01080"></a>01080                                                 <span class="keywordflow">if</span> ((i &gt; length) || (array[i] != items[nextIndexToFind]))
-<a name="l01081"></a>01081                                                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l01082"></a>01082                                                 
-<a name="l01083"></a>01083                                                 itemsToFind--;
-<a name="l01084"></a>01084                                         }
-<a name="l01085"></a>01085                                         
-<a name="l01086"></a>01086                                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l01087"></a>01087                                 }
-<a name="l01088"></a>01088                         }
-<a name="l01089"></a>01089                 }               
-<a name="l01090"></a>01090                 
-<a name="l01091"></a>01091                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l01092"></a>01092         }
-<a name="l01093"></a>01093         
-<a name="l01098"></a><a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41">01098</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (ObjectType <span class="keyword">const</span>&amp; itemToSearchFor, <span class="keyword">const</span> <span class="keywordtype">int</span> startIndex = 0) <span class="keyword">const</span> throw()
-<a name="l01099"></a>01099         {
-<a name="l01100"></a>01100                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01101"></a>01101                 
-<a name="l01102"></a>01102                 <span class="keywordflow">if</span> (array != 0)
-<a name="l01103"></a>01103                 {
-<a name="l01104"></a>01104                         <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
-<a name="l01105"></a>01105                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = startIndex &lt; 0 ? 0 : startIndex; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
-<a name="l01106"></a>01106                                 <span class="keywordflow">if</span> (array[i] == itemToSearchFor)
-<a name="l01107"></a>01107                                         <span class="keywordflow">return</span> i;
-<a name="l01108"></a>01108                 }               
-<a name="l01109"></a>01109                 
-<a name="l01110"></a>01110                 <span class="keywordflow">return</span> -1;
-<a name="l01111"></a>01111         }
-<a name="l01112"></a>01112         
-<a name="l01114"></a><a class="code" href="class_object_array.html#a48849d83a5c0c3e9f4968c8faab347da">01114</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; itemsToSearchFor, <span class="keyword">const</span> <span class="keywordtype">int</span> startIndex = 0) <span class="keyword">const</span> throw()
-<a name="l01115"></a>01115         {
-<a name="l01116"></a>01116                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01117"></a>01117                 <span class="keyword">const</span> ObjectType *items = itemsToSearchFor.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01118"></a>01118 
-<a name="l01119"></a>01119                 <span class="keywordflow">if</span> (array != 0 &amp;&amp; items != 0)
-<a name="l01120"></a>01120                 {
-<a name="l01121"></a>01121                         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01122"></a>01122                         <span class="keywordtype">int</span> itemsToFind = itemsToSearchFor.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01123"></a>01123                         
-<a name="l01124"></a>01124                         <span class="keywordflow">if</span> (length == 0 || itemsToFind == 0)
-<a name="l01125"></a>01125                                 <span class="keywordflow">return</span> -1;
-<a name="l01126"></a>01126                         
-<a name="l01127"></a>01127                         <span class="keywordtype">int</span> nextIndexToFind = 0;
-<a name="l01128"></a>01128                         
-<a name="l01129"></a>01129                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = startIndex &lt; 0 ? 0 : startIndex; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
-<a name="l01130"></a>01130                         {
-<a name="l01131"></a>01131                                 <span class="keywordflow">if</span> (array[i] == items[nextIndexToFind])
-<a name="l01132"></a>01132                                 {
-<a name="l01133"></a>01133                                         <span class="keywordtype">int</span> foundAtIndex = i;
-<a name="l01134"></a>01134                                         
-<a name="l01135"></a>01135                                         itemsToFind--;
-<a name="l01136"></a>01136                                         
-<a name="l01137"></a>01137                                         <span class="keywordflow">while</span> (itemsToFind &gt; 0)
-<a name="l01138"></a>01138                                         {
-<a name="l01139"></a>01139                                                 i++;
-<a name="l01140"></a>01140                                                 nextIndexToFind++;
-<a name="l01141"></a>01141                                                 
-<a name="l01142"></a>01142                                                 <span class="keywordflow">if</span> ((i &gt; length) || (array[i] != items[nextIndexToFind]))
-<a name="l01143"></a>01143                                                         <span class="keywordflow">return</span> -1;
-<a name="l01144"></a>01144                                                 
-<a name="l01145"></a>01145                                                 itemsToFind--;
-<a name="l01146"></a>01146                                         }
-<a name="l01147"></a>01147                                         
-<a name="l01148"></a>01148                                         <span class="keywordflow">return</span> foundAtIndex;
-<a name="l01149"></a>01149                                 }
-<a name="l01150"></a>01150                         }
-<a name="l01151"></a>01151                 }               
-<a name="l01152"></a>01152                 
-<a name="l01153"></a>01153                 <span class="keywordflow">return</span> -1;
-<a name="l01154"></a>01154         }
-<a name="l01155"></a>01155         
-<a name="l01157"></a><a class="code" href="class_object_array.html#a3766d14cdfac35751119147622f35322">01157</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a3766d14cdfac35751119147622f35322" title="Search for any items in a given array.">indexOfAny</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; itemsToSearchFor, <span class="keyword">const</span> <span class="keywordtype">int</span> startIndex = 0) <span class="keyword">const</span> throw()
-<a name="l01158"></a>01158         {
-<a name="l01159"></a>01159                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01160"></a>01160                 
-<a name="l01161"></a>01161                 <span class="keywordflow">if</span> (array != 0)
-<a name="l01162"></a>01162                 {
-<a name="l01163"></a>01163                         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01164"></a>01164                         <span class="keyword">const</span> <span class="keywordtype">int</span> itemsToFind = itemsToSearchFor.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01165"></a>01165                         
-<a name="l01166"></a>01166                         <span class="keywordflow">if</span> (length == 0 || itemsToFind == 0)
-<a name="l01167"></a>01167                                 <span class="keywordflow">return</span> -1;
-<a name="l01168"></a>01168                         
-<a name="l01169"></a>01169                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = startIndex &lt; 0 ? 0 : startIndex; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
-<a name="l01170"></a>01170                                 <span class="keywordflow">if</span> (itemsToSearchFor.<a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e" title="Returns whether the array contains a particular item.">contains</a> (array[i]))
-<a name="l01171"></a>01171                                         <span class="keywordflow">return</span> i;
-<a name="l01172"></a>01172                 }
-<a name="l01173"></a>01173                 
-<a name="l01174"></a>01174                 <span class="keywordflow">return</span> -1;
-<a name="l01175"></a>01175         }
-<a name="l01176"></a>01176         
-<a name="l01179"></a><a class="code" href="class_object_array.html#a9efe2797629ae5f5ac32f4ff57212b04">01179</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a9efe2797629ae5f5ac32f4ff57212b04" title="Return a new array which is a subarray of this one.">from</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> startIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01016"></a>01016                 <span class="keywordflow">if</span> (size == 0) 
+<a name="l01017"></a>01017             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l01018"></a>01018                 
+<a name="l01019"></a>01019                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
+<a name="l01020"></a>01020                         <span class="keywordflow">if</span> (thisArray[i] != otherArray[i])
+<a name="l01021"></a>01021                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l01022"></a>01022                 
+<a name="l01023"></a>01023                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l01024"></a>01024         }
+<a name="l01025"></a>01025         
+<a name="l01027"></a><a class="code" href="class_object_array.html#a19bf576e39e283a2af2cb60d8726ae8b">01027</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(<span class="keyword">const</span> ObjectType* otherArray) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01028"></a>01028         {               
+<a name="l01029"></a>01029                 <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (otherArray != 0);
+<a name="l01030"></a>01030                 
+<a name="l01031"></a>01031                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01032"></a>01032                 
+<a name="l01033"></a>01033                 <span class="keywordflow">if</span> (thisArray == otherArray) 
+<a name="l01034"></a>01034             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l01035"></a>01035                 
+<a name="l01036"></a>01036                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01037"></a>01037         
+<a name="l01038"></a>01038                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
+<a name="l01039"></a>01039                         <span class="keywordflow">if</span> (thisArray[i] != otherArray[i])
+<a name="l01040"></a>01040                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l01041"></a>01041                 
+<a name="l01042"></a>01042                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l01043"></a>01043         }
+<a name="l01044"></a>01044         
+<a name="l01046"></a><a class="code" href="class_object_array.html#a768e3730d2076b1d5eade90b0593397e">01046</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a768e3730d2076b1d5eade90b0593397e" title="Compares whether the contents of two arrays are the different.">operator!= </a>(<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01047"></a>01047         {
+<a name="l01048"></a>01048                 <span class="keywordflow">return</span> !<a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(other);
+<a name="l01049"></a>01049         }
+<a name="l01050"></a>01050         
+<a name="l01052"></a><a class="code" href="class_object_array.html#a2424be9a3c5826f508b73e007dfe5b0a">01052</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#a768e3730d2076b1d5eade90b0593397e" title="Compares whether the contents of two arrays are the different.">operator!= </a>(<span class="keyword">const</span> ObjectType* otherArray) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01053"></a>01053         {
+<a name="l01054"></a>01054                 <span class="keywordflow">return</span> !<a class="code" href="class_object_array.html#a3476b7debbb42f1277d7df5b0d591396" title="Compares whether the contents of two arrays are the same.">operator== </a>(otherArray);
+<a name="l01055"></a>01055         }
+<a name="l01056"></a>01056         
+<a name="l01058"></a><a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e">01058</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e" title="Returns whether the array contains a particular item.">contains</a> (ObjectType <span class="keyword">const</span>&amp; itemToSearchFor) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01059"></a>01059         {
+<a name="l01060"></a>01060                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01061"></a>01061                 
+<a name="l01062"></a>01062                 <span class="keywordflow">if</span> (array != 0)
+<a name="l01063"></a>01063                 {
+<a name="l01064"></a>01064                         <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01065"></a>01065             
+<a name="l01066"></a>01066                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
+<a name="l01067"></a>01067                                 <span class="keywordflow">if</span> (array[i] == itemToSearchFor)
+<a name="l01068"></a>01068                                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l01069"></a>01069                 }               
+<a name="l01070"></a>01070                 
+<a name="l01071"></a>01071                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l01072"></a>01072         }
+<a name="l01073"></a>01073                 
+<a name="l01076"></a><a class="code" href="class_object_array.html#a4f36d45789d499b691b59fb59294e1b3">01076</a>         <span class="keywordtype">bool</span> <a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e" title="Returns whether the array contains a particular item.">contains</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; itemsToSearchFor) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01077"></a>01077         {
+<a name="l01078"></a>01078                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01079"></a>01079                 <span class="keyword">const</span> ObjectType *items = itemsToSearchFor.getArray();
+<a name="l01080"></a>01080                 
+<a name="l01081"></a>01081                 <span class="keywordflow">if</span> (array != 0 &amp;&amp; items != 0)
+<a name="l01082"></a>01082                 {
+<a name="l01083"></a>01083                         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01084"></a>01084                         <span class="keywordtype">int</span> itemsToFind = itemsToSearchFor.length();
+<a name="l01085"></a>01085                         
+<a name="l01086"></a>01086                         <span class="keywordflow">if</span> (length == 0 || itemsToFind == 0)
+<a name="l01087"></a>01087                                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l01088"></a>01088                         
+<a name="l01089"></a>01089                         <span class="keywordtype">int</span> nextIndexToFind = 0;
+<a name="l01090"></a>01090                         
+<a name="l01091"></a>01091                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
+<a name="l01092"></a>01092                         {
+<a name="l01093"></a>01093                                 <span class="keywordflow">if</span> (array[i] == items[nextIndexToFind])
+<a name="l01094"></a>01094                                 {
+<a name="l01095"></a>01095                                         itemsToFind--;
+<a name="l01096"></a>01096                                         
+<a name="l01097"></a>01097                                         <span class="keywordflow">while</span> (itemsToFind &gt; 0)
+<a name="l01098"></a>01098                                         {
+<a name="l01099"></a>01099                                                 i++;
+<a name="l01100"></a>01100                                                 nextIndexToFind++;
+<a name="l01101"></a>01101                                                 
+<a name="l01102"></a>01102                                                 <span class="keywordflow">if</span> ((i &gt; length) || (array[i] != items[nextIndexToFind]))
+<a name="l01103"></a>01103                                                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l01104"></a>01104                                                 
+<a name="l01105"></a>01105                                                 itemsToFind--;
+<a name="l01106"></a>01106                                         }
+<a name="l01107"></a>01107                                         
+<a name="l01108"></a>01108                                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l01109"></a>01109                                 }
+<a name="l01110"></a>01110                         }
+<a name="l01111"></a>01111                 }               
+<a name="l01112"></a>01112                 
+<a name="l01113"></a>01113                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l01114"></a>01114         }
+<a name="l01115"></a>01115         
+<a name="l01120"></a><a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41">01120</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (ObjectType <span class="keyword">const</span>&amp; itemToSearchFor, <span class="keyword">const</span> <span class="keywordtype">int</span> startIndex = 0) <span class="keyword">const</span> throw()
+<a name="l01121"></a>01121         {
+<a name="l01122"></a>01122                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01123"></a>01123                 
+<a name="l01124"></a>01124                 <span class="keywordflow">if</span> (array != 0)
+<a name="l01125"></a>01125                 {
+<a name="l01126"></a>01126                         <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01127"></a>01127                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = startIndex &lt; 0 ? 0 : startIndex; i &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>; ++i)
+<a name="l01128"></a>01128                                 <span class="keywordflow">if</span> (array[i] == itemToSearchFor)
+<a name="l01129"></a>01129                                         <span class="keywordflow">return</span> i;
+<a name="l01130"></a>01130                 }               
+<a name="l01131"></a>01131                 
+<a name="l01132"></a>01132                 <span class="keywordflow">return</span> -1;
+<a name="l01133"></a>01133         }
+<a name="l01134"></a>01134         
+<a name="l01136"></a><a class="code" href="class_object_array.html#a48849d83a5c0c3e9f4968c8faab347da">01136</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; itemsToSearchFor, <span class="keyword">const</span> <span class="keywordtype">int</span> startIndex = 0) <span class="keyword">const</span> throw()
+<a name="l01137"></a>01137         {
+<a name="l01138"></a>01138                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01139"></a>01139                 <span class="keyword">const</span> ObjectType *items = itemsToSearchFor.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01140"></a>01140 
+<a name="l01141"></a>01141                 <span class="keywordflow">if</span> (array != 0 &amp;&amp; items != 0)
+<a name="l01142"></a>01142                 {
+<a name="l01143"></a>01143                         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01144"></a>01144                         <span class="keywordtype">int</span> itemsToFind = itemsToSearchFor.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01145"></a>01145                         
+<a name="l01146"></a>01146                         <span class="keywordflow">if</span> (length == 0 || itemsToFind == 0)
+<a name="l01147"></a>01147                                 <span class="keywordflow">return</span> -1;
+<a name="l01148"></a>01148                         
+<a name="l01149"></a>01149                         <span class="keywordtype">int</span> nextIndexToFind = 0;
+<a name="l01150"></a>01150                         
+<a name="l01151"></a>01151                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = startIndex &lt; 0 ? 0 : startIndex; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
+<a name="l01152"></a>01152                         {
+<a name="l01153"></a>01153                                 <span class="keywordflow">if</span> (array[i] == items[nextIndexToFind])
+<a name="l01154"></a>01154                                 {
+<a name="l01155"></a>01155                                         <span class="keywordtype">int</span> foundAtIndex = i;
+<a name="l01156"></a>01156                                         
+<a name="l01157"></a>01157                                         itemsToFind--;
+<a name="l01158"></a>01158                                         
+<a name="l01159"></a>01159                                         <span class="keywordflow">while</span> (itemsToFind &gt; 0)
+<a name="l01160"></a>01160                                         {
+<a name="l01161"></a>01161                                                 i++;
+<a name="l01162"></a>01162                                                 nextIndexToFind++;
+<a name="l01163"></a>01163                                                 
+<a name="l01164"></a>01164                                                 <span class="keywordflow">if</span> ((i &gt; length) || (array[i] != items[nextIndexToFind]))
+<a name="l01165"></a>01165                                                         <span class="keywordflow">return</span> -1;
+<a name="l01166"></a>01166                                                 
+<a name="l01167"></a>01167                                                 itemsToFind--;
+<a name="l01168"></a>01168                                         }
+<a name="l01169"></a>01169                                         
+<a name="l01170"></a>01170                                         <span class="keywordflow">return</span> foundAtIndex;
+<a name="l01171"></a>01171                                 }
+<a name="l01172"></a>01172                         }
+<a name="l01173"></a>01173                 }               
+<a name="l01174"></a>01174                 
+<a name="l01175"></a>01175                 <span class="keywordflow">return</span> -1;
+<a name="l01176"></a>01176         }
+<a name="l01177"></a>01177         
+<a name="l01179"></a><a class="code" href="class_object_array.html#a3766d14cdfac35751119147622f35322">01179</a>         <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a3766d14cdfac35751119147622f35322" title="Search for any items in a given array.">indexOfAny</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; itemsToSearchFor, <span class="keyword">const</span> <span class="keywordtype">int</span> startIndex = 0) <span class="keyword">const</span> throw()
 <a name="l01180"></a>01180         {
-<a name="l01181"></a>01181                 <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex);
-<a name="l01182"></a>01182         }
-<a name="l01183"></a>01183         
-<a name="l01186"></a><a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a">01186</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> startIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01187"></a>01187         {
-<a name="l01188"></a>01188                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, 0x7fffffff);
-<a name="l01189"></a>01189         }
-<a name="l01190"></a>01190         
-<a name="l01193"></a><a class="code" href="class_object_array.html#ae0a86661df85c2aaf0954b236ed3fa50">01193</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#ae0a86661df85c2aaf0954b236ed3fa50" title="Return a new array which is a subarray of this one.">to</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> endIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01194"></a>01194         {
-<a name="l01195"></a>01195                 <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (0, endIndex);
-<a name="l01196"></a>01196         }
-<a name="l01197"></a>01197         
-<a name="l01200"></a><a class="code" href="class_object_array.html#ae735443d708a74182544016f89523de2">01200</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> startIndex, <span class="keyword">const</span> <span class="keywordtype">int</span> endIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01201"></a>01201         {
-<a name="l01202"></a>01202                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
-<a name="l01203"></a>01203         
-<a name="l01204"></a>01204                 <span class="keywordflow">if</span> (size == 0) 
-<a name="l01205"></a>01205             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
-<a name="l01206"></a>01206                 
-<a name="l01207"></a>01207                 <span class="keyword">const</span> <span class="keywordtype">int</span> startIndexChecked = startIndex &lt; 0 ? 0 : startIndex;
-<a name="l01208"></a>01208                 <span class="keyword">const</span> <span class="keywordtype">int</span> endIndexChecked = endIndex &gt; size ? size : endIndex;
-<a name="l01209"></a>01209 
-<a name="l01210"></a>01210                 <span class="keywordflow">if</span> (startIndexChecked &gt;= endIndexChecked) <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
-<a name="l01211"></a>01211                 
-<a name="l01212"></a>01212                 <span class="keyword">const</span> ObjectType *sourceArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01213"></a>01213         
-<a name="l01214"></a>01214                 <span class="keywordflow">if</span> (sourceArray == 0) 
-<a name="l01215"></a>01215             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
-<a name="l01216"></a>01216                 
-<a name="l01217"></a>01217                 <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNull = this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>();
-<a name="l01218"></a>01218                 
-<a name="l01219"></a>01219                 <span class="keyword">const</span> <span class="keywordtype">int</span> diff = endIndexChecked - startIndexChecked;
-<a name="l01220"></a>01220                 <span class="keyword">const</span> <span class="keywordtype">int</span> newSize = needsNull &amp;&amp; (endIndexChecked &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>) ? diff + 1 : diff;
-<a name="l01221"></a>01221                                 
-<a name="l01222"></a>01222                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> result (newSize, needsNull);
-<a name="l01223"></a>01223                 ObjectType *resultArray = result.getArray();
-<a name="l01224"></a>01224                 
-<a name="l01225"></a>01225                 <span class="keywordtype">int</span> resultIndex = 0;
-<a name="l01226"></a>01226                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> sourceIndex = startIndexChecked; sourceIndex &lt; endIndexChecked; ++sourceIndex)
-<a name="l01227"></a>01227                         resultArray[resultIndex++] = sourceArray[sourceIndex];
+<a name="l01181"></a>01181                 <span class="keyword">const</span> ObjectType *array = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01182"></a>01182                 
+<a name="l01183"></a>01183                 <span class="keywordflow">if</span> (array != 0)
+<a name="l01184"></a>01184                 {
+<a name="l01185"></a>01185                         <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01186"></a>01186                         <span class="keyword">const</span> <span class="keywordtype">int</span> itemsToFind = itemsToSearchFor.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01187"></a>01187                         
+<a name="l01188"></a>01188                         <span class="keywordflow">if</span> (length == 0 || itemsToFind == 0)
+<a name="l01189"></a>01189                                 <span class="keywordflow">return</span> -1;
+<a name="l01190"></a>01190                         
+<a name="l01191"></a>01191                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = startIndex &lt; 0 ? 0 : startIndex; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
+<a name="l01192"></a>01192                                 <span class="keywordflow">if</span> (itemsToSearchFor.<a class="code" href="class_object_array.html#ad87075a49fe1cea5bcdaf54f15873c4e" title="Returns whether the array contains a particular item.">contains</a> (array[i]))
+<a name="l01193"></a>01193                                         <span class="keywordflow">return</span> i;
+<a name="l01194"></a>01194                 }
+<a name="l01195"></a>01195                 
+<a name="l01196"></a>01196                 <span class="keywordflow">return</span> -1;
+<a name="l01197"></a>01197         }
+<a name="l01198"></a>01198         
+<a name="l01201"></a><a class="code" href="class_object_array.html#a9efe2797629ae5f5ac32f4ff57212b04">01201</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a9efe2797629ae5f5ac32f4ff57212b04" title="Return a new array which is a subarray of this one.">from</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> startIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01202"></a>01202         {
+<a name="l01203"></a>01203                 <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex);
+<a name="l01204"></a>01204         }
+<a name="l01205"></a>01205         
+<a name="l01208"></a><a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a">01208</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> startIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01209"></a>01209         {
+<a name="l01210"></a>01210                 <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, 0x7fffffff);
+<a name="l01211"></a>01211         }
+<a name="l01212"></a>01212         
+<a name="l01215"></a><a class="code" href="class_object_array.html#ae0a86661df85c2aaf0954b236ed3fa50">01215</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#ae0a86661df85c2aaf0954b236ed3fa50" title="Return a new array which is a subarray of this one.">to</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> endIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01216"></a>01216         {
+<a name="l01217"></a>01217                 <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (0, endIndex);
+<a name="l01218"></a>01218         }
+<a name="l01219"></a>01219         
+<a name="l01222"></a><a class="code" href="class_object_array.html#ae735443d708a74182544016f89523de2">01222</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> startIndex, <span class="keyword">const</span> <span class="keywordtype">int</span> endIndex) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01223"></a>01223         {
+<a name="l01224"></a>01224                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01225"></a>01225         
+<a name="l01226"></a>01226                 <span class="keywordflow">if</span> (size == 0) 
+<a name="l01227"></a>01227             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
 <a name="l01228"></a>01228                 
-<a name="l01229"></a>01229                 <span class="keywordflow">if</span> (needsNull)
-<a name="l01230"></a>01230                         resultArray[resultIndex] = this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>();
-<a name="l01231"></a>01231                 
-<a name="l01232"></a>01232                 <span class="keywordflow">return</span> result;
-<a name="l01233"></a>01233         }
-<a name="l01234"></a>01234         
-<a name="l01237"></a><a class="code" href="class_object_array.html#a596d19434b80e819291091dd81a9c4b4">01237</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a596d19434b80e819291091dd81a9c4b4" title="Perform a find and replace on the array and return the result.">replace</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; find, <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; substitute) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01238"></a>01238         {
-<a name="l01239"></a>01239                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
-<a name="l01240"></a>01240                 <span class="keyword">const</span> <span class="keywordtype">int</span> findLength = find.length();
-<a name="l01241"></a>01241                 <span class="keywordtype">int</span> startIndex = 0;
-<a name="l01242"></a>01242                 <span class="keywordtype">int</span> findIndex;
-<a name="l01243"></a>01243                 
-<a name="l01244"></a>01244                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> result;
-<a name="l01245"></a>01245                 
-<a name="l01246"></a>01246                 <span class="keywordflow">while</span> ((findIndex = this-&gt;<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (find, startIndex)) &gt;= 0)
-<a name="l01247"></a>01247                 {
-<a name="l01248"></a>01248                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, findIndex));
-<a name="l01249"></a>01249                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (substitute);
-<a name="l01250"></a>01250                         startIndex = findIndex + findLength;
-<a name="l01251"></a>01251                 }
-<a name="l01252"></a>01252                 
-<a name="l01253"></a>01253                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, size));
-<a name="l01254"></a>01254                 
-<a name="l01255"></a>01255                 <span class="keywordflow">return</span> result;
-<a name="l01256"></a>01256         }
-<a name="l01257"></a>01257         
-<a name="l01259"></a><a class="code" href="class_object_array.html#a691f1805e81bbe042bcc07d84d7eb8e0">01259</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>&amp; <a class="code" href="class_object_array.html#a691f1805e81bbe042bcc07d84d7eb8e0" title="Remove an item in-place.">removeItem</a> (<span class="keyword">const</span> ObjectType item) <span class="keywordflow">throw</span>()
+<a name="l01229"></a>01229                 <span class="keyword">const</span> <span class="keywordtype">int</span> startIndexChecked = startIndex &lt; 0 ? 0 : startIndex;
+<a name="l01230"></a>01230                 <span class="keyword">const</span> <span class="keywordtype">int</span> endIndexChecked = endIndex &gt; size ? size : endIndex;
+<a name="l01231"></a>01231 
+<a name="l01232"></a>01232                 <span class="keywordflow">if</span> (startIndexChecked &gt;= endIndexChecked) <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
+<a name="l01233"></a>01233                 
+<a name="l01234"></a>01234                 <span class="keyword">const</span> ObjectType *sourceArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01235"></a>01235         
+<a name="l01236"></a>01236                 <span class="keywordflow">if</span> (sourceArray == 0) 
+<a name="l01237"></a>01237             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
+<a name="l01238"></a>01238                 
+<a name="l01239"></a>01239                 <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNull = this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>();
+<a name="l01240"></a>01240                 
+<a name="l01241"></a>01241                 <span class="keyword">const</span> <span class="keywordtype">int</span> diff = endIndexChecked - startIndexChecked;
+<a name="l01242"></a>01242                 <span class="keyword">const</span> <span class="keywordtype">int</span> newSize = needsNull &amp;&amp; (endIndexChecked &lt; <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>) ? diff + 1 : diff;
+<a name="l01243"></a>01243                                 
+<a name="l01244"></a>01244                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> result (newSize, needsNull);
+<a name="l01245"></a>01245                 ObjectType *resultArray = result.getArray();
+<a name="l01246"></a>01246                 
+<a name="l01247"></a>01247                 <span class="keywordtype">int</span> resultIndex = 0;
+<a name="l01248"></a>01248                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> sourceIndex = startIndexChecked; sourceIndex &lt; endIndexChecked; ++sourceIndex)
+<a name="l01249"></a>01249                         resultArray[resultIndex++] = sourceArray[sourceIndex];
+<a name="l01250"></a>01250                 
+<a name="l01251"></a>01251                 <span class="keywordflow">if</span> (needsNull)
+<a name="l01252"></a>01252                         resultArray[resultIndex] = this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>();
+<a name="l01253"></a>01253                 
+<a name="l01254"></a>01254                 <span class="keywordflow">return</span> result;
+<a name="l01255"></a>01255         }
+<a name="l01256"></a>01256         
+<a name="l01259"></a><a class="code" href="class_object_array.html#a596d19434b80e819291091dd81a9c4b4">01259</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <a class="code" href="class_object_array.html#a596d19434b80e819291091dd81a9c4b4" title="Perform a find and replace on the array and return the result.">replace</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; find, <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; substitute) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l01260"></a>01260         {
-<a name="l01261"></a>01261                 <span class="keyword">const</span> <span class="keywordtype">int</span> index = this-&gt;<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (item);
-<a name="l01262"></a>01262                 
-<a name="l01263"></a>01263                 <span class="keywordflow">if</span> (index &gt;= 0)
-<a name="l01264"></a>01264                         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array_internal_base.html#a533abc7b672410aac2a81f263abcc841">remove</a> (index);
+<a name="l01261"></a>01261                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01262"></a>01262                 <span class="keyword">const</span> <span class="keywordtype">int</span> findLength = find.length();
+<a name="l01263"></a>01263                 <span class="keywordtype">int</span> startIndex = 0;
+<a name="l01264"></a>01264                 <span class="keywordtype">int</span> findIndex;
 <a name="l01265"></a>01265                 
-<a name="l01266"></a>01266                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l01267"></a>01267         }
-<a name="l01268"></a>01268         
-<a name="l01270"></a><a class="code" href="class_object_array.html#a4c9d17a3269ab9904a4fb2219c367b6f">01270</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>&amp; <a class="code" href="class_object_array.html#a4c9d17a3269ab9904a4fb2219c367b6f" title="Remove several items in-place.">removeItems</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; items) <span class="keywordflow">throw</span>()
-<a name="l01271"></a>01271         {
-<a name="l01272"></a>01272                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; items.length(); i++)
-<a name="l01273"></a>01273                         this-&gt;<a class="code" href="class_object_array.html#a691f1805e81bbe042bcc07d84d7eb8e0" title="Remove an item in-place.">removeItem</a> (items[i]);
+<a name="l01266"></a>01266                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> result;
+<a name="l01267"></a>01267                 
+<a name="l01268"></a>01268                 <span class="keywordflow">while</span> ((findIndex = this-&gt;<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (find, startIndex)) &gt;= 0)
+<a name="l01269"></a>01269                 {
+<a name="l01270"></a>01270                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, findIndex));
+<a name="l01271"></a>01271                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (substitute);
+<a name="l01272"></a>01272                         startIndex = findIndex + findLength;
+<a name="l01273"></a>01273                 }
 <a name="l01274"></a>01274                 
-<a name="l01275"></a>01275                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l01276"></a>01276         }
-<a name="l01277"></a>01277         
-<a name="l01279"></a><a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf">01279</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf" title="Group this array into a 2D array with a particular group size.">group</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> groupSize) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01280"></a>01280         {
-<a name="l01281"></a>01281                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01282"></a>01282         
-<a name="l01283"></a>01283                 <span class="keywordflow">if</span> (length == 0) 
-<a name="l01284"></a>01284             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
-<a name="l01285"></a>01285                 
-<a name="l01286"></a>01286                 <span class="keyword">const</span> <span class="keywordtype">int</span> groupSizeChecked = groupSize &lt; 1 ? 1 : groupSize;
-<a name="l01287"></a>01287                 <span class="keyword">const</span> <span class="keywordtype">int</span> groupSizeMinus1 = groupSizeChecked - 1;
-<a name="l01288"></a>01288                 <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNull = this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>();
-<a name="l01289"></a>01289                 
-<a name="l01290"></a>01290                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt; ObjectArray&lt;ObjectType&gt;</a> &gt; result;
-<a name="l01291"></a>01291                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> element;
-<a name="l01292"></a>01292                 
-<a name="l01293"></a>01293                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01294"></a>01294                 
-<a name="l01295"></a>01295                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
-<a name="l01296"></a>01296                 {
-<a name="l01297"></a>01297                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (thisArray[i]);
-<a name="l01298"></a>01298             
-<a name="l01299"></a>01299                         <span class="keywordflow">if</span> ((i % groupSizeChecked) == groupSizeMinus1)
-<a name="l01300"></a>01300                         {
-<a name="l01301"></a>01301                                 <span class="keywordflow">if</span> (needsNull) 
-<a name="l01302"></a>01302                                 {
-<a name="l01303"></a>01303                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
-<a name="l01304"></a>01304                                         element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
-<a name="l01305"></a>01305                                 }
-<a name="l01306"></a>01306                                 
-<a name="l01307"></a>01307                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a>(element);
-<a name="l01308"></a>01308                                 element = <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>(); <span class="comment">// reset</span>
-<a name="l01309"></a>01309                         }
-<a name="l01310"></a>01310                 }
+<a name="l01275"></a>01275                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, size));
+<a name="l01276"></a>01276                 
+<a name="l01277"></a>01277                 <span class="keywordflow">return</span> result;
+<a name="l01278"></a>01278         }
+<a name="l01279"></a>01279         
+<a name="l01281"></a><a class="code" href="class_object_array.html#a691f1805e81bbe042bcc07d84d7eb8e0">01281</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>&amp; <a class="code" href="class_object_array.html#a691f1805e81bbe042bcc07d84d7eb8e0" title="Remove an item in-place.">removeItem</a> (<span class="keyword">const</span> ObjectType item) <span class="keywordflow">throw</span>()
+<a name="l01282"></a>01282         {
+<a name="l01283"></a>01283                 <span class="keyword">const</span> <span class="keywordtype">int</span> index = this-&gt;<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (item);
+<a name="l01284"></a>01284                 
+<a name="l01285"></a>01285                 <span class="keywordflow">if</span> (index &gt;= 0)
+<a name="l01286"></a>01286                         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;<a class="code" href="class_object_array_internal_base.html#a533abc7b672410aac2a81f263abcc841">remove</a> (index);
+<a name="l01287"></a>01287                 
+<a name="l01288"></a>01288                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01289"></a>01289         }
+<a name="l01290"></a>01290         
+<a name="l01292"></a><a class="code" href="class_object_array.html#a4c9d17a3269ab9904a4fb2219c367b6f">01292</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>&amp; <a class="code" href="class_object_array.html#a4c9d17a3269ab9904a4fb2219c367b6f" title="Remove several items in-place.">removeItems</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> <span class="keyword">const</span>&amp; items) <span class="keywordflow">throw</span>()
+<a name="l01293"></a>01293         {
+<a name="l01294"></a>01294                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; items.length(); i++)
+<a name="l01295"></a>01295                         this-&gt;<a class="code" href="class_object_array.html#a691f1805e81bbe042bcc07d84d7eb8e0" title="Remove an item in-place.">removeItem</a> (items[i]);
+<a name="l01296"></a>01296                 
+<a name="l01297"></a>01297                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l01298"></a>01298         }
+<a name="l01299"></a>01299         
+<a name="l01301"></a><a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf">01301</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf" title="Group this array into a 2D array with a particular group size.">group</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> groupSize) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01302"></a>01302         {
+<a name="l01303"></a>01303                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01304"></a>01304         
+<a name="l01305"></a>01305                 <span class="keywordflow">if</span> (length == 0) 
+<a name="l01306"></a>01306             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
+<a name="l01307"></a>01307                 
+<a name="l01308"></a>01308                 <span class="keyword">const</span> <span class="keywordtype">int</span> groupSizeChecked = groupSize &lt; 1 ? 1 : groupSize;
+<a name="l01309"></a>01309                 <span class="keyword">const</span> <span class="keywordtype">int</span> groupSizeMinus1 = groupSizeChecked - 1;
+<a name="l01310"></a>01310                 <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNull = this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>();
 <a name="l01311"></a>01311                 
-<a name="l01312"></a>01312                 <span class="keywordflow">if</span> (element.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() != 0)
-<a name="l01313"></a>01313                 {
-<a name="l01314"></a>01314                         <span class="keywordflow">if</span> (needsNull) 
-<a name="l01315"></a>01315                         {
-<a name="l01316"></a>01316                                 element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
-<a name="l01317"></a>01317                                 element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
-<a name="l01318"></a>01318                         }
-<a name="l01319"></a>01319                         
-<a name="l01320"></a>01320                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (element);
-<a name="l01321"></a>01321                 }
-<a name="l01322"></a>01322                 
-<a name="l01323"></a>01323                 <span class="keywordflow">return</span> result;
-<a name="l01324"></a>01324         }
-<a name="l01325"></a>01325         
-<a name="l01328"></a><a class="code" href="class_object_array.html#a1b9f73b45869002f410e320c68d8c068">01328</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a1b9f73b45869002f410e320c68d8c068" title="Split the array into a 2D using delimiters.">split</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> delimiters) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01329"></a>01329         {
-<a name="l01330"></a>01330                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01331"></a>01331         
-<a name="l01332"></a>01332                 <span class="keywordflow">if</span> (length == 0) 
-<a name="l01333"></a>01333             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
-<a name="l01334"></a>01334                 
-<a name="l01335"></a>01335                 <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNull = this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>();
-<a name="l01336"></a>01336                 
-<a name="l01337"></a>01337                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt; ObjectArray&lt;ObjectType&gt;</a> &gt; result;
-<a name="l01338"></a>01338                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> element;
-<a name="l01339"></a>01339                 
-<a name="l01340"></a>01340                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01341"></a>01341         
-<a name="l01342"></a>01342                 <span class="keywordflow">if</span> (thisArray != 0)
-<a name="l01343"></a>01343                 {
-<a name="l01344"></a>01344                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
-<a name="l01345"></a>01345                         {
-<a name="l01346"></a>01346                                 <span class="keyword">const</span> ObjectType item = thisArray[i];
-<a name="l01347"></a>01347                                 
-<a name="l01348"></a>01348                                 <span class="keywordflow">if</span> (delimiters.contains(item))
-<a name="l01349"></a>01349                                 {
-<a name="l01350"></a>01350                                         <span class="keywordflow">if</span> (element.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &gt; 0)
-<a name="l01351"></a>01351                                         {
-<a name="l01352"></a>01352                                                 <span class="keywordflow">if</span> (needsNull) 
-<a name="l01353"></a>01353                                                 {
-<a name="l01354"></a>01354                                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
-<a name="l01355"></a>01355                                                         element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
-<a name="l01356"></a>01356                                                 }
-<a name="l01357"></a>01357                                                 
-<a name="l01358"></a>01358                                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (element);
-<a name="l01359"></a>01359                                                 element = <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();    <span class="comment">// reset</span>
-<a name="l01360"></a>01360                                         }
-<a name="l01361"></a>01361                                 }
-<a name="l01362"></a>01362                                 <span class="keywordflow">else</span>
-<a name="l01363"></a>01363                                 {
-<a name="l01364"></a>01364                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (item);
-<a name="l01365"></a>01365                                 }
-<a name="l01366"></a>01366                         }
-<a name="l01367"></a>01367                         
-<a name="l01368"></a>01368                         <span class="keywordflow">if</span> (element.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() != 0)
-<a name="l01369"></a>01369                         {
-<a name="l01370"></a>01370                                 <span class="keywordflow">if</span> (needsNull) 
+<a name="l01312"></a>01312                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt; ObjectArray&lt;ObjectType&gt;</a> &gt; result;
+<a name="l01313"></a>01313                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> element;
+<a name="l01314"></a>01314                 
+<a name="l01315"></a>01315                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01316"></a>01316                 
+<a name="l01317"></a>01317                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
+<a name="l01318"></a>01318                 {
+<a name="l01319"></a>01319                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (thisArray[i]);
+<a name="l01320"></a>01320             
+<a name="l01321"></a>01321                         <span class="keywordflow">if</span> ((i % groupSizeChecked) == groupSizeMinus1)
+<a name="l01322"></a>01322                         {
+<a name="l01323"></a>01323                                 <span class="keywordflow">if</span> (needsNull) 
+<a name="l01324"></a>01324                                 {
+<a name="l01325"></a>01325                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
+<a name="l01326"></a>01326                                         element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
+<a name="l01327"></a>01327                                 }
+<a name="l01328"></a>01328                                 
+<a name="l01329"></a>01329                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a>(element);
+<a name="l01330"></a>01330                                 element = <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>(); <span class="comment">// reset</span>
+<a name="l01331"></a>01331                         }
+<a name="l01332"></a>01332                 }
+<a name="l01333"></a>01333                 
+<a name="l01334"></a>01334                 <span class="keywordflow">if</span> (element.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() != 0)
+<a name="l01335"></a>01335                 {
+<a name="l01336"></a>01336                         <span class="keywordflow">if</span> (needsNull) 
+<a name="l01337"></a>01337                         {
+<a name="l01338"></a>01338                                 element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
+<a name="l01339"></a>01339                                 element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
+<a name="l01340"></a>01340                         }
+<a name="l01341"></a>01341                         
+<a name="l01342"></a>01342                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (element);
+<a name="l01343"></a>01343                 }
+<a name="l01344"></a>01344                 
+<a name="l01345"></a>01345                 <span class="keywordflow">return</span> result;
+<a name="l01346"></a>01346         }
+<a name="l01347"></a>01347         
+<a name="l01350"></a><a class="code" href="class_object_array.html#a1b9f73b45869002f410e320c68d8c068">01350</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a1b9f73b45869002f410e320c68d8c068" title="Split the array into a 2D using delimiters.">split</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> delimiters) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01351"></a>01351         {
+<a name="l01352"></a>01352                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01353"></a>01353         
+<a name="l01354"></a>01354                 <span class="keywordflow">if</span> (length == 0) 
+<a name="l01355"></a>01355             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
+<a name="l01356"></a>01356                 
+<a name="l01357"></a>01357                 <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNull = this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>();
+<a name="l01358"></a>01358                 
+<a name="l01359"></a>01359                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt; ObjectArray&lt;ObjectType&gt;</a> &gt; result;
+<a name="l01360"></a>01360                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> element;
+<a name="l01361"></a>01361                 
+<a name="l01362"></a>01362                 <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01363"></a>01363         
+<a name="l01364"></a>01364                 <span class="keywordflow">if</span> (thisArray != 0)
+<a name="l01365"></a>01365                 {
+<a name="l01366"></a>01366                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>; ++i)
+<a name="l01367"></a>01367                         {
+<a name="l01368"></a>01368                                 <span class="keyword">const</span> ObjectType item = thisArray[i];
+<a name="l01369"></a>01369                                 
+<a name="l01370"></a>01370                                 <span class="keywordflow">if</span> (delimiters.contains(item))
 <a name="l01371"></a>01371                                 {
-<a name="l01372"></a>01372                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
-<a name="l01373"></a>01373                                         element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
-<a name="l01374"></a>01374                                 }
-<a name="l01375"></a>01375                                 
-<a name="l01376"></a>01376                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (element);
-<a name="l01377"></a>01377                         }
-<a name="l01378"></a>01378                 }
-<a name="l01379"></a>01379                 
-<a name="l01380"></a>01380                 <span class="keywordflow">return</span> result;          
-<a name="l01381"></a>01381         }
-<a name="l01382"></a>01382         
-<a name="l01383"></a><a class="code" href="class_object_array.html#a664370848338525597ca379ce6da43de">01383</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a664370848338525597ca379ce6da43de">splitSequence</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> delimitingSequence) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01384"></a>01384         {
-<a name="l01385"></a>01385                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
-<a name="l01386"></a>01386                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt; ObjectArray&lt;ObjectType&gt;</a> &gt; result;
-<a name="l01387"></a>01387                 
-<a name="l01388"></a>01388                 <span class="keywordflow">if</span> (size != 0)
-<a name="l01389"></a>01389                 {
-<a name="l01390"></a>01390                         <span class="keyword">const</span> <span class="keywordtype">int</span> findLength = delimitingSequence.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01391"></a>01391                         <span class="keywordtype">int</span> startIndex = 0;
-<a name="l01392"></a>01392                         <span class="keywordtype">int</span> findIndex;
-<a name="l01393"></a>01393                         
-<a name="l01394"></a>01394                         <span class="keywordflow">while</span> ((findIndex = this-&gt;<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (delimitingSequence, startIndex)) &gt;= 0)
-<a name="l01395"></a>01395                         {
-<a name="l01396"></a>01396                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, findIndex));
-<a name="l01397"></a>01397                                 startIndex = findIndex + findLength;
-<a name="l01398"></a>01398                         }
-<a name="l01399"></a>01399                         
-<a name="l01400"></a>01400                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, size));
-<a name="l01401"></a>01401                 }
-<a name="l01402"></a>01402                 
-<a name="l01403"></a>01403                 <span class="keywordflow">return</span> result;          
-<a name="l01404"></a>01404         }     
-<a name="l01405"></a>01405         
-<a name="l01407"></a><a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748">01407</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="Deinternleave this array into a 2D array with a particular number of groups.">deinterleave</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> numGroups) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l01408"></a>01408         {
-<a name="l01409"></a>01409         <span class="keywordtype">int</span> i, j;
-<a name="l01410"></a>01410         
-<a name="l01411"></a>01411         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (!this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>()); <span class="comment">// could be done but need this for audio de-interleaving for now..</span>
-<a name="l01412"></a>01412 
-<a name="l01413"></a>01413                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l01414"></a>01414         
-<a name="l01415"></a>01415         <span class="keywordflow">if</span> (length == 0) 
-<a name="l01416"></a>01416             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
-<a name="l01417"></a>01417 
-<a name="l01418"></a>01418         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (numGroups &gt; 0);
-<a name="l01419"></a>01419         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((length % numGroups) == 0);
-<a name="l01420"></a>01420         
-<a name="l01421"></a>01421         <span class="keywordflow">if</span> (numGroups == 1)
-<a name="l01422"></a>01422             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a1a434ddf2302f5be2f1bfa6e1d6f3ebe">ObjectArray2DType</a> (*<span class="keyword">this</span>);
-<a name="l01423"></a>01423         
-<a name="l01424"></a>01424         <span class="keyword">const</span> <span class="keywordtype">int</span> subLength = length / numGroups;
-<a name="l01425"></a>01425         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> result = <a class="code" href="class_object_array.html#afc0c8de5e14b9b5257f072c26fe7a5b5" title="Returns an empty array with a given size of allocated storage.">ObjectArray2DType::emptyWithAllocatedSize</a> (numGroups);
-<a name="l01426"></a>01426         
-<a name="l01427"></a>01427         <span class="keywordflow">for</span> (i = 0; i &lt; numGroups; ++i)
-<a name="l01428"></a>01428         {
-<a name="l01429"></a>01429             <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a> sub = <a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">ObjectArray::withSize</a> (subLength);
-<a name="l01430"></a>01430          
-<a name="l01431"></a>01431             <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>() + i;
-<a name="l01432"></a>01432             ObjectType* <span class="keyword">const</span> subArray = sub.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l01433"></a>01433             
-<a name="l01434"></a>01434             <span class="keywordflow">for</span> (j = 0; j &lt; subLength; ++j, thisArray += numGroups)
-<a name="l01435"></a>01435                 subArray[j] = *thisArray;
-<a name="l01436"></a>01436             
-<a name="l01437"></a>01437             result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (sub);
-<a name="l01438"></a>01438         }               
-<a name="l01439"></a>01439                 
-<a name="l01440"></a>01440                 <span class="keywordflow">return</span> result;
-<a name="l01441"></a>01441         }
-<a name="l01442"></a>01442 
-<a name="l01443"></a>01443 };
-<a name="l01444"></a>01444 
-<a name="l01445"></a>01445 
-<a name="l01446"></a>01446 
-<a name="l01447"></a>01447 
-<a name="l01448"></a>01448 <span class="preprocessor">#endif // PLONK_OBJECTARRAY_H</span>
+<a name="l01372"></a>01372                                         <span class="keywordflow">if</span> (element.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &gt; 0)
+<a name="l01373"></a>01373                                         {
+<a name="l01374"></a>01374                                                 <span class="keywordflow">if</span> (needsNull) 
+<a name="l01375"></a>01375                                                 {
+<a name="l01376"></a>01376                                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
+<a name="l01377"></a>01377                                                         element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
+<a name="l01378"></a>01378                                                 }
+<a name="l01379"></a>01379                                                 
+<a name="l01380"></a>01380                                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (element);
+<a name="l01381"></a>01381                                                 element = <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();    <span class="comment">// reset</span>
+<a name="l01382"></a>01382                                         }
+<a name="l01383"></a>01383                                 }
+<a name="l01384"></a>01384                                 <span class="keywordflow">else</span>
+<a name="l01385"></a>01385                                 {
+<a name="l01386"></a>01386                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (item);
+<a name="l01387"></a>01387                                 }
+<a name="l01388"></a>01388                         }
+<a name="l01389"></a>01389                         
+<a name="l01390"></a>01390                         <span class="keywordflow">if</span> (element.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() != 0)
+<a name="l01391"></a>01391                         {
+<a name="l01392"></a>01392                                 <span class="keywordflow">if</span> (needsNull) 
+<a name="l01393"></a>01393                                 {
+<a name="l01394"></a>01394                                         element.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">getNullObject</a>());
+<a name="l01395"></a>01395                                         element.<a class="code" href="class_object_array.html#a18008cf93344763c2c5309a2c5053246" title="Changes this array&#39;s null terminator flag.">setNullTerminated</a> (<span class="keyword">true</span>);
+<a name="l01396"></a>01396                                 }
+<a name="l01397"></a>01397                                 
+<a name="l01398"></a>01398                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (element);
+<a name="l01399"></a>01399                         }
+<a name="l01400"></a>01400                 }
+<a name="l01401"></a>01401                 
+<a name="l01402"></a>01402                 <span class="keywordflow">return</span> result;          
+<a name="l01403"></a>01403         }
+<a name="l01404"></a>01404         
+<a name="l01405"></a><a class="code" href="class_object_array.html#a664370848338525597ca379ce6da43de">01405</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#a664370848338525597ca379ce6da43de">splitSequence</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a> delimitingSequence) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01406"></a>01406         {
+<a name="l01407"></a>01407                 <span class="keyword">const</span> <span class="keywordtype">int</span> size = this-&gt;<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();
+<a name="l01408"></a>01408                 <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt; ObjectArray&lt;ObjectType&gt;</a> &gt; result;
+<a name="l01409"></a>01409                 
+<a name="l01410"></a>01410                 <span class="keywordflow">if</span> (size != 0)
+<a name="l01411"></a>01411                 {
+<a name="l01412"></a>01412                         <span class="keyword">const</span> <span class="keywordtype">int</span> findLength = delimitingSequence.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01413"></a>01413                         <span class="keywordtype">int</span> startIndex = 0;
+<a name="l01414"></a>01414                         <span class="keywordtype">int</span> findIndex;
+<a name="l01415"></a>01415                         
+<a name="l01416"></a>01416                         <span class="keywordflow">while</span> ((findIndex = this-&gt;<a class="code" href="class_object_array.html#ad2065d1c59f281fb17c78cce33f62b41" title="Gets the index of a particular item.">indexOf</a> (delimitingSequence, startIndex)) &gt;= 0)
+<a name="l01417"></a>01417                         {
+<a name="l01418"></a>01418                                 result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, findIndex));
+<a name="l01419"></a>01419                                 startIndex = findIndex + findLength;
+<a name="l01420"></a>01420                         }
+<a name="l01421"></a>01421                         
+<a name="l01422"></a>01422                         result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (this-&gt;<a class="code" href="class_object_array.html#a4d6c495b62d477184230022511cee67a" title="Return a new array which is a subarray of this one.">range</a> (startIndex, size));
+<a name="l01423"></a>01423                 }
+<a name="l01424"></a>01424                 
+<a name="l01425"></a>01425                 <span class="keywordflow">return</span> result;          
+<a name="l01426"></a>01426         }     
+<a name="l01427"></a>01427         
+<a name="l01429"></a><a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748">01429</a>         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> <a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="Deinternleave this array into a 2D array with a particular number of groups.">deinterleave</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> numGroups) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l01430"></a>01430         {
+<a name="l01431"></a>01431         <span class="keywordtype">int</span> i, j;
+<a name="l01432"></a>01432         
+<a name="l01433"></a>01433         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (!this-&gt;<a class="code" href="class_object_array.html#ab5013b564df8b9f768b3ab7a799c31af" title="Returns whether this is a null terminated array or not.">isNullTerminated</a>()); <span class="comment">// could be done but need this for audio de-interleaving for now..</span>
+<a name="l01434"></a>01434 
+<a name="l01435"></a>01435                 <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a> = this-&gt;<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l01436"></a>01436         
+<a name="l01437"></a>01437         <span class="keywordflow">if</span> (length == 0) 
+<a name="l01438"></a>01438             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ObjectType&gt;</a>();
+<a name="l01439"></a>01439 
+<a name="l01440"></a>01440         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (numGroups &gt; 0);
+<a name="l01441"></a>01441         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> ((length % numGroups) == 0);
+<a name="l01442"></a>01442         
+<a name="l01443"></a>01443         <span class="keywordflow">if</span> (numGroups == 1)
+<a name="l01444"></a>01444             <span class="keywordflow">return</span> <a class="code" href="class_object_array.html#a1a434ddf2302f5be2f1bfa6e1d6f3ebe">ObjectArray2DType</a> (*<span class="keyword">this</span>);
+<a name="l01445"></a>01445         
+<a name="l01446"></a>01446         <span class="keyword">const</span> <span class="keywordtype">int</span> subLength = length / numGroups;
+<a name="l01447"></a>01447         <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray2DType</a> result = <a class="code" href="class_object_array.html#afc0c8de5e14b9b5257f072c26fe7a5b5" title="Returns an empty array with a given size of allocated storage.">ObjectArray2DType::emptyWithAllocatedSize</a> (numGroups);
+<a name="l01448"></a>01448         
+<a name="l01449"></a>01449         <span class="keywordflow">for</span> (i = 0; i &lt; numGroups; ++i)
+<a name="l01450"></a>01450         {
+<a name="l01451"></a>01451             <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a> sub = <a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">ObjectArray::withSize</a> (subLength);
+<a name="l01452"></a>01452          
+<a name="l01453"></a>01453             <span class="keyword">const</span> ObjectType *thisArray = this-&gt;<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>() + i;
+<a name="l01454"></a>01454             ObjectType* <span class="keyword">const</span> subArray = sub.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l01455"></a>01455             
+<a name="l01456"></a>01456             <span class="keywordflow">for</span> (j = 0; j &lt; subLength; ++j, thisArray += numGroups)
+<a name="l01457"></a>01457                 subArray[j] = *thisArray;
+<a name="l01458"></a>01458             
+<a name="l01459"></a>01459             result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (sub);
+<a name="l01460"></a>01460         }               
+<a name="l01461"></a>01461                 
+<a name="l01462"></a>01462                 <span class="keywordflow">return</span> result;
+<a name="l01463"></a>01463         }
+<a name="l01464"></a>01464 
+<a name="l01465"></a>01465 };
+<a name="l01466"></a>01466 
+<a name="l01467"></a>01467 
+<a name="l01468"></a>01468 
+<a name="l01469"></a>01469 
+<a name="l01470"></a>01470 <span class="preprocessor">#endif // PLONK_OBJECTARRAY_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -1381,7 +1401,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:40 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:10 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

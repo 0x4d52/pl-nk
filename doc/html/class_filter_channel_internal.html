@@ -70,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="FilterChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;" -->
-<p>A generic IIR filter.  
+<p>A generic FIR/IIR filter.  
  <a href="class_filter_channel_internal.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="plonk___filter_8h_source.html">plonk_Filter.h</a>&gt;</code></p>
@@ -99,7 +99,7 @@ Public Types</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#a68f9eccee714950f6b0895c1ed78a93e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; <a class="el" href="class_filter_channel_internal.html#a9a063fa9b428b4501a7e2d0a1932d561">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_channel_internal.html#aab0c6a7905efb19b2d532981e493f871">ChannelType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_channel_internal.html">FilterChannelInternal</a><br class="typebreak"/>
-&lt; <a class="el" href="class_filter_form_type.html">FilterFormType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_channel_internal.html#a94d4f081210634b6548635625c2c6ea7">FilterInternal</a></td></tr>
+&lt; FormType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_channel_internal.html#a39992615025d0841af9b8a37923f7eed">FilterInternal</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
 &lt; <a class="el" href="class_filter_channel_internal.html#a9a063fa9b428b4501a7e2d0a1932d561">SampleType</a>, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_channel_internal.html#affcf4ca9856d0708cd9683e289e2294f">Internal</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
@@ -125,7 +125,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;class FormType&gt;<br/>
 class FilterChannelInternal&lt; FormType &gt;</h3>
 
-<p>A generic IIR filter. </p>
+<p>A generic FIR/IIR filter. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="a38e673fc3c2bd57433ce5c758e39d5b8"></a><!-- doxytag: member="FilterChannelInternal::Buffer" ref="a38e673fc3c2bd57433ce5c758e39d5b8" args="" -->
 <div class="memitem">
@@ -181,14 +181,14 @@ template&lt;class FormType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a94d4f081210634b6548635625c2c6ea7"></a><!-- doxytag: member="FilterChannelInternal::FilterInternal" ref="a94d4f081210634b6548635625c2c6ea7" args="" -->
+<a class="anchor" id="a39992615025d0841af9b8a37923f7eed"></a><!-- doxytag: member="FilterChannelInternal::FilterInternal" ref="a39992615025d0841af9b8a37923f7eed" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_channel_internal.html">FilterChannelInternal</a>&lt;<a class="el" href="class_filter_form_type.html">FilterFormType</a>&gt; <a class="el" href="class_filter_channel_internal.html">FilterChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_filter_channel_internal.html">FilterInternal</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_channel_internal.html">FilterChannelInternal</a>&lt;FormType&gt; <a class="el" href="class_filter_channel_internal.html">FilterChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_filter_channel_internal.html">FilterInternal</a></td>
         </tr>
       </table>
 </div>
@@ -474,7 +474,7 @@ template&lt;class FormType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 26 2012 21:36:45 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:15 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
