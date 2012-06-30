@@ -107,12 +107,12 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
 //    return RLPF::ar (HarmonicSaw::ar (Lag::kr (freq).ar(), amp), freq * 2 + 200, 3);
 //    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq.ar()), amp), freq * 2 + 200, 3);
 //    return RLPF::ar (HarmonicSaw::ar (ar (Lag::kr (freq)), amp), freq * 2 + 200, 3);
-    return RLPF::ar (HarmonicSaw::ar (Lag::kr (kr (freq)).ar(), amp), freq * 2 + 200, 3);
+//    return RLPF::ar (HarmonicSaw::ar (Lag::kr (kr (freq)).ar(), amp), freq * 2 + 200, 3);
   
-//    Unit input = BusRead::ar (Bus ("0"));
-//    Unit delay1 = Delay::ar (input, 0.25, 0.5);
-//    Unit delay2 = Delay::ar (input, 0.5, 0.5);
-//    return input + delay1 * 0.5 + delay2 * 0.25;
+    Unit input = BusRead::ar (Bus ("0"));
+    Unit delay1 = Delay::ar (input, 0.25, 0.5);
+    Unit delay2 = Delay::ar (input, 0.5, 0.5);
+    return input + delay1 * 0.5 + delay2 * 0.25;
 }
 
 -(void)hostStopped:(PLAudioHost *)host

@@ -42,25 +42,12 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
-//template<class FormType> class DelayChannelInternal;
-//
-//PLONK_CHANNELDATA_DECLARE(DelayChannelInternal,SampleType)
-//{        
-//    typedef typename TypeUtility<SampleType>::IndexType DurationType;
-//
-//    ChannelInternalCore::Data base;
-//    
-//    DurationType maximumDuration;
-//    int writePosition;
-//};      
-//
-////------------------------------------------------------------------------------
 
 /** Delay processor. */
 template<class FormType>
 class DelayBaseChannelInternal 
-:   public ChannelInternal<typename FormType::SampleDataType, 
-                           typename FormType::Data>
+:   public ProxyOwnerChannelInternal<typename FormType::SampleDataType, 
+                                     typename FormType::Data>
 {
 public:
     typedef typename FormType::SampleDataType               SampleType;
@@ -68,7 +55,7 @@ public:
     
     typedef ChannelBase<SampleType>                         ChannelType;
     typedef DelayBaseChannelInternal<FormType>              DelayInternal;
-    typedef ChannelInternal<SampleType,Data>                Internal;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>      Internal;
     typedef ChannelInternalBase<SampleType>                 InternalBase;
     typedef UnitBase<SampleType>                            UnitType;
     typedef InputDictionary                                 Inputs;
@@ -83,7 +70,7 @@ public:
                               Data const& data, 
                               BlockSize const& blockSize,
                               SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate)
+    :   Internal (1, inputs, data, blockSize, sampleRate)
     {
     }
     
@@ -121,139 +108,23 @@ public:
         this->initValue (SampleType (0));
         
         Data& data = this->getState();
-        this->buffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5));
+        this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5));
     }    
     
     void process (ProcessInfo& info, const int channel) throw()
     {
-        FormType::process (this->getOutputSamples(),
-                           this->getOutputBuffer().length(), 
+        FormType::process (this->getOutputSamples (0),
+                           this->getOutputBuffer (0).length(), 
                            this->getInputAsUnit (IOKey::Generic), 
                            this->getInputAsUnit (IOKey::Duration), 
-                           this->buffer,
+                           this->circularBuffer,
                            this->getState(),
                            info, 
                            channel);        
     }
-    
-//    void process (ProcessInfo& info, const int channel) throw()
-//    {        
-//        Data& data = this->getState();
-//        const double sampleRate = data.base.sampleRate;
-//        
-//        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-//        const Buffer inputBuffer (inputUnit.process (info, channel));
-//        const SampleType* const inputSamples = inputBuffer.getArray();
-//        const int inputBufferLength = inputBuffer.length();
-//
-//        DurationUnitType& durationUnit = ChannelInternalCore::getInputAs<DurationUnitType> (IOKey::Duration);
-//        const DurationBufferType durationBuffer (durationUnit.process (info, channel));
-//        const DurationType* const durationSamples = durationBuffer.getArray();
-//        const int durationBufferLength = durationBuffer.length();
-//        
-//        SampleType* const outputSamples = this->getOutputSamples();
-//        const int outputBufferLength = this->getOutputBuffer().length();
-//        
-//        SampleType* const bufferSamples = buffer.getArray();
-//        const int bufferLength = buffer.length();
-//        const DurationType bufferLengthIndex = DurationType (bufferLength);
-//        const DurationType buffer0 (0);
-//        
-//        int writePosition = data.writePosition;
-//        int i;
-//        
-//        plonk_assert (inputBufferLength == outputBufferLength);
-//        
-//        if (durationBufferLength == outputBufferLength)
-//        {
-//            for (i = 0; i < outputBufferLength; ++i) 
-//            {
-//                const DurationType durationInSamples = DurationType (durationSamples[i] * sampleRate);
-//                plonk_assert (durationInSamples <= bufferLength);
-//
-//                const SampleType inputValue = inputSamples[i];
-//                
-//                DurationType readPosition = DurationType (writePosition) - durationInSamples;
-//                if (readPosition < buffer0)
-//                    readPosition += bufferLengthIndex;
-//                const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
-//                
-//                const SampleType writeValue = inputValue;
-//                bufferSamples[writePosition] = writeValue;
-//                
-//                const SampleType outputValue = delayedValue;
-//                
-//                outputSamples[i] = outputValue;
-//                
-//                writePosition++;
-//                if (writePosition >= bufferLength)
-//                    writePosition = 0;
-//            }            
-//        }
-//        else if (durationBufferLength == 1)
-//        {
-//            const DurationType durationInSamples = DurationType (durationSamples[0] * sampleRate);
-//            
-//            plonk_assert (durationInSamples <= bufferLength);
-//            
-//            for (i = 0; i < outputBufferLength; ++i) 
-//            {
-//                const SampleType inputValue = inputSamples[i];
-//                
-//                DurationType readPosition = DurationType (writePosition) - durationInSamples;
-//                if (readPosition < buffer0)
-//                    readPosition += bufferLengthIndex;
-//                const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
-//                
-//                const SampleType writeValue = inputValue;
-//                bufferSamples[writePosition] = writeValue;
-//                
-//                const SampleType outputValue = delayedValue;
-//                
-//                outputSamples[i] = outputValue;
-//                
-//                writePosition++;
-//                if (writePosition >= bufferLength)
-//                    writePosition = 0;
-//            }            
-//        }
-//        else
-//        {            
-//            double durationPosition = 0.0;
-//            const double durationIncrement = double (durationBufferLength) / double (outputBufferLength);
-//
-//            for (i = 0; i < outputBufferLength; ++i) 
-//            {
-//                const DurationType durationInSamples = DurationType (durationSamples[int (durationPosition)] * sampleRate);
-//                plonk_assert (durationInSamples <= bufferLength);
-//
-//                const SampleType inputValue = inputSamples[i];
-//                
-//                DurationType readPosition = DurationType (writePosition) - durationInSamples;
-//                if (readPosition < buffer0)
-//                    readPosition += bufferLengthIndex;
-//                const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
-//                
-//                const SampleType writeValue = inputValue;
-//                bufferSamples[writePosition] = writeValue;
-//                
-//                const SampleType outputValue = delayedValue;
-//                
-//                outputSamples[i] = outputValue;
-//                
-//                writePosition++;
-//                if (writePosition >= bufferLength)
-//                    writePosition = 0;
-//                
-//                durationPosition += durationIncrement;
-//            }            
-//        }
-//        
-//        data.writePosition = writePosition;
-//    }
-    
+        
 private:
-    Buffer buffer;
+    Buffer circularBuffer;
 };
 
 //------------------------------------------------------------------------------
@@ -316,10 +187,10 @@ public:
         
         Data data = { { -1.0, -1.0 }, maximumDuration, 0 };
         
-        return UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                   data, 
-                                                                   preferredBlockSize, 
-                                                                   preferredSampleRate);
+        return UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
+                                                                    data, 
+                                                                    preferredBlockSize, 
+                                                                    preferredSampleRate);
     }
 };
 

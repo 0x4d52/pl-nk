@@ -200,7 +200,7 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,     Measure::None,              IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,    Measure::None,              IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Position,   Measure::NormalisedBipolar, 0.0,                IOLimit::Clipped, Measure::NormalisedBipolar,  -peak, peak,
                          IOKey::BlockSize,  Measure::Samples,           blockSize,          IOLimit::Minimum, Measure::Samples,             1.0,
                          IOKey::SampleRate, Measure::Hertz,             sampleRate,         IOLimit::Minimum, Measure::Hertz,               0.0,
