@@ -385,7 +385,8 @@ public:
 //    }
 
     
-    /** Resamples this unit to a different sample rate and/or block size. */
+    /** Resamples this unit to a different sample rate and/or block size. 
+     By default the default sample rate and default block size are used. */
     inline UnitBase ar (BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) const throw()
     {
@@ -603,10 +604,7 @@ public:
     
     /** Get the maximum block size in the array of channels in this unit. */
     BlockSize getMaxBlockSize() const throw();
-    
-//    /** Get the block size of a specific channel in this unit. */
-//    inline const BlockSize getBlockSize (const int index) const throw()    { return this->wrapAt (index).getBlockSize(); }
-    
+        
     /** Get the block size of a specific channel in this unit. */
     inline BlockSize getBlockSize (const int index) const throw()            { return this->wrapAt (index).getBlockSize(); }
 
@@ -636,11 +634,7 @@ public:
     
     /** Get the maximum sample rate in the array of channels in this unit. */
     SampleRate getMaxSampleRate() const throw();
-    
-//    /** Get the sample rate of a specific channel in this unit. 
-//     Indices out of range will be wrapped to the available channels. */
-//    inline const SampleRate getSampleRate (const int index) const throw()  { return this->wrapAt (index).getSampleRate(); }
-    
+        
     /** Get the sample rate of a specific channel in this unit.  
      Indices out of range will be wrapped to the available channels. */
     inline SampleRate getSampleRate (const int index) const throw()          { return this->wrapAt (index).getSampleRate(); }
@@ -898,6 +892,30 @@ PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase);  // declares global functions with the 
 //    const UnitBase<SampleType> clipped (clip (input, inLow, inHigh));
 //    return log (clipped / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
 //}
+
+/** Resamples a unit to a different sample rate and/or block size. 
+ By default the default sample rate and default block size are used. */
+template<class SampleType>
+UnitBase<SampleType> ar (UnitBase<SampleType> const& unit,
+                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+{
+    return unit.ar (preferredBlockSize, preferredSampleRate);
+}    
+
+/** Resamples a unit to the default control rate sample rate and block size. */
+template<class SampleType>
+inline UnitBase<SampleType> kr (UnitBase<SampleType> const& unit) throw()
+{
+    return unit.kr();
+}
+
+/** Mixes a unit down to a single channel. */
+template<class SampleType>
+inline UnitBase<SampleType> mix (UnitBase<SampleType> const& unit) throw()
+{
+    return unit.mix();
+}
 
 
 //------------------------------------------------------------------------------

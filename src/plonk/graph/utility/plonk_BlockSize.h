@@ -44,6 +44,9 @@
 #include "../../core/plonk_Receiver.h"
 #include "../../maths/plonk_InlineCommonOps.h"
 
+class BlockSizeDefault;
+class BlockSizeNoPreference;
+
 /** A specialised Variable<int> for handling block sizes. 
  One or more BlockSize objects store the block size for different parts of 
  the graph. For most applications there can be just one, default block size 
@@ -77,6 +80,9 @@ public:
     
     /** Copy constructor. */
     BlockSize (BlockSize const& copy) throw();
+    
+    BlockSize (BlockSizeDefault const& copy) throw();
+    BlockSize (BlockSizeNoPreference const& copy) throw();
         
     /** Create a block size converting from another type.
      This is useful for setting up ratios for both SampleRate and
@@ -136,6 +142,23 @@ private:
 };
 
 typedef NumericalArray<BlockSize> BlockSizes;
+
+//------------------------------------------------------------------------------
+
+class BlockSizeDefault : public BlockSize
+{
+public:
+    inline BlockSizeDefault() : BlockSize (BlockSize::getDefault()) { }
+};
+
+//------------------------------------------------------------------------------
+
+class BlockSizeNoPreference : public BlockSize
+{
+public:
+    inline BlockSizeNoPreference() : BlockSize (BlockSize::getDefault()) { }
+};
+
 
 
 

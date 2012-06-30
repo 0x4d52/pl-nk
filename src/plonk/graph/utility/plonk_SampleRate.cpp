@@ -72,6 +72,16 @@ SampleRate::SampleRate (SampleRate const& copy) throw()
 {
 }        
 
+SampleRate::SampleRate (SampleRateDefault const& copy) throw()
+:	Base (static_cast<Base const&> (copy))
+{    
+}
+
+SampleRate::SampleRate (SampleRateNoPreference const& copy) throw()
+:	Base (static_cast<Base const&> (copy))
+{    
+}
+
 const double SampleRate::getSampleDurationInTicks() const throw()
 {
     return TimeStamp::getTicks() / this->getValue();

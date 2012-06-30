@@ -73,9 +73,10 @@ public:
     typedef ReceiverInternal<Variable>      Receiver;
     typedef Variable                        Sender;
     typedef WeakPointerContainer<Variable>  Weak;
+    typedef UnitBase<Type>                  UnitType;
     
     /** Default constructor. */
-    Variable() throw()
+    inline Variable() throw()
     :   Base (new VariableInternalType (Type (0)))
     {
     }
@@ -88,7 +89,7 @@ public:
     
     /** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
-    Variable (Variable const& copy) throw()
+    inline Variable (Variable const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }
@@ -123,14 +124,14 @@ public:
 	}	                
     
     /** Initialised with a specific value. */
-    Variable (Type const& initValue) throw()
+    inline Variable (Type const& initValue) throw()
     :   Base (new VariableInternalType (initValue))
     {
     }
     
     /** Create a Variable that converts from one type to another. */
     template<class OtherType>
-    Variable (OtherType const& other) throw()
+    inline Variable (OtherType const& other) throw()
     :   Base (new TypeVariableInternal<Type,OtherType> (other))
     {
     }
@@ -152,13 +153,13 @@ public:
 
     
     /** Returns the current value. */
-    const Type getValue() const throw()
+    inline const Type getValue() const throw()
     {
         return this->getInternal()->getValue();
     }
     
     /** Returns the current value. */
-    operator Type () const throw()
+    inline operator Type () const throw()
     {
         return this->getInternal()->getValue();
     }
@@ -172,7 +173,7 @@ public:
     }
     
     /** Sets the current value. */
-    void setValue (Type const& newValue) throw()
+    inline void setValue (Type const& newValue) throw()
     {
         this->getInternal()->setValue (newValue);
     }    
@@ -206,43 +207,7 @@ public:
     {
         return (this->getValue() < other.getValue()) ? other : *this;
     }
-        
-//    inline static const Variable& getZero() throw()  
-//    { 
-//        static const Variable v (Math<Type>::get0() ); 
-//        return v; 
-//    }
-//    
-//    inline static const Variable& getOne() throw()   
-//    {         
-//        static const Variable v (Math<Type>::get1() ); 
-//        return v; 
-//    }
-//    
-//    inline static const Variable& getTwo() throw()   
-//    {         
-//        static const Variable v (Math<Type>::get2() ); 
-//        return v; 
-//    }
-//    
-//    inline static const Variable& getHalf() throw()  
-//    {         
-//        static const Variable v (Math<Type>::get0_5()); 
-//        return v; 
-//    }
-//    
-//    inline static const Variable& getPi() throw()    
-//    {         
-//        static const Variable v (Math<Type>::getPi()); 
-//        return v; 
-//    }
-//    
-//    inline static const Variable& getTwoPi() throw() 
-//    {         
-//        static const Variable v (Math<Type>::get2Pi() ); 
-//        return v; 
-//    }    
-    
+            
     int getTypeCode() const throw()
     {
         return TypeUtility<Variable>::getTypeCode();
@@ -252,7 +217,29 @@ public:
     {
         return TypeUtility<Type>::getTypeCode();
     }        
+    
+    inline UnitType ar() const throw()
+    {
+        return UnitType (*this).ar();
+    }
+    
+    inline UnitType kr() const throw()
+    {
+        return UnitType (*this).kr();
+    }
 };
+
+template<class Type>
+inline UnitBase<Type> ar (Variable<Type> v) throw()
+{
+    return UnitBase<Type> (v).ar();
+}
+
+template<class Type>
+inline UnitBase<Type> kr (Variable<Type> v) throw()
+{
+    return UnitBase<Type> (v).kr();
+}
 
 template<class Type>
 std::istream& operator>> (std::istream &inputStream, Variable<Type>& variable)

@@ -42,7 +42,7 @@
 #include "../plonk_GraphForwardDeclarations.h"
 #include "plonk_FilterTypes.h"
 
-template<class SampleType, FilterFormType::Name Form, FilterShapeType::Name Shape>      class FilterCoeffsUnit;
-template<class FormType>                                                                class FilterUnit;
+//template<class SampleType, FilterFormType::Name Form, FilterShapeType::Name Shape>      class FilterCoeffsUnit;
+//template<class FormType>                                                                class FilterUnit;
 
 #endif // PLONK_FILTERFORWARDDECLARATIONS_H

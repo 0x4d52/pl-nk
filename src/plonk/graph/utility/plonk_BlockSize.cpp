@@ -73,6 +73,16 @@ BlockSize::BlockSize (BlockSize const& copy) throw()
 {
 }        
 
+BlockSize::BlockSize (BlockSizeDefault const& copy) throw()
+:	Base (static_cast<Base const&> (copy))
+{
+}        
+
+BlockSize::BlockSize (BlockSizeNoPreference const& copy) throw()
+:	Base (static_cast<Base const&> (copy))
+{
+}        
+
 BlockSize BlockSize::getDefault() throw()
 {
     static BlockSize blockSize (512);

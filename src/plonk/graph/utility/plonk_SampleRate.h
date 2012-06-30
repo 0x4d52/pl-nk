@@ -44,6 +44,9 @@
 #include "../../core/plonk_Receiver.h"
 #include "../../maths/plonk_InlineCommonOps.h"
 
+class SampleRateDefault;
+class SampleRateNoPreference;
+
 /** A specialised Variable<double> for handling sample rates. 
  One or more SampleRate objects store the sample rate for different parts of 
  the audio graph. There are accessors to get the default sample rate, a zero 
@@ -73,6 +76,9 @@ public:
     
     /** Copy constructor. */
     SampleRate (SampleRate const& copy) throw();
+    
+    SampleRate (SampleRateDefault const& copy) throw();
+    SampleRate (SampleRateNoPreference const& copy) throw();
     
     template<class OtherType>
     SampleRate (OtherType const& initValue) throw()
@@ -105,5 +111,22 @@ private:
 };
 
 typedef NumericalArray<SampleRate> SampleRates;
+
+//------------------------------------------------------------------------------
+
+class SampleRateDefault : public SampleRate
+{
+public:
+    SampleRateDefault() : SampleRate (SampleRate::getDefault()) { }
+};
+
+//------------------------------------------------------------------------------
+
+class SampleRateNoPreference : public SampleRate
+{
+public:
+    SampleRateNoPreference() : SampleRate (SampleRate::noPreference()) { }
+};
+
 
 #endif // PLONK_SAMPLERATE_H

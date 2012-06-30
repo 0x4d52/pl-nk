@@ -91,7 +91,7 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
         
 //        self.preferredBlockSize = 512;
 //        self.preferredSampleRate = 22050.0;
-        
+                
         freq = 500.f;
         amp = 0.1f;
         
@@ -104,33 +104,16 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
 - (Unit)constructGraph:(PLAudioHost*)host
 {
 //    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq, 0.5), amp), freq * 2 + 200, 3);
-    return RLPF::ar (HarmonicSaw::ar (Lag::kr (freq).ar(), amp), freq * 2 + 200, 3);
-    
+//    return RLPF::ar (HarmonicSaw::ar (Lag::kr (freq).ar(), amp), freq * 2 + 200, 3);
+//    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq.ar()), amp), freq * 2 + 200, 3);
+//    return RLPF::ar (HarmonicSaw::ar (ar (Lag::kr (freq)), amp), freq * 2 + 200, 3);
+    return RLPF::ar (HarmonicSaw::ar (Lag::kr (kr (freq)).ar(), amp), freq * 2 + 200, 3);
+  
 //    Unit input = BusRead::ar (Bus ("0"));
 //    Unit delay1 = Delay::ar (input, 0.25, 0.5);
 //    Unit delay2 = Delay::ar (input, 0.5, 0.5);
 //    return input + delay1 * 0.5 + delay2 * 0.25;
 }
-
-//- (float)freq
-//{
-//    return freq.getValue();
-//}
-//
-//- (void)setFreq:(float)value
-//{
-//    freq.setValue (value);
-//}
-//
-//- (float)amp
-//{
-//    return amp.getValue();
-//}
-//
-//- (void)setAmp:(float)value
-//{
-//    amp.setValue (value);
-//}
 
 -(void)hostStopped:(PLAudioHost *)host
 {
