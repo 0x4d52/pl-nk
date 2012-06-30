@@ -187,10 +187,11 @@ public:
         
         Data data = { { -1.0, -1.0 }, maximumDuration, 0 };
         
-        return UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
-                                                                    data, 
-                                                                    preferredBlockSize, 
-                                                                    preferredSampleRate);
+        //proxiesFromInputs
+        return UnitType::template createFromInputs<DelayInternal> (inputs, 
+                                                                   data, 
+                                                                   preferredBlockSize, 
+                                                                   preferredSampleRate);
     }
 };
 

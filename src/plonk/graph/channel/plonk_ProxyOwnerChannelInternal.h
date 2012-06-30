@@ -106,7 +106,10 @@ public:
         
     bool deleteIfOnlyMutualReferencesRemain() throw();
     
-    bool isProxyOwner() const throw() { return true; }
+    bool isProxyOwner() const throw() 
+    { 
+        return this->getNumChannels() > 1; 
+    }
     
     InternalBase* getChannel (const int /*index*/) throw()
     {
