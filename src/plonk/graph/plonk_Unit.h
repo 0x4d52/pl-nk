@@ -264,7 +264,8 @@ public:
                                                                           data, 
                                                                           preferredBlockSize, 
                                                                           preferredSampleRate);
-            plonk_assert (internal->isProxyOwner() == false);
+            
+            plonk_assert ((internal->isProxyOwner() == false) || (internal->getNumChannels() == 1));
 
             internal->initChannel (i);
                         

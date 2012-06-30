@@ -164,6 +164,8 @@ public:
     inline SampleType* getOutputSamples() throw()                           { return this->getInternal()->getOutputSamples(); }
     inline void setOutputBuffer (Buffer const& externalBuffer) throw()      { this->getInternal()->setOutputBuffer (externalBuffer); }
     
+    inline int getNumChannels() const throw()                               { return this->getInternal()->getNumChannels(); }
+    
     inline void initValue (SampleType const& value) throw()                 { return this->getInternal()->initValue (value); }
     inline void initChannel (const int index) throw()                       { this->getInternal()->initChannel (index); }
     inline const SampleType& getValue() const throw()                       { return this->getInternal()->getValue(); }

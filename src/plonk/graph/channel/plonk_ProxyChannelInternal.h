@@ -117,6 +117,11 @@ public:
         return this;
     }    
     
+    int getNumChannels() const throw()
+    {
+        return owner.getNumChannels();
+    }
+    
     void initChannel (const int channel) throw()
     {        
         InternalBase* proxyOwner 

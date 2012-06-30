@@ -108,7 +108,8 @@ public:
     
     bool isProxyOwner() const throw() 
     { 
-        return this->getNumChannels() > 1; 
+        return true;
+        //return this->getNumChannels() > 1; 
     }
     
     InternalBase* getChannel (const int /*index*/) throw()
@@ -148,7 +149,7 @@ public:
         return proxiesArray[index].getOutputBuffer();
     }    
     
-    inline const int getNumChannels() const throw()
+    int getNumChannels() const throw()
     {
         return proxies.getInternal()->length();
     }

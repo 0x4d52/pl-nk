@@ -102,6 +102,7 @@ public:
     virtual bool isTypeConverter() const throw()        { return false; }
     virtual bool canUseExternalBuffer() const throw()   { return true;  }
     virtual double getLatency() const throw()           { return 0.0;   }
+    virtual int getNumChannels() const throw()          { return 1; }
     
     virtual Text getLabel() const throw()               { return identifier; }  // virtual due to proxies
     virtual void setLabel (Text const& newId) throw();                          // virtual due to proxies
