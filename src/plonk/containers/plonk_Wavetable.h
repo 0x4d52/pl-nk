@@ -56,6 +56,10 @@ class WavetableBase : private NumericalArray<SampleType>
 public:
     typedef NumericalArray<SampleType> Buffer;
     
+    WavetableBase() throw()
+    {
+    }
+    
     WavetableBase (Buffer const& buffer) throw()
     :   Buffer (Buffer::withSize (buffer.length() * 2, false))
     {

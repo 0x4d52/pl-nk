@@ -100,10 +100,12 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
         IntArray test (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);//, 12);
         IntArray2D test2d = test.deinterleave (3);
         IntArray test2 = test2d.interleave();
+        IntArray flat = test2d.flatten();
         
         test.print("orig");
         test2d.print("deint");
         test2.print("reint");
+        flat.print("flat");
 
     }
     

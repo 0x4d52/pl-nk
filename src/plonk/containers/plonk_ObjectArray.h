@@ -1345,7 +1345,7 @@ public:
 		return result;
 	}
 	
-	/** Split the array into a 2D using delimiters. 
+	/** Split the array into a 2D array using delimiters. 
 	 The array will the split when ANY of the delimiters is found. */
 	ObjectArray2DType split (ObjectArray<ObjectType> delimiters) const throw()
 	{
@@ -1402,6 +1402,8 @@ public:
 		return result;		
 	}
 	
+    /** Split the array into a 2D array using a delimiting sequence. 
+	 The array will the split when ALL of the delimiters are found in the same sequence. */
 	ObjectArray2DType splitSequence (ObjectArray<ObjectType> delimitingSequence) const throw()
 	{
 		const int size = this->size();
@@ -1462,6 +1464,16 @@ public:
 //		return result;
 //	}
     
+    /** De-interleave an array into a 2D array.
+     The 2D array will contain @c numGroups sub-arrays. Items in the source
+     array are added to the sub-arrays in turn until all items are added.
+     
+     Example:
+     @code
+     IntArray source1d (1, 2, 3, 4, 5, 6, 7);
+     IntArray2D dest2d = source1d.deinterleave (2);
+      // result will be {{1, 3, 5, 7}, {2, 4, 6}}
+     @endcode */
     ObjectArray2DType deinterleave (const int numGroups) const throw()
 	{
         int i, j;

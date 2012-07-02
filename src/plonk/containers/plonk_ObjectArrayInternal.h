@@ -212,7 +212,7 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
             // and clear the rest
             if (newSize > overlapSize)
             {
-                ObjectType null = ObjectType();
+                ObjectType null = TypeUtility<ObjectType>::getNull();// ObjectType();
             
                 for (i = overlapSize; i < newSize; ++i)
                     newArray[i] = null;
@@ -234,9 +234,7 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     plonk_assert (ownsTheData);
     
     setSizeIfNeeded (sizeUsed + 1, true);
-    
     array[this->length() - 1] = item;
-    
     this->update();
 }
 
@@ -279,7 +277,8 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         for (int i = index; i < newSize; ++i)
             array[i] = array[i + 1];
         
-        array[newSize] = ObjectType(); //null
+        ObjectType null = TypeUtility<ObjectType>::getNull();// ObjectType();
+        array[newSize] = null;//ObjectType();
         
         sizeUsed = newSize;
     }
@@ -322,7 +321,8 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         {
             arrayIsNullTerminated = needsNullTermination;
             needsUpdate = true;
-            array[this->length()] = ObjectType();
+            ObjectType null = TypeUtility<ObjectType>::getNull();// ObjectType();
+            array[this->length()] = null;//ObjectType();
         }
     }
     else 
@@ -341,7 +341,10 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         needsUpdate = true;
         
         if (array)
-            array[this->length()] = ObjectType();
+        {
+            ObjectType null = TypeUtility<ObjectType>::getNull();// ObjectType();
+            array[this->length()] = null;//ObjectType();
+        }
     }
     
     if (needsUpdate)

@@ -255,7 +255,7 @@ public:
     typedef Type const&     PassType;
     typedef float           IndexType;
     static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<OriginalType>::getNull(); }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 template<class Type>
@@ -267,7 +267,7 @@ public:
     typedef Type const&     PassType;
     typedef float           IndexType;
     static inline int getTypeCode()     { return TypeCode::Unknown; }
-    static inline const OriginalType& getNull() { return TypeUtilityBase<OriginalType>::getNull(); }
+    static inline const OriginalType& getNull() { static OriginalType null; return null; }
 };
 
 

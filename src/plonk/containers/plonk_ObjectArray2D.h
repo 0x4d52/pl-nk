@@ -336,6 +336,7 @@ public:
 	{
 	}
     
+    /** Does the item contain a particular item. */
 	bool contains (ArrayType const& item) const throw()
 	{
 		const int numRows = this->length();
@@ -370,6 +371,7 @@ public:
 		column = -1;
 	}
 	
+    /** Does each of the rows of the 2D array contain the same number of items. */
 	bool isMatrix() const throw()
 	{
 		const int numRows = this->length();
@@ -391,11 +393,15 @@ public:
 		return true;
 	}
 	
+    /** Return the number rows in the 2D array. */
 	int numRows() const throw()
 	{
 		return this->size();
 	}
 	
+    /** Return the largest length row in each of the rows in the 2D array. 
+     This can be used in conjunction with isMatrix() to determin if all the row
+     lengths are the same (i.e., the 2D array is a matrix). */
 	int numColumns() const throw()
 	{
 		const int numRows = this->length();
@@ -414,6 +420,7 @@ public:
 		return maxNumColumns;
 	}
     
+    /** Flatten the array to a one dimensional array. */
 	RowType flatten() const throw()
 	{
 		RowType result;
@@ -441,6 +448,20 @@ public:
         return result;
     }
     
+    /** Interleave the 2D array into one dimension.
+     The result will contain the same number of array items but flattened
+     to a one dimensional array. 
+     
+     Example:
+     @code
+     IntArray source1d (1, 2, 3, 4, 5, 6, 7);
+     
+     IntArray2D dest2d = source1d.deinterleave (2);
+     // result will be {{1, 3, 5, 7}, {2, 4, 6}}
+     
+     IntArray dest1d = dest2d.interleave();
+     // result will be {1, 2, 3, 4, 5, 6, 7}
+     @endcode */
     ObjectArrayType interleave() throw()
     {
         int i, j;
@@ -531,7 +552,7 @@ public:
 	{
 	}
     
-	ObjectArray2D(const int rows, const int columns) throw()
+	ObjectArray2D (const int rows, const int columns) throw()
 	:	ObjectArray2DBase< ArrayType, RowType > (rows < 0 ? 0 : rows)//, false) 
 	{
 		if (columns > 0 && rows > 0)
