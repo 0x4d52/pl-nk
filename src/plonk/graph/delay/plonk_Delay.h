@@ -187,7 +187,7 @@ public:
         
         Data data = { { -1.0, -1.0 }, maximumDuration, 0 };
         
-        //proxiesFromInputs
+        //proxiesFromInputs // <--- can use this anyway for just one channel...
         return UnitType::template createFromInputs<DelayInternal> (inputs, 
                                                                    data, 
                                                                    preferredBlockSize, 

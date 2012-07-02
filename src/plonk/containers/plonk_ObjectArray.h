@@ -1426,41 +1426,82 @@ public:
 	}     
         
     /** Deinternleave this array into a 2D array with a particular number of groups. */
-	ObjectArray2DType deinterleave (const int numGroups) const throw()
+//	ObjectArray2DType deinterleave (const int numGroups) const throw()
+//	{
+//        int i, j;
+//        
+//        plonk_assert (!this->isNullTerminated()); // could be done but need this for audio de-interleaving for now..
+//
+//		const int length = this->length();
+//        
+//        if (length == 0) 
+//            return ObjectArray<ObjectType>();
+//
+//        plonk_assert (numGroups > 0);
+//        plonk_assert ((length % numGroups) == 0);
+//        
+//        if (numGroups == 1)
+//            return ObjectArray2DType (*this);
+//        
+//        const int subLength = length / numGroups;
+//        ObjectArray2DType result = ObjectArray2DType::emptyWithAllocatedSize (numGroups);
+//        
+//        for (i = 0; i < numGroups; ++i)
+//        {
+//            ObjectArray sub = ObjectArray::withSize (subLength);
+//         
+//            const ObjectType *thisArray = this->getArray() + i;
+//            ObjectType* const subArray = sub.getArray();
+//            
+//            for (j = 0; j < subLength; ++j, thisArray += numGroups)
+//                subArray[j] = *thisArray;
+//            
+//            result.add (sub);
+//        }		
+//		
+//		return result;
+//	}
+    
+    ObjectArray2DType deinterleave (const int numGroups) const throw()
 	{
         int i, j;
         
         plonk_assert (!this->isNullTerminated()); // could be done but need this for audio de-interleaving for now..
-
+        
 		const int length = this->length();
         
         if (length == 0) 
             return ObjectArray<ObjectType>();
-
+        
         plonk_assert (numGroups > 0);
-        plonk_assert ((length % numGroups) == 0);
         
         if (numGroups == 1)
             return ObjectArray2DType (*this);
         
-        const int subLength = length / numGroups;
-        ObjectArray2DType result = ObjectArray2DType::emptyWithAllocatedSize (numGroups);
+        const int subLength = (length % numGroups) == 0 ? length / numGroups : length / numGroups + 1;
+        ObjectArray2DType result = ObjectArray2DType::withSize (numGroups);
+        ObjectArray* const resultArray = result.getArray();
+        
+        int lengthRemaining = length;
         
         for (i = 0; i < numGroups; ++i)
         {
-            ObjectArray sub = ObjectArray::withSize (subLength);
-         
-            const ObjectType *thisArray = this->getArray() + i;
+            const int subLengthUsed = plonk::min (subLength, lengthRemaining);
+            ObjectArray sub = ObjectArray::withSize (subLengthUsed);
             ObjectType* const subArray = sub.getArray();
+
+            const ObjectType *thisArray = this->getArray() + i;
             
-            for (j = 0; j < subLength; ++j, thisArray += numGroups)
+            for (j = 0; j < subLengthUsed; ++j, thisArray += numGroups)
                 subArray[j] = *thisArray;
             
-            result.add (sub);
+            resultArray[i] = sub;
+            lengthRemaining -= subLengthUsed;
         }		
 		
 		return result;
 	}
+
 
 };
 

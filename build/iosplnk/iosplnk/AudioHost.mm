@@ -96,6 +96,15 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
         amp = 0.1f;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"update" object:self];
+        
+        IntArray test (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);//, 12);
+        IntArray2D test2d = test.deinterleave (3);
+        IntArray test2 = test2d.interleave();
+        
+        test.print("orig");
+        test2d.print("deint");
+        test2.print("reint");
+
     }
     
     return self;

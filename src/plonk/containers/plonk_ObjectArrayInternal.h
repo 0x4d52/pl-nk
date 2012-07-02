@@ -166,7 +166,7 @@ bool ObjectArrayInternalBase<ObjectType,BaseType>
         {   
             // null items beyond the used size and add null termination if needed..
             // could avoid this for simple numerical types 
-            ObjectType null = ObjectType();
+            ObjectType null = TypeUtility<ObjectType>::getNull();// ObjectType();
             
             for (int i = newLength; i < allocatedSize; ++i)
                 array[i] = null;

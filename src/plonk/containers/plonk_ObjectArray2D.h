@@ -444,22 +444,23 @@ public:
     ObjectArrayType interleave() throw()
     {
         int i, j;
-        
-        plonk_assert (isMatrix());
-        
+        int actualSize = 0;
         const int numRows = this->numRows();
-        const int numColumns = this->numColumns();
         
-        ObjectArrayType result = ObjectArrayType::withSize (numRows * numColumns);
+        ObjectArrayType result = ObjectArrayType::withSize (numRows * this->numColumns());
+        const RowType* const rows = this->getArray();
         
         for (i = 0; i < numRows; ++i)
         {
+            const ArrayType* const sourceArray = rows[i].getArray();
+            const int numColumns = rows[i].length();
             ArrayType* resultArray = result.getArray() + i;
-            ArrayType* sourceArray = this->atUnchecked (i).getArray();
             
-            for (j = 0; j < numColumns; ++j, resultArray += numRows)
+            for (j = 0; j < numColumns; ++j, resultArray += numRows, ++actualSize)
                 *resultArray = sourceArray[j];
         }
+        
+        result.setSize (actualSize, true); // shrink the size if needed
         
         return result;
     }
