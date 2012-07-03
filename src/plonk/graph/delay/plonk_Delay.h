@@ -119,16 +119,16 @@ public:
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
         const Buffer inputBuffer (inputUnit.process (info, channel));
         data.inputSamples = inputBuffer.getArray();
+        data.outputSamples = this->getOutputSamples (0);
    
         plonk_assert (inputBuffer.length() == outputBufferLength);
 
-        FormType::process (this->getOutputSamples (0),
-                           outputBufferLength, 
-                           this->getInputAsUnit (IOKey::Duration), 
-                           this->circularBuffer,
-                           data,
-                           info, 
-                           channel);        
+        data.writePosition = FormType::process (outputBufferLength, 
+                                                this->getInputAsUnit (IOKey::Duration), 
+                                                this->circularBuffer,
+                                                data,
+                                                info, 
+                                                channel);        
     }
         
 private:
