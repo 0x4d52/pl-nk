@@ -95,18 +95,7 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
         freq = 500.f;
         amp = 0.1f;
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"update" object:self];
-        
-        IntArray test (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);//, 12);
-        IntArray2D test2d = test.deinterleave (3);
-        IntArray test2 = test2d.interleave();
-        IntArray flat = test2d.flatten();
-        
-        test.print("orig");
-        test2d.print("deint");
-        test2.print("reint");
-        flat.print("flat");
-
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"update" object:self];        
     }
     
     return self;
@@ -120,10 +109,18 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
 //    return RLPF::ar (HarmonicSaw::ar (ar (Lag::kr (freq)), amp), freq * 2 + 200, 3);
 //    return RLPF::ar (HarmonicSaw::ar (Lag::kr (kr (freq)).ar(), amp), freq * 2 + 200, 3);
   
+//    Unit input = BusRead::ar (Bus ("0"));
+//    Unit delay1 = Delay::ar (input, 0.25, 0.5);
+//    Unit delay2 = Delay::ar (input, 0.5, 0.5);
+//    return input + delay1 * 0.5 + delay2 * 0.25;
+    
+//    Unit input = BusRead::ar (Bus ("0"));
+//    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.25, 0.2525), 0.5);
+//    return input + delay1 * 0.5;
+    
     Unit input = BusRead::ar (Bus ("0"));
-    Unit delay1 = Delay::ar (input, 0.25, 0.5);
-    Unit delay2 = Delay::ar (input, 0.5, 0.5);
-    return input + delay1 * 0.5 + delay2 * 0.25;
+    Unit delay1 = Delay::ar (input, Sine::kr (5).linlin (0.25, 0.2525).ar(), 0.5);
+    return input + delay1 * 0.5;
 }
 
 -(void)hostStopped:(PLAudioHost *)host
