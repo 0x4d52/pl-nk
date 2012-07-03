@@ -160,20 +160,21 @@ public:
     {
         const double blockSize = (double)BlockSize::noPreference().getValue();
         const double sampleRate = SampleRate::noPreference().getValue();
-//        const double peak = (double)TypeUtility<SampleType>::getTypePeak(); // will be innaccurate for LongLong
         
         return UnitInfo ("Filter", "A generic IIR filter.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,    Measure::None,      0.0,                IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,     Measure::None,
-                         IOKey::Coeffs,     Measure::Coeffs,
-                         IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
-                         IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::Generic,    Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Coeffs,     Measure::Coeffs,    IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Multiply,   Measure::Factor,    1.0,                IOLimit::None,
+                         IOKey::Add,        Measure::None,      0.0,                IOLimit::None,
+                         IOKey::BlockSize,  Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,           1.0,
+                         IOKey::SampleRate, Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,             0.0,
                          IOKey::End);
     }
                 

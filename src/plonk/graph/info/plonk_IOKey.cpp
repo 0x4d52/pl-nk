@@ -81,7 +81,8 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Signal,
         IOKey::Breakpoints,
         IOKey::AutoDeleteFlag,
-        IOKey::HarmonicCount
+        IOKey::HarmonicCount,
+        IOKey::MaximumDuration,
     };
     
     if (value == IOKey::End)   
@@ -146,7 +147,8 @@ Text IOKey::getName (const int keyIndex) throw()
         "Breakpoints",
         
         "Auto Delete Flag",
-        "Harmonic Count"
+        "Harmonic Count",
+        "Maximum Duration",
     };
     
     if (keyIndex < 0 || keyIndex >= NumNames)
@@ -196,7 +198,8 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeBreakpoints,     //"Breakpoints"
         
         IOKey::TypeBool,            //"Auto Delete Flag"
-        IOKey::TypeNumerical        //"Harmonic Count"
+        IOKey::TypeNumerical,       //"Harmonic Count"
+        IOKey::TypeNumerical,       //"Maximum Duration"
     };
     
     if (keyIndex < 0 || keyIndex >= IOKey::NumNames)
@@ -246,7 +249,8 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Breakpoints",      //"Breakpoints"
         
         "Bool",             //"Auto Delete Flag"
-        "Numerical"         //"Harmonic Count"
+        "Numerical",        //"Harmonic Count"
+        "Numerical",        //"Maximum Duration"
     };
     
     if (keyIndex < 0 || keyIndex >= IOKey::NumNames)

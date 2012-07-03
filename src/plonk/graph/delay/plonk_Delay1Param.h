@@ -63,11 +63,10 @@ public:
     
     typedef typename TypeUtility<SampleType>::IndexType     DurationType;
     
-    typedef typename TypeUtility<SampleType>::IndexType     Param1Type;
-    typedef UnitBase<Param1Type>                            Param1UnitType;
-    typedef NumericalArray<Param1Type>                      Param1BufferType;
-    typedef InterpLinear<SampleType,Param1Type>             InterpType;
-    
+    typedef typename FormType::Param1Type                   Param1Type;
+    typedef typename FormType::Param1UnitType               Param1UnitType;
+    typedef typename FormType::Param1BufferType             Param1BufferType;
+        
     typedef void (*InputFunction)(Data&);
     typedef void (*ReadFunction)(Data&, const int);
     typedef void (*WriteFunction)(Data&, const int);
@@ -90,7 +89,7 @@ public:
     
     Text getName() const throw()
     {
-        return "Delay1Param";
+        return FormType::getName();
     }       
     
     IntArray getInputKeys() const throw()
@@ -142,7 +141,7 @@ public:
                                           FormType::outputWrite,
                                           FormType::param1Process>
                                     (outputBufferLength, 
-                                     this->getInputAsUnit (FormType::getInputKeys ().atUnchecked (1)), 
+                                     this->getInputAsUnit (FormType::getInputKeys().atUnchecked (1)), 
                                      this->circularBuffer,
                                      data,
                                      info, 
@@ -275,27 +274,28 @@ public:
     typedef typename DelayInternal::Param1UnitType          DurationUnitType;
     typedef typename DelayInternal::Param1BufferType        DurationBufferType;
     
-//    static inline UnitInfos getInfo() throw()
-//    {
-//        const double blockSize = (double)BlockSize::getDefault().getValue();
-//        const double sampleRate = SampleRate::getDefault().getValue();
-//        
-//        return UnitInfo ("Table", "A wavetable oscillator.",
-//                         
-//                         // output
-//                         ChannelCount::VariableChannelCount, 
-//                         IOKey::Generic,    Measure::None,      0.0,        IOLimit::None,
-//                         IOKey::End,
-//                         
-//                         // inputs
-//                         IOKey::Wavetable,  Measure::None,
-//                         IOKey::Frequency,  Measure::Hertz,     440.0,      IOLimit::Clipped,   Measure::SampleRateRatio,   0.0, 0.5,
-//                         IOKey::Multiply,   Measure::Factor,    1.0,        IOLimit::None,
-//                         IOKey::Add,        Measure::None,      0.0,        IOLimit::None,
-//                         IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
-//                         IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
-//                         IOKey::End);
-//    }
+    static inline UnitInfos getInfo() throw()
+    {
+        const double blockSize = (double)BlockSize::getDefault().getValue();
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("Delay", "A simple delay processor.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount, 
+                         IOKey::Generic,            Measure::None,      0.0,                IOLimit::None,                         
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::Minimum,   Measure::Seconds,   0.0,
+                         IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::None,
+                         IOKey::MaximumDuration,    Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
+                         IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
+                         IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
+                         IOKey::BlockSize,          Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
+                         IOKey::SampleRate,         Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
+                         IOKey::End);
+    }
     
     /** Create an audio rate wavetable oscillator. */
     static UnitType ar (UnitType const& input,

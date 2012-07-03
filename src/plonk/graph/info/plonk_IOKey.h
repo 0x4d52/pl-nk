@@ -113,6 +113,7 @@ public:
         
         AutoDeleteFlag, ///< To control the auto deletion
         HarmonicCount,
+        MaximumDuration,
 
         NumNames
     };

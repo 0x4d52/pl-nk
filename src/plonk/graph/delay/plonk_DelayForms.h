@@ -72,7 +72,7 @@ template<class SampleType, signed Form, signed NumParams>
 class DelayFormBase
 {
 public:    
-    static Text getName() throw()
+    static inline Text getName() throw()
     {
         return DelayFormType::getName (Form);
     }        
@@ -107,12 +107,16 @@ public:
     typedef NumericalArray<DurationType>                                DurationBufferType;
     typedef InterpLinear<SampleType,DurationType>                       InterpType;
     
+    typedef DurationType                                                Param1Type;
+    typedef DurationUnitType                                            Param1UnitType;
+    typedef DurationBufferType                                          Param1BufferType;
+
     static inline IntArray getInputKeys() throw()
     {
         const IntArray keys (IOKey::Generic, IOKey::Duration);
         return keys;
     }    
-
+    
     static inline void inputIgnore (Data&) throw() { }
     static inline void inputRead (Data& data) throw()
     {
