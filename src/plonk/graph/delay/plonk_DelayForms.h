@@ -55,6 +55,8 @@ struct DelayFormData
     SampleType inputValue;
     SampleType writeValue;
     SampleType outputValue;
+    
+    const SampleType* inputSamples;
 };      
 
 //------------------------------------------------------------------------------
@@ -101,7 +103,6 @@ public:
     
     static void process (SampleType* outputSamples,
                          const int outputBufferLength,
-                         UnitType& inputUnit, 
                          DurationUnitType& durationUnit,
                          Buffer& buffer,
                          Data& data,
@@ -109,11 +110,7 @@ public:
                          const int channel) throw()
     {
         const double sampleRate = data.base.sampleRate;
-        
-        const Buffer inputBuffer (inputUnit.process (info, channel));
-        const SampleType* inputSamples = inputBuffer.getArray();
-        const int inputBufferLength = inputBuffer.length();
-        
+                
         const DurationBufferType durationBuffer (durationUnit.process (info, channel));
         const DurationType* durationSamples = durationBuffer.getArray();
         const int durationBufferLength = durationBuffer.length();
@@ -125,7 +122,6 @@ public:
         
         int writePosition = data.writePosition;
         
-        plonk_assert (inputBufferLength == outputBufferLength);
         int numSamplesToProcess = outputBufferLength;
         
         if (durationBufferLength == outputBufferLength)
@@ -142,7 +138,7 @@ public:
                     const DurationType durationInSamples = DurationType (durationValue * sampleRate);
                     plonk_assert (durationInSamples <= bufferLength);
 
-                    data.inputValue = *inputSamples++;
+                    data.inputValue = *data.inputSamples++;
                     
                     DurationType readPosition = DurationType (writePosition) - durationInSamples;
                     if (readPosition < buffer0)
@@ -176,7 +172,7 @@ public:
                 
                 while (numSamplesThisTime--) 
                 {
-                    data.inputValue = *inputSamples++;
+                    data.inputValue = *data.inputSamples++;
                     
                     DurationType readPosition = DurationType (writePosition) - durationInSamples;
                     if (readPosition < buffer0)
@@ -213,7 +209,7 @@ public:
                     const DurationType durationInSamples = DurationType (durationValue * sampleRate);
                     plonk_assert (durationInSamples <= bufferLength);
                     
-                    data.inputValue = *inputSamples++;
+                    data.inputValue = *data.inputSamples++;
                     
                     DurationType readPosition = DurationType (writePosition) - durationInSamples;
                     if (readPosition < buffer0)

@@ -118,15 +118,15 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
 //    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.25, 0.2525), 0.5);
 //    return input + delay1 * 0.5;
     
-//    Unit input = BusRead::ar (Bus ("0"));
-//    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.125, 0.12525), 0.5);
-//    Unit delay2 = Delay::ar (input, Sine::kr (5).linlin (0.25, 0.2525).ar(), 0.5);
-//    Unit delay3 = Delay::ar (input, 0.5, 0.5);
-//    return input + delay1 * 0.5 + delay2 * 0.25 + delay3 * 0.125;
-    
     Unit input = BusRead::ar (Bus ("0"));
-    Unit delay = Delay::ar (input, 0.5, 0.5);
-    return input + delay;
+    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.125, 0.12525), 0.5);
+    Unit delay2 = Delay::ar (input, Sine::kr (5).linlin (0.25, 0.2525).ar(), 0.5);
+    Unit delay3 = Delay::ar (input, 0.5, 0.5);
+    return input + delay1 * 0.5 + delay2 * 0.25 + delay3 * 0.125;
+    
+//    Unit input = BusRead::ar (Bus ("0"));
+//    Unit delay = Delay::ar (input, 0.5, 0.5);
+//    return input + delay;
 
 }
 

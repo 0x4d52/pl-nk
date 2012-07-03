@@ -113,12 +113,20 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {
+        Data& data = this->getState();
+        const int outputBufferLength = this->getOutputBuffer (0).length();
+        
+        UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
+        const Buffer inputBuffer (inputUnit.process (info, channel));
+        data.inputSamples = inputBuffer.getArray();
+   
+        plonk_assert (inputBuffer.length() == outputBufferLength);
+
         FormType::process (this->getOutputSamples (0),
-                           this->getOutputBuffer (0).length(), 
-                           this->getInputAsUnit (IOKey::Generic), 
+                           outputBufferLength, 
                            this->getInputAsUnit (IOKey::Duration), 
                            this->circularBuffer,
-                           this->getState(),
+                           data,
                            info, 
                            channel);        
     }
