@@ -112,8 +112,7 @@ public:
             
             ShapeType::calculate (data);
             
-            int i;
-            for (i = 0; i < FormType::NumCoeffs; ++i)
+            for (int i = 0; i < FormType::NumCoeffs; ++i)
                 this->initProxyValue (i, data.coeffs[i]);            
         }
     }    

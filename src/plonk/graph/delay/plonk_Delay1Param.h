@@ -111,17 +111,21 @@ public:
     {        
         const UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
         
-        this->setBlockSize (BlockSize::decide (inputUnit.getBlockSize (channel),
-                                               this->getBlockSize()));
-        this->setSampleRate (SampleRate::decide (inputUnit.getSampleRate (channel),
-                                                 this->getSampleRate()));
-        
-        this->setOverlap (inputUnit.getOverlap (channel));
-        
-        this->initValue (SampleType (0));
-        
-        Data& data = this->getState();
-        this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5));
+        if ((channel % this->getNumChannels()) == 0)
+        {
+            this->setBlockSize (BlockSize::decide (inputUnit.getBlockSize (channel),
+                                                   this->getBlockSize()));
+            this->setSampleRate (SampleRate::decide (inputUnit.getSampleRate (channel),
+                                                     this->getSampleRate()));
+            
+            this->setOverlap (inputUnit.getOverlap (channel));
+            
+            for (int i = 0; i < this->getNumChannels(); ++i)
+                this->initProxyValue (i, SampleType (0));            
+            
+            Data& data = this->getState();
+            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5));
+        }
     }    
     
     void process (ProcessInfo& info, const int channel) throw()
@@ -132,10 +136,8 @@ public:
         const Buffer inputBuffer (inputUnit.process (info, channel));
         data.inputSamples = inputBuffer.getArray();
         
-        
-        // for each proxy "i", with "ignore" versions for channels above 0
-        //{
-        
+        Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
+                        
         data.outputSamples = this->getOutputSamples (0);
         const int outputBufferLength = this->getOutputBuffer (0).length();
         plonk_assert (inputBuffer.length() == outputBufferLength);
@@ -145,14 +147,17 @@ public:
                                           FormType::writeWrite, 
                                           FormType::outputWrite,
                                           FormType::param1Process>
-                                    (outputBufferLength, 
-                                     ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1)),
-                                     this->circularBuffer,
-                                     data,
-                                     info, 
-                                     channel);      //<--- will be "i" rather than channel
+                                    (outputBufferLength, param1Unit, this->circularBuffer, data, info, 0);
         
-        //}
+        const int numChannels = this->getNumChannels();
+
+        for (int i = 1; i < numChannels; ++i)
+            process<FormType::inputIgnore, 
+                    FormType::readRead, 
+                    FormType::writeIgnore, 
+                    FormType::outputWrite,
+                    FormType::param1Process>
+                (outputBufferLength, param1Unit, this->circularBuffer, data, info, i);
         
         data.writePosition = writePosition; // update the write position from the first channel write
     }

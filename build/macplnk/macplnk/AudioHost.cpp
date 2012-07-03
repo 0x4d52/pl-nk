@@ -54,11 +54,15 @@ Unit AudioHost::constructGraph()
     
 //    return LinearPan::ar (Sine::ar (1000, 0.25), Sine::kr (0.5));
     
+//    Unit input = BusRead::ar (Bus ("0"));
+//    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.125, 0.12525), 0.5);
+//    Unit delay2 = Delay::ar (input, Sine::kr (5).linlin (0.25, 0.2525).ar(), 0.5);
+//    Unit delay3 = Delay::ar (input, 0.5, 0.5);
+//    return input + delay1 * 0.5 + delay2 * 0.25 + delay3 * 0.125;
+    
     Unit input = BusRead::ar (Bus ("0"));
-    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.125, 0.12525), 0.5);
-    Unit delay2 = Delay::ar (input, Sine::kr (5).linlin (0.25, 0.2525).ar(), 0.5);
-    Unit delay3 = Delay::ar (input, 0.5, 0.5);
-    return input + delay1 * 0.5 + delay2 * 0.25 + delay3 * 0.125;
+    Unit delay = Delay::ar (input, Floats (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), 1.0);
+    return delay.mix() * 0.2; 
 }
 
 
