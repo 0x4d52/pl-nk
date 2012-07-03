@@ -80,6 +80,7 @@
 		A824185015911596004CA012 /* plonk_RNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A824181215911595004CA012 /* plonk_RNG.cpp */; };
 		A824185415911605004CA012 /* plonk_PortAudioAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A824185215911605004CA012 /* plonk_PortAudioAudioHost.cpp */; };
 		A82418571592670A004CA012 /* AudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8241855159265F9004CA012 /* AudioHost.cpp */; };
+		A86AD4C915A320F60064EA76 /* plonk_DelayTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -345,6 +346,12 @@
 		A824185315911605004CA012 /* plonk_PortAudioAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_PortAudioAudioHost.h; sourceTree = "<group>"; };
 		A8241855159265F9004CA012 /* AudioHost.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioHost.cpp; sourceTree = "<group>"; };
 		A8241856159265F9004CA012 /* AudioHost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioHost.h; sourceTree = "<group>"; };
+		A86AD4C415A320F60064EA76 /* plonk_Delay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay.h; sourceTree = "<group>"; };
+		A86AD4C515A320F60064EA76 /* plonk_DelayForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForms.h; sourceTree = "<group>"; };
+		A86AD4C615A320F60064EA76 /* plonk_DelayForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForwardDeclarations.h; sourceTree = "<group>"; };
+		A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DelayTypes.cpp; sourceTree = "<group>"; };
+		A86AD4C815A320F60064EA76 /* plonk_DelayTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayTypes.h; sourceTree = "<group>"; };
+		A86AD4CB15A3344E0064EA76 /* plonk_Delay1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay1Param.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -855,6 +862,12 @@
 		A82417C015911595004CA012 /* delay */ = {
 			isa = PBXGroup;
 			children = (
+				A86AD4C415A320F60064EA76 /* plonk_Delay.h */,
+				A86AD4CB15A3344E0064EA76 /* plonk_Delay1Param.h */,
+				A86AD4C515A320F60064EA76 /* plonk_DelayForms.h */,
+				A86AD4C615A320F60064EA76 /* plonk_DelayForwardDeclarations.h */,
+				A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */,
+				A86AD4C815A320F60064EA76 /* plonk_DelayTypes.h */,
 				A82417C115911595004CA012 /* notes.txt */,
 			);
 			path = delay;
@@ -1152,6 +1165,7 @@
 				A824185015911596004CA012 /* plonk_RNG.cpp in Sources */,
 				A824185415911605004CA012 /* plonk_PortAudioAudioHost.cpp in Sources */,
 				A82418571592670A004CA012 /* AudioHost.cpp in Sources */,
+				A86AD4C915A320F60064EA76 /* plonk_DelayTypes.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -45,14 +45,20 @@ AudioHost::AudioHost()
 
 Unit AudioHost::constructGraph()
 {
-    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
-    Unit mod = Sine::ar (500);              // 500Hz sine
-    return input * mod;                     // ringmod
+//    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
+//    Unit mod = Sine::ar (500);              // 500Hz sine
+//    return input * mod;                     // ringmod
     
 //    Floats freq (1000, 1555);
 //    return Sine::ar (freq, 0.25);
     
 //    return LinearPan::ar (Sine::ar (1000, 0.25), Sine::kr (0.5));
+    
+    Unit input = BusRead::ar (Bus ("0"));
+    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.125, 0.12525), 0.5);
+    Unit delay2 = Delay::ar (input, Sine::kr (5).linlin (0.25, 0.2525).ar(), 0.5);
+    Unit delay3 = Delay::ar (input, 0.5, 0.5);
+    return input + delay1 * 0.5 + delay2 * 0.25 + delay3 * 0.125;
 }
 
 
