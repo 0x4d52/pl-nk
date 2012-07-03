@@ -51,6 +51,10 @@ struct DelayFormData
     
     DurationType maximumDuration;
     int writePosition;
+    
+    SampleType inputValue;
+    SampleType writeValue;
+    SampleType outputValue;
 };      
 
 //------------------------------------------------------------------------------
@@ -83,15 +87,17 @@ public:
     typedef NumericalArray<SampleType>                          Buffer;
     typedef DelayFormData<SampleType, DelayFormType::Delay>     Data;
     
-    typedef typename TypeUtility<SampleType>::IndexType     DurationType;
-    typedef UnitBase<DurationType>                          DurationUnitType;
-    typedef NumericalArray<DurationType>                    DurationBufferType;
-    typedef InterpLinear<SampleType,DurationType>           InterpType;
+    typedef typename TypeUtility<SampleType>::IndexType         DurationType;
+    typedef UnitBase<DurationType>                              DurationUnitType;
+    typedef NumericalArray<DurationType>                        DurationBufferType;
+    typedef InterpLinear<SampleType,DurationType>               InterpType;
 
     enum Coeffs
     {
         NumCoeffs = 0
     };
+    
+//    static inline const SampleType& inputRead
     
     static void process (SampleType* outputSamples,
                          const int outputBufferLength,
@@ -136,18 +142,18 @@ public:
                     const DurationType durationInSamples = DurationType (durationValue * sampleRate);
                     plonk_assert (durationInSamples <= bufferLength);
 
-                    const SampleType inputValue = *inputSamples++;
+                    data.inputValue = *inputSamples++;
                     
                     DurationType readPosition = DurationType (writePosition) - durationInSamples;
                     if (readPosition < buffer0)
                         readPosition += bufferLengthIndex;
                     const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
                     
-                    const SampleType writeValue = inputValue;
-                    bufferSamples[writePosition] = writeValue;
+                    data.writeValue = data.inputValue;
+                    bufferSamples[writePosition] = data.writeValue;
                     
-                    const SampleType outputValue = delayedValue;
-                    *outputSamples++ = outputValue;
+                    data.outputValue = delayedValue;
+                    *outputSamples++ = data.outputValue;
                     
                     writePosition++;
                 }
@@ -170,18 +176,18 @@ public:
                 
                 while (numSamplesThisTime--) 
                 {
-                    const SampleType inputValue = *inputSamples++;
+                    data.inputValue = *inputSamples++;
                     
                     DurationType readPosition = DurationType (writePosition) - durationInSamples;
                     if (readPosition < buffer0)
                         readPosition += bufferLengthIndex;
                     const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
                     
-                    const SampleType writeValue = inputValue;
-                    bufferSamples[writePosition] = writeValue;
+                    data.writeValue = data.inputValue;
+                    bufferSamples[writePosition] = data.writeValue;
                     
-                    const SampleType outputValue = delayedValue;
-                    *outputSamples++ = outputValue;
+                    data.outputValue = delayedValue;
+                    *outputSamples++ = data.outputValue;
                     
                     writePosition++;
                 }
@@ -207,18 +213,18 @@ public:
                     const DurationType durationInSamples = DurationType (durationValue * sampleRate);
                     plonk_assert (durationInSamples <= bufferLength);
                     
-                    const SampleType inputValue = *inputSamples++;
+                    data.inputValue = *inputSamples++;
                     
                     DurationType readPosition = DurationType (writePosition) - durationInSamples;
                     if (readPosition < buffer0)
                         readPosition += bufferLengthIndex;
                     const SampleType delayedValue = InterpType::lookup (bufferSamples, readPosition);
                     
-                    const SampleType writeValue = inputValue;
-                    bufferSamples[writePosition] = writeValue;
+                    data.writeValue = data.inputValue;
+                    bufferSamples[writePosition] = data.writeValue;
                     
-                    const SampleType outputValue = delayedValue;
-                    *outputSamples++ = outputValue;
+                    data.outputValue = delayedValue;
+                    *outputSamples++ = data.outputValue;
                     
                     writePosition++;
                     durationPosition += durationIncrement;
