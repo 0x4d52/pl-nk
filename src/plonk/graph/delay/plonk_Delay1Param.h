@@ -83,7 +83,8 @@ public:
                                 Data const& data, 
                                 BlockSize const& blockSize,
                                 SampleRate const& sampleRate) throw()
-    :   Internal (1, inputs, data, blockSize, sampleRate)
+    :   Internal (inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels(), // num proxies
+                  inputs, data, blockSize, sampleRate)
     {
     }
     
@@ -131,6 +132,10 @@ public:
         const Buffer inputBuffer (inputUnit.process (info, channel));
         data.inputSamples = inputBuffer.getArray();
         
+        
+        // for each proxy "i", with "ignore" versions for channels above 0
+        //{
+        
         data.outputSamples = this->getOutputSamples (0);
         const int outputBufferLength = this->getOutputBuffer (0).length();
         plonk_assert (inputBuffer.length() == outputBufferLength);
@@ -141,13 +146,15 @@ public:
                                           FormType::outputWrite,
                                           FormType::param1Process>
                                     (outputBufferLength, 
-                                     this->getInputAsUnit (FormType::getInputKeys().atUnchecked (1)), 
+                                     ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1)),
                                      this->circularBuffer,
                                      data,
                                      info, 
-                                     channel);     
+                                     channel);      //<--- will be "i" rather than channel
         
-        data.writePosition = writePosition;
+        //}
+        
+        data.writePosition = writePosition; // update the write position from the first channel write
     }
     
     template<InputFunction inputFunction, 
@@ -274,6 +281,11 @@ public:
     typedef typename DelayInternal::Param1UnitType          DurationUnitType;
     typedef typename DelayInternal::Param1BufferType        DurationBufferType;
     
+    typedef ChannelBase<DurationType>                                       DurationChannelType;
+    typedef NumericalArray2D<DurationChannelType,DurationUnitType>          DurationUnitArrayType;
+    typedef NumericalArray2D<ChannelType,UnitType>                          UnitArrayType;
+
+    
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -308,7 +320,6 @@ public:
     {             
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
-        inputs.put (IOKey::Duration, duration);
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
           
@@ -318,10 +329,46 @@ public:
                       0, 0, { 0 }};
         
         //proxiesFromInputs // <--- can use this anyway for just one channel...
-        return UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                   data, 
-                                                                   preferredBlockSize, 
-                                                                   preferredSampleRate);
+        
+        const int numInputChannels = input.getNumChannels();
+        const int numDurationChannels = duration.getNumChannels();
+        const int numChannels = plonk::max (numInputChannels, numDurationChannels);
+
+        if (numChannels == 1)
+        {
+            Inputs inputs;
+            inputs.put (IOKey::Generic, input);
+            inputs.put (IOKey::Duration, duration);
+            inputs.put (IOKey::Multiply, mul);
+            inputs.put (IOKey::Add, add);
+
+            return UnitType::template createFromInputs<DelayInternal> (inputs, 
+                                                                       data, 
+                                                                       preferredBlockSize, 
+                                                                       preferredSampleRate);
+        }
+        else
+        {
+            DurationUnitArrayType durationsGrouped = duration.deinterleave (numInputChannels);
+            UnitArrayType resultGrouped;
+            
+            for (int i = 0; i < numInputChannels; ++i)
+            {
+                Inputs inputs;
+                inputs.put (IOKey::Generic, input);
+                inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
+                inputs.put (IOKey::Multiply, mul);
+                inputs.put (IOKey::Add, add);
+
+                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
+                                                                                     data, 
+                                                                                     preferredBlockSize, 
+                                                                                     preferredSampleRate);
+                resultGrouped.add (unit);
+            }
+            
+            return resultGrouped.interleave();
+        }
     }
 };
 
