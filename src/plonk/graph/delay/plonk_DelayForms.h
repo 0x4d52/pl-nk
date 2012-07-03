@@ -126,120 +126,14 @@ public:
         data.bufferSamples[writePosition] = data.writeValue;
     }
     
-    
-    static int process (const int outputBufferLength,
-                         DurationUnitType& durationUnit,
-                         Buffer& buffer,
-                         Data& data,
-                         ProcessInfo& info, 
-                         const int channel) throw()
+    static inline void outputIgnore (Data&, int&) throw() { }
+    static inline void outputWrite (Data& data, int& writePosition) throw()
     {
-        const double sampleRate = data.base.sampleRate;
-                
-        const DurationBufferType durationBuffer (durationUnit.process (info, channel));
-        const DurationType* durationSamples = durationBuffer.getArray();
-        const int durationBufferLength = durationBuffer.length();
-                
-        data.bufferSamples = buffer.getArray();
-        const int bufferLength = buffer.length();
-        const DurationType bufferLengthIndex = DurationType (bufferLength);
-        const DurationType buffer0 (0);
-                
-        int writePosition = data.writePosition;
-        
-        int numSamplesToProcess = outputBufferLength;
-        
-        if (durationBufferLength == outputBufferLength)
-        {            
-            while (numSamplesToProcess > 0)
-            {
-                int bufferSamplesRemaining = bufferLength - writePosition;
-                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
-                numSamplesToProcess -= numSamplesThisTime;
-                
-                while (numSamplesThisTime--) 
-                {
-                    const DurationType durationValue = *durationSamples++;
-                    const DurationType durationInSamples = DurationType (durationValue * sampleRate);
-                    plonk_assert (durationInSamples <= bufferLength);
-
-                    inputRead (data);
-                    readRead (data, writePosition, durationInSamples, buffer0, bufferLengthIndex);                    
-                    writeWrite (data, writePosition);
-                    
-                    data.outputValue = data.readValue;
-                    *data.outputSamples++ = data.outputValue;
-                    
-                    writePosition++;
-                }
-                
-                if (writePosition >= bufferLength)
-                    writePosition = 0;
-            }
-        }
-        else if (durationBufferLength == 1)
-        {
-            const DurationType durationInSamples = DurationType (durationSamples[0] * sampleRate);
-            
-            plonk_assert (durationInSamples <= bufferLength);
-            
-            while (numSamplesToProcess > 0)
-            {
-                int bufferSamplesRemaining = bufferLength - writePosition;
-                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
-                numSamplesToProcess -= numSamplesThisTime;
-                
-                while (numSamplesThisTime--) 
-                {
-                    inputRead (data);
-                    readRead (data, writePosition, durationInSamples, buffer0, bufferLengthIndex);
-                    writeWrite (data, writePosition);
-                    
-                    data.outputValue = data.readValue;
-                    *data.outputSamples++ = data.outputValue;
-                    
-                    writePosition++;
-                }
-
-                if (writePosition >= bufferLength)
-                    writePosition = 0;
-            }
-        }
-        else
-        {                        
-            double durationPosition = 0.0;
-            const double durationIncrement = double (durationBufferLength) / double (outputBufferLength);
-
-            while (numSamplesToProcess > 0)
-            {
-                int bufferSamplesRemaining = bufferLength - writePosition;
-                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
-                numSamplesToProcess -= numSamplesThisTime;
-                
-                while (numSamplesThisTime--) 
-                {
-                    const DurationType durationValue = durationSamples[int (durationPosition)];
-                    const DurationType durationInSamples = DurationType (durationValue * sampleRate);
-                    plonk_assert (durationInSamples <= bufferLength);
-                    
-                    inputRead (data);
-                    readRead (data, writePosition, durationInSamples, buffer0, bufferLengthIndex);
-                    writeWrite (data, writePosition);
-                    
-                    data.outputValue = data.readValue;
-                    *data.outputSamples++ = data.outputValue;
-                    
-                    writePosition++;
-                    durationPosition += durationIncrement;
-                }
-                
-                if (writePosition >= bufferLength)
-                    writePosition = 0;
-            }
-        }
-        
-        return writePosition;
+        data.outputValue = data.readValue;
+        *data.outputSamples++ = data.outputValue;
+        writePosition++;
     }
+    
 };
 
 

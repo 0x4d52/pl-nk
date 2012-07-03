@@ -66,6 +66,11 @@ public:
     typedef NumericalArray<DurationType>                    DurationBufferType;
     typedef InterpLinear<SampleType,DurationType>           InterpType;
     
+    typedef void (*InputFunction)(Data&);
+    typedef void (*ReadFunction)(Data&, const int, const DurationType, const DurationType, const DurationType);
+    typedef void (*WriteFunction)(Data&, const int);
+    typedef void (*OutputFunction)(Data&, int&);
+
     DelayBaseChannelInternal (Inputs const& inputs, 
                               Data const& data, 
                               BlockSize const& blockSize,
@@ -123,13 +128,122 @@ public:
    
         plonk_assert (inputBuffer.length() == outputBufferLength);
 
-        data.writePosition = FormType::process (outputBufferLength, 
-                                                this->getInputAsUnit (IOKey::Duration), 
-                                                this->circularBuffer,
-                                                data,
-                                                info, 
-                                                channel);        
+        data.writePosition = process<FormType::inputRead, FormType::readRead, FormType::writeWrite, FormType::outputWrite>
+                                      (outputBufferLength, 
+                                      this->getInputAsUnit (IOKey::Duration), 
+                                      this->circularBuffer,
+                                      data,
+                                      info, 
+                                      channel);        
     }
+    
+    template<InputFunction inputFunction, 
+             ReadFunction readFunction,
+             WriteFunction writeFunction,
+             OutputFunction outputFunction>
+    static int process (const int outputBufferLength,
+                        DurationUnitType& durationUnit,
+                        Buffer& buffer,
+                        Data& data,
+                        ProcessInfo& info, 
+                        const int channel) throw()
+    {
+        const double sampleRate = data.base.sampleRate;
+        
+        const DurationBufferType durationBuffer (durationUnit.process (info, channel));
+        const DurationType* durationSamples = durationBuffer.getArray();
+        const int durationBufferLength = durationBuffer.length();
+        
+        data.bufferSamples = buffer.getArray();
+        const int bufferLength = buffer.length();
+        const DurationType bufferLengthIndex = DurationType (bufferLength);
+        const DurationType buffer0 (0);
+        
+        int writePosition = data.writePosition;
+        
+        int numSamplesToProcess = outputBufferLength;
+        
+        if (durationBufferLength == outputBufferLength)
+        {            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                {
+                    const DurationType durationValue = *durationSamples++;
+                    const DurationType durationInSamples = DurationType (durationValue * sampleRate);
+                    plonk_assert (durationInSamples <= bufferLength);
+                    
+                    inputFunction (data);
+                    readFunction (data, writePosition, durationInSamples, buffer0, bufferLengthIndex);                    
+                    writeFunction (data, writePosition);
+                    outputFunction (data, writePosition);                    
+                }
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
+        else if (durationBufferLength == 1)
+        {
+            const DurationType durationInSamples = DurationType (durationSamples[0] * sampleRate);
+            
+            plonk_assert (durationInSamples <= bufferLength);
+            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                {
+                    inputFunction (data);
+                    readFunction (data, writePosition, durationInSamples, buffer0, bufferLengthIndex);
+                    writeFunction (data, writePosition);
+                    outputFunction (data, writePosition);
+                }
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
+        else
+        {                        
+            double durationPosition = 0.0;
+            const double durationIncrement = double (durationBufferLength) / double (outputBufferLength);
+            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                {
+                    const DurationType durationValue = durationSamples[int (durationPosition)];
+                    const DurationType durationInSamples = DurationType (durationValue * sampleRate);
+                    plonk_assert (durationInSamples <= bufferLength);
+                    
+                    inputFunction (data);
+                    readFunction (data, writePosition, durationInSamples, buffer0, bufferLengthIndex);
+                    writeFunction (data, writePosition);
+                    outputFunction (data, writePosition);
+                    
+                    durationPosition += durationIncrement;
+                }
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
+        
+        return writePosition;
+    }
+
         
 private:
     Buffer circularBuffer;
