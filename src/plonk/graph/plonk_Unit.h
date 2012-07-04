@@ -82,7 +82,8 @@ protected:
     typedef ChannelBase<SampleType>                 ChannelType;
     typedef ChannelInternalBase<SampleType>         ChannelInternalType;
     typedef NumericalArray<ChannelType>             UnitType;
-    typedef NumericalArray2D<ChannelType,UnitType>  UnitArray;
+//    typedef NumericalArray2D<ChannelType,UnitType>  UnitArray;
+    typedef NumericalArray2D<ChannelType,UnitBase>  UnitArray;
     typedef NumericalArray2D<SampleType>            BufferArrayType;
     typedef NullChannelInternal<SampleType>         NullInternal;
     typedef Variable<SampleType>                    VariableType;
@@ -126,7 +127,7 @@ public:
 		return null;
 	}	                            
     
-    static const UnitBase emptyChannels(const int numChannels) throw()
+    static const UnitBase emptyChannels (const int numChannels) throw()
     {
         return UnitBase::withSize (numChannels);
     }
@@ -569,22 +570,22 @@ public:
     inline int getNumChannels() const throw() { return this->length(); }
     
     /** Returns a unit with the single channel specified.
-     This wraps the index so that it is always in range. It is alos recursive such that the returned
+     This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */
     inline UnitBase getChannel (const int index) throw() { return this->wrapAt (index).getChannel (index); }
     
     /** Returns a unit with the single channel specified.
-     This wraps the index so that it is always in range. It is alos recursive such that the returned
+     This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */    
     inline UnitBase getChannel (const int index) const throw() { return this->copy().wrapAt (index).getChannel (index); }
 
     /** Returns a unit with the single channel specified.
-     This wraps the index so that it is always in range. It is alos recursive such that the returned
+     This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */    
     UnitBase operator[] (const int index) throw() { return this->getChannel (index); }
     
     /** Returns a unit with the single channel specified.
-     This wraps the index so that it is always in range. It is alos recursive such that the returned
+     This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */    
     UnitBase operator[] (const int index) const throw() { return this->getChannel (index); }
     
@@ -598,6 +599,22 @@ public:
         
         this->getArray() [index] = channel.atUnchecked (0);
         return *this;
+    }
+    
+    UnitBase flatten() const throw()
+    {
+        const int numChannels = this->getNumChannels();
+        UnitBase result = UnitBase::emptyChannels(numChannels);
+        
+        for (int i = 0; i < numChannels; ++i)
+            result.put (i, this->getChannel (i));
+        
+        return result;
+    }
+    
+    UnitArray group (const int groupSize) const throw()
+    {
+		return this->flatten().Base::group (groupSize);
     }
     
     /** Get the minimum block size in the array of channels in this unit. */

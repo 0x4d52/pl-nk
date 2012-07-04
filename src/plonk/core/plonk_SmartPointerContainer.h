@@ -66,7 +66,7 @@ public:
             internal->incrementRefCount();
 	}
     	
-	~SmartPointerContainerBase()
+    ~SmartPointerContainerBase()
 	{        
 		if (internal != 0) 
 			internal->decrementRefCount();

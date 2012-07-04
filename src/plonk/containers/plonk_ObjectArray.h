@@ -685,7 +685,7 @@ public:
 	/** Returns a reference to an item at the specified index. 
 	 If you are not sure about the index being in range check for the object being "null" as a
 	 separate internal null value may have been returned instead. */
-	ObjectType& operator[] (const int index) throw()
+    ObjectType& operator[] (const int index) throw()
 	{
 		if (index < 0 || index >= this->size()) 
 			return getNullObject();
@@ -696,7 +696,7 @@ public:
 	/** Returns a reference to an item at the specified index. 
 	 If you are not sure about the index being in range check for the object being "null" as a
 	 separate internal null value may have been returned instead. */	
-	const ObjectType& operator[] (const int index) const throw()
+    const ObjectType& operator[] (const int index) const throw()
 	{
 		if (index < 0 || index >= this->size()) 
 			return getNullObject();
@@ -1326,7 +1326,7 @@ public:
 					element.setNullTerminated (true);
 				}
 				
-				result.add(element);
+				result.add (element);
 				element = ObjectArray<ObjectType>(); // reset
 			}
 		}

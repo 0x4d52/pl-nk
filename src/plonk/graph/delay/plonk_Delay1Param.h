@@ -83,7 +83,7 @@ public:
                                 Data const& data, 
                                 BlockSize const& blockSize,
                                 SampleRate const& sampleRate) throw()
-    :   Internal (inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels(), // num proxies
+    :   Internal (getNumChannelsFromInputs (inputs), // num proxies
                   inputs, data, blockSize, sampleRate)
     {
     }
@@ -97,16 +97,7 @@ public:
     {
         return FormType::getInputKeys();
     }    
-    
-    InternalBase* getChannel (const int index) throw()
-    {
-        const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new DelayInternal (channelInputs, 
-                                  this->getState(), 
-                                  this->getBlockSize(), 
-                                  this->getSampleRate());
-    }
-    
+        
     void initChannel (const int channel) throw()
     {        
         const UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
@@ -160,6 +151,12 @@ public:
                 (outputBufferLength, param1Unit, this->circularBuffer, data, info, i);
         
         data.writePosition = writePosition; // update the write position from the first channel write
+    }
+    
+private:
+    static inline int getNumChannelsFromInputs (Inputs const& inputs) throw()
+    {
+        return inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels();
     }
     
     template<InputFunction inputFunction, 
@@ -360,7 +357,7 @@ public:
             for (int i = 0; i < numInputChannels; ++i)
             {
                 Inputs inputs;
-                inputs.put (IOKey::Generic, input);
+                inputs.put (IOKey::Generic, input[i]);
                 inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
                 inputs.put (IOKey::Multiply, mul);
                 inputs.put (IOKey::Add, add);

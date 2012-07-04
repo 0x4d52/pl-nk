@@ -346,12 +346,12 @@
 		A824185315911605004CA012 /* plonk_PortAudioAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_PortAudioAudioHost.h; sourceTree = "<group>"; };
 		A8241855159265F9004CA012 /* AudioHost.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioHost.cpp; sourceTree = "<group>"; };
 		A8241856159265F9004CA012 /* AudioHost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioHost.h; sourceTree = "<group>"; };
-		A86AD4C415A320F60064EA76 /* plonk_Delay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay.h; sourceTree = "<group>"; };
 		A86AD4C515A320F60064EA76 /* plonk_DelayForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForms.h; sourceTree = "<group>"; };
 		A86AD4C615A320F60064EA76 /* plonk_DelayForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForwardDeclarations.h; sourceTree = "<group>"; };
 		A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DelayTypes.cpp; sourceTree = "<group>"; };
 		A86AD4C815A320F60064EA76 /* plonk_DelayTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayTypes.h; sourceTree = "<group>"; };
 		A86AD4CB15A3344E0064EA76 /* plonk_Delay1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay1Param.h; sourceTree = "<group>"; };
+		A86AD4CC15A431F90064EA76 /* plonk_Delay2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay2Param.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -862,8 +862,8 @@
 		A82417C015911595004CA012 /* delay */ = {
 			isa = PBXGroup;
 			children = (
-				A86AD4C415A320F60064EA76 /* plonk_Delay.h */,
 				A86AD4CB15A3344E0064EA76 /* plonk_Delay1Param.h */,
+				A86AD4CC15A431F90064EA76 /* plonk_Delay2Param.h */,
 				A86AD4C515A320F60064EA76 /* plonk_DelayForms.h */,
 				A86AD4C615A320F60064EA76 /* plonk_DelayForwardDeclarations.h */,
 				A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */,

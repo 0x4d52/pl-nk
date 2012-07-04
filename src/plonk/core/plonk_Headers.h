@@ -154,8 +154,8 @@
 #include "../graph/delay/plonk_DelayForwardDeclarations.h"
 #include "../graph/delay/plonk_DelayTypes.h"
 #include "../graph/delay/plonk_DelayForms.h"
-#include "../graph/delay/plonk_Delay.h"
 #include "../graph/delay/plonk_Delay1Param.h"
+#include "../graph/delay/plonk_Delay2Param.h"
 
 #include "../graph/control/plonk_EnvelopeChannel.h"
 

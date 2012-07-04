@@ -60,9 +60,40 @@ Unit AudioHost::constructGraph()
 //    Unit delay3 = Delay::ar (input, 0.5, 0.5);
 //    return input + delay1 * 0.5 + delay2 * 0.25 + delay3 * 0.125;
     
+//    Unit input = BusRead::ar (Bus ("0"));
+//    Unit delay = Delay::ar (input, 
+//                            Floats (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), 
+//                            1.0,
+//                            Floats (0.5, 0.5, 0.4, 0.4, 0.3, 0.3, 0.2, 0.2));
+//    
+//    Unit delay2;
+//    
+//    delay2.add (delay[0]);
+//    delay2.add (delay[1]);
+//    delay2.add (delay[2]);
+//    delay2.add (delay[3]);
+//    delay2.add (delay[4]);
+//    delay2.add (delay[5]);
+//    delay2.add (delay[6]);
+//    delay2.add (delay[7]);
+//    
+//    Units group = delay2.group (2);
+//    return Mixer::ar (group);    
+    
+//    Unit input = BusRead::ar (Bus ("0"));
+//    Unit delay = Delay::ar (input, 
+//                            Floats (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), 
+//                            1.0,
+//                            Floats (0.5, 0.5, 0.4, 0.4, 0.3, 0.3, 0.2, 0.2));
+//    Units group = delay.group (2);
+//    return Mixer::ar (group);    
+
     Unit input = BusRead::ar (Bus ("0"));
-    Unit delay = Delay::ar (input, Floats (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), 1.0);
-    return delay.mix() * 0.2; 
+    Unit delay = Delay::ar (input, 
+                            Floats (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), 
+                            1.0,
+                            Floats (0.5, 0.5, 0.4, 0.4, 0.3, 0.3, 0.2, 0.2));
+    return Mixer::ar (delay.group (2));    
 }
 
 

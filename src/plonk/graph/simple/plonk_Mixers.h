@@ -395,7 +395,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
         
-        Data data = { { -1.0, -1.0 }, allowAutoDelete };
+        Data data = { { -1.0, -1.0 }, (allowAutoDelete != 0) };
         
         return UnitType::template proxiesFromInputs<UnitMixerInternal> (inputs, 
                                                                         data, 
