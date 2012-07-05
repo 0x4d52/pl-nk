@@ -46,51 +46,51 @@ template<class Type>
 class Math
 {
 public:
-    static const Type& get0() throw()          { static const Type v (0); return v; }
-    static const Type& get1() throw()          { static const Type v (1); return v; }
-    static const Type& get2() throw()          { static const Type v (2); return v; }
-    static const Type& get4() throw()          { static const Type v (4); return v; }
-    static const Type& get10() throw()         { static const Type v (10); return v; }
-    static const Type& get20() throw()         { static const Type v (20); return v; }
+    static inline const Type& get0() throw()          { static const Type v (0); return v; }
+    static inline const Type& get1() throw()          { static const Type v (1); return v; }
+    static inline const Type& get2() throw()          { static const Type v (2); return v; }
+    static inline const Type& get4() throw()          { static const Type v (4); return v; }
+    static inline const Type& get10() throw()         { static const Type v (10); return v; }
+    static inline const Type& get20() throw()         { static const Type v (20); return v; }
 
-    static const Type& get_1() throw()         { static const Type v (-1); return v; }
-    static const Type& get0_5() throw()        { static const Type v (0.5); return v; }
-    static const Type& get_0_5() throw()       { static const Type v (-0.5); return v; }
-    static const Type& get0_25() throw()       { static const Type v (0.25); return v; }
-    static const Type& get1_5() throw()        { static const Type v (1.5); return v; }
+    static inline const Type& get_1() throw()         { static const Type v (-1); return v; }
+    static inline const Type& get0_5() throw()        { static const Type v (0.5); return v; }
+    static inline const Type& get_0_5() throw()       { static const Type v (-0.5); return v; }
+    static inline const Type& get0_25() throw()       { static const Type v (0.25); return v; }
+    static inline const Type& get1_5() throw()        { static const Type v (1.5); return v; }
     
-    static const Type& get40() throw()         { static const Type v (40); return v; }    
-    static const Type& get440() throw()        { static const Type v (440); return v; }
-    static const Type& get12() throw()         { static const Type v (12); return v; }
-    static const Type& get69() throw()         { static const Type v (69); return v; }
-    static const Type& get360() throw()        { static const Type v (360); return v; }    
+    static inline const Type& get40() throw()         { static const Type v (40); return v; }    
+    static inline const Type& get440() throw()        { static const Type v (440); return v; }
+    static inline const Type& get12() throw()         { static const Type v (12); return v; }
+    static inline const Type& get69() throw()         { static const Type v (69); return v; }
+    static inline const Type& get360() throw()        { static const Type v (360); return v; }    
     
-    static const Type& get1_40() throw()       { static const Type v (get1() / get40()); return v; }
-    static const Type& get1_440() throw()      { static const Type v (get1() / get440()); return v; }
-    static const Type& get1_12() throw()       { static const Type v (get1() / get12()); return v; }
-    static const Type& get1_360() throw()      { static const Type v (get1() / get360()); return v; }
+    static inline const Type& get1_40() throw()       { static const Type v (get1() / get40()); return v; }
+    static inline const Type& get1_440() throw()      { static const Type v (get1() / get440()); return v; }
+    static inline const Type& get1_12() throw()       { static const Type v (get1() / get12()); return v; }
+    static inline const Type& get1_360() throw()      { static const Type v (get1() / get360()); return v; }
     
-    static const Type& getPi() throw()         { static const Type v (std::acos (-1.0)); return v; }
-    static const Type& getLog0_001() throw()   { static const Type v (std::log (0.001)); return v; }
-    static const Type& getLog0_01() throw()    { static const Type v (std::log (0.01)); return v; }
-    static const Type& getLog0_1() throw()     { static const Type v (std::log (0.1)); return v; }
-    static const Type& getLog2() throw()       { static const Type v (std::log (2.0)); return v; }
-    static const Type& get1_Log2() throw()     { static const Type v (1.0 / std::log (2.0)); return v; }
-    static const Type& getSqrt2() throw()      { static const Type v (std::sqrt (2.0)); return v; }
-    static const Type& get1_Sqrt2() throw()    { static const Type v (1.0 / getSqrt2()); return v; }
-    static const Type& getSqrt2_2() throw()    { static const Type v (getSqrt2() * get0_5()); return v; }
-    static const Type& getSqrt2_1() throw()    { static const Type v (getSqrt2() - get1()); return v; }
+    static inline const Type& getPi() throw()         { static const Type v (std::acos (-1.0)); return v; }
+    static inline const Type& getLog0_001() throw()   { static const Type v (std::log (0.001)); return v; }
+    static inline const Type& getLog0_01() throw()    { static const Type v (std::log (0.01)); return v; }
+    static inline const Type& getLog0_1() throw()     { static const Type v (std::log (0.1)); return v; }
+    static inline const Type& getLog2() throw()       { static const Type v (std::log (2.0)); return v; }
+    static inline const Type& get1_Log2() throw()     { static const Type v (1.0 / std::log (2.0)); return v; }
+    static inline const Type& getSqrt2() throw()      { static const Type v (std::sqrt (2.0)); return v; }
+    static inline const Type& get1_Sqrt2() throw()    { static const Type v (1.0 / getSqrt2()); return v; }
+    static inline const Type& getSqrt2_2() throw()    { static const Type v (getSqrt2() * get0_5()); return v; }
+    static inline const Type& getSqrt2_1() throw()    { static const Type v (getSqrt2() - get1()); return v; }
     
-    static const Type& getLogSqrt2() throw()   { static const Type v (std::log (std::sqrt (2.0))); return v; }
-    static const Type& getE() throw()          { static const Type v (std::exp (1.0)); return v; }
+    static inline const Type& getLogSqrt2() throw()   { static const Type v (std::log (std::sqrt (2.0))); return v; }
+    static inline const Type& getE() throw()          { static const Type v (std::exp (1.0)); return v; }
 
-    static const Type& get2Pi() throw()        { static const Type v (getPi() * get2()); return v; }
-    static const Type& get4Pi() throw()        { static const Type v (getPi() * get4()); return v; }
+    static inline const Type& get2Pi() throw()        { static const Type v (getPi() * get2()); return v; }
+    static inline const Type& get4Pi() throw()        { static const Type v (getPi() * get4()); return v; }
     
-    static const Type& getPi_2() throw()       { static const Type v (getPi() * get0_5()); return v; }
-    static const Type& getPi_4() throw()       { static const Type v (getPi() * get0_25()); return v; }
-    static const Type& get3Pi_2() throw()      { static const Type v (getPi() * get1_5()); return v; }
-    static const Type& get1_2Pi() throw()      { static const Type v (1.0 / get2Pi()); return v; }
+    static inline const Type& getPi_2() throw()       { static const Type v (getPi() * get0_5()); return v; }
+    static inline const Type& getPi_4() throw()       { static const Type v (getPi() * get0_25()); return v; }
+    static inline const Type& get3Pi_2() throw()      { static const Type v (getPi() * get1_5()); return v; }
+    static inline const Type& get1_2Pi() throw()      { static const Type v (1.0 / get2Pi()); return v; }
 };
 
 

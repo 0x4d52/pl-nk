@@ -67,11 +67,11 @@ public:
     typedef typename FormType::Param1UnitType               Param1UnitType;
     typedef typename FormType::Param1BufferType             Param1BufferType;
         
-    typedef void (*InputFunction)(Data&);
-    typedef void (*ReadFunction)(Data&, const int);
-    typedef void (*WriteFunction)(Data&, const int);
-    typedef void (*OutputFunction)(Data&, int&);
-    typedef void (*Param1Function)(Data&, const Param1Type);
+    typedef void (*InputFunction)  (Data&);
+    typedef void (*ReadFunction)   (Data&, const int);
+    typedef void (*WriteFunction)  (Data&, const int);
+    typedef void (*OutputFunction) (Data&, int&);
+    typedef void (*Param1Function) (Data&, const Param1Type);
     
     enum Params
     {
@@ -301,8 +301,8 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::Minimum,   Measure::Seconds,   0.0,
-                         IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::None,
+                         IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::Minimum,   Measure::Seconds,   0.0,
                          IOKey::MaximumDuration,    Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -320,18 +320,11 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
-        Inputs inputs;
-        inputs.put (IOKey::Generic, input);
-        inputs.put (IOKey::Multiply, mul);
-        inputs.put (IOKey::Add, add);
-          
         Data data = { { -1.0, -1.0 }, maximumDuration, 0, 
                       0, 0, 0, 0,
                       0, 0, 0, 
                       0, 0, { 0 }};
-        
-        //proxiesFromInputs // <--- can use this anyway for just one channel...
-        
+                
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();
         const int numChannels = plonk::max (numInputChannels, numDurationChannels);

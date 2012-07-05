@@ -151,13 +151,110 @@ public:
     static inline void param1Process (Data& data, DurationType const duration) throw()
     {
         data.params[Duration] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (data.params[Duration] <= data.bufferLengthIndex);
+        plonk_assert (data.params[Duration] >= 0 && data.params[Duration] <= data.bufferLengthIndex);
     }
 };
 
 
 //------------------------------------------------------------------------------
 
+
+template<class SampleType>
+class DelayForm<SampleType, DelayFormType::CombDecay, 2>
+:   public DelayFormBase<SampleType, DelayFormType::CombDecay, 2>
+{
+public:
+    enum Params
+    {
+        Duration,
+        Feedback,
+        NumParams
+    };
+    
+    typedef SampleType                                                  SampleDataType;
+    typedef UnitBase<SampleType>                                        UnitType;
+    typedef NumericalArray<SampleType>                                  Buffer;
+    typedef DelayFormData<SampleType, DelayFormType::Delay, NumParams>  Data;
+    
+    typedef typename TypeUtility<SampleType>::IndexType                 DurationType;
+    typedef UnitBase<DurationType>                                      DurationUnitType;
+    typedef NumericalArray<DurationType>                                DurationBufferType;
+    typedef InterpLinear<SampleType,DurationType>                       InterpType;
+    
+    typedef typename TypeUtility<SampleType>::IndexType                 DecayType;
+    typedef UnitBase<DecayType>                                         DecayUnitType;
+    typedef NumericalArray<DecayType>                                   DecayBufferType;
+    
+    typedef DurationType                                                Param1Type;
+    typedef DurationUnitType                                            Param1UnitType;
+    typedef DurationBufferType                                          Param1BufferType;
+    
+    typedef DecayType                                                   Param2Type;
+    typedef DecayUnitType                                               Param2UnitType;
+    typedef DecayBufferType                                             Param2BufferType;
+    
+    static inline IntArray getInputKeys() throw()
+    {
+        const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Decay);
+        return keys;
+    }    
+    
+    static inline void inputIgnore (Data&) throw() { }
+    static inline void inputRead (Data& data) throw()
+    {
+        data.inputValue = *data.inputSamples++;
+    }
+    
+    static inline void readIgnore (Data&, const int) throw() { }
+    static inline void readRead (Data& data, const int writePosition) throw()
+    {
+        DurationType readPosition = DurationType (writePosition) - data.params[Duration];
+        if (readPosition < data.buffer0)
+            readPosition += data.bufferLengthIndex;
+        data.readValue = InterpType::lookup (data.bufferSamples, readPosition);
+    }
+    
+    static inline void writeIgnore (Data&, const int) throw() { }
+    static inline void writeWrite (Data& data, const int writePosition) throw()
+    {
+        data.writeValue = data.readValue * data.params[Feedback] + data.inputValue;
+        data.bufferSamples[writePosition] = data.writeValue;
+    }
+    
+    static inline void outputIgnore (Data&, int&) throw() { }
+    static inline void outputWrite (Data& data, int& writePosition) throw()
+    {
+        data.outputValue = data.readValue;
+        *data.outputSamples++ = data.outputValue;
+        writePosition++;
+    }
+    
+    static inline void param1Ignore (Data& data, DurationType const duration) throw() { }
+    static inline void param1Process (Data& data, DurationType const duration) throw()
+    {
+        data.params[Duration] = DurationType (duration * data.base.sampleRate);
+        plonk_assert (data.params[Duration] >= 0 && data.params[Duration] <= data.bufferLengthIndex);
+    }
+    
+    static inline void param2Ignore (Data& data, DecayType const decay) throw() { }
+    static inline void param2Process (Data& data, DecayType const decay) throw()
+    {                
+        const DecayType duration (data.params[Duration] * data.base.sampleDuration);
+        const DecayType duration0 (Math<DecayType>::get0());
+        const DecayType log001 (Math<DecayType>::getLog0_001());
+        
+        if (duration > duration0)
+			data.params[Feedback] = DecayType (plonk::exp (log001 * duration / decay));
+		else if (duration < duration0)
+			data.params[Feedback] = -DecayType (plonk::exp (log001 * duration / -decay));
+		else
+			data.params[Feedback] = duration0;
+    }
+
+};
+
+
+//------------------------------------------------------------------------------
 
 
 #endif // PLONK_DELAYFORMS_H

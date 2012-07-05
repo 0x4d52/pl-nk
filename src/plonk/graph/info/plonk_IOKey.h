@@ -92,6 +92,9 @@ public:
         Gain,           ///< Gain specifically (usually in dB as opposed to Multiply).
         Bandwidth,      ///< Bandwidth (could be in Semitones, Octaves or Hertz).
         Duration,       ///< Duration in seconds.
+        Decay,          ///< Decay time in seconds
+        Feedback,       ///< A feedback amount
+        Feedforward,    ///< A feedforward amount
         Coeffs,         ///< Filter coefficients
         FFT,            ///< FFT data
         Real,

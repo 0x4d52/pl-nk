@@ -48,6 +48,9 @@ DelayFormType::Name DelayFormType::fromInt (const int value) throw()
     static const DelayFormType::Name names[] = {
         DelayFormType::Unknown,
         DelayFormType::Delay,
+        DelayFormType::CombFB,
+        DelayFormType::CombDecay,
+        DelayFormType::AllpassFFFB,
     };
     
     if (value < 0 || value >= DelayFormType::NumNames)
@@ -66,6 +69,9 @@ Text DelayFormType::getName (const int index) throw()
     static const char* names[] = {
         "Unknown",
         "Delay",
+        "CombFB",
+        "CombDecay",
+        "AllpassFFFB",
     };
     
     if (index < 0 || index >= DelayFormType::NumNames)
@@ -73,56 +79,6 @@ Text DelayFormType::getName (const int index) throw()
     else
         return names[index];                
 }
-
-//------------------------------------------------------------------------------
-
-//FilterShapeType::Name FilterShapeType::fromInt (const int value) throw()
-//{
-//    static const FilterShapeType::Name names[] = {
-//        FilterShapeType::Unknown,
-//        FilterShapeType::LPF,
-//        FilterShapeType::HPF,
-//        FilterShapeType::BPF,
-//        FilterShapeType::BRF,
-//        FilterShapeType::LowShelf,
-//        FilterShapeType::HighShelf,
-//        FilterShapeType::Notch,
-//        FilterShapeType::Allpass,
-//        FilterShapeType::Other
-//    };
-//    
-//    if (value < 0 || value >= FilterShapeType::NumNames)
-//    {
-//        plonk_assertfalse;
-//        return FilterShapeType::Unknown;
-//    }
-//    else
-//    {
-//        return names[value];
-//    }
-//}
-//
-//Text FilterShapeType::getName (const int index) throw()
-//{
-//    static const char* names[] = {
-//        "Unknown",
-//        "LPF",
-//        "HPF",
-//        "BPF",
-//        "BRF",
-//        "LowShelf",
-//        "HighShelf",
-//        "Notch",
-//        "Allpass",
-//        "Other"
-//    };
-//    
-//    if (index < 0 || index >= FilterShapeType::NumNames)
-//        return "Unknown";
-//    else
-//        return names[index];                
-//}
-//
 
 
 

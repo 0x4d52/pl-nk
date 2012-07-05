@@ -47,38 +47,15 @@ public:
     {
         Unknown = 0,
         Delay,
+        CombDecay,
+        CombFB,
+        AllpassFFFB,
         NumNames
     };
     
     static DelayFormType::Name fromInt (const int value) throw();
     static Text getName (const int index) throw();
 };
-
-//------------------------------------------------------------------------------
-
-
-//class FilterShapeType
-//{
-//public:
-//    enum Name
-//    {
-//        Unknown = 0,
-//        LPF,
-//        HPF,
-//        BPF,
-//        BRF,
-//        LowShelf,
-//        HighShelf,
-//        Notch,
-//        Allpass,
-//        Other,
-//        NumNames
-//    };
-//   
-//    static FilterShapeType::Name fromInt (const int value) throw();
-//    static Text getName (const int index) throw();
-//};
-
 
 
 

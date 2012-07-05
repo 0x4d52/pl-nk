@@ -64,6 +64,9 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Gain,
         IOKey::Bandwidth,
         IOKey::Duration,
+        IOKey::Decay,
+        IOKey::Feedback,
+        IOKey::Feedforward,
         IOKey::Coeffs,
         IOKey::FFT,
         IOKey::Real,
@@ -126,6 +129,9 @@ Text IOKey::getName (const int keyIndex) throw()
         "Gain",
         "Bandwidth",
         "Duration",
+        "Decay",
+        "Feedback",
+        "Feedforward"
         "Coeffs",
         
         "FFT",
@@ -178,6 +184,9 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeUnit,            //"Gain",
         IOKey::TypeUnit,            //"Bandwidth",
         IOKey::TypeUnit,            //"Duration"
+        IOKey::TypeUnit,            //"Decay"
+        IOKey::TypeUnit,            //"Feedback"
+        IOKey::TypeUnit,            //"Feedforward"
         IOKey::TypeUnit,            //"Coeffs",
         IOKey::TypeUnit,            //"FFT",
         IOKey::TypeUnit,            //"Real",
@@ -229,6 +238,10 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Unit",             //"Gain",
         "Unit",             //"Bandwidth",
         "Unit",             //"Duration",
+        "Unit",             //"Decay",
+        "Unit",             //"Feedback",
+        "Unit",             //"Feedforward",
+
         "Unit",             //"Coeffs",
         "Unit",             //"FFT",
         "Unit",             //"Real",

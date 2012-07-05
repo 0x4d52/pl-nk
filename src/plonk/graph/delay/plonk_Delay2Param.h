@@ -71,12 +71,12 @@ public:
     typedef typename FormType::Param2UnitType               Param2UnitType;
     typedef typename FormType::Param2BufferType             Param2BufferType;
 
-    typedef void (*InputFunction)(Data&);
-    typedef void (*ReadFunction)(Data&, const int);
-    typedef void (*WriteFunction)(Data&, const int);
-    typedef void (*OutputFunction)(Data&, int&);
-    typedef void (*Param1Function)(Data&, const Param1Type);
-    typedef void (*Param2Function)(Data&, const Param2Type);
+    typedef void (*InputFunction)  (Data&);
+    typedef void (*ReadFunction)   (Data&, const int);
+    typedef void (*WriteFunction)  (Data&, const int);
+    typedef void (*OutputFunction) (Data&, int&);
+    typedef void (*Param1Function) (Data&, const Param1Type);
+    typedef void (*Param2Function) (Data&, const Param2Type);
     
     enum Params
     {
@@ -213,63 +213,109 @@ private:
         
         int numSamplesToProcess = outputBufferLength;
         
-//        if (param1BufferLength == outputBufferLength)
-//        {            
-//            while (numSamplesToProcess > 0)
-//            {
-//                int bufferSamplesRemaining = bufferLength - writePosition;
-//                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
-//                numSamplesToProcess -= numSamplesThisTime;
-//                
-//                while (numSamplesThisTime--) 
-//                {
-//                    param1Function (data, *param1Samples++);                    
-//                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);                    
-//                }
-//                
-//                if (writePosition >= bufferLength)
-//                    writePosition = 0;
-//            }
-//        }
-//        else if (param1BufferLength == 1)
-//        {
-//            param1Function (data, param1Samples[0]);                    
-//            
-//            while (numSamplesToProcess > 0)
-//            {
-//                int bufferSamplesRemaining = bufferLength - writePosition;
-//                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
-//                numSamplesToProcess -= numSamplesThisTime;
-//                
-//                while (numSamplesThisTime--) 
-//                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);                    
-//                
-//                if (writePosition >= bufferLength)
-//                    writePosition = 0;
-//            }
-//        }
-//        else
-//        {                        
-//            double param1Position = 0.0;
-//            const double param1Increment = double (param1BufferLength) / double (outputBufferLength);
-//            
-//            while (numSamplesToProcess > 0)
-//            {
-//                int bufferSamplesRemaining = bufferLength - writePosition;
-//                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
-//                numSamplesToProcess -= numSamplesThisTime;
-//                
-//                while (numSamplesThisTime--) 
-//                {                    
-//                    param1Function (data, param1Samples[int (param1Position)]);                    
-//                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);
-//                    param1Position += param1Increment;
-//                }
-//                
-//                if (writePosition >= bufferLength)
-//                    writePosition = 0;
-//            }
-//        }
+        if ((param1BufferLength == outputBufferLength) && (param2BufferLength == outputBufferLength))
+        {            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                {
+                    param1Function (data, *param1Samples++);  
+                    param2Function (data, *param2Samples++);                    
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);                    
+                }
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
+        else if ((param1BufferLength == 1) && (param2BufferLength == 1))
+        {
+            param1Function (data, param1Samples[0]);                    
+            param2Function (data, param2Samples[0]);                    
+            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
+        else if ((param1BufferLength == 1) && (param2BufferLength == outputBufferLength))
+        {
+            param1Function (data, param1Samples[0]);                    
+            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                {
+                    param2Function (data, *param2Samples++);
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);                    
+                }
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
+        else if ((param1BufferLength == outputBufferLength) && (param2BufferLength == 1))
+        {
+            param2Function (data, param2Samples[0]);                    
+            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                {
+                    param1Function (data, *param1Samples++);
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);                    
+                }
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
+        else
+        {                        
+            double param1Position = 0.0;
+            const double param1Increment = double (param1BufferLength) / double (outputBufferLength);
+            double param2Position = 0.0;
+            const double param2Increment = double (param2BufferLength) / double (outputBufferLength);
+            
+            while (numSamplesToProcess > 0)
+            {
+                int bufferSamplesRemaining = bufferLength - writePosition;
+                int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
+                numSamplesToProcess -= numSamplesThisTime;
+                
+                while (numSamplesThisTime--) 
+                {                    
+                    param1Function (data, param1Samples[int (param1Position)]);   
+                    param2Function (data, param2Samples[int (param2Position)]);                    
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);
+                    param1Position += param1Increment;
+                    param2Position += param2Increment;
+                }
+                
+                if (writePosition >= bufferLength)
+                    writePosition = 0;
+            }
+        }
         
         return writePosition;
     }
@@ -281,119 +327,126 @@ private:
 
 //------------------------------------------------------------------------------
 
-///** Simple delay processor. */
-//template<class SampleType>
-//class DelayUnit
-//{
-//public:    
-//    typedef DelayForm<SampleType, DelayFormType::Delay, 1>  FormType;
-//
-//    typedef Delay1ParamChannelInternal<FormType>            DelayInternal;
-//    typedef typename DelayInternal::Data                    Data;
-//    typedef ChannelBase<SampleType>                         ChannelType;
-//    typedef ChannelInternal<SampleType,Data>                Internal;
-//    typedef UnitBase<SampleType>                            UnitType;
-//    typedef InputDictionary                                 Inputs;
-//    typedef NumericalArray<SampleType>                      Buffer;
-//    
-//    typedef typename DelayInternal::Param1Type              DurationType;
-//    typedef typename DelayInternal::Param1UnitType          DurationUnitType;
-//    typedef typename DelayInternal::Param1BufferType        DurationBufferType;
-//    
-//    typedef ChannelBase<DurationType>                                       DurationChannelType;
-//    typedef NumericalArray2D<DurationChannelType,DurationUnitType>          DurationUnitArrayType;
-//    typedef NumericalArray2D<ChannelType,UnitType>                          UnitArrayType;
-//
-//    
-//    static inline UnitInfos getInfo() throw()
-//    {
-//        const double blockSize = (double)BlockSize::getDefault().getValue();
-//        const double sampleRate = SampleRate::getDefault().getValue();
-//        
-//        return UnitInfo ("Delay", "A simple delay processor.",
-//                         
-//                         // output
-//                         ChannelCount::VariableChannelCount, 
-//                         IOKey::Generic,            Measure::None,      0.0,                IOLimit::None,                         
-//                         IOKey::End,
-//                         
-//                         // inputs
-//                         IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::Minimum,   Measure::Seconds,   0.0,
-//                         IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::None,
-//                         IOKey::MaximumDuration,    Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
-//                         IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
-//                         IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
-//                         IOKey::BlockSize,          Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
-//                         IOKey::SampleRate,         Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
-//                         IOKey::End);
-//    }
-//    
-//    /** Create an audio rate wavetable oscillator. */
-//    static UnitType ar (UnitType const& input,
-//                        DurationUnitType const& duration = DurationType (0.5),
-//                        const DurationType maximumDuration = DurationType (1.0),
-//                        UnitType const& mul = SampleType (1),
-//                        UnitType const& add = SampleType (0),
-//                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
-//                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-//    {             
-//        Inputs inputs;
-//        inputs.put (IOKey::Generic, input);
-//        inputs.put (IOKey::Multiply, mul);
-//        inputs.put (IOKey::Add, add);
-//          
-//        Data data = { { -1.0, -1.0 }, maximumDuration, 0, 
-//                      0, 0, 0, 0,
-//                      0, 0, 0, 
-//                      0, 0, { 0 }};
-//        
-//        //proxiesFromInputs // <--- can use this anyway for just one channel...
-//        
-//        const int numInputChannels = input.getNumChannels();
-//        const int numDurationChannels = duration.getNumChannels();
-//        const int numChannels = plonk::max (numInputChannels, numDurationChannels);
-//
-//        if (numChannels == 1)
-//        {
-//            Inputs inputs;
-//            inputs.put (IOKey::Generic, input);
-//            inputs.put (IOKey::Duration, duration);
-//            inputs.put (IOKey::Multiply, mul);
-//            inputs.put (IOKey::Add, add);
-//
-//            return UnitType::template createFromInputs<DelayInternal> (inputs, 
-//                                                                       data, 
-//                                                                       preferredBlockSize, 
-//                                                                       preferredSampleRate);
-//        }
-//        else
-//        {
-//            DurationUnitArrayType durationsGrouped = duration.deinterleave (numInputChannels);
-//            UnitArrayType resultGrouped;
-//            
-//            for (int i = 0; i < numInputChannels; ++i)
-//            {
-//                Inputs inputs;
-//                inputs.put (IOKey::Generic, input[i]);
-//                inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
-//                inputs.put (IOKey::Multiply, mul);
-//                inputs.put (IOKey::Add, add);
-//
-//                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
-//                                                                                     data, 
-//                                                                                     preferredBlockSize, 
-//                                                                                     preferredSampleRate);
-//                resultGrouped.add (unit);
-//            }
-//            
-//            return resultGrouped.interleave();
-//        }
-//    }
-//};
-//
-//typedef DelayUnit<PLONK_TYPE_DEFAULT> Delay;
-//
-//
+/** Comb filter. */
+template<class SampleType>
+class CombDecayUnit
+{
+public:    
+    typedef DelayForm<SampleType, DelayFormType::CombDecay, 2>  FormType;
+
+    typedef Delay2ParamChannelInternal<FormType>                DelayInternal;
+    typedef typename DelayInternal::Data                        Data;
+    typedef ChannelBase<SampleType>                             ChannelType;
+    typedef ChannelInternal<SampleType,Data>                    Internal;
+    typedef UnitBase<SampleType>                                UnitType;
+    typedef InputDictionary                                     Inputs;
+    typedef NumericalArray<SampleType>                          Buffer;
+    
+    typedef typename DelayInternal::Param1Type                  DurationType;
+    typedef typename DelayInternal::Param1UnitType              DurationUnitType;
+    typedef typename DelayInternal::Param1BufferType            DurationBufferType;
+
+    typedef typename DelayInternal::Param2Type                  DecayType;
+    typedef typename DelayInternal::Param2UnitType              DecayUnitType;
+    typedef typename DelayInternal::Param2BufferType            DecayBufferType;
+    
+    typedef ChannelBase<DurationType>                                       DurationChannelType;
+    typedef NumericalArray2D<DurationChannelType,DurationUnitType>          DurationUnitArrayType;
+    typedef ChannelBase<DecayType>                                          DecayChannelType;
+    typedef NumericalArray2D<DecayChannelType,DecayUnitType>                DecayUnitArrayType;
+    typedef NumericalArray2D<ChannelType,UnitType>                          UnitArrayType;
+
+    
+    static inline UnitInfos getInfo() throw()
+    {
+        const double blockSize = (double)BlockSize::getDefault().getValue();
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("CombDecay", "A comb filter setting the decay as a time to decay by 60dB.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount, 
+                         IOKey::Generic,            Measure::None,      0.0,                IOLimit::None,                         
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::Minimum,   Measure::Seconds,   0.0,
+                         IOKey::Decay,              Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Seconds,   0.0,
+                         IOKey::MaximumDuration,    Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
+                         IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
+                         IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
+                         IOKey::BlockSize,          Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
+                         IOKey::SampleRate,         Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
+                         IOKey::End);
+    }
+    
+    /** Create an audio rate wavetable oscillator. */
+    static UnitType ar (UnitType const& input,
+                        DurationUnitType const& duration = DurationType (0.5),
+                        DecayUnitType const& decay = DurationType (1.0),
+                        const DurationType maximumDuration = DurationType (1.0),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    {             
+        Data data = { { -1.0, -1.0 }, maximumDuration, 0, 
+                      0, 0, 0, 0,
+                      0, 0, 0, 
+                      0, 0, { 0, 0 }};
+                
+        const int numInputChannels = input.getNumChannels();
+        const int numDurationChannels = duration.getNumChannels();
+        const int numDecayChannels = decay.getNumChannels();
+        const int numChannels = plonk::max (numInputChannels, plonk::max (numDurationChannels, numDecayChannels));
+
+        if (numChannels == 1)
+        {
+            Inputs inputs;
+            inputs.put (IOKey::Generic, input);
+            inputs.put (IOKey::Duration, duration);
+            inputs.put (IOKey::Decay, decay);
+            inputs.put (IOKey::Multiply, mul);
+            inputs.put (IOKey::Add, add);
+
+            return UnitType::template createFromInputs<DelayInternal> (inputs, 
+                                                                       data, 
+                                                                       preferredBlockSize, 
+                                                                       preferredSampleRate);
+        }
+        else
+        {
+            // almost certain this isn't correct.. need to check
+            
+            DurationUnitArrayType durationsGrouped = duration.deinterleave (numInputChannels);
+            DecayUnitArrayType decaysGrouped = decay.deinterleave (numInputChannels);
+            UnitArrayType resultGrouped;
+            
+            for (int i = 0; i < numInputChannels; ++i)
+            {
+                Inputs inputs;
+                inputs.put (IOKey::Generic, input[i]);
+                inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
+                inputs.put (IOKey::Decay, decaysGrouped.wrapAt (i));
+                inputs.put (IOKey::Multiply, mul);
+                inputs.put (IOKey::Add, add);
+
+                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
+                                                                                     data, 
+                                                                                     preferredBlockSize, 
+                                                                                     preferredSampleRate);
+                resultGrouped.add (unit);
+            }
+            
+            return resultGrouped.interleave();
+        }
+    }
+};
+
+typedef CombDecayUnit<PLONK_TYPE_DEFAULT> CombDecay;
+
+
 
 
 
