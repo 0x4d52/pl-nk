@@ -60,6 +60,7 @@ struct DelayFormData
     const SampleType* inputSamples;
     SampleType* bufferSamples;
     SampleType* outputSamples;
+    int outputBufferLength;
     
     IndexType buffer0;
     IndexType bufferLengthIndex;

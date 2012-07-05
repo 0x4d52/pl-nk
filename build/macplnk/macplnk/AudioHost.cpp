@@ -95,11 +95,11 @@ Unit AudioHost::constructGraph()
 //                            Floats (0.5, 0.5, 0.4, 0.4, 0.3, 0.3, 0.2, 0.2));
 //    return Mixer::ar (delay.group (2));    
     
-//    Unit input = BusRead::ar (Bus ("0"));
-//    return CombDecay::ar (input, Floats (0.049, 0.051), 10.0); 
-    
     Unit input = BusRead::ar (Bus ("0"));
-    return Delay::ar (input, Floats (0.25, 0.5), 1.0).flatten();
+    return CombDecay::ar (input, Floats (0.0345, 0.1), 10.0); 
+    
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return Delay::ar (input, Floats (0.25, 0.5), 1.0);
 }
 
 

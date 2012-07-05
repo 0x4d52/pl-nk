@@ -137,7 +137,7 @@ public:
         Param2UnitType& param2Unit = ChannelInternalCore::getInputAs<Param2UnitType> (FormType::getInputKeys().atUnchecked (2));
                         
         data.outputSamples = this->getOutputSamples (0);
-        const int outputBufferLength = this->getOutputBuffer (0).length();
+        int outputBufferLength = this->getOutputBuffer (0).length();
         plonk_assert (inputBuffer.length() == outputBufferLength);
 
         const int writePosition = process<FormType::inputRead, 
@@ -151,6 +151,11 @@ public:
         const int numChannels = this->getNumChannels();
 
         for (int i = 1; i < numChannels; ++i)
+        {
+            outputBufferLength = this->getOutputBuffer (0).length();
+            plonk_assert (inputBuffer.length() == outputBufferLength);
+            data.outputSamples = this->getOutputSamples (i);
+            
             process<FormType::inputIgnore, 
                     FormType::readRead, 
                     FormType::writeIgnore, 
@@ -158,6 +163,7 @@ public:
                     FormType::param1Process,
                     FormType::param2Process>
                 (outputBufferLength, param1Unit, param2Unit, this->circularBuffer, data, info, i);
+        }
         
         data.writePosition = writePosition; // update the write position from the first channel write
     }
@@ -394,7 +400,7 @@ public:
         Data data = { { -1.0, -1.0 }, maximumDuration, 0, 
                       0, 0, 0, 0,
                       0, 0, 0, 
-                      0, 0, { 0, 0 }, { 0, 0 }};
+                      0, 0, 0, { 0, 0 }, { 0, 0 }};
                 
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();

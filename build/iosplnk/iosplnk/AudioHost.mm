@@ -141,6 +141,9 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
     printf ("delay.getNumChannels() = %d\n", delay.getNumChannels());
     return delay;
     
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return CombDecay::ar (input, Floats (0.0345, 0.1), 10.0); 
+    
 //    return Mixer::ar (Sine::ar (Floats::exprand (20, 100, 1000), 0.01).group (2));
 }
 
