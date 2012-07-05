@@ -52,6 +52,7 @@ class Delay1ParamChannelInternal
 public:
     typedef typename FormType::SampleDataType               SampleType;
     typedef typename FormType::Data                         Data;
+    typedef typename Data::DelayState                       DelayState;
     
     typedef ChannelBase<SampleType>                         ChannelType;
     typedef Delay1ParamChannelInternal<FormType>            DelayInternal;
@@ -67,11 +68,11 @@ public:
     typedef UnitBase<Param1Type>                            Param1UnitType;
     typedef NumericalArray<Param1Type>                      Param1BufferType;
         
-    typedef void (*InputFunction)  (Data&);
-    typedef void (*ReadFunction)   (Data&, const int);
-    typedef void (*WriteFunction)  (Data&, const int);
-    typedef void (*OutputFunction) (Data&, int&);
-    typedef void (*Param1Function) (Data&, const Param1Type);
+    typedef void (*InputFunction)  (DelayState&);
+    typedef void (*ReadFunction)   (DelayState&);
+    typedef void (*WriteFunction)  (DelayState&);
+    typedef void (*OutputFunction) (DelayState&);
+    typedef void (*Param1Function) (DelayState&, const Param1Type);
     
     enum Params
     {
@@ -119,41 +120,43 @@ public:
         }
     }    
     
-    void process (ProcessInfo& info, const int channel) throw()
+    void process (ProcessInfo& info, const int /*channel*/) throw()
     {
         Data& data = this->getState();
         
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
-        const Buffer inputBuffer (inputUnit.process (info, channel)); // channel=0?
-        data.inputSamples = inputBuffer.getArray();
-        
+        const Buffer inputBuffer (inputUnit.process (info, 0));
         Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
                         
-        data.outputSamples = this->getOutputSamples (0);
-        int outputBufferLength = this->getOutputBuffer (0).length();
-        plonk_assert (inputBuffer.length() == outputBufferLength);
+        plonk_assert (inputBuffer.length() == this->getOutputBuffer (0).length());
 
         const int writePosition = process<FormType::inputRead, 
                                           FormType::readRead, 
                                           FormType::writeWrite, 
                                           FormType::outputWrite,
                                           FormType::param1Process>
-                                    (outputBufferLength, param1Unit, this->circularBuffer, data, info, 0);
-        
+                                    (this->getOutputSamples (0), 
+                                     this->getOutputBuffer (0).length(), 
+                                     inputBuffer.getArray(), 
+                                     param1Unit, 
+                                     this->circularBuffer, data, info, 0);
+//        
         const int numChannels = this->getNumChannels();
 
         for (int i = 1; i < numChannels; ++i)
         {
-            data.outputSamples = this->getOutputSamples (i);
-            outputBufferLength = this->getOutputBuffer (i).length();
-            plonk_assert (inputBuffer.length() == outputBufferLength);
+            plonk_assert (inputBuffer.length() == this->getOutputBuffer (i).length());
 
             process<FormType::inputIgnore, 
                     FormType::readRead, 
                     FormType::writeIgnore, 
                     FormType::outputWrite,
                     FormType::param1Process>
-                (outputBufferLength, param1Unit, this->circularBuffer, data, info, i);
+                (this->getOutputSamples (i), 
+                 this->getOutputBuffer (i).length(), 
+                 0, 
+                 param1Unit, 
+                 this->circularBuffer, data, info, i);
         }
         
         data.writePosition = writePosition; // update the write position from the first channel write
@@ -169,12 +172,12 @@ private:
              ReadFunction readFunction,
              WriteFunction writeFunction,
              OutputFunction outputFunction>
-    static inline void tick (Data& data, int& writePosition) throw()
+    static inline void tick (DelayState& data) throw()
     {
         inputFunction (data);
-        readFunction (data, writePosition);  
-        writeFunction (data, writePosition);
-        outputFunction (data, writePosition);
+        readFunction (data);  
+        writeFunction (data);
+        outputFunction (data);
     }
     
     template<InputFunction inputFunction, 
@@ -182,23 +185,32 @@ private:
              WriteFunction writeFunction,
              OutputFunction outputFunction,
              Param1Function param1Function>
-    static int process (const int outputBufferLength,
+    static int process (SampleType* const outputSamples,
+                        const int outputBufferLength,
+                        const SampleType* inputSamples,
                         Param1UnitType& param1Unit,
                         Buffer& buffer,
                         Data& data,
                         ProcessInfo& info, 
                         const int channel) throw()
     {        
+        DelayState state = {
+            { data.base.sampleRate, data.base.sampleDuration },
+            outputSamples,
+            outputBufferLength,
+            inputSamples,
+            buffer.getArray(),
+            buffer.length(),
+            Param1Type (buffer.length()),
+            Param1Type (0),
+            data.writePosition,
+            SampleType (0), SampleType (0), SampleType (0), SampleType (0),
+            { 0 }, { 0 }
+        };
+        
         const Param1BufferType param1Buffer (param1Unit.process (info, channel));
         const Param1Type* param1Samples = param1Buffer.getArray();
         const int param1BufferLength = param1Buffer.length();
-        
-        data.bufferSamples = buffer.getArray();
-        const int bufferLength = buffer.length();
-        data.bufferLengthIndex = Param1Type (bufferLength);
-        data.buffer0 = Param1Type (0);
-        
-        int writePosition = data.writePosition;
         
         int numSamplesToProcess = outputBufferLength;
         
@@ -206,35 +218,35 @@ private:
         {            
             while (numSamplesToProcess > 0)
             {
-                int bufferSamplesRemaining = bufferLength - writePosition;
+                int bufferSamplesRemaining = state.bufferLength - state.writePosition;
                 int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
                 numSamplesToProcess -= numSamplesThisTime;
                 
                 while (numSamplesThisTime--) 
                 {
-                    param1Function (data, *param1Samples++);                    
-                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);                    
+                    param1Function (state, *param1Samples++);                    
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
                 }
                 
-                if (writePosition >= bufferLength)
-                    writePosition = 0;
+                if (state.writePosition >= state.bufferLength)
+                    state.writePosition = 0;
             }
         }
         else if (param1BufferLength == 1)
         {
-            param1Function (data, param1Samples[0]);                    
+            param1Function (state, param1Samples[0]);                    
             
             while (numSamplesToProcess > 0)
             {
-                int bufferSamplesRemaining = bufferLength - writePosition;
+                int bufferSamplesRemaining = state.bufferLength - state.writePosition;
                 int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
                 numSamplesToProcess -= numSamplesThisTime;
                 
                 while (numSamplesThisTime--) 
-                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);                    
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
                 
-                if (writePosition >= bufferLength)
-                    writePosition = 0;
+                if (state.writePosition >= state.bufferLength)
+                    state.writePosition = 0;
             }
         }
         else
@@ -244,23 +256,23 @@ private:
             
             while (numSamplesToProcess > 0)
             {
-                int bufferSamplesRemaining = bufferLength - writePosition;
+                int bufferSamplesRemaining = state.bufferLength - state.writePosition;
                 int numSamplesThisTime = plonk::min (bufferSamplesRemaining, numSamplesToProcess);
                 numSamplesToProcess -= numSamplesThisTime;
                 
                 while (numSamplesThisTime--) 
                 {                    
-                    param1Function (data, param1Samples[int (param1Position)]);                    
-                    tick<inputFunction, readFunction, writeFunction, outputFunction> (data, writePosition);
+                    param1Function (state, param1Samples[int (param1Position)]);                    
+                    tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
                     param1Position += param1Increment;
                 }
                 
-                if (writePosition >= bufferLength)
-                    writePosition = 0;
+                if (state.writePosition >= state.bufferLength)
+                    state.writePosition = 0;
             }
         }
         
-        return writePosition;
+        return state.writePosition;
     }
 
         
@@ -326,10 +338,7 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
-        Data data = { { -1.0, -1.0 }, maximumDuration, 0, 
-                      0, 0, 0, 0,
-                      0, 0, 0, 
-                      0, 0, 0, { 0 }, { 0 }};
+        Data data = { { -1.0, -1.0 }, maximumDuration, 0, };
                 
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();

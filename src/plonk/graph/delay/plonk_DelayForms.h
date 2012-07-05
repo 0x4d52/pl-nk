@@ -52,20 +52,28 @@ struct DelayFormData
     IndexType maximumDuration;
     int writePosition;
     
-    SampleType inputValue;
-    SampleType readValue;
-    SampleType writeValue;
-    SampleType outputValue;
-    
-    const SampleType* inputSamples;
-    SampleType* bufferSamples;
-    SampleType* outputSamples;
-    int outputBufferLength;
-    
-    IndexType buffer0;
-    IndexType bufferLengthIndex;
-    IndexType paramsIn[NumInParams];
-    IndexType paramsOut[NumOutParams];
+    struct DelayState
+    {
+        const ChannelInternalCore::Data base;
+        
+        SampleType* outputSamples;
+        const int outputBufferLength;
+        const SampleType* inputSamples;
+        SampleType* const bufferSamples;
+        const int bufferLength;
+        const IndexType bufferLengthIndex;
+        const IndexType buffer0;
+
+        int writePosition;
+        
+        SampleType inputValue;
+        SampleType readValue;
+        SampleType writeValue;
+        SampleType outputValue;
+        
+        IndexType paramsIn[NumInParams];
+        IndexType paramsOut[NumOutParams];
+    };
 };      
 
 //------------------------------------------------------------------------------
@@ -106,6 +114,7 @@ public:
     };
 
     typedef DelayFormData<SampleType, DelayFormType::Delay, NumInParams, NumOutParams>  Data;
+    typedef typename Data::DelayState                                                   DelayState;
 
     typedef SampleType                                  SampleDataType;
     typedef UnitBase<SampleType>                        UnitType;
@@ -123,40 +132,40 @@ public:
         return keys;
     }    
     
-    static inline void inputIgnore (Data&) throw() { }
-    static inline void inputRead (Data& data) throw()
+    static inline void inputIgnore (DelayState&) throw() { }
+    static inline void inputRead (DelayState& data) throw()
     {
         data.inputValue = *data.inputSamples++;
     }
     
-    static inline void readIgnore (Data&, const int) throw() { }
-    static inline void readRead (Data& data, const int writePosition) throw()
+    static inline void readIgnore (DelayState&) throw() { }
+    static inline void readRead (DelayState& data) throw()
     {
-        DurationType readPosition = DurationType (writePosition) - data.paramsOut[DurationInSamples];
+        DurationType readPosition = DurationType (data.writePosition) - data.paramsOut[DurationInSamples];
         if (readPosition < data.buffer0)
             readPosition += data.bufferLengthIndex;
         data.readValue = InterpType::lookup (data.bufferSamples, readPosition);
     }
         
-    static inline void writeIgnore (Data&, const int) throw() { }
-    static inline void writeWrite (Data& data, const int writePosition) throw()
+    static inline void writeIgnore (DelayState&) throw() { }
+    static inline void writeWrite (DelayState& data) throw()
     {
         data.writeValue = data.inputValue;
-        data.bufferSamples[writePosition] = data.writeValue;
-        if (writePosition == 0)
+        data.bufferSamples[data.writePosition] = data.writeValue;
+        if (data.writePosition == 0)
             data.bufferSamples[int (data.bufferLengthIndex)] = data.writeValue;
     }
     
-    static inline void outputIgnore (Data&, int&) throw() { }
-    static inline void outputWrite (Data& data, int& writePosition) throw()
+    static inline void outputIgnore (DelayState&) throw() { }
+    static inline void outputWrite (DelayState& data) throw()
     {
         data.outputValue = data.readValue;
         *data.outputSamples++ = data.outputValue;
-        writePosition++;
+        data.writePosition++;
     }
     
-    static inline void param1Ignore (Data& data, DurationType const duration) throw() { }
-    static inline void param1Process (Data& data, DurationType const duration) throw()
+    static inline void param1Ignore (DelayState& data, DurationType const duration) throw() { }
+    static inline void param1Process (DelayState& data, DurationType const duration) throw()
     {
         data.paramsIn[Duration] = duration;
         data.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
