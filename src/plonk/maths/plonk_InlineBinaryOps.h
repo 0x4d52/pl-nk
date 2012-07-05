@@ -222,6 +222,17 @@ inline Type trunc (Type const& a, Type const& b) throw()
 template<class Type> inline Type clip2 (Type const& value, Type const& range) throw()     { return clip<Type> (value, -range, range); }
 template<class Type> inline Type wrap (Type const& value, Type const& upper) throw()      { return wrap (value, Math<Type>::get0(), upper); }
 
+template<class Type> inline Type decayFeedback (Type const& delayTime, Type const& decayTime) throw()
+{
+    const Type zero (Math<Type>::get0());
+    const Type log001 (Math<Type>::getLog0_001());
+        
+    if (delayTime > zero)       return Type (plonk::exp (log001 * delayTime / decayTime));
+    else if (delayTime < zero)  return -Type (plonk::exp (log001 * delayTime / -decayTime));
+    else                        return zero;
+
+}
+
 /// @}
 
 #endif // PLONK_INLINEBINARYOPS_H

@@ -1487,8 +1487,8 @@ public:
         
         plonk_assert (numGroups > 0);
         
-        if (numGroups == 1)
-            return ObjectArray2DType (*this);
+//        if (numGroups == 1)
+//            return ObjectArray2DType (*this);
         
         const int subLength = (length % numGroups) == 0 ? length / numGroups : length / numGroups + 1;
         ObjectArray2DType result = ObjectArray2DType::withSize (numGroups);

@@ -83,14 +83,14 @@ static inline void InterruptionListener (void *inClientData,
     host->interruptionCallback (inInterruption);
 }
 
-static inline void audioFloatToShort(float *src, short* dst, unsigned int length) throw()
+static inline void audioFloatToShort (float *src, short* dst, unsigned int length) throw()
 {
 	static const float scale = 32767.f;
     pl_VectorMulF_N1N (src, scale, src, length);
     pl_VectorConvertF2S_NN (dst, src, length);
 }
 
-static inline void audioFloatToShortChannels(float *src[], AudioBufferList* dst, unsigned int length, unsigned int numChannels) throw()
+static inline void audioFloatToShortChannels (float *src[], AudioBufferList* dst, unsigned int length, unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; channel++)
 	{
@@ -99,14 +99,14 @@ static inline void audioFloatToShortChannels(float *src[], AudioBufferList* dst,
 	}
 }
 
-static inline void audioShortToFloat(short *src, float* dst, unsigned int length) throw()
+static inline void audioShortToFloat (short *src, float* dst, unsigned int length) throw()
 {
 	static const float scale = 1.f / 32767.f;	
 	pl_VectorConvertS2F_NN (dst, src, length);
     pl_VectorMulF_N1N (dst, scale, dst, length);
 }
 
-static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[], unsigned int length, unsigned int numChannels) throw()
+static inline void audioShortToFloatChannels (AudioBufferList* src, float* dst[], unsigned int length, unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; channel++)
 	{
@@ -119,7 +119,7 @@ static inline void audioShortToFloatChannels(AudioBufferList* src, float* dst[],
 
 IOSAudioHost::IOSAudioHost() throw()
 :   hwSampleRate (0.0),         // let the hardware choose
-cpuUsage (0.0)//,
+    cpuUsage (0.0)//,
 //    audioCategory (kAudioSessionCategory_PlayAndRecord)
 {    
 }

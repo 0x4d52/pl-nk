@@ -62,7 +62,6 @@
 		A824183E15911596004CA012 /* plonk_BinaryFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82417AB15911595004CA012 /* plonk_BinaryFile.cpp */; };
 		A824183F15911596004CA012 /* plonk_TextFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82417AD15911595004CA012 /* plonk_TextFile.cpp */; };
 		A824184015911596004CA012 /* plonk_ChannelInternalCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82417B515911595004CA012 /* plonk_ChannelInternalCore.cpp */; };
-		A824184115911596004CA012 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = A82417C115911595004CA012 /* notes.txt */; };
 		A824184215911596004CA012 /* plonk_FilterTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82417CE15911595004CA012 /* plonk_FilterTypes.cpp */; };
 		A824184315911596004CA012 /* plonk_IOInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82417DA15911595004CA012 /* plonk_IOInfo.cpp */; };
 		A824184415911596004CA012 /* plonk_IOKey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82417DC15911595004CA012 /* plonk_IOKey.cpp */; };
@@ -271,7 +270,6 @@
 		A82417BD15911595004CA012 /* plonk_OverlapMixChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_OverlapMixChannel.h; sourceTree = "<group>"; };
 		A82417BE15911595004CA012 /* plonk_ResampleChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ResampleChannel.h; sourceTree = "<group>"; };
 		A82417BF15911595004CA012 /* plonk_TypeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TypeChannel.h; sourceTree = "<group>"; };
-		A82417C115911595004CA012 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
 		A82417C315911595004CA012 /* plonk_FFTChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FFTChannel.h; sourceTree = "<group>"; };
 		A82417C415911595004CA012 /* plonk_IFFTChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IFFTChannel.h; sourceTree = "<group>"; };
 		A82417C615911595004CA012 /* plonk_Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Filter.h; sourceTree = "<group>"; };
@@ -868,7 +866,6 @@
 				A86AD4C615A320F60064EA76 /* plonk_DelayForwardDeclarations.h */,
 				A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */,
 				A86AD4C815A320F60064EA76 /* plonk_DelayTypes.h */,
-				A82417C115911595004CA012 /* notes.txt */,
 			);
 			path = delay;
 			sourceTree = "<group>";
@@ -1090,7 +1087,6 @@
 				A82416D31590B95A004CA012 /* InfoPlist.strings in Resources */,
 				A82416D91590B95A004CA012 /* Credits.rtf in Resources */,
 				A82416DF1590B95A004CA012 /* MainMenu.xib in Resources */,
-				A824184115911596004CA012 /* notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -92,6 +92,9 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
 //        self.preferredBlockSize = 512;
 //        self.preferredSampleRate = 22050.0;
                 
+        self.numInputs = 2;
+        self.numOutputs = 2;
+        
         freq = 500.f;
         amp = 0.1f;
         
@@ -134,8 +137,11 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
 //    return Sine::ar (Floats (555, 1000), 0.2);
     
     Unit input = BusRead::ar (Bus ("0"));
-    return Delay::ar (input, Floats (1, 2), 5);    
-
+    Unit delay = Delay::ar (input, Floats (0.25, 0.50), 1.0);
+    printf ("delay.getNumChannels() = %d\n", delay.getNumChannels());
+    return delay;
+    
+//    return Mixer::ar (Sine::ar (Floats::exprand (20, 100, 1000), 0.01).group (2));
 }
 
 -(void)hostStopped:(PLAudioHost *)host

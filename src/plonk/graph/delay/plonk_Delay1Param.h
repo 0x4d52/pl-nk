@@ -115,7 +115,7 @@ public:
                 this->initProxyValue (i, SampleType (0));            
             
             Data& data = this->getState();
-            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 1.0));
+            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 2.0));
         }
     }    
     
@@ -124,7 +124,7 @@ public:
         Data& data = this->getState();
         
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
-        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const Buffer inputBuffer (inputUnit.process (info, channel)); // channel=0?
         data.inputSamples = inputBuffer.getArray();
         
         Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
@@ -352,8 +352,6 @@ public:
                 Inputs inputs;
                 inputs.put (IOKey::Generic, input[i]);
                 inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
-                inputs.put (IOKey::Multiply, mul);
-                inputs.put (IOKey::Add, add);
 
                 UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
                                                                                      data, 
@@ -362,7 +360,9 @@ public:
                 resultGrouped.add (unit);
             }
             
-            return resultGrouped.interleave();
+            const UnitType mainUnit (resultGrouped.interleave());
+            plonk_assert (mainUnit.getNumChannels() == numChannels);
+            return UnitType::applyMulAdd (mainUnit, mul, add);
         }
     }
 };

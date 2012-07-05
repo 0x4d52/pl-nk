@@ -142,6 +142,8 @@ public:
     {
         data.writeValue = data.inputValue;
         data.bufferSamples[writePosition] = data.writeValue;
+        if (writePosition == 0)
+            data.bufferSamples[int (data.bufferLengthIndex)] = data.writeValue;
     }
     
     static inline void outputIgnore (Data&, int&) throw() { }
@@ -225,6 +227,8 @@ public:
     {
         data.writeValue = data.readValue * data.paramsOut[Feedback] + data.inputValue;
         data.bufferSamples[writePosition] = data.writeValue;
+        if (writePosition == 0)
+            data.bufferSamples[int (data.bufferLengthIndex)] = data.writeValue;
     }
     
     static inline void outputIgnore (Data&, int&) throw() { }
@@ -245,19 +249,9 @@ public:
     
     static inline void param2Ignore (Data& data, DecayType const decay) throw() { }
     static inline void param2Process (Data& data, DecayType const decay) throw()
-    {                
-        const DecayType duration (data.paramsIn[Duration]);
-        const DecayType duration0 (Math<DecayType>::get0());
-        const DecayType log001 (Math<DecayType>::getLog0_001());
-                
+    {                                
         data.paramsIn[Decay] = decay;
-        
-        if (duration > duration0)
-			data.paramsOut[Feedback] = DecayType (plonk::exp (log001 * duration / decay));
-		else if (duration < duration0)
-			data.paramsOut[Feedback] = -DecayType (plonk::exp (log001 * duration / -decay));
-		else
-			data.paramsOut[Feedback] = duration0;
+        data.paramsOut[Feedback] = plonk::decayFeedback (data.paramsIn[Duration], decay);
     }
 };
 
