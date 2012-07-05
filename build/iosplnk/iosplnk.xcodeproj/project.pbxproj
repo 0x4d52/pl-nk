@@ -83,9 +83,9 @@
 		A80D19431585EC0500AAB01B /* plonk_RNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80D19081585EC0500AAB01B /* plonk_RNG.cpp */; };
 		A80D194A158633CF00AAB01B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80D1949158633CF00AAB01B /* AudioToolbox.framework */; };
 		A80D19531587819500AAB01B /* AudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A80D19521587819500AAB01B /* AudioHost.mm */; };
-		A82416811588C10C004CA012 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = A82416801588C10C004CA012 /* notes.txt */; };
 		A8241691158C77AF004CA012 /* plonk_IOSAudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A824168F158C77AF004CA012 /* plonk_IOSAudioHost.mm */; };
 		A82416B7158E4CF3004CA012 /* plonk_JuceAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82416B5158E4CF3004CA012 /* plonk_JuceAudioHost.cpp */; };
+		A86AD4D415A5718C0064EA76 /* plonk_DelayTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86AD4BE159DE71A0064EA76 /* plonk_DelayTypes.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -351,17 +351,17 @@
 		A80D1949158633CF00AAB01B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A80D19511587819500AAB01B /* AudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHost.h; sourceTree = "<group>"; };
 		A80D19521587819500AAB01B /* AudioHost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHost.mm; sourceTree = "<group>"; };
-		A82416801588C10C004CA012 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
 		A82416821588C13A004CA012 /* plonk_AudioHostBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_AudioHostBase.h; sourceTree = "<group>"; };
 		A824168F158C77AF004CA012 /* plonk_IOSAudioHost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = plonk_IOSAudioHost.mm; sourceTree = "<group>"; };
 		A8241690158C77AF004CA012 /* plonk_IOSAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOSAudioHost.h; sourceTree = "<group>"; };
 		A82416B5158E4CF3004CA012 /* plonk_JuceAudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_JuceAudioHost.cpp; sourceTree = "<group>"; };
 		A82416B6158E4CF3004CA012 /* plonk_JuceAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_JuceAudioHost.h; sourceTree = "<group>"; };
-		A86AD4B4159DB0700064EA76 /* plonk_Delay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_Delay.h; sourceTree = "<group>"; };
 		A86AD4BC159DDDA50064EA76 /* plonk_DelayForms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForms.h; sourceTree = "<group>"; };
 		A86AD4BD159DDE810064EA76 /* plonk_DelayForwardDeclarations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForwardDeclarations.h; sourceTree = "<group>"; };
 		A86AD4BE159DE71A0064EA76 /* plonk_DelayTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DelayTypes.cpp; sourceTree = "<group>"; };
 		A86AD4BF159DE71B0064EA76 /* plonk_DelayTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayTypes.h; sourceTree = "<group>"; };
+		A86AD4D215A571460064EA76 /* plonk_Delay1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay1Param.h; sourceTree = "<group>"; };
+		A86AD4D315A571460064EA76 /* plonk_Delay2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay2Param.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -998,12 +998,12 @@
 		A824167F1588C10C004CA012 /* delay */ = {
 			isa = PBXGroup;
 			children = (
-				A86AD4B4159DB0700064EA76 /* plonk_Delay.h */,
+				A86AD4D215A571460064EA76 /* plonk_Delay1Param.h */,
+				A86AD4D315A571460064EA76 /* plonk_Delay2Param.h */,
 				A86AD4BC159DDDA50064EA76 /* plonk_DelayForms.h */,
 				A86AD4BD159DDE810064EA76 /* plonk_DelayForwardDeclarations.h */,
 				A86AD4BE159DE71A0064EA76 /* plonk_DelayTypes.cpp */,
 				A86AD4BF159DE71B0064EA76 /* plonk_DelayTypes.h */,
-				A82416801588C10C004CA012 /* notes.txt */,
 			);
 			path = delay;
 			sourceTree = "<group>";
@@ -1085,7 +1085,6 @@
 				A80D17EB1585EAB500AAB01B /* FirstViewController_iPad.xib in Resources */,
 				A80D17EE1585EAB500AAB01B /* SecondViewController_iPhone.xib in Resources */,
 				A80D17F11585EAB500AAB01B /* SecondViewController_iPad.xib in Resources */,
-				A82416811588C10C004CA012 /* notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,6 +1160,7 @@
 				A80D19531587819500AAB01B /* AudioHost.mm in Sources */,
 				A8241691158C77AF004CA012 /* plonk_IOSAudioHost.mm in Sources */,
 				A82416B7158E4CF3004CA012 /* plonk_JuceAudioHost.cpp in Sources */,
+				A86AD4D415A5718C0064EA76 /* plonk_DelayTypes.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

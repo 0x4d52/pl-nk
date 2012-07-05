@@ -42,14 +42,14 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
-template<class SampleType, signed Form, signed NumParams>
+template<class SampleType, signed Form, signed NumInParams, signed NumOutParams>
 struct DelayFormData
 {    
-    typedef typename TypeUtility<SampleType>::IndexType DurationType;
+    typedef typename TypeUtility<SampleType>::IndexType IndexType;
     
     ChannelInternalCore::Data base;
     
-    DurationType maximumDuration;
+    IndexType maximumDuration;
     int writePosition;
     
     SampleType inputValue;
@@ -61,14 +61,15 @@ struct DelayFormData
     SampleType* bufferSamples;
     SampleType* outputSamples;
     
-    DurationType buffer0;
-    DurationType bufferLengthIndex;
-    DurationType params[NumParams];
+    IndexType buffer0;
+    IndexType bufferLengthIndex;
+    IndexType paramsIn[NumInParams];
+    IndexType paramsOut[NumOutParams];
 };      
 
 //------------------------------------------------------------------------------
 
-template<class SampleType, signed Form, signed NumParams>
+template<class SampleType, signed Form, signed NumInParams, signed NumOutParams>
 class DelayFormBase
 {
 public:    
@@ -78,8 +79,8 @@ public:
     }        
 };
 
-template<class SampleType, signed Form, signed NumParams>
-class DelayForm : public DelayFormBase<SampleType, Form, NumParams>
+template<class SampleType, signed Form, signed NumInParams, signed NumOutParams>
+class DelayForm : public DelayFormBase<SampleType, Form, NumInParams, NumOutParams>
 {
 };
 
@@ -87,29 +88,33 @@ class DelayForm : public DelayFormBase<SampleType, Form, NumParams>
 
 
 template<class SampleType>
-class DelayForm<SampleType, DelayFormType::Delay, 1>
-:   public DelayFormBase<SampleType, DelayFormType::Delay, 1>
+class DelayForm<SampleType, DelayFormType::Delay, 1, 1>
+:   public DelayFormBase<SampleType, DelayFormType::Delay, 1, 1>
 {
 public:
-    enum Params
+    enum InParams
     {
         Duration,
-        NumParams
+        NumInParams
     };
     
-    typedef SampleType                                                  SampleDataType;
-    typedef UnitBase<SampleType>                                        UnitType;
-    typedef NumericalArray<SampleType>                                  Buffer;
-    typedef DelayFormData<SampleType, DelayFormType::Delay, NumParams>  Data;
+    enum OutParams
+    {
+        DurationInSamples,
+        NumOutParams
+    };
+
+    typedef DelayFormData<SampleType, DelayFormType::Delay, NumInParams, NumOutParams>  Data;
+
+    typedef SampleType                                  SampleDataType;
+    typedef UnitBase<SampleType>                        UnitType;
+    typedef NumericalArray<SampleType>                  Buffer;
     
-    typedef typename TypeUtility<SampleType>::IndexType                 DurationType;
-    typedef UnitBase<DurationType>                                      DurationUnitType;
-    typedef NumericalArray<DurationType>                                DurationBufferType;
-    typedef InterpLinear<SampleType,DurationType>                       InterpType;
+    typedef typename TypeUtility<SampleType>::IndexType DurationType;
+    typedef DurationType                                Param1Type;
     
-    typedef DurationType                                                Param1Type;
-    typedef DurationUnitType                                            Param1UnitType;
-    typedef DurationBufferType                                          Param1BufferType;
+    typedef InterpLinear<SampleType,DurationType>       InterpType;    
+
 
     static inline IntArray getInputKeys() throw()
     {
@@ -126,7 +131,7 @@ public:
     static inline void readIgnore (Data&, const int) throw() { }
     static inline void readRead (Data& data, const int writePosition) throw()
     {
-        DurationType readPosition = DurationType (writePosition) - data.params[Duration];
+        DurationType readPosition = DurationType (writePosition) - data.paramsOut[DurationInSamples];
         if (readPosition < data.buffer0)
             readPosition += data.bufferLengthIndex;
         data.readValue = InterpType::lookup (data.bufferSamples, readPosition);
@@ -150,8 +155,9 @@ public:
     static inline void param1Ignore (Data& data, DurationType const duration) throw() { }
     static inline void param1Process (Data& data, DurationType const duration) throw()
     {
-        data.params[Duration] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (data.params[Duration] >= 0 && data.params[Duration] <= data.bufferLengthIndex);
+        data.paramsIn[Duration] = duration;
+        data.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
+        plonk_assert (data.paramsOut[DurationInSamples] >= 0 && data.paramsOut[DurationInSamples] <= data.bufferLengthIndex);
     }
 };
 
@@ -160,38 +166,38 @@ public:
 
 
 template<class SampleType>
-class DelayForm<SampleType, DelayFormType::CombDecay, 2>
-:   public DelayFormBase<SampleType, DelayFormType::CombDecay, 2>
+class DelayForm<SampleType, DelayFormType::CombDecay, 2, 2>
+:   public DelayFormBase<SampleType, DelayFormType::CombDecay, 2, 2>
 {
 public:
-    enum Params
+    enum InParams
     {
         Duration,
-        Feedback,
-        NumParams
+        Decay,
+        NumInParams
     };
     
-    typedef SampleType                                                  SampleDataType;
-    typedef UnitBase<SampleType>                                        UnitType;
-    typedef NumericalArray<SampleType>                                  Buffer;
-    typedef DelayFormData<SampleType, DelayFormType::Delay, NumParams>  Data;
+    enum OutParams
+    {
+        DurationInSamples,
+        Feedback,
+        NumOutParams
+    };
+
+    typedef DelayFormData<SampleType, DelayFormType::Delay, NumInParams, NumOutParams>  Data;
+
+    typedef SampleType                                  SampleDataType;
+    typedef UnitBase<SampleType>                        UnitType;
+    typedef NumericalArray<SampleType>                  Buffer;
     
-    typedef typename TypeUtility<SampleType>::IndexType                 DurationType;
-    typedef UnitBase<DurationType>                                      DurationUnitType;
-    typedef NumericalArray<DurationType>                                DurationBufferType;
-    typedef InterpLinear<SampleType,DurationType>                       InterpType;
+    typedef typename TypeUtility<SampleType>::IndexType DurationType;    
+    typedef typename TypeUtility<SampleType>::IndexType DecayType;
     
-    typedef typename TypeUtility<SampleType>::IndexType                 DecayType;
-    typedef UnitBase<DecayType>                                         DecayUnitType;
-    typedef NumericalArray<DecayType>                                   DecayBufferType;
+    typedef DurationType                                Param1Type;    
+    typedef DecayType                                   Param2Type;
     
-    typedef DurationType                                                Param1Type;
-    typedef DurationUnitType                                            Param1UnitType;
-    typedef DurationBufferType                                          Param1BufferType;
-    
-    typedef DecayType                                                   Param2Type;
-    typedef DecayUnitType                                               Param2UnitType;
-    typedef DecayBufferType                                             Param2BufferType;
+    typedef InterpLinear<SampleType,DurationType>       InterpType;
+
     
     static inline IntArray getInputKeys() throw()
     {
@@ -208,7 +214,7 @@ public:
     static inline void readIgnore (Data&, const int) throw() { }
     static inline void readRead (Data& data, const int writePosition) throw()
     {
-        DurationType readPosition = DurationType (writePosition) - data.params[Duration];
+        DurationType readPosition = DurationType (writePosition) - data.paramsOut[DurationInSamples];
         if (readPosition < data.buffer0)
             readPosition += data.bufferLengthIndex;
         data.readValue = InterpType::lookup (data.bufferSamples, readPosition);
@@ -217,7 +223,7 @@ public:
     static inline void writeIgnore (Data&, const int) throw() { }
     static inline void writeWrite (Data& data, const int writePosition) throw()
     {
-        data.writeValue = data.readValue * data.params[Feedback] + data.inputValue;
+        data.writeValue = data.readValue * data.paramsOut[Feedback] + data.inputValue;
         data.bufferSamples[writePosition] = data.writeValue;
     }
     
@@ -232,25 +238,27 @@ public:
     static inline void param1Ignore (Data& data, DurationType const duration) throw() { }
     static inline void param1Process (Data& data, DurationType const duration) throw()
     {
-        data.params[Duration] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (data.params[Duration] >= 0 && data.params[Duration] <= data.bufferLengthIndex);
+        data.paramsIn[Duration] = duration;
+        data.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
+        plonk_assert (data.paramsOut[DurationInSamples] >= 0 && data.paramsOut[DurationInSamples] <= data.bufferLengthIndex);
     }
     
     static inline void param2Ignore (Data& data, DecayType const decay) throw() { }
     static inline void param2Process (Data& data, DecayType const decay) throw()
     {                
-        const DecayType duration (data.params[Duration] * data.base.sampleDuration);
+        const DecayType duration (data.paramsIn[Duration]);
         const DecayType duration0 (Math<DecayType>::get0());
         const DecayType log001 (Math<DecayType>::getLog0_001());
+                
+        data.paramsIn[Decay] = decay;
         
         if (duration > duration0)
-			data.params[Feedback] = DecayType (plonk::exp (log001 * duration / decay));
+			data.paramsOut[Feedback] = DecayType (plonk::exp (log001 * duration / decay));
 		else if (duration < duration0)
-			data.params[Feedback] = -DecayType (plonk::exp (log001 * duration / -decay));
+			data.paramsOut[Feedback] = -DecayType (plonk::exp (log001 * duration / -decay));
 		else
-			data.params[Feedback] = duration0;
+			data.paramsOut[Feedback] = duration0;
     }
-
 };
 
 

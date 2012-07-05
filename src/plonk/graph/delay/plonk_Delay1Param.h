@@ -64,8 +64,8 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType     DurationType;
     
     typedef typename FormType::Param1Type                   Param1Type;
-    typedef typename FormType::Param1UnitType               Param1UnitType;
-    typedef typename FormType::Param1BufferType             Param1BufferType;
+    typedef UnitBase<Param1Type>                            Param1UnitType;
+    typedef NumericalArray<Param1Type>                      Param1BufferType;
         
     typedef void (*InputFunction)  (Data&);
     typedef void (*ReadFunction)   (Data&, const int);
@@ -115,7 +115,7 @@ public:
                 this->initProxyValue (i, SampleType (0));            
             
             Data& data = this->getState();
-            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5));
+            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 1.0));
         }
     }    
     
@@ -269,23 +269,23 @@ template<class SampleType>
 class DelayUnit
 {
 public:    
-    typedef DelayForm<SampleType, DelayFormType::Delay, 1>  FormType;
+    typedef DelayForm<SampleType, DelayFormType::Delay, 1, 1>       FormType;
 
-    typedef Delay1ParamChannelInternal<FormType>            DelayInternal;
-    typedef typename DelayInternal::Data                    Data;
-    typedef ChannelBase<SampleType>                         ChannelType;
-    typedef ChannelInternal<SampleType,Data>                Internal;
-    typedef UnitBase<SampleType>                            UnitType;
-    typedef InputDictionary                                 Inputs;
-    typedef NumericalArray<SampleType>                      Buffer;
+    typedef Delay1ParamChannelInternal<FormType>                    DelayInternal;
+    typedef typename DelayInternal::Data                            Data;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef NumericalArray<SampleType>                              Buffer;
     
-    typedef typename DelayInternal::Param1Type              DurationType;
-    typedef typename DelayInternal::Param1UnitType          DurationUnitType;
-    typedef typename DelayInternal::Param1BufferType        DurationBufferType;
+    typedef typename DelayInternal::Param1Type                      DurationType;
+    typedef UnitBase<DurationType>                                  DurationUnitType;
+    typedef NumericalArray<DurationType>                            DurationBufferType;
     
-    typedef ChannelBase<DurationType>                                       DurationChannelType;
-    typedef NumericalArray2D<DurationChannelType,DurationUnitType>          DurationUnitArrayType;
-    typedef NumericalArray2D<ChannelType,UnitType>                          UnitArrayType;
+    typedef ChannelBase<DurationType>                               DurationChannelType;
+    typedef NumericalArray2D<DurationChannelType,DurationUnitType>  DurationUnitArrayType;
+    typedef NumericalArray2D<ChannelType,UnitType>                  UnitArrayType;
 
     
     static inline UnitInfos getInfo() throw()
@@ -323,7 +323,7 @@ public:
         Data data = { { -1.0, -1.0 }, maximumDuration, 0, 
                       0, 0, 0, 0,
                       0, 0, 0, 
-                      0, 0, { 0 }};
+                      0, 0, { 0 }, { 0 }};
                 
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();
