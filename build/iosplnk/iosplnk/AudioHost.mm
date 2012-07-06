@@ -88,13 +88,7 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
     if (self = [super init])
     {
         self.delegate = self; // set which class contains the constructGraph method
-        
-//        self.preferredBlockSize = 512;
-//        self.preferredSampleRate = 22050.0;
                 
-        self.numInputs = 2;
-        self.numOutputs = 2;
-        
         freq = 500.f;
         amp = 0.1f;
         
@@ -106,45 +100,7 @@ PLONK_OBJC_PROPERTY_SYNTH (float,amp);
 
 - (Unit)constructGraph:(PLAudioHost*)host
 {
-//    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq, 0.5), amp), freq * 2 + 200, 3);
-//    return RLPF::ar (HarmonicSaw::ar (Lag::kr (freq).ar(), amp), freq * 2 + 200, 3);
-//    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq.ar()), amp), freq * 2 + 200, 3);
-//    return RLPF::ar (HarmonicSaw::ar (ar (Lag::kr (freq)), amp), freq * 2 + 200, 3);
-//    return RLPF::ar (HarmonicSaw::ar (Lag::kr (kr (freq)).ar(), amp), freq * 2 + 200, 3);
-  
-//    Unit input = BusRead::ar (Bus ("0"));
-//    Unit delay1 = Delay::ar (input, 0.25, 0.5);
-//    Unit delay2 = Delay::ar (input, 0.5, 0.5);
-//    return input + delay1 * 0.5 + delay2 * 0.25;
-    
-//    Unit input = BusRead::ar (Bus ("0"));
-//    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.25, 0.2525), 0.5);
-//    return input + delay1 * 0.5;
-    
-//    Unit input = BusRead::ar (Bus ("0"));
-//    Unit delay1 = Delay::ar (input, Sine::ar (5).linlin (0.125, 0.12525), 0.5);
-//    Unit delay2 = Delay::ar (input, Sine::kr (5).linlin (0.25, 0.2525).ar(), 0.5);
-//    Unit delay3 = Delay::ar (input, 0.5, 0.5);
-//    return input + delay1 * 0.5 + delay2 * 0.25 + delay3 * 0.125;
-    
-//    Unit input = BusRead::ar (Bus ("0"));
-//    Unit delay = Delay::ar (input, 0.5, 0.5);
-//    return input + delay;
-    
-//    Unit input = BusRead::ar (Bus ("0"));
-//    return CombDecay::ar (input, Floats (0.049, 0.051), 10.0);   
-    
-//    return Sine::ar (Floats (555, 1000), 0.2);
-    
-    Unit input = BusRead::ar (Bus ("0"));
-    Unit delay = Delay::ar (input, Floats (0.25, 0.50), 1.0);
-    printf ("delay.getNumChannels() = %d\n", delay.getNumChannels());
-    return delay;
-    
-//    Unit input = BusRead::ar (Bus ("0"));
-//    return CombDecay::ar (input, Floats (0.0345, 0.1), 10.0); 
-    
-//    return Mixer::ar (Sine::ar (Floats::exprand (20, 100, 1000), 0.01).group (2));
+    return RLPF::ar (HarmonicSaw::ar (Lag::ar (freq).ar(), amp), freq * 2 + 200, 3);
 }
 
 -(void)hostStopped:(PLAudioHost *)host
