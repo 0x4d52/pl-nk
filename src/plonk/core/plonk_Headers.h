@@ -155,7 +155,8 @@
 #include "../graph/delay/plonk_DelayTypes.h"
 #include "../graph/delay/plonk_DelayForms.h"
 #include "../graph/delay/plonk_DelayFormDelay.h"
-#include "../graph/delay/plonk_DelayFormComb.h"
+#include "../graph/delay/plonk_DelayFormCombDecay.h"
+#include "../graph/delay/plonk_DelayFormCombFB.h"
 #include "../graph/delay/plonk_Delay1Param.h"
 #include "../graph/delay/plonk_Delay2Param.h"
 

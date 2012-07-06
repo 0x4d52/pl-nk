@@ -96,20 +96,23 @@ Unit AudioHost::constructGraph()
 //                            Floats (0.5, 0.5, 0.4, 0.4, 0.3, 0.3, 0.2, 0.2));
 //    return Mixer::ar (delay.group (2));    
     
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return CombDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
+
     Unit input = BusRead::ar (Bus ("0"));
-    return CombDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
+    return CombFB::ar (input, Floats (0.03, 0.0299), 0.5);; 
     
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return Delay::ar (input, Floats (0.25, 0.5), 1.0);
     
 //    Unit input = BusRead::ar (Bus ("0"));
 //    const int size = 50;
-//    Floats times = Floats::rand (size, 0.5, 2.0);
+//    Floats times = Floats::rand (size, 0.001, 0.05);
 //    times.print("times");
 //    const float maximumTime = times.findMaximum();
 //    printf ("maxtime: %f\n", maximumTime);
 //    Unit combs = CombDecay::ar (input, times, 5, maximumTime);
-////    return Mixer::ar (combs.group (2)) * (2.f / size);
+//    return Mixer::ar (combs.group (2)) * (2.f / size);
 //    return combs.mix() * (2.f / size);
     
 //    Unit input = BusRead::ar (Bus ("0"));

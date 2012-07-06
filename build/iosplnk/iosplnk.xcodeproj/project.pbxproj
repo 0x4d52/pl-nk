@@ -356,6 +356,8 @@
 		A8241690158C77AF004CA012 /* plonk_IOSAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOSAudioHost.h; sourceTree = "<group>"; };
 		A82416B5158E4CF3004CA012 /* plonk_JuceAudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_JuceAudioHost.cpp; sourceTree = "<group>"; };
 		A82416B6158E4CF3004CA012 /* plonk_JuceAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_JuceAudioHost.h; sourceTree = "<group>"; };
+		A8486E8015A71CF500EAAFB2 /* plonk_DelayFormDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormDelay.h; sourceTree = "<group>"; };
+		A8486E8115A71CF500EAAFB2 /* plonk_DelayFormCombDecay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombDecay.h; sourceTree = "<group>"; };
 		A86AD4BC159DDDA50064EA76 /* plonk_DelayForms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForms.h; sourceTree = "<group>"; };
 		A86AD4BD159DDE810064EA76 /* plonk_DelayForwardDeclarations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForwardDeclarations.h; sourceTree = "<group>"; };
 		A86AD4BE159DE71A0064EA76 /* plonk_DelayTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DelayTypes.cpp; sourceTree = "<group>"; };
@@ -1001,6 +1003,8 @@
 				A86AD4D215A571460064EA76 /* plonk_Delay1Param.h */,
 				A86AD4D315A571460064EA76 /* plonk_Delay2Param.h */,
 				A86AD4BC159DDDA50064EA76 /* plonk_DelayForms.h */,
+				A8486E8015A71CF500EAAFB2 /* plonk_DelayFormDelay.h */,
+				A8486E8115A71CF500EAAFB2 /* plonk_DelayFormCombDecay.h */,
 				A86AD4BD159DDE810064EA76 /* plonk_DelayForwardDeclarations.h */,
 				A86AD4BE159DE71A0064EA76 /* plonk_DelayTypes.cpp */,
 				A86AD4BF159DE71B0064EA76 /* plonk_DelayTypes.h */,

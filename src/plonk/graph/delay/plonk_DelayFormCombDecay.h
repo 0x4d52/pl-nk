@@ -36,8 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_DELAYFORMCOMB_H
-#define PLONK_DELAYFORMCOMB_H
+#ifndef PLONK_DELAYFORMCOMBDECAY_H
+#define PLONK_DELAYFORMCOMBDECAY_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "plonk_DelayForwardDeclarations.h"
@@ -76,18 +76,11 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType             Param1Type;  
     typedef Param1Type                                              DurationType;    
     typedef UnitBase<DurationType>                                  DurationUnitType;
-    typedef NumericalArray<DurationType>                            DurationBufferType;
-    typedef ChannelBase<DurationType>                               DurationChannelType;
-    typedef NumericalArray2D<DurationChannelType,DurationUnitType>  DurationUnitArrayType;
 
     typedef typename TypeUtility<SampleType>::IndexType             Param2Type;  
     typedef Param2Type                                              DecayType;    
     typedef UnitBase<DecayType>                                     DecayUnitType;
-    typedef NumericalArray<DecayType>                               DecayBufferType;
-    typedef ChannelBase<DecayType>                                  DecayChannelType;
-    typedef NumericalArray2D<DecayChannelType,DecayUnitType>        DecayUnitArrayType;
     
-    typedef NumericalArray2D<ChannelType,UnitType>                  UnitArrayType;
     typedef InterpLinear<SampleType,DurationType>                   InterpType;
     
     typedef void (*InputFunction)  (DelayState&);
@@ -165,14 +158,14 @@ public:
     }
     
     /** Create an audio rate wavetable oscillator. */
-    static inline  UnitType ar (UnitType const& input,
-                                DurationUnitType const& duration,
-                                DecayUnitType const& decay,
-                                const DurationType maximumDuration,
-                                UnitType const& mul,
-                                UnitType const& add,
-                                BlockSize const& preferredBlockSize,
-                                SampleRate const& preferredSampleRate) throw()
+    static inline UnitType ar (UnitType const& input,
+                               DurationUnitType const& duration,
+                               DecayUnitType const& decay,
+                               const DurationType maximumDuration,
+                               UnitType const& mul,
+                               UnitType const& add,
+                               BlockSize const& preferredBlockSize,
+                               SampleRate const& preferredSampleRate) throw()
     {             
         Data data = { { -1.0, -1.0 }, maximumDuration, 0 };
         
@@ -181,46 +174,23 @@ public:
         const int numDecayChannels = decay.getNumChannels();
         const int numChannels = plonk::max (numInputChannels, plonk::max (numDurationChannels, numDecayChannels));
         
-        if (numChannels == 1)
+        UnitType mainUnit = UnitType::emptyChannels (numChannels);
+        
+        for (int i = 0; i < numChannels; ++i)
         {
             Inputs inputs;
-            inputs.put (IOKey::Generic, input);
-            inputs.put (IOKey::Duration, duration);
-            inputs.put (IOKey::Decay, decay);
-            inputs.put (IOKey::Multiply, mul);
-            inputs.put (IOKey::Add, add);
+            inputs.put (IOKey::Generic, input[i]);
+            inputs.put (IOKey::Duration, duration[i]);
+            inputs.put (IOKey::Decay, decay[i]);
             
-            return UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                       data, 
-                                                                       preferredBlockSize, 
-                                                                       preferredSampleRate);
+            UnitType unit = UnitType::template createFromInputs<DelayInternal> (inputs, 
+                                                                                data, 
+                                                                                preferredBlockSize, 
+                                                                                preferredSampleRate);
+            mainUnit.put (i, unit);
         }
-        else
-        {
-            // absolutely certain this isn't correct.. need to check
-            
-            DurationUnitArrayType durationsGrouped = duration.deinterleave (numInputChannels);
-            DecayUnitArrayType decaysGrouped = decay.deinterleave (numInputChannels);
-            UnitArrayType resultGrouped;
-            
-            for (int i = 0; i < numInputChannels; ++i)
-            {
-                Inputs inputs;
-                inputs.put (IOKey::Generic, input[i]);
-                inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
-                inputs.put (IOKey::Decay, decaysGrouped.wrapAt (i));
-                
-                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
-                                                                                     data, 
-                                                                                     preferredBlockSize, 
-                                                                                     preferredSampleRate);
-                resultGrouped.add (unit);
-            }
-            
-            const UnitType mainUnit (resultGrouped.interleave());
-            plonk_assert (mainUnit.getNumChannels() == numChannels);
-            return UnitType::applyMulAdd (mainUnit, mul, add);
-        }
+        
+        return UnitType::applyMulAdd (mainUnit, mul, add);
     }
 };
 
@@ -228,7 +198,7 @@ public:
 //------------------------------------------------------------------------------
 
 
-/** Comb filter. */
+/** A comb filter setting the decay as a time to decay by 60dB. */
 template<class SampleType>
 class CombDecayUnit
 {
@@ -236,26 +206,14 @@ public:
     typedef DelayForm<SampleType, DelayFormType::CombDecay, 2, 2>   FormType;
     
     typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
-    typedef typename DelayInternal::Data                            Data;
-    typedef ChannelBase<SampleType>                                 ChannelType;
-    typedef ChannelInternal<SampleType,Data>                        Internal;
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
-    typedef NumericalArray<SampleType>                              Buffer;
     
     typedef typename DelayInternal::Param1Type                      DurationType;
     typedef UnitBase<DurationType>                                  DurationUnitType;
-    typedef NumericalArray<DurationType>                            DurationBufferType;
     
     typedef typename DelayInternal::Param2Type                      DecayType;
     typedef UnitBase<DecayType>                                     DecayUnitType;
-    typedef NumericalArray<DecayType>                               DecayBufferType;
-    
-    typedef ChannelBase<DurationType>                               DurationChannelType;
-    typedef NumericalArray2D<DurationChannelType,DurationUnitType>  DurationUnitArrayType;
-    typedef ChannelBase<DecayType>                                  DecayChannelType;
-    typedef NumericalArray2D<DecayChannelType,DecayUnitType>        DecayUnitArrayType;
-    typedef NumericalArray2D<ChannelType,UnitType>                  UnitArrayType;
     
     
     static inline UnitInfos getInfo() throw()
@@ -273,7 +231,7 @@ public:
                          // inputs
                          IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::Minimum,   Measure::Seconds,   0.0,
-                         IOKey::Decay,              Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Seconds,   0.0,
+                         IOKey::Decay,              Measure::Seconds,   1.0,                IOLimit::None,
                          IOKey::MaximumDuration,    Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -285,7 +243,7 @@ public:
     /** Create an audio rate wavetable oscillator. */
     static UnitType ar (UnitType const& input,
                         DurationUnitType const& duration = DurationType (0.5),
-                        DecayUnitType const& decay = DurationType (1.0),
+                        DecayUnitType const& decay = DecayType (1.0),
                         const DurationType maximumDuration = DurationType (1.0),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
@@ -300,5 +258,5 @@ public:
 typedef CombDecayUnit<PLONK_TYPE_DEFAULT> CombDecay;
 
 
-#endif // PLONK_DELAYFORMCOMB_H
+#endif // PLONK_DELAYFORMCOMBDECAY_H
 

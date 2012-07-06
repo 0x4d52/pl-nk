@@ -344,8 +344,9 @@
 		A824185315911605004CA012 /* plonk_PortAudioAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_PortAudioAudioHost.h; sourceTree = "<group>"; };
 		A8241855159265F9004CA012 /* AudioHost.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioHost.cpp; sourceTree = "<group>"; };
 		A8241856159265F9004CA012 /* AudioHost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioHost.h; sourceTree = "<group>"; };
-		A8486E7915A7192C00EAAFB2 /* plonk_DelayFormComb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormComb.h; sourceTree = "<group>"; };
+		A8486E7915A7192C00EAAFB2 /* plonk_DelayFormCombDecay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombDecay.h; sourceTree = "<group>"; };
 		A8486E7A15A7192C00EAAFB2 /* plonk_DelayFormDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormDelay.h; sourceTree = "<group>"; };
+		A8486E8315A71DAB00EAAFB2 /* plonk_DelayFormCombFB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombFB.h; sourceTree = "<group>"; };
 		A86AD4C515A320F60064EA76 /* plonk_DelayForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForms.h; sourceTree = "<group>"; };
 		A86AD4C615A320F60064EA76 /* plonk_DelayForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForwardDeclarations.h; sourceTree = "<group>"; };
 		A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DelayTypes.cpp; sourceTree = "<group>"; };
@@ -866,7 +867,8 @@
 				A86AD4CC15A431F90064EA76 /* plonk_Delay2Param.h */,
 				A86AD4C515A320F60064EA76 /* plonk_DelayForms.h */,
 				A8486E7A15A7192C00EAAFB2 /* plonk_DelayFormDelay.h */,
-				A8486E7915A7192C00EAAFB2 /* plonk_DelayFormComb.h */,
+				A8486E7915A7192C00EAAFB2 /* plonk_DelayFormCombDecay.h */,
+				A8486E8315A71DAB00EAAFB2 /* plonk_DelayFormCombFB.h */,
 				A86AD4C615A320F60064EA76 /* plonk_DelayForwardDeclarations.h */,
 				A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */,
 				A86AD4C815A320F60064EA76 /* plonk_DelayTypes.h */,
