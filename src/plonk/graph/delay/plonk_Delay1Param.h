@@ -40,7 +40,7 @@
 #define PLONK_DELAY1PARAM_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
-#include "../plonk_GraphForwardDeclarations.h"
+#include "plonk_DelayForwardDeclarations.h"
 
 
 /** Delay processor. */
@@ -68,11 +68,11 @@ public:
     typedef UnitBase<Param1Type>                            Param1UnitType;
     typedef NumericalArray<Param1Type>                      Param1BufferType;
         
-    typedef void (*InputFunction)  (DelayState&);
-    typedef void (*ReadFunction)   (DelayState&);
-    typedef void (*WriteFunction)  (DelayState&);
-    typedef void (*OutputFunction) (DelayState&);
-    typedef void (*Param1Function) (DelayState&, const Param1Type);
+    typedef typename FormType::InputFunction                InputFunction;
+    typedef typename FormType::ReadFunction                 ReadFunction;
+    typedef typename FormType::WriteFunction                WriteFunction;
+    typedef typename FormType::OutputFunction               OutputFunction;
+    typedef typename FormType::Param1Function               Param1Function;
     
     enum Params
     {
@@ -116,7 +116,7 @@ public:
                 this->initProxyValue (i, SampleType (0));            
             
             Data& data = this->getState();
-            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 2.0));
+            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5) + 1);
         }
     }    
     
@@ -140,7 +140,7 @@ public:
                                      inputBuffer.getArray(), 
                                      param1Unit, 
                                      this->circularBuffer, data, info, 0);
-//        
+        
         const int numChannels = this->getNumChannels();
 
         for (int i = 1; i < numChannels; ++i)
@@ -167,19 +167,7 @@ private:
     {
         return inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels();
     }
-    
-    template<InputFunction inputFunction, 
-             ReadFunction readFunction,
-             WriteFunction writeFunction,
-             OutputFunction outputFunction>
-    static inline void tick (DelayState& data) throw()
-    {
-        inputFunction (data);
-        readFunction (data);  
-        writeFunction (data);
-        outputFunction (data);
-    }
-    
+        
     template<InputFunction inputFunction, 
              ReadFunction readFunction,
              WriteFunction writeFunction,
@@ -200,9 +188,9 @@ private:
             outputBufferLength,
             inputSamples,
             buffer.getArray(),
-            buffer.length(),
-            Param1Type (buffer.length()),
-            Param1Type (0),
+            buffer.length() - 1 ,
+            DurationType (buffer.length()) - Math<DurationType>::get1(),
+            DurationType (0),
             data.writePosition,
             SampleType (0), SampleType (0), SampleType (0), SampleType (0),
             { 0 }, { 0 }
@@ -225,7 +213,7 @@ private:
                 while (numSamplesThisTime--) 
                 {
                     param1Function (state, *param1Samples++);                    
-                    tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
                 }
                 
                 if (state.writePosition >= state.bufferLength)
@@ -243,7 +231,7 @@ private:
                 numSamplesToProcess -= numSamplesThisTime;
                 
                 while (numSamplesThisTime--) 
-                    tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
                 
                 if (state.writePosition >= state.bufferLength)
                     state.writePosition = 0;
@@ -263,7 +251,7 @@ private:
                 while (numSamplesThisTime--) 
                 {                    
                     param1Function (state, param1Samples[int (param1Position)]);                    
-                    tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
                     param1Position += param1Increment;
                 }
                 
@@ -330,6 +318,57 @@ public:
     }
     
     /** Create an audio rate wavetable oscillator. */
+//    static UnitType ar (UnitType const& input,
+//                        DurationUnitType const& duration = DurationType (0.5),
+//                        const DurationType maximumDuration = DurationType (1.0),
+//                        UnitType const& mul = SampleType (1),
+//                        UnitType const& add = SampleType (0),
+//                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+//                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+//    {             
+//        Data data = { { -1.0, -1.0 }, maximumDuration, 0, };
+//                
+//        const int numInputChannels = input.getNumChannels();
+//        const int numDurationChannels = duration.getNumChannels();
+//        const int numChannels = plonk::max (numInputChannels, numDurationChannels);
+//
+//        if (numChannels == 1)
+//        {
+//            Inputs inputs;
+//            inputs.put (IOKey::Generic, input);
+//            inputs.put (IOKey::Duration, duration);
+//            inputs.put (IOKey::Multiply, mul);
+//            inputs.put (IOKey::Add, add);
+//
+//            return UnitType::template createFromInputs<DelayInternal> (inputs, 
+//                                                                       data, 
+//                                                                       preferredBlockSize, 
+//                                                                       preferredSampleRate);
+//        }
+//        else
+//        {
+//            DurationUnitArrayType durationsGrouped = duration.deinterleave (numInputChannels);
+//            UnitArrayType resultGrouped;
+//            
+//            for (int i = 0; i < numInputChannels; ++i)
+//            {
+//                Inputs inputs;
+//                inputs.put (IOKey::Generic, input[i]);
+//                inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
+//
+//                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
+//                                                                                     data, 
+//                                                                                     preferredBlockSize, 
+//                                                                                     preferredSampleRate);
+//                resultGrouped.add (unit);
+//            }
+//            
+//            const UnitType mainUnit (resultGrouped.interleave());
+//            plonk_assert (mainUnit.getNumChannels() == numChannels);
+//            return UnitType::applyMulAdd (mainUnit, mul, add);
+//        }
+//    }
+    
     static UnitType ar (UnitType const& input,
                         DurationUnitType const& duration = DurationType (0.5),
                         const DurationType maximumDuration = DurationType (1.0),
@@ -338,48 +377,9 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
-        Data data = { { -1.0, -1.0 }, maximumDuration, 0, };
-                
-        const int numInputChannels = input.getNumChannels();
-        const int numDurationChannels = duration.getNumChannels();
-        const int numChannels = plonk::max (numInputChannels, numDurationChannels);
-
-        if (numChannels == 1)
-        {
-            Inputs inputs;
-            inputs.put (IOKey::Generic, input);
-            inputs.put (IOKey::Duration, duration);
-            inputs.put (IOKey::Multiply, mul);
-            inputs.put (IOKey::Add, add);
-
-            return UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                       data, 
-                                                                       preferredBlockSize, 
-                                                                       preferredSampleRate);
-        }
-        else
-        {
-            DurationUnitArrayType durationsGrouped = duration.deinterleave (numInputChannels);
-            UnitArrayType resultGrouped;
-            
-            for (int i = 0; i < numInputChannels; ++i)
-            {
-                Inputs inputs;
-                inputs.put (IOKey::Generic, input[i]);
-                inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
-
-                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
-                                                                                     data, 
-                                                                                     preferredBlockSize, 
-                                                                                     preferredSampleRate);
-                resultGrouped.add (unit);
-            }
-            
-            const UnitType mainUnit (resultGrouped.interleave());
-            plonk_assert (mainUnit.getNumChannels() == numChannels);
-            return UnitType::applyMulAdd (mainUnit, mul, add);
-        }
+        return FormType::ar (input, duration, maximumDuration, mul, add, preferredBlockSize, preferredSampleRate);
     }
+
 };
 
 typedef DelayUnit<PLONK_TYPE_DEFAULT> Delay;

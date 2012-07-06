@@ -41,8 +41,8 @@
 
 #include "../plonk_GraphForwardDeclarations.h"
 
-//template<class SampleType>                                                                class DelayUnit;
-
+template<class FormType> class Delay1ParamChannelInternal;
+template<class FormType> class Delay2ParamChannelInternal;
 
 
 #endif // PLONK_DELAYFORWARDDECLARATIONS_H

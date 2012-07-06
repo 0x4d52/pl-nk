@@ -406,7 +406,8 @@ public:
 		return newArray;		
 	}
 	
-	/** Creates a NumericalArray with a given size (length) randomly distributed. */
+	/** Creates a NumericalArray with a given size (length) randomly distributed. 
+     Values will be between @c lower and @c upper bounds and uniformly distributed. */
 	static NumericalArray<NumericalType> rand (const int size, 
 											   const NumericalType lower, 
 											   const NumericalType upper) throw()
@@ -425,15 +426,27 @@ public:
 		
 		return newArray;
 	}
+    
+    /** Creates a NumericalArray with a given size (length) randomly distributed. 
+     Values will be between zero and the @c upper bound and uniformly distributed. */
+    static NumericalArray<NumericalType> rand (const int size, 
+											   const NumericalType upper) throw()
+    {
+        return rand (size, NumericalType (0), upper);
+    }
 	
-	/** Creates a NumericalArray with a given size (length) randomly distributed. */
+	/** Creates a NumericalArray with a given size (length) randomly distributed. 
+     Values will be either side of zero upto a magnitude given by @c upper and uniformly distributed. */
 	static NumericalArray<NumericalType> rand2 (const int size, 
 											    const NumericalType positive) throw()
 	{
 		return rand (size, -positive, positive);
 	}
 	
-	/** Creates a NumericalArray with a given size (length) with an exponential random distribution. */
+	/** Creates a NumericalArray with a given size (length) with an exponential random distribution. 
+     Values will be between @c lower and @c upper bounds and exponentially distributed
+     such that more values will appear in the lower end of the range compared to the upper part.
+     This is good for selecting frequencies randomly. */
 	static NumericalArray<NumericalType> exprand (const int size, 
 												  const NumericalType lower, 
 												  const NumericalType upper) throw()
