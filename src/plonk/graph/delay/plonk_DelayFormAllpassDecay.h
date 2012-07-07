@@ -36,15 +36,15 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_DELAYFORMCOMBDECAY_H
-#define PLONK_DELAYFORMCOMBDECAY_H
+#ifndef PLONK_DELAYFORMALLPASSDECAY_H
+#define PLONK_DELAYFORMALLPASSDECAY_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "plonk_DelayForwardDeclarations.h"
 
 template<class SampleType>
-class DelayForm<SampleType, DelayFormType::CombDecay, 2, 2>
-:   public DelayFormBase<SampleType, DelayFormType::CombDecay, 2, 2>
+class DelayForm<SampleType, DelayFormType::AllpassDecay, 2, 2>
+:   public DelayFormBase<SampleType, DelayFormType::AllpassDecay, 2, 2>
 {
 public:
     enum InParams
@@ -61,9 +61,9 @@ public:
         NumOutParams
     };
 
-    typedef DelayFormData<SampleType, DelayFormType::CombDecay, NumInParams, NumOutParams>  Data;
-    typedef typename Data::DelayState                                                       DelayState;
-    typedef DelayForm<SampleType, DelayFormType::CombDecay, NumInParams, NumOutParams>      FormType;
+    typedef DelayFormData<SampleType, DelayFormType::AllpassDecay, NumInParams, NumOutParams>   Data;
+    typedef typename Data::DelayState                                                           DelayState;
+    typedef DelayForm<SampleType, DelayFormType::AllpassDecay, NumInParams, NumOutParams>       FormType;
     
     typedef SampleType                                              SampleDataType;
     typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
@@ -95,8 +95,8 @@ public:
         const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Decay);
         return keys;
     }    
-    
-    static inline void inputIgnore (DelayState&) throw() { }
+        
+    static inline void inputIgnore (DelayState&) throw() { plonk_assertfalse; }
     static inline void inputRead (DelayState& data) throw()
     {
         data.inputValue = *data.inputSamples++;
@@ -125,7 +125,7 @@ public:
     static inline void outputIgnore (DelayState&) throw() { }
     static inline void outputWrite (DelayState& data) throw()
     {
-        data.outputValue = data.readValue;
+        data.outputValue = data.readValue - data.paramsOut[Feedback] * data.writeValue;
         *data.outputSamples++ = data.outputValue;
         data.writePosition++;
     }
@@ -134,8 +134,9 @@ public:
     static inline void param1Process (DelayState& data, DurationType const& duration) throw()
     {
         data.paramsIn[Duration] = duration;
-        data.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (data.paramsOut[DurationInSamples] >= 0 && data.paramsOut[DurationInSamples] <= data.bufferLengthIndex);
+        data.paramsOut[DurationInSamples] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
+        plonk_assert (data.paramsOut[DurationInSamples] > 0 && data.paramsOut[DurationInSamples] <= data.bufferLengthIndex);
+        data.paramsOut[Feedback] = plonk::decayFeedback (data.paramsIn[Duration], data.paramsIn[Decay]);
     }
     
     static inline void param2Ignore (DelayState& data, DecayType const& decay) throw() { }
@@ -198,22 +199,22 @@ public:
 //------------------------------------------------------------------------------
 
 
-/** A comb filter setting the decay as a time to decay by 60dB. */
+/** An allpass delay setting the decay as a time to decay by 60dB. */
 template<class SampleType>
-class CombDecayUnit
+class AllpassDecayUnit
 {
 public:    
-    typedef DelayForm<SampleType, DelayFormType::CombDecay, 2, 2>   FormType;
+    typedef DelayForm<SampleType, DelayFormType::AllpassDecay, 2, 2>    FormType;
     
-    typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
-    typedef UnitBase<SampleType>                                    UnitType;
-    typedef InputDictionary                                         Inputs;
+    typedef Delay2ParamChannelInternal<FormType>                        DelayInternal;
+    typedef UnitBase<SampleType>                                        UnitType;
+    typedef InputDictionary                                             Inputs;
     
-    typedef typename DelayInternal::Param1Type                      DurationType;
-    typedef UnitBase<DurationType>                                  DurationUnitType;
+    typedef typename DelayInternal::Param1Type                          DurationType;
+    typedef UnitBase<DurationType>                                      DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type                      DecayType;
-    typedef UnitBase<DecayType>                                     DecayUnitType;
+    typedef typename DelayInternal::Param2Type                          DecayType;
+    typedef UnitBase<DecayType>                                         DecayUnitType;
     
     
     static inline UnitInfos getInfo() throw()
@@ -221,7 +222,7 @@ public:
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
         
-        return UnitInfo ("CombDecay", "A comb filter setting the decay as a time to decay by 60dB.",
+        return UnitInfo ("AllpassDecay", "An allpass delay setting the decay as a time to decay by 60dB.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
@@ -255,8 +256,8 @@ public:
     
 };
 
-typedef CombDecayUnit<PLONK_TYPE_DEFAULT> CombDecay;
+typedef AllpassDecayUnit<PLONK_TYPE_DEFAULT> AllpassDecay;
 
 
-#endif // PLONK_DELAYFORMCOMBDECAY_H
+#endif // PLONK_DELAYFORMALLPASSDECAY_H
 

@@ -48,8 +48,9 @@ DelayFormType::Name DelayFormType::fromInt (const int value) throw()
     static const DelayFormType::Name names[] = {
         DelayFormType::Unknown,
         DelayFormType::Delay,
-        DelayFormType::CombFB,
         DelayFormType::CombDecay,
+        DelayFormType::CombFB,
+        DelayFormType::AllpassDecay,
         DelayFormType::AllpassFFFB,
     };
     
@@ -69,8 +70,9 @@ Text DelayFormType::getName (const int index) throw()
     static const char* names[] = {
         "Unknown",
         "Delay",
-        "CombFB",
         "CombDecay",
+        "CombFB",
+        "AllpassDecay",
         "AllpassFFFB",
     };
     

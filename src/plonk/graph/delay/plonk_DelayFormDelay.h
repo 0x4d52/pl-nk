@@ -156,7 +156,7 @@ public:
                                BlockSize const& preferredBlockSize,
                                SampleRate const& preferredSampleRate) throw()
     {             
-        Data data = { { -1.0, -1.0 }, maximumDuration, 0, };
+        const Data data = { { -1.0, -1.0 }, maximumDuration, 0, };
         
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();
