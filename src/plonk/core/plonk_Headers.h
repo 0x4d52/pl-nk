@@ -152,6 +152,7 @@
 #include "../graph/filters/shapes/plonk_FilterShapesB.h"
 
 #include "../graph/delay/plonk_DelayForwardDeclarations.h"
+#include "../graph/delay/plonk_DelayBase.h"
 #include "../graph/delay/plonk_DelayTypes.h"
 #include "../graph/delay/plonk_DelayForms.h"
 #include "../graph/delay/plonk_DelayFormDelay.h"

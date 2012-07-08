@@ -355,6 +355,7 @@
 		A86AD4CB15A3344E0064EA76 /* plonk_Delay1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay1Param.h; sourceTree = "<group>"; };
 		A86AD4CC15A431F90064EA76 /* plonk_Delay2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay2Param.h; sourceTree = "<group>"; };
 		A885834515A9E58B0079AB85 /* plonk_DelayFormCombLPF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombLPF.h; sourceTree = "<group>"; };
+		A885834715AA0A750079AB85 /* plonk_DelayBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayBase.h; sourceTree = "<group>"; };
 		A8DA9B2A15A9A02B009253AB /* plonk_DelayFormAllpassFFFB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormAllpassFFFB.h; sourceTree = "<group>"; };
 		A8DA9B2C15A9A774009253AB /* plonk_Delay3Param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_Delay3Param.h; sourceTree = "<group>"; };
 		A8DA9B2D15A9AA36009253AB /* plonk_Delay4Param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_Delay4Param.h; sourceTree = "<group>"; };
@@ -868,6 +869,7 @@
 		A82417C015911595004CA012 /* delay */ = {
 			isa = PBXGroup;
 			children = (
+				A885834715AA0A750079AB85 /* plonk_DelayBase.h */,
 				A86AD4CB15A3344E0064EA76 /* plonk_Delay1Param.h */,
 				A86AD4CC15A431F90064EA76 /* plonk_Delay2Param.h */,
 				A8DA9B2C15A9A774009253AB /* plonk_Delay3Param.h */,

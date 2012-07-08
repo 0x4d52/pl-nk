@@ -86,6 +86,11 @@ public:
     {
         return DelayFormType::getName (Form);
     }        
+    
+    static inline int getNumCircularBuffers() throw()
+    {
+        return 1;
+    }
 };
 
 template<class SampleType, signed Form, signed NumInParams, signed NumOutParams>

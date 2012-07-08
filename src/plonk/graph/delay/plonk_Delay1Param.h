@@ -46,8 +46,7 @@
 /** Delay processor. */
 template<class FormType>
 class Delay1ParamChannelInternal
-:   public ProxyOwnerChannelInternal<typename FormType::SampleDataType, 
-                                     typename FormType::Data>
+:   public DelayChannelInternalBase<FormType>
 {
 public:
     typedef typename FormType::SampleDataType               SampleType;
@@ -58,7 +57,7 @@ public:
     
     typedef ChannelBase<SampleType>                         ChannelType;
     typedef Delay1ParamChannelInternal<FormType>            DelayInternal;
-    typedef ProxyOwnerChannelInternal<SampleType,Data>      Internal;
+    typedef DelayChannelInternalBase<FormType>              Internal;
     typedef ChannelInternalBase<SampleType>                 InternalBase;
     typedef UnitBase<SampleType>                            UnitType;
     typedef InputDictionary                                 Inputs;
@@ -89,56 +88,12 @@ public:
     :   Internal (getNumChannelsFromInputs (inputs), // num proxies
                   inputs, data, blockSize, sampleRate)
     {
-        delayStates = DelayStateArray::withSize (this->getNumChannels());
     }
-    
-    Text getName() const throw()
-    {
-        return FormType::getName();
-    }       
-    
-    IntArray getInputKeys() const throw()
-    {
-        return FormType::getInputKeys();
-    }    
-        
-    void initChannel (const int channel) throw()
-    {        
-        const UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
-        
-        if ((channel % this->getNumChannels()) == 0)
-        {
-            this->setBlockSize (BlockSize::decide (inputUnit.getBlockSize (channel),
-                                                   this->getBlockSize()));
-            this->setSampleRate (SampleRate::decide (inputUnit.getSampleRate (channel),
-                                                     this->getSampleRate()));
-            
-            this->setOverlap (inputUnit.getOverlap (channel));
-            
-            Data& data = this->getState();
-            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5) + 1);
-            
-            for (int i = 0; i < this->getNumChannels(); ++i)
-            {
-                this->initProxyValue (i, SampleType (0));            
-
-                DelayState& delayState = delayStates.atUnchecked (i);
-                
-                Memory::zero (delayState);
-                
-                delayState.base.sampleRate = data.base.sampleRate;
-                delayState.base.sampleDuration = data.base.sampleDuration;
-                delayState.bufferSamples = circularBuffer.getArray();
-                delayState.bufferLength = circularBuffer.length() - 1 ,
-                delayState.bufferLengthIndex = DurationType (circularBuffer.length()) - Math<DurationType>::get1(),
-                delayState.buffer0 = DurationType (0);
-            }
-        }
-    }    
     
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {
         Data& data = this->getState();
+        DelayStateArray& delayStates = this->getDelayStates();
         
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
         const Buffer inputBuffer (inputUnit.process (info, 0));
@@ -155,7 +110,7 @@ public:
                                      this->getOutputBuffer (0).length(), 
                                      inputBuffer.getArray(), 
                                      param1Unit, 
-                                     this->circularBuffer, data, delayStates.atUnchecked (0), info, 0);
+                                     data, delayStates.atUnchecked (0), info, 0);
         
         const int numChannels = this->getNumChannels();
 
@@ -172,7 +127,7 @@ public:
                  this->getOutputBuffer (i).length(), 
                  0, 
                  param1Unit, 
-                 this->circularBuffer, data, delayStates.atUnchecked (i), info, i);
+                 data, delayStates.atUnchecked (i), info, i);
         }
         
         data.writePosition = writePosition; // update the write position from the first channel write
@@ -193,26 +148,11 @@ private:
                         const int outputBufferLength,
                         const SampleType* inputSamples,
                         Param1UnitType& param1Unit,
-                        Buffer& buffer,
                         Data& data,
                         DelayState& state,
                         ProcessInfo& info, 
                         const int channel) throw()
-    {        
-//        DelayState state = {
-//            { data.base.sampleRate, data.base.sampleDuration },
-//            outputSamples,
-//            outputBufferLength,
-//            inputSamples,
-//            buffer.getArray(),
-//            buffer.length() - 1 ,
-//            DurationType (buffer.length()) - Math<DurationType>::get1(),
-//            DurationType (0),
-//            data.writePosition,
-//            SampleType (0), SampleType (0), SampleType (0), SampleType (0),
-//            { 0 }, { 0 }
-//        };
-        
+    {                
         state.outputSamples = outputSamples;
         state.outputBufferLength = outputBufferLength;
         state.inputSamples = inputSamples;
@@ -284,10 +224,6 @@ private:
         
         return state.writePosition;
     }
-        
-private:
-    Buffer circularBuffer;
-    DelayStateArray delayStates;
 };
 
 

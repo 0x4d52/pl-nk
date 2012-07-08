@@ -44,6 +44,7 @@
 template<class SampleType, signed Form, signed NumInParams, signed NumOutParams> struct DelayFormData;
 template<class SampleType, signed Form, signed NumInParams, signed NumOutParams> class DelayForm;
 
+template<class FormType> class DelayChannelInternalBase;
 template<class FormType> class Delay1ParamChannelInternal;
 template<class FormType> class Delay2ParamChannelInternal;
 template<class FormType> class Delay3ParamChannelInternal;
