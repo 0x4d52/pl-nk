@@ -152,6 +152,7 @@ class AllpassDecayUnit
 {
 public:    
     typedef DelayFormAllpassDecay<SampleType>       FormType;
+    typedef DelayFormAllpassFFFB<SampleType>        AltFormType;
     
     typedef Delay2ParamChannelInternal<FormType>    DelayInternal;
     typedef UnitBase<SampleType>                    UnitType;
@@ -197,8 +198,14 @@ public:
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {             
-        return FormType::ar (input, duration, decay, maximumDuration, mul, add, preferredBlockSize, preferredSampleRate);
+    {          
+        if (duration.isEachChannelConstant() && decay.isEachChannelConstant())
+            
+            return AltFormType::ar (input, duration, duration.getValues().decayFeedback (decay.getValues()), maximumDuration,
+                                    mul, add, preferredBlockSize, preferredSampleRate);
+        else 
+            return FormType::ar (input, duration, decay, maximumDuration, 
+                                 mul, add, preferredBlockSize, preferredSampleRate);
     }
     
 };

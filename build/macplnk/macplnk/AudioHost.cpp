@@ -99,8 +99,8 @@ Unit AudioHost::constructGraph()
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return CombDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
 
-    Unit input = BusRead::ar (Bus ("0"));
-    return AllpassDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return AllpassDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
 
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return CombFB::ar (input, Floats (0.03, 0.0299), 0.5);; 
@@ -142,15 +142,15 @@ Unit AudioHost::constructGraph()
 //                            1.0);
 //    return delay; 
 
-//    Unit input = BusRead::ar (Bus ("0"));    
-//    Unit combs = CombDecay::ar(input, Floats::rand (16, 0.0001, 0.05), 0.05);
-//    
-//    Unit output = Mixer::ar (combs.group (2));
-//    
-//    for (int i = 0; i < 20; ++i)
-//        output = AllpassDecay::ar (output, Floats::rand (2, 0.0001, 0.05), 10, 0.05);
-//    
-//    return output;
+    Unit input = BusRead::ar (Bus ("0"));    
+    Unit combs = CombDecay::ar(input, Floats::rand (16, 0.0001, 0.05), 0.05);
+    
+    Unit output = Mixer::ar (combs.group (2));
+    
+    for (int i = 0; i < 40; ++i)
+        output = AllpassDecay::ar (output, Floats::rand (2, 0.0001, 0.05), 10, 0.05);
+    
+    return output;
     
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return AllpassDecay::ar (input, Floats::rand (2, 0.05), 10.0); 

@@ -751,6 +751,18 @@ public:
         return this->wrapAt (index).getValue();
     }
     
+    inline const Buffer getValues() const throw()
+    {
+        const int numChannels = this->getNumChannels();
+        Buffer result = Buffer::withSize (numChannels);
+        SampleType* const resultArray = result.getArray();
+        
+        for (int i = 0; i < numChannels; ++i)
+            resultArray[i] = this->atUnchecked (i).getValue();
+        
+        return result;
+    }
+    
     inline const TimeStamp getNextTimeStamp(const int index) const throw()
     {
         return this->wrapAt (index).getNextTimeStamp();
@@ -769,6 +781,15 @@ public:
     inline bool isConstant (const int index) const throw()
     {
         return this->wrapAt (index).isConstant();
+    }
+    
+    inline bool isEachChannelConstant() const throw()
+    {        
+        for (int i = 0; i < this->getNumChannels(); ++i)
+            if (!this->atUnchecked (i).isConstant())
+                return false;
+        
+        return true;
     }
     
     inline bool isNotConstant (const int index) const throw()

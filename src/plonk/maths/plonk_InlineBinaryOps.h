@@ -78,6 +78,7 @@
         PLONK_BINARYOP(CLASSNAME, round)\
         PLONK_BINARYOP(CLASSNAME, trunc)\
         PLONK_BINARYOP(CLASSNAME, clip2)\
+        PLONK_BINARYOP(CLASSNAME, decayFeedback)\
         /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME operator+   (RightType const& right) const throw() { return binary<plonk::addop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\
@@ -135,7 +136,9 @@
         BINARYOPGLOBAL(CLASSNAME, thresh)\
         BINARYOPGLOBAL(CLASSNAME, round)\
         BINARYOPGLOBAL(CLASSNAME, trunc)\
-        BINARYOPGLOBAL(CLASSNAME, clip2)
+        BINARYOPGLOBAL(CLASSNAME, clip2)\
+        BINARYOPGLOBAL(CLASSNAME, decayFeedback)
+
 
 #define PLONK_BINARYOPGLOBALS(CLASSNAME) PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME)
 #define PLONK_BINARYOPGLOBALS_TEMPLATE(CLASSNAME) PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL_TEMPLATE,CLASSNAME)

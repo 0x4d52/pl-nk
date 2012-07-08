@@ -75,6 +75,7 @@ private:
         names.put (&plonk::round<SampleType>,                   "round");
         names.put (&plonk::trunc<SampleType>,                   "trunc");
         names.put (&plonk::clip2<SampleType>,                   "clip2");
+        names.put (&plonk::decayFeedback<SampleType>,           "decayFeedback");
     }
     
 public:

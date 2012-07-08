@@ -147,7 +147,8 @@ class CombDecayUnit
 {
 public:    
     typedef DelayFormCombDecay<SampleType>              FormType;
-    
+    typedef DelayFormCombFB<SampleType>                 AltFormType;
+
     typedef Delay2ParamChannelInternal<FormType>        DelayInternal;
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;
@@ -193,7 +194,12 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
-        return FormType::ar (input, duration, decay, maximumDuration, mul, add, preferredBlockSize, preferredSampleRate);
+        if (duration.isEachChannelConstant() && decay.isEachChannelConstant())
+            return AltFormType::ar (input, duration, duration.getValues().decayFeedback (decay.getValues()), maximumDuration,
+                                    mul, add, preferredBlockSize, preferredSampleRate);
+        else 
+            return FormType::ar (input, duration, decay, maximumDuration, 
+                                 mul, add, preferredBlockSize, preferredSampleRate);
     }
     
 };
