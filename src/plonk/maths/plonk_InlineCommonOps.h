@@ -54,10 +54,14 @@ template<class Type> inline Type abs (Type const& a) throw() { return (a < Math<
 /** Returns minimum of @e a and @e b. 
  @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type min (Type const& a, Type const& b) throw() { return (a > b) ? b : a; }
+template<class Type> inline Type min (Type const& a, Type const& b, Type const& c) throw() { return min (min (a, b), c); }
+template<class Type> inline Type min (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return min (min (a, b), min (c, d)); }
 
 /** Returns maximum of @e a and @e b. 
  @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type max (Type const& a, Type const& b) throw() { return (a < b) ? b : a; }
+template<class Type> inline Type max (Type const& a, Type const& b, Type const& c) throw() { return max (max (a, b), c); }
+template<class Type> inline Type max (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return max (max (a, b), max (c, d)); }
 
 /** Returns @e a raised to the power @e b. 
  @ingroup PlonkBinaryOpFunctions*/

@@ -91,7 +91,6 @@ public:
         return keys;
     }    
             
-    static inline void param1Ignore (DelayState& data, DurationType const& duration) throw() { }
     static inline void param1Process (DelayState& data, DurationType const& duration) throw()
     {
         data.paramsIn[DurationIn] = duration;
@@ -121,7 +120,7 @@ public:
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();
         const int numDecayChannels = decay.getNumChannels();
-        const int numChannels = plonk::max (numInputChannels, plonk::max (numDurationChannels, numDecayChannels));
+        const int numChannels = plonk::max (numInputChannels, numDurationChannels, numDecayChannels);
         
         UnitType mainUnit = UnitType::emptyChannels (numChannels);
         

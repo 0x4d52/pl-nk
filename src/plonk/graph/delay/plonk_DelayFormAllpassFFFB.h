@@ -172,7 +172,7 @@ public:
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();
         const int numCoeffChannels = coeff.getNumChannels();
-        const int numChannels = plonk::max (numInputChannels, plonk::max (numDurationChannels, numCoeffChannels));
+        const int numChannels = plonk::max (numInputChannels, numDurationChannels, numCoeffChannels);
         
         UnitType mainUnit = UnitType::emptyChannels (numChannels);
         

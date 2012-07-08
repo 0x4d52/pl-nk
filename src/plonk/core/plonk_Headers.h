@@ -161,6 +161,8 @@
 #include "../graph/delay/plonk_DelayFormAllpassFFFB.h"
 #include "../graph/delay/plonk_Delay1Param.h"
 #include "../graph/delay/plonk_Delay2Param.h"
+#include "../graph/delay/plonk_Delay3Param.h"
+#include "../graph/delay/plonk_Delay4Param.h"
 
 #include "../graph/control/plonk_EnvelopeChannel.h"
 
