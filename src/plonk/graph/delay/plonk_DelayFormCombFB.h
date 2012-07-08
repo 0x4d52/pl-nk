@@ -135,15 +135,19 @@ public:
     static inline void param1Ignore (Data&, DelayState&, DurationType const&) throw() { }
     static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
-        state.paramsIn[DurationIn] = duration;
-        state.paramsOut[DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (state.paramsOut[DurationInSamplesOut] >= 0 && state.paramsOut[DurationInSamplesOut] <= state.bufferLengthIndex);
+        if (state.paramsIn[DurationIn] != duration)
+        {
+            state.paramsIn[DurationIn] = duration;
+            state.paramsOut[DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
+            plonk_assert (state.paramsOut[DurationInSamplesOut] >= 0 && 
+                          state.paramsOut[DurationInSamplesOut] <= state.bufferLengthIndex);
+        }
     }
     
     static inline void param2Ignore (Data&, DelayState&, FeedbackType const&) throw() { }
     static inline void param2Process (Data&, DelayState& state, FeedbackType const& feedback) throw()
     {                                
-        state.paramsIn[FeedbackIn] = state.paramsOut[FeedbackOut] = feedback;
+        state.paramsIn[FeedbackIn] = state.paramsOut[FeedbackOut] = feedback; // probably faster not to check
     }
     
     template<InputFunction inputFunction, 

@@ -133,9 +133,13 @@ public:
     static inline void param1Ignore (Data&, DelayState&, DurationType const&) throw() { }
     static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
-        state.paramsIn[Duration] = duration;
-        state.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (state.paramsOut[DurationInSamples] >= 0 && state.paramsOut[DurationInSamples] <= state.bufferLengthIndex);
+        if (state.paramsIn[Duration] != duration)
+        {
+            state.paramsIn[Duration] = duration;
+            state.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
+            plonk_assert (state.paramsOut[DurationInSamples] >= 0 && 
+                          state.paramsOut[DurationInSamples] <= state.bufferLengthIndex);
+        }
     }
     
     template<InputFunction inputFunction, 
