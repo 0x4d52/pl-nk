@@ -49,5 +49,7 @@ template<class FormType> class Delay2ParamChannelInternal;
 
 template<class SampleType> class DelayFormCombFB;
 template<class SampleType> class DelayFormCombDecay;
+template<class SampleType> class DelayFormAllpassFFFB;
+template<class SampleType> class DelayFormAllPassDecay;
 
 #endif // PLONK_DELAYFORWARDDECLARATIONS_H

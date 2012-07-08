@@ -43,10 +43,12 @@
 #include "plonk_DelayForwardDeclarations.h"
 
 template<class SampleType>
-class DelayForm<SampleType, DelayFormType::AllpassFFFB, 2, 2>
-:   public DelayFormBase<SampleType, DelayFormType::AllpassFFFB, 2, 2>
+class DelayFormAllpassFFFB
+:   public DelayForm<SampleType, DelayFormType::AllpassFFFB, 2, 2>
 {
 public:
+    typedef DelayForm<SampleType, DelayFormType::AllpassFFFB, 2, 2> Base;
+    
     enum InParams
     {
         DurationIn,
@@ -61,9 +63,9 @@ public:
         NumOutParams
     };
     
-    typedef DelayFormData<SampleType, DelayFormType::AllpassFFFB, NumInParams, NumOutParams>   Data;
-    typedef typename Data::DelayState                                                           DelayState;
-    typedef DelayForm<SampleType, DelayFormType::AllpassFFFB, NumInParams, NumOutParams>       FormType;
+    typedef typename Base::Data Data;
+    typedef typename Data::DelayState                               DelayState;
+    typedef DelayFormAllpassFFFB                                    FormType;
     
     typedef SampleType                                              SampleDataType;
     typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
@@ -201,17 +203,17 @@ template<class SampleType>
 class AllpassFFFBUnit
 {
 public:    
-    typedef DelayForm<SampleType, DelayFormType::AllpassFFFB, 2, 2>    FormType;
+    typedef DelayFormAllpassFFFB<SampleType>        FormType;
     
-    typedef Delay2ParamChannelInternal<FormType>                        DelayInternal;
-    typedef UnitBase<SampleType>                                        UnitType;
-    typedef InputDictionary                                             Inputs;
+    typedef Delay2ParamChannelInternal<FormType>    DelayInternal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;
     
-    typedef typename DelayInternal::Param1Type                          DurationType;
-    typedef UnitBase<DurationType>                                      DurationUnitType;
+    typedef typename DelayInternal::Param1Type      DurationType;
+    typedef UnitBase<DurationType>                  DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type                          CoeffType;
-    typedef UnitBase<CoeffType>                                         CoeffUnitType;
+    typedef typename DelayInternal::Param2Type      CoeffType;
+    typedef UnitBase<CoeffType>                     CoeffUnitType;
     
     
     static inline UnitInfos getInfo() throw()

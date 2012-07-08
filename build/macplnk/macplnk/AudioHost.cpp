@@ -99,14 +99,14 @@ Unit AudioHost::constructGraph()
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return CombDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
 
-//    Unit input = BusRead::ar (Bus ("0"));
-//    return AllpassDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
+    Unit input = BusRead::ar (Bus ("0"));
+    return AllpassDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
 
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return CombFB::ar (input, Floats (0.03, 0.0299), 0.5);; 
 
-    Unit input = BusRead::ar (Bus ("0"));
-    return AllpassFFFB::ar (input, Floats (0.03, 0.0299), 0.5); 
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return AllpassFFFB::ar (input, Floats (0.03, 0.0299), 0.5); 
 
     
 //    Unit input = BusRead::ar (Bus ("0"));
