@@ -44,10 +44,12 @@
 
 
 template<class SampleType>
-class DelayForm<SampleType, DelayFormType::Delay, 1, 1>
-:   public DelayFormBase<SampleType, DelayFormType::Delay, 1, 1>
+class DelayFormDelay
+:   public DelayForm<SampleType, DelayFormType::Delay, 1, 1>
 {
 public:
+    typedef DelayForm<SampleType, DelayFormType::Delay, 1, 1>       Base;
+    
     enum InParams
     {
         Duration,
@@ -60,9 +62,9 @@ public:
         NumOutParams
     };
 
-    typedef DelayFormData<SampleType, DelayFormType::Delay, NumInParams, NumOutParams>  Data;
-    typedef typename Data::DelayState                                                   DelayState;
-    typedef DelayForm<SampleType, DelayFormType::Delay, NumInParams, NumOutParams>      FormType;
+    typedef typename Base::Data                                     Data;
+    typedef typename Data::DelayState                               DelayState;
+    typedef DelayFormDelay                                          FormType;
  
     typedef SampleType                                              SampleDataType;
     typedef Delay1ParamChannelInternal<FormType>                    DelayInternal;
@@ -208,14 +210,14 @@ template<class SampleType>
 class DelayUnit
 {
 public:    
-    typedef DelayForm<SampleType, DelayFormType::Delay, 1, 1>       FormType;
+    typedef DelayFormDelay<SampleType>              FormType;
     
-    typedef Delay1ParamChannelInternal<FormType>                    DelayInternal;
-    typedef UnitBase<SampleType>                                    UnitType;
-    typedef InputDictionary                                         Inputs;
+    typedef Delay1ParamChannelInternal<FormType>    DelayInternal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;
     
-    typedef typename DelayInternal::Param1Type                      DurationType;
-    typedef UnitBase<DurationType>                                  DurationUnitType;
+    typedef typename DelayInternal::Param1Type      DurationType;
+    typedef UnitBase<DurationType>                  DurationUnitType;
     
     
     static inline UnitInfos getInfo() throw()

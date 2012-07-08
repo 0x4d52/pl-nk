@@ -46,7 +46,10 @@ template<class SampleType, signed Form, signed NumInParams, signed NumOutParams>
 
 template<class FormType> class Delay1ParamChannelInternal;
 template<class FormType> class Delay2ParamChannelInternal;
+template<class FormType> class Delay3ParamChannelInternal;
+template<class FormType> class Delay4ParamChannelInternal;
 
+template<class SampleType> class DelayFormDelay;
 template<class SampleType> class DelayFormCombFB;
 template<class SampleType> class DelayFormCombDecay;
 template<class SampleType> class DelayFormAllpassFFFB;
