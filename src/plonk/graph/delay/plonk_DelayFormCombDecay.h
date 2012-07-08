@@ -86,19 +86,19 @@ public:
         return keys;
     }    
         
-    static inline void param1Process (DelayState& data, DurationType const& duration) throw()
+    static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
-        data.paramsIn[DurationIn] = duration;
-        data.paramsOut[Base::DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (data.paramsOut[Base::DurationInSamplesOut] >= 0 && data.paramsOut[Base::DurationInSamplesOut] <= data.bufferLengthIndex);
-        data.paramsOut[Base::FeedbackOut] = plonk::decayFeedback (data.paramsIn[DurationIn], data.paramsIn[DecayIn]);
+        state.paramsIn[DurationIn] = duration;
+        state.paramsOut[Base::DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
+        plonk_assert (state.paramsOut[Base::DurationInSamplesOut] >= 0 && state.paramsOut[Base::DurationInSamplesOut] <= state.bufferLengthIndex);
+        state.paramsOut[Base::FeedbackOut] = plonk::decayFeedback (state.paramsIn[DurationIn], state.paramsIn[DecayIn]);
     }
 
-    static inline void param2Ignore (DelayState& data, DecayType const& decay) throw() { }
-    static inline void param2Process (DelayState& data, DecayType const& decay) throw()
+    static inline void param2Ignore (Data&, DelayState&, DecayType const&) throw() { }
+    static inline void param2Process (Data&, DelayState& state, DecayType const& decay) throw()
     {                                
-        data.paramsIn[DecayIn] = decay;
-        data.paramsOut[Base::FeedbackOut] = plonk::decayFeedback (data.paramsIn[DurationIn], decay);
+        state.paramsIn[DecayIn] = decay;
+        state.paramsOut[Base::FeedbackOut] = plonk::decayFeedback (state.paramsIn[DurationIn], decay);
     }
         
     static inline UnitType ar (UnitType const& input,

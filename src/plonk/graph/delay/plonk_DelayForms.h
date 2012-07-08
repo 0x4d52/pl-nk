@@ -54,7 +54,7 @@ struct DelayFormData
     
     struct DelayState
     {
-        ChannelInternalCore::Data base;
+//        ChannelInternalCore::Data base;
         
         SampleType* outputSamples;
         int outputBufferLength;

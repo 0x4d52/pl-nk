@@ -78,12 +78,12 @@ public:
     
     typedef InterpLinear<SampleType,DurationType>                   InterpType;
     
-    typedef void (*InputFunction)  (DelayState&);
-    typedef void (*ReadFunction)   (DelayState&);
-    typedef void (*WriteFunction)  (DelayState&);
-    typedef void (*OutputFunction) (DelayState&);
-    typedef void (*Param1Function) (DelayState&, Param1Type const&);
-    typedef void (*Param2Function) (DelayState&, Param2Type const&);
+    typedef void (*InputFunction)  (Data&, DelayState&);
+    typedef void (*ReadFunction)   (Data&, DelayState&);
+    typedef void (*WriteFunction)  (Data&, DelayState&);
+    typedef void (*OutputFunction) (Data&, DelayState&);
+    typedef void (*Param1Function) (Data&, DelayState&, Param1Type const&);
+    typedef void (*Param2Function) (Data&, DelayState&, Param2Type const&);
     
     static inline IntArray getInputKeys() throw()
     {
@@ -91,19 +91,19 @@ public:
         return keys;
     }    
             
-    static inline void param1Process (DelayState& data, DurationType const& duration) throw()
+    static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
-        data.paramsIn[DurationIn] = duration;
-        data.paramsOut[Base::DurationInSamplesOut] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
-        plonk_assert (data.paramsOut[Base::DurationInSamplesOut] > 0 && data.paramsOut[Base::DurationInSamplesOut] <= data.bufferLengthIndex);
-        data.paramsOut[Base::CoeffOut] = plonk::decayFeedback (data.paramsIn[DurationIn], data.paramsIn[DecayIn]);
+        state.paramsIn[DurationIn] = duration;
+        state.paramsOut[Base::DurationInSamplesOut] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
+        plonk_assert (state.paramsOut[Base::DurationInSamplesOut] > 0 && state.paramsOut[Base::DurationInSamplesOut] <= state.bufferLengthIndex);
+        state.paramsOut[Base::CoeffOut] = plonk::decayFeedback (state.paramsIn[DurationIn], state.paramsIn[DecayIn]);
     }
     
-    static inline void param2Ignore (DelayState& data, DecayType const& decay) throw() { }
-    static inline void param2Process (DelayState& data, DecayType const& decay) throw()
+    static inline void param2Ignore (Data&, DelayState&, DecayType const&) throw() { }
+    static inline void param2Process (Data&, DelayState& state, DecayType const& decay) throw()
     {                                
-        data.paramsIn[DecayIn] = decay;
-        data.paramsOut[Base::CoeffOut] = plonk::decayFeedback (data.paramsIn[DurationIn], decay);
+        state.paramsIn[DecayIn] = decay;
+        state.paramsOut[Base::CoeffOut] = plonk::decayFeedback (state.paramsIn[DurationIn], decay);
     }
         
     static inline UnitType ar (UnitType const& input,

@@ -194,9 +194,9 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {
-                    param1Function (state, *param1Samples++);  
-                    param2Function (state, *param2Samples++);                    
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    param1Function (data, state, *param1Samples++);  
+                    param2Function (data, state, *param2Samples++);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);                    
                 }
                 
                 if (state.writePosition >= state.bufferLength)
@@ -205,8 +205,8 @@ private:
         }
         else if ((param1BufferLength == 1) && (param2BufferLength == 1))
         {
-            param1Function (state, param1Samples[0]);                    
-            param2Function (state, param2Samples[0]);                    
+            param1Function (data, state, param1Samples[0]);                    
+            param2Function (data, state, param2Samples[0]);                    
             
             while (numSamplesToProcess > 0)
             {
@@ -215,7 +215,7 @@ private:
                 numSamplesToProcess -= numSamplesThisTime;
                 
                 while (numSamplesThisTime--) 
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);
                 
                 if (state.writePosition >= state.bufferLength)
                     state.writePosition = 0;
@@ -223,7 +223,7 @@ private:
         }
         else if ((param1BufferLength == 1) && (param2BufferLength == outputBufferLength))
         {
-            param1Function (state, param1Samples[0]);                    
+            param1Function (data, state, param1Samples[0]);                    
             
             while (numSamplesToProcess > 0)
             {
@@ -233,8 +233,8 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {
-                    param2Function (state, *param2Samples++);
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    param2Function (data, state, *param2Samples++);
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);                    
                 }
                 
                 if (state.writePosition >= state.bufferLength)
@@ -243,7 +243,7 @@ private:
         }
         else if ((param1BufferLength == outputBufferLength) && (param2BufferLength == 1))
         {
-            param2Function (state, param2Samples[0]);                    
+            param2Function (data, state, param2Samples[0]);                    
             
             while (numSamplesToProcess > 0)
             {
@@ -253,8 +253,8 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {
-                    param1Function (state, *param1Samples++);
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    param1Function (data, state, *param1Samples++);
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);                    
                 }
                 
                 if (state.writePosition >= state.bufferLength)
@@ -276,9 +276,9 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {                    
-                    param1Function (state, param1Samples[int (param1Position)]);   
-                    param2Function (state, param2Samples[int (param2Position)]);                    
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
+                    param1Function (data, state, param1Samples[int (param1Position)]);   
+                    param2Function (data, state, param2Samples[int (param2Position)]);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);
                     param1Position += param1Increment;
                     param2Position += param2Increment;
                 }

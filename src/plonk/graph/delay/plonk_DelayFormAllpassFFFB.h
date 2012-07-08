@@ -85,12 +85,12 @@ public:
     
     typedef InterpLinear<SampleType,DurationType>                   InterpType;
     
-    typedef void (*InputFunction)  (DelayState&);
-    typedef void (*ReadFunction)   (DelayState&);
-    typedef void (*WriteFunction)  (DelayState&);
-    typedef void (*OutputFunction) (DelayState&);
-    typedef void (*Param1Function) (DelayState&, Param1Type const&);
-    typedef void (*Param2Function) (DelayState&, Param2Type const&);
+    typedef void (*InputFunction)  (Data&, DelayState&);
+    typedef void (*ReadFunction)   (Data&, DelayState&);
+    typedef void (*WriteFunction)  (Data&, DelayState&);
+    typedef void (*OutputFunction) (Data&, DelayState&);
+    typedef void (*Param1Function) (Data&, DelayState&, Param1Type const&);
+    typedef void (*Param2Function) (Data&, DelayState&, Param2Type const&);
     
     static inline IntArray getInputKeys() throw()
     {
@@ -98,64 +98,64 @@ public:
         return keys;
     }    
     
-    static inline void inputIgnore (DelayState&) throw() { plonk_assertfalse; }
-    static inline void inputRead (DelayState& data) throw()
+    static inline void inputIgnore (Data&, DelayState&) throw() { plonk_assertfalse; }
+    static inline void inputRead (Data&, DelayState& state) throw()
     {
-        data.inputValue = *data.inputSamples++;
+        state.inputValue = *state.inputSamples++;
     }
     
-    static inline void readIgnore (DelayState&) throw() { }
-    static inline void readRead (DelayState& data) throw()
+    static inline void readIgnore (Data&, DelayState&) throw() { }
+    static inline void readRead (Data&, DelayState& state) throw()
     {
-        DurationType readPosition = DurationType (data.writePosition) - data.paramsOut[DurationInSamplesOut];
-        if (readPosition < data.buffer0)
-            readPosition += data.bufferLengthIndex;
-        plonk_assert (readPosition >= 0 && readPosition <= data.bufferLengthIndex);
-        data.readValue = InterpType::lookup (data.bufferSamples, readPosition);
+        DurationType readPosition = DurationType (state.writePosition) - state.paramsOut[DurationInSamplesOut];
+        if (readPosition < state.buffer0)
+            readPosition += state.bufferLengthIndex;
+        plonk_assert (readPosition >= 0 && readPosition <= state.bufferLengthIndex);
+        state.readValue = InterpType::lookup (state.bufferSamples, readPosition);
     }
     
-    static inline void writeIgnore (DelayState&) throw() { }
-    static inline void writeWrite (DelayState& data) throw()
+    static inline void writeIgnore (Data&, DelayState&) throw() { }
+    static inline void writeWrite (Data&, DelayState& state) throw()
     {
-        plonk_assert (data.writePosition >= 0 && data.writePosition < data.bufferLength);
-        data.writeValue = data.inputValue + data.paramsOut[CoeffOut] * data.readValue;
-        data.bufferSamples[data.writePosition] = data.writeValue;
-        if (data.writePosition == 0)
-            data.bufferSamples[data.bufferLength] = data.writeValue; // for interpolation
+        plonk_assert (state.writePosition >= 0 && state.writePosition < state.bufferLength);
+        state.writeValue = state.inputValue + state.paramsOut[CoeffOut] * state.readValue;
+        state.bufferSamples[state.writePosition] = state.writeValue;
+        if (state.writePosition == 0)
+            state.bufferSamples[state.bufferLength] = state.writeValue; // for interpolation
     }
     
-    static inline void outputIgnore (DelayState&) throw() { }
-    static inline void outputWrite (DelayState& data) throw()
+    static inline void outputIgnore (Data&, DelayState&) throw() { }
+    static inline void outputWrite (Data&, DelayState& state) throw()
     {
-        data.outputValue = data.readValue - data.paramsOut[CoeffOut] * data.writeValue;
-        *data.outputSamples++ = data.outputValue;
-        data.writePosition++;
+        state.outputValue = state.readValue - state.paramsOut[CoeffOut] * state.writeValue;
+        *state.outputSamples++ = state.outputValue;
+        state.writePosition++;
     }
     
-    static inline void param1Ignore (DelayState& data, DurationType const& duration) throw() { }
-    static inline void param1Process (DelayState& data, DurationType const& duration) throw()
+    static inline void param1Ignore (Data&, DelayState&, DurationType const&) throw() { }
+    static inline void param1Process (Data& data, DelayState& state, DurationType const& duration) throw()
     {
-        data.paramsIn[DurationIn] = duration;
-        data.paramsOut[DurationInSamplesOut] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
-        plonk_assert (data.paramsOut[DurationInSamplesOut] > 0 && data.paramsOut[DurationInSamplesOut] <= data.bufferLengthIndex);
+        state.paramsIn[DurationIn] = duration;
+        state.paramsOut[DurationInSamplesOut] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
+        plonk_assert (state.paramsOut[DurationInSamplesOut] > 0 && state.paramsOut[DurationInSamplesOut] <= state.bufferLengthIndex);
     }
     
-    static inline void param2Ignore (DelayState& data, CoeffType const& decay) throw() { }
-    static inline void param2Process (DelayState& data, CoeffType const& decay) throw()
+    static inline void param2Ignore (Data&, DelayState&, CoeffType const&) throw() { }
+    static inline void param2Process (Data&, DelayState& state, CoeffType const& decay) throw()
     {                                
-        data.paramsOut[CoeffIn] = data.paramsOut[CoeffOut] = decay;
+        state.paramsOut[CoeffIn] = state.paramsOut[CoeffOut] = decay;
     }
     
     template<InputFunction inputFunction, 
              ReadFunction readFunction,
              WriteFunction writeFunction,
              OutputFunction outputFunction>
-    static inline void tick (DelayState& data) throw()
+    static inline void tick (Data& data, DelayState& state) throw()
     {
-        inputFunction (data);
-        readFunction (data);
-        writeFunction (data);
-        outputFunction (data);
+        inputFunction (data, state);
+        readFunction (data, state);
+        writeFunction (data, state);
+        outputFunction (data, state);
     }
     
     static inline UnitType ar (UnitType const& input,

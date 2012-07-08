@@ -46,8 +46,7 @@
 /** Delay processor with two control parameters. */
 template<class FormType>
 class Delay4ParamChannelInternal
-:   public ProxyOwnerChannelInternal<typename FormType::SampleDataType, 
-                                     typename FormType::Data>
+:   public DelayChannelInternalBase<FormType>
 {
 public:
     typedef typename FormType::SampleDataType               SampleType;
@@ -58,7 +57,7 @@ public:
 
     typedef ChannelBase<SampleType>                         ChannelType;
     typedef Delay4ParamChannelInternal<FormType>            DelayInternal;
-    typedef ProxyOwnerChannelInternal<SampleType,Data>      Internal;
+    typedef DelayChannelInternalBase<FormType>              Internal;
     typedef ChannelInternalBase<SampleType>                 InternalBase;
     typedef UnitBase<SampleType>                            UnitType;
     typedef InputDictionary                                 Inputs;
@@ -108,42 +107,12 @@ public:
                   inputs, data, blockSize, sampleRate)
     {
     }
-    
-    Text getName() const throw()
-    {
-        return FormType::getName();
-    }       
-    
-    IntArray getInputKeys() const throw()
-    {
-        return FormType::getInputKeys();
-    }    
         
-    void initChannel (const int channel) throw()
-    {        
-        const UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
-        
-        if ((channel % this->getNumChannels()) == 0)
-        {
-            this->setBlockSize (BlockSize::decide (inputUnit.getBlockSize (channel),
-                                                   this->getBlockSize()));
-            this->setSampleRate (SampleRate::decide (inputUnit.getSampleRate (channel),
-                                                     this->getSampleRate()));
-            
-            this->setOverlap (inputUnit.getOverlap (channel));
-            
-            for (int i = 0; i < this->getNumChannels(); ++i)
-                this->initProxyValue (i, SampleType (0));            
-            
-            Data& data = this->getState();
-            this->circularBuffer = Buffer::newClear (int (data.maximumDuration * data.base.sampleRate + 0.5) + 1);
-        }
-    }    
-    
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {
         Data& data = this->getState();
-        
+        DelayStateArray& delayStates = this->getDelayStates();
+
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
         const Buffer inputBuffer (inputUnit.process (info, 0));
         Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
@@ -168,7 +137,7 @@ public:
                                      param2Unit,
                                      param3Unit,
                                      param4Unit,
-                                     this->circularBuffer, data, info, 0);
+                                     data, delayStates.atUnchecked (0), info, 0);
         
         const int numChannels = this->getNumChannels();
         
@@ -191,7 +160,7 @@ public:
                  param2Unit,
                  param3Unit,
                  param4Unit,
-                 this->circularBuffer, data, info, i);
+                 data, delayStates.atUnchecked (i), info, i);
         }
         
         data.writePosition = writePosition; // update the write position from the first channel write
@@ -225,22 +194,14 @@ private:
                         Param4UnitType& param4Unit,
                         Buffer& buffer,
                         Data& data,
+                        DelayState& state,
                         ProcessInfo& info, 
                         const int channel) throw()
     {        
-        DelayState state = {
-            { data.base.sampleRate, data.base.sampleDuration },
-            outputSamples,
-            outputBufferLength,
-            inputSamples,
-            buffer.getArray(),
-            buffer.length() - 1 ,
-            DurationType (buffer.length()) - Math<DurationType>::get1(),
-            DurationType (0),
-            data.writePosition,
-            SampleType (0), SampleType (0), SampleType (0), SampleType (0),
-            { 0, 0, 0, 0 }, { 0, 0, 0, 0 }
-        };
+        state.outputSamples = outputSamples;
+        state.outputBufferLength = outputBufferLength;
+        state.inputSamples = inputSamples;
+        state.writePosition = data.writePosition;
 
         const Param1BufferType param1Buffer (param1Unit.process (info, channel));
         const Param1Type* param1Samples = param1Buffer.getArray();
@@ -273,12 +234,12 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {
-                    param1Function (state, *param1Samples++);  
-                    param2Function (state, *param2Samples++);  
-                    param3Function (state, *param3Samples++);                    
-                    param4Function (state, *param4Samples++);                    
+                    param1Function (data, state, *param1Samples++);  
+                    param2Function (data, state, *param2Samples++);  
+                    param3Function (data, state, *param3Samples++);                    
+                    param4Function (data, state, *param4Samples++);                    
 
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);                    
                 }
                 
                 if (state.writePosition >= state.bufferLength)
@@ -290,10 +251,10 @@ private:
                  (param3BufferLength == 1) &&
                  (param4BufferLength == 1))
         {
-            param1Function (state, param1Samples[0]);                    
-            param2Function (state, param2Samples[0]);  
-            param3Function (state, param3Samples[0]); 
-            param4Function (state, param4Samples[0]);                    
+            param1Function (data, state, param1Samples[0]);                    
+            param2Function (data, state, param2Samples[0]);  
+            param3Function (data, state, param3Samples[0]); 
+            param4Function (data, state, param4Samples[0]);                    
             
             while (numSamplesToProcess > 0)
             {
@@ -302,7 +263,7 @@ private:
                 numSamplesToProcess -= numSamplesThisTime;
                 
                 while (numSamplesThisTime--) 
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);
                 
                 if (state.writePosition >= state.bufferLength)
                     state.writePosition = 0;
@@ -327,11 +288,11 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {                    
-                    param1Function (state, param1Samples[int (param1Position)]);   
-                    param2Function (state, param2Samples[int (param2Position)]);       
-                    param3Function (state, param3Samples[int (param3Position)]);       
-                    param4Function (state, param4Samples[int (param4Position)]);                    
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
+                    param1Function (data, state, param1Samples[int (param1Position)]);   
+                    param2Function (data, state, param2Samples[int (param2Position)]);       
+                    param3Function (data, state, param3Samples[int (param3Position)]);       
+                    param4Function (data, state, param4Samples[int (param4Position)]);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);
                     param1Position += param1Increment;
                     param2Position += param2Increment;
                     param3Position += param3Increment;
@@ -345,11 +306,6 @@ private:
         
         return state.writePosition;
     }
-
-        
-private:
-    Buffer circularBuffer;
-    DelayStateArray state;
 };
 
 

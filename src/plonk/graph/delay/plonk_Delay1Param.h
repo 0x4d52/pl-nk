@@ -175,7 +175,7 @@ private:
                 while (numSamplesThisTime--) 
                 {
                     param1Function (state, *param1Samples++);                    
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);                    
                 }
                 
                 if (state.writePosition >= state.bufferLength)
@@ -193,7 +193,7 @@ private:
                 numSamplesToProcess -= numSamplesThisTime;
                 
                 while (numSamplesThisTime--) 
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);                    
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);                    
                 
                 if (state.writePosition >= state.bufferLength)
                     state.writePosition = 0;
@@ -213,7 +213,7 @@ private:
                 while (numSamplesThisTime--) 
                 {                    
                     param1Function (state, param1Samples[int (param1Position)]);                    
-                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (state);
+                    FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);
                     param1Position += param1Increment;
                 }
                 
@@ -225,8 +225,6 @@ private:
         return state.writePosition;
     }
 };
-
-
 
 
 

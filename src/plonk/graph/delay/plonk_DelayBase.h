@@ -115,8 +115,6 @@ public:
                 
                 Memory::zero (delayState);
                 
-                delayState.base.sampleRate = data.base.sampleRate;
-                delayState.base.sampleDuration = data.base.sampleDuration;
                 delayState.bufferSamples = circularBuffer.getArray();
                 delayState.bufferLength = circularBuffer.length() - 1 ,
                 delayState.bufferLengthIndex = DurationType (circularBuffer.length()) - Math<DurationType>::get1(),
