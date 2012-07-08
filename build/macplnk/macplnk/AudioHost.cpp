@@ -95,9 +95,9 @@ Unit AudioHost::constructGraph()
 //                            1.0,
 //                            Floats (0.5, 0.5, 0.4, 0.4, 0.3, 0.3, 0.2, 0.2));
 //    return Mixer::ar (delay.group (2));    
-//    
-//    Unit input = BusRead::ar (Bus ("0"));
-//    return CombDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
+    
+    Unit input = BusRead::ar (Bus ("0"));
+    return CombDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
 
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return AllpassDecay::ar (input, Floats (0.03, 0.0299), 10.0); 
@@ -109,8 +109,8 @@ Unit AudioHost::constructGraph()
 //    return AllpassFFFB::ar (input, Floats (0.03, 0.0299), 0.5); 
 
     
-    Unit input = BusRead::ar (Bus ("0"));
-    return Delay::ar (input, Floats (0.25, 0.5), 1.0);
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return Delay::ar (input, Floats (0.25, 0.5), 1.0);
     
 //    Unit input = BusRead::ar (Bus ("0"));
 //    const int size = 50;
