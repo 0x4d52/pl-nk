@@ -49,6 +49,7 @@ public:
         Delay,
         CombDecay,
         CombFB,
+        CombLPF,
         AllpassDecay,
         AllpassFFFB,
         NumNames

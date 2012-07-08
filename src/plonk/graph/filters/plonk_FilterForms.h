@@ -456,7 +456,7 @@ public:
     typedef SampleType                                          SampleDataType;
     typedef UnitBase<SampleType>                                UnitType;
     typedef NumericalArray<SampleType>                          Buffer;
-    typedef FilterData<SampleType, FilterFormType::B2>      Data;
+    typedef FilterData<SampleType, FilterFormType::B2>          Data;
 
     enum Coeffs
     {

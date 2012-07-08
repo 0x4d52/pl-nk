@@ -54,6 +54,8 @@ public:
     typedef typename FormType::Data                         Data;
     typedef typename Data::DelayState                       DelayState;
 
+    typedef ObjectArray<DelayState>                         DelayStateArray;
+
     typedef ChannelBase<SampleType>                         ChannelType;
     typedef Delay4ParamChannelInternal<FormType>            DelayInternal;
     typedef ProxyOwnerChannelInternal<SampleType,Data>      Internal;
@@ -347,6 +349,7 @@ private:
         
 private:
     Buffer circularBuffer;
+    DelayStateArray state;
 };
 
 

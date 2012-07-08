@@ -54,15 +54,15 @@ struct DelayFormData
     
     struct DelayState
     {
-        const ChannelInternalCore::Data base;
+        ChannelInternalCore::Data base;
         
         SampleType* outputSamples;
-        const int outputBufferLength;
+        int outputBufferLength;
         const SampleType* inputSamples;
-        SampleType* const bufferSamples;
-        const int bufferLength;
-        const IndexType bufferLengthIndex;
-        const IndexType buffer0;
+        SampleType* bufferSamples;
+        int bufferLength;
+        IndexType bufferLengthIndex;
+        IndexType buffer0;
 
         int writePosition;
         
@@ -71,8 +71,8 @@ struct DelayFormData
         SampleType writeValue;
         SampleType outputValue;
         
-        IndexType paramsIn[NumInParams];
         IndexType paramsOut[NumOutParams];
+        IndexType paramsIn[NumInParams];
     };
 };      
 

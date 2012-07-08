@@ -50,6 +50,7 @@ DelayFormType::Name DelayFormType::fromInt (const int value) throw()
         DelayFormType::Delay,
         DelayFormType::CombDecay,
         DelayFormType::CombFB,
+        DelayFormType::CombLPF,
         DelayFormType::AllpassDecay,
         DelayFormType::AllpassFFFB,
     };
@@ -72,6 +73,7 @@ Text DelayFormType::getName (const int index) throw()
         "Delay",
         "CombDecay",
         "CombFB",
+        "CombLPF",
         "AllpassDecay",
         "AllpassFFFB",
     };
