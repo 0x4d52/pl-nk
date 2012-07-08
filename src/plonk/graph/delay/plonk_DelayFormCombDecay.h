@@ -86,6 +86,7 @@ public:
         return keys;
     }    
         
+    static inline void param1Ignore (DelayState& data, DurationType const& duration) throw() { }
     static inline void param1Process (DelayState& data, DurationType const& duration) throw()
     {
         data.paramsIn[DurationIn] = duration;
@@ -93,14 +94,14 @@ public:
         plonk_assert (data.paramsOut[Base::DurationInSamplesOut] >= 0 && data.paramsOut[Base::DurationInSamplesOut] <= data.bufferLengthIndex);
         data.paramsOut[Base::FeedbackOut] = plonk::decayFeedback (data.paramsIn[DurationIn], data.paramsIn[DecayIn]);
     }
-    
+
+    static inline void param2Ignore (DelayState& data, DecayType const& decay) throw() { }
     static inline void param2Process (DelayState& data, DecayType const& decay) throw()
     {                                
         data.paramsIn[DecayIn] = decay;
         data.paramsOut[Base::FeedbackOut] = plonk::decayFeedback (data.paramsIn[DurationIn], decay);
     }
         
-    /** Create an audio rate wavetable oscillator. */
     static inline UnitType ar (UnitType const& input,
                                DurationUnitType const& duration,
                                DecayUnitType const& decay,
@@ -183,7 +184,7 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate wavetable oscillator. */
+    /** Create an audio rate comb filter. */
     static UnitType ar (UnitType const& input,
                         DurationUnitType const& duration = DurationType (0.5),
                         DecayUnitType const& decay = DecayType (1.0),

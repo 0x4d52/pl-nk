@@ -36,36 +36,34 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_DELAYFORMCOMBFB_H
-#define PLONK_DELAYFORMCOMBFB_H
+#ifndef PLONK_DELAYFORMALLPASSFFFB_H
+#define PLONK_DELAYFORMALLPASSFFFB_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "plonk_DelayForwardDeclarations.h"
 
 template<class SampleType>
-class DelayFormCombFB
-:   public DelayForm<SampleType, DelayFormType::CombFB, 2, 2>
+class DelayForm<SampleType, DelayFormType::AllpassFFFB, 2, 2>
+:   public DelayFormBase<SampleType, DelayFormType::AllpassFFFB, 2, 2>
 {
 public:
-    typedef DelayForm<SampleType, DelayFormType::CombFB, 2, 2>      Base;
-    
     enum InParams
     {
         DurationIn,
-        FeedbackIn,
+        CoeffIn,
         NumInParams
     };
     
     enum OutParams
     {
         DurationInSamplesOut,
-        FeedbackOut,
+        CoeffOut,
         NumOutParams
     };
-
-    typedef typename Base::Data                                     Data;
-    typedef typename Data::DelayState                               DelayState;
-    typedef DelayFormCombFB                                         FormType;
+    
+    typedef DelayFormData<SampleType, DelayFormType::AllpassFFFB, NumInParams, NumOutParams>   Data;
+    typedef typename Data::DelayState                                                           DelayState;
+    typedef DelayForm<SampleType, DelayFormType::AllpassFFFB, NumInParams, NumOutParams>       FormType;
     
     typedef SampleType                                              SampleDataType;
     typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
@@ -78,10 +76,10 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType             Param1Type;  
     typedef Param1Type                                              DurationType;    
     typedef UnitBase<DurationType>                                  DurationUnitType;
-
+    
     typedef typename TypeUtility<SampleType>::IndexType             Param2Type;  
-    typedef Param2Type                                              FeedbackType;    
-    typedef UnitBase<FeedbackType>                                  FeedbackUnitType;
+    typedef Param2Type                                              CoeffType;    
+    typedef UnitBase<CoeffType>                                     CoeffUnitType;
     
     typedef InterpLinear<SampleType,DurationType>                   InterpType;
     
@@ -94,11 +92,11 @@ public:
     
     static inline IntArray getInputKeys() throw()
     {
-        const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Feedback);
+        const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Coeffs);
         return keys;
     }    
     
-    static inline void inputIgnore (DelayState&) throw() { }
+    static inline void inputIgnore (DelayState&) throw() { plonk_assertfalse; }
     static inline void inputRead (DelayState& data) throw()
     {
         data.inputValue = *data.inputSamples++;
@@ -118,7 +116,7 @@ public:
     static inline void writeWrite (DelayState& data) throw()
     {
         plonk_assert (data.writePosition >= 0 && data.writePosition < data.bufferLength);
-        data.writeValue = data.inputValue + data.paramsOut[FeedbackOut] * data.readValue;
+        data.writeValue = data.inputValue + data.paramsOut[CoeffOut] * data.readValue;
         data.bufferSamples[data.writePosition] = data.writeValue;
         if (data.writePosition == 0)
             data.bufferSamples[data.bufferLength] = data.writeValue; // for interpolation
@@ -127,7 +125,7 @@ public:
     static inline void outputIgnore (DelayState&) throw() { }
     static inline void outputWrite (DelayState& data) throw()
     {
-        data.outputValue = data.readValue;
+        data.outputValue = data.readValue - data.paramsOut[CoeffOut] * data.writeValue;
         *data.outputSamples++ = data.outputValue;
         data.writePosition++;
     }
@@ -136,14 +134,14 @@ public:
     static inline void param1Process (DelayState& data, DurationType const& duration) throw()
     {
         data.paramsIn[DurationIn] = duration;
-        data.paramsOut[DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (data.paramsOut[DurationInSamplesOut] >= 0 && data.paramsOut[DurationInSamplesOut] <= data.bufferLengthIndex);
+        data.paramsOut[DurationInSamplesOut] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
+        plonk_assert (data.paramsOut[DurationInSamplesOut] > 0 && data.paramsOut[DurationInSamplesOut] <= data.bufferLengthIndex);
     }
     
-    static inline void param2Ignore (DelayState& data, FeedbackType const& feedback) throw() { }
-    static inline void param2Process (DelayState& data, FeedbackType const& feedback) throw()
+    static inline void param2Ignore (DelayState& data, CoeffType const& decay) throw() { }
+    static inline void param2Process (DelayState& data, CoeffType const& decay) throw()
     {                                
-        data.paramsIn[FeedbackIn] = data.paramsOut[FeedbackOut] = feedback;
+        data.paramsOut[CoeffIn] = data.paramsOut[CoeffOut] = decay;
     }
     
     template<InputFunction inputFunction, 
@@ -158,10 +156,9 @@ public:
         outputFunction (data);
     }
     
-    /** Create an audio rate wavetable oscillator. */
     static inline UnitType ar (UnitType const& input,
                                DurationUnitType const& duration,
-                               FeedbackUnitType const& feedback,
+                               CoeffUnitType const& coeff,
                                const DurationType maximumDuration,
                                UnitType const& mul,
                                UnitType const& add,
@@ -172,8 +169,8 @@ public:
         
         const int numInputChannels = input.getNumChannels();
         const int numDurationChannels = duration.getNumChannels();
-        const int numFeedbackChannels = feedback.getNumChannels();
-        const int numChannels = plonk::max (numInputChannels, plonk::max (numDurationChannels, numFeedbackChannels));
+        const int numCoeffChannels = coeff.getNumChannels();
+        const int numChannels = plonk::max (numInputChannels, plonk::max (numDurationChannels, numCoeffChannels));
         
         UnitType mainUnit = UnitType::emptyChannels (numChannels);
         
@@ -182,7 +179,7 @@ public:
             Inputs inputs;
             inputs.put (IOKey::Generic, input[i]);
             inputs.put (IOKey::Duration, duration[i]);
-            inputs.put (IOKey::Feedback, feedback[i]);
+            inputs.put (IOKey::Coeffs, coeff[i]);
             
             UnitType unit = UnitType::template createFromInputs<DelayInternal> (inputs, 
                                                                                 data, 
@@ -199,29 +196,30 @@ public:
 //------------------------------------------------------------------------------
 
 
-/** A comb filter setting the feedback amount directly. */
+/** An allpass delay setting the feedforward and feeback coefficient directly. */
 template<class SampleType>
-class CombFBUnit
+class AllpassFFFBUnit
 {
 public:    
-    typedef DelayFormCombFB<SampleType>             FormType;
+    typedef DelayForm<SampleType, DelayFormType::AllpassFFFB, 2, 2>    FormType;
     
-    typedef Delay2ParamChannelInternal<FormType>    DelayInternal;
-    typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;
+    typedef Delay2ParamChannelInternal<FormType>                        DelayInternal;
+    typedef UnitBase<SampleType>                                        UnitType;
+    typedef InputDictionary                                             Inputs;
     
-    typedef typename DelayInternal::Param1Type      DurationType;
-    typedef UnitBase<DurationType>                  DurationUnitType;
+    typedef typename DelayInternal::Param1Type                          DurationType;
+    typedef UnitBase<DurationType>                                      DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type      FeedbackType;
-    typedef UnitBase<FeedbackType>                  FeedbackUnitType;
+    typedef typename DelayInternal::Param2Type                          CoeffType;
+    typedef UnitBase<CoeffType>                                         CoeffUnitType;
+    
     
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
         
-        return UnitInfo ("CombFB", "A comb filter setting the feedback amount directly.",
+        return UnitInfo ("AllpassDecay", "An allpass delay setting the feedforward and feeback coefficient directly.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
@@ -231,7 +229,7 @@ public:
                          // inputs
                          IOKey::Generic,            Measure::None,      IOInfo::NoDefault,  IOLimit::None,
                          IOKey::Duration,           Measure::Seconds,   0.5,                IOLimit::Minimum,   Measure::Seconds,   0.0,
-                         IOKey::Feedback,           Measure::Factor,    0.5,                IOLimit::None,
+                         IOKey::Coeffs,             Measure::Factor,    0.5,                IOLimit::None,
                          IOKey::MaximumDuration,    Measure::Seconds,   1.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
@@ -240,23 +238,23 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate comb filter. */
+    /** Create an audio rate allpass delay. */
     static UnitType ar (UnitType const& input,
                         DurationUnitType const& duration = DurationType (0.5),
-                        FeedbackUnitType const& feedback = FeedbackType (0.5),
+                        CoeffUnitType const& coeff = CoeffType (0.5),
                         const DurationType maximumDuration = DurationType (1.0),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
-        return FormType::ar (input, duration, feedback, maximumDuration, mul, add, preferredBlockSize, preferredSampleRate);
+        return FormType::ar (input, duration, coeff, maximumDuration, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
 };
 
-typedef CombFBUnit<PLONK_TYPE_DEFAULT> CombFB;
+typedef AllpassFFFBUnit<PLONK_TYPE_DEFAULT> AllpassFFFB;
 
 
-#endif // PLONK_DELAYFORMCOMBFB_H
+#endif // PLONK_DELAYFORMALLPASSFFFB_H
 

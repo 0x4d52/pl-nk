@@ -49,15 +49,15 @@ class DelayForm<SampleType, DelayFormType::AllpassDecay, 2, 2>
 public:
     enum InParams
     {
-        Duration,
-        Decay,
+        DurationIn,
+        DecayIn,
         NumInParams
     };
     
     enum OutParams
     {
-        DurationInSamples,
-        Feedback,
+        DurationInSamplesOut,
+        CoeffOut,
         NumOutParams
     };
 
@@ -105,7 +105,7 @@ public:
     static inline void readIgnore (DelayState&) throw() { }
     static inline void readRead (DelayState& data) throw()
     {
-        DurationType readPosition = DurationType (data.writePosition) - data.paramsOut[DurationInSamples];
+        DurationType readPosition = DurationType (data.writePosition) - data.paramsOut[DurationInSamplesOut];
         if (readPosition < data.buffer0)
             readPosition += data.bufferLengthIndex;
         plonk_assert (readPosition >= 0 && readPosition <= data.bufferLengthIndex);
@@ -116,7 +116,7 @@ public:
     static inline void writeWrite (DelayState& data) throw()
     {
         plonk_assert (data.writePosition >= 0 && data.writePosition < data.bufferLength);
-        data.writeValue = data.inputValue + data.paramsOut[Feedback] * data.readValue;
+        data.writeValue = data.inputValue + data.paramsOut[CoeffOut] * data.readValue;
         data.bufferSamples[data.writePosition] = data.writeValue;
         if (data.writePosition == 0)
             data.bufferSamples[data.bufferLength] = data.writeValue; // for interpolation
@@ -125,7 +125,7 @@ public:
     static inline void outputIgnore (DelayState&) throw() { }
     static inline void outputWrite (DelayState& data) throw()
     {
-        data.outputValue = data.readValue - data.paramsOut[Feedback] * data.writeValue;
+        data.outputValue = data.readValue - data.paramsOut[CoeffOut] * data.writeValue;
         *data.outputSamples++ = data.outputValue;
         data.writePosition++;
     }
@@ -133,17 +133,17 @@ public:
     static inline void param1Ignore (DelayState& data, DurationType const& duration) throw() { }
     static inline void param1Process (DelayState& data, DurationType const& duration) throw()
     {
-        data.paramsIn[Duration] = duration;
-        data.paramsOut[DurationInSamples] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
-        plonk_assert (data.paramsOut[DurationInSamples] > 0 && data.paramsOut[DurationInSamples] <= data.bufferLengthIndex);
-        data.paramsOut[Feedback] = plonk::decayFeedback (data.paramsIn[Duration], data.paramsIn[Decay]);
+        data.paramsIn[DurationIn] = duration;
+        data.paramsOut[DurationInSamplesOut] = plonk::max (DurationType (1), DurationType (duration * data.base.sampleRate));
+        plonk_assert (data.paramsOut[DurationInSamplesOut] > 0 && data.paramsOut[DurationInSamplesOut] <= data.bufferLengthIndex);
+        data.paramsOut[CoeffOut] = plonk::decayFeedback (data.paramsIn[DurationIn], data.paramsIn[DecayIn]);
     }
     
     static inline void param2Ignore (DelayState& data, DecayType const& decay) throw() { }
     static inline void param2Process (DelayState& data, DecayType const& decay) throw()
     {                                
-        data.paramsIn[Decay] = decay;
-        data.paramsOut[Feedback] = plonk::decayFeedback (data.paramsIn[Duration], decay);
+        data.paramsIn[DecayIn] = decay;
+        data.paramsOut[CoeffOut] = plonk::decayFeedback (data.paramsIn[DurationIn], decay);
     }
     
     template<InputFunction inputFunction, 
@@ -158,7 +158,6 @@ public:
         outputFunction (data);
     }
     
-    /** Create an audio rate wavetable oscillator. */
     static inline UnitType ar (UnitType const& input,
                                DurationUnitType const& duration,
                                DecayUnitType const& decay,
@@ -241,7 +240,7 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate wavetable oscillator. */
+    /** Create an audio rate allpass delay. */
     static UnitType ar (UnitType const& input,
                         DurationUnitType const& duration = DurationType (0.5),
                         DecayUnitType const& decay = DecayType (1.0),
