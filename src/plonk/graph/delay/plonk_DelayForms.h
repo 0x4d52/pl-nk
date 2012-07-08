@@ -91,6 +91,8 @@ public:
 template<class SampleType, signed Form, signed NumInParams, signed NumOutParams>
 class DelayForm : public DelayFormBase<SampleType, Form, NumInParams, NumOutParams>
 {
+public:
+    typedef DelayFormData<SampleType, Form, NumInParams, NumOutParams>     Data;
 };
 
 

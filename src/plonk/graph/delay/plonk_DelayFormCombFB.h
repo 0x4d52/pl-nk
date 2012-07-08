@@ -43,27 +43,29 @@
 #include "plonk_DelayForwardDeclarations.h"
 
 template<class SampleType>
-class DelayForm<SampleType, DelayFormType::CombFB, 2, 2>
-:   public DelayFormBase<SampleType, DelayFormType::CombFB, 2, 2>
+class DelayFormCombFB
+:   public DelayForm<SampleType, DelayFormType::CombFB, 2, 2>
 {
 public:
+    typedef DelayForm<SampleType, DelayFormType::CombFB, 2, 2>      Base;
+    
     enum InParams
     {
-        Duration,
+        DurationIn,
         FeedbackIn,
         NumInParams
     };
     
     enum OutParams
     {
-        DurationInSamples,
+        DurationInSamplesOut,
         FeedbackOut,
         NumOutParams
     };
 
-    typedef DelayFormData<SampleType, DelayFormType::CombFB, NumInParams, NumOutParams>     Data;
-    typedef typename Data::DelayState                                                       DelayState;
-    typedef DelayForm<SampleType, DelayFormType::CombFB, NumInParams, NumOutParams>         FormType;
+    typedef typename Base::Data                                     Data;
+    typedef typename Data::DelayState                               DelayState;
+    typedef DelayFormCombFB                                         FormType;
     
     typedef SampleType                                              SampleDataType;
     typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
@@ -105,7 +107,7 @@ public:
     static inline void readIgnore (DelayState&) throw() { }
     static inline void readRead (DelayState& data) throw()
     {
-        DurationType readPosition = DurationType (data.writePosition) - data.paramsOut[DurationInSamples];
+        DurationType readPosition = DurationType (data.writePosition) - data.paramsOut[DurationInSamplesOut];
         if (readPosition < data.buffer0)
             readPosition += data.bufferLengthIndex;
         plonk_assert (readPosition >= 0 && readPosition <= data.bufferLengthIndex);
@@ -133,9 +135,9 @@ public:
     static inline void param1Ignore (DelayState& data, DurationType const& duration) throw() { }
     static inline void param1Process (DelayState& data, DurationType const& duration) throw()
     {
-        data.paramsIn[Duration] = duration;
-        data.paramsOut[DurationInSamples] = DurationType (duration * data.base.sampleRate);
-        plonk_assert (data.paramsOut[DurationInSamples] >= 0 && data.paramsOut[DurationInSamples] <= data.bufferLengthIndex);
+        data.paramsIn[DurationIn] = duration;
+        data.paramsOut[DurationInSamplesOut] = DurationType (duration * data.base.sampleRate);
+        plonk_assert (data.paramsOut[DurationInSamplesOut] >= 0 && data.paramsOut[DurationInSamplesOut] <= data.bufferLengthIndex);
     }
     
     static inline void param2Ignore (DelayState& data, FeedbackType const& feedback) throw() { }
@@ -202,17 +204,17 @@ template<class SampleType>
 class CombFBUnit
 {
 public:    
-    typedef DelayForm<SampleType, DelayFormType::CombFB, 2, 2>      FormType;
+    typedef DelayFormCombFB<SampleType>             FormType;
     
-    typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
-    typedef UnitBase<SampleType>                                    UnitType;
-    typedef InputDictionary                                         Inputs;
+    typedef Delay2ParamChannelInternal<FormType>    DelayInternal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;
     
-    typedef typename DelayInternal::Param1Type                      DurationType;
-    typedef UnitBase<DurationType>                                  DurationUnitType;
+    typedef typename DelayInternal::Param1Type      DurationType;
+    typedef UnitBase<DurationType>                  DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type                      FeedbackType;
-    typedef UnitBase<FeedbackType>                                  FeedbackUnitType;
+    typedef typename DelayInternal::Param2Type      FeedbackType;
+    typedef UnitBase<FeedbackType>                  FeedbackUnitType;
     
     static inline UnitInfos getInfo() throw()
     {
