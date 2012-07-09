@@ -47,7 +47,7 @@ class DelayFormCombLPF
 :   public DelayForm<SampleType, DelayFormType::CombLPF, 3, 3>
 {
 public:
-    typedef DelayForm<SampleType, DelayFormType::CombLPF, 3, 3>      Base;
+    typedef DelayForm<SampleType, DelayFormType::CombLPF, 3, 3>     Base;
     
     enum InParams
     {
@@ -66,20 +66,38 @@ public:
     };
     
     typedef typename Base::Data                                     Data;
-    typedef typename Data::DelayState                               DelayStateBase;
     typedef DelayFormCombLPF                                        FormType;
     typedef FilterShapeLPFBase<SampleType>                          FilterShape;
     typedef typename FilterShape::Data                              FilterShapeData;
     typedef typename FilterShape::FormType                          FilterForm;
-    
+    typedef typename TypeUtility<SampleType>::IndexType             IndexType;
+
     struct DelayState
     {
-        DelayStateBase base;
+        SampleType* outputSamples;
+        int outputBufferLength;
+        const SampleType* inputSamples;
+        SampleType* bufferSamples;
+        int bufferLength;
+        IndexType bufferLengthIndex;
+        IndexType buffer0;
+        
+        int writePosition;
+        
+        SampleType inputValue;
+        SampleType readValue;
+        SampleType writeValue;
+        SampleType outputValue;
+        
+        IndexType paramsOut[NumOutParams];
+        IndexType paramsIn[NumInParams];
+        
         FilterShapeData filterShapeData;
+        SampleType y1, y2;
     };
     
     typedef SampleType                                              SampleDataType;
-    typedef Delay2ParamChannelInternal<FormType>                    DelayInternal;
+    typedef Delay3ParamChannelInternal<FormType>                    DelayInternal;
     typedef ChannelBase<SampleType>                                 ChannelType;
     typedef ChannelInternal<SampleType,Data>                        Internal;
     typedef UnitBase<SampleType>                                    UnitType;
@@ -134,8 +152,13 @@ public:
     static inline void writeWrite (Data&, DelayState& state) throw()
     {
         plonk_assert (state.writePosition >= 0 && state.writePosition < state.bufferLength);
-        state.writeValue = state.inputValue + state.paramsOut[FeedbackOut] * state.readValue;
+                
+        state.writeValue = state.inputValue + FilterForm::process (SampleType (state.paramsOut[FeedbackOut] * state.readValue),
+                                                                   (SampleType*)state.filterShapeData.coeffs,
+                                                                   state.y1, state.y2);
+        
         state.bufferSamples[state.writePosition] = state.writeValue;
+       
         if (state.writePosition == 0)
             state.bufferSamples[state.bufferLength] = state.writeValue; // for interpolation
     }
@@ -167,9 +190,17 @@ public:
     }
 
     static inline void param3Ignore (Data&, DelayState&, FrequencyType const&) throw() { }
-    static inline void param3Process (Data&, DelayState& state, FrequencyType const& frequency) throw()
-    {                                
-
+    static inline void param3Process (Data& data, DelayState& state, FrequencyType const& frequency) throw()
+    {   
+        if (state.paramsIn[FrequencyIn] != frequency)
+        {
+            state.paramsIn[FrequencyIn] = 
+            state.paramsOut[FrequencyOut] = 
+            state.filterShapeData.params[FilterShape::Frequency] = frequency;
+            state.filterShapeData.filterSampleRate = data.base.sampleRate;
+            state.filterShapeData.filterSampleDuration = data.base.sampleDuration;
+            FilterShape::calculate (state.filterShapeData);
+        }
     }
 
     template<InputFunction inputFunction, 
@@ -233,9 +264,9 @@ template<class SampleType>
 class CombLPFUnit
 {
 public:    
-    typedef DelayFormCombFB<SampleType>             FormType;
+    typedef DelayFormCombLPF<SampleType>            FormType;
     
-    typedef Delay2ParamChannelInternal<FormType>    DelayInternal;
+    typedef Delay3ParamChannelInternal<FormType>    DelayInternal;
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;
     

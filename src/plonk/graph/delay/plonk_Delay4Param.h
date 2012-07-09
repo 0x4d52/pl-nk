@@ -51,7 +51,7 @@ class Delay4ParamChannelInternal
 public:
     typedef typename FormType::SampleDataType               SampleType;
     typedef typename FormType::Data                         Data;
-    typedef typename Data::DelayState                       DelayState;
+    typedef typename FormType::DelayState                   DelayState;
 
     typedef ObjectArray<DelayState>                         DelayStateArray;
 

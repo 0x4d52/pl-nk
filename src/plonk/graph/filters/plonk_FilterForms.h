@@ -342,6 +342,17 @@ public:
         return output;
     }
     
+    static inline SampleType process (SampleType const& input,
+                                      const SampleType* coeffs,     
+                                      SampleType& y1,
+                                      SampleType& y2) throw()
+    {
+        return process (input, 
+                        coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffA2], 
+                        coeffs[CoeffB1], coeffs[CoeffB2], 
+                        y1, y2);
+    }
+    
     static void process (SampleType* const outputSamples,
                          const int outputLength,
                          UnitType& inputUnit, 
@@ -484,6 +495,17 @@ public:
         return output;
     }
     
+    static inline SampleType process (SampleType const& input,
+                                      const SampleType* coeffs,     
+                                      SampleType& y1,
+                                      SampleType& y2) throw()
+    {
+        return process (input, 
+                        coeffs[CoeffA0], coeffs[CoeffA1], coeffs[CoeffA2], 
+                        coeffs[CoeffB1], coeffs[CoeffB2], 
+                        y1, y2);
+    }
+
     static void process (SampleType* const outputSamples,
                          const int outputLength,
                          UnitType& inputUnit, 
