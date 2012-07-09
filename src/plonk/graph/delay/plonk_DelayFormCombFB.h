@@ -162,7 +162,6 @@ public:
         outputFunction (data, state);
     }
     
-    /** Create an audio rate wavetable oscillator. */
     static inline UnitType ar (UnitType const& input,
                                DurationUnitType const& duration,
                                FeedbackUnitType const& feedback,

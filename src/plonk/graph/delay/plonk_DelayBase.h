@@ -49,21 +49,23 @@ class DelayChannelInternalBase
                                      typename FormType::Data>
 {
 public:
-    typedef typename FormType::SampleDataType               SampleType;
-    typedef typename FormType::Data                         Data;
-    typedef typename Data::DelayState                       DelayState;
-    typedef ObjectArray<DelayState>                         DelayStateArray;
+    typedef typename FormType::SampleDataType                       SampleType;
+    typedef typename FormType::Data                                 Data;
+    typedef typename Data::DelayState                               DelayState;
+    typedef ObjectArray<DelayState>                                 DelayStateArray;
     
-    typedef ChannelBase<SampleType>                         ChannelType;
-    typedef Delay1ParamChannelInternal<FormType>            DelayInternal;
-    typedef ProxyOwnerChannelInternal<SampleType,Data>      Internal;
-    typedef ChannelInternalBase<SampleType>                 InternalBase;
-    typedef UnitBase<SampleType>                            UnitType;
-    typedef InputDictionary                                 Inputs;
-    typedef NumericalArray<SampleType>                      Buffer;
-    typedef ObjectArray<Buffer>                             BufferArray;
+    typedef typename DelayFormData<SampleType,0,1,1>::DelayState    DelayStateBase;
     
-    typedef typename TypeUtility<SampleType>::IndexType     DurationType;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef Delay1ParamChannelInternal<FormType>                    DelayInternal;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
+    typedef ChannelInternalBase<SampleType>                         InternalBase;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef NumericalArray<SampleType>                              Buffer;
+    typedef ObjectArray<Buffer>                                     BufferArray;
+    
+    typedef typename TypeUtility<SampleType>::IndexType             DurationType;
                     
     DelayChannelInternalBase (const int numOutputs, 
                               Inputs const& inputs, 
@@ -115,10 +117,11 @@ public:
                 
                 Memory::zero (delayState);
                 
-                delayState.bufferSamples = circularBuffer.getArray();
-                delayState.bufferLength = circularBuffer.length() - 1,
-                delayState.bufferLengthIndex = DurationType (circularBuffer.length()) - Math<DurationType>::get1(),
-                delayState.buffer0 = DurationType (0);
+                DelayStateBase& delayStateBase (reinterpret_cast<DelayStateBase&>(delayState));
+                delayStateBase.bufferSamples = circularBuffer.getArray();
+                delayStateBase.bufferLength = circularBuffer.length() - 1,
+                delayStateBase.bufferLengthIndex = DurationType (circularBuffer.length()) - Math<DurationType>::get1(),
+                delayStateBase.buffer0 = DurationType (0);
             }
         }
     }    
