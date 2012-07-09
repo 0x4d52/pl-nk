@@ -165,8 +165,18 @@ Unit AudioHost::constructGraph()
 //
 //    return output;
     
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return CombLPF::ar (input, Floats (0.0101, 0.00999), 0.95, 1200.0, 1.0);
+    
     Unit input = BusRead::ar (Bus ("0"));
-    return CombLPF::ar (input, 0.1, 0.75, 1200.0, 1.0);
+    const int size = 12;
+    Unit combs = CombLPF::ar (input, 
+                              Floats::rand (size, 0.01, 0.5), 
+                              Floats::rand (size, 0.5, 0.999), 
+                              Floats::exprand (size, 100, 10000), 
+                              1.0);
+    return Mixer::ar (combs.group (2));
+
 
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return AllpassDecay::ar (input, Floats::rand (2, 0.05), 10.0); 
