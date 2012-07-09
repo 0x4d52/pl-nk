@@ -58,6 +58,7 @@ public:
     };
 
     typedef FilterForm<SampleType,FilterFormType::P1a>                  FormType;
+    typedef typename FormType::Data                                     FormData;
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;    
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
@@ -69,16 +70,10 @@ public:
         return keys;
     }
         
-//    static CalcTypes calculate (const CalcType frequency, 
-//                                const double sampleRate = SampleRate::getDefault()) throw()
-//    {
-//        Data data;
-//        data.params[Frequency] = frequency;
-//        data.filterSampleRate = sampleRate;
-//        data.filterSampleDuration = 1.0 / sampleRate;
-//        calculate (data);
-//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-//    }
+    static inline SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    {
+        return FormType::process (input, data.coeffs, form);
+    }
 
     static inline void calculate (Data& data) throw()
     {
@@ -106,6 +101,7 @@ public:
     };
     
     typedef FilterForm<SampleType,FilterFormType::P1a>                  FormType;
+    typedef typename FormType::Data                                     FormData;
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
@@ -117,16 +113,10 @@ public:
         return keys;
     }
     
-//    static CalcTypes calculate (const CalcType duration, 
-//                                const double sampleRate = SampleRate::getDefault()) throw()
-//    {
-//        Data data;
-//        data.params[Duration] = duration;
-//        data.filterSampleRate = sampleRate;
-//        data.filterSampleDuration = 1.0 / sampleRate;
-//        calculate (data);
-//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-//    }
+    static inline SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    {
+        return FormType::process (input, data.coeffs, form);
+    }
 
     static inline void calculate (Data& data) throw()
     {
@@ -157,6 +147,7 @@ public:
     };
     
     typedef FilterForm<SampleType,FilterFormType::P1>                   FormType;
+    typedef typename FormType::Data                                     FormData;
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
@@ -168,16 +159,10 @@ public:
         return keys;
     }
     
-//    static CalcTypes calculate (const CalcType frequency, 
-//                                const double sampleRate = SampleRate::getDefault()) throw()
-//    {
-//        Data data;
-//        data.params[Frequency] = frequency;
-//        data.filterSampleRate = sampleRate;
-//        data.filterSampleDuration = 1.0 / sampleRate;
-//        calculate (data);
-//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-//    }
+    static inline SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    {
+        return FormType::process (input, data.coeffs, form);
+    }
 
     static inline void calculate (Data& data) throw()
     {
@@ -212,6 +197,7 @@ public:
     };
     
     typedef FilterForm<SampleType,FilterFormType::P1>                   FormType;
+    typedef typename FormType::Data                                     FormData;
     typedef FilterShapeData<SampleType,FormType::NumCoeffs,NumParams>   Data;
     typedef typename TypeUtility<SampleType>::IndexType                 CalcType;
     typedef NumericalArray<CalcType>                                    CalcTypes;
@@ -223,16 +209,10 @@ public:
         return keys;
     }
     
-//    static CalcTypes calculate (const CalcType duration, 
-//                                const double sampleRate = SampleRate::getDefault()) throw()
-//    {
-//        Data data;
-//        data.params[Duration] = duration;
-//        data.filterSampleRate = sampleRate;
-//        data.filterSampleDuration = 1.0 / sampleRate;
-//        calculate (data);
-//        return CalcTypes::withArray (FormType::NumCoeffs, data.coeffs);
-//    }
+    static inline SampleType process (SampleType const& input, Data const& data, FormData& form) throw()
+    {
+        return FormType::process (input, data.coeffs, form);
+    }
             
     static inline void calculate (Data& data) throw()
     {

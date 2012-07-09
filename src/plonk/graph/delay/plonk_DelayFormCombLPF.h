@@ -70,6 +70,7 @@ public:
     typedef FilterShapeLPFBase<SampleType>                          FilterShape;
     typedef typename FilterShape::Data                              FilterShapeData;
     typedef typename FilterShape::FormType                          FilterForm;
+    typedef typename FilterForm::Data                               FilterFormData;
     typedef typename TypeUtility<SampleType>::IndexType             IndexType;
 
     struct DelayState
@@ -93,7 +94,7 @@ public:
         IndexType paramsIn[NumInParams];
         
         FilterShapeData filterShapeData;
-        SampleType y1, y2;
+        FilterFormData filterFormData;
     };
     
     typedef SampleType                                              SampleDataType;
@@ -153,9 +154,9 @@ public:
     {
         plonk_assert (state.writePosition >= 0 && state.writePosition < state.bufferLength);
                 
-        state.writeValue = state.inputValue + FilterForm::process (SampleType (state.paramsOut[FeedbackOut] * state.readValue),
-                                                                   (SampleType*)state.filterShapeData.coeffs,
-                                                                   state.y1, state.y2);
+        state.writeValue = state.inputValue + FilterShape::process (SampleType (state.paramsOut[FeedbackOut] * state.readValue),
+                                                                    state.filterShapeData,
+                                                                    state.filterFormData);
         
         state.bufferSamples[state.writePosition] = state.writeValue;
        
