@@ -178,14 +178,23 @@ Unit AudioHost::constructGraph()
 //    return Mixer::ar (combs.group (2));
 
     
-    Unit output = BusRead::ar (Bus ("0"));
-    for (int i = 0; i < 6; ++i)
-        output = CombLPF::ar (output, 
-                              Floats::exprand (2, 0.01, 0.5), 
-                              Floats::exprand (2, 0.5, 0.999), 
-                              Floats::exprand (2, 100, 10000), 
-                              1.0);
-    return output;
+//    Unit output = BusRead::ar (Bus ("0"));
+//    for (int i = 0; i < 6; ++i)
+//        output = CombLPF::ar (output, 
+//                              Floats::exprand (2, 0.01, 0.5), 
+//                              Floats::exprand (2, 0.5, 0.999), 
+//                              Floats::exprand (2, 100, 10000), 
+//                              1.0);
+//    return output;
+    
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return CombLPFP1::ar (input, 0.25, 0.95, 10000.0, 1.0);
+
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return CombLPF::ar (input, 0.25, 0.95, 10000.0, 1.0);
+
+    Unit input = BusRead::ar (Bus ("0"));
+    return CombHPF::ar (input, 0.25, 0.95, 1000, 1.0);
 
 
 //    Unit input = BusRead::ar (Bus ("0"));

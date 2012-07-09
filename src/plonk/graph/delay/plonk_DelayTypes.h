@@ -50,6 +50,7 @@ public:
         CombDecay,
         CombFB,
         CombLPF,
+        CombFilter1Param,
         AllpassDecay,
         AllpassFFFB,
         NumNames

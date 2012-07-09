@@ -159,6 +159,7 @@
 #include "../graph/delay/plonk_DelayFormCombDecay.h"
 #include "../graph/delay/plonk_DelayFormCombFB.h"
 #include "../graph/delay/plonk_DelayFormCombLPF.h"
+#include "../graph/delay/plonk_DelayFormCombFilter1Param.h"
 #include "../graph/delay/plonk_DelayFormAllpassDecay.h"
 #include "../graph/delay/plonk_DelayFormAllpassFFFB.h"
 #include "../graph/delay/plonk_Delay1Param.h"
