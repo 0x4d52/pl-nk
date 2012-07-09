@@ -69,32 +69,15 @@ public:
     };
     
     typedef typename Base::Data                                     Data;
+    typedef typename Data::DelayState                               DelayStateBase;
     typedef DelayFormCombFilter1Param                               FormType;
     typedef typename FilterShape::Data                              FilterShapeData;
     typedef typename FilterShape::FormType                          FilterForm;
     typedef typename FilterForm::Data                               FilterFormData;
     typedef typename TypeUtility<SampleType>::IndexType             IndexType;
 
-    struct DelayState
+    struct DelayState : DelayStateBase
     {
-        SampleType* outputSamples;
-        int outputBufferLength;
-        const SampleType* inputSamples;
-        SampleType* bufferSamples;
-        int bufferLength;
-        IndexType bufferLengthIndex;
-        IndexType buffer0;
-        
-        int writePosition;
-        
-        SampleType inputValue;
-        SampleType readValue;
-        SampleType writeValue;
-        SampleType outputValue;
-        
-        IndexType paramsOut[NumOutParams];
-        IndexType paramsIn[NumInParams];
-        
         FilterShapeData filterShapeData;
         FilterFormData filterFormData;
     };
