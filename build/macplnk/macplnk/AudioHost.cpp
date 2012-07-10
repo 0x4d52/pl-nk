@@ -193,12 +193,14 @@ Unit AudioHost::constructGraph()
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return CombLPF::ar (input, 0.25, 0.95, 10000.0, 1.0);
 
-    Unit input = BusRead::ar (Bus ("0"));
-    return CombHPF::ar (input, 0.25, 0.95, 1000, 1.0);
+//    Unit input = BusRead::ar (Bus ("0"));
+//    return CombHPF::ar (input, 0.25, 0.95, 1000, 1.0);
 
 
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return AllpassDecay::ar (input, Floats::rand (2, 0.05), 10.0); 
+    
+    return WhiteNoise::ar (0.05);
 }
 
 

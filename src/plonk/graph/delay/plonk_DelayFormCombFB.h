@@ -202,7 +202,8 @@ public:
 //------------------------------------------------------------------------------
 
 
-/** A comb filter setting the feedback amount directly. */
+/** A comb filter setting the feedback amount directly. 
+ @ingroup DelayUnits */
 template<class SampleType>
 class CombFBUnit
 {

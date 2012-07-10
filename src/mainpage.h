@@ -5,20 +5,24 @@
  Plonk|Plink|Plank implements a set of resuable functions and DSP for audio software development.
  
  @section Installation Installation
- Currently there are no example projects, these are comming soon.
+ Currently is currently an example project for iOS and an example project for Mac OS X using PortAudio.
  
- In the meantime <em>Plonk|Plink|Plank</em> are easy to include in a project. Just add all the files
+ <em>Plonk|Plink|Plank</em> are easy to include in a project and are not tied to a particular
+ host environment. Just add all the files
  in the @c /src directory (recursively) to a project. To use Plonk just include
  @c plonk/plonk.h (this automatically includes @c plank/plank.h as Plonk is dependent
  on Plank).
  
  @section GettingStarted Getting started
  <em>Plonk|Plink|Plank</em> are designed to be used with a wide range of audio I/O systems. It
- has been tested primarily with 32-bit floating point audio I/O although should work at double precision
- and even integer-based formats too. The following assume the use of standard 32-bit floating point 
- processing.
+ has been tested primarily with 32-bit floating point audio I/O although most processiong should work at 
+ double precision and some even using integer-based formats too.
 
+ */
 
+ /*
+ The following assume the use of standard 32-bit floating point processing.
+  
  The following class should act as pseudocode for the required operations needed to get
  basic synthesis working.
  

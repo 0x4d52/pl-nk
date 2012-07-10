@@ -148,7 +148,8 @@ public:
 //------------------------------------------------------------------------------
 
 
-/** A comb filter setting the decay as a time to decay by 60dB. */
+/** A comb filter setting the decay as a time to decay by 60dB. 
+ @ingroup DelayUnits */
 template<class SampleType>
 class CombDecayUnit
 {

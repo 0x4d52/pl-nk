@@ -245,7 +245,8 @@ public:
 //------------------------------------------------------------------------------
 
 
-/** A comb filter with a filter in the feedback loop (where the filter takes one parameter). */
+/** A comb filter with a filter in the feedback loop (where the filter takes one parameter). 
+ @ingroup DelayUnits */
 template<class FilterShape>
 class CombFilter1ParamUnit
 {

@@ -76,19 +76,19 @@ template<class Type> inline Type cubed (Type const& a) throw()         { return 
 // common misc
 
 /** Returns minimum of @c a, @e b and @c c. 
- @ingroup PlonkMiscOpFunctions*/
+ @ingroup PlonkMiscArithmeticFunctions*/
 template<class Type> inline Type min (Type const& a, Type const& b, Type const& c) throw() { return min (min (a, b), c); }
 
 /** Returns minimum of @c a, @e b, @c c and @c d. 
- @ingroup PlonkMiscOpFunctions*/
+ @ingroup PlonkMiscArithmeticFunctions*/
 template<class Type> inline Type min (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return min (min (a, b), min (c, d)); }
 
 /** Returns maximum of @c a, @e b and @c c. 
- @ingroup PlonkMiscOpFunctions*/
+ @ingroup PlonkMiscArithmeticFunctions*/
 template<class Type> inline Type max (Type const& a, Type const& b, Type const& c) throw() { return max (max (a, b), c); }
 
 /** Returns maximum of @c a, @e b, @c c and @c d. 
- @ingroup PlonkMiscOpFunctions*/
+ @ingroup PlonkMiscArithmeticFunctions*/
 template<class Type> inline Type max (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return max (max (a, b), max (c, d)); }
 
 

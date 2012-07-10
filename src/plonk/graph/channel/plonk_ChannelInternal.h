@@ -111,7 +111,7 @@ public:
             this->setOverlapInternal (newOverlap);
             this->getOverlap().addReceiver (this);
             
-            this->updateTimeStamp(); // changes the next time due to chnaged overlap..
+            this->updateTimeStamp(); // changes the next time due to changed overlap..
         }
     }
     

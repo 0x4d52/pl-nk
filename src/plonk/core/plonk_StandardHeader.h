@@ -90,7 +90,7 @@
 
 #define PLONK_NAMESPACE plonk
 
-#ifdef PLONK_NAMESPACE
+#if defined(PLONK_NAMESPACE) || DOXYGEN
     #define BEGIN_PLONK_NAMESPACE    namespace PLONK_NAMESPACE {
     #define END_PLONK_NAMESPACE      }
 #else
@@ -169,15 +169,10 @@ typedef PlankP Pointer;
 #define PLONK_INT24_MAX PLANK_INT24_MAX
 
 #if PLONK_WIN
-//    typedef __int64 LongLong;
-//    typedef unsigned __int64 UnsignedLongLong;
 	#pragma warning(disable : 4244) // loss of precision
 	#pragma warning(disable : 4996) // security of snprintf etc
 	#pragma warning(disable : 4800) // bool performance warning
 	#define _CRT_SECURE_NO_WARNINGS
-//#else
-//    typedef long long LongLong;
-//	typedef unsigned long long UnsignedLongLong;
 #endif
 
 

@@ -135,6 +135,7 @@
 #include "../graph/simple/plonk_AtomicVariableChannel.h"
 
 #include "../graph/generators/plonk_Saw.h"
+#include "../graph/generators/plonk_WhiteNoise.h"
 #include "../graph/generators/plonk_Table.h"
 #include "../graph/generators/plonk_SignalPlay.h"
 

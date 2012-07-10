@@ -209,7 +209,8 @@ public:
 
 //------------------------------------------------------------------------------
 
-/** Simple delay processor. */
+/** Simple delay processor. 
+ @ingroup DelayUnits */
 template<class SampleType>
 class DelayUnit
 {

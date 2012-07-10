@@ -153,7 +153,8 @@ public:
 //------------------------------------------------------------------------------
 
 
-/** An allpass delay setting the decay as a time to decay by 60dB. */
+/** An allpass delay setting the decay as a time to decay by 60dB. 
+ @ingroup DelayUnits */
 template<class SampleType>
 class AllpassDecayUnit
 {

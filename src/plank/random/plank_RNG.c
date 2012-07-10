@@ -130,6 +130,8 @@ void pl_RNG_Seed (PlankRNGRef p, unsigned int seed)
     p->value = seed;
 }
 
+/// inline these next ones?
+
 int pl_RNG_Next (PlankRNGRef p)
 {
     p->value = (unsigned int)PLANK_RNG_MAGIC1 * p->value + (unsigned int)PLANK_RNG_MAGIC2;
