@@ -49,7 +49,6 @@ public:
         Delay,
         CombDecay,
         CombFB,
-        CombLPF,
         CombFilter1Param,
         AllpassDecay,
         AllpassFFFB,

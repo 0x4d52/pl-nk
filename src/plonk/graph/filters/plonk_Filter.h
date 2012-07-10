@@ -90,21 +90,14 @@ public:
         const UnitType& coeffs = this->getInputAsUnit (IOKey::Coeffs);
         UnitsType groupedCoeffs = coeffs.group (FormType::NumCoeffs);
         UnitType channelCoeffs = groupedCoeffs.wrapAt (index);
-        
-//        plonk_assert (channelCoeffs.getNumChannels() == FormType::NumCoeffs);
-//        
-//        for (int i = 0; i < FormType::NumCoeffs; ++i)
-//            channelCoeffs.put (i, channelCoeffs.atUnchecked (i).getChannel (index));
-        
+                
         channelInputs.put (IOKey::Coeffs, 
                            channelCoeffs);
         
         return new FilterChannelInternal (channelInputs, 
                                           this->getState(), 
                                           this->getBlockSize(), 
-                                          this->getSampleRate());     
-        
-//        return this;
+                                          this->getSampleRate());        
     }
     
     void initChannel (const int channel) throw()

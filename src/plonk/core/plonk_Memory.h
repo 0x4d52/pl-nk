@@ -132,80 +132,32 @@ public:
     static void free (Type* const ptr) throw()          { delete [] ptr; }
 };
 
-template<>
-class ArrayAllocator<Float>
+template<class Type>
+class ArrayAllocatorBuiltIn
 {
 public:
-    typedef Float Type;
     static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
     static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
 };
 
-template<>
-class ArrayAllocator<Double>
-{
-public:
-    typedef Double Type;
-    static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
-    static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
-};
+template<> class ArrayAllocator<Float>         : public ArrayAllocatorBuiltIn<Float>         { public: typedef Float Type; };
+template<> class ArrayAllocator<Double>        : public ArrayAllocatorBuiltIn<Double>        { public: typedef Double Type; };
+template<> class ArrayAllocator<Int>           : public ArrayAllocatorBuiltIn<Int>           { public: typedef Int Type; };
+template<> class ArrayAllocator<UnsignedInt>   : public ArrayAllocatorBuiltIn<UnsignedInt>   { public: typedef UnsignedInt Type; };
+template<> class ArrayAllocator<Short>         : public ArrayAllocatorBuiltIn<Short>         { public: typedef Short Type; };
+template<> class ArrayAllocator<UnsignedShort> : public ArrayAllocatorBuiltIn<UnsignedShort> { public: typedef UnsignedShort Type; };
+template<> class ArrayAllocator<Long>          : public ArrayAllocatorBuiltIn<Long>          { public: typedef Long Type; };
+template<> class ArrayAllocator<UnsignedLong>  : public ArrayAllocatorBuiltIn<UnsignedLong>  { public: typedef UnsignedLong Type; };
 
-template<>
-class ArrayAllocator<Int>
-{
-public:
-    typedef Int Type;
-    static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
-    static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
-};
-
-template<>
-class ArrayAllocator<Short>
-{
-public:
-    typedef Short Type;
-    static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
-    static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
-};
-
-template<>
-class ArrayAllocator<Long>
-{
-public:
-    typedef Long Type;
-    static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
-    static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
-};
 
 #if ! (PLANK_WIN && PLANK_64BIT)
-template<>
-class ArrayAllocator<LongLong>
-{
-public:
-    typedef LongLong Type;
-    static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
-    static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
-};
+template<> class ArrayAllocator<LongLong>         : public ArrayAllocatorBuiltIn<LongLong>         { public: typedef LongLong Type; };
+template<> class ArrayAllocator<UnsignedLongLong> : public ArrayAllocatorBuiltIn<UnsignedLongLong> { public: typedef UnsignedLongLong Type; };
 #endif
 
-template<>
-class ArrayAllocator<Char>
-{
-public:
-    typedef Char Type;
-    static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
-    static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
-};
-
-template<>
-class ArrayAllocator<Bool>
-{
-public:
-    typedef Bool Type;
-    static Type* allocate (const int numItems) throw()  { return static_cast<Type*> (Memory::global().allocateBytes (numItems * sizeof (Type))); }    
-    static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
-};
-
+template<> class ArrayAllocator<Char>          : public ArrayAllocatorBuiltIn<Char>          { public: typedef Char Type; };
+template<> class ArrayAllocator<UnsignedChar>  : public ArrayAllocatorBuiltIn<UnsignedChar>  { public: typedef UnsignedChar Type; };
+template<> class ArrayAllocator<Bool>          : public ArrayAllocatorBuiltIn<Bool>          { public: typedef Bool Type; };
 
 
 
