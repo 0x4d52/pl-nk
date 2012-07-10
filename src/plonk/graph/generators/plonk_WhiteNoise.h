@@ -70,7 +70,6 @@ class WhiteNoiseChannelInternal
 public:
     typedef PLONK_CHANNELDATA_NAME(WhiteNoiseChannelInternal,SampleType)    Data;
     typedef InputDictionary                                                 Inputs;
-
     typedef ChannelBase<SampleType>                                         ChannelType;
     typedef WhiteNoiseChannelInternal<SampleType>                           WhiteNoiseInternal;
     typedef ChannelInternal<SampleType,Data>                                Internal;
@@ -87,7 +86,7 @@ public:
             
     Text getName() const throw()
     {
-        return "WhiteNoise";
+        return "White Noise";
     }       
     
     IntArray getInputKeys() const throw()
@@ -103,13 +102,6 @@ public:
     
     void initChannel (const int channel) throw()
     {                        
-//        this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
-//                                               this->getBlockSize()));
-//        this->setSampleRate (SampleRate::decide (frequencyUnit.getSampleRate (channel),
-//                                                 this->getSampleRate()));
-//        
-//        this->setOverlap (frequencyUnit.getOverlap (channel));
-//        
         this->initValue (SampleType (0));
     }    
     

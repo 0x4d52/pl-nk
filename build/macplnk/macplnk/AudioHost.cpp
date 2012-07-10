@@ -200,7 +200,14 @@ Unit AudioHost::constructGraph()
 //    Unit input = BusRead::ar (Bus ("0"));
 //    return AllpassDecay::ar (input, Floats::rand (2, 0.05), 10.0); 
     
-    return WhiteNoise::ar (0.05);
+//    return WhiteNoise::ar (0.1);
+    
+//    return WhiteNoise::ar (Floats (0.1, 0.1));
+    
+    return WhiteNoise::ar (Floats::series (50, 0.000001, 0.000001)) * 0;
+
+//    return WhiteNoise::ar (Floats (0.1, 0.1)) * Saw::ar(-1);
+
 }
 
 

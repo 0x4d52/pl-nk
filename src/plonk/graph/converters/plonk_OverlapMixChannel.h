@@ -205,7 +205,7 @@ public:
                          
                          // inputs
                          IOKey::Generic,         Measure::None,      IOInfo::NoDefault,   IOLimit::None,
-                         IOKey::OverlapMix,     Measure::Factor,    0.5,                 IOLimit::Clipped,   Measure::Factor,     minOverlap, 1.0,
+                         IOKey::OverlapMix,      Measure::Factor,    0.5,                 IOLimit::Clipped,   Measure::Factor,     minOverlap, 1.0,
                          IOKey::End);
     }    
     
