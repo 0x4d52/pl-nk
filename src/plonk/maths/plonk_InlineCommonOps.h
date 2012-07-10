@@ -49,29 +49,47 @@
  @ingroup PlonkUnaryOpFunctions*/
 template<class Type> inline Type abs (Type const& a) throw() { return (a < Math<Type>::get0()) ? -a : a; }
 
+
 // common binary
 
-/** Returns minimum of @e a and @e b. 
+/** Returns minimum of @c a and @c b. 
  @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type min (Type const& a, Type const& b) throw() { return (a > b) ? b : a; }
-template<class Type> inline Type min (Type const& a, Type const& b, Type const& c) throw() { return min (min (a, b), c); }
-template<class Type> inline Type min (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return min (min (a, b), min (c, d)); }
 
-/** Returns maximum of @e a and @e b. 
+/** Returns maximum of @c a and @c b. 
  @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type max (Type const& a, Type const& b) throw() { return (a < b) ? b : a; }
-template<class Type> inline Type max (Type const& a, Type const& b, Type const& c) throw() { return max (max (a, b), c); }
-template<class Type> inline Type max (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return max (max (a, b), max (c, d)); }
 
 /** Returns @e a raised to the power @e b. 
  @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type pow (Type const& a, Type const& b) throw() { return ::pow ((double)a, (double)b);    }
 
-/** Returns the input argument squared. */
+/** Returns the input argument squared. 
+ @ingroup PlonkBinaryOpFunctions */
 template<class Type> inline Type squared (Type const& a) throw()       { return a * a; }
 
-/** Returns the input argument cubed. */
+/** Returns the input argument cubed. 
+ @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type cubed (Type const& a) throw()         { return a * a * a;	}
+
+
+// common misc
+
+/** Returns minimum of @c a, @e b and @c c. 
+ @ingroup PlonkMiscOpFunctions*/
+template<class Type> inline Type min (Type const& a, Type const& b, Type const& c) throw() { return min (min (a, b), c); }
+
+/** Returns minimum of @c a, @e b, @c c and @c d. 
+ @ingroup PlonkMiscOpFunctions*/
+template<class Type> inline Type min (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return min (min (a, b), min (c, d)); }
+
+/** Returns maximum of @c a, @e b and @c c. 
+ @ingroup PlonkMiscOpFunctions*/
+template<class Type> inline Type max (Type const& a, Type const& b, Type const& c) throw() { return max (max (a, b), c); }
+
+/** Returns maximum of @c a, @e b, @c c and @c d. 
+ @ingroup PlonkMiscOpFunctions*/
+template<class Type> inline Type max (Type const& a, Type const& b, Type const& c, Type const& d) throw() { return max (max (a, b), max (c, d)); }
 
 
 #endif // PLONK_INLINECOMMONOPS_H

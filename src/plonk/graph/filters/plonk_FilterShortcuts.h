@@ -1038,14 +1038,7 @@ public:
                          IOKey::SampleRate,         Measure::Hertz,    -1.0,                IOLimit::Minimum,   Measure::Hertz,             0.0,
                          IOKey::End);    
     }
-        
-    static inline SampleType process (SampleType const& input, 
-                                      FilterShapeData const& shape, 
-                                      FormData& form) throw()
-    {
-        return FormType::process (input, shape.coeffs, form);
-    }
-    
+            
     /** Create a simple Butterworth 2nd-order low-pass filter.
      @param input The input signal to filter.
      @param frequency  The -3dB point cut-off frequency. 
