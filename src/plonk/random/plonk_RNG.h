@@ -118,7 +118,7 @@ public:
     float exponential (const float min, const float max) throw();
     
     /** Generate a exponentially distributed random double between min and max. */
-    double exponential (const double min, const double max) throw();        
+    double exponential (const double min, const double max) throw();           
 };
 
 //------------------------------------------------------------------------------

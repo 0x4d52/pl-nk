@@ -50,6 +50,7 @@ PLONK_CHANNELDATA_DECLARE(WhiteNoiseChannelInternal,SampleType)
     
     SampleType minValue;
     SampleType maxValue;
+    PlankRNG rng;
 };              
 
 PLONK_CHANNELDATA_SPECIAL(WhiteNoiseChannelInternal,short)
@@ -58,6 +59,7 @@ PLONK_CHANNELDATA_SPECIAL(WhiteNoiseChannelInternal,short)
     
     int minValue;
     int maxValue;
+    PlankRNG rng;
 };      
 
 //------------------------------------------------------------------------------
@@ -82,6 +84,7 @@ public:
                                SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
+        rng.seed (data.rng);
     }
             
     Text getName() const throw()
@@ -110,14 +113,13 @@ public:
         Data& data = this->getState();        
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
-
-        RNG& rng (RNG::audio());
         
         for (int i = 0; i < outputBufferLength; ++i) 
             outputSamples[i] = SampleType (rng.uniform (data.minValue, data.maxValue));
     }
     
 private:
+    RNG rng;
 };
 //------------------------------------------------------------------------------
 
@@ -179,7 +181,7 @@ public:
         p.buffers[0].bufferSize = this->getOutputBuffer().length();;
         p.buffers[0].buffer     = this->getOutputSamples();
         
-        plink_WhiteNoiseProcessF (&p, &this->getState());
+        plink_WhiteNoiseProcessF_N (&p, &this->getState());
     }
     
 private:
@@ -232,7 +234,6 @@ public:
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                                
         const LongLong peak = SampleType (TypeUtility<SampleType>::getTypePeak());
-        Data data = { { -1.0, -1.0 }, -peak, peak };
         
         const int numChannels = plonk::max (mul.getNumChannels(), add.getNumChannels());
         UnitType result (UnitType::withSize (numChannels));
@@ -241,6 +242,10 @@ public:
         
         for (int i = 0; i < numChannels; ++i) 
         {
+            PlankRNG rng;
+            pl_RNG_Init (&rng);
+            pl_RNG_Seed (&rng, RNG::global().uniformInt());
+            Data data = { { -1.0, -1.0 }, -peak, peak, rng };
             ChannelInternalType* internal = new WhiteNoiseInternal (inputs, 
                                                                     data, 
                                                                     preferredBlockSize, 

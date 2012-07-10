@@ -202,9 +202,9 @@ Unit AudioHost::constructGraph()
     
 //    return WhiteNoise::ar (0.1);
     
-//    return WhiteNoise::ar (Floats (0.1, 0.1));
+    return WhiteNoise::ar (Floats (0.1, 0.1));
     
-    return WhiteNoise::ar (Floats::series (50, 0.000001, 0.000001)).mix() * 0;
+//    return WhiteNoise::ar (Floats::series (50, 0.000001, 0.000001)).mix() * 0;
 
 //    return WhiteNoise::ar (Floats (0.1, 0.1)) * Saw::ar(-1);
 

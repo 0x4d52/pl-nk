@@ -52,9 +52,7 @@ void plink_WhiteNoiseProcessF_N (void* ppv, WhiteNoiseProcessStateF* state)
     PlankRNGRef rng = &state->rng;
 
     for (i = 0; i < N; ++i) 
-    {
         output[i] = pl_RNG_NextFloat (rng);
-    }    
 }
 
 void plink_WhiteNoiseProcessF (void* ppv, WhiteNoiseProcessStateF* state)
