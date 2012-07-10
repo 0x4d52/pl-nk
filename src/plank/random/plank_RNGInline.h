@@ -36,9 +36,15 @@
  -------------------------------------------------------------------------------
  */
 
-#include "../core/plank_StandardHeader.h"
-#include "plank_RNG.h"
-#include "../containers/plank_Atomic.h"
+// help prevent accidental inclusion other than via the intended header
+#if PLANK_INLINING_FUNCTIONS
+
+#if !DOXYGEN
+typedef struct PlankRNG
+{
+    unsigned int value;
+} PlankRNG;
+#endif
 
 #define PLANK_RNG_MAGIC1      1664525
 #define PLANK_RNG_MAGIC2      1013904223
@@ -47,85 +53,34 @@
 #define PLANK_RNG_DOUBLE_ONE  0x3ff0000000000000
 #define PLANK_RNG_DOUBLE_MASK 0x000fffffffffffff
 
-PlankRNGRef pl_RNGGlobal()
+static inline int pl_RNG_Next (PlankRNGRef p)
 {
-    static PlankAtomicI init = { 0 };
-    static PlankRNG rng;
-    
-    if (pl_AtomicI_CompareAndSwap (&init, 0, 1))
-        pl_RNG_Init (&rng);
-    
-    return &rng;
+    p->value = (unsigned int)PLANK_RNG_MAGIC1 * p->value + (unsigned int)PLANK_RNG_MAGIC2;
+    return p->value;
 }
 
-PlankRNGRef pl_RNG_CreateAndInit()
+static inline unsigned int pl_RNG_NextInt (PlankRNGRef p, unsigned int max)
 {
-    PlankRNGRef p;
-    p = pl_RNG_Create();
-    
-    if (p != PLANK_NULL)
-    {
-        if (pl_RNG_Init (p) != PlankResult_OK)
-            pl_RNG_Destroy (p);
-        else
-            return p;
-    }
-    
-    return PLANK_NULL;
+    unsigned int value = pl_RNG_Next (p);
+    return value % max;
 }
 
-PlankRNGRef pl_RNG_Create()
-{
-    PlankMemoryRef m;
-    PlankRNGRef p;
-
-    m = pl_MemoryGlobal();
-    p = (PlankRNGRef)pl_Memory_AllocateBytes (m, sizeof (PlankRNG));
-    
-    if (p != NULL)
-        pl_MemoryZero (p, sizeof (PlankRNG));
-    
-    return p;
+static inline float pl_RNG_NextFloat (PlankRNGRef p)
+{    
+    unsigned int bits;
+	float value;
+	bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_MASK & pl_RNG_Next (p));
+    value = *(float*)(&bits);
+    return value - 1.f;
 }
 
-PlankResult pl_RNG_Init(PlankRNGRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    
-    p->value = (unsigned int)time (NULL);
-    return PlankResult_OK;
+static inline double pl_RNG_NextDouble (PlankRNGRef p)
+{    
+    unsigned int bits;
+	float value;
+	bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_MASK & pl_RNG_Next (p));
+    value = *(float*)(&bits);
+    return (double)value - 1.0;
 }
 
-PlankResult pl_RNG_DeInit(PlankRNGRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-
-    return PlankResult_OK;
-}
-
-PlankResult pl_RNG_Destroy (PlankRNGRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_RNG_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);
-        
-exit:
-    return result;
-}
-
-void pl_RNG_Seed (PlankRNGRef p, unsigned int seed)
-{
-    p->value = seed;
-}
+#endif

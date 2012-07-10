@@ -36,96 +36,33 @@
  -------------------------------------------------------------------------------
  */
 
-#include "../core/plank_StandardHeader.h"
-#include "plank_RNG.h"
-#include "../containers/plank_Atomic.h"
+#ifndef PLINK_WHITENOISE_H
+#define PLINK_WHITENOISE_H
 
-#define PLANK_RNG_MAGIC1      1664525
-#define PLANK_RNG_MAGIC2      1013904223
-#define PLANK_RNG_FLOAT_ONE   0x3f800000
-#define PLANK_RNG_FLOAT_MASK  0x007fffff
-#define PLANK_RNG_DOUBLE_ONE  0x3ff0000000000000
-#define PLANK_RNG_DOUBLE_MASK 0x000fffffffffffff
+#include "../plink_Process.h"
 
-PlankRNGRef pl_RNGGlobal()
+/** A white noise generator process.
+ 
+ @defgroup PlinkWhiteNoiseProcessFClass Plink WhiteNoiseProcessStateF class
+ @ingroup PlinkClasses
+ @{
+ */
+
+typedef struct WhiteNoiseProcessStateF
 {
-    static PlankAtomicI init = { 0 };
-    static PlankRNG rng;
-    
-    if (pl_AtomicI_CompareAndSwap (&init, 0, 1))
-        pl_RNG_Init (&rng);
-    
-    return &rng;
-}
+    PlinkState common;
+    float minValue;
+    float maxValue;
+    PlankRNG rng;
+} WhiteNoiseProcessStateF;
 
-PlankRNGRef pl_RNG_CreateAndInit()
-{
-    PlankRNGRef p;
-    p = pl_RNG_Create();
-    
-    if (p != PLANK_NULL)
-    {
-        if (pl_RNG_Init (p) != PlankResult_OK)
-            pl_RNG_Destroy (p);
-        else
-            return p;
-    }
-    
-    return PLANK_NULL;
-}
+PLINK_BEGIN_C_LINKAGE
 
-PlankRNGRef pl_RNG_Create()
-{
-    PlankMemoryRef m;
-    PlankRNGRef p;
+void PLINK_API plink_WhiteNoiseProcessF_N (void* pp, WhiteNoiseProcessStateF* state);
+void PLINK_API plink_WhiteNoiseProcessF   (void* pp, WhiteNoiseProcessStateF* state);
 
-    m = pl_MemoryGlobal();
-    p = (PlankRNGRef)pl_Memory_AllocateBytes (m, sizeof (PlankRNG));
-    
-    if (p != NULL)
-        pl_MemoryZero (p, sizeof (PlankRNG));
-    
-    return p;
-}
+PLINK_END_C_LINKAGE
 
-PlankResult pl_RNG_Init(PlankRNGRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    
-    p->value = (unsigned int)time (NULL);
-    return PlankResult_OK;
-}
+/// @} End group PlinkWhiteNoiseProcessFClass
 
-PlankResult pl_RNG_DeInit(PlankRNGRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-
-    return PlankResult_OK;
-}
-
-PlankResult pl_RNG_Destroy (PlankRNGRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_RNG_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);
-        
-exit:
-    return result;
-}
-
-void pl_RNG_Seed (PlankRNGRef p, unsigned int seed)
-{
-    p->value = seed;
-}
+#endif // PLINK_WHITENOISE_H

@@ -95,33 +95,30 @@ void pl_RNG_Seed (PlankRNGRef p, unsigned int seed);
 /** Generate a random integer. 
  @param p The <i>Plank %RNG</i> object. 
  @return The random integer. */
-int pl_RNG_Next (PlankRNGRef p);
+static int pl_RNG_Next (PlankRNGRef p);
 
 /** Generate a random unsigned integer over a given range. 
  @param p The <i>Plank %RNG</i> object. 
  @param max Random numbers between 0 and max-1 will be generated. 
  @return The random unsigned integer. */
-unsigned int pl_RNG_NextInt (PlankRNGRef p, unsigned int max);
+static unsigned int pl_RNG_NextInt (PlankRNGRef p, unsigned int max);
 
 /** Generate a random float between 0 and 1. 
  @param p The <i>Plank %RNG</i> object. 
  @return The random float. */
-float pl_RNG_NextFloat (PlankRNGRef p);
+static float pl_RNG_NextFloat (PlankRNGRef p);
 
 /** Generate a random double between 0 and 1. 
  @param p The <i>Plank %RNG</i> object. 
  @return The random double. */
-double pl_RNG_NextDouble (PlankRNGRef p);
+static double pl_RNG_NextDouble (PlankRNGRef p);
 
 /// @} // End group PlankRNGClass
 
 PLANK_END_C_LINKAGE
 
-#if !DOXYGEN
-typedef struct PlankRNG
-{
-    unsigned int value;
-} PlankRNG;
-#endif
+#define PLANK_INLINING_FUNCTIONS 1
+#include "plank_RNGInline.h"
+#undef PLANK_INLINING_FUNCTIONS
 
 #endif // PLANK_RNG_H

@@ -119,7 +119,74 @@ public:
     
 private:
 };
+//------------------------------------------------------------------------------
 
+#ifdef PLONK_USEPLINK
+
+template<>
+class WhiteNoiseChannelInternal<float> : public ChannelInternal<float, WhiteNoiseProcessStateF>
+{
+public:
+    typedef WhiteNoiseProcessStateF             Data;
+    typedef InputDictionary                     Inputs;
+    typedef ChannelBase<float>                  ChannelType;
+    typedef WhiteNoiseChannelInternal<float>    WhiteNoiseInternal;
+    typedef ChannelInternal<float,Data>         Internal;
+    typedef ChannelInternalBase<float>          InternalBase;
+    typedef UnitBase<float>                     UnitType;
+        
+    
+    enum Outputs { Output, NumOutputs };
+    enum InputIndices  { NumInputs };
+    enum Buffers { OutputBuffer, NumBuffers };
+    
+    typedef PlinkProcess<NumBuffers> Process;
+    
+    WhiteNoiseChannelInternal (Inputs const& inputs, 
+                               Data const& data, 
+                               BlockSize const& blockSize,
+                               SampleRate const& sampleRate) throw()
+    :   Internal (inputs, data, blockSize, sampleRate)
+    {
+        plonk_assert (NumBuffers == (NumInputs + NumOutputs));
+        
+        Process::init (&p, this, NumOutputs, NumInputs);
+    }
+    
+    Text getName() const throw()
+    {
+        return "White Noise";
+    }       
+    
+    IntArray getInputKeys() const throw()
+    {
+        const IntArray keys;
+        return keys;
+    }    
+    
+    InternalBase* getChannel (const int index) throw()
+    {
+        return this;
+    }    
+    
+    void initChannel (const int channel) throw()
+    {        
+        this->initValue (0.f);
+    }        
+    
+    void process (ProcessInfo& info, const int channel) throw()
+    {                        
+        p.buffers[0].bufferSize = this->getOutputBuffer().length();;
+        p.buffers[0].buffer     = this->getOutputSamples();
+        
+        plink_WhiteNoiseProcessF (&p, &this->getState());
+    }
+    
+private:
+    Process p;
+};
+
+#endif
 
 //------------------------------------------------------------------------------
 

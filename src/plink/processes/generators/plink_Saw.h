@@ -36,8 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLINK_SAWPROCESS_H
-#define PLINK_SAWPROCESS_H
+#ifndef PLINK_SAW_H
+#define PLINK_SAW_H
 
 #include "../plink_Process.h"
 
@@ -67,4 +67,4 @@ PLINK_END_C_LINKAGE
 
 /// @} End group PlinkSawProcessFClass
 
-#endif // PLINK_SAWPROCESS_H
+#endif // PLINK_SAW_H

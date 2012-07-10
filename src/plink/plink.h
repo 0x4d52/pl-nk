@@ -59,7 +59,8 @@
 #include "processes/plink_Process.h"
 #include "processes/simple/plink_UnaryOpProcess.h"
 #include "processes/simple/plink_BinaryOpProcess.h"
-#include "processes/oscillators/plink_Saw.h"
+#include "processes/generators/plink_Saw.h"
+#include "processes/generators/plink_WhiteNoise.h"
 
 /** Plink modules....
  @defgroup PlinkModules Plink */

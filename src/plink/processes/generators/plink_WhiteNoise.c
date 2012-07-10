@@ -36,96 +36,29 @@
  -------------------------------------------------------------------------------
  */
 
-#include "../core/plank_StandardHeader.h"
-#include "plank_RNG.h"
-#include "../containers/plank_Atomic.h"
+#include "../../core/plink_StandardHeader.h"
+#include "plink_WhiteNoise.h"
 
-#define PLANK_RNG_MAGIC1      1664525
-#define PLANK_RNG_MAGIC2      1013904223
-#define PLANK_RNG_FLOAT_ONE   0x3f800000
-#define PLANK_RNG_FLOAT_MASK  0x007fffff
-#define PLANK_RNG_DOUBLE_ONE  0x3ff0000000000000
-#define PLANK_RNG_DOUBLE_MASK 0x000fffffffffffff
 
-PlankRNGRef pl_RNGGlobal()
+void plink_WhiteNoiseProcessF_N (void* ppv, WhiteNoiseProcessStateF* state)
 {
-    static PlankAtomicI init = { 0 };
-    static PlankRNG rng;
-    
-    if (pl_AtomicI_CompareAndSwap (&init, 0, 1))
-        pl_RNG_Init (&rng);
-    
-    return &rng;
-}
+    PlinkProcessF* pp;
+    int i, N;
+    float *output;
 
-PlankRNGRef pl_RNG_CreateAndInit()
-{
-    PlankRNGRef p;
-    p = pl_RNG_Create();
-    
-    if (p != PLANK_NULL)
+    pp = (PlinkProcessF*)ppv;
+    N = pp->buffers[0].bufferSize;
+    output = pp->buffers[0].buffer;
+    PlankRNGRef rng = &state->rng;
+
+    for (i = 0; i < N; ++i) 
     {
-        if (pl_RNG_Init (p) != PlankResult_OK)
-            pl_RNG_Destroy (p);
-        else
-            return p;
-    }
-    
-    return PLANK_NULL;
+        output[i] = pl_RNG_NextFloat (rng);
+    }    
 }
 
-PlankRNGRef pl_RNG_Create()
+void plink_WhiteNoiseProcessF (void* ppv, WhiteNoiseProcessStateF* state)
 {
-    PlankMemoryRef m;
-    PlankRNGRef p;
-
-    m = pl_MemoryGlobal();
-    p = (PlankRNGRef)pl_Memory_AllocateBytes (m, sizeof (PlankRNG));
-    
-    if (p != NULL)
-        pl_MemoryZero (p, sizeof (PlankRNG));
-    
-    return p;
+    plink_WhiteNoiseProcessF_N (ppv, state);
 }
 
-PlankResult pl_RNG_Init(PlankRNGRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-    
-    p->value = (unsigned int)time (NULL);
-    return PlankResult_OK;
-}
-
-PlankResult pl_RNG_DeInit(PlankRNGRef p)
-{
-    if (p == PLANK_NULL)
-        return PlankResult_MemoryError;
-
-    return PlankResult_OK;
-}
-
-PlankResult pl_RNG_Destroy (PlankRNGRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_RNG_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);
-        
-exit:
-    return result;
-}
-
-void pl_RNG_Seed (PlankRNGRef p, unsigned int seed)
-{
-    p->value = seed;
-}
