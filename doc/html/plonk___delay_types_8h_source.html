@@ -121,42 +121,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00047"></a>00047     {
 <a name="l00048"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca03bbe5c978425fb3d8524d203337e04a">00048</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca03bbe5c978425fb3d8524d203337e04a">Unknown</a> = 0,
 <a name="l00049"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffcabb92b52b1c1db08fb4559b0368ad242f">00049</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffcabb92b52b1c1db08fb4559b0368ad242f">Delay</a>,
-<a name="l00050"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca818f49aca367a9005be83673f86b4f64">00050</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca818f49aca367a9005be83673f86b4f64">NumNames</a>
-<a name="l00051"></a>00051     };
-<a name="l00052"></a>00052     
-<a name="l00053"></a>00053     <span class="keyword">static</span> <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffc">DelayFormType::Name</a> <a class="code" href="class_delay_form_type.html#a3da0be3d025d67857931203c099b55fa">fromInt</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> value) <span class="keywordflow">throw</span>();
-<a name="l00054"></a>00054     <span class="keyword">static</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_delay_form_type.html#a6700c29e2866ec67c6d9afa3b6d10894">getName</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>();
-<a name="l00055"></a>00055 };
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="comment">//class FilterShapeType</span>
-<a name="l00061"></a>00061 <span class="comment">//{</span>
-<a name="l00062"></a>00062 <span class="comment">//public:</span>
-<a name="l00063"></a>00063 <span class="comment">//    enum Name</span>
-<a name="l00064"></a>00064 <span class="comment">//    {</span>
-<a name="l00065"></a>00065 <span class="comment">//        Unknown = 0,</span>
-<a name="l00066"></a>00066 <span class="comment">//        LPF,</span>
-<a name="l00067"></a>00067 <span class="comment">//        HPF,</span>
-<a name="l00068"></a>00068 <span class="comment">//        BPF,</span>
-<a name="l00069"></a>00069 <span class="comment">//        BRF,</span>
-<a name="l00070"></a>00070 <span class="comment">//        LowShelf,</span>
-<a name="l00071"></a>00071 <span class="comment">//        HighShelf,</span>
-<a name="l00072"></a>00072 <span class="comment">//        Notch,</span>
-<a name="l00073"></a>00073 <span class="comment">//        Allpass,</span>
-<a name="l00074"></a>00074 <span class="comment">//        Other,</span>
-<a name="l00075"></a>00075 <span class="comment">//        NumNames</span>
-<a name="l00076"></a>00076 <span class="comment">//    };</span>
-<a name="l00077"></a>00077 <span class="comment">//   </span>
-<a name="l00078"></a>00078 <span class="comment">//    static FilterShapeType::Name fromInt (const int value) throw();</span>
-<a name="l00079"></a>00079 <span class="comment">//    static Text getName (const int index) throw();</span>
-<a name="l00080"></a>00080 <span class="comment">//};</span>
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 <span class="preprocessor">#endif // PLONK_DELAYTYPES_H</span>
+<a name="l00050"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca9971ab66c1b1877b75ec3fd74e7f1b3f">00050</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca9971ab66c1b1877b75ec3fd74e7f1b3f">CombDecay</a>,
+<a name="l00051"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca2d169e109d739a6509bfd353f4ddf33e">00051</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca2d169e109d739a6509bfd353f4ddf33e">CombFB</a>,
+<a name="l00052"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffcada63d333eb1fb176586ebe3896c5f8f5">00052</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffcada63d333eb1fb176586ebe3896c5f8f5">CombFilter1Param</a>,
+<a name="l00053"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffcaa0bc857b839e16c402aff3cc9e6dbc28">00053</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffcaa0bc857b839e16c402aff3cc9e6dbc28">AllpassDecay</a>,
+<a name="l00054"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca1ce14d977fc66ac6cf1fe0704381d30f">00054</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca1ce14d977fc66ac6cf1fe0704381d30f">AllpassFFFB</a>,
+<a name="l00055"></a><a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca818f49aca367a9005be83673f86b4f64">00055</a>         <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffca818f49aca367a9005be83673f86b4f64">NumNames</a>
+<a name="l00056"></a>00056     };
+<a name="l00057"></a>00057     
+<a name="l00058"></a>00058     <span class="keyword">static</span> <a class="code" href="class_delay_form_type.html#a3e45b623681337ea5a6c03e86fd96ffc">DelayFormType::Name</a> <a class="code" href="class_delay_form_type.html#a3da0be3d025d67857931203c099b55fa">fromInt</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> value) <span class="keywordflow">throw</span>();
+<a name="l00059"></a>00059     <span class="keyword">static</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_delay_form_type.html#a6700c29e2866ec67c6d9afa3b6d10894">getName</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keywordflow">throw</span>();
+<a name="l00060"></a>00060 };
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 <span class="preprocessor">#endif // PLONK_DELAYTYPES_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -173,7 +152,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:10 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

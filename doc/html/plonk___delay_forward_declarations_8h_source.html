@@ -115,10 +115,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../plonk_GraphForwardDeclarations.h&quot;</span>
 <a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <span class="comment">//template&lt;class SampleType&gt;                                                                class DelayUnit;</span>
-<a name="l00045"></a>00045 
+<a name="l00044"></a>00044 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, <span class="keywordtype">signed</span> Form, <span class="keywordtype">signed</span> NumInParams, <span class="keywordtype">signed</span> NumOutParams&gt; <span class="keyword">struct </span><a class="code" href="struct_delay_form_data.html">DelayFormData</a>;
+<a name="l00045"></a>00045 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType, <span class="keywordtype">signed</span> Form, <span class="keywordtype">signed</span> NumInParams, <span class="keywordtype">signed</span> NumOutParams&gt; <span class="keyword">class </span><a class="code" href="class_delay_form.html">DelayForm</a>;
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="preprocessor">#endif // PLONK_DELAYFORWARDDECLARATIONS_H</span>
+<a name="l00047"></a>00047 <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormType&gt; <span class="keyword">class </span><a class="code" href="class_delay_channel_internal_base.html">DelayChannelInternalBase</a>;
+<a name="l00048"></a>00048 <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormType&gt; <span class="keyword">class </span><a class="code" href="class_delay1_param_channel_internal.html" title="Delay processor.">Delay1ParamChannelInternal</a>;
+<a name="l00049"></a>00049 <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormType&gt; <span class="keyword">class </span><a class="code" href="class_delay2_param_channel_internal.html" title="Delay processor with two control parameters.">Delay2ParamChannelInternal</a>;
+<a name="l00050"></a>00050 <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormType&gt; <span class="keyword">class </span><a class="code" href="class_delay3_param_channel_internal.html" title="Delay processor with two control parameters.">Delay3ParamChannelInternal</a>;
+<a name="l00051"></a>00051 <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormType&gt; <span class="keyword">class </span><a class="code" href="class_delay4_param_channel_internal.html" title="Delay processor with two control parameters.">Delay4ParamChannelInternal</a>;
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt; <span class="keyword">class </span><a class="code" href="class_delay_form_delay.html">DelayFormDelay</a>;
+<a name="l00054"></a>00054 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt; <span class="keyword">class </span><a class="code" href="class_delay_form_comb_f_b.html">DelayFormCombFB</a>;
+<a name="l00055"></a>00055 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt; <span class="keyword">class </span><a class="code" href="class_delay_form_comb_decay.html">DelayFormCombDecay</a>;
+<a name="l00056"></a>00056 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt; <span class="keyword">class </span><a class="code" href="class_delay_form_allpass_f_f_f_b.html">DelayFormAllpassFFFB</a>;
+<a name="l00057"></a>00057 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt; <span class="keyword">class </span>DelayFormAllPassDecay;
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 <span class="preprocessor">#endif // PLONK_DELAYFORWARDDECLARATIONS_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -135,7 +147,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:10 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -93,6 +93,7 @@ Public Types</h2></td></tr>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, <br class="typebreak"/>
 FilterFormType::P1a &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_l_p_f_p1_base.html#ae90fbe393eeb908f3c8a51ec96740eb9">FormType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_filter_data.html">FormType::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_l_p_f_p1_base.html#a0421422cd28c053a3811addf18b6f867">FormData</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_filter_shape_data.html">FilterShapeData</a><br class="typebreak"/>
 &lt; SampleType, <br class="typebreak"/>
 FormType::NumCoeffs, NumParams &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_l_p_f_p1_base.html#a8a249d81468371bb29cd0114ae9aad2f">Data</a></td></tr>
@@ -103,6 +104,7 @@ FormType::NumCoeffs, NumParams &gt;&#160;</td><td class="memItemRight" valign="b
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_l_p_f_p1_base.html#a93379d6f05020f6d182dd37404c1b18c">getInputKeys</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static SampleType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_l_p_f_p1_base.html#a7a595dde8283516443af6d14c673f114">process</a> (SampleType const &amp;input, <a class="el" href="struct_filter_shape_data.html">Data</a> const &amp;data, <a class="el" href="struct_filter_data.html">FormData</a> &amp;form)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_shape_l_p_f_p1_base.html#a36f07f91401624de5cfae2564ee5b22b">calculate</a> (<a class="el" href="struct_filter_shape_data.html">Data</a> &amp;data)  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -149,6 +151,21 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="struct_filter_shape_data.html">FilterShapeData</a>&lt;SampleType,FormType::NumCoeffs,NumParams&gt; <a class="el" href="class_filter_shape_l_p_f_p1_base.html">FilterShapeLPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_shape_data.html">Data</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0421422cd28c053a3811addf18b6f867"></a><!-- doxytag: member="FilterShapeLPFP1Base::FormData" ref="a0421422cd28c053a3811addf18b6f867" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_filter_data.html">FormType::Data</a> <a class="el" href="class_filter_shape_l_p_f_p1_base.html">FilterShapeLPFP1Base</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_data.html">FormData</a></td>
         </tr>
       </table>
 </div>
@@ -248,6 +265,41 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a7a595dde8283516443af6d14c673f114"></a><!-- doxytag: member="FilterShapeLPFP1Base::process" ref="a7a595dde8283516443af6d14c673f114" args="(SampleType const &amp;input, Data const &amp;data, FormData &amp;form)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static SampleType <a class="el" href="class_filter_shape_l_p_f_p1_base.html">FilterShapeLPFP1Base</a>&lt; SampleType &gt;::process </td>
+          <td>(</td>
+          <td class="paramtype">SampleType const &amp;&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_filter_shape_data.html">Data</a> const &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_filter_data.html">FormData</a> &amp;&#160;</td>
+          <td class="paramname"><em>form</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_shapes_simple_8h_source.html">plonk_FilterShapesSimple.h</a></li>
 </ul>
@@ -266,7 +318,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:16 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:54 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

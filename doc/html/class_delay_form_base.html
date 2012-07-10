@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>pl-nk: DelayFormBase&lt; SampleType, Form &gt; Class Template Reference</title>
+<title>pl-nk: DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -65,18 +65,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">DelayFormBase&lt; SampleType, Form &gt; Class Template Reference</div>  </div>
+<div class="title">DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="DelayFormBase" -->
 <p><code>#include &lt;<a class="el" href="plonk___delay_forms_8h_source.html">plonk_DelayForms.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for DelayFormBase&lt; SampleType, Form &gt;:</div>
+Inheritance diagram for DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="class_delay_form_base.png" usemap="#DelayFormBase&lt; SampleType, Form &gt;_map" alt=""/>
-  <map id="DelayFormBase&lt; SampleType, Form &gt;_map" name="DelayFormBase&lt; SampleType, Form &gt;_map">
-<area href="class_delay_form.html" alt="DelayForm&lt; SampleType, Form &gt;" shape="rect" coords="0,56,233,80"/>
+  <img src="class_delay_form_base.png" usemap="#DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;_map" alt=""/>
+  <map id="DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;_map" name="DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;_map">
+<area href="class_delay_form.html" alt="DelayForm&lt; SampleType, Form, NumInParams, NumOutParams &gt;" shape="rect" coords="0,56,415,80"/>
+<area href="class_delay_form.html" alt="DelayForm&lt; SampleType, DelayFormType::AllpassFFFB, 2, 2 &gt;" shape="rect" coords="425,56,840,80"/>
+<area href="class_delay_form.html" alt="DelayForm&lt; SampleType, DelayFormType::CombFB, 2, 2 &gt;" shape="rect" coords="850,56,1265,80"/>
+<area href="class_delay_form.html" alt="DelayForm&lt; SampleType, DelayFormType::Delay, 1, 1 &gt;" shape="rect" coords="1275,56,1690,80"/>
+<area href="class_delay_form_allpass_f_f_f_b.html" alt="DelayFormAllpassFFFB&lt; SampleType &gt;" shape="rect" coords="425,112,840,136"/>
+<area href="class_delay_form_comb_f_b.html" alt="DelayFormCombFB&lt; SampleType &gt;" shape="rect" coords="850,112,1265,136"/>
+<area href="class_delay_form_delay.html" alt="DelayFormDelay&lt; SampleType &gt;" shape="rect" coords="1275,112,1690,136"/>
+<area href="class_delay_form_allpass_decay.html" alt="DelayFormAllpassDecay&lt; SampleType &gt;" shape="rect" coords="425,168,840,192"/>
+<area href="class_delay_form_comb_decay.html" alt="DelayFormCombDecay&lt; SampleType &gt;" shape="rect" coords="850,168,1265,192"/>
 </map>
  </div></div>
 
@@ -84,20 +92,39 @@ Inheritance diagram for DelayFormBase&lt; SampleType, Form &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay_form_base.html#aca79e94428cd795d26ba5aa1cc5409b7">getName</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay_form_base.html#a80e9bb39491b9b5567cad05555ef09bc">getName</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay_form_base.html#a906a8342bb6c6ae3852f1644564ef4e1">getNumCircularBuffers</a> ()  throw ()</td></tr>
 </table>
-<h3>template&lt;class SampleType, signed Form&gt;<br/>
- class DelayFormBase&lt; SampleType, Form &gt;</h3>
+<h3>template&lt;class SampleType, signed Form, signed NumInParams, signed NumOutParams&gt;<br/>
+ class DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;</h3>
 
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aca79e94428cd795d26ba5aa1cc5409b7"></a><!-- doxytag: member="DelayFormBase::getName" ref="aca79e94428cd795d26ba5aa1cc5409b7" args="()" -->
+<a class="anchor" id="a80e9bb39491b9b5567cad05555ef09bc"></a><!-- doxytag: member="DelayFormBase::getName" ref="a80e9bb39491b9b5567cad05555ef09bc" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class SampleType, signed Form&gt; </div>
+template&lt;class SampleType, signed Form, signed NumInParams, signed NumOutParams&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_text.html">Text</a> <a class="el" href="class_delay_form_base.html">DelayFormBase</a>&lt; SampleType, Form &gt;::getName </td>
+          <td class="memname">static <a class="el" href="class_text.html">Text</a> <a class="el" href="class_delay_form_base.html">DelayFormBase</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a906a8342bb6c6ae3852f1644564ef4e1"></a><!-- doxytag: member="DelayFormBase::getNumCircularBuffers" ref="a906a8342bb6c6ae3852f1644564ef4e1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static int <a class="el" href="class_delay_form_base.html">DelayFormBase</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::getNumCircularBuffers </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -126,7 +153,7 @@ template&lt;class SampleType, signed Form&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:15 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

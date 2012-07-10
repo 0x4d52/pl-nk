@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ChannelMixerChannelInternal&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="ChannelMixerChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal, SampleType)&gt;" -->
+<!-- doxytag: class="ChannelMixerChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" -->
 <p>Mix all channels in a single unit to a single channel.  
  <a href="class_channel_mixer_channel_internal.html#details">More...</a></p>
 
@@ -80,13 +80,13 @@ Inheritance diagram for ChannelMixerChannelInternal&lt; SampleType &gt;:</div>
  <div class="center">
   <img src="class_channel_mixer_channel_internal.png" usemap="#ChannelMixerChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="ChannelMixerChannelInternal&lt; SampleType &gt;_map" name="ChannelMixerChannelInternal&lt; SampleType &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal, SampleType)&gt;" shape="rect" coords="973,168,1612,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="649,112,1288,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1298,112,1937,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,639,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="649,56,1288,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1298,56,1937,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,639,24"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="856,168,1417,192"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="571,112,1132,136"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1142,112,1703,136"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,561,80"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="571,56,1132,80"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1142,56,1703,80"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,561,24"/>
 </map>
  </div></div>
 
@@ -94,6 +94,10 @@ Inheritance diagram for ChannelMixerChannelInternal&lt; SampleType &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data.html">ChannelData</a><br class="typebreak"/>
+&lt; <a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a><br class="typebreak"/>
+&lt; SampleType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html#a0b4582c80f049e243c71a00118dfee6c">Data</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#a0b4582c80f049e243c71a00118dfee6c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html#a145d487589d95f1a8a503e28f4beca64">ChannelType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
 <a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a><br class="typebreak"/>
@@ -108,7 +112,6 @@ Public Types</h2></td></tr>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html#a0d31249c6130576a85c9d28aae0a8ad9">Buffer</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html#ad7b403e2115bfd20e4f6faef7a3b3e47">PLONK_CHANNELDATA_NAME</a> (<a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a>, SampleType) <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html#a0c61170e1dc06c47b805b269443433ab">ChannelMixerChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html#a775f5a1b1c867925fcb4b3f9f283e30e">getName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_mixer_channel_internal.html#a8811a9d505d2ea1a16664dc270af082f">getInputKeys</a> () const   throw ()</td></tr>
@@ -137,7 +140,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal, SampleType)&gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -169,7 +172,27 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal, SampleType)&gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0b4582c80f049e243c71a00118dfee6c"></a><!-- doxytag: member="ChannelMixerChannelInternal::Data" ref="a0b4582c80f049e243c71a00118dfee6c" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a> &lt; SampleType &gt; &gt; <a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>To store channel state data. </p>
+<p>Sublasses should inherit from this, add their own members, and store an instance. Where applicable the structure should match the equivalents in the Plink library. </p>
+
+<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a09763233582f6f0985461449aa262ae5">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -186,7 +209,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal, SampleType)&gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -203,7 +226,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal, SampleType)&gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -235,7 +258,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal, SampleType)&gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, ChannelData&lt; ChannelMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -367,35 +390,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad7b403e2115bfd20e4f6faef7a3b3e47"></a><!-- doxytag: member="ChannelMixerChannelInternal::PLONK_CHANNELDATA_NAME" ref="ad7b403e2115bfd20e4f6faef7a3b3e47" args="(ChannelMixerChannelInternal, SampleType) Data" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a>&lt; SampleType &gt;::PLONK_CHANNELDATA_NAME </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a>&lt; SampleType &gt;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SampleType&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="af388639c73905f4d9fd47ed34adce022"></a><!-- doxytag: member="ChannelMixerChannelInternal::process" ref="af388639c73905f4d9fd47ed34adce022" args="(ProcessInfo &amp;info, const int)" -->
 <div class="memitem">
 <div class="memproto">
@@ -448,7 +442,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:15 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:52 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

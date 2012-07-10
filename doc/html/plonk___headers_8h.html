@@ -151,6 +151,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;../graph/simple/plonk_VariableChannel.h&quot;</code><br/>
 <code>#include &quot;../graph/simple/plonk_AtomicVariableChannel.h&quot;</code><br/>
 <code>#include &quot;../graph/generators/plonk_Saw.h&quot;</code><br/>
+<code>#include &quot;../graph/generators/plonk_WhiteNoise.h&quot;</code><br/>
 <code>#include &quot;../graph/generators/plonk_Table.h&quot;</code><br/>
 <code>#include &quot;../graph/generators/plonk_SignalPlay.h&quot;</code><br/>
 <code>#include &quot;../graph/filters/plonk_FilterForwardDeclarations.h&quot;</code><br/>
@@ -166,9 +167,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;../graph/filters/shapes/plonk_FilterShapesP2Z2.h&quot;</code><br/>
 <code>#include &quot;../graph/filters/shapes/plonk_FilterShapesB.h&quot;</code><br/>
 <code>#include &quot;../graph/delay/plonk_DelayForwardDeclarations.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_DelayBase.h&quot;</code><br/>
 <code>#include &quot;../graph/delay/plonk_DelayTypes.h&quot;</code><br/>
 <code>#include &quot;../graph/delay/plonk_DelayForms.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_Delay.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_DelayFormDelay.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_DelayFormCombDecay.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_DelayFormCombFB.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_DelayFormCombFilter1Param.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_DelayFormAllpassDecay.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_DelayFormAllpassFFFB.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_Delay1Param.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_Delay2Param.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_Delay3Param.h&quot;</code><br/>
+<code>#include &quot;../graph/delay/plonk_Delay4Param.h&quot;</code><br/>
 <code>#include &quot;../graph/control/plonk_EnvelopeChannel.h&quot;</code><br/>
 <code>#include &quot;../graph/fft/plonk_FFTChannel.h&quot;</code><br/>
 <code>#include &quot;../graph/fft/plonk_IFFTChannel.h&quot;</code><br/>
@@ -192,7 +203,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:12 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

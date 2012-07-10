@@ -142,7 +142,7 @@ Inheritance diagram for SmartPointer:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Miscellaneous</div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a5924160b4e8c220951aaeac4328f637d">getRefCount</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a5924160b4e8c220951aaeac4328f637d">getRefCount</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#ad9b847814db1a98672a6e1c3be4d3076">isActive</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a91e9d2ec0e1ed1d0d34344f4c8b63994">update</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#ab5e9a656c806bcc764321c90f3218ff6">getWeak</a> () const   throw ()</td></tr>
@@ -151,7 +151,7 @@ Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a3eba77b47581c836520d1c32b2726ca9">destroy</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; <a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a87c671981d16ad14ce2fbf12478dd394">refCount</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt; Long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#a87c671981d16ad14ce2fbf12478dd394">refCount</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#af75157adb0bca4ac771b6e2f97b44951">weakPointer</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer.html#abac7a991ec089ad87a2bcda60e4fe2da">active</a></td></tr>
 <tr><td colspan="2"><h2><a name="member-group"></a>
@@ -238,7 +238,7 @@ Construction and destruction</h2></td></tr>
 <p>Most <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> subclass don't need this but some which naturally form circular references may need to detect this state and release themselves. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal</a>, <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a> </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_proxy_channel_internal.html#a461146a715e59e231ce1ddb9ea39c0e0">ProxyChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal, SampleType)&gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_proxy_channel_internal.html#a461146a715e59e231ce1ddb9ea39c0e0">ProxyChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt; &gt;</a>, <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;</a>, and <a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
 
 </div>
 </div>
@@ -263,7 +263,7 @@ Construction and destruction</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a> SmartPointer::getRefCount </td>
+          <td class="memname">Long SmartPointer::getRefCount </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -393,7 +393,7 @@ Construction and destruction</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;<a class="el" href="plonk___standard_header_8h.html#a951638d5b3c1bbe3b063e48121b4ae0a">Long</a>&gt; <a class="el" href="class_smart_pointer.html#a87c671981d16ad14ce2fbf12478dd394">SmartPointer::refCount</a><code> [protected]</code></td>
+          <td class="memname"><a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;Long&gt; <a class="el" href="class_smart_pointer.html#a87c671981d16ad14ce2fbf12478dd394">SmartPointer::refCount</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -433,7 +433,7 @@ Construction and destruction</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:21 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

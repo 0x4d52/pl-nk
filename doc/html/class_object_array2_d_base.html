@@ -113,14 +113,20 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a228f1b0ffdd13ea3d0f88cffe994afbb">ObjectArrayAssignmentDefinition</a> (<a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>, RowType)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#ab892943135a6777ce7c6a5f490cbeeee">ObjectArray2DBase</a> (<a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt; const &amp;array0, <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt; const &amp;array1)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a5f92c4180cdc093b9d2efe80c53f1769">contains</a> (ArrayType const &amp;item) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Does the item contain a particular item.  <a href="#a5f92c4180cdc093b9d2efe80c53f1769"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a554c8525c50532a264c3c7d63f554141">indexOf</a> (ArrayType const &amp;item, int &amp;row, int &amp;column) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for the row and column index of an item.  <a href="#a554c8525c50532a264c3c7d63f554141"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a45476db2dcbb85fd62d1f193cc99a5ba">isMatrix</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Does each of the rows of the 2D array contain the same number of items.  <a href="#a45476db2dcbb85fd62d1f193cc99a5ba"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#abab907a4c2f115abd51b2b74b92bcd11">numRows</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number rows in the 2D array.  <a href="#abab907a4c2f115abd51b2b74b92bcd11"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a7f18891a5476fbfc4c71ed05cc7a4946">numColumns</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the largest length row in each of the rows in the 2D array.  <a href="#a7f18891a5476fbfc4c71ed05cc7a4946"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">RowType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#adbed4457ecfc4ead043257d91ae700dd">flatten</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Flatten the array to a one dimensional array.  <a href="#adbed4457ecfc4ead043257d91ae700dd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">RowType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#aebfb577a164022b86222822e1187318e">columnWrapAt</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_object_array.html">ObjectArrayType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd">interleave</a> ()  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Interleave the 2D array into one dimension.  <a href="#a48a1a46956adc5c15b0cfec6d297f3dd"></a><br/></td></tr>
 </table>
 <h3>template&lt;class ArrayType, class RowType&gt;<br/>
  class ObjectArray2DBase&lt; ArrayType, RowType &gt;</h3>
@@ -814,6 +820,8 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Does the item contain a particular item. </p>
+
 </div>
 </div>
 <a class="anchor" id="adbed4457ecfc4ead043257d91ae700dd"></a><!-- doxytag: member="ObjectArray2DBase::flatten" ref="adbed4457ecfc4ead043257d91ae700dd" args="() const " -->
@@ -831,6 +839,8 @@ template&lt;class ArrayType, class RowType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Flatten the array to a one dimensional array. </p>
 
 </div>
 </div>
@@ -888,6 +898,17 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Interleave the 2D array into one dimension. </p>
+<p>The result will contain the same number of array items but flattened to a one dimensional array.</p>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment">     <a class="code" href="class_numerical_array.html">IntArray</a> source1d (1, 2, 3, 4, 5, 6, 7);
+     
+     <a class="code" href="class_numerical_array2_d.html">IntArray2D</a> dest2d = source1d.<a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="Deinternleave this array into a 2D array with a particular number of groups.">deinterleave</a> (2);
+     <span class="comment">// result will be {{1, 3, 5, 7}, {2, 4, 6}}</span>
+     
+     <a class="code" href="class_numerical_array.html">IntArray</a> dest1d = dest2d.<a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd" title="Interleave the 2D array into one dimension.">interleave</a>();
+     <span class="comment">// result will be {1, 2, 3, 4, 5, 6, 7}</span>
+</pre></div> 
 </div>
 </div>
 <a class="anchor" id="a45476db2dcbb85fd62d1f193cc99a5ba"></a><!-- doxytag: member="ObjectArray2DBase::isMatrix" ref="a45476db2dcbb85fd62d1f193cc99a5ba" args="() const " -->
@@ -905,6 +926,8 @@ template&lt;class ArrayType, class RowType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Does each of the rows of the 2D array contain the same number of items. </p>
 
 </div>
 </div>
@@ -924,6 +947,9 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Return the largest length row in each of the rows in the 2D array. </p>
+<p>This can be used in conjunction with <a class="el" href="class_object_array2_d_base.html#a45476db2dcbb85fd62d1f193cc99a5ba" title="Does each of the rows of the 2D array contain the same number of items.">isMatrix()</a> to determin if all the row lengths are the same (i.e., the 2D array is a matrix). </p>
+
 </div>
 </div>
 <a class="anchor" id="abab907a4c2f115abd51b2b74b92bcd11"></a><!-- doxytag: member="ObjectArray2DBase::numRows" ref="abab907a4c2f115abd51b2b74b92bcd11" args="() const " -->
@@ -941,6 +967,8 @@ template&lt;class ArrayType, class RowType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Return the number rows in the 2D array. </p>
 
 </div>
 </div>
@@ -1012,7 +1040,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:18 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

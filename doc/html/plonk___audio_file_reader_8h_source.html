@@ -185,7 +185,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00111"></a>00111 {
 <a name="l00112"></a>00112     <span class="comment">// this needs to do many more checks...</span>
 <a name="l00113"></a>00113     
-<a name="l00114"></a>00114     <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result;
+<a name="l00114"></a>00114     <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result;
 <a name="l00115"></a>00115     
 <a name="l00116"></a>00116     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a> SampleArray;
 <a name="l00117"></a>00117     
@@ -225,7 +225,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00151"></a>00151         {            
 <a name="l00152"></a>00152             <span class="keywordflow">if</span> (bytesPerSample == 2)
 <a name="l00153"></a>00153             {
-<a name="l00154"></a>00154                 <a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a62dd0af849edb0b4496ab8f18087cdfc">Short</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00154"></a>00154                 <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ab187ef52fc28b259d5800da6d4352f16">Short</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ab187ef52fc28b259d5800da6d4352f16">Short</a>*<span class="keyword">&gt;</span> (readBufferArray); 
 <a name="l00155"></a>00155                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
 <a name="l00156"></a>00156                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
 <a name="l00157"></a>00157                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
@@ -239,14 +239,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00165"></a>00165             }
 <a name="l00166"></a>00166             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 4)
 <a name="l00167"></a>00167             {
-<a name="l00168"></a>00168                 <a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#ace5c3f44bf4a264c8b4ce9c4ba6e2979">Int</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00168"></a>00168                 <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a844cf07e4b4041981d8b6032c7953b30">Int</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a844cf07e4b4041981d8b6032c7953b30">Int</a>*<span class="keyword">&gt;</span> (readBufferArray); 
 <a name="l00169"></a>00169                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
 <a name="l00170"></a>00170                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
 <a name="l00171"></a>00171                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
 <a name="l00172"></a>00172             }
 <a name="l00173"></a>00173             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 1)
 <a name="l00174"></a>00174             {
-<a name="l00175"></a>00175                 <a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a798ee39c5fecb0b2282cac9e2522509c">Char</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00175"></a>00175                 <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a4ed64363688ff976adafc517ccbaed23">Char</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a4ed64363688ff976adafc517ccbaed23">Char</a>*<span class="keyword">&gt;</span> (readBufferArray); 
 <a name="l00176"></a>00176                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
 <a name="l00177"></a>00177                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
 <a name="l00178"></a>00178             }
@@ -259,14 +259,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00185"></a>00185         {
 <a name="l00186"></a>00186             <span class="keywordflow">if</span> (bytesPerSample == 4)
 <a name="l00187"></a>00187             {
-<a name="l00188"></a>00188                 <a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a6fb08ae63158b73fd8d2ee1235967aef">Float</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00188"></a>00188                 <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a682546ee38c6491370ba520226663103">Float</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a682546ee38c6491370ba520226663103">Float</a>*<span class="keyword">&gt;</span> (readBufferArray); 
 <a name="l00189"></a>00189                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
 <a name="l00190"></a>00190                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
 <a name="l00191"></a>00191                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
 <a name="l00192"></a>00192             }
 <a name="l00193"></a>00193             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bytesPerSample == 8)
 <a name="l00194"></a>00194             {
-<a name="l00195"></a>00195                 <a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="plonk___standard_header_8h.html#a1d67c07e5487fdf4b9b07dba8a210ed6">Double</a>*<span class="keyword">&gt;</span> (readBufferArray); 
+<a name="l00195"></a>00195                 <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a2995d24f02a86027c4b40693afb989ff">Double</a>* <span class="keyword">const</span> convertBuffer = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a2995d24f02a86027c4b40693afb989ff">Double</a>*<span class="keyword">&gt;</span> (readBufferArray); 
 <a name="l00196"></a>00196                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
 <a name="l00197"></a>00197                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
 <a name="l00198"></a>00198                 <span class="comment">// could deinterleve here using the temp readBufferArray </span>
@@ -460,7 +460,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:10 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

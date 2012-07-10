@@ -132,7 +132,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00059"></a>00059     
 <a name="l00060"></a><a class="code" href="class_simple_linked_list_internal.html#a0e8d3f3eee9deff0cdb7ab8050cc5855">00060</a>     <a class="code" href="class_simple_linked_list_internal.html#a0e8d3f3eee9deff0cdb7ab8050cc5855">~SimpleLinkedListInternal</a>()
 <a name="l00061"></a>00061     {
-<a name="l00062"></a>00062         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result;
+<a name="l00062"></a>00062         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result;
 <a name="l00063"></a>00063         
 <a name="l00064"></a>00064         result = <a class="code" href="group___plank_simple_linked_list_class.html#ga8becd3c3678bf04cb4d6f68407faebab">pl_SimpleLinkedList_Clear</a> (&amp;list);
 <a name="l00065"></a>00065         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
@@ -147,26 +147,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00074"></a>00074     
 <a name="l00075"></a><a class="code" href="class_simple_linked_list_internal.html#a5f6930866c413e5ff0f817f18bce2369">00075</a>     <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list_internal.html#a5f6930866c413e5ff0f817f18bce2369">add</a> (ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00076"></a>00076     {
-<a name="l00077"></a>00077         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga2a36814a42ab3f713bd6f8def2b9c990">pl_SimpleLinkedList_Add</a> (&amp;list, createElement (value));
+<a name="l00077"></a>00077         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga2a36814a42ab3f713bd6f8def2b9c990">pl_SimpleLinkedList_Add</a> (&amp;list, createElement (value));
 <a name="l00078"></a>00078         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00079"></a>00079 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00080"></a>00080 <span class="preprocessor"></span>        (void)result;
 <a name="l00081"></a>00081 <span class="preprocessor">#endif</span>
 <a name="l00082"></a>00082 <span class="preprocessor"></span>    }
 <a name="l00083"></a>00083     
-<a name="l00084"></a><a class="code" href="class_simple_linked_list_internal.html#a58eae7232189c2bc718d387e60f2b049">00084</a>     <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list_internal.html#a58eae7232189c2bc718d387e60f2b049">insertAtIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index, ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
+<a name="l00084"></a><a class="code" href="class_simple_linked_list_internal.html#a58eae7232189c2bc718d387e60f2b049">00084</a>     <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list_internal.html#a58eae7232189c2bc718d387e60f2b049">insertAtIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index, ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00085"></a>00085     {
-<a name="l00086"></a>00086         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga9df0ee45c1ac452565c000fe4ff2d5b1">pl_SimpleLinkedList_InsertAtIndex</a> (&amp;list, index, createElement (value));
+<a name="l00086"></a>00086         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga9df0ee45c1ac452565c000fe4ff2d5b1">pl_SimpleLinkedList_InsertAtIndex</a> (&amp;list, index, createElement (value));
 <a name="l00087"></a>00087         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00088"></a>00088 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00089"></a>00089 <span class="preprocessor"></span>        (void)result;
 <a name="l00090"></a>00090 <span class="preprocessor">#endif</span>
 <a name="l00091"></a>00091 <span class="preprocessor"></span>    }
 <a name="l00092"></a>00092     
-<a name="l00093"></a><a class="code" href="class_simple_linked_list_internal.html#a0000093738c3f432a71ff19c92a4bf9c">00093</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#a0000093738c3f432a71ff19c92a4bf9c">atIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index) <span class="keywordflow">throw</span>()
+<a name="l00093"></a><a class="code" href="class_simple_linked_list_internal.html#a0000093738c3f432a71ff19c92a4bf9c">00093</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#a0000093738c3f432a71ff19c92a4bf9c">atIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index) <span class="keywordflow">throw</span>()
 <a name="l00094"></a>00094     {
 <a name="l00095"></a>00095         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00096"></a>00096         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gaba49cefde0b278134af8b76d01193599">pl_SimpleLinkedList_AtIndex</a> (&amp;list, index, &amp;element);
+<a name="l00096"></a>00096         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gaba49cefde0b278134af8b76d01193599">pl_SimpleLinkedList_AtIndex</a> (&amp;list, index, &amp;element);
 <a name="l00097"></a>00097         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00098"></a>00098 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00099"></a>00099 <span class="preprocessor"></span>        (void)result;
@@ -177,7 +177,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00104"></a><a class="code" href="class_simple_linked_list_internal.html#aa0b49e78f84005eea52bbcbb90cf956c">00104</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#aa0b49e78f84005eea52bbcbb90cf956c">getFirst</a>() throw()
 <a name="l00105"></a>00105     {
 <a name="l00106"></a>00106         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00107"></a>00107         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
+<a name="l00107"></a>00107         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
 <a name="l00108"></a>00108         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00109"></a>00109 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00110"></a>00110 <span class="preprocessor"></span>        (void)result;
@@ -188,7 +188,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00115"></a><a class="code" href="class_simple_linked_list_internal.html#ac4b45ed6683cbe73b839c973aa6becb7">00115</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#ac4b45ed6683cbe73b839c973aa6becb7">getLast</a>() throw()
 <a name="l00116"></a>00116     {
 <a name="l00117"></a>00117         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00118"></a>00118         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga588ecf34b789342b43cb2b809f7cf20a">pl_SimpleLinkedList_GetLast</a> (&amp;list, &amp;element);
+<a name="l00118"></a>00118         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga588ecf34b789342b43cb2b809f7cf20a">pl_SimpleLinkedList_GetLast</a> (&amp;list, &amp;element);
 <a name="l00119"></a>00119         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00120"></a>00120 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00121"></a>00121 <span class="preprocessor"></span>        (void)result;
@@ -196,10 +196,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00123"></a>00123 <span class="preprocessor"></span>        <span class="keywordflow">return</span> getValueFromElement (element);
 <a name="l00124"></a>00124     }
 <a name="l00125"></a>00125     
-<a name="l00126"></a><a class="code" href="class_simple_linked_list_internal.html#a352c7916732166d331e3b573ee767f68">00126</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#a352c7916732166d331e3b573ee767f68">removeAtIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index) <span class="keywordflow">throw</span>()
+<a name="l00126"></a><a class="code" href="class_simple_linked_list_internal.html#a352c7916732166d331e3b573ee767f68">00126</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#a352c7916732166d331e3b573ee767f68">removeAtIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index) <span class="keywordflow">throw</span>()
 <a name="l00127"></a>00127     {
 <a name="l00128"></a>00128         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00129"></a>00129         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga25fb0f09e4eb87cb1fa09c00779c4550">pl_SimpleLinkedList_RemoveAtIndex</a> (&amp;list, index, &amp;element);
+<a name="l00129"></a>00129         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga25fb0f09e4eb87cb1fa09c00779c4550">pl_SimpleLinkedList_RemoveAtIndex</a> (&amp;list, index, &amp;element);
 <a name="l00130"></a>00130         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00131"></a>00131 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00132"></a>00132 <span class="preprocessor"></span>        (void)result;
@@ -210,7 +210,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00137"></a><a class="code" href="class_simple_linked_list_internal.html#a1cf1a23f1923bd472da95b867f659815">00137</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#a1cf1a23f1923bd472da95b867f659815">removeFirst</a>() throw()
 <a name="l00138"></a>00138     {
 <a name="l00139"></a>00139         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00140"></a>00140         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gad111a4cefa6c31528751c22f184496db">pl_SimpleLinkedList_RemoveFirst</a> (&amp;list, &amp;element);
+<a name="l00140"></a>00140         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gad111a4cefa6c31528751c22f184496db">pl_SimpleLinkedList_RemoveFirst</a> (&amp;list, &amp;element);
 <a name="l00141"></a>00141         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00142"></a>00142 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00143"></a>00143 <span class="preprocessor"></span>        (void)result;
@@ -221,7 +221,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00148"></a><a class="code" href="class_simple_linked_list_internal.html#a1d540ec122e0026af4d244d5d4d16ee5">00148</a>     ValueType <a class="code" href="class_simple_linked_list_internal.html#a1d540ec122e0026af4d244d5d4d16ee5">removeLast</a>() throw()
 <a name="l00149"></a>00149     {
 <a name="l00150"></a>00150         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00151"></a>00151         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gac26a15b09dd58d45c63d98d1d11552f1">pl_SimpleLinkedList_RemoveLast</a> (&amp;list, &amp;element);
+<a name="l00151"></a>00151         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gac26a15b09dd58d45c63d98d1d11552f1">pl_SimpleLinkedList_RemoveLast</a> (&amp;list, &amp;element);
 <a name="l00152"></a>00152         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00153"></a>00153 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00154"></a>00154 <span class="preprocessor"></span>        (void)result;
@@ -229,13 +229,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00156"></a>00156 <span class="preprocessor"></span>        <span class="keywordflow">return</span> removeValueFromElement (element);
 <a name="l00157"></a>00157     }
 <a name="l00158"></a>00158     
-<a name="l00159"></a><a class="code" href="class_simple_linked_list_internal.html#a8d2cc915b317c451738332734a83e8f1">00159</a>     <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a8d2cc915b317c451738332734a83e8f1">indexOf</a> (ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
+<a name="l00159"></a><a class="code" href="class_simple_linked_list_internal.html#a8d2cc915b317c451738332734a83e8f1">00159</a>     <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a8d2cc915b317c451738332734a83e8f1">indexOf</a> (ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00160"></a>00160     {
 <a name="l00161"></a>00161         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00162"></a>00162         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
+<a name="l00162"></a>00162         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
 <a name="l00163"></a>00163         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00164"></a>00164         
-<a name="l00165"></a>00165         <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index = 0;
+<a name="l00165"></a>00165         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index = 0;
 <a name="l00166"></a>00166         
 <a name="l00167"></a>00167         <span class="keywordflow">while</span> (element != 0)
 <a name="l00168"></a>00168         {
@@ -252,7 +252,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00179"></a>00179 <span class="preprocessor"></span>        <span class="keywordflow">return</span> -1;
 <a name="l00180"></a>00180     }
 <a name="l00181"></a>00181     
-<a name="l00182"></a><a class="code" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">00182</a>     <span class="keyword">inline</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">size</a>() throw()
+<a name="l00182"></a><a class="code" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">00182</a>     <span class="keyword">inline</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">size</a>() throw()
 <a name="l00183"></a>00183     {
 <a name="l00184"></a>00184         <span class="keywordflow">return</span> <a class="code" href="group___plank_simple_linked_list_class.html#ga1dcd6f46a3eb06a39f837dd1722a53b5">pl_SimpleLinkedList_GetSize</a> (&amp;list);
 <a name="l00185"></a>00185     }
@@ -290,7 +290,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00217"></a>00217         
 <a name="l00218"></a>00218         ValueType* <span class="keyword">const</span> value = <span class="keyword">static_cast&lt;</span>ValueType*<span class="keyword">&gt;</span> (<a class="code" href="group___plank_simple_linked_list_element_class.html#ga28d35b1818f5c42f407551ab1baf1d6c">pl_SimpleLinkedListElement_GetData</a> (element));
 <a name="l00219"></a>00219         
-<a name="l00220"></a>00220         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_element_class.html#gac6ac3283f18a4ccfdac40dcc6b3ee806">pl_SimpleLinkedListElement_Destroy</a> (element);
+<a name="l00220"></a>00220         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_element_class.html#gac6ac3283f18a4ccfdac40dcc6b3ee806">pl_SimpleLinkedListElement_Destroy</a> (element);
 <a name="l00221"></a>00221         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00222"></a>00222 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00223"></a>00223 <span class="preprocessor"></span>        (void)result;
@@ -308,7 +308,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00235"></a>00235         }
 <a name="l00236"></a>00236     }
 <a name="l00237"></a>00237 
-<a name="l00238"></a>00238     <span class="keyword">static</span> <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> freeElement (<a class="code" href="plonk___standard_header_8h.html#ae27c804e609988476229004fb717ab5a">Pointer</a> data)
+<a name="l00238"></a>00238     <span class="keyword">static</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> freeElement (<a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a72a786a3c34c8b3418a6181b3a359cdd">Pointer</a> data)
 <a name="l00239"></a>00239     {
 <a name="l00240"></a>00240         <span class="keyword">delete</span> <span class="keyword">static_cast&lt;</span>ValueType*<span class="keyword">&gt;</span> (data);
 <a name="l00241"></a>00241         <span class="keywordflow">return</span> <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>;
@@ -336,26 +336,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00263"></a>00263         
 <a name="l00264"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a6918896bbef5ef674048a2052a975a16">00264</a>     <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list_internal.html#a5f6930866c413e5ff0f817f18bce2369">add</a> (ValueType* <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00265"></a>00265     {
-<a name="l00266"></a>00266         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga2a36814a42ab3f713bd6f8def2b9c990">pl_SimpleLinkedList_Add</a> (&amp;list, createElement (value));
+<a name="l00266"></a>00266         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga2a36814a42ab3f713bd6f8def2b9c990">pl_SimpleLinkedList_Add</a> (&amp;list, createElement (value));
 <a name="l00267"></a>00267         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00268"></a>00268 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00269"></a>00269 <span class="preprocessor"></span>        (void)result;
 <a name="l00270"></a>00270 <span class="preprocessor">#endif</span>
 <a name="l00271"></a>00271 <span class="preprocessor"></span>    }
 <a name="l00272"></a>00272     
-<a name="l00273"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a3b7d5278891694e5f0eb63f49d2fcf88">00273</a>     <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list_internal.html#a58eae7232189c2bc718d387e60f2b049">insertAtIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index, ValueType* <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
+<a name="l00273"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a3b7d5278891694e5f0eb63f49d2fcf88">00273</a>     <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list_internal.html#a58eae7232189c2bc718d387e60f2b049">insertAtIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index, ValueType* <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00274"></a>00274     {
-<a name="l00275"></a>00275         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga9df0ee45c1ac452565c000fe4ff2d5b1">pl_SimpleLinkedList_InsertAtIndex</a> (&amp;list, index, createElement (value));
+<a name="l00275"></a>00275         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga9df0ee45c1ac452565c000fe4ff2d5b1">pl_SimpleLinkedList_InsertAtIndex</a> (&amp;list, index, createElement (value));
 <a name="l00276"></a>00276         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00277"></a>00277 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00278"></a>00278 <span class="preprocessor"></span>        (void)result;
 <a name="l00279"></a>00279 <span class="preprocessor">#endif</span>
 <a name="l00280"></a>00280 <span class="preprocessor"></span>    }
 <a name="l00281"></a>00281     
-<a name="l00282"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#ada06ee12f42f44380d6168b6d07b2933">00282</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#a0000093738c3f432a71ff19c92a4bf9c">atIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index) <span class="keywordflow">throw</span>()
+<a name="l00282"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#ada06ee12f42f44380d6168b6d07b2933">00282</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#a0000093738c3f432a71ff19c92a4bf9c">atIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index) <span class="keywordflow">throw</span>()
 <a name="l00283"></a>00283     {
 <a name="l00284"></a>00284         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00285"></a>00285         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gaba49cefde0b278134af8b76d01193599">pl_SimpleLinkedList_AtIndex</a> (&amp;list, index, &amp;element);
+<a name="l00285"></a>00285         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gaba49cefde0b278134af8b76d01193599">pl_SimpleLinkedList_AtIndex</a> (&amp;list, index, &amp;element);
 <a name="l00286"></a>00286         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00287"></a>00287 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00288"></a>00288 <span class="preprocessor"></span>        (void)result;
@@ -366,7 +366,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00293"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a024ff14776fcd09a0ba216fb88bf925f">00293</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#aa0b49e78f84005eea52bbcbb90cf956c">getFirst</a>() throw()
 <a name="l00294"></a>00294     {
 <a name="l00295"></a>00295         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00296"></a>00296         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
+<a name="l00296"></a>00296         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
 <a name="l00297"></a>00297         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00298"></a>00298 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00299"></a>00299 <span class="preprocessor"></span>        (void)result;
@@ -377,7 +377,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00304"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#aa3136e4f1be1b9ff4803c0099300e744">00304</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#ac4b45ed6683cbe73b839c973aa6becb7">getLast</a>() throw()
 <a name="l00305"></a>00305     {
 <a name="l00306"></a>00306         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00307"></a>00307         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga588ecf34b789342b43cb2b809f7cf20a">pl_SimpleLinkedList_GetLast</a> (&amp;list, &amp;element);
+<a name="l00307"></a>00307         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga588ecf34b789342b43cb2b809f7cf20a">pl_SimpleLinkedList_GetLast</a> (&amp;list, &amp;element);
 <a name="l00308"></a>00308         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00309"></a>00309 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00310"></a>00310 <span class="preprocessor"></span>        (void)result;
@@ -385,10 +385,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00312"></a>00312 <span class="preprocessor"></span>        <span class="keywordflow">return</span> getValueFromElement (element);
 <a name="l00313"></a>00313     }
 <a name="l00314"></a>00314     
-<a name="l00315"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a871c637e23fba60d8ccb120a89d8c21a">00315</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#a352c7916732166d331e3b573ee767f68">removeAtIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index) <span class="keywordflow">throw</span>()
+<a name="l00315"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a871c637e23fba60d8ccb120a89d8c21a">00315</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#a352c7916732166d331e3b573ee767f68">removeAtIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index) <span class="keywordflow">throw</span>()
 <a name="l00316"></a>00316     {
 <a name="l00317"></a>00317         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00318"></a>00318         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga25fb0f09e4eb87cb1fa09c00779c4550">pl_SimpleLinkedList_RemoveAtIndex</a> (&amp;list, index, &amp;element);
+<a name="l00318"></a>00318         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga25fb0f09e4eb87cb1fa09c00779c4550">pl_SimpleLinkedList_RemoveAtIndex</a> (&amp;list, index, &amp;element);
 <a name="l00319"></a>00319         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00320"></a>00320 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00321"></a>00321 <span class="preprocessor"></span>        (void)result;
@@ -399,7 +399,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00326"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a50b429ab19e68d24b2747262991cb2c7">00326</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#a1cf1a23f1923bd472da95b867f659815">removeFirst</a>() throw()
 <a name="l00327"></a>00327     {
 <a name="l00328"></a>00328         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00329"></a>00329         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gad111a4cefa6c31528751c22f184496db">pl_SimpleLinkedList_RemoveFirst</a> (&amp;list, &amp;element);
+<a name="l00329"></a>00329         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gad111a4cefa6c31528751c22f184496db">pl_SimpleLinkedList_RemoveFirst</a> (&amp;list, &amp;element);
 <a name="l00330"></a>00330         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00331"></a>00331 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00332"></a>00332 <span class="preprocessor"></span>        (void)result;
@@ -410,7 +410,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00337"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a135a28b88297ba2e8bde1b7838ecbe22">00337</a>     ValueType* <a class="code" href="class_simple_linked_list_internal.html#a1d540ec122e0026af4d244d5d4d16ee5">removeLast</a>() throw()
 <a name="l00338"></a>00338     {
 <a name="l00339"></a>00339         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00340"></a>00340         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gac26a15b09dd58d45c63d98d1d11552f1">pl_SimpleLinkedList_RemoveLast</a> (&amp;list, &amp;element);
+<a name="l00340"></a>00340         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#gac26a15b09dd58d45c63d98d1d11552f1">pl_SimpleLinkedList_RemoveLast</a> (&amp;list, &amp;element);
 <a name="l00341"></a>00341         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00342"></a>00342 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00343"></a>00343 <span class="preprocessor"></span>        (void)result;
@@ -418,13 +418,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00345"></a>00345 <span class="preprocessor"></span>        <span class="keywordflow">return</span> removeValueFromElement (element);
 <a name="l00346"></a>00346     }
 <a name="l00347"></a>00347     
-<a name="l00348"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a156af49301fe877319dd8ffb56fe71fa">00348</a>     <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a8d2cc915b317c451738332734a83e8f1">indexOf</a> (ValueType* <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
+<a name="l00348"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a156af49301fe877319dd8ffb56fe71fa">00348</a>     <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a8d2cc915b317c451738332734a83e8f1">indexOf</a> (ValueType* <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00349"></a>00349     {
 <a name="l00350"></a>00350         <a class="code" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> element;
-<a name="l00351"></a>00351         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
+<a name="l00351"></a>00351         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_class.html#ga394b1659789f55f1089942c35b0b738f">pl_SimpleLinkedList_GetFirst</a> (&amp;list, &amp;element);
 <a name="l00352"></a>00352         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00353"></a>00353         
-<a name="l00354"></a>00354         <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index = 0;
+<a name="l00354"></a>00354         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index = 0;
 <a name="l00355"></a>00355         
 <a name="l00356"></a>00356         <span class="keywordflow">while</span> (element != 0)
 <a name="l00357"></a>00357         {
@@ -441,7 +441,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00368"></a>00368 <span class="preprocessor"></span>        <span class="keywordflow">return</span> -1;
 <a name="l00369"></a>00369     }
 <a name="l00370"></a>00370     
-<a name="l00371"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a05bca103fb6c6416bf1f6069371f20fb">00371</a>     <span class="keyword">inline</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">size</a>() throw()
+<a name="l00371"></a><a class="code" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a05bca103fb6c6416bf1f6069371f20fb">00371</a>     <span class="keyword">inline</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> <a class="code" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">size</a>() throw()
 <a name="l00372"></a>00372     {
 <a name="l00373"></a>00373         <span class="keywordflow">return</span> <a class="code" href="group___plank_simple_linked_list_class.html#ga1dcd6f46a3eb06a39f837dd1722a53b5">pl_SimpleLinkedList_GetSize</a> (&amp;list);
 <a name="l00374"></a>00374     }
@@ -474,7 +474,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00401"></a>00401         
 <a name="l00402"></a>00402         ValueType* <span class="keyword">const</span> value = <span class="keyword">static_cast&lt;</span>ValueType*<span class="keyword">&gt;</span> (<a class="code" href="group___plank_simple_linked_list_element_class.html#ga28d35b1818f5c42f407551ab1baf1d6c">pl_SimpleLinkedListElement_GetData</a> (element));
 <a name="l00403"></a>00403         
-<a name="l00404"></a>00404         <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_element_class.html#gac6ac3283f18a4ccfdac40dcc6b3ee806">pl_SimpleLinkedListElement_Destroy</a> (element);
+<a name="l00404"></a>00404         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> result = <a class="code" href="group___plank_simple_linked_list_element_class.html#gac6ac3283f18a4ccfdac40dcc6b3ee806">pl_SimpleLinkedListElement_Destroy</a> (element);
 <a name="l00405"></a>00405         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (result == <a class="code" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50af336ea275ee6514611cfe075d69dcdac" title="No error occurred during the operation.">PlankResult_OK</a>);
 <a name="l00406"></a>00406 <span class="preprocessor">#ifndef PLONK_DEBUG</span>
 <a name="l00407"></a>00407 <span class="preprocessor"></span>        (void)result;
@@ -534,12 +534,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00468"></a>00468         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;add (value);
 <a name="l00469"></a>00469     }
 <a name="l00470"></a>00470     
-<a name="l00471"></a><a class="code" href="class_simple_linked_list.html#a7ffe2111623d7060e04a255d6c532c3e">00471</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list.html#a7ffe2111623d7060e04a255d6c532c3e">insertAtIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index, ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
+<a name="l00471"></a><a class="code" href="class_simple_linked_list.html#a7ffe2111623d7060e04a255d6c532c3e">00471</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_simple_linked_list.html#a7ffe2111623d7060e04a255d6c532c3e">insertAtIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index, ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00472"></a>00472     {
 <a name="l00473"></a>00473         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;insertAtIndex (index, value);
 <a name="l00474"></a>00474     }
 <a name="l00475"></a>00475 
-<a name="l00476"></a><a class="code" href="class_simple_linked_list.html#acd025570057e7c9274a5dfbbf756d59c">00476</a>     <span class="keyword">inline</span> ValueType <a class="code" href="class_simple_linked_list.html#acd025570057e7c9274a5dfbbf756d59c">atIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index) <span class="keywordflow">throw</span>()
+<a name="l00476"></a><a class="code" href="class_simple_linked_list.html#acd025570057e7c9274a5dfbbf756d59c">00476</a>     <span class="keyword">inline</span> ValueType <a class="code" href="class_simple_linked_list.html#acd025570057e7c9274a5dfbbf756d59c">atIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index) <span class="keywordflow">throw</span>()
 <a name="l00477"></a>00477     {
 <a name="l00478"></a>00478         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;atIndex (index);
 <a name="l00479"></a>00479     }
@@ -554,7 +554,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00488"></a>00488         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getFirst();
 <a name="l00489"></a>00489     }
 <a name="l00490"></a>00490     
-<a name="l00491"></a><a class="code" href="class_simple_linked_list.html#a8e994ed5f397ae63375bf9e390c9792c">00491</a>     <span class="keyword">inline</span> ValueType <a class="code" href="class_simple_linked_list.html#a8e994ed5f397ae63375bf9e390c9792c">removeAtIndex</a> (<span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> index) <span class="keywordflow">throw</span>()
+<a name="l00491"></a><a class="code" href="class_simple_linked_list.html#a8e994ed5f397ae63375bf9e390c9792c">00491</a>     <span class="keyword">inline</span> ValueType <a class="code" href="class_simple_linked_list.html#a8e994ed5f397ae63375bf9e390c9792c">removeAtIndex</a> (<span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> index) <span class="keywordflow">throw</span>()
 <a name="l00492"></a>00492     {
 <a name="l00493"></a>00493         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;removeAtIndex (index);
 <a name="l00494"></a>00494     }
@@ -569,7 +569,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00503"></a>00503         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;removeFirst();
 <a name="l00504"></a>00504     }
 <a name="l00505"></a>00505     
-<a name="l00506"></a><a class="code" href="class_simple_linked_list.html#a5ea3ec7185bebe839ef9babac8ded490">00506</a>     <span class="keyword">inline</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_simple_linked_list.html#a5ea3ec7185bebe839ef9babac8ded490">indexOf</a> (ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
+<a name="l00506"></a><a class="code" href="class_simple_linked_list.html#a5ea3ec7185bebe839ef9babac8ded490">00506</a>     <span class="keyword">inline</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> <a class="code" href="class_simple_linked_list.html#a5ea3ec7185bebe839ef9babac8ded490">indexOf</a> (ValueType <span class="keyword">const</span>&amp; value) <span class="keywordflow">throw</span>()
 <a name="l00507"></a>00507     {
 <a name="l00508"></a>00508         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;indexOf (value);
 <a name="l00509"></a>00509     }
@@ -579,7 +579,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00513"></a>00513         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;indexOf (value) &gt;= 0;
 <a name="l00514"></a>00514     }
 <a name="l00515"></a>00515     
-<a name="l00516"></a><a class="code" href="class_simple_linked_list.html#a8b7b2e5cc89ad38d1817b5fb0a72a6f4">00516</a>     <span class="keyword">inline</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_simple_linked_list.html#a8b7b2e5cc89ad38d1817b5fb0a72a6f4">size</a>() throw()
+<a name="l00516"></a><a class="code" href="class_simple_linked_list.html#a8b7b2e5cc89ad38d1817b5fb0a72a6f4">00516</a>     <span class="keyword">inline</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> <a class="code" href="class_simple_linked_list.html#a8b7b2e5cc89ad38d1817b5fb0a72a6f4">size</a>() throw()
 <a name="l00517"></a>00517     {
 <a name="l00518"></a>00518         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;size();
 <a name="l00519"></a>00519     }
@@ -603,7 +603,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:11 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

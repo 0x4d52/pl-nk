@@ -139,6 +139,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aa535c6c94db3858dc7c8f0d205946e63">getOutputSamples</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#af26b93f5d5cb7a85586c6802ecce4e71">getOutputSamples</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#abc2b39a0ea0f1425ccc4da256f98108b">setOutputBuffer</a> (<a class="el" href="class_numerical_array.html">Buffer</a> const &amp;externalBuffer)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a4cb3af5acf6392800838b4a6c250e0c8">getNumChannels</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ac28aedb608797008cec817c4c454aa36">initValue</a> (SampleType const &amp;value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#aabe8e0ee05f00cee85cee5ab5464fb0e">initChannel</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const SampleType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a3755b8dc86d2fc3513f9388ce2e17f16">getValue</a> () const   throw ()</td></tr>
@@ -156,8 +157,8 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_channel_base.html">ChannelBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#ac7425a8ffd4ac897bf05b24a008f0d15">getNull</a> ()  throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-types"></a>
 Protected Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef PLONK_UNITBASETYPE<br class="typebreak"/>
-&lt; <a class="el" href="class_channel_base.html">ChannelBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a8cd96d9312c86b20ea926973794568ae">UnitType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
+&lt; <a class="el" href="class_channel_base.html">ChannelBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_channel_base.html#a12faeeef00b1dbd883a3fba380acce07">UnitType</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -228,14 +229,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8cd96d9312c86b20ea926973794568ae"></a><!-- doxytag: member="ChannelBase::UnitType" ref="a8cd96d9312c86b20ea926973794568ae" args="" -->
+<a class="anchor" id="a12faeeef00b1dbd883a3fba380acce07"></a><!-- doxytag: member="ChannelBase::UnitType" ref="a12faeeef00b1dbd883a3fba380acce07" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef PLONK_UNITBASETYPE&lt;<a class="el" href="class_channel_base.html">ChannelBase</a>&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html#a8cd96d9312c86b20ea926973794568ae">UnitType</a><code> [protected]</code></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelBase</a>&gt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">UnitType</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -558,6 +559,24 @@ template&lt;class SampleType&gt; </div>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4cb3af5acf6392800838b4a6c250e0c8"></a><!-- doxytag: member="ChannelBase::getNumChannels" ref="a4cb3af5acf6392800838b4a6c250e0c8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;::getNumChannels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -1096,7 +1115,7 @@ template&lt;class SampleType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:14 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

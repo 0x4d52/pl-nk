@@ -83,17 +83,17 @@ Public Types</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#a585d7bb6fc6f2237bcebf94a86b7dd99">Memory</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#a3a8118255f6a282c552e4b997368c942">allocateBytes</a> (const <a class="el" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a> numBytes)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#a3a8118255f6a282c552e4b997368c942">allocateBytes</a> (const UnsignedLong numBytes)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#a3387f660bfd2a95ebb319d2ed80e1b28">free</a> (void *ptr)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#a7a757c7c084b64be333fb7e97786c2b1">setFunctions</a> (<a class="el" href="class_memory.html#affc53937a8e8e0216d915571d51f7327">AllocateBytesFunction</a> allocateFunction, <a class="el" href="class_memory.html#a4519c2975ebeb4264139cfdffa0558af">FreeFunction</a> freeFunction)  throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_memory.html">Memory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#ad523c3c897146ea7c0906f63b1360cc6">global</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_memory.html">Memory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#a20012bc65834da280f78b477fd7f9b33">realTime</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#ac7521d0acb6823daa4578779b2ee8833">zero</a> (void *const ptr, const <a class="el" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a> numBytes)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#ac7521d0acb6823daa4578779b2ee8833">zero</a> (void *const ptr, const UnsignedLong numBytes)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_memory.html#a0d35343b0393b4ae99ac70d88de8925f">zero</a> (Type &amp;object)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#acced1962b50c14708b61a1c82bfefed2">copy</a> (void *const dst, const void *const src, const <a class="el" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a> numBytes)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memory.html#acced1962b50c14708b61a1c82bfefed2">copy</a> (void *const dst, const void *const src, const UnsignedLong numBytes)  throw ()</td></tr>
 </table>
 <hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="affc53937a8e8e0216d915571d51f7327"></a><!-- doxytag: member="Memory::AllocateBytesFunction" ref="affc53937a8e8e0216d915571d51f7327" args="" -->
@@ -147,7 +147,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void* Memory::allocateBytes </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a>&#160;</td>
+          <td class="paramtype">const UnsignedLong&#160;</td>
           <td class="paramname"><em>numBytes</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
@@ -176,7 +176,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a>&#160;</td>
+          <td class="paramtype">const UnsignedLong&#160;</td>
           <td class="paramname"><em>numBytes</em>&#160;</td>
         </tr>
         <tr>
@@ -279,7 +279,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="plonk___standard_header_8h.html#a86004de94fb2ac8e51daaedd6bbea221">UnsignedLong</a>&#160;</td>
+          <td class="paramtype">const UnsignedLong&#160;</td>
           <td class="paramname"><em>numBytes</em>&#160;</td>
         </tr>
         <tr>
@@ -330,7 +330,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:17 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -68,15 +68,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#define-members">Defines</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">plank_RNG.h File Reference</div>  </div>
 </div>
 <div class="contents">
-
+<div class="textblock"><code>#include &quot;<a class="el" href="plank___r_n_g_inline_8h_source.html">plank_RNGInline.h</a>&quot;</code><br/>
+</div>
 <p><a href="plank___r_n_g_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Defines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___r_n_g_8h.html#a2f35c7cdc1e90ae214e0bc431898a98f">PLANK_INLINING_FUNCTIONS</a>&#160;&#160;&#160;1</td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct PlankRNG *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a></td></tr>
@@ -96,15 +101,29 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a Plank <a class="el" href="class_r_n_g.html" title="Random number generator.">RNG</a> object.  <a href="group___plank_r_n_g_class.html#gabf41c3146297725bd10f022b0121927b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#ga2bc680ab31e54bd5f950bfd874ba3317">pl_RNG_Seed</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p, unsigned int seed)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Seed a <em>Plank RNG</em> object.  <a href="group___plank_r_n_g_class.html#ga2bc680ab31e54bd5f950bfd874ba3317"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#gaa491e976fcc32d5d0737283cf0962d25">pl_RNG_Next</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random integer.  <a href="group___plank_r_n_g_class.html#gaa491e976fcc32d5d0737283cf0962d25"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#ga4daf97c392ac08d6b7a792908fef49ee">pl_RNG_NextInt</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p, unsigned int max)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random unsigned integer over a given range.  <a href="group___plank_r_n_g_class.html#ga4daf97c392ac08d6b7a792908fef49ee"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#gac6ef1b374d35ae518fc6e8f253903b2e">pl_RNG_NextFloat</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random float between 0 and 1.  <a href="group___plank_r_n_g_class.html#gac6ef1b374d35ae518fc6e8f253903b2e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#ga5a9fcc9ad32752176756cef63495795c">pl_RNG_NextDouble</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random double between 0 and 1.  <a href="group___plank_r_n_g_class.html#ga5a9fcc9ad32752176756cef63495795c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#ga7366f413a659c0633e5ef89595a032cc">pl_RNG_Next</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random integer.  <a href="group___plank_r_n_g_class.html#ga7366f413a659c0633e5ef89595a032cc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#ga8f577823c323a83c0aa5418db3d79f0a">pl_RNG_NextInt</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p, unsigned int max)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random unsigned integer over a given range.  <a href="group___plank_r_n_g_class.html#ga8f577823c323a83c0aa5418db3d79f0a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#ga6f3a1cd9c95780cbb782f3234c4e1150">pl_RNG_NextFloat</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random float between 0 and 1.  <a href="group___plank_r_n_g_class.html#ga6f3a1cd9c95780cbb782f3234c4e1150"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_r_n_g_class.html#gaf1d82fa1ba755fe6399767b9b88967b6">pl_RNG_NextDouble</a> (<a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random double between 0 and 1.  <a href="group___plank_r_n_g_class.html#gaf1d82fa1ba755fe6399767b9b88967b6"></a><br/></td></tr>
 </table>
+<hr/><h2>Define Documentation</h2>
+<a class="anchor" id="a2f35c7cdc1e90ae214e0bc431898a98f"></a><!-- doxytag: member="plank_RNG.h::PLANK_INLINING_FUNCTIONS" ref="a2f35c7cdc1e90ae214e0bc431898a98f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_INLINING_FUNCTIONS&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -120,7 +139,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:12 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

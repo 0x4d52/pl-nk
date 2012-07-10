@@ -129,14 +129,22 @@ Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gadbd2cee522ab1adcf5fd33508931d47b">wrap</a> (Type const &amp;value, Type const &amp;upper)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaf4d669544b6444eabbd898f6d559bec4">decayFeedback</a> (Type const &amp;delayTime, Type const &amp;decayTime)  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gabf9e7fd23a39c53e897cf66aaf90a68a">min</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns minimum of <em>a</em> and <em>b</em>.  <a href="#gabf9e7fd23a39c53e897cf66aaf90a68a"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns minimum of <code>a</code> and <code>b</code>.  <a href="#gabf9e7fd23a39c53e897cf66aaf90a68a"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146">max</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns maximum of <em>a</em> and <em>b</em>.  <a href="#gae9767f40737087f6253040a0aaee4146"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns maximum of <code>a</code> and <code>b</code>.  <a href="#gae9767f40737087f6253040a0aaee4146"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga0efbcd57e8a17ef548e238ea9f35bc62">pow</a> (Type const &amp;a, Type const &amp;b)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <em>a</em> raised to the power <em>b</em>.  <a href="#ga0efbcd57e8a17ef548e238ea9f35bc62"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#ga3edabf0b05f53c9399cd27330d6bbb04">squared</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument squared.  <a href="#ga3edabf0b05f53c9399cd27330d6bbb04"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gadd1d6f37c63b4d84d7ccec97ce802376">cubed</a> (Type const &amp;a)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument cubed.  <a href="#gadd1d6f37c63b4d84d7ccec97ce802376"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Binary arithmetic operator functions. </p>
@@ -251,6 +259,56 @@ template&lt;class Type &gt; </div>
           <td></td>
           <td class="paramtype">Type const &amp;&#160;</td>
           <td class="paramname"><em>range</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gadd1d6f37c63b4d84d7ccec97ce802376"></a><!-- doxytag: member="plonk_InlineCommonOps.h::cubed" ref="gadd1d6f37c63b4d84d7ccec97ce802376" args="(Type const &amp;a)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type cubed </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the input argument cubed. </p>
+
+</div>
+</div>
+<a class="anchor" id="gaf4d669544b6444eabbd898f6d559bec4"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::decayFeedback" ref="gaf4d669544b6444eabbd898f6d559bec4" args="(Type const &amp;delayTime, Type const &amp;decayTime)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type decayFeedback </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>delayTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>decayTime</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -569,7 +627,7 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns maximum of <em>a</em> and <em>b</em>. </p>
+<p>Returns maximum of <code>a</code> and <code>b</code>. </p>
 
 </div>
 </div>
@@ -600,7 +658,7 @@ template&lt;class Type &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Returns minimum of <em>a</em> and <em>b</em>. </p>
+<p>Returns minimum of <code>a</code> and <code>b</code>. </p>
 
 </div>
 </div>
@@ -754,6 +812,27 @@ template&lt;class Type &gt; </div>
 <div class="memdoc">
 
 <p>Returns <img class="formulaInl" alt="$ (a + b) * (a + b) $" src="form_9.png"/>. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga3edabf0b05f53c9399cd27330d6bbb04"></a><!-- doxytag: member="plonk_InlineCommonOps.h::squared" ref="ga3edabf0b05f53c9399cd27330d6bbb04" args="(Type const &amp;a)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Type squared </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the input argument squared. </p>
 
 </div>
 </div>
@@ -923,7 +1002,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:12 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

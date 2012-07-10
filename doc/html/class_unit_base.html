@@ -143,14 +143,168 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an overlapping process from this unit's contrinuous stream.  <a href="#a170d8b94e06f8c8b3c318892d0533cbf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab3a20c72aae6c5f580937fd580e52c78">overlapMix</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;overlap=<a class="el" href="class_math.html">Math</a>&lt; <a class="el" href="class_variable.html">DoubleVariable</a> &gt;::get0_5()) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mix down overlapping process to a continuous stream.  <a href="#ab3a20c72aae6c5f580937fd580e52c78"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;PLONK_BINARYOPFUNCTION(SampleType, op) &gt; </td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a35419f9d20253e5d52de37d4367c7311">binary</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;rightOperand) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Templated binary operator Unit creator.  <a href="#a35419f9d20253e5d52de37d4367c7311"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;PLONK_UNARYOPFUNCTION(SampleType, op) &gt; </td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;SampleType(*)(SampleTypeconst &amp;) op&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a142b2de4be916e9eeec7957f550e3518">unary</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Templated unary operator Unit creator.  <a href="#a142b2de4be916e9eeec7957f550e3518"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a07938a1316f73d404e43c54bf9966e1c">PLONK_BINARYOPS</a> (<a class="el" href="class_unit_base.html">UnitBase</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a72b229d23020e3c9b7ee49182eb19522">PLONK_UNARYOPS</a> (<a class="el" href="class_unit_base.html">UnitBase</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a9ce47f1b83109061a4865b1ed3ff3578">addop</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'addop' function to this one and the <em>right</em> argument.  <a href="#a9ce47f1b83109061a4865b1ed3ff3578"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a007485d6e5d46ba2f1c081b9f156d932">subop</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'subop' function to this one and the <em>right</em> argument.  <a href="#a007485d6e5d46ba2f1c081b9f156d932"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#af0679918598bab4c013cfc4f2d5c268f">mulop</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'mulop' function to this one and the <em>right</em> argument.  <a href="#af0679918598bab4c013cfc4f2d5c268f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a6f745272970edbac5e99fb7cc30ffc4c">divop</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'divop' function to this one and the <em>right</em> argument.  <a href="#a6f745272970edbac5e99fb7cc30ffc4c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a769265718d2edfe60c43e4cf797c0110">isEqualTo</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isEqualTo' function to this one and the <em>right</em> argument.  <a href="#a769265718d2edfe60c43e4cf797c0110"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a9cbfe5d8e80d28df1f5241e1ea874929">isNotEqualTo</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isNotEqualTo' function to this one and the <em>right</em> argument.  <a href="#a9cbfe5d8e80d28df1f5241e1ea874929"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#af70d74f6f77c5c5866146c89a2d123c9">isGreaterThan</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isGreaterThan' function to this one and the <em>right</em> argument.  <a href="#af70d74f6f77c5c5866146c89a2d123c9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ac6b0846c1172e1fa275d51beb7895559">isGreaterThanOrEqualTo</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isGreaterThanOrEqualTo' function to this one and the <em>right</em> argument.  <a href="#ac6b0846c1172e1fa275d51beb7895559"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#af6582e308726a8e4fb63235ca5b73016">isLessThan</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isLessThan' function to this one and the <em>right</em> argument.  <a href="#af6582e308726a8e4fb63235ca5b73016"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a1e52af4d320c6b8ef1518458868a5953">isLessThanOrEqualTo</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isLessThanOrEqualTo' function to this one and the <em>right</em> argument.  <a href="#a1e52af4d320c6b8ef1518458868a5953"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a12fde7570fe1ff64ef675c0d5f91b736">hypot</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'hypot' function to this one and the <em>right</em> argument.  <a href="#a12fde7570fe1ff64ef675c0d5f91b736"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aa44db5c79cca4f9ea0f7bb984cf2d8f9">pow</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'pow' function to this one and the <em>right</em> argument.  <a href="#aa44db5c79cca4f9ea0f7bb984cf2d8f9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a764a7d2d34e98b273063606d76bd703b">atan2</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'atan2' function to this one and the <em>right</em> argument.  <a href="#a764a7d2d34e98b273063606d76bd703b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a64cf093d072095318f4c27a476d12208">min</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'min' function to this one and the <em>right</em> argument.  <a href="#a64cf093d072095318f4c27a476d12208"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a4cdf04233317f510dda567bda01fb5dd">max</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'max' function to this one and the <em>right</em> argument.  <a href="#a4cdf04233317f510dda567bda01fb5dd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a9859d688170b57861e5373728a4304f4">sumsqr</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'sumsqr' function to this one and the <em>right</em> argument.  <a href="#a9859d688170b57861e5373728a4304f4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a6276eb0d25731e070427370a27a5e86f">difsqr</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'difsqr' function to this one and the <em>right</em> argument.  <a href="#a6276eb0d25731e070427370a27a5e86f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#adb1fc080c1b85651ab0f0a2da2a37fbe">sqrsum</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'sqrsum' function to this one and the <em>right</em> argument.  <a href="#adb1fc080c1b85651ab0f0a2da2a37fbe"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ad44f311b28ebda6d59a8aca92b937ae9">sqrdif</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'sqrdif' function to this one and the <em>right</em> argument.  <a href="#ad44f311b28ebda6d59a8aca92b937ae9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a8b2d8eaf1da10d44b0a50976a2d601af">absdif</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'absdif' function to this one and the <em>right</em> argument.  <a href="#a8b2d8eaf1da10d44b0a50976a2d601af"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#adab69c58f3fe0588d0d4aad52935e254">thresh</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'thresh' function to this one and the <em>right</em> argument.  <a href="#adab69c58f3fe0588d0d4aad52935e254"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#afa2a02a2c6fb51b2607ab7a1507788fb">round</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'round' function to this one and the <em>right</em> argument.  <a href="#afa2a02a2c6fb51b2607ab7a1507788fb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a51eebe85fa983b84bc44a2def0a8ac7d">trunc</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'trunc' function to this one and the <em>right</em> argument.  <a href="#a51eebe85fa983b84bc44a2def0a8ac7d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#af384ce936686453e9689eeaf6457986f">clip2</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'clip2' function to this one and the <em>right</em> argument.  <a href="#af384ce936686453e9689eeaf6457986f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a5c2523ef17dcee2d90eb4deca3b57f4d">decayFeedback</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'decayFeedback' function to this one and the <em>right</em> argument.  <a href="#a5c2523ef17dcee2d90eb4deca3b57f4d"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a783d354004272b602e116d058294f157">operator+</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '+' operator to this and the <em>right</em> argument.  <a href="#a783d354004272b602e116d058294f157"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aa00cdc04e68728d2892ba17b6efae5c2">operator-</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '-' operator to this and the <em>right</em> argument.  <a href="#aa00cdc04e68728d2892ba17b6efae5c2"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a61fabb5b95c3d391451bd5c394447d49">operator*</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '*' operator to this and the <em>right</em> argument.  <a href="#a61fabb5b95c3d391451bd5c394447d49"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a50be2f9d83e178bd7ad755364655d357">operator/</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '/' operator to this and the <em>right</em> argument.  <a href="#a50be2f9d83e178bd7ad755364655d357"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ad7f73b933867b036a575ff01c621ff08">operator+=</a> (RightType const &amp;right)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '+' operator to this and the <em>right</em> argument.  <a href="#ad7f73b933867b036a575ff01c621ff08"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a03113ab3519c80f88e78f97ea272bd94">operator-=</a> (RightType const &amp;right)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '-' operator to this and the <em>right</em> argument.  <a href="#a03113ab3519c80f88e78f97ea272bd94"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#afc7424b74a1185a578ba25c499986cff">operator*=</a> (RightType const &amp;right)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '*' operator to this and the <em>right</em> argument.  <a href="#afc7424b74a1185a578ba25c499986cff"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a0c0b2547f77f2840de847a77cf39f87f">operator/=</a> (RightType const &amp;right)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '/' operator to this and the <em>right</em> argument.  <a href="#a0c0b2547f77f2840de847a77cf39f87f"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a3fbcb0b247b7335b27aa90c454b30308">operator&lt;</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&lt;' operator to this and the <em>right</em> argument.  <a href="#a3fbcb0b247b7335b27aa90c454b30308"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#abd22385bfeb42dad70f0ef9d65e3bbcf">operator&lt;=</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&lt;=' operator to this and the <em>right</em> argument.  <a href="#abd22385bfeb42dad70f0ef9d65e3bbcf"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a5a1d2e2d65b20054478ab234e9a920a8">operator&gt;</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&gt;' operator to this and the <em>right</em> argument.  <a href="#a5a1d2e2d65b20054478ab234e9a920a8"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class RightType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_unit_base.html#adafd268de4860a36a14c6d63f6247f28">operator&gt;=</a> (RightType const &amp;right) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&gt;=' operator to this and the <em>right</em> argument.  <a href="#adafd268de4860a36a14c6d63f6247f28"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a3218bcc6c0d55a2b19b6d5ffd8a0af31">move</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'move' function to this one.  <a href="#a3218bcc6c0d55a2b19b6d5ffd8a0af31"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a2fd07c9e23fb1dcf2ba895306ff3cbc8">inc</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'inc' function to this one.  <a href="#a2fd07c9e23fb1dcf2ba895306ff3cbc8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a44f39fd6c809e2c858ff959af4b41144">dec</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'dec' function to this one.  <a href="#a44f39fd6c809e2c858ff959af4b41144"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a554c1b387f114d20d4d5b1215ffa27a4">abs</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'abs' function to this one.  <a href="#a554c1b387f114d20d4d5b1215ffa27a4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#af0d0038175b087694a309d47b66bf440">log2</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'log2' function to this one.  <a href="#af0d0038175b087694a309d47b66bf440"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a0314952ec0909fb5cce927b12efc9a7f">neg</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'neg' function to this one.  <a href="#a0314952ec0909fb5cce927b12efc9a7f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aedf8a851d44920f7c5569f5357587d01">reciprocal</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'reciprocal' function to this one.  <a href="#aedf8a851d44920f7c5569f5357587d01"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#adfd01e6c59c15369e4bfda8f5776b570">sin</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sin' function to this one.  <a href="#adfd01e6c59c15369e4bfda8f5776b570"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a6131c0e3755237cdec87441a2ab35ac1">cos</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'cos' function to this one.  <a href="#a6131c0e3755237cdec87441a2ab35ac1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a0af939bf3ff068d959ae5be1fa581bce">tan</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'tan' function to this one.  <a href="#a0af939bf3ff068d959ae5be1fa581bce"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a4a3d949cd5c57c8fdb5badcca675497c">asin</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'asin' function to this one.  <a href="#a4a3d949cd5c57c8fdb5badcca675497c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#abf0d922e1c6ca460292375fc895e8048">acos</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'acos' function to this one.  <a href="#abf0d922e1c6ca460292375fc895e8048"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#acb2fdbd56ed53328c20327aa140c0f67">atan</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'atan' function to this one.  <a href="#acb2fdbd56ed53328c20327aa140c0f67"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a7042232fed9247cb1c185a4405e62638">sinh</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sinh' function to this one.  <a href="#a7042232fed9247cb1c185a4405e62638"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a337c6c7cc6c6c69fb4245a2524ffd747">cosh</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'cosh' function to this one.  <a href="#a337c6c7cc6c6c69fb4245a2524ffd747"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aad9b00972e19f50911631486aa44f590">tanh</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'tanh' function to this one.  <a href="#aad9b00972e19f50911631486aa44f590"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ad3c6085937821c153209ae38a6471d85">sqrt</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sqrt' function to this one.  <a href="#ad3c6085937821c153209ae38a6471d85"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#acc7d6774a51a7f17c98e2369158bd02a">log</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'log' function to this one.  <a href="#acc7d6774a51a7f17c98e2369158bd02a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#abae5ddb502112cbdaaba960ed041fe0a">log10</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'log10' function to this one.  <a href="#abae5ddb502112cbdaaba960ed041fe0a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ad7558bfa0572b759fe423f1b8da02660">exp</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'exp' function to this one.  <a href="#ad7558bfa0572b759fe423f1b8da02660"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ad1bd91b6d6644cc438f16489ada2da9f">squared</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'squared' function to this one.  <a href="#ad1bd91b6d6644cc438f16489ada2da9f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a2a0d4359ab797a76531b844097e5b828">cubed</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'cubed' function to this one.  <a href="#a2a0d4359ab797a76531b844097e5b828"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a9b625b6139101fc94112cb11fc25ede8">ceil</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'ceil' function to this one.  <a href="#a9b625b6139101fc94112cb11fc25ede8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ac65016aecebfe364574f328bf58a4f9f">floor</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'floor' function to this one.  <a href="#ac65016aecebfe364574f328bf58a4f9f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a7543750a30dd2f6f87fc61d8d627beec">frac</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'frac' function to this one.  <a href="#a7543750a30dd2f6f87fc61d8d627beec"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a498954490886e3acd13d5747f65d290a">sign</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sign' function to this one.  <a href="#a498954490886e3acd13d5747f65d290a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ad8b08088db7545b26fe6d48872f08203">m2f</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'm2f' function to this one.  <a href="#ad8b08088db7545b26fe6d48872f08203"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aed8bc12ebfab2788c950c70ad5fc8a5c">f2m</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'f2m' function to this one.  <a href="#aed8bc12ebfab2788c950c70ad5fc8a5c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a88265b35eb65738f78899255c186efbe">a2dB</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'a2dB' function to this one.  <a href="#a88265b35eb65738f78899255c186efbe"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a887e8a891ea784749728c80c7bb670e2">dB2a</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'dB2a' function to this one.  <a href="#a887e8a891ea784749728c80c7bb670e2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a7c498c5e54d2438b9461599fde9fb13e">d2r</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'd2r' function to this one.  <a href="#a7c498c5e54d2438b9461599fde9fb13e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#abd8eaab7d56faed695675c0e98e4cd0f">r2d</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'r2d' function to this one.  <a href="#abd8eaab7d56faed695675c0e98e4cd0f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a196824b85035fea76f750b642db6b42e">distort</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'distort' function to this one.  <a href="#a196824b85035fea76f750b642db6b42e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a928af1dac6e8b66ab2c9d7a7ceaa10a7">zap</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'zap' function to this one.  <a href="#a928af1dac6e8b66ab2c9d7a7ceaa10a7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#abc6b6d450e027fba5242bf9985eb614c">operator-</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary '-' operator to this one.  <a href="#abc6b6d450e027fba5242bf9985eb614c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab059fa15afabe76458e77e94c3918c64">linlin</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;inLow, <a class="el" href="class_unit_base.html">UnitBase</a> const &amp;inHigh, <a class="el" href="class_unit_base.html">UnitBase</a> const &amp;outLow, <a class="el" href="class_unit_base.html">UnitBase</a> const &amp;outHigh) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear to linear mapping.  <a href="#ab059fa15afabe76458e77e94c3918c64"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a5f7d518d49d41bbd87cf8c0e8b8bf5a5">linlin</a> (<a class="el" href="class_unit_base.html">UnitBase</a> const &amp;outLow, <a class="el" href="class_unit_base.html">UnitBase</a> const &amp;outHigh) const   throw ()</td></tr>
@@ -190,11 +344,15 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a unit with the single channel specified.  <a href="#afd08e14c94c1e344a05b957308caa472"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a336e560bdcb43adae1b83f1dc9f3d114">put</a> (const int index, <a class="el" href="class_unit_base.html">UnitBase</a> const &amp;channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a particular channel.  <a href="#a336e560bdcb43adae1b83f1dc9f3d114"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a7d43aee9d147c9556b3ae592c20d31ed">flatten</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array2_d.html">UnitArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a24b42b5dd7a658930fa8fd97f479e6b7">group</a> (const int groupSize) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Group this array into a 2D array with a particular group size.  <a href="#a24b42b5dd7a658930fa8fd97f479e6b7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aa7027499885c3206dee0b8b95f6e4fa2">getMinBlockSize</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the minimum block size in the array of channels in this unit.  <a href="#aa7027499885c3206dee0b8b95f6e4fa2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a357165ca134a47f7204169b469e80b00">getMaxBlockSize</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the maximum block size in the array of channels in this unit.  <a href="#a357165ca134a47f7204169b469e80b00"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_block_size.html">BlockSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a9e6663d2783b9de78f1f06442c395532">getBlockSize</a> (const int index) const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the block size of a specific channel in this unit.  <a href="#a9e6663d2783b9de78f1f06442c395532"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a9cee8690b55ba3b627eb5c741ae4d54c">setBlockSize</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;newBlockSize)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the block size of all channels in this unit.  <a href="#a9cee8690b55ba3b627eb5c741ae4d54c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">BlockSizes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a35982dd645c434bef7a8461082d44943">getBlockSizes</a> () const   throw ()</td></tr>
@@ -228,10 +386,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output buffers of this unit's channels to use external buffers.  <a href="#a5971dc08c2dc28db827df3b7ea671e94"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const SampleType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a0abca48d077f3f49b5c9639ac64eec5a">getValue</a> (const int index) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current value of a specific channel in this unit.  <a href="#a0abca48d077f3f49b5c9639ac64eec5a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aedd150dd3b7657232815ede9b5eb9639">getValues</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_time_stamp.html">TimeStamp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a2c5e01a93876321a3e9fced5006c4521">getNextTimeStamp</a> (const int index) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aee5909be3f87dca9156fe4611b7c94d6">isNull</a> (const int index) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a405c7135663599a9603393a393f0bb66">isNotNull</a> (const int index) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a5a9473b849ca895b72d058ad54f02eae">isConstant</a> (const int index) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a2afc73431dc2fc0f1e051dc5ba25dafb">isEachChannelConstant</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a4dc53a4989df63faf42b4c7b648ca5e3">isNotConstant</a> (const int index) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a2b9e0433de29cce99dfa9e04cf7b4074">isNull</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if this unit contains only a single null channel.  <a href="#a2b9e0433de29cce99dfa9e04cf7b4074"></a><br/></td></tr>
@@ -270,7 +430,7 @@ Protected Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a72d04200ca52533aec32209d8f06d3ad">UnitType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a><br class="typebreak"/>
-&lt; <a class="el" href="class_channel_base.html">ChannelType</a>, <a class="el" href="class_numerical_array.html">UnitType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a47a57032361dd89ae13a00a2d9199a99">UnitArray</a></td></tr>
+&lt; <a class="el" href="class_channel_base.html">ChannelType</a>, <a class="el" href="class_unit_base.html">UnitBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a1a80c3900ac2859503d9836a16cce33a">UnitArray</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a593b06cfae47f7507b7dbc4702ce3efb">BufferArrayType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_null_channel_internal.html">NullChannelInternal</a><br class="typebreak"/>
@@ -425,14 +585,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a47a57032361dd89ae13a00a2d9199a99"></a><!-- doxytag: member="UnitBase::UnitArray" ref="a47a57032361dd89ae13a00a2d9199a99" args="" -->
+<a class="anchor" id="a1a80c3900ac2859503d9836a16cce33a"></a><!-- doxytag: member="UnitBase::UnitArray" ref="a1a80c3900ac2859503d9836a16cce33a" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>,<a class="el" href="class_numerical_array.html">UnitType</a>&gt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array2_d.html">UnitArray</a><code> [protected]</code></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>,<a class="el" href="class_unit_base.html">UnitBase</a>&gt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array2_d.html">UnitArray</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -716,6 +876,114 @@ template&lt;class SampleType&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a88265b35eb65738f78899255c186efbe"></a><!-- doxytag: member="UnitBase::a2dB" ref="a88265b35eb65738f78899255c186efbe" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::a2dB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'a2dB' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a4b1aba374f09890145c23e48ac790aca">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a554c1b387f114d20d4d5b1215ffa27a4"></a><!-- doxytag: member="UnitBase::abs" ref="a554c1b387f114d20d4d5b1215ffa27a4" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::abs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'abs' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#adb5da433d91966c11849e4e3ae09b20c">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8b2d8eaf1da10d44b0a50976a2d601af"></a><!-- doxytag: member="UnitBase::absdif" ref="a8b2d8eaf1da10d44b0a50976a2d601af" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::absdif </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'absdif' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="abf0d922e1c6ca460292375fc895e8048"></a><!-- doxytag: member="UnitBase::acos" ref="abf0d922e1c6ca460292375fc895e8048" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::acos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'acos' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a21247673f17dbb118748c1ef5868715d">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9ce47f1b83109061a4865b1ed3ff3578"></a><!-- doxytag: member="UnitBase::addop" ref="a9ce47f1b83109061a4865b1ed3ff3578" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::addop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'addop' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
 <a class="anchor" id="a3d6a3fbf0d6a2f1dcec1a7503e74b9d4"></a><!-- doxytag: member="UnitBase::applyMulAdd" ref="a3d6a3fbf0d6a2f1dcec1a7503e74b9d4" args="(UnitBase const &amp;mainUnit, UnitBase const &amp;mul, UnitBase const &amp;add)" -->
 <div class="memitem">
 <div class="memproto">
@@ -782,7 +1050,72 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Apply multiply and addition operators to another unit. </p>
-<p>Here <code>mul</code> will be ignored (not applied) if the value is a single channel constant equal to 1 (or null rather than just a constant 0). And <code>add</code> will be ignored (not applied) if it is a single channel constant equal to 0 (or null). On some platforms this might be implemented as a single multiply-and-add operation. Resamples this unit to a different sample rate and/or block size. </p>
+<p>Here <code>mul</code> will be ignored (not applied) if the value is a single channel constant equal to 1 (or null rather than just a constant 0). And <code>add</code> will be ignored (not applied) if it is a single channel constant equal to 0 (or null). On some platforms this might be implemented as a single multiply-and-add operation. Resamples this unit to a different sample rate and/or block size. By default the default sample rate and default block size are used. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4a3d949cd5c57c8fdb5badcca675497c"></a><!-- doxytag: member="UnitBase::asin" ref="a4a3d949cd5c57c8fdb5badcca675497c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::asin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'asin' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a78dc93f9d6203a2dc52f6b710cc53770">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acb2fdbd56ed53328c20327aa140c0f67"></a><!-- doxytag: member="UnitBase::atan" ref="acb2fdbd56ed53328c20327aa140c0f67" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::atan </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'atan' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a958f1721d9c62493ec9cdb82a8656938">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a764a7d2d34e98b273063606d76bd703b"></a><!-- doxytag: member="UnitBase::atan2" ref="a764a7d2d34e98b273063606d76bd703b" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::atan2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'atan2' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -792,7 +1125,7 @@ template&lt;class SampleType&gt; </div>
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
 <div class="memtemplate">
-template&lt;PLONK_BINARYOPFUNCTION(SampleType, op) &gt; </div>
+template&lt;SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::binary </td>
@@ -806,6 +1139,28 @@ template&lt;PLONK_BINARYOPFUNCTION(SampleType, op) &gt; </div>
 <div class="memdoc">
 
 <p>Templated binary operator Unit creator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9b625b6139101fc94112cb11fc25ede8"></a><!-- doxytag: member="UnitBase::ceil" ref="a9b625b6139101fc94112cb11fc25ede8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::ceil </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'ceil' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#aa42dd31de7f243533ffb84f5310ee5a7">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -824,6 +1179,71 @@ template&lt;class SampleType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af384ce936686453e9689eeaf6457986f"></a><!-- doxytag: member="UnitBase::clip2" ref="af384ce936686453e9689eeaf6457986f" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::clip2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'clip2' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6131c0e3755237cdec87441a2ab35ac1"></a><!-- doxytag: member="UnitBase::cos" ref="a6131c0e3755237cdec87441a2ab35ac1" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::cos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'cos' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ad8e91af12a57e6579d4fa944f0720bce">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a337c6c7cc6c6c69fb4245a2524ffd747"></a><!-- doxytag: member="UnitBase::cosh" ref="a337c6c7cc6c6c69fb4245a2524ffd747" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::cosh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'cosh' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ae9dd56f3652efbbbaabe347ec9225f27">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -873,6 +1293,179 @@ template&lt;class ChannelInternalClassType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a2a0d4359ab797a76531b844097e5b828"></a><!-- doxytag: member="UnitBase::cubed" ref="a2a0d4359ab797a76531b844097e5b828" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::cubed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'cubed' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#aba1b45c75b8a8e1a06708efd02c43464">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7c498c5e54d2438b9461599fde9fb13e"></a><!-- doxytag: member="UnitBase::d2r" ref="a7c498c5e54d2438b9461599fde9fb13e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::d2r </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'd2r' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a03bea6ba00183782f52b7c244292e678">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a887e8a891ea784749728c80c7bb670e2"></a><!-- doxytag: member="UnitBase::dB2a" ref="a887e8a891ea784749728c80c7bb670e2" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::dB2a </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'dB2a' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a2be3c3ede1f2261a224c4da48e364b6e">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a44f39fd6c809e2c858ff959af4b41144"></a><!-- doxytag: member="UnitBase::dec" ref="a44f39fd6c809e2c858ff959af4b41144" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::dec </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'dec' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#abd0ffdbf49fa2d8ee67110d58ace23d0">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5c2523ef17dcee2d90eb4deca3b57f4d"></a><!-- doxytag: member="UnitBase::decayFeedback" ref="a5c2523ef17dcee2d90eb4deca3b57f4d" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::decayFeedback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'decayFeedback' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6276eb0d25731e070427370a27a5e86f"></a><!-- doxytag: member="UnitBase::difsqr" ref="a6276eb0d25731e070427370a27a5e86f" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::difsqr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'difsqr' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a196824b85035fea76f750b642db6b42e"></a><!-- doxytag: member="UnitBase::distort" ref="a196824b85035fea76f750b642db6b42e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::distort </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'distort' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a36bfa91e815e5f2a4e81d6a8a05a89a8">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6f745272970edbac5e99fb7cc30ffc4c"></a><!-- doxytag: member="UnitBase::divop" ref="a6f745272970edbac5e99fb7cc30ffc4c" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::divop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'divop' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
 <a class="anchor" id="a916cfd64bee364c7c7f06831d048b716"></a><!-- doxytag: member="UnitBase::emptyChannels" ref="a916cfd64bee364c7c7f06831d048b716" args="(const int numChannels)" -->
 <div class="memitem">
 <div class="memproto">
@@ -889,6 +1482,28 @@ template&lt;class SampleType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad7558bfa0572b759fe423f1b8da02660"></a><!-- doxytag: member="UnitBase::exp" ref="ad7558bfa0572b759fe423f1b8da02660" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::exp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'exp' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#aa97d16057f07d6400ac15f31497d34c2">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -933,6 +1548,90 @@ template&lt;class SampleType&gt; </div>
 
 <p>Exponential to linear mapping. </p>
 <p>Note that the intput range must not cross or meet zero. </p>
+
+</div>
+</div>
+<a class="anchor" id="aed8bc12ebfab2788c950c70ad5fc8a5c"></a><!-- doxytag: member="UnitBase::f2m" ref="aed8bc12ebfab2788c950c70ad5fc8a5c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::f2m </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'f2m' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a2b2452f6193c054cea33ce3a8162a085">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7d43aee9d147c9556b3ae592c20d31ed"></a><!-- doxytag: member="UnitBase::flatten" ref="a7d43aee9d147c9556b3ae592c20d31ed" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::flatten </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac65016aecebfe364574f328bf58a4f9f"></a><!-- doxytag: member="UnitBase::floor" ref="ac65016aecebfe364574f328bf58a4f9f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::floor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'floor' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a363a91ba97804be5c8217596807ccf5f">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7543750a30dd2f6f87fc61d8d627beec"></a><!-- doxytag: member="UnitBase::frac" ref="a7543750a30dd2f6f87fc61d8d627beec" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::frac </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'frac' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a9d212e39edd96f22493fb173f6a6d320">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -995,6 +1694,7 @@ template&lt;class SampleType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
 <p>Get the block size of a specific channel in this unit. </p>
 
 </div>
@@ -1019,28 +1719,6 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad9e6d5dad44ca41ebe4b6f6f56cab95e"></a><!-- doxytag: member="UnitBase::getChannel" ref="ad9e6d5dad44ca41ebe4b6f6f56cab95e" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getChannel </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns a unit with the single channel specified. </p>
-<p>This wraps the index so that it is always in range. It is alos recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
-
-</div>
-</div>
 <a class="anchor" id="a6b70baa2348be760bdde2a8dcf0fb1ac"></a><!-- doxytag: member="UnitBase::getChannel" ref="a6b70baa2348be760bdde2a8dcf0fb1ac" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1059,7 +1737,29 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Returns a unit with the single channel specified. </p>
-<p>This wraps the index so that it is always in range. It is alos recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
+<p>This wraps the index so that it is always in range. It is also recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad9e6d5dad44ca41ebe4b6f6f56cab95e"></a><!-- doxytag: member="UnitBase::getChannel" ref="ad9e6d5dad44ca41ebe4b6f6f56cab95e" args="(const int index)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getChannel </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a unit with the single channel specified. </p>
+<p>This wraps the index so that it is always in range. It is also recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
 
 </div>
 </div>
@@ -1365,7 +2065,7 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Get the sample rate of a specific channel in this unit. </p>
-<p>Indices out of range will be wrapped to the available channels. Get the sample rate of a specific channel in this unit. Indices out of range will be wrapped to the available channels. </p>
+<p>Indices out of range will be wrapped to the available channels. </p>
 
 </div>
 </div>
@@ -1449,6 +2149,90 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aedd150dd3b7657232815ede9b5eb9639"></a><!-- doxytag: member="UnitBase::getValues" ref="aedd150dd3b7657232815ede9b5eb9639" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_numerical_array.html">Buffer</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getValues </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a24b42b5dd7a658930fa8fd97f479e6b7"></a><!-- doxytag: member="UnitBase::group" ref="a24b42b5dd7a658930fa8fd97f479e6b7" args="(const int groupSize) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_numerical_array2_d.html">UnitArray</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::group </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>groupSize</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Group this array into a 2D array with a particular group size. </p>
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf">ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a12fde7570fe1ff64ef675c0d5f91b736"></a><!-- doxytag: member="UnitBase::hypot" ref="a12fde7570fe1ff64ef675c0d5f91b736" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::hypot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'hypot' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2fd07c9e23fb1dcf2ba895306ff3cbc8"></a><!-- doxytag: member="UnitBase::inc" ref="a2fd07c9e23fb1dcf2ba895306ff3cbc8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::inc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'inc' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ac99a652927b8588c19e3b0fb58ced052">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a5a9473b849ca895b72d058ad54f02eae"></a><!-- doxytag: member="UnitBase::isConstant" ref="a5a9473b849ca895b72d058ad54f02eae" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1488,6 +2272,129 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a2afc73431dc2fc0f1e051dc5ba25dafb"></a><!-- doxytag: member="UnitBase::isEachChannelConstant" ref="a2afc73431dc2fc0f1e051dc5ba25dafb" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::isEachChannelConstant </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a769265718d2edfe60c43e4cf797c0110"></a><!-- doxytag: member="UnitBase::isEqualTo" ref="a769265718d2edfe60c43e4cf797c0110" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::isEqualTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isEqualTo' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="af70d74f6f77c5c5866146c89a2d123c9"></a><!-- doxytag: member="UnitBase::isGreaterThan" ref="af70d74f6f77c5c5866146c89a2d123c9" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::isGreaterThan </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isGreaterThan' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac6b0846c1172e1fa275d51beb7895559"></a><!-- doxytag: member="UnitBase::isGreaterThanOrEqualTo" ref="ac6b0846c1172e1fa275d51beb7895559" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::isGreaterThanOrEqualTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isGreaterThanOrEqualTo' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="af6582e308726a8e4fb63235ca5b73016"></a><!-- doxytag: member="UnitBase::isLessThan" ref="af6582e308726a8e4fb63235ca5b73016" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::isLessThan </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isLessThan' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1e52af4d320c6b8ef1518458868a5953"></a><!-- doxytag: member="UnitBase::isLessThanOrEqualTo" ref="a1e52af4d320c6b8ef1518458868a5953" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::isLessThanOrEqualTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isLessThanOrEqualTo' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
 <a class="anchor" id="a4dc53a4989df63faf42b4c7b648ca5e3"></a><!-- doxytag: member="UnitBase::isNotConstant" ref="a4dc53a4989df63faf42b4c7b648ca5e3" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1524,6 +2431,27 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Returns <code>false</code> if this unit contains only a single constant channel. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9cbfe5d8e80d28df1f5241e1ea874929"></a><!-- doxytag: member="UnitBase::isNotEqualTo" ref="a9cbfe5d8e80d28df1f5241e1ea874929" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::isNotEqualTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'isNotEqualTo' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -1927,6 +2855,136 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="acc7d6774a51a7f17c98e2369158bd02a"></a><!-- doxytag: member="UnitBase::log" ref="acc7d6774a51a7f17c98e2369158bd02a" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::log </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'log' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#aaac2483594423eca542b918f3868bafa">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abae5ddb502112cbdaaba960ed041fe0a"></a><!-- doxytag: member="UnitBase::log10" ref="abae5ddb502112cbdaaba960ed041fe0a" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::log10 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'log10' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ae46ae0e874297a5ef8a29ba9ee1d6732">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af0d0038175b087694a309d47b66bf440"></a><!-- doxytag: member="UnitBase::log2" ref="af0d0038175b087694a309d47b66bf440" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::log2 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'log2' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a070b5d8792fba8be0e49aa67d466c7c5">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad8b08088db7545b26fe6d48872f08203"></a><!-- doxytag: member="UnitBase::m2f" ref="ad8b08088db7545b26fe6d48872f08203" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::m2f </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'm2f' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a0eaa8e96782b6afb620ad4bcd09b5bd1">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4cdf04233317f510dda567bda01fb5dd"></a><!-- doxytag: member="UnitBase::max" ref="a4cdf04233317f510dda567bda01fb5dd" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::max </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'max' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a64cf093d072095318f4c27a476d12208"></a><!-- doxytag: member="UnitBase::min" ref="a64cf093d072095318f4c27a476d12208" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::min </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'min' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
 <a class="anchor" id="afd8d0797e935d3c384910a8090f0202b"></a><!-- doxytag: member="UnitBase::mix" ref="afd8d0797e935d3c384910a8090f0202b" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1968,22 +3026,168 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a706c00f62f694ec1c825ac72697156fa"></a><!-- doxytag: member="UnitBase::operator," ref="a706c00f62f694ec1c825ac72697156fa" args="(UnitBase const &amp;other) const " -->
+<a class="anchor" id="a3218bcc6c0d55a2b19b6d5ffd8a0af31"></a><!-- doxytag: member="UnitBase::move" ref="a3218bcc6c0d55a2b19b6d5ffd8a0af31" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class SampleType &gt; </div>
+template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator, </td>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::move </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'move' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a874ca968256c98cd3832c186c46b3982">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af0679918598bab4c013cfc4f2d5c268f"></a><!-- doxytag: member="UnitBase::mulop" ref="af0679918598bab4c013cfc4f2d5c268f" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::mulop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'mulop' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0314952ec0909fb5cce927b12efc9a7f"></a><!-- doxytag: member="UnitBase::neg" ref="a0314952ec0909fb5cce927b12efc9a7f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::neg </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'neg' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a55de58ebf08c5847b883fc490d08b9d4">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a61fabb5b95c3d391451bd5c394447d49"></a><!-- doxytag: member="UnitBase::operator*" ref="a61fabb5b95c3d391451bd5c394447d49" args="(RightType const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '*' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a8368368153fe158df9e918bc6ba80022">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afc7424b74a1185a578ba25c499986cff"></a><!-- doxytag: member="UnitBase::operator*=" ref="afc7424b74a1185a578ba25c499986cff" args="(RightType const &amp;right)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '*' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a1a43141b93f7a8e24d777acb30ca115c">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a783d354004272b602e116d058294f157"></a><!-- doxytag: member="UnitBase::operator+" ref="a783d354004272b602e116d058294f157" args="(RightType const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '+' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ac73002a959b7fbdb0e1bf49150e00ac7">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad7f73b933867b036a575ff01c621ff08"></a><!-- doxytag: member="UnitBase::operator+=" ref="ad7f73b933867b036a575ff01c621ff08" args="(RightType const &amp;right)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '+' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a2cbf65a8a44ec8fbe2afab55cd39418b">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -2008,24 +3212,169 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a89dce5a55adbbdfaae908958b760012d"></a><!-- doxytag: member="UnitBase::operator&lt;&lt;" ref="a89dce5a55adbbdfaae908958b760012d" args="(UnitBase const &amp;other) const " -->
+<a class="anchor" id="a706c00f62f694ec1c825ac72697156fa"></a><!-- doxytag: member="UnitBase::operator," ref="a706c00f62f694ec1c825ac72697156fa" args="(UnitBase const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator, </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abc6b6d450e027fba5242bf9985eb614c"></a><!-- doxytag: member="UnitBase::operator&#45;" ref="abc6b6d450e027fba5242bf9985eb614c" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_numerical_array2_d.html">UnitArray</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator&lt;&lt; </td>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator- </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create a array of units by concatenation. </p>
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary '-' operator to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a403fa7e62e11b0315fcf1d573a6c86b4">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa00cdc04e68728d2892ba17b6efae5c2"></a><!-- doxytag: member="UnitBase::operator&#45;" ref="aa00cdc04e68728d2892ba17b6efae5c2" args="(RightType const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '-' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ad8c78788dec82a15c338319174e891c2">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a03113ab3519c80f88e78f97ea272bd94"></a><!-- doxytag: member="UnitBase::operator&#45;=" ref="a03113ab3519c80f88e78f97ea272bd94" args="(RightType const &amp;right)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator-= </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '-' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a5538284563eac6f5682d50976ea9119f">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a50be2f9d83e178bd7ad755364655d357"></a><!-- doxytag: member="UnitBase::operator/" ref="a50be2f9d83e178bd7ad755364655d357" args="(RightType const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator/ </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '/' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a4290f465e129c3acb29872229f31ea26">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0c0b2547f77f2840de847a77cf39f87f"></a><!-- doxytag: member="UnitBase::operator/=" ref="a0c0b2547f77f2840de847a77cf39f87f" args="(RightType const &amp;right)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator/= </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> and assign it to this one by applying the binary '/' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#aeab50549403525ae68bf3eea47869601">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3fbcb0b247b7335b27aa90c454b30308"></a><!-- doxytag: member="UnitBase::operator&lt;" ref="a3fbcb0b247b7335b27aa90c454b30308" args="(RightType const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&lt;' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a0fc984fa1bddcb904611f9c4c8ac355c">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -2047,6 +3396,73 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Create a array of units by concatenation. </p>
+
+</div>
+</div>
+<a class="anchor" id="a89dce5a55adbbdfaae908958b760012d"></a><!-- doxytag: member="UnitBase::operator&lt;&lt;" ref="a89dce5a55adbbdfaae908958b760012d" args="(UnitBase const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_numerical_array2_d.html">UnitArray</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a array of units by concatenation. </p>
+
+</div>
+</div>
+<a class="anchor" id="abd22385bfeb42dad70f0ef9d65e3bbcf"></a><!-- doxytag: member="UnitBase::operator&lt;=" ref="abd22385bfeb42dad70f0ef9d65e3bbcf" args="(RightType const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&lt;=' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a66f4fe62052817c7a7452d4d8129c40f">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aab0d06b9df0c6d0a56f469b2ee572c09"></a><!-- doxytag: member="UnitBase::operator=" ref="aab0d06b9df0c6d0a56f469b2ee572c09" args="(ObjectArray&lt; ChannelType &gt; const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator from an array of channels. </p>
 
 </div>
 </div>
@@ -2113,48 +3529,53 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aab0d06b9df0c6d0a56f469b2ee572c09"></a><!-- doxytag: member="UnitBase::operator=" ref="aab0d06b9df0c6d0a56f469b2ee572c09" args="(ObjectArray&lt; ChannelType &gt; const &amp;other)" -->
+<a class="anchor" id="a5a1d2e2d65b20054478ab234e9a920a8"></a><!-- doxytag: member="UnitBase::operator&gt;" ref="a5a1d2e2d65b20054478ab234e9a920a8" args="(RightType const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&amp; <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator= </td>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator&gt; </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Assignment operator from an array of channels. </p>
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&gt;' operator to this and the <em>right</em> argument. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a8d0c7dc1faa2bb93bc3cb9eade40d7eb">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a51d3e16937b30c0469661261e6acb42d"></a><!-- doxytag: member="UnitBase::operator[]" ref="a51d3e16937b30c0469661261e6acb42d" args="(const int index)" -->
+<a class="anchor" id="adafd268de4860a36a14c6d63f6247f28"></a><!-- doxytag: member="UnitBase::operator&gt;=" ref="adafd268de4860a36a14c6d63f6247f28" args="(RightType const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator[] </td>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator&gt;= </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Returns a unit with the single channel specified. </p>
-<p>This wraps the index so that it is always in range. It is alos recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary '&gt;=' operator to this and the <em>right</em> argument. </p>
 
-<p>Reimplemented from <a class="el" href="class_object_array.html#a64873f1b21d3888d606f555da6a2014a">ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a1aedf3452546d858bc38253ee95b6904">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -2176,9 +3597,33 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Returns a unit with the single channel specified. </p>
-<p>This wraps the index so that it is always in range. It is alos recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
+<p>This wraps the index so that it is always in range. It is also recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
 
 <p>Reimplemented from <a class="el" href="class_object_array.html#a0bc80ee77d245f592d75f480293937b6">ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a51d3e16937b30c0469661261e6acb42d"></a><!-- doxytag: member="UnitBase::operator[]" ref="a51d3e16937b30c0469661261e6acb42d" args="(const int index)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a unit with the single channel specified. </p>
+<p>This wraps the index so that it is always in range. It is also recursive such that the returned channel has in turn stripped out the other multiple channels during the process. </p>
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a64873f1b21d3888d606f555da6a2014a">ObjectArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -2224,41 +3669,24 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a07938a1316f73d404e43c54bf9966e1c"></a><!-- doxytag: member="UnitBase::PLONK_BINARYOPS" ref="a07938a1316f73d404e43c54bf9966e1c" args="(UnitBase)" -->
+<a class="anchor" id="aa44db5c79cca4f9ea0f7bb984cf2d8f9"></a><!-- doxytag: member="UnitBase::pow" ref="aa44db5c79cca4f9ea0f7bb984cf2d8f9" args="(UnitBase const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::PLONK_BINARYOPS </td>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::pow </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a72b229d23020e3c9b7ee49182eb19522"></a><!-- doxytag: member="UnitBase::PLONK_UNARYOPS" ref="a72b229d23020e3c9b7ee49182eb19522" args="(UnitBase)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::PLONK_UNARYOPS </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'pow' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -2395,6 +3823,71 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="abd8eaab7d56faed695675c0e98e4cd0f"></a><!-- doxytag: member="UnitBase::r2d" ref="abd8eaab7d56faed695675c0e98e4cd0f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::r2d </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'r2d' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a60278e868bb7668d86217f640d113920">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aedf8a851d44920f7c5569f5357587d01"></a><!-- doxytag: member="UnitBase::reciprocal" ref="aedf8a851d44920f7c5569f5357587d01" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::reciprocal </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'reciprocal' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#aab34a0718dfa0dd4ae5fdbc2c1c00773">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afa2a02a2c6fb51b2607ab7a1507788fb"></a><!-- doxytag: member="UnitBase::round" ref="afa2a02a2c6fb51b2607ab7a1507788fb" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::round </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'round' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
 <a class="anchor" id="a9cee8690b55ba3b627eb5c741ae4d54c"></a><!-- doxytag: member="UnitBase::setBlockSize" ref="a9cee8690b55ba3b627eb5c741ae4d54c" args="(BlockSize const &amp;newBlockSize)" -->
 <div class="memitem">
 <div class="memproto">
@@ -2438,27 +3931,6 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a5971dc08c2dc28db827df3b7ea671e94"></a><!-- doxytag: member="UnitBase::setOutputBuffer" ref="a5971dc08c2dc28db827df3b7ea671e94" args="(BufferArrayType const &amp;externalBuffer)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::setOutputBuffer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array2_d.html">BufferArrayType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>externalBuffer</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set the output buffers of this unit's channels to use external buffers. </p>
-
-</div>
-</div>
 <a class="anchor" id="aed36ad8bca094f3fa98d0a134cb2d36f"></a><!-- doxytag: member="UnitBase::setOutputBuffer" ref="aed36ad8bca094f3fa98d0a134cb2d36f" args="(const int index, Buffer const &amp;externalBuffer)" -->
 <div class="memitem">
 <div class="memproto">
@@ -2487,6 +3959,27 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Set the output buffer of a specific channel to use an external buffer. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5971dc08c2dc28db827df3b7ea671e94"></a><!-- doxytag: member="UnitBase::setOutputBuffer" ref="a5971dc08c2dc28db827df3b7ea671e94" args="(BufferArrayType const &amp;externalBuffer)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::setOutputBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array2_d.html">BufferArrayType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>externalBuffer</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the output buffers of this unit's channels to use external buffers. </p>
 
 </div>
 </div>
@@ -2529,13 +4022,293 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a498954490886e3acd13d5747f65d290a"></a><!-- doxytag: member="UnitBase::sign" ref="a498954490886e3acd13d5747f65d290a" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::sign </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sign' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a2c97c407bb1d944e3c357c7ff22eb91d">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adfd01e6c59c15369e4bfda8f5776b570"></a><!-- doxytag: member="UnitBase::sin" ref="adfd01e6c59c15369e4bfda8f5776b570" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::sin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sin' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a8c6a229a1ca6aa62ce2f16a7cddc81c7">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7042232fed9247cb1c185a4405e62638"></a><!-- doxytag: member="UnitBase::sinh" ref="a7042232fed9247cb1c185a4405e62638" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::sinh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sinh' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a93eff4090af911add420281e8825debc">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad44f311b28ebda6d59a8aca92b937ae9"></a><!-- doxytag: member="UnitBase::sqrdif" ref="ad44f311b28ebda6d59a8aca92b937ae9" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::sqrdif </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'sqrdif' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="adb1fc080c1b85651ab0f0a2da2a37fbe"></a><!-- doxytag: member="UnitBase::sqrsum" ref="adb1fc080c1b85651ab0f0a2da2a37fbe" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::sqrsum </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'sqrsum' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad3c6085937821c153209ae38a6471d85"></a><!-- doxytag: member="UnitBase::sqrt" ref="ad3c6085937821c153209ae38a6471d85" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::sqrt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'sqrt' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a99590a6747640c9adf4ecd0dab889507">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad1bd91b6d6644cc438f16489ada2da9f"></a><!-- doxytag: member="UnitBase::squared" ref="ad1bd91b6d6644cc438f16489ada2da9f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::squared </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'squared' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a10c88d42c1a68c2cf019ba599ce39386">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a007485d6e5d46ba2f1c081b9f156d932"></a><!-- doxytag: member="UnitBase::subop" ref="a007485d6e5d46ba2f1c081b9f156d932" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::subop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'subop' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9859d688170b57861e5373728a4304f4"></a><!-- doxytag: member="UnitBase::sumsqr" ref="a9859d688170b57861e5373728a4304f4" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::sumsqr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'sumsqr' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0af939bf3ff068d959ae5be1fa581bce"></a><!-- doxytag: member="UnitBase::tan" ref="a0af939bf3ff068d959ae5be1fa581bce" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::tan </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'tan' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a012a46fa5971b4e4d453fd3134adcc6e">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aad9b00972e19f50911631486aa44f590"></a><!-- doxytag: member="UnitBase::tanh" ref="aad9b00972e19f50911631486aa44f590" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::tanh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'tanh' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a279cbc086c73080ae0ee9f341cd6934f">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adab69c58f3fe0588d0d4aad52935e254"></a><!-- doxytag: member="UnitBase::thresh" ref="adab69c58f3fe0588d0d4aad52935e254" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::thresh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'thresh' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a51eebe85fa983b84bc44a2def0a8ac7d"></a><!-- doxytag: member="UnitBase::trunc" ref="a51eebe85fa983b84bc44a2def0a8ac7d" args="(UnitBase const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::trunc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the binary 'trunc' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
 <a class="anchor" id="a142b2de4be916e9eeec7957f550e3518"></a><!-- doxytag: member="UnitBase::unary" ref="a142b2de4be916e9eeec7957f550e3518" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
 <div class="memtemplate">
-template&lt;PLONK_UNARYOPFUNCTION(SampleType, op) &gt; </div>
+template&lt;SampleType(*)(SampleTypeconst &amp;) op&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::unary </td>
@@ -2550,6 +4323,28 @@ template&lt;PLONK_UNARYOPFUNCTION(SampleType, op) &gt; </div>
 <p>Templated unary operator Unit creator. </p>
 
 <p>Reimplemented from <a class="el" href="class_numerical_array.html#a533dbf3a2404de6f1618e0559231b785">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a928af1dac6e8b66ab2c9d7a7ceaa10a7"></a><!-- doxytag: member="UnitBase::zap" ref="a928af1dac6e8b66ab2c9d7a7ceaa10a7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a> <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::zap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> by applying the unary 'zap' function to this one. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#aa803bf54847396f2a846f435676ab117">NumericalArray&lt; ChannelBase&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -2571,7 +4366,7 @@ template&lt;PLONK_UNARYOPFUNCTION(SampleType, op) &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:23 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

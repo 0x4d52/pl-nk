@@ -112,6 +112,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#a278f8a2f0b4880b7b65d586b681020d7">setLabel</a> (<a class="el" href="class_text.html">Text</a> const &amp;newId)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#a35e4616aba2878b70f0ff28c865cf6bf">isProxy</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_internal_base.html">InternalBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#a6c85c72f54c4908c2a303396959889ec">getChannel</a> (const int)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#a2d6f5daadf3f1f0b26faedb8ee90c840">getNumChannels</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#aeaf9c14f6cd394b352e2d8828bff44f8">initChannel</a> (const int channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to initialise the channel's initial value.  <a href="#aeaf9c14f6cd394b352e2d8828bff44f8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#a461146a715e59e231ce1ddb9ea39c0e0">deleteIfOnlyMutualReferencesRemain</a> ()  throw ()</td></tr>
@@ -412,6 +413,26 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a2d6f5daadf3f1f0b26faedb8ee90c840"></a><!-- doxytag: member="ProxyChannelInternal::getNumChannels" ref="a2d6f5daadf3f1f0b26faedb8ee90c840" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::getNumChannels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a43277b3178b32a3945b1275ab50c6122">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aeaf9c14f6cd394b352e2d8828bff44f8"></a><!-- doxytag: member="ProxyChannelInternal::initChannel" ref="aeaf9c14f6cd394b352e2d8828bff44f8" args="(const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -529,7 +550,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:18 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

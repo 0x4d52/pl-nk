@@ -258,21 +258,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_overlap_mix_channel_internal.html#a90a9a676ffe0e58e29fac61e1817f4e7">OverlapMixChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_resample_channel_internal.html#a679158964f94140fee97f507d7c8085a">ResampleChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_type_channel_internal.html#ad2627fe33be83523a1726cd94e20f66f">TypeChannelInternal&lt; OutputSampleType, InputSampleType &gt;</a>
-, <a class="el" href="class_delay_base_channel_internal.html#af2c934c29c5bcd0c1bc7f85ec6788bae">DelayBaseChannelInternal&lt; FormType &gt;</a>
 , <a class="el" href="class_i_f_f_t_channel_internal.html#ab78eb0487ba34851205ff674a07a6887">IFFTChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_filter_channel_internal.html#abae92c6e62a51b5e0c623996dc61f383">FilterChannelInternal&lt; FormType &gt;</a>
 , <a class="el" href="class_saw_channel_internal.html#ad94e5ac86ba64c072fc2219ffda1f245">SawChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_signal_play_channel_internal.html#a0a12b7ea88a7dc3c03c215af6c7c4a7d">SignalPlayChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_table_channel_internal.html#a6d99fcb9211a3d17847515fa2e1b111f">TableChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_white_noise_channel_internal.html#aa6f4be763c6ee9f46230bc18ae2276dc">WhiteNoiseChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_unit_base.html#ad9e6d5dad44ca41ebe4b6f6f56cab95e">UnitBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_atomic_variable_channel_internal.html#a2db84fb8c3a92caa2a5f3654eda03078">AtomicVariableChannelInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_binary_op_channel_internal.html#a24dec666fd08107b88858c2f371b2b0e">BinaryOpChannelInternal&lt; SampleType, &gt;</a>
+, <a class="el" href="class_binary_op_channel_internal.html#aa7c9dc051c0e0857509b50edffebdf81">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_block_channel_internal.html#a80c37d889ab3271a27a1366f743b4fcb">BlockChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_read_channel_internal.html#a8645afee627f9f779cecf2f3ca629177">BusReadChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_write_channel_internal.html#a10115dbb64cf42613af9366f4bf09047">BusWriteChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_constant_channel_internal.html#ad7552c8f4e4fe69ed1e392597e2380fa">ConstantChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_channel_mixer_channel_internal.html#a2c366295c0de249b15b15a3a73503a5d">ChannelMixerChannelInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_unary_op_channel_internal.html#ad7b7c6275bd198a1de5248e29fbf1001">UnaryOpChannelInternal&lt; SampleType, &gt;</a>
+, <a class="el" href="class_unary_op_channel_internal.html#a230a1244f40c64ac5c6c53dec5b77cca">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_variable_channel_internal.html#abf6d7f6fb96c65010d247dfbd6938c31">VariableChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_input_dictionary.html#a2f1736b42993b530ae0000070506f520">InputDictionary</a>
 , <a class="el" href="class_dynamic.html#afaa53b9442737bff6e788dc2b2260e3a">Dynamic</a>
@@ -280,17 +280,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_proxy_channel_internal.html#a6c85c72f54c4908c2a303396959889ec">ProxyChannelInternal&lt; SampleType &gt;</a>
 </li>
+<li>getCircularBuffers()
+: <a class="el" href="class_delay_channel_internal_base.html#a32bc108ce0d285ef95182a6f9065cabc">DelayChannelInternalBase&lt; FormType &gt;</a>
+</li>
 <li>getControlRate()
 : <a class="el" href="class_sample_rate.html#aa715672eb75094e596a88f4c43fd1634">SampleRate</a>
 </li>
 <li>getControlRateBlockSize()
 : <a class="el" href="class_block_size.html#a6da00bc268f96d88975655fcd3cdd681">BlockSize</a>
 </li>
-<li>getCpuUsage()
-: <a class="el" href="class_i_o_s_audio_host.html#a1c3abbab2d2103e059a984c433efb120">IOSAudioHost</a>
-, <a class="el" href="class_juce_audio_host.html#adc6d54e10aa7e5fe8a8d25fd19f5657d">JuceAudioHost</a>
+<li>getCpuUsage
+: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#ac81d36522a2c627dc7916fc7158b212b">PLONK_NAMESPACE::IOSAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a632749ca4707dc0d8cf06892e1c767ce">PLONK_NAMESPACE::JuceAudioHost</a>
 , <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_port_audio_audio_host.html#a0452b64734b12bdb056830dc1e11d309">PortAudioAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a7f3576f5715b0a68b4a1a12d9017467f">PLONK_NAMESPACE::PortAudioAudioHost</a>
 </li>
 <li>getCurrentThreadID()
 : <a class="el" href="class_threading.html#a9453710636ee4e1b579bd1153b00c25c">Threading</a>
@@ -311,6 +314,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getDeinterleaved()
 : <a class="el" href="class_signal_internal.html#a864db69042a6395c92b350d716df215c">SignalInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_signal_base.html#a23969fa8a2d54f39304b990e179b5c6e">SignalBase&lt; SampleType &gt;</a>
+</li>
+<li>getDelayStates()
+: <a class="el" href="class_delay_channel_internal_base.html#a98695d945508623947e8dedaba08f6d7">DelayChannelInternalBase&lt; FormType &gt;</a>
 </li>
 <li>getDetail()
 : <a class="el" href="class_unit_info.html#aacb9a5a19e7f8e1768f0fa8edc024860">UnitInfo</a>
@@ -366,10 +372,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_signal_base.html#a54e5d4fe8787f1198a5086215a6dce98">SignalBase&lt; SampleType &gt;</a>
 </li>
 <li>getHostName()
-: <a class="el" href="class_port_audio_audio_host.html#a57229bcdd1ed0bf0758ea8730cd0adbe">PortAudioAudioHost</a>
-, <a class="el" href="class_i_o_s_audio_host.html#aa9d54a838e1b63189f25491f206d172e">IOSAudioHost</a>
-, <a class="el" href="class_juce_audio_host.html#ada1e6460f3712aa1b628a2b1ee336b52">JuceAudioHost</a>
+: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a8f422b0307da6e958e50a9eb998cb20c">PLONK_NAMESPACE::JuceAudioHost</a>
 , <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a355bc0659fb9afe1ae200d81aa80c44f">PLONK_NAMESPACE::PortAudioAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#aab2e3c42ad0ab2827b701cb7b8a1ef41">PLONK_NAMESPACE::IOSAudioHost</a>
 </li>
 <li>getID()
 : <a class="el" href="class_threading_1_1_thread.html#ae8f792258076e7a3d886cf3eca777b8c">Threading::Thread</a>
@@ -383,6 +389,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_overlap_mix_unit.html#aa2f578bf77ce0342453348384b1ce21d">OverlapMixUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_resample_unit.html#a8e99f7ac4cae3a9c4bc0991bb4865332">ResampleUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_type_unit_base.html#aca9d21abfda6fabdb5ee70db4a24f8d8">TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</a>
+, <a class="el" href="class_allpass_decay_unit.html#adf9165985d345cae807dbc4d74b31f72">AllpassDecayUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_allpass_f_f_f_b_unit.html#a85abbd43343bd8fb4ab53ded2ca1314f">AllpassFFFBUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_comb_decay_unit.html#add67cabd306414d128872e5e1438a6a0">CombDecayUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_comb_f_b_unit.html#a6805b7c0026fc30a0e101b24bf25b313">CombFBUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_comb_filter1_param_unit.html#a2bb3dea6156ee33428f8bbeaa93b7c95">CombFilter1ParamUnit&lt; FilterShape &gt;</a>
+, <a class="el" href="class_delay_unit.html#abb19261c8f1324b227438080081a7090">DelayUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_f_f_t_unit.html#ad9c44667f2c2eadd0c1f5732b2c667d4">FFTUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_i_f_f_t_unit.html#ab99ea09b4884cd57d51e6bfbbe77a9e0">IFFTUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_filter_unit.html#a37a04379dbfc33dd8a3c084313186c29">FilterUnit&lt; FormType &gt;</a>
@@ -408,6 +420,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_sine_unit.html#ac77db8979031da62dcbb8b1fa764bc85">SineUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_harmonic_saw_unit.html#af3b66b8c2274a2c152e28da409b04308">HarmonicSawUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_harmonic_square_unit.html#aed2144451f248e37dcfb997779c22e28">HarmonicSquareUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_white_noise_unit.html#afa6544deae62a33c2bf4a41a320e5dd0">WhiteNoiseUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_atomic_variable_unit.html#a8b252b563d15e39ef5a5255ff192d234">AtomicVariableUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_block_unit.html#ae9b2a1d73cd1ee176ce5a33aa358f57b">BlockUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_read_unit.html#a2daae17291fcf1ce86cd1840d5f72061">BusReadUnit&lt; SampleType &gt;</a>
@@ -463,7 +476,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_overlap_mix_channel_internal.html#a40f9c13c009707579ca388e777f446d4">OverlapMixChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_resample_channel_internal.html#aa387258bb881fa3d76f2f0cf476184b1">ResampleChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_type_channel_internal.html#ae7cddfc0938971efdeb1048f1a84c177">TypeChannelInternal&lt; OutputSampleType, InputSampleType &gt;</a>
-, <a class="el" href="class_delay_base_channel_internal.html#a9d348bf4c4c3cce89a5137dc4cae32bd">DelayBaseChannelInternal&lt; FormType &gt;</a>
+, <a class="el" href="class_delay_channel_internal_base.html#a0e94f59fdb1cae4998e38c33dc8e1f42">DelayChannelInternalBase&lt; FormType &gt;</a>
+, <a class="el" href="class_delay_form_allpass_decay.html#a2a6f5bd1206d4b3849ff05d5d700a058">DelayFormAllpassDecay&lt; SampleType &gt;</a>
+, <a class="el" href="class_delay_form_allpass_f_f_f_b.html#aa49ca05a3c12afa90752758084835f2c">DelayFormAllpassFFFB&lt; SampleType &gt;</a>
+, <a class="el" href="class_delay_form_comb_decay.html#a03f4511e9d8784f5602dc2515ec08126">DelayFormCombDecay&lt; SampleType &gt;</a>
+, <a class="el" href="class_delay_form_comb_f_b.html#abeab08e65821636816a0e816cb24c571">DelayFormCombFB&lt; SampleType &gt;</a>
+, <a class="el" href="class_delay_form_comb_filter1_param.html#af1c96949c2c8889c3d3e10d4cc25fa1d">DelayFormCombFilter1Param&lt; FilterShape &gt;</a>
+, <a class="el" href="class_delay_form_delay.html#ad2dca578c79730c6854d562b55f30915">DelayFormDelay&lt; SampleType &gt;</a>
 , <a class="el" href="class_f_f_t_channel_internal.html#a242c0d2739e61ef97758af1269c04911">FFTChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_i_f_f_t_channel_internal.html#a3c7ff3ecbc1475302324e22ff4e48777">IFFTChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_filter_channel_internal.html#abb357c50a18bb827cd0e15fa0c443c73">FilterChannelInternal&lt; FormType &gt;</a>
@@ -486,8 +505,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_saw_channel_internal.html#adac51f5b9e15ee1be7e6ee5fdb719f25">SawChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_signal_play_channel_internal.html#ad8c410dc3b31fe21fdac4fa72663a10c">SignalPlayChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_table_channel_internal.html#a7faa2d57b91bf9c4fb3fb30bbff70a48">TableChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_white_noise_channel_internal.html#ac33607203b6dc8bf92f38ef58003eb7a">WhiteNoiseChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_atomic_variable_channel_internal.html#ab0c05bbb1af95bb072814016e45924e0">AtomicVariableChannelInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_binary_op_channel_internal.html#afd630c74649cd0ccf96719b6c1e7fd78">BinaryOpChannelInternal&lt; SampleType, &gt;</a>
+, <a class="el" href="class_binary_op_channel_internal.html#acbbbdb209f372596bf5c26cd7b05b733">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_block_channel_internal.html#a2fc741106130d144ecfea5c539d58d93">BlockChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_read_channel_internal.html#ab3ebc7a6b3aa119b67dace5936612a42">BusReadChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_write_channel_internal.html#a8b401ac1d79d91fc148a86b8b51c5c9b">BusWriteChannelInternal&lt; SampleType &gt;</a>
@@ -495,22 +515,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_linear_pan_channel_internal.html#af6bfedad671084401bda4500df0c8db5">LinearPanChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_channel_mixer_channel_internal.html#a8811a9d505d2ea1a16664dc270af082f">ChannelMixerChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_unit_mixer_channel_internal.html#a752d6f45f61710185210be7e88abe819">UnitMixerChannelInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_unary_op_channel_internal.html#a3aff900081d52c1b6c9dc8f405a7706a">UnaryOpChannelInternal&lt; SampleType, &gt;</a>
+, <a class="el" href="class_unary_op_channel_internal.html#a7e05e6ee482af61e0eaa354b1585d73f">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_variable_channel_internal.html#abac48d9f689f001c39467623ab30cf38">VariableChannelInternal&lt; SampleType &gt;</a>
 </li>
-<li>getInputName()
-: <a class="el" href="class_i_o_s_audio_host.html#a3e517d1b0d047dfa004c559f6cf78462">IOSAudioHost</a>
-, <a class="el" href="class_juce_audio_host.html#aa21eccee6a496368d997f858aed942dd">JuceAudioHost</a>
+<li>getInputName
+: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a6acd613c2d7d92a840ccdcf38dc78bd7">PLONK_NAMESPACE::IOSAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a1a219edcb47dc7cc716c33ae76b20789">PLONK_NAMESPACE::JuceAudioHost</a>
 , <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_port_audio_audio_host.html#a593b705d936549cc02cef5b9f1c88c23">PortAudioAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#aacbf452956ce030d71b564034a82f810">PLONK_NAMESPACE::PortAudioAudioHost</a>
 </li>
 <li>getInputNames()
 : <a class="el" href="class_channel_internal_core.html#aba48225249f5367de51053f44274bfa0">ChannelInternalCore</a>
 </li>
 <li>getInputs()
-: <a class="el" href="class_channel_base.html#ac89965ee80fc73ffe48bee4c4afbd253">ChannelBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_channel_internal_core.html#abb9ec1b62dc48e62bf7bc838d28dc7bd">ChannelInternalCore</a>
+: <a class="el" href="class_channel_internal_core.html#abb9ec1b62dc48e62bf7bc838d28dc7bd">ChannelInternalCore</a>
 , <a class="el" href="class_audio_host_base.html#a69984e3427c16ef8ebdaa77f8e7aab31">AudioHostBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_base.html#ac89965ee80fc73ffe48bee4c4afbd253">ChannelBase&lt; SampleType &gt;</a>
 </li>
 <li>getInputTypeCode()
 : <a class="el" href="class_channel_base.html#ac900b0a75df3f4c83d1c656545740d73">ChannelBase&lt; SampleType &gt;</a>
@@ -644,8 +664,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_overlap_mix_channel_internal.html#a8c718c7e412f9214d5033f018c9cef86">OverlapMixChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_resample_channel_internal.html#a6d05d4e0beb4f10bda6a9adf73133b33">ResampleChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_type_channel_internal.html#acfe2445ef0321c456eeea6f488b8834c">TypeChannelInternal&lt; OutputSampleType, InputSampleType &gt;</a>
-, <a class="el" href="class_delay_base_channel_internal.html#a9c89a5e2969cb44272ac66a1f6660667">DelayBaseChannelInternal&lt; FormType &gt;</a>
-, <a class="el" href="class_delay_form_base.html#aca79e94428cd795d26ba5aa1cc5409b7">DelayFormBase&lt; SampleType, Form &gt;</a>
+, <a class="el" href="class_delay_channel_internal_base.html#ae874deeffd68b64263a4b6ee08b7add1">DelayChannelInternalBase&lt; FormType &gt;</a>
+, <a class="el" href="class_delay_form_base.html#a80e9bb39491b9b5567cad05555ef09bc">DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;</a>
 , <a class="el" href="class_delay_form_type.html#a6700c29e2866ec67c6d9afa3b6d10894">DelayFormType</a>
 , <a class="el" href="class_f_f_t_channel_internal.html#abe812ce3ebf5ba04e86fb7b7872373cc">FFTChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_i_f_f_t_channel_internal.html#a6151076e1692a7cf1e6a87e6eaf15642">IFFTChannelInternal&lt; SampleType &gt;</a>
@@ -659,6 +679,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_saw_channel_internal.html#addff9557b53437ac8941c72cd07932af">SawChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_signal_play_channel_internal.html#a6aaa4e1ffdb93bce3d886b80cfa25877">SignalPlayChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_table_channel_internal.html#af2ac5a2aa46e0ad300b45653c8b8db7a">TableChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_white_noise_channel_internal.html#afb579babd82ef790ebc0a724a2a95e6e">WhiteNoiseChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_channel_count.html#a4267be42cbce69b3c05f8507fbc61a80">ChannelCount</a>
 , <a class="el" href="class_i_o_info.html#a693247ccdb8d2bd68e4debd1e8757de9">IOInfo</a>
 , <a class="el" href="class_i_o_key.html#a795910a95d4820630475b7f062368d7c">IOKey</a>
@@ -667,7 +688,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_unit_info.html#a7eef9349314af28ac4911c44aa4e4fd9">UnitInfo</a>
 , <a class="el" href="class_atomic_variable_channel_internal.html#a6fda034abb71eb01dbb124ed4b083350">AtomicVariableChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_binary_op_utility.html#a8859344877a5bc19fed6971ae56f244d">BinaryOpUtility&lt; SampleType &gt;</a>
-, <a class="el" href="class_binary_op_channel_internal.html#ac658dacfd9dcd25dea5e4cf29101c82e">BinaryOpChannelInternal&lt; SampleType, &gt;</a>
+, <a class="el" href="class_binary_op_channel_internal.html#a68839caf34c45f689679bfc3c1edc934">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_block_channel_internal.html#a2faf60032b15d306c63845c219a0685e">BlockChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_read_channel_internal.html#a9f573baf21d8c0595de8a04eb7f21141">BusReadChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_write_channel_internal.html#a92d399bb2c692c718e57e1649f10d8bf">BusWriteChannelInternal&lt; SampleType &gt;</a>
@@ -677,18 +698,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_channel_mixer_channel_internal.html#a775f5a1b1c867925fcb4b3f9f283e30e">ChannelMixerChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_unit_mixer_channel_internal.html#af7a98ce1ab30a0b83aeecd81c642dd7c">UnitMixerChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_unary_op_utility.html#a0ffdf30687bf03f2d92f351dc129a804">UnaryOpUtility&lt; SampleType &gt;</a>
-, <a class="el" href="class_unary_op_channel_internal.html#a430177f88c52939634cbb27e1aa458b8">UnaryOpChannelInternal&lt; SampleType, &gt;</a>
+, <a class="el" href="class_unary_op_channel_internal.html#af21c782eb2e61489273ab471546d2415">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_variable_channel_internal.html#a63c392c332bd46c4408b407dcc6ff143">VariableChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_buffer.html#aa9b781560f5080769f6a7bd9c79507aa">BusBuffer&lt; SampleType &gt;</a>
 </li>
 <li>getNameKey()
 : <a class="el" href="class_i_o_info.html#a340c8d643289dc883ba03ca25305e6fe">IOInfo</a>
 </li>
-<li>getNativeHostName()
-: <a class="el" href="class_i_o_s_audio_host.html#a10a6e94caf6ddc7eb9b8c92d15083995">IOSAudioHost</a>
-, <a class="el" href="class_juce_audio_host.html#aa1b5341d4e2c3a052e74d25d91d61dc6">JuceAudioHost</a>
+<li>getNativeHostName
+: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#ae8337ea43cf516aa1d04e98bbefc9893">PLONK_NAMESPACE::IOSAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a766ab8692fe633a24860d2fbe1be2d1d">PLONK_NAMESPACE::JuceAudioHost</a>
 , <a class="el" href="class_audio_host_base.html#a9f3d7131d5e3b466319783f4362eefa4">AudioHostBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_port_audio_audio_host.html#a8153804facf8763b46931ab58ea24fcd">PortAudioAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a5393b804323a7c4c524b86f107999812">PLONK_NAMESPACE::PortAudioAudioHost</a>
 </li>
 <li>getNext()
 : <a class="el" href="class_breakpoint_base.html#ab92b75124230846009b616f7c02fb287">BreakpointBase&lt; SampleType &gt;</a>
@@ -707,178 +728,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_unit_base.html#a2c5e01a93876321a3e9fced5006c4521">UnitBase&lt; SampleType &gt;</a>
 </li>
 <li>getNull()
-: <a class="el" href="class_type_utility_base_3_01const_01_long_busses_01_4.html#a51e4548d98e47a0306997244c171c84d">TypeUtilityBase&lt; const LongBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_breakpoints_01_4.html#a3be21ffdfc9e46ddcded9b3959e09fd7">TypeUtilityBase&lt; FloatBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_breakpoints_01_4.html#aee2b2970e5fcb79f89ddd1d83283d74d">TypeUtilityBase&lt; const FloatBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_wavetable_01_4.html#afb9c4e58171d3f0eadb02937a995075d">TypeUtilityBase&lt; DoubleWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_breakpoints_01_4.html#adc398d7f2061d65afa795271bea482e0">TypeUtilityBase&lt; DoubleBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_breakpoints_01_4.html#a81757b85da842c55b2e4f36d91f27f9c">TypeUtilityBase&lt; const DoubleBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_breakpoints_01_4.html#aeb8730f3215f8c57de1bb063ccee2716">TypeUtilityBase&lt; IntBreakpoints &gt;</a>
+: <a class="el" href="class_type_utility_base_3_01_short_units_01_4.html#a32e5ab43f4f4e4f11cccc5ed38fb2b5b">TypeUtilityBase&lt; ShortUnits &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_int_breakpoints_01_4.html#a939db290b042ae0f8eac98d4dfe96257">TypeUtilityBase&lt; const IntBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_breakpoints_01_4.html#a7bca3d8ceb5199bff517b5f4312e233a">TypeUtilityBase&lt; ShortBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_breakpoints_01_4.html#a6b6c07dbbeaee80bb9884b89a1408c9f">TypeUtilityBase&lt; const ShortBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_breakpoints_01_4.html#a504dd4855ef138e9db151d7acba43c45">TypeUtilityBase&lt; Int24Breakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_breakpoints_01_4.html#aedaf34dcd1f64ffe628527c27f3db76b">TypeUtilityBase&lt; const Int24Breakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_breakpoints_01_4.html#aded44908a7b0c0f39c541f128741048f">TypeUtilityBase&lt; LongBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_breakpoints_01_4.html#a805635bcc7f7968dc30c64d8a8e74714">TypeUtilityBase&lt; const LongBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_wavetable_01_4.html#a24af8ec46d9b7e6b5a888a4adb60d73a">TypeUtilityBase&lt; FloatWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_wavetable_01_4.html#a28cd072b7bbeef30f7a4e6210b66017a">TypeUtilityBase&lt; const FloatWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_wavetable_01_4.html#a76377e4b2c9a61f6a48bf7e929f4e39e">TypeUtilityBase&lt; const DoubleWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_wavetable_01_4.html#a6c4f2b73a1694472fb52e4d1bb487ec8">TypeUtilityBase&lt; IntWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_wavetable_01_4.html#a31261ecee4e07559abdad684f53cf600">TypeUtilityBase&lt; const IntWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_busses_01_4.html#a0746979bf7b762ae0161659e9ba6472a">TypeUtilityBase&lt; LongBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_wavetable_01_4.html#ac48f5c804d7b9c4f86e4788ee7258419">TypeUtilityBase&lt; ShortWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_wavetable_01_4.html#ad7e27998abd73fbd3362142bee105db6">TypeUtilityBase&lt; const ShortWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_wavetable_01_4.html#a06f4a803771a2af0b5dc7b8d24918192">TypeUtilityBase&lt; Int24Wavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_busses_01_4.html#a26ec113ae79009db003fb8da1c33ce76">TypeUtilityBase&lt; ShortBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_wavetable_01_4.html#a973f827897d00e89dd702f41bc163862">TypeUtilityBase&lt; const Int24Wavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_wavetable_01_4.html#ac15417bdea78b1f1913b9ac3d7296093">TypeUtilityBase&lt; const LongWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_signal_01_4.html#a699261c639c193e5752d041ae5bb9f72">TypeUtilityBase&lt; FloatSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_busses_01_4.html#ae99db7257f09514f75865fe9e32b17b7">TypeUtilityBase&lt; DoubleBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_signal_01_4.html#ab0bb82e9d79a81e1d55a7e670ea7df93">TypeUtilityBase&lt; const FloatSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_signal_01_4.html#afd0d49237f6b44467dfab8b484d480ec">TypeUtilityBase&lt; const DoubleSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_signal_01_4.html#a96aaace8e1a4c19afca94472142d05b5">TypeUtilityBase&lt; IntSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_signal_01_4.html#a94497fb3b62d6f37f324772bb652bf36">TypeUtilityBase&lt; const IntSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_signal_01_4.html#ab11eb826b33cbf4174acd99c656cd56f">TypeUtilityBase&lt; const ShortSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_signal_01_4.html#a14f5a6952c49138e8d090507c0b3adc2">TypeUtilityBase&lt; Int24Signal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_signal_01_4.html#a424f0788ab90db34d1ff5f5c20027191">TypeUtilityBase&lt; const Int24Signal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_units_01_4.html#a32e5ab43f4f4e4f11cccc5ed38fb2b5b">TypeUtilityBase&lt; ShortUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_signal_01_4.html#ac9ce17efffa891077818128374e987c4">TypeUtilityBase&lt; LongSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_signal_01_4.html#a1b353981ff4497701912fe7f865d64b9">TypeUtilityBase&lt; const LongSignal &gt;</a>
-, <a class="el" href="class_channel_base.html#ac7425a8ffd4ac897bf05b24a008f0d15">ChannelBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_units_01_4.html#a42f9bd7096a3c2d09962dbc44052ff4a">TypeUtilityBase&lt; DoubleUnits &gt;</a>
-, <a class="el" href="class_unit_base.html#a2a48b6e82bb1a93ee0b0ecd309688ff0">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_bus_buffer.html#a2cb2e42b6c36795ebf865006aed7a0ff">BusBuffer&lt; SampleType &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_signal_01_4.html#aa5e6f2733ef700b8494f9228c953abd6">TypeUtilityBase&lt; ShortSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_bus_01_4.html#a2a11d2862fd7bdc563a03fbb84a7d592">TypeUtilityBase&lt; LongBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_wavetable_01_4.html#ab32a2b27defa9c791fd1f1b2d94bba69">TypeUtilityBase&lt; LongWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_signal_01_4.html#a571faf8aa1ae2ade17d81d344148e3a4">TypeUtilityBase&lt; DoubleSignal &gt;</a>
-, <a class="el" href="class_breakpoint_base.html#a44ae8c361fbfeebecea50b051efa55ad">BreakpointBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_breakpoints_base.html#a605bb5bec9668cc108647ed714177f37">BreakpointsBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_dictionary.html#a6931d4128351acd8496c0e735a1dace8">Dictionary&lt; ValueType, KeyType &gt;</a>
-, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_object_array.html#a715e318d82d3ecd17b4a0ca64b5e3222">ObjectArray&lt; ObjectType &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_bus_01_4.html#aa1e56607e3c64c218617415e45a261d6">TypeUtilityBase&lt; DoubleBus &gt;</a>
-, <a class="el" href="class_object_array2_d.html#ae2b57af76bb0e493bb0747389dfd815a">ObjectArray2D&lt; ArrayType, RowType &gt;</a>
-, <a class="el" href="class_signal_base.html#a903cc79674435f2dcfb53858b0809e81">SignalBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_text.html#a4fb99e6125742dab2e2c3738891e27d5">Text</a>
-, <a class="el" href="class_type_utility_base_3_01_long_unit_01_4.html#a19e3ef285283c4bbb378ec94c97c689d">TypeUtilityBase&lt; LongUnit &gt;</a>
-, <a class="el" href="class_text_array.html#a22abdfacc5926d2503a1ebd5e6425e1f">TextArray</a>
-, <a class="el" href="class_variable.html#a19d9e0c60da0a91e293aac5f83e65950">Variable&lt; Type &gt;</a>
-, <a class="el" href="class_type_utility_base.html#a8581b0c0b44540bbafce86714b2f7d06">TypeUtilityBase&lt; Type &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_unit_01_4.html#a32d8870563bd3d7ea33cbf08bd027fc4">TypeUtilityBase&lt; ShortUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_type_01_6_01_4.html#aa1e1fd9db7fc5e9263266341b33bd842">TypeUtilityBase&lt; Type &amp; &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#aa3a3714e7b3caf6cb743de3fc4dca3cb">TypeUtilityBase&lt; Type const &amp; &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_dynamic_01_4.html#ad865679022b24ae4607dd73426214029">TypeUtilityBase&lt; Dynamic &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_dynamic_01_4.html#a1ee5eb8bb3e69a5a7a80f38e0fda008b">TypeUtilityBase&lt; const Dynamic &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01float_01_4.html#a41677986abf7346ff3d1e7e3958e2d78">TypeUtilityBase&lt; float &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01double_01_4.html#a639ecdcadcc5c1299390972e738f2d8e">TypeUtilityBase&lt; double &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01int_01_4.html#a65fb541826c85baff00534aa50f464c1">TypeUtilityBase&lt; int &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_channel_01_4.html#a759d5607976a1c18da52a542c4e1f612">TypeUtilityBase&lt; LongChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01short_01_4.html#ae022e18c361d534f8f81ca4c4ef82e87">TypeUtilityBase&lt; short &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_01_4.html#a98f57659ad631db306678fb47d2c66f6">TypeUtilityBase&lt; Int24 &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_long_01_4.html#a05b52e3436e649c6558419b2c44f0ed0">TypeUtilityBase&lt; LongLong &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_channel_01_4.html#ad0e635cdbcbe621004ad3053cc4d81ea">TypeUtilityBase&lt; ShortChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01char_01_4.html#a4d7d5b1805d5adb92529c527241a8360">TypeUtilityBase&lt; char &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01bool_01_4.html#ab399ce0fe77123dd3b97f104da94a2e6">TypeUtilityBase&lt; bool &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_float_01_4.html#a40f1d3a50ee58f9a79bf8aa122729bc8">TypeUtilityBase&lt; AtomicFloat &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_channel_01_4.html#ae6c813ae556563021b752a6f1ca2ce34">TypeUtilityBase&lt; DoubleChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_01_4.html#a7fdf86a357224fa0e7bd147d716285b7">TypeUtilityBase&lt; const AtomicFloat &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_double_01_4.html#afeed31548fdfcdfb5f92b19527444d70">TypeUtilityBase&lt; AtomicDouble &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_01_4.html#a785764827cfa1e02092efb02d832510d">TypeUtilityBase&lt; const AtomicDouble &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_int_01_4.html#a160333eb94bd64e021cdd9a3acd4ade8">TypeUtilityBase&lt; AtomicInt &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_01_4.html#a3f0dff6db475a5945be8459926957717">TypeUtilityBase&lt; const AtomicInt &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_long_long_01_4.html#a940cdb4aecc7de7e06e55968919766d8">TypeUtilityBase&lt; AtomicLongLong &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_long_01_4.html#afbe9874de0ad616a43f8c626f25346dc">TypeUtilityBase&lt; const AtomicLongLong &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_bool_array_01_4.html#aa8e4f838e763710cf475c078435e78e0">TypeUtilityBase&lt; BoolArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_01_4.html#a6b6a30d91a61d235636c9b20176deb1a">TypeUtilityBase&lt; AtomicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_01_4.html#ad580dbce39220f2817cb894cb3ece06c">TypeUtilityBase&lt; const AtomicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_01_4.html#ab7bc3a6af4064889f946190c52335318">TypeUtilityBase&lt; AtomicExtendedPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_array_01_4.html#aa4bbe31fc5c9f5907e9cdd6ac58967f5">TypeUtilityBase&lt; LongArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_01_4.html#aed373efb5575edcafb103a0346727d50">TypeUtilityBase&lt; const AtomicExtendedPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_01_4.html#af12d2b377f0ee64c517eade17bd39e3d">TypeUtilityBase&lt; AtomicDynamicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_01_4.html#a9df2c7831979cc0bcc492393f664ffbb">TypeUtilityBase&lt; const AtomicDynamicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_array_01_4.html#ae708cdc9187efb3cd26c6fefe07ca2fa">TypeUtilityBase&lt; ShortArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_variable_01_4.html#a6e1ecb5d83d9ba9b8af7e24d5f72db1d">TypeUtilityBase&lt; FloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_variable_01_4.html#a66596d5b0612c9305fcea9027aaf3558">TypeUtilityBase&lt; const FloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_variable_01_4.html#a8a0efe3158c055b46593460823ac92b4">TypeUtilityBase&lt; DoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_variable_01_4.html#ab6cbe68c37a732807e0ef92c28d93e55">TypeUtilityBase&lt; const DoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_variable_01_4.html#a36329f39642695e753cda09464788af2">TypeUtilityBase&lt; IntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_variable_01_4.html#aff22e6c5ac90cc8f2739317ad3d2d14d">TypeUtilityBase&lt; const IntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_variable_01_4.html#aed12a28bc3ed778d8a182095c8799567">TypeUtilityBase&lt; ShortVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_variable_01_4.html#a4491db21ef91f0db78d729c657b5b12c">TypeUtilityBase&lt; const AtomicExtendedPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_variable_01_4.html#aaa72b2f54b5c1b5d36dc3ed8cd9812b8">TypeUtilityBase&lt; const ShortVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_variable_01_4.html#adb3923abebd8d6cef1e12864ba77ada0">TypeUtilityBase&lt; Int24Variable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_variable_01_4.html#a4ea5401b284c335d47207599d2715bff">TypeUtilityBase&lt; const Int24Variable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_variable_01_4.html#a38f51a67c16ebd396f90c3c937d8d934">TypeUtilityBase&lt; const AtomicLongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_variable_01_4.html#ac902cc3c939818fa8a99790a0445d0bd">TypeUtilityBase&lt; LongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_variable_01_4.html#a498a562509a04d77616b0ac2f6fbe08c">TypeUtilityBase&lt; const LongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_char_variable_01_4.html#abce9d09259f9f2f1682cc679532d93df">TypeUtilityBase&lt; CharVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_char_variable_01_4.html#a42c6f6198c32acc7f4dacd38bae01830">TypeUtilityBase&lt; const CharVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_bool_variable_01_4.html#adb5f026a75bfbc305220c66580f8ac35">TypeUtilityBase&lt; BoolVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_bool_variable_01_4.html#abe2727c3d2ab2888442df466458071db">TypeUtilityBase&lt; const BoolVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_float_variable_01_4.html#ab5081fc8f621d2bd776458ebeb643c09">TypeUtilityBase&lt; AtomicFloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_variable_01_4.html#a28eb7b6024e5de83cd0290b6610b9975">TypeUtilityBase&lt; const AtomicFloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_double_variable_01_4.html#a6d55fa0fa4292102bfa0fb6d19b6f907">TypeUtilityBase&lt; AtomicDoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_variable_01_4.html#a213777488f66a149d7505f93d20200f4">TypeUtilityBase&lt; const AtomicDoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_int_variable_01_4.html#a025da68bbe7f7f39e6e5b5dee7a19d4c">TypeUtilityBase&lt; AtomicIntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_variable_01_4.html#aa6076936a17694a3ffe3237cad8c2460">TypeUtilityBase&lt; const AtomicIntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_long_variable_01_4.html#ae48db2e5cf85f0cdd59ab3435a837162">TypeUtilityBase&lt; AtomicLongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_variable_01_4.html#aaff1e3abd8467b0c9a8eebaa55b8147e">TypeUtilityBase&lt; AtomicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_variable_01_4.html#a6d38bef7ec4509a8c9023c89a4b1bc50">TypeUtilityBase&lt; const AtomicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_variable_01_4.html#a47c7842d15011535a357dcd1eb024ed1">TypeUtilityBase&lt; AtomicExtendedPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_variable_01_4.html#a806c3c56a26468fb952dd5e1d16c3d8a">TypeUtilityBase&lt; AtomicDynamicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_variable_01_4.html#a333fc97290b6b8ed9fcfdcd8d6b0cb87">TypeUtilityBase&lt; const AtomicDynamicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_array_01_4.html#aa488464a334a3f3e7584283de0c0977f">TypeUtilityBase&lt; FloatArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_array_01_4.html#ae17350844be9d53cc29ed5898bcdb274">TypeUtilityBase&lt; DoubleArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_array_01_4.html#a5ffe2a3705d06adb513353630ec23cb8">TypeUtilityBase&lt; const DoubleArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_array_01_4.html#aa6b384f3bd8d048a3ac4da9431e95db8">TypeUtilityBase&lt; IntArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_array_01_4.html#ab07bf0b6172b04810a8303468e67bb21">TypeUtilityBase&lt; const IntArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_array_01_4.html#a0bba60ca0d4b74a1a187647181341831">TypeUtilityBase&lt; const ShortArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_array_01_4.html#a658f2bf0d589b46f18605a558b41d6dd">TypeUtilityBase&lt; Int24Array &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_array_01_4.html#a44b0a41034b77c0ab60f7ce973e4b87e">TypeUtilityBase&lt; const Int24Array &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_array_01_4.html#a34fb5597e7c169ce98b279363ae22d6a">TypeUtilityBase&lt; const LongArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_char_array_01_4.html#ac42e026ea1a918f286a3957b3f100a2d">TypeUtilityBase&lt; CharArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_char_array_01_4.html#a2eb662a1de70d1f27be0e4358da41be6">TypeUtilityBase&lt; const CharArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_bool_array_01_4.html#ad6977b822fb872d4c1951f8ace99cea1">TypeUtilityBase&lt; const BoolArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01plonk_1_1_text_01_4.html#a2f443a3b7ce6dbac6bb2eeee269d0873">TypeUtilityBase&lt; plonk::Text &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01plonk_1_1_text_01_4.html#aaae14006b3e44440e831a7039a977643">TypeUtilityBase&lt; const plonk::Text &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_text_array_01_4.html#ac5eeaa3f68e2cdbe5b2a89bd877c466b">TypeUtilityBase&lt; TextArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_text_array_01_4.html#aaf282a645bf21fcf744f29ecc75ed727">TypeUtilityBase&lt; const TextArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_channel_01_4.html#a4597177ca298f2e09ae521e008c40cc2">TypeUtilityBase&lt; FloatChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_channel_01_4.html#ae2c301463320107b37201e1f5994e454">TypeUtilityBase&lt; const FloatChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_channel_01_4.html#a3212a92d8a6540f96b316efb2a1184f3">TypeUtilityBase&lt; const DoubleChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_channel_01_4.html#a4970dbddf894fb46d8c981f912cfec0a">TypeUtilityBase&lt; IntChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_channel_01_4.html#aa18a56d8e8e7f4eea707d53f31276ac9">TypeUtilityBase&lt; const IntChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_channel_01_4.html#a66fee6110bcd2b0c5a8652e1b305e6f9">TypeUtilityBase&lt; const ShortChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_channel_01_4.html#a72c1e285f884b0f2e1e42cb6838fe0d8">TypeUtilityBase&lt; Int24Channel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_channel_01_4.html#a1689dd68619400397193b050d151bb71">TypeUtilityBase&lt; const Int24Channel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_channel_01_4.html#a0c0789a6995f01cb567292cd1c11485d">TypeUtilityBase&lt; const LongChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_unit_01_4.html#acffa1823afb356a1e1dd5541069f8afe">TypeUtilityBase&lt; FloatUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_unit_01_4.html#af3317f22e8a5dc721a1ae1ca321db9e9">TypeUtilityBase&lt; const FloatUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_unit_01_4.html#a13d300289e6f6c0ebe934ed5ed16f3ae">TypeUtilityBase&lt; DoubleUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_unit_01_4.html#ab7223b246e5796e9b32e4d840e50dc84">TypeUtilityBase&lt; const DoubleUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_unit_01_4.html#a784a1940342bc379ff19cc912b77e1ae">TypeUtilityBase&lt; IntUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_unit_01_4.html#a8a8bdffa51bff1df51d93ab4247ca536">TypeUtilityBase&lt; const IntUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_unit_01_4.html#a7c2e1e457874ef0d855850fc8d145d73">TypeUtilityBase&lt; const ShortUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_unit_01_4.html#ae0f07914ae9d48224cfcfe112bf8ec3f">TypeUtilityBase&lt; Int24Unit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_unit_01_4.html#a91d47ec877fb17662867a19dd25e313d">TypeUtilityBase&lt; const Int24Unit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_unit_01_4.html#adac4834ede54b8150fb54c611c9ed327">TypeUtilityBase&lt; const LongUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_bus_01_4.html#acffb38ceb05d2e1a5510cb2304e64c66">TypeUtilityBase&lt; FloatBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_bus_01_4.html#ac69702ecb92a910900b910b1b26a7bcb">TypeUtilityBase&lt; const FloatBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_bus_01_4.html#a0ec19d0fc10a413fb2b3999687c936ed">TypeUtilityBase&lt; const DoubleBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_bus_01_4.html#ac3f0f5ed7876226c9e0cfc142e0d522c">TypeUtilityBase&lt; IntBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_bus_01_4.html#ad738d9e7ece1c349258df1f8529c98e6">TypeUtilityBase&lt; const IntBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_bus_01_4.html#a88404711f856f60b8b0eb96e1d440c27">TypeUtilityBase&lt; ShortBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_bus_01_4.html#a97e032754a343944074e538e7968666f">TypeUtilityBase&lt; const ShortBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_bus_01_4.html#a58ccc786267b64f17ce6f153706756f8">TypeUtilityBase&lt; Int24Bus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_bus_01_4.html#a42e277bb371ce4fac9344530126f9faa">TypeUtilityBase&lt; const Int24Bus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_bus_01_4.html#ab1b40719877c3880f6e80fca7a57f919">TypeUtilityBase&lt; const LongBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_units_01_4.html#a31e77ab9cec7d86e3030dc5d7685eca8">TypeUtilityBase&lt; FloatUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_units_01_4.html#a8950ef24570720bb4453d653809cf22a">TypeUtilityBase&lt; const FloatUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_units_01_4.html#a3c5ff948cbb1cf755e471b03ec67d961">TypeUtilityBase&lt; const DoubleUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_units_01_4.html#af4585b6d20b3b31a1e7036c57e037e4a">TypeUtilityBase&lt; IntUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_units_01_4.html#a3ce8a086926e495af51787e061d89122">TypeUtilityBase&lt; const IntUnits &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_short_units_01_4.html#a2e46ac6afef5ebe0e51e68399e6e34e5">TypeUtilityBase&lt; const ShortUnits &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01_int24_units_01_4.html#aaf5a652d2a1eb93464f57ea8280a2d59">TypeUtilityBase&lt; Int24Units &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_int24_units_01_4.html#a13c045316ddc933670b19835ef03dbc3">TypeUtilityBase&lt; const Int24Units &gt;</a>
@@ -886,12 +737,182 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_type_utility_base_3_01const_01_long_units_01_4.html#a0060dd0e87aa3e8589f5c5739446ddd0">TypeUtilityBase&lt; const LongUnits &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01_float_busses_01_4.html#a37908cd9ff6b7106cb1d92234e7f5d7c">TypeUtilityBase&lt; FloatBusses &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_float_busses_01_4.html#afdff1d22afbccb64727d5f3336b428ed">TypeUtilityBase&lt; const FloatBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_busses_01_4.html#ae99db7257f09514f75865fe9e32b17b7">TypeUtilityBase&lt; DoubleBusses &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_double_busses_01_4.html#a098e2eca0cb87107d41df148d41780de">TypeUtilityBase&lt; const DoubleBusses &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01_int_busses_01_4.html#ab79af2ccaeef75199639a5516c702661">TypeUtilityBase&lt; IntBusses &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_int_busses_01_4.html#a602f795dbab0d26106669910790c747a">TypeUtilityBase&lt; const IntBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_busses_01_4.html#a26ec113ae79009db003fb8da1c33ce76">TypeUtilityBase&lt; ShortBusses &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_short_busses_01_4.html#ac42958d676d73f7b077a61f844365476">TypeUtilityBase&lt; const ShortBusses &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01_int24_busses_01_4.html#ac341b64983ca7afc08edbc773c6ac949">TypeUtilityBase&lt; Int24Busses &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_int24_busses_01_4.html#a64e69ae010eedf92f97a23931b34b33a">TypeUtilityBase&lt; const Int24Busses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_busses_01_4.html#a0746979bf7b762ae0161659e9ba6472a">TypeUtilityBase&lt; LongBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_busses_01_4.html#a51e4548d98e47a0306997244c171c84d">TypeUtilityBase&lt; const LongBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_breakpoints_01_4.html#a3be21ffdfc9e46ddcded9b3959e09fd7">TypeUtilityBase&lt; FloatBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_breakpoints_01_4.html#aee2b2970e5fcb79f89ddd1d83283d74d">TypeUtilityBase&lt; const FloatBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_breakpoints_01_4.html#adc398d7f2061d65afa795271bea482e0">TypeUtilityBase&lt; DoubleBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_breakpoints_01_4.html#a81757b85da842c55b2e4f36d91f27f9c">TypeUtilityBase&lt; const DoubleBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_breakpoints_01_4.html#aeb8730f3215f8c57de1bb063ccee2716">TypeUtilityBase&lt; IntBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_breakpoints_01_4.html#a7bca3d8ceb5199bff517b5f4312e233a">TypeUtilityBase&lt; ShortBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_units_01_4.html#a3ce8a086926e495af51787e061d89122">TypeUtilityBase&lt; const IntUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_breakpoints_01_4.html#a6b6c07dbbeaee80bb9884b89a1408c9f">TypeUtilityBase&lt; const ShortBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_breakpoints_01_4.html#a504dd4855ef138e9db151d7acba43c45">TypeUtilityBase&lt; Int24Breakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_breakpoints_01_4.html#aded44908a7b0c0f39c541f128741048f">TypeUtilityBase&lt; LongBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_units_01_4.html#a8950ef24570720bb4453d653809cf22a">TypeUtilityBase&lt; const FloatUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_breakpoints_01_4.html#a805635bcc7f7968dc30c64d8a8e74714">TypeUtilityBase&lt; const LongBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_wavetable_01_4.html#a24af8ec46d9b7e6b5a888a4adb60d73a">TypeUtilityBase&lt; FloatWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_wavetable_01_4.html#afb9c4e58171d3f0eadb02937a995075d">TypeUtilityBase&lt; DoubleWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_bus_01_4.html#a42e277bb371ce4fac9344530126f9faa">TypeUtilityBase&lt; const Int24Bus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_wavetable_01_4.html#a76377e4b2c9a61f6a48bf7e929f4e39e">TypeUtilityBase&lt; const DoubleWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_wavetable_01_4.html#a6c4f2b73a1694472fb52e4d1bb487ec8">TypeUtilityBase&lt; IntWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_wavetable_01_4.html#a31261ecee4e07559abdad684f53cf600">TypeUtilityBase&lt; const IntWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_wavetable_01_4.html#ac48f5c804d7b9c4f86e4788ee7258419">TypeUtilityBase&lt; ShortWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_wavetable_01_4.html#ad7e27998abd73fbd3362142bee105db6">TypeUtilityBase&lt; const ShortWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_wavetable_01_4.html#a06f4a803771a2af0b5dc7b8d24918192">TypeUtilityBase&lt; Int24Wavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_wavetable_01_4.html#ab32a2b27defa9c791fd1f1b2d94bba69">TypeUtilityBase&lt; LongWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_bus_01_4.html#ac69702ecb92a910900b910b1b26a7bcb">TypeUtilityBase&lt; const FloatBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_wavetable_01_4.html#ac15417bdea78b1f1913b9ac3d7296093">TypeUtilityBase&lt; const LongWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_signal_01_4.html#a699261c639c193e5752d041ae5bb9f72">TypeUtilityBase&lt; FloatSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_signal_01_4.html#a571faf8aa1ae2ade17d81d344148e3a4">TypeUtilityBase&lt; DoubleSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_unit_01_4.html#a91d47ec877fb17662867a19dd25e313d">TypeUtilityBase&lt; const Int24Unit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_signal_01_4.html#afd0d49237f6b44467dfab8b484d480ec">TypeUtilityBase&lt; const DoubleSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_signal_01_4.html#a96aaace8e1a4c19afca94472142d05b5">TypeUtilityBase&lt; IntSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_signal_01_4.html#aa5e6f2733ef700b8494f9228c953abd6">TypeUtilityBase&lt; ShortSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_unit_01_4.html#a8a8bdffa51bff1df51d93ab4247ca536">TypeUtilityBase&lt; const IntUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_signal_01_4.html#ab11eb826b33cbf4174acd99c656cd56f">TypeUtilityBase&lt; const ShortSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_signal_01_4.html#a14f5a6952c49138e8d090507c0b3adc2">TypeUtilityBase&lt; Int24Signal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_signal_01_4.html#a424f0788ab90db34d1ff5f5c20027191">TypeUtilityBase&lt; const Int24Signal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_signal_01_4.html#ac9ce17efffa891077818128374e987c4">TypeUtilityBase&lt; LongSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_signal_01_4.html#a1b353981ff4497701912fe7f865d64b9">TypeUtilityBase&lt; const LongSignal &gt;</a>
+, <a class="el" href="class_channel_base.html#ac7425a8ffd4ac897bf05b24a008f0d15">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_bus_buffer.html#a2cb2e42b6c36795ebf865006aed7a0ff">BusBuffer&lt; SampleType &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_channel_01_4.html#a1689dd68619400397193b050d151bb71">TypeUtilityBase&lt; const Int24Channel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_breakpoints_01_4.html#aedaf34dcd1f64ffe628527c27f3db76b">TypeUtilityBase&lt; const Int24Breakpoints &gt;</a>
+, <a class="el" href="class_unit_base.html#a2a48b6e82bb1a93ee0b0ecd309688ff0">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_signal_01_4.html#a94497fb3b62d6f37f324772bb652bf36">TypeUtilityBase&lt; const IntSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_channel_01_4.html#aa18a56d8e8e7f4eea707d53f31276ac9">TypeUtilityBase&lt; const IntChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_signal_01_4.html#ab0bb82e9d79a81e1d55a7e670ea7df93">TypeUtilityBase&lt; const FloatSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_wavetable_01_4.html#a973f827897d00e89dd702f41bc163862">TypeUtilityBase&lt; const Int24Wavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_wavetable_01_4.html#a28cd072b7bbeef30f7a4e6210b66017a">TypeUtilityBase&lt; const FloatWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_channel_01_4.html#ae2c301463320107b37201e1f5994e454">TypeUtilityBase&lt; const FloatChannel &gt;</a>
+, <a class="el" href="class_breakpoint_base.html#a44ae8c361fbfeebecea50b051efa55ad">BreakpointBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_breakpoints_base.html#a605bb5bec9668cc108647ed714177f37">BreakpointsBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_dictionary.html#a6931d4128351acd8496c0e735a1dace8">Dictionary&lt; ValueType, KeyType &gt;</a>
+, <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; NumericalType &gt;</a>
+, <a class="el" href="class_object_array.html#a715e318d82d3ecd17b4a0ca64b5e3222">ObjectArray&lt; ObjectType &gt;</a>
+, <a class="el" href="class_object_array2_d.html#ae2b57af76bb0e493bb0747389dfd815a">ObjectArray2D&lt; ArrayType, RowType &gt;</a>
+, <a class="el" href="class_signal_base.html#a903cc79674435f2dcfb53858b0809e81">SignalBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_char_array_01_4.html#a2eb662a1de70d1f27be0e4358da41be6">TypeUtilityBase&lt; const CharArray &gt;</a>
+, <a class="el" href="class_text.html#a4fb99e6125742dab2e2c3738891e27d5">Text</a>
+, <a class="el" href="class_text_array.html#a22abdfacc5926d2503a1ebd5e6425e1f">TextArray</a>
+, <a class="el" href="class_variable.html#a19d9e0c60da0a91e293aac5f83e65950">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_array_01_4.html#a44b0a41034b77c0ab60f7ce973e4b87e">TypeUtilityBase&lt; const Int24Array &gt;</a>
+, <a class="el" href="class_type_utility_base.html#a8581b0c0b44540bbafce86714b2f7d06">TypeUtilityBase&lt; Type &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_type_01_6_01_4.html#aa1e1fd9db7fc5e9263266341b33bd842">TypeUtilityBase&lt; Type &amp; &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#aa3a3714e7b3caf6cb743de3fc4dca3cb">TypeUtilityBase&lt; Type const &amp; &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_array_01_4.html#ab07bf0b6172b04810a8303468e67bb21">TypeUtilityBase&lt; const IntArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_dynamic_01_4.html#ad865679022b24ae4607dd73426214029">TypeUtilityBase&lt; Dynamic &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_dynamic_01_4.html#a1ee5eb8bb3e69a5a7a80f38e0fda008b">TypeUtilityBase&lt; const Dynamic &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01float_01_4.html#a41677986abf7346ff3d1e7e3958e2d78">TypeUtilityBase&lt; float &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01double_01_4.html#a639ecdcadcc5c1299390972e738f2d8e">TypeUtilityBase&lt; double &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01int_01_4.html#a65fb541826c85baff00534aa50f464c1">TypeUtilityBase&lt; int &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01short_01_4.html#ae022e18c361d534f8f81ca4c4ef82e87">TypeUtilityBase&lt; short &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_01_4.html#a98f57659ad631db306678fb47d2c66f6">TypeUtilityBase&lt; Int24 &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_variable_01_4.html#a47c7842d15011535a357dcd1eb024ed1">TypeUtilityBase&lt; AtomicExtendedPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_long_01_4.html#a05b52e3436e649c6558419b2c44f0ed0">TypeUtilityBase&lt; LongLong &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01char_01_4.html#a4d7d5b1805d5adb92529c527241a8360">TypeUtilityBase&lt; char &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01bool_01_4.html#ab399ce0fe77123dd3b97f104da94a2e6">TypeUtilityBase&lt; bool &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_long_variable_01_4.html#ae48db2e5cf85f0cdd59ab3435a837162">TypeUtilityBase&lt; AtomicLongVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_float_01_4.html#a40f1d3a50ee58f9a79bf8aa122729bc8">TypeUtilityBase&lt; AtomicFloat &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_01_4.html#a7fdf86a357224fa0e7bd147d716285b7">TypeUtilityBase&lt; const AtomicFloat &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_double_01_4.html#afeed31548fdfcdfb5f92b19527444d70">TypeUtilityBase&lt; AtomicDouble &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_double_variable_01_4.html#a6d55fa0fa4292102bfa0fb6d19b6f907">TypeUtilityBase&lt; AtomicDoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_01_4.html#a785764827cfa1e02092efb02d832510d">TypeUtilityBase&lt; const AtomicDouble &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_int_01_4.html#a160333eb94bd64e021cdd9a3acd4ade8">TypeUtilityBase&lt; AtomicInt &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_01_4.html#a3f0dff6db475a5945be8459926957717">TypeUtilityBase&lt; const AtomicInt &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_long_long_01_4.html#a940cdb4aecc7de7e06e55968919766d8">TypeUtilityBase&lt; AtomicLongLong &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_long_01_4.html#afbe9874de0ad616a43f8c626f25346dc">TypeUtilityBase&lt; const AtomicLongLong &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_01_4.html#a6b6a30d91a61d235636c9b20176deb1a">TypeUtilityBase&lt; AtomicPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_01_4.html#ad580dbce39220f2817cb894cb3ece06c">TypeUtilityBase&lt; const AtomicPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_variable_01_4.html#ac902cc3c939818fa8a99790a0445d0bd">TypeUtilityBase&lt; LongVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_01_4.html#ab7bc3a6af4064889f946190c52335318">TypeUtilityBase&lt; AtomicExtendedPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_01_4.html#aed373efb5575edcafb103a0346727d50">TypeUtilityBase&lt; const AtomicExtendedPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_01_4.html#af12d2b377f0ee64c517eade17bd39e3d">TypeUtilityBase&lt; AtomicDynamicPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_variable_01_4.html#aed12a28bc3ed778d8a182095c8799567">TypeUtilityBase&lt; ShortVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_01_4.html#a9df2c7831979cc0bcc492393f664ffbb">TypeUtilityBase&lt; const AtomicDynamicPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_variable_01_4.html#a6e1ecb5d83d9ba9b8af7e24d5f72db1d">TypeUtilityBase&lt; FloatVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_variable_01_4.html#a66596d5b0612c9305fcea9027aaf3558">TypeUtilityBase&lt; const FloatVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_variable_01_4.html#a8a0efe3158c055b46593460823ac92b4">TypeUtilityBase&lt; DoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_variable_01_4.html#ab6cbe68c37a732807e0ef92c28d93e55">TypeUtilityBase&lt; const DoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_variable_01_4.html#a36329f39642695e753cda09464788af2">TypeUtilityBase&lt; IntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_variable_01_4.html#aff22e6c5ac90cc8f2739317ad3d2d14d">TypeUtilityBase&lt; const IntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_variable_01_4.html#aaa72b2f54b5c1b5d36dc3ed8cd9812b8">TypeUtilityBase&lt; const ShortVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_variable_01_4.html#adb3923abebd8d6cef1e12864ba77ada0">TypeUtilityBase&lt; Int24Variable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_variable_01_4.html#a4ea5401b284c335d47207599d2715bff">TypeUtilityBase&lt; const Int24Variable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_variable_01_4.html#a498a562509a04d77616b0ac2f6fbe08c">TypeUtilityBase&lt; const LongVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_char_variable_01_4.html#abce9d09259f9f2f1682cc679532d93df">TypeUtilityBase&lt; CharVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_char_variable_01_4.html#a42c6f6198c32acc7f4dacd38bae01830">TypeUtilityBase&lt; const CharVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_bool_variable_01_4.html#adb5f026a75bfbc305220c66580f8ac35">TypeUtilityBase&lt; BoolVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_bool_variable_01_4.html#abe2727c3d2ab2888442df466458071db">TypeUtilityBase&lt; const BoolVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_float_variable_01_4.html#ab5081fc8f621d2bd776458ebeb643c09">TypeUtilityBase&lt; AtomicFloatVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_variable_01_4.html#a28eb7b6024e5de83cd0290b6610b9975">TypeUtilityBase&lt; const AtomicFloatVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_variable_01_4.html#a213777488f66a149d7505f93d20200f4">TypeUtilityBase&lt; const AtomicDoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_int_variable_01_4.html#a025da68bbe7f7f39e6e5b5dee7a19d4c">TypeUtilityBase&lt; AtomicIntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_variable_01_4.html#aa6076936a17694a3ffe3237cad8c2460">TypeUtilityBase&lt; const AtomicIntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_variable_01_4.html#a38f51a67c16ebd396f90c3c937d8d934">TypeUtilityBase&lt; const AtomicLongVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_variable_01_4.html#aaff1e3abd8467b0c9a8eebaa55b8147e">TypeUtilityBase&lt; AtomicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_variable_01_4.html#a6d38bef7ec4509a8c9023c89a4b1bc50">TypeUtilityBase&lt; const AtomicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_variable_01_4.html#a4491db21ef91f0db78d729c657b5b12c">TypeUtilityBase&lt; const AtomicExtendedPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_variable_01_4.html#a806c3c56a26468fb952dd5e1d16c3d8a">TypeUtilityBase&lt; AtomicDynamicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_variable_01_4.html#a333fc97290b6b8ed9fcfdcd8d6b0cb87">TypeUtilityBase&lt; const AtomicDynamicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_array_01_4.html#aa488464a334a3f3e7584283de0c0977f">TypeUtilityBase&lt; FloatArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_array_01_4.html#ae17350844be9d53cc29ed5898bcdb274">TypeUtilityBase&lt; DoubleArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_array_01_4.html#a5ffe2a3705d06adb513353630ec23cb8">TypeUtilityBase&lt; const DoubleArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_array_01_4.html#aa6b384f3bd8d048a3ac4da9431e95db8">TypeUtilityBase&lt; IntArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_array_01_4.html#ae708cdc9187efb3cd26c6fefe07ca2fa">TypeUtilityBase&lt; ShortArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_array_01_4.html#a0bba60ca0d4b74a1a187647181341831">TypeUtilityBase&lt; const ShortArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_array_01_4.html#a658f2bf0d589b46f18605a558b41d6dd">TypeUtilityBase&lt; Int24Array &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_array_01_4.html#aa4bbe31fc5c9f5907e9cdd6ac58967f5">TypeUtilityBase&lt; LongArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_array_01_4.html#a34fb5597e7c169ce98b279363ae22d6a">TypeUtilityBase&lt; const LongArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_char_array_01_4.html#ac42e026ea1a918f286a3957b3f100a2d">TypeUtilityBase&lt; CharArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_bool_array_01_4.html#aa8e4f838e763710cf475c078435e78e0">TypeUtilityBase&lt; BoolArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_bool_array_01_4.html#ad6977b822fb872d4c1951f8ace99cea1">TypeUtilityBase&lt; const BoolArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01plonk_1_1_text_01_4.html#a2f443a3b7ce6dbac6bb2eeee269d0873">TypeUtilityBase&lt; plonk::Text &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01plonk_1_1_text_01_4.html#aaae14006b3e44440e831a7039a977643">TypeUtilityBase&lt; const plonk::Text &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_text_array_01_4.html#ac5eeaa3f68e2cdbe5b2a89bd877c466b">TypeUtilityBase&lt; TextArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_text_array_01_4.html#aaf282a645bf21fcf744f29ecc75ed727">TypeUtilityBase&lt; const TextArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_channel_01_4.html#a4597177ca298f2e09ae521e008c40cc2">TypeUtilityBase&lt; FloatChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_channel_01_4.html#ae6c813ae556563021b752a6f1ca2ce34">TypeUtilityBase&lt; DoubleChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_channel_01_4.html#a3212a92d8a6540f96b316efb2a1184f3">TypeUtilityBase&lt; const DoubleChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_channel_01_4.html#a4970dbddf894fb46d8c981f912cfec0a">TypeUtilityBase&lt; IntChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_channel_01_4.html#ad0e635cdbcbe621004ad3053cc4d81ea">TypeUtilityBase&lt; ShortChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_channel_01_4.html#a66fee6110bcd2b0c5a8652e1b305e6f9">TypeUtilityBase&lt; const ShortChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_channel_01_4.html#a72c1e285f884b0f2e1e42cb6838fe0d8">TypeUtilityBase&lt; Int24Channel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_channel_01_4.html#a759d5607976a1c18da52a542c4e1f612">TypeUtilityBase&lt; LongChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_channel_01_4.html#a0c0789a6995f01cb567292cd1c11485d">TypeUtilityBase&lt; const LongChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_unit_01_4.html#acffa1823afb356a1e1dd5541069f8afe">TypeUtilityBase&lt; FloatUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_unit_01_4.html#af3317f22e8a5dc721a1ae1ca321db9e9">TypeUtilityBase&lt; const FloatUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_unit_01_4.html#a13d300289e6f6c0ebe934ed5ed16f3ae">TypeUtilityBase&lt; DoubleUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_unit_01_4.html#ab7223b246e5796e9b32e4d840e50dc84">TypeUtilityBase&lt; const DoubleUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_unit_01_4.html#a784a1940342bc379ff19cc912b77e1ae">TypeUtilityBase&lt; IntUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_unit_01_4.html#a32d8870563bd3d7ea33cbf08bd027fc4">TypeUtilityBase&lt; ShortUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_unit_01_4.html#a7c2e1e457874ef0d855850fc8d145d73">TypeUtilityBase&lt; const ShortUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_unit_01_4.html#ae0f07914ae9d48224cfcfe112bf8ec3f">TypeUtilityBase&lt; Int24Unit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_unit_01_4.html#a19e3ef285283c4bbb378ec94c97c689d">TypeUtilityBase&lt; LongUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_unit_01_4.html#adac4834ede54b8150fb54c611c9ed327">TypeUtilityBase&lt; const LongUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_bus_01_4.html#acffb38ceb05d2e1a5510cb2304e64c66">TypeUtilityBase&lt; FloatBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_bus_01_4.html#aa1e56607e3c64c218617415e45a261d6">TypeUtilityBase&lt; DoubleBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_bus_01_4.html#a0ec19d0fc10a413fb2b3999687c936ed">TypeUtilityBase&lt; const DoubleBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_bus_01_4.html#ac3f0f5ed7876226c9e0cfc142e0d522c">TypeUtilityBase&lt; IntBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_bus_01_4.html#ad738d9e7ece1c349258df1f8529c98e6">TypeUtilityBase&lt; const IntBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_bus_01_4.html#a88404711f856f60b8b0eb96e1d440c27">TypeUtilityBase&lt; ShortBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_bus_01_4.html#a97e032754a343944074e538e7968666f">TypeUtilityBase&lt; const ShortBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_bus_01_4.html#a58ccc786267b64f17ce6f153706756f8">TypeUtilityBase&lt; Int24Bus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_bus_01_4.html#a2a11d2862fd7bdc563a03fbb84a7d592">TypeUtilityBase&lt; LongBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_bus_01_4.html#ab1b40719877c3880f6e80fca7a57f919">TypeUtilityBase&lt; const LongBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_units_01_4.html#a31e77ab9cec7d86e3030dc5d7685eca8">TypeUtilityBase&lt; FloatUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_units_01_4.html#a42f9bd7096a3c2d09962dbc44052ff4a">TypeUtilityBase&lt; DoubleUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_units_01_4.html#a3c5ff948cbb1cf755e471b03ec67d961">TypeUtilityBase&lt; const DoubleUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_units_01_4.html#af4585b6d20b3b31a1e7036c57e037e4a">TypeUtilityBase&lt; IntUnits &gt;</a>
 </li>
 <li>getNullObject()
 : <a class="el" href="class_object_array.html#a37f469f93e6df953eea9587240bc8cdd">ObjectArray&lt; ObjectType &gt;</a>
@@ -901,23 +922,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_breakpoints_base.html#a5627a4403a12edddf9758c58a0c65745">BreakpointsBase&lt; SampleType &gt;</a>
 </li>
 <li>getNumChannels()
-: <a class="el" href="class_signal_internal.html#af8998a5b306c4dfcbf9e3004a921c95d">SignalInternal&lt; SampleType &gt;</a>
+: <a class="el" href="class_dynamic.html#a3880f597fcc82b3b8fc5ad79a39ec7e1">Dynamic</a>
+, <a class="el" href="class_signal_internal.html#af8998a5b306c4dfcbf9e3004a921c95d">SignalInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_signal_base.html#ac32675e7c0bcb0d4941356dd2aaaaa51">SignalBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_audio_file_reader_internal.html#aa606f14fd216447b5f79a6d304e575ea">AudioFileReaderInternal</a>
-, <a class="el" href="class_proxy_owner_channel_internal.html#a6801fae6242932e36548b063855ad465">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>
-, <a class="el" href="class_unit_base.html#a1f8d49c0651e927f3583fa6458a5b908">UnitBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">AudioFileReader</a>
-, <a class="el" href="class_dynamic.html#a3880f597fcc82b3b8fc5ad79a39ec7e1">Dynamic</a>
+, <a class="el" href="class_channel_base.html#a4cb3af5acf6392800838b4a6c250e0c8">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_internal_core.html#a43277b3178b32a3945b1275ab50c6122">ChannelInternalCore</a>
+, <a class="el" href="class_proxy_channel_internal.html#a2d6f5daadf3f1f0b26faedb8ee90c840">ProxyChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_proxy_owner_channel_internal.html#a5f3d2b85beb2f9062bc70110af73a121">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>
+, <a class="el" href="class_unit_base.html#a1f8d49c0651e927f3583fa6458a5b908">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_audio_file_reader_internal.html#aa606f14fd216447b5f79a6d304e575ea">AudioFileReaderInternal</a>
+</li>
+<li>getNumCircularBuffers()
+: <a class="el" href="class_delay_form_base.html#a906a8342bb6c6ae3852f1644564ef4e1">DelayFormBase&lt; SampleType, Form, NumInParams, NumOutParams &gt;</a>
 </li>
 <li>getNumFrames()
-: <a class="el" href="class_signal_internal.html#afb05af34041b8d076e194ee3a0442ee6">SignalInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_signal_base.html#ac8fbaa071d5860ec54c29e357d235187">SignalBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_signal_base.html#ac8fbaa071d5860ec54c29e357d235187">SignalBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_audio_file_reader_internal.html#a5419dd37a2aa79a27793637e501c13ea">AudioFileReaderInternal</a>
 , <a class="el" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">AudioFileReader</a>
+, <a class="el" href="class_signal_internal.html#afb05af34041b8d076e194ee3a0442ee6">SignalInternal&lt; SampleType &gt;</a>
 </li>
 <li>getNumInputs()
-: <a class="el" href="class_unit_info.html#a0b71cb41b6756449f8b3e5a8eeea3b7a">UnitInfo</a>
-, <a class="el" href="class_audio_host_base.html#a2a91a9dce214bddabc6033daaae43782">AudioHostBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_audio_host_base.html#a2a91a9dce214bddabc6033daaae43782">AudioHostBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_unit_info.html#a0b71cb41b6756449f8b3e5a8eeea3b7a">UnitInfo</a>
 </li>
 <li>getNumInputsAsText()
 : <a class="el" href="class_unit_info.html#a027ce4b51f85ab065d104b590cd6acc7">UnitInfo</a>
@@ -940,29 +967,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_audio_file_reader.html#a00200d3a16d0fa133813ea3155da2237">AudioFileReader</a>
 </li>
 <li>getOutputBuffer()
-: <a class="el" href="class_channel_base.html#a07ff752e8aaf1e1724d6e0c4be77af51">ChannelBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_proxy_owner_channel_internal.html#ab6bd6cd0e9e5f4f0c13042868051db65">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>
 , <a class="el" href="class_channel_internal_base.html#a6a2abcf8641b00549e4ed81a5693e90d">ChannelInternalBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_proxy_owner_channel_internal.html#af0043514ac536634ad2e3c20225cd51d">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>
-, <a class="el" href="class_unit_base.html#a65a60c385d78f0221acee780808e1517">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_unit_base.html#a08100240d3ae6e9f1dbe9add73d24d06">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_base.html#a07ff752e8aaf1e1724d6e0c4be77af51">ChannelBase&lt; SampleType &gt;</a>
 </li>
 <li>getOutputInfos()
 : <a class="el" href="class_unit_info.html#a997972ce95ca348a20c927be672810a5">UnitInfo</a>
 </li>
 <li>getOutputName()
-: <a class="el" href="class_i_o_s_audio_host.html#a7a95b486ca8b568045dc8fe4de434392">IOSAudioHost</a>
+: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#ac118773fbed1f24a0afc5615c5d47745">PLONK_NAMESPACE::JuceAudioHost</a>
 , <a class="el" href="class_audio_host_base.html#ad46ac3e85653530dead5e504c1f73984">AudioHostBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_port_audio_audio_host.html#a4dede4e5a0a8bf6cb63702bcac0359f7">PortAudioAudioHost</a>
-, <a class="el" href="class_juce_audio_host.html#a4027a4ade1fcc79486186e1749df5b52">JuceAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a6838d1529f8a3b92e6a48686e69fa234">PLONK_NAMESPACE::PortAudioAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a8fa224402128d8357b19775723803628">PLONK_NAMESPACE::IOSAudioHost</a>
 </li>
 <li>getOutputs()
 : <a class="el" href="class_audio_host_base.html#a22b45cff1aebea00e11b273b4911dbf8">AudioHostBase&lt; SampleType &gt;</a>
 </li>
 <li>getOutputSamples()
-: <a class="el" href="class_channel_base.html#af26b93f5d5cb7a85586c6802ecce4e71">ChannelBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">ChannelInternalBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_proxy_owner_channel_internal.html#ae46492bac1707a7a1ea7f7d77111a305">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>
-, <a class="el" href="class_unit_base.html#a43faf13fd6fba7d41104578862a65863">UnitBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_unit_base.html#a52d71e0871badee91a8e565107e55936">UnitBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_channel_base.html#aa535c6c94db3858dc7c8f0d205946e63">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">ChannelInternalBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_proxy_owner_channel_internal.html#a7a69eb72da9e7368a7e3ad0b90e1673f">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>
+, <a class="el" href="class_unit_base.html#a43faf13fd6fba7d41104578862a65863">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_internal_base.html#a625829f6404e86b4606776ab46fb5764">ChannelInternalBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_base.html#af26b93f5d5cb7a85586c6802ecce4e71">ChannelBase&lt; SampleType &gt;</a>
 </li>
 <li>getOutputTypeCode()
 : <a class="el" href="class_channel_base.html#ad3de7039cffdc9c3b86019f2ed554bf2">ChannelBase&lt; SampleType &gt;</a>
@@ -976,9 +1006,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_audio_host_base.html#a02d334e10b9c4d0d3d178a4f22f2bf82">AudioHostBase&lt; SampleType &gt;</a>
 </li>
 <li>getOverlap()
-: <a class="el" href="class_unit_base.html#a2a7a1b5cbe1b247e20d48927ec5fb676">UnitBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_channel_internal_core.html#a65cf23793f7c11c14b40de16596cfba1">ChannelInternalCore</a>
 , <a class="el" href="class_channel_base.html#abeb5ad1150c3c211356a519279ba6b33">ChannelBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_channel_internal_core.html#a65cf23793f7c11c14b40de16596cfba1">ChannelInternalCore</a>
+, <a class="el" href="class_unit_base.html#a5903a71f02960ca268b94e2d481f8af9">UnitBase&lt; SampleType &gt;</a>
 </li>
 <li>getPairs()
 : <a class="el" href="class_dictionary.html#a0bb89703d9eecc0b0fe2d596daeab015">Dictionary&lt; ValueType, KeyType &gt;</a>
@@ -996,9 +1026,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_math.html#a02c1c0abccc1fee5291edeabea481321">Math&lt; Type &gt;</a>
 </li>
 <li>getPosition()
-: <a class="el" href="class_binary_file_internal.html#a86d891ad458740f16db1161dec10f234">BinaryFileInternal</a>
+: <a class="el" href="class_binary_file.html#a36fae2aecda26143ed6bd04346f3eef7">BinaryFile</a>
+, <a class="el" href="class_binary_file_internal.html#a86d891ad458740f16db1161dec10f234">BinaryFileInternal</a>
 , <a class="el" href="class_text_file_internal.html#a34b64b042077988a9989ded8677302bf">TextFileInternal</a>
-, <a class="el" href="class_binary_file.html#a36fae2aecda26143ed6bd04346f3eef7">BinaryFile</a>
 , <a class="el" href="class_text_file.html#ad5353add58119fb2440f8a4edfb6f063">TextFile</a>
 </li>
 <li>getPreferredBlockSize()
@@ -1014,8 +1044,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_proxy_owner_channel_internal.html#a64e2c06a3fd0aeb46faac973747e104d">ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</a>
 </li>
 <li>getPtr()
-: <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a9a6bdc818d2a1f284888e6267cb674b3">AtomicExtended&lt; Type * &gt;</a>
+: <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#afa76ace64d71822ade320b6bc1bb084e">AtomicExtended&lt; Type * &gt;</a>
 , <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a7196856c9887aa24ee399a505ba1165d">AtomicValue&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a9a6bdc818d2a1f284888e6267cb674b3">AtomicExtended&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a2523701f856048e9212cef20faa91116">AtomicValue&lt; Type * &gt;</a>
 </li>
 <li>getPunctuation()
 : <a class="el" href="class_text.html#a59888f1f2cc0a22f0110f8e53975ad77">Text</a>
@@ -1030,21 +1062,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_smart_pointer.html#a5924160b4e8c220951aaeac4328f637d">SmartPointer</a>
 </li>
 <li>getSampleDurationInTicks()
-: <a class="el" href="class_channel_base.html#a81b9a245ed843bc9452495a7c337b277">ChannelBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_channel_internal_core.html#adec0ae5607da4ca0b915b10918cb84a2">ChannelInternalCore</a>
+: <a class="el" href="class_sample_rate.html#ab7fe28d810bde70a898f856c94750d1b">SampleRate</a>
+, <a class="el" href="class_channel_base.html#a81b9a245ed843bc9452495a7c337b277">ChannelBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_unit_base.html#a56260640747b48ffa5b3f6de840af3f3">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_sample_rate.html#ab7fe28d810bde70a898f856c94750d1b">SampleRate</a>
+, <a class="el" href="class_channel_internal_core.html#adec0ae5607da4ca0b915b10918cb84a2">ChannelInternalCore</a>
 </li>
 <li>getSampleRate()
 : <a class="el" href="class_channel_internal_core.html#afd271ba08b388a2132c8d73a6ec3259f">ChannelInternalCore</a>
-, <a class="el" href="class_unit_base.html#ae75214256d2240c537462510737bdd61">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_audio_file_reader_internal.html#af9de6ebcf61fdc5648684bbfe596907b">AudioFileReaderInternal</a>
-, <a class="el" href="class_signal_base.html#a3f07a7b90ee77d88934b8a4c59e4aeae">SignalBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">AudioFileReader</a>
 , <a class="el" href="class_bus_buffer_internal.html#addd54ae25b62c50b843079da4c108620">BusBufferInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_buffer.html#a76c95b300fd5ec00e1af8364ca97640f">BusBuffer&lt; SampleType &gt;</a>
-, <a class="el" href="class_channel_base.html#a10650b28984d19e9da500d79168732fd">ChannelBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_signal_base.html#a60aff6d5eeb77cb50b41c5037dcde125">SignalBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_base.html#a10650b28984d19e9da500d79168732fd">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_audio_file_reader_internal.html#af9de6ebcf61fdc5648684bbfe596907b">AudioFileReaderInternal</a>
+, <a class="el" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">AudioFileReader</a>
+, <a class="el" href="class_unit_base.html#ae75214256d2240c537462510737bdd61">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_signal_base.html#a3f07a7b90ee77d88934b8a4c59e4aeae">SignalBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_bus_buffer.html#ae608678cbfdf7899808431688e7aa4da">BusBuffer&lt; SampleType &gt;</a>
 </li>
 <li>getSampleRate0()
 : <a class="el" href="class_sample_rate.html#a7c87c879a6c84d6fce1d1998972a5470">SampleRate</a>
@@ -1053,21 +1086,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_unit_base.html#aa1a2d7ba651df9c86dc3bb2403bc489b">UnitBase&lt; SampleType &gt;</a>
 </li>
 <li>getSamples()
-: <a class="el" href="class_signal_base.html#a390d52b58e445f9768c80216f7459e58">SignalBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_signal_internal.html#a6df90c274aad4f57c8a7712b75ac9fc6">SignalInternal&lt; SampleType &gt;</a>
+: <a class="el" href="class_signal_internal.html#a6df90c274aad4f57c8a7712b75ac9fc6">SignalInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_signal_base.html#a390d52b58e445f9768c80216f7459e58">SignalBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_signal_internal.html#ab8a2fd5a33106f2175da164127dd54c0">SignalInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_signal_base.html#a19ce8609e82a3217d4ee15f8b0b14939">SignalBase&lt; SampleType &gt;</a>
 </li>
 <li>getSampleTypeCode()
-: <a class="el" href="class_bus_buffer.html#a78317e65223f396f139090fedf077a63">BusBuffer&lt; SampleType &gt;</a>
+: <a class="el" href="class_channel_base.html#a54bbf006332c4eb79aebd377eb05d1b1">ChannelBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_unit_base.html#aea8acd5fba79b7fe97712e2e9a09275c">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_channel_base.html#a54bbf006332c4eb79aebd377eb05d1b1">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_bus_buffer.html#a78317e65223f396f139090fedf077a63">BusBuffer&lt; SampleType &gt;</a>
 </li>
 <li>getShapeName()
 : <a class="el" href="class_filter_shape.html#abd9cd339d2576ad961c4bea0cd1ee435">FilterShape&lt; SampleType, Form, Shape &gt;</a>
 </li>
 <li>getShouldDelete()
-: <a class="el" href="class_process_info.html#a49f2c56b036c5b3e18a9d47b21669b0f">ProcessInfo</a>
-, <a class="el" href="class_process_info_internal.html#a14e0b07c21daf66c6fc233f8c54e3150">ProcessInfoInternal</a>
+: <a class="el" href="class_process_info_internal.html#a14e0b07c21daf66c6fc233f8c54e3150">ProcessInfoInternal</a>
+, <a class="el" href="class_process_info.html#a49f2c56b036c5b3e18a9d47b21669b0f">ProcessInfo</a>
 </li>
 <li>getShouldExit()
 : <a class="el" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e">Threading::Thread</a>
@@ -1092,18 +1126,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_breakpoints_base.html#a75dc4c8bbee37b6130d11a10b912ebc9">BreakpointsBase&lt; SampleType &gt;</a>
 </li>
 <li>getState()
-: <a class="el" href="class_channel_internal.html#a8708ae6b7f2c2cf43fbc465549d49c94">ChannelInternal&lt; SampleType, DataType &gt;</a>
+: <a class="el" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">ChannelInternal&lt; SampleType, DataType &gt;</a>
 </li>
 <li>getSymbol()
 : <a class="el" href="class_measure.html#a79bd608851804ad83d9f57b700389afa">Measure</a>
 </li>
 <li>getTargetLevel()
-: <a class="el" href="class_breakpoint_internal.html#a91eb3155db48d39d7089af8ea25274a6">BreakpointInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_breakpoint_base.html#a7aff1f0fd806092609ec909a8761810d">BreakpointBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_breakpoint_base.html#a7aff1f0fd806092609ec909a8761810d">BreakpointBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_breakpoint_internal.html#a91eb3155db48d39d7089af8ea25274a6">BreakpointInternal&lt; SampleType &gt;</a>
 </li>
 <li>getTargetTime()
-: <a class="el" href="class_breakpoint_internal.html#a019ad9eb3ad58f953a8b9a0f25324223">BreakpointInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_breakpoint_base.html#a7016b0f5723009f4dfe5261d78d72c64">BreakpointBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_breakpoint_base.html#a7016b0f5723009f4dfe5261d78d72c64">BreakpointBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_breakpoint_internal.html#a019ad9eb3ad58f953a8b9a0f25324223">BreakpointInternal&lt; SampleType &gt;</a>
 </li>
 <li>getTicks()
 : <a class="el" href="class_time_stamp.html#a9b07cd3f2f12e3a11834f55c2400e130">TimeStamp</a>
@@ -1112,253 +1146,256 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_time_stamp.html#a8f76bf0a76946c10f6cb8a103cf7c4a0">TimeStamp</a>
 </li>
 <li>getTimeStamp()
-: <a class="el" href="class_process_info.html#adc09432bb787204aba36f4a971bd7526">ProcessInfo</a>
-, <a class="el" href="class_process_info_internal.html#aeca1c69b3c0897fdd2500e9f7f4b2c57">ProcessInfoInternal</a>
+: <a class="el" href="class_process_info_internal.html#aeca1c69b3c0897fdd2500e9f7f4b2c57">ProcessInfoInternal</a>
+, <a class="el" href="class_process_info.html#adc09432bb787204aba36f4a971bd7526">ProcessInfo</a>
 </li>
 <li>getType()
 : <a class="el" href="class_i_o_key.html#aaa3c246a15a6c35a7c8c447cf3502977">IOKey</a>
 </li>
 <li>getTypeCode()
-: <a class="el" href="class_type_utility_base_3_01_long_signal_01_4.html#a57f21bb478b31b675534a3f418ef59f0">TypeUtilityBase&lt; LongSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_units_01_4.html#afc6c13d3c3659254ca0e6f7ca6166e2a">TypeUtilityBase&lt; FloatUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_array_01_4.html#a94d973527c5679a385c8fc212fc2f87b">TypeUtilityBase&lt; IntArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_units_01_4.html#a1f23efb0ad14774dd7adfe9087387d15">TypeUtilityBase&lt; const ShortUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01float_01_4.html#ae225b0a777c81caa8b351ad0d15772da">TypeUtilityBase&lt; float &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_wavetable_01_4.html#afdda8e59dca02a086ed6f507df239a0a">TypeUtilityBase&lt; LongWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_channel_01_4.html#a0c9a6ebedd18ee0f321d775b2405a167">TypeUtilityBase&lt; const FloatChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_units_01_4.html#ad16ea366e06720b461558dde6f06e5ba">TypeUtilityBase&lt; DoubleUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_signal_01_4.html#a432c576d65fec7b0d0e606042cb7a99c">TypeUtilityBase&lt; const IntSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_signal_01_4.html#a0c9444e5816b0d22703a9a8ec069c5b0">TypeUtilityBase&lt; Int24Signal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01int_01_4.html#aeae0b7a9e42374e6744666ba5cd80203">TypeUtilityBase&lt; int &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_signal_01_4.html#adb46aa772de042aa0dfce5862fea4dc9">TypeUtilityBase&lt; const Int24Signal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_long_01_4.html#a93707460e45c8b35d734fca1f4a0a340">TypeUtilityBase&lt; LongLong &gt;</a>
-, <a class="el" href="class_dynamic.html#ac28f81a26685cb3af5df42b25faabb38">Dynamic</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_channel_01_4.html#a7e7f399f1411743eeca395aced8f2d5e">TypeUtilityBase&lt; const LongChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_bus_01_4.html#ad48216071653a93b0c23df54e73a17ed">TypeUtilityBase&lt; LongBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_units_01_4.html#a6ff0a9fe678d80c20319e2bf7f30e6dc">TypeUtilityBase&lt; Int24Units &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_dynamic_01_4.html#ab3ff10329c422651353fddcae84d2c9e">TypeUtilityBase&lt; const Dynamic &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_breakpoints_01_4.html#a42402edc3331712f4b6fbb305f9caf4e">TypeUtilityBase&lt; const FloatBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_bus_01_4.html#a38a5b25bcbba6e911becdba48860226f">TypeUtilityBase&lt; const LongBus &gt;</a>
-, <a class="el" href="class_type_utility_base.html#a9471ab8441b611a7431f202ac3327fd2">TypeUtilityBase&lt; Type &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_01_4.html#a30b9b51fe04143ba02262fe007d9105b">TypeUtilityBase&lt; const AtomicFloat &gt;</a>
+: <a class="el" href="class_dynamic.html#ac28f81a26685cb3af5df42b25faabb38">Dynamic</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_int24_units_01_4.html#a369ea6b482b89963b6ee62c71e47775f">TypeUtilityBase&lt; const Int24Units &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_unit_01_4.html#a95bd915c9f2174c71433fdcb9c9470f2">TypeUtilityBase&lt; const DoubleUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_bus_01_4.html#acf5d972d94f510ec5ea98d3c7b10523d">TypeUtilityBase&lt; const FloatBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_variable_01_4.html#a36881c46c2bcf26831119011f539cd16">TypeUtilityBase&lt; AtomicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_bus_01_4.html#abe5913c307ac7b7d8e4663ce385e991b">TypeUtilityBase&lt; const IntBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_units_01_4.html#adcbfb6bd59183f6f52e5a9a168024344">TypeUtilityBase&lt; const IntUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_breakpoints_01_4.html#a22e173f02398952ff0fdaf1f0c2249ba">TypeUtilityBase&lt; ShortBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_float_01_4.html#a76da621b8acd6e67cf6afd64dc72ecf4">TypeUtilityBase&lt; AtomicFloat &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_variable_01_4.html#aaffc67920d1f1b7bb3a3c323971930da">TypeUtilityBase&lt; FloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_signal_01_4.html#a6a7d37af43e3b79f83c76062c4e595f0">TypeUtilityBase&lt; const DoubleSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_breakpoints_01_4.html#aac3405150d9ea51981e081f5a5477657">TypeUtilityBase&lt; Int24Breakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_bus_01_4.html#a60dcb81a6d9cd6485823431dcc0afa16">TypeUtilityBase&lt; IntBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_array_01_4.html#a9f4fa3a5e57fc5965a7994f2158df1ab">TypeUtilityBase&lt; const DoubleArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_busses_01_4.html#aa9dfed63b59c324f88dc164cc5f47384">TypeUtilityBase&lt; const Int24Busses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_signal_01_4.html#a68271e56a7944d99595f201dfab0aa0a">TypeUtilityBase&lt; FloatSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_unit_01_4.html#af3d574294ea18b61cb959a9b6ee047f9">TypeUtilityBase&lt; IntUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_channel_01_4.html#ae077966e5349ae30d191e99bea76fd30">TypeUtilityBase&lt; LongChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_array_01_4.html#adc1ab17b255722ff7bc13d85dfd58b27">TypeUtilityBase&lt; Int24Array &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_unit_01_4.html#a089912e372526873f5bf0d405fc63e57">TypeUtilityBase&lt; FloatUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_busses_01_4.html#a71a1f97e1a9450733f0a755419cc2139">TypeUtilityBase&lt; const LongBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_char_variable_01_4.html#aeacb2db06ec4afa3e35ce3a06fcfb7c3">TypeUtilityBase&lt; CharVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_busses_01_4.html#affef308b9052a09eefe8536c10a9c45c">TypeUtilityBase&lt; const FloatBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_wavetable_01_4.html#a60be62a57bf3d5b3eeddf9b2c2d46837">TypeUtilityBase&lt; ShortWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_unit_01_4.html#adc258d64bcc3677ffe37342b859e86fa">TypeUtilityBase&lt; const ShortUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_units_01_4.html#a45174151ca68915ede090c5b4c16b9aa">TypeUtilityBase&lt; const LongUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_long_variable_01_4.html#ad41083cbf4bb51ba66b0da20228a3d13">TypeUtilityBase&lt; AtomicLongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_channel_01_4.html#a5fb06a39e6c83924a69eebb963b62665">TypeUtilityBase&lt; Int24Channel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_channel_01_4.html#a2f1b6c41669ff9b63b47d551e4fda88c">TypeUtilityBase&lt; const Int24Channel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_int_variable_01_4.html#a362d7f8aab214567cb6a6976fc3c64ed">TypeUtilityBase&lt; AtomicIntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_variable_01_4.html#a68f2f1c84724557ce3730c469f16f403">TypeUtilityBase&lt; AtomicExtendedPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_channel_01_4.html#a5ebe1f0fd269a8604784c4c5f1763ec4">TypeUtilityBase&lt; ShortChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_wavetable_01_4.html#aac9ea7c8f752906ea25168befe91c9e0">TypeUtilityBase&lt; const FloatWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_variable_01_4.html#a5ebe7a9d1d72352b39dc98c7134586a9">TypeUtilityBase&lt; const AtomicExtendedPointerVariable &gt;</a>
-, <a class="el" href="class_bus_buffer.html#a05008872078e5c47d585ff575673867c">BusBuffer&lt; SampleType &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_char_variable_01_4.html#ad84709c6f94bb9487b0614534a640c55">TypeUtilityBase&lt; const CharVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_wavetable_01_4.html#aa63582ef784a0b3a26b4545ca2b115c9">TypeUtilityBase&lt; const LongWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_bool_variable_01_4.html#a441414732b632cf5b3895bd76ea8c84c">TypeUtilityBase&lt; const BoolVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_char_array_01_4.html#a6b67fdc7e01e17607a530dfe4931c2f5">TypeUtilityBase&lt; CharArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_unit_01_4.html#ad9929af6eaa946245ec3aa4304a13291">TypeUtilityBase&lt; ShortUnit &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01_long_busses_01_4.html#a94950f888854992881745db9e4be21ed">TypeUtilityBase&lt; LongBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_variable_01_4.html#aec5ebb6662a6e3a38d99870f4c8297c2">TypeUtilityBase&lt; const AtomicLongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_01_4.html#a0d5169f797006fed0eaf2fa083703ede">TypeUtilityBase&lt; Int24 &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_bus_01_4.html#ae60599f202c14928655a19ef1b7bd57d">TypeUtilityBase&lt; DoubleBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_wavetable_01_4.html#a5cd006acc4b51c5a5b759a3041aa45f6">TypeUtilityBase&lt; const Int24Wavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_channel_01_4.html#a4312509c14e890462e8db5632dc43a8a">TypeUtilityBase&lt; const DoubleChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_variable_01_4.html#a4e9ac56d98c071dd33280f286cf7fd3e">TypeUtilityBase&lt; const AtomicDoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_breakpoints_01_4.html#ab85c85dce287f2780754b4d4a51347b4">TypeUtilityBase&lt; const IntBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_char_array_01_4.html#a9f8023dd8757d9813882e1b3ce8fedd4">TypeUtilityBase&lt; const CharArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_channel_01_4.html#a41c7094be17b37592a7f08e3ea17aef0">TypeUtilityBase&lt; const IntChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_bool_array_01_4.html#a0aa30cb36cdf1226d13c6de918a60036">TypeUtilityBase&lt; const BoolArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01plonk_1_1_text_01_4.html#ada235f0cd5433ba3cb250f83aadd31eb">TypeUtilityBase&lt; plonk::Text &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_01_4.html#a8179a867742de6c40674e574e48bd695">TypeUtilityBase&lt; const AtomicInt &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_long_variable_01_4.html#ac111f7a459b7a0249552ebc6e2c4537c">TypeUtilityBase&lt; const LongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_wavetable_01_4.html#a15bdaa68369d94a5c726e762a071c37b">TypeUtilityBase&lt; const DoubleWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_breakpoints_01_4.html#abae6fafbef0cf1df439dad0d00563ead">TypeUtilityBase&lt; const Int24Breakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_channel_01_4.html#a15c77433f4d2aba2ac57ceca438a55a3">TypeUtilityBase&lt; IntChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_array_01_4.html#ac4d8f4b1b27b2b3691e18dfed7000dec">TypeUtilityBase&lt; const IntArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_variable_01_4.html#af2fb05e7d312cfbc3521f8ffeb09932b">TypeUtilityBase&lt; const FloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_array_01_4.html#a205210f5dcf7a9625edbdd6950ca4e14">TypeUtilityBase&lt; const LongArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_channel_01_4.html#a3383af21e78b9abdfe6db46b4afa859d">TypeUtilityBase&lt; FloatChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_breakpoints_01_4.html#a5a83417ee65f04efcf69d58b1647ac5f">TypeUtilityBase&lt; LongBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_wavetable_01_4.html#a3eb6437ff7e46d10caded2414147f35c">TypeUtilityBase&lt; DoubleWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_bool_array_01_4.html#aefee66261c8397a32aefd97ab650d80b">TypeUtilityBase&lt; BoolArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_text_array_01_4.html#ac3a85806cf05d097f9adea93e8cda651">TypeUtilityBase&lt; TextArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_type_01_6_01_4.html#a699f1527f00f91e39e439adf084a2970">TypeUtilityBase&lt; Type &amp; &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_wavetable_01_4.html#a23f6dfd9df7d37982a49c9dd7b153e54">TypeUtilityBase&lt; IntWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_wavetable_01_4.html#aff2304a7012a32dbaa411005f9401c01">TypeUtilityBase&lt; Int24Wavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_variable_01_4.html#a9b00356512459e202df8f9f77ad0a563">TypeUtilityBase&lt; const AtomicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_bus_01_4.html#a07db7fecf07cdb7686acd091b3e63d98">TypeUtilityBase&lt; FloatBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_unit_01_4.html#a7b435b8f9f05571807b99362c9379df6">TypeUtilityBase&lt; Int24Unit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_variable_01_4.html#ad900029730b1e5231bfaf2331f281306">TypeUtilityBase&lt; const IntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_busses_01_4.html#a818685c07227e16c1ec752358681885a">TypeUtilityBase&lt; FloatBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_text_array_01_4.html#aefcde959f3bbbd89a994b4533f605f40">TypeUtilityBase&lt; const TextArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_channel_01_4.html#a12fedbc85465865d9972a1adf354687f">TypeUtilityBase&lt; const ShortChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_array_01_4.html#a6f1462bd33c2c8cca676dffa8fea2d91">TypeUtilityBase&lt; LongArray &gt;</a>
 , <a class="el" href="class_unit_base.html#a2891d6c1839d13315f8f950631688518">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_variable_01_4.html#a3881a1f072b278fca6f96949bb39c22a">TypeUtilityBase&lt; const AtomicFloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_bool_variable_01_4.html#ae64ac7b722ab524eb10c7f4e52435536">TypeUtilityBase&lt; BoolVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_breakpoints_01_4.html#a53bc54ff4080161aed8040ac4f3efdd2">TypeUtilityBase&lt; FloatBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_breakpoints_01_4.html#a22e173f02398952ff0fdaf1f0c2249ba">TypeUtilityBase&lt; ShortBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_array_01_4.html#a085131cc244fa79a5999105d9de0c6f6">TypeUtilityBase&lt; ShortArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01float_01_4.html#ae225b0a777c81caa8b351ad0d15772da">TypeUtilityBase&lt; float &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_signal_01_4.html#a520e86a7c6f41fcfad3b5bdbf6419c93">TypeUtilityBase&lt; IntSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_breakpoints_01_4.html#abae6fafbef0cf1df439dad0d00563ead">TypeUtilityBase&lt; const Int24Breakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_units_01_4.html#adcbfb6bd59183f6f52e5a9a168024344">TypeUtilityBase&lt; const IntUnits &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01_float_wavetable_01_4.html#ab39d9880e8ea00a6520ab61b2b459760">TypeUtilityBase&lt; FloatWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01char_01_4.html#aa42e4e5ecbffe395932f9db2a99a11f7">TypeUtilityBase&lt; char &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_units_01_4.html#afc6c13d3c3659254ca0e6f7ca6166e2a">TypeUtilityBase&lt; FloatUnits &gt;</a>
+, <a class="el" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_float_01_4.html#a76da621b8acd6e67cf6afd64dc72ecf4">TypeUtilityBase&lt; AtomicFloat &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_signal_01_4.html#adb46aa772de042aa0dfce5862fea4dc9">TypeUtilityBase&lt; const Int24Signal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_units_01_4.html#a1601306f64ce7646dfc2cb177aacef32">TypeUtilityBase&lt; const FloatUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#a2eea9ca1d7a2872b7f74d6ba4cf58d5e">TypeUtilityBase&lt; Type const &amp; &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_units_01_4.html#a620f8394cc08eff8bc17ca96e13f3546">TypeUtilityBase&lt; IntUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_signal_01_4.html#a6a7d37af43e3b79f83c76062c4e595f0">TypeUtilityBase&lt; const DoubleSignal &gt;</a>
+, <a class="el" href="class_channel_base.html#a53d9b13c460b5449f70435834a6f6ca0">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_bus_01_4.html#a1e14d3aab4de65d8bf40baa1d61615d0">TypeUtilityBase&lt; const DoubleBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_bus_01_4.html#a07db7fecf07cdb7686acd091b3e63d98">TypeUtilityBase&lt; FloatBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_bus_01_4.html#a81b2567b61a83c255ed8f115ba2d8db1">TypeUtilityBase&lt; const Int24Bus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_signal_01_4.html#a12707d3a68baff1b1d9397d6bc3f9800">TypeUtilityBase&lt; ShortSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_bus_01_4.html#a60dcb81a6d9cd6485823431dcc0afa16">TypeUtilityBase&lt; IntBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_channel_01_4.html#a5fb06a39e6c83924a69eebb963b62665">TypeUtilityBase&lt; Int24Channel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_variable_01_4.html#a2c958606dfebde8a58745f0697577c20">TypeUtilityBase&lt; AtomicDynamicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_bus_01_4.html#ad48216071653a93b0c23df54e73a17ed">TypeUtilityBase&lt; LongBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_variable_01_4.html#afa43abb6bc2eebfbad51af1f20cdfb76">TypeUtilityBase&lt; DoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_signal_01_4.html#a68271e56a7944d99595f201dfab0aa0a">TypeUtilityBase&lt; FloatSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_variable_01_4.html#a9fc07a90baae38578e1e335f55feef29">TypeUtilityBase&lt; Int24Variable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_busses_01_4.html#a3ffaf5db5f47dd9b1ebc67051fc8ea07">TypeUtilityBase&lt; DoubleBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_int_variable_01_4.html#a362d7f8aab214567cb6a6976fc3c64ed">TypeUtilityBase&lt; AtomicIntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_breakpoints_01_4.html#a5a83417ee65f04efcf69d58b1647ac5f">TypeUtilityBase&lt; LongBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_channel_01_4.html#a15c77433f4d2aba2ac57ceca438a55a3">TypeUtilityBase&lt; IntChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_variable_01_4.html#a26a14f2dbee231fd0c4e4e3d5e3b1cda">TypeUtilityBase&lt; const AtomicDynamicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_channel_01_4.html#ae077966e5349ae30d191e99bea76fd30">TypeUtilityBase&lt; LongChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_array_01_4.html#a94d973527c5679a385c8fc212fc2f87b">TypeUtilityBase&lt; IntArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_float_variable_01_4.html#a352eae7afc594326eabec4ac33f9d48f">TypeUtilityBase&lt; AtomicFloatVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_breakpoints_01_4.html#aef7230abb92c9e5d0120f23530f10d06">TypeUtilityBase&lt; DoubleBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_breakpoints_01_4.html#a42402edc3331712f4b6fbb305f9caf4e">TypeUtilityBase&lt; const FloatBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_array_01_4.html#af7c34bcda6db55422edc0a2bc8e9aa68">TypeUtilityBase&lt; FloatArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_busses_01_4.html#a0ee6eb7af6c98dc60fa044a019b4816b">TypeUtilityBase&lt; const DoubleBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_array_01_4.html#ac4d8f4b1b27b2b3691e18dfed7000dec">TypeUtilityBase&lt; const IntArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_variable_01_4.html#a495e4e1cd8fd21662b340f57464e40a4">TypeUtilityBase&lt; IntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_channel_01_4.html#a4312509c14e890462e8db5632dc43a8a">TypeUtilityBase&lt; const DoubleChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_variable_01_4.html#a36881c46c2bcf26831119011f539cd16">TypeUtilityBase&lt; AtomicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_busses_01_4.html#affef308b9052a09eefe8536c10a9c45c">TypeUtilityBase&lt; const FloatBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_bool_variable_01_4.html#a441414732b632cf5b3895bd76ea8c84c">TypeUtilityBase&lt; const BoolVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_01_4.html#a25e0c4714a9742e7bfa0044ab453aa2f">TypeUtilityBase&lt; const AtomicPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_wavetable_01_4.html#a23f6dfd9df7d37982a49c9dd7b153e54">TypeUtilityBase&lt; IntWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_unit_01_4.html#ac8f9e5caf8a90c54a53ea9e7d4c4bce7">TypeUtilityBase&lt; LongUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_signal_01_4.html#a59b647386749bf36cec8cad8792682dc">TypeUtilityBase&lt; const FloatSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_variable_01_4.html#a5ebe7a9d1d72352b39dc98c7134586a9">TypeUtilityBase&lt; const AtomicExtendedPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_unit_01_4.html#ae955a71401a4840c46a6760a1d7b13c2">TypeUtilityBase&lt; const FloatUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_breakpoints_01_4.html#a53bc54ff4080161aed8040ac4f3efdd2">TypeUtilityBase&lt; FloatBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_array_01_4.html#a205210f5dcf7a9625edbdd6950ca4e14">TypeUtilityBase&lt; const LongArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_char_array_01_4.html#a9f8023dd8757d9813882e1b3ce8fedd4">TypeUtilityBase&lt; const CharArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_breakpoints_01_4.html#aac3405150d9ea51981e081f5a5477657">TypeUtilityBase&lt; Int24Breakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_variable_01_4.html#ab3c8c70fad11493de4f5f306415bde0c">TypeUtilityBase&lt; const AtomicIntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_unit_01_4.html#a7b435b8f9f05571807b99362c9379df6">TypeUtilityBase&lt; Int24Unit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_variable_01_4.html#aec5ebb6662a6e3a38d99870f4c8297c2">TypeUtilityBase&lt; const AtomicLongVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_wavetable_01_4.html#a3eb6437ff7e46d10caded2414147f35c">TypeUtilityBase&lt; DoubleWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_unit_01_4.html#adc258d64bcc3677ffe37342b859e86fa">TypeUtilityBase&lt; const ShortUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_bus_01_4.html#ae60599f202c14928655a19ef1b7bd57d">TypeUtilityBase&lt; DoubleBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_bus_01_4.html#acf5d972d94f510ec5ea98d3c7b10523d">TypeUtilityBase&lt; const FloatBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_signal_01_4.html#a432c576d65fec7b0d0e606042cb7a99c">TypeUtilityBase&lt; const IntSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_signal_01_4.html#ab4a4f932209734329083f091b0e95f6e">TypeUtilityBase&lt; DoubleSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_wavetable_01_4.html#a15bdaa68369d94a5c726e762a071c37b">TypeUtilityBase&lt; const DoubleWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_breakpoints_01_4.html#a636e37ab9006598a30c96dcc58393a21">TypeUtilityBase&lt; const ShortBreakpoints &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_int_busses_01_4.html#a10d638cb01ebe60a7346c80c08afccfb">TypeUtilityBase&lt; const IntBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_variable_01_4.html#ad900029730b1e5231bfaf2331f281306">TypeUtilityBase&lt; const IntVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_unit_01_4.html#a2fd9bd769fba178dd0061b779cdfba38">TypeUtilityBase&lt; const LongUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_array_01_4.html#a6f1462bd33c2c8cca676dffa8fea2d91">TypeUtilityBase&lt; LongArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_bool_array_01_4.html#a0aa30cb36cdf1226d13c6de918a60036">TypeUtilityBase&lt; const BoolArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_array_01_4.html#aabd5097d37d126b72e5899154bdfedb9">TypeUtilityBase&lt; const ShortArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01plonk_1_1_text_01_4.html#ada235f0cd5433ba3cb250f83aadd31eb">TypeUtilityBase&lt; plonk::Text &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_channel_01_4.html#ae308864bf6fffb4489a21fa4d0ec9a31">TypeUtilityBase&lt; DoubleChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01plonk_1_1_text_01_4.html#a1df65530692c51e063acc35ea64b3a22">TypeUtilityBase&lt; const plonk::Text &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_wavetable_01_4.html#a60be62a57bf3d5b3eeddf9b2c2d46837">TypeUtilityBase&lt; ShortWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_variable_01_4.html#a686634bc82251ca5792b60e41820e811">TypeUtilityBase&lt; const DoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_busses_01_4.html#a71a1f97e1a9450733f0a755419cc2139">TypeUtilityBase&lt; const LongBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_breakpoints_01_4.html#aa1fcca5428e4f6db0dc85062a9b1f222">TypeUtilityBase&lt; const LongBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_bool_array_01_4.html#aefee66261c8397a32aefd97ab650d80b">TypeUtilityBase&lt; BoolArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_array_01_4.html#adc1ab17b255722ff7bc13d85dfd58b27">TypeUtilityBase&lt; Int24Array &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_wavetable_01_4.html#a8c5c9ba669173b7c30a18192e3a866be">TypeUtilityBase&lt; const IntWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_wavetable_01_4.html#aac9ea7c8f752906ea25168befe91c9e0">TypeUtilityBase&lt; const FloatWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_text_array_01_4.html#aefcde959f3bbbd89a994b4533f605f40">TypeUtilityBase&lt; const TextArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_01_4.html#ac7e24e489ad55c23e7e9354a7d7c3ad8">TypeUtilityBase&lt; const AtomicDynamicPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_text_array_01_4.html#ac3a85806cf05d097f9adea93e8cda651">TypeUtilityBase&lt; TextArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_unit_01_4.html#a542c1714733caa41fb85d160adfcb6bc">TypeUtilityBase&lt; const Int24Unit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_array_01_4.html#a0bc6fda9ea4852130a16ad8cbea1d9b5">TypeUtilityBase&lt; const Int24Array &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_array_01_4.html#a9f4fa3a5e57fc5965a7994f2158df1ab">TypeUtilityBase&lt; const DoubleArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_unit_01_4.html#a089912e372526873f5bf0d405fc63e57">TypeUtilityBase&lt; FloatUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_variable_01_4.html#a4e9ac56d98c071dd33280f286cf7fd3e">TypeUtilityBase&lt; const AtomicDoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01bool_01_4.html#a9faa5836ae27f55a80f69840017c78d9">TypeUtilityBase&lt; bool &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_wavetable_01_4.html#a5cd006acc4b51c5a5b759a3041aa45f6">TypeUtilityBase&lt; const Int24Wavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_breakpoints_01_4.html#a3ae2dee6cf31a774da8533ab41cfa98b">TypeUtilityBase&lt; const DoubleBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_busses_01_4.html#ab208e392e9c986a61bf9df83e7576e31">TypeUtilityBase&lt; const ShortBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_busses_01_4.html#a24b979f90c39664576440ae5f0bf374d">TypeUtilityBase&lt; IntBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_variable_01_4.html#a9b00356512459e202df8f9f77ad0a563">TypeUtilityBase&lt; const AtomicPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_wavetable_01_4.html#aa63582ef784a0b3a26b4545ca2b115c9">TypeUtilityBase&lt; const LongWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_busses_01_4.html#a818685c07227e16c1ec752358681885a">TypeUtilityBase&lt; FloatBusses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_signal_01_4.html#a6b859d7fc3176d8616e56894bfaa624b">TypeUtilityBase&lt; const LongSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_units_01_4.html#a1f23efb0ad14774dd7adfe9087387d15">TypeUtilityBase&lt; const ShortUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_unit_01_4.html#a397ce093a9687d18e7e0408de5d8d705">TypeUtilityBase&lt; const IntUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_variable_01_4.html#aaffc67920d1f1b7bb3a3c323971930da">TypeUtilityBase&lt; FloatVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_bus_01_4.html#a360031c1cac94bd5e0f8e73f9fdc11fb">TypeUtilityBase&lt; const ShortBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_units_01_4.html#a45174151ca68915ede090c5b4c16b9aa">TypeUtilityBase&lt; const LongUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_units_01_4.html#a6ff0a9fe678d80c20319e2bf7f30e6dc">TypeUtilityBase&lt; Int24Units &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_dynamic_01_4.html#a0f964a4ad48cc62f43dac233df6a4850">TypeUtilityBase&lt; Dynamic &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_type_01_6_01_4.html#a699f1527f00f91e39e439adf084a2970">TypeUtilityBase&lt; Type &amp; &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_busses_01_4.html#a3da7dcb421cc2a39dbd7020508d9dbbe">TypeUtilityBase&lt; Int24Busses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_signal_01_4.html#a37825bdd46da789754020feab468e217">TypeUtilityBase&lt; const ShortSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_bus_01_4.html#a38a5b25bcbba6e911becdba48860226f">TypeUtilityBase&lt; const LongBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_01_4.html#a0d5169f797006fed0eaf2fa083703ede">TypeUtilityBase&lt; Int24 &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_long_01_4.html#a93707460e45c8b35d734fca1f4a0a340">TypeUtilityBase&lt; LongLong &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_units_01_4.html#adb9da2ebe68feea02df8f9d173d4c8ee">TypeUtilityBase&lt; const DoubleUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01int_01_4.html#aeae0b7a9e42374e6744666ba5cd80203">TypeUtilityBase&lt; int &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_int_01_4.html#a374142bf81b9b92029b58e7916208829">TypeUtilityBase&lt; AtomicInt &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_bus_01_4.html#a10131afa5daabf3dec848f5d94cfe3d2">TypeUtilityBase&lt; Int24Bus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_01_4.html#add97ac7b887f1627537c91e593e745a1">TypeUtilityBase&lt; AtomicPointer &gt;</a>
+, <a class="el" href="class_dynamic_internal.html#ad2db3bbc3c1a7c754e273f3ccc8a4d77">DynamicInternal</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_01_4.html#a526871f49d0d920fd180b277ee172cd3">TypeUtilityBase&lt; AtomicDynamicPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_float_channel_01_4.html#a3383af21e78b9abdfe6db46b4afa859d">TypeUtilityBase&lt; FloatChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_char_variable_01_4.html#aeacb2db06ec4afa3e35ce3a06fcfb7c3">TypeUtilityBase&lt; CharVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_channel_01_4.html#a2f1b6c41669ff9b63b47d551e4fda88c">TypeUtilityBase&lt; const Int24Channel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_variable_01_4.html#a3bf922ad918f378c64505f51cda2fbda">TypeUtilityBase&lt; ShortVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_unit_01_4.html#af3d574294ea18b61cb959a9b6ee047f9">TypeUtilityBase&lt; IntUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_variable_01_4.html#a1adaf657ccd388e09642d03a9053c7eb">TypeUtilityBase&lt; LongVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_channel_01_4.html#a41c7094be17b37592a7f08e3ea17aef0">TypeUtilityBase&lt; const IntChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_bool_variable_01_4.html#ae64ac7b722ab524eb10c7f4e52435536">TypeUtilityBase&lt; BoolVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_long_channel_01_4.html#a7e7f399f1411743eeca395aced8f2d5e">TypeUtilityBase&lt; const LongChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_double_variable_01_4.html#affc7db1ba6bcac0033fc3357f4d39972">TypeUtilityBase&lt; AtomicDoubleVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_wavetable_01_4.html#afdda8e59dca02a086ed6f507df239a0a">TypeUtilityBase&lt; LongWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_variable_01_4.html#a3881a1f072b278fca6f96949bb39c22a">TypeUtilityBase&lt; const AtomicFloatVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_channel_01_4.html#a12fedbc85465865d9972a1adf354687f">TypeUtilityBase&lt; const ShortChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_channel_01_4.html#a0c9a6ebedd18ee0f321d775b2405a167">TypeUtilityBase&lt; const FloatChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int_breakpoints_01_4.html#afd818dafafe847a384c60b692b6719fb">TypeUtilityBase&lt; IntBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_bus_01_4.html#abe5913c307ac7b7d8e4663ce385e991b">TypeUtilityBase&lt; const IntBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_channel_01_4.html#a5ebe1f0fd269a8604784c4c5f1763ec4">TypeUtilityBase&lt; ShortChannel &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_double_unit_01_4.html#a95bd915c9f2174c71433fdcb9c9470f2">TypeUtilityBase&lt; const DoubleUnit &gt;</a>
+, <a class="el" href="class_bus_buffer.html#a05008872078e5c47d585ff575673867c">BusBuffer&lt; SampleType &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_bus_01_4.html#a1b25a9223f27ebab600f1c55377a9b48">TypeUtilityBase&lt; ShortBus &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_wavetable_01_4.html#aff2304a7012a32dbaa411005f9401c01">TypeUtilityBase&lt; Int24Wavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_array_01_4.html#a870ed0c4babae2d5d2bbd4fe02691eb2">TypeUtilityBase&lt; DoubleArray &gt;</a>
+, <a class="el" href="class_type_utility_base.html#a9471ab8441b611a7431f202ac3327fd2">TypeUtilityBase&lt; Type &gt;</a>
+, <a class="el" href="class_numerical_array.html#a095cf7075cb975098c35eaac78f6225e">NumericalArray&lt; NumericalType &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_unit_01_4.html#a60b2ae6d42723616924b0f87a0d6647e">TypeUtilityBase&lt; DoubleUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_double_01_4.html#ac348479cf302f1b07271ed48bdfc5b5e">TypeUtilityBase&lt; AtomicDouble &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_dynamic_01_4.html#ab3ff10329c422651353fddcae84d2c9e">TypeUtilityBase&lt; const Dynamic &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_int24_signal_01_4.html#a0c9444e5816b0d22703a9a8ec069c5b0">TypeUtilityBase&lt; Int24Signal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_unit_01_4.html#ad9929af6eaa946245ec3aa4304a13291">TypeUtilityBase&lt; ShortUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_double_units_01_4.html#ad16ea366e06720b461558dde6f06e5ba">TypeUtilityBase&lt; DoubleUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_01_4.html#aee37cbec9456ff27dda6f340826a80f9">TypeUtilityBase&lt; AtomicExtendedPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_signal_01_4.html#a57f21bb478b31b675534a3f418ef59f0">TypeUtilityBase&lt; LongSignal &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_short_units_01_4.html#ab17a04aa71ed2dde677ab9b289def72d">TypeUtilityBase&lt; ShortUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_float_01_4.html#a30b9b51fe04143ba02262fe007d9105b">TypeUtilityBase&lt; const AtomicFloat &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_char_variable_01_4.html#ad84709c6f94bb9487b0614534a640c55">TypeUtilityBase&lt; const CharVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_variable_01_4.html#a68f2f1c84724557ce3730c469f16f403">TypeUtilityBase&lt; AtomicExtendedPointerVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01short_01_4.html#a587fd09f1d4ff1f50b4530530f7550b2">TypeUtilityBase&lt; short &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_int24_variable_01_4.html#aafcd9fe70175130743e34a3fff458839">TypeUtilityBase&lt; const Int24Variable &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01const_01_short_variable_01_4.html#a85c2953b2d6d9407fef77773b588e009">TypeUtilityBase&lt; const ShortVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_busses_01_4.html#a24b979f90c39664576440ae5f0bf374d">TypeUtilityBase&lt; IntBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_units_01_4.html#a976c289d38e9b0ca2ac938fb6bffcf83">TypeUtilityBase&lt; LongUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_pointer_01_4.html#a25e0c4714a9742e7bfa0044ab453aa2f">TypeUtilityBase&lt; const AtomicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_busses_01_4.html#a0ee6eb7af6c98dc60fa044a019b4816b">TypeUtilityBase&lt; const DoubleBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_01_4.html#ac7e24e489ad55c23e7e9354a7d7c3ad8">TypeUtilityBase&lt; const AtomicDynamicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_signal_01_4.html#a520e86a7c6f41fcfad3b5bdbf6419c93">TypeUtilityBase&lt; IntSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_bus_01_4.html#a360031c1cac94bd5e0f8e73f9fdc11fb">TypeUtilityBase&lt; const ShortBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_long_01_4.html#a2690568bb8011213dd42be75f4359a73">TypeUtilityBase&lt; const AtomicLongLong &gt;</a>
-, <a class="el" href="class_variable.html#ac469cff8d1ff1991abdf1bce0a1cf693">Variable&lt; Type &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_01_4.html#a8179a867742de6c40674e574e48bd695">TypeUtilityBase&lt; const AtomicInt &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_01_4.html#af1c49a1ae2366d98c6360cb5d1d5a4de">TypeUtilityBase&lt; const AtomicDouble &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_wavetable_01_4.html#a8c5c9ba669173b7c30a18192e3a866be">TypeUtilityBase&lt; const IntWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01double_01_4.html#a832b63698632b45884246c1541f96ddd">TypeUtilityBase&lt; double &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_bus_01_4.html#a81b2567b61a83c255ed8f115ba2d8db1">TypeUtilityBase&lt; const Int24Bus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01char_01_4.html#aa42e4e5ecbffe395932f9db2a99a11f7">TypeUtilityBase&lt; char &gt;</a>
-, <a class="el" href="class_numerical_array.html#a095cf7075cb975098c35eaac78f6225e">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_double_01_4.html#ac348479cf302f1b07271ed48bdfc5b5e">TypeUtilityBase&lt; AtomicDouble &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#a2eea9ca1d7a2872b7f74d6ba4cf58d5e">TypeUtilityBase&lt; Type const &amp; &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_long_long_01_4.html#a5b376d6b85ae1a8b51f4c5cc786627ae">TypeUtilityBase&lt; AtomicLongLong &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_breakpoints_01_4.html#a636e37ab9006598a30c96dcc58393a21">TypeUtilityBase&lt; const ShortBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_extended_pointer_01_4.html#aee37cbec9456ff27dda6f340826a80f9">TypeUtilityBase&lt; AtomicExtendedPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_busses_01_4.html#a3da7dcb421cc2a39dbd7020508d9dbbe">TypeUtilityBase&lt; Int24Busses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_unit_01_4.html#ae955a71401a4840c46a6760a1d7b13c2">TypeUtilityBase&lt; const FloatUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_bus_01_4.html#a1e14d3aab4de65d8bf40baa1d61615d0">TypeUtilityBase&lt; const DoubleBus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_variable_01_4.html#a495e4e1cd8fd21662b340f57464e40a4">TypeUtilityBase&lt; IntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_unit_01_4.html#ac8f9e5caf8a90c54a53ea9e7d4c4bce7">TypeUtilityBase&lt; LongUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_float_array_01_4.html#af7c34bcda6db55422edc0a2bc8e9aa68">TypeUtilityBase&lt; FloatArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_unit_01_4.html#a2fd9bd769fba178dd0061b779cdfba38">TypeUtilityBase&lt; const LongUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_array_01_4.html#a0bc6fda9ea4852130a16ad8cbea1d9b5">TypeUtilityBase&lt; const Int24Array &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_double_variable_01_4.html#affc7db1ba6bcac0033fc3357f4d39972">TypeUtilityBase&lt; AtomicDoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_busses_01_4.html#ab208e392e9c986a61bf9df83e7576e31">TypeUtilityBase&lt; const ShortBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_channel_01_4.html#ae308864bf6fffb4489a21fa4d0ec9a31">TypeUtilityBase&lt; DoubleChannel &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_array_01_4.html#a085131cc244fa79a5999105d9de0c6f6">TypeUtilityBase&lt; ShortArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_wavetable_01_4.html#a6a1f81eaddd4714d59976614e50a2c28">TypeUtilityBase&lt; const ShortWavetable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_array_01_4.html#aabd5097d37d126b72e5899154bdfedb9">TypeUtilityBase&lt; const ShortArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_signal_01_4.html#a6b859d7fc3176d8616e56894bfaa624b">TypeUtilityBase&lt; const LongSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_long_breakpoints_01_4.html#aa1fcca5428e4f6db0dc85062a9b1f222">TypeUtilityBase&lt; const LongBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_float_variable_01_4.html#a352eae7afc594326eabec4ac33f9d48f">TypeUtilityBase&lt; AtomicFloatVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_01_4.html#a526871f49d0d920fd180b277ee172cd3">TypeUtilityBase&lt; AtomicDynamicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_variable_01_4.html#afa43abb6bc2eebfbad51af1f20cdfb76">TypeUtilityBase&lt; DoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_dynamic_pointer_variable_01_4.html#a2c958606dfebde8a58745f0697577c20">TypeUtilityBase&lt; AtomicDynamicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_signal_01_4.html#ab4a4f932209734329083f091b0e95f6e">TypeUtilityBase&lt; DoubleSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_variable_01_4.html#a9fc07a90baae38578e1e335f55feef29">TypeUtilityBase&lt; Int24Variable &gt;</a>
-, <a class="el" href="class_channel_base.html#a53d9b13c460b5449f70435834a6f6ca0">ChannelBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_01_4.html#a979f88638e33b3b59389498744b68dcb">TypeUtilityBase&lt; const AtomicExtendedPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_units_01_4.html#a620f8394cc08eff8bc17ca96e13f3546">TypeUtilityBase&lt; IntUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_bus_01_4.html#a1b25a9223f27ebab600f1c55377a9b48">TypeUtilityBase&lt; ShortBus &gt;</a>
-, <a class="el" href="class_dynamic_internal.html#ad2db3bbc3c1a7c754e273f3ccc8a4d77">DynamicInternal</a>
-, <a class="el" href="class_type_utility_base_3_01_double_unit_01_4.html#a60b2ae6d42723616924b0f87a0d6647e">TypeUtilityBase&lt; DoubleUnit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_signal_01_4.html#a59b647386749bf36cec8cad8792682dc">TypeUtilityBase&lt; const FloatSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01short_01_4.html#a587fd09f1d4ff1f50b4530530f7550b2">TypeUtilityBase&lt; short &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_short_signal_01_4.html#a37825bdd46da789754020feab468e217">TypeUtilityBase&lt; const ShortSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_signal_01_4.html#a12707d3a68baff1b1d9397d6bc3f9800">TypeUtilityBase&lt; ShortSignal &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_int_01_4.html#a374142bf81b9b92029b58e7916208829">TypeUtilityBase&lt; AtomicInt &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01bool_01_4.html#a9faa5836ae27f55a80f69840017c78d9">TypeUtilityBase&lt; bool &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_int_variable_01_4.html#ab3c8c70fad11493de4f5f306415bde0c">TypeUtilityBase&lt; const AtomicIntVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_variable_01_4.html#a3bf922ad918f378c64505f51cda2fbda">TypeUtilityBase&lt; ShortVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_breakpoints_01_4.html#a3ae2dee6cf31a774da8533ab41cfa98b">TypeUtilityBase&lt; const DoubleBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_array_01_4.html#a870ed0c4babae2d5d2bbd4fe02691eb2">TypeUtilityBase&lt; DoubleArray &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01plonk_1_1_text_01_4.html#a1df65530692c51e063acc35ea64b3a22">TypeUtilityBase&lt; const plonk::Text &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_atomic_dynamic_pointer_variable_01_4.html#a26a14f2dbee231fd0c4e4e3d5e3b1cda">TypeUtilityBase&lt; const AtomicDynamicPointerVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int24_bus_01_4.html#a10131afa5daabf3dec848f5d94cfe3d2">TypeUtilityBase&lt; Int24Bus &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_breakpoints_01_4.html#aef7230abb92c9e5d0120f23530f10d06">TypeUtilityBase&lt; DoubleBreakpoints &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_atomic_pointer_01_4.html#add97ac7b887f1627537c91e593e745a1">TypeUtilityBase&lt; AtomicPointer &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_units_01_4.html#adb9da2ebe68feea02df8f9d173d4c8ee">TypeUtilityBase&lt; const DoubleUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_float_units_01_4.html#a1601306f64ce7646dfc2cb177aacef32">TypeUtilityBase&lt; const FloatUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_short_units_01_4.html#ab17a04aa71ed2dde677ab9b289def72d">TypeUtilityBase&lt; ShortUnits &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_dynamic_01_4.html#a0f964a4ad48cc62f43dac233df6a4850">TypeUtilityBase&lt; Dynamic &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_double_variable_01_4.html#a686634bc82251ca5792b60e41820e811">TypeUtilityBase&lt; const DoubleVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_long_variable_01_4.html#a1adaf657ccd388e09642d03a9053c7eb">TypeUtilityBase&lt; LongVariable &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int24_unit_01_4.html#a542c1714733caa41fb85d160adfcb6bc">TypeUtilityBase&lt; const Int24Unit &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01const_01_int_unit_01_4.html#a397ce093a9687d18e7e0408de5d8d705">TypeUtilityBase&lt; const IntUnit &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_float_variable_01_4.html#af2fb05e7d312cfbc3521f8ffeb09932b">TypeUtilityBase&lt; const FloatVariable &gt;</a>
 , <a class="el" href="class_type_utility_base_3_01_short_busses_01_4.html#ad0291c78bae8e07c620ae7aa215a6055">TypeUtilityBase&lt; ShortBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_double_busses_01_4.html#a3ffaf5db5f47dd9b1ebc67051fc8ea07">TypeUtilityBase&lt; DoubleBusses &gt;</a>
-, <a class="el" href="class_type_utility_base_3_01_int_breakpoints_01_4.html#afd818dafafe847a384c60b692b6719fb">TypeUtilityBase&lt; IntBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int24_busses_01_4.html#aa9dfed63b59c324f88dc164cc5f47384">TypeUtilityBase&lt; const Int24Busses &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_int_breakpoints_01_4.html#ab85c85dce287f2780754b4d4a51347b4">TypeUtilityBase&lt; const IntBreakpoints &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_long_long_01_4.html#a5b376d6b85ae1a8b51f4c5cc786627ae">TypeUtilityBase&lt; AtomicLongLong &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_long_units_01_4.html#a976c289d38e9b0ca2ac938fb6bffcf83">TypeUtilityBase&lt; LongUnits &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_double_01_4.html#af1c49a1ae2366d98c6360cb5d1d5a4de">TypeUtilityBase&lt; const AtomicDouble &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_extended_pointer_01_4.html#a979f88638e33b3b59389498744b68dcb">TypeUtilityBase&lt; const AtomicExtendedPointer &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_char_array_01_4.html#a6b67fdc7e01e17607a530dfe4931c2f5">TypeUtilityBase&lt; CharArray &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01_atomic_long_variable_01_4.html#ad41083cbf4bb51ba66b0da20228a3d13">TypeUtilityBase&lt; AtomicLongVariable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_atomic_long_long_01_4.html#a2690568bb8011213dd42be75f4359a73">TypeUtilityBase&lt; const AtomicLongLong &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01const_01_short_wavetable_01_4.html#a6a1f81eaddd4714d59976614e50a2c28">TypeUtilityBase&lt; const ShortWavetable &gt;</a>
+, <a class="el" href="class_type_utility_base_3_01double_01_4.html#a832b63698632b45884246c1541f96ddd">TypeUtilityBase&lt; double &gt;</a>
 </li>
 <li>getTypeEpsilon()
 : <a class="el" href="class_type_utility.html#ad9ba073ce696e8892cf9034fe2b7eb09">TypeUtility&lt; Type &gt;</a>
 </li>
 <li>getTypeName()
-: <a class="el" href="class_type_utility.html#a790f1fa8bf38a0e82d4ca466d17ad99e">TypeUtility&lt; Type &gt;</a>
-, <a class="el" href="class_i_o_key.html#a276546611d42692fe6fcda6d16dce47f">IOKey</a>
+: <a class="el" href="class_i_o_key.html#a276546611d42692fe6fcda6d16dce47f">IOKey</a>
+, <a class="el" href="class_type_utility.html#a790f1fa8bf38a0e82d4ca466d17ad99e">TypeUtility&lt; Type &gt;</a>
 </li>
 <li>getTypePeak()
 : <a class="el" href="class_type_utility.html#a928612347b795b300eca9358243940d5">TypeUtility&lt; Type &gt;</a>
 </li>
 <li>getValue()
-: <a class="el" href="class_variable_internal_base.html#a369ba8fea5e5a5af1956de3fce161102">VariableInternalBase&lt; Type &gt;</a>
-, <a class="el" href="class_channel_internal_base.html#a7023081abf6a915cffb50aa76b868226">ChannelInternalBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a8690ff0c31912971d95eebfc4d899701">AtomicExtended&lt; Type * &gt;</a>
-, <a class="el" href="class_unary_op_variable_internal.html#ac84af9617cc7c6a828fee68c31e07a4a">UnaryOpVariableInternal&lt; Type, &gt;</a>
-, <a class="el" href="class_type_variable_internal.html#ae1c3273ce351db8116c2ef4a6197edc5">TypeVariableInternal&lt; Type, OtherType &gt;</a>
-, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a40619e1aabf2c000858e00467f316c1a">AtomicValue&lt; Type * &gt;</a>
+: <a class="el" href="class_variable_3_01_type_01_6_01_4.html#a80a7732e5de85ace6ea7600b0b5f9fa8">Variable&lt; Type &amp; &gt;</a>
 , <a class="el" href="class_key_value_pair.html#a541b92b4cf2ccc23ae3f57797133152c">KeyValuePair&lt; ValueType, KeyType &gt;</a>
-, <a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html#ae6f49fcc159bf32302462836a89f63d7">VariableInternal&lt; Type &amp; &gt;</a>
-, <a class="el" href="class_variable_3_01_type_01_6_01_4.html#a80a7732e5de85ace6ea7600b0b5f9fa8">Variable&lt; Type &amp; &gt;</a>
-, <a class="el" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360">Variable&lt; Type &gt;</a>
-, <a class="el" href="class_variable_internal.html#a77f3d3bb8eb343a65e60670bce2a5338">VariableInternal&lt; Type &gt;</a>
-, <a class="el" href="class_time_stamp.html#aa5a1e08676f574769f440faad8a46f5d">TimeStamp</a>
-, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aea5d60ab7b9cc582a117bf355602357d">AtomicValue&lt; Type * &gt;</a>
-, <a class="el" href="class_binary_op_variable_internal.html#a98a001c511638f9ac970fae273e11aa1">BinaryOpVariableInternal&lt; Type, &gt;</a>
-, <a class="el" href="class_atomic_extended_3_01_long_01_4.html#a015de9dd282ab7f5e17a568cb86c2b66">AtomicExtended&lt; Long &gt;</a>
 , <a class="el" href="class_channel_base.html#a3755b8dc86d2fc3513f9388ce2e17f16">ChannelBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_internal_base.html#a7023081abf6a915cffb50aa76b868226">ChannelInternalBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_binary_op_variable_internal.html#aa05401959b8d48c8442fe895a971ff43">BinaryOpVariableInternal&lt; Type, op &gt;</a>
+, <a class="el" href="class_unary_op_variable_internal.html#ab32125b91f71835730ce3a045888df0f">UnaryOpVariableInternal&lt; Type, op &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a8690ff0c31912971d95eebfc4d899701">AtomicExtended&lt; Type * &gt;</a>
 , <a class="el" href="class_unit_base.html#a0abca48d077f3f49b5c9639ac64eec5a">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a40619e1aabf2c000858e00467f316c1a">AtomicValue&lt; Type * &gt;</a>
+, <a class="el" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_long_01_4.html#a015de9dd282ab7f5e17a568cb86c2b66">AtomicExtended&lt; Long &gt;</a>
+, <a class="el" href="class_variable_internal_base.html#a369ba8fea5e5a5af1956de3fce161102">VariableInternalBase&lt; Type &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aea5d60ab7b9cc582a117bf355602357d">AtomicValue&lt; Type * &gt;</a>
+, <a class="el" href="class_variable_internal.html#a77f3d3bb8eb343a65e60670bce2a5338">VariableInternal&lt; Type &gt;</a>
+, <a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html#ae6f49fcc159bf32302462836a89f63d7">VariableInternal&lt; Type &amp; &gt;</a>
+, <a class="el" href="class_type_variable_internal.html#ae1c3273ce351db8116c2ef4a6197edc5">TypeVariableInternal&lt; Type, OtherType &gt;</a>
+, <a class="el" href="class_time_stamp.html#aa5a1e08676f574769f440faad8a46f5d">TimeStamp</a>
+, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a18c9ca367b2df628401f240f771fffb8">AtomicExtended&lt; Type * &gt;</a>
 </li>
 <li>getValues()
-: <a class="el" href="class_dictionary_internal.html#a3b8496e8af7d39332822189bad5f6fd5">DictionaryInternal&lt; ValueType, KeyType &gt;</a>
-, <a class="el" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f">Dictionary&lt; ValueType, KeyType &gt;</a>
+: <a class="el" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f">Dictionary&lt; ValueType, KeyType &gt;</a>
+, <a class="el" href="class_unit_base.html#aedd150dd3b7657232815ede9b5eb9639">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_dictionary_internal.html#a3b8496e8af7d39332822189bad5f6fd5">DictionaryInternal&lt; ValueType, KeyType &gt;</a>
 </li>
 <li>getValueTypeCode()
-: <a class="el" href="class_variable.html#a5a1841278390d071d56d99ade1969de3">Variable&lt; Type &gt;</a>
-, <a class="el" href="class_numerical_array.html#abf8173e2b68127c91baa5cc061bc7d89">NumericalArray&lt; NumericalType &gt;</a>
+: <a class="el" href="class_numerical_array.html#abf8173e2b68127c91baa5cc061bc7d89">NumericalArray&lt; NumericalType &gt;</a>
+, <a class="el" href="class_variable.html#a5a1841278390d071d56d99ade1969de3">Variable&lt; Type &gt;</a>
 </li>
 <li>getWeak()
 : <a class="el" href="class_smart_pointer.html#ab5e9a656c806bcc764321c90f3218ff6">SmartPointer</a>
 </li>
 <li>getWeakPointer()
 : <a class="el" href="class_weak_pointer_container.html#a22c5983f7acb7ad3e8030ad033e0e3d7">WeakPointerContainer&lt; OriginalType &gt;</a>
-, <a class="el" href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html#ad55b7d61fd307bee8823cc0d25bc77de">SmartPointerContainer&lt; SmartPointerType, true &gt;</a>
 , <a class="el" href="class_weak_pointer.html#a82b46043d7e7769a73afa6f038381368">WeakPointer</a>
+, <a class="el" href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html#ad55b7d61fd307bee8823cc0d25bc77de">SmartPointerContainer&lt; SmartPointerType, true &gt;</a>
 </li>
 <li>getWriteBlockSize()
-: <a class="el" href="class_bus_buffer.html#a79667b1d3c7df70edbaa1c26aca6e0ea">BusBuffer&lt; SampleType &gt;</a>
-, <a class="el" href="class_bus_buffer_internal.html#a64e2faf392b8190006f17b53c12375e3">BusBufferInternal&lt; SampleType &gt;</a>
+: <a class="el" href="class_bus_buffer_internal.html#a64e2faf392b8190006f17b53c12375e3">BusBufferInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_bus_buffer.html#a42ba81dd10744b208a705502334976f9">BusBuffer&lt; SampleType &gt;</a>
 </li>
 <li>getZero()
 : <a class="el" href="class_time_stamp.html#a3b177f0b402c2d1bb51c404e0397449b">TimeStamp</a>
 </li>
 <li>global()
 : <a class="el" href="class_memory.html#ad523c3c897146ea7c0906f63b1360cc6">Memory</a>
-, <a class="el" href="class_unary_op_utility.html#a9d403431722cb2776f6f60d98d593844">UnaryOpUtility&lt; SampleType &gt;</a>
 , <a class="el" href="class_r_n_g.html#aa44a6fbe95ea8b66e3f7280389cf3a75">RNG</a>
+, <a class="el" href="class_unary_op_utility.html#a9d403431722cb2776f6f60d98d593844">UnaryOpUtility&lt; SampleType &gt;</a>
 , <a class="el" href="class_binary_op_utility.html#ab827a828e27d680ad58b442f39196705">BinaryOpUtility&lt; SampleType &gt;</a>
 </li>
 <li>group()
-: <a class="el" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf">ObjectArray&lt; ObjectType &gt;</a>
+: <a class="el" href="class_unit_base.html#a24b42b5dd7a658930fa8fd97f479e6b7">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_object_array.html#a88aeed1b448dddd7a668400b51f014cf">ObjectArray&lt; ObjectType &gt;</a>
 </li>
 <li>growBufferSize()
 : <a class="el" href="class_bus_buffer_internal.html#a9f2efbe27a1e527013492e2c731c6b67">BusBufferInternal&lt; SampleType &gt;</a>
@@ -1380,7 +1417,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:13 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

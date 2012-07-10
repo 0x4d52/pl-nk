@@ -118,7 +118,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a7a69eb72da9e7368a7e3ad0b90e1673f">getOutputSamples</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#af0043514ac536634ad2e3c20225cd51d">getOutputBuffer</a> (const int index) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ab6bd6cd0e9e5f4f0c13042868051db65">getOutputBuffer</a> (const int index)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a6801fae6242932e36548b063855ad465">getNumChannels</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a5f3d2b85beb2f9062bc70110af73a121">getNumChannels</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ab7136ee4e6c3d8751202a0e583114df5">initProxyValue</a> (const int index, SampleType const &amp;value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_base.html">ChannelType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a64e2c06a3fd0aeb46faac973747e104d">getProxy</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a5d1193dd9223e46fd906d578e71dde8b">setBlockSize</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;newBlockSize)  throw ()</td></tr>
@@ -148,7 +148,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_f_f_t_channel_internal.html#a2d0ebf995c97e0f96ad48979d9efe29a">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a2b1059092344012b86ae6570212bc4c1">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#ae7ed731bf9ca912757a86409786cb67f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8d8b10544bea6a9009e604ba16d9d426">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#ac94a8db479c5d62962aa4b63b82b7156">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a0a73a4434d1df137dde22b27ed5510c0">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#acd111bb5e7ea8d873088a6b79525a1d5">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0ef0336efe6c4a406640e8627fc24694">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ae492f64dbde87816dadbb0055be93ecb">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a7787e378a14d9c8c3b483ff24b793072">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a2d0ebf995c97e0f96ad48979d9efe29a">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a2b1059092344012b86ae6570212bc4c1">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#ae7ed731bf9ca912757a86409786cb67f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8d8b10544bea6a9009e604ba16d9d426">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#ac94a8db479c5d62962aa4b63b82b7156">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -182,7 +182,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_f_f_t_channel_internal.html#ab8d7b9e973668ccc24a401ef3f0abcfc">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a7d7372b8175b5d2b2f07e2f1a595a116">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a5410ca29623aec5bd24d4273790d9e53">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a9b417ef1a79072ad7458e37666a569af">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a9698156f05712b0c24a646eaf331551d">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#a95afee6e27c4ddf5ea37a8af4f949749">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a8db93d5facc65672c047216a41caabbf">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a8bbd1b9bd53b76017232bc8e9ef72421">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a73ad6b538760b8769a6ef71e5a3d38f7">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a222d65725954cdedd2a2351b76495046">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#abf4df64b97b005d47185b141d18c43c6">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ab8d7b9e973668ccc24a401ef3f0abcfc">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a7d7372b8175b5d2b2f07e2f1a595a116">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a5410ca29623aec5bd24d4273790d9e53">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a9b417ef1a79072ad7458e37666a569af">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a9698156f05712b0c24a646eaf331551d">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#a95afee6e27c4ddf5ea37a8af4f949749">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -201,7 +201,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_f_f_t_channel_internal.html#af68d6fcd6a63b5d9f5b59401094360b3">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ac1497894293b4ebd8fdb68c3aa6283e2">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3374b8f21a1459ed5c8d960c1cb7356f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#af88415e41073c4bc7e1640e11f80c2c3">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#aa50bdecd5991929900176b7aee7f60e7">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#aaa09a18a5f1c3ea9f1dc7c4d173659e1">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#aa42ed4f24a4d6f29087bac7b573d2045">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a79172aacd36a99756cb2669f3e018035">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#af1720094ca81c6b380cfed1b00632a12">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a407d9e81dba868607789b3484c6de254">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#af68d6fcd6a63b5d9f5b59401094360b3">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ac1497894293b4ebd8fdb68c3aa6283e2">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3374b8f21a1459ed5c8d960c1cb7356f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#af88415e41073c4bc7e1640e11f80c2c3">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#aa50bdecd5991929900176b7aee7f60e7">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -220,7 +220,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_f_f_t_channel_internal.html#a811eef2e8bce285dbd63f134e58cf5a5">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ad271d80e235fc004cec984147b28ca91">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a829f0f1920e30f23f7c3671df5bbbab9">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8a2b2d6293f459cb7d97c7eaa9d9a748">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#a7c3df8e34d5a201d191258a58ea34b85">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#abf8614ee1e1d32cc0f52932d6f3f914b">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a69f59782b47f16b75a592733229d84ba">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0d981c096ff4874679da4ba8b0f143b0">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ac5bf342efb07e0c2b96dd5518222ea9a">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a5b83efa17d7bf51d4389fb2a3cdf3ce9">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a811eef2e8bce285dbd63f134e58cf5a5">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ad271d80e235fc004cec984147b28ca91">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a829f0f1920e30f23f7c3671df5bbbab9">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8a2b2d6293f459cb7d97c7eaa9d9a748">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#a7c3df8e34d5a201d191258a58ea34b85">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -236,6 +236,8 @@ template&lt;class SampleType, class DataType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a637afaccf20366870817759c88fa70bf">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#adbcc9c1c071b03e0197be8cb76fc0f19">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#aa3dc18ae214807c17402bd3768db71af">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#abbc6f7bceaaa404c37d66a88d083ed2c">Delay4ParamChannelInternal&lt; FormType &gt;</a>, and <a class="el" href="class_delay_channel_internal_base.html#a625ab3bdc63b2a6bb4f3682fe36b8f05">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
 
 </div>
 </div>
@@ -284,7 +286,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_f_f_t_channel_internal.html#ad802ea9e4454a7a74dec2dbafcb018a7">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#adeeaf67d9dadbf8fc49e348faf7ce73e">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a5412c61648c0b577d2fe81820f1ddc81">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a82b2055732c73361f50718d7a90e1457">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a294a708bab56c641c726b7c21c7765d7">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a0ff92f8fd185bce2b437d6dfd04ade00">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a09c0cac08645353fd93c8c9e62f3e1ff">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a8d3e21c415b006ea885c7f6e6d206098">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a8d5051d03ab3575068def5e9d1a8f283">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ad802ea9e4454a7a74dec2dbafcb018a7">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#adeeaf67d9dadbf8fc49e348faf7ce73e">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a5412c61648c0b577d2fe81820f1ddc81">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a82b2055732c73361f50718d7a90e1457">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -382,21 +384,23 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6801fae6242932e36548b063855ad465"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getNumChannels" ref="a6801fae6242932e36548b063855ad465" args="() const " -->
+<a class="anchor" id="a5f3d2b85beb2f9062bc70110af73a121"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getNumChannels" ref="a5f3d2b85beb2f9062bc70110af73a121" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType, class DataType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const int <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getNumChannels </td>
+          <td class="memname">int <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getNumChannels </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a43277b3178b32a3945b1275ab50c6122">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -625,7 +629,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:18 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -175,24 +175,24 @@ Functions</h2></td></tr>
     <span class="keyword">class </span><a class="code" href="class_binary_op_channel_internal.html" title="For applying binary operators.">BinaryOpChannelInternal</a>&lt;float, PLONKOP&gt; : <span class="keyword">public</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a>&lt;float, ChannelInternalCore::Data&gt;\
     {\
     <span class="keyword">public</span>:\
-        <span class="keyword">typedef</span> <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>               <a class="code" href="class_binary_op_channel_internal.html#a8491eb1217a3276401e0836fb40d5c06" title="To store channel state data.">Data</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html">ChannelBase&lt;float&gt;</a>                      <a class="code" href="class_binary_op_channel_internal.html#a115bf5998f2dbc5dcd655915d6801ac4">ChannelType</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_binary_op_channel_internal.html" title="For applying binary operators.">BinaryOpChannelInternal&lt;float,PLONKOP&gt;</a>  <a class="code" href="class_binary_op_channel_internal.html#a4b96b26783ba0d61f5a0387dc770ccf2">BinaryOpInternal</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;float,Data&gt;</a>             <a class="code" href="class_binary_op_channel_internal.html#a84bc7aac2e843f1018976b80135605b7">Internal</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html">ChannelInternalBase&lt;float&gt;</a>              <a class="code" href="class_binary_op_channel_internal.html#acc37da9c37f78d66d29b6603c6821fcd">InternalBase</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html">UnitBase&lt;float&gt;</a>                         <a class="code" href="class_binary_op_channel_internal.html#a93d9dd367ee965102576fc133176b6b5">UnitType</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                         <a class="code" href="class_binary_op_channel_internal.html#ac57c063e5353514a2b57ef9fc060ed40">Inputs</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;float&gt;</a>                   <a class="code" href="class_binary_op_channel_internal.html#a7871499e3ff2c4a40f74295aa9c1af65">Buffer</a>;\
-        <span class="keyword">typedef</span> <a class="code" href="class_binary_op_utility.html">BinaryOpUtility&lt;float&gt;</a>                  <a class="code" href="class_binary_op_channel_internal.html#a0ba589694ef92a6c9a63209893f8283c">UtilityType</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>               <a class="code" href="class_binary_op_channel_internal.html#a2f9034200615d396daa33c4977d83c8c" title="To store channel state data.">Data</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html">ChannelBase&lt;float&gt;</a>                      <a class="code" href="class_binary_op_channel_internal.html#a21a6edb5b81e598eefb00a5aaa69ae65">ChannelType</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_binary_op_channel_internal.html" title="For applying binary operators.">BinaryOpChannelInternal&lt;float,PLONKOP&gt;</a>  <a class="code" href="class_binary_op_channel_internal.html#aca8e3b31d9a371081167456a09a4d87e">BinaryOpInternal</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;float,Data&gt;</a>             <a class="code" href="class_binary_op_channel_internal.html#a8b51eda8b6c2d7ba7a140818984d32db">Internal</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_channel_internal_base.html">ChannelInternalBase&lt;float&gt;</a>              <a class="code" href="class_binary_op_channel_internal.html#a8aa12ffbca8ce4a677f4d50e0530755c">InternalBase</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html">UnitBase&lt;float&gt;</a>                         <a class="code" href="class_binary_op_channel_internal.html#a3df9b0d02210bd4d8a62d13fd2ccc5cb">UnitType</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                         <a class="code" href="class_binary_op_channel_internal.html#a869cc88044fc071047ef4b115328e787">Inputs</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;float&gt;</a>                   <a class="code" href="class_binary_op_channel_internal.html#a24310a31645493d2904a91124d045b47">Buffer</a>;\
+        <span class="keyword">typedef</span> <a class="code" href="class_binary_op_utility.html">BinaryOpUtility&lt;float&gt;</a>                  <a class="code" href="class_binary_op_channel_internal.html#a653f2f4a2e27ce4e874fd21ad9758737">UtilityType</a>;\
         \
         <span class="keyword">enum</span> InputIndices { LeftOperand, RightOperand, NumInputs };\
         <span class="keyword">enum</span> Outputs { Output, NumOutputs };\
         <span class="keyword">enum</span> <a class="code" href="class_numerical_array2_d.html">Buffers</a> { OutputBuffer, LeftOperandBuffer, RightOperandBuffer, NumBuffers };\
         <span class="keyword">typedef</span> PlinkProcess&lt;NumBuffers&gt; Process;\
         \
-        <a class="code" href="class_binary_op_channel_internal.html#a5d69123cfd283ffba21bc10b3e555926">BinaryOpChannelInternal</a> (<a class="code" href="class_binary_op_channel_internal.html#ac57c063e5353514a2b57ef9fc060ed40">Inputs</a> <span class="keyword">const</span>&amp; inputs, <a class="code" href="class_binary_op_channel_internal.html#a8491eb1217a3276401e0836fb40d5c06" title="To store channel state data.">Data</a> <span class="keyword">const</span>&amp; data,\
+        <a class="code" href="class_binary_op_channel_internal.html#a30bf28111759e7b2f849c458d8e72ea7">BinaryOpChannelInternal</a> (<a class="code" href="class_binary_op_channel_internal.html#a869cc88044fc071047ef4b115328e787">Inputs</a> <span class="keyword">const</span>&amp; inputs, <a class="code" href="class_binary_op_channel_internal.html#a2f9034200615d396daa33c4977d83c8c" title="To store channel state data.">Data</a> <span class="keyword">const</span>&amp; data,\
                                  <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; blockSize, <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate) <span class="keywordflow">throw</span>()\
-        :   <a class="code" href="class_binary_op_channel_internal.html#a84bc7aac2e843f1018976b80135605b7">Internal</a> (inputs, data, blockSize, sampleRate)\
+        :   <a class="code" href="class_binary_op_channel_internal.html#a8b51eda8b6c2d7ba7a140818984d32db">Internal</a> (inputs, data, blockSize, sampleRate)\
         {\
             <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (NumBuffers == (NumInputs + NumOutputs));\
             Process::init (&amp;p, <span class="keyword">this</span>, NumOutputs, NumInputs);\
@@ -837,7 +837,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:12 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

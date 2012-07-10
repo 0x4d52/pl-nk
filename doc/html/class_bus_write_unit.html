@@ -93,14 +93,13 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a97518ea37c6867d31ab96fcfb8f1d752">Buffer</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a4451d903edd97542468337c4554e081a">Bus</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef PLONK_BUSARRAYBASETYPE<br class="typebreak"/>
-&lt; <a class="el" href="class_bus_buffer.html">Bus</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#ab491e4e4d8ff73453a84d021cb7306b0">Busses</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; <a class="el" href="class_bus_buffer.html">Bus</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a64e92ac6f97e03c46183465eb15f6ccf">Busses</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#a4f4298e98c98f33be271dbdfe4ca4740">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#ac827ead7040479156130903742389edf">ar</a> (<a class="el" href="class_bus_write_unit.html#ab491e4e4d8ff73453a84d021cb7306b0">Busses</a> const &amp;busses, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#ac827ead7040479156130903742389edf">ar</a> (<a class="el" href="class_numerical_array.html">Busses</a> const &amp;busses, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate bus writer.  <a href="#ac827ead7040479156130903742389edf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#abe26fbff51099cf9e639567eb816e19d">kr</a> (<a class="el" href="class_bus_write_unit.html#ab491e4e4d8ff73453a84d021cb7306b0">Busses</a> const &amp;busses, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;input)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bus_write_unit.html#abe26fbff51099cf9e639567eb816e19d">kr</a> (<a class="el" href="class_numerical_array.html">Busses</a> const &amp;busses, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;input)  throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
@@ -138,14 +137,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab491e4e4d8ff73453a84d021cb7306b0"></a><!-- doxytag: member="BusWriteUnit::Busses" ref="ab491e4e4d8ff73453a84d021cb7306b0" args="" -->
+<a class="anchor" id="a64e92ac6f97e03c46183465eb15f6ccf"></a><!-- doxytag: member="BusWriteUnit::Busses" ref="a64e92ac6f97e03c46183465eb15f6ccf" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef PLONK_BUSARRAYBASETYPE&lt;<a class="el" href="class_bus_buffer.html">Bus</a>&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_bus_write_unit.html#ab491e4e4d8ff73453a84d021cb7306b0">Busses</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">Bus</a>&gt; <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Busses</a></td>
         </tr>
       </table>
 </div>
@@ -268,7 +267,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::ar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_bus_write_unit.html#ab491e4e4d8ff73453a84d021cb7306b0">Busses</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">Busses</a> const &amp;&#160;</td>
           <td class="paramname"><em>busses</em>, </td>
         </tr>
         <tr>
@@ -323,7 +322,7 @@ template&lt;class SampleType &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_bus_write_unit.html">BusWriteUnit</a>&lt; SampleType &gt;::kr </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_bus_write_unit.html#ab491e4e4d8ff73453a84d021cb7306b0">Busses</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">Busses</a> const &amp;&#160;</td>
           <td class="paramname"><em>busses</em>, </td>
         </tr>
         <tr>
@@ -361,7 +360,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:14 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

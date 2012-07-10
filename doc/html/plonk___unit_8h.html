@@ -90,8 +90,97 @@ Classes</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___unit_8h.html#a50479476214bfb1cb49a27e7d0f5af3e">PLONK_BINARYOPGLOBALS_TEMPLATE</a> (<a class="el" href="class_unit_base.html">UnitBase</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___unit_8h.html#a6c9e5cbdeabe6ca5e520ea3ed6816b3c">PLONK_UNARYOPGLOBALS_TEMPLATE</a> (<a class="el" href="class_unit_base.html">UnitBase</a>)</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="plonk___unit_8h.html#a19106d53bdd1b43ee20a83fb33cb647e">ar</a> (<a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;unit, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resamples a unit to a different sample rate and/or block size.  <a href="#a19106d53bdd1b43ee20a83fb33cb647e"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="plonk___unit_8h.html#aa6e1597bbea05be833c72440c0df445d">kr</a> (<a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;unit)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resamples a unit to the default control rate sample rate and block size.  <a href="#aa6e1597bbea05be833c72440c0df445d"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="plonk___unit_8h.html#a41450edfb112748a0239029b96ac711b">mix</a> (<a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;unit)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes a unit down to a single channel.  <a href="#a41450edfb112748a0239029b96ac711b"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a19106d53bdd1b43ee20a83fb33cb647e"></a><!-- doxytag: member="plonk_Unit.h::ar" ref="a19106d53bdd1b43ee20a83fb33cb647e" args="(UnitBase&lt; SampleType &gt; const &amp;unit, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; ar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_block_size.html">BlockSize</a> const &amp;&#160;</td>
+          <td class="paramname"><em>preferredBlockSize</em> = <code>BlockSize::getDefault()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
+          <td class="paramname"><em>preferredSampleRate</em> = <code>SampleRate::getDefault()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Resamples a unit to a different sample rate and/or block size. </p>
+<p>By default the default sample rate and default block size are used. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa6e1597bbea05be833c72440c0df445d"></a><!-- doxytag: member="plonk_Unit.h::kr" ref="aa6e1597bbea05be833c72440c0df445d" args="(UnitBase&lt; SampleType &gt; const &amp;unit)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; kr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>unit</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Resamples a unit to the default control rate sample rate and block size. </p>
+
+</div>
+</div>
+<a class="anchor" id="a41450edfb112748a0239029b96ac711b"></a><!-- doxytag: member="plonk_Unit.h::mix" ref="a41450edfb112748a0239029b96ac711b" args="(UnitBase&lt; SampleType &gt; const &amp;unit)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; mix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>unit</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Mixes a unit down to a single channel. </p>
+
+</div>
+</div>
 <a class="anchor" id="a50479476214bfb1cb49a27e7d0f5af3e"></a><!-- doxytag: member="plonk_Unit.h::PLONK_BINARYOPGLOBALS_TEMPLATE" ref="a50479476214bfb1cb49a27e7d0f5af3e" args="(UnitBase)" -->
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +230,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jun 29 2012 22:16:12 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

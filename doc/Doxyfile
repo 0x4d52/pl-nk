@@ -1495,24 +1495,25 @@ PREDEFINED             = DOXYGEN=1 \
 # Use the PREDEFINED tag if you want to use a different macro definition that 
 # overrules the definition found in the source code.
 
-EXPAND_AS_DEFINED      = BINARYOP \
-                         BINARYOPS \
-                         UNARYOP \
-                         UNARYOPS \
-                         BINARYOPGLOBAL \
-                         BINARYOPGLOBALS \
-                         UNARYOPGLOBAL \
-                         UNARYOPGLOBALS \
-                         BINARYOPFUNCTION \
-                         UNARYOPFUNCTION \
-                         TERNARYOPFUNCTION \
-                         QUATERNARYOPFUNCTION \
-                         QUINARYOPFUNCTION \
-                         CHANNELDATA_NAME \
-                         CHANNELDATA_DECLARE \
-                         CHANNELDATA_SPECIAL \
-                         UNITBASETYPE \
-                         BUSARRAYBASETYPE \
+EXPAND_AS_DEFINED      = PLONK_BINARYOP \
+                         PLONK_BINARYOPS \
+                         PLONK_UNARYOP \
+                         PLONK_UNARYOPS \
+                         PLONK_BINARYOPGLOBAL \
+                         PLONK_BINARYOPGLOBALS \
+                         PLONK_UNARYOPGLOBAL \
+                         PLONK_UNARYOPGLOBALS \
+                         PLONK_BINARYOPFUNCTION \
+                         PLONK_UNARYOPFUNCTION \
+                         PLONK_TERNARYOPFUNCTION \
+                         PLONK_QUATERNARYOPFUNCTION \
+                         PLONK_QUINARYOPFUNCTION \
+                         PLONK_CHANNELDATA_NAME \
+                         PLONK_CHANNELDATA_DECLARE \
+                         PLONK_CHANNELDATA_SPECIAL \
+                         PLONK_UNITBASETYPE \
+                         PLONK_BUSARRAYBASETYPE \
+                         PLONK_NAMESPACE \
                          END_PLONK_NAMESPACE \
                          BEGIN_PLONK_NAMESPACE \
                          PLANK_BEGIN_C_LINKAGE \
