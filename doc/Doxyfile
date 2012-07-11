@@ -1495,7 +1495,8 @@ PREDEFINED             = DOXYGEN=1 \
 # Use the PREDEFINED tag if you want to use a different macro definition that 
 # overrules the definition found in the source code.
 
-EXPAND_AS_DEFINED      = PLONK_BINARYOP \
+EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
+					     PLONK_BINARYOP \
                          PLONK_BINARYOPS \
                          PLONK_UNARYOP \
                          PLONK_UNARYOPS \
