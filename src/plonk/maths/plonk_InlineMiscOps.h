@@ -266,6 +266,82 @@ public:
 };
 
 
+template<class Type, signed NumBits>
+class BitsBase
+{
+public:
+};
+
+
+template<class Type>
+class BitsBase<Type,1>
+{
+public:
+    typedef UnsignedChar InternalType;
+    
+    static inline Type countOnes             (Type value) throw() { return (Type)(pl_CountOnesUC ((InternalType)(value))); }
+    static inline Type countLeadingZeros     (Type value) throw() { return (Type)(pl_CountLeadingZerosUC ((InternalType)(value))); }
+    static inline Type countTrailingZeroes   (Type value) throw() { return (Type)(pl_CountTrailingZerosUC ((InternalType)(value))); }
+    static inline Type countLeadingOnes      (Type value) throw() { return (Type)(pl_CountLeadingOnesUC ((InternalType)(value))); }
+    static inline Type countTrailingOnes     (Type value) throw() { return (Type)(pl_CountTrailingOnesUC ((InternalType)(value))); }
+    static inline Type numBitsRequired       (Type value) throw() { return (Type)(pl_NumBitsRequiredUC ((InternalType)(value))); }
+    static inline Type nextPowerOf2          (Type value) throw() { return (Type)(pl_NextPowerOf2UC ((InternalType)(value))); }
+    static inline bool isPowerOf2            (Type value) throw() { return (Type)(pl_IsPowerOf2UC ((InternalType)(value))); }
+};
+
+template<class Type>
+class BitsBase<Type,2>
+{
+public:
+    typedef UnsignedShort InternalType;
+    
+    static inline Type countOnes             (Type value) throw() { return (Type)(pl_CountOnesUS ((InternalType)(value))); }
+    static inline Type countLeadingZeros     (Type value) throw() { return (Type)(pl_CountLeadingZerosUS ((InternalType)(value))); }
+    static inline Type countTrailingZeroes   (Type value) throw() { return (Type)(pl_CountTrailingZerosUS ((InternalType)(value))); }
+    static inline Type countLeadingOnes      (Type value) throw() { return (Type)(pl_CountLeadingOnesUS ((InternalType)(value))); }
+    static inline Type countTrailingOnes     (Type value) throw() { return (Type)(pl_CountTrailingOnesUS ((InternalType)(value))); }
+    static inline Type numBitsRequired       (Type value) throw() { return (Type)(pl_NumBitsRequiredUS ((InternalType)(value))); }
+    static inline Type nextPowerOf2          (Type value) throw() { return (Type)(pl_NextPowerOf2US ((InternalType)(value))); }
+    static inline bool isPowerOf2            (Type value) throw() { return (Type)(pl_IsPowerOf2US ((InternalType)(value))); }
+};
+
+template<class Type>
+class BitsBase<Type,4>
+{
+public:
+    typedef UnsignedInt InternalType;
+    
+    static inline Type countOnes             (Type value) throw() { return (Type)(pl_CountOnesUI ((InternalType)(value))); }
+    static inline Type countLeadingZeros     (Type value) throw() { return (Type)(pl_CountLeadingZerosUI ((InternalType)(value))); }
+    static inline Type countTrailingZeroes   (Type value) throw() { return (Type)(pl_CountTrailingZerosUI ((InternalType)(value))); }
+    static inline Type countLeadingOnes      (Type value) throw() { return (Type)(pl_CountLeadingOnesUI ((InternalType)(value))); }
+    static inline Type countTrailingOnes     (Type value) throw() { return (Type)(pl_CountTrailingOnesUI ((InternalType)(value))); }
+    static inline Type numBitsRequired       (Type value) throw() { return (Type)(pl_NumBitsRequiredUI ((InternalType)(value))); }
+    static inline Type nextPowerOf2          (Type value) throw() { return (Type)(pl_NextPowerOf2UI ((InternalType)(value))); }
+    static inline bool isPowerOf2            (Type value) throw() { return (Type)(pl_IsPowerOf2UI ((InternalType)(value))); }
+};
+
+template<class Type>
+class BitsBase<Type,8>
+{
+public:
+    typedef UnsignedLongLong InternalType;
+    
+    static inline Type countOnes             (Type value) throw() { return (Type)(pl_CountOnesULL ((InternalType)(value))); }
+    static inline Type countLeadingZeros     (Type value) throw() { return (Type)(pl_CountLeadingZerosULL ((InternalType)(value))); }
+    static inline Type countTrailingZeroes   (Type value) throw() { return (Type)(pl_CountTrailingZerosULL ((InternalType)(value))); }
+    static inline Type countLeadingOnes      (Type value) throw() { return (Type)(pl_CountLeadingOnesULL ((InternalType)(value))); }
+    static inline Type countTrailingOnes     (Type value) throw() { return (Type)(pl_CountTrailingOnesULL ((InternalType)(value))); }
+    static inline Type numBitsRequired       (Type value) throw() { return (Type)(pl_NumBitsRequiredULL ((InternalType)(value))); }
+    static inline Type nextPowerOf2          (Type value) throw() { return (Type)(pl_NextPowerOf2ULL ((InternalType)(value))); }
+    static inline bool isPowerOf2            (Type value) throw() { return (Type)(pl_IsPowerOf2ULL ((InternalType)(value))); }
+};
+
+
+template<class Type>
+class Bits : public BitsBase<Type,sizeof(Type)>
+{
+};
 
 
 //template<class ValueType, class IndexType>

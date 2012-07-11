@@ -159,6 +159,229 @@ static inline PlankI pl_ConvertI24ToI (const PlankI24 i24)
 #endif
 }
 
+/** @defgroup PlankBitwiseFunctions Plank bitwise functions
+ @ingroup PlankFunctions
+ @{
+ */
+
+static inline PlankUC pl_CountOnesUC (PlankUC x)
+{
+    x -= ((x >> 1) & 0x55);
+    x = (((x >> 2) & 0x33) + (x & 0x33));
+    x = (((x >> 4) + x) & 0x0f);
+    return x & 0x0000000f;		
+}
+
+static inline PlankUC pl_CountLeadingZerosUC (PlankUC x)
+{
+    x |= (x >> 1);
+    x |= (x >> 2);
+    x |= (x >> 4);
+    return 8 - pl_CountOnesUC (x);
+}
+
+static inline PlankUC pl_CountTrailingZerosUC (PlankUC x) 
+{
+    return 8 - pl_CountLeadingZerosUC (~x & (x - 1));
+}
+
+static inline PlankUC pl_CountLeadingOnesUC (PlankUC x) 
+{
+    return pl_CountLeadingZerosUC (~x);
+}
+
+static inline PlankUC pl_CountTrailingOnesUC (PlankUC x) 
+{
+    return 8 - pl_CountLeadingZerosUC (x & (~x - 1));
+}
+
+static inline PlankUC pl_NumBitsRequiredUC (PlankUC x) 
+{
+    return 8 - pl_CountLeadingZerosUC (x);
+}
+
+static inline PlankUC pl_Log2CeilUC (PlankUC x) 
+{
+    return 8 - pl_CountLeadingZerosUC (x - 1);
+}
+
+static inline PlankUC pl_NextPowerOf2UC (PlankUC x) 
+{
+    return (PlankUC)1 << pl_Log2CeilUC (x);
+}
+
+static inline PlankB pl_IsPowerOf2UC (PlankUC x) 
+{
+    return (x & (x - 1)) == 0;
+}
+
+static inline PlankUS pl_CountOnesUS (PlankUS x)
+{
+    x -= ((x >> 1) & 0x5555);
+    x = (((x >> 2) & 0x3333) + (x & 0x3333));
+    x = (((x >> 4) + x) & 0x0f0f);
+    x += (x >> 8);
+    return x & 0x0000001f;		
+}
+
+static inline PlankUS pl_CountLeadingZerosUS (PlankUS x)
+{
+    x |= (x >> 1);
+    x |= (x >> 2);
+    x |= (x >> 4);
+    x |= (x >> 8);
+    return 16 - pl_CountOnesUS (x);
+}
+
+static inline PlankUS pl_CountTrailingZerosUS (PlankUS x) 
+{
+    return 16 - pl_CountLeadingZerosUS (~x & (x - 1));
+}
+
+static inline PlankUS pl_CountLeadingOnesUS (PlankUS x) 
+{
+    return pl_CountLeadingZerosUS (~x);
+}
+
+static inline PlankUS pl_CountTrailingOnesUS (PlankUS x) 
+{
+    return 16 - pl_CountLeadingZerosUS (x & (~x - 1));
+}
+
+static inline PlankUS pl_NumBitsRequiredUS (PlankUS x) 
+{
+    return 16 - pl_CountLeadingZerosUS (x);
+}
+
+static inline PlankUS pl_Log2CeilUS (PlankUS x) 
+{
+    return 16 - pl_CountLeadingZerosUS (x - 1);
+}
+
+static inline PlankUS pl_NextPowerOf2US (PlankUS x) 
+{
+    return 1 << pl_Log2CeilUS (x);
+}
+
+static inline PlankB pl_IsPowerOf2US (PlankUS x) 
+{
+    return (x & (x - 1)) == (PlankUS)0;
+}
+
+static inline PlankUI pl_CountOnesUI (PlankUI x)
+{
+    x -= ((x >> 1) & 0x55555555);
+    x = (((x >> 2) & 0x33333333) + (x & 0x33333333));
+    x = (((x >> 4) + x) & 0x0f0f0f0f);
+    x += (x >> 8);
+    x += (x >> 16);
+    return x & 0x0000003f;		
+}
+
+static inline PlankUI pl_CountLeadingZerosUI (PlankUI x)
+{
+    x |= (x >> 1);
+    x |= (x >> 2);
+    x |= (x >> 4);
+    x |= (x >> 8);
+    x |= (x >> 16);
+    return 32 - pl_CountOnesUI (x);
+}
+
+static inline PlankUI pl_CountTrailingZerosUI (PlankUI x) 
+{
+    return 32 - pl_CountLeadingZerosUI (~x & (x - 1));
+}
+
+static inline PlankUI pl_CountLeadingOnesUI (PlankUI x) 
+{
+    return pl_CountLeadingZerosUI (~x);
+}
+
+static inline PlankUI pl_CountTrailingOnesUI (PlankUI x) 
+{
+    return 32 - pl_CountLeadingZerosUI (x & (~x - 1));
+}
+
+static inline PlankUI pl_NumBitsRequiredUI (PlankUI x) 
+{
+    return 32 - pl_CountLeadingZerosUI (x);
+}
+
+static inline PlankUI pl_Log2CeilUI (PlankUI x) 
+{
+    return 32 - pl_CountLeadingZerosUI (x - 1);
+}
+
+static inline PlankUI pl_NextPowerOf2UI (PlankUI x) 
+{
+    return 1LL << pl_Log2CeilUI (x);
+}
+
+static inline PlankB pl_IsPowerOf2UI (PlankUI x) 
+{
+    return (x & (x - 1)) == (PlankUI)0;
+}
+
+static inline PlankULL pl_CountOnesULL (PlankULL x)
+{
+    x -= ((x >> 1) & 0x5555555555555555);
+    x = (((x >> 2) & 0x3333333333333333) + (x & 0x3333333333333333));
+    x = (((x >> 4) + x) & 0x0f0f0f0f0f0f0f0f);
+    x += (x >> 8);
+    x += (x >> 16);
+    x += (x >> 32);
+    return x & 0x0000007f;		
+}
+
+static inline PlankULL pl_CountLeadingZerosULL (PlankULL x)
+{
+    x |= (x >> 1);
+    x |= (x >> 2);
+    x |= (x >> 4);
+    x |= (x >> 8);
+    x |= (x >> 16);
+    x |= (x >> 32);
+    return 64 - pl_CountOnesULL (x);
+}
+
+static inline PlankULL pl_CountTrailingZerosULL (PlankULL x) 
+{
+    return 64 - pl_CountLeadingZerosULL (~x & (x - 1));
+}
+
+static inline PlankULL pl_CountLeadingOnesULL (PlankULL x) 
+{
+    return pl_CountLeadingZerosULL (~x);
+}
+
+static inline PlankULL pl_CountTrailingOnesULL (PlankULL x) 
+{
+    return 64 - pl_CountLeadingZerosULL (x & (~x - 1));
+}
+
+static inline PlankULL pl_NumBitsRequiredULL (PlankULL x) 
+{
+    return 64 - pl_CountLeadingZerosULL (x);
+}
+
+static inline PlankULL pl_Log2CeilULL (PlankULL x) 
+{
+    return 64 - pl_CountLeadingZerosULL (x - 1);
+}
+
+static inline PlankULL pl_NextPowerOf2ULL (PlankULL x) 
+{
+    return 1L << pl_Log2CeilULL (x);
+}
+
+static inline PlankB pl_IsPowerOf2ULL (PlankULL x) 
+{
+    return (x & (x - 1)) == (PlankULL)0;
+}
+
+/// @} // End group PlankBitwiseFunctions
+
 
 /** @defgroup PlankEndianFunctions Plank endian functions
  @ingroup PlankFunctions
