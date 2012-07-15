@@ -209,7 +209,7 @@ public:
         {
             if (leftBufferLength == 1)
             {
-                SampleType leftValue (leftBuffer[0]);
+                const SampleType leftValue (leftBuffer[0]);
                 
                 for (i = 0; i < outputBufferLength; ++i) 
                     outputSamples[i] = op (leftValue, rightSamples[i]);
@@ -232,7 +232,7 @@ public:
         {
             if (rightBufferLength == 1)
             {
-                SampleType rightValue (rightBuffer[0]);
+                const SampleType rightValue (rightBuffer[0]);
                 
                 for (i = 0; i < outputBufferLength; ++i) 
                     outputSamples[i] = op (leftSamples[i], rightValue);

@@ -280,14 +280,14 @@ public:
     public:\
         typedef PlankU##TypeCode InternalType;\
         \
-        static inline Type countOnes             (Type value) throw() { return (Type)(pl_CountOnesU##TypeCode ((InternalType)(value))); }\
-        static inline Type countLeadingZeros     (Type value) throw() { return (Type)(pl_CountLeadingZerosU##TypeCode ((InternalType)(value))); }\
-        static inline Type countTrailingZeroes   (Type value) throw() { return (Type)(pl_CountTrailingZerosU##TypeCode ((InternalType)(value))); }\
-        static inline Type countLeadingOnes      (Type value) throw() { return (Type)(pl_CountLeadingOnesU##TypeCode ((InternalType)(value))); }\
-        static inline Type countTrailingOnes     (Type value) throw() { return (Type)(pl_CountTrailingOnesU##TypeCode ((InternalType)(value))); }\
-        static inline Type numBitsRequired       (Type value) throw() { return (Type)(pl_NumBitsRequiredU##TypeCode ((InternalType)(value))); }\
-        static inline Type nextPowerOf2          (Type value) throw() { return (Type)(pl_NextPowerOf2U##TypeCode ((InternalType)(value))); }\
-        static inline bool isPowerOf2            (Type value) throw() { return (Type)(pl_IsPowerOf2U##TypeCode ((InternalType)(value))); }\
+        static inline Type countOnes             (Type const& value) throw() { return (Type)pl_CountOnesU##TypeCode ((InternalType)value);          }\
+        static inline Type countLeadingZeros     (Type const& value) throw() { return (Type)pl_CountLeadingZerosU##TypeCode ((InternalType)value);  }\
+        static inline Type countTrailingZeroes   (Type const& value) throw() { return (Type)pl_CountTrailingZerosU##TypeCode ((InternalType)value); }\
+        static inline Type countLeadingOnes      (Type const& value) throw() { return (Type)pl_CountLeadingOnesU##TypeCode ((InternalType)value);   }\
+        static inline Type countTrailingOnes     (Type const& value) throw() { return (Type)pl_CountTrailingOnesU##TypeCode ((InternalType)value);  }\
+        static inline Type numBitsRequired       (Type const& value) throw() { return (Type)pl_NumBitsRequiredU##TypeCode ((InternalType)value);    }\
+        static inline Type nextPowerOf2          (Type const& value) throw() { return (Type)pl_NextPowerOf2U##TypeCode ((InternalType)value);       }\
+        static inline bool isPowerOf2            (Type const& value) throw() { return (Type)pl_IsPowerOf2U##TypeCode ((InternalType)value);         }\
     }
 
 PLONK_BITSBASE_DECLARE(C,1);
@@ -295,19 +295,20 @@ PLONK_BITSBASE_DECLARE(S,2);
 PLONK_BITSBASE_DECLARE(I,4);
 PLONK_BITSBASE_DECLARE(LL,8);
 
+/** Some useful bitwise functions. */
 template<class Type>
 class Bits : public BitsBase<Type,sizeof(Type)>
 {
 public:
     typedef BitsBase<Type,sizeof(Type)> Base;
-    static inline Type countOnes             (Type value) throw() { return Base::countOnes (value); }
-    static inline Type countLeadingZeros     (Type value) throw() { return Base::countLeadingZeros (value); }
-    static inline Type countTrailingZeroes   (Type value) throw() { return Base::countTrailingZeroes (value); }
-    static inline Type countLeadingOnes      (Type value) throw() { return Base::countLeadingOnes (value); }
-    static inline Type countTrailingOnes     (Type value) throw() { return Base::countTrailingOnes (value); }
-    static inline Type numBitsRequired       (Type value) throw() { return Base::numBitsRequired (value); }
-    static inline Type nextPowerOf2          (Type value) throw() { return Base::nextPowerOf2 (value); }
-    static inline bool isPowerOf2            (Type value) throw() { return Base::isPowerOf2 (value); }
+    static inline Type countOnes             (Type const& value) throw() { return Base::countOnes (value);              }
+    static inline Type countLeadingZeros     (Type const& value) throw() { return Base::countLeadingZeros (value);      }
+    static inline Type countTrailingZeroes   (Type const& value) throw() { return Base::countTrailingZeroes (value);    }
+    static inline Type countLeadingOnes      (Type const& value) throw() { return Base::countLeadingOnes (value);       }
+    static inline Type countTrailingOnes     (Type const& value) throw() { return Base::countTrailingOnes (value);      }
+    static inline Type numBitsRequired       (Type const& value) throw() { return Base::numBitsRequired (value);        }
+    static inline Type nextPowerOf2          (Type const& value) throw() { return Base::nextPowerOf2 (value);           }
+    static inline bool isPowerOf2            (Type const& value) throw() { return Base::isPowerOf2 (value);             }
 };
 
 

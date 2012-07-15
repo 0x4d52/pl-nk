@@ -203,16 +203,27 @@ Unit AudioHost::constructGraph()
 //    return WhiteNoise::ar (0.1);
     
     
-    int val = 0x2000;
-    int count = Bits<int>::countTrailingZeroes (val);
-    printf ("count (%d) = %d\n", val, count);
+//    int val = 0x2000;
+//    int count = Bits<int>::countTrailingZeroes (val);
+//    printf ("count (%d) = %d\n", val, count);
     
-    return WhiteNoise::ar (Floats (0.1, 0.1));
+//    return WhiteNoise::ar (Floats (0.1, 0.1));
+    
+//    return RLPF::ar(WhiteNoise::ar(), Sine::ar(0.1).linexp(50, 10000), Sine::ar(0.9999).linexp(1, 10), 0.2);
     
 //    return WhiteNoise::ar (Floats::series (50, 0.000001, 0.000001)).mix() * 0;
 
 //    return WhiteNoise::ar (Floats (0.1, 0.1)) * Saw::ar(-1);
 
+//    Dynamic dyn;
+//    AtomicDynamicPointer adyn = &dyn;
+//    dyn = Sine::ar (1000, 0.1);
+//    return adyn.getObject().as<Unit>();
+
+    Unit source = Sine::ar (1000, 0.1);
+    static PatchSource<Unit> patch (source);    
+    Unit unit = Patch::ar (patch);
+    return unit;
 }
 
 

@@ -382,42 +382,6 @@ Int24& Int24::operator>>= (const int shift) throw()
     return *this;
 }                             
 
-//const Int24& Int24::getZero() throw()
-//{
-//    static Int24 v (0);
-//    return v;
-//}
-//
-//const Int24& Int24::getOne() throw()
-//{
-//    static Int24 v (1);
-//    return v;
-//}
-//
-//const Int24& Int24::getTwo() throw()
-//{
-//    static Int24 v (2);
-//    return v;
-//}
-//
-//const Int24& Int24::getHalf() throw()
-//{
-//    static Int24 v (0);
-//    return v;
-//}
-//
-//const Int24& Int24::getPi() throw()
-//{
-//    static Int24 v (3);
-//    return v;
-//}
-//
-//const Int24& Int24::getTwoPi() throw()
-//{
-//    static Int24 v (6);
-//    return v;
-//}
-
 std::istream& operator>> (std::istream &inputStream, Int24& value)
 {
     int intValue;

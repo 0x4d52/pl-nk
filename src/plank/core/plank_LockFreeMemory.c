@@ -36,106 +36,106 @@
  -------------------------------------------------------------------------------
  */
 
-#include "plank_StandardHeader.h"
-#include "plank_LockFreeMemory.h"
-
-PlankLockFreeMemoryRef pl_LockFreeMemory_CreateAndInit()
-{
-    PlankLockFreeMemoryRef p;
-    p = pl_LockFreeMemory_Create();
-    
-    if (p != PLANK_NULL)
-    {
-        if (pl_LockFreeMemory_Init (p) != PlankResult_OK)
-            pl_LockFreeMemory_Destroy (p);
-        else
-            return p;
-    }
-    
-    return PLANK_NULL;  
-}
-
-PlankLockFreeMemoryRef pl_LockFreeMemory_Create()
-{
-    PlankMemoryRef m;
-    PlankLockFreeMemoryRef p;
-    
-    m = pl_MemoryGlobal(); // OK, creation of this isn't itself necessarily lock free
-    p = (PlankLockFreeMemoryRef)pl_Memory_AllocateBytes (m, sizeof (PlankLockFreeMemory));
-    
-    if (p != PLANK_NULL)
-        pl_MemoryZero (p, sizeof (PlankLockFreeMemory));
-    
-    return p;
-}
-
-PlankResult pl_LockFreeMemory_Init (PlankLockFreeMemoryRef p)
-{
-    PlankResult result = PlankResult_OK;
-    int i, size;
-        
-    for (i = 0, size = 8; i < PLANKLOCKFREEMEMORY_NUMSIZECLASSES; ++i, size += 8)
-    {
-        PlankLockFreeMemorySizeClassRef sizeClass = &p->sizeClasses[i];
-        pl_LockFreeStack_Init (&sizeClass->partial);
-        sizeClass->size = size;
-        sizeClass->superBlockSize = PLANKLOCKFREEMEMORY_SUPERBLOCKSIZE;
-    }
-
-    return result;
-}
-
-PlankResult pl_LockFreeMemory_DeInit (PlankLockFreeMemoryRef p)
-{
-    PlankResult result = PlankResult_OK;
-    int i;
-
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }    
-    
-    for (i = 0; i < PLANKLOCKFREEMEMORY_NUMSIZECLASSES; ++i)
-    {
-        PlankLockFreeMemorySizeClassRef sizeClass = &p->sizeClasses[i];
-        pl_LockFreeStack_DeInit (&sizeClass->partial);
-    }
-
-exit:
-    return result;
-}
-
-PlankResult pl_LockFreeMemory_Destroy (PlankLockFreeMemoryRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_LockFreeMemory_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);   
-    
-exit:
-    return result;        
-}
-
-void* pl_LockFreeMemory_AllocateBytes (PlankLockFreeMemoryRef p, PlankUL numBytes)
-{
-	(void)p;
-	(void)numBytes;
-    return PLANK_NULL;
-}
-
-PlankResult pl_LockFreeMemory_Free (PlankLockFreeMemoryRef p, void* ptr)
-{
-	(void)p;
-	(void)ptr;
-    return PlankResult_UnknownError;
-}
+//#include "plank_StandardHeader.h"
+//#include "plank_LockFreeMemory.h"
+//
+//PlankLockFreeMemoryRef pl_LockFreeMemory_CreateAndInit()
+//{
+//    PlankLockFreeMemoryRef p;
+//    p = pl_LockFreeMemory_Create();
+//    
+//    if (p != PLANK_NULL)
+//    {
+//        if (pl_LockFreeMemory_Init (p) != PlankResult_OK)
+//            pl_LockFreeMemory_Destroy (p);
+//        else
+//            return p;
+//    }
+//    
+//    return PLANK_NULL;  
+//}
+//
+//PlankLockFreeMemoryRef pl_LockFreeMemory_Create()
+//{
+//    PlankMemoryRef m;
+//    PlankLockFreeMemoryRef p;
+//    
+//    m = pl_MemoryGlobal(); // OK, creation of this isn't itself necessarily lock free
+//    p = (PlankLockFreeMemoryRef)pl_Memory_AllocateBytes (m, sizeof (PlankLockFreeMemory));
+//    
+//    if (p != PLANK_NULL)
+//        pl_MemoryZero (p, sizeof (PlankLockFreeMemory));
+//    
+//    return p;
+//}
+//
+//PlankResult pl_LockFreeMemory_Init (PlankLockFreeMemoryRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    int i, size;
+//        
+//    for (i = 0, size = 8; i < PLANKLOCKFREEMEMORY_NUMSIZECLASSES; ++i, size += 8)
+//    {
+//        PlankLockFreeMemorySizeClassRef sizeClass = &p->sizeClasses[i];
+//        pl_LockFreeStack_Init (&sizeClass->partial);
+//        sizeClass->size = size;
+//        sizeClass->superBlockSize = PLANKLOCKFREEMEMORY_SUPERBLOCKSIZE;
+//    }
+//
+//    return result;
+//}
+//
+//PlankResult pl_LockFreeMemory_DeInit (PlankLockFreeMemoryRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    int i;
+//
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }    
+//    
+//    for (i = 0; i < PLANKLOCKFREEMEMORY_NUMSIZECLASSES; ++i)
+//    {
+//        PlankLockFreeMemorySizeClassRef sizeClass = &p->sizeClasses[i];
+//        pl_LockFreeStack_DeInit (&sizeClass->partial);
+//    }
+//
+//exit:
+//    return result;
+//}
+//
+//PlankResult pl_LockFreeMemory_Destroy (PlankLockFreeMemoryRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankMemoryRef m = pl_MemoryGlobal();
+//    
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }
+//    
+//    if ((result = pl_LockFreeMemory_DeInit (p)) != PlankResult_OK)
+//        goto exit;
+//    
+//    result = pl_Memory_Free (m, p);   
+//    
+//exit:
+//    return result;        
+//}
+//
+//void* pl_LockFreeMemory_AllocateBytes (PlankLockFreeMemoryRef p, PlankUL numBytes)
+//{
+//	(void)p;
+//	(void)numBytes;
+//    return PLANK_NULL;
+//}
+//
+//PlankResult pl_LockFreeMemory_Free (PlankLockFreeMemoryRef p, void* ptr)
+//{
+//	(void)p;
+//	(void)ptr;
+//    return PlankResult_UnknownError;
+//}

@@ -220,4 +220,5 @@ typedef AtomicValue<char*>              AtomicPointer;
 typedef AtomicExtended<char*>           AtomicExtendedPointer;
 typedef AtomicExtended<Dynamic*>        AtomicDynamicPointer;
 
+
 #endif // PLONK_CONTAINERFORWARDDECLARATIONS_H

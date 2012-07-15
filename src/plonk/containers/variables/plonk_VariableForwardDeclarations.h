@@ -63,7 +63,7 @@ typedef Variable<LongLong>  LongLongVariable;
 typedef Variable<char>      CharVariable;
 typedef Variable<bool>      BoolVariable;
 
-// these don't really store references, they're just used to maninulate the compiler
+// these don't really store references, they're just used to manipulate the compiler
 typedef Variable<AtomicFloat&>               AtomicFloatVariable;
 typedef Variable<AtomicDouble&>              AtomicDoubleVariable;
 typedef Variable<AtomicInt&>                 AtomicIntVariable;
@@ -72,6 +72,5 @@ typedef Variable<AtomicLongLong&>            AtomicLongLongVariable;
 typedef Variable<AtomicPointer&>             AtomicPointerVariable;
 typedef Variable<AtomicExtendedPointer&>     AtomicExtendedPointerVariable;
 typedef Variable<AtomicDynamicPointer&>      AtomicDynamicPointerVariable;
-
 
 #endif // PLONK_VARIABLEFORWARDDECLARATIONS_H

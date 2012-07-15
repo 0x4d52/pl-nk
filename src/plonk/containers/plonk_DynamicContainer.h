@@ -146,7 +146,7 @@ public:
     inline operator const Dynamic& () const throw()         { return *this; }        
     inline operator Dynamic& () throw()                     { return *this; } 
 #endif
-    inline bool isItemNull() const throw()                  { return this->getInternal()->isNull();}
+    inline bool isItemNull() const throw()                  { return this->getInternal()->isNull(); }
     inline bool isItemNotNull() const throw()               { return this->getInternal()->isNotNull(); }
         
     template<class ContainerType>
@@ -164,7 +164,7 @@ public:
         plonk_assert (TypeUtility<ContainerType>::getTypeCode() == this->getTypeCode());
         return reinterpret_cast<ContainerType&> (this->getItem());
     }
-    
+        
     template<class ContainerType>
     inline ContainerType as() const throw()
     {              
@@ -173,7 +173,7 @@ public:
         else
             return reinterpret_cast<const ContainerType&> (this->getItem());
     }
-    
+        
     Dynamic getMaxBlockSize() const throw();    
     Dynamic getMaxSampleRate() const throw();
     int getNumChannels() const throw();

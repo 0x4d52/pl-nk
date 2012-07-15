@@ -364,6 +364,7 @@
 		A8EF74C615ACBA1E0059E3A9 /* plink_WhiteNoise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_WhiteNoise.c; sourceTree = "<group>"; };
 		A8EF74C715ACBA1E0059E3A9 /* plink_WhiteNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_WhiteNoise.h; sourceTree = "<group>"; };
 		A8EF74C915ACBF920059E3A9 /* plank_RNGInline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plank_RNGInline.h; sourceTree = "<group>"; };
+		A8FE7C8D15B2A6D70097B154 /* plonk_PatchChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_PatchChannel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -924,6 +925,7 @@
 				A82417ED15911595004CA012 /* plonk_ConstantChannel.h */,
 				A82417EE15911595004CA012 /* plonk_LinearPanChannel.h */,
 				A82417EF15911595004CA012 /* plonk_Mixers.h */,
+				A8FE7C8D15B2A6D70097B154 /* plonk_PatchChannel.h */,
 				A82417F015911595004CA012 /* plonk_UnaryOpChannel.h */,
 				A82417F115911595004CA012 /* plonk_UnaryOpPlink.h */,
 				A82417F215911595004CA012 /* plonk_VariableChannel.h */,

@@ -171,6 +171,9 @@ int Dynamic::getNumChannels() const throw()
         case TypeCode::AtomicDoubleVariable:
         case TypeCode::AtomicIntVariable: 
         case TypeCode::AtomicLongVariable: 
+        case TypeCode::AtomicPointerVariable:
+        case TypeCode::AtomicExtendedPointerVariable: 
+        case TypeCode::AtomicDynamicPointerVariable:
             
         case TypeCode::FloatArray:
         case TypeCode::DoubleArray:

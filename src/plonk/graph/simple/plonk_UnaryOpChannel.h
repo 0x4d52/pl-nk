@@ -197,7 +197,7 @@ public:
         }
         else if (operandBufferLength == 1)
         {
-            SampleType value (op (operandSamples[0]));
+            const SampleType value (op (operandSamples[0]));
             
             for (i = 0; i < outputBufferLength; ++i) 
                 outputSamples[i] = value;

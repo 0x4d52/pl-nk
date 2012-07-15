@@ -135,27 +135,27 @@ typedef BusBuffer<short>                ShortBus;
 typedef BusBuffer<Long>                 LongBus;
 
 #define PLONK_BUSARRAYBASETYPE NumericalArray
-typedef PLONK_BUSARRAYBASETYPE<FloatBus>      FloatBusses;
-typedef PLONK_BUSARRAYBASETYPE<DoubleBus>     DoubleBusses;
-typedef PLONK_BUSARRAYBASETYPE<IntBus>        IntBusses;
-typedef PLONK_BUSARRAYBASETYPE<Int24Bus>      Int24Busses;
-typedef PLONK_BUSARRAYBASETYPE<ShortBus>      ShortBusses;
-typedef PLONK_BUSARRAYBASETYPE<LongBus>       LongBusses;
+typedef PLONK_BUSARRAYBASETYPE<FloatBus>                    FloatBusses;
+typedef PLONK_BUSARRAYBASETYPE<DoubleBus>                   DoubleBusses;
+typedef PLONK_BUSARRAYBASETYPE<IntBus>                      IntBusses;
+typedef PLONK_BUSARRAYBASETYPE<Int24Bus>                    Int24Busses;
+typedef PLONK_BUSARRAYBASETYPE<ShortBus>                    ShortBusses;
+typedef PLONK_BUSARRAYBASETYPE<LongBus>                     LongBusses;
 
 #define PLONK_UNITBASETYPE NumericalArray
-typedef PLONK_UNITBASETYPE<FloatUnit>  FloatUnitRaw;
-typedef PLONK_UNITBASETYPE<DoubleUnit> DoubleUnitRaw;
-typedef PLONK_UNITBASETYPE<ShortUnit>  ShortUnitRaw;
-typedef PLONK_UNITBASETYPE<IntUnit>    IntUnitRaw;
-typedef PLONK_UNITBASETYPE<Int24Unit>  Int24UnitRaw;
-typedef PLONK_UNITBASETYPE<LongUnit>   LongUnitRaw;
+typedef PLONK_UNITBASETYPE<FloatUnit>                       FloatUnitRaw;
+typedef PLONK_UNITBASETYPE<DoubleUnit>                      DoubleUnitRaw;
+typedef PLONK_UNITBASETYPE<ShortUnit>                       ShortUnitRaw;
+typedef PLONK_UNITBASETYPE<IntUnit>                         IntUnitRaw;
+typedef PLONK_UNITBASETYPE<Int24Unit>                       Int24UnitRaw;
+typedef PLONK_UNITBASETYPE<LongUnit>                        LongUnitRaw;
 
-typedef NumericalArray2D<FloatChannel,FloatUnit>    FloatUnits;
-typedef NumericalArray2D<DoubleChannel,DoubleUnit>  DoubleUnits;
-typedef NumericalArray2D<ShortChannel,ShortUnit>    ShortUnits;
-typedef NumericalArray2D<IntChannel,IntUnit>        IntUnits;
-typedef NumericalArray2D<Int24Channel,Int24Unit>    Int24Units;
-typedef NumericalArray2D<LongChannel,LongUnit>      LongUnits;
+typedef NumericalArray2D<FloatChannel,FloatUnit>            FloatUnits;
+typedef NumericalArray2D<DoubleChannel,DoubleUnit>          DoubleUnits;
+typedef NumericalArray2D<ShortChannel,ShortUnit>            ShortUnits;
+typedef NumericalArray2D<IntChannel,IntUnit>                IntUnits;
+typedef NumericalArray2D<Int24Channel,Int24Unit>            Int24Units;
+typedef NumericalArray2D<LongChannel,LongUnit>              LongUnits;
 
 
 // default types
@@ -168,6 +168,7 @@ typedef NumericalArray2D<PLONK_TYPE_DEFAULT>                Buffers;
 typedef BusBuffer<PLONK_TYPE_DEFAULT>                       Bus;
 typedef PLONK_BUSARRAYBASETYPE<Bus>                         Busses;
 
+//typedef AtomicDynamicPointerVariable                        PatchSource;
 
 
 

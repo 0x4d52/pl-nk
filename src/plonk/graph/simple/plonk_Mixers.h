@@ -57,14 +57,14 @@ class ChannelMixerChannelInternal
 :   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)    Data;
-    typedef ChannelBase<SampleType>                                     ChannelType;
-    typedef ChannelMixerChannelInternal<SampleType>                     ChannelMixerInternal;
-    typedef ChannelInternal<SampleType,Data>                            Internal;
-    typedef ChannelInternalBase<SampleType>                             InternalBase;
-    typedef UnitBase<SampleType>                                        UnitType;
-    typedef InputDictionary                                             Inputs;
-    typedef NumericalArray<SampleType>                                  Buffer;
+    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)  Data;
+    typedef ChannelBase<SampleType>                                         ChannelType;
+    typedef ChannelMixerChannelInternal<SampleType>                         ChannelMixerInternal;
+    typedef ChannelInternal<SampleType,Data>                                Internal;
+    typedef ChannelInternalBase<SampleType>                                 InternalBase;
+    typedef UnitBase<SampleType>                                            UnitType;
+    typedef InputDictionary                                                 Inputs;
+    typedef NumericalArray<SampleType>                                      Buffer;
     
     ChannelMixerChannelInternal (Inputs const& inputs, 
                                  Data const& data, 
@@ -177,13 +177,13 @@ class UnitMixerChannelInternal
 :   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)   Data;
-    typedef ChannelBase<SampleType>                                 ChannelType;
-    typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
-    typedef UnitBase<SampleType>                                    UnitType;
-    typedef InputDictionary                                         Inputs;
-    typedef NumericalArray<SampleType>                              Buffer;
-    typedef NumericalArray2D<ChannelType,UnitType>                  UnitsType;
+    typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType) Data;
+    typedef ChannelBase<SampleType>                                     ChannelType;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
+    typedef UnitBase<SampleType>                                        UnitType;
+    typedef InputDictionary                                             Inputs;
+    typedef NumericalArray<SampleType>                                  Buffer;
+    typedef NumericalArray2D<ChannelType,UnitType>                      UnitsType;
         
     UnitMixerChannelInternal (Inputs const& inputs, 
                               Data const& data, 
@@ -357,10 +357,6 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {           
-        /*
-         for full templating we'd need to add template params for mul + add unit types
-         */
-
         typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType) Data;
 
         Inputs inputs;
@@ -384,10 +380,6 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
-        /*
-         for full templating we'd need to add template params for mul + add unit types
-         */
-
         typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType) Data;
 
         Inputs inputs;

@@ -713,7 +713,7 @@ PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL old
 #if PLANK_64BIT
 PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
 { 
-    PlankAtomicPX oldAll; // = { oldPtr, oldExtra };
+    PlankAtomicPX oldAll;
 	oldAll.ptr = oldPtr;
 	oldAll.extra = oldExtra;
     return _InterlockedCompareExchange128 ((volatile __int64*)p,

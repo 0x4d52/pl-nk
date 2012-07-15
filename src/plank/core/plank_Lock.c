@@ -91,7 +91,9 @@ exit:
 }
 
 //------------------------------------------------------------------------------
+
 #if PLANK_APPLE
+
 PlankResult pl_Lock_Init (PlankLockRef p)
 {
     PlankResult result = PlankResult_OK;
@@ -154,10 +156,13 @@ void pl_Lock_Signal (PlankLockRef p)
 {
     pthread_cond_signal(&p->condition);
 }
+
 #endif // PLANK_APPLE
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
+
 #if PLANK_WIN
 PlankResult pl_Lock_Init (PlankLockRef p)
 {
@@ -226,7 +231,9 @@ void pl_Lock_Signal (PlankLockRef p)
 {
     SetEvent (p->condition);
 }
+
 #endif // PLANK_WIN
+
 //------------------------------------------------------------------------------
 
 
