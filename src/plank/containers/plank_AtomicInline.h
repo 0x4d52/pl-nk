@@ -39,6 +39,66 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
+
+//------------------------------------------------------------------------------
+
+
+#if !DOXYGEN
+typedef struct PlankAtomicI
+{
+    volatile PlankI value;
+} PlankAtomicI;
+
+typedef struct PlankAtomicL
+{
+    volatile PlankL value;
+} PlankAtomicL;
+
+typedef struct PlankAtomicLL
+{
+    volatile PlankLL value;
+#if PLANK_NOATOMIC64BIT
+    PlankLockRef lock;
+#endif
+} PlankAtomicLL;
+
+typedef struct PlankAtomicF
+{
+    volatile PlankF value;
+} PlankAtomicF;
+
+typedef struct PlankAtomicD
+{
+    volatile PlankD value;
+#if PLANK_NOATOMIC64BIT
+    PlankLockRef lock;
+#endif    
+} PlankAtomicD;
+
+typedef struct PlankAtomicP
+{
+    volatile PlankP ptr;
+} PlankAtomicP;
+
+typedef struct PlankAtomicPX
+{
+    volatile PlankP ptr;
+    volatile PlankL extra;
+#if PLANK_NOATOMIC64BIT
+    PlankLockRef lock;
+#endif    
+} PlankAtomicPX;
+
+typedef struct PlankAtomicLX
+{
+    volatile PlankL value;
+    volatile PlankL extra;
+#if PLANK_NOATOMIC64BIT
+    PlankLockRef lock;
+#endif    
+} PlankAtomicLX;
+#endif
+
 static inline void pl_AtomicMemoryBarrier()
 {
 #if PLANK_APPLE
@@ -92,6 +152,11 @@ static inline PlankI pl_AtomicI_Get (PlankAtomicIRef p)
     return pl_AtomicI_Add (p, 0);
 }
 
+static inline PlankI pl_AtomicI_GetUnchecked (PlankAtomicIRef p)
+{
+    return p->value;
+}
+
 static inline PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newValue)
 {
     PlankI oldValue;
@@ -103,6 +168,19 @@ static inline PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newValue)
     } while (!success);
     
     return oldValue;
+}
+
+static inline void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtomicIRef p2)
+{
+//    PlankI oldValue;
+//    PlankB success;
+//    
+//    do {
+//        oldValue = *(PlankI*)p;
+//        success = pl_AtomicI_CompareAndSwap (p, oldValue, newValue);
+//    } while (!success);
+//    
+//    return oldValue;
 }
 
 static inline void pl_AtomicI_Set (PlankAtomicIRef p, PlankI newValue)
@@ -161,6 +239,11 @@ static inline PlankL pl_AtomicL_Get (PlankAtomicLRef p)
     return pl_AtomicL_Add (p, (PlankL)0);
 }
 
+static inline PlankL pl_AtomicL_GetUnchecked (PlankAtomicLRef p)
+{
+    return p->value;
+}
+
 static inline PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newValue)
 {
     PlankL oldValue;
@@ -172,6 +255,19 @@ static inline PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newValue)
     } while (!success);
     
     return oldValue;
+}
+
+static inline void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtomicLRef p2)
+{
+//    PlankL oldValue;
+//    PlankB success;
+//    
+//    do {
+//        oldValue = *(PlankL*)p;
+//        success = pl_AtomicL_CompareAndSwap (p, oldValue, newValue);
+//    } while (!success);
+//    
+//    return oldValue;
 }
 
 static inline void pl_AtomicL_Set (PlankAtomicLRef p, PlankL newValue)
@@ -270,6 +366,11 @@ static inline PlankLL pl_AtomicLL_Get (PlankAtomicLLRef p)
     return pl_AtomicLL_Add (p, (PlankLL)0);
 }
 
+static inline PlankLL pl_AtomicLL_GetUnchecked (PlankAtomicLLRef p)
+{
+    return p->value;
+}
+
 static inline PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL newValue)
 {
     PlankLL oldValue;
@@ -281,6 +382,19 @@ static inline PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL newValue)
     } while (!success);
     
     return oldValue;
+}
+
+static inline void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAtomicLLRef p2)
+{
+//    PlankLL oldValue;
+//    PlankB success;
+//    
+//    do {
+//        oldValue = *(PlankLL*)p;
+//        success = pl_AtomicLL_CompareAndSwap (p, oldValue, newValue);
+//    } while (!success);
+//    
+//    return oldValue;
 }
 
 static inline void pl_AtomicLL_Set (PlankAtomicLLRef p, PlankLL newValue)
@@ -367,6 +481,11 @@ static inline PlankF pl_AtomicF_Get (PlankAtomicFRef p)
     return *(PlankF*)&bits;
 }
 
+static inline PlankF pl_AtomicF_GetUnchecked (PlankAtomicFRef p)
+{
+    return  p->value;
+}
+
 static inline PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newValue)
 {
     PlankF oldValue;
@@ -379,6 +498,20 @@ static inline PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newValue)
     } while (!success);
     
     return oldValue;
+}
+
+static inline void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtomicFRef p2)
+{
+//    PlankF oldValue;
+//    PlankB success;
+//    
+//    do
+//    {
+//        oldValue = *(PlankF*)p;
+//        success = pl_AtomicF_CompareAndSwap (p, oldValue, newValue);
+//    } while (!success);
+//    
+//    return oldValue;
 }
 
 static inline void pl_AtomicF_Set (PlankAtomicFRef p, PlankF newValue)
@@ -442,6 +575,11 @@ static inline PlankD pl_AtomicD_Get (PlankAtomicDRef p)
     return *(PlankD*)&bits;
 }
 
+static inline PlankD pl_AtomicD_GetUnchecked (PlankAtomicDRef p)
+{
+    return p->value;
+}
+
 static inline PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newValue)
 {
     PlankD oldValue;
@@ -453,6 +591,19 @@ static inline PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newValue)
     } while (!success);
     
     return oldValue;
+}
+
+static inline void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtomicDRef p2)
+{
+//    PlankD oldValue;
+//    PlankB success;
+//    
+//    do {
+//        oldValue = *(PlankD*)p;
+//        success = pl_AtomicD_CompareAndSwap (p, oldValue, newValue);
+//    } while (!success);
+//    
+//    return oldValue;
 }
 
 static inline void pl_AtomicD_Set (PlankAtomicDRef p, PlankD newValue)
@@ -528,6 +679,11 @@ static inline PlankP pl_AtomicP_Get (PlankAtomicPRef p)
     return pl_AtomicP_Add (p, (PlankL)0);
 }
 
+static inline PlankP pl_AtomicP_GetUnchecked (PlankAtomicPRef p)
+{
+    return p->ptr;
+}
+
 static inline PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr)
 {
     PlankP oldPtr;
@@ -539,6 +695,19 @@ static inline PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr)
     } while (!success);
     
     return oldPtr;    
+}
+
+static inline void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtomicPRef p2)
+{
+//    PlankP oldPtr;
+//    PlankB success;
+//    
+//    do {
+//        oldPtr = *(PlankP*)p;
+//        success = pl_AtomicP_CompareAndSwap (p, oldPtr, newPtr);
+//    } while (!success);
+//    
+//    return oldPtr;    
 }
 
 static inline void pl_AtomicP_Set (PlankAtomicPRef p, PlankP newPtr)
@@ -633,64 +802,6 @@ static inline PlankP pl_AtomicP_Decrement (PlankAtomicPRef p)
 }
 
 
-//------------------------------------------------------------------------------
-
-
-#if !DOXYGEN
-typedef struct PlankAtomicI
-{
-    volatile PlankI value;
-} PlankAtomicI;
-
-typedef struct PlankAtomicL
-{
-    volatile PlankL value;
-} PlankAtomicL;
-
-typedef struct PlankAtomicLL
-{
-    volatile PlankLL value;
-#if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
-#endif
-} PlankAtomicLL;
-
-typedef struct PlankAtomicF
-{
-    volatile PlankF value;
-} PlankAtomicF;
-
-typedef struct PlankAtomicD
-{
-    volatile PlankD value;
-#if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
-#endif    
-} PlankAtomicD;
-
-typedef struct PlankAtomicP
-{
-    volatile PlankP ptr;
-} PlankAtomicP;
-
-typedef struct PlankAtomicPX
-{
-    volatile PlankP ptr;
-    volatile PlankL extra;
-#if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
-#endif    
-} PlankAtomicPX;
-
-typedef struct PlankAtomicLX
-{
-    volatile PlankL value;
-    volatile PlankL extra;
-#if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
-#endif    
-} PlankAtomicLX;
-#endif
 
 
 #endif //PLANK_INLINING_FUNCTIONS

@@ -91,6 +91,12 @@ PlankI pl_AtomicI_GetExtra (PlankAtomicIRef p)
     return 0;
 }
 
+PlankI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p)
+{
+    (void)p;
+    return 0;
+}
+
 //------------------------------------------------------------------------------
 
 PlankAtomicLRef pl_AtomicL_CreateAndInit()
@@ -138,6 +144,12 @@ PlankResult pl_AtomicL_Destroy (PlankAtomicLRef p)
 }
 
 PlankL pl_AtomicL_GetExtra (PlankAtomicLRef p)
+{
+    (void)p;
+    return (PlankL)0;
+}
+
+PlankL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p)
 {
     (void)p;
     return (PlankL)0;
@@ -230,6 +242,12 @@ PlankLL pl_AtomicLL_GetExtra (PlankAtomicLLRef p)
     return (PlankLL)0;
 }
 
+PlankLL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p)
+{
+    (void)p;
+    return (PlankLL)0;
+}
+
 
 #if PLANK_APPLE && PLANK_PPC
  PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
@@ -299,6 +317,12 @@ PlankResult pl_AtomicF_Destroy (PlankAtomicFRef p)
 }
 
 PlankI pl_AtomicF_GetExtra (PlankAtomicFRef p)
+{
+    (void)p;
+    return 0;
+}
+
+PlankI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p)
 {
     (void)p;
     return 0;
@@ -391,6 +415,12 @@ PlankLL pl_AtomicD_GetExtra (PlankAtomicDRef p)
     return (PlankLL)0;
 }
 
+PlankLL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p)
+{
+    (void)p;
+    return (PlankLL)0;
+}
+
 //------------------------------------------------------------------------------
 
 PlankAtomicPRef pl_AtomicP_CreateAndInit()
@@ -439,6 +469,12 @@ PlankResult pl_AtomicP_Destroy (PlankAtomicPRef p)
 }
 
 PlankL pl_AtomicP_GetExtra (PlankAtomicPRef p)
+{
+	(void)p;
+    return (PlankL)0;
+}
+
+PlankL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p)
 {
 	(void)p;
     return (PlankL)0;
@@ -531,9 +567,19 @@ PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
     return pl_AtomicP_Get ((PlankAtomicPRef)p);
 }
 
+PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
+{
+    return p->ptr;
+}
+
 PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
 {
     return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
+}
+
+PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
+{
+    return p->extra;
 }
 
 PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
@@ -811,9 +857,19 @@ PlankL pl_AtomicLX_Get (PlankAtomicLXRef p)
     return pl_AtomicL_Get ((PlankAtomicLRef)p);
 }
 
+PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p)
+{
+    return p->value;
+}
+
 PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
 {
     return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
+}
+
+PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)
+{
+    return p->extra;
 }
 
 PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra, PlankL* oldExtraPtr)

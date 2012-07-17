@@ -95,20 +95,33 @@ PlankResult pl_AtomicI_DeInit (PlankAtomicIRef p);
 PlankResult pl_AtomicI_Destroy (PlankAtomicIRef p);
 
 /** Get the current value. 
+ This is done by adding zero to the current value and returning the result.
  @param p The <i>Plank %AtomicI</i> object. 
  @return The value. */
 static PlankI pl_AtomicI_Get (PlankAtomicIRef p);
+
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicI</i> object. 
+ @return The value. */
+static PlankI pl_AtomicI_GetUnchecked (PlankAtomicIRef p);
 
 /** Not used for this class. 
  @param p The <i>Plank %AtomicI</i> object. 
  @return Always returns 0. */
 PlankI pl_AtomicI_GetExtra (PlankAtomicIRef p);
 
+/** Not used for this class. 
+ @param p The <i>Plank %AtomicI</i> object. 
+ @return Always returns 0. */
+PlankI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p);
+
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicI</i> object. 
  @param newValue The new value to store.
  @return The previously stored value. */
 static PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newValue);
+
+static void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtomicIRef p2);
 
 /** Set the current value to a new value. 
  @param p The <i>Plank %AtomicI</i> object. 
@@ -195,16 +208,28 @@ PlankResult pl_AtomicL_Destroy (PlankAtomicLRef p);
  @return The value. */
 static PlankL pl_AtomicL_Get (PlankAtomicLRef p);
 
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicL</i> object. 
+ @return The value. */
+static PlankL pl_AtomicL_GetUnchecked (PlankAtomicLRef p);
+
 /** Not used for this class. 
  @param p The <i>Plank %AtomicL</i> object. 
  @return Always returns 0. */
 PlankL pl_AtomicL_GetExtra (PlankAtomicLRef p);
+
+/** Not used for this class. 
+ @param p The <i>Plank %AtomicL</i> object. 
+ @return Always returns 0. */
+PlankL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicL</i> object. 
  @param newValue The new value to store.
  @return The previously stored value. */
 static PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newValue);
+
+static void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtomicLRef p2);
 
 /** Set the current value to a new value. 
  @param p The <i>Plank %AtomicL</i> object. 
@@ -292,16 +317,28 @@ PlankResult pl_AtomicLL_Destroy (PlankAtomicLLRef p);
  @return The value. */
 static PlankLL pl_AtomicLL_Get (PlankAtomicLLRef p);
 
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicLL</i> object. 
+ @return The value. */
+static PlankLL pl_AtomicLL_GetUnchecked (PlankAtomicLLRef p);
+
 /** Not used for this class. 
  @param p The <i>Plank %AtomicLL</i> object. 
  @return Always returns 0. */
 PlankLL pl_AtomicLL_GetExtra (PlankAtomicLLRef p);
+
+/** Not used for this class. 
+ @param p The <i>Plank %AtomicLL</i> object. 
+ @return Always returns 0. */
+PlankLL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicLL</i> object. 
  @param newValue The new value to store.
  @return The previously stored value. */
 static PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL newValue);
+
+static void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAtomicLLRef p2);
 
 /** Set the current value to a new value. 
  @param p The <i>Plank %AtomicLL</i> object. 
@@ -389,16 +426,28 @@ PlankResult pl_AtomicF_Destroy (PlankAtomicFRef p);
  @return The value. */
 static PlankF pl_AtomicF_Get (PlankAtomicFRef p);
 
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicF</i> object. 
+ @return The value. */
+static PlankF pl_AtomicF_GetUnchecked (PlankAtomicFRef p);
+
 /** Not used for this class. 
  @param p The <i>Plank %AtomicF</i> object. 
  @return Always returns 0. */
 PlankI pl_AtomicF_GetExtra (PlankAtomicFRef p);
+
+/** Not used for this class. 
+ @param p The <i>Plank %AtomicF</i> object. 
+ @return Always returns 0. */
+PlankI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicF</i> object. 
  @param newValue The new value to store.
  @return The previously stored value. */
 static PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newValue);
+
+static void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtomicFRef p2);
 
 /** Set the current value to a new value. 
  @param p The <i>Plank %AtomicF</i> object. 
@@ -492,16 +541,28 @@ PlankResult pl_AtomicD_Destroy (PlankAtomicDRef p);
  @return The value. */
 static PlankD pl_AtomicD_Get (PlankAtomicDRef p);
 
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicD</i> object. 
+ @return The value. */
+static PlankD pl_AtomicD_GetUnchecked (PlankAtomicDRef p);
+
 /** Not used for this class. 
  @param p The <i>Plank %AtomicD</i> object. 
  @return Always returns 0. */
 PlankLL pl_AtomicD_GetExtra (PlankAtomicDRef p);
+
+/** Not used for this class. 
+ @param p The <i>Plank %AtomicD</i> object. 
+ @return Always returns 0. */
+PlankLL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p);
 
 /** Swap the current value with a new value. 
  @param p The <i>Plank %AtomicD</i> object. 
  @param newValue The new value to store.
  @return The previously stored value. */
 static PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newValue);
+
+static void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtomicDRef p2);
 
 /** Set the current value to a new value. 
  @param p The <i>Plank %AtomicD</i> object. 
@@ -594,17 +655,30 @@ PlankResult pl_AtomicP_Destroy (PlankAtomicPRef p);
  @return The value. */
 static PlankP pl_AtomicP_Get (PlankAtomicPRef p);
 
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicP</i> object. 
+ @return The value. */
+static PlankP pl_AtomicP_GetUnchecked (PlankAtomicPRef p);
+
 /** Not used for this class. 
  Use @link PlankAtomicPXClass AtomicPX @endlink for safer pointer storage.
  @param p The <i>Plank %AtomicI</i> object. 
  @return Always returns 0. */
 PlankL pl_AtomicP_GetExtra (PlankAtomicPRef p);
 
+/** Not used for this class. 
+ Use @link PlankAtomicPXClass AtomicPX @endlink for safer pointer storage.
+ @param p The <i>Plank %AtomicI</i> object. 
+ @return Always returns 0. */
+PlankL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p);
+
 /** Swap the current pointer with a new pointer. 
  @param p The <i>Plank %AtomicP</i> object. 
  @param newPtr The new value to store.
  @return The previously stored pointer. */
 static PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr);
+
+static void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtomicPRef p2);
 
 /** Set the current pointer to a new pointer. 
  @param p The <i>Plank %AtomicP</i> object. 
@@ -702,12 +776,24 @@ PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p);
  @return The value. */
 PlankP pl_AtomicPX_Get (PlankAtomicPXRef p);
 
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicPX</i> object. 
+ @return The value. */
+PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p);
+
 /** Get the current value of the extra "tag". 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The extra tag. */
 PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p);
+
+/** Get the current value of the extra "tag" nonatomically. 
+ Many algorithms the user doesn't need to know the value of the tag as it is 
+ simply used to make each write commit unique.
+ @param p The <i>Plank %AtomicPX</i> object. 
+ @return The extra tag. */
+PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p);
 
 /** Swap the current pointer with a new pointer and change the tag. 
  @param p The <i>Plank %AtomicPX</i> object. 
@@ -723,6 +809,8 @@ PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, 
  @param newPtr The new pointer to store.
  @return The previously stored value. */
 PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr);
+
+void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2);
 
 /** Set the current pointer to a new pointer and change the tag. 
  @param p The <i>Plank %AtomicPX</i> object. 
@@ -837,12 +925,24 @@ PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p);
  @return The value. */
 PlankL pl_AtomicLX_Get (PlankAtomicLXRef p);
 
+/** Get the current value nonatomically. 
+ @param p The <i>Plank %AtomicLX</i> object. 
+ @return The value. */
+PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p);
+
 /** Get the current value of the extra "tag". 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicLX</i> object. 
  @return The extra tag. */
 PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p);
+
+/** Get the current value of the extra "tag" nonatomically. 
+ Many algorithms the user doesn't need to know the value of the tag as it is 
+ simply used to make each write commit unique.
+ @param p The <i>Plank %AtomicLX</i> object. 
+ @return The extra tag. */
+PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p);
 
 /** Swap the current pointer with a new pointer and change the tag. 
  @param p The <i>Plank %AtomicLX</i> object. 
@@ -858,6 +958,8 @@ PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra
  @param newValue The new pointer to store.
  @return The previously stored value. */
 PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue);
+
+void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2);
 
 /** Set the current value to a new value and change the tag. 
  @param p The <i>Plank %AtomicLX</i> object. 
