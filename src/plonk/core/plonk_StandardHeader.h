@@ -78,10 +78,12 @@
 
 #if PLANK_32BIT
 #define PLONK_32BIT 1
+#define PLONK_WORDSIZE 4
 #endif
 
 #if PLANK_64BIT
 #define PLONK_64BIT 1
+#define PLONK_WORDSIZE 8
 #endif
 
 #ifdef PLONK_USEPLINK

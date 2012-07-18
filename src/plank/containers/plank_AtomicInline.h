@@ -172,15 +172,16 @@ static inline PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newValue)
 
 static inline void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtomicIRef p2)
 {
-//    PlankI oldValue;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = *(PlankI*)p;
-//        success = pl_AtomicI_CompareAndSwap (p, oldValue, newValue);
-//    } while (!success);
-//    
-//    return oldValue;
+    PlankI value1, value2;
+    PlankB success;
+    
+    do {
+        value1 = *(PlankI*)p1;
+        value2 = *(PlankI*)p2;
+        success = pl_AtomicI_CompareAndSwap (p1, value1, value2);
+    } while (!success);
+    
+    *(PlankI*)p2 = value1;
 }
 
 static inline void pl_AtomicI_Set (PlankAtomicIRef p, PlankI newValue)
@@ -259,15 +260,16 @@ static inline PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newValue)
 
 static inline void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtomicLRef p2)
 {
-//    PlankL oldValue;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = *(PlankL*)p;
-//        success = pl_AtomicL_CompareAndSwap (p, oldValue, newValue);
-//    } while (!success);
-//    
-//    return oldValue;
+    PlankL value1, value2;
+    PlankB success;
+    
+    do {
+        value1 = *(PlankL*)p1;
+        value2 = *(PlankL*)p2;
+        success = pl_AtomicL_CompareAndSwap (p1, value1, value2);
+    } while (!success);
+    
+    *(PlankL*)p2 = value1;
 }
 
 static inline void pl_AtomicL_Set (PlankAtomicLRef p, PlankL newValue)
@@ -386,15 +388,16 @@ static inline PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL newValue)
 
 static inline void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAtomicLLRef p2)
 {
-//    PlankLL oldValue;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = *(PlankLL*)p;
-//        success = pl_AtomicLL_CompareAndSwap (p, oldValue, newValue);
-//    } while (!success);
-//    
-//    return oldValue;
+    PlankLL value1, value2;
+    PlankB success;
+    
+    do {
+        value1 = *(PlankLL*)p1;
+        value2 = *(PlankLL*)p2;
+        success = pl_AtomicLL_CompareAndSwap (p1, value1, value2);
+    } while (!success);
+    
+    *(PlankLL*)p2 = value1;
 }
 
 static inline void pl_AtomicLL_Set (PlankAtomicLLRef p, PlankLL newValue)
@@ -502,16 +505,16 @@ static inline PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newValue)
 
 static inline void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtomicFRef p2)
 {
-//    PlankF oldValue;
-//    PlankB success;
-//    
-//    do
-//    {
-//        oldValue = *(PlankF*)p;
-//        success = pl_AtomicF_CompareAndSwap (p, oldValue, newValue);
-//    } while (!success);
-//    
-//    return oldValue;
+    PlankF value1, value2;
+    PlankB success;
+    
+    do {
+        value1 = *(PlankF*)p1;
+        value2 = *(PlankF*)p2;
+        success = pl_AtomicF_CompareAndSwap (p1, value1, value2);
+    } while (!success);
+    
+    *(PlankF*)p2 = value1;
 }
 
 static inline void pl_AtomicF_Set (PlankAtomicFRef p, PlankF newValue)
@@ -595,15 +598,16 @@ static inline PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newValue)
 
 static inline void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtomicDRef p2)
 {
-//    PlankD oldValue;
-//    PlankB success;
-//    
-//    do {
-//        oldValue = *(PlankD*)p;
-//        success = pl_AtomicD_CompareAndSwap (p, oldValue, newValue);
-//    } while (!success);
-//    
-//    return oldValue;
+    PlankD value1, value2;
+    PlankB success;
+    
+    do {
+        value1 = *(PlankD*)p1;
+        value2 = *(PlankD*)p2;
+        success = pl_AtomicD_CompareAndSwap (p1, value1, value2);
+    } while (!success);
+    
+    *(PlankD*)p2 = value1;
 }
 
 static inline void pl_AtomicD_Set (PlankAtomicDRef p, PlankD newValue)
@@ -699,15 +703,16 @@ static inline PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr)
 
 static inline void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtomicPRef p2)
 {
-//    PlankP oldPtr;
-//    PlankB success;
-//    
-//    do {
-//        oldPtr = *(PlankP*)p;
-//        success = pl_AtomicP_CompareAndSwap (p, oldPtr, newPtr);
-//    } while (!success);
-//    
-//    return oldPtr;    
+    PlankP value1, value2;
+    PlankB success;
+    
+    do {
+        value1 = *(PlankP*)p1;
+        value2 = *(PlankP*)p2;
+        success = pl_AtomicP_CompareAndSwap (p1, value1, value2);
+    } while (!success);
+    
+    *(PlankP*)p2 = value1;
 }
 
 static inline void pl_AtomicP_Set (PlankAtomicPRef p, PlankP newPtr)

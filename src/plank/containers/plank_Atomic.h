@@ -121,6 +121,10 @@ PlankI pl_AtomicI_GetExtraUnchecked (PlankAtomicIRef p);
  @return The previously stored value. */
 static PlankI pl_AtomicI_Swap (PlankAtomicIRef p, PlankI newValue);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicI</i> object. 
+ @param p2 The other <i>Plank %AtomicI</i> object. */
 static void pl_AtomicI_SwapOther (PlankAtomicIRef p1, PlankAtomicIRef p2);
 
 /** Set the current value to a new value. 
@@ -229,6 +233,10 @@ PlankL pl_AtomicL_GetExtraUnchecked (PlankAtomicLRef p);
  @return The previously stored value. */
 static PlankL pl_AtomicL_Swap (PlankAtomicLRef p, PlankL newValue);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicL</i> object. 
+ @param p2 The other <i>Plank %AtomicL</i> object. */
 static void pl_AtomicL_SwapOther (PlankAtomicLRef p1, PlankAtomicLRef p2);
 
 /** Set the current value to a new value. 
@@ -338,6 +346,10 @@ PlankLL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p);
  @return The previously stored value. */
 static PlankLL pl_AtomicLL_Swap (PlankAtomicLLRef p, PlankLL newValue);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicLL</i> object. 
+ @param p2 The other <i>Plank %AtomicLL</i> object. */
 static void pl_AtomicLL_SwapOther (PlankAtomicLLRef p1, PlankAtomicLLRef p2);
 
 /** Set the current value to a new value. 
@@ -447,6 +459,10 @@ PlankI pl_AtomicF_GetExtraUnchecked (PlankAtomicFRef p);
  @return The previously stored value. */
 static PlankF pl_AtomicF_Swap (PlankAtomicFRef p, PlankF newValue);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicF</i> object. 
+ @param p2 The other <i>Plank %AtomicF</i> object. */
 static void pl_AtomicF_SwapOther (PlankAtomicFRef p1, PlankAtomicFRef p2);
 
 /** Set the current value to a new value. 
@@ -562,6 +578,10 @@ PlankLL pl_AtomicD_GetExtraUnchecked (PlankAtomicDRef p);
  @return The previously stored value. */
 static PlankD pl_AtomicD_Swap (PlankAtomicDRef p, PlankD newValue);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicD</i> object. 
+ @param p2 The other <i>Plank %AtomicD</i> object. */
 static void pl_AtomicD_SwapOther (PlankAtomicDRef p1, PlankAtomicDRef p2);
 
 /** Set the current value to a new value. 
@@ -678,6 +698,10 @@ PlankL pl_AtomicP_GetExtraUnchecked (PlankAtomicPRef p);
  @return The previously stored pointer. */
 static PlankP pl_AtomicP_Swap (PlankAtomicPRef p, PlankP newPtr);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicP</i> object. 
+ @param p2 The other <i>Plank %AtomicP</i> object. */
 static void pl_AtomicP_SwapOther (PlankAtomicPRef p1, PlankAtomicPRef p2);
 
 /** Set the current pointer to a new pointer. 
@@ -810,6 +834,10 @@ PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, 
  @return The previously stored value. */
 PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicPX</i> object. 
+ @param p2 The other <i>Plank %AtomicPX</i> object. */
 void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2);
 
 /** Set the current pointer to a new pointer and change the tag. 
@@ -959,6 +987,10 @@ PlankL pl_AtomicLX_SwapAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra
  @return The previously stored value. */
 PlankL pl_AtomicLX_Swap (PlankAtomicLXRef p, PlankL newValue);
 
+/** Swap over two values.
+ The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
+ @param p1 One <i>Plank %AtomicLX</i> object. 
+ @param p2 The other <i>Plank %AtomicLX</i> object. */
 void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2);
 
 /** Set the current value to a new value and change the tag. 

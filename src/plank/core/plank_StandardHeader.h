@@ -216,11 +216,11 @@ typedef PlankI PlankFourCharCode;
 
 
 #ifdef PLANK_32BIT
-//#warning PLANK_32BIT
+    #define PLANK_WORDSIZE 4
 #endif
 
 #ifdef PLANK_64BIT
-//#warning PLANK_64BIT
+    #define PLANK_WORDSIZE 8
 #endif
 
 #ifndef PLANK_LITTLEENDIAN
