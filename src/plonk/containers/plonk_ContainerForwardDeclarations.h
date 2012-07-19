@@ -46,7 +46,8 @@ class Globals;
 class Int24;
 class Function;
 
-template<class Type>                                                    class Atomic;
+template<class Type>                                                    class AtomicValue;
+template<class Type>                                                    class AtomicExtended;
 template<class ObjectType>                                              class SimpleArray;
 template<class ObjectType>                                              class ObjectArray;
 //template<class ObjectType, 

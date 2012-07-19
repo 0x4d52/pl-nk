@@ -39,64 +39,62 @@
 #ifndef PLONK_ATOMICOBJECT_H
 #define PLONK_ATOMICOBJECT_H
 
-//template<class Type>
-//class AtomicObjectWrapper
-//{
-//public:
-//    
-//};
+template<class Type>
+struct AtomicObjectWrapper
+{
+public:
+    AtomicObjectWrapper (Type const& other) throw()
+    :   counter (0),
+        object (other)
+    {
+    }
+    
+    AtomicValue<int> counter;
+    Type object;    
+};
 
-//template<class Type>
-//class AtomicObjectInternal : public SmartPointer
-//{
-//public:
-//    AtomicObjectInternal() throw()
-//    {
-//        this->set (Type::getNull()); // Object type Type must respond to getNull()
-//    }
-//    
-//    AtomicObjectInternal (Type const& object) throw()
-//    {
-//        this->set (object);
-//    }
-//
-//    void set (Type const& object) throw()
-//    {
-//        Long oldCount;
-//        Type* const oldPtr = atom.swapAll (new Type (object), 1, oldCount);
-//        
-//        if (oldCount == 1)
-//            delete oldPtr;
-//    }
-//    
-//    Type get() throw()
-//    {
-//        bool success;
-//        Type* currentPtr;
-//        Long count;
-//        
-//        do {
-//            currentPtr = atom.getPtr();
-//            count = atom.getExtra();
-//            success = atom.swapAll (currentPtr, count + 1);
-//        } while (!success);
-//        
-//        plonk_assert (currentPtr != 0);
-//        
-//        Type result = *currentPtr; 
-//        
-//    }
-//
-//    
-//private:
-//    AtomicExtended<Type*> atom;    
-//};
-//
-//
-//template<class Type>
-//class AtomicObject : public SmartPointerContainer< AtomicObjectInternal<Type> >
-//{
-//public: 
-//};
+
+template<class Type>
+class AtomicObject
+{
+public: 
+    typedef AtomicObjectWrapper<Type> Wrapper;
+
+    AtomicObject() throw()
+    {
+        
+    }
+    
+    AtomicObject (Wrapper* const wrapper) throw()
+    {
+        AtomicValue<Wrapper*> temp (wrapper);
+        ++temp.counter;
+        atom.swapWith (temp);
+    }
+    
+    ~AtomicObject()
+    {
+        AtomicValue<Wrapper*> temp (0);
+        atom.swapWith (temp);
+        
+        if (temp.getPtrUnchecked() != 0)
+            if (--temp.counter == 0)
+                delete temp.getPtrUnchecked();
+    }
+    
+    AtomicObject (AtomicObject const& copy) throw()
+    {
+        AtomicValue<Wrapper*> temp (/* inc and fetch */);
+        atom.swapWith (temp);
+    }
+    
+    AtomicObject& operator= (AtomicObject const& other) throw()
+    {
+        AtomicObject temp (other);
+        atom.swapWith (temp.atom);
+    }
+
+    AtomicValue<Wrapper*> atom;
+};
 
 #endif // PLONK_ATOMICOBJECT_H

@@ -220,10 +220,13 @@ Unit AudioHost::constructGraph()
 //    dyn = Sine::ar (1000, 0.1);
 //    return adyn.getObject().as<Unit>();
 
-    Unit source = Sine::ar (1000, 0.1);
-    static PatchSource<Unit> patch (source);    
-    Unit unit = Patch::ar (patch);
-    return unit;
+//    Unit source = Sine::ar (1000, 0.1);
+//    static PatchSource<Unit> patch (source);    
+//    Unit unit = Patch::ar (patch);
+//    return unit;
+    
+//    return Sine::ar (Floats(500, 2000), 0.25);
+    return Sine::ar (Floats(1000, 1000), 0.25);
 }
 
 

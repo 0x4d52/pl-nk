@@ -137,6 +137,9 @@ class AtomicExtended : public AtomicBase<Type>
         inline Plank##NUMCODE swap (const Plank##NUMCODE newValue) throw() {\
             return pl_Atomic##FUNCCODE##_Swap (getAtomicRef(), newValue);\
         }\
+        inline void swapWith (ATOMIC_CLASS& other) throw() {\
+            return pl_Atomic##FUNCCODE##_SwapOther (getAtomicRef(), other.getAtomicRef());\
+        }\
         \
         inline void setValue (const Plank##TYPECODE other) throw() { pl_Atomic##FUNCCODE##_Set (getAtomicRef(), other); }\
         inline Plank##TYPECODE getValue() const throw() { return pl_Atomic##FUNCCODE##_Get (getAtomicRef()); }\
@@ -146,10 +149,10 @@ class AtomicExtended : public AtomicBase<Type>
         inline operator Plank##TYPECODE () const throw() { return pl_Atomic##FUNCCODE##_Get (getAtomicRef()); }\
         inline Plank##NUMCODE getExtra() const throw() { return pl_Atomic##FUNCCODE##_GetExtra (getAtomicRef()); }\
         inline Plank##NUMCODE getExtraUnchecked() const throw() { return pl_Atomic##FUNCCODE##_GetExtraUnchecked (getAtomicRef()); }\
-        inline ATOMIC_CLASS& operator+= (const Plank##NUMCODE operand) throw() { pl_Atomic##FUNCCODE##_Add (getAtomicRef(), operand); return *this; }\
-        inline ATOMIC_CLASS& operator-= (const Plank##NUMCODE operand) throw() { pl_Atomic##FUNCCODE##_Add (getAtomicRef(), -operand); return *this; }\
-        inline ATOMIC_CLASS& operator++() throw() { pl_Atomic##FUNCCODE##_Increment (getAtomicRef()); return *this; }\
-        inline ATOMIC_CLASS& operator--() throw() { pl_Atomic##FUNCCODE##_Decrement (getAtomicRef()); return *this; }\
+        inline Plank##TYPECODE operator+= (const Plank##NUMCODE operand) throw() { return pl_Atomic##FUNCCODE##_Add (getAtomicRef(), operand); }\
+        inline Plank##TYPECODE operator-= (const Plank##NUMCODE operand) throw() { return pl_Atomic##FUNCCODE##_Add (getAtomicRef(), -operand); }\
+        inline Plank##TYPECODE operator++() throw() { return pl_Atomic##FUNCCODE##_Increment (getAtomicRef()); }\
+        inline Plank##TYPECODE operator--() throw() { return pl_Atomic##FUNCCODE##_Decrement (getAtomicRef()); }\
         inline Plank##TYPECODE operator++ (int) throw() { const Plank##TYPECODE oldValue = pl_Atomic##FUNCCODE##_Get (getAtomicRef()); ++(*this); return oldValue; }\
         inline Plank##TYPECODE operator-- (int) throw() { const Plank##TYPECODE oldValue = pl_Atomic##FUNCCODE##_Get (getAtomicRef()); --(*this); return oldValue; }\
         \
@@ -263,6 +266,11 @@ public:
         return pl_AtomicP_Swap (getAtomicRef(), newValue);
     }
     
+    inline void swapWith (AtomicValue& other) throw() 
+    {
+        return pl_AtomicP_SwapOther (getAtomicRef(), other.getAtomicRef());
+    }
+
     inline void setObject (Type const& other) throw()       { pl_AtomicP_Set (getAtomicRef(), (void*)(&other)); }
     inline void setValue (const Type* other) throw()        { pl_AtomicP_Set (getAtomicRef(), (void*)(other)); }
     inline void setPtr (const Type* other) throw()          { pl_AtomicP_Set (getAtomicRef(), (void*)(other)); }
@@ -305,28 +313,24 @@ public:
     bool operator>  (const Type* other) const throw() { return this->getValue() >  other; }
     bool operator>= (const Type* other) const throw() { return this->getValue() >= other; }
 
-    inline AtomicValue& operator+= (const Long operand) throw() 
+    inline Type* operator+= (const Long operand) throw() 
     { 
-        pl_AtomicP_Add (getAtomicRef(), operand * AtomicValue::incrementSize()); 
-        return *this; 
+        return pl_AtomicP_Add (getAtomicRef(), operand * AtomicValue::incrementSize()); 
     }
     
-    inline AtomicValue& operator-= (const Long operand) throw() 
+    inline Type* operator-= (const Long operand) throw() 
     { 
-        pl_AtomicP_Add (getAtomicRef(), -operand * AtomicValue::incrementSize()); 
-        return *this; 
+        return pl_AtomicP_Add (getAtomicRef(), -operand * AtomicValue::incrementSize()); 
     }
     
-    inline AtomicValue& operator++() throw() 
+    inline Type* operator++() throw() 
     { 
-        pl_AtomicP_Add (getAtomicRef(), AtomicValue::incrementSize()); 
-        return *this; 
+        return pl_AtomicP_Add (getAtomicRef(), AtomicValue::incrementSize()); 
     }
     
-    inline AtomicValue& operator--() throw() 
+    inline Type* operator--() throw() 
     { 
-        pl_AtomicP_Subtract (getAtomicRef(), AtomicValue::incrementSize()); 
-        return *this; 
+        return pl_AtomicP_Subtract (getAtomicRef(), AtomicValue::incrementSize()); 
     }
     
     inline Type* operator++ (int) throw() 
@@ -493,28 +497,24 @@ public:
     bool operator>  (const Type* other) const throw() { return this->getValue() >  other; }
     bool operator>= (const Type* other) const throw() { return this->getValue() >= other; }
 
-    inline AtomicExtended& operator+= (const Long operand) throw() 
+    inline Type* operator+= (const Long operand) throw() 
     { 
-        pl_AtomicPX_Add (getAtomicRef(), operand * AtomicExtended::incrementSize()); 
-        return *this; 
+        return pl_AtomicPX_Add (getAtomicRef(), operand * AtomicExtended::incrementSize()); 
     }
     
-    inline AtomicExtended& operator-= (const Long operand) throw() 
+    inline Type* operator-= (const Long operand) throw() 
     { 
-        pl_AtomicPX_Add (getAtomicRef(), -operand * AtomicExtended::incrementSize()); 
-        return *this; 
+        return pl_AtomicPX_Add (getAtomicRef(), -operand * AtomicExtended::incrementSize()); 
     }
     
-    inline AtomicExtended& operator++() throw() 
+    inline Type* operator++() throw() 
     { 
-        pl_AtomicPX_Add (getAtomicRef(), AtomicExtended::incrementSize()); 
-        return *this; 
+        return pl_AtomicPX_Add (getAtomicRef(), AtomicExtended::incrementSize()); 
     }
     
-    inline AtomicExtended& operator--() throw() 
+    inline Type* operator--() throw() 
     { 
-        pl_AtomicPX_Subtract (getAtomicRef(), AtomicExtended::incrementSize()); 
-        return *this; 
+        return pl_AtomicPX_Subtract (getAtomicRef(), AtomicExtended::incrementSize()); 
     }
     
     inline Type* operator++ (int) throw() 
@@ -606,28 +606,24 @@ public:
     inline Long getValueUnchecked() const throw() { return pl_AtomicLX_GetUnchecked (getAtomicRef()); }
     inline Long getExtraUnchecked() const throw() { return pl_AtomicLX_GetExtraUnchecked (getAtomicRef()); }
 
-    inline AtomicExtended& operator+= (const Long operand) throw() 
+    inline Long operator+= (const Long operand) throw() 
     { 
-        pl_AtomicLX_Add (getAtomicRef(), operand); 
-        return *this; 
+        return pl_AtomicLX_Add (getAtomicRef(), operand); 
     }
     
-    inline AtomicExtended& operator-= (const Long operand) throw() 
+    inline Long operator-= (const Long operand) throw() 
     { 
-        pl_AtomicLX_Add (getAtomicRef(), -operand); 
-        return *this; 
+        return pl_AtomicLX_Add (getAtomicRef(), -operand); 
     }
     
-    inline AtomicExtended& operator++() throw() 
+    inline Long operator++() throw() 
     { 
-        pl_AtomicLX_Add (getAtomicRef(), 1); 
-        return *this; 
+        return pl_AtomicLX_Add (getAtomicRef(), 1); 
     }
     
-    inline AtomicExtended& operator--() throw() 
+    inline Long operator--() throw() 
     { 
-        pl_AtomicLX_Subtract (getAtomicRef(), 1); 
-        return *this; 
+        return pl_AtomicLX_Subtract (getAtomicRef(), 1); 
     }
     
     inline Long operator++ (int) throw() 

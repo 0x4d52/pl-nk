@@ -204,7 +204,6 @@ void SmartPointer::incrementRefCount()  throw()
 
 	if (active) 
     {
-        //pl_AtomicL_Increment ((PlankAtomicLRef)&refCount);     
         ++refCount;
     }
 }
@@ -217,12 +216,10 @@ bool SmartPointer::decrementRefCount()  throw()
 	{
 		plonk_assert (refCount > 0);
 
-        //pl_AtomicL_Increment((PlankAtomicLRef)&refCount);        
         --refCount;
         
         if (deleteIfOnlyMutualReferencesRemain() == true)
 		{
-            //pl_AtomicL_Increment((PlankAtomicLRef)&refCount);   
             --refCount;
 			plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
         }
