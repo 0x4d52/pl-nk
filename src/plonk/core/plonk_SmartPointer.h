@@ -89,7 +89,7 @@ public:
 protected:
     virtual void destroy();
     
-    AtomicValue<Long> refCount;
+    Long refCount; //AtomicValue<Long> refCount;
     void *weakPointer;
 	unsigned int active;
 	

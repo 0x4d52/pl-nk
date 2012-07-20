@@ -40,6 +40,10 @@
 #define PLONK_ATOMICOBJECT_H
 
 
+template<class Type> class AtomicObject;
+
+static AtomicValue<int> atomicObjectCount;
+
 template<class Type>
 class AtomicObjectWrapper
 {
@@ -48,21 +52,21 @@ public:
     :   counter (0),
         object (other)
     {
+        ++atomicObjectCount;
+        printf ("AtomicObject: atomicObjectCount = %d\n", atomicObjectCount.getValueUnchecked());
     }
     
-    inline int incrementRefCount() throw()
+    ~AtomicObjectWrapper()
     {
-        return ++counter;
+        --atomicObjectCount;
+        printf ("AtomicObject: atomicObjectCount = %d\n", atomicObjectCount.getValueUnchecked());
     }
     
-    inline int decrementRefCount() throw()
-    {
-        return --counter;
-    }
-        
+    friend class AtomicObject<Type>;
+            
 private:
     AtomicValue<int> counter;
-    Type object;    
+    Type object;        
 };
 
 
@@ -72,44 +76,143 @@ class AtomicObject
 public: 
     typedef AtomicObjectWrapper<Type> Wrapper;
 
-    AtomicObject() throw()
+    inline AtomicObject() throw()
     {
-        
+        this->init (Type::getNull());
     }
     
-    AtomicObject (Wrapper* const wrapper) throw()
+    inline AtomicObject (Type const& object) throw()
     {
-        AtomicValue<Wrapper*> temp (wrapper);
-        temp->incrementRefCount();
-        atom.swapWith (temp);
+        this->init (object);
     }
     
-    ~AtomicObject()
+    inline ~AtomicObject()
     {
-        AtomicValue<Wrapper*> temp (0);
+        AtomicValue<Wrapper*> temp (getNullWrapper());
         atom.swapWith (temp);
         
-        if (temp != 0)
-            if (!temp->decrementRefCount())
-                temp.deletePtr();
+        this->decrementRefCount (temp);
     }
     
-    AtomicObject (AtomicObject const& copy) throw()
+    inline AtomicObject (AtomicObject const& copy) throw()
     {
-        AtomicValue<Wrapper*> temp (/* inc and fetch */);
+        AtomicValue<Wrapper*> temp (incrementRefCountAndGetPtr (const_cast<AtomicObject&> (copy).atom));
         atom.swapWith (temp);
     }
     
-    AtomicObject& operator= (AtomicObject const& other) throw()
+    inline AtomicObject& operator= (AtomicObject const& other) throw()
     {
         AtomicObject temp (other);
         atom.swapWith (temp.atom);
+        return *this;
     }
+    
+    inline AtomicObject& operator= (Type const& object) throw()
+    {
+        this->set (object);
+        return *this;
+    }
+    
+    inline void set (Type const& object) throw()
+    {
+        AtomicObject temp (object);
+        atom.swapWith (temp.atom);
+    }
+    
+    inline Type get() const throw()
+    {
+        AtomicObject temp (*this);
+        return temp.atom->object;
+    }
+    
+    inline Type operator-> () const throw()
+    {
+        return this->get();
+    }
+    
+    inline Type operator-> () throw()
+    {
+        return this->get();
+    }
+    
+    inline Type operator* () const throw()
+    {
+        return this->get();
+    }
+    
+    inline Type operator* () throw()
+    {
+        return this->get();
+    }
+    
+//    inline AtomicObject containerCopy() const throw()
+//    {
+//        return *this;
+//    }
 
 private:
-    AtomicValue<Wrapper*> atom;
+    AtomicValue<Wrapper*> atom; 
     
-//    static inline Wrapper* 
+    inline void init (Type const& object) throw()
+    {
+        AtomicValue<Wrapper*> temp (new Wrapper (object));
+        this->incrementRefCount (temp);
+        atom.swapWith (temp);
+    }
+
+    static inline Wrapper* getNullWrapper() throw()
+    {
+        return static_cast<Wrapper*> (0);
+    }
+    
+    static inline void incrementRefCount (AtomicValue<Wrapper*>& atom) throw()
+    {
+        Wrapper* const wrapper (atom.getPtrUnchecked());
+        int counter;
+        
+        if (wrapper != getNullWrapper()) 
+            counter = ++wrapper->counter;
+        
+        printf ("AtomicObject: ++%p->counter = %d\n", wrapper, counter);
+    }
+    
+    static inline void decrementRefCount (AtomicValue<Wrapper*>& atom) throw()
+    {
+        Wrapper* const wrapper (atom.getPtrUnchecked());
+        int counter;
+        
+        if ((wrapper != getNullWrapper()) && ((counter = --wrapper->counter) == 0))
+            delete wrapper;
+        
+        printf ("AtomicObject: ++%p->counter = %d\n", wrapper, counter);
+    }
+    
+    static inline Wrapper* incrementRefCountAndGetPtr (AtomicValue<Wrapper*>& atom) throw()
+    {
+        int counter;
+        Wrapper* wrapper;
+        
+        do 
+        {
+            do 
+            {
+                wrapper = atom.getPtrUnchecked();
+                
+                if (wrapper == getNullWrapper())
+                    goto exit;
+                
+                counter = wrapper->counter.getValueUnchecked();
+                
+            } while (wrapper != atom.getPtrUnchecked());
+            
+        } while ((wrapper != getNullWrapper()) && 
+                 (wrapper->counter.compareAndSwap (counter, counter + 1) == false));
+        
+        printf ("AtomicObject: ++%p->counter = %d\n", wrapper, counter + 1);
+        
+    exit:
+        return wrapper;
+    }
 };
 
 #endif // PLONK_ATOMICOBJECT_H
