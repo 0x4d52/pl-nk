@@ -39,8 +39,9 @@
 #ifndef PLONK_ATOMICOBJECT_H
 #define PLONK_ATOMICOBJECT_H
 
+
 template<class Type>
-struct AtomicObjectWrapper
+class AtomicObjectWrapper
 {
 public:
     AtomicObjectWrapper (Type const& other) throw()
@@ -49,6 +50,17 @@ public:
     {
     }
     
+    inline int incrementRefCount() throw()
+    {
+        return ++counter;
+    }
+    
+    inline int decrementRefCount() throw()
+    {
+        return --counter;
+    }
+        
+private:
     AtomicValue<int> counter;
     Type object;    
 };
@@ -68,7 +80,7 @@ public:
     AtomicObject (Wrapper* const wrapper) throw()
     {
         AtomicValue<Wrapper*> temp (wrapper);
-        ++temp.counter;
+        temp->incrementRefCount();
         atom.swapWith (temp);
     }
     
@@ -77,9 +89,9 @@ public:
         AtomicValue<Wrapper*> temp (0);
         atom.swapWith (temp);
         
-        if (temp.getPtrUnchecked() != 0)
-            if (--temp.counter == 0)
-                delete temp.getPtrUnchecked();
+        if (temp != 0)
+            if (!temp->decrementRefCount())
+                temp.deletePtr();
     }
     
     AtomicObject (AtomicObject const& copy) throw()
@@ -94,7 +106,10 @@ public:
         atom.swapWith (temp.atom);
     }
 
+private:
     AtomicValue<Wrapper*> atom;
+    
+//    static inline Wrapper* 
 };
 
 #endif // PLONK_ATOMICOBJECT_H
