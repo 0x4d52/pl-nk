@@ -1228,6 +1228,9 @@ public:
     {
         return TypeUtility<NumericalType>::getTypeCode();
     }
+    
+    PLONK_OBJECTARROWOPERATOR(NumericalArray)
+
 };
 
 PLONK_BINARYOPGLOBALS_TEMPLATE(NumericalArray); // declares global functions with the same name as the binary operators

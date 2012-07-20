@@ -79,6 +79,8 @@ public:
     bool tryLock() throw();
     void wait() throw();
     void signal() throw();
+    
+    PLONK_OBJECTARROWOPERATOR(Lock)
 };
 
 //------------------------------------------------------------------------------
@@ -90,6 +92,8 @@ public:
     AutoLock (Lock const& lock) throw();
     ~AutoLock();
     
+    PLONK_OBJECTARROWOPERATOR(AutoLock)
+
 private:
     Lock theLock;
     
@@ -106,6 +110,8 @@ public:
     AutoUnlock (Lock const& lock) throw();
     ~AutoUnlock();
     
+    PLONK_OBJECTARROWOPERATOR(AutoUnlock)
+
 private:
     Lock theLock;
     

@@ -663,6 +663,9 @@ public:
 	:	ObjectArray2DBase< ArrayType, RowType > (array0, array1)
 	{
 	}
+    
+    PLONK_OBJECTARROWOPERATOR(ObjectArray2D)
+
 };
 
 

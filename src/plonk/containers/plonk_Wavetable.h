@@ -218,6 +218,8 @@ public:
 		return WavetableBase (Buffer::harmonicTable (8192, weights));
 	}
     
+    PLONK_OBJECTARROWOPERATOR(WavetableBase)
+
 };
 
 #endif // PLONK_WAVETABLE_H

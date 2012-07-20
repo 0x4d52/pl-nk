@@ -137,6 +137,8 @@ public:
     static BlockSize decide (BlockSize const& inputBlockSize, 
                              BlockSize const& preferredBlockSize) throw();
     
+    PLONK_OBJECTARROWOPERATOR(BlockSize)
+
 private:
     static const BlockSize getMultipleOfDefault (SampleRate const& factor) throw();    
 };

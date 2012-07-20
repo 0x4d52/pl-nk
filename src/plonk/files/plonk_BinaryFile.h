@@ -330,6 +330,9 @@ public:
         plonk_assert (Text (fourCharCode).length() == 4);
         return pl_FourCharCode (fourCharCode);
     }
+    
+    PLONK_OBJECTARROWOPERATOR(BinaryFile)
+
 };
 
 

@@ -179,6 +179,8 @@ public:
     int getNumChannels() const throw();
     Dynamic getChannel (const int index) throw();
     
+    PLONK_OBJECTARROWOPERATOR(Dynamic)
+
 private:
     template<class ContainerType> operator const ContainerType& () const;
     template<class ContainerType> operator ContainerType& ();

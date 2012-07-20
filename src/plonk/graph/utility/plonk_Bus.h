@@ -409,7 +409,8 @@ public:
         return TypeUtility<SampleType>::getTypeCode();
     }            
     
-    
+    PLONK_OBJECTARROWOPERATOR(BusBuffer)
+
 private:    
     static BusDictionary& getBusDictionary() throw()
     {

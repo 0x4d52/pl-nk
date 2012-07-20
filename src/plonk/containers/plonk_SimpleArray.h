@@ -85,6 +85,8 @@ public:
         
         return *this;
 	}
+    
+    PLONK_OBJECTARROWOPERATOR(SimpleArray)
 
 };
 

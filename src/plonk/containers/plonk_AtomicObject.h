@@ -57,7 +57,7 @@ public:
     {
 #if PLONK_ATOMICOBJECT_DEBUG
         ++atomicObjectCount;
-        printf ("AtomicObject: atomicObjectCount = %d\n", atomicObjectCount.getValueUnchecked());
+        printf ("AtomicObject: atomicObjectCount = %d [thread=%lx]\n", atomicObjectCount.getValueUnchecked(), Threading::getCurrentThreadID());
 #endif
     }
     
@@ -65,7 +65,7 @@ public:
     {
 #if PLONK_ATOMICOBJECT_DEBUG
         --atomicObjectCount;
-        printf ("AtomicObject: atomicObjectCount = %d\n", atomicObjectCount.getValueUnchecked());
+        printf ("AtomicObject: atomicObjectCount = %d [thread=%lx]\n", atomicObjectCount.getValueUnchecked(), Threading::getCurrentThreadID());
 #endif
     }
     
@@ -98,12 +98,12 @@ public:
         AtomicValue<Wrapper*> temp (getNullWrapper());
         atom.swapWith (temp);
         
-        this->decrementRefCount (temp);
+        decrementRefCount (temp);
     }
     
     inline AtomicObject (AtomicObject const& copy) throw()
     {
-        AtomicValue<Wrapper*> temp (incrementRefCountAndGetPtr (const_cast<AtomicObject&> (copy).atom));
+        AtomicValue<Wrapper*> temp (incrementRefCountAndGetPtr (const_cast<AtomicValue<Wrapper*>&> (copy.atom)));
         atom.swapWith (temp);
     }
     
@@ -132,24 +132,59 @@ public:
         return temp.atom->object;
     }
     
-    inline Type operator-> () const throw()
+    inline Type operator->() const throw()
     {
         return this->get();
     }
     
-    inline Type operator-> () throw()
+    inline Type operator->() throw()
     {
         return this->get();
     }
     
-    inline Type operator* () const throw()
+    inline Type operator*() const throw()
     {
         return this->get();
     }
     
-    inline Type operator* () throw()
+    inline Type operator*() throw()
     {
         return this->get();
+    }
+    
+    bool isNull() const throw()
+	{
+		return atom.getPtrUnchecked() == 0;
+	}
+	
+	bool isNotNull() const throw()
+	{
+		return atom.getPtrUnchecked() != 0;
+	}
+    
+    bool operator== (AtomicObject const& other) const throw()
+	{
+        Type temp1 (atom->object);
+        Type temp2 (other.atom->object);
+		return temp1 == temp2;
+	}
+	
+	bool operator!= (AtomicObject const& other) const throw()
+	{
+        Type temp1 (atom->object);
+        Type temp2 (other.atom->object);
+		return temp1 != temp2;
+	}
+    
+    void swapWith (AtomicObject const& other) throw()
+    {
+        atom.swapWith (other.atom);
+    }
+
+    static AtomicObject& getNull() throw()
+    {
+        static AtomicObject null;
+        return null;
     }
     
 private:
@@ -158,7 +193,7 @@ private:
     inline void init (Type const& object) throw()
     {
         AtomicValue<Wrapper*> temp (new Wrapper (object));
-        this->incrementRefCount (temp);
+        incrementRefCount (temp);
         atom.swapWith (temp);
     }
 
@@ -169,27 +204,31 @@ private:
     
     static inline void incrementRefCount (AtomicValue<Wrapper*>& atom) throw()
     {
-        Wrapper* const wrapper (atom.getPtrUnchecked());
         int counter;
+        Wrapper* const wrapper (atom.getPtrUnchecked());
         
         if (wrapper != getNullWrapper()) 
             counter = ++wrapper->counter;
         
 #if PLONK_ATOMICOBJECT_DEBUG
-        printf ("AtomicObject:  ++%p->counter = %d\n", wrapper, counter);
+        printf ("AtomicObject:  ++%p->counter = %d [thread=%lx]\n", wrapper, counter, Threading::getCurrentThreadID());
+#else
+        (void)counter;
 #endif
     }
     
     static inline void decrementRefCount (AtomicValue<Wrapper*>& atom) throw()
     {
-        Wrapper* const wrapper (atom.getPtrUnchecked());
         int counter;
+        Wrapper* const wrapper (atom.getPtrUnchecked());
         
         if ((wrapper != getNullWrapper()) && !(counter = --wrapper->counter))
             delete wrapper;
         
 #if PLONK_ATOMICOBJECT_DEBUG
-        printf ("AtomicObject:  --%p->counter = %d\n", wrapper, counter);
+        printf ("AtomicObject:  --%p->counter = %d [thread=%lx]\n", wrapper, counter, Threading::getCurrentThreadID());
+#else
+        (void)counter;
 #endif
     }
     
@@ -215,13 +254,21 @@ private:
                  !wrapper->counter.compareAndSwap (counter, counter + 1));
         
 #if PLONK_ATOMICOBJECT_DEBUG
-        printf ("AtomicObject: *++%p->counter = %d\n", wrapper, counter + 1);
+        printf ("AtomicObject: *++%p->counter = %d [thread=%lx]\n", wrapper, counter + 1, Threading::getCurrentThreadID());
 #endif
         
     exit:
         return wrapper;
     }
 };
+
+template<class Type>
+void swap (AtomicObject<Type> const& a, 
+           AtomicObject<Type> const& b) throw()
+{
+    a.swapWith (b);
+}
+
 
 #undef PLONK_ATOMICOBJECT_DEBUG
 

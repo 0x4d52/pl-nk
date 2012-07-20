@@ -111,6 +111,12 @@ public:
          if it should exit. This is thread-safe. */
         ResultCode setShouldExit() throw();
         
+        /** Signals that the thread should exit then waits for it to exit.
+         This is thread-safe but blocks the calling thread until the other
+         thread as exited. 
+         @param interval The time interval between checks for the thread to exit. */
+        ResultCode setShouldExitAndWait (const double interval = 0.001) throw();
+        
         /** Returns @c true if the thread has been signalled to exit, otherwise @c false.
          This is thread-safe. */
         bool getShouldExit() throw();

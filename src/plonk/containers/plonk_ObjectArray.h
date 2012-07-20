@@ -1514,6 +1514,7 @@ public:
 		return result;
 	}
 
+    PLONK_OBJECTARROWOPERATOR(ObjectArray)
 
 };
 

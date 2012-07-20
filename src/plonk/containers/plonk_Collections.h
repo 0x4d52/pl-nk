@@ -409,6 +409,9 @@ public:
 		
 		return values.size();
 	}
+    
+    PLONK_OBJECTARROWOPERATOR(Dictionary)
+
 };
 
 

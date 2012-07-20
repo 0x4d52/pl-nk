@@ -325,6 +325,8 @@ public:
         this->getInternal()->setValue (newValue);
     }    
     
+    PLONK_OBJECTARROWOPERATOR(Variable)
+
 };
 
 

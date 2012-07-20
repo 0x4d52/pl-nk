@@ -286,7 +286,8 @@ public:
         return this->getInternal()->getDeinterleaved();
     }
 
-    
+    PLONK_OBJECTARROWOPERATOR(SignalBase)
+
 };
 
 

@@ -85,6 +85,7 @@ public:
     void resetShouldDelete() throw();
     bool getShouldDelete() const throw();
         
+    PLONK_OBJECTARROWOPERATOR(ProcessInfo)
 };
 
 #endif // PLONK_PROCESSINFO_H

@@ -104,7 +104,8 @@ public:
     static SampleRate decide (SampleRate const& inputSampleRate, 
                               SampleRate const& preferredSampleRate) throw();
     
-    
+    PLONK_OBJECTARROWOPERATOR(SampleRate)
+
 private:
     static const SampleRate getMultipleOfDefault(BlockSize const& blockSize) throw();
 

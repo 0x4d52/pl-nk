@@ -78,6 +78,8 @@ public:
     /** Find the maximum number of channels in this dictionary (i.e., in unit, units and busses). 
      This is not recursive. */
     int getMaxNumChannels() const throw();
+    
+    PLONK_OBJECTARROWOPERATOR(InputDictionary)
 };
 
 

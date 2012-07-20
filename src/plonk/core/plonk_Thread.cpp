@@ -126,6 +126,19 @@ ResultCode Threading::Thread::setShouldExit() throw()
     return result;
 }
 
+ResultCode Threading::Thread::setShouldExitAndWait (const double interval) throw()
+{
+    ResultCode result = PlankResult_OK;
+    
+    result = setShouldExit();
+    plonk_assert (result == PlankResult_OK);
+    
+    while (isRunning())
+        Threading::sleep (interval);
+    
+    return result;
+}
+
 bool Threading::Thread::getShouldExit() throw()
 {
     return pl_Thread_GetShouldExit (getPeerRef());
