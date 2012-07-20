@@ -43,6 +43,11 @@
 #include "plonk_WeakPointer.h"
 
 
+#define PLONK_OBJECTARROWOPERATOR(Type) \
+    inline Type* operator->() throw() { return this; } \
+	inline const Type* operator->() const throw() { return this; }
+
+
 /** This manages a SmartPointer pointer. 
  This class and its subclasses are passed around by value (or reference) and 
  if a copy is made it actually just copies the SmartPointer it contains 
@@ -59,14 +64,19 @@ class SmartPointerContainerBase
 public:         
     typedef SmartPointerType Internal;
 
-	SmartPointerContainerBase (SmartPointerType* internalToUse = 0) throw() 
+	inline SmartPointerContainerBase() throw() 
+	:	internal (0)
+	{
+	}
+    
+    inline SmartPointerContainerBase (SmartPointerType* internalToUse) throw() 
 	:	internal (internalToUse)
 	{
         if (internal != 0)
             internal->incrementRefCount();
 	}
-    	
-    ~SmartPointerContainerBase()
+
+    inline ~SmartPointerContainerBase()
 	{        
 		if (internal != 0) 
 			internal->decrementRefCount();
@@ -78,21 +88,31 @@ public:
 	{
 		return internal;
 	}
-	
-	inline SmartPointerType* operator->() throw() 
-	{
-		return internal;
-	}
-	
+		
 	inline const SmartPointerType* getInternal() const throw() 
 	{
 		return internal;
 	}
     	
+    inline SmartPointerType* operator->() throw() 
+	{
+		return internal;
+	}
+    
 	inline const SmartPointerType* operator->() const throw() 
 	{
 		return internal;
 	}
+
+//    inline SmartPointerType* operator->() throw() 
+//	{
+//		return internal;
+//	}
+//
+//	inline const SmartPointerType* operator->() const throw() 
+//	{
+//		return internal;
+//	}
     
     SmartPointerContainerBase containerCopy() const throw()
     {

@@ -39,10 +39,13 @@
 #ifndef PLONK_ATOMICOBJECT_H
 #define PLONK_ATOMICOBJECT_H
 
+#define PLONK_ATOMICOBJECT_DEBUG 1
 
 template<class Type> class AtomicObject;
 
+#if PLONK_ATOMICOBJECT_DEBUG
 static AtomicValue<int> atomicObjectCount;
+#endif 
 
 template<class Type>
 class AtomicObjectWrapper
@@ -52,14 +55,18 @@ public:
     :   counter (0),
         object (other)
     {
+#if PLONK_ATOMICOBJECT_DEBUG
         ++atomicObjectCount;
         printf ("AtomicObject: atomicObjectCount = %d\n", atomicObjectCount.getValueUnchecked());
+#endif
     }
     
     ~AtomicObjectWrapper()
     {
+#if PLONK_ATOMICOBJECT_DEBUG
         --atomicObjectCount;
         printf ("AtomicObject: atomicObjectCount = %d\n", atomicObjectCount.getValueUnchecked());
+#endif
     }
     
     friend class AtomicObject<Type>;
@@ -145,11 +152,6 @@ public:
         return this->get();
     }
     
-//    inline AtomicObject containerCopy() const throw()
-//    {
-//        return *this;
-//    }
-
 private:
     AtomicValue<Wrapper*> atom; 
     
@@ -173,7 +175,9 @@ private:
         if (wrapper != getNullWrapper()) 
             counter = ++wrapper->counter;
         
-        printf ("AtomicObject: ++%p->counter = %d\n", wrapper, counter);
+#if PLONK_ATOMICOBJECT_DEBUG
+        printf ("AtomicObject:  ++%p->counter = %d\n", wrapper, counter);
+#endif
     }
     
     static inline void decrementRefCount (AtomicValue<Wrapper*>& atom) throw()
@@ -181,10 +185,12 @@ private:
         Wrapper* const wrapper (atom.getPtrUnchecked());
         int counter;
         
-        if ((wrapper != getNullWrapper()) && ((counter = --wrapper->counter) == 0))
+        if ((wrapper != getNullWrapper()) && !(counter = --wrapper->counter))
             delete wrapper;
         
-        printf ("AtomicObject: ++%p->counter = %d\n", wrapper, counter);
+#if PLONK_ATOMICOBJECT_DEBUG
+        printf ("AtomicObject:  --%p->counter = %d\n", wrapper, counter);
+#endif
     }
     
     static inline Wrapper* incrementRefCountAndGetPtr (AtomicValue<Wrapper*>& atom) throw()
@@ -206,13 +212,17 @@ private:
             } while (wrapper != atom.getPtrUnchecked());
             
         } while ((wrapper != getNullWrapper()) && 
-                 (wrapper->counter.compareAndSwap (counter, counter + 1) == false));
+                 !wrapper->counter.compareAndSwap (counter, counter + 1));
         
-        printf ("AtomicObject: ++%p->counter = %d\n", wrapper, counter + 1);
+#if PLONK_ATOMICOBJECT_DEBUG
+        printf ("AtomicObject: *++%p->counter = %d\n", wrapper, counter + 1);
+#endif
         
     exit:
         return wrapper;
     }
 };
+
+#undef PLONK_ATOMICOBJECT_DEBUG
 
 #endif // PLONK_ATOMICOBJECT_H
