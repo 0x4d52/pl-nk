@@ -315,7 +315,7 @@ public:
 	}        
     
 //    BusBuffer (Dynamic const& other) throw()
-//    :   Base (static_cast<Internal*> (other.containerCopy().getItem().getInternal()))
+//    :   Base (static_cast<Internal*> (other.getItem().getInternal()))
 //    {
 //        if (this->getInternal() == 0)
 //            operator= (BusBuffer());

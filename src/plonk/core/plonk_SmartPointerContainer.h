@@ -84,12 +84,12 @@ public:
 		internal = 0;        
 	}
     	
-	inline SmartPointerType* getInternal() throw() 
-	{
-		return internal;
-	}
+//	inline SmartPointerType* getInternal() throw() 
+//	{
+//		return internal;
+//	}
 		
-	inline const SmartPointerType* getInternal() const throw() 
+	inline SmartPointerType* getInternal() const throw() 
 	{
 		return internal;
 	}

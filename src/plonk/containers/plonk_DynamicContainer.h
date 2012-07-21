@@ -65,7 +65,7 @@ public:
     
     template<class ContainerType>
     DynamicInternal (ContainerType const& other) throw()
-    :   item (static_cast<SmartPointer*> (other.containerCopy().getInternal())),
+    :   item (static_cast<SmartPointer*> (other.getInternal())),//(static_cast<SmartPointer*> (other.containerCopy().getInternal())),
         typeCode (TypeUtility<ContainerType>::getTypeCode())
     {
     }
@@ -75,7 +75,7 @@ public:
     {
         typeCode = 0; // unknown
         AtomicOps::memoryBarrier();
-        item = static_cast<SmartPointer*> (other.containerCopy().getInternal());
+        item = static_cast<SmartPointer*> (other.getInternal());//(other.containerCopy().getInternal());
         typeCode = TypeUtility<ContainerType>::getTypeCode();
     }
     
@@ -138,7 +138,7 @@ public:
         this->getInternal()->setItem (other);
     }
     
-    inline Dynamic containerCopy() const throw()            { return *this; }
+    //inline Dynamic containerCopy() const throw()            { return *this; }
     inline const GenericContainer& getItem() const throw()  { return this->getInternal()->getItem(); }
     inline GenericContainer& getItem() throw()              { return this->getInternal()->getItem(); }    
     inline int getTypeCode() const throw()                  { return this->getInternal()->getTypeCode(); }

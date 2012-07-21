@@ -108,7 +108,7 @@ class AtomicExtended : public AtomicBase<Type>
         \
         inline ATOMIC_CLASS (ATOMIC_CLASS const& copy) throw() {\
             pl_Atomic##FUNCCODE##_Init (getAtomicRef());\
-            pl_Atomic##FUNCCODE##_Set (getAtomicRef(), pl_Atomic##FUNCCODE##_Get ((AtomTypeRef)&copy.atomic));\
+            pl_Atomic##FUNCCODE##_Set (getAtomicRef(), pl_Atomic##FUNCCODE##_Get (copy.getAtomicRef()));\
         }\
         \
         inline  ~ATOMIC_CLASS() {\
@@ -116,7 +116,7 @@ class AtomicExtended : public AtomicBase<Type>
         }\
         \
         inline ATOMIC_CLASS& operator= (ATOMIC_CLASS const& other) throw() {\
-            if (this != &other) pl_Atomic##FUNCCODE##_Set (getAtomicRef(), pl_Atomic##FUNCCODE##_Get ((AtomTypeRef)&other.atomic));\
+            if (this != &other) pl_Atomic##FUNCCODE##_Set (getAtomicRef(), pl_Atomic##FUNCCODE##_Get (other.getAtomicRef()));\
             return *this;\
         }\
         inline ATOMIC_CLASS& operator= (const Plank##TYPECODE other) throw() {\
@@ -169,7 +169,7 @@ class AtomicExtended : public AtomicBase<Type>
         \
     private:\
         inline AtomTypeRef getAtomicRef() { return static_cast<AtomTypeRef> (&atomic); }\
-        inline const AtomTypeRef getAtomicRef() const { return const_cast<const AtomTypeRef> (&atomic); }\
+        inline const AtomTypeRef getAtomicRef() const { return const_cast<AtomTypeRef> (&atomic); }\
         \
         PLANK_ALIGN(8)\
         AtomType atomic;\
@@ -218,7 +218,7 @@ public:
     inline AtomicValue (AtomicValue const& copy) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), pl_AtomicP_Get ((PlankAtomicPRef)&copy.atomic));
+        pl_AtomicP_Set (getAtomicRef(), pl_AtomicP_Get (copy.getAtomicRef()));
     }
     
     inline ~AtomicValue() 
@@ -229,7 +229,7 @@ public:
     inline AtomicValue& operator= (AtomicValue const& other) throw() 
     {
         if (this != &other) 
-            pl_AtomicP_Set (getAtomicRef(), pl_AtomicP_Get ((PlankAtomicPRef)&other.atomic));
+            pl_AtomicP_Set (getAtomicRef(), pl_AtomicP_Get (other.getAtomicRef()));
         
         return *this;
     }
@@ -291,8 +291,10 @@ public:
     inline Type* getPtr() const throw()                     { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
     inline Type* operator->() const throw()                 { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
 
-    inline Type* getValueUnchecked() const throw()          { return static_cast<const Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
-    inline Type* getPtrUnchecked() const throw()            { return static_cast<const Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+    inline Type* getValueUnchecked() const throw()          { return static_cast<Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+    inline Type* getPtrUnchecked() const throw()            { return static_cast<Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+    inline Long getExtra() const throw()                    { return pl_AtomicP_GetExtra (getAtomicRef()); }
+    inline Long getExtraUnchecked() const throw()           { return pl_AtomicP_GetExtraUnchecked (getAtomicRef()); }
 
     inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
     inline operator Type* () const throw()                  { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
@@ -301,12 +303,12 @@ public:
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
     inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
 
-//    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == other; }
-//    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != other; }
-//    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  other; }
-//    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= other; }
-//    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  other; }
-//    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= other; }
+    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Type> (other); }
+    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Type> (other); }
+    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Type> (other); }
+    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Type> (other); }
+    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Type> (other); }
+    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Type> (other); }
 
     bool operator== (const Type* other) const throw() { return this->getPtrUnchecked() == other; }
     bool operator!= (const Type* other) const throw() { return this->getPtrUnchecked() != other; }
@@ -351,7 +353,7 @@ public:
     
 private:
     inline PlankAtomicPRef getAtomicRef() { return static_cast<PlankAtomicPRef> (&atomic); }
-    inline const PlankAtomicPRef getAtomicRef() const { return const_cast<const PlankAtomicPRef> (&atomic); }
+    inline const PlankAtomicPRef getAtomicRef() const { return const_cast<PlankAtomicPRef> (&atomic); }
     
     PLONK_ALIGN(8) 
     PlankAtomicP atomic;
@@ -389,7 +391,7 @@ public:
     inline AtomicExtended (AtomicExtended const& copy) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), pl_AtomicPX_Get ((PlankAtomicPXRef)&copy.atomic));
+        pl_AtomicPX_Set (getAtomicRef(), pl_AtomicPX_Get (copy.getAtomicRef()));
     }
     
     inline ~AtomicExtended() 
@@ -400,7 +402,7 @@ public:
     inline AtomicExtended& operator= (AtomicExtended const& other) throw() 
     {
         if (this != &other) 
-            pl_AtomicPX_Set (getAtomicRef(), pl_AtomicPX_Get ((PlankAtomicPXRef)&other.atomic));
+            pl_AtomicPX_Set (getAtomicRef(), pl_AtomicPX_Get (other.getAtomicRef()));
         
         return *this;
     }
@@ -492,12 +494,12 @@ public:
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
     inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
 
-//    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == other; }
-//    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != other; }
-//    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  other; }
-//    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= other; }
-//    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  other; }
-//    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= other; }
+    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Type> (other); }
+    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Type> (other); }
+    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Type> (other); }
+    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Type> (other); }
+    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Type> (other); }
+    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Type> (other); }
     
     bool operator== (const Type* other) const throw() { return this->getPtrUnchecked() == other; }
     bool operator!= (const Type* other) const throw() { return this->getPtrUnchecked() != other; }
@@ -542,7 +544,7 @@ public:
     
 private:
     inline PlankAtomicPXRef getAtomicRef() { return static_cast<PlankAtomicPXRef> (&atomic); }
-    inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<const PlankAtomicPXRef> (&atomic); }
+    inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<PlankAtomicPXRef> (&atomic); }
     
     PLONK_ALIGN(16) 
     PlankAtomicPX atomic;
@@ -567,7 +569,7 @@ public:
     inline AtomicExtended (AtomicExtended const& copy) throw() 
     {
         pl_AtomicLX_Init (getAtomicRef());
-        pl_AtomicLX_Set (getAtomicRef(), pl_AtomicLX_Get ((PlankAtomicLXRef)&copy.atomic));
+        pl_AtomicLX_Set (getAtomicRef(), pl_AtomicLX_Get (copy.getAtomicRef()));
     }
     
     inline ~AtomicExtended() 
@@ -578,7 +580,7 @@ public:
     inline AtomicExtended& operator= (AtomicExtended const& other) throw() 
     {
         if (this != &other) 
-            pl_AtomicLX_Set (getAtomicRef(), pl_AtomicLX_Get ((PlankAtomicLXRef)&other.atomic));
+            pl_AtomicLX_Set (getAtomicRef(), pl_AtomicLX_Get (other.getAtomicRef()));
         
         return *this;
     }
@@ -609,7 +611,12 @@ public:
         return pl_AtomicLX_Swap (getAtomicRef(), newValue);
     }
     
-    Long swapAll (const Long newValue, const Long newExtra, Long* oldExtraPtr = 0) throw() 
+    Long swapAll (const Long newValue, const Long newExtra) throw() 
+    {
+        return pl_AtomicLX_SwapAll (getAtomicRef(), newValue, newExtra, 0);
+    }
+    
+    Long swapAll (const Long newValue, const Long newExtra, Long* oldExtraPtr) throw() 
     {
         return pl_AtomicLX_SwapAll (getAtomicRef(), newValue, newExtra, oldExtraPtr);
     }
@@ -619,6 +626,20 @@ public:
     inline Long getExtra() const throw() { return pl_AtomicLX_GetExtra (getAtomicRef()); }
     inline Long getValueUnchecked() const throw() { return pl_AtomicLX_GetUnchecked (getAtomicRef()); }
     inline Long getExtraUnchecked() const throw() { return pl_AtomicLX_GetExtraUnchecked (getAtomicRef()); }
+
+    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Long> (other); }
+    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Long> (other); }
+    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Long> (other); }
+    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Long> (other); }
+    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Long> (other); }
+    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Long> (other); }
+    
+    bool operator== (const Long other) const throw() { return this->getValueUnchecked() == other; }
+    bool operator!= (const Long other) const throw() { return this->getValueUnchecked() != other; }
+    bool operator<  (const Long other) const throw() { return this->getValueUnchecked() <  other; }
+    bool operator<= (const Long other) const throw() { return this->getValueUnchecked() <= other; }
+    bool operator>  (const Long other) const throw() { return this->getValueUnchecked() >  other; }
+    bool operator>= (const Long other) const throw() { return this->getValueUnchecked() >= other; }
 
     inline Long operator+= (const Long operand) throw() 
     { 
@@ -656,7 +677,7 @@ public:
     
 private:
     inline PlankAtomicLXRef getAtomicRef() { return static_cast<PlankAtomicLXRef> (&atomic); }
-    inline const PlankAtomicLXRef getAtomicRef() const { return const_cast<const PlankAtomicLXRef> (&atomic); }
+    inline const PlankAtomicLXRef getAtomicRef() const { return const_cast<PlankAtomicLXRef> (&atomic); }
     
     PLONK_ALIGN(16) 
     PlankAtomicLX atomic;
@@ -784,6 +805,20 @@ public:
         return element.separate.extra;
     }
     
+    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Int> (other); }
+    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Int> (other); }
+    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Int> (other); }
+    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Int> (other); }
+    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Int> (other); }
+    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Int> (other); }
+    
+    bool operator== (const Int other) const throw() { return this->getValueUnchecked() == other; }
+    bool operator!= (const Int other) const throw() { return this->getValueUnchecked() != other; }
+    bool operator<  (const Int other) const throw() { return this->getValueUnchecked() <  other; }
+    bool operator<= (const Int other) const throw() { return this->getValueUnchecked() <= other; }
+    bool operator>  (const Int other) const throw() { return this->getValueUnchecked() >  other; }
+    bool operator>= (const Int other) const throw() { return this->getValueUnchecked() >= other; }
+
     inline Int operator+= (const Int operand) throw() 
     { 
         bool success;
@@ -981,6 +1016,20 @@ public:
         return element.separate.extra;
     }
     
+    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Short> (other); }
+    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Short> (other); }
+    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Short> (other); }
+    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Short> (other); }
+    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Short> (other); }
+    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Short> (other); }
+    
+    bool operator== (const Short other) const throw() { return this->getValueUnchecked() == other; }
+    bool operator!= (const Short other) const throw() { return this->getValueUnchecked() != other; }
+    bool operator<  (const Short other) const throw() { return this->getValueUnchecked() <  other; }
+    bool operator<= (const Short other) const throw() { return this->getValueUnchecked() <= other; }
+    bool operator>  (const Short other) const throw() { return this->getValueUnchecked() >  other; }
+    bool operator>= (const Short other) const throw() { return this->getValueUnchecked() >= other; }
+
     inline Short operator+= (const Short operand) throw() 
     { 
         bool success;

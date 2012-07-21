@@ -225,7 +225,7 @@ public:
     NumericalArray& operator= (NumericalArray const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
         
         return *this;
 	}

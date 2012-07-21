@@ -76,7 +76,7 @@ public:
     /** Default constructor.
      Creates a "null" channel. */
     ChannelBase() throw() 
-    :   Base (ChannelBase::getNull().containerCopy().getInternal()) 
+    :   Base (ChannelBase::getNull().getInternal())//(ChannelBase::getNull().containerCopy().getInternal()) 
     { 
     }
     
@@ -97,13 +97,13 @@ public:
     ChannelBase& operator= (ChannelBase const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
         
         return *this;
 	}
     
 //    ChannelBase (Dynamic const& other) throw()
-//    :   Base (static_cast<Internal*> (other.containerCopy().getItem().getInternal()))
+//    :   Base (static_cast<Internal*> (other.getItem().getInternal()))
 //    {
 //        if (this->getInternal() == 0)
 //            operator= (ChannelBase());

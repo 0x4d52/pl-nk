@@ -87,7 +87,7 @@ public:
     ObjectArray2DBase& operator= (ObjectArray2DBase const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
         
         return *this;
 	}
@@ -528,7 +528,7 @@ public:
     ObjectArray2D& operator= (ObjectArray2D const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
         
         return *this;
 	}

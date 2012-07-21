@@ -211,7 +211,7 @@ public:
     LockFreeStack& operator= (LockFreeStack const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
         
         return *this;
 	}

@@ -76,7 +76,21 @@ private:
     Type object;        
 };
 
-
+/** Store and retrieve an object atomically.
+ This stores an object using a reference counted wrapper. The object must implement
+ a getNull() function and should implement operator-> (in order for this operator
+ to be usable on the AtomicObject). Subclasses of SmartPointerContainer meet both
+ of these requirements and work well with this class.
+ 
+ It is important to note that the storage and retrieval of the object is atomic
+ (i.e., threadsafe) but other operations on the object may not be threadsafe.
+ This is especially true of subclasses of SmartPointerContainer in Plonk.
+ 
+ For example you could store a FloatArray in an AtomicObject<FloatArray>, access
+ items in the array, get the size of the array. But adding items to or removing
+ items from the array would not be threadsafe. Instead your algorithm would need 
+ to use only one thread to modify such objects but new items could be received from 
+ other threads via the AtomicObject<FloatArray> and addded on the designated thread. */
 template<class Type>
 class AtomicObject
 {
@@ -103,7 +117,6 @@ public:
     
     inline AtomicObject (AtomicObject const& copy) throw()
     {
-//        Wrapper* const wrapper (incrementRefCountAndGetPtr (const_cast<AtomicWrapperPointer&> (copy.atom)));
         Wrapper* const wrapper (incrementRefCountAndGetPtr (copy.atom));
         AtomicWrapperPointer temp (wrapper);
         atom.swapWith (temp);
@@ -275,37 +288,6 @@ private:
     exit:
         return wrapper;
     }
-
-    
-//    static inline Wrapper* incrementRefCountAndGetPtr (AtomicWrapperPointer& atom) throw()
-//    {
-//        int counter;
-//        Wrapper* wrapper = getNullWrapper();
-//        
-//        do 
-//        {
-//            do 
-//            {
-//                wrapper = atom.getPtrUnchecked();
-//                
-//                if (wrapper == getNullWrapper())
-//                    goto exit;
-//                
-//                counter = wrapper->counter.getValueUnchecked();
-//                
-//            } while (wrapper != atom.getPtrUnchecked());
-//            
-//        } while ((wrapper != getNullWrapper()) && 
-//                 !wrapper->counter.compareAndSwap (counter, counter + 1));
-//        
-//#if PLONK_ATOMICOBJECT_DEBUG
-//        printf ("AtomicObject: *++%p->counter = %d [extra=%ld] [thread=%lx]\n", 
-//                wrapper, counter + 1, atom.getExtraUnchecked(), Threading::getCurrentThreadID());
-//#endif
-//        
-//    exit:
-//        return wrapper;
-//    }
 };
 
 template<class Type>
