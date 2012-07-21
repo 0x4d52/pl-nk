@@ -39,7 +39,7 @@
 #ifndef PLONK_ATOMICOBJECT_H
 #define PLONK_ATOMICOBJECT_H
 
-#define PLONK_ATOMICOBJECT_DEBUG 1
+#define PLONK_ATOMICOBJECT_DEBUG 0
 
 template<class Type> class AtomicObject;
 

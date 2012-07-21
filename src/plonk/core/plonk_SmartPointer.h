@@ -79,8 +79,8 @@ public:
 	/// @name Miscellaneous
 	/// @{
 	
-	Long getRefCount() const throw()	{ return refCount; }
-	bool isActive() const throw()       { return active != 0; }
+	Int getRefCount() const throw()	{ return refCount.getValueUnchecked(); }
+//	bool isActive() const throw()       { return active != 0; }
     void update() throw() { }
     void* getWeak() const throw()       { return weakPointer; }
         
@@ -89,9 +89,10 @@ public:
 protected:
     virtual void destroy();
     
-    Long refCount; //AtomicValue<Long> refCount;
+    //Int refCount;
+    AtomicValue<Int> refCount;
     void *weakPointer;
-	unsigned int active;
+//	unsigned int active;
 	
 private:
 	SmartPointer (const SmartPointer&);

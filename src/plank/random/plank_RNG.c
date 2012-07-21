@@ -88,7 +88,7 @@ PlankRNGRef pl_RNG_Create()
     return p;
 }
 
-PlankResult pl_RNG_Init(PlankRNGRef p)
+PlankResult pl_RNG_Init (PlankRNGRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
@@ -97,7 +97,7 @@ PlankResult pl_RNG_Init(PlankRNGRef p)
     return PlankResult_OK;
 }
 
-PlankResult pl_RNG_DeInit(PlankRNGRef p)
+PlankResult pl_RNG_DeInit (PlankRNGRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;

@@ -42,6 +42,7 @@
 #include "plonk_CoreForwardDeclarations.h"
 #include "plonk_SmartPointer.h"
 
+
 /** Holds a weak reference to a SmartPointer.
  This is a peer to a SmartPointer and stores a copy of the pointer. 
  The main difference is that this copy does not increment the reference 
@@ -51,13 +52,13 @@
 class WeakPointer : public SmartPointer
 {
 public:
-    WeakPointer(SmartPointer* smartPointerToUse) throw();
+    WeakPointer (SmartPointer* smartPointerToUse) throw();
     
-    void setWeakPointer(SmartPointer* smartPointerToUse) throw();
+    void setWeakPointer (SmartPointer* smartPointerToUse) throw();
     SmartPointer* getWeakPointer() const throw();
     
 private:
-    SmartPointer* smartPointer;
+    AtomicExtended<SmartPointer*> smartPointer;
     
     WeakPointer();
     WeakPointer (const WeakPointer&);

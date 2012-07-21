@@ -120,6 +120,8 @@ public:
     static const Variable& getNull() throw()
 	{
 		static Variable null;
+        //null.getInternal()->incrementRefCount(); //!!
+        //printf("%s::null = %p [refCount=%d]\n", typeid(Variable).name(), null.getInternal(), null.getInternal()->getRefCount());
 		return null;
 	}	                
     

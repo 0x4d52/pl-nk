@@ -41,6 +41,7 @@
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
+#include "plonk_BinaryOpPlink.h"
 
 template<class SampleType> class ChannelMixerChannelInternal;
 
@@ -135,7 +136,7 @@ public:
             }
             else if (inputBufferLength == 1)
             {
-                SampleType value (inputSamples[0]);
+                const SampleType value (inputSamples[0]);
                 
                 for (i = 0; i < outputBufferLength; ++i) 
                     outputSamples[i] += value;
@@ -159,6 +160,108 @@ public:
             info.resetShouldDelete();
     }
 };
+
+//------------------------------------------------------------------------------
+
+#ifdef PLONK_USEPLINK
+
+template<>
+class ChannelMixerChannelInternal<float>
+:   public ChannelInternal<float, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,float)>
+{
+public:
+    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,float)  Data;
+    typedef ChannelBase<float>                                         ChannelType;
+    typedef ChannelMixerChannelInternal<float>                         ChannelMixerInternal;
+    typedef ChannelInternal<float,Data>                                Internal;
+    typedef ChannelInternalBase<float>                                 InternalBase;
+    typedef UnitBase<float>                                            UnitType;
+    typedef InputDictionary                                            Inputs;
+    typedef NumericalArray<float>                                      Buffer;
+        
+    typedef typename BinaryOpChannelInternal<float,plonk::addop>::Process Process;
+    
+    ChannelMixerChannelInternal (Inputs const& inputs, 
+                                 Data const& data, 
+                                 BlockSize const& blockSize,
+                                 SampleRate const& sampleRate) throw()
+    :   Internal (inputs, data, blockSize, sampleRate)
+    {
+//        Process::init (&p, this, NumOutputs, NumInputs);
+    }
+    
+    Text getName() const throw()
+    {        
+        return "Channel Mixer";
+    }    
+    
+    IntArray getInputKeys() const throw()
+    {
+        const IntArray keys (IOKey::Generic);
+        return keys;
+    }    
+    
+    InternalBase* getChannel (const int /*index*/) throw()
+    {
+        return this;
+    }    
+    
+    void initChannel (const int /*channel*/) throw()
+    {
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
+        
+        this->setBlockSize (BlockSize::decide (input.getMaxBlockSize(),
+                                               this->getBlockSize()));
+        this->setSampleRate (SampleRate::decide (input.getMaxSampleRate(),
+                                                 this->getSampleRate()));      
+        
+        const int numChannels = input.getNumChannels();
+        float value = 0.f;
+        
+        for (int i = 0; i < numChannels; ++i)
+            value += input.getValue (i);
+        
+        this->initValue (value);
+    }
+    
+    void process (ProcessInfo& info, const int /*channel*/) throw()
+    {        
+        this->getOutputBuffer().zero();
+        float* const outputSamples = this->getOutputSamples();
+        const int outputBufferLength = this->getOutputBuffer().length();
+        pl_VectorClearF_N (outputSamples, outputBufferLength);
+        
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        
+        const int numChannels = inputUnit.getNumChannels();
+        
+        p.buffers[0].bufferSize = outputBufferLength;
+        p.buffers[0].buffer     = outputSamples;
+        p.buffers[1].bufferSize = outputBufferLength;
+        p.buffers[1].buffer     = outputSamples;
+        
+        
+        for (int channel = 0; channel < numChannels; ++channel)
+        {
+            plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
+            
+            const Buffer inputBuffer (inputUnit.process (info, channel));            
+            p.buffers[2].bufferSize = inputBuffer.length();
+            p.buffers[2].buffer     = inputBuffer.getArray();
+            plink_BinaryOpProcessAddF (&p, 0);
+        }
+        
+        const Data& data = this->getState();
+
+        if (data.allowAutoDelete == false)
+            info.resetShouldDelete();
+    }
+    
+private:
+    Process p;
+};
+
+#endif //PLONK_USEPLINK
 
 //------------------------------------------------------------------------------
 

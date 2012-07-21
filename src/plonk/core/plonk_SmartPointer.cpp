@@ -115,13 +115,12 @@ private:
 
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
 :	refCount (0),
-	weakPointer (0),
-    active (0)
+    weakPointer (0)//, active (0)
 {		
 	if (allocateWeakPointer)
 		weakPointer = new WeakPointer (this);
 
-    active = 1;
+//    active = 1;
     
     if (weakPointer != 0)
     {
@@ -160,7 +159,7 @@ SmartPointer::~SmartPointer()
   #endif
 #endif
     
-	plonk_assert (refCount >= 0);
+	plonk_assert (refCount == 0);
     
     if (weakPointer != 0)
     {
@@ -186,50 +185,81 @@ void SmartPointer::operator delete (void* ptr)
     Memory::realTime().free (ptr); 
 }
 
+//void SmartPointer::destroy()
+//{
+//    plonk_assert (active); // want to see if these checks can be removed...
+//    
+//    if (active)
+//    {
+//        active = 0;
+//        //Deleter::getDeleter()->deleteInternal (this);
+//        delete this; 
+//    }
+//}
+//
+//void SmartPointer::incrementRefCount()  throw()
+//{	
+//    plonk_assert (active); // want to see if these checks can be removed...
+//
+//	if (active) 
+//    {
+//        ++refCount;
+//    }
+//}
+//
+//bool SmartPointer::decrementRefCount()  throw()
+//{ 
+//    plonk_assert (active); // want to see if these checks can be removed...
+//
+//	if (active)
+//	{
+//		plonk_assert (refCount > 0);
+//
+//        --refCount;
+//        
+//        if (deleteIfOnlyMutualReferencesRemain() == true)
+//		{
+//            --refCount;
+//			plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
+//        }
+//		
+//        if (refCount <= 0) 
+//        {
+//            destroy();
+//            return true;
+//        }
+//	}
+//    
+//    return false;
+//}
+
 void SmartPointer::destroy()
 {
-    plonk_assert (active); // want to see if these checks can be removed...
-    
-    if (active)
-    {
-        active = 0;
-        //Deleter::getDeleter()->deleteInternal (this);
-        delete this; 
-    }
+    delete this; 
 }
 
 void SmartPointer::incrementRefCount()  throw()
 {	
-    plonk_assert (active); // want to see if these checks can be removed...
-
-	if (active) 
-    {
-        ++refCount;
-    }
+    ++refCount;
 }
 
 bool SmartPointer::decrementRefCount()  throw()
 { 
-    plonk_assert (active); // want to see if these checks can be removed...
-
-	if (active)
-	{
-		plonk_assert (refCount > 0);
-
+    plonk_assert (refCount > 0);
+    
+    --refCount;
+    
+    if (deleteIfOnlyMutualReferencesRemain() == true)
+    {
         --refCount;
-        
-        if (deleteIfOnlyMutualReferencesRemain() == true)
-		{
-            --refCount;
-			plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
-        }
-		
-        if (refCount <= 0) 
-        {
-            destroy();
-            return true;
-        }
-	}
+        plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
+    }
+    
+    if (refCount <= 0) 
+    {
+        destroy();
+        return true;
+    }
     
     return false;
 }
