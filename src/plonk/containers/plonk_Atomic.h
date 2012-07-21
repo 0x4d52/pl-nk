@@ -473,6 +473,11 @@ public:
         return pl_AtomicPX_SwapAll (getAtomicRef(), newValue, newExtra, &oldExtra);
     }
     
+    inline void swapWith (AtomicExtended& other) throw() 
+    {
+        return pl_AtomicPX_SwapOther (getAtomicRef(), other.getAtomicRef());
+    }
+    
     inline void setObject (Type const& other) throw()       { pl_AtomicPX_Set (getAtomicRef(), (void*)(&other)); }
     inline void setValue (const Type* other) throw()        { pl_AtomicPX_Set (getAtomicRef(), (void*)(other)); }
     inline void setPtr (const Type* other) throw()          { pl_AtomicPX_Set (getAtomicRef(), (void*)(other)); }
@@ -673,6 +678,399 @@ private:
     PlankAtomicLX atomic;
 };
 
+template<>
+class AtomicExtended<Int> : public AtomicBase<Long>
+{
+public:
+    inline AtomicExtended() throw() 
+    {
+    }
+    
+    inline AtomicExtended (const Int initialValue) throw() 
+    :   atom (fromParts (initialValue, 0))
+    {
+    }    
+    
+    inline AtomicExtended (AtomicExtended const& copy) throw() 
+    {
+        setValue (copy.getValue());
+    }
+    
+    inline ~AtomicExtended() 
+    {
+    }
+    
+    inline AtomicExtended& operator= (AtomicExtended const& other) throw() 
+    {
+        if (this != &other) 
+            setValue (other.getValue());
+        
+        return *this;
+    }
+    
+    inline AtomicExtended& operator= (const Int other) throw() 
+    {
+        setValue (other);
+        return *this;
+    }        
+    
+    inline void setAll (const Int other, const Int extra) throw() 
+    { 
+        atom.setValue (fromParts (other, extra));
+    }
+    
+    inline bool compareAndSwap (const Int oldValue, const Int oldExtra, const Int newValue, const Int newExtra) throw() 
+    {
+        return atom.compareAndSwap (fromParts (oldValue, oldExtra), fromParts (newValue, newExtra));
+    }
+    
+    inline bool compareAndSwap (const Int newValue, const Int newExtra) throw() 
+    {
+        return atom.compareAndSwap (atom.getValueUnchecked(), fromParts (newValue, newExtra));
+    }
+    
+    inline Int swap (const Int newValue) throw() 
+    {
+        bool success;
+        Element oldAll, newAll;
+        
+        do 
+        {
+            oldAll.whole = atom.getValueUnchecked();
+            newAll.separate.value = newValue;
+            newAll.separate.extra = oldAll.separate.extra + 1;
+            success = atom.compareAndSwap (oldAll.whole, newAll.whole);
+        } while (!success);
+        
+        return oldAll.separate.value;
+    }
+    
+    Int swapAll (const Int newValue, const Int newExtra) throw() 
+    {
+        return swapAll (newValue, newExtra, 0);
+    }
+    
+    Int swapAll (const Int newValue, const Int newExtra, Int* oldExtraPtr) throw() 
+    {
+        bool success;
+        Element oldAll;
+        
+        do 
+        {
+            oldAll.whole = atom.getValueUnchecked();
+            success = atom.compareAndSwap (oldAll.whole, fromParts (newValue, newExtra));
+        } while (!success);
+        
+        if (oldExtraPtr != 0)
+            *oldExtraPtr = oldAll.separate.extra;
+        
+        return oldAll.separate.value;
+    }
+    
+    inline void setValue (const Int other) throw() 
+    { 
+        swap (other);
+    }
+    
+    inline Int getValue() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValue();
+        return element.separate.value;
+    }
+    
+    inline Int getExtra() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValue();
+        return element.separate.extra;
+    }
+    
+    inline Int getValueUnchecked() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValueUnchecked();
+        return element.separate.value;
+    }
+    
+    inline Int getExtraUnchecked() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValueUnchecked();
+        return element.separate.extra;
+    }
+    
+    inline Int operator+= (const Int operand) throw() 
+    { 
+        bool success;
+        Element oldAll, newAll;
+        
+        do 
+        {
+            oldAll.whole = atom.getValueUnchecked();
+            newAll.separate.value = oldAll.separate.value + operand;
+            newAll.separate.extra = oldAll.separate.extra + 1;
+            success = atom.compareAndSwap (oldAll.whole, newAll.whole);
+        } while (!success);
+        
+        return newAll.separate.value;
+    }
+    
+    inline Int operator-= (const Int operand) throw() 
+    { 
+        return operator+= (-operand);
+    }
+    
+    inline Int operator++() throw() 
+    { 
+        return operator+= (1);
+    }
+    
+    inline Int operator--() throw() 
+    { 
+        return operator+= (-1);
+    }
+    
+    inline Int operator++ (int) throw() 
+    { 
+        const Int oldValue = getValueUnchecked(); 
+        ++(*this); 
+        return oldValue; 
+    }
+    
+    inline Int operator-- (int) throw() 
+    { 
+        const Int oldValue = getValueUnchecked(); 
+        --(*this); 
+        return oldValue; 
+    }
+    
+private:    
+    AtomicValue<Long> atom;
+    
+    struct Separate
+    {
+        Int value;
+        Int extra;
+    };
+        
+    union Element
+    {
+        Separate separate;
+        Long whole;
+    };
+    
+    static inline Long fromParts (const Int value, const Int extra) throw()
+    {
+        Element element = { { value, extra } };
+        return element.whole;
+    }
+    
+    static inline Separate fromWhole (Long const& whole) throw()
+    {
+        Element element;
+        element.whole = whole;
+        return element.separate;
+    }
+    
+};
+
+template<>
+class AtomicExtended<Short> : public AtomicBase<Int>
+{
+public:
+    inline AtomicExtended() throw() 
+    {
+    }
+    
+    inline AtomicExtended (const Short initialValue) throw() 
+    :   atom (fromParts (initialValue, 0))
+    {
+    }    
+    
+    inline AtomicExtended (AtomicExtended const& copy) throw() 
+    {
+        setValue (copy.getValue());
+    }
+    
+    inline ~AtomicExtended() 
+    {
+    }
+    
+    inline AtomicExtended& operator= (AtomicExtended const& other) throw() 
+    {
+        if (this != &other) 
+            setValue (other.getValue());
+        
+        return *this;
+    }
+    
+    inline AtomicExtended& operator= (const Short other) throw() 
+    {
+        setValue (other);
+        return *this;
+    }        
+    
+    inline void setAll (const Short other, const Short extra) throw() 
+    { 
+        atom.setValue (fromParts (other, extra));
+    }
+    
+    inline bool compareAndSwap (const Short oldValue, const Short oldExtra, const Short newValue, const Short newExtra) throw() 
+    {
+        return atom.compareAndSwap (fromParts (oldValue, oldExtra), fromParts (newValue, newExtra));
+    }
+    
+    inline bool compareAndSwap (const Short newValue, const Short newExtra) throw() 
+    {
+        return atom.compareAndSwap (atom.getValueUnchecked(), fromParts (newValue, newExtra));
+    }
+    
+    inline Short swap (const Short newValue) throw() 
+    {
+        bool success;
+        Element oldAll, newAll;
+        
+        do 
+        {
+            oldAll.whole = atom.getValueUnchecked();
+            newAll.separate.value = newValue;
+            newAll.separate.extra = oldAll.separate.extra + 1;
+            success = atom.compareAndSwap (oldAll.whole, newAll.whole);
+        } while (!success);
+        
+        return oldAll.separate.value;
+    }
+    
+    Short swapAll (const Short newValue, const Short newExtra) throw() 
+    {
+        return swapAll (newValue, newExtra, 0);
+    }
+    
+    Short swapAll (const Short newValue, const Short newExtra, Short* oldExtraPtr) throw() 
+    {
+        bool success;
+        Element oldAll;
+        
+        do 
+        {
+            oldAll.whole = atom.getValueUnchecked();
+            success = atom.compareAndSwap (oldAll.whole, fromParts (newValue, newExtra));
+        } while (!success);
+        
+        if (oldExtraPtr != 0)
+            *oldExtraPtr = oldAll.separate.extra;
+        
+        return oldAll.separate.value;
+    }
+    
+    inline void setValue (const Short other) throw() 
+    { 
+        swap (other);
+    }
+    
+    inline Short getValue() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValue();
+        return element.separate.value;
+    }
+    
+    inline Short getExtra() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValue();
+        return element.separate.extra;
+    }
+    
+    inline Short getValueUnchecked() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValueUnchecked();
+        return element.separate.value;
+    }
+    
+    inline Short getExtraUnchecked() const throw() 
+    { 
+        Element element;
+        element.whole = atom.getValueUnchecked();
+        return element.separate.extra;
+    }
+    
+    inline Short operator+= (const Short operand) throw() 
+    { 
+        bool success;
+        Element oldAll, newAll;
+        
+        do 
+        {
+            oldAll.whole = atom.getValueUnchecked();
+            newAll.separate.value = oldAll.separate.value + operand;
+            newAll.separate.extra = oldAll.separate.extra + 1;
+            success = atom.compareAndSwap (oldAll.whole, newAll.whole);
+        } while (!success);
+        
+        return newAll.separate.value;
+    }
+    
+    inline Short operator-= (const Short operand) throw() 
+    { 
+        return operator+= (-operand);
+    }
+    
+    inline Short operator++() throw() 
+    { 
+        return operator+= (1);
+    }
+    
+    inline Short operator--() throw() 
+    { 
+        return operator+= (-1);
+    }
+    
+    inline Short operator++ (int) throw() 
+    { 
+        const Short oldValue = getValueUnchecked(); 
+        ++(*this); 
+        return oldValue; 
+    }
+    
+    inline Short operator-- (int) throw() 
+    { 
+        const Short oldValue = getValueUnchecked(); 
+        --(*this); 
+        return oldValue; 
+    }
+    
+private:    
+    AtomicValue<Int> atom;
+    
+    struct Separate
+    {
+        Short value;
+        Short extra;
+    };
+    
+    union Element
+    {
+        Separate separate;
+        Int whole;
+    };
+    
+    static inline Int fromParts (const Short value, const Short extra) throw()
+    {
+        Element element = { { value, extra } };
+        return element.whole;
+    }
+    
+    static inline Separate fromWhole (const Short whole) throw()
+    {
+        Element element;
+        element.whole = whole;
+        return element.separate;
+    }
+    
+};
 
 
 #endif // PLONK_ATOMIC_H

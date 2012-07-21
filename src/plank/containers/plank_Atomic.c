@@ -623,10 +623,10 @@ void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2)
     do {
         tmp1 = *p1;
         tmp2 = *p2;        
-        success = pl_AtomicPX_CompareAndSwap (p1, tmp1.ptr, tmp1.extra, tmp2.ptr, tmp2.extra);
+        success = pl_AtomicPX_CompareAndSwap (p1, tmp1.ptr, tmp1.extra, tmp2.ptr, tmp1.extra + 1);
     } while (!success);
     
-    *p2 = tmp1;
+    pl_AtomicPX_Set (p2, tmp1.ptr);
 }
 
 void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
@@ -927,10 +927,10 @@ void pl_AtomicLX_SwapOther (PlankAtomicLXRef p1, PlankAtomicLXRef p2)
     do {
         tmp1 = *p1;
         tmp2 = *p2;        
-        success = pl_AtomicLX_CompareAndSwap (p1, tmp1.value, tmp1.extra, tmp2.value, tmp2.extra);
+        success = pl_AtomicLX_CompareAndSwap (p1, tmp1.value, tmp1.extra, tmp2.value, tmp1.extra + 1);
     } while (!success);
     
-    *p2 = tmp1;
+    pl_AtomicLX_Set (p2, tmp1.value);
 }
 
 void pl_AtomicLX_SetAll (PlankAtomicLXRef p, PlankL newValue, PlankL newExtra)

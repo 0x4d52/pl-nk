@@ -81,7 +81,8 @@ template<class Type>
 class AtomicObject
 {
 public: 
-    typedef AtomicObjectWrapper<Type> Wrapper;
+    typedef AtomicObjectWrapper<Type>   Wrapper;
+    typedef AtomicExtended<Wrapper*>       AtomicWrapperPointer;
 
     inline AtomicObject() throw()
     {
@@ -95,7 +96,7 @@ public:
     
     inline ~AtomicObject()
     {
-        AtomicValue<Wrapper*> temp (getNullWrapper());
+        AtomicWrapperPointer temp (getNullWrapper());
         atom.swapWith (temp);
         
         decrementRefCount (temp);
@@ -103,7 +104,7 @@ public:
     
     inline AtomicObject (AtomicObject const& copy) throw()
     {
-        AtomicValue<Wrapper*> temp (incrementRefCountAndGetPtr (const_cast<AtomicValue<Wrapper*>&> (copy.atom)));
+        AtomicWrapperPointer temp (incrementRefCountAndGetPtr (const_cast<AtomicWrapperPointer&> (copy.atom)));
         atom.swapWith (temp);
     }
     
@@ -188,11 +189,11 @@ public:
     }
     
 private:
-    AtomicValue<Wrapper*> atom; 
+    AtomicWrapperPointer atom; 
     
     inline void init (Type const& object) throw()
     {
-        AtomicValue<Wrapper*> temp (new Wrapper (object));
+        AtomicWrapperPointer temp (new Wrapper (object));
         incrementRefCount (temp);
         atom.swapWith (temp);
     }
@@ -202,7 +203,7 @@ private:
         return static_cast<Wrapper*> (0);
     }
     
-    static inline void incrementRefCount (AtomicValue<Wrapper*>& atom) throw()
+    static inline void incrementRefCount (AtomicWrapperPointer& atom) throw()
     {
         int counter;
         Wrapper* const wrapper (atom.getPtrUnchecked());
@@ -211,13 +212,14 @@ private:
             counter = ++wrapper->counter;
         
 #if PLONK_ATOMICOBJECT_DEBUG
-        printf ("AtomicObject:  ++%p->counter = %d [thread=%lx]\n", wrapper, counter, Threading::getCurrentThreadID());
+        printf ("AtomicObject:  ++%p->counter = %d [extra=%ld] [thread=%lx]\n", 
+                wrapper, counter, atom.getExtraUnchecked(), Threading::getCurrentThreadID());
 #else
         (void)counter;
 #endif
     }
     
-    static inline void decrementRefCount (AtomicValue<Wrapper*>& atom) throw()
+    static inline void decrementRefCount (AtomicWrapperPointer& atom) throw()
     {
         int counter;
         Wrapper* const wrapper (atom.getPtrUnchecked());
@@ -226,16 +228,17 @@ private:
             delete wrapper;
         
 #if PLONK_ATOMICOBJECT_DEBUG
-        printf ("AtomicObject:  --%p->counter = %d [thread=%lx]\n", wrapper, counter, Threading::getCurrentThreadID());
+        printf ("AtomicObject:  --%p->counter = %d [extra=%ld] [thread=%lx]\n", 
+                wrapper, counter, atom.getExtraUnchecked(), Threading::getCurrentThreadID());
 #else
         (void)counter;
 #endif
     }
     
-    static inline Wrapper* incrementRefCountAndGetPtr (AtomicValue<Wrapper*>& atom) throw()
+    static inline Wrapper* incrementRefCountAndGetPtr (AtomicWrapperPointer& atom) throw()
     {
         int counter;
-        Wrapper* wrapper;
+        Wrapper* wrapper = getNullWrapper();
         
         do 
         {
@@ -254,7 +257,8 @@ private:
                  !wrapper->counter.compareAndSwap (counter, counter + 1));
         
 #if PLONK_ATOMICOBJECT_DEBUG
-        printf ("AtomicObject: *++%p->counter = %d [thread=%lx]\n", wrapper, counter + 1, Threading::getCurrentThreadID());
+        printf ("AtomicObject: *++%p->counter = %d [extra=%ld] [thread=%lx]\n", 
+                wrapper, counter + 1, atom.getExtraUnchecked(), Threading::getCurrentThreadID());
 #endif
         
     exit:
