@@ -159,7 +159,7 @@ public:
     
     inline const Inputs getInputs() const throw()                           { return this->getInternal()->getInputs(); }
     
-    inline const Buffer getOutputBuffer() const throw()                     { return this->getInternal()->getOutputBuffer(); }
+    inline const Buffer& getOutputBuffer() const throw()                     { return this->getInternal()->getOutputBuffer(); }
     inline const SampleType* getOutputSamples() const throw()               { return this->getInternal()->getOutputSamples(); }
     inline SampleType* getOutputSamples() throw()                           { return this->getInternal()->getOutputSamples(); }
     inline void setOutputBuffer (Buffer const& externalBuffer) throw()      { this->getInternal()->setOutputBuffer (externalBuffer); }

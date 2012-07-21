@@ -107,8 +107,8 @@ public:
     inline SampleRate& getInputAsSampleRate (const int key) throw()                     { return this->getInputAs<SampleRate> (key); }
     inline BlockSize& getInputAsBlockSize (const int key) throw()                       { return this->getInputAs<BlockSize> (key); }
 
-    inline const Buffer getOutputBuffer() const throw()                                 { return outputBuffer; }
-    inline Buffer getOutputBuffer() throw()                                             { return outputBuffer; }
+    inline const Buffer& getOutputBuffer() const throw()                                { return outputBuffer; }
+    inline Buffer& getOutputBuffer() throw()                                            { return outputBuffer; }
     inline const SampleType* getOutputSamples() const throw()                           { return outputBuffer.getArray(); }
     inline SampleType* getOutputSamples() throw()                                       { return outputBuffer.getArray(); }
     

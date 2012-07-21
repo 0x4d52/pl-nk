@@ -702,17 +702,17 @@ public:
     
     /** Get the output buffer of a specific channel.  
      Indices out of range will be wrapped to the available channels. */
-    inline const Buffer getOutputBuffer (const int index) const throw() 
+    inline const Buffer& getOutputBuffer (const int index) const throw() 
     { 
         return this->wrapAt (index).getOutputBuffer();
     }
     
-    /** Get the output buffer of a specific channel.  
-     Indices out of range will be wrapped to the available channels. */
-    inline Buffer getOutputBuffer (const int index) throw() 
-    { 
-        return this->wrapAt (index).getOutputBuffer();
-    }
+//    /** Get the output buffer of a specific channel.  
+//     Indices out of range will be wrapped to the available channels. */
+//    inline Buffer& getOutputBuffer (const int index) throw() 
+//    { 
+//        return this->wrapAt (index).getOutputBuffer();
+//    }
     
     /** Get a pointer to the raw samples of a specific channel.  
      Indices out of range will be wrapped to the available channels. */
@@ -842,7 +842,7 @@ public:
      for each required block of data. This is generally used by ChannelInternal
      subclasses when obtaining input data. 
      @return The buffer from the requested channel. */
-    inline const Buffer process (ProcessInfo& info, const int channel) throw()
+    inline const Buffer& process (ProcessInfo& info, const int channel) throw()
     {
         ChannelType& theChannel (this->wrapAt (channel));
         

@@ -133,7 +133,7 @@ public:
         return proxiesArray[index].getOutputSamples();
     }
     
-    inline const Buffer getOutputBuffer (const int index) const throw() 
+    inline const Buffer& getOutputBuffer (const int index) const throw() 
     {         
         plonk_assert (index >= 0);
         plonk_assert (index < proxies.getInternal()->length());
@@ -141,7 +141,7 @@ public:
         return proxiesArray[index].getOutputBuffer();
     }
     
-    inline Buffer getOutputBuffer (const int index) throw() 
+    inline Buffer& getOutputBuffer (const int index) throw() 
     {                 
         plonk_assert (index >= 0);
         plonk_assert (index < proxies.getInternal()->length());

@@ -126,7 +126,7 @@ public:
         const double sampleDuration = data.base.sampleDuration;
 
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
-        const FrequencyBufferType frequencyBuffer (frequencyUnit.process (info, channel));
+        const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
         
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
