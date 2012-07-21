@@ -81,8 +81,8 @@ template<class Type>
 class AtomicObject
 {
 public: 
-    typedef AtomicObjectWrapper<Type>   Wrapper;
-    typedef AtomicExtended<Wrapper*>       AtomicWrapperPointer;
+    typedef AtomicObjectWrapper<Type>       Wrapper;
+    typedef AtomicExtended<Wrapper*>        AtomicWrapperPointer;
 
     inline AtomicObject() throw()
     {
@@ -98,13 +98,14 @@ public:
     {
         AtomicWrapperPointer temp (getNullWrapper());
         atom.swapWith (temp);
-        
         decrementRefCount (temp);
     }
     
     inline AtomicObject (AtomicObject const& copy) throw()
     {
-        AtomicWrapperPointer temp (incrementRefCountAndGetPtr (const_cast<AtomicWrapperPointer&> (copy.atom)));
+//        Wrapper* const wrapper (incrementRefCountAndGetPtr (const_cast<AtomicWrapperPointer&> (copy.atom)));
+        Wrapper* const wrapper (incrementRefCountAndGetPtr (copy.atom));
+        AtomicWrapperPointer temp (wrapper);
         atom.swapWith (temp);
     }
     
@@ -191,13 +192,23 @@ public:
 private:
     AtomicWrapperPointer atom; 
     
+    inline AtomicObject (Wrapper* const wrapper) throw()
+    {
+        init (wrapper);
+    }
+    
     inline void init (Type const& object) throw()
     {
-        AtomicWrapperPointer temp (new Wrapper (object));
+        init (new Wrapper (object));
+    }
+
+    inline void init (Wrapper* const wrapper) throw()
+    {
+        AtomicWrapperPointer temp (wrapper);
         incrementRefCount (temp);
         atom.swapWith (temp);
     }
-
+    
     static inline Wrapper* getNullWrapper() throw()
     {
         return static_cast<Wrapper*> (0);
@@ -235,7 +246,7 @@ private:
 #endif
     }
     
-    static inline Wrapper* incrementRefCountAndGetPtr (AtomicWrapperPointer& atom) throw()
+    static inline Wrapper* incrementRefCountAndGetPtr (AtomicWrapperPointer const& atom) throw()
     {
         int counter;
         Wrapper* wrapper = getNullWrapper();
@@ -264,6 +275,37 @@ private:
     exit:
         return wrapper;
     }
+
+    
+//    static inline Wrapper* incrementRefCountAndGetPtr (AtomicWrapperPointer& atom) throw()
+//    {
+//        int counter;
+//        Wrapper* wrapper = getNullWrapper();
+//        
+//        do 
+//        {
+//            do 
+//            {
+//                wrapper = atom.getPtrUnchecked();
+//                
+//                if (wrapper == getNullWrapper())
+//                    goto exit;
+//                
+//                counter = wrapper->counter.getValueUnchecked();
+//                
+//            } while (wrapper != atom.getPtrUnchecked());
+//            
+//        } while ((wrapper != getNullWrapper()) && 
+//                 !wrapper->counter.compareAndSwap (counter, counter + 1));
+//        
+//#if PLONK_ATOMICOBJECT_DEBUG
+//        printf ("AtomicObject: *++%p->counter = %d [extra=%ld] [thread=%lx]\n", 
+//                wrapper, counter + 1, atom.getExtraUnchecked(), Threading::getCurrentThreadID());
+//#endif
+//        
+//    exit:
+//        return wrapper;
+//    }
 };
 
 template<class Type>

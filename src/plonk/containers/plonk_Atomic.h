@@ -196,10 +196,10 @@ public:
         pl_AtomicP_Init (getAtomicRef());
     }
 
-    inline AtomicValue (Type const& initialValue) throw() 
+    inline AtomicValue (Type& initialValue) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), (void*)&initialValue);
+        pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (&initialValue));
     }
     
 	template<class OtherType>
@@ -209,10 +209,10 @@ public:
         pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
     }
     
-    inline AtomicValue (const Type* initialPtr) throw() 
+    inline AtomicValue (Type* initialPtr) throw() 
     {
         pl_AtomicP_Init (getAtomicRef());
-        pl_AtomicP_Set (getAtomicRef(), const_cast<Type*> (initialPtr));
+        pl_AtomicP_Set (getAtomicRef(), initialPtr);
     }    
     
     inline AtomicValue (AtomicValue const& copy) throw() 
@@ -280,36 +280,26 @@ public:
         return pl_AtomicP_SwapOther (getAtomicRef(), other.getAtomicRef());
     }
 
-    inline void setObject (Type const& other) throw()       { pl_AtomicP_Set (getAtomicRef(), (void*)(&other)); }
-    inline void setValue (const Type* other) throw()        { pl_AtomicP_Set (getAtomicRef(), (void*)(other)); }
-    inline void setPtr (const Type* other) throw()          { pl_AtomicP_Set (getAtomicRef(), (void*)(other)); }
+    inline void setObject (Type& other) throw()             { pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (&other)); }
+    inline void setValue (Type* other) throw()              { pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (other)); }
+    inline void setPtr (Type* other) throw()                { pl_AtomicP_Set (getAtomicRef(), static_cast<void*> (other)); }
 
     inline const Type& getObject() const throw()            { return *static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
     inline Type& getObject() throw()                        { return *static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
 
-    inline const Type* getValue() const throw()             { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline Type* getValue() throw()                         { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline const Type* getPtr() const throw()               { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline Type* getPtr() throw()                           { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline const Type* operator->() const throw()           { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline Type* operator->() throw()                       { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
+    inline Type* getValue() const throw()                   { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
+    inline Type* getPtr() const throw()                     { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
+    inline Type* operator->() const throw()                 { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
 
-    inline const Type* getValueUnchecked() const throw()    { return static_cast<const Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
-    inline Type* getValueUnchecked() throw()                { return static_cast<Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
-    inline const Type* getPtrUnchecked() const throw()      { return static_cast<const Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
-    inline Type* getPtrUnchecked() throw()                  { return static_cast<Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+    inline Type* getValueUnchecked() const throw()          { return static_cast<const Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+    inline Type* getPtrUnchecked() const throw()            { return static_cast<const Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+
+    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
+    inline operator Type* () const throw()                  { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
+    inline operator Type () const throw()                   { return *static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
 
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
     inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
-
-//    inline const Type* operator->() const throw()       { return static_cast<const Type*> (atomic.ptr); }
-//    inline Type* operator->() throw()                   { return static_cast<Type*> (atomic.ptr); }
-
-    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline operator Type* () throw()                        { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
-
-    inline operator const Type () const throw()             { return *static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline operator Type () throw()                         { return *static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
 
 //    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == other; }
 //    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != other; }
@@ -377,10 +367,10 @@ public:
         pl_AtomicPX_Init (getAtomicRef());
     }
     
-    inline AtomicExtended (Type const& initialValue) throw() 
+    inline AtomicExtended (Type& initialValue) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), (void*)&initialValue);
+        pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (&initialValue));
     }
     
 	template<class OtherType>
@@ -390,10 +380,10 @@ public:
         pl_AtomicPX_Set (getAtomicRef(), static_cast<Type*> (initialPtr));
     }
     
-    inline AtomicExtended (const Type* initialPtr) throw() 
+    inline AtomicExtended (Type* initialPtr) throw() 
     {
         pl_AtomicPX_Init (getAtomicRef());
-        pl_AtomicPX_Set (getAtomicRef(), const_cast<Type*> (initialPtr));
+        pl_AtomicPX_Set (getAtomicRef(), initialPtr);
     }    
     
     inline AtomicExtended (AtomicExtended const& copy) throw() 
@@ -430,9 +420,9 @@ public:
         return *this;
     }    
     
-    inline AtomicExtended& operator= (Type const& other) throw() 
+    inline AtomicExtended& operator= (Type& other) throw() 
     {
-        pl_AtomicPX_Set (getAtomicRef(), (void*)&other);
+        pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (&other));
         return *this;
     }    
 
@@ -478,36 +468,30 @@ public:
         return pl_AtomicPX_SwapOther (getAtomicRef(), other.getAtomicRef());
     }
     
-    inline void setObject (Type const& other) throw()       { pl_AtomicPX_Set (getAtomicRef(), (void*)(&other)); }
-    inline void setValue (const Type* other) throw()        { pl_AtomicPX_Set (getAtomicRef(), (void*)(other)); }
-    inline void setPtr (const Type* other) throw()          { pl_AtomicPX_Set (getAtomicRef(), (void*)(other)); }
+    inline void setObject (Type& other) throw()             { pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (&other)); }
+    inline void setValue (Type* other) throw()              { pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (other)); }
+    inline void setPtr (Type* other) throw()                { pl_AtomicPX_Set (getAtomicRef(), static_cast<void*> (other)); }
+    
     inline const Type& getObject() const throw()            { return *static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
     inline Type& getObject() throw()                        { return *static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
 
-    inline const Type* getValue() const throw()             { return static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-    inline Type* getValue() throw()                         { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-    inline const Type* getPtr() const throw()               { return static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-    inline Type* getPtr() throw()                           { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-    inline const Type* operator->() const throw()           { return static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-    inline Type* operator->() throw()                       { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
+    inline Type* getValue() const throw()                   { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
+    inline Type* getPtr() const throw()                     { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
+    inline Type* operator->() const throw()                 { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
     
-    inline const Type* getValueUnchecked() const throw()    { return static_cast<const Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
-    inline Type* getValueUnchecked() throw()                { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
-    inline const Type* getPtrUnchecked() const throw()      { return static_cast<const Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
-    inline Type* getPtrUnchecked() throw()                  { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
-
-    inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
-    inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
+    inline Type* getValueUnchecked() const throw()          { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
+    inline Type* getPtrUnchecked() const throw()            { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
 
     inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
     inline operator Type* () throw()                        { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-
-    inline operator const Type () const throw()             { return *static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-    inline operator Type () throw()                         { return *static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
+    inline operator Type () const throw()                   { return *static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
 
     inline Long getExtra() const throw()                    { return pl_AtomicPX_GetExtra (getAtomicRef()); }
     inline Long getExtraUnchecked() const throw()           { return pl_AtomicPX_GetExtraUnchecked (getAtomicRef()); }
     
+    inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
+    inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
+
 //    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == other; }
 //    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != other; }
 //    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  other; }
