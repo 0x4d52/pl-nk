@@ -63,7 +63,7 @@ public:
         deInitStack (deadStack);
     }
     
-    void push (ValueType const& value) throw()
+    inline void push (ValueType const& value) throw()
     {
         PlankLockFreeStackElementRef element = createElement (value);
         ResultCode result = pl_LockFreeStack_Push (&liveStack, element);
@@ -73,33 +73,46 @@ public:
 #endif
     }
     
-    ValueType pop() throw()
+    inline ValueType pop() throw()
     {
-        ValueType returnValue;
-        
-        PlankLockFreeStackElementRef element;
-        ResultCode result = pl_LockFreeStack_Pop (&liveStack, &element);
-        plonk_assert (result == PlankResult_OK);
-
-        if (element != 0)
+        ValueType value;
+        ValueType* valuePtr = popInternal (&value);
+        return (valuePtr == 0) ? getNullValue() : value;
+    }
+    
+    void clear() throw()
+    {
+        ValueType* valuePtr;
+        do 
         {
-            ValueType* valuePtr = static_cast <ValueType*> (pl_LockFreeStackElement_GetData (element));
-            
-            if (valuePtr != 0)
-            {
-                returnValue = *valuePtr;
-                *valuePtr = getNullValue();
-            }
-            
-            result = pl_LockFreeStack_Push (&deadStack, element);
-            plonk_assert (result == PlankResult_OK);
-        }
+            valuePtr = popInternal (0);
+        } while (valuePtr != 0);
+    }
+    
+    void clearCache() throw()
+    {
+        ResultCode result = pl_LockFreeStack_Clear (&deadStack);
+        plonk_assert (result == PlankResult_OK);
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+
+    void clearAll() throw()
+    {
+        ResultCode result = pl_LockFreeStack_Clear (&liveStack);
+        plonk_assert (result == PlankResult_OK);
+        
+        clearCache();
         
 #ifndef PLONK_DEBUG
         (void)result;
 #endif
-        
-        return returnValue;
+    }
+    
+    inline LongLong length() throw()
+    {
+        return pl_LockFreeStack_GetSize (&liveStack);
     }
     
     friend class LockFreeStack<ValueType>;
@@ -129,7 +142,7 @@ private:
 #endif
     }
     
-    PlankLockFreeStackElementRef createElement (ValueType const& value) throw()
+    inline PlankLockFreeStackElementRef createElement (ValueType const& value) throw()
     {
         PlankLockFreeStackElementRef element;
         ResultCode result = pl_LockFreeStack_Pop (&deadStack, &element);
@@ -166,6 +179,36 @@ private:
         static ValueType null = ValueType();
         return null;
     }
+    
+    ValueType* popInternal (ValueType* value) throw()
+    {
+        ValueType* valuePtr = 0;
+        
+        PlankLockFreeStackElementRef element;
+        ResultCode result = pl_LockFreeStack_Pop (&liveStack, &element);
+        plonk_assert (result == PlankResult_OK);
+        
+        if (element != 0)
+        {
+            valuePtr = static_cast <ValueType*> (pl_LockFreeStackElement_GetData (element));
+            plonk_assert (valuePtr != 0);
+                        
+            if (value != 0)
+                *value = *valuePtr;
+            
+            *valuePtr = getNullValue();
+            
+            result = pl_LockFreeStack_Push (&deadStack, element);
+            plonk_assert (result == PlankResult_OK);
+        }
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+        
+        return valuePtr;
+    }
+
 };
 
 
@@ -219,6 +262,30 @@ public:
         return returnValue;
     }
     
+    void clear() throw()
+    {
+        ResultCode result = pl_LockFreeStack_Clear (&stack);
+        plonk_assert (result == PlankResult_OK);
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
+    void clearCache() throw()
+    {
+        // not applicable
+    }
+    
+    void clearAll() throw()
+    {
+        clear();
+    }
+    
+    LongLong length() throw()
+    {
+        return pl_LockFreeStack_GetSize (&stack);
+    }
+    
     friend class LockFreeStack<ValueType*>;
     
 private:
@@ -238,12 +305,12 @@ public:
     typedef SmartPointerContainer<Internal>     Base;
     typedef WeakPointerContainer<LockFreeStack> Weak;    
 
-    LockFreeStack()
+    inline LockFreeStack()
     :   Base (new Internal())
     {
     }
     
-    explicit LockFreeStack (Internal* internalToUse) throw() 
+    inline explicit LockFreeStack (Internal* internalToUse) throw() 
 	:	Base (internalToUse)
 	{
 	}
@@ -257,37 +324,56 @@ public:
     }    
     
     /** Copy constructor. */
-    LockFreeStack (LockFreeStack const& copy) throw()
+    inline LockFreeStack (LockFreeStack const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }
     
-    LockFreeStack (Dynamic const& other) throw()
+    inline LockFreeStack (Dynamic const& other) throw()
     :   Base (other.as<LockFreeStack>().getInternal())
     {
     }    
     
     /** Assignment operator. */
-    LockFreeStack& operator= (LockFreeStack const& other) throw()
+    inline LockFreeStack& operator= (LockFreeStack const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}
     
-    void push (ValueType const& value) throw()
+    inline void push (ValueType const& value) throw()
     {
         this->getInternal()->push (value);
     }
     
-    ValueType pop() throw()
+    inline ValueType pop() throw()
     {
         return this->getInternal()->pop();
     }
     
-    PLONK_OBJECTARROWOPERATOR(LockFreeStack)
+    inline void clear() throw()
+    {
+        return this->getInternal()->clear();
+    }
+    
+    inline void clearCache() throw()
+    {
+        return this->getInternal()->clearCache();
+    }
+    
+    inline void clearAll() throw()
+    {
+        return this->getInternal()->clearAll();
+    }
 
+    inline LongLong length() throw()
+    {
+        return this->getInternal()->length();
+    }
+    
+    PLONK_OBJECTARROWOPERATOR(LockFreeStack)
 };
 
 
