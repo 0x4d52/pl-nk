@@ -53,20 +53,20 @@ public:
 
     LockFreeStackInternal() throw()
     {
-        pl_LockFreeStack_Init (&stack);
+        initStack (liveStack);
+        initStack (deadStack);
     }
     
     ~LockFreeStackInternal()
     {
-        pl_LockFreeStack_DeInit (&stack);
+        deInitStack (liveStack);
+        deInitStack (deadStack);
     }
     
     void push (ValueType const& value) throw()
     {
-        PlankLockFreeStackElementRef element = pl_LockFreeStackElement_CreateAndInit();
-        plonk_assert (element != 0);
-        pl_LockFreeStackElement_SetData (element, new ValueType (value));
-        ResultCode result = pl_LockFreeStack_Push (&stack, element);
+        PlankLockFreeStackElementRef element = createElement (value);
+        ResultCode result = pl_LockFreeStack_Push (&liveStack, element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
         (void)result;
@@ -78,7 +78,7 @@ public:
         ValueType returnValue;
         
         PlankLockFreeStackElementRef element;
-        ResultCode result = pl_LockFreeStack_Pop (&stack, &element);
+        ResultCode result = pl_LockFreeStack_Pop (&liveStack, &element);
         plonk_assert (result == PlankResult_OK);
 
         if (element != 0)
@@ -88,10 +88,10 @@ public:
             if (valuePtr != 0)
             {
                 returnValue = *valuePtr;
-                delete valuePtr;
+                *valuePtr = getNullValue();
             }
             
-            result = pl_LockFreeStackElement_Destroy (element);
+            result = pl_LockFreeStack_Push (&deadStack, element);
             plonk_assert (result == PlankResult_OK);
         }
         
@@ -105,7 +105,67 @@ public:
     friend class LockFreeStack<ValueType>;
     
 private:
-    PlankLockFreeStack stack;
+    PlankLockFreeStack liveStack;
+    PlankLockFreeStack deadStack;
+        
+    static void initStack (PlankLockFreeStack& stack) throw()
+    {
+        pl_LockFreeStack_Init (&stack);
+        pl_LockFreeStack_SetFreeElementDataFunction (&stack, LockFreeStackInternal::freeElement);
+    }
+    
+    static void deInitStack (PlankLockFreeStack& stack) throw()
+    {
+        ResultCode result;
+        
+        result = pl_LockFreeStack_Clear (&stack);
+        plonk_assert (result == PlankResult_OK);
+        
+        result = pl_LockFreeStack_DeInit (&stack);
+        plonk_assert (result == PlankResult_OK);
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
+    PlankLockFreeStackElementRef createElement (ValueType const& value) throw()
+    {
+        PlankLockFreeStackElementRef element;
+        ResultCode result = pl_LockFreeStack_Pop (&deadStack, &element);
+        plonk_assert (result == PlankResult_OK);
+        
+        if (element != 0)
+        {
+            ValueType* data = static_cast<ValueType*> (pl_LockFreeStackElement_GetData (element));
+            plonk_assert (data != 0);
+            *data = value;
+        }
+        else 
+        {
+            element = pl_LockFreeStackElement_CreateAndInit();
+            plonk_assert (element != 0);
+            pl_LockFreeStackElement_SetData (element, new ValueType (value));
+        }
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+        
+        return element;
+    }
+    
+    static ResultCode freeElement (Pointer data)
+    {
+        delete static_cast<ValueType*> (data);
+        return PlankResult_OK;
+    }
+    
+    static inline ValueType getNullValue() throw()
+    {
+        static ValueType null = ValueType();
+        return null;
+    }
 };
 
 

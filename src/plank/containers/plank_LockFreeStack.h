@@ -52,11 +52,15 @@ PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankLockFreeStack* PlankLockFreeStackRef; 
 
+typedef PlankResult (*PlankLockFreeStackFreeElementDataFunction)(PlankP);
+
 PlankLockFreeStackRef pl_LockFreeStack_CreateAndInit();
 PlankLockFreeStackRef pl_LockFreeStack_Create();
 PlankResult pl_LockFreeStack_Init (PlankLockFreeStackRef p);
 PlankResult pl_LockFreeStack_DeInit (PlankLockFreeStackRef p);
 PlankResult pl_LockFreeStack_Destroy (PlankLockFreeStackRef p);
+PlankResult pl_LockFreeStack_Clear (PlankLockFreeStackRef p);
+PlankResult pl_LockFreeStack_SetFreeElementDataFunction (PlankLockFreeStackRef p, PlankLockFreeStackFreeElementDataFunction freeFunction);
 PlankResult pl_LockFreeStack_Push (PlankLockFreeStackRef p, const PlankLockFreeStackElementRef element);
 PlankResult pl_LockFreeStack_Pop (PlankLockFreeStackRef p, PlankLockFreeStackElementRef* element);
 PlankLL pl_LockFreeStack_GetSize (PlankLockFreeStackRef p);
@@ -70,6 +74,7 @@ typedef struct PlankLockFreeStack
 {
 	PLANK_ALIGN(16) PlankAtomicPX	atom;
     PLANK_ALIGN(16) PlankAtomicLL   count;
+    PlankLockFreeStackFreeElementDataFunction freeFunction;
 } PlankLockFreeStack;
 #endif
 
