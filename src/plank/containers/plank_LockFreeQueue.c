@@ -150,6 +150,57 @@ exit:
     return result;    
 }
 
+PlankResult pl_LockFreeQueue_Clear (PlankLockFreeQueueRef p)
+{
+    PlankResult result = PlankResult_OK;
+    PlankLockFreeQueueElementRef element;
+    PlankP data;
+    
+    if ((result = pl_LockFreeQueue_Pop (p, &element)) != PlankResult_OK)
+        goto exit;
+    
+    if (p->freeFunction != PLANK_NULL)
+    {
+        while (element != PLANK_NULL) 
+        {
+            data = pl_LockFreeQueueElement_GetData (element);
+            
+            if (data != PLANK_NULL)
+            {
+                if ((result = (p->freeFunction) (data)) != PlankResult_OK)
+                    goto exit;
+            }
+            
+            if ((result = pl_LockFreeQueueElement_Destroy (element)) != PlankResult_OK)
+                goto exit;
+            
+            if ((result = pl_LockFreeQueue_Pop (p, &element)) != PlankResult_OK)
+                goto exit;
+        }
+    }
+    else
+    {
+        while (element != PLANK_NULL) 
+        {
+            if ((result = pl_LockFreeQueueElement_Destroy (element)) != PlankResult_OK)
+                goto exit;
+            
+            if ((result = pl_LockFreeQueue_Pop (p, &element)) != PlankResult_OK)
+                goto exit;
+        }
+    }
+    
+exit:
+    return result;    
+}
+
+PlankResult pl_LockFreeQueue_SetFreeElementDataFunction (PlankLockFreeQueueRef p, PlankLockFreeQueueFreeElementDataFunction freeFunction)
+{
+    PlankResult result = PlankResult_OK;    
+    p->freeFunction = freeFunction;
+    return result;
+}
+
 PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
 {
     PlankResult result = PlankResult_OK;

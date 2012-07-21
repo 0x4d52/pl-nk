@@ -52,11 +52,15 @@ PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankLockFreeQueue* PlankLockFreeQueueRef; 
 
+typedef PlankResult (*PlankLockFreeQueueFreeElementDataFunction)(PlankP);
+
 PlankLockFreeQueueRef pl_LockFreeQueue_CreateAndInit();
 PlankLockFreeQueueRef pl_LockFreeQueue_Create();
 PlankResult pl_LockFreeQueue_Init (PlankLockFreeQueueRef p);
 PlankResult pl_LockFreeQueue_DeInit (PlankLockFreeQueueRef p);
 PlankResult pl_LockFreeQueue_Destroy (PlankLockFreeQueueRef p);
+PlankResult pl_LockFreeQueue_Clear (PlankLockFreeQueueRef p);
+PlankResult pl_LockFreeQueue_SetFreeElementDataFunction (PlankLockFreeQueueRef p, PlankLockFreeQueueFreeElementDataFunction freeFunction);
 PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element);
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element);
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element);
@@ -73,6 +77,8 @@ typedef struct PlankLockFreeQueue
     PLANK_ALIGN(16) PlankAtomicPX               tail;
     PLANK_ALIGN(16) PlankAtomicLL               count;
     PLANK_ALIGN(16) PlankLockFreeQueueElement   dummyElement;
+    PlankLockFreeQueueFreeElementDataFunction   freeFunction;
+
 } PlankLockFreeQueue;
 #endif
 

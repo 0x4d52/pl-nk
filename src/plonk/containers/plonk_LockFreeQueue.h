@@ -50,48 +50,155 @@ class LockFreeQueueInternal : public SmartPointer
 {
 public:
     typedef LockFreeQueue<ValueType>        QueueType;
-
+    
     LockFreeQueueInternal() throw()
     {
-        pl_LockFreeQueue_Init (&queue);
+        initQueue (liveQueue);
+        initQueue (deadQueue);
     }
     
     ~LockFreeQueueInternal()
     {
-        pl_LockFreeQueue_DeInit (&queue);
+        deInitQueue (liveQueue);
+        deInitQueue (deadQueue);
     }
     
-    void push (ValueType const& value) throw()
+    inline void push (ValueType const& value) throw()
     {
-        PlankLockFreeQueueElementRef element = pl_LockFreeQueueElement_CreateAndInit();
-        plonk_assert (element != 0);
-        pl_LockFreeQueueElement_SetData (element, new ValueType (value));
-        ResultCode result = pl_LockFreeQueue_Push (&queue, element);
+        PlankLockFreeQueueElementRef element = createElement (value);
+        ResultCode result = pl_LockFreeQueue_Push (&liveQueue, element);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
         (void)result;
 #endif
     }
     
-    ValueType pop() throw()
+    inline ValueType pop() throw()
     {
-        ValueType returnValue;
-        
-        PlankLockFreeQueueElementRef element;
-        ResultCode result = pl_LockFreeQueue_Pop (&queue, &element);
+        ValueType value;
+        ValueType* valuePtr = popInternal (&value);
+        return (valuePtr == 0) ? getNullValue() : value;
+    }
+    
+    void clear() throw()
+    {
+        ValueType* valuePtr;
+        do 
+        {
+            valuePtr = popInternal (0);
+        } while (valuePtr != 0);
+    }
+    
+    void clearCache() throw()
+    {
+        ResultCode result = pl_LockFreeQueue_Clear (&deadQueue);
         plonk_assert (result == PlankResult_OK);
-
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
+    void clearAll() throw()
+    {
+        ResultCode result = pl_LockFreeQueue_Clear (&liveQueue);
+        plonk_assert (result == PlankResult_OK);
+        
+        clearCache();
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
+    inline LongLong length() throw()
+    {
+        return pl_LockFreeQueue_GetSize (&liveQueue);
+    }
+    
+    friend class LockFreeQueue<ValueType>;
+    
+private:
+    PlankLockFreeQueue liveQueue;
+    PlankLockFreeQueue deadQueue;
+    
+    static void initQueue (PlankLockFreeQueue& queue) throw()
+    {
+        pl_LockFreeQueue_Init (&queue);
+        pl_LockFreeQueue_SetFreeElementDataFunction (&queue, LockFreeQueueInternal::freeElement);
+    }
+    
+    static void deInitQueue (PlankLockFreeQueue& queue) throw()
+    {
+        ResultCode result;
+        
+        result = pl_LockFreeQueue_Clear (&queue);
+        plonk_assert (result == PlankResult_OK);
+        
+        result = pl_LockFreeQueue_DeInit (&queue);
+        plonk_assert (result == PlankResult_OK);
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
+    inline PlankLockFreeQueueElementRef createElement (ValueType const& value) throw()
+    {
+        PlankLockFreeQueueElementRef element;
+        ResultCode result = pl_LockFreeQueue_Pop (&deadQueue, &element);
+        plonk_assert (result == PlankResult_OK);
+        
         if (element != 0)
         {
-            ValueType* valuePtr = static_cast <ValueType*> (pl_LockFreeQueueElement_GetData (element));
+            ValueType* data = static_cast<ValueType*> (pl_LockFreeQueueElement_GetData (element));
+            plonk_assert (data != 0);
+            *data = value;
+        }
+        else 
+        {
+            element = pl_LockFreeQueueElement_CreateAndInit();
+            plonk_assert (element != 0);
+            pl_LockFreeQueueElement_SetData (element, new ValueType (value));
+        }
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+        
+        return element;
+    }
+    
+    static ResultCode freeElement (Pointer data)
+    {
+        delete static_cast<ValueType*> (data);
+        return PlankResult_OK;
+    }
+    
+    static inline ValueType getNullValue() throw()
+    {
+        static ValueType null = ValueType();
+        return null;
+    }
+    
+    ValueType* popInternal (ValueType* value) throw()
+    {
+        ValueType* valuePtr = 0;
+        
+        PlankLockFreeQueueElementRef element;
+        ResultCode result = pl_LockFreeQueue_Pop (&liveQueue, &element);
+        plonk_assert (result == PlankResult_OK);
+        
+        if (element != 0)
+        {
+            valuePtr = static_cast <ValueType*> (pl_LockFreeQueueElement_GetData (element));
+            plonk_assert (valuePtr != 0);
             
-            if (valuePtr != 0)
-            {
-                returnValue = *valuePtr;
-                delete valuePtr;
-            }
+            if (value != 0)
+                *value = *valuePtr;
             
-            result = pl_LockFreeQueueElement_Destroy (element);
+            *valuePtr = getNullValue();
+            
+            result = pl_LockFreeQueue_Push (&deadQueue, element);
             plonk_assert (result == PlankResult_OK);
         }
         
@@ -99,14 +206,11 @@ public:
         (void)result;
 #endif
         
-        return returnValue;
+        return valuePtr;
     }
     
-    friend class LockFreeQueue<ValueType>;
-    
-private:
-    PlankLockFreeQueue queue;
 };
+
 
 
 template<class ValueType>                                               
@@ -159,6 +263,30 @@ public:
         return returnValue;
     }
     
+    void clear() throw()
+    {
+        ResultCode result = pl_LockFreeQueue_Clear (&queue);
+        plonk_assert (result == PlankResult_OK);
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
+    void clearCache() throw()
+    {
+        // not applicable
+    }
+    
+    void clearAll() throw()
+    {
+        clear();
+    }
+    
+    LongLong length() throw()
+    {
+        return pl_LockFreeQueue_GetSize (&queue);
+    }
+
     friend class LockFreeQueue<ValueType*>;
     
 private:
@@ -178,12 +306,12 @@ public:
     typedef SmartPointerContainer<Internal>     Base;
     typedef WeakPointerContainer<LockFreeQueue> Weak;    
 
-    LockFreeQueue()
+    inline LockFreeQueue()
     :   Base (new Internal())
     {
     }
     
-    explicit LockFreeQueue (Internal* internalToUse) throw() 
+    inline explicit LockFreeQueue (Internal* internalToUse) throw() 
 	:	Base (internalToUse)
 	{
 	}
@@ -197,18 +325,18 @@ public:
     }    
     
     /** Copy constructor. */
-    LockFreeQueue (LockFreeQueue const& copy) throw()
+    inline LockFreeQueue (LockFreeQueue const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }
     
-    LockFreeQueue (Dynamic const& other) throw()
+    inline LockFreeQueue (Dynamic const& other) throw()
     :   Base (other.as<LockFreeQueue>().getInternal())
     {
     }    
     
     /** Assignment operator. */
-    LockFreeQueue& operator= (LockFreeQueue const& other) throw()
+    inline LockFreeQueue& operator= (LockFreeQueue const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());
@@ -216,14 +344,34 @@ public:
         return *this;
 	}
     
-    void push (ValueType const& value) throw()
+    inline void push (ValueType const& value) throw()
     {
         this->getInternal()->push (value);
     }
     
-    ValueType pop() throw()
+    inline ValueType pop() throw()
     {
         return this->getInternal()->pop();
+    }
+    
+    inline void clear() throw()
+    {
+        return this->getInternal()->clear();
+    }
+    
+    inline void clearCache() throw()
+    {
+        return this->getInternal()->clearCache();
+    }
+    
+    inline void clearAll() throw()
+    {
+        return this->getInternal()->clearAll();
+    }
+    
+    inline LongLong length() throw()
+    {
+        return this->getInternal()->length();
     }
     
     PLONK_OBJECTARROWOPERATOR(LockFreeQueue)
