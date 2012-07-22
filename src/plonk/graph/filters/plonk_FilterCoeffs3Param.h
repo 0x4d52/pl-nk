@@ -158,9 +158,9 @@ public:
         UnitType& param1Unit = this->getInputAsUnit (inputKeys.atUnchecked (1));
         UnitType& param2Unit = this->getInputAsUnit (inputKeys.atUnchecked (2));
         
-        const Buffer param0Buffer (param0Unit.process (info, 0));
-        const Buffer param1Buffer (param1Unit.process (info, 0));
-        const Buffer param2Buffer (param2Unit.process (info, 0));
+        const Buffer& param0Buffer (param0Unit.process (info, 0));
+        const Buffer& param1Buffer (param1Unit.process (info, 0));
+        const Buffer& param2Buffer (param2Unit.process (info, 0));
         const SampleType* const param0Samples = param0Buffer.getArray();
         const SampleType* const param1Samples = param1Buffer.getArray();
         const SampleType* const param2Samples = param2Buffer.getArray();

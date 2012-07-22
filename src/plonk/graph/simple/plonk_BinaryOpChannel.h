@@ -187,8 +187,8 @@ public:
         UnitType& leftUnit (this->getInputAsUnit (IOKey::LeftOperand));
         UnitType& rightUnit (this->getInputAsUnit (IOKey::RightOperand));
         
-        const Buffer leftBuffer (leftUnit.process (info, channel));
-        const Buffer rightBuffer (rightUnit.process (info, channel));
+        const Buffer& leftBuffer (leftUnit.process (info, channel));
+        const Buffer& rightBuffer (rightUnit.process (info, channel));
         
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();

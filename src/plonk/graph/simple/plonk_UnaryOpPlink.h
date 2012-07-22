@@ -106,7 +106,7 @@
     \
     void process (ProcessInfo& info, const int channel) throw() {\
         UnitType& operandUnit (this->getInputAsUnit (IOKey::Generic));\
-        const Buffer operandBuffer (operandUnit.process (info, channel));\
+        const Buffer& operandBuffer (operandUnit.process (info, channel));\
         \
         p.buffers[0].bufferSize = this->getOutputBuffer().length();\
         p.buffers[0].buffer = this->getOutputSamples();\

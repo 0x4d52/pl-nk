@@ -235,20 +235,27 @@ public:
         
         const int numChannels = inputUnit.getNumChannels();
         
-        p.buffers[0].bufferSize = outputBufferLength;
-        p.buffers[0].buffer     = outputSamples;
-        p.buffers[1].bufferSize = outputBufferLength;
-        p.buffers[1].buffer     = outputSamples;
-        
+        p.buffers[0].bufferSize = p.buffers[1].bufferSize = outputBufferLength;
+        p.buffers[0].buffer     = p.buffers[1].buffer     = outputSamples;
         
         for (int channel = 0; channel < numChannels; ++channel)
         {
             plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
             
-            const Buffer& inputBuffer (inputUnit.process (info, channel));            
-            p.buffers[2].bufferSize = inputBuffer.length();
-            p.buffers[2].buffer     = inputBuffer.getArray();
-            plink_BinaryOpProcessAddF (&p, 0);
+            const Buffer& inputBuffer (inputUnit.process (info, channel));
+            const float* const inputSamples = inputBuffer.getArray();
+            const int inputBufferLength = inputBuffer.length();
+            
+            if (outputBufferLength == inputBufferLength)
+            {
+                pl_VectorAddF_NNN (outputSamples, outputSamples, inputSamples, outputBufferLength);
+            }
+            else
+            {
+                p.buffers[2].bufferSize = inputBuffer.length();
+                p.buffers[2].buffer     = inputBuffer.getArray();
+                plink_BinaryOpProcessAddF (&p, 0);
+            }
         }
         
         const Data& data = this->getState();

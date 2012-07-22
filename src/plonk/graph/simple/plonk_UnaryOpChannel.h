@@ -180,7 +180,7 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {
         UnitType& operandUnit (this->getInputAsUnit (IOKey::Generic));
-        const Buffer operandBuffer (operandUnit.process (info, channel));
+        const Buffer& operandBuffer (operandUnit.process (info, channel));
         
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();

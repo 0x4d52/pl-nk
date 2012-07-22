@@ -203,19 +203,19 @@ private:
         state.inputSamples = inputSamples;
         state.writePosition = data.writePosition;
 
-        const Param1BufferType param1Buffer (param1Unit.process (info, channel));
+        const Param1BufferType& param1Buffer (param1Unit.process (info, channel));
         const Param1Type* param1Samples = param1Buffer.getArray();
         const int param1BufferLength = param1Buffer.length();
         
-        const Param2BufferType param2Buffer (param2Unit.process (info, channel));
+        const Param2BufferType& param2Buffer (param2Unit.process (info, channel));
         const Param2Type* param2Samples = param2Buffer.getArray();
         const int param2BufferLength = param2Buffer.length();
 
-        const Param3BufferType param3Buffer (param3Unit.process (info, channel));
+        const Param3BufferType& param3Buffer (param3Unit.process (info, channel));
         const Param3Type* param3Samples = param3Buffer.getArray();
         const int param3BufferLength = param3Buffer.length();
 
-        const Param4BufferType param4Buffer (param4Unit.process (info, channel));
+        const Param4BufferType& param4Buffer (param4Unit.process (info, channel));
         const Param4Type* param4Samples = param4Buffer.getArray();
         const int param4BufferLength = param4Buffer.length();
 

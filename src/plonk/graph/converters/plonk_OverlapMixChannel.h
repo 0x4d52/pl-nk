@@ -133,7 +133,7 @@ public:
                 const int tempBufferStartPos = tempBufferPos;
                 
                 info.setTimeStamp (nextInputTimeStamp);
-                const Buffer inputBuffer (inputUnit.process (info, channel));            
+                const Buffer& inputBuffer (inputUnit.process (info, channel));            
                 nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
                 
                 const SampleType* const inputSamples = inputBuffer.getArray();
@@ -160,7 +160,7 @@ public:
         }
         else
         {
-            const Buffer inputBuffer (inputUnit.process (info, channel));            
+            const Buffer& inputBuffer (inputUnit.process (info, channel));            
             const SampleType* const inputSamples = inputBuffer.getArray();
             
             plonk_assert (outputBufferLength == inputBuffer.length());

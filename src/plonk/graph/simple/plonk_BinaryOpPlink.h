@@ -116,8 +116,8 @@
         UnitType& leftUnit (this->getInputAsUnit (IOKey::LeftOperand));\
         UnitType& rightUnit (this->getInputAsUnit  (IOKey::RightOperand));\
         \
-        const Buffer leftBuffer (leftUnit.process (info, channel));\
-        const Buffer rightBuffer (rightUnit.process (info, channel));\
+        const Buffer& leftBuffer (leftUnit.process (info, channel));\
+        const Buffer& rightBuffer (rightUnit.process (info, channel));\
         \
         p.buffers[0].bufferSize = this->getOutputBuffer().length();\
         p.buffers[0].buffer = this->getOutputSamples();\

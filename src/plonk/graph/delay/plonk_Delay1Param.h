@@ -158,7 +158,7 @@ private:
         state.inputSamples = inputSamples;
         state.writePosition = data.writePosition;
         
-        const Param1BufferType param1Buffer (param1Unit.process (info, channel));
+        const Param1BufferType& param1Buffer (param1Unit.process (info, channel));
         const Param1Type* param1Samples = param1Buffer.getArray();
         const int param1BufferLength = param1Buffer.length();
         

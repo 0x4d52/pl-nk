@@ -81,7 +81,7 @@ public:
     
     inline operator double () const throw() { return this->getValue(); }
     inline double toSeconds() const throw() { return this->getValue() * getReciprocalTicks(); }
-    double toSamples(const double sampleRate) const throw();
+    double toSamples (const double sampleRate) const throw();
     
     bool operator== (TimeStamp const& other) const throw();
     bool operator!= (TimeStamp const& other) const throw();
@@ -105,5 +105,22 @@ private:
     
     static bool fractionIsValid (const double f) throw();
 };
+
+//------------------------------------------------------------------------------
+
+inline bool TimeStamp::operator>= (TimeStamp const& other) const throw()
+{
+    plonk_assert (fractionIsValid (this->fraction));
+    plonk_assert (fractionIsValid (other.fraction));
+    
+    if (this->isInfinite())
+    {
+        if (other.isInfinite())
+            return false;
+        else
+            return true;
+    }
+    else return ((time > other.time) || ((time == other.time) && (fraction >= other.fraction)));
+}
 
 #endif // PLONK_TIMESTAMP_H

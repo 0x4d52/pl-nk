@@ -302,7 +302,7 @@ public:
     {                
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
 
-        const FrequencyBufferType frequencyBuffer (frequencyUnit.process (info, channel));
+        const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
                         
         p.buffers[0].bufferSize = this->getOutputBuffer().length();;
         p.buffers[0].buffer     = this->getOutputSamples();

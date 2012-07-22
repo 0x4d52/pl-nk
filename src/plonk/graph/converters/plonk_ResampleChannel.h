@@ -151,7 +151,7 @@ public:
                 if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
                 {
                     info.setTimeStamp (nextInputTimeStamp);
-                    const Buffer inputBuffer (inputUnit.process (info, channel));
+                    const Buffer& inputBuffer (inputUnit.process (info, channel));
                     nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
                     
                     const SampleType* const inputSamples = inputBuffer.getArray();

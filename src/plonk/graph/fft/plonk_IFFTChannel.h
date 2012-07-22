@@ -103,8 +103,8 @@ public:
         const int imagIndex = realIndex + 1;
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::FFT));
-        const Buffer realBuffer (inputUnit.process (info, realIndex));
-        const Buffer imagBuffer (inputUnit.process (info, imagIndex));
+        const Buffer& realBuffer (inputUnit.process (info, realIndex));
+        const Buffer& imagBuffer (inputUnit.process (info, imagIndex));
         
         plonk_assert (realBuffer.length() == imagBuffer.length());
         

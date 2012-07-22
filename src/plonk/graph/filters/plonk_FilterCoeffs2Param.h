@@ -154,8 +154,8 @@ public:
         UnitType& param0Unit = this->getInputAsUnit (inputKeys.atUnchecked (0));
         UnitType& param1Unit = this->getInputAsUnit (inputKeys.atUnchecked (1));
         
-        const Buffer param0Buffer (param0Unit.process (info, 0));
-        const Buffer param1Buffer (param1Unit.process (info, 0));
+        const Buffer& param0Buffer (param0Unit.process (info, 0));
+        const Buffer& param1Buffer (param1Unit.process (info, 0));
         const SampleType* const param0Samples = param0Buffer.getArray();
         const SampleType* const param1Samples = param1Buffer.getArray();
         const int param0Length = param0Buffer.length();

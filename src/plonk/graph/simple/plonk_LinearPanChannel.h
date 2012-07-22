@@ -126,8 +126,8 @@ public:
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         UnitType& positionUnit (this->getInputAsUnit (IOKey::Position));
         
-        const Buffer inputBuffer (inputUnit.process (info, 0));
-        const Buffer positionBuffer (positionUnit.process (info, 0));
+        const Buffer& inputBuffer (inputUnit.process (info, 0));
+        const Buffer& positionBuffer (positionUnit.process (info, 0));
         
         const SampleType mulAdd (0.5);
         const SampleType rightLevel = positionBuffer.atUnchecked (0) * mulAdd + mulAdd;

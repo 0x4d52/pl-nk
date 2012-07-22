@@ -97,7 +97,7 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {                
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
         
         SampleType* const realOutputSamples = this->getOutputSamples (RealOutput);

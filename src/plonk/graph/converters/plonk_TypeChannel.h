@@ -157,7 +157,7 @@ public:
         }
         else if (inputBufferLength == 1)
         {
-            OutputSampleType value = OutputSampleType (inputSamples[0]); 
+            const OutputSampleType value = OutputSampleType (inputSamples[0]); 
             
             for (i = 0; i < outputBufferLength; ++i) 
                 outputSamples[i] = value;

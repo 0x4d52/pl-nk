@@ -183,7 +183,7 @@ public:
         const int outputBufferLength = this->getOutputBuffer().length();
 
         UnitType& gate (this->getInputAsUnit (IOKey::Control));
-        const Buffer gateBuffer (gate.process (info, 0));
+        const Buffer& gateBuffer (gate.process (info, 0));
         const SampleType* gateSamples = gateBuffer.getArray();
         const int gateBufferLength = gateBuffer.length();        
         

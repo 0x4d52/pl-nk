@@ -176,7 +176,7 @@ public:
     inline const TimeStamp getNextTimeStamp() const throw()                 { return this->getInternal()->getNextTimeStamp(); }
     inline bool shouldBeDeletedNow (TimeStamp const& time) const throw()    { return this->getInternal()->shouldBeDeletedNow (time); }
     
-    void process (ProcessInfo& info, const int channel) throw()
+    inline void process (ProcessInfo& info, const int channel) throw()
     {
         const TimeStamp& nextTimeStamp = this->getInternal()->getNextTimeStamp();
         const TimeStamp& infoTimeStamp = info.getTimeStamp();

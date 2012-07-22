@@ -133,7 +133,7 @@ public:
 
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         
-        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
         const int inputBufferLength = inputBuffer.length();
         

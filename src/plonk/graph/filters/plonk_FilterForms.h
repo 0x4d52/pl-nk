@@ -140,12 +140,12 @@ public:
                          const int channel) throw()
     {
         const int firstCoeff = NumCoeffs * channel;
-        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
         
-        const Buffer a0Buffer (coeffsUnit.process (info, firstCoeff + CoeffA0));
-        const Buffer a1Buffer (coeffsUnit.process (info, firstCoeff + CoeffA1));
-        const Buffer b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
+        const Buffer& a0Buffer (coeffsUnit.process (info, firstCoeff + CoeffA0));
+        const Buffer& a1Buffer (coeffsUnit.process (info, firstCoeff + CoeffA1));
+        const Buffer& b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
         
         const SampleType* const a0Samples = a0Buffer.getArray();
         const SampleType* const a1Samples = a1Buffer.getArray();
@@ -261,10 +261,10 @@ public:
                          const int channel) throw()
     {
         const int firstCoeff = NumCoeffs * channel;
-        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
         
-        const Buffer b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
+        const Buffer& b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
         const SampleType* const b1Samples = b1Buffer.getArray();
         const int b1Length = b1Buffer.length();
         const int inputLength = inputBuffer.length();
@@ -383,14 +383,14 @@ public:
                          const int channel) throw()
     {
         const int firstCoeff = NumCoeffs * channel;
-        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
         
-        const Buffer a0Buffer (coeffsUnit.process (info, firstCoeff + CoeffA0));
-        const Buffer a1Buffer (coeffsUnit.process (info, firstCoeff + CoeffA1));
-        const Buffer a2Buffer (coeffsUnit.process (info, firstCoeff + CoeffA2));
-        const Buffer b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
-        const Buffer b2Buffer (coeffsUnit.process (info, firstCoeff + CoeffB2));
+        const Buffer& a0Buffer (coeffsUnit.process (info, firstCoeff + CoeffA0));
+        const Buffer& a1Buffer (coeffsUnit.process (info, firstCoeff + CoeffA1));
+        const Buffer& a2Buffer (coeffsUnit.process (info, firstCoeff + CoeffA2));
+        const Buffer& b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
+        const Buffer& b2Buffer (coeffsUnit.process (info, firstCoeff + CoeffB2));
         
         const SampleType* const a0Samples = a0Buffer.getArray();
         const SampleType* const a1Samples = a1Buffer.getArray();
@@ -543,14 +543,14 @@ public:
                          const int channel) throw()
     {
         const int firstCoeff = NumCoeffs * channel;
-        const Buffer inputBuffer (inputUnit.process (info, channel));
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
         const SampleType* const inputSamples = inputBuffer.getArray();
         
-        const Buffer a0Buffer (coeffsUnit.process (info, firstCoeff + CoeffA0));
-        const Buffer a1Buffer (coeffsUnit.process (info, firstCoeff + CoeffA1));
-        const Buffer a2Buffer (coeffsUnit.process (info, firstCoeff + CoeffA2));
-        const Buffer b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
-        const Buffer b2Buffer (coeffsUnit.process (info, firstCoeff + CoeffB2));
+        const Buffer& a0Buffer (coeffsUnit.process (info, firstCoeff + CoeffA0));
+        const Buffer& a1Buffer (coeffsUnit.process (info, firstCoeff + CoeffA1));
+        const Buffer& a2Buffer (coeffsUnit.process (info, firstCoeff + CoeffA2));
+        const Buffer& b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
+        const Buffer& b2Buffer (coeffsUnit.process (info, firstCoeff + CoeffB2));
         
         const SampleType* const a0Samples = a0Buffer.getArray();
         const SampleType* const a1Samples = a1Buffer.getArray();

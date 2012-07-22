@@ -124,7 +124,7 @@ public:
         Data& data = this->getState();
         
         RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
-        const RateBufferType rateBuffer (rateUnit.process (info, channel));
+        const RateBufferType& rateBuffer (rateUnit.process (info, channel));
         
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();

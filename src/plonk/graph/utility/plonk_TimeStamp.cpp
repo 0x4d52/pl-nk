@@ -220,10 +220,12 @@ bool TimeStamp::operator< (TimeStamp const& other) const throw()
     plonk_assert (fractionIsValid (other.fraction));
 
     if (other.isInfinite())
+    {
         if (this->isInfinite())
             return false;
         else
             return true;
+    }
     else if (time < other.time)
         return true;
     else if ((time == other.time) && (fraction < other.fraction))
@@ -238,10 +240,12 @@ bool TimeStamp::operator<= (TimeStamp const& other) const throw()
     plonk_assert (fractionIsValid (other.fraction));
     
     if (other.isInfinite())
+    {
         if (this->isInfinite())
             return false;
         else
             return true;
+    }
     else if (time < other.time)
         return true;
     else if ((time == other.time) && (fraction <= other.fraction))
@@ -256,10 +260,12 @@ bool TimeStamp::operator> (TimeStamp const& other) const throw()
     plonk_assert (fractionIsValid (other.fraction));
     
     if (this->isInfinite())
+    {
         if (other.isInfinite())
             return false;
         else
             return true;
+    }
     else if (time > other.time)
         return true;
     else if ((time == other.time) && (fraction > other.fraction))
@@ -268,23 +274,42 @@ bool TimeStamp::operator> (TimeStamp const& other) const throw()
         return false;    
 }
 
-bool TimeStamp::operator>= (TimeStamp const& other) const throw()
-{
-    plonk_assert (fractionIsValid (this->fraction));
-    plonk_assert (fractionIsValid (other.fraction));
-    
-    if (this->isInfinite())
-        if (other.isInfinite())
-            return false;
-        else
-            return true;
-    else if (time > other.time)
-        return true;
-    else if ((time == other.time) && (fraction >= other.fraction))
-        return true;
-    else
-        return false;    
-}
+//bool TimeStamp::operator>= (TimeStamp const& other) const throw()
+//{
+//    plonk_assert (fractionIsValid (this->fraction));
+//    plonk_assert (fractionIsValid (other.fraction));
+//    
+//    if (this->isInfinite())
+//        if (other.isInfinite())
+//            return false;
+//        else
+//            return true;
+//    else if (time > other.time)
+//        return true;
+//    else if ((time == other.time) && (fraction >= other.fraction))
+//        return true;
+//    else
+//        return false;    
+//}
+
+//bool TimeStamp::operator>= (TimeStamp const& other) const throw()
+//{
+//    plonk_assert (fractionIsValid (this->fraction));
+//    plonk_assert (fractionIsValid (other.fraction));
+//    
+//    if (this->isInfinite())
+//    {
+//        if (other.isInfinite())
+//            return false;
+//        else
+//            return true;
+//    }
+//    else if ((time > other.time) || ((time == other.time) && (fraction >= other.fraction)))
+//        return true;
+//    else
+//        return false;    
+//}
+
 
 bool TimeStamp::fractionIsValid (const double f) throw()
 {
