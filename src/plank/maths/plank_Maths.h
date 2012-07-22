@@ -39,12 +39,12 @@
 #ifndef PLANK_MATHS_H
 #define PLANK_MATHS_H
 
+
 /** @defgroup PlankMathsFunctions Plank maths functions
  @ingroup PlankFunctions
  @{
 */
     
-
                     //3.14159265358979323846264338327950288419716939937510
 #define PLANK_PI_D    3.1415926535897932384626433832795
 #define PLANK_PI_F    3.14159265358979323846f
@@ -68,6 +68,18 @@ PlankB pl_IsNanD (double a);
 
 PLANK_END_C_LINKAGE
 
+
+//#if (defined (_WIN32) || defined (_WIN64))
+//static inline PlankB pl_IsInfF (float a)				{ return _finite ((double)a) == 0; }
+//static inline PlankB pl_IsInfD (double a)				{ return _finite (a) == 0; }
+//static inline PlankB pl_IsNanF (float a)				{ return _isnan ((double)a) != 0; }
+//static inline PlankB pl_IsNanD (double a)				{ return _isnan (a) != 0; }
+//#else
+//static inline PlankB pl_IsInfF (float a)				{ return isinf (a); }
+//static inline PlankB pl_IsInfD (double a)				{ return isinf (a); }
+//static inline PlankB pl_IsNanF (float a)				{ return isnan (a); }
+//static inline PlankB pl_IsNanD (double a)				{ return isnan (a); }
+//#endif
 
 
 // unary ops

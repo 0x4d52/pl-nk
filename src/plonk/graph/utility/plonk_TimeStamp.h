@@ -108,6 +108,16 @@ private:
 
 //------------------------------------------------------------------------------
 
+inline bool TimeStamp::isFinite() const throw()
+{
+    return ! isInfinite();
+}
+
+inline bool TimeStamp::isInfinite() const throw()
+{
+    return pl_IsInfD (fraction) != 0;
+}
+
 inline bool TimeStamp::operator>= (TimeStamp const& other) const throw()
 {
     plonk_assert (fractionIsValid (this->fraction));

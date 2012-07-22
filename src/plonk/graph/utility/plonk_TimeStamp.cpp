@@ -78,15 +78,15 @@ TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
     return *this;
 }
 
-bool TimeStamp::isFinite() const throw()
-{
-    return ! isInfinite();
-}
-
-bool TimeStamp::isInfinite() const throw()
-{
-    return pl_IsInfD (fraction) != 0;
-}
+//bool TimeStamp::isFinite() const throw()
+//{
+//    return ! isInfinite();
+//}
+//
+//bool TimeStamp::isInfinite() const throw()
+//{
+//    return pl_IsInfD (fraction) != 0;
+//}
 
 TimeStamp& TimeStamp::operator+= (const double offset) throw()
 {

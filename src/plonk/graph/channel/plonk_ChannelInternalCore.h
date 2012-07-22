@@ -145,5 +145,34 @@ private:
 	const ChannelInternalCore& operator= (const ChannelInternalCore&);    
 };
 
+//------------------------------------------------------------------------------
+
+inline void ChannelInternalCore::setNextTimeStamp (TimeStamp const& time) throw()
+{
+    plonk_assert ((nextTimeStamp.isInfinite() && time.isInfinite()) || (time > nextTimeStamp)); // gone backwards or wraparound
+    nextTimeStamp = time;
+}
+
+inline void ChannelInternalCore::setLastTimeStamp (TimeStamp const& time) throw()
+{
+    plonk_assert (time.isFinite());
+    lastTimeStamp = time;
+}
+
+inline void ChannelInternalCore::setExpiryTimeStamp (TimeStamp const& time) throw()
+{
+    expiryTimeStamp = time;
+}
+
+inline bool ChannelInternalCore::shouldBeDeletedNow (TimeStamp const& time) const throw()
+{
+    return time >= expiryTimeStamp;
+}
+
+inline double ChannelInternalCore::getBlockDurationInTicks() const throw()                          
+{ 
+    return this->getSampleDurationInTicks() * double (this->getBlockSize().getValue()) * overlap.getValue();
+}
+
 
 #endif // PLONK_CHANNELINTERNALCORE_H
