@@ -72,7 +72,7 @@ public:
     WeakPointerContainer& operator= (WeakPointerContainer const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
     }
@@ -101,7 +101,7 @@ public:
         return smartPointer;
     }
     
-    bool isAlve() const throw()
+    bool isAlive() const throw()
     {
         return this->getWeakPointer() != 0;
     }

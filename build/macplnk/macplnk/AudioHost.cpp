@@ -80,6 +80,14 @@ Unit AudioHost::constructGraph()
 //    
 //    Units group = delay2.group (2);
 //    return Mixer::ar (group);    
+
+    Unit input = BusRead::ar (Bus ("0"));
+    Unit delay = Delay::ar (input, 
+                            Floats (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), 
+                            1.0,
+                            Floats (0.5, 0.5, 0.4, 0.4, 0.3, 0.3, 0.2, 0.2));
+    return delay.mix();   
+
     
 //    Unit input = BusRead::ar (Bus ("0"));
 //    Unit delay = Delay::ar (input, 
@@ -226,7 +234,7 @@ Unit AudioHost::constructGraph()
 //    return unit;
     
 //    return Sine::ar (Floats(500, 2000), 0.25);
-    return Sine::ar (Floats(1000, 1000), 0.25);
+//    return Sine::ar (Floats(1000, 1000), 0.25);
 }
 
 

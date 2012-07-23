@@ -80,6 +80,7 @@ class UnitBase : public NumericalArray<ChannelBase<SampleType> >
 {
 protected:
     typedef ChannelBase<SampleType>                 ChannelType;
+    typedef ObjectArray<ChannelType>                ChannelArrayType;          
     typedef ChannelInternalBase<SampleType>         ChannelInternalType;
     typedef NumericalArray<ChannelType>             UnitType;
 //    typedef NumericalArray2D<ChannelType,UnitType>  UnitArray;
@@ -102,7 +103,7 @@ public:
     :   Base (ChannelType())
     {
     }
-    
+        
     explicit UnitBase (Internal* internal) throw()
     :   Base (internal)
     {
@@ -208,7 +209,7 @@ public:
 //	{
 //	}
         
-    UnitBase (ObjectArray<ChannelType> const& copy) throw()
+    UnitBase (ChannelArrayType const& copy) throw()
 	:	UnitType (static_cast<UnitType const&> (copy))
 	{
 	}    
@@ -292,24 +293,21 @@ public:
         const Dynamic add = mainInputs.remove (IOKey::Add);
         const Dynamic mul = mainInputs.remove (IOKey::Multiply);
                 
-        ProxyOwnerChannelInternalClassType* proxyOwner 
-            = new ProxyOwnerChannelInternalClassType (mainInputs, 
-                                                      data, 
-                                                      preferredBlockSize, 
-                                                      preferredSampleRate);
+        ChannelArrayType channels;
         
-        plonk_assert (proxyOwner->isProxyOwner() == true);
+//        ProxyOwnerChannelInternalClassType* proxyOwner =
+            new ProxyOwnerChannelInternalClassType (mainInputs, 
+                                                    data, 
+                                                    preferredBlockSize, 
+                                                    preferredSampleRate, 
+                                                    channels);
+        const int numChannels = channels.length();
+        for (int i = 0; i < numChannels; ++i)
+            channels.atUnchecked (i).initChannel (i);
         
-        const int numChannels = proxyOwner->getNumChannels();
-        UnitBase result (UnitBase::withSize (numChannels));
+        UnitBase result (channels);
         
-        for (int i = 0; i < numChannels; ++i) 
-        {
-            ChannelType proxy = proxyOwner->getProxy (i);
-            proxy.initChannel (i);
-            result.put (i, proxy);
-        }
-        
+//        plonk_assert (proxyOwner->isProxyOwner() == true);
         return applyMulAdd (result, UnitBase (mul), UnitBase (add));
     }        
     

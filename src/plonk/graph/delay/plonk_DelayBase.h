@@ -57,6 +57,7 @@ public:
     typedef typename DelayFormData<SampleType,0,1,1>::DelayState    DelayStateBase;
     
     typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ObjectArray<ChannelType>                                ChannelArrayType;
     typedef Delay1ParamChannelInternal<FormType>                    DelayInternal;
     typedef ProxyOwnerChannelInternal<SampleType,Data>              Internal;
     typedef ChannelInternalBase<SampleType>                         InternalBase;
@@ -71,8 +72,9 @@ public:
                               Inputs const& inputs, 
                               Data const& data, 
                               BlockSize const& blockSize,
-                              SampleRate const& sampleRate) throw()
-    :   Internal (numOutputs, inputs, data, blockSize, sampleRate)
+                              SampleRate const& sampleRate,
+                              ChannelArrayType& channels) throw()
+    :   Internal (numOutputs, inputs, data, blockSize, sampleRate, channels)
     {
         delayStates = DelayStateArray::withSize (this->getNumChannels());
         circularBuffers = BufferArray::withSize (FormType::getNumCircularBuffers());

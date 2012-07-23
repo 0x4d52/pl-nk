@@ -46,7 +46,7 @@
 #include "../core/plonk_WeakPointer.h"
 #include "plonk_SmartPointerContainer.h"
 #include "plonk_ObjectArrayInternal.h"
-//#include "plonk_DynamicContainer.h"
+
 
 template<class ObjectType>
 class SimpleArray : public SmartPointerContainer< ObjectArrayInternal<ObjectType,SmartPointer> >
@@ -81,13 +81,12 @@ public:
     SimpleArray& operator= (SimpleArray const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}
     
     PLONK_OBJECTARROWOPERATOR(SimpleArray)
-
 };
 
 //class Globals

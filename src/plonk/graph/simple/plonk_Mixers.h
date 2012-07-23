@@ -289,6 +289,7 @@ class UnitMixerChannelInternal
 public:
     typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType) Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
+    typedef ObjectArray<ChannelType>                                    ChannelArrayType;
     typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
@@ -298,12 +299,14 @@ public:
     UnitMixerChannelInternal (Inputs const& inputs, 
                               Data const& data, 
                               BlockSize const& blockSize,
-                              SampleRate const& sampleRate) throw()
+                              SampleRate const& sampleRate,
+                              ChannelArrayType& channels) throw()
     :   Internal (inputs.getMaxNumChannels(), 
                   inputs, 
                   data,
                   blockSize, 
-                  sampleRate)
+                  sampleRate,
+                  channels)
     {
     }
 

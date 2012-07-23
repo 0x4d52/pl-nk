@@ -56,6 +56,7 @@ public:
     typedef ObjectArray<DelayState>                         DelayStateArray;
     
     typedef ChannelBase<SampleType>                         ChannelType;
+    typedef ObjectArray<ChannelType>                        ChannelArrayType;
     typedef Delay1ParamChannelInternal<FormType>            DelayInternal;
     typedef DelayChannelInternalBase<FormType>              Internal;
     typedef ChannelInternalBase<SampleType>                 InternalBase;
@@ -84,9 +85,11 @@ public:
     Delay1ParamChannelInternal (Inputs const& inputs, 
                                 Data const& data, 
                                 BlockSize const& blockSize,
-                                SampleRate const& sampleRate) throw()
+                                SampleRate const& sampleRate,
+                                ChannelArrayType& channels) throw()
     :   Internal (getNumChannelsFromInputs (inputs), // num proxies
-                  inputs, data, blockSize, sampleRate)
+                  inputs, data, blockSize, sampleRate, channels),
+        inputKeys (FormType::getInputKeys())
     {
     }
     
@@ -97,7 +100,7 @@ public:
         
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
         const Buffer& inputBuffer (inputUnit.process (info, 0));
-        Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
+        Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (inputKeys.atUnchecked (1));
                         
         plonk_assert (inputBuffer.length() == this->getOutputBuffer (0).length());
 
@@ -134,6 +137,8 @@ public:
     }
     
 private:
+    IntArray inputKeys;
+    
     static inline int getNumChannelsFromInputs (Inputs const& inputs) throw()
     {
         return inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels();

@@ -56,6 +56,7 @@ public:
     typedef ObjectArray<DelayState>                         DelayStateArray;
 
     typedef ChannelBase<SampleType>                         ChannelType;
+    typedef ObjectArray<ChannelType>                        ChannelArrayType;
     typedef Delay4ParamChannelInternal<FormType>            DelayInternal;
     typedef DelayChannelInternalBase<FormType>              Internal;
     typedef ChannelInternalBase<SampleType>                 InternalBase;
@@ -102,9 +103,11 @@ public:
     Delay4ParamChannelInternal (Inputs const& inputs, 
                                 Data const& data, 
                                 BlockSize const& blockSize,
-                                SampleRate const& sampleRate) throw()
+                                SampleRate const& sampleRate,
+                                ChannelArrayType& channels) throw()
     :   Internal (getNumChannelsFromInputs (inputs), // num proxies
-                  inputs, data, blockSize, sampleRate)
+                  inputs, data, blockSize, sampleRate, channels),
+        inputKeys (FormType::getInputKeys())
     {
     }
         
@@ -115,10 +118,10 @@ public:
 
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
         const Buffer& inputBuffer (inputUnit.process (info, 0));
-        Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
-        Param2UnitType& param2Unit = ChannelInternalCore::getInputAs<Param2UnitType> (FormType::getInputKeys().atUnchecked (2));
-        Param3UnitType& param3Unit = ChannelInternalCore::getInputAs<Param3UnitType> (FormType::getInputKeys().atUnchecked (3));
-        Param4UnitType& param4Unit = ChannelInternalCore::getInputAs<Param4UnitType> (FormType::getInputKeys().atUnchecked (4));
+        Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (inputKeys.atUnchecked (1));
+        Param2UnitType& param2Unit = ChannelInternalCore::getInputAs<Param2UnitType> (inputKeys.atUnchecked (2));
+        Param3UnitType& param3Unit = ChannelInternalCore::getInputAs<Param3UnitType> (inputKeys.atUnchecked (3));
+        Param4UnitType& param4Unit = ChannelInternalCore::getInputAs<Param4UnitType> (inputKeys.atUnchecked (4));
         
         plonk_assert (inputBuffer.length() == this->getOutputBuffer (0).length());
         
@@ -168,6 +171,8 @@ public:
     
 
 private:
+    IntArray inputKeys;
+    
     static inline int getNumChannelsFromInputs (Inputs const& inputs) throw()
     {
         const int p1 = inputs[FormType::getInputKeys().atUnchecked (1)].template asUnchecked<Param1UnitType>().getNumChannels();

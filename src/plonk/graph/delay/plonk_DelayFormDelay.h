@@ -176,10 +176,10 @@ public:
             inputs.put (IOKey::Multiply, mul);
             inputs.put (IOKey::Add, add);
             
-            return UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                       data, 
-                                                                       preferredBlockSize, 
-                                                                       preferredSampleRate);
+            return UnitType::template proxiesFromInputs<DelayInternal> (inputs,
+                                                                        data, 
+                                                                        preferredBlockSize, 
+                                                                        preferredSampleRate);
         }
         else
         {

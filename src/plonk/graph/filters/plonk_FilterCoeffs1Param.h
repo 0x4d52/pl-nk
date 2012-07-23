@@ -56,6 +56,7 @@ public:
     typedef typename ShapeType::FormType                        FormType;
     
     typedef ChannelBase<SampleType>                             ChannelType;
+    typedef ObjectArray<ChannelType>                            ChannelArrayType;
         
     typedef ProxyOwnerChannelInternal<SampleType,Data>          Internal;
     typedef UnitBase<SampleType>                                UnitType;
@@ -65,8 +66,9 @@ public:
     FilterCoeffs1ParamChannelInternal (Inputs const& inputs, 
                                        Data const& data, 
                                        BlockSize const& blockSize,
-                                       SampleRate const& sampleRate) throw()
-    :   Internal (FormType::NumCoeffs, inputs, data, blockSize, sampleRate),
+                                       SampleRate const& sampleRate,
+                                       ChannelArrayType& channels) throw()
+    :   Internal (FormType::NumCoeffs, inputs, data, blockSize, sampleRate, channels),
         inputKeys (ShapeType::getInputKeys())
     {
         plonk_assert (ShapeType::NumParams == 1);

@@ -53,6 +53,7 @@ public:
     typedef typename ChannelInternalCore::Data              Data;
 
     typedef ChannelBase<SampleType>                         ChannelType;
+    typedef ObjectArray<ChannelType>                        ChannelArrayType;
     typedef ProxyOwnerChannelInternal<SampleType,Data>      Internal;
     typedef UnitBase<SampleType>                            UnitType;
     typedef InputDictionary                                 Inputs;
@@ -63,8 +64,9 @@ public:
     LinearPanChannelInternal (Inputs const& inputs, 
                               Data const& data, 
                               BlockSize const& blockSize,
-                              SampleRate const& sampleRate) throw()
-    :   Internal (NumOutputs, inputs, data, blockSize, sampleRate)
+                              SampleRate const& sampleRate,
+                              ChannelArrayType& channels) throw()
+    :   Internal (NumOutputs, inputs, data, blockSize, sampleRate, channels)
     {
     }
         

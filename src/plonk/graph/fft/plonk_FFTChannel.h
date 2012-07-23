@@ -50,6 +50,7 @@ class FFTChannelInternal
 public:
     typedef ChannelInternalCore::Data                           Data;
     typedef ChannelBase<SampleType>                             ChannelType;
+    typedef SimpleArray<ChannelType>                            ChannelArrayType;
     typedef FFTChannelInternal<SampleType>                      FFTInternal;
     typedef ProxyOwnerChannelInternal<SampleType,Data>          Internal;
     typedef UnitBase<SampleType>                                UnitType;
@@ -62,8 +63,9 @@ public:
     FFTChannelInternal (Inputs const& inputs, 
                         Data const& data, 
                         BlockSize const& blockSize,
-                        SampleRate const& sampleRate) throw()
-    :   Internal (NumOutputs, inputs, data, blockSize, sampleRate)
+                        SampleRate const& sampleRate,
+                        ChannelArrayType& channels) throw()
+    :   Internal (NumOutputs, inputs, data, blockSize, sampleRate, channels)
     {
     }
     

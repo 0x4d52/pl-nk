@@ -243,19 +243,32 @@ void SmartPointer::incrementRefCount()  throw()
     ++refCount;
 }
 
+//bool SmartPointer::decrementRefCount()  throw()
+//{ 
+//    plonk_assert (refCount > 0);
+//    
+//    --refCount;
+//    
+//    if (deleteIfOnlyMutualReferencesRemain() == true)
+//    {
+//        --refCount;
+//        plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
+//    }
+//    
+//    if (refCount <= 0) 
+//    {
+//        destroy();
+//        return true;
+//    }
+//    
+//    return false;
+//}
+
 bool SmartPointer::decrementRefCount()  throw()
 { 
     plonk_assert (refCount > 0);
-    
-    --refCount;
-    
-    if (deleteIfOnlyMutualReferencesRemain() == true)
-    {
-        --refCount;
-        plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
-    }
-    
-    if (refCount <= 0) 
+        
+    if (--refCount == 0) 
     {
         destroy();
         return true;

@@ -60,32 +60,39 @@ class ProxyOwnerChannelInternal : public ChannelInternal<SampleType, DataType>
 {
 public:    
     typedef ChannelBase<SampleType>                 ChannelType;
-    typedef SimpleArray<ChannelType>                ChannelArrayType;
+    typedef ObjectArray<ChannelType>                ChannelArrayType;
+    typedef WeakPointerContainer<ChannelType>       WeakChannelType;
+    typedef SimpleArray<WeakChannelType>            WeakChannelArrayType;
     typedef ChannelInternalBase<SampleType>         InternalBase;
     typedef ChannelInternal<SampleType,DataType>    Internal;
     typedef ProxyChannelInternal<SampleType>        ProxyInternal;
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;
     typedef NumericalArray<SampleType>              Buffer;    
+    typedef ObjectArray<Buffer>                     BufferArray;
     typedef typename ProxyInternal::Data            ProxyData;
 
     ProxyOwnerChannelInternal (const int numOutputs, 
                                Inputs const& inputs, 
                                DataType const& data, 
                                BlockSize const& blockSize,
-                               SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate),
-        ready (false),
-        fullyInitialised (false)
+                               SampleRate const& sampleRate,
+                               ChannelArrayType& proxyChannels) throw()
+    :   Internal (inputs, data, blockSize, sampleRate)//, ready (false), fullyInitialised (false)
     {
         plonk_assert (numOutputs >= 1);
         
+        proxyChannels.setSize (numOutputs, false);
+        channelBuffers.setSize (numOutputs, false);
         proxies.getInternal()->setSize (numOutputs, false);
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
         
-        InternalBase* ownerInternal = this;
+        WeakChannelType* proxiesArray = proxies.getInternal()->getArray();
+        
+        InternalBase* const ownerInternal = this;
         ChannelType ownerChannel = ChannelType (ownerInternal);
-        proxiesArray[0] = ownerChannel;
+        proxyChannels.put (0, ownerChannel);
+        proxiesArray[0] = WeakChannelType (ownerChannel);
+        channelBuffers[0] = InternalBase::getOutputBuffer();
                 
         const ProxyData& proxyData (reinterpret_cast<ProxyData const&> (data));
         
@@ -98,13 +105,19 @@ public:
                                      sampleRate,
                                      i);
             
-            proxiesArray[i] = ChannelType (proxyInternal);
+            ChannelType channel = ChannelType (proxyInternal);
+            proxyChannels.put (i, channel);
+            proxiesArray[i] = WeakChannelType (channel);
+            channelBuffers[i] = proxyInternal->getOutputBuffer();
         }        
         
-        ready = true;
+//        for (int i = 0; i < numOutputs; ++i)
+//            proxyChannels.atUnchecked (i)->initChannel (i);
+        
+//        ready = true;
     }
         
-    bool deleteIfOnlyMutualReferencesRemain() throw();
+//    bool deleteIfOnlyMutualReferencesRemain() throw();
     
     bool isProxyOwner() const throw() 
     { 
@@ -116,36 +129,56 @@ public:
         return this;
     }
     
+//    inline const SampleType* getOutputSamples (const int index) const throw() 
+//    {         
+//        plonk_assert (index >= 0);
+//        plonk_assert (index < proxies.getInternal()->length());
+//        const ChannelType* proxiesArray = proxies.getInternal()->getArray();
+//        return proxiesArray[index].getOutputSamples();
+//    }
+//    
+//    inline SampleType* getOutputSamples (const int index) throw() 
+//    {        
+//        plonk_assert (index >= 0);
+//        plonk_assert (index < proxies.getInternal()->length());
+//        ChannelType* proxiesArray = proxies.getInternal()->getArray();
+//        return proxiesArray[index].getOutputSamples();
+//    }
+//    
+//    inline const Buffer& getOutputBuffer (const int index) const throw() 
+//    {         
+//        plonk_assert (index >= 0);
+//        plonk_assert (index < proxies.getInternal()->length());
+//        const ChannelType* proxiesArray = proxies.getInternal()->getArray();
+//        return proxiesArray[index].getOutputBuffer();
+//    }
+//    
+//    inline Buffer& getOutputBuffer (const int index) throw() 
+//    {                 
+//        plonk_assert (index >= 0);
+//        plonk_assert (index < proxies.getInternal()->length());
+//        ChannelType* proxiesArray = proxies.getInternal()->getArray();
+//        return proxiesArray[index].getOutputBuffer();
+//    }  
+    
     inline const SampleType* getOutputSamples (const int index) const throw() 
     {         
-        plonk_assert (index >= 0);
-        plonk_assert (index < proxies.getInternal()->length());
-        const ChannelType* proxiesArray = proxies.getInternal()->getArray();
-        return proxiesArray[index].getOutputSamples();
+        return channelBuffers.atUnchecked (index).getArray();
     }
     
     inline SampleType* getOutputSamples (const int index) throw() 
     {        
-        plonk_assert (index >= 0);
-        plonk_assert (index < proxies.getInternal()->length());
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
-        return proxiesArray[index].getOutputSamples();
+        return channelBuffers.atUnchecked (index).getArray();
     }
     
     inline const Buffer& getOutputBuffer (const int index) const throw() 
     {         
-        plonk_assert (index >= 0);
-        plonk_assert (index < proxies.getInternal()->length());
-        const ChannelType* proxiesArray = proxies.getInternal()->getArray();
-        return proxiesArray[index].getOutputBuffer();
+        return channelBuffers.atUnchecked (index);
     }
     
     inline Buffer& getOutputBuffer (const int index) throw() 
     {                 
-        plonk_assert (index >= 0);
-        plonk_assert (index < proxies.getInternal()->length());
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
-        return proxiesArray[index].getOutputBuffer();
+        return channelBuffers.atUnchecked (index);
     }    
     
     int getNumChannels() const throw()
@@ -157,16 +190,21 @@ public:
     {
         plonk_assert (index >= 0);
         plonk_assert (index < proxies.getInternal()->length());
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
-        return proxiesArray[index].initValue (value);
+        WeakChannelType* proxiesArray = proxies.getInternal()->getArray();
+        
+        if (proxiesArray[index].isAlive())
+            proxiesArray[index].fromWeak().initValue (value);
     }
     
-    ChannelType& getProxy (const int index) throw()
+    ChannelType getProxy (const int index) throw()
     {
         plonk_assert (index >= 0);
         plonk_assert (index < proxies.getInternal()->length());
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
-        return proxiesArray[index];
+        WeakChannelType* proxiesArray = proxies.getInternal()->getArray();
+        
+        plonk_assert (proxiesArray[index].isAlive());
+        
+        return proxiesArray[index].fromWeak();
     }
     
     void setBlockSize (BlockSize const& newBlockSize) throw()
@@ -174,10 +212,13 @@ public:
         InternalBase::setBlockSize (newBlockSize);
         
         const int numProxies = proxies.getInternal()->length();
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
+        WeakChannelType* proxiesArray = proxies.getInternal()->getArray();
 
         for (int i = 1; i < numProxies; ++i)
-            proxiesArray[i].setBlockSize (newBlockSize);
+        {
+            if (proxiesArray[i].isAlive())
+                proxiesArray[i].fromWeak().setBlockSize (newBlockSize);    
+        }
     }
     
     void setSampleRate (SampleRate const& newSampleRate) throw()
@@ -185,10 +226,13 @@ public:
         Internal::setSampleRate (newSampleRate);
         
         const int numProxies = proxies.getInternal()->length();
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
+        WeakChannelType* proxiesArray = proxies.getInternal()->getArray();
 
         for (int i = 1; i < numProxies; ++i)
-            proxiesArray[i].setSampleRate (newSampleRate);
+        {
+            if (proxiesArray[i].isAlive())
+                proxiesArray[i].fromWeak().setSampleRate (newSampleRate);
+        }
     }
     
     void setOverlap (DoubleVariable const& newOverlap) throw()
@@ -196,61 +240,65 @@ public:
         Internal::setOverlap (newOverlap);
         
         const int numProxies = proxies.getInternal()->length();
-        ChannelType* proxiesArray = proxies.getInternal()->getArray();
+        WeakChannelType* proxiesArray = proxies.getInternal()->getArray();
 
         for (int i = 1; i < numProxies; ++i)
-            proxiesArray[i].setOverlap (newOverlap);        
+        {
+            if (proxiesArray[i].isAlive())
+                proxiesArray[i].fromWeak().setOverlap (newOverlap);     
+        }
     }
     
 private:
-    ChannelArrayType proxies;
-    bool ready : 1;
-    bool fullyInitialised : 1;
+    WeakChannelArrayType proxies;
+    BufferArray channelBuffers;
+//    bool ready : 1;
+//    bool fullyInitialised : 1;
 };
 
 
-template<class SampleType, class DataType>
-bool ProxyOwnerChannelInternal<SampleType,DataType>::deleteIfOnlyMutualReferencesRemain() throw()
-{            
-    typedef ChannelBase<SampleType> ChannelType;
-
-    if (ready == true)
-	{
-		if (fullyInitialised == false)
-		{
-			// refCounts reach the critial state once during normal initialisation
-			// this flags that state, the next time it's reached it is time to
-			// destory the proxy and owner
-			fullyInitialised = true;        
-		}
-		else
-		{
-			const int numProxies = proxies.getInternal()->length();
-			ChannelType* const proxiesArray = proxies.getInternal()->getArray();
-
-			for (int i = 1 ; i < numProxies; ++i)
-			{
-				const SmartPointer* const p = proxiesArray[i].getInternal();
-				const int proxyRefCount = p->getRefCount();
-				if (proxyRefCount > 1)
-					return false;
-			}
-            
-			if (this->getRefCount() <= numProxies)
-			{
-				ready = false;  
-                
-				// this is to ensure the clean deteleting of all objects
-				this->incrementRefCount();
-				proxies.getInternal()->clear();
-
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
+//template<class SampleType, class DataType>
+//bool ProxyOwnerChannelInternal<SampleType,DataType>::deleteIfOnlyMutualReferencesRemain() throw()
+//{            
+//    typedef ChannelBase<SampleType> ChannelType;
+//
+//    if (ready == true)
+//	{
+//		if (fullyInitialised == false)
+//		{
+//			// refCounts reach the critial state once during normal initialisation
+//			// this flags that state, the next time it's reached it is time to
+//			// destory the proxy and owner
+//			fullyInitialised = true;        
+//		}
+//		else
+//		{
+//			const int numProxies = proxies.getInternal()->length();
+//			ChannelType* const proxiesArray = proxies.getInternal()->getArray();
+//
+//			for (int i = 1 ; i < numProxies; ++i)
+//			{
+//				const SmartPointer* const p = proxiesArray[i].getInternal();
+//				const int proxyRefCount = p->getRefCount();
+//				if (proxyRefCount > 1)
+//					return false;
+//			}
+//            
+//			if (this->getRefCount() <= numProxies)
+//			{
+//				ready = false;  
+//                
+//				// this is to ensure the clean deteleting of all objects
+//				this->incrementRefCount();
+//				proxies.getInternal()->clear();
+//
+//				return true;
+//			}
+//		}
+//	}
+//
+//	return false;
+//}
 
 
 #endif // PLONK_PROXYOWNERCHANNELINTERNAL_H

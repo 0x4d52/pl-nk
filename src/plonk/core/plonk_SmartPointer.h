@@ -72,7 +72,7 @@ public:
      circular references may need to detect this state and release themselves.
      @see ProxyOwnerChannelInternal, ProxyChannelInternal
      */
-    virtual bool deleteIfOnlyMutualReferencesRemain() throw() { return false; } 
+//    virtual bool deleteIfOnlyMutualReferencesRemain() throw() { return false; } 
 	
 	/// @} <!-- end Construction and destruction -->
 	
@@ -89,7 +89,7 @@ protected:
     virtual void destroy();
     
     AtomicValue<Long> refCount;
-    void *weakPointer;
+    void *weakPointer; // make atomic?
 	
 private:
 	SmartPointer (const SmartPointer&);
