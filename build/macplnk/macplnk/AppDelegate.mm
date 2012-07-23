@@ -18,10 +18,11 @@
 {
     if (self = [super init])
     {
-        host.getHostName().print ("Host");
-        host.getNativeHostName().print ("Native");
-        host.getInputName().print ("Input");
-        host.getOutputName().print ("Output");
+        host = new AudioHost;
+        host->getHostName().print ("Host");
+        host->getNativeHostName().print ("Native");
+        host->getInputName().print ("Input");
+        host->getOutputName().print ("Output");
     }
     
     return self;
@@ -34,12 +35,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    host.startHost();
+    host->startHost();
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-    host.stopHost();
+    host->stopHost();
+    delete host;
 }
 
 @end

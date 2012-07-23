@@ -47,6 +47,7 @@ class AudioHost : public PortAudioAudioHost
 {
 public:
     AudioHost();
+    ~AudioHost();
     
     Unit constructGraph();
 };

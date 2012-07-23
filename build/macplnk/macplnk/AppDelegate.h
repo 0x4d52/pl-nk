@@ -11,7 +11,7 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-    AudioHost host;
+    AudioHost* host;
 }
 
 @property (assign) IBOutlet NSWindow *window;

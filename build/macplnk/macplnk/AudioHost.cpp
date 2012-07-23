@@ -44,6 +44,11 @@ AudioHost::AudioHost()
 //    setNumOutputs (4);
 }
 
+AudioHost::~AudioHost()
+{
+    
+}
+
 Unit AudioHost::constructGraph()
 {
 //    Unit input = BusRead::ar (Bus ("0"));   // busses 0 and 1 are left and right
