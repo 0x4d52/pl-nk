@@ -88,9 +88,9 @@ public:
     
     const double getSampleDurationInTicks() const throw();
         
-    static SampleRate getDefault() throw();
-    static SampleRate getControlRate() throw();
-    static SampleRate getDefaultBlockRate() throw();
+    static SampleRate& getDefault() throw();
+    static SampleRate& getControlRate() throw();
+    static SampleRate& getDefaultBlockRate() throw();
     static const SampleRate getFractionOfDefault(IntVariable const& divisor) throw();
     static const SampleRate getMultipleOfDefault(IntVariable const& factor) throw();
     inline static const SampleRate getMultipleOfDefault(const int factor) throw() { return getMultipleOfDefault (IntVariable (factor)); }

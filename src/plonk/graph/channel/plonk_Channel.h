@@ -146,18 +146,22 @@ public:
     inline int getOutputTypeCode() const throw()                            { return this->getInternal()->getOutputTypeCode(); }
     inline int getInputTypeCode() const throw()                             { return this->getInternal()->getInputTypeCode(); }
 
-    inline BlockSize getBlockSize() const throw()                           { return this->getInternal()->getBlockSize(); }
+    inline const BlockSize& getBlockSize() const throw()                    { return this->getInternal()->getBlockSize(); }
+    inline BlockSize& getBlockSize() throw()                                { return this->getInternal()->getBlockSize(); }
     inline void setBlockSize (BlockSize const& newBlockSize) throw()        { this->getInternal()->setBlockSize (newBlockSize); }
 
-    inline SampleRate getSampleRate() const throw()                         { return this->getInternal()->getSampleRate(); }
+    inline const SampleRate& getSampleRate() const throw()                  { return this->getInternal()->getSampleRate(); }
+    inline SampleRate& getSampleRate() throw()                              { return this->getInternal()->getSampleRate(); }
     inline void setSampleRate (SampleRate const& newSampleRate) throw()     { this->getInternal()->setSampleRate (newSampleRate); }
     inline double getSampleDurationInTicks() const throw()                  { return this->getInternal()->getSampleDurationInTicks(); }
     inline double getBlockDurationInTicks() const throw()                   { return this->getInternal()->getBlockDurationInTicks(); }
     
-    inline DoubleVariable getOverlap() const throw()                        { return this->getInternal()->getOverlap(); }
+    inline const DoubleVariable& getOverlap() const throw()                 { return this->getInternal()->getOverlap(); }
+    inline DoubleVariable& getOverlap() throw()                             { return this->getInternal()->getOverlap(); }
     inline void setOverlap (DoubleVariable const& newOverlap) throw()       { this->getInternal()->setOverlap (newOverlap); }
     
-    inline const Inputs getInputs() const throw()                           { return this->getInternal()->getInputs(); }
+    inline const Inputs& getInputs() const throw()                          { return this->getInternal()->getInputs(); }
+    inline Inputs getInputs() throw()                                       { return this->getInternal()->getInputs(); }
     
     inline const Buffer& getOutputBuffer() const throw()                    { return this->getInternal()->getOutputBuffer(); }
     inline Buffer& getOutputBuffer() throw()                                { return this->getInternal()->getOutputBuffer(); }

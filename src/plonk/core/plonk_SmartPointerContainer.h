@@ -110,17 +110,17 @@ public:
 		return internal;
 	}
     
-    SmartPointerContainerBase containerCopy() const throw()
+    inline SmartPointerContainerBase containerCopy() const throw()
     {
         return *this;
     }
     
-	bool isNull() const throw()
+	inline bool isNull() const throw()
 	{
 		return internal == getNullSmartPointer();
 	}
 	
-	bool isNotNull() const throw()
+	inline bool isNotNull() const throw()
 	{
 		return internal != getNullSmartPointer();
 	}
@@ -131,12 +131,12 @@ public:
         internal.swapWith (temp.internal);        
 	}
     
-    void swapWith (SmartPointerContainerBase& other) throw()
+    inline void swapWith (SmartPointerContainerBase& other) throw()
     {
         internal.swapWith (other.internal);
     }
 	
-	SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
+	inline SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
     :   internal (getNullSmartPointer())
 	{
         if (copy.internal != getNullSmartPointer()) 
@@ -147,23 +147,20 @@ public:
         }        
 	}
         
-	SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
+	inline SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
 	{
 		if (this != &other)
-        {            
-            SmartPointerContainerBase temp (other);
-            internal.swapWith (temp.internal);
-		}
+            this->setInternal (other.internal);
         
 		return *this;		
 	}    
     
-	bool operator== (SmartPointerContainerBase const& other) const throw()
+	inline bool operator== (SmartPointerContainerBase const& other) const throw()
 	{
 		return internal == other.internal;
 	}
 	
-	bool operator!= (SmartPointerContainerBase const& other) const throw()
+	inline bool operator!= (SmartPointerContainerBase const& other) const throw()
 	{
 		return internal != other.internal;
 	}
@@ -294,21 +291,23 @@ template<class SmartPointerType>
 class SmartPointerContainer<SmartPointerType, true> : public SmartPointerContainerBase<SmartPointerType>
 {
 public:    
-    SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
+    typedef SmartPointerContainerBase<SmartPointerType> Base;
+    
+    inline SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
 	:	SmartPointerContainerBase<SmartPointerType> (internalToUse)
 	{
 	}
     
-    SmartPointerContainer (SmartPointerContainer const& copy) throw()
+    inline SmartPointerContainer (SmartPointerContainer const& copy) throw()
 	:	SmartPointerContainerBase<SmartPointerType> (copy)
 	{
 	}    
     
     WeakPointer* getWeakPointer() const throw()
     {
-        const SmartPointerType* p = this->getInternal();
+        const SmartPointerType* const p = this->getInternal();
             
-        if (p != 0)
+        if (p != Base::getNullSmartPointer())
         {
             // todo: should this be static_cast?
             WeakPointer* w = reinterpret_cast<WeakPointer*> (p->getWeak());

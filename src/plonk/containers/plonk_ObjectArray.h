@@ -187,7 +187,7 @@ public:
 	    
 	/** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
-    ObjectArray (ObjectArray const& copy) throw()
+    inline ObjectArray (ObjectArray const& copy) throw()
     :   Base (static_cast<Base const&> (copy))
     {
     }

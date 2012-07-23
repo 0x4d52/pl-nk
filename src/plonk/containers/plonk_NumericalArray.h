@@ -216,13 +216,13 @@ public:
         Memory::zero (dst, numItems * sizeof (NumericalType));
     }
     
-    NumericalArray (NumericalArray const& copy) throw()
+    inline NumericalArray (NumericalArray const& copy) throw()
 	:	Base (static_cast<Base const&> (copy))
 	{
 	}    
     
     /** Assignment operator. */
-    NumericalArray& operator= (NumericalArray const& other) throw()
+    inline NumericalArray& operator= (NumericalArray const& other) throw()
 	{
 		if (this != &other)
             this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
@@ -230,7 +230,7 @@ public:
         return *this;
 	}
 
-    NumericalArray (ObjectArray<NumericalType> const& copy) throw()
+    inline NumericalArray (ObjectArray<NumericalType> const& copy) throw()
 	:	Base (static_cast<Base const&> (copy))
 	{
 	}    

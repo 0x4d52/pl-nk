@@ -104,10 +104,16 @@ public:
                 
 protected:
     /** Get the input buffers. @internal */
-    inline BufferArray getInputs() const throw() { return this->inputs; }
+    inline const BufferArray& getInputs() const throw()  { return this->inputs; }
+    
+    /** Get the input buffers. @internal */
+    inline BufferArray& getInputs() throw()              { return this->inputs; }
+
+    /** Get the output buffers. @internal */
+    inline const BufferArray& getOutputs() const throw() { return this->outputs; }
     
     /** Get the output buffers. @internal */
-    inline BufferArray getOutputs() const throw() { return this->outputs; }
+    inline BufferArray& getOutputs() throw()             { return this->outputs; }
 
     /** Get the name of the audio host. */
     virtual Text getHostName() const = 0;

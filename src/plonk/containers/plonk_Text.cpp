@@ -171,7 +171,7 @@ Text Text::fromValue (const double num) throw()
 Text& Text::operator= (Text const& other) throw()
 {
     if (this != &other)
-        this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+        this->setInternal (other.getInternal());
     
     return *this;
 }

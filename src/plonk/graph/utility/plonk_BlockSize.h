@@ -101,11 +101,11 @@ public:
      @code
         BlockSize::getDefault().setValue(newBlockSize)
      @endcode */
-    static BlockSize getDefault() throw();
+    static BlockSize& getDefault() throw();
     
     /** Gets the default control rate block size.
      This is currently 1. */
-    static BlockSize getControlRateBlockSize() throw();
+    static BlockSize& getControlRateBlockSize() throw();
     
     /** Create a block size that is a fraction of the default block size.
      This will automatically update when/if the default block size is changed. */

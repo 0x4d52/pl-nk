@@ -87,36 +87,36 @@ const double SampleRate::getSampleDurationInTicks() const throw()
     return TimeStamp::getTicks() / this->getValue();
 }
 
-SampleRate SampleRate::getDefault() throw()
+SampleRate& SampleRate::getDefault() throw()
 {
     static SampleRate sampleRate (44100.0);
     return sampleRate;
 }
 
-SampleRate SampleRate::getControlRate() throw()
+SampleRate& SampleRate::getControlRate() throw()
 {
     static SampleRate sampleRate ((getDefault() / BlockSize::getDefault()) * BlockSize::getControlRateBlockSize());   
     return sampleRate;
 }
 
-SampleRate SampleRate::getDefaultBlockRate() throw()
+SampleRate& SampleRate::getDefaultBlockRate() throw()
 {
     static SampleRate sampleRate (getDefault() / BlockSize::getDefault());
     return sampleRate;
 }
 
-const SampleRate SampleRate::getFractionOfDefault(IntVariable const& divisor) throw()
+const SampleRate SampleRate::getFractionOfDefault (IntVariable const& divisor) throw()
 {
     plonk_assert (divisor.getValue() > 0);
     return getDefault() / divisor;
 }
 
-const SampleRate SampleRate::getMultipleOfDefault(IntVariable const& factor) throw()
+const SampleRate SampleRate::getMultipleOfDefault (IntVariable const& factor) throw()
 {
     return getDefault() * factor;
 }
 
-const SampleRate SampleRate::getMultipleOfDefault(DoubleVariable const& factor) throw()
+const SampleRate SampleRate::getMultipleOfDefault (DoubleVariable const& factor) throw()
 {
     return getDefault() * factor;
 }

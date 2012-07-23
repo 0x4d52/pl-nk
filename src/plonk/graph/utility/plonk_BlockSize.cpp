@@ -83,13 +83,13 @@ BlockSize::BlockSize (BlockSizeNoPreference const& copy) throw()
 {
 }        
 
-BlockSize BlockSize::getDefault() throw()
+BlockSize& BlockSize::getDefault() throw()
 {
     static BlockSize blockSize (512);
     return blockSize;
 }
 
-BlockSize BlockSize::getControlRateBlockSize() throw()
+BlockSize& BlockSize::getControlRateBlockSize() throw()
 {
     static BlockSize blockSize (1); // temporary solution
     return blockSize;

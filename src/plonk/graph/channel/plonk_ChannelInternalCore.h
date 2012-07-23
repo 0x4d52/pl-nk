@@ -83,14 +83,19 @@ public:
     void setExpiryTimeStamp (TimeStamp const& newTimeStamp) throw();
     bool shouldBeDeletedNow (TimeStamp const& time) const throw();
         
-    inline Inputs getInputs() const throw()                                             { return this->inputs; }
+    inline const Inputs& getInputs() const throw()                                      { return this->inputs; }
+    inline Inputs& getInputs() throw()                                                  { return this->inputs; }
+    
     template<class Type> inline const Type& getInputAs (const int key) const throw()    { return this->inputs[key].asUnchecked<Type>(); }
     template<class Type> inline Type& getInputAs (const int key) throw()                { return this->inputs[key].asUnchecked<Type>(); }
     
-    BlockSize getBlockSize() const throw()    { return blockSize; }
-    SampleRate getSampleRate() const throw()  { return sampleRate; }    
-    DoubleVariable getOverlap() const throw() { return overlap; }
-    
+    const BlockSize& getBlockSize() const throw()    { return blockSize; }
+    const SampleRate& getSampleRate() const throw()  { return sampleRate; }    
+    const DoubleVariable& getOverlap() const throw() { return overlap; }
+    BlockSize& getBlockSize() throw()                 { return blockSize; }
+    SampleRate& getSampleRate() throw()               { return sampleRate; }    
+    DoubleVariable& getOverlap() throw()              { return overlap; }
+
     double getSampleDurationInTicks() const throw()  { return cachedSampleDurationTicks; }
     double getBlockDurationInTicks() const throw();
     void updateTimeStamp() throw();
