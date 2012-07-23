@@ -41,7 +41,6 @@
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
-#include "plonk_BinaryOpPlink.h"
 
 template<class SampleType> class ChannelMixerChannelInternal;
 
@@ -164,6 +163,7 @@ public:
 //------------------------------------------------------------------------------
 
 #ifdef PLONK_USEPLINK
+#include "plonk_BinaryOpPlink.h"
 
 template<>
 class ChannelMixerChannelInternal<float>

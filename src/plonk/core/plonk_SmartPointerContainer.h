@@ -62,8 +62,6 @@ template<class SmartPointerType>
 class SmartPointerContainerBase
 {
 public:         
-    typedef SmartPointerType Internal;
-
 	inline SmartPointerContainerBase() throw() 
 	:	internal (0)
 	{
@@ -83,12 +81,7 @@ public:
 		
 		internal = 0;        
 	}
-    	
-//	inline SmartPointerType* getInternal() throw() 
-//	{
-//		return internal;
-//	}
-		
+    			
 	inline SmartPointerType* getInternal() const throw() 
 	{
 		return internal;
@@ -103,16 +96,6 @@ public:
 	{
 		return internal;
 	}
-
-//    inline SmartPointerType* operator->() throw() 
-//	{
-//		return internal;
-//	}
-//
-//	inline const SmartPointerType* operator->() const throw() 
-//	{
-//		return internal;
-//	}
     
     SmartPointerContainerBase containerCopy() const throw()
     {
@@ -140,9 +123,9 @@ public:
         internal = newInternal;        
 	}
     
-    void swapWith (SmartPointerContainerBase const& other) throw()
+    void swapWith (SmartPointerContainerBase& other) throw()
     {
-        const Internal* const otherInternal = other.internal;
+        SmartPointerType* const otherInternal = other.internal;
         other.internal = internal;
         internal = otherInternal;
     }
@@ -173,7 +156,6 @@ public:
 	}
     
 private:
-    //AtomicValue<SmartPointerType*> internal;
     SmartPointerType* internal;
 };
 
@@ -227,8 +209,8 @@ public:
 
 
 template<class SmartPointerContainerType>
-void swap (SmartPointerContainerType const& a, 
-           SmartPointerContainerType const& b) throw()
+void swap (SmartPointerContainerType& a, 
+           SmartPointerContainerType& b) throw()
 {
     a.swapWith (b);
 }

@@ -108,7 +108,7 @@ public:
         DelayStateArray& delayStates = this->getDelayStates();
 
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
-        const Buffer inputBuffer (inputUnit.process (info, 0));
+        const Buffer& inputBuffer (inputUnit.process (info, 0));
         Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
         Param2UnitType& param2Unit = ChannelInternalCore::getInputAs<Param2UnitType> (FormType::getInputKeys().atUnchecked (2));
         Param3UnitType& param3Unit = ChannelInternalCore::getInputAs<Param3UnitType> (FormType::getInputKeys().atUnchecked (3));

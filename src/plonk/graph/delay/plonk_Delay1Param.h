@@ -96,7 +96,7 @@ public:
         DelayStateArray& delayStates = this->getDelayStates();
         
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
-        const Buffer inputBuffer (inputUnit.process (info, 0));
+        const Buffer& inputBuffer (inputUnit.process (info, 0));
         Param1UnitType& param1Unit = ChannelInternalCore::getInputAs<Param1UnitType> (FormType::getInputKeys().atUnchecked (1));
                         
         plonk_assert (inputBuffer.length() == this->getOutputBuffer (0).length());
@@ -174,7 +174,7 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {
-                    param1Function (state, *param1Samples++);                    
+                    param1Function (data, state, *param1Samples++);                    
                     FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);                    
                 }
                 
@@ -184,7 +184,7 @@ private:
         }
         else if (param1BufferLength == 1)
         {
-            param1Function (state, param1Samples[0]);                    
+            param1Function (data, state, param1Samples[0]);                    
             
             while (numSamplesToProcess > 0)
             {
@@ -212,7 +212,7 @@ private:
                 
                 while (numSamplesThisTime--) 
                 {                    
-                    param1Function (state, param1Samples[int (param1Position)]);                    
+                    param1Function (data, state, param1Samples[int (param1Position)]);                    
                     FormType::template tick<inputFunction, readFunction, writeFunction, outputFunction> (data, state);
                     param1Position += param1Increment;
                 }

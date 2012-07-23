@@ -44,7 +44,7 @@ BEGIN_PLONK_NAMESPACE
 
 #ifndef DEBUG_SmartPointer
   #ifdef PLONK_DEBUG
-    #define DEBUG_SmartPointer 0//1
+    #define DEBUG_SmartPointer 1
   #else
     #define DEBUG_SmartPointer 0
   #endif

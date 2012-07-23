@@ -84,7 +84,7 @@ public:
                                SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
-        rng.seed (data.rng);
+        rng.seed (data.rng.value);
     }
             
     Text getName() const throw()

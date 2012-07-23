@@ -109,7 +109,6 @@ public:
     bool isProxyOwner() const throw() 
     { 
         return true;
-        //return this->getNumChannels() > 1; 
     }
     
     InternalBase* getChannel (const int /*index*/) throw()
@@ -227,11 +226,11 @@ bool ProxyOwnerChannelInternal<SampleType,DataType>::deleteIfOnlyMutualReference
 		else
 		{
 			const int numProxies = proxies.getInternal()->length();
-			ChannelType* proxiesArray = proxies.getInternal()->getArray();
+			ChannelType* const proxiesArray = proxies.getInternal()->getArray();
 
 			for (int i = 1 ; i < numProxies; ++i)
 			{
-				SmartPointer* p = proxiesArray[i].getInternal();
+				const SmartPointer* const p = proxiesArray[i].getInternal();
 				const int proxyRefCount = p->getRefCount();
 				if (proxyRefCount > 1)
 					return false;
