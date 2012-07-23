@@ -62,6 +62,8 @@ template<class SmartPointerType>
 class SmartPointerContainerBase
 {
 public: 
+    typedef AtomicValue<SmartPointerType*> AtomicPointer;
+    
     inline static SmartPointerType* getNullSmartPointer() throw() 
     { 
         return static_cast<SmartPointerType*> (0); 
@@ -73,18 +75,24 @@ public:
 	}
     
     inline SmartPointerContainerBase (SmartPointerType* internalToUse) throw() 
-	:	internal (internalToUse)
+	:	internal (getNullSmartPointer())
 	{
-        if (internal != getNullSmartPointer())
-            internal->incrementRefCount();
+        if (internalToUse != getNullSmartPointer())
+        {
+            internalToUse->incrementRefCount();
+
+            AtomicPointer temp (internalToUse);
+            internal.swapWith (temp);
+        }
 	}
     
     inline ~SmartPointerContainerBase()
 	{        
-		if (internal != getNullSmartPointer()) 
-			internal->decrementRefCount();
-		
-		internal = getNullSmartPointer();        
+        AtomicPointer temp (getNullSmartPointer());
+        internal.swapWith (temp);
+        
+		if (temp != getNullSmartPointer()) 
+			temp->decrementRefCount();		
 	}
     
 	inline SmartPointerType* getInternal() const throw() 
@@ -119,34 +127,34 @@ public:
 	
 	inline void setInternal (SmartPointerType* newInternal) throw()
 	{
-        if (newInternal != getNullSmartPointer())
-            newInternal->incrementRefCount();
-        
-        if (internal != getNullSmartPointer())
-            internal->decrementRefCount();
-        
-        internal = newInternal;        
+        SmartPointerContainerBase temp (newInternal);
+        internal.swapWith (temp.internal);        
 	}
     
     void swapWith (SmartPointerContainerBase& other) throw()
     {
-        SmartPointerType* const otherInternal = other.internal;
-        other.internal = internal;
-        internal = otherInternal;
+        internal.swapWith (other.internal);
     }
 	
 	SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
-	:	internal (copy.internal)
+    :   internal (getNullSmartPointer())
 	{
-		if (internal != getNullSmartPointer()) 
-            internal->incrementRefCount();
+        if (copy.internal != getNullSmartPointer()) 
+        {
+            copy.internal->incrementRefCount();
+            AtomicPointer temp (copy.internal);
+            internal.swapWith (temp);
+        }        
 	}
-    
+        
 	SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.internal);
-		
+        {            
+            SmartPointerContainerBase temp (other);
+            internal.swapWith (temp.internal);
+		}
+        
 		return *this;		
 	}    
     
@@ -161,7 +169,7 @@ public:
 	}
     
 private:
-    AtomicValue<SmartPointerType*> internal;
+    AtomicPointer internal;
 };
 
 //template<class SmartPointerType>
