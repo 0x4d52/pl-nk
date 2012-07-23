@@ -296,9 +296,9 @@ public:
     inline Long getExtra() const throw()                    { return pl_AtomicP_GetExtra (getAtomicRef()); }
     inline Long getExtraUnchecked() const throw()           { return pl_AtomicP_GetExtraUnchecked (getAtomicRef()); }
 
-    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline operator Type* () const throw()                  { return static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
-    inline operator Type () const throw()                   { return *static_cast<Type*> (pl_AtomicP_Get (getAtomicRef())); }
+    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+    inline operator Type* () const throw()                  { return static_cast<Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
+    inline operator Type () const throw()                   { return *static_cast<Type*> (pl_AtomicP_GetUnchecked (getAtomicRef())); }
 
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
     inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
@@ -484,9 +484,9 @@ public:
     inline Type* getValueUnchecked() const throw()          { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
     inline Type* getPtrUnchecked() const throw()            { return static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
 
-    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicPX_Get (getAtomicRef())); }
+    inline operator const Type* () const throw()            { return static_cast<const Type*> (pl_AtomicPX_GetUncheckedUnchecked (getAtomicRef())); }
     inline operator Type* () throw()                        { return static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
-    inline operator Type () const throw()                   { return *static_cast<Type*> (pl_AtomicPX_Get (getAtomicRef())); }
+    inline operator Type () const throw()                   { return *static_cast<Type*> (pl_AtomicPX_GetUnchecked (getAtomicRef())); }
 
     inline Long getExtra() const throw()                    { return pl_AtomicPX_GetExtra (getAtomicRef()); }
     inline Long getExtraUnchecked() const throw()           { return pl_AtomicPX_GetExtraUnchecked (getAtomicRef()); }
