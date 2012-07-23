@@ -61,32 +61,37 @@
 template<class SmartPointerType>
 class SmartPointerContainerBase
 {
-public:         
+public: 
+    inline static SmartPointerType* getNullSmartPointer() throw() 
+    { 
+        return static_cast<SmartPointerType*> (0); 
+    }
+    
 	inline SmartPointerContainerBase() throw() 
-	:	internal (0)
+	:	internal (getNullSmartPointer())
 	{
 	}
     
     inline SmartPointerContainerBase (SmartPointerType* internalToUse) throw() 
 	:	internal (internalToUse)
 	{
-        if (internal != 0)
+        if (internal != getNullSmartPointer())
             internal->incrementRefCount();
 	}
-
+    
     inline ~SmartPointerContainerBase()
 	{        
-		if (internal != 0) 
+		if (internal != getNullSmartPointer()) 
 			internal->decrementRefCount();
 		
-		internal = 0;        
+		internal = getNullSmartPointer();        
 	}
-    			
+    
 	inline SmartPointerType* getInternal() const throw() 
 	{
 		return internal;
 	}
-    	
+    
     inline SmartPointerType* operator->() throw() 
 	{
 		return internal;
@@ -101,23 +106,23 @@ public:
     {
         return *this;
     }
-
+    
 	bool isNull() const throw()
 	{
-		return internal == 0;
+		return internal == getNullSmartPointer();
 	}
 	
 	bool isNotNull() const throw()
 	{
-		return internal != 0;
+		return internal != getNullSmartPointer();
 	}
 	
 	inline void setInternal (SmartPointerType* newInternal) throw()
 	{
-        if (newInternal != 0)
+        if (newInternal != getNullSmartPointer())
             newInternal->incrementRefCount();
         
-        if (internal != 0)
+        if (internal != getNullSmartPointer())
             internal->decrementRefCount();
         
         internal = newInternal;        
@@ -133,7 +138,7 @@ public:
 	SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
 	:	internal (copy.internal)
 	{
-		if (internal != 0) 
+		if (internal != getNullSmartPointer()) 
             internal->incrementRefCount();
 	}
     
@@ -156,8 +161,109 @@ public:
 	}
     
 private:
-    SmartPointerType* internal;
+    AtomicValue<SmartPointerType*> internal;
 };
+
+//template<class SmartPointerType>
+//class SmartPointerContainerBase
+//{
+//public:         
+//	inline SmartPointerContainerBase() throw() 
+//	:	internal (0)
+//	{
+//	}
+//    
+//    inline SmartPointerContainerBase (SmartPointerType* internalToUse) throw() 
+//	:	internal (internalToUse)
+//	{
+//        if (internal != 0)
+//            internal->incrementRefCount();
+//	}
+//
+//    inline ~SmartPointerContainerBase()
+//	{        
+//		if (internal != 0) 
+//			internal->decrementRefCount();
+//		
+//		internal = 0;        
+//	}
+//    			
+//	inline SmartPointerType* getInternal() const throw() 
+//	{
+//		return internal;
+//	}
+//    	
+//    inline SmartPointerType* operator->() throw() 
+//	{
+//		return internal;
+//	}
+//    
+//	inline const SmartPointerType* operator->() const throw() 
+//	{
+//		return internal;
+//	}
+//    
+//    SmartPointerContainerBase containerCopy() const throw()
+//    {
+//        return *this;
+//    }
+//
+//	bool isNull() const throw()
+//	{
+//		return internal == 0;
+//	}
+//	
+//	bool isNotNull() const throw()
+//	{
+//		return internal != 0;
+//	}
+//	
+//	inline void setInternal (SmartPointerType* newInternal) throw()
+//	{
+//        if (newInternal != 0)
+//            newInternal->incrementRefCount();
+//        
+//        if (internal != 0)
+//            internal->decrementRefCount();
+//        
+//        internal = newInternal;        
+//	}
+//    
+//    void swapWith (SmartPointerContainerBase& other) throw()
+//    {
+//        SmartPointerType* const otherInternal = other.internal;
+//        other.internal = internal;
+//        internal = otherInternal;
+//    }
+//	
+//	SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
+//	:	internal (copy.internal)
+//	{
+//		if (internal != 0) 
+//            internal->incrementRefCount();
+//	}
+//    
+//	SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
+//	{
+//		if (this != &other)
+//            this->setInternal (other.internal);
+//		
+//		return *this;		
+//	}    
+//    
+//	bool operator== (SmartPointerContainerBase const& other) const throw()
+//	{
+//		return internal == other.internal;
+//	}
+//	
+//	bool operator!= (SmartPointerContainerBase const& other) const throw()
+//	{
+//		return internal != other.internal;
+//	}
+//    
+//private:
+//    SmartPointerType* internal;
+//};
 
 
 template<class SmartPointerType, bool enableWeak>

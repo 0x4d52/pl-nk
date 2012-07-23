@@ -303,12 +303,12 @@ public:
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
     inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
 
-    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Type> (other); }
-    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Type> (other); }
-    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Type> (other); }
-    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Type> (other); }
-    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Type> (other); }
-    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Type> (other); }
+    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Type*> (other); }
+    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Type*> (other); }
+    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Type*> (other); }
+    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Type*> (other); }
+    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Type*> (other); }
+    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Type*> (other); }
 
     bool operator== (const Type* other) const throw() { return this->getPtrUnchecked() == other; }
     bool operator!= (const Type* other) const throw() { return this->getPtrUnchecked() != other; }
@@ -494,12 +494,12 @@ public:
     inline void deletePtr() throw()                         { delete this->getPtrUnchecked(); }
     inline void deleteAndZeroPtr() throw()                  { delete this->getPtrUnchecked(); this->setPtr (0); }
 
-    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Type> (other); }
-    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Type> (other); }
-    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Type> (other); }
-    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Type> (other); }
-    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Type> (other); }
-    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Type> (other); }
+    template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == static_cast<Type*> (other); }
+    template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != static_cast<Type*> (other); }
+    template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  static_cast<Type*> (other); }
+    template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= static_cast<Type*> (other); }
+    template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  static_cast<Type*> (other); }
+    template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= static_cast<Type*> (other); }
     
     bool operator== (const Type* other) const throw() { return this->getPtrUnchecked() == other; }
     bool operator!= (const Type* other) const throw() { return this->getPtrUnchecked() != other; }

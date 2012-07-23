@@ -39,7 +39,7 @@
 #ifndef PLONK_ATOMICOBJECT_H
 #define PLONK_ATOMICOBJECT_H
 
-#define PLONK_ATOMICOBJECT_DEBUG 0
+#define PLONK_ATOMICOBJECT_DEBUG 1
 
 template<class Type> class AtomicObject;
 
@@ -291,8 +291,8 @@ private:
 };
 
 template<class Type>
-void swap (AtomicObject<Type> const& a, 
-           AtomicObject<Type> const& b) throw()
+void swap (AtomicObject<Type>& a, 
+           AtomicObject<Type>& b) throw()
 {
     a.swapWith (b);
 }

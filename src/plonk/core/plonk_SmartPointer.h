@@ -66,14 +66,7 @@ public:
     
 	void incrementRefCount() throw();
     bool decrementRefCount() throw(); 
-    
-    /** To check for mutual-only references remaining.
-     Most SmartPointer subclass don't need this but some which naturally form
-     circular references may need to detect this state and release themselves.
-     @see ProxyOwnerChannelInternal, ProxyChannelInternal
-     */
-//    virtual bool deleteIfOnlyMutualReferencesRemain() throw() { return false; } 
-	
+    	
 	/// @} <!-- end Construction and destruction -->
 	
 	/// @name Miscellaneous
@@ -86,7 +79,7 @@ public:
 	/// @} <!-- end Miscellaneous -->
     
 protected:
-    virtual void destroy();
+    //virtual void destroy();
     
     AtomicValue<Long> refCount;
     void *weakPointer; // make atomic?
@@ -95,53 +88,5 @@ private:
 	SmartPointer (const SmartPointer&);
     const SmartPointer& operator= (const SmartPointer&);
 };
-
-//class SmartPointer
-//{
-//public:
-//	
-//	/// @name Construction and destruction
-//	/// @{
-//	
-//	SmartPointer (const bool allocateWeakPointer = true) throw();
-//    virtual ~SmartPointer();
-//
-//    static void* operator new (size_t size); 
-//    static void operator delete (void* ptr);
-//    
-//	void incrementRefCount() throw();
-//    bool decrementRefCount() throw(); 
-//    
-//    /** To check for mutual-only references remaining.
-//     Most SmartPointer subclass don't need this but some which naturally form
-//     circular references may need to detect this state and release themselves.
-//     @see ProxyOwnerChannelInternal, ProxyChannelInternal
-//     */
-//    virtual bool deleteIfOnlyMutualReferencesRemain() throw() { return false; } 
-//	
-//	/// @} <!-- end Construction and destruction -->
-//	
-//	/// @name Miscellaneous
-//	/// @{
-//	
-//	Long getRefCount() const throw()	{ return refCount.getValueUnchecked(); }
-////	bool isActive() const throw()       { return active != 0; }
-//    void update() throw() { }
-//    void* getWeak() const throw()       { return weakPointer; }
-//        
-//	/// @} <!-- end Miscellaneous -->
-//		
-//protected:
-//    virtual void destroy();
-//    
-//    //Int refCount;
-//    AtomicValue<Long> refCount;
-//    void *weakPointer;
-////	unsigned int active;
-//	
-//private:
-//	SmartPointer (const SmartPointer&);
-//    const SmartPointer& operator= (const SmartPointer&);
-//};
 
 #endif // PLONK_SMARTPOINTER_H

@@ -185,84 +185,10 @@ void SmartPointer::operator delete (void* ptr)
     Memory::realTime().free (ptr); 
 }
 
-//void SmartPointer::destroy()
-//{
-//    plonk_assert (active); // want to see if these checks can be removed...
-//    
-//    if (active)
-//    {
-//        active = 0;
-//        //Deleter::getDeleter()->deleteInternal (this);
-//        delete this; 
-//    }
-//}
-//
-//void SmartPointer::incrementRefCount()  throw()
-//{	
-//    plonk_assert (active); // want to see if these checks can be removed...
-//
-//	if (active) 
-//    {
-//        ++refCount;
-//    }
-//}
-//
-//bool SmartPointer::decrementRefCount()  throw()
-//{ 
-//    plonk_assert (active); // want to see if these checks can be removed...
-//
-//	if (active)
-//	{
-//		plonk_assert (refCount > 0);
-//
-//        --refCount;
-//        
-//        if (deleteIfOnlyMutualReferencesRemain() == true)
-//		{
-//            --refCount;
-//			plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
-//        }
-//		
-//        if (refCount <= 0) 
-//        {
-//            destroy();
-//            return true;
-//        }
-//	}
-//    
-//    return false;
-//}
-
-void SmartPointer::destroy()
-{
-    delete this; 
-}
-
 void SmartPointer::incrementRefCount()  throw()
 {	
     ++refCount;
 }
-
-//bool SmartPointer::decrementRefCount()  throw()
-//{ 
-//    plonk_assert (refCount > 0);
-//    
-//    --refCount;
-//    
-//    if (deleteIfOnlyMutualReferencesRemain() == true)
-//    {
-//        --refCount;
-//        plonk_assert (refCount == 0); // once we use a deferred Deleter this may not be the case?
-//    }
-//    
-//    if (refCount <= 0) 
-//    {
-//        destroy();
-//        return true;
-//    }
-//    
-//    return false;
-//}
 
 bool SmartPointer::decrementRefCount()  throw()
 { 
@@ -270,7 +196,7 @@ bool SmartPointer::decrementRefCount()  throw()
         
     if (--refCount == 0) 
     {
-        destroy();
+        delete this;
         return true;
     }
     
