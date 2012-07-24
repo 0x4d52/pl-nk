@@ -55,7 +55,6 @@
 
 #include "../containers/plonk_ContainerForwardDeclarations.h"
 #include "../containers/plonk_Atomic.h"
-#include "../containers/plonk_AtomicObject.h"
 #include "../containers/plonk_DynamicContainer.h"
 #include "../containers/plonk_ObjectArrayInternal.h"
 #include "../containers/plonk_SimpleArray.h"

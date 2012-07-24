@@ -133,4 +133,21 @@ inline bool TimeStamp::operator>= (TimeStamp const& other) const throw()
     else return ((time > other.time) || ((time == other.time) && (fraction >= other.fraction)));
 }
 
+inline double TimeStamp::getTicks() throw()
+{
+    return 1000000.0; // microseconds
+}
+
+inline double TimeStamp::getReciprocalTicks() throw()
+{
+    return 1.0 / 1000000.0; // 1/microseconds
+}
+
+inline const TimeStamp& TimeStamp::getZero() throw()
+{
+    static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
+    return *timeZero;
+}
+
+
 #endif // PLONK_TIMESTAMP_H

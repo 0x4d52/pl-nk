@@ -322,10 +322,6 @@ public:
                                              BlockSize const& preferredBlockSize,
                                              SampleRate const& preferredSampleRate) throw()
     {        
-        /*
-         for full templating we'd need to add template params for the mul and add unit types
-        */
-        
         Inputs mainInputs = inputs;
         const Dynamic add = mainInputs.remove (IOKey::Add);
         const Dynamic mul = mainInputs.remove (IOKey::Multiply);
@@ -358,29 +354,21 @@ public:
                                               BlockSize const& preferredBlockSize,
                                               SampleRate const& preferredSampleRate) throw()
     {        
-        /*
-         for full templating we'd need to add template params for the mul and add unit types
-         */
-
         Inputs mainInputs = inputs;
         const Dynamic add = mainInputs.remove (IOKey::Add);
         const Dynamic mul = mainInputs.remove (IOKey::Multiply);
                 
-        ChannelArrayType channels;
-        
-//        ProxyOwnerChannelInternalClassType* proxyOwner =
-            new ProxyOwnerChannelInternalClassType (mainInputs, 
-                                                    data, 
-                                                    preferredBlockSize, 
-                                                    preferredSampleRate, 
-                                                    channels);
+        ChannelArrayType channels;        
+        new ProxyOwnerChannelInternalClassType (mainInputs, 
+                                                data, 
+                                                preferredBlockSize, 
+                                                preferredSampleRate, 
+                                                channels);
         const int numChannels = channels.length();
         for (int i = 0; i < numChannels; ++i)
             channels.atUnchecked (i).initChannel (i);
         
-        UnitBase result (channels);
-        
-//        plonk_assert (proxyOwner->isProxyOwner() == true);
+        UnitBase result (channels);        
         return applyMulAdd (result, UnitBase (mul), UnitBase (add));
     }        
     
@@ -394,10 +382,6 @@ public:
                                         UnitBase const& mul,
                                         UnitBase const& add) throw()
     {
-        /*
-         for full templating we'd need to add template params for the mul and add unit types
-         */
-
         UnitBase result = mainUnit;
         
         bool hasMul = true;
@@ -419,44 +403,6 @@ public:
             
         return result;        
     }
-    
-//    /** Apply multiply and addition operators to another unit.
-//     Here @c mul will be ignored (not applied) if the value is a single channel 
-//     constant equal to 1 (or null rather than just a constant 0). And @c add 
-//     will be ignored (not applied) if it is a single channel constant equal to
-//     0 (or null). On some platforms this might be implemented as a single
-//     multiply-and-add operation. */
-//    template<class MulUnitType, class AddUnitType>
-//    static inline UnitBase applyMulAdd (UnitBase const& mainUnit, 
-//                                        MulUnitType const& mul,
-//                                        AddUnitType const& add) throw()
-//    {
-//        /*
-//         for full templating we'd need to add template params for the mul and add unit types
-//         */
-//        
-//        UnitBase result = mainUnit;
-//        
-//        bool hasMul = true;
-//        bool hasAdd = true;
-//        
-//        if (mul.isNull() || (mul.isConstant() && (mul.getValue (0) == SampleType (1))))
-//            hasMul = false;
-//        
-//        if (add.isNull() || (add.isConstant() && (add.getValue (0) == SampleType (0))))
-//            hasAdd = false;
-//        
-//        // could apply an all-in-one muladd if we had one...
-//        
-//        if (hasMul)
-//            result *= mul;
-//        
-//        if (hasAdd)
-//            result += add;
-//        
-//        return result;        
-//    }
-
     
     /** Resamples this unit to a different sample rate and/or block size. 
      By default the default sample rate and default block size are used. */
@@ -501,10 +447,6 @@ public:
     template<PLONK_BINARYOPFUNCTION(SampleType, op)>
     UnitBase binary (UnitBase const& rightOperand) const throw() 
     {        
-        /*
-         for full templating we'd need to add template param for the rightop unit types
-         */
-
         typedef BinaryOpChannelInternal<SampleType,op>      ChannelInternalClassType;
         typedef typename ChannelInternalClassType::Data     Data;
                 

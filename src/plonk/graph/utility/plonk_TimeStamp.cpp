@@ -78,16 +78,6 @@ TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
     return *this;
 }
 
-//bool TimeStamp::isFinite() const throw()
-//{
-//    return ! isInfinite();
-//}
-//
-//bool TimeStamp::isInfinite() const throw()
-//{
-//    return pl_IsInfD (fraction) != 0;
-//}
-
 TimeStamp& TimeStamp::operator+= (const double offset) throw()
 {
     if (pl_IsInfD (offset))
@@ -321,15 +311,15 @@ bool TimeStamp::fractionIsValid (const double f) throw()
         return false;
 }
 
-double TimeStamp::getTicks() throw()
-{
-    return 1000000.0; // microseconds
-}
-
-double TimeStamp::getReciprocalTicks() throw()
-{
-    return 1.0 / 1000000.0; // 1/microseconds
-}
+//double TimeStamp::getTicks() throw()
+//{
+//    return 1000000.0; // microseconds
+//}
+//
+//double TimeStamp::getReciprocalTicks() throw()
+//{
+//    return 1.0 / 1000000.0; // 1/microseconds
+//}
 
 TimeStamp TimeStamp::fromSeconds (const double seconds) throw()
 {
@@ -343,11 +333,11 @@ TimeStamp TimeStamp::fromSamples (const double samples, const double sampleRate)
     return fromSeconds (samples / sampleRate);    
 }
 
-const TimeStamp& TimeStamp::getZero() throw()
-{
-    static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
-    return *timeZero;
-}
+//const TimeStamp& TimeStamp::getZero() throw()
+//{
+//    static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
+//    return *timeZero;
+//}
 
 const TimeStamp& TimeStamp::getMaximum() throw()
 {
