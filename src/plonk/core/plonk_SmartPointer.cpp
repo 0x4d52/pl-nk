@@ -42,74 +42,20 @@ BEGIN_PLONK_NAMESPACE
 
 #include "plonk_Headers.h"
 
-#ifndef DEBUG_SmartPointer
+#ifndef PLONK_SMARTPOINTER_DEBUG
   #ifdef PLONK_DEBUG
-    #define DEBUG_SmartPointer 1
+    #define PLONK_SMARTPOINTER_DEBUG 0//1
   #else
-    #define DEBUG_SmartPointer 0
+    #define PLONK_SMARTPOINTER_DEBUG 0
   #endif
 #endif
 
-#define DEBUB_SmartPointerLog 1
+#define PLONK_SMARTPOINTER_DEBUGLOG 1
 
 //=========================== SmartPointer =====================================
 
-#if DEBUG_SmartPointer
-class DummyBase 
-{
-public:
-    virtual ~DummyBase() { }
-    void update() throw() { }
-}; 
-
-class SmartPointerCounter
-{
-public:
-    static SmartPointerCounter& global() throw()
-    {
-        static SmartPointerCounter object;
-        return object;
-    }
-    
-    ~SmartPointerCounter()
-    {        
-        for (int i = allocations->size(); --i >= 0;)
-        {
-            SmartPointer* p = allocations->getArray()[i];
-            (void)p;
-            p = 0; // just an extra line to ease stepping through
-        }
-        
-//        plonk_assert (allocations->size() == 0);
-        
-        delete allocations;
-    }
-        
-    void add (SmartPointer* p) 
-    { 
-        allocations->add (p);
-    }
-    
-    void remove (SmartPointer* p) 
-    { 
-        int index = allocations->indexOf (p);
-        
-        plonk_assert (index >= 0);
-        
-        if (index >= 0)
-            allocations->remove (index);
-    }
-    
-    int size() const throw() { return allocations->size(); }
-        
-private:
-    SmartPointerCounter() throw()
-    :   allocations(new ObjectArrayInternal<SmartPointer*,DummyBase> (0, false))
-    {
-    }
-    
-    ObjectArrayInternal<SmartPointer*,DummyBase>* allocations;
-};
+#if PLONK_SMARTPOINTER_DEBUG
+AtomicLong totalSmartPointers;
 #endif
 
 
@@ -129,33 +75,20 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
         weak->incrementRefCount();
     }
     
-#if DEBUG_SmartPointer
-    SmartPointerCounter::global().add (this);
-    
-    if ((long)this == 0) 
-    {
-        printf("stop\n");
-    }
-        
-  #if DEBUB_SmartPointerLog
-	printf("+++++++, %p, %d\n", this, SmartPointerCounter::global().size());
-    
-    if (SmartPointerCounter::global().size() == -1)
-    {
-        printf("stop\n");
-    }
-    
-    
+#if PLONK_SMARTPOINTER_DEBUG
+    ++totalSmartPointers;
+  #if PLONK_SMARTPOINTER_DEBUGLOG
+	printf("++SmartPointer++ %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
   #endif
 #endif
 }
 
 SmartPointer::~SmartPointer()
 {
-#if DEBUG_SmartPointer
-    SmartPointerCounter::global().remove (this);
-  #if DEBUB_SmartPointerLog
-	printf("-------, %p, %d\n", this, SmartPointerCounter::global().size());
+#if PLONK_SMARTPOINTER_DEBUG
+    --totalSmartPointers;
+  #if PLONK_SMARTPOINTER_DEBUGLOG
+	printf("--SmartPointer-- %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
   #endif
 #endif
     

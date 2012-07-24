@@ -83,7 +83,6 @@ protected:
     typedef ObjectArray<ChannelType>                ChannelArrayType;          
     typedef ChannelInternalBase<SampleType>         ChannelInternalType;
     typedef NumericalArray<ChannelType>             UnitType;
-//    typedef NumericalArray2D<ChannelType,UnitType>  UnitArray;
     typedef NumericalArray2D<ChannelType,UnitBase>  UnitArray;
     typedef NumericalArray2D<SampleType>            BufferArrayType;
     typedef NullChannelInternal<SampleType>         NullInternal;
@@ -189,26 +188,86 @@ public:
     {
     }
     
-//    UnitBase (InitialUnit const& i00,
-//              InitialUnit const& i01,
-//              InitialUnit const& i02,
-//              InitialUnit const& i03 = InitialUnit()) throw()
-//	:	Base (i00, i01, i02, i03)
-//	{
-//	}
-//	
-//    UnitBase (InitialUnit const& i00,
-//              InitialUnit const& i01,
-//              InitialUnit const& i02,
-//              InitialUnit const& i03,
-//              InitialUnit const& i04,
-//              InitialUnit const& i05 = InitialUnit(),
-//              InitialUnit const& i06 = InitialUnit(),
-//              InitialUnit const& i07 = InitialUnit()) throw()
-//	:	Base (i00, i01, i02, i03, i04, i05, i06, i07)
-//	{
-//	}
+    UnitBase (InitialUnit const& i00,
+              InitialUnit const& i01,
+              InitialUnit const& i02,
+              InitialUnit const& i03 = InitialUnit()) throw()
+	:	Base (i00, i01, i02, i03)
+	{
+	}
+	
+    UnitBase (InitialUnit const& i00,
+              InitialUnit const& i01,
+              InitialUnit const& i02,
+              InitialUnit const& i03,
+              InitialUnit const& i04,
+              InitialUnit const& i05 = InitialUnit(),
+              InitialUnit const& i06 = InitialUnit(),
+              InitialUnit const& i07 = InitialUnit()) throw()
+	:	Base (i00, i01, i02, i03, i04, i05, i06, i07)
+	{
+	}
         
+    UnitBase (InitialUnit const &i00,
+              InitialUnit const &i01,
+              InitialUnit const &i02,
+              InitialUnit const &i03,
+              InitialUnit const &i04,
+              InitialUnit const &i05,
+              InitialUnit const &i06,
+              InitialUnit const &i07,
+              InitialUnit const &i08,
+              InitialUnit const &i09 = InitialUnit(),
+              InitialUnit const &i10 = InitialUnit(),
+              InitialUnit const &i11 = InitialUnit(),
+              InitialUnit const &i12 = InitialUnit(),
+              InitialUnit const &i13 = InitialUnit(),
+              InitialUnit const &i14 = InitialUnit(),
+              InitialUnit const &i15 = InitialUnit()) throw()
+	:	Base (i00, i01, i02, i03, i04, i05, i06, i07, 
+              i08, i09, i10, i11, i12, i13, i14, i15)
+	{
+    }
+    
+    UnitBase (InitialUnit const &i00,
+              InitialUnit const &i01,
+              InitialUnit const &i02,
+              InitialUnit const &i03,
+              InitialUnit const &i04,
+              InitialUnit const &i05,
+              InitialUnit const &i06,
+              InitialUnit const &i07,
+              InitialUnit const &i08,
+              InitialUnit const &i09,
+              InitialUnit const &i10,
+              InitialUnit const &i11,
+              InitialUnit const &i12,
+              InitialUnit const &i13,
+              InitialUnit const &i14,
+              InitialUnit const &i15,
+              InitialUnit const &i16,
+              InitialUnit const &i17 = InitialUnit(),
+              InitialUnit const &i18 = InitialUnit(),
+              InitialUnit const &i19 = InitialUnit(),
+              InitialUnit const &i20 = InitialUnit(),
+              InitialUnit const &i21 = InitialUnit(),
+              InitialUnit const &i22 = InitialUnit(),
+              InitialUnit const &i23 = InitialUnit(),
+              InitialUnit const &i24 = InitialUnit(),
+              InitialUnit const &i25 = InitialUnit(),
+              InitialUnit const &i26 = InitialUnit(),
+              InitialUnit const &i27 = InitialUnit(),
+              InitialUnit const &i28 = InitialUnit(),
+              InitialUnit const &i29 = InitialUnit(),
+              InitialUnit const &i30 = InitialUnit(),
+              InitialUnit const &i31 = InitialUnit()) throw()
+	:	Base (i00, i01, i02, i03, i04, i05, i06, i07, 
+              i08, i09, i10, i11, i12, i13, i14, i15,
+              i16, i17, i18, i19, i20, i21, i22, i23,
+              i24, i25, i26, i27, i28, i29, i30, i31)
+	{
+    }
+    
     UnitBase (ChannelArrayType const& copy) throw()
 	:	UnitType (static_cast<UnitType const&> (copy))
 	{
@@ -240,6 +299,20 @@ public:
 	{
 		return operator= (static_cast<UnitBase const&> (other));
 	}    
+    
+    /** Cast to a single channel. */
+    inline operator const ChannelType& () const throw()
+    {
+        plonk_assert (this->getNumChannels() == 1);
+        return this->atUnchecked (0);
+    }
+    
+    /** Cast to a single channel. */
+    inline operator ChannelType& () throw()
+    {
+        plonk_assert (this->getNumChannels() == 1);
+        return this->atUnchecked (0);
+    }
     
     /** Primary means of creating Unit objects.
      Used with most non-proxy-owning ChannelInternal classes. */

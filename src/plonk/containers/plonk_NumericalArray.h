@@ -96,7 +96,7 @@ public:
 	class InitialNumber
 	{
 	public:
-		InitialNumber() throw() : value(0), valid(false) { }
+		InitialNumber() throw() : value (0), valid (false) { }
 		InitialNumber (NumericalType initialValue) throw()
 		:	value (initialValue), 
             valid (true) 

@@ -76,7 +76,7 @@ public:
     /** Default constructor.
      Creates a "null" channel. */
     ChannelBase() throw() 
-    :   Base (ChannelBase::getNull().getInternal())//(ChannelBase::getNull().containerCopy().getInternal()) 
+    :   Base (ChannelBase::getNull().getInternal())
     { 
     }
     
@@ -85,6 +85,21 @@ public:
     :   Base (internal)
     {
     }
+    
+    /** Get the first channel from a one-channel unit. */
+    ChannelBase (UnitType const& unit) throw()
+    :   Base (static_cast<Base const&> (unit.atUnchecked (0)))
+    {
+        plonk_assert (unit.getNumChannels() == 1);
+    }
+    
+    /** Get the first channel from a one-channel unit. */
+    ChannelBase (UnitBase<SampleType> const& unit) throw()
+    :   Base (static_cast<Base const&> (unit.atUnchecked (0)))
+    {
+        plonk_assert (unit.getNumChannels() == 1);
+    }
+
     
     /** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
