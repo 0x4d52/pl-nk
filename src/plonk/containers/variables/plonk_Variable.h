@@ -77,7 +77,7 @@ public:
     
     /** Default constructor. */
     inline Variable() throw()
-    :   Base (new VariableInternalType (Type (0)))
+    :   Base (new VariableInternalType (Type()))
     {
     }
     
@@ -104,7 +104,7 @@ public:
     Variable& operator= (Variable const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}
@@ -144,15 +144,6 @@ public:
         this->setValue (newValue);
         return *this;
     }
-
-//    /** A convenience for setValue() mainly for atomic types. */
-//    template<template <typename> class OuterType, class InnerType>
-//    Variable& operator= (InnerType const& newValue) throw()
-//    {
-//        this->setValue (newValue);
-//        return *this;
-//    }
-
     
     /** Returns the current value. */
     inline const Type getValue() const throw()
@@ -322,13 +313,12 @@ public:
     }
     
     template<class ValueType>
-    inline void setValue(ValueType const& newValue) throw()
+    inline void setValue (ValueType const& newValue) throw()
     {
         this->getInternal()->setValue (newValue);
     }    
     
     PLONK_OBJECTARROWOPERATOR(Variable)
-
 };
 
 

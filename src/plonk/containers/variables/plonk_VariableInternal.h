@@ -123,15 +123,15 @@ class VariableInternal<Type&> : public SmartPointer // VariableInternalBase<Type
 public:    
     typedef Variable<Type&> Container; 
         
-    VariableInternal (Type const& initValue) throw()
-    {
-        value.setValue (initValue.getValue());
-    }
+//    VariableInternal (Type const& initValue) throw()
+//    {
+//        value.setValue (initValue.getValue());
+//    }
     
     template<class ValueType>
     VariableInternal (ValueType const& initValue) throw()
     {
-        value.setValue (initValue);
+        setValue (initValue);
     }
     
     inline Type& getValue() throw()
@@ -142,7 +142,7 @@ public:
     template<class ValueType>
     inline void setValue (ValueType const& newValue) throw()
     {
-        value.setValue (newValue);
+        value = newValue;
     }
     
 private:

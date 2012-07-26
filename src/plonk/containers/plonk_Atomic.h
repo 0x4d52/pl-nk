@@ -248,9 +248,9 @@ public:
         return *this;
     }    
 
-    inline AtomicValue& operator= (Type const& other) throw() 
+    inline AtomicValue& operator= (Type& other) throw() 
     {
-        pl_AtomicP_Set (getAtomicRef(), (void*)&other);
+        pl_AtomicP_Set (getAtomicRef(), static_cast<Type*> (&other));
         return *this;
     }    
 
@@ -428,7 +428,6 @@ public:
         return *this;
     }    
 
-//    
 //    inline AtomicExtended& operator= (const Type* other) throw() 
 //    {
 //        pl_AtomicPX_Set (getAtomicRef(), const_cast<Type*> (other));

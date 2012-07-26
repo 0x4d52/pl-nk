@@ -157,6 +157,13 @@ typedef NumericalArray2D<IntChannel,IntUnit>                IntUnits;
 typedef NumericalArray2D<Int24Channel,Int24Unit>            Int24Units;
 typedef NumericalArray2D<LongChannel,LongUnit>              LongUnits;
 
+typedef Variable< UnitBase<float>& >                        FloatUnitVariable;
+typedef Variable< UnitBase<double>& >                       DoubleUnitVariable;
+typedef Variable< UnitBase<int>& >                          IntUnitVariable;
+typedef Variable< UnitBase<short>& >                        ShortUnitVariable;
+typedef Variable< UnitBase<Int24>& >                        Int24UnitVariable;
+typedef Variable< UnitBase<Long>& >                         LongUnitVariable;
+
 
 // default types
 typedef ChannelBase<PLONK_TYPE_DEFAULT>                     Channel;
@@ -167,6 +174,8 @@ typedef NumericalArray<PLONK_TYPE_DEFAULT>                  Buffer;
 typedef NumericalArray2D<PLONK_TYPE_DEFAULT>                Buffers;
 typedef BusBuffer<PLONK_TYPE_DEFAULT>                       Bus;
 typedef PLONK_BUSARRAYBASETYPE<Bus>                         Busses;
+typedef Variable< UnitBase<PLONK_TYPE_DEFAULT>& >           UnitVariable;
+
 
 //typedef AtomicDynamicPointerVariable                        PatchSource;
 
