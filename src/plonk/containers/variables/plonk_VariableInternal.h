@@ -73,12 +73,12 @@ class VariableInternal : public VariableInternalBase<Type>
 public:    
     typedef Variable<Type> Container; 
     
-    VariableInternal() throw()
+    inline VariableInternal() throw()
     :   value (0)
     {
     }
     
-    ~VariableInternal()
+    inline ~VariableInternal()
     {
     }
     
@@ -88,28 +88,35 @@ public:
 //    {
 //    }
 
-    VariableInternal (Type const& initValue) throw()
+    inline VariableInternal (Type const& initValue) throw()
     :   value (initValue)
     {
     }
 
-    const Type getValue() const throw()
+    inline const Type getValue() const throw()
     {
         return value;
     }
     
-    const Type nextValue() throw()
+    inline const Type nextValue() throw()
     {        
         return value;
     }
     
-    void setValue (Type const& newValue) throw()
+    inline void setValue (Type const& newValue) throw()
     {
         if (value != newValue)
         {
             value = newValue;
             this->update();
         }
+    }
+    
+    inline void swapValues (Type& other) throw()
+    {
+        Type temp = other;
+        other = value;
+        value = temp;
     }
     
 private:
@@ -143,6 +150,11 @@ public:
     inline void setValue (ValueType const& newValue) throw()
     {
         value = newValue;
+    }
+    
+    inline void swapValues (Type& other) throw()
+    {
+        value.swapWith (other);
     }
     
 private:

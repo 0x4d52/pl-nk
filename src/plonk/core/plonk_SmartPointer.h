@@ -82,7 +82,7 @@ protected:
     //virtual void destroy();
     
     AtomicValue<Long> refCount;
-    void *weakPointer; // make atomic?
+    AtomicValue<void*> weakPointer;
 	
 private:
 	SmartPointer (const SmartPointer&);

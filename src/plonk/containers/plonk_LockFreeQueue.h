@@ -150,7 +150,7 @@ private:
         
         if (element != 0)
         {
-            ValueType* data = static_cast<ValueType*> (pl_LockFreeQueueElement_GetData (element));
+            ValueType* const data = static_cast<ValueType*> (pl_LockFreeQueueElement_GetData (element));
             plonk_assert (data != 0);
             *data = value;
         }

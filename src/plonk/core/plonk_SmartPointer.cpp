@@ -61,17 +61,14 @@ AtomicLong totalSmartPointers;
 
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
 :	refCount (0),
-    weakPointer (0)//, active (0)
+    weakPointer (0)
 {		
 	if (allocateWeakPointer)
 		weakPointer = new WeakPointer (this);
-
-//    active = 1;
     
     if (weakPointer != 0)
     {
-        // todo: should this be static_cast?
-        WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer);
+        WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
         weak->incrementRefCount();
     }
     
@@ -96,7 +93,7 @@ SmartPointer::~SmartPointer()
     
     if (weakPointer != 0)
     {
-        WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer);
+        WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
         weak->setWeakPointer (0);
         weak->decrementRefCount();
         weakPointer = 0;

@@ -244,11 +244,15 @@ Unit AudioHost::constructGraph()
     Unit src1 = Sine::ar (1000);
     Unit src2 = WhiteNoise::ar();
     
-    UnitVariable var;
+    UnitVariable var1;
+    UnitVariable var2;
     
-    var.setValue (src1);
+    var1.setValue (src1);
+    var2.setValue (src2);
     
-    return var.getValue() * 0.1;
+    var1.swapValues (var2);
+    
+    return var1.getValue() * 0.1;
 }
 
 

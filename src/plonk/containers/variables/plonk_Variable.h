@@ -170,6 +170,11 @@ public:
     {
         this->getInternal()->setValue (newValue);
     }    
+    
+    inline void swapValues (Type& other) throw()
+    {
+        this->getInternal()->swapValues (other);
+    }
                 
     /** Builds a binary operation from two source Variables. */
     template<PLONK_BINARYOPFUNCTION(Type, op)>
@@ -220,6 +225,7 @@ public:
     {
         return UnitType (*this).kr();
     }
+    
 };
 
 template<class Type>
@@ -317,6 +323,11 @@ public:
     {
         this->getInternal()->setValue (newValue);
     }    
+    
+    inline void swapValues (Type& other) throw()
+    {
+        this->getInternal()->swapValues (other);
+    }
     
     PLONK_OBJECTARROWOPERATOR(Variable)
 };
