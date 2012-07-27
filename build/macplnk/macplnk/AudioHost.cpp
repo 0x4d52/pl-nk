@@ -241,6 +241,8 @@ Unit AudioHost::constructGraph()
 //    return Sine::ar (Floats(500, 2000), 0.25);
 //    return Sine::ar (Floats(1000, 1000), 0.25);
     
+    AtomicIntVariable intvar;
+    
     Unit src1 = Sine::ar (1000);
     Unit src2 = WhiteNoise::ar();
     

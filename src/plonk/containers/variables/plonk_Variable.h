@@ -60,7 +60,7 @@
  into graphs using binary and unary operators and type conversions from one 
  variable types to another. Within a Variable graph each node registers itself 
  as Receiver from its dependent variables such that it can be notified if these 
- change. This changes is trasnmitted all the way through the graph to the root. 
+ change. This changes is trasnmitted all the way through the graph to the root.
  @ingroup PlonkContainerClasses
  */
 template<class Type>
@@ -261,6 +261,11 @@ std::ostream& operator<< (std::ostream &outputStream, Variable<Type> const& vari
 //BINARYOPGLOBALS(Variable) // declares global functions with the same name as the binary operators
 //UNARYOPGLOBALS(Variable)  // declares global functions with the same name as the unary operators
 
+/** A variable container for objects.
+ This is designed to store subclasses of SmartPointerContainer which covers most
+ objects in Plonk (e.g., units, arrays). This makes it possible to store object 
+ variables that need to be swapped atomically to assist with multithreaded 
+ access. */
 template<class Type>
 class Variable<Type&> : public SmartPointerContainer< VariableInternal<Type&> >
 {
@@ -288,13 +293,7 @@ public:
     :   Base (new Internal (initValue))
     {
     }    
-        
-//    inline Variable& operator= (Type& newValue) throw()
-//    {
-//        this->setValue (newValue);
-//        return *this;
-//    }
-    
+            
     template<class ValueType>
     inline Variable& operator= (ValueType const& newValue) throw()
     {
