@@ -89,7 +89,29 @@ public:
         FloatWavetable, DoubleWavetable, IntWavetable, ShortWavetable, Int24Wavetable, LongWavetable,
     // signals (87)
         FloatSignal, DoubleSignal, IntSignal, ShortSignal, Int24Signal, LongSignal,
-    // count (92)
+    // arrays
+        FloatArrayVariable, DoubleArrayVariable, IntArrayVariable, ShortArrayVariable, 
+        Int24ArrayVariable, LongArrayVariable, CharArrayVariable, BoolArrayVariable,
+    // other
+        TextVariable, TextArrayVariable,
+    // channels
+        FloatChannelVariable, DoubleChannelVariable, IntChannelVariable, ShortChannelVariable, Int24ChannelVariable, LongChannelVariable,
+    // units
+        FloatUnitVariable, DoubleUnitVariable, IntUnitVariable, ShortUnitVariable, Int24UnitVariable, LongUnitVariable,
+    // bus (56)
+        FloatBusVariable, DoubleBusVariable, IntBusVariable, ShortBusVariable, Int24BusVariable, LongBusVariable, 
+    // unit arrays
+        FloatUnitsVariable, DoubleUnitsVariable, IntUnitsVariable, ShortUnitsVariable, Int24UnitsVariable, LongUnitsVariable,
+    // bus arrays
+        FloatBussesVariable, DoubleBussesVariable, IntBussesVariable, ShortBussesVariable, Int24BussesVariable, LongBussesVariable, 
+    // breakpoints
+        FloatBreakpointsVariable, DoubleBreakpointsVariable, IntBreakpointsVariable, ShortBreakpointsVariable, Int24BreakpointsVariable, LongBreakpointsVariable,
+    // wavetables
+        FloatWavetableVariable, DoubleWavetableVariable, IntWavetableVariable, ShortWavetableVariable, Int24WavetableVariable, LongWavetableVariable,
+    // signals
+        FloatSignalVariable, DoubleSignalVariable, IntSignalVariable, ShortSignalVariable, Int24SignalVariable, LongSignalVariable,
+
+    // count (??)
         NumTypeCodes
     };    
     
@@ -127,7 +149,29 @@ public:
             
             "FloatWavetable", "DoubleWavetable", "IntWavetable", "ShortWavetable", "Int24Wavetable", "LongWavetable",
             
-            "FloatSignal", "DoubleSignal", "IntSignal", "ShortSignal", "Int24Signal", "LongSignal"
+            "FloatSignal", "DoubleSignal", "IntSignal", "ShortSignal", "Int24Signal", "LongSignal",
+            
+            "FloatArrayVariable", "DoubleArrayVariable", "IntArrayVariable", "ShortArrayVariable", 
+            "Int24ArrayVariable", "LongArrayVariable", "CharArrayVariable", "BoolArrayVariable",
+
+            "TextVariable", "TextArrayVariable",
+
+            "FloatChannelVariable", "DoubleChannelVariable", "IntChannelVariable", "ShortChannelVariable", "Int24ChannelVariable", "LongChannelVariable",
+
+            "FloatUnitVariable", "DoubleUnitVariable", "IntUnitVariable", "ShortUnitVariable", "Int24UnitVariable", "LongUnitVariable",
+
+            "FloatBusVariable", "DoubleBusVariable", "IntBusVariable", "ShortBusVariable", "Int24BusVariable", "LongBusVariable", 
+
+            "FloatUnitsVariable", "DoubleUnitsVariable", "IntUnitsVariable", "ShortUnitsVariable", "Int24UnitsVariable", "LongUnitsVariable",
+
+            "FloatBussesVariable", "DoubleBussesVariable", "IntBussesVariable", "ShortBussesVariable", "Int24BussesVariable", "LongBussesVariable", 
+
+            "FloatBreakpointsVariable", "DoubleBreakpointsVariable", "IntBreakpointsVariable", "ShortBreakpointsVariable", "Int24BreakpointsVariable", "LongBreakpointsVariable",
+
+            "FloatWavetableVariable", "DoubleWavetableVariable", "IntWavetableVariable", "ShortWavetableVariable", "Int24WavetableVariable", "LongWavetableVariable",
+
+            "FloatSignalVariable", "DoubleSignalVariable", "IntSignalVariable", "ShortSignalVariable", "Int24SignalVariable", "LongSignalVariable"
+
         };
         
         if ((code >= 0) && (code < TypeCode::NumTypeCodes))
@@ -176,6 +220,7 @@ public:
     static inline bool isAtomic (const int code) throw()            { return (code >= TypeCode::AtomicFloat) && (code <= TypeCode::AtomicDynamicPointer); }
     static inline bool isVariable (const int code) throw()          { return (code >= TypeCode::FloatVariable) && (code <= TypeCode::BoolVariable); }
     static inline bool isAtomicVariable (const int code) throw()    { return (code >= TypeCode::AtomicFloatVariable) && (code <= TypeCode::AtomicDynamicPointerVariable); } 
+    static inline bool isObjectVariable (const int code) throw()    { return (code >= TypeCode::FloatArrayVariable) && (code <= TypeCode::LongSignalVariable); } 
     static inline bool isArray (const int code) throw()             { return (code >= TypeCode::FloatArray) && (code <= TypeCode::TextArray); }
     static inline bool isChannel (const int code) throw()           { return (code >= TypeCode::FloatChannel) && (code <= TypeCode::LongChannel); }
     static inline bool isUnit (const int code) throw()              { return (code >= TypeCode::FloatUnit) && (code <= TypeCode::LongUnit); }
@@ -273,7 +318,6 @@ public:
 
 //------------------------------------------------------------------------------
 
-//todo add getNull() to these...
 
 template<>
 class TypeUtilityBase<Dynamic>
@@ -963,11 +1007,25 @@ public:
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
+//------------------------------------------------------------------------------
+
 template<>
 class TypeUtilityBase<FloatArray>
 {
 public:
     typedef FloatArray              TypeName;
+    typedef FloatArray              OriginalType;
+    typedef FloatArray const&       PassType;
+    typedef float                   IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatArray>
+{
+public:
+    typedef const FloatArray        TypeName;
     typedef FloatArray              OriginalType;
     typedef FloatArray const&       PassType;
     typedef float                   IndexType;
@@ -2343,6 +2401,1401 @@ public:
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
+
+//------------------------------------------------------------------------------
+
+template<>
+class TypeUtilityBase<FloatArrayVariable>
+{
+public:
+    typedef FloatArrayVariable              TypeName;
+    typedef FloatArrayVariable              OriginalType;
+    typedef FloatArrayVariable const&       PassType;
+    typedef float                   IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatArrayVariable>
+{
+public:
+    typedef const FloatArrayVariable        TypeName;
+    typedef FloatArrayVariable              OriginalType;
+    typedef FloatArrayVariable const&       PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+
+template<>
+class TypeUtilityBase<DoubleArrayVariable>
+{
+public:
+    typedef DoubleArrayVariable             TypeName;
+    typedef DoubleArrayVariable             OriginalType;
+    typedef DoubleArrayVariable const&      PassType;
+    typedef double                  IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleArrayVariable>
+{
+public:
+    typedef const DoubleArrayVariable       TypeName;
+    typedef DoubleArrayVariable             OriginalType;
+    typedef DoubleArrayVariable const&      PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntArrayVariable>
+{
+public:
+    typedef IntArrayVariable            TypeName;
+    typedef IntArrayVariable            OriginalType;
+    typedef IntArrayVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntArrayVariable>
+{
+public:
+    typedef const IntArrayVariable      TypeName;
+    typedef IntArrayVariable            OriginalType;
+    typedef IntArrayVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortArrayVariable>
+{
+public:
+    typedef ShortArrayVariable          TypeName;
+    typedef ShortArrayVariable          OriginalType;
+    typedef ShortArrayVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortArrayVariable>
+{
+public:
+    typedef const ShortArrayVariable    TypeName;
+    typedef ShortArrayVariable          OriginalType;
+    typedef ShortArrayVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24ArrayVariable>
+{
+public:
+    typedef Int24ArrayVariable          TypeName;
+    typedef Int24ArrayVariable          OriginalType;
+    typedef Int24ArrayVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24ArrayVariable>
+{
+public:
+    typedef const Int24ArrayVariable    TypeName;
+    typedef Int24ArrayVariable          OriginalType;
+    typedef Int24ArrayVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongArrayVariable>
+{
+public:
+    typedef LongArrayVariable           TypeName;
+    typedef LongArrayVariable           OriginalType;
+    typedef LongArrayVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongArrayVariable>
+{
+public:
+    typedef const LongArrayVariable     TypeName;
+    typedef LongArrayVariable           OriginalType;
+    typedef LongArrayVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<CharArrayVariable>
+{
+public:
+    typedef CharArrayVariable           TypeName;
+    typedef CharArrayVariable           OriginalType;
+    typedef CharArrayVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::CharArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const CharArrayVariable>
+{
+public:
+    typedef const CharArrayVariable     TypeName;
+    typedef CharArrayVariable           OriginalType;
+    typedef CharArrayVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::CharArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<BoolArrayVariable>
+{
+public:
+    typedef BoolArrayVariable           TypeName;
+    typedef BoolArrayVariable           OriginalType;
+    typedef BoolArrayVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::BoolArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const BoolArrayVariable>
+{
+public:
+    typedef const BoolArrayVariable     TypeName;
+    typedef BoolArrayVariable           OriginalType;
+    typedef BoolArrayVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::BoolArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<plonk::TextVariable>
+{
+public:
+    typedef TextVariable         TypeName;
+    typedef TextVariable         OriginalType;
+    typedef TextVariable const&  PassType;
+    typedef int                  IndexType;
+    static inline int  getTypeCode() { return TypeCode::TextVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const plonk::TextVariable>
+{
+public:
+    typedef const TextVariable   TypeName;
+    typedef TextVariable         OriginalType;
+    typedef TextVariable const&  PassType;
+    typedef int                  IndexType;
+    static inline int  getTypeCode() { return TypeCode::TextVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<TextArrayVariable>
+{
+public:
+    typedef TextArrayVariable           TypeName;
+    typedef TextArrayVariable           OriginalType;
+    typedef TextArrayVariable const&    PassType;
+    typedef int                         IndexType;
+    static inline int  getTypeCode() { return TypeCode::TextArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const TextArrayVariable>
+{
+public:
+    typedef const TextArrayVariable     TypeName;
+    typedef TextArrayVariable           OriginalType;
+    typedef TextArrayVariable const&    PassType;
+    typedef int                         IndexType;
+    static inline int  getTypeCode() { return TypeCode::TextArrayVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatChannelVariable>
+{
+public:
+    typedef FloatChannelVariable        TypeName;
+    typedef FloatChannelVariable        OriginalType;
+    typedef FloatChannelVariable const& PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatChannelVariable>
+{
+public:
+    typedef const FloatChannelVariable  TypeName;
+    typedef FloatChannelVariable        OriginalType;
+    typedef FloatChannelVariable const& PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleChannelVariable>
+{
+public:
+    typedef DoubleChannelVariable           TypeName;
+    typedef DoubleChannelVariable           OriginalType;
+    typedef DoubleChannelVariable const&    PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleChannelVariable>
+{
+public:
+    typedef const DoubleChannelVariable     TypeName;
+    typedef DoubleChannelVariable           OriginalType;
+    typedef DoubleChannelVariable const&    PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntChannelVariable>
+{
+public:
+    typedef IntChannelVariable              TypeName;
+    typedef IntChannelVariable              OriginalType;
+    typedef IntChannelVariable const&       PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntChannelVariable>
+{
+public:
+    typedef const IntChannelVariable        TypeName;
+    typedef IntChannelVariable              OriginalType;
+    typedef IntChannelVariable const&       PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortChannelVariable>
+{
+public:
+    typedef ShortChannelVariable            TypeName;
+    typedef ShortChannelVariable            OriginalType;
+    typedef ShortChannelVariable const&     PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortChannelVariable>
+{
+public:
+    typedef const ShortChannelVariable      TypeName;
+    typedef ShortChannelVariable            OriginalType;
+    typedef ShortChannelVariable const&     PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24ChannelVariable>
+{
+public:
+    typedef Int24ChannelVariable            TypeName;
+    typedef Int24ChannelVariable            OriginalType;
+    typedef Int24ChannelVariable const&     PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24ChannelVariable>
+{
+public:
+    typedef const Int24ChannelVariable      TypeName;
+    typedef Int24ChannelVariable            OriginalType;
+    typedef Int24ChannelVariable const&     PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongChannelVariable>
+{
+public:
+    typedef LongChannelVariable             TypeName;
+    typedef LongChannelVariable             OriginalType;
+    typedef LongChannelVariable const&      PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongChannelVariable>
+{
+public:
+    typedef const LongChannelVariable       TypeName;
+    typedef LongChannelVariable             OriginalType;
+    typedef LongChannelVariable const&      PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongChannelVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatUnitVariable>
+{
+public:
+    typedef FloatUnitVariable               TypeName;
+    typedef FloatUnitVariable               OriginalType;
+    typedef FloatUnitVariable const&        PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatUnitVariable>
+{
+public:
+    typedef const FloatUnitVariable         TypeName;
+    typedef FloatUnitVariable               OriginalType;
+    typedef FloatUnitVariable const&        PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleUnitVariable>
+{
+public:
+    typedef DoubleUnitVariable              TypeName;
+    typedef DoubleUnitVariable              OriginalType;
+    typedef DoubleUnitVariable const&       PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleUnitVariable>
+{
+public:
+    typedef const DoubleUnitVariable        TypeName;
+    typedef DoubleUnitVariable              OriginalType;
+    typedef DoubleUnitVariable const&       PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntUnitVariable>
+{
+public:
+    typedef IntUnitVariable             TypeName;
+    typedef IntUnitVariable             OriginalType;
+    typedef IntUnitVariable const&      PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntUnitVariable>
+{
+public:
+    typedef const IntUnitVariable       TypeName;
+    typedef IntUnitVariable             OriginalType;
+    typedef IntUnitVariable const&      PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortUnitVariable>
+{
+public:
+    typedef ShortUnitVariable           TypeName;
+    typedef ShortUnitVariable           OriginalType;
+    typedef ShortUnitVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortUnitVariable>
+{
+public:
+    typedef const ShortUnitVariable     TypeName;
+    typedef ShortUnitVariable           OriginalType;
+    typedef ShortUnitVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24UnitVariable>
+{
+public:
+    typedef Int24UnitVariable           TypeName;
+    typedef Int24UnitVariable           OriginalType;
+    typedef Int24UnitVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24UnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24UnitVariable>
+{
+public:
+    typedef const Int24UnitVariable     TypeName;
+    typedef Int24UnitVariable           OriginalType;
+    typedef Int24UnitVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24UnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongUnitVariable>
+{
+public:
+    typedef LongUnitVariable            TypeName;
+    typedef LongUnitVariable            OriginalType;
+    typedef LongUnitVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongUnitVariable>
+{
+public:
+    typedef const LongUnitVariable      TypeName;
+    typedef LongUnitVariable            OriginalType;
+    typedef LongUnitVariable const&     PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongUnitVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatBusVariable>
+{
+public:
+    typedef FloatBusVariable            TypeName;
+    typedef FloatBusVariable            OriginalType;
+    typedef FloatBusVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatBusVariable>
+{
+public:
+    typedef const FloatBusVariable      TypeName;
+    typedef FloatBusVariable            OriginalType;
+    typedef FloatBusVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleBusVariable>
+{
+public:
+    typedef DoubleBusVariable           TypeName;
+    typedef DoubleBusVariable           OriginalType;
+    typedef DoubleBusVariable const&    PassType;
+    typedef double                      IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleBusVariable>
+{
+public:
+    typedef const DoubleBusVariable     TypeName;
+    typedef DoubleBusVariable           OriginalType;
+    typedef DoubleBusVariable const&    PassType;
+    typedef double                      IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntBusVariable>
+{
+public:
+    typedef IntBusVariable              TypeName;
+    typedef IntBusVariable              OriginalType;
+    typedef IntBusVariable const&       PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntBusVariable>
+{
+public:
+    typedef const IntBusVariable        TypeName;
+    typedef IntBusVariable              OriginalType;
+    typedef IntBusVariable const&       PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortBusVariable>
+{
+public:
+    typedef ShortBusVariable            TypeName;
+    typedef ShortBusVariable            OriginalType;
+    typedef ShortBusVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortBusVariable>
+{
+public:
+    typedef const ShortBusVariable      TypeName;
+    typedef ShortBusVariable            OriginalType;
+    typedef ShortBusVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24BusVariable>
+{
+public:
+    typedef Int24BusVariable            TypeName;
+    typedef Int24BusVariable            OriginalType;
+    typedef Int24BusVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24BusVariable>
+{
+public:
+    typedef const Int24BusVariable      TypeName;
+    typedef Int24BusVariable            OriginalType;
+    typedef Int24BusVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongBusVariable>
+{
+public:
+    typedef LongBusVariable             TypeName;
+    typedef LongBusVariable             OriginalType;
+    typedef LongBusVariable const&      PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongBusVariable>
+{
+public:
+    typedef const LongBusVariable       TypeName;
+    typedef LongBusVariable             OriginalType;
+    typedef LongBusVariable const&      PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBusVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatUnitsVariable>
+{
+public:
+    typedef FloatUnitsVariable          TypeName;
+    typedef FloatUnitsVariable          OriginalType;
+    typedef FloatUnitsVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatUnitsVariable>
+{
+public:
+    typedef const FloatUnitsVariable    TypeName;
+    typedef FloatUnitsVariable          OriginalType;
+    typedef FloatUnitsVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleUnitsVariable>
+{
+public:
+    typedef DoubleUnitsVariable             TypeName;
+    typedef DoubleUnitsVariable             OriginalType;
+    typedef DoubleUnitsVariable const&      PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleUnitsVariable>
+{
+public:
+    typedef const DoubleUnitsVariable       TypeName;
+    typedef DoubleUnitsVariable             OriginalType;
+    typedef DoubleUnitsVariable const&      PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntUnitsVariable>
+{
+public:
+    typedef IntUnitsVariable            TypeName;
+    typedef IntUnitsVariable            OriginalType;
+    typedef IntUnitsVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntUnitsVariable>
+{
+public:
+    typedef const IntUnitsVariable      TypeName;
+    typedef IntUnitsVariable            OriginalType;
+    typedef IntUnitsVariable const&     PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortUnitsVariable>
+{
+public:
+    typedef ShortUnitsVariable          TypeName;
+    typedef ShortUnitsVariable          OriginalType;
+    typedef ShortUnitsVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortUnitsVariable>
+{
+public:
+    typedef const ShortUnitsVariable    TypeName;
+    typedef ShortUnitsVariable          OriginalType;
+    typedef ShortUnitsVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24UnitsVariable>
+{
+public:
+    typedef Int24UnitsVariable          TypeName;
+    typedef Int24UnitsVariable          OriginalType;
+    typedef Int24UnitsVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24UnitsVariable>
+{
+public:
+    typedef const Int24UnitsVariable    TypeName;
+    typedef Int24UnitsVariable          OriginalType;
+    typedef Int24UnitsVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongUnitsVariable>
+{
+public:
+    typedef LongUnitsVariable           TypeName;
+    typedef LongUnitsVariable           OriginalType;
+    typedef LongUnitsVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongUnitsVariable>
+{
+public:
+    typedef const LongUnitsVariable     TypeName;
+    typedef LongUnitsVariable           OriginalType;
+    typedef LongUnitsVariable const&    PassType;
+    typedef float               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongUnitsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatBussesVariable>
+{
+public:
+    typedef FloatBussesVariable         TypeName;
+    typedef FloatBussesVariable         OriginalType;
+    typedef FloatBussesVariable const&  PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatBussesVariable>
+{
+public:
+    typedef const FloatBussesVariable   TypeName;
+    typedef FloatBussesVariable         OriginalType;
+    typedef FloatBussesVariable const&  PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleBussesVariable>
+{
+public:
+    typedef DoubleBussesVariable TypeName;
+    typedef DoubleBussesVariable            OriginalType;
+    typedef DoubleBussesVariable const&     PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleBussesVariable>
+{
+public:
+    typedef const DoubleBussesVariable      TypeName;
+    typedef DoubleBussesVariable            OriginalType;
+    typedef DoubleBussesVariable const&     PassType;
+    typedef double                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntBussesVariable>
+{
+public:
+    typedef IntBussesVariable           TypeName;
+    typedef IntBussesVariable           OriginalType;
+    typedef IntBussesVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntBussesVariable>
+{
+public:
+    typedef const IntBussesVariable     TypeName;
+    typedef IntBussesVariable           OriginalType;
+    typedef IntBussesVariable const&    PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortBussesVariable>
+{
+public:
+    typedef ShortBussesVariable         TypeName;
+    typedef ShortBussesVariable         OriginalType;
+    typedef ShortBussesVariable const&  PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortBussesVariable>
+{
+public:
+    typedef const ShortBussesVariable   TypeName;
+    typedef ShortBussesVariable         OriginalType;
+    typedef ShortBussesVariable const&  PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24BussesVariable>
+{
+public:
+    typedef Int24BussesVariable         TypeName;
+    typedef Int24BussesVariable         OriginalType;
+    typedef Int24BussesVariable const&  PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24BussesVariable>
+{
+public:
+    typedef const Int24BussesVariable   TypeName;
+    typedef Int24BussesVariable         OriginalType;
+    typedef Int24BussesVariable const&  PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongBussesVariable>
+{
+public:
+    typedef LongBussesVariable          TypeName;
+    typedef LongBussesVariable          OriginalType;
+    typedef LongBussesVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongBussesVariable>
+{
+public:
+    typedef const LongBussesVariable    TypeName;
+    typedef LongBussesVariable          OriginalType;
+    typedef LongBussesVariable const&   PassType;
+    typedef float                       IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBussesVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatBreakpointsVariable>
+{
+public:
+    typedef FloatBreakpointsVariable            TypeName;
+    typedef FloatBreakpointsVariable            OriginalType;
+    typedef FloatBreakpointsVariable const&     PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatBreakpointsVariable>
+{
+public:
+    typedef const FloatBreakpointsVariable      TypeName;
+    typedef FloatBreakpointsVariable            OriginalType;
+    typedef FloatBreakpointsVariable const&     PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleBreakpointsVariable>
+{
+public:
+    typedef DoubleBreakpointsVariable           TypeName;
+    typedef DoubleBreakpointsVariable           OriginalType;
+    typedef DoubleBreakpointsVariable const&    PassType;
+    typedef double                              IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleBreakpointsVariable>
+{
+public:
+    typedef const DoubleBreakpointsVariable     TypeName;
+    typedef DoubleBreakpointsVariable           OriginalType;
+    typedef DoubleBreakpointsVariable const&    PassType;
+    typedef double                              IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntBreakpointsVariable>
+{
+public:
+    typedef IntBreakpointsVariable              TypeName;
+    typedef IntBreakpointsVariable              OriginalType;
+    typedef IntBreakpointsVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntBreakpointsVariable>
+{
+public:
+    typedef const IntBreakpointsVariable        TypeName;
+    typedef IntBreakpointsVariable              OriginalType;
+    typedef IntBreakpointsVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortBreakpointsVariable>
+{
+public:
+    typedef ShortBreakpointsVariable            TypeName;
+    typedef ShortBreakpointsVariable            OriginalType;
+    typedef ShortBreakpointsVariable const&     PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortBreakpointsVariable>
+{
+public:
+    typedef const ShortBreakpointsVariable      TypeName;
+    typedef ShortBreakpointsVariable            OriginalType;
+    typedef ShortBreakpointsVariable const&     PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24BreakpointsVariable>
+{
+public:
+    typedef Int24BreakpointsVariable            TypeName;
+    typedef Int24BreakpointsVariable            OriginalType;
+    typedef Int24BreakpointsVariable const&     PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24BreakpointsVariable>
+{
+public:
+    typedef const Int24BreakpointsVariable      TypeName;
+    typedef Int24BreakpointsVariable            OriginalType;
+    typedef Int24BreakpointsVariable const&     PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongBreakpointsVariable>
+{
+public:
+    typedef LongBreakpointsVariable             TypeName;
+    typedef LongBreakpointsVariable             OriginalType;
+    typedef LongBreakpointsVariable const&      PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongBreakpointsVariable>
+{
+public:
+    typedef const LongBreakpointsVariable       TypeName;
+    typedef LongBreakpointsVariable             OriginalType;
+    typedef LongBreakpointsVariable const&      PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatWavetableVariable>
+{
+public:
+    typedef FloatWavetableVariable              TypeName;
+    typedef FloatWavetableVariable              OriginalType;
+    typedef FloatWavetableVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatWavetableVariable>
+{
+public:
+    typedef const FloatWavetableVariable        TypeName;
+    typedef FloatWavetableVariable              OriginalType;
+    typedef FloatWavetableVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleWavetableVariable>
+{
+public:
+    typedef DoubleWavetableVariable             TypeName;
+    typedef DoubleWavetableVariable             OriginalType;
+    typedef DoubleWavetableVariable const&      PassType;
+    typedef double                              IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleWavetableVariable>
+{
+public:
+    typedef const DoubleWavetableVariable       TypeName;
+    typedef DoubleWavetableVariable             OriginalType;
+    typedef DoubleWavetableVariable const&      PassType;
+    typedef double                              IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntWavetableVariable>
+{
+public:
+    typedef IntWavetableVariable            TypeName;
+    typedef IntWavetableVariable            OriginalType;
+    typedef IntWavetableVariable const&     PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntWavetableVariable>
+{
+public:
+    typedef const IntWavetableVariable      TypeName;
+    typedef IntWavetableVariable            OriginalType;
+    typedef IntWavetableVariable const&     PassType;
+    typedef float                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortWavetableVariable>
+{
+public:
+    typedef ShortWavetableVariable              TypeName;
+    typedef ShortWavetableVariable              OriginalType;
+    typedef ShortWavetableVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortWavetableVariable>
+{
+public:
+    typedef const ShortWavetableVariable        TypeName;
+    typedef ShortWavetableVariable              OriginalType;
+    typedef ShortWavetableVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24WavetableVariable>
+{
+public:
+    typedef Int24WavetableVariable              TypeName;
+    typedef Int24WavetableVariable              OriginalType;
+    typedef Int24WavetableVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24WavetableVariable>
+{
+public:
+    typedef const Int24WavetableVariable        TypeName;
+    typedef Int24WavetableVariable              OriginalType;
+    typedef Int24WavetableVariable const&       PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongWavetableVariable>
+{
+public:
+    typedef LongWavetableVariable               TypeName;
+    typedef LongWavetableVariable               OriginalType;
+    typedef LongWavetableVariable const&        PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongWavetableVariable>
+{
+public:
+    typedef const LongWavetableVariable         TypeName;
+    typedef LongWavetableVariable               OriginalType;
+    typedef LongWavetableVariable const&        PassType;
+    typedef float                               IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongWavetableVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FloatSignalVariable>
+{
+public:
+    typedef FloatSignalVariable              TypeName;
+    typedef FloatSignalVariable              OriginalType;
+    typedef FloatSignalVariable const&       PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const FloatSignalVariable>
+{
+public:
+    typedef const FloatSignalVariable        TypeName;
+    typedef FloatSignalVariable              OriginalType;
+    typedef FloatSignalVariable const&       PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::FloatSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<DoubleSignalVariable>
+{
+public:
+    typedef DoubleSignalVariable             TypeName;
+    typedef DoubleSignalVariable             OriginalType;
+    typedef DoubleSignalVariable const&      PassType;
+    typedef double                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const DoubleSignalVariable>
+{
+public:
+    typedef const DoubleSignalVariable       TypeName;
+    typedef DoubleSignalVariable             OriginalType;
+    typedef DoubleSignalVariable const&      PassType;
+    typedef double                           IndexType;
+    static inline int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<IntSignalVariable>
+{
+public:
+    typedef IntSignalVariable            TypeName;
+    typedef IntSignalVariable            OriginalType;
+    typedef IntSignalVariable const&     PassType;
+    typedef float                        IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const IntSignalVariable>
+{
+public:
+    typedef const IntSignalVariable      TypeName;
+    typedef IntSignalVariable            OriginalType;
+    typedef IntSignalVariable const&     PassType;
+    typedef float                        IndexType;
+    static inline int  getTypeCode() { return TypeCode::IntSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<ShortSignalVariable>
+{
+public:
+    typedef ShortSignalVariable              TypeName;
+    typedef ShortSignalVariable              OriginalType;
+    typedef ShortSignalVariable const&       PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const ShortSignalVariable>
+{
+public:
+    typedef const ShortSignalVariable        TypeName;
+    typedef ShortSignalVariable              OriginalType;
+    typedef ShortSignalVariable const&       PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::ShortSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<Int24SignalVariable>
+{
+public:
+    typedef Int24SignalVariable              TypeName;
+    typedef Int24SignalVariable              OriginalType;
+    typedef Int24SignalVariable const&       PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24SignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const Int24SignalVariable>
+{
+public:
+    typedef const Int24SignalVariable        TypeName;
+    typedef Int24SignalVariable              OriginalType;
+    typedef Int24SignalVariable const&       PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::Int24SignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<LongSignalVariable>
+{
+public:
+    typedef LongSignalVariable               TypeName;
+    typedef LongSignalVariable               OriginalType;
+    typedef LongSignalVariable const&        PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const LongSignalVariable>
+{
+public:
+    typedef const LongSignalVariable         TypeName;
+    typedef LongSignalVariable               OriginalType;
+    typedef LongSignalVariable const&        PassType;
+    typedef float                            IndexType;
+    static inline int  getTypeCode() { return TypeCode::LongSignalVariable; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
 
 //------------------------------------------------------------------------------
 

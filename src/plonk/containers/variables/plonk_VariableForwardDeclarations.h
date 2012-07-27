@@ -73,4 +73,50 @@ typedef Variable<AtomicPointer&>                    AtomicPointerVariable;
 typedef Variable<AtomicExtendedPointer&>            AtomicExtendedPointerVariable;
 typedef Variable<AtomicDynamicPointer&>             AtomicDynamicPointerVariable;
 
+typedef Variable<FloatArray&>                       FloatArrayVariable;
+typedef Variable<DoubleArray&>                      DoubleArrayVariable;
+typedef Variable<IntArray&>                         IntArrayVariable;
+typedef Variable<ShortArray&>                       ShortArrayVariable;
+typedef Variable<Int24Array&>                       Int24ArrayVariable;
+typedef Variable<LongArray&>                        LongArrayVariable;
+typedef Variable<CharArray&>                        CharArrayVariable;
+typedef Variable<BoolArray&>                        BoolArrayVariable;
+
+typedef Variable<Text&>                             TextVariable;
+typedef Variable<TextArray&>                        TextArrayVariable;
+
+typedef Variable<FloatBreakpoint&>                  FloatBreakpointVariable;
+typedef Variable<DoubleBreakpoint&>                 DoubleBreakpointVariable;
+typedef Variable<IntBreakpoint&>                    IntBreakpointVariable;
+typedef Variable<ShortBreakpoint&>                  ShortBreakpointVariable;
+typedef Variable<Int24Breakpoint&>                  Int24BreakpointVariable;
+typedef Variable<LongBreakpoint&>                   LongBreakpointVariable;
+typedef Variable<Breakpoint&>                       BreakpointVariable;
+
+typedef Variable<FloatBreakpoints&>                 FloatBreakpointsVariable;
+typedef Variable<DoubleBreakpoints&>                DoubleBreakpointsVariable;
+typedef Variable<IntBreakpoints&>                   IntBreakpointsVariable;
+typedef Variable<ShortBreakpoints&>                 ShortBreakpointsVariable;
+typedef Variable<Int24Breakpoints&>                 Int24BreakpointsVariable;
+typedef Variable<LongBreakpoints&>                  LongBreakpointsVariable;
+typedef Variable<Breakpoints&>                      BreakpointsVariable;
+
+typedef Variable<FloatWavetable&>                   FloatWavetableVariable;
+typedef Variable<DoubleWavetable&>                  DoubleWavetableVariable;
+typedef Variable<IntWavetable&>                     IntWavetableVariable;
+typedef Variable<ShortWavetable&>                   ShortWavetableVariable;
+typedef Variable<Int24Wavetable&>                   Int24WavetableVariable;
+typedef Variable<LongWavetable&>                    LongWavetableVariable;
+typedef Variable<Wavetable&>                        WavetableVariable;
+
+typedef Variable<FloatSignal&>                      FloatSignalVariable;
+typedef Variable<DoubleSignal&>                     DoubleSignalVariable;
+typedef Variable<IntSignal&>                        IntSignalVariable;
+typedef Variable<ShortSignal&>                      ShortSignalVariable;
+typedef Variable<Int24Signal&>                      Int24SignalVariable;
+typedef Variable<LongSignal&>                       LongSignalVariable;
+typedef Variable<Signal&>                           SignalVariable;
+
+
+
 #endif // PLONK_VARIABLEFORWARDDECLARATIONS_H

@@ -188,6 +188,14 @@ typedef NumericalArray2D<Double>			Double2D;
 typedef ObjectArray2D<Text,TextArray>       TextArray2D;
 typedef ObjectArray2D<Text,TextArray>       Text2D;
 
+typedef BreakpointBase<Float>                 FloatBreakpoint;
+typedef BreakpointBase<Double>                DoubleBreakpoint;
+typedef BreakpointBase<Short>                 ShortBreakpoint;
+typedef BreakpointBase<Int>                   IntBreakpoint;
+typedef BreakpointBase<Int24>                 Int24Breakpoint;
+typedef BreakpointBase<Long>                  LongBreakpoint;
+typedef BreakpointBase<PLONK_TYPE_DEFAULT>    Breakpoint;
+
 typedef BreakpointsBase<Float>                 FloatBreakpoints;
 typedef BreakpointsBase<Double>                DoubleBreakpoints;
 typedef BreakpointsBase<Short>                 ShortBreakpoints;

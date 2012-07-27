@@ -157,14 +157,6 @@ typedef NumericalArray2D<IntChannel,IntUnit>                IntUnits;
 typedef NumericalArray2D<Int24Channel,Int24Unit>            Int24Units;
 typedef NumericalArray2D<LongChannel,LongUnit>              LongUnits;
 
-typedef Variable< UnitBase<float>& >                        FloatUnitVariable;
-typedef Variable< UnitBase<double>& >                       DoubleUnitVariable;
-typedef Variable< UnitBase<int>& >                          IntUnitVariable;
-typedef Variable< UnitBase<short>& >                        ShortUnitVariable;
-typedef Variable< UnitBase<Int24>& >                        Int24UnitVariable;
-typedef Variable< UnitBase<Long>& >                         LongUnitVariable;
-
-
 // default types
 typedef ChannelBase<PLONK_TYPE_DEFAULT>                     Channel;
 typedef UnitBase<PLONK_TYPE_DEFAULT>                        Unit;
@@ -174,7 +166,47 @@ typedef NumericalArray<PLONK_TYPE_DEFAULT>                  Buffer;
 typedef NumericalArray2D<PLONK_TYPE_DEFAULT>                Buffers;
 typedef BusBuffer<PLONK_TYPE_DEFAULT>                       Bus;
 typedef PLONK_BUSARRAYBASETYPE<Bus>                         Busses;
+
+// variable graph objects
+typedef Variable< ChannelBase<float>& >                     FloatChannelVariable;
+typedef Variable< ChannelBase<double>& >                    DoubleChannelVariable;
+typedef Variable< ChannelBase<int>& >                       IntChannelVariable;
+typedef Variable< ChannelBase<short>& >                     ShortChannelVariable;
+typedef Variable< ChannelBase<Int24>& >                     Int24ChannelVariable;
+typedef Variable< ChannelBase<Long>& >                      LongChannelVariable;
+typedef Variable< ChannelBase<PLONK_TYPE_DEFAULT>& >        ChannelVariable;
+
+typedef Variable< UnitBase<float>& >                        FloatUnitVariable;
+typedef Variable< UnitBase<double>& >                       DoubleUnitVariable;
+typedef Variable< UnitBase<int>& >                          IntUnitVariable;
+typedef Variable< UnitBase<short>& >                        ShortUnitVariable;
+typedef Variable< UnitBase<Int24>& >                        Int24UnitVariable;
+typedef Variable< UnitBase<Long>& >                         LongUnitVariable;
 typedef Variable< UnitBase<PLONK_TYPE_DEFAULT>& >           UnitVariable;
+
+typedef Variable< BusBuffer<float>& >                       FloatBusVariable;
+typedef Variable< BusBuffer<double>& >                      DoubleBusVariable;
+typedef Variable< BusBuffer<int>& >                         IntBusVariable;
+typedef Variable< BusBuffer<short>& >                       ShortBusVariable;
+typedef Variable< BusBuffer<Int24>& >                       Int24BusVariable;
+typedef Variable< BusBuffer<Long>& >                        LongBusVariable;
+typedef Variable< BusBuffer<PLONK_TYPE_DEFAULT>& >          BusVariable;
+
+typedef Variable< FloatBusses& >                            FloatBussesVariable;
+typedef Variable< DoubleBusses& >                           DoubleBussesVariable;
+typedef Variable< IntBusses& >                              IntBussesVariable;
+typedef Variable< ShortBusses& >                            ShortBussesVariable;
+typedef Variable< Int24Busses& >                            Int24BussesVariable;
+typedef Variable< LongBusses& >                             LongBussesVariable;
+typedef Variable< Busses& >                                 BussesVariable;
+
+typedef Variable< FloatUnits& >                             FloatUnitsVariable;
+typedef Variable< DoubleUnits& >                            DoubleUnitsVariable;
+typedef Variable< IntUnits& >                               IntUnitsVariable;
+typedef Variable< ShortUnits& >                             ShortUnitsVariable;
+typedef Variable< Int24Units& >                             Int24UnitsVariable;
+typedef Variable< LongUnits& >                              LongUnitsVariable;
+typedef Variable< Units& >                                  UnitsVariable;
 
 
 //typedef AtomicDynamicPointerVariable                        PatchSource;
