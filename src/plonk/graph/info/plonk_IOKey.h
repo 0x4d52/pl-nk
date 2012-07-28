@@ -60,6 +60,14 @@ public:
         TypeWavetable,
         TypeSignal,
         TypeBreakpoints,
+        TypeUnitVariable,
+        TypeUnitsVariable,
+        TypeBusVariable,
+        TypeBussesVariable,
+        TypeBufferVariable,
+        TypeWavetableVariable,
+        TypeSignalVariable,
+        TypeBreakpointsVariable,
         TypeBlockSize,
         TypeSampleRate,
 //        TypeBlockSizes,
@@ -114,6 +122,15 @@ public:
         Signal,         ///< A stored signal buffer
         Breakpoints,    ///< Breakpoints (i.e., an envelope specification)
         
+        UnitVariable,           ///< A variable unit
+        UnitsVariable,          ///< An variable array of units.
+        BusVariable,            ///< A variable bus.
+        BussesVariable,         ///< An variable array of busses.
+        BufferVariable,         ///< A variable single buffer.
+        WavetableVariable,      ///< A variable wavetable
+        SignalVariable,         ///< A variable signal buffer
+        BreakpointsVariable,    ///< A variable Breakpoints object (i.e., an envelope specification)
+
         AutoDeleteFlag, ///< To control the auto deletion
         HarmonicCount,
         MaximumDuration,

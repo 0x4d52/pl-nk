@@ -83,6 +83,14 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Wavetable,
         IOKey::Signal,
         IOKey::Breakpoints,
+        IOKey::UnitVariable,
+        IOKey::UnitsVariable,
+        IOKey::BusVariable,
+        IOKey::BussesVariable,
+        IOKey::BufferVariable,
+        IOKey::WavetableVariable,
+        IOKey::SignalVariable,
+        IOKey::BreakpointsVariable,
         IOKey::AutoDeleteFlag,
         IOKey::HarmonicCount,
         IOKey::MaximumDuration,
@@ -152,6 +160,15 @@ Text IOKey::getName (const int keyIndex) throw()
         "Signal",
         "Breakpoints",
         
+        "UnitVariable",
+        "UnitsVariable",
+        "BusVariable",
+        "BussesVariable",
+        "BufferVariable",
+        "WavetableVariable",
+        "SignalVariable",
+        "BreakpointsVariable",
+        
         "Auto Delete Flag",
         "Harmonic Count",
         "Maximum Duration",
@@ -205,6 +222,15 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeWavetable,       //"Wavetable",
         IOKey::TypeSignal,          //"Signal",
         IOKey::TypeBreakpoints,     //"Breakpoints"
+        
+        IOKey::TypeUnitVariable,
+        IOKey::TypeUnitsVariable,
+        IOKey::TypeBusVariable,
+        IOKey::TypeBussesVariable,
+        IOKey::TypeBufferVariable,
+        IOKey::TypeWavetableVariable,
+        IOKey::TypeSignalVariable,
+        IOKey::TypeBreakpointsVariable,
         
         IOKey::TypeBool,            //"Auto Delete Flag"
         IOKey::TypeNumerical,       //"Harmonic Count"
@@ -260,6 +286,15 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Wavetable",        //"Wavetable",
         "Signal",           //"Signal",
         "Breakpoints",      //"Breakpoints"
+        
+        "UnitVariable",
+        "UnitsVariable",
+        "BusVariable",
+        "BussesVariable",
+        "BufferVariable",
+        "WavetableVariable",
+        "SignalVariable",
+        "BreakpointsVariable",
         
         "Bool",             //"Auto Delete Flag"
         "Numerical",        //"Harmonic Count"

@@ -81,6 +81,7 @@ typedef Variable<Int24Array&>                       Int24ArrayVariable;
 typedef Variable<LongArray&>                        LongArrayVariable;
 typedef Variable<CharArray&>                        CharArrayVariable;
 typedef Variable<BoolArray&>                        BoolArrayVariable;
+typedef Variable<Buffer&>                           BufferVariable;
 
 typedef Variable<Text&>                             TextVariable;
 typedef Variable<TextArray&>                        TextArrayVariable;
