@@ -56,11 +56,11 @@ public:
         return memory;
     }
     
-    static Memory& realTime() throw()
-    {
-        static Memory memory;
-        return memory;
-    }
+//    static Memory& realTime() throw()
+//    {
+//        static Memory memory;
+//        return memory;
+//    }
     
     Memory() throw()
     {

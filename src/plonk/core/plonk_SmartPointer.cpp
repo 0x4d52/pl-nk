@@ -44,7 +44,7 @@ BEGIN_PLONK_NAMESPACE
 
 #ifndef PLONK_SMARTPOINTER_DEBUG
   #ifdef PLONK_DEBUG
-    #define PLONK_SMARTPOINTER_DEBUG 1
+    #define PLONK_SMARTPOINTER_DEBUG 0//1
   #else
     #define PLONK_SMARTPOINTER_DEBUG 0
   #endif
@@ -102,7 +102,8 @@ SmartPointer::~SmartPointer()
 
 void* SmartPointer::operator new (size_t size)
 {
-    void *ptr = Memory::realTime().allocateBytes (size);
+//    void *ptr = Memory::realTime().allocateBytes (size);
+    void *ptr = Memory::global().allocateBytes (size);
     
     if (ptr == 0)
         throw std::bad_alloc();
@@ -112,7 +113,8 @@ void* SmartPointer::operator new (size_t size)
 
 void SmartPointer::operator delete (void* ptr)
 {
-    Memory::realTime().free (ptr); 
+//    Memory::realTime().free (ptr); 
+    Memory::global().free (ptr); 
 }
 
 void SmartPointer::incrementRefCount()  throw()
