@@ -289,10 +289,14 @@ Unit AudioHost::constructGraph()
 //    Unit patch = Patch::ar (src);
 //    return src;
     
-    Unit patch = Patch::ar (src);
-    thread1->start();
-    thread2->start();
-    return patch;
+//    Unit patch = Patch::ar (src);
+//    thread1->start();
+//    thread2->start();
+//    return patch;
+    
+    Units units;
+    return Mixer::ar (units);
+
 }
 
 

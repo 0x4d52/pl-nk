@@ -278,6 +278,7 @@ PLONK_CHANNELDATA_DECLARE(UnitMixerChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     bool allowAutoDelete:1;
+    bool purgeNullUnits:1;
 };      
 
 
@@ -351,10 +352,13 @@ public:
         
         Units& units = this->getInputAsUnits (IOKey::Units);
         
-        // remove nulls...
-        for (unit = units.length(); --unit >= 0;)
-            if (units.atUnchecked (unit).isNull())
-                units.remove (unit);
+        if (data.purgeNullUnits)
+        {
+            // remove nulls...
+            for (unit = units.length(); --unit >= 0;)
+                if (units.atUnchecked (unit).isNull())
+                    units.remove (unit);
+        }
         
         const int numChannels = this->getNumChannels();
         const int numUnits = units.length();
@@ -371,38 +375,41 @@ public:
             {
                 UnitType& inputUnit (units.atUnchecked (unit));
                 
-                plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
-                
-                const Buffer inputBuffer (inputUnit.process (info, channel));
-                const SampleType* const inputSamples = inputBuffer.getArray();
-                const int inputBufferLength = inputBuffer.length();
-                
-                if (inputBufferLength == outputBufferLength)
+                if (inputUnit.isNotNull (channel))
                 {
-                    for (i = 0; i < outputBufferLength; ++i) 
-                        outputSamples[i] += inputSamples[i];
-                }
-                else if (inputBufferLength == 1)
-                {
-                    SampleType value (inputSamples[0]);
+                    plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
                     
-                    for (i = 0; i < outputBufferLength; ++i) 
-                        outputSamples[i] += value;
-                }
-                else
-                {
-                    double inputPosition = 0.0;
-                    const double inputIncrement = double (inputBufferLength) / double (outputBufferLength);
+                    const Buffer inputBuffer (inputUnit.process (info, channel));
+                    const SampleType* const inputSamples = inputBuffer.getArray();
+                    const int inputBufferLength = inputBuffer.length();
                     
-                    for (i = 0; i < outputBufferLength; ++i) 
+                    if (inputBufferLength == outputBufferLength)
                     {
-                        outputSamples[i] += inputSamples[int (inputPosition)];
-                        inputPosition += inputIncrement;
-                    }        
+                        for (i = 0; i < outputBufferLength; ++i) 
+                            outputSamples[i] += inputSamples[i];
+                    }
+                    else if (inputBufferLength == 1)
+                    {
+                        SampleType value (inputSamples[0]);
+                        
+                        for (i = 0; i < outputBufferLength; ++i) 
+                            outputSamples[i] += value;
+                    }
+                    else
+                    {
+                        double inputPosition = 0.0;
+                        const double inputIncrement = double (inputBufferLength) / double (outputBufferLength);
+                        
+                        for (i = 0; i < outputBufferLength; ++i) 
+                        {
+                            outputSamples[i] += inputSamples[int (inputPosition)];
+                            inputPosition += inputIncrement;
+                        }        
+                    }
+                    
+                    if (data.allowAutoDelete == false)
+                        info.resetShouldDelete();    
                 }
-                
-                if (data.allowAutoDelete == false)
-                    info.resetShouldDelete();        
             }
         }
     }    
@@ -477,7 +484,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
         
-        Data data = { { -1.0, -1.0 }, (allowAutoDelete != 0) };
+        Data data = { { -1.0, -1.0 }, allowAutoDelete };
         
         return UnitType::template createFromInputs<ChannelMixerInternal> (inputs, 
                                                                           data, 
@@ -488,6 +495,7 @@ public:
     /** Create an audio rate unit mixer. */
     static UnitType ar (UnitsType const& array, 
                         const bool allowAutoDelete = true,
+                        const bool purgeNullUnits = true,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
@@ -500,7 +508,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
         
-        Data data = { { -1.0, -1.0 }, (allowAutoDelete != 0) };
+        Data data = { { -1.0, -1.0 }, allowAutoDelete, purgeNullUnits };
         
         return UnitType::template proxiesFromInputs<UnitMixerInternal> (inputs, 
                                                                         data, 
