@@ -42,65 +42,6 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
-template<class Type>
-class PatchSource
-{
-public:
-    PatchSource() throw()
-    {
-        this->setSourceInternal (Type::getNull());
-    }
-    
-    PatchSource (Type const& source) throw()
-    {
-        this->setSourceInternal (source);
-    }
-    
-    PatchSource (AtomicDynamicPointerVariable const& atomic) throw()
-    :   atom (atomic)
-    {
-    }
-    
-    PatchSource (PatchSource const& other) throw()
-    :   atom (other.getAtom())
-    {
-    }
-
-    PatchSource& operator= (PatchSource const& other) throw()
-	{
-		if (this != &other)
-            this->atom = other.getAtom();
-        
-        return *this;
-	}
-
-    ~PatchSource()
-    {
-        Dynamic* const oldPtr = this->atom.getValue().getPtr();
-        delete oldPtr;
-    }
-    
-    // this isn't thread safe yet... but sorting out the architecture first...
-        
-    inline void setSource (Type const& source) throw()
-    {
-        Dynamic* const oldPtr = this->atom.getValue().getPtr();
-        this->setSourceInternal (source);
-        delete oldPtr;
-    }
-    
-    inline AtomicDynamicPointerVariable& getAtom() throw() { return atom; }
-    inline const AtomicDynamicPointerVariable& getAtom() const throw() { return atom; }
-    
-private:
-    AtomicDynamicPointerVariable atom;
-    
-    inline void setSourceInternal (Type const& source) throw()
-    {
-        Dynamic* const newPtr = new Dynamic (source);
-        this->atom.getValue().setPtr (newPtr);
-    }
-};
 
 /** Patch channel.
  Safe repatching of signals. */
@@ -117,6 +58,7 @@ public:
     typedef UnitBase<SampleType>                                UnitType;
     typedef InputDictionary                                     Inputs;
     typedef NumericalArray<SampleType>                          Buffer;
+    typedef Variable<UnitType&>                                 UnitVariableType;
     
     PatchChannelInternal (Inputs const& inputs, 
                           Data const& data, 
@@ -133,7 +75,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::AtomicVariable);
+        const IntArray keys (IOKey::UnitVariable);
         return keys;
     }    
     
@@ -144,9 +86,6 @@ public:
     
     void initChannel (const int /*channel*/) throw()
     {
-//        AtomicVariableType& atomicVariable = ChannelInternalCore::getInputAs<AtomicVariableType> (IOKey::AtomicVariable);
-//        AtomicType& atomicValue = atomicVariable.getValue();
-
         this->initValue (0); // should get real value
     }    
     
@@ -154,11 +93,16 @@ public:
     {        
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();        
+        
+        UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
 
-        AtomicDynamicPointerVariable& atom = ChannelInternalCore::getInputAs<AtomicDynamicPointerVariable> (IOKey::AtomicVariable);
-        Dynamic& dynamic = atom.getValue().getObject();
-        UnitType& source = dynamic.asUnchecked<UnitType>();
-        const Buffer sourceBuffer (source.process (info, 0)); // channel 0...!?
+        if (var.isValueNotNull())
+        {
+            currentSource = UnitType::getNull();
+            var.swapValues (currentSource);
+        }
+        
+        const Buffer sourceBuffer (currentSource.process (info, 0)); // channel 0...!?
         const SampleType* const sourceSamples = sourceBuffer.getArray();
         const int sourceBufferLength = sourceBuffer.length();
 
@@ -190,6 +134,7 @@ public:
     }
 
 private:
+    UnitType currentSource;
 };
 
 
@@ -211,14 +156,14 @@ public:
     typedef UnitBase<SampleType>                                    UnitType;
     typedef InputDictionary                                         Inputs;
     typedef NumericalArray<SampleType>                              Buffer;
-    typedef PatchSource<UnitType>                                   UnitPatchSource;
-    
+    typedef Variable<UnitType&>                                     UnitVariableType;
+
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
 
-        return UnitInfo ("Patch", "Safe repatching of signals.",
+        return UnitInfo ("Patch", "Threadsafe repatching of signals.",
                          
                          // output
                          1, 
@@ -233,12 +178,12 @@ public:
     }    
     
     /** Create control rate variable. */
-    static UnitType ar (UnitPatchSource const& source,
+    static UnitType ar (UnitVariableType const& source,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
         Inputs inputs;
-        inputs.put (IOKey::AtomicVariable, source.getAtom());
+        inputs.put (IOKey::UnitVariable, source);
         
         Data data = { -1.0, -1.0 };
                 

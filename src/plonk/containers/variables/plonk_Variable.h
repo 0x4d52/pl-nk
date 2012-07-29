@@ -120,8 +120,6 @@ public:
     static const Variable& getNull() throw()
 	{
 		static Variable null;
-        //null.getInternal()->incrementRefCount(); //!!
-        //printf("%s::null = %p [refCount=%d]\n", typeid(Variable).name(), null.getInternal(), null.getInternal()->getRefCount());
 		return null;
 	}	                
     
@@ -175,7 +173,7 @@ public:
     {
         this->getInternal()->swapValues (other);
     }
-                
+                    
     /** Builds a binary operation from two source Variables. */
     template<PLONK_BINARYOPFUNCTION(Type, op)>
     const Variable binary (Variable const& rightOperand) const throw()
@@ -306,6 +304,11 @@ public:
         return this->getInternal()->getValue();
     }
     
+    inline const Type& getValue() const throw()
+    {
+        return this->getInternal()->getValue();
+    }
+    
     inline operator Type& () throw()
     {
         return this->getInternal()->getValue();
@@ -326,6 +329,21 @@ public:
     inline void swapValues (Type& other) throw()
     {
         this->getInternal()->swapValues (other);
+    }
+    
+    inline void swapValues (Variable const& other) throw()
+    {
+        this->getInternal()->swapValues (other.getValue());
+    }
+    
+    inline bool isValueNull() const throw()
+    {
+        return this->getInternal()->getValue().isNull();
+    }
+
+    inline bool isValueNotNull() const throw()
+    {
+        return this->getInternal()->getValue().isNotNull();
     }
     
     PLONK_OBJECTARROWOPERATOR(Variable)

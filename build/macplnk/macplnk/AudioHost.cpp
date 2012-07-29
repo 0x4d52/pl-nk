@@ -39,14 +39,43 @@
 
 #include "AudioHost.h"
 
+class MyThread : public Threading::Thread
+{
+public:
+    MyThread (UnitVariable const& srcref)
+    :   src (srcref)
+    {
+    }
+    
+    ResultCode run()
+    {
+        while (!getShouldExit())
+        {
+            Threading::sleep (rand (0.001, 2.0));
+            
+            Unit unit = Sine::ar (exprand (500, 2000), 0.1);
+            src.swapValues (unit);
+        }
+        
+        return 0;
+    }
+    
+private:
+    UnitVariable src;
+};
+
 AudioHost::AudioHost()
 {
-//    setNumOutputs (4);
+    thread1 = new MyThread (src);
+    thread2 = new MyThread (src);
 }
 
 AudioHost::~AudioHost()
 {
-    
+    thread1->setShouldExitAndWait();
+    delete thread1;
+    thread2->setShouldExitAndWait();
+    delete thread2;
 }
 
 Unit AudioHost::constructGraph()
@@ -241,20 +270,29 @@ Unit AudioHost::constructGraph()
 //    return Sine::ar (Floats(500, 2000), 0.25);
 //    return Sine::ar (Floats(1000, 1000), 0.25);
     
-    AtomicIntVariable intvar;
+//    AtomicIntVariable intvar;
+//    
+//    Unit src1 = Sine::ar (1000);
+//    Unit src2 = WhiteNoise::ar();
+//    
+//    UnitVariable var1;
+//    UnitVariable var2;
+//    
+//    var1.setValue (src1);
+//    var2.setValue (src2);
+//    
+//    var1.swapValues (var2);
+//    
+//    return var1.getValue() * 0.1;
     
-    Unit src1 = Sine::ar (1000);
-    Unit src2 = WhiteNoise::ar();
+//    Unit src = Sine::ar (1000, 0.1);
+//    Unit patch = Patch::ar (src);
+//    return src;
     
-    UnitVariable var1;
-    UnitVariable var2;
-    
-    var1.setValue (src1);
-    var2.setValue (src2);
-    
-    var1.swapValues (var2);
-    
-    return var1.getValue() * 0.1;
+    Unit patch = Patch::ar (src);
+    thread1->start();
+    thread2->start();
+    return patch;
 }
 
 

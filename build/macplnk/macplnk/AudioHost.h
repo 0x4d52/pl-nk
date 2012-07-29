@@ -50,6 +50,11 @@ public:
     ~AudioHost();
     
     Unit constructGraph();
+    
+private:
+    UnitVariable src;
+    Threading::Thread* thread1;
+    Threading::Thread* thread2;
 };
 
 #endif // AUDIOHOST_H

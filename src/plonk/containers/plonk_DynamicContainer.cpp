@@ -56,7 +56,7 @@ Dynamic::Dynamic (Dynamic const& copy) throw()
 Dynamic& Dynamic::operator= (Dynamic const& other) throw()
 {
     if (this != &other)
-        this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+        this->setInternal (other.getInternal());
     
     return *this;
 }
@@ -118,10 +118,11 @@ int Dynamic::getNumChannels() const throw()
     
     switch (typeCode) 
     {
-        case TypeCode::FloatUnit:       return reinterpret_cast<const FloatUnit&>    (this->getItem()).getNumChannels();
-        case TypeCode::FloatUnits:      return reinterpret_cast<const FloatUnits&>   (this->getItem()).numColumns();
-        case TypeCode::FloatBusses:     return reinterpret_cast<const FloatBusses&>  (this->getItem()).length();  
-        case TypeCode::FloatSignal:     return reinterpret_cast<const FloatSignal&>  (this->getItem()).getNumChannels();  
+        case TypeCode::FloatUnit:           return reinterpret_cast<const FloatUnit&>           (this->getItem()).getNumChannels();
+        case TypeCode::FloatUnits:          return reinterpret_cast<const FloatUnits&>          (this->getItem()).numColumns();
+        case TypeCode::FloatBusses:         return reinterpret_cast<const FloatBusses&>         (this->getItem()).length();  
+        case TypeCode::FloatSignal:         return reinterpret_cast<const FloatSignal&>         (this->getItem()).getNumChannels();
+        case TypeCode::FloatUnitVariable:   return reinterpret_cast<const FloatUnitVariable&>   (this->getItem()).getValue().getNumChannels();
             
         case TypeCode::ShortUnit:       return reinterpret_cast<const ShortUnit&>    (this->getItem()).getNumChannels();
         case TypeCode::ShortUnits:      return reinterpret_cast<const ShortUnits&>   (this->getItem()).numColumns();
