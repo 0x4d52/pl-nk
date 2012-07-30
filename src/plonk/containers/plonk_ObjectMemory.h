@@ -45,6 +45,9 @@ public:
     
     struct Deletee
     {
+        Deletee() : ptr (0) { }
+        Deletee (void* p) : ptr (p) { }
+        
         void* ptr;
     };
     
@@ -54,8 +57,12 @@ public:
     
     ResultCode run() throw();
     
-    static void* allocateBytes (PlankUL size);
-    static void free (void* ptr);
+    static void* staticAlloc (PlankUL size);
+    static void staticFree (void* ptr);
+    
+    void* allocateBytes (PlankUL size);
+    void free (void* ptr);
+
     
 private:
     LockFreeQueue<Deletee> queue;

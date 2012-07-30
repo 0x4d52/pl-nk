@@ -78,6 +78,7 @@
 		A82418571592670A004CA012 /* AudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8241855159265F9004CA012 /* AudioHost.cpp */; };
 		A86AD4C915A320F60064EA76 /* plonk_DelayTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */; };
 		A892A7CE15C6DFAD00E5A0C9 /* plonk_ObjectMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemory.cpp */; };
+		A892A7D815C6EFF900E5A0C9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A892A7D715C6EFF900E5A0C9 /* Accelerate.framework */; };
 		A8EF74C315ACB9F00059E3A9 /* plink_Saw.c in Sources */ = {isa = PBXBuildFile; fileRef = A8EF74BB15ACB9F00059E3A9 /* plink_Saw.c */; };
 		A8EF74C415ACB9F00059E3A9 /* plink_BinaryOpProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = A8EF74BF15ACB9F00059E3A9 /* plink_BinaryOpProcess.c */; };
 		A8EF74C515ACB9F00059E3A9 /* plink_UnaryOpProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = A8EF74C115ACB9F00059E3A9 /* plink_UnaryOpProcess.c */; };
@@ -351,6 +352,7 @@
 		A885834815AB84370079AB85 /* plonk_DelayFormCombFilter1Param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombFilter1Param.h; sourceTree = "<group>"; };
 		A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ObjectMemory.cpp; sourceTree = "<group>"; };
 		A892A7CD15C6DFAC00E5A0C9 /* plonk_ObjectMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectMemory.h; sourceTree = "<group>"; };
+		A892A7D715C6EFF900E5A0C9 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = ../../../../../../System/Library/Frameworks/Accelerate.framework; sourceTree = "<group>"; };
 		A8BF684E15AC92200005088B /* plonk_WhiteNoise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_WhiteNoise.h; sourceTree = "<group>"; };
 		A8DA9B2A15A9A02B009253AB /* plonk_DelayFormAllpassFFFB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormAllpassFFFB.h; sourceTree = "<group>"; };
 		A8DA9B2C15A9A774009253AB /* plonk_Delay3Param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_Delay3Param.h; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				A82416F21590BB4A004CA012 /* AudioUnit.framework in Frameworks */,
 				A82416F31590BB4A004CA012 /* AudioToolbox.framework in Frameworks */,
 				A81A8D6015949081004D7C99 /* libportaudio.a in Frameworks */,
+				A892A7D815C6EFF900E5A0C9 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +435,7 @@
 		A82416C71590B95A004CA012 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A892A7D715C6EFF900E5A0C9 /* Accelerate.framework */,
 				A82416EE1590BB4A004CA012 /* CoreAudio.framework */,
 				A82416EF1590BB4A004CA012 /* AudioUnit.framework */,
 				A82416F01590BB4A004CA012 /* AudioToolbox.framework */,
@@ -1244,6 +1248,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PLONK_USEPLINK=1",
 					"PLONK_AUDIOHOST_PORTAUDIO=1",
+					"PLANK_VEC_VDSP=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -1271,6 +1276,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PLONK_USEPLINK=1",
 					"PLONK_AUDIOHOST_PORTAUDIO=1",
+					"PLANK_VEC_VDSP=1",
 					"NDEBUG=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

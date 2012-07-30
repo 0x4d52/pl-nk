@@ -300,7 +300,10 @@ Unit AudioHost::constructGraph()
 //    return Sine::ar (1000, 0.1) * AtomicVariableUnit<float>::ar (gate);
 
     
-    return Patch::ar (src, false);
+//    return Patch::ar (src, false);
+    
+    const int NUM_SINES = 60;
+    return Sine::ar (Float1D::exprand(NUM_SINES, 100, 1000)).mix() * (0.25f / NUM_SINES);
 }
 
 void AudioHost::setGate (const bool state) throw() 

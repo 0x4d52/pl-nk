@@ -39,9 +39,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
-{
-    [[NSNotificationCenter defaultCenter] removeObject:self];
-    
+{    
     host->stopHost();
     delete host;
 }

@@ -42,6 +42,38 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../core/plonk_Headers.h"
 
+void* ObjectMemory::staticAlloc (PlankUL size)
+{
+    return ObjectMemory::global().allocateBytes (size);
+}
+
+void ObjectMemory::staticFree (void* ptr)
+{
+    ObjectMemory::global().free (ptr);
+}
+
+ObjectMemory& ObjectMemory::global() throw()
+{
+    static ObjectMemory om (Memory::global());
+    
+    if (!om.isRunning())
+        om.start();
+    
+    return om;
+}
+
+ObjectMemory::ObjectMemory (Memory& m) throw()
+:   memory (m)
+{
+    memory.setFunctions (staticAlloc, staticFree);
+}
+
+ObjectMemory::~ObjectMemory()
+{
+    memory.setFunctions (malloc, ::free);
+    setShouldExitAndWait();
+}
+
 void* ObjectMemory::allocateBytes (PlankUL size)
 {
     return malloc (size);
@@ -49,29 +81,46 @@ void* ObjectMemory::allocateBytes (PlankUL size)
 
 void ObjectMemory::free (void* ptr)
 {
-    ::free (ptr);
+    if (Threading::getCurrentThreadID() == getID())
+    {
+        ::free (ptr); // already triggered by a call on the background thread.
+    }
+    else 
+    {
+        Deletee d (ptr);
+        queue.push (d);
+    }
 }
 
-ObjectMemory& ObjectMemory::global() throw()
-{
-    static ObjectMemory om (Memory::global());
-    return om;
-}
-
-ObjectMemory::ObjectMemory (Memory& m) throw()
-:   memory (m)
-{
-    memory.setFunctions (ObjectMemory::allocateBytes, ObjectMemory::free);
-}
-
-ObjectMemory::~ObjectMemory()
-{
-    setShouldExitAndWait();
-    memory.setFunctions (malloc, ::free);
-}
+//void ObjectMemory::free (void* ptr)
+//{
+//    ::free (ptr);
+//}
 
 ResultCode ObjectMemory::run() throw()
 {
+    const double minDuration = 0.000001;
+    const double maxDuration = 0.1;
+    double duration = minDuration;
+    
+    while (!getShouldExit())
+    {
+        Deletee d = queue.pop();
+        
+        if (d.ptr != 0)
+        {
+            duration = minDuration;
+            ::free (d.ptr);
+        }
+        else 
+        {
+            duration = plonk::min (duration * 2.0, maxDuration);
+        }
+        
+        Threading::sleep (duration);
+    }
+    
+    queue.clearAll();
     
     return 0;
 }
