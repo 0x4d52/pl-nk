@@ -53,7 +53,7 @@
 
 -(IBAction)buttonChanged:(NSButton*)sender
 {
-    host->setGate([sender intValue] == 1 ? true : false);
+    host->setGate ([sender intValue] == 1 ? true : false);
 }
 
 

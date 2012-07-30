@@ -37,7 +37,6 @@
  */
 
 #include "../core/plonk_StandardHeader.h"
-//#include <cstdarg>
 
 BEGIN_PLONK_NAMESPACE
 

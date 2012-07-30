@@ -56,7 +56,8 @@ public:
     
     /** Constructor */
     AudioHostBase() throw()
-    :   preferredSampleRate (0.0),
+    :   om (ObjectMemory::global()),
+        preferredSampleRate (0.0),
         preferredBlockSize (0),
         isRunning (false)
     { 
@@ -159,9 +160,9 @@ protected:
                                                 blockSize, 
                                                 this->inputs.atUnchecked (i).getArray());
         
-        this->lock.lock();
+        this->lock.lock();   // perhaps replace with virtual function call?
         this->outputUnit.process (info);
-        this->lock.unlock();
+        this->lock.unlock(); // perhaps replace with virtual function call?
         
         if (this->outputUnit.isNotNull())
         {
@@ -199,6 +200,8 @@ protected:
 
     
 private:
+    ObjectMemory& om;
+
     double preferredSampleRate;
     int preferredBlockSize;
 	bool isRunning;    
@@ -209,7 +212,8 @@ private:
     BussesType busses;
     BufferArray inputs;
     BufferArray outputs;
-    Lock lock;
+    Lock lock; // <-- can get rid of soon!
+    
 };
 
 //------------------------------------------------------------------------------

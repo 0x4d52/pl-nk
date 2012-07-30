@@ -39,9 +39,6 @@
 #ifndef PLONK_MEMORY_H
 #define PLONK_MEMORY_H
 
-template<class Type>
-class ObjectMemoryAllocator;
-
 
 
 class Memory

@@ -70,18 +70,18 @@ PlankResult pl_Memory_Init (PlankMemoryRef p)
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
 
-    p->alloc = (PlankMemoryAllocateBytesFunction)malloc;
-    p->free = free;
-    return PlankResult_OK;
+    pl_AtomicPX_Init (&p->funcs);
+    return pl_Memory_SetFunctions (p, malloc, free);
 }
 
 PlankResult pl_Memory_DeInit (PlankMemoryRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
-        
-    p->alloc = 0;
-    p->free = 0;
+    
+    pl_AtomicPX_SwapAll (&p->funcs, 0, 0, 0);
+    pl_AtomicPX_DeInit (&p->funcs);
+    
     return PlankResult_OK;
 }
 
@@ -105,11 +105,15 @@ PlankResult pl_Memory_SetFunctions (PlankMemoryRef p,
                                     PlankMemoryAllocateBytesFunction allocateBytesFunction, 
                                     PlankMemoryFreeFunction freeFunction)
 {
-    if ((allocateBytesFunction == 0) || (freeFunction == 0))
-        return PlankResult_FunctionsInvalid;
+    PlankAtomicPX temp = p->funcs;
+    
+    if (allocateBytesFunction != 0)
+        temp.ptr = allocateBytesFunction;
         
-    p->alloc = allocateBytesFunction;
-    p->free = freeFunction;
+    if (freeFunction != 0)
+        temp.extra = *(PlankL*)&freeFunction;
+    
+    pl_AtomicPX_SwapAll (&p->funcs, temp.ptr, temp.extra, 0);
     
     return PlankResult_OK;
 }
