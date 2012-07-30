@@ -14,6 +14,8 @@
     AudioHost* host;
 }
 
+-(IBAction)buttonChanged:(NSButton*)sender;
+
 @property (assign) IBOutlet NSWindow *window;
 
 @end

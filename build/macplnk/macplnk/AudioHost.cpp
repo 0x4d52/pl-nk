@@ -66,16 +66,16 @@ private:
 
 AudioHost::AudioHost()
 {
-    thread1 = new MyThread (src);
-    thread2 = new MyThread (src);
+//    thread1 = new MyThread (src);
+//    thread2 = new MyThread (src);
 }
 
 AudioHost::~AudioHost()
 {
-    thread1->setShouldExitAndWait();
-    delete thread1;
-    thread2->setShouldExitAndWait();
-    delete thread2;
+//    thread1->setShouldExitAndWait();
+//    delete thread1;
+//    thread2->setShouldExitAndWait();
+//    delete thread2;
 }
 
 Unit AudioHost::constructGraph()
@@ -294,11 +294,28 @@ Unit AudioHost::constructGraph()
 //    thread2->start();
 //    return patch;
     
-    Units units;
-    return Mixer::ar (units);
+//    Units units;
+//    return Mixer::ar (units);
+    
+//    return Sine::ar (1000, 0.1) * AtomicVariableUnit<float>::ar (gate);
 
+    
+    return Patch::ar (src, false);
 }
 
+void AudioHost::setGate (const bool state) throw() 
+{ 
+    gate.setValue (state ? 1.f : 0.f); 
+    
+    if (state)
+    {
+        Unit sine = Sine::ar (exprand (880, 1760), 0.25);
+        Unit gateUnit = AtomicVariableUnit<float>::ar (gate);
+        Unit env = Envelope::ar (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
+        Unit newSource = sine * env;
+        src.swapValues (newSource);
+    }
+}
 
 
 

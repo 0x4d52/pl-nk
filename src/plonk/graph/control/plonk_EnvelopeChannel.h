@@ -66,15 +66,15 @@ class EnvelopeChannelInternal
 :   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(EnvelopeChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(EnvelopeChannelInternal,SampleType)    Data;
-    typedef ChannelBase<SampleType>                                 ChannelType;
-    typedef EnvelopeChannelInternal<SampleType>                     EnvelopeInternal;
-    typedef ChannelInternal<SampleType,Data>                        Internal;
-    typedef ChannelInternalBase<SampleType>                         InternalBase;
-    typedef UnitBase<SampleType>                                    UnitType;
-    typedef InputDictionary                                         Inputs;
-    typedef BreakpointsBase<SampleType>                             BreakpointsType;
-    typedef BreakpointBase<SampleType>                              BreakpointType;
+    typedef PLONK_CHANNELDATA_NAME(EnvelopeChannelInternal,SampleType)  Data;
+    typedef ChannelBase<SampleType>                                     ChannelType;
+    typedef EnvelopeChannelInternal<SampleType>                         EnvelopeInternal;
+    typedef ChannelInternal<SampleType,Data>                            Internal;
+    typedef ChannelInternalBase<SampleType>                             InternalBase;
+    typedef UnitBase<SampleType>                                        UnitType;
+    typedef InputDictionary                                             Inputs;
+    typedef BreakpointsBase<SampleType>                                 BreakpointsType;
+    typedef BreakpointBase<SampleType>                                  BreakpointType;
 
     EnvelopeChannelInternal (Inputs const& inputs, 
                              Data const& data, 
@@ -142,13 +142,13 @@ public:
                 const BreakpointType& targetBreakpoint = breakpoints.atUnchecked (index);
                 
                 const SampleType diff = targetBreakpoint.getTargetLevel() - data.currentLevel;
-                data.samplesUntilTarget = targetBreakpoint.getTargetTime() * this->getSampleRate();
+                data.samplesUntilTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
                 data.grow = diff / data.samplesUntilTarget;
             }
         }
     }
     
-    inline void nextTargetPoint(const bool gate, const int samplesRemaining) throw()
+    inline void nextTargetPoint (const bool gate, const int samplesRemaining) throw()
     {
         const Data& data = this->getState();
         const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
@@ -227,11 +227,11 @@ public:
                 }
                 else
                 {    
-                    const bool gate = *gateSamples >= SampleType (0.5);
+                    const bool gate = gateSamples[0] >= SampleType (0.5);
                     
                     // find how many samples the gate stays in the same state
                     int count = 1;
-                    while ((gate == (gateSamples[count] >= SampleType (0.5))) && (count <  samplesThisTime))
+                    while ((gate == (gateSamples[count] >= SampleType (0.5))) && (count < samplesThisTime))
                         count++;
                     
                     this->nextTargetPoint (gate, count);

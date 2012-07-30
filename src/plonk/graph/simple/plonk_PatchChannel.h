@@ -42,23 +42,31 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
+template<class SampleType> class PatchChannelInternal;
+
+PLONK_CHANNELDATA_DECLARE(PatchChannelInternal,SampleType)
+{    
+    ChannelInternalCore::Data base;
+    bool allowAutoDelete:1;
+};      
+
 
 /** Patch channel.
  Safe repatching of signals. */
 template<class SampleType>
 class PatchChannelInternal 
-:   public ChannelInternal<SampleType, ChannelInternalCore::Data> // will need to be a proxyowner...
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(PatchChannelInternal,SampleType)> // will need to be a proxyowner...
 {
 public:
-    typedef ChannelInternalCore::Data                           Data;
-    typedef ChannelBase<SampleType>                             ChannelType;
-    typedef PatchChannelInternal<SampleType>                    PatchChannelInternalType;
-    typedef ChannelInternal<SampleType,Data>                    Internal;
-    typedef ChannelInternalBase<SampleType>                     InternalBase;
-    typedef UnitBase<SampleType>                                UnitType;
-    typedef InputDictionary                                     Inputs;
-    typedef NumericalArray<SampleType>                          Buffer;
-    typedef Variable<UnitType&>                                 UnitVariableType;
+    typedef PLONK_CHANNELDATA_NAME(PatchChannelInternal,SampleType)     Data;
+    typedef ChannelBase<SampleType>                                     ChannelType;
+    typedef PatchChannelInternal<SampleType>                            PatchChannelInternalType;
+    typedef ChannelInternal<SampleType,Data>                            Internal;
+    typedef ChannelInternalBase<SampleType>                             InternalBase;
+    typedef UnitBase<SampleType>                                        UnitType;
+    typedef InputDictionary                                             Inputs;
+    typedef NumericalArray<SampleType>                                  Buffer;
+    typedef Variable<UnitType&>                                         UnitVariableType;
     
     PatchChannelInternal (Inputs const& inputs, 
                           Data const& data, 
@@ -131,6 +139,11 @@ public:
                 sourcePosition += sourceIncrement;
             }        
         }
+        
+        const Data& data = this->getState();
+        
+        if (data.allowAutoDelete == false)
+            info.resetShouldDelete();
     }
 
 private:
@@ -179,13 +192,14 @@ public:
     
     /** Create control rate variable. */
     static UnitType ar (UnitVariableType const& source,
+                        const bool allowAutoDelete = true,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
         Inputs inputs;
         inputs.put (IOKey::UnitVariable, source);
         
-        Data data = { -1.0, -1.0 };
+        Data data = { { -1.0, -1.0 }, allowAutoDelete };
                 
         return UnitType::template createFromInputs<PatchChannelInternalType> (inputs, 
                                                                               data, 

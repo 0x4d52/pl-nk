@@ -87,6 +87,9 @@ protected:
     typedef NumericalArray2D<SampleType>            BufferArrayType;
     typedef NullChannelInternal<SampleType>         NullInternal;
     typedef Variable<SampleType>                    VariableType;
+    typedef AtomicValue<SampleType>                 AtomicType;
+    typedef Variable<AtomicType&>                   AtomicVariableType;
+    typedef AtomicVariableUnit<SampleType>          AtomicVariableUnitType;
 
 public:
     typedef ObjectArrayInternal<ChannelType>    Internal;    
@@ -162,6 +165,11 @@ public:
     
     UnitBase (VariableType const& variable) throw()
     :   UnitType (VariableUnit<SampleType>::kr (variable))
+    {
+    }
+    
+    UnitBase (AtomicVariableType const& variable) throw()
+    :   UnitType (AtomicVariableUnitType::kr (variable))
     {
     }
         

@@ -51,10 +51,13 @@ public:
     
     Unit constructGraph();
     
+    void setGate (const bool state) throw();// { gate.setValue (state ? 1.f : 0.f); }
+    
 private:
     UnitVariable src;
-    Threading::Thread* thread1;
-    Threading::Thread* thread2;
+//    MyThread* thread1;
+//    MyThread* thread2;
+    AtomicFloatVariable gate;
 };
 
 #endif // AUDIOHOST_H

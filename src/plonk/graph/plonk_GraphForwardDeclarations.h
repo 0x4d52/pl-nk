@@ -86,6 +86,7 @@ template<class SampleType>                                              class Mi
 template<class SampleType>                                              class OverlapMakeUnit;
 template<class SampleType>                                              class OverlapMixUnit;
 template<class SampleType>                                              class VariableUnit;
+template<class SampleType>                                              class AtomicVariableUnit;
 
 // type conversion units
 template<class OutputSampleType, class InputSampleType>                 class TypeUnit;

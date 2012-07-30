@@ -40,8 +40,21 @@
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
+    [[NSNotificationCenter defaultCenter] removeObject:self];
+    
     host->stopHost();
     delete host;
 }
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return YES;
+}
+
+-(IBAction)buttonChanged:(NSButton*)sender
+{
+    host->setGate([sender intValue] == 1 ? true : false);
+}
+
 
 @end

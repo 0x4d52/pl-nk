@@ -127,7 +127,7 @@ public:
     BreakpointBase& operator= (BreakpointBase const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}
@@ -188,7 +188,6 @@ public:
         plonk_assert (((nextGateOns.length() == 0) && (nextGateOffs.length() == 0)) || 
                      ((nextGateOns.length() == (levels.length() - 1))) && ((nextGateOffs.length() == (levels.length() - 1))));
 
-        
         const SampleType* levelsArray = levels.getArray();
         const double* timesArray = times.getArray();
         const int* nextOnsArray = nextGateOns.getArray();
@@ -201,16 +200,20 @@ public:
         if (nextGateOns.length() != 0)
         {
             for (int i = 0; i < numBreakpoints; ++i)
+            {
                 this->breakpoints.put (i, BreakpointType (levelsArray[i],
                                                           timesArray[i],
                                                           nextOnsArray[i],
                                                           nextOffsArray[i]));
+            }
         } 
         else
         {
             for (int i = 0; i < numBreakpoints; ++i)
+            {
                 this->breakpoints.put (i, BreakpointType (levelsArray[i],
-                                                          timesArray[i]));            
+                                                          timesArray[i]));  
+            }
         }
 	}
 	
@@ -286,7 +289,7 @@ public:
     BreakpointsBase& operator= (BreakpointsBase const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}

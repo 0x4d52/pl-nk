@@ -232,7 +232,6 @@ public:
         pl_VectorClearF_N (outputSamples, outputBufferLength);
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-        
         const int numChannels = inputUnit.getNumChannels();
         
         p.buffers[0].bufferSize = p.buffers[1].bufferSize = outputBufferLength;
