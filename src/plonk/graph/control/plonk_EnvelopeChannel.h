@@ -146,7 +146,7 @@ public:
                 data.samplesUntilTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
                 data.grow = diff / data.samplesUntilTarget;
             }
-        }
+        }        
     }
     
     inline void nextTargetPoint (const bool gate, const int samplesRemaining) throw()
@@ -195,7 +195,7 @@ public:
             const bool currGate = gateSamples[0] >= SampleType (0.5);
             
             if (currGate != data.prevGate)
-                this->nextTargetPoint (gate, samplesRemaining);
+                this->nextTargetPoint (currGate, samplesRemaining);
             
             while (samplesRemaining > 0)
             {
@@ -211,8 +211,7 @@ public:
                 }
                 else
                 {           
-                    if (currGate != data.prevGate)
-                        this->nextTargetPoint (gate, samplesRemaining);
+                    this->nextTargetPoint (currGate, samplesRemaining);
                 }
             }
             
