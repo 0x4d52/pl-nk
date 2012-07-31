@@ -94,7 +94,6 @@ public:
     {
     }
     
-    
     Variable (Dynamic const& other) throw()
     :   Base (other.as<Variable>().getInternal())
     {
@@ -308,7 +307,6 @@ public:
         return *this;
     }    
 
-    
     inline Type& getValue() throw()
     {
         return this->getInternal()->getValue();

@@ -115,7 +115,7 @@ public:
     inline const SampleType& getValue() const throw() 
     { 
         // the underlying Channel or Unit may not have called initValue()
-        plonk_assert (hasInitialisedValue == true); 
+        plonk_assert (this->isNull() || hasInitialisedValue == true); 
         return outputBuffer.last();
     }
     

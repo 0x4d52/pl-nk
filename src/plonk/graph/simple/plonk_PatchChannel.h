@@ -47,6 +47,7 @@ template<class SampleType> class PatchChannelInternal;
 PLONK_CHANNELDATA_DECLARE(PatchChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
+    int preferredNumChannels;
     bool allowAutoDelete:1;
 };      
 
@@ -55,13 +56,14 @@ PLONK_CHANNELDATA_DECLARE(PatchChannelInternal,SampleType)
  Safe repatching of signals. */
 template<class SampleType>
 class PatchChannelInternal 
-:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(PatchChannelInternal,SampleType)> // will need to be a proxyowner...
+:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(PatchChannelInternal,SampleType)> 
 {
 public:
     typedef PLONK_CHANNELDATA_NAME(PatchChannelInternal,SampleType)     Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
+    typedef ObjectArray<ChannelType>                                    ChannelArrayType;
     typedef PatchChannelInternal<SampleType>                            PatchChannelInternalType;
-    typedef ChannelInternal<SampleType,Data>                            Internal;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
     typedef ChannelInternalBase<SampleType>                             InternalBase;
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
@@ -71,9 +73,17 @@ public:
     PatchChannelInternal (Inputs const& inputs, 
                           Data const& data, 
                           BlockSize const& blockSize,
-                          SampleRate const& sampleRate) throw()
-    :   Internal (inputs, data, blockSize, sampleRate)
+                          SampleRate const& sampleRate,
+                          ChannelArrayType& channels) throw()
+    :   Internal (data.preferredNumChannels > 0 ? data.preferredNumChannels : numChannelsInSource (inputs), 
+                  inputs, data, blockSize, sampleRate, channels)
     {
+    }
+    
+    static inline int numChannelsInSource (Inputs const& inputs) throw()
+    {
+        const UnitVariableType& var = inputs[IOKey::UnitVariable].asUnchecked<UnitVariableType> ();
+        return var.getValue().getNumChannels();
     }
     
     Text getName() const throw()
@@ -92,16 +102,25 @@ public:
         return this;
     }        
     
-    void initChannel (const int /*channel*/) throw()
+    void initChannel (const int channel) throw()
     {
-        this->initValue (0); // should get real value
+        if ((channel % this->getNumChannels()) == 0)
+        {
+            UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
+            
+            if (var.isValueNotNull())
+            {
+                currentSource = UnitType::getNull();
+                var.swapValues (currentSource);
+            }
+        }
+        
+        this->initProxyValue (channel, currentSource.getValue (channel)); 
     }    
     
     void process (ProcessInfo& info, const int /*channel*/) throw()
-    {        
-        SampleType* const outputSamples = this->getOutputSamples();
-        const int outputBufferLength = this->getOutputBuffer().length();        
-        
+    {       
+        const Data& data = this->getState();
         UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
 
         if (var.isValueNotNull())
@@ -110,40 +129,47 @@ public:
             var.swapValues (currentSource);
         }
         
-        const Buffer sourceBuffer (currentSource.process (info, 0)); // channel 0...!?
-        const SampleType* const sourceSamples = sourceBuffer.getArray();
-        const int sourceBufferLength = sourceBuffer.length();
+        const int numChannels = this->getNumChannels();
 
-        int i;
-        
-        if (sourceBufferLength == outputBufferLength)
+        for (int channel = 0; channel < numChannels; ++channel)
         {
-            for (i = 0; i < outputBufferLength; ++i) 
-                outputSamples[i] = sourceSamples[i];
-        }
-        else if (sourceBufferLength == 1)
-        {
-            const SampleType value (sourceSamples[0]);
+            Buffer& outputBuffer = this->getOutputBuffer (channel);
+            SampleType* const outputSamples = outputBuffer.getArray();
+            const int outputBufferLength = outputBuffer.length();        
+
+            const Buffer sourceBuffer (currentSource.process (info, channel));
+            const SampleType* const sourceSamples = sourceBuffer.getArray();
+            const int sourceBufferLength = sourceBuffer.length();
+
+            int i;
             
-            for (i = 0; i < outputBufferLength; ++i) 
-                outputSamples[i] = value;
-        }
-        else
-        {
-            double sourcePosition = 0.0;
-            const double sourceIncrement = double (sourceBufferLength) / double (outputBufferLength);
-            
-            for (i = 0; i < outputBufferLength; ++i) 
+            if (sourceBufferLength == outputBufferLength)
             {
-                outputSamples[i] = sourceSamples[int (sourcePosition)];
-                sourcePosition += sourceIncrement;
-            }        
+                for (i = 0; i < outputBufferLength; ++i) 
+                    outputSamples[i] = sourceSamples[i];
+            }
+            else if (sourceBufferLength == 1)
+            {
+                const SampleType value (sourceSamples[0]);
+                
+                for (i = 0; i < outputBufferLength; ++i) 
+                    outputSamples[i] = value;
+            }
+            else
+            {
+                double sourcePosition = 0.0;
+                const double sourceIncrement = double (sourceBufferLength) / double (outputBufferLength);
+                
+                for (i = 0; i < outputBufferLength; ++i) 
+                {
+                    outputSamples[i] = sourceSamples[int (sourcePosition)];
+                    sourcePosition += sourceIncrement;
+                }        
+            }
+            
+            if (data.allowAutoDelete == false)
+                info.resetShouldDelete();
         }
-        
-        const Data& data = this->getState();
-        
-        if (data.allowAutoDelete == false)
-            info.resetShouldDelete();
     }
 
 private:
@@ -193,18 +219,19 @@ public:
     /** Create control rate variable. */
     static UnitType ar (UnitVariableType const& source,
                         const bool allowAutoDelete = true,
+                        const int numChannels = 0, 
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
         Inputs inputs;
         inputs.put (IOKey::UnitVariable, source);
         
-        Data data = { { -1.0, -1.0 }, allowAutoDelete };
-                
-        return UnitType::template createFromInputs<PatchChannelInternalType> (inputs, 
-                                                                              data, 
-                                                                              preferredBlockSize, 
-                                                                              preferredSampleRate);
+        Data data = { { -1.0, -1.0 }, numChannels, allowAutoDelete };
+            
+        return UnitType::template proxiesFromInputs<PatchChannelInternalType> (inputs, 
+                                                                               data, 
+                                                                               preferredBlockSize, 
+                                                                               preferredSampleRate);
     }   
 };
 

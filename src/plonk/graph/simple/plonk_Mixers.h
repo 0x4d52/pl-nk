@@ -302,11 +302,7 @@ public:
                               SampleRate const& sampleRate,
                               ChannelArrayType& channels) throw()
     :   Internal (inputs.getMaxNumChannels(), 
-                  inputs, 
-                  data,
-                  blockSize, 
-                  sampleRate,
-                  channels)
+                  inputs, data, blockSize, sampleRate, channels)
     {
     }
 
