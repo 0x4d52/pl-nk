@@ -54,6 +54,7 @@ PLONK_CHANNELDATA_DECLARE(EnvelopeChannelInternal,SampleType)
     SampleType grow;
     int targetPointIndex;
     
+    bool prevGate:1;
     bool done:1;
     bool deleteWhenDone:1;
 };      
@@ -191,6 +192,11 @@ public:
         
         if (gateBufferLength == 1)
         {
+            const bool currGate = gateSamples[0] >= SampleType (0.5);
+            
+            if (currGate != data.prevGate)
+                this->nextTargetPoint (gate, samplesRemaining);
+            
             while (samplesRemaining > 0)
             {
                 const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.samplesUntilTarget));
@@ -205,10 +211,12 @@ public:
                 }
                 else
                 {           
-                    const bool gate = *gateSamples >= SampleType (0.5);
-                    this->nextTargetPoint (gate, samplesRemaining);
+                    if (currGate != data.prevGate)
+                        this->nextTargetPoint (gate, samplesRemaining);
                 }
             }
+            
+            data.prevGate = currGate;
         }
         else if (gateBufferLength == outputBufferLength)
         {
@@ -334,7 +342,7 @@ public:
         inputs.put (IOKey::Breakpoints, breakpoints);
         inputs.put (IOKey::Control, gate);
         
-        Data data = { { -1.0, -1.0 }, 0, 0, 0, -1, false, deleteWhenDone };
+        Data data = { { -1.0, -1.0 }, 0, 0, 0, -1, false, false, deleteWhenDone };
         
         return UnitType::template createFromInputs<EnvelopeInternal> (inputs, 
                                                                       data, 
