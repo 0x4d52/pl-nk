@@ -313,12 +313,16 @@ void AudioHost::setGate (const bool state) throw()
     if (state)
     {
         Unit sine = Sine::ar (exprand (880, 1760), 0.25);
-        Unit gateUnit = AtomicVariableUnit<float>::ar (gate);
-        //Unit gateUnit = AtomicVariableUnit<float>::kr (gate);
+        //Unit gateUnit = AtomicVariableUnit<float>::ar (gate);
+        Unit gateUnit = AtomicVariableUnit<float>::kr (gate);
 
-        Unit env = Envelope::ar (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
+        //Unit gateUnit = AtomicVariableUnit<float>::ar (gate, 64);
+        
+        //Unit env = Envelope::ar (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
+        Unit env = Envelope::kr (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
+        //Unit env = Envelope::ar (Breakpoints::asr (1.0, 1.0, 2.0), gateUnit);
         Unit newSource = sine * env;
-        src.swapValues (newSource);
+        src = newSource;
     }
 }
 

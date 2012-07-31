@@ -137,7 +137,8 @@ public:
     }
     
     /** A convenience for setValue(). */
-    Variable& operator= (Type const& newValue) throw()
+    template<class ValueType>
+    Variable& operator= (ValueType const& newValue) throw()
     {
         this->setValue (newValue);
         return *this;
@@ -295,9 +296,18 @@ public:
     template<class ValueType>
     inline Variable& operator= (ValueType const& newValue) throw()
     {
-        this->setValue (newValue);
+        Type temp (newValue);
+        this->swapValues (temp);
         return *this;
     }    
+    
+    inline Variable& operator= (Variable const& other) throw()
+    {
+        Variable temp (other.getValue());
+        this->swapValues (temp);
+        return *this;
+    }    
+
     
     inline Type& getValue() throw()
     {

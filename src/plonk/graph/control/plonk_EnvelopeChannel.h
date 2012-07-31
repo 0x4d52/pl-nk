@@ -116,7 +116,7 @@ public:
     {
         Data& data = this->getState();
         
-        if (index == data.targetPointIndex)
+        if ((index != 0) && (index == data.targetPointIndex))
         {
             // sustain
             data.grow = SampleType (0);
@@ -185,15 +185,14 @@ public:
 
         UnitType& gate (this->getInputAsUnit (IOKey::Control));
         const Buffer& gateBuffer (gate.process (info, 0));
-        const SampleType* gateSamples = gateBuffer.getArray();
+        const SampleType* const gateSamples = gateBuffer.getArray();
         const int gateBufferLength = gateBuffer.length();        
-        
-        int samplesRemaining = outputBufferLength;
         
         bool currGate;
         
-        if (gateBufferLength == 1)
+        if (gateBufferLength == 1) // most efficient
         {
+            int samplesRemaining = outputBufferLength;
             currGate = gateSamples[0] >= SampleType (0.5);
             
             if (currGate != data.prevGate)
@@ -211,90 +210,50 @@ public:
                     samplesRemaining -= samplesThisTime;
                     data.samplesUntilTarget -= samplesThisTime;
                 }
-                else
-                {           
+                
+                if (data.samplesUntilTarget == 0)
                     this->nextTargetPoint (currGate, samplesRemaining);
-                }
             }
             
             data.prevGate = currGate;
         }
         else if (gateBufferLength == outputBufferLength)
         {
-            int gateSamplesStartIndex = 0;
-            
-            currGate = data.prevGate;
-            
-            while (samplesRemaining > 0)
+            for (int i = 0; i < outputBufferLength; ++i)
             {
-                int gateSamplesCount = 0;
-
-                while ((data.prevGate == (gateSamples[gateSamplesStartIndex + gateSamplesCount] >= SampleType (0.5))) && 
-                       ((gateSamplesStartIndex + gateSamplesCount) < samplesRemaining))
-                    gateSamplesCount++;
-
-                while (gateSamplesCount > 0)
-                {
-                    const int samplesThisTime = int (plonk::min (LongLong (gateSamplesCount), data.samplesUntilTarget));
-                    
-                    if (samplesThisTime > 0)
-                    {
-                        processLinear (outputSamples, samplesThisTime);
-                        
-                        outputSamples += samplesThisTime;
-                        samplesRemaining -= samplesThisTime;
-                        data.samplesUntilTarget -= samplesThisTime;
-                        gateSamplesCount -= samplesThisTime;
-                    }
-                    else
-                    {           
-                        this->nextTargetPoint (currGate, samplesRemaining);
-                    }
-                }
-
-                gateSamplesStartIndex += gateSamplesCount;
-
+                currGate = gateSamples[i] >= SampleType (0.5);
+                
+                if (currGate != data.prevGate)
+                    this->nextTargetPoint (currGate, 1);
+                
+                processLinear (outputSamples++, 1);
+                
+                if (data.samplesUntilTarget-- == 0)
+                    this->nextTargetPoint (currGate, 1);
+                
                 data.prevGate = currGate;
-                currGate = gateSamples[gateSamplesStartIndex] >= SampleType (0.5);
             }
-            
         }
         else
-        {
-            plonk_assertfalse;
+        {            
+            double gatePosition = 0.0;
+            const double gateIncrement = double (gateBufferLength) / double (outputBufferLength);
             
-//            double gatePosition = 0.0;
-//            const double gateIncrement = double (gateBufferLength) / double (outputBufferLength);
-//            
-//            while (samplesRemaining > 0)
-//            {
-//                const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.samplesUntilTarget));
-//                
-//                if (samplesThisTime > 0)
-//                {
-//                    processLinear (outputSamples, samplesThisTime);
-//                    
-//                    outputSamples += samplesThisTime;
-//                    gatePosition += gateIncrement * samplesThisTime;
-//                    samplesRemaining -= samplesThisTime;
-//                    data.samplesUntilTarget -= samplesThisTime;
-//                }
-//                else
-//                {                  
-//                    const bool gate = gateSamples[int (gatePosition)] >= SampleType (0.5);
-//                    
-//                    int count = 1;
-//                    double gatePositionCount = gatePosition + gateIncrement;
-//                    
-//                    while ((gate == (gateSamples[int (gatePositionCount)] >= SampleType (0.5))) && (count <  samplesThisTime))
-//                    {
-//                        count++;
-//                        gatePositionCount += gateIncrement;
-//                    }
-//                    
-//                    this->nextTargetPoint (gate, count);
-//                }
-//            }            
+            for (int i = 0; i < outputBufferLength; ++i)
+            {
+                currGate = gateSamples[int (gatePosition)] >= SampleType (0.5);
+                
+                if (currGate != data.prevGate)
+                    this->nextTargetPoint (currGate, 1);
+                
+                processLinear (outputSamples++, 1);
+                
+                if (data.samplesUntilTarget-- == 0)
+                    this->nextTargetPoint (currGate, 1);
+                
+                data.prevGate = currGate;
+                gatePosition += gateIncrement;
+            }
         }
         
         if (data.done && data.deleteWhenDone)
@@ -345,11 +304,11 @@ public:
     }    
     
     /** Create an audio rate envelope generator. */
-    static  UnitType ar (BreakpointsType const& breakpoints,
-                         UnitType const& gate = SampleType (0),
-                         const bool deleteWhenDone = true,
-                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
-                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    static UnitType ar (BreakpointsType const& breakpoints,
+                        UnitType const& gate = SampleType (1),
+                        const bool deleteWhenDone = true,
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
         plonk_assert (gate.getNumChannels() == 1);
         
@@ -364,6 +323,17 @@ public:
                                                                       preferredBlockSize, 
                                                                       preferredSampleRate);
     }
+    
+    /** Create a control rate envelope generator. */
+    static inline UnitType kr (BreakpointsType const& breakpoints,
+                               UnitType const& gate = SampleType (1),
+                               const bool deleteWhenDone = true) throw()
+    {
+        return ar (breakpoints, gate, deleteWhenDone,
+                   BlockSize::getControlRateBlockSize(), 
+                   SampleRate::getControlRate());
+    }
+
 };
 
 typedef EnvelopeUnit<PLONK_TYPE_DEFAULT> Envelope;

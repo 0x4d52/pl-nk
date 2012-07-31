@@ -92,7 +92,8 @@ public:
     enum NextPoint
     {
         This = -2,
-        Next = -1
+        Next = -1,
+        End = INT_MAX
     };    
     
 	BreakpointBase(const SampleType targetLevel = SampleType (0), 
@@ -326,10 +327,20 @@ public:
         const SampleType peak = SampleTypeUtility::getTypePeak();
         return BreakpointsBase (LevelsArray (SampleType (0), peak, sustainLevel, SampleType (0)),
                                 TimesArray (attackTime, decayTime, releaseTime),
-                                NextArray (BreakpointType::Next, BreakpointType::This, lastPoint),
-                                NextArray (lastPoint, lastPoint, lastPoint));
+                                NextArray (BreakpointType::Next, BreakpointType::This, BreakpointType::End),
+                                NextArray (lastPoint, lastPoint, BreakpointType::End));
     }
     
+    static BreakpointsBase asr (const double attackTime, 
+                                const SampleType sustainLevel,
+                                const double releaseTime) throw()
+    {
+        const int lastPoint = 1;
+        return BreakpointsBase (LevelsArray (SampleType (0), sustainLevel, SampleType (0)),
+                                TimesArray (attackTime, releaseTime),
+                                NextArray (BreakpointType::This, BreakpointType::End),
+                                NextArray (lastPoint, BreakpointType::End));
+    }
     
     inline int getNumBreakpoints() const throw()
     {
