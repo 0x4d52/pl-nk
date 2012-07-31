@@ -190,9 +190,11 @@ public:
         
         int samplesRemaining = outputBufferLength;
         
+        bool currGate;
+        
         if (gateBufferLength == 1)
         {
-            const bool currGate = gateSamples[0] >= SampleType (0.5);
+            currGate = gateSamples[0] >= SampleType (0.5);
             
             if (currGate != data.prevGate)
                 this->nextTargetPoint (currGate, samplesRemaining);
@@ -219,66 +221,80 @@ public:
         }
         else if (gateBufferLength == outputBufferLength)
         {
-            while (samplesRemaining > 0)
-            {
-                const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.samplesUntilTarget));
-                
-                if (samplesThisTime > 0)
-                {
-                    processLinear (outputSamples, samplesThisTime);
-                    
-                    outputSamples += samplesThisTime;
-                    gateSamples += samplesThisTime;
-                    samplesRemaining -= samplesThisTime;
-                    data.samplesUntilTarget -= samplesThisTime;
-                }
-                else
-                {    
-                    const bool gate = gateSamples[0] >= SampleType (0.5);
-                    
-                    // find how many samples the gate stays in the same state
-                    int count = 1;
-                    while ((gate == (gateSamples[count] >= SampleType (0.5))) && (count < samplesThisTime))
-                        count++;
-                    
-                    this->nextTargetPoint (gate, count);
-                }
-            }            
-        }
-        else
-        {
-            double gatePosition = 0.0;
-            const double gateIncrement = double (gateBufferLength) / double (outputBufferLength);
+            int gateSamplesStartIndex = 0;
+            
+            currGate = data.prevGate;
             
             while (samplesRemaining > 0)
             {
-                const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.samplesUntilTarget));
-                
-                if (samplesThisTime > 0)
+                int gateSamplesCount = 0;
+
+                while ((data.prevGate == (gateSamples[gateSamplesStartIndex + gateSamplesCount] >= SampleType (0.5))) && 
+                       ((gateSamplesStartIndex + gateSamplesCount) < samplesRemaining))
+                    gateSamplesCount++;
+
+                while (gateSamplesCount > 0)
                 {
-                    processLinear (outputSamples, samplesThisTime);
+                    const int samplesThisTime = int (plonk::min (LongLong (gateSamplesCount), data.samplesUntilTarget));
                     
-                    outputSamples += samplesThisTime;
-                    gatePosition += gateIncrement * samplesThisTime;
-                    samplesRemaining -= samplesThisTime;
-                    data.samplesUntilTarget -= samplesThisTime;
-                }
-                else
-                {                  
-                    const bool gate = gateSamples[int (gatePosition)] >= SampleType (0.5);
-                    
-                    int count = 1;
-                    double gatePositionCount = gatePosition + gateIncrement;
-                    
-                    while ((gate == (gateSamples[int (gatePositionCount)] >= SampleType (0.5))) && (count <  samplesThisTime))
+                    if (samplesThisTime > 0)
                     {
-                        count++;
-                        gatePositionCount += gateIncrement;
+                        processLinear (outputSamples, samplesThisTime);
+                        
+                        outputSamples += samplesThisTime;
+                        samplesRemaining -= samplesThisTime;
+                        data.samplesUntilTarget -= samplesThisTime;
+                        gateSamplesCount -= samplesThisTime;
                     }
-                    
-                    this->nextTargetPoint (gate, count);
+                    else
+                    {           
+                        this->nextTargetPoint (currGate, samplesRemaining);
+                    }
                 }
-            }            
+
+                gateSamplesStartIndex += gateSamplesCount;
+
+                data.prevGate = currGate;
+                currGate = gateSamples[gateSamplesStartIndex] >= SampleType (0.5);
+            }
+            
+        }
+        else
+        {
+            plonk_assertfalse;
+            
+//            double gatePosition = 0.0;
+//            const double gateIncrement = double (gateBufferLength) / double (outputBufferLength);
+//            
+//            while (samplesRemaining > 0)
+//            {
+//                const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.samplesUntilTarget));
+//                
+//                if (samplesThisTime > 0)
+//                {
+//                    processLinear (outputSamples, samplesThisTime);
+//                    
+//                    outputSamples += samplesThisTime;
+//                    gatePosition += gateIncrement * samplesThisTime;
+//                    samplesRemaining -= samplesThisTime;
+//                    data.samplesUntilTarget -= samplesThisTime;
+//                }
+//                else
+//                {                  
+//                    const bool gate = gateSamples[int (gatePosition)] >= SampleType (0.5);
+//                    
+//                    int count = 1;
+//                    double gatePositionCount = gatePosition + gateIncrement;
+//                    
+//                    while ((gate == (gateSamples[int (gatePositionCount)] >= SampleType (0.5))) && (count <  samplesThisTime))
+//                    {
+//                        count++;
+//                        gatePositionCount += gateIncrement;
+//                    }
+//                    
+//                    this->nextTargetPoint (gate, count);
+//                }
+//            }            
         }
         
         if (data.done && data.deleteWhenDone)
