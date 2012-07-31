@@ -79,13 +79,7 @@ public:
                   inputs, data, blockSize, sampleRate, channels)
     {
     }
-    
-    static inline int numChannelsInSource (Inputs const& inputs) throw()
-    {
-        const UnitVariableType& var = inputs[IOKey::UnitVariable].asUnchecked<UnitVariableType> ();
-        return var.getValue().getNumChannels();
-    }
-    
+        
     Text getName() const throw()
     {        
         return "Patch";
@@ -105,15 +99,7 @@ public:
     void initChannel (const int channel) throw()
     {
         if ((channel % this->getNumChannels()) == 0)
-        {
-            UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
-            
-            if (var.isValueNotNull())
-            {
-                currentSource = UnitType::getNull();
-                var.swapValues (currentSource);
-            }
-        }
+            updateSource();
         
         this->initProxyValue (channel, currentSource.getValue (channel)); 
     }    
@@ -121,13 +107,7 @@ public:
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {       
         const Data& data = this->getState();
-        UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
-
-        if (var.isValueNotNull())
-        {
-            currentSource = UnitType::getNull();
-            var.swapValues (currentSource);
-        }
+        updateSource();
         
         const int numChannels = this->getNumChannels();
 
@@ -145,8 +125,9 @@ public:
             
             if (sourceBufferLength == outputBufferLength)
             {
-                for (i = 0; i < outputBufferLength; ++i) 
-                    outputSamples[i] = sourceSamples[i];
+                Buffer::copyData (outputSamples, sourceSamples, outputBufferLength);
+//                for (i = 0; i < outputBufferLength; ++i) 
+//                    outputSamples[i] = sourceSamples[i];
             }
             else if (sourceBufferLength == 1)
             {
@@ -174,6 +155,23 @@ public:
 
 private:
     UnitType currentSource;
+    
+    static inline int numChannelsInSource (Inputs const& inputs) throw()
+    {
+        const UnitVariableType& var = inputs[IOKey::UnitVariable].asUnchecked<UnitVariableType> ();
+        return var.getValue().getNumChannels();
+    }
+    
+    inline void updateSource() throw()
+    {
+        UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
+        
+        if (var.isValueNotNull())
+        {
+            currentSource = UnitType::getNull();
+            var.swapValues (currentSource);
+        }
+    }
 };
 
 

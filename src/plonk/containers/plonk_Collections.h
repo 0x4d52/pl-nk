@@ -361,7 +361,7 @@ public:
 		ObjectArray<ValueType> const& values = getValues();
 		ObjectArray<KeyType> const& keys = getKeys();
 		
-		int index = values.indexOf (value);
+		const int index = values.indexOf (value);
 		return keys[index];
 	}
 	

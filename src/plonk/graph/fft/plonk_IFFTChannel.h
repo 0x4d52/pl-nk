@@ -123,7 +123,7 @@ public:
 
         // pack
         int i, j;
-        
+                
         for (i = 0; i <= halfLength; ++i)
             outputSamples[i] = realInputSamples[i];
 
