@@ -322,11 +322,12 @@ public:
                                  const SampleType sustainLevel,
                                  const double releaseTime) throw()
     {
+        const int lastPoint = 2;
         const SampleType peak = SampleTypeUtility::getTypePeak();
         return BreakpointsBase (LevelsArray (SampleType (0), peak, sustainLevel, SampleType (0)),
                                 TimesArray (attackTime, decayTime, releaseTime),
-                                NextArray (BreakpointType::Next, BreakpointType::This, BreakpointType::Next),
-                                NextArray (BreakpointType::Next, BreakpointType::Next, BreakpointType::Next));
+                                NextArray (BreakpointType::Next, BreakpointType::This, lastPoint),
+                                NextArray (lastPoint, lastPoint, lastPoint));
     }
     
     

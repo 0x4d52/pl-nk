@@ -85,7 +85,7 @@ void ObjectMemory::free (void* ptr)
     {
         ::free (ptr); // already triggered by a call on the background thread.
     }
-    else 
+    else if (ptr != 0)
     {
         Deletee d (ptr);
         queue.push (d);
@@ -109,11 +109,12 @@ ResultCode ObjectMemory::run() throw()
         
         if (d.ptr != 0)
         {
-            duration = minDuration;
+            duration = minDuration; // reset back to high speed
             ::free (d.ptr);
         }
         else 
         {
+            // gradually increase the amount of sleep if the queue is empty
             duration = plonk::min (duration * 2.0, maxDuration);
         }
         
