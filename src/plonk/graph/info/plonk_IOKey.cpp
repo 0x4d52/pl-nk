@@ -92,8 +92,10 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::SignalVariable,
         IOKey::BreakpointsVariable,
         IOKey::AutoDeleteFlag,
+        IOKey::PurgeNullUnitsFlag,
         IOKey::HarmonicCount,
         IOKey::MaximumDuration,
+        IOKey::PreferredNumChannels,
     };
     
     if (value == IOKey::End)   
@@ -170,8 +172,10 @@ Text IOKey::getName (const int keyIndex) throw()
         "BreakpointsVariable",
         
         "Auto Delete Flag",
+        "Purge Null Units Flag",
         "Harmonic Count",
         "Maximum Duration",
+        "Preferred Num Channels",
     };
     
     if (keyIndex < 0 || keyIndex >= NumNames)
@@ -233,8 +237,10 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeBreakpointsVariable,
         
         IOKey::TypeBool,            //"Auto Delete Flag"
+        IOKey::TypeBool,            //"Purge Null Units Flag"
         IOKey::TypeNumerical,       //"Harmonic Count"
         IOKey::TypeNumerical,       //"Maximum Duration"
+        IOKey::TypeNumerical,       //"Preferred NumChannels"
     };
     
     if (keyIndex < 0 || keyIndex >= IOKey::NumNames)
@@ -297,8 +303,10 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "BreakpointsVariable",
         
         "Bool",             //"Auto Delete Flag"
+        "Bool",             //"Purge Null Units Flag"
         "Numerical",        //"Harmonic Count"
         "Numerical",        //"Maximum Duration"
+        "Numerical",        //"Preferred NumChannels"
     };
     
     if (keyIndex < 0 || keyIndex >= IOKey::NumNames)

@@ -49,7 +49,6 @@ PLONK_CHANNELDATA_DECLARE(PatchChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     int preferredNumChannels;
-    int fadeSamplesRemaining;
     SampleType fadeIncrement;
     SampleType fadeLevel;
     bool allowAutoDelete:1;
@@ -131,13 +130,71 @@ public:
     
     void processFade (ProcessInfo& info)
     {
-//        Data& data = this->getState();
-//        const int numChannels = this->getNumChannels();
-//
-//        const SampleType fadeIncrement = data.fadeIncrement;
-//        SampleType fadeOutLevel = data.fadeLevel;
-//        SampleType fadeInLevel = TypeUtility<SampleType>::getTypePeak() - fadeOutLevel;
+        Data& data = this->getState();
+        const int numChannels = this->getNumChannels();
 
+        const SampleType fadeIncrement = data.fadeIncrement;
+        const SampleType fadeMax = TypeUtility<SampleType>::getTypePeak();
+        const SampleType fadeMin = Math<SampleType>::get0();
+        SampleType fadeOutLevel, fadeInLevel;
+
+        for (int channel = 0; channel < numChannels; ++channel)
+        {
+            fadeOutLevel = data.fadeLevel;
+            fadeInLevel = fadeMax - fadeOutLevel;
+
+            Buffer& outputBuffer = this->getOutputBuffer (channel);
+            SampleType* const outputSamples = outputBuffer.getArray();
+            const int outputBufferLength = outputBuffer.length();        
+            
+            const Buffer fadeInSourceBuffer (currentSource.process (info, channel));
+            const SampleType* const fadeInSourceSamples = fadeInSourceBuffer.getArray();
+            const int fadeInSourceBufferLength = fadeInSourceBuffer.length();
+            
+            const Buffer fadeOutSourceBuffer (fadeSource.process (info, channel));
+            const SampleType* const fadeOutSourceSamples = fadeOutSourceBuffer.getArray();
+            const int fadeOutSourceBufferLength = fadeOutSourceBuffer.length();
+
+            int i;
+            
+            if ((fadeInSourceBufferLength == outputBufferLength) &&
+                (fadeInSourceBufferLength) == fadeOutSourceBufferLength)
+            {
+                for (i = 0; i < outputBufferLength; ++i)
+                {
+                    outputSamples[i] = fadeInSourceSamples[i] * fadeInLevel + fadeOutSourceSamples[i] * fadeOutLevel;
+                    fadeInLevel = plonk::min (fadeInLevel + fadeIncrement, fadeMax);
+                    fadeOutLevel = plonk::max (fadeOutLevel - fadeIncrement, fadeMin);
+                }
+            }
+            else
+            {
+                double fadeInSourcePosition = 0.0;
+                const double fadeInSourceIncrement = double (fadeInSourceBufferLength) / double (outputBufferLength);
+                double fadeOutSourcePosition = 0.0;
+                const double fadeOutSourceIncrement = double (fadeOutSourceBufferLength) / double (outputBufferLength);
+                
+                for (i = 0; i < outputBufferLength; ++i) 
+                {
+                    outputSamples[i] = fadeInSourceSamples[int (fadeInSourcePosition)] * fadeInLevel + 
+                                       fadeOutSourceSamples[int (fadeOutSourcePosition)] * fadeOutLevel;
+
+                    fadeInLevel = plonk::min (fadeInLevel + fadeIncrement, fadeMax);
+                    fadeOutLevel = plonk::max (fadeOutLevel - fadeIncrement, fadeMin);
+
+                    fadeInSourcePosition += fadeInSourceIncrement;
+                    fadeOutSourcePosition += fadeOutSourceIncrement;
+                }        
+            }
+            
+            if (data.allowAutoDelete == false)
+                info.resetShouldDelete();
+        }
+        
+        data.fadeLevel = fadeOutLevel;
+        
+        if (fadeOutLevel <= fadeMin)
+            fadeSource = UnitType::getNull();
     }
     
     void processCopy (ProcessInfo& info)
@@ -214,8 +271,8 @@ private:
             
             if (duration > Math<DurationType>::get0())
             {
-                data.fadeSamplesRemaining = int (duration * data.base.sampleRate + 0.5);
-                data.fadeIncrement = TypeUtility<SampleType>::getTypePeak() / SampleType (data.fadeSamplesRemaining);
+                const int fadeSamplesRemaining = int (duration * data.base.sampleRate + 0.5);
+                data.fadeIncrement = TypeUtility<SampleType>::getTypePeak() / SampleType (fadeSamplesRemaining);
                 data.fadeLevel = TypeUtility<SampleType>::getTypePeak();
             }
         }
@@ -350,12 +407,13 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::AtomicVariable,     Measure::None,      IOInfo::NoDefault,      IOLimit::None, //need to change
-                         // autodelete
-                         // pref numchannels
-                         // fade duration
-                         IOKey::BlockSize,          Measure::Samples,   blockSize,              IOLimit::Minimum, Measure::Samples,             1.0,
-                         IOKey::SampleRate,         Measure::Hertz,     sampleRate,             IOLimit::Minimum, Measure::Hertz,               0.0,
+                         IOKey::UnitVariable,           Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
+                         IOKey::AutoDeleteFlag,         Measure::Bool,      IOInfo::True,       IOLimit::None,
+                         IOKey::PurgeNullUnitsFlag,     Measure::Bool,      IOInfo::True,       IOLimit::None,
+                         IOKey::PreferredNumChannels,   Measure::Count,     0.0,                IOLimit::None,
+                         IOKey::Duration,               Measure::Seconds,   0.1,                IOLimit::Minimum, Measure::Seconds,             0.0,
+                         IOKey::BlockSize,              Measure::Samples,   blockSize,          IOLimit::Minimum, Measure::Samples,             1.0,
+                         IOKey::SampleRate,             Measure::Hertz,     sampleRate,         IOLimit::Minimum, Measure::Hertz,               0.0,
                          IOKey::End);
     }    
     
@@ -363,7 +421,7 @@ public:
     static UnitType ar (UnitVariableType const& initialSource,
                         const bool allowAutoDelete = true,
                         const int preferredNumChannels = 0, 
-                        DurationUnitType const& fadeDuration = DurationType (0.0),
+                        DurationUnitType const& fadeDuration = DurationType (0.1),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
@@ -371,7 +429,7 @@ public:
         inputs.put (IOKey::UnitVariable, initialSource);
         inputs.put (IOKey::Duration, fadeDuration);
         
-        Data data = { { -1.0, -1.0 }, preferredNumChannels, 0, 0, 0, allowAutoDelete };
+        Data data = { { -1.0, -1.0 }, preferredNumChannels, 0, 0, allowAutoDelete };
             
         return UnitType::template proxiesFromInputs<PatchChannelInternalType> (inputs, 
                                                                                data, 

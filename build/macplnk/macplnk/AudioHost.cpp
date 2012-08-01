@@ -300,11 +300,31 @@ Unit AudioHost::constructGraph()
 //    return Sine::ar (1000, 0.1) * AtomicVariableUnit<float>::ar (gate);
 
     
-    return Patch::ar (src, false, 2);
+//    return Patch::ar (src, false, 2, 0.5);
     
-//    const int NUM_SINES = 60;
-//    return Sine::ar (Float1D::exprand(NUM_SINES, 100, 1000)).mix() * (0.25f / NUM_SINES);
+    const int NUM_SINES = 60;
+    return Sine::ar (Float1D::exprand(NUM_SINES, 100, 1000)).mix() * (0.25f / NUM_SINES);
 }
+
+//void AudioHost::setGate (const bool state) throw() 
+//{ 
+//    gate.setValue (state ? 1.f : 0.f); 
+//    
+//    if (state)
+//    {
+//        Unit sine = Sine::ar (Floats::exprand (2, 880, 1760), 0.25);
+//        //Unit gateUnit = AtomicVariableUnit<float>::ar (gate);
+//        Unit gateUnit = AtomicVariableUnit<float>::kr (gate);
+//
+//        //Unit gateUnit = AtomicVariableUnit<float>::ar (gate, 64);
+//        
+//        Unit env = Envelope::ar (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
+//        //Unit env = Envelope::kr (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
+//        //Unit env = Envelope::ar (Breakpoints::asr (1.0, 1.0, 2.0), gateUnit);
+//        Unit newSource = sine * env;
+//        src = newSource;
+//    }
+//}
 
 void AudioHost::setGate (const bool state) throw() 
 { 
@@ -313,19 +333,9 @@ void AudioHost::setGate (const bool state) throw()
     if (state)
     {
         Unit sine = Sine::ar (Floats::exprand (2, 880, 1760), 0.25);
-        //Unit gateUnit = AtomicVariableUnit<float>::ar (gate);
-        Unit gateUnit = AtomicVariableUnit<float>::kr (gate);
-
-        //Unit gateUnit = AtomicVariableUnit<float>::ar (gate, 64);
-        
-        Unit env = Envelope::ar (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
-        //Unit env = Envelope::kr (Breakpoints::adsr (1.0, 1.0, 0.7, 2.0), gateUnit);
-        //Unit env = Envelope::ar (Breakpoints::asr (1.0, 1.0, 2.0), gateUnit);
-        Unit newSource = sine * env;
-        src = newSource;
+        src = sine;
     }
 }
-
 
 
 

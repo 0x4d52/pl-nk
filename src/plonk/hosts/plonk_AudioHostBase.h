@@ -160,9 +160,9 @@ protected:
                                                 blockSize, 
                                                 this->inputs.atUnchecked (i).getArray());
         
-        this->lock.lock();   // perhaps replace with virtual function call?
+        //this->lock.lock();   // perhaps replace with virtual function call?
         this->outputUnit.process (info);
-        this->lock.unlock(); // perhaps replace with virtual function call?
+        //this->lock.unlock(); // perhaps replace with virtual function call?
         
         if (this->outputUnit.isNotNull())
         {
@@ -212,7 +212,7 @@ private:
     BussesType busses;
     BufferArray inputs;
     BufferArray outputs;
-    Lock lock; // <-- can get rid of soon!
+    //Lock lock; // <-- can get rid of soon!
     
 };
 

@@ -132,8 +132,10 @@ public:
         BreakpointsVariable,    ///< A variable Breakpoints object (i.e., an envelope specification)
 
         AutoDeleteFlag, ///< To control the auto deletion
+        PurgeNullUnitsFlag,
         HarmonicCount,
         MaximumDuration,
+        PreferredNumChannels,
 
         NumNames
     };

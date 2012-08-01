@@ -178,16 +178,19 @@ int PortAudioAudioHost::callback (const float **inputData, float **outputData,
     
     BlockSize::getDefault().setValue (frameCount);
     
-    const int numInputs = getInputs().length();
-    const int numOutputs = getOutputs().length();
+    BufferArray& inputs = getInputs();
+    BufferArray& outputs = getOutputs();
+
+    const int numInputs = inputs.length();
+    const int numOutputs = outputs.length();
     
     int i;
     
     for (i = 0; i < numInputs; ++i)
-        getInputs().atUnchecked (i).referTo (frameCount, const_cast<float*> (inputData[i]));
+        inputs.atUnchecked (i).referTo (frameCount, const_cast<float*> (inputData[i]));
 
     for (i = 0; i < numOutputs; ++i)
-        getOutputs().atUnchecked (i).referTo (frameCount, outputData[i]);
+        outputs.atUnchecked (i).referTo (frameCount, outputData[i]);
     
     process();
     

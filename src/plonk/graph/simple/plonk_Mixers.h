@@ -452,15 +452,17 @@ public:
                                     
                                     // output
                                     ChannelCount::VariableChannelCount,     
-                                    IOKey::Generic,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
+                                    IOKey::Generic,                 Measure::None,      IOInfo::NoDefault,  IOLimit::None,      IOKey::End,
 
                                     // inputs
-                                    IOKey::Units,           Measure::None,
-                                    IOKey::AutoDeleteFlag,  Measure::Bool,      IOInfo::True,       IOLimit::None,
-                                    IOKey::Multiply,        Measure::Factor,    1.0,                IOLimit::None,
-                                    IOKey::Add,             Measure::None,      0.0,                IOLimit::None,
-                                    IOKey::BlockSize,       Measure::Samples,   blockSize,          IOLimit::Minimum, Measure::Samples,     1.0,
-                                    IOKey::SampleRate,      Measure::Hertz,     sampleRate,         IOLimit::Minimum, Measure::Hertz,       0.0,
+                                    IOKey::Units,                   Measure::None,
+                                    IOKey::AutoDeleteFlag,          Measure::Bool,      IOInfo::True,       IOLimit::None,
+                                    IOKey::PurgeNullUnitsFlag,      Measure::Bool,      IOInfo::True,       IOLimit::None,
+                                    IOKey::PreferredNumChannels,    Measure::Count,     0.0,                IOLimit::None,
+                                    IOKey::Multiply,                Measure::Factor,    1.0,                IOLimit::None,
+                                    IOKey::Add,                     Measure::None,      0.0,                IOLimit::None,
+                                    IOKey::BlockSize,               Measure::Samples,   blockSize,          IOLimit::Minimum, Measure::Samples,     1.0,
+                                    IOKey::SampleRate,              Measure::Hertz,     sampleRate,         IOLimit::Minimum, Measure::Hertz,       0.0,
                                     IOKey::End));
     }        
     
