@@ -36,6 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
+// unlikely to implement now... other more straightforward solutions used...
+
 //#include "plank_StandardHeader.h"
 //#include "plank_LockFreeMemory.h"
 //

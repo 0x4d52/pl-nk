@@ -92,16 +92,29 @@ void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
     output = pp->buffers[0].buffer;
     valueIncrement = pp->buffers[1].buffer[0] * factor;
     
-    for (i = 0; i < N; ++i) 
+    if (valueIncrement > 0.f)
     {
-        output[i] = currentValue;
-        currentValue += valueIncrement;
-        
-        if (currentValue >= peak)
-            currentValue -= 2.f;
-        else if (currentValue < -peak)
-            currentValue += 2.f;
-    }    
+        for (i = 0; i < N; ++i) 
+        {
+            output[i] = currentValue;
+            currentValue += valueIncrement;
+            
+            if (currentValue >= peak)
+                currentValue -= 2.f;
+        }  
+    }
+    else 
+    {
+        for (i = 0; i < N; ++i) 
+        {
+            output[i] = currentValue;
+            currentValue += valueIncrement;
+            
+            if (currentValue < -peak)
+                currentValue += 2.f;
+        }  
+
+    }
     
     state->currentValue = currentValue;    
 }

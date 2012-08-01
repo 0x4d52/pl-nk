@@ -36,236 +36,238 @@
  -------------------------------------------------------------------------------
  */
 
-#include "../core/plank_StandardHeader.h"
-#include "plank_ThreadLocalStorage.h"
-#include "plank_Atomic.h"
+// difficult to do properly on all versions of windows
 
-/*
- Windows TLS stuff...
- 
- void __cdecl on_process_enter(void);
- void __cdecl on_process_exit(void);
- void __cdecl on_thread_enter(void);
- void __cdecl on_thread_exit(void);
- 
- http://stackoverflow.com/questions/3802244/hooking-thread-creation-termination
- The best way is to call WaitForSingleObject with the HANDLE of the thread (call OpenThread using the thread id to get the HANDLE).
- - how will one know the thread exists in the first place!
-
- */
-
-// private functions
-void pl_ThreadLocalStorageFree (PlankP ptr);
-PlankUL pl_ThreadLocalStorageCreateIdentifier();
-void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier);
-PlankAtomicLRef pl_ThreadLocalStorageGetNumActive();
-PlankResult pl_ThreadLocalStorageIncrementNumActive();
-PlankResult pl_ThreadLocalStorageDecrementNumActive();
-
-void pl_ThreadLocalStorageFree (PlankP ptr)
-{
-    PlankMemoryRef m = pl_MemoryGlobal();
-    pl_Memory_Free (m, ptr);
-}
-
-#if PLANK_APPLE
-PlankUL pl_ThreadLocalStorageCreateIdentifier()
-{
-    pthread_key_t key;
-    pthread_key_create (&key, pl_ThreadLocalStorageFree);
-    return (PlankUL)key;
-}
-
-void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier)
-{
-    pthread_key_delete ((pthread_key_t)identifier);
-}
-#endif
-
-#if PLANK_WIN
-PlankUL pl_ThreadLocalStorageCreateIdentifier()
-{
-    return (PlankUL)TlsAlloc(); // FlsAlloc() (W7 onwards) has a free function but not TlsAlloc!!
-}
-
-void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier)
-{
-    TlsFree ((DWORD)identifier);
-}
-#endif
-
-PlankAtomicLRef pl_ThreadLocalStorageGetNumActive()
-{
-    static PlankAtomicL counter = { 0 };
-    return &counter;
-}
-
-PlankResult pl_ThreadLocalStorageIncrementNumActive()
-{
-    if (pl_AtomicL_Get (pl_ThreadLocalStorageGetNumActive()) >= PLANKTHREADLOCALSTORAGE_MAXIMUMIDENTIFIERS)
-        return PlankResult_ThreadLocalStorageMaximumIdentifiersReached;
-    
-    pl_AtomicL_Increment (pl_ThreadLocalStorageGetNumActive());
-    return PlankResult_OK;
-}
-
-PlankResult pl_ThreadLocalStorageDecrementNumActive()
-{
-    pl_AtomicL_Decrement (pl_ThreadLocalStorageGetNumActive());
-    return PlankResult_OK;
-}
-
-//------------------------------------------------------------------------------
-
-PlankThreadLocalStorageRef pl_ThreadLocalStorage_CreateAndInit()
-{
-    PlankThreadLocalStorageRef p;
-    p = pl_ThreadLocalStorage_Create();
-    
-    if (p != PLANK_NULL)
-    {
-        if (pl_ThreadLocalStorage_Init (p) != PlankResult_OK)
-            pl_ThreadLocalStorage_Destroy (p);
-        else
-            return p;
-    }
-    
-    return PLANK_NULL;
-}
-
-PlankThreadLocalStorageRef pl_ThreadLocalStorage_Create()
-{
-    PlankMemoryRef m;
-    PlankThreadLocalStorageRef p;
-    
-    m = pl_MemoryGlobal(); // OK, creation of the queue isn't itself lock free
-    p = (PlankThreadLocalStorageRef)pl_Memory_AllocateBytes (m, sizeof (PlankThreadLocalStorage));
-    
-    if (p != PLANK_NULL)
-        pl_MemoryZero (p, sizeof (PlankThreadLocalStorage));
-    
-    return p;
-}
-
-PlankResult pl_ThreadLocalStorage_Init (PlankThreadLocalStorageRef p)
-{
-    return pl_ThreadLocalStorage_InitWithNumBytes (p, PLANKTHREADLOCALSTORAGE_DEFAULTNUMBYTES);
-}
-
-PlankResult pl_ThreadLocalStorage_InitWithNumBytes (PlankThreadLocalStorageRef p, const PlankL numBytes)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_ThreadLocalStorageIncrementNumActive()) != PlankResult_OK)
-        goto exit;
-    
-    p->numBytes = numBytes;
-    p->identifier = pl_ThreadLocalStorageCreateIdentifier();
-            
-exit:
-    return result;    
-}
-
-PlankResult pl_ThreadLocalStorage_DeInit (PlankThreadLocalStorageRef p)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-        
-    pl_ThreadLocalStorageDestroyIdentifier (p->identifier);
-    
-    if ((result = pl_ThreadLocalStorageDecrementNumActive()) != PlankResult_OK)
-        goto exit;
-    
-exit:
-    return result;    
-}
-
-PlankResult pl_ThreadLocalStorage_Destroy (PlankThreadLocalStorageRef p)
-{
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    if ((result = pl_ThreadLocalStorage_DeInit (p)) != PlankResult_OK)
-        goto exit;
-    
-    result = pl_Memory_Free (m, p);   
-    
-exit:
-    return result;    
-}
-
-PlankUL pl_ThreadLocalStorage_GetNumBytes (PlankThreadLocalStorageRef p)
-{
-    return p->numBytes;
-}
-
-#if PLANK_APPLE
-PlankP pl_ThreadLocalStorage_GetData (PlankThreadLocalStorageRef p)
-{
-    PlankP returnValue = PLANK_NULL;
-    PlankMemoryRef m = pl_MemoryGlobal();
-
-    returnValue = pthread_getspecific ((pthread_key_t)p->identifier);
-    
-    if (returnValue == PLANK_NULL) 
-    {
-        returnValue = pl_Memory_AllocateBytes (m, p->numBytes);
-        
-        if (returnValue == PLANK_NULL)
-            goto exit;
-        
-        pthread_setspecific ((pthread_key_t)p->identifier, returnValue);
-    }
-    
-exit:
-    return returnValue;
-}
-#endif
-
-#if PLANK_WIN    
-PlankP pl_ThreadLocalStorage_GetData (PlankThreadLocalStorageRef p)
-{
-    PlankP returnValue = PLANK_NULL;
-    PlankMemoryRef m = pl_MemoryGlobal();
-
-    returnValue = (PlankP)TlsGetValue ((DWORD)p->identifier);
-    
-    if (returnValue == PLANK_NULL)
-    {
-        returnValue = pl_Memory_AllocateBytes (m, p->numBytes);
-        
-        if (returnValue == PLANK_NULL)
-            goto exit;
-        
-        if (! TlsSetValue ((DWORD)p->identifier, returnValue))
-        {
-            pl_Memory_Free (m, returnValue);
-            returnValue = PLANK_NULL;
-        }
-    }
-    
-exit:
-    return returnValue;
-}
-
-#endif
+//#include "../core/plank_StandardHeader.h"
+//#include "plank_ThreadLocalStorage.h"
+//#include "plank_Atomic.h"
+//
+///*
+// Windows TLS stuff...
+// 
+// void __cdecl on_process_enter(void);
+// void __cdecl on_process_exit(void);
+// void __cdecl on_thread_enter(void);
+// void __cdecl on_thread_exit(void);
+// 
+// http://stackoverflow.com/questions/3802244/hooking-thread-creation-termination
+// The best way is to call WaitForSingleObject with the HANDLE of the thread (call OpenThread using the thread id to get the HANDLE).
+// - how will one know the thread exists in the first place!
+//
+// */
+//
+//// private functions
+//void pl_ThreadLocalStorageFree (PlankP ptr);
+//PlankUL pl_ThreadLocalStorageCreateIdentifier();
+//void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier);
+//PlankAtomicLRef pl_ThreadLocalStorageGetNumActive();
+//PlankResult pl_ThreadLocalStorageIncrementNumActive();
+//PlankResult pl_ThreadLocalStorageDecrementNumActive();
+//
+//void pl_ThreadLocalStorageFree (PlankP ptr)
+//{
+//    PlankMemoryRef m = pl_MemoryGlobal();
+//    pl_Memory_Free (m, ptr);
+//}
+//
+//#if PLANK_APPLE
+//PlankUL pl_ThreadLocalStorageCreateIdentifier()
+//{
+//    pthread_key_t key;
+//    pthread_key_create (&key, pl_ThreadLocalStorageFree);
+//    return (PlankUL)key;
+//}
+//
+//void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier)
+//{
+//    pthread_key_delete ((pthread_key_t)identifier);
+//}
+//#endif
+//
+//#if PLANK_WIN
+//PlankUL pl_ThreadLocalStorageCreateIdentifier()
+//{
+//    return (PlankUL)TlsAlloc(); // FlsAlloc() (W7 onwards) has a free function but not TlsAlloc!!
+//}
+//
+//void pl_ThreadLocalStorageDestroyIdentifier (PlankUL identifier)
+//{
+//    TlsFree ((DWORD)identifier);
+//}
+//#endif
+//
+//PlankAtomicLRef pl_ThreadLocalStorageGetNumActive()
+//{
+//    static PlankAtomicL counter = { 0 };
+//    return &counter;
+//}
+//
+//PlankResult pl_ThreadLocalStorageIncrementNumActive()
+//{
+//    if (pl_AtomicL_Get (pl_ThreadLocalStorageGetNumActive()) >= PLANKTHREADLOCALSTORAGE_MAXIMUMIDENTIFIERS)
+//        return PlankResult_ThreadLocalStorageMaximumIdentifiersReached;
+//    
+//    pl_AtomicL_Increment (pl_ThreadLocalStorageGetNumActive());
+//    return PlankResult_OK;
+//}
+//
+//PlankResult pl_ThreadLocalStorageDecrementNumActive()
+//{
+//    pl_AtomicL_Decrement (pl_ThreadLocalStorageGetNumActive());
+//    return PlankResult_OK;
+//}
+//
+////------------------------------------------------------------------------------
+//
+//PlankThreadLocalStorageRef pl_ThreadLocalStorage_CreateAndInit()
+//{
+//    PlankThreadLocalStorageRef p;
+//    p = pl_ThreadLocalStorage_Create();
+//    
+//    if (p != PLANK_NULL)
+//    {
+//        if (pl_ThreadLocalStorage_Init (p) != PlankResult_OK)
+//            pl_ThreadLocalStorage_Destroy (p);
+//        else
+//            return p;
+//    }
+//    
+//    return PLANK_NULL;
+//}
+//
+//PlankThreadLocalStorageRef pl_ThreadLocalStorage_Create()
+//{
+//    PlankMemoryRef m;
+//    PlankThreadLocalStorageRef p;
+//    
+//    m = pl_MemoryGlobal(); // OK, creation of the queue isn't itself lock free
+//    p = (PlankThreadLocalStorageRef)pl_Memory_AllocateBytes (m, sizeof (PlankThreadLocalStorage));
+//    
+//    if (p != PLANK_NULL)
+//        pl_MemoryZero (p, sizeof (PlankThreadLocalStorage));
+//    
+//    return p;
+//}
+//
+//PlankResult pl_ThreadLocalStorage_Init (PlankThreadLocalStorageRef p)
+//{
+//    return pl_ThreadLocalStorage_InitWithNumBytes (p, PLANKTHREADLOCALSTORAGE_DEFAULTNUMBYTES);
+//}
+//
+//PlankResult pl_ThreadLocalStorage_InitWithNumBytes (PlankThreadLocalStorageRef p, const PlankL numBytes)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }
+//    
+//    if ((result = pl_ThreadLocalStorageIncrementNumActive()) != PlankResult_OK)
+//        goto exit;
+//    
+//    p->numBytes = numBytes;
+//    p->identifier = pl_ThreadLocalStorageCreateIdentifier();
+//            
+//exit:
+//    return result;    
+//}
+//
+//PlankResult pl_ThreadLocalStorage_DeInit (PlankThreadLocalStorageRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }
+//        
+//    pl_ThreadLocalStorageDestroyIdentifier (p->identifier);
+//    
+//    if ((result = pl_ThreadLocalStorageDecrementNumActive()) != PlankResult_OK)
+//        goto exit;
+//    
+//exit:
+//    return result;    
+//}
+//
+//PlankResult pl_ThreadLocalStorage_Destroy (PlankThreadLocalStorageRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankMemoryRef m = pl_MemoryGlobal();
+//    
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }
+//    
+//    if ((result = pl_ThreadLocalStorage_DeInit (p)) != PlankResult_OK)
+//        goto exit;
+//    
+//    result = pl_Memory_Free (m, p);   
+//    
+//exit:
+//    return result;    
+//}
+//
+//PlankUL pl_ThreadLocalStorage_GetNumBytes (PlankThreadLocalStorageRef p)
+//{
+//    return p->numBytes;
+//}
+//
+//#if PLANK_APPLE
+//PlankP pl_ThreadLocalStorage_GetData (PlankThreadLocalStorageRef p)
+//{
+//    PlankP returnValue = PLANK_NULL;
+//    PlankMemoryRef m = pl_MemoryGlobal();
+//
+//    returnValue = pthread_getspecific ((pthread_key_t)p->identifier);
+//    
+//    if (returnValue == PLANK_NULL) 
+//    {
+//        returnValue = pl_Memory_AllocateBytes (m, p->numBytes);
+//        
+//        if (returnValue == PLANK_NULL)
+//            goto exit;
+//        
+//        pthread_setspecific ((pthread_key_t)p->identifier, returnValue);
+//    }
+//    
+//exit:
+//    return returnValue;
+//}
+//#endif
+//
+//#if PLANK_WIN    
+//PlankP pl_ThreadLocalStorage_GetData (PlankThreadLocalStorageRef p)
+//{
+//    PlankP returnValue = PLANK_NULL;
+//    PlankMemoryRef m = pl_MemoryGlobal();
+//
+//    returnValue = (PlankP)TlsGetValue ((DWORD)p->identifier);
+//    
+//    if (returnValue == PLANK_NULL)
+//    {
+//        returnValue = pl_Memory_AllocateBytes (m, p->numBytes);
+//        
+//        if (returnValue == PLANK_NULL)
+//            goto exit;
+//        
+//        if (! TlsSetValue ((DWORD)p->identifier, returnValue))
+//        {
+//            pl_Memory_Free (m, returnValue);
+//            returnValue = PLANK_NULL;
+//        }
+//    }
+//    
+//exit:
+//    return returnValue;
+//}
+//
+//#endif
 
 
 

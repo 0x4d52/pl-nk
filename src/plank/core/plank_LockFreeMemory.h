@@ -36,6 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
+// unlikely to implement now... other more straightforward solutions used...
+
 //#ifndef PLANK_LOCKFREEMEMORY_H
 //#define PLANK_LOCKFREEMEMORY_H
 //

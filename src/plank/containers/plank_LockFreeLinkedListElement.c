@@ -64,7 +64,7 @@ PlankLockFreeLinkedListElementRef pl_LockFreeLinkedListElement_Create()
     PlankMemoryRef m;
     PlankLockFreeLinkedListElementRef p;
     
-    m = pl_MemoryGlobal(); // must use the lock free one when done...
+    m = pl_MemoryGlobal(); // must use the lock free one when done... nope just live with it and use alogrithms that reuse the memory allocs
     p = (PlankLockFreeLinkedListElementRef)pl_Memory_AllocateBytes (m, sizeof (PlankLockFreeLinkedListElement));
     
     if (p != PLANK_NULL)
