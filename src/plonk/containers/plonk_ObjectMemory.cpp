@@ -42,7 +42,7 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../core/plonk_Headers.h"
 
-#define PLONK_OBJECTMEMORY_DEBUG 1
+#define PLONK_OBJECTMEMORY_DEBUG 0//1
 
 void* ObjectMemory::staticAlloc (PlankUL size)
 {

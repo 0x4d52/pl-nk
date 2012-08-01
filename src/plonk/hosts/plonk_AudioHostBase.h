@@ -61,7 +61,7 @@ public:
         preferredBlockSize (0),
         isRunning (false)
     { 
-        //om.increaseQueueCache (256);
+        om.increaseQueueCache (256);
     }
     
     /** Destructor */

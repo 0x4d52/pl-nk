@@ -49,9 +49,7 @@ public:
     
     static Memory& global() throw()
     {
-//        static Memory memory (pl_MemoryGlobal());
-        static Memory memory;
-
+        static Memory memory (pl_MemoryGlobal());
         return memory;
     }
         
@@ -67,7 +65,7 @@ public:
     
     ~Memory()
     {
-        //setFunctions (malloc, ::free);
+        //setFunctions (malloc, ::free);//??
         
         if (internal != pl_MemoryGlobal())
             pl_Memory_Destroy (internal);
