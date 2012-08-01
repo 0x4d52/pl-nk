@@ -49,7 +49,7 @@ public:
     typedef AudioHostBase<float>::Buffer Buffer;
     typedef AudioHostBase<float>::BufferArray BufferArray;
 
-    PortAudioAudioHost() throw();
+    PortAudioAudioHost (const int memoryQueueCacheSize = 0) throw();
     ~PortAudioAudioHost();
     
     Text getHostName() const throw();

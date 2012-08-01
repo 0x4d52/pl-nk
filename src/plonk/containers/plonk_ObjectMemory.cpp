@@ -42,7 +42,7 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../core/plonk_Headers.h"
 
-#define PLONK_OBJECTMEMORY_DEBUG 0//1
+#define PLONK_OBJECTMEMORY_DEBUG 1
 
 void* ObjectMemory::staticAlloc (PlankUL size)
 {
@@ -64,12 +64,12 @@ static inline void staticDoFree (void* ptr) throw()
 
 ObjectMemory& ObjectMemory::global() throw()
 {
-    static ObjectMemory om (Memory::global());
+    static ObjectMemory* om = new ObjectMemory (Memory::global()); // just leak
     
-    if (!om.isRunning())
-        om.start();
+    if (!om->isRunning())
+        om->start();
     
-    return om;
+    return *om;
 }
 
 ObjectMemory::ObjectMemory (Memory& m) throw()

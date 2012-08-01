@@ -49,8 +49,8 @@ public:
     
     static Memory& global() throw()
     {
-        static Memory memory (pl_MemoryGlobal());
-        return memory;
+        static Memory* memory = new Memory (pl_MemoryGlobal()); // just leak
+        return *memory;
     }
         
     Memory() throw()
