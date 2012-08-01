@@ -57,6 +57,12 @@ public:
     /** Get the calling thread ID. */
     static Threading::ID getCurrentThreadID() throw();
     
+    static Threading::ID getAudioThreadID() throw();
+    
+    static void setAudioThreadID (const Threading::ID theID) throw();
+    
+    static bool currentThreadIsAudioThread() throw();
+    
     /** The Thread class itself.
      You must inherit form this and implement the run() function. Then
      call start().

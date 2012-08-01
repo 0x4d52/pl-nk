@@ -41,6 +41,7 @@
 BEGIN_PLONK_NAMESPACE
 
 #include "plonk_Thread.h"
+#include "../containers/plonk_Atomic.h"
 
 PlankResult Threading::run (PlankThreadRef plankThread) throw()
 {
@@ -69,6 +70,28 @@ ResultCode Threading::yield() throw()
 Threading::ID Threading::getCurrentThreadID() throw()
 {
     return pl_ThreadCurrentID();
+}
+
+static AtomicValue<Threading::ID>& getAudioThreadIDRef() throw()
+{
+    static AtomicValue<Threading::ID> audioThreadID;
+    return audioThreadID;
+}
+
+Threading::ID Threading::getAudioThreadID() throw()
+{
+    return getAudioThreadIDRef().getValueUnchecked();
+}
+
+void Threading::setAudioThreadID (const Threading::ID theID) throw()
+{
+    getAudioThreadIDRef().setValue (theID);
+}
+
+bool Threading::currentThreadIsAudioThread() throw()
+{
+    Threading::ID audioThreadID = getAudioThreadID();
+    return audioThreadID == 0 ? false : audioThreadID == getCurrentThreadID();
 }
 
 Threading::Thread::Thread() throw()

@@ -42,6 +42,8 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../core/plonk_Headers.h"
 
+#define PLONK_OBJECTMEMORY_DEBUG 0
+
 void* ObjectMemory::staticAlloc (PlankUL size)
 {
     return ObjectMemory::global().allocateBytes (size);
@@ -50,6 +52,14 @@ void* ObjectMemory::staticAlloc (PlankUL size)
 void ObjectMemory::staticFree (void* ptr)
 {
     ObjectMemory::global().free (ptr);
+}
+
+static inline void staticDoFree (void* ptr) throw()
+{
+#if PLONK_OBJECTMEMORY_DEBUG
+    plonk_assert (!Threading::currentThreadIsAudioThread());
+#endif
+    ::free (ptr);
 }
 
 ObjectMemory& ObjectMemory::global() throw()
@@ -76,6 +86,9 @@ ObjectMemory::~ObjectMemory()
 
 void* ObjectMemory::allocateBytes (PlankUL size)
 {
+#if PLONK_OBJECTMEMORY_DEBUG
+    plonk_assert (!Threading::currentThreadIsAudioThread());
+#endif
     return malloc (size);
 }
 
@@ -83,7 +96,7 @@ void ObjectMemory::free (void* ptr)
 {
     if (Threading::getCurrentThreadID() == getID())
     {
-        ::free (ptr); // already triggered by a call on the background thread.
+        staticDoFree (ptr); // already triggered by a call on the background thread.
     }
     else if (ptr != 0)
     {
@@ -92,10 +105,6 @@ void ObjectMemory::free (void* ptr)
     }
 }
 
-//void ObjectMemory::free (void* ptr)
-//{
-//    ::free (ptr);
-//}
 
 ResultCode ObjectMemory::run() throw()
 {
@@ -110,7 +119,7 @@ ResultCode ObjectMemory::run() throw()
         if (d.ptr != 0)
         {
             duration = minDuration; // reset back to high speed
-            ::free (d.ptr);
+            staticDoFree (d.ptr);
         }
         else 
         {

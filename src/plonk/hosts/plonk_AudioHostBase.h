@@ -147,6 +147,12 @@ protected:
     /** @internal */
     inline void process() throw()
     {
+#ifdef PLONK_DEBUG
+        Threading::ID currentThreadID = Threading::getCurrentThreadID();
+        if (currentThreadID != Threading::getAudioThreadID())
+            Threading::setAudioThreadID (Threading::getCurrentThreadID());
+#endif
+        
         const int blockSize = BlockSize::getDefault().getValue();
         const int numInputs = this->inputs.length();
         const int numOutputs = this->outputs.length();

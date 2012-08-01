@@ -279,97 +279,6 @@ private:
     }
 };
 
-///** Patch channel.
-// Safe repatching of signals. */
-//template<class SampleType>
-//class PatchChannelInternal 
-//:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(PatchChannelInternal,SampleType)> 
-//{
-//public:
-//    typedef PLONK_CHANNELDATA_NAME(PatchChannelInternal,SampleType)     Data;
-//    typedef ChannelBase<SampleType>                                     ChannelType;
-//    typedef ObjectArray<ChannelType>                                    ChannelArrayType;
-//    typedef PatchChannelInternal<SampleType>                            PatchChannelInternalType;
-//    typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
-//    typedef ChannelInternalBase<SampleType>                             InternalBase;
-//    typedef UnitBase<SampleType>                                        UnitType;
-//    typedef InputDictionary                                             Inputs;
-//    typedef NumericalArray<SampleType>                                  Buffer;
-//    typedef NumericalArray2D<ChannelType,UnitType>                      UnitsType;
-//    typedef Variable<UnitType&>                                         UnitVariableType;
-//    typedef MixerUnit<SampleType>                                       MixerType;
-//    
-//    PatchChannelInternal (Inputs const& inputs, 
-//                          Data const& data, 
-//                          BlockSize const& blockSize,
-//                          SampleRate const& sampleRate,
-//                          ChannelArrayType& channels) throw()
-//    :   Internal (data.preferredNumChannels > 0 ? data.preferredNumChannels : numChannelsInSource (inputs), 
-//                  inputs, data, blockSize, sampleRate, channels),
-//        sources (UnitsType (data.maxOverlaps)),
-//        mixer (MixerType::ar (sources, false, false, data.preferredNumChannels, 
-//                              SampleType (1), SampleType (0), blockSize, sampleRate)),
-//        currentSource (0)
-//    {
-//    }
-//    
-//    Text getName() const throw()
-//    {        
-//        return "Patch";
-//    }        
-//    
-//    IntArray getInputKeys() const throw()
-//    {
-//        const IntArray keys (IOKey::UnitVariable);
-//        return keys;
-//    }    
-//    
-//    InternalBase* getChannel (const int /*index*/) throw()
-//    {
-//        return this;
-//    }        
-//    
-//    void initChannel (const int channel) throw()
-//    {
-//        if ((channel % this->getNumChannels()) == 0)
-//            updateSource();
-//        
-//        this->initProxyValue (channel, 0);//currentSource.getValue (channel));  fix later...
-//    }    
-//    
-//    void process (ProcessInfo& info, const int /*channel*/) throw()
-//    {       
-//        //const Data& data = this->getState();
-//        updateSource();
-//        
-//        mixer.process (info);
-//        
-//        //.. copy data out ..
-//    }
-//    
-//private:
-//    UnitsType sources;
-//    UnitType mixer;
-//    int currentSource;
-//    
-//    static inline int numChannelsInSource (Inputs const& inputs) throw()
-//    {
-//        const UnitVariableType& var = inputs[IOKey::UnitVariable].asUnchecked<UnitVariableType> ();
-//        return var.getValue().getNumChannels();
-//    }
-//    
-//    inline void updateSource() throw()
-//    {
-//        UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
-//        
-//        if (var.isValueNotNull())
-//        {
-////            currentSource = UnitType::getNull();
-////            var.swapValues (currentSource);
-//        }
-//    }
-//};
-
 
 //------------------------------------------------------------------------------
 
@@ -426,6 +335,7 @@ public:
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
         Inputs inputs;
+        inputs.put (IOKey::Unknown, UnitType::getNull()); // ensure getNull() is called off the audio thread for the first time
         inputs.put (IOKey::UnitVariable, initialSource);
         inputs.put (IOKey::Duration, fadeDuration);
         
