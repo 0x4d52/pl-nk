@@ -93,7 +93,7 @@ public:
 			for (int i = 0; i < rows; ++i)
 				this->put (i, RowType (NumericalArraySpec (columns, zeroData)));
 	}
-	
+    	
 	NumericalArray2D (ObjectArray2DType const& other) throw()
 	:	Base (other.size())
 	{

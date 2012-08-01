@@ -276,6 +276,7 @@ template<class SampleType> class UnitMixerChannelInternal;
 PLONK_CHANNELDATA_DECLARE(UnitMixerChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
+    int preferredNumChannels;
     bool allowAutoDelete:1;
     bool purgeNullUnits:1;
 };      
@@ -301,7 +302,7 @@ public:
                               BlockSize const& blockSize,
                               SampleRate const& sampleRate,
                               ChannelArrayType& channels) throw()
-    :   Internal (inputs.getMaxNumChannels(), 
+    :   Internal (data.preferredNumChannels > 0 ? data.preferredNumChannels : inputs.getMaxNumChannels(),
                   inputs, data, blockSize, sampleRate, channels)
     {
     }
@@ -491,6 +492,7 @@ public:
     static UnitType ar (UnitsType const& array, 
                         const bool allowAutoDelete = true,
                         const bool purgeNullUnits = true,
+                        const int preferredNumChannels = 0,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
@@ -503,7 +505,7 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
         
-        Data data = { { -1.0, -1.0 }, allowAutoDelete, purgeNullUnits };
+        Data data = { { -1.0, -1.0 }, preferredNumChannels, allowAutoDelete, purgeNullUnits };
         
         return UnitType::template proxiesFromInputs<UnitMixerInternal> (inputs, 
                                                                         data, 
