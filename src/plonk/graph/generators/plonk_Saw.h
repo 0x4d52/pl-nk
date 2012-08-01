@@ -168,7 +168,7 @@ public:
 
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
 
-        const FrequencyBufferType frequencyBuffer (frequencyUnit.process (info, channel));
+        const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
         const FrequencyType* const frequencySamples = frequencyBuffer.getArray();
         const int frequencyBufferLength = frequencyBuffer.length();
         

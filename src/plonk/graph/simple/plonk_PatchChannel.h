@@ -49,7 +49,9 @@ PLONK_CHANNELDATA_DECLARE(PatchChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     int preferredNumChannels;
-    int maxOverlaps;
+    int fadeSamplesRemaining;
+    SampleType fadeIncrement;
+    SampleType fadeLevel;
     bool allowAutoDelete:1;
 };      
 
@@ -71,6 +73,11 @@ public:
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
     typedef Variable<UnitType&>                                         UnitVariableType;
+    
+    typedef typename TypeUtility<SampleType>::IndexType                 DurationType;
+    typedef UnitBase<DurationType>                                      DurationUnitType;
+    typedef NumericalArray<DurationType>                                DurationBufferType;
+
     
     PatchChannelInternal (Inputs const& inputs, 
                           Data const& data, 
@@ -101,16 +108,41 @@ public:
     void initChannel (const int channel) throw()
     {
         if ((channel % this->getNumChannels()) == 0)
-            updateSource();
+        {
+            UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
+            
+            if (var.isValueNotNull())
+                var.swapValues (currentSource);
+        }
         
         this->initProxyValue (channel, currentSource.getValue (channel)); 
     }    
     
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {       
-        const Data& data = this->getState();
-        updateSource();
-        
+        Data& data = this->getState();
+        updateSources (info);
+                
+        if (data.fadeLevel > Math<SampleType>::get0())
+            processFade (info);
+        else
+            processCopy (info);
+    }
+    
+    void processFade (ProcessInfo& info)
+    {
+//        Data& data = this->getState();
+//        const int numChannels = this->getNumChannels();
+//
+//        const SampleType fadeIncrement = data.fadeIncrement;
+//        SampleType fadeOutLevel = data.fadeLevel;
+//        SampleType fadeInLevel = TypeUtility<SampleType>::getTypePeak() - fadeOutLevel;
+
+    }
+    
+    void processCopy (ProcessInfo& info)
+    {
+        Data& data = this->getState();
         const int numChannels = this->getNumChannels();
 
         for (int channel = 0; channel < numChannels; ++channel)
@@ -118,18 +150,16 @@ public:
             Buffer& outputBuffer = this->getOutputBuffer (channel);
             SampleType* const outputSamples = outputBuffer.getArray();
             const int outputBufferLength = outputBuffer.length();        
-
+            
             const Buffer sourceBuffer (currentSource.process (info, channel));
             const SampleType* const sourceSamples = sourceBuffer.getArray();
             const int sourceBufferLength = sourceBuffer.length();
-
+            
             int i;
             
             if (sourceBufferLength == outputBufferLength)
             {
                 Buffer::copyData (outputSamples, sourceSamples, outputBufferLength);
-//                for (i = 0; i < outputBufferLength; ++i) 
-//                    outputSamples[i] = sourceSamples[i];
             }
             else if (sourceBufferLength == 1)
             {
@@ -157,6 +187,7 @@ public:
 
 private:
     UnitType currentSource;
+    UnitType fadeSource;
     
     static inline int numChannelsInSource (Inputs const& inputs) throw()
     {
@@ -164,14 +195,29 @@ private:
         return var.getValue().getNumChannels();
     }
     
-    inline void updateSource() throw()
+    inline void updateSources (ProcessInfo& info) throw()
     {
         UnitVariableType& var = ChannelInternalCore::getInputAs<UnitVariableType> (IOKey::UnitVariable);
         
         if (var.isValueNotNull())
         {
+            fadeSource = currentSource;
             currentSource = UnitType::getNull();
             var.swapValues (currentSource);
+            
+            Data& data = this->getState();
+
+            DurationUnitType& durationUnit = ChannelInternalCore::getInputAs<DurationUnitType> (IOKey::Duration);
+            plonk_assert (durationUnit.getNumChannels() == 1);
+            const DurationBufferType& durationBuffer (durationUnit.process (info, 0));
+            const DurationType duration = durationBuffer.atUnchecked (0);
+            
+            if (duration > Math<DurationType>::get0())
+            {
+                data.fadeSamplesRemaining = int (duration * data.base.sampleRate + 0.5);
+                data.fadeIncrement = TypeUtility<SampleType>::getTypePeak() / SampleType (data.fadeSamplesRemaining);
+                data.fadeLevel = TypeUtility<SampleType>::getTypePeak();
+            }
         }
     }
 };
@@ -287,6 +333,10 @@ public:
     typedef NumericalArray<SampleType>                              Buffer;
     typedef Variable<UnitType&>                                     UnitVariableType;
 
+    typedef typename PatchChannelInternalType::DurationType         DurationType;
+    typedef typename PatchChannelInternalType::DurationUnitType     DurationUnitType;
+    typedef typename PatchChannelInternalType::DurationBufferType   DurationBufferType;
+
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -300,24 +350,28 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::AtomicVariable,     Measure::None,      IOInfo::NoDefault,      IOLimit::None,
+                         IOKey::AtomicVariable,     Measure::None,      IOInfo::NoDefault,      IOLimit::None, //need to change
+                         // autodelete
+                         // pref numchannels
+                         // fade duration
                          IOKey::BlockSize,          Measure::Samples,   blockSize,              IOLimit::Minimum, Measure::Samples,             1.0,
                          IOKey::SampleRate,         Measure::Hertz,     sampleRate,             IOLimit::Minimum, Measure::Hertz,               0.0,
                          IOKey::End);
     }    
     
     /** Create control rate variable. */
-    static UnitType ar (UnitVariableType const& source,
+    static UnitType ar (UnitVariableType const& initialSource,
                         const bool allowAutoDelete = true,
                         const int preferredNumChannels = 0, 
-                        const int maxOverlaps = 2,
+                        DurationUnitType const& fadeDuration = DurationType (0.0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {        
         Inputs inputs;
-        inputs.put (IOKey::UnitVariable, source);
+        inputs.put (IOKey::UnitVariable, initialSource);
+        inputs.put (IOKey::Duration, fadeDuration);
         
-        Data data = { { -1.0, -1.0 }, preferredNumChannels, maxOverlaps, allowAutoDelete };
+        Data data = { { -1.0, -1.0 }, preferredNumChannels, 0, 0, 0, allowAutoDelete };
             
         return UnitType::template proxiesFromInputs<PatchChannelInternalType> (inputs, 
                                                                                data, 
