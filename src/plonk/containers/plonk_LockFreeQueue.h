@@ -281,7 +281,7 @@ public:
     {
         clear();
     }
-    
+        
     LongLong length() throw()
     {
         return pl_LockFreeQueue_GetSize (&queue);
@@ -367,6 +367,18 @@ public:
     inline void clearAll() throw()
     {
         return this->getInternal()->clearAll();
+    }
+    
+    void increaseCache (const int count) throw()
+    {
+        // dirty hack for now..
+        
+        plonk_assert (count > 0);
+        
+        for (int i = 0; i < count; ++i)
+            push (ValueType());
+        
+        clear(); // moves items to the dead queue
     }
     
     inline LongLong length() throw()

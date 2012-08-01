@@ -49,31 +49,40 @@ public:
     
     static Memory& global() throw()
     {
+//        static Memory memory (pl_MemoryGlobal());
         static Memory memory;
+
         return memory;
     }
-    
-//    static Memory& realTime() throw()
-//    {
-//        static Memory memory;
-//        return memory;
-//    }
-    
+        
     Memory() throw()
+    :   internal (pl_Memory_CreateAndInit())
     {
-        pl_Memory_Init (&internal);
+    }
+    
+    Memory (PlankMemory* const internalToUse) throw()
+    :   internal (internalToUse)
+    {
+    }
+    
+    ~Memory()
+    {
+        //setFunctions (malloc, ::free);
+        
+        if (internal != pl_MemoryGlobal())
+            pl_Memory_Destroy (internal);
     }
     
     inline void* allocateBytes (const UnsignedLong numBytes) throw()
     {
-        void* const ptr = pl_Memory_AllocateBytes (&internal, numBytes);
+        void* const ptr = pl_Memory_AllocateBytes (internal, numBytes);
         plonk_assert (ptr != 0);
         return ptr;
     }
     
     inline void free (void* ptr) throw()
     {
-        const ResultCode result = pl_Memory_Free (&internal, ptr);
+        const ResultCode result = pl_Memory_Free (internal, ptr);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
         (void)result;
@@ -82,7 +91,7 @@ public:
     
     void setFunctions (AllocateBytesFunction allocateFunction, FreeFunction freeFunction) throw()
     {
-        const ResultCode result = pl_Memory_SetFunctions (&internal, allocateFunction, freeFunction);
+        const ResultCode result = pl_Memory_SetFunctions (internal, allocateFunction, freeFunction);
         plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
         (void)result;
@@ -115,7 +124,7 @@ public:
 
     
 private:
-    PlankMemory internal;
+    PlankMemory* const internal;
     
     Memory (Memory const&);
     Memory& operator= (Memory const&);

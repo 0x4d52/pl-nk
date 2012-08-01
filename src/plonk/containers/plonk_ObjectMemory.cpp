@@ -42,7 +42,7 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../core/plonk_Headers.h"
 
-#define PLONK_OBJECTMEMORY_DEBUG 0
+#define PLONK_OBJECTMEMORY_DEBUG 1
 
 void* ObjectMemory::staticAlloc (PlankUL size)
 {
@@ -75,7 +75,7 @@ ObjectMemory& ObjectMemory::global() throw()
 ObjectMemory::ObjectMemory (Memory& m) throw()
 :   memory (m)
 {
-    memory.setFunctions (staticAlloc, staticFree);
+    memory.setFunctions (staticAlloc, staticFree);    
 }
 
 ObjectMemory::~ObjectMemory()
@@ -105,6 +105,10 @@ void ObjectMemory::free (void* ptr)
     }
 }
 
+void ObjectMemory::increaseQueueCache (const int count) throw()
+{
+    queue.increaseCache (count);
+}
 
 ResultCode ObjectMemory::run() throw()
 {

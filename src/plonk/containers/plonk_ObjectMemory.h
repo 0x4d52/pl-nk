@@ -63,6 +63,7 @@ public:
     void* allocateBytes (PlankUL size);
     void free (void* ptr);
 
+    void increaseQueueCache (const int count) throw();
     
 private:
     LockFreeQueue<Deletee> queue;
