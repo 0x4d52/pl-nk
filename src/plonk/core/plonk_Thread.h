@@ -93,7 +93,7 @@ public:
      @endcode
      @ingroup PlonkOtherUserClasses 
      */
-    class Thread
+    class Thread // do not inherit from PlonkBase - threads need to managed carefully
     {
     public:
         Thread() throw();
@@ -119,7 +119,7 @@ public:
         
         /** Signals that the thread should exit then waits for it to exit.
          This is thread-safe but blocks the calling thread until the other
-         thread as exited. 
+         thread has exited. 
          @param interval The time interval between checks for the thread to exit. */
         ResultCode setShouldExitAndWait (const double interval = 0.001) throw();
         

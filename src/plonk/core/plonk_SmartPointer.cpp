@@ -58,6 +58,20 @@ BEGIN_PLONK_NAMESPACE
 AtomicLong totalSmartPointers;
 #endif
 
+void* PlonkBase::operator new (size_t size)
+{
+    void *ptr = Memory::global().allocateBytes (size);
+    
+    if (ptr == 0)
+        throw std::bad_alloc();
+    
+    return ptr;    
+}
+
+void PlonkBase::operator delete (void* ptr)
+{
+    Memory::global().free (ptr); 
+}
 
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
 :	refCount (0),
@@ -100,22 +114,22 @@ SmartPointer::~SmartPointer()
     }
 }
 
-void* SmartPointer::operator new (size_t size)
-{
-//    void *ptr = Memory::realTime().allocateBytes (size);
-    void *ptr = Memory::global().allocateBytes (size);
-    
-    if (ptr == 0)
-        throw std::bad_alloc();
-    
-    return ptr;    
-}
-
-void SmartPointer::operator delete (void* ptr)
-{
-//    Memory::realTime().free (ptr); 
-    Memory::global().free (ptr); 
-}
+//void* SmartPointer::operator new (size_t size)
+//{
+////    void *ptr = Memory::realTime().allocateBytes (size);
+//    void *ptr = Memory::global().allocateBytes (size);
+//    
+//    if (ptr == 0)
+//        throw std::bad_alloc();
+//    
+//    return ptr;    
+//}
+//
+//void SmartPointer::operator delete (void* ptr)
+//{
+////    Memory::realTime().free (ptr); 
+//    Memory::global().free (ptr); 
+//}
 
 void SmartPointer::incrementRefCount()  throw()
 {	

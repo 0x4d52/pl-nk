@@ -59,7 +59,7 @@
  SmartPointerContainer) representation. 
  @see SenderContainer */
 template<class SmartPointerType>
-class SmartPointerContainerBase
+class SmartPointerContainerBase : public PlonkBase
 {
 public: 
     typedef AtomicValue<SmartPointerType*> AtomicPointer;

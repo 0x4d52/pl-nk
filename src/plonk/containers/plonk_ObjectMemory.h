@@ -43,8 +43,9 @@ class ObjectMemory : public Threading::Thread
 {
 public:   
     
-    struct Deletee
+    class Deletee : public PlonkBase
     {
+    public:
         Deletee() : ptr (0) { }
         Deletee (void* p) : ptr (p) { }
         

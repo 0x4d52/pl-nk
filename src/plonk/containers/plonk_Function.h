@@ -49,7 +49,7 @@
 
 //------------------------------------------------------------------------------
 
-class FunctionContainerBase
+class FunctionContainerBase : public PlonkBase
 {
 public:
     FunctionContainerBase() throw()  { }

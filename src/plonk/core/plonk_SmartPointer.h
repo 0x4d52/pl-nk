@@ -41,6 +41,13 @@
 
 #include "../containers/plonk_Atomic.h"
 
+class PlonkBase
+{
+public:
+    static void* operator new (size_t size); 
+    static void operator delete (void* ptr);
+};
+
 /** Reference counted pointer base class.
  One of the most important classes. In fact on the internal side of things this 
  perhaps is the most important class. It handles reference counting of all 
@@ -51,7 +58,7 @@
  count but will get set to 0 when its SmartPointer peer is deleted.
  @see WeakPointer, SmartPointerContainer
  */
-class SmartPointer
+class SmartPointer : public PlonkBase
 {
 public:
 	
@@ -61,8 +68,8 @@ public:
 	SmartPointer (const bool allocateWeakPointer = true) throw();
     virtual ~SmartPointer();
     
-    static void* operator new (size_t size); 
-    static void operator delete (void* ptr);
+//    static void* operator new (size_t size); 
+//    static void operator delete (void* ptr);
     
 	void incrementRefCount() throw();
     bool decrementRefCount() throw(); 

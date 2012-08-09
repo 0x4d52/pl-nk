@@ -40,7 +40,7 @@
 #define PLONK_ATOMIC_H
 
 /** Type-independent atomic operations. */
-class AtomicOps
+class AtomicOps //: public PlonkBase // need to reorganise headers etc
 {
 public:
     inline static void memoryBarrier() throw()
