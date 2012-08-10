@@ -134,7 +134,7 @@ class AtomicExtended : public AtomicBase<Type>
             return pl_Atomic##FUNCCODE##_CompareAndSwap (getAtomicRef(), oldValue, newValue);\
         }\
         \
-        inline bool compareAndSwap (Plank##NUMCODE newValue) throw() {\
+        inline bool compareAndSwap (const Plank##NUMCODE newValue) throw() {\
             return pl_Atomic##FUNCCODE##_CompareAndSwap (getAtomicRef(), this->getValueUnchecked(), newValue);\
         }\
         \
@@ -166,6 +166,26 @@ class AtomicExtended : public AtomicBase<Type>
         template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= other; }\
         template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  other; }\
         template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= other; }\
+        \
+        inline const void setIfLarger (const Plank##NUMCODE newValue) throw()\
+        {\
+            Plank##TYPECODE oldValue;\
+            bool success;\
+            do {\
+                oldValue = getValueUnchecked();\
+                success = compareAndSwap (oldValue, newValue > oldValue ? newValue : oldValue);\
+            } while (!success);\
+        }\
+        \
+        inline const void setIfSmaller (const Plank##NUMCODE newValue) throw()\
+        {\
+            Plank##TYPECODE oldValue;\
+            bool success;\
+            do {\
+                oldValue = getValueUnchecked();\
+                success = compareAndSwap (oldValue, newValue < oldValue ? newValue : oldValue);\
+            } while (!success);\
+        }\
         \
     private:\
         inline AtomTypeRef getAtomicRef() { return static_cast<AtomTypeRef> (&atomic); }\

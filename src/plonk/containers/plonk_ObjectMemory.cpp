@@ -84,24 +84,38 @@ ObjectMemory::~ObjectMemory()
     setShouldExitAndWait();
 }
 
-void* ObjectMemory::allocateBytes (PlankUL size)
+void* ObjectMemory::allocateBytes (PlankUL requestedSize)
 {
 #if PLONK_OBJECTMEMORY_DEBUG
     plonk_assert (!Threading::currentThreadIsAudioThread());
 #endif
-    return malloc (size);
+    
+    const PlankUL align = PLONK_WORDSIZE * 2;
+    const PlankUL size = Bits<PlankUL>::nextPowerOf2 (requestedSize + align);
+    
+    PlankUC* const raw = static_cast<PlankUC*> (malloc (size));
+    *reinterpret_cast<PlankUL*> (raw) = size;
+    
+    return raw + align;
 }
 
 void ObjectMemory::free (void* ptr)
 {
-    if (Threading::getCurrentThreadID() == getID())
+    if (ptr != 0)
     {
-        staticDoFree (ptr); // already triggered by a call on the background thread.
-    }
-    else if (ptr != 0)
-    {
-        Deletee d (ptr);
-        queue.push (d);
+        const PlankUL align = PLONK_WORDSIZE * 2;
+        PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
+        const PlankUL size = *reinterpret_cast<PlankUL*> (raw);
+        
+        if (Threading::getCurrentThreadID() == getID())
+        {
+            staticDoFree (raw); // already triggered by a call on the background thread.
+        }
+        else if (ptr != 0)
+        {
+            Deletee d (raw, size);
+            queue.push (d);
+        }
     }
 }
 

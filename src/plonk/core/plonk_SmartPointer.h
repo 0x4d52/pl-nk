@@ -44,8 +44,11 @@
 class PlonkBase
 {
 public:
+    PlonkBase() throw() { }
+    virtual ~PlonkBase() { }
     static void* operator new (size_t size); 
     static void operator delete (void* ptr);
+    Long size;
 };
 
 /** Reference counted pointer base class.
@@ -66,7 +69,7 @@ public:
 	/// @{
 	
 	SmartPointer (const bool allocateWeakPointer = true) throw();
-    virtual ~SmartPointer();
+    /*virtual*/ ~SmartPointer();
     
 //    static void* operator new (size_t size); 
 //    static void operator delete (void* ptr);

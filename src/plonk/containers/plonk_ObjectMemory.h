@@ -47,9 +47,11 @@ public:
     {
     public:
         Deletee() : ptr (0) { }
-        Deletee (void* p) : ptr (p) { }
-        
+        Deletee (void* p) : ptr (p), size (0) { }
+        Deletee (void* p, PlankUL sz) : ptr (p), size (sz) { }
+
         void* ptr;
+        PlankUL size; // just to test
     };
     
     static ObjectMemory& global() throw();

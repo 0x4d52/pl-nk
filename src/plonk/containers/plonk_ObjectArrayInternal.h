@@ -132,7 +132,6 @@ ObjectArrayInternalBase<ObjectType,BaseType>
 {
     if (ownsTheData) 
         ArrayAllocator<ObjectType>::free (array);
-        //delete [] array;
 }
 
 
