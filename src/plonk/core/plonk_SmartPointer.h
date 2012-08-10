@@ -45,7 +45,7 @@ class PlonkBase
 {
 public:
     PlonkBase() throw() { }
-    virtual ~PlonkBase() { }
+    /*virtual*/ ~PlonkBase() { } // doesn't need to be virtual as we never need to call delete on a PlonkBase pointer
     static void* operator new (size_t size); 
     static void operator delete (void* ptr);
     Long size;
@@ -69,11 +69,8 @@ public:
 	/// @{
 	
 	SmartPointer (const bool allocateWeakPointer = true) throw();
-    /*virtual*/ ~SmartPointer();
-    
-//    static void* operator new (size_t size); 
-//    static void operator delete (void* ptr);
-    
+    virtual ~SmartPointer(); // MUST be virtual unless PlonkBase gains the need to be virtual
+        
 	void incrementRefCount() throw();
     bool decrementRefCount() throw(); 
     	

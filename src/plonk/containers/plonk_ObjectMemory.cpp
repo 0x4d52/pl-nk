@@ -44,6 +44,11 @@ BEGIN_PLONK_NAMESPACE
 
 #define PLONK_OBJECTMEMORY_DEBUG 1
 
+#if PLONK_OBJECTMEMORY_DEBUG
+AtomicLong largestSize;
+AtomicInt blockCounts[64];
+#endif
+
 void* ObjectMemory::staticAlloc (PlankUL size)
 {
     return ObjectMemory::global().allocateBytes (size);
@@ -93,6 +98,14 @@ void* ObjectMemory::allocateBytes (PlankUL requestedSize)
     const PlankUL align = PLONK_WORDSIZE * 2;
     const PlankUL size = Bits<PlankUL>::nextPowerOf2 (requestedSize + align);
     
+#if PLONK_OBJECTMEMORY_DEBUG
+    const PlankUL sizeLog2 = Bits<PlankUL>::countTrailingZeroes (size);
+    plonk_assert (sizeLog2 > 0 && sizeLog2 < 64);
+    blockCounts[sizeLog2]++;
+    
+    largestSize.setIfLarger (size);
+#endif
+    
     PlankUC* const raw = static_cast<PlankUC*> (malloc (size));
     *reinterpret_cast<PlankUL*> (raw) = size;
     
@@ -106,6 +119,12 @@ void ObjectMemory::free (void* ptr)
         const PlankUL align = PLONK_WORDSIZE * 2;
         PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
         const PlankUL size = *reinterpret_cast<PlankUL*> (raw);
+        
+#if PLONK_OBJECTMEMORY_DEBUG
+        const PlankUL sizeLog2 = Bits<PlankUL>::countTrailingZeroes (size);
+        plonk_assert (sizeLog2 > 0 && sizeLog2 < 64);
+        blockCounts[sizeLog2]--; 
+#endif
         
         if (Threading::getCurrentThreadID() == getID())
         {

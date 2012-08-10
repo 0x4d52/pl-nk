@@ -116,23 +116,6 @@ SmartPointer::~SmartPointer()
     }
 }
 
-//void* SmartPointer::operator new (size_t size)
-//{
-////    void *ptr = Memory::realTime().allocateBytes (size);
-//    void *ptr = Memory::global().allocateBytes (size);
-//    
-//    if (ptr == 0)
-//        throw std::bad_alloc();
-//    
-//    return ptr;    
-//}
-//
-//void SmartPointer::operator delete (void* ptr)
-//{
-////    Memory::realTime().free (ptr); 
-//    Memory::global().free (ptr); 
-//}
-
 void SmartPointer::incrementRefCount()  throw()
 {	
     ++refCount;
