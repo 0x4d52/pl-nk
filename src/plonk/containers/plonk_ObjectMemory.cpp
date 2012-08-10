@@ -132,7 +132,7 @@ void ObjectMemory::free (void* ptr)
         }
         else if (ptr != 0)
         {
-            Deletee d (raw, size);
+            Deletee d (raw);
             queue.push (d);
         }
     }
