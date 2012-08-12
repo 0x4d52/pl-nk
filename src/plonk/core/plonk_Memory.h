@@ -107,6 +107,11 @@ public:
         userData = *static_cast<Type*> (pl_Memory_GetUserData (internal));
     }
     
+    void resetUserData() throw()
+    {
+        setUserData (internal);
+    }
+
     void setFunctions (AllocateBytesFunction allocateFunction, FreeFunction freeFunction) throw()
     {
         const ResultCode result = pl_Memory_SetFunctions (internal, allocateFunction, freeFunction);
@@ -120,6 +125,7 @@ public:
     {
         setFunctions (0, 0);
     }
+    
     
     static inline void zero (void* const ptr, const UnsignedLong numBytes) throw()
     {

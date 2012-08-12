@@ -51,22 +51,24 @@ static AtomicInt blockCounts[64];
 
 void* ObjectMemoryPools::staticAlloc (void* userData, PlankUL size)
 {
-    return ObjectMemoryPools::global().allocateBytes (size);
+    ObjectMemoryPools& om = *static_cast<ObjectMemoryPools*> (userData);
+    return om.allocateBytes (size);
 }
 
 void ObjectMemoryPools::staticFree (void* userData, void* ptr)
 {
-    ObjectMemoryPools::global().free (ptr);
+    ObjectMemoryPools& om = *static_cast<ObjectMemoryPools*> (userData);
+    om.free (ptr);
 }
 
-static inline void staticDoFree (void* ptr) throw()
+static inline void staticDoFree (void* userData, void* ptr) throw()
 {
 #if PLONK_OBJECTMEMORYPOOLS_DEBUG
     plonk_assert (!Threading::currentThreadIsAudioThread());
 #endif
     const PlankUL align = PLONK_WORDSIZE * 2;
     PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
-    ::free (raw);
+    pl_Memory_DefaultFree (userData, raw);
 }
 
 ObjectMemoryPools& ObjectMemoryPools::global() throw()
@@ -82,8 +84,10 @@ ObjectMemoryPools& ObjectMemoryPools::global() throw()
 ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
 :   memory (m)
 {
+    memory.resetUserData();
     memory.resetFunctions();
     queues = new LockFreeQueue<Element>[NumQueues];
+    memory.setUserData (this);
     memory.setFunctions (staticAlloc, staticFree); 
 }
 
@@ -91,6 +95,7 @@ ObjectMemoryPools::~ObjectMemoryPools()
 {
     setShouldExitAndWait(); // the thread clears the queues
     //something could happen here on another thread but we should be shut down by now..?
+    memory.resetUserData();
     memory.resetFunctions();
     delete [] queues;
 }
@@ -122,7 +127,7 @@ void* ObjectMemoryPools::allocateBytes (PlankUL requestedSize)
         largestSize.setIfLarger (size);
 #endif
     
-        raw = static_cast<PlankUC*> (malloc (size));
+        raw = static_cast<PlankUC*> (pl_Memory_DefaultAllocateBytes (this, size));
         *reinterpret_cast<PlankUL*> (raw) = size;
         rtn = raw + align;
     }
@@ -168,7 +173,7 @@ ResultCode ObjectMemoryPools::run() throw()
         do 
         {
             e = queues[i].pop();
-            staticDoFree (e.ptr);
+            staticDoFree (this, e.ptr);
         } while (e.ptr != 0);
     }
     
