@@ -56,8 +56,8 @@ public:
 private:
 //    MyThread* thread1;
 //    MyThread* thread2;
-//    UnitVariable src;
-//    AtomicFloatVariable gate;
+    UnitVariable src;
+    AtomicFloatVariable gate;
 };
 
 #endif // AUDIOHOST_H

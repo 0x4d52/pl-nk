@@ -47,12 +47,6 @@ public:
     typedef PlankMemoryAllocateBytesFunction AllocateBytesFunction;
     typedef PlankMemoryFreeFunction FreeFunction;
     
-//    static Memory& global() throw()
-//    {
-//        static Memory* memory = new Memory (pl_MemoryGlobal()); // just leak
-//        return *memory;
-//    }
-
     static Memory& global() throw()
     {
         static Memory memory (pl_MemoryGlobal());

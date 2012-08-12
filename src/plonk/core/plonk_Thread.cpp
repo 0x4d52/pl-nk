@@ -72,10 +72,16 @@ Threading::ID Threading::getCurrentThreadID() throw()
     return pl_ThreadCurrentID();
 }
 
+//static AtomicValue<Threading::ID>& getAudioThreadIDRef() throw()
+//{
+//    static AtomicValue<Threading::ID>* audioThreadID = new AtomicValue<Threading::ID>; // just leak this one...
+//    return *audioThreadID;
+//}
+
 static AtomicValue<Threading::ID>& getAudioThreadIDRef() throw()
 {
-    static AtomicValue<Threading::ID>* audioThreadID = new AtomicValue<Threading::ID>; // just leak this one...
-    return *audioThreadID;
+    static AtomicValue<Threading::ID> audioThreadID;
+    return audioThreadID;
 }
 
 Threading::ID Threading::getAudioThreadID() throw()
