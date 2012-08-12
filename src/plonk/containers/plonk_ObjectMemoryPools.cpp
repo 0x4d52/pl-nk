@@ -46,7 +46,9 @@ BEGIN_PLONK_NAMESPACE
 
 #if PLONK_OBJECTMEMORYPOOLS_DEBUG
 static AtomicLong largestSize;
-static AtomicInt blockCounts[64];
+static AtomicInt blockAllocationCounts[ObjectMemoryPools::NumQueues];
+static AtomicInt blockDeallocationCounts[ObjectMemoryPools::NumQueues];
+
 #endif
 
 void* ObjectMemoryPools::staticAlloc (void* userData, PlankUL size)
@@ -61,31 +63,35 @@ void ObjectMemoryPools::staticFree (void* userData, void* ptr)
     om.free (ptr);
 }
 
+static inline void* staticDoAlloc (void* userData, PlankUL requestedSize) throw()
+{    
+    const PlankUL align = PLONK_WORDSIZE * 2;
+    const PlankUL size = Bits<PlankUL>::nextPowerOf2 (requestedSize + align);
+    PlankUC* raw = static_cast<PlankUC*> (pl_Memory_DefaultAllocateBytes (userData, size));
+    *reinterpret_cast<PlankUL*> (raw) = size;
+    
+    return raw + align;
+}
+
 static inline void staticDoFree (void* userData, void* ptr) throw()
 {
 #if PLONK_OBJECTMEMORYPOOLS_DEBUG
     plonk_assert (!Threading::currentThreadIsAudioThread());
 #endif
-    const PlankUL align = PLONK_WORDSIZE * 2;
-    PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
-    pl_Memory_DefaultFree (userData, raw);
-}
-
-ObjectMemoryPools& ObjectMemoryPools::global() throw()
-{
-    static ObjectMemoryPools om (Memory::global());
     
-    if (!om.isRunning())
-        om.start();
-        
-    return om;
+    if (ptr != 0)
+    {
+        const PlankUL align = PLONK_WORDSIZE * 2;
+        PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
+        pl_Memory_DefaultFree (userData, raw);
+    }
 }
 
 ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
 :   memory (m)
 {
     memory.resetUserData();
-    memory.resetFunctions();
+    memory.setFunctions (staticDoAlloc, staticDoFree); 
     queues = new LockFreeQueue<Element>[NumQueues];
     memory.setUserData (this);
     memory.setFunctions (staticAlloc, staticFree); 
@@ -94,9 +100,9 @@ ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
 ObjectMemoryPools::~ObjectMemoryPools()
 {
     setShouldExitAndWait(); // the thread clears the queues
-    //something could happen here on another thread but we should be shut down by now..?
+    //<-- something could happen here on another thread but we should be shut down by now..?
     memory.resetUserData();
-    memory.resetFunctions();
+    memory.setFunctions (staticDoAlloc, staticDoFree); 
     delete [] queues;
 }
 
@@ -121,15 +127,7 @@ void* ObjectMemoryPools::allocateBytes (PlankUL requestedSize)
     }
     else
     {
-#if PLONK_OBJECTMEMORYPOOLS_DEBUG
-        //plonk_assert (!Threading::currentThreadIsAudioThread());
-        blockCounts[sizeLog2]++;
-        largestSize.setIfLarger (size);
-#endif
-    
-        raw = static_cast<PlankUC*> (pl_Memory_DefaultAllocateBytes (this, size));
-        *reinterpret_cast<PlankUL*> (raw) = size;
-        rtn = raw + align;
+        rtn = staticDoAlloc (this, size);
     }
 
     return rtn;
@@ -161,21 +159,16 @@ ResultCode ObjectMemoryPools::run() throw()
     {
         for (i = 0; i < NumQueues; ++i)
         {
+            plonk_assert (memory.getUserData() == this);
             // could delete some here gradually
             Threading::sleep (duration);
         }
     }
     
+    memory.setFunctions (staticDoAlloc, staticDoFree); 
+    
     for (i = 0; i < NumQueues; ++i)
-    {
-        Element e;
-        
-        do 
-        {
-            e = queues[i].pop();
-            staticDoFree (this, e.ptr);
-        } while (e.ptr != 0);
-    }
+        queues[i].clearAll();
     
     return 0;
 }

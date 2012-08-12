@@ -55,14 +55,14 @@ public:
     typedef Dictionary<Dynamic>                 OptionDictionary;
     
     /** Constructor */
-    AudioHostBase (const int memoryQueueCacheSize = 0) throw()
-    :   //om (ObjectMemory::global()),
+    AudioHostBase (const int memoryQueueCacheSize = 0, 
+                   Memory& memory = Memory::global()) throw()
+    :   om (memory),
         preferredSampleRate (0.0),
         preferredBlockSize (0),
         isRunning (false)
     { 
-//        if (memoryQueueCacheSize > 0)
-//            om.increaseQueueCache (memoryQueueCacheSize);
+        om.start();
     }
     
     /** Destructor */
@@ -208,7 +208,7 @@ protected:
 
     
 private:
-//    ObjectMemory& om;
+    ObjectMemoryPools om;
 
     double preferredSampleRate;
     int preferredBlockSize;

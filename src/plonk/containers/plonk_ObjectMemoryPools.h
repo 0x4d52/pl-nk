@@ -57,8 +57,9 @@ public:
         void* ptr;
     };
     
-    static ObjectMemoryPools& global() throw();
+//    static ObjectMemoryPools& global() throw();
         
+    ObjectMemoryPools (Memory& memory) throw();
     ~ObjectMemoryPools();
     
     ResultCode run() throw();
@@ -73,7 +74,7 @@ private:
     LockFreeQueue<Element>* queues;
     Memory& memory;
     
-    ObjectMemoryPools (Memory& memory) throw();    
+    ObjectMemoryPools();
 };
 
 #endif // PLONK_OBJECTMEMORYPOOLS_H

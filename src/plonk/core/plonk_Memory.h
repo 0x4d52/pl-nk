@@ -107,6 +107,11 @@ public:
         userData = *static_cast<Type*> (pl_Memory_GetUserData (internal));
     }
     
+    inline void* getUserData() throw()
+    {
+        return pl_Memory_GetUserData (internal);
+    }
+    
     void resetUserData() throw()
     {
         setUserData (internal);
@@ -151,6 +156,8 @@ public:
 #endif
     }
 
+    static FreeFunction defaultFree;
+    static AllocateBytesFunction defaultAllocateBytes;
     
 private:
     PlankMemory* const internal;
@@ -158,6 +165,9 @@ private:
     Memory (Memory const&);
     Memory& operator= (Memory const&);
 };
+
+//Memory::FreeFunction Memory::defaultFree = pl_Memory_DefaultFree;
+//Memory::AllocateBytesFunction Memory::defaultAllocateBytes = pl_Memory_DefaultAllocateBytes;
 
 template<class Type>
 class ArrayAllocator
