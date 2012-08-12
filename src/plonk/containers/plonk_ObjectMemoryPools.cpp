@@ -49,12 +49,12 @@ static AtomicLong largestSize;
 static AtomicInt blockCounts[64];
 #endif
 
-void* ObjectMemoryPools::staticAlloc (PlankUL size)
+void* ObjectMemoryPools::staticAlloc (void* userData, PlankUL size)
 {
     return ObjectMemoryPools::global().allocateBytes (size);
 }
 
-void ObjectMemoryPools::staticFree (void* ptr)
+void ObjectMemoryPools::staticFree (void* userData, void* ptr)
 {
     ObjectMemoryPools::global().free (ptr);
 }
@@ -71,26 +71,28 @@ static inline void staticDoFree (void* ptr) throw()
 
 ObjectMemoryPools& ObjectMemoryPools::global() throw()
 {
-    static ObjectMemoryPools* om = new ObjectMemoryPools (Memory::global()); // just leak
+    static ObjectMemoryPools om (Memory::global());
     
-    if (!om->isRunning()) // how best to avoid this without calling ->start from the constructor?
-        om->start();
-    
-    return *om;
+    if (!om.isRunning())
+        om.start();
+        
+    return om;
 }
 
 ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
 :   memory (m)
 {
-    memory.setFunctions (staticAlloc, staticFree);    
+    memory.resetFunctions();
+    queues = new LockFreeQueue<Element>[NumQueues];
+    memory.setFunctions (staticAlloc, staticFree); 
 }
 
 ObjectMemoryPools::~ObjectMemoryPools()
 {
-    //memory.setFunctions (staticAlloc, staticDoFree);
-    setShouldExitAndWait();
-    //aarggh.. something could happen here on another thread!?
-    memory.setFunctions (malloc, ::free);
+    setShouldExitAndWait(); // the thread clears the queues
+    //something could happen here on another thread but we should be shut down by now..?
+    memory.resetFunctions();
+    delete [] queues;
 }
 
 void* ObjectMemoryPools::allocateBytes (PlankUL requestedSize)

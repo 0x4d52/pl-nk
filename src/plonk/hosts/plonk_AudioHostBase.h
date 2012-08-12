@@ -56,7 +56,7 @@ public:
     
     /** Constructor */
     AudioHostBase (const int memoryQueueCacheSize = 0) throw()
-    :   om (ObjectMemory::global()),
+    :   //om (ObjectMemory::global()),
         preferredSampleRate (0.0),
         preferredBlockSize (0),
         isRunning (false)
@@ -208,7 +208,7 @@ protected:
 
     
 private:
-    ObjectMemory& om;
+//    ObjectMemory& om;
 
     double preferredSampleRate;
     int preferredBlockSize;

@@ -44,8 +44,11 @@ PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankMemory* PlankMemoryRef; 
 
-typedef void* (*PlankMemoryAllocateBytesFunction)(PlankUL);
-typedef void (*PlankMemoryFreeFunction)(void*);
+typedef void* (*PlankMemoryAllocateBytesFunction)(PlankP, PlankUL);
+typedef void (*PlankMemoryFreeFunction)(PlankP, void*);
+
+static void* pl_Memory_DefaultAllocateBytes (PlankP p, PlankUL size);
+static void pl_Memory_DefaultFree (PlankP p, void* ptr);
 
 static PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes);
 static PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const PlankUL numBytes);

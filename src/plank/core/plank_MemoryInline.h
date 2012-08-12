@@ -59,6 +59,17 @@ typedef struct PlankMemory
 } PlankMemory; 
 #endif
 
+static inline void* pl_Memory_DefaultAllocateBytes (PlankP p, PlankUL size)
+{
+    (void)p;
+    return malloc (size);
+}
+
+static inline void pl_Memory_DefaultFree (PlankP p, void* ptr)
+{
+    (void)p;
+    free (ptr);
+}
 
 static inline PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
 {
@@ -84,7 +95,7 @@ static inline PlankP pl_Memory_AllocateBytes (PlankMemoryRef p, PlankUL numBytes
     PlankP ptr;
     
     allocFunction = (PlankMemoryAllocateBytesFunction)p->funcs.ptr;
-    ptr = (*allocFunction) (numBytes);
+    ptr = (*allocFunction) (p->userData, numBytes);
 
 #if defined(PLANK_DEBUG) && PLANK_MEMORY_DEBUG
     printf ("pl_Memory_AllocateBytes(%p, %ld) = %p\n", p, numBytes, ptr);
@@ -101,7 +112,7 @@ static inline PlankResult pl_Memory_Free (PlankMemoryRef p, PlankP ptr)
     printf ("pl_Memory_Free(%p) = %p\n", p, ptr);
 #endif    
     
-    (*freeFunction) (ptr);
+    (*freeFunction) (p->userData, ptr);
 
     return PlankResult_OK;
 }

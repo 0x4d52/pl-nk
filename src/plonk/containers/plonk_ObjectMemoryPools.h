@@ -63,17 +63,17 @@ public:
     
     ResultCode run() throw();
     
-    static void* staticAlloc (PlankUL size);
-    static void staticFree (void* ptr);
+    static void* staticAlloc (void* userData, PlankUL size);
+    static void staticFree (void* userData, void* ptr);
     
     void* allocateBytes (PlankUL size);
     void free (void* ptr);
     
 private:
-    LockFreeQueue<Element> queues[NumQueues];
+    LockFreeQueue<Element>* queues;
     Memory& memory;
     
-    ObjectMemoryPools (Memory& memory) throw();
+    ObjectMemoryPools (Memory& memory) throw();    
 };
 
 #endif // PLONK_OBJECTMEMORYPOOLS_H

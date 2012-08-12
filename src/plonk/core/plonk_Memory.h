@@ -47,12 +47,18 @@ public:
     typedef PlankMemoryAllocateBytesFunction AllocateBytesFunction;
     typedef PlankMemoryFreeFunction FreeFunction;
     
+//    static Memory& global() throw()
+//    {
+//        static Memory* memory = new Memory (pl_MemoryGlobal()); // just leak
+//        return *memory;
+//    }
+
     static Memory& global() throw()
     {
-        static Memory* memory = new Memory (pl_MemoryGlobal()); // just leak
-        return *memory;
+        static Memory memory (pl_MemoryGlobal());
+        return memory;
     }
-        
+    
     Memory() throw()
     :   internal (pl_Memory_CreateAndInit())
     {
@@ -64,9 +70,7 @@ public:
     }
     
     ~Memory()
-    {
-        //setFunctions (malloc, ::free);//??
-        
+    {        
         if (internal != pl_MemoryGlobal())
             pl_Memory_Destroy (internal);
     }
@@ -110,6 +114,11 @@ public:
 #ifndef PLONK_DEBUG
         (void)result;
 #endif        
+    }
+    
+    void resetFunctions() throw()
+    {
+        setFunctions (0, 0);
     }
     
     static inline void zero (void* const ptr, const UnsignedLong numBytes) throw()
