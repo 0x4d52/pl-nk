@@ -101,6 +101,17 @@ exit:
     return result;
 }
 
+PlankResult pl_Memory_SetUserData (PlankMemoryRef p, PlankP userData)
+{
+    p->userData = userData;
+    return PlankResult_OK;
+}
+
+PlankP pl_Memory_GetUserData (PlankMemoryRef p)
+{
+    return p->userData;
+}
+
 PlankResult pl_Memory_SetFunctions (PlankMemoryRef p, 
                                     PlankMemoryAllocateBytesFunction allocateBytesFunction, 
                                     PlankMemoryFreeFunction freeFunction)

@@ -42,34 +42,26 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../core/plonk_Headers.h"
 
-#define PLONK_OBJECTMEMORY_DEBUG 1
+#define PLONK_OBJECTMEMORYPOOLS_DEBUG 1
 
-#if PLONK_OBJECTMEMORY_DEBUG
+#if PLONK_OBJECTMEMORYPOOLS_DEBUG
 static AtomicLong largestSize;
 static AtomicInt blockCounts[64];
 #endif
 
-void* ObjectMemory::staticAlloc (PlankUL size)
+void* ObjectMemoryPools::staticAlloc (PlankUL size)
 {
-    return ObjectMemory::global().allocateBytes (size);
+    return ObjectMemoryPools::global().allocateBytes (size);
 }
 
-void ObjectMemory::staticFree (void* ptr)
+void ObjectMemoryPools::staticFree (void* ptr)
 {
-    ObjectMemory::global().free (ptr);
+    ObjectMemoryPools::global().free (ptr);
 }
-
-//static inline void staticDoFree (void* ptr) throw()
-//{
-//#if PLONK_OBJECTMEMORY_DEBUG
-//    plonk_assert (!Threading::currentThreadIsAudioThread());
-//#endif
-//    ::free (ptr);
-//}
 
 static inline void staticDoFree (void* ptr) throw()
 {
-#if PLONK_OBJECTMEMORY_DEBUG
+#if PLONK_OBJECTMEMORYPOOLS_DEBUG
     plonk_assert (!Threading::currentThreadIsAudioThread());
 #endif
     const PlankUL align = PLONK_WORDSIZE * 2;
@@ -77,9 +69,9 @@ static inline void staticDoFree (void* ptr) throw()
     ::free (raw);
 }
 
-ObjectMemory& ObjectMemory::global() throw()
+ObjectMemoryPools& ObjectMemoryPools::global() throw()
 {
-    static ObjectMemory* om = new ObjectMemory (Memory::global()); // just leak
+    static ObjectMemoryPools* om = new ObjectMemoryPools (Memory::global()); // just leak
     
     if (!om->isRunning()) // how best to avoid this without calling ->start from the constructor?
         om->start();
@@ -87,13 +79,13 @@ ObjectMemory& ObjectMemory::global() throw()
     return *om;
 }
 
-ObjectMemory::ObjectMemory (Memory& m) throw()
+ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
 :   memory (m)
 {
     memory.setFunctions (staticAlloc, staticFree);    
 }
 
-ObjectMemory::~ObjectMemory()
+ObjectMemoryPools::~ObjectMemoryPools()
 {
     //memory.setFunctions (staticAlloc, staticDoFree);
     setShouldExitAndWait();
@@ -101,123 +93,12 @@ ObjectMemory::~ObjectMemory()
     memory.setFunctions (malloc, ::free);
 }
 
-
-//ObjectMemory& ObjectMemory::global() throw()
-//{
-//    static ObjectMemory* om = new ObjectMemory (Memory::global()); // just leak
-//    
-//    if (!om->isRunning()) // how best to avoid this without calling ->start from the constructor?
-//        om->start();
-//    
-//    return *om;
-//}
-//
-//ObjectMemory::ObjectMemory (Memory& m) throw()
-//:   memory (m)
-//{
-//    memory.setFunctions (staticAlloc, staticFree);    
-//}
-//
-//ObjectMemory::~ObjectMemory()
-//{
-//    // actually this never happens because we just leak it!
-//    
-//    //memory.setFunctions (staticAlloc, staticDoFree);
-//    setShouldExitAndWait();
-//    //aarggh.. something could happen here on another thread!?
-//    memory.setFunctions (malloc, ::free);
-//}
-
-//void* ObjectMemory::allocateBytes (PlankUL requestedSize)
-//{
-//#if PLONK_OBJECTMEMORY_DEBUG
-//    plonk_assert (!Threading::currentThreadIsAudioThread());
-//#endif
-//    
-//    const PlankUL align = PLONK_WORDSIZE * 2;
-//    const PlankUL size = Bits<PlankUL>::nextPowerOf2 (requestedSize + align);
-//    
-//#if PLONK_OBJECTMEMORY_DEBUG
-//    const PlankUL sizeLog2 = Bits<PlankUL>::countTrailingZeroes (size);
-//    plonk_assert (sizeLog2 > 0 && sizeLog2 < 64);
-//    blockCounts[sizeLog2]++;
-//    
-//    largestSize.setIfLarger (size);
-//#endif
-//    
-//    PlankUC* const raw = static_cast<PlankUC*> (malloc (size));
-//    *reinterpret_cast<PlankUL*> (raw) = size;
-//    
-//    return raw + align;
-//}
-//
-//void ObjectMemory::free (void* ptr)
-//{
-//    if (ptr != 0)
-//    {
-//        const PlankUL align = PLONK_WORDSIZE * 2;
-//        PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
-//        const PlankUL size = *reinterpret_cast<PlankUL*> (raw);
-//        
-//#if PLONK_OBJECTMEMORY_DEBUG
-//        const PlankUL sizeLog2 = Bits<PlankUL>::countTrailingZeroes (size);
-//        plonk_assert (sizeLog2 > 0 && sizeLog2 < 64);
-//        blockCounts[sizeLog2]--; 
-//#endif
-//        
-//        if (Threading::getCurrentThreadID() == getID())
-//        {
-//            staticDoFree (raw); // already triggered by a call on the background thread.
-//        }
-//        else if (ptr != 0)
-//        {
-//            Deletee d (raw);
-//            queue.push (d);
-//        }
-//    }
-//}
-//
-//void ObjectMemory::increaseQueueCache (const int count) throw()
-//{
-//    queue.increaseCache (count);
-//}
-//
-//ResultCode ObjectMemory::run() throw()
-//{
-//    const double minDuration = 0.000001;
-//    const double maxDuration = 0.1;
-//    double duration = minDuration;
-//    
-//    while (!getShouldExit())
-//    {
-//        Deletee d = queue.pop();
-//        
-//        if (d.ptr != 0)
-//        {
-//            duration = minDuration; // reset back to high speed
-//            staticDoFree (d.ptr);
-//        }
-//        else 
-//        {
-//            // gradually increase the amount of sleep if the queue is empty
-//            duration = plonk::min (duration * 2.0, maxDuration);
-//        }
-//        
-//        Threading::sleep (duration);
-//    }
-//    
-//    queue.clearAll();
-//    
-//    return 0;
-//}
-
-
-void* ObjectMemory::allocateBytes (PlankUL requestedSize)
+void* ObjectMemoryPools::allocateBytes (PlankUL requestedSize)
 {    
     const PlankUL align = PLONK_WORDSIZE * 2;
     const PlankUL size = Bits<PlankUL>::nextPowerOf2 (requestedSize + align);
     const PlankUL sizeLog2 = size > 0 ? Bits<PlankUL>::countTrailingZeroes (size) : 0;
-    plonk_assert (sizeLog2 >= 0 && sizeLog2 < PLONK_OBJECTMEMORY_NUMQUEUES);
+    plonk_assert (sizeLog2 >= 0 && sizeLog2 < NumQueues);
     
     void* rtn = 0;
     PlankUC* raw;
@@ -233,7 +114,7 @@ void* ObjectMemory::allocateBytes (PlankUL requestedSize)
     }
     else
     {
-#if PLONK_OBJECTMEMORY_DEBUG
+#if PLONK_OBJECTMEMORYPOOLS_DEBUG
         //plonk_assert (!Threading::currentThreadIsAudioThread());
         blockCounts[sizeLog2]++;
         largestSize.setIfLarger (size);
@@ -247,7 +128,7 @@ void* ObjectMemory::allocateBytes (PlankUL requestedSize)
     return rtn;
 }
 
-void ObjectMemory::free (void* ptr)
+void ObjectMemoryPools::free (void* ptr)
 {
     if (ptr != 0)
     {
@@ -255,14 +136,14 @@ void ObjectMemory::free (void* ptr)
         PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
         const PlankUL size = *reinterpret_cast<PlankUL*> (raw);
         const PlankUL sizeLog2 = size > 0 ? Bits<PlankUL>::countTrailingZeroes (size) : 0;
-        plonk_assert (sizeLog2 >= 0 && sizeLog2 < PLONK_OBJECTMEMORY_NUMQUEUES);
+        plonk_assert (sizeLog2 >= 0 && sizeLog2 < NumQueues);
 
         Element e (ptr);
         queues[sizeLog2].push (e);
     }
 }
 
-ResultCode ObjectMemory::run() throw()
+ResultCode ObjectMemoryPools::run() throw()
 {
     int i;
 //    const double minDuration = 0.000001;
@@ -271,14 +152,14 @@ ResultCode ObjectMemory::run() throw()
     
     while (!getShouldExit())
     {
-        for (i = 0; i < PLONK_OBJECTMEMORY_NUMQUEUES; ++i)
+        for (i = 0; i < NumQueues; ++i)
         {
             // could delete some here gradually
             Threading::sleep (duration);
         }
     }
     
-    for (i = 0; i < PLONK_OBJECTMEMORY_NUMQUEUES; ++i)
+    for (i = 0; i < NumQueues; ++i)
     {
         Element e;
         

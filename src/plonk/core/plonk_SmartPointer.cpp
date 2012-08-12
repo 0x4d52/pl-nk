@@ -65,7 +65,7 @@ void* PlonkBase::operator new (size_t size)
     if (ptr == 0)
         throw std::bad_alloc();
         
-    static_cast<PlonkBase*> (ptr)->size = size;
+//    static_cast<PlonkBase*> (ptr)->size = size;
     
     return ptr;    
 }

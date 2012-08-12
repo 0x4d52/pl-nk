@@ -304,7 +304,9 @@ Unit AudioHost::constructGraph()
 //    patch = Patch::ar (src, false, 2, 0.5);
 //    return patch;
     
-    return Patch::ar (src, false, 2, 0.5);
+//    return Patch::ar (src, false, 2, 0.5);
+    
+    return Sine::ar (1000, 0.1);
     
 //    const int NUM_SINES = 60;
 //    return Sine::ar (Float1D::exprand(NUM_SINES, 100, 1000)).mix() * (0.25f / NUM_SINES);
@@ -332,13 +334,13 @@ Unit AudioHost::constructGraph()
 
 void AudioHost::setGate (const bool state) throw() 
 { 
-    gate.setValue (state ? 1.f : 0.f); 
-    
-    if (state)
-    {
-        Unit sine = Sine::ar (Floats::exprand (2, 880, 1760), 0.25);
-        src = sine;
-    }
+//    gate.setValue (state ? 1.f : 0.f); 
+//    
+//    if (state)
+//    {
+//        Unit sine = Sine::ar (Floats::exprand (2, 880, 1760), 0.25);
+//        src = sine;
+//    }
 }
 
 

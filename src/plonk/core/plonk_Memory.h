@@ -87,6 +87,22 @@ public:
 #endif
     }
     
+    template<class Type>
+    void setUserData (Type* userData) throw()
+    {
+        const ResultCode result = pl_Memory_SetUserData (internal, userData);
+        plonk_assert (result == PlankResult_OK);
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
+    template<class Type>
+    void getUserData (Type& userData) throw()
+    {
+        userData = *static_cast<Type*> (pl_Memory_GetUserData (internal));
+    }
+    
     void setFunctions (AllocateBytesFunction allocateFunction, FreeFunction freeFunction) throw()
     {
         const ResultCode result = pl_Memory_SetFunctions (internal, allocateFunction, freeFunction);

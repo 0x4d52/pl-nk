@@ -54,10 +54,10 @@ public:
     void setGate (const bool state) throw();// { gate.setValue (state ? 1.f : 0.f); }
     
 private:
-    UnitVariable src;
 //    MyThread* thread1;
 //    MyThread* thread2;
-    AtomicFloatVariable gate;
+//    UnitVariable src;
+//    AtomicFloatVariable gate;
 };
 
 #endif // AUDIOHOST_H

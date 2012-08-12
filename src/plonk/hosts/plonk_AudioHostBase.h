@@ -42,7 +42,7 @@
 /** An abstract class to interface with audio devices.
  @see PortAudioAudioHost, IOSAudioHost, JuceAudioHost */
 template<class SampleType>
-class AudioHostBase
+class AudioHostBase // don't inherit from PlonkBase...!
 {
 public:
     typedef NumericalArray<SampleType>          Buffer;
@@ -61,8 +61,8 @@ public:
         preferredBlockSize (0),
         isRunning (false)
     { 
-        if (memoryQueueCacheSize > 0)
-            om.increaseQueueCache (memoryQueueCacheSize);
+//        if (memoryQueueCacheSize > 0)
+//            om.increaseQueueCache (memoryQueueCacheSize);
     }
     
     /** Destructor */
@@ -219,9 +219,7 @@ private:
     UnitType outputUnit;  
     BussesType busses;
     BufferArray inputs;
-    BufferArray outputs;
-    //Lock lock; // <-- can get rid of soon!
-    
+    BufferArray outputs;    
 };
 
 //------------------------------------------------------------------------------

@@ -57,6 +57,21 @@ PlankMemoryRef pl_Memory_Create();
 PlankResult pl_Memory_Init (PlankMemoryRef p);
 PlankResult pl_Memory_DeInit (PlankMemoryRef p);
 PlankResult pl_Memory_Destroy (PlankMemoryRef p);
+
+/** Set a user data pointer.
+ This allows the %Memory to access data via the pointer using 
+ pl_Memory_GetUserData().
+ @param p The <i>Plank %Memory</i> object. 
+ @param userData The user data pointer to store.
+ @return PlankResult_OK if successful, otherwise an error code. */
+PlankResult pl_Memory_SetUserData (PlankMemoryRef p, PlankP userData);
+
+/** Get the user data pointer.
+ This allows the %Memory to access data while it is running.
+ @param p The <i>Plank %Memory</i> object. 
+ @return The user data pointer. */
+PlankP pl_Memory_GetUserData (PlankMemoryRef p);
+
 PlankResult pl_Memory_SetFunctions (PlankMemoryRef p, 
                                     PlankMemoryAllocateBytesFunction allocateBytesFunction, 
                                     PlankMemoryFreeFunction freeFunction);

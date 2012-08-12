@@ -39,15 +39,17 @@
 #ifndef PLONK_OBJECTMEMORY_H
 #define PLONK_OBJECTMEMORY_H
 
+#define PLONK_OBJECTMEMORY_NUMQUEUES 64
+
 class ObjectMemory : public Threading::Thread
 {
 public:   
     
-    class Deletee : public PlonkBase
+    class Element : public PlonkBase
     {
     public:
-        Deletee() : ptr (0) { }
-        Deletee (void* p) : ptr (p) { }
+        Element() : ptr (0) { }
+        Element (void* p) : ptr (p) { }
 
         void* ptr;
     };
@@ -64,14 +66,14 @@ public:
     void* allocateBytes (PlankUL size);
     void free (void* ptr);
 
-    void increaseQueueCache (const int count) throw();
+//    void increaseQueueCache (const int count) throw();
     
 private:
-    LockFreeQueue<Deletee> queue;
-    LockFreeQueue<Deletee> queues[64];
+    //LockFreeQueue<Deletee> queue;
+    LockFreeQueue<Element> queues[PLONK_OBJECTMEMORY_NUMQUEUES];
     Memory& memory;
     
     ObjectMemory (Memory& memory) throw();
 };
 
-#endif // PLONK_DELETER_H
+#endif // PLONK_OBJECTMEMORY_H

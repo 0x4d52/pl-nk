@@ -76,6 +76,7 @@
 #include "../containers/plonk_LockFreeQueue.h"
 #include "../containers/plonk_LockFreeStack.h"
 #include "../containers/plonk_ObjectMemory.h"
+#include "../containers/plonk_ObjectMemoryPools.h"
 
 #include "../containers/variables/plonk_VariableForwardDeclarations.h"
 #include "../containers/variables/plonk_Variable.h"

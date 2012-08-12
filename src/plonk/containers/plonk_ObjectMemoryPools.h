@@ -36,75 +36,44 @@
  -------------------------------------------------------------------------------
  */
 
-//#define PLANK_MEMORY_DEBUG 1
+#ifndef PLONK_OBJECTMEMORYPOOLS_H
+#define PLONK_OBJECTMEMORYPOOLS_H
 
-// help prevent accidental inclusion other than via the intended header
-#if PLANK_INLINING_FUNCTIONS
-
-#include "../containers/plank_Atomic.h"
-
-//#if !DOXYGEN
-//typedef struct PlankMemory
-//{
-//    PlankMemoryAllocateBytesFunction alloc;
-//    PlankMemoryFreeFunction free;
-//} PlankMemory; 
-//#endif
-
-#if !DOXYGEN
-typedef struct PlankMemory
+class ObjectMemoryPools : public Threading::Thread
 {
-    PLANK_ALIGN(16) PlankAtomicPX funcs;
-    PlankP userData;
-} PlankMemory; 
-#endif
-
-
-static inline PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
-{
-    if (ptr == PLANK_NULL || numBytes == 0)
-        return PlankResult_MemoryError;
+public:   
     
-    memset (ptr, 0, numBytes);
-    return PlankResult_OK;
-}
-
-static inline PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const PlankUL numBytes)
-{
-    if (src == PLANK_NULL || dst == PLANK_NULL || numBytes == 0)
-        return PlankResult_MemoryError;
+    enum Constants
+    {
+        NumQueues = 64
+    };
     
-    memcpy (dst, src, numBytes);
-    return PlankResult_OK;    
-}
+    class Element : public PlonkBase
+    {
+    public:
+        Element() : ptr (0) { }
+        Element (void* p) : ptr (p) { }
 
-static inline PlankP pl_Memory_AllocateBytes (PlankMemoryRef p, PlankUL numBytes)
-{
-    PlankMemoryAllocateBytesFunction allocFunction;
-    PlankP ptr;
+        void* ptr;
+    };
     
-    allocFunction = (PlankMemoryAllocateBytesFunction)p->funcs.ptr;
-    ptr = (*allocFunction) (numBytes);
-
-#if defined(PLANK_DEBUG) && PLANK_MEMORY_DEBUG
-    printf ("pl_Memory_AllocateBytes(%p, %ld) = %p\n", p, numBytes, ptr);
-#endif
-    return ptr;
-}
-
-static inline PlankResult pl_Memory_Free (PlankMemoryRef p, PlankP ptr)
-{
-    PlankMemoryFreeFunction freeFunction;
-    freeFunction = *(PlankMemoryFreeFunction*)&p->funcs.extra;
-
-#if defined(PLANK_DEBUG) && PLANK_MEMORY_DEBUG
-    printf ("pl_Memory_Free(%p) = %p\n", p, ptr);
-#endif    
+    static ObjectMemoryPools& global() throw();
+        
+    ~ObjectMemoryPools();
     
-    (*freeFunction) (ptr);
+    ResultCode run() throw();
+    
+    static void* staticAlloc (PlankUL size);
+    static void staticFree (void* ptr);
+    
+    void* allocateBytes (PlankUL size);
+    void free (void* ptr);
+    
+private:
+    LockFreeQueue<Element> queues[NumQueues];
+    Memory& memory;
+    
+    ObjectMemoryPools (Memory& memory) throw();
+};
 
-    return PlankResult_OK;
-}
-
-#endif //PLANK_INLINING_FUNCTIONS
-
+#endif // PLONK_OBJECTMEMORYPOOLS_H
