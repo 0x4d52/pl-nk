@@ -80,9 +80,8 @@ static inline void paCheckError (PaError err)
 
 //------------------------------------------------------------------------------
 
-PortAudioAudioHost::PortAudioAudioHost (const int memoryQueueCacheSize) throw() 
-:   AudioHostBase<float> (memoryQueueCacheSize),
-    stream (0)
+PortAudioAudioHost::PortAudioAudioHost() throw() 
+:   stream (0)
 {    
     PaError err;
 	err = Pa_Initialize();

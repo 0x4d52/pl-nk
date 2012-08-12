@@ -48,7 +48,8 @@ BEGIN_PLONK_NAMESPACE
 
 /** An audio host for the iOS platform.
  @see PLAudioHost */
-class IOSAudioHost : public AudioHostBase<float>
+template<class ObjectMemoryType = ObjectMemoryDefault>
+class IOSAudioHost : public AudioHostBase<float,ObjectMemoryType>
 {
 public:
     typedef AudioHostBase<float>::UnitType UnitType;

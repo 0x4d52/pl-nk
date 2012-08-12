@@ -39,9 +39,12 @@
 #ifndef PLONK_AUDIOHOSTBASE_H
 #define PLONK_AUDIOHOSTBASE_H
 
+template<class SampleType, class ObjectMemoryType = ObjectMemoryDefault>
+class AudioHostBase;
+
 /** An abstract class to interface with audio devices.
  @see PortAudioAudioHost, IOSAudioHost, JuceAudioHost */
-template<class SampleType>
+template<class SampleType, class ObjectMemoryType>
 class AudioHostBase // don't inherit from PlonkBase...!
 {
 public:
@@ -55,14 +58,13 @@ public:
     typedef Dictionary<Dynamic>                 OptionDictionary;
     
     /** Constructor */
-    AudioHostBase (const int memoryQueueCacheSize = 0, 
-                   Memory& memory = Memory::global()) throw()
+    AudioHostBase (Memory& memory = Memory::global()) throw()
     :   om (memory),
         preferredSampleRate (0.0),
         preferredBlockSize (0),
         isRunning (false)
     { 
-        om.start();
+        om.init();
     }
     
     /** Destructor */
@@ -208,7 +210,7 @@ protected:
 
     
 private:
-    ObjectMemoryPools om;
+    ObjectMemoryType om;
 
     double preferredSampleRate;
     int preferredBlockSize;
@@ -224,8 +226,8 @@ private:
 
 //------------------------------------------------------------------------------
 
-template<class SampleType>
-void AudioHostBase<SampleType>::setNumInputs (const int numInputs) throw()
+template<class SampleType, class ObjectMemoryType>
+void AudioHostBase<SampleType,ObjectMemoryType>::setNumInputs (const int numInputs) throw()
 {
     plonk_assert (numInputs >= 0);
     
@@ -247,8 +249,8 @@ void AudioHostBase<SampleType>::setNumInputs (const int numInputs) throw()
     }
 }
 
-template<class SampleType>
-void AudioHostBase<SampleType>::setNumOutputs (const int numOutputs) throw()
+template<class SampleType, class ObjectMemoryType>
+void AudioHostBase<SampleType,ObjectMemoryType>::setNumOutputs (const int numOutputs) throw()
 {
     plonk_assert (numOutputs >= 0);
     

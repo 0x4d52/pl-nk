@@ -73,6 +73,21 @@ void PlonkBase::operator delete (void* ptr)
     Memory::global().free (ptr); 
 }
 
+void* PlonkBase::operator new[] (size_t size)
+{
+    void *ptr = Memory::global().allocateBytes (size);
+    
+    if (ptr == 0)
+        throw std::bad_alloc();
+    
+    return ptr;    
+}
+
+void PlonkBase::operator delete[] (void* ptr)
+{
+    Memory::global().free (ptr); 
+}
+
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
 :	refCount (0),
     weakPointer (0)

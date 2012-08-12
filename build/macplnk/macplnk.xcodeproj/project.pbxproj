@@ -990,8 +990,8 @@
 		A824180515911595004CA012 /* juce */ = {
 			isa = PBXGroup;
 			children = (
-				A824180615911595004CA012 /* plonk_JuceAudioHost.cpp */,
 				A824180715911595004CA012 /* plonk_JuceAudioHost.h */,
+				A824180615911595004CA012 /* plonk_JuceAudioHost.cpp */,
 			);
 			path = juce;
 			sourceTree = "<group>";

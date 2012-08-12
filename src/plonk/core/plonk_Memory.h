@@ -163,6 +163,26 @@ private:
 //Memory::FreeFunction Memory::defaultFree = pl_Memory_DefaultFree;
 //Memory::AllocateBytesFunction Memory::defaultAllocateBytes = pl_Memory_DefaultAllocateBytes;
 
+// make ObjectMemory an abstract class or at least base with virtuals?
+
+class ObjectMemoryDefault
+{
+public:     
+    ObjectMemoryDefault (Memory& m) throw() 
+    :   dummy (0)
+    { 
+        m.resetUserData(); 
+        m.resetFunctions(); 
+    }
+    
+    void init() throw() 
+    {
+    }
+    
+private:
+    Char dummy;
+};
+
 template<class Type>
 class ArrayAllocator
 {

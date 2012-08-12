@@ -43,13 +43,13 @@
 
 BEGIN_PLONK_NAMESPACE
 
-class PortAudioAudioHost : public AudioHostBase<float>
+class PortAudioAudioHost : public AudioHostBase<float,ObjectMemoryPools>
 {
 public:
-    typedef AudioHostBase<float>::Buffer Buffer;
-    typedef AudioHostBase<float>::BufferArray BufferArray;
+    typedef AudioHostBase<float,ObjectMemoryPools>::Buffer Buffer;
+    typedef AudioHostBase<float,ObjectMemoryPools>::BufferArray BufferArray;
 
-    PortAudioAudioHost (const int memoryQueueCacheSize = 0) throw();
+    PortAudioAudioHost() throw();
     ~PortAudioAudioHost();
     
     Text getHostName() const throw();

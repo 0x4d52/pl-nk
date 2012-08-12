@@ -65,7 +65,6 @@ private:
 };
 
 AudioHost::AudioHost()
-:   PortAudioAudioHost (256) // memory queue cache size
 {
 //    thread1 = new MyThread (src);
 //    thread2 = new MyThread (src);

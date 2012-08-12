@@ -56,12 +56,11 @@ public:
 
         void* ptr;
     };
-    
-//    static ObjectMemoryPools& global() throw();
-        
+            
     ObjectMemoryPools (Memory& memory) throw();
     ~ObjectMemoryPools();
     
+    inline void init() throw() { start(); }
     ResultCode run() throw();
     
     static void* staticAlloc (void* userData, PlankUL size);

@@ -184,6 +184,49 @@ PlankThreadID pl_Thread_GetID (PlankThreadRef p)
     return p->threadID;
 }
 
+//#if PLANK_WIN
+//struct THREADNAME_INFO
+//{
+//    DWORD dwType; // must be 0x1000
+//    LPCSTR szName; // pointer to name (in user addr space)
+//    DWORD dwThreadID; // thread ID (-1=caller thread)
+//    DWORD dwFlags; // reserved for future use, must be zero
+//} THREADNAME_INFO;
+//#endif
+//
+//PlankResult pl_Thread_SetName (PlankThreadRef p, const char* name)
+//{
+//#if PLANK_APPLE
+//    
+//    pthread_setname_np (name);
+//    return PlankResult_OK;
+//    
+//#elif PLANK_WIN
+//    
+//    (void)name;
+////    not tested
+////    THREADNAME_INFO info;
+////    info.dwType = 0x1000;
+////    info.szName = name;
+////    info.dwThreadID = pl_Thread_GetID (p);
+////    info.dwFlags = 0;
+////    
+////    __try
+////    {
+////        RaiseException (0x406D1388, 0, sizeof (info) / sizeof (DWORD), (DWORD*)&info);
+////    }
+////    except(EXCEPTION_CONTINUE_EXECUTION)
+////    {
+////    }    
+//    
+//    return PlankResult_OK;
+//    
+//#else
+//    (void)name;
+//    return PlankResult_UnknownError;
+//#endif
+//}
+
 PlankResult pl_Thread_SetFunction (PlankThreadRef p, PlankThreadFunction function)
 {
     if (pl_AtomicI_Get (&p->isRunningAtom))

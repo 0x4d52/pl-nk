@@ -43,7 +43,8 @@
 
 BEGIN_PLONK_NAMESPACE
 
-class JuceAudioHost :   public AudioHostBase<float>,
+template<class ObjectMemoryType = ObjectMemoryDefault>
+class JuceAudioHost :   public AudioHostBase<float,ObjectMemoryType>,
                         public AudioIODeviceCallback
 {
 public:

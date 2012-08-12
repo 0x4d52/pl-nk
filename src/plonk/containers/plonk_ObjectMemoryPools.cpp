@@ -45,13 +45,12 @@ BEGIN_PLONK_NAMESPACE
 #define PLONK_OBJECTMEMORYPOOLS_DEBUG 1
 
 #if PLONK_OBJECTMEMORYPOOLS_DEBUG
-static AtomicLong largestSize;
-static AtomicInt blockAllocationCounts[ObjectMemoryPools::NumQueues];
-static AtomicInt blockDeallocationCounts[ObjectMemoryPools::NumQueues];
-
+//static AtomicLong largestSize;
+//static AtomicInt blockAllocationCounts[ObjectMemoryPools::NumQueues];
+//static AtomicInt blockDeallocationCounts[ObjectMemoryPools::NumQueues];
 #endif
 
-void* ObjectMemoryPools::staticAlloc (void* userData, PlankUL size)
+void* ObjectMemoryPools::staticAlloc (void* userData, UnsignedLong size)
 {
     ObjectMemoryPools& om = *static_cast<ObjectMemoryPools*> (userData);
     return om.allocateBytes (size);
@@ -63,12 +62,12 @@ void ObjectMemoryPools::staticFree (void* userData, void* ptr)
     om.free (ptr);
 }
 
-static inline void* staticDoAlloc (void* userData, PlankUL requestedSize) throw()
+static inline void* staticDoAlloc (void* userData, UnsignedLong requestedSize) throw()
 {    
-    const PlankUL align = PLONK_WORDSIZE * 2;
-    const PlankUL size = Bits<PlankUL>::nextPowerOf2 (requestedSize + align);
-    PlankUC* raw = static_cast<PlankUC*> (pl_Memory_DefaultAllocateBytes (userData, size));
-    *reinterpret_cast<PlankUL*> (raw) = size;
+    const UnsignedLong align = PLONK_WORDSIZE * 2;
+    const UnsignedLong size = Bits<UnsignedLong>::nextPowerOf2 (requestedSize + align);
+    UnsignedChar* raw = static_cast<UnsignedChar*> (pl_Memory_DefaultAllocateBytes (userData, size));
+    *reinterpret_cast<UnsignedLong*> (raw) = size;
     
     return raw + align;
 }
@@ -81,8 +80,8 @@ static inline void staticDoFree (void* userData, void* ptr) throw()
     
     if (ptr != 0)
     {
-        const PlankUL align = PLONK_WORDSIZE * 2;
-        PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
+        const UnsignedLong align = PLONK_WORDSIZE * 2;
+        UnsignedChar* const raw = static_cast<UnsignedChar*> (ptr) - align;
         pl_Memory_DefaultFree (userData, raw);
     }
 }
@@ -106,23 +105,23 @@ ObjectMemoryPools::~ObjectMemoryPools()
     delete [] queues;
 }
 
-void* ObjectMemoryPools::allocateBytes (PlankUL requestedSize)
+void* ObjectMemoryPools::allocateBytes (UnsignedLong requestedSize)
 {    
-    const PlankUL align = PLONK_WORDSIZE * 2;
-    const PlankUL size = Bits<PlankUL>::nextPowerOf2 (requestedSize + align);
-    const PlankUL sizeLog2 = size > 0 ? Bits<PlankUL>::countTrailingZeroes (size) : 0;
+    const UnsignedLong align = PLONK_WORDSIZE * 2;
+    const UnsignedLong size = Bits<UnsignedLong>::nextPowerOf2 (requestedSize + align);
+    const UnsignedLong sizeLog2 = size > 0 ? Bits<UnsignedLong>::countTrailingZeroes (size) : 0;
     plonk_assert (sizeLog2 >= 0 && sizeLog2 < NumQueues);
     
     void* rtn = 0;
-    PlankUC* raw;
+    UnsignedChar* raw;
     Element e = queues[sizeLog2].pop();
     
     if (e.ptr != 0)
     {
         rtn = e.ptr;
 #if PLONK_DEBUG
-        raw = static_cast<PlankUC*> (rtn) - align;
-        plonk_assert (*reinterpret_cast<PlankUL*> (raw) == size);
+        raw = static_cast<UnsignedChar*> (rtn) - align;
+        plonk_assert (*reinterpret_cast<UnsignedLong*> (raw) == size);
 #endif
     }
     else
@@ -137,10 +136,10 @@ void ObjectMemoryPools::free (void* ptr)
 {
     if (ptr != 0)
     {
-        const PlankUL align = PLONK_WORDSIZE * 2;
-        PlankUC* const raw = static_cast<PlankUC*> (ptr) - align;
-        const PlankUL size = *reinterpret_cast<PlankUL*> (raw);
-        const PlankUL sizeLog2 = size > 0 ? Bits<PlankUL>::countTrailingZeroes (size) : 0;
+        const UnsignedLong align = PLONK_WORDSIZE * 2;
+        UnsignedChar* const raw = static_cast<UnsignedChar*> (ptr) - align;
+        const UnsignedLong size = *reinterpret_cast<UnsignedLong*> (raw);
+        const UnsignedLong sizeLog2 = size > 0 ? Bits<UnsignedLong>::countTrailingZeroes (size) : 0;
         plonk_assert (sizeLog2 >= 0 && sizeLog2 < NumQueues);
 
         Element e (ptr);

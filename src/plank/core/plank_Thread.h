@@ -135,6 +135,9 @@ PlankResult pl_Thread_Destroy (PlankThreadRef p);
  @return The thread's ID. */
 PlankThreadID pl_Thread_GetID (PlankThreadRef p);
 
+///** */
+//PlankResult pl_Thread_SetName (PlankThreadRef p, const char* name);
+
 /** Set the thread run function.
  This must be called before pl_Thread_Start().
  @param p The <i>Plank %Thread</i> object. 

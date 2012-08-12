@@ -48,6 +48,9 @@ public:
     ~PlonkBase() { } // doesn't need to be virtual as we never need to call delete on a PlonkBase pointer
     static void* operator new (size_t size); 
     static void operator delete (void* ptr);
+    static void* operator new[] (size_t size); 
+    static void operator delete[] (void* ptr);
+
 };
 
 /** Reference counted pointer base class.
