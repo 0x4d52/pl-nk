@@ -135,8 +135,11 @@ PlankResult pl_Thread_Destroy (PlankThreadRef p);
  @return The thread's ID. */
 PlankThreadID pl_Thread_GetID (PlankThreadRef p);
 
-///** */
-//PlankResult pl_Thread_SetName (PlankThreadRef p, const char* name);
+/** Set the name of the thread.
+ Useful for debugging.
+ This must be called before pl_Thread_Start().
+ Not implemented on all platforms. */
+PlankResult pl_Thread_SetName (PlankThreadRef p, const char* name);
 
 /** Set the thread run function.
  This must be called before pl_Thread_Start().
@@ -217,6 +220,8 @@ typedef unsigned PlankThreadNativeReturn;
 #define PLANK_THREADCALL __stdcall
 #endif // PLANK_WINDOWS
 
+#define PLANK_THREAD_MAXNAMELENGTH 256
+
 typedef struct PlankThread
 {
     PlankThreadNativeHandle thread;
@@ -225,6 +230,7 @@ typedef struct PlankThread
     PLANK_ALIGN(16) PlankAtomicPX userDataAtom;
     PLANK_ALIGN(16) PlankAtomicI shouldExitAtom;
     PLANK_ALIGN(16) PlankAtomicI isRunningAtom;
+    char name[PLANK_THREAD_MAXNAMELENGTH];
 } PlankThread;
 #endif
 

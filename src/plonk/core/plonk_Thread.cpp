@@ -100,12 +100,18 @@ bool Threading::currentThreadIsAudioThread() throw()
     return audioThreadID == 0 ? false : audioThreadID == getCurrentThreadID();
 }
 
-Threading::Thread::Thread() throw()
+Threading::Thread::Thread (const char* name) throw()
 {
     ResultCode result;
     result = pl_Thread_Init (getPeerRef());
     plonk_assert (result == PlankResult_OK);
 
+    if (name != 0)
+    {
+        result = pl_Thread_SetName(getPeerRef(), name);
+        plonk_assert (result == PlankResult_OK);
+    }
+    
     result = pl_Thread_SetFunction (getPeerRef(), Threading::run);
     plonk_assert (result == PlankResult_OK);
     

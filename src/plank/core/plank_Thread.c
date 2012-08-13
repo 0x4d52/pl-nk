@@ -86,6 +86,47 @@ PlankThreadID pl_ThreadCurrentID()
 #endif
 }
 
+#if PLANK_WIN
+struct THREADNAME_INFO
+{
+    DWORD dwType; // must be 0x1000
+    LPCSTR szName; // pointer to name (in user addr space)
+    DWORD dwThreadID; // thread ID (-1=caller thread)
+    DWORD dwFlags; // reserved for future use, must be zero
+} THREADNAME_INFO;
+#endif
+
+static PlankResult pl_ThreadSetNameInternal (const char* name)
+{
+#if PLANK_APPLE
+    pthread_setname_np (name);
+    return PlankResult_OK;
+#elif PLANK_WIN
+    
+    (void)name;
+//    not tested
+//    THREADNAME_INFO info;
+//    info.dwType = 0x1000;
+//    info.szName = name;
+//    info.dwThreadID = pl_Thread_GetID (p);
+//    info.dwFlags = 0;
+//    
+//    __try
+//    {
+//        RaiseException (0x406D1388, 0, sizeof (info) / sizeof (DWORD), (DWORD*)&info);
+//    }
+//    except(EXCEPTION_CONTINUE_EXECUTION)
+//    {
+//    }    
+    
+    return PlankResult_OK;
+    
+#else
+    (void)name;
+    return PlankResult_OK;
+#endif
+}
+
 PlankThreadNativeReturn PLANK_THREADCALL pl_ThreadNativeFunction (PlankP argument)
 {
     PlankResult result;
@@ -93,13 +134,21 @@ PlankThreadNativeReturn PLANK_THREADCALL pl_ThreadNativeFunction (PlankP argumen
     
     p = (PlankThreadRef)argument;
     
+    if (p->name[0] != '\0')
+    {
+        result = pl_ThreadSetNameInternal (p->name);
+        
+        if (result != PlankResult_OK)
+            goto exit;
+    }
+    
     if (p->function == 0)
         result = PlankResult_ThreadFunctionInvalid;
     else
         result = (*p->function) (p);
-        
+  
+exit:
     pl_Thread_Reset (p);
-
     return (result == PlankResult_OK) ? 0 : (PlankThreadNativeReturn)(-1);
 }
 
@@ -138,6 +187,7 @@ PlankResult pl_Thread_Init (PlankThreadRef p)
     PlankResult result = PlankResult_OK;
     
     p->function = (PlankThreadFunction)0;
+    p->name[0] = '\0';
     
     pl_AtomicI_Init (&p->shouldExitAtom);
     pl_AtomicI_Init (&p->isRunningAtom);
@@ -184,48 +234,14 @@ PlankThreadID pl_Thread_GetID (PlankThreadRef p)
     return p->threadID;
 }
 
-//#if PLANK_WIN
-//struct THREADNAME_INFO
-//{
-//    DWORD dwType; // must be 0x1000
-//    LPCSTR szName; // pointer to name (in user addr space)
-//    DWORD dwThreadID; // thread ID (-1=caller thread)
-//    DWORD dwFlags; // reserved for future use, must be zero
-//} THREADNAME_INFO;
-//#endif
-//
-//PlankResult pl_Thread_SetName (PlankThreadRef p, const char* name)
-//{
-//#if PLANK_APPLE
-//    
-//    pthread_setname_np (name);
-//    return PlankResult_OK;
-//    
-//#elif PLANK_WIN
-//    
-//    (void)name;
-////    not tested
-////    THREADNAME_INFO info;
-////    info.dwType = 0x1000;
-////    info.szName = name;
-////    info.dwThreadID = pl_Thread_GetID (p);
-////    info.dwFlags = 0;
-////    
-////    __try
-////    {
-////        RaiseException (0x406D1388, 0, sizeof (info) / sizeof (DWORD), (DWORD*)&info);
-////    }
-////    except(EXCEPTION_CONTINUE_EXECUTION)
-////    {
-////    }    
-//    
-//    return PlankResult_OK;
-//    
-//#else
-//    (void)name;
-//    return PlankResult_UnknownError;
-//#endif
-//}
+PlankResult pl_Thread_SetName (PlankThreadRef p, const char* name)
+{
+    if (pl_AtomicI_Get (&p->isRunningAtom))
+        return PlankResult_ThreadSetFunctionFailed;
+
+    strncpy (p->name, name, PLANK_THREAD_MAXNAMELENGTH);
+    return PlankResult_OK;
+}
 
 PlankResult pl_Thread_SetFunction (PlankThreadRef p, PlankThreadFunction function)
 {

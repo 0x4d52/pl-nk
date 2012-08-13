@@ -39,7 +39,6 @@
 #ifndef PLONK_THREAD_H
 #define PLONK_THREAD_H
 
-
 /** Crossplatform threading support. */
 class Threading
 {
@@ -96,7 +95,7 @@ public:
     class Thread // do not inherit from PlonkBase - threads need to managed carefully
     {
     public:
-        Thread() throw();
+        Thread (const char* name = 0) throw();
         virtual ~Thread();
         
         ResultCode start() throw();

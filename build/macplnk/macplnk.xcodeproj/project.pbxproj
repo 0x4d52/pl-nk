@@ -78,7 +78,7 @@
 		A82418571592670A004CA012 /* AudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8241855159265F9004CA012 /* AudioHost.cpp */; };
 		A854E7E215D7A5B1008D1FE5 /* plonk_ObjectMemoryPools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854E7E015D7A5AE008D1FE5 /* plonk_ObjectMemoryPools.cpp */; };
 		A86AD4C915A320F60064EA76 /* plonk_DelayTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86AD4C715A320F60064EA76 /* plonk_DelayTypes.cpp */; };
-		A892A7CE15C6DFAD00E5A0C9 /* plonk_ObjectMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemory.cpp */; };
+		A892A7CE15C6DFAD00E5A0C9 /* plonk_ObjectMemoryDeferFree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemoryDeferFree.cpp */; };
 		A892A7D815C6EFF900E5A0C9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A892A7D715C6EFF900E5A0C9 /* Accelerate.framework */; };
 		A8EF74C315ACB9F00059E3A9 /* plink_Saw.c in Sources */ = {isa = PBXBuildFile; fileRef = A8EF74BB15ACB9F00059E3A9 /* plink_Saw.c */; };
 		A8EF74C415ACB9F00059E3A9 /* plink_BinaryOpProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = A8EF74BF15ACB9F00059E3A9 /* plink_BinaryOpProcess.c */; };
@@ -353,8 +353,8 @@
 		A86AD4CC15A431F90064EA76 /* plonk_Delay2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay2Param.h; sourceTree = "<group>"; };
 		A885834715AA0A750079AB85 /* plonk_DelayBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayBase.h; sourceTree = "<group>"; };
 		A885834815AB84370079AB85 /* plonk_DelayFormCombFilter1Param.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombFilter1Param.h; sourceTree = "<group>"; };
-		A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ObjectMemory.cpp; sourceTree = "<group>"; };
-		A892A7CD15C6DFAC00E5A0C9 /* plonk_ObjectMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectMemory.h; sourceTree = "<group>"; };
+		A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemoryDeferFree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ObjectMemoryDeferFree.cpp; sourceTree = "<group>"; };
+		A892A7CD15C6DFAC00E5A0C9 /* plonk_ObjectMemoryDeferFree.h */ = {isa = PBXFileReference; fileEncoding = 4; path = plonk_ObjectMemoryDeferFree.h; sourceTree = "<group>"; };
 		A892A7D715C6EFF900E5A0C9 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = ../../../../../../System/Library/Frameworks/Accelerate.framework; sourceTree = "<group>"; };
 		A8BF684E15AC92200005088B /* plonk_WhiteNoise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_WhiteNoise.h; sourceTree = "<group>"; };
 		A8DA9B2A15A9A02B009253AB /* plonk_DelayFormAllpassFFFB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormAllpassFFFB.h; sourceTree = "<group>"; };
@@ -697,8 +697,8 @@
 				A824177B15911595004CA012 /* plonk_ObjectArray.h */,
 				A824177C15911595004CA012 /* plonk_ObjectArray2D.h */,
 				A824177D15911595004CA012 /* plonk_ObjectArrayInternal.h */,
-				A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemory.cpp */,
-				A892A7CD15C6DFAC00E5A0C9 /* plonk_ObjectMemory.h */,
+				A892A7CC15C6DFAA00E5A0C9 /* plonk_ObjectMemoryDeferFree.cpp */,
+				A892A7CD15C6DFAC00E5A0C9 /* plonk_ObjectMemoryDeferFree.h */,
 				A854E7E015D7A5AE008D1FE5 /* plonk_ObjectMemoryPools.cpp */,
 				A854E7E115D7A5B0008D1FE5 /* plonk_ObjectMemoryPools.h */,
 				A824177E15911595004CA012 /* plonk_Signal.h */,
@@ -1206,7 +1206,7 @@
 				A8EF74C415ACB9F00059E3A9 /* plink_BinaryOpProcess.c in Sources */,
 				A8EF74C515ACB9F00059E3A9 /* plink_UnaryOpProcess.c in Sources */,
 				A8EF74C815ACBA1E0059E3A9 /* plink_WhiteNoise.c in Sources */,
-				A892A7CE15C6DFAD00E5A0C9 /* plonk_ObjectMemory.cpp in Sources */,
+				A892A7CE15C6DFAD00E5A0C9 /* plonk_ObjectMemoryDeferFree.cpp in Sources */,
 				A854E7E215D7A5B1008D1FE5 /* plonk_ObjectMemoryPools.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

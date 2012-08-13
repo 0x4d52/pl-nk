@@ -65,7 +65,7 @@ private:
 };
 
 AudioHost::AudioHost()
-:   PortAudioAudioHost (ObjectMemory<ObjectMemoryPools>::create())
+:   PortAudioAudioHost (ObjectMemory<ObjectMemoryDeferFree>::create())
 {
 //    thread1 = new MyThread (src);
 //    thread2 = new MyThread (src);

@@ -36,60 +36,41 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_SIMPLEARRAY_H
-#define PLONK_SIMPLEARRAY_H
+#ifndef PLONK_ObjectMemoryDeferFree_H
+#define PLONK_ObjectMemoryDeferFree_H
 
-#include "../core/plonk_CoreForwardDeclarations.h"
-#include "plonk_ContainerForwardDeclarations.h"
-
-#include "../core/plonk_SmartPointer.h"
-#include "../core/plonk_WeakPointer.h"
-#include "plonk_SmartPointerContainer.h"
-#include "plonk_ObjectArrayInternal.h"
-
-
-template<class ObjectType>
-class SimpleArray : public SmartPointerContainer< ObjectArrayInternal<ObjectType,SmartPointer> >
+class ObjectMemoryDeferFree :   public ObjectMemoryBase,
+                                public Threading::Thread
 {
-public:
-    typedef ObjectArrayInternal<ObjectType,SmartPointer>    Internal;
-    typedef SmartPointerContainer<Internal>                 Base;
+public:   
     
-    SimpleArray()
-    :	SmartPointerContainer<Internal> (new Internal (0, false))
+    class Element : public PlonkBase
     {
-    }
+    public:
+        Element() : ptr (0) { }
+        Element (void* p) : ptr (p) { }
+
+        void* ptr;
+    };
+            
+    ObjectMemoryDeferFree (Memory& memory) throw();
+    ~ObjectMemoryDeferFree();
     
-    explicit SimpleArray (Internal* internalToUse) throw() 
-	:	Base (internalToUse)
-	{
-	} 
+    inline void init() throw() { start(); }
+    ResultCode run() throw();
     
-    /** Copy constructor.
-	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
-    SimpleArray (SimpleArray const& copy) throw()
-    :   Base (static_cast<Base const&> (copy))
-    {
-    }
+    static void* staticAlloc (void* userData, PlankUL size);
+    static void staticFree (void* userData, void* ptr);
     
-//    SimpleArray (Dynamic const& other) throw()
-//    :   Base (other.as<SimpleArray>().getInternal())
-//    {
-//    }    
-//    
-    /** Assignment operator. */
-    SimpleArray& operator= (SimpleArray const& other) throw()
-	{
-		if (this != &other)
-            this->setInternal (other.getInternal());
-        
-        return *this;
-	}
+    void* allocateBytes (PlankUL size);
+    void free (void* ptr);
+
+//    void increaseQueueCache (const int count) throw();
     
-    PLONK_OBJECTARROWOPERATOR(SimpleArray)
+private:
+    LockFreeQueue<Element>* queue;
+    
+    
 };
 
-
-
-
-#endif // PLONK_SIMPLEARRAY_H
+#endif // PLONK_ObjectMemoryDeferFree_H
