@@ -66,7 +66,7 @@ static inline void* staticDoAlloc (void* userData, UnsignedLong requestedSize) t
 {    
     const UnsignedLong align = PLONK_WORDSIZE * 2;
     const UnsignedLong size = Bits<UnsignedLong>::nextPowerOf2 (requestedSize + align);
-    UnsignedChar* raw = static_cast<UnsignedChar*> (pl_Memory_DefaultAllocateBytes (userData, size));
+    UnsignedChar* raw = static_cast<UnsignedChar*> (pl_MemoryDefaultAllocateBytes (userData, size));
     *reinterpret_cast<UnsignedLong*> (raw) = size;
     
     return raw + align;
@@ -82,16 +82,21 @@ static inline void staticDoFree (void* userData, void* ptr) throw()
     {
         const UnsignedLong align = PLONK_WORDSIZE * 2;
         UnsignedChar* const raw = static_cast<UnsignedChar*> (ptr) - align;
-        pl_Memory_DefaultFree (userData, raw);
+        pl_MemoryDefaultFree (userData, raw);
     }
 }
 
 ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
-:   ObjectMemoryBase (m)
+:   ObjectMemoryBase (m),
+    Threading::Thread ("plonk::ObjectMemoryPools::Threading::Thread")
 {
     getMemory().resetUserData();
     getMemory().setFunctions (staticDoAlloc, staticDoFree); 
+    
+    AtomicOps::memoryBarrier();
     queues = new LockFreeQueue<Element>[NumQueues];
+    AtomicOps::memoryBarrier();
+    
     getMemory().setUserData (this);
     getMemory().setFunctions (staticAlloc, staticFree); 
 }

@@ -39,6 +39,18 @@
 #include "plank_StandardHeader.h"
 #include "plank_Memory.h"
 
+void* pl_MemoryDefaultAllocateBytes (PlankP p, PlankUL size)
+{
+    (void)p;
+    return malloc (size);
+}
+
+void pl_MemoryDefaultFree (PlankP p, void* ptr)
+{
+    (void)p;
+    free (ptr);
+}
+
 PlankMemoryRef pl_Memory_CreateAndInit()
 {
     PlankMemoryRef p;
@@ -57,7 +69,7 @@ PlankMemoryRef pl_Memory_CreateAndInit()
 
 PlankMemoryRef pl_Memory_Create()
 {
-    PlankMemoryRef p = (PlankMemoryRef)pl_Memory_DefaultAllocateBytes (0, sizeof (PlankMemory));
+    PlankMemoryRef p = (PlankMemoryRef)pl_MemoryDefaultAllocateBytes (0, sizeof (PlankMemory));
     
     if (p != PLANK_NULL)
         pl_MemoryZero (p, sizeof (PlankMemory));
@@ -96,7 +108,7 @@ PlankResult pl_Memory_Destroy (PlankMemoryRef p)
             goto exit;
     }
     
-    pl_Memory_DefaultFree (0, p);
+    pl_MemoryDefaultFree (0, p);
     
 exit:
     return result;
@@ -120,10 +132,10 @@ PlankResult pl_Memory_SetFunctions (PlankMemoryRef p,
     PlankAtomicPX temp = p->funcs; // copy old
     
     if (allocateBytesFunction == PLANK_NULL)
-        allocateBytesFunction = pl_Memory_DefaultAllocateBytes;
+        allocateBytesFunction = pl_MemoryDefaultAllocateBytes;
     
     if (freeFunction == PLANK_NULL)
-        freeFunction = pl_Memory_DefaultFree;
+        freeFunction = pl_MemoryDefaultFree;
     
     temp.ptr = allocateBytesFunction;
     temp.extra = *(PlankL*)&freeFunction;

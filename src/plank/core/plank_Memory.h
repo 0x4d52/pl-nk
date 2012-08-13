@@ -47,8 +47,8 @@ typedef struct PlankMemory* PlankMemoryRef;
 typedef void* (*PlankMemoryAllocateBytesFunction)(PlankP, PlankUL);
 typedef void (*PlankMemoryFreeFunction)(PlankP, void*);
 
-static void* pl_Memory_DefaultAllocateBytes (PlankP p, PlankUL size);
-static void pl_Memory_DefaultFree (PlankP p, void* ptr);
+void* pl_MemoryDefaultAllocateBytes (PlankP p, PlankUL size);
+void pl_MemoryDefaultFree (PlankP p, void* ptr);
 
 static PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes);
 static PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const PlankUL numBytes);

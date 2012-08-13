@@ -251,8 +251,9 @@ static inline void pl_VectorSubF_NN1 (float *result, const float* a, float b, Pl
 
 static inline void pl_VectorSubF_N1N (float *result, float a, const float* b, PlankUL N)        
 { 
-    float na = -a; 
-    vDSP_vsadd ((float*)b, 1, &na, result, 1, N); 
+    float mone = -1.f;
+    vDSP_vsmul ((float*)b, 1, &mone, result, 1, N); 
+    vDSP_vsadd (result, 1, &a, result, 1, N); 
 }
 
 static inline void pl_VectorMulF_NNN (float *result, const float* a, const float* b, PlankUL N) 
@@ -342,7 +343,10 @@ static inline void pl_VectorMulAddF_NNN (float *io, const float* a, const float*
     vDSP_vma ((float*)io, 1, (float*)a, 1, (float*)b, 1, (float*)io, 1, N); 
 }
 
+
 // works as documented but seems useless as it interpolates thr "wrong" two samples
+// fixed in 10.7.2 but is that seems to be the runtime lib so would still 
+// be dangerous to use without some runtime checking
 //static inline void pl_VectorLookupF_NnN (float *result, const float* table, PlankUL n, const float* index, PlankUL N) 
 //{ 
 //    float mul = 1.f;
@@ -550,8 +554,9 @@ static inline void pl_VectorSubD_NN1 (double *result, const double* a, double b,
 
 static inline void pl_VectorSubD_N1N (double *result, double a, const double* b, PlankUL N)        
 { 
-    double na = -a; 
-    vDSP_vsaddD ((double*)b, 1, &na, result, 1, N); 
+    double mone = -1.0;
+    vDSP_vsmulD ((double*)b, 1, &mone, result, 1, N); 
+    vDSP_vsaddD (result, 1, &a, result, 1, N); 
 }
 
 static inline void pl_VectorMulD_NNN (double *result, const double* a, const double* b, PlankUL N) 
@@ -641,6 +646,9 @@ static inline void pl_VectorMulAddD_NNN (double *io, const double* a, const doub
     vDSP_vmaD ((double*)io, 1, (double*)a, 1, (double*)b, 1, (double*)io, 1, N); 
 }
 
+// works as documented but seems useless as it interpolates thr "wrong" two samples
+// fixed in 10.7.2 but is that seems to be the runtime lib so would still 
+// be dangerous to use without some runtime checking
 //static inline void pl_VectorLookupD_NnN (double *result, const double* table, PlankUL n, const double* index, PlankUL N) 
 //{ 
 //    double mul = 1.0;

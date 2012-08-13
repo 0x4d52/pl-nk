@@ -61,7 +61,7 @@ static inline void staticDoFree (void* userData, void* ptr) throw()
 #if PLONK_OBJECTMEMORYDEFERFREE_DEBUG
     plonk_assert (!Threading::currentThreadIsAudioThread());
 #endif
-    pl_Memory_DefaultFree (userData, ptr);
+    pl_MemoryDefaultFree (userData, ptr);
 }
 
 ObjectMemoryDeferFree::ObjectMemoryDeferFree (Memory& m) throw()
@@ -70,7 +70,11 @@ ObjectMemoryDeferFree::ObjectMemoryDeferFree (Memory& m) throw()
 {    
     getMemory().resetUserData();
     getMemory().resetFunctions();
+    
+    AtomicOps::memoryBarrier();
     queue = new LockFreeQueue<Element>;
+    AtomicOps::memoryBarrier();
+    
     getMemory().setUserData (this);
     getMemory().setFunctions (staticAlloc, staticFree); 
 }
@@ -86,7 +90,7 @@ ObjectMemoryDeferFree::~ObjectMemoryDeferFree()
 
 void* ObjectMemoryDeferFree::allocateBytes (PlankUL size)
 {
-    return pl_Memory_DefaultAllocateBytes (this, size);
+    return pl_MemoryDefaultAllocateBytes (this, size);
 }
 
 void ObjectMemoryDeferFree::free (void* ptr)

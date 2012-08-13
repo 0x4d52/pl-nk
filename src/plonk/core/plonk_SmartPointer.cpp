@@ -38,6 +38,53 @@
 
 #include "plonk_StandardHeader.h"
 
+#if PLONK_DEBUG
+// not many cpp files to put these in
+// used mainly to help see all allocs/deallocs in debugging
+// must be at global scope
+void* operator new (size_t size) throw (std::bad_alloc) 
+{
+    void *ptr = pl_MemoryDefaultAllocateBytes (0, size);
+    
+    if (ptr == 0)
+        throw std::bad_alloc();
+    
+    return ptr;    
+}
+
+void* operator new (size_t size, const std::nothrow_t&) throw() 
+{
+    return pl_MemoryDefaultAllocateBytes (0, size);    
+}
+
+void operator delete (void* ptr) throw()
+{
+    pl_MemoryDefaultFree (0, ptr);
+}
+
+void* operator new[] (size_t size) throw (std::bad_alloc) 
+{
+    void *ptr = pl_MemoryDefaultAllocateBytes (0, size);
+    
+    if (ptr == 0)
+        throw std::bad_alloc();
+    
+    return ptr;    
+}
+
+void* operator new[] (size_t size, const std::nothrow_t&) throw() 
+{
+    return pl_MemoryDefaultAllocateBytes (0, size);    
+}
+
+void operator delete[] (void* ptr) throw()
+{
+    pl_MemoryDefaultFree (0, ptr);
+}
+#endif // PLONK_DEBUG==1
+
+//------------------------------------------------------------------------------
+
 BEGIN_PLONK_NAMESPACE
 
 #include "plonk_Headers.h"
@@ -57,6 +104,7 @@ BEGIN_PLONK_NAMESPACE
 #if PLONK_SMARTPOINTER_DEBUG
 AtomicLong totalSmartPointers;
 #endif
+
 
 void* PlonkBase::operator new (size_t size)
 {

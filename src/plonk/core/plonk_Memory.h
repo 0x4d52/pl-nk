@@ -39,7 +39,7 @@
 #ifndef PLONK_MEMORY_H
 #define PLONK_MEMORY_H
 
-
+#include "../containers/plonk_Int24.h"
 
 class Memory
 {
@@ -164,12 +164,19 @@ private:
 
 //------------------------------------------------------------------------------
 
+/** Manage a custom memory allocation system.
+ An ObjectMemoryBase subclass manages a Memory instance. Care should be take for this
+ to be created before any other objects EXCEPT for Memory instances and AudioHostBase subclasses. 
+ In fact the AudioHostBase provides a means for using an ObjectMemoryBase subclass
+ and controls its creation and running. */
 class ObjectMemoryBase
 {
 public:
     ObjectMemoryBase (Memory& m) throw() : memory (m) { }
     virtual ~ObjectMemoryBase() { }
-    virtual void init() = 0;
+    
+    /** Must implement, normally this starts a background thread. */
+    virtual void init() = 0; 
 
     inline Memory& getMemory() throw() { return memory; }
     
@@ -205,6 +212,8 @@ public:
 
 //------------------------------------------------------------------------------
 
+/** Default array de/allocation. 
+ For most Plonk objects this will invoke their custom new/delete opators. */
 template<class Type>
 class ArrayAllocator
 {
@@ -213,6 +222,16 @@ public:
     static void free (Type* const ptr) throw()          { delete [] ptr; }
 };
 
+/** Pointer array de/allocation. */
+template<class Type>
+class ArrayAllocator<Type*>
+{
+public:
+    static Type** allocate (const int numItems) throw() { return static_cast<Type**> (Memory::global().allocateBytes (numItems * sizeof (Type*))); }    
+    static void free (Type** const ptr) throw()         { Memory::global().free (static_cast<void*> (ptr)); }
+};
+
+/** Built-in numerical types array de/allocation. */
 template<class Type>
 class ArrayAllocatorBuiltIn
 {
@@ -221,15 +240,16 @@ public:
     static void free (Type* const ptr) throw()          { Memory::global().free (static_cast<void*> (ptr)); }
 };
 
+// specialisations for the built-in numerical array types
 template<> class ArrayAllocator<Float>         : public ArrayAllocatorBuiltIn<Float>         { public: typedef Float Type; };
 template<> class ArrayAllocator<Double>        : public ArrayAllocatorBuiltIn<Double>        { public: typedef Double Type; };
 template<> class ArrayAllocator<Int>           : public ArrayAllocatorBuiltIn<Int>           { public: typedef Int Type; };
+template<> class ArrayAllocator<Int24>         : public ArrayAllocatorBuiltIn<Int24>         { public: typedef Int24 Type; };//??
 template<> class ArrayAllocator<UnsignedInt>   : public ArrayAllocatorBuiltIn<UnsignedInt>   { public: typedef UnsignedInt Type; };
 template<> class ArrayAllocator<Short>         : public ArrayAllocatorBuiltIn<Short>         { public: typedef Short Type; };
 template<> class ArrayAllocator<UnsignedShort> : public ArrayAllocatorBuiltIn<UnsignedShort> { public: typedef UnsignedShort Type; };
 template<> class ArrayAllocator<Long>          : public ArrayAllocatorBuiltIn<Long>          { public: typedef Long Type; };
 template<> class ArrayAllocator<UnsignedLong>  : public ArrayAllocatorBuiltIn<UnsignedLong>  { public: typedef UnsignedLong Type; };
-
 
 #if ! (PLANK_WIN && PLANK_64BIT)
 template<> class ArrayAllocator<LongLong>         : public ArrayAllocatorBuiltIn<LongLong>         { public: typedef LongLong Type; };
