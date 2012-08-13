@@ -91,7 +91,7 @@ BEGIN_PLONK_NAMESPACE
 
 #ifndef PLONK_SMARTPOINTER_DEBUG
   #ifdef PLONK_DEBUG
-    #define PLONK_SMARTPOINTER_DEBUG 0//1
+    #define PLONK_SMARTPOINTER_DEBUG 1
   #else
     #define PLONK_SMARTPOINTER_DEBUG 0
   #endif
@@ -167,14 +167,6 @@ SmartPointer::~SmartPointer()
 #endif
     
 	plonk_assert (refCount == 0);
-    
-    if (weakPointer != 0)
-    {
-        WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-        weak->setWeakPointer (0);
-        weak->decrementRefCount();
-        weakPointer = 0;
-    }
 }
 
 void SmartPointer::incrementRefCount()  throw()
@@ -188,6 +180,14 @@ bool SmartPointer::decrementRefCount()  throw()
         
     if (--refCount == 0) 
     {
+        if (weakPointer != 0)
+        {
+            WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+            weak->setWeakPointer (0);
+            weak->decrementRefCount();
+            weakPointer = 0;
+        }
+
         delete this;
         return true;
     }
