@@ -117,8 +117,9 @@ static inline void audioShortToFloatChannels (AudioBufferList* src, float* dst[]
 
 //------------------------------------------------------------------------------
 
-IOSAudioHost::IOSAudioHost() throw()
-:   hwSampleRate (0.0),         // let the hardware choose
+IOSAudioHost::IOSAudioHost (ObjectMemoryBase* omb) throw()
+:   AudioHostBase (omb),
+    hwSampleRate (0.0),         // let the hardware choose
     cpuUsage (0.0)//,
 //    audioCategory (kAudioSessionCategory_PlayAndRecord)
 {    

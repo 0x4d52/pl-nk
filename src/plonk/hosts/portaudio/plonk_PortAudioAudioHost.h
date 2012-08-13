@@ -43,13 +43,14 @@
 
 BEGIN_PLONK_NAMESPACE
 
-class PortAudioAudioHost : public AudioHostBase<float,ObjectMemoryPools>
+class PortAudioAudioHost : public AudioHostBase<float>
 {
 public:
-    typedef AudioHostBase<float,ObjectMemoryPools>::Buffer Buffer;
-    typedef AudioHostBase<float,ObjectMemoryPools>::BufferArray BufferArray;
+    typedef AudioHostBase<float>::Buffer Buffer;
+    typedef AudioHostBase<float>::BufferArray BufferArray;
 
-    PortAudioAudioHost() throw();
+    /** Default constructor. */
+    PortAudioAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
     ~PortAudioAudioHost();
     
     Text getHostName() const throw();
@@ -67,7 +68,7 @@ public:
                   PaStreamCallbackFlags statusFlags) throw();
                 
 private:
-    PaStream* stream;
+    PaStream* stream;    
 };
 
 END_PLONK_NAMESPACE

@@ -80,13 +80,14 @@ static inline void paCheckError (PaError err)
 
 //------------------------------------------------------------------------------
 
-PortAudioAudioHost::PortAudioAudioHost() throw() 
-:   stream (0)
-{    
+PortAudioAudioHost::PortAudioAudioHost (ObjectMemoryBase* omb) throw() 
+:   AudioHostBase (omb),
+    stream (0)
+{
     PaError err;
 	err = Pa_Initialize();
     paCheckError (err);
-
+    
     setNumInputs (1);
     setNumOutputs (2);
     setPreferredBlockSize (512);

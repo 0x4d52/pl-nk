@@ -43,12 +43,11 @@
 
 BEGIN_PLONK_NAMESPACE
 
-template<class ObjectMemoryType = ObjectMemoryDefault>
-class JuceAudioHost :   public AudioHostBase<float,ObjectMemoryType>,
+class JuceAudioHost :   public AudioHostBase<float>,
                         public AudioIODeviceCallback
 {
 public:
-    JuceAudioHost() throw();
+    JuceAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
     ~JuceAudioHost();
     
     Text getHostName() const throw();

@@ -168,17 +168,26 @@ class ObjectMemoryBase
 {
 public:
     ObjectMemoryBase (Memory& m) throw() : memory (m) { }
-    ~ObjectMemoryBase() { }
-    
-    inline Memory& getMemory() throw() { return memory; }
-    
+    virtual ~ObjectMemoryBase() { }
     virtual void init() = 0;
+
+    inline Memory& getMemory() throw() { return memory; }
     
 private:
     Memory& memory;
     
     ObjectMemoryBase();
     ObjectMemoryBase& operator= (const ObjectMemoryBase&);
+};
+
+template<class ObjectMemoryType>
+class ObjectMemory
+{
+public:
+    static ObjectMemoryBase* create (Memory& memory = Memory::global()) throw()
+    {
+        return new ObjectMemoryType (memory);
+    }
 };
 
 class ObjectMemoryDefault : public ObjectMemoryBase

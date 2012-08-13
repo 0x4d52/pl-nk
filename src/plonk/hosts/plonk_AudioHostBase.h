@@ -39,12 +39,12 @@
 #ifndef PLONK_AUDIOHOSTBASE_H
 #define PLONK_AUDIOHOSTBASE_H
 
-template<class SampleType, class ObjectMemoryType = ObjectMemoryDefault>
+template<class SampleType>
 class AudioHostBase;
 
 /** An abstract class to interface with audio devices.
  @see PortAudioAudioHost, IOSAudioHost, JuceAudioHost */
-template<class SampleType, class ObjectMemoryType>
+template<class SampleType>
 class AudioHostBase // don't inherit from PlonkBase...!
 {
 public:
@@ -58,17 +58,20 @@ public:
     typedef Dictionary<Dynamic>                 OptionDictionary;
     
     /** Constructor */
-    AudioHostBase (Memory& memory = Memory::global()) throw()
-    :   om (memory),
+    AudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw()
+    :   om (omb),
         preferredSampleRate (0.0),
         preferredBlockSize (0),
         isRunning (false)
     { 
-        om.init();
+        om->init();
     }
-    
+        
     /** Destructor */
-    virtual ~AudioHostBase() { }
+    virtual ~AudioHostBase() 
+    {
+        delete om;
+    }
         
     /** Determine whether the audio device is runnging. */
     inline bool getIsRunning() const throw() { return isRunning; }
@@ -210,7 +213,7 @@ protected:
 
     
 private:
-    ObjectMemoryType om;
+    ObjectMemoryBase* om;
 
     double preferredSampleRate;
     int preferredBlockSize;
@@ -226,8 +229,8 @@ private:
 
 //------------------------------------------------------------------------------
 
-template<class SampleType, class ObjectMemoryType>
-void AudioHostBase<SampleType,ObjectMemoryType>::setNumInputs (const int numInputs) throw()
+template<class SampleType>
+void AudioHostBase<SampleType>::setNumInputs (const int numInputs) throw()
 {
     plonk_assert (numInputs >= 0);
     
@@ -249,8 +252,8 @@ void AudioHostBase<SampleType,ObjectMemoryType>::setNumInputs (const int numInpu
     }
 }
 
-template<class SampleType, class ObjectMemoryType>
-void AudioHostBase<SampleType,ObjectMemoryType>::setNumOutputs (const int numOutputs) throw()
+template<class SampleType>
+void AudioHostBase<SampleType>::setNumOutputs (const int numOutputs) throw()
 {
     plonk_assert (numOutputs >= 0);
     
