@@ -95,7 +95,7 @@ protected:
 	
 private:
 	SmartPointer (const SmartPointer&);
-    const SmartPointer& operator= (const SmartPointer&);
+    SmartPointer& operator= (const SmartPointer&);
 };
 
 #endif // PLONK_SMARTPOINTER_H

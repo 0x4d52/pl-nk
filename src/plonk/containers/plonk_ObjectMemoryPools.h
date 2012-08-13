@@ -39,7 +39,8 @@
 #ifndef PLONK_OBJECTMEMORYPOOLS_H
 #define PLONK_OBJECTMEMORYPOOLS_H
 
-class ObjectMemoryPools : public Threading::Thread
+class ObjectMemoryPools :   public ObjectMemoryBase,
+                            public Threading::Thread
 {
 public:   
     
@@ -70,10 +71,7 @@ public:
     void free (void* ptr);
     
 private:
-    LockFreeQueue<Element>* queues;
-    Memory& memory;
-    
-    ObjectMemoryPools();
+    LockFreeQueue<Element>* queues;    
 };
 
 #endif // PLONK_OBJECTMEMORYPOOLS_H

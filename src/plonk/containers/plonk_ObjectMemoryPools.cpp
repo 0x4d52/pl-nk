@@ -87,21 +87,21 @@ static inline void staticDoFree (void* userData, void* ptr) throw()
 }
 
 ObjectMemoryPools::ObjectMemoryPools (Memory& m) throw()
-:   memory (m)
+:   ObjectMemoryBase (m)
 {
-    memory.resetUserData();
-    memory.setFunctions (staticDoAlloc, staticDoFree); 
+    getMemory().resetUserData();
+    getMemory().setFunctions (staticDoAlloc, staticDoFree); 
     queues = new LockFreeQueue<Element>[NumQueues];
-    memory.setUserData (this);
-    memory.setFunctions (staticAlloc, staticFree); 
+    getMemory().setUserData (this);
+    getMemory().setFunctions (staticAlloc, staticFree); 
 }
 
 ObjectMemoryPools::~ObjectMemoryPools()
 {
     setShouldExitAndWait(); // the thread clears the queues
     //<-- something could happen here on another thread but we should be shut down by now..?
-    memory.resetUserData();
-    memory.setFunctions (staticDoAlloc, staticDoFree); 
+    getMemory().resetUserData();
+    getMemory().setFunctions (staticDoAlloc, staticDoFree); 
     delete [] queues;
 }
 
@@ -158,13 +158,13 @@ ResultCode ObjectMemoryPools::run() throw()
     {
         for (i = 0; i < NumQueues; ++i)
         {
-            plonk_assert (memory.getUserData() == this);
+            plonk_assert (getMemory().getUserData() == this);
             // could delete some here gradually
             Threading::sleep (duration);
         }
     }
     
-    memory.setFunctions (staticDoAlloc, staticDoFree); 
+    getMemory().setFunctions (staticDoAlloc, staticDoFree); 
     
     for (i = 0; i < NumQueues; ++i)
         queues[i].clearAll();

@@ -125,7 +125,6 @@ public:
         setFunctions (0, 0);
     }
     
-    
     static inline void zero (void* const ptr, const UnsignedLong numBytes) throw()
     {
         const ResultCode result = pl_MemoryZero (ptr, numBytes);
@@ -163,25 +162,39 @@ private:
 //Memory::FreeFunction Memory::defaultFree = pl_Memory_DefaultFree;
 //Memory::AllocateBytesFunction Memory::defaultAllocateBytes = pl_Memory_DefaultAllocateBytes;
 
-// make ObjectMemory an abstract class or at least base with virtuals?
+//------------------------------------------------------------------------------
 
-class ObjectMemoryDefault
+class ObjectMemoryBase
+{
+public:
+    ObjectMemoryBase (Memory& m) throw() : memory (m) { }
+    ~ObjectMemoryBase() { }
+    
+    inline Memory& getMemory() throw() { return memory; }
+    
+    virtual void init() = 0;
+    
+private:
+    Memory& memory;
+    
+    ObjectMemoryBase();
+    ObjectMemoryBase& operator= (const ObjectMemoryBase&);
+};
+
+class ObjectMemoryDefault : public ObjectMemoryBase
 {
 public:     
     ObjectMemoryDefault (Memory& m) throw() 
-    :   dummy (0)
+    :   ObjectMemoryBase (m)
     { 
-        m.resetUserData(); 
-        m.resetFunctions(); 
+        getMemory().resetUserData(); 
+        getMemory().resetFunctions(); 
     }
     
-    void init() throw() 
-    {
-    }
-    
-private:
-    Char dummy;
+    void init() throw() { }
 };
+
+//------------------------------------------------------------------------------
 
 template<class Type>
 class ArrayAllocator
