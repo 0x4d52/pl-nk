@@ -40,6 +40,7 @@
 #define PLONK_COREFORWARDDECLARATIONS_H
 
 class SmartPointer;
+class SmartPointerCounter;
 class WeakPointer;
 class TypeCode;
 

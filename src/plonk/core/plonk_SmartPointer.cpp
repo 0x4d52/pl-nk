@@ -136,24 +136,79 @@ void PlonkBase::operator delete[] (void* ptr)
     Memory::global().free (ptr); 
 }
 
+//SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
+//:	refCount (0),
+//    weakPointer (0)
+//{		
+//	if (allocateWeakPointer)
+//    {
+//		weakPointer = new WeakPointer (this);
+//        WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+//        weak->incrementRefCount();
+//    }
+//    
+//#if PLONK_SMARTPOINTER_DEBUG
+//    ++totalSmartPointers;
+//  #if PLONK_SMARTPOINTER_DEBUGLOG
+//	printf("++SmartPointer++ %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
+//  #endif
+//#endif
+//}
+//
+//SmartPointer::~SmartPointer()
+//{
+//#if PLONK_SMARTPOINTER_DEBUG
+//    --totalSmartPointers;
+//  #if PLONK_SMARTPOINTER_DEBUGLOG
+//	printf("--SmartPointer-- %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
+//  #endif
+//#endif
+//    
+//	plonk_assert (refCount == 0);
+//}
+//
+//void SmartPointer::incrementRefCount()  throw()
+//{	
+//    ++refCount;
+//}
+//
+//bool SmartPointer::decrementRefCount()  throw()
+//{ 
+//    plonk_assert (refCount > 0);
+//        
+//    if (--refCount == 0) 
+//    {
+//        if (weakPointer != 0)
+//        {
+//            WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+//            weak->setWeakPointer (0);
+//            weak->decrementRefCount();
+//            weakPointer = 0;
+//        }
+//
+//        delete this;
+//        return true;
+//    }
+//    
+//    return false;
+//}
+
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
-:	refCount (0),
+:	counter (new SmartPointerCounter),
     weakPointer (0)
 {		
 	if (allocateWeakPointer)
-		weakPointer = new WeakPointer (this);
-    
-    if (weakPointer != 0)
     {
-        WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+		weakPointer = new WeakPointer (this);
+        WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
         weak->incrementRefCount();
     }
     
 #if PLONK_SMARTPOINTER_DEBUG
     ++totalSmartPointers;
-  #if PLONK_SMARTPOINTER_DEBUGLOG
+#if PLONK_SMARTPOINTER_DEBUGLOG
 	printf("++SmartPointer++ %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
-  #endif
+#endif
 #endif
 }
 
@@ -161,38 +216,63 @@ SmartPointer::~SmartPointer()
 {
 #if PLONK_SMARTPOINTER_DEBUG
     --totalSmartPointers;
-  #if PLONK_SMARTPOINTER_DEBUGLOG
+#if PLONK_SMARTPOINTER_DEBUGLOG
 	printf("--SmartPointer-- %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
-  #endif
+#endif
 #endif
     
-	plonk_assert (refCount == 0);
+	plonk_assert (counter->refCount == 0);
+    delete counter;
 }
 
 void SmartPointer::incrementRefCount()  throw()
 {	
-    ++refCount;
+    ++counter->refCount;
 }
 
 bool SmartPointer::decrementRefCount()  throw()
 { 
-    plonk_assert (refCount > 0);
-        
-    if (--refCount == 0) 
+    plonk_assert (counter->refCount > 0);
+    
+    if (--counter->refCount == 0) 
     {
         if (weakPointer != 0)
         {
-            WeakPointer* weak = reinterpret_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-            weak->setWeakPointer (0);
+            WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+            weak->clearWeakPointer();
             weak->decrementRefCount();
             weakPointer = 0;
         }
-
+        
         delete this;
         return true;
     }
     
     return false;
 }
+
+Long SmartPointer::getRefCount() const throw()            
+{ 
+    return counter->refCount.getValueUnchecked(); 
+}
+
+//SmartPointerCounter* SmartPointer::getCounter() throw()   
+//{ 
+//    counter->incrementRefCount();
+//    return counter;
+//}
+
+///-----------------------------------------------------------------------------
+
+//SmartPointerCounter::SmartPointerCounter() throw()
+//:   SmartPointer (false), // avoid infinite recursion
+//    refCount (0)
+//{
+//}
+//
+//SmartPointerCounter::~SmartPointerCounter()
+//{
+//    // perhaps --refCount again to make it -1?
+//}
 
 END_PLONK_NAMESPACE

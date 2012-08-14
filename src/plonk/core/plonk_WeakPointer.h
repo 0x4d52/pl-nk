@@ -53,12 +53,15 @@ class WeakPointer : public SmartPointer
 {
 public:
     WeakPointer (SmartPointer* smartPointerToUse) throw();
+    ~WeakPointer();
     
-    void setWeakPointer (SmartPointer* smartPointerToUse) throw();
+//    void setWeakPointer (SmartPointer* smartPointerToUse) throw();
+    void clearWeakPointer() throw();
     SmartPointer* getWeakPointer() const throw();
     
 private:
     AtomicExtended<SmartPointer*> smartPointer;
+//    SmartPointerCounter* counter;
     
     WeakPointer();
     WeakPointer (const WeakPointer&);

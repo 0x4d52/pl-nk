@@ -82,13 +82,13 @@ public:
     {
     }
     
-    void setWeakPointer (OriginalInternal* smartPointer) throw()
-    {
-        WeakPointer* weakPointer = this->getInternal();
-        
-        if (weakPointer != 0)
-            weakPointer->setWeakPointer (smartPointer);
-    }
+//    void setWeakPointer (OriginalInternal* smartPointer) throw()
+//    {
+//        WeakPointer* weakPointer = this->getInternal();
+//        
+//        if (weakPointer != 0)
+//            weakPointer->setWeakPointer (smartPointer);
+//    }
     
     OriginalInternal* getWeakPointer() const throw()
     {
