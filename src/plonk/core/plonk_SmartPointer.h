@@ -40,7 +40,20 @@
 #define PLONK_SMARTPOINTER_H
 
 #include "plonk_CoreForwardDeclarations.h"
+#include "../containers/plonk_ContainerForwardDeclarations.h"
+//#include "plonk_WeakPointer.h" // argh!!
 #include "../containers/plonk_Atomic.h"
+
+#ifndef PLONK_SMARTPOINTER_DEBUG
+    #ifdef PLONK_DEBUG
+        #define PLONK_SMARTPOINTER_DEBUG 1
+    #else
+        #define PLONK_SMARTPOINTER_DEBUG 0
+    #endif
+#endif
+
+#define PLONK_SMARTPOINTER_DEBUGLOG 1
+
 
 class PlonkBase
 {
@@ -64,42 +77,6 @@ public:
  count but will get set to 0 when its SmartPointer peer is deleted.
  @see WeakPointer, SmartPointerContainer
  */
-//class SmartPointer : public PlonkBase
-//{
-//public:
-//	
-//	/// @name Construction and destruction
-//	/// @{
-//	
-//	SmartPointer (const bool allocateWeakPointer = true) throw();
-//    virtual ~SmartPointer(); // MUST be virtual unless PlonkBase gains the need to be virtual
-//        
-//	void incrementRefCount() throw();
-//    bool decrementRefCount() throw(); 
-//    	
-//	/// @} <!-- end Construction and destruction -->
-//	
-//	/// @name Miscellaneous
-//	/// @{
-//	
-//	Long getRefCount() const throw()	{ return refCount.getValueUnchecked(); }
-//    void update() throw()               { }
-//    void* getWeak() const throw()       { return weakPointer.getPtrUnchecked(); }
-//        
-//	/// @} <!-- end Miscellaneous -->
-//    
-//protected:    
-//    // have this as a single extended? so can be atomically updated?? would that actually help?
-//    AtomicValue<Long> refCount;
-//    AtomicValue<void*> weakPointer;
-//	
-//private:
-//	SmartPointer (const SmartPointer&);
-//    SmartPointer& operator= (const SmartPointer&);
-//};
-
-
-
 class SmartPointer : public PlonkBase
 {
 public:
@@ -109,25 +86,24 @@ public:
 	
 	SmartPointer (const bool allocateWeakPointer = true) throw();
     virtual ~SmartPointer(); // MUST be virtual unless PlonkBase gains the need to be virtual
-    
+        
 	void incrementRefCount() throw();
     bool decrementRefCount() throw(); 
-    
+    	
 	/// @} <!-- end Construction and destruction -->
 	
 	/// @name Miscellaneous
 	/// @{
 	
-    void update() throw()                       { }
-    
-    void* getWeak() const throw()               { return weakPointer.getPtrUnchecked(); }
-    Long getRefCount() const throw();
-//    SmartPointerCounter* getCounter() throw();
-    
+	Long getRefCount() const throw()	{ return refCount.getValueUnchecked(); }
+    void update() throw()               { }
+    void* getWeak() const throw()       { return weakPointer.getPtrUnchecked(); }
+        
 	/// @} <!-- end Miscellaneous -->
     
 protected:    
-    SmartPointerCounter* counter;
+    // have this as a single extended? so can be atomically updated?? would that actually help?
+    AtomicValue<Long> refCount;
     AtomicValue<void*> weakPointer;
 	
 private:
@@ -135,25 +111,148 @@ private:
     SmartPointer& operator= (const SmartPointer&);
 };
 
-class SmartPointerCounter : public PlonkBase
-{
-public:
-    SmartPointerCounter() throw()
-    :   refCount (0)
-    {
-    }
-    
-    ~SmartPointerCounter()
-    {
-        // perhaps --refCount again to make it -1?
-    }
-    
-    
-    friend class SmartPointer;
-    friend class WeakPointer;
-    
-private:
-    AtomicValue<Long> refCount;
-};
+// new here
+
+//#if PLONK_SMARTPOINTER_DEBUG
+//extern AtomicLong totalSmartPointers;
+//#endif
+//
+////------------------------------------------------------------------------------
+//
+//template<class CounterType>
+//class SmartPointerBase : public PlonkBase
+//{
+//public:
+//	
+//	/// @name Construction and destruction
+//	/// @{
+//	
+//	SmartPointerBase (const bool allocateWeakPointer) throw()
+//    :	counter (new CounterType),
+//        weakPointer (0)
+//    {		
+//        if (allocateWeakPointer)
+//        {
+//            weakPointer = new WeakPointer (this);
+//            WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+//            weak->incrementRefCount();
+//        }
+//        
+//#if PLONK_SMARTPOINTER_DEBUG
+//        ++totalSmartPointers;
+//#if PLONK_SMARTPOINTER_DEBUGLOG
+//        printf("++SmartPointer++ %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
+//#endif
+//#endif
+//    }
+//    
+//    
+//    virtual ~SmartPointerBase() // MUST be virtual unless PlonkBase gains the need to be virtual
+//    {
+//#if PLONK_SMARTPOINTER_DEBUG
+//        --totalSmartPointers;
+//#if PLONK_SMARTPOINTER_DEBUGLOG
+//        printf("--SmartPointer-- %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
+//#endif
+//#endif
+//        
+//        plonk_assert (counter->refCount == 0);
+//        delete counter;        
+//    }
+//    
+//	void incrementRefCount() throw()
+//    {
+//        ++counter->refCount;
+//    }
+//    
+//    bool decrementRefCount() throw()
+//    {
+//        plonk_assert (counter->refCount > 0);
+//        
+//        if (--counter->refCount == 0) 
+//        {
+//            if (weakPointer != 0)
+//            {
+//                WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+//                weak->clearWeakPointer();
+//                weak->decrementRefCount();
+//                weakPointer = 0;
+//            }
+//            
+//            delete this;
+//            return true;
+//        }
+//        
+//        return false;        
+//    }
+//    
+//	/// @} <!-- end Construction and destruction -->
+//	
+//	/// @name Miscellaneous
+//	/// @{
+//	
+//    void update() throw() { }
+//    
+//    void* getWeak() const throw()               
+//    { 
+//        return weakPointer.getPtrUnchecked(); 
+//    }
+//    
+//    Long getRefCount() const throw()
+//    {
+//        return counter->refCount.getValueUnchecked(); 
+//    }
+//    
+////    SmartPointerCounter* getCounter() throw();
+//    
+//	/// @} <!-- end Miscellaneous -->
+//    
+//protected:    
+//    CounterType* counter;
+//    AtomicValue<void*> weakPointer;
+//	
+//private:
+//	SmartPointerBase (const SmartPointerBase&);
+//    SmartPointerBase& operator= (const SmartPointerBase&);
+//};
+//
+////------------------------------------------------------------------------------
+//
+//class SmartPointerCounter : public PlonkBase
+//{
+//public:
+//    SmartPointerCounter() throw()
+//    :   refCount (0)
+//    {
+//    }
+//    
+//    ~SmartPointerCounter()
+//    {
+//        // perhaps --refCount again to make it -1?
+//    }
+//    
+//    
+//    friend class SmartPointer;
+//    friend class WeakPointer;
+//    
+//    //private:
+//    AtomicValue<Long> refCount;
+//};
+//
+////------------------------------------------------------------------------------
+//
+//class SmartPointer : public SmartPointerBase<SmartPointerCounter>
+//{
+//public:  
+//    SmartPointer (const bool allocateWeakPointer = true) throw()
+//    :   SmartPointerBase<SmartPointerCounter> (allocateWeakPointer)
+//    {
+//        
+//    }
+//
+//};
+//
+////------------------------------------------------------------------------------
+//
 
 #endif // PLONK_SMARTPOINTER_H
