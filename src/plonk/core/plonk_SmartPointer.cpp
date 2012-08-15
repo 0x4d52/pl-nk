@@ -138,65 +138,6 @@ void PlonkBase::operator delete[] (void* ptr)
     Memory::global().free (ptr); 
 }
 
-///-----------------------------------------------------------------------------
-//SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
-//:	refCount (0),
-//    weakPointer (0)
-//{		
-//	if (allocateWeakPointer)
-//    {
-//		weakPointer = new WeakPointer (this);
-//        WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-//        weak->incrementRefCount();
-//    }
-//    
-//#if PLONK_SMARTPOINTER_DEBUG
-//    ++totalSmartPointers;
-//  #if PLONK_SMARTPOINTER_DEBUGLOG
-//	printf("++SmartPointer++ %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
-//  #endif
-//#endif
-//}
-//
-//SmartPointer::~SmartPointer()
-//{
-//#if PLONK_SMARTPOINTER_DEBUG
-//    --totalSmartPointers;
-//  #if PLONK_SMARTPOINTER_DEBUGLOG
-//	printf("--SmartPointer-- %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
-//  #endif
-//#endif
-//    
-//	plonk_assert (refCount == 0);
-//}
-//
-//void SmartPointer::incrementRefCount()  throw()
-//{	
-//    ++refCount;
-//}
-//
-//bool SmartPointer::decrementRefCount()  throw()
-//{ 
-//    plonk_assert (refCount > 0);
-//        
-//    if (--refCount == 0) 
-//    {
-//        if (weakPointer != 0)
-//        {
-//            WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-//            weak->clearWeakPointer();
-//            weak->decrementRefCount();
-//            weakPointer = 0;
-//        }
-//
-//        delete this;
-//        return true;
-//    }
-//    
-//    return false;
-//}
-///-----------------------------------------------------------------------------
-
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
 :	counter (0),
     weakPointer (0)
@@ -228,6 +169,14 @@ SmartPointer::~SmartPointer()
 #endif
     
 	plonk_assert (counter->getRefCount() == 0);
+    
+    if (weakPointer != 0)
+    {
+        WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+        weak->decrementCounts();
+        weakPointer = 0;
+    }
+    
     delete counter; // <-- will be done by SmartPointerCounter itself when refCount and weakCount both hit zero
 }
 
@@ -236,24 +185,10 @@ void SmartPointer::incrementRefCount()  throw()
     counter->incrementRefCount();
 }
 
-bool SmartPointer::decrementRefCount()  throw()
+void SmartPointer::decrementRefCount()  throw()
 { 
     plonk_assert (counter->getRefCount() > 0);
-    
-    if (counter->decrementRefCount() == 0) 
-    {
-        if (weakPointer != 0)
-        {
-            WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-            weak->decrementCounts();
-            weakPointer = 0;
-        }
-        
-        delete this;
-        return true;
-    }
-    
-    return false;
+    counter->decrementRefCount(); 
 }
 
 void* SmartPointer::getWeak() const throw()               
@@ -296,28 +231,32 @@ SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
     return smartPointer.getPtrUnchecked();
 }
 
-int SmartPointerCounter::incrementRefCount() throw()
+void SmartPointerCounter::incrementRefCount() throw()
 {
-    const int count = ++refCount;  
+    //const int count = 
+    ++refCount;  
 #if PLONK_SMARTPOINTER_DEBUGLOG
     printf ("+R SmartPointerCounter %p refCount=%d weakCount=%d\n", 
             this, 
             refCount.getValueUnchecked(), 
             weakCount.getValueUnchecked());
 #endif
-    return count;
+//    return count;
 }
 
-int SmartPointerCounter::decrementRefCount() throw()
+void SmartPointerCounter::decrementRefCount() throw()
 {
-    const int count = --refCount;  
+    //const int count = 
+    ;  
     
     // need to do the refCount dec and clear of weak atomically if it hits zero!!
     // and if both refCount and weakCount hits zero we can delete this SmartPointerCounter
     
-    if (count == 0)
+    if (--refCount == 0)
     {
+        SmartPointer* expired = smartPointer.getValueUnchecked();
         smartPointer.setPtr (0);
+        delete expired;
     }
     
 #if PLONK_SMARTPOINTER_DEBUGLOG
@@ -326,7 +265,7 @@ int SmartPointerCounter::decrementRefCount() throw()
             refCount.getValueUnchecked(), 
             weakCount.getValueUnchecked());
 #endif    
-    return count;
+//    return count;
 }
 
 int SmartPointerCounter::getRefCount() const throw()
@@ -334,28 +273,30 @@ int SmartPointerCounter::getRefCount() const throw()
     return refCount.getValueUnchecked();
 }
 
-int SmartPointerCounter::incrementWeakCount() throw()
+void SmartPointerCounter::incrementWeakCount() throw()
 {
-    const int count = ++weakCount;  
+    //const int count = 
+    ++weakCount;  
 #if PLONK_SMARTPOINTER_DEBUGLOG
     printf ("+W SmartPointerCounter %p refCount=%d weakCount=%d\n", 
             this, 
             refCount.getValueUnchecked(), 
             weakCount.getValueUnchecked());
 #endif 
-    return count;
+//    return count;
 }
 
-int SmartPointerCounter::decrementWeakCount() throw()
+void SmartPointerCounter::decrementWeakCount() throw()
 {
-    const int count = --weakCount;  
+    //const int count = 
+    --weakCount;  
 #if PLONK_SMARTPOINTER_DEBUGLOG
     printf ("-W SmartPointerCounter %p refCount=%d weakCount=%d\n", 
             this, 
             refCount.getValueUnchecked(), 
             weakCount.getValueUnchecked());
 #endif    
-    return count;
+//    return count;
 }
 
 int SmartPointerCounter::getWeakCount() const throw()

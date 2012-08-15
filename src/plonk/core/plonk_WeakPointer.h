@@ -57,8 +57,8 @@ public:
     
     SmartPointer* getWeakPointer() const throw();
     
-    int incrementWeakCount() throw();    
-    int decrementWeakCount() throw();
+    void incrementWeakCount() throw();    
+    void decrementWeakCount() throw();
     int getWeakCount() const throw();   
     
     void incrementCounts() throw();    

@@ -59,14 +59,14 @@ SmartPointer* WeakPointer::getWeakPointer() const throw()
     return counter->getSmartPointer();
 }    
 
-int WeakPointer::incrementWeakCount() throw()
+void WeakPointer::incrementWeakCount() throw()
 {
-    return counter->incrementWeakCount();
+    counter->incrementWeakCount();
 }
 
-int WeakPointer::decrementWeakCount() throw()
+void WeakPointer::decrementWeakCount() throw()
 {
-    return counter->decrementWeakCount();
+    counter->decrementWeakCount();
 }
 
 int WeakPointer::getWeakCount() const throw()

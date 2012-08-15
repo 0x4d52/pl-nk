@@ -65,44 +65,6 @@ public:
  count but will get set to 0 when its SmartPointer peer is deleted.
  @see WeakPointer, SmartPointerContainer
  */
-//class SmartPointer : public PlonkBase
-//{
-//public:
-//	
-//	/// @name Construction and destruction
-//	/// @{
-//	
-//	SmartPointer (const bool allocateWeakPointer = true) throw();
-//    virtual ~SmartPointer(); // MUST be virtual unless PlonkBase gains the need to be virtual
-//        
-//	void incrementRefCount() throw();
-//    bool decrementRefCount() throw(); 
-//    	
-//	/// @} <!-- end Construction and destruction -->
-//	
-//	/// @name Miscellaneous
-//	/// @{
-//	
-//	Long getRefCount() const throw()	{ return refCount.getValueUnchecked(); }
-//    void update() throw()               { }
-//    void* getWeak() const throw()       { return weakPointer.getPtrUnchecked(); }
-//        
-//	/// @} <!-- end Miscellaneous -->
-//    
-//protected:    
-//    // have this as a single extended? so can be atomically updated?? would that actually help?
-//    AtomicValue<Long> refCount;
-//    AtomicValue<void*> weakPointer;
-//	
-//private:
-//	SmartPointer (const SmartPointer&);
-//    SmartPointer& operator= (const SmartPointer&);
-//};
-
-// new here
-
-//------------------------------------------------------------------------------
-
 class SmartPointer : public PlonkBase
 {
 public:
@@ -114,7 +76,7 @@ public:
     virtual ~SmartPointer(); // MUST be virtual unless PlonkBase gains the need to be virtual    
     
 	void incrementRefCount() throw();    
-    bool decrementRefCount() throw();
+    void decrementRefCount() throw();
     
 	/// @} <!-- end Construction and destruction -->
 	
@@ -148,12 +110,12 @@ public:
     
     SmartPointer* getSmartPointer() const throw();
     
-    int incrementRefCount() throw();    
-    int decrementRefCount() throw();
+    void incrementRefCount() throw();    
+    void decrementRefCount() throw();
     int getRefCount() const throw();   
     
-    int incrementWeakCount() throw();    
-    int decrementWeakCount() throw();
+    void incrementWeakCount() throw();    
+    void decrementWeakCount() throw();
     int getWeakCount() const throw();    
 
     void incrementCounts() throw();    
