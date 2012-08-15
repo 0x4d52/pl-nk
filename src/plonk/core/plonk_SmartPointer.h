@@ -122,28 +122,38 @@ public:
     void decrementCounts() throw();    
 
 private:
-    AtomicValue<LongLong> atom;
+    AtomicExtended<SmartPointer*> atom;
 
-    struct Separate
+    struct Counts
     {
-        int refCount;
-        int weakCount;
+        int refCount:PLONK_HALFWORDBITS;
+        int weakCount:PLONK_HALFWORDBITS;
+    };
+    
+    struct Parts
+    {
         SmartPointer* smartPointer;
-        int dummy;
+        Counts counts;    
+    };
+    
+    struct Halves
+    {
+        SmartPointer* ptr;
+        Long extra;
     };
     
     union Element
     {
-        Separate parts;
-        LongLong whole;
+        Parts parts;
+        Halves halves;
     };
     
-    inline LongLong createElement (const int refCount, const int weakCount, SmartPointer* const smartPointer) throw()
-    {
-        const Separate s = {refCount, weakCount, smartPointer, 0};
-        const Element e = { s };
-        return e.whole;
-    }
+//    inline Halves createElement (const int refCount, const int weakCount, SmartPointer* const smartPointer) throw()
+//    {
+//        const Parts p = { refCount, weakCount, smartPointer };
+//        const Element e = { p };
+//        return e.halves;
+//    }
     
     void clearSmartPointer() throw();
     

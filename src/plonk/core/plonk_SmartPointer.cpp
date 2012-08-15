@@ -146,10 +146,10 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
     
 	if (allocateWeakPointer)
     {
-		weakPointer = new WeakPointer (counter);
-        WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
+        WeakPointer* weak = new WeakPointer (counter);
         weak->incrementRefCount();  // for the WeakPointer object
         weak->incrementWeakCount(); // for the weak count for this object
+        this->weakPointer = weak;
     }
     
 #if PLONK_SMARTPOINTER_DEBUG
@@ -178,9 +178,7 @@ SmartPointer::~SmartPointer()
         weak->decrementWeakCount(); // for the weak count for this object
         weak->decrementRefCount();  // for the WeakPointer object
         weakPointer = 0;
-    }
-    
-    delete counter; // <-- will be done by SmartPointerCounter itself when refCount and weakCount both hit zero
+    }    
 }
 
 void SmartPointer::incrementRefCount()  throw()
@@ -207,8 +205,21 @@ int SmartPointer::getRefCount() const throw()
 ///-----------------------------------------------------------------------------
 
 SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
-:   atom (createElement (0, 0, smartPointer))
 {
+    // no need to set atomically in the constructor
+    atom.getAtomicRef()->ptr = smartPointer;
+    atom.getAtomicRef()->extra = 0;
+    
+#if PLONK_DEBUG // really need a static assert!!
+    const size_t wordSize = PLONK_WORDSIZE * 2;
+    const size_t partsSize = sizeof (Parts);
+    const size_t halvesSize = sizeof (Halves);
+    const size_t elementSize = sizeof (Element);
+    plonk_assert (partsSize == wordSize);
+    plonk_assert (elementSize == wordSize);
+    plonk_assert (halvesSize == wordSize);
+#endif
+    
 #if PLONK_SMARTPOINTER_DEBUG
     ++totalSmartPointerCounters;
 #if PLONK_SMARTPOINTER_DEBUGLOG
@@ -230,104 +241,163 @@ SmartPointerCounter::~SmartPointerCounter()
 SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
 {
     Element e;
-    e.whole = atom.getValueUnchecked();
+    e.halves.ptr = atom.getPtrUnchecked();
     return e.parts.smartPointer;
 }
 
 void SmartPointerCounter::clearSmartPointer() throw()
 {
-    Element oldElement;
+    Element oldElement, newElement;
     bool success;
     
     do
     {
-        oldElement.whole = atom.getValueUnchecked();
-        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount, 
-                                                              oldElement.parts.weakCount, 
-                                                              0));
+        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
+        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        newElement.parts.smartPointer = 0;
+        
+        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
+                                       newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
 }
 
 void SmartPointerCounter::incrementRefCount() throw()
 {
-    Element oldElement;
+    Element oldElement, newElement;
     bool success;
     
     do
     {
-        oldElement.whole = atom.getValueUnchecked();
-        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount + 1, 
-                                                              oldElement.parts.weakCount, 
-                                                              oldElement.parts.smartPointer));
+        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
+        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        ++newElement.parts.counts.refCount;
+        
+        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
+                                       newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
 }
 
 void SmartPointerCounter::decrementRefCount() throw()
-{
-//    // need to do the refCount dec and clear of weak atomically if it hits zero!!
-//    // and if both refCount and weakCount hits zero we can delete this SmartPointerCounter
-//    
-//    if (--refCount == 0)
-//    {
-//        SmartPointer* expired = getSmartPointer();
-//        clearSmartPointer();
-//        delete expired;
-//    }    
+{    
+    Element oldElement, newElement;
+    bool success;
+    
+    do
+    {
+        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
+        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        
+        if (--newElement.parts.counts.refCount == 0)
+            newElement.parts.smartPointer = 0;
+        
+        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
+                                       newElement.halves.ptr, newElement.halves.extra);
+    } while (!success);
+    
+    if (newElement.parts.counts.refCount == 0)
+    {
+        delete oldElement.parts.smartPointer;
+        
+        if (newElement.parts.counts.weakCount == 0)
+            delete this;
+    }
 }
 
 int SmartPointerCounter::getRefCount() const throw()
 {
     Element e;
-    e.whole = atom.getValueUnchecked();
-    return e.parts.refCount;
+    e.halves.extra = atom.getExtraUnchecked();
+    return e.parts.counts.refCount;
 }
 
 void SmartPointerCounter::incrementWeakCount() throw()
 {
-    Element oldElement;
+    Element oldElement, newElement;
     bool success;
     
     do
     {
-        oldElement.whole = atom.getValueUnchecked();
-        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount, 
-                                                              oldElement.parts.weakCount + 1, 
-                                                              oldElement.parts.smartPointer));
+        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
+        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        ++newElement.parts.counts.weakCount;
+        
+        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
+                                       newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
 }
 
 void SmartPointerCounter::decrementWeakCount() throw()
-{
-//    --weakCount;  
+{    
+    Element oldElement, newElement;
+    bool success;
+    
+    do
+    {
+        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
+        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        --newElement.parts.counts.weakCount;
+        
+        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
+                                       newElement.halves.ptr, newElement.halves.extra);
+    } while (!success);
+    
+    if ((newElement.parts.counts.refCount == 0) && (newElement.parts.counts.weakCount == 0))
+        delete this;
 }
 
 int SmartPointerCounter::getWeakCount() const throw()
 {
     Element e;
-    e.whole = atom.getValueUnchecked();
-    return e.parts.weakCount;
+    e.halves.extra = atom.getExtraUnchecked();
+    return e.parts.counts.weakCount;
 }
 
 void SmartPointerCounter::incrementCounts() throw()
 {
-    Element oldElement;
+    Element oldElement, newElement;
     bool success;
     
     do
     {
-        oldElement.whole = atom.getValueUnchecked();
-        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount + 1, 
-                                                              oldElement.parts.weakCount + 1, 
-                                                              oldElement.parts.smartPointer));
+        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
+        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        ++newElement.parts.counts.refCount;
+        ++newElement.parts.counts.weakCount;
+        
+        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
+                                       newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
 }
 
 void SmartPointerCounter::decrementCounts() throw()
-{
-//    // can ultimately be atomic
-//    decrementWeakCount();
-//    decrementRefCount();
+{    
+    Element oldElement, newElement;
+    bool success;
+    
+    do
+    {
+        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
+        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
+        
+        if (--newElement.parts.counts.refCount == 0)
+            newElement.parts.smartPointer = 0;
+        
+        --newElement.parts.counts.weakCount;
+        
+        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
+                                       newElement.halves.ptr, newElement.halves.extra);
+    } while (!success);
+    
+    if (newElement.parts.counts.refCount == 0)
+    {
+        delete oldElement.parts.smartPointer;
+        
+        if (newElement.parts.counts.weakCount == 0)
+            delete this;
+    }
 }
+
+///-----------------------------------------------------------------------------
 
 //#if PLONK_SMARTPOINTER_DEBUGLOG
 //printf ("-R SmartPointerCounter %p refCount=%d weakCount=%d\n", 

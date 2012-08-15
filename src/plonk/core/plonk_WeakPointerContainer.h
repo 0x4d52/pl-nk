@@ -103,7 +103,7 @@ public:
         const WeakPointer* const weakPointer = this->getInternal();
         
         if (weakPointer != 0)
-            smartPointer = reinterpret_cast<OriginalInternal*> (weakPointer->getWeakPointer());
+            smartPointer = static_cast<OriginalInternal*> (weakPointer->getWeakPointer());
         
         return smartPointer;
     }
