@@ -245,22 +245,6 @@ SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
     return e.parts.smartPointer;
 }
 
-void SmartPointerCounter::clearSmartPointer() throw()
-{
-    Element oldElement, newElement;
-    bool success;
-    
-    do
-    {
-        oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
-        oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
-        newElement.parts.smartPointer = 0;
-        
-        success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
-                                       newElement.halves.ptr, newElement.halves.extra);
-    } while (!success);
-}
-
 void SmartPointerCounter::incrementRefCount() throw()
 {
     Element oldElement, newElement;
@@ -271,6 +255,8 @@ void SmartPointerCounter::incrementRefCount() throw()
         oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
         oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
         ++newElement.parts.counts.refCount;
+        
+        plonk_assert (newElement.parts.counts.refCount != 0); // overflow occurred
         
         success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
                                        newElement.halves.ptr, newElement.halves.extra);
@@ -321,6 +307,8 @@ void SmartPointerCounter::incrementWeakCount() throw()
         oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
         ++newElement.parts.counts.weakCount;
         
+        plonk_assert (newElement.parts.counts.weakCount != 0); // overflow occurred
+        
         success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
                                        newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
@@ -364,6 +352,9 @@ void SmartPointerCounter::incrementCounts() throw()
         ++newElement.parts.counts.refCount;
         ++newElement.parts.counts.weakCount;
         
+        plonk_assert (newElement.parts.counts.refCount != 0); // overflow occurred
+        plonk_assert (newElement.parts.counts.weakCount != 0); // overflow occurred
+
         success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
                                        newElement.halves.ptr, newElement.halves.extra);
     } while (!success);
@@ -396,77 +387,6 @@ void SmartPointerCounter::decrementCounts() throw()
             delete this;
     }
 }
-
-///-----------------------------------------------------------------------------
-
-//#if PLONK_SMARTPOINTER_DEBUGLOG
-//printf ("-R SmartPointerCounter %p refCount=%d weakCount=%d\n", 
-//        this, 
-//        refCount.getValueUnchecked(), 
-//        weakCount.getValueUnchecked());
-//#endif    
-
-//SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
-//{
-//    return smartPointer.getPtrUnchecked();
-//}
-//
-//void SmartPointerCounter::clearSmartPointer() throw()
-//{
-//    
-//}
-//
-//void SmartPointerCounter::incrementRefCount() throw()
-//{
-//    ++refCount;  
-//}
-//
-//void SmartPointerCounter::decrementRefCount() throw()
-//{
-//    // need to do the refCount dec and clear of weak atomically if it hits zero!!
-//    // and if both refCount and weakCount hits zero we can delete this SmartPointerCounter
-//    
-//    if (--refCount == 0)
-//    {
-//        SmartPointer* expired = getSmartPointer();
-//        clearSmartPointer();
-//        delete expired;
-//    }    
-//}
-//
-//int SmartPointerCounter::getRefCount() const throw()
-//{
-//    return refCount.getValueUnchecked();
-//}
-//
-//void SmartPointerCounter::incrementWeakCount() throw()
-//{
-//    ++weakCount;  
-//}
-//
-//void SmartPointerCounter::decrementWeakCount() throw()
-//{
-//    --weakCount;  
-//}
-//
-//int SmartPointerCounter::getWeakCount() const throw()
-//{
-//    return weakCount.getValueUnchecked();
-//}
-//
-//void SmartPointerCounter::incrementCounts() throw()
-//{
-//    // can ultimately be atomic
-//    incrementRefCount();
-//    incrementWeakCount();
-//}
-//
-//void SmartPointerCounter::decrementCounts() throw()
-//{
-//    // can ultimately be atomic
-//    decrementWeakCount();
-//    decrementRefCount();
-//}
 
 
 END_PLONK_NAMESPACE

@@ -126,8 +126,8 @@ private:
 
     struct Counts
     {
-        int refCount:PLONK_HALFWORDBITS;
-        int weakCount:PLONK_HALFWORDBITS;
+        unsigned int refCount:PLONK_HALFWORDBITS;
+        unsigned int weakCount:PLONK_HALFWORDBITS;
     };
     
     struct Parts
@@ -146,21 +146,7 @@ private:
     {
         Parts parts;
         Halves halves;
-    };
-    
-//    inline Halves createElement (const int refCount, const int weakCount, SmartPointer* const smartPointer) throw()
-//    {
-//        const Parts p = { refCount, weakCount, smartPointer };
-//        const Element e = { p };
-//        return e.halves;
-//    }
-    
-    void clearSmartPointer() throw();
-    
-    // pack these into a single atomic then they can all be set atomically
-//    AtomicValue<int> refCount;
-//    AtomicValue<int> weakCount;
-//    AtomicValue<SmartPointer*> smartPointer; // weak!
+    };    
 };
 
 //------------------------------------------------------------------------------

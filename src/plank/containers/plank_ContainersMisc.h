@@ -169,7 +169,7 @@ static inline PlankUC pl_CountOnesUC (PlankUC x)
     x -= ((x >> 1) & 0x55);
     x = (((x >> 2) & 0x33) + (x & 0x33));
     x = (((x >> 4) + x) & 0x0f);
-    return x & 0x0000000f;		
+    return x;		
 }
 
 static inline PlankUC pl_CountLeadingZerosUC (PlankUC x)
@@ -221,7 +221,7 @@ static inline PlankUS pl_CountOnesUS (PlankUS x)
     x = (((x >> 2) & 0x3333) + (x & 0x3333));
     x = (((x >> 4) + x) & 0x0f0f);
     x += (x >> 8);
-    return x & 0x0000001f;		
+    return x & 0x001f;		
 }
 
 static inline PlankUS pl_CountLeadingZerosUS (PlankUS x)
@@ -325,13 +325,13 @@ static inline PlankB pl_IsPowerOf2UI (PlankUI x)
 
 static inline PlankULL pl_CountOnesULL (PlankULL x)
 {
-    x -= ((x >> 1) & 0x5555555555555555);
-    x = (((x >> 2) & 0x3333333333333333) + (x & 0x3333333333333333));
-    x = (((x >> 4) + x) & 0x0f0f0f0f0f0f0f0f);
+    x -= ((x >> 1) & 0x5555555555555555ULL);
+    x = (((x >> 2) & 0x3333333333333333ULL) + (x & 0x3333333333333333ULL));
+    x = (((x >> 4) + x) & 0x0f0f0f0f0f0f0f0fULL);
     x += (x >> 8);
     x += (x >> 16);
     x += (x >> 32);
-    return x & 0x0000007f;		
+    return x & 0x000000000000007fULL;		
 }
 
 static inline PlankULL pl_CountLeadingZerosULL (PlankULL x)
