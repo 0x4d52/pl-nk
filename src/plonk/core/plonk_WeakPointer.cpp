@@ -43,25 +43,20 @@ BEGIN_PLONK_NAMESPACE
 #include "plonk_Headers.h"
 
 
-WeakPointer::WeakPointer (SmartPointer* smartPointerToUse) throw()
+WeakPointer::WeakPointer (SmartPointerCounter* counterToUse) throw()
 :   SmartPointer (false), // avoid infinite recursion
-    smartPointer (smartPointerToUse),
-    counter (smartPointerToUse == 0 ? 0 : smartPointerToUse->counter)
+    counter (counterToUse)
 {
+    plonk_assert (counter != 0);
 }
 
 WeakPointer::~WeakPointer()
 {
 }
 
-void WeakPointer::clearWeakPointer() throw()
-{
-    smartPointer.setPtr (0);
-}
-
 SmartPointer* WeakPointer::getWeakPointer() const throw()
 {
-    return smartPointer.getPtrUnchecked();
+    return counter->getSmartPointer();
 }    
 
 int WeakPointer::incrementWeakCount() throw()

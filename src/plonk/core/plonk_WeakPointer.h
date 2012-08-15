@@ -52,10 +52,9 @@
 class WeakPointer : public SmartPointer
 {
 public:
-    WeakPointer (SmartPointer* smartPointerToUse) throw();
+    WeakPointer (SmartPointerCounter* counter) throw();
     ~WeakPointer();
     
-    void clearWeakPointer() throw();
     SmartPointer* getWeakPointer() const throw();
     
     int incrementWeakCount() throw();    
@@ -66,8 +65,7 @@ public:
     void decrementCounts() throw();
     
 private:
-    AtomicExtended<SmartPointer*> smartPointer;
-    SmartPointerCounter* counter;
+    SmartPointerCounter* const counter; // don't think this needs to be atomic as the counting will be ALL atomic and wi
     
     WeakPointer();
     WeakPointer (const WeakPointer&);

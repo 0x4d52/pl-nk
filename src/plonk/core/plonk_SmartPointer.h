@@ -143,8 +143,10 @@ private:
 class SmartPointerCounter : public PlonkBase
 {
 public:
-    SmartPointerCounter() throw();    
+    SmartPointerCounter (SmartPointer* smartPointer) throw();    
     ~SmartPointerCounter();    
+    
+    SmartPointer* getSmartPointer() const throw();
     
     int incrementRefCount() throw();    
     int decrementRefCount() throw();
@@ -158,9 +160,10 @@ public:
     void decrementCounts() throw();    
 
 private:
-    // maybe pack these into a single atomic?
+    // pack these into a single atomic then they can all be set atomically
     AtomicValue<int> refCount;
     AtomicValue<int> weakCount;
+    AtomicValue<SmartPointer*> smartPointer; // weak!
 };
 
 //------------------------------------------------------------------------------

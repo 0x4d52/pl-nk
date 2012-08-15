@@ -198,12 +198,14 @@ void PlonkBase::operator delete[] (void* ptr)
 ///-----------------------------------------------------------------------------
 
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
-:	counter (new SmartPointerCounter),
+:	counter (0),
     weakPointer (0)
 {		
+    counter = new SmartPointerCounter (this);
+    
 	if (allocateWeakPointer)
     {
-		weakPointer = new WeakPointer (this);
+		weakPointer = new WeakPointer (counter);
         WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
         weak->incrementCounts();
     }
@@ -226,7 +228,7 @@ SmartPointer::~SmartPointer()
 #endif
     
 	plonk_assert (counter->getRefCount() == 0);
-    delete counter;
+    delete counter; // <-- will be done by SmartPointerCounter itself when refCount and weakCount both hit zero
 }
 
 void SmartPointer::incrementRefCount()  throw()
@@ -243,7 +245,6 @@ bool SmartPointer::decrementRefCount()  throw()
         if (weakPointer != 0)
         {
             WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-            weak->clearWeakPointer(); // hmm counld be done by SmartPointerCounter
             weak->decrementCounts();
             weakPointer = 0;
         }
@@ -267,8 +268,10 @@ int SmartPointer::getRefCount() const throw()
 
 ///-----------------------------------------------------------------------------
 
-SmartPointerCounter::SmartPointerCounter() throw()
-:   refCount (0)
+SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointerToUse) throw()
+:   smartPointer (smartPointerToUse),
+    refCount (0),
+    weakCount (0)
 {
 #if PLONK_SMARTPOINTER_DEBUG
     ++totalSmartPointerCounters;
@@ -288,6 +291,11 @@ SmartPointerCounter::~SmartPointerCounter()
 #endif
 }
 
+SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
+{
+    return smartPointer.getPtrUnchecked();
+}
+
 int SmartPointerCounter::incrementRefCount() throw()
 {
     const int count = ++refCount;  
@@ -303,6 +311,15 @@ int SmartPointerCounter::incrementRefCount() throw()
 int SmartPointerCounter::decrementRefCount() throw()
 {
     const int count = --refCount;  
+    
+    // need to do the refCount dec and clear of weak atomically if it hits zero!!
+    // and if both refCount and weakCount hits zero we can delete this SmartPointerCounter
+    
+    if (count == 0)
+    {
+        smartPointer.setPtr (0);
+    }
+    
 #if PLONK_SMARTPOINTER_DEBUGLOG
     printf ("-R SmartPointerCounter %p refCount=%d weakCount=%d\n", 
             this, 
