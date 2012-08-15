@@ -148,8 +148,8 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
     {
 		weakPointer = new WeakPointer (counter);
         WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-        weak->incrementRefCount();
-        weak->incrementWeakCount();
+        weak->incrementRefCount();  // for the WeakPointer object
+        weak->incrementWeakCount(); // for the weak count for this object
     }
     
 #if PLONK_SMARTPOINTER_DEBUG
@@ -171,11 +171,12 @@ SmartPointer::~SmartPointer()
     
 	plonk_assert (counter->getRefCount() == 0);
     
+    // this is a good place to do this
     if (weakPointer != 0)
     {
         WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-        weak->decrementWeakCount();
-        weak->decrementRefCount();
+        weak->decrementWeakCount(); // for the weak count for this object
+        weak->decrementRefCount();  // for the WeakPointer object
         weakPointer = 0;
     }
     
@@ -205,10 +206,8 @@ int SmartPointer::getRefCount() const throw()
 
 ///-----------------------------------------------------------------------------
 
-SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointerToUse) throw()
-:   smartPointer (smartPointerToUse),
-    refCount (0),
-    weakCount (0)
+SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
+:   atom (createElement (0, 0, smartPointer))
 {
 #if PLONK_SMARTPOINTER_DEBUG
     ++totalSmartPointerCounters;
@@ -230,94 +229,174 @@ SmartPointerCounter::~SmartPointerCounter()
 
 SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
 {
-    return smartPointer.getPtrUnchecked();
+    Element e;
+    e.whole = atom.getValueUnchecked();
+    return e.parts.smartPointer;
+}
+
+void SmartPointerCounter::clearSmartPointer() throw()
+{
+    Element oldElement;
+    bool success;
+    
+    do
+    {
+        oldElement.whole = atom.getValueUnchecked();
+        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount, 
+                                                              oldElement.parts.weakCount, 
+                                                              0));
+    } while (!success);
 }
 
 void SmartPointerCounter::incrementRefCount() throw()
 {
-    //const int count = 
-    ++refCount;  
-#if PLONK_SMARTPOINTER_DEBUGLOG
-    printf ("+R SmartPointerCounter %p refCount=%d weakCount=%d\n", 
-            this, 
-            refCount.getValueUnchecked(), 
-            weakCount.getValueUnchecked());
-#endif
-//    return count;
+    Element oldElement;
+    bool success;
+    
+    do
+    {
+        oldElement.whole = atom.getValueUnchecked();
+        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount + 1, 
+                                                              oldElement.parts.weakCount, 
+                                                              oldElement.parts.smartPointer));
+    } while (!success);
 }
 
 void SmartPointerCounter::decrementRefCount() throw()
 {
-    //const int count = 
-    ;  
-    
-    // need to do the refCount dec and clear of weak atomically if it hits zero!!
-    // and if both refCount and weakCount hits zero we can delete this SmartPointerCounter
-    
-    if (--refCount == 0)
-    {
-        SmartPointer* expired = smartPointer.getValueUnchecked();
-        smartPointer.setPtr (0);
-        delete expired;
-    }
-    
-#if PLONK_SMARTPOINTER_DEBUGLOG
-    printf ("-R SmartPointerCounter %p refCount=%d weakCount=%d\n", 
-            this, 
-            refCount.getValueUnchecked(), 
-            weakCount.getValueUnchecked());
-#endif    
-//    return count;
+//    // need to do the refCount dec and clear of weak atomically if it hits zero!!
+//    // and if both refCount and weakCount hits zero we can delete this SmartPointerCounter
+//    
+//    if (--refCount == 0)
+//    {
+//        SmartPointer* expired = getSmartPointer();
+//        clearSmartPointer();
+//        delete expired;
+//    }    
 }
 
 int SmartPointerCounter::getRefCount() const throw()
 {
-    return refCount.getValueUnchecked();
+    Element e;
+    e.whole = atom.getValueUnchecked();
+    return e.parts.refCount;
 }
 
 void SmartPointerCounter::incrementWeakCount() throw()
 {
-    //const int count = 
-    ++weakCount;  
-#if PLONK_SMARTPOINTER_DEBUGLOG
-    printf ("+W SmartPointerCounter %p refCount=%d weakCount=%d\n", 
-            this, 
-            refCount.getValueUnchecked(), 
-            weakCount.getValueUnchecked());
-#endif 
-//    return count;
+    Element oldElement;
+    bool success;
+    
+    do
+    {
+        oldElement.whole = atom.getValueUnchecked();
+        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount, 
+                                                              oldElement.parts.weakCount + 1, 
+                                                              oldElement.parts.smartPointer));
+    } while (!success);
 }
 
 void SmartPointerCounter::decrementWeakCount() throw()
 {
-    //const int count = 
-    --weakCount;  
-#if PLONK_SMARTPOINTER_DEBUGLOG
-    printf ("-W SmartPointerCounter %p refCount=%d weakCount=%d\n", 
-            this, 
-            refCount.getValueUnchecked(), 
-            weakCount.getValueUnchecked());
-#endif    
-//    return count;
+//    --weakCount;  
 }
 
 int SmartPointerCounter::getWeakCount() const throw()
 {
-    return weakCount.getValueUnchecked();
+    Element e;
+    e.whole = atom.getValueUnchecked();
+    return e.parts.weakCount;
 }
 
 void SmartPointerCounter::incrementCounts() throw()
 {
-    // can ultimately be atomic
-    incrementRefCount();
-    incrementWeakCount();
+    Element oldElement;
+    bool success;
+    
+    do
+    {
+        oldElement.whole = atom.getValueUnchecked();
+        atom.compareAndSwap (oldElement.whole, createElement (oldElement.parts.refCount + 1, 
+                                                              oldElement.parts.weakCount + 1, 
+                                                              oldElement.parts.smartPointer));
+    } while (!success);
 }
 
 void SmartPointerCounter::decrementCounts() throw()
 {
-    // can ultimately be atomic
-    decrementWeakCount();
-    decrementRefCount();
+//    // can ultimately be atomic
+//    decrementWeakCount();
+//    decrementRefCount();
 }
+
+//#if PLONK_SMARTPOINTER_DEBUGLOG
+//printf ("-R SmartPointerCounter %p refCount=%d weakCount=%d\n", 
+//        this, 
+//        refCount.getValueUnchecked(), 
+//        weakCount.getValueUnchecked());
+//#endif    
+
+//SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
+//{
+//    return smartPointer.getPtrUnchecked();
+//}
+//
+//void SmartPointerCounter::clearSmartPointer() throw()
+//{
+//    
+//}
+//
+//void SmartPointerCounter::incrementRefCount() throw()
+//{
+//    ++refCount;  
+//}
+//
+//void SmartPointerCounter::decrementRefCount() throw()
+//{
+//    // need to do the refCount dec and clear of weak atomically if it hits zero!!
+//    // and if both refCount and weakCount hits zero we can delete this SmartPointerCounter
+//    
+//    if (--refCount == 0)
+//    {
+//        SmartPointer* expired = getSmartPointer();
+//        clearSmartPointer();
+//        delete expired;
+//    }    
+//}
+//
+//int SmartPointerCounter::getRefCount() const throw()
+//{
+//    return refCount.getValueUnchecked();
+//}
+//
+//void SmartPointerCounter::incrementWeakCount() throw()
+//{
+//    ++weakCount;  
+//}
+//
+//void SmartPointerCounter::decrementWeakCount() throw()
+//{
+//    --weakCount;  
+//}
+//
+//int SmartPointerCounter::getWeakCount() const throw()
+//{
+//    return weakCount.getValueUnchecked();
+//}
+//
+//void SmartPointerCounter::incrementCounts() throw()
+//{
+//    // can ultimately be atomic
+//    incrementRefCount();
+//    incrementWeakCount();
+//}
+//
+//void SmartPointerCounter::decrementCounts() throw()
+//{
+//    // can ultimately be atomic
+//    decrementWeakCount();
+//    decrementRefCount();
+//}
+
 
 END_PLONK_NAMESPACE

@@ -122,10 +122,35 @@ public:
     void decrementCounts() throw();    
 
 private:
+    AtomicValue<LongLong> atom;
+
+    struct Separate
+    {
+        int refCount;
+        int weakCount;
+        SmartPointer* smartPointer;
+        int dummy;
+    };
+    
+    union Element
+    {
+        Separate parts;
+        LongLong whole;
+    };
+    
+    inline LongLong createElement (const int refCount, const int weakCount, SmartPointer* const smartPointer) throw()
+    {
+        const Separate s = {refCount, weakCount, smartPointer, 0};
+        const Element e = { s };
+        return e.whole;
+    }
+    
+    void clearSmartPointer() throw();
+    
     // pack these into a single atomic then they can all be set atomically
-    AtomicValue<int> refCount;
-    AtomicValue<int> weakCount;
-    AtomicValue<SmartPointer*> smartPointer; // weak!
+//    AtomicValue<int> refCount;
+//    AtomicValue<int> weakCount;
+//    AtomicValue<SmartPointer*> smartPointer; // weak!
 };
 
 //------------------------------------------------------------------------------
