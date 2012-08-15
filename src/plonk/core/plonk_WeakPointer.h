@@ -55,13 +55,19 @@ public:
     WeakPointer (SmartPointer* smartPointerToUse) throw();
     ~WeakPointer();
     
-//    void setWeakPointer (SmartPointer* smartPointerToUse) throw();
     void clearWeakPointer() throw();
     SmartPointer* getWeakPointer() const throw();
     
+    int incrementWeakCount() throw();    
+    int decrementWeakCount() throw();
+    int getWeakCount() const throw();   
+    
+    void incrementCounts() throw();    
+    void decrementCounts() throw();
+    
 private:
     AtomicExtended<SmartPointer*> smartPointer;
-//    SmartPointerCounter* counter;
+    SmartPointerCounter* counter;
     
     WeakPointer();
     WeakPointer (const WeakPointer&);

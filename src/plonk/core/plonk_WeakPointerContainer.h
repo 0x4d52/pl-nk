@@ -61,18 +61,32 @@ public:
     {
     }        
     
+    ~WeakPointerContainer()
+    {
+        decrementWeakCount (this->getInternal());
+    }
+    
     /** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
 	WeakPointerContainer (WeakPointerContainer const& copy) throw()
 	:	Base (static_cast<Base const&> (copy))
 	{
+        incrementWeakCount (this->getInternal());
 	}
     
     /** Assignment operator. */
     WeakPointerContainer& operator= (WeakPointerContainer const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());
+        {
+            WeakPointer* const weakPointer = this->getInternal();
+            WeakPointer* const otherWeakPointer = other.getInternal();
+
+            incrementWeakCount (otherWeakPointer);
+            decrementWeakCount (weakPointer);
+
+            this->setInternal (otherWeakPointer);
+        }
         
         return *this;
     }
@@ -80,20 +94,13 @@ public:
     WeakPointerContainer (OriginalType const& original) throw()
     :   Base (original.getWeakPointer())
     {
+        incrementWeakCount (this->getInternal());
     }
-    
-//    void setWeakPointer (OriginalInternal* smartPointer) throw()
-//    {
-//        WeakPointer* weakPointer = this->getInternal();
-//        
-//        if (weakPointer != 0)
-//            weakPointer->setWeakPointer (smartPointer);
-//    }
-    
+        
     OriginalInternal* getWeakPointer() const throw()
     {
         OriginalInternal* smartPointer = 0;
-        const WeakPointer* weakPointer = this->getInternal();
+        const WeakPointer* const weakPointer = this->getInternal();
         
         if (weakPointer != 0)
             smartPointer = reinterpret_cast<OriginalInternal*> (weakPointer->getWeakPointer());
@@ -117,6 +124,17 @@ public:
     }
     
 private:
+    inline static void incrementWeakCount (WeakPointer* const weakPointer) throw()
+    {
+        if (weakPointer != 0)
+            weakPointer->incrementWeakCount();
+    }
+    
+    inline static void decrementWeakCount (WeakPointer* const weakPointer) throw()
+    {
+        if (weakPointer != 0)
+            weakPointer->decrementWeakCount();
+    }
 };
 
 

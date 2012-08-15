@@ -45,22 +45,14 @@ BEGIN_PLONK_NAMESPACE
 
 WeakPointer::WeakPointer (SmartPointer* smartPointerToUse) throw()
 :   SmartPointer (false), // avoid infinite recursion
-    smartPointer (smartPointerToUse)//,
-    //counter (smartPointerToUse == 0 ? 0 : smartPointer->getCounter()) // increments ref count
+    smartPointer (smartPointerToUse),
+    counter (smartPointerToUse == 0 ? 0 : smartPointerToUse->counter)
 {
-//    setWeakPointer (smartPointerToUse);
 }
 
 WeakPointer::~WeakPointer()
 {
-//    if (counter != 0)
-//        counter->decrementRefCount();
 }
-
-//void WeakPointer::setWeakPointer (SmartPointer* smartPointerToUse) throw()
-//{
-//    smartPointer.setPtr (smartPointerToUse);
-//}
 
 void WeakPointer::clearWeakPointer() throw()
 {
@@ -71,6 +63,33 @@ SmartPointer* WeakPointer::getWeakPointer() const throw()
 {
     return smartPointer.getPtrUnchecked();
 }    
+
+int WeakPointer::incrementWeakCount() throw()
+{
+    return counter->incrementWeakCount();
+}
+
+int WeakPointer::decrementWeakCount() throw()
+{
+    return counter->decrementWeakCount();
+}
+
+int WeakPointer::getWeakCount() const throw()
+{
+    return counter->getWeakCount();
+}
+
+void WeakPointer::incrementCounts() throw()
+{
+    incrementRefCount();
+    incrementWeakCount();
+}
+
+void WeakPointer::decrementCounts() throw()
+{
+    decrementWeakCount();
+    decrementRefCount();
+}
     
 
 END_PLONK_NAMESPACE

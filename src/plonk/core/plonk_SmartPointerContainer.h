@@ -205,11 +205,9 @@ public:
     {
         const SmartPointerType* const p = this->getInternal();
             
-        if (p != Base::getNullSmartPointer())
+        if (p != Base::getNullSmartPointer()) // can't remember why :(
         {
-            // todo: should this be static_cast?
-            WeakPointer* w = reinterpret_cast<WeakPointer*> (p->getWeak());
-            
+            WeakPointer* w = static_cast<WeakPointer*> (p->getWeak());            
             return w;
         }
         
