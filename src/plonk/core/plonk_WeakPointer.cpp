@@ -74,17 +74,17 @@ int WeakPointer::getWeakCount() const throw()
     return counter->getWeakCount();
 }
 
-void WeakPointer::incrementCounts() throw()
-{
-    incrementRefCount();
-    incrementWeakCount();
-}
-
-void WeakPointer::decrementCounts() throw()
-{
-    decrementWeakCount();
-    decrementRefCount();
-}
+//void WeakPointer::incrementCounts() throw()
+//{
+//    incrementRefCount();    // for this object
+//    incrementWeakCount();   // for the object referred to
+//}
+//
+//void WeakPointer::decrementCounts() throw()
+//{
+//    decrementWeakCount();   // for the object referred to
+//    decrementRefCount();    // for this object
+//}
     
 
 END_PLONK_NAMESPACE

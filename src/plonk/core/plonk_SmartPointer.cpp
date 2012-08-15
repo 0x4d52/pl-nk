@@ -148,7 +148,8 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
     {
 		weakPointer = new WeakPointer (counter);
         WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-        weak->incrementCounts();
+        weak->incrementRefCount();
+        weak->incrementWeakCount();
     }
     
 #if PLONK_SMARTPOINTER_DEBUG
@@ -173,7 +174,8 @@ SmartPointer::~SmartPointer()
     if (weakPointer != 0)
     {
         WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());
-        weak->decrementCounts();
+        weak->decrementWeakCount();
+        weak->decrementRefCount();
         weakPointer = 0;
     }
     

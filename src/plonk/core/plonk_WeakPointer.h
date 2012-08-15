@@ -61,8 +61,8 @@ public:
     void decrementWeakCount() throw();
     int getWeakCount() const throw();   
     
-    void incrementCounts() throw();    
-    void decrementCounts() throw();
+//    void incrementCounts() throw();    
+//    void decrementCounts() throw();
     
 private:
     SmartPointerCounter* const counter; // don't think this needs to be atomic as the counting will be ALL atomic and wi
