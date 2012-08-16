@@ -36,91 +36,75 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLANK_LOCK_H
-#define PLANK_LOCK_H
+#ifndef PLANK_SPINLOCK_H
+#define PLANK_SPINLOCK_H
+
+#include "../containers/plank_Atomic.h"
 
 PLANK_BEGIN_C_LINKAGE
 
 /** A crossplatform synchronisation utiltiy.
- 
- This uses a pthread mutex on supported platforms and a CriticalSection on Windows.
- 
- @defgroup PlankLockClass Plank Lock class
+  
+ @defgroup PlankLockClass Plank SpinLock class
  @ingroup PlankClasses
  @{
  */
 
-/** An opaque reference to the <i>Plank %Lock</i> object. */
-typedef struct PlankLock* PlankLockRef; 
+/** An opaque reference to the <i>Plank %SpinLock</i> object. */
+typedef struct PlankSpinLock* PlankSpinLockRef; 
 
-/** Create and intitialise a <i>Plank %Lock</i> object and return an oqaque reference to it.
- @return A <i>Plank %Lock</i> object as an opaque reference or PLANK_NULL. */
-PlankLockRef pl_Lock_CreateAndInit();
+/** Create and intitialise a <i>Plank %SpinLock</i> object and return an oqaque reference to it.
+ @return A <i>Plank %SpinLock</i> object as an opaque reference or PLANK_NULL. */
+PlankSpinLockRef pl_SpinLock_CreateAndInit();
 
-/** Create a <i>Plank %Lock</i> object and return an oqaque reference to it.
- @return A <i>Plank %Lock</i> object as an opaque reference or PLANK_NULL. */
-PlankLockRef pl_Lock_Create();
+/** Create a <i>Plank %SpinLock</i> object and return an oqaque reference to it.
+ @return A <i>Plank %SpinLock</i> object as an opaque reference or PLANK_NULL. */
+PlankSpinLockRef pl_SpinLock_Create();
 
-/** Initialise a <i>Plank %Lock</i> object. 
- @param p The <i>Plank %Lock</i> object. 
+/** Initialise a <i>Plank %SpinLock</i> object. 
+ @param p The <i>Plank %SpinLock</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_Lock_Init (PlankLockRef p);
+PlankResult pl_SpinLock_Init (PlankSpinLockRef p);
 
-/** Deinitialise a <i>Plank %Lock</i> object. 
- @param p The <i>Plank %Lock</i> object. 
+/** Deinitialise a <i>Plank %SpinLock</i> object. 
+ @param p The <i>Plank %SpinLock</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_Lock_DeInit (PlankLockRef p);
+PlankResult pl_SpinLock_DeInit (PlankSpinLockRef p);
 
-/** Destroy a <i>Plank %Lock</i> object. 
- @param p The <i>Plank %Lock</i> object. 
+/** Destroy a <i>Plank %SpinLock</i> object. 
+ @param p The <i>Plank %SpinLock</i> object. 
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_Lock_Destroy (PlankLockRef p);
+PlankResult pl_SpinLock_Destroy (PlankSpinLockRef p);
 
 /** Obtain the lock. 
  This will block until the lock can be obtained. Be sure to release the lock
- using pl_Lock_Unlock() otherwise your application will freeze.
- @param p The <i>Plank %Lock</i> object. */
-void pl_Lock_Lock (PlankLockRef p);
+ using pl_SpinLock_Unlock() otherwise your application will freeze.
+ @param p The <i>Plank %SpinLock</i> object. */
+void pl_SpinLock_Lock (PlankSpinLockRef p);
 
 /** Release the lock. 
- @param p The <i>Plank %Lock</i> object. */
-void pl_Lock_Unlock (PlankLockRef p);
+ @param p The <i>Plank %SpinLock</i> object. */
+void pl_SpinLock_Unlock (PlankSpinLockRef p);
 
 /** Tries to obtain the lock but doesn't block if this fails. 
- @param p The <i>Plank %Lock</i> object. 
+ @param p The <i>Plank %SpinLock</i> object. 
  @return @c true if the lock was obtained, otherwise @c false. */
-PlankB pl_Lock_TryLock (PlankLockRef p);
+PlankB pl_SpinLock_TryLock (PlankSpinLockRef p);
 
 /** Wait on the lock. 
  [todo docs]
- @param p The <i>Plank %Lock</i> object. */
-void pl_Lock_Wait (PlankLockRef p);
-
-/** Signal the lock. 
- [todo docs]
- @param p The <i>Plank %Lock</i> object. */
-void pl_Lock_Signal (PlankLockRef p);
+ @param p The <i>Plank %SpinLock</i> object. */
+void pl_SpinLock_Wait (PlankSpinLockRef p);
 
 /** @} */
 
 PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
-#if PLANK_APPLE
-typedef struct PlankLock
+typedef struct PlankSpinLock
 {
-    pthread_mutex_t mutex;
-    pthread_cond_t condition;
-} PlankLock;
+    PLANK_ALIGN(16) PlankAtomicI flag;
+} PlankSpinLock;
 #endif
 
-#if PLANK_WIN
-typedef struct PlankLock
-{
-    CRITICAL_SECTION mutex;
-    HANDLE condition;
-} PlankLock;
-#endif
-#endif
-
-#endif // PLANK_LOCK_H
+#endif // PLANK_SPINLOCK_H

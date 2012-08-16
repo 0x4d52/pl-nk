@@ -45,7 +45,7 @@ BEGIN_PLONK_NAMESPACE
 
 WeakPointer::WeakPointer (SmartPointerCounter* counterToUse) throw()
 :   SmartPointer (false), // avoid infinite recursion
-    counter (counterToUse)
+    peerCounter (counterToUse)
 {
     plonk_assert (counter != 0);
 }
@@ -56,35 +56,37 @@ WeakPointer::~WeakPointer()
 
 SmartPointer* WeakPointer::getWeakPointer() const throw()
 {
-    return counter->getSmartPointer();
+    return peerCounter->getSmartPointer();
 }    
 
 void WeakPointer::incrementWeakCount() throw()
 {
-    counter->incrementWeakCount();
+    peerCounter->incrementWeakCount();
 }
 
 void WeakPointer::decrementWeakCount() throw()
 {
-    counter->decrementWeakCount();
+    peerCounter->decrementWeakCount();
 }
 
 int WeakPointer::getWeakCount() const throw()
 {
-    return counter->getWeakCount();
+    return peerCounter->getWeakCount();
 }
 
-//void WeakPointer::incrementCounts() throw()
-//{
-//    incrementRefCount();    // for this object
-//    incrementWeakCount();   // for the object referred to
-//}
-//
-//void WeakPointer::decrementCounts() throw()
-//{
-//    decrementWeakCount();   // for the object referred to
-//    decrementRefCount();    // for this object
-//}
-    
+void WeakPointer::incrementPeerRefCount() throw()
+{
+    peerCounter->incrementRefCount();
+}
+
+void WeakPointer::decrementPeerRefCount() throw()
+{
+    peerCounter->decrementRefCount();
+}
+
+int WeakPointer::getPeerRefCount() const throw()
+{
+    return peerCounter->getRefCount();
+}
 
 END_PLONK_NAMESPACE

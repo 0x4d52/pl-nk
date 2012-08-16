@@ -115,12 +115,21 @@ public:
     
     OriginalType fromWeak() const throw()
     {
-        OriginalInternal* smartPointer = this->getWeakPointer();
+        OriginalType result = OriginalType();
+        WeakPointer* const weakPointer = this->getInternal();
         
-        if (smartPointer != 0)
-            return OriginalType (smartPointer);
-        else
-            return OriginalType();
+        if (weakPointer != 0)
+        {
+            //weakPointer->incrementPeerRefCount();
+            OriginalInternal* smartPointer = this->getWeakPointer();
+            
+            if (smartPointer != 0)
+                return OriginalType (smartPointer);
+
+            //weakPointer->decrementPeerRefCount();
+        }
+        
+        return result;
     }
     
 private:

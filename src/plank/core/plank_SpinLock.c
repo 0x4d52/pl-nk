@@ -36,46 +36,111 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_WEAKPOINTER_H
-#define PLONK_WEAKPOINTER_H
+#include "plank_StandardHeader.h"
+#include "plank_SpinLock.h"
+#include "plank_Thread.h"
 
-#include "plonk_CoreForwardDeclarations.h"
-#include "plonk_SmartPointer.h"
-
-
-/** Holds a weak reference to a SmartPointer.
- This is a peer to a SmartPointer and stores a copy of the pointer. 
- The main difference is that this copy does not increment the reference 
- count of the SmartPointer and gets set to 0 when the SmartPointer is 
- deleted.
- @see SmartPointer, WeakPointerContainer*/
-class WeakPointer : public SmartPointer
+PlankSpinLockRef pl_SpinLock_CreateAndInit()
 {
-public:
-    WeakPointer (SmartPointerCounter* counter) throw();
-    ~WeakPointer();
+    PlankSpinLockRef p;
+    p = pl_SpinLock_Create();
     
-    SmartPointer* getWeakPointer() const throw();
+    if (p != PLANK_NULL)
+    {
+        if (pl_SpinLock_Init (p) != PlankResult_OK)
+            pl_SpinLock_Destroy (p);
+        else
+            return p;
+    }
     
-    void incrementWeakCount() throw();    
-    void decrementWeakCount() throw();
-    int getWeakCount() const throw();   
+    return PLANK_NULL;
+}
+
+PlankSpinLockRef pl_SpinLock_Create()
+{
+    PlankMemoryRef m;
+    PlankSpinLockRef p;
     
-    void incrementPeerRefCount() throw();    
-    void decrementPeerRefCount() throw();
-    int getPeerRefCount() const throw();   
+    m = pl_MemoryGlobal();
+    p = (PlankSpinLockRef)pl_Memory_AllocateBytes (m, sizeof (PlankSpinLock));
     
-//    void incrementCounts() throw();    
-//    void decrementCounts() throw();
+    if (p != PLANK_NULL)
+        pl_MemoryZero (p, sizeof (PlankSpinLock));
     
-private:
-    SmartPointerCounter* const peerCounter;
+    return p;
+}
+
+PlankResult pl_SpinLock_Destroy (PlankSpinLockRef p)
+{
+    PlankResult result = PlankResult_OK;
     
-    WeakPointer();
-    WeakPointer (const WeakPointer&);
-    const WeakPointer& operator= (const WeakPointer&);
-};
+    PlankMemoryRef m = pl_MemoryGlobal();
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    if ((result = pl_SpinLock_DeInit (p)) != PlankResult_OK)
+        goto exit;
+    
+    result = pl_Memory_Free (m, p);
+    
+exit:
+    return result;
+}
+
+PlankResult pl_SpinLock_Init (PlankSpinLockRef p)
+{
+    PlankResult result = PlankResult_OK;
+
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }    
+    
+    pl_AtomicI_Init (&p->flag);
+    
+exit:
+    return result;    
+}
+
+PlankResult pl_SpinLock_DeInit (PlankSpinLockRef p)
+{
+    PlankResult result = PlankResult_OK;
+
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pl_AtomicI_DeInit (&p->flag);
+
+exit:
+    return result;
+}
+
+void pl_SpinLock_Lock (PlankSpinLockRef p)
+{
+
+}
+
+void pl_SpinLock_Unlock (PlankSpinLockRef p)
+{
+
+}
+
+PlankB pl_SpinLock_TryLock (PlankSpinLockRef p)
+{
+    return false;
+}
+
+void pl_SpinLock_Wait (PlankSpinLockRef p)
+{
+    
+}
 
 
-
-#endif // PLONK_WEAKPOINTER_H
