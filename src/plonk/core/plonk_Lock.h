@@ -44,43 +44,87 @@
 #include "plonk_WeakPointer.h"
 #include "plonk_SmartPointerContainer.h"
 
+class LockInternalBase : public SmartPointer
+{
+public:
+    LockInternalBase() throw() : SmartPointer (false) { } // no weak ref needed
+    ~LockInternalBase() { }
+    
+    virtual void lock() throw() = 0;
+    virtual void unlock() throw() = 0;
+    virtual bool tryLock() throw() = 0;
+    virtual void wait() throw() = 0;
+    virtual void signal() throw() = 0;
 
-class LockInternal : public SmartPointer
+};
+
+class LockInternal : public LockInternalBase
 {
 public:
     LockInternal() throw();
     ~LockInternal();
     
-    friend class Lock;
-    
+    void lock() throw();
+    void unlock() throw();
+    bool tryLock() throw();
+    void wait() throw();
+    void signal() throw();
+
 private:
-    inline PlankLockRef getPeerRef() { return &lock; }
-    PlankLock lock;    
+    inline PlankLockRef getPeerRef() { return &l; }
+    PlankLock l;    
 };
 
-//------------------------------------------------------------------------------
-
-/** @ingroup PlonkOtherUserClasses */
-class Lock : public SmartPointerContainer<LockInternal>
+class SpinLockInternal : public LockInternalBase
 {
 public:
-    typedef SmartPointerContainer<LockInternal> Base;
-
-    Lock() throw();
+    SpinLockInternal() throw();
+    ~SpinLockInternal();
     
-    explicit Lock (LockInternal* internalToUse) throw();
-    
-    /** Copy constructor. */
-    Lock (Lock const& copy) throw();
-    Lock& operator= (Lock const& other) throw();
-        
     void lock() throw();
     void unlock() throw();
     bool tryLock() throw();
     void wait() throw();
     void signal() throw();
     
+private:
+    inline PlankSpinLockRef getPeerRef() { return &l; }
+    PlankSpinLock l;    
+};
+
+//------------------------------------------------------------------------------
+
+/** @ingroup PlonkOtherUserClasses */
+class Lock : public SmartPointerContainer<LockInternalBase>
+{
+public:
+    typedef SmartPointerContainer<LockInternalBase> Base;
+
+    enum Type
+    {
+        MutexLock,
+        SpinLock,
+        NumTypes
+    };
+    
+    Lock (const Lock::Type lockType = MutexLock) throw();
+    
+    explicit Lock (LockInternalBase* internalToUse) throw();
+    
+    /** Copy constructor. */
+    Lock (Lock const& copy) throw();
+    Lock& operator= (Lock const& other) throw();
+        
+    inline void lock() throw()      { getInternal()->lock(); }
+    inline void unlock() throw()    { getInternal()->unlock(); }
+    inline bool tryLock() throw()   { return getInternal()->tryLock(); }
+    inline void wait() throw()      { getInternal()->wait(); }
+    inline void signal() throw()    { getInternal()->signal(); }
+    
     PLONK_OBJECTARROWOPERATOR(Lock)
+    
+private:
+    static LockInternalBase* lockInternalFromType (const Lock::Type lockType) throw();
 };
 
 //------------------------------------------------------------------------------
@@ -89,7 +133,7 @@ public:
 class AutoLock
 {
 public:
-    AutoLock (Lock const& lock) throw();
+    AutoLock (Lock const& lock = Lock::MutexLock) throw();
     ~AutoLock();
     
     PLONK_OBJECTARROWOPERATOR(AutoLock)
@@ -107,7 +151,7 @@ private:
 class AutoUnlock
 {
 public:
-    AutoUnlock (Lock const& lock) throw();
+    AutoUnlock (Lock const& lock = Lock::MutexLock) throw();
     ~AutoUnlock();
     
     PLONK_OBJECTARROWOPERATOR(AutoUnlock)
@@ -125,8 +169,12 @@ private:
 class AutoTryLock
 {
 public:
-    AutoTryLock (Lock const& lock) throw();
+    AutoTryLock (Lock const& lock = Lock::MutexLock, bool* didLock = 0) throw();
     ~AutoTryLock();
+    
+    bool getDidLock() const throw() { return didLock; }
+    
+    PLONK_OBJECTARROWOPERATOR(AutoTryLock)
     
 private:
     Lock theLock;

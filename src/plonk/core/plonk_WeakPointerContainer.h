@@ -96,18 +96,7 @@ public:
     {
         incrementWeakCount (this->getInternal());
     }
-        
-//    OriginalInternal* getWeakPointer() const throw()
-//    {
-//        OriginalInternal* smartPointer = 0;
-//        const WeakPointer* const weakPointer = this->getInternal();
-//        
-//        if (weakPointer != 0)
-//            smartPointer = static_cast<OriginalInternal*> (weakPointer->getWeakPointer());
-//        
-//        return smartPointer;
-//    }
-    
+            
     bool isAlive() const throw()
     {
         return this->getWeakPointer() != 0;

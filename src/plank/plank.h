@@ -58,6 +58,7 @@
 
 #include "core/plank_StandardHeader.h"
 #include "core/plank_Lock.h"
+#include "core/plank_SpinLock.h"
 #include "core/plank_Thread.h"
 #include "core/plank_LockFreeMemory.h"
 

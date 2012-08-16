@@ -43,24 +43,95 @@ BEGIN_PLONK_NAMESPACE
 #include "plonk_Lock.h"
 
 LockInternal::LockInternal() throw()
-:   SmartPointer (false) // no weak ref needed
 {
-    pl_Lock_Init (&lock);
+    pl_Lock_Init (getPeerRef());
 }
 
 LockInternal::~LockInternal()
 {
-    pl_Lock_DeInit (&lock);
+    pl_Lock_DeInit (getPeerRef());
+}
+
+void LockInternal::lock() throw()
+{
+    pl_Lock_Lock (getPeerRef());
+}
+
+void LockInternal::unlock() throw()
+{
+    pl_Lock_Unlock (getPeerRef());
+}
+
+bool LockInternal::tryLock() throw()
+{
+    return pl_Lock_TryLock (getPeerRef()) != 0;
+}
+
+void LockInternal::wait() throw()
+{
+    pl_Lock_Wait (getPeerRef());
+}
+
+void LockInternal::signal() throw()
+{
+    pl_Lock_Signal (getPeerRef());
 }
 
 //------------------------------------------------------------------------------
 
-Lock::Lock() throw()
-:   Base (new LockInternal())
+SpinLockInternal::SpinLockInternal() throw()
+{
+    pl_SpinLock_Init (getPeerRef());
+}
+
+SpinLockInternal::~SpinLockInternal()
+{
+    pl_SpinLock_DeInit (getPeerRef());
+}
+
+void SpinLockInternal::lock() throw()
+{
+    pl_SpinLock_Lock (getPeerRef());
+}
+
+void SpinLockInternal::unlock() throw()
+{
+    pl_SpinLock_Unlock (getPeerRef());
+}
+
+bool SpinLockInternal::tryLock() throw()
+{
+    return pl_SpinLock_TryLock (getPeerRef()) != 0;
+}
+
+void SpinLockInternal::wait() throw()
+{
+    pl_SpinLock_Wait (getPeerRef());
+}
+
+void SpinLockInternal::signal() throw()
+{
+    // nothing
+}
+
+//------------------------------------------------------------------------------
+
+Lock::Lock (const Lock::Type lockType) throw()
+:   Base (lockInternalFromType (lockType))
 {
 }
 
-Lock::Lock (LockInternal* internalToUse) throw() 
+LockInternalBase* Lock::lockInternalFromType (const Lock::Type lockType) throw()
+{
+    switch (lockType) 
+    {
+        case MutexLock: return new LockInternal();
+        case SpinLock: return new SpinLockInternal();
+        default: return new LockInternal();
+    }
+}
+
+Lock::Lock (LockInternalBase* internalToUse) throw() 
 :	Base (internalToUse)
 {
 }    
@@ -73,35 +144,11 @@ Lock::Lock (Lock const& copy) throw()
 Lock& Lock::operator= (Lock const& other) throw()
 {
     if (this != &other)
-        this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+        this->setInternal (other.getInternal());
     
     return *this;
 }
 
-void Lock::lock() throw()
-{
-    pl_Lock_Lock (getInternal()->getPeerRef());
-}
-
-void Lock::unlock() throw()
-{
-    pl_Lock_Unlock (getInternal()->getPeerRef());
-}
-
-bool Lock::tryLock() throw()
-{
-    return pl_Lock_TryLock (getInternal()->getPeerRef()) != 0;
-}
-
-void Lock::wait() throw()
-{
-    pl_Lock_Wait (getInternal()->getPeerRef());
-}
-
-void Lock::signal() throw()
-{
-    pl_Lock_Signal (getInternal()->getPeerRef());
-}
 
 //------------------------------------------------------------------------------
 
@@ -131,10 +178,12 @@ AutoUnlock::~AutoUnlock()
 
 //------------------------------------------------------------------------------
 
-AutoTryLock::AutoTryLock (Lock const& lock) throw()
+AutoTryLock::AutoTryLock (Lock const& lock, bool* didLockToReturn) throw()
 :   theLock (lock),
     didLock (theLock.tryLock())
 {
+    if (didLock != 0)
+        *didLockToReturn = didLock;
 }
 
 AutoTryLock::~AutoTryLock()
