@@ -58,7 +58,7 @@ typedef struct PlankAtomicLL
 {
     volatile PlankLL value;
 #if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
+    PlankSpinLock lock;
 #endif
 } PlankAtomicLL;
 
@@ -71,7 +71,7 @@ typedef struct PlankAtomicD
 {
     volatile PlankD value;
 #if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
+    PlankSpinLock lock;
 #endif    
 } PlankAtomicD;
 
@@ -85,7 +85,7 @@ typedef struct PlankAtomicPX
     volatile PlankP ptr;
     volatile PlankL extra;
 #if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
+    PlankSpinLock lock;
 #endif    
 } PlankAtomicPX;
 
@@ -94,7 +94,7 @@ typedef struct PlankAtomicLX
     volatile PlankL value;
     volatile PlankL extra;
 #if PLANK_NOATOMIC64BIT
-    PlankLockRef lock;
+    PlankSpinLock lock;
 #endif    
 } PlankAtomicLX;
 #endif

@@ -184,6 +184,109 @@ private:
     AutoTryLock& operator= (AutoTryLock const&);
 };
 
+//------------------------------------------------------------------------------
 
+template<class ValueType>
+class LockedValueInternal : public SmartPointer
+{
+public:
+    LockedValueInternal (ValueType const& initialValue, Lock const& lockToUse)
+    :   value (initialValue),
+        lock (lockToUse)
+    {
+    }
+    
+    void setValue (ValueType const& newValue) throw()
+    {
+        AutoLock l (lock);
+        value = newValue;
+    }
+    
+    bool trySetValue (ValueType const& newValue) throw()
+    {
+        AutoTryLock l (lock);
+        
+        if (l.getDidLock())
+        {
+            value = newValue;
+            return true;
+        }
+        
+        return false;
+    }
+    
+    const ValueType getValue() const throw()
+    {
+        ValueType tmp;
+        
+        AutoLock l (lock);
+        tmp = value;
+        return tmp;
+    }
+
+    
+private:
+    ValueType value;
+    Lock lock;
+};
+
+/** A class that stores a value that is stored and retieved using a lock.
+ Generally the AtomicValue<> and the atomic Variable classes are best for 
+ built-in types but for data/structures larger than 32/64 bits then this class may 
+ be useful.
+ @ingroup PlonkOtherUserClasses */
+template<class ValueType>
+class LockedValue : public SmartPointerContainer<LockedValueInternal<ValueType> >
+{
+public:
+    typedef LockedValueInternal<ValueType>        Internal;
+    typedef SmartPointerContainer<Internal>       Base;
+
+    LockedValue (ValueType const& value = ValueType(), Lock const& lock = Lock::SpinLock)
+    :   Base (new Internal (value, lock))
+    {
+    }
+    
+    LockedValue (LockedValue const& copy) throw()
+    :   Base (static_cast<Base> (copy))
+    {
+    }
+    
+    LockedValue& operator= (LockedValue const& other) throw()
+    {
+        if (this != &other)
+            this->setInternal (other.getInternal());
+        
+        return *this;
+    }
+    
+    inline LockedValue& operator= (ValueType const& other) throw()
+    {
+        this->setValue (other);
+        return *this;
+    }
+    
+    inline void setValue (ValueType const& newValue) throw()
+    {
+        this->getInternal()->setValue (newValue);
+    }
+    
+    inline bool trySetValue (ValueType const& newValue) throw()
+    {
+        return this->getInternal()->trySetValue (newValue);
+    }
+    
+    inline const ValueType getValue() const throw()
+    {
+        return this->getInternal()->getValue();
+    }
+        
+    inline operator ValueType() const throw()
+    {
+        return this->getInternal()->getValue();
+    }
+    
+    PLONK_OBJECTARROWOPERATOR(LockedValue)
+};
 
 #endif // PLONK_LOCK_H

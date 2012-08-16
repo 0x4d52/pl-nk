@@ -189,13 +189,7 @@ PlankResult pl_AtomicLL_Init (PlankAtomicLLRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    p->lock = pl_Lock_Create();
-    
-    if (p->lock == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }    
+    pl_SpinLock_Init (&p->lock);
 #endif    
     
     pl_AtomicLL_Set (p, (PlankLL)0);
@@ -215,8 +209,7 @@ PlankResult pl_AtomicLL_DeInit (PlankAtomicLLRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    if ((result = pl_Lock_Destroy (p->lock)) != PlankResult_OK)
-        goto exit;
+    pl_SpinLock_DeInit (&p->lock);
 #endif
     
 exit:
@@ -250,19 +243,19 @@ PlankLL pl_AtomicLL_GetExtraUnchecked (PlankAtomicLLRef p)
 
 
 #if PLANK_APPLE && PLANK_PPC
- PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
+PlankB pl_AtomicLL_CompareAndSwap (PlankAtomicLLRef p, PlankLL oldValue, PlankLL newValue)
 {    
-    if (! pl_Lock_TryLock (p->lock))
+    if (! pl_SpinLock_TryLock (&p->lock))
         return PLANK_FALSE;
     
     if (p->value != oldValue)
     {
-        pl_Lock_Unlock (p->lock);
+        pl_SpinLock_Unlock (&p->lock);
         return PLANK_FALSE;
     }
     
     p->value = newValue;
-    pl_Lock_Unlock (p->lock);
+    pl_SpinLock_Unlock (&p->lock);
 
     return PLANK_TRUE;
 }
@@ -362,13 +355,7 @@ PlankResult pl_AtomicD_Init (PlankAtomicDRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    p->lock = pl_Lock_Create();
-    
-    if (p->lock == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }    
+    pl_SpinLock_Init (&p->lock);
 #endif    
     
     pl_AtomicD_Set (p, 0.0);
@@ -388,8 +375,7 @@ PlankResult pl_AtomicD_DeInit (PlankAtomicDRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    if ((result = pl_Lock_Destroy (p->lock)) != PlankResult_OK)
-        goto exit;
+    pl_SpinLock_DeInit (&p->lock);
 #endif
     
 exit:
@@ -514,13 +500,7 @@ PlankResult pl_AtomicPX_Init (PlankAtomicPXRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    p->lock = pl_Lock_Create();
-    
-    if (p->lock == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
+    pl_SpinLock_Init (&p->lock);
 #endif        
     
     pl_AtomicPX_SetAll (p, (PlankP)0, (PlankL)0);
@@ -540,8 +520,7 @@ PlankResult pl_AtomicPX_DeInit (PlankAtomicPXRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    if ((result = pl_Lock_Destroy (p->lock)) != PlankResult_OK)
-        goto exit;
+    pl_SpinLock_DeInit (&p->lock);
 #endif
     
 exit:
@@ -818,13 +797,7 @@ PlankResult pl_AtomicLX_Init (PlankAtomicLXRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    p->lock = pl_Lock_Create();
-    
-    if (p->lock == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
+    pl_SpinLock_Init (&p->lock);
 #endif        
     
     pl_AtomicLX_SetAll (p, (PlankL)0, (PlankL)0);
@@ -844,8 +817,7 @@ PlankResult pl_AtomicLX_DeInit (PlankAtomicLXRef p)
     }
     
 #if PLANK_NOATOMIC64BIT
-    if ((result = pl_Lock_Destroy (p->lock)) != PlankResult_OK)
-        goto exit;
+    pl_SpinLock_DeInit (&p->lock);
 #endif
     
 exit:

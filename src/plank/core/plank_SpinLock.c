@@ -40,8 +40,6 @@
 #include "plank_SpinLock.h"
 #include "plank_Thread.h"
 
-#define PLANK_SPINLOCK_UNLOCKED 0
-#define PLANK_SPINLOCK_LOCKED 1
 #define PLANK_SPINLOCK_ITERS 20
 
 PlankSpinLockRef pl_SpinLock_CreateAndInit()
@@ -59,7 +57,7 @@ PlankSpinLockRef pl_SpinLock_CreateAndInit()
     
     return PLANK_NULL;
 }
-
+ 
 PlankSpinLockRef pl_SpinLock_Create()
 {
     PlankMemoryRef m;
@@ -132,10 +130,10 @@ void pl_SpinLock_Lock (PlankSpinLockRef p)
     int i;
     
     for (i = 0; i < PLANK_SPINLOCK_ITERS; ++i)
-        if (pl_AtomicI_CompareAndSwap (&p->flag, PLANK_SPINLOCK_UNLOCKED, PLANK_SPINLOCK_LOCKED))
+        if (pl_SpinLock_TryLock (p))
             return;
     
-    while (!pl_AtomicI_CompareAndSwap (&p->flag, PLANK_SPINLOCK_UNLOCKED, PLANK_SPINLOCK_LOCKED))
+    while (!pl_SpinLock_TryLock (p))
         pl_ThreadYield();
 }
 
@@ -143,11 +141,6 @@ void pl_SpinLock_Unlock (PlankSpinLockRef p)
 {
     pl_AtomicMemoryBarrier();
     p->flag.value = PLANK_SPINLOCK_UNLOCKED;
-}
-
-PlankB pl_SpinLock_TryLock (PlankSpinLockRef p)
-{
-    return pl_AtomicI_CompareAndSwap (&p->flag, PLANK_SPINLOCK_UNLOCKED, PLANK_SPINLOCK_LOCKED);
 }
 
 void pl_SpinLock_Wait (PlankSpinLockRef p)

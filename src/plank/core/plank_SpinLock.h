@@ -41,6 +41,9 @@
 
 #include "../containers/plank_Atomic.h"
 
+#define PLANK_SPINLOCK_UNLOCKED 0
+#define PLANK_SPINLOCK_LOCKED 1
+
 PLANK_BEGIN_C_LINKAGE
 
 /** A crossplatform synchronisation utiltiy.
@@ -89,7 +92,7 @@ void pl_SpinLock_Unlock (PlankSpinLockRef p);
 /** Tries to obtain the lock but doesn't block if this fails. 
  @param p The <i>Plank %SpinLock</i> object. 
  @return @c true if the lock was obtained, otherwise @c false. */
-PlankB pl_SpinLock_TryLock (PlankSpinLockRef p);
+static PlankB pl_SpinLock_TryLock (PlankSpinLockRef p);
 
 /** Wait on the lock. 
  [todo docs]
@@ -106,5 +109,10 @@ typedef struct PlankSpinLock
     PLANK_ALIGN(16) PlankAtomicI flag;
 } PlankSpinLock;
 #endif
+
+static inline PlankB pl_SpinLock_TryLock (PlankSpinLockRef p)
+{
+    return pl_AtomicI_CompareAndSwap (&p->flag, PLANK_SPINLOCK_UNLOCKED, PLANK_SPINLOCK_LOCKED);
+}
 
 #endif // PLANK_SPINLOCK_H
