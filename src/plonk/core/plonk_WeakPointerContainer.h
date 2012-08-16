@@ -97,16 +97,16 @@ public:
         incrementWeakCount (this->getInternal());
     }
         
-    OriginalInternal* getWeakPointer() const throw()
-    {
-        OriginalInternal* smartPointer = 0;
-        const WeakPointer* const weakPointer = this->getInternal();
-        
-        if (weakPointer != 0)
-            smartPointer = static_cast<OriginalInternal*> (weakPointer->getWeakPointer());
-        
-        return smartPointer;
-    }
+//    OriginalInternal* getWeakPointer() const throw()
+//    {
+//        OriginalInternal* smartPointer = 0;
+//        const WeakPointer* const weakPointer = this->getInternal();
+//        
+//        if (weakPointer != 0)
+//            smartPointer = static_cast<OriginalInternal*> (weakPointer->getWeakPointer());
+//        
+//        return smartPointer;
+//    }
     
     bool isAlive() const throw()
     {
@@ -121,7 +121,7 @@ public:
         if (weakPointer != 0)
         {
             weakPointer->incrementPeerRefCount();
-            OriginalInternal* smartPointer = this->getWeakPointer();
+            OriginalInternal* smartPointer = static_cast<OriginalInternal*> (weakPointer->getWeakPointer());
             
             if (smartPointer != 0)
                 result = OriginalType (smartPointer);
