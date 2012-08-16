@@ -65,9 +65,6 @@ public:
     void decrementPeerRefCount() throw();
     int getPeerRefCount() const throw();   
     
-//    void incrementCounts() throw();    
-//    void decrementCounts() throw();
-    
 private:
     SmartPointerCounter* const peerCounter;
     

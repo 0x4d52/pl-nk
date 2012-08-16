@@ -120,13 +120,13 @@ public:
         
         if (weakPointer != 0)
         {
-            //weakPointer->incrementPeerRefCount();
+            weakPointer->incrementPeerRefCount();
             OriginalInternal* smartPointer = this->getWeakPointer();
             
             if (smartPointer != 0)
-                return OriginalType (smartPointer);
+                result = OriginalType (smartPointer);
 
-            //weakPointer->decrementPeerRefCount();
+            weakPointer->decrementPeerRefCount();
         }
         
         return result;
