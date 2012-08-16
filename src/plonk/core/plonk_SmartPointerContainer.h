@@ -224,5 +224,75 @@ void swap (SmartPointerContainerType& a,
     a.swapWith (b);
 }
 
+template<class ScopedPointerType>
+class ScopedPointerContainer
+{
+public:
+    typedef AtomicValue<ScopedPointerType*> AtomicPointer;
+
+    ScopedPointerContainer (ScopedPointerType* const raw = new ScopedPointerType()) throw()
+    :   internal (raw)
+    {
+    }
+    
+    ~ScopedPointerContainer()
+    {
+        destroy();
+    }
+    
+    inline ScopedPointerContainer (ScopedPointerContainer const& copy) throw()
+    :   internal (0)
+	{
+        swapWith (copy);        
+	}
+    
+	inline ScopedPointerContainer& operator= (ScopedPointerContainer const& other) throw()
+	{
+		if (this != &other)
+        {
+            destroy();
+            swapWith (other);
+        }
+        
+		return *this;		
+	}    
+    
+    void destroy() throw()
+    {
+        AtomicPointer null (0);
+        internal.swapWith (null);
+        delete null.getPtrUnchecked();
+    }
+    
+    inline void swapWith (ScopedPointerContainer& other) throw()
+    {
+        internal.swapWith (other.internal);
+    }
+    
+    inline ScopedPointerType* operator->() throw() 
+    { 
+        return internal.getPtrUnchecked(); 
+    }
+    
+	inline const ScopedPointerType* operator->() const throw() 
+    { 
+        return internal.getPtrUnchecked(); 
+    }
+    
+    inline ScopedPointerType& operator*() throw() 
+    { 
+        plonk_assert(internal.getPtrUnchecked() != 0);
+        return *internal.getPtrUnchecked(); 
+    }
+    
+	inline const ScopedPointerType& operator*() const throw() 
+    { 
+        plonk_assert(internal.getPtrUnchecked() != 0);
+        return *internal.getPtrUnchecked(); 
+    }
+    
+private:
+    AtomicPointer internal;
+};
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H
