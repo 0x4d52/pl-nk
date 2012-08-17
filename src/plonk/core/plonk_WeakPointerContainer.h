@@ -99,7 +99,12 @@ public:
             
     bool isAlive() const throw()
     {
-        return this->getWeakPointer() != 0;
+        WeakPointer* const weakPointer = this->getInternal();
+
+        if (weakPointer != 0)
+            return weakPointer->getWeakPointer() != 0;
+        
+        return false;
     }
     
     OriginalType fromWeak() const throw()
@@ -109,12 +114,17 @@ public:
         
         if (weakPointer != 0)
         {
-            weakPointer->incrementPeerRefCount();
+            // retain it, this ensures that if weakPointer->getWeakPointer() returns
+            // a non-null pointer that it will still be valid when passed to 
+            // construct the container object (which retains it again)
+            weakPointer->incrementPeerRefCount(); 
+            
             OriginalInternal* smartPointer = static_cast<OriginalInternal*> (weakPointer->getWeakPointer());
             
             if (smartPointer != 0)
                 result = OriginalType (smartPointer);
 
+            // release it
             weakPointer->decrementPeerRefCount();
         }
         

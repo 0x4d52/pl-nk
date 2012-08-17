@@ -655,12 +655,12 @@ public:
 		return *this;
 	}
 	
-	/** Adds several items in-place. */
-	ObjectArray<ObjectType>& add (ObjectArray<ObjectType> const& other) throw()  // does an ambiguity mean this needs to be addAll?
-	{
-        this->getInternal()->add (other.length(), other.getArray()); 
-		return *this;
-	}
+//	/** Adds several items in-place. */
+//	ObjectArray<ObjectType>& add (ObjectArray<ObjectType> const& other) throw()  // does an ambiguity mean this needs to be addAll?
+//	{
+//        this->getInternal()->add (other.length(), other.getArray()); 
+//		return *this;
+//	}
 	
 	/** Removes an item at the given index in-place. 
 	 Indices out of range will be ignored.*/

@@ -208,20 +208,14 @@ int SmartPointer::getRefCount() const throw()
 
 SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
 {
+    plonk_staticassert (sizeof (Parts) == (PLONK_WORDSIZE*2))
+    plonk_staticassert (sizeof (Halves) == (PLONK_WORDSIZE*2))
+    plonk_staticassert (sizeof (Element) == (PLONK_WORDSIZE*2))
+
     // no need to set atomically in the constructor
     atom.getAtomicRef()->ptr = smartPointer;
     atom.getAtomicRef()->extra = 0;
-    
-#if PLONK_DEBUG // really need a static assert!!
-    const size_t wordSize = PLONK_WORDSIZE * 2;
-    const size_t partsSize = sizeof (Parts);
-    const size_t halvesSize = sizeof (Halves);
-    const size_t elementSize = sizeof (Element);
-    plonk_assert (partsSize == wordSize);
-    plonk_assert (elementSize == wordSize);
-    plonk_assert (halvesSize == wordSize);
-#endif
-    
+        
 #if PLONK_SMARTPOINTER_DEBUG
     ++totalSmartPointerCounters;
 #if PLONK_SMARTPOINTER_DEBUGLOG

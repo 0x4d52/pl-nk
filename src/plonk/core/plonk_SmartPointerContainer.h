@@ -164,6 +164,31 @@ public:
 		return internal != other.internal;
 	}
     
+    
+//    template<class OtherType, typename Function>
+//    void operator() (OtherType& object, Function function)
+//    {
+//        (object.*function)();
+//    }
+//    
+//    template<class OtherType, typename Function, class Arg1Type>
+//    void operator() (OtherType& object, Function function, Arg1Type const& arg1)
+//    {
+//        (object.*function)(arg1);
+//    }
+//    
+//    template<class OtherType, typename Function, class Arg1Type, class Arg2Type>
+//    void operator() (OtherType& object, Function function, Arg1Type const& arg1, Arg2Type const& arg2)
+//    {
+//        (object.*function)(arg1, arg2);
+//    }
+//    
+//    template<class OtherType, typename Function, class Arg1Type, class Arg2Type, class Arg3Type>
+//    void operator() (OtherType& object, Function function, Arg1Type const& arg1, Arg2Type const& arg2, Arg3Type const& arg3)
+//    {
+//        (object.*function)(arg1, arg2, arg3);
+//    }
+    
 private:
     AtomicPointer internal;
 };

@@ -123,7 +123,7 @@ public:
 
 private:
     AtomicExtended<SmartPointer*> atom;
-
+    
     struct Counts
     {
         unsigned int refCount:PLONK_HALFWORDBITS;
@@ -146,8 +146,9 @@ private:
     {
         Parts parts;
         Halves halves;
-    };    
+    };        
 };
+
 
 //------------------------------------------------------------------------------
 

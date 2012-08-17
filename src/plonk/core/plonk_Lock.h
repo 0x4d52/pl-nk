@@ -136,7 +136,7 @@ public:
     AutoLock (Lock const& lock = Lock::MutexLock) throw();
     ~AutoLock();
     
-    PLONK_OBJECTARROWOPERATOR(AutoLock)
+    //PLONK_OBJECTARROWOPERATOR(AutoLock)
 
 private:
     Lock theLock;
@@ -154,7 +154,7 @@ public:
     AutoUnlock (Lock const& lock = Lock::MutexLock) throw();
     ~AutoUnlock();
     
-    PLONK_OBJECTARROWOPERATOR(AutoUnlock)
+    //PLONK_OBJECTARROWOPERATOR(AutoUnlock)
 
 private:
     Lock theLock;
@@ -174,7 +174,7 @@ public:
     
     bool getDidLock() const throw() { return didLock; }
     
-    PLONK_OBJECTARROWOPERATOR(AutoTryLock)
+    //PLONK_OBJECTARROWOPERATOR(AutoTryLock)
     
 private:
     Lock theLock;
@@ -215,7 +215,7 @@ public:
         return false;
     }
     
-    const ValueType getValue() const throw()
+    ValueType getValue() const throw()
     {
         ValueType tmp;
         
@@ -223,7 +223,8 @@ public:
         tmp = value;
         return tmp;
     }
-
+    
+    inline Lock& getLock() throw() { return lock; }
     
 private:
     ValueType value;
@@ -236,13 +237,14 @@ private:
  be useful.
  @ingroup PlonkOtherUserClasses */
 template<class ValueType>
-class LockedValue : public SmartPointerContainer<LockedValueInternal<ValueType> >
+class LockedValue : public SmartPointerContainer< LockedValueInternal<ValueType> >
 {
 public:
     typedef LockedValueInternal<ValueType>        Internal;
     typedef SmartPointerContainer<Internal>       Base;
 
-    LockedValue (ValueType const& value = ValueType(), Lock const& lock = Lock::SpinLock)
+    LockedValue (ValueType const& value = ValueType(), 
+                 Lock const& lock = Lock::SpinLock)
     :   Base (new Internal (value, lock))
     {
     }
@@ -276,7 +278,7 @@ public:
         return this->getInternal()->trySetValue (newValue);
     }
     
-    inline const ValueType getValue() const throw()
+    inline ValueType getValue() const throw()
     {
         return this->getInternal()->getValue();
     }
@@ -287,6 +289,88 @@ public:
     }
     
     PLONK_OBJECTARROWOPERATOR(LockedValue)
+    
+    template<typename Function>
+    inline void operator() (VoidReturn::Type ret, Function function)
+    {
+        (void)ret;
+        ValueType value = this->getValue();
+        AutoLock l (this->getInternal()->getLock());
+        (value.*function)();
+    }
+
+    
+    //---
+
+    template<class ReturnType, typename Function>
+    inline void operator() (ReturnType* ret, Function function)
+    {
+        ValueType value = this->getValue();
+        
+        if (ret)
+        {
+            AutoLock l (this->getInternal()->getLock());
+            *ret = (value.*function)();
+        }
+        else
+        {
+            AutoLock l (this->getInternal()->getLock());
+            (value.*function)();
+        }   
+    }
+
+    template<class ReturnType, typename Function, class Arg1Type>
+    inline void operator() (ReturnType* ret, Function function, Arg1Type arg1)
+    {
+        ValueType value = this->getValue();
+
+        if (ret)
+        {
+            AutoLock l (this->getInternal()->getLock());
+            *ret = (value.*function)(arg1);
+        }
+        else
+        {
+            AutoLock l (this->getInternal()->getLock());
+            (value.*function)(arg1);
+        }   
+    }
+    
+    template<class ReturnType, typename Function, class Arg1Type, class Arg2Type>
+    inline void operator() (ReturnType* ret, Function function, Arg1Type arg1, Arg2Type arg2)
+    {
+        ValueType value = this->getValue();
+
+        if (ret)
+        {
+            AutoLock l (this->getInternal()->getLock());
+            *ret = (value.*function)(arg1, arg2);
+        }
+        else
+        {
+            AutoLock l (this->getInternal()->getLock());
+            (value.*function)(arg1, arg2);
+        }   
+    }
+    
+    template<class ReturnType, typename Function, class Arg1Type, class Arg2Type, class Arg3Type>
+    inline void operator() (ReturnType* ret, Function function, Arg1Type arg1, Arg2Type arg2, Arg3Type arg3)
+    {
+        ValueType value = this->getValue();
+
+        if (ret)
+        {
+            AutoLock l (this->getInternal()->getLock());
+            *ret = (value.*function)(arg1, arg2, arg3);
+        }
+        else
+        {
+            AutoLock l (this->getInternal()->getLock());
+            (value.*function)(arg1, arg2, arg3);
+        }   
+    }
+
+
 };
 
 #endif // PLONK_LOCK_H

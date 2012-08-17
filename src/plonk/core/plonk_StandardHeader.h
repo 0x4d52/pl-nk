@@ -146,11 +146,16 @@
 	#define plonk_assertfalse	{ }
 #endif
 
+
 /* if you're getting your first compile error here on iOS
  it's probably because the file your compiling which includes
  plonk headers is not a C++ file. To make an Obj-C file (.m) 
  an Obj-C++ file use .mm as the file extension. */
 BEGIN_PLONK_NAMESPACE
+
+template <bool x> struct PlonkStaticAssertUtility;
+template <> struct PlonkStaticAssertUtility<true> { static void plonkStaticAssertionFailure() {} };
+#define plonk_staticassert(x) plonk::PlonkStaticAssertUtility<x>::plonkStaticAssertionFailure();
 
 typedef PlankResult ResultCode;
 
@@ -171,6 +176,9 @@ typedef PlankULL UnsignedLongLong;
 
 typedef bool Bool;
 typedef PlankP Pointer;
+
+struct VoidReturn { enum Type { Pass = 1 }; };
+
 
 #define PLONK_INT24_MAX PLANK_INT24_MAX
 
