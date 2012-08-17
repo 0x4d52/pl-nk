@@ -92,6 +92,24 @@ private:
     PlankSpinLock l;    
 };
 
+class ThreadSpinLockInternal : public LockInternalBase
+{
+public:
+    ThreadSpinLockInternal() throw();
+    ~ThreadSpinLockInternal();
+    
+    void lock() throw();
+    void unlock() throw();
+    bool tryLock() throw();
+    void wait() throw();
+    void signal() throw();
+    
+private:
+    inline PlankThreadSpinLockRef getPeerRef() { return &l; }
+    PlankThreadSpinLock l;    
+};
+
+
 //------------------------------------------------------------------------------
 
 /** @ingroup PlonkOtherUserClasses */
@@ -102,8 +120,9 @@ public:
 
     enum Type
     {
-        MutexLock,
-        SpinLock,
+        MutexLock,          ///< Uses a mutex to lock
+        SpinLock,           ///< Uses a simple spin lock
+        ThreadSpinLock,     ///< Uses a spin lock that can be locked mutiple times from the same thread.
         NumTypes
     };
     
@@ -402,11 +421,11 @@ public:
         value.FUNCTION ARGS;\
     } while (false);\
 
-#define PLONK_LOCKEDVALUE_CALLRETURN(VALUETYPE, LOCKEDVALUE, FUNCTION, ARGS, RETURN) \
+#define PLONK_LOCKEDVALUE_CALLRETURN(VALUETYPE, RETURNEXPR, LOCKEDVALUE, FUNCTION, ARGS) \
     do {\
         VALUETYPE value = LOCKEDVALUE.getValue();\
         const AutoLock l (LOCKEDVALUE.getLock());\
-        RETURN = value.FUNCTION ARGS;\
+        RETURNEXPR value.FUNCTION ARGS;\
     } while (false);\
 
 

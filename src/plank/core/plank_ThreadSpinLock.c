@@ -37,20 +37,19 @@
  */
 
 #include "plank_StandardHeader.h"
-#include "plank_SpinLock.h"
-#include "plank_Thread.h"
+#include "plank_ThreadSpinLock.h"
 
-#define PLANK_SPINLOCK_ITERS 20
+#define PLANK_THREADSPINLOCK_ITERS 20
 
-PlankSpinLockRef pl_SpinLock_CreateAndInit()
+PlankThreadSpinLockRef pl_ThreadSpinLock_CreateAndInit()
 {
-    PlankSpinLockRef p;
-    p = pl_SpinLock_Create();
+    PlankThreadSpinLockRef p;
+    p = pl_ThreadSpinLock_Create();
     
     if (p != PLANK_NULL)
     {
-        if (pl_SpinLock_Init (p) != PlankResult_OK)
-            pl_SpinLock_Destroy (p);
+        if (pl_ThreadSpinLock_Init (p) != PlankResult_OK)
+            pl_ThreadSpinLock_Destroy (p);
         else
             return p;
     }
@@ -58,21 +57,21 @@ PlankSpinLockRef pl_SpinLock_CreateAndInit()
     return PLANK_NULL;
 }
  
-PlankSpinLockRef pl_SpinLock_Create()
+PlankThreadSpinLockRef pl_ThreadSpinLock_Create()
 {
     PlankMemoryRef m;
-    PlankSpinLockRef p;
+    PlankThreadSpinLockRef p;
     
     m = pl_MemoryGlobal();
-    p = (PlankSpinLockRef)pl_Memory_AllocateBytes (m, sizeof (PlankSpinLock));
+    p = (PlankThreadSpinLockRef)pl_Memory_AllocateBytes (m, sizeof (PlankThreadSpinLock));
     
     if (p != PLANK_NULL)
-        pl_MemoryZero (p, sizeof (PlankSpinLock));
+        pl_MemoryZero (p, sizeof (PlankThreadSpinLock));
     
     return p;
 }
 
-PlankResult pl_SpinLock_Destroy (PlankSpinLockRef p)
+PlankResult pl_ThreadSpinLock_Destroy (PlankThreadSpinLockRef p)
 {
     PlankResult result = PlankResult_OK;
     
@@ -84,7 +83,7 @@ PlankResult pl_SpinLock_Destroy (PlankSpinLockRef p)
         goto exit;
     }
     
-    if ((result = pl_SpinLock_DeInit (p)) != PlankResult_OK)
+    if ((result = pl_ThreadSpinLock_DeInit (p)) != PlankResult_OK)
         goto exit;
     
     result = pl_Memory_Free (m, p);
@@ -93,7 +92,7 @@ exit:
     return result;
 }
 
-PlankResult pl_SpinLock_Init (PlankSpinLockRef p)
+PlankResult pl_ThreadSpinLock_Init (PlankThreadSpinLockRef p)
 {
     PlankResult result = PlankResult_OK;
 
@@ -103,13 +102,13 @@ PlankResult pl_SpinLock_Init (PlankSpinLockRef p)
         goto exit;
     }    
     
-    pl_AtomicI_Init (&p->flag);
+    pl_AtomicL_Init (&p->flag);
     
 exit:
     return result;    
 }
 
-PlankResult pl_SpinLock_DeInit (PlankSpinLockRef p)
+PlankResult pl_ThreadSpinLock_DeInit (PlankThreadSpinLockRef p)
 {
     PlankResult result = PlankResult_OK;
 
@@ -119,39 +118,39 @@ PlankResult pl_SpinLock_DeInit (PlankSpinLockRef p)
         goto exit;
     }
     
-    pl_AtomicI_DeInit (&p->flag);
+    pl_AtomicL_DeInit (&p->flag);
 
 exit:
     return result;
 }
 
-void pl_SpinLock_Lock (PlankSpinLockRef p)
+void pl_ThreadSpinLock_Lock (PlankThreadSpinLockRef p)
 {
     int i;
     
-    for (i = 0; i < PLANK_SPINLOCK_ITERS; ++i)
-        if (pl_SpinLock_TryLock (p))
+    for (i = 0; i < PLANK_THREADSPINLOCK_ITERS; ++i)
+        if (pl_ThreadSpinLock_TryLock (p))
             return;
     
-    while (!pl_SpinLock_TryLock (p))
+    while (!pl_ThreadSpinLock_TryLock (p))
         pl_ThreadYield();
 }
 
-void pl_SpinLock_Unlock (PlankSpinLockRef p)
+void pl_ThreadSpinLock_Unlock (PlankThreadSpinLockRef p)
 {
     pl_AtomicMemoryBarrier();
-    p->flag.value = PLANK_SPINLOCK_UNLOCKED;
+    p->flag.value = PLANK_THREADSPINLOCK_UNLOCKED;
 }
 
-void pl_SpinLock_Wait (PlankSpinLockRef p)
+void pl_ThreadSpinLock_Wait (PlankThreadSpinLockRef p)
 {
     int i;
     
-    for (i = 0; i < PLANK_SPINLOCK_ITERS; ++i)
-        if (p->flag.value == PLANK_SPINLOCK_UNLOCKED)
+    for (i = 0; i < PLANK_THREADSPINLOCK_ITERS; ++i)
+        if (p->flag.value == PLANK_THREADSPINLOCK_UNLOCKED)
             return;
     
-    while (p->flag.value != PLANK_SPINLOCK_UNLOCKED)
+    while (p->flag.value != PLANK_THREADSPINLOCK_UNLOCKED)
         pl_ThreadYield();
 
 }

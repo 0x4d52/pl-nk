@@ -116,6 +116,43 @@ void SpinLockInternal::signal() throw()
 
 //------------------------------------------------------------------------------
 
+ThreadSpinLockInternal::ThreadSpinLockInternal() throw()
+{
+    pl_ThreadSpinLock_Init (getPeerRef());
+}
+
+ThreadSpinLockInternal::~ThreadSpinLockInternal()
+{
+    pl_ThreadSpinLock_DeInit (getPeerRef());
+}
+
+void ThreadSpinLockInternal::lock() throw()
+{
+    pl_ThreadSpinLock_Lock (getPeerRef());
+}
+
+void ThreadSpinLockInternal::unlock() throw()
+{
+    pl_ThreadSpinLock_Unlock (getPeerRef());
+}
+
+bool ThreadSpinLockInternal::tryLock() throw()
+{
+    return pl_ThreadSpinLock_TryLock (getPeerRef()) != 0;
+}
+
+void ThreadSpinLockInternal::wait() throw()
+{
+    pl_ThreadSpinLock_Wait (getPeerRef());
+}
+
+void ThreadSpinLockInternal::signal() throw()
+{
+    // nothing
+}
+
+//------------------------------------------------------------------------------
+
 Lock::Lock (const Lock::Type lockType) throw()
 :   Base (lockInternalFromType (lockType))
 {
