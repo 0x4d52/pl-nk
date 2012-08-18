@@ -173,7 +173,6 @@ SmartPointer::~SmartPointer()
     
 	plonk_assert (counter->getRefCount() == 0);
     
-    // this is a good place to do this
     if (weakPointer != 0)
     {
         WeakPointer* weak = static_cast<WeakPointer*> (weakPointer.getPtrUnchecked());

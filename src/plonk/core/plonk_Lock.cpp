@@ -41,6 +41,7 @@
 BEGIN_PLONK_NAMESPACE
 
 #include "plonk_Lock.h"
+#include "plonk_Thread.h"
 
 LockInternal::LockInternal() throw()
 {
@@ -128,21 +129,25 @@ ThreadSpinLockInternal::~ThreadSpinLockInternal()
 
 void ThreadSpinLockInternal::lock() throw()
 {
+    plonk_assert (Threading::getCurrentThreadID() != 0); // zero is used to signal unlocked!
     pl_ThreadSpinLock_Lock (getPeerRef());
 }
 
 void ThreadSpinLockInternal::unlock() throw()
 {
+    plonk_assert (Threading::getCurrentThreadID() != 0); // zero is used to signal unlocked!
     pl_ThreadSpinLock_Unlock (getPeerRef());
 }
 
 bool ThreadSpinLockInternal::tryLock() throw()
 {
+    plonk_assert (Threading::getCurrentThreadID() != 0); // zero is used to signal unlocked!
     return pl_ThreadSpinLock_TryLock (getPeerRef()) != 0;
 }
 
 void ThreadSpinLockInternal::wait() throw()
 {
+    plonk_assert (Threading::getCurrentThreadID() != getPeerRef()->flag.value); // you're asking the thread that locked to wait! how is that going to work?
     pl_ThreadSpinLock_Wait (getPeerRef());
 }
 
@@ -158,13 +163,17 @@ Lock::Lock (const Lock::Type lockType) throw()
 {
 }
 
-LockInternalBase* Lock::lockInternalFromType (const Lock::Type lockType) throw()
+LockInternalBase* Lock::lockInternalFromType (const int lockType) throw()
 {
+    plonk_assert (lockType < NumTypes);
+    
     switch (lockType) 
     {
-        case MutexLock: return new LockInternal();
-        case SpinLock: return new SpinLockInternal();
-        default: return new LockInternal();
+        case NoLock:            return new NoLockInternal();
+        case MutexLock:         return new LockInternal();
+        case SpinLock:          return new SpinLockInternal();
+        case ThreadSpinLock:    return new ThreadSpinLockInternal();
+        default:                return new NoLockInternal();
     }
 }
 

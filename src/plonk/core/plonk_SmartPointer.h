@@ -83,7 +83,7 @@ public:
 	/// @name Miscellaneous
 	/// @{
 	
-    void update() throw() { } // need this anymore?
+    inline void update() throw() { } // needed as a dummy in place of Sender::update?
     void* getWeak() const throw();
     int getRefCount() const throw();    
     

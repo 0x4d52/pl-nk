@@ -137,9 +137,9 @@ void pl_ThreadSpinLock_Lock (PlankThreadSpinLockRef p)
 }
 
 void pl_ThreadSpinLock_Unlock (PlankThreadSpinLockRef p)
-{
-    pl_AtomicMemoryBarrier();
-    p->flag.value = PLANK_THREADSPINLOCK_UNLOCKED;
+{    
+    PlankThreadID threadID = pl_ThreadCurrentID();
+    pl_AtomicL_CompareAndSwap (&p->flag, threadID, PLANK_THREADSPINLOCK_UNLOCKED); // only unlock if we hold the lock
 }
 
 void pl_ThreadSpinLock_Wait (PlankThreadSpinLockRef p)

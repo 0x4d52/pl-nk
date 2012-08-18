@@ -58,6 +58,21 @@ public:
 
 };
 
+class NoLockInternal : public LockInternalBase
+{
+public:
+    NoLockInternal() throw() { }
+    ~NoLockInternal() { }
+    
+    void lock() throw() { }
+    void unlock() throw() { }
+    bool tryLock() throw() { return true; }
+    void wait() throw() { }
+    void signal() throw() { }
+    
+private:
+};
+
 class LockInternal : public LockInternalBase
 {
 public:
@@ -120,9 +135,10 @@ public:
 
     enum Type
     {
-        MutexLock,          ///< Uses a mutex to lock
-        SpinLock,           ///< Uses a simple spin lock
-        ThreadSpinLock,     ///< Uses a spin lock that can be locked mutiple times from the same thread.
+        NoLock,             ///< Doesn't actually lock.
+        MutexLock,          ///< Uses a mutex to lock.
+        SpinLock,           ///< Uses a simple spin lock.
+        ThreadSpinLock,     ///< Uses a spin lock that can be locked multiple times from the same thread.
         NumTypes
     };
     
@@ -133,7 +149,7 @@ public:
     /** Copy constructor. */
     Lock (Lock const& copy) throw();
     Lock& operator= (Lock const& other) throw();
-        
+    
     inline void lock() throw()      { getInternal()->lock(); }
     inline void unlock() throw()    { getInternal()->unlock(); }
     inline bool tryLock() throw()   { return getInternal()->tryLock(); }
@@ -143,7 +159,7 @@ public:
     PLONK_OBJECTARROWOPERATOR(Lock)
     
 private:
-    static LockInternalBase* lockInternalFromType (const Lock::Type lockType) throw();
+    static LockInternalBase* lockInternalFromType (const int lockType) throw();
 };
 
 //------------------------------------------------------------------------------
@@ -410,7 +426,11 @@ public:
         }   
     }
     
-    Lock& getLock() throw() { return this->getInternal()->getLock(); }
+    inline Lock& getLock() throw() { return this->getInternal()->getLock(); }
+    
+    inline void lock() throw() { this->getLock().lock(); } 
+    inline void unlock() throw() { this->getLock().unlock(); } 
+    inline bool tryLock() throw() { return this->getLock().tryLock(); } 
 
 };
 
