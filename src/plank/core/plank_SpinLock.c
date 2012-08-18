@@ -74,9 +74,11 @@ PlankSpinLockRef pl_SpinLock_Create()
 
 PlankResult pl_SpinLock_Destroy (PlankSpinLockRef p)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
+    PlankMemoryRef m;
     
-    PlankMemoryRef m = pl_MemoryGlobal();
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
     {

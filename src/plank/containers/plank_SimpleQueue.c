@@ -104,8 +104,11 @@ exit:
 
 PlankResult pl_SimpleQueue_Destroy (PlankSimpleQueueRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
     {

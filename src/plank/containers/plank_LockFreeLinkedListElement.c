@@ -111,8 +111,11 @@ exit:
 
 PlankResult pl_LockFreeLinkedListElement_Destroy (PlankLockFreeLinkedListElementRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if ((result = pl_LockFreeLinkedListElement_DeInit (p)) != PlankResult_OK)
         goto exit;

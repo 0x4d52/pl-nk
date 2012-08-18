@@ -106,9 +106,12 @@ exit:
 
 PlankResult pl_IffFileReader_Destroy (PlankIffFileReaderRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
     
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
+        
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;

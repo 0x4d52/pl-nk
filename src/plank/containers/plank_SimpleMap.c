@@ -158,8 +158,11 @@ exit:
 
 PlankResult pl_SimpleMap_Destroy (PlankSimpleMapRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
     {

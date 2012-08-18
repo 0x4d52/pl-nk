@@ -384,8 +384,11 @@ exit:
 
 PlankResult pl_AtomicD_Destroy (PlankAtomicDRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if ((result = pl_AtomicD_DeInit (p)) != PlankResult_OK)
         goto exit;
@@ -529,8 +532,11 @@ exit:
 
 PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
 
     if ((result = pl_AtomicPX_DeInit (p)) != PlankResult_OK)
         goto exit;
@@ -826,8 +832,11 @@ exit:
 
 PlankResult pl_AtomicLX_Destroy (PlankAtomicLXRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if ((result = pl_AtomicLX_DeInit (p)) != PlankResult_OK)
         goto exit;

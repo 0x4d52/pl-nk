@@ -132,9 +132,12 @@ exit:
 
 PlankResult pl_LockFreeQueue_Destroy (PlankLockFreeQueueRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
     
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
+
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
@@ -152,9 +155,11 @@ exit:
 
 PlankResult pl_LockFreeQueue_Clear (PlankLockFreeQueueRef p)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankLockFreeQueueElementRef element;
     PlankP data;
+    
+    result = PlankResult_OK;
     
     if ((result = pl_LockFreeQueue_Pop (p, &element)) != PlankResult_OK)
         goto exit;
@@ -203,11 +208,14 @@ PlankResult pl_LockFreeQueue_SetFreeElementDataFunction (PlankLockFreeQueueRef p
 
 PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankL tailExtra;
     PlankLockFreeQueueElementRef tailElement;
     PlankAtomicPXRef tailElementNextAtom;
-    PlankB success = PLANK_FALSE;
+    PlankB success;
+    
+    result = PlankResult_OK;
+    success = PLANK_FALSE;
     
 	tailExtra = 0;
 	tailElement = 0;
@@ -242,13 +250,15 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
 
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankL headExtra, tailExtra;
 	PlankLockFreeQueueElementRef headElement, nextElement;
-    PlankB success = PLANK_FALSE;
+    PlankB success;
     
+    result = PlankResult_OK;
 	headElement = 0;
-
+    success = PLANK_FALSE;
+    
     while (!success)
     {
         headExtra = pl_AtomicPX_GetExtra ((PlankAtomicPXRef)&(p->head));

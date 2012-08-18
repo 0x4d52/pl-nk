@@ -180,8 +180,10 @@ exit:
 
 PlankResult pl_FFTF_Destroy (PlankFFTFRef p)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankMemoryRef m;
+    
+    result = PlankResult_OK;
     m = pl_MemoryGlobal();
     
     if ((result = pl_FFTF_DeInit (p)) != PlankResult_OK)

@@ -111,8 +111,11 @@ PlankResult pl_IffFileWriter_DeInit (PlankIffFileWriterRef p)
 
 PlankResult pl_IffFileWriter_Destroy (PlankIffFileWriterRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
     {

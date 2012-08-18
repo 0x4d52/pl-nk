@@ -73,9 +73,11 @@ PlankThreadSpinLockRef pl_ThreadSpinLock_Create()
 
 PlankResult pl_ThreadSpinLock_Destroy (PlankThreadSpinLockRef p)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
+    PlankMemoryRef m;
     
-    PlankMemoryRef m = pl_MemoryGlobal();
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
     {

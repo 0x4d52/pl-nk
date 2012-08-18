@@ -71,9 +71,11 @@ PlankLockRef pl_Lock_Create()
 
 PlankResult pl_Lock_Destroy (PlankLockRef p)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
+    PlankMemoryRef m;
     
-    PlankMemoryRef m = pl_MemoryGlobal();
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
     {
@@ -97,6 +99,7 @@ exit:
 PlankResult pl_Lock_Init (PlankLockRef p)
 {
     PlankResult result = PlankResult_OK;
+    pthread_mutexattr_t attr;
 
     if (p == PLANK_NULL)
     {
@@ -104,7 +107,6 @@ PlankResult pl_Lock_Init (PlankLockRef p)
         goto exit;
     }    
     
-    pthread_mutexattr_t attr;
     pthread_mutexattr_init (&attr);
     pthread_mutexattr_settype (&attr, PTHREAD_MUTEX_RECURSIVE);
     pthread_mutexattr_setprotocol (&attr, PTHREAD_PRIO_INHERIT);

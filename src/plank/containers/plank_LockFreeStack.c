@@ -111,9 +111,12 @@ exit:
 
 PlankResult pl_LockFreeStack_Destroy (PlankLockFreeStackRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
     
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
+
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
@@ -131,9 +134,11 @@ exit:
 
 PlankResult pl_LockFreeStack_Clear (PlankLockFreeStackRef p)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;    
     PlankLockFreeStackElementRef element;
     PlankP data;
+    
+    result = PlankResult_OK;
     
     if ((result = pl_LockFreeStack_Pop (p, &element)) != PlankResult_OK)
         goto exit;
@@ -182,10 +187,12 @@ PlankResult pl_LockFreeStack_SetFreeElementDataFunction (PlankLockFreeStackRef p
 
 PlankResult pl_LockFreeStack_Push (PlankLockFreeStackRef p, const PlankLockFreeStackElementRef element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankP oldPtr, newPtr;
     PlankL oldExtra, newExtra;
     PlankB success;
+        
+    result = PlankResult_OK;
     
 	do {
 		oldPtr = p->atom.ptr;
@@ -206,11 +213,13 @@ PlankResult pl_LockFreeStack_Push (PlankLockFreeStackRef p, const PlankLockFreeS
 
 PlankResult pl_LockFreeStack_Pop (PlankLockFreeStackRef p, PlankLockFreeStackElementRef* element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankP headPtr, nextPtr;
     PlankL headExtra, nextExtra;
     PlankB success;
 
+    result = PlankResult_OK;
+    
 	do {
 		headPtr = p->atom.ptr;
         

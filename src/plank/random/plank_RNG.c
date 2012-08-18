@@ -107,8 +107,11 @@ PlankResult pl_RNG_DeInit (PlankRNGRef p)
 
 PlankResult pl_RNG_Destroy (PlankRNGRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
     
     if (p == PLANK_NULL)
     {

@@ -105,9 +105,12 @@ exit:
 
 PlankResult pl_SimpleLinkedList_Destroy (PlankSimpleLinkedListRef p)
 {
-    PlankResult result = PlankResult_OK;
-    PlankMemoryRef m = pl_MemoryGlobal();
+    PlankResult result;
+    PlankMemoryRef m;
     
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
+
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
@@ -125,9 +128,11 @@ exit:
 
 PlankResult pl_SimpleLinkedList_Clear (PlankSimpleLinkedListRef p)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef element;
     PlankP data;
+    
+    result = PlankResult_OK;
     
     if ((result = pl_SimpleLinkedList_RemoveFirst (p, &element)) != PlankResult_OK)
         goto exit;
@@ -177,9 +182,11 @@ PlankResult pl_SimpleLinkedList_SetFreeElementDataFunction (PlankSimpleLinkedLis
 
 PlankResult pl_SimpleLinkedList_Add (PlankSimpleLinkedListRef p, const PlankSimpleLinkedListElementRef element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef last;
 
+    result = PlankResult_OK;
+    
     if (p->first == PLANK_NULL)
     {
         p->first = element;
@@ -195,10 +202,11 @@ PlankResult pl_SimpleLinkedList_Add (PlankSimpleLinkedListRef p, const PlankSimp
 
 PlankResult pl_SimpleLinkedList_InsertAtIndex (PlankSimpleLinkedListRef p, const PlankLL index, const PlankSimpleLinkedListElementRef element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef prev, curr, next;
     PlankLL count;
     
+    result = PlankResult_OK;
     count = 0;
     
     if (index == 0)
@@ -241,10 +249,11 @@ exit:
 
 PlankResult pl_SimpleLinkedList_AtIndex (PlankSimpleLinkedListRef p, const PlankLL index, PlankSimpleLinkedListElementRef* element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef prev, curr, next;
     PlankLL count;
     
+    result = PlankResult_OK;
     count = 0;
     
     if (p->first == PLANK_NULL)
@@ -297,9 +306,10 @@ PlankResult pl_SimpleLinkedList_GetFirst (PlankSimpleLinkedListRef p, PlankSimpl
 
 PlankResult pl_SimpleLinkedList_GetLast (PlankSimpleLinkedListRef p, PlankSimpleLinkedListElementRef* element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef curr, next;
     
+    result = PlankResult_OK;
     curr = p->first;
     
     if (curr == PLANK_NULL)
@@ -324,10 +334,11 @@ exit:
 
 PlankResult pl_SimpleLinkedList_RemoveAtIndex (PlankSimpleLinkedListRef p, const PlankLL index, PlankSimpleLinkedListElementRef* element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef prev, curr, next;
     PlankLL count;
     
+    result = PlankResult_OK;
     count = 0;
     
     if (index == 0)
@@ -379,8 +390,10 @@ PlankResult pl_SimpleLinkedList_RemoveFirst (PlankSimpleLinkedListRef p, PlankSi
 
 PlankResult pl_SimpleLinkedList_RemoveLast (PlankSimpleLinkedListRef p, PlankSimpleLinkedListElementRef* element)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef prev, curr, next;
+    
+    result = PlankResult_OK;
     
     if (p->first == PLANK_NULL)
     {
@@ -412,12 +425,13 @@ PlankResult pl_SimpleLinkedList_RemoveLast (PlankSimpleLinkedListRef p, PlankSim
 
 PlankResult pl_SimpleLinkedList_IndexOf (PlankSimpleLinkedListRef p, const PlankSimpleLinkedListElementRef element, PlankLL* index)
 {
-    PlankResult result = PlankResult_OK;
+    PlankResult result;
     PlankSimpleLinkedListElementRef curr, next;
     PlankLL count;
     
-    count = 0;
+    result = PlankResult_OK;
     curr = p->first;
+    count = 0;
     
     if (curr != PLANK_NULL)
     {
@@ -457,9 +471,9 @@ PlankLL pl_SimpleLinkedList_GetSize (PlankSimpleLinkedListRef p)
     PlankSimpleLinkedListElementRef curr, next;
     PlankLL count;
     
-    count = 0;
     curr = p->first;
-    
+    count = 0;
+
     if (curr != PLANK_NULL)
     {
         next = pl_SimpleLinkedListElement_GetNext (curr);
