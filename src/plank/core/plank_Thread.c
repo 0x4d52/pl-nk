@@ -134,7 +134,7 @@ PlankThreadNativeReturn PLANK_THREADCALL pl_ThreadNativeFunction (PlankP argumen
     
     p = (PlankThreadRef)argument;
     
-    if (p->name != PLANK_NULL)
+    if (p->name[0] != '\0')
     {
         result = pl_ThreadSetNameInternal (p->name);
         
@@ -187,7 +187,7 @@ PlankResult pl_Thread_Init (PlankThreadRef p)
     PlankResult result = PlankResult_OK;
     
     p->function = (PlankThreadFunction)0;
-    p->name = (char*)0;
+    p->name[0] = '\0';
     
     pl_AtomicI_Init (&p->shouldExitAtom);
     pl_AtomicI_Init (&p->isRunningAtom);
@@ -209,12 +209,6 @@ PlankResult pl_Thread_DeInit (PlankThreadRef p)
     pl_AtomicI_DeInit (&p->shouldExitAtom);
     pl_AtomicI_DeInit (&p->isRunningAtom);
     pl_AtomicPX_DeInit (&p->userDataAtom);
-
-    if (p->name != PLANK_NULL)
-    {
-        if ((result = pl_Memory_Free (m, p->name)) != PlankResult_OK)
-            goto exit;
-    }
 
 exit:
     return result;    
@@ -249,23 +243,11 @@ PlankThreadID pl_Thread_GetID (PlankThreadRef p)
 }
 
 PlankResult pl_Thread_SetName (PlankThreadRef p, const char* name)
-{
-    PlankMemoryRef m;
-    int length;
-    
+{    
     if (pl_AtomicI_Get (&p->isRunningAtom))
         return PlankResult_ThreadSetFunctionFailed;
 
-    length = strlen (name);  
-    
-    if (length <= PLANK_THREAD_MAXNAMELENGTH)
-    {
-        m = pl_MemoryGlobal();
-        p->name = (char*)pl_Memory_AllocateBytes (m, length + 1);
-        
-        if (p->name != PLANK_NULL)
-            strncpy (p->name, name, length);
-    }
+    strncpy (p->name, name, PLANK_THREAD_MAXNAMELENGTH);
     
     return PlankResult_OK;
 }

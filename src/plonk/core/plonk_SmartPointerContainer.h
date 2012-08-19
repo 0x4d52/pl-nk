@@ -198,15 +198,23 @@ template<class SmartPointerType, bool enableWeak>
 class SmartPointerContainer : public SmartPointerContainerBase<SmartPointerType>
 {
 public:
-    SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
+    inline SmartPointerContainer (SmartPointerType* internalToUse = 0) throw() 
 	:	SmartPointerContainerBase<SmartPointerType> (internalToUse)
 	{
 	}
     
-    SmartPointerContainer (SmartPointerContainer const& copy) throw()
+    inline SmartPointerContainer (SmartPointerContainer const& copy) throw()
 	:	SmartPointerContainerBase<SmartPointerType> (copy)
 	{
 	}
+    
+    inline SmartPointerContainer& operator= (SmartPointerContainer const& other) throw()
+	{
+		if (this != &other)
+            this->setInternal (other.getInternal());
+        
+		return *this;		
+	}    
     
 };
 
@@ -226,11 +234,19 @@ public:
 	{
 	}    
     
+    inline SmartPointerContainer& operator= (SmartPointerContainer const& other) throw()
+	{
+		if (this != &other)
+            this->setInternal (other.getInternal());
+        
+		return *this;		
+	}    
+
     WeakPointer* getWeakPointer() const throw()
     {
         const SmartPointerType* const p = this->getInternal();
             
-        if ((p != 0) && (p != Base::getNullSmartPointer())) // can't remember why :(
+        if (p != Base::getNullSmartPointer())
         {
             WeakPointer* w = static_cast<WeakPointer*> (p->getWeak());            
             return w;
@@ -271,7 +287,7 @@ public:
         swapWith (copy);        
 	}
     
-	inline ScopedPointerContainer& operator= (ScopedPointerContainer const& other) throw()
+	inline ScopedPointerContainer& operator= (ScopedPointerContainer& other) throw()
 	{
 		if (this != &other)
         {
@@ -284,9 +300,9 @@ public:
     
     void destroy() throw()
     {
-        AtomicPointer null (0);
-        internal.swapWith (null);
-        delete null.getPtrUnchecked();
+        AtomicPointer tmp (0);
+        internal.swapWith (tmp);
+        delete tmp.getPtrUnchecked();
     }
     
     inline void swapWith (ScopedPointerContainer& other) throw()
@@ -296,11 +312,13 @@ public:
     
     inline ScopedPointerType* operator->() throw() 
     { 
+        plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtrUnchecked(); 
     }
     
 	inline const ScopedPointerType* operator->() const throw() 
     { 
+        plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtrUnchecked(); 
     }
     
@@ -318,6 +336,8 @@ public:
     
 private:
     AtomicPointer internal;
+    
+    ScopedPointerContainer& operator= (ScopedPointerContainer const& other);
 };
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H

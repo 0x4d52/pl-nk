@@ -38,7 +38,7 @@
 
 #include "plonk_StandardHeader.h"
 
-#if PLONK_DEBUG
+#if PLONK_DEBUG // PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE
 // not many cpp files to put these in
 // used mainly to help see all allocs/deallocs in debugging
 // must be at global scope
@@ -249,7 +249,7 @@ void SmartPointerCounter::incrementRefCount() throw()
     {
         oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
         oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
-        ++newElement.parts.counts.refCount;
+        ++newElement.parts.counts.refCount; // in multithreaded, we might be incrementing after the pointer was deleted and zereo'd
         
         plonk_assert (newElement.parts.counts.refCount != 0); // overflow occurred
         
@@ -277,7 +277,7 @@ void SmartPointerCounter::decrementRefCount() throw()
     
     if (newElement.parts.counts.refCount == 0)
     {
-        delete oldElement.parts.smartPointer;
+        delete oldElement.parts.smartPointer; // might be zero in multithreaded if we inc'd and dec'd again but that's OK
         
         if (newElement.parts.counts.weakCount == 0)
             delete this;
@@ -344,10 +344,10 @@ void SmartPointerCounter::incrementCounts() throw()
     {
         oldElement.halves.ptr = newElement.halves.ptr = atom.getPtrUnchecked();
         oldElement.halves.extra = newElement.halves.extra = atom.getExtraUnchecked();
-        ++newElement.parts.counts.refCount;
+        ++newElement.parts.counts.refCount; // in multithreaded, we might be incrementing after the pointer was deleted and zereo'd
         ++newElement.parts.counts.weakCount;
         
-        plonk_assert (newElement.parts.counts.refCount != 0); // overflow occurred
+        plonk_assert (newElement.parts.counts.refCount != 0);  // overflow occurred
         plonk_assert (newElement.parts.counts.weakCount != 0); // overflow occurred
 
         success = atom.compareAndSwap (oldElement.halves.ptr, oldElement.halves.extra, 
@@ -376,7 +376,7 @@ void SmartPointerCounter::decrementCounts() throw()
     
     if (newElement.parts.counts.refCount == 0)
     {
-        delete oldElement.parts.smartPointer;
+        delete oldElement.parts.smartPointer; // might be zero in multithreaded if we inc'd and dec'd again but that's OK
         
         if (newElement.parts.counts.weakCount == 0)
             delete this;

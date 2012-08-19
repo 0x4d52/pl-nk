@@ -116,7 +116,8 @@ public:
         {
             // retain it, this ensures that if weakPointer->getWeakPointer() returns
             // a non-null pointer that it will still be valid when passed to 
-            // construct the container object (which retains it again)
+            // construct the container object (which retains it again) OR...
+            // the pointer will be null
             weakPointer->incrementPeerRefCount(); 
             
             OriginalInternal* smartPointer = static_cast<OriginalInternal*> (weakPointer->getWeakPointer());

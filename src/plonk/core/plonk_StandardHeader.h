@@ -180,6 +180,25 @@ typedef PlankP Pointer;
 struct VoidReturn { enum Type { Pass = 1 }; };
 
 
+#if defined (__clang__) && defined (__has_feature)
+#if !__has_feature (cxx_noexcept)
+#define noexcept throw()
+const                           // this is a const object...
+class {
+public:
+    template<class T>           // convertible to any type
+    operator T*() const         // of null non-member
+    { return 0; }               // pointer...
+    template<class C, class T>  // or any type of null
+    operator T C::*() const     // member pointer...
+    { return 0; }
+private:
+    void operator&() const;     // whose address can't be taken
+} nullptr = {};                 // and whose name is nullptr
+#endif
+#endif
+
+
 #define PLONK_INT24_MAX PLANK_INT24_MAX
 
 #if PLONK_WIN
@@ -230,23 +249,6 @@ struct PlinkProcess
 #include "plonk_Memory.h"
 
 END_PLONK_NAMESPACE
-
-#if 0//!PLONK_USE_DEFAULT_GLOBAL_NEW_DELETE
-inline void* operator new (size_t size)
-{
-    void *ptr = plonk::Memory::global().allocateBytes (size);
-    
-    if (ptr == 0)
-        throw std::bad_alloc();
-    
-    return ptr;
-}
-
-inline void operator delete (void *ptr)
-{
-    plonk::Memory::global().free (ptr);
-}
-#endif
 
 #ifdef INFINITY
     #define PLONK_INFINITY (INFINITY)

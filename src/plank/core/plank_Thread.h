@@ -220,7 +220,7 @@ typedef unsigned PlankThreadNativeReturn;
 #define PLANK_THREADCALL __stdcall
 #endif // PLANK_WINDOWS
 
-#define PLANK_THREAD_MAXNAMELENGTH 1024
+#define PLANK_THREAD_MAXNAMELENGTH 256
 
 typedef struct PlankThread
 {
@@ -230,7 +230,7 @@ typedef struct PlankThread
     PLANK_ALIGN(16) PlankAtomicPX userDataAtom;
     PLANK_ALIGN(16) PlankAtomicI shouldExitAtom;
     PLANK_ALIGN(16) PlankAtomicI isRunningAtom;
-    char* name;
+    char name[PLANK_THREAD_MAXNAMELENGTH];
 } PlankThread;
 #endif
 

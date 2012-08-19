@@ -118,14 +118,13 @@ void* ObjectMemoryPools::allocateBytes (UnsignedLong requestedSize)
     plonk_assert (sizeLog2 >= 0 && sizeLog2 < NumQueues);
     
     void* rtn = 0;
-    UnsignedChar* raw;
     Element e = queues[sizeLog2].pop();
     
     if (e.ptr != 0)
     {
         rtn = e.ptr;
 #if PLONK_DEBUG
-        raw = static_cast<UnsignedChar*> (rtn) - align;
+        UnsignedChar* raw = static_cast<UnsignedChar*> (rtn) - align;
         plonk_assert (*reinterpret_cast<UnsignedLong*> (raw) == size);
 #endif
     }
