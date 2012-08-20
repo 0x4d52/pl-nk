@@ -40,17 +40,18 @@
 #ifndef PLANK_H
 #define PLANK_H
 
-/* 10/1/2012
- http://cloc.sourceforge.net v 1.52  T=1.0 s (89.0 files/s, 16517.0 lines/s)
+/* 19/8/2012 
+ http://cloc.sourceforge.net v 1.52  T=0.5 s (188.0 files/s, 40740.0 lines/s)
  -------------------------------------------------------------------------------
  Language                     files          blank        comment           code
  -------------------------------------------------------------------------------
- C                               28           1551            245           4965
- C/C++ Header                    60           2440           2600           4679
- C++                              1              7              7             23
+ C/C++ Header                    63           2839           4183           4981
+ C                               30           1734           1666           4899
+ C++                              1             13             32             23
  -------------------------------------------------------------------------------
- SUM:                            89           3998           2852           9667
+ SUM:                            94           4586           5881           9903
  -------------------------------------------------------------------------------
+
  */ 
 
 // this must be before the standard header incase we want it different in user code?
@@ -118,6 +119,7 @@
  - F float (32-bit floating point)
  - D double (64-bit floating point)
  - B bool (Boolean value)
+ - P pointer (a void*)
  
  Unsigned version (where applicable) are prefixed with 'U'. So for example, a PlankUI 
  type is just an unsigned int. This naming scheme is also employed in functions.

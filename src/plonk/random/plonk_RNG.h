@@ -75,7 +75,8 @@ public:
     /** Get the global random number generator. */
     static RNG& global() throw();
     
-    /** Get the audio thread random number generator. */
+    /** Get the audio thread random number generator. 
+     NB This will be no longer sufficient when multicore. */
     static RNG& audio() throw();
     
     /** Seed this random number generator. */

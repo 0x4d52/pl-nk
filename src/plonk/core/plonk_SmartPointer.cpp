@@ -89,24 +89,22 @@ BEGIN_PLONK_NAMESPACE
 
 #include "plonk_Headers.h"
 
-#define PLONK_SMARTPOINTER_DEBUG 0
-
-#ifndef PLONK_SMARTPOINTER_DEBUG
-  #ifdef PLONK_DEBUG
-    #define PLONK_SMARTPOINTER_DEBUGLOG 1
-    #define PLONK_SMARTPOINTER_DEBUG 1
-  #else
-    #define PLONK_SMARTPOINTER_DEBUGLOG 0
-    #define PLONK_SMARTPOINTER_DEBUG 0
-  #endif
-#endif
-
 
 //=========================== SmartPointer =====================================
 
 #if PLONK_SMARTPOINTER_DEBUG
 AtomicLong totalSmartPointers;
 AtomicLong totalSmartPointerCounters;
+
+Long getTotalSmartPointers() throw()
+{
+    return totalSmartPointers.getValue();
+}
+
+Long getTotalSmartPointerCounterss() throw()
+{
+    return totalSmartPointerCounters.getValue();
+}
 #endif
 
 
@@ -171,7 +169,9 @@ SmartPointer::~SmartPointer()
 #endif
 #endif
     
-	plonk_assert (counter->getRefCount() == 0);
+    // actually OK now as the weak ref would be nulled on the when the refcount hit zero
+    // another thread getting the weak ref must have intervened and inc'd it
+	//plonk_assert (counter->getRefCount() == 0); 
     
     if (weakPointer != 0)
     {

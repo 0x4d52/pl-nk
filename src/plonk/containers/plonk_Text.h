@@ -84,6 +84,7 @@ public:
 	Text (const char c) throw();
     
     Text (const int value) throw();
+    Text (const LongLong value) throw();
     Text (const float value) throw();
     Text (const double value) throw();
     
@@ -119,6 +120,7 @@ public:
 	static Text withSize (const int size, const bool zeroData = false) throw();	
 	static Text newClear (const int size) throw();
 	static Text fromValue (const int num) throw();
+	static Text fromValue (const LongLong num) throw();
 	static Text fromValue (const float num) throw();
 	static Text fromValue (const double num) throw();
 

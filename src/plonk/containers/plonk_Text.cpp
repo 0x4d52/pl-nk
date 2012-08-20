@@ -84,6 +84,11 @@ Text::Text (const int value) throw()
     operator= (Text::fromValue (value));
 }
 
+Text::Text (const LongLong value) throw()
+{
+    operator= (Text::fromValue (value));
+}
+
 Text::Text (const float value) throw()
 {
     operator= (Text::fromValue (value));
@@ -144,6 +149,16 @@ Text Text::fromValue (const int num) throw()
 	char buf[size];
 	
 	snprintf (buf, size, "%d", num);
+	
+	return buf;
+}
+
+Text Text::fromValue (const LongLong num) throw()
+{
+	const int size = 64;
+	char buf[size];
+	
+	snprintf (buf, size, "%lld", num);
 	
 	return buf;
 }

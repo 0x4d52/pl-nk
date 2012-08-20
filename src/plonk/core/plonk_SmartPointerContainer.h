@@ -271,37 +271,37 @@ class ScopedPointerContainer
 public:
     typedef AtomicValue<ScopedPointerType*> AtomicPointer;
 
-    ScopedPointerContainer (ScopedPointerType* const raw = new ScopedPointerType()) throw()
+    ScopedPointerContainer (ScopedPointerType* const raw) throw()
     :   internal (raw)
     {
     }
     
     ~ScopedPointerContainer()
     {
-        destroy();
+        destroy (*this);
     }
     
-    inline ScopedPointerContainer (ScopedPointerContainer const& copy) throw()
+    inline ScopedPointerContainer (ScopedPointerContainer& copy) throw()
     :   internal (0)
 	{
-        swapWith (copy);        
+        this->swapWith (copy);        
 	}
     
 	inline ScopedPointerContainer& operator= (ScopedPointerContainer& other) throw()
 	{
 		if (this != &other)
         {
-            destroy();
-            swapWith (other);
+            destroy (*this);
+            this->swapWith (other);
         }
         
 		return *this;		
 	}    
     
-    void destroy() throw()
+    inline static void destroy (ScopedPointerContainer& container) throw()
     {
         AtomicPointer tmp (0);
-        internal.swapWith (tmp);
+        container.internal.swapWith (tmp);
         delete tmp.getPtrUnchecked();
     }
     
@@ -337,7 +337,8 @@ public:
 private:
     AtomicPointer internal;
     
-    ScopedPointerContainer& operator= (ScopedPointerContainer const& other);
+    ScopedPointerContainer& operator= (ScopedPointerContainer const&);
+    ScopedPointerContainer (ScopedPointerContainer const&);
 };
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H

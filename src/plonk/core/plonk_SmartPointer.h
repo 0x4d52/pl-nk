@@ -43,6 +43,30 @@
 #include "../containers/plonk_ContainerForwardDeclarations.h"
 #include "../containers/plonk_Atomic.h"
 
+#define PLONK_SMARTPOINTER_DEBUG 1
+#define PLONK_SMARTPOINTER_DEBUGLOG 0
+
+#ifndef PLONK_SMARTPOINTER_DEBUG
+    #ifdef PLONK_DEBUG
+        #define PLONK_SMARTPOINTER_DEBUG 1
+        #ifndef PLONK_SMARTPOINTER_DEBUGLOG
+            #define PLONK_SMARTPOINTER_DEBUGLOG 1
+        #endif
+    #else
+        #define PLONK_SMARTPOINTER_DEBUG 0
+        #ifndef PLONK_SMARTPOINTER_DEBUGLOG
+            #define PLONK_SMARTPOINTER_DEBUGLOG 0
+        #endif
+    #endif
+#endif
+
+//------------------------------------------------------------------------------
+
+#if PLONK_SMARTPOINTER_DEBUG
+Long getTotalSmartPointers() throw();
+Long getTotalSmartPointerCounterss() throw();
+#endif
+
 class PlonkBase
 {
 public:
