@@ -43,7 +43,7 @@
 #include "../containers/plonk_ContainerForwardDeclarations.h"
 #include "../containers/plonk_Atomic.h"
 
-#define PLONK_SMARTPOINTER_DEBUG 1
+#define PLONK_SMARTPOINTER_DEBUG 0
 #define PLONK_SMARTPOINTER_DEBUGLOG 0
 
 #ifndef PLONK_SMARTPOINTER_DEBUG
@@ -63,8 +63,8 @@
 //------------------------------------------------------------------------------
 
 #if PLONK_SMARTPOINTER_DEBUG
-Long getTotalSmartPointers() throw();
-Long getTotalSmartPointerCounterss() throw();
+const Long getTotalSmartPointers() throw();
+const Long getTotalSmartPointerCounters() throw();
 #endif
 
 class PlonkBase

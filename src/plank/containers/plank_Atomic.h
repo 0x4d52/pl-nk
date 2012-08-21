@@ -798,26 +798,26 @@ PlankResult pl_AtomicPX_Destroy (PlankAtomicPXRef p);
  used to make each write commit unique.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The value. */
-PlankP pl_AtomicPX_Get (PlankAtomicPXRef p);
+static PlankP pl_AtomicPX_Get (PlankAtomicPXRef p);
 
 /** Get the current value nonatomically. 
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The value. */
-PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p);
+static PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p);
 
 /** Get the current value of the extra "tag". 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The extra tag. */
-PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p);
+static PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p);
 
 /** Get the current value of the extra "tag" nonatomically. 
  Many algorithms the user doesn't need to know the value of the tag as it is 
  simply used to make each write commit unique.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The extra tag. */
-PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p);
+static PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p);
 
 /** Swap the current pointer with a new pointer and change the tag. 
  @param p The <i>Plank %AtomicPX</i> object. 
@@ -825,58 +825,58 @@ PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p);
  @param newExtra The new extra tag to store.
  @param oldExtra The old tage will be place here (you can pass PLANK_NULL if you don't need this).
  @return The previously stored value. */
-PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtra);
+static PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtra);
 
 /** Swap the current pointer with a new pointer. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicPX</i> object. 
  @param newPtr The new pointer to store.
  @return The previously stored value. */
-PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr);
+static PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr);
 
 /** Swap over two values.
  The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation.
  @param p1 One <i>Plank %AtomicPX</i> object. 
  @param p2 The other <i>Plank %AtomicPX</i> object. */
-void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2);
+static void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2);
 
 /** Set the current pointer to a new pointer and change the tag. 
  @param p The <i>Plank %AtomicPX</i> object. 
  @param newPtr The new value to store.
  @param newExtra The new extra tag to store. */
-void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra);
+static void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra);
 
 /** Set the current pointer to a new pointer. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicPX</i> object. 
  @param newPtr The new pointer to store. */
-void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr);
+static void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr);
 
 /** Offset current pointer. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicPX</i> object. 
  @param operand The number of bytes by which to offset. 
  @return The new pointer. */
-PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand);
+static PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand);
 
 /** Offset current pointer in a negative direct. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicPX</i> object. 
  @param operand The number of bytes to subtract from the pointer. 
  @return The new pointer. */
-PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand);
+static PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand);
 
 /** Increment the current pointer by 1 byte. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The new pointer. */
-PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p);
+static PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p);
 
 /** Decrement the current pointer by 1 byte. 
  This also increments the extra tag by 1.
  @param p The <i>Plank %AtomicPX</i> object. 
  @return The new pointer. */
-PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p);
+static PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p);
 
 /** Swap the current values with new values if specified old values are still current.
  This is the most important atomic operation for each atomic class, many other operations are based on this.
@@ -895,7 +895,7 @@ PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p);
  @param newPtr The new pointer to attempt to store.
  @param newExtra The new extra tag to attempt to store.
  @return @c true if the swap was successful, otherwise @c false. */
-PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra);
+static PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra);
 
 /** @} */
 

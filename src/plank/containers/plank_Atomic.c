@@ -547,227 +547,227 @@ exit:
     return result;
 }
 
-PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
-{
-    return pl_AtomicP_Get ((PlankAtomicPRef)p);
-}
-
-PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
-{
-    return p->ptr;
-}
-
-PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
-{
-    return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
-}
-
-PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
-{
-    return p->extra;
-}
-
-PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
-{
-    PlankP oldPtr;
-    PlankL oldExtra;
-    PlankB success;
-    
-    do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, newExtra);
-    } while (!success);
-    
-    if (oldExtraPtr != PLANK_NULL)
-        *oldExtraPtr = oldExtra;
-        
-    return oldPtr;        
-}
-
-PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
-{
-    PlankP oldPtr;
-    PlankL oldExtra;
-    PlankB success;
-    
-    do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
-    } while (!success);
-    
-    return oldPtr;            
-}
-
-void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2)
-{
-    PlankAtomicPX tmp1, tmp2;
-    PlankB success;
-    
-    do {
-        tmp1 = *p1;
-        tmp2 = *p2;        
-        success = pl_AtomicPX_CompareAndSwap (p1, tmp1.ptr, tmp1.extra, tmp2.ptr, tmp1.extra + 1);
-    } while (!success);
-    
-    pl_AtomicPX_Set (p2, tmp1.ptr);
-}
-
-void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
-{
-    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankL*)PLANK_NULL);
-}
-
-void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
-{
-    PlankP oldPtr;
-    PlankL oldExtra;
-    PlankB success;
-    
-    do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
-    } while (!success);
-}
-
-PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
-{
-    PlankP newPtr, oldPtr;
-    PlankL oldExtra;
-    PlankB success;
-    
-    do {
-        oldPtr = p->ptr;
-        oldExtra = p->extra;
-        newPtr = (PlankUC*)oldPtr + operand;
-        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
-    } while (!success);
-    
-    return newPtr;    
-}
-
-PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand)
-{
-    return pl_AtomicPX_Add (p, -operand);
-}
-
-PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p)
-{
-    return pl_AtomicPX_Add (p, (PlankL)1);
-}
-
-PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
-{
-    return pl_AtomicPX_Add (p, (PlankL)(-1));
-}
-
-
-#if PLANK_APPLE
-#if PLANK_X86
-#if PLANK_32BIT
-inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    char success;
-#if __PIC__
-    /* If PIC is turned on, we can't use %ebx as it is reserved for the
-     GOT pointer.  We can save and restore %ebx because GCC won't be
-     using it for anything else (such as any of the m operands) */
-    __asm__ __volatile__("pushl %%ebx;"   /* save ebx used for PIC GOT ptr */
-                         "movl %6,%%ebx;" /* move new_val2 to %ebx */
-                         "lock; cmpxchg8b %0; setz %1;"
-                         "pop %%ebx;"     /* restore %ebx */
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                           "c" (newExtra), "m" (newPtr) : "memory");
-#else // !__PIC__
-    /* We can't just do the same thing in non-PIC mode, because GCC
-     * might be using %ebx as the memory operand.  We could have ifdef'd
-     * in a clobber, but there's no point doing the push/pop if we don't
-     * have to. */
-    __asm__ __volatile__("lock; cmpxchg8b %0; setz %1;"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                           "c" (newExtra), "b" (newPtr) : "memory");
-#endif // !__PIC__
-    return success;
-}
-#endif // PLANK_32BIT
-
-#if PLANK_64BIT
-inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    char success;
-    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
-                         : "=m"(*p), "=a"(success)
-                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
-                         "c" (newExtra), "b" (newPtr) : "memory");
-    return success;    
-}
-#endif //PLANK_64BIT
-#endif //PLANK_X86
-
-#if PLANK_PPC // and PLANK_APPLE
-inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    PlankAtomicPX oldAll = { oldPtr, oldExtra, p->lock };
-    PlankAtomicPX newAll = { newPtr, newExtra, p->lock };
-    
-    return pl_AtomicLL_CompareAndSwap ((PlankAtomicLLRef)p, 
-                                       *(PlankLL*)&oldAll, 
-                                       *(PlankLL*)&newAll);  
-}
-#endif // PLANK_PPC and PLANK_APPLE
-
-#if PLANK_ARM // and PLANK_APPLE
-inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    PlankAtomicPX oldAll = { oldPtr, oldExtra };
-    PlankAtomicPX newAll = { newPtr, newExtra };
-        
-    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll, 
-                                            *(int64_t*)&newAll, 
-                                            (volatile int64_t*)p);    
-}
-#endif // PLANK_ARM and PLANK_APPLE
-
-#endif // PLANK_APPLE
-
-#if PLANK_WIN
-#if PLANK_32BIT
-PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    // can't use static init as MSVC C is C89
-    PlankAtomicPX oldAll;
-    PlankAtomicPX newAll;
-    PlankULL oldAllValue;
-    PlankULL newAllValue;
-    
-	oldAll.ptr   = oldPtr; 
-	oldAll.extra = oldExtra;
-	newAll.ptr   = newPtr; 
-	newAll.extra = newExtra;
-    oldAllValue  = *(PlankULL*)&oldAll;
-	newAllValue  = *(PlankULL*)&newAll;
-
-	return oldAllValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newAllValue, oldAllValue);
-}
-#endif
-
-#if PLANK_64BIT
-PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{ 
-    PlankAtomicPX oldAll;
-	oldAll.ptr = oldPtr;
-	oldAll.extra = oldExtra;
-    return _InterlockedCompareExchange128 ((volatile __int64*)p,
-                                           *(__int64*)&newExtra,
-                                           *(__int64*)&newPtr,
-                                           (__int64*)&oldAll);    
-}
-#endif
-#endif
+//PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
+//{
+//    return pl_AtomicP_Get ((PlankAtomicPRef)p);
+//}
+//
+//PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
+//{
+//    return p->ptr;
+//}
+//
+//PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
+//{
+//    return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
+//}
+//
+//PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
+//{
+//    return p->extra;
+//}
+//
+//PlankP pl_AtomicPX_SwapAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra, PlankL* oldExtraPtr)
+//{
+//    PlankP oldPtr;
+//    PlankL oldExtra;
+//    PlankB success;
+//    
+//    do {
+//        oldPtr = p->ptr;
+//        oldExtra = p->extra;
+//        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, newExtra);
+//    } while (!success);
+//    
+//    if (oldExtraPtr != PLANK_NULL)
+//        *oldExtraPtr = oldExtra;
+//        
+//    return oldPtr;        
+//}
+//
+//PlankP pl_AtomicPX_Swap (PlankAtomicPXRef p, PlankP newPtr)
+//{
+//    PlankP oldPtr;
+//    PlankL oldExtra;
+//    PlankB success;
+//    
+//    do {
+//        oldPtr = p->ptr;
+//        oldExtra = p->extra;
+//        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
+//    } while (!success);
+//    
+//    return oldPtr;            
+//}
+//
+//void pl_AtomicPX_SwapOther (PlankAtomicPXRef p1, PlankAtomicPXRef p2)
+//{
+//    PlankAtomicPX tmp1, tmp2;
+//    PlankB success;
+//    
+//    do {
+//        tmp1 = *p1;
+//        tmp2 = *p2;        
+//        success = pl_AtomicPX_CompareAndSwap (p1, tmp1.ptr, tmp1.extra, tmp2.ptr, tmp1.extra + 1);
+//    } while (!success);
+//    
+//    pl_AtomicPX_Set (p2, tmp1.ptr);
+//}
+//
+//void pl_AtomicPX_SetAll (PlankAtomicPXRef p, PlankP newPtr, PlankL newExtra)
+//{
+//    pl_AtomicPX_SwapAll (p, newPtr, newExtra, (PlankL*)PLANK_NULL);
+//}
+//
+//void pl_AtomicPX_Set (PlankAtomicPXRef p, PlankP newPtr)
+//{
+//    PlankP oldPtr;
+//    PlankL oldExtra;
+//    PlankB success;
+//    
+//    do {
+//        oldPtr = p->ptr;
+//        oldExtra = p->extra;
+//        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
+//    } while (!success);
+//}
+//
+//PlankP pl_AtomicPX_Add (PlankAtomicPXRef p, PlankL operand)
+//{
+//    PlankP newPtr, oldPtr;
+//    PlankL oldExtra;
+//    PlankB success;
+//    
+//    do {
+//        oldPtr = p->ptr;
+//        oldExtra = p->extra;
+//        newPtr = (PlankUC*)oldPtr + operand;
+//        success = pl_AtomicPX_CompareAndSwap (p, oldPtr, oldExtra, newPtr, oldExtra + 1);
+//    } while (!success);
+//    
+//    return newPtr;    
+//}
+//
+//PlankP pl_AtomicPX_Subtract (PlankAtomicPXRef p, PlankL operand)
+//{
+//    return pl_AtomicPX_Add (p, -operand);
+//}
+//
+//PlankP pl_AtomicPX_Increment (PlankAtomicPXRef p)
+//{
+//    return pl_AtomicPX_Add (p, (PlankL)1);
+//}
+//
+//PlankP pl_AtomicPX_Decrement (PlankAtomicPXRef p)
+//{
+//    return pl_AtomicPX_Add (p, (PlankL)(-1));
+//}
+//
+//
+//#if PLANK_APPLE
+//#if PLANK_X86
+//#if PLANK_32BIT
+//inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//{
+//    char success;
+//#if __PIC__
+//    /* If PIC is turned on, we can't use %ebx as it is reserved for the
+//     GOT pointer.  We can save and restore %ebx because GCC won't be
+//     using it for anything else (such as any of the m operands) */
+//    __asm__ __volatile__("pushl %%ebx;"   /* save ebx used for PIC GOT ptr */
+//                         "movl %6,%%ebx;" /* move new_val2 to %ebx */
+//                         "lock; cmpxchg8b %0; setz %1;"
+//                         "pop %%ebx;"     /* restore %ebx */
+//                         : "=m"(*p), "=a"(success)
+//                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
+//                           "c" (newExtra), "m" (newPtr) : "memory");
+//#else // !__PIC__
+//    /* We can't just do the same thing in non-PIC mode, because GCC
+//     * might be using %ebx as the memory operand.  We could have ifdef'd
+//     * in a clobber, but there's no point doing the push/pop if we don't
+//     * have to. */
+//    __asm__ __volatile__("lock; cmpxchg8b %0; setz %1;"
+//                         : "=m"(*p), "=a"(success)
+//                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
+//                           "c" (newExtra), "b" (newPtr) : "memory");
+//#endif // !__PIC__
+//    return success;
+//}
+//#endif // PLANK_32BIT
+//
+//#if PLANK_64BIT
+//inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//{
+//    char success;
+//    __asm__ __volatile__("lock; cmpxchg16b %0; setz %1"
+//                         : "=m"(*p), "=a"(success)
+//                         : "m"(*p), "d" (oldExtra), "a" (oldPtr),
+//                         "c" (newExtra), "b" (newPtr) : "memory");
+//    return success;    
+//}
+//#endif //PLANK_64BIT
+//#endif //PLANK_X86
+//
+//#if PLANK_PPC // and PLANK_APPLE
+//inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//{
+//    PlankAtomicPX oldAll = { oldPtr, oldExtra, p->lock };
+//    PlankAtomicPX newAll = { newPtr, newExtra, p->lock };
+//    
+//    return pl_AtomicLL_CompareAndSwap ((PlankAtomicLLRef)p, 
+//                                       *(PlankLL*)&oldAll, 
+//                                       *(PlankLL*)&newAll);  
+//}
+//#endif // PLANK_PPC and PLANK_APPLE
+//
+//#if PLANK_ARM // and PLANK_APPLE
+//inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//{
+//    PlankAtomicPX oldAll = { oldPtr, oldExtra };
+//    PlankAtomicPX newAll = { newPtr, newExtra };
+//        
+//    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldAll, 
+//                                            *(int64_t*)&newAll, 
+//                                            (volatile int64_t*)p);    
+//}
+//#endif // PLANK_ARM and PLANK_APPLE
+//
+//#endif // PLANK_APPLE
+//
+//#if PLANK_WIN
+//#if PLANK_32BIT
+//PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//{
+//    // can't use static init as MSVC C is C89
+//    PlankAtomicPX oldAll;
+//    PlankAtomicPX newAll;
+//    PlankULL oldAllValue;
+//    PlankULL newAllValue;
+//    
+//	oldAll.ptr   = oldPtr; 
+//	oldAll.extra = oldExtra;
+//	newAll.ptr   = newPtr; 
+//	newAll.extra = newExtra;
+//    oldAllValue  = *(PlankULL*)&oldAll;
+//	newAllValue  = *(PlankULL*)&newAll;
+//
+//	return oldAllValue == pl_InterlockedCompareExchange64 ((volatile PlankULL*)p, newAllValue, oldAllValue);
+//}
+//#endif
+//
+//#if PLANK_64BIT
+//PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+//{ 
+//    PlankAtomicPX oldAll;
+//	oldAll.ptr = oldPtr;
+//	oldAll.extra = oldExtra;
+//    return _InterlockedCompareExchange128 ((volatile __int64*)p,
+//                                           *(__int64*)&newExtra,
+//                                           *(__int64*)&newPtr,
+//                                           (__int64*)&oldAll);    
+//}
+//#endif
+//#endif
 
 //------------------------------------------------------------------------------
 

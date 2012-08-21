@@ -93,17 +93,26 @@ BEGIN_PLONK_NAMESPACE
 //=========================== SmartPointer =====================================
 
 #if PLONK_SMARTPOINTER_DEBUG
-AtomicLong totalSmartPointers;
-AtomicLong totalSmartPointerCounters;
-
-Long getTotalSmartPointers() throw()
+static AtomicLong& getTotalSmartPointersAtom() throw()
 {
-    return totalSmartPointers.getValue();
+    static AtomicLong totalSmartPointers;
+    return totalSmartPointers;
 }
 
-Long getTotalSmartPointerCounterss() throw()
+static AtomicLong& getTotalSmartPointerCountersAtom() throw()
 {
-    return totalSmartPointerCounters.getValue();
+    static AtomicLong totalSmartPointerCounters;
+    return totalSmartPointerCounters;
+}
+
+const Long getTotalSmartPointers() throw()
+{
+    return getTotalSmartPointersAtom().getValue();
+}
+
+const Long getTotalSmartPointerCounters() throw()
+{
+    return getTotalSmartPointerCountersAtom().getValue();
 }
 #endif
 
@@ -153,7 +162,7 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
     }
     
 #if PLONK_SMARTPOINTER_DEBUG
-    ++totalSmartPointers;
+    ++getTotalSmartPointersAtom();
 #if PLONK_SMARTPOINTER_DEBUGLOG
 	printf("++SmartPointer++ %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
 #endif
@@ -163,7 +172,7 @@ SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
 SmartPointer::~SmartPointer()
 {
 #if PLONK_SMARTPOINTER_DEBUG
-    --totalSmartPointers;
+    --getTotalSmartPointersAtom();
 #if PLONK_SMARTPOINTER_DEBUGLOG
 	printf("--SmartPointer-- %p, %ld\n", this, totalSmartPointers.getValueUnchecked());    
 #endif
@@ -216,7 +225,7 @@ SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
     atom.getAtomicRef()->extra = 0;
         
 #if PLONK_SMARTPOINTER_DEBUG
-    ++totalSmartPointerCounters;
+    ++getTotalSmartPointerCountersAtom();
 #if PLONK_SMARTPOINTER_DEBUGLOG
     printf("++SmartPointerCounter++ %p, %ld\n", this, totalSmartPointerCounters.getValueUnchecked());    
 #endif
@@ -226,7 +235,7 @@ SmartPointerCounter::SmartPointerCounter (SmartPointer* smartPointer) throw()
 SmartPointerCounter::~SmartPointerCounter()
 {
 #if PLONK_SMARTPOINTER_DEBUG
-    --totalSmartPointerCounters;
+    --getTotalSmartPointerCountersAtom();
 #if PLONK_SMARTPOINTER_DEBUGLOG
     printf("--SmartPointerCounter-- %p, %ld\n", this, totalSmartPointerCounters.getValueUnchecked());    
 #endif
@@ -236,7 +245,7 @@ SmartPointerCounter::~SmartPointerCounter()
 SmartPointer* SmartPointerCounter::getSmartPointer() const throw()
 {
     Element e;
-    e.halves.ptr = atom.getPtrUnchecked();
+    e.halves.ptr = atom.getPtr(); // could this be the unchecked version?
     return e.parts.smartPointer;
 }
 
@@ -287,7 +296,7 @@ void SmartPointerCounter::decrementRefCount() throw()
 int SmartPointerCounter::getRefCount() const throw()
 {
     Element e;
-    e.halves.extra = atom.getExtraUnchecked();
+    e.halves.extra = atom.getExtra(); // could this be the unchecked version?
     return e.parts.counts.refCount;
 }
 
@@ -331,7 +340,7 @@ void SmartPointerCounter::decrementWeakCount() throw()
 int SmartPointerCounter::getWeakCount() const throw()
 {
     Element e;
-    e.halves.extra = atom.getExtraUnchecked();
+    e.halves.extra = atom.getExtra(); // could this be the unchecked version?
     return e.parts.counts.weakCount;
 }
 

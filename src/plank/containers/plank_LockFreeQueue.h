@@ -64,7 +64,9 @@ PlankResult pl_LockFreeQueue_SetFreeElementDataFunction (PlankLockFreeQueueRef p
 PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element);
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element);
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element);
-PlankLL pl_LockFreeQueue_GetSize (PlankLockFreeQueueRef p);
+
+/** NB the result of this could be invalid by the time it is returned in a multithreaded context. */
+PlankI pl_LockFreeQueue_GetSize (PlankLockFreeQueueRef p);
 
 /** @} */
 
@@ -75,7 +77,7 @@ typedef struct PlankLockFreeQueue
 {
 	PLANK_ALIGN(16) PlankAtomicPX               head;
     PLANK_ALIGN(16) PlankAtomicPX               tail;
-    PLANK_ALIGN(16) PlankAtomicLL               count;
+    PLANK_ALIGN(16) PlankAtomicI                count;
     PLANK_ALIGN(16) PlankLockFreeQueueElement   dummyElement;
     PlankLockFreeQueueFreeElementDataFunction   freeFunction;
 

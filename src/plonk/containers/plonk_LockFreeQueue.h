@@ -80,6 +80,20 @@ public:
         return (valuePtr == 0) ? getNullValue() : value;
     }
     
+    template<class OtherType>
+    inline bool pop (OtherType& value)
+    {
+        ValueType tmp;
+        ValueType* valuePtr = popInternal (tmp);
+ 
+        if (valuePtr != 0)
+        {
+            value = tmp;
+            return true;
+        }
+        else return false;
+    }
+
     void clear() throw()
     {
         ValueType* valuePtr;
@@ -263,6 +277,12 @@ public:
         return returnValue;
     }
     
+    template<class OtherType>
+    inline bool pop (OtherType& value)
+    {
+        return value = pop() ? true : false;
+    }
+    
     void clear() throw()
     {
         ResultCode result = pl_LockFreeQueue_Clear (&queue);
@@ -352,6 +372,12 @@ public:
     inline ValueType pop() throw()
     {
         return this->getInternal()->pop();
+    }
+    
+    template<class OtherType>
+    inline bool pop (OtherType& value)
+    {
+        return this->getInternal()->pop (value);
     }
     
     inline void clear() throw()

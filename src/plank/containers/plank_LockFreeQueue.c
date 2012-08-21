@@ -224,8 +224,8 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
     
     while (!success)
     {
-        tailExtra = pl_AtomicPX_GetExtra ((PlankAtomicPXRef)&(p->tail));
-        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_Get ((PlankAtomicPXRef)&(p->tail));
+        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));                            // changed to unchecked
+        tailElement = (PlankLockFreeQueueElementRef)pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail)); // changed to unchecked
         
         tailElementNextAtom = pl_LockFreeQueueElement_GetNextAtom (tailElement);
         success = pl_AtomicP_CompareAndSwap ((PlankAtomicPRef)tailElementNextAtom, 
@@ -243,7 +243,7 @@ PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQ
                                 tailElement, tailExtra, 
                                 element, tailExtra + 1);    
     
-    pl_AtomicLL_Increment (&p->count);
+    pl_AtomicI_Increment (&p->count);
     
     return result;
 }
@@ -261,14 +261,14 @@ PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueEle
     
     while (!success)
     {
-        headExtra = pl_AtomicPX_GetExtra ((PlankAtomicPXRef)&(p->head));
-        tailExtra = pl_AtomicPX_GetExtra ((PlankAtomicPXRef)&(p->tail));
-        headElement = pl_AtomicPX_Get ((PlankAtomicPXRef)&(p->head));
+        headExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->head));       // changed to unchecked
+        tailExtra = pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->tail));       // changed to unchecked
+        headElement = pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->head));          // changed to unchecked
         nextElement = pl_LockFreeQueueElement_GetNext (headElement);
         
-        if (headExtra == pl_AtomicPX_GetExtra ((PlankAtomicPXRef)&(p->head)))
+        if (headExtra == pl_AtomicPX_GetExtraUnchecked ((PlankAtomicPXRef)&(p->head)))  // changed to unchecked
         {
-            if (headElement == pl_AtomicPX_Get ((PlankAtomicPXRef)&(p->tail)))
+            if (headElement == pl_AtomicPX_GetUnchecked ((PlankAtomicPXRef)&(p->tail))) // changed to unchecked
             {
                 if (nextElement == (PlankLockFreeQueueElementRef)p)
                 {
@@ -289,7 +289,7 @@ PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueEle
         }
     }
     
-    pl_AtomicLL_Decrement (&p->count);
+    pl_AtomicI_Decrement (&p->count);
     
     if (headElement == &p->dummyElement)
     {
@@ -306,7 +306,7 @@ exit:
     return result;    
 }
 
-PlankLL pl_LockFreeQueue_GetSize (PlankLockFreeQueueRef p)
+PlankI pl_LockFreeQueue_GetSize (PlankLockFreeQueueRef p)
 {
-    return pl_AtomicLL_Get (&p->count);
+    return pl_AtomicI_GetUnchecked (&p->count); // changed to unchecked
 }

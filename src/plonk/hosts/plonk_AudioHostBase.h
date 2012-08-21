@@ -70,7 +70,6 @@ public:
     /** Destructor */
     virtual ~AudioHostBase() 
     {
-        delete om;
     }
         
     /** Determine whether the audio device is runnging. */
@@ -213,7 +212,7 @@ protected:
 
     
 private:
-    ObjectMemoryBase* om;
+    ScopedPointerContainer<ObjectMemoryBase> om;
 
     double preferredSampleRate;
     int preferredBlockSize;

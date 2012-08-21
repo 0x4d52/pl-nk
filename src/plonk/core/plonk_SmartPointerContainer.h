@@ -90,23 +90,25 @@ public:
         AtomicPointer temp (getNullSmartPointer());
         internal.swapWith (temp);
         
-		if (temp != getNullSmartPointer()) 
-			temp->decrementRefCount();		
+        SmartPointerType* const tempPtr = temp.getPtrUnchecked(); // unchecked version is fine here
+        
+		if (tempPtr != getNullSmartPointer()) 
+			tempPtr->decrementRefCount(); 
 	}
     
 	inline SmartPointerType* getInternal() const throw() 
 	{
-		return internal;
+		return internal.getPtr(); // might need to be this safe version
 	}
     
     inline SmartPointerType* operator->() throw() 
 	{
-		return internal;
+		return internal.getPtr(); // might need to be this safe version
 	}
     
 	inline const SmartPointerType* operator->() const throw() 
 	{
-		return internal;
+		return internal.getPtr(); // might need to be this safe version
 	}
     
     inline SmartPointerContainerBase containerCopy() const throw()
@@ -116,12 +118,12 @@ public:
     
 	inline bool isNull() const throw()
 	{
-		return internal == getNullSmartPointer();
+		return internal.getPtrUnchecked() == getNullSmartPointer(); // fine as the result is not reliable anyway!
 	}
 	
 	inline bool isNotNull() const throw()
 	{
-		return internal != getNullSmartPointer();
+		return internal.getPtrUnchecked() != getNullSmartPointer(); // fine as the result is not reliable anyway!
 	}
 	
 	inline void setInternal (SmartPointerType* newInternal) throw()
@@ -132,24 +134,27 @@ public:
     
     inline void swapWith (SmartPointerContainerBase& other) throw()
     {
+        // is this a problem is other.internal is contended?
         internal.swapWith (other.internal);
     }
 	
 	inline SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
     :   internal (getNullSmartPointer())
 	{
-        if (copy.internal != getNullSmartPointer()) 
+        SmartPointerType* copyPtr = copy.internal.getPtr(); // need be safe version?
+        
+        if (copyPtr != getNullSmartPointer()) 
         {
-            copy.internal->incrementRefCount();
-            AtomicPointer temp (copy.internal.getPtrUnchecked());
-            internal.swapWith (temp);
+            copyPtr->incrementRefCount();
+            AtomicPointer temp (copyPtr);
+            internal.swapWith (temp);            
         }        
 	}
         
 	inline SmartPointerContainerBase& operator= (SmartPointerContainerBase const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.internal);
+            this->setInternal (other.getInternal());
         
 		return *this;		
 	}    
@@ -164,30 +169,6 @@ public:
 		return internal != other.internal;
 	}
     
-    
-//    template<class OtherType, typename Function>
-//    void operator() (OtherType& object, Function function)
-//    {
-//        (object.*function)();
-//    }
-//    
-//    template<class OtherType, typename Function, class Arg1Type>
-//    void operator() (OtherType& object, Function function, Arg1Type const& arg1)
-//    {
-//        (object.*function)(arg1);
-//    }
-//    
-//    template<class OtherType, typename Function, class Arg1Type, class Arg2Type>
-//    void operator() (OtherType& object, Function function, Arg1Type const& arg1, Arg2Type const& arg2)
-//    {
-//        (object.*function)(arg1, arg2);
-//    }
-//    
-//    template<class OtherType, typename Function, class Arg1Type, class Arg2Type, class Arg3Type>
-//    void operator() (OtherType& object, Function function, Arg1Type const& arg1, Arg2Type const& arg2, Arg3Type const& arg3)
-//    {
-//        (object.*function)(arg1, arg2, arg3);
-//    }
     
 private:
     AtomicPointer internal;
@@ -302,36 +283,37 @@ public:
     {
         AtomicPointer tmp (0);
         container.internal.swapWith (tmp);
-        delete tmp.getPtrUnchecked();
+        delete tmp.getPtrUnchecked(); // unchecked is fine here
     }
     
     inline void swapWith (ScopedPointerContainer& other) throw()
     {
+        // other might be contended
         internal.swapWith (other.internal);
     }
     
     inline ScopedPointerType* operator->() throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
-        return internal.getPtrUnchecked(); 
+        return internal.getPtr(); 
     }
     
 	inline const ScopedPointerType* operator->() const throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
-        return internal.getPtrUnchecked(); 
+        return internal.getPtr(); 
     }
     
     inline ScopedPointerType& operator*() throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
-        return *internal.getPtrUnchecked(); 
+        return *internal.getPtr(); 
     }
     
 	inline const ScopedPointerType& operator*() const throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);
-        return *internal.getPtrUnchecked(); 
+        return *internal.getPtr(); 
     }
     
 private:

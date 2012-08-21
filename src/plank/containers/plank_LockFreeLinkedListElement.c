@@ -128,7 +128,7 @@ exit:
 
 PlankP pl_LockFreeLinkedListElement_GetData (PlankLockFreeLinkedListElementRef p)
 {
-    return pl_AtomicPX_Get (&p->data);
+    return pl_AtomicPX_GetUnchecked (&p->data); // changed to unchecked
 }
 
 void pl_LockFreeLinkedListElement_SetData (PlankLockFreeLinkedListElementRef p, const PlankP data)
@@ -138,7 +138,7 @@ void pl_LockFreeLinkedListElement_SetData (PlankLockFreeLinkedListElementRef p, 
 
 PlankLockFreeLinkedListElementRef pl_LockFreeLinkedListElement_GetNext (PlankLockFreeLinkedListElementRef p)
 {
-    return pl_AtomicPX_Get (&p->next);
+    return pl_AtomicPX_GetUnchecked (&p->next); // changed to unchecked
 }
 
 void pl_LockFreeLinkedListElement_SetNext (PlankLockFreeLinkedListElementRef p, const PlankLockFreeLinkedListElementRef next)

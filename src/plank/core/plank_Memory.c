@@ -140,7 +140,7 @@ PlankResult pl_Memory_SetFunctions (PlankMemoryRef p,
     temp.ptr = allocateBytesFunction;
     temp.extra = *(PlankL*)&freeFunction;
     
-    pl_AtomicPX_SwapAll (&p->funcs, temp.ptr, temp.extra, 0);
+    pl_AtomicPX_SetAll (&p->funcs, temp.ptr, temp.extra);
     
     return PlankResult_OK;
 }
