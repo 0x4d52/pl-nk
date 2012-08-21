@@ -65,7 +65,7 @@ private:
 };
 
 AudioHost::AudioHost()
-:   PortAudioAudioHost (ObjectMemory<ObjectMemoryPools>::create())
+//:   PortAudioAudioHost (ObjectMemory<ObjectMemoryPools>::create())
 {
 //    thread1 = new MyThread (src);
 //    thread2 = new MyThread (src);
@@ -304,12 +304,12 @@ Unit AudioHost::constructGraph()
 //    patch = Patch::ar (src, false, 2, 0.5);
 //    return patch;
     
-//    return Patch::ar (src, false, 2, 0.5);
+    return Patch::ar (src, false, 2, 0.5);
     
 //    return Sine::ar (1000, 0.1);
     
-    const int NUM_SINES = 60;
-    return Sine::ar (Float1D::exprand(NUM_SINES, 100, 1000)).mix() * (0.25f / NUM_SINES);
+//    const int NUM_SINES = 60;
+//    return Sine::ar (Float1D::exprand(NUM_SINES, 100, 1000)).mix() * (0.25f / NUM_SINES);
 }
 
 //void AudioHost::setGate (const bool state) throw() 

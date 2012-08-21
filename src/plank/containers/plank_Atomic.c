@@ -849,7 +849,7 @@ exit:
 
 PlankL pl_AtomicLX_Get (PlankAtomicLXRef p)
 {
-    return pl_AtomicL_Get ((PlankAtomicLRef)p);
+    return p->value; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)p);
 }
 
 PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p)
@@ -859,7 +859,7 @@ PlankL pl_AtomicLX_GetUnchecked (PlankAtomicLXRef p)
 
 PlankL pl_AtomicLX_GetExtra (PlankAtomicLXRef p)
 {
-    return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
+    return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
 PlankL pl_AtomicLX_GetExtraUnchecked (PlankAtomicLXRef p)

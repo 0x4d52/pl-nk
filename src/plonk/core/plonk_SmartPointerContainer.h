@@ -98,17 +98,17 @@ public:
     
 	inline SmartPointerType* getInternal() const throw() 
 	{
-		return internal.getPtr(); // might need to be this safe version
+		return internal.getPtr();
 	}
     
     inline SmartPointerType* operator->() throw() 
 	{
-		return internal.getPtr(); // might need to be this safe version
+		return internal.getPtr();
 	}
     
 	inline const SmartPointerType* operator->() const throw() 
 	{
-		return internal.getPtr(); // might need to be this safe version
+		return internal.getPtr();
 	}
     
     inline SmartPointerContainerBase containerCopy() const throw()
@@ -118,12 +118,12 @@ public:
     
 	inline bool isNull() const throw()
 	{
-		return internal.getPtrUnchecked() == getNullSmartPointer(); // fine as the result is not reliable anyway!
+		return internal.getPtr() == getNullSmartPointer();
 	}
 	
 	inline bool isNotNull() const throw()
 	{
-		return internal.getPtrUnchecked() != getNullSmartPointer(); // fine as the result is not reliable anyway!
+		return internal.getPtr() != getNullSmartPointer();
 	}
 	
 	inline void setInternal (SmartPointerType* newInternal) throw()
@@ -141,7 +141,7 @@ public:
 	inline SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
     :   internal (getNullSmartPointer())
 	{
-        SmartPointerType* copyPtr = copy.internal.getPtr(); // need be safe version?
+        SmartPointerType* copyPtr = copy.internal.getPtr();
         
         if (copyPtr != getNullSmartPointer()) 
         {

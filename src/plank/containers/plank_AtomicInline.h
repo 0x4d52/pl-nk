@@ -149,7 +149,7 @@ static inline PlankULL pl_InterlockedCompareExchange64 (volatile PlankULL *value
 
 static inline PlankI pl_AtomicI_Get (PlankAtomicIRef p)
 {
-    return pl_AtomicI_Add (p, 0);
+    return p->value; // should be aligned anyway and volatile so OK // pl_AtomicI_Add (p, 0);
 }
 
 static inline PlankI pl_AtomicI_GetUnchecked (PlankAtomicIRef p)
@@ -237,7 +237,7 @@ static inline PlankI pl_AtomicI_Decrement (PlankAtomicIRef p)
 
 static inline PlankL pl_AtomicL_Get (PlankAtomicLRef p)
 {
-    return pl_AtomicL_Add (p, (PlankL)0);
+    return p->value; // should be aligned anyway and volatile so OK // pl_AtomicL_Add (p, (PlankL)0);
 }
 
 static inline PlankL pl_AtomicL_GetUnchecked (PlankAtomicLRef p)
@@ -365,7 +365,13 @@ static inline PlankL pl_AtomicL_Decrement (PlankAtomicLRef p)
 
 static inline PlankLL pl_AtomicLL_Get (PlankAtomicLLRef p)
 {
+#if PLANK_32BIT
     return pl_AtomicLL_Add (p, (PlankLL)0);
+#endif
+    
+#if PLANK_64BIT
+    return p->value; // should be aligned anyway and volatile so OK
+#endif
 }
 
 static inline PlankLL pl_AtomicLL_GetUnchecked (PlankAtomicLLRef p)
@@ -480,8 +486,10 @@ static inline PlankLL pl_AtomicLL_Decrement (PlankAtomicLLRef p)
 
 static inline PlankF pl_AtomicF_Get (PlankAtomicFRef p)
 {
-    PlankI bits = pl_AtomicI_Add ((PlankAtomicIRef)p, 0); // use the I version
-    return *(PlankF*)&bits;
+//    PlankI bits = pl_AtomicI_Add ((PlankAtomicIRef)p, 0); // use the I version
+//    return *(PlankF*)&bits;
+    
+    return p->value; // should be aligned anyway and volatile so OK
 }
 
 static inline PlankF pl_AtomicF_GetUnchecked (PlankAtomicFRef p)
@@ -574,8 +582,14 @@ static inline PlankF pl_AtomicF_Decrement (PlankAtomicFRef p)
 
 static inline PlankD pl_AtomicD_Get (PlankAtomicDRef p)
 {
+#if PLANK_32BIT
     PlankLL bits = pl_AtomicLL_Add ((PlankAtomicLLRef)p, (PlankLL)0); // use the LL version
     return *(PlankD*)&bits;
+#endif
+    
+#if PLANK_64BIT
+    return p->value; // should be aligned anyway and volatile so OK
+#endif
 }
 
 static inline PlankD pl_AtomicD_GetUnchecked (PlankAtomicDRef p)
@@ -680,7 +694,7 @@ static inline PlankD pl_AtomicD_Decrement (PlankAtomicDRef p)
 
 static inline PlankP pl_AtomicP_Get (PlankAtomicPRef p)
 {
-    return pl_AtomicP_Add (p, (PlankL)0);
+    return p->ptr; // should be aligned anyway and volatile so OK // pl_AtomicP_Add (p, (PlankL)0);
 }
 
 static inline PlankP pl_AtomicP_GetUnchecked (PlankAtomicPRef p)
@@ -811,7 +825,7 @@ static inline PlankP pl_AtomicP_Decrement (PlankAtomicPRef p)
 
 static inline PlankP pl_AtomicPX_Get (PlankAtomicPXRef p)
 {
-    return pl_AtomicP_Get ((PlankAtomicPRef)p);
+    return p->ptr; // should be aligned anyway and volatile so OK // pl_AtomicP_Get ((PlankAtomicPRef)p);
 }
 
 static inline PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
@@ -821,7 +835,7 @@ static inline PlankP pl_AtomicPX_GetUnchecked (PlankAtomicPXRef p)
 
 static inline PlankL pl_AtomicPX_GetExtra (PlankAtomicPXRef p)
 {
-    return pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
+    return p->extra; // should be aligned anyway and volatile so OK // pl_AtomicL_Get ((PlankAtomicLRef)&(p->extra));
 }
 
 static inline PlankL pl_AtomicPX_GetExtraUnchecked (PlankAtomicPXRef p)
