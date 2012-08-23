@@ -102,7 +102,7 @@ public:
         return *this;
 	}
     
-    using Buffer::containerCopy;
+//    using Buffer::containerCopy;
     using Buffer::getInternal;
         
     int length() const throw()

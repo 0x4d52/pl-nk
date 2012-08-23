@@ -41,8 +41,7 @@
 
 #include "plonk_SmartPointer.h"
 #include "plonk_WeakPointer.h"
-#include "plonk_Thread.h"
-
+//#include "plonk_Thread.h"
 
 #define PLONK_OBJECTARROWOPERATOR(Type) \
     inline Type* operator->() throw() { return this; } \
@@ -112,10 +111,10 @@ public:
 		return internal.getPtr();
 	}
     
-    inline SmartPointerContainerBase containerCopy() const throw()
-    {
-        return *this;
-    }
+//    inline SmartPointerContainerBase containerCopy() const throw()
+//    {
+//        return *this;
+//    }
     
 	inline bool isNull() const throw()
 	{
@@ -326,34 +325,5 @@ private:
 
 //------------------------------------------------------------------------------
 
-/** Thread-safe access to another container.
- The SmartPointerContainer and ScopedPointerContainer are thread-safe in terms
- of copying the object but not actions on the object. This class holds another
- container object and ensures thread-safe manipulations on the object. */
-template<class Container>
-class ThreadSafeAccess
-{
-public:
-    typedef typename Container::Internal ContainerInternal;
-    
-    ThreadSafeAccess() throw()
-    {
-    }
-    
-    explicit ThreadSafeAccess (Container const& initialValue) throw()
-    :   read (initialValue)//, write (initialValue)
-    {
-    }
-    
-    Container& operator->() throw() 
-    { 
-        /* swap ?? */
-        return read;
-    }
-
-private:
-    Container read;
-    //Container write;
-};
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H

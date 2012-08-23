@@ -43,18 +43,19 @@ class SmartPointer;
 class SmartPointerCounter;
 class WeakPointer;
 class TypeCode;
-
-template<class Type>                        class TypeUtility;
-template<class OriginalType>                class WeakPointerContainer;
-template<class SmartPointerType>            class SmartPointerContainerBase;
+    
+template<class Type>                                class TypeUtility;
+template<class OriginalType>                        class WeakPointerContainer;
+template<class SmartPointerType>                    class SmartPointerContainerBase;
 template<class SmartPointerType,
-         bool enableWeak = true>            class SmartPointerContainer;
-template<class SenderContainerBaseType>     class ReceiverInternal;
-template<class ReceiverInternalType>        class ReceiverContainer;
-template<class SenderContainerBaseType>     class SenderInternal;
-template<class SenderInternalType>          class SenderContainer;
-template<class Type>                        class TypeUtility;
-template<class TypeA, class TypeB>          class BinaryOpTypeUtility;
+         bool enableWeak = true>                    class SmartPointerContainer;
+template<class Container, int NumThreads = 2>       class ThreadSafeAccess;
+template<class SenderContainerBaseType>             class ReceiverInternal;
+template<class ReceiverInternalType>                class ReceiverContainer;
+template<class SenderContainerBaseType>             class SenderInternal;
+template<class SenderInternalType>                  class SenderContainer;
+template<class Type>                                class TypeUtility;
+template<class TypeA, class TypeB>                  class BinaryOpTypeUtility;
 
 
 #endif // PLONK_GRAPHFORWARDDECLARATIONS_H

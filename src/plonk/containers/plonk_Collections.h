@@ -45,6 +45,7 @@
 
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
+#include "../core/plonk_Thread.h"
 #include "plonk_ObjectArray.h"
 #include "plonk_SimpleArray.h"
 
@@ -430,6 +431,59 @@ public:
     PLONK_OBJECTARROWOPERATOR(Dictionary)
 
 };
+
+///-----------------------------------------------------------------------------
+
+/** Thread-safe access to another container.
+ The SmartPointerContainer and ScopedPointerContainer are thread-safe in terms
+ of copying the object but not actions on the object. This class holds another
+ container object and ensures thread-safe manipulations on the object. 
+ The container must respond to the -> operator and implement copy() which
+ should return a deep object of the object. */
+template<class Container, int NumThreads>
+class ThreadSafeAccess
+{
+public:
+    typedef typename Container::Internal ContainerInternal;
+    typedef ObjectArray<Container> Containers;
+    
+    ThreadSafeAccess() throw()
+    :   containers (Containers::withSize (NumThreads))
+    {
+        clearThreads();
+        threads[0] = Threading::getCurrentThreadID();
+    }
+    
+    ~ThreadSafeAccess()
+    {
+    }
+    
+    explicit ThreadSafeAccess (Container const& initialValue) throw()
+    :   containers (Containers::withSize (NumThreads))
+    {        
+        for (int i = 0; i < NumThreads; ++i)
+            containers.atUnchecked (i) = initialValue.copy();
+        
+        clearThreads();
+        threads[0] = Threading::getCurrentThreadID();
+    }
+    
+    Container operator->() throw() 
+    { 
+        return containers[0];
+    }
+    
+private:
+    Containers containers;
+    Threading::ID threads[NumThreads];
+    
+    void clearThreads() throw()
+    {
+        for (int i = 0; i < NumThreads; ++i)
+            threads[i] = 0;
+    }
+};
+
 
 
 #endif // PLONK_COLLECTIONS_H
