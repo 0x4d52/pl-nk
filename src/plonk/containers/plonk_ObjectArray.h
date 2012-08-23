@@ -1426,43 +1426,6 @@ public:
 		
 		return result;		
 	}     
-        
-    /** Deinternleave this array into a 2D array with a particular number of groups. */
-//	ObjectArray2DType deinterleave (const int numGroups) const throw()
-//	{
-//        int i, j;
-//        
-//        plonk_assert (!this->isNullTerminated()); // could be done but need this for audio de-interleaving for now..
-//
-//		const int length = this->length();
-//        
-//        if (length == 0) 
-//            return ObjectArray<ObjectType>();
-//
-//        plonk_assert (numGroups > 0);
-//        plonk_assert ((length % numGroups) == 0);
-//        
-//        if (numGroups == 1)
-//            return ObjectArray2DType (*this);
-//        
-//        const int subLength = length / numGroups;
-//        ObjectArray2DType result = ObjectArray2DType::emptyWithAllocatedSize (numGroups);
-//        
-//        for (i = 0; i < numGroups; ++i)
-//        {
-//            ObjectArray sub = ObjectArray::withSize (subLength);
-//         
-//            const ObjectType *thisArray = this->getArray() + i;
-//            ObjectType* const subArray = sub.getArray();
-//            
-//            for (j = 0; j < subLength; ++j, thisArray += numGroups)
-//                subArray[j] = *thisArray;
-//            
-//            result.add (sub);
-//        }		
-//		
-//		return result;
-//	}
     
     /** De-interleave an array into a 2D array.
      The 2D array will contain @c numGroups sub-arrays. Items in the source
@@ -1486,10 +1449,7 @@ public:
             return ObjectArray<ObjectType>();
         
         plonk_assert (numGroups > 0);
-        
-//        if (numGroups == 1)
-//            return ObjectArray2DType (*this);
-        
+                
         const int subLength = (length % numGroups) == 0 ? length / numGroups : length / numGroups + 1;
         ObjectArray2DType result = ObjectArray2DType::withSize (numGroups);
         ObjectArray* const resultArray = result.getArray();

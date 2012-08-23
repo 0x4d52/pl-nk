@@ -58,9 +58,9 @@ typedef struct PlankThread* PlankThreadRef;
 /** Thread ID. */
 
 #if PLANK_WIN
-typedef PlankI PlankThreadID;
+typedef PlankUI PlankThreadID;
 #else
-typedef PlankL PlankThreadID;
+typedef PlankUL PlankThreadID;
 #endif
 
 /** The Thread run function.

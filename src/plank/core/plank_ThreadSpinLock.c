@@ -138,10 +138,10 @@ void pl_ThreadSpinLock_Lock (PlankThreadSpinLockRef p)
         pl_ThreadYield();
 }
 
-void pl_ThreadSpinLock_Unlock (PlankThreadSpinLockRef p)
+PlankB pl_ThreadSpinLock_Unlock (PlankThreadSpinLockRef p)
 {    
     PlankThreadID threadID = pl_ThreadCurrentID();
-    pl_AtomicL_CompareAndSwap (&p->flag, threadID, PLANK_THREADSPINLOCK_UNLOCKED); // only unlock if we hold the lock
+    return pl_AtomicL_CompareAndSwap (&p->flag, threadID, PLANK_THREADSPINLOCK_UNLOCKED); // only unlock if we hold the lock
 }
 
 void pl_ThreadSpinLock_Wait (PlankThreadSpinLockRef p)

@@ -41,7 +41,7 @@
 
 #include "plonk_SmartPointer.h"
 #include "plonk_WeakPointer.h"
-//#include "plonk_Thread.h"
+
 
 #define PLONK_OBJECTARROWOPERATOR(Type) \
     inline Type* operator->() throw() { return this; } \
@@ -110,12 +110,7 @@ public:
 	{
 		return internal.getPtr();
 	}
-    
-//    inline SmartPointerContainerBase containerCopy() const throw()
-//    {
-//        return *this;
-//    }
-    
+        
 	inline bool isNull() const throw()
 	{
 		return internal.getPtr() == getNullSmartPointer();
@@ -303,24 +298,9 @@ public:
         plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtr(); 
     }
-    
-    //inline ScopedPointerType& operator*() throw() 
-    //{ 
-    //    plonk_assert(internal.getPtrUnchecked() != 0);
-    //    return *internal.getPtr(); 
-    //}
-    //
-	//inline const ScopedPointerType& operator*() const throw() 
-    //{ 
-    //    plonk_assert(internal.getPtrUnchecked() != 0);
-    //    return *internal.getPtr(); 
-    //}
-    
+        
 private:
-    AtomicPointer internal;
-    
-	//ScopedPointerContainer& operator= (ScopedPointerContainer const&) throw() { }
-	//ScopedPointerContainer (ScopedPointerContainer const&) throw() { }
+    AtomicPointer internal;    
 };
 
 //------------------------------------------------------------------------------

@@ -63,13 +63,6 @@ Int24::Int24 (const short value) throw()
 {
 }
 
-/*
-Int24::Int24 (const Long value) throw()
-:   data (pl_ConvertIToI24 (int (value)))
-{
-}
-*/
-
 Int24::Int24 (const LongLong value) throw()
 :   data (pl_ConvertIToI24 (int (value)))
 {
@@ -117,13 +110,6 @@ Int24::operator int() const throw()
 {
     return pl_ConvertI24ToI (data);
 }
-
-/*
-Int24::operator Long() const throw()
-{
-    return pl_ConvertI24ToI (data);
-}
-*/
 
 Int24::operator LongLong() const throw()
 {

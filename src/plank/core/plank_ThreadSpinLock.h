@@ -86,8 +86,9 @@ PlankResult pl_ThreadSpinLock_Destroy (PlankThreadSpinLockRef p);
 void pl_ThreadSpinLock_Lock (PlankThreadSpinLockRef p);
 
 /** Release the lock. 
- @param p The <i>Plank %ThreadSpinLock</i> object. */
-void pl_ThreadSpinLock_Unlock (PlankThreadSpinLockRef p);
+ @param p The <i>Plank %ThreadSpinLock</i> object. 
+ @return Returns PLANK_TRUE if the lock was unlocked. */
+PlankB pl_ThreadSpinLock_Unlock (PlankThreadSpinLockRef p);
 
 /** Tries to obtain the lock but doesn't block if this fails. 
  @param p The <i>Plank %ThreadSpinLock</i> object. 
