@@ -39,6 +39,9 @@
 // help prevent accidental inclusion other than via the intended header
 #if PLANK_INLINING_FUNCTIONS
 
+#if PLANK_NOATOMIC64BIT
+    #include "../core/plank_ThreadSpinLock.h"
+#endif
 
 //------------------------------------------------------------------------------
 
@@ -71,7 +74,7 @@ typedef struct PlankAtomicD
 {
     volatile PlankD value;
 #if PLANK_NOATOMIC64BIT
-    PlankSpinLock lock;
+    PlankThreadSpinLock lock;
 #endif    
 } PlankAtomicD;
 
@@ -85,7 +88,7 @@ typedef struct PlankAtomicPX
     volatile PlankP ptr;
     volatile PlankL extra;
 #if PLANK_NOATOMIC64BIT
-    PlankSpinLock lock;
+    PlankThreadSpinLock lock;
 #endif    
 } PlankAtomicPX;
 
@@ -94,7 +97,7 @@ typedef struct PlankAtomicLX
     volatile PlankL value;
     volatile PlankL extra;
 #if PLANK_NOATOMIC64BIT
-    PlankSpinLock lock;
+    PlankThreadSpinLock lock;
 #endif    
 } PlankAtomicLX;
 #endif

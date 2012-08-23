@@ -72,13 +72,7 @@ Threading::ID Threading::getCurrentThreadID() throw()
     return pl_ThreadCurrentID();
 }
 
-//static AtomicValue<Threading::ID>& getAudioThreadIDRef() throw()
-//{
-//    static AtomicValue<Threading::ID>* audioThreadID = new AtomicValue<Threading::ID>; // just leak this one...
-//    return *audioThreadID;
-//}
-
-static AtomicValue<Threading::ID>& getAudioThreadIDRef() throw()
+static AtomicValue<Threading::ID>& plonk_getAudioThreadIDRef() throw()
 {
     static AtomicValue<Threading::ID> audioThreadID;
     return audioThreadID;
@@ -86,12 +80,24 @@ static AtomicValue<Threading::ID>& getAudioThreadIDRef() throw()
 
 Threading::ID Threading::getAudioThreadID() throw()
 {
-    return getAudioThreadIDRef().getValueUnchecked();
+    return plonk_getAudioThreadIDRef().getValueUnchecked();
 }
 
-void Threading::setAudioThreadID (const Threading::ID theID) throw()
+bool Threading::setAudioThreadID (const Threading::ID theID) throw()
 {
-    getAudioThreadIDRef().setValue (theID);
+    if (theID == 0)
+    {
+        plonk_getAudioThreadIDRef().setValue (0);
+        return true;
+    }
+    else if (plonk_getAudioThreadIDRef().compareAndSwap (0, theID))
+    {
+        return true;
+    }
+    else
+    {
+        return plonk_getAudioThreadIDRef().compareAndSwap (theID, theID);
+    }
 }
 
 bool Threading::currentThreadIsAudioThread() throw()
@@ -108,7 +114,7 @@ Threading::Thread::Thread (const char* name) throw()
 
     if (name != 0)
     {
-        result = pl_Thread_SetName(getPeerRef(), name);
+        result = pl_Thread_SetName (getPeerRef(), name);
         plonk_assert (result == PlankResult_OK);
     }
     

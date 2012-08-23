@@ -80,7 +80,8 @@ PlankResult pl_ThreadYield()
 PlankThreadID pl_ThreadCurrentID()
 {
 #if PLANK_APPLE
-    return (PlankThreadID)pthread_self();
+    pthread_t native = pthread_self();
+    return *(PlankThreadID*)&native;
 #elif PLANK_WIN
     return (PlankThreadID)GetCurrentThreadId();
 #endif
@@ -200,17 +201,13 @@ PlankResult pl_Thread_Init (PlankThreadRef p)
 
 PlankResult pl_Thread_DeInit (PlankThreadRef p)
 {
-    PlankResult result;    
-    PlankMemoryRef m;
-    
+    PlankResult result;        
     result = PlankResult_OK;    
-    m = pl_MemoryGlobal();
 
     pl_AtomicI_DeInit (&p->shouldExitAtom);
     pl_AtomicI_DeInit (&p->isRunningAtom);
     pl_AtomicPX_DeInit (&p->userDataAtom);
 
-exit:
     return result;    
 }
 
@@ -287,7 +284,7 @@ PlankResult pl_Thread_Start (PlankThreadRef p)
     if (pthread_create (&p->thread, NULL, pl_ThreadNativeFunction, p) != 0)
         return PlankResult_ThreadStartFailed;
     
-    p->threadID = (PlankThreadID)p->thread;
+    p->threadID = *(PlankThreadID*)&p->thread;
     
 #elif PLANK_WIN    
     if ((p->thread = _beginthreadex (NULL, 0, pl_ThreadNativeFunction, p, 0, (unsigned int*)&p->threadID)) == 0) 

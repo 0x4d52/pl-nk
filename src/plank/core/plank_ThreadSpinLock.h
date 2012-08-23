@@ -42,7 +42,7 @@
 #include "../containers/plank_Atomic.h"
 #include "plank_Thread.h"
 
-#define PLANK_THREADSPINLOCK_UNLOCKED 0
+#define PLANK_THREADSPINLOCK_UNLOCKED 0 // assumes 0 is an invalid thread ID, should be OK on posix & windows
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -117,7 +117,7 @@ static inline PlankB pl_ThreadSpinLock_TryLock (PlankThreadSpinLockRef p)
     if (pl_AtomicL_CompareAndSwap (&p->flag, PLANK_THREADSPINLOCK_UNLOCKED, threadID))
         return true;
     else
-        return pl_AtomicL_CompareAndSwap (&p->flag, threadID, threadID);
+        return pl_AtomicL_CompareAndSwap (&p->flag, threadID, threadID); // stay locked on same thread
 }
 
 

@@ -58,7 +58,7 @@ public:
     
     static Threading::ID getAudioThreadID() throw();
     
-    static void setAudioThreadID (const Threading::ID theID) throw();
+    static bool setAudioThreadID (const Threading::ID theID) throw();
     
     static bool currentThreadIsAudioThread() throw();
     

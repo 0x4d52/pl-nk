@@ -39,10 +39,6 @@
 #ifndef PLANK_ATOMIC_H
 #define PLANK_ATOMIC_H
 
-#if PLANK_NOATOMIC64BIT
-    #include "../core/plank_SpinLock.h"
-#endif
-
 PLANK_BEGIN_C_LINKAGE
 
 /** Crossplatform atomic operation classes.
