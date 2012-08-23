@@ -372,7 +372,7 @@ static inline PlankULL pl_Log2CeilULL (PlankULL x)
 
 static inline PlankULL pl_NextPowerOf2ULL (PlankULL x) 
 {
-    return 1L << pl_Log2CeilULL (x);
+    return 1ULL << pl_Log2CeilULL (x);
 }
 
 static inline PlankB pl_IsPowerOf2ULL (PlankULL x) 

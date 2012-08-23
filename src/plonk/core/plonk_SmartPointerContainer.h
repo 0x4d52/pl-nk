@@ -211,7 +211,7 @@ public:
 	}
     
     inline SmartPointerContainer (SmartPointerContainer const& copy) throw()
-	:	SmartPointerContainerBase<SmartPointerType> (copy)
+	:	SmartPointerContainerBase<SmartPointerType> (static_cast<Base const&> (copy))
 	{
 	}    
     
@@ -304,23 +304,23 @@ public:
         return internal.getPtr(); 
     }
     
-    inline ScopedPointerType& operator*() throw() 
-    { 
-        plonk_assert(internal.getPtrUnchecked() != 0);
-        return *internal.getPtr(); 
-    }
-    
-	inline const ScopedPointerType& operator*() const throw() 
-    { 
-        plonk_assert(internal.getPtrUnchecked() != 0);
-        return *internal.getPtr(); 
-    }
+    //inline ScopedPointerType& operator*() throw() 
+    //{ 
+    //    plonk_assert(internal.getPtrUnchecked() != 0);
+    //    return *internal.getPtr(); 
+    //}
+    //
+	//inline const ScopedPointerType& operator*() const throw() 
+    //{ 
+    //    plonk_assert(internal.getPtrUnchecked() != 0);
+    //    return *internal.getPtr(); 
+    //}
     
 private:
     AtomicPointer internal;
     
-    ScopedPointerContainer& operator= (ScopedPointerContainer const&);
-    ScopedPointerContainer (ScopedPointerContainer const&);
+	//ScopedPointerContainer& operator= (ScopedPointerContainer const&) throw() { }
+	//ScopedPointerContainer (ScopedPointerContainer const&) throw() { }
 };
 
 //------------------------------------------------------------------------------

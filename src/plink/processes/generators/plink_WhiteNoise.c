@@ -45,11 +45,12 @@ void plink_WhiteNoiseProcessF_N (void* ppv, WhiteNoiseProcessStateF* state)
     PlinkProcessF* pp;
     int i, N;
     float *output;
+	PlankRNGRef rng;
 
     pp = (PlinkProcessF*)ppv;
     N = pp->buffers[0].bufferSize;
     output = pp->buffers[0].buffer;
-    PlankRNGRef rng = &state->rng;
+    rng = &state->rng;
 
     for (i = 0; i < N; ++i) 
         output[i] = pl_RNG_NextFloat (rng);

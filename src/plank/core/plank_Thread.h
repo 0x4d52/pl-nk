@@ -56,7 +56,12 @@ PLANK_BEGIN_C_LINKAGE
 typedef struct PlankThread* PlankThreadRef; 
 
 /** Thread ID. */
-typedef long PlankThreadID;
+
+#if PLANK_WIN
+typedef PlankI PlankThreadID;
+#else
+typedef PlankL PlankThreadID;
+#endif
 
 /** The Thread run function.
  This should have the declaration:

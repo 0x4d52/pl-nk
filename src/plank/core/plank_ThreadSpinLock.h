@@ -115,7 +115,7 @@ static inline PlankB pl_ThreadSpinLock_TryLock (PlankThreadSpinLockRef p)
     PlankThreadID threadID = pl_ThreadCurrentID();
     
     if (pl_AtomicL_CompareAndSwap (&p->flag, PLANK_THREADSPINLOCK_UNLOCKED, threadID))
-        return true;
+        return PLANK_TRUE;
     else
         return pl_AtomicL_CompareAndSwap (&p->flag, threadID, threadID); // stay locked on same thread
 }
