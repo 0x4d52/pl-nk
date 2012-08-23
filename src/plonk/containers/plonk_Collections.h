@@ -102,18 +102,35 @@ template<class ValueType, class KeyType>
 class KeyValuePair
 {
 public:
-	KeyValuePair()
+	KeyValuePair() throw()
 	{
 	}
 	
-	KeyValuePair (KeyType const& key, ValueType const& value)
+	KeyValuePair (KeyType const& key, ValueType const& value) throw()
 	:	v (value), 
         k (key)
 	{
 	}
+    
+    KeyValuePair (KeyValuePair const& copy) throw()
+    :   v (copy.v),
+        k (copy.k)
+    {
+    }
+    
+    KeyValuePair operator= (KeyValuePair const& other) throw()
+    {
+        if (this != &other)
+        {
+            v = other.v;
+            k = other.k;
+        }
+        
+        return *this;
+    }
 	
-	const KeyType& getKey() { return k; }
-	const ValueType& getValue() { return v; }
+	const KeyType& getKey() const throw() { return k; }
+	const ValueType& getValue() const throw() { return v; }
 	
 private:
 	ValueType v;
@@ -190,7 +207,7 @@ public:
 	}	                                
     
 	/** Creates a dictionary initialise with an array of key/value pairs. */
-	Dictionary (KeyValuePairArrayType pairs) throw()
+	Dictionary (KeyValuePairArrayType const& pairs) throw()
 	:	Base (new Internal())
 	{
 		put (pairs);
@@ -244,12 +261,12 @@ public:
 		}
 	}
 	
-	ValueType put (KeyValuePairType pair) throw()
+	ValueType put (KeyValuePairType const& pair) throw()
 	{
 		return put (pair.getKey(), pair.getValue());
 	}
 	
-	void put (KeyValuePairArrayType pairs) throw()
+	void put (KeyValuePairArrayType const& pairs) throw()
 	{
 		for (int i = 0; i < pairs.length(); ++i)
 			put (pairs[i]);
