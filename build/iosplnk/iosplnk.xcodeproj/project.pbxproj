@@ -25,71 +25,73 @@
 		A80D17F11585EAB500AAB01B /* SecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A80D17EF1585EAB500AAB01B /* SecondViewController_iPad.xib */; };
 		A80D194A158633CF00AAB01B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80D1949158633CF00AAB01B /* AudioToolbox.framework */; };
 		A80D19531587819500AAB01B /* AudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A80D19521587819500AAB01B /* AudioHost.mm */; };
-		A854EC1515D92E47008D1FE5 /* plank_Atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAE315D92E46008D1FE5 /* plank_Atomic.c */; };
-		A854EC1615D92E47008D1FE5 /* plank_DynamicArray.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAE715D92E46008D1FE5 /* plank_DynamicArray.c */; };
-		A854EC1715D92E47008D1FE5 /* plank_LockFreeDynamicArray.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAE915D92E46008D1FE5 /* plank_LockFreeDynamicArray.c */; };
-		A854EC1815D92E47008D1FE5 /* plank_LockFreeLinkedListElement.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAEB15D92E46008D1FE5 /* plank_LockFreeLinkedListElement.c */; };
-		A854EC1915D92E47008D1FE5 /* plank_LockFreeQueue.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAEE15D92E46008D1FE5 /* plank_LockFreeQueue.c */; };
-		A854EC1A15D92E47008D1FE5 /* plank_LockFreeStack.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAF015D92E46008D1FE5 /* plank_LockFreeStack.c */; };
-		A854EC1B15D92E47008D1FE5 /* plank_SimpleLinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAF215D92E46008D1FE5 /* plank_SimpleLinkedList.c */; };
-		A854EC1C15D92E47008D1FE5 /* plank_SimpleLinkedListElement.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAF415D92E46008D1FE5 /* plank_SimpleLinkedListElement.c */; };
-		A854EC1D15D92E47008D1FE5 /* plank_SimpleMap.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAF715D92E46008D1FE5 /* plank_SimpleMap.c */; };
-		A854EC1E15D92E47008D1FE5 /* plank_SimpleQueue.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAF915D92E46008D1FE5 /* plank_SimpleQueue.c */; };
-		A854EC1F15D92E47008D1FE5 /* plank_SimpleStack.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAFB15D92E46008D1FE5 /* plank_SimpleStack.c */; };
-		A854EC2015D92E47008D1FE5 /* plank_ThreadLocalStorage.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EAFD15D92E46008D1FE5 /* plank_ThreadLocalStorage.c */; };
-		A854EC2115D92E47008D1FE5 /* plank_Lock.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB0015D92E46008D1FE5 /* plank_Lock.c */; };
-		A854EC2215D92E47008D1FE5 /* plank_LockFreeMemory.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB0215D92E46008D1FE5 /* plank_LockFreeMemory.c */; };
-		A854EC2315D92E47008D1FE5 /* plank_Memory.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB0415D92E46008D1FE5 /* plank_Memory.c */; };
-		A854EC2415D92E47008D1FE5 /* plank_Result.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB0715D92E46008D1FE5 /* plank_Result.c */; };
-		A854EC2515D92E47008D1FE5 /* plank_Thread.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB0A15D92E46008D1FE5 /* plank_Thread.c */; };
-		A854EC2615D92E47008D1FE5 /* plank_FFTRealInternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB2315D92E46008D1FE5 /* plank_FFTRealInternal.cpp */; };
-		A854EC2715D92E47008D1FE5 /* plank_FFT.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB2515D92E46008D1FE5 /* plank_FFT.c */; };
-		A854EC2815D92E47008D1FE5 /* plank_AudioFileCuePoint.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB2A15D92E46008D1FE5 /* plank_AudioFileCuePoint.c */; };
-		A854EC2915D92E47008D1FE5 /* plank_AudioFileMetaData.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB2C15D92E46008D1FE5 /* plank_AudioFileMetaData.c */; };
-		A854EC2A15D92E47008D1FE5 /* plank_AudioFileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB2E15D92E46008D1FE5 /* plank_AudioFileReader.c */; };
-		A854EC2B15D92E47008D1FE5 /* plank_AudioFileRegion.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB3015D92E46008D1FE5 /* plank_AudioFileRegion.c */; };
-		A854EC2C15D92E47008D1FE5 /* plank_AudioFileWriter.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB3215D92E46008D1FE5 /* plank_AudioFileWriter.c */; };
-		A854EC2D15D92E47008D1FE5 /* plank_File.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB3415D92E46008D1FE5 /* plank_File.c */; };
-		A854EC2E15D92E47008D1FE5 /* plank_IffFileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB3715D92E46008D1FE5 /* plank_IffFileReader.c */; };
-		A854EC2F15D92E47008D1FE5 /* plank_IffFileWriter.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB3915D92E46008D1FE5 /* plank_IffFileWriter.c */; };
-		A854EC3015D92E47008D1FE5 /* plank_Maths.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB3C15D92E46008D1FE5 /* plank_Maths.c */; };
-		A854EC3115D92E47008D1FE5 /* plank_RNG.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB4315D92E46008D1FE5 /* plank_RNG.c */; };
-		A854EC3215D92E47008D1FE5 /* plink_Saw.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB4C15D92E46008D1FE5 /* plink_Saw.c */; };
-		A854EC3315D92E47008D1FE5 /* plink_WhiteNoise.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB4E15D92E46008D1FE5 /* plink_WhiteNoise.c */; };
-		A854EC3415D92E47008D1FE5 /* plink_BinaryOpProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB5215D92E46008D1FE5 /* plink_BinaryOpProcess.c */; };
-		A854EC3515D92E47008D1FE5 /* plink_UnaryOpProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = A854EB5415D92E46008D1FE5 /* plink_UnaryOpProcess.c */; };
-		A854EC3615D92E47008D1FE5 /* plonk_DynamicContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB5C15D92E46008D1FE5 /* plonk_DynamicContainer.cpp */; };
-		A854EC3715D92E47008D1FE5 /* plonk_Int24.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB5F15D92E46008D1FE5 /* plonk_Int24.cpp */; };
-		A854EC3815D92E47008D1FE5 /* plonk_ObjectMemoryDeferFree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB6815D92E46008D1FE5 /* plonk_ObjectMemoryDeferFree.cpp */; };
-		A854EC3915D92E47008D1FE5 /* plonk_ObjectMemoryPools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB6A15D92E46008D1FE5 /* plonk_ObjectMemoryPools.cpp */; };
-		A854EC3A15D92E47008D1FE5 /* plonk_Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB7115D92E46008D1FE5 /* plonk_Text.cpp */; };
-		A854EC3B15D92E47008D1FE5 /* plonk_TextArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB7315D92E46008D1FE5 /* plonk_TextArray.cpp */; };
-		A854EC3C15D92E47008D1FE5 /* plonk_Deleter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB7F15D92E46008D1FE5 /* plonk_Deleter.cpp */; };
-		A854EC3D15D92E47008D1FE5 /* plonk_Lock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB8215D92E46008D1FE5 /* plonk_Lock.cpp */; };
-		A854EC3E15D92E47008D1FE5 /* plonk_SmartPointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB8815D92E46008D1FE5 /* plonk_SmartPointer.cpp */; };
-		A854EC3F15D92E47008D1FE5 /* plonk_Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB8C15D92E46008D1FE5 /* plonk_Thread.cpp */; };
-		A854EC4015D92E47008D1FE5 /* plonk_WeakPointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB8F15D92E46008D1FE5 /* plonk_WeakPointer.cpp */; };
-		A854EC4115D92E47008D1FE5 /* plonk_AudioFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB9715D92E46008D1FE5 /* plonk_AudioFileReader.cpp */; };
-		A854EC4215D92E47008D1FE5 /* plonk_BinaryFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB9915D92E46008D1FE5 /* plonk_BinaryFile.cpp */; };
-		A854EC4315D92E47008D1FE5 /* plonk_TextFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EB9B15D92E46008D1FE5 /* plonk_TextFile.cpp */; };
-		A854EC4415D92E47008D1FE5 /* plonk_ChannelInternalCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBA315D92E46008D1FE5 /* plonk_ChannelInternalCore.cpp */; };
-		A854EC4515D92E47008D1FE5 /* plonk_DelayTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBBC15D92E47008D1FE5 /* plonk_DelayTypes.cpp */; };
-		A854EC4615D92E47008D1FE5 /* plonk_FilterTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBCA15D92E47008D1FE5 /* plonk_FilterTypes.cpp */; };
-		A854EC4715D92E47008D1FE5 /* plonk_IOInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBD715D92E47008D1FE5 /* plonk_IOInfo.cpp */; };
-		A854EC4815D92E47008D1FE5 /* plonk_IOKey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBD915D92E47008D1FE5 /* plonk_IOKey.cpp */; };
-		A854EC4915D92E47008D1FE5 /* plonk_IOLimit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBDB15D92E47008D1FE5 /* plonk_IOLimit.cpp */; };
-		A854EC4A15D92E47008D1FE5 /* plonk_Measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBDD15D92E47008D1FE5 /* plonk_Measure.cpp */; };
-		A854EC4B15D92E47008D1FE5 /* plonk_UnitInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBDF15D92E47008D1FE5 /* plonk_UnitInfo.cpp */; };
-		A854EC4C15D92E47008D1FE5 /* plonk_BlockSize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBF215D92E47008D1FE5 /* plonk_BlockSize.cpp */; };
-		A854EC4D15D92E47008D1FE5 /* plonk_InputDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBF515D92E47008D1FE5 /* plonk_InputDictionary.cpp */; };
-		A854EC4E15D92E47008D1FE5 /* plonk_ProcessInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBF715D92E47008D1FE5 /* plonk_ProcessInfo.cpp */; };
-		A854EC4F15D92E47008D1FE5 /* plonk_ProcessInfoInternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBF915D92E47008D1FE5 /* plonk_ProcessInfoInternal.cpp */; };
-		A854EC5015D92E47008D1FE5 /* plonk_SampleRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBFB15D92E47008D1FE5 /* plonk_SampleRate.cpp */; };
-		A854EC5115D92E47008D1FE5 /* plonk_TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EBFD15D92E47008D1FE5 /* plonk_TimeStamp.cpp */; };
-		A854EC5215D92E47008D1FE5 /* plonk_IOSAudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A854EC0215D92E47008D1FE5 /* plonk_IOSAudioHost.mm */; };
-		A854EC5315D92E47008D1FE5 /* plonk_JuceAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EC0415D92E47008D1FE5 /* plonk_JuceAudioHost.cpp */; };
-		A854EC5415D92E47008D1FE5 /* plonk_PortAudioAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EC0815D92E47008D1FE5 /* plonk_PortAudioAudioHost.cpp */; };
-		A854EC5515D92E47008D1FE5 /* plonk_RNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A854EC1315D92E47008D1FE5 /* plonk_RNG.cpp */; };
+		A818A54B15E652EC00E44E91 /* plank_Atomic.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A41515E652EC00E44E91 /* plank_Atomic.c */; };
+		A818A54C15E652EC00E44E91 /* plank_DynamicArray.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A41915E652EC00E44E91 /* plank_DynamicArray.c */; };
+		A818A54D15E652EC00E44E91 /* plank_LockFreeDynamicArray.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A41B15E652EC00E44E91 /* plank_LockFreeDynamicArray.c */; };
+		A818A54E15E652EC00E44E91 /* plank_LockFreeLinkedListElement.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A41D15E652EC00E44E91 /* plank_LockFreeLinkedListElement.c */; };
+		A818A54F15E652EC00E44E91 /* plank_LockFreeQueue.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42015E652EC00E44E91 /* plank_LockFreeQueue.c */; };
+		A818A55015E652EC00E44E91 /* plank_LockFreeStack.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42215E652EC00E44E91 /* plank_LockFreeStack.c */; };
+		A818A55115E652EC00E44E91 /* plank_SimpleLinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42415E652EC00E44E91 /* plank_SimpleLinkedList.c */; };
+		A818A55215E652EC00E44E91 /* plank_SimpleLinkedListElement.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42615E652EC00E44E91 /* plank_SimpleLinkedListElement.c */; };
+		A818A55315E652EC00E44E91 /* plank_SimpleMap.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42915E652EC00E44E91 /* plank_SimpleMap.c */; };
+		A818A55415E652EC00E44E91 /* plank_SimpleQueue.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42B15E652EC00E44E91 /* plank_SimpleQueue.c */; };
+		A818A55515E652EC00E44E91 /* plank_SimpleStack.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42D15E652EC00E44E91 /* plank_SimpleStack.c */; };
+		A818A55615E652EC00E44E91 /* plank_ThreadLocalStorage.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A42F15E652EC00E44E91 /* plank_ThreadLocalStorage.c */; };
+		A818A55715E652EC00E44E91 /* plank_Lock.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A43215E652EC00E44E91 /* plank_Lock.c */; };
+		A818A55815E652EC00E44E91 /* plank_LockFreeMemory.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A43415E652EC00E44E91 /* plank_LockFreeMemory.c */; };
+		A818A55915E652EC00E44E91 /* plank_Memory.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A43615E652EC00E44E91 /* plank_Memory.c */; };
+		A818A55A15E652EC00E44E91 /* plank_Result.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A43915E652EC00E44E91 /* plank_Result.c */; };
+		A818A55B15E652EC00E44E91 /* plank_SpinLock.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A43B15E652EC00E44E91 /* plank_SpinLock.c */; };
+		A818A55C15E652EC00E44E91 /* plank_Thread.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A43E15E652EC00E44E91 /* plank_Thread.c */; };
+		A818A55D15E652EC00E44E91 /* plank_ThreadSpinLock.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A44015E652EC00E44E91 /* plank_ThreadSpinLock.c */; };
+		A818A55E15E652EC00E44E91 /* plank_FFTRealInternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A45915E652EC00E44E91 /* plank_FFTRealInternal.cpp */; };
+		A818A55F15E652EC00E44E91 /* plank_FFT.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A45B15E652EC00E44E91 /* plank_FFT.c */; };
+		A818A56015E652EC00E44E91 /* plank_AudioFileCuePoint.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46015E652EC00E44E91 /* plank_AudioFileCuePoint.c */; };
+		A818A56115E652EC00E44E91 /* plank_AudioFileMetaData.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46215E652EC00E44E91 /* plank_AudioFileMetaData.c */; };
+		A818A56215E652EC00E44E91 /* plank_AudioFileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46415E652EC00E44E91 /* plank_AudioFileReader.c */; };
+		A818A56315E652EC00E44E91 /* plank_AudioFileRegion.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46615E652EC00E44E91 /* plank_AudioFileRegion.c */; };
+		A818A56415E652EC00E44E91 /* plank_AudioFileWriter.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46815E652EC00E44E91 /* plank_AudioFileWriter.c */; };
+		A818A56515E652EC00E44E91 /* plank_File.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46A15E652EC00E44E91 /* plank_File.c */; };
+		A818A56615E652EC00E44E91 /* plank_IffFileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46D15E652EC00E44E91 /* plank_IffFileReader.c */; };
+		A818A56715E652EC00E44E91 /* plank_IffFileWriter.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A46F15E652EC00E44E91 /* plank_IffFileWriter.c */; };
+		A818A56815E652EC00E44E91 /* plank_Maths.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A47215E652EC00E44E91 /* plank_Maths.c */; };
+		A818A56915E652EC00E44E91 /* plank_RNG.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A47915E652EC00E44E91 /* plank_RNG.c */; };
+		A818A56A15E652EC00E44E91 /* plink_Saw.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A48215E652EC00E44E91 /* plink_Saw.c */; };
+		A818A56B15E652EC00E44E91 /* plink_WhiteNoise.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A48415E652EC00E44E91 /* plink_WhiteNoise.c */; };
+		A818A56C15E652EC00E44E91 /* plink_BinaryOpProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A48815E652EC00E44E91 /* plink_BinaryOpProcess.c */; };
+		A818A56D15E652EC00E44E91 /* plink_UnaryOpProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = A818A48A15E652EC00E44E91 /* plink_UnaryOpProcess.c */; };
+		A818A56E15E652EC00E44E91 /* plonk_DynamicContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A49215E652EC00E44E91 /* plonk_DynamicContainer.cpp */; };
+		A818A56F15E652EC00E44E91 /* plonk_Int24.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A49515E652EC00E44E91 /* plonk_Int24.cpp */; };
+		A818A57015E652EC00E44E91 /* plonk_ObjectMemoryDeferFree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A49E15E652EC00E44E91 /* plonk_ObjectMemoryDeferFree.cpp */; };
+		A818A57115E652EC00E44E91 /* plonk_ObjectMemoryPools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4A015E652EC00E44E91 /* plonk_ObjectMemoryPools.cpp */; };
+		A818A57215E652EC00E44E91 /* plonk_Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4A715E652EC00E44E91 /* plonk_Text.cpp */; };
+		A818A57315E652EC00E44E91 /* plonk_TextArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4A915E652EC00E44E91 /* plonk_TextArray.cpp */; };
+		A818A57415E652EC00E44E91 /* plonk_Deleter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4B515E652EC00E44E91 /* plonk_Deleter.cpp */; };
+		A818A57515E652EC00E44E91 /* plonk_Lock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4B815E652EC00E44E91 /* plonk_Lock.cpp */; };
+		A818A57615E652EC00E44E91 /* plonk_SmartPointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4BE15E652EC00E44E91 /* plonk_SmartPointer.cpp */; };
+		A818A57715E652EC00E44E91 /* plonk_Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4C215E652EC00E44E91 /* plonk_Thread.cpp */; };
+		A818A57815E652EC00E44E91 /* plonk_WeakPointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4C515E652EC00E44E91 /* plonk_WeakPointer.cpp */; };
+		A818A57915E652EC00E44E91 /* plonk_AudioFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4CD15E652EC00E44E91 /* plonk_AudioFileReader.cpp */; };
+		A818A57A15E652EC00E44E91 /* plonk_BinaryFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4CF15E652EC00E44E91 /* plonk_BinaryFile.cpp */; };
+		A818A57B15E652EC00E44E91 /* plonk_TextFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4D115E652EC00E44E91 /* plonk_TextFile.cpp */; };
+		A818A57C15E652EC00E44E91 /* plonk_ChannelInternalCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4D915E652EC00E44E91 /* plonk_ChannelInternalCore.cpp */; };
+		A818A57D15E652EC00E44E91 /* plonk_DelayTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A4F215E652EC00E44E91 /* plonk_DelayTypes.cpp */; };
+		A818A57E15E652EC00E44E91 /* plonk_FilterTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A50015E652EC00E44E91 /* plonk_FilterTypes.cpp */; };
+		A818A57F15E652EC00E44E91 /* plonk_IOInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A50D15E652EC00E44E91 /* plonk_IOInfo.cpp */; };
+		A818A58015E652EC00E44E91 /* plonk_IOKey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A50F15E652EC00E44E91 /* plonk_IOKey.cpp */; };
+		A818A58115E652EC00E44E91 /* plonk_IOLimit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A51115E652EC00E44E91 /* plonk_IOLimit.cpp */; };
+		A818A58215E652EC00E44E91 /* plonk_Measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A51315E652EC00E44E91 /* plonk_Measure.cpp */; };
+		A818A58315E652EC00E44E91 /* plonk_UnitInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A51515E652EC00E44E91 /* plonk_UnitInfo.cpp */; };
+		A818A58415E652EC00E44E91 /* plonk_BlockSize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A52815E652EC00E44E91 /* plonk_BlockSize.cpp */; };
+		A818A58515E652EC00E44E91 /* plonk_InputDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A52B15E652EC00E44E91 /* plonk_InputDictionary.cpp */; };
+		A818A58615E652EC00E44E91 /* plonk_ProcessInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A52D15E652EC00E44E91 /* plonk_ProcessInfo.cpp */; };
+		A818A58715E652EC00E44E91 /* plonk_ProcessInfoInternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A52F15E652EC00E44E91 /* plonk_ProcessInfoInternal.cpp */; };
+		A818A58815E652EC00E44E91 /* plonk_SampleRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A53115E652EC00E44E91 /* plonk_SampleRate.cpp */; };
+		A818A58915E652EC00E44E91 /* plonk_TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A53315E652EC00E44E91 /* plonk_TimeStamp.cpp */; };
+		A818A58A15E652EC00E44E91 /* plonk_IOSAudioHost.mm in Sources */ = {isa = PBXBuildFile; fileRef = A818A53815E652EC00E44E91 /* plonk_IOSAudioHost.mm */; };
+		A818A58B15E652EC00E44E91 /* plonk_JuceAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A53A15E652EC00E44E91 /* plonk_JuceAudioHost.cpp */; };
+		A818A58C15E652EC00E44E91 /* plonk_PortAudioAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A53E15E652EC00E44E91 /* plonk_PortAudioAudioHost.cpp */; };
+		A818A58D15E652EC00E44E91 /* plonk_RNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A818A54915E652EC00E44E91 /* plonk_RNG.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,274 +120,278 @@
 		A80D1949158633CF00AAB01B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A80D19511587819500AAB01B /* AudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHost.h; sourceTree = "<group>"; };
 		A80D19521587819500AAB01B /* AudioHost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHost.mm; sourceTree = "<group>"; };
-		A854EAE015D92E46008D1FE5 /* mainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainpage.h; sourceTree = "<group>"; };
-		A854EAE315D92E46008D1FE5 /* plank_Atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Atomic.c; sourceTree = "<group>"; };
-		A854EAE415D92E46008D1FE5 /* plank_Atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Atomic.h; sourceTree = "<group>"; };
-		A854EAE515D92E46008D1FE5 /* plank_AtomicInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AtomicInline.h; sourceTree = "<group>"; };
-		A854EAE615D92E46008D1FE5 /* plank_ContainersMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_ContainersMisc.h; sourceTree = "<group>"; };
-		A854EAE715D92E46008D1FE5 /* plank_DynamicArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_DynamicArray.c; sourceTree = "<group>"; };
-		A854EAE815D92E46008D1FE5 /* plank_DynamicArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_DynamicArray.h; sourceTree = "<group>"; };
-		A854EAE915D92E46008D1FE5 /* plank_LockFreeDynamicArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeDynamicArray.c; sourceTree = "<group>"; };
-		A854EAEA15D92E46008D1FE5 /* plank_LockFreeDynamicArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeDynamicArray.h; sourceTree = "<group>"; };
-		A854EAEB15D92E46008D1FE5 /* plank_LockFreeLinkedListElement.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeLinkedListElement.c; sourceTree = "<group>"; };
-		A854EAEC15D92E46008D1FE5 /* plank_LockFreeLinkedListElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeLinkedListElement.h; sourceTree = "<group>"; };
-		A854EAED15D92E46008D1FE5 /* plank_LockFreeLinkedListElementInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeLinkedListElementInline.h; sourceTree = "<group>"; };
-		A854EAEE15D92E46008D1FE5 /* plank_LockFreeQueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeQueue.c; sourceTree = "<group>"; };
-		A854EAEF15D92E46008D1FE5 /* plank_LockFreeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeQueue.h; sourceTree = "<group>"; };
-		A854EAF015D92E46008D1FE5 /* plank_LockFreeStack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeStack.c; sourceTree = "<group>"; };
-		A854EAF115D92E46008D1FE5 /* plank_LockFreeStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeStack.h; sourceTree = "<group>"; };
-		A854EAF215D92E46008D1FE5 /* plank_SimpleLinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleLinkedList.c; sourceTree = "<group>"; };
-		A854EAF315D92E46008D1FE5 /* plank_SimpleLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleLinkedList.h; sourceTree = "<group>"; };
-		A854EAF415D92E46008D1FE5 /* plank_SimpleLinkedListElement.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleLinkedListElement.c; sourceTree = "<group>"; };
-		A854EAF515D92E46008D1FE5 /* plank_SimpleLinkedListElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleLinkedListElement.h; sourceTree = "<group>"; };
-		A854EAF615D92E46008D1FE5 /* plank_SimpleLinkedListElementInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleLinkedListElementInline.h; sourceTree = "<group>"; };
-		A854EAF715D92E46008D1FE5 /* plank_SimpleMap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleMap.c; sourceTree = "<group>"; };
-		A854EAF815D92E46008D1FE5 /* plank_SimpleMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleMap.h; sourceTree = "<group>"; };
-		A854EAF915D92E46008D1FE5 /* plank_SimpleQueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleQueue.c; sourceTree = "<group>"; };
-		A854EAFA15D92E46008D1FE5 /* plank_SimpleQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleQueue.h; sourceTree = "<group>"; };
-		A854EAFB15D92E46008D1FE5 /* plank_SimpleStack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleStack.c; sourceTree = "<group>"; };
-		A854EAFC15D92E46008D1FE5 /* plank_SimpleStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleStack.h; sourceTree = "<group>"; };
-		A854EAFD15D92E46008D1FE5 /* plank_ThreadLocalStorage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_ThreadLocalStorage.c; sourceTree = "<group>"; };
-		A854EAFE15D92E46008D1FE5 /* plank_ThreadLocalStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_ThreadLocalStorage.h; sourceTree = "<group>"; };
-		A854EB0015D92E46008D1FE5 /* plank_Lock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Lock.c; sourceTree = "<group>"; };
-		A854EB0115D92E46008D1FE5 /* plank_Lock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Lock.h; sourceTree = "<group>"; };
-		A854EB0215D92E46008D1FE5 /* plank_LockFreeMemory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeMemory.c; sourceTree = "<group>"; };
-		A854EB0315D92E46008D1FE5 /* plank_LockFreeMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeMemory.h; sourceTree = "<group>"; };
-		A854EB0415D92E46008D1FE5 /* plank_Memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Memory.c; sourceTree = "<group>"; };
-		A854EB0515D92E46008D1FE5 /* plank_Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Memory.h; sourceTree = "<group>"; };
-		A854EB0615D92E46008D1FE5 /* plank_MemoryInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_MemoryInline.h; sourceTree = "<group>"; };
-		A854EB0715D92E46008D1FE5 /* plank_Result.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Result.c; sourceTree = "<group>"; };
-		A854EB0815D92E46008D1FE5 /* plank_Result.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Result.h; sourceTree = "<group>"; };
-		A854EB0915D92E46008D1FE5 /* plank_StandardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_StandardHeader.h; sourceTree = "<group>"; };
-		A854EB0A15D92E46008D1FE5 /* plank_Thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Thread.c; sourceTree = "<group>"; };
-		A854EB0B15D92E46008D1FE5 /* plank_Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Thread.h; sourceTree = "<group>"; };
-		A854EB0F15D92E46008D1FE5 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
-		A854EB1015D92E46008D1FE5 /* Array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Array.hpp; sourceTree = "<group>"; };
-		A854EB1115D92E46008D1FE5 /* def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = def.h; sourceTree = "<group>"; };
-		A854EB1215D92E46008D1FE5 /* DynArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynArray.h; sourceTree = "<group>"; };
-		A854EB1315D92E46008D1FE5 /* DynArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DynArray.hpp; sourceTree = "<group>"; };
-		A854EB1415D92E46008D1FE5 /* FFTReal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTReal.h; sourceTree = "<group>"; };
-		A854EB1515D92E46008D1FE5 /* FFTReal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTReal.hpp; sourceTree = "<group>"; };
-		A854EB1615D92E46008D1FE5 /* FFTRealFixLen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealFixLen.h; sourceTree = "<group>"; };
-		A854EB1715D92E46008D1FE5 /* FFTRealFixLen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealFixLen.hpp; sourceTree = "<group>"; };
-		A854EB1815D92E46008D1FE5 /* FFTRealFixLenParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealFixLenParam.h; sourceTree = "<group>"; };
-		A854EB1915D92E46008D1FE5 /* FFTRealPassDirect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealPassDirect.h; sourceTree = "<group>"; };
-		A854EB1A15D92E46008D1FE5 /* FFTRealPassDirect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealPassDirect.hpp; sourceTree = "<group>"; };
-		A854EB1B15D92E46008D1FE5 /* FFTRealPassInverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealPassInverse.h; sourceTree = "<group>"; };
-		A854EB1C15D92E46008D1FE5 /* FFTRealPassInverse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealPassInverse.hpp; sourceTree = "<group>"; };
-		A854EB1D15D92E46008D1FE5 /* FFTRealSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealSelect.h; sourceTree = "<group>"; };
-		A854EB1E15D92E46008D1FE5 /* FFTRealSelect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealSelect.hpp; sourceTree = "<group>"; };
-		A854EB1F15D92E46008D1FE5 /* FFTRealUseTrigo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealUseTrigo.h; sourceTree = "<group>"; };
-		A854EB2015D92E46008D1FE5 /* FFTRealUseTrigo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealUseTrigo.hpp; sourceTree = "<group>"; };
-		A854EB2115D92E46008D1FE5 /* OscSinCos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscSinCos.h; sourceTree = "<group>"; };
-		A854EB2215D92E46008D1FE5 /* OscSinCos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OscSinCos.hpp; sourceTree = "<group>"; };
-		A854EB2315D92E46008D1FE5 /* plank_FFTRealInternal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plank_FFTRealInternal.cpp; sourceTree = "<group>"; };
-		A854EB2415D92E46008D1FE5 /* plank_FFTRealInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_FFTRealInternal.h; sourceTree = "<group>"; };
-		A854EB2515D92E46008D1FE5 /* plank_FFT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_FFT.c; sourceTree = "<group>"; };
-		A854EB2615D92E46008D1FE5 /* plank_FFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_FFT.h; sourceTree = "<group>"; };
-		A854EB2915D92E46008D1FE5 /* plank_AudioFileCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileCommon.h; sourceTree = "<group>"; };
-		A854EB2A15D92E46008D1FE5 /* plank_AudioFileCuePoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileCuePoint.c; sourceTree = "<group>"; };
-		A854EB2B15D92E46008D1FE5 /* plank_AudioFileCuePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileCuePoint.h; sourceTree = "<group>"; };
-		A854EB2C15D92E46008D1FE5 /* plank_AudioFileMetaData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileMetaData.c; sourceTree = "<group>"; };
-		A854EB2D15D92E46008D1FE5 /* plank_AudioFileMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileMetaData.h; sourceTree = "<group>"; };
-		A854EB2E15D92E46008D1FE5 /* plank_AudioFileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileReader.c; sourceTree = "<group>"; };
-		A854EB2F15D92E46008D1FE5 /* plank_AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileReader.h; sourceTree = "<group>"; };
-		A854EB3015D92E46008D1FE5 /* plank_AudioFileRegion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileRegion.c; sourceTree = "<group>"; };
-		A854EB3115D92E46008D1FE5 /* plank_AudioFileRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileRegion.h; sourceTree = "<group>"; };
-		A854EB3215D92E46008D1FE5 /* plank_AudioFileWriter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileWriter.c; sourceTree = "<group>"; };
-		A854EB3315D92E46008D1FE5 /* plank_AudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileWriter.h; sourceTree = "<group>"; };
-		A854EB3415D92E46008D1FE5 /* plank_File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_File.c; sourceTree = "<group>"; };
-		A854EB3515D92E46008D1FE5 /* plank_File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_File.h; sourceTree = "<group>"; };
-		A854EB3615D92E46008D1FE5 /* plank_IffFileCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_IffFileCommon.h; sourceTree = "<group>"; };
-		A854EB3715D92E46008D1FE5 /* plank_IffFileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_IffFileReader.c; sourceTree = "<group>"; };
-		A854EB3815D92E46008D1FE5 /* plank_IffFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_IffFileReader.h; sourceTree = "<group>"; };
-		A854EB3915D92E46008D1FE5 /* plank_IffFileWriter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_IffFileWriter.c; sourceTree = "<group>"; };
-		A854EB3A15D92E46008D1FE5 /* plank_IffFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_IffFileWriter.h; sourceTree = "<group>"; };
-		A854EB3C15D92E46008D1FE5 /* plank_Maths.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Maths.c; sourceTree = "<group>"; };
-		A854EB3D15D92E46008D1FE5 /* plank_Maths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Maths.h; sourceTree = "<group>"; };
-		A854EB3F15D92E46008D1FE5 /* plank_vDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_vDSP.h; sourceTree = "<group>"; };
-		A854EB4015D92E46008D1FE5 /* plank_Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Vectors.h; sourceTree = "<group>"; };
-		A854EB4115D92E46008D1FE5 /* plank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank.h; sourceTree = "<group>"; };
-		A854EB4315D92E46008D1FE5 /* plank_RNG.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_RNG.c; sourceTree = "<group>"; };
-		A854EB4415D92E46008D1FE5 /* plank_RNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_RNG.h; sourceTree = "<group>"; };
-		A854EB4515D92E46008D1FE5 /* plank_RNGInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_RNGInline.h; sourceTree = "<group>"; };
-		A854EB4815D92E46008D1FE5 /* plink_StandardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_StandardHeader.h; sourceTree = "<group>"; };
-		A854EB4915D92E46008D1FE5 /* plink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink.h; sourceTree = "<group>"; };
-		A854EB4C15D92E46008D1FE5 /* plink_Saw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_Saw.c; sourceTree = "<group>"; };
-		A854EB4D15D92E46008D1FE5 /* plink_Saw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_Saw.h; sourceTree = "<group>"; };
-		A854EB4E15D92E46008D1FE5 /* plink_WhiteNoise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_WhiteNoise.c; sourceTree = "<group>"; };
-		A854EB4F15D92E46008D1FE5 /* plink_WhiteNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_WhiteNoise.h; sourceTree = "<group>"; };
-		A854EB5015D92E46008D1FE5 /* plink_Process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_Process.h; sourceTree = "<group>"; };
-		A854EB5215D92E46008D1FE5 /* plink_BinaryOpProcess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_BinaryOpProcess.c; sourceTree = "<group>"; };
-		A854EB5315D92E46008D1FE5 /* plink_BinaryOpProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_BinaryOpProcess.h; sourceTree = "<group>"; };
-		A854EB5415D92E46008D1FE5 /* plink_UnaryOpProcess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_UnaryOpProcess.c; sourceTree = "<group>"; };
-		A854EB5515D92E46008D1FE5 /* plink_UnaryOpProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_UnaryOpProcess.h; sourceTree = "<group>"; };
-		A854EB5815D92E46008D1FE5 /* plonk_Atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Atomic.h; sourceTree = "<group>"; };
-		A854EB5915D92E46008D1FE5 /* plonk_BreakPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BreakPoints.h; sourceTree = "<group>"; };
-		A854EB5A15D92E46008D1FE5 /* plonk_Collections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Collections.h; sourceTree = "<group>"; };
-		A854EB5B15D92E46008D1FE5 /* plonk_ContainerForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ContainerForwardDeclarations.h; sourceTree = "<group>"; };
-		A854EB5C15D92E46008D1FE5 /* plonk_DynamicContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DynamicContainer.cpp; sourceTree = "<group>"; };
-		A854EB5D15D92E46008D1FE5 /* plonk_DynamicContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DynamicContainer.h; sourceTree = "<group>"; };
-		A854EB5E15D92E46008D1FE5 /* plonk_Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Function.h; sourceTree = "<group>"; };
-		A854EB5F15D92E46008D1FE5 /* plonk_Int24.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Int24.cpp; sourceTree = "<group>"; };
-		A854EB6015D92E46008D1FE5 /* plonk_Int24.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Int24.h; sourceTree = "<group>"; };
-		A854EB6115D92E46008D1FE5 /* plonk_LockFreeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_LockFreeQueue.h; sourceTree = "<group>"; };
-		A854EB6215D92E46008D1FE5 /* plonk_LockFreeStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_LockFreeStack.h; sourceTree = "<group>"; };
-		A854EB6315D92E46008D1FE5 /* plonk_NumericalArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_NumericalArray.h; sourceTree = "<group>"; };
-		A854EB6415D92E46008D1FE5 /* plonk_NumericalArray2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_NumericalArray2D.h; sourceTree = "<group>"; };
-		A854EB6515D92E46008D1FE5 /* plonk_ObjectArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectArray.h; sourceTree = "<group>"; };
-		A854EB6615D92E46008D1FE5 /* plonk_ObjectArray2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectArray2D.h; sourceTree = "<group>"; };
-		A854EB6715D92E46008D1FE5 /* plonk_ObjectArrayInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectArrayInternal.h; sourceTree = "<group>"; };
-		A854EB6815D92E46008D1FE5 /* plonk_ObjectMemoryDeferFree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ObjectMemoryDeferFree.cpp; sourceTree = "<group>"; };
-		A854EB6915D92E46008D1FE5 /* plonk_ObjectMemoryDeferFree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectMemoryDeferFree.h; sourceTree = "<group>"; };
-		A854EB6A15D92E46008D1FE5 /* plonk_ObjectMemoryPools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ObjectMemoryPools.cpp; sourceTree = "<group>"; };
-		A854EB6B15D92E46008D1FE5 /* plonk_ObjectMemoryPools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectMemoryPools.h; sourceTree = "<group>"; };
-		A854EB6C15D92E46008D1FE5 /* plonk_Signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Signal.h; sourceTree = "<group>"; };
-		A854EB6D15D92E46008D1FE5 /* plonk_SimpleArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleArray.h; sourceTree = "<group>"; };
-		A854EB6E15D92E46008D1FE5 /* plonk_SimpleLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleLinkedList.h; sourceTree = "<group>"; };
-		A854EB6F15D92E46008D1FE5 /* plonk_SimpleQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleQueue.h; sourceTree = "<group>"; };
-		A854EB7015D92E46008D1FE5 /* plonk_SimpleStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleStack.h; sourceTree = "<group>"; };
-		A854EB7115D92E46008D1FE5 /* plonk_Text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Text.cpp; sourceTree = "<group>"; };
-		A854EB7215D92E46008D1FE5 /* plonk_Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Text.h; sourceTree = "<group>"; };
-		A854EB7315D92E46008D1FE5 /* plonk_TextArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_TextArray.cpp; sourceTree = "<group>"; };
-		A854EB7415D92E46008D1FE5 /* plonk_TextArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TextArray.h; sourceTree = "<group>"; };
-		A854EB7515D92E46008D1FE5 /* plonk_Wavetable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Wavetable.h; sourceTree = "<group>"; };
-		A854EB7715D92E46008D1FE5 /* plonk_BinaryOpVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryOpVariable.h; sourceTree = "<group>"; };
-		A854EB7815D92E46008D1FE5 /* plonk_TypeVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TypeVariable.h; sourceTree = "<group>"; };
-		A854EB7915D92E46008D1FE5 /* plonk_UnaryOpVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnaryOpVariable.h; sourceTree = "<group>"; };
-		A854EB7A15D92E46008D1FE5 /* plonk_Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Variable.h; sourceTree = "<group>"; };
-		A854EB7B15D92E46008D1FE5 /* plonk_VariableForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_VariableForwardDeclarations.h; sourceTree = "<group>"; };
-		A854EB7C15D92E46008D1FE5 /* plonk_VariableInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_VariableInternal.h; sourceTree = "<group>"; };
-		A854EB7E15D92E46008D1FE5 /* plonk_CoreForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_CoreForwardDeclarations.h; sourceTree = "<group>"; };
-		A854EB7F15D92E46008D1FE5 /* plonk_Deleter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Deleter.cpp; sourceTree = "<group>"; };
-		A854EB8015D92E46008D1FE5 /* plonk_Deleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Deleter.h; sourceTree = "<group>"; };
-		A854EB8115D92E46008D1FE5 /* plonk_Headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Headers.h; sourceTree = "<group>"; };
-		A854EB8215D92E46008D1FE5 /* plonk_Lock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Lock.cpp; sourceTree = "<group>"; };
-		A854EB8315D92E46008D1FE5 /* plonk_Lock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Lock.h; sourceTree = "<group>"; };
-		A854EB8415D92E46008D1FE5 /* plonk_Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Memory.h; sourceTree = "<group>"; };
-		A854EB8515D92E46008D1FE5 /* plonk_Receiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Receiver.h; sourceTree = "<group>"; };
-		A854EB8615D92E46008D1FE5 /* plonk_Sender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Sender.h; sourceTree = "<group>"; };
-		A854EB8715D92E46008D1FE5 /* plonk_SenderContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SenderContainer.h; sourceTree = "<group>"; };
-		A854EB8815D92E46008D1FE5 /* plonk_SmartPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_SmartPointer.cpp; sourceTree = "<group>"; };
-		A854EB8915D92E46008D1FE5 /* plonk_SmartPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SmartPointer.h; sourceTree = "<group>"; };
-		A854EB8A15D92E46008D1FE5 /* plonk_SmartPointerContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SmartPointerContainer.h; sourceTree = "<group>"; };
-		A854EB8B15D92E46008D1FE5 /* plonk_StandardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_StandardHeader.h; sourceTree = "<group>"; };
-		A854EB8C15D92E46008D1FE5 /* plonk_Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Thread.cpp; sourceTree = "<group>"; };
-		A854EB8D15D92E46008D1FE5 /* plonk_Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Thread.h; sourceTree = "<group>"; };
-		A854EB8E15D92E46008D1FE5 /* plonk_TypeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TypeUtility.h; sourceTree = "<group>"; };
-		A854EB8F15D92E46008D1FE5 /* plonk_WeakPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_WeakPointer.cpp; sourceTree = "<group>"; };
-		A854EB9015D92E46008D1FE5 /* plonk_WeakPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_WeakPointer.h; sourceTree = "<group>"; };
-		A854EB9115D92E46008D1FE5 /* plonk_WeakPointerContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_WeakPointerContainer.h; sourceTree = "<group>"; };
-		A854EB9315D92E46008D1FE5 /* plonk_FFTEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FFTEngine.h; sourceTree = "<group>"; };
-		A854EB9415D92E46008D1FE5 /* plonk_FFTEngineInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FFTEngineInternal.h; sourceTree = "<group>"; };
-		A854EB9715D92E46008D1FE5 /* plonk_AudioFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_AudioFileReader.cpp; sourceTree = "<group>"; };
-		A854EB9815D92E46008D1FE5 /* plonk_AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_AudioFileReader.h; sourceTree = "<group>"; };
-		A854EB9915D92E46008D1FE5 /* plonk_BinaryFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_BinaryFile.cpp; sourceTree = "<group>"; };
-		A854EB9A15D92E46008D1FE5 /* plonk_BinaryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryFile.h; sourceTree = "<group>"; };
-		A854EB9B15D92E46008D1FE5 /* plonk_TextFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_TextFile.cpp; sourceTree = "<group>"; };
-		A854EB9C15D92E46008D1FE5 /* plonk_TextFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TextFile.h; sourceTree = "<group>"; };
-		A854EB9F15D92E46008D1FE5 /* plonk_Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Channel.h; sourceTree = "<group>"; };
-		A854EBA015D92E46008D1FE5 /* plonk_ChannelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelData.h; sourceTree = "<group>"; };
-		A854EBA115D92E46008D1FE5 /* plonk_ChannelInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelInternal.h; sourceTree = "<group>"; };
-		A854EBA215D92E46008D1FE5 /* plonk_ChannelInternalBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelInternalBase.h; sourceTree = "<group>"; };
-		A854EBA315D92E46008D1FE5 /* plonk_ChannelInternalCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ChannelInternalCore.cpp; sourceTree = "<group>"; };
-		A854EBA415D92E46008D1FE5 /* plonk_ChannelInternalCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelInternalCore.h; sourceTree = "<group>"; };
-		A854EBA515D92E46008D1FE5 /* plonk_ProxyChannelInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProxyChannelInternal.h; sourceTree = "<group>"; };
-		A854EBA615D92E46008D1FE5 /* plonk_ProxyOwnerChannelInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProxyOwnerChannelInternal.h; sourceTree = "<group>"; };
-		A854EBA815D92E46008D1FE5 /* plonk_EnvelopeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_EnvelopeChannel.h; sourceTree = "<group>"; };
-		A854EBAA15D92E46008D1FE5 /* plonk_OverlapMakeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_OverlapMakeChannel.h; sourceTree = "<group>"; };
-		A854EBAB15D92E46008D1FE5 /* plonk_OverlapMixChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_OverlapMixChannel.h; sourceTree = "<group>"; };
-		A854EBAC15D92E46008D1FE5 /* plonk_ResampleChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ResampleChannel.h; sourceTree = "<group>"; };
-		A854EBAD15D92E46008D1FE5 /* plonk_TypeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TypeChannel.h; sourceTree = "<group>"; };
-		A854EBAF15D92E46008D1FE5 /* plonk_Delay1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay1Param.h; sourceTree = "<group>"; };
-		A854EBB015D92E46008D1FE5 /* plonk_Delay2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay2Param.h; sourceTree = "<group>"; };
-		A854EBB115D92E46008D1FE5 /* plonk_Delay3Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay3Param.h; sourceTree = "<group>"; };
-		A854EBB215D92E46008D1FE5 /* plonk_Delay4Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay4Param.h; sourceTree = "<group>"; };
-		A854EBB315D92E46008D1FE5 /* plonk_DelayBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayBase.h; sourceTree = "<group>"; };
-		A854EBB415D92E46008D1FE5 /* plonk_DelayFormAllpassDecay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormAllpassDecay.h; sourceTree = "<group>"; };
-		A854EBB515D92E46008D1FE5 /* plonk_DelayFormAllpassFFFB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormAllpassFFFB.h; sourceTree = "<group>"; };
-		A854EBB615D92E46008D1FE5 /* plonk_DelayFormCombDecay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombDecay.h; sourceTree = "<group>"; };
-		A854EBB715D92E46008D1FE5 /* plonk_DelayFormCombFB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombFB.h; sourceTree = "<group>"; };
-		A854EBB815D92E46008D1FE5 /* plonk_DelayFormCombFilter1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombFilter1Param.h; sourceTree = "<group>"; };
-		A854EBB915D92E46008D1FE5 /* plonk_DelayFormDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormDelay.h; sourceTree = "<group>"; };
-		A854EBBA15D92E47008D1FE5 /* plonk_DelayForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForms.h; sourceTree = "<group>"; };
-		A854EBBB15D92E47008D1FE5 /* plonk_DelayForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForwardDeclarations.h; sourceTree = "<group>"; };
-		A854EBBC15D92E47008D1FE5 /* plonk_DelayTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DelayTypes.cpp; sourceTree = "<group>"; };
-		A854EBBD15D92E47008D1FE5 /* plonk_DelayTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayTypes.h; sourceTree = "<group>"; };
-		A854EBBF15D92E47008D1FE5 /* plonk_FFTChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FFTChannel.h; sourceTree = "<group>"; };
-		A854EBC015D92E47008D1FE5 /* plonk_IFFTChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IFFTChannel.h; sourceTree = "<group>"; };
-		A854EBC215D92E47008D1FE5 /* plonk_Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Filter.h; sourceTree = "<group>"; };
-		A854EBC315D92E47008D1FE5 /* plonk_FilterCoeffs1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterCoeffs1Param.h; sourceTree = "<group>"; };
-		A854EBC415D92E47008D1FE5 /* plonk_FilterCoeffs2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterCoeffs2Param.h; sourceTree = "<group>"; };
-		A854EBC515D92E47008D1FE5 /* plonk_FilterCoeffs3Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterCoeffs3Param.h; sourceTree = "<group>"; };
-		A854EBC615D92E47008D1FE5 /* plonk_FilterForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterForms.h; sourceTree = "<group>"; };
-		A854EBC715D92E47008D1FE5 /* plonk_FilterForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterForwardDeclarations.h; sourceTree = "<group>"; };
-		A854EBC815D92E47008D1FE5 /* plonk_FilterShapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapes.h; sourceTree = "<group>"; };
-		A854EBC915D92E47008D1FE5 /* plonk_FilterShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShortcuts.h; sourceTree = "<group>"; };
-		A854EBCA15D92E47008D1FE5 /* plonk_FilterTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_FilterTypes.cpp; sourceTree = "<group>"; };
-		A854EBCB15D92E47008D1FE5 /* plonk_FilterTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterTypes.h; sourceTree = "<group>"; };
-		A854EBCD15D92E47008D1FE5 /* plonk_FilterShapesB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapesB.h; sourceTree = "<group>"; };
-		A854EBCE15D92E47008D1FE5 /* plonk_FilterShapesP2Z2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapesP2Z2.h; sourceTree = "<group>"; };
-		A854EBCF15D92E47008D1FE5 /* plonk_FilterShapesSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapesSimple.h; sourceTree = "<group>"; };
-		A854EBD115D92E47008D1FE5 /* plonk_Saw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Saw.h; sourceTree = "<group>"; };
-		A854EBD215D92E47008D1FE5 /* plonk_SignalPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SignalPlay.h; sourceTree = "<group>"; };
-		A854EBD315D92E47008D1FE5 /* plonk_Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Table.h; sourceTree = "<group>"; };
-		A854EBD415D92E47008D1FE5 /* plonk_WhiteNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_WhiteNoise.h; sourceTree = "<group>"; };
-		A854EBD615D92E47008D1FE5 /* plonk_InfoHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InfoHeaders.h; sourceTree = "<group>"; };
-		A854EBD715D92E47008D1FE5 /* plonk_IOInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_IOInfo.cpp; sourceTree = "<group>"; };
-		A854EBD815D92E47008D1FE5 /* plonk_IOInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOInfo.h; sourceTree = "<group>"; };
-		A854EBD915D92E47008D1FE5 /* plonk_IOKey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_IOKey.cpp; sourceTree = "<group>"; };
-		A854EBDA15D92E47008D1FE5 /* plonk_IOKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOKey.h; sourceTree = "<group>"; };
-		A854EBDB15D92E47008D1FE5 /* plonk_IOLimit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_IOLimit.cpp; sourceTree = "<group>"; };
-		A854EBDC15D92E47008D1FE5 /* plonk_IOLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOLimit.h; sourceTree = "<group>"; };
-		A854EBDD15D92E47008D1FE5 /* plonk_Measure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Measure.cpp; sourceTree = "<group>"; };
-		A854EBDE15D92E47008D1FE5 /* plonk_Measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Measure.h; sourceTree = "<group>"; };
-		A854EBDF15D92E47008D1FE5 /* plonk_UnitInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_UnitInfo.cpp; sourceTree = "<group>"; };
-		A854EBE015D92E47008D1FE5 /* plonk_UnitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnitInfo.h; sourceTree = "<group>"; };
-		A854EBE115D92E47008D1FE5 /* plonk_GraphForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_GraphForwardDeclarations.h; sourceTree = "<group>"; };
-		A854EBE215D92E47008D1FE5 /* plonk_Unit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Unit.h; sourceTree = "<group>"; };
-		A854EBE415D92E47008D1FE5 /* plonk_AtomicVariableChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_AtomicVariableChannel.h; sourceTree = "<group>"; };
-		A854EBE515D92E47008D1FE5 /* plonk_BinaryOpChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryOpChannel.h; sourceTree = "<group>"; };
-		A854EBE615D92E47008D1FE5 /* plonk_BinaryOpPlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryOpPlink.h; sourceTree = "<group>"; };
-		A854EBE715D92E47008D1FE5 /* plonk_BlockChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BlockChannel.h; sourceTree = "<group>"; };
-		A854EBE815D92E47008D1FE5 /* plonk_BusReadChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BusReadChannel.h; sourceTree = "<group>"; };
-		A854EBE915D92E47008D1FE5 /* plonk_BusWriteChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BusWriteChannel.h; sourceTree = "<group>"; };
-		A854EBEA15D92E47008D1FE5 /* plonk_ConstantChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ConstantChannel.h; sourceTree = "<group>"; };
-		A854EBEB15D92E47008D1FE5 /* plonk_LinearPanChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_LinearPanChannel.h; sourceTree = "<group>"; };
-		A854EBEC15D92E47008D1FE5 /* plonk_Mixers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Mixers.h; sourceTree = "<group>"; };
-		A854EBED15D92E47008D1FE5 /* plonk_PatchChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_PatchChannel.h; sourceTree = "<group>"; };
-		A854EBEE15D92E47008D1FE5 /* plonk_UnaryOpChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnaryOpChannel.h; sourceTree = "<group>"; };
-		A854EBEF15D92E47008D1FE5 /* plonk_UnaryOpPlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnaryOpPlink.h; sourceTree = "<group>"; };
-		A854EBF015D92E47008D1FE5 /* plonk_VariableChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_VariableChannel.h; sourceTree = "<group>"; };
-		A854EBF215D92E47008D1FE5 /* plonk_BlockSize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_BlockSize.cpp; sourceTree = "<group>"; };
-		A854EBF315D92E47008D1FE5 /* plonk_BlockSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BlockSize.h; sourceTree = "<group>"; };
-		A854EBF415D92E47008D1FE5 /* plonk_Bus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Bus.h; sourceTree = "<group>"; };
-		A854EBF515D92E47008D1FE5 /* plonk_InputDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_InputDictionary.cpp; sourceTree = "<group>"; };
-		A854EBF615D92E47008D1FE5 /* plonk_InputDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InputDictionary.h; sourceTree = "<group>"; };
-		A854EBF715D92E47008D1FE5 /* plonk_ProcessInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ProcessInfo.cpp; sourceTree = "<group>"; };
-		A854EBF815D92E47008D1FE5 /* plonk_ProcessInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProcessInfo.h; sourceTree = "<group>"; };
-		A854EBF915D92E47008D1FE5 /* plonk_ProcessInfoInternal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ProcessInfoInternal.cpp; sourceTree = "<group>"; };
-		A854EBFA15D92E47008D1FE5 /* plonk_ProcessInfoInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProcessInfoInternal.h; sourceTree = "<group>"; };
-		A854EBFB15D92E47008D1FE5 /* plonk_SampleRate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_SampleRate.cpp; sourceTree = "<group>"; };
-		A854EBFC15D92E47008D1FE5 /* plonk_SampleRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SampleRate.h; sourceTree = "<group>"; };
-		A854EBFD15D92E47008D1FE5 /* plonk_TimeStamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_TimeStamp.cpp; sourceTree = "<group>"; };
-		A854EBFE15D92E47008D1FE5 /* plonk_TimeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TimeStamp.h; sourceTree = "<group>"; };
-		A854EC0115D92E47008D1FE5 /* plonk_IOSAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOSAudioHost.h; sourceTree = "<group>"; };
-		A854EC0215D92E47008D1FE5 /* plonk_IOSAudioHost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = plonk_IOSAudioHost.mm; sourceTree = "<group>"; };
-		A854EC0415D92E47008D1FE5 /* plonk_JuceAudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_JuceAudioHost.cpp; sourceTree = "<group>"; };
-		A854EC0515D92E47008D1FE5 /* plonk_JuceAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_JuceAudioHost.h; sourceTree = "<group>"; };
-		A854EC0615D92E47008D1FE5 /* plonk_AudioHostBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_AudioHostBase.h; sourceTree = "<group>"; };
-		A854EC0815D92E47008D1FE5 /* plonk_PortAudioAudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_PortAudioAudioHost.cpp; sourceTree = "<group>"; };
-		A854EC0915D92E47008D1FE5 /* plonk_PortAudioAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_PortAudioAudioHost.h; sourceTree = "<group>"; };
-		A854EC0B15D92E47008D1FE5 /* plonk_Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Constants.h; sourceTree = "<group>"; };
-		A854EC0C15D92E47008D1FE5 /* plonk_Endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Endian.h; sourceTree = "<group>"; };
-		A854EC0D15D92E47008D1FE5 /* plonk_InlineBinaryOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineBinaryOps.h; sourceTree = "<group>"; };
-		A854EC0E15D92E47008D1FE5 /* plonk_InlineCommonOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineCommonOps.h; sourceTree = "<group>"; };
-		A854EC0F15D92E47008D1FE5 /* plonk_InlineMiscOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineMiscOps.h; sourceTree = "<group>"; };
-		A854EC1015D92E47008D1FE5 /* plonk_InlineUnaryOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineUnaryOps.h; sourceTree = "<group>"; };
-		A854EC1115D92E47008D1FE5 /* plonk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk.h; sourceTree = "<group>"; };
-		A854EC1315D92E47008D1FE5 /* plonk_RNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_RNG.cpp; sourceTree = "<group>"; };
-		A854EC1415D92E47008D1FE5 /* plonk_RNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_RNG.h; sourceTree = "<group>"; };
+		A818A41215E652EC00E44E91 /* mainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainpage.h; sourceTree = "<group>"; };
+		A818A41515E652EC00E44E91 /* plank_Atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Atomic.c; sourceTree = "<group>"; };
+		A818A41615E652EC00E44E91 /* plank_Atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Atomic.h; sourceTree = "<group>"; };
+		A818A41715E652EC00E44E91 /* plank_AtomicInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AtomicInline.h; sourceTree = "<group>"; };
+		A818A41815E652EC00E44E91 /* plank_ContainersMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_ContainersMisc.h; sourceTree = "<group>"; };
+		A818A41915E652EC00E44E91 /* plank_DynamicArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_DynamicArray.c; sourceTree = "<group>"; };
+		A818A41A15E652EC00E44E91 /* plank_DynamicArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_DynamicArray.h; sourceTree = "<group>"; };
+		A818A41B15E652EC00E44E91 /* plank_LockFreeDynamicArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeDynamicArray.c; sourceTree = "<group>"; };
+		A818A41C15E652EC00E44E91 /* plank_LockFreeDynamicArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeDynamicArray.h; sourceTree = "<group>"; };
+		A818A41D15E652EC00E44E91 /* plank_LockFreeLinkedListElement.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeLinkedListElement.c; sourceTree = "<group>"; };
+		A818A41E15E652EC00E44E91 /* plank_LockFreeLinkedListElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeLinkedListElement.h; sourceTree = "<group>"; };
+		A818A41F15E652EC00E44E91 /* plank_LockFreeLinkedListElementInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeLinkedListElementInline.h; sourceTree = "<group>"; };
+		A818A42015E652EC00E44E91 /* plank_LockFreeQueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeQueue.c; sourceTree = "<group>"; };
+		A818A42115E652EC00E44E91 /* plank_LockFreeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeQueue.h; sourceTree = "<group>"; };
+		A818A42215E652EC00E44E91 /* plank_LockFreeStack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeStack.c; sourceTree = "<group>"; };
+		A818A42315E652EC00E44E91 /* plank_LockFreeStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeStack.h; sourceTree = "<group>"; };
+		A818A42415E652EC00E44E91 /* plank_SimpleLinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleLinkedList.c; sourceTree = "<group>"; };
+		A818A42515E652EC00E44E91 /* plank_SimpleLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleLinkedList.h; sourceTree = "<group>"; };
+		A818A42615E652EC00E44E91 /* plank_SimpleLinkedListElement.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleLinkedListElement.c; sourceTree = "<group>"; };
+		A818A42715E652EC00E44E91 /* plank_SimpleLinkedListElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleLinkedListElement.h; sourceTree = "<group>"; };
+		A818A42815E652EC00E44E91 /* plank_SimpleLinkedListElementInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleLinkedListElementInline.h; sourceTree = "<group>"; };
+		A818A42915E652EC00E44E91 /* plank_SimpleMap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleMap.c; sourceTree = "<group>"; };
+		A818A42A15E652EC00E44E91 /* plank_SimpleMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleMap.h; sourceTree = "<group>"; };
+		A818A42B15E652EC00E44E91 /* plank_SimpleQueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleQueue.c; sourceTree = "<group>"; };
+		A818A42C15E652EC00E44E91 /* plank_SimpleQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleQueue.h; sourceTree = "<group>"; };
+		A818A42D15E652EC00E44E91 /* plank_SimpleStack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SimpleStack.c; sourceTree = "<group>"; };
+		A818A42E15E652EC00E44E91 /* plank_SimpleStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SimpleStack.h; sourceTree = "<group>"; };
+		A818A42F15E652EC00E44E91 /* plank_ThreadLocalStorage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_ThreadLocalStorage.c; sourceTree = "<group>"; };
+		A818A43015E652EC00E44E91 /* plank_ThreadLocalStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_ThreadLocalStorage.h; sourceTree = "<group>"; };
+		A818A43215E652EC00E44E91 /* plank_Lock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Lock.c; sourceTree = "<group>"; };
+		A818A43315E652EC00E44E91 /* plank_Lock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Lock.h; sourceTree = "<group>"; };
+		A818A43415E652EC00E44E91 /* plank_LockFreeMemory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_LockFreeMemory.c; sourceTree = "<group>"; };
+		A818A43515E652EC00E44E91 /* plank_LockFreeMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_LockFreeMemory.h; sourceTree = "<group>"; };
+		A818A43615E652EC00E44E91 /* plank_Memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Memory.c; sourceTree = "<group>"; };
+		A818A43715E652EC00E44E91 /* plank_Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Memory.h; sourceTree = "<group>"; };
+		A818A43815E652EC00E44E91 /* plank_MemoryInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_MemoryInline.h; sourceTree = "<group>"; };
+		A818A43915E652EC00E44E91 /* plank_Result.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Result.c; sourceTree = "<group>"; };
+		A818A43A15E652EC00E44E91 /* plank_Result.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Result.h; sourceTree = "<group>"; };
+		A818A43B15E652EC00E44E91 /* plank_SpinLock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_SpinLock.c; sourceTree = "<group>"; };
+		A818A43C15E652EC00E44E91 /* plank_SpinLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_SpinLock.h; sourceTree = "<group>"; };
+		A818A43D15E652EC00E44E91 /* plank_StandardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_StandardHeader.h; sourceTree = "<group>"; };
+		A818A43E15E652EC00E44E91 /* plank_Thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Thread.c; sourceTree = "<group>"; };
+		A818A43F15E652EC00E44E91 /* plank_Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Thread.h; sourceTree = "<group>"; };
+		A818A44015E652EC00E44E91 /* plank_ThreadSpinLock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_ThreadSpinLock.c; sourceTree = "<group>"; };
+		A818A44115E652EC00E44E91 /* plank_ThreadSpinLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_ThreadSpinLock.h; sourceTree = "<group>"; };
+		A818A44515E652EC00E44E91 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
+		A818A44615E652EC00E44E91 /* Array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Array.hpp; sourceTree = "<group>"; };
+		A818A44715E652EC00E44E91 /* def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = def.h; sourceTree = "<group>"; };
+		A818A44815E652EC00E44E91 /* DynArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynArray.h; sourceTree = "<group>"; };
+		A818A44915E652EC00E44E91 /* DynArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DynArray.hpp; sourceTree = "<group>"; };
+		A818A44A15E652EC00E44E91 /* FFTReal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTReal.h; sourceTree = "<group>"; };
+		A818A44B15E652EC00E44E91 /* FFTReal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTReal.hpp; sourceTree = "<group>"; };
+		A818A44C15E652EC00E44E91 /* FFTRealFixLen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealFixLen.h; sourceTree = "<group>"; };
+		A818A44D15E652EC00E44E91 /* FFTRealFixLen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealFixLen.hpp; sourceTree = "<group>"; };
+		A818A44E15E652EC00E44E91 /* FFTRealFixLenParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealFixLenParam.h; sourceTree = "<group>"; };
+		A818A44F15E652EC00E44E91 /* FFTRealPassDirect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealPassDirect.h; sourceTree = "<group>"; };
+		A818A45015E652EC00E44E91 /* FFTRealPassDirect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealPassDirect.hpp; sourceTree = "<group>"; };
+		A818A45115E652EC00E44E91 /* FFTRealPassInverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealPassInverse.h; sourceTree = "<group>"; };
+		A818A45215E652EC00E44E91 /* FFTRealPassInverse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealPassInverse.hpp; sourceTree = "<group>"; };
+		A818A45315E652EC00E44E91 /* FFTRealSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealSelect.h; sourceTree = "<group>"; };
+		A818A45415E652EC00E44E91 /* FFTRealSelect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealSelect.hpp; sourceTree = "<group>"; };
+		A818A45515E652EC00E44E91 /* FFTRealUseTrigo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealUseTrigo.h; sourceTree = "<group>"; };
+		A818A45615E652EC00E44E91 /* FFTRealUseTrigo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealUseTrigo.hpp; sourceTree = "<group>"; };
+		A818A45715E652EC00E44E91 /* OscSinCos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscSinCos.h; sourceTree = "<group>"; };
+		A818A45815E652EC00E44E91 /* OscSinCos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OscSinCos.hpp; sourceTree = "<group>"; };
+		A818A45915E652EC00E44E91 /* plank_FFTRealInternal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plank_FFTRealInternal.cpp; sourceTree = "<group>"; };
+		A818A45A15E652EC00E44E91 /* plank_FFTRealInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_FFTRealInternal.h; sourceTree = "<group>"; };
+		A818A45B15E652EC00E44E91 /* plank_FFT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_FFT.c; sourceTree = "<group>"; };
+		A818A45C15E652EC00E44E91 /* plank_FFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_FFT.h; sourceTree = "<group>"; };
+		A818A45F15E652EC00E44E91 /* plank_AudioFileCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileCommon.h; sourceTree = "<group>"; };
+		A818A46015E652EC00E44E91 /* plank_AudioFileCuePoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileCuePoint.c; sourceTree = "<group>"; };
+		A818A46115E652EC00E44E91 /* plank_AudioFileCuePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileCuePoint.h; sourceTree = "<group>"; };
+		A818A46215E652EC00E44E91 /* plank_AudioFileMetaData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileMetaData.c; sourceTree = "<group>"; };
+		A818A46315E652EC00E44E91 /* plank_AudioFileMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileMetaData.h; sourceTree = "<group>"; };
+		A818A46415E652EC00E44E91 /* plank_AudioFileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileReader.c; sourceTree = "<group>"; };
+		A818A46515E652EC00E44E91 /* plank_AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileReader.h; sourceTree = "<group>"; };
+		A818A46615E652EC00E44E91 /* plank_AudioFileRegion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileRegion.c; sourceTree = "<group>"; };
+		A818A46715E652EC00E44E91 /* plank_AudioFileRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileRegion.h; sourceTree = "<group>"; };
+		A818A46815E652EC00E44E91 /* plank_AudioFileWriter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_AudioFileWriter.c; sourceTree = "<group>"; };
+		A818A46915E652EC00E44E91 /* plank_AudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_AudioFileWriter.h; sourceTree = "<group>"; };
+		A818A46A15E652EC00E44E91 /* plank_File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_File.c; sourceTree = "<group>"; };
+		A818A46B15E652EC00E44E91 /* plank_File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_File.h; sourceTree = "<group>"; };
+		A818A46C15E652EC00E44E91 /* plank_IffFileCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_IffFileCommon.h; sourceTree = "<group>"; };
+		A818A46D15E652EC00E44E91 /* plank_IffFileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_IffFileReader.c; sourceTree = "<group>"; };
+		A818A46E15E652EC00E44E91 /* plank_IffFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_IffFileReader.h; sourceTree = "<group>"; };
+		A818A46F15E652EC00E44E91 /* plank_IffFileWriter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_IffFileWriter.c; sourceTree = "<group>"; };
+		A818A47015E652EC00E44E91 /* plank_IffFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_IffFileWriter.h; sourceTree = "<group>"; };
+		A818A47215E652EC00E44E91 /* plank_Maths.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Maths.c; sourceTree = "<group>"; };
+		A818A47315E652EC00E44E91 /* plank_Maths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Maths.h; sourceTree = "<group>"; };
+		A818A47515E652EC00E44E91 /* plank_vDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_vDSP.h; sourceTree = "<group>"; };
+		A818A47615E652EC00E44E91 /* plank_Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Vectors.h; sourceTree = "<group>"; };
+		A818A47715E652EC00E44E91 /* plank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank.h; sourceTree = "<group>"; };
+		A818A47915E652EC00E44E91 /* plank_RNG.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_RNG.c; sourceTree = "<group>"; };
+		A818A47A15E652EC00E44E91 /* plank_RNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_RNG.h; sourceTree = "<group>"; };
+		A818A47B15E652EC00E44E91 /* plank_RNGInline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_RNGInline.h; sourceTree = "<group>"; };
+		A818A47E15E652EC00E44E91 /* plink_StandardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_StandardHeader.h; sourceTree = "<group>"; };
+		A818A47F15E652EC00E44E91 /* plink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink.h; sourceTree = "<group>"; };
+		A818A48215E652EC00E44E91 /* plink_Saw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_Saw.c; sourceTree = "<group>"; };
+		A818A48315E652EC00E44E91 /* plink_Saw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_Saw.h; sourceTree = "<group>"; };
+		A818A48415E652EC00E44E91 /* plink_WhiteNoise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_WhiteNoise.c; sourceTree = "<group>"; };
+		A818A48515E652EC00E44E91 /* plink_WhiteNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_WhiteNoise.h; sourceTree = "<group>"; };
+		A818A48615E652EC00E44E91 /* plink_Process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_Process.h; sourceTree = "<group>"; };
+		A818A48815E652EC00E44E91 /* plink_BinaryOpProcess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_BinaryOpProcess.c; sourceTree = "<group>"; };
+		A818A48915E652EC00E44E91 /* plink_BinaryOpProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_BinaryOpProcess.h; sourceTree = "<group>"; };
+		A818A48A15E652EC00E44E91 /* plink_UnaryOpProcess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plink_UnaryOpProcess.c; sourceTree = "<group>"; };
+		A818A48B15E652EC00E44E91 /* plink_UnaryOpProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plink_UnaryOpProcess.h; sourceTree = "<group>"; };
+		A818A48E15E652EC00E44E91 /* plonk_Atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Atomic.h; sourceTree = "<group>"; };
+		A818A48F15E652EC00E44E91 /* plonk_BreakPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BreakPoints.h; sourceTree = "<group>"; };
+		A818A49015E652EC00E44E91 /* plonk_Collections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Collections.h; sourceTree = "<group>"; };
+		A818A49115E652EC00E44E91 /* plonk_ContainerForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ContainerForwardDeclarations.h; sourceTree = "<group>"; };
+		A818A49215E652EC00E44E91 /* plonk_DynamicContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DynamicContainer.cpp; sourceTree = "<group>"; };
+		A818A49315E652EC00E44E91 /* plonk_DynamicContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DynamicContainer.h; sourceTree = "<group>"; };
+		A818A49415E652EC00E44E91 /* plonk_Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Function.h; sourceTree = "<group>"; };
+		A818A49515E652EC00E44E91 /* plonk_Int24.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Int24.cpp; sourceTree = "<group>"; };
+		A818A49615E652EC00E44E91 /* plonk_Int24.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Int24.h; sourceTree = "<group>"; };
+		A818A49715E652EC00E44E91 /* plonk_LockFreeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_LockFreeQueue.h; sourceTree = "<group>"; };
+		A818A49815E652EC00E44E91 /* plonk_LockFreeStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_LockFreeStack.h; sourceTree = "<group>"; };
+		A818A49915E652EC00E44E91 /* plonk_NumericalArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_NumericalArray.h; sourceTree = "<group>"; };
+		A818A49A15E652EC00E44E91 /* plonk_NumericalArray2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_NumericalArray2D.h; sourceTree = "<group>"; };
+		A818A49B15E652EC00E44E91 /* plonk_ObjectArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectArray.h; sourceTree = "<group>"; };
+		A818A49C15E652EC00E44E91 /* plonk_ObjectArray2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectArray2D.h; sourceTree = "<group>"; };
+		A818A49D15E652EC00E44E91 /* plonk_ObjectArrayInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectArrayInternal.h; sourceTree = "<group>"; };
+		A818A49E15E652EC00E44E91 /* plonk_ObjectMemoryDeferFree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ObjectMemoryDeferFree.cpp; sourceTree = "<group>"; };
+		A818A49F15E652EC00E44E91 /* plonk_ObjectMemoryDeferFree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectMemoryDeferFree.h; sourceTree = "<group>"; };
+		A818A4A015E652EC00E44E91 /* plonk_ObjectMemoryPools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ObjectMemoryPools.cpp; sourceTree = "<group>"; };
+		A818A4A115E652EC00E44E91 /* plonk_ObjectMemoryPools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ObjectMemoryPools.h; sourceTree = "<group>"; };
+		A818A4A215E652EC00E44E91 /* plonk_Signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Signal.h; sourceTree = "<group>"; };
+		A818A4A315E652EC00E44E91 /* plonk_SimpleArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleArray.h; sourceTree = "<group>"; };
+		A818A4A415E652EC00E44E91 /* plonk_SimpleLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleLinkedList.h; sourceTree = "<group>"; };
+		A818A4A515E652EC00E44E91 /* plonk_SimpleQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleQueue.h; sourceTree = "<group>"; };
+		A818A4A615E652EC00E44E91 /* plonk_SimpleStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SimpleStack.h; sourceTree = "<group>"; };
+		A818A4A715E652EC00E44E91 /* plonk_Text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Text.cpp; sourceTree = "<group>"; };
+		A818A4A815E652EC00E44E91 /* plonk_Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Text.h; sourceTree = "<group>"; };
+		A818A4A915E652EC00E44E91 /* plonk_TextArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_TextArray.cpp; sourceTree = "<group>"; };
+		A818A4AA15E652EC00E44E91 /* plonk_TextArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TextArray.h; sourceTree = "<group>"; };
+		A818A4AB15E652EC00E44E91 /* plonk_Wavetable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Wavetable.h; sourceTree = "<group>"; };
+		A818A4AD15E652EC00E44E91 /* plonk_BinaryOpVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryOpVariable.h; sourceTree = "<group>"; };
+		A818A4AE15E652EC00E44E91 /* plonk_TypeVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TypeVariable.h; sourceTree = "<group>"; };
+		A818A4AF15E652EC00E44E91 /* plonk_UnaryOpVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnaryOpVariable.h; sourceTree = "<group>"; };
+		A818A4B015E652EC00E44E91 /* plonk_Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Variable.h; sourceTree = "<group>"; };
+		A818A4B115E652EC00E44E91 /* plonk_VariableForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_VariableForwardDeclarations.h; sourceTree = "<group>"; };
+		A818A4B215E652EC00E44E91 /* plonk_VariableInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_VariableInternal.h; sourceTree = "<group>"; };
+		A818A4B415E652EC00E44E91 /* plonk_CoreForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_CoreForwardDeclarations.h; sourceTree = "<group>"; };
+		A818A4B515E652EC00E44E91 /* plonk_Deleter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Deleter.cpp; sourceTree = "<group>"; };
+		A818A4B615E652EC00E44E91 /* plonk_Deleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Deleter.h; sourceTree = "<group>"; };
+		A818A4B715E652EC00E44E91 /* plonk_Headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Headers.h; sourceTree = "<group>"; };
+		A818A4B815E652EC00E44E91 /* plonk_Lock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Lock.cpp; sourceTree = "<group>"; };
+		A818A4B915E652EC00E44E91 /* plonk_Lock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Lock.h; sourceTree = "<group>"; };
+		A818A4BA15E652EC00E44E91 /* plonk_Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Memory.h; sourceTree = "<group>"; };
+		A818A4BB15E652EC00E44E91 /* plonk_Receiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Receiver.h; sourceTree = "<group>"; };
+		A818A4BC15E652EC00E44E91 /* plonk_Sender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Sender.h; sourceTree = "<group>"; };
+		A818A4BD15E652EC00E44E91 /* plonk_SenderContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SenderContainer.h; sourceTree = "<group>"; };
+		A818A4BE15E652EC00E44E91 /* plonk_SmartPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_SmartPointer.cpp; sourceTree = "<group>"; };
+		A818A4BF15E652EC00E44E91 /* plonk_SmartPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SmartPointer.h; sourceTree = "<group>"; };
+		A818A4C015E652EC00E44E91 /* plonk_SmartPointerContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SmartPointerContainer.h; sourceTree = "<group>"; };
+		A818A4C115E652EC00E44E91 /* plonk_StandardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_StandardHeader.h; sourceTree = "<group>"; };
+		A818A4C215E652EC00E44E91 /* plonk_Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Thread.cpp; sourceTree = "<group>"; };
+		A818A4C315E652EC00E44E91 /* plonk_Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Thread.h; sourceTree = "<group>"; };
+		A818A4C415E652EC00E44E91 /* plonk_TypeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TypeUtility.h; sourceTree = "<group>"; };
+		A818A4C515E652EC00E44E91 /* plonk_WeakPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_WeakPointer.cpp; sourceTree = "<group>"; };
+		A818A4C615E652EC00E44E91 /* plonk_WeakPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_WeakPointer.h; sourceTree = "<group>"; };
+		A818A4C715E652EC00E44E91 /* plonk_WeakPointerContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_WeakPointerContainer.h; sourceTree = "<group>"; };
+		A818A4C915E652EC00E44E91 /* plonk_FFTEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FFTEngine.h; sourceTree = "<group>"; };
+		A818A4CA15E652EC00E44E91 /* plonk_FFTEngineInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FFTEngineInternal.h; sourceTree = "<group>"; };
+		A818A4CD15E652EC00E44E91 /* plonk_AudioFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_AudioFileReader.cpp; sourceTree = "<group>"; };
+		A818A4CE15E652EC00E44E91 /* plonk_AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_AudioFileReader.h; sourceTree = "<group>"; };
+		A818A4CF15E652EC00E44E91 /* plonk_BinaryFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_BinaryFile.cpp; sourceTree = "<group>"; };
+		A818A4D015E652EC00E44E91 /* plonk_BinaryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryFile.h; sourceTree = "<group>"; };
+		A818A4D115E652EC00E44E91 /* plonk_TextFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_TextFile.cpp; sourceTree = "<group>"; };
+		A818A4D215E652EC00E44E91 /* plonk_TextFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TextFile.h; sourceTree = "<group>"; };
+		A818A4D515E652EC00E44E91 /* plonk_Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Channel.h; sourceTree = "<group>"; };
+		A818A4D615E652EC00E44E91 /* plonk_ChannelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelData.h; sourceTree = "<group>"; };
+		A818A4D715E652EC00E44E91 /* plonk_ChannelInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelInternal.h; sourceTree = "<group>"; };
+		A818A4D815E652EC00E44E91 /* plonk_ChannelInternalBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelInternalBase.h; sourceTree = "<group>"; };
+		A818A4D915E652EC00E44E91 /* plonk_ChannelInternalCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ChannelInternalCore.cpp; sourceTree = "<group>"; };
+		A818A4DA15E652EC00E44E91 /* plonk_ChannelInternalCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ChannelInternalCore.h; sourceTree = "<group>"; };
+		A818A4DB15E652EC00E44E91 /* plonk_ProxyChannelInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProxyChannelInternal.h; sourceTree = "<group>"; };
+		A818A4DC15E652EC00E44E91 /* plonk_ProxyOwnerChannelInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProxyOwnerChannelInternal.h; sourceTree = "<group>"; };
+		A818A4DE15E652EC00E44E91 /* plonk_EnvelopeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_EnvelopeChannel.h; sourceTree = "<group>"; };
+		A818A4E015E652EC00E44E91 /* plonk_OverlapMakeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_OverlapMakeChannel.h; sourceTree = "<group>"; };
+		A818A4E115E652EC00E44E91 /* plonk_OverlapMixChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_OverlapMixChannel.h; sourceTree = "<group>"; };
+		A818A4E215E652EC00E44E91 /* plonk_ResampleChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ResampleChannel.h; sourceTree = "<group>"; };
+		A818A4E315E652EC00E44E91 /* plonk_TypeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TypeChannel.h; sourceTree = "<group>"; };
+		A818A4E515E652EC00E44E91 /* plonk_Delay1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay1Param.h; sourceTree = "<group>"; };
+		A818A4E615E652EC00E44E91 /* plonk_Delay2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay2Param.h; sourceTree = "<group>"; };
+		A818A4E715E652EC00E44E91 /* plonk_Delay3Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay3Param.h; sourceTree = "<group>"; };
+		A818A4E815E652EC00E44E91 /* plonk_Delay4Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Delay4Param.h; sourceTree = "<group>"; };
+		A818A4E915E652EC00E44E91 /* plonk_DelayBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayBase.h; sourceTree = "<group>"; };
+		A818A4EA15E652EC00E44E91 /* plonk_DelayFormAllpassDecay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormAllpassDecay.h; sourceTree = "<group>"; };
+		A818A4EB15E652EC00E44E91 /* plonk_DelayFormAllpassFFFB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormAllpassFFFB.h; sourceTree = "<group>"; };
+		A818A4EC15E652EC00E44E91 /* plonk_DelayFormCombDecay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombDecay.h; sourceTree = "<group>"; };
+		A818A4ED15E652EC00E44E91 /* plonk_DelayFormCombFB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombFB.h; sourceTree = "<group>"; };
+		A818A4EE15E652EC00E44E91 /* plonk_DelayFormCombFilter1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormCombFilter1Param.h; sourceTree = "<group>"; };
+		A818A4EF15E652EC00E44E91 /* plonk_DelayFormDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayFormDelay.h; sourceTree = "<group>"; };
+		A818A4F015E652EC00E44E91 /* plonk_DelayForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForms.h; sourceTree = "<group>"; };
+		A818A4F115E652EC00E44E91 /* plonk_DelayForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayForwardDeclarations.h; sourceTree = "<group>"; };
+		A818A4F215E652EC00E44E91 /* plonk_DelayTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_DelayTypes.cpp; sourceTree = "<group>"; };
+		A818A4F315E652EC00E44E91 /* plonk_DelayTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_DelayTypes.h; sourceTree = "<group>"; };
+		A818A4F515E652EC00E44E91 /* plonk_FFTChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FFTChannel.h; sourceTree = "<group>"; };
+		A818A4F615E652EC00E44E91 /* plonk_IFFTChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IFFTChannel.h; sourceTree = "<group>"; };
+		A818A4F815E652EC00E44E91 /* plonk_Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Filter.h; sourceTree = "<group>"; };
+		A818A4F915E652EC00E44E91 /* plonk_FilterCoeffs1Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterCoeffs1Param.h; sourceTree = "<group>"; };
+		A818A4FA15E652EC00E44E91 /* plonk_FilterCoeffs2Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterCoeffs2Param.h; sourceTree = "<group>"; };
+		A818A4FB15E652EC00E44E91 /* plonk_FilterCoeffs3Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterCoeffs3Param.h; sourceTree = "<group>"; };
+		A818A4FC15E652EC00E44E91 /* plonk_FilterForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterForms.h; sourceTree = "<group>"; };
+		A818A4FD15E652EC00E44E91 /* plonk_FilterForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterForwardDeclarations.h; sourceTree = "<group>"; };
+		A818A4FE15E652EC00E44E91 /* plonk_FilterShapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapes.h; sourceTree = "<group>"; };
+		A818A4FF15E652EC00E44E91 /* plonk_FilterShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShortcuts.h; sourceTree = "<group>"; };
+		A818A50015E652EC00E44E91 /* plonk_FilterTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_FilterTypes.cpp; sourceTree = "<group>"; };
+		A818A50115E652EC00E44E91 /* plonk_FilterTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterTypes.h; sourceTree = "<group>"; };
+		A818A50315E652EC00E44E91 /* plonk_FilterShapesB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapesB.h; sourceTree = "<group>"; };
+		A818A50415E652EC00E44E91 /* plonk_FilterShapesP2Z2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapesP2Z2.h; sourceTree = "<group>"; };
+		A818A50515E652EC00E44E91 /* plonk_FilterShapesSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_FilterShapesSimple.h; sourceTree = "<group>"; };
+		A818A50715E652EC00E44E91 /* plonk_Saw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Saw.h; sourceTree = "<group>"; };
+		A818A50815E652EC00E44E91 /* plonk_SignalPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SignalPlay.h; sourceTree = "<group>"; };
+		A818A50915E652EC00E44E91 /* plonk_Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Table.h; sourceTree = "<group>"; };
+		A818A50A15E652EC00E44E91 /* plonk_WhiteNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_WhiteNoise.h; sourceTree = "<group>"; };
+		A818A50C15E652EC00E44E91 /* plonk_InfoHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InfoHeaders.h; sourceTree = "<group>"; };
+		A818A50D15E652EC00E44E91 /* plonk_IOInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_IOInfo.cpp; sourceTree = "<group>"; };
+		A818A50E15E652EC00E44E91 /* plonk_IOInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOInfo.h; sourceTree = "<group>"; };
+		A818A50F15E652EC00E44E91 /* plonk_IOKey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_IOKey.cpp; sourceTree = "<group>"; };
+		A818A51015E652EC00E44E91 /* plonk_IOKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOKey.h; sourceTree = "<group>"; };
+		A818A51115E652EC00E44E91 /* plonk_IOLimit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_IOLimit.cpp; sourceTree = "<group>"; };
+		A818A51215E652EC00E44E91 /* plonk_IOLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOLimit.h; sourceTree = "<group>"; };
+		A818A51315E652EC00E44E91 /* plonk_Measure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_Measure.cpp; sourceTree = "<group>"; };
+		A818A51415E652EC00E44E91 /* plonk_Measure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Measure.h; sourceTree = "<group>"; };
+		A818A51515E652EC00E44E91 /* plonk_UnitInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_UnitInfo.cpp; sourceTree = "<group>"; };
+		A818A51615E652EC00E44E91 /* plonk_UnitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnitInfo.h; sourceTree = "<group>"; };
+		A818A51715E652EC00E44E91 /* plonk_GraphForwardDeclarations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_GraphForwardDeclarations.h; sourceTree = "<group>"; };
+		A818A51815E652EC00E44E91 /* plonk_Unit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Unit.h; sourceTree = "<group>"; };
+		A818A51A15E652EC00E44E91 /* plonk_AtomicVariableChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_AtomicVariableChannel.h; sourceTree = "<group>"; };
+		A818A51B15E652EC00E44E91 /* plonk_BinaryOpChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryOpChannel.h; sourceTree = "<group>"; };
+		A818A51C15E652EC00E44E91 /* plonk_BinaryOpPlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BinaryOpPlink.h; sourceTree = "<group>"; };
+		A818A51D15E652EC00E44E91 /* plonk_BlockChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BlockChannel.h; sourceTree = "<group>"; };
+		A818A51E15E652EC00E44E91 /* plonk_BusReadChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BusReadChannel.h; sourceTree = "<group>"; };
+		A818A51F15E652EC00E44E91 /* plonk_BusWriteChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BusWriteChannel.h; sourceTree = "<group>"; };
+		A818A52015E652EC00E44E91 /* plonk_ConstantChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ConstantChannel.h; sourceTree = "<group>"; };
+		A818A52115E652EC00E44E91 /* plonk_LinearPanChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_LinearPanChannel.h; sourceTree = "<group>"; };
+		A818A52215E652EC00E44E91 /* plonk_Mixers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Mixers.h; sourceTree = "<group>"; };
+		A818A52315E652EC00E44E91 /* plonk_PatchChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_PatchChannel.h; sourceTree = "<group>"; };
+		A818A52415E652EC00E44E91 /* plonk_UnaryOpChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnaryOpChannel.h; sourceTree = "<group>"; };
+		A818A52515E652EC00E44E91 /* plonk_UnaryOpPlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_UnaryOpPlink.h; sourceTree = "<group>"; };
+		A818A52615E652EC00E44E91 /* plonk_VariableChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_VariableChannel.h; sourceTree = "<group>"; };
+		A818A52815E652EC00E44E91 /* plonk_BlockSize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_BlockSize.cpp; sourceTree = "<group>"; };
+		A818A52915E652EC00E44E91 /* plonk_BlockSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_BlockSize.h; sourceTree = "<group>"; };
+		A818A52A15E652EC00E44E91 /* plonk_Bus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Bus.h; sourceTree = "<group>"; };
+		A818A52B15E652EC00E44E91 /* plonk_InputDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_InputDictionary.cpp; sourceTree = "<group>"; };
+		A818A52C15E652EC00E44E91 /* plonk_InputDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InputDictionary.h; sourceTree = "<group>"; };
+		A818A52D15E652EC00E44E91 /* plonk_ProcessInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ProcessInfo.cpp; sourceTree = "<group>"; };
+		A818A52E15E652EC00E44E91 /* plonk_ProcessInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProcessInfo.h; sourceTree = "<group>"; };
+		A818A52F15E652EC00E44E91 /* plonk_ProcessInfoInternal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_ProcessInfoInternal.cpp; sourceTree = "<group>"; };
+		A818A53015E652EC00E44E91 /* plonk_ProcessInfoInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_ProcessInfoInternal.h; sourceTree = "<group>"; };
+		A818A53115E652EC00E44E91 /* plonk_SampleRate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_SampleRate.cpp; sourceTree = "<group>"; };
+		A818A53215E652EC00E44E91 /* plonk_SampleRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_SampleRate.h; sourceTree = "<group>"; };
+		A818A53315E652EC00E44E91 /* plonk_TimeStamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_TimeStamp.cpp; sourceTree = "<group>"; };
+		A818A53415E652EC00E44E91 /* plonk_TimeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_TimeStamp.h; sourceTree = "<group>"; };
+		A818A53715E652EC00E44E91 /* plonk_IOSAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_IOSAudioHost.h; sourceTree = "<group>"; };
+		A818A53815E652EC00E44E91 /* plonk_IOSAudioHost.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = plonk_IOSAudioHost.mm; sourceTree = "<group>"; };
+		A818A53A15E652EC00E44E91 /* plonk_JuceAudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_JuceAudioHost.cpp; sourceTree = "<group>"; };
+		A818A53B15E652EC00E44E91 /* plonk_JuceAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_JuceAudioHost.h; sourceTree = "<group>"; };
+		A818A53C15E652EC00E44E91 /* plonk_AudioHostBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_AudioHostBase.h; sourceTree = "<group>"; };
+		A818A53E15E652EC00E44E91 /* plonk_PortAudioAudioHost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_PortAudioAudioHost.cpp; sourceTree = "<group>"; };
+		A818A53F15E652EC00E44E91 /* plonk_PortAudioAudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_PortAudioAudioHost.h; sourceTree = "<group>"; };
+		A818A54115E652EC00E44E91 /* plonk_Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Constants.h; sourceTree = "<group>"; };
+		A818A54215E652EC00E44E91 /* plonk_Endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_Endian.h; sourceTree = "<group>"; };
+		A818A54315E652EC00E44E91 /* plonk_InlineBinaryOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineBinaryOps.h; sourceTree = "<group>"; };
+		A818A54415E652EC00E44E91 /* plonk_InlineCommonOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineCommonOps.h; sourceTree = "<group>"; };
+		A818A54515E652EC00E44E91 /* plonk_InlineMiscOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineMiscOps.h; sourceTree = "<group>"; };
+		A818A54615E652EC00E44E91 /* plonk_InlineUnaryOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_InlineUnaryOps.h; sourceTree = "<group>"; };
+		A818A54715E652EC00E44E91 /* plonk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk.h; sourceTree = "<group>"; };
+		A818A54915E652EC00E44E91 /* plonk_RNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_RNG.cpp; sourceTree = "<group>"; };
+		A818A54A15E652EC00E44E91 /* plonk_RNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_RNG.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,7 +448,7 @@
 				A80D17E01585EAB500AAB01B /* SecondViewController.mm */,
 				A80D19511587819500AAB01B /* AudioHost.h */,
 				A80D19521587819500AAB01B /* AudioHost.mm */,
-				A854EADF15D92E46008D1FE5 /* src */,
+				A818A41115E652EC00E44E91 /* src */,
 				A80D17CD1585EAB500AAB01B /* Supporting Files */,
 				A80D17F71585EBCA00AAB01B /* Resources */,
 			);
@@ -475,606 +481,610 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		A854EADF15D92E46008D1FE5 /* src */ = {
+		A818A41115E652EC00E44E91 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				A854EAE015D92E46008D1FE5 /* mainpage.h */,
-				A854EAE115D92E46008D1FE5 /* plank */,
-				A854EB4615D92E46008D1FE5 /* plink */,
-				A854EB5615D92E46008D1FE5 /* plonk */,
+				A818A41215E652EC00E44E91 /* mainpage.h */,
+				A818A41315E652EC00E44E91 /* plank */,
+				A818A47C15E652EC00E44E91 /* plink */,
+				A818A48C15E652EC00E44E91 /* plonk */,
 			);
 			name = src;
 			path = ../../../src;
 			sourceTree = "<group>";
 		};
-		A854EAE115D92E46008D1FE5 /* plank */ = {
+		A818A41315E652EC00E44E91 /* plank */ = {
 			isa = PBXGroup;
 			children = (
-				A854EAE215D92E46008D1FE5 /* containers */,
-				A854EAFF15D92E46008D1FE5 /* core */,
-				A854EB0C15D92E46008D1FE5 /* fft */,
-				A854EB2715D92E46008D1FE5 /* files */,
-				A854EB3B15D92E46008D1FE5 /* maths */,
-				A854EB4115D92E46008D1FE5 /* plank.h */,
-				A854EB4215D92E46008D1FE5 /* random */,
+				A818A41415E652EC00E44E91 /* containers */,
+				A818A43115E652EC00E44E91 /* core */,
+				A818A44215E652EC00E44E91 /* fft */,
+				A818A45D15E652EC00E44E91 /* files */,
+				A818A47115E652EC00E44E91 /* maths */,
+				A818A47715E652EC00E44E91 /* plank.h */,
+				A818A47815E652EC00E44E91 /* random */,
 			);
 			path = plank;
 			sourceTree = "<group>";
 		};
-		A854EAE215D92E46008D1FE5 /* containers */ = {
+		A818A41415E652EC00E44E91 /* containers */ = {
 			isa = PBXGroup;
 			children = (
-				A854EAE315D92E46008D1FE5 /* plank_Atomic.c */,
-				A854EAE415D92E46008D1FE5 /* plank_Atomic.h */,
-				A854EAE515D92E46008D1FE5 /* plank_AtomicInline.h */,
-				A854EAE615D92E46008D1FE5 /* plank_ContainersMisc.h */,
-				A854EAE715D92E46008D1FE5 /* plank_DynamicArray.c */,
-				A854EAE815D92E46008D1FE5 /* plank_DynamicArray.h */,
-				A854EAE915D92E46008D1FE5 /* plank_LockFreeDynamicArray.c */,
-				A854EAEA15D92E46008D1FE5 /* plank_LockFreeDynamicArray.h */,
-				A854EAEB15D92E46008D1FE5 /* plank_LockFreeLinkedListElement.c */,
-				A854EAEC15D92E46008D1FE5 /* plank_LockFreeLinkedListElement.h */,
-				A854EAED15D92E46008D1FE5 /* plank_LockFreeLinkedListElementInline.h */,
-				A854EAEE15D92E46008D1FE5 /* plank_LockFreeQueue.c */,
-				A854EAEF15D92E46008D1FE5 /* plank_LockFreeQueue.h */,
-				A854EAF015D92E46008D1FE5 /* plank_LockFreeStack.c */,
-				A854EAF115D92E46008D1FE5 /* plank_LockFreeStack.h */,
-				A854EAF215D92E46008D1FE5 /* plank_SimpleLinkedList.c */,
-				A854EAF315D92E46008D1FE5 /* plank_SimpleLinkedList.h */,
-				A854EAF415D92E46008D1FE5 /* plank_SimpleLinkedListElement.c */,
-				A854EAF515D92E46008D1FE5 /* plank_SimpleLinkedListElement.h */,
-				A854EAF615D92E46008D1FE5 /* plank_SimpleLinkedListElementInline.h */,
-				A854EAF715D92E46008D1FE5 /* plank_SimpleMap.c */,
-				A854EAF815D92E46008D1FE5 /* plank_SimpleMap.h */,
-				A854EAF915D92E46008D1FE5 /* plank_SimpleQueue.c */,
-				A854EAFA15D92E46008D1FE5 /* plank_SimpleQueue.h */,
-				A854EAFB15D92E46008D1FE5 /* plank_SimpleStack.c */,
-				A854EAFC15D92E46008D1FE5 /* plank_SimpleStack.h */,
-				A854EAFD15D92E46008D1FE5 /* plank_ThreadLocalStorage.c */,
-				A854EAFE15D92E46008D1FE5 /* plank_ThreadLocalStorage.h */,
+				A818A41515E652EC00E44E91 /* plank_Atomic.c */,
+				A818A41615E652EC00E44E91 /* plank_Atomic.h */,
+				A818A41715E652EC00E44E91 /* plank_AtomicInline.h */,
+				A818A41815E652EC00E44E91 /* plank_ContainersMisc.h */,
+				A818A41915E652EC00E44E91 /* plank_DynamicArray.c */,
+				A818A41A15E652EC00E44E91 /* plank_DynamicArray.h */,
+				A818A41B15E652EC00E44E91 /* plank_LockFreeDynamicArray.c */,
+				A818A41C15E652EC00E44E91 /* plank_LockFreeDynamicArray.h */,
+				A818A41D15E652EC00E44E91 /* plank_LockFreeLinkedListElement.c */,
+				A818A41E15E652EC00E44E91 /* plank_LockFreeLinkedListElement.h */,
+				A818A41F15E652EC00E44E91 /* plank_LockFreeLinkedListElementInline.h */,
+				A818A42015E652EC00E44E91 /* plank_LockFreeQueue.c */,
+				A818A42115E652EC00E44E91 /* plank_LockFreeQueue.h */,
+				A818A42215E652EC00E44E91 /* plank_LockFreeStack.c */,
+				A818A42315E652EC00E44E91 /* plank_LockFreeStack.h */,
+				A818A42415E652EC00E44E91 /* plank_SimpleLinkedList.c */,
+				A818A42515E652EC00E44E91 /* plank_SimpleLinkedList.h */,
+				A818A42615E652EC00E44E91 /* plank_SimpleLinkedListElement.c */,
+				A818A42715E652EC00E44E91 /* plank_SimpleLinkedListElement.h */,
+				A818A42815E652EC00E44E91 /* plank_SimpleLinkedListElementInline.h */,
+				A818A42915E652EC00E44E91 /* plank_SimpleMap.c */,
+				A818A42A15E652EC00E44E91 /* plank_SimpleMap.h */,
+				A818A42B15E652EC00E44E91 /* plank_SimpleQueue.c */,
+				A818A42C15E652EC00E44E91 /* plank_SimpleQueue.h */,
+				A818A42D15E652EC00E44E91 /* plank_SimpleStack.c */,
+				A818A42E15E652EC00E44E91 /* plank_SimpleStack.h */,
+				A818A42F15E652EC00E44E91 /* plank_ThreadLocalStorage.c */,
+				A818A43015E652EC00E44E91 /* plank_ThreadLocalStorage.h */,
 			);
 			path = containers;
 			sourceTree = "<group>";
 		};
-		A854EAFF15D92E46008D1FE5 /* core */ = {
+		A818A43115E652EC00E44E91 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB0015D92E46008D1FE5 /* plank_Lock.c */,
-				A854EB0115D92E46008D1FE5 /* plank_Lock.h */,
-				A854EB0215D92E46008D1FE5 /* plank_LockFreeMemory.c */,
-				A854EB0315D92E46008D1FE5 /* plank_LockFreeMemory.h */,
-				A854EB0415D92E46008D1FE5 /* plank_Memory.c */,
-				A854EB0515D92E46008D1FE5 /* plank_Memory.h */,
-				A854EB0615D92E46008D1FE5 /* plank_MemoryInline.h */,
-				A854EB0715D92E46008D1FE5 /* plank_Result.c */,
-				A854EB0815D92E46008D1FE5 /* plank_Result.h */,
-				A854EB0915D92E46008D1FE5 /* plank_StandardHeader.h */,
-				A854EB0A15D92E46008D1FE5 /* plank_Thread.c */,
-				A854EB0B15D92E46008D1FE5 /* plank_Thread.h */,
+				A818A43215E652EC00E44E91 /* plank_Lock.c */,
+				A818A43315E652EC00E44E91 /* plank_Lock.h */,
+				A818A43415E652EC00E44E91 /* plank_LockFreeMemory.c */,
+				A818A43515E652EC00E44E91 /* plank_LockFreeMemory.h */,
+				A818A43615E652EC00E44E91 /* plank_Memory.c */,
+				A818A43715E652EC00E44E91 /* plank_Memory.h */,
+				A818A43815E652EC00E44E91 /* plank_MemoryInline.h */,
+				A818A43915E652EC00E44E91 /* plank_Result.c */,
+				A818A43A15E652EC00E44E91 /* plank_Result.h */,
+				A818A43B15E652EC00E44E91 /* plank_SpinLock.c */,
+				A818A43C15E652EC00E44E91 /* plank_SpinLock.h */,
+				A818A43D15E652EC00E44E91 /* plank_StandardHeader.h */,
+				A818A43E15E652EC00E44E91 /* plank_Thread.c */,
+				A818A43F15E652EC00E44E91 /* plank_Thread.h */,
+				A818A44015E652EC00E44E91 /* plank_ThreadSpinLock.c */,
+				A818A44115E652EC00E44E91 /* plank_ThreadSpinLock.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		A854EB0C15D92E46008D1FE5 /* fft */ = {
+		A818A44215E652EC00E44E91 /* fft */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB0D15D92E46008D1FE5 /* fftreal */,
-				A854EB2515D92E46008D1FE5 /* plank_FFT.c */,
-				A854EB2615D92E46008D1FE5 /* plank_FFT.h */,
+				A818A44315E652EC00E44E91 /* fftreal */,
+				A818A45B15E652EC00E44E91 /* plank_FFT.c */,
+				A818A45C15E652EC00E44E91 /* plank_FFT.h */,
 			);
 			path = fft;
 			sourceTree = "<group>";
 		};
-		A854EB0D15D92E46008D1FE5 /* fftreal */ = {
+		A818A44315E652EC00E44E91 /* fftreal */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB0E15D92E46008D1FE5 /* ffft */,
-				A854EB2315D92E46008D1FE5 /* plank_FFTRealInternal.cpp */,
-				A854EB2415D92E46008D1FE5 /* plank_FFTRealInternal.h */,
+				A818A44415E652EC00E44E91 /* ffft */,
+				A818A45915E652EC00E44E91 /* plank_FFTRealInternal.cpp */,
+				A818A45A15E652EC00E44E91 /* plank_FFTRealInternal.h */,
 			);
 			path = fftreal;
 			sourceTree = "<group>";
 		};
-		A854EB0E15D92E46008D1FE5 /* ffft */ = {
+		A818A44415E652EC00E44E91 /* ffft */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB0F15D92E46008D1FE5 /* Array.h */,
-				A854EB1015D92E46008D1FE5 /* Array.hpp */,
-				A854EB1115D92E46008D1FE5 /* def.h */,
-				A854EB1215D92E46008D1FE5 /* DynArray.h */,
-				A854EB1315D92E46008D1FE5 /* DynArray.hpp */,
-				A854EB1415D92E46008D1FE5 /* FFTReal.h */,
-				A854EB1515D92E46008D1FE5 /* FFTReal.hpp */,
-				A854EB1615D92E46008D1FE5 /* FFTRealFixLen.h */,
-				A854EB1715D92E46008D1FE5 /* FFTRealFixLen.hpp */,
-				A854EB1815D92E46008D1FE5 /* FFTRealFixLenParam.h */,
-				A854EB1915D92E46008D1FE5 /* FFTRealPassDirect.h */,
-				A854EB1A15D92E46008D1FE5 /* FFTRealPassDirect.hpp */,
-				A854EB1B15D92E46008D1FE5 /* FFTRealPassInverse.h */,
-				A854EB1C15D92E46008D1FE5 /* FFTRealPassInverse.hpp */,
-				A854EB1D15D92E46008D1FE5 /* FFTRealSelect.h */,
-				A854EB1E15D92E46008D1FE5 /* FFTRealSelect.hpp */,
-				A854EB1F15D92E46008D1FE5 /* FFTRealUseTrigo.h */,
-				A854EB2015D92E46008D1FE5 /* FFTRealUseTrigo.hpp */,
-				A854EB2115D92E46008D1FE5 /* OscSinCos.h */,
-				A854EB2215D92E46008D1FE5 /* OscSinCos.hpp */,
+				A818A44515E652EC00E44E91 /* Array.h */,
+				A818A44615E652EC00E44E91 /* Array.hpp */,
+				A818A44715E652EC00E44E91 /* def.h */,
+				A818A44815E652EC00E44E91 /* DynArray.h */,
+				A818A44915E652EC00E44E91 /* DynArray.hpp */,
+				A818A44A15E652EC00E44E91 /* FFTReal.h */,
+				A818A44B15E652EC00E44E91 /* FFTReal.hpp */,
+				A818A44C15E652EC00E44E91 /* FFTRealFixLen.h */,
+				A818A44D15E652EC00E44E91 /* FFTRealFixLen.hpp */,
+				A818A44E15E652EC00E44E91 /* FFTRealFixLenParam.h */,
+				A818A44F15E652EC00E44E91 /* FFTRealPassDirect.h */,
+				A818A45015E652EC00E44E91 /* FFTRealPassDirect.hpp */,
+				A818A45115E652EC00E44E91 /* FFTRealPassInverse.h */,
+				A818A45215E652EC00E44E91 /* FFTRealPassInverse.hpp */,
+				A818A45315E652EC00E44E91 /* FFTRealSelect.h */,
+				A818A45415E652EC00E44E91 /* FFTRealSelect.hpp */,
+				A818A45515E652EC00E44E91 /* FFTRealUseTrigo.h */,
+				A818A45615E652EC00E44E91 /* FFTRealUseTrigo.hpp */,
+				A818A45715E652EC00E44E91 /* OscSinCos.h */,
+				A818A45815E652EC00E44E91 /* OscSinCos.hpp */,
 			);
 			path = ffft;
 			sourceTree = "<group>";
 		};
-		A854EB2715D92E46008D1FE5 /* files */ = {
+		A818A45D15E652EC00E44E91 /* files */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB2815D92E46008D1FE5 /* audio */,
-				A854EB3415D92E46008D1FE5 /* plank_File.c */,
-				A854EB3515D92E46008D1FE5 /* plank_File.h */,
-				A854EB3615D92E46008D1FE5 /* plank_IffFileCommon.h */,
-				A854EB3715D92E46008D1FE5 /* plank_IffFileReader.c */,
-				A854EB3815D92E46008D1FE5 /* plank_IffFileReader.h */,
-				A854EB3915D92E46008D1FE5 /* plank_IffFileWriter.c */,
-				A854EB3A15D92E46008D1FE5 /* plank_IffFileWriter.h */,
+				A818A45E15E652EC00E44E91 /* audio */,
+				A818A46A15E652EC00E44E91 /* plank_File.c */,
+				A818A46B15E652EC00E44E91 /* plank_File.h */,
+				A818A46C15E652EC00E44E91 /* plank_IffFileCommon.h */,
+				A818A46D15E652EC00E44E91 /* plank_IffFileReader.c */,
+				A818A46E15E652EC00E44E91 /* plank_IffFileReader.h */,
+				A818A46F15E652EC00E44E91 /* plank_IffFileWriter.c */,
+				A818A47015E652EC00E44E91 /* plank_IffFileWriter.h */,
 			);
 			path = files;
 			sourceTree = "<group>";
 		};
-		A854EB2815D92E46008D1FE5 /* audio */ = {
+		A818A45E15E652EC00E44E91 /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB2915D92E46008D1FE5 /* plank_AudioFileCommon.h */,
-				A854EB2A15D92E46008D1FE5 /* plank_AudioFileCuePoint.c */,
-				A854EB2B15D92E46008D1FE5 /* plank_AudioFileCuePoint.h */,
-				A854EB2C15D92E46008D1FE5 /* plank_AudioFileMetaData.c */,
-				A854EB2D15D92E46008D1FE5 /* plank_AudioFileMetaData.h */,
-				A854EB2E15D92E46008D1FE5 /* plank_AudioFileReader.c */,
-				A854EB2F15D92E46008D1FE5 /* plank_AudioFileReader.h */,
-				A854EB3015D92E46008D1FE5 /* plank_AudioFileRegion.c */,
-				A854EB3115D92E46008D1FE5 /* plank_AudioFileRegion.h */,
-				A854EB3215D92E46008D1FE5 /* plank_AudioFileWriter.c */,
-				A854EB3315D92E46008D1FE5 /* plank_AudioFileWriter.h */,
+				A818A45F15E652EC00E44E91 /* plank_AudioFileCommon.h */,
+				A818A46015E652EC00E44E91 /* plank_AudioFileCuePoint.c */,
+				A818A46115E652EC00E44E91 /* plank_AudioFileCuePoint.h */,
+				A818A46215E652EC00E44E91 /* plank_AudioFileMetaData.c */,
+				A818A46315E652EC00E44E91 /* plank_AudioFileMetaData.h */,
+				A818A46415E652EC00E44E91 /* plank_AudioFileReader.c */,
+				A818A46515E652EC00E44E91 /* plank_AudioFileReader.h */,
+				A818A46615E652EC00E44E91 /* plank_AudioFileRegion.c */,
+				A818A46715E652EC00E44E91 /* plank_AudioFileRegion.h */,
+				A818A46815E652EC00E44E91 /* plank_AudioFileWriter.c */,
+				A818A46915E652EC00E44E91 /* plank_AudioFileWriter.h */,
 			);
 			path = audio;
 			sourceTree = "<group>";
 		};
-		A854EB3B15D92E46008D1FE5 /* maths */ = {
+		A818A47115E652EC00E44E91 /* maths */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB3C15D92E46008D1FE5 /* plank_Maths.c */,
-				A854EB3D15D92E46008D1FE5 /* plank_Maths.h */,
-				A854EB3E15D92E46008D1FE5 /* vectors */,
+				A818A47215E652EC00E44E91 /* plank_Maths.c */,
+				A818A47315E652EC00E44E91 /* plank_Maths.h */,
+				A818A47415E652EC00E44E91 /* vectors */,
 			);
 			path = maths;
 			sourceTree = "<group>";
 		};
-		A854EB3E15D92E46008D1FE5 /* vectors */ = {
+		A818A47415E652EC00E44E91 /* vectors */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB3F15D92E46008D1FE5 /* plank_vDSP.h */,
-				A854EB4015D92E46008D1FE5 /* plank_Vectors.h */,
+				A818A47515E652EC00E44E91 /* plank_vDSP.h */,
+				A818A47615E652EC00E44E91 /* plank_Vectors.h */,
 			);
 			path = vectors;
 			sourceTree = "<group>";
 		};
-		A854EB4215D92E46008D1FE5 /* random */ = {
+		A818A47815E652EC00E44E91 /* random */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB4315D92E46008D1FE5 /* plank_RNG.c */,
-				A854EB4415D92E46008D1FE5 /* plank_RNG.h */,
-				A854EB4515D92E46008D1FE5 /* plank_RNGInline.h */,
+				A818A47915E652EC00E44E91 /* plank_RNG.c */,
+				A818A47A15E652EC00E44E91 /* plank_RNG.h */,
+				A818A47B15E652EC00E44E91 /* plank_RNGInline.h */,
 			);
 			path = random;
 			sourceTree = "<group>";
 		};
-		A854EB4615D92E46008D1FE5 /* plink */ = {
+		A818A47C15E652EC00E44E91 /* plink */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB4715D92E46008D1FE5 /* core */,
-				A854EB4915D92E46008D1FE5 /* plink.h */,
-				A854EB4A15D92E46008D1FE5 /* processes */,
+				A818A47D15E652EC00E44E91 /* core */,
+				A818A47F15E652EC00E44E91 /* plink.h */,
+				A818A48015E652EC00E44E91 /* processes */,
 			);
 			path = plink;
 			sourceTree = "<group>";
 		};
-		A854EB4715D92E46008D1FE5 /* core */ = {
+		A818A47D15E652EC00E44E91 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB4815D92E46008D1FE5 /* plink_StandardHeader.h */,
+				A818A47E15E652EC00E44E91 /* plink_StandardHeader.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		A854EB4A15D92E46008D1FE5 /* processes */ = {
+		A818A48015E652EC00E44E91 /* processes */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB4B15D92E46008D1FE5 /* generators */,
-				A854EB5015D92E46008D1FE5 /* plink_Process.h */,
-				A854EB5115D92E46008D1FE5 /* simple */,
+				A818A48115E652EC00E44E91 /* generators */,
+				A818A48615E652EC00E44E91 /* plink_Process.h */,
+				A818A48715E652EC00E44E91 /* simple */,
 			);
 			path = processes;
 			sourceTree = "<group>";
 		};
-		A854EB4B15D92E46008D1FE5 /* generators */ = {
+		A818A48115E652EC00E44E91 /* generators */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB4C15D92E46008D1FE5 /* plink_Saw.c */,
-				A854EB4D15D92E46008D1FE5 /* plink_Saw.h */,
-				A854EB4E15D92E46008D1FE5 /* plink_WhiteNoise.c */,
-				A854EB4F15D92E46008D1FE5 /* plink_WhiteNoise.h */,
+				A818A48215E652EC00E44E91 /* plink_Saw.c */,
+				A818A48315E652EC00E44E91 /* plink_Saw.h */,
+				A818A48415E652EC00E44E91 /* plink_WhiteNoise.c */,
+				A818A48515E652EC00E44E91 /* plink_WhiteNoise.h */,
 			);
 			path = generators;
 			sourceTree = "<group>";
 		};
-		A854EB5115D92E46008D1FE5 /* simple */ = {
+		A818A48715E652EC00E44E91 /* simple */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB5215D92E46008D1FE5 /* plink_BinaryOpProcess.c */,
-				A854EB5315D92E46008D1FE5 /* plink_BinaryOpProcess.h */,
-				A854EB5415D92E46008D1FE5 /* plink_UnaryOpProcess.c */,
-				A854EB5515D92E46008D1FE5 /* plink_UnaryOpProcess.h */,
+				A818A48815E652EC00E44E91 /* plink_BinaryOpProcess.c */,
+				A818A48915E652EC00E44E91 /* plink_BinaryOpProcess.h */,
+				A818A48A15E652EC00E44E91 /* plink_UnaryOpProcess.c */,
+				A818A48B15E652EC00E44E91 /* plink_UnaryOpProcess.h */,
 			);
 			path = simple;
 			sourceTree = "<group>";
 		};
-		A854EB5615D92E46008D1FE5 /* plonk */ = {
+		A818A48C15E652EC00E44E91 /* plonk */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB5715D92E46008D1FE5 /* containers */,
-				A854EB7D15D92E46008D1FE5 /* core */,
-				A854EB9215D92E46008D1FE5 /* fft */,
-				A854EB9515D92E46008D1FE5 /* files */,
-				A854EB9D15D92E46008D1FE5 /* graph */,
-				A854EBFF15D92E47008D1FE5 /* hosts */,
-				A854EC0A15D92E47008D1FE5 /* maths */,
-				A854EC1115D92E47008D1FE5 /* plonk.h */,
-				A854EC1215D92E47008D1FE5 /* random */,
+				A818A48D15E652EC00E44E91 /* containers */,
+				A818A4B315E652EC00E44E91 /* core */,
+				A818A4C815E652EC00E44E91 /* fft */,
+				A818A4CB15E652EC00E44E91 /* files */,
+				A818A4D315E652EC00E44E91 /* graph */,
+				A818A53515E652EC00E44E91 /* hosts */,
+				A818A54015E652EC00E44E91 /* maths */,
+				A818A54715E652EC00E44E91 /* plonk.h */,
+				A818A54815E652EC00E44E91 /* random */,
 			);
 			path = plonk;
 			sourceTree = "<group>";
 		};
-		A854EB5715D92E46008D1FE5 /* containers */ = {
+		A818A48D15E652EC00E44E91 /* containers */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB5815D92E46008D1FE5 /* plonk_Atomic.h */,
-				A854EB5915D92E46008D1FE5 /* plonk_BreakPoints.h */,
-				A854EB5A15D92E46008D1FE5 /* plonk_Collections.h */,
-				A854EB5B15D92E46008D1FE5 /* plonk_ContainerForwardDeclarations.h */,
-				A854EB5C15D92E46008D1FE5 /* plonk_DynamicContainer.cpp */,
-				A854EB5D15D92E46008D1FE5 /* plonk_DynamicContainer.h */,
-				A854EB5E15D92E46008D1FE5 /* plonk_Function.h */,
-				A854EB5F15D92E46008D1FE5 /* plonk_Int24.cpp */,
-				A854EB6015D92E46008D1FE5 /* plonk_Int24.h */,
-				A854EB6115D92E46008D1FE5 /* plonk_LockFreeQueue.h */,
-				A854EB6215D92E46008D1FE5 /* plonk_LockFreeStack.h */,
-				A854EB6315D92E46008D1FE5 /* plonk_NumericalArray.h */,
-				A854EB6415D92E46008D1FE5 /* plonk_NumericalArray2D.h */,
-				A854EB6515D92E46008D1FE5 /* plonk_ObjectArray.h */,
-				A854EB6615D92E46008D1FE5 /* plonk_ObjectArray2D.h */,
-				A854EB6715D92E46008D1FE5 /* plonk_ObjectArrayInternal.h */,
-				A854EB6815D92E46008D1FE5 /* plonk_ObjectMemoryDeferFree.cpp */,
-				A854EB6915D92E46008D1FE5 /* plonk_ObjectMemoryDeferFree.h */,
-				A854EB6A15D92E46008D1FE5 /* plonk_ObjectMemoryPools.cpp */,
-				A854EB6B15D92E46008D1FE5 /* plonk_ObjectMemoryPools.h */,
-				A854EB6C15D92E46008D1FE5 /* plonk_Signal.h */,
-				A854EB6D15D92E46008D1FE5 /* plonk_SimpleArray.h */,
-				A854EB6E15D92E46008D1FE5 /* plonk_SimpleLinkedList.h */,
-				A854EB6F15D92E46008D1FE5 /* plonk_SimpleQueue.h */,
-				A854EB7015D92E46008D1FE5 /* plonk_SimpleStack.h */,
-				A854EB7115D92E46008D1FE5 /* plonk_Text.cpp */,
-				A854EB7215D92E46008D1FE5 /* plonk_Text.h */,
-				A854EB7315D92E46008D1FE5 /* plonk_TextArray.cpp */,
-				A854EB7415D92E46008D1FE5 /* plonk_TextArray.h */,
-				A854EB7515D92E46008D1FE5 /* plonk_Wavetable.h */,
-				A854EB7615D92E46008D1FE5 /* variables */,
+				A818A48E15E652EC00E44E91 /* plonk_Atomic.h */,
+				A818A48F15E652EC00E44E91 /* plonk_BreakPoints.h */,
+				A818A49015E652EC00E44E91 /* plonk_Collections.h */,
+				A818A49115E652EC00E44E91 /* plonk_ContainerForwardDeclarations.h */,
+				A818A49215E652EC00E44E91 /* plonk_DynamicContainer.cpp */,
+				A818A49315E652EC00E44E91 /* plonk_DynamicContainer.h */,
+				A818A49415E652EC00E44E91 /* plonk_Function.h */,
+				A818A49515E652EC00E44E91 /* plonk_Int24.cpp */,
+				A818A49615E652EC00E44E91 /* plonk_Int24.h */,
+				A818A49715E652EC00E44E91 /* plonk_LockFreeQueue.h */,
+				A818A49815E652EC00E44E91 /* plonk_LockFreeStack.h */,
+				A818A49915E652EC00E44E91 /* plonk_NumericalArray.h */,
+				A818A49A15E652EC00E44E91 /* plonk_NumericalArray2D.h */,
+				A818A49B15E652EC00E44E91 /* plonk_ObjectArray.h */,
+				A818A49C15E652EC00E44E91 /* plonk_ObjectArray2D.h */,
+				A818A49D15E652EC00E44E91 /* plonk_ObjectArrayInternal.h */,
+				A818A49E15E652EC00E44E91 /* plonk_ObjectMemoryDeferFree.cpp */,
+				A818A49F15E652EC00E44E91 /* plonk_ObjectMemoryDeferFree.h */,
+				A818A4A015E652EC00E44E91 /* plonk_ObjectMemoryPools.cpp */,
+				A818A4A115E652EC00E44E91 /* plonk_ObjectMemoryPools.h */,
+				A818A4A215E652EC00E44E91 /* plonk_Signal.h */,
+				A818A4A315E652EC00E44E91 /* plonk_SimpleArray.h */,
+				A818A4A415E652EC00E44E91 /* plonk_SimpleLinkedList.h */,
+				A818A4A515E652EC00E44E91 /* plonk_SimpleQueue.h */,
+				A818A4A615E652EC00E44E91 /* plonk_SimpleStack.h */,
+				A818A4A715E652EC00E44E91 /* plonk_Text.cpp */,
+				A818A4A815E652EC00E44E91 /* plonk_Text.h */,
+				A818A4A915E652EC00E44E91 /* plonk_TextArray.cpp */,
+				A818A4AA15E652EC00E44E91 /* plonk_TextArray.h */,
+				A818A4AB15E652EC00E44E91 /* plonk_Wavetable.h */,
+				A818A4AC15E652EC00E44E91 /* variables */,
 			);
 			path = containers;
 			sourceTree = "<group>";
 		};
-		A854EB7615D92E46008D1FE5 /* variables */ = {
+		A818A4AC15E652EC00E44E91 /* variables */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB7715D92E46008D1FE5 /* plonk_BinaryOpVariable.h */,
-				A854EB7815D92E46008D1FE5 /* plonk_TypeVariable.h */,
-				A854EB7915D92E46008D1FE5 /* plonk_UnaryOpVariable.h */,
-				A854EB7A15D92E46008D1FE5 /* plonk_Variable.h */,
-				A854EB7B15D92E46008D1FE5 /* plonk_VariableForwardDeclarations.h */,
-				A854EB7C15D92E46008D1FE5 /* plonk_VariableInternal.h */,
+				A818A4AD15E652EC00E44E91 /* plonk_BinaryOpVariable.h */,
+				A818A4AE15E652EC00E44E91 /* plonk_TypeVariable.h */,
+				A818A4AF15E652EC00E44E91 /* plonk_UnaryOpVariable.h */,
+				A818A4B015E652EC00E44E91 /* plonk_Variable.h */,
+				A818A4B115E652EC00E44E91 /* plonk_VariableForwardDeclarations.h */,
+				A818A4B215E652EC00E44E91 /* plonk_VariableInternal.h */,
 			);
 			path = variables;
 			sourceTree = "<group>";
 		};
-		A854EB7D15D92E46008D1FE5 /* core */ = {
+		A818A4B315E652EC00E44E91 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB7E15D92E46008D1FE5 /* plonk_CoreForwardDeclarations.h */,
-				A854EB7F15D92E46008D1FE5 /* plonk_Deleter.cpp */,
-				A854EB8015D92E46008D1FE5 /* plonk_Deleter.h */,
-				A854EB8115D92E46008D1FE5 /* plonk_Headers.h */,
-				A854EB8215D92E46008D1FE5 /* plonk_Lock.cpp */,
-				A854EB8315D92E46008D1FE5 /* plonk_Lock.h */,
-				A854EB8415D92E46008D1FE5 /* plonk_Memory.h */,
-				A854EB8515D92E46008D1FE5 /* plonk_Receiver.h */,
-				A854EB8615D92E46008D1FE5 /* plonk_Sender.h */,
-				A854EB8715D92E46008D1FE5 /* plonk_SenderContainer.h */,
-				A854EB8815D92E46008D1FE5 /* plonk_SmartPointer.cpp */,
-				A854EB8915D92E46008D1FE5 /* plonk_SmartPointer.h */,
-				A854EB8A15D92E46008D1FE5 /* plonk_SmartPointerContainer.h */,
-				A854EB8B15D92E46008D1FE5 /* plonk_StandardHeader.h */,
-				A854EB8C15D92E46008D1FE5 /* plonk_Thread.cpp */,
-				A854EB8D15D92E46008D1FE5 /* plonk_Thread.h */,
-				A854EB8E15D92E46008D1FE5 /* plonk_TypeUtility.h */,
-				A854EB8F15D92E46008D1FE5 /* plonk_WeakPointer.cpp */,
-				A854EB9015D92E46008D1FE5 /* plonk_WeakPointer.h */,
-				A854EB9115D92E46008D1FE5 /* plonk_WeakPointerContainer.h */,
+				A818A4B415E652EC00E44E91 /* plonk_CoreForwardDeclarations.h */,
+				A818A4B515E652EC00E44E91 /* plonk_Deleter.cpp */,
+				A818A4B615E652EC00E44E91 /* plonk_Deleter.h */,
+				A818A4B715E652EC00E44E91 /* plonk_Headers.h */,
+				A818A4B815E652EC00E44E91 /* plonk_Lock.cpp */,
+				A818A4B915E652EC00E44E91 /* plonk_Lock.h */,
+				A818A4BA15E652EC00E44E91 /* plonk_Memory.h */,
+				A818A4BB15E652EC00E44E91 /* plonk_Receiver.h */,
+				A818A4BC15E652EC00E44E91 /* plonk_Sender.h */,
+				A818A4BD15E652EC00E44E91 /* plonk_SenderContainer.h */,
+				A818A4BE15E652EC00E44E91 /* plonk_SmartPointer.cpp */,
+				A818A4BF15E652EC00E44E91 /* plonk_SmartPointer.h */,
+				A818A4C015E652EC00E44E91 /* plonk_SmartPointerContainer.h */,
+				A818A4C115E652EC00E44E91 /* plonk_StandardHeader.h */,
+				A818A4C215E652EC00E44E91 /* plonk_Thread.cpp */,
+				A818A4C315E652EC00E44E91 /* plonk_Thread.h */,
+				A818A4C415E652EC00E44E91 /* plonk_TypeUtility.h */,
+				A818A4C515E652EC00E44E91 /* plonk_WeakPointer.cpp */,
+				A818A4C615E652EC00E44E91 /* plonk_WeakPointer.h */,
+				A818A4C715E652EC00E44E91 /* plonk_WeakPointerContainer.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		A854EB9215D92E46008D1FE5 /* fft */ = {
+		A818A4C815E652EC00E44E91 /* fft */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB9315D92E46008D1FE5 /* plonk_FFTEngine.h */,
-				A854EB9415D92E46008D1FE5 /* plonk_FFTEngineInternal.h */,
+				A818A4C915E652EC00E44E91 /* plonk_FFTEngine.h */,
+				A818A4CA15E652EC00E44E91 /* plonk_FFTEngineInternal.h */,
 			);
 			path = fft;
 			sourceTree = "<group>";
 		};
-		A854EB9515D92E46008D1FE5 /* files */ = {
+		A818A4CB15E652EC00E44E91 /* files */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB9615D92E46008D1FE5 /* audio */,
-				A854EB9915D92E46008D1FE5 /* plonk_BinaryFile.cpp */,
-				A854EB9A15D92E46008D1FE5 /* plonk_BinaryFile.h */,
-				A854EB9B15D92E46008D1FE5 /* plonk_TextFile.cpp */,
-				A854EB9C15D92E46008D1FE5 /* plonk_TextFile.h */,
+				A818A4CC15E652EC00E44E91 /* audio */,
+				A818A4CF15E652EC00E44E91 /* plonk_BinaryFile.cpp */,
+				A818A4D015E652EC00E44E91 /* plonk_BinaryFile.h */,
+				A818A4D115E652EC00E44E91 /* plonk_TextFile.cpp */,
+				A818A4D215E652EC00E44E91 /* plonk_TextFile.h */,
 			);
 			path = files;
 			sourceTree = "<group>";
 		};
-		A854EB9615D92E46008D1FE5 /* audio */ = {
+		A818A4CC15E652EC00E44E91 /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB9715D92E46008D1FE5 /* plonk_AudioFileReader.cpp */,
-				A854EB9815D92E46008D1FE5 /* plonk_AudioFileReader.h */,
+				A818A4CD15E652EC00E44E91 /* plonk_AudioFileReader.cpp */,
+				A818A4CE15E652EC00E44E91 /* plonk_AudioFileReader.h */,
 			);
 			path = audio;
 			sourceTree = "<group>";
 		};
-		A854EB9D15D92E46008D1FE5 /* graph */ = {
+		A818A4D315E652EC00E44E91 /* graph */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB9E15D92E46008D1FE5 /* channel */,
-				A854EBA715D92E46008D1FE5 /* control */,
-				A854EBA915D92E46008D1FE5 /* converters */,
-				A854EBAE15D92E46008D1FE5 /* delay */,
-				A854EBBE15D92E47008D1FE5 /* fft */,
-				A854EBC115D92E47008D1FE5 /* filters */,
-				A854EBD015D92E47008D1FE5 /* generators */,
-				A854EBD515D92E47008D1FE5 /* info */,
-				A854EBE115D92E47008D1FE5 /* plonk_GraphForwardDeclarations.h */,
-				A854EBE215D92E47008D1FE5 /* plonk_Unit.h */,
-				A854EBE315D92E47008D1FE5 /* simple */,
-				A854EBF115D92E47008D1FE5 /* utility */,
+				A818A4D415E652EC00E44E91 /* channel */,
+				A818A4DD15E652EC00E44E91 /* control */,
+				A818A4DF15E652EC00E44E91 /* converters */,
+				A818A4E415E652EC00E44E91 /* delay */,
+				A818A4F415E652EC00E44E91 /* fft */,
+				A818A4F715E652EC00E44E91 /* filters */,
+				A818A50615E652EC00E44E91 /* generators */,
+				A818A50B15E652EC00E44E91 /* info */,
+				A818A51715E652EC00E44E91 /* plonk_GraphForwardDeclarations.h */,
+				A818A51815E652EC00E44E91 /* plonk_Unit.h */,
+				A818A51915E652EC00E44E91 /* simple */,
+				A818A52715E652EC00E44E91 /* utility */,
 			);
 			path = graph;
 			sourceTree = "<group>";
 		};
-		A854EB9E15D92E46008D1FE5 /* channel */ = {
+		A818A4D415E652EC00E44E91 /* channel */ = {
 			isa = PBXGroup;
 			children = (
-				A854EB9F15D92E46008D1FE5 /* plonk_Channel.h */,
-				A854EBA015D92E46008D1FE5 /* plonk_ChannelData.h */,
-				A854EBA115D92E46008D1FE5 /* plonk_ChannelInternal.h */,
-				A854EBA215D92E46008D1FE5 /* plonk_ChannelInternalBase.h */,
-				A854EBA315D92E46008D1FE5 /* plonk_ChannelInternalCore.cpp */,
-				A854EBA415D92E46008D1FE5 /* plonk_ChannelInternalCore.h */,
-				A854EBA515D92E46008D1FE5 /* plonk_ProxyChannelInternal.h */,
-				A854EBA615D92E46008D1FE5 /* plonk_ProxyOwnerChannelInternal.h */,
+				A818A4D515E652EC00E44E91 /* plonk_Channel.h */,
+				A818A4D615E652EC00E44E91 /* plonk_ChannelData.h */,
+				A818A4D715E652EC00E44E91 /* plonk_ChannelInternal.h */,
+				A818A4D815E652EC00E44E91 /* plonk_ChannelInternalBase.h */,
+				A818A4D915E652EC00E44E91 /* plonk_ChannelInternalCore.cpp */,
+				A818A4DA15E652EC00E44E91 /* plonk_ChannelInternalCore.h */,
+				A818A4DB15E652EC00E44E91 /* plonk_ProxyChannelInternal.h */,
+				A818A4DC15E652EC00E44E91 /* plonk_ProxyOwnerChannelInternal.h */,
 			);
 			path = channel;
 			sourceTree = "<group>";
 		};
-		A854EBA715D92E46008D1FE5 /* control */ = {
+		A818A4DD15E652EC00E44E91 /* control */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBA815D92E46008D1FE5 /* plonk_EnvelopeChannel.h */,
+				A818A4DE15E652EC00E44E91 /* plonk_EnvelopeChannel.h */,
 			);
 			path = control;
 			sourceTree = "<group>";
 		};
-		A854EBA915D92E46008D1FE5 /* converters */ = {
+		A818A4DF15E652EC00E44E91 /* converters */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBAA15D92E46008D1FE5 /* plonk_OverlapMakeChannel.h */,
-				A854EBAB15D92E46008D1FE5 /* plonk_OverlapMixChannel.h */,
-				A854EBAC15D92E46008D1FE5 /* plonk_ResampleChannel.h */,
-				A854EBAD15D92E46008D1FE5 /* plonk_TypeChannel.h */,
+				A818A4E015E652EC00E44E91 /* plonk_OverlapMakeChannel.h */,
+				A818A4E115E652EC00E44E91 /* plonk_OverlapMixChannel.h */,
+				A818A4E215E652EC00E44E91 /* plonk_ResampleChannel.h */,
+				A818A4E315E652EC00E44E91 /* plonk_TypeChannel.h */,
 			);
 			path = converters;
 			sourceTree = "<group>";
 		};
-		A854EBAE15D92E46008D1FE5 /* delay */ = {
+		A818A4E415E652EC00E44E91 /* delay */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBAF15D92E46008D1FE5 /* plonk_Delay1Param.h */,
-				A854EBB015D92E46008D1FE5 /* plonk_Delay2Param.h */,
-				A854EBB115D92E46008D1FE5 /* plonk_Delay3Param.h */,
-				A854EBB215D92E46008D1FE5 /* plonk_Delay4Param.h */,
-				A854EBB315D92E46008D1FE5 /* plonk_DelayBase.h */,
-				A854EBB415D92E46008D1FE5 /* plonk_DelayFormAllpassDecay.h */,
-				A854EBB515D92E46008D1FE5 /* plonk_DelayFormAllpassFFFB.h */,
-				A854EBB615D92E46008D1FE5 /* plonk_DelayFormCombDecay.h */,
-				A854EBB715D92E46008D1FE5 /* plonk_DelayFormCombFB.h */,
-				A854EBB815D92E46008D1FE5 /* plonk_DelayFormCombFilter1Param.h */,
-				A854EBB915D92E46008D1FE5 /* plonk_DelayFormDelay.h */,
-				A854EBBA15D92E47008D1FE5 /* plonk_DelayForms.h */,
-				A854EBBB15D92E47008D1FE5 /* plonk_DelayForwardDeclarations.h */,
-				A854EBBC15D92E47008D1FE5 /* plonk_DelayTypes.cpp */,
-				A854EBBD15D92E47008D1FE5 /* plonk_DelayTypes.h */,
+				A818A4E515E652EC00E44E91 /* plonk_Delay1Param.h */,
+				A818A4E615E652EC00E44E91 /* plonk_Delay2Param.h */,
+				A818A4E715E652EC00E44E91 /* plonk_Delay3Param.h */,
+				A818A4E815E652EC00E44E91 /* plonk_Delay4Param.h */,
+				A818A4E915E652EC00E44E91 /* plonk_DelayBase.h */,
+				A818A4EA15E652EC00E44E91 /* plonk_DelayFormAllpassDecay.h */,
+				A818A4EB15E652EC00E44E91 /* plonk_DelayFormAllpassFFFB.h */,
+				A818A4EC15E652EC00E44E91 /* plonk_DelayFormCombDecay.h */,
+				A818A4ED15E652EC00E44E91 /* plonk_DelayFormCombFB.h */,
+				A818A4EE15E652EC00E44E91 /* plonk_DelayFormCombFilter1Param.h */,
+				A818A4EF15E652EC00E44E91 /* plonk_DelayFormDelay.h */,
+				A818A4F015E652EC00E44E91 /* plonk_DelayForms.h */,
+				A818A4F115E652EC00E44E91 /* plonk_DelayForwardDeclarations.h */,
+				A818A4F215E652EC00E44E91 /* plonk_DelayTypes.cpp */,
+				A818A4F315E652EC00E44E91 /* plonk_DelayTypes.h */,
 			);
 			path = delay;
 			sourceTree = "<group>";
 		};
-		A854EBBE15D92E47008D1FE5 /* fft */ = {
+		A818A4F415E652EC00E44E91 /* fft */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBBF15D92E47008D1FE5 /* plonk_FFTChannel.h */,
-				A854EBC015D92E47008D1FE5 /* plonk_IFFTChannel.h */,
+				A818A4F515E652EC00E44E91 /* plonk_FFTChannel.h */,
+				A818A4F615E652EC00E44E91 /* plonk_IFFTChannel.h */,
 			);
 			path = fft;
 			sourceTree = "<group>";
 		};
-		A854EBC115D92E47008D1FE5 /* filters */ = {
+		A818A4F715E652EC00E44E91 /* filters */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBC215D92E47008D1FE5 /* plonk_Filter.h */,
-				A854EBC315D92E47008D1FE5 /* plonk_FilterCoeffs1Param.h */,
-				A854EBC415D92E47008D1FE5 /* plonk_FilterCoeffs2Param.h */,
-				A854EBC515D92E47008D1FE5 /* plonk_FilterCoeffs3Param.h */,
-				A854EBC615D92E47008D1FE5 /* plonk_FilterForms.h */,
-				A854EBC715D92E47008D1FE5 /* plonk_FilterForwardDeclarations.h */,
-				A854EBC815D92E47008D1FE5 /* plonk_FilterShapes.h */,
-				A854EBC915D92E47008D1FE5 /* plonk_FilterShortcuts.h */,
-				A854EBCA15D92E47008D1FE5 /* plonk_FilterTypes.cpp */,
-				A854EBCB15D92E47008D1FE5 /* plonk_FilterTypes.h */,
-				A854EBCC15D92E47008D1FE5 /* shapes */,
+				A818A4F815E652EC00E44E91 /* plonk_Filter.h */,
+				A818A4F915E652EC00E44E91 /* plonk_FilterCoeffs1Param.h */,
+				A818A4FA15E652EC00E44E91 /* plonk_FilterCoeffs2Param.h */,
+				A818A4FB15E652EC00E44E91 /* plonk_FilterCoeffs3Param.h */,
+				A818A4FC15E652EC00E44E91 /* plonk_FilterForms.h */,
+				A818A4FD15E652EC00E44E91 /* plonk_FilterForwardDeclarations.h */,
+				A818A4FE15E652EC00E44E91 /* plonk_FilterShapes.h */,
+				A818A4FF15E652EC00E44E91 /* plonk_FilterShortcuts.h */,
+				A818A50015E652EC00E44E91 /* plonk_FilterTypes.cpp */,
+				A818A50115E652EC00E44E91 /* plonk_FilterTypes.h */,
+				A818A50215E652EC00E44E91 /* shapes */,
 			);
 			path = filters;
 			sourceTree = "<group>";
 		};
-		A854EBCC15D92E47008D1FE5 /* shapes */ = {
+		A818A50215E652EC00E44E91 /* shapes */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBCD15D92E47008D1FE5 /* plonk_FilterShapesB.h */,
-				A854EBCE15D92E47008D1FE5 /* plonk_FilterShapesP2Z2.h */,
-				A854EBCF15D92E47008D1FE5 /* plonk_FilterShapesSimple.h */,
+				A818A50315E652EC00E44E91 /* plonk_FilterShapesB.h */,
+				A818A50415E652EC00E44E91 /* plonk_FilterShapesP2Z2.h */,
+				A818A50515E652EC00E44E91 /* plonk_FilterShapesSimple.h */,
 			);
 			path = shapes;
 			sourceTree = "<group>";
 		};
-		A854EBD015D92E47008D1FE5 /* generators */ = {
+		A818A50615E652EC00E44E91 /* generators */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBD115D92E47008D1FE5 /* plonk_Saw.h */,
-				A854EBD215D92E47008D1FE5 /* plonk_SignalPlay.h */,
-				A854EBD315D92E47008D1FE5 /* plonk_Table.h */,
-				A854EBD415D92E47008D1FE5 /* plonk_WhiteNoise.h */,
+				A818A50715E652EC00E44E91 /* plonk_Saw.h */,
+				A818A50815E652EC00E44E91 /* plonk_SignalPlay.h */,
+				A818A50915E652EC00E44E91 /* plonk_Table.h */,
+				A818A50A15E652EC00E44E91 /* plonk_WhiteNoise.h */,
 			);
 			path = generators;
 			sourceTree = "<group>";
 		};
-		A854EBD515D92E47008D1FE5 /* info */ = {
+		A818A50B15E652EC00E44E91 /* info */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBD615D92E47008D1FE5 /* plonk_InfoHeaders.h */,
-				A854EBD715D92E47008D1FE5 /* plonk_IOInfo.cpp */,
-				A854EBD815D92E47008D1FE5 /* plonk_IOInfo.h */,
-				A854EBD915D92E47008D1FE5 /* plonk_IOKey.cpp */,
-				A854EBDA15D92E47008D1FE5 /* plonk_IOKey.h */,
-				A854EBDB15D92E47008D1FE5 /* plonk_IOLimit.cpp */,
-				A854EBDC15D92E47008D1FE5 /* plonk_IOLimit.h */,
-				A854EBDD15D92E47008D1FE5 /* plonk_Measure.cpp */,
-				A854EBDE15D92E47008D1FE5 /* plonk_Measure.h */,
-				A854EBDF15D92E47008D1FE5 /* plonk_UnitInfo.cpp */,
-				A854EBE015D92E47008D1FE5 /* plonk_UnitInfo.h */,
+				A818A50C15E652EC00E44E91 /* plonk_InfoHeaders.h */,
+				A818A50D15E652EC00E44E91 /* plonk_IOInfo.cpp */,
+				A818A50E15E652EC00E44E91 /* plonk_IOInfo.h */,
+				A818A50F15E652EC00E44E91 /* plonk_IOKey.cpp */,
+				A818A51015E652EC00E44E91 /* plonk_IOKey.h */,
+				A818A51115E652EC00E44E91 /* plonk_IOLimit.cpp */,
+				A818A51215E652EC00E44E91 /* plonk_IOLimit.h */,
+				A818A51315E652EC00E44E91 /* plonk_Measure.cpp */,
+				A818A51415E652EC00E44E91 /* plonk_Measure.h */,
+				A818A51515E652EC00E44E91 /* plonk_UnitInfo.cpp */,
+				A818A51615E652EC00E44E91 /* plonk_UnitInfo.h */,
 			);
 			path = info;
 			sourceTree = "<group>";
 		};
-		A854EBE315D92E47008D1FE5 /* simple */ = {
+		A818A51915E652EC00E44E91 /* simple */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBE415D92E47008D1FE5 /* plonk_AtomicVariableChannel.h */,
-				A854EBE515D92E47008D1FE5 /* plonk_BinaryOpChannel.h */,
-				A854EBE615D92E47008D1FE5 /* plonk_BinaryOpPlink.h */,
-				A854EBE715D92E47008D1FE5 /* plonk_BlockChannel.h */,
-				A854EBE815D92E47008D1FE5 /* plonk_BusReadChannel.h */,
-				A854EBE915D92E47008D1FE5 /* plonk_BusWriteChannel.h */,
-				A854EBEA15D92E47008D1FE5 /* plonk_ConstantChannel.h */,
-				A854EBEB15D92E47008D1FE5 /* plonk_LinearPanChannel.h */,
-				A854EBEC15D92E47008D1FE5 /* plonk_Mixers.h */,
-				A854EBED15D92E47008D1FE5 /* plonk_PatchChannel.h */,
-				A854EBEE15D92E47008D1FE5 /* plonk_UnaryOpChannel.h */,
-				A854EBEF15D92E47008D1FE5 /* plonk_UnaryOpPlink.h */,
-				A854EBF015D92E47008D1FE5 /* plonk_VariableChannel.h */,
+				A818A51A15E652EC00E44E91 /* plonk_AtomicVariableChannel.h */,
+				A818A51B15E652EC00E44E91 /* plonk_BinaryOpChannel.h */,
+				A818A51C15E652EC00E44E91 /* plonk_BinaryOpPlink.h */,
+				A818A51D15E652EC00E44E91 /* plonk_BlockChannel.h */,
+				A818A51E15E652EC00E44E91 /* plonk_BusReadChannel.h */,
+				A818A51F15E652EC00E44E91 /* plonk_BusWriteChannel.h */,
+				A818A52015E652EC00E44E91 /* plonk_ConstantChannel.h */,
+				A818A52115E652EC00E44E91 /* plonk_LinearPanChannel.h */,
+				A818A52215E652EC00E44E91 /* plonk_Mixers.h */,
+				A818A52315E652EC00E44E91 /* plonk_PatchChannel.h */,
+				A818A52415E652EC00E44E91 /* plonk_UnaryOpChannel.h */,
+				A818A52515E652EC00E44E91 /* plonk_UnaryOpPlink.h */,
+				A818A52615E652EC00E44E91 /* plonk_VariableChannel.h */,
 			);
 			path = simple;
 			sourceTree = "<group>";
 		};
-		A854EBF115D92E47008D1FE5 /* utility */ = {
+		A818A52715E652EC00E44E91 /* utility */ = {
 			isa = PBXGroup;
 			children = (
-				A854EBF215D92E47008D1FE5 /* plonk_BlockSize.cpp */,
-				A854EBF315D92E47008D1FE5 /* plonk_BlockSize.h */,
-				A854EBF415D92E47008D1FE5 /* plonk_Bus.h */,
-				A854EBF515D92E47008D1FE5 /* plonk_InputDictionary.cpp */,
-				A854EBF615D92E47008D1FE5 /* plonk_InputDictionary.h */,
-				A854EBF715D92E47008D1FE5 /* plonk_ProcessInfo.cpp */,
-				A854EBF815D92E47008D1FE5 /* plonk_ProcessInfo.h */,
-				A854EBF915D92E47008D1FE5 /* plonk_ProcessInfoInternal.cpp */,
-				A854EBFA15D92E47008D1FE5 /* plonk_ProcessInfoInternal.h */,
-				A854EBFB15D92E47008D1FE5 /* plonk_SampleRate.cpp */,
-				A854EBFC15D92E47008D1FE5 /* plonk_SampleRate.h */,
-				A854EBFD15D92E47008D1FE5 /* plonk_TimeStamp.cpp */,
-				A854EBFE15D92E47008D1FE5 /* plonk_TimeStamp.h */,
+				A818A52815E652EC00E44E91 /* plonk_BlockSize.cpp */,
+				A818A52915E652EC00E44E91 /* plonk_BlockSize.h */,
+				A818A52A15E652EC00E44E91 /* plonk_Bus.h */,
+				A818A52B15E652EC00E44E91 /* plonk_InputDictionary.cpp */,
+				A818A52C15E652EC00E44E91 /* plonk_InputDictionary.h */,
+				A818A52D15E652EC00E44E91 /* plonk_ProcessInfo.cpp */,
+				A818A52E15E652EC00E44E91 /* plonk_ProcessInfo.h */,
+				A818A52F15E652EC00E44E91 /* plonk_ProcessInfoInternal.cpp */,
+				A818A53015E652EC00E44E91 /* plonk_ProcessInfoInternal.h */,
+				A818A53115E652EC00E44E91 /* plonk_SampleRate.cpp */,
+				A818A53215E652EC00E44E91 /* plonk_SampleRate.h */,
+				A818A53315E652EC00E44E91 /* plonk_TimeStamp.cpp */,
+				A818A53415E652EC00E44E91 /* plonk_TimeStamp.h */,
 			);
 			path = utility;
 			sourceTree = "<group>";
 		};
-		A854EBFF15D92E47008D1FE5 /* hosts */ = {
+		A818A53515E652EC00E44E91 /* hosts */ = {
 			isa = PBXGroup;
 			children = (
-				A854EC0015D92E47008D1FE5 /* ios */,
-				A854EC0315D92E47008D1FE5 /* juce */,
-				A854EC0615D92E47008D1FE5 /* plonk_AudioHostBase.h */,
-				A854EC0715D92E47008D1FE5 /* portaudio */,
+				A818A53615E652EC00E44E91 /* ios */,
+				A818A53915E652EC00E44E91 /* juce */,
+				A818A53C15E652EC00E44E91 /* plonk_AudioHostBase.h */,
+				A818A53D15E652EC00E44E91 /* portaudio */,
 			);
 			path = hosts;
 			sourceTree = "<group>";
 		};
-		A854EC0015D92E47008D1FE5 /* ios */ = {
+		A818A53615E652EC00E44E91 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				A854EC0115D92E47008D1FE5 /* plonk_IOSAudioHost.h */,
-				A854EC0215D92E47008D1FE5 /* plonk_IOSAudioHost.mm */,
+				A818A53715E652EC00E44E91 /* plonk_IOSAudioHost.h */,
+				A818A53815E652EC00E44E91 /* plonk_IOSAudioHost.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
 		};
-		A854EC0315D92E47008D1FE5 /* juce */ = {
+		A818A53915E652EC00E44E91 /* juce */ = {
 			isa = PBXGroup;
 			children = (
-				A854EC0415D92E47008D1FE5 /* plonk_JuceAudioHost.cpp */,
-				A854EC0515D92E47008D1FE5 /* plonk_JuceAudioHost.h */,
+				A818A53A15E652EC00E44E91 /* plonk_JuceAudioHost.cpp */,
+				A818A53B15E652EC00E44E91 /* plonk_JuceAudioHost.h */,
 			);
 			path = juce;
 			sourceTree = "<group>";
 		};
-		A854EC0715D92E47008D1FE5 /* portaudio */ = {
+		A818A53D15E652EC00E44E91 /* portaudio */ = {
 			isa = PBXGroup;
 			children = (
-				A854EC0815D92E47008D1FE5 /* plonk_PortAudioAudioHost.cpp */,
-				A854EC0915D92E47008D1FE5 /* plonk_PortAudioAudioHost.h */,
+				A818A53E15E652EC00E44E91 /* plonk_PortAudioAudioHost.cpp */,
+				A818A53F15E652EC00E44E91 /* plonk_PortAudioAudioHost.h */,
 			);
 			path = portaudio;
 			sourceTree = "<group>";
 		};
-		A854EC0A15D92E47008D1FE5 /* maths */ = {
+		A818A54015E652EC00E44E91 /* maths */ = {
 			isa = PBXGroup;
 			children = (
-				A854EC0B15D92E47008D1FE5 /* plonk_Constants.h */,
-				A854EC0C15D92E47008D1FE5 /* plonk_Endian.h */,
-				A854EC0D15D92E47008D1FE5 /* plonk_InlineBinaryOps.h */,
-				A854EC0E15D92E47008D1FE5 /* plonk_InlineCommonOps.h */,
-				A854EC0F15D92E47008D1FE5 /* plonk_InlineMiscOps.h */,
-				A854EC1015D92E47008D1FE5 /* plonk_InlineUnaryOps.h */,
+				A818A54115E652EC00E44E91 /* plonk_Constants.h */,
+				A818A54215E652EC00E44E91 /* plonk_Endian.h */,
+				A818A54315E652EC00E44E91 /* plonk_InlineBinaryOps.h */,
+				A818A54415E652EC00E44E91 /* plonk_InlineCommonOps.h */,
+				A818A54515E652EC00E44E91 /* plonk_InlineMiscOps.h */,
+				A818A54615E652EC00E44E91 /* plonk_InlineUnaryOps.h */,
 			);
 			path = maths;
 			sourceTree = "<group>";
 		};
-		A854EC1215D92E47008D1FE5 /* random */ = {
+		A818A54815E652EC00E44E91 /* random */ = {
 			isa = PBXGroup;
 			children = (
-				A854EC1315D92E47008D1FE5 /* plonk_RNG.cpp */,
-				A854EC1415D92E47008D1FE5 /* plonk_RNG.h */,
+				A818A54915E652EC00E44E91 /* plonk_RNG.cpp */,
+				A818A54A15E652EC00E44E91 /* plonk_RNG.h */,
 			);
 			path = random;
 			sourceTree = "<group>";
@@ -1153,71 +1163,73 @@
 				A80D17DA1585EAB500AAB01B /* FirstViewController.mm in Sources */,
 				A80D17E11585EAB500AAB01B /* SecondViewController.mm in Sources */,
 				A80D19531587819500AAB01B /* AudioHost.mm in Sources */,
-				A854EC1515D92E47008D1FE5 /* plank_Atomic.c in Sources */,
-				A854EC1615D92E47008D1FE5 /* plank_DynamicArray.c in Sources */,
-				A854EC1715D92E47008D1FE5 /* plank_LockFreeDynamicArray.c in Sources */,
-				A854EC1815D92E47008D1FE5 /* plank_LockFreeLinkedListElement.c in Sources */,
-				A854EC1915D92E47008D1FE5 /* plank_LockFreeQueue.c in Sources */,
-				A854EC1A15D92E47008D1FE5 /* plank_LockFreeStack.c in Sources */,
-				A854EC1B15D92E47008D1FE5 /* plank_SimpleLinkedList.c in Sources */,
-				A854EC1C15D92E47008D1FE5 /* plank_SimpleLinkedListElement.c in Sources */,
-				A854EC1D15D92E47008D1FE5 /* plank_SimpleMap.c in Sources */,
-				A854EC1E15D92E47008D1FE5 /* plank_SimpleQueue.c in Sources */,
-				A854EC1F15D92E47008D1FE5 /* plank_SimpleStack.c in Sources */,
-				A854EC2015D92E47008D1FE5 /* plank_ThreadLocalStorage.c in Sources */,
-				A854EC2115D92E47008D1FE5 /* plank_Lock.c in Sources */,
-				A854EC2215D92E47008D1FE5 /* plank_LockFreeMemory.c in Sources */,
-				A854EC2315D92E47008D1FE5 /* plank_Memory.c in Sources */,
-				A854EC2415D92E47008D1FE5 /* plank_Result.c in Sources */,
-				A854EC2515D92E47008D1FE5 /* plank_Thread.c in Sources */,
-				A854EC2615D92E47008D1FE5 /* plank_FFTRealInternal.cpp in Sources */,
-				A854EC2715D92E47008D1FE5 /* plank_FFT.c in Sources */,
-				A854EC2815D92E47008D1FE5 /* plank_AudioFileCuePoint.c in Sources */,
-				A854EC2915D92E47008D1FE5 /* plank_AudioFileMetaData.c in Sources */,
-				A854EC2A15D92E47008D1FE5 /* plank_AudioFileReader.c in Sources */,
-				A854EC2B15D92E47008D1FE5 /* plank_AudioFileRegion.c in Sources */,
-				A854EC2C15D92E47008D1FE5 /* plank_AudioFileWriter.c in Sources */,
-				A854EC2D15D92E47008D1FE5 /* plank_File.c in Sources */,
-				A854EC2E15D92E47008D1FE5 /* plank_IffFileReader.c in Sources */,
-				A854EC2F15D92E47008D1FE5 /* plank_IffFileWriter.c in Sources */,
-				A854EC3015D92E47008D1FE5 /* plank_Maths.c in Sources */,
-				A854EC3115D92E47008D1FE5 /* plank_RNG.c in Sources */,
-				A854EC3215D92E47008D1FE5 /* plink_Saw.c in Sources */,
-				A854EC3315D92E47008D1FE5 /* plink_WhiteNoise.c in Sources */,
-				A854EC3415D92E47008D1FE5 /* plink_BinaryOpProcess.c in Sources */,
-				A854EC3515D92E47008D1FE5 /* plink_UnaryOpProcess.c in Sources */,
-				A854EC3615D92E47008D1FE5 /* plonk_DynamicContainer.cpp in Sources */,
-				A854EC3715D92E47008D1FE5 /* plonk_Int24.cpp in Sources */,
-				A854EC3815D92E47008D1FE5 /* plonk_ObjectMemoryDeferFree.cpp in Sources */,
-				A854EC3915D92E47008D1FE5 /* plonk_ObjectMemoryPools.cpp in Sources */,
-				A854EC3A15D92E47008D1FE5 /* plonk_Text.cpp in Sources */,
-				A854EC3B15D92E47008D1FE5 /* plonk_TextArray.cpp in Sources */,
-				A854EC3C15D92E47008D1FE5 /* plonk_Deleter.cpp in Sources */,
-				A854EC3D15D92E47008D1FE5 /* plonk_Lock.cpp in Sources */,
-				A854EC3E15D92E47008D1FE5 /* plonk_SmartPointer.cpp in Sources */,
-				A854EC3F15D92E47008D1FE5 /* plonk_Thread.cpp in Sources */,
-				A854EC4015D92E47008D1FE5 /* plonk_WeakPointer.cpp in Sources */,
-				A854EC4115D92E47008D1FE5 /* plonk_AudioFileReader.cpp in Sources */,
-				A854EC4215D92E47008D1FE5 /* plonk_BinaryFile.cpp in Sources */,
-				A854EC4315D92E47008D1FE5 /* plonk_TextFile.cpp in Sources */,
-				A854EC4415D92E47008D1FE5 /* plonk_ChannelInternalCore.cpp in Sources */,
-				A854EC4515D92E47008D1FE5 /* plonk_DelayTypes.cpp in Sources */,
-				A854EC4615D92E47008D1FE5 /* plonk_FilterTypes.cpp in Sources */,
-				A854EC4715D92E47008D1FE5 /* plonk_IOInfo.cpp in Sources */,
-				A854EC4815D92E47008D1FE5 /* plonk_IOKey.cpp in Sources */,
-				A854EC4915D92E47008D1FE5 /* plonk_IOLimit.cpp in Sources */,
-				A854EC4A15D92E47008D1FE5 /* plonk_Measure.cpp in Sources */,
-				A854EC4B15D92E47008D1FE5 /* plonk_UnitInfo.cpp in Sources */,
-				A854EC4C15D92E47008D1FE5 /* plonk_BlockSize.cpp in Sources */,
-				A854EC4D15D92E47008D1FE5 /* plonk_InputDictionary.cpp in Sources */,
-				A854EC4E15D92E47008D1FE5 /* plonk_ProcessInfo.cpp in Sources */,
-				A854EC4F15D92E47008D1FE5 /* plonk_ProcessInfoInternal.cpp in Sources */,
-				A854EC5015D92E47008D1FE5 /* plonk_SampleRate.cpp in Sources */,
-				A854EC5115D92E47008D1FE5 /* plonk_TimeStamp.cpp in Sources */,
-				A854EC5215D92E47008D1FE5 /* plonk_IOSAudioHost.mm in Sources */,
-				A854EC5315D92E47008D1FE5 /* plonk_JuceAudioHost.cpp in Sources */,
-				A854EC5415D92E47008D1FE5 /* plonk_PortAudioAudioHost.cpp in Sources */,
-				A854EC5515D92E47008D1FE5 /* plonk_RNG.cpp in Sources */,
+				A818A54B15E652EC00E44E91 /* plank_Atomic.c in Sources */,
+				A818A54C15E652EC00E44E91 /* plank_DynamicArray.c in Sources */,
+				A818A54D15E652EC00E44E91 /* plank_LockFreeDynamicArray.c in Sources */,
+				A818A54E15E652EC00E44E91 /* plank_LockFreeLinkedListElement.c in Sources */,
+				A818A54F15E652EC00E44E91 /* plank_LockFreeQueue.c in Sources */,
+				A818A55015E652EC00E44E91 /* plank_LockFreeStack.c in Sources */,
+				A818A55115E652EC00E44E91 /* plank_SimpleLinkedList.c in Sources */,
+				A818A55215E652EC00E44E91 /* plank_SimpleLinkedListElement.c in Sources */,
+				A818A55315E652EC00E44E91 /* plank_SimpleMap.c in Sources */,
+				A818A55415E652EC00E44E91 /* plank_SimpleQueue.c in Sources */,
+				A818A55515E652EC00E44E91 /* plank_SimpleStack.c in Sources */,
+				A818A55615E652EC00E44E91 /* plank_ThreadLocalStorage.c in Sources */,
+				A818A55715E652EC00E44E91 /* plank_Lock.c in Sources */,
+				A818A55815E652EC00E44E91 /* plank_LockFreeMemory.c in Sources */,
+				A818A55915E652EC00E44E91 /* plank_Memory.c in Sources */,
+				A818A55A15E652EC00E44E91 /* plank_Result.c in Sources */,
+				A818A55B15E652EC00E44E91 /* plank_SpinLock.c in Sources */,
+				A818A55C15E652EC00E44E91 /* plank_Thread.c in Sources */,
+				A818A55D15E652EC00E44E91 /* plank_ThreadSpinLock.c in Sources */,
+				A818A55E15E652EC00E44E91 /* plank_FFTRealInternal.cpp in Sources */,
+				A818A55F15E652EC00E44E91 /* plank_FFT.c in Sources */,
+				A818A56015E652EC00E44E91 /* plank_AudioFileCuePoint.c in Sources */,
+				A818A56115E652EC00E44E91 /* plank_AudioFileMetaData.c in Sources */,
+				A818A56215E652EC00E44E91 /* plank_AudioFileReader.c in Sources */,
+				A818A56315E652EC00E44E91 /* plank_AudioFileRegion.c in Sources */,
+				A818A56415E652EC00E44E91 /* plank_AudioFileWriter.c in Sources */,
+				A818A56515E652EC00E44E91 /* plank_File.c in Sources */,
+				A818A56615E652EC00E44E91 /* plank_IffFileReader.c in Sources */,
+				A818A56715E652EC00E44E91 /* plank_IffFileWriter.c in Sources */,
+				A818A56815E652EC00E44E91 /* plank_Maths.c in Sources */,
+				A818A56915E652EC00E44E91 /* plank_RNG.c in Sources */,
+				A818A56A15E652EC00E44E91 /* plink_Saw.c in Sources */,
+				A818A56B15E652EC00E44E91 /* plink_WhiteNoise.c in Sources */,
+				A818A56C15E652EC00E44E91 /* plink_BinaryOpProcess.c in Sources */,
+				A818A56D15E652EC00E44E91 /* plink_UnaryOpProcess.c in Sources */,
+				A818A56E15E652EC00E44E91 /* plonk_DynamicContainer.cpp in Sources */,
+				A818A56F15E652EC00E44E91 /* plonk_Int24.cpp in Sources */,
+				A818A57015E652EC00E44E91 /* plonk_ObjectMemoryDeferFree.cpp in Sources */,
+				A818A57115E652EC00E44E91 /* plonk_ObjectMemoryPools.cpp in Sources */,
+				A818A57215E652EC00E44E91 /* plonk_Text.cpp in Sources */,
+				A818A57315E652EC00E44E91 /* plonk_TextArray.cpp in Sources */,
+				A818A57415E652EC00E44E91 /* plonk_Deleter.cpp in Sources */,
+				A818A57515E652EC00E44E91 /* plonk_Lock.cpp in Sources */,
+				A818A57615E652EC00E44E91 /* plonk_SmartPointer.cpp in Sources */,
+				A818A57715E652EC00E44E91 /* plonk_Thread.cpp in Sources */,
+				A818A57815E652EC00E44E91 /* plonk_WeakPointer.cpp in Sources */,
+				A818A57915E652EC00E44E91 /* plonk_AudioFileReader.cpp in Sources */,
+				A818A57A15E652EC00E44E91 /* plonk_BinaryFile.cpp in Sources */,
+				A818A57B15E652EC00E44E91 /* plonk_TextFile.cpp in Sources */,
+				A818A57C15E652EC00E44E91 /* plonk_ChannelInternalCore.cpp in Sources */,
+				A818A57D15E652EC00E44E91 /* plonk_DelayTypes.cpp in Sources */,
+				A818A57E15E652EC00E44E91 /* plonk_FilterTypes.cpp in Sources */,
+				A818A57F15E652EC00E44E91 /* plonk_IOInfo.cpp in Sources */,
+				A818A58015E652EC00E44E91 /* plonk_IOKey.cpp in Sources */,
+				A818A58115E652EC00E44E91 /* plonk_IOLimit.cpp in Sources */,
+				A818A58215E652EC00E44E91 /* plonk_Measure.cpp in Sources */,
+				A818A58315E652EC00E44E91 /* plonk_UnitInfo.cpp in Sources */,
+				A818A58415E652EC00E44E91 /* plonk_BlockSize.cpp in Sources */,
+				A818A58515E652EC00E44E91 /* plonk_InputDictionary.cpp in Sources */,
+				A818A58615E652EC00E44E91 /* plonk_ProcessInfo.cpp in Sources */,
+				A818A58715E652EC00E44E91 /* plonk_ProcessInfoInternal.cpp in Sources */,
+				A818A58815E652EC00E44E91 /* plonk_SampleRate.cpp in Sources */,
+				A818A58915E652EC00E44E91 /* plonk_TimeStamp.cpp in Sources */,
+				A818A58A15E652EC00E44E91 /* plonk_IOSAudioHost.mm in Sources */,
+				A818A58B15E652EC00E44E91 /* plonk_JuceAudioHost.cpp in Sources */,
+				A818A58C15E652EC00E44E91 /* plonk_PortAudioAudioHost.cpp in Sources */,
+				A818A58D15E652EC00E44E91 /* plonk_RNG.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

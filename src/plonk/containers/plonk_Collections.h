@@ -434,85 +434,157 @@ public:
 
 ///-----------------------------------------------------------------------------
 
-/** Thread-safe access to another container.
- The SmartPointerContainer and ScopedPointerContainer are thread-safe in terms
- of copying the object but not actions on the object. This class holds another
- container object and ensures thread-safe manipulations on the object. 
- The container must respond to the -> operator and implement copy() which
- should return a deep object of the object. */
-template<class Container, int NumThreads>
-class ThreadSafeAccess
-{
-public:
-    typedef typename Container::Internal ContainerInternal;
-    typedef ObjectArray<Container> Containers;
-    typedef AtomicValue<Threading::ID> AtomicThreadID;
-    typedef ObjectArray<AtomicThreadID> Threads;
-    
-    ThreadSafeAccess() throw()
-    :   containers (Containers::withSize (NumThreads)),
-        threads (Threads::withSize(NumThreads))
-    {
-        clearThreads();
-        threads.atUnchecked (0) = Threading::getCurrentThreadID();
-    }
-    
-    ~ThreadSafeAccess()
-    {
-    }
-    
-    explicit ThreadSafeAccess (Container const& initialValue) throw()
-    :   containers (Containers::withSize (NumThreads)),
-        threads (Threads::withSize(NumThreads))
-    {        
-        for (int i = 0; i < NumThreads; ++i)
-            containers.atUnchecked (i) = initialValue.copy();
-        
-        clearThreads();
-        threads.atUnchecked (0) = Threading::getCurrentThreadID();
-    }
-    
-    Container operator->() throw() 
-    { 
-        const Threading::ID threadID = Threading::getCurrentThreadID();
-        
-        if (threads.contains (threadID))
-        {
-            return containers.atUnchecked (threads.indexOf (threadID));
-        }
-        else 
-        {
-            AtomicThreadID* const ids = threads.getArray();
-            
-            for (int i = 0; i < NumThreads; ++i)
-                if (ids[i].compareAndSwap (0, threadID))
-                    return containers.atUnchecked (i);
-        }
-        
-        plonk_assertfalse; // too many threads trying to access the data
-        return Container::getNull();
-    }
-    
-    void releaseThread() throw()
-    {
-        const Threading::ID threadID = Threading::getCurrentThreadID();
-        AtomicThreadID* const ids = threads.getArray();
+///** Thread-safe access to another container.
+// The SmartPointerContainer and ScopedPointerContainer are thread-safe in terms
+// of copying the object but not actions on the object. This class holds another
+// container object and ensures thread-safe manipulations on the object. 
+// The container must respond to the -> operator and implement copy() which
+// should return a deep object of the object. */
+//
+//template<class Container>
+//class ThreadSafeAccess
+//{
+//public:
+//    typedef typename Container::Internal ContainerInternal;
+//
+//    ThreadSafeAccess() throw()
+//    {
+//    }
+//    
+//    ~ThreadSafeAccess()
+//    {
+//    }
+//    
+//    explicit ThreadSafeAccess (Container const& initialValue) throw()
+//    :   read (initialValue.copy()), 
+//        write (initialValue.copy())
+//    {        
+//    }
+//    
+//    const Container& getRead() throw() 
+//    { 
+//        return read;
+//    }
+//    
+//    bool checkout() throw()
+//    {
+//        const Threading::ID threadID = Threading::getCurrentThreadID();
+//        
+//        if (writingThread.compareAndSwap (0, threadID))
+//        {
+//            write = read.copy();
+//            return true;
+//        }
+//        
+//        return false;
+//    }
+//        
+//    bool commit() throw()
+//    {
+//        const Threading::ID threadID = Threading::getCurrentThreadID();
+//
+//        if (writingThread == threadID)
+//        {
+//            read.swapWith (write);
+//            writingThread = 0;
+//            return true;
+//        }
+//        
+//        return false;
+//    }
+//    
+//    Container operator->() throw() 
+//    {   
+//        plonk_assert (writingThread == Threading::getCurrentThreadID());
+//        return write;
+//    }
+//    
+//    const Container& operator*() const throw() 
+//    {   
+//        return read;
+//    }
+//
+//
+//    
+//private:
+//    Container read;
+//    Container write;
+//    AtomicValue<Threading::ID> writingThread;
+//};
 
-        for (int i = 0; i < NumThreads; ++i)
-            if (ids[i].compareAndSwap (threadID, 0))
-                return;
-    }
-    
-private:
-    Containers containers;
-    Threads threads;
-    
-    void clearThreads() throw()
-    {
-        for (int i = 0; i < NumThreads; ++i)
-            threads.atUnchecked (i) = 0;
-    }
-};
+//template<class Container, int NumThreads>
+//class ThreadSafeAccess
+//{
+//public:
+//    typedef typename Container::Internal ContainerInternal;
+//    typedef ObjectArray<Container> Containers;
+//    typedef AtomicValue<Threading::ID> AtomicThreadID;
+//    typedef ObjectArray<AtomicThreadID> Threads;
+//    
+//    ThreadSafeAccess() throw()
+//    :   containers (Containers::withSize (NumThreads)),
+//        threads (Threads::withSize (NumThreads))
+//    {
+//        clearThreads();
+//        threads.atUnchecked (0) = Threading::getCurrentThreadID();
+//    }
+//    
+//    ~ThreadSafeAccess()
+//    {
+//    }
+//    
+//    explicit ThreadSafeAccess (Container const& initialValue) throw()
+//    :   containers (Containers::withSize (NumThreads)),
+//        threads (Threads::withSize (NumThreads))
+//    {        
+//        for (int i = 0; i < NumThreads; ++i)
+//            containers.atUnchecked (i) = initialValue.copy();
+//        
+//        clearThreads();
+//        threads.atUnchecked (0) = Threading::getCurrentThreadID();
+//    }
+//    
+//    Container operator->() throw() 
+//    { 
+//        const Threading::ID threadID = Threading::getCurrentThreadID();
+//        
+//        if (threads.contains (threadID))
+//        {
+//            return containers.atUnchecked (threads.indexOf (threadID));
+//        }
+//        else 
+//        {
+//            AtomicThreadID* const ids = threads.getArray();
+//            
+//            for (int i = 0; i < NumThreads; ++i)
+//                if (ids[i].compareAndSwap (0, threadID))
+//                    return containers.atUnchecked (i);
+//        }
+//        
+//        plonk_assertfalse; // too many threads trying to access the data
+//        return Container::getNull();
+//    }
+//    
+//    void releaseThread() throw()
+//    {
+//        const Threading::ID threadID = Threading::getCurrentThreadID();
+//        AtomicThreadID* const ids = threads.getArray();
+//
+//        for (int i = 0; i < NumThreads; ++i)
+//            if (ids[i].compareAndSwap (threadID, 0))
+//                return;
+//    }
+//    
+//private:
+//    Containers containers;
+//    Threads threads;
+//    
+//    void clearThreads() throw()
+//    {
+//        for (int i = 0; i < NumThreads; ++i)
+//            threads.atUnchecked (i) = 0;
+//    }
+//};
 
 
 

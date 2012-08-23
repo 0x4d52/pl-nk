@@ -656,7 +656,7 @@ public:
 	}
 	
 	/** Adds several items in-place. */
-	ObjectArray<ObjectType>& addAll (ObjectArray<ObjectType> const& other) throw()
+	ObjectArray<ObjectType>& add (ObjectArray<ObjectType> const& other) throw() // had changed to addAll but caused other errors. add is nice polymorphism!
 	{
         this->getInternal()->add (other.length(), other.getArray()); 
 		return *this;

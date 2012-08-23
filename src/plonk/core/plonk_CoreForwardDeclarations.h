@@ -49,7 +49,6 @@ template<class OriginalType>                        class WeakPointerContainer;
 template<class SmartPointerType>                    class SmartPointerContainerBase;
 template<class SmartPointerType,
          bool enableWeak = true>                    class SmartPointerContainer;
-template<class Container, int NumThreads = 2>       class ThreadSafeAccess;
 template<class SenderContainerBaseType>             class ReceiverInternal;
 template<class ReceiverInternalType>                class ReceiverContainer;
 template<class SenderContainerBaseType>             class SenderInternal;
