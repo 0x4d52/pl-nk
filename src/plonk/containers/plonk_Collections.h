@@ -446,12 +446,15 @@ class ThreadSafeAccess
 public:
     typedef typename Container::Internal ContainerInternal;
     typedef ObjectArray<Container> Containers;
+    typedef AtomicValue<Threading::ID> AtomicThreadID;
+    typedef ObjectArray<AtomicThreadID> Threads;
     
     ThreadSafeAccess() throw()
-    :   containers (Containers::withSize (NumThreads))
+    :   containers (Containers::withSize (NumThreads)),
+        threads (Threads::withSize(NumThreads))
     {
         clearThreads();
-        threads[0] = Threading::getCurrentThreadID();
+        threads.atUnchecked (0) = Threading::getCurrentThreadID();
     }
     
     ~ThreadSafeAccess()
@@ -459,28 +462,55 @@ public:
     }
     
     explicit ThreadSafeAccess (Container const& initialValue) throw()
-    :   containers (Containers::withSize (NumThreads))
+    :   containers (Containers::withSize (NumThreads)),
+        threads (Threads::withSize(NumThreads))
     {        
         for (int i = 0; i < NumThreads; ++i)
             containers.atUnchecked (i) = initialValue.copy();
         
         clearThreads();
-        threads[0] = Threading::getCurrentThreadID();
+        threads.atUnchecked (0) = Threading::getCurrentThreadID();
     }
     
     Container operator->() throw() 
     { 
-        return containers[0];
+        const Threading::ID threadID = Threading::getCurrentThreadID();
+        
+        if (threads.contains (threadID))
+        {
+            return containers.atUnchecked (threads.indexOf (threadID));
+        }
+        else 
+        {
+            AtomicThreadID* const ids = threads.getArray();
+            
+            for (int i = 0; i < NumThreads; ++i)
+                if (ids[i].compareAndSwap (0, threadID))
+                    return containers.atUnchecked (i);
+        }
+        
+        plonk_assertfalse; // too many threads trying to access the data
+        return Container::getNull();
+    }
+    
+    void releaseThread() throw()
+    {
+        const Threading::ID threadID = Threading::getCurrentThreadID();
+        AtomicThreadID* const ids = threads.getArray();
+
+        for (int i = 0; i < NumThreads; ++i)
+            if (ids[i].compareAndSwap (threadID, 0))
+                return;
     }
     
 private:
     Containers containers;
-    Threading::ID threads[NumThreads];
+    Threads threads;
     
     void clearThreads() throw()
     {
         for (int i = 0; i < NumThreads; ++i)
-            threads[i] = 0;
+            threads.atUnchecked (i) = 0;
     }
 };
 
