@@ -49,9 +49,9 @@
     return YES;
 }
 
--(IBAction)buttonTapped:(NSButton*)sender
+-(IBAction)buttonChanged:(NSButton*)sender
 {
-    host->trigger();
+    host->setGate ([sender intValue] == 1 ? true : false);
 }
 
 

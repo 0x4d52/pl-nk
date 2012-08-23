@@ -50,10 +50,14 @@ public:
     ~AudioHost();
     
     Unit constructGraph();
-    void trigger() throw();
+    
+    void setGate (const bool state) throw();// { gate.setValue (state ? 1.f : 0.f); }
     
 private:
+//    MyThread* thread1;
+//    MyThread* thread2;
     UnitVariable src;
+    AtomicFloatVariable gate;
 };
 
 #endif // AUDIOHOST_H
