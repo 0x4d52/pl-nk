@@ -191,7 +191,7 @@ class AtomicExtended : public AtomicBase<Type>
         inline const AtomTypeRef getAtomicRef() const { return const_cast<AtomTypeRef> (&atomic); }\
     private:\
         \
-        PLANK_ALIGN(8)\
+        PLONK_ALIGN(sizeof(AtomType))\
         AtomType atomic;\
     };
 
@@ -360,7 +360,7 @@ public:
     inline const PlankAtomicPRef getAtomicRef() const { return const_cast<PlankAtomicPRef> (&atomic); }
     
 private:
-    PLONK_ALIGN(8) 
+    PLONK_ALIGN(sizeof(PlankAtomicP)) 
     PlankAtomicP atomic;
 };
 
@@ -499,7 +499,7 @@ public:
     inline const PlankAtomicPRef getAtomicRef() const { return const_cast<PlankAtomicPRef> (&atomic); }
    
 private:
-    PLONK_ALIGN(8) 
+    PLONK_ALIGN(sizeof(PlankAtomicP)) 
     PlankAtomicP atomic;
 };
 
@@ -684,7 +684,7 @@ public:
     inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<PlankAtomicPXRef> (&atomic); }
     
 private:
-    PLONK_ALIGN(16) 
+    PLONK_ALIGN(sizeof(PlankAtomicPX)) 
     PlankAtomicPX atomic;
 };
 
@@ -823,7 +823,7 @@ public:
     inline const PlankAtomicLXRef getAtomicRef() const { return const_cast<PlankAtomicLXRef> (&atomic); }
     
 private:
-    PLONK_ALIGN(16) 
+    PLONK_ALIGN(sizeof(PlankAtomicLX)) 
     PlankAtomicLX atomic;
 };
 

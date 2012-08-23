@@ -90,6 +90,8 @@
 #define PLONK_WORDSIZE 8
 #endif
 
+#define PLONK_ALIGN(X) PLANK_ALIGN(X)
+
 #ifdef PLONK_USEPLINK
     #include "../../plink/plink.h"
 #endif

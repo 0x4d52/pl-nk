@@ -233,8 +233,8 @@ typedef struct PlankThread
     PlankThreadID threadID;
     PlankThreadFunction function;
     PLANK_ALIGN(16) PlankAtomicPX userDataAtom;
-    PLANK_ALIGN(16) PlankAtomicI shouldExitAtom;
-    PLANK_ALIGN(16) PlankAtomicI isRunningAtom;
+    PLANK_ALIGN(4) PlankAtomicI shouldExitAtom;
+    PLANK_ALIGN(4) PlankAtomicI isRunningAtom;
     char name[PLANK_THREAD_MAXNAMELENGTH];
 } PlankThread;
 #endif

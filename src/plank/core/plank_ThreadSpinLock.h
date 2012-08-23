@@ -107,7 +107,7 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankThreadSpinLock
 {
-    PLANK_ALIGN(16) PlankAtomicL flag;
+    PLANK_ALIGN(8) PlankAtomicL flag;
 } PlankThreadSpinLock;
 #endif
 
