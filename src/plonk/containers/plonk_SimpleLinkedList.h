@@ -518,7 +518,7 @@ public:
         return this->getInternal()->size();
     }
     
-    PLONK_OBJECTARROWOPERATOR(SimpleLinkedList)
+    PLONK_OBJECTARROWOPERATOR(SimpleLinkedList);
 
 };
 

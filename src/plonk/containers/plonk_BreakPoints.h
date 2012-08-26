@@ -158,7 +158,7 @@ public:
         return gate ? this->getNextGateOn() : this->getNextGateOff();
     }
 
-    PLONK_OBJECTARROWOPERATOR(BreakpointBase)
+    PLONK_OBJECTARROWOPERATOR(BreakpointBase);
 
 };
 
@@ -357,7 +357,7 @@ public:
         return this->getInternal()->getBreakpoints().atUnchecked (index);
     }
     
-    PLONK_OBJECTARROWOPERATOR(BreakpointsBase)
+    PLONK_OBJECTARROWOPERATOR(BreakpointsBase);
 };
 
 

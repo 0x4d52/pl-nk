@@ -81,7 +81,7 @@ PlankThreadID pl_ThreadCurrentID()
 {
 #if PLANK_APPLE
     pthread_t native = pthread_self();
-    return *(PlankThreadID*)&native;
+    return (PlankThreadID)native;
 #elif PLANK_WIN
     return (PlankThreadID)GetCurrentThreadId();
 #endif
@@ -284,7 +284,7 @@ PlankResult pl_Thread_Start (PlankThreadRef p)
     if (pthread_create (&p->thread, NULL, pl_ThreadNativeFunction, p) != 0)
         return PlankResult_ThreadStartFailed;
     
-    p->threadID = *(PlankThreadID*)&p->thread;
+    p->threadID = (PlankThreadID)p->thread;
     
 #elif PLANK_WIN    
     if ((p->thread = _beginthreadex (NULL, 0, pl_ThreadNativeFunction, p, 0, (unsigned int*)&p->threadID)) == 0) 

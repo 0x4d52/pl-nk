@@ -428,7 +428,7 @@ public:
 		return values.size();
 	}
     
-    PLONK_OBJECTARROWOPERATOR(Dictionary)
+    PLONK_OBJECTARROWOPERATOR(Dictionary);
 
 };
 

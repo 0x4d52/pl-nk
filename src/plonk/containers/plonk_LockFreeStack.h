@@ -373,7 +373,7 @@ public:
         return this->getInternal()->length();
     }
     
-    PLONK_OBJECTARROWOPERATOR(LockFreeStack)
+    PLONK_OBJECTARROWOPERATOR(LockFreeStack);
 };
 
 

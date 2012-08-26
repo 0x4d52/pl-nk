@@ -354,7 +354,7 @@ public:
         return this->getInternal()->getValue().isNotNull();
     }
     
-    PLONK_OBJECTARROWOPERATOR(Variable)
+    PLONK_OBJECTARROWOPERATOR(Variable);
 };
 
 

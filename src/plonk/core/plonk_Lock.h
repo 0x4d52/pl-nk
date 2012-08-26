@@ -156,7 +156,7 @@ public:
     inline void wait() throw()      { getInternal()->wait(); }
     inline void signal() throw()    { getInternal()->signal(); }
     
-    PLONK_OBJECTARROWOPERATOR(Lock)
+    PLONK_OBJECTARROWOPERATOR(Lock);
     
 private:
     static LockInternalBase* lockInternalFromType (const int lockType) throw();
@@ -171,8 +171,6 @@ public:
     AutoLock (Lock const& lock = Lock::MutexLock) throw();
     ~AutoLock();
     
-    //PLONK_OBJECTARROWOPERATOR(AutoLock)
-
 private:
     Lock theLock;
     
@@ -189,8 +187,6 @@ public:
     AutoUnlock (Lock const& lock = Lock::MutexLock) throw();
     ~AutoUnlock();
     
-    //PLONK_OBJECTARROWOPERATOR(AutoUnlock)
-
 private:
     Lock theLock;
     
@@ -208,9 +204,7 @@ public:
     ~AutoTryLock();
     
     bool getDidLock() const throw() { return didLock; }
-    
-    //PLONK_OBJECTARROWOPERATOR(AutoTryLock)
-    
+        
 private:
     Lock theLock;
     bool didLock;
@@ -324,7 +318,7 @@ public:
         return this->getInternal()->getValue();
     }
     
-    PLONK_OBJECTARROWOPERATOR(LockedValue)
+    PLONK_OBJECTARROWOPERATOR(LockedValue);
     
     template<typename Function>
     inline void operator() (VoidReturn::Type ret, Function function)

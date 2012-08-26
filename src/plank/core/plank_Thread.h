@@ -229,6 +229,7 @@ typedef unsigned PlankThreadNativeReturn;
 
 typedef struct PlankThread
 {
+    // could pack thread, shouldExitAtom and isRunningAtom into a PX
     PlankThreadNativeHandle thread;
     PlankThreadID threadID;
     PlankThreadFunction function;

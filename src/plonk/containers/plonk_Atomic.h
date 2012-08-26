@@ -202,7 +202,7 @@ PLONK_ATOMIC_DEFINE(AtomicValue,UI,I,I);
 PLONK_ATOMIC_DEFINE_SIMPLE(L);
 PLONK_ATOMIC_DEFINE(AtomicValue,UL,L,L);
 
-#if ! (PLANK_WIN && PLANK_64BIT)
+#if !(PLANK_WIN && PLANK_64BIT) || DOXYGEN
 PLONK_ATOMIC_DEFINE_SIMPLE(LL);
 PLONK_ATOMIC_DEFINE(AtomicValue,ULL,LL,LL);
 #endif
@@ -847,6 +847,8 @@ public:
     
     inline ~AtomicExtended() 
     {
+        plonk_staticassert (sizeof (Separate) == sizeof (Long));
+        plonk_staticassert (sizeof (Element) == sizeof (Long));
     }
     
     inline AtomicExtended& operator= (AtomicExtended const& other) throw() 
@@ -1058,6 +1060,8 @@ public:
     
     inline ~AtomicExtended() 
     {
+        plonk_staticassert (sizeof (Separate) == sizeof (Int));
+        plonk_staticassert (sizeof (Element) == sizeof (Int));
     }
     
     inline AtomicExtended& operator= (AtomicExtended const& other) throw() 

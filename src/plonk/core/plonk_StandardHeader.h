@@ -45,49 +45,49 @@
 #define PLONK_LITTLEENDIAN  PLANK_LITTLEENDIAN
 
 #if PLANK_WIN
-#define PLONK_WIN 1
+    #define PLONK_WIN 1
 #endif
 
 #if PLANK_APPLE
-#define PLONK_APPLE 1
+    #define PLONK_APPLE 1
 #endif
 
 #if PLANK_GCC
-#define PLONK_GCC 1
+    #define PLONK_GCC 1
 #endif
 
 #if PLANK_LLVN
-#define PLONK_LLVM 1
+    #define PLONK_LLVM 1
 #endif
 
 #if PLANK_APPLE_LLVM
-#define PLONK_APPLE_LLVM 1
+    #define PLONK_APPLE_LLVM 1
 #endif
 
 #if PLANK_ARM
-#define PLONK_ARM 1
+    #define PLONK_ARM 1
 #endif
 
 #if PLANK_X86
-#define PLONK_X86 1
+    #define PLONK_X86 1
 #endif
 
 #if PLANK_PPC
-#define PLONK_PPC 1
+    #define PLONK_PPC 1
 #endif
 
 #if PLANK_32BIT
-#define PLONK_32BIT 1
-#define PLONK_WORDBITS 32
-#define PLONK_HALFWORDBITS 16
-#define PLONK_WORDSIZE 4
+    #define PLONK_32BIT 1
+    #define PLONK_WORDBITS 32
+    #define PLONK_HALFWORDBITS 16
+    #define PLONK_WORDSIZE 4
 #endif
 
 #if PLANK_64BIT
-#define PLONK_64BIT 1
-#define PLONK_WORDBITS 64
-#define PLONK_HALFWORDBITS 32
-#define PLONK_WORDSIZE 8
+    #define PLONK_64BIT 1
+    #define PLONK_WORDBITS 64
+    #define PLONK_HALFWORDBITS 32
+    #define PLONK_WORDSIZE 8
 #endif
 
 #define PLONK_ALIGN(X) PLANK_ALIGN(X)
@@ -181,25 +181,27 @@ typedef PlankP Pointer;
 
 struct VoidReturn { enum Type { Pass = 1 }; };
 
-
 #if defined (__clang__) && defined (__has_feature)
-#if !__has_feature (cxx_noexcept)
-#define noexcept throw()
-const                           // this is a const object...
-class {
-public:
-    template<class T>           // convertible to any type
-    operator T*() const         // of null non-member
-    { return 0; }               // pointer...
-    template<class C, class T>  // or any type of null
-    operator T C::*() const     // member pointer...
-    { return 0; }
-private:
-    void operator&() const;     // whose address can't be taken
-} nullptr = {};                 // and whose name is nullptr
-#endif
+    #if !__has_feature (cxx_noexcept)
+        #define PLONK_USING_NEWCXXFEATURES 1
+    #endif
 #endif
 
+#if PLONK_USING_NEWCXXFEATURES
+    #define noexcept throw()
+    const                           // this is a const object...
+    class {
+    public:
+        template<class T>           // convertible to any type
+        operator T*() const         // of null non-member
+        { return 0; }               // pointer...
+        template<class C, class T>  // or any type of null
+        operator T C::*() const     // member pointer...
+        { return 0; }
+    private:
+        void operator&() const;     // whose address can't be taken
+    } nullptr = {};                 // and whose name is nullptr
+#endif
 
 #define PLONK_INT24_MAX PLANK_INT24_MAX
 
@@ -222,31 +224,29 @@ struct ForceErrorStruct { int dummy; };
 
 
 #ifdef PLONK_USEPLINK
-
-template<class SampleType = float>
-struct PlinkBuffer
-{
-    int bufferSize;
-    const SampleType* buffer;
-};
-
-template<int N, class SampleType = float>
-struct PlinkProcess
-{        
-    PlinkProcessBase base;
-    PlinkBuffer<SampleType> buffers[N];
-    
-    static void init (PlinkProcess* pp, void* userData, int numOutputs, int numInputs)
+    template<class SampleType = float>
+    struct PlinkBuffer
     {
-        plonk_assert (N >= (numInputs + numOutputs));
-        
-        pp->base.userData   = userData;
-        pp->base.numOutputs = numOutputs;
-        pp->base.numInputs  = numInputs;
-        pp->base.numBuffers = N;        
-    }
-};
+        int bufferSize;
+        const SampleType* buffer;
+    };
 
+    template<int N, class SampleType = float>
+    struct PlinkProcess
+    {        
+        PlinkProcessBase base;
+        PlinkBuffer<SampleType> buffers[N];
+        
+        static void init (PlinkProcess* pp, void* userData, int numOutputs, int numInputs)
+        {
+            plonk_assert (N >= (numInputs + numOutputs));
+            
+            pp->base.userData   = userData;
+            pp->base.numOutputs = numOutputs;
+            pp->base.numInputs  = numInputs;
+            pp->base.numBuffers = N;        
+        }
+    };
 #endif
 
 #include "plonk_Memory.h"

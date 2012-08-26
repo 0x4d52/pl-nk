@@ -921,7 +921,7 @@ public:
         return TypeUtility<SampleType>::getTypeCode();
     }          
     
-    PLONK_OBJECTARROWOPERATOR(UnitBase)
+    PLONK_OBJECTARROWOPERATOR(UnitBase);
     
 private:
     UnitBase (BlockSize const& blockSize) throw()

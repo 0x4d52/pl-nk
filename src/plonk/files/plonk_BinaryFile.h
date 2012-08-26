@@ -331,7 +331,7 @@ public:
         return pl_FourCharCode (fourCharCode);
     }
     
-    PLONK_OBJECTARROWOPERATOR(BinaryFile)
+    PLONK_OBJECTARROWOPERATOR(BinaryFile);
 
 };
 

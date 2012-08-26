@@ -1474,7 +1474,7 @@ public:
 		return result;
 	}
 
-    PLONK_OBJECTARROWOPERATOR(ObjectArray)
+    PLONK_OBJECTARROWOPERATOR(ObjectArray);
 
 };
 

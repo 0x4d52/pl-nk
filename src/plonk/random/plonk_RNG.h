@@ -121,7 +121,7 @@ public:
     /** Generate a exponentially distributed random double between min and max. */
     double exponential (const double min, const double max) throw();     
     
-    PLONK_OBJECTARROWOPERATOR(RNG)
+    PLONK_OBJECTARROWOPERATOR(RNG);
 };
 
 //------------------------------------------------------------------------------

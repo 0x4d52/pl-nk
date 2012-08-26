@@ -244,7 +244,7 @@ public:
         getInternal()->writeLine (text.getArray());
     }    
     
-    PLONK_OBJECTARROWOPERATOR(TextFile)
+    PLONK_OBJECTARROWOPERATOR(TextFile);
 
 };
 

@@ -48,7 +48,7 @@ PLANK_BEGIN_C_LINKAGE
 
 /** A crossplatform synchronisation utiltiy.
   
- @defgroup PlankLockClass Plank ThreadSpinLock class
+ @defgroup PlankThreadSpinLockClass Plank ThreadSpinLock class
  @ingroup PlankClasses
  @{
  */

@@ -36,6 +36,11 @@
  -------------------------------------------------------------------------------
  */
 
+/*
+ You must ensure you comply with the Juce license (either GPL or Commercial)
+ to use this code, see http://juce.com
+ */
+
 #ifndef PLONK_JUCEAUDIOHOST_H
 #define PLONK_JUCEAUDIOHOST_H
 

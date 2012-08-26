@@ -246,7 +246,7 @@ public:
         return this->getInternal()->pop();
     }
     
-    PLONK_OBJECTARROWOPERATOR(SimpleQueue)
+    PLONK_OBJECTARROWOPERATOR(SimpleQueue);
 
 };
 

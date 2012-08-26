@@ -158,7 +158,7 @@ public:
 	static const Text& getPunctuation() throw();
 	static const Text& getStandardDelimiters() throw();
     
-    PLONK_OBJECTARROWOPERATOR(Text)
+    PLONK_OBJECTARROWOPERATOR(Text);
 };
 
 Text operator+ (const char* text1, Text const& text2) throw();

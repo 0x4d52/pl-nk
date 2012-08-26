@@ -1181,13 +1181,13 @@ public:
 		return Base::replace (NumericalArray (find), NumericalArray (substitute));
 	}
 	
-	ObjectArray2DType split(const NumericalType *delimiters) const throw()
+	ObjectArray2DType split (const NumericalType *delimiters) const throw()
 	{
 		plonk_assert (delimiters != 0);
 		return Base::split (NumericalArray(delimiters));
 	}
 
-	ObjectArray2DType splitSequence(const NumericalType *delimitingSequence) const throw()
+	ObjectArray2DType splitSequence (const NumericalType *delimitingSequence) const throw()
 	{
 		plonk_assert (delimitingSequence != 0);
 		return Base::splitSequence (NumericalArray (delimitingSequence));
@@ -1229,7 +1229,7 @@ public:
         return TypeUtility<NumericalType>::getTypeCode();
     }
     
-    PLONK_OBJECTARROWOPERATOR(NumericalArray)
+    PLONK_OBJECTARROWOPERATOR(NumericalArray);
 
 };
 

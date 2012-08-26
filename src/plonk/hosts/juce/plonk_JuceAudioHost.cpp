@@ -36,6 +36,11 @@
  -------------------------------------------------------------------------------
  */
 
+/*
+ You must ensure you comply with the Juce license (either GPL or Commercial)
+ to use this code, see http://juce.com
+ */
+
 #ifdef PLONK_AUDIOHOST_JUCE
 
 #include "../../core/plonk_StandardHeader.h"

@@ -1,3 +1,41 @@
+/*
+ -------------------------------------------------------------------------------
+ This file is part of the Plink, Plonk, Plank libraries
+ by Martin Robinson
+ 
+ http://code.google.com/p/pl-nk/
+ 
+ Copyright University of the West of England, Bristol 2011-12
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ 
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+ * Neither the name of University of the West of England, Bristol nor 
+   the names of its contributors may be used to endorse or promote products
+   derived from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE 
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
+ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ 
+ This software makes use of third party libraries. For more information see:
+ doc/license.txt included in the distribution.
+ -------------------------------------------------------------------------------
+ */
+
 /** 
  @mainpage Plonk|Plink|Plank Documentation
  
@@ -8,16 +46,39 @@
  Currently is currently an example project for iOS and an example project for Mac OS X using PortAudio.
  
  <em>Plonk|Plink|Plank</em> are easy to include in a project and are not tied to a particular
- host environment. Just add all the files
- in the @c /src directory (recursively) to a project. To use Plonk just include
- @c plonk/plonk.h (this automatically includes @c plank/plank.h as Plonk is dependent
- on Plank).
+ host environment. Just add all the files in the @c /src directory (recursively) to a project. 
+ To use Plonk just include @c plonk/plonk.h (this automatically includes @c plank/plank.h 
+ as Plonk is dependent on Plank).
  
  @section GettingStarted Getting started
- <em>Plonk|Plink|Plank</em> are designed to be used with a wide range of audio I/O systems. It
- has been tested primarily with 32-bit floating point audio I/O although most processiong should work at 
- double precision and some even using integer-based formats too.
+ There are a few compile options that can be configured using preprocessor macros. First, you 
+ should ensure that DEBUG=1 is defined for a <em>Debug</em> build and NDEBUG=1 is defined for a 
+ <em>Release</em> build.
+ 
+ <strong>Plank</strong> (these optionas also affect the behaviour of Plink and Plonk)
+ - PLANK_VEC_VDSP=1 : Use Apple's Accelerate vDSP library for vector processing where possible 
+                      (the default is to use scalar code). You must also link to the 
+                      Accelerate framework.
+ - PLANK_FFT_VDSP=1 : Use Apple's Accelerate vDSP library for FFT processing 
+                      (the default is to use FFTReal which is included in the source tree).
+                      You must also link to the Accelerate framework.
+ 
+ <strong>Plonk</strong>
+ - PLONK_USEPLINK=1 : Use the Plink library where possible. This effectively enables optimised versions of
+                      some processing units since Plink may be leveraging vectorised code directly (rather
+                      than relying of compiler optimisations via the template code in Plonk).
+ - PLONK_AUDIOHOST_PORTAUDIO=1 : Use the PortAudio audio host. You must also link to the PortAudio library.
+ - PLONK_AUDIOHOST_IOS=1 : Use the Apple iOS audio host. You must also link to the CoreAudio, AudioUnit and 
+                           AudioToolbox frameworks.
+ - PLONK_AUDIOHOST_JUCE=1 : Use the Juce audio host. You must also link to Juce (either the static library
+                            or otherwise using the Introjucer to generate the project).
+ 
+ <strong>Plink</strong>
+ <em>None</em>
 
+ You should read the section @link PlonkCoreConcepts core concepts in Plonk @endlink then use the macplnk or
+ iosplnk projects as a starting point. (Windows project - winplnk - coming soon.)
+ 
  */
 
  /*

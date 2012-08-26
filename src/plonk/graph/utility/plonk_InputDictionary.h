@@ -79,7 +79,7 @@ public:
      This is not recursive. */
     int getMaxNumChannels() const throw();
     
-    PLONK_OBJECTARROWOPERATOR(InputDictionary)
+    PLONK_OBJECTARROWOPERATOR(InputDictionary);
 };
 
 

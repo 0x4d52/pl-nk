@@ -269,7 +269,7 @@ SIP_SUPPORT            = NO
 # setting a simple type. If this is not the case, or you want to show the 
 # methods anyway, you should set this option to NO.
 
-IDL_PROPERTY_SUPPORT   = YES
+IDL_PROPERTY_SUPPORT   = NO
 
 # If member grouping is used in the documentation and the DISTRIBUTE_GROUP_DOC 
 # tag is set to YES, then doxygen will reuse the documentation of the first 
@@ -415,7 +415,7 @@ HIDE_SCOPE_NAMES       = NO
 # will put a list of the files that are included by a file in the documentation 
 # of that file.
 
-SHOW_INCLUDE_FILES     = YES
+SHOW_INCLUDE_FILES     = NO
 
 # If the FORCE_LOCAL_INCLUDES tag is set to YES then Doxygen 
 # will list include files with double quotes in the documentation 
@@ -433,7 +433,7 @@ INLINE_INFO            = YES
 # alphabetically by member name. If set to NO the members will appear in 
 # declaration order.
 
-SORT_MEMBER_DOCS       = YES
+SORT_MEMBER_DOCS       = NO
 
 # If the SORT_BRIEF_DOCS tag is set to YES then doxygen will sort the 
 # brief documentation of file, namespace and class members alphabetically 
@@ -526,7 +526,7 @@ SHOW_USED_FILES        = YES
 # then setting the SHOW_DIRECTORIES tag to YES will show the directory hierarchy 
 # in the documentation. The default is NO.
 
-SHOW_DIRECTORIES       = YES
+SHOW_DIRECTORIES       = NO
 
 # Set the SHOW_FILES tag to NO to disable the generation of the Files page. 
 # This will remove the Files entry from the Quick Index and from the 
@@ -1496,7 +1496,7 @@ PREDEFINED             = DOXYGEN=1 \
 # overrules the definition found in the source code.
 
 EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
-					     PLONK_BINARYOP \
+                         PLONK_BINARYOP \
                          PLONK_BINARYOPS \
                          PLONK_UNARYOP \
                          PLONK_UNARYOPS \
@@ -1515,6 +1515,9 @@ EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLONK_UNITBASETYPE \
                          PLONK_BUSARRAYBASETYPE \
                          PLONK_NAMESPACE \
+                         PLONK_OBJECTARROWOPERATOR \
+                         PLONK_ATOMIC_DEFINE \
+                         PLONK_ATOMIC_DEFINE_SIMPLE \
                          END_PLONK_NAMESPACE \
                          BEGIN_PLONK_NAMESPACE \
                          PLANK_BEGIN_C_LINKAGE \
@@ -1549,6 +1552,7 @@ EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLANK_VECTOR_OPS \
                          PLINK_BINARYOPPROCESS_DECLARE \
                          PLINK_UNARYOPPROCESS_DECLARE
+                         
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES (the default) then 
 # doxygen's preprocessor will remove all references to function-like macros 

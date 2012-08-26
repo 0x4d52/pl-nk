@@ -89,6 +89,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A801DE5915E8A67C002B91BF /* doc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = doc.h; sourceTree = "<group>"; };
 		A80FE4EE15DFE4AA00988DFB /* mainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainpage.h; sourceTree = "<group>"; };
 		A80FE4F115DFE4AA00988DFB /* plank_Atomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_Atomic.c; sourceTree = "<group>"; };
 		A80FE4F215DFE4AA00988DFB /* plank_Atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Atomic.h; sourceTree = "<group>"; };
@@ -398,6 +399,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A801DE5715E8A60A002B91BF /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				A801DE5915E8A67C002B91BF /* doc.h */,
+			);
+			path = doc;
+			sourceTree = "<group>";
+		};
 		A80FE4ED15DFE4AA00988DFB /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -644,6 +653,7 @@
 		A80FE56815DFE4AA00988DFB /* plonk */ = {
 			isa = PBXGroup;
 			children = (
+				A801DE5715E8A60A002B91BF /* doc */,
 				A80FE56915DFE4AA00988DFB /* containers */,
 				A80FE58F15DFE4AA00988DFB /* core */,
 				A80FE5A415DFE4AA00988DFB /* fft */,

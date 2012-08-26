@@ -664,7 +664,7 @@ public:
 	{
 	}
     
-    PLONK_OBJECTARROWOPERATOR(ObjectArray2D)
+    PLONK_OBJECTARROWOPERATOR(ObjectArray2D);
 
 };
 

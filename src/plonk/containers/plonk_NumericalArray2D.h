@@ -226,7 +226,7 @@ public:
 		}
 	}
 	
-    PLONK_OBJECTARROWOPERATOR(NumericalArray2D)
+    PLONK_OBJECTARROWOPERATOR(NumericalArray2D);
 
 };
 

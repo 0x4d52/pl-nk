@@ -56,10 +56,8 @@ public:
     /** Get the calling thread ID. */
     static Threading::ID getCurrentThreadID() throw();
     
-    static Threading::ID getAudioThreadID() throw();
-    
+    static Threading::ID getAudioThreadID() throw(); // there will be more that one audio thread when going multicore
     static bool setAudioThreadID (const Threading::ID theID) throw();
-    
     static bool currentThreadIsAudioThread() throw();
     
     /** The Thread class itself.

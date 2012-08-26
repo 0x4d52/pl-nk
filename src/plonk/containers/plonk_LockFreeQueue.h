@@ -412,7 +412,7 @@ public:
         return this->getInternal()->length();
     }
     
-    PLONK_OBJECTARROWOPERATOR(LockFreeQueue)
+    PLONK_OBJECTARROWOPERATOR(LockFreeQueue);
 
 };
 

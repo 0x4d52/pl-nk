@@ -148,7 +148,7 @@ public:
 	
 	void print (const char *prefix = 0) const throw();
     
-    PLONK_OBJECTARROWOPERATOR(TextArray)
+    PLONK_OBJECTARROWOPERATOR(TextArray);
 
 };
 
