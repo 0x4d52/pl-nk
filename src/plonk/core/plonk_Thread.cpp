@@ -157,7 +157,7 @@ ResultCode Threading::Thread::wait() throw()
 
 ResultCode Threading::Thread::pause (const double duration) throw()
 {
-    ResultCode result = pl_Thread_PauseWithTimeout(getPeerRef(), duration);
+    ResultCode result = pl_Thread_PauseWithTimeout (getPeerRef(), duration);
     plonk_assert (result == PlankResult_OK);
     return result;
 }

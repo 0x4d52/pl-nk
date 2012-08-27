@@ -350,6 +350,9 @@ PlankResult pl_Thread_Pause (PlankThreadRef p)
 
 PlankResult pl_Thread_PauseWithTimeout (PlankThreadRef p, double duration)
 {
+    if (pl_ThreadCurrentID() != pl_Thread_GetID (p)) // a thread can only pause itself
+        return PlankResult_ThreadInvalid;
+    
     pl_AtomicI_Set (&p->paused, PLANK_TRUE);
     
     double time = 0.0;
@@ -367,6 +370,9 @@ PlankResult pl_Thread_PauseWithTimeout (PlankThreadRef p, double duration)
 
 PlankResult pl_Thread_Resume (PlankThreadRef p)
 {
+    if (pl_ThreadCurrentID() == pl_Thread_GetID (p)) // a thread can't resume itself
+        return PlankResult_ThreadInvalid;
+    
     pl_AtomicI_Set (&p->paused, PLANK_FALSE);
     return PlankResult_OK;
 }

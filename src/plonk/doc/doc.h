@@ -167,7 +167,7 @@
  you can call faster versions:
  
  @code
- Ints a (1, 2, 3); // array length aL
+ Ints a (1, 2, 3);
  int b = a[0]; // is 1
  int c = a[1]; // is 2
  int d = a[2]; // is 3
@@ -232,7 +232,95 @@
  @endcode
  
  It is best not to store any of the pointers obtained this way as the array could be
- reallocated if it is modified (e.g., by adding items).
+ reallocated if it is modified (e.g., by adding items). If you are iterating through 
+ an array this may be faster than repeated calls to atUnchecked() or the [] operator.
+ 
+ @subsection ChannelsUnitsAndGraphs Channels, units and graphs
+ Channels, units and graphs are concepts used to represent audio processing 
+ configurations in Plonk.
+ - channel: a single channel of audio (i.e, mono)
+ - unit: an array of channels
+ - graph: an interconnected collection of units
+ 
+ In fact in Plonk there is no separate "graph" object, rather graphs are built by
+ passing units to other units during construction. There are channel objects 
+ (the ChannelBase<SampleType> class) although you rarely deal with these directly
+ in user code. Most user code will create and manipulate unit objects 
+ (via the UnitBase<SampleType> class). By default Plonk is setup to deal with 32-bit 
+ floating point data throughout its graphs. This is achieved by the macro
+ PLONK_TYPE_DEFAULT which is set to 'float'. This macro is used to set the default
+ type for the UnitBase class and the unit factory classes. The convention is for the
+ base types (ChannelBase, UnitBase) to become simply 'Channel' and 'Unit' for the
+ default sample type. For factory classes, these are generally names like 
+ SomethingUnit, which becomes simply 'Something' for the default sample type.
+ 
+ For example, the SineUnit factory class is used to create wavetable-based sine
+ wave oscillators. To create one you would do this:
+ 
+ @code
+ Unit u = Sine::ar (1000, 0.1);
+ @endcode
+ 
+ This creates a single channel 1kHz sine oscillator unit at an amplitude of 0.1 
+ and stores it in the variable 'u' (of type Unit). The 'ar' factory function
+ name is common throughout the factory classes and denotes 'audio rate' in a similar way 
+ to other Music-N languages (Csound, SuperCollider etc). This means it will output one
+ sample for each sample required by the audio hardware. It is possible to create 'control rate'
+ units too although this will be discussed later (in fact there isn't really a global
+ notion of 'control rate' as there is in other Music-N langauges as Plonk channels
+ can run at arbitrary sample rates and block sizes).
+ 
+ The argument, or 'inputs', for the factory functions are documented in the factory class
+ documentation. For example, SineUnit documentation states:
+ 
+ <table><tr><td>
+ Factory functions:
+ - ar (frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (frequency=440, mul=1, add=0) 
+ 
+ Inputs:
+ - frequency: (unit, multi) the frequency of the oscillator in Hz
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+ </td></tr></table>
+ 
+ The 'mul' and 'add' inputs are common to many factory classes these are applied
+ after the output of the unit at full ampltitude. The default for float and double sample types
+ is ±1. Thus Sine::ar(1000) would output a full scale sine wave at 1kHz. While the 'add'
+ input can be used to mix units, this is not its primary purpose nor the most convenient
+ way of achieving this. The 'add' input is more useful for creating modulators. E.g.,
+ 
+ @code
+ Unit u = Sine::ar (Sine::ar (5, 100, 1000), 0.1);
+ @endcode
+ 
+ Here the 5Hz sine is used to modulate another sine. This could be rewritten a follows:
+ 
+ @code
+ Unit m = Sine::ar (5, 100, 1000);
+ Unit u = Sine::ar (m, 0.1);
+ @endcode
+
+ The 'mul' input for 'm' is 100, this is effectively the modulation depth. The 'add'
+ input is 1000, this is effectively the centre value for the modulation. Thus the modulator
+ will have a centre value of 1000 and deviate by ±100 (i.e., 900...1100). The unit 'm'
+ is then used as the frequency input for the unit 'u'. Any input marked as 'unit' can
+ be any other unit. Units can be created explicitly using the factory classes, or in some cases
+ implicitly from constants, Variable types, NumericalArray types and so on. Inputs marked
+ as 'multi' can be used to create multichannel units by passing in a multichannel unit to 
+ this input. For example, the following code creates a two-channel unit, both with
+ amplitude 0.1 but one with frequency 995Hz and the other 1005Hz:
+ 
+ @code
+ Unit u = Sine::ar (Floats (995, 1005), 0.1);
+ @endcode
+
+ 
+ 
+ 
+ mixing
  
 */
 
