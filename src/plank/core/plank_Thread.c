@@ -40,6 +40,7 @@
 #include "plank_Thread.h"
 #include "../maths/plank_Maths.h"
 
+#define PLANK_THREAD_PAUSEQUANTA 0.00001
 
 typedef PlankThreadNativeReturn (PLANK_THREADCALL *PlankThreadNativeFunction)(PlankP);
 PlankThreadNativeReturn PLANK_THREADCALL pl_ThreadNativeFunction (PlankP argument);
@@ -192,6 +193,7 @@ PlankResult pl_Thread_Init (PlankThreadRef p)
     
     pl_AtomicI_Init (&p->shouldExitAtom);
     pl_AtomicI_Init (&p->isRunningAtom);
+    pl_AtomicI_Init (&p->paused);
     pl_AtomicPX_Init (&p->userDataAtom);
         
     pl_Thread_Reset (p);
@@ -206,6 +208,7 @@ PlankResult pl_Thread_DeInit (PlankThreadRef p)
 
     pl_AtomicI_DeInit (&p->shouldExitAtom);
     pl_AtomicI_DeInit (&p->isRunningAtom);
+    pl_AtomicI_DeInit (&p->paused);
     pl_AtomicPX_DeInit (&p->userDataAtom);
 
     return result;    
@@ -338,6 +341,34 @@ PlankResult pl_Thread_Wait (PlankThreadRef p)
     
 #endif
     return PlankResult_ThreadWaitFailed;    
+}
+
+PlankResult pl_Thread_Pause (PlankThreadRef p)
+{    
+    return pl_Thread_PauseWithTimeout (p, PLANK_INFINITY);
+}
+
+PlankResult pl_Thread_PauseWithTimeout (PlankThreadRef p, double duration)
+{
+    pl_AtomicI_Set (&p->paused, PLANK_TRUE);
+    
+    double time = 0.0;
+    
+    while (pl_AtomicI_GetUnchecked (&p->paused) && (time < duration))
+    {
+        pl_ThreadSleep (PLANK_THREAD_PAUSEQUANTA);
+        time = time + PLANK_THREAD_PAUSEQUANTA;
+    }
+        
+    pl_AtomicI_Set (&p->paused, PLANK_FALSE);
+
+    return PlankResult_OK;
+}
+
+PlankResult pl_Thread_Resume (PlankThreadRef p)
+{
+    pl_AtomicI_Set (&p->paused, PLANK_FALSE);
+    return PlankResult_OK;
 }
 
 PlankB pl_Thread_IsRunning (PlankThreadRef p)

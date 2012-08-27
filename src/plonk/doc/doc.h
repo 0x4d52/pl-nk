@@ -130,8 +130,9 @@
 
  Plonk provides its own dynamic array class ObjectArray (which is also a template class and
  employs the same reference counted lifetime management as the Variable class). ObjectArray
- is very generalised. To store and manipulate numerical data there is the specialised class
- NumericalArray (which inherits from ObjectArray). 
+ is very generalised. Please note that while assignment of a Plonk array is thread safe, 
+ manipulations of the array are not. To store and manipulate numerical data there is the 
+ specialised class NumericalArray (which inherits from ObjectArray). 
  
  As with the Variable class there are @c typedef s for many of the common types.
  One convention in Plonk is to use the plural form to imply an array e.g., Ints is a 
@@ -145,6 +146,9 @@
  Ints b (1);          // an array containing a single element '1'
  Ints c (1, 2, 3, 4); // initialise with array {1, 2, 3, 4}, up to 32 items can be used to initialise this way
  
+ int cn = c.length(); // is 4, the number of items stored in 'c'
+ int cs = c.size();   // is also 4, 'size' and 'length' are only different for null terminated arrays (see Text below)
+ 
  b.add (10);          // 'b' is now {1, 10}
  b.add (100);         // 'b' is now {1, 10, 100}
  
@@ -155,6 +159,24 @@
  a.remove (0);        // remove at index 0, 'a' and 'b' are now both {10, 20}
  c.removeItem (20);   // removes item '20', 'c' is now { 1, 3, 4}
  c.removeItem (100);  // has no effect as 'c' doesn't contain '100'
+ cn = c.length();     // is now 3
+ @endcode
+ 
+ By default Plonk checks inidices to ensure they are not out of bounds. If you
+ wish to avoid these checks and are sure that array indices are within the bounds
+ you can call faster versions:
+ 
+ @code
+ Ints a (1, 2, 3); // array length aL
+ int b = a[0]; // is 1
+ int c = a[1]; // is 2
+ int d = a[2]; // is 3
+ int e = a[3]; // index out-of-bounds, returns zero (or a 'null' object if this is not a NumericalArray)
+ int f = a.atUnchecked (0); // is 1
+ int g = a.atUnchecked (1); // is 2
+ int h = a.atUnchecked (2); // is 3
+ int i = a.atUnchecked (3); // returns garbage or may crash, raises an assertion though in a Debug build
+ 
  @endcode
  
  As dicsussed above, arithmetic can be performed on NumericalArray types. For example:
@@ -180,6 +202,38 @@
  Floats e (Floats::rand (4, 10, 100));    // array of 4 random values 10...100 uniformly distributed
  Floats f (Floats::exprand (4, 10, 100)); // array of 4 random values 10...100 exponentially distributed
  @endcode
+ 
+ Text is a specially adapted Chars (CharArray or NumericalArray<Char>) for dealing with text strings.
+ 
+ @code
+ Text a ("Hello");
+ Text b ("World!");
+ Text c (a + " " + b); // is "Hello World!" as '+' is overidden to do concatenation
+ int an = a.length();  // is 5
+ int bn = b.length();  // is 6
+ int cn = c.length();  // is 12
+ int as = a.size();    // is 6
+ int bs = b.size();    // is 7
+ int cs = c.size();    // is 13
+ @endcode
+ 
+ If you need to access the raw C++ array stored in the Plonk array you can do use getArray() or cast the 
+ Plonk array to a pointer to the array type:
+ 
+ @code
+ Ints a (1, 2, 3);
+ 
+ // all of these are equivalent
+ int* ptr1 = a.getArray();           // explicit getArray()
+ int* ptr2 = static_cast<int*> (a);  // explicit cast, calls getArray() internally 
+ int* ptr3 (a);                      // implicit cast, calls getArray() internally
+ int* ptr4 = a;                      // implicit cast, calls getArray() internally
+ int* ptr5 = (int*)a;                // should work, but not C casts are not recommended in C++
+ @endcode
+ 
+ It is best not to store any of the pointers obtained this way as the array could be
+ reallocated if it is modified (e.g., by adding items).
+ 
 */
 
 

@@ -253,18 +253,7 @@ struct ForceErrorStruct { int dummy; };
 
 END_PLONK_NAMESPACE
 
-#ifdef INFINITY
-    #define PLONK_INFINITY (INFINITY)
-#else
-    union PLONK_MSVC_EVIL_FLOAT_HACK
-    {
-       unsigned __int8 Bytes[4];
-       float Value;
-    };
-    static union PLONK_MSVC_EVIL_FLOAT_HACK PLONK_INFINITY_HACK = {{0x00, 0x00, 0x80, 0x7F}};
-#define PLONK_INFINITY (PLONK_INFINITY_HACK.Value)
-#endif
-
+#define PLONK_INFINITY PLANK_INFINITY
 
 //inline int quantiseUp(const int a, const int q) 
 //{ 

@@ -155,6 +155,20 @@ ResultCode Threading::Thread::wait() throw()
     return result;
 }
 
+ResultCode Threading::Thread::pause (const double duration) throw()
+{
+    ResultCode result = pl_Thread_PauseWithTimeout(getPeerRef(), duration);
+    plonk_assert (result == PlankResult_OK);
+    return result;
+}
+
+ResultCode Threading::Thread::resume() throw()
+{
+    ResultCode result = pl_Thread_Resume (getPeerRef());
+    plonk_assert (result == PlankResult_OK);
+    return result;
+}
+
 bool Threading::Thread::isRunning() throw()
 {
     return pl_Thread_IsRunning (getPeerRef());

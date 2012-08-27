@@ -105,6 +105,9 @@ public:
          until that returns false to simulate the same behviour. */
         ResultCode wait() throw();
         
+        ResultCode pause (const double duration = PLONK_INFINITY) throw();
+        ResultCode resume() throw();
+        
         /** Returns @c true if the thread is running, otherwise @c false.
          This is thread-safe. */
         bool isRunning() throw();

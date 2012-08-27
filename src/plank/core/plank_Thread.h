@@ -187,6 +187,12 @@ PlankResult pl_Thread_Cancel (PlankThreadRef p);
  @return PlankResult_OK if successful, otherwise an error code. */
 PlankResult pl_Thread_Wait (PlankThreadRef p);
 
+
+PlankResult pl_Thread_Pause (PlankThreadRef p);
+PlankResult pl_Thread_PauseWithTimeout (PlankThreadRef p, double duration);
+PlankResult pl_Thread_Resume (PlankThreadRef p);
+
+
 /** Determines if the %Thread is still running.
  @param p The <i>Plank %Thread</i> object. 
  @return @c true if the %Thread is still running, otherwise @c false. */
@@ -236,6 +242,7 @@ typedef struct PlankThread
     PLANK_ALIGN(16) PlankAtomicPX userDataAtom;
     PLANK_ALIGN(4) PlankAtomicI shouldExitAtom;
     PLANK_ALIGN(4) PlankAtomicI isRunningAtom;
+    PLANK_ALIGN(4) PlankAtomicI paused;
     char name[PLANK_THREAD_MAXNAMELENGTH];
 } PlankThread;
 #endif

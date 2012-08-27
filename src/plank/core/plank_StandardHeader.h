@@ -212,6 +212,18 @@ typedef const void* PlankConstantP;
 
 typedef PlankI PlankFourCharCode;
 
+#ifdef INFINITY
+    #define PLANK_INFINITY (INFINITY)
+#else
+    union PLANK_MSVC_EVIL_FLOAT_HACK
+    {
+        unsigned __int8 Bytes[4];
+        float Value;
+    };
+    static union PLANK_MSVC_EVIL_FLOAT_HACK PLANK_INFINITY_HACK = {{0x00, 0x00, 0x80, 0x7F}};
+    #define PLANK_INFINITY (PLANK_INFINITY_HACK.Value)
+#endif
+
 #include "plank_Result.h"
 
 
