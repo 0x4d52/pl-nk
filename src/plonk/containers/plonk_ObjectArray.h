@@ -310,7 +310,7 @@ public:
 		this->put (0, single);
 	}		
 	
-private:
+protected:
 	static int countValidInitialisers (InitialObject const& i03) throw()
 	{
 		int size = 3;
@@ -333,7 +333,7 @@ public:
 		if (i03.valid) thisArray[ 3] = i03.object; else return;
 	}
 	
-private:
+protected:
 	static int countValidInitialisers (InitialObject const& i05,
 									   InitialObject const& i06,
 									   InitialObject const& i07) throw()
@@ -369,9 +369,8 @@ public:
 		if (i06.valid) thisArray[ 6] = i06.object; else return;
 		if (i07.valid) thisArray[ 7] = i07.object; else return;
 	}
-	
-	
-private:
+		
+protected:
 	static int countValidInitialisers (InitialObject const& i09,
 									   InitialObject const& i10,
 									   InitialObject const& i11,
@@ -432,7 +431,7 @@ public:
 		if (i15.valid) thisArray[15] = i15.object; else return;
 	}	
 	
-private:
+protected:
 	static int countValidInitialisers (InitialObject const& i17,
 									   InitialObject const& i18,
 									   InitialObject const& i19,

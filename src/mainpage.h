@@ -55,7 +55,7 @@
  should ensure that DEBUG=1 is defined for a <em>Debug</em> build and NDEBUG=1 is defined for a 
  <em>Release</em> build.
  
- <strong>Plank</strong> (these optionas also affect the behaviour of Plink and Plonk)
+ <strong>Plank</strong> (these options also affect the behaviour of Plink and Plonk)
  - PLANK_VEC_VDSP=1 : Use Apple's Accelerate vDSP library for vector processing where possible 
                       (the default is to use scalar code). You must also link to the 
                       Accelerate framework.

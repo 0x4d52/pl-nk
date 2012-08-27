@@ -271,6 +271,12 @@
  notion of 'control rate' as there is in other Music-N langauges as Plonk channels
  can run at arbitrary sample rates and block sizes).
  
+ To create a non-bandlimited sawtooth with amplitude 0.1 and frequency 1kHz you would use:
+ 
+ @code
+ Unit u = Saw::ar (1000, 0.1);
+ @endcode
+ 
  The arguments, or 'inputs', for the factory functions are documented in the factory class
  documentation. For example, SineUnit documentation states:
  
@@ -376,8 +382,34 @@
           Sine::ar (800, 0.1 / 4);
  @endcode
  
- (The creates the first four harmonics of a sawtooth wave.) In most cases it
- is more straightforward to use the MixerUnit to achieve the same result:
+ (This creates the first four harmonics of a sawtooth wave.) 
+ 
+ Ring modulation can be achieved using the '*' operator too:
+ 
+ @code
+ Unit u = Sine::ar (1000) * Sine::ar (1200) * 0.1;
+ @endcode
+ 
+ As can amplitude modulation:
+ 
+ @code
+ Unit u = Sine::ar (1000) * Sine::ar (0.5, 0.1, 0.1);
+ @endcode
+ 
+ bin
+ -Ring modulations
+ -Min/max
+ 
+ un
+ -sin with saw
+ -m2f
+ -dB2A
+ 
+ see unitbase for full list of supported operators
+ 
+ 
+ Returning to tecniques for mixing units, in most cases it is more 
+ straightforward and efficient to use the MixerUnit rather than the '+' operator:
  
  @code
  Unit u = Mixer::ar (Sine::ar (Floats (200, 400, 600, 800), 
@@ -445,7 +477,7 @@
  Unit u = Mixer::ar (us);
  @endcode
 
-    
+
  
  
 */

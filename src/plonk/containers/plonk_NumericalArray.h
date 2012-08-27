@@ -92,7 +92,6 @@ public:
     typedef ObjectArray<NumericalType>          ObjectArrayType;
     typedef ObjectArray<ObjectArrayType>        ObjectArray2DType;
 
-    
 	class InitialNumber
 	{
 	public:

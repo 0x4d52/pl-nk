@@ -54,7 +54,7 @@ public:
     
     typedef ObjectArray<NumericalType>                  ObjectArrayType;
     typedef ObjectArray<ObjectArrayType>                ObjectArray2DType;
-
+    typedef typename Base::InitialObject                InitialObject;
     
 	NumericalArray2D (const int rows = 0) throw()
 	:	Base (rows < 0 ? 0 : rows, false) 
@@ -108,79 +108,79 @@ public:
 	{
 	}
 	
-	NumericalArray2D (RowType const &i00,
-					  RowType const &i01,
-					  RowType const &i02 = RowType(),
-					  RowType const &i03 = RowType()) throw()
+	NumericalArray2D (InitialObject const &i00,
+					  InitialObject const &i01,
+					  InitialObject const &i02 = InitialObject(),
+					  InitialObject const &i03 = InitialObject()) throw()
 	:	Base (i00, i01, i02, i03) 
 	{
 	}
 
-	NumericalArray2D (RowType const &i00,
-					  RowType const &i01,
-					  RowType const &i02,
-					  RowType const &i03,
-					  RowType const &i04,
-					  RowType const &i05 = RowType(),
-					  RowType const &i06 = RowType(),
-					  RowType const &i07 = RowType()) throw()
+	NumericalArray2D (InitialObject const &i00,
+					  InitialObject const &i01,
+					  InitialObject const &i02,
+					  InitialObject const &i03,
+					  InitialObject const &i04,
+					  InitialObject const &i05 = InitialObject(),
+					  InitialObject const &i06 = InitialObject(),
+					  InitialObject const &i07 = InitialObject()) throw()
 	:	Base (i00, i01, i02, i03, i04, i05, i06, i07) 
 	{
 	}
 
-	NumericalArray2D (RowType const &i00,
-					  RowType const &i01,
-					  RowType const &i02,
-					  RowType const &i03,
-					  RowType const &i04,
-					  RowType const &i05,
-					  RowType const &i06,
-					  RowType const &i07,
-					  RowType const &i08,
-					  RowType const &i09 = RowType(),
-					  RowType const &i10 = RowType(),
-					  RowType const &i11 = RowType(),
-					  RowType const &i12 = RowType(),
-					  RowType const &i13 = RowType(),
-					  RowType const &i14 = RowType(),
-					  RowType const &i15 = RowType()) throw()
+	NumericalArray2D (InitialObject const &i00,
+					  InitialObject const &i01,
+					  InitialObject const &i02,
+					  InitialObject const &i03,
+					  InitialObject const &i04,
+					  InitialObject const &i05,
+					  InitialObject const &i06,
+					  InitialObject const &i07,
+					  InitialObject const &i08,
+					  InitialObject const &i09 = InitialObject(),
+					  InitialObject const &i10 = InitialObject(),
+					  InitialObject const &i11 = InitialObject(),
+					  InitialObject const &i12 = InitialObject(),
+					  InitialObject const &i13 = InitialObject(),
+					  InitialObject const &i14 = InitialObject(),
+					  InitialObject const &i15 = InitialObject()) throw()
 	:	Base (i00, i01, i02, i03, i04, i05, i06, i07,
 			  i08, i09, i10, i11, i12, i13, i14, i15)
 	{
 	}
 
-	NumericalArray2D (RowType const &i00,
-					  RowType const &i01,
-					  RowType const &i02,
-					  RowType const &i03,
-					  RowType const &i04,
-					  RowType const &i05,
-					  RowType const &i06,
-					  RowType const &i07,
-					  RowType const &i08,
-					  RowType const &i09,
-					  RowType const &i10,
-					  RowType const &i11,
-					  RowType const &i12,
-					  RowType const &i13,
-					  RowType const &i14,
-					  RowType const &i15,
-					  RowType const &i16,
-					  RowType const &i17 = RowType(),
-					  RowType const &i18 = RowType(),
-					  RowType const &i19 = RowType(),
-					  RowType const &i20 = RowType(),
-					  RowType const &i21 = RowType(),
-					  RowType const &i22 = RowType(),
-					  RowType const &i23 = RowType(),
-					  RowType const &i24 = RowType(),
-					  RowType const &i25 = RowType(),
-					  RowType const &i26 = RowType(),
-					  RowType const &i27 = RowType(),
-					  RowType const &i28 = RowType(),
-					  RowType const &i29 = RowType(),
-					  RowType const &i30 = RowType(),
-					  RowType const &i31 = RowType()) throw()
+	NumericalArray2D (InitialObject const &i00,
+					  InitialObject const &i01,
+					  InitialObject const &i02,
+					  InitialObject const &i03,
+					  InitialObject const &i04,
+					  InitialObject const &i05,
+					  InitialObject const &i06,
+					  InitialObject const &i07,
+					  InitialObject const &i08,
+					  InitialObject const &i09,
+					  InitialObject const &i10,
+					  InitialObject const &i11,
+					  InitialObject const &i12,
+					  InitialObject const &i13,
+					  InitialObject const &i14,
+					  InitialObject const &i15,
+					  InitialObject const &i16,
+					  InitialObject const &i17 = InitialObject(),
+					  InitialObject const &i18 = InitialObject(),
+					  InitialObject const &i19 = InitialObject(),
+					  InitialObject const &i20 = InitialObject(),
+					  InitialObject const &i21 = InitialObject(),
+					  InitialObject const &i22 = InitialObject(),
+					  InitialObject const &i23 = InitialObject(),
+					  InitialObject const &i24 = InitialObject(),
+					  InitialObject const &i25 = InitialObject(),
+					  InitialObject const &i26 = InitialObject(),
+					  InitialObject const &i27 = InitialObject(),
+					  InitialObject const &i28 = InitialObject(),
+					  InitialObject const &i29 = InitialObject(),
+					  InitialObject const &i30 = InitialObject(),
+					  InitialObject const &i31 = InitialObject()) throw()
 	:	Base (i00, i01, i02, i03, i04, i05, i06, i07,
 			  i08, i09, i10, i11, i12, i13, i14, i15, 
               i16, i17, i18, i19, i20, i21, i22, i23,

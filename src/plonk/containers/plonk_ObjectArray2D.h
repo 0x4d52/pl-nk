@@ -54,7 +54,7 @@ public:
     
     typedef ObjectArray<ArrayType>                      ObjectArrayType;
     typedef ObjectArray<ObjectArrayType>                ObjectArray2DType;
-
+    typedef typename Base::InitialObject                InitialObject;
     
 	ObjectArray2DBase (const int rows = 0) throw()
 	:	ObjectArray<RowType> (rows < 0 ? 0 : rows, false) 
@@ -91,45 +91,15 @@ public:
         
         return *this;
 	}
-	
-private:
-	static int countValidInitialisers (RowType const& i03) throw()
+
+	ObjectArray2DBase (InitialObject const &i00,
+					   InitialObject const &i01,
+					   InitialObject const &i02,
+					   InitialObject const &i03 = InitialObject()) throw()
+	:	Base (i00, i01, i02, i03) 
 	{
-		int size = 3;
-		if (i03.length() > 0) size++; else return size;
-		return size;
-	}	
-    
-public:
-	ObjectArray2DBase (RowType const &i00,
-					   RowType const &i01,
-					   RowType const &i02,
-					   RowType const &i03 = RowType()) throw()
-	:	ObjectArray<RowType> (countValidInitialisers (i03), false) 
-	{
-		RowType *thisArray = this->getArray();
-		
-		if (i00.length() > 0) thisArray[ 0] = i00; else return;
-		if (i01.length() > 0) thisArray[ 1] = i01; else return;
-		if (i02.length() > 0) thisArray[ 2] = i02; else return;
-		if (i03.length() > 0) thisArray[ 3] = i03; else return;
 	}
     
-private:
-	static int countValidInitialisers (RowType const &i05,
-									   RowType const &i06,
-									   RowType const &i07) throw()
-	{
-		int size = 5;
-		
-		if (i05.length() > 0) size++; else return size;
-		if (i06.length() > 0) size++; else return size;
-		if (i07.length() > 0) size++; else return size;
-		
-		return size;
-	}
-    
-public:
 	ObjectArray2DBase (RowType const &i00,
 					   RowType const &i01,
 					   RowType const &i02,
@@ -138,43 +108,11 @@ public:
 					   RowType const &i05 = RowType(),
 					   RowType const &i06 = RowType(),
 					   RowType const &i07 = RowType()) throw()
-	:	ObjectArray<RowType> (countValidInitialisers (i05, i06, i07), false)
+	:	Base (i00, i01, i02, i03,
+              i04, i05, i06, i07)
 	{
-		RowType *thisArray = this->getArray();
-		
-		if (i00.length() > 0) thisArray[ 0] = i00; else return;
-		if (i01.length() > 0) thisArray[ 1] = i01; else return;
-		if (i02.length() > 0) thisArray[ 2] = i02; else return;
-		if (i03.length() > 0) thisArray[ 3] = i03; else return;
-		if (i04.length() > 0) thisArray[ 4] = i04; else return;
-		if (i05.length() > 0) thisArray[ 5] = i05; else return;
-		if (i06.length() > 0) thisArray[ 6] = i06; else return;
-		if (i07.length() > 0) thisArray[ 7] = i07; else return;
 	}
     
-private:
-	static int countValidInitialisers(RowType const &i09,
-									  RowType const &i10,
-									  RowType const &i11,
-									  RowType const &i12,
-									  RowType const &i13,
-									  RowType const &i14,
-									  RowType const &i15) throw()
-	{
-		int size = 9;
-		
-		if (i09.length() > 0) size++; else return size;
-		if (i10.length() > 0) size++; else return size;
-		if (i11.length() > 0) size++; else return size;
-		if (i12.length() > 0) size++; else return size;
-		if (i13.length() > 0) size++; else return size;
-		if (i14.length() > 0) size++; else return size;
-		if (i15.length() > 0) size++; else return size;
-		
-		return size;
-	}
-    
-public:
 	ObjectArray2DBase (RowType const &i00,
 					   RowType const &i01,
 					   RowType const &i02,
@@ -191,69 +129,13 @@ public:
 					   RowType const &i13 = RowType(),
 					   RowType const &i14 = RowType(),
 					   RowType const &i15 = RowType()) throw()
-	:	ObjectArray<RowType> (countValidInitialisers (     i09, i10, i11, 
-													  i12, i13, i14, i15), 
-							  false)
+	:	Base (i00, i01, i02, i03,
+              i04, i05, i06, i07,
+              i08, i09, i10, i11,
+              i12, i13, i14, i15)
 	{
-		RowType *thisArray = this->getArray();
-		
-		if (i00.length() > 0) thisArray[ 0] = i00; else return;
-		if (i01.length() > 0) thisArray[ 1] = i01; else return;
-		if (i02.length() > 0) thisArray[ 2] = i02; else return;
-		if (i03.length() > 0) thisArray[ 3] = i03; else return;
-		if (i04.length() > 0) thisArray[ 4] = i04; else return;
-		if (i05.length() > 0) thisArray[ 5] = i05; else return;
-		if (i06.length() > 0) thisArray[ 6] = i06; else return;
-		if (i07.length() > 0) thisArray[ 7] = i07; else return;
-		if (i08.length() > 0) thisArray[ 8] = i08; else return;
-		if (i09.length() > 0) thisArray[ 9] = i09; else return;
-		if (i10.length() > 0) thisArray[10] = i10; else return;
-		if (i11.length() > 0) thisArray[11] = i11; else return;
-		if (i12.length() > 0) thisArray[12] = i12; else return;
-		if (i13.length() > 0) thisArray[13] = i13; else return;
-		if (i14.length() > 0) thisArray[14] = i14; else return;
-		if (i15.length() > 0) thisArray[15] = i15; else return;
 	}
     
-private:
-	static int countValidInitialisers (RowType const &i17,
-									   RowType const &i18,
-									   RowType const &i19,
-									   RowType const &i20,
-									   RowType const &i21,
-									   RowType const &i22,
-									   RowType const &i23,
-									   RowType const &i24,
-									   RowType const &i25,
-									   RowType const &i26,
-									   RowType const &i27,
-									   RowType const &i28,
-									   RowType const &i29,
-									   RowType const &i30,
-									   RowType const &i31) throw()
-	{
-		int size = 17;
-		
-		if (i17.length() > 0) size++; else return size;
-		if (i18.length() > 0) size++; else return size;
-		if (i19.length() > 0) size++; else return size;
-		if (i20.length() > 0) size++; else return size;
-		if (i21.length() > 0) size++; else return size;
-		if (i22.length() > 0) size++; else return size;
-		if (i23.length() > 0) size++; else return size;
-		if (i24.length() > 0) size++; else return size;
-		if (i25.length() > 0) size++; else return size;
-		if (i26.length() > 0) size++; else return size;
-		if (i27.length() > 0) size++; else return size;
-		if (i28.length() > 0) size++; else return size;
-		if (i29.length() > 0) size++; else return size;
-		if (i30.length() > 0) size++; else return size;
-		if (i31.length() > 0) size++; else return size;
-		
-		return size;
-	}
-    
-public:
 	ObjectArray2DBase (RowType const &i00,
 					   RowType const &i01,
 					   RowType const &i02,
@@ -286,47 +168,252 @@ public:
 					   RowType const &i29 = RowType(),
 					   RowType const &i30 = RowType(),
 					   RowType const &i31 = RowType()) throw()
-	:	ObjectArray<RowType> (countValidInitialisers (     i17, i18, i19,
-													  i20, i21, i22, i23,
-													  i24, i25, i26, i27,
-													  i28, i29, i30, i31), 
-							  false)
+	:	Base (i00, i01, i02, i03,
+              i04, i05, i06, i07,
+              i08, i09, i10, i11,
+              i12, i13, i14, i15,
+              i16, i17, i18, i19,
+              i20, i21, i22, i23,
+              i24, i25, i26, i27,
+              i28, i29, i30, i31)
 	{
-		RowType *thisArray = this->getArray();
-		
-		if (i00.length() > 0) thisArray[ 0] = i00; else return;
-		if (i01.length() > 0) thisArray[ 1] = i01; else return;
-		if (i02.length() > 0) thisArray[ 2] = i02; else return;
-		if (i03.length() > 0) thisArray[ 3] = i03; else return;
-		if (i04.length() > 0) thisArray[ 4] = i04; else return;
-		if (i05.length() > 0) thisArray[ 5] = i05; else return;
-		if (i06.length() > 0) thisArray[ 6] = i06; else return;
-		if (i07.length() > 0) thisArray[ 7] = i07; else return;
-		if (i08.length() > 0) thisArray[ 8] = i08; else return;
-		if (i09.length() > 0) thisArray[ 9] = i09; else return;
-		if (i10.length() > 0) thisArray[10] = i10; else return;
-		if (i11.length() > 0) thisArray[11] = i11; else return;
-		if (i12.length() > 0) thisArray[12] = i12; else return;
-		if (i13.length() > 0) thisArray[13] = i13; else return;
-		if (i14.length() > 0) thisArray[14] = i14; else return;
-		if (i15.length() > 0) thisArray[15] = i15; else return;
-		if (i16.length() > 0) thisArray[16] = i16; else return;
-		if (i17.length() > 0) thisArray[17] = i17; else return;
-		if (i18.length() > 0) thisArray[18] = i18; else return;
-		if (i19.length() > 0) thisArray[19] = i19; else return;
-		if (i20.length() > 0) thisArray[20] = i20; else return;
-		if (i21.length() > 0) thisArray[21] = i21; else return;
-		if (i22.length() > 0) thisArray[22] = i22; else return;
-		if (i23.length() > 0) thisArray[23] = i23; else return;
-		if (i24.length() > 0) thisArray[24] = i24; else return;
-		if (i25.length() > 0) thisArray[25] = i25; else return;
-		if (i26.length() > 0) thisArray[26] = i26; else return;
-		if (i27.length() > 0) thisArray[27] = i27; else return;
-		if (i28.length() > 0) thisArray[28] = i28; else return;
-		if (i29.length() > 0) thisArray[29] = i29; else return;
-		if (i30.length() > 0) thisArray[30] = i30; else return;
-		if (i31.length() > 0) thisArray[31] = i31; else return;
 	}
+
+//private:
+//	static int countValidInitialisers (RowType const& i03) throw()
+//	{
+//		int size = 3;
+//		if (i03.length() > 0) size++; else return size;
+//		return size;
+//	}	
+//    
+//public:
+//	ObjectArray2DBase (RowType const &i00,
+//					   RowType const &i01,
+//					   RowType const &i02,
+//					   RowType const &i03 = RowType()) throw()
+//	:	ObjectArray<RowType> (countValidInitialisers (i03), false) 
+//	{
+//		RowType *thisArray = this->getArray();
+//		
+//		if (i00.length() > 0) thisArray[ 0] = i00; else return;
+//		if (i01.length() > 0) thisArray[ 1] = i01; else return;
+//		if (i02.length() > 0) thisArray[ 2] = i02; else return;
+//		if (i03.length() > 0) thisArray[ 3] = i03; else return;
+//	}
+//    
+//private:
+//	static int countValidInitialisers (RowType const &i05,
+//									   RowType const &i06,
+//									   RowType const &i07) throw()
+//	{
+//		int size = 5;
+//		
+//		if (i05.length() > 0) size++; else return size;
+//		if (i06.length() > 0) size++; else return size;
+//		if (i07.length() > 0) size++; else return size;
+//		
+//		return size;
+//	}
+//    
+//public:
+//	ObjectArray2DBase (RowType const &i00,
+//					   RowType const &i01,
+//					   RowType const &i02,
+//					   RowType const &i03,
+//					   RowType const &i04,
+//					   RowType const &i05 = RowType(),
+//					   RowType const &i06 = RowType(),
+//					   RowType const &i07 = RowType()) throw()
+//	:	ObjectArray<RowType> (countValidInitialisers (i05, i06, i07), false)
+//	{
+//		RowType *thisArray = this->getArray();
+//		
+//		if (i00.length() > 0) thisArray[ 0] = i00; else return;
+//		if (i01.length() > 0) thisArray[ 1] = i01; else return;
+//		if (i02.length() > 0) thisArray[ 2] = i02; else return;
+//		if (i03.length() > 0) thisArray[ 3] = i03; else return;
+//		if (i04.length() > 0) thisArray[ 4] = i04; else return;
+//		if (i05.length() > 0) thisArray[ 5] = i05; else return;
+//		if (i06.length() > 0) thisArray[ 6] = i06; else return;
+//		if (i07.length() > 0) thisArray[ 7] = i07; else return;
+//	}
+//    
+//private:
+//	static int countValidInitialisers(RowType const &i09,
+//									  RowType const &i10,
+//									  RowType const &i11,
+//									  RowType const &i12,
+//									  RowType const &i13,
+//									  RowType const &i14,
+//									  RowType const &i15) throw()
+//	{
+//		int size = 9;
+//		
+//		if (i09.length() > 0) size++; else return size;
+//		if (i10.length() > 0) size++; else return size;
+//		if (i11.length() > 0) size++; else return size;
+//		if (i12.length() > 0) size++; else return size;
+//		if (i13.length() > 0) size++; else return size;
+//		if (i14.length() > 0) size++; else return size;
+//		if (i15.length() > 0) size++; else return size;
+//		
+//		return size;
+//	}
+//    
+//public:
+//	ObjectArray2DBase (RowType const &i00,
+//					   RowType const &i01,
+//					   RowType const &i02,
+//					   RowType const &i03,
+//					   RowType const &i04,
+//					   RowType const &i05,
+//					   RowType const &i06,
+//					   RowType const &i07,
+//					   RowType const &i08,
+//					   RowType const &i09 = RowType(),
+//					   RowType const &i10 = RowType(),
+//					   RowType const &i11 = RowType(),
+//					   RowType const &i12 = RowType(),
+//					   RowType const &i13 = RowType(),
+//					   RowType const &i14 = RowType(),
+//					   RowType const &i15 = RowType()) throw()
+//	:	ObjectArray<RowType> (countValidInitialisers (     i09, i10, i11, 
+//													  i12, i13, i14, i15), 
+//							  false)
+//	{
+//		RowType *thisArray = this->getArray();
+//		
+//		if (i00.length() > 0) thisArray[ 0] = i00; else return;
+//		if (i01.length() > 0) thisArray[ 1] = i01; else return;
+//		if (i02.length() > 0) thisArray[ 2] = i02; else return;
+//		if (i03.length() > 0) thisArray[ 3] = i03; else return;
+//		if (i04.length() > 0) thisArray[ 4] = i04; else return;
+//		if (i05.length() > 0) thisArray[ 5] = i05; else return;
+//		if (i06.length() > 0) thisArray[ 6] = i06; else return;
+//		if (i07.length() > 0) thisArray[ 7] = i07; else return;
+//		if (i08.length() > 0) thisArray[ 8] = i08; else return;
+//		if (i09.length() > 0) thisArray[ 9] = i09; else return;
+//		if (i10.length() > 0) thisArray[10] = i10; else return;
+//		if (i11.length() > 0) thisArray[11] = i11; else return;
+//		if (i12.length() > 0) thisArray[12] = i12; else return;
+//		if (i13.length() > 0) thisArray[13] = i13; else return;
+//		if (i14.length() > 0) thisArray[14] = i14; else return;
+//		if (i15.length() > 0) thisArray[15] = i15; else return;
+//	}
+//    
+//private:
+//	static int countValidInitialisers (RowType const &i17,
+//									   RowType const &i18,
+//									   RowType const &i19,
+//									   RowType const &i20,
+//									   RowType const &i21,
+//									   RowType const &i22,
+//									   RowType const &i23,
+//									   RowType const &i24,
+//									   RowType const &i25,
+//									   RowType const &i26,
+//									   RowType const &i27,
+//									   RowType const &i28,
+//									   RowType const &i29,
+//									   RowType const &i30,
+//									   RowType const &i31) throw()
+//	{
+//		int size = 17;
+//		
+//		if (i17.length() > 0) size++; else return size;
+//		if (i18.length() > 0) size++; else return size;
+//		if (i19.length() > 0) size++; else return size;
+//		if (i20.length() > 0) size++; else return size;
+//		if (i21.length() > 0) size++; else return size;
+//		if (i22.length() > 0) size++; else return size;
+//		if (i23.length() > 0) size++; else return size;
+//		if (i24.length() > 0) size++; else return size;
+//		if (i25.length() > 0) size++; else return size;
+//		if (i26.length() > 0) size++; else return size;
+//		if (i27.length() > 0) size++; else return size;
+//		if (i28.length() > 0) size++; else return size;
+//		if (i29.length() > 0) size++; else return size;
+//		if (i30.length() > 0) size++; else return size;
+//		if (i31.length() > 0) size++; else return size;
+//		
+//		return size;
+//	}
+//    
+//public:
+//	ObjectArray2DBase (RowType const &i00,
+//					   RowType const &i01,
+//					   RowType const &i02,
+//					   RowType const &i03,
+//					   RowType const &i04,
+//					   RowType const &i05,
+//					   RowType const &i06,
+//					   RowType const &i07,
+//					   RowType const &i08,
+//					   RowType const &i09,
+//					   RowType const &i10,
+//					   RowType const &i11,
+//					   RowType const &i12,
+//					   RowType const &i13,
+//					   RowType const &i14,
+//					   RowType const &i15,
+//					   RowType const &i16,
+//					   RowType const &i17 = RowType(),
+//					   RowType const &i18 = RowType(),
+//					   RowType const &i19 = RowType(),
+//					   RowType const &i20 = RowType(),
+//					   RowType const &i21 = RowType(),
+//					   RowType const &i22 = RowType(),
+//					   RowType const &i23 = RowType(),
+//					   RowType const &i24 = RowType(),
+//					   RowType const &i25 = RowType(),
+//					   RowType const &i26 = RowType(),
+//					   RowType const &i27 = RowType(),
+//					   RowType const &i28 = RowType(),
+//					   RowType const &i29 = RowType(),
+//					   RowType const &i30 = RowType(),
+//					   RowType const &i31 = RowType()) throw()
+//	:	ObjectArray<RowType> (countValidInitialisers (     i17, i18, i19,
+//													  i20, i21, i22, i23,
+//													  i24, i25, i26, i27,
+//													  i28, i29, i30, i31), 
+//							  false)
+//	{
+//		RowType *thisArray = this->getArray();
+//		
+//		if (i00.length() > 0) thisArray[ 0] = i00; else return;
+//		if (i01.length() > 0) thisArray[ 1] = i01; else return;
+//		if (i02.length() > 0) thisArray[ 2] = i02; else return;
+//		if (i03.length() > 0) thisArray[ 3] = i03; else return;
+//		if (i04.length() > 0) thisArray[ 4] = i04; else return;
+//		if (i05.length() > 0) thisArray[ 5] = i05; else return;
+//		if (i06.length() > 0) thisArray[ 6] = i06; else return;
+//		if (i07.length() > 0) thisArray[ 7] = i07; else return;
+//		if (i08.length() > 0) thisArray[ 8] = i08; else return;
+//		if (i09.length() > 0) thisArray[ 9] = i09; else return;
+//		if (i10.length() > 0) thisArray[10] = i10; else return;
+//		if (i11.length() > 0) thisArray[11] = i11; else return;
+//		if (i12.length() > 0) thisArray[12] = i12; else return;
+//		if (i13.length() > 0) thisArray[13] = i13; else return;
+//		if (i14.length() > 0) thisArray[14] = i14; else return;
+//		if (i15.length() > 0) thisArray[15] = i15; else return;
+//		if (i16.length() > 0) thisArray[16] = i16; else return;
+//		if (i17.length() > 0) thisArray[17] = i17; else return;
+//		if (i18.length() > 0) thisArray[18] = i18; else return;
+//		if (i19.length() > 0) thisArray[19] = i19; else return;
+//		if (i20.length() > 0) thisArray[20] = i20; else return;
+//		if (i21.length() > 0) thisArray[21] = i21; else return;
+//		if (i22.length() > 0) thisArray[22] = i22; else return;
+//		if (i23.length() > 0) thisArray[23] = i23; else return;
+//		if (i24.length() > 0) thisArray[24] = i24; else return;
+//		if (i25.length() > 0) thisArray[25] = i25; else return;
+//		if (i26.length() > 0) thisArray[26] = i26; else return;
+//		if (i27.length() > 0) thisArray[27] = i27; else return;
+//		if (i28.length() > 0) thisArray[28] = i28; else return;
+//		if (i29.length() > 0) thisArray[29] = i29; else return;
+//		if (i30.length() > 0) thisArray[30] = i30; else return;
+//		if (i31.length() > 0) thisArray[31] = i31; else return;
+//	}
     
 	ObjectArrayAssignmentDefinition(ObjectArray2DBase, RowType);
 	
@@ -505,10 +592,11 @@ public:
     
     typedef ObjectArray<ArrayType>                  ObjectArrayType;
     typedef ObjectArray<ObjectArrayType>            ObjectArray2DType;
-    
+    typedef typename Base::InitialObject            InitialObject;
+
 	
     explicit ObjectArray2D (Internal* internalToUse) throw() 
-	:	ObjectArray<RowType> (internalToUse)
+	:	Base (internalToUse)
 	{
 	} 
     
@@ -548,12 +636,12 @@ public:
 	}	                
     
     ObjectArray2D (const int rows = 0) throw()
-	:	ObjectArray2DBase< ArrayType, RowType > (rows < 0 ? 0 : rows)//, false) 
+	:	Base (rows < 0 ? 0 : rows)
 	{
 	}
     
 	ObjectArray2D (const int rows, const int columns) throw()
-	:	ObjectArray2DBase< ArrayType, RowType > (rows < 0 ? 0 : rows)//, false) 
+	:	Base (rows < 0 ? 0 : rows)
 	{
 		if (columns > 0 && rows > 0)
 		{
@@ -565,94 +653,94 @@ public:
 	}
     
 	ObjectArray2D (RowType const& single) throw()
-	:	ObjectArray2DBase< ArrayType, RowType > (single)
+	:	Base (single)
 	{
 	}
     
-	ObjectArray2D (RowType const &i00,
-				   RowType const &i01,
-				   RowType const &i02 = RowType(),
-				   RowType const &i03 = RowType()) throw()
-	:	ObjectArray2DBase<ArrayType, RowType> (i00, i01, i02, i03) 
+	ObjectArray2D (InitialObject const &i00,
+				   InitialObject const &i01,
+				   InitialObject const &i02 = InitialObject(),
+				   InitialObject const &i03 = InitialObject()) throw()
+	:	Base (i00, i01, i02, i03) 
 	{
 	}
     
-	ObjectArray2D (RowType const &i00,
-				   RowType const &i01,
-				   RowType const &i02,
-				   RowType const &i03,
-				   RowType const &i04,
-				   RowType const &i05 = RowType(),
-				   RowType const &i06 = RowType(),
-				   RowType const &i07 = RowType()) throw()
-	:	ObjectArray2DBase<ArrayType, RowType> (i00, i01, i02, i03,
-											   i04, i05, i06, i07) 
+	ObjectArray2D (InitialObject const &i00,
+				   InitialObject const &i01,
+				   InitialObject const &i02,
+				   InitialObject const &i03,
+				   InitialObject const &i04,
+				   InitialObject const &i05 = InitialObject(),
+				   InitialObject const &i06 = InitialObject(),
+				   InitialObject const &i07 = InitialObject()) throw()
+	:	Base (i00, i01, i02, i03,
+              i04, i05, i06, i07) 
 	{
 	}
     
-	ObjectArray2D (RowType const &i00,
-				   RowType const &i01,
-				   RowType const &i02,
-				   RowType const &i03,
-				   RowType const &i04,
-				   RowType const &i05,
-				   RowType const &i06,
-				   RowType const &i07,
-				   RowType const &i08,
-				   RowType const &i09 = RowType(),
-				   RowType const &i10 = RowType(),
-				   RowType const &i11 = RowType(),
-				   RowType const &i12 = RowType(),
-				   RowType const &i13 = RowType(),
-				   RowType const &i14 = RowType(),
-				   RowType const &i15 = RowType()) throw()
-	:	ObjectArray2DBase<ArrayType, RowType> (i00, i01, i02, i03,
-											   i04, i05, i06, i07,
-											   i08, i09, i10, i11, 
-											   i12, i13, i14, i15)
+	ObjectArray2D (InitialObject const &i00,
+				   InitialObject const &i01,
+				   InitialObject const &i02,
+				   InitialObject const &i03,
+				   InitialObject const &i04,
+				   InitialObject const &i05,
+				   InitialObject const &i06,
+				   InitialObject const &i07,
+				   InitialObject const &i08,
+				   InitialObject const &i09 = InitialObject(),
+				   InitialObject const &i10 = InitialObject(),
+				   InitialObject const &i11 = InitialObject(),
+				   InitialObject const &i12 = InitialObject(),
+				   InitialObject const &i13 = InitialObject(),
+				   InitialObject const &i14 = InitialObject(),
+				   InitialObject const &i15 = InitialObject()) throw()
+	:	Base (i00, i01, i02, i03,
+              i04, i05, i06, i07,
+              i08, i09, i10, i11, 
+              i12, i13, i14, i15)
 	{
 	}
     
-	ObjectArray2D (RowType const &i00,
-				   RowType const &i01,
-				   RowType const &i02,
-				   RowType const &i03,
-				   RowType const &i04,
-				   RowType const &i05,
-				   RowType const &i06,
-				   RowType const &i07,
-				   RowType const &i08,
-				   RowType const &i09,
-				   RowType const &i10,
-				   RowType const &i11,
-				   RowType const &i12,
-				   RowType const &i13,
-				   RowType const &i14,
-				   RowType const &i15,
-				   RowType const &i16,
-				   RowType const &i17 = RowType(),
-				   RowType const &i18 = RowType(),
-				   RowType const &i19 = RowType(),
-				   RowType const &i20 = RowType(),
-				   RowType const &i21 = RowType(),
-				   RowType const &i22 = RowType(),
-				   RowType const &i23 = RowType(),
-				   RowType const &i24 = RowType(),
-				   RowType const &i25 = RowType(),
-				   RowType const &i26 = RowType(),
-				   RowType const &i27 = RowType(),
-				   RowType const &i28 = RowType(),
-				   RowType const &i29 = RowType(),
-				   RowType const &i30 = RowType(),
-				   RowType const &i31 = RowType()) throw()
-	:	ObjectArray2DBase<ArrayType, RowType> (i00, i01, i02, i03,
-											   i04, i05, i06, i07,
-											   i08, i09, i10, i11, 
-											   i12, i13, i14, i15, 
-											   i16, i17, i18, i19,
-											   i20, i21, i22, i23,
-											   i24, i25, i26, i27,
-											   i28, i29, i30, i31)
+	ObjectArray2D (InitialObject const &i00,
+				   InitialObject const &i01,
+				   InitialObject const &i02,
+				   InitialObject const &i03,
+				   InitialObject const &i04,
+				   InitialObject const &i05,
+				   InitialObject const &i06,
+				   InitialObject const &i07,
+				   InitialObject const &i08,
+				   InitialObject const &i09,
+				   InitialObject const &i10,
+				   InitialObject const &i11,
+				   InitialObject const &i12,
+				   InitialObject const &i13,
+				   InitialObject const &i14,
+				   InitialObject const &i15,
+				   InitialObject const &i16,
+				   InitialObject const &i17 = InitialObject(),
+				   InitialObject const &i18 = InitialObject(),
+				   InitialObject const &i19 = InitialObject(),
+				   InitialObject const &i20 = InitialObject(),
+				   InitialObject const &i21 = InitialObject(),
+				   InitialObject const &i22 = InitialObject(),
+				   InitialObject const &i23 = InitialObject(),
+				   InitialObject const &i24 = InitialObject(),
+				   InitialObject const &i25 = InitialObject(),
+				   InitialObject const &i26 = InitialObject(),
+				   InitialObject const &i27 = InitialObject(),
+				   InitialObject const &i28 = InitialObject(),
+				   InitialObject const &i29 = InitialObject(),
+				   InitialObject const &i30 = InitialObject(),
+				   InitialObject const &i31 = InitialObject()) throw()
+	:	Base (i00, i01, i02, i03,
+              i04, i05, i06, i07,
+              i08, i09, i10, i11, 
+              i12, i13, i14, i15, 
+              i16, i17, i18, i19,
+              i20, i21, i22, i23,
+              i24, i25, i26, i27,
+              i28, i29, i30, i31)
 	{
 	}
     
@@ -660,7 +748,7 @@ public:
     
 	ObjectArray2D (ObjectArray2D<ArrayType,RowType> const& array0, 
 				   ObjectArray2D<ArrayType,RowType> const& array1) throw()
-	:	ObjectArray2DBase< ArrayType, RowType > (array0, array1)
+	:	Base (array0, array1)
 	{
 	}
     
