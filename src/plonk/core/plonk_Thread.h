@@ -121,7 +121,7 @@ public:
          This is thread-safe but blocks the calling thread until the other
          thread has exited. 
          @param interval The time interval between checks for the thread to exit. */
-        ResultCode setShouldExitAndWait (const double interval = 0.001) throw();
+        ResultCode setShouldExitAndWait (const double interval = 0.000001) throw();
         
         /** Returns @c true if the thread has been signalled to exit, otherwise @c false.
          This is thread-safe. */

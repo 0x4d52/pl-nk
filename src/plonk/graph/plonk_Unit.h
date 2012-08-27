@@ -97,8 +97,37 @@ public:
     typedef WeakPointerContainer<UnitBase>      Weak;
     typedef NumericalArray<SampleType>          Buffer;
     typedef InputDictionary                     Inputs;    
-    typedef typename UnitType::InitialNumber    InitialUnit;
+    
+    class InitialUnit
+    {
+	public:
+		InitialUnit() throw() 
+        :   value (UnitBase::getNull()), 
+            valid (false) 
+        { 
+        }
+        
+		InitialUnit (UnitBase const& initialValue) throw()
+		:	value (initialValue), 
+            valid (true) 
+		{ 
+		}
+        
+		template<class OtherType>
+		InitialUnit (OtherType const& initialValue) throw()
+		:	value (initialValue), 
+            valid (true) 
+		{ 
+		}
+		
+		const UnitBase value;
+		const bool valid;
+        
+	private:
+		InitialUnit& operator= (InitialUnit const&); // to prevent assignment and MSVC complaining!
+	};
 
+    
     /** Default constructor.
      This creates a Unit with a single null Channel. */
     UnitBase() throw()
@@ -196,14 +225,69 @@ public:
     {
     }
     
+    UnitBase (UnitBase const& i00,
+              UnitBase const& i01) throw()
+    :   Base (i00, i01)
+    {
+    }
+    
+private:
+    static int countValidChannels (InitialUnit const& i00,
+                                   InitialUnit const& i01,
+                                   InitialUnit const& i02,
+                                   InitialUnit const& i03) throw()
+    {
+        int numChannels = 0;
+        
+        if (i00.valid) numChannels += i00.value.getNumChannels();
+        if (i01.valid) numChannels += i01.value.getNumChannels();
+        if (i02.valid) numChannels += i02.value.getNumChannels();        
+        if (i03.valid) numChannels += i03.value.getNumChannels();
+
+        return numChannels;
+    }
+    
+public:
     UnitBase (InitialUnit const& i00,
               InitialUnit const& i01,
               InitialUnit const& i02,
               InitialUnit const& i03 = InitialUnit()) throw()
-	:	Base (i00, i01, i02, i03)
+	:	Base (NumericalArraySpec (countValidChannels (i00, i01, i02, i03), false))
 	{
+        int i;
+        ChannelType* array = this->getArray();
+        
+        if (i00.valid) { for (i = 0; i < i00.value.getNumChannels(); ++i) *array++ = i00.value.atUnchecked (i); }
+        if (i01.valid) { for (i = 0; i < i01.value.getNumChannels(); ++i) *array++ = i01.value.atUnchecked (i); }
+        if (i02.valid) { for (i = 0; i < i02.value.getNumChannels(); ++i) *array++ = i02.value.atUnchecked (i); }
+        if (i03.valid) { for (i = 0; i < i03.value.getNumChannels(); ++i) *array++ = i03.value.atUnchecked (i); }
 	}
-	
+    
+private:
+    static int countValidChannels (InitialUnit const& i00,
+                                   InitialUnit const& i01,
+                                   InitialUnit const& i02,
+                                   InitialUnit const& i03,
+                                   InitialUnit const& i04,
+                                   InitialUnit const& i05,
+                                   InitialUnit const& i06,
+                                   InitialUnit const& i07) throw()
+    {
+        int numChannels = 0;
+        
+        if (i00.valid) numChannels += i00.value.getNumChannels();
+        if (i01.valid) numChannels += i01.value.getNumChannels();
+        if (i02.valid) numChannels += i02.value.getNumChannels();        
+        if (i03.valid) numChannels += i03.value.getNumChannels();
+        if (i04.valid) numChannels += i04.value.getNumChannels();
+        if (i05.valid) numChannels += i05.value.getNumChannels();
+        if (i06.valid) numChannels += i06.value.getNumChannels();
+        if (i07.valid) numChannels += i07.value.getNumChannels();
+        
+        return numChannels;
+    }
+    
+public:
     UnitBase (InitialUnit const& i00,
               InitialUnit const& i01,
               InitialUnit const& i02,
@@ -212,10 +296,63 @@ public:
               InitialUnit const& i05 = InitialUnit(),
               InitialUnit const& i06 = InitialUnit(),
               InitialUnit const& i07 = InitialUnit()) throw()
-	:	Base (i00, i01, i02, i03, i04, i05, i06, i07)
+	:	Base (NumericalArraySpec (countValidChannels (i00, i01, i02, i03,
+                                                      i04, i05, i06, i07), false))
 	{
-	}
+        int i;
+        ChannelType* array = this->getArray();
         
+        if (i00.valid) { for (i = 0; i < i00.value.getNumChannels(); ++i) *array++ = i00.value.atUnchecked (i); }
+        if (i01.valid) { for (i = 0; i < i01.value.getNumChannels(); ++i) *array++ = i01.value.atUnchecked (i); }
+        if (i02.valid) { for (i = 0; i < i02.value.getNumChannels(); ++i) *array++ = i02.value.atUnchecked (i); }
+        if (i03.valid) { for (i = 0; i < i03.value.getNumChannels(); ++i) *array++ = i03.value.atUnchecked (i); }
+        if (i04.valid) { for (i = 0; i < i04.value.getNumChannels(); ++i) *array++ = i04.value.atUnchecked (i); }
+        if (i05.valid) { for (i = 0; i < i05.value.getNumChannels(); ++i) *array++ = i05.value.atUnchecked (i); }
+        if (i06.valid) { for (i = 0; i < i06.value.getNumChannels(); ++i) *array++ = i06.value.atUnchecked (i); }
+        if (i07.valid) { for (i = 0; i < i07.value.getNumChannels(); ++i) *array++ = i07.value.atUnchecked (i); }
+	}
+    
+private:
+    static int countValidChannels (InitialUnit const& i00,
+                                   InitialUnit const& i01,
+                                   InitialUnit const& i02,
+                                   InitialUnit const& i03,
+                                   InitialUnit const& i04,
+                                   InitialUnit const& i05,
+                                   InitialUnit const& i06,
+                                   InitialUnit const& i07,
+                                   InitialUnit const& i08,
+                                   InitialUnit const& i09,
+                                   InitialUnit const& i10,
+                                   InitialUnit const& i11,
+                                   InitialUnit const& i12,
+                                   InitialUnit const& i13,
+                                   InitialUnit const& i14,
+                                   InitialUnit const& i15) throw()
+    {
+        int numChannels = 0;
+        
+        if (i00.valid) numChannels += i00.value.getNumChannels();
+        if (i01.valid) numChannels += i01.value.getNumChannels();
+        if (i02.valid) numChannels += i02.value.getNumChannels();        
+        if (i03.valid) numChannels += i03.value.getNumChannels();
+        if (i04.valid) numChannels += i04.value.getNumChannels();
+        if (i05.valid) numChannels += i05.value.getNumChannels();
+        if (i06.valid) numChannels += i06.value.getNumChannels();
+        if (i07.valid) numChannels += i07.value.getNumChannels();
+        if (i08.valid) numChannels += i08.value.getNumChannels();
+        if (i09.valid) numChannels += i09.value.getNumChannels();
+        if (i10.valid) numChannels += i10.value.getNumChannels();
+        if (i11.valid) numChannels += i11.value.getNumChannels();
+        if (i12.valid) numChannels += i12.value.getNumChannels();
+        if (i13.valid) numChannels += i13.value.getNumChannels();
+        if (i14.valid) numChannels += i14.value.getNumChannels();
+        if (i15.valid) numChannels += i15.value.getNumChannels();
+        
+        return numChannels;
+    }
+    
+public:
     UnitBase (InitialUnit const &i00,
               InitialUnit const &i01,
               InitialUnit const &i02,
@@ -232,11 +369,105 @@ public:
               InitialUnit const &i13 = InitialUnit(),
               InitialUnit const &i14 = InitialUnit(),
               InitialUnit const &i15 = InitialUnit()) throw()
-	:	Base (i00, i01, i02, i03, i04, i05, i06, i07, 
-              i08, i09, i10, i11, i12, i13, i14, i15)
+	:	Base (NumericalArraySpec (countValidChannels (i00, i01, i02, i03,
+                                                      i04, i05, i06, i07,
+                                                      i08, i09, i10, i11,
+                                                      i12, i13, i14, i15), false))
 	{
+        int i;
+        ChannelType* array = this->getArray();
+        
+        if (i00.valid) { for (i = 0; i < i00.value.getNumChannels(); ++i) *array++ = i00.value.atUnchecked (i); }
+        if (i01.valid) { for (i = 0; i < i01.value.getNumChannels(); ++i) *array++ = i01.value.atUnchecked (i); }
+        if (i02.valid) { for (i = 0; i < i02.value.getNumChannels(); ++i) *array++ = i02.value.atUnchecked (i); }
+        if (i03.valid) { for (i = 0; i < i03.value.getNumChannels(); ++i) *array++ = i03.value.atUnchecked (i); }
+        if (i04.valid) { for (i = 0; i < i04.value.getNumChannels(); ++i) *array++ = i04.value.atUnchecked (i); }
+        if (i05.valid) { for (i = 0; i < i05.value.getNumChannels(); ++i) *array++ = i05.value.atUnchecked (i); }
+        if (i06.valid) { for (i = 0; i < i06.value.getNumChannels(); ++i) *array++ = i06.value.atUnchecked (i); }
+        if (i07.valid) { for (i = 0; i < i07.value.getNumChannels(); ++i) *array++ = i07.value.atUnchecked (i); }
+        if (i08.valid) { for (i = 0; i < i08.value.getNumChannels(); ++i) *array++ = i08.value.atUnchecked (i); }
+        if (i09.valid) { for (i = 0; i < i09.value.getNumChannels(); ++i) *array++ = i09.value.atUnchecked (i); }
+        if (i10.valid) { for (i = 0; i < i10.value.getNumChannels(); ++i) *array++ = i10.value.atUnchecked (i); }
+        if (i11.valid) { for (i = 0; i < i11.value.getNumChannels(); ++i) *array++ = i11.value.atUnchecked (i); }
+        if (i12.valid) { for (i = 0; i < i12.value.getNumChannels(); ++i) *array++ = i12.value.atUnchecked (i); }
+        if (i13.valid) { for (i = 0; i < i13.value.getNumChannels(); ++i) *array++ = i13.value.atUnchecked (i); }
+        if (i14.valid) { for (i = 0; i < i14.value.getNumChannels(); ++i) *array++ = i14.value.atUnchecked (i); }
+        if (i15.valid) { for (i = 0; i < i15.value.getNumChannels(); ++i) *array++ = i15.value.atUnchecked (i); }
     }
     
+private:
+    static int countValidChannels (InitialUnit const& i00,
+                                   InitialUnit const& i01,
+                                   InitialUnit const& i02,
+                                   InitialUnit const& i03,
+                                   InitialUnit const& i04,
+                                   InitialUnit const& i05,
+                                   InitialUnit const& i06,
+                                   InitialUnit const& i07,
+                                   InitialUnit const& i08,
+                                   InitialUnit const& i09,
+                                   InitialUnit const& i10,
+                                   InitialUnit const& i11,
+                                   InitialUnit const& i12,
+                                   InitialUnit const& i13,
+                                   InitialUnit const& i14,
+                                   InitialUnit const& i15,
+                                   InitialUnit const& i16,
+                                   InitialUnit const& i17,
+                                   InitialUnit const& i18,
+                                   InitialUnit const& i19,
+                                   InitialUnit const& i20,
+                                   InitialUnit const& i21,
+                                   InitialUnit const& i22,
+                                   InitialUnit const& i23,
+                                   InitialUnit const& i24,
+                                   InitialUnit const& i25,
+                                   InitialUnit const& i26,
+                                   InitialUnit const& i27,
+                                   InitialUnit const& i28,
+                                   InitialUnit const& i29,
+                                   InitialUnit const& i30,
+                                   InitialUnit const& i31) throw()
+    {
+        int numChannels = 0;
+        
+        if (i00.valid) numChannels += i00.value.getNumChannels();
+        if (i01.valid) numChannels += i01.value.getNumChannels();
+        if (i02.valid) numChannels += i02.value.getNumChannels();        
+        if (i03.valid) numChannels += i03.value.getNumChannels();
+        if (i04.valid) numChannels += i04.value.getNumChannels();
+        if (i05.valid) numChannels += i05.value.getNumChannels();
+        if (i06.valid) numChannels += i06.value.getNumChannels();
+        if (i07.valid) numChannels += i07.value.getNumChannels();
+        if (i08.valid) numChannels += i08.value.getNumChannels();
+        if (i09.valid) numChannels += i09.value.getNumChannels();
+        if (i10.valid) numChannels += i10.value.getNumChannels();
+        if (i11.valid) numChannels += i11.value.getNumChannels();
+        if (i12.valid) numChannels += i12.value.getNumChannels();
+        if (i13.valid) numChannels += i13.value.getNumChannels();
+        if (i14.valid) numChannels += i14.value.getNumChannels();
+        if (i15.valid) numChannels += i15.value.getNumChannels();
+        if (i16.valid) numChannels += i16.value.getNumChannels();
+        if (i17.valid) numChannels += i17.value.getNumChannels();
+        if (i18.valid) numChannels += i18.value.getNumChannels();
+        if (i19.valid) numChannels += i19.value.getNumChannels();
+        if (i20.valid) numChannels += i20.value.getNumChannels();
+        if (i21.valid) numChannels += i21.value.getNumChannels();
+        if (i22.valid) numChannels += i22.value.getNumChannels();
+        if (i23.valid) numChannels += i23.value.getNumChannels();
+        if (i24.valid) numChannels += i24.value.getNumChannels();
+        if (i25.valid) numChannels += i25.value.getNumChannels();
+        if (i26.valid) numChannels += i26.value.getNumChannels();
+        if (i27.valid) numChannels += i27.value.getNumChannels();
+        if (i28.valid) numChannels += i28.value.getNumChannels();
+        if (i29.valid) numChannels += i29.value.getNumChannels();
+        if (i30.valid) numChannels += i30.value.getNumChannels();
+        if (i31.valid) numChannels += i31.value.getNumChannels();
+        
+        return numChannels;
+    }
+    
+public:
     UnitBase (InitialUnit const &i00,
               InitialUnit const &i01,
               InitialUnit const &i02,
@@ -269,11 +500,50 @@ public:
               InitialUnit const &i29 = InitialUnit(),
               InitialUnit const &i30 = InitialUnit(),
               InitialUnit const &i31 = InitialUnit()) throw()
-	:	Base (i00, i01, i02, i03, i04, i05, i06, i07, 
-              i08, i09, i10, i11, i12, i13, i14, i15,
-              i16, i17, i18, i19, i20, i21, i22, i23,
-              i24, i25, i26, i27, i28, i29, i30, i31)
+	:	Base (NumericalArraySpec (countValidChannels (i00, i01, i02, i03,
+                                                      i04, i05, i06, i07,
+                                                      i08, i09, i10, i11,
+                                                      i12, i13, i14, i15,
+                                                      i16, i17, i18, i19,
+                                                      i20, i21, i22, i23,
+                                                      i24, i25, i26, i27, 
+                                                      i28, i29, i30, i31), false))
 	{
+        int i;
+        ChannelType* array = this->getArray();
+        
+        if (i00.valid) { for (i = 0; i < i00.value.getNumChannels(); ++i) *array++ = i00.value.atUnchecked (i); }
+        if (i01.valid) { for (i = 0; i < i01.value.getNumChannels(); ++i) *array++ = i01.value.atUnchecked (i); }
+        if (i02.valid) { for (i = 0; i < i02.value.getNumChannels(); ++i) *array++ = i02.value.atUnchecked (i); }
+        if (i03.valid) { for (i = 0; i < i03.value.getNumChannels(); ++i) *array++ = i03.value.atUnchecked (i); }
+        if (i04.valid) { for (i = 0; i < i04.value.getNumChannels(); ++i) *array++ = i04.value.atUnchecked (i); }
+        if (i05.valid) { for (i = 0; i < i05.value.getNumChannels(); ++i) *array++ = i05.value.atUnchecked (i); }
+        if (i06.valid) { for (i = 0; i < i06.value.getNumChannels(); ++i) *array++ = i06.value.atUnchecked (i); }
+        if (i07.valid) { for (i = 0; i < i07.value.getNumChannels(); ++i) *array++ = i07.value.atUnchecked (i); }
+        if (i08.valid) { for (i = 0; i < i08.value.getNumChannels(); ++i) *array++ = i08.value.atUnchecked (i); }
+        if (i09.valid) { for (i = 0; i < i09.value.getNumChannels(); ++i) *array++ = i09.value.atUnchecked (i); }
+        if (i10.valid) { for (i = 0; i < i10.value.getNumChannels(); ++i) *array++ = i10.value.atUnchecked (i); }
+        if (i11.valid) { for (i = 0; i < i11.value.getNumChannels(); ++i) *array++ = i11.value.atUnchecked (i); }
+        if (i12.valid) { for (i = 0; i < i12.value.getNumChannels(); ++i) *array++ = i12.value.atUnchecked (i); }
+        if (i13.valid) { for (i = 0; i < i13.value.getNumChannels(); ++i) *array++ = i13.value.atUnchecked (i); }
+        if (i14.valid) { for (i = 0; i < i14.value.getNumChannels(); ++i) *array++ = i14.value.atUnchecked (i); }
+        if (i15.valid) { for (i = 0; i < i15.value.getNumChannels(); ++i) *array++ = i15.value.atUnchecked (i); }
+        if (i16.valid) { for (i = 0; i < i16.value.getNumChannels(); ++i) *array++ = i16.value.atUnchecked (i); }
+        if (i17.valid) { for (i = 0; i < i17.value.getNumChannels(); ++i) *array++ = i17.value.atUnchecked (i); }
+        if (i18.valid) { for (i = 0; i < i18.value.getNumChannels(); ++i) *array++ = i18.value.atUnchecked (i); }
+        if (i19.valid) { for (i = 0; i < i19.value.getNumChannels(); ++i) *array++ = i19.value.atUnchecked (i); }
+        if (i20.valid) { for (i = 0; i < i20.value.getNumChannels(); ++i) *array++ = i20.value.atUnchecked (i); }
+        if (i21.valid) { for (i = 0; i < i21.value.getNumChannels(); ++i) *array++ = i21.value.atUnchecked (i); }
+        if (i22.valid) { for (i = 0; i < i22.value.getNumChannels(); ++i) *array++ = i22.value.atUnchecked (i); }
+        if (i23.valid) { for (i = 0; i < i23.value.getNumChannels(); ++i) *array++ = i23.value.atUnchecked (i); }
+        if (i24.valid) { for (i = 0; i < i24.value.getNumChannels(); ++i) *array++ = i24.value.atUnchecked (i); }
+        if (i25.valid) { for (i = 0; i < i25.value.getNumChannels(); ++i) *array++ = i25.value.atUnchecked (i); }
+        if (i26.valid) { for (i = 0; i < i26.value.getNumChannels(); ++i) *array++ = i26.value.atUnchecked (i); }
+        if (i27.valid) { for (i = 0; i < i27.value.getNumChannels(); ++i) *array++ = i27.value.atUnchecked (i); }
+        if (i28.valid) { for (i = 0; i < i28.value.getNumChannels(); ++i) *array++ = i28.value.atUnchecked (i); }
+        if (i29.valid) { for (i = 0; i < i29.value.getNumChannels(); ++i) *array++ = i29.value.atUnchecked (i); }
+        if (i30.valid) { for (i = 0; i < i30.value.getNumChannels(); ++i) *array++ = i30.value.atUnchecked (i); }
+        if (i31.valid) { for (i = 0; i < i31.value.getNumChannels(); ++i) *array++ = i31.value.atUnchecked (i); }
     }
     
     UnitBase (ChannelArrayType const& copy) throw()
@@ -564,11 +834,11 @@ public:
         return plonk::explin (*this, inLow, inHigh, outLow, outHigh);
     }
         
-    /** Create a array of units by concatenation. */
-    const UnitArray operator<< (UnitType const& other) const throw()   { return UnitArray (*this, other); }
-    
-    /** Create a array of units by concatenation. */
-	const UnitArray operator<< (UnitBase const& other) const throw()   { return UnitArray (*this, other); }
+//    /** Create a array of units by concatenation. */
+//    const UnitArray operator<< (UnitType const& other) const throw()   { return UnitArray (*this, other); }
+//    
+//    /** Create a array of units by concatenation. */
+//	const UnitArray operator<< (UnitBase const& other) const throw()   { return UnitArray (*this, other); }
     
     /** Concatenate. */
     UnitBase operator, (UnitType const& other) const throw();

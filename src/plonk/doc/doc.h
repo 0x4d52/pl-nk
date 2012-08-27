@@ -65,7 +65,7 @@
  @section CoreClasses Core classes
  Plonk is designed to fully support a range of audio sample types in the future. Currently,
  only 32-bit float support is extensively tested but 64-bit support should work (and the
- infrastructure is in place to make integer or maybe fixed-point processing a possibility 
+ infrastructure is in place to make integer and maybe fixed-point processing a possibility 
  in the future). To help support this many Plonk classes are C++ template classes. For example,
  The Variable class is a template. Essentially, this allows you to store another value or object 
  in a rerefence counted container (Variable has other useful features too which are outlined below).
@@ -119,10 +119,7 @@
  
  int t4 = c; // is 102
  @endcode
- 
- These arithmetic operations are evaluated on assignment unlike the Variable class 
- (although you could wrap a NumericalArray in a Variable if you wish).
- 
+  
  Variable supports many unary and binary arithmetic operators in this way including 
  @c +, @c -, @c *, @c /, @c pow, and so on. The Variable documentation page provides a full list.
  
@@ -191,6 +188,10 @@
  e *= 10;                   // 'e' is now {50, 700, 9000, 50000} but 'f' is still {5, 70, 900, 5000}
  @endcode
  
+ These arithmetic operations are evaluated on assignment unlike the Variable class 
+ (although you could wrap a NumericalArray in a Variable if you wish, to 
+ leverage the deferred evaluation capabiltiies of Variable).
+
  Numerical arrays can be filled with commonly required data e.g., sine wave tables, random values.
  For example:
  
@@ -212,13 +213,13 @@
  int an = a.length();  // is 5
  int bn = b.length();  // is 6
  int cn = c.length();  // is 12
- int as = a.size();    // is 6
+ int as = a.size();    // is 6  (size is one larger to hold the null terminating character
  int bs = b.size();    // is 7
  int cs = c.size();    // is 13
  @endcode
  
- If you need to access the raw C++ array stored in the Plonk array you can do use getArray() or cast the 
- Plonk array to a pointer to the array type:
+ If you need to access the raw C++ array stored in the Plonk array you can use getArray() or cast the 
+ Plonk array to a pointer to the array's value type:
  
  @code
  Ints a (1, 2, 3);
@@ -255,7 +256,7 @@
  SomethingUnit, which becomes simply 'Something' for the default sample type.
  
  For example, the SineUnit factory class is used to create wavetable-based sine
- wave oscillators. To create one you would do this:
+ wave oscillators. To create one using the default sample type you would do this:
  
  @code
  Unit u = Sine::ar (1000, 0.1);
@@ -270,7 +271,7 @@
  notion of 'control rate' as there is in other Music-N langauges as Plonk channels
  can run at arbitrary sample rates and block sizes).
  
- The argument, or 'inputs', for the factory functions are documented in the factory class
+ The arguments, or 'inputs', for the factory functions are documented in the factory class
  documentation. For example, SineUnit documentation states:
  
  <table><tr><td>
@@ -302,6 +303,10 @@
  Unit m = Sine::ar (5, 100, 1000);
  Unit u = Sine::ar (m, 0.1);
  @endcode
+ 
+ (Both of these versions produce identical graphs, the processing required to render
+ either graph will be exactly the same. The latter version <em>may</em> be a fraction
+ slower to construct but most compilers should be able to optimise.)
 
  The 'mul' input for 'm' is 100, this is effectively the modulation depth. The 'add'
  input is 1000, this is effectively the centre value for the modulation. Thus the modulator
@@ -316,11 +321,132 @@
  @code
  Unit u = Sine::ar (Floats (995, 1005), 0.1);
  @endcode
+ 
+ Or alternatively:
 
+ @code
+ Unit u = Sine::ar (Unit (995, 1005), 0.1);
+ @endcode
+
+ This is equivalent to:
  
+ @code
+ Unit u = Unit (Sine::ar (995, 0.1), Sine::ar (1005, 0.1));
+ @endcode
  
+ Similarly, multichannel units can be passed into all inputs labelled 'multi'. The
+ following code creates two sines with frequencies as above but with different
+ amplitudes too:
  
- mixing
+ @code
+ Unit u = Sine::ar (Floats (995, 1005), Floats (0.09, 0.11));
+ @endcode
+
+ This is equivalent to:
+ 
+ @code
+ Unit u = Unit (Sine::ar (995, 0.09), Sine::ar (1005, 0.11));
+ @endcode
+
+ @subsection ImplicitUnaryAndBinaryOperatorUnits Implicit unary and binary operator units
+ 
+ Arithmetic can be performed on units in an intuitive fashion. For example, the following
+ lines are all equivalent to each other:
+ 
+ @code
+ Unit u = Sine::ar (Floats (995, 1005), 0.1);
+ Unit u = Sine::ar (Floats (995, 1005)) * 0.1;
+ Unit u = Sine::ar (Floats (995, 1005)) * Unit (0.1);
+ @endcode
+ 
+ Similarly, the following lines are also equivalent to each other:
+ 
+ @code
+ Unit u = Sine::ar (Floats (995, 1005), Floats (0.09, 0.11));
+ Unit u = Sine::ar (Floats (995, 1005)) * Floats (0.09, 0.11);
+ Unit u = Sine::ar (Floats (995, 1005)) * Unit (0.1, 0.11);
+ @endcode
+
+ Mixing can be performed using the addition operator:
+ 
+ @code
+ Unit u = Sine::ar (200, 0.1) +
+          Sine::ar (400, 0.1 / 2) +
+          Sine::ar (600, 0.1 / 3) +
+          Sine::ar (800, 0.1 / 4);
+ @endcode
+ 
+ (The creates the first four harmonics of a sawtooth wave.) In most cases it
+ is more straightforward to use the MixerUnit to achieve the same result:
+ 
+ @code
+ Unit u = Mixer::ar (Sine::ar (Floats (200, 400, 600, 800), 
+                               Floats (0.1, 0.1/2, 0.1/3, 0.1/4)));
+ @endcode
+ 
+ Or more clearly:
+ 
+ @code
+ Unit s = Sine::ar (Floats (200, 400, 600, 800), 
+                    Floats (0.1, 0.1/2, 0.1/3, 0.1/4));
+ Unit u = Mixer::ar (s);
+ @endcode
+ 
+ Or:
+ 
+ @code
+ Unit u = Sine::ar (Floats (200, 400, 600, 800), 
+                    Floats (0.1, 0.1/2, 0.1/3, 0.1/4)).mix();
+ @endcode
+
+ Thus Mixer and Unit::mix() mix down multiple channels to a single channel.
+ Mixing multiple channels is as straightforward but requires the use of arrays
+ or units i.e. a Units or UnitArray. Take the following example:
+ 
+ @code
+ Unit a = Sine::ar (Floats (200, 600), Floats (0.1, 0.1/3));
+ Unit b = Sine::ar (Floats (400, 800), Floats (0.1/2, 0.1/4));
+ Unit u = a + b;
+ @endcode
+ 
+ Here 200Hz and 400Hz are mixed in one channel and 600Hz and 800Hz are mixed in 
+ another channel. Using Mixer this could be:
+ 
+ @code
+ Unit a = Sine::ar (Floats (200, 600), Floats (0.1, 0.1/3));
+ Unit b = Sine::ar (Floats (400, 800), Floats (0.1/2, 0.1/4));
+ Units us = Units (a, b);
+ Unit u = Mixer::ar (us);
+ @endcode
+
+ Clearly in this case this results in <em>more</em> code but with larger numbers
+ of units to mix this can be more convenient.
+ 
+ An equivalent would be:
+ 
+ @code
+ Units us;
+ us.add (Sine::ar (Floats (200, 600), Floats (0.1, 0.1/3)));
+ us.add (Sine::ar (Floats (400, 800), Floats (0.1/2, 0.1/4)));
+ Unit u = Mixer::ar (us);
+ @endcode
+
+ This technique allows you to build arrays of units using conventional C++ loops:
+ 
+ @code
+ Units us;
+ 
+ for (int i = 0; i < 4; ++i)
+ {
+    us.add (Sine::ar (Floats::exprand (2, 100, 1000), 
+                      Floats::rand (2, 0.05, 0.1)));
+ }
+ 
+ Unit u = Mixer::ar (us);
+ @endcode
+
+    
+ 
  
 */
 

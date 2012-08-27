@@ -661,7 +661,7 @@ public:
 	{
 	}
 
-private:
+protected:
 	static int countValidInitialisers (InitialNumber const& i03) throw()
 	{
 		int size = 3;
@@ -684,7 +684,7 @@ public:
 		if (i03.valid) thisArray[ 3] = i03.value; else return;
 	}
 	
-private:
+protected:
 	static int countValidInitialisers (InitialNumber const &i05,
 									   InitialNumber const &i06,
 									   InitialNumber const &i07) throw()
@@ -722,7 +722,7 @@ public:
 		if (i07.valid) thisArray[ 7] = i07.value; else return;
 	}
 	
-private:
+protected:
 	static int countValidInitialisers (InitialNumber const &i09,
 									   InitialNumber const &i10,
 									   InitialNumber const &i11,
@@ -784,7 +784,7 @@ public:
 		if (i15.valid) thisArray[15] = i15.value; else return;
 	}
 	
-private:
+protected:
 	static int countValidInitialisers (InitialNumber const &i17,
 									   InitialNumber const &i18,
 									   InitialNumber const &i19,
