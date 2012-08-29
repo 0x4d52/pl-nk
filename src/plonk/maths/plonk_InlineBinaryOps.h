@@ -107,7 +107,7 @@
 
 #define PLONK_BINARYOPGLOBAL(CLASSNAME,OP)\
     /** Create a new CLASSNAME by applying the binary '##OP##' function to the @e left and @e right inputs. */\
-    CLASSNAME OP (CLASSNAME const& left, CLASSNAME const& right) throw() { return left.OP (right); }
+    inline CLASSNAME OP (CLASSNAME const& left, CLASSNAME const& right) throw() { return left.OP (right); }
 
 #define PLONK_BINARYOPGLOBAL_TEMPLATE(CLASSNAME,OP)\
     template<class T> PLONK_BINARYOPGLOBAL(CLASSNAME<T>,OP)

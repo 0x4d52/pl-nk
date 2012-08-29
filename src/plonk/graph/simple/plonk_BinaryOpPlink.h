@@ -36,10 +36,10 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_UNARYOPPLINK_H
-#define PLONK_UNARYOPPLINK_H
+#ifndef PLONK_BINARYOPPLINK_H
+#define PLONK_BINARYOPPLINK_H
 
-#include "plonk_UnaryOpChannel.h"
+#include "plonk_BinaryOpChannel.h"
 
 #define PLONK_PLINK_BINARYOPCHANNEL_COMMON_START(PLONKOP) \
     template<>\
@@ -157,4 +157,4 @@ PLONK_PLINK_BINARYOPCHANNEL(plonk::absdif, AbsDif);
 PLONK_PLINK_BINARYOPCHANNEL(plonk::thresh, Thresh);
 
 
-#endif // PLONK_UNARYOPPLINK_H
+#endif // PLONK_BINARYOPPLINK_H

@@ -353,8 +353,68 @@
  @code
  Unit u = Unit (Sine::ar (995, 0.09), Sine::ar (1005, 0.11));
  @endcode
+ 
+ @subsection RunningProcessesAndAudioHosts Running processes and 'audio hosts'
+ Plonk is not tied to any particular platform or audio IO system. Plonk does
+ provide some built-in "audio hosts" which interface with commonly available
+ IO APIs. For example, there are audio hosts for PortAudio (PortAudioAudioHost), 
+ iOS (IOSAudioHost) and Juce (JuceAudioHost). It's reasonably trivial to add
+ hosts, each derives from the AudioHostBase class.
+ 
+ In each case the audio host class communicates with the host API. As a user you
+ simply need to inherit from the desired audio host, implement the constructGraph()
+ function (see below) and call startHost().
+ 
+ The constructGraph() function needs to return the graph (i.e., a unit) that contains
+ the audio processing algorithm you want to play. For example, here is a PortAudio-based
+ example:
+ 
+ @code
+ class AudioHost : public PortAudioAudioHost
+ {
+ public:
+    AudioHost()
+    {
+        // ..DO NOT call startHost() here.. 
+    }
+    
+    ~AudioHost();
+    {
+    }
+    
+    Unit constructGraph()
+    {
+        Unit u = Sine::ar (1000, 0.1);
+        return u;
+    }
+ };
+ @endcode
+  
+ Then you need to create an instance of this class and call its startHost() function.
+ For a naive implementation could be:
+ 
+ @code
+ 
+ int main(int argc, char *argv[])
+ {
+    AudioHost host;
+    host.startHost();
+ 
+    while(true) // pause forever..
+        Threading::sleep (0.001);
+ 
+    return 0;
+ }
+ @endcode
+ 
+ In reality, you would probably use your AudioHost class within the context of
+ an event driven system (e.g., on Mac OS X and iOS you could store your AudioHost
+ in your AppDelegate class as per the macplnk and iosplnk examples).
+ 
+ In each of the examples below you would be able to return the 'u' variable from
+ a constructGraph() function as above.
 
- @subsection ImplicitUnaryAndBinaryOperatorUnits Implicit unary and binary operator units
+ @subsection ImplicitArithmeticUnits Implicit arithmetic units
  
  Arithmetic can be performed on units in an intuitive fashion. For example, the following
  lines are all equivalent to each other:
@@ -396,20 +456,77 @@
  Unit u = Sine::ar (1000) * Sine::ar (0.5, 0.1, 0.1);
  @endcode
  
- bin
- -Ring modulations
- -Min/max
+ Here the amplitude modulation is at a rate of 0.5Hz and the 'mul' and 'add'
+ of 0.1 scales and shifts the sine wave to fit betweem 0...0.2. Alternatives to
+ this are:
  
- un
- -sin with saw
- -m2f
- -dB2A
+ @code
+ Unit u = Sine::ar (1000, Sine::ar (0.5, 0.1, 0.1));
+ Unit u = Sine::ar (1000, Sine::ar (0.5).linlin (-1, 1, 0.0, 0.2));
+ Unit u = Sine::ar (1000, Sine::ar (0.5).linlin (0.0, 0.2));
+ @endcode
  
- see unitbase for full list of supported operators
+ Here the latter two versions use the 'linlin' functionwhich maps one linear range
+ onto another. With all four arguments, the first two are the input range of 
+ the source unit (-1, 1) and the second two are the desired output range (0.0, 0.2).
+ As most units' use a default output range (i.e., ±1 for float and double sample types)
+ only the output range needs specifying (i.e., the last of the three forms).
+
+ Plonk units also support unary operators such as standard trig functions (sin, cos etc)
+ and some useful coverters (for dBs, MIDI note numbers etc). For example, an inefficient
+ way to synthesise a sine wave would be:
  
+ @code
+ const float pi = FloatMath::getPi();      // Math<Type> contains some useful constants
+ Unit p = Saw::ar (1000).linlin (-pi, pi); // phasor ±pi (i.e., ±180° in radians)
+ Unit u = sin (p) * 0.1;                   // call sin() on the phasor and scale
+ @endcode
+
+ The sin() function can be called like this or in "message passing" format when called
+ on Plonk units or arrays but not built-in types. This can often make reading a chain 
+ of arithmetic functions easier):
  
- Returning to tecniques for mixing units, in most cases it is more 
- straightforward and efficient to use the MixerUnit rather than the '+' operator:
+ @code
+ const float pi = FloatMath::getPi();      // Math<Type> contains some useful constants
+ Unit p = Saw::ar (1000).linlin (-pi, pi); // phasor ±pi (i.e., ±180° in radians)
+ Unit u = p.sin() * 0.1;                   // call sin() on the phasor and scale
+ @endcode
+
+ Coversions from MIDI note to frequency in Hertz is often useful:
+ 
+ @code
+ Unit u = Sine::ar (m2f (69), 0.1); // MIDI note 69 = 440Hz
+ @endcode
+
+ This also works on units, of course, where message passing format can be used:
+ 
+ @code
+ Unit f = Sine::ar (0.5).linlin (60, 72).m2f(); // sweep between 60 and 72, middle-C to the next octave
+ Unit u = Sine::ar (f, 0.1);
+ @endcode
+
+ For a similar sweep with discrete steps round() can be used to quantise the MIDI
+ not numbers to integers before conversion to Hz:
+ 
+ @code
+ Unit f = Sine::ar (0.5).linlin (60, 72).round (1).m2f();
+ Unit u = Sine::ar (f, 0.1);
+ @endcode
+ 
+ Similar coversions are available from frequency back to MIDI notes (f2m) and 
+ between dB and linear amplitude (dB2a and a2dB):
+ 
+ @code
+ Unit u = Sine::ar (1000, dB2a (-18)); // -18dB is amplitude 0.125
+ @endcode
+ 
+ See the UnitBase for full list of supported operators and arithmetic functions.
+ 
+ @subsection Mixing Mixing
+
+ Returning to techniques for mixing units, in most cases it is more 
+ straightforward and efficient to use the MixerUnit rather than chains of 
+ '+' operators:
  
  @code
  Unit u = Mixer::ar (Sine::ar (Floats (200, 400, 600, 800), 
@@ -433,7 +550,7 @@
 
  Thus Mixer and Unit::mix() mix down multiple channels to a single channel.
  Mixing multiple channels is as straightforward but requires the use of arrays
- or units i.e. a Units or UnitArray. Take the following example:
+ of units i.e. a Units or UnitArray. Take the following example:
  
  @code
  Unit a = Sine::ar (Floats (200, 600), Floats (0.1, 0.1/3));
@@ -477,8 +594,55 @@
  Unit u = Mixer::ar (us);
  @endcode
 
+ @subsection OscillatorsAndGenerators Oscillators and generators
+ See the @link GeneratorUnits oscillator @endlink and @link NoiseUnits 
+ noise @endlink unit documentation for a list of available unit factories.
+ [todo]
+ 
+ @subsection Filters Filters
+ The underlying code for the filter units can look daunting but the classes
+ designed to be used in user code are straightforward. These are as follows:
+ 
+ - LPFUnit:       a Butterworth 2nd-order low-pass filter
+ - LPFP1Unit:     a one-pole low-pass filter
+ - RLPFUnit:      a resonant low-pass filter
+ - HPFUnit:       a Butterworth 2nd-order high-pass filter
+ - HPFP1Unit:     a one-pole high-pass filter
+ - RHPFUnit:      a resonant high-pass filter
+ - BPFUnit:       a band-pass filter
+ - BRFUnit:       a band-reject (band-elimination) filter
+ - NotchUnit:     a notching filter (i.e., a parametric EQ, or peaking filter)
+ - LowShelfUnit:  a low-shelving filter
+ - HighShelfUnit: a high-shelving filter
+ - LagUnit:       an exponential lag filter for parameter smoothing
+ - DecayUnit:     an exponential decay filter
+ 
+ You need to view each filter's documentation for the inputs each accepts but in general
+ the first input is the signal to filter. For example, to apply a low-pass filter to
+ a sawtooth wave you could do the following:
+ 
+ @code
+ Unit s = Saw::ar (200, 0.1);
+ Unit u = LPF::ar (s, 400); // cut-off at 400Hz
+ @endcode
+ 
+ Of course, the cutoff frequency can be modulated, here with a resonant low-pass:
+ @code
+ Unit s = Saw::ar (200, 0.1);
+ Unit m = Sine::ar (1).linexp (400, 1600); // exponential map ±1 to 400...1600
+ Unit u = RLPF::ar (s, m, 5);              // Q-factor of 5
+ @endcode
 
  
+ 
+ [todo]
+ 
+ @subsection Delay Delay
+ [todo]
+ 
+ @subsection FFTProcessing FFT processing
+ [todo]
+
  
 */
 

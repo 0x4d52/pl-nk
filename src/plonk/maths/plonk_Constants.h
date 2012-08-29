@@ -93,5 +93,8 @@ public:
     static inline const Type& get1_2Pi() throw()      { static const Type v (1.0 / get2Pi()); return v; }
 };
 
+typedef Math<Float> FloatMath;
+typedef Math<Double> DoubleMath;
+
 
 #endif // PLONK_CONSTANTS_H

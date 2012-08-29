@@ -127,8 +127,8 @@ inline Type linlin (Type const& input,
                     Type const& inLow, Type const& inHigh,
                     Type const& outLow, Type const& outHigh) throw()
 {
-	Type inRange = inHigh - inLow;
-	Type outRange = outHigh - outLow;
+	const Type inRange = inHigh - inLow;
+	const Type outRange = outHigh - outLow;
 	return (input - inLow) * outRange / inRange + outLow;
 }
 
@@ -145,11 +145,11 @@ inline Type linsin (Type const& input,
                     Type const& inLow, Type const& inHigh,
                     Type const& outLow, Type const& outHigh) throw()
 {
-	Type inRange = inHigh - inLow;
-	Type outRange = outHigh - outLow;
+	const Type inRange = inHigh - inLow;
+	const Type outRange = outHigh - outLow;
     
-	Type inPhase = (input - inLow) * Math<Type>::getPi() / inRange + Math<Type>::getPi();
-	Type cosInPhase = cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
+	const Type inPhase = (input - inLow) * Math<Type>::getPi() / inRange + Math<Type>::getPi();
+	const Type cosInPhase = cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
 	
 	return cosInPhase * outRange + outLow;	
 }
@@ -159,8 +159,8 @@ inline Type linsin2 (Type const& input,
                      Type const& inLow, Type const& inRange,
                      Type const& outLow, Type const& outRange) throw()
 {	
-	Type inPhase = (input - inLow) * Math<Type>::getPi() / inRange + Math<Type>::getPi();
-	Type cosInPhase = cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
+	const Type inPhase = (input - inLow) * Math<Type>::getPi() / inRange + Math<Type>::getPi();
+	const Type cosInPhase = cos (inPhase) * Math<Type>::get0_5() + Math<Type>::get0_5();
 	return cosInPhase * outRange + outLow;	
 }
 
@@ -169,9 +169,9 @@ inline Type linexp (Type const& input,
                     Type const& inLow, Type const& inHigh,
                     Type const& outLow, Type const& outHigh) throw()
 {
-	Type outRatio = outHigh / outLow;
-	Type reciprocalInRange = Math<Type>::get1() / (inHigh - inLow);
-	Type inLowOverInRange = reciprocalInRange * inLow;
+	const Type outRatio = outHigh / outLow;
+	const Type reciprocalInRange = Math<Type>::get1() / (inHigh - inLow);
+	const Type inLowOverInRange = reciprocalInRange * inLow;
 	return outLow * pow (outRatio, input * reciprocalInRange - inLowOverInRange);	
 }
 
@@ -188,9 +188,9 @@ inline Type linwelch (Type const& input,
                       Type const& inLow, Type const& inHigh,
                       Type const& outLow, Type const& outHigh) throw()
 {
-	Type inRange = inHigh - inLow;
-	Type outRange = outHigh - outLow;
-	Type inPos = (input - inLow) / inRange;
+	const Type inRange = inHigh - inLow;
+	const Type outRange = outHigh - outLow;
+	const Type inPos = (input - inLow) / inRange;
     
 	if (outLow < outHigh)
 		return outLow + outRange * sin (Math<Type>::getPi_2() * inPos);
@@ -217,7 +217,7 @@ inline Type explin (Type const& input,
                     Type const& inLow, Type const& inHigh, 
                     Type const& outLow, Type const& outHigh)
 {    
-    Type clipped = clip (input, inLow, inHigh);
+    const Type clipped = clip (input, inLow, inHigh);
     return log (clipped / inLow) / log (inHigh / inLow) * (outHigh - outLow) + outLow;
 }
 
@@ -311,21 +311,6 @@ public:
     static inline bool isPowerOf2            (Type const& value) throw() { return Base::isPowerOf2 (value);             }
 };
 
-
-//template<class ValueType, class IndexType>
-//inline ValueType lininterp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
-//{
-//    return value0 + ValueType (frac * (value1 - value0));
-//}
-//
-//template<class ValueType, class IndexType>
-//inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
-//{
-//    const int index0 = int (index);
-//    const int index1 = index0 + 1;
-//    const IndexType frac = index - IndexType (index0);
-//    return lininterp (table[index0], table[index1], frac);
-//}
 
 /// @}
 

@@ -138,21 +138,21 @@ static inline void pl_VectorFloorF_NN (float *result, const float* a, PlankUL N)
 static inline void pl_VectorPowF_NNN (float *result, const float* a, const float *b, PlankUL N)        
 { 
     const int n = N;
-    vvpowf (result, a, b, &n); 
+    vvpowf (result, b, a, &n); 
 }
 
 static inline void pl_VectorPowF_NN1 (float *result, const float* a, float b, PlankUL N)        
 { 
     const int n = N;
     vDSP_vfill (&b, result, 1, N); 
-    vvpowf (result, a, result, &n); 
+    vvpowf (result, result, a, &n); 
 }
 
 static inline void pl_VectorPowF_N1N (float *result, float a, const float* b, PlankUL N)        
 { 
     const int n = N;
     vDSP_vfill (&a, result, 1, N); 
-    vvpowf (result, result, b, &n); 
+    vvpowf (result, b, result, &n); 
 }
 
 static inline void pl_VectorAtan2F_NNN (float *result, const float* a, const float *b, PlankUL N)        
