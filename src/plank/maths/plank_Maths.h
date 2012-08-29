@@ -50,6 +50,22 @@
 #define PLANK_PI_F    3.14159265358979323846f
 #define PLANK_SQRT2_D 1.41421356237309514547462185873883
 #define PLANK_SQRT2_F 1.41421356237309514547f
+#define PLANK_440_D   440.0
+#define PLANK_440_F   440.f
+#define PLANK_360_D   360.0
+#define PLANK_360_F   360.f
+#define PLANK_69_D    69.0
+#define PLANK_69_F    69.f
+#define PLANK_20_D    20.0
+#define PLANK_20_F    20.f
+#define PLANK_12_D    12.0
+#define PLANK_12_F    12.f
+#define PLANK_2_D     2.0
+#define PLANK_2_F     2.f
+#define PLANK_1_D     1.0
+#define PLANK_1_F     1.f
+#define PLANK_0_D     0.0
+#define PLANK_0_F     0.f
 
 
 #if (defined (_WIN32) || defined (_WIN64))

@@ -61,12 +61,12 @@ static inline void pl_VectorClearF_N (float *result, PlankUL N)
     vDSP_vclr (result, 1, N);
 }
 
-static inline void pl_VectorRampF_N1 (float *result, float a, float b, PlankUL N) 
-{ 
+static inline void pl_VectorRampF_N11 (float *result, float a, float b, PlankUL N)
+{
     vDSP_vramp (&a, &b, result, 1, N); 
 }
 
-static inline void pl_VectorLineF_N1 (float *result, float a, float b, PlankUL N) 
+static inline void pl_VectorLineF_N11 (float *result, float a, float b, PlankUL N)
 { 
     vDSP_vgen (&a, &b, result, 1, N); 
 }
