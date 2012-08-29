@@ -256,12 +256,10 @@
 
 /// @} End group PlankVectorMacros
 
-#define PLANK_VEC_VDSP 1
-
 #if defined(PLANK_VEC_VDSP) //&& !DOXYGEN
-#include "plank_vDSP.h"
+    #include "plank_vDSP.h"
 #elif defined(PLANK_VEC_OTHERLIB) //etc!
-#include "some other vector lib"
+    #include "some other vector lib" // must define PLANK_VEC_CUSTOM
 #endif
 
 #if !defined(PLANK_VEC_CUSTOM) || DOXYGEN

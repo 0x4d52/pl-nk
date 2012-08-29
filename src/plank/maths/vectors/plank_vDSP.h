@@ -237,7 +237,7 @@ static inline void pl_VectorAddF_N1N (float *result, float a, const float* b, Pl
 
 static inline void pl_VectorSubF_NNN (float *result, const float* a, const float* b, PlankUL N) 
 { 
-    // due to bug in vDSP_vsub
+    // due to ancient bug in vDSP_vsub
     float mone = -1.f;
     vDSP_vsmul ((float*)b, 1, &mone, result, 1, N); 
     vDSP_vadd ((float*)a, 1, result, 1, result, 1, N); 
@@ -448,14 +448,21 @@ static inline void pl_VectorFloorD_NN (double *result, const double* a, PlankUL 
 static inline void pl_VectorPowD_NNN (double *result, const double* a, const double *b, PlankUL N)        
 { 
     const int n = N;
-    vvpow (result, a, b, &n); 
+    vvpow (result, b, a, &n); 
 }
 
 static inline void pl_VectorPowD_NN1 (double *result, const double* a, double b, PlankUL N)        
 { 
     const int n = N;
     vDSP_vfillD (&b, result, 1, N); 
-    vvpow (result, a, result, &n); 
+    vvpow (result, result, a, &n); 
+}
+
+static inline void pl_VectorPowD_N1N (double *result, double a, const double* b, PlankUL N)        
+{ 
+    const int n = N;
+    vDSP_vfillD (&a, result, 1, N); 
+    vvpow (result, b, result, &n); 
 }
 
 static inline void pl_VectorAtan2D_NNN (double *result, const double* a, const double *b, PlankUL N)        
