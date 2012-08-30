@@ -229,7 +229,7 @@
  int* ptr2 = static_cast<int*> (a);  // explicit cast, calls getArray() internally 
  int* ptr3 (a);                      // implicit cast, calls getArray() internally
  int* ptr4 = a;                      // implicit cast, calls getArray() internally
- int* ptr5 = (int*)a;                // should work, but not C casts are not recommended in C++
+ int* ptr5 = (int*)a;                // should work, but C casts are not recommended in C++
  @endcode
  
  It is best not to store any of the pointers obtained this way as the array could be
@@ -420,9 +420,9 @@
  lines are all equivalent to each other:
  
  @code
- Unit u = Sine::ar (Floats (995, 1005), 0.1);
- Unit u = Sine::ar (Floats (995, 1005)) * 0.1;
- Unit u = Sine::ar (Floats (995, 1005)) * Unit (0.1);
+ Unit u = Sine::ar (Floats (995, 1005), 0.1);         // use the mul input
+ Unit u = Sine::ar (Floats (995, 1005)) * 0.1;        // explicit multiply
+ Unit u = Sine::ar (Floats (995, 1005)) * Unit (0.1); // explicit multiply and explicit unit creation
  @endcode
  
  Similarly, the following lines are also equivalent to each other:
@@ -447,7 +447,7 @@
  Ring modulation can be achieved using the '*' operator too:
  
  @code
- Unit u = Sine::ar (1000) * Sine::ar (1200) * 0.1;
+ Unit u = Sine::ar (1200) * Sine::ar (1000) * 0.1; // 2200 and 200 Hz will be heard at 0.1 amplitude (1200+1000 & 1200-1000)
  @endcode
  
  As can amplitude modulation:
@@ -466,30 +466,30 @@
  Unit u = Sine::ar (1000, Sine::ar (0.5).linlin (0.0, 0.2));
  @endcode
  
- Here the latter two versions use the 'linlin' functionwhich maps one linear range
+ Here the latter two versions use the 'linlin' function which maps one linear range
  onto another. With all four arguments, the first two are the input range of 
  the source unit (-1, 1) and the second two are the desired output range (0.0, 0.2).
  As most units' use a default output range (i.e., ±1 for float and double sample types)
  only the output range needs specifying (i.e., the last of the three forms).
 
- Plonk units also support unary operators such as standard trig functions (sin, cos etc)
- and some useful coverters (for dBs, MIDI note numbers etc). For example, an inefficient
+ Plonk units also support unary operators such as standard trig functions (sin, cos, etc)
+ and some useful coverters (for dBs, MIDI note numbers, etc). For example, an inefficient
  way to synthesise a sine wave would be:
  
  @code
- const float pi = FloatMath::getPi();      // Math<Type> contains some useful constants
- Unit p = Saw::ar (1000).linlin (-pi, pi); // phasor ±pi (i.e., ±180° in radians)
- Unit u = sin (p) * 0.1;                   // call sin() on the phasor and scale
+ const float pi = FloatMath::getPi();  // Math<Type> contains some useful constants
+ Unit p = Saw::ar (1000, pi);          // phasor ±pi (i.e., ±180° in radians)
+ Unit u = sin (p) * 0.1;               // call sin() on the phasor and scale
  @endcode
 
  The sin() function can be called like this or in "message passing" format when called
- on Plonk units or arrays but not built-in types. This can often make reading a chain 
+ on Plonk units or arrays but <strong>not</strong> built-in types. This can often make reading a chain 
  of arithmetic functions easier):
  
  @code
- const float pi = FloatMath::getPi();      // Math<Type> contains some useful constants
- Unit p = Saw::ar (1000).linlin (-pi, pi); // phasor ±pi (i.e., ±180° in radians)
- Unit u = p.sin() * 0.1;                   // call sin() on the phasor and scale
+ const float pi = FloatMath::getPi();  // Math<Type> contains some useful constants
+ Unit p = Saw::ar (1000, pi);          // phasor ±pi (i.e., ±180° in radians)
+ Unit u = p.sin() * 0.1;               // call sin() on the phasor and scale
  @endcode
 
  Coversions from MIDI note to frequency in Hertz is often useful:
@@ -501,7 +501,7 @@
  This also works on units, of course, where message passing format can be used:
  
  @code
- Unit f = Sine::ar (0.5).linlin (60, 72).m2f(); // sweep between 60 and 72, middle-C to the next octave
+ Unit f = Sine::ar (0.5).linlin (60, 72).m2f(); // sweep between notes 60 and 72 i.e., middle-C to the next octave
  Unit u = Sine::ar (f, 0.1);
  @endcode
 
@@ -514,10 +514,30 @@
  @endcode
  
  Similar coversions are available from frequency back to MIDI notes (f2m) and 
- between dB and linear amplitude (dB2a and a2dB):
+ between dB and linear amplitude (dB2a and a2dB) e.g,:
  
  @code
  Unit u = Sine::ar (1000, dB2a (-18)); // -18dB is amplitude 0.125
+ @endcode
+ 
+ A simple non-bandlimited square wave can be created using the comparison
+ operators e.g.,:
+
+ @code
+ Unit u = (Saw::ar (200) > 0).linlin (0, 1, -0.1, 0.1);
+ @endcode
+ 
+ The comparison operator units output either 0 or 1 (corresponding to false and true).
+ Here, when the sawtooth wave is greater than zero the comparison results in '1' and
+ when is is zero or below it outputs '0'. Thus a square wave is created, this is 
+ then mapped to ±0.1.
+ 
+ A pulse wave can be created by comparing against a value other than zero. This can
+ even be modulated as in the example below, to achieve pulse width modulation:
+ 
+ @code
+ Unit m = Sine::ar (0.5, 0.25);
+ Unit u = (Saw::ar (200) > m).linlin (0, 1, -0.1, 0.1);
  @endcode
  
  See the UnitBase for full list of supported operators and arithmetic functions.
@@ -533,7 +553,7 @@
                                Floats (0.1, 0.1/2, 0.1/3, 0.1/4)));
  @endcode
  
- Or more clearly:
+ Or perhaps more clearly:
  
  @code
  Unit s = Sine::ar (Floats (200, 400, 600, 800), 
@@ -633,7 +653,13 @@
  Unit u = RLPF::ar (s, m, 5);              // Q-factor of 5
  @endcode
 
- 
+ Here linexp() is the equivalent of linlin() but the output range is exponential. This
+ means in the example above 0 maps to 800, this makes the musical interval the
+ same for both the negative and positive phases of the input sine wave. Here -1..0 maps to 
+ 400..800 which is an octave and 0..+1 maps to 800..1600 which is also an octave.
+ (If linlin() had been used then 0 would have mapped to the linear half way point between
+ 400 and 1600 i.e., 1000.) However, linexp() is more CPU intensive so linlin() may
+ be a useful compromise in some circumstances.
  
  [todo]
  
