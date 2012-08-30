@@ -111,6 +111,15 @@ private:
 //------------------------------------------------------------------------------
 
 /** Atomic variable unit. 
+ 
+ Factory functions:
+ - ar (atomicVariable=0, preferredBlockSize=default)
+ - kr (atomicVariable=0) 
+ 
+ Inputs:
+ - atomicVariable: (atomicvariable) the atomicvariable to use as a unit, changes to the value are threadsafe
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+
  @ingroup ControlUnits */
 template<class SampleType>
 class AtomicVariableUnit

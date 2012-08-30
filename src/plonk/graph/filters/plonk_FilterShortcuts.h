@@ -47,6 +47,19 @@
 // one pole
 
 /** One-pole low-pass filter. 
+ 
+ Factory functions:
+ - ar (input, frequency=1200, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (input frequency=1200, mul=1, add=0) 
+ 
+ Inputs:
+ - input: (unit, multi) the unit to filter
+ - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
  @ingroup AllUnits FilterUnits */
 template<class SampleType>
 class LPFP1Unit

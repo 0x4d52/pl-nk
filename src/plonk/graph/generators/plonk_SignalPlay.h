@@ -215,6 +215,19 @@ private:
 //------------------------------------------------------------------------------
 
 /** Signal player generator. 
+ 
+ Factory functions:
+ - ar (signal, rate=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (signal, rate=1, mul=1, add=0) 
+ 
+ Inputs:
+ - signal: (signal, multi) the signal to play
+ - rate: (unit, multi) the rate of playback (1= normal speed)
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
   @ingroup GeneratorUnits */
 template<class SampleType>
 class SignalPlayUnit

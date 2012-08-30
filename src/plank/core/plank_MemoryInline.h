@@ -43,14 +43,6 @@
 
 #include "../containers/plank_Atomic.h"
 
-//#if !DOXYGEN
-//typedef struct PlankMemory
-//{
-//    PlankMemoryAllocateBytesFunction alloc;
-//    PlankMemoryFreeFunction free;
-//} PlankMemory; 
-//#endif
-
 #if !DOXYGEN
 typedef struct PlankMemory
 {

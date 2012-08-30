@@ -268,6 +268,9 @@ private:
 //------------------------------------------------------------------------------
 
 /** Envelope unit performs a series of breakpoints. 
+ 
+ [args-todo]
+ 
  @ingroup EnvelopeUnits */
 template<class SampleType>
 class EnvelopeUnit

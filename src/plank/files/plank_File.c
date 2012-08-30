@@ -936,9 +936,7 @@ PlankResult pl_File_WritePascalString255 (PlankFileRef p, PlankPascalString255* 
     if ((result = pl_File_WriteUC (p, length)) != PlankResult_OK) goto exit;
     
     if (length > 0)
-    {
         if ((result = pl_File_Write (p, &string->data[1], length)) != PlankResult_OK) goto exit;
-    }
     
 exit:
     return result;        

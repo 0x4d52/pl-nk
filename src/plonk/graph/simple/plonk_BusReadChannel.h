@@ -144,6 +144,15 @@ private:
 //------------------------------------------------------------------------------
 
 /** Reads data from a Bus. 
+ 
+ Factory functions:
+ - ar (busses, preferredBlockSize=default)
+ - kr (busses) 
+ 
+ Inputs:
+ - busses: (busses, multi) the busses from which to read the signal(s)
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+
  @ingroup MiscUnits */
 template<class SampleType>
 class BusReadUnit

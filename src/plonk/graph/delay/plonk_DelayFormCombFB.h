@@ -203,6 +203,9 @@ public:
 
 
 /** A comb filter setting the feedback amount directly. 
+
+ [args-todo]
+
  @ingroup DelayUnits */
 template<class SampleType>
 class CombFBUnit

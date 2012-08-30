@@ -191,6 +191,16 @@ private:
 //------------------------------------------------------------------------------
 
 /** Resample a unit to a different sample rate and/or block size.
+ 
+ Factory functions:
+ - ar (input, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (input)
+ 
+ Inputs:
+ - input: (unit, multi) the unit to resample
+ - preferredBlockSize: the preferred output block size 
+ - preferredSampleRate: the preferred output sample rate
+
  @ingroup ConverterUnits */
 template<class SampleType>
 class ResampleUnit
@@ -249,7 +259,6 @@ public:
 };
 
 typedef ResampleUnit<PLONK_TYPE_DEFAULT> Resample;
-//typedef Resample Reblock;
 
 
 

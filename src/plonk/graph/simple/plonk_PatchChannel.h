@@ -284,6 +284,20 @@ private:
 
 /** Patch channel.
  Safe repatching of signals. 
+ 
+ Factory functions:
+ - ar (initialSource, allowAutoDelete=true, preferredNumChannels=0, fadeDuration=0.1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ 
+ Inputs:
+ - initialSource: (unitvariable, multi)
+ - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit it contains
+ - preferredNumChannels: (int) force this unit to have a certain number of channels (0= the channel count in initialSource)
+ - fadeDuration: (unit, mono) the crossfade time in seconds to be used when patch sources are changed
+ - mul: (unit) the multiplier applied to the output (NB NOT multi)
+ - add: (unit) the offset aded to the output (NB NOT multi)
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
  @ingroup ControlUnits */
 template<class SampleType>
 class PatchUnit

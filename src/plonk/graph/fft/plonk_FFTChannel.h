@@ -134,6 +134,9 @@ private:
 
 /** FFT Unit. 
  Takes a time domain real signal as its input and outputs frequency domain data in real/imaginary format. 
+ 
+ [args-todo]
+
  @ingroup ConverterUnits FFTUnits */
 template<class SampleType>
 class FFTUnit

@@ -194,6 +194,17 @@ private:
 //------------------------------------------------------------------------------
 
 /** A white noise generator. 
+ 
+ Factory functions:
+ - ar (mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (mul=1, add=0) 
+ 
+ Inputs:
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
  @ingroup GeneratorUnits ControlUnits */
 template<class SampleType>
 class WhiteNoiseUnit

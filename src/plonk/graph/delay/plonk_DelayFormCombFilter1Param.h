@@ -246,6 +246,9 @@ public:
 
 
 /** A comb filter with a filter in the feedback loop (where the filter takes one parameter). 
+ 
+ [args-todo]
+ 
  @ingroup DelayUnits */
 template<class FilterShape>
 class CombFilter1ParamUnit

@@ -175,6 +175,18 @@ public:
 
 //------------------------------------------------------------------------------
 
+/** A linear panning unit.
+ 
+ Factory functions:
+ - ar (input, position=0, preferredBlockSize=default, preferredSampleRate=default)
+ 
+ Inputs:
+ - input: (unit, multi) the input signal(s) to pan (each channel will generate a pair of outputs)
+ - position: (unit, multi) the pan position(s), 0 is centre, in float/double units -1 is left +1 is right 
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
+ */
 template<class SampleType>
 class LinearPanUnit
 {

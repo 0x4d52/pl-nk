@@ -112,7 +112,7 @@ void SpinLockInternal::wait() throw()
 
 void SpinLockInternal::signal() throw()
 {
-    // nothing
+    pl_SpinLock_Signal (getPeerRef());
 }
 
 //------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ void ThreadSpinLockInternal::wait() throw()
 
 void ThreadSpinLockInternal::signal() throw()
 {
-    // nothing
+    pl_ThreadSpinLock_Signal (getPeerRef());
 }
 
 //------------------------------------------------------------------------------

@@ -209,6 +209,20 @@ public:
 //------------------------------------------------------------------------------
 
 /** Wavetable oscillator. 
+ 
+ Factory functions:
+ - ar (table, frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (table, frequency=440, mul=1, add=0) 
+ 
+ Inputs:
+ - table: (wavetable) the wavetable to use for the oscillator
+ - frequency: (unit, multi) the frequency of the oscillator in Hz
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
+ 
   @ingroup GeneratorUnits ControlUnits */
 template<class SampleType>
 class TableUnit
@@ -361,6 +375,19 @@ public:
 typedef SineUnit<PLONK_TYPE_DEFAULT> Sine;
 
 /** Harmonic sawtooth wave oscillator. 
+ 
+ Factory functions:
+ - ar (frequency=440, mul=1, add=0, numHarmonics=21, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (frequency=440, mul=1, add=0, numHarmonics=21) 
+ 
+ Inputs:
+ - frequency: (unit, multi) the frequency of the oscillator in Hz
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - numHarmonics: (int) the number of harmonics to generate
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
  @see TableUnit
  @ingroup GeneratorUnits */
 template<class SampleType>
@@ -430,6 +457,19 @@ typedef HarmonicSawUnit<PLONK_TYPE_DEFAULT> HarmonicSaw;
 
 
 /** Harmonic square wave oscillator. 
+ 
+ Factory functions:
+ - ar (frequency=440, mul=1, add=0, numHarmonics=21, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (frequency=440, mul=1, add=0, numHarmonics=21) 
+ 
+ Inputs:
+ - frequency: (unit, multi) the frequency of the oscillator in Hz
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - numHarmonics: (int) the number of harmonics to generate
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
  @see TableUnit
  @ingroup GeneratorUnits */
 template<class SampleType>

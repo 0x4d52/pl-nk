@@ -203,6 +203,9 @@ public:
 
 
 /** An allpass delay setting the feedforward and feeback coefficient directly. 
+ 
+ [args-todo]
+
  @ingroup DelayUnits */
 template<class SampleType>
 class AllpassFFFBUnit

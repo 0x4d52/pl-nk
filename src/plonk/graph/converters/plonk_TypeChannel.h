@@ -182,6 +182,17 @@ private:
 
 /** Convert from one sample type to another.
  E.g., from float to short (i.e, 16bit)
+ 
+ Factory functions:
+ - ar (input, preferredBlockSize=noPref, preferredSampleRate=noPref)
+ - kr (input)
+ 
+ Inputs:
+ - input: (unit, multi) the unit to convert
+ - preferredBlockSize: the preferred output block size 
+ - preferredSampleRate: the preferred output sample rate
+
+ 
  @ingroup ConverterUnits */
 template<class OutputSampleType, class InputSampleType>
 class TypeUnitBase
@@ -207,13 +218,13 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Generic,    Measure::None,      IOInfo::NoDefault,  IOLimit::None,
                          IOKey::End,
 
                          // inputs
-                         IOKey::Generic,     Measure::None,      IOInfo::NoDefault,  IOLimit::None,
-                         IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,   1.0,
-                         IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,     0.0,
+                         IOKey::Generic,    Measure::None,      IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::BlockSize,  Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
+                         IOKey::SampleRate, Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
                          IOKey::End);
     }    
     

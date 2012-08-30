@@ -124,6 +124,17 @@ private:
 
 /** Copies data from a buffer to an output block. 
  Can be used to generate windowing functions for example. 
+ 
+ Factory functions:
+ - ar (buffer, overlap=1, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (buffer, overlap=1) 
+ 
+ Inputs:
+ - buffer: (buffer) the buffer to use
+ - overlap: (doublevariable) the overlap to use 1= no overlap, 0.5= blocks overlap by half their length
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
  @ingroup ControlUnits FFTUnits */
 template<class SampleType>
 class BlockUnit

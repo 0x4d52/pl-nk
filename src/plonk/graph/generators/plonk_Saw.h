@@ -322,21 +322,16 @@ private:
 
 /** A non-bandlimted sawtooth oscillator. 
  
- Although the template class name is SawUnit the abbreviated name Saw may be
- used when employing the deafult sample type (which defaults to float).
+ Factory functions:
+ - ar (frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (frequency=440, mul=1, add=0) 
  
- <em>Examples:</em>
- @code Unit test()
- {
-    return Saw::ar (440, 0.1); // 440Hz, amplitude 0.1
- } @endcode
- 
- @code Unit test()
- {
-    // Modulated frequency rising 600-900Hz, amplitude 0.1
-    return Saw::ar (Saw::ar (1, 300, 600), 0.1); 
- } @endcode
-
+ Inputs:
+ - frequency: (unit, multi) the frequency of the oscillator in Hz
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
  @ingroup GeneratorUnits ControlUnits */
 template<class SampleType>

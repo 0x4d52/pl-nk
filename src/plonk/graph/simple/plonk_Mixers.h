@@ -416,6 +416,22 @@ public:
 //------------------------------------------------------------------------------
 
 /** Mixer. 
+ 
+ Factory functions:
+ - ar (input, allowAutoDelete=true, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - ar (array, allowAutoDelete=true, purgeNullUnits=true, preferredNumChannels=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ 
+ Inputs:
+ - input: (unit) the input unit to mix
+ - array: (units, multi) the array of units to mix
+ - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit(s) it contains
+ - purgeNullUnits: (bool) whether null units are removed from the array during processing
+ - preferredNumChannels: (int) force this unit to have a certain number of channels (0= the maximum channel count in array)
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+
  @ingroup MathsUnits */
 template<class SampleType>
 class MixerUnit
@@ -441,11 +457,11 @@ public:
                                     
                                     // inputs
                                     IOKey::Generic,          Measure::None,      IOInfo::NoDefault,  IOLimit::None,
-                                    IOKey::AutoDeleteFlag,  Measure::Bool,      IOInfo::True,       IOLimit::None,
-                                    IOKey::Multiply,        Measure::Factor,    1.0,                IOLimit::None,
-                                    IOKey::Add,             Measure::None,      0.0,                IOLimit::None,
-                                    IOKey::BlockSize,       Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
-                                    IOKey::SampleRate,      Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
+                                    IOKey::AutoDeleteFlag,   Measure::Bool,      IOInfo::True,       IOLimit::None,
+                                    IOKey::Multiply,         Measure::Factor,    1.0,                IOLimit::None,
+                                    IOKey::Add,              Measure::None,      0.0,                IOLimit::None,
+                                    IOKey::BlockSize,        Measure::Samples,   blockSize,          IOLimit::Minimum,   Measure::Samples,   1.0,
+                                    IOKey::SampleRate,       Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
                                     IOKey::End),
                           
                           UnitInfo ("Mixer", "Mixes multichannel units down to a multichannel unit.",
