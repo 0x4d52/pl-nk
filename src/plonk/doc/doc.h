@@ -659,7 +659,8 @@
  400..800 which is an octave and 0..+1 maps to 800..1600 which is also an octave.
  (If linlin() had been used then 0 would have mapped to the linear half way point between
  400 and 1600 i.e., 1000.) However, linexp() is more CPU intensive so linlin() may
- be a useful compromise in some circumstances.
+ be a useful compromise in some circumstances even when explonential mapping is more
+ appropriate.
  
  [todo]
  

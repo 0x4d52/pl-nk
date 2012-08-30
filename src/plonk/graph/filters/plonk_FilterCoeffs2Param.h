@@ -167,9 +167,7 @@ public:
         {
             if (outputBufferLength == param1BufferLength)
             {
-                // full rate (although for brest performance in many cases this should be at a lower rate 
-                // than the hardware sample rate and resampled before using with the filter)
-                
+                // NN
                 for (i = 0; i < outputBufferLength; ++i)
                 {
                     data.params[0] = param0Samples[i];
@@ -181,19 +179,56 @@ public:
                         this->getOutputSamples (j) [i] = data.coeffs[j];
                 }                
             }
-            else // add cases where param lengths are 1
+            else if (param1BufferLength == 1) 
             {
-                goto fallback;
+                // N1
+                data.params[1] = param1Samples[0];
+
+                for (i = 0; i < outputBufferLength; ++i)
+                {
+                    data.params[0] = param0Samples[i];
+                    
+                    ShapeType::calculate (data);
+                    
+                    for (j = 0; j < FormType::NumCoeffs; ++j)
+                        this->getOutputSamples (j) [i] = data.coeffs[j];
+                }                
             }
+            else goto fallback; // Nn
         }
-        else if (outputBufferLength == param1BufferLength)
+        else if ((outputBufferLength == param1BufferLength) &&
+                 (param0BufferLength == 1))
         {
-            goto fallback;
+            // 1N
+            data.params[0] = param0Samples[0];
+
+            for (i = 0; i < outputBufferLength; ++i)
+            {
+                data.params[1] = param1Samples[i];
+                
+                ShapeType::calculate (data);
+                
+                for (j = 0; j < FormType::NumCoeffs; ++j)
+                    this->getOutputSamples (j) [i] = data.coeffs[j];
+            }                            
         }
-        else // add cases where param lengths are 1
+        else if ((param0BufferLength == 1) &&
+                 (param1BufferLength == 1))
         {
-            goto fallback;
+            // 11
+            data.params[0] = param0Samples[0];
+            data.params[1] = param1Samples[0];
+            
+            ShapeType::calculate (data);
+
+            for (i = 0; i < outputBufferLength; ++i)
+            {
+                for (j = 0; j < FormType::NumCoeffs; ++j)
+                    this->getOutputSamples (j) [i] = data.coeffs[j];
+            }                
+
         }
+        else goto fallback; // 1n, 1N, nn or nN
         
         return;
         

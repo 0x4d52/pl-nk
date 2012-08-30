@@ -171,26 +171,159 @@ public:
         const int param1BufferLength = param1Buffer.length();
         const int param2BufferLength = param2Buffer.length();
         
-        if ((outputBufferLength == param0BufferLength) &&
-            (outputBufferLength == param1BufferLength) &&
-            (outputBufferLength == param2BufferLength))
+        if (outputBufferLength == param0BufferLength)
         {
-            for (i = 0; i < outputBufferLength; ++i)
+            if ((outputBufferLength == param1BufferLength) &&
+                (outputBufferLength == param2BufferLength))
             {
-                data.params[0] = param0Samples[i];
-                data.params[1] = param1Samples[i];
-                data.params[2] = param2Samples[i];
-                
-                ShapeType::calculate (data);
-                
-                for (j = 0; j < FormType::NumCoeffs; ++j)
-                    this->getOutputSamples (j) [i] = data.coeffs[j];
-            }            
+                // NNN
+                for (i = 0; i < outputBufferLength; ++i)
+                {
+                    data.params[0] = param0Samples[i];
+                    data.params[1] = param1Samples[i];
+                    data.params[2] = param2Samples[i];
+                    
+                    ShapeType::calculate (data);
+                    
+                    for (j = 0; j < FormType::NumCoeffs; ++j)
+                        this->getOutputSamples (j) [i] = data.coeffs[j];
+                }            
+            }
+            else if (param1BufferLength == 1)
+            {
+                if (outputBufferLength == param2BufferLength)
+                {   
+                    // N1N
+                    data.params[1] = param1Samples[0];
+
+                    for (i = 0; i < outputBufferLength; ++i)
+                    {
+                        data.params[0] = param0Samples[i];
+                        data.params[2] = param2Samples[i];
+                        
+                        ShapeType::calculate (data);
+                        
+                        for (j = 0; j < FormType::NumCoeffs; ++j)
+                            this->getOutputSamples (j) [i] = data.coeffs[j];
+                    }            
+                }
+                else if (param2BufferLength == 1)
+                {
+                    // N11
+                    data.params[1] = param1Samples[0];
+                    data.params[2] = param2Samples[0];
+
+                    for (i = 0; i < outputBufferLength; ++i)
+                    {
+                        data.params[0] = param0Samples[i];
+                        
+                        ShapeType::calculate (data);
+                        
+                        for (j = 0; j < FormType::NumCoeffs; ++j)
+                            this->getOutputSamples (j) [i] = data.coeffs[j];
+                    }            
+                }
+                else goto fallback; // Nnn
+            }
+            else if (param2BufferLength == 1)
+            {
+                if (outputBufferLength == param1BufferLength)
+                {
+                    // NN1
+                    data.params[2] = param2Samples[0];
+
+                    for (i = 0; i < outputBufferLength; ++i)
+                    {
+                        data.params[0] = param0Samples[i];
+                        data.params[1] = param1Samples[i];
+                        
+                        ShapeType::calculate (data);
+                        
+                        for (j = 0; j < FormType::NumCoeffs; ++j)
+                            this->getOutputSamples (j) [i] = data.coeffs[j];
+                    }            
+                }
+                else goto fallback; // Nn1
+            }
+            else goto fallback; //?
         }
-        else
+        else if (param0BufferLength == 1)
         {
-            goto fallback;                       
-        }        
+            if ((outputBufferLength == param1BufferLength) &&
+                (outputBufferLength == param2BufferLength))
+            {
+                // 1NN
+                data.params[0] = param0Samples[0];
+
+                for (i = 0; i < outputBufferLength; ++i)
+                {
+                    data.params[1] = param1Samples[i];
+                    data.params[2] = param2Samples[i];
+                    
+                    ShapeType::calculate (data);
+                    
+                    for (j = 0; j < FormType::NumCoeffs; ++j)
+                        this->getOutputSamples (j) [i] = data.coeffs[j];
+                }            
+            }
+            else if (param1BufferLength == 1)
+            {
+                if (param2BufferLength == outputBufferLength)
+                {
+                    // 11N
+                    data.params[0] = param0Samples[0];
+                    data.params[1] = param1Samples[0];
+
+                    for (i = 0; i < outputBufferLength; ++i)
+                    {
+                        data.params[2] = param2Samples[i];
+                        
+                        ShapeType::calculate (data);
+                        
+                        for (j = 0; j < FormType::NumCoeffs; ++j)
+                            this->getOutputSamples (j) [i] = data.coeffs[j];
+                    }            
+                }
+                else if (param2BufferLength == 1)
+                {
+                    // 111
+                    data.params[0] = param0Samples[0];
+                    data.params[1] = param1Samples[0];
+                    data.params[2] = param2Samples[0];
+                    
+                    ShapeType::calculate (data);
+
+                    for (i = 0; i < outputBufferLength; ++i)
+                    {
+                        for (j = 0; j < FormType::NumCoeffs; ++j)
+                            this->getOutputSamples (j) [i] = data.coeffs[j];
+                    }            
+                }
+                else goto fallback; // 11n
+            }
+            else if (param2BufferLength == 1)
+            {
+                if (param1BufferLength == outputBufferLength)
+                {
+                    // 1N1
+                    data.params[0] = param0Samples[0];
+                    data.params[2] = param2Samples[0];
+
+                    for (i = 0; i < outputBufferLength; ++i)
+                    {
+                        data.params[1] = param1Samples[i];
+                        
+                        ShapeType::calculate (data);
+                        
+                        for (j = 0; j < FormType::NumCoeffs; ++j)
+                            this->getOutputSamples (j) [i] = data.coeffs[j];
+                    }            
+                }
+                goto fallback; // 1n1
+            }
+            else goto fallback; // 1nn
+        }
+        else goto fallback; // nnn
         
         return;
         
@@ -219,7 +352,6 @@ public:
                 param2Position += param2Increment;
             }        
         }
-
     }
     
 private:
