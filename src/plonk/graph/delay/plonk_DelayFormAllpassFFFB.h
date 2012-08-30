@@ -204,7 +204,18 @@ public:
 
 /** An allpass delay setting the feedforward and feeback coefficient directly. 
  
- [args-todo]
+ Factory functions:
+ - ar (input, duration=0.5, coeff=0.5, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ 
+ Inputs:
+ - input: (unit, multi) the unit to which delay is applied
+ - duration: (unit, multi) the delay duration in seconds
+ - coeff: (unit, multi) the feedforward amount and feedback amount multipliers (the feedback amount is negated internally)
+ - maximumDuration: (real) the maximum delay time in seconds (this can be equal to duration if duration is a constant)
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup DelayUnits */
 template<class SampleType>

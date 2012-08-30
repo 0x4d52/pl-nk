@@ -145,7 +145,16 @@ private:
 /** IFFT Unit. 
  Takes frequency domain signal in real/imaginary format and outputs the time domain real signal. 
  
- [args-todo]
+ Each pair of imput channels generates one output channel. The even numbered channels should conatin 
+ the real data and the odd numbered channel should contain the imaginary data. (This is the same
+ output format as the FFTUnit.)
+ 
+ Factory functions:
+ - ar (input)
+ 
+ Inputs:
+ - input: (unit, multi, fft) the input unit in FFT format
+ 
 
  @ingroup ConverterUnits FFTUnits */
 template<class SampleType>

@@ -247,7 +247,19 @@ public:
 
 /** A comb filter with a filter in the feedback loop (where the filter takes one parameter). 
  
- [args-todo]
+ Factory functions:
+ - ar (input, duration=0.5, feedback=0.5, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ 
+ Inputs:
+ - input: (unit, multi) the unit to which delay is applied
+ - duration: (unit, multi) the delay duration in seconds
+ - feedback: (unit, multi) the feedback amount multiplier
+ - frequency: (unit, multi) the filter frequency (the use depends on the filter type.
+ - maximumDuration: (real) the maximum delay time in seconds (this can be equal to duration if duration is a constant)
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
  @ingroup DelayUnits */
 template<class FilterShape>
@@ -311,9 +323,16 @@ public:
     
 };
 
+/** A comb filter with a one-pole low-pass filter in the feedback loop. @ingroup DelayUnits */
 typedef CombFilter1ParamUnit<FilterShapeLPFP1Base<PLONK_TYPE_DEFAULT> >     CombLPFP1;
+
+/** A comb filter with a Butterworth low-pass filter in the feedback loop. @ingroup DelayUnits */
 typedef CombFilter1ParamUnit<FilterShapeLPFBase<PLONK_TYPE_DEFAULT> >       CombLPF;
+
+/** A comb filter with a one-pole high-pass filter in the feedback loop. @ingroup DelayUnits */
 typedef CombFilter1ParamUnit<FilterShapeHPFP1Base<PLONK_TYPE_DEFAULT> >     CombHPFP1;
+
+/** A comb filter with a Butterworth high-pass filter in the feedback loop. @ingroup DelayUnits */
 typedef CombFilter1ParamUnit<FilterShapeHPFBase<PLONK_TYPE_DEFAULT> >       CombHPF;
 
 

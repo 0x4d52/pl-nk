@@ -261,7 +261,6 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate wavetable oscillator. */    
     static UnitType ar (UnitType const& input,
                         DurationUnitType const& duration = DurationType (0.5),
                         const DurationType maximumDuration = DurationType (1.0),
