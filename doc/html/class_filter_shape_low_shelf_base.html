@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,8 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="FilterShapeLowShelfBase" --><!-- doxytag: inherits="FilterShape&lt; SampleType, FilterFormType::P2Z2, FilterShapeType::LowShelf &gt;" -->
 <p>Two-pole, two-zero, low-shelving filter shape.  
  <a href="class_filter_shape_low_shelf_base.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___filter_shapes_p2_z2_8h_source.html">plonk_FilterShapesP2Z2.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for FilterShapeLowShelfBase&lt; SampleType &gt;:</div>
 <div class="dyncontent">
@@ -115,6 +112,51 @@ class FilterShapeLowShelfBase&lt; SampleType &gt;</h3>
 
 <p>Two-pole, two-zero, low-shelving filter shape. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a45dd971b8a2d88f9dc8518fd2de22ec6"></a><!-- doxytag: member="FilterShapeLowShelfBase::FormType" ref="a45dd971b8a2d88f9dc8518fd2de22ec6" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_filter_form.html">FilterForm</a>&lt;SampleType,FilterFormType::P2Z2&gt; <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::<a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FormType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af3290df88332295ccb74237edf6d4b82"></a><!-- doxytag: member="FilterShapeLowShelfBase::FormData" ref="af3290df88332295ccb74237edf6d4b82" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_filter_data_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FormType::Data</a> <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_data_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FormData</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7497b01a0cfd0a27bea4a51b32afbd23"></a><!-- doxytag: member="FilterShapeLowShelfBase::Data" ref="a7497b01a0cfd0a27bea4a51b32afbd23" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_filter_shape_data.html">FilterShapeData</a>&lt;SampleType,FormType::NumCoeffs,NumParams&gt; <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_shape_data.html">Data</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a5fa64f931d03da0ed37a56947d0ea75a"></a><!-- doxytag: member="FilterShapeLowShelfBase::CalcType" ref="a5fa64f931d03da0ed37a56947d0ea75a" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -138,51 +180,6 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_filter_shape_low_shelf_base.html#a5fa64f931d03da0ed37a56947d0ea75a">CalcType</a>&gt; <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">CalcTypes</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7497b01a0cfd0a27bea4a51b32afbd23"></a><!-- doxytag: member="FilterShapeLowShelfBase::Data" ref="a7497b01a0cfd0a27bea4a51b32afbd23" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_filter_shape_data.html">FilterShapeData</a>&lt;SampleType,FormType::NumCoeffs,NumParams&gt; <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_shape_data.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af3290df88332295ccb74237edf6d4b82"></a><!-- doxytag: member="FilterShapeLowShelfBase::FormData" ref="af3290df88332295ccb74237edf6d4b82" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_filter_data_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FormType::Data</a> <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::<a class="el" href="struct_filter_data_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FormData</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a45dd971b8a2d88f9dc8518fd2de22ec6"></a><!-- doxytag: member="FilterShapeLowShelfBase::FormType" ref="a45dd971b8a2d88f9dc8518fd2de22ec6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_form.html">FilterForm</a>&lt;SampleType,FilterFormType::P2Z2&gt; <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::<a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html">FormType</a></td>
         </tr>
       </table>
 </div>
@@ -234,25 +231,6 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a87f4d00e72e9f0035a8567e5fbf16eaa"></a><!-- doxytag: member="FilterShapeLowShelfBase::calculate" ref="a87f4d00e72e9f0035a8567e5fbf16eaa" args="(Data &amp;data)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static void <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::calculate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_filter_shape_data.html">Data</a> &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ab4a18310b0d13bb4978a5a65d42f7eb1"></a><!-- doxytag: member="FilterShapeLowShelfBase::getInputKeys" ref="ab4a18310b0d13bb4978a5a65d42f7eb1" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -306,6 +284,25 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a87f4d00e72e9f0035a8567e5fbf16eaa"></a><!-- doxytag: member="FilterShapeLowShelfBase::calculate" ref="a87f4d00e72e9f0035a8567e5fbf16eaa" args="(Data &amp;data)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="class_filter_shape_low_shelf_base.html">FilterShapeLowShelfBase</a>&lt; SampleType &gt;::calculate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_filter_shape_data.html">Data</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_shapes_p2_z2_8h_source.html">plonk_FilterShapesP2Z2.h</a></li>
 </ul>
@@ -324,7 +321,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:54 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:58 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Filter coefficients generator for an IIR filter using one control parameter.  
  <a href="class_filter_coeffs1_param_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___filter_coeffs1_param_8h_source.html">plonk_FilterCoeffs1Param.h</a>&gt;</code></p>
-
 <p><a href="class_filter_coeffs1_param_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -102,14 +99,14 @@ class FilterCoeffs1ParamUnit&lt; ShapeType &gt;</h3>
 
 <p>Filter coefficients generator for an IIR filter using one control parameter. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a68d6f92562ea50af19bd46f312da026a"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::ChannelType" ref="a68d6f92562ea50af19bd46f312da026a" args="" -->
+<a class="anchor" id="a29e2189a01626850faf37da47c5296f3"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::SampleType" ref="a29e2189a01626850faf37da47c5296f3" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ShapeType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">SampleType</a>&gt; <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef ShapeType::SampleDataType <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">SampleType</a></td>
         </tr>
       </table>
 </div>
@@ -132,21 +129,6 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a25379128f88893651a725f16eaec1db1"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::FilterCoeffsInternal" ref="a25379128f88893651a725f16eaec1db1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_channel_internal.html">FilterCoeffs1ParamChannelInternal</a>&lt;ShapeType&gt; <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs1_param_channel_internal.html">FilterCoeffsInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ad87cd8f7a11f0100fd3e33a420336dd5"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::FormType" ref="ad87cd8f7a11f0100fd3e33a420336dd5" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -162,14 +144,29 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a56522ba02f8f354bf74c10920bd77a26"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::Inputs" ref="a56522ba02f8f354bf74c10920bd77a26" args="" -->
+<a class="anchor" id="a25379128f88893651a725f16eaec1db1"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::FilterCoeffsInternal" ref="a25379128f88893651a725f16eaec1db1" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ShapeType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_channel_internal.html">FilterCoeffs1ParamChannelInternal</a>&lt;ShapeType&gt; <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs1_param_channel_internal.html">FilterCoeffsInternal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a68d6f92562ea50af19bd46f312da026a"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::ChannelType" ref="a68d6f92562ea50af19bd46f312da026a" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">SampleType</a>&gt; <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -192,21 +189,6 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a29e2189a01626850faf37da47c5296f3"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::SampleType" ref="a29e2189a01626850faf37da47c5296f3" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef ShapeType::SampleDataType <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">SampleType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="abbdb7ea3396d96b5da8e54d21f3dfad3"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::UnitType" ref="abbdb7ea3396d96b5da8e54d21f3dfad3" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -222,7 +204,40 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a56522ba02f8f354bf74c10920bd77a26"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::Inputs" ref="a56522ba02f8f354bf74c10920bd77a26" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="afa2baae1e0e426ab0c17d96c6a21da11"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::getInfo" ref="afa2baae1e0e426ab0c17d96c6a21da11" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ad340003b900e2ef01237b10540a2a801"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::ar" ref="ad340003b900e2ef01237b10540a2a801" args="(UnitType const &amp;param0, SampleRates const filterSampleRates=SampleRate::getDefault(), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -266,24 +281,6 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afa2baae1e0e426ab0c17d96c6a21da11"></a><!-- doxytag: member="FilterCoeffs1ParamUnit::getInfo" ref="afa2baae1e0e426ab0c17d96c6a21da11" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt; ShapeType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_coeffs1_param_8h_source.html">plonk_FilterCoeffs1Param.h</a></li>
 </ul>
@@ -302,7 +299,7 @@ template&lt;class ShapeType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

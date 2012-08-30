@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,23 +71,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="Delay2ParamChannelInternal" --><!-- doxytag: inherits="DelayChannelInternalBase" -->
 <p>Delay processor with two control parameters.  
  <a href="class_delay2_param_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___delay2_param_8h_source.html">plonk_Delay2Param.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Delay2ParamChannelInternal&lt; FormType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_delay2_param_channel_internal.png" usemap="#Delay2ParamChannelInternal&lt; FormType &gt;_map" alt=""/>
   <map id="Delay2ParamChannelInternal&lt; FormType &gt;_map" name="Delay2ParamChannelInternal&lt; FormType &gt;_map">
-<area href="class_delay_channel_internal_base.html" alt="DelayChannelInternalBase&lt; FormType &gt;" shape="rect" coords="693,280,1145,304"/>
-<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;" shape="rect" coords="693,224,1145,248"/>
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;" shape="rect" coords="693,168,1145,192"/>
-<area href="class_channel_internal_base.html" alt="ChannelInternalBase&lt; FormType::SampleDataType &gt;" shape="rect" coords="462,112,914,136"/>
+<area href="class_delay_channel_internal_base.html" alt="DelayChannelInternalBase&lt; FormType &gt;" shape="rect" coords="693,336,1145,360"/>
+<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;" shape="rect" coords="693,280,1145,304"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; FormType::SampleDataType, FormType::Data &gt;" shape="rect" coords="693,224,1145,248"/>
+<area href="class_channel_internal_base.html" alt="ChannelInternalBase&lt; FormType::SampleDataType &gt;" shape="rect" coords="462,168,914,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="924,168,1376,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; FormType::SampleDataType &gt; &gt;" shape="rect" coords="0,112,452,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="462,112,914,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="924,112,1376,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; FormType::SampleDataType &gt; &gt;" shape="rect" coords="0,56,452,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="462,56,914,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="924,56,1376,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,452,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,452,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,452,24"/>
 </map>
  </div></div>
 
@@ -106,6 +104,7 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef FormType::DelayState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#ae6e4278802960cefc5dde68f6e5e7705">DelayState</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_delay2_param_channel_internal.html#ae6e4278802960cefc5dde68f6e5e7705">DelayState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#a09f0f67c1f43d337f55d9a52884357b9">DelayStateArray</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; <a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#a8bbd1b9bd53b76017232bc8e9ef72421">ChannelType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#a5a34763bd1eecc2279eedd59db972150">ChannelArrayType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
 <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a><br class="typebreak"/>
 &lt; FormType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#a546920b5e8d14cf2d222cedf546dc4d2">DelayInternal</a></td></tr>
@@ -136,7 +135,7 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef FormType::Param2Function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#a39237d31736f73f040c70905383b69da">Param2Function</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#a29546f2381d05f50526e3d1d5aa171c6">Delay2ParamChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#ab930ac128411689ae07c5c5943b9071f">Delay2ParamChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate, <a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;channels)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_delay2_param_channel_internal.html#ae7e44939064036c3d9bb413681b6763f">process</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The DSP function.  <a href="#ae7e44939064036c3d9bb413681b6763f"></a><br/></td></tr>
 </table>
@@ -146,37 +145,20 @@ class Delay2ParamChannelInternal&lt; FormType &gt;</h3>
 
 <p>Delay processor with two control parameters. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="acd111bb5e7ea8d873088a6b79525a1d5"></a><!-- doxytag: member="Delay2ParamChannelInternal::Buffer" ref="acd111bb5e7ea8d873088a6b79525a1d5" args="" -->
+<a class="anchor" id="aea748dc8c83c2ce4d6f8de430cf2ea0d"></a><!-- doxytag: member="Delay2ParamChannelInternal::SampleType" ref="aea748dc8c83c2ce4d6f8de430cf2ea0d" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+          <td class="memname">typedef FormType::SampleDataType <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a7787e378a14d9c8c3b483ff24b793072">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8bbd1b9bd53b76017232bc8e9ef72421"></a><!-- doxytag: member="Delay2ParamChannelInternal::ChannelType" ref="a8bbd1b9bd53b76017232bc8e9ef72421" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FormType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#abf4df64b97b005d47185b141d18c43c6">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#ab26a3d577bb464314d9a9df4b1e3f88f">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
 
 </div>
 </div>
@@ -197,23 +179,6 @@ template&lt;class FormType &gt; </div>
 <p>Sublasses should inherit from this, add their own members, and store an instance. Where applicable the structure should match the equivalents in the Plink library. </p>
 
 <p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a86cd96ab4fb4536cc60ad89a8ae80156">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a546920b5e8d14cf2d222cedf546dc4d2"></a><!-- doxytag: member="Delay2ParamChannelInternal::DelayInternal" ref="a546920b5e8d14cf2d222cedf546dc4d2" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FormType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt;FormType&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html">DelayInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a62402a687ea3529800e70dbf1941b5ad">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
 
 </div>
 </div>
@@ -251,52 +216,54 @@ template&lt;class FormType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae24ab80570e56c5f7c2cd818a71c43e6"></a><!-- doxytag: member="Delay2ParamChannelInternal::DurationType" ref="ae24ab80570e56c5f7c2cd818a71c43e6" args="" -->
+<a class="anchor" id="a8bbd1b9bd53b76017232bc8e9ef72421"></a><!-- doxytag: member="Delay2ParamChannelInternal::ChannelType" ref="a8bbd1b9bd53b76017232bc8e9ef72421" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt;::IndexType <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#ae24ab80570e56c5f7c2cd818a71c43e6">DurationType</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a634b9a75e4e6c20048bc44f02fa73e89">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#abf4df64b97b005d47185b141d18c43c6">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a11d835c59e88e31c0796a44a4fa6a94a"></a><!-- doxytag: member="Delay2ParamChannelInternal::InputFunction" ref="a11d835c59e88e31c0796a44a4fa6a94a" args="" -->
+<a class="anchor" id="a5a34763bd1eecc2279eedd59db972150"></a><!-- doxytag: member="Delay2ParamChannelInternal::ChannelArrayType" ref="a5a34763bd1eecc2279eedd59db972150" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef FormType::InputFunction <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#a11d835c59e88e31c0796a44a4fa6a94a">InputFunction</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_object_array.html">ChannelArrayType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a85b2d38313bc926fa2ace0fd77a2cb80">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="aa42ed4f24a4d6f29087bac7b573d2045"></a><!-- doxytag: member="Delay2ParamChannelInternal::Inputs" ref="aa42ed4f24a4d6f29087bac7b573d2045" args="" -->
+<a class="anchor" id="a546920b5e8d14cf2d222cedf546dc4d2"></a><!-- doxytag: member="Delay2ParamChannelInternal::DelayInternal" ref="a546920b5e8d14cf2d222cedf546dc4d2" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt;FormType&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html">DelayInternal</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a407d9e81dba868607789b3484c6de254">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a62402a687ea3529800e70dbf1941b5ad">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
 
 </div>
 </div>
@@ -334,48 +301,71 @@ template&lt;class FormType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7593d6357511b6a3cabc45304064a727"></a><!-- doxytag: member="Delay2ParamChannelInternal::OutputFunction" ref="a7593d6357511b6a3cabc45304064a727" args="" -->
+<a class="anchor" id="a0ff92f8fd185bce2b437d6dfd04ade00"></a><!-- doxytag: member="Delay2ParamChannelInternal::UnitType" ref="a0ff92f8fd185bce2b437d6dfd04ade00" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef FormType::OutputFunction <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#a7593d6357511b6a3cabc45304064a727">OutputFunction</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a8d5051d03ab3575068def5e9d1a8f283">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="a61547723303737d52819c2a92ebb4a51"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param1BufferType" ref="a61547723303737d52819c2a92ebb4a51" args="" -->
+<a class="anchor" id="aa42ed4f24a4d6f29087bac7b573d2045"></a><!-- doxytag: member="Delay2ParamChannelInternal::Inputs" ref="aa42ed4f24a4d6f29087bac7b573d2045" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#a986d6f6910d9b6338f09adc0838cb2f3">Param1Type</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_numerical_array.html">Param1BufferType</a></td>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a407d9e81dba868607789b3484c6de254">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="ae3b014f7a178326fd65342af843194b3"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param1Function" ref="ae3b014f7a178326fd65342af843194b3" args="" -->
+<a class="anchor" id="acd111bb5e7ea8d873088a6b79525a1d5"></a><!-- doxytag: member="Delay2ParamChannelInternal::Buffer" ref="acd111bb5e7ea8d873088a6b79525a1d5" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef FormType::Param1Function <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#ae3b014f7a178326fd65342af843194b3">Param1Function</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a7787e378a14d9c8c3b483ff24b793072">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae24ab80570e56c5f7c2cd818a71c43e6"></a><!-- doxytag: member="Delay2ParamChannelInternal::DurationType" ref="ae24ab80570e56c5f7c2cd818a71c43e6" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FormType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt;::IndexType <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#ae24ab80570e56c5f7c2cd818a71c43e6">DurationType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a634b9a75e4e6c20048bc44f02fa73e89">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
 
 </div>
 </div>
@@ -409,29 +399,14 @@ template&lt;class FormType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a43d8ce6f02b50bece9d9cc451102680e"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param2BufferType" ref="a43d8ce6f02b50bece9d9cc451102680e" args="" -->
+<a class="anchor" id="a61547723303737d52819c2a92ebb4a51"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param1BufferType" ref="a61547723303737d52819c2a92ebb4a51" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#a8fc0ecd77aa3ba869db7b1c2cefd3b7e">Param2Type</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_numerical_array.html">Param2BufferType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a39237d31736f73f040c70905383b69da"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param2Function" ref="a39237d31736f73f040c70905383b69da" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FormType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef FormType::Param2Function <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#a39237d31736f73f040c70905383b69da">Param2Function</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#a986d6f6910d9b6338f09adc0838cb2f3">Param1Type</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_numerical_array.html">Param1BufferType</a></td>
         </tr>
       </table>
 </div>
@@ -469,6 +444,36 @@ template&lt;class FormType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a43d8ce6f02b50bece9d9cc451102680e"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param2BufferType" ref="a43d8ce6f02b50bece9d9cc451102680e" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FormType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#a8fc0ecd77aa3ba869db7b1c2cefd3b7e">Param2Type</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_numerical_array.html">Param2BufferType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a11d835c59e88e31c0796a44a4fa6a94a"></a><!-- doxytag: member="Delay2ParamChannelInternal::InputFunction" ref="a11d835c59e88e31c0796a44a4fa6a94a" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FormType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef FormType::InputFunction <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#a11d835c59e88e31c0796a44a4fa6a94a">InputFunction</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a87ef5c37cf8dc68be06a9cb23a40f0f1"></a><!-- doxytag: member="Delay2ParamChannelInternal::ReadFunction" ref="a87ef5c37cf8dc68be06a9cb23a40f0f1" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -484,40 +489,6 @@ template&lt;class FormType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aea748dc8c83c2ce4d6f8de430cf2ea0d"></a><!-- doxytag: member="Delay2ParamChannelInternal::SampleType" ref="aea748dc8c83c2ce4d6f8de430cf2ea0d" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FormType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef FormType::SampleDataType <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#ab26a3d577bb464314d9a9df4b1e3f88f">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0ff92f8fd185bce2b437d6dfd04ade00"></a><!-- doxytag: member="Delay2ParamChannelInternal::UnitType" ref="a0ff92f8fd185bce2b437d6dfd04ade00" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class FormType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_delay2_param_channel_internal.html#aea748dc8c83c2ce4d6f8de430cf2ea0d">SampleType</a>&gt; <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_delay_channel_internal_base.html#a8d5051d03ab3575068def5e9d1a8f283">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a4e2136132fca4e1ce626e1860a1da05e"></a><!-- doxytag: member="Delay2ParamChannelInternal::WriteFunction" ref="a4e2136132fca4e1ce626e1860a1da05e" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -526,6 +497,51 @@ template&lt;class FormType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef FormType::WriteFunction <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#a4e2136132fca4e1ce626e1860a1da05e">WriteFunction</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7593d6357511b6a3cabc45304064a727"></a><!-- doxytag: member="Delay2ParamChannelInternal::OutputFunction" ref="a7593d6357511b6a3cabc45304064a727" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FormType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef FormType::OutputFunction <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#a7593d6357511b6a3cabc45304064a727">OutputFunction</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae3b014f7a178326fd65342af843194b3"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param1Function" ref="ae3b014f7a178326fd65342af843194b3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FormType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef FormType::Param1Function <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#ae3b014f7a178326fd65342af843194b3">Param1Function</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a39237d31736f73f040c70905383b69da"></a><!-- doxytag: member="Delay2ParamChannelInternal::Param2Function" ref="a39237d31736f73f040c70905383b69da" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class FormType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef FormType::Param2Function <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt; FormType &gt;::<a class="el" href="class_delay2_param_channel_internal.html#a39237d31736f73f040c70905383b69da">Param2Function</a></td>
         </tr>
       </table>
 </div>
@@ -560,7 +576,7 @@ template&lt;class FormType &gt; </div>
 </div>
 </div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a29546f2381d05f50526e3d1d5aa171c6"></a><!-- doxytag: member="Delay2ParamChannelInternal::Delay2ParamChannelInternal" ref="a29546f2381d05f50526e3d1d5aa171c6" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
+<a class="anchor" id="ab930ac128411689ae07c5c5943b9071f"></a><!-- doxytag: member="Delay2ParamChannelInternal::Delay2ParamChannelInternal" ref="ab930ac128411689ae07c5c5943b9071f" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate, ChannelArrayType &amp;channels)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -588,7 +604,13 @@ template&lt;class FormType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
+          <td class="paramname"><em>sampleRate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;&#160;</td>
+          <td class="paramname"><em>channels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -654,7 +676,7 @@ template&lt;class FormType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:55 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

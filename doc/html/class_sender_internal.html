@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,15 +68,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SenderInternal&lt; SenderContainerBaseType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="SenderInternal" --><!-- doxytag: inherits="SmartPointer" -->
-<p><code>#include &lt;<a class="el" href="plonk___sender_8h_source.html">plonk_Sender.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="SenderInternal" --><!-- doxytag: inherits="SmartPointer" --><div class="dynheader">
 Inheritance diagram for SenderInternal&lt; SenderContainerBaseType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_sender_internal.png" usemap="#SenderInternal&lt; SenderContainerBaseType &gt;_map" alt=""/>
   <map id="SenderInternal&lt; SenderContainerBaseType &gt;_map" name="SenderInternal&lt; SenderContainerBaseType &gt;_map">
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,271,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,271,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,271,24"/>
 </map>
  </div></div>
 
@@ -109,14 +107,14 @@ Public Member Functions</h2></td></tr>
  class SenderInternal&lt; SenderContainerBaseType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a649cf3348f0c70fd1421f68f59092bbe"></a><!-- doxytag: member="SenderInternal::RawReceiverArrayInternal" ref="a649cf3348f0c70fd1421f68f59092bbe" args="" -->
+<a class="anchor" id="abb4cd6809ae00d321ee4105adc52bf4b"></a><!-- doxytag: member="SenderInternal::SenderInternalBaseType" ref="abb4cd6809ae00d321ee4105adc52bf4b" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SenderContainerBaseType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array_internal.html">ObjectArrayInternal</a>&lt;<a class="el" href="class_receiver_internal.html">Receiver</a>*,<a class="el" href="class_smart_pointer.html">SmartPointer</a>&gt; <a class="el" href="class_sender_internal.html">SenderInternal</a>&lt; SenderContainerBaseType &gt;::<a class="el" href="class_object_array_internal.html">RawReceiverArrayInternal</a></td>
+          <td class="memname">typedef SenderContainerBaseType::Internal <a class="el" href="class_sender_internal.html">SenderInternal</a>&lt; SenderContainerBaseType &gt;::<a class="el" href="class_sender_internal.html#abb4cd6809ae00d321ee4105adc52bf4b">SenderInternalBaseType</a></td>
         </tr>
       </table>
 </div>
@@ -139,14 +137,14 @@ template&lt;class SenderContainerBaseType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="abb4cd6809ae00d321ee4105adc52bf4b"></a><!-- doxytag: member="SenderInternal::SenderInternalBaseType" ref="abb4cd6809ae00d321ee4105adc52bf4b" args="" -->
+<a class="anchor" id="a649cf3348f0c70fd1421f68f59092bbe"></a><!-- doxytag: member="SenderInternal::RawReceiverArrayInternal" ref="a649cf3348f0c70fd1421f68f59092bbe" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SenderContainerBaseType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef SenderContainerBaseType::Internal <a class="el" href="class_sender_internal.html">SenderInternal</a>&lt; SenderContainerBaseType &gt;::<a class="el" href="class_sender_internal.html#abb4cd6809ae00d321ee4105adc52bf4b">SenderInternalBaseType</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array_internal.html">ObjectArrayInternal</a>&lt;<a class="el" href="class_receiver_internal.html">Receiver</a>*,<a class="el" href="class_smart_pointer.html">SmartPointer</a>&gt; <a class="el" href="class_sender_internal.html">SenderInternal</a>&lt; SenderContainerBaseType &gt;::<a class="el" href="class_object_array_internal.html">RawReceiverArrayInternal</a></td>
         </tr>
       </table>
 </div>
@@ -226,6 +224,25 @@ template&lt;class SenderContainerBaseType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a2f96e05299fedb11f4bd282fb4b7f608"></a><!-- doxytag: member="SenderInternal::removeReceiver" ref="a2f96e05299fedb11f4bd282fb4b7f608" args="(Receiver *const receiver)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SenderContainerBaseType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_sender_internal.html">SenderInternal</a>&lt; SenderContainerBaseType &gt;::removeReceiver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_receiver_internal.html">Receiver</a> *const&#160;</td>
+          <td class="paramname"><em>receiver</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a849d04fd46f450b004c50935835c33bf"></a><!-- doxytag: member="SenderInternal::addReceiver" ref="a849d04fd46f450b004c50935835c33bf" args="(WeakPointer *const owner, Receiver *const receiver)" -->
 <div class="memitem">
 <div class="memproto">
@@ -248,25 +265,6 @@ template&lt;class SenderContainerBaseType &gt; </div>
           <td></td>
           <td>)</td>
           <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2f96e05299fedb11f4bd282fb4b7f608"></a><!-- doxytag: member="SenderInternal::removeReceiver" ref="a2f96e05299fedb11f4bd282fb4b7f608" args="(Receiver *const receiver)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SenderContainerBaseType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_sender_internal.html">SenderInternal</a>&lt; SenderContainerBaseType &gt;::removeReceiver </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_receiver_internal.html">Receiver</a> *const&#160;</td>
-          <td class="paramname"><em>receiver</em></td><td>)</td>
-          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -377,7 +375,7 @@ template&lt;class SenderContainerBaseType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -118,12 +117,12 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gaf8c9d1bec2fe0ab8c5568e8917197209"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_Create" ref="gaf8c9d1bec2fe0ab8c5568e8917197209" args="()" -->
+<a class="anchor" id="gac1ac75a23a86504004b6f3a0008451a1"></a><!-- doxytag: member="plank_RNG.h::pl_RNGGlobal" ref="gac1ac75a23a86504004b6f3a0008451a1" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> pl_RNG_Create </td>
+          <td class="memname"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> pl_RNGGlobal </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -131,9 +130,6 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Create a <em>Plank RNG</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank RNG</em> object as an opaque reference or NULL. </dd></dl>
 
 </div>
 </div>
@@ -153,6 +149,51 @@ Functions</h2></td></tr>
 
 <p>Create and initialise a <em>Plank RNG</em> object and return an oqaque reference to it. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank RNG</em> object as an opaque reference or NULL. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaf8c9d1bec2fe0ab8c5568e8917197209"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_Create" ref="gaf8c9d1bec2fe0ab8c5568e8917197209" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> pl_RNG_Create </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a <em>Plank RNG</em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank RNG</em> object as an opaque reference or NULL. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga6daa15c83f5bb03d4eb8a843eb41f729"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_Init" ref="ga6daa15c83f5bb03d4eb8a843eb41f729" args="(PlankRNGRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_RNG_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Initialse a <em>Plank RNG</em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank RNG</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
 
 </div>
 </div>
@@ -208,29 +249,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga6daa15c83f5bb03d4eb8a843eb41f729"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_Init" ref="ga6daa15c83f5bb03d4eb8a843eb41f729" args="(PlankRNGRef p)" -->
+<a class="anchor" id="ga2bc680ab31e54bd5f950bfd874ba3317"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_Seed" ref="ga2bc680ab31e54bd5f950bfd874ba3317" args="(PlankRNGRef p, unsigned int seed)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_RNG_Init </td>
+          <td class="memname">void pl_RNG_Seed </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>seed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Initialse a <em>Plank RNG</em> object. </p>
+<p>Seed a <em>Plank RNG</em> object. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank RNG</em> object. </td></tr>
+    <tr><td class="paramname">seed</td><td>The new seed. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
 
 </div>
 </div>
@@ -257,58 +308,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The random integer. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="gaf1d82fa1ba755fe6399767b9b88967b6"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_NextDouble" ref="gaf1d82fa1ba755fe6399767b9b88967b6" args="(PlankRNGRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static double pl_RNG_NextDouble </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a random double between 0 and 1. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank RNG</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The random double. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga6f3a1cd9c95780cbb782f3234c4e1150"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_NextFloat" ref="ga6f3a1cd9c95780cbb782f3234c4e1150" args="(PlankRNGRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static float pl_RNG_NextFloat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Generate a random float between 0 and 1. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank RNG</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The random float. </dd></dl>
 
 </div>
 </div>
@@ -349,55 +348,55 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga2bc680ab31e54bd5f950bfd874ba3317"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_Seed" ref="ga2bc680ab31e54bd5f950bfd874ba3317" args="(PlankRNGRef p, unsigned int seed)" -->
+<a class="anchor" id="ga6f3a1cd9c95780cbb782f3234c4e1150"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_NextFloat" ref="ga6f3a1cd9c95780cbb782f3234c4e1150" args="(PlankRNGRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void pl_RNG_Seed </td>
+          <td class="memname">static float pl_RNG_NextFloat </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>seed</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Seed a <em>Plank RNG</em> object. </p>
+<p>Generate a random float between 0 and 1. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank RNG</em> object. </td></tr>
-    <tr><td class="paramname">seed</td><td>The new seed. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The random float. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="gac1ac75a23a86504004b6f3a0008451a1"></a><!-- doxytag: member="plank_RNG.h::pl_RNGGlobal" ref="gac1ac75a23a86504004b6f3a0008451a1" args="()" -->
+<a class="anchor" id="gaf1d82fa1ba755fe6399767b9b88967b6"></a><!-- doxytag: member="plank_RNG.h::pl_RNG_NextDouble" ref="gaf1d82fa1ba755fe6399767b9b88967b6" args="(PlankRNGRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a> pl_RNGGlobal </td>
+          <td class="memname">static double pl_RNG_NextDouble </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="paramtype"><a class="el" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb">PlankRNGRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Generate a random double between 0 and 1. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank RNG</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The random double. </dd></dl>
 
 </div>
 </div>
@@ -416,7 +415,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,7 +69,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="LinearPanUnit" -->
-<p><code>#include &lt;<a class="el" href="plonk___linear_pan_channel_8h_source.html">plonk_LinearPanChannel.h</a>&gt;</code></p>
+<p>A linear panning unit.  
+ <a href="class_linear_pan_unit.html#details">More...</a></p>
 
 <p><a href="class_linear_pan_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -90,25 +90,23 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_linear_pan_unit.html#a770b3b5da121713307a059286d3313d4">getInfo</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_linear_pan_unit.html#ad5c6c77c3c557400572995cccd826b19">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;position=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::noPreference(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::noPreference())  throw ()</td></tr>
 </table>
-<h3>template&lt;class SampleType&gt;<br/>
- class LinearPanUnit&lt; SampleType &gt;</h3>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
+class LinearPanUnit&lt; SampleType &gt;</h3>
 
-<hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aecaddc03abadab87c969ce524520af94"></a><!-- doxytag: member="LinearPanUnit::ChannelType" ref="aecaddc03abadab87c969ce524520af94" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
+<p>A linear panning unit. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, position=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the input signal(s) to pan (each channel will generate a pair of outputs)</li>
+<li>position: (unit, multi) the pan position(s), 0 is centre, in float/double units -1 is left +1 is right</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
+</div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="a4bdf985f5e3221d9c17c874ce9280299"></a><!-- doxytag: member="LinearPanUnit::Data" ref="a4bdf985f5e3221d9c17c874ce9280299" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -117,36 +115,6 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a116c66b0ed795de0f6ba5cc89b28a640"></a><!-- doxytag: member="LinearPanUnit::Inputs" ref="a116c66b0ed795de0f6ba5cc89b28a640" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a057dfbb9f90c6b8310206021fc6b82ac"></a><!-- doxytag: member="LinearPanUnit::Internal" ref="a057dfbb9f90c6b8310206021fc6b82ac" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
         </tr>
       </table>
 </div>
@@ -169,6 +137,36 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aecaddc03abadab87c969ce524520af94"></a><!-- doxytag: member="LinearPanUnit::ChannelType" ref="aecaddc03abadab87c969ce524520af94" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a057dfbb9f90c6b8310206021fc6b82ac"></a><!-- doxytag: member="LinearPanUnit::Internal" ref="a057dfbb9f90c6b8310206021fc6b82ac" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a0abbb1a2ce6a8fd2d41545a5516f5200"></a><!-- doxytag: member="LinearPanUnit::UnitType" ref="a0abbb1a2ce6a8fd2d41545a5516f5200" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +182,40 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a116c66b0ed795de0f6ba5cc89b28a640"></a><!-- doxytag: member="LinearPanUnit::Inputs" ref="a116c66b0ed795de0f6ba5cc89b28a640" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a770b3b5da121713307a059286d3313d4"></a><!-- doxytag: member="LinearPanUnit::getInfo" ref="a770b3b5da121713307a059286d3313d4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ad5c6c77c3c557400572995cccd826b19"></a><!-- doxytag: member="LinearPanUnit::ar" ref="ad5c6c77c3c557400572995cccd826b19" args="(UnitType const &amp;input, UnitType const &amp;position=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -226,24 +257,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a770b3b5da121713307a059286d3313d4"></a><!-- doxytag: member="LinearPanUnit::getInfo" ref="a770b3b5da121713307a059286d3313d4" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_linear_pan_unit.html">LinearPanUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___linear_pan_channel_8h_source.html">plonk_LinearPanChannel.h</a></li>
 </ul>
@@ -262,7 +275,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

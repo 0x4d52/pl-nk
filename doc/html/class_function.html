@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,8 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="Function" -->
-<p><code>#include &lt;<a class="el" href="plonk___function_8h_source.html">plonk_Function.h</a>&gt;</code></p>
-
 <p><a href="class_function-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
@@ -151,21 +148,63 @@ template&lt;class ReturnType , class Arg1CallType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a9bc1763bac37df03249d607a0fc6805b"></a><!-- doxytag: member="Function::create" ref="a9bc1763bac37df03249d607a0fc6805b" args="(ReturnType(*proxyFunction)(typename TypeUtility&lt; Arg1CallType &gt;::PassType, typename TypeUtility&lt; Arg2CallType &gt;::PassType, typename TypeUtility&lt; Arg3CallType &gt;::PassType), Arg1CallType argument1, Arg2CallType argument2, Arg3CallType argument3)" -->
+<a class="anchor" id="a1ff07a378cd5fbb525070cacd39d5732"></a><!-- doxytag: member="Function::create" ref="a1ff07a378cd5fbb525070cacd39d5732" args="(Arg1CallType argument1)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ReturnType , class Arg1CallType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container.html">FunctionContainer</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType&gt;, 1, false&gt; Function::create </td>
+          <td>(</td>
+          <td class="paramtype">Arg1CallType&#160;</td>
+          <td class="paramname"><em>argument1</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abe022e9d1738fb98579d1bc9751cd6b2"></a><!-- doxytag: member="Function::create" ref="abe022e9d1738fb98579d1bc9751cd6b2" args="(Arg1CallType argument1, Arg2CallType argument2)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ReturnType , class Arg1CallType , class Arg2CallType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container.html">FunctionContainer</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg2CallType&gt;::OriginalType&gt;, 2, false&gt; Function::create </td>
+          <td>(</td>
+          <td class="paramtype">Arg1CallType&#160;</td>
+          <td class="paramname"><em>argument1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Arg2CallType&#160;</td>
+          <td class="paramname"><em>argument2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac2769e6952310530757bc90717e71f47"></a><!-- doxytag: member="Function::create" ref="ac2769e6952310530757bc90717e71f47" args="(Arg1CallType argument1, Arg2CallType argument2, Arg3CallType argument3)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ReturnType , class Arg1CallType , class Arg2CallType , class Arg3CallType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container_proxy.html">FunctionContainerProxy</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg2CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg3CallType&gt;::OriginalType&gt;, 3, true&gt; Function::create </td>
+          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container.html">FunctionContainer</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg2CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg3CallType&gt;::OriginalType&gt;, 3, false&gt; Function::create </td>
           <td>(</td>
-          <td class="paramtype">ReturnType(*)(typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg1CallType &gt;::PassType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg2CallType &gt;::PassType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg3CallType &gt;::PassType)&#160;</td>
-          <td class="paramname"><em>proxyFunction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">Arg1CallType&#160;</td>
           <td class="paramname"><em>argument1</em>, </td>
         </tr>
@@ -180,6 +219,54 @@ template&lt;class ReturnType , class Arg1CallType , class Arg2CallType , class A
           <td></td>
           <td class="paramtype">Arg3CallType&#160;</td>
           <td class="paramname"><em>argument3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aebc20d03daae0d7ab6045911034e98af"></a><!-- doxytag: member="Function::create" ref="aebc20d03daae0d7ab6045911034e98af" args="(ReturnType(*proxyFunction)(void))" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ReturnType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container_proxy.html">FunctionContainerProxy</a>&lt;ReturnType&gt;, 0, true&gt; Function::create </td>
+          <td>(</td>
+          <td class="paramtype">ReturnType(*)(void)&#160;</td>
+          <td class="paramname"><em>proxyFunction</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a65fe5b3da1bbe2387583e92d8a167341"></a><!-- doxytag: member="Function::create" ref="a65fe5b3da1bbe2387583e92d8a167341" args="(ReturnType(*proxyFunction)(typename TypeUtility&lt; Arg1CallType &gt;::PassType), Arg1CallType argument1)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ReturnType , class Arg1CallType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container_proxy.html">FunctionContainerProxy</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType&gt;, 1, true&gt; Function::create </td>
+          <td>(</td>
+          <td class="paramtype">ReturnType(*)(typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg1CallType &gt;::PassType)&#160;</td>
+          <td class="paramname"><em>proxyFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Arg1CallType&#160;</td>
+          <td class="paramname"><em>argument1</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -227,63 +314,21 @@ template&lt;class ReturnType , class Arg1CallType , class Arg2CallType &gt; </di
 
 </div>
 </div>
-<a class="anchor" id="a65fe5b3da1bbe2387583e92d8a167341"></a><!-- doxytag: member="Function::create" ref="a65fe5b3da1bbe2387583e92d8a167341" args="(ReturnType(*proxyFunction)(typename TypeUtility&lt; Arg1CallType &gt;::PassType), Arg1CallType argument1)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ReturnType , class Arg1CallType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container_proxy.html">FunctionContainerProxy</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType&gt;, 1, true&gt; Function::create </td>
-          <td>(</td>
-          <td class="paramtype">ReturnType(*)(typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg1CallType &gt;::PassType)&#160;</td>
-          <td class="paramname"><em>proxyFunction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Arg1CallType&#160;</td>
-          <td class="paramname"><em>argument1</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aebc20d03daae0d7ab6045911034e98af"></a><!-- doxytag: member="Function::create" ref="aebc20d03daae0d7ab6045911034e98af" args="(ReturnType(*proxyFunction)(void))" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ReturnType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container_proxy.html">FunctionContainerProxy</a>&lt;ReturnType&gt;, 0, true&gt; Function::create </td>
-          <td>(</td>
-          <td class="paramtype">ReturnType(*)(void)&#160;</td>
-          <td class="paramname"><em>proxyFunction</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac2769e6952310530757bc90717e71f47"></a><!-- doxytag: member="Function::create" ref="ac2769e6952310530757bc90717e71f47" args="(Arg1CallType argument1, Arg2CallType argument2, Arg3CallType argument3)" -->
+<a class="anchor" id="a9bc1763bac37df03249d607a0fc6805b"></a><!-- doxytag: member="Function::create" ref="a9bc1763bac37df03249d607a0fc6805b" args="(ReturnType(*proxyFunction)(typename TypeUtility&lt; Arg1CallType &gt;::PassType, typename TypeUtility&lt; Arg2CallType &gt;::PassType, typename TypeUtility&lt; Arg3CallType &gt;::PassType), Arg1CallType argument1, Arg2CallType argument2, Arg3CallType argument3)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ReturnType , class Arg1CallType , class Arg2CallType , class Arg3CallType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container.html">FunctionContainer</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg2CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg3CallType&gt;::OriginalType&gt;, 3, false&gt; Function::create </td>
+          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container_proxy.html">FunctionContainerProxy</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg2CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg3CallType&gt;::OriginalType&gt;, 3, true&gt; Function::create </td>
           <td>(</td>
+          <td class="paramtype">ReturnType(*)(typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg1CallType &gt;::PassType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg2CallType &gt;::PassType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Arg3CallType &gt;::PassType)&#160;</td>
+          <td class="paramname"><em>proxyFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">Arg1CallType&#160;</td>
           <td class="paramname"><em>argument1</em>, </td>
         </tr>
@@ -310,54 +355,6 @@ template&lt;class ReturnType , class Arg1CallType , class Arg2CallType , class A
 
 </div>
 </div>
-<a class="anchor" id="abe022e9d1738fb98579d1bc9751cd6b2"></a><!-- doxytag: member="Function::create" ref="abe022e9d1738fb98579d1bc9751cd6b2" args="(Arg1CallType argument1, Arg2CallType argument2)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ReturnType , class Arg1CallType , class Arg2CallType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container.html">FunctionContainer</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg2CallType&gt;::OriginalType&gt;, 2, false&gt; Function::create </td>
-          <td>(</td>
-          <td class="paramtype">Arg1CallType&#160;</td>
-          <td class="paramname"><em>argument1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Arg2CallType&#160;</td>
-          <td class="paramname"><em>argument2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1ff07a378cd5fbb525070cacd39d5732"></a><!-- doxytag: member="Function::create" ref="a1ff07a378cd5fbb525070cacd39d5732" args="(Arg1CallType argument1)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ReturnType , class Arg1CallType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt;<a class="el" href="class_function_container.html">FunctionContainer</a>&lt;ReturnType, typename <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;Arg1CallType&gt;::OriginalType&gt;, 1, false&gt; Function::create </td>
-          <td>(</td>
-          <td class="paramtype">Arg1CallType&#160;</td>
-          <td class="paramname"><em>argument1</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___function_8h_source.html">plonk_Function.h</a></li>
 </ul>
@@ -376,7 +373,7 @@ template&lt;class ReturnType , class Arg1CallType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:54 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:58 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,13 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -74,16 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_ObjectArray.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;../core/plonk_CoreForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___container_forward_declarations_8h_source.html">plonk_ContainerForwardDeclarations.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___dynamic_container_8h_source.html">plonk_DynamicContainer.h</a>&quot;</code><br/>
-<code>#include &quot;../core/plonk_SmartPointerContainer.h&quot;</code><br/>
-<code>#include &quot;../core/plonk_WeakPointerContainer.h&quot;</code><br/>
-<code>#include &quot;../core/plonk_SenderContainer.h&quot;</code><br/>
-<code>#include &quot;../maths/plonk_InlineCommonOps.h&quot;</code><br/>
-<code>#include &quot;../random/plonk_RNG.h&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___object_array_internal_8h_source.html">plonk_ObjectArrayInternal.h</a>&quot;</code><br/>
-</div>
+
 <p><a href="plonk___object_array_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
@@ -97,37 +80,6 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___object_array_8h.html#ad32b9c276b7a6988614ff7492dff0f9d">ObjectArrayAssignmentDefinition</a>(DerivedArrayType, ElementType)</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="ad32b9c276b7a6988614ff7492dff0f9d"></a><!-- doxytag: member="plonk_ObjectArray.h::ObjectArrayAssignmentDefinition" ref="ad32b9c276b7a6988614ff7492dff0f9d" args="(DerivedArrayType, ElementType)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ObjectArrayAssignmentDefinition</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">DerivedArrayType, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">ElementType&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">DerivedArrayType&amp; operator= (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ElementType&gt;</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()\
-    {\
-        <span class="keywordflow">return</span> operator= (static_cast&lt;DerivedArrayType const&amp;&gt; (other) );\
-    }
-</pre></div>
-</div>
-</div>
 <a class="anchor" id="a1f18141b300145cab40b1256568d8903"></a><!-- doxytag: member="plonk_ObjectArray.h::ObjectArrayConcatOperatorsDefine" ref="a1f18141b300145cab40b1256568d8903" args="(Base, Type)" -->
 <div class="memitem">
 <div class="memproto">
@@ -184,6 +136,37 @@ Defines</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="ad32b9c276b7a6988614ff7492dff0f9d"></a><!-- doxytag: member="plonk_ObjectArray.h::ObjectArrayAssignmentDefinition" ref="ad32b9c276b7a6988614ff7492dff0f9d" args="(DerivedArrayType, ElementType)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ObjectArrayAssignmentDefinition</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">DerivedArrayType, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ElementType&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">DerivedArrayType&amp; operator= (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ElementType&gt;</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()\
+    {\
+        <span class="keywordflow">return</span> operator= (static_cast&lt;DerivedArrayType const&amp;&gt; (other) );\
+    }
+</pre></div>
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -199,7 +182,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

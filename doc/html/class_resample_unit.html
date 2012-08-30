@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Resample a unit to a different sample rate and/or block size.  
  <a href="class_resample_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___resample_channel_8h_source.html">plonk_ResampleChannel.h</a>&gt;</code></p>
-
 <p><a href="class_resample_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -100,15 +97,26 @@ Static Public Member Functions</h2></td></tr>
 class ResampleUnit&lt; SampleType &gt;</h3>
 
 <p>Resample a unit to a different sample rate and/or block size. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (input)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to resample</li>
+<li>preferredBlockSize: the preferred output block size</li>
+<li>preferredSampleRate: the preferred output sample rate </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ac0f130bf8e6d86bb1f8bb745a1065934"></a><!-- doxytag: member="ResampleUnit::ChannelType" ref="ac0f130bf8e6d86bb1f8bb745a1065934" args="" -->
+<a class="anchor" id="a2f090027c158d63f3e3a7b08f36a153d"></a><!-- doxytag: member="ResampleUnit::ResampleInternal" ref="a2f090027c158d63f3e3a7b08f36a153d" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef <a class="el" href="class_resample_channel_internal.html">ResampleChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::<a class="el" href="class_resample_channel_internal.html">ResampleInternal</a></td>
         </tr>
       </table>
 </div>
@@ -131,14 +139,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a29ffe08e8b704d4dafc759cfefdf52de"></a><!-- doxytag: member="ResampleUnit::Inputs" ref="a29ffe08e8b704d4dafc759cfefdf52de" args="" -->
+<a class="anchor" id="ac0f130bf8e6d86bb1f8bb745a1065934"></a><!-- doxytag: member="ResampleUnit::ChannelType" ref="ac0f130bf8e6d86bb1f8bb745a1065934" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -161,21 +169,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2f090027c158d63f3e3a7b08f36a153d"></a><!-- doxytag: member="ResampleUnit::ResampleInternal" ref="a2f090027c158d63f3e3a7b08f36a153d" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_resample_channel_internal.html">ResampleChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::<a class="el" href="class_resample_channel_internal.html">ResampleInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a91e32100bda958a3683d27f7f0df9d5b"></a><!-- doxytag: member="ResampleUnit::UnitType" ref="a91e32100bda958a3683d27f7f0df9d5b" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +184,40 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a29ffe08e8b704d4dafc759cfefdf52de"></a><!-- doxytag: member="ResampleUnit::Inputs" ref="a29ffe08e8b704d4dafc759cfefdf52de" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a8e99f7ac4cae3a9c4bc0991bb4865332"></a><!-- doxytag: member="ResampleUnit::getInfo" ref="a8e99f7ac4cae3a9c4bc0991bb4865332" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3bfc455fde75627c07f933a208ca10df"></a><!-- doxytag: member="ResampleUnit::ar" ref="a3bfc455fde75627c07f933a208ca10df" args="(UnitType const &amp;input, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -226,24 +252,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Create an audio rate sample rate converter. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8e99f7ac4cae3a9c4bc0991bb4865332"></a><!-- doxytag: member="ResampleUnit::getInfo" ref="a8e99f7ac4cae3a9c4bc0991bb4865332" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_resample_unit.html">ResampleUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -284,7 +292,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

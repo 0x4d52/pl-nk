@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Signal player generator.  
  <a href="class_signal_play_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___signal_play_8h_source.html">plonk_SignalPlay.h</a>&gt;</code></p>
-
 <p><a href="class_signal_play_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -108,15 +105,29 @@ Static Public Member Functions</h2></td></tr>
 class SignalPlayUnit&lt; SampleType &gt;</h3>
 
 <p>Signal player generator. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (signal, rate=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (signal, rate=1, mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>signal: (signal, multi) the signal to play</li>
+<li>rate: (unit, multi) the rate of playback (1= normal speed)</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ab7a0759ced863e48c770486e47c0038f"></a><!-- doxytag: member="SignalPlayUnit::ChannelType" ref="ab7a0759ced863e48c770486e47c0038f" args="" -->
+<a class="anchor" id="a79123e1b1ce3b2026ac3ad1f882932e9"></a><!-- doxytag: member="SignalPlayUnit::SignalPlayInternal" ref="a79123e1b1ce3b2026ac3ad1f882932e9" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef <a class="el" href="class_signal_play_channel_internal.html">SignalPlayChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_signal_play_channel_internal.html">SignalPlayInternal</a></td>
         </tr>
       </table>
 </div>
@@ -139,14 +150,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a764b092d55322256773c030fb2a9567e"></a><!-- doxytag: member="SignalPlayUnit::Inputs" ref="a764b092d55322256773c030fb2a9567e" args="" -->
+<a class="anchor" id="ab7a0759ced863e48c770486e47c0038f"></a><!-- doxytag: member="SignalPlayUnit::ChannelType" ref="ab7a0759ced863e48c770486e47c0038f" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -169,14 +180,44 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2fbac57d1c46097be037cb88771f1c22"></a><!-- doxytag: member="SignalPlayUnit::RateBufferType" ref="a2fbac57d1c46097be037cb88771f1c22" args="" -->
+<a class="anchor" id="a9025e0896aee24077085bce4500e5b63"></a><!-- doxytag: member="SignalPlayUnit::UnitType" ref="a9025e0896aee24077085bce4500e5b63" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">SignalPlayInternal::RateBufferType</a> <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">RateBufferType</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a764b092d55322256773c030fb2a9567e"></a><!-- doxytag: member="SignalPlayUnit::Inputs" ref="a764b092d55322256773c030fb2a9567e" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac8d1757b39333b6a74e931409eebd7ca"></a><!-- doxytag: member="SignalPlayUnit::SignalType" ref="ac8d1757b39333b6a74e931409eebd7ca" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_signal_base.html">SignalBase</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_signal_base.html">SignalType</a></td>
         </tr>
       </table>
 </div>
@@ -214,44 +255,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a79123e1b1ce3b2026ac3ad1f882932e9"></a><!-- doxytag: member="SignalPlayUnit::SignalPlayInternal" ref="a79123e1b1ce3b2026ac3ad1f882932e9" args="" -->
+<a class="anchor" id="a2fbac57d1c46097be037cb88771f1c22"></a><!-- doxytag: member="SignalPlayUnit::RateBufferType" ref="a2fbac57d1c46097be037cb88771f1c22" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_signal_play_channel_internal.html">SignalPlayChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_signal_play_channel_internal.html">SignalPlayInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac8d1757b39333b6a74e931409eebd7ca"></a><!-- doxytag: member="SignalPlayUnit::SignalType" ref="ac8d1757b39333b6a74e931409eebd7ca" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_signal_base.html">SignalBase</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_signal_base.html">SignalType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9025e0896aee24077085bce4500e5b63"></a><!-- doxytag: member="SignalPlayUnit::UnitType" ref="a9025e0896aee24077085bce4500e5b63" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">SignalPlayInternal::RateBufferType</a> <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">RateBufferType</a></td>
         </tr>
       </table>
 </div>
@@ -260,6 +271,24 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a2d12c192ced4f8ce323a9bb54869db18"></a><!-- doxytag: member="SignalPlayUnit::getInfo" ref="a2d12c192ced4f8ce323a9bb54869db18" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aa3dff9d3c4f781c0c58c45dae1a0ee64"></a><!-- doxytag: member="SignalPlayUnit::ar" ref="aa3dff9d3c4f781c0c58c45dae1a0ee64" args="(SignalType const &amp;signal, RateUnitType const &amp;rate=RateType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -312,24 +341,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Create an audio rate signal player oscillator. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2d12c192ced4f8ce323a9bb54869db18"></a><!-- doxytag: member="SignalPlayUnit::getInfo" ref="a2d12c192ced4f8ce323a9bb54869db18" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_signal_play_unit.html">SignalPlayUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -394,7 +405,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

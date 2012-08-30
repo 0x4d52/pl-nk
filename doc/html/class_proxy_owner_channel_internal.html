@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,21 +71,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="ProxyOwnerChannelInternal" --><!-- doxytag: inherits="ChannelInternal" -->
 <p>Where true multiple-input-multiple-output units are needed This is where all outputs depend on all inputs in a matrix configuration a proxy system is used.  
  <a href="class_proxy_owner_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___proxy_owner_channel_internal_8h_source.html">plonk_ProxyOwnerChannelInternal.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_proxy_owner_channel_internal.png" usemap="#ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;_map" alt=""/>
   <map id="ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;_map" name="ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;_map">
-<area href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived." alt="ChannelInternal&lt; SampleType, DataType &gt;" shape="rect" coords="507,168,835,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="338,112,666,136"/>
+<area href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived." alt="ChannelInternal&lt; SampleType, DataType &gt;" shape="rect" coords="507,224,835,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="338,168,666,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="676,168,1004,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,328,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="338,112,666,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="676,112,1004,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,328,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="338,56,666,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="676,56,1004,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,328,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,328,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,328,24"/>
 </map>
  </div></div>
 
@@ -95,7 +93,11 @@ Inheritance diagram for ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;:
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ChannelType</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_simple_array.html">SimpleArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a5167e2ab319cd254411ed75f3b3d84f4">ChannelArrayType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a73b428803deec77d33f77e5198c8aca1">ChannelArrayType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a><br class="typebreak"/>
+&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a5fe04388180b90965437b255932bade9">WeakChannelType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_simple_array.html">SimpleArray</a><br class="typebreak"/>
+&lt; <a class="el" href="class_weak_pointer_container.html">WeakChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a6eefdc110af683a79f501a50f5d4c026">WeakChannelArrayType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a5104c81d97d0e53b9a2827dc502cf155">InternalBase</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a><br class="typebreak"/>
@@ -106,21 +108,20 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">Inputs</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">Buffer</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_numerical_array.html">Buffer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#aecbf6f8c9837b043e4e875d9695ea4c1">BufferArray</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ProxyInternal::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a841e57b9ed58eff73081efdc168f1dc1">ProxyData</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a27b12c3c953cdde587dd1cef4c84a439">ProxyOwnerChannelInternal</a> (const int numOutputs, <a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, DataType const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ab9851db8986feffedb7356ec7b96ca03">deleteIfOnlyMutualReferencesRemain</a> ()  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To check for mutual-only references remaining.  <a href="#ab9851db8986feffedb7356ec7b96ca03"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a1085b145c782bbf819b709b25ff95df3">ProxyOwnerChannelInternal</a> (const int numOutputs, <a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, DataType const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate, <a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;proxyChannels)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ad12836204d524acdbb93699e50afbaab">isProxyOwner</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_internal_base.html">InternalBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a75407545f0517c5df9c0c76d38145a3d">getChannel</a> (const int)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ae46492bac1707a7a1ea7f7d77111a305">getOutputSamples</a> (const int index) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a7a69eb72da9e7368a7e3ad0b90e1673f">getOutputSamples</a> (const int index)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#af0043514ac536634ad2e3c20225cd51d">getOutputBuffer</a> (const int index) const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ab6bd6cd0e9e5f4f0c13042868051db65">getOutputBuffer</a> (const int index)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a505e87f48b0810b5bf6b0531289846f3">getOutputBuffer</a> (const int index) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a84324f92879708ebf851e388b2b71120">getOutputBuffer</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a5f3d2b85beb2f9062bc70110af73a121">getNumChannels</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#ab7136ee4e6c3d8751202a0e583114df5">initProxyValue</a> (const int index, SampleType const &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_base.html">ChannelType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a64e2c06a3fd0aeb46faac973747e104d">getProxy</a> (const int index)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_base.html">ChannelType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#acc776fe622bc8766733a69a22b46d69b">getProxy</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#a5d1193dd9223e46fd906d578e71dde8b">setBlockSize</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;newBlockSize)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">setSampleRate</a> (<a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;newSampleRate)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_owner_channel_internal.html#aa359090b3118808786ef920c9656e148">setOverlap</a> (<a class="el" href="class_variable.html">DoubleVariable</a> const &amp;newOverlap)  throw ()</td></tr>
@@ -133,40 +134,6 @@ class ProxyOwnerChannelInternal&lt; SampleType, DataType &gt;</h3>
 <p>Here one <a class="el" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal</a> object is created that in turn creates a series of (dumb) <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a> objects (which essentially hold buffers of samples). Subclasses that need to operate this way inherit from <a class="el" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal</a>. In this case the <a class="el" href="class_channel_internal_core.html#aa4e59e6ac19208c22de024fe2bda39bc" title="The DSP function.">process()</a> function processes the sample data for all channels rather than just one, writing outputs for the 2nd channel and higher to the buffers in the proxies. <a class="el" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal</a> and <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a> keep references to each other in a mutually dependent way so that should the channels be split into separate units (and perhaps recombined later) all the channels stay in memory until only mutual references remain. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="plonk___linear_pan_channel_8h.html#a02767498492bf2a24ff74677dfec922a">LinearPan</a> </dd></dl>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="abc5718f7325a88f1b4f589e306f683b5"></a><!-- doxytag: member="ProxyOwnerChannelInternal::Buffer" ref="abc5718f7325a88f1b4f589e306f683b5" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a0a73a4434d1df137dde22b27ed5510c0">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#acd111bb5e7ea8d873088a6b79525a1d5">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0ef0336efe6c4a406640e8627fc24694">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ae492f64dbde87816dadbb0055be93ecb">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a7787e378a14d9c8c3b483ff24b793072">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a2d0ebf995c97e0f96ad48979d9efe29a">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a2b1059092344012b86ae6570212bc4c1">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#ae7ed731bf9ca912757a86409786cb67f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8d8b10544bea6a9009e604ba16d9d426">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#ac94a8db479c5d62962aa4b63b82b7156">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5167e2ab319cd254411ed75f3b3d84f4"></a><!-- doxytag: member="ProxyOwnerChannelInternal::ChannelArrayType" ref="a5167e2ab319cd254411ed75f3b3d84f4" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_simple_array.html">SimpleArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_simple_array.html">ChannelArrayType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a66b854dcf0db11c050c69dff2f3e374f"></a><!-- doxytag: member="ProxyOwnerChannelInternal::ChannelType" ref="a66b854dcf0db11c050c69dff2f3e374f" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -182,26 +149,71 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a8db93d5facc65672c047216a41caabbf">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a8bbd1b9bd53b76017232bc8e9ef72421">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a73ad6b538760b8769a6ef71e5a3d38f7">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a222d65725954cdedd2a2351b76495046">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#abf4df64b97b005d47185b141d18c43c6">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ab8d7b9e973668ccc24a401ef3f0abcfc">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a7d7372b8175b5d2b2f07e2f1a595a116">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a5410ca29623aec5bd24d4273790d9e53">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a9b417ef1a79072ad7458e37666a569af">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a9698156f05712b0c24a646eaf331551d">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#a95afee6e27c4ddf5ea37a8af4f949749">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a8db93d5facc65672c047216a41caabbf">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a8bbd1b9bd53b76017232bc8e9ef72421">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a73ad6b538760b8769a6ef71e5a3d38f7">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a222d65725954cdedd2a2351b76495046">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#abf4df64b97b005d47185b141d18c43c6">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ab8d7b9e973668ccc24a401ef3f0abcfc">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a7d7372b8175b5d2b2f07e2f1a595a116">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a5410ca29623aec5bd24d4273790d9e53">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a9b417ef1a79072ad7458e37666a569af">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a9698156f05712b0c24a646eaf331551d">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#a95afee6e27c4ddf5ea37a8af4f949749">UnitMixerChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_patch_channel_internal.html#a90faaacbafab18f723d3b0fd816d3021">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae43c4c8567ce1a67c51281a7c546ca06"></a><!-- doxytag: member="ProxyOwnerChannelInternal::Inputs" ref="ae43c4c8567ce1a67c51281a7c546ca06" args="" -->
+<a class="anchor" id="a73b428803deec77d33f77e5198c8aca1"></a><!-- doxytag: member="ProxyOwnerChannelInternal::ChannelArrayType" ref="a73b428803deec77d33f77e5198c8aca1" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType, class DataType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_object_array.html">ChannelArrayType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a48b9fe09f64390b9f29f19ab31d622e9">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a5a34763bd1eecc2279eedd59db972150">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a4f0a93aca33250eeac10d6ebea7d915f">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a3bd3c289f5ee90cb3e426b07bf8da819">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a85b2d38313bc926fa2ace0fd77a2cb80">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a2afbcff023d9c6a06f390635ecb0f029">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#af07555216de0b90d0023ef9fa4d8834b">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a4d205a8c6c727034cfcf298d223b39b3">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#ac01d41ca45e5e699f7de4bbb097e9358">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#ab12f626989906a2ed0de10c9bc4a02e8">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#a59c15e827ac8629d5c11db2119a74053">UnitMixerChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_patch_channel_internal.html#a6a44295056ef2d87da883af89ab57d7e">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#aaa09a18a5f1c3ea9f1dc7c4d173659e1">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#aa42ed4f24a4d6f29087bac7b573d2045">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a79172aacd36a99756cb2669f3e018035">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#af1720094ca81c6b380cfed1b00632a12">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a407d9e81dba868607789b3484c6de254">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#af68d6fcd6a63b5d9f5b59401094360b3">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ac1497894293b4ebd8fdb68c3aa6283e2">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3374b8f21a1459ed5c8d960c1cb7356f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#af88415e41073c4bc7e1640e11f80c2c3">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#aa50bdecd5991929900176b7aee7f60e7">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a5fe04388180b90965437b255932bade9"></a><!-- doxytag: member="ProxyOwnerChannelInternal::WeakChannelType" ref="a5fe04388180b90965437b255932bade9" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_weak_pointer_container.html">WeakChannelType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6eefdc110af683a79f501a50f5d4c026"></a><!-- doxytag: member="ProxyOwnerChannelInternal::WeakChannelArrayType" ref="a6eefdc110af683a79f501a50f5d4c026" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_simple_array.html">SimpleArray</a>&lt;<a class="el" href="class_weak_pointer_container.html">WeakChannelType</a>&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_simple_array.html">WeakChannelArrayType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5104c81d97d0e53b9a2827dc502cf155"></a><!-- doxytag: member="ProxyOwnerChannelInternal::InternalBase" ref="a5104c81d97d0e53b9a2827dc502cf155" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_channel_internal_base.html">InternalBase</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a637afaccf20366870817759c88fa70bf">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#adbcc9c1c071b03e0197be8cb76fc0f19">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#aa3dc18ae214807c17402bd3768db71af">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#abbc6f7bceaaa404c37d66a88d083ed2c">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a625ab3bdc63b2a6bb4f3682fe36b8f05">DelayChannelInternalBase&lt; FormType &gt;</a>, and <a class="el" href="class_patch_channel_internal.html#ac90394b13651971f8e2c6a8e19ed1e75">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -220,39 +232,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a9edab70c3d38bb8adb2e816dfb578cf1">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#abf8614ee1e1d32cc0f52932d6f3f914b">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a69f59782b47f16b75a592733229d84ba">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0d981c096ff4874679da4ba8b0f143b0">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ac5bf342efb07e0c2b96dd5518222ea9a">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a5b83efa17d7bf51d4389fb2a3cdf3ce9">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a811eef2e8bce285dbd63f134e58cf5a5">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ad271d80e235fc004cec984147b28ca91">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a829f0f1920e30f23f7c3671df5bbbab9">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8a2b2d6293f459cb7d97c7eaa9d9a748">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#a7c3df8e34d5a201d191258a58ea34b85">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5104c81d97d0e53b9a2827dc502cf155"></a><!-- doxytag: member="ProxyOwnerChannelInternal::InternalBase" ref="a5104c81d97d0e53b9a2827dc502cf155" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_channel_internal_base.html">InternalBase</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a637afaccf20366870817759c88fa70bf">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#adbcc9c1c071b03e0197be8cb76fc0f19">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#aa3dc18ae214807c17402bd3768db71af">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#abbc6f7bceaaa404c37d66a88d083ed2c">Delay4ParamChannelInternal&lt; FormType &gt;</a>, and <a class="el" href="class_delay_channel_internal_base.html#a625ab3bdc63b2a6bb4f3682fe36b8f05">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a841e57b9ed58eff73081efdc168f1dc1"></a><!-- doxytag: member="ProxyOwnerChannelInternal::ProxyData" ref="a841e57b9ed58eff73081efdc168f1dc1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ProxyInternal::Data</a> <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ProxyData</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#abf8614ee1e1d32cc0f52932d6f3f914b">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a69f59782b47f16b75a592733229d84ba">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0d981c096ff4874679da4ba8b0f143b0">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ac5bf342efb07e0c2b96dd5518222ea9a">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a5b83efa17d7bf51d4389fb2a3cdf3ce9">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a811eef2e8bce285dbd63f134e58cf5a5">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ad271d80e235fc004cec984147b28ca91">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a829f0f1920e30f23f7c3671df5bbbab9">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8a2b2d6293f459cb7d97c7eaa9d9a748">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#a7c3df8e34d5a201d191258a58ea34b85">UnitMixerChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_patch_channel_internal.html#acc0fb3143198421d2e2c19d401aafd75">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -286,12 +266,82 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a294a708bab56c641c726b7c21c7765d7">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a0ff92f8fd185bce2b437d6dfd04ade00">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a09c0cac08645353fd93c8c9e62f3e1ff">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a8d3e21c415b006ea885c7f6e6d206098">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a8d5051d03ab3575068def5e9d1a8f283">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ad802ea9e4454a7a74dec2dbafcb018a7">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#adeeaf67d9dadbf8fc49e348faf7ce73e">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a5412c61648c0b577d2fe81820f1ddc81">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a82b2055732c73361f50718d7a90e1457">LinearPanChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitMixerChannelInternal&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a294a708bab56c641c726b7c21c7765d7">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#a0ff92f8fd185bce2b437d6dfd04ade00">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a09c0cac08645353fd93c8c9e62f3e1ff">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#a8d3e21c415b006ea885c7f6e6d206098">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a8d5051d03ab3575068def5e9d1a8f283">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#ad802ea9e4454a7a74dec2dbafcb018a7">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#adeeaf67d9dadbf8fc49e348faf7ce73e">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a5412c61648c0b577d2fe81820f1ddc81">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a82b2055732c73361f50718d7a90e1457">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitMixerChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_patch_channel_internal.html#af842acc580d8a1d8008c7db71411cbd2">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae43c4c8567ce1a67c51281a7c546ca06"></a><!-- doxytag: member="ProxyOwnerChannelInternal::Inputs" ref="ae43c4c8567ce1a67c51281a7c546ca06" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#aaa09a18a5f1c3ea9f1dc7c4d173659e1">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#aa42ed4f24a4d6f29087bac7b573d2045">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a79172aacd36a99756cb2669f3e018035">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#af1720094ca81c6b380cfed1b00632a12">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a407d9e81dba868607789b3484c6de254">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#af68d6fcd6a63b5d9f5b59401094360b3">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#ac1497894293b4ebd8fdb68c3aa6283e2">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#a3374b8f21a1459ed5c8d960c1cb7356f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#af88415e41073c4bc7e1640e11f80c2c3">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#aa50bdecd5991929900176b7aee7f60e7">UnitMixerChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_patch_channel_internal.html#a3cc31a8d754afa9b4b57efd5cf6fe997">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abc5718f7325a88f1b4f589e306f683b5"></a><!-- doxytag: member="ProxyOwnerChannelInternal::Buffer" ref="abc5718f7325a88f1b4f589e306f683b5" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="class_delay1_param_channel_internal.html#a0a73a4434d1df137dde22b27ed5510c0">Delay1ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay2_param_channel_internal.html#acd111bb5e7ea8d873088a6b79525a1d5">Delay2ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay3_param_channel_internal.html#a0ef0336efe6c4a406640e8627fc24694">Delay3ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay4_param_channel_internal.html#ae492f64dbde87816dadbb0055be93ecb">Delay4ParamChannelInternal&lt; FormType &gt;</a>, <a class="el" href="class_delay_channel_internal_base.html#a7787e378a14d9c8c3b483ff24b793072">DelayChannelInternalBase&lt; FormType &gt;</a>, <a class="el" href="class_f_f_t_channel_internal.html#a2d0ebf995c97e0f96ad48979d9efe29a">FFTChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">FilterCoeffs1ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a2b1059092344012b86ae6570212bc4c1">FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_filter_coeffs3_param_channel_internal.html#ae7ed731bf9ca912757a86409786cb67f">FilterCoeffs3ParamChannelInternal&lt; ShapeType &gt;</a>, <a class="el" href="class_linear_pan_channel_internal.html#a8d8b10544bea6a9009e604ba16d9d426">LinearPanChannelInternal&lt; SampleType &gt;</a>, <a class="el" href="class_unit_mixer_channel_internal.html#ac94a8db479c5d62962aa4b63b82b7156">UnitMixerChannelInternal&lt; SampleType &gt;</a>, and <a class="el" href="class_patch_channel_internal.html#abb4bfe563a5290046557d9121490fb55">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aecbf6f8c9837b043e4e875d9695ea4c1"></a><!-- doxytag: member="ProxyOwnerChannelInternal::BufferArray" ref="aecbf6f8c9837b043e4e875d9695ea4c1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_numerical_array.html">Buffer</a>&gt; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="class_object_array.html">BufferArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_delay_channel_internal_base.html#adf631536ba01a92abfabcb934fe97d63">DelayChannelInternalBase&lt; FormType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a841e57b9ed58eff73081efdc168f1dc1"></a><!-- doxytag: member="ProxyOwnerChannelInternal::ProxyData" ref="a841e57b9ed58eff73081efdc168f1dc1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ProxyInternal::Data</a> <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ProxyData</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a27b12c3c953cdde587dd1cef4c84a439"></a><!-- doxytag: member="ProxyOwnerChannelInternal::ProxyOwnerChannelInternal" ref="a27b12c3c953cdde587dd1cef4c84a439" args="(const int numOutputs, Inputs const &amp;inputs, DataType const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
+<a class="anchor" id="a1085b145c782bbf819b709b25ff95df3"></a><!-- doxytag: member="ProxyOwnerChannelInternal::ProxyOwnerChannelInternal" ref="a1085b145c782bbf819b709b25ff95df3" args="(const int numOutputs, Inputs const &amp;inputs, DataType const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate, ChannelArrayType &amp;proxyChannels)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -325,7 +375,13 @@ template&lt;class SampleType, class DataType&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
+          <td class="paramname"><em>sampleRate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;&#160;</td>
+          <td class="paramname"><em>proxyChannels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -339,27 +395,23 @@ template&lt;class SampleType, class DataType&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ab9851db8986feffedb7356ec7b96ca03"></a><!-- doxytag: member="ProxyOwnerChannelInternal::deleteIfOnlyMutualReferencesRemain" ref="ab9851db8986feffedb7356ec7b96ca03" args="()" -->
+<a class="anchor" id="ad12836204d524acdbb93699e50afbaab"></a><!-- doxytag: member="ProxyOwnerChannelInternal::isProxyOwner" ref="ad12836204d524acdbb93699e50afbaab" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class SampleType , class DataType &gt; </div>
+template&lt;class SampleType, class DataType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::deleteIfOnlyMutualReferencesRemain </td>
+          <td class="memname">bool <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::isProxyOwner </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>To check for mutual-only references remaining. </p>
-<p>Most <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> subclass don't need this but some which naturally form circular references may need to detect this state and release themselves. </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal</a>, <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a> </dd></dl>
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer.html#a7926abda357aff5a8f40c9dc9873c6da">SmartPointer</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a27ef737a9cd0b9fd436ff138320ef2d5">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -382,63 +434,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 <p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
 
-</div>
-</div>
-<a class="anchor" id="a5f3d2b85beb2f9062bc70110af73a121"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getNumChannels" ref="a5f3d2b85beb2f9062bc70110af73a121" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getNumChannels </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a43277b3178b32a3945b1275ab50c6122">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af0043514ac536634ad2e3c20225cd51d"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getOutputBuffer" ref="af0043514ac536634ad2e3c20225cd51d" args="(const int index) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_numerical_array.html">Buffer</a> <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getOutputBuffer </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab6bd6cd0e9e5f4f0c13042868051db65"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getOutputBuffer" ref="ab6bd6cd0e9e5f4f0c13042868051db65" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">Buffer</a> <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getOutputBuffer </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Reimplemented in <a class="el" href="class_patch_channel_internal.html#aeccb4462cd15009ab2a79bf5bf51ccc5">PatchChannelInternal&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -480,14 +476,33 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a64e2c06a3fd0aeb46faac973747e104d"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getProxy" ref="a64e2c06a3fd0aeb46faac973747e104d" args="(const int index)" -->
+<a class="anchor" id="a505e87f48b0810b5bf6b0531289846f3"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getOutputBuffer" ref="a505e87f48b0810b5bf6b0531289846f3" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType, class DataType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_channel_base.html">ChannelType</a>&amp; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getProxy </td>
+          <td class="memname">const <a class="el" href="class_numerical_array.html">Buffer</a>&amp; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getOutputBuffer </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a84324f92879708ebf851e388b2b71120"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getOutputBuffer" ref="a84324f92879708ebf851e388b2b71120" args="(const int index)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_numerical_array.html">Buffer</a>&amp; <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getOutputBuffer </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
@@ -496,6 +511,26 @@ template&lt;class SampleType, class DataType&gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5f3d2b85beb2f9062bc70110af73a121"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getNumChannels" ref="a5f3d2b85beb2f9062bc70110af73a121" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getNumChannels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a43277b3178b32a3945b1275ab50c6122">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -528,23 +563,22 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad12836204d524acdbb93699e50afbaab"></a><!-- doxytag: member="ProxyOwnerChannelInternal::isProxyOwner" ref="ad12836204d524acdbb93699e50afbaab" args="() const " -->
+<a class="anchor" id="acc776fe622bc8766733a69a22b46d69b"></a><!-- doxytag: member="ProxyOwnerChannelInternal::getProxy" ref="acc776fe622bc8766733a69a22b46d69b" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType, class DataType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::isProxyOwner </td>
+          <td class="memname"><a class="el" href="class_channel_base.html">ChannelType</a> <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::getProxy </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#a27ef737a9cd0b9fd436ff138320ef2d5">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -569,27 +603,6 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa359090b3118808786ef920c9656e148"></a><!-- doxytag: member="ProxyOwnerChannelInternal::setOverlap" ref="aa359090b3118808786ef920c9656e148" args="(DoubleVariable const &amp;newOverlap)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType, class DataType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::setOverlap </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newOverlap</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a69a895f1fb4feef65421a5059e98ebc3">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="abafbbd9538b9b60fe67fdb9d704d42d2"></a><!-- doxytag: member="ProxyOwnerChannelInternal::setSampleRate" ref="abafbbd9538b9b60fe67fdb9d704d42d2" args="(SampleRate const &amp;newSampleRate)" -->
 <div class="memitem">
 <div class="memproto">
@@ -611,6 +624,27 @@ template&lt;class SampleType, class DataType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aa359090b3118808786ef920c9656e148"></a><!-- doxytag: member="ProxyOwnerChannelInternal::setOverlap" ref="aa359090b3118808786ef920c9656e148" args="(DoubleVariable const &amp;newOverlap)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType, class DataType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a>&lt; SampleType, DataType &gt;::setOverlap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable</a> const &amp;&#160;</td>
+          <td class="paramname"><em>newOverlap</em></td><td>)</td>
+          <td>  throw ()<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a69a895f1fb4feef65421a5059e98ebc3">ChannelInternal&lt; SampleType, DataType &gt;</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___proxy_owner_channel_internal_8h_source.html">plonk_ProxyOwnerChannelInternal.h</a></li>
 </ul>
@@ -629,7 +663,7 @@ template&lt;class SampleType, class DataType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

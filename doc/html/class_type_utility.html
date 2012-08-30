@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,8 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="TypeUtility" --><!-- doxytag: inherits="TypeUtilityBase" -->
 <p>A utility for finding out information about certain other classes and types.  
  <a href="class_type_utility.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___type_utility_8h_source.html">plonk_TypeUtility.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TypeUtility&lt; Type &gt;:</div>
 <div class="dyncontent">
@@ -132,20 +129,20 @@ class TypeUtility&lt; Type &gt;</h3>
 
 <p>A utility for finding out information about certain other classes and types. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ac80865385bceb2c3ed885231850d2561"></a><!-- doxytag: member="TypeUtility::IndexType" ref="ac80865385bceb2c3ed885231850d2561" args="" -->
+<a class="anchor" id="a25803d16ba5e56280791200811345013"></a><!-- doxytag: member="TypeUtility::TypeName" ref="a25803d16ba5e56280791200811345013" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt;Type&gt;::<a class="el" href="class_type_utility_base.html#a71c13e7988190e2e29eb3dbc56f15943">IndexType</a> <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::<a class="el" href="class_type_utility_base.html#a71c13e7988190e2e29eb3dbc56f15943">IndexType</a></td>
+          <td class="memname">typedef <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt;Type&gt;::<a class="el" href="class_type_utility_base.html#afaafe56b8c7d15773bb69f4266ece247">TypeName</a> <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::<a class="el" href="class_type_utility_base.html#afaafe56b8c7d15773bb69f4266ece247">TypeName</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_type_utility_base.html#a71c13e7988190e2e29eb3dbc56f15943">TypeUtilityBase&lt; Type &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_type_utility_base.html#afaafe56b8c7d15773bb69f4266ece247">TypeUtilityBase&lt; Type &gt;</a>.</p>
 
 </div>
 </div>
@@ -183,60 +180,24 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a25803d16ba5e56280791200811345013"></a><!-- doxytag: member="TypeUtility::TypeName" ref="a25803d16ba5e56280791200811345013" args="" -->
+<a class="anchor" id="ac80865385bceb2c3ed885231850d2561"></a><!-- doxytag: member="TypeUtility::IndexType" ref="ac80865385bceb2c3ed885231850d2561" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt;Type&gt;::<a class="el" href="class_type_utility_base.html#afaafe56b8c7d15773bb69f4266ece247">TypeName</a> <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::<a class="el" href="class_type_utility_base.html#afaafe56b8c7d15773bb69f4266ece247">TypeName</a></td>
+          <td class="memname">typedef <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt;Type&gt;::<a class="el" href="class_type_utility_base.html#a71c13e7988190e2e29eb3dbc56f15943">IndexType</a> <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::<a class="el" href="class_type_utility_base.html#a71c13e7988190e2e29eb3dbc56f15943">IndexType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_type_utility_base.html#afaafe56b8c7d15773bb69f4266ece247">TypeUtilityBase&lt; Type &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_type_utility_base.html#a71c13e7988190e2e29eb3dbc56f15943">TypeUtilityBase&lt; Type &gt;</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a851a7de4a464c268f82e7b4a2325751e"></a><!-- doxytag: member="TypeUtility::getIndexTypeName" ref="a851a7de4a464c268f82e7b4a2325751e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_text.html">Text</a> <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::getIndexTypeName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad9ba073ce696e8892cf9034fe2b7eb09"></a><!-- doxytag: member="TypeUtility::getTypeEpsilon" ref="ad9ba073ce696e8892cf9034fe2b7eb09" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static double <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::getTypeEpsilon </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a790f1fa8bf38a0e82d4ca466d17ad99e"></a><!-- doxytag: member="TypeUtility::getTypeName" ref="a790f1fa8bf38a0e82d4ca466d17ad99e" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -273,17 +234,17 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="acf4dbd8062b85c0cbced6a6964dba496"></a><!-- doxytag: member="TypeUtility::isArray" ref="acf4dbd8062b85c0cbced6a6964dba496" args="()" -->
+<a class="anchor" id="ad9ba073ce696e8892cf9034fe2b7eb09"></a><!-- doxytag: member="TypeUtility::getTypeEpsilon" ref="ad9ba073ce696e8892cf9034fe2b7eb09" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isArray </td>
+          <td class="memname">static double <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::getTypeEpsilon </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
+          <td><code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -291,17 +252,17 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a031de443f81b3b2706e8d5bcf83944c1"></a><!-- doxytag: member="TypeUtility::isAtomicVariable" ref="a031de443f81b3b2706e8d5bcf83944c1" args="()" -->
+<a class="anchor" id="a851a7de4a464c268f82e7b4a2325751e"></a><!-- doxytag: member="TypeUtility::getIndexTypeName" ref="a851a7de4a464c268f82e7b4a2325751e" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isAtomicVariable </td>
+          <td class="memname">static <a class="el" href="class_text.html">Text</a> <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::getIndexTypeName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
+          <td><code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -309,122 +270,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab3d2c64c8ad6a6df64febf4c345b59e7"></a><!-- doxytag: member="TypeUtility::isBoolType" ref="ab3d2c64c8ad6a6df64febf4c345b59e7" args="()" -->
+<a class="anchor" id="af8240804e495cdd0662f9efb6b2e3bdf"></a><!-- doxytag: member="TypeUtility::isUnknown" ref="af8240804e495cdd0662f9efb6b2e3bdf" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBoolType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8e455490d8e7f4c0be9f586b6d88c7aa"></a><!-- doxytag: member="TypeUtility::isBuiltIn" ref="a8e455490d8e7f4c0be9f586b6d88c7aa" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBuiltIn </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a242cea3ef65f72ee9f15078e4a0a563e"></a><!-- doxytag: member="TypeUtility::isBus" ref="a242cea3ef65f72ee9f15078e4a0a563e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBus </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abad4fcf22857a921cdff46e890f0e90c"></a><!-- doxytag: member="TypeUtility::isBusses" ref="abad4fcf22857a921cdff46e890f0e90c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBusses </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6a5da48fe0a51d750987c5b92f0f45ec"></a><!-- doxytag: member="TypeUtility::isChannel" ref="a6a5da48fe0a51d750987c5b92f0f45ec" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isChannel </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a24e43fb7791351198b99438bcc05bd75"></a><!-- doxytag: member="TypeUtility::isCharType" ref="a24e43fb7791351198b99438bcc05bd75" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isCharType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acc4d314dbacef9eeae487441a3157f55"></a><!-- doxytag: member="TypeUtility::isDoubleType" ref="acc4d314dbacef9eeae487441a3157f55" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isDoubleType </td>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isUnknown </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -453,14 +306,194 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a11ecff2472f9f4125c43b3bd271d5d8f"></a><!-- doxytag: member="TypeUtility::isFloatOrDoubleType" ref="a11ecff2472f9f4125c43b3bd271d5d8f" args="()" -->
+<a class="anchor" id="a8e455490d8e7f4c0be9f586b6d88c7aa"></a><!-- doxytag: member="TypeUtility::isBuiltIn" ref="a8e455490d8e7f4c0be9f586b6d88c7aa" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isFloatOrDoubleType </td>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBuiltIn </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afc59cb20f75354295de2a011680e8056"></a><!-- doxytag: member="TypeUtility::isVariable" ref="afc59cb20f75354295de2a011680e8056" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isVariable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a031de443f81b3b2706e8d5bcf83944c1"></a><!-- doxytag: member="TypeUtility::isAtomicVariable" ref="a031de443f81b3b2706e8d5bcf83944c1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isAtomicVariable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acf4dbd8062b85c0cbced6a6964dba496"></a><!-- doxytag: member="TypeUtility::isArray" ref="acf4dbd8062b85c0cbced6a6964dba496" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6a5da48fe0a51d750987c5b92f0f45ec"></a><!-- doxytag: member="TypeUtility::isChannel" ref="a6a5da48fe0a51d750987c5b92f0f45ec" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isChannel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7f4daea16f8f8eb75fa6c6471a08ce72"></a><!-- doxytag: member="TypeUtility::isUnit" ref="a7f4daea16f8f8eb75fa6c6471a08ce72" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isUnit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a242cea3ef65f72ee9f15078e4a0a563e"></a><!-- doxytag: member="TypeUtility::isBus" ref="a242cea3ef65f72ee9f15078e4a0a563e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a387b70309da86b2e2389b693844ace3e"></a><!-- doxytag: member="TypeUtility::isUnits" ref="a387b70309da86b2e2389b693844ace3e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isUnits </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abad4fcf22857a921cdff46e890f0e90c"></a><!-- doxytag: member="TypeUtility::isBusses" ref="abad4fcf22857a921cdff46e890f0e90c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBusses </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aab5f54bdb162e836f7a538826ef563f5"></a><!-- doxytag: member="TypeUtility::isWavetable" ref="aab5f54bdb162e836f7a538826ef563f5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isWavetable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afb33645a046f6722d84787e83d494f62"></a><!-- doxytag: member="TypeUtility::isSignal" ref="afb33645a046f6722d84787e83d494f62" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isSignal </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -489,32 +522,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab786bc513143a95c0e96ed58088bbe7f"></a><!-- doxytag: member="TypeUtility::isInt24Type" ref="ab786bc513143a95c0e96ed58088bbe7f" args="()" -->
+<a class="anchor" id="acc4d314dbacef9eeae487441a3157f55"></a><!-- doxytag: member="TypeUtility::isDoubleType" ref="acc4d314dbacef9eeae487441a3157f55" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isInt24Type </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5ec4171e267739674ba5a36d77b41f79"></a><!-- doxytag: member="TypeUtility::isIntegralType" ref="a5ec4171e267739674ba5a36d77b41f79" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isIntegralType </td>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isDoubleType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -533,6 +548,24 @@ template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isIntType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab786bc513143a95c0e96ed58088bbe7f"></a><!-- doxytag: member="TypeUtility::isInt24Type" ref="ab786bc513143a95c0e96ed58088bbe7f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isInt24Type </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -579,14 +612,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afb33645a046f6722d84787e83d494f62"></a><!-- doxytag: member="TypeUtility::isSignal" ref="afb33645a046f6722d84787e83d494f62" args="()" -->
+<a class="anchor" id="a24e43fb7791351198b99438bcc05bd75"></a><!-- doxytag: member="TypeUtility::isCharType" ref="a24e43fb7791351198b99438bcc05bd75" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isSignal </td>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isCharType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -597,14 +630,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7f4daea16f8f8eb75fa6c6471a08ce72"></a><!-- doxytag: member="TypeUtility::isUnit" ref="a7f4daea16f8f8eb75fa6c6471a08ce72" args="()" -->
+<a class="anchor" id="ab3d2c64c8ad6a6df64febf4c345b59e7"></a><!-- doxytag: member="TypeUtility::isBoolType" ref="ab3d2c64c8ad6a6df64febf4c345b59e7" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isUnit </td>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isBoolType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -615,14 +648,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a387b70309da86b2e2389b693844ace3e"></a><!-- doxytag: member="TypeUtility::isUnits" ref="a387b70309da86b2e2389b693844ace3e" args="()" -->
+<a class="anchor" id="a11ecff2472f9f4125c43b3bd271d5d8f"></a><!-- doxytag: member="TypeUtility::isFloatOrDoubleType" ref="a11ecff2472f9f4125c43b3bd271d5d8f" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isUnits </td>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isFloatOrDoubleType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -633,50 +666,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af8240804e495cdd0662f9efb6b2e3bdf"></a><!-- doxytag: member="TypeUtility::isUnknown" ref="af8240804e495cdd0662f9efb6b2e3bdf" args="()" -->
+<a class="anchor" id="a5ec4171e267739674ba5a36d77b41f79"></a><!-- doxytag: member="TypeUtility::isIntegralType" ref="a5ec4171e267739674ba5a36d77b41f79" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isUnknown </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afc59cb20f75354295de2a011680e8056"></a><!-- doxytag: member="TypeUtility::isVariable" ref="afc59cb20f75354295de2a011680e8056" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isVariable </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aab5f54bdb162e836f7a538826ef563f5"></a><!-- doxytag: member="TypeUtility::isWavetable" ref="aab5f54bdb162e836f7a538826ef563f5" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isWavetable </td>
+          <td class="memname">static bool <a class="el" href="class_type_utility.html">TypeUtility</a>&lt; Type &gt;::isIntegralType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
@@ -705,7 +702,7 @@ template&lt;class Type&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:04 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

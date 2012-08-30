@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,8 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="TimeStamp" -->
 <p>Measures time.  
  <a href="class_time_stamp.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___time_stamp_8h_source.html">plonk_TimeStamp.h</a>&gt;</code></p>
 
 <p><a href="class_time_stamp-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -201,171 +198,16 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a9e39bf8505e06f1cc2fec88c6ed55fe4"></a><!-- doxytag: member="TimeStamp::fromSamples" ref="a9e39bf8505e06f1cc2fec88c6ed55fe4" args="(const double samples, const double sampleRate)" -->
+<a class="anchor" id="a96477988b28487014163e97f16ad07cb"></a><!-- doxytag: member="TimeStamp::operator=" ref="a96477988b28487014163e97f16ad07cb" args="(TimeStamp const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::fromSamples </td>
+          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> &amp; TimeStamp::operator= </td>
           <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>samples</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aafc4cea1f46fa878bc141573cfe28062"></a><!-- doxytag: member="TimeStamp::fromSeconds" ref="aafc4cea1f46fa878bc141573cfe28062" args="(const double seconds)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::fromSeconds </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>seconds</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a513254a5db567ed79238f744eecb2dc5"></a><!-- doxytag: member="TimeStamp::getFraction" ref="a513254a5db567ed79238f744eecb2dc5" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double TimeStamp::getFraction </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a213ba0bf3ec944cb10ccea4904b7a519"></a><!-- doxytag: member="TimeStamp::getFractionInTicks" ref="a213ba0bf3ec944cb10ccea4904b7a519" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int TimeStamp::getFractionInTicks </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab0dd73c80396763164d4596580227351"></a><!-- doxytag: member="TimeStamp::getMaximum" ref="ab0dd73c80396763164d4596580227351" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_time_stamp.html">TimeStamp</a> &amp; TimeStamp::getMaximum </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac366fab0b7035c309585a1f58ec58ff2"></a><!-- doxytag: member="TimeStamp::getReciprocalTicks" ref="ac366fab0b7035c309585a1f58ec58ff2" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double TimeStamp::getReciprocalTicks </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9b07cd3f2f12e3a11834f55c2400e130"></a><!-- doxytag: member="TimeStamp::getTicks" ref="a9b07cd3f2f12e3a11834f55c2400e130" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double TimeStamp::getTicks </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8f76bf0a76946c10f6cb8a103cf7c4a0"></a><!-- doxytag: member="TimeStamp::getTime" ref="a8f76bf0a76946c10f6cb8a103cf7c4a0" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">LongLong TimeStamp::getTime </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa5a1e08676f574769f440faad8a46f5d"></a><!-- doxytag: member="TimeStamp::getValue" ref="aa5a1e08676f574769f440faad8a46f5d" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double TimeStamp::getValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3b177f0b402c2d1bb51c404e0397449b"></a><!-- doxytag: member="TimeStamp::getZero" ref="a3b177f0b402c2d1bb51c404e0397449b" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_time_stamp.html">TimeStamp</a> &amp; TimeStamp::getZero </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -381,7 +223,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">bool TimeStamp::isFinite </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -397,74 +239,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">bool TimeStamp::isInfinite </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3958acdc3545fa8ee00df707889957db"></a><!-- doxytag: member="TimeStamp::operator double" ref="a3958acdc3545fa8ee00df707889957db" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">TimeStamp::operator double </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a825ba6468c8d61887c5c34ac48e28192"></a><!-- doxytag: member="TimeStamp::operator!=" ref="a825ba6468c8d61887c5c34ac48e28192" args="(TimeStamp const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool TimeStamp::operator!= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a084628699d90edd4053f97f75e6fbc6d"></a><!-- doxytag: member="TimeStamp::operator+" ref="a084628699d90edd4053f97f75e6fbc6d" args="(TimeStamp const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator+ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a178d6c33ce38e3dddb0afb974cf5e635"></a><!-- doxytag: member="TimeStamp::operator+" ref="a178d6c33ce38e3dddb0afb974cf5e635" args="(const double offset) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator+ </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>offset</em></td><td>)</td>
-          <td> const  throw ()</td>
         </tr>
       </table>
 </div>
@@ -506,15 +281,15 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ada96351fb074e3f8f283cbf0550fe6a2"></a><!-- doxytag: member="TimeStamp::operator&#45;" ref="ada96351fb074e3f8f283cbf0550fe6a2" args="(TimeStamp const &amp;other) const " -->
+<a class="anchor" id="a178d6c33ce38e3dddb0afb974cf5e635"></a><!-- doxytag: member="TimeStamp::operator+" ref="a178d6c33ce38e3dddb0afb974cf5e635" args="(const double offset) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator- </td>
+          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator+ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
           <td> const  throw ()</td>
         </tr>
       </table>
@@ -523,15 +298,15 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8aaafba4380df61710ddb361c1f2869f"></a><!-- doxytag: member="TimeStamp::operator&#45;" ref="a8aaafba4380df61710ddb361c1f2869f" args="(const double offset) const " -->
+<a class="anchor" id="a084628699d90edd4053f97f75e6fbc6d"></a><!-- doxytag: member="TimeStamp::operator+" ref="a084628699d90edd4053f97f75e6fbc6d" args="(TimeStamp const &amp;other) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator- </td>
+          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator+ </td>
           <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td> const  throw ()</td>
         </tr>
       </table>
@@ -574,15 +349,15 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a141bd249206b7df9f5ebb97937b6196e"></a><!-- doxytag: member="TimeStamp::operator&lt;" ref="a141bd249206b7df9f5ebb97937b6196e" args="(TimeStamp const &amp;other) const " -->
+<a class="anchor" id="a8aaafba4380df61710ddb361c1f2869f"></a><!-- doxytag: member="TimeStamp::operator&#45;" ref="a8aaafba4380df61710ddb361c1f2869f" args="(const double offset) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool TimeStamp::operator&lt; </td>
+          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator- </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
           <td> const  throw ()</td>
         </tr>
       </table>
@@ -591,80 +366,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adc5a82c21e8348d9f76590889f908b5a"></a><!-- doxytag: member="TimeStamp::operator&lt;=" ref="adc5a82c21e8348d9f76590889f908b5a" args="(TimeStamp const &amp;other) const " -->
+<a class="anchor" id="ada96351fb074e3f8f283cbf0550fe6a2"></a><!-- doxytag: member="TimeStamp::operator&#45;" ref="ada96351fb074e3f8f283cbf0550fe6a2" args="(TimeStamp const &amp;other) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool TimeStamp::operator&lt;= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a96477988b28487014163e97f16ad07cb"></a><!-- doxytag: member="TimeStamp::operator=" ref="a96477988b28487014163e97f16ad07cb" args="(TimeStamp const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> &amp; TimeStamp::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a819fa595c1dc09bac855de5c3279d99a"></a><!-- doxytag: member="TimeStamp::operator==" ref="a819fa595c1dc09bac855de5c3279d99a" args="(TimeStamp const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool TimeStamp::operator== </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a59247e46d54cafe7ccfc5422d4e5b9ea"></a><!-- doxytag: member="TimeStamp::operator&gt;" ref="a59247e46d54cafe7ccfc5422d4e5b9ea" args="(TimeStamp const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool TimeStamp::operator&gt; </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a58c0709897399c8029f767c190b44752"></a><!-- doxytag: member="TimeStamp::operator&gt;=" ref="a58c0709897399c8029f767c190b44752" args="(TimeStamp const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool TimeStamp::operator&gt;= </td>
+          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::operator- </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -703,6 +410,102 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a8f76bf0a76946c10f6cb8a103cf7c4a0"></a><!-- doxytag: member="TimeStamp::getTime" ref="a8f76bf0a76946c10f6cb8a103cf7c4a0" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LongLong TimeStamp::getTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a513254a5db567ed79238f744eecb2dc5"></a><!-- doxytag: member="TimeStamp::getFraction" ref="a513254a5db567ed79238f744eecb2dc5" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TimeStamp::getFraction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a213ba0bf3ec944cb10ccea4904b7a519"></a><!-- doxytag: member="TimeStamp::getFractionInTicks" ref="a213ba0bf3ec944cb10ccea4904b7a519" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int TimeStamp::getFractionInTicks </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa5a1e08676f574769f440faad8a46f5d"></a><!-- doxytag: member="TimeStamp::getValue" ref="aa5a1e08676f574769f440faad8a46f5d" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TimeStamp::getValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3958acdc3545fa8ee00df707889957db"></a><!-- doxytag: member="TimeStamp::operator double" ref="a3958acdc3545fa8ee00df707889957db" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TimeStamp::operator double </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a95fd21f8cc377a9542b91b92469c931e"></a><!-- doxytag: member="TimeStamp::toSeconds" ref="a95fd21f8cc377a9542b91b92469c931e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TimeStamp::toSeconds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a87d1c72796a49c111ce0e7107f980c66"></a><!-- doxytag: member="TimeStamp::toSamples" ref="a87d1c72796a49c111ce0e7107f980c66" args="(const double sampleRate) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -720,15 +523,209 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a95fd21f8cc377a9542b91b92469c931e"></a><!-- doxytag: member="TimeStamp::toSeconds" ref="a95fd21f8cc377a9542b91b92469c931e" args="() const " -->
+<a class="anchor" id="a819fa595c1dc09bac855de5c3279d99a"></a><!-- doxytag: member="TimeStamp::operator==" ref="a819fa595c1dc09bac855de5c3279d99a" args="(TimeStamp const &amp;other) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double TimeStamp::toSeconds </td>
+          <td class="memname">bool TimeStamp::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a825ba6468c8d61887c5c34ac48e28192"></a><!-- doxytag: member="TimeStamp::operator!=" ref="a825ba6468c8d61887c5c34ac48e28192" args="(TimeStamp const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TimeStamp::operator!= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a141bd249206b7df9f5ebb97937b6196e"></a><!-- doxytag: member="TimeStamp::operator&lt;" ref="a141bd249206b7df9f5ebb97937b6196e" args="(TimeStamp const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TimeStamp::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adc5a82c21e8348d9f76590889f908b5a"></a><!-- doxytag: member="TimeStamp::operator&lt;=" ref="adc5a82c21e8348d9f76590889f908b5a" args="(TimeStamp const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TimeStamp::operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a59247e46d54cafe7ccfc5422d4e5b9ea"></a><!-- doxytag: member="TimeStamp::operator&gt;" ref="a59247e46d54cafe7ccfc5422d4e5b9ea" args="(TimeStamp const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TimeStamp::operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a58c0709897399c8029f767c190b44752"></a><!-- doxytag: member="TimeStamp::operator&gt;=" ref="a58c0709897399c8029f767c190b44752" args="(TimeStamp const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TimeStamp::operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_time_stamp.html">TimeStamp</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9b07cd3f2f12e3a11834f55c2400e130"></a><!-- doxytag: member="TimeStamp::getTicks" ref="a9b07cd3f2f12e3a11834f55c2400e130" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TimeStamp::getTicks </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac366fab0b7035c309585a1f58ec58ff2"></a><!-- doxytag: member="TimeStamp::getReciprocalTicks" ref="ac366fab0b7035c309585a1f58ec58ff2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TimeStamp::getReciprocalTicks </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aafc4cea1f46fa878bc141573cfe28062"></a><!-- doxytag: member="TimeStamp::fromSeconds" ref="aafc4cea1f46fa878bc141573cfe28062" args="(const double seconds)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::fromSeconds </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>seconds</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9e39bf8505e06f1cc2fec88c6ed55fe4"></a><!-- doxytag: member="TimeStamp::fromSamples" ref="a9e39bf8505e06f1cc2fec88c6ed55fe4" args="(const double samples, const double sampleRate)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_time_stamp.html">TimeStamp</a> TimeStamp::fromSamples </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>samples</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>sampleRate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3b177f0b402c2d1bb51c404e0397449b"></a><!-- doxytag: member="TimeStamp::getZero" ref="a3b177f0b402c2d1bb51c404e0397449b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_time_stamp.html">TimeStamp</a> &amp; TimeStamp::getZero </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab0dd73c80396763164d4596580227351"></a><!-- doxytag: member="TimeStamp::getMaximum" ref="ab0dd73c80396763164d4596580227351" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_time_stamp.html">TimeStamp</a> &amp; TimeStamp::getMaximum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -755,7 +752,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

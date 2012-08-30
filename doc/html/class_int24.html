@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="Int24" -->
 <p>An emulated 24-bit integer type.  
  <a href="class_int24.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___int24_8h_source.html">plonk_Int24.h</a>&gt;</code></p>
 
 <p><a href="class_int24-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -338,15 +335,35 @@ template&lt;class OtherType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a7b75d6f6c6c47b06cf547ee7b7a97b00"></a><!-- doxytag: member="Int24::getRaw" ref="a7b75d6f6c6c47b06cf547ee7b7a97b00" args="() const " -->
+<a class="anchor" id="a0e7c70b5e11c3acbcb657928a3c3817c"></a><!-- doxytag: member="Int24::operator=" ref="a0e7c70b5e11c3acbcb657928a3c3817c" args="(Int24 const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_plank_i24.html">Int24::Internal</a> Int24::getRaw </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a741777456890225ab6ff9bed9161be3e"></a><!-- doxytag: member="Int24::operator=" ref="a741777456890225ab6ff9bed9161be3e" args="(const OtherType other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class OtherType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a>&amp; Int24::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const OtherType&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -360,86 +377,6 @@ template&lt;class OtherType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">Int24::operator char </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a895f80ef6d5659ec41213aa63d3ece00"></a><!-- doxytag: member="Int24::operator double" ref="a895f80ef6d5659ec41213aa63d3ece00" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Int24::operator double </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af814a576881ec50f0da13a5fbdc616da"></a><!-- doxytag: member="Int24::operator float" ref="af814a576881ec50f0da13a5fbdc616da" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Int24::operator float </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afcc3eb41f40d3761cb33d1590774f6a1"></a><!-- doxytag: member="Int24::operator int" ref="afcc3eb41f40d3761cb33d1590774f6a1" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Int24::operator int </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a02347b904ea765e8661f370f84abea6b"></a><!-- doxytag: member="Int24::operator Internal" ref="a02347b904ea765e8661f370f84abea6b" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Int24::operator <a class="el" href="struct_plank_i24.html">Internal</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1a036e32d24cc684f6fcc5ff2486c94c"></a><!-- doxytag: member="Int24::operator LongLong" ref="a1a036e32d24cc684f6fcc5ff2486c94c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Int24::operator LongLong </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()</td>
@@ -466,12 +403,305 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af7fa34e6cf886c01caf28075f9425bd1"></a><!-- doxytag: member="Int24::operator!=" ref="af7fa34e6cf886c01caf28075f9425bd1" args="(Int24 const &amp;leftOperand) const " -->
+<a class="anchor" id="afcc3eb41f40d3761cb33d1590774f6a1"></a><!-- doxytag: member="Int24::operator int" ref="afcc3eb41f40d3761cb33d1590774f6a1" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Int24::operator!= </td>
+          <td class="memname">Int24::operator int </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1a036e32d24cc684f6fcc5ff2486c94c"></a><!-- doxytag: member="Int24::operator LongLong" ref="a1a036e32d24cc684f6fcc5ff2486c94c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Int24::operator LongLong </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af814a576881ec50f0da13a5fbdc616da"></a><!-- doxytag: member="Int24::operator float" ref="af814a576881ec50f0da13a5fbdc616da" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Int24::operator float </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a895f80ef6d5659ec41213aa63d3ece00"></a><!-- doxytag: member="Int24::operator double" ref="a895f80ef6d5659ec41213aa63d3ece00" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Int24::operator double </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a02347b904ea765e8661f370f84abea6b"></a><!-- doxytag: member="Int24::operator Internal" ref="a02347b904ea765e8661f370f84abea6b" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Int24::operator <a class="el" href="struct_plank_i24.html">Internal</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af38c903a8da234835d7ea206c3641ecb"></a><!-- doxytag: member="Int24::toInt" ref="af38c903a8da234835d7ea206c3641ecb" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Int24::toInt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a42f5ca8e5570a0c246b3e1d82df19e01"></a><!-- doxytag: member="Int24::toFloat" ref="a42f5ca8e5570a0c246b3e1d82df19e01" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Int24::toFloat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abb7421507e0ec8ad20a6ca480e096254"></a><!-- doxytag: member="Int24::toDouble" ref="abb7421507e0ec8ad20a6ca480e096254" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Int24::toDouble </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7b75d6f6c6c47b06cf547ee7b7a97b00"></a><!-- doxytag: member="Int24::getRaw" ref="a7b75d6f6c6c47b06cf547ee7b7a97b00" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_plank_i24.html">Int24::Internal</a> Int24::getRaw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4be460d972a5c703c76f1215dc999afb"></a><!-- doxytag: member="Int24::operator~" ref="a4be460d972a5c703c76f1215dc999afb" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator~ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a128e766fb190ebe1d6c190ae1819ffe9"></a><!-- doxytag: member="Int24::operator&#45;" ref="a128e766fb190ebe1d6c190ae1819ffe9" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4c07d3030e9fd61dbb197bedebf176f5"></a><!-- doxytag: member="Int24::operator++" ref="a4c07d3030e9fd61dbb197bedebf176f5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8f8213efacc2c5b9373c5307ca372e99"></a><!-- doxytag: member="Int24::operator&#45;&#45;" ref="a8f8213efacc2c5b9373c5307ca372e99" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator-- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa6efd368f92f1dbcf4947ad62ea3d343"></a><!-- doxytag: member="Int24::operator++" ref="aa6efd368f92f1dbcf4947ad62ea3d343" args="(int)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a01df062df2233ab340821490e2ce9ce8"></a><!-- doxytag: member="Int24::operator&#45;&#45;" ref="a01df062df2233ab340821490e2ce9ce8" args="(int)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator-- </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a62bb9b36e8100378c1eac9cd27c70ddf"></a><!-- doxytag: member="Int24::operator+" ref="a62bb9b36e8100378c1eac9cd27c70ddf" args="(Int24 const &amp;leftOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad8df10110ccf6bff8687eec4db4604c6"></a><!-- doxytag: member="Int24::operator&#45;" ref="ad8df10110ccf6bff8687eec4db4604c6" args="(Int24 const &amp;leftOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a45d181c8672d9f3e10ef481bdbb5ecbd"></a><!-- doxytag: member="Int24::operator*" ref="a45d181c8672d9f3e10ef481bdbb5ecbd" args="(Int24 const &amp;leftOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator* </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aef75de9ff3212651ec03762ff97a25ab"></a><!-- doxytag: member="Int24::operator/" ref="aef75de9ff3212651ec03762ff97a25ab" args="(Int24 const &amp;leftOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator/ </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
@@ -500,16 +730,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a082ab05d553848f00ffa94a067b30f4e"></a><!-- doxytag: member="Int24::operator%=" ref="a082ab05d553848f00ffa94a067b30f4e" args="(Int24 const &amp;leftOperand)" -->
+<a class="anchor" id="a39cb8a3088ce725e94ca6d018b6b06a5"></a><!-- doxytag: member="Int24::operator|" ref="a39cb8a3088ce725e94ca6d018b6b06a5" args="(Int24 const &amp;leftOperand) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator%= </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator| </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td>  throw ()</td>
+          <td> const  throw ()</td>
         </tr>
       </table>
 </div>
@@ -534,12 +764,12 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aff177aa09af18488d727954655d5152d"></a><!-- doxytag: member="Int24::operator&amp;&amp;" ref="aff177aa09af18488d727954655d5152d" args="(Int24 const &amp;leftOperand) const " -->
+<a class="anchor" id="ad7d45d7f61b6ec5dc733a7dab3691fff"></a><!-- doxytag: member="Int24::operator^" ref="ad7d45d7f61b6ec5dc733a7dab3691fff" args="(Int24 const &amp;leftOperand) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Int24::operator&amp;&amp; </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator^ </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
@@ -551,100 +781,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a41ff94224af6348b6757572f369fc2a4"></a><!-- doxytag: member="Int24::operator&amp;=" ref="a41ff94224af6348b6757572f369fc2a4" args="(Int24 const &amp;leftOperand)" -->
+<a class="anchor" id="ac55c2f13f16197986384ae0cc3b0b03c"></a><!-- doxytag: member="Int24::pow" ref="ac55c2f13f16197986384ae0cc3b0b03c" args="(Int24 const &amp;leftOperand) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator&amp;= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a45d181c8672d9f3e10ef481bdbb5ecbd"></a><!-- doxytag: member="Int24::operator*" ref="a45d181c8672d9f3e10ef481bdbb5ecbd" args="(Int24 const &amp;leftOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator* </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::pow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
           <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a00583af1d48be03ed6b63d0d3f14d02e"></a><!-- doxytag: member="Int24::operator*=" ref="a00583af1d48be03ed6b63d0d3f14d02e" args="(Int24 const &amp;leftOperand)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator*= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a62bb9b36e8100378c1eac9cd27c70ddf"></a><!-- doxytag: member="Int24::operator+" ref="a62bb9b36e8100378c1eac9cd27c70ddf" args="(Int24 const &amp;leftOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator+ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4c07d3030e9fd61dbb197bedebf176f5"></a><!-- doxytag: member="Int24::operator++" ref="a4c07d3030e9fd61dbb197bedebf176f5" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator++ </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa6efd368f92f1dbcf4947ad62ea3d343"></a><!-- doxytag: member="Int24::operator++" ref="aa6efd368f92f1dbcf4947ad62ea3d343" args="(int)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator++ </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -661,72 +807,6 @@ template&lt;class OtherType &gt; </div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad8df10110ccf6bff8687eec4db4604c6"></a><!-- doxytag: member="Int24::operator&#45;" ref="ad8df10110ccf6bff8687eec4db4604c6" args="(Int24 const &amp;leftOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator- </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a128e766fb190ebe1d6c190ae1819ffe9"></a><!-- doxytag: member="Int24::operator&#45;" ref="a128e766fb190ebe1d6c190ae1819ffe9" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator- </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8f8213efacc2c5b9373c5307ca372e99"></a><!-- doxytag: member="Int24::operator&#45;&#45;" ref="a8f8213efacc2c5b9373c5307ca372e99" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator-- </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a01df062df2233ab340821490e2ce9ce8"></a><!-- doxytag: member="Int24::operator&#45;&#45;" ref="a01df062df2233ab340821490e2ce9ce8" args="(int)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator-- </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -752,16 +832,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aef75de9ff3212651ec03762ff97a25ab"></a><!-- doxytag: member="Int24::operator/" ref="aef75de9ff3212651ec03762ff97a25ab" args="(Int24 const &amp;leftOperand) const " -->
+<a class="anchor" id="a00583af1d48be03ed6b63d0d3f14d02e"></a><!-- doxytag: member="Int24::operator*=" ref="a00583af1d48be03ed6b63d0d3f14d02e" args="(Int24 const &amp;leftOperand)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator/ </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator*= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td> const  throw ()</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -786,6 +866,108 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a082ab05d553848f00ffa94a067b30f4e"></a><!-- doxytag: member="Int24::operator%=" ref="a082ab05d553848f00ffa94a067b30f4e" args="(Int24 const &amp;leftOperand)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator%= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9f44b79852a7f5729a317bf83e6459f7"></a><!-- doxytag: member="Int24::operator|=" ref="a9f44b79852a7f5729a317bf83e6459f7" args="(Int24 const &amp;leftOperand)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator|= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a41ff94224af6348b6757572f369fc2a4"></a><!-- doxytag: member="Int24::operator&amp;=" ref="a41ff94224af6348b6757572f369fc2a4" args="(Int24 const &amp;leftOperand)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator&amp;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a294c50b1425e419e6f71c70c516cf916"></a><!-- doxytag: member="Int24::operator^=" ref="a294c50b1425e419e6f71c70c516cf916" args="(Int24 const &amp;leftOperand)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator^= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aba81a9c8ef2e9254310b8a20df1e0531"></a><!-- doxytag: member="Int24::operator==" ref="aba81a9c8ef2e9254310b8a20df1e0531" args="(Int24 const &amp;leftOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Int24::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af7fa34e6cf886c01caf28075f9425bd1"></a><!-- doxytag: member="Int24::operator!=" ref="af7fa34e6cf886c01caf28075f9425bd1" args="(Int24 const &amp;leftOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Int24::operator!= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
+          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="af1d5e591c5b0590d4c6ce6f47295b0e9"></a><!-- doxytag: member="Int24::operator&lt;" ref="af1d5e591c5b0590d4c6ce6f47295b0e9" args="(Int24 const &amp;leftOperand) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -803,99 +985,12 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a52e1dba0f9c31e54787f0d644a41d3c9"></a><!-- doxytag: member="Int24::operator&lt;&lt;" ref="a52e1dba0f9c31e54787f0d644a41d3c9" args="(const int shift) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>shift</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acaa64b992e0dd5d809197122d23a7447"></a><!-- doxytag: member="Int24::operator&lt;&lt;=" ref="acaa64b992e0dd5d809197122d23a7447" args="(const int shift)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator&lt;&lt;= </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>shift</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ab7b6f283f20fb249e23db433d04fb893"></a><!-- doxytag: member="Int24::operator&lt;=" ref="ab7b6f283f20fb249e23db433d04fb893" args="(Int24 const &amp;leftOperand) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Int24::operator&lt;= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a741777456890225ab6ff9bed9161be3e"></a><!-- doxytag: member="Int24::operator=" ref="a741777456890225ab6ff9bed9161be3e" args="(const OtherType other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OtherType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a>&amp; Int24::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const OtherType&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0e7c70b5e11c3acbcb657928a3c3817c"></a><!-- doxytag: member="Int24::operator=" ref="a0e7c70b5e11c3acbcb657928a3c3817c" args="(Int24 const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aba81a9c8ef2e9254310b8a20df1e0531"></a><!-- doxytag: member="Int24::operator==" ref="aba81a9c8ef2e9254310b8a20df1e0531" args="(Int24 const &amp;leftOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Int24::operator== </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
@@ -941,101 +1036,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae2e582728dee3402644be7d154d98a4d"></a><!-- doxytag: member="Int24::operator&gt;&gt;" ref="ae2e582728dee3402644be7d154d98a4d" args="(const int shift) const " -->
+<a class="anchor" id="aff177aa09af18488d727954655d5152d"></a><!-- doxytag: member="Int24::operator&amp;&amp;" ref="aff177aa09af18488d727954655d5152d" args="(Int24 const &amp;leftOperand) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator&gt;&gt; </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>shift</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a633ff20a1583adac9372bead1dc3d7f9"></a><!-- doxytag: member="Int24::operator&gt;&gt;=" ref="a633ff20a1583adac9372bead1dc3d7f9" args="(const int shift)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator&gt;&gt;= </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>shift</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad7d45d7f61b6ec5dc733a7dab3691fff"></a><!-- doxytag: member="Int24::operator^" ref="ad7d45d7f61b6ec5dc733a7dab3691fff" args="(Int24 const &amp;leftOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator^ </td>
+          <td class="memname">bool Int24::operator&amp;&amp; </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>leftOperand</em></td><td>)</td>
           <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a294c50b1425e419e6f71c70c516cf916"></a><!-- doxytag: member="Int24::operator^=" ref="a294c50b1425e419e6f71c70c516cf916" args="(Int24 const &amp;leftOperand)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator^= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a39cb8a3088ce725e94ca6d018b6b06a5"></a><!-- doxytag: member="Int24::operator|" ref="a39cb8a3088ce725e94ca6d018b6b06a5" args="(Int24 const &amp;leftOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator| </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9f44b79852a7f5729a317bf83e6459f7"></a><!-- doxytag: member="Int24::operator|=" ref="a9f44b79852a7f5729a317bf83e6459f7" args="(Int24 const &amp;leftOperand)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator|= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
-          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -1060,14 +1070,15 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4be460d972a5c703c76f1215dc999afb"></a><!-- doxytag: member="Int24::operator~" ref="a4be460d972a5c703c76f1215dc999afb" args="() const " -->
+<a class="anchor" id="a52e1dba0f9c31e54787f0d644a41d3c9"></a><!-- doxytag: member="Int24::operator&lt;&lt;" ref="a52e1dba0f9c31e54787f0d644a41d3c9" args="(const int shift) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator~ </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator&lt;&lt; </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>shift</em></td><td>)</td>
           <td> const  throw ()</td>
         </tr>
       </table>
@@ -1076,15 +1087,15 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac55c2f13f16197986384ae0cc3b0b03c"></a><!-- doxytag: member="Int24::pow" ref="ac55c2f13f16197986384ae0cc3b0b03c" args="(Int24 const &amp;leftOperand) const " -->
+<a class="anchor" id="ae2e582728dee3402644be7d154d98a4d"></a><!-- doxytag: member="Int24::operator&gt;&gt;" ref="ae2e582728dee3402644be7d154d98a4d" args="(const int shift) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::pow </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> Int24::operator&gt;&gt; </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>leftOperand</em></td><td>)</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>shift</em></td><td>)</td>
           <td> const  throw ()</td>
         </tr>
       </table>
@@ -1093,15 +1104,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="abb7421507e0ec8ad20a6ca480e096254"></a><!-- doxytag: member="Int24::toDouble" ref="abb7421507e0ec8ad20a6ca480e096254" args="() const " -->
+<a class="anchor" id="acaa64b992e0dd5d809197122d23a7447"></a><!-- doxytag: member="Int24::operator&lt;&lt;=" ref="acaa64b992e0dd5d809197122d23a7447" args="(const int shift)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Int24::toDouble </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator&lt;&lt;= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>shift</em></td><td>)</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -1109,31 +1121,16 @@ template&lt;class OtherType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a42f5ca8e5570a0c246b3e1d82df19e01"></a><!-- doxytag: member="Int24::toFloat" ref="a42f5ca8e5570a0c246b3e1d82df19e01" args="() const " -->
+<a class="anchor" id="a633ff20a1583adac9372bead1dc3d7f9"></a><!-- doxytag: member="Int24::operator&gt;&gt;=" ref="a633ff20a1583adac9372bead1dc3d7f9" args="(const int shift)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float Int24::toFloat </td>
+          <td class="memname"><a class="el" href="class_int24.html">Int24</a> &amp; Int24::operator&gt;&gt;= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af38c903a8da234835d7ea206c3641ecb"></a><!-- doxytag: member="Int24::toInt" ref="af38c903a8da234835d7ea206c3641ecb" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Int24::toInt </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>shift</em></td><td>)</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -1142,33 +1139,6 @@ template&lt;class OtherType &gt; </div>
 </div>
 </div>
 <hr/><h2>Friends And Related Function Documentation</h2>
-<a class="anchor" id="a0a36e085e7bf6a9c9ac9a982934caf21"></a><!-- doxytag: member="Int24::operator&lt;&lt;" ref="a0a36e085e7bf6a9c9ac9a982934caf21" args="(std::ostream &amp;outputStream, Int24 const &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>outputStream</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [friend]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a10a0267afbb35836bfca4da4c91427b0"></a><!-- doxytag: member="Int24::operator&gt;&gt;" ref="a10a0267afbb35836bfca4da4c91427b0" args="(std::istream &amp;inputStream, Int24 &amp;value)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1183,6 +1153,33 @@ template&lt;class OtherType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [friend]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0a36e085e7bf6a9c9ac9a982934caf21"></a><!-- doxytag: member="Int24::operator&lt;&lt;" ref="a0a36e085e7bf6a9c9ac9a982934caf21" args="(std::ostream &amp;outputStream, Int24 const &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outputStream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_int24.html">Int24</a> const &amp;&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -1215,7 +1212,7 @@ template&lt;class OtherType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

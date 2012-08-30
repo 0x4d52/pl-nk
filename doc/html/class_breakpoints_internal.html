@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,16 +68,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">BreakpointsInternal&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="BreakpointsInternal" --><!-- doxytag: inherits="SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___break_points_8h_source.html">plonk_BreakPoints.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="BreakpointsInternal" --><!-- doxytag: inherits="SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;" --><div class="dynheader">
 Inheritance diagram for BreakpointsInternal&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_breakpoints_internal.png" usemap="#BreakpointsInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="BreakpointsInternal&lt; SampleType &gt;_map" name="BreakpointsInternal&lt; SampleType &gt;_map">
-<area href="class_sender_internal.html" alt="SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,306,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,306,24"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; BreakpointsBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,306,136"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,306,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,306,24"/>
 </map>
  </div></div>
 
@@ -108,14 +106,14 @@ Public Member Functions</h2></td></tr>
  class BreakpointsInternal&lt; SampleType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a10f3171c4afbec3b3c770e1508e1a1be"></a><!-- doxytag: member="BreakpointsInternal::BreakpointArrayType" ref="a10f3171c4afbec3b3c770e1508e1a1be" args="" -->
+<a class="anchor" id="a81e7c008cecb32915ef90c6187be0b46"></a><!-- doxytag: member="BreakpointsInternal::Container" ref="a81e7c008cecb32915ef90c6187be0b46" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_breakpoint_base.html">BreakpointType</a>&gt; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::<a class="el" href="class_object_array.html">BreakpointArrayType</a></td>
+          <td class="memname">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt;SampleType&gt; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoints_base.html">Container</a></td>
         </tr>
       </table>
 </div>
@@ -138,14 +136,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a81e7c008cecb32915ef90c6187be0b46"></a><!-- doxytag: member="BreakpointsInternal::Container" ref="a81e7c008cecb32915ef90c6187be0b46" args="" -->
+<a class="anchor" id="a10f3171c4afbec3b3c770e1508e1a1be"></a><!-- doxytag: member="BreakpointsInternal::BreakpointArrayType" ref="a10f3171c4afbec3b3c770e1508e1a1be" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt;SampleType&gt; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoints_base.html">Container</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_breakpoint_base.html">BreakpointType</a>&gt; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::<a class="el" href="class_object_array.html">BreakpointArrayType</a></td>
         </tr>
       </table>
 </div>
@@ -168,21 +166,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aea7d38e2f824aac631973f73ff79c0c4"></a><!-- doxytag: member="BreakpointsInternal::NextArray" ref="aea7d38e2f824aac631973f73ff79c0c4" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;int&gt; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">NextArray</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="abf28568778495c3141c2fe9ad656b0f9"></a><!-- doxytag: member="BreakpointsInternal::TimesArray" ref="abf28568778495c3141c2fe9ad656b0f9" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -191,6 +174,21 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;double&gt; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">TimesArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aea7d38e2f824aac631973f73ff79c0c4"></a><!-- doxytag: member="BreakpointsInternal::NextArray" ref="aea7d38e2f824aac631973f73ff79c0c4" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;int&gt; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">NextArray</a></td>
         </tr>
       </table>
 </div>
@@ -259,24 +257,6 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a60168ec642f24120b63939bce5fc0cbd"></a><!-- doxytag: member="BreakpointsInternal::getBreakpoints" ref="a60168ec642f24120b63939bce5fc0cbd" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_object_array.html">BreakpointArrayType</a>&amp; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::getBreakpoints </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ae703fc3dcc72ed16985e6c68ad6289cf"></a><!-- doxytag: member="BreakpointsInternal::getNumBreakpoints" ref="ae703fc3dcc72ed16985e6c68ad6289cf" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -313,6 +293,24 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a60168ec642f24120b63939bce5fc0cbd"></a><!-- doxytag: member="BreakpointsInternal::getBreakpoints" ref="a60168ec642f24120b63939bce5fc0cbd" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_object_array.html">BreakpointArrayType</a>&amp; <a class="el" href="class_breakpoints_internal.html">BreakpointsInternal</a>&lt; SampleType &gt;::getBreakpoints </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___break_points_8h_source.html">plonk_BreakPoints.h</a></li>
 </ul>
@@ -331,7 +329,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

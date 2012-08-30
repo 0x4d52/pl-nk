@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_fc9dc22fc4a86e8fd9bb27dd82ac5f85.html">fft</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_FFTEngine.h</div>  </div>
@@ -141,7 +132,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00079"></a><a class="code" href="class_f_f_t_engine_base_3_01float_01_4.html#a02536062e3b3cb35bdac478ca41b371d">00079</a>     <a class="code" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&amp; operator= (<a class="code" href="class_f_f_t_engine_base.html">FFTEngineBase</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00080"></a>00080         {
 <a name="l00081"></a>00081                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00082"></a>00082             this-&gt;setInternal (other.containerCopy().getInternal());
+<a name="l00082"></a>00082             this-&gt;setInternal (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
 <a name="l00083"></a>00083         
 <a name="l00084"></a>00084         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00085"></a>00085         }
@@ -203,7 +194,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:47 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

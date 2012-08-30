@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Mixer.  
  <a href="class_mixer_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___mixers_8h_source.html">plonk_Mixers.h</a>&gt;</code></p>
-
 <p><a href="class_mixer_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -95,14 +92,31 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mixer_unit.html#aa506d87dd77592f76328b8ac9590af44">getInfo</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mixer_unit.html#ac6358840aff51693d2061dcab5f72c07">ar</a> (<a class="el" href="class_unit_base.html">UnitType</a> const &amp;input, const bool allowAutoDelete=true, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate channel mixer.  <a href="#ac6358840aff51693d2061dcab5f72c07"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mixer_unit.html#ac7a05bf36aebd66c15d868022db028aa">ar</a> (<a class="el" href="class_numerical_array2_d.html">UnitsType</a> const &amp;array, const bool allowAutoDelete=true, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate unit mixer.  <a href="#ac7a05bf36aebd66c15d868022db028aa"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mixer_unit.html#adfd0de31dcb88611aa84271f0b08954b">ar</a> (<a class="el" href="class_numerical_array2_d.html">UnitsType</a> const &amp;array, const bool allowAutoDelete=true, const bool purgeNullUnits=true, const int preferredNumChannels=0, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;mul=SampleType(1), <a class="el" href="class_unit_base.html">UnitType</a> const &amp;add=SampleType(0), <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate unit mixer.  <a href="#adfd0de31dcb88611aa84271f0b08954b"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
 class MixerUnit&lt; SampleType &gt;</h3>
 
 <p>Mixer. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, allowAutoDelete=true, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>ar (array, allowAutoDelete=true, purgeNullUnits=true, preferredNumChannels=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit) the input unit to mix</li>
+<li>array: (units, multi) the array of units to mix</li>
+<li>allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit(s) it contains</li>
+<li>purgeNullUnits: (bool) whether null units are removed from the array during processing</li>
+<li>preferredNumChannels: (int) force this unit to have a certain number of channels (0= the maximum channel count in array)</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="abd49365087145834b66d3d34e4e6f18b"></a><!-- doxytag: member="MixerUnit::ChannelMixerInternal" ref="abd49365087145834b66d3d34e4e6f18b" args="" -->
 <div class="memitem">
@@ -112,36 +126,6 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_mixer_channel_internal.html">ChannelMixerInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7ab67f31a5cd6ebf9b9e8fe14a4953e7"></a><!-- doxytag: member="MixerUnit::ChannelType" ref="a7ab67f31a5cd6ebf9b9e8fe14a4953e7" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0804a497dee6afd342acf30352eee6a2"></a><!-- doxytag: member="MixerUnit::Inputs" ref="a0804a497dee6afd342acf30352eee6a2" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
         </tr>
       </table>
 </div>
@@ -164,14 +148,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0e2caa939a3b86248ec0f8471cd85715"></a><!-- doxytag: member="MixerUnit::UnitsType" ref="a0e2caa939a3b86248ec0f8471cd85715" args="" -->
+<a class="anchor" id="a7ab67f31a5cd6ebf9b9e8fe14a4953e7"></a><!-- doxytag: member="MixerUnit::ChannelType" ref="a7ab67f31a5cd6ebf9b9e8fe14a4953e7" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>,<a class="el" href="class_unit_base.html">UnitType</a>&gt; <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array2_d.html">UnitsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -194,7 +178,55 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a0e2caa939a3b86248ec0f8471cd85715"></a><!-- doxytag: member="MixerUnit::UnitsType" ref="a0e2caa939a3b86248ec0f8471cd85715" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>,<a class="el" href="class_unit_base.html">UnitType</a>&gt; <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array2_d.html">UnitsType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0804a497dee6afd342acf30352eee6a2"></a><!-- doxytag: member="MixerUnit::Inputs" ref="a0804a497dee6afd342acf30352eee6a2" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aa506d87dd77592f76328b8ac9590af44"></a><!-- doxytag: member="MixerUnit::getInfo" ref="aa506d87dd77592f76328b8ac9590af44" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac6358840aff51693d2061dcab5f72c07"></a><!-- doxytag: member="MixerUnit::ar" ref="ac6358840aff51693d2061dcab5f72c07" args="(UnitType const &amp;input, const bool allowAutoDelete=true, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -250,7 +282,7 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac7a05bf36aebd66c15d868022db028aa"></a><!-- doxytag: member="MixerUnit::ar" ref="ac7a05bf36aebd66c15d868022db028aa" args="(UnitsType const &amp;array, const bool allowAutoDelete=true, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
+<a class="anchor" id="adfd0de31dcb88611aa84271f0b08954b"></a><!-- doxytag: member="MixerUnit::ar" ref="adfd0de31dcb88611aa84271f0b08954b" args="(UnitsType const &amp;array, const bool allowAutoDelete=true, const bool purgeNullUnits=true, const int preferredNumChannels=0, UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -267,6 +299,18 @@ template&lt;class SampleType &gt; </div>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
           <td class="paramname"><em>allowAutoDelete</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>purgeNullUnits</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>preferredNumChannels</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -305,24 +349,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa506d87dd77592f76328b8ac9590af44"></a><!-- doxytag: member="MixerUnit::getInfo" ref="aa506d87dd77592f76328b8ac9590af44" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_mixer_unit.html">MixerUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___mixers_8h_source.html">plonk_Mixers.h</a></li>
 </ul>
@@ -341,7 +367,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

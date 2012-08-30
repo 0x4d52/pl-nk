@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p><a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> unit.  
  <a href="class_variable_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___variable_channel_8h_source.html">plonk_VariableChannel.h</a>&gt;</code></p>
-
 <p><a href="class_variable_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -106,30 +103,25 @@ Static Public Member Functions</h2></td></tr>
 class VariableUnit&lt; SampleType &gt;</h3>
 
 <p><a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> unit. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (variable=0, preferredBlockSize=default)</li>
+<li>kr (variable=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>variable: (variable) the variable to use as a unit</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a3747a6c556acc406d97ba25b364d54f5"></a><!-- doxytag: member="VariableUnit::Buffer" ref="a3747a6c556acc406d97ba25b364d54f5" args="" -->
+<a class="anchor" id="aa7360be461f97133bcad273e3da4d861"></a><!-- doxytag: member="VariableUnit::VariableChannelInternalType" ref="aa7360be461f97133bcad273e3da4d861" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5de8a6c0a55f2d8b76517032d2d5fe13"></a><!-- doxytag: member="VariableUnit::ChannelType" ref="a5de8a6c0a55f2d8b76517032d2d5fe13" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable_channel_internal.html">VariableChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_variable_channel_internal.html">VariableChannelInternalType</a></td>
         </tr>
       </table>
 </div>
@@ -152,29 +144,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a92ab7e248848dfdc95631c2ae09a30c9"></a><!-- doxytag: member="VariableUnit::Inputs" ref="a92ab7e248848dfdc95631c2ae09a30c9" args="" -->
+<a class="anchor" id="a5de8a6c0a55f2d8b76517032d2d5fe13"></a><!-- doxytag: member="VariableUnit::ChannelType" ref="a5de8a6c0a55f2d8b76517032d2d5fe13" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af9cfb0cfa8c54f272d276f56ce8e2c31"></a><!-- doxytag: member="VariableUnit::InternaBase" ref="af9cfb0cfa8c54f272d276f56ce8e2c31" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -197,6 +174,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="af9cfb0cfa8c54f272d276f56ce8e2c31"></a><!-- doxytag: member="VariableUnit::InternaBase" ref="af9cfb0cfa8c54f272d276f56ce8e2c31" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a762804166e685fb40f125e71a1a76596"></a><!-- doxytag: member="VariableUnit::UnitType" ref="a762804166e685fb40f125e71a1a76596" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -212,14 +204,29 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa7360be461f97133bcad273e3da4d861"></a><!-- doxytag: member="VariableUnit::VariableChannelInternalType" ref="aa7360be461f97133bcad273e3da4d861" args="" -->
+<a class="anchor" id="a92ab7e248848dfdc95631c2ae09a30c9"></a><!-- doxytag: member="VariableUnit::Inputs" ref="a92ab7e248848dfdc95631c2ae09a30c9" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_variable_channel_internal.html">VariableChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_variable_channel_internal.html">VariableChannelInternalType</a></td>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3747a6c556acc406d97ba25b364d54f5"></a><!-- doxytag: member="VariableUnit::Buffer" ref="a3747a6c556acc406d97ba25b364d54f5" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
         </tr>
       </table>
 </div>
@@ -243,6 +250,24 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a8ee7a100f13ec65969251184b97a1cba"></a><!-- doxytag: member="VariableUnit::getInfo" ref="a8ee7a100f13ec65969251184b97a1cba" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a66c421dd52d501d0212248e8dad5d844"></a><!-- doxytag: member="VariableUnit::ar" ref="a66c421dd52d501d0212248e8dad5d844" args="(VariableType const &amp;variable=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -271,24 +296,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Create control rate variable. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8ee7a100f13ec65969251184b97a1cba"></a><!-- doxytag: member="VariableUnit::getInfo" ref="a8ee7a100f13ec65969251184b97a1cba" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_variable_unit.html">VariableUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -329,7 +336,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_32165843d27efd022843dfaad1c0372c.html">core</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_SenderContainer.h</div>  </div>
@@ -137,7 +128,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00067"></a><a class="code" href="class_sender_container.html#a7087ae5d7f2387c2beb82d70389e6318">00067</a>     <a class="code" href="class_sender_container.html">SenderContainer</a>&amp; <a class="code" href="class_sender_container.html#a7087ae5d7f2387c2beb82d70389e6318" title="Assignment operator.">operator= </a>(<a class="code" href="class_sender_container.html">SenderContainer</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00068"></a>00068         {
 <a name="l00069"></a>00069                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00070"></a>00070             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
+<a name="l00070"></a>00070             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
 <a name="l00071"></a>00071         
 <a name="l00072"></a>00072         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00073"></a>00073         }
@@ -145,25 +136,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00075"></a>00075     <span class="keyword">template</span>&lt;<span class="keyword">class</span> Receiver&gt;
 <a name="l00076"></a><a class="code" href="class_sender_container.html#ae4d0ef7f4145d1ab12727839280e21a7">00076</a>     <span class="keywordtype">void</span> <a class="code" href="class_sender_container.html#ae4d0ef7f4145d1ab12727839280e21a7">addReceiver</a> (Receiver* receiver) <span class="keywordflow">throw</span>()
 <a name="l00077"></a>00077     {
-<a name="l00078"></a>00078         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;addReceiver (receiver);
+<a name="l00078"></a>00078         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;addReceiver (receiver);
 <a name="l00079"></a>00079     }
 <a name="l00080"></a>00080     
 <a name="l00081"></a>00081     <span class="keyword">template</span>&lt;<span class="keyword">class</span> Receiver&gt;
 <a name="l00082"></a><a class="code" href="class_sender_container.html#ad67bb1ee11503fce1810369f87d77720">00082</a>     <span class="keywordtype">void</span> <a class="code" href="class_sender_container.html#ad67bb1ee11503fce1810369f87d77720">removeReceiver</a> (Receiver* receiver) <span class="keywordflow">throw</span>()
 <a name="l00083"></a>00083     {
-<a name="l00084"></a>00084         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;removeReceiver (receiver);
+<a name="l00084"></a>00084         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;removeReceiver (receiver);
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086     
 <a name="l00087"></a>00087     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SmartPo<span class="keywordtype">int</span>erType&gt;
 <a name="l00088"></a><a class="code" href="class_sender_container.html#a18046578c95b224fc74ed63ba29c3325">00088</a>     <span class="keywordtype">void</span> <a class="code" href="class_sender_container.html#ae4d0ef7f4145d1ab12727839280e21a7">addReceiver</a> (<a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;SmartPointerType&gt;</a>&amp; receiver) <span class="keywordflow">throw</span>()
 <a name="l00089"></a>00089     {        
-<a name="l00090"></a>00090         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;addReceiver (receiver.getWeakPointer(), receiver.getInternal());
+<a name="l00090"></a>00090         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;addReceiver (receiver.getWeakPointer(), receiver.getInternal());
 <a name="l00091"></a>00091     }
 <a name="l00092"></a>00092     
 <a name="l00093"></a>00093     <span class="keyword">template</span>&lt;<span class="keyword">class</span> SmartPo<span class="keywordtype">int</span>erType&gt;
 <a name="l00094"></a><a class="code" href="class_sender_container.html#a53e72402a2c3b5e7317d5e6c8e1be5f2">00094</a>     <span class="keywordtype">void</span> <a class="code" href="class_sender_container.html#ad67bb1ee11503fce1810369f87d77720">removeReceiver</a> (<a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;SmartPointerType&gt;</a>&amp; receiver) <span class="keywordflow">throw</span>()
 <a name="l00095"></a>00095     {
-<a name="l00096"></a>00096         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;removeReceiver (receiver.getWeakPointer(), receiver.getInternal());
+<a name="l00096"></a>00096         this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;removeReceiver (receiver.getWeakPointer(), receiver.getInternal());
 <a name="l00097"></a>00097     }
 <a name="l00098"></a>00098     
 <a name="l00099"></a>00099 };
@@ -185,7 +176,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

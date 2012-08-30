@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -75,8 +74,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>A class for storing and manipulating text strings.  
  <a href="class_text.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___text_8h_source.html">plonk_Text.h</a>&gt;</code></p>
-
 <p>Inherits <a class="el" href="class_numerical_array.html">NumericalArray&lt; Char &gt;</a>.</p>
 
 <p><a href="class_text-members.html">List of all members.</a></p>
@@ -95,6 +92,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a6a37381f3b9631eceb5623d577b0cc0c">Text</a> (const char c)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a text string containing a single character.  <a href="#a6a37381f3b9631eceb5623d577b0cc0c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#af1bc230e470e76fff24c8c8dd0dbc8fb">Text</a> (const int value)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a635b15f8ec0035e5a1f76f06d7ae6da8">Text</a> (const LongLong value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#aa14c2f2e416638b6dd661f1ee203d220">Text</a> (const float value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a74f355313c4dff521935f9d77fa8b793">Text</a> (const double value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a1506ec82c8541b2915a91d5ceca36e51">Text</a> (<a class="el" href="class_text.html">Text</a> const &amp;copy)  throw ()</td></tr>
@@ -130,6 +128,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a2e061ffa271b9b5ac080b51664d02741">indexOfAnyIgnoreCase</a> (<a class="el" href="class_text.html">Text</a> const &amp;toFind, const int startIndex=0) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a390ea2de1307909c181875096c98f343">replaceIgnoreCase</a> (<a class="el" href="class_text.html">Text</a> const &amp;find, <a class="el" href="class_text.html">Text</a> const &amp;substitute) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#ae42f88028d42a7905c430376a923e246">print</a> (const char *prefix=0) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a587940ae3d26fc08a2032439b13cb504">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_text.html">Text</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a08f8fa766d32ed5a8bae34d256a3c5e2">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#ab00905939be3c3f26e0f82f386eeb994">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -141,6 +141,7 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#afa3c84f9ac6aaa4c88a5fa2736849e53">newClear</a> (const int size)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with all items set to zero.  <a href="#afa3c84f9ac6aaa4c88a5fa2736849e53"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const int num)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a04264dbe326907af82561a243e937258">fromValue</a> (const LongLong num)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a35e3d575e71af9e471e71a7a15ec5c60">fromValue</a> (const float num)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a6abab13261a766ec2bc04e70a0659e73">fromValue</a> (const double num)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_text.html">Text</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text.html#a6055aad336b152fb30db326e13813175">getPrintable</a> ()  throw ()</td></tr>
@@ -159,21 +160,6 @@ Static Public Attributes</h2></td></tr>
 <div class="textblock"><p>A class for storing and manipulating text strings. </p>
 <p>Similar to std:string this is plonk's default text format. Internally <a class="el" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> is just a null terminated C string (array of chars) and is just a specialised versio of CharArray or NumericalArray&lt;char&gt;. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ab10f8916896b5131535e9fc2bd7ae250"></a><!-- doxytag: member="Text::Base" ref="ab10f8916896b5131535e9fc2bd7ae250" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">CharArray</a> <a class="el" href="class_numerical_array.html">Text::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; Char &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a2728647a7c540f8a2305b3d7ebeaa9c3"></a><!-- doxytag: member="Text::Internal" ref="a2728647a7c540f8a2305b3d7ebeaa9c3" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -186,6 +172,21 @@ Static Public Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_numerical_array.html#a7e4c6b7c3510949ad880d92f5d3c804f">NumericalArray&lt; Char &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab10f8916896b5131535e9fc2bd7ae250"></a><!-- doxytag: member="Text::Base" ref="ab10f8916896b5131535e9fc2bd7ae250" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">CharArray</a> <a class="el" href="class_numerical_array.html">Text::Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ae95ce32ea5bf1b47707cbf06e3ecac2b">NumericalArray&lt; Char &gt;</a>.</p>
 
 </div>
 </div>
@@ -267,6 +268,23 @@ Static Public Attributes</h2></td></tr>
           <td class="memname">Text::Text </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a635b15f8ec0035e5a1f76f06d7ae6da8"></a><!-- doxytag: member="Text::Text" ref="a635b15f8ec0035e5a1f76f06d7ae6da8" args="(const LongLong value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Text::Text </td>
+          <td>(</td>
+          <td class="paramtype">const LongLong&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
@@ -529,12 +547,68 @@ template&lt;class CopyType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a6a1108b69293b6aa70f9724337d4b067"></a><!-- doxytag: member="Text::add" ref="a6a1108b69293b6aa70f9724337d4b067" args="(Text const &amp;other)" -->
+<a class="anchor" id="ab00905939be3c3f26e0f82f386eeb994"></a><!-- doxytag: member="Text::fromWeak" ref="ab00905939be3c3f26e0f82f386eeb994" args="(Weak const &amp;weak)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::add </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::fromWeak </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;&#160;</td>
+          <td class="paramname"><em>weak</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get a weakly linked copy of this object. </p>
+<p>This will return a blank/empty/null object of this type if the original has already been deleted. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; Char &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4fb99e6125742dab2e2c3738891e27d5"></a><!-- doxytag: member="Text::getNull" ref="a4fb99e6125742dab2e2c3738891e27d5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getNull </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; Char &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aecdfe96a623554ee0f002f966c79c6c7"></a><!-- doxytag: member="Text::getEmpty" ref="aecdfe96a623554ee0f002f966c79c6c7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a79897ed3a9538de4677814c04b1ddf96"></a><!-- doxytag: member="Text::operator=" ref="a79897ed3a9538de4677814c04b1ddf96" args="(Text const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -546,16 +620,26 @@ template&lt;class CopyType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aae2b3eb7e8a5a28f176e6899d356207a"></a><!-- doxytag: member="Text::containsIgnoreCase" ref="aae2b3eb7e8a5a28f176e6899d356207a" args="(Text const &amp;toFind) const " -->
+<a class="anchor" id="a4ccbb30c80be0206ea73dbde42854f7d"></a><!-- doxytag: member="Text::ObjectArrayAssignmentDefinition" ref="a4ccbb30c80be0206ea73dbde42854f7d" args="(Text, char)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Text::containsIgnoreCase </td>
+          <td class="memname">Text::ObjectArrayAssignmentDefinition </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>toFind</em></td><td>)</td>
-          <td> const  throw ()</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -563,16 +647,85 @@ template&lt;class CopyType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6b6de5ee32db3277502246fdd80a0f2a"></a><!-- doxytag: member="Text::equalsIgnoreCase" ref="a6b6de5ee32db3277502246fdd80a0f2a" args="(Text const &amp;other) const " -->
+<a class="anchor" id="aff424fbf995e268141efcb453c5959bf"></a><!-- doxytag: member="Text::withSize" ref="aff424fbf995e268141efcb453c5959bf" args="(const int size, const bool zeroData=false)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Text::equalsIgnoreCase </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::withSize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>zeroData</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length). </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#ada7cd40ff1de921243a1ba6d0a73fe5d">NumericalArray&lt; Char &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afa3c84f9ac6aaa4c88a5fa2736849e53"></a><!-- doxytag: member="Text::newClear" ref="afa3c84f9ac6aaa4c88a5fa2736849e53" args="(const int size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::newClear </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with all items set to zero. </p>
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a35333c3e01ef69f3a2915165c2d3ab83">NumericalArray&lt; Char &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa50aa3cc0754e70e6deae153872efe15"></a><!-- doxytag: member="Text::fromValue" ref="aa50aa3cc0754e70e6deae153872efe15" args="(const int num)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::fromValue </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>num</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a04264dbe326907af82561a243e937258"></a><!-- doxytag: member="Text::fromValue" ref="a04264dbe326907af82561a243e937258" args="(const LongLong num)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::fromValue </td>
+          <td>(</td>
+          <td class="paramtype">const LongLong&#160;</td>
+          <td class="paramname"><em>num</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -588,23 +741,6 @@ template&lt;class CopyType &gt; </div>
           <td class="memname"><a class="el" href="class_text.html">Text</a> Text::fromValue </td>
           <td>(</td>
           <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>num</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa50aa3cc0754e70e6deae153872efe15"></a><!-- doxytag: member="Text::fromValue" ref="aa50aa3cc0754e70e6deae153872efe15" args="(const int num)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::fromValue </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>num</em></td><td>)</td>
           <td>  throw ()<code> [static]</code></td>
         </tr>
@@ -631,37 +767,134 @@ template&lt;class CopyType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab00905939be3c3f26e0f82f386eeb994"></a><!-- doxytag: member="Text::fromWeak" ref="ab00905939be3c3f26e0f82f386eeb994" args="(Weak const &amp;weak)" -->
+<a class="anchor" id="a490a079eae5ae4ae0bcbb89c2271c2ae"></a><!-- doxytag: member="Text::operator=" ref="a490a079eae5ae4ae0bcbb89c2271c2ae" args="(Base const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::fromWeak </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;&#160;</td>
-          <td class="paramname"><em>weak</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">Base</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Get a weakly linked copy of this object. </p>
-<p>This will return a blank/empty/null object of this type if the original has already been deleted. </p>
-
-<p>Reimplemented from <a class="el" href="class_numerical_array.html#afc49243d8e6c1c262a42d6691a5d6b32">NumericalArray&lt; Char &gt;</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="a908680a697b632ac53a5402996b30f43"></a><!-- doxytag: member="Text::getAlphabetAll" ref="a908680a697b632ac53a5402996b30f43" args="()" -->
+<a class="anchor" id="ac02820c574aeefe318d49df128cb2d2f"></a><!-- doxytag: member="Text::operator=" ref="ac02820c574aeefe318d49df128cb2d2f" args="(const char *other)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getAlphabetAll </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac8b7c5a66240f12fc260f21510b389c3"></a><!-- doxytag: member="Text::operator=" ref="ac8b7c5a66240f12fc260f21510b389c3" args="(const wchar_t *other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const wchar_t *&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac74cf133d432ce01d60ba43e61bedaf9"></a><!-- doxytag: member="Text::operator+" ref="ac74cf133d432ce01d60ba43e61bedaf9" args="(Text const &amp;rightOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rightOperand</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2e943cb90053df1fc66eddadc670e71e"></a><!-- doxytag: member="Text::operator+=" ref="a2e943cb90053df1fc66eddadc670e71e" args="(Text const &amp;rightOperand)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::operator+= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rightOperand</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3a08732edc5ff110af7364704811d785"></a><!-- doxytag: member="Text::offset" ref="a3a08732edc5ff110af7364704811d785" args="(Text const &amp;rightOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::offset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rightOperand</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6a1108b69293b6aa70f9724337d4b067"></a><!-- doxytag: member="Text::add" ref="a6a1108b69293b6aa70f9724337d4b067" args="(Text const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::add </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae0ec7ba26cc4e1f3c26ed8389f63f266"></a><!-- doxytag: member="Text::toUpper" ref="ae0ec7ba26cc4e1f3c26ed8389f63f266" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::toUpper </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
+          <td> const  throw ()</td>
         </tr>
       </table>
 </div>
@@ -669,12 +902,160 @@ template&lt;class CopyType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3bf0755c09a9f91423d12c91b54a5405"></a><!-- doxytag: member="Text::getAlphabetAndDigits" ref="a3bf0755c09a9f91423d12c91b54a5405" args="()" -->
+<a class="anchor" id="ad392b2444f86319448114e1c0cdbcf1a"></a><!-- doxytag: member="Text::toLower" ref="ad392b2444f86319448114e1c0cdbcf1a" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getAlphabetAndDigits </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::toLower </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6b6de5ee32db3277502246fdd80a0f2a"></a><!-- doxytag: member="Text::equalsIgnoreCase" ref="a6b6de5ee32db3277502246fdd80a0f2a" args="(Text const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Text::equalsIgnoreCase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aae2b3eb7e8a5a28f176e6899d356207a"></a><!-- doxytag: member="Text::containsIgnoreCase" ref="aae2b3eb7e8a5a28f176e6899d356207a" args="(Text const &amp;toFind) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Text::containsIgnoreCase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>toFind</em></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2753a439476795e1d63815912e948e0e"></a><!-- doxytag: member="Text::indexOfIgnoreCase" ref="a2753a439476795e1d63815912e948e0e" args="(Text const &amp;toFind, const int startIndex=0) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Text::indexOfIgnoreCase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>toFind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2e061ffa271b9b5ac080b51664d02741"></a><!-- doxytag: member="Text::indexOfAnyIgnoreCase" ref="a2e061ffa271b9b5ac080b51664d02741" args="(Text const &amp;toFind, const int startIndex=0) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Text::indexOfAnyIgnoreCase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>toFind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a390ea2de1307909c181875096c98f343"></a><!-- doxytag: member="Text::replaceIgnoreCase" ref="a390ea2de1307909c181875096c98f343" args="(Text const &amp;find, Text const &amp;substitute) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::replaceIgnoreCase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>find</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>substitute</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae42f88028d42a7905c430376a923e246"></a><!-- doxytag: member="Text::print" ref="ae42f88028d42a7905c430376a923e246" args="(const char *prefix=0) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Text::print </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>prefix</em> = <code>0</code></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6055aad336b152fb30db326e13813175"></a><!-- doxytag: member="Text::getPrintable" ref="a6055aad336b152fb30db326e13813175" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getPrintable </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [static]</code></td>
@@ -717,6 +1098,22 @@ template&lt;class CopyType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a908680a697b632ac53a5402996b30f43"></a><!-- doxytag: member="Text::getAlphabetAll" ref="a908680a697b632ac53a5402996b30f43" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getAlphabetAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a81cbdb0031dd14595bfdb336e74a86d8"></a><!-- doxytag: member="Text::getDigits" ref="a81cbdb0031dd14595bfdb336e74a86d8" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -733,46 +1130,12 @@ template&lt;class CopyType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aecdfe96a623554ee0f002f966c79c6c7"></a><!-- doxytag: member="Text::getEmpty" ref="aecdfe96a623554ee0f002f966c79c6c7" args="()" -->
+<a class="anchor" id="a3bf0755c09a9f91423d12c91b54a5405"></a><!-- doxytag: member="Text::getAlphabetAndDigits" ref="a3bf0755c09a9f91423d12c91b54a5405" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getEmpty </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4fb99e6125742dab2e2c3738891e27d5"></a><!-- doxytag: member="Text::getNull" ref="a4fb99e6125742dab2e2c3738891e27d5" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NumericalArray&lt; Char &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6055aad336b152fb30db326e13813175"></a><!-- doxytag: member="Text::getPrintable" ref="a6055aad336b152fb30db326e13813175" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getPrintable </td>
+          <td class="memname">const <a class="el" href="class_text.html">Text</a> &amp; Text::getAlphabetAndDigits </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [static]</code></td>
@@ -815,331 +1178,39 @@ template&lt;class CopyType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2e061ffa271b9b5ac080b51664d02741"></a><!-- doxytag: member="Text::indexOfAnyIgnoreCase" ref="a2e061ffa271b9b5ac080b51664d02741" args="(Text const &amp;toFind, const int startIndex=0) const " -->
+<a class="anchor" id="a587940ae3d26fc08a2032439b13cb504"></a><!-- doxytag: member="Text::operator&#45;&gt;" ref="a587940ae3d26fc08a2032439b13cb504" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Text::indexOfAnyIgnoreCase </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>toFind</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2753a439476795e1d63815912e948e0e"></a><!-- doxytag: member="Text::indexOfIgnoreCase" ref="a2753a439476795e1d63815912e948e0e" args="(Text const &amp;toFind, const int startIndex=0) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Text::indexOfIgnoreCase </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>toFind</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>startIndex</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afa3c84f9ac6aaa4c88a5fa2736849e53"></a><!-- doxytag: member="Text::newClear" ref="afa3c84f9ac6aaa4c88a5fa2736849e53" args="(const int size)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::newClear </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length) with all items set to zero. </p>
-
-<p>Reimplemented from <a class="el" href="class_numerical_array.html#a35333c3e01ef69f3a2915165c2d3ab83">NumericalArray&lt; Char &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4ccbb30c80be0206ea73dbde42854f7d"></a><!-- doxytag: member="Text::ObjectArrayAssignmentDefinition" ref="a4ccbb30c80be0206ea73dbde42854f7d" args="(Text, char)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Text::ObjectArrayAssignmentDefinition </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a>&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3a08732edc5ff110af7364704811d785"></a><!-- doxytag: member="Text::offset" ref="a3a08732edc5ff110af7364704811d785" args="(Text const &amp;rightOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::offset </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rightOperand</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac74cf133d432ce01d60ba43e61bedaf9"></a><!-- doxytag: member="Text::operator+" ref="ac74cf133d432ce01d60ba43e61bedaf9" args="(Text const &amp;rightOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::operator+ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rightOperand</em></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2e943cb90053df1fc66eddadc670e71e"></a><!-- doxytag: member="Text::operator+=" ref="a2e943cb90053df1fc66eddadc670e71e" args="(Text const &amp;rightOperand)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::operator+= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>rightOperand</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a79897ed3a9538de4677814c04b1ddf96"></a><!-- doxytag: member="Text::operator=" ref="a79897ed3a9538de4677814c04b1ddf96" args="(Text const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac02820c574aeefe318d49df128cb2d2f"></a><!-- doxytag: member="Text::operator=" ref="ac02820c574aeefe318d49df128cb2d2f" args="(const char *other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a490a079eae5ae4ae0bcbb89c2271c2ae"></a><!-- doxytag: member="Text::operator=" ref="a490a079eae5ae4ae0bcbb89c2271c2ae" args="(Base const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">Base</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac8b7c5a66240f12fc260f21510b389c3"></a><!-- doxytag: member="Text::operator=" ref="ac8b7c5a66240f12fc260f21510b389c3" args="(const wchar_t *other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> &amp; Text::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const wchar_t *&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae42f88028d42a7905c430376a923e246"></a><!-- doxytag: member="Text::print" ref="ae42f88028d42a7905c430376a923e246" args="(const char *prefix=0) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Text::print </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>prefix</em> = <code>0</code></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a390ea2de1307909c181875096c98f343"></a><!-- doxytag: member="Text::replaceIgnoreCase" ref="a390ea2de1307909c181875096c98f343" args="(Text const &amp;find, Text const &amp;substitute) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::replaceIgnoreCase </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>find</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>substitute</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad392b2444f86319448114e1c0cdbcf1a"></a><!-- doxytag: member="Text::toLower" ref="ad392b2444f86319448114e1c0cdbcf1a" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::toLower </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a>* Text::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; Char &gt;</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="ae0ec7ba26cc4e1f3c26ed8389f63f266"></a><!-- doxytag: member="Text::toUpper" ref="ae0ec7ba26cc4e1f3c26ed8389f63f266" args="() const " -->
+<a class="anchor" id="a08f8fa766d32ed5a8bae34d256a3c5e2"></a><!-- doxytag: member="Text::operator&#45;&gt;" ref="a08f8fa766d32ed5a8bae34d256a3c5e2" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::toUpper </td>
+          <td class="memname">const <a class="el" href="class_text.html">Text</a>* Text::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="aff424fbf995e268141efcb453c5959bf"></a><!-- doxytag: member="Text::withSize" ref="aff424fbf995e268141efcb453c5959bf" args="(const int size, const bool zeroData=false)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> Text::withSize </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>zeroData</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> with a given size (length). </p>
-
-<p>Reimplemented from <a class="el" href="class_numerical_array.html#ada7cd40ff1de921243a1ba6d0a73fe5d">NumericalArray&lt; Char &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; Char &gt;</a>.</p>
 
 </div>
 </div>
@@ -1176,7 +1247,7 @@ template&lt;class CopyType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

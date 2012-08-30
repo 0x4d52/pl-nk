@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,17 +66,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_memory.html">Memory</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_memory.html#a3a8118255f6a282c552e4b997368c942">allocateBytes</a>(const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a524a9ecd6157f26d093ecd6ae3275d9f">allocateBytes</a>(const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#affc53937a8e8e0216d915571d51f7327">AllocateBytesFunction</a> typedef</td><td><a class="el" href="class_memory.html">Memory</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#acced1962b50c14708b61a1c82bfefed2">copy</a>(void *const dst, const void *const src, const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a79932139ae53c42f00f4e22d0f224133">defaultAllocateBytes</a></td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a553e8f96f5a1610e19a20ce2544eaf3c">defaultFree</a></td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a3387f660bfd2a95ebb319d2ed80e1b28">free</a>(void *ptr)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a4519c2975ebeb4264139cfdffa0558af">FreeFunction</a> typedef</td><td><a class="el" href="class_memory.html">Memory</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a642ba8d6a8ad2a2e7d492433e6f7d1a4">getUserData</a>(Type &amp;userData)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#ac6f9bd0e6c5caca3827a0937624d27b1">getUserData</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#ad523c3c897146ea7c0906f63b1360cc6">global</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a585d7bb6fc6f2237bcebf94a86b7dd99">Memory</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_memory.html#a20012bc65834da280f78b477fd7f9b33">realTime</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a28342da99d2fdcb164c4ef41130cb75c">Memory</a>(PlankMemory *const internalToUse)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a881a4d9573306c138eaab3fdfe15f0bb">resetFunctions</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a54644dd1e40ce0b01069b7983f84233a">resetUserData</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a7a757c7c084b64be333fb7e97786c2b1">setFunctions</a>(AllocateBytesFunction allocateFunction, FreeFunction freeFunction)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a306ca72aa7a537b6e6d69c04d00d922b">setUserData</a>(Type *userData)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#ac7521d0acb6823daa4578779b2ee8833">zero</a>(void *const ptr, const UnsignedLong numBytes)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_memory.html#a0d35343b0393b4ae99ac70d88de8925f">zero</a>(Type &amp;object)</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline, static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_memory.html#a0ffa9759ebbf103f11132a505b93bdc0">~Memory</a>()</td><td><a class="el" href="class_memory.html">Memory</a></td><td><code> [inline]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -93,7 +100,7 @@ This is the complete list of members for <a class="el" href="class_memory.html">
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

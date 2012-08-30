@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -67,7 +66,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#abac7a991ec089ad87a2bcda60e4fe2da">active</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#af0b5757b15154e42944ee122821a562b">Buffer</a> typedef</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a8f7ac6fea5afdb3f946ed133e34c19a4">BusBufferInternal</a>()</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a8f7607cd42f3299677e264e01469effb">BusBufferInternal</a>(BlockSize const &amp;bufferSizeToUse, BlockSize const &amp;writeBlockSizeToUse, SampleRate const &amp;sampleRateToUse)</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
@@ -75,33 +73,35 @@ This is the complete list of members for <a class="el" href="class_bus_buffer_in
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a7f457e2982419d556f5d5d4743e31651">BusType</a> typedef</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a195515fc95b95eef315cb8e87104ec8b">changed</a>(BlockSize::Sender const &amp;source)</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_receiver_internal.html#a449583d592991b940b42a2a6c59796eb">ReceiverInternal::changed</a>(SenderContainerBaseType const &amp;source)=0</td><td><a class="el" href="class_receiver_internal.html">ReceiverInternal&lt; SenderContainerBaseType &gt;</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a615a55df2d19e11151dfa76791e1d1ca">decrementRefCount</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a7926abda357aff5a8f40c9dc9873c6da">deleteIfOnlyMutualReferencesRemain</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a3eba77b47581c836520d1c32b2726ca9">destroy</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a7ba301343cc7433dab04868a57419aba">counter</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#acea9f749c0ab920d2833d4bb81f6eb9f">decrementRefCount</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a49b525e8ce88a9ce1cbd1acc879c8ce7">getBufferSize</a>() const </td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a184accc96de2fb55e5b054fada95e05b">getDuration</a>() const </td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a366e018b7cfbcb9bdee8c4251bba13dc">getEarliestValidTime</a>() const </td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#ad3196a7be11865d6b9f44d35e84a5712">getLabel</a>() const </td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a4b86e32ed9cccb6698047f7748506564">getLatestValidTime</a>() const </td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a5924160b4e8c220951aaeac4328f637d">getRefCount</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a02d93e0dab37f421808dc02dc348d7fd">getRefCount</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#addd54ae25b62c50b843079da4c108620">getSampleRate</a>() const </td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ab5e9a656c806bcc764321c90f3218ff6">getWeak</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#afce7e04754b78ffcb484c8b5108d799a">getWeak</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a64e2faf392b8190006f17b53c12375e3">getWriteBlockSize</a>() const </td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a9f2efbe27a1e527013492e2c731c6b67">growBufferSize</a>()</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ad9196fe14d4e4d9b1c28982738436544">incrementRefCount</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_receiver_internal.html#ac1910adc042a53336c1316a1303eafcc">Internal</a> typedef</td><td><a class="el" href="class_receiver_internal.html">ReceiverInternal&lt; SenderContainerBaseType &gt;</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ad9b847814db1a98672a6e1c3be4d3076">isActive</a>() const </td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#aef931304501097e3eec855f358daf2e7">operator delete</a>(void *ptr)</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a57e3da1ca0d5afe12fc44112c1ff1d74">operator new</a>(size_t size)</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a2a6cd5929fffe586119920e4e8ec272d">operator delete</a>(void *ptr)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a675fca1c9385594a8f85c5be86cbbf8a">operator delete[]</a>(void *ptr)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#ac6f698db7b73e460c3fee1f20525b6a1">operator new</a>(size_t size)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a272539263843cc0178dcfe406730ab67">operator new[]</a>(size_t size)</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#a52a540ab018929c9224336d44be9e31e">PlonkBase</a>()</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a04a89c66f478db20be52eea031e9d4b9">read</a>(TimeStamp &amp;readStartTime, const int numReadSamples, SampleType *destData)</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_receiver_internal.html#a6daed2be1730aca5952d4e98c1c35e5d">ReceiverInternal</a>()</td><td><a class="el" href="class_receiver_internal.html">ReceiverInternal&lt; SenderContainerBaseType &gt;</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a87c671981d16ad14ce2fbf12478dd394">refCount</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a5fc988bbbfd7afd7386fd70cdc5c3e1b">setLabel</a>(Text const &amp;newId)</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a279a99170aded5dad1d4cf939bbc8fbe">SmartPointer</a>(const bool allocateWeakPointer=true)</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a91e9d2ec0e1ed1d0d34344f4c8b63994">update</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [inline]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#af75157adb0bca4ac771b6e2f97b44951">weakPointer</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#ae9317dca421926e7b6140f0675ee70d9">WeakPointer</a> class</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [friend]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a9d43530959d2bb8831e77832fe9a7271">weakPointer</a></td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a4924453568d5231345f834a52e63c89e">write</a>(TimeStamp writeStartTime, const int numWriteSamples, const SampleType *sourceData)</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_bus_buffer_internal.html#a811e7b4e826dfcc545eb8dd0b85dc418">~BusBufferInternal</a>()</td><td><a class="el" href="class_bus_buffer_internal.html">BusBufferInternal&lt; SampleType &gt;</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_plonk_base.html#abec18f8588d85a52bbda28c350a9afaf">~PlonkBase</a>()</td><td><a class="el" href="class_plonk_base.html">PlonkBase</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_receiver_internal.html#a4552c469b77fbd7a5313516a6335668f">~ReceiverInternal</a>()</td><td><a class="el" href="class_receiver_internal.html">ReceiverInternal&lt; SenderContainerBaseType &gt;</a></td><td><code> [inline, virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_smart_pointer.html#a961ec2a7684ba32d0aaff86969c28099">~SmartPointer</a>()</td><td><a class="el" href="class_smart_pointer.html">SmartPointer</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
@@ -119,7 +119,7 @@ This is the complete list of members for <a class="el" href="class_bus_buffer_in
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

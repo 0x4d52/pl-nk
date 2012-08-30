@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -96,64 +95,6 @@ Defines</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Vector processing macros. </p>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="ga4406f528b4bb25b3246f79b5a42e76f6"></a><!-- doxytag: member="plank_Vectors.h::PLANK_SCALARBINARYOPVECTOR_DEFINE" ref="ga4406f528b4bb25b3246f79b5a42e76f6" args="(OP, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_SCALARBINARYOPVECTOR_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OP, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga2cfbefc59f835e416e8621af51b43b10">PLANK_SCALARBINARYOPVECTOR_NAME</a>(OP,TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, <span class="keyword">const</span> Plank##TYPECODE* b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_##OP##TYPECODE (a, b[i]); }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga2cfbefc59f835e416e8621af51b43b10"></a><!-- doxytag: member="plank_Vectors.h::PLANK_SCALARBINARYOPVECTOR_NAME" ref="ga2cfbefc59f835e416e8621af51b43b10" args="(OP, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_SCALARBINARYOPVECTOR_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OP, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_N1N)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga2294b83bc58f427fba51d5e5f8a2913d"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTOR_NAMEINTERNAL" ref="ga2294b83bc58f427fba51d5e5f8a2913d" args="(OP, TYPECODE, SUFFIX)" -->
 <div class="memitem">
 <div class="memproto">
@@ -187,29 +128,12 @@ Defines</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga1003d48aab416b139a234bcd9bba28c3"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTOR_OPS" ref="ga1003d48aab416b139a234bcd9bba28c3" args="(TYPECODE)" -->
+<a class="anchor" id="ga23ad596e9c890aac4ca1385b47e87732"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORUNARYOP_NAME" ref="ga23ad596e9c890aac4ca1385b47e87732" args="(OP, TYPECODE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PLANK_VECTOR_OPS</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga32eca98475e2a6c35a6a4c3a3acb48ea"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOP_DEFINE" ref="ga32eca98475e2a6c35a6a4c3a3acb48ea" args="(OP, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORBINARYOP_DEFINE</td>
+          <td class="memname">#define PLANK_VECTORUNARYOP_NAME</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">OP, </td>
@@ -223,435 +147,7 @@ Defines</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plank_vector_macros.html#gac669d16ef6a9f370d498382f65cc4c70">PLANK_VECTORBINARYOPVECTOR_DEFINE</a>(OP,TYPECODE)\
-    <a class="code" href="group___plank_vector_macros.html#ga1f46b802fc92825f98b13a552dbef80c">PLANK_VECTORBINARYOPSCALAR_DEFINE</a>(OP,TYPECODE)\
-    <a class="code" href="group___plank_vector_macros.html#ga4406f528b4bb25b3246f79b5a42e76f6">PLANK_SCALARBINARYOPVECTOR_DEFINE</a>(OP,TYPECODE)
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga1f46b802fc92825f98b13a552dbef80c"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPSCALAR_DEFINE" ref="ga1f46b802fc92825f98b13a552dbef80c" args="(OP, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORBINARYOPSCALAR_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OP, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gafdbb918c1b92c5a8bdfa843a3af9516f">PLANK_VECTORBINARYOPSCALAR_NAME</a>(OP,TYPECODE) (Plank##TYPECODE *result, <span class="keyword">const</span> Plank##TYPECODE* a, Plank##TYPECODE b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_##OP##TYPECODE (a[i], b); }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="gafdbb918c1b92c5a8bdfa843a3af9516f"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPSCALAR_NAME" ref="gafdbb918c1b92c5a8bdfa843a3af9516f" args="(OP, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORBINARYOPSCALAR_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OP, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_NN1)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gac669d16ef6a9f370d498382f65cc4c70"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPVECTOR_DEFINE" ref="gac669d16ef6a9f370d498382f65cc4c70" args="(OP, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORBINARYOPVECTOR_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OP, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga8918a3b271d7c04aadd73df6ece8e53e">PLANK_VECTORBINARYOPVECTOR_NAME</a>(OP,TYPECODE) (Plank##TYPECODE *result, <span class="keyword">const</span> Plank##TYPECODE* a, <span class="keyword">const</span> Plank##TYPECODE* b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_##OP##TYPECODE (a[i], b[i]); }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga8918a3b271d7c04aadd73df6ece8e53e"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPVECTOR_NAME" ref="ga8918a3b271d7c04aadd73df6ece8e53e" args="(OP, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORBINARYOPVECTOR_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OP, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_NNN)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga32b0f34701124f75f15a0f3a0f29309c"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCLEAR_DEFINE" ref="ga32b0f34701124f75f15a0f3a0f29309c" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORCLEAR_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga061a6a31c1bd40f7de9e24b69b3ccf77">PLANK_VECTORCLEAR_NAME</a>(TYPECODE) (Plank##TYPECODE *result, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = (Plank##TYPECODE)0; }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga061a6a31c1bd40f7de9e24b69b3ccf77"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCLEAR_NAME" ref="ga061a6a31c1bd40f7de9e24b69b3ccf77" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORCLEAR_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Clear,TYPECODE,_N)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga0d0c9c6b897c9b48e3ecdc765e5afa11"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERT_DEFINE" ref="ga0d0c9c6b897c9b48e3ecdc765e5afa11" args="(DSTTYPECODE, SRCTYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORCONVERT_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">DSTTYPECODE, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">SRCTYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga1f93264b731f30ecf938c74e3b5c59ab">PLANK_VECTORCONVERT_NAME</a>(DSTTYPECODE,SRCTYPECODE) (Plank##DSTTYPECODE *result, <span class="keyword">const</span> Plank##SRCTYPECODE* a, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = (Plank##DSTTYPECODE)a[i]; }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga1f93264b731f30ecf938c74e3b5c59ab"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERT_NAME" ref="ga1f93264b731f30ecf938c74e3b5c59ab" args="(DSTTYPECODE, SRCTYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORCONVERT_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">DSTTYPECODE, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">SRCTYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Convert,SRCTYPECODE##2##DSTTYPECODE,_NN)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gade11f0765ae8af2defa3b31e81be5b5e"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTERS_DEFINE" ref="gade11f0765ae8af2defa3b31e81be5b5e" args="(DSTTYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORCONVERTERS_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">DSTTYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,F)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,D)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,C)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,I)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,S)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,L)
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga389d5f53d0b8f650812e65f49372bf3e"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORFILL_DEFINE" ref="ga389d5f53d0b8f650812e65f49372bf3e" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORFILL_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gabac7d14ca50018acde360c496ca4d071">PLANK_VECTORFILL_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE value, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = value; }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="gabac7d14ca50018acde360c496ca4d071"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORFILL_NAME" ref="gabac7d14ca50018acde360c496ca4d071" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORFILL_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Fill,TYPECODE,_N1)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaf63600bdea8a53611685a6830bab090d"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLINE_DEFINE" ref="gaf63600bdea8a53611685a6830bab090d" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORLINE_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gaca04f7f2a4d1721372317cfb27f96c92">PLANK_VECTORLINE_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-        <a class="code" href="group___plank_vector_macros.html#gaba7cecacebe95d31bdad7d315418d333">PLANK_VECTORRAMP_NAME</a>(TYPECODE) (result, a, (b - a) / (Plank##TYPECODE)(N - 1), N);\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="gaca04f7f2a4d1721372317cfb27f96c92"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLINE_NAME" ref="gaca04f7f2a4d1721372317cfb27f96c92" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORLINE_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Line,TYPECODE,_N11)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga4d995aa4fa14c8223593c8f51a0b1ceb"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLOOKUP_DEFINE" ref="ga4d995aa4fa14c8223593c8f51a0b1ceb" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORLOOKUP_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga81d5410ab8f2e8b4c6adb9dbc1884633">PLANK_VECTORLOOKUP_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE *table, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> n, Plank##TYPECODE *index, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <a class="code" href="plank___standard_header_8h.html#a6b4e6d92be5ba256114b2d8d507c2582">PLANK_UNUSED</a>(n); <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_Lookup##TYPECODE (table, index[i]); }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga81d5410ab8f2e8b4c6adb9dbc1884633"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLOOKUP_NAME" ref="ga81d5410ab8f2e8b4c6adb9dbc1884633" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORLOOKUP_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Lookup,TYPECODE,_NnN)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gadbee61f5f1f02a84e7b1f9858f6372fd"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORMULADD_DEFINE" ref="gadbee61f5f1f02a84e7b1f9858f6372fd" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORMULADD_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga924c6a1e68b27823f27e699bb8c7d7eb">PLANK_VECTORMULADD_NAME</a>(TYPECODE) (Plank##TYPECODE *io, <span class="keyword">const</span> Plank##TYPECODE* mul, <span class="keyword">const</span> Plank##TYPECODE* add, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { io[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (io[i], mul[i]), add[i]); }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga924c6a1e68b27823f27e699bb8c7d7eb"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORMULADD_NAME" ref="ga924c6a1e68b27823f27e699bb8c7d7eb" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORMULADD_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(MulAdd,TYPECODE,_NNN)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga3412479787609ced0f9e26e04e4a0261"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORRAMP_DEFINE" ref="ga3412479787609ced0f9e26e04e4a0261" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORRAMP_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">\
-    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gaba7cecacebe95d31bdad7d315418d333">PLANK_VECTORRAMP_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
-        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = a; a = a + b; }\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="gaba7cecacebe95d31bdad7d315418d333"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORRAMP_NAME" ref="gaba7cecacebe95d31bdad7d315418d333" args="(TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_VECTORRAMP_NAME</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE</td><td>)</td>
-          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Ramp,TYPECODE,_N11)</td>
+          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_NN)</td>
         </tr>
       </table>
 </div>
@@ -690,12 +186,12 @@ Defines</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ga23ad596e9c890aac4ca1385b47e87732"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORUNARYOP_NAME" ref="ga23ad596e9c890aac4ca1385b47e87732" args="(OP, TYPECODE)" -->
+<a class="anchor" id="ga8918a3b271d7c04aadd73df6ece8e53e"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPVECTOR_NAME" ref="ga8918a3b271d7c04aadd73df6ece8e53e" args="(OP, TYPECODE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PLANK_VECTORUNARYOP_NAME</td>
+          <td class="memname">#define PLANK_VECTORBINARYOPVECTOR_NAME</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">OP, </td>
@@ -709,7 +205,510 @@ Defines</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_NN)</td>
+          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_NNN)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gafdbb918c1b92c5a8bdfa843a3af9516f"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPSCALAR_NAME" ref="gafdbb918c1b92c5a8bdfa843a3af9516f" args="(OP, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORBINARYOPSCALAR_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_NN1)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga2cfbefc59f835e416e8621af51b43b10"></a><!-- doxytag: member="plank_Vectors.h::PLANK_SCALARBINARYOPVECTOR_NAME" ref="ga2cfbefc59f835e416e8621af51b43b10" args="(OP, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_SCALARBINARYOPVECTOR_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(OP,TYPECODE,_N1N)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gac669d16ef6a9f370d498382f65cc4c70"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPVECTOR_DEFINE" ref="gac669d16ef6a9f370d498382f65cc4c70" args="(OP, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORBINARYOPVECTOR_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga8918a3b271d7c04aadd73df6ece8e53e">PLANK_VECTORBINARYOPVECTOR_NAME</a>(OP,TYPECODE) (Plank##TYPECODE *result, <span class="keyword">const</span> Plank##TYPECODE* a, <span class="keyword">const</span> Plank##TYPECODE* b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_##OP##TYPECODE (a[i], b[i]); }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga1f46b802fc92825f98b13a552dbef80c"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOPSCALAR_DEFINE" ref="ga1f46b802fc92825f98b13a552dbef80c" args="(OP, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORBINARYOPSCALAR_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gafdbb918c1b92c5a8bdfa843a3af9516f">PLANK_VECTORBINARYOPSCALAR_NAME</a>(OP,TYPECODE) (Plank##TYPECODE *result, <span class="keyword">const</span> Plank##TYPECODE* a, Plank##TYPECODE b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_##OP##TYPECODE (a[i], b); }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga4406f528b4bb25b3246f79b5a42e76f6"></a><!-- doxytag: member="plank_Vectors.h::PLANK_SCALARBINARYOPVECTOR_DEFINE" ref="ga4406f528b4bb25b3246f79b5a42e76f6" args="(OP, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_SCALARBINARYOPVECTOR_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga2cfbefc59f835e416e8621af51b43b10">PLANK_SCALARBINARYOPVECTOR_NAME</a>(OP,TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, <span class="keyword">const</span> Plank##TYPECODE* b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_##OP##TYPECODE (a, b[i]); }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga32eca98475e2a6c35a6a4c3a3acb48ea"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORBINARYOP_DEFINE" ref="ga32eca98475e2a6c35a6a4c3a3acb48ea" args="(OP, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORBINARYOP_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OP, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plank_vector_macros.html#gac669d16ef6a9f370d498382f65cc4c70">PLANK_VECTORBINARYOPVECTOR_DEFINE</a>(OP,TYPECODE)\
+    <a class="code" href="group___plank_vector_macros.html#ga1f46b802fc92825f98b13a552dbef80c">PLANK_VECTORBINARYOPSCALAR_DEFINE</a>(OP,TYPECODE)\
+    <a class="code" href="group___plank_vector_macros.html#ga4406f528b4bb25b3246f79b5a42e76f6">PLANK_SCALARBINARYOPVECTOR_DEFINE</a>(OP,TYPECODE)
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga924c6a1e68b27823f27e699bb8c7d7eb"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORMULADD_NAME" ref="ga924c6a1e68b27823f27e699bb8c7d7eb" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORMULADD_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(MulAdd,TYPECODE,_NNN)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gadbee61f5f1f02a84e7b1f9858f6372fd"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORMULADD_DEFINE" ref="gadbee61f5f1f02a84e7b1f9858f6372fd" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORMULADD_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga924c6a1e68b27823f27e699bb8c7d7eb">PLANK_VECTORMULADD_NAME</a>(TYPECODE) (Plank##TYPECODE *io, <span class="keyword">const</span> Plank##TYPECODE* mul, <span class="keyword">const</span> Plank##TYPECODE* add, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { io[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (io[i], mul[i]), add[i]); }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="gabac7d14ca50018acde360c496ca4d071"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORFILL_NAME" ref="gabac7d14ca50018acde360c496ca4d071" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORFILL_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Fill,TYPECODE,_N1)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga389d5f53d0b8f650812e65f49372bf3e"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORFILL_DEFINE" ref="ga389d5f53d0b8f650812e65f49372bf3e" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORFILL_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gabac7d14ca50018acde360c496ca4d071">PLANK_VECTORFILL_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE value, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = value; }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga061a6a31c1bd40f7de9e24b69b3ccf77"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCLEAR_NAME" ref="ga061a6a31c1bd40f7de9e24b69b3ccf77" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCLEAR_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Clear,TYPECODE,_N)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga32b0f34701124f75f15a0f3a0f29309c"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCLEAR_DEFINE" ref="ga32b0f34701124f75f15a0f3a0f29309c" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCLEAR_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga061a6a31c1bd40f7de9e24b69b3ccf77">PLANK_VECTORCLEAR_NAME</a>(TYPECODE) (Plank##TYPECODE *result, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+                <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = (Plank##TYPECODE)0; }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="gaba7cecacebe95d31bdad7d315418d333"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORRAMP_NAME" ref="gaba7cecacebe95d31bdad7d315418d333" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORRAMP_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Ramp,TYPECODE,_N11)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga3412479787609ced0f9e26e04e4a0261"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORRAMP_DEFINE" ref="ga3412479787609ced0f9e26e04e4a0261" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORRAMP_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gaba7cecacebe95d31bdad7d315418d333">PLANK_VECTORRAMP_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = a; a = a + b; }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="gaca04f7f2a4d1721372317cfb27f96c92"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLINE_NAME" ref="gaca04f7f2a4d1721372317cfb27f96c92" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORLINE_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Line,TYPECODE,_N11)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gaf63600bdea8a53611685a6830bab090d"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLINE_DEFINE" ref="gaf63600bdea8a53611685a6830bab090d" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORLINE_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gaca04f7f2a4d1721372317cfb27f96c92">PLANK_VECTORLINE_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE a, Plank##TYPECODE b, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+        <a class="code" href="group___plank_vector_macros.html#gaba7cecacebe95d31bdad7d315418d333">PLANK_VECTORRAMP_NAME</a>(TYPECODE) (result, a, (b - a) / (Plank##TYPECODE)(N - 1), N);\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga81d5410ab8f2e8b4c6adb9dbc1884633"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLOOKUP_NAME" ref="ga81d5410ab8f2e8b4c6adb9dbc1884633" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORLOOKUP_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Lookup,TYPECODE,_NnN)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga4d995aa4fa14c8223593c8f51a0b1ceb"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORLOOKUP_DEFINE" ref="ga4d995aa4fa14c8223593c8f51a0b1ceb" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORLOOKUP_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga81d5410ab8f2e8b4c6adb9dbc1884633">PLANK_VECTORLOOKUP_NAME</a>(TYPECODE) (Plank##TYPECODE *result, Plank##TYPECODE *table, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> n, Plank##TYPECODE *index, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <a class="code" href="plank___standard_header_8h.html#a6b4e6d92be5ba256114b2d8d507c2582">PLANK_UNUSED</a>(n); <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = pl_Lookup##TYPECODE (table, index[i]); }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga1f93264b731f30ecf938c74e3b5c59ab"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERT_NAME" ref="ga1f93264b731f30ecf938c74e3b5c59ab" args="(DSTTYPECODE, SRCTYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCONVERT_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">DSTTYPECODE, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SRCTYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Convert,SRCTYPECODE##2##DSTTYPECODE,_NN)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga0d0c9c6b897c9b48e3ecdc765e5afa11"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERT_DEFINE" ref="ga0d0c9c6b897c9b48e3ecdc765e5afa11" args="(DSTTYPECODE, SRCTYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCONVERT_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">DSTTYPECODE, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SRCTYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#ga1f93264b731f30ecf938c74e3b5c59ab">PLANK_VECTORCONVERT_NAME</a>(DSTTYPECODE,SRCTYPECODE) (Plank##DSTTYPECODE *result, <span class="keyword">const</span> Plank##SRCTYPECODE* a, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = (Plank##DSTTYPECODE)a[i]; }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="gade11f0765ae8af2defa3b31e81be5b5e"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTERS_DEFINE" ref="gade11f0765ae8af2defa3b31e81be5b5e" args="(DSTTYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCONVERTERS_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">DSTTYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,F)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,D)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,C)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,I)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,S)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,L)
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga1003d48aab416b139a234bcd9bba28c3"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTOR_OPS" ref="ga1003d48aab416b139a234bcd9bba28c3" args="(TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTOR_OPS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE</td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -732,7 +731,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

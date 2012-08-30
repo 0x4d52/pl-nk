@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,17 +71,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="ProcessInfo" --><!-- doxytag: inherits="SenderContainer&lt; ProcessInfoInternal &gt;" -->
 <p>Holds information about the Unit graph.  
  <a href="class_process_info.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___process_info_8h_source.html">plonk_ProcessInfo.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ProcessInfo:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_process_info.png" usemap="#ProcessInfo_map" alt=""/>
   <map id="ProcessInfo_map" name="ProcessInfo_map">
-<area href="class_sender_container.html" alt="SenderContainer&lt; ProcessInfoInternal &gt;" shape="rect" coords="0,112,300,136"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ProcessInfoInternal &gt;" shape="rect" coords="0,56,300,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ProcessInfoInternal &gt;" shape="rect" coords="0,0,300,24"/>
+<area href="class_sender_container.html" alt="SenderContainer&lt; ProcessInfoInternal &gt;" shape="rect" coords="0,168,300,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ProcessInfoInternal &gt;" shape="rect" coords="0,112,300,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ProcessInfoInternal &gt;" shape="rect" coords="0,56,300,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,300,24"/>
 </map>
  </div></div>
 
@@ -110,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_process_info.html#a890ded655233c6a67a5c9da78a837b33">setShouldDelete</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_process_info.html#a6bcaf7841c05c7ce82ebc1e02c4bda1e">resetShouldDelete</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_process_info.html#a49f2c56b036c5b3e18a9d47b21669b0f">getShouldDelete</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_process_info.html">ProcessInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_process_info.html#a8825c685800fe66da3426cbcd7c68836">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_process_info.html">ProcessInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_process_info.html#aa4f1abf334000f7fed0285d63d5dac18">operator-&gt;</a> () const   throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Holds information about the Unit graph. </p>
@@ -117,21 +117,6 @@ Public Member Functions</h2></td></tr>
 <p>The "time stamp" is incremented after each block to ensure that it uniquely identifies the start sample of each block at all block sizes in the graph. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>, <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a>, <a class="el" href="class_channel_base.html" title="A single output signal.">ChannelBase</a> </dd></dl>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a31c474e6ae7fc584bb99d2fe9310f712"></a><!-- doxytag: member="ProcessInfo::Base" ref="a31c474e6ae7fc584bb99d2fe9310f712" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_sender_container.html">SenderContainer</a>&lt;<a class="el" href="class_process_info_internal.html">Internal</a>&gt; <a class="el" href="class_sender_container.html">ProcessInfo::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_sender_container.html#a798aa6cb8d4c28e1306053b440ed49c2">SenderContainer&lt; ProcessInfoInternal &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a2b954e92af1f1a2a3244124b482d3f17"></a><!-- doxytag: member="ProcessInfo::Internal" ref="a2b954e92af1f1a2a3244124b482d3f17" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -144,6 +129,21 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_sender_container.html#a83124562a4c0a8594dfede23e271fbf1">SenderContainer&lt; ProcessInfoInternal &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a31c474e6ae7fc584bb99d2fe9310f712"></a><!-- doxytag: member="ProcessInfo::Base" ref="a31c474e6ae7fc584bb99d2fe9310f712" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_sender_container.html">SenderContainer</a>&lt;<a class="el" href="class_process_info_internal.html">Internal</a>&gt; <a class="el" href="class_sender_container.html">ProcessInfo::Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_sender_container.html#a798aa6cb8d4c28e1306053b440ed49c2">SenderContainer&lt; ProcessInfoInternal &gt;</a>.</p>
 
 </div>
 </div>
@@ -249,22 +249,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a49f2c56b036c5b3e18a9d47b21669b0f"></a><!-- doxytag: member="ProcessInfo::getShouldDelete" ref="a49f2c56b036c5b3e18a9d47b21669b0f" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ProcessInfo::getShouldDelete </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="adc09432bb787204aba36f4a971bd7526"></a><!-- doxytag: member="ProcessInfo::getTimeStamp" ref="adc09432bb787204aba36f4a971bd7526" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -283,6 +267,26 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a4c77916d8b6321081f6067d8ee6149a3"></a><!-- doxytag: member="ProcessInfo::setTimeStamp" ref="a4c77916d8b6321081f6067d8ee6149a3" args="(const TimeStamp newSampleNumber)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProcessInfo::setTimeStamp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_time_stamp.html">TimeStamp</a>&#160;</td>
+          <td class="paramname"><em>newSampleNumber</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the current time stamp. </p>
+<p>Use with caution. </p>
+
+</div>
+</div>
 <a class="anchor" id="a940c6b2fdbe97f27467f1f0c35318b7f"></a><!-- doxytag: member="ProcessInfo::offsetTimeStamp" ref="a940c6b2fdbe97f27467f1f0c35318b7f" args="(const double offset)" -->
 <div class="memitem">
 <div class="memproto">
@@ -292,22 +296,6 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>offset</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6bcaf7841c05c7ce82ebc1e02c4bda1e"></a><!-- doxytag: member="ProcessInfo::resetShouldDelete" ref="a6bcaf7841c05c7ce82ebc1e02c4bda1e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ProcessInfo::resetShouldDelete </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -332,23 +320,71 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4c77916d8b6321081f6067d8ee6149a3"></a><!-- doxytag: member="ProcessInfo::setTimeStamp" ref="a4c77916d8b6321081f6067d8ee6149a3" args="(const TimeStamp newSampleNumber)" -->
+<a class="anchor" id="a6bcaf7841c05c7ce82ebc1e02c4bda1e"></a><!-- doxytag: member="ProcessInfo::resetShouldDelete" ref="a6bcaf7841c05c7ce82ebc1e02c4bda1e" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ProcessInfo::setTimeStamp </td>
+          <td class="memname">void ProcessInfo::resetShouldDelete </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_time_stamp.html">TimeStamp</a>&#160;</td>
-          <td class="paramname"><em>newSampleNumber</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Sets the current time stamp. </p>
-<p>Use with caution. </p>
+</div>
+</div>
+<a class="anchor" id="a49f2c56b036c5b3e18a9d47b21669b0f"></a><!-- doxytag: member="ProcessInfo::getShouldDelete" ref="a49f2c56b036c5b3e18a9d47b21669b0f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ProcessInfo::getShouldDelete </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8825c685800fe66da3426cbcd7c68836"></a><!-- doxytag: member="ProcessInfo::operator&#45;&gt;" ref="a8825c685800fe66da3426cbcd7c68836" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_process_info.html">ProcessInfo</a>* ProcessInfo::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; ProcessInfoInternal &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa4f1abf334000f7fed0285d63d5dac18"></a><!-- doxytag: member="ProcessInfo::operator&#45;&gt;" ref="aa4f1abf334000f7fed0285d63d5dac18" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_process_info.html">ProcessInfo</a>* ProcessInfo::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; ProcessInfoInternal &gt;</a>.</p>
 
 </div>
 </div>
@@ -371,7 +407,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

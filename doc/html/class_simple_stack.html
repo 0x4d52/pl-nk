@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,16 +69,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SimpleStack&lt; ValueType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="SimpleStack" --><!-- doxytag: inherits="SmartPointerContainer&lt; SimpleStackInternal&lt; ValueType &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___simple_stack_8h_source.html">plonk_SimpleStack.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="SimpleStack" --><!-- doxytag: inherits="SmartPointerContainer&lt; SimpleStackInternal&lt; ValueType &gt; &gt;" --><div class="dynheader">
 Inheritance diagram for SimpleStack&lt; ValueType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_simple_stack.png" usemap="#SimpleStack&lt; ValueType &gt;_map" alt=""/>
   <map id="SimpleStack&lt; ValueType &gt;_map" name="SimpleStack&lt; ValueType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; SimpleStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,56,386,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,0,386,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; SimpleStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,112,386,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,56,386,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,386,24"/>
 </map>
  </div></div>
 
@@ -104,6 +102,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#a6c9e14d2d4bb9520380b13967cc6ee70"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_stack.html#a13ced8a22441dc7efc54775330698179">push</a> (ValueType const &amp;value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_stack.html#ab338d020f7269d46bb09ec8b10f9b0ed">pop</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_stack.html">SimpleStack</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_stack.html#a3edcf86b0155dafbec3420dded091ca0">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_simple_stack.html">SimpleStack</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_stack.html#a9eb467c0908a44fee4d201b877b25c47">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_simple_stack.html">SimpleStack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_stack.html#a3bf9a268c3e35c1a8a4e163720be5971">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -113,21 +113,6 @@ Static Public Member Functions</h2></td></tr>
  class SimpleStack&lt; ValueType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a2beea3122cfaceb3972b20c0b59f48bb"></a><!-- doxytag: member="SimpleStack::Base" ref="a2beea3122cfaceb3972b20c0b59f48bb" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_simple_stack_internal.html">Internal</a>&gt; <a class="el" href="class_simple_stack.html">SimpleStack</a>&lt; ValueType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a223a843b131133efe588791f5bdd0ee6"></a><!-- doxytag: member="SimpleStack::Internal" ref="a223a843b131133efe588791f5bdd0ee6" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +126,20 @@ template&lt;class ValueType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a2beea3122cfaceb3972b20c0b59f48bb"></a><!-- doxytag: member="SimpleStack::Base" ref="a2beea3122cfaceb3972b20c0b59f48bb" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_simple_stack_internal.html">Internal</a>&gt; <a class="el" href="class_simple_stack.html">SimpleStack</a>&lt; ValueType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -283,6 +281,25 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a13ced8a22441dc7efc54775330698179"></a><!-- doxytag: member="SimpleStack::push" ref="a13ced8a22441dc7efc54775330698179" args="(ValueType const &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_simple_stack.html">SimpleStack</a>&lt; ValueType &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ab338d020f7269d46bb09ec8b10f9b0ed"></a><!-- doxytag: member="SimpleStack::pop" ref="ab338d020f7269d46bb09ec8b10f9b0ed" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -301,22 +318,43 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a13ced8a22441dc7efc54775330698179"></a><!-- doxytag: member="SimpleStack::push" ref="a13ced8a22441dc7efc54775330698179" args="(ValueType const &amp;value)" -->
+<a class="anchor" id="a3edcf86b0155dafbec3420dded091ca0"></a><!-- doxytag: member="SimpleStack::operator&#45;&gt;" ref="a3edcf86b0155dafbec3420dded091ca0" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ValueType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_simple_stack.html">SimpleStack</a>&lt; ValueType &gt;::push </td>
+          <td class="memname"><a class="el" href="class_simple_stack.html">SimpleStack</a>* <a class="el" href="class_simple_stack.html">SimpleStack</a>&lt; ValueType &gt;::operator-&gt; </td>
           <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9eb467c0908a44fee4d201b877b25c47"></a><!-- doxytag: member="SimpleStack::operator&#45;&gt;" ref="a9eb467c0908a44fee4d201b877b25c47" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_simple_stack.html">SimpleStack</a>* <a class="el" href="class_simple_stack.html">SimpleStack</a>&lt; ValueType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; SimpleStackInternal&lt; ValueType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -338,7 +376,7 @@ template&lt;class ValueType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

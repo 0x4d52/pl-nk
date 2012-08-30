@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -76,8 +75,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ffft::OscSinCos" -->
-<p><code>#include &lt;<a class="el" href="_osc_sin_cos_8h_source.html">OscSinCos.h</a>&gt;</code></p>
-
 <p><a href="classffft_1_1_osc_sin_cos-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -131,16 +128,17 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a1be4a9ec10517ae2615d2925c05d7d29"></a><!-- doxytag: member="ffft::OscSinCos::clear_buffers" ref="a1be4a9ec10517ae2615d2925c05d7d29" args="()" -->
+<a class="anchor" id="ad41139a76b16a5af136d1e730a9143dc"></a><!-- doxytag: member="ffft::OscSinCos::set_step" ref="ad41139a76b16a5af136d1e730a9143dc" args="(double angle_rad)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classffft_1_1_osc_sin_cos.html">ffft::OscSinCos</a>&lt; T &gt;::clear_buffers </td>
+          <td class="memname">void <a class="el" href="classffft_1_1_osc_sin_cos.html">ffft::OscSinCos</a>&lt; T &gt;::set_step </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>angle_rad</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -185,25 +183,6 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad41139a76b16a5af136d1e730a9143dc"></a><!-- doxytag: member="ffft::OscSinCos::set_step" ref="ad41139a76b16a5af136d1e730a9143dc" args="(double angle_rad)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classffft_1_1_osc_sin_cos.html">ffft::OscSinCos</a>&lt; T &gt;::set_step </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>angle_rad</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a442975ce6388271ea78998c080364e08"></a><!-- doxytag: member="ffft::OscSinCos::step" ref="a442975ce6388271ea78998c080364e08" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -212,6 +191,24 @@ template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void <a class="el" href="classffft_1_1_osc_sin_cos.html">ffft::OscSinCos</a>&lt; T &gt;::step </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1be4a9ec10517ae2615d2925c05d7d29"></a><!-- doxytag: member="ffft::OscSinCos::clear_buffers" ref="a1be4a9ec10517ae2615d2925c05d7d29" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classffft_1_1_osc_sin_cos.html">ffft::OscSinCos</a>&lt; T &gt;::clear_buffers </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -241,7 +238,7 @@ template&lt;class T &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

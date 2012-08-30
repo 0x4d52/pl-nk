@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -125,63 +124,6 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gaa561452eee42c9d3516bd5f7f30e3099"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_AddItem" ref="gaa561452eee42c9d3516bd5f7f30e3099" args="(PlankDynamicArrayRef p, const PlankP item)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_AddItem </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Add an item to the array. </p>
-<p>This copies the bytes from one memory location to the array data based on the item size set during initialisation. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-    <tr><td class="paramname">item</td><td>The item to add to the array. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="gabc45b142d8e106c0a4727df63b291c14"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Create" ref="gabc45b142d8e106c0a4727df63b291c14" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a> pl_DynamicArray_Create </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a <em>Plank DynamicArray</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank DynamicArray</em> object as an opaque reference or PLANK_NULL. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="gacd75d8697297ad44f47d69594f6976dd"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_CreateAndInit" ref="gacd75d8697297ad44f47d69594f6976dd" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -201,193 +143,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga6bee60c8f55eb626e187331fbec4aa2a"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_DeInit" ref="ga6bee60c8f55eb626e187331fbec4aa2a" args="(PlankDynamicArrayRef p)" -->
+<a class="anchor" id="gabc45b142d8e106c0a4727df63b291c14"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Create" ref="gabc45b142d8e106c0a4727df63b291c14" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_DeInit </td>
+          <td class="memname"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a> pl_DynamicArray_Create </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Denitialise the array. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga63ed4ec36b9f70f4ae773f561ce9a6a7"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Destroy" ref="ga63ed4ec36b9f70f4ae773f561ce9a6a7" args="(PlankDynamicArrayRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_Destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Destroy a <em>Plank DynamicArray</em> object. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga419418a3b9949d20152f7145c31ec537"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_EnsureSize" ref="ga419418a3b9949d20152f7145c31ec537" args="(PlankDynamicArrayRef p, const PlankLL capacity)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_EnsureSize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>capacity</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Ensures that the array is sufficient to hold a certain number of items. </p>
-<p>This will resize the array if necessary to hold the specified capacity. This only resizes the avauilable capacity <a class="el" href="group___plank_dynamic_array_class.html#ga9959b3818ed920725f60982f2e621313" title="Get the number of items stored in the array.">pl_DynamicArray_GetSize()</a> will still return the number of items used. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-    <tr><td class="paramname">capacity</td><td>The number of items the array should be set to hold. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="gaec671807f28d5b3d89c2717e88029741"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_GetItem" ref="gaec671807f28d5b3d89c2717e88029741" args="(PlankDynamicArrayRef p, const PlankLL index, PlankP item)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_GetItem </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Retrieves an item at the specified index. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-    <tr><td class="paramname">index</td><td>The desired index. This must be between 0 and one less that the current size. </td></tr>
-    <tr><td class="paramname">item</td><td>The destination to copy the specified item. This must point to memory of sufficient size to hold the item. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga9959b3818ed920725f60982f2e621313"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_GetSize" ref="ga9959b3818ed920725f60982f2e621313" args="(PlankDynamicArrayRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> pl_DynamicArray_GetSize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the number of items stored in the array. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga877d22e866939a3311db08fa78799ccf"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Grow" ref="ga877d22e866939a3311db08fa78799ccf" args="(PlankDynamicArrayRef p, const int amount)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_Grow </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>amount</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Inreases the array's capcity by a spefcified number of items. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-    <tr><td class="paramname">amount</td><td>The number of additional items the array should be set to hold. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+<p>Create a <em>Plank DynamicArray</em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank DynamicArray</em> object as an opaque reference or PLANK_NULL. </dd></dl>
 
 </div>
 </div>
@@ -495,44 +266,51 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga0f943c760ec60620c38aa3669e934a2e"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_InsertItem" ref="ga0f943c760ec60620c38aa3669e934a2e" args="(PlankDynamicArrayRef p, const PlankLL index, const PlankP item)" -->
+<a class="anchor" id="ga6bee60c8f55eb626e187331fbec4aa2a"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_DeInit" ref="ga6bee60c8f55eb626e187331fbec4aa2a" args="(PlankDynamicArrayRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_InsertItem </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_DeInit </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Inserts an item into the specified index. </p>
-<p>This copies the bytes from one memory location to the array data based on the item size set during initialisation. Items above the specified index will be moved one index higher. </p>
+<p>Denitialise the array. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-    <tr><td class="paramname">index</td><td>The desired index. This should be 0 or greater. If this is beyond the size of the array the item will be added to the end. </td></tr>
-    <tr><td class="paramname">item</td><td>The item to add to the array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga63ed4ec36b9f70f4ae773f561ce9a6a7"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Destroy" ref="ga63ed4ec36b9f70f4ae773f561ce9a6a7" args="(PlankDynamicArrayRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_Destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Destroy a <em>Plank DynamicArray</em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -569,12 +347,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga638b78468ffe31abf386279973441359"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Purge" ref="ga638b78468ffe31abf386279973441359" args="(PlankDynamicArrayRef p)" -->
+<a class="anchor" id="ga9959b3818ed920725f60982f2e621313"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_GetSize" ref="ga9959b3818ed920725f60982f2e621313" args="(PlankDynamicArrayRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_Purge </td>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> pl_DynamicArray_GetSize </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -584,24 +362,16 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Reduces the amount of memory the array uses to the minimum. </p>
-<p>This sets the allocated size to the number of items used.  During this operation the array may temporarily require more memory. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+<p>Get the number of items stored in the array. </p>
 
 </div>
 </div>
-<a class="anchor" id="gab9368552c890756c74a4d81004f917f3"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_RemoveItem" ref="gab9368552c890756c74a4d81004f917f3" args="(PlankDynamicArrayRef p, const PlankLL index)" -->
+<a class="anchor" id="gaa561452eee42c9d3516bd5f7f30e3099"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_AddItem" ref="gaa561452eee42c9d3516bd5f7f30e3099" args="(PlankDynamicArrayRef p, const PlankP item)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_RemoveItem </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_AddItem </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -609,8 +379,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -621,11 +391,12 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Removes an item from the specified index. </p>
+<p>Add an item to the array. </p>
+<p>This copies the bytes from one memory location to the array data based on the item size set during initialisation. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
-    <tr><td class="paramname">index</td><td>The desired index to remove. This must be between 0 and one less that the current size. </td></tr>
+    <tr><td class="paramname">item</td><td>The item to add to the array. </td></tr>
   </table>
   </dd>
 </dl>
@@ -678,6 +449,234 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga0f943c760ec60620c38aa3669e934a2e"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_InsertItem" ref="ga0f943c760ec60620c38aa3669e934a2e" args="(PlankDynamicArrayRef p, const PlankLL index, const PlankP item)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_InsertItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Inserts an item into the specified index. </p>
+<p>This copies the bytes from one memory location to the array data based on the item size set during initialisation. Items above the specified index will be moved one index higher. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
+    <tr><td class="paramname">index</td><td>The desired index. This should be 0 or greater. If this is beyond the size of the array the item will be added to the end. </td></tr>
+    <tr><td class="paramname">item</td><td>The item to add to the array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaec671807f28d5b3d89c2717e88029741"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_GetItem" ref="gaec671807f28d5b3d89c2717e88029741" args="(PlankDynamicArrayRef p, const PlankLL index, PlankP item)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_GetItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieves an item at the specified index. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
+    <tr><td class="paramname">index</td><td>The desired index. This must be between 0 and one less that the current size. </td></tr>
+    <tr><td class="paramname">item</td><td>The destination to copy the specified item. This must point to memory of sufficient size to hold the item. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gab9368552c890756c74a4d81004f917f3"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_RemoveItem" ref="gab9368552c890756c74a4d81004f917f3" args="(PlankDynamicArrayRef p, const PlankLL index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_RemoveItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Removes an item from the specified index. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
+    <tr><td class="paramname">index</td><td>The desired index to remove. This must be between 0 and one less that the current size. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga419418a3b9949d20152f7145c31ec537"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_EnsureSize" ref="ga419418a3b9949d20152f7145c31ec537" args="(PlankDynamicArrayRef p, const PlankLL capacity)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_EnsureSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>capacity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Ensures that the array is sufficient to hold a certain number of items. </p>
+<p>This will resize the array if necessary to hold the specified capacity. This only resizes the avauilable capacity <a class="el" href="group___plank_dynamic_array_class.html#ga9959b3818ed920725f60982f2e621313" title="Get the number of items stored in the array.">pl_DynamicArray_GetSize()</a> will still return the number of items used. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
+    <tr><td class="paramname">capacity</td><td>The number of items the array should be set to hold. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga877d22e866939a3311db08fa78799ccf"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Grow" ref="ga877d22e866939a3311db08fa78799ccf" args="(PlankDynamicArrayRef p, const int amount)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_Grow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>amount</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Inreases the array's capcity by a spefcified number of items. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
+    <tr><td class="paramname">amount</td><td>The number of additional items the array should be set to hold. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga638b78468ffe31abf386279973441359"></a><!-- doxytag: member="plank_DynamicArray.h::pl_DynamicArray_Purge" ref="ga638b78468ffe31abf386279973441359" args="(PlankDynamicArrayRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_DynamicArray_Purge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_dynamic_array_class.html#ga7ed3f04247baaec4f09394dee060950d">PlankDynamicArrayRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reduces the amount of memory the array uses to the minimum. </p>
+<p>This sets the allocated size to the number of items used.  During this operation the array may temporarily require more memory. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank DynamicArray</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -693,7 +692,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="PLAudioHost" -->
 <p>An Objective-C audio host for the iOS platform.  
  <a href="interface_p_l_audio_host.html#details">More...</a></p>
-
-<p><code>#import &lt;<a class="el" href="plonk___i_o_s_audio_host_8h_source.html">plonk_IOSAudioHost.h</a>&gt;</code></p>
 
 <p><a href="class_p_l_audio_host-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -162,19 +159,6 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a9573c9e1072aacdc982d3c2e4c64de06"></a><!-- doxytag: member="PLAudioHost::delegate" ref="a9573c9e1072aacdc982d3c2e4c64de06" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (id&lt;<a class="el" href="protocol_p_l_audio_host_delegate-p.html">PLAudioHostDelegate</a>&gt;) <a class="el" href="interface_p_l_audio_host.html#a9573c9e1072aacdc982d3c2e4c64de06">delegate</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a13b0c7fe05cb6ab73e9e895f24cd02cc"></a><!-- doxytag: member="PLAudioHost::peer" ref="a13b0c7fe05cb6ab73e9e895f24cd02cc" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -188,37 +172,20 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9573c9e1072aacdc982d3c2e4c64de06"></a><!-- doxytag: member="PLAudioHost::delegate" ref="a9573c9e1072aacdc982d3c2e4c64de06" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (id&lt;<a class="el" href="protocol_p_l_audio_host_delegate-p.html">PLAudioHostDelegate</a>&gt;) <a class="el" href="interface_p_l_audio_host.html#a9573c9e1072aacdc982d3c2e4c64de06">delegate</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Property Documentation</h2>
-<a class="anchor" id="a0d6e194b401bb33f632da21c37a0fa64"></a><!-- doxytag: member="PLAudioHost::category" ref="a0d6e194b401bb33f632da21c37a0fa64" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (UInt32) category<code> [read, write, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
-<a class="anchor" id="ac52aba0de2bc5fe5e917a27d3e146bdd"></a><!-- doxytag: member="PLAudioHost::cpuUsage" ref="ac52aba0de2bc5fe5e917a27d3e146bdd" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (double) cpuUsage<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The current CPU usage of the DSP loop. </p>
-
-</div>
-</div>
 <a class="anchor" id="a1f05ecdc163b39e2737c6a3b9c3c6d21"></a><!-- doxytag: member="PLAudioHost::delegate" ref="a1f05ecdc163b39e2737c6a3b9c3c6d21" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -249,6 +216,21 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ae1f9428528fa57ef31ad54ec4ead601e"></a><!-- doxytag: member="PLAudioHost::nativeHostName" ref="ae1f9428528fa57ef31ad54ec4ead601e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (NSString*) nativeHostName<code> [read, assign]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The native host name - currently always "RemoteIO". </p>
+
+</div>
+</div>
 <a class="anchor" id="a49667880f969d2d7a4d225f213e61d5f"></a><!-- doxytag: member="PLAudioHost::inputName" ref="a49667880f969d2d7a4d225f213e61d5f" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -261,6 +243,36 @@ Properties</h2></td></tr>
 <div class="memdoc">
 
 <p>The name of the input device. May be "Default Input" on the simulator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a801abb70ea4f0e485f3d6dab29e00133"></a><!-- doxytag: member="PLAudioHost::outputName" ref="a801abb70ea4f0e485f3d6dab29e00133" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (NSString*) outputName<code> [read, assign]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The name of the output device. May be "Default Output" on the simulator. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac52aba0de2bc5fe5e917a27d3e146bdd"></a><!-- doxytag: member="PLAudioHost::cpuUsage" ref="ac52aba0de2bc5fe5e917a27d3e146bdd" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (double) cpuUsage<code> [read, assign]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The current CPU usage of the DSP loop. </p>
 
 </div>
 </div>
@@ -279,33 +291,18 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad1f823296fe6ab0b28d983f75556a24c"></a><!-- doxytag: member="PLAudioHost::mode" ref="ad1f823296fe6ab0b28d983f75556a24c" args="" -->
+<a class="anchor" id="aca2f44cee58c26663034a25f869ec552"></a><!-- doxytag: member="PLAudioHost::outputUnit" ref="aca2f44cee58c26663034a25f869ec552" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">- (UInt32) mode<code> [read, write, assign]</code></td>
+          <td class="memname">- (PLUNIT) outputUnit<code> [read, assign]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message. </p>
-
-</div>
-</div>
-<a class="anchor" id="ae1f9428528fa57ef31ad54ec4ead601e"></a><!-- doxytag: member="PLAudioHost::nativeHostName" ref="ae1f9428528fa57ef31ad54ec4ead601e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) nativeHostName<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The native host name - currently always "RemoteIO". </p>
+<p>The output unit of the host. </p>
 
 </div>
 </div>
@@ -339,36 +336,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a801abb70ea4f0e485f3d6dab29e00133"></a><!-- doxytag: member="PLAudioHost::outputName" ref="a801abb70ea4f0e485f3d6dab29e00133" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (NSString*) outputName<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The name of the output device. May be "Default Output" on the simulator. </p>
-
-</div>
-</div>
-<a class="anchor" id="aca2f44cee58c26663034a25f869ec552"></a><!-- doxytag: member="PLAudioHost::outputUnit" ref="aca2f44cee58c26663034a25f869ec552" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (PLUNIT) outputUnit<code> [read, assign]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The output unit of the host. </p>
-
-</div>
-</div>
 <a class="anchor" id="ab5947e54205d567c6e3c90a28744f113"></a><!-- doxytag: member="PLAudioHost::preferredBlockSize" ref="ab5947e54205d567c6e3c90a28744f113" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -399,6 +366,36 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a0d6e194b401bb33f632da21c37a0fa64"></a><!-- doxytag: member="PLAudioHost::category" ref="a0d6e194b401bb33f632da21c37a0fa64" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (UInt32) category<code> [read, write, assign]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad1f823296fe6ab0b28d983f75556a24c"></a><!-- doxytag: member="PLAudioHost::mode" ref="ad1f823296fe6ab0b28d983f75556a24c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (UInt32) mode<code> [read, write, assign]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___i_o_s_audio_host_8h_source.html">plonk_IOSAudioHost.h</a></li>
 </ul>
@@ -417,7 +414,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:00 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

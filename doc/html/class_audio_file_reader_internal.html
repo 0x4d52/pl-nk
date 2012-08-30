@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -68,15 +67,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">AudioFileReaderInternal Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="AudioFileReaderInternal" --><!-- doxytag: inherits="SmartPointer" -->
-<p><code>#include &lt;<a class="el" href="plonk___audio_file_reader_8h_source.html">plonk_AudioFileReader.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="AudioFileReaderInternal" --><!-- doxytag: inherits="SmartPointer" --><div class="dynheader">
 Inheritance diagram for AudioFileReaderInternal:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_audio_file_reader_internal.png" usemap="#AudioFileReaderInternal_map" alt=""/>
   <map id="AudioFileReaderInternal_map" name="AudioFileReaderInternal_map">
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,149,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,149,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,149,24"/>
 </map>
  </div></div>
 
@@ -195,44 +193,12 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad7ff4644688cdb32ed6dcde99059a4aa"></a><!-- doxytag: member="AudioFileReaderInternal::getFramePosition" ref="ad7ff4644688cdb32ed6dcde99059a4aa" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int AudioFileReaderInternal::getFramePosition </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="aa606f14fd216447b5f79a6d304e575ea"></a><!-- doxytag: member="AudioFileReaderInternal::getNumChannels" ref="aa606f14fd216447b5f79a6d304e575ea" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int AudioFileReaderInternal::getNumChannels </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5419dd37a2aa79a27793637e501c13ea"></a><!-- doxytag: member="AudioFileReaderInternal::getNumFrames" ref="a5419dd37a2aa79a27793637e501c13ea" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int AudioFileReaderInternal::getNumFrames </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()</td>
@@ -259,28 +225,64 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7c8e502f67505235eb7db99dc4b90cce"></a><!-- doxytag: member="AudioFileReaderInternal::initSignal" ref="a7c8e502f67505235eb7db99dc4b90cce" args="(SignalBase&lt; SampleType &gt; &amp;signal, const int numFrames)" -->
+<a class="anchor" id="a5419dd37a2aa79a27793637e501c13ea"></a><!-- doxytag: member="AudioFileReaderInternal::getNumFrames" ref="a5419dd37a2aa79a27793637e501c13ea" args="() const " -->
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void AudioFileReaderInternal::initSignal </td>
+          <td class="memname">int AudioFileReaderInternal::getNumFrames </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;&#160;</td>
-          <td class="paramname"><em>signal</em>, </td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
         </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad7ff4644688cdb32ed6dcde99059a4aa"></a><!-- doxytag: member="AudioFileReaderInternal::getFramePosition" ref="ad7ff4644688cdb32ed6dcde99059a4aa" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
         <tr>
-          <td class="paramkey"></td>
-          <td></td>
+          <td class="memname">int AudioFileReaderInternal::getFramePosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acb5ffc05a2bed9d605bbf6f3713dbf19"></a><!-- doxytag: member="AudioFileReaderInternal::setFramePosition" ref="acb5ffc05a2bed9d605bbf6f3713dbf19" args="(const int position)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioFileReaderInternal::setFramePosition </td>
+          <td>(</td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>numFrames</em>&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td>  throw ()</td>
         </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af947c7141df270549b7bf585e472ae77"></a><!-- doxytag: member="AudioFileReaderInternal::resetFramePosition" ref="af947c7141df270549b7bf585e472ae77" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
         <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
+          <td class="memname">void AudioFileReaderInternal::resetFramePosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -323,6 +325,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a7c8e502f67505235eb7db99dc4b90cce"></a><!-- doxytag: member="AudioFileReaderInternal::initSignal" ref="a7c8e502f67505235eb7db99dc4b90cce" args="(SignalBase&lt; SampleType &gt; &amp;signal, const int numFrames)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioFileReaderInternal::initSignal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>signal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>numFrames</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a1a7f8a74adf25ececf27fa2beccd5a41"></a><!-- doxytag: member="AudioFileReaderInternal::readSignal" ref="a1a7f8a74adf25ececf27fa2beccd5a41" args="(SignalBase&lt; SampleType &gt; &amp;signal, const bool applyScaling)" -->
 <div class="memitem">
 <div class="memproto">
@@ -352,39 +383,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af947c7141df270549b7bf585e472ae77"></a><!-- doxytag: member="AudioFileReaderInternal::resetFramePosition" ref="af947c7141df270549b7bf585e472ae77" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AudioFileReaderInternal::resetFramePosition </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acb5ffc05a2bed9d605bbf6f3713dbf19"></a><!-- doxytag: member="AudioFileReaderInternal::setFramePosition" ref="acb5ffc05a2bed9d605bbf6f3713dbf19" args="(const int position)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AudioFileReaderInternal::setFramePosition </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="plonk___audio_file_reader_8h_source.html">plonk_AudioFileReader.h</a></li>
 <li><a class="el" href="plonk___audio_file_reader_8cpp.html">plonk_AudioFileReader.cpp</a></li>
@@ -404,7 +402,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

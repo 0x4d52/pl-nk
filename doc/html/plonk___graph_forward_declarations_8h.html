@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,13 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_3f1b4f3ea3075fcfdf842d116a9177d8.html">graph</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -74,12 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_GraphForwardDeclarations.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;../maths/plonk_InlineBinaryOps.h&quot;</code><br/>
-<code>#include &quot;../maths/plonk_InlineUnaryOps.h&quot;</code><br/>
-<code>#include &quot;../core/plonk_CoreForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_ContainerForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../containers/variables/plonk_VariableForwardDeclarations.h&quot;</code><br/>
-</div>
+
 <p><a href="plonk___graph_forward_declarations_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
@@ -176,6 +163,62 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
 &lt; PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#ad42b7ef94a430c02123e73edb158c868">Bus</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; <a class="el" href="class_bus_buffer.html">Bus</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#aef2b80505493bb316db34a8a3fc99adf">Busses</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a><br class="typebreak"/>
+&lt; float &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a66eb249d921517ae4a949653ce0562c2">FloatChannelVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a><br class="typebreak"/>
+&lt; double &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a9da1c15da6e059d781610916d8105fe7">DoubleChannelVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a><br class="typebreak"/>
+&lt; int &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a1215ff1c810ea68d2324537e8931e998">IntChannelVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a><br class="typebreak"/>
+&lt; short &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a350aa1b7fcc87c2b81bc4c5cfa9fa4c8">ShortChannelVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a><br class="typebreak"/>
+&lt; <a class="el" href="class_int24.html">Int24</a> &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a05d43b7d955678f4f9b38d81c207cef8">Int24ChannelVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a><br class="typebreak"/>
+&lt; Long &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a664306e6b9429e73817b737cac915f1e">LongChannelVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a><br class="typebreak"/>
+&lt; PLONK_TYPE_DEFAULT &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#aefb22d43067c1a6d165798558cc63771">ChannelVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a><br class="typebreak"/>
+&lt; float &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#ab80c265b7703d4899458ddaf5334243b">FloatUnitVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a><br class="typebreak"/>
+&lt; double &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a198824d2412a6f46437c788f234ddab5">DoubleUnitVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a><br class="typebreak"/>
+&lt; int &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#abde32b2a996f8c9af46753fd87322268">IntUnitVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a><br class="typebreak"/>
+&lt; short &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a60874ddbb3edf35920b1b3b40ffe66f2">ShortUnitVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a><br class="typebreak"/>
+&lt; <a class="el" href="class_int24.html">Int24</a> &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#aa702c28f4e4cdaf6bf025fddc92e8e2e">Int24UnitVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a><br class="typebreak"/>
+&lt; Long &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#ad2c8a01eb6bd713ba3d77e32e48323e4">LongUnitVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a><br class="typebreak"/>
+&lt; PLONK_TYPE_DEFAULT &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a339961f124401f672fc6a401bfc28fb8">UnitVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
+&lt; float &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#aa73b49c25841110ac793eadcbc9276ca">FloatBusVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
+&lt; double &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#aa2c72d48982093f87ab501958fb5e33c">DoubleBusVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
+&lt; int &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#ac83b16509f58e2cd3cdad8e5cd8d192f">IntBusVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
+&lt; short &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a0ca8ac8403615f3e5df4e93daffdeb95">ShortBusVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
+&lt; <a class="el" href="class_int24.html">Int24</a> &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a26f06f473578315d11cc615fabc0a251">Int24BusVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
+&lt; Long &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#adf03b787215c9f338969650e22869eb5">LongBusVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a><br class="typebreak"/>
+&lt; PLONK_TYPE_DEFAULT &gt; &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#ae0eb4ce2c4c70861fab0598f5911c649">BusVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">FloatBusses</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#ad1b1c19884407e77c03636f3ec5ae9dd">FloatBussesVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">DoubleBusses</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a41aff338f6991362d43d610073a5ec58">DoubleBussesVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">IntBusses</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a52524a6ba417e55be0d0ed994dcde375">IntBussesVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">ShortBusses</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a1fc4bfa356b36ef4f099fb39f52ce3dd">ShortBussesVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">Int24Busses</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a5d955fb4de50d7989640b449b0ebb44d">Int24BussesVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">LongBusses</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a1aa163c0cdb6ac12acc23653e5aa2a4a">LongBussesVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">Busses</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#afbe4b46c2bca6a87a5ddcd553adf692d">BussesVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">FloatUnits</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a5c94679f4dca69463ef306155ba25c4b">FloatUnitsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">DoubleUnits</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a9ccd73fc5594fe7cd9d0a58f099b3e65">DoubleUnitsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">IntUnits</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a05a4bc9a3a95a1adb88db166958660f1">IntUnitsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">ShortUnits</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a78ac7cd1a1b4317acea0f5739aba8800">ShortUnitsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">Int24Units</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a4e322ec561f6a3f8934a8a0487784ad2">Int24UnitsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">LongUnits</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#a1604776202ee4a38eb7b69ada1301486">LongUnitsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">Units</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___graph_forward_declarations_8h.html#ac274c83923b4d500617aaa31d7a04b4c">UnitsVariable</a></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="ac60d8a5a210368feb38db501008acbec"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::PLONK_BUSARRAYBASETYPE" ref="ac60d8a5a210368feb38db501008acbec" args="" -->
@@ -205,6 +248,786 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 </div>
 </div>
 <hr/><h2>Typedef Documentation</h2>
+<a class="anchor" id="ae4e68c6f6615ece6a95c89677e46d8ae"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IOInfos" ref="ae4e68c6f6615ece6a95c89677e46d8ae" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_i_o_info.html">IOInfo</a>&gt; <a class="el" href="class_object_array.html">IOInfos</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acce3dff6314457ed322db7102c054f2d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::UnitInfos" ref="acce3dff6314457ed322db7102c054f2d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_unit_info.html">UnitInfo</a>&gt; <a class="el" href="class_object_array.html">UnitInfos</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab90aca1016cbdd080ec83436cfcb3b3c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt2Float" ref="ab90aca1016cbdd080ec83436cfcb3b3c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,int&gt; <a class="el" href="class_type_unit.html">TypeInt2Float</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a784007fe788d833f83562e43b9a2eff7"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Int" ref="a784007fe788d833f83562e43b9a2eff7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;int,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Int</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a26961a849ad8ccf8b233947bc5d6584e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDouble2Float" ref="a26961a849ad8ccf8b233947bc5d6584e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,double&gt; <a class="el" href="class_type_unit.html">TypeDouble2Float</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a416df930555ea1551ffcafab6ae01d92"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Double" ref="a416df930555ea1551ffcafab6ae01d92" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;double,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Double</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0c3f2093dac1ab09a330100f1120a494"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeShort2Float" ref="a0c3f2093dac1ab09a330100f1120a494" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,short&gt; <a class="el" href="class_type_unit.html">TypeShort2Float</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6af9b7955fac46a0e2358c84e0bbdc49"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Short" ref="a6af9b7955fac46a0e2358c84e0bbdc49" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;short,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Short</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0537b9a3dcb7822cadd2b6ab69703b90"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt242Float" ref="a0537b9a3dcb7822cadd2b6ab69703b90" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_type_unit.html">TypeInt242Float</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8d187323dda25cd576946ee8d33fc89d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2In24" ref="a8d187323dda25cd576946ee8d33fc89d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;<a class="el" href="class_int24.html">Int24</a>,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2In24</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a545593f9938470ab8dcb5160a2155f01"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Default" ref="a545593f9938470ab8dcb5160a2155f01" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Default</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a88dd634b841135ca5d4508b67695fad9"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDouble2Default" ref="a88dd634b841135ca5d4508b67695fad9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,double&gt; <a class="el" href="class_type_unit.html">TypeDouble2Default</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5a3b1052ce30b1d6a824fae8ed9e70f0"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt2Default" ref="a5a3b1052ce30b1d6a824fae8ed9e70f0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,int&gt; <a class="el" href="class_type_unit.html">TypeInt2Default</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1c42734a622ad304b494811be9e73d7e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeShort2Default" ref="a1c42734a622ad304b494811be9e73d7e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,short&gt; <a class="el" href="class_type_unit.html">TypeShort2Default</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac2556a130bd247fa660b61201016cd58"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt242Default" ref="ac2556a130bd247fa660b61201016cd58" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_type_unit.html">TypeInt242Default</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a96af21cab93020f19c5861518e68ae5d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Float" ref="a96af21cab93020f19c5861518e68ae5d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Float</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a72b3eb95373411e2031515a3d3b95ca9"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Double" ref="a72b3eb95373411e2031515a3d3b95ca9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;double,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Double</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7efd2d5c10253a3c5da3d778b8649d33"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Int" ref="a7efd2d5c10253a3c5da3d778b8649d33" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;int,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Int</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5cd5ec0bffa7cc499970d683cc3f0b98"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Short" ref="a5cd5ec0bffa7cc499970d683cc3f0b98" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;short,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Short</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a15b40ba54fa6ec01a3ade9504b52d75c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Int24" ref="a15b40ba54fa6ec01a3ade9504b52d75c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;<a class="el" href="class_int24.html">Int24</a>,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Int24</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad7296513c69f65a517e3d0569e005044"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatChannel" ref="ad7296513c69f65a517e3d0569e005044" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;float&gt; <a class="el" href="class_channel_base.html">FloatChannel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac8b259376dec69e2fd8689f12d218bd5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleChannel" ref="ac8b259376dec69e2fd8689f12d218bd5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;double&gt; <a class="el" href="class_channel_base.html">DoubleChannel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab0182fb9c6c02db3e55fbb43b1d74044"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortChannel" ref="ab0182fb9c6c02db3e55fbb43b1d74044" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;short&gt; <a class="el" href="class_channel_base.html">ShortChannel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a40ef85f2bee4bdd9c17ad7195a5f8242"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntChannel" ref="a40ef85f2bee4bdd9c17ad7195a5f8242" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;int&gt; <a class="el" href="class_channel_base.html">IntChannel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2f6e5ce388c0a680255fbcfa89850b36"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Channel" ref="a2f6e5ce388c0a680255fbcfa89850b36" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_channel_base.html">Int24Channel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a41a6c97f130e4a635e4faee5aefa09d7"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongChannel" ref="a41a6c97f130e4a635e4faee5aefa09d7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;Long&gt; <a class="el" href="class_channel_base.html">LongChannel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ade1d64b4440a208a1c15f84caa6b009d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnit" ref="ade1d64b4440a208a1c15f84caa6b009d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;float&gt; <a class="el" href="class_unit_base.html">FloatUnit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a12cd09ff68adf074aae2b6280eb77737"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnit" ref="a12cd09ff68adf074aae2b6280eb77737" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;double&gt; <a class="el" href="class_unit_base.html">DoubleUnit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a398355d72df1e14ae410a510027c201e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnit" ref="a398355d72df1e14ae410a510027c201e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;short&gt; <a class="el" href="class_unit_base.html">ShortUnit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6b80dcddcecf8c3ea1facc9b7dd84d6d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnit" ref="a6b80dcddcecf8c3ea1facc9b7dd84d6d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;int&gt; <a class="el" href="class_unit_base.html">IntUnit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1f3365e1f9c9b69aa1d95ec4596f4b4d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Unit" ref="a1f3365e1f9c9b69aa1d95ec4596f4b4d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_unit_base.html">Int24Unit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab10edfd641412d4758da4917941dc857"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnit" ref="ab10edfd641412d4758da4917941dc857" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;Long&gt; <a class="el" href="class_unit_base.html">LongUnit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aece092a847bff319e93b3e88b817b561"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatBus" ref="aece092a847bff319e93b3e88b817b561" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;float&gt; <a class="el" href="class_bus_buffer.html">FloatBus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7fe165989fa9cc7bd2b47bf9a017ce47"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleBus" ref="a7fe165989fa9cc7bd2b47bf9a017ce47" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;double&gt; <a class="el" href="class_bus_buffer.html">DoubleBus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac839377bfe91831ebcbd915617ae759e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntBus" ref="ac839377bfe91831ebcbd915617ae759e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;int&gt; <a class="el" href="class_bus_buffer.html">IntBus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af2d659eb9fce338c7db4e6e3c2af0ea7"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Bus" ref="af2d659eb9fce338c7db4e6e3c2af0ea7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_bus_buffer.html">Int24Bus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af5ab26faa0cac88a4b33c08129519203"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortBus" ref="af5ab26faa0cac88a4b33c08129519203" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;short&gt; <a class="el" href="class_bus_buffer.html">ShortBus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac48dbfaa6c62b0da501e2ed0689717a4"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongBus" ref="ac48dbfaa6c62b0da501e2ed0689717a4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;Long&gt; <a class="el" href="class_bus_buffer.html">LongBus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8e00f0091a5f4ef23a951d403d99c5fc"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatBusses" ref="a8e00f0091a5f4ef23a951d403d99c5fc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">FloatBus</a>&gt; <a class="el" href="class_numerical_array.html">FloatBusses</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af9527b6b4161b8db3622dc6416a1e8e1"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleBusses" ref="af9527b6b4161b8db3622dc6416a1e8e1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">DoubleBus</a>&gt; <a class="el" href="class_numerical_array.html">DoubleBusses</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3fa076eb52cb5170eb569f6792c3f8b5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntBusses" ref="a3fa076eb52cb5170eb569f6792c3f8b5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">IntBus</a>&gt; <a class="el" href="class_numerical_array.html">IntBusses</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a76e75fdf24c1c0987e38cecc8a647692"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Busses" ref="a76e75fdf24c1c0987e38cecc8a647692" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">Int24Bus</a>&gt; <a class="el" href="class_numerical_array.html">Int24Busses</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1e5f1bcff21e836800670e6e9b549fff"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortBusses" ref="a1e5f1bcff21e836800670e6e9b549fff" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">ShortBus</a>&gt; <a class="el" href="class_numerical_array.html">ShortBusses</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9a74fc807cf36e6fbe5e76e65a22bbe2"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongBusses" ref="a9a74fc807cf36e6fbe5e76e65a22bbe2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">LongBus</a>&gt; <a class="el" href="class_numerical_array.html">LongBusses</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af8f895f41f1f3b4e6995ef06417d80b4"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnitRaw" ref="af8f895f41f1f3b4e6995ef06417d80b4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">FloatUnit</a>&gt; <a class="el" href="class_numerical_array.html">FloatUnitRaw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51abddb0810082ac5e5841c364635082"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnitRaw" ref="a51abddb0810082ac5e5841c364635082" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">DoubleUnit</a>&gt; <a class="el" href="class_numerical_array.html">DoubleUnitRaw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa5794a320dd59cf925f2f0ebeee94fc8"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnitRaw" ref="aa5794a320dd59cf925f2f0ebeee94fc8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">ShortUnit</a>&gt; <a class="el" href="class_numerical_array.html">ShortUnitRaw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9af1f59d5d8c3b399559b231fb9a12ef"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnitRaw" ref="a9af1f59d5d8c3b399559b231fb9a12ef" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">IntUnit</a>&gt; <a class="el" href="class_numerical_array.html">IntUnitRaw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1dc8fcbc25474c9088b0628eed6b1e09"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24UnitRaw" ref="a1dc8fcbc25474c9088b0628eed6b1e09" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">Int24Unit</a>&gt; <a class="el" href="class_numerical_array.html">Int24UnitRaw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a78b70aca71cb0b33f73ecdbbc6090184"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnitRaw" ref="a78b70aca71cb0b33f73ecdbbc6090184" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">LongUnit</a>&gt; <a class="el" href="class_numerical_array.html">LongUnitRaw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acf7dcc70cd93be99b9ca98792b0880b1"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnits" ref="acf7dcc70cd93be99b9ca98792b0880b1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">FloatChannel</a>,<a class="el" href="class_unit_base.html">FloatUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">FloatUnits</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a532930c36e91df9ef2d981ec241e64f5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnits" ref="a532930c36e91df9ef2d981ec241e64f5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">DoubleChannel</a>,<a class="el" href="class_unit_base.html">DoubleUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">DoubleUnits</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad075443822fe7cac287f45e1fb84a00b"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnits" ref="ad075443822fe7cac287f45e1fb84a00b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">ShortChannel</a>,<a class="el" href="class_unit_base.html">ShortUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">ShortUnits</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2abb1828f5d354468130ab3daade6798"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnits" ref="a2abb1828f5d354468130ab3daade6798" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">IntChannel</a>,<a class="el" href="class_unit_base.html">IntUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">IntUnits</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aee50e8ce02fbdef8d27048d6ddda61e0"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Units" ref="aee50e8ce02fbdef8d27048d6ddda61e0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">Int24Channel</a>,<a class="el" href="class_unit_base.html">Int24Unit</a>&gt; <a class="el" href="class_numerical_array2_d.html">Int24Units</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1d588e0e9a6d82ca54fc6c85f3d8fcfa"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnits" ref="a1d588e0e9a6d82ca54fc6c85f3d8fcfa" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">LongChannel</a>,<a class="el" href="class_unit_base.html">LongUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">LongUnits</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7135a10b1cd0b53c3eb628e45108508c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Channel" ref="a7135a10b1cd0b53c3eb628e45108508c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_channel_base.html">Channel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af31f3e20e5e9212f42f71b0bd9477ebb"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Unit" ref="af31f3e20e5e9212f42f71b0bd9477ebb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_unit_base.html">Unit</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a70fdfbb1fa3059616caac9b488900c72"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::UnitRaw" ref="a70fdfbb1fa3059616caac9b488900c72" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">UnitBase</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_numerical_array.html">UnitRaw</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a20426efc8042f1c905c6506acccd0b8f"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Units" ref="a20426efc8042f1c905c6506acccd0b8f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">Channel</a>,<a class="el" href="class_unit_base.html">Unit</a>&gt; <a class="el" href="class_numerical_array2_d.html">Units</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a20601b9514230cd4f092717b83c5b30b"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Buffer" ref="a20601b9514230cd4f092717b83c5b30b" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -257,12 +1080,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a7135a10b1cd0b53c3eb628e45108508c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Channel" ref="a7135a10b1cd0b53c3eb628e45108508c" args="" -->
+<a class="anchor" id="a66eb249d921517ae4a949653ce0562c2"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatChannelVariable" ref="a66eb249d921517ae4a949653ce0562c2" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_channel_base.html">Channel</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;float&gt;&amp; &gt; <a class="el" href="class_variable.html">FloatChannelVariable</a></td>
         </tr>
       </table>
 </div>
@@ -270,12 +1093,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a7fe165989fa9cc7bd2b47bf9a017ce47"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleBus" ref="a7fe165989fa9cc7bd2b47bf9a017ce47" args="" -->
+<a class="anchor" id="a9da1c15da6e059d781610916d8105fe7"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleChannelVariable" ref="a9da1c15da6e059d781610916d8105fe7" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;double&gt; <a class="el" href="class_bus_buffer.html">DoubleBus</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;double&gt;&amp; &gt; <a class="el" href="class_variable.html">DoubleChannelVariable</a></td>
         </tr>
       </table>
 </div>
@@ -283,12 +1106,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="af9527b6b4161b8db3622dc6416a1e8e1"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleBusses" ref="af9527b6b4161b8db3622dc6416a1e8e1" args="" -->
+<a class="anchor" id="a1215ff1c810ea68d2324537e8931e998"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntChannelVariable" ref="a1215ff1c810ea68d2324537e8931e998" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">DoubleBus</a>&gt; <a class="el" href="class_numerical_array.html">DoubleBusses</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;int&gt;&amp; &gt; <a class="el" href="class_variable.html">IntChannelVariable</a></td>
         </tr>
       </table>
 </div>
@@ -296,12 +1119,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ac8b259376dec69e2fd8689f12d218bd5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleChannel" ref="ac8b259376dec69e2fd8689f12d218bd5" args="" -->
+<a class="anchor" id="a350aa1b7fcc87c2b81bc4c5cfa9fa4c8"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortChannelVariable" ref="a350aa1b7fcc87c2b81bc4c5cfa9fa4c8" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;double&gt; <a class="el" href="class_channel_base.html">DoubleChannel</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;short&gt;&amp; &gt; <a class="el" href="class_variable.html">ShortChannelVariable</a></td>
         </tr>
       </table>
 </div>
@@ -309,12 +1132,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a12cd09ff68adf074aae2b6280eb77737"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnit" ref="a12cd09ff68adf074aae2b6280eb77737" args="" -->
+<a class="anchor" id="a05d43b7d955678f4f9b38d81c207cef8"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24ChannelVariable" ref="a05d43b7d955678f4f9b38d81c207cef8" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;double&gt; <a class="el" href="class_unit_base.html">DoubleUnit</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt;&amp; &gt; <a class="el" href="class_variable.html">Int24ChannelVariable</a></td>
         </tr>
       </table>
 </div>
@@ -322,12 +1145,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a51abddb0810082ac5e5841c364635082"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnitRaw" ref="a51abddb0810082ac5e5841c364635082" args="" -->
+<a class="anchor" id="a664306e6b9429e73817b737cac915f1e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongChannelVariable" ref="a664306e6b9429e73817b737cac915f1e" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">DoubleUnit</a>&gt; <a class="el" href="class_numerical_array.html">DoubleUnitRaw</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;Long&gt;&amp; &gt; <a class="el" href="class_variable.html">LongChannelVariable</a></td>
         </tr>
       </table>
 </div>
@@ -335,12 +1158,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a532930c36e91df9ef2d981ec241e64f5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnits" ref="a532930c36e91df9ef2d981ec241e64f5" args="" -->
+<a class="anchor" id="aefb22d43067c1a6d165798558cc63771"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ChannelVariable" ref="aefb22d43067c1a6d165798558cc63771" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">DoubleChannel</a>,<a class="el" href="class_unit_base.html">DoubleUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">DoubleUnits</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;PLONK_TYPE_DEFAULT&gt;&amp; &gt; <a class="el" href="class_variable.html">ChannelVariable</a></td>
         </tr>
       </table>
 </div>
@@ -348,12 +1171,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="aece092a847bff319e93b3e88b817b561"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatBus" ref="aece092a847bff319e93b3e88b817b561" args="" -->
+<a class="anchor" id="ab80c265b7703d4899458ddaf5334243b"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnitVariable" ref="ab80c265b7703d4899458ddaf5334243b" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;float&gt; <a class="el" href="class_bus_buffer.html">FloatBus</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt;float&gt;&amp; &gt; <a class="el" href="class_variable.html">FloatUnitVariable</a></td>
         </tr>
       </table>
 </div>
@@ -361,12 +1184,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a8e00f0091a5f4ef23a951d403d99c5fc"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatBusses" ref="a8e00f0091a5f4ef23a951d403d99c5fc" args="" -->
+<a class="anchor" id="a198824d2412a6f46437c788f234ddab5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnitVariable" ref="a198824d2412a6f46437c788f234ddab5" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">FloatBus</a>&gt; <a class="el" href="class_numerical_array.html">FloatBusses</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt;double&gt;&amp; &gt; <a class="el" href="class_variable.html">DoubleUnitVariable</a></td>
         </tr>
       </table>
 </div>
@@ -374,12 +1197,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ad7296513c69f65a517e3d0569e005044"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatChannel" ref="ad7296513c69f65a517e3d0569e005044" args="" -->
+<a class="anchor" id="abde32b2a996f8c9af46753fd87322268"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnitVariable" ref="abde32b2a996f8c9af46753fd87322268" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;float&gt; <a class="el" href="class_channel_base.html">FloatChannel</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt;int&gt;&amp; &gt; <a class="el" href="class_variable.html">IntUnitVariable</a></td>
         </tr>
       </table>
 </div>
@@ -387,12 +1210,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ade1d64b4440a208a1c15f84caa6b009d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnit" ref="ade1d64b4440a208a1c15f84caa6b009d" args="" -->
+<a class="anchor" id="a60874ddbb3edf35920b1b3b40ffe66f2"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnitVariable" ref="a60874ddbb3edf35920b1b3b40ffe66f2" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;float&gt; <a class="el" href="class_unit_base.html">FloatUnit</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt;short&gt;&amp; &gt; <a class="el" href="class_variable.html">ShortUnitVariable</a></td>
         </tr>
       </table>
 </div>
@@ -400,12 +1223,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="af8f895f41f1f3b4e6995ef06417d80b4"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnitRaw" ref="af8f895f41f1f3b4e6995ef06417d80b4" args="" -->
+<a class="anchor" id="aa702c28f4e4cdaf6bf025fddc92e8e2e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24UnitVariable" ref="aa702c28f4e4cdaf6bf025fddc92e8e2e" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">FloatUnit</a>&gt; <a class="el" href="class_numerical_array.html">FloatUnitRaw</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt;&amp; &gt; <a class="el" href="class_variable.html">Int24UnitVariable</a></td>
         </tr>
       </table>
 </div>
@@ -413,12 +1236,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="acf7dcc70cd93be99b9ca98792b0880b1"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnits" ref="acf7dcc70cd93be99b9ca98792b0880b1" args="" -->
+<a class="anchor" id="ad2c8a01eb6bd713ba3d77e32e48323e4"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnitVariable" ref="ad2c8a01eb6bd713ba3d77e32e48323e4" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">FloatChannel</a>,<a class="el" href="class_unit_base.html">FloatUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">FloatUnits</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt;Long&gt;&amp; &gt; <a class="el" href="class_variable.html">LongUnitVariable</a></td>
         </tr>
       </table>
 </div>
@@ -426,12 +1249,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="af2d659eb9fce338c7db4e6e3c2af0ea7"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Bus" ref="af2d659eb9fce338c7db4e6e3c2af0ea7" args="" -->
+<a class="anchor" id="a339961f124401f672fc6a401bfc28fb8"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::UnitVariable" ref="a339961f124401f672fc6a401bfc28fb8" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_bus_buffer.html">Int24Bus</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_unit_base.html">UnitBase</a>&lt;PLONK_TYPE_DEFAULT&gt;&amp; &gt; <a class="el" href="class_variable.html">UnitVariable</a></td>
         </tr>
       </table>
 </div>
@@ -439,12 +1262,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a76e75fdf24c1c0987e38cecc8a647692"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Busses" ref="a76e75fdf24c1c0987e38cecc8a647692" args="" -->
+<a class="anchor" id="aa73b49c25841110ac793eadcbc9276ca"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatBusVariable" ref="aa73b49c25841110ac793eadcbc9276ca" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">Int24Bus</a>&gt; <a class="el" href="class_numerical_array.html">Int24Busses</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;float&gt;&amp; &gt; <a class="el" href="class_variable.html">FloatBusVariable</a></td>
         </tr>
       </table>
 </div>
@@ -452,12 +1275,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a2f6e5ce388c0a680255fbcfa89850b36"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Channel" ref="a2f6e5ce388c0a680255fbcfa89850b36" args="" -->
+<a class="anchor" id="aa2c72d48982093f87ab501958fb5e33c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleBusVariable" ref="aa2c72d48982093f87ab501958fb5e33c" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_channel_base.html">Int24Channel</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;double&gt;&amp; &gt; <a class="el" href="class_variable.html">DoubleBusVariable</a></td>
         </tr>
       </table>
 </div>
@@ -465,12 +1288,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a1f3365e1f9c9b69aa1d95ec4596f4b4d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Unit" ref="a1f3365e1f9c9b69aa1d95ec4596f4b4d" args="" -->
+<a class="anchor" id="ac83b16509f58e2cd3cdad8e5cd8d192f"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntBusVariable" ref="ac83b16509f58e2cd3cdad8e5cd8d192f" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_unit_base.html">Int24Unit</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;int&gt;&amp; &gt; <a class="el" href="class_variable.html">IntBusVariable</a></td>
         </tr>
       </table>
 </div>
@@ -478,12 +1301,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a1dc8fcbc25474c9088b0628eed6b1e09"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24UnitRaw" ref="a1dc8fcbc25474c9088b0628eed6b1e09" args="" -->
+<a class="anchor" id="a0ca8ac8403615f3e5df4e93daffdeb95"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortBusVariable" ref="a0ca8ac8403615f3e5df4e93daffdeb95" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">Int24Unit</a>&gt; <a class="el" href="class_numerical_array.html">Int24UnitRaw</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;short&gt;&amp; &gt; <a class="el" href="class_variable.html">ShortBusVariable</a></td>
         </tr>
       </table>
 </div>
@@ -491,12 +1314,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="aee50e8ce02fbdef8d27048d6ddda61e0"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24Units" ref="aee50e8ce02fbdef8d27048d6ddda61e0" args="" -->
+<a class="anchor" id="a26f06f473578315d11cc615fabc0a251"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24BusVariable" ref="a26f06f473578315d11cc615fabc0a251" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">Int24Channel</a>,<a class="el" href="class_unit_base.html">Int24Unit</a>&gt; <a class="el" href="class_numerical_array2_d.html">Int24Units</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;<a class="el" href="class_int24.html">Int24</a>&gt;&amp; &gt; <a class="el" href="class_variable.html">Int24BusVariable</a></td>
         </tr>
       </table>
 </div>
@@ -504,12 +1327,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ac839377bfe91831ebcbd915617ae759e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntBus" ref="ac839377bfe91831ebcbd915617ae759e" args="" -->
+<a class="anchor" id="adf03b787215c9f338969650e22869eb5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongBusVariable" ref="adf03b787215c9f338969650e22869eb5" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;int&gt; <a class="el" href="class_bus_buffer.html">IntBus</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;Long&gt;&amp; &gt; <a class="el" href="class_variable.html">LongBusVariable</a></td>
         </tr>
       </table>
 </div>
@@ -517,12 +1340,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a3fa076eb52cb5170eb569f6792c3f8b5"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntBusses" ref="a3fa076eb52cb5170eb569f6792c3f8b5" args="" -->
+<a class="anchor" id="ae0eb4ce2c4c70861fab0598f5911c649"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::BusVariable" ref="ae0eb4ce2c4c70861fab0598f5911c649" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">IntBus</a>&gt; <a class="el" href="class_numerical_array.html">IntBusses</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;PLONK_TYPE_DEFAULT&gt;&amp; &gt; <a class="el" href="class_variable.html">BusVariable</a></td>
         </tr>
       </table>
 </div>
@@ -530,12 +1353,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a40ef85f2bee4bdd9c17ad7195a5f8242"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntChannel" ref="a40ef85f2bee4bdd9c17ad7195a5f8242" args="" -->
+<a class="anchor" id="ad1b1c19884407e77c03636f3ec5ae9dd"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatBussesVariable" ref="ad1b1c19884407e77c03636f3ec5ae9dd" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;int&gt; <a class="el" href="class_channel_base.html">IntChannel</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">FloatBusses</a>&amp; &gt; <a class="el" href="class_variable.html">FloatBussesVariable</a></td>
         </tr>
       </table>
 </div>
@@ -543,12 +1366,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a6b80dcddcecf8c3ea1facc9b7dd84d6d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnit" ref="a6b80dcddcecf8c3ea1facc9b7dd84d6d" args="" -->
+<a class="anchor" id="a41aff338f6991362d43d610073a5ec58"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleBussesVariable" ref="a41aff338f6991362d43d610073a5ec58" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;int&gt; <a class="el" href="class_unit_base.html">IntUnit</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">DoubleBusses</a>&amp; &gt; <a class="el" href="class_variable.html">DoubleBussesVariable</a></td>
         </tr>
       </table>
 </div>
@@ -556,12 +1379,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a9af1f59d5d8c3b399559b231fb9a12ef"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnitRaw" ref="a9af1f59d5d8c3b399559b231fb9a12ef" args="" -->
+<a class="anchor" id="a52524a6ba417e55be0d0ed994dcde375"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntBussesVariable" ref="a52524a6ba417e55be0d0ed994dcde375" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">IntUnit</a>&gt; <a class="el" href="class_numerical_array.html">IntUnitRaw</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">IntBusses</a>&amp; &gt; <a class="el" href="class_variable.html">IntBussesVariable</a></td>
         </tr>
       </table>
 </div>
@@ -569,12 +1392,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a2abb1828f5d354468130ab3daade6798"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnits" ref="a2abb1828f5d354468130ab3daade6798" args="" -->
+<a class="anchor" id="a1fc4bfa356b36ef4f099fb39f52ce3dd"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortBussesVariable" ref="a1fc4bfa356b36ef4f099fb39f52ce3dd" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">IntChannel</a>,<a class="el" href="class_unit_base.html">IntUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">IntUnits</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">ShortBusses</a>&amp; &gt; <a class="el" href="class_variable.html">ShortBussesVariable</a></td>
         </tr>
       </table>
 </div>
@@ -582,12 +1405,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ae4e68c6f6615ece6a95c89677e46d8ae"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IOInfos" ref="ae4e68c6f6615ece6a95c89677e46d8ae" args="" -->
+<a class="anchor" id="a5d955fb4de50d7989640b449b0ebb44d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24BussesVariable" ref="a5d955fb4de50d7989640b449b0ebb44d" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_i_o_info.html">IOInfo</a>&gt; <a class="el" href="class_object_array.html">IOInfos</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">Int24Busses</a>&amp; &gt; <a class="el" href="class_variable.html">Int24BussesVariable</a></td>
         </tr>
       </table>
 </div>
@@ -595,12 +1418,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ac48dbfaa6c62b0da501e2ed0689717a4"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongBus" ref="ac48dbfaa6c62b0da501e2ed0689717a4" args="" -->
+<a class="anchor" id="a1aa163c0cdb6ac12acc23653e5aa2a4a"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongBussesVariable" ref="a1aa163c0cdb6ac12acc23653e5aa2a4a" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;Long&gt; <a class="el" href="class_bus_buffer.html">LongBus</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">LongBusses</a>&amp; &gt; <a class="el" href="class_variable.html">LongBussesVariable</a></td>
         </tr>
       </table>
 </div>
@@ -608,12 +1431,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a9a74fc807cf36e6fbe5e76e65a22bbe2"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongBusses" ref="a9a74fc807cf36e6fbe5e76e65a22bbe2" args="" -->
+<a class="anchor" id="afbe4b46c2bca6a87a5ddcd553adf692d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::BussesVariable" ref="afbe4b46c2bca6a87a5ddcd553adf692d" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">LongBus</a>&gt; <a class="el" href="class_numerical_array.html">LongBusses</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">Busses</a>&amp; &gt; <a class="el" href="class_variable.html">BussesVariable</a></td>
         </tr>
       </table>
 </div>
@@ -621,12 +1444,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a41a6c97f130e4a635e4faee5aefa09d7"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongChannel" ref="a41a6c97f130e4a635e4faee5aefa09d7" args="" -->
+<a class="anchor" id="a5c94679f4dca69463ef306155ba25c4b"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::FloatUnitsVariable" ref="a5c94679f4dca69463ef306155ba25c4b" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;Long&gt; <a class="el" href="class_channel_base.html">LongChannel</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">FloatUnits</a>&amp; &gt; <a class="el" href="class_variable.html">FloatUnitsVariable</a></td>
         </tr>
       </table>
 </div>
@@ -634,12 +1457,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ab10edfd641412d4758da4917941dc857"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnit" ref="ab10edfd641412d4758da4917941dc857" args="" -->
+<a class="anchor" id="a9ccd73fc5594fe7cd9d0a58f099b3e65"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::DoubleUnitsVariable" ref="a9ccd73fc5594fe7cd9d0a58f099b3e65" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;Long&gt; <a class="el" href="class_unit_base.html">LongUnit</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">DoubleUnits</a>&amp; &gt; <a class="el" href="class_variable.html">DoubleUnitsVariable</a></td>
         </tr>
       </table>
 </div>
@@ -647,12 +1470,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a78b70aca71cb0b33f73ecdbbc6090184"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnitRaw" ref="a78b70aca71cb0b33f73ecdbbc6090184" args="" -->
+<a class="anchor" id="a05a4bc9a3a95a1adb88db166958660f1"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::IntUnitsVariable" ref="a05a4bc9a3a95a1adb88db166958660f1" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">LongUnit</a>&gt; <a class="el" href="class_numerical_array.html">LongUnitRaw</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">IntUnits</a>&amp; &gt; <a class="el" href="class_variable.html">IntUnitsVariable</a></td>
         </tr>
       </table>
 </div>
@@ -660,12 +1483,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a1d588e0e9a6d82ca54fc6c85f3d8fcfa"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnits" ref="a1d588e0e9a6d82ca54fc6c85f3d8fcfa" args="" -->
+<a class="anchor" id="a78ac7cd1a1b4317acea0f5739aba8800"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnitsVariable" ref="a78ac7cd1a1b4317acea0f5739aba8800" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">LongChannel</a>,<a class="el" href="class_unit_base.html">LongUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">LongUnits</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">ShortUnits</a>&amp; &gt; <a class="el" href="class_variable.html">ShortUnitsVariable</a></td>
         </tr>
       </table>
 </div>
@@ -673,12 +1496,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="af5ab26faa0cac88a4b33c08129519203"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortBus" ref="af5ab26faa0cac88a4b33c08129519203" args="" -->
+<a class="anchor" id="a4e322ec561f6a3f8934a8a0487784ad2"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Int24UnitsVariable" ref="a4e322ec561f6a3f8934a8a0487784ad2" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;short&gt; <a class="el" href="class_bus_buffer.html">ShortBus</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">Int24Units</a>&amp; &gt; <a class="el" href="class_variable.html">Int24UnitsVariable</a></td>
         </tr>
       </table>
 </div>
@@ -686,12 +1509,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="a1e5f1bcff21e836800670e6e9b549fff"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortBusses" ref="a1e5f1bcff21e836800670e6e9b549fff" args="" -->
+<a class="anchor" id="a1604776202ee4a38eb7b69ada1301486"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::LongUnitsVariable" ref="a1604776202ee4a38eb7b69ada1301486" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">ShortBus</a>&gt; <a class="el" href="class_numerical_array.html">ShortBusses</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">LongUnits</a>&amp; &gt; <a class="el" href="class_variable.html">LongUnitsVariable</a></td>
         </tr>
       </table>
 </div>
@@ -699,337 +1522,12 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 
 </div>
 </div>
-<a class="anchor" id="ab0182fb9c6c02db3e55fbb43b1d74044"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortChannel" ref="ab0182fb9c6c02db3e55fbb43b1d74044" args="" -->
+<a class="anchor" id="ac274c83923b4d500617aaa31d7a04b4c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::UnitsVariable" ref="ac274c83923b4d500617aaa31d7a04b4c" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;short&gt; <a class="el" href="class_channel_base.html">ShortChannel</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a398355d72df1e14ae410a510027c201e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnit" ref="a398355d72df1e14ae410a510027c201e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;short&gt; <a class="el" href="class_unit_base.html">ShortUnit</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa5794a320dd59cf925f2f0ebeee94fc8"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnitRaw" ref="aa5794a320dd59cf925f2f0ebeee94fc8" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">ShortUnit</a>&gt; <a class="el" href="class_numerical_array.html">ShortUnitRaw</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad075443822fe7cac287f45e1fb84a00b"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::ShortUnits" ref="ad075443822fe7cac287f45e1fb84a00b" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">ShortChannel</a>,<a class="el" href="class_unit_base.html">ShortUnit</a>&gt; <a class="el" href="class_numerical_array2_d.html">ShortUnits</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a72b3eb95373411e2031515a3d3b95ca9"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Double" ref="a72b3eb95373411e2031515a3d3b95ca9" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;double,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Double</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a96af21cab93020f19c5861518e68ae5d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Float" ref="a96af21cab93020f19c5861518e68ae5d" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Float</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7efd2d5c10253a3c5da3d778b8649d33"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Int" ref="a7efd2d5c10253a3c5da3d778b8649d33" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;int,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Int</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a15b40ba54fa6ec01a3ade9504b52d75c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Int24" ref="a15b40ba54fa6ec01a3ade9504b52d75c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;<a class="el" href="class_int24.html">Int24</a>,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Int24</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5cd5ec0bffa7cc499970d683cc3f0b98"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDefault2Short" ref="a5cd5ec0bffa7cc499970d683cc3f0b98" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;short,PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_type_unit.html">TypeDefault2Short</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a88dd634b841135ca5d4508b67695fad9"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDouble2Default" ref="a88dd634b841135ca5d4508b67695fad9" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,double&gt; <a class="el" href="class_type_unit.html">TypeDouble2Default</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a26961a849ad8ccf8b233947bc5d6584e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeDouble2Float" ref="a26961a849ad8ccf8b233947bc5d6584e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,double&gt; <a class="el" href="class_type_unit.html">TypeDouble2Float</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a545593f9938470ab8dcb5160a2155f01"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Default" ref="a545593f9938470ab8dcb5160a2155f01" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Default</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a416df930555ea1551ffcafab6ae01d92"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Double" ref="a416df930555ea1551ffcafab6ae01d92" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;double,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Double</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8d187323dda25cd576946ee8d33fc89d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2In24" ref="a8d187323dda25cd576946ee8d33fc89d" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;<a class="el" href="class_int24.html">Int24</a>,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2In24</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a784007fe788d833f83562e43b9a2eff7"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Int" ref="a784007fe788d833f83562e43b9a2eff7" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;int,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Int</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6af9b7955fac46a0e2358c84e0bbdc49"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeFloat2Short" ref="a6af9b7955fac46a0e2358c84e0bbdc49" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;short,float&gt; <a class="el" href="class_type_unit.html">TypeFloat2Short</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac2556a130bd247fa660b61201016cd58"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt242Default" ref="ac2556a130bd247fa660b61201016cd58" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_type_unit.html">TypeInt242Default</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0537b9a3dcb7822cadd2b6ab69703b90"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt242Float" ref="a0537b9a3dcb7822cadd2b6ab69703b90" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,<a class="el" href="class_int24.html">Int24</a>&gt; <a class="el" href="class_type_unit.html">TypeInt242Float</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5a3b1052ce30b1d6a824fae8ed9e70f0"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt2Default" ref="a5a3b1052ce30b1d6a824fae8ed9e70f0" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,int&gt; <a class="el" href="class_type_unit.html">TypeInt2Default</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab90aca1016cbdd080ec83436cfcb3b3c"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeInt2Float" ref="ab90aca1016cbdd080ec83436cfcb3b3c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,int&gt; <a class="el" href="class_type_unit.html">TypeInt2Float</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1c42734a622ad304b494811be9e73d7e"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeShort2Default" ref="a1c42734a622ad304b494811be9e73d7e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;PLONK_TYPE_DEFAULT,short&gt; <a class="el" href="class_type_unit.html">TypeShort2Default</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0c3f2093dac1ab09a330100f1120a494"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::TypeShort2Float" ref="a0c3f2093dac1ab09a330100f1120a494" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_unit.html">TypeUnit</a>&lt;float,short&gt; <a class="el" href="class_type_unit.html">TypeShort2Float</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af31f3e20e5e9212f42f71b0bd9477ebb"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Unit" ref="af31f3e20e5e9212f42f71b0bd9477ebb" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;PLONK_TYPE_DEFAULT&gt; <a class="el" href="class_unit_base.html">Unit</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acce3dff6314457ed322db7102c054f2d"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::UnitInfos" ref="acce3dff6314457ed322db7102c054f2d" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_unit_info.html">UnitInfo</a>&gt; <a class="el" href="class_object_array.html">UnitInfos</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a70fdfbb1fa3059616caac9b488900c72"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::UnitRaw" ref="a70fdfbb1fa3059616caac9b488900c72" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_unit_base.html">UnitBase</a>&lt;PLONK_TYPE_DEFAULT&gt; &gt; <a class="el" href="class_numerical_array.html">UnitRaw</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a20426efc8042f1c905c6506acccd0b8f"></a><!-- doxytag: member="plonk_GraphForwardDeclarations.h::Units" ref="a20426efc8042f1c905c6506acccd0b8f" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;<a class="el" href="class_channel_base.html">Channel</a>,<a class="el" href="class_unit_base.html">Unit</a>&gt; <a class="el" href="class_numerical_array2_d.html">Units</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array2_d.html">Units</a>&amp; &gt; <a class="el" href="class_variable.html">UnitsVariable</a></td>
         </tr>
       </table>
 </div>
@@ -1052,7 +1550,7 @@ PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cl
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

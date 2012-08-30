@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,16 +72,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="TextFile" --><!-- doxytag: inherits="SmartPointerContainer&lt; TextFileInternal &gt;" -->
 <p>A utility class for reading and writing text files.  
  <a href="class_text_file.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___text_file_8h_source.html">plonk_TextFile.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TextFile:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_text_file.png" usemap="#TextFile_map" alt=""/>
   <map id="TextFile_map" name="TextFile_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; TextFileInternal &gt;" shape="rect" coords="0,56,277,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; TextFileInternal &gt;" shape="rect" coords="0,0,277,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; TextFileInternal &gt;" shape="rect" coords="0,112,277,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; TextFileInternal &gt;" shape="rect" coords="0,56,277,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,277,24"/>
 </map>
  </div></div>
 
@@ -133,6 +131,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a string of text to the file and move to a new line.  <a href="#a0f55fc093d50394bc8a70c8ec28b38f7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_file.html#ac3edbd65e0883d410931c89979564921">writeLine</a> (<a class="el" href="class_text.html">Text</a> const &amp;text)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a string of text to the file and move to a new line.  <a href="#ac3edbd65e0883d410931c89979564921"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text_file.html">TextFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_file.html#af3755bb184a081d7588b824fb892594a">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_text_file.html">TextFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_file.html#a118567e5e33227b3a5d4984bbdcc6502">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_text_file.html">TextFile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_file.html#a2507ae955c30b88a59e35a42125b89f3">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -142,19 +142,6 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock"><p>A utility class for reading and writing text files. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_binary_file.html" title="A utility class for reading and writing binary files.">BinaryFile</a> </dd></dl>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a09e5d457012ae1e6afec8ca021ffcc13"></a><!-- doxytag: member="TextFile::Base" ref="a09e5d457012ae1e6afec8ca021ffcc13" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_text_file_internal.html">Internal</a>&gt; <a class="el" href="class_smart_pointer_container.html">TextFile::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a882b1fdb110afa981a2cd7a3e9224522"></a><!-- doxytag: member="TextFile::Internal" ref="a882b1fdb110afa981a2cd7a3e9224522" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +153,18 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; TextFileInternal &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a09e5d457012ae1e6afec8ca021ffcc13"></a><!-- doxytag: member="TextFile::Base" ref="a09e5d457012ae1e6afec8ca021ffcc13" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_text_file_internal.html">Internal</a>&gt; <a class="el" href="class_smart_pointer_container.html">TextFile::Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -371,6 +369,25 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a7cede5491f516bd03068a084f631bd4f"></a><!-- doxytag: member="TextFile::operator=" ref="a7cede5491f516bd03068a084f631bd4f" args="(TextFile const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text_file.html">TextFile</a>&amp; TextFile::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text_file.html">TextFile</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
+
+</div>
+</div>
 <a class="anchor" id="a2507ae955c30b88a59e35a42125b89f3"></a><!-- doxytag: member="TextFile::fromWeak" ref="a2507ae955c30b88a59e35a42125b89f3" args="(Weak const &amp;weak)" -->
 <div class="memitem">
 <div class="memproto">
@@ -388,61 +405,6 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Get a weakly linked copy of this object. </p>
 <p>This will return a blank/empty/null object of this type if the original has already been deleted. </p>
-
-</div>
-</div>
-<a class="anchor" id="ad5353add58119fb2440f8a4edfb6f063"></a><!-- doxytag: member="TextFile::getPosition" ref="ad5353add58119fb2440f8a4edfb6f063" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">LongLong TextFile::getPosition </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Gets the position of the file stream. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4aa83da8810343bcf358e3030fea8043"></a><!-- doxytag: member="TextFile::isEof" ref="a4aa83da8810343bcf358e3030fea8043" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool TextFile::isEof </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Determines if the file stream is positioned at its end. </p>
-
-</div>
-</div>
-<a class="anchor" id="a7cede5491f516bd03068a084f631bd4f"></a><!-- doxytag: member="TextFile::operator=" ref="a7cede5491f516bd03068a084f631bd4f" args="(TextFile const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text_file.html">TextFile</a>&amp; TextFile::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text_file.html">TextFile</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Assignment operator. </p>
 
 </div>
 </div>
@@ -466,21 +428,21 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a889d157a1b45b2a29d81d557d80d2b15"></a><!-- doxytag: member="TextFile::setEof" ref="a889d157a1b45b2a29d81d557d80d2b15" args="()" -->
+<a class="anchor" id="ad5353add58119fb2440f8a4edfb6f063"></a><!-- doxytag: member="TextFile::getPosition" ref="ad5353add58119fb2440f8a4edfb6f063" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void TextFile::setEof </td>
+          <td class="memname">LongLong TextFile::getPosition </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Sets the position of the file stream to the end of the file. </p>
+<p>Gets the position of the file stream. </p>
 
 </div>
 </div>
@@ -501,6 +463,64 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Sets the position of the file stream. </p>
 <p>0 is the start of the stream. </p>
+
+</div>
+</div>
+<a class="anchor" id="a889d157a1b45b2a29d81d557d80d2b15"></a><!-- doxytag: member="TextFile::setEof" ref="a889d157a1b45b2a29d81d557d80d2b15" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TextFile::setEof </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the position of the file stream to the end of the file. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4aa83da8810343bcf358e3030fea8043"></a><!-- doxytag: member="TextFile::isEof" ref="a4aa83da8810343bcf358e3030fea8043" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TextFile::isEof </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Determines if the file stream is positioned at its end. </p>
+
+</div>
+</div>
+<a class="anchor" id="a59d6f4f8e026a14847818e6788c2c97a"></a><!-- doxytag: member="TextFile::writeValue" ref="a59d6f4f8e026a14847818e6788c2c97a" args="(const ValueType value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void TextFile::writeValue </td>
+          <td>(</td>
+          <td class="paramtype">const ValueType&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Write a numerical value as text to the file. </p>
+<p>This must be one of: char, short, int, long or LongLong (and their unsigned versions). </p>
 
 </div>
 </div>
@@ -580,25 +600,39 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a59d6f4f8e026a14847818e6788c2c97a"></a><!-- doxytag: member="TextFile::writeValue" ref="a59d6f4f8e026a14847818e6788c2c97a" args="(const ValueType value)" -->
+<a class="anchor" id="af3755bb184a081d7588b824fb892594a"></a><!-- doxytag: member="TextFile::operator&#45;&gt;" ref="af3755bb184a081d7588b824fb892594a" args="()" -->
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void TextFile::writeValue </td>
+          <td class="memname"><a class="el" href="class_text_file.html">TextFile</a>* TextFile::operator-&gt; </td>
           <td>(</td>
-          <td class="paramtype">const ValueType&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Write a numerical value as text to the file. </p>
-<p>This must be one of: char, short, int, long or LongLong (and their unsigned versions). </p>
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; TextFileInternal &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a118567e5e33227b3a5d4984bbdcc6502"></a><!-- doxytag: member="TextFile::operator&#45;&gt;" ref="a118567e5e33227b3a5d4984bbdcc6502" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_text_file.html">TextFile</a>* TextFile::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; TextFileInternal &gt;</a>.</p>
 
 </div>
 </div>
@@ -620,7 +654,7 @@ template&lt;class ValueType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

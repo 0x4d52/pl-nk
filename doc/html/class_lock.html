@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,16 +68,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Lock Class Reference<div class="ingroups"><a class="el" href="group___plonk_other_user_classes.html">Other Plonk user classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="Lock" --><!-- doxytag: inherits="SmartPointerContainer&lt; LockInternal &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___lock_8h_source.html">plonk_Lock.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="Lock" --><!-- doxytag: inherits="SmartPointerContainer&lt; LockInternalBase &gt;" --><div class="dynheader">
 Inheritance diagram for Lock:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_lock.png" usemap="#Lock_map" alt=""/>
   <map id="Lock_map" name="Lock_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; LockInternal &gt;" shape="rect" coords="0,56,260,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; LockInternal &gt;" shape="rect" coords="0,0,260,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; LockInternalBase &gt;" shape="rect" coords="0,112,288,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; LockInternalBase &gt;" shape="rect" coords="0,56,288,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,288,24"/>
 </map>
  </div></div>
 
@@ -86,12 +84,21 @@ Inheritance diagram for Lock:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caad">Type</a> { <br/>
+&#160;&#160;<a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caada4b01f1f100c0a5dfa1d26a513302366f">NoLock</a>, 
+<a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caadae7a02be4189b19e727ed979922da6eb1">MutexLock</a>, 
+<a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caada0cd353fc5af5908107d8980ef63d227c">SpinLock</a>, 
+<a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caadaddce80bb3faaef3bed0837eea8582240">ThreadSpinLock</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caadaa514ea895af0b0c022769c9a21a30b37">NumTypes</a>
+<br/>
+ }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a><br class="typebreak"/>
-&lt; <a class="el" href="class_lock_internal.html">LockInternal</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a4c93d605f7c006db4e44ac212eb5aa91">Base</a></td></tr>
+&lt; <a class="el" href="class_lock_internal_base.html">LockInternalBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a895a2a91cc88426708a119660cdb7c7f">Base</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a9944623567d8138b95e74fadc7190adb">Lock</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a50c048b83fcef58ca5a7625c3236d800">Lock</a> (<a class="el" href="class_lock_internal.html">LockInternal</a> *internalToUse)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a4ea23cd1ea40e16cc8ae6e78013dd029">Lock</a> (const <a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caad">Lock::Type</a> lockType=MutexLock)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a5150b3a7bacae4e264fa6f7aa868f674">Lock</a> (<a class="el" href="class_lock_internal_base.html">LockInternalBase</a> *internalToUse)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a3265549002facfdf11c8db090adac30c">Lock</a> (<a class="el" href="class_lock.html">Lock</a> const &amp;copy)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#a3265549002facfdf11c8db090adac30c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lock.html">Lock</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a7c1f87fc4af15ef08f71a4f3a214acfd">operator=</a> (<a class="el" href="class_lock.html">Lock</a> const &amp;other)  throw ()</td></tr>
@@ -100,14 +107,16 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a8a26bb2f1c9eebadbd795c4af900ef60">tryLock</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a3733a4040a40eec7541a429c6c2843df">wait</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a40c82936d4b51095f158676743d39fd2">signal</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lock.html">Lock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a9550682bd3f13d699e3f740c73d41b9f">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_lock.html">Lock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock.html#a28193ba951baa41796263f1788aed3bd">operator-&gt;</a> () const   throw ()</td></tr>
 </table>
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a4c93d605f7c006db4e44ac212eb5aa91"></a><!-- doxytag: member="Lock::Base" ref="a4c93d605f7c006db4e44ac212eb5aa91" args="" -->
+<a class="anchor" id="a895a2a91cc88426708a119660cdb7c7f"></a><!-- doxytag: member="Lock::Base" ref="a895a2a91cc88426708a119660cdb7c7f" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_lock_internal.html">LockInternal</a>&gt; <a class="el" href="class_smart_pointer_container.html">Lock::Base</a></td>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_lock_internal_base.html">LockInternalBase</a>&gt; <a class="el" href="class_smart_pointer_container.html">Lock::Base</a></td>
         </tr>
       </table>
 </div>
@@ -115,15 +124,48 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<hr/><h2>Member Enumeration Documentation</h2>
+<a class="anchor" id="ab95046aacdff47710fc1e20f5730caad"></a><!-- doxytag: member="Lock::Type" ref="ab95046aacdff47710fc1e20f5730caad" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caad">Lock::Type</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="ab95046aacdff47710fc1e20f5730caada4b01f1f100c0a5dfa1d26a513302366f"></a><!-- doxytag: member="NoLock" ref="ab95046aacdff47710fc1e20f5730caada4b01f1f100c0a5dfa1d26a513302366f" args="" -->NoLock</em>&nbsp;</td><td>
+<p>Doesn't actually lock. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ab95046aacdff47710fc1e20f5730caadae7a02be4189b19e727ed979922da6eb1"></a><!-- doxytag: member="MutexLock" ref="ab95046aacdff47710fc1e20f5730caadae7a02be4189b19e727ed979922da6eb1" args="" -->MutexLock</em>&nbsp;</td><td>
+<p>Uses a mutex to lock. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ab95046aacdff47710fc1e20f5730caada0cd353fc5af5908107d8980ef63d227c"></a><!-- doxytag: member="SpinLock" ref="ab95046aacdff47710fc1e20f5730caada0cd353fc5af5908107d8980ef63d227c" args="" -->SpinLock</em>&nbsp;</td><td>
+<p>Uses a simple spin lock. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ab95046aacdff47710fc1e20f5730caadaddce80bb3faaef3bed0837eea8582240"></a><!-- doxytag: member="ThreadSpinLock" ref="ab95046aacdff47710fc1e20f5730caadaddce80bb3faaef3bed0837eea8582240" args="" -->ThreadSpinLock</em>&nbsp;</td><td>
+<p>Uses a spin lock that can be locked multiple times from the same thread. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ab95046aacdff47710fc1e20f5730caadaa514ea895af0b0c022769c9a21a30b37"></a><!-- doxytag: member="NumTypes" ref="ab95046aacdff47710fc1e20f5730caadaa514ea895af0b0c022769c9a21a30b37" args="" -->NumTypes</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9944623567d8138b95e74fadc7190adb"></a><!-- doxytag: member="Lock::Lock" ref="a9944623567d8138b95e74fadc7190adb" args="()" -->
+<a class="anchor" id="a4ea23cd1ea40e16cc8ae6e78013dd029"></a><!-- doxytag: member="Lock::Lock" ref="a4ea23cd1ea40e16cc8ae6e78013dd029" args="(const Lock::Type lockType=MutexLock)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Lock::Lock </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caad">Lock::Type</a>&#160;</td>
+          <td class="paramname"><em>lockType</em> = <code>MutexLock</code></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -132,14 +174,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a50c048b83fcef58ca5a7625c3236d800"></a><!-- doxytag: member="Lock::Lock" ref="a50c048b83fcef58ca5a7625c3236d800" args="(LockInternal *internalToUse)" -->
+<a class="anchor" id="a5150b3a7bacae4e264fa6f7aa868f674"></a><!-- doxytag: member="Lock::Lock" ref="a5150b3a7bacae4e264fa6f7aa868f674" args="(LockInternalBase *internalToUse)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Lock::Lock </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_lock_internal.html">LockInternal</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_lock_internal_base.html">LockInternalBase</a> *&#160;</td>
           <td class="paramname"><em>internalToUse</em></td><td>)</td>
           <td>  throw ()<code> [explicit]</code></td>
         </tr>
@@ -169,22 +211,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a9274a7e20cd5884ea268698d6db8eed6"></a><!-- doxytag: member="Lock::lock" ref="a9274a7e20cd5884ea268698d6db8eed6" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Lock::lock </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a7c1f87fc4af15ef08f71a4f3a214acfd"></a><!-- doxytag: member="Lock::operator=" ref="a7c1f87fc4af15ef08f71a4f3a214acfd" args="(Lock const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
@@ -202,31 +228,15 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a40c82936d4b51095f158676743d39fd2"></a><!-- doxytag: member="Lock::signal" ref="a40c82936d4b51095f158676743d39fd2" args="()" -->
+<a class="anchor" id="a9274a7e20cd5884ea268698d6db8eed6"></a><!-- doxytag: member="Lock::lock" ref="a9274a7e20cd5884ea268698d6db8eed6" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Lock::signal </td>
+          <td class="memname">void Lock::lock </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8a26bb2f1c9eebadbd795c4af900ef60"></a><!-- doxytag: member="Lock::tryLock" ref="a8a26bb2f1c9eebadbd795c4af900ef60" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Lock::tryLock </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -242,7 +252,23 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void Lock::unlock </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8a26bb2f1c9eebadbd795c4af900ef60"></a><!-- doxytag: member="Lock::tryLock" ref="a8a26bb2f1c9eebadbd795c4af900ef60" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Lock::tryLock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -258,11 +284,63 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void Lock::wait </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a40c82936d4b51095f158676743d39fd2"></a><!-- doxytag: member="Lock::signal" ref="a40c82936d4b51095f158676743d39fd2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Lock::signal </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9550682bd3f13d699e3f740c73d41b9f"></a><!-- doxytag: member="Lock::operator&#45;&gt;" ref="a9550682bd3f13d699e3f740c73d41b9f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_lock.html">Lock</a>* Lock::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; LockInternalBase &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a28193ba951baa41796263f1788aed3bd"></a><!-- doxytag: member="Lock::operator&#45;&gt;" ref="a28193ba951baa41796263f1788aed3bd" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_lock.html">Lock</a>* Lock::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; LockInternalBase &gt;</a>.</p>
 
 </div>
 </div>
@@ -285,7 +363,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

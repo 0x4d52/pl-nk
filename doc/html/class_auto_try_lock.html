@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,17 +68,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="AutoTryLock" -->
-<p><code>#include &lt;<a class="el" href="plonk___lock_8h_source.html">plonk_Lock.h</a>&gt;</code></p>
-
 <p><a href="class_auto_try_lock-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_auto_try_lock.html#aee2990aee23fa4a4bb5fd5eaf98f5c09">AutoTryLock</a> (<a class="el" href="class_lock.html">Lock</a> const &amp;lock)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_auto_try_lock.html#a70767e7ff70f076d24c0372d404f340d">AutoTryLock</a> (<a class="el" href="class_lock.html">Lock</a> const &amp;lock=Lock::MutexLock, bool *didLock=0)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_auto_try_lock.html#a7b564c1ba166b1f88f96de444ca69de8">~AutoTryLock</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_auto_try_lock.html#ac72fa1deb7164e85ac13ce6ed2517904">getDidLock</a> () const   throw ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aee2990aee23fa4a4bb5fd5eaf98f5c09"></a><!-- doxytag: member="AutoTryLock::AutoTryLock" ref="aee2990aee23fa4a4bb5fd5eaf98f5c09" args="(Lock const &amp;lock)" -->
+<a class="anchor" id="a70767e7ff70f076d24c0372d404f340d"></a><!-- doxytag: member="AutoTryLock::AutoTryLock" ref="a70767e7ff70f076d24c0372d404f340d" args="(Lock const &amp;lock=Lock::MutexLock, bool *didLock=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -87,8 +85,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">AutoTryLock::AutoTryLock </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_lock.html">Lock</a> const &amp;&#160;</td>
-          <td class="paramname"><em>lock</em></td><td>)</td>
-          <td>  throw ()</td>
+          <td class="paramname"><em>lock</em> = <code>Lock::MutexLock</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>didLock</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -105,6 +113,23 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ac72fa1deb7164e85ac13ce6ed2517904"></a><!-- doxytag: member="AutoTryLock::getDidLock" ref="ac72fa1deb7164e85ac13ce6ed2517904" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool AutoTryLock::getDidLock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -131,7 +156,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,8 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="TypeUnitBase" -->
 <p>Convert from one sample type to another.  
  <a href="class_type_unit_base.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___type_channel_8h_source.html">plonk_TypeChannel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;:</div>
 <div class="dyncontent">
@@ -113,7 +110,18 @@ Static Public Member Functions</h2></td></tr>
 class TypeUnitBase&lt; OutputSampleType, InputSampleType &gt;</h3>
 
 <p>Convert from one sample type to another. </p>
-<p>E.g., from float to short (i.e, 16bit) </p>
+<p>E.g., from float to short (i.e, 16bit)</p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, preferredBlockSize=noPref, preferredSampleRate=noPref)</li>
+<li>kr (input)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to convert</li>
+<li>preferredBlockSize: the preferred output block size</li>
+<li>preferredSampleRate: the preferred output sample rate </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
 <a class="anchor" id="abe607a70afa3aa4029d08b82aaa340e3"></a><!-- doxytag: member="TypeUnitBase::Data" ref="abe607a70afa3aa4029d08b82aaa340e3" args="" -->
 <div class="memitem">
@@ -123,66 +131,6 @@ template&lt;class OutputSampleType , class InputSampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acb265a708bb4af9bd3860bcb0a156f18"></a><!-- doxytag: member="TypeUnitBase::Inputs" ref="acb265a708bb4af9bd3860bcb0a156f18" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OutputSampleType , class InputSampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab3ef89ca68cdaede4a6cb0b224d0ab47"></a><!-- doxytag: member="TypeUnitBase::InputUnitType" ref="ab3ef89ca68cdaede4a6cb0b224d0ab47" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OutputSampleType , class InputSampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;InputSampleType&gt; <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_unit_base.html">InputUnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a27742c613e829812e97b855a1003fa21"></a><!-- doxytag: member="TypeUnitBase::OutputChannelInternalBaseType" ref="a27742c613e829812e97b855a1003fa21" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OutputSampleType , class InputSampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;OutputSampleType&gt; <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_channel_internal_base.html">OutputChannelInternalBaseType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aada924d2d486376f82e5d0b6705038df"></a><!-- doxytag: member="TypeUnitBase::OutputChannelInternalType" ref="aada924d2d486376f82e5d0b6705038df" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OutputSampleType , class InputSampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;OutputSampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_channel_internal.html">OutputChannelInternalType</a></td>
         </tr>
       </table>
 </div>
@@ -205,6 +153,36 @@ template&lt;class OutputSampleType , class InputSampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aada924d2d486376f82e5d0b6705038df"></a><!-- doxytag: member="TypeUnitBase::OutputChannelInternalType" ref="aada924d2d486376f82e5d0b6705038df" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class OutputSampleType , class InputSampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;OutputSampleType,<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&gt; <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_channel_internal.html">OutputChannelInternalType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a27742c613e829812e97b855a1003fa21"></a><!-- doxytag: member="TypeUnitBase::OutputChannelInternalBaseType" ref="a27742c613e829812e97b855a1003fa21" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class OutputSampleType , class InputSampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;OutputSampleType&gt; <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_channel_internal_base.html">OutputChannelInternalBaseType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="afd2fb277928d68de1b80281d1e9a1b09"></a><!-- doxytag: member="TypeUnitBase::OutputUnitType" ref="afd2fb277928d68de1b80281d1e9a1b09" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -213,6 +191,36 @@ template&lt;class OutputSampleType , class InputSampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;OutputSampleType&gt; <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_unit_base.html">OutputUnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab3ef89ca68cdaede4a6cb0b224d0ab47"></a><!-- doxytag: member="TypeUnitBase::InputUnitType" ref="ab3ef89ca68cdaede4a6cb0b224d0ab47" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class OutputSampleType , class InputSampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;InputSampleType&gt; <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_unit_base.html">InputUnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acb265a708bb4af9bd3860bcb0a156f18"></a><!-- doxytag: member="TypeUnitBase::Inputs" ref="acb265a708bb4af9bd3860bcb0a156f18" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class OutputSampleType , class InputSampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
         </tr>
       </table>
 </div>
@@ -236,6 +244,24 @@ template&lt;class OutputSampleType , class InputSampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aca9d21abfda6fabdb5ee70db4a24f8d8"></a><!-- doxytag: member="TypeUnitBase::getInfo" ref="aca9d21abfda6fabdb5ee70db4a24f8d8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class OutputSampleType , class InputSampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a37501d918e1d71b2a63f9540f3d9a58a"></a><!-- doxytag: member="TypeUnitBase::ar" ref="a37501d918e1d71b2a63f9540f3d9a58a" args="(InputUnitType const &amp;input, BlockSize const &amp;blockSize=BlockSize::noPreference(), SampleRate const &amp;sampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -264,24 +290,6 @@ template&lt;class OutputSampleType , class InputSampleType &gt; </div>
           <td></td>
           <td>)</td>
           <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aca9d21abfda6fabdb5ee70db4a24f8d8"></a><!-- doxytag: member="TypeUnitBase::getInfo" ref="aca9d21abfda6fabdb5ee70db4a24f8d8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class OutputSampleType , class InputSampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_type_unit_base.html">TypeUnitBase</a>&lt; OutputSampleType, InputSampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -326,7 +334,7 @@ template&lt;class OutputSampleType , class InputSampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:04 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

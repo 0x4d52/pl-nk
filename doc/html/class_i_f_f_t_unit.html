@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>IFFT Unit.  
  <a href="class_i_f_f_t_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___i_f_f_t_channel_8h_source.html">plonk_IFFTChannel.h</a>&gt;</code></p>
-
 <p><a href="class_i_f_f_t_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -102,31 +99,25 @@ Static Public Member Functions</h2></td></tr>
 class IFFTUnit&lt; SampleType &gt;</h3>
 
 <p>IFFT Unit. </p>
-<p>Takes frequency domain signal in real/imaginary format and outputs the time domain real signal. </p>
+<p>Takes frequency domain signal in real/imaginary format and outputs the time domain real signal.</p>
+<p>Each pair of imput channels generates one output channel. The even numbered channels should conatin the real data and the odd numbered channel should contain the imaginary data. (This is the same output format as the <a class="el" href="class_f_f_t_unit.html" title="FFT Unit.">FFTUnit</a>.)</p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi, fft) the input unit in FFT format </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a75d40ae4d534c6286db45347dfd58726"></a><!-- doxytag: member="IFFTUnit::Buffer" ref="a75d40ae4d534c6286db45347dfd58726" args="" -->
+<a class="anchor" id="a7530cdc85ace783bce2f08cf171e2ea8"></a><!-- doxytag: member="IFFTUnit::IFFTInternal" ref="a7530cdc85ace783bce2f08cf171e2ea8" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a24ad20515b7225a56b70e6b8bef909d9"></a><!-- doxytag: member="IFFTUnit::ChannelType" ref="a24ad20515b7225a56b70e6b8bef909d9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef <a class="el" href="class_i_f_f_t_channel_internal.html">IFFTChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_i_f_f_t_channel_internal.html">IFFTInternal</a></td>
         </tr>
       </table>
 </div>
@@ -149,29 +140,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7530cdc85ace783bce2f08cf171e2ea8"></a><!-- doxytag: member="IFFTUnit::IFFTInternal" ref="a7530cdc85ace783bce2f08cf171e2ea8" args="" -->
+<a class="anchor" id="a24ad20515b7225a56b70e6b8bef909d9"></a><!-- doxytag: member="IFFTUnit::ChannelType" ref="a24ad20515b7225a56b70e6b8bef909d9" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_i_f_f_t_channel_internal.html">IFFTChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_i_f_f_t_channel_internal.html">IFFTInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5f967d431903375a64ed361a4d8ccffd"></a><!-- doxytag: member="IFFTUnit::Inputs" ref="a5f967d431903375a64ed361a4d8ccffd" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -224,7 +200,55 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a5f967d431903375a64ed361a4d8ccffd"></a><!-- doxytag: member="IFFTUnit::Inputs" ref="a5f967d431903375a64ed361a4d8ccffd" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a75d40ae4d534c6286db45347dfd58726"></a><!-- doxytag: member="IFFTUnit::Buffer" ref="a75d40ae4d534c6286db45347dfd58726" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ab99ea09b4884cd57d51e6bfbbe77a9e0"></a><!-- doxytag: member="IFFTUnit::getInfo" ref="ab99ea09b4884cd57d51e6bfbbe77a9e0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a940c3d6ca063c62a7f9ca6d642e39e9c"></a><!-- doxytag: member="IFFTUnit::ar" ref="a940c3d6ca063c62a7f9ca6d642e39e9c" args="(UnitType const &amp;input)" -->
 <div class="memitem">
 <div class="memproto">
@@ -246,24 +270,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab99ea09b4884cd57d51e6bfbbe77a9e0"></a><!-- doxytag: member="IFFTUnit::getInfo" ref="ab99ea09b4884cd57d51e6bfbbe77a9e0" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_i_f_f_t_unit.html">IFFTUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___i_f_f_t_channel_8h_source.html">plonk_IFFTChannel.h</a></li>
 </ul>
@@ -282,7 +288,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

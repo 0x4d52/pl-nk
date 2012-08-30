@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,23 +72,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="Variable" --><!-- doxytag: inherits="SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" -->
 <p>A template class for storing any variable type.  
  <a href="class_variable.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___variable_8h_source.html">plonk_Variable.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Variable&lt; Type &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_variable.png" usemap="#Variable&lt; Type &gt;_map" alt=""/>
   <map id="Variable&lt; Type &gt;_map" name="Variable&lt; Type &gt;_map">
-<area href="class_sender_container.html" alt="SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="556,112,917,136"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="556,56,917,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="556,0,917,24"/>
-<area href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes." alt="BlockSize" shape="rect" coords="185,224,546,248"/>
-<area href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates." alt="SampleRate" shape="rect" coords="927,224,1288,248"/>
-<area href="class_block_size_default.html" alt="BlockSizeDefault" shape="rect" coords="0,280,361,304"/>
-<area href="class_block_size_no_preference.html" alt="BlockSizeNoPreference" shape="rect" coords="371,280,732,304"/>
-<area href="class_sample_rate_default.html" alt="SampleRateDefault" shape="rect" coords="742,280,1103,304"/>
-<area href="class_sample_rate_no_preference.html" alt="SampleRateNoPreference" shape="rect" coords="1113,280,1474,304"/>
+<area href="class_sender_container.html" alt="SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,168,546,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,112,546,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,56,546,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="185,0,546,24"/>
+<area href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes." alt="BlockSize" shape="rect" coords="185,280,546,304"/>
+<area href="class_block_size_default.html" alt="BlockSizeDefault" shape="rect" coords="0,336,361,360"/>
+<area href="class_block_size_no_preference.html" alt="BlockSizeNoPreference" shape="rect" coords="371,336,732,360"/>
 </map>
  </div></div>
 
@@ -123,16 +118,18 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_variable.html#a8909b50eb8b70cea703d6572d0246f90">Variable</a> (OtherType const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> that converts from one type to another.  <a href="#a8909b50eb8b70cea703d6572d0246f90"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">Variable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable.html#af6ab86cefc93c864dd7f454a495cc704">operator=</a> (Type const &amp;newValue)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A convenience for <a class="el" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue()</a>.  <a href="#af6ab86cefc93c864dd7f454a495cc704"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">Variable</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_variable.html#ad658206cf88b5ec6fb17bf494e398761">operator=</a> (ValueType const &amp;newValue)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A convenience for <a class="el" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue()</a>.  <a href="#ad658206cf88b5ec6fb17bf494e398761"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360">getValue</a> () const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A convenience for <a class="el" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue()</a> mainly for atomic types.  <a href="#a3f05fc2768b1de80706b39ee14f3c360"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current value.  <a href="#a3f05fc2768b1de80706b39ee14f3c360"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable.html#a704a01abccce524ea67757560b52515a">operator Type</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current value.  <a href="#a704a01abccce524ea67757560b52515a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable.html#a547e48952c1ffe3c0833fc6f5830162a">nextValue</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next value.  <a href="#a547e48952c1ffe3c0833fc6f5830162a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9">setValue</a> (Type const &amp;newValue)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current value.  <a href="#ab412784e254b3fb3914d7118b03777c9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable.html#a5b6d637c82197496cf0f083b23360bf3">swapValues</a> (Type &amp;other)  throw ()</td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;Type(*)(Typeconst &amp;, Typeconst &amp;) op&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="class_variable.html">Variable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_variable.html#a89fbfb288dd1a08dc268756ac3da4fac">binary</a> (<a class="el" href="class_variable.html">Variable</a> const &amp;rightOperand) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a binary operation from two source Variables.  <a href="#a89fbfb288dd1a08dc268756ac3da4fac"></a><br/></td></tr>
@@ -314,25 +311,6 @@ class Variable&lt; Type &gt;</h3>
 <p>A template class for storing any variable type. </p>
 <p>The main reason for this class is that it is the simplest kind of Sender. Thus you can inhereit from <a class="el" href="class_variable.html#aa2d9bec5af21535eb910c562a135b229">Variable&lt;Type&gt;::Receiver</a> and register this with a Variable&lt;Type&gt; object for updates when it changes. Variables can be constructed into graphs using binary and unary operators and type conversions from one variable types to another. Within a <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> graph each node registers itself as Receiver from its dependent variables such that it can be notified if these change. This changes is trasnmitted all the way through the graph to the root. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a7d33a8832aa7de89feb902833102589a"></a><!-- doxytag: member="Variable::Base" ref="a7d33a8832aa7de89feb902833102589a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_sender_container.html">SenderContainer</a>&lt;<a class="el" href="class_variable_internal_base.html">Internal</a>&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::<a class="el" href="class_sender_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_sender_container.html#a798aa6cb8d4c28e1306053b440ed49c2">SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">BlockSize</a>, and <a class="el" href="class_sample_rate.html#af86f9b391c8bdabd7fac07c8b112d6a6">SampleRate</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="aa48b89eeec4c57a9648acdaab46d9e49"></a><!-- doxytag: member="Variable::Internal" ref="aa48b89eeec4c57a9648acdaab46d9e49" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -349,6 +327,40 @@ template&lt;class Type&gt; </div>
 <p>Reimplemented from <a class="el" href="class_sender_container.html#a83124562a4c0a8594dfede23e271fbf1">SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;</a>.</p>
 
 <p>Reimplemented in <a class="el" href="class_block_size.html#a4040584c77fe568474f4d8cfd0486dd8">BlockSize</a>, and <a class="el" href="class_sample_rate.html#a24ab2a49d5e9d9aae022d212a014fa0f">SampleRate</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4beb77d6d48775ef3a7533404e0bdf8b"></a><!-- doxytag: member="Variable::VariableInternalType" ref="a4beb77d6d48775ef3a7533404e0bdf8b" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt;Type&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::<a class="el" href="class_variable_internal.html">VariableInternalType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7d33a8832aa7de89feb902833102589a"></a><!-- doxytag: member="Variable::Base" ref="a7d33a8832aa7de89feb902833102589a" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_sender_container.html">SenderContainer</a>&lt;<a class="el" href="class_variable_internal_base.html">Internal</a>&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::<a class="el" href="class_sender_container.html">Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_sender_container.html#a798aa6cb8d4c28e1306053b440ed49c2">SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="class_block_size.html#a9a8590ac83812328fbd25ab0a0b0a6a0">BlockSize</a>, and <a class="el" href="class_sample_rate.html#af86f9b391c8bdabd7fac07c8b112d6a6">SampleRate</a>.</p>
 
 </div>
 </div>
@@ -382,36 +394,6 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a30c0462241ca22de906b6c0ea9d1e74a"></a><!-- doxytag: member="Variable::UnitType" ref="a30c0462241ca22de906b6c0ea9d1e74a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;Type&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4beb77d6d48775ef3a7533404e0bdf8b"></a><!-- doxytag: member="Variable::VariableInternalType" ref="a4beb77d6d48775ef3a7533404e0bdf8b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt;Type&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::<a class="el" href="class_variable_internal.html">VariableInternalType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a36b782ed60391366e7bc3ac12ed61860"></a><!-- doxytag: member="Variable::Weak" ref="a36b782ed60391366e7bc3ac12ed61860" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -426,6 +408,21 @@ template&lt;class Type&gt; </div>
 <div class="memdoc">
 
 <p>Reimplemented in <a class="el" href="class_block_size.html#abc106659fc8fa174e2d80df9caa1d6ae">BlockSize</a>, and <a class="el" href="class_sample_rate.html#a1adcb77fd56fc961d3c311019d9dafd8">SampleRate</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a30c0462241ca22de906b6c0ea9d1e74a"></a><!-- doxytag: member="Variable::UnitType" ref="a30c0462241ca22de906b6c0ea9d1e74a" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;Type&gt; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -557,531 +554,24 @@ template&lt;class OtherType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ae9ebc64440f71428b24c9c725cfc47d8"></a><!-- doxytag: member="Variable::a2dB" ref="ae9ebc64440f71428b24c9c725cfc47d8" args="() const " -->
+<a class="anchor" id="a607f32d2dfcdfeef6d5ea68d42328136"></a><!-- doxytag: member="Variable::operator=" ref="a607f32d2dfcdfeef6d5ea68d42328136" args="(Variable const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::a2dB </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'a2dB' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="ad1ff6375a25ebbfcd686752d1cf8095d"></a><!-- doxytag: member="Variable::abs" ref="ad1ff6375a25ebbfcd686752d1cf8095d" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::abs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'abs' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a0dca0682594ef059ac3368ef39b21f85"></a><!-- doxytag: member="Variable::absdif" ref="a0dca0682594ef059ac3368ef39b21f85" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::absdif </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'absdif' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a9b4f8130fc61470e33b893ba2aed89e8"></a><!-- doxytag: member="Variable::acos" ref="a9b4f8130fc61470e33b893ba2aed89e8" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::acos </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'acos' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4e6cbb3b981c291605c64f183cb70646"></a><!-- doxytag: member="Variable::addop" ref="a4e6cbb3b981c291605c64f183cb70646" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::addop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'addop' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a91180255242b2fa2f3400329ed801be3"></a><!-- doxytag: member="Variable::ar" ref="a91180255242b2fa2f3400329ed801be3" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::ar </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a983239f71827c758e79f47a732e24c8c"></a><!-- doxytag: member="Variable::asin" ref="a983239f71827c758e79f47a732e24c8c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::asin </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'asin' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a984477a59f043ca6fb6fe90a91d8445b"></a><!-- doxytag: member="Variable::atan" ref="a984477a59f043ca6fb6fe90a91d8445b" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::atan </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'atan' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a18fbc70b3ee0e31385dd75774852c5e5"></a><!-- doxytag: member="Variable::atan2" ref="a18fbc70b3ee0e31385dd75774852c5e5" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::atan2 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'atan2' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a89fbfb288dd1a08dc268756ac3da4fac"></a><!-- doxytag: member="Variable::binary" ref="a89fbfb288dd1a08dc268756ac3da4fac" args="(Variable const &amp;rightOperand) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-<div class="memtemplate">
-template&lt;Type(*)(Typeconst &amp;, Typeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::binary </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>rightOperand</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Builds a binary operation from two source Variables. </p>
-
-</div>
-</div>
-<a class="anchor" id="af3e5b91a96af9ecf7b5c6f91e05c4926"></a><!-- doxytag: member="Variable::ceil" ref="af3e5b91a96af9ecf7b5c6f91e05c4926" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::ceil </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'ceil' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a7af2f45c6213448c74d66303b03c83c8"></a><!-- doxytag: member="Variable::clip2" ref="a7af2f45c6213448c74d66303b03c83c8" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::clip2 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'clip2' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a3be1ac06521eeb553688fa4299a0f5af"></a><!-- doxytag: member="Variable::cos" ref="a3be1ac06521eeb553688fa4299a0f5af" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::cos </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'cos' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a70d1a89f4dee674196317d3f38650633"></a><!-- doxytag: member="Variable::cosh" ref="a70d1a89f4dee674196317d3f38650633" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::cosh </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'cosh' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a5e719e3d0e0314cd155626120478a731"></a><!-- doxytag: member="Variable::cubed" ref="a5e719e3d0e0314cd155626120478a731" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::cubed </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'cubed' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="ac161203dc921c344b0c992922494390c"></a><!-- doxytag: member="Variable::d2r" ref="ac161203dc921c344b0c992922494390c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::d2r </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'd2r' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a226ff6ec2d54fdc50dd6bce87415ea9c"></a><!-- doxytag: member="Variable::dB2a" ref="a226ff6ec2d54fdc50dd6bce87415ea9c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::dB2a </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'dB2a' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4b172de6950b6d9e98728ba936d12bb5"></a><!-- doxytag: member="Variable::dec" ref="a4b172de6950b6d9e98728ba936d12bb5" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::dec </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'dec' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a88f419d631226b6186ebaf6e93c2ce2f"></a><!-- doxytag: member="Variable::decayFeedback" ref="a88f419d631226b6186ebaf6e93c2ce2f" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::decayFeedback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'decayFeedback' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8f78c4fa62e77ba7690c135ed12dc2c5"></a><!-- doxytag: member="Variable::difsqr" ref="a8f78c4fa62e77ba7690c135ed12dc2c5" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::difsqr </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'difsqr' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="ab8a63ff6989cee2ab236e02bfcfbf484"></a><!-- doxytag: member="Variable::distort" ref="ab8a63ff6989cee2ab236e02bfcfbf484" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::distort </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'distort' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="afa5fb6f70d3ac944ae97b3ca23548fa6"></a><!-- doxytag: member="Variable::divop" ref="afa5fb6f70d3ac944ae97b3ca23548fa6" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::divop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'divop' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2a22c822c0cbec961b9a1329f6cef3b9"></a><!-- doxytag: member="Variable::exp" ref="a2a22c822c0cbec961b9a1329f6cef3b9" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::exp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'exp' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4c5689400c7389dc7cb0081d19648c9a"></a><!-- doxytag: member="Variable::f2m" ref="a4c5689400c7389dc7cb0081d19648c9a" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::f2m </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'f2m' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="ab7404cb8c94b1669c953914051dbb239"></a><!-- doxytag: member="Variable::floor" ref="ab7404cb8c94b1669c953914051dbb239" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::floor </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'floor' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="adcb0e1f0d8545fcdba04cc307d8f20ba"></a><!-- doxytag: member="Variable::frac" ref="adcb0e1f0d8545fcdba04cc307d8f20ba" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::frac </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'frac' function to this one. </p>
+<p>Assignment operator. </p>
 
 </div>
 </div>
@@ -1125,21 +615,26 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac469cff8d1ff1991abdf1bce0a1cf693"></a><!-- doxytag: member="Variable::getTypeCode" ref="ac469cff8d1ff1991abdf1bce0a1cf693" args="() const " -->
+<a class="anchor" id="ad658206cf88b5ec6fb17bf494e398761"></a><!-- doxytag: member="Variable::operator=" ref="ad658206cf88b5ec6fb17bf494e398761" args="(ValueType const &amp;newValue)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::getTypeCode </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramname"><em>newValue</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>A convenience for <a class="el" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue()</a>. </p>
 
 </div>
 </div>
@@ -1159,19 +654,18 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>A convenience for <a class="el" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue()</a> mainly for atomic types. </p>
 <p>Returns the current value. </p>
 
 </div>
 </div>
-<a class="anchor" id="a5a1841278390d071d56d99ade1969de3"></a><!-- doxytag: member="Variable::getValueTypeCode" ref="a5a1841278390d071d56d99ade1969de3" args="() const " -->
+<a class="anchor" id="a704a01abccce524ea67757560b52515a"></a><!-- doxytag: member="Variable::operator Type" ref="a704a01abccce524ea67757560b52515a" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::getValueTypeCode </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator Type </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -1180,16 +674,124 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Returns the current value. </p>
+
 </div>
 </div>
-<a class="anchor" id="a8ae5f7c2efedf51e039f5daf8197b9b1"></a><!-- doxytag: member="Variable::hypot" ref="a8ae5f7c2efedf51e039f5daf8197b9b1" args="(Variable const &amp;right) const " -->
+<a class="anchor" id="a547e48952c1ffe3c0833fc6f5830162a"></a><!-- doxytag: member="Variable::nextValue" ref="a547e48952c1ffe3c0833fc6f5830162a" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::hypot </td>
+          <td class="memname">const Type <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::nextValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the next value. </p>
+<p>By default this returns the current value. More complex <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> subclasses might generate sequences or random numbers (for example). </p>
+
+</div>
+</div>
+<a class="anchor" id="ab412784e254b3fb3914d7118b03777c9"></a><!-- doxytag: member="Variable::setValue" ref="ab412784e254b3fb3914d7118b03777c9" args="(Type const &amp;newValue)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::setValue </td>
+          <td>(</td>
+          <td class="paramtype">Type const &amp;&#160;</td>
+          <td class="paramname"><em>newValue</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the current value. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5b6d637c82197496cf0f083b23360bf3"></a><!-- doxytag: member="Variable::swapValues" ref="a5b6d637c82197496cf0f083b23360bf3" args="(Type &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::swapValues </td>
+          <td>(</td>
+          <td class="paramtype">Type &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a89fbfb288dd1a08dc268756ac3da4fac"></a><!-- doxytag: member="Variable::binary" ref="a89fbfb288dd1a08dc268756ac3da4fac" args="(Variable const &amp;rightOperand) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+<div class="memtemplate">
+template&lt;Type(*)(Typeconst &amp;, Typeconst &amp;) op&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::binary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>rightOperand</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Builds a binary operation from two source Variables. </p>
+
+</div>
+</div>
+<a class="anchor" id="aeeed31e594cdf5ee0468e6ed15ee8a7d"></a><!-- doxytag: member="Variable::unary" ref="aeeed31e594cdf5ee0468e6ed15ee8a7d" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+<div class="memtemplate">
+template&lt;Type(*)(Typeconst &amp;) op&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::unary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Builds a unary operation from a source <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4e6cbb3b981c291605c64f183cb70646"></a><!-- doxytag: member="Variable::addop" ref="a4e6cbb3b981c291605c64f183cb70646" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::addop </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
@@ -1199,27 +801,70 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'hypot' function to this one and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'addop' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
-<a class="anchor" id="a7113540443a034e512972cd6334f6811"></a><!-- doxytag: member="Variable::inc" ref="a7113540443a034e512972cd6334f6811" args="() const " -->
+<a class="anchor" id="aac049b45484a41b74aed4de6f48e23b3"></a><!-- doxytag: member="Variable::subop" ref="aac049b45484a41b74aed4de6f48e23b3" args="(Variable const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::inc </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::subop </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'inc' function to this one. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'subop' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2ecf3f58999ab22b24a082d9aaf75dcb"></a><!-- doxytag: member="Variable::mulop" ref="a2ecf3f58999ab22b24a082d9aaf75dcb" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::mulop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'mulop' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="afa5fb6f70d3ac944ae97b3ca23548fa6"></a><!-- doxytag: member="Variable::divop" ref="afa5fb6f70d3ac944ae97b3ca23548fa6" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::divop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'divop' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -1241,6 +886,27 @@ template&lt;class Type&gt; </div>
 <div class="memdoc">
 
 <p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'isEqualTo' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0e5584301b12f0a207836ca05a5a6961"></a><!-- doxytag: member="Variable::isNotEqualTo" ref="a0e5584301b12f0a207836ca05a5a6961" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::isNotEqualTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'isNotEqualTo' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -1328,14 +994,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0e5584301b12f0a207836ca05a5a6961"></a><!-- doxytag: member="Variable::isNotEqualTo" ref="a0e5584301b12f0a207836ca05a5a6961" args="(Variable const &amp;right) const " -->
+<a class="anchor" id="a8ae5f7c2efedf51e039f5daf8197b9b1"></a><!-- doxytag: member="Variable::hypot" ref="a8ae5f7c2efedf51e039f5daf8197b9b1" args="(Variable const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::isNotEqualTo </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::hypot </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
@@ -1345,116 +1011,18 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'isNotEqualTo' function to this one and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'hypot' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
-<a class="anchor" id="a608f4ab21fe3e5a22bc142fd95037ba7"></a><!-- doxytag: member="Variable::kr" ref="a608f4ab21fe3e5a22bc142fd95037ba7" args="() const " -->
+<a class="anchor" id="a204f23bd924338957d5b16aa210c054b"></a><!-- doxytag: member="Variable::pow" ref="a204f23bd924338957d5b16aa210c054b" args="(Variable const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::kr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae2707e545f61e1c4f86915003bd9c0da"></a><!-- doxytag: member="Variable::log" ref="ae2707e545f61e1c4f86915003bd9c0da" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::log </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'log' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="af5f189b95aced9b421164f901517a6ab"></a><!-- doxytag: member="Variable::log10" ref="af5f189b95aced9b421164f901517a6ab" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::log10 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'log10' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a85adc4c3da414f97328ad35d4c350ed1"></a><!-- doxytag: member="Variable::log2" ref="a85adc4c3da414f97328ad35d4c350ed1" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::log2 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'log2' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="ae029ebd0d601109d427b91f968b0428b"></a><!-- doxytag: member="Variable::m2f" ref="ae029ebd0d601109d427b91f968b0428b" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::m2f </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'm2f' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2509b3b7d3232052ab01328092546c79"></a><!-- doxytag: member="Variable::max" ref="a2509b3b7d3232052ab01328092546c79" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::max </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::pow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
@@ -1464,7 +1032,28 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'max' function to this one and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'pow' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a18fbc70b3ee0e31385dd75774852c5e5"></a><!-- doxytag: member="Variable::atan2" ref="a18fbc70b3ee0e31385dd75774852c5e5" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::atan2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'atan2' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -1489,34 +1078,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa5a5e385c1bb37ef19d3022e449ebba2"></a><!-- doxytag: member="Variable::move" ref="aa5a5e385c1bb37ef19d3022e449ebba2" args="() const " -->
+<a class="anchor" id="a2509b3b7d3232052ab01328092546c79"></a><!-- doxytag: member="Variable::max" ref="a2509b3b7d3232052ab01328092546c79" args="(Variable const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::move </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'move' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2ecf3f58999ab22b24a082d9aaf75dcb"></a><!-- doxytag: member="Variable::mulop" ref="a2ecf3f58999ab22b24a082d9aaf75dcb" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::mulop </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::max </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
@@ -1526,83 +1095,20 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'mulop' function to this one and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'max' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
-<a class="anchor" id="a6fdd06820e46c7995b40d634a7ed674e"></a><!-- doxytag: member="Variable::neg" ref="a6fdd06820e46c7995b40d634a7ed674e" args="() const " -->
+<a class="anchor" id="a25ddb483dc9a0b40c40f6e5a9fc5c2d6"></a><!-- doxytag: member="Variable::sumsqr" ref="a25ddb483dc9a0b40c40f6e5a9fc5c2d6" args="(Variable const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::neg </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sumsqr </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'neg' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a547e48952c1ffe3c0833fc6f5830162a"></a><!-- doxytag: member="Variable::nextValue" ref="a547e48952c1ffe3c0833fc6f5830162a" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const Type <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::nextValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the next value. </p>
-<p>By default this returns the current value. More complex <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> subclasses might generate sequences or random numbers (for example). </p>
-
-</div>
-</div>
-<a class="anchor" id="a704a01abccce524ea67757560b52515a"></a><!-- doxytag: member="Variable::operator Type" ref="a704a01abccce524ea67757560b52515a" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator Type </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the current value. </p>
-
-</div>
-</div>
-<a class="anchor" id="ad437e0113e9f65d3dd62ceeb62fc187d"></a><!-- doxytag: member="Variable::operator*" ref="ad437e0113e9f65d3dd62ceeb62fc187d" args="(RightType const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-<div class="memtemplate">
-template&lt;class RightType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator* </td>
-          <td>(</td>
-          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
@@ -1610,30 +1116,196 @@ template&lt;class RightType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary '*' operator to this and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'sumsqr' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
-<a class="anchor" id="af3defe0081ff93b2a16f6c1a357ab71f"></a><!-- doxytag: member="Variable::operator*=" ref="af3defe0081ff93b2a16f6c1a357ab71f" args="(RightType const &amp;right)" -->
+<a class="anchor" id="a8f78c4fa62e77ba7690c135ed12dc2c5"></a><!-- doxytag: member="Variable::difsqr" ref="a8f78c4fa62e77ba7690c135ed12dc2c5" args="(Variable const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
-<div class="memtemplate">
-template&lt;class RightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator*= </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::difsqr </td>
           <td>(</td>
-          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> and assign it to this one by applying the binary '*' operator to this and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'difsqr' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab7c84c48863c981bba6627de7648eca7"></a><!-- doxytag: member="Variable::sqrsum" ref="ab7c84c48863c981bba6627de7648eca7" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sqrsum </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'sqrsum' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae88845d0e4cb45c17de36479bde76788"></a><!-- doxytag: member="Variable::sqrdif" ref="ae88845d0e4cb45c17de36479bde76788" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sqrdif </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'sqrdif' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0dca0682594ef059ac3368ef39b21f85"></a><!-- doxytag: member="Variable::absdif" ref="a0dca0682594ef059ac3368ef39b21f85" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::absdif </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'absdif' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7c8506c73f5a8ac27daf7287aba65fa7"></a><!-- doxytag: member="Variable::thresh" ref="a7c8506c73f5a8ac27daf7287aba65fa7" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::thresh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'thresh' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3c3463bda7d53ada2724f8a198af441d"></a><!-- doxytag: member="Variable::round" ref="a3c3463bda7d53ada2724f8a198af441d" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::round </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'round' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0c86a2084bc6b339f47b1667764751b7"></a><!-- doxytag: member="Variable::trunc" ref="a0c86a2084bc6b339f47b1667764751b7" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::trunc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'trunc' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7af2f45c6213448c74d66303b03c83c8"></a><!-- doxytag: member="Variable::clip2" ref="a7af2f45c6213448c74d66303b03c83c8" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::clip2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'clip2' function to this one and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a88f419d631226b6186ebaf6e93c2ce2f"></a><!-- doxytag: member="Variable::decayFeedback" ref="a88f419d631226b6186ebaf6e93c2ce2f" args="(Variable const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::decayFeedback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'decayFeedback' function to this one and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -1660,29 +1332,6 @@ template&lt;class RightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a64d4ae239dcb1a5779fd46be8746f774"></a><!-- doxytag: member="Variable::operator+=" ref="a64d4ae239dcb1a5779fd46be8746f774" args="(RightType const &amp;right)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-<div class="memtemplate">
-template&lt;class RightType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator+= </td>
-          <td>(</td>
-          <td class="paramtype">RightType const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> and assign it to this one by applying the binary '+' operator to this and the <em>right</em> argument. </p>
-
-</div>
-</div>
 <a class="anchor" id="a48ca70774a64269d3d90c6451af0558e"></a><!-- doxytag: member="Variable::operator&#45;" ref="a48ca70774a64269d3d90c6451af0558e" args="(RightType const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1706,23 +1355,72 @@ template&lt;class RightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afd57a8bf39d84a1cfcc6936263f75f32"></a><!-- doxytag: member="Variable::operator&#45;" ref="afd57a8bf39d84a1cfcc6936263f75f32" args="() const " -->
+<a class="anchor" id="ad437e0113e9f65d3dd62ceeb62fc187d"></a><!-- doxytag: member="Variable::operator*" ref="ad437e0113e9f65d3dd62ceeb62fc187d" args="(RightType const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator- </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator* </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary '-' operator to this one. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary '*' operator to this and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a490cb39db286e5731eb36ddc9dba2600"></a><!-- doxytag: member="Variable::operator/" ref="a490cb39db286e5731eb36ddc9dba2600" args="(RightType const &amp;right) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator/ </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary '/' operator to this and the <em>right</em> argument. </p>
+
+</div>
+</div>
+<a class="anchor" id="a64d4ae239dcb1a5779fd46be8746f774"></a><!-- doxytag: member="Variable::operator+=" ref="a64d4ae239dcb1a5779fd46be8746f774" args="(RightType const &amp;right)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+<div class="memtemplate">
+template&lt;class RightType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">RightType const &amp;&#160;</td>
+          <td class="paramname"><em>right</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> and assign it to this one by applying the binary '+' operator to this and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -1749,7 +1447,7 @@ template&lt;class RightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a490cb39db286e5731eb36ddc9dba2600"></a><!-- doxytag: member="Variable::operator/" ref="a490cb39db286e5731eb36ddc9dba2600" args="(RightType const &amp;right) const " -->
+<a class="anchor" id="af3defe0081ff93b2a16f6c1a357ab71f"></a><!-- doxytag: member="Variable::operator*=" ref="af3defe0081ff93b2a16f6c1a357ab71f" args="(RightType const &amp;right)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -1758,17 +1456,17 @@ template&lt;class Type&gt; </div>
 template&lt;class RightType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator/ </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator*= </td>
           <td>(</td>
           <td class="paramtype">RightType const &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary '/' operator to this and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> and assign it to this one by applying the binary '*' operator to this and the <em>right</em> argument. </p>
 
 </div>
 </div>
@@ -1841,48 +1539,6 @@ template&lt;class RightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af6ab86cefc93c864dd7f454a495cc704"></a><!-- doxytag: member="Variable::operator=" ref="af6ab86cefc93c864dd7f454a495cc704" args="(Type const &amp;newValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>newValue</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>A convenience for <a class="el" href="class_variable.html#ab412784e254b3fb3914d7118b03777c9" title="Sets the current value.">setValue()</a>. </p>
-
-</div>
-</div>
-<a class="anchor" id="a607f32d2dfcdfeef6d5ea68d42328136"></a><!-- doxytag: member="Variable::operator=" ref="a607f32d2dfcdfeef6d5ea68d42328136" args="(Variable const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a>&amp; <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Assignment operator. </p>
-
-</div>
-</div>
 <a class="anchor" id="a2ce283ac54262e189a0da0ab0a1e7e6a"></a><!-- doxytag: member="Variable::operator&gt;" ref="a2ce283ac54262e189a0da0ab0a1e7e6a" args="(RightType const &amp;right) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -1929,35 +1585,14 @@ template&lt;class RightType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a204f23bd924338957d5b16aa210c054b"></a><!-- doxytag: member="Variable::pow" ref="a204f23bd924338957d5b16aa210c054b" args="(Variable const &amp;right) const " -->
+<a class="anchor" id="aa5a5e385c1bb37ef19d3022e449ebba2"></a><!-- doxytag: member="Variable::move" ref="aa5a5e385c1bb37ef19d3022e449ebba2" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::pow </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'pow' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="ab4a8fc30b2979f5c32bd43dbc1769678"></a><!-- doxytag: member="Variable::r2d" ref="ab4a8fc30b2979f5c32bd43dbc1769678" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::r2d </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::move </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -1966,7 +1601,107 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'r2d' function to this one. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'move' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7113540443a034e512972cd6334f6811"></a><!-- doxytag: member="Variable::inc" ref="a7113540443a034e512972cd6334f6811" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::inc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'inc' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4b172de6950b6d9e98728ba936d12bb5"></a><!-- doxytag: member="Variable::dec" ref="a4b172de6950b6d9e98728ba936d12bb5" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::dec </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'dec' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad1ff6375a25ebbfcd686752d1cf8095d"></a><!-- doxytag: member="Variable::abs" ref="ad1ff6375a25ebbfcd686752d1cf8095d" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::abs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'abs' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a85adc4c3da414f97328ad35d4c350ed1"></a><!-- doxytag: member="Variable::log2" ref="a85adc4c3da414f97328ad35d4c350ed1" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::log2 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'log2' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6fdd06820e46c7995b40d634a7ed674e"></a><!-- doxytag: member="Variable::neg" ref="a6fdd06820e46c7995b40d634a7ed674e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::neg </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'neg' function to this one. </p>
 
 </div>
 </div>
@@ -1990,106 +1725,6 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3c3463bda7d53ada2724f8a198af441d"></a><!-- doxytag: member="Variable::round" ref="a3c3463bda7d53ada2724f8a198af441d" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::round </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'round' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a9414bbb949835fb4396eb221958b26c2"></a><!-- doxytag: member="Variable::selectMax" ref="a9414bbb949835fb4396eb221958b26c2" args="(Variable const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::selectMax </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad849a67249fa3240aee1b63336380555"></a><!-- doxytag: member="Variable::selectMin" ref="ad849a67249fa3240aee1b63336380555" args="(Variable const &amp;other) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::selectMin </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab412784e254b3fb3914d7118b03777c9"></a><!-- doxytag: member="Variable::setValue" ref="ab412784e254b3fb3914d7118b03777c9" args="(Type const &amp;newValue)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::setValue </td>
-          <td>(</td>
-          <td class="paramtype">Type const &amp;&#160;</td>
-          <td class="paramname"><em>newValue</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Sets the current value. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8a5d19cc6f61bc34b526cee17fb95134"></a><!-- doxytag: member="Variable::sign" ref="a8a5d19cc6f61bc34b526cee17fb95134" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sign </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'sign' function to this one. </p>
-
-</div>
-</div>
 <a class="anchor" id="ae71d0c4eb460c994534923cbcbfc4926"></a><!-- doxytag: member="Variable::sin" ref="ae71d0c4eb460c994534923cbcbfc4926" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -2110,14 +1745,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1a3d9e65cf0d34e3425450efb4157c6d"></a><!-- doxytag: member="Variable::sinh" ref="a1a3d9e65cf0d34e3425450efb4157c6d" args="() const " -->
+<a class="anchor" id="a3be1ac06521eeb553688fa4299a0f5af"></a><!-- doxytag: member="Variable::cos" ref="a3be1ac06521eeb553688fa4299a0f5af" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sinh </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::cos </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -2126,131 +1761,7 @@ template&lt;class Type&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'sinh' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="ae88845d0e4cb45c17de36479bde76788"></a><!-- doxytag: member="Variable::sqrdif" ref="ae88845d0e4cb45c17de36479bde76788" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sqrdif </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'sqrdif' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="ab7c84c48863c981bba6627de7648eca7"></a><!-- doxytag: member="Variable::sqrsum" ref="ab7c84c48863c981bba6627de7648eca7" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sqrsum </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'sqrsum' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a01586350b26418e2d007ff9a293f1550"></a><!-- doxytag: member="Variable::sqrt" ref="a01586350b26418e2d007ff9a293f1550" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sqrt </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'sqrt' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="a6ce54f286ec81993b685286f6993ca4a"></a><!-- doxytag: member="Variable::squared" ref="a6ce54f286ec81993b685286f6993ca4a" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::squared </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'squared' function to this one. </p>
-
-</div>
-</div>
-<a class="anchor" id="aac049b45484a41b74aed4de6f48e23b3"></a><!-- doxytag: member="Variable::subop" ref="aac049b45484a41b74aed4de6f48e23b3" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::subop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'subop' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a25ddb483dc9a0b40c40f6e5a9fc5c2d6"></a><!-- doxytag: member="Variable::sumsqr" ref="a25ddb483dc9a0b40c40f6e5a9fc5c2d6" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sumsqr </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'sumsqr' function to this one and the <em>right</em> argument. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'cos' function to this one. </p>
 
 </div>
 </div>
@@ -2274,6 +1785,106 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a983239f71827c758e79f47a732e24c8c"></a><!-- doxytag: member="Variable::asin" ref="a983239f71827c758e79f47a732e24c8c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::asin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'asin' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9b4f8130fc61470e33b893ba2aed89e8"></a><!-- doxytag: member="Variable::acos" ref="a9b4f8130fc61470e33b893ba2aed89e8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::acos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'acos' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a984477a59f043ca6fb6fe90a91d8445b"></a><!-- doxytag: member="Variable::atan" ref="a984477a59f043ca6fb6fe90a91d8445b" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::atan </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'atan' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1a3d9e65cf0d34e3425450efb4157c6d"></a><!-- doxytag: member="Variable::sinh" ref="a1a3d9e65cf0d34e3425450efb4157c6d" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sinh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'sinh' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a70d1a89f4dee674196317d3f38650633"></a><!-- doxytag: member="Variable::cosh" ref="a70d1a89f4dee674196317d3f38650633" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::cosh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'cosh' function to this one. </p>
+
+</div>
+</div>
 <a class="anchor" id="a967c969f3f652baba2ce895962c24dbe"></a><!-- doxytag: member="Variable::tanh" ref="a967c969f3f652baba2ce895962c24dbe" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -2294,58 +1905,14 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7c8506c73f5a8ac27daf7287aba65fa7"></a><!-- doxytag: member="Variable::thresh" ref="a7c8506c73f5a8ac27daf7287aba65fa7" args="(Variable const &amp;right) const " -->
+<a class="anchor" id="a01586350b26418e2d007ff9a293f1550"></a><!-- doxytag: member="Variable::sqrt" ref="a01586350b26418e2d007ff9a293f1550" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::thresh </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'thresh' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="a0c86a2084bc6b339f47b1667764751b7"></a><!-- doxytag: member="Variable::trunc" ref="a0c86a2084bc6b339f47b1667764751b7" args="(Variable const &amp;right) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::trunc </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the binary 'trunc' function to this one and the <em>right</em> argument. </p>
-
-</div>
-</div>
-<a class="anchor" id="aeeed31e594cdf5ee0468e6ed15ee8a7d"></a><!-- doxytag: member="Variable::unary" ref="aeeed31e594cdf5ee0468e6ed15ee8a7d" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type&gt; </div>
-<div class="memtemplate">
-template&lt;Type(*)(Typeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::unary </td>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sqrt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -2354,7 +1921,327 @@ template&lt;Type(*)(Typeconst &amp;) op&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Builds a unary operation from a source <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>. </p>
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'sqrt' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae2707e545f61e1c4f86915003bd9c0da"></a><!-- doxytag: member="Variable::log" ref="ae2707e545f61e1c4f86915003bd9c0da" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::log </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'log' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="af5f189b95aced9b421164f901517a6ab"></a><!-- doxytag: member="Variable::log10" ref="af5f189b95aced9b421164f901517a6ab" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::log10 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'log10' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2a22c822c0cbec961b9a1329f6cef3b9"></a><!-- doxytag: member="Variable::exp" ref="a2a22c822c0cbec961b9a1329f6cef3b9" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::exp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'exp' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6ce54f286ec81993b685286f6993ca4a"></a><!-- doxytag: member="Variable::squared" ref="a6ce54f286ec81993b685286f6993ca4a" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::squared </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'squared' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5e719e3d0e0314cd155626120478a731"></a><!-- doxytag: member="Variable::cubed" ref="a5e719e3d0e0314cd155626120478a731" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::cubed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'cubed' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="af3e5b91a96af9ecf7b5c6f91e05c4926"></a><!-- doxytag: member="Variable::ceil" ref="af3e5b91a96af9ecf7b5c6f91e05c4926" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::ceil </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'ceil' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab7404cb8c94b1669c953914051dbb239"></a><!-- doxytag: member="Variable::floor" ref="ab7404cb8c94b1669c953914051dbb239" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::floor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'floor' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="adcb0e1f0d8545fcdba04cc307d8f20ba"></a><!-- doxytag: member="Variable::frac" ref="adcb0e1f0d8545fcdba04cc307d8f20ba" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::frac </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'frac' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8a5d19cc6f61bc34b526cee17fb95134"></a><!-- doxytag: member="Variable::sign" ref="a8a5d19cc6f61bc34b526cee17fb95134" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::sign </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'sign' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae029ebd0d601109d427b91f968b0428b"></a><!-- doxytag: member="Variable::m2f" ref="ae029ebd0d601109d427b91f968b0428b" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::m2f </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'm2f' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4c5689400c7389dc7cb0081d19648c9a"></a><!-- doxytag: member="Variable::f2m" ref="a4c5689400c7389dc7cb0081d19648c9a" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::f2m </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'f2m' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae9ebc64440f71428b24c9c725cfc47d8"></a><!-- doxytag: member="Variable::a2dB" ref="ae9ebc64440f71428b24c9c725cfc47d8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::a2dB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'a2dB' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="a226ff6ec2d54fdc50dd6bce87415ea9c"></a><!-- doxytag: member="Variable::dB2a" ref="a226ff6ec2d54fdc50dd6bce87415ea9c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::dB2a </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'dB2a' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac161203dc921c344b0c992922494390c"></a><!-- doxytag: member="Variable::d2r" ref="ac161203dc921c344b0c992922494390c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::d2r </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'd2r' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab4a8fc30b2979f5c32bd43dbc1769678"></a><!-- doxytag: member="Variable::r2d" ref="ab4a8fc30b2979f5c32bd43dbc1769678" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::r2d </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'r2d' function to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab8a63ff6989cee2ab236e02bfcfbf484"></a><!-- doxytag: member="Variable::distort" ref="ab8a63ff6989cee2ab236e02bfcfbf484" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::distort </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary 'distort' function to this one. </p>
 
 </div>
 </div>
@@ -2378,6 +2265,136 @@ template&lt;class Type&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="afd57a8bf39d84a1cfcc6936263f75f32"></a><!-- doxytag: member="Variable::operator&#45;" ref="afd57a8bf39d84a1cfcc6936263f75f32" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a new <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> by applying the unary '-' operator to this one. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad849a67249fa3240aee1b63336380555"></a><!-- doxytag: member="Variable::selectMin" ref="ad849a67249fa3240aee1b63336380555" args="(Variable const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::selectMin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9414bbb949835fb4396eb221958b26c2"></a><!-- doxytag: member="Variable::selectMax" ref="a9414bbb949835fb4396eb221958b26c2" args="(Variable const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_variable.html">Variable</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::selectMax </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac469cff8d1ff1991abdf1bce0a1cf693"></a><!-- doxytag: member="Variable::getTypeCode" ref="ac469cff8d1ff1991abdf1bce0a1cf693" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::getTypeCode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5a1841278390d071d56d99ade1969de3"></a><!-- doxytag: member="Variable::getValueTypeCode" ref="a5a1841278390d071d56d99ade1969de3" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::getValueTypeCode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a91180255242b2fa2f3400329ed801be3"></a><!-- doxytag: member="Variable::ar" ref="a91180255242b2fa2f3400329ed801be3" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::ar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a608f4ab21fe3e5a22bc142fd95037ba7"></a><!-- doxytag: member="Variable::kr" ref="a608f4ab21fe3e5a22bc142fd95037ba7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_variable.html">Variable</a>&lt; Type &gt;::kr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___variable_8h_source.html">plonk_Variable.h</a></li>
 </ul>
@@ -2396,7 +2413,7 @@ template&lt;class Type&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -71,15 +70,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="WeakPointer" --><!-- doxytag: inherits="SmartPointer" -->
 <p>Holds a weak reference to a <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>.  
  <a href="class_weak_pointer.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___weak_pointer_8h_source.html">plonk_WeakPointer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for WeakPointer:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_weak_pointer.png" usemap="#WeakPointer_map" alt=""/>
   <map id="WeakPointer_map" name="WeakPointer_map">
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,84,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,84,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,84,24"/>
 </map>
  </div></div>
 
@@ -87,25 +85,47 @@ Inheritance diagram for WeakPointer:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#ad97d3c442f598b07bc6923ac70b8bfc6">WeakPointer</a> (<a class="el" href="class_smart_pointer.html">SmartPointer</a> *smartPointerToUse)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#af0da7b77be58a80485e5389d254ee418">setWeakPointer</a> (<a class="el" href="class_smart_pointer.html">SmartPointer</a> *smartPointerToUse)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#a903f09bb9519267c4d1cb23da7fc7675">WeakPointer</a> (<a class="el" href="class_smart_pointer_counter.html">SmartPointerCounter</a> *<a class="el" href="class_smart_pointer.html#a7ba301343cc7433dab04868a57419aba">counter</a>)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#abc4bab5811cb1a3a32deb9bbc2f2a43e">~WeakPointer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_smart_pointer.html">SmartPointer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#a82b46043d7e7769a73afa6f038381368">getWeakPointer</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#a651580fc557ba131c7f98230b46b9611">incrementWeakCount</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#a65dee5f2a6827def4eaa975228382b7d">decrementWeakCount</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#a0c1570610fee6ae194cbccb5c262a771">getWeakCount</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#a2510e7c8bbb811f5e326b7d6a69e4240">incrementPeerRefCount</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#ae59878943cfb3189c32db95ad170e1d7">decrementPeerRefCount</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_weak_pointer.html#a140d379191d250f730dbf4bb5722e142">getPeerRefCount</a> () const   throw ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Holds a weak reference to a <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>. </p>
 <p>This is a peer to a <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> and stores a copy of the pointer. The main difference is that this copy does not increment the reference count of the <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> and gets set to 0 when the <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> is deleted. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>, <a class="el" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a> </dd></dl>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad97d3c442f598b07bc6923ac70b8bfc6"></a><!-- doxytag: member="WeakPointer::WeakPointer" ref="ad97d3c442f598b07bc6923ac70b8bfc6" args="(SmartPointer *smartPointerToUse)" -->
+<a class="anchor" id="a903f09bb9519267c4d1cb23da7fc7675"></a><!-- doxytag: member="WeakPointer::WeakPointer" ref="a903f09bb9519267c4d1cb23da7fc7675" args="(SmartPointerCounter *counter)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">WeakPointer::WeakPointer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_smart_pointer.html">SmartPointer</a> *&#160;</td>
-          <td class="paramname"><em>smartPointerToUse</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_smart_pointer_counter.html">SmartPointerCounter</a> *&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
           <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abc4bab5811cb1a3a32deb9bbc2f2a43e"></a><!-- doxytag: member="WeakPointer::~WeakPointer" ref="abc4bab5811cb1a3a32deb9bbc2f2a43e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WeakPointer::~WeakPointer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -130,16 +150,95 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af0da7b77be58a80485e5389d254ee418"></a><!-- doxytag: member="WeakPointer::setWeakPointer" ref="af0da7b77be58a80485e5389d254ee418" args="(SmartPointer *smartPointerToUse)" -->
+<a class="anchor" id="a651580fc557ba131c7f98230b46b9611"></a><!-- doxytag: member="WeakPointer::incrementWeakCount" ref="a651580fc557ba131c7f98230b46b9611" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void WeakPointer::setWeakPointer </td>
+          <td class="memname">void WeakPointer::incrementWeakCount </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_smart_pointer.html">SmartPointer</a> *&#160;</td>
-          <td class="paramname"><em>smartPointerToUse</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a65dee5f2a6827def4eaa975228382b7d"></a><!-- doxytag: member="WeakPointer::decrementWeakCount" ref="a65dee5f2a6827def4eaa975228382b7d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WeakPointer::decrementWeakCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0c1570610fee6ae194cbccb5c262a771"></a><!-- doxytag: member="WeakPointer::getWeakCount" ref="a0c1570610fee6ae194cbccb5c262a771" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int WeakPointer::getWeakCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2510e7c8bbb811f5e326b7d6a69e4240"></a><!-- doxytag: member="WeakPointer::incrementPeerRefCount" ref="a2510e7c8bbb811f5e326b7d6a69e4240" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WeakPointer::incrementPeerRefCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae59878943cfb3189c32db95ad170e1d7"></a><!-- doxytag: member="WeakPointer::decrementPeerRefCount" ref="ae59878943cfb3189c32db95ad170e1d7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WeakPointer::decrementPeerRefCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a140d379191d250f730dbf4bb5722e142"></a><!-- doxytag: member="WeakPointer::getPeerRefCount" ref="a140d379191d250f730dbf4bb5722e142" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int WeakPointer::getPeerRefCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
         </tr>
       </table>
 </div>
@@ -166,7 +265,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

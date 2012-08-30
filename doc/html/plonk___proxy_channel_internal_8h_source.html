@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_3f1b4f3ea3075fcfdf842d116a9177d8.html">graph</a>      </li>
-      <li class="navelem"><a class="el" href="dir_e6ca1960e28fd5ec01771c3049c42b87.html">channel</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_ProxyChannelInternal.h</div>  </div>
@@ -146,7 +136,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00072"></a><a class="code" href="class_proxy_channel_internal.html#a0c4bc8b6562f013b7a08d2245f93463a">00072</a>     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_proxy_channel_internal.html#a0c4bc8b6562f013b7a08d2245f93463a">getName</a>() <span class="keyword">const</span> throw()
 <a name="l00073"></a>00073     {
 <a name="l00074"></a>00074         <span class="keyword">const</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* proxyOwner 
-<a name="l00075"></a>00075             = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>());
+<a name="l00075"></a>00075             = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>());
 <a name="l00076"></a>00076 
 <a name="l00077"></a>00077         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Proxy (&quot;</span> 
 <a name="l00078"></a>00078                 + proxyOwner-&gt;<a class="code" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">getName</a>() 
@@ -158,7 +148,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00084"></a><a class="code" href="class_proxy_channel_internal.html#a22e0b0445caae0b72bfefeca6f481599">00084</a>     <a class="code" href="class_numerical_array.html">IntArray</a> <a class="code" href="class_proxy_channel_internal.html#a22e0b0445caae0b72bfefeca6f481599">getInputKeys</a>() <span class="keyword">const</span> throw()
 <a name="l00085"></a>00085     {
 <a name="l00086"></a>00086         <span class="keyword">const</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* proxyOwner 
-<a name="l00087"></a>00087             = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>());
+<a name="l00087"></a>00087             = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>());
 <a name="l00088"></a>00088         
 <a name="l00089"></a>00089         <span class="keywordflow">return</span> proxyOwner-&gt;<a class="code" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">getInputKeys</a>();
 <a name="l00090"></a>00090     }    
@@ -166,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00092"></a><a class="code" href="class_proxy_channel_internal.html#aaede52545e364d6ab6caad4587c66100">00092</a>     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_proxy_channel_internal.html#aaede52545e364d6ab6caad4587c66100">getLabel</a>() <span class="keyword">const</span> throw() 
 <a name="l00093"></a>00093     { 
 <a name="l00094"></a>00094         <span class="keyword">const</span> <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* proxyOwner 
-<a name="l00095"></a>00095             = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>());
+<a name="l00095"></a>00095             = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>());
 <a name="l00096"></a>00096 
 <a name="l00097"></a>00097         <span class="keyword">const</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> ownerLabel = proxyOwner-&gt;<a class="code" href="class_channel_internal_core.html#a27bda1a4eba75b6e5266af3939564929">getLabel</a>();
 <a name="l00098"></a>00098         
@@ -179,7 +169,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00105"></a><a class="code" href="class_proxy_channel_internal.html#a278f8a2f0b4880b7b65d586b681020d7">00105</a>     <span class="keywordtype">void</span> <a class="code" href="class_proxy_channel_internal.html#a278f8a2f0b4880b7b65d586b681020d7">setLabel</a>(<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; newId) <span class="keywordflow">throw</span>()
 <a name="l00106"></a>00106     {
 <a name="l00107"></a>00107         <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* proxyOwner 
-<a name="l00108"></a>00108             = <span class="keyword">static_cast&lt;</span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>());
+<a name="l00108"></a>00108             = <span class="keyword">static_cast&lt;</span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>());
 <a name="l00109"></a>00109         
 <a name="l00110"></a>00110         proxyOwner-&gt;<a class="code" href="class_channel_internal_core.html#ab2074527635ab833ba3cd9b98e759731">setLabel</a> (newId);
 <a name="l00111"></a>00111     }
@@ -199,21 +189,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00125"></a><a class="code" href="class_proxy_channel_internal.html#aeaf9c14f6cd394b352e2d8828bff44f8">00125</a>     <span class="keywordtype">void</span> <a class="code" href="class_proxy_channel_internal.html#aeaf9c14f6cd394b352e2d8828bff44f8" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
 <a name="l00126"></a>00126     {        
 <a name="l00127"></a>00127         <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* proxyOwner 
-<a name="l00128"></a>00128             = <span class="keyword">static_cast&lt;</span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>());
+<a name="l00128"></a>00128             = <span class="keyword">static_cast&lt;</span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>());
 <a name="l00129"></a>00129         
 <a name="l00130"></a>00130         proxyOwner-&gt;<a class="code" href="class_channel_internal_core.html#a0d5725cc71173dcff25b08f992acf1ea" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (channel);
 <a name="l00131"></a>00131     }    
 <a name="l00132"></a>00132     
-<a name="l00133"></a><a class="code" href="class_proxy_channel_internal.html#a461146a715e59e231ce1ddb9ea39c0e0">00133</a>     <span class="keywordtype">bool</span> <a class="code" href="class_proxy_channel_internal.html#a461146a715e59e231ce1ddb9ea39c0e0" title="To check for mutual-only references remaining.">deleteIfOnlyMutualReferencesRemain</a>() throw()
-<a name="l00134"></a>00134     {
-<a name="l00135"></a>00135         <a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>* proxyOwner 
-<a name="l00136"></a>00136             = <span class="keyword">static_cast&lt;</span><a class="code" href="class_channel_internal_base.html" title="The templated base class for all internal channel processes.">InternalBase</a>*<span class="keyword">&gt;</span> (owner.<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>());
-<a name="l00137"></a>00137         
-<a name="l00138"></a>00138         <span class="keywordflow">if</span> (proxyOwner != 0)
-<a name="l00139"></a>00139             <span class="keywordflow">return</span> proxyOwner-&gt;<a class="code" href="class_smart_pointer.html#a7926abda357aff5a8f40c9dc9873c6da" title="To check for mutual-only references remaining.">deleteIfOnlyMutualReferencesRemain</a>();    
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00142"></a>00142     }
+<a name="l00133"></a>00133 <span class="comment">//    bool deleteIfOnlyMutualReferencesRemain() throw()</span>
+<a name="l00134"></a>00134 <span class="comment">//    {</span>
+<a name="l00135"></a>00135 <span class="comment">//        InternalBase* proxyOwner </span>
+<a name="l00136"></a>00136 <span class="comment">//            = static_cast&lt;InternalBase*&gt; (owner.getInternal());</span>
+<a name="l00137"></a>00137 <span class="comment">//        </span>
+<a name="l00138"></a>00138 <span class="comment">//        if (proxyOwner != 0)</span>
+<a name="l00139"></a>00139 <span class="comment">//            return proxyOwner-&gt;deleteIfOnlyMutualReferencesRemain();    </span>
+<a name="l00140"></a>00140 <span class="comment">//</span>
+<a name="l00141"></a>00141 <span class="comment">//              return false;</span>
+<a name="l00142"></a>00142 <span class="comment">//    }</span>
 <a name="l00143"></a>00143             
 <a name="l00144"></a><a class="code" href="class_proxy_channel_internal.html#ae0f6c255c3b8fcc8a9e98fd4dd471bd9">00144</a>     <span class="keywordtype">void</span> <a class="code" href="class_proxy_channel_internal.html#ae0f6c255c3b8fcc8a9e98fd4dd471bd9" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
 <a name="l00145"></a>00145     {        
@@ -244,7 +234,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,13 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_3f1b4f3ea3075fcfdf842d116a9177d8.html">graph</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -74,18 +66,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_Unit.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="plonk___graph_forward_declarations_8h_source.html">plonk_GraphForwardDeclarations.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___process_info_8h_source.html">utility/plonk_ProcessInfo.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___block_size_8h_source.html">utility/plonk_BlockSize.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___sample_rate_8h_source.html">utility/plonk_SampleRate.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___info_headers_8h_source.html">info/plonk_InfoHeaders.h</a>&quot;</code><br/>
-</div>
+
 <p><a href="plonk___unit_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html">UnitBase&lt; SampleType &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A Unit is effectively an array of Channel objects.  <a href="class_unit_base.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base_1_1_initial_unit.html">UnitBase&lt; SampleType &gt;::InitialUnit</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___unit_8h.html#a50479476214bfb1cb49a27e7d0f5af3e">PLONK_BINARYOPGLOBALS_TEMPLATE</a> (<a class="el" href="class_unit_base.html">UnitBase</a>)</td></tr>
@@ -101,6 +89,40 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Mixes a unit down to a single channel.  <a href="#a41450edfb112748a0239029b96ac711b"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a50479476214bfb1cb49a27e7d0f5af3e"></a><!-- doxytag: member="plonk_Unit.h::PLONK_BINARYOPGLOBALS_TEMPLATE" ref="a50479476214bfb1cb49a27e7d0f5af3e" args="(UnitBase)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PLONK_BINARYOPGLOBALS_TEMPLATE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6c9e5cbdeabe6ca5e520ea3ed6816b3c"></a><!-- doxytag: member="plonk_Unit.h::PLONK_UNARYOPGLOBALS_TEMPLATE" ref="a6c9e5cbdeabe6ca5e520ea3ed6816b3c" args="(UnitBase)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PLONK_UNARYOPGLOBALS_TEMPLATE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a19106d53bdd1b43ee20a83fb33cb647e"></a><!-- doxytag: member="plonk_Unit.h::ar" ref="a19106d53bdd1b43ee20a83fb33cb647e" args="(UnitBase&lt; SampleType &gt; const &amp;unit, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -181,40 +203,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a50479476214bfb1cb49a27e7d0f5af3e"></a><!-- doxytag: member="plonk_Unit.h::PLONK_BINARYOPGLOBALS_TEMPLATE" ref="a50479476214bfb1cb49a27e7d0f5af3e" args="(UnitBase)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">PLONK_BINARYOPGLOBALS_TEMPLATE </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6c9e5cbdeabe6ca5e520ea3ed6816b3c"></a><!-- doxytag: member="plonk_Unit.h::PLONK_UNARYOPGLOBALS_TEMPLATE" ref="a6c9e5cbdeabe6ca5e520ea3ed6816b3c" args="(UnitBase)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">PLONK_UNARYOPGLOBALS_TEMPLATE </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitBase</a>&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -230,7 +218,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

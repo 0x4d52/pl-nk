@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -83,10 +82,16 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <em>Plank AtomicP</em> object.  <a href="#ga48a4a79f0f042e2971afe827db1e5efd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#ga68f8298157fccc5a71a0785e37465a03">pl_AtomicP_Get</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current value.  <a href="#ga68f8298157fccc5a71a0785e37465a03"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#ga2e426d5cc548af7df01d1455c0709068">pl_AtomicP_GetUnchecked</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current value nonatomically.  <a href="#ga2e426d5cc548af7df01d1455c0709068"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#gae0357d56df22fa5095e124e530d0a7db">pl_AtomicP_GetExtra</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used for this class.  <a href="#gae0357d56df22fa5095e124e530d0a7db"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#ga15b73a82fd82e7324c9afa4e0bc8eb7f">pl_AtomicP_GetExtraUnchecked</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used for this class.  <a href="#ga15b73a82fd82e7324c9afa4e0bc8eb7f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#gaf34822f085b42e6cf2c8a8bf2a33621c">pl_AtomicP_Swap</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p, <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> newPtr)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap the current pointer with a new pointer.  <a href="#gaf34822f085b42e6cf2c8a8bf2a33621c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#ga98e1591583586b6a0230381f68a860ae">pl_AtomicP_SwapOther</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p1, <a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p2)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap over two values.  <a href="#ga98e1591583586b6a0230381f68a860ae"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#ga956fba70602f11fa64747eeab5158bec">pl_AtomicP_Set</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p, <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> newPtr)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current pointer to a new pointer.  <a href="#ga956fba70602f11fa64747eeab5158bec"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_atomic_p_class.html#ga306a94df2dd34d91234ab9b73bffda4d">pl_AtomicP_Add</a> (<a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> p, <a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a> operand)</td></tr>
@@ -121,85 +126,22 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga306a94df2dd34d91234ab9b73bffda4d"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Add" ref="ga306a94df2dd34d91234ab9b73bffda4d" args="(PlankAtomicPRef p, PlankL operand)" -->
+<a class="anchor" id="ga91086b7040d5c5d0594cceb1d8c27550"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_CreateAndInit" ref="ga91086b7040d5c5d0594cceb1d8c27550" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Add </td>
+          <td class="memname"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> pl_AtomicP_CreateAndInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td>
-          <td class="paramname"><em>operand</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Offset current pointer. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
-    <tr><td class="paramname">operand</td><td>The number of bytes by which to offset. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga7bbfec08311361e425765d80d8ee4287"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_CompareAndSwap" ref="ga7bbfec08311361e425765d80d8ee4287" args="(PlankAtomicPRef p, PlankP oldPtr, PlankP newPtr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_AtomicP_CompareAndSwap </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
-          <td class="paramname"><em>oldPtr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
-          <td class="paramname"><em>newPtr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Swap the current pointer with a new pointer if a specified old pointer is still current. </p>
-<p>This is the most important atomic operation for each atomic class, many other operations are based on this. If the operation fails the user would generally try again by getting the old pointer again and retrying to write the new pointer (e.g., in a loop) until successful. If there are no other threads contending to write the pointer the operation should succeed without blocking. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
-    <tr><td class="paramname">oldPtr</td><td>The expected old pointer being currently stored. </td></tr>
-    <tr><td class="paramname">newPtr</td><td>The new pointer to attempt to store. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the swap was successful, otherwise <code>false</code>. </dd></dl>
+<p>Creates and initialises a <em>Plank AtomicP</em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank AtomicP</em> object as an opaque reference or PLANK_NULL. </dd></dl>
 
 </div>
 </div>
@@ -222,48 +164,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga91086b7040d5c5d0594cceb1d8c27550"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_CreateAndInit" ref="ga91086b7040d5c5d0594cceb1d8c27550" args="()" -->
+<a class="anchor" id="ga0849a41418ac1d472939355373c8b70e"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Init" ref="ga0849a41418ac1d472939355373c8b70e" args="(PlankAtomicPRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a> pl_AtomicP_CreateAndInit </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AtomicP_Init </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Creates and initialises a <em>Plank AtomicP</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank AtomicP</em> object as an opaque reference or PLANK_NULL. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga20daf4da5c87a2d8e48405cc8c091dae"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Decrement" ref="ga20daf4da5c87a2d8e48405cc8c091dae" args="(PlankAtomicPRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Decrement </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Decrement the current pointer by 1 byte. </p>
+<p>Initialise a <em>Plank AtomicP</em> object. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
 
 </div>
 </div>
@@ -345,6 +268,32 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga2e426d5cc548af7df01d1455c0709068"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_GetUnchecked" ref="ga2e426d5cc548af7df01d1455c0709068" args="(PlankAtomicPRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_GetUnchecked </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the current value nonatomically. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The value. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="gae0357d56df22fa5095e124e530d0a7db"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_GetExtra" ref="gae0357d56df22fa5095e124e530d0a7db" args="(PlankAtomicPRef p)" -->
 <div class="memitem">
 <div class="memproto">
@@ -372,38 +321,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaf79c17977d7445ff5fbf6ba58a34748f"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Increment" ref="gaf79c17977d7445ff5fbf6ba58a34748f" args="(PlankAtomicPRef p)" -->
+<a class="anchor" id="ga15b73a82fd82e7324c9afa4e0bc8eb7f"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_GetExtraUnchecked" ref="ga15b73a82fd82e7324c9afa4e0bc8eb7f" args="(PlankAtomicPRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Increment </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Increment the current pointer by 1 byte. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga0849a41418ac1d472939355373c8b70e"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Init" ref="ga0849a41418ac1d472939355373c8b70e" args="(PlankAtomicPRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AtomicP_Init </td>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a> pl_AtomicP_GetExtraUnchecked </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -413,87 +336,15 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Initialise a <em>Plank AtomicP</em> object. </p>
+<p>Not used for this class. </p>
+<p>Use <a class="el" href="group___plank_atomic_p_x_class.html">AtomicPX </a> for safer pointer storage. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicI</em> object. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga956fba70602f11fa64747eeab5158bec"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Set" ref="ga956fba70602f11fa64747eeab5158bec" args="(PlankAtomicPRef p, PlankP newPtr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void pl_AtomicP_Set </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
-          <td class="paramname"><em>newPtr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set the current pointer to a new pointer. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
-    <tr><td class="paramname">newPtr</td><td>The new pointer to store. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="ga6c4c61a1de6e2f7999c6ff6912dbe4d7"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Subtract" ref="ga6c4c61a1de6e2f7999c6ff6912dbe4d7" args="(PlankAtomicPRef p, PlankL operand)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Subtract </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td>
-          <td class="paramname"><em>operand</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Offset current pointer in a negative direct. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
-    <tr><td class="paramname">operand</td><td>The number of bytes to subtract from the pointer. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Always returns 0. </dd></dl>
 
 </div>
 </div>
@@ -534,6 +385,250 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga98e1591583586b6a0230381f68a860ae"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_SwapOther" ref="ga98e1591583586b6a0230381f68a860ae" args="(PlankAtomicPRef p1, PlankAtomicPRef p2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void pl_AtomicP_SwapOther </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Swap over two values. </p>
+<p>The contents of p1 is copied to p2 and p2 is copied to p1 in an atomic operation. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p1</td><td>One <em>Plank AtomicP</em> object. </td></tr>
+    <tr><td class="paramname">p2</td><td>The other <em>Plank AtomicP</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga956fba70602f11fa64747eeab5158bec"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Set" ref="ga956fba70602f11fa64747eeab5158bec" args="(PlankAtomicPRef p, PlankP newPtr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void pl_AtomicP_Set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
+          <td class="paramname"><em>newPtr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the current pointer to a new pointer. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+    <tr><td class="paramname">newPtr</td><td>The new pointer to store. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga306a94df2dd34d91234ab9b73bffda4d"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Add" ref="ga306a94df2dd34d91234ab9b73bffda4d" args="(PlankAtomicPRef p, PlankL operand)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Add </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td>
+          <td class="paramname"><em>operand</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Offset current pointer. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+    <tr><td class="paramname">operand</td><td>The number of bytes by which to offset. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga6c4c61a1de6e2f7999c6ff6912dbe4d7"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Subtract" ref="ga6c4c61a1de6e2f7999c6ff6912dbe4d7" args="(PlankAtomicPRef p, PlankL operand)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Subtract </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>&#160;</td>
+          <td class="paramname"><em>operand</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Offset current pointer in a negative direct. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+    <tr><td class="paramname">operand</td><td>The number of bytes to subtract from the pointer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaf79c17977d7445ff5fbf6ba58a34748f"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Increment" ref="gaf79c17977d7445ff5fbf6ba58a34748f" args="(PlankAtomicPRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Increment </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Increment the current pointer by 1 byte. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga20daf4da5c87a2d8e48405cc8c091dae"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_Decrement" ref="ga20daf4da5c87a2d8e48405cc8c091dae" args="(PlankAtomicPRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_AtomicP_Decrement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Decrement the current pointer by 1 byte. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The new pointer. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga7bbfec08311361e425765d80d8ee4287"></a><!-- doxytag: member="plank_Atomic.h::pl_AtomicP_CompareAndSwap" ref="ga7bbfec08311361e425765d80d8ee4287" args="(PlankAtomicPRef p, PlankP oldPtr, PlankP newPtr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_AtomicP_CompareAndSwap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_atomic_p_class.html#gac6ebd37367523407839a0f9a4fc5d9ea">PlankAtomicPRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
+          <td class="paramname"><em>oldPtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td>
+          <td class="paramname"><em>newPtr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Swap the current pointer with a new pointer if a specified old pointer is still current. </p>
+<p>This is the most important atomic operation for each atomic class, many other operations are based on this. If the operation fails the user would generally try again by getting the old pointer again and retrying to write the new pointer (e.g., in a loop) until successful. If there are no other threads contending to write the pointer the operation should succeed without blocking. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank AtomicP</em> object. </td></tr>
+    <tr><td class="paramname">oldPtr</td><td>The expected old pointer being currently stored. </td></tr>
+    <tr><td class="paramname">newPtr</td><td>The new pointer to attempt to store. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the swap was successful, otherwise <code>false</code>. </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -549,7 +644,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

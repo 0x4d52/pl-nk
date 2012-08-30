@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_96f503a49b04edc511af40b79507ca5e.html">hosts</a>      </li>
-      <li class="navelem"><a class="el" href="dir_1d5b8b25e51cd7f3e0439f5b07c83b3a.html">juce</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_JuceAudioHost.h</div>  </div>
@@ -110,42 +100,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00036"></a>00036 <span class="comment"> -------------------------------------------------------------------------------</span>
 <a name="l00037"></a>00037 <span class="comment"> */</span>
 <a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLONK_JUCEAUDIOHOST_H</span>
-<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_JUCEAUDIOHOST_H</span>
-<a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &quot;JuceHeader.h&quot;</span> <span class="comment">// assumes you&#39;re using a Jucer-created project with a JuceHeader.h file</span>
+<a name="l00039"></a>00039 <span class="comment">/*</span>
+<a name="l00040"></a>00040 <span class="comment"> You must ensure you comply with the Juce license (either GPL or Commercial)</span>
+<a name="l00041"></a>00041 <span class="comment"> to use this code, see http://juce.com</span>
+<a name="l00042"></a>00042 <span class="comment"> */</span>
 <a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>
-<a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">00046</a> <span class="keyword">class </span><a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">JuceAudioHost</a> :   <span class="keyword">public</span> <a class="code" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase</a>&lt;float&gt;,
-<a name="l00047"></a>00047                         <span class="keyword">public</span> AudioIODeviceCallback
-<a name="l00048"></a>00048 {
-<a name="l00049"></a>00049 <span class="keyword">public</span>:
-<a name="l00050"></a>00050     <a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">JuceAudioHost</a>() <span class="keywordflow">throw</span>();
-<a name="l00051"></a>00051     ~<a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">JuceAudioHost</a>();
-<a name="l00052"></a>00052     
-<a name="l00053"></a>00053     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getHostName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00054"></a>00054     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getNativeHostName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00055"></a>00055     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getInputName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00056"></a>00056     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getOutputName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00057"></a>00057     <span class="keywordtype">double</span> getCpuUsage() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059     <span class="keywordtype">void</span> startHost() <span class="keywordflow">throw</span>();
-<a name="l00060"></a>00060     <span class="keywordtype">void</span> stopHost() <span class="keywordflow">throw</span>();
-<a name="l00061"></a>00061         
-<a name="l00062"></a>00062     <span class="keywordtype">void</span> audioDeviceIOCallback (<span class="keyword">const</span> <span class="keywordtype">float</span>** inputs, <span class="keywordtype">int</span> numInputs, 
-<a name="l00063"></a>00063                                 <span class="keywordtype">float</span>** outputs, <span class="keywordtype">int</span> numOutputs, 
-<a name="l00064"></a>00064                                 <span class="keywordtype">int</span> blockSize) <span class="keywordflow">throw</span>();
-<a name="l00065"></a>00065         <span class="keywordtype">void</span> audioDeviceAboutToStart (AudioIODevice* device) <span class="keywordflow">throw</span>();
-<a name="l00066"></a>00066         <span class="keywordtype">void</span> audioDeviceStopped() <span class="keywordflow">throw</span>();
-<a name="l00067"></a>00067         
-<a name="l00068"></a>00068 <span class="keyword">private</span>:
-<a name="l00069"></a>00069     <span class="keyword">mutable</span> AudioDeviceManager audioDeviceManager;
-<a name="l00070"></a>00070 };
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 <a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074 <span class="preprocessor">#endif  // PLONK_JUCEAUDIOHOST_H</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#ifndef PLONK_JUCEAUDIOHOST_H</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_JUCEAUDIOHOST_H</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span>
+<a name="l00047"></a>00047 <span class="preprocessor">#include &quot;JuceHeader.h&quot;</span> <span class="comment">// assumes you&#39;re using a Jucer-created project with a JuceHeader.h file</span>
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 <a class="code" href="plonk___standard_header_8h.html#a354c7e075ff01d6be5f26b53c752e8d5">BEGIN_PLONK_NAMESPACE</a>
+<a name="l00050"></a>00050 
+<a name="l00051"></a><a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">00051</a> <span class="keyword">class </span><a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">JuceAudioHost</a> :   <span class="keyword">public</span> <a class="code" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase</a>&lt;float&gt;,
+<a name="l00052"></a>00052                         <span class="keyword">public</span> AudioIODeviceCallback
+<a name="l00053"></a>00053 {
+<a name="l00054"></a>00054 <span class="keyword">public</span>:
+<a name="l00055"></a>00055     <a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">JuceAudioHost</a> (<a class="code" href="class_object_memory_base.html" title="Manage a custom memory allocation system.">ObjectMemoryBase</a>* omb = <a class="code" href="class_object_memory.html">ObjectMemory&lt;ObjectMemoryDefault&gt;::create</a>()) <span class="keywordflow">throw</span>();
+<a name="l00056"></a>00056     ~<a class="code" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html">JuceAudioHost</a>();
+<a name="l00057"></a>00057     
+<a name="l00058"></a>00058     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getHostName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00059"></a>00059     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getNativeHostName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00060"></a>00060     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getInputName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00061"></a>00061     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> getOutputName() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00062"></a>00062     <span class="keywordtype">double</span> getCpuUsage() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064     <span class="keywordtype">void</span> startHost() <span class="keywordflow">throw</span>();
+<a name="l00065"></a>00065     <span class="keywordtype">void</span> stopHost() <span class="keywordflow">throw</span>();
+<a name="l00066"></a>00066         
+<a name="l00067"></a>00067     <span class="keywordtype">void</span> audioDeviceIOCallback (<span class="keyword">const</span> <span class="keywordtype">float</span>** inputs, <span class="keywordtype">int</span> numInputs, 
+<a name="l00068"></a>00068                                 <span class="keywordtype">float</span>** outputs, <span class="keywordtype">int</span> numOutputs, 
+<a name="l00069"></a>00069                                 <span class="keywordtype">int</span> blockSize) <span class="keywordflow">throw</span>();
+<a name="l00070"></a>00070         <span class="keywordtype">void</span> audioDeviceAboutToStart (AudioIODevice* device) <span class="keywordflow">throw</span>();
+<a name="l00071"></a>00071         <span class="keywordtype">void</span> audioDeviceStopped() <span class="keywordflow">throw</span>();
+<a name="l00072"></a>00072         
+<a name="l00073"></a>00073 <span class="keyword">private</span>:
+<a name="l00074"></a>00074     <span class="keyword">mutable</span> AudioDeviceManager audioDeviceManager;
+<a name="l00075"></a>00075 };
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 <a class="code" href="plonk___standard_header_8h.html#a688348aeb9da024d63e43762196b102b">END_PLONK_NAMESPACE</a>
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 <span class="preprocessor">#endif  // PLONK_JUCEAUDIOHOST_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -162,7 +157,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:47 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>An allpass delay setting the decay as a time to decay by 60dB.  
  <a href="class_allpass_decay_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___delay_form_allpass_decay_8h_source.html">plonk_DelayFormAllpassDecay.h</a>&gt;</code></p>
-
 <p><a href="class_allpass_decay_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -103,7 +100,37 @@ Static Public Member Functions</h2></td></tr>
 class AllpassDecayUnit&lt; SampleType &gt;</h3>
 
 <p>An allpass delay setting the decay as a time to decay by 60dB. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, duration=0.5, decay=1, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to which delay is applied</li>
+<li>duration: (unit, multi) the delay duration in seconds</li>
+<li>decay: (unit, multi) the -60dB decay time</li>
+<li>maximumDuration: (real) the maximum delay time in seconds (this can be equal to duration if duration is a constant)</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a8e7d818800155ff6897204eaf6fa91d5"></a><!-- doxytag: member="AllpassDecayUnit::FormType" ref="a8e7d818800155ff6897204eaf6fa91d5" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_delay_form_allpass_decay.html">DelayFormAllpassDecay</a>&lt;SampleType&gt; <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_delay_form_allpass_decay.html">FormType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a802d7c4afc9a9565ff5ef678865ea486"></a><!-- doxytag: member="AllpassDecayUnit::AltFormType" ref="a802d7c4afc9a9565ff5ef678865ea486" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -119,36 +146,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a84b403586e25e4064fe745edc5d970a7"></a><!-- doxytag: member="AllpassDecayUnit::DecayType" ref="a84b403586e25e4064fe745edc5d970a7" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_delay2_param_channel_internal.html#a8fc0ecd77aa3ba869db7b1c2cefd3b7e">DelayInternal::Param2Type</a> <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_allpass_decay_unit.html#a84b403586e25e4064fe745edc5d970a7">DecayType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaaaa5143d5c32bb18cb813e82609a47f"></a><!-- doxytag: member="AllpassDecayUnit::DecayUnitType" ref="aaaaa5143d5c32bb18cb813e82609a47f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_allpass_decay_unit.html#a84b403586e25e4064fe745edc5d970a7">DecayType</a>&gt; <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">DecayUnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="acc60d3f5bf6c8e31da8cc00a711e1a6e"></a><!-- doxytag: member="AllpassDecayUnit::DelayInternal" ref="acc60d3f5bf6c8e31da8cc00a711e1a6e" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -157,6 +154,36 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_delay2_param_channel_internal.html">Delay2ParamChannelInternal</a>&lt;<a class="el" href="class_delay_form_allpass_decay.html">FormType</a>&gt; <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_delay2_param_channel_internal.html">DelayInternal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4e838bca97a90495ffa97711306a2c96"></a><!-- doxytag: member="AllpassDecayUnit::UnitType" ref="a4e838bca97a90495ffa97711306a2c96" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3a6818f7511855be6bc81c78345c37e4"></a><!-- doxytag: member="AllpassDecayUnit::Inputs" ref="a3a6818f7511855be6bc81c78345c37e4" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
         </tr>
       </table>
 </div>
@@ -194,14 +221,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8e7d818800155ff6897204eaf6fa91d5"></a><!-- doxytag: member="AllpassDecayUnit::FormType" ref="a8e7d818800155ff6897204eaf6fa91d5" args="" -->
+<a class="anchor" id="a84b403586e25e4064fe745edc5d970a7"></a><!-- doxytag: member="AllpassDecayUnit::DecayType" ref="a84b403586e25e4064fe745edc5d970a7" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_delay_form_allpass_decay.html">DelayFormAllpassDecay</a>&lt;SampleType&gt; <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_delay_form_allpass_decay.html">FormType</a></td>
+          <td class="memname">typedef <a class="el" href="class_delay2_param_channel_internal.html#a8fc0ecd77aa3ba869db7b1c2cefd3b7e">DelayInternal::Param2Type</a> <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_allpass_decay_unit.html#a84b403586e25e4064fe745edc5d970a7">DecayType</a></td>
         </tr>
       </table>
 </div>
@@ -209,29 +236,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3a6818f7511855be6bc81c78345c37e4"></a><!-- doxytag: member="AllpassDecayUnit::Inputs" ref="a3a6818f7511855be6bc81c78345c37e4" args="" -->
+<a class="anchor" id="aaaaa5143d5c32bb18cb813e82609a47f"></a><!-- doxytag: member="AllpassDecayUnit::DecayUnitType" ref="aaaaa5143d5c32bb18cb813e82609a47f" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4e838bca97a90495ffa97711306a2c96"></a><!-- doxytag: member="AllpassDecayUnit::UnitType" ref="a4e838bca97a90495ffa97711306a2c96" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;<a class="el" href="class_allpass_decay_unit.html#a84b403586e25e4064fe745edc5d970a7">DecayType</a>&gt; <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">DecayUnitType</a></td>
         </tr>
       </table>
 </div>
@@ -240,6 +252,24 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="adf9165985d345cae807dbc4d74b31f72"></a><!-- doxytag: member="AllpassDecayUnit::getInfo" ref="adf9165985d345cae807dbc4d74b31f72" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a2605ea3a91b16128a264ffa219453e44"></a><!-- doxytag: member="AllpassDecayUnit::ar" ref="a2605ea3a91b16128a264ffa219453e44" args="(UnitType const &amp;input, DurationUnitType const &amp;duration=DurationType(0.5), DecayUnitType const &amp;decay=DecayType(1.0), const DurationType maximumDuration=DurationType(1.0), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -307,24 +337,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="adf9165985d345cae807dbc4d74b31f72"></a><!-- doxytag: member="AllpassDecayUnit::getInfo" ref="adf9165985d345cae807dbc4d74b31f72" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_allpass_decay_unit.html">AllpassDecayUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___delay_form_allpass_decay_8h_source.html">plonk_DelayFormAllpassDecay.h</a></li>
 </ul>
@@ -343,7 +355,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

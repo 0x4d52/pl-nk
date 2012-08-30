@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -112,27 +111,22 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gab10f618aa45bae084bf7940c0259ac58"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_Close" ref="gab10f618aa45bae084bf7940c0259ac58" args="(PlankIffFileReaderRef p)" -->
+<a class="anchor" id="gad8b686899f4ce9390290569e1774a11f"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_CreateAndInit" ref="gad8b686899f4ce9390290569e1774a11f" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_Close </td>
+          <td class="memname"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a> pl_IffFileReader_CreateAndInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank IffFileReader</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+<p>Create and initialise a <em>Plank IffFileReader</em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank IffFileReader</em> object as an opaque reference or PLANK_NULL. </dd></dl>
 
 </div>
 </div>
@@ -155,22 +149,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gad8b686899f4ce9390290569e1774a11f"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_CreateAndInit" ref="gad8b686899f4ce9390290569e1774a11f" args="()" -->
+<a class="anchor" id="ga1d3aa86bd74b5091bac3787bf63816b5"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_Init" ref="ga1d3aa86bd74b5091bac3787bf63816b5" args="(PlankIffFileReaderRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a> pl_IffFileReader_CreateAndInit </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_Init </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create and initialise a <em>Plank IffFileReader</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank IffFileReader</em> object as an opaque reference or PLANK_NULL. </dd></dl>
+<p>Initialise a <em>Plank IffFileReader</em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank IffFileReader</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
 
 </div>
 </div>
@@ -253,12 +254,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga70f5e5cc3c47c0ce3b1c2904c7bc50dd"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_GetFormatID" ref="ga70f5e5cc3c47c0ce3b1c2904c7bc50dd" args="(PlankIffFileReaderRef p, PlankFourCharCode *formatID)" -->
+<a class="anchor" id="ga5ac68294a1adf847195937a1ba30d03e"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_Open" ref="ga5ac68294a1adf847195937a1ba30d03e" args="(PlankIffFileReaderRef p, const char *filepath)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_GetFormatID </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_Open </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -266,8 +267,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> *&#160;</td>
-          <td class="paramname"><em>formatID</em>&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filepath</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -287,26 +288,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga6b687552c44f6cbe6ad1b489831bc1eb"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_GetMainEnd" ref="ga6b687552c44f6cbe6ad1b489831bc1eb" args="(PlankIffFileReaderRef p, PlankLL *mainEnd)" -->
+<a class="anchor" id="gab10f618aa45bae084bf7940c0259ac58"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_Close" ref="gab10f618aa45bae084bf7940c0259ac58" args="(PlankIffFileReaderRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_GetMainEnd </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_Close </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *&#160;</td>
-          <td class="paramname"><em>mainEnd</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -336,6 +327,40 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> *&#160;</td>
           <td class="paramname"><em>mainID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank IffFileReader</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga70f5e5cc3c47c0ce3b1c2904c7bc50dd"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_GetFormatID" ref="ga70f5e5cc3c47c0ce3b1c2904c7bc50dd" args="(PlankIffFileReaderRef p, PlankFourCharCode *formatID)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_GetFormatID </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a7f6d46cbd6808d436e42ab5afcd69a81">PlankFourCharCode</a> *&#160;</td>
+          <td class="paramname"><em>formatID</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -389,22 +414,30 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga1d3aa86bd74b5091bac3787bf63816b5"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_Init" ref="ga1d3aa86bd74b5091bac3787bf63816b5" args="(PlankIffFileReaderRef p)" -->
+<a class="anchor" id="ga6b687552c44f6cbe6ad1b489831bc1eb"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_GetMainEnd" ref="ga6b687552c44f6cbe6ad1b489831bc1eb" args="(PlankIffFileReaderRef p, PlankLL *mainEnd)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_Init </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_GetMainEnd </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *&#160;</td>
+          <td class="paramname"><em>mainEnd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Initialise a <em>Plank IffFileReader</em> object. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank IffFileReader</em> object. </td></tr>
@@ -449,12 +482,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga5ac68294a1adf847195937a1ba30d03e"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_Open" ref="ga5ac68294a1adf847195937a1ba30d03e" args="(PlankIffFileReaderRef p, const char *filepath)" -->
+<a class="anchor" id="gafe00a67e7166da700d577793f672991d"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_SetEndian" ref="gafe00a67e7166da700d577793f672991d" args="(PlankIffFileReaderRef p, const PlankB isBigEndian)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_Open </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_SetEndian </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -462,8 +495,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>filepath</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>&#160;</td>
+          <td class="paramname"><em>isBigEndian</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -529,40 +562,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gafe00a67e7166da700d577793f672991d"></a><!-- doxytag: member="plank_IffFileReader.h::pl_IffFileReader_SetEndian" ref="gafe00a67e7166da700d577793f672991d" args="(PlankIffFileReaderRef p, const PlankB isBigEndian)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_IffFileReader_SetEndian </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_iff_file_reader_class.html#gaf3f3fbf2849e73e0d7c0cee324713acd">PlankIffFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>&#160;</td>
-          <td class="paramname"><em>isBigEndian</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank IffFileReader</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -578,7 +577,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

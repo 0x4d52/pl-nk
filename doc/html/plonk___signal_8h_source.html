@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_Signal.h</div>  </div>
@@ -216,7 +207,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00143"></a>00143     {        
 <a name="l00144"></a>00144         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(buffers.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() &gt; 0);
 <a name="l00145"></a>00145         <span class="keywordflow">if</span> (<a class="code" href="class_signal_internal.html#a9795db6f212eee3e2b6b40a9ac199583">isInterleaved</a>()) 
-<a name="l00146"></a>00146             <span class="keywordflow">return</span> buffers.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0).<a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="Deinternleave this array into a 2D array with a particular number of groups.">deinterleave</a> (numInterleavedChannels);
+<a name="l00146"></a>00146             <span class="keywordflow">return</span> buffers.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0).<a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="De-interleave an array into a 2D array.">deinterleave</a> (numInterleavedChannels);
 <a name="l00147"></a>00147         <span class="keywordflow">else</span>
 <a name="l00148"></a>00148             <span class="keywordflow">return</span> buffers;
 <a name="l00149"></a>00149     }
@@ -248,13 +239,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00176"></a>00176     }
 <a name="l00177"></a>00177     
 <a name="l00178"></a><a class="code" href="class_signal_base.html#adc957a4fd0a34d88def26e17b2cddfa1">00178</a>     <a class="code" href="class_signal_base.html#a7499e4c89177b19c27e0a248eec92064">SignalBase</a> (<a class="code" href="class_numerical_array2_d.html">Buffers</a> <span class="keyword">const</span>&amp; buffers, 
-<a name="l00179"></a>00179                 <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate = <a class="code" href="class_sample_rate.html#ab8f9226a01308b2e18951c2b83faccec">SampleRate::getDefault</a>()) throw()
+<a name="l00179"></a>00179                 <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>()) throw()
 <a name="l00180"></a>00180     :   <a class="code" href="class_smart_pointer_container.html">Base</a> (new <a class="code" href="class_signal_internal.html">Internal</a> (buffers, sampleRate))
 <a name="l00181"></a>00181     {
 <a name="l00182"></a>00182     }
 <a name="l00183"></a>00183     
 <a name="l00184"></a><a class="code" href="class_signal_base.html#a73e2b67d690533a31c48a09b7b5c1a7f">00184</a>     <a class="code" href="class_signal_base.html#a7499e4c89177b19c27e0a248eec92064">SignalBase</a> (<a class="code" href="class_numerical_array.html">Buffer</a> <span class="keyword">const</span>&amp; buffer, 
-<a name="l00185"></a>00185                 <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate = <a class="code" href="class_sample_rate.html#ab8f9226a01308b2e18951c2b83faccec">SampleRate::getDefault</a>(),
+<a name="l00185"></a>00185                 <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>(),
 <a name="l00186"></a>00186                 <span class="keyword">const</span> <span class="keywordtype">int</span> interleavedChannelsInBuffer = 1) throw()
 <a name="l00187"></a>00187     :   <a class="code" href="class_smart_pointer_container.html">Base</a> (new <a class="code" href="class_signal_internal.html">Internal</a> (buffer, sampleRate, interleavedChannelsInBuffer))
 <a name="l00188"></a>00188     {
@@ -271,14 +262,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00199"></a>00199     }    
 <a name="l00200"></a>00200     
 <a name="l00201"></a><a class="code" href="class_signal_base.html#a673125bf90fd12eaf2867d8a8f1b3ee2">00201</a>     <a class="code" href="class_signal_base.html#a7499e4c89177b19c27e0a248eec92064">SignalBase</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00202"></a>00202     :   <a class="code" href="class_signal_base.html#a60d836ada6f59fb9c80eb0d949412f96">Base</a> (other.as&lt;<a class="code" href="class_signal_base.html">SignalBase</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>())
+<a name="l00202"></a>00202     :   <a class="code" href="class_signal_base.html#a60d836ada6f59fb9c80eb0d949412f96">Base</a> (other.as&lt;<a class="code" href="class_signal_base.html">SignalBase</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>())
 <a name="l00203"></a>00203     {
 <a name="l00204"></a>00204     }    
 <a name="l00205"></a>00205     
 <a name="l00207"></a><a class="code" href="class_signal_base.html#acf554dee1fecca632b7d903015eea50c">00207</a>     <a class="code" href="class_signal_base.html">SignalBase</a>&amp; <a class="code" href="class_signal_base.html#acf554dee1fecca632b7d903015eea50c" title="Assignment operator.">operator= </a>(<a class="code" href="class_signal_base.html">SignalBase</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00208"></a>00208         {
 <a name="l00209"></a>00209         <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00210"></a>00210             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
+<a name="l00210"></a>00210             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());<span class="comment">//this-&gt;setInternal (other.containerCopy().getInternal());</span>
 <a name="l00211"></a>00211         
 <a name="l00212"></a>00212         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00213"></a>00213         }
@@ -296,70 +287,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00228"></a>00228     
 <a name="l00229"></a><a class="code" href="class_signal_base.html#a324d546983767e4812895263f9ea6aa1">00229</a>     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_numerical_array2_d.html">Buffers</a>&amp; <a class="code" href="class_signal_base.html#a324d546983767e4812895263f9ea6aa1">getBuffers</a>() <span class="keyword">const</span> throw()
 <a name="l00230"></a>00230     {
-<a name="l00231"></a>00231         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;buffers;
+<a name="l00231"></a>00231         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;buffers;
 <a name="l00232"></a>00232     }
 <a name="l00233"></a>00233 
 <a name="l00234"></a><a class="code" href="class_signal_base.html#afde1b6e1d8b7d32b7a142986b2163b53">00234</a>     <span class="keyword">inline</span> <a class="code" href="class_numerical_array2_d.html">Buffers</a>&amp; <a class="code" href="class_signal_base.html#a324d546983767e4812895263f9ea6aa1">getBuffers</a>() throw()
 <a name="l00235"></a>00235     {
-<a name="l00236"></a>00236         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;buffers;
+<a name="l00236"></a>00236         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;buffers;
 <a name="l00237"></a>00237     }
 <a name="l00238"></a>00238 
 <a name="l00239"></a><a class="code" href="class_signal_base.html#a60aff6d5eeb77cb50b41c5037dcde125">00239</a>     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; <a class="code" href="class_signal_base.html#a60aff6d5eeb77cb50b41c5037dcde125">getSampleRate</a>() <span class="keyword">const</span> throw()
 <a name="l00240"></a>00240     {
-<a name="l00241"></a>00241         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;sampleRate;
+<a name="l00241"></a>00241         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;sampleRate;
 <a name="l00242"></a>00242     }
 <a name="l00243"></a>00243     
 <a name="l00244"></a><a class="code" href="class_signal_base.html#a3f07a7b90ee77d88934b8a4c59e4aeae">00244</a>     <span class="keyword">inline</span> <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; <a class="code" href="class_signal_base.html#a60aff6d5eeb77cb50b41c5037dcde125">getSampleRate</a>() throw()
 <a name="l00245"></a>00245     {
-<a name="l00246"></a>00246         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;sampleRate;
+<a name="l00246"></a>00246         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;sampleRate;
 <a name="l00247"></a>00247     }
 <a name="l00248"></a>00248     
 <a name="l00249"></a><a class="code" href="class_signal_base.html#ac8fbaa071d5860ec54c29e357d235187">00249</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_signal_base.html#ac8fbaa071d5860ec54c29e357d235187">getNumFrames</a>() <span class="keyword">const</span> throw()
 <a name="l00250"></a>00250     {
-<a name="l00251"></a>00251         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getNumFrames();
+<a name="l00251"></a>00251         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getNumFrames();
 <a name="l00252"></a>00252     }
 <a name="l00253"></a>00253     
 <a name="l00254"></a><a class="code" href="class_signal_base.html#ac32675e7c0bcb0d4941356dd2aaaaa51">00254</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_signal_base.html#ac32675e7c0bcb0d4941356dd2aaaaa51">getNumChannels</a>() <span class="keyword">const</span> throw()
 <a name="l00255"></a>00255     {
-<a name="l00256"></a>00256         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getNumChannels();
+<a name="l00256"></a>00256         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getNumChannels();
 <a name="l00257"></a>00257     }
 <a name="l00258"></a>00258     
 <a name="l00259"></a><a class="code" href="class_signal_base.html#a54e5d4fe8787f1198a5086215a6dce98">00259</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_signal_base.html#a54e5d4fe8787f1198a5086215a6dce98">getFrameStride</a>() <span class="keyword">const</span> throw()
 <a name="l00260"></a>00260     {
-<a name="l00261"></a>00261         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getFrameStride();
+<a name="l00261"></a>00261         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getFrameStride();
 <a name="l00262"></a>00262     }
 <a name="l00263"></a>00263     
 <a name="l00264"></a><a class="code" href="class_signal_base.html#a390d52b58e445f9768c80216f7459e58">00264</a>     SampleType* <a class="code" href="class_signal_base.html#a390d52b58e445f9768c80216f7459e58">getSamples</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
 <a name="l00265"></a>00265     {
-<a name="l00266"></a>00266         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getSamples (channel);
+<a name="l00266"></a>00266         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getSamples (channel);
 <a name="l00267"></a>00267     }
 <a name="l00268"></a>00268     
 <a name="l00269"></a><a class="code" href="class_signal_base.html#a19ce8609e82a3217d4ee15f8b0b14939">00269</a>     <span class="keyword">const</span> SampleType* <a class="code" href="class_signal_base.html#a390d52b58e445f9768c80216f7459e58">getSamples</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
 <a name="l00270"></a>00270     {
-<a name="l00271"></a>00271         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getSamples (channel);
+<a name="l00271"></a>00271         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getSamples (channel);
 <a name="l00272"></a>00272     }
 <a name="l00273"></a>00273     
 <a name="l00274"></a><a class="code" href="class_signal_base.html#a8a3f60a8ec9bbc1eba131b72b6e95caf">00274</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_signal_base.html#a8a3f60a8ec9bbc1eba131b72b6e95caf">isInterleaved</a>() <span class="keyword">const</span> throw()
 <a name="l00275"></a>00275     {
-<a name="l00276"></a>00276         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;isInterleaved();
+<a name="l00276"></a>00276         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;isInterleaved();
 <a name="l00277"></a>00277     }
 <a name="l00278"></a>00278 
 <a name="l00279"></a><a class="code" href="class_signal_base.html#add8d2db46b117001ec72230e4378aa1c">00279</a>     <span class="keyword">inline</span> <a class="code" href="class_numerical_array.html">Buffer</a> <a class="code" href="class_signal_base.html#add8d2db46b117001ec72230e4378aa1c">getInterleaved</a>() <span class="keyword">const</span> throw()
 <a name="l00280"></a>00280     {
-<a name="l00281"></a>00281         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getInterleaved();
+<a name="l00281"></a>00281         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getInterleaved();
 <a name="l00282"></a>00282     }
 <a name="l00283"></a>00283     
 <a name="l00284"></a><a class="code" href="class_signal_base.html#a23969fa8a2d54f39304b990e179b5c6e">00284</a>     <span class="keyword">inline</span> <a class="code" href="class_numerical_array2_d.html">Buffers</a> <a class="code" href="class_signal_base.html#a23969fa8a2d54f39304b990e179b5c6e">getDeinterleaved</a>() <span class="keyword">const</span> throw()
 <a name="l00285"></a>00285     {
-<a name="l00286"></a>00286         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getDeinterleaved();
+<a name="l00286"></a>00286         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getDeinterleaved();
 <a name="l00287"></a>00287     }
 <a name="l00288"></a>00288 
-<a name="l00289"></a>00289     
-<a name="l00290"></a>00290 };
-<a name="l00291"></a>00291 
+<a name="l00289"></a><a class="code" href="class_signal_base.html#a04ee879d3cf2219580a8f77c10510467">00289</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_signal_base.html">SignalBase</a>);
+<a name="l00290"></a>00290 
+<a name="l00291"></a>00291 };
 <a name="l00292"></a>00292 
 <a name="l00293"></a>00293 
-<a name="l00294"></a>00294 <span class="preprocessor">#endif // PLONK_SIGNAL_H</span>
+<a name="l00294"></a>00294 
+<a name="l00295"></a>00295 <span class="preprocessor">#endif // PLONK_SIGNAL_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -376,7 +368,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

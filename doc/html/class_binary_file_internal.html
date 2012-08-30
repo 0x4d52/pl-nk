@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -68,15 +67,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">BinaryFileInternal Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="BinaryFileInternal" --><!-- doxytag: inherits="SmartPointer" -->
-<p><code>#include &lt;<a class="el" href="plonk___binary_file_8h_source.html">plonk_BinaryFile.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="BinaryFileInternal" --><!-- doxytag: inherits="SmartPointer" --><div class="dynheader">
 Inheritance diagram for BinaryFileInternal:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_binary_file_internal.png" usemap="#BinaryFileInternal_map" alt=""/>
   <map id="BinaryFileInternal_map" name="BinaryFileInternal_map">
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,112,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,112,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,112,24"/>
 </map>
  </div></div>
 
@@ -212,15 +210,32 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afd34f810e0a65e054693b1c5cb72d5fd"></a><!-- doxytag: member="BinaryFileInternal::isBigEndian" ref="afd34f810e0a65e054693b1c5cb72d5fd" args="() const " -->
+<a class="anchor" id="a86baf0a3e45a4e502549b8242e2bc358"></a><!-- doxytag: member="BinaryFileInternal::setPosition" ref="a86baf0a3e45a4e502549b8242e2bc358" args="(const LongLong position)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool BinaryFileInternal::isBigEndian </td>
+          <td class="memname">void BinaryFileInternal::setPosition </td>
+          <td>(</td>
+          <td class="paramtype">const LongLong&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a89909528deb6f9a210153f467b20ccb5"></a><!-- doxytag: member="BinaryFileInternal::setEof" ref="a89909528deb6f9a210153f467b20ccb5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::setEof </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
+          <td>  throw ()</td>
         </tr>
       </table>
 </div>
@@ -234,6 +249,22 @@ Public Member Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool BinaryFileInternal::isEof </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afd34f810e0a65e054693b1c5cb72d5fd"></a><!-- doxytag: member="BinaryFileInternal::isBigEndian" ref="afd34f810e0a65e054693b1c5cb72d5fd" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BinaryFileInternal::isBigEndian </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()</td>
@@ -303,40 +334,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a52c8dd3c73aa16be16e10a206473cbe7"></a><!-- doxytag: member="BinaryFileInternal::read" ref="a52c8dd3c73aa16be16e10a206473cbe7" args="(unsigned int &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::read </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acd5df16f19673730daa4a88bebe4b621"></a><!-- doxytag: member="BinaryFileInternal::read" ref="acd5df16f19673730daa4a88bebe4b621" args="(UnsignedLongLong &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::read </td>
-          <td>(</td>
-          <td class="paramtype">UnsignedLongLong &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="af2cf73701072338db8a88543e37c2744"></a><!-- doxytag: member="BinaryFileInternal::read" ref="af2cf73701072338db8a88543e37c2744" args="(char &amp;value)" -->
 <div class="memitem">
 <div class="memproto">
@@ -345,40 +342,6 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void BinaryFileInternal::read </td>
           <td>(</td>
           <td class="paramtype">char &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a399b1a8113895c815a01602a31be34dd"></a><!-- doxytag: member="BinaryFileInternal::read" ref="a399b1a8113895c815a01602a31be34dd" args="(float &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::read </td>
-          <td>(</td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af73db4ec9ce3b36a78bf24343b03c1f5"></a><!-- doxytag: member="BinaryFileInternal::read" ref="af73db4ec9ce3b36a78bf24343b03c1f5" args="(double &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::read </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
@@ -397,25 +360,6 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">short &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aae8e39be03096f3cd6ebfa2191d5c1b6"></a><!-- doxytag: member="BinaryFileInternal::read" ref="aae8e39be03096f3cd6ebfa2191d5c1b6" args="(NumericalArray&lt; NumericalType &gt; &amp;array)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class NumericalType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int BinaryFileInternal::read </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; &amp;&#160;</td>
-          <td class="paramname"><em>array</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -509,47 +453,14 @@ template&lt;class NumericalType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a89909528deb6f9a210153f467b20ccb5"></a><!-- doxytag: member="BinaryFileInternal::setEof" ref="a89909528deb6f9a210153f467b20ccb5" args="()" -->
+<a class="anchor" id="a52c8dd3c73aa16be16e10a206473cbe7"></a><!-- doxytag: member="BinaryFileInternal::read" ref="a52c8dd3c73aa16be16e10a206473cbe7" args="(unsigned int &amp;value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BinaryFileInternal::setEof </td>
+          <td class="memname">void BinaryFileInternal::read </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a86baf0a3e45a4e502549b8242e2bc358"></a><!-- doxytag: member="BinaryFileInternal::setPosition" ref="a86baf0a3e45a4e502549b8242e2bc358" args="(const LongLong position)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::setPosition </td>
-          <td>(</td>
-          <td class="paramtype">const LongLong&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5c1d4cd0dd9d213447dfbc7ffdc24f1b"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a5c1d4cd0dd9d213447dfbc7ffdc24f1b" args="(const float value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::write </td>
-          <td>(</td>
-          <td class="paramtype">const float&#160;</td>
+          <td class="paramtype">unsigned int &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
@@ -559,14 +470,14 @@ template&lt;class NumericalType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ace15252309f48086842f388bc58b7b8a"></a><!-- doxytag: member="BinaryFileInternal::write" ref="ace15252309f48086842f388bc58b7b8a" args="(const UnsignedLongLong value)" -->
+<a class="anchor" id="acd5df16f19673730daa4a88bebe4b621"></a><!-- doxytag: member="BinaryFileInternal::read" ref="acd5df16f19673730daa4a88bebe4b621" args="(UnsignedLongLong &amp;value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BinaryFileInternal::write </td>
+          <td class="memname">void BinaryFileInternal::read </td>
           <td>(</td>
-          <td class="paramtype">const UnsignedLongLong&#160;</td>
+          <td class="paramtype">UnsignedLongLong &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
@@ -576,17 +487,95 @@ template&lt;class NumericalType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1836fc798a5abe9f17cb87980532239a"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a1836fc798a5abe9f17cb87980532239a" args="(NumericalArray&lt; NumericalType &gt; const &amp;array)" -->
+<a class="anchor" id="a399b1a8113895c815a01602a31be34dd"></a><!-- doxytag: member="BinaryFileInternal::read" ref="a399b1a8113895c815a01602a31be34dd" args="(float &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::read </td>
+          <td>(</td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af73db4ec9ce3b36a78bf24343b03c1f5"></a><!-- doxytag: member="BinaryFileInternal::read" ref="af73db4ec9ce3b36a78bf24343b03c1f5" args="(double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::read </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aae8e39be03096f3cd6ebfa2191d5c1b6"></a><!-- doxytag: member="BinaryFileInternal::read" ref="aae8e39be03096f3cd6ebfa2191d5c1b6" args="(NumericalArray&lt; NumericalType &gt; &amp;array)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class NumericalType &gt; </div>
       <table class="memname">
         <tr>
+          <td class="memname">int BinaryFileInternal::read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>array</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abd23204f7faee7430d784a480d2918f5"></a><!-- doxytag: member="BinaryFileInternal::write" ref="abd23204f7faee7430d784a480d2918f5" args="(void *data, const int maximumBytes)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
           <td class="memname">void BinaryFileInternal::write </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>array</em></td><td>)</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>maximumBytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acbc93f1ecbbdb639e0687614b14c51e6"></a><!-- doxytag: member="BinaryFileInternal::write" ref="acbc93f1ecbbdb639e0687614b14c51e6" args="(const char value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::write </td>
+          <td>(</td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -629,6 +618,23 @@ template&lt;class NumericalType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ab4ab2bc256bd487a1e021ab862aa86d2"></a><!-- doxytag: member="BinaryFileInternal::write" ref="ab4ab2bc256bd487a1e021ab862aa86d2" args="(const Int24 value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::write </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_int24.html">Int24</a>&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ae0595a62592c82e4da76a3112dd60124"></a><!-- doxytag: member="BinaryFileInternal::write" ref="ae0595a62592c82e4da76a3112dd60124" args="(const LongLong value)" -->
 <div class="memitem">
 <div class="memproto">
@@ -646,14 +652,14 @@ template&lt;class NumericalType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab4ab2bc256bd487a1e021ab862aa86d2"></a><!-- doxytag: member="BinaryFileInternal::write" ref="ab4ab2bc256bd487a1e021ab862aa86d2" args="(const Int24 value)" -->
+<a class="anchor" id="a79ccbd26996ec19a5a3810b21b456402"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a79ccbd26996ec19a5a3810b21b456402" args="(const unsigned char value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void BinaryFileInternal::write </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_int24.html">Int24</a>&#160;</td>
+          <td class="paramtype">const unsigned char&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
@@ -680,67 +686,6 @@ template&lt;class NumericalType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a59e4ad72712e5241d459b9744fb8ee48"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a59e4ad72712e5241d459b9744fb8ee48" args="(const double value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::write </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acbc93f1ecbbdb639e0687614b14c51e6"></a><!-- doxytag: member="BinaryFileInternal::write" ref="acbc93f1ecbbdb639e0687614b14c51e6" args="(const char value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::write </td>
-          <td>(</td>
-          <td class="paramtype">const char&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abd23204f7faee7430d784a480d2918f5"></a><!-- doxytag: member="BinaryFileInternal::write" ref="abd23204f7faee7430d784a480d2918f5" args="(void *data, const int maximumBytes)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFileInternal::write </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>maximumBytes</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a01e6cb8a67ecf79e89c0d7abb7cd8cf7"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a01e6cb8a67ecf79e89c0d7abb7cd8cf7" args="(const unsigned int value)" -->
 <div class="memitem">
 <div class="memproto">
@@ -758,15 +703,68 @@ template&lt;class NumericalType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a79ccbd26996ec19a5a3810b21b456402"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a79ccbd26996ec19a5a3810b21b456402" args="(const unsigned char value)" -->
+<a class="anchor" id="ace15252309f48086842f388bc58b7b8a"></a><!-- doxytag: member="BinaryFileInternal::write" ref="ace15252309f48086842f388bc58b7b8a" args="(const UnsignedLongLong value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void BinaryFileInternal::write </td>
           <td>(</td>
-          <td class="paramtype">const unsigned char&#160;</td>
+          <td class="paramtype">const UnsignedLongLong&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5c1d4cd0dd9d213447dfbc7ffdc24f1b"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a5c1d4cd0dd9d213447dfbc7ffdc24f1b" args="(const float value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::write </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a59e4ad72712e5241d459b9744fb8ee48"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a59e4ad72712e5241d459b9744fb8ee48" args="(const double value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::write </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1836fc798a5abe9f17cb87980532239a"></a><!-- doxytag: member="BinaryFileInternal::write" ref="a1836fc798a5abe9f17cb87980532239a" args="(NumericalArray&lt; NumericalType &gt; const &amp;array)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NumericalType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFileInternal::write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; NumericalType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>array</em></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -794,7 +792,7 @@ template&lt;class NumericalType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

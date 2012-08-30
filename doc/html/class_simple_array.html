@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,16 +68,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SimpleArray&lt; ObjectType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="SimpleArray" --><!-- doxytag: inherits="SmartPointerContainer&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___simple_array_8h_source.html">plonk_SimpleArray.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="SimpleArray" --><!-- doxytag: inherits="SmartPointerContainer&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;" --><div class="dynheader">
 Inheritance diagram for SimpleArray&lt; ObjectType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_simple_array.png" usemap="#SimpleArray&lt; ObjectType &gt;_map" alt=""/>
   <map id="SimpleArray&lt; ObjectType &gt;_map" name="SimpleArray&lt; ObjectType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;" shape="rect" coords="0,56,473,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;" shape="rect" coords="0,0,473,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;" shape="rect" coords="0,112,473,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;" shape="rect" coords="0,56,473,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,473,24"/>
 </map>
  </div></div>
 
@@ -98,26 +96,13 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#a93642b58a067185fedd427679fde6fb9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_array.html">SimpleArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_array.html#ae993e92c48565a803ae86ecb1ba64fb0">operator=</a> (<a class="el" href="class_simple_array.html">SimpleArray</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#ae993e92c48565a803ae86ecb1ba64fb0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_array.html">SimpleArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_array.html#a7131034acf7087260d558bacd69e27ab">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_simple_array.html">SimpleArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_array.html#a1064c11ec3e28a173651904fda3d13f7">operator-&gt;</a> () const   throw ()</td></tr>
 </table>
 <h3>template&lt;class ObjectType&gt;<br/>
  class SimpleArray&lt; ObjectType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a321eebd9ae0a09c97eac1926504e67b3"></a><!-- doxytag: member="SimpleArray::Base" ref="a321eebd9ae0a09c97eac1926504e67b3" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ObjectType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_object_array_internal.html">Internal</a>&gt; <a class="el" href="class_simple_array.html">SimpleArray</a>&lt; ObjectType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a10ec9c0915e8c9aaef47a471eb07f019"></a><!-- doxytag: member="SimpleArray::Internal" ref="a10ec9c0915e8c9aaef47a471eb07f019" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +116,20 @@ template&lt;class ObjectType&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a321eebd9ae0a09c97eac1926504e67b3"></a><!-- doxytag: member="SimpleArray::Base" ref="a321eebd9ae0a09c97eac1926504e67b3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_object_array_internal.html">Internal</a>&gt; <a class="el" href="class_simple_array.html">SimpleArray</a>&lt; ObjectType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -217,6 +215,46 @@ template&lt;class ObjectType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a7131034acf7087260d558bacd69e27ab"></a><!-- doxytag: member="SimpleArray::operator&#45;&gt;" ref="a7131034acf7087260d558bacd69e27ab" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_array.html">SimpleArray</a>* <a class="el" href="class_simple_array.html">SimpleArray</a>&lt; ObjectType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1064c11ec3e28a173651904fda3d13f7"></a><!-- doxytag: member="SimpleArray::operator&#45;&gt;" ref="a1064c11ec3e28a173651904fda3d13f7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ObjectType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_simple_array.html">SimpleArray</a>* <a class="el" href="class_simple_array.html">SimpleArray</a>&lt; ObjectType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; ObjectArrayInternal&lt; ObjectType, SmartPointer &gt; &gt;</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___simple_array_8h_source.html">plonk_SimpleArray.h</a></li>
 </ul>
@@ -235,7 +273,7 @@ template&lt;class ObjectType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

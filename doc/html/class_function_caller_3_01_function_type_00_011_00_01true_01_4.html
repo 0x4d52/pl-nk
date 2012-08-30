@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,17 +68,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">FunctionCaller&lt; FunctionType, 1, true &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="FunctionCaller&lt; FunctionType, 1, true &gt;" --><!-- doxytag: inherits="FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___function_8h_source.html">plonk_Function.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="FunctionCaller&lt; FunctionType, 1, true &gt;" --><!-- doxytag: inherits="FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;" --><div class="dynheader">
 Inheritance diagram for FunctionCaller&lt; FunctionType, 1, true &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_function_caller_3_01_function_type_00_011_00_01true_01_4.png" usemap="#FunctionCaller&lt; FunctionType, 1, true &gt;_map" alt=""/>
   <map id="FunctionCaller&lt; FunctionType, 1, true &gt;_map" name="FunctionCaller&lt; FunctionType, 1, true &gt;_map">
-<area href="class_function_proxy_caller_base.html" alt="FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;" shape="rect" coords="0,112,829,136"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;" shape="rect" coords="0,56,829,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;" shape="rect" coords="0,0,829,24"/>
+<area href="class_function_proxy_caller_base.html" alt="FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;" shape="rect" coords="0,168,829,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;" shape="rect" coords="0,112,829,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; FunctionProxyCallerInternal&lt; FunctionType, FunctionType::Return, FunctionType::Arg1, ArgType2, ArgType3 &gt; &gt;" shape="rect" coords="0,56,829,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,829,24"/>
 </map>
  </div></div>
 
@@ -104,20 +102,18 @@ Public Member Functions</h2></td></tr>
  class FunctionCaller&lt; FunctionType, 1, true &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a4a78cdaaa90888c1abd44b7d48750376"></a><!-- doxytag: member="FunctionCaller&lt; FunctionType, 1, true &gt;::Arg1PassType" ref="a4a78cdaaa90888c1abd44b7d48750376" args="" -->
+<a class="anchor" id="a0e3ad903801722f7a37c9cf3fec2f844"></a><!-- doxytag: member="FunctionCaller&lt; FunctionType, 1, true &gt;::ReturnType" ref="a0e3ad903801722f7a37c9cf3fec2f844" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FunctionType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;<a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a2fe22fbceecd45522e8c32cd643b9d10">ArgType1</a>&gt;::PassType <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt; FunctionType, 1, true &gt;::<a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a4a78cdaaa90888c1abd44b7d48750376">Arg1PassType</a></td>
+          <td class="memname">typedef FunctionType::Return <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt; FunctionType, 1, true &gt;::<a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a0e3ad903801722f7a37c9cf3fec2f844">ReturnType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_function_proxy_caller_base.html#a6148dac8ee7889b9b5d04daba44a0145">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;</a>.</p>
 
 </div>
 </div>
@@ -136,20 +132,20 @@ template&lt;class FunctionType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1049b45b2beeda091019b37e260bbafb"></a><!-- doxytag: member="FunctionCaller&lt; FunctionType, 1, true &gt;::Base" ref="a1049b45b2beeda091019b37e260bbafb" args="" -->
+<a class="anchor" id="a4a78cdaaa90888c1abd44b7d48750376"></a><!-- doxytag: member="FunctionCaller&lt; FunctionType, 1, true &gt;::Arg1PassType" ref="a4a78cdaaa90888c1abd44b7d48750376" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FunctionType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_function_proxy_caller_base.html">FunctionProxyCallerBase</a>&lt;FunctionType, <a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a0e3ad903801722f7a37c9cf3fec2f844">ReturnType</a>, <a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a2fe22fbceecd45522e8c32cd643b9d10">ArgType1</a>&gt; <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt; FunctionType, 1, true &gt;::<a class="el" href="class_function_proxy_caller_base_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html">Base</a></td>
+          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;<a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a2fe22fbceecd45522e8c32cd643b9d10">ArgType1</a>&gt;::PassType <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt; FunctionType, 1, true &gt;::<a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a4a78cdaaa90888c1abd44b7d48750376">Arg1PassType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_function_proxy_caller_base.html#a808ea9dce17acb34e527d3668e57d446">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_function_proxy_caller_base.html#a6148dac8ee7889b9b5d04daba44a0145">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;</a>.</p>
 
 </div>
 </div>
@@ -170,18 +166,20 @@ template&lt;class FunctionType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0e3ad903801722f7a37c9cf3fec2f844"></a><!-- doxytag: member="FunctionCaller&lt; FunctionType, 1, true &gt;::ReturnType" ref="a0e3ad903801722f7a37c9cf3fec2f844" args="" -->
+<a class="anchor" id="a1049b45b2beeda091019b37e260bbafb"></a><!-- doxytag: member="FunctionCaller&lt; FunctionType, 1, true &gt;::Base" ref="a1049b45b2beeda091019b37e260bbafb" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FunctionType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef FunctionType::Return <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt; FunctionType, 1, true &gt;::<a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a0e3ad903801722f7a37c9cf3fec2f844">ReturnType</a></td>
+          <td class="memname">typedef <a class="el" href="class_function_proxy_caller_base.html">FunctionProxyCallerBase</a>&lt;FunctionType, <a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a0e3ad903801722f7a37c9cf3fec2f844">ReturnType</a>, <a class="el" href="class_function_caller_3_01_function_type_00_011_00_01true_01_4.html#a2fe22fbceecd45522e8c32cd643b9d10">ArgType1</a>&gt; <a class="el" href="class_function_caller.html">FunctionCaller</a>&lt; FunctionType, 1, true &gt;::<a class="el" href="class_function_proxy_caller_base_3_01_function_type_00_01_return_type_00_01_arg_type1_01_4.html">Base</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_function_proxy_caller_base.html#a808ea9dce17acb34e527d3668e57d446">FunctionProxyCallerBase&lt; FunctionType, FunctionType::Return, FunctionType::Arg1 &gt;</a>.</p>
 
 </div>
 </div>
@@ -233,7 +231,7 @@ template&lt;class FunctionType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:54 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:58 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

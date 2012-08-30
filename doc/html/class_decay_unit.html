@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Exponential decay filter.  
  <a href="class_decay_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___filter_shortcuts_8h_source.html">plonk_FilterShortcuts.h</a>&gt;</code></p>
-
 <p><a href="class_decay_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -100,16 +97,30 @@ Static Public Member Functions</h2></td></tr>
 class DecayUnit&lt; SampleType &gt;</h3>
 
 <p>Exponential decay filter. </p>
-<p>Useful for creating simple decaying envlopes from impulses. </p>
+<p>Useful for creating simple decaying envlopes from impulses.</p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, duration=0.2, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (input duration=0.2, mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to filter</li>
+<li>duration: (unit, multi) The -60dB decay time in seconds</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ac06036738fb3f3d1aa011f28d63c29cc"></a><!-- doxytag: member="DecayUnit::FilterCoeffsType" ref="ac06036738fb3f3d1aa011f28d63c29cc" args="" -->
+<a class="anchor" id="a1ce607f439b6fc6f29c99a6e83614dd9"></a><!-- doxytag: member="DecayUnit::UnitType" ref="a1ce607f439b6fc6f29c99a6e83614dd9" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_decay_base.html">FilterShape</a>&gt; <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
         </tr>
       </table>
 </div>
@@ -132,14 +143,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8b6675afb4cdea67234d92a7e625f828"></a><!-- doxytag: member="DecayUnit::FilterType" ref="a8b6675afb4cdea67234d92a7e625f828" args="" -->
+<a class="anchor" id="ac06036738fb3f3d1aa011f28d63c29cc"></a><!-- doxytag: member="DecayUnit::FilterCoeffsType" ref="ac06036738fb3f3d1aa011f28d63c29cc" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_decay_unit.html#a3ec7af9a3c31e091e5f9e603f4d7bb6b">FormType</a>&gt; <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_decay_base.html">FilterShape</a>&gt; <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffsType</a></td>
         </tr>
       </table>
 </div>
@@ -162,6 +173,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a8b6675afb4cdea67234d92a7e625f828"></a><!-- doxytag: member="DecayUnit::FilterType" ref="a8b6675afb4cdea67234d92a7e625f828" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_decay_unit.html#a3ec7af9a3c31e091e5f9e603f4d7bb6b">FormType</a>&gt; <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a29013b13c7d57771caaaab380f0269a1"></a><!-- doxytag: member="DecayUnit::ResampleType" ref="a29013b13c7d57771caaaab380f0269a1" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -177,14 +203,18 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1ce607f439b6fc6f29c99a6e83614dd9"></a><!-- doxytag: member="DecayUnit::UnitType" ref="a1ce607f439b6fc6f29c99a6e83614dd9" args="" -->
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aedcd14340866b64c79d3202e5d51bc81"></a><!-- doxytag: member="DecayUnit::getInfo" ref="aedcd14340866b64c79d3202e5d51bc81" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -192,7 +222,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ab5dea7b8d3ac9d8431fa514371abc8dd"></a><!-- doxytag: member="DecayUnit::ar" ref="ab5dea7b8d3ac9d8431fa514371abc8dd" args="(UnitType const &amp;input, UnitType const &amp;duration=SampleType(0.2), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -256,24 +285,6 @@ template&lt;class SampleType &gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="aedcd14340866b64c79d3202e5d51bc81"></a><!-- doxytag: member="DecayUnit::getInfo" ref="aedcd14340866b64c79d3202e5d51bc81" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_decay_unit.html">DecayUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -347,7 +358,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:52 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:55 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,13 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_66de319f4396a2b7916472e434c6bf60.html">plank</a>      </li>
-      <li class="navelem"><a class="el" href="dir_4d6c3b9eaf843e696e8e525ea151a418.html">containers</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -75,9 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_LockFreeLinkedListElement.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="plank___atomic_8h_source.html">plank_Atomic.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plank___lock_free_linked_list_element_inline_8h_source.html">plank_LockFreeLinkedListElementInline.h</a>&quot;</code><br/>
-</div>
+
 <p><a href="plank___lock_free_linked_list_element_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
@@ -128,12 +118,12 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_atomic_p_x_class.html#ga71e2a3899219aaf2d3b0b881a2613776">PlankAtomicPXRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_free_linked_list_element_class.html#gae9220b9f6c20402a720bad46d053bcbb">pl_LockFreeLinkedListElement_GetNextAtom</a> (<a class="el" href="group___plank_lock_free_linked_list_element_class.html#ga7d13325615349299e5003b986cc29f18">PlankLockFreeLinkedListElementRef</a> p)</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="a4a180acbd282f7c0c2c6dd218d8b857a"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_Create" ref="a4a180acbd282f7c0c2c6dd218d8b857a" args="" -->
+<a class="anchor" id="a2f35c7cdc1e90ae214e0bc431898a98f"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::PLANK_INLINING_FUNCTIONS" ref="a2f35c7cdc1e90ae214e0bc431898a98f" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define pl_LockFreeQueueElement_Create&#160;&#160;&#160;pl_LockFreeLinkedListElement_Create</td>
+          <td class="memname">#define PLANK_INLINING_FUNCTIONS&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div>
@@ -147,6 +137,32 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define pl_LockFreeQueueElement_CreateAndInit&#160;&#160;&#160;pl_LockFreeLinkedListElement_CreateAndInit</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4a180acbd282f7c0c2c6dd218d8b857a"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_Create" ref="a4a180acbd282f7c0c2c6dd218d8b857a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pl_LockFreeQueueElement_Create&#160;&#160;&#160;pl_LockFreeLinkedListElement_Create</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aae10b19ff5ccc304c2d753ff1cb09dc1"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_Init" ref="aae10b19ff5ccc304c2d753ff1cb09dc1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pl_LockFreeQueueElement_Init&#160;&#160;&#160;pl_LockFreeLinkedListElement_Init</td>
         </tr>
       </table>
 </div>
@@ -193,12 +209,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a57e235e1525ed12c0f88e7e6b03d6ebc"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_GetDataAtom" ref="a57e235e1525ed12c0f88e7e6b03d6ebc" args="" -->
+<a class="anchor" id="a7fad8842d7eb2be00888b9426c70f0c4"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_SetData" ref="a7fad8842d7eb2be00888b9426c70f0c4" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define pl_LockFreeQueueElement_GetDataAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetDataAtom</td>
+          <td class="memname">#define pl_LockFreeQueueElement_SetData&#160;&#160;&#160;pl_LockFreeLinkedListElement_SetData</td>
         </tr>
       </table>
 </div>
@@ -219,64 +235,51 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5247c4ec0fca53bd843aa709a4464d21"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_GetNextAtom" ref="a5247c4ec0fca53bd843aa709a4464d21" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define pl_LockFreeQueueElement_GetNextAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetNextAtom</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5247c4ec0fca53bd843aa709a4464d21"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_GetNextAtom" ref="a5247c4ec0fca53bd843aa709a4464d21" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define pl_LockFreeQueueElement_GetNextAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetNextAtom</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aae10b19ff5ccc304c2d753ff1cb09dc1"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_Init" ref="aae10b19ff5ccc304c2d753ff1cb09dc1" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define pl_LockFreeQueueElement_Init&#160;&#160;&#160;pl_LockFreeLinkedListElement_Init</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7fad8842d7eb2be00888b9426c70f0c4"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_SetData" ref="a7fad8842d7eb2be00888b9426c70f0c4" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define pl_LockFreeQueueElement_SetData&#160;&#160;&#160;pl_LockFreeLinkedListElement_SetData</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ab827f55f35b2cba79bc156673acff77a"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_SetNext" ref="ab827f55f35b2cba79bc156673acff77a" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">#define pl_LockFreeQueueElement_SetNext&#160;&#160;&#160;pl_LockFreeLinkedListElement_SetNext</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a57e235e1525ed12c0f88e7e6b03d6ebc"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_GetDataAtom" ref="a57e235e1525ed12c0f88e7e6b03d6ebc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pl_LockFreeQueueElement_GetDataAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetDataAtom</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5247c4ec0fca53bd843aa709a4464d21"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_GetNextAtom" ref="a5247c4ec0fca53bd843aa709a4464d21" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pl_LockFreeQueueElement_GetNextAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetNextAtom</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0b3fb5299b60a41da165a3e1ba6b9502"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_CreateAndInit" ref="a0b3fb5299b60a41da165a3e1ba6b9502" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pl_LockFreeStackElement_CreateAndInit&#160;&#160;&#160;pl_LockFreeLinkedListElement_CreateAndInit</td>
         </tr>
       </table>
 </div>
@@ -297,12 +300,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0b3fb5299b60a41da165a3e1ba6b9502"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_CreateAndInit" ref="a0b3fb5299b60a41da165a3e1ba6b9502" args="" -->
+<a class="anchor" id="ae54cce843a43e80bd963c7197c875c06"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_Init" ref="ae54cce843a43e80bd963c7197c875c06" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define pl_LockFreeStackElement_CreateAndInit&#160;&#160;&#160;pl_LockFreeLinkedListElement_CreateAndInit</td>
+          <td class="memname">#define pl_LockFreeStackElement_Init&#160;&#160;&#160;pl_LockFreeLinkedListElement_Init</td>
         </tr>
       </table>
 </div>
@@ -349,12 +352,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa77d4f369e6b187f403caa3b0cabb1cc"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_GetDataAtom" ref="aa77d4f369e6b187f403caa3b0cabb1cc" args="" -->
+<a class="anchor" id="abd51d7ac8de0930f5918fdae1e52ae13"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_SetData" ref="abd51d7ac8de0930f5918fdae1e52ae13" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define pl_LockFreeStackElement_GetDataAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetDataAtom</td>
+          <td class="memname">#define pl_LockFreeStackElement_SetData&#160;&#160;&#160;pl_LockFreeLinkedListElement_SetData</td>
         </tr>
       </table>
 </div>
@@ -375,32 +378,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae54cce843a43e80bd963c7197c875c06"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_Init" ref="ae54cce843a43e80bd963c7197c875c06" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define pl_LockFreeStackElement_Init&#160;&#160;&#160;pl_LockFreeLinkedListElement_Init</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abd51d7ac8de0930f5918fdae1e52ae13"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_SetData" ref="abd51d7ac8de0930f5918fdae1e52ae13" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define pl_LockFreeStackElement_SetData&#160;&#160;&#160;pl_LockFreeLinkedListElement_SetData</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a318544b0d09c351677e1c4355256bdcf"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_SetNext" ref="a318544b0d09c351677e1c4355256bdcf" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -414,12 +391,25 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2f35c7cdc1e90ae214e0bc431898a98f"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::PLANK_INLINING_FUNCTIONS" ref="a2f35c7cdc1e90ae214e0bc431898a98f" args="" -->
+<a class="anchor" id="aa77d4f369e6b187f403caa3b0cabb1cc"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeStackElement_GetDataAtom" ref="aa77d4f369e6b187f403caa3b0cabb1cc" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PLANK_INLINING_FUNCTIONS&#160;&#160;&#160;1</td>
+          <td class="memname">#define pl_LockFreeStackElement_GetDataAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetDataAtom</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5247c4ec0fca53bd843aa709a4464d21"></a><!-- doxytag: member="plank_LockFreeLinkedListElement.h::pl_LockFreeQueueElement_GetNextAtom" ref="a5247c4ec0fca53bd843aa709a4464d21" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pl_LockFreeQueueElement_GetNextAtom&#160;&#160;&#160;pl_LockFreeLinkedListElement_GetNextAtom</td>
         </tr>
       </table>
 </div>
@@ -442,7 +432,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

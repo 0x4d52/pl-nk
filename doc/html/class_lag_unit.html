@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Exponential lag filter.  
  <a href="class_lag_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___filter_shortcuts_8h_source.html">plonk_FilterShortcuts.h</a>&gt;</code></p>
-
 <p><a href="class_lag_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -100,16 +97,30 @@ Static Public Member Functions</h2></td></tr>
 class LagUnit&lt; SampleType &gt;</h3>
 
 <p>Exponential lag filter. </p>
-<p>Useful for smoothing control signals. </p>
+<p>Useful for smoothing control signals.</p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, duration=0.2, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (input duration=0.2, mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to filter</li>
+<li>duration: (unit, multi) The -60dB lag time in seconds</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="abc44f63d7b4c3c0b2c1b41be4573ee78"></a><!-- doxytag: member="LagUnit::FilterCoeffsType" ref="abc44f63d7b4c3c0b2c1b41be4573ee78" args="" -->
+<a class="anchor" id="a986fc0d3dc186d9b1b71ef82b96dd6b3"></a><!-- doxytag: member="LagUnit::UnitType" ref="a986fc0d3dc186d9b1b71ef82b96dd6b3" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_lag_base.html">FilterShape</a>&gt; <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
         </tr>
       </table>
 </div>
@@ -132,14 +143,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a513476fb396212d1bca49c29b17b6417"></a><!-- doxytag: member="LagUnit::FilterType" ref="a513476fb396212d1bca49c29b17b6417" args="" -->
+<a class="anchor" id="abc44f63d7b4c3c0b2c1b41be4573ee78"></a><!-- doxytag: member="LagUnit::FilterCoeffsType" ref="abc44f63d7b4c3c0b2c1b41be4573ee78" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_lag_unit.html#aad538539bc5751bbb7c29a9ee6670a16">FormType</a>&gt; <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffs1ParamUnit</a>&lt;<a class="el" href="class_filter_shape_lag_base.html">FilterShape</a>&gt; <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs1_param_unit.html">FilterCoeffsType</a></td>
         </tr>
       </table>
 </div>
@@ -162,6 +173,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a513476fb396212d1bca49c29b17b6417"></a><!-- doxytag: member="LagUnit::FilterType" ref="a513476fb396212d1bca49c29b17b6417" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_lag_unit.html#aad538539bc5751bbb7c29a9ee6670a16">FormType</a>&gt; <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aa0e4762fb585d1b98d90954daabda069"></a><!-- doxytag: member="LagUnit::ResampleType" ref="aa0e4762fb585d1b98d90954daabda069" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -177,14 +203,18 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a986fc0d3dc186d9b1b71ef82b96dd6b3"></a><!-- doxytag: member="LagUnit::UnitType" ref="a986fc0d3dc186d9b1b71ef82b96dd6b3" args="" -->
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af66d65e5ed682d7a560ec50a11373e2d"></a><!-- doxytag: member="LagUnit::getInfo" ref="af66d65e5ed682d7a560ec50a11373e2d" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -192,7 +222,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aa93a29a2a7de7bb3da3fad935a1922c9"></a><!-- doxytag: member="LagUnit::ar" ref="aa93a29a2a7de7bb3da3fad935a1922c9" args="(UnitType const &amp;input, UnitType const &amp;duration=SampleType(0.2), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -256,24 +285,6 @@ template&lt;class SampleType &gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="af66d65e5ed682d7a560ec50a11373e2d"></a><!-- doxytag: member="LagUnit::getInfo" ref="af66d65e5ed682d7a560ec50a11373e2d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_lag_unit.html">LagUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -347,7 +358,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

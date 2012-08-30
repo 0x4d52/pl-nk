@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,19 +68,49 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___mixers_8h_source.html">plonk_Mixers.h</a>&gt;</code></p>
-
 <p><a href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#acf462ad3fe9ebd00303f4b16713d5145">base</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#a522ed1656289d53a6dfe34e5ab3c0e86">preferredNumChannels</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#a731b71d2b337d7a3e538ea0b39f7adb3">allowAutoDelete</a>:1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#aafaf8667f6a3e92f22f68c43fb126de6">purgeNullUnits</a>:1</td></tr>
 </table>
 <h3>template&lt;class SampleType&gt;<br/>
  struct ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;</h3>
 
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="acf462ad3fe9ebd00303f4b16713d5145"></a><!-- doxytag: member="ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;::base" ref="acf462ad3fe9ebd00303f4b16713d5145" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#acf462ad3fe9ebd00303f4b16713d5145">base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a522ed1656289d53a6dfe34e5ab3c0e86"></a><!-- doxytag: member="ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;::preferredNumChannels" ref="a522ed1656289d53a6dfe34e5ab3c0e86" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#a522ed1656289d53a6dfe34e5ab3c0e86">preferredNumChannels</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a731b71d2b337d7a3e538ea0b39f7adb3"></a><!-- doxytag: member="ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;::allowAutoDelete" ref="a731b71d2b337d7a3e538ea0b39f7adb3" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -97,14 +126,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="acf462ad3fe9ebd00303f4b16713d5145"></a><!-- doxytag: member="ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;::base" ref="acf462ad3fe9ebd00303f4b16713d5145" args="" -->
+<a class="anchor" id="aafaf8667f6a3e92f22f68c43fb126de6"></a><!-- doxytag: member="ChannelData&lt; UnitMixerChannelInternal&lt; SampleType &gt; &gt;::purgeNullUnits" ref="aafaf8667f6a3e92f22f68c43fb126de6" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a> <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#acf462ad3fe9ebd00303f4b16713d5145">base</a></td>
+          <td class="memname">bool <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_unit_mixer_channel_internal.html">UnitMixerChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_unit_mixer_channel_internal_3_01_sample_type_01_4_01_4.html#aafaf8667f6a3e92f22f68c43fb126de6">purgeNullUnits</a></td>
         </tr>
       </table>
 </div>
@@ -130,7 +159,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:54 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

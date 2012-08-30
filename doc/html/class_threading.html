@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -75,8 +74,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Crossplatform threading support.  
  <a href="class_threading.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___thread_8h_source.html">plonk_Thread.h</a>&gt;</code></p>
-
 <p><a href="class_threading-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
@@ -85,7 +82,7 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> class itself.  <a href="class_threading_1_1_thread.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">ID</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">ID</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684">sleep</a> (const double seconds)  throw ()</td></tr>
@@ -94,6 +91,9 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Yield the current thread.  <a href="#a064c003b9a820cabb3768f7466d4d05a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a9453710636ee4e1b579bd1153b00c25c">getCurrentThreadID</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the calling thread ID.  <a href="#a9453710636ee4e1b579bd1153b00c25c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#acb3e4038e1bca654e09cd3d270e9d259">getAudioThreadID</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a80cbc490a9390a7a6faadff865ea3ca2">setAudioThreadID</a> (const <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> theID)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#a68419efc1cc64978766b5fcc3a15c60a">currentThreadIsAudioThread</a> ()  throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="friends"></a>
 Friends</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading.html#adbc148eaddd341d7ae4d07c9e9e33bfd">Thread</a></td></tr>
@@ -106,7 +106,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a> <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a></td>
+          <td class="memname">typedef <a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a> <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a></td>
         </tr>
       </table>
 </div>
@@ -115,24 +115,6 @@ Friends</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a9453710636ee4e1b579bd1153b00c25c"></a><!-- doxytag: member="Threading::getCurrentThreadID" ref="a9453710636ee4e1b579bd1153b00c25c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> Threading::getCurrentThreadID </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the calling thread ID. </p>
-
-</div>
-</div>
 <a class="anchor" id="af06e4d7a02ac3054e17b01ae78e39684"></a><!-- doxytag: member="Threading::sleep" ref="af06e4d7a02ac3054e17b01ae78e39684" args="(const double seconds)" -->
 <div class="memitem">
 <div class="memproto">
@@ -172,6 +154,73 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9453710636ee4e1b579bd1153b00c25c"></a><!-- doxytag: member="Threading::getCurrentThreadID" ref="a9453710636ee4e1b579bd1153b00c25c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> Threading::getCurrentThreadID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the calling thread ID. </p>
+
+</div>
+</div>
+<a class="anchor" id="acb3e4038e1bca654e09cd3d270e9d259"></a><!-- doxytag: member="Threading::getAudioThreadID" ref="acb3e4038e1bca654e09cd3d270e9d259" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> Threading::getAudioThreadID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a80cbc490a9390a7a6faadff865ea3ca2"></a><!-- doxytag: member="Threading::setAudioThreadID" ref="a80cbc490a9390a7a6faadff865ea3ca2" args="(const Threading::ID theID)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Threading::setAudioThreadID </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td>
+          <td class="paramname"><em>theID</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a68419efc1cc64978766b5fcc3a15c60a"></a><!-- doxytag: member="Threading::currentThreadIsAudioThread" ref="a68419efc1cc64978766b5fcc3a15c60a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Threading::currentThreadIsAudioThread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Friends And Related Function Documentation</h2>
 <a class="anchor" id="adbc148eaddd341d7ae4d07c9e9e33bfd"></a><!-- doxytag: member="Threading::Thread" ref="adbc148eaddd341d7ae4d07c9e9e33bfd" args="" -->
 <div class="memitem">
@@ -205,7 +254,7 @@ Friends</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

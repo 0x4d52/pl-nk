@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,13 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_8c06e60823060e3e53ae5913cf44194b.html">maths</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -74,11 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_InlineBinaryOps.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="plonk___constants_8h_source.html">plonk_Constants.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___inline_common_ops_8h_source.html">plonk_InlineCommonOps.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___inline_unary_ops_8h_source.html">plonk_InlineUnaryOps.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___inline_misc_ops_8h_source.html">plonk_InlineMiscOps.h</a>&quot;</code><br/>
-</div>
+
 <p><a href="plonk___inline_binary_ops_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
@@ -159,6 +147,33 @@ Functions</h2></td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___plonk_binary_op_functions.html#gaf4d669544b6444eabbd898f6d559bec4">decayFeedback</a> (Type const &amp;delayTime, Type const &amp;decayTime)  throw ()</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="a44db665205781565d0a31f11d866d5a6"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPFUNCTION" ref="a44db665205781565d0a31f11d866d5a6" args="(TYPE, NAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_BINARYOPFUNCTION</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPE, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NAME&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac2f12bd387c71732728103c236426458"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOP" ref="ac2f12bd387c71732728103c236426458" args="(CLASSNAME, OP)" -->
 <div class="memitem">
 <div class="memproto">
@@ -188,26 +203,16 @@ Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a44db665205781565d0a31f11d866d5a6"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPFUNCTION" ref="a44db665205781565d0a31f11d866d5a6" args="(TYPE, NAME)" -->
+<a class="anchor" id="a4f71baec43eb9c50fdb76acede4f5eb9"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPS" ref="a4f71baec43eb9c50fdb76acede4f5eb9" args="(CLASSNAME)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PLONK_BINARYOPFUNCTION</td>
+          <td class="memname">#define PLONK_BINARYOPS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPE, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
           <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NAME&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;TYPE (*NAME)(TYPE const&amp;, TYPE const&amp;)</td>
         </tr>
       </table>
 </div>
@@ -240,7 +245,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment">\
-    CLASSNAME OP (CLASSNAME <span class="keyword">const</span>&amp; left, CLASSNAME <span class="keyword">const</span>&amp; right) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> left.OP (right); }
+    <span class="keyword">inline</span> CLASSNAME OP (CLASSNAME <span class="keyword">const</span>&amp; left, CLASSNAME <span class="keyword">const</span>&amp; right) <span class="keywordflow">throw</span>() { <span class="keywordflow">return</span> left.OP (right); }
 </pre></div>
 </div>
 </div>
@@ -264,23 +269,6 @@ Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td>&#160;&#160;&#160;template&lt;class T&gt; PLONK_BINARYOPGLOBAL(CLASSNAME&lt;T&gt;,OP)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aba40c34626fdc5160fa2b4ed21dfa8ca"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBALS" ref="aba40c34626fdc5160fa2b4ed21dfa8ca" args="(CLASSNAME)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLONK_BINARYOPGLOBALS</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
-          <td>&#160;&#160;&#160;PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME)</td>
         </tr>
       </table>
 </div>
@@ -340,6 +328,23 @@ Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="aba40c34626fdc5160fa2b4ed21dfa8ca"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBALS" ref="aba40c34626fdc5160fa2b4ed21dfa8ca" args="(CLASSNAME)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_BINARYOPGLOBALS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td>&#160;&#160;&#160;PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a5a42a6a313eda2b881d30cf5dde08506"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPGLOBALS_TEMPLATE" ref="a5a42a6a313eda2b881d30cf5dde08506" args="(CLASSNAME)" -->
 <div class="memitem">
 <div class="memproto">
@@ -350,23 +355,6 @@ Functions</h2></td></tr>
           <td class="paramtype">&#160;</td>
           <td class="paramname">CLASSNAME</td><td>)</td>
           <td>&#160;&#160;&#160;PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL_TEMPLATE,CLASSNAME)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4f71baec43eb9c50fdb76acede4f5eb9"></a><!-- doxytag: member="plonk_InlineBinaryOps.h::PLONK_BINARYOPS" ref="a4f71baec43eb9c50fdb76acede4f5eb9" args="(CLASSNAME)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLONK_BINARYOPS</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
-          <td></td>
         </tr>
       </table>
 </div>
@@ -389,7 +377,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

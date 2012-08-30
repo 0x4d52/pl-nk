@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_SimpleArray.h</div>  </div>
@@ -119,7 +110,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00046"></a>00046 <span class="preprocessor">#include &quot;../core/plonk_WeakPointer.h&quot;</span>
 <a name="l00047"></a>00047 <span class="preprocessor">#include &quot;<a class="code" href="plonk___smart_pointer_container_8h.html">plonk_SmartPointerContainer.h</a>&quot;</span>
 <a name="l00048"></a>00048 <span class="preprocessor">#include &quot;<a class="code" href="plonk___object_array_internal_8h.html">plonk_ObjectArrayInternal.h</a>&quot;</span>
-<a name="l00049"></a>00049 <span class="comment">//#include &quot;plonk_DynamicContainer.h&quot;</span>
+<a name="l00049"></a>00049 
 <a name="l00050"></a>00050 
 <a name="l00051"></a>00051 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ObjectType&gt;
 <a name="l00052"></a><a class="code" href="class_simple_array.html">00052</a> <span class="keyword">class </span><a class="code" href="class_simple_array.html">SimpleArray</a> : <span class="keyword">public</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt; ObjectArrayInternal&lt;ObjectType,SmartPointer&gt; &gt;
@@ -129,11 +120,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00056"></a><a class="code" href="class_simple_array.html#a321eebd9ae0a09c97eac1926504e67b3">00056</a>     <span class="keyword">typedef</span> <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer&lt;Internal&gt;</a>                 <a class="code" href="class_simple_array.html#a321eebd9ae0a09c97eac1926504e67b3">Base</a>;
 <a name="l00057"></a>00057     
 <a name="l00058"></a><a class="code" href="class_simple_array.html#aa2c58bbca10904ed0824c9c1ba1d7474">00058</a>     <a class="code" href="class_simple_array.html#aa2c58bbca10904ed0824c9c1ba1d7474">SimpleArray</a>()
-<a name="l00059"></a>00059     :   <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="code" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">Internal</a>&gt; (new <a class="code" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">Internal</a> (0, false))
+<a name="l00059"></a>00059     :   <a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="code" href="class_object_array_internal.html">Internal</a>&gt; (new <a class="code" href="class_object_array_internal.html">Internal</a> (0, false))
 <a name="l00060"></a>00060     {
 <a name="l00061"></a>00061     }
 <a name="l00062"></a>00062     
-<a name="l00063"></a><a class="code" href="class_simple_array.html#aa0b17afb4a6739e98bdc4a3c50a8b63b">00063</a>     <span class="keyword">explicit</span> <a class="code" href="class_simple_array.html#aa2c58bbca10904ed0824c9c1ba1d7474">SimpleArray</a> (<a class="code" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
+<a name="l00063"></a><a class="code" href="class_simple_array.html#aa0b17afb4a6739e98bdc4a3c50a8b63b">00063</a>     <span class="keyword">explicit</span> <a class="code" href="class_simple_array.html#aa2c58bbca10904ed0824c9c1ba1d7474">SimpleArray</a> (<a class="code" href="class_object_array_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
 <a name="l00064"></a>00064         :       <a class="code" href="class_simple_array.html#a321eebd9ae0a09c97eac1926504e67b3">Base</a> (internalToUse)
 <a name="l00065"></a>00065         {
 <a name="l00066"></a>00066         } 
@@ -151,61 +142,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00081"></a><a class="code" href="class_simple_array.html#ae993e92c48565a803ae86ecb1ba64fb0">00081</a> <span class="comment"></span>    <a class="code" href="class_simple_array.html">SimpleArray</a>&amp; <a class="code" href="class_simple_array.html#ae993e92c48565a803ae86ecb1ba64fb0" title="Assignment operator.">operator= </a>(<a class="code" href="class_simple_array.html">SimpleArray</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
 <a name="l00082"></a>00082         {
 <a name="l00083"></a>00083                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00084"></a>00084             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
+<a name="l00084"></a>00084             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());
 <a name="l00085"></a>00085         
 <a name="l00086"></a>00086         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00087"></a>00087         }
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089 };
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="comment">//class Globals</span>
-<a name="l00092"></a>00092 <span class="comment">//{</span>
-<a name="l00093"></a>00093 <span class="comment">//public:</span>
-<a name="l00094"></a>00094 <span class="comment">//    static void add (const SmartPointer* p) throw()</span>
-<a name="l00095"></a>00095 <span class="comment">//    {</span>
-<a name="l00096"></a>00096 <span class="comment">//        Globals* g = Globals::get (false);</span>
-<a name="l00097"></a>00097 <span class="comment">//        </span>
-<a name="l00098"></a>00098 <span class="comment">//        if (g-&gt;globals.getInternal()-&gt;indexOf (const_cast&lt;SmartPointer*&gt; (p)) &lt; 0); // no duplicates</span>
-<a name="l00099"></a>00099 <span class="comment">//            g-&gt;globals.getInternal()-&gt;add (const_cast&lt;SmartPointer*&gt; (p));</span>
-<a name="l00100"></a>00100 <span class="comment">//    }</span>
-<a name="l00101"></a>00101 <span class="comment">//    </span>
-<a name="l00102"></a>00102 <span class="comment">//    static void destroy() throw()</span>
-<a name="l00103"></a>00103 <span class="comment">//    {</span>
-<a name="l00104"></a>00104 <span class="comment">//        Globals* g = Globals::get (true); // returns and resets so we must delete it here</span>
-<a name="l00105"></a>00105 <span class="comment">//        </span>
-<a name="l00106"></a>00106 <span class="comment">//        SmartPointer** array = g-&gt;globals.getInternal()-&gt;getArray();</span>
-<a name="l00107"></a>00107 <span class="comment">//        const int numItems = g-&gt;globals.getInternal()-&gt;length();</span>
-<a name="l00108"></a>00108 <span class="comment">//        </span>
-<a name="l00109"></a>00109 <span class="comment">//        for (int i = numItems; --i &gt;= 0;)</span>
-<a name="l00110"></a>00110 <span class="comment">//            array[i]-&gt;decrementRefCount();</span>
-<a name="l00111"></a>00111 <span class="comment">//        </span>
-<a name="l00112"></a>00112 <span class="comment">//        delete g;</span>
-<a name="l00113"></a>00113 <span class="comment">//    }</span>
-<a name="l00114"></a>00114 <span class="comment">//    </span>
-<a name="l00115"></a>00115 <span class="comment">//private:</span>
-<a name="l00116"></a>00116 <span class="comment">//    Globals() throw()</span>
-<a name="l00117"></a>00117 <span class="comment">//    {</span>
-<a name="l00118"></a>00118 <span class="comment">//    }</span>
-<a name="l00119"></a>00119 <span class="comment">//    </span>
-<a name="l00120"></a>00120 <span class="comment">//    static Globals* get (bool reset) throw()</span>
-<a name="l00121"></a>00121 <span class="comment">//    {</span>
-<a name="l00122"></a>00122 <span class="comment">//        static Globals* g = new Globals();</span>
-<a name="l00123"></a>00123 <span class="comment">//        Globals* temp = g;</span>
-<a name="l00124"></a>00124 <span class="comment">//        </span>
-<a name="l00125"></a>00125 <span class="comment">//        plonk_assert (g != 0); // exit has already happened once</span>
-<a name="l00126"></a>00126 <span class="comment">//        </span>
-<a name="l00127"></a>00127 <span class="comment">//        if (reset)</span>
-<a name="l00128"></a>00128 <span class="comment">//            g = 0;</span>
-<a name="l00129"></a>00129 <span class="comment">//        </span>
-<a name="l00130"></a>00130 <span class="comment">//        return temp;</span>
-<a name="l00131"></a>00131 <span class="comment">//    }</span>
-<a name="l00132"></a>00132 <span class="comment">//    </span>
-<a name="l00133"></a>00133 <span class="comment">//    SimpleArray&lt;SmartPointer*&gt; globals;</span>
-<a name="l00134"></a>00134 <span class="comment">//};</span>
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138 <span class="preprocessor">#endif // PLONK_SIMPLEARRAY_H</span>
+<a name="l00088"></a>00088     
+<a name="l00089"></a><a class="code" href="class_simple_array.html#a1064c11ec3e28a173651904fda3d13f7">00089</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_simple_array.html">SimpleArray</a>);
+<a name="l00090"></a>00090 };
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095 <span class="preprocessor">#endif // PLONK_SIMPLEARRAY_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -222,7 +170,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

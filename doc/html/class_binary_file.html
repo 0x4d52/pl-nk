@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,16 +72,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="BinaryFile" --><!-- doxytag: inherits="SmartPointerContainer&lt; BinaryFileInternal &gt;" -->
 <p>A utility class for reading and writing binary files.  
  <a href="class_binary_file.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___binary_file_8h_source.html">plonk_BinaryFile.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BinaryFile:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_binary_file.png" usemap="#BinaryFile_map" alt=""/>
   <map id="BinaryFile_map" name="BinaryFile_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; BinaryFileInternal &gt;" shape="rect" coords="0,56,291,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; BinaryFileInternal &gt;" shape="rect" coords="0,0,291,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; BinaryFileInternal &gt;" shape="rect" coords="0,112,291,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; BinaryFileInternal &gt;" shape="rect" coords="0,56,291,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,291,24"/>
 </map>
  </div></div>
 
@@ -129,6 +127,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class ValueType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a8470cddb92f785bcde9845ef78735f41">write</a> (const ValueType value)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a numerical value to the file.  <a href="#a8470cddb92f785bcde9845ef78735f41"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_binary_file.html">BinaryFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a7b1621b3329910dec697d96c78124e59">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_binary_file.html">BinaryFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#a7a2f685b16278fc8a11a653ecc80a513">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_binary_file.html">BinaryFile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_binary_file.html#ae343de37e61e0a652e39ace0ccdfd5b7">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -140,19 +140,6 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock"><p>A utility class for reading and writing binary files. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_text_file.html" title="A utility class for reading and writing text files.">TextFile</a> </dd></dl>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ab5014faa5dd78d9c7c1fd578e4ef5fbc"></a><!-- doxytag: member="BinaryFile::Base" ref="ab5014faa5dd78d9c7c1fd578e4ef5fbc" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_binary_file_internal.html">Internal</a>&gt; <a class="el" href="class_smart_pointer_container.html">BinaryFile::Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a32868bebf98cc1838d00eebce5b89bf6"></a><!-- doxytag: member="BinaryFile::Internal" ref="a32868bebf98cc1838d00eebce5b89bf6" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -164,7 +151,18 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="ab5014faa5dd78d9c7c1fd578e4ef5fbc"></a><!-- doxytag: member="BinaryFile::Base" ref="ab5014faa5dd78d9c7c1fd578e4ef5fbc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_binary_file_internal.html">Internal</a>&gt; <a class="el" href="class_smart_pointer_container.html">BinaryFile::Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -411,23 +409,22 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ae0dc1dd415db7429c7eeaf8040d4c2e9"></a><!-- doxytag: member="BinaryFile::chunkID" ref="ae0dc1dd415db7429c7eeaf8040d4c2e9" args="(const char *const fourCharCode)" -->
+<a class="anchor" id="aafe776f527c875a94f4172dc2e2b458a"></a><!-- doxytag: member="BinaryFile::operator=" ref="aafe776f527c875a94f4172dc2e2b458a" args="(BinaryFile const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static int BinaryFile::chunkID </td>
+          <td class="memname"><a class="el" href="class_binary_file.html">BinaryFile</a>&amp; BinaryFile::operator= </td>
           <td>(</td>
-          <td class="paramtype">const char *const&#160;</td>
-          <td class="paramname"><em>fourCharCode</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
+          <td class="paramtype"><a class="el" href="class_binary_file.html">BinaryFile</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Creates a chunk name identifier. </p>
-<p>A convenience function for creating an interger to write to a file for chunk IDs in many IFF-type files. </p>
+<p>Assignment operator. </p>
 
 </div>
 </div>
@@ -469,6 +466,44 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a6e1149fe6d5d17341c981a53bde320a1"></a><!-- doxytag: member="BinaryFile::setPosition" ref="a6e1149fe6d5d17341c981a53bde320a1" args="(const LongLong position)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFile::setPosition </td>
+          <td>(</td>
+          <td class="paramtype">const LongLong&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the position of the file stream. </p>
+<p>0 is the start of the stream. </p>
+
+</div>
+</div>
+<a class="anchor" id="aec74973dc081b0e904e161cef0860af1"></a><!-- doxytag: member="BinaryFile::setEof" ref="aec74973dc081b0e904e161cef0860af1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinaryFile::setEof </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the position of the file stream to the end of the file. </p>
+
+</div>
+</div>
 <a class="anchor" id="ad4d69bef12e39c8a8a4ba30856d7a395"></a><!-- doxytag: member="BinaryFile::isEof" ref="ad4d69bef12e39c8a8a4ba30856d7a395" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -487,22 +522,24 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aafe776f527c875a94f4172dc2e2b458a"></a><!-- doxytag: member="BinaryFile::operator=" ref="aafe776f527c875a94f4172dc2e2b458a" args="(BinaryFile const &amp;other)" -->
+<a class="anchor" id="a153e39a0a8eba7898910e7b249c46ac8"></a><!-- doxytag: member="BinaryFile::read" ref="a153e39a0a8eba7898910e7b249c46ac8" args="()" -->
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_binary_file.html">BinaryFile</a>&amp; BinaryFile::operator= </td>
+          <td class="memname">ValueType BinaryFile::read </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_binary_file.html">BinaryFile</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Assignment operator. </p>
+<p>Reads a numerical value from the file. </p>
+<p>This must be one of: char, short, int, long or LongLong (and their unsigned versions). This is read in the endian format specified in the constructor. </p>
 
 </div>
 </div>
@@ -528,65 +565,6 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a153e39a0a8eba7898910e7b249c46ac8"></a><!-- doxytag: member="BinaryFile::read" ref="a153e39a0a8eba7898910e7b249c46ac8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ValueType BinaryFile::read </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reads a numerical value from the file. </p>
-<p>This must be one of: char, short, int, long or LongLong (and their unsigned versions). This is read in the endian format specified in the constructor. </p>
-
-</div>
-</div>
-<a class="anchor" id="aec74973dc081b0e904e161cef0860af1"></a><!-- doxytag: member="BinaryFile::setEof" ref="aec74973dc081b0e904e161cef0860af1" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFile::setEof </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Sets the position of the file stream to the end of the file. </p>
-
-</div>
-</div>
-<a class="anchor" id="a6e1149fe6d5d17341c981a53bde320a1"></a><!-- doxytag: member="BinaryFile::setPosition" ref="a6e1149fe6d5d17341c981a53bde320a1" args="(const LongLong position)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BinaryFile::setPosition </td>
-          <td>(</td>
-          <td class="paramtype">const LongLong&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Sets the position of the file stream. </p>
-<p>0 is the start of the stream. </p>
-
-</div>
-</div>
 <a class="anchor" id="a8470cddb92f785bcde9845ef78735f41"></a><!-- doxytag: member="BinaryFile::write" ref="a8470cddb92f785bcde9845ef78735f41" args="(const ValueType value)" -->
 <div class="memitem">
 <div class="memproto">
@@ -609,6 +587,62 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ae0dc1dd415db7429c7eeaf8040d4c2e9"></a><!-- doxytag: member="BinaryFile::chunkID" ref="ae0dc1dd415db7429c7eeaf8040d4c2e9" args="(const char *const fourCharCode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int BinaryFile::chunkID </td>
+          <td>(</td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>fourCharCode</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates a chunk name identifier. </p>
+<p>A convenience function for creating an interger to write to a file for chunk IDs in many IFF-type files. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7b1621b3329910dec697d96c78124e59"></a><!-- doxytag: member="BinaryFile::operator&#45;&gt;" ref="a7b1621b3329910dec697d96c78124e59" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_binary_file.html">BinaryFile</a>* BinaryFile::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7a2f685b16278fc8a11a653ecc80a513"></a><!-- doxytag: member="BinaryFile::operator&#45;&gt;" ref="a7a2f685b16278fc8a11a653ecc80a513" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_binary_file.html">BinaryFile</a>* BinaryFile::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; BinaryFileInternal &gt;</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___binary_file_8h_source.html">plonk_BinaryFile.h</a></li>
 </ul>
@@ -627,7 +661,7 @@ template&lt;class ValueType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

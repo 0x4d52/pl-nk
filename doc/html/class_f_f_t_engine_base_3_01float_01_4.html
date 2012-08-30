@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,16 +71,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="FFTEngineBase&lt; float &gt;" --><!-- doxytag: inherits="SmartPointerContainer&lt; FFTEngineInternal&lt; float &gt; &gt;" -->
 <p>A platform independent FFT processing engine.  
  <a href="class_f_f_t_engine_base_3_01float_01_4.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___f_f_t_engine_8h_source.html">plonk_FFTEngine.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for FFTEngineBase&lt; float &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_f_f_t_engine_base_3_01float_01_4.png" usemap="#FFTEngineBase&lt; float &gt;_map" alt=""/>
   <map id="FFTEngineBase&lt; float &gt;_map" name="FFTEngineBase&lt; float &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; FFTEngineInternal&lt; float &gt; &gt;" shape="rect" coords="0,56,343,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; FFTEngineInternal&lt; float &gt; &gt;" shape="rect" coords="0,0,343,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; FFTEngineInternal&lt; float &gt; &gt;" shape="rect" coords="0,112,343,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; FFTEngineInternal&lt; float &gt; &gt;" shape="rect" coords="0,56,343,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,343,24"/>
 </map>
  </div></div>
 
@@ -120,19 +118,6 @@ class FFTEngineBase&lt; float &gt;</h3>
 <p>A platform independent FFT processing engine. </p>
 <p>This uses Plank to decide which underlying processing engine to use (e.g., FFTReal or vDSP). </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a11a9b5832a0da26a505a4ddcf6c1655c"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::Base" ref="a11a9b5832a0da26a505a4ddcf6c1655c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_f_f_t_engine_internal_3_01float_01_4.html">Internal</a>&gt; <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ae4c874d09e7dcf46d7781e90e5751b18"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::Internal" ref="ae4c874d09e7dcf46d7781e90e5751b18" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +129,18 @@ class FFTEngineBase&lt; float &gt;</h3>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; FFTEngineInternal&lt; float &gt; &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a11a9b5832a0da26a505a4ddcf6c1655c"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::Base" ref="a11a9b5832a0da26a505a4ddcf6c1655c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_f_f_t_engine_internal_3_01float_01_4.html">Internal</a>&gt; <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -195,6 +191,25 @@ class FFTEngineBase&lt; float &gt;</h3>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a02536062e3b3cb35bdac478ca41b371d"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::operator=" ref="a02536062e3b3cb35bdac478ca41b371d" args="(FFTEngineBase const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&amp; <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
+
+</div>
+</div>
 <a class="anchor" id="a4ea96a42335717feed5544f6d413569f"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::forward" ref="a4ea96a42335717feed5544f6d413569f" args="(float *output, const float *input)" -->
 <div class="memitem">
 <div class="memproto">
@@ -255,22 +270,33 @@ class FFTEngineBase&lt; float &gt;</h3>
 
 </div>
 </div>
-<a class="anchor" id="a59c534d2e6030892dfb1a94bea72d919"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::halfLength" ref="a59c534d2e6030892dfb1a94bea72d919" args="() const " -->
+<a class="anchor" id="aed54f69cdcdd65d88e72557e35064659"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::inverse" ref="aed54f69cdcdd65d88e72557e35064659" args="(float *output, const float *input)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::halfLength </td>
+          <td class="memname">void <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::inverse </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>input</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Get half FFT size. </p>
-<p>This is just as a convenience as it is already cached for efficiency. </p>
+<p>Apply the inverse-FFT to the input and place the result in output. </p>
+<p>This can't be performed in-place (i.e., input and output must not point to the same data or overlap). </p>
 
 </div>
 </div>
@@ -288,36 +314,6 @@ class FFTEngineBase&lt; float &gt;</h3>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_numerical_array.html">Buffer</a> const &amp;&#160;</td>
-          <td class="paramname"><em>input</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Apply the inverse-FFT to the input and place the result in output. </p>
-<p>This can't be performed in-place (i.e., input and output must not point to the same data or overlap). </p>
-
-</div>
-</div>
-<a class="anchor" id="aed54f69cdcdd65d88e72557e35064659"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::inverse" ref="aed54f69cdcdd65d88e72557e35064659" args="(float *output, const float *input)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::inverse </td>
-          <td>(</td>
-          <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const float *&#160;</td>
           <td class="paramname"><em>input</em>&#160;</td>
         </tr>
         <tr>
@@ -352,22 +348,22 @@ class FFTEngineBase&lt; float &gt;</h3>
 
 </div>
 </div>
-<a class="anchor" id="a02536062e3b3cb35bdac478ca41b371d"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::operator=" ref="a02536062e3b3cb35bdac478ca41b371d" args="(FFTEngineBase const &amp;other)" -->
+<a class="anchor" id="a59c534d2e6030892dfb1a94bea72d919"></a><!-- doxytag: member="FFTEngineBase&lt; float &gt;::halfLength" ref="a59c534d2e6030892dfb1a94bea72d919" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&amp; <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::operator= </td>
+          <td class="memname">long <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt;::halfLength </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; float &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Assignment operator. </p>
+<p>Get half FFT size. </p>
+<p>This is just as a convenience as it is already cached for efficiency. </p>
 
 </div>
 </div>
@@ -389,7 +385,7 @@ class FFTEngineBase&lt; float &gt;</h3>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

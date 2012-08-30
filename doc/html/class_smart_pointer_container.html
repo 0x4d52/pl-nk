@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -68,21 +67,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SmartPointerContainer&lt; SmartPointerType, enableWeak &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="SmartPointerContainer" --><!-- doxytag: inherits="SmartPointerContainerBase" -->
-<p><code>#include &lt;<a class="el" href="plonk___smart_pointer_container_8h_source.html">plonk_SmartPointerContainer.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="SmartPointerContainer" --><!-- doxytag: inherits="SmartPointerContainerBase" --><div class="dynheader">
 Inheritance diagram for SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_smart_pointer_container.png" usemap="#SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;_map" alt=""/>
   <map id="SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;_map" name="SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;_map">
-<area href="class_smart_pointer_container_base.html" title="This manages a SmartPointer pointer." alt="SmartPointerContainerBase&lt; SmartPointerType &gt;" shape="rect" coords="702,0,1043,24"/>
-<area href="class_dictionary.html" alt="Dictionary&lt; Dynamic &gt;" shape="rect" coords="0,112,341,136"/>
-<area href="class_dictionary.html" alt="Dictionary&lt; Dynamic, int &gt;" shape="rect" coords="351,112,692,136"/>
-<area href="class_simple_array.html" alt="SimpleArray&lt; ChannelType &gt;" shape="rect" coords="702,112,1043,136"/>
-<area href="class_simple_array.html" alt="SimpleArray&lt; Receiver * &gt;" shape="rect" coords="1053,112,1394,136"/>
-<area href="class_simple_array.html" alt="SimpleArray&lt; WeakPointer * &gt;" shape="rect" coords="1404,112,1745,136"/>
-<area href="class_input_dictionary.html" title="For storing named Dynamic objects." alt="InputDictionary" shape="rect" coords="351,168,692,192"/>
+<area href="class_smart_pointer_container_base.html" title="This manages a SmartPointer pointer." alt="SmartPointerContainerBase&lt; SmartPointerType &gt;" shape="rect" coords="702,56,1043,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="702,0,1043,24"/>
+<area href="class_dictionary.html" alt="Dictionary&lt; Dynamic &gt;" shape="rect" coords="0,168,341,192"/>
+<area href="class_dictionary.html" alt="Dictionary&lt; Dynamic, int &gt;" shape="rect" coords="351,168,692,192"/>
+<area href="class_simple_array.html" alt="SimpleArray&lt; Receiver * &gt;" shape="rect" coords="702,168,1043,192"/>
+<area href="class_simple_array.html" alt="SimpleArray&lt; WeakChannelType &gt;" shape="rect" coords="1053,168,1394,192"/>
+<area href="class_simple_array.html" alt="SimpleArray&lt; WeakPointer * &gt;" shape="rect" coords="1404,168,1745,192"/>
+<area href="class_input_dictionary.html" title="For storing named Dynamic objects." alt="InputDictionary" shape="rect" coords="351,224,692,248"/>
 </map>
  </div></div>
 
@@ -92,6 +90,7 @@ Inheritance diagram for SmartPointerContainer&lt; SmartPointerType, enableWeak &
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container.html#a4087a64436d45a952b062423d2e89bff">SmartPointerContainer</a> (SmartPointerType *internalToUse=0)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container.html#a91c21d1da616006d4c3618e3bd9e5e76">SmartPointerContainer</a> (<a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a> const &amp;copy)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container.html#abbab2b54576a88029e8b123e78fda7f4">operator=</a> (<a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a> const &amp;other)  throw ()</td></tr>
 </table>
 <h3>template&lt;class SmartPointerType, bool enableWeak&gt;<br/>
  class SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;</h3>
@@ -135,6 +134,26 @@ template&lt;class SmartPointerType, bool enableWeak&gt; </div>
 
 </div>
 </div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="abbab2b54576a88029e8b123e78fda7f4"></a><!-- doxytag: member="SmartPointerContainer::operator=" ref="abbab2b54576a88029e8b123e78fda7f4" args="(SmartPointerContainer const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SmartPointerType, bool enableWeak&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&amp; <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt; SmartPointerType, enableWeak &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt; SmartPointerType, enableWeak &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___smart_pointer_container_8h_source.html">plonk_SmartPointerContainer.h</a></li>
 </ul>
@@ -153,7 +172,7 @@ template&lt;class SmartPointerType, bool enableWeak&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

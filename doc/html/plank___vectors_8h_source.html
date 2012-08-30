@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_66de319f4396a2b7916472e434c6bf60.html">plank</a>      </li>
-      <li class="navelem"><a class="el" href="dir_974ed0dc1fad48201c03d54423eb6e82.html">maths</a>      </li>
-      <li class="navelem"><a class="el" href="dir_45ddda15590de563371d6928fb94d327.html">vectors</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plank_Vectors.h</div>  </div>
@@ -279,100 +269,102 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00248"></a>00248 <span class="preprocessor">    PLANK_VECTORBINARYOP_DEFINE(SqrSum,TYPECODE)\</span>
 <a name="l00249"></a>00249 <span class="preprocessor">    PLANK_VECTORBINARYOP_DEFINE(SqrDif,TYPECODE)\</span>
 <a name="l00250"></a>00250 <span class="preprocessor">    PLANK_VECTORBINARYOP_DEFINE(AbsDif,TYPECODE)\</span>
-<a name="l00251"></a><a class="code" href="group___plank_vector_functions.html#ga6bd51dca6361c74850caf92244eefbf4">00251</a> <span class="preprocessor">    PLANK_VECTORBINARYOP_DEFINE(Thresh,TYPECODE)\</span>
-<a name="l00252"></a><a class="code" href="group___plank_vector_functions.html#gabfeb5cce886741713f4db15d8e45530a">00252</a> <span class="preprocessor">    \</span>
-<a name="l00253"></a><a class="code" href="group___plank_vector_functions.html#ga3b51b5328580cc5ddf4521f4703c5b55">00253</a> <span class="preprocessor">    PLANK_VECTORMULADD_DEFINE(TYPECODE)\</span>
-<a name="l00254"></a><a class="code" href="group___plank_vector_functions.html#ga0d3db035bc4c110b3e12a119f6160282">00254</a> <span class="preprocessor">    \</span>
-<a name="l00255"></a><a class="code" href="group___plank_vector_functions.html#ga5ff4edc54c8076017f196becd1dd3138">00255</a> <span class="preprocessor">    PLANK_VECTORLOOKUP_DEFINE(TYPECODE)</span>
-<a name="l00256"></a><a class="code" href="group___plank_vector_functions.html#gae3b94b589f0cb52834f70a44afb3658a">00256</a> <span class="preprocessor"></span>
-<a name="l00258"></a><a class="code" href="group___plank_vector_functions.html#gabc6677e90f170c8309699d4e2ea5a4ac">00258</a> 
-<a name="l00259"></a><a class="code" href="group___plank_vector_functions.html#ga4aa5ede069e1c9a8a6fc9c954fdc82dc">00259</a> <span class="preprocessor">#if defined(PLANK_VEC_VDSP) &amp;&amp; !DOXYGEN</span>
-<a name="l00260"></a>00260 <span class="preprocessor"></span><span class="preprocessor">    #include &quot;<a class="code" href="plank__v_d_s_p_8h.html">plank_vDSP.h</a>&quot;</span>
-<a name="l00261"></a>00261 <span class="preprocessor">#endif</span>
-<a name="l00262"></a>00262 <span class="preprocessor"></span>
-<a name="l00263"></a>00263 <span class="preprocessor">#if !defined(PLANK_VEC_CUSTOM) || DOXYGEN</span>
+<a name="l00251"></a>00251 <span class="preprocessor">    PLANK_VECTORBINARYOP_DEFINE(Thresh,TYPECODE)\</span>
+<a name="l00252"></a>00252 <span class="preprocessor">    \</span>
+<a name="l00253"></a><a class="code" href="group___plank_vector_functions.html#ga6bd51dca6361c74850caf92244eefbf4">00253</a> <span class="preprocessor">    PLANK_VECTORMULADD_DEFINE(TYPECODE)\</span>
+<a name="l00254"></a><a class="code" href="group___plank_vector_functions.html#gabfeb5cce886741713f4db15d8e45530a">00254</a> <span class="preprocessor">    \</span>
+<a name="l00255"></a><a class="code" href="group___plank_vector_functions.html#ga3b51b5328580cc5ddf4521f4703c5b55">00255</a> <span class="preprocessor">    PLANK_VECTORLOOKUP_DEFINE(TYPECODE)</span>
+<a name="l00256"></a><a class="code" href="group___plank_vector_functions.html#ga0d3db035bc4c110b3e12a119f6160282">00256</a> <span class="preprocessor"></span>
+<a name="l00258"></a><a class="code" href="group___plank_vector_functions.html#gae3b94b589f0cb52834f70a44afb3658a">00258</a> 
+<a name="l00259"></a>00259 <span class="preprocessor">#if defined(PLANK_VEC_VDSP) //&amp;&amp; !DOXYGEN</span>
+<a name="l00260"></a><a class="code" href="group___plank_vector_functions.html#gabc6677e90f170c8309699d4e2ea5a4ac">00260</a> <span class="preprocessor"></span><span class="preprocessor">    #include &quot;<a class="code" href="plank__v_d_s_p_8h.html">plank_vDSP.h</a>&quot;</span>
+<a name="l00261"></a><a class="code" href="group___plank_vector_functions.html#ga4aa5ede069e1c9a8a6fc9c954fdc82dc">00261</a> <span class="preprocessor">#elif defined(PLANK_VEC_OTHERLIB) //etc!</span>
+<a name="l00262"></a>00262 <span class="preprocessor"></span><span class="preprocessor">    #include &quot;some other vector lib&quot;</span> <span class="comment">// must define PLANK_VEC_CUSTOM</span>
+<a name="l00263"></a>00263 <span class="preprocessor">#endif</span>
 <a name="l00264"></a>00264 <span class="preprocessor"></span>
-<a name="l00287"></a>00287 <a class="code" href="group___plank_vector_macros.html#ga1003d48aab416b139a234bcd9bba28c3">PLANK_VECTOR_OPS</a>(F)
-<a name="l00288"></a>00288 <a class="code" href="group___plank_vector_macros.html#ga1003d48aab416b139a234bcd9bba28c3">PLANK_VECTOR_OPS</a>(D)
-<a name="l00289"></a>00289 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(F)
-<a name="l00290"></a>00290 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(D)
-<a name="l00291"></a>00291 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(C)
-<a name="l00292"></a>00292 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(I)
-<a name="l00293"></a>00293 <span class="comment">//PLANK_VECTORCONVERTERS_DEFINE(I24)</span>
-<a name="l00294"></a><a class="code" href="group___plank_endian_functions.html#ga7604245ac9f66736a91b5021f3de2b37">00294</a> <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(S)
-<a name="l00295"></a>00295 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(L)
-<a name="l00296"></a>00296 
+<a name="l00265"></a>00265 <span class="preprocessor">#if !defined(PLANK_VEC_CUSTOM) || DOXYGEN</span>
+<a name="l00266"></a>00266 <span class="preprocessor"></span>
+<a name="l00289"></a>00289 <a class="code" href="group___plank_vector_macros.html#ga1003d48aab416b139a234bcd9bba28c3">PLANK_VECTOR_OPS</a>(F)
+<a name="l00290"></a>00290 <a class="code" href="group___plank_vector_macros.html#ga1003d48aab416b139a234bcd9bba28c3">PLANK_VECTOR_OPS</a>(D)
+<a name="l00291"></a>00291 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(F)
+<a name="l00292"></a>00292 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(D)
+<a name="l00293"></a>00293 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(C)
+<a name="l00294"></a>00294 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(I)
+<a name="l00295"></a>00295 <span class="comment">//PLANK_VECTORCONVERTERS_DEFINE(I24)</span>
+<a name="l00296"></a><a class="code" href="group___plank_endian_functions.html#ga7604245ac9f66736a91b5021f3de2b37">00296</a> <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(S)
+<a name="l00297"></a>00297 <a class="code" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(L)
 <a name="l00298"></a>00298 
-<a name="l00299"></a>00299 <span class="preprocessor">#endif // PLANK_VEC_CUSTOM</span>
-<a name="l00300"></a>00300 <span class="preprocessor"></span>
-<a name="l00303"></a>00303 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gaad47ed6ec1112e62fbcf37d52bf3e8ba" title="Swap the endianness of a vector of unsigned short elements.">pl_VectorSwapEndianUS</a> (<a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00304"></a>00304 {
-<a name="l00305"></a>00305     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
-<a name="l00306"></a>00306     
-<a name="l00307"></a>00307     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
-<a name="l00308"></a>00308         <a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52" title="Swap the byte order of the unisgned short pointed to by bits.">pl_SwapEndianUS</a> (data);
-<a name="l00309"></a>00309 }
-<a name="l00310"></a>00310 
-<a name="l00313"></a>00313 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac2a9bbe8bd68d2e4f0ad845302a35e41" title="Swap the endianness of a vector of short elements.">pl_VectorSwapEndianS</a> (<a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">PlankS</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00314"></a>00314 {
-<a name="l00315"></a>00315     <a class="code" href="group___plank_endian_functions.html#gaad47ed6ec1112e62fbcf37d52bf3e8ba" title="Swap the endianness of a vector of unsigned short elements.">pl_VectorSwapEndianUS</a> ((<a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a>*)data, N);
-<a name="l00316"></a>00316 }
-<a name="l00317"></a>00317 
-<a name="l00320"></a>00320 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga95ac1433588bc708224d63b722b8f5f8" title="Swap the endianness of a vector of unsigned 24-bit int elements.">pl_VectorSwapEndianUI24</a> (<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00321"></a>00321 {
-<a name="l00322"></a>00322     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
-<a name="l00323"></a>00323     
-<a name="l00324"></a>00324     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
-<a name="l00325"></a>00325         <a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0" title="Swap the byte order of the 24-bit int pointed to by bits.">pl_SwapEndianUI24</a> (data);
-<a name="l00326"></a>00326 }
-<a name="l00327"></a>00327 
-<a name="l00330"></a>00330 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga7604245ac9f66736a91b5021f3de2b37" title="Swap the endianness of a vector of 24-bit int elements.">pl_VectorSwapEndianI24</a> (<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00331"></a>00331 {
-<a name="l00332"></a>00332     <a class="code" href="group___plank_endian_functions.html#ga95ac1433588bc708224d63b722b8f5f8" title="Swap the endianness of a vector of unsigned 24-bit int elements.">pl_VectorSwapEndianUI24</a> ((<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)data, N);
-<a name="l00333"></a>00333 }
-<a name="l00334"></a>00334 
-<a name="l00337"></a>00337 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga6375760408bb72569315fd789584f54d" title="Swap the endianness of a vector of unsigned int elements.">pl_VectorSwapEndianUI</a> (<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00338"></a>00338 {
-<a name="l00339"></a>00339     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
-<a name="l00340"></a>00340     
-<a name="l00341"></a>00341     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
-<a name="l00342"></a>00342         <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> (data);
-<a name="l00343"></a>00343 }
-<a name="l00344"></a>00344 
-<a name="l00347"></a>00347 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga50132656767457518fb71a5fa1a16f8a" title="Swap the endianness of a vector of int elements.">pl_VectorSwapEndianI</a> (<a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00348"></a>00348 {
-<a name="l00349"></a>00349     <a class="code" href="group___plank_endian_functions.html#ga6375760408bb72569315fd789584f54d" title="Swap the endianness of a vector of unsigned int elements.">pl_VectorSwapEndianUI</a> ((<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)data, N);
-<a name="l00350"></a>00350 }
-<a name="l00351"></a>00351 
-<a name="l00354"></a>00354 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga13e357d6631b9249b071eed95bab3427" title="Swap the endianness of a vector of unsigned long elements.">pl_VectorSwapEndianUL</a> (<a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00355"></a>00355 {
-<a name="l00356"></a>00356     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
-<a name="l00357"></a>00357     
-<a name="l00358"></a>00358     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
-<a name="l00359"></a>00359         <a class="code" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba" title="Swap the byte order of the unisgned long pointed to by data.">pl_SwapEndianUL</a> (data);
-<a name="l00360"></a>00360 }
-<a name="l00361"></a>00361 
-<a name="l00364"></a>00364 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga4a934295b74de6f927562b60ca42082c" title="Swap the endianness of a vector of long elements.">pl_VectorSwapEndianL</a> (<a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00365"></a>00365 {
-<a name="l00366"></a>00366     <a class="code" href="group___plank_endian_functions.html#ga13e357d6631b9249b071eed95bab3427" title="Swap the endianness of a vector of unsigned long elements.">pl_VectorSwapEndianUL</a> ((<a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>*)data, N);
-<a name="l00367"></a>00367 }
-<a name="l00368"></a>00368 
-<a name="l00371"></a>00371 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga7c453b13e7b777fbff26687a54638069" title="Swap the endianness of a vector of unsigned long long (64-bit) elements.">pl_VectorSwapEndianULL</a> (<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00372"></a>00372 {
-<a name="l00373"></a>00373     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
-<a name="l00374"></a>00374     
-<a name="l00375"></a>00375     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
-<a name="l00376"></a>00376         <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> (data);
-<a name="l00377"></a>00377 }
-<a name="l00378"></a>00378 
-<a name="l00381"></a>00381 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gafe44c27a16eb8deaa2ef6b98515715be" title="Swap the endianness of a vector of long long (64-bit) elements.">pl_VectorSwapEndianLL</a> (<a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
-<a name="l00382"></a>00382 {
-<a name="l00383"></a>00383     <a class="code" href="group___plank_endian_functions.html#ga7c453b13e7b777fbff26687a54638069" title="Swap the endianness of a vector of unsigned long long (64-bit) elements.">pl_VectorSwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data, N);
-<a name="l00384"></a>00384 }
-<a name="l00385"></a>00385 
-<a name="l00386"></a>00386 
-<a name="l00387"></a>00387 <span class="preprocessor">#endif // PLANK_VECTORS_H</span>
-<a name="l00388"></a>00388 <span class="preprocessor"></span>
+<a name="l00300"></a>00300 
+<a name="l00301"></a>00301 <span class="preprocessor">#endif // PLANK_VEC_CUSTOM</span>
+<a name="l00302"></a>00302 <span class="preprocessor"></span>
+<a name="l00305"></a>00305 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gaad47ed6ec1112e62fbcf37d52bf3e8ba" title="Swap the endianness of a vector of unsigned short elements.">pl_VectorSwapEndianUS</a> (<a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00306"></a>00306 {
+<a name="l00307"></a>00307     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
+<a name="l00308"></a>00308     
+<a name="l00309"></a>00309     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
+<a name="l00310"></a>00310         <a class="code" href="group___plank_endian_functions.html#gae23643694e2e245ca44347c6192a8c52" title="Swap the byte order of the unisgned short pointed to by bits.">pl_SwapEndianUS</a> (data);
+<a name="l00311"></a>00311 }
+<a name="l00312"></a>00312 
+<a name="l00315"></a>00315 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gac2a9bbe8bd68d2e4f0ad845302a35e41" title="Swap the endianness of a vector of short elements.">pl_VectorSwapEndianS</a> (<a class="code" href="plank___standard_header_8h.html#aed2b7d72d154175c22ab3263ab7a9dda">PlankS</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00316"></a>00316 {
+<a name="l00317"></a>00317     <a class="code" href="group___plank_endian_functions.html#gaad47ed6ec1112e62fbcf37d52bf3e8ba" title="Swap the endianness of a vector of unsigned short elements.">pl_VectorSwapEndianUS</a> ((<a class="code" href="plank___standard_header_8h.html#ac403835a47846de2698d75c6089ba2a2">PlankUS</a>*)data, N);
+<a name="l00318"></a>00318 }
+<a name="l00319"></a>00319 
+<a name="l00322"></a>00322 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga95ac1433588bc708224d63b722b8f5f8" title="Swap the endianness of a vector of unsigned 24-bit int elements.">pl_VectorSwapEndianUI24</a> (<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00323"></a>00323 {
+<a name="l00324"></a>00324     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
+<a name="l00325"></a>00325     
+<a name="l00326"></a>00326     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
+<a name="l00327"></a>00327         <a class="code" href="group___plank_endian_functions.html#gac75ceea748c47b6dfda8c357364e5da0" title="Swap the byte order of the 24-bit int pointed to by bits.">pl_SwapEndianUI24</a> (data);
+<a name="l00328"></a>00328 }
+<a name="l00329"></a>00329 
+<a name="l00332"></a>00332 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga7604245ac9f66736a91b5021f3de2b37" title="Swap the endianness of a vector of 24-bit int elements.">pl_VectorSwapEndianI24</a> (<a class="code" href="struct_plank_i24.html" title="Storage for a 24-bit integer.">PlankI24</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00333"></a>00333 {
+<a name="l00334"></a>00334     <a class="code" href="group___plank_endian_functions.html#ga95ac1433588bc708224d63b722b8f5f8" title="Swap the endianness of a vector of unsigned 24-bit int elements.">pl_VectorSwapEndianUI24</a> ((<a class="code" href="struct_plank_u_i24.html" title="Storage for a 24-bit unsigned integer.">PlankUI24</a>*)data, N);
+<a name="l00335"></a>00335 }
+<a name="l00336"></a>00336 
+<a name="l00339"></a>00339 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga6375760408bb72569315fd789584f54d" title="Swap the endianness of a vector of unsigned int elements.">pl_VectorSwapEndianUI</a> (<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00340"></a>00340 {
+<a name="l00341"></a>00341     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
+<a name="l00342"></a>00342     
+<a name="l00343"></a>00343     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
+<a name="l00344"></a>00344         <a class="code" href="group___plank_endian_functions.html#ga1d4306e552673586bbaaa76e97dfc9cd" title="Swap the byte order of the unisgned int pointed to by bits.">pl_SwapEndianUI</a> (data);
+<a name="l00345"></a>00345 }
+<a name="l00346"></a>00346 
+<a name="l00349"></a>00349 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga50132656767457518fb71a5fa1a16f8a" title="Swap the endianness of a vector of int elements.">pl_VectorSwapEndianI</a> (<a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00350"></a>00350 {
+<a name="l00351"></a>00351     <a class="code" href="group___plank_endian_functions.html#ga6375760408bb72569315fd789584f54d" title="Swap the endianness of a vector of unsigned int elements.">pl_VectorSwapEndianUI</a> ((<a class="code" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>*)data, N);
+<a name="l00352"></a>00352 }
+<a name="l00353"></a>00353 
+<a name="l00356"></a>00356 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga13e357d6631b9249b071eed95bab3427" title="Swap the endianness of a vector of unsigned long elements.">pl_VectorSwapEndianUL</a> (<a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00357"></a>00357 {
+<a name="l00358"></a>00358     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
+<a name="l00359"></a>00359     
+<a name="l00360"></a>00360     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
+<a name="l00361"></a>00361         <a class="code" href="group___plank_endian_functions.html#ga11766e40fbdf1bf99aab1b10805eccba" title="Swap the byte order of the unisgned long pointed to by data.">pl_SwapEndianUL</a> (data);
+<a name="l00362"></a>00362 }
+<a name="l00363"></a>00363 
+<a name="l00366"></a>00366 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga4a934295b74de6f927562b60ca42082c" title="Swap the endianness of a vector of long elements.">pl_VectorSwapEndianL</a> (<a class="code" href="plank___standard_header_8h.html#a56a3a82c06ac0807a6e4c7afbece3c3f">PlankL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00367"></a>00367 {
+<a name="l00368"></a>00368     <a class="code" href="group___plank_endian_functions.html#ga13e357d6631b9249b071eed95bab3427" title="Swap the endianness of a vector of unsigned long elements.">pl_VectorSwapEndianUL</a> ((<a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>*)data, N);
+<a name="l00369"></a>00369 }
+<a name="l00370"></a>00370 
+<a name="l00373"></a>00373 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#ga7c453b13e7b777fbff26687a54638069" title="Swap the endianness of a vector of unsigned long long (64-bit) elements.">pl_VectorSwapEndianULL</a> (<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00374"></a>00374 {
+<a name="l00375"></a>00375     <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i;
+<a name="l00376"></a>00376     
+<a name="l00377"></a>00377     <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (i), <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a> (data))
+<a name="l00378"></a>00378         <a class="code" href="group___plank_endian_functions.html#ga37d0f99842d745175394f7f4a378e82d" title="Swap the byte order of the unisgned long long pointed to by bits.">pl_SwapEndianULL</a> (data);
+<a name="l00379"></a>00379 }
+<a name="l00380"></a>00380 
+<a name="l00383"></a>00383 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_endian_functions.html#gafe44c27a16eb8deaa2ef6b98515715be" title="Swap the endianness of a vector of long long (64-bit) elements.">pl_VectorSwapEndianLL</a> (<a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>* data, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N)
+<a name="l00384"></a>00384 {
+<a name="l00385"></a>00385     <a class="code" href="group___plank_endian_functions.html#ga7c453b13e7b777fbff26687a54638069" title="Swap the endianness of a vector of unsigned long long (64-bit) elements.">pl_VectorSwapEndianULL</a> ((<a class="code" href="plank___standard_header_8h.html#a173f1d590f482a0eefff64a9f90a9d26">PlankULL</a>*)data, N);
+<a name="l00386"></a>00386 }
+<a name="l00387"></a>00387 
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389 <span class="preprocessor">#endif // PLANK_VECTORS_H</span>
+<a name="l00390"></a>00390 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -389,7 +381,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:46 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:44 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

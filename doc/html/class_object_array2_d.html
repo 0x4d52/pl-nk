@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,18 +69,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ObjectArray2D&lt; ArrayType, RowType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="ObjectArray2D" --><!-- doxytag: inherits="ObjectArray2DBase" -->
-<p><code>#include &lt;<a class="el" href="plonk___object_array2_d_8h_source.html">plonk_ObjectArray2D.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="ObjectArray2D" --><!-- doxytag: inherits="ObjectArray2DBase" --><div class="dynheader">
 Inheritance diagram for ObjectArray2D&lt; ArrayType, RowType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_object_array2_d.png" usemap="#ObjectArray2D&lt; ArrayType, RowType &gt;_map" alt=""/>
   <map id="ObjectArray2D&lt; ArrayType, RowType &gt;_map" name="ObjectArray2D&lt; ArrayType, RowType &gt;_map">
-<area href="class_object_array2_d_base.html" alt="ObjectArray2DBase&lt; ArrayType, RowType &gt;" shape="rect" coords="0,168,379,192"/>
-<area href="class_object_array.html" alt="ObjectArray&lt; RowType &gt;" shape="rect" coords="0,112,379,136"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,56,379,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,0,379,24"/>
+<area href="class_object_array2_d_base.html" alt="ObjectArray2DBase&lt; ArrayType, RowType &gt;" shape="rect" coords="0,224,379,248"/>
+<area href="class_object_array.html" alt="ObjectArray&lt; RowType &gt;" shape="rect" coords="0,168,379,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,112,379,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,56,379,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,379,24"/>
 </map>
  </div></div>
 
@@ -98,6 +96,7 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ArrayType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a8d99d21cb7cb69c657200fe52ab30144">ObjectArrayType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a><br class="typebreak"/>
 &lt; <a class="el" href="class_object_array.html">ObjectArrayType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#afb24269ea2a87c3820774bed41d0e5a8">ObjectArray2DType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">Base::InitialObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">InitialObject</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a12582954a69635c22c80015c10d9b49f">ObjectArray2D</a> (<a class="el" href="class_object_array_internal.html">Internal</a> *internalToUse)  throw ()</td></tr>
@@ -109,12 +108,14 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#ac96530521a49123daa828c036490c676">ObjectArray2D</a> (const int rows=0)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#abde2d32fd776b9e2e9f9bc95799eba0b">ObjectArray2D</a> (const int rows, const int columns)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#ad08db4741056b70cafd8a52de9bdf5fe">ObjectArray2D</a> (RowType const &amp;single)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#aba2ee32f43a2211710b17e6a81b09dd5">ObjectArray2D</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02=RowType(), RowType const &amp;i03=RowType())  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#af623a2e9c9d60affa8b1f33f4cbca7d6">ObjectArray2D</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05=RowType(), RowType const &amp;i06=RowType(), RowType const &amp;i07=RowType())  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#ad2d11face85f549128f09961bd6985de">ObjectArray2D</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05, RowType const &amp;i06, RowType const &amp;i07, RowType const &amp;i08, RowType const &amp;i09=RowType(), RowType const &amp;i10=RowType(), RowType const &amp;i11=RowType(), RowType const &amp;i12=RowType(), RowType const &amp;i13=RowType(), RowType const &amp;i14=RowType(), RowType const &amp;i15=RowType())  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a3543a2db5bba0a3f246923ed601e5e91">ObjectArray2D</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05, RowType const &amp;i06, RowType const &amp;i07, RowType const &amp;i08, RowType const &amp;i09, RowType const &amp;i10, RowType const &amp;i11, RowType const &amp;i12, RowType const &amp;i13, RowType const &amp;i14, RowType const &amp;i15, RowType const &amp;i16, RowType const &amp;i17=RowType(), RowType const &amp;i18=RowType(), RowType const &amp;i19=RowType(), RowType const &amp;i20=RowType(), RowType const &amp;i21=RowType(), RowType const &amp;i22=RowType(), RowType const &amp;i23=RowType(), RowType const &amp;i24=RowType(), RowType const &amp;i25=RowType(), RowType const &amp;i26=RowType(), RowType const &amp;i27=RowType(), RowType const &amp;i28=RowType(), RowType const &amp;i29=RowType(), RowType const &amp;i30=RowType(), RowType const &amp;i31=RowType())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#acb7b630358423c624480d798fa9500f6">ObjectArray2D</a> (<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i00, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i01, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i02=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i03=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a82e1d8df4a6dd5b1a0a6b50b62a9ba38">ObjectArray2D</a> (<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i00, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i01, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i02, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i03, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i04, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i05=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i06=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i07=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a33a407c77a9b27da03518e293eebd5fd">ObjectArray2D</a> (<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i00, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i01, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i02, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i03, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i04, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i05, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i06, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i07, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i08, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i09=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i10=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i11=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i12=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i13=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i14=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i15=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#ad45cba7cb86fbb8405f79e997ac1c712">ObjectArray2D</a> (<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i00, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i01, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i02, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i03, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i04, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i05, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i06, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i07, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i08, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i09, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i10, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i11, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i12, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i13, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i14, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i15, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i16, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i17=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i18=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i19=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i20=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i21=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i22=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i23=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i24=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i25=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i26=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i27=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i28=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i29=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i30=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>(), <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i31=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>())  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a406a0eb24d38ef4d5bd6e76eef8a8012">ObjectArrayAssignmentDefinition</a> (<a class="el" href="class_object_array2_d.html">ObjectArray2D</a>, RowType)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#af8082dcb0d717810c66550e375563b30">ObjectArray2D</a> (<a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt; const &amp;array0, <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt; const &amp;array1)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#a1735a1cdf79753358cbf88619978f92f">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_object_array2_d.html">ObjectArray2D</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#abaaec1aecf9e3efea2d3bd62867547ea">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d.html#add78e9b1c4d4c397b5158dc40a5fdeaf">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -125,23 +126,6 @@ Static Public Member Functions</h2></td></tr>
  class ObjectArray2D&lt; ArrayType, RowType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aa6956459229b6dfe6a1b7efc5de322e6"></a><!-- doxytag: member="ObjectArray2D::Base" ref="aa6956459229b6dfe6a1b7efc5de322e6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ArrayType, class RowType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt;ArrayType,RowType&gt; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ad8251c75a6aff77fc497241a07d4ae67"></a><!-- doxytag: member="ObjectArray2D::Internal" ref="ad8251c75a6aff77fc497241a07d4ae67" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -159,20 +143,37 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afb24269ea2a87c3820774bed41d0e5a8"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2DType" ref="afb24269ea2a87c3820774bed41d0e5a8" args="" -->
+<a class="anchor" id="aa6956459229b6dfe6a1b7efc5de322e6"></a><!-- doxytag: member="ObjectArray2D::Base" ref="aa6956459229b6dfe6a1b7efc5de322e6" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_object_array.html">ObjectArrayType</a>&gt; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">ObjectArray2DType</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt;ArrayType,RowType&gt; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">Base</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#a9a46eca4c5a894f4ecb3d7cbf7a3462c">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a34387565e8e74e2e94e434ea1eeaad46"></a><!-- doxytag: member="ObjectArray2D::Weak" ref="a34387565e8e74e2e94e434ea1eeaad46" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&gt; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>.</p>
 
 </div>
 </div>
@@ -193,20 +194,37 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a34387565e8e74e2e94e434ea1eeaad46"></a><!-- doxytag: member="ObjectArray2D::Weak" ref="a34387565e8e74e2e94e434ea1eeaad46" args="" -->
+<a class="anchor" id="afb24269ea2a87c3820774bed41d0e5a8"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2DType" ref="afb24269ea2a87c3820774bed41d0e5a8" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&gt; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_object_array.html">ObjectArrayType</a>&gt; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">ObjectArray2DType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#ab9129e37869c62293f498c4fb3708b27">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0c1ef8383f9b39c7f67b266eb41e16b7"></a><!-- doxytag: member="ObjectArray2D::InitialObject" ref="a0c1ef8383f9b39c7f67b266eb41e16b7" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">Base::InitialObject</a> <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">ObjectArray2DBase&lt; ArrayType, RowType &gt;</a>.</p>
 
 </div>
 </div>
@@ -338,7 +356,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aba2ee32f43a2211710b17e6a81b09dd5"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="aba2ee32f43a2211710b17e6a81b09dd5" args="(RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02=RowType(), RowType const &amp;i03=RowType())" -->
+<a class="anchor" id="acb7b630358423c624480d798fa9500f6"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="acb7b630358423c624480d798fa9500f6" args="(InitialObject const &amp;i00, InitialObject const &amp;i01, InitialObject const &amp;i02=InitialObject(), InitialObject const &amp;i03=InitialObject())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -347,26 +365,26 @@ template&lt;class ArrayType, class RowType&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array2_d.html">ObjectArray2D</a> </td>
           <td>(</td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i00</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i01</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i02</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i02</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i03</em> = <code>RowType()</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i03</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -379,7 +397,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af623a2e9c9d60affa8b1f33f4cbca7d6"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="af623a2e9c9d60affa8b1f33f4cbca7d6" args="(RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05=RowType(), RowType const &amp;i06=RowType(), RowType const &amp;i07=RowType())" -->
+<a class="anchor" id="a82e1d8df4a6dd5b1a0a6b50b62a9ba38"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="a82e1d8df4a6dd5b1a0a6b50b62a9ba38" args="(InitialObject const &amp;i00, InitialObject const &amp;i01, InitialObject const &amp;i02, InitialObject const &amp;i03, InitialObject const &amp;i04, InitialObject const &amp;i05=InitialObject(), InitialObject const &amp;i06=InitialObject(), InitialObject const &amp;i07=InitialObject())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -388,50 +406,50 @@ template&lt;class ArrayType, class RowType&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array2_d.html">ObjectArray2D</a> </td>
           <td>(</td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i00</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i01</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i02</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i03</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i04</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i05</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i05</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i06</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i06</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i07</em> = <code>RowType()</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i07</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -444,7 +462,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad2d11face85f549128f09961bd6985de"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="ad2d11face85f549128f09961bd6985de" args="(RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05, RowType const &amp;i06, RowType const &amp;i07, RowType const &amp;i08, RowType const &amp;i09=RowType(), RowType const &amp;i10=RowType(), RowType const &amp;i11=RowType(), RowType const &amp;i12=RowType(), RowType const &amp;i13=RowType(), RowType const &amp;i14=RowType(), RowType const &amp;i15=RowType())" -->
+<a class="anchor" id="a33a407c77a9b27da03518e293eebd5fd"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="a33a407c77a9b27da03518e293eebd5fd" args="(InitialObject const &amp;i00, InitialObject const &amp;i01, InitialObject const &amp;i02, InitialObject const &amp;i03, InitialObject const &amp;i04, InitialObject const &amp;i05, InitialObject const &amp;i06, InitialObject const &amp;i07, InitialObject const &amp;i08, InitialObject const &amp;i09=InitialObject(), InitialObject const &amp;i10=InitialObject(), InitialObject const &amp;i11=InitialObject(), InitialObject const &amp;i12=InitialObject(), InitialObject const &amp;i13=InitialObject(), InitialObject const &amp;i14=InitialObject(), InitialObject const &amp;i15=InitialObject())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -453,98 +471,98 @@ template&lt;class ArrayType, class RowType&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array2_d.html">ObjectArray2D</a> </td>
           <td>(</td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i00</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i01</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i02</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i03</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i04</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i05</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i06</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i07</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i08</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i09</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i09</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i10</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i10</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i11</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i11</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i12</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i12</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i13</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i13</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i14</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i14</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i15</em> = <code>RowType()</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i15</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -557,7 +575,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3543a2db5bba0a3f246923ed601e5e91"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="a3543a2db5bba0a3f246923ed601e5e91" args="(RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05, RowType const &amp;i06, RowType const &amp;i07, RowType const &amp;i08, RowType const &amp;i09, RowType const &amp;i10, RowType const &amp;i11, RowType const &amp;i12, RowType const &amp;i13, RowType const &amp;i14, RowType const &amp;i15, RowType const &amp;i16, RowType const &amp;i17=RowType(), RowType const &amp;i18=RowType(), RowType const &amp;i19=RowType(), RowType const &amp;i20=RowType(), RowType const &amp;i21=RowType(), RowType const &amp;i22=RowType(), RowType const &amp;i23=RowType(), RowType const &amp;i24=RowType(), RowType const &amp;i25=RowType(), RowType const &amp;i26=RowType(), RowType const &amp;i27=RowType(), RowType const &amp;i28=RowType(), RowType const &amp;i29=RowType(), RowType const &amp;i30=RowType(), RowType const &amp;i31=RowType())" -->
+<a class="anchor" id="ad45cba7cb86fbb8405f79e997ac1c712"></a><!-- doxytag: member="ObjectArray2D::ObjectArray2D" ref="ad45cba7cb86fbb8405f79e997ac1c712" args="(InitialObject const &amp;i00, InitialObject const &amp;i01, InitialObject const &amp;i02, InitialObject const &amp;i03, InitialObject const &amp;i04, InitialObject const &amp;i05, InitialObject const &amp;i06, InitialObject const &amp;i07, InitialObject const &amp;i08, InitialObject const &amp;i09, InitialObject const &amp;i10, InitialObject const &amp;i11, InitialObject const &amp;i12, InitialObject const &amp;i13, InitialObject const &amp;i14, InitialObject const &amp;i15, InitialObject const &amp;i16, InitialObject const &amp;i17=InitialObject(), InitialObject const &amp;i18=InitialObject(), InitialObject const &amp;i19=InitialObject(), InitialObject const &amp;i20=InitialObject(), InitialObject const &amp;i21=InitialObject(), InitialObject const &amp;i22=InitialObject(), InitialObject const &amp;i23=InitialObject(), InitialObject const &amp;i24=InitialObject(), InitialObject const &amp;i25=InitialObject(), InitialObject const &amp;i26=InitialObject(), InitialObject const &amp;i27=InitialObject(), InitialObject const &amp;i28=InitialObject(), InitialObject const &amp;i29=InitialObject(), InitialObject const &amp;i30=InitialObject(), InitialObject const &amp;i31=InitialObject())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -566,194 +584,194 @@ template&lt;class ArrayType, class RowType&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array2_d.html">ObjectArray2D</a> </td>
           <td>(</td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i00</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i01</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i02</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i03</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i04</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i05</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i06</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i07</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i08</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i09</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i10</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i11</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i12</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i13</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i14</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i15</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i16</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i17</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i17</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i18</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i18</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i19</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i19</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i20</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i20</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i21</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i21</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i22</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i22</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i23</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i23</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i24</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i24</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i25</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i25</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i26</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i26</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i27</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i27</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i28</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i28</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i29</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i29</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i30</em> = <code>RowType()</code>, </td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i30</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i31</em> = <code>RowType()</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i31</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -796,6 +814,27 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="afd8b937c3824c4eac56ae0c077bea880"></a><!-- doxytag: member="ObjectArray2D::operator=" ref="afd8b937c3824c4eac56ae0c077bea880" args="(ObjectArray2D const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&amp; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
+
+</div>
+</div>
 <a class="anchor" id="add78e9b1c4d4c397b5158dc40a5fdeaf"></a><!-- doxytag: member="ObjectArray2D::fromWeak" ref="add78e9b1c4d4c397b5158dc40a5fdeaf" args="(Weak const &amp;weak)" -->
 <div class="memitem">
 <div class="memproto">
@@ -869,24 +908,43 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afd8b937c3824c4eac56ae0c077bea880"></a><!-- doxytag: member="ObjectArray2D::operator=" ref="afd8b937c3824c4eac56ae0c077bea880" args="(ObjectArray2D const &amp;other)" -->
+<a class="anchor" id="a1735a1cdf79753358cbf88619978f92f"></a><!-- doxytag: member="ObjectArray2D::operator&#45;&gt;" ref="a1735a1cdf79753358cbf88619978f92f" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&amp; <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::operator= </td>
+          <td class="memname"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>* <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::operator-&gt; </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Assignment operator. </p>
+<p>Reimplemented from <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; RowType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abaaec1aecf9e3efea2d3bd62867547ea"></a><!-- doxytag: member="ObjectArray2D::operator&#45;&gt;" ref="abaaec1aecf9e3efea2d3bd62867547ea" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>* <a class="el" href="class_object_array2_d.html">ObjectArray2D</a>&lt; ArrayType, RowType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; RowType &gt;</a>.</p>
 
 </div>
 </div>
@@ -908,7 +966,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:00 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

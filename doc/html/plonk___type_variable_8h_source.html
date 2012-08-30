@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-      <li class="navelem"><a class="el" href="dir_33635cde1c3b53c6618cb4806d78b524.html">variables</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_TypeVariable.h</div>  </div>
@@ -141,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00067"></a>00067     
 <a name="l00068"></a><a class="code" href="class_type_variable_internal.html#ae1c3273ce351db8116c2ef4a6197edc5">00068</a>     <span class="keyword">const</span> Type <a class="code" href="class_type_variable_internal.html#ae1c3273ce351db8116c2ef4a6197edc5">getValue</a>() <span class="keyword">const</span> throw()
 <a name="l00069"></a>00069     {
-<a name="l00070"></a>00070         this-&gt;cachedValue = Type (operand.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>());
+<a name="l00070"></a>00070         this-&gt;cachedValue = Type (operand.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>());
 <a name="l00071"></a>00071         <span class="keywordflow">return</span> this-&gt;cachedValue;
 <a name="l00072"></a>00072     }
 <a name="l00073"></a>00073     
@@ -160,7 +150,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00086"></a>00086     
 <a name="l00087"></a><a class="code" href="class_type_variable_internal.html#ab26f6c1f535544ea15d5a0723954bb5f">00087</a>     <span class="keywordtype">void</span> <a class="code" href="class_type_variable_internal.html#ab26f6c1f535544ea15d5a0723954bb5f">setValue</a>(Type <span class="keyword">const</span>&amp; newValue) <span class="keywordflow">throw</span>()
 <a name="l00088"></a>00088     {
-<a name="l00089"></a>00089         <span class="keyword">const</span> OtherType currentValue = operand.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>();
+<a name="l00089"></a>00089         <span class="keyword">const</span> OtherType currentValue = operand.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
 <a name="l00090"></a>00090         <span class="keyword">const</span> OtherType otherNewValue = OtherType (newValue);
 <a name="l00091"></a>00091         
 <a name="l00092"></a>00092         <span class="keywordflow">if</span> (otherNewValue != currentValue)
@@ -192,7 +182,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:49 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

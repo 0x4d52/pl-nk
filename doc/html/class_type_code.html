@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,8 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="TypeCode" -->
 <p>Used to determine information about some types.  
  <a href="class_type_code.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___type_utility_8h_source.html">plonk_TypeUtility.h</a>&gt;</code></p>
 
 <p><a href="class_type_code-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -195,7 +192,79 @@ Public Types</h2></td></tr>
 <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91adf5289e66ac91d54263b003474e00575">Int24Signal</a>, 
 <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91abf66da35866df9d97ac056c619138217">LongSignal</a>, 
 <br/>
-&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad3877376396ffb86a7834525fb418be4">NumTypeCodes</a>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ab43225f8f27e38b0fb18c6fa4a71e101">FloatArrayVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a50b7be907e0a27178ab6ec1f77b27568">DoubleArrayVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91af063849f395ff727f9e4aa21e552b656">IntArrayVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91adeae4d77da7aba6a80436332d52ecc37">ShortArrayVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91aa658f0079708edc2894f7c08a29dfd47">Int24ArrayVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a235f798aa0d25f00ee2fef83b9257944">LongArrayVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a0b4ad761a1b7b514c06cc775ad377e33">CharArrayVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a66d37d122728a22e1ea5328797195964">BoolArrayVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a60ba8f019e7242ff8acbcd121b138d5e">TextVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a16925d481ac2ab0797cfa7ad649c449c">TextArrayVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a2b63e4bc51a254b9e6ac2b6c8b173694">FloatChannelVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ae09e4fd2e6d0a32d6de2f941d1274178">DoubleChannelVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad0c2365534d3b0689959d744a136f687">IntChannelVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a0147b5f58a379bead9b0c688faccd028">ShortChannelVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a3a59069111a8b72d4f2694495e0d9656">Int24ChannelVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a748b79291018165eddae6cd579de3af7">LongChannelVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a27e8bda0c29f6d5779c67627bdd24dbe">FloatUnitVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a55dfa825395838c60b2723381988aa71">DoubleUnitVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a7637e98f9718ce80b3cf94c4b501e01d">IntUnitVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad89f13bf0da9b233f9ca001309884855">ShortUnitVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad7f9b50ca1506b7b55948788151bf3b5">Int24UnitVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a1828c897dcabe1df533a7b2e6d7d2036">LongUnitVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91aab7575a2064c2b015a12f67f950fdb96">FloatBusVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a33a4acda7c241d2bbbf6b52f0c025340">DoubleBusVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ae6efe3e98f5616b820021c8d58f8f1e4">IntBusVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a3545c4cf38aa888d8a5c13b3b9cc9653">ShortBusVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a059303b6ae6d91bba180c257d9fe4d95">Int24BusVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a1d3ea5566d803a2ab06713f8af5bf790">LongBusVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6a4e735fbd280fdaad71c21eb9a8b3d6">FloatUnitsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a56a7719eeaca7ddff8163cae03649d89">DoubleUnitsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a2620f128ef6b881fcbef75df1319966b">IntUnitsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad3459994eed5978ec1d20633271bbb07">ShortUnitsVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a4f72ad96432e2c8ab9c97c5ad0de0679">Int24UnitsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6439b352857148254c4d17148ba96d76">LongUnitsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a961bb23f44b1c78ff0fa2f3f5d4c6cdc">FloatBussesVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a3342ef33e81c9a0afb8012bba6007651">DoubleBussesVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a684dd99a360602a12e506e316a7cecea">IntBussesVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6e43ead52d34ec5d472aa0f25c90a799">ShortBussesVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a65b8a7068590fe37b3a2e9b0c8b24a09">Int24BussesVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a4b806954d26706b743893562c7d1f5be">LongBussesVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ac6b6a84bba65fc2695a986c7030f1d9e">FloatBreakpointsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a80aa5d216414a663dff27b26f44d7d97">DoubleBreakpointsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a186cc4bbc7d2ea15bf709b570dfc5838">IntBreakpointsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91af4b613d9ea094af7df45903d8b43b6cc">ShortBreakpointsVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91af7a1fa4ec48c30320a5e00f25c6d4ed1">Int24BreakpointsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a84a39e6fa68dec09b8f78da5af9bc661">LongBreakpointsVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a0d4e853a2b83523897eb9ae1ae3e6040">FloatWavetableVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a3f3901c3ee21ec308615ff1fa33fdd48">DoubleWavetableVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a2d75690f76771d196b52147ae8805e4c">IntWavetableVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6e8dda6c11697e6ada526057ccb5d69c">ShortWavetableVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ae051d5f76aa9e3aee76d924b8dff0343">Int24WavetableVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a72f974d602b138507451795610de079b">LongWavetableVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a4d5080d191d88049a046b7f7f0535800">FloatSignalVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a823427e3eea1ed889fce332decc73e30">DoubleSignalVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6a2a2139b50b31bcc559244decb896b7">IntSignalVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ac93872c240756ea79535ea71f567e097">ShortSignalVariable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a26604333f2ad63b82f3ffc76e61efaa4">Int24SignalVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a5def8a726e7a048de563b067cd215f88">LongSignalVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad3877376396ffb86a7834525fb418be4">NumTypeCodes</a>
 <br/>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
@@ -212,6 +281,7 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#aaf566f11c80846bfb2b8ae6e33cd1f02">isAtomic</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a2c418ae0217e0beeeee624b3de10397e">isVariable</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a7a4581a8acacfc00714f4a5cf6077a7f">isAtomicVariable</a> (const int code)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a92ec3a3924ed047cc45999edae22a3da">isObjectVariable</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a31ab61889e919af5b4b8b040f3e9a3c1">isArray</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a2839e85377d4fe0408b3c6786e67151c">isChannel</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a994d972960d9b6445b157bede1e87e3d">isUnit</a> (const int code)  throw ()</td></tr>
@@ -432,6 +502,122 @@ Static Public Member Functions</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91abf66da35866df9d97ac056c619138217"></a><!-- doxytag: member="LongSignal" ref="aa38a0802e31a7f24bb409e9930438f91abf66da35866df9d97ac056c619138217" args="" -->LongSignal</em>&nbsp;</td><td>
 </td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ab43225f8f27e38b0fb18c6fa4a71e101"></a><!-- doxytag: member="FloatArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91ab43225f8f27e38b0fb18c6fa4a71e101" args="" -->FloatArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a50b7be907e0a27178ab6ec1f77b27568"></a><!-- doxytag: member="DoubleArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91a50b7be907e0a27178ab6ec1f77b27568" args="" -->DoubleArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91af063849f395ff727f9e4aa21e552b656"></a><!-- doxytag: member="IntArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91af063849f395ff727f9e4aa21e552b656" args="" -->IntArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91adeae4d77da7aba6a80436332d52ecc37"></a><!-- doxytag: member="ShortArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91adeae4d77da7aba6a80436332d52ecc37" args="" -->ShortArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91aa658f0079708edc2894f7c08a29dfd47"></a><!-- doxytag: member="Int24ArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91aa658f0079708edc2894f7c08a29dfd47" args="" -->Int24ArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a235f798aa0d25f00ee2fef83b9257944"></a><!-- doxytag: member="LongArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91a235f798aa0d25f00ee2fef83b9257944" args="" -->LongArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a0b4ad761a1b7b514c06cc775ad377e33"></a><!-- doxytag: member="CharArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91a0b4ad761a1b7b514c06cc775ad377e33" args="" -->CharArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a66d37d122728a22e1ea5328797195964"></a><!-- doxytag: member="BoolArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91a66d37d122728a22e1ea5328797195964" args="" -->BoolArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a60ba8f019e7242ff8acbcd121b138d5e"></a><!-- doxytag: member="TextVariable" ref="aa38a0802e31a7f24bb409e9930438f91a60ba8f019e7242ff8acbcd121b138d5e" args="" -->TextVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a16925d481ac2ab0797cfa7ad649c449c"></a><!-- doxytag: member="TextArrayVariable" ref="aa38a0802e31a7f24bb409e9930438f91a16925d481ac2ab0797cfa7ad649c449c" args="" -->TextArrayVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a2b63e4bc51a254b9e6ac2b6c8b173694"></a><!-- doxytag: member="FloatChannelVariable" ref="aa38a0802e31a7f24bb409e9930438f91a2b63e4bc51a254b9e6ac2b6c8b173694" args="" -->FloatChannelVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ae09e4fd2e6d0a32d6de2f941d1274178"></a><!-- doxytag: member="DoubleChannelVariable" ref="aa38a0802e31a7f24bb409e9930438f91ae09e4fd2e6d0a32d6de2f941d1274178" args="" -->DoubleChannelVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ad0c2365534d3b0689959d744a136f687"></a><!-- doxytag: member="IntChannelVariable" ref="aa38a0802e31a7f24bb409e9930438f91ad0c2365534d3b0689959d744a136f687" args="" -->IntChannelVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a0147b5f58a379bead9b0c688faccd028"></a><!-- doxytag: member="ShortChannelVariable" ref="aa38a0802e31a7f24bb409e9930438f91a0147b5f58a379bead9b0c688faccd028" args="" -->ShortChannelVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a3a59069111a8b72d4f2694495e0d9656"></a><!-- doxytag: member="Int24ChannelVariable" ref="aa38a0802e31a7f24bb409e9930438f91a3a59069111a8b72d4f2694495e0d9656" args="" -->Int24ChannelVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a748b79291018165eddae6cd579de3af7"></a><!-- doxytag: member="LongChannelVariable" ref="aa38a0802e31a7f24bb409e9930438f91a748b79291018165eddae6cd579de3af7" args="" -->LongChannelVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a27e8bda0c29f6d5779c67627bdd24dbe"></a><!-- doxytag: member="FloatUnitVariable" ref="aa38a0802e31a7f24bb409e9930438f91a27e8bda0c29f6d5779c67627bdd24dbe" args="" -->FloatUnitVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a55dfa825395838c60b2723381988aa71"></a><!-- doxytag: member="DoubleUnitVariable" ref="aa38a0802e31a7f24bb409e9930438f91a55dfa825395838c60b2723381988aa71" args="" -->DoubleUnitVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a7637e98f9718ce80b3cf94c4b501e01d"></a><!-- doxytag: member="IntUnitVariable" ref="aa38a0802e31a7f24bb409e9930438f91a7637e98f9718ce80b3cf94c4b501e01d" args="" -->IntUnitVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ad89f13bf0da9b233f9ca001309884855"></a><!-- doxytag: member="ShortUnitVariable" ref="aa38a0802e31a7f24bb409e9930438f91ad89f13bf0da9b233f9ca001309884855" args="" -->ShortUnitVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ad7f9b50ca1506b7b55948788151bf3b5"></a><!-- doxytag: member="Int24UnitVariable" ref="aa38a0802e31a7f24bb409e9930438f91ad7f9b50ca1506b7b55948788151bf3b5" args="" -->Int24UnitVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a1828c897dcabe1df533a7b2e6d7d2036"></a><!-- doxytag: member="LongUnitVariable" ref="aa38a0802e31a7f24bb409e9930438f91a1828c897dcabe1df533a7b2e6d7d2036" args="" -->LongUnitVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91aab7575a2064c2b015a12f67f950fdb96"></a><!-- doxytag: member="FloatBusVariable" ref="aa38a0802e31a7f24bb409e9930438f91aab7575a2064c2b015a12f67f950fdb96" args="" -->FloatBusVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a33a4acda7c241d2bbbf6b52f0c025340"></a><!-- doxytag: member="DoubleBusVariable" ref="aa38a0802e31a7f24bb409e9930438f91a33a4acda7c241d2bbbf6b52f0c025340" args="" -->DoubleBusVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ae6efe3e98f5616b820021c8d58f8f1e4"></a><!-- doxytag: member="IntBusVariable" ref="aa38a0802e31a7f24bb409e9930438f91ae6efe3e98f5616b820021c8d58f8f1e4" args="" -->IntBusVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a3545c4cf38aa888d8a5c13b3b9cc9653"></a><!-- doxytag: member="ShortBusVariable" ref="aa38a0802e31a7f24bb409e9930438f91a3545c4cf38aa888d8a5c13b3b9cc9653" args="" -->ShortBusVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a059303b6ae6d91bba180c257d9fe4d95"></a><!-- doxytag: member="Int24BusVariable" ref="aa38a0802e31a7f24bb409e9930438f91a059303b6ae6d91bba180c257d9fe4d95" args="" -->Int24BusVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a1d3ea5566d803a2ab06713f8af5bf790"></a><!-- doxytag: member="LongBusVariable" ref="aa38a0802e31a7f24bb409e9930438f91a1d3ea5566d803a2ab06713f8af5bf790" args="" -->LongBusVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a6a4e735fbd280fdaad71c21eb9a8b3d6"></a><!-- doxytag: member="FloatUnitsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a6a4e735fbd280fdaad71c21eb9a8b3d6" args="" -->FloatUnitsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a56a7719eeaca7ddff8163cae03649d89"></a><!-- doxytag: member="DoubleUnitsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a56a7719eeaca7ddff8163cae03649d89" args="" -->DoubleUnitsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a2620f128ef6b881fcbef75df1319966b"></a><!-- doxytag: member="IntUnitsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a2620f128ef6b881fcbef75df1319966b" args="" -->IntUnitsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ad3459994eed5978ec1d20633271bbb07"></a><!-- doxytag: member="ShortUnitsVariable" ref="aa38a0802e31a7f24bb409e9930438f91ad3459994eed5978ec1d20633271bbb07" args="" -->ShortUnitsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a4f72ad96432e2c8ab9c97c5ad0de0679"></a><!-- doxytag: member="Int24UnitsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a4f72ad96432e2c8ab9c97c5ad0de0679" args="" -->Int24UnitsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a6439b352857148254c4d17148ba96d76"></a><!-- doxytag: member="LongUnitsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a6439b352857148254c4d17148ba96d76" args="" -->LongUnitsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a961bb23f44b1c78ff0fa2f3f5d4c6cdc"></a><!-- doxytag: member="FloatBussesVariable" ref="aa38a0802e31a7f24bb409e9930438f91a961bb23f44b1c78ff0fa2f3f5d4c6cdc" args="" -->FloatBussesVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a3342ef33e81c9a0afb8012bba6007651"></a><!-- doxytag: member="DoubleBussesVariable" ref="aa38a0802e31a7f24bb409e9930438f91a3342ef33e81c9a0afb8012bba6007651" args="" -->DoubleBussesVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a684dd99a360602a12e506e316a7cecea"></a><!-- doxytag: member="IntBussesVariable" ref="aa38a0802e31a7f24bb409e9930438f91a684dd99a360602a12e506e316a7cecea" args="" -->IntBussesVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a6e43ead52d34ec5d472aa0f25c90a799"></a><!-- doxytag: member="ShortBussesVariable" ref="aa38a0802e31a7f24bb409e9930438f91a6e43ead52d34ec5d472aa0f25c90a799" args="" -->ShortBussesVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a65b8a7068590fe37b3a2e9b0c8b24a09"></a><!-- doxytag: member="Int24BussesVariable" ref="aa38a0802e31a7f24bb409e9930438f91a65b8a7068590fe37b3a2e9b0c8b24a09" args="" -->Int24BussesVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a4b806954d26706b743893562c7d1f5be"></a><!-- doxytag: member="LongBussesVariable" ref="aa38a0802e31a7f24bb409e9930438f91a4b806954d26706b743893562c7d1f5be" args="" -->LongBussesVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ac6b6a84bba65fc2695a986c7030f1d9e"></a><!-- doxytag: member="FloatBreakpointsVariable" ref="aa38a0802e31a7f24bb409e9930438f91ac6b6a84bba65fc2695a986c7030f1d9e" args="" -->FloatBreakpointsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a80aa5d216414a663dff27b26f44d7d97"></a><!-- doxytag: member="DoubleBreakpointsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a80aa5d216414a663dff27b26f44d7d97" args="" -->DoubleBreakpointsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a186cc4bbc7d2ea15bf709b570dfc5838"></a><!-- doxytag: member="IntBreakpointsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a186cc4bbc7d2ea15bf709b570dfc5838" args="" -->IntBreakpointsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91af4b613d9ea094af7df45903d8b43b6cc"></a><!-- doxytag: member="ShortBreakpointsVariable" ref="aa38a0802e31a7f24bb409e9930438f91af4b613d9ea094af7df45903d8b43b6cc" args="" -->ShortBreakpointsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91af7a1fa4ec48c30320a5e00f25c6d4ed1"></a><!-- doxytag: member="Int24BreakpointsVariable" ref="aa38a0802e31a7f24bb409e9930438f91af7a1fa4ec48c30320a5e00f25c6d4ed1" args="" -->Int24BreakpointsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a84a39e6fa68dec09b8f78da5af9bc661"></a><!-- doxytag: member="LongBreakpointsVariable" ref="aa38a0802e31a7f24bb409e9930438f91a84a39e6fa68dec09b8f78da5af9bc661" args="" -->LongBreakpointsVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a0d4e853a2b83523897eb9ae1ae3e6040"></a><!-- doxytag: member="FloatWavetableVariable" ref="aa38a0802e31a7f24bb409e9930438f91a0d4e853a2b83523897eb9ae1ae3e6040" args="" -->FloatWavetableVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a3f3901c3ee21ec308615ff1fa33fdd48"></a><!-- doxytag: member="DoubleWavetableVariable" ref="aa38a0802e31a7f24bb409e9930438f91a3f3901c3ee21ec308615ff1fa33fdd48" args="" -->DoubleWavetableVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a2d75690f76771d196b52147ae8805e4c"></a><!-- doxytag: member="IntWavetableVariable" ref="aa38a0802e31a7f24bb409e9930438f91a2d75690f76771d196b52147ae8805e4c" args="" -->IntWavetableVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a6e8dda6c11697e6ada526057ccb5d69c"></a><!-- doxytag: member="ShortWavetableVariable" ref="aa38a0802e31a7f24bb409e9930438f91a6e8dda6c11697e6ada526057ccb5d69c" args="" -->ShortWavetableVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ae051d5f76aa9e3aee76d924b8dff0343"></a><!-- doxytag: member="Int24WavetableVariable" ref="aa38a0802e31a7f24bb409e9930438f91ae051d5f76aa9e3aee76d924b8dff0343" args="" -->Int24WavetableVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a72f974d602b138507451795610de079b"></a><!-- doxytag: member="LongWavetableVariable" ref="aa38a0802e31a7f24bb409e9930438f91a72f974d602b138507451795610de079b" args="" -->LongWavetableVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a4d5080d191d88049a046b7f7f0535800"></a><!-- doxytag: member="FloatSignalVariable" ref="aa38a0802e31a7f24bb409e9930438f91a4d5080d191d88049a046b7f7f0535800" args="" -->FloatSignalVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a823427e3eea1ed889fce332decc73e30"></a><!-- doxytag: member="DoubleSignalVariable" ref="aa38a0802e31a7f24bb409e9930438f91a823427e3eea1ed889fce332decc73e30" args="" -->DoubleSignalVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a6a2a2139b50b31bcc559244decb896b7"></a><!-- doxytag: member="IntSignalVariable" ref="aa38a0802e31a7f24bb409e9930438f91a6a2a2139b50b31bcc559244decb896b7" args="" -->IntSignalVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ac93872c240756ea79535ea71f567e097"></a><!-- doxytag: member="ShortSignalVariable" ref="aa38a0802e31a7f24bb409e9930438f91ac93872c240756ea79535ea71f567e097" args="" -->ShortSignalVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a26604333f2ad63b82f3ffc76e61efaa4"></a><!-- doxytag: member="Int24SignalVariable" ref="aa38a0802e31a7f24bb409e9930438f91a26604333f2ad63b82f3ffc76e61efaa4" args="" -->Int24SignalVariable</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a5def8a726e7a048de563b067cd215f88"></a><!-- doxytag: member="LongSignalVariable" ref="aa38a0802e31a7f24bb409e9930438f91a5def8a726e7a048de563b067cd215f88" args="" -->LongSignalVariable</em>&nbsp;</td><td>
+</td></tr>
 <tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ad3877376396ffb86a7834525fb418be4"></a><!-- doxytag: member="NumTypeCodes" ref="aa38a0802e31a7f24bb409e9930438f91ad3877376396ffb86a7834525fb418be4" args="" -->NumTypeCodes</em>&nbsp;</td><td>
 </td></tr>
 </table>
@@ -441,26 +627,6 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a390c1a46498983aa069f25912e4203b0"></a><!-- doxytag: member="TypeCode::getEpsilon" ref="a390c1a46498983aa069f25912e4203b0" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static double TypeCode::getEpsilon </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Used for sample types to determine the smallest non-zero value. </p>
-<p>For integers this is always 1 so is most useful for floating point types. </p>
-
-</div>
-</div>
 <a class="anchor" id="a21afb093939a27cef0d35f8b69a6eac7"></a><!-- doxytag: member="TypeCode::getName" ref="a21afb093939a27cef0d35f8b69a6eac7" args="(const int code)" -->
 <div class="memitem">
 <div class="memproto">
@@ -500,12 +666,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a31ab61889e919af5b4b8b040f3e9a3c1"></a><!-- doxytag: member="TypeCode::isArray" ref="a31ab61889e919af5b4b8b040f3e9a3c1" args="(const int code)" -->
+<a class="anchor" id="a390c1a46498983aa069f25912e4203b0"></a><!-- doxytag: member="TypeCode::getEpsilon" ref="a390c1a46498983aa069f25912e4203b0" args="(const int code)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static bool TypeCode::isArray </td>
+          <td class="memname">static double TypeCode::getEpsilon </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -515,167 +681,17 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="aaf566f11c80846bfb2b8ae6e33cd1f02"></a><!-- doxytag: member="TypeCode::isAtomic" ref="aaf566f11c80846bfb2b8ae6e33cd1f02" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isAtomic </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Used for sample types to determine the smallest non-zero value. </p>
+<p>For integers this is always 1 so is most useful for floating point types. </p>
 
 </div>
 </div>
-<a class="anchor" id="a7a4581a8acacfc00714f4a5cf6077a7f"></a><!-- doxytag: member="TypeCode::isAtomicVariable" ref="a7a4581a8acacfc00714f4a5cf6077a7f" args="(const int code)" -->
+<a class="anchor" id="a531548bff202de68186396242bf5ac0f"></a><!-- doxytag: member="TypeCode::isUnknown" ref="a531548bff202de68186396242bf5ac0f" args="(const int code)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static bool TypeCode::isAtomicVariable </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adaa65505e2a46af79daf911d97b0ada4"></a><!-- doxytag: member="TypeCode::isBoolType" ref="adaa65505e2a46af79daf911d97b0ada4" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isBoolType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4f4a225e75ab916395684c14cad9afc7"></a><!-- doxytag: member="TypeCode::isBreakpoints" ref="a4f4a225e75ab916395684c14cad9afc7" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isBreakpoints </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad79a79d0052529978befa15ac981e796"></a><!-- doxytag: member="TypeCode::isBuiltIn" ref="ad79a79d0052529978befa15ac981e796" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isBuiltIn </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac9951392ad17c2aa25ca63115ddb7f4b"></a><!-- doxytag: member="TypeCode::isBus" ref="ac9951392ad17c2aa25ca63115ddb7f4b" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isBus </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a385f086494584162536b3941e9324366"></a><!-- doxytag: member="TypeCode::isBusses" ref="a385f086494584162536b3941e9324366" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isBusses </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2839e85377d4fe0408b3c6786e67151c"></a><!-- doxytag: member="TypeCode::isChannel" ref="a2839e85377d4fe0408b3c6786e67151c" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isChannel </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad1f816cd7040f345b451dd7d64ea0d00"></a><!-- doxytag: member="TypeCode::isCharType" ref="ad1f816cd7040f345b451dd7d64ea0d00" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isCharType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af1c25c328bdeefa506cbeb958e3b4f0e"></a><!-- doxytag: member="TypeCode::isDoubleType" ref="af1c25c328bdeefa506cbeb958e3b4f0e" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isDoubleType </td>
+          <td class="memname">static bool TypeCode::isUnknown </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -704,12 +720,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a620ef5df7d37c25ba79d34e0b2ff3abb"></a><!-- doxytag: member="TypeCode::isFloatOrDoubleType" ref="a620ef5df7d37c25ba79d34e0b2ff3abb" args="(const int code)" -->
+<a class="anchor" id="ad79a79d0052529978befa15ac981e796"></a><!-- doxytag: member="TypeCode::isBuiltIn" ref="ad79a79d0052529978befa15ac981e796" args="(const int code)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static bool TypeCode::isFloatOrDoubleType </td>
+          <td class="memname">static bool TypeCode::isBuiltIn </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -721,182 +737,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2ebd3f553d7557cfc4aaeb91f7946f73"></a><!-- doxytag: member="TypeCode::isFloatType" ref="a2ebd3f553d7557cfc4aaeb91f7946f73" args="(const int code)" -->
+<a class="anchor" id="aaf566f11c80846bfb2b8ae6e33cd1f02"></a><!-- doxytag: member="TypeCode::isAtomic" ref="aaf566f11c80846bfb2b8ae6e33cd1f02" args="(const int code)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static bool TypeCode::isFloatType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6ca6d4f75367bb06103a11123acd722d"></a><!-- doxytag: member="TypeCode::isInt24Type" ref="a6ca6d4f75367bb06103a11123acd722d" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isInt24Type </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7ff4bd259930e8c4e6dce7c5f2b6b2d5"></a><!-- doxytag: member="TypeCode::isIntegralType" ref="a7ff4bd259930e8c4e6dce7c5f2b6b2d5" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isIntegralType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1654b9af98033ab1b8131d96eeca8ba3"></a><!-- doxytag: member="TypeCode::isIntType" ref="a1654b9af98033ab1b8131d96eeca8ba3" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isIntType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af6047ba741447375a3779cf013ea3545"></a><!-- doxytag: member="TypeCode::isLongLongType" ref="af6047ba741447375a3779cf013ea3545" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isLongLongType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaa6fd477d5832966bf564e7992e76295"></a><!-- doxytag: member="TypeCode::isLongType" ref="aaa6fd477d5832966bf564e7992e76295" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isLongType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8c32c38be0b2d214b5064ad46cb8ade6"></a><!-- doxytag: member="TypeCode::isShortType" ref="a8c32c38be0b2d214b5064ad46cb8ade6" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isShortType </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a07d33871edccfcb2ee111dbfe30c848d"></a><!-- doxytag: member="TypeCode::isSignal" ref="a07d33871edccfcb2ee111dbfe30c848d" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isSignal </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a994d972960d9b6445b157bede1e87e3d"></a><!-- doxytag: member="TypeCode::isUnit" ref="a994d972960d9b6445b157bede1e87e3d" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isUnit </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2f280b302a97dba24a78a0419cd1e878"></a><!-- doxytag: member="TypeCode::isUnits" ref="a2f280b302a97dba24a78a0419cd1e878" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isUnits </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a531548bff202de68186396242bf5ac0f"></a><!-- doxytag: member="TypeCode::isUnknown" ref="a531548bff202de68186396242bf5ac0f" args="(const int code)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool TypeCode::isUnknown </td>
+          <td class="memname">static bool TypeCode::isAtomic </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -925,12 +771,369 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7a4581a8acacfc00714f4a5cf6077a7f"></a><!-- doxytag: member="TypeCode::isAtomicVariable" ref="a7a4581a8acacfc00714f4a5cf6077a7f" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isAtomicVariable </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a92ec3a3924ed047cc45999edae22a3da"></a><!-- doxytag: member="TypeCode::isObjectVariable" ref="a92ec3a3924ed047cc45999edae22a3da" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isObjectVariable </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a31ab61889e919af5b4b8b040f3e9a3c1"></a><!-- doxytag: member="TypeCode::isArray" ref="a31ab61889e919af5b4b8b040f3e9a3c1" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isArray </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2839e85377d4fe0408b3c6786e67151c"></a><!-- doxytag: member="TypeCode::isChannel" ref="a2839e85377d4fe0408b3c6786e67151c" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isChannel </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a994d972960d9b6445b157bede1e87e3d"></a><!-- doxytag: member="TypeCode::isUnit" ref="a994d972960d9b6445b157bede1e87e3d" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isUnit </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac9951392ad17c2aa25ca63115ddb7f4b"></a><!-- doxytag: member="TypeCode::isBus" ref="ac9951392ad17c2aa25ca63115ddb7f4b" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isBus </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2f280b302a97dba24a78a0419cd1e878"></a><!-- doxytag: member="TypeCode::isUnits" ref="a2f280b302a97dba24a78a0419cd1e878" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isUnits </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a385f086494584162536b3941e9324366"></a><!-- doxytag: member="TypeCode::isBusses" ref="a385f086494584162536b3941e9324366" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isBusses </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4f4a225e75ab916395684c14cad9afc7"></a><!-- doxytag: member="TypeCode::isBreakpoints" ref="a4f4a225e75ab916395684c14cad9afc7" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isBreakpoints </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a81521106e50bee26629d434e515f1ec4"></a><!-- doxytag: member="TypeCode::isWavetable" ref="a81521106e50bee26629d434e515f1ec4" args="(const int code)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">static bool TypeCode::isWavetable </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a07d33871edccfcb2ee111dbfe30c848d"></a><!-- doxytag: member="TypeCode::isSignal" ref="a07d33871edccfcb2ee111dbfe30c848d" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isSignal </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2ebd3f553d7557cfc4aaeb91f7946f73"></a><!-- doxytag: member="TypeCode::isFloatType" ref="a2ebd3f553d7557cfc4aaeb91f7946f73" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isFloatType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af1c25c328bdeefa506cbeb958e3b4f0e"></a><!-- doxytag: member="TypeCode::isDoubleType" ref="af1c25c328bdeefa506cbeb958e3b4f0e" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isDoubleType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1654b9af98033ab1b8131d96eeca8ba3"></a><!-- doxytag: member="TypeCode::isIntType" ref="a1654b9af98033ab1b8131d96eeca8ba3" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isIntType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8c32c38be0b2d214b5064ad46cb8ade6"></a><!-- doxytag: member="TypeCode::isShortType" ref="a8c32c38be0b2d214b5064ad46cb8ade6" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isShortType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6ca6d4f75367bb06103a11123acd722d"></a><!-- doxytag: member="TypeCode::isInt24Type" ref="a6ca6d4f75367bb06103a11123acd722d" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isInt24Type </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaa6fd477d5832966bf564e7992e76295"></a><!-- doxytag: member="TypeCode::isLongType" ref="aaa6fd477d5832966bf564e7992e76295" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isLongType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af6047ba741447375a3779cf013ea3545"></a><!-- doxytag: member="TypeCode::isLongLongType" ref="af6047ba741447375a3779cf013ea3545" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isLongLongType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad1f816cd7040f345b451dd7d64ea0d00"></a><!-- doxytag: member="TypeCode::isCharType" ref="ad1f816cd7040f345b451dd7d64ea0d00" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isCharType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adaa65505e2a46af79daf911d97b0ada4"></a><!-- doxytag: member="TypeCode::isBoolType" ref="adaa65505e2a46af79daf911d97b0ada4" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isBoolType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a620ef5df7d37c25ba79d34e0b2ff3abb"></a><!-- doxytag: member="TypeCode::isFloatOrDoubleType" ref="a620ef5df7d37c25ba79d34e0b2ff3abb" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isFloatOrDoubleType </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7ff4bd259930e8c4e6dce7c5f2b6b2d5"></a><!-- doxytag: member="TypeCode::isIntegralType" ref="a7ff4bd259930e8c4e6dce7c5f2b6b2d5" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isIntegralType </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -960,7 +1163,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:04 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>A white noise generator.  
  <a href="class_white_noise_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___white_noise_8h_source.html">plonk_WhiteNoise.h</a>&gt;</code></p>
-
 <p><a href="class_white_noise_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -103,30 +100,27 @@ Static Public Member Functions</h2></td></tr>
 class WhiteNoiseUnit&lt; SampleType &gt;</h3>
 
 <p>A white noise generator. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ad8013a57f78fb5e4b41dda1cf1678c97"></a><!-- doxytag: member="WhiteNoiseUnit::ChannelInternalType" ref="ad8013a57f78fb5e4b41dda1cf1678c97" args="" -->
+<a class="anchor" id="a315d62418afc766a64402ad022b65122"></a><!-- doxytag: member="WhiteNoiseUnit::WhiteNoiseInternal" ref="a315d62418afc766a64402ad022b65122" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">ChannelInternalType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac656df13876a9e6fc76a21c7854956f5"></a><!-- doxytag: member="WhiteNoiseUnit::ChannelType" ref="ac656df13876a9e6fc76a21c7854956f5" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::<a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseInternal</a></td>
         </tr>
       </table>
 </div>
@@ -164,6 +158,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ac656df13876a9e6fc76a21c7854956f5"></a><!-- doxytag: member="WhiteNoiseUnit::ChannelType" ref="ac656df13876a9e6fc76a21c7854956f5" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac17ed9ffb3a7c41d30c047816698b62d"></a><!-- doxytag: member="WhiteNoiseUnit::Internal" ref="ac17ed9ffb3a7c41d30c047816698b62d" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -172,6 +181,21 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_white_noise_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a>&gt; <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad8013a57f78fb5e4b41dda1cf1678c97"></a><!-- doxytag: member="WhiteNoiseUnit::ChannelInternalType" ref="ad8013a57f78fb5e4b41dda1cf1678c97" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">ChannelInternalType</a></td>
         </tr>
       </table>
 </div>
@@ -194,14 +218,18 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a315d62418afc766a64402ad022b65122"></a><!-- doxytag: member="WhiteNoiseUnit::WhiteNoiseInternal" ref="a315d62418afc766a64402ad022b65122" args="" -->
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="afa6544deae62a33c2bf4a41a320e5dd0"></a><!-- doxytag: member="WhiteNoiseUnit::getInfo" ref="afa6544deae62a33c2bf4a41a320e5dd0" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::<a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseInternal</a></td>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -209,7 +237,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a11be90c63263fb248b8a8c359f19edf9"></a><!-- doxytag: member="WhiteNoiseUnit::ar" ref="a11be90c63263fb248b8a8c359f19edf9" args="(UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -250,24 +277,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Create an audio rate white noise generator. </p>
-
-</div>
-</div>
-<a class="anchor" id="afa6544deae62a33c2bf4a41a320e5dd0"></a><!-- doxytag: member="WhiteNoiseUnit::getInfo" ref="afa6544deae62a33c2bf4a41a320e5dd0" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_white_noise_unit.html">WhiteNoiseUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -320,7 +329,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

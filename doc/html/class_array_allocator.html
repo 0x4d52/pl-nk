@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,7 +68,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ArrayAllocator" -->
-<p><code>#include &lt;<a class="el" href="plonk___memory_8h_source.html">plonk_Memory.h</a>&gt;</code></p>
+<p>Default array de/allocation.  
+ <a href="class_array_allocator.html#details">More...</a></p>
 
 <p><a href="class_array_allocator-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -78,10 +78,13 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static Type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array_allocator.html#a5f10184922a263f4a19699e93ac79bad">allocate</a> (const int numItems)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_array_allocator.html#af66d0de564ca433383b039109c27957f">free</a> (Type *const ptr)  throw ()</td></tr>
 </table>
-<h3>template&lt;class Type&gt;<br/>
- class ArrayAllocator&lt; Type &gt;</h3>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class Type&gt;<br/>
+class ArrayAllocator&lt; Type &gt;</h3>
 
-<hr/><h2>Member Function Documentation</h2>
+<p>Default array de/allocation. </p>
+<p>For most Plonk objects this will invoke their custom new/delete opators. </p>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a5f10184922a263f4a19699e93ac79bad"></a><!-- doxytag: member="ArrayAllocator::allocate" ref="a5f10184922a263f4a19699e93ac79bad" args="(const int numItems)" -->
 <div class="memitem">
 <div class="memproto">
@@ -138,7 +141,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

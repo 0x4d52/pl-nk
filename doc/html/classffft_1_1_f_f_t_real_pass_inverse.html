@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -77,8 +76,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ffft::FFTRealPassInverse" -->
-<p><code>#include &lt;<a class="el" href="_f_f_t_real_pass_inverse_8h_source.html">FFTRealPassInverse.h</a>&gt;</code></p>
-
 <p><a href="classffft_1_1_f_f_t_real_pass_inverse-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -200,14 +197,14 @@ template&lt;int PASS&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a80eca51993c8178cc80e7e7629be311a"></a><!-- doxytag: member="ffft::FFTRealPassInverse::process_internal" ref="a80eca51993c8178cc80e7e7629be311a" args="(long len, DataType dest_ptr[], const DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], OscType osc_list[])" -->
+<a class="anchor" id="a814ede91583f5710bbd3d89154b310b1"></a><!-- doxytag: member="ffft::FFTRealPassInverse::process_rec" ref="a814ede91583f5710bbd3d89154b310b1" args="(long len, DataType dest_ptr[], DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], OscType osc_list[])" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;&gt; </div>
+template&lt;int PASS&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html">ffft::FFTRealPassInverse</a>&lt; 1 &gt;::process_internal </td>
+          <td class="memname">void <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html">ffft::FFTRealPassInverse</a>&lt; PASS &gt;::process_rec </td>
           <td>(</td>
           <td class="paramtype">long&#160;</td>
           <td class="paramname"><em>len</em>, </td>
@@ -221,7 +218,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
           <td class="paramname"><em>src_ptr</em>[], </td>
         </tr>
         <tr>
@@ -251,66 +248,7 @@ template&lt;&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a22997a729a1136bbfbe0610abd6377de"></a><!-- doxytag: member="ffft::FFTRealPassInverse::process_internal" ref="a22997a729a1136bbfbe0610abd6377de" args="(long len, DataType dest_ptr[], const DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], OscType osc_list[])" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html">ffft::FFTRealPassInverse</a>&lt; 2 &gt;::process_internal </td>
-          <td>(</td>
-          <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
-          <td class="paramname"><em>dest_ptr</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
-          <td class="paramname"><em>src_ptr</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
-          <td class="paramname"><em>cos_ptr</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>cos_len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const long&#160;</td>
-          <td class="paramname"><em>br_ptr</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a>&#160;</td>
-          <td class="paramname"><em>osc_list</em>[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
+          <td></td><td><code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -436,14 +374,14 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a814ede91583f5710bbd3d89154b310b1"></a><!-- doxytag: member="ffft::FFTRealPassInverse::process_rec" ref="a814ede91583f5710bbd3d89154b310b1" args="(long len, DataType dest_ptr[], DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], OscType osc_list[])" -->
+<a class="anchor" id="a22997a729a1136bbfbe0610abd6377de"></a><!-- doxytag: member="ffft::FFTRealPassInverse::process_internal" ref="a22997a729a1136bbfbe0610abd6377de" args="(long len, DataType dest_ptr[], const DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], OscType osc_list[])" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;int PASS&gt; </div>
+template&lt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html">ffft::FFTRealPassInverse</a>&lt; PASS &gt;::process_rec </td>
+          <td class="memname">void <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html">ffft::FFTRealPassInverse</a>&lt; 2 &gt;::process_internal </td>
           <td>(</td>
           <td class="paramtype">long&#160;</td>
           <td class="paramname"><em>len</em>, </td>
@@ -457,7 +395,7 @@ template&lt;int PASS&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
           <td class="paramname"><em>src_ptr</em>[], </td>
         </tr>
         <tr>
@@ -487,7 +425,66 @@ template&lt;int PASS&gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [static]</code></td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a80eca51993c8178cc80e7e7629be311a"></a><!-- doxytag: member="ffft::FFTRealPassInverse::process_internal" ref="a80eca51993c8178cc80e7e7629be311a" args="(long len, DataType dest_ptr[], const DataType src_ptr[], const DataType cos_ptr[], long cos_len, const long br_ptr[], OscType osc_list[])" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html">ffft::FFTRealPassInverse</a>&lt; 1 &gt;::process_internal </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
+          <td class="paramname"><em>dest_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
+          <td class="paramname"><em>src_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classffft_1_1_f_f_t_real_pass_inverse.html#adecc3668f71245ef20a93546a55b3190">DataType</a>&#160;</td>
+          <td class="paramname"><em>cos_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>cos_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>br_ptr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classffft_1_1_osc_sin_cos.html">OscType</a>&#160;</td>
+          <td class="paramname"><em>osc_list</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -514,7 +511,7 @@ template&lt;int PASS&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

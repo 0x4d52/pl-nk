@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,17 +69,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">BreakpointsBase&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="BreakpointsBase" --><!-- doxytag: inherits="SenderContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___break_points_8h_source.html">plonk_BreakPoints.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="BreakpointsBase" --><!-- doxytag: inherits="SenderContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" --><div class="dynheader">
 Inheritance diagram for BreakpointsBase&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_breakpoints_base.png" usemap="#BreakpointsBase&lt; SampleType &gt;_map" alt=""/>
   <map id="BreakpointsBase&lt; SampleType &gt;_map" name="BreakpointsBase&lt; SampleType &gt;_map">
-<area href="class_sender_container.html" alt="SenderContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,392,136"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,392,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,0,392,24"/>
+<area href="class_sender_container.html" alt="SenderContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,168,392,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,392,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; BreakpointsInternal&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,392,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,392,24"/>
 </map>
  </div></div>
 
@@ -111,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a5627a4403a12edddf9758c58a0c65745">getNumBreakpoints</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SampleType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a75dc4c8bbee37b6130d11a10b912ebc9">getStartLevel</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_breakpoint_base.html">BreakpointType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a08e6fbc2ec0c45f1ae878ba0e2b91dfa">atUnchecked</a> (const int index) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#aa83201b2b80de5a83531ad7d935c8215">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a5fd37bdc7f608d9643eb67c992eba402">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#acc7dfa070da4bc8934dfadaa3d648e6e">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -118,43 +118,12 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a605bb5bec9668cc108647ed714177f37">getNull</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a568d5c6345d700014ea89fb6180228c7">linen</a> (const double attackTime, const double sustainTime, const double releaseTime)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a3ad483ff984517389cb7ac0c3df6e918">adsr</a> (const double attackTime, const double decayTime, const SampleType sustainLevel, const double releaseTime)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_breakpoints_base.html#a33777c9dfb3831efd3d4b7d6bcf70c8d">asr</a> (const double attackTime, const SampleType sustainLevel, const double releaseTime)  throw ()</td></tr>
 </table>
 <h3>template&lt;class SampleType&gt;<br/>
  class BreakpointsBase&lt; SampleType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ab2a5694bf0f32b7d4c7c99cf501ec050"></a><!-- doxytag: member="BreakpointsBase::Base" ref="ab2a5694bf0f32b7d4c7c99cf501ec050" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_sender_container.html">SenderContainer</a>&lt;<a class="el" href="class_breakpoints_internal.html">Internal</a>&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_sender_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_sender_container.html#a798aa6cb8d4c28e1306053b440ed49c2">SenderContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aac0d4722a8d847a1cc53458ad94277b2"></a><!-- doxytag: member="BreakpointsBase::BreakpointType" ref="aac0d4722a8d847a1cc53458ad94277b2" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_breakpoint_base.html">BreakpointBase</a>&lt;SampleType&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoint_base.html">BreakpointType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a3c37ca9342fbdc751bf51b3d4251aeeb"></a><!-- doxytag: member="BreakpointsBase::Internal" ref="a3c37ca9342fbdc751bf51b3d4251aeeb" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -172,6 +141,38 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ab2a5694bf0f32b7d4c7c99cf501ec050"></a><!-- doxytag: member="BreakpointsBase::Base" ref="ab2a5694bf0f32b7d4c7c99cf501ec050" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_sender_container.html">SenderContainer</a>&lt;<a class="el" href="class_breakpoints_internal.html">Internal</a>&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_sender_container.html">Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_sender_container.html#a798aa6cb8d4c28e1306053b440ed49c2">SenderContainer&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8bf1f8ed1b7e0c4f46a691774929f4fc"></a><!-- doxytag: member="BreakpointsBase::Weak" ref="a8bf1f8ed1b7e0c4f46a691774929f4fc" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a7ba8c3614d1333c9fd8ca3b51e3a51cc"></a><!-- doxytag: member="BreakpointsBase::LevelsArray" ref="a7ba8c3614d1333c9fd8ca3b51e3a51cc" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -180,36 +181,6 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">LevelsArray</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab8e7d98777a0ad5f2d300257d289c21f"></a><!-- doxytag: member="BreakpointsBase::NextArray" ref="ab8e7d98777a0ad5f2d300257d289c21f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;int&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">NextArray</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac201ec147a65b0ab303a8ac925301944"></a><!-- doxytag: member="BreakpointsBase::SampleTypeUtility" ref="ac201ec147a65b0ab303a8ac925301944" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_type_utility.html">SampleTypeUtility</a></td>
         </tr>
       </table>
 </div>
@@ -232,14 +203,44 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8bf1f8ed1b7e0c4f46a691774929f4fc"></a><!-- doxytag: member="BreakpointsBase::Weak" ref="a8bf1f8ed1b7e0c4f46a691774929f4fc" args="" -->
+<a class="anchor" id="ab8e7d98777a0ad5f2d300257d289c21f"></a><!-- doxytag: member="BreakpointsBase::NextArray" ref="ab8e7d98777a0ad5f2d300257d289c21f" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;int&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">NextArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aac0d4722a8d847a1cc53458ad94277b2"></a><!-- doxytag: member="BreakpointsBase::BreakpointType" ref="aac0d4722a8d847a1cc53458ad94277b2" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_breakpoint_base.html">BreakpointBase</a>&lt;SampleType&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoint_base.html">BreakpointType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac201ec147a65b0ab303a8ac925301944"></a><!-- doxytag: member="BreakpointsBase::SampleTypeUtility" ref="ac201ec147a65b0ab303a8ac925301944" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::<a class="el" href="class_type_utility.html">SampleTypeUtility</a></td>
         </tr>
       </table>
 </div>
@@ -347,63 +348,24 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a3ad483ff984517389cb7ac0c3df6e918"></a><!-- doxytag: member="BreakpointsBase::adsr" ref="a3ad483ff984517389cb7ac0c3df6e918" args="(const double attackTime, const double decayTime, const SampleType sustainLevel, const double releaseTime)" -->
+<a class="anchor" id="adf01b65acbc2839d11403439097d5e61"></a><!-- doxytag: member="BreakpointsBase::operator=" ref="adf01b65acbc2839d11403439097d5e61" args="(BreakpointsBase const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::adsr </td>
+          <td class="memname"><a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&amp; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>attackTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>decayTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const SampleType&#160;</td>
-          <td class="paramname"><em>sustainLevel</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>releaseTime</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
+          <td class="paramtype"><a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a08e6fbc2ec0c45f1ae878ba0e2b91dfa"></a><!-- doxytag: member="BreakpointsBase::atUnchecked" ref="a08e6fbc2ec0c45f1ae878ba0e2b91dfa" args="(const int index) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_breakpoint_base.html">BreakpointType</a>&amp; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::atUnchecked </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Assignment operator. </p>
 
 </div>
 </div>
@@ -447,6 +409,117 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a568d5c6345d700014ea89fb6180228c7"></a><!-- doxytag: member="BreakpointsBase::linen" ref="a568d5c6345d700014ea89fb6180228c7" args="(const double attackTime, const double sustainTime, const double releaseTime)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::linen </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>attackTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>sustainTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>releaseTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3ad483ff984517389cb7ac0c3df6e918"></a><!-- doxytag: member="BreakpointsBase::adsr" ref="a3ad483ff984517389cb7ac0c3df6e918" args="(const double attackTime, const double decayTime, const SampleType sustainLevel, const double releaseTime)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::adsr </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>attackTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>decayTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const SampleType&#160;</td>
+          <td class="paramname"><em>sustainLevel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>releaseTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a33777c9dfb3831efd3d4b7d6bcf70c8d"></a><!-- doxytag: member="BreakpointsBase::asr" ref="a33777c9dfb3831efd3d4b7d6bcf70c8d" args="(const double attackTime, const SampleType sustainLevel, const double releaseTime)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::asr </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>attackTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const SampleType&#160;</td>
+          <td class="paramname"><em>sustainLevel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>releaseTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a5627a4403a12edddf9758c58a0c65745"></a><!-- doxytag: member="BreakpointsBase::getNumBreakpoints" ref="a5627a4403a12edddf9758c58a0c65745" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -483,34 +556,18 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a568d5c6345d700014ea89fb6180228c7"></a><!-- doxytag: member="BreakpointsBase::linen" ref="a568d5c6345d700014ea89fb6180228c7" args="(const double attackTime, const double sustainTime, const double releaseTime)" -->
+<a class="anchor" id="a08e6fbc2ec0c45f1ae878ba0e2b91dfa"></a><!-- doxytag: member="BreakpointsBase::atUnchecked" ref="a08e6fbc2ec0c45f1ae878ba0e2b91dfa" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::linen </td>
+          <td class="memname">const <a class="el" href="class_breakpoint_base.html">BreakpointType</a>&amp; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::atUnchecked </td>
           <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>attackTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>sustainTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>releaseTime</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -518,24 +575,43 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="adf01b65acbc2839d11403439097d5e61"></a><!-- doxytag: member="BreakpointsBase::operator=" ref="adf01b65acbc2839d11403439097d5e61" args="(BreakpointsBase const &amp;other)" -->
+<a class="anchor" id="aa83201b2b80de5a83531ad7d935c8215"></a><!-- doxytag: member="BreakpointsBase::operator&#45;&gt;" ref="aa83201b2b80de5a83531ad7d935c8215" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&amp; <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::operator= </td>
+          <td class="memname"><a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>* <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::operator-&gt; </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Assignment operator. </p>
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5fd37bdc7f608d9643eb67c992eba402"></a><!-- doxytag: member="BreakpointsBase::operator&#45;&gt;" ref="a5fd37bdc7f608d9643eb67c992eba402" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>* <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt; SampleType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; BreakpointsInternal&lt; SampleType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -557,7 +633,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

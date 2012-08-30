@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -78,23 +77,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="Threading::Thread" -->
 <p>The <a class="el" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> class itself.  
  <a href="class_threading_1_1_thread.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___thread_8h_source.html">plonk_Thread.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Threading::Thread:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_threading_1_1_thread.png" usemap="#Threading::Thread_map" alt=""/>
+  <map id="Threading::Thread_map" name="Threading::Thread_map">
+<area href="class_object_memory_defer_free.html" alt="ObjectMemoryDeferFree" shape="rect" coords="0,56,154,80"/>
+<area href="class_object_memory_pools.html" alt="ObjectMemoryPools" shape="rect" coords="164,56,318,80"/>
+</map>
+ </div></div>
 
 <p><a href="class_threading_1_1_thread-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a434228db8b77856420ba78166849c820">Thread</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#ae985d730801d4679590869393ef044a8">Thread</a> (const char *name=0)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a7fb203f137956ef48da44e4426b73ab1">~Thread</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">start</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a161d0f429aa7f7a1ae63e11dca204fa6">cancel</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a69a1d2b26ec63699833c4b3c86719fb4">wait</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the thread to exit.  <a href="#a69a1d2b26ec63699833c4b3c86719fb4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a9403dc7ff1d22254e706a720bed6297f">pause</a> (const double duration=PLONK_INFINITY)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#adcdf6643b10513084505dd9403be5e13">resume</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#aa09e7addc297931a3dab8740e88b624f">isRunning</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if the thread is running, otherwise <code>false</code>.  <a href="#aa09e7addc297931a3dab8740e88b624f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9">setShouldExit</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals that the thread should exit.  <a href="#af7b4f2a7a1cd0fac3734f3873dfa96c9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#afac6cb66c5ab59a6a3f371dbea00e898">setShouldExitAndWait</a> (const double interval=0.000001)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals that the thread should exit then waits for it to exit.  <a href="#afac6cb66c5ab59a6a3f371dbea00e898"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e">getShouldExit</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if the thread has been signalled to exit, otherwise <code>false</code>.  <a href="#a8f420000728f97481fda9c4be5388c3e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#ae8f792258076e7a3d886cf3eca777b8c">getID</a> ()  throw ()</td></tr>
@@ -111,7 +122,7 @@ Static Protected Member Functions</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_threading_1_1_thread.html" title="The Thread class itself.">Thread</a> class itself. </p>
 <p>You must inherit form this and implement the <a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run()</a> function. Then call <a class="el" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">start()</a>.</p>
-<div class="fragment"><pre class="fragment">     <span class="keyword">class </span>MyThread: <span class="keyword">public</span> <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::<a class="code" href="class_threading_1_1_thread.html#a434228db8b77856420ba78166849c820">Thread</a>
+<div class="fragment"><pre class="fragment">     <span class="keyword">class </span>MyThread: <span class="keyword">public</span> <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::<a class="code" href="class_threading_1_1_thread.html#ae985d730801d4679590869393ef044a8">Thread</a>
      {
      <span class="keyword">public</span>:
         <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> <a class="code" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run</a>()
@@ -130,14 +141,15 @@ Static Protected Member Functions</h2></td></tr>
      myThread.start();
      ...
 </pre></div> </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a434228db8b77856420ba78166849c820"></a><!-- doxytag: member="Threading::Thread::Thread" ref="a434228db8b77856420ba78166849c820" args="()" -->
+<a class="anchor" id="ae985d730801d4679590869393ef044a8"></a><!-- doxytag: member="Threading::Thread::Thread" ref="ae985d730801d4679590869393ef044a8" args="(const char *name=0)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Threading::Thread::Thread </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em> = <code>0</code></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -163,140 +175,28 @@ Static Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a161d0f429aa7f7a1ae63e11dca204fa6"></a><!-- doxytag: member="Threading::Thread::cancel" ref="a161d0f429aa7f7a1ae63e11dca204fa6" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ResultCode Threading::Thread::cancel </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae8f792258076e7a3d886cf3eca777b8c"></a><!-- doxytag: member="Threading::Thread::getID" ref="ae8f792258076e7a3d886cf3eca777b8c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> Threading::Thread::getID </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get this thread's ID. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8f420000728f97481fda9c4be5388c3e"></a><!-- doxytag: member="Threading::Thread::getShouldExit" ref="a8f420000728f97481fda9c4be5388c3e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Threading::Thread::getShouldExit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns <code>true</code> if the thread has been signalled to exit, otherwise <code>false</code>. </p>
-<p>This is thread-safe. </p>
-
-</div>
-</div>
-<a class="anchor" id="aa09e7addc297931a3dab8740e88b624f"></a><!-- doxytag: member="Threading::Thread::isRunning" ref="aa09e7addc297931a3dab8740e88b624f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Threading::Thread::isRunning </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns <code>true</code> if the thread is running, otherwise <code>false</code>. </p>
-<p>This is thread-safe. </p>
-
-</div>
-</div>
-<a class="anchor" id="a30d723c645d98a76e58f692d5ac26b32"></a><!-- doxytag: member="Threading::Thread::run" ref="a30d723c645d98a76e58f692d5ac26b32" args="()=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual ResultCode Threading::Thread::run </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The <a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run()</a> function: you must implement this in your sublcass. </p>
-
-</div>
-</div>
-<a class="anchor" id="af7b4f2a7a1cd0fac3734f3873dfa96c9"></a><!-- doxytag: member="Threading::Thread::setShouldExit" ref="af7b4f2a7a1cd0fac3734f3873dfa96c9" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ResultCode Threading::Thread::setShouldExit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Signals that the thread should exit. </p>
-<p>The <a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run()</a> function should be checking <a class="el" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e" title="Returns true if the thread has been signalled to exit, otherwise false.">getShouldExit()</a> regularly to determine if it should exit. This is thread-safe. </p>
-
-</div>
-</div>
-<a class="anchor" id="a6e52ef55ffcba982eb270909564f607e"></a><!-- doxytag: member="Threading::Thread::sleep" ref="a6e52ef55ffcba982eb270909564f607e" args="(const double seconds)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ResultCode Threading::Thread::sleep </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>seconds</em></td><td>)</td>
-          <td>  throw ()<code> [static, protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>A shortcut for <a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684" title="Sleeps the current thread.">Threading::sleep()</a> </p>
-
-</div>
-</div>
 <a class="anchor" id="aec62063348aad6daca0c6c51d7270b2d"></a><!-- doxytag: member="Threading::Thread::start" ref="aec62063348aad6daca0c6c51d7270b2d" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">ResultCode Threading::Thread::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a161d0f429aa7f7a1ae63e11dca204fa6"></a><!-- doxytag: member="Threading::Thread::cancel" ref="a161d0f429aa7f7a1ae63e11dca204fa6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResultCode Threading::Thread::cancel </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
@@ -323,6 +223,179 @@ Static Protected Member Functions</h2></td></tr>
 
 <p>Waits for the thread to exit. </p>
 <p>You should call <a class="el" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9" title="Signals that the thread should exit.">setShouldExit()</a> then call this function to block until the thread exits. Or you could run your own loop checking <a class="el" href="class_threading_1_1_thread.html#aa09e7addc297931a3dab8740e88b624f" title="Returns true if the thread is running, otherwise false.">isRunning()</a> until that returns false to simulate the same behviour. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9403dc7ff1d22254e706a720bed6297f"></a><!-- doxytag: member="Threading::Thread::pause" ref="a9403dc7ff1d22254e706a720bed6297f" args="(const double duration=PLONK_INFINITY)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResultCode Threading::Thread::pause </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>duration</em> = <code>PLONK_INFINITY</code></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adcdf6643b10513084505dd9403be5e13"></a><!-- doxytag: member="Threading::Thread::resume" ref="adcdf6643b10513084505dd9403be5e13" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResultCode Threading::Thread::resume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa09e7addc297931a3dab8740e88b624f"></a><!-- doxytag: member="Threading::Thread::isRunning" ref="aa09e7addc297931a3dab8740e88b624f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Threading::Thread::isRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns <code>true</code> if the thread is running, otherwise <code>false</code>. </p>
+<p>This is thread-safe. </p>
+
+</div>
+</div>
+<a class="anchor" id="af7b4f2a7a1cd0fac3734f3873dfa96c9"></a><!-- doxytag: member="Threading::Thread::setShouldExit" ref="af7b4f2a7a1cd0fac3734f3873dfa96c9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResultCode Threading::Thread::setShouldExit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Signals that the thread should exit. </p>
+<p>The <a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run()</a> function should be checking <a class="el" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e" title="Returns true if the thread has been signalled to exit, otherwise false.">getShouldExit()</a> regularly to determine if it should exit. This is thread-safe. </p>
+
+</div>
+</div>
+<a class="anchor" id="afac6cb66c5ab59a6a3f371dbea00e898"></a><!-- doxytag: member="Threading::Thread::setShouldExitAndWait" ref="afac6cb66c5ab59a6a3f371dbea00e898" args="(const double interval=0.000001)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResultCode Threading::Thread::setShouldExitAndWait </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>interval</em> = <code>0.000001</code></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Signals that the thread should exit then waits for it to exit. </p>
+<p>This is thread-safe but blocks the calling thread until the other thread has exited. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval</td><td>The time interval between checks for the thread to exit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a8f420000728f97481fda9c4be5388c3e"></a><!-- doxytag: member="Threading::Thread::getShouldExit" ref="a8f420000728f97481fda9c4be5388c3e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Threading::Thread::getShouldExit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns <code>true</code> if the thread has been signalled to exit, otherwise <code>false</code>. </p>
+<p>This is thread-safe. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae8f792258076e7a3d886cf3eca777b8c"></a><!-- doxytag: member="Threading::Thread::getID" ref="ae8f792258076e7a3d886cf3eca777b8c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a> Threading::Thread::getID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get this thread's ID. </p>
+
+</div>
+</div>
+<a class="anchor" id="a30d723c645d98a76e58f692d5ac26b32"></a><!-- doxytag: member="Threading::Thread::run" ref="a30d723c645d98a76e58f692d5ac26b32" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ResultCode Threading::Thread::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The <a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run()</a> function: you must implement this in your sublcass. </p>
+
+<p>Implemented in <a class="el" href="class_object_memory_defer_free.html#aa72e25ddb0652cdda6cb8bc4018a4e2e">ObjectMemoryDeferFree</a>, and <a class="el" href="class_object_memory_pools.html#ab6fd2bd25e4e3b8da8743de29f99aca5">ObjectMemoryPools</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6e52ef55ffcba982eb270909564f607e"></a><!-- doxytag: member="Threading::Thread::sleep" ref="a6e52ef55ffcba982eb270909564f607e" args="(const double seconds)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResultCode Threading::Thread::sleep </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>seconds</em></td><td>)</td>
+          <td>  throw ()<code> [static, protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>A shortcut for <a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684" title="Sleeps the current thread.">Threading::sleep()</a> </p>
 
 </div>
 </div>
@@ -363,7 +436,7 @@ Static Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

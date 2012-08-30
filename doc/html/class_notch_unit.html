@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Notch filter (i.e, parametric mid-EQ).  
  <a href="class_notch_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___filter_shortcuts_8h_source.html">plonk_FilterShortcuts.h</a>&gt;</code></p>
-
 <p><a href="class_notch_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -100,15 +97,31 @@ Static Public Member Functions</h2></td></tr>
 class NotchUnit&lt; SampleType &gt;</h3>
 
 <p>Notch filter (i.e, parametric mid-EQ). </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, frequency=1200, q=1, gain=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (input frequency=1200, q=1, gain=0, mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to filter</li>
+<li>frequency: (unit, multi) the -3dB point cut-off frequency in Hz</li>
+<li>q: (unit, multi) the filter Q factor</li>
+<li>gain: (unit, multi) the cut/boost in gain dB</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a925f2fe421903f9c725f87e5395b8926"></a><!-- doxytag: member="NotchUnit::FilterCoeffsType" ref="a925f2fe421903f9c725f87e5395b8926" args="" -->
+<a class="anchor" id="a3c639fef347dda589e5e1e7c273f8bea"></a><!-- doxytag: member="NotchUnit::UnitType" ref="a3c639fef347dda589e5e1e7c273f8bea" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit</a>&lt;<a class="el" href="class_filter_shape_notch_base.html">FilterShape</a>&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
         </tr>
       </table>
 </div>
@@ -131,14 +144,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad70dd4b779033589fec326fc0d370515"></a><!-- doxytag: member="NotchUnit::FilterType" ref="ad70dd4b779033589fec326fc0d370515" args="" -->
+<a class="anchor" id="a925f2fe421903f9c725f87e5395b8926"></a><!-- doxytag: member="NotchUnit::FilterCoeffsType" ref="a925f2fe421903f9c725f87e5395b8926" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_notch_unit.html#adad839430e9579b4c130ebb51dd413e2">FormType</a>&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit</a>&lt;<a class="el" href="class_filter_shape_notch_base.html">FilterShape</a>&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffsType</a></td>
         </tr>
       </table>
 </div>
@@ -161,6 +174,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ad70dd4b779033589fec326fc0d370515"></a><!-- doxytag: member="NotchUnit::FilterType" ref="ad70dd4b779033589fec326fc0d370515" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_notch_unit.html#adad839430e9579b4c130ebb51dd413e2">FormType</a>&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="afc974f4e17308075925674b4f5bc7d5e"></a><!-- doxytag: member="NotchUnit::ResampleType" ref="afc974f4e17308075925674b4f5bc7d5e" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,14 +204,18 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3c639fef347dda589e5e1e7c273f8bea"></a><!-- doxytag: member="NotchUnit::UnitType" ref="a3c639fef347dda589e5e1e7c273f8bea" args="" -->
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a4fa70e156f65fa424e6753a06a70a95f"></a><!-- doxytag: member="NotchUnit::getInfo" ref="a4fa70e156f65fa424e6753a06a70a95f" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -191,7 +223,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a089a8dd265a7c34f698eb67ae0a6c99c"></a><!-- doxytag: member="NotchUnit::ar" ref="a089a8dd265a7c34f698eb67ae0a6c99c" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;q=SampleType(1), UnitType const &amp;gain=SampleType(0), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -269,24 +300,6 @@ template&lt;class SampleType &gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="a4fa70e156f65fa424e6753a06a70a95f"></a><!-- doxytag: member="NotchUnit::getInfo" ref="a4fa70e156f65fa424e6753a06a70a95f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_notch_unit.html">NotchUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -374,7 +387,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

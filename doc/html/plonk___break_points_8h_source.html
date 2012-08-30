@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_BreakPoints.h</div>  </div>
@@ -164,249 +155,267 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00092"></a><a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2">00092</a>     <span class="keyword">enum</span> <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2">NextPoint</a>
 <a name="l00093"></a>00093     {
 <a name="l00094"></a><a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ad883e72c2b96bb913566ae440f6da0b4">00094</a>         <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ad883e72c2b96bb913566ae440f6da0b4">This</a> = -2,
-<a name="l00095"></a><a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">00095</a>         <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">Next</a> = -1
-<a name="l00096"></a>00096     };    
-<a name="l00097"></a>00097     
-<a name="l00098"></a><a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">00098</a>         <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a>(<span class="keyword">const</span> SampleType targetLevel = SampleType (0), 
-<a name="l00099"></a>00099                    <span class="keyword">const</span> <span class="keywordtype">double</span> targetTime = 0.0,
-<a name="l00100"></a>00100                    <span class="keyword">const</span> <span class="keywordtype">int</span> nextGateOn = <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointBase::Next</a>,
-<a name="l00101"></a>00101                    <span class="keyword">const</span> <span class="keywordtype">int</span> nextGateOff = <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointBase::Next</a>) throw()
-<a name="l00102"></a>00102         :       <a class="code" href="class_sender_container.html">Base</a> (new <a class="code" href="class_breakpoint_internal.html">Internal</a> (targetLevel,
-<a name="l00103"></a>00103                             targetTime,
-<a name="l00104"></a>00104                             nextGateOn,
-<a name="l00105"></a>00105                             nextGateOff))
-<a name="l00106"></a>00106         {
-<a name="l00107"></a>00107         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (nextGateOn &gt;= -2);  <span class="comment">// must be a special code or a real index, &gt;=0</span>
-<a name="l00108"></a>00108         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (nextGateOff &gt;= -1); <span class="comment">// not the only infinite loop but one of them!</span>
-<a name="l00109"></a>00109         }
-<a name="l00110"></a>00110         
-<a name="l00111"></a><a class="code" href="class_breakpoint_base.html#ab71d3f07aacaf0b6421a578a4273635c">00111</a>     <span class="keyword">explicit</span> <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a> (<a class="code" href="class_breakpoint_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
-<a name="l00112"></a>00112         :       <a class="code" href="class_breakpoint_base.html#a0decb3ff568e18171a746eb4d1dc4b18">Base</a> (internalToUse)
-<a name="l00113"></a>00113         {
-<a name="l00114"></a>00114         } 
-<a name="l00115"></a>00115     
-<a name="l00116"></a><a class="code" href="class_breakpoint_base.html#a1e086ea76db196fd60b84efe0b709670">00116</a>     <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a> (<a class="code" href="class_breakpoint_base.html">BreakpointBase</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
-<a name="l00117"></a>00117         :       <a class="code" href="class_breakpoint_base.html#a0decb3ff568e18171a746eb4d1dc4b18">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
-<a name="l00118"></a>00118         {
-<a name="l00119"></a>00119         }    
-<a name="l00120"></a>00120     
-<a name="l00121"></a><a class="code" href="class_breakpoint_base.html#a01f866e16261eace4aed383ad8d44eef">00121</a>     <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00122"></a>00122     :   <a class="code" href="class_breakpoint_base.html#a0decb3ff568e18171a746eb4d1dc4b18">Base</a> (other.as&lt;<a class="code" href="class_breakpoint_base.html">BreakpointBase</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>())
-<a name="l00123"></a>00123     {
-<a name="l00124"></a>00124     }    
-<a name="l00125"></a>00125     
-<a name="l00127"></a><a class="code" href="class_breakpoint_base.html#a7fc7e19974308f3ddadf92c76cc486e1">00127</a>     <a class="code" href="class_breakpoint_base.html">BreakpointBase</a>&amp; <a class="code" href="class_breakpoint_base.html#a7fc7e19974308f3ddadf92c76cc486e1" title="Assignment operator.">operator= </a>(<a class="code" href="class_breakpoint_base.html">BreakpointBase</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00128"></a>00128         {
-<a name="l00129"></a>00129                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00130"></a>00130             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
-<a name="l00131"></a>00131         
-<a name="l00132"></a>00132         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00133"></a>00133         }
-<a name="l00134"></a>00134         
-<a name="l00138"></a><a class="code" href="class_breakpoint_base.html#a6538d2eb95254126c751a2d45b3e9359">00138</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase</a> <a class="code" href="class_breakpoint_base.html#a6538d2eb95254126c751a2d45b3e9359" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
-<a name="l00139"></a>00139     {
-<a name="l00140"></a>00140         <span class="keywordflow">return</span> weak.<a class="code" href="class_breakpoint_base.html#a6538d2eb95254126c751a2d45b3e9359" title="Get a weakly linked copy of this object.">fromWeak</a>();
-<a name="l00141"></a>00141     }    
-<a name="l00142"></a>00142         
-<a name="l00143"></a><a class="code" href="class_breakpoint_base.html#a44ae8c361fbfeebecea50b051efa55ad">00143</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase</a>&amp; <a class="code" href="class_breakpoint_base.html#a44ae8c361fbfeebecea50b051efa55ad">getNull</a>() throw()
-<a name="l00144"></a>00144         {
-<a name="l00145"></a>00145                 <span class="keyword">static</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase</a> null;        
-<a name="l00146"></a>00146                 <span class="keywordflow">return</span> null;
-<a name="l00147"></a>00147         }                                   
-<a name="l00148"></a>00148     
-<a name="l00149"></a><a class="code" href="class_breakpoint_base.html#a7aff1f0fd806092609ec909a8761810d">00149</a>     <span class="keyword">inline</span> SampleType <a class="code" href="class_breakpoint_base.html#a7aff1f0fd806092609ec909a8761810d">getTargetLevel</a>() <span class="keyword">const</span> throw()   { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getTargetLevel(); }
-<a name="l00150"></a><a class="code" href="class_breakpoint_base.html#a7016b0f5723009f4dfe5261d78d72c64">00150</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_breakpoint_base.html#a7016b0f5723009f4dfe5261d78d72c64">getTargetTime</a>() <span class="keyword">const</span> throw()        { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getTargetTime(); }
-<a name="l00151"></a><a class="code" href="class_breakpoint_base.html#aef913d7eb5fcf92458518ef7e69671ab">00151</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_breakpoint_base.html#aef913d7eb5fcf92458518ef7e69671ab">isSustainPoint</a>() <span class="keyword">const</span> throw()         { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getNextGateOn() == <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ad883e72c2b96bb913566ae440f6da0b4">BreakpointBase::This</a>; }
-<a name="l00152"></a><a class="code" href="class_breakpoint_base.html#a13691408fcf2c61ce7adf1474838570e">00152</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoint_base.html#a13691408fcf2c61ce7adf1474838570e">getNextGateOn</a>() <span class="keyword">const</span> throw()           { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getNextGateOn(); }
-<a name="l00153"></a><a class="code" href="class_breakpoint_base.html#a589cadcbda2806af5006b0ec95e2ac24">00153</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoint_base.html#a589cadcbda2806af5006b0ec95e2ac24">getNextGateOff</a>() <span class="keyword">const</span> throw()          { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getNextGateOff(); }
-<a name="l00154"></a>00154    
-<a name="l00155"></a><a class="code" href="class_breakpoint_base.html#ab92b75124230846009b616f7c02fb287">00155</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoint_base.html#ab92b75124230846009b616f7c02fb287">getNext</a> (<span class="keyword">const</span> <span class="keywordtype">bool</span> gate) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00156"></a>00156     {
-<a name="l00157"></a>00157         <span class="keywordflow">return</span> gate ? this-&gt;<a class="code" href="class_breakpoint_base.html#a13691408fcf2c61ce7adf1474838570e">getNextGateOn</a>() : this-&gt;<a class="code" href="class_breakpoint_base.html#a589cadcbda2806af5006b0ec95e2ac24">getNextGateOff</a>();
-<a name="l00158"></a>00158     }
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 };
-<a name="l00161"></a>00161 
+<a name="l00095"></a><a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">00095</a>         <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">Next</a> = -1,
+<a name="l00096"></a><a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2af961ec176ad5b29bc0d925dc43b10e4b">00096</a>         <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2af961ec176ad5b29bc0d925dc43b10e4b">End</a> = INT_MAX
+<a name="l00097"></a>00097     };    
+<a name="l00098"></a>00098     
+<a name="l00099"></a><a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">00099</a>         <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a>(<span class="keyword">const</span> SampleType targetLevel = SampleType (0), 
+<a name="l00100"></a>00100                    <span class="keyword">const</span> <span class="keywordtype">double</span> targetTime = 0.0,
+<a name="l00101"></a>00101                    <span class="keyword">const</span> <span class="keywordtype">int</span> nextGateOn = <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointBase::Next</a>,
+<a name="l00102"></a>00102                    <span class="keyword">const</span> <span class="keywordtype">int</span> nextGateOff = <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointBase::Next</a>) throw()
+<a name="l00103"></a>00103         :       <a class="code" href="class_sender_container.html">Base</a> (new <a class="code" href="class_breakpoint_internal.html">Internal</a> (targetLevel,
+<a name="l00104"></a>00104                             targetTime,
+<a name="l00105"></a>00105                             nextGateOn,
+<a name="l00106"></a>00106                             nextGateOff))
+<a name="l00107"></a>00107         {
+<a name="l00108"></a>00108         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (nextGateOn &gt;= -2);  <span class="comment">// must be a special code or a real index, &gt;=0</span>
+<a name="l00109"></a>00109         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (nextGateOff &gt;= -1); <span class="comment">// not the only infinite loop but one of them!</span>
+<a name="l00110"></a>00110         }
+<a name="l00111"></a>00111         
+<a name="l00112"></a><a class="code" href="class_breakpoint_base.html#ab71d3f07aacaf0b6421a578a4273635c">00112</a>     <span class="keyword">explicit</span> <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a> (<a class="code" href="class_breakpoint_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
+<a name="l00113"></a>00113         :       <a class="code" href="class_breakpoint_base.html#a0decb3ff568e18171a746eb4d1dc4b18">Base</a> (internalToUse)
+<a name="l00114"></a>00114         {
+<a name="l00115"></a>00115         } 
+<a name="l00116"></a>00116     
+<a name="l00117"></a><a class="code" href="class_breakpoint_base.html#a1e086ea76db196fd60b84efe0b709670">00117</a>     <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a> (<a class="code" href="class_breakpoint_base.html">BreakpointBase</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00118"></a>00118         :       <a class="code" href="class_breakpoint_base.html#a0decb3ff568e18171a746eb4d1dc4b18">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
+<a name="l00119"></a>00119         {
+<a name="l00120"></a>00120         }    
+<a name="l00121"></a>00121     
+<a name="l00122"></a><a class="code" href="class_breakpoint_base.html#a01f866e16261eace4aed383ad8d44eef">00122</a>     <a class="code" href="class_breakpoint_base.html#a2ae8a4d5e6aeb2e653f1cf9ddfea7cd9">BreakpointBase</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00123"></a>00123     :   <a class="code" href="class_breakpoint_base.html#a0decb3ff568e18171a746eb4d1dc4b18">Base</a> (other.as&lt;<a class="code" href="class_breakpoint_base.html">BreakpointBase</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>())
+<a name="l00124"></a>00124     {
+<a name="l00125"></a>00125     }    
+<a name="l00126"></a>00126     
+<a name="l00128"></a><a class="code" href="class_breakpoint_base.html#a7fc7e19974308f3ddadf92c76cc486e1">00128</a>     <a class="code" href="class_breakpoint_base.html">BreakpointBase</a>&amp; <a class="code" href="class_breakpoint_base.html#a7fc7e19974308f3ddadf92c76cc486e1" title="Assignment operator.">operator= </a>(<a class="code" href="class_breakpoint_base.html">BreakpointBase</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00129"></a>00129         {
+<a name="l00130"></a>00130                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
+<a name="l00131"></a>00131             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());
+<a name="l00132"></a>00132         
+<a name="l00133"></a>00133         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00134"></a>00134         }
+<a name="l00135"></a>00135         
+<a name="l00139"></a><a class="code" href="class_breakpoint_base.html#a6538d2eb95254126c751a2d45b3e9359">00139</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase</a> <a class="code" href="class_breakpoint_base.html#a6538d2eb95254126c751a2d45b3e9359" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
+<a name="l00140"></a>00140     {
+<a name="l00141"></a>00141         <span class="keywordflow">return</span> weak.<a class="code" href="class_breakpoint_base.html#a6538d2eb95254126c751a2d45b3e9359" title="Get a weakly linked copy of this object.">fromWeak</a>();
+<a name="l00142"></a>00142     }    
+<a name="l00143"></a>00143         
+<a name="l00144"></a><a class="code" href="class_breakpoint_base.html#a44ae8c361fbfeebecea50b051efa55ad">00144</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase</a>&amp; <a class="code" href="class_breakpoint_base.html#a44ae8c361fbfeebecea50b051efa55ad">getNull</a>() throw()
+<a name="l00145"></a>00145         {
+<a name="l00146"></a>00146                 <span class="keyword">static</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase</a> null;        
+<a name="l00147"></a>00147                 <span class="keywordflow">return</span> null;
+<a name="l00148"></a>00148         }                                   
+<a name="l00149"></a>00149     
+<a name="l00150"></a><a class="code" href="class_breakpoint_base.html#a7aff1f0fd806092609ec909a8761810d">00150</a>     <span class="keyword">inline</span> SampleType <a class="code" href="class_breakpoint_base.html#a7aff1f0fd806092609ec909a8761810d">getTargetLevel</a>() <span class="keyword">const</span> throw()   { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getTargetLevel(); }
+<a name="l00151"></a><a class="code" href="class_breakpoint_base.html#a7016b0f5723009f4dfe5261d78d72c64">00151</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_breakpoint_base.html#a7016b0f5723009f4dfe5261d78d72c64">getTargetTime</a>() <span class="keyword">const</span> throw()        { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getTargetTime(); }
+<a name="l00152"></a><a class="code" href="class_breakpoint_base.html#aef913d7eb5fcf92458518ef7e69671ab">00152</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_breakpoint_base.html#aef913d7eb5fcf92458518ef7e69671ab">isSustainPoint</a>() <span class="keyword">const</span> throw()         { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getNextGateOn() == <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ad883e72c2b96bb913566ae440f6da0b4">BreakpointBase::This</a>; }
+<a name="l00153"></a><a class="code" href="class_breakpoint_base.html#a13691408fcf2c61ce7adf1474838570e">00153</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoint_base.html#a13691408fcf2c61ce7adf1474838570e">getNextGateOn</a>() <span class="keyword">const</span> throw()           { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getNextGateOn(); }
+<a name="l00154"></a><a class="code" href="class_breakpoint_base.html#a589cadcbda2806af5006b0ec95e2ac24">00154</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoint_base.html#a589cadcbda2806af5006b0ec95e2ac24">getNextGateOff</a>() <span class="keyword">const</span> throw()          { <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getNextGateOff(); }
+<a name="l00155"></a>00155    
+<a name="l00156"></a><a class="code" href="class_breakpoint_base.html#ab92b75124230846009b616f7c02fb287">00156</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoint_base.html#ab92b75124230846009b616f7c02fb287">getNext</a> (<span class="keyword">const</span> <span class="keywordtype">bool</span> gate) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00157"></a>00157     {
+<a name="l00158"></a>00158         <span class="keywordflow">return</span> gate ? this-&gt;<a class="code" href="class_breakpoint_base.html#a13691408fcf2c61ce7adf1474838570e">getNextGateOn</a>() : this-&gt;<a class="code" href="class_breakpoint_base.html#a589cadcbda2806af5006b0ec95e2ac24">getNextGateOff</a>();
+<a name="l00159"></a>00159     }
+<a name="l00160"></a>00160 
+<a name="l00161"></a><a class="code" href="class_breakpoint_base.html#ac1a126ae5061c8ff25b46a5c3e5158bd">00161</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_breakpoint_base.html">BreakpointBase</a>);
 <a name="l00162"></a>00162 
-<a name="l00163"></a>00163 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00163"></a>00163 };
 <a name="l00164"></a>00164 
 <a name="l00165"></a>00165 
-<a name="l00166"></a>00166 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00167"></a><a class="code" href="class_breakpoints_internal.html">00167</a> <span class="keyword">class </span><a class="code" href="class_breakpoints_internal.html">BreakpointsInternal</a> : <span class="keyword">public</span> <a class="code" href="class_sender_internal.html">SenderInternal</a>&lt; BreakpointsBase&lt;SampleType&gt; &gt;
-<a name="l00168"></a>00168 {
-<a name="l00169"></a>00169 <span class="keyword">public</span>:
-<a name="l00170"></a><a class="code" href="class_breakpoints_internal.html#a81e7c008cecb32915ef90c6187be0b46">00170</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase&lt;SampleType&gt;</a>     <a class="code" href="class_breakpoints_internal.html#a81e7c008cecb32915ef90c6187be0b46">Container</a>;
-<a name="l00171"></a><a class="code" href="class_breakpoints_internal.html#ab0f92736cd9193a9d7896399efc6bd4f">00171</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase&lt;SampleType&gt;</a>      <a class="code" href="class_breakpoints_internal.html#ab0f92736cd9193a9d7896399efc6bd4f">BreakpointType</a>;
-<a name="l00172"></a><a class="code" href="class_breakpoints_internal.html#a10f3171c4afbec3b3c770e1508e1a1be">00172</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html">ObjectArray&lt;BreakpointType&gt;</a>     <a class="code" href="class_breakpoints_internal.html#a10f3171c4afbec3b3c770e1508e1a1be">BreakpointArrayType</a>;
-<a name="l00173"></a>00173     
-<a name="l00174"></a><a class="code" href="class_breakpoints_internal.html#aa3c3904f5345db2fdcb6618c7ebb9e8b">00174</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>      <a class="code" href="class_breakpoints_internal.html#aa3c3904f5345db2fdcb6618c7ebb9e8b">LevelsArray</a>;
-<a name="l00175"></a><a class="code" href="class_breakpoints_internal.html#abf28568778495c3141c2fe9ad656b0f9">00175</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;double&gt;</a>          <a class="code" href="class_breakpoints_internal.html#abf28568778495c3141c2fe9ad656b0f9">TimesArray</a>;
-<a name="l00176"></a><a class="code" href="class_breakpoints_internal.html#aea7d38e2f824aac631973f73ff79c0c4">00176</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;int&gt;</a>             <a class="code" href="class_breakpoints_internal.html#aea7d38e2f824aac631973f73ff79c0c4">NextArray</a>;
-<a name="l00177"></a>00177     
-<a name="l00178"></a><a class="code" href="class_breakpoints_internal.html#ab33254697afa0f4b7ea2c95cfd551021">00178</a>         <a class="code" href="class_breakpoints_internal.html#ab33254697afa0f4b7ea2c95cfd551021">BreakpointsInternal</a>(<a class="code" href="class_numerical_array.html">LevelsArray</a> <span class="keyword">const</span>&amp; levels,
-<a name="l00179"></a>00179                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> <span class="keyword">const</span>&amp; times,
-<a name="l00180"></a>00180                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOns,
-<a name="l00181"></a>00181                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOffs) <span class="keywordflow">throw</span>()
-<a name="l00182"></a>00182     :   breakpoints (<a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">BreakpointArrayType::withSize</a> (times.length()))
-<a name="l00183"></a>00183         {
-<a name="l00184"></a>00184         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (levels.length() &gt;= 2);
-<a name="l00185"></a>00185         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (times.length() == (levels.length() - 1));
-<a name="l00186"></a>00186         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (((nextGateOns.length() == 0) &amp;&amp; (nextGateOffs.length() == 0)) || 
-<a name="l00187"></a>00187                      ((nextGateOns.length() == (levels.length() - 1))) &amp;&amp; ((nextGateOffs.length() == (levels.length() - 1))));
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189         
-<a name="l00190"></a>00190         <span class="keyword">const</span> SampleType* levelsArray = levels.getArray();
-<a name="l00191"></a>00191         <span class="keyword">const</span> <span class="keywordtype">double</span>* timesArray = times.getArray();
-<a name="l00192"></a>00192         <span class="keyword">const</span> <span class="keywordtype">int</span>* nextOnsArray = nextGateOns.getArray();
-<a name="l00193"></a>00193         <span class="keyword">const</span> <span class="keywordtype">int</span>* nextOffsArray = nextGateOffs.getArray();
-<a name="l00194"></a>00194 
-<a name="l00195"></a>00195         this-&gt;startLevel = *levelsArray++;
-<a name="l00196"></a>00196         
-<a name="l00197"></a>00197         <span class="keyword">const</span> <span class="keywordtype">int</span> numBreakpoints = times.length();
+<a name="l00166"></a>00166 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168 
+<a name="l00169"></a>00169 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00170"></a><a class="code" href="class_breakpoints_internal.html">00170</a> <span class="keyword">class </span><a class="code" href="class_breakpoints_internal.html">BreakpointsInternal</a> : <span class="keyword">public</span> <a class="code" href="class_sender_internal.html">SenderInternal</a>&lt; BreakpointsBase&lt;SampleType&gt; &gt;
+<a name="l00171"></a>00171 {
+<a name="l00172"></a>00172 <span class="keyword">public</span>:
+<a name="l00173"></a><a class="code" href="class_breakpoints_internal.html#a81e7c008cecb32915ef90c6187be0b46">00173</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase&lt;SampleType&gt;</a>     <a class="code" href="class_breakpoints_internal.html#a81e7c008cecb32915ef90c6187be0b46">Container</a>;
+<a name="l00174"></a><a class="code" href="class_breakpoints_internal.html#ab0f92736cd9193a9d7896399efc6bd4f">00174</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase&lt;SampleType&gt;</a>      <a class="code" href="class_breakpoints_internal.html#ab0f92736cd9193a9d7896399efc6bd4f">BreakpointType</a>;
+<a name="l00175"></a><a class="code" href="class_breakpoints_internal.html#a10f3171c4afbec3b3c770e1508e1a1be">00175</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html">ObjectArray&lt;BreakpointType&gt;</a>     <a class="code" href="class_breakpoints_internal.html#a10f3171c4afbec3b3c770e1508e1a1be">BreakpointArrayType</a>;
+<a name="l00176"></a>00176     
+<a name="l00177"></a><a class="code" href="class_breakpoints_internal.html#aa3c3904f5345db2fdcb6618c7ebb9e8b">00177</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>      <a class="code" href="class_breakpoints_internal.html#aa3c3904f5345db2fdcb6618c7ebb9e8b">LevelsArray</a>;
+<a name="l00178"></a><a class="code" href="class_breakpoints_internal.html#abf28568778495c3141c2fe9ad656b0f9">00178</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;double&gt;</a>          <a class="code" href="class_breakpoints_internal.html#abf28568778495c3141c2fe9ad656b0f9">TimesArray</a>;
+<a name="l00179"></a><a class="code" href="class_breakpoints_internal.html#aea7d38e2f824aac631973f73ff79c0c4">00179</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;int&gt;</a>             <a class="code" href="class_breakpoints_internal.html#aea7d38e2f824aac631973f73ff79c0c4">NextArray</a>;
+<a name="l00180"></a>00180     
+<a name="l00181"></a><a class="code" href="class_breakpoints_internal.html#ab33254697afa0f4b7ea2c95cfd551021">00181</a>         <a class="code" href="class_breakpoints_internal.html#ab33254697afa0f4b7ea2c95cfd551021">BreakpointsInternal</a>(<a class="code" href="class_numerical_array.html">LevelsArray</a> <span class="keyword">const</span>&amp; levels,
+<a name="l00182"></a>00182                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> <span class="keyword">const</span>&amp; times,
+<a name="l00183"></a>00183                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOns,
+<a name="l00184"></a>00184                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOffs) <span class="keywordflow">throw</span>()
+<a name="l00185"></a>00185     :   breakpoints (<a class="code" href="class_object_array.html#acfdcf984b61c960961710910fcf4b64e" title="Returns an array with a given size.">BreakpointArrayType::withSize</a> (times.length()))
+<a name="l00186"></a>00186         {
+<a name="l00187"></a>00187         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (levels.length() &gt;= 2);
+<a name="l00188"></a>00188         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (times.length() == (levels.length() - 1));
+<a name="l00189"></a>00189         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (((nextGateOns.length() == 0) &amp;&amp; (nextGateOffs.length() == 0)) || 
+<a name="l00190"></a>00190                      ((nextGateOns.length() == (levels.length() - 1))) &amp;&amp; ((nextGateOffs.length() == (levels.length() - 1))));
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192         <span class="keyword">const</span> SampleType* levelsArray = levels.getArray();
+<a name="l00193"></a>00193         <span class="keyword">const</span> <span class="keywordtype">double</span>* timesArray = times.getArray();
+<a name="l00194"></a>00194         <span class="keyword">const</span> <span class="keywordtype">int</span>* nextOnsArray = nextGateOns.getArray();
+<a name="l00195"></a>00195         <span class="keyword">const</span> <span class="keywordtype">int</span>* nextOffsArray = nextGateOffs.getArray();
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197         this-&gt;startLevel = *levelsArray++;
 <a name="l00198"></a>00198         
-<a name="l00199"></a>00199         <span class="keywordflow">if</span> (nextGateOns.length() != 0)
-<a name="l00200"></a>00200         {
-<a name="l00201"></a>00201             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numBreakpoints; ++i)
-<a name="l00202"></a>00202                 this-&gt;breakpoints.<a class="code" href="class_object_array.html#ad675f23eada53adcadda78f096b3642d" title="Places an item at the given index.">put</a> (i, <a class="code" href="class_breakpoint_base.html">BreakpointType</a> (levelsArray[i],
-<a name="l00203"></a>00203                                                           timesArray[i],
-<a name="l00204"></a>00204                                                           nextOnsArray[i],
-<a name="l00205"></a>00205                                                           nextOffsArray[i]));
-<a name="l00206"></a>00206         } 
-<a name="l00207"></a>00207         <span class="keywordflow">else</span>
-<a name="l00208"></a>00208         {
-<a name="l00209"></a>00209             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numBreakpoints; ++i)
-<a name="l00210"></a>00210                 this-&gt;breakpoints.<a class="code" href="class_object_array.html#ad675f23eada53adcadda78f096b3642d" title="Places an item at the given index.">put</a> (i, <a class="code" href="class_breakpoint_base.html">BreakpointType</a> (levelsArray[i],
-<a name="l00211"></a>00211                                                           timesArray[i]));            
-<a name="l00212"></a>00212         }
-<a name="l00213"></a>00213         }
-<a name="l00214"></a>00214         
-<a name="l00215"></a><a class="code" href="class_breakpoints_internal.html#ad1a97d57f87c4ca0a63253046e3bcdbc">00215</a>         <a class="code" href="class_breakpoints_internal.html#ad1a97d57f87c4ca0a63253046e3bcdbc">~BreakpointsInternal</a>()
-<a name="l00216"></a>00216         {
-<a name="l00217"></a>00217         }
-<a name="l00218"></a>00218     
-<a name="l00219"></a><a class="code" href="class_breakpoints_internal.html#ae703fc3dcc72ed16985e6c68ad6289cf">00219</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoints_internal.html#ae703fc3dcc72ed16985e6c68ad6289cf">getNumBreakpoints</a>() <span class="keyword">const</span> throw()
-<a name="l00220"></a>00220     {
-<a name="l00221"></a>00221         <span class="keywordflow">return</span> breakpoints.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00222"></a>00222     }
-<a name="l00223"></a>00223     
-<a name="l00224"></a><a class="code" href="class_breakpoints_internal.html#a7538babfc9ad3a7bdbf128281dfd8bd1">00224</a>     <span class="keyword">inline</span> SampleType <a class="code" href="class_breakpoints_internal.html#a7538babfc9ad3a7bdbf128281dfd8bd1">getStartLevel</a>() <span class="keyword">const</span> throw()
-<a name="l00225"></a>00225     {
-<a name="l00226"></a>00226         <span class="keywordflow">return</span> startLevel;
-<a name="l00227"></a>00227     }
-<a name="l00228"></a>00228     
-<a name="l00229"></a><a class="code" href="class_breakpoints_internal.html#a60168ec642f24120b63939bce5fc0cbd">00229</a>     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_object_array.html">BreakpointArrayType</a>&amp; <a class="code" href="class_breakpoints_internal.html#a60168ec642f24120b63939bce5fc0cbd">getBreakpoints</a>() <span class="keyword">const</span> throw()
-<a name="l00230"></a>00230     {
-<a name="l00231"></a>00231         <span class="keywordflow">return</span> breakpoints; 
-<a name="l00232"></a>00232     }
-<a name="l00233"></a>00233         
-<a name="l00234"></a>00234 <span class="keyword">private</span>:
-<a name="l00235"></a>00235     SampleType startLevel;
-<a name="l00236"></a>00236     <a class="code" href="class_breakpoints_internal.html#a10f3171c4afbec3b3c770e1508e1a1be">BreakpointArrayType</a> breakpoints;
-<a name="l00237"></a>00237 };
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00241"></a>00241 
-<a name="l00243"></a>00243 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
-<a name="l00244"></a><a class="code" href="class_breakpoints_base.html">00244</a> <span class="keyword">class </span><a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> : <span class="keyword">public</span> <a class="code" href="class_sender_container.html">SenderContainer</a>&lt; BreakpointsInternal&lt;SampleType&gt; &gt;
-<a name="l00245"></a>00245 {
-<a name="l00246"></a>00246 <span class="keyword">public</span>:
-<a name="l00247"></a><a class="code" href="class_breakpoints_base.html#a3c37ca9342fbdc751bf51b3d4251aeeb">00247</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoints_internal.html">BreakpointsInternal&lt;SampleType&gt;</a>         <a class="code" href="class_breakpoints_base.html#a3c37ca9342fbdc751bf51b3d4251aeeb">Internal</a>;
-<a name="l00248"></a><a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">00248</a>     <span class="keyword">typedef</span> <a class="code" href="class_sender_container.html">SenderContainer&lt;Internal&gt;</a>               <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a>;
-<a name="l00249"></a><a class="code" href="class_breakpoints_base.html#a8bf1f8ed1b7e0c4f46a691774929f4fc">00249</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;BreakpointsBase&gt;</a>   <a class="code" href="class_breakpoints_base.html#a8bf1f8ed1b7e0c4f46a691774929f4fc">Weak</a>;    
-<a name="l00250"></a>00250     
-<a name="l00251"></a><a class="code" href="class_breakpoints_base.html#a7ba8c3614d1333c9fd8ca3b51e3a51cc">00251</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>              <a class="code" href="class_breakpoints_base.html#a7ba8c3614d1333c9fd8ca3b51e3a51cc">LevelsArray</a>;
-<a name="l00252"></a><a class="code" href="class_breakpoints_base.html#ab189b2897aef7a1958cf54ed6fe7fdae">00252</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;double&gt;</a>                  <a class="code" href="class_breakpoints_base.html#ab189b2897aef7a1958cf54ed6fe7fdae">TimesArray</a>;
-<a name="l00253"></a><a class="code" href="class_breakpoints_base.html#ab8e7d98777a0ad5f2d300257d289c21f">00253</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;int&gt;</a>                     <a class="code" href="class_breakpoints_base.html#ab8e7d98777a0ad5f2d300257d289c21f">NextArray</a>;
-<a name="l00254"></a>00254     
-<a name="l00255"></a><a class="code" href="class_breakpoints_base.html#aac0d4722a8d847a1cc53458ad94277b2">00255</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase&lt;SampleType&gt;</a>              <a class="code" href="class_breakpoints_base.html#aac0d4722a8d847a1cc53458ad94277b2">BreakpointType</a>;
+<a name="l00199"></a>00199         <span class="keyword">const</span> <span class="keywordtype">int</span> numBreakpoints = times.length();
+<a name="l00200"></a>00200         
+<a name="l00201"></a>00201         <span class="keywordflow">if</span> (nextGateOns.length() != 0)
+<a name="l00202"></a>00202         {
+<a name="l00203"></a>00203             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numBreakpoints; ++i)
+<a name="l00204"></a>00204             {
+<a name="l00205"></a>00205                 this-&gt;breakpoints.<a class="code" href="class_object_array.html#ad675f23eada53adcadda78f096b3642d" title="Places an item at the given index.">put</a> (i, <a class="code" href="class_breakpoint_base.html">BreakpointType</a> (levelsArray[i],
+<a name="l00206"></a>00206                                                           timesArray[i],
+<a name="l00207"></a>00207                                                           nextOnsArray[i],
+<a name="l00208"></a>00208                                                           nextOffsArray[i]));
+<a name="l00209"></a>00209             }
+<a name="l00210"></a>00210         } 
+<a name="l00211"></a>00211         <span class="keywordflow">else</span>
+<a name="l00212"></a>00212         {
+<a name="l00213"></a>00213             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numBreakpoints; ++i)
+<a name="l00214"></a>00214             {
+<a name="l00215"></a>00215                 this-&gt;breakpoints.<a class="code" href="class_object_array.html#ad675f23eada53adcadda78f096b3642d" title="Places an item at the given index.">put</a> (i, <a class="code" href="class_breakpoint_base.html">BreakpointType</a> (levelsArray[i],
+<a name="l00216"></a>00216                                                           timesArray[i]));  
+<a name="l00217"></a>00217             }
+<a name="l00218"></a>00218         }
+<a name="l00219"></a>00219         }
+<a name="l00220"></a>00220         
+<a name="l00221"></a><a class="code" href="class_breakpoints_internal.html#ad1a97d57f87c4ca0a63253046e3bcdbc">00221</a>         <a class="code" href="class_breakpoints_internal.html#ad1a97d57f87c4ca0a63253046e3bcdbc">~BreakpointsInternal</a>()
+<a name="l00222"></a>00222         {
+<a name="l00223"></a>00223         }
+<a name="l00224"></a>00224     
+<a name="l00225"></a><a class="code" href="class_breakpoints_internal.html#ae703fc3dcc72ed16985e6c68ad6289cf">00225</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoints_internal.html#ae703fc3dcc72ed16985e6c68ad6289cf">getNumBreakpoints</a>() <span class="keyword">const</span> throw()
+<a name="l00226"></a>00226     {
+<a name="l00227"></a>00227         <span class="keywordflow">return</span> breakpoints.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00228"></a>00228     }
+<a name="l00229"></a>00229     
+<a name="l00230"></a><a class="code" href="class_breakpoints_internal.html#a7538babfc9ad3a7bdbf128281dfd8bd1">00230</a>     <span class="keyword">inline</span> SampleType <a class="code" href="class_breakpoints_internal.html#a7538babfc9ad3a7bdbf128281dfd8bd1">getStartLevel</a>() <span class="keyword">const</span> throw()
+<a name="l00231"></a>00231     {
+<a name="l00232"></a>00232         <span class="keywordflow">return</span> startLevel;
+<a name="l00233"></a>00233     }
+<a name="l00234"></a>00234     
+<a name="l00235"></a><a class="code" href="class_breakpoints_internal.html#a60168ec642f24120b63939bce5fc0cbd">00235</a>     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_object_array.html">BreakpointArrayType</a>&amp; <a class="code" href="class_breakpoints_internal.html#a60168ec642f24120b63939bce5fc0cbd">getBreakpoints</a>() <span class="keyword">const</span> throw()
+<a name="l00236"></a>00236     {
+<a name="l00237"></a>00237         <span class="keywordflow">return</span> breakpoints; 
+<a name="l00238"></a>00238     }
+<a name="l00239"></a>00239         
+<a name="l00240"></a>00240 <span class="keyword">private</span>:
+<a name="l00241"></a>00241     SampleType startLevel;
+<a name="l00242"></a>00242     <a class="code" href="class_breakpoints_internal.html#a10f3171c4afbec3b3c770e1508e1a1be">BreakpointArrayType</a> breakpoints;
+<a name="l00243"></a>00243 };
+<a name="l00244"></a>00244 
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00247"></a>00247 
+<a name="l00249"></a>00249 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SampleType&gt;
+<a name="l00250"></a><a class="code" href="class_breakpoints_base.html">00250</a> <span class="keyword">class </span><a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> : <span class="keyword">public</span> <a class="code" href="class_sender_container.html">SenderContainer</a>&lt; BreakpointsInternal&lt;SampleType&gt; &gt;
+<a name="l00251"></a>00251 {
+<a name="l00252"></a>00252 <span class="keyword">public</span>:
+<a name="l00253"></a><a class="code" href="class_breakpoints_base.html#a3c37ca9342fbdc751bf51b3d4251aeeb">00253</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoints_internal.html">BreakpointsInternal&lt;SampleType&gt;</a>         <a class="code" href="class_breakpoints_base.html#a3c37ca9342fbdc751bf51b3d4251aeeb">Internal</a>;
+<a name="l00254"></a><a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">00254</a>     <span class="keyword">typedef</span> <a class="code" href="class_sender_container.html">SenderContainer&lt;Internal&gt;</a>               <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a>;
+<a name="l00255"></a><a class="code" href="class_breakpoints_base.html#a8bf1f8ed1b7e0c4f46a691774929f4fc">00255</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;BreakpointsBase&gt;</a>   <a class="code" href="class_breakpoints_base.html#a8bf1f8ed1b7e0c4f46a691774929f4fc">Weak</a>;    
 <a name="l00256"></a>00256     
-<a name="l00257"></a><a class="code" href="class_breakpoints_base.html#ac201ec147a65b0ab303a8ac925301944">00257</a>     <span class="keyword">typedef</span> <a class="code" href="class_type_utility.html">TypeUtility&lt;SampleType&gt;</a>                 <a class="code" href="class_breakpoints_base.html#ac201ec147a65b0ab303a8ac925301944">SampleTypeUtility</a>;
-<a name="l00258"></a>00258     
-<a name="l00259"></a>00259     
-<a name="l00260"></a><a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">00260</a>         <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_numerical_array.html">LevelsArray</a> <span class="keyword">const</span>&amp; levels = <a class="code" href="class_numerical_array.html">LevelsArray</a> (SampleType (0), SampleType (0)),
-<a name="l00261"></a>00261                      <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> <span class="keyword">const</span>&amp; times = <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> (0.0),
-<a name="l00262"></a>00262                      <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOns = <a class="code" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NextArray::getNull</a>(),
-<a name="l00263"></a>00263                      <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOffs = <a class="code" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NextArray::getNull</a>()) throw()
-<a name="l00264"></a>00264         :       <a class="code" href="class_sender_container.html">Base</a> (new <a class="code" href="class_breakpoints_internal.html">Internal</a>(levels, times, nextGateOns, nextGateOffs))
-<a name="l00265"></a>00265         {
-<a name="l00266"></a>00266         }
-<a name="l00267"></a>00267         
-<a name="l00268"></a><a class="code" href="class_breakpoints_base.html#abe0680980bbfee1766e72a9a37827d26">00268</a>     <span class="keyword">explicit</span> <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_breakpoints_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
-<a name="l00269"></a>00269         :       <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a> (internalToUse)
-<a name="l00270"></a>00270         {
-<a name="l00271"></a>00271         } 
-<a name="l00272"></a>00272     
-<a name="l00273"></a><a class="code" href="class_breakpoints_base.html#ab025b787592999092c151c7ebb83dc1d">00273</a>     <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
-<a name="l00274"></a>00274         :       <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
-<a name="l00275"></a>00275         {
-<a name="l00276"></a>00276         }          
-<a name="l00277"></a>00277     
-<a name="l00278"></a><a class="code" href="class_breakpoints_base.html#ae8d3a04ec651996ab32413b6a861d887">00278</a>     <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00279"></a>00279     :   <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a> (other.as&lt;<a class="code" href="class_breakpoints_base.html">BreakpointsBase</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>())
-<a name="l00280"></a>00280     {
-<a name="l00281"></a>00281     }    
-<a name="l00282"></a>00282     
-<a name="l00284"></a><a class="code" href="class_breakpoints_base.html#adf01b65acbc2839d11403439097d5e61">00284</a>     <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a>&amp; <a class="code" href="class_breakpoints_base.html#adf01b65acbc2839d11403439097d5e61" title="Assignment operator.">operator= </a>(<a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00285"></a>00285         {
-<a name="l00286"></a>00286                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00287"></a>00287             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.containerCopy().getInternal());
-<a name="l00288"></a>00288         
-<a name="l00289"></a>00289         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00290"></a>00290         }
-<a name="l00291"></a>00291     
-<a name="l00295"></a><a class="code" href="class_breakpoints_base.html#acc7dfa070da4bc8934dfadaa3d648e6e">00295</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="code" href="class_breakpoints_base.html#acc7dfa070da4bc8934dfadaa3d648e6e" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
-<a name="l00296"></a>00296     {
-<a name="l00297"></a>00297         <span class="keywordflow">return</span> weak.<a class="code" href="class_breakpoints_base.html#acc7dfa070da4bc8934dfadaa3d648e6e" title="Get a weakly linked copy of this object.">fromWeak</a>();
-<a name="l00298"></a>00298     }    
-<a name="l00299"></a>00299     
-<a name="l00300"></a><a class="code" href="class_breakpoints_base.html#a605bb5bec9668cc108647ed714177f37">00300</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a>&amp; <a class="code" href="class_breakpoints_base.html#a605bb5bec9668cc108647ed714177f37">getNull</a>() throw()
-<a name="l00301"></a>00301         {
-<a name="l00302"></a>00302                 <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> null;        
-<a name="l00303"></a>00303                 <span class="keywordflow">return</span> null;
-<a name="l00304"></a>00304         }                      
+<a name="l00257"></a><a class="code" href="class_breakpoints_base.html#a7ba8c3614d1333c9fd8ca3b51e3a51cc">00257</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>              <a class="code" href="class_breakpoints_base.html#a7ba8c3614d1333c9fd8ca3b51e3a51cc">LevelsArray</a>;
+<a name="l00258"></a><a class="code" href="class_breakpoints_base.html#ab189b2897aef7a1958cf54ed6fe7fdae">00258</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;double&gt;</a>                  <a class="code" href="class_breakpoints_base.html#ab189b2897aef7a1958cf54ed6fe7fdae">TimesArray</a>;
+<a name="l00259"></a><a class="code" href="class_breakpoints_base.html#ab8e7d98777a0ad5f2d300257d289c21f">00259</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray&lt;int&gt;</a>                     <a class="code" href="class_breakpoints_base.html#ab8e7d98777a0ad5f2d300257d289c21f">NextArray</a>;
+<a name="l00260"></a>00260     
+<a name="l00261"></a><a class="code" href="class_breakpoints_base.html#aac0d4722a8d847a1cc53458ad94277b2">00261</a>     <span class="keyword">typedef</span> <a class="code" href="class_breakpoint_base.html">BreakpointBase&lt;SampleType&gt;</a>              <a class="code" href="class_breakpoints_base.html#aac0d4722a8d847a1cc53458ad94277b2">BreakpointType</a>;
+<a name="l00262"></a>00262     
+<a name="l00263"></a><a class="code" href="class_breakpoints_base.html#ac201ec147a65b0ab303a8ac925301944">00263</a>     <span class="keyword">typedef</span> <a class="code" href="class_type_utility.html">TypeUtility&lt;SampleType&gt;</a>                 <a class="code" href="class_breakpoints_base.html#ac201ec147a65b0ab303a8ac925301944">SampleTypeUtility</a>;
+<a name="l00264"></a>00264     
+<a name="l00265"></a>00265     
+<a name="l00266"></a><a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">00266</a>         <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_numerical_array.html">LevelsArray</a> <span class="keyword">const</span>&amp; levels = <a class="code" href="class_numerical_array.html">LevelsArray</a> (SampleType (0), SampleType (0)),
+<a name="l00267"></a>00267                      <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> <span class="keyword">const</span>&amp; times = <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> (0.0),
+<a name="l00268"></a>00268                      <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOns = <a class="code" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NextArray::getNull</a>(),
+<a name="l00269"></a>00269                      <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> <span class="keyword">const</span>&amp; nextGateOffs = <a class="code" href="class_numerical_array.html#acd997a3e645f9c570204a3cb6cd5075e">NextArray::getNull</a>()) throw()
+<a name="l00270"></a>00270         :       <a class="code" href="class_sender_container.html">Base</a> (new <a class="code" href="class_breakpoints_internal.html">Internal</a>(levels, times, nextGateOns, nextGateOffs))
+<a name="l00271"></a>00271         {
+<a name="l00272"></a>00272         }
+<a name="l00273"></a>00273         
+<a name="l00274"></a><a class="code" href="class_breakpoints_base.html#abe0680980bbfee1766e72a9a37827d26">00274</a>     <span class="keyword">explicit</span> <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_breakpoints_internal.html">Internal</a>* internalToUse) <span class="keywordflow">throw</span>() 
+<a name="l00275"></a>00275         :       <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a> (internalToUse)
+<a name="l00276"></a>00276         {
+<a name="l00277"></a>00277         } 
+<a name="l00278"></a>00278     
+<a name="l00279"></a><a class="code" href="class_breakpoints_base.html#ab025b787592999092c151c7ebb83dc1d">00279</a>     <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <span class="keyword">const</span>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00280"></a>00280         :       <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a> (static_cast&lt;Base const&amp;&gt; (copy))
+<a name="l00281"></a>00281         {
+<a name="l00282"></a>00282         }          
+<a name="l00283"></a>00283     
+<a name="l00284"></a><a class="code" href="class_breakpoints_base.html#ae8d3a04ec651996ab32413b6a861d887">00284</a>     <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_dynamic.html">Dynamic</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00285"></a>00285     :   <a class="code" href="class_breakpoints_base.html#ab2a5694bf0f32b7d4c7c99cf501ec050">Base</a> (other.as&lt;<a class="code" href="class_breakpoints_base.html">BreakpointsBase</a>&gt;().<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>())
+<a name="l00286"></a>00286     {
+<a name="l00287"></a>00287     }    
+<a name="l00288"></a>00288     
+<a name="l00290"></a><a class="code" href="class_breakpoints_base.html#adf01b65acbc2839d11403439097d5e61">00290</a>     <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a>&amp; <a class="code" href="class_breakpoints_base.html#adf01b65acbc2839d11403439097d5e61" title="Assignment operator.">operator= </a>(<a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00291"></a>00291         {
+<a name="l00292"></a>00292                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
+<a name="l00293"></a>00293             this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">setInternal</a> (other.getInternal());
+<a name="l00294"></a>00294         
+<a name="l00295"></a>00295         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00296"></a>00296         }
+<a name="l00297"></a>00297     
+<a name="l00301"></a><a class="code" href="class_breakpoints_base.html#acc7dfa070da4bc8934dfadaa3d648e6e">00301</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="code" href="class_breakpoints_base.html#acc7dfa070da4bc8934dfadaa3d648e6e" title="Get a weakly linked copy of this object.">fromWeak</a> (<a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">Weak</a> <span class="keyword">const</span>&amp; weak) <span class="keywordflow">throw</span>()
+<a name="l00302"></a>00302     {
+<a name="l00303"></a>00303         <span class="keywordflow">return</span> weak.<a class="code" href="class_breakpoints_base.html#acc7dfa070da4bc8934dfadaa3d648e6e" title="Get a weakly linked copy of this object.">fromWeak</a>();
+<a name="l00304"></a>00304     }    
 <a name="l00305"></a>00305     
-<a name="l00306"></a><a class="code" href="class_breakpoints_base.html#a568d5c6345d700014ea89fb6180228c7">00306</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="code" href="class_breakpoints_base.html#a568d5c6345d700014ea89fb6180228c7">linen</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> attackTime, 
-<a name="l00307"></a>00307                                   <span class="keyword">const</span> <span class="keywordtype">double</span> sustainTime,
-<a name="l00308"></a>00308                                   <span class="keyword">const</span> <span class="keywordtype">double</span> releaseTime) <span class="keywordflow">throw</span>()
-<a name="l00309"></a>00309     {
-<a name="l00310"></a>00310         <span class="keyword">const</span> SampleType peak = <a class="code" href="class_type_utility.html#a928612347b795b300eca9358243940d5">SampleTypeUtility::getTypePeak</a>();
-<a name="l00311"></a>00311         <span class="keywordflow">return</span> <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_numerical_array.html">LevelsArray</a> (SampleType (0), peak, peak, SampleType (0)),
-<a name="l00312"></a>00312                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> (attackTime, sustainTime, releaseTime));
-<a name="l00313"></a>00313     }
-<a name="l00314"></a>00314     
-<a name="l00315"></a><a class="code" href="class_breakpoints_base.html#a3ad483ff984517389cb7ac0c3df6e918">00315</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="code" href="class_breakpoints_base.html#a3ad483ff984517389cb7ac0c3df6e918">adsr</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> attackTime, 
-<a name="l00316"></a>00316                                  <span class="keyword">const</span> <span class="keywordtype">double</span> decayTime,
-<a name="l00317"></a>00317                                  <span class="keyword">const</span> SampleType sustainLevel,
-<a name="l00318"></a>00318                                  <span class="keyword">const</span> <span class="keywordtype">double</span> releaseTime) <span class="keywordflow">throw</span>()
-<a name="l00319"></a>00319     {
-<a name="l00320"></a>00320         <span class="keyword">const</span> SampleType peak = <a class="code" href="class_type_utility.html#a928612347b795b300eca9358243940d5">SampleTypeUtility::getTypePeak</a>();
-<a name="l00321"></a>00321         <span class="keywordflow">return</span> <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_numerical_array.html">LevelsArray</a> (SampleType (0), peak, sustainLevel, SampleType (0)),
-<a name="l00322"></a>00322                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> (attackTime, decayTime, releaseTime),
-<a name="l00323"></a>00323                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> (<a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointType::Next</a>, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ad883e72c2b96bb913566ae440f6da0b4">BreakpointType::This</a>, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointType::Next</a>),
-<a name="l00324"></a>00324                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> (<a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointType::Next</a>, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointType::Next</a>, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointType::Next</a>));
-<a name="l00325"></a>00325     }
-<a name="l00326"></a>00326     
-<a name="l00327"></a>00327     
-<a name="l00328"></a><a class="code" href="class_breakpoints_base.html#a5627a4403a12edddf9758c58a0c65745">00328</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoints_base.html#a5627a4403a12edddf9758c58a0c65745">getNumBreakpoints</a>() <span class="keyword">const</span> throw()
-<a name="l00329"></a>00329     {
-<a name="l00330"></a>00330         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getNumBreakpoints();
-<a name="l00331"></a>00331     }
-<a name="l00332"></a>00332     
-<a name="l00333"></a><a class="code" href="class_breakpoints_base.html#a75dc4c8bbee37b6130d11a10b912ebc9">00333</a>     <span class="keyword">inline</span> SampleType <a class="code" href="class_breakpoints_base.html#a75dc4c8bbee37b6130d11a10b912ebc9">getStartLevel</a>() <span class="keyword">const</span> throw()
-<a name="l00334"></a>00334     {
-<a name="l00335"></a>00335         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getStartLevel();
-<a name="l00336"></a>00336     }
-<a name="l00337"></a>00337     
-<a name="l00338"></a><a class="code" href="class_breakpoints_base.html#a08e6fbc2ec0c45f1ae878ba0e2b91dfa">00338</a>     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_breakpoint_base.html">BreakpointType</a>&amp; <a class="code" href="class_breakpoints_base.html#a08e6fbc2ec0c45f1ae878ba0e2b91dfa">atUnchecked</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
-<a name="l00339"></a>00339     {
-<a name="l00340"></a>00340         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#af12280dcb4c44c263151d5aad6f3b417">getInternal</a>()-&gt;getBreakpoints().atUnchecked (index);
-<a name="l00341"></a>00341     }
-<a name="l00342"></a>00342     
-<a name="l00343"></a>00343 };
-<a name="l00344"></a>00344 
-<a name="l00345"></a>00345 
-<a name="l00346"></a>00346 <span class="preprocessor">#endif // PLONK_BREAKPOINTS_H</span>
+<a name="l00306"></a><a class="code" href="class_breakpoints_base.html#a605bb5bec9668cc108647ed714177f37">00306</a>     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a>&amp; <a class="code" href="class_breakpoints_base.html#a605bb5bec9668cc108647ed714177f37">getNull</a>() throw()
+<a name="l00307"></a>00307         {
+<a name="l00308"></a>00308                 <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> null;        
+<a name="l00309"></a>00309                 <span class="keywordflow">return</span> null;
+<a name="l00310"></a>00310         }                      
+<a name="l00311"></a>00311     
+<a name="l00312"></a><a class="code" href="class_breakpoints_base.html#a568d5c6345d700014ea89fb6180228c7">00312</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="code" href="class_breakpoints_base.html#a568d5c6345d700014ea89fb6180228c7">linen</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> attackTime, 
+<a name="l00313"></a>00313                                   <span class="keyword">const</span> <span class="keywordtype">double</span> sustainTime,
+<a name="l00314"></a>00314                                   <span class="keyword">const</span> <span class="keywordtype">double</span> releaseTime) <span class="keywordflow">throw</span>()
+<a name="l00315"></a>00315     {
+<a name="l00316"></a>00316         <span class="keyword">const</span> SampleType peak = <a class="code" href="class_type_utility.html#a928612347b795b300eca9358243940d5">SampleTypeUtility::getTypePeak</a>();
+<a name="l00317"></a>00317         <span class="keywordflow">return</span> <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_numerical_array.html">LevelsArray</a> (SampleType (0), peak, peak, SampleType (0)),
+<a name="l00318"></a>00318                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> (attackTime, sustainTime, releaseTime));
+<a name="l00319"></a>00319     }
+<a name="l00320"></a>00320     
+<a name="l00321"></a><a class="code" href="class_breakpoints_base.html#a3ad483ff984517389cb7ac0c3df6e918">00321</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="code" href="class_breakpoints_base.html#a3ad483ff984517389cb7ac0c3df6e918">adsr</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> attackTime, 
+<a name="l00322"></a>00322                                  <span class="keyword">const</span> <span class="keywordtype">double</span> decayTime,
+<a name="l00323"></a>00323                                  <span class="keyword">const</span> SampleType sustainLevel,
+<a name="l00324"></a>00324                                  <span class="keyword">const</span> <span class="keywordtype">double</span> releaseTime) <span class="keywordflow">throw</span>()
+<a name="l00325"></a>00325     {
+<a name="l00326"></a>00326         <span class="keyword">const</span> <span class="keywordtype">int</span> lastPoint = 2;
+<a name="l00327"></a>00327         <span class="keyword">const</span> SampleType peak = <a class="code" href="class_type_utility.html#a928612347b795b300eca9358243940d5">SampleTypeUtility::getTypePeak</a>();
+<a name="l00328"></a>00328         <span class="keywordflow">return</span> <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_numerical_array.html">LevelsArray</a> (SampleType (0), peak, sustainLevel, SampleType (0)),
+<a name="l00329"></a>00329                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> (attackTime, decayTime, releaseTime),
+<a name="l00330"></a>00330                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> (<a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ab928e6bf1c6f2d4a2b65d955485091f9">BreakpointType::Next</a>, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ad883e72c2b96bb913566ae440f6da0b4">BreakpointType::This</a>, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2af961ec176ad5b29bc0d925dc43b10e4b">BreakpointType::End</a>),
+<a name="l00331"></a>00331                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> (lastPoint, lastPoint, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2af961ec176ad5b29bc0d925dc43b10e4b">BreakpointType::End</a>));
+<a name="l00332"></a>00332     }
+<a name="l00333"></a>00333     
+<a name="l00334"></a><a class="code" href="class_breakpoints_base.html#a33777c9dfb3831efd3d4b7d6bcf70c8d">00334</a>     <span class="keyword">static</span> <a class="code" href="class_breakpoints_base.html">BreakpointsBase</a> <a class="code" href="class_breakpoints_base.html#a33777c9dfb3831efd3d4b7d6bcf70c8d">asr</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> attackTime, 
+<a name="l00335"></a>00335                                 <span class="keyword">const</span> SampleType sustainLevel,
+<a name="l00336"></a>00336                                 <span class="keyword">const</span> <span class="keywordtype">double</span> releaseTime) <span class="keywordflow">throw</span>()
+<a name="l00337"></a>00337     {
+<a name="l00338"></a>00338         <span class="keyword">const</span> <span class="keywordtype">int</span> lastPoint = 1;
+<a name="l00339"></a>00339         <span class="keywordflow">return</span> <a class="code" href="class_breakpoints_base.html#a2365c37d577ac4c40be2283849d2698f">BreakpointsBase</a> (<a class="code" href="class_numerical_array.html">LevelsArray</a> (SampleType (0), sustainLevel, SampleType (0)),
+<a name="l00340"></a>00340                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">TimesArray</a> (attackTime, releaseTime),
+<a name="l00341"></a>00341                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> (<a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2ad883e72c2b96bb913566ae440f6da0b4">BreakpointType::This</a>, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2af961ec176ad5b29bc0d925dc43b10e4b">BreakpointType::End</a>),
+<a name="l00342"></a>00342                                 <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NextArray</a> (lastPoint, <a class="code" href="class_breakpoint_base.html#adf1bd10a53c974a00df2b96ee90e43b2af961ec176ad5b29bc0d925dc43b10e4b">BreakpointType::End</a>));
+<a name="l00343"></a>00343     }
+<a name="l00344"></a>00344     
+<a name="l00345"></a><a class="code" href="class_breakpoints_base.html#a5627a4403a12edddf9758c58a0c65745">00345</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_breakpoints_base.html#a5627a4403a12edddf9758c58a0c65745">getNumBreakpoints</a>() <span class="keyword">const</span> throw()
+<a name="l00346"></a>00346     {
+<a name="l00347"></a>00347         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getNumBreakpoints();
+<a name="l00348"></a>00348     }
+<a name="l00349"></a>00349     
+<a name="l00350"></a><a class="code" href="class_breakpoints_base.html#a75dc4c8bbee37b6130d11a10b912ebc9">00350</a>     <span class="keyword">inline</span> SampleType <a class="code" href="class_breakpoints_base.html#a75dc4c8bbee37b6130d11a10b912ebc9">getStartLevel</a>() <span class="keyword">const</span> throw()
+<a name="l00351"></a>00351     {
+<a name="l00352"></a>00352         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getStartLevel();
+<a name="l00353"></a>00353     }
+<a name="l00354"></a>00354     
+<a name="l00355"></a><a class="code" href="class_breakpoints_base.html#a08e6fbc2ec0c45f1ae878ba0e2b91dfa">00355</a>     <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_breakpoint_base.html">BreakpointType</a>&amp; <a class="code" href="class_breakpoints_base.html#a08e6fbc2ec0c45f1ae878ba0e2b91dfa">atUnchecked</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00356"></a>00356     {
+<a name="l00357"></a>00357         <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_smart_pointer_container_base.html#a6d288e885102290e991d01ae06eaacde">getInternal</a>()-&gt;getBreakpoints().atUnchecked (index);
+<a name="l00358"></a>00358     }
+<a name="l00359"></a>00359     
+<a name="l00360"></a><a class="code" href="class_breakpoints_base.html#a5fd37bdc7f608d9643eb67c992eba402">00360</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_breakpoints_base.html">BreakpointsBase</a>);
+<a name="l00361"></a>00361 };
+<a name="l00362"></a>00362 
+<a name="l00363"></a>00363 
+<a name="l00364"></a>00364 <span class="preprocessor">#endif // PLONK_BREAKPOINTS_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -423,7 +432,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:46 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:44 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

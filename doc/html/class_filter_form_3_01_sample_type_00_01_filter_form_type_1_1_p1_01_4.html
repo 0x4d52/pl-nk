@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,8 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="FilterForm&lt; SampleType, FilterFormType::P1 &gt;" --><!-- doxytag: inherits="FilterFormBase&lt; SampleType, FilterFormType::P1 &gt;" -->
 <p>One-pole form.  
  <a href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p1_01_4.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___filter_forms_8h_source.html">plonk_FilterForms.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for FilterForm&lt; SampleType, FilterFormType::P1 &gt;:</div>
 <div class="dyncontent">
@@ -113,36 +110,6 @@ class FilterForm&lt; SampleType, FilterFormType::P1 &gt;</h3>
 <p>One-pole form. </p>
 <p>Direct Form II implementation. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a4cc411e2564c8c84ce267d80b4f9653d"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::Buffer" ref="a4cc411e2564c8c84ce267d80b4f9653d" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a218d3fd743b419476e70c6696064193f"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::Data" ref="a218d3fd743b419476e70c6696064193f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_filter_data.html">FilterData</a>&lt;SampleType, FilterFormType::P1&gt; <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::<a class="el" href="struct_filter_data.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a513363c3e89051c4e54726fb1319bdac"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::SampleDataType" ref="a513363c3e89051c4e54726fb1319bdac" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -166,6 +133,36 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4cc411e2564c8c84ce267d80b4f9653d"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::Buffer" ref="a4cc411e2564c8c84ce267d80b4f9653d" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a218d3fd743b419476e70c6696064193f"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::Data" ref="a218d3fd743b419476e70c6696064193f" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_filter_data.html">FilterData</a>&lt;SampleType, FilterFormType::P1&gt; <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::<a class="el" href="struct_filter_data.html">Data</a></td>
         </tr>
       </table>
 </div>
@@ -249,6 +246,76 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a3757b5c6693d923c24868d30b06da177"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::process" ref="a3757b5c6693d923c24868d30b06da177" args="(SampleType const &amp;input, const SampleType *coeffs, SampleType &amp;y1)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static SampleType <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::process </td>
+          <td>(</td>
+          <td class="paramtype">SampleType const &amp;&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const SampleType *&#160;</td>
+          <td class="paramname"><em>coeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType &amp;&#160;</td>
+          <td class="paramname"><em>y1</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a575d10630ab8e7d9be3d0e3ec7703109"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::process" ref="a575d10630ab8e7d9be3d0e3ec7703109" args="(SampleType const &amp;input, const SampleType *coeffs, Data &amp;data)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static SampleType <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::process </td>
+          <td>(</td>
+          <td class="paramtype">SampleType const &amp;&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const SampleType *&#160;</td>
+          <td class="paramname"><em>coeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_filter_data.html">Data</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a5d3760214deb66480fdaed9229cb1123"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::process" ref="a5d3760214deb66480fdaed9229cb1123" args="(SampleType *const outputSamples, const int outputLength, UnitType &amp;inputUnit, UnitType &amp;coeffsUnit, Data &amp;data, ProcessInfo &amp;info, const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -308,76 +375,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a575d10630ab8e7d9be3d0e3ec7703109"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::process" ref="a575d10630ab8e7d9be3d0e3ec7703109" args="(SampleType const &amp;input, const SampleType *coeffs, Data &amp;data)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static SampleType <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::process </td>
-          <td>(</td>
-          <td class="paramtype">SampleType const &amp;&#160;</td>
-          <td class="paramname"><em>input</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const SampleType *&#160;</td>
-          <td class="paramname"><em>coeffs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_filter_data.html">Data</a> &amp;&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3757b5c6693d923c24868d30b06da177"></a><!-- doxytag: member="FilterForm&lt; SampleType, FilterFormType::P1 &gt;::process" ref="a3757b5c6693d923c24868d30b06da177" args="(SampleType const &amp;input, const SampleType *coeffs, SampleType &amp;y1)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static SampleType <a class="el" href="class_filter_form.html">FilterForm</a>&lt; SampleType, FilterFormType::P1 &gt;::process </td>
-          <td>(</td>
-          <td class="paramtype">SampleType const &amp;&#160;</td>
-          <td class="paramname"><em>input</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const SampleType *&#160;</td>
-          <td class="paramname"><em>coeffs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SampleType &amp;&#160;</td>
-          <td class="paramname"><em>y1</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_forms_8h_source.html">plonk_FilterForms.h</a></li>
 </ul>
@@ -396,7 +393,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

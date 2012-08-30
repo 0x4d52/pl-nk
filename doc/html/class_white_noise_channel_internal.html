@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,21 +71,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="WhiteNoiseChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;" -->
 <p>White noise generator.  
  <a href="class_white_noise_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___white_noise_8h_source.html">plonk_WhiteNoise.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for WhiteNoiseChannelInternal&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_white_noise_channel_internal.png" usemap="#WhiteNoiseChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="WhiteNoiseChannelInternal&lt; SampleType &gt;_map" name="WhiteNoiseChannelInternal&lt; SampleType &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="832,168,1377,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="555,112,1100,136"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="832,224,1377,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="555,168,1100,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1110,168,1655,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,545,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="555,112,1100,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1110,112,1655,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,545,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="555,56,1100,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1110,56,1655,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,545,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,545,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,545,24"/>
 </map>
  </div></div>
 
@@ -125,23 +123,6 @@ class WhiteNoiseChannelInternal&lt; SampleType &gt;</h3>
 
 <p>White noise generator. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a1de39b16727c1986cebfd76d5f3d8d60"></a><!-- doxytag: member="WhiteNoiseChannelInternal::ChannelType" ref="a1de39b16727c1986cebfd76d5f3d8d60" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ad00e66be56b7faa752713d293fb43766"></a><!-- doxytag: member="WhiteNoiseChannelInternal::Data" ref="ad00e66be56b7faa752713d293fb43766" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,6 +157,38 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1de39b16727c1986cebfd76d5f3d8d60"></a><!-- doxytag: member="WhiteNoiseChannelInternal::ChannelType" ref="a1de39b16727c1986cebfd76d5f3d8d60" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelData&lt; WhiteNoiseChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a99adb876977bb3a0b08ccb7a981e322b"></a><!-- doxytag: member="WhiteNoiseChannelInternal::WhiteNoiseInternal" ref="a99adb876977bb3a0b08ccb7a981e322b" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseInternal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -228,21 +241,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a99adb876977bb3a0b08ccb7a981e322b"></a><!-- doxytag: member="WhiteNoiseChannelInternal::WhiteNoiseInternal" ref="a99adb876977bb3a0b08ccb7a981e322b" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa6c81cf3366f91f49893f0b38dcb08b3"></a><!-- doxytag: member="WhiteNoiseChannelInternal::WhiteNoiseChannelInternal" ref="aa6c81cf3366f91f49893f0b38dcb08b3" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
 <div class="memitem">
@@ -286,24 +284,23 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa6f4be763c6ee9f46230bc18ae2276dc"></a><!-- doxytag: member="WhiteNoiseChannelInternal::getChannel" ref="aa6f4be763c6ee9f46230bc18ae2276dc" args="(const int index)" -->
+<a class="anchor" id="afb579babd82ef790ebc0a724a2a95e6e"></a><!-- doxytag: member="WhiteNoiseChannelInternal::getName" ref="afb579babd82ef790ebc0a724a2a95e6e" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::getName </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -327,23 +324,24 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afb579babd82ef790ebc0a724a2a95e6e"></a><!-- doxytag: member="WhiteNoiseChannelInternal::getName" ref="afb579babd82ef790ebc0a724a2a95e6e" args="() const " -->
+<a class="anchor" id="aa6f4be763c6ee9f46230bc18ae2276dc"></a><!-- doxytag: member="WhiteNoiseChannelInternal::getChannel" ref="aa6f4be763c6ee9f46230bc18ae2276dc" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::getName </td>
+          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_white_noise_channel_internal.html">WhiteNoiseChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -423,7 +421,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

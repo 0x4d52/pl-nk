@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,18 +69,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">TextArray Class Reference<div class="ingroups"><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="TextArray" --><!-- doxytag: inherits="ObjectArray2DBase&lt; char, Text &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___text_array_8h_source.html">plonk_TextArray.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="TextArray" --><!-- doxytag: inherits="ObjectArray2DBase&lt; char, Text &gt;" --><div class="dynheader">
 Inheritance diagram for TextArray:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_text_array.png" usemap="#TextArray_map" alt=""/>
   <map id="TextArray_map" name="TextArray_map">
-<area href="class_object_array2_d_base.html" alt="ObjectArray2DBase&lt; char, Text &gt;" shape="rect" coords="0,168,350,192"/>
-<area href="class_object_array.html" alt="ObjectArray&lt; Text &gt;" shape="rect" coords="0,112,350,136"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; Text &gt; &gt;" shape="rect" coords="0,56,350,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Text &gt; &gt;" shape="rect" coords="0,0,350,24"/>
+<area href="class_object_array2_d_base.html" alt="ObjectArray2DBase&lt; char, Text &gt;" shape="rect" coords="0,224,350,248"/>
+<area href="class_object_array.html" alt="ObjectArray&lt; Text &gt;" shape="rect" coords="0,168,350,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; Text &gt; &gt;" shape="rect" coords="0,112,350,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; Text &gt; &gt;" shape="rect" coords="0,56,350,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,350,24"/>
 </map>
  </div></div>
 
@@ -114,11 +112,26 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the index of a particular item.  <a href="#ade0a7ad154327ffa37687ad2ea6cca6c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_array.html#a4ac7040d91a6b4856a778a428113a1ca">indexOfIgnoreCase</a> (<a class="el" href="class_text.html">Text</a> const &amp;item, const int startIndex=0) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_array.html#a68fbbc3f44788a47079510d60de804f8">print</a> (const char *prefix=0) const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text_array.html">TextArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_array.html#a44fafe9b6ccb773495521a2362bce202">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_text_array.html">TextArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_array.html#aebe21683a46f8af45422051bf62a3323">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="class_text_array.html">TextArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_text_array.html#a22abdfacc5926d2503a1ebd5e6425e1f">getNull</a> ()  throw ()</td></tr>
 </table>
 <hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="acf474dd1dbd7cb2e2feef6765fcb99ba"></a><!-- doxytag: member="TextArray::RowType" ref="acf474dd1dbd7cb2e2feef6765fcb99ba" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;char&gt; <a class="el" href="class_object_array.html">TextArray::RowType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8d408f4f51410b6562659e2d7b5ee5ac"></a><!-- doxytag: member="TextArray::Base" ref="a8d408f4f51410b6562659e2d7b5ee5ac" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -146,19 +159,6 @@ Static Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_object_array2_d_base.html#a141a85933e2f5cbd19112237189e1dbb">ObjectArray2DBase&lt; char, Text &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acf474dd1dbd7cb2e2feef6765fcb99ba"></a><!-- doxytag: member="TextArray::RowType" ref="acf474dd1dbd7cb2e2feef6765fcb99ba" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;char&gt; <a class="el" href="class_object_array.html">TextArray::RowType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -775,6 +775,50 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a24916575608764c19e4211e4f9f0c03a"></a><!-- doxytag: member="TextArray::operator=" ref="a24916575608764c19e4211e4f9f0c03a" args="(TextArray const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text_array.html">TextArray</a> &amp; TextArray::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text_array.html">TextArray</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aae6d9620116a5234493606350adf73b1"></a><!-- doxytag: member="TextArray::ObjectArrayAssignmentDefinition" ref="aae6d9620116a5234493606350adf73b1" args="(TextArray, Text)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TextArray::ObjectArrayAssignmentDefinition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text_array.html">TextArray</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ade0a7ad154327ffa37687ad2ea6cca6c"></a><!-- doxytag: member="TextArray::indexOf" ref="ade0a7ad154327ffa37687ad2ea6cca6c" args="(Text const &amp;item, const int startIndex=0) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -841,50 +885,6 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aae6d9620116a5234493606350adf73b1"></a><!-- doxytag: member="TextArray::ObjectArrayAssignmentDefinition" ref="aae6d9620116a5234493606350adf73b1" args="(TextArray, Text)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">TextArray::ObjectArrayAssignmentDefinition </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text_array.html">TextArray</a>&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a>&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a24916575608764c19e4211e4f9f0c03a"></a><!-- doxytag: member="TextArray::operator=" ref="a24916575608764c19e4211e4f9f0c03a" args="(TextArray const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text_array.html">TextArray</a> &amp; TextArray::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text_array.html">TextArray</a> const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a68fbbc3f44788a47079510d60de804f8"></a><!-- doxytag: member="TextArray::print" ref="a68fbbc3f44788a47079510d60de804f8" args="(const char *prefix=0) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -899,6 +899,42 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a44fafe9b6ccb773495521a2362bce202"></a><!-- doxytag: member="TextArray::operator&#45;&gt;" ref="a44fafe9b6ccb773495521a2362bce202" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text_array.html">TextArray</a>* TextArray::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#ab5fac0ee11cf250bbc316953b08bd5da">ObjectArray&lt; Text &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aebe21683a46f8af45422051bf62a3323"></a><!-- doxytag: member="TextArray::operator&#45;&gt;" ref="aebe21683a46f8af45422051bf62a3323" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_text_array.html">TextArray</a>* TextArray::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a3db3cdbeddafbd785924fc3b7d07e4da">ObjectArray&lt; Text &gt;</a>.</p>
 
 </div>
 </div>
@@ -921,7 +957,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

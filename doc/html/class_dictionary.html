@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,16 +72,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="Dictionary" --><!-- doxytag: inherits="SmartPointerContainer&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;" -->
 <p>A dictionary class for storing key/value pairs.  
  <a href="class_dictionary.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___collections_8h_source.html">plonk_Collections.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Dictionary&lt; ValueType, KeyType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_dictionary.png" usemap="#Dictionary&lt; ValueType, KeyType &gt;_map" alt=""/>
   <map id="Dictionary&lt; ValueType, KeyType &gt;_map" name="Dictionary&lt; ValueType, KeyType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;" shape="rect" coords="0,56,435,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;" shape="rect" coords="0,0,435,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;" shape="rect" coords="0,112,435,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;" shape="rect" coords="0,56,435,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,435,24"/>
 </map>
  </div></div>
 
@@ -110,8 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a49abeb6f5747938493095d1d670ceda8">Dictionary</a> (<a class="el" href="class_dynamic.html">Dynamic</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dictionary.html">Dictionary</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#afc6c389dfa64984c8afb22d67fc0c538">operator=</a> (<a class="el" href="class_dictionary.html">Dictionary</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#afc6c389dfa64984c8afb22d67fc0c538"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#ac5472b454c9cf5fd395d9746350f2788">Dictionary</a> (<a class="el" href="class_object_array.html">KeyValuePairArrayType</a> pairs)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a dictionary initialise with an array of key/value pairs.  <a href="#ac5472b454c9cf5fd395d9746350f2788"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#ab31d318b9c8288cfe441035b6136839b">Dictionary</a> (<a class="el" href="class_object_array.html">KeyValuePairArrayType</a> const &amp;pairs)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a dictionary initialise with an array of key/value pairs.  <a href="#ab31d318b9c8288cfe441035b6136839b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ValueType &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a2b7ad3dfd1e62023c5fc063e9f31802f">getValues</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the array of values.  <a href="#a2b7ad3dfd1e62023c5fc063e9f31802f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_object_array.html">ObjectArray</a>&lt; KeyType &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a83ed3edd33080fbc502ea7da5e0047a3">getKeys</a> () const   throw ()</td></tr>
@@ -120,8 +118,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array of the key/value pairs.  <a href="#a0bb89703d9eecc0b0fe2d596daeab015"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13">put</a> (KeyType const &amp;key, ValueType const &amp;value)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Put an item into the dicionary associated with the specified key.  <a href="#a6ee81b793caf6c652e9d6545ce848a13"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#ac14a8a29e8d203f56186a081b7fed0bd">put</a> (<a class="el" href="class_key_value_pair.html">KeyValuePairType</a> pair)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a552c536e495be148604a49be0001d5f6">put</a> (<a class="el" href="class_object_array.html">KeyValuePairArrayType</a> pairs)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a1eda5d5d1cebd9141d11c1965e510f3b">put</a> (<a class="el" href="class_key_value_pair.html">KeyValuePairType</a> const &amp;pair)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#aa1cdb298d38f1b6e5a9f7ff41ebcb1b9">put</a> (<a class="el" href="class_object_array.html">KeyValuePairArrayType</a> const &amp;pairs)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a1e11339ada757437f1723e7f22915e00">containsKey</a> (KeyType const &amp;key)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#aa1dfe7a241bbb2aa86d19b5b757d6b37">containsValue</a> (ValueType const &amp;value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ValueType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a83c2739092b4a8d164b5c8d5575801d2">at</a> (KeyType const &amp;key)  throw ()</td></tr>
@@ -152,6 +150,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of items stored in the dictionary.  <a href="#a4af4232a588a2777343008309a2d1faf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a63c0c7e86f5935ea9ae4dce27be28355">size</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of items stored in the dictionary.  <a href="#a63c0c7e86f5935ea9ae4dce27be28355"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dictionary.html">Dictionary</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a7a7216ec346e85989ff8246aef1e806f">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_dictionary.html">Dictionary</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a96a4c8347ab8a0373033e49e49ded93b">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_dictionary.html">Dictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dictionary.html#a57cd3afaeee69cab52b38b1a34e9da5c">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -165,37 +165,18 @@ class Dictionary&lt; ValueType, KeyType &gt;</h3>
 <p>A dictionary class for storing key/value pairs. </p>
 <p>Similar to std::map. Holds objects against a key. Items are stored in an array and accessed via their key. By default the key is a <a class="el" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> string but can be any appropriate type. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a63fa6492d520e66be961871b7533f385"></a><!-- doxytag: member="Dictionary::Base" ref="a63fa6492d520e66be961871b7533f385" args="" -->
+<a class="anchor" id="a0b3f09eea5f8e05629a2cb8cd33cb725"></a><!-- doxytag: member="Dictionary::KeyValuePairType" ref="a0b3f09eea5f8e05629a2cb8cd33cb725" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ValueType, class KeyType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_dictionary_internal.html">Internal</a>&gt; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
+          <td class="memname">typedef <a class="el" href="class_key_value_pair.html">KeyValuePair</a>&lt;ValueType,KeyType&gt; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::<a class="el" href="class_key_value_pair.html">KeyValuePairType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_input_dictionary.html#aa416b65cfc080b9a54bf51e0d27c5dd0">InputDictionary</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a18da9048a4cd48e33fc65c0a5cf66cf9"></a><!-- doxytag: member="Dictionary::Internal" ref="a18da9048a4cd48e33fc65c0a5cf66cf9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_dictionary_internal.html">DictionaryInternal</a>&lt;ValueType,KeyType&gt; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::<a class="el" href="class_dictionary_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -214,18 +195,35 @@ template&lt;class ValueType, class KeyType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0b3f09eea5f8e05629a2cb8cd33cb725"></a><!-- doxytag: member="Dictionary::KeyValuePairType" ref="a0b3f09eea5f8e05629a2cb8cd33cb725" args="" -->
+<a class="anchor" id="a18da9048a4cd48e33fc65c0a5cf66cf9"></a><!-- doxytag: member="Dictionary::Internal" ref="a18da9048a4cd48e33fc65c0a5cf66cf9" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ValueType, class KeyType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_key_value_pair.html">KeyValuePair</a>&lt;ValueType,KeyType&gt; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::<a class="el" href="class_key_value_pair.html">KeyValuePairType</a></td>
+          <td class="memname">typedef <a class="el" href="class_dictionary_internal.html">DictionaryInternal</a>&lt;ValueType,KeyType&gt; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::<a class="el" href="class_dictionary_internal.html">Internal</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a63fa6492d520e66be961871b7533f385"></a><!-- doxytag: member="Dictionary::Base" ref="a63fa6492d520e66be961871b7533f385" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_dictionary_internal.html">Internal</a>&gt; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_input_dictionary.html#aa416b65cfc080b9a54bf51e0d27c5dd0">InputDictionary</a>.</p>
 
 </div>
 </div>
@@ -343,7 +341,7 @@ template&lt;class ValueType, class KeyType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac5472b454c9cf5fd395d9746350f2788"></a><!-- doxytag: member="Dictionary::Dictionary" ref="ac5472b454c9cf5fd395d9746350f2788" args="(KeyValuePairArrayType pairs)" -->
+<a class="anchor" id="ab31d318b9c8288cfe441035b6136839b"></a><!-- doxytag: member="Dictionary::Dictionary" ref="ab31d318b9c8288cfe441035b6136839b" args="(KeyValuePairArrayType const &amp;pairs)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -352,7 +350,7 @@ template&lt;class ValueType, class KeyType&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::<a class="el" href="class_dictionary.html">Dictionary</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_object_array.html">KeyValuePairArrayType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array.html">KeyValuePairArrayType</a> const &amp;&#160;</td>
           <td class="paramname"><em>pairs</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
@@ -365,6 +363,235 @@ template&lt;class ValueType, class KeyType&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="afc6c389dfa64984c8afb22d67fc0c538"></a><!-- doxytag: member="Dictionary::operator=" ref="afc6c389dfa64984c8afb22d67fc0c538" args="(Dictionary const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_dictionary.html">Dictionary</a>&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a57cd3afaeee69cab52b38b1a34e9da5c"></a><!-- doxytag: member="Dictionary::fromWeak" ref="a57cd3afaeee69cab52b38b1a34e9da5c" args="(Weak const &amp;weak)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_dictionary.html">Dictionary</a> <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::fromWeak </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;&#160;</td>
+          <td class="paramname"><em>weak</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get a weakly linked copy of this object. </p>
+<p>This will return a blank/empty/null object of this type if the original has already been deleted. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6931d4128351acd8496c0e735a1dace8"></a><!-- doxytag: member="Dictionary::getNull" ref="a6931d4128351acd8496c0e735a1dace8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static const <a class="el" href="class_dictionary.html">Dictionary</a>&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getNull </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2b7ad3dfd1e62023c5fc063e9f31802f"></a><!-- doxytag: member="Dictionary::getValues" ref="a2b7ad3dfd1e62023c5fc063e9f31802f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_object_array.html">ObjectArray</a>&lt;ValueType&gt;&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getValues </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the array of values. </p>
+
+</div>
+</div>
+<a class="anchor" id="a83ed3edd33080fbc502ea7da5e0047a3"></a><!-- doxytag: member="Dictionary::getKeys" ref="a83ed3edd33080fbc502ea7da5e0047a3" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_object_array.html">ObjectArray</a>&lt;KeyType&gt;&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getKeys </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the array of keys. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0bb89703d9eecc0b0fe2d596daeab015"></a><!-- doxytag: member="Dictionary::getPairs" ref="a0bb89703d9eecc0b0fe2d596daeab015" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_object_array.html">KeyValuePairArrayType</a> <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getPairs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns an array of the key/value pairs. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6ee81b793caf6c652e9d6545ce848a13"></a><!-- doxytag: member="Dictionary::put" ref="a6ee81b793caf6c652e9d6545ce848a13" args="(KeyType const &amp;key, ValueType const &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">ValueType <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::put </td>
+          <td>(</td>
+          <td class="paramtype">KeyType const &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Put an item into the dicionary associated with the specified key. </p>
+<p>If an item is already stored agains that key the old value is returned. Otherwise a "null" version of the value is returned. In many case you will not need to use the return value. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1eda5d5d1cebd9141d11c1965e510f3b"></a><!-- doxytag: member="Dictionary::put" ref="a1eda5d5d1cebd9141d11c1965e510f3b" args="(KeyValuePairType const &amp;pair)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">ValueType <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::put </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_key_value_pair.html">KeyValuePairType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>pair</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa1cdb298d38f1b6e5a9f7ff41ebcb1b9"></a><!-- doxytag: member="Dictionary::put" ref="aa1cdb298d38f1b6e5a9f7ff41ebcb1b9" args="(KeyValuePairArrayType const &amp;pairs)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::put </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_object_array.html">KeyValuePairArrayType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>pairs</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1e11339ada757437f1723e7f22915e00"></a><!-- doxytag: member="Dictionary::containsKey" ref="a1e11339ada757437f1723e7f22915e00" args="(KeyType const &amp;key)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::containsKey </td>
+          <td>(</td>
+          <td class="paramtype">KeyType const &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa1dfe7a241bbb2aa86d19b5b757d6b37"></a><!-- doxytag: member="Dictionary::containsValue" ref="aa1dfe7a241bbb2aa86d19b5b757d6b37" args="(ValueType const &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::containsValue </td>
+          <td>(</td>
+          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a83c2739092b4a8d164b5c8d5575801d2"></a><!-- doxytag: member="Dictionary::at" ref="a83c2739092b4a8d164b5c8d5575801d2" args="(KeyType const &amp;key)" -->
 <div class="memitem">
 <div class="memproto">
@@ -485,248 +712,6 @@ template&lt;class ValueType, class KeyType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1e11339ada757437f1723e7f22915e00"></a><!-- doxytag: member="Dictionary::containsKey" ref="a1e11339ada757437f1723e7f22915e00" args="(KeyType const &amp;key)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::containsKey </td>
-          <td>(</td>
-          <td class="paramtype">KeyType const &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa1dfe7a241bbb2aa86d19b5b757d6b37"></a><!-- doxytag: member="Dictionary::containsValue" ref="aa1dfe7a241bbb2aa86d19b5b757d6b37" args="(ValueType const &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::containsValue </td>
-          <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a57cd3afaeee69cab52b38b1a34e9da5c"></a><!-- doxytag: member="Dictionary::fromWeak" ref="a57cd3afaeee69cab52b38b1a34e9da5c" args="(Weak const &amp;weak)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_dictionary.html">Dictionary</a> <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::fromWeak </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;&#160;</td>
-          <td class="paramname"><em>weak</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get a weakly linked copy of this object. </p>
-<p>This will return a blank/empty/null object of this type if the original has already been deleted. </p>
-
-</div>
-</div>
-<a class="anchor" id="a83ed3edd33080fbc502ea7da5e0047a3"></a><!-- doxytag: member="Dictionary::getKeys" ref="a83ed3edd33080fbc502ea7da5e0047a3" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_object_array.html">ObjectArray</a>&lt;KeyType&gt;&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getKeys </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the array of keys. </p>
-
-</div>
-</div>
-<a class="anchor" id="a6931d4128351acd8496c0e735a1dace8"></a><!-- doxytag: member="Dictionary::getNull" ref="a6931d4128351acd8496c0e735a1dace8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static const <a class="el" href="class_dictionary.html">Dictionary</a>&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getNull </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0bb89703d9eecc0b0fe2d596daeab015"></a><!-- doxytag: member="Dictionary::getPairs" ref="a0bb89703d9eecc0b0fe2d596daeab015" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_object_array.html">KeyValuePairArrayType</a> <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getPairs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns an array of the key/value pairs. </p>
-
-</div>
-</div>
-<a class="anchor" id="a2b7ad3dfd1e62023c5fc063e9f31802f"></a><!-- doxytag: member="Dictionary::getValues" ref="a2b7ad3dfd1e62023c5fc063e9f31802f" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_object_array.html">ObjectArray</a>&lt;ValueType&gt;&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::getValues </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the array of values. </p>
-
-</div>
-</div>
-<a class="anchor" id="a0f61cc9a425100dd854816641258cc8a"></a><!-- doxytag: member="Dictionary::key" ref="a0f61cc9a425100dd854816641258cc8a" args="(const int index) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const KeyType&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::key </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get a key at a particular index. </p>
-
-</div>
-</div>
-<a class="anchor" id="a17ce658ebb6fe914bb044e60a3c5ae6d"></a><!-- doxytag: member="Dictionary::key" ref="a17ce658ebb6fe914bb044e60a3c5ae6d" args="(const int index)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">KeyType&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::key </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get a key at a particular index. </p>
-
-</div>
-</div>
-<a class="anchor" id="ac15f5b7945d4fc918e098015f11c0136"></a><!-- doxytag: member="Dictionary::keyForValue" ref="ac15f5b7945d4fc918e098015f11c0136" args="(ValueType const &amp;value) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const KeyType&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::keyForValue </td>
-          <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td> const<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Return the key for a particular value. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4af4232a588a2777343008309a2d1faf"></a><!-- doxytag: member="Dictionary::length" ref="a4af4232a588a2777343008309a2d1faf" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::length </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the number of items stored in the dictionary. </p>
-
-</div>
-</div>
-<a class="anchor" id="afc6c389dfa64984c8afb22d67fc0c538"></a><!-- doxytag: member="Dictionary::operator=" ref="afc6c389dfa64984c8afb22d67fc0c538" args="(Dictionary const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_dictionary.html">Dictionary</a>&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Assignment operator. </p>
-
-</div>
-</div>
 <a class="anchor" id="a41988ece0789b19039c7367a2abb3e72"></a><!-- doxytag: member="Dictionary::operator[]" ref="a41988ece0789b19039c7367a2abb3e72" args="(KeyType const &amp;key)" -->
 <div class="memitem">
 <div class="memproto">
@@ -771,76 +756,6 @@ template&lt;class ValueType, class KeyType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac14a8a29e8d203f56186a081b7fed0bd"></a><!-- doxytag: member="Dictionary::put" ref="ac14a8a29e8d203f56186a081b7fed0bd" args="(KeyValuePairType pair)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ValueType <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::put </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_key_value_pair.html">KeyValuePairType</a>&#160;</td>
-          <td class="paramname"><em>pair</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6ee81b793caf6c652e9d6545ce848a13"></a><!-- doxytag: member="Dictionary::put" ref="a6ee81b793caf6c652e9d6545ce848a13" args="(KeyType const &amp;key, ValueType const &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">ValueType <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::put </td>
-          <td>(</td>
-          <td class="paramtype">KeyType const &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Put an item into the dicionary associated with the specified key. </p>
-<p>If an item is already stored agains that key the old value is returned. Otherwise a "null" version of the value is returned. In many case you will not need to use the return value. </p>
-
-</div>
-</div>
-<a class="anchor" id="a552c536e495be148604a49be0001d5f6"></a><!-- doxytag: member="Dictionary::put" ref="a552c536e495be148604a49be0001d5f6" args="(KeyValuePairArrayType pairs)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType, class KeyType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::put </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_object_array.html">KeyValuePairArrayType</a>&#160;</td>
-          <td class="paramname"><em>pairs</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="aee8b8fb99e32739a8c9f55a81c6ca01b"></a><!-- doxytag: member="Dictionary::remove" ref="aee8b8fb99e32739a8c9f55a81c6ca01b" args="(KeyType const &amp;key)" -->
 <div class="memitem">
 <div class="memproto">
@@ -863,23 +778,45 @@ template&lt;class ValueType, class KeyType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a63c0c7e86f5935ea9ae4dce27be28355"></a><!-- doxytag: member="Dictionary::size" ref="a63c0c7e86f5935ea9ae4dce27be28355" args="() const " -->
+<a class="anchor" id="ac15f5b7945d4fc918e098015f11c0136"></a><!-- doxytag: member="Dictionary::keyForValue" ref="ac15f5b7945d4fc918e098015f11c0136" args="(ValueType const &amp;value) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ValueType, class KeyType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::size </td>
+          <td class="memname">const KeyType&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::keyForValue </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Get the number of items stored in the dictionary. </p>
+<p>Return the key for a particular value. </p>
+
+</div>
+</div>
+<a class="anchor" id="a17ce658ebb6fe914bb044e60a3c5ae6d"></a><!-- doxytag: member="Dictionary::key" ref="a17ce658ebb6fe914bb044e60a3c5ae6d" args="(const int index)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">KeyType&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::key </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get a key at a particular index. </p>
 
 </div>
 </div>
@@ -904,6 +841,27 @@ template&lt;class ValueType, class KeyType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a0f61cc9a425100dd854816641258cc8a"></a><!-- doxytag: member="Dictionary::key" ref="a0f61cc9a425100dd854816641258cc8a" args="(const int index) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const KeyType&amp; <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::key </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get a key at a particular index. </p>
+
+</div>
+</div>
 <a class="anchor" id="af1abde84ed749710596e8130a2c75bd9"></a><!-- doxytag: member="Dictionary::value" ref="af1abde84ed749710596e8130a2c75bd9" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -925,6 +883,90 @@ template&lt;class ValueType, class KeyType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a4af4232a588a2777343008309a2d1faf"></a><!-- doxytag: member="Dictionary::length" ref="a4af4232a588a2777343008309a2d1faf" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the number of items stored in the dictionary. </p>
+
+</div>
+</div>
+<a class="anchor" id="a63c0c7e86f5935ea9ae4dce27be28355"></a><!-- doxytag: member="Dictionary::size" ref="a63c0c7e86f5935ea9ae4dce27be28355" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the number of items stored in the dictionary. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7a7216ec346e85989ff8246aef1e806f"></a><!-- doxytag: member="Dictionary::operator&#45;&gt;" ref="a7a7216ec346e85989ff8246aef1e806f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_dictionary.html">Dictionary</a>* <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="class_input_dictionary.html#a9deee976aa50b7a376b619731311e67f">InputDictionary</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a96a4c8347ab8a0373033e49e49ded93b"></a><!-- doxytag: member="Dictionary::operator&#45;&gt;" ref="a96a4c8347ab8a0373033e49e49ded93b" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType, class KeyType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_dictionary.html">Dictionary</a>* <a class="el" href="class_dictionary.html">Dictionary</a>&lt; ValueType, KeyType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; DictionaryInternal&lt; ValueType, KeyType &gt; &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="class_input_dictionary.html#ab8a1a75c1c4034efdb3f3f4f815d4b64">InputDictionary</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___collections_8h_source.html">plonk_Collections.h</a></li>
 </ul>
@@ -943,7 +985,7 @@ template&lt;class ValueType, class KeyType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:56 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,16 +69,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">LockFreeStack&lt; ValueType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="LockFreeStack" --><!-- doxytag: inherits="SmartPointerContainer&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___lock_free_stack_8h_source.html">plonk_LockFreeStack.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="LockFreeStack" --><!-- doxytag: inherits="SmartPointerContainer&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;" --><div class="dynheader">
 Inheritance diagram for LockFreeStack&lt; ValueType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_lock_free_stack.png" usemap="#LockFreeStack&lt; ValueType &gt;_map" alt=""/>
   <map id="LockFreeStack&lt; ValueType &gt;_map" name="LockFreeStack&lt; ValueType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,56,403,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,0,403,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,112,403,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,56,403,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,403,24"/>
 </map>
  </div></div>
 
@@ -104,6 +102,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#a887989224f2f92f02001bc840f30a250"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a113f77995900bb189cc45d06c0d148d0">push</a> (ValueType const &amp;value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a749acb85bf6a7814d7d6ed619867e961">pop</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a5be1a57d3d131783a98908e88a6e972c">clear</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a80443d7f700e73e915c1a1e9a292690f">clearCache</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a9a6594b348ff500d339934788fb38d4d">clearAll</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LongLong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a45cf6dc137f4483d93e10751453f7cf9">length</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lock_free_stack.html">LockFreeStack</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a059158ab89d9b53e7a190bc4249cca64">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_lock_free_stack.html">LockFreeStack</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a7721983f28760f41a4c0a2b30875f3a5">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html#a9a725d5b7ab37e0e0e64e74e9e8a3207">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -113,21 +117,6 @@ Static Public Member Functions</h2></td></tr>
  class LockFreeStack&lt; ValueType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a33a544949b5ca88683de7fb4df55f5af"></a><!-- doxytag: member="LockFreeStack::Base" ref="a33a544949b5ca88683de7fb4df55f5af" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_lock_free_stack_internal.html">Internal</a>&gt; <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ae32ed0a840e9b2a6f1ce2b0588305c89"></a><!-- doxytag: member="LockFreeStack::Internal" ref="ae32ed0a840e9b2a6f1ce2b0588305c89" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +130,20 @@ template&lt;class ValueType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a33a544949b5ca88683de7fb4df55f5af"></a><!-- doxytag: member="LockFreeStack::Base" ref="a33a544949b5ca88683de7fb4df55f5af" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_lock_free_stack_internal.html">Internal</a>&gt; <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -282,6 +284,25 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a113f77995900bb189cc45d06c0d148d0"></a><!-- doxytag: member="LockFreeStack::push" ref="a113f77995900bb189cc45d06c0d148d0" args="(ValueType const &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a749acb85bf6a7814d7d6ed619867e961"></a><!-- doxytag: member="LockFreeStack::pop" ref="a749acb85bf6a7814d7d6ed619867e961" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -300,22 +321,115 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a113f77995900bb189cc45d06c0d148d0"></a><!-- doxytag: member="LockFreeStack::push" ref="a113f77995900bb189cc45d06c0d148d0" args="(ValueType const &amp;value)" -->
+<a class="anchor" id="a5be1a57d3d131783a98908e88a6e972c"></a><!-- doxytag: member="LockFreeStack::clear" ref="a5be1a57d3d131783a98908e88a6e972c" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ValueType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::push </td>
+          <td class="memname">void <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::clear </td>
           <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a80443d7f700e73e915c1a1e9a292690f"></a><!-- doxytag: member="LockFreeStack::clearCache" ref="a80443d7f700e73e915c1a1e9a292690f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::clearCache </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9a6594b348ff500d339934788fb38d4d"></a><!-- doxytag: member="LockFreeStack::clearAll" ref="a9a6594b348ff500d339934788fb38d4d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::clearAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a45cf6dc137f4483d93e10751453f7cf9"></a><!-- doxytag: member="LockFreeStack::length" ref="a45cf6dc137f4483d93e10751453f7cf9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">LongLong <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a059158ab89d9b53e7a190bc4249cca64"></a><!-- doxytag: member="LockFreeStack::operator&#45;&gt;" ref="a059158ab89d9b53e7a190bc4249cca64" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_lock_free_stack.html">LockFreeStack</a>* <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7721983f28760f41a4c0a2b30875f3a5"></a><!-- doxytag: member="LockFreeStack::operator&#45;&gt;" ref="a7721983f28760f41a4c0a2b30875f3a5" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>* <a class="el" href="class_lock_free_stack.html">LockFreeStack</a>&lt; ValueType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; LockFreeStackInternal&lt; ValueType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -337,7 +451,7 @@ template&lt;class ValueType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

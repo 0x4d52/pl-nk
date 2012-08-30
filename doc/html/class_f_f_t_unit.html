@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>FFT Unit.  
  <a href="class_f_f_t_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___f_f_t_channel_8h_source.html">plonk_FFTChannel.h</a>&gt;</code></p>
-
 <p><a href="class_f_f_t_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -95,23 +92,17 @@ Static Public Member Functions</h2></td></tr>
 class FFTUnit&lt; SampleType &gt;</h3>
 
 <p>FFT Unit. </p>
-<p>Takes a time domain real signal as its input and outputs frequency domain data in real/imaginary format. </p>
+<p>Takes a time domain real signal as its input and outputs frequency domain data in real/imaginary format.</p>
+<p>Each input channel generates two output channels. The even number channel is the real data and the odd numbered channel contains the imaginary data. (The <a class="el" href="class_i_f_f_t_unit.html" title="IFFT Unit.">IFFTUnit</a> expects the data in this format.)</p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the input unit </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a70f9fd6cfc94ae3e765a7f12cd0af9f7"></a><!-- doxytag: member="FFTUnit::Data" ref="a70f9fd6cfc94ae3e765a7f12cd0af9f7" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">FFTInternal::Data</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a9ad85d7f7eeab31521a602f6717641e7"></a><!-- doxytag: member="FFTUnit::FFTInternal" ref="a9ad85d7f7eeab31521a602f6717641e7" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -127,14 +118,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a096c61a380ecf29c578ec65c05f812e4"></a><!-- doxytag: member="FFTUnit::Inputs" ref="a096c61a380ecf29c578ec65c05f812e4" args="" -->
+<a class="anchor" id="a70f9fd6cfc94ae3e765a7f12cd0af9f7"></a><!-- doxytag: member="FFTUnit::Data" ref="a70f9fd6cfc94ae3e765a7f12cd0af9f7" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">FFTInternal::Data</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a></td>
         </tr>
       </table>
 </div>
@@ -157,7 +148,40 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a096c61a380ecf29c578ec65c05f812e4"></a><!-- doxytag: member="FFTUnit::Inputs" ref="a096c61a380ecf29c578ec65c05f812e4" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ad9c44667f2c2eadd0c1f5732b2c667d4"></a><!-- doxytag: member="FFTUnit::getInfo" ref="ad9c44667f2c2eadd0c1f5732b2c667d4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ab7707d07e6434ab87d3503089a3f6b82"></a><!-- doxytag: member="FFTUnit::ar" ref="ab7707d07e6434ab87d3503089a3f6b82" args="(UnitType const &amp;input)" -->
 <div class="memitem">
 <div class="memproto">
@@ -179,24 +203,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad9c44667f2c2eadd0c1f5732b2c667d4"></a><!-- doxytag: member="FFTUnit::getInfo" ref="ad9c44667f2c2eadd0c1f5732b2c667d4" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_f_f_t_unit.html">FFTUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___f_f_t_channel_8h_source.html">plonk_FFTChannel.h</a></li>
 </ul>
@@ -215,7 +221,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

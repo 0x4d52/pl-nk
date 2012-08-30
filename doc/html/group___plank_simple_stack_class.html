@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -85,19 +84,6 @@ Functions</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>A simple stack. </p>
 <hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ga453a1ce7007b4c00676449802a07c6f9"></a><!-- doxytag: member="plank_SimpleStack.h::PlankSimpleStackFreeElementDataFunction" ref="ga453a1ce7007b4c00676449802a07c6f9" args=")(PlankP)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(* <a class="el" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a>)(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga739c711e9ffe58e4d3a8133613ba6cc9"></a><!-- doxytag: member="plank_SimpleStack.h::PlankSimpleStackRef" ref="ga739c711e9ffe58e4d3a8133613ba6cc9" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -111,16 +97,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga6124b576a0f7beb83c148cf95a7debc4"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_Clear" ref="ga6124b576a0f7beb83c148cf95a7debc4" args="(PlankSimpleStackRef p)" -->
+<a class="anchor" id="ga453a1ce7007b4c00676449802a07c6f9"></a><!-- doxytag: member="plank_SimpleStack.h::PlankSimpleStackFreeElementDataFunction" ref="ga453a1ce7007b4c00676449802a07c6f9" args=")(PlankP)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_Clear </td>
+          <td class="memname">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(* <a class="el" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a>)(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gab5f7b15c3e776be779eb2ccf3ce68aa0"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_CreateAndInit" ref="gab5f7b15c3e776be779eb2ccf3ce68aa0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> pl_SimpleStack_CreateAndInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -145,14 +143,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gab5f7b15c3e776be779eb2ccf3ce68aa0"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_CreateAndInit" ref="gab5f7b15c3e776be779eb2ccf3ce68aa0" args="()" -->
+<a class="anchor" id="ga10f9dadc0aeba73ec4e51558c5f5a83e"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_Init" ref="ga10f9dadc0aeba73ec4e51558c5f5a83e" args="(PlankSimpleStackRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a> pl_SimpleStack_CreateAndInit </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_Init </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -195,12 +194,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga26c6edc1169459d9e8e337b9258a0596"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_GetSize" ref="ga26c6edc1169459d9e8e337b9258a0596" args="(PlankSimpleStackRef p)" -->
+<a class="anchor" id="ga6124b576a0f7beb83c148cf95a7debc4"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_Clear" ref="ga6124b576a0f7beb83c148cf95a7debc4" args="(PlankSimpleStackRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> pl_SimpleStack_GetSize </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_Clear </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -212,29 +211,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga10f9dadc0aeba73ec4e51558c5f5a83e"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_Init" ref="ga10f9dadc0aeba73ec4e51558c5f5a83e" args="(PlankSimpleStackRef p)" -->
+<a class="anchor" id="ga56f117ee5f19c873ed2ec5648eca56f0"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_SetFreeElementDataFunction" ref="ga56f117ee5f19c873ed2ec5648eca56f0" args="(PlankSimpleStackRef p, PlankSimpleStackFreeElementDataFunction freeFunction)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gac55e55178661cd3ecc3455141ced807e"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_Pop" ref="gac55e55178661cd3ecc3455141ced807e" args="(PlankSimpleStackRef p, PlankSimpleStackElementRef *element)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_Pop </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_SetFreeElementDataFunction </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -242,8 +224,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_element_class.html#ga1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a>&#160;</td>
+          <td class="paramname"><em>freeFunction</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -283,12 +265,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga56f117ee5f19c873ed2ec5648eca56f0"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_SetFreeElementDataFunction" ref="ga56f117ee5f19c873ed2ec5648eca56f0" args="(PlankSimpleStackRef p, PlankSimpleStackFreeElementDataFunction freeFunction)" -->
+<a class="anchor" id="gac55e55178661cd3ecc3455141ced807e"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_Pop" ref="gac55e55178661cd3ecc3455141ced807e" args="(PlankSimpleStackRef p, PlankSimpleStackElementRef *element)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_SetFreeElementDataFunction </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleStack_Pop </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -296,13 +278,30 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga453a1ce7007b4c00676449802a07c6f9">PlankSimpleStackFreeElementDataFunction</a>&#160;</td>
-          <td class="paramname"><em>freeFunction</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_element_class.html#ga1be2966c6c1d12502b1923c8da2f8d91">PlankSimpleStackElementRef</a> *&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga26c6edc1169459d9e8e337b9258a0596"></a><!-- doxytag: member="plank_SimpleStack.h::pl_SimpleStack_GetSize" ref="ga26c6edc1169459d9e8e337b9258a0596" args="(PlankSimpleStackRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> pl_SimpleStack_GetSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_stack_class.html#ga739c711e9ffe58e4d3a8133613ba6cc9">PlankSimpleStackRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -325,7 +324,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

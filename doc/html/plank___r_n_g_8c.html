@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,13 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_66de319f4396a2b7916472e434c6bf60.html">plank</a>      </li>
-      <li class="navelem"><a class="el" href="dir_7ac325d9fd989c7cb2643110814d789c.html">random</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -74,10 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_RNG.c File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;../core/plank_StandardHeader.h&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plank___r_n_g_8h_source.html">plank_RNG.h</a>&quot;</code><br/>
-<code>#include &quot;../containers/plank_Atomic.h&quot;</code><br/>
-</div><table class="memberdecls">
+<table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___r_n_g_8c.html#aa3f4848bb7668062213f2495eac096ad">PLANK_RNG_MAGIC1</a>&#160;&#160;&#160;1664525</td></tr>
@@ -103,58 +92,6 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Seed a <em>Plank RNG</em> object.  <a href="group___plank_r_n_g_class.html#ga2bc680ab31e54bd5f950bfd874ba3317"></a><br/></td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="a6329a6e906e6e23e8f9f251b7805149e"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_DOUBLE_MASK" ref="a6329a6e906e6e23e8f9f251b7805149e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_RNG_DOUBLE_MASK&#160;&#160;&#160;0x000fffffffffffff</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6e6aa059e7f313efee7fbd262a587114"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_DOUBLE_ONE" ref="a6e6aa059e7f313efee7fbd262a587114" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_RNG_DOUBLE_ONE&#160;&#160;&#160;0x3ff0000000000000</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a94890519bd6aee1f10bcc1290a44b788"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_FLOAT_MASK" ref="a94890519bd6aee1f10bcc1290a44b788" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_RNG_FLOAT_MASK&#160;&#160;&#160;0x007fffff</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab7911794e6c23d240a276e4d67018769"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_FLOAT_ONE" ref="ab7911794e6c23d240a276e4d67018769" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLANK_RNG_FLOAT_ONE&#160;&#160;&#160;0x3f800000</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="aa3f4848bb7668062213f2495eac096ad"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_MAGIC1" ref="aa3f4848bb7668062213f2495eac096ad" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -181,6 +118,58 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ab7911794e6c23d240a276e4d67018769"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_FLOAT_ONE" ref="ab7911794e6c23d240a276e4d67018769" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_RNG_FLOAT_ONE&#160;&#160;&#160;0x3f800000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a94890519bd6aee1f10bcc1290a44b788"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_FLOAT_MASK" ref="a94890519bd6aee1f10bcc1290a44b788" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_RNG_FLOAT_MASK&#160;&#160;&#160;0x007fffff</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6e6aa059e7f313efee7fbd262a587114"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_DOUBLE_ONE" ref="a6e6aa059e7f313efee7fbd262a587114" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_RNG_DOUBLE_ONE&#160;&#160;&#160;0x3ff0000000000000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6329a6e906e6e23e8f9f251b7805149e"></a><!-- doxytag: member="plank_RNG.c::PLANK_RNG_DOUBLE_MASK" ref="a6329a6e906e6e23e8f9f251b7805149e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_RNG_DOUBLE_MASK&#160;&#160;&#160;0x000fffffffffffff</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -196,7 +185,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

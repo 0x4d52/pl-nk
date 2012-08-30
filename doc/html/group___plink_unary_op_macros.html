@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -76,12 +75,12 @@ Defines</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Unary operator process macros. </p>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="ga7dd10ddfa605955ab5d98e972af5ba19"></a><!-- doxytag: member="plink_UnaryOpProcess.h::PLINK_UNARYOPPROCESS_DECLARE" ref="ga7dd10ddfa605955ab5d98e972af5ba19" args="(OPNAME, TYPECODE)" -->
+<a class="anchor" id="gab5ae30ca4d116ae46307a1b37a668990"></a><!-- doxytag: member="plink_UnaryOpProcess.h::PLINK_UNARYOPPROCESS_DEFINE_NN" ref="gab5ae30ca4d116ae46307a1b37a668990" args="(OPNAME, TYPECODE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PLINK_UNARYOPPROCESS_DECLARE</td>
+          <td class="memname">#define PLINK_UNARYOPPROCESS_DEFINE_NN</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">OPNAME, </td>
@@ -100,41 +99,15 @@ Defines</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);\
-    <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _N1 (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);\
-    <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _Nn (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);\
-    <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="ga5bf163439bc53d1b9570c2eb1851bbce"></a><!-- doxytag: member="plink_UnaryOpProcess.h::PLINK_UNARYOPPROCESS_DEFINE" ref="ga5bf163439bc53d1b9570c2eb1851bbce" args="(OPNAME, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLINK_UNARYOPPROCESS_DEFINE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OPNAME, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plink_unary_op_macros.html#gab5ae30ca4d116ae46307a1b37a668990">PLINK_UNARYOPPROCESS_DEFINE_NN</a>(OPNAME, TYPECODE)\
-    <a class="code" href="group___plink_unary_op_macros.html#gae74bb983d094e4729927f7445c30b9f9">PLINK_UNARYOPPROCESS_DEFINE_N1</a>(OPNAME, TYPECODE)\
-    <a class="code" href="group___plink_unary_op_macros.html#gae6bfcffe8d73b6700a1f67d41b489cfd">PLINK_UNARYOPPROCESS_DEFINE_Nn</a>(OPNAME, TYPECODE)\
-    <a class="code" href="group___plink_unary_op_macros.html#ga13383242c905cb665a28a000fa4ab127">PLINK_UNARYOPPROCESS_DEFINE_SELECT</a>(OPNAME, TYPECODE)
+<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (<span class="keywordtype">void</span>* ppv, <a class="code" href="struct_plink_state.html">UnaryState</a>* state) {\
+        PlinkProcess##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N; Plank##TYPECODE* output; <span class="keyword">const</span> Plank##TYPECODE* input;\
+        (void)state;\
+        pp = (PlinkProcess##TYPECODE*)ppv;\
+        N = pp-&gt;buffers[0].bufferSize;\
+        output = pp-&gt;buffers[0].buffer;\
+        input = pp-&gt;buffers[1].buffer;\
+        <a class="code" href="group___plank_vector_macros.html#ga23ad596e9c890aac4ca1385b47e87732">PLANK_VECTORUNARYOP_NAME</a>(OPNAME,TYPECODE) (output, input, N);\
+    }
 </pre></div>
 </div>
 </div>
@@ -170,42 +143,6 @@ Defines</h2></td></tr>
         output = pp-&gt;buffers[0].buffer;\
         value = pl_##OPNAME##TYPECODE (pp-&gt;buffers[1].buffer[0]);\
         <a class="code" href="group___plank_vector_macros.html#gabac7d14ca50018acde360c496ca4d071">PLANK_VECTORFILL_NAME</a>(TYPECODE) (output, value, N);\
-    }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="gab5ae30ca4d116ae46307a1b37a668990"></a><!-- doxytag: member="plink_UnaryOpProcess.h::PLINK_UNARYOPPROCESS_DEFINE_NN" ref="gab5ae30ca4d116ae46307a1b37a668990" args="(OPNAME, TYPECODE)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLINK_UNARYOPPROCESS_DEFINE_NN</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">OPNAME, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">TYPECODE&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (<span class="keywordtype">void</span>* ppv, <a class="code" href="struct_plink_state.html">UnaryState</a>* state) {\
-        PlinkProcess##TYPECODE* pp; <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N; Plank##TYPECODE* output; <span class="keyword">const</span> Plank##TYPECODE* input;\
-        (void)state;\
-        pp = (PlinkProcess##TYPECODE*)ppv;\
-        N = pp-&gt;buffers[0].bufferSize;\
-        output = pp-&gt;buffers[0].buffer;\
-        input = pp-&gt;buffers[1].buffer;\
-        <a class="code" href="group___plank_vector_macros.html#ga23ad596e9c890aac4ca1385b47e87732">PLANK_VECTORUNARYOP_NAME</a>(OPNAME,TYPECODE) (output, input, N);\
     }
 </pre></div>
 </div>
@@ -289,6 +226,68 @@ Defines</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="ga7dd10ddfa605955ab5d98e972af5ba19"></a><!-- doxytag: member="plink_UnaryOpProcess.h::PLINK_UNARYOPPROCESS_DECLARE" ref="ga7dd10ddfa605955ab5d98e972af5ba19" args="(OPNAME, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLINK_UNARYOPPROCESS_DECLARE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OPNAME, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _NN (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);\
+    <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _N1 (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);\
+    <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE ## _Nn (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);\
+    <span class="keywordtype">void</span> <a class="code" href="plink_8h.html#ae1a8a9671664454367b9f21d4f533b0c">PLINK_API</a> plink_UnaryOpProcess ## OPNAME ## TYPECODE (<span class="keywordtype">void</span>* pp, <a class="code" href="struct_plink_state.html">UnaryState</a>* state);
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga5bf163439bc53d1b9570c2eb1851bbce"></a><!-- doxytag: member="plink_UnaryOpProcess.h::PLINK_UNARYOPPROCESS_DEFINE" ref="ga5bf163439bc53d1b9570c2eb1851bbce" args="(OPNAME, TYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLINK_UNARYOPPROCESS_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">OPNAME, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plink_unary_op_macros.html#gab5ae30ca4d116ae46307a1b37a668990">PLINK_UNARYOPPROCESS_DEFINE_NN</a>(OPNAME, TYPECODE)\
+    <a class="code" href="group___plink_unary_op_macros.html#gae74bb983d094e4729927f7445c30b9f9">PLINK_UNARYOPPROCESS_DEFINE_N1</a>(OPNAME, TYPECODE)\
+    <a class="code" href="group___plink_unary_op_macros.html#gae6bfcffe8d73b6700a1f67d41b489cfd">PLINK_UNARYOPPROCESS_DEFINE_Nn</a>(OPNAME, TYPECODE)\
+    <a class="code" href="group___plink_unary_op_macros.html#ga13383242c905cb665a28a000fa4ab127">PLINK_UNARYOPPROCESS_DEFINE_SELECT</a>(OPNAME, TYPECODE)
+</pre></div>
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -304,7 +303,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

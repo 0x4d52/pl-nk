@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,21 +71,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="BinaryOpChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" -->
 <p>For applying binary operators.  
  <a href="class_binary_op_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___binary_op_channel_8h_source.html">plonk_BinaryOpChannel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BinaryOpChannelInternal&lt; SampleType, op &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_binary_op_channel_internal.png" usemap="#BinaryOpChannelInternal&lt; SampleType, op &gt;_map" alt=""/>
   <map id="BinaryOpChannelInternal&lt; SampleType, op &gt;_map" name="BinaryOpChannelInternal&lt; SampleType, op &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,168,895,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,112,714,136"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,224,895,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,168,714,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,168,1076,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,352,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,112,714,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,112,1076,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,352,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,56,714,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,56,1076,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,352,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,352,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,352,24"/>
 </map>
  </div></div>
 
@@ -127,55 +125,6 @@ class BinaryOpChannelInternal&lt; SampleType, op &gt;</h3>
 
 <p>For applying binary operators. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aca8e3b31d9a371081167456a09a4d87e"></a><!-- doxytag: member="BinaryOpChannelInternal::BinaryOpInternal" ref="aca8e3b31d9a371081167456a09a4d87e" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt;SampleType,op&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_binary_op_channel_internal.html">BinaryOpInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a24310a31645493d2904a91124d045b47"></a><!-- doxytag: member="BinaryOpChannelInternal::Buffer" ref="a24310a31645493d2904a91124d045b47" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a21a6edb5b81e598eefb00a5aaa69ae65"></a><!-- doxytag: member="BinaryOpChannelInternal::ChannelType" ref="a21a6edb5b81e598eefb00a5aaa69ae65" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a2f9034200615d396daa33c4977d83c8c"></a><!-- doxytag: member="BinaryOpChannelInternal::Data" ref="a2f9034200615d396daa33c4977d83c8c" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -196,20 +145,35 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 
 </div>
 </div>
-<a class="anchor" id="a869cc88044fc071047ef4b115328e787"></a><!-- doxytag: member="BinaryOpChannelInternal::Inputs" ref="a869cc88044fc071047ef4b115328e787" args="" -->
+<a class="anchor" id="a21a6edb5b81e598eefb00a5aaa69ae65"></a><!-- doxytag: member="BinaryOpChannelInternal::ChannelType" ref="a21a6edb5b81e598eefb00a5aaa69ae65" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aca8e3b31d9a371081167456a09a4d87e"></a><!-- doxytag: member="BinaryOpChannelInternal::BinaryOpInternal" ref="aca8e3b31d9a371081167456a09a4d87e" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt;SampleType,op&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_binary_op_channel_internal.html">BinaryOpInternal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -259,6 +223,40 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_channel_internal.html#a3b121d7cdac860b370de05f3540c81ae">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a869cc88044fc071047ef4b115328e787"></a><!-- doxytag: member="BinaryOpChannelInternal::Inputs" ref="a869cc88044fc071047ef4b115328e787" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a24310a31645493d2904a91124d045b47"></a><!-- doxytag: member="BinaryOpChannelInternal::Buffer" ref="a24310a31645493d2904a91124d045b47" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
 
 </div>
 </div>
@@ -320,24 +318,23 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa7c9dc051c0e0857509b50edffebdf81"></a><!-- doxytag: member="BinaryOpChannelInternal::getChannel" ref="aa7c9dc051c0e0857509b50edffebdf81" args="(const int index)" -->
+<a class="anchor" id="a68839caf34c45f689679bfc3c1edc934"></a><!-- doxytag: member="BinaryOpChannelInternal::getName" ref="a68839caf34c45f689679bfc3c1edc934" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::getChannel </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::getName </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -361,23 +358,24 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 
 </div>
 </div>
-<a class="anchor" id="a68839caf34c45f689679bfc3c1edc934"></a><!-- doxytag: member="BinaryOpChannelInternal::getName" ref="a68839caf34c45f689679bfc3c1edc934" args="() const " -->
+<a class="anchor" id="aa7c9dc051c0e0857509b50edffebdf81"></a><!-- doxytag: member="BinaryOpChannelInternal::getChannel" ref="aa7c9dc051c0e0857509b50edffebdf81" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeconst &amp;) op&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::getName </td>
+          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_binary_op_channel_internal.html">BinaryOpChannelInternal</a>&lt; SampleType, op &gt;::getChannel </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -457,7 +455,7 @@ template&lt;class SampleType , SampleType(*)(SampleTypeconst &amp;, SampleTypeco
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

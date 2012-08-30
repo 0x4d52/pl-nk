@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,8 +69,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="TypeUtilityBase&lt; Type const &amp; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___type_utility_8h_source.html">plonk_TypeUtility.h</a>&gt;</code></p>
-
 <p><a href="class_type_utility_base_3_01_type_01const_01_6_01_4-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -89,14 +86,14 @@ Static Public Member Functions</h2></td></tr>
  class TypeUtilityBase&lt; Type const &amp; &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="ae54fca1cc20159037622fe4d39eed49a"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::IndexType" ref="ae54fca1cc20159037622fe4d39eed49a" args="" -->
+<a class="anchor" id="ae58dfaf52d8a721c6500bdaeff61bea2"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::TypeName" ref="ae58dfaf52d8a721c6500bdaeff61bea2" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef float <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::<a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#ae54fca1cc20159037622fe4d39eed49a">IndexType</a></td>
+          <td class="memname">typedef void* <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::<a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#ae58dfaf52d8a721c6500bdaeff61bea2">TypeName</a></td>
         </tr>
       </table>
 </div>
@@ -134,14 +131,14 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae58dfaf52d8a721c6500bdaeff61bea2"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::TypeName" ref="ae58dfaf52d8a721c6500bdaeff61bea2" args="" -->
+<a class="anchor" id="ae54fca1cc20159037622fe4d39eed49a"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::IndexType" ref="ae54fca1cc20159037622fe4d39eed49a" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef void* <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::<a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#ae58dfaf52d8a721c6500bdaeff61bea2">TypeName</a></td>
+          <td class="memname">typedef float <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::<a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#ae54fca1cc20159037622fe4d39eed49a">IndexType</a></td>
         </tr>
       </table>
 </div>
@@ -150,14 +147,14 @@ template&lt;class Type &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa3a3714e7b3caf6cb743de3fc4dca3cb"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::getNull" ref="aa3a3714e7b3caf6cb743de3fc4dca3cb" args="()" -->
+<a class="anchor" id="a2eea9ca1d7a2872b7f74d6ba4cf58d5e"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::getTypeCode" ref="a2eea9ca1d7a2872b7f74d6ba4cf58d5e" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static const <a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#a14adb5314a729acbc78437efb341c5a3">OriginalType</a>&amp; <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::getNull </td>
+          <td class="memname">static int <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::getTypeCode </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline, static]</code></td>
@@ -168,14 +165,14 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2eea9ca1d7a2872b7f74d6ba4cf58d5e"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::getTypeCode" ref="a2eea9ca1d7a2872b7f74d6ba4cf58d5e" args="()" -->
+<a class="anchor" id="aa3a3714e7b3caf6cb743de3fc4dca3cb"></a><!-- doxytag: member="TypeUtilityBase&lt; Type const &amp; &gt;::getNull" ref="aa3a3714e7b3caf6cb743de3fc4dca3cb" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Type &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static int <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::getTypeCode </td>
+          <td class="memname">static const <a class="el" href="class_type_utility_base_3_01_type_01const_01_6_01_4.html#a14adb5314a729acbc78437efb341c5a3">OriginalType</a>&amp; <a class="el" href="class_type_utility_base.html">TypeUtilityBase</a>&lt; Type const &amp; &gt;::getNull </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline, static]</code></td>
@@ -204,7 +201,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:05 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

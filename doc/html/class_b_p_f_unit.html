@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Bandpass filter.  
  <a href="class_b_p_f_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___filter_shortcuts_8h_source.html">plonk_FilterShortcuts.h</a>&gt;</code></p>
-
 <p><a href="class_b_p_f_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -100,15 +97,30 @@ Static Public Member Functions</h2></td></tr>
 class BPFUnit&lt; SampleType &gt;</h3>
 
 <p>Bandpass filter. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, frequency=1200, bandwidth=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (input frequency=1200, bandwidth=1, mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to filter</li>
+<li>frequency: (unit, multi) the -3dB point cut-off frequency in Hz</li>
+<li>bandwidth: (unit, multi) The bandwidth of the passband in octaves</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a49556ac30ce4ccea94ebc11d6cf83f72"></a><!-- doxytag: member="BPFUnit::FilterCoeffsType" ref="a49556ac30ce4ccea94ebc11d6cf83f72" args="" -->
+<a class="anchor" id="a4b9addc78ec4cdb198db9736e1479dd8"></a><!-- doxytag: member="BPFUnit::UnitType" ref="a4b9addc78ec4cdb198db9736e1479dd8" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit</a>&lt;<a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
         </tr>
       </table>
 </div>
@@ -131,14 +143,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a33e97f55eb0edb80187444305650978f"></a><!-- doxytag: member="BPFUnit::FilterType" ref="a33e97f55eb0edb80187444305650978f" args="" -->
+<a class="anchor" id="a49556ac30ce4ccea94ebc11d6cf83f72"></a><!-- doxytag: member="BPFUnit::FilterCoeffsType" ref="a49556ac30ce4ccea94ebc11d6cf83f72" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffs2ParamUnit</a>&lt;<a class="el" href="class_filter_shape_b_p_f_base.html">FilterShape</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs2_param_unit.html">FilterCoeffsType</a></td>
         </tr>
       </table>
 </div>
@@ -161,6 +173,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a33e97f55eb0edb80187444305650978f"></a><!-- doxytag: member="BPFUnit::FilterType" ref="a33e97f55eb0edb80187444305650978f" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_b_p_f_unit.html#a41225132c5f1b971fc683dd864e2994f">FormType</a>&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="abdfa9c385c4102f95a8ee7e798bb0ef2"></a><!-- doxytag: member="BPFUnit::ResampleType" ref="abdfa9c385c4102f95a8ee7e798bb0ef2" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,14 +203,18 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4b9addc78ec4cdb198db9736e1479dd8"></a><!-- doxytag: member="BPFUnit::UnitType" ref="a4b9addc78ec4cdb198db9736e1479dd8" args="" -->
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a5df5f17a9f133bb95a39ef0d06864d9b"></a><!-- doxytag: member="BPFUnit::getInfo" ref="a5df5f17a9f133bb95a39ef0d06864d9b" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -191,7 +222,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aeee58f840b0e7573abac3b824d83ceb2"></a><!-- doxytag: member="BPFUnit::ar" ref="aeee58f840b0e7573abac3b824d83ceb2" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;bandwidth=SampleType(1), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -262,24 +292,6 @@ template&lt;class SampleType &gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="a5df5f17a9f133bb95a39ef0d06864d9b"></a><!-- doxytag: member="BPFUnit::getInfo" ref="a5df5f17a9f133bb95a39ef0d06864d9b" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_b_p_f_unit.html">BPFUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -360,7 +372,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

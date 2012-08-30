@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -71,8 +70,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="Endian" -->
 <p>A utility class to swap the endianness (byte-order) of one or more data elements.  
  <a href="class_endian.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___endian_8h_source.html">plonk_Endian.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Endian:</div>
 <div class="dyncontent">
@@ -119,7 +116,7 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7252bd0bdeb0a764159f4be2a197c1fa"></a><!-- doxytag: member="Endian::swap" ref="a7252bd0bdeb0a764159f4be2a197c1fa" args="(NumericalArray&lt; Type &gt; &amp;array)" -->
+<a class="anchor" id="a956265260b6cad55239ae0cdb881b596"></a><!-- doxytag: member="Endian::swap" ref="a956265260b6cad55239ae0cdb881b596" args="(Type *data)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -128,8 +125,8 @@ template&lt;class Type &gt; </div>
         <tr>
           <td class="memname">static void Endian::swap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; Type &gt; &amp;&#160;</td>
-          <td class="paramname"><em>array</em></td><td>)</td>
+          <td class="paramtype">Type *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
@@ -167,7 +164,7 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a956265260b6cad55239ae0cdb881b596"></a><!-- doxytag: member="Endian::swap" ref="a956265260b6cad55239ae0cdb881b596" args="(Type *data)" -->
+<a class="anchor" id="a7252bd0bdeb0a764159f4be2a197c1fa"></a><!-- doxytag: member="Endian::swap" ref="a7252bd0bdeb0a764159f4be2a197c1fa" args="(NumericalArray&lt; Type &gt; &amp;array)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -176,8 +173,8 @@ template&lt;class Type &gt; </div>
         <tr>
           <td class="memname">static void Endian::swap </td>
           <td>(</td>
-          <td class="paramtype">Type *&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; Type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>array</em></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
@@ -204,7 +201,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:56 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

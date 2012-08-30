@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_96f503a49b04edc511af40b79507ca5e.html">hosts</a>      </li>
-      <li class="navelem"><a class="el" href="dir_99bf8859eca4450a8d74cbae18b8939c.html">ios</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -76,11 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_IOSAudioHost.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &lt;AudioToolbox/AudioQueue.h&gt;</code><br/>
-<code>#include &lt;AudioToolbox/AudioServices.h&gt;</code><br/>
-<code>#include &lt;AudioToolbox/AudioToolbox.h&gt;</code><br/>
-<code>#include &lt;AudioUnit/AudioUnit.h&gt;</code><br/>
-</div>
+
 <p><a href="plonk___i_o_s_audio_host_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
@@ -105,6 +92,44 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___i_o_s_audio_host_8h.html#a993e51bba58ce1f0f71e7ab96f6ee860">PLUNIT</a>&#160;&#160;&#160;plonk::IOSAudioHost::UnitType</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="ad2a61a10fc5c8f1e202ebaf97cc4e8d3"></a><!-- doxytag: member="plonk_IOSAudioHost.h::PLONK_OBJC_PROPERTY_MEMBER" ref="ad2a61a10fc5c8f1e202ebaf97cc4e8d3" args="(Type, Name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_OBJC_PROPERTY_MEMBER</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="class_variable.html">Variable</a>&lt;Type&gt; Name</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convenience macro for adding member variables to Objective-C classes. </p>
+<p>This helps declare the appropriate type of Plonk Variable&lt;&gt; e.g., for providing an interface between a GUI and the audio engine. You then need to declare the property using PLONK_OBJC_PROPERTY_DECLARE and synthesise the getter and setter methods using PLONK_OBJC_PROPERTY_SYNTH.</p>
+<p>For example:</p>
+<div class="fragment"><pre class="fragment"> <span class="keyword">@interface </span>MyClass : NSObject
+ {
+    <a class="code" href="plonk___i_o_s_audio_host_8h.html#ad2a61a10fc5c8f1e202ebaf97cc4e8d3" title="Convenience macro for adding member variables to Objective-C classes.">PLONK_OBJC_PROPERTY_MEMBER</a>(<span class="keywordtype">float</span>,frequency);
+    <a class="code" href="plonk___i_o_s_audio_host_8h.html#ad2a61a10fc5c8f1e202ebaf97cc4e8d3" title="Convenience macro for adding member variables to Objective-C classes.">PLONK_OBJC_PROPERTY_MEMBER</a>(<span class="keywordtype">float</span>,amplitude);
+ }
+ ...
+</pre></div><dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="plonk___i_o_s_audio_host_8h.html#ae1db643362e4f99196427afe37839389" title="Convenience macro for declaring Objective-C properites.">PLONK_OBJC_PROPERTY_DECLARE</a>, <a class="el" href="plonk___i_o_s_audio_host_8h.html#a485270314a84d17ad274feeb889f97a8" title="Convenience macro for synthesising properity methods.">PLONK_OBJC_PROPERTY_SYNTH</a> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ae1db643362e4f99196427afe37839389"></a><!-- doxytag: member="plonk_IOSAudioHost.h::PLONK_OBJC_PROPERTY_DECLARE" ref="ae1db643362e4f99196427afe37839389" args="(Type, Name)" -->
 <div class="memitem">
 <div class="memproto">
@@ -142,44 +167,6 @@ Defines</h2></td></tr>
  <a class="code" href="plonk___i_o_s_audio_host_8h.html#ae1db643362e4f99196427afe37839389" title="Convenience macro for declaring Objective-C properites.">PLONK_OBJC_PROPERTY_DECLARE</a>(<span class="keywordtype">float</span>,amplitude); <span class="comment">// instead of @property ..etc</span>
  <span class="keyword">@end</span>
 </pre></div><dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="plonk___i_o_s_audio_host_8h.html#ad2a61a10fc5c8f1e202ebaf97cc4e8d3" title="Convenience macro for adding member variables to Objective-C classes.">PLONK_OBJC_PROPERTY_MEMBER</a>, <a class="el" href="plonk___i_o_s_audio_host_8h.html#a485270314a84d17ad274feeb889f97a8" title="Convenience macro for synthesising properity methods.">PLONK_OBJC_PROPERTY_SYNTH</a> </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ad2a61a10fc5c8f1e202ebaf97cc4e8d3"></a><!-- doxytag: member="plonk_IOSAudioHost.h::PLONK_OBJC_PROPERTY_MEMBER" ref="ad2a61a10fc5c8f1e202ebaf97cc4e8d3" args="(Type, Name)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLONK_OBJC_PROPERTY_MEMBER</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Name&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="class_variable.html">Variable</a>&lt;Type&gt; Name</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Convenience macro for adding member variables to Objective-C classes. </p>
-<p>This helps declare the appropriate type of Plonk Variable&lt;&gt; e.g., for providing an interface between a GUI and the audio engine. You then need to declare the property using PLONK_OBJC_PROPERTY_DECLARE and synthesise the getter and setter methods using PLONK_OBJC_PROPERTY_SYNTH.</p>
-<p>For example:</p>
-<div class="fragment"><pre class="fragment"> <span class="keyword">@interface </span>MyClass : NSObject
- {
-    <a class="code" href="plonk___i_o_s_audio_host_8h.html#ad2a61a10fc5c8f1e202ebaf97cc4e8d3" title="Convenience macro for adding member variables to Objective-C classes.">PLONK_OBJC_PROPERTY_MEMBER</a>(<span class="keywordtype">float</span>,frequency);
-    <a class="code" href="plonk___i_o_s_audio_host_8h.html#ad2a61a10fc5c8f1e202ebaf97cc4e8d3" title="Convenience macro for adding member variables to Objective-C classes.">PLONK_OBJC_PROPERTY_MEMBER</a>(<span class="keywordtype">float</span>,amplitude);
- }
- ...
-</pre></div><dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="plonk___i_o_s_audio_host_8h.html#ae1db643362e4f99196427afe37839389" title="Convenience macro for declaring Objective-C properites.">PLONK_OBJC_PROPERTY_DECLARE</a>, <a class="el" href="plonk___i_o_s_audio_host_8h.html#a485270314a84d17ad274feeb889f97a8" title="Convenience macro for synthesising properity methods.">PLONK_OBJC_PROPERTY_SYNTH</a> </dd></dl>
 
 </div>
 </div>
@@ -255,7 +242,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

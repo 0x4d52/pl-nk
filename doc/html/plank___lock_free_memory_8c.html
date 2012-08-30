@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,172 +57,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_66de319f4396a2b7916472e434c6bf60.html">plank</a>      </li>
-      <li class="navelem"><a class="el" href="dir_4b1cf33a571f40b66f6d4251555d31a6.html">core</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">plank_LockFreeMemory.c File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="plank___standard_header_8h_source.html">plank_StandardHeader.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plank___lock_free_memory_8h_source.html">plank_LockFreeMemory.h</a>&quot;</code><br/>
-</div><table class="memberdecls">
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___lock_free_memory_8c.html#ac9cf016b3d32f2c6511d0de5e67afd18">pl_LockFreeMemory_CreateAndInit</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___lock_free_memory_8c.html#abe2e506b06c9c1a1f074f0089ea57cef">pl_LockFreeMemory_Create</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___lock_free_memory_8c.html#a77c817163a008efe456f2d98f828dc60">pl_LockFreeMemory_Init</a> (<a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___lock_free_memory_8c.html#af7ba3887fc76ac142aa630dd05d21398">pl_LockFreeMemory_DeInit</a> (<a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___lock_free_memory_8c.html#a229c29437084dcf54ea1f9698237a0f1">pl_LockFreeMemory_Destroy</a> (<a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___lock_free_memory_8c.html#abbc2da8ecf1b44de1a9e834c92f1468b">pl_LockFreeMemory_AllocateBytes</a> (<a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a> p, <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> numBytes)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___lock_free_memory_8c.html#af5b3f51e3a3a488bc354e5766a82ba59">pl_LockFreeMemory_Free</a> (<a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a> p, void *ptr)</td></tr>
+<table class="memberdecls">
 </table>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="abbc2da8ecf1b44de1a9e834c92f1468b"></a><!-- doxytag: member="plank_LockFreeMemory.c::pl_LockFreeMemory_AllocateBytes" ref="abbc2da8ecf1b44de1a9e834c92f1468b" args="(PlankLockFreeMemoryRef p, PlankUL numBytes)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* pl_LockFreeMemory_AllocateBytes </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>&#160;</td>
-          <td class="paramname"><em>numBytes</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abe2e506b06c9c1a1f074f0089ea57cef"></a><!-- doxytag: member="plank_LockFreeMemory.c::pl_LockFreeMemory_Create" ref="abe2e506b06c9c1a1f074f0089ea57cef" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a> pl_LockFreeMemory_Create </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ac9cf016b3d32f2c6511d0de5e67afd18"></a><!-- doxytag: member="plank_LockFreeMemory.c::pl_LockFreeMemory_CreateAndInit" ref="ac9cf016b3d32f2c6511d0de5e67afd18" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a> pl_LockFreeMemory_CreateAndInit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af7ba3887fc76ac142aa630dd05d21398"></a><!-- doxytag: member="plank_LockFreeMemory.c::pl_LockFreeMemory_DeInit" ref="af7ba3887fc76ac142aa630dd05d21398" args="(PlankLockFreeMemoryRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeMemory_DeInit </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a229c29437084dcf54ea1f9698237a0f1"></a><!-- doxytag: member="plank_LockFreeMemory.c::pl_LockFreeMemory_Destroy" ref="a229c29437084dcf54ea1f9698237a0f1" args="(PlankLockFreeMemoryRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeMemory_Destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af5b3f51e3a3a488bc354e5766a82ba59"></a><!-- doxytag: member="plank_LockFreeMemory.c::pl_LockFreeMemory_Free" ref="af5b3f51e3a3a488bc354e5766a82ba59" args="(PlankLockFreeMemoryRef p, void *ptr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeMemory_Free </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>ptr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a77c817163a008efe456f2d98f828dc60"></a><!-- doxytag: member="plank_LockFreeMemory.c::pl_LockFreeMemory_Init" ref="a77c817163a008efe456f2d98f828dc60" args="(PlankLockFreeMemoryRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_LockFreeMemory_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___lock_free_memory_8h.html#a166f677ec1671179b6eac40f21af784d">PlankLockFreeMemoryRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -239,7 +80,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>High-shelving (treble) filter.  
  <a href="class_high_shelf_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___filter_shortcuts_8h_source.html">plonk_FilterShortcuts.h</a>&gt;</code></p>
-
 <p><a href="class_high_shelf_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -101,15 +98,31 @@ Static Public Member Functions</h2></td></tr>
 class HighShelfUnit&lt; SampleType &gt;</h3>
 
 <p>High-shelving (treble) filter. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (input, frequency=1200, s=1, gain=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (input frequency=1200, s=1, gain=0, mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>input: (unit, multi) the unit to filter</li>
+<li>frequency: (unit, multi) the -3dB point cut-off frequency in Hz</li>
+<li>s: (unit, multi) the slope factor (keep to 1 or below for no strange resonances)</li>
+<li>gain: (unit, multi) the cut/boost in gain dB</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a9b60881a8bb3102124d1322dad0d5098"></a><!-- doxytag: member="HighShelfUnit::FilterCoeffsType" ref="a9b60881a8bb3102124d1322dad0d5098" args="" -->
+<a class="anchor" id="a2d74a0faa8d6e9b409921344d694706e"></a><!-- doxytag: member="HighShelfUnit::UnitType" ref="a2d74a0faa8d6e9b409921344d694706e" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit</a>&lt;<a class="el" href="class_filter_shape_high_shelf_base.html">FilterShape</a>&gt; <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffsType</a></td>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
         </tr>
       </table>
 </div>
@@ -132,14 +145,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a05e58b99c96aa451079cd9181fbf2b79"></a><!-- doxytag: member="HighShelfUnit::FilterType" ref="a05e58b99c96aa451079cd9181fbf2b79" args="" -->
+<a class="anchor" id="a9b60881a8bb3102124d1322dad0d5098"></a><!-- doxytag: member="HighShelfUnit::FilterCoeffsType" ref="a9b60881a8bb3102124d1322dad0d5098" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_high_shelf_unit.html#ad286e18516fdcaf86fd0570af2f5a5f7">FormType</a>&gt; <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+          <td class="memname">typedef <a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffs3ParamUnit</a>&lt;<a class="el" href="class_filter_shape_high_shelf_base.html">FilterShape</a>&gt; <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_coeffs3_param_unit.html">FilterCoeffsType</a></td>
         </tr>
       </table>
 </div>
@@ -162,6 +175,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a05e58b99c96aa451079cd9181fbf2b79"></a><!-- doxytag: member="HighShelfUnit::FilterType" ref="a05e58b99c96aa451079cd9181fbf2b79" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_filter_unit.html">FilterUnit</a>&lt;<a class="el" href="class_high_shelf_unit.html#ad286e18516fdcaf86fd0570af2f5a5f7">FormType</a>&gt; <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::<a class="el" href="class_filter_unit.html">FilterType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a088b4259309c56126cca7f155238b919"></a><!-- doxytag: member="HighShelfUnit::ResampleType" ref="a088b4259309c56126cca7f155238b919" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -177,14 +205,18 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2d74a0faa8d6e9b409921344d694706e"></a><!-- doxytag: member="HighShelfUnit::UnitType" ref="a2d74a0faa8d6e9b409921344d694706e" args="" -->
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a04083a5538a2debb9d482591b562b77f"></a><!-- doxytag: member="HighShelfUnit::getInfo" ref="a04083a5538a2debb9d482591b562b77f" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -192,7 +224,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a8700666575714b548fe8abc83aaeba00"></a><!-- doxytag: member="HighShelfUnit::ar" ref="a8700666575714b548fe8abc83aaeba00" args="(UnitType const &amp;input, UnitType const &amp;frequency=SampleType(1200), UnitType const &amp;s=SampleType(1), UnitType const &amp;gain=SampleType(0), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::noPreference(), SampleRate const &amp;preferredSampleRate=SampleRate::noPreference())" -->
 <div class="memitem">
 <div class="memproto">
@@ -270,24 +301,6 @@ template&lt;class SampleType &gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="a04083a5538a2debb9d482591b562b77f"></a><!-- doxytag: member="HighShelfUnit::getInfo" ref="a04083a5538a2debb9d482591b562b77f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_high_shelf_unit.html">HighShelfUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -375,7 +388,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

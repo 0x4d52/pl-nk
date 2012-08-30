@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -74,9 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">DelayFormData&lt; SampleType, Form, NumInParams, NumOutParams &gt;::DelayState Struct Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="DelayFormData::DelayState" -->
-<p><code>#include &lt;<a class="el" href="plonk___delay_forms_8h_source.html">plonk_DelayForms.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="DelayFormData::DelayState" --><div class="dynheader">
 Inheritance diagram for DelayFormData&lt; SampleType, Form, NumInParams, NumOutParams &gt;::DelayState:</div>
 <div class="dyncontent">
  <div class="center">
@@ -109,14 +106,59 @@ Public Attributes</h2></td></tr>
  struct DelayFormData&lt; SampleType, Form, NumInParams, NumOutParams &gt;::DelayState</h3>
 
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="aa8f420066dedb3d6389cc7d30d50d3cc"></a><!-- doxytag: member="DelayFormData::DelayState::buffer0" ref="aa8f420066dedb3d6389cc7d30d50d3cc" args="" -->
+<a class="anchor" id="ad58997f5c23b137da052681e286416b0"></a><!-- doxytag: member="DelayFormData::DelayState::outputSamples" ref="ad58997f5c23b137da052681e286416b0" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#aa8f420066dedb3d6389cc7d30d50d3cc">DelayState::buffer0</a></td>
+          <td class="memname">SampleType* <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#ad58997f5c23b137da052681e286416b0">DelayState::outputSamples</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae6f462892c7edc4d694d66ff867509bb"></a><!-- doxytag: member="DelayFormData::DelayState::outputBufferLength" ref="ae6f462892c7edc4d694d66ff867509bb" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#ae6f462892c7edc4d694d66ff867509bb">DelayState::outputBufferLength</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3b47dbc5c9e47ec2cd7ea720c3e19c2d"></a><!-- doxytag: member="DelayFormData::DelayState::inputSamples" ref="a3b47dbc5c9e47ec2cd7ea720c3e19c2d" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const SampleType* <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a3b47dbc5c9e47ec2cd7ea720c3e19c2d">DelayState::inputSamples</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a367a30cee3501b2867775d03dcd2d287"></a><!-- doxytag: member="DelayFormData::DelayState::bufferSamples" ref="a367a30cee3501b2867775d03dcd2d287" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SampleType* <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a367a30cee3501b2867775d03dcd2d287">DelayState::bufferSamples</a></td>
         </tr>
       </table>
 </div>
@@ -154,134 +196,14 @@ template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutPar
 
 </div>
 </div>
-<a class="anchor" id="a367a30cee3501b2867775d03dcd2d287"></a><!-- doxytag: member="DelayFormData::DelayState::bufferSamples" ref="a367a30cee3501b2867775d03dcd2d287" args="" -->
+<a class="anchor" id="aa8f420066dedb3d6389cc7d30d50d3cc"></a><!-- doxytag: member="DelayFormData::DelayState::buffer0" ref="aa8f420066dedb3d6389cc7d30d50d3cc" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">SampleType* <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a367a30cee3501b2867775d03dcd2d287">DelayState::bufferSamples</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3b47dbc5c9e47ec2cd7ea720c3e19c2d"></a><!-- doxytag: member="DelayFormData::DelayState::inputSamples" ref="a3b47dbc5c9e47ec2cd7ea720c3e19c2d" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const SampleType* <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a3b47dbc5c9e47ec2cd7ea720c3e19c2d">DelayState::inputSamples</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aafef16600ffa97e3de2120dcdab07f25"></a><!-- doxytag: member="DelayFormData::DelayState::inputValue" ref="aafef16600ffa97e3de2120dcdab07f25" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SampleType <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#aafef16600ffa97e3de2120dcdab07f25">DelayState::inputValue</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae6f462892c7edc4d694d66ff867509bb"></a><!-- doxytag: member="DelayFormData::DelayState::outputBufferLength" ref="ae6f462892c7edc4d694d66ff867509bb" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#ae6f462892c7edc4d694d66ff867509bb">DelayState::outputBufferLength</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad58997f5c23b137da052681e286416b0"></a><!-- doxytag: member="DelayFormData::DelayState::outputSamples" ref="ad58997f5c23b137da052681e286416b0" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SampleType* <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#ad58997f5c23b137da052681e286416b0">DelayState::outputSamples</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a11e87f3a2dffb78ead8a05e0ea5b3f40"></a><!-- doxytag: member="DelayFormData::DelayState::outputValue" ref="a11e87f3a2dffb78ead8a05e0ea5b3f40" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SampleType <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a11e87f3a2dffb78ead8a05e0ea5b3f40">DelayState::outputValue</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3583e14aeddbac82c145af4e2ea7f1ed"></a><!-- doxytag: member="DelayFormData::DelayState::paramsIn" ref="a3583e14aeddbac82c145af4e2ea7f1ed" args="[NumInParams]" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a3583e14aeddbac82c145af4e2ea7f1ed">DelayState::paramsIn</a>[NumInParams]</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae4ffe6833e723f6881d71d80ffdf5619"></a><!-- doxytag: member="DelayFormData::DelayState::paramsOut" ref="ae4ffe6833e723f6881d71d80ffdf5619" args="[NumOutParams]" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#ae4ffe6833e723f6881d71d80ffdf5619">DelayState::paramsOut</a>[NumOutParams]</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af218dc3ebc3edbe95625d28de3edb150"></a><!-- doxytag: member="DelayFormData::DelayState::readValue" ref="af218dc3ebc3edbe95625d28de3edb150" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SampleType <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#af218dc3ebc3edbe95625d28de3edb150">DelayState::readValue</a></td>
+          <td class="memname"><a class="el" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#aa8f420066dedb3d6389cc7d30d50d3cc">DelayState::buffer0</a></td>
         </tr>
       </table>
 </div>
@@ -304,6 +226,36 @@ template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutPar
 
 </div>
 </div>
+<a class="anchor" id="aafef16600ffa97e3de2120dcdab07f25"></a><!-- doxytag: member="DelayFormData::DelayState::inputValue" ref="aafef16600ffa97e3de2120dcdab07f25" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SampleType <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#aafef16600ffa97e3de2120dcdab07f25">DelayState::inputValue</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af218dc3ebc3edbe95625d28de3edb150"></a><!-- doxytag: member="DelayFormData::DelayState::readValue" ref="af218dc3ebc3edbe95625d28de3edb150" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SampleType <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#af218dc3ebc3edbe95625d28de3edb150">DelayState::readValue</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aa6c9f358368dc5e9f21e7e78b65b71bc"></a><!-- doxytag: member="DelayFormData::DelayState::writeValue" ref="aa6c9f358368dc5e9f21e7e78b65b71bc" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -312,6 +264,51 @@ template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutPar
       <table class="memname">
         <tr>
           <td class="memname">SampleType <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#aa6c9f358368dc5e9f21e7e78b65b71bc">DelayState::writeValue</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a11e87f3a2dffb78ead8a05e0ea5b3f40"></a><!-- doxytag: member="DelayFormData::DelayState::outputValue" ref="a11e87f3a2dffb78ead8a05e0ea5b3f40" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SampleType <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a11e87f3a2dffb78ead8a05e0ea5b3f40">DelayState::outputValue</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae4ffe6833e723f6881d71d80ffdf5619"></a><!-- doxytag: member="DelayFormData::DelayState::paramsOut" ref="ae4ffe6833e723f6881d71d80ffdf5619" args="[NumOutParams]" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#ae4ffe6833e723f6881d71d80ffdf5619">DelayState::paramsOut</a>[NumOutParams]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3583e14aeddbac82c145af4e2ea7f1ed"></a><!-- doxytag: member="DelayFormData::DelayState::paramsIn" ref="a3583e14aeddbac82c145af4e2ea7f1ed" args="[NumInParams]" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutParams&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_delay_form_data.html#abebbc446e88a288fa2b5f30aa8bb7a14">IndexType</a> <a class="el" href="struct_delay_form_data.html">DelayFormData</a>&lt; SampleType, Form, NumInParams, NumOutParams &gt;::<a class="el" href="struct_delay_form_data_1_1_delay_state.html#a3583e14aeddbac82c145af4e2ea7f1ed">DelayState::paramsIn</a>[NumInParams]</td>
         </tr>
       </table>
 </div>
@@ -337,7 +334,7 @@ template&lt;class SampleType , signed Form, signed NumInParams, signed NumOutPar
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:56 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

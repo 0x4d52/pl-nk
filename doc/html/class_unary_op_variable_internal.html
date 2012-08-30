@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,18 +68,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">UnaryOpVariableInternal&lt; Type, op &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="UnaryOpVariableInternal" --><!-- doxytag: inherits="VariableInternalBase,ReceiverInternal" -->
-<p><code>#include &lt;<a class="el" href="plonk___unary_op_variable_8h_source.html">plonk_UnaryOpVariable.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="UnaryOpVariableInternal" --><!-- doxytag: inherits="VariableInternalBase,ReceiverInternal" --><div class="dynheader">
 Inheritance diagram for UnaryOpVariableInternal&lt; Type, op &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_unary_op_variable_internal.png" usemap="#UnaryOpVariableInternal&lt; Type, op &gt;_map" alt=""/>
   <map id="UnaryOpVariableInternal&lt; Type, op &gt;_map" name="UnaryOpVariableInternal&lt; Type, op &gt;_map">
-<area href="class_variable_internal_base.html" alt="VariableInternalBase&lt; Type &gt;" shape="rect" coords="0,112,228,136"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="238,112,466,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; Variable&lt; Type &gt; &gt;" shape="rect" coords="0,56,228,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,228,24"/>
+<area href="class_variable_internal_base.html" alt="VariableInternalBase&lt; Type &gt;" shape="rect" coords="0,168,228,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="238,168,466,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; Variable&lt; Type &gt; &gt;" shape="rect" coords="0,112,228,136"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,228,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,228,24"/>
 </map>
  </div></div>
 
@@ -103,21 +101,6 @@ Public Member Functions</h2></td></tr>
  class UnaryOpVariableInternal&lt; Type, op &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aa864386baec9f2f3594d1fde5c4cb509"></a><!-- doxytag: member="UnaryOpVariableInternal::Sender" ref="aa864386baec9f2f3594d1fde5c4cb509" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type, Type(*)(Typeconst &amp;) op&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">VariableType::Sender</a> <a class="el" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal</a>&lt; Type, op &gt;::<a class="el" href="class_variable.html">Sender</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a2b49929ca5c1e75b43a4308331ba0372"></a><!-- doxytag: member="UnaryOpVariableInternal::VariableType" ref="a2b49929ca5c1e75b43a4308331ba0372" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -126,6 +109,21 @@ template&lt;class Type, Type(*)(Typeconst &amp;) op&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;Type&gt; <a class="el" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal</a>&lt; Type, op &gt;::<a class="el" href="class_variable.html">VariableType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa864386baec9f2f3594d1fde5c4cb509"></a><!-- doxytag: member="UnaryOpVariableInternal::Sender" ref="aa864386baec9f2f3594d1fde5c4cb509" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type, Type(*)(Typeconst &amp;) op&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">VariableType::Sender</a> <a class="el" href="class_unary_op_variable_internal.html">UnaryOpVariableInternal</a>&lt; Type, op &gt;::<a class="el" href="class_variable.html">Sender</a></td>
         </tr>
       </table>
 </div>
@@ -270,7 +268,7 @@ template&lt;class Type, Type(*)(Typeconst &amp;) op&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:05 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,15 +69,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">LockFreeQueueInternal&lt; ValueType * &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="LockFreeQueueInternal&lt; ValueType * &gt;" --><!-- doxytag: inherits="SmartPointer" -->
-<p><code>#include &lt;<a class="el" href="plonk___lock_free_queue_8h_source.html">plonk_LockFreeQueue.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="LockFreeQueueInternal&lt; ValueType * &gt;" --><!-- doxytag: inherits="SmartPointer" --><div class="dynheader">
 Inheritance diagram for LockFreeQueueInternal&lt; ValueType * &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.png" usemap="#LockFreeQueueInternal&lt; ValueType * &gt;_map" alt=""/>
   <map id="LockFreeQueueInternal&lt; ValueType * &gt;_map" name="LockFreeQueueInternal&lt; ValueType * &gt;_map">
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,243,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,243,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,243,24"/>
 </map>
  </div></div>
 
@@ -94,6 +92,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#a070752e3d6160bcce1335e8a413767e0">~LockFreeQueueInternal</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#a5dbf080a7d5b1081e279055ea1079667">push</a> (ValueType *const value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ValueType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#aa587c1259adf63586085120c20168f03">pop</a> ()  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#ac5e80cb12a27c7e89bd87f7f0450bc91">pop</a> (OtherType &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#a985aacc2a0f1e0fd089140cb775010dc">clear</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#a5e270a8a91e778e94bf76335ecc3f882">clearCache</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#ae5a9dfba7102da5d8f23f492eadbdb9a">clearAll</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LongLong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#a3d4b7bbede82a918c816bd10fba28a26">length</a> ()  throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="friends"></a>
 Friends</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue_internal_3_01_value_type_01_5_01_4.html#a8312dc68a7c5c47c241505b05127dc14">LockFreeQueue&lt; ValueType * &gt;</a></td></tr>
@@ -155,6 +159,25 @@ template&lt;class ValueType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a5dbf080a7d5b1081e279055ea1079667"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::push" ref="a5dbf080a7d5b1081e279055ea1079667" args="(ValueType *const value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt; ValueType * &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">ValueType *const&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aa587c1259adf63586085120c20168f03"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::pop" ref="aa587c1259adf63586085120c20168f03" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -173,17 +196,91 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a5dbf080a7d5b1081e279055ea1079667"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::push" ref="a5dbf080a7d5b1081e279055ea1079667" args="(ValueType *const value)" -->
+<a class="anchor" id="ac5e80cb12a27c7e89bd87f7f0450bc91"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::pop" ref="ac5e80cb12a27c7e89bd87f7f0450bc91" args="(OtherType &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+<div class="memtemplate">
+template&lt;class OtherType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt; ValueType * &gt;::pop </td>
+          <td>(</td>
+          <td class="paramtype">OtherType &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a985aacc2a0f1e0fd089140cb775010dc"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::clear" ref="a985aacc2a0f1e0fd089140cb775010dc" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ValueType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt; ValueType * &gt;::push </td>
+          <td class="memname">void <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt; ValueType * &gt;::clear </td>
           <td>(</td>
-          <td class="paramtype">ValueType *const&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5e270a8a91e778e94bf76335ecc3f882"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::clearCache" ref="a5e270a8a91e778e94bf76335ecc3f882" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt; ValueType * &gt;::clearCache </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae5a9dfba7102da5d8f23f492eadbdb9a"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::clearAll" ref="ae5a9dfba7102da5d8f23f492eadbdb9a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt; ValueType * &gt;::clearAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3d4b7bbede82a918c816bd10fba28a26"></a><!-- doxytag: member="LockFreeQueueInternal&lt; ValueType * &gt;::length" ref="a3d4b7bbede82a918c816bd10fba28a26" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">LongLong <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt; ValueType * &gt;::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
@@ -226,7 +323,7 @@ template&lt;class ValueType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

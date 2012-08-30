@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_66de319f4396a2b7916472e434c6bf60.html">plank</a>      </li>
-      <li class="navelem"><a class="el" href="dir_4d6c3b9eaf843e696e8e525ea151a418.html">containers</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plank_LockFreeQueue.h</div>  </div>
@@ -118,29 +109,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00045"></a>00045 
 <a name="l00053"></a><a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">00053</a> <span class="keyword">typedef</span> <span class="keyword">struct </span>PlankLockFreeQueue* <a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a>; 
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055 <a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga34203c72ddf1e100b4e7bda6e64838b4">pl_LockFreeQueue_CreateAndInit</a>();
-<a name="l00056"></a>00056 <a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga86b810409108ffdb914cde24780ba04e">pl_LockFreeQueue_Create</a>();
-<a name="l00057"></a>00057 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga0ec98226a4b16c9520c83eda9dbb60f9">pl_LockFreeQueue_Init</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
-<a name="l00058"></a>00058 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gae420f1660c934e90e682a9913769d495">pl_LockFreeQueue_DeInit</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
-<a name="l00059"></a>00059 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga22fddc6eab9392565837be81186a7358">pl_LockFreeQueue_Destroy</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
-<a name="l00060"></a>00060 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gab2a410db5a9c7f3e147660850adbb1f7">pl_LockFreeQueue_Push</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <span class="keyword">const</span> <a class="code" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a> element);
-<a name="l00061"></a>00061 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gab64a9e7f8817ed5e220b8f51e2993837">pl_LockFreeQueue_Pop</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <a class="code" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a>* element);
-<a name="l00062"></a>00062 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gab64a9e7f8817ed5e220b8f51e2993837">pl_LockFreeQueue_Pop</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <a class="code" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a>* element);
-<a name="l00063"></a>00063 <a class="code" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga1ab8eb7f022361781d3b4276909cb575">pl_LockFreeQueue_GetSize</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
-<a name="l00064"></a>00064 
-<a name="l00067"></a>00067 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="preprocessor">#if !DOXYGEN</span>
-<a name="l00070"></a>00070 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankLockFreeQueue
-<a name="l00071"></a>00071 {
-<a name="l00072"></a>00072         <a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">PLANK_ALIGN</a>(16) PlankAtomicPX               head;
-<a name="l00073"></a>00073     <a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">PLANK_ALIGN</a>(16) PlankAtomicPX               tail;
-<a name="l00074"></a>00074     <a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">PLANK_ALIGN</a>(16) PlankAtomicLL               count;
-<a name="l00075"></a>00075     <a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">PLANK_ALIGN</a>(16) PlankLockFreeQueueElement   dummyElement;
-<a name="l00076"></a>00076 } PlankLockFreeQueue;
-<a name="l00077"></a>00077 <span class="preprocessor">#endif</span>
-<a name="l00078"></a>00078 <span class="preprocessor"></span>
-<a name="l00079"></a>00079 <span class="preprocessor">#endif // PLANK_LOCKFREEQUEUE_H</span>
+<a name="l00055"></a><a class="code" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">00055</a> <span class="keyword">typedef</span> <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> (*<a class="code" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">PlankLockFreeQueueFreeElementDataFunction</a>)(<a class="code" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 <a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga34203c72ddf1e100b4e7bda6e64838b4">pl_LockFreeQueue_CreateAndInit</a>();
+<a name="l00058"></a>00058 <a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga86b810409108ffdb914cde24780ba04e">pl_LockFreeQueue_Create</a>();
+<a name="l00059"></a>00059 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga0ec98226a4b16c9520c83eda9dbb60f9">pl_LockFreeQueue_Init</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
+<a name="l00060"></a>00060 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gae420f1660c934e90e682a9913769d495">pl_LockFreeQueue_DeInit</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
+<a name="l00061"></a>00061 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga22fddc6eab9392565837be81186a7358">pl_LockFreeQueue_Destroy</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
+<a name="l00062"></a>00062 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#ga9651b88d77524c82642c0cbadcbbf58e">pl_LockFreeQueue_Clear</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
+<a name="l00063"></a>00063 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gaf310470590c1e97e259cebf0b9c352d1">pl_LockFreeQueue_SetFreeElementDataFunction</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <a class="code" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">PlankLockFreeQueueFreeElementDataFunction</a> freeFunction);
+<a name="l00064"></a>00064 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gab2a410db5a9c7f3e147660850adbb1f7">pl_LockFreeQueue_Push</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <span class="keyword">const</span> <a class="code" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a> element);
+<a name="l00065"></a>00065 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gab64a9e7f8817ed5e220b8f51e2993837">pl_LockFreeQueue_Pop</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <a class="code" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a>* element);
+<a name="l00066"></a>00066 <a class="code" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> <a class="code" href="group___plank_lock_free_queue_class.html#gab64a9e7f8817ed5e220b8f51e2993837">pl_LockFreeQueue_Pop</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p, <a class="code" href="group___plank_lock_free_linked_list_element_class.html#ga7e049c7edba8f155690ca68a97bd2180">PlankLockFreeQueueElementRef</a>* element);
+<a name="l00067"></a>00067 
+<a name="l00069"></a>00069 <a class="code" href="plank___standard_header_8h.html#adc55cc3e1effd5d94c88cc90d1117ce5">PlankI</a> <a class="code" href="group___plank_lock_free_queue_class.html#gafb22446a30c9dee41214207fe01130a8" title="NB the result of this could be invalid by the time it is returned in a multithreaded context...">pl_LockFreeQueue_GetSize</a> (<a class="code" href="group___plank_lock_free_queue_class.html#ga7c068cf6b20efd5a00f15d89d2be5167">PlankLockFreeQueueRef</a> p);
+<a name="l00070"></a>00070 
+<a name="l00073"></a>00073 <a class="code" href="plank___standard_header_8h.html#a5f78f73f0b53faac6c264036f55232e4">PLANK_END_C_LINKAGE</a>
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 <span class="preprocessor">#if !DOXYGEN</span>
+<a name="l00076"></a>00076 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>PlankLockFreeQueue
+<a name="l00077"></a>00077 {
+<a name="l00078"></a>00078         <a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">PLANK_ALIGN</a>(16) PlankAtomicPX               head;
+<a name="l00079"></a>00079     <a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">PLANK_ALIGN</a>(16) PlankAtomicPX               tail;
+<a name="l00080"></a>00080     <a class="code" href="plank___standard_header_8h.html#a29a58464704fb911f8092f2e25efe0d4">PLANK_ALIGN</a>(4) PlankAtomicI                 count;
+<a name="l00081"></a>00081     <a class="code" href="group___plank_lock_free_queue_class.html#ga7504ef4a6c3859003f938f7b989ac323">PlankLockFreeQueueFreeElementDataFunction</a>   freeFunction;
+<a name="l00082"></a>00082     PlankLockFreeQueueElement                   dummyElement;
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084 } PlankLockFreeQueue;
+<a name="l00085"></a>00085 <span class="preprocessor">#endif</span>
+<a name="l00086"></a>00086 <span class="preprocessor"></span>
+<a name="l00087"></a>00087 <span class="preprocessor">#endif // PLANK_LOCKFREEQUEUE_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -157,7 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:46 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:44 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

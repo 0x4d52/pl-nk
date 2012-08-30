@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_66de319f4396a2b7916472e434c6bf60.html">plank</a>      </li>
-      <li class="navelem"><a class="el" href="dir_55acb8a3572514eb98b6cea648adb87c.html">files</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6c4a58545874dea69350fbfdc742ea5d.html">audio</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plank_AudioFileCommon.h</div>  </div>
@@ -113,11 +103,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">#ifndef PLANK_AUDIOFILECOMMON_H</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_AUDIOFILECOMMON_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a><a class="code" href="plank___audio_file_common_8h.html#a8ab2bce0d091553026a0a846efce1567">00042</a> <span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_INVALID      -1</span>
-<a name="l00043"></a><a class="code" href="plank___audio_file_common_8h.html#a17bfd8ac1e5744f061885ff546a679be">00043</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_UNKNOWN       0</span>
-<a name="l00044"></a><a class="code" href="plank___audio_file_common_8h.html#a9ac23decd9f7a734bf4cbefe67312783">00044</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_WAV           1</span>
-<a name="l00045"></a><a class="code" href="plank___audio_file_common_8h.html#ad4c1b25a2c4f4820bc19a8423160aa17">00045</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_AIFF          2</span>
-<a name="l00046"></a><a class="code" href="plank___audio_file_common_8h.html#a80db1a4837507d011d227c5134cde705">00046</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_AIFC          3</span>
+<a name="l00042"></a><a class="code" href="plank___audio_file_common_8h.html#a8ab2bce0d091553026a0a846efce1567">00042</a> <span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_INVALID                -1</span>
+<a name="l00043"></a><a class="code" href="plank___audio_file_common_8h.html#a17bfd8ac1e5744f061885ff546a679be">00043</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_UNKNOWN                 0</span>
+<a name="l00044"></a><a class="code" href="plank___audio_file_common_8h.html#a9ac23decd9f7a734bf4cbefe67312783">00044</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_WAV                     1</span>
+<a name="l00045"></a><a class="code" href="plank___audio_file_common_8h.html#ad4c1b25a2c4f4820bc19a8423160aa17">00045</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_AIFF                    2</span>
+<a name="l00046"></a><a class="code" href="plank___audio_file_common_8h.html#a80db1a4837507d011d227c5134cde705">00046</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_FORMAT_AIFC                    3</span>
 <a name="l00047"></a>00047 <span class="preprocessor"></span>
 <a name="l00048"></a><a class="code" href="plank___audio_file_common_8h.html#a5523d1a743ecf56afd461e3612586a13">00048</a> <span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG        1</span>
 <a name="l00049"></a><a class="code" href="plank___audio_file_common_8h.html#a0ab39aca1a3cdc840b10132b51b6c65a">00049</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_PCM_FLAG              2</span>
@@ -136,11 +126,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00062"></a><a class="code" href="plank___audio_file_common_8h.html#acac6d9a676516aa7b2c2fd7c79baca1e">00062</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_ENCODING_MAX                   PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN</span>
 <a name="l00063"></a>00063 <span class="preprocessor"></span>
 <a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="plank___audio_file_common_8h.html#a81d4284d4138e0f7723f04bda41f55b4">00065</a> <span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_PCM          0x0001</span>
-<a name="l00066"></a><a class="code" href="plank___audio_file_common_8h.html#a0146400db5c3099e76f3ae99c8ac837b">00066</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT        0x0003</span>
-<a name="l00067"></a><a class="code" href="plank___audio_file_common_8h.html#afa0fa8bdeadd026f9085c7e6aa3144dc">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE   0xFFFE</span>
+<a name="l00065"></a><a class="code" href="plank___audio_file_common_8h.html#a81d4284d4138e0f7723f04bda41f55b4">00065</a> <span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_PCM            0x0001</span>
+<a name="l00066"></a><a class="code" href="plank___audio_file_common_8h.html#a0146400db5c3099e76f3ae99c8ac837b">00066</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT          0x0003</span>
+<a name="l00067"></a><a class="code" href="plank___audio_file_common_8h.html#afa0fa8bdeadd026f9085c7e6aa3144dc">00067</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE     0xFFFE</span>
 <a name="l00068"></a>00068 <span class="preprocessor"></span>
-<a name="l00069"></a><a class="code" href="plank___audio_file_common_8h.html#aac98b9da5e0dd8569027bf9b71c663d8">00069</a> <span class="preprocessor">#define PLANKAUDIOFILE_AIFC_VERSION 0xA2805140</span>
+<a name="l00069"></a><a class="code" href="plank___audio_file_common_8h.html#aac98b9da5e0dd8569027bf9b71c663d8">00069</a> <span class="preprocessor">#define PLANKAUDIOFILE_AIFC_VERSION                   0xA2805140</span>
 <a name="l00070"></a>00070 <span class="preprocessor"></span>
 <a name="l00071"></a><a class="code" href="struct_plank_audio_file_format_info.html">00071</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_plank_audio_file_format_info.html">PlankAudioFileFormatInfo</a>
 <a name="l00072"></a>00072 {
@@ -171,7 +161,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:46 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:44 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -119,27 +118,22 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gaa2de7a4772b24bdacc792a38ccfcc971"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_Close" ref="gaa2de7a4772b24bdacc792a38ccfcc971" args="(PlankAudioFileReaderRef p)" -->
+<a class="anchor" id="ga8784ba3b844756be7837c8f8bd1ab7a2"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_CreateAndInit" ref="ga8784ba3b844756be7837c8f8bd1ab7a2" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_Close </td>
+          <td class="memname"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a> pl_AudioFileReader_CreateAndInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+<p>Create and initialise a <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object as an opaque reference or PLANK_NULL. </dd></dl>
 
 </div>
 </div>
@@ -162,22 +156,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga8784ba3b844756be7837c8f8bd1ab7a2"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_CreateAndInit" ref="ga8784ba3b844756be7837c8f8bd1ab7a2" args="()" -->
+<a class="anchor" id="ga7efa09693c7ccea6568df64fe5cddbd5"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_Init" ref="ga7efa09693c7ccea6568df64fe5cddbd5" args="(PlankAudioFileReaderRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a> pl_AudioFileReader_CreateAndInit </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_Init </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create and initialise a <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object as an opaque reference or PLANK_NULL. </dd></dl>
+<p>Initialise a <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
 
 </div>
 </div>
@@ -223,6 +224,159 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Destroy a <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga5a6e10f2b61bfd8ab9f289a5a76e8f53"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetFile" ref="ga5a6e10f2b61bfd8ab9f289a5a76e8f53" args="(PlankAudioFileReaderRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59">PlankFileRef</a> pl_AudioFileReader_GetFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the underlying <em>Plank File</em> object. </p>
+<p>This is the raw file object the is performing the fundamental file access operations. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The <em>Plank File</em> object. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaa85d094267a8f606f6f82e9f40447bd6"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_Open" ref="gaa85d094267a8f606f6f82e9f40447bd6" args="(PlankAudioFileReaderRef p, const char *filepath)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_Open </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filepath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaa2de7a4772b24bdacc792a38ccfcc971"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_Close" ref="gaa2de7a4772b24bdacc792a38ccfcc971" args="(PlankAudioFileReaderRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_Close </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga3f14cbe2ba096761fb06d9dd7704e3e3"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetFormat" ref="ga3f14cbe2ba096761fb06d9dd7704e3e3" args="(PlankAudioFileReaderRef p, int *format)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>format</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga6ba1c8ba7650576efcc962f5aadc33df"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetEncoding" ref="ga6ba1c8ba7650576efcc962f5aadc33df" args="(PlankAudioFileReaderRef p, int *encoding)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetEncoding </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>encoding</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
@@ -305,135 +459,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga6ba1c8ba7650576efcc962f5aadc33df"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetEncoding" ref="ga6ba1c8ba7650576efcc962f5aadc33df" args="(PlankAudioFileReaderRef p, int *encoding)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetEncoding </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>encoding</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga5a6e10f2b61bfd8ab9f289a5a76e8f53"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetFile" ref="ga5a6e10f2b61bfd8ab9f289a5a76e8f53" args="(PlankAudioFileReaderRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_file_class.html#ga7a3834c3811eceffb81213155fd14e59">PlankFileRef</a> pl_AudioFileReader_GetFile </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Gets the underlying <em>Plank File</em> object. </p>
-<p>This is the raw file object the is performing the fundamental file access operations. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The <em>Plank File</em> object. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga3f14cbe2ba096761fb06d9dd7704e3e3"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetFormat" ref="ga3f14cbe2ba096761fb06d9dd7704e3e3" args="(PlankAudioFileReaderRef p, int *format)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetFormat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>format</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga0687de26ac936f805f3349a236dcf9df"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetFramePosition" ref="ga0687de26ac936f805f3349a236dcf9df" args="(PlankAudioFileReaderRef p, int *frameIndex)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetFramePosition </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>frameIndex</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="ga0b169539564da5e656f4843bca46d730"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetNumChannels" ref="ga0b169539564da5e656f4843bca46d730" args="(PlankAudioFileReaderRef p, int *numChannels)" -->
 <div class="memitem">
 <div class="memproto">
@@ -449,40 +474,6 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>numChannels</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga72c00c51c3fcaa3fc2f0a60f65d7f61d"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetNumFrames" ref="ga72c00c51c3fcaa3fc2f0a60f65d7f61d" args="(PlankAudioFileReaderRef p, int *numFrames)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetNumFrames </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>numFrames</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -536,22 +527,30 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga7efa09693c7ccea6568df64fe5cddbd5"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_Init" ref="ga7efa09693c7ccea6568df64fe5cddbd5" args="(PlankAudioFileReaderRef p)" -->
+<a class="anchor" id="ga72c00c51c3fcaa3fc2f0a60f65d7f61d"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetNumFrames" ref="ga72c00c51c3fcaa3fc2f0a60f65d7f61d" args="(PlankAudioFileReaderRef p, int *numFrames)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_Init </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetNumFrames </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>numFrames</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Initialise a <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
@@ -562,12 +561,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaa85d094267a8f606f6f82e9f40447bd6"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_Open" ref="gaa85d094267a8f606f6f82e9f40447bd6" args="(PlankAudioFileReaderRef p, const char *filepath)" -->
+<a class="anchor" id="ga85749687029ce642263b50d34979a7ee"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_SetFramePosition" ref="ga85749687029ce642263b50d34979a7ee" args="(PlankAudioFileReaderRef p, const int frameIndex)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_Open </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_SetFramePosition </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -575,8 +574,66 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>filepath</em>&#160;</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>frameIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gac726281037e5e992ba936fb24f807487"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_ResetFramePosition" ref="gac726281037e5e992ba936fb24f807487" args="(PlankAudioFileReaderRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_ResetFramePosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga0687de26ac936f805f3349a236dcf9df"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_GetFramePosition" ref="ga0687de26ac936f805f3349a236dcf9df" args="(PlankAudioFileReaderRef p, int *frameIndex)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_GetFramePosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>frameIndex</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -642,64 +699,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gac726281037e5e992ba936fb24f807487"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_ResetFramePosition" ref="gac726281037e5e992ba936fb24f807487" args="(PlankAudioFileReaderRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_ResetFramePosition </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga85749687029ce642263b50d34979a7ee"></a><!-- doxytag: member="plank_AudioFileReader.h::pl_AudioFileReader_SetFramePosition" ref="ga85749687029ce642263b50d34979a7ee" args="(PlankAudioFileReaderRef p, const int frameIndex)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_SetFramePosition </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>frameIndex</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank <a class="el" href="class_audio_file_reader.html" title="Audio file reader.">AudioFileReader</a></em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A result code which will be PlankResult_OK if the operation was completely successful. </dd></dl>
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -715,7 +714,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,17 +68,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="AutoLock" -->
-<p><code>#include &lt;<a class="el" href="plonk___lock_8h_source.html">plonk_Lock.h</a>&gt;</code></p>
-
 <p><a href="class_auto_lock-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_auto_lock.html#a5a371f1d829718a9a3a22c42a807edf6">AutoLock</a> (<a class="el" href="class_lock.html">Lock</a> const &amp;lock)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_auto_lock.html#afcfb307fda9ce7f1ba9f22c182058fe8">AutoLock</a> (<a class="el" href="class_lock.html">Lock</a> const &amp;lock=Lock::MutexLock)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_auto_lock.html#a8e8ebb3eefdb6b5fefc6fe76a26f8c6c">~AutoLock</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a5a371f1d829718a9a3a22c42a807edf6"></a><!-- doxytag: member="AutoLock::AutoLock" ref="a5a371f1d829718a9a3a22c42a807edf6" args="(Lock const &amp;lock)" -->
+<a class="anchor" id="afcfb307fda9ce7f1ba9f22c182058fe8"></a><!-- doxytag: member="AutoLock::AutoLock" ref="afcfb307fda9ce7f1ba9f22c182058fe8" args="(Lock const &amp;lock=Lock::MutexLock)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -87,7 +84,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">AutoLock::AutoLock </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_lock.html">Lock</a> const &amp;&#160;</td>
-          <td class="paramname"><em>lock</em></td><td>)</td>
+          <td class="paramname"><em>lock</em> = <code>Lock::MutexLock</code></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -131,7 +128,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

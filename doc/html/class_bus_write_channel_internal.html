@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,21 +71,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="BusWriteChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" -->
 <p>Bus write channel.  
  <a href="class_bus_write_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___bus_write_channel_8h_source.html">plonk_BusWriteChannel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BusWriteChannelInternal&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_bus_write_channel_internal.png" usemap="#BusWriteChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="BusWriteChannelInternal&lt; SampleType &gt;_map" name="BusWriteChannelInternal&lt; SampleType &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,168,895,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,112,714,136"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,224,895,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,168,714,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,168,1076,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,352,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,112,714,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,112,1076,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,352,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,56,714,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,56,1076,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,352,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,352,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,352,24"/>
 </map>
  </div></div>
 
@@ -128,85 +126,6 @@ class BusWriteChannelInternal&lt; SampleType &gt;</h3>
 <p>Bus write channel. </p>
 <p>Writes data to a bus. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a58c0ead34f6454d11a15cc9a2c4326ad"></a><!-- doxytag: member="BusWriteChannelInternal::Buffer" ref="a58c0ead34f6454d11a15cc9a2c4326ad" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a09fe521f3ecbd390dd8998e05e871e63"></a><!-- doxytag: member="BusWriteChannelInternal::Bus" ref="a09fe521f3ecbd390dd8998e05e871e63" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">Bus</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a591fc08dfe3da545e098673a7fb6f1ff"></a><!-- doxytag: member="BusWriteChannelInternal::Busses" ref="a591fc08dfe3da545e098673a7fb6f1ff" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">Bus</a>&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Busses</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a03b5a0dcc5b7732108f58ba6ca1c815d"></a><!-- doxytag: member="BusWriteChannelInternal::BusWriteInternal" ref="a03b5a0dcc5b7732108f58ba6ca1c815d" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_bus_write_channel_internal.html">BusWriteInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a407b80598e360087a413ca04f28e0f50"></a><!-- doxytag: member="BusWriteChannelInternal::ChannelType" ref="a407b80598e360087a413ca04f28e0f50" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="afb5c216f8bb181dc0dea1be98f1a8518"></a><!-- doxytag: member="BusWriteChannelInternal::Data" ref="afb5c216f8bb181dc0dea1be98f1a8518" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -227,20 +146,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6366549656a18696accba0d76d41078c"></a><!-- doxytag: member="BusWriteChannelInternal::Inputs" ref="a6366549656a18696accba0d76d41078c" args="" -->
+<a class="anchor" id="a407b80598e360087a413ca04f28e0f50"></a><!-- doxytag: member="BusWriteChannelInternal::ChannelType" ref="a407b80598e360087a413ca04f28e0f50" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a03b5a0dcc5b7732108f58ba6ca1c815d"></a><!-- doxytag: member="BusWriteChannelInternal::BusWriteInternal" ref="a03b5a0dcc5b7732108f58ba6ca1c815d" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_bus_write_channel_internal.html">BusWriteInternal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -293,6 +227,70 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a6366549656a18696accba0d76d41078c"></a><!-- doxytag: member="BusWriteChannelInternal::Inputs" ref="a6366549656a18696accba0d76d41078c" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a58c0ead34f6454d11a15cc9a2c4326ad"></a><!-- doxytag: member="BusWriteChannelInternal::Buffer" ref="a58c0ead34f6454d11a15cc9a2c4326ad" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a09fe521f3ecbd390dd8998e05e871e63"></a><!-- doxytag: member="BusWriteChannelInternal::Bus" ref="a09fe521f3ecbd390dd8998e05e871e63" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt;SampleType&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_bus_buffer.html">Bus</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a591fc08dfe3da545e098673a7fb6f1ff"></a><!-- doxytag: member="BusWriteChannelInternal::Busses" ref="a591fc08dfe3da545e098673a7fb6f1ff" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_bus_buffer.html">Bus</a>&gt; <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Busses</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa3f04a5ee5ff6488ce974395949b3bf8"></a><!-- doxytag: member="BusWriteChannelInternal::BusWriteChannelInternal" ref="aa3f04a5ee5ff6488ce974395949b3bf8" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
 <div class="memitem">
@@ -336,24 +334,23 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a10115dbb64cf42613af9366f4bf09047"></a><!-- doxytag: member="BusWriteChannelInternal::getChannel" ref="a10115dbb64cf42613af9366f4bf09047" args="(const int index)" -->
+<a class="anchor" id="a92d399bb2c692c718e57e1649f10d8bf"></a><!-- doxytag: member="BusWriteChannelInternal::getName" ref="a92d399bb2c692c718e57e1649f10d8bf" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::getName </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -377,23 +374,24 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a92d399bb2c692c718e57e1649f10d8bf"></a><!-- doxytag: member="BusWriteChannelInternal::getName" ref="a92d399bb2c692c718e57e1649f10d8bf" args="() const " -->
+<a class="anchor" id="a10115dbb64cf42613af9366f4bf09047"></a><!-- doxytag: member="BusWriteChannelInternal::getChannel" ref="a10115dbb64cf42613af9366f4bf09047" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::getName </td>
+          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_bus_write_channel_internal.html">BusWriteChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td>  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -473,7 +471,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:54 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

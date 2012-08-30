@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-      <li class="navelem"><a class="el" href="dir_33635cde1c3b53c6618cb4806d78b524.html">variables</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -75,17 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_Variable.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="plonk___variable_forward_declarations_8h_source.html">plonk_VariableForwardDeclarations.h</a>&quot;</code><br/>
-<code>#include &quot;../plonk_DynamicContainer.h&quot;</code><br/>
-<code>#include &quot;../../core/plonk_SmartPointerContainer.h&quot;</code><br/>
-<code>#include &quot;../../core/plonk_WeakPointerContainer.h&quot;</code><br/>
-<code>#include &quot;../../core/plonk_SenderContainer.h&quot;</code><br/>
-<code>#include &quot;../../maths/plonk_InlineUnaryOps.h&quot;</code><br/>
-<code>#include &quot;../../maths/plonk_InlineBinaryOps.h&quot;</code><br/>
-<code>#include &quot;../../maths/plonk_InlineMiscOps.h&quot;</code><br/>
-<code>#include &quot;../../random/plonk_RNG.h&quot;</code><br/>
-<code>#include &quot;../plonk_Text.h&quot;</code><br/>
-</div>
+
 <p><a href="plonk___variable_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
@@ -93,6 +74,7 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable.html">Variable&lt; Type &gt;</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A template class for storing any variable type.  <a href="class_variable.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_3_01_type_01_6_01_4.html">Variable&lt; Type &amp; &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A variable container for objects.  <a href="class_variable_3_01_type_01_6_01_4.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class Type &gt; </td></tr>
@@ -143,35 +125,6 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a17e58f5f36eba9f1a031d36ac70836e8"></a><!-- doxytag: member="plonk_Variable.h::operator&lt;&lt;" ref="a17e58f5f36eba9f1a031d36ac70836e8" args="(std::ostream &amp;outputStream, Variable&lt; Type &gt; const &amp;variable)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Type &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>outputStream</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>variable</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a3d64e67bbae9030c17cf8d4ba61e036d"></a><!-- doxytag: member="plonk_Variable.h::operator&gt;&gt;" ref="a3d64e67bbae9030c17cf8d4ba61e036d" args="(std::istream &amp;inputStream, Variable&lt; Type &gt; &amp;variable)" -->
 <div class="memitem">
 <div class="memproto">
@@ -201,6 +154,35 @@ template&lt;class Type &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a17e58f5f36eba9f1a031d36ac70836e8"></a><!-- doxytag: member="plonk_Variable.h::operator&lt;&lt;" ref="a17e58f5f36eba9f1a031d36ac70836e8" args="(std::ostream &amp;outputStream, Variable&lt; Type &gt; const &amp;variable)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outputStream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a>&lt; Type &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>variable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -216,7 +198,7 @@ template&lt;class Type &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

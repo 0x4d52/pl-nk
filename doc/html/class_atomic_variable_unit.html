@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Atomic variable unit.  
  <a href="class_atomic_variable_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___atomic_variable_channel_8h_source.html">plonk_AtomicVariableChannel.h</a>&gt;</code></p>
-
 <p><a href="class_atomic_variable_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -107,22 +104,17 @@ Static Public Member Functions</h2></td></tr>
 class AtomicVariableUnit&lt; SampleType &gt;</h3>
 
 <p>Atomic variable unit. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (atomicVariable=0, preferredBlockSize=default)</li>
+<li>kr (atomicVariable=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>atomicVariable: (atomicvariable) the atomicvariable to use as a unit, changes to the value are threadsafe</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure) </li>
+</ul>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a727550665659de5e55bc54fd51af2d86"></a><!-- doxytag: member="AtomicVariableUnit::AtomicType" ref="a727550665659de5e55bc54fd51af2d86" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_atomic_value.html">AtomicType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="af824d1dcdbad07aa1fa89ebc8537161b"></a><!-- doxytag: member="AtomicVariableUnit::AtomicVariableChannelInternalType" ref="af824d1dcdbad07aa1fa89ebc8537161b" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -131,51 +123,6 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_atomic_variable_channel_internal.html">AtomicVariableChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_atomic_variable_channel_internal.html">AtomicVariableChannelInternalType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adad4e3ae02ac0f70ece3ad47f31af0d4"></a><!-- doxytag: member="AtomicVariableUnit::AtomicVariableType" ref="adad4e3ae02ac0f70ece3ad47f31af0d4" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicType</a>&amp;&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_variable.html">AtomicVariableType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa770f101c431159062578ba1be743c3f"></a><!-- doxytag: member="AtomicVariableUnit::Buffer" ref="aa770f101c431159062578ba1be743c3f" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a523c8b24979efcc1c0a469923b4bcbd1"></a><!-- doxytag: member="AtomicVariableUnit::ChannelType" ref="a523c8b24979efcc1c0a469923b4bcbd1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -198,29 +145,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab24bff99d4f1c3495e8ff55a87160969"></a><!-- doxytag: member="AtomicVariableUnit::Inputs" ref="ab24bff99d4f1c3495e8ff55a87160969" args="" -->
+<a class="anchor" id="a523c8b24979efcc1c0a469923b4bcbd1"></a><!-- doxytag: member="AtomicVariableUnit::ChannelType" ref="a523c8b24979efcc1c0a469923b4bcbd1" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9379729520abd5f62ecf5ff48f3ebd36"></a><!-- doxytag: member="AtomicVariableUnit::InternaBase" ref="a9379729520abd5f62ecf5ff48f3ebd36" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -243,6 +175,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a9379729520abd5f62ecf5ff48f3ebd36"></a><!-- doxytag: member="AtomicVariableUnit::InternaBase" ref="a9379729520abd5f62ecf5ff48f3ebd36" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ab7551c8e9e01ad67c6d4807a70bda1be"></a><!-- doxytag: member="AtomicVariableUnit::UnitType" ref="ab7551c8e9e01ad67c6d4807a70bda1be" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +205,85 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ab24bff99d4f1c3495e8ff55a87160969"></a><!-- doxytag: member="AtomicVariableUnit::Inputs" ref="ab24bff99d4f1c3495e8ff55a87160969" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa770f101c431159062578ba1be743c3f"></a><!-- doxytag: member="AtomicVariableUnit::Buffer" ref="aa770f101c431159062578ba1be743c3f" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a727550665659de5e55bc54fd51af2d86"></a><!-- doxytag: member="AtomicVariableUnit::AtomicType" ref="a727550665659de5e55bc54fd51af2d86" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_atomic_value.html">AtomicValue</a>&lt;SampleType&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_atomic_value.html">AtomicType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adad4e3ae02ac0f70ece3ad47f31af0d4"></a><!-- doxytag: member="AtomicVariableUnit::AtomicVariableType" ref="adad4e3ae02ac0f70ece3ad47f31af0d4" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicType</a>&amp;&gt; <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::<a class="el" href="class_variable.html">AtomicVariableType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a8b252b563d15e39ef5a5255ff192d234"></a><!-- doxytag: member="AtomicVariableUnit::getInfo" ref="a8b252b563d15e39ef5a5255ff192d234" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a166ad3b50f39b033ae5328c710e8efc7"></a><!-- doxytag: member="AtomicVariableUnit::ar" ref="a166ad3b50f39b033ae5328c710e8efc7" args="(AtomicVariableType const &amp;atomicVariable=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -287,24 +312,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Create control rate variable. </p>
-
-</div>
-</div>
-<a class="anchor" id="a8b252b563d15e39ef5a5255ff192d234"></a><!-- doxytag: member="AtomicVariableUnit::getInfo" ref="a8b252b563d15e39ef5a5255ff192d234" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_atomic_variable_unit.html">AtomicVariableUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -345,7 +352,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

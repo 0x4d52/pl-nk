@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_Text.h</div>  </div>
@@ -125,11 +116,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00052"></a>00052 
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054 
-<a name="l00060"></a><a class="code" href="class_text.html">00060</a> <span class="keyword">class </span><a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> : <span class="keyword">public</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">CharArray</a>
+<a name="l00060"></a><a class="code" href="class_text.html">00060</a> <span class="keyword">class </span><a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> : <span class="keyword">public</span> <a class="code" href="class_numerical_array.html">CharArray</a>
 <a name="l00061"></a>00061 {
 <a name="l00062"></a>00062 <span class="keyword">public</span>:
 <a name="l00063"></a><a class="code" href="class_text.html#a2728647a7c540f8a2305b3d7ebeaa9c3">00063</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array_internal.html">ObjectArrayInternal&lt;char&gt;</a>   <a class="code" href="class_text.html#a2728647a7c540f8a2305b3d7ebeaa9c3">Internal</a>;
-<a name="l00064"></a><a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">00064</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">CharArray</a>                   <a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Base</a>;    
+<a name="l00064"></a><a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">00064</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">CharArray</a>                   <a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Base</a>;    
 <a name="l00065"></a><a class="code" href="class_text.html#afd854044a3d1320c2fd0c604040623ad">00065</a>     <span class="keyword">typedef</span> <a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer&lt;Text&gt;</a>  <a class="code" href="class_text.html#afd854044a3d1320c2fd0c604040623ad">Weak</a>;
 <a name="l00066"></a>00066     
 <a name="l00067"></a><a class="code" href="class_text.html#adccc0430a2134a9846b8f4925f9ac45b">00067</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="class_text.html#adccc0430a2134a9846b8f4925f9ac45b">space</a>;
@@ -147,80 +138,84 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00084"></a>00084         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">char</span> c) throw();
 <a name="l00085"></a>00085     
 <a name="l00086"></a>00086     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">int</span> value) throw();
-<a name="l00087"></a>00087     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">float</span> value) throw();
-<a name="l00088"></a>00088     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">double</span> value) throw();
-<a name="l00089"></a>00089     
-<a name="l00090"></a>00090     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) throw();
-<a name="l00091"></a>00091     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (<a class="code" href="class_dynamic.html">Dynamic</a> const&amp; other) throw();
-<a name="l00092"></a>00092     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; other) throw();
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094         
-<a name="l00096"></a>00096         template&lt;class CopyType&gt;
-<a name="l00097"></a><a class="code" href="class_text.html#a0d1528af9b765d9528a22ea88d4b9d9c">00097</a>         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;CopyType&gt; const&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) throw()
-<a name="l00098"></a>00098         :       <a class="code" href="class_numerical_array.html">Base</a> (<a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>)
-<a name="l00099"></a>00099         {
-<a name="l00100"></a>00100         }
-<a name="l00101"></a>00101         
-<a name="l00103"></a>00103         <span class="keyword">template</span>&lt;<span class="keyword">class</span> CopyType&gt;
-<a name="l00104"></a><a class="code" href="class_text.html#ab46c6c76bb1b99dfe309161360e1f05a">00104</a>         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CopyType&gt;</a> <span class="keyword">const</span>&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) <span class="keywordflow">throw</span>()
-<a name="l00105"></a>00105         :       <a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Base</a> (<a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>)
-<a name="l00106"></a>00106         {
-<a name="l00107"></a>00107         }
-<a name="l00108"></a>00108         
-<a name="l00110"></a>00110         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* <span class="keywordtype">string</span>) <span class="keywordflow">throw</span>();
-<a name="l00111"></a>00111         
-<a name="l00112"></a>00112         <a class="code" href="class_text.html#a4ccbb30c80be0206ea73dbde42854f7d">ObjectArrayAssignmentDefinition</a>(<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>, <span class="keywordtype">char</span>);
-<a name="l00113"></a>00113         
-<a name="l00115"></a>00115         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; array0, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; array1) <span class="keywordflow">throw</span>();
-<a name="l00116"></a>00116                 
-<a name="l00117"></a>00117         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_numerical_array_spec.html" title="For specificying the initial state of a NumericalArray.">NumericalArraySpec</a> <span class="keyword">const</span>&amp; spec) <span class="keywordflow">throw</span>();
-<a name="l00118"></a>00118         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_numerical_array_spec.html" title="For specificying the initial state of a NumericalArray.">NumericalArraySpec</a> <span class="keyword">const</span>&amp; spec, <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNullTermination) <span class="keywordflow">throw</span>();
-<a name="l00119"></a>00119         <span class="keyword">static</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aff424fbf995e268141efcb453c5959bf" title="Creates a NumericalArray with a given size (length).">withSize</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>, <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="class_numerical_array.html#af3278b33b10a66e201a950900359abd4">zeroData</a> = <span class="keyword">false</span>) throw();     
-<a name="l00120"></a>00120         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#afa3c84f9ac6aaa4c88a5fa2736849e53" title="Creates a NumericalArray with a given size (length) with all items set to zero.">newClear</a> (const <span class="keywordtype">int</span> size) throw();
-<a name="l00121"></a>00121         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const <span class="keywordtype">int</span> num) throw();
-<a name="l00122"></a>00122         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const <span class="keywordtype">float</span> num) throw();
-<a name="l00123"></a>00123         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const <span class="keywordtype">double</span> num) throw();
-<a name="l00124"></a>00124 
-<a name="l00125"></a>00125     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (<a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Base</a> const&amp; other) throw();
-<a name="l00126"></a>00126         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (const <span class="keywordtype">char</span>* other) throw();
-<a name="l00127"></a>00127         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (const <span class="keywordtype">wchar_t</span>* other) throw();
-<a name="l00128"></a>00128         
-<a name="l00129"></a>00129         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> operator+ (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; rightOperand) const throw();
-<a name="l00130"></a>00130         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> operator+= (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; rightOperand) throw();
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#a3a08732edc5ff110af7364704811d785">offset</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; rightOperand) const throw();
-<a name="l00133"></a>00133         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a6a1108b69293b6aa70f9724337d4b067">add</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; other) throw();
-<a name="l00134"></a>00134         
-<a name="l00135"></a>00135         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">char</span>* nullTerminatedSourceArray);
-<a name="l00136"></a>00136         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">int</span> size, const <span class="keywordtype">char</span>* sourceArray, const <span class="keywordtype">bool</span> needsNullTermination = false);
-<a name="l00137"></a>00137                 
-<a name="l00138"></a>00138         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#ae0ec7ba26cc4e1f3c26ed8389f63f266">toUpper</a>() const throw();
-<a name="l00139"></a>00139         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#ad392b2444f86319448114e1c0cdbcf1a">toLower</a>() const throw();
-<a name="l00140"></a>00140         
-<a name="l00141"></a>00141         <span class="keywordtype">bool</span> <a class="code" href="class_text.html#a6b6de5ee32db3277502246fdd80a0f2a">equalsIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; other) const throw();
+<a name="l00087"></a>00087     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> value) throw();
+<a name="l00088"></a>00088     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">float</span> value) throw();
+<a name="l00089"></a>00089     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">double</span> value) throw();
+<a name="l00090"></a>00090     
+<a name="l00091"></a>00091     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) throw();
+<a name="l00092"></a>00092     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (<a class="code" href="class_dynamic.html">Dynamic</a> const&amp; other) throw();
+<a name="l00093"></a>00093     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; other) throw();
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095         
+<a name="l00097"></a>00097         template&lt;class CopyType&gt;
+<a name="l00098"></a><a class="code" href="class_text.html#a0d1528af9b765d9528a22ea88d4b9d9c">00098</a>         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>&lt;CopyType&gt; const&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) throw()
+<a name="l00099"></a>00099         :       <a class="code" href="class_numerical_array.html">Base</a> (<a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>)
+<a name="l00100"></a>00100         {
+<a name="l00101"></a>00101         }
+<a name="l00102"></a>00102         
+<a name="l00104"></a>00104         <span class="keyword">template</span>&lt;<span class="keyword">class</span> CopyType&gt;
+<a name="l00105"></a><a class="code" href="class_text.html#ab46c6c76bb1b99dfe309161360e1f05a">00105</a>         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;CopyType&gt;</a> <span class="keyword">const</span>&amp; <a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>) <span class="keywordflow">throw</span>()
+<a name="l00106"></a>00106         :       <a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Base</a> (<a class="code" href="class_object_array.html#a03baa6c06a77a576a05e1898b9ccd19f" title="Creates a deep copy of the array.">copy</a>)
+<a name="l00107"></a>00107         {
+<a name="l00108"></a>00108         }
+<a name="l00109"></a>00109         
+<a name="l00111"></a>00111         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* <span class="keywordtype">string</span>) <span class="keywordflow">throw</span>();
+<a name="l00112"></a>00112         
+<a name="l00113"></a>00113         <a class="code" href="class_text.html#a4ccbb30c80be0206ea73dbde42854f7d">ObjectArrayAssignmentDefinition</a>(<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>, <span class="keywordtype">char</span>);
+<a name="l00114"></a>00114         
+<a name="l00116"></a>00116         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; array0, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <span class="keyword">const</span>&amp; array1) <span class="keywordflow">throw</span>();
+<a name="l00117"></a>00117                 
+<a name="l00118"></a>00118         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_numerical_array_spec.html" title="For specificying the initial state of a NumericalArray.">NumericalArraySpec</a> <span class="keyword">const</span>&amp; spec) <span class="keywordflow">throw</span>();
+<a name="l00119"></a>00119         <a class="code" href="class_text.html#ab3e26143fccc52699bcc5149cae852bc" title="Creates an emply text string.">Text</a> (<a class="code" href="class_numerical_array_spec.html" title="For specificying the initial state of a NumericalArray.">NumericalArraySpec</a> <span class="keyword">const</span>&amp; spec, <span class="keyword">const</span> <span class="keywordtype">bool</span> needsNullTermination) <span class="keywordflow">throw</span>();
+<a name="l00120"></a>00120         <span class="keyword">static</span> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aff424fbf995e268141efcb453c5959bf" title="Creates a NumericalArray with a given size (length).">withSize</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>, <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="class_numerical_array.html#af3278b33b10a66e201a950900359abd4">zeroData</a> = <span class="keyword">false</span>) throw();     
+<a name="l00121"></a>00121         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#afa3c84f9ac6aaa4c88a5fa2736849e53" title="Creates a NumericalArray with a given size (length) with all items set to zero.">newClear</a> (const <span class="keywordtype">int</span> size) throw();
+<a name="l00122"></a>00122         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const <span class="keywordtype">int</span> num) throw();
+<a name="l00123"></a>00123         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> num) throw();
+<a name="l00124"></a>00124         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const <span class="keywordtype">float</span> num) throw();
+<a name="l00125"></a>00125         static <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#aa50aa3cc0754e70e6deae153872efe15">fromValue</a> (const <span class="keywordtype">double</span> num) throw();
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (<a class="code" href="class_text.html#ab10f8916896b5131535e9fc2bd7ae250">Base</a> const&amp; other) throw();
+<a name="l00128"></a>00128         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (const <span class="keywordtype">char</span>* other) throw();
+<a name="l00129"></a>00129         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; operator= (const <span class="keywordtype">wchar_t</span>* other) throw();
+<a name="l00130"></a>00130         
+<a name="l00131"></a>00131         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> operator+ (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; rightOperand) const throw();
+<a name="l00132"></a>00132         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> operator+= (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; rightOperand) throw();
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#a3a08732edc5ff110af7364704811d785">offset</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; rightOperand) const throw();
+<a name="l00135"></a>00135         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a6a1108b69293b6aa70f9724337d4b067">add</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; other) throw();
+<a name="l00136"></a>00136         
+<a name="l00137"></a>00137         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">char</span>* nullTerminatedSourceArray);
+<a name="l00138"></a>00138         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> (const <span class="keywordtype">int</span> size, const <span class="keywordtype">char</span>* sourceArray, const <span class="keywordtype">bool</span> needsNullTermination = false);
+<a name="l00139"></a>00139                 
+<a name="l00140"></a>00140         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#ae0ec7ba26cc4e1f3c26ed8389f63f266">toUpper</a>() const throw();
+<a name="l00141"></a>00141         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#ad392b2444f86319448114e1c0cdbcf1a">toLower</a>() const throw();
 <a name="l00142"></a>00142         
-<a name="l00143"></a>00143         <span class="keywordtype">bool</span> <a class="code" href="class_text.html#aae2b3eb7e8a5a28f176e6899d356207a">containsIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; toFind) const throw();     
-<a name="l00144"></a>00144         <span class="keywordtype">int</span> <a class="code" href="class_text.html#a2753a439476795e1d63815912e948e0e">indexOfIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; toFind, const <span class="keywordtype">int</span> startIndex = 0) const throw();
-<a name="l00145"></a>00145         <span class="keywordtype">int</span> <a class="code" href="class_text.html#a2e061ffa271b9b5ac080b51664d02741">indexOfAnyIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; toFind, const <span class="keywordtype">int</span> startIndex = 0) const throw();
-<a name="l00146"></a>00146         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#a390ea2de1307909c181875096c98f343">replaceIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; find, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; substitute) const throw();
-<a name="l00147"></a>00147         
-<a name="l00148"></a>00148         <span class="keywordtype">void</span> <a class="code" href="class_text.html#ae42f88028d42a7905c430376a923e246">print</a> (const <span class="keywordtype">char</span> *prefix = 0) const throw();
+<a name="l00143"></a>00143         <span class="keywordtype">bool</span> <a class="code" href="class_text.html#a6b6de5ee32db3277502246fdd80a0f2a">equalsIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; other) const throw();
+<a name="l00144"></a>00144         
+<a name="l00145"></a>00145         <span class="keywordtype">bool</span> <a class="code" href="class_text.html#aae2b3eb7e8a5a28f176e6899d356207a">containsIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; toFind) const throw();     
+<a name="l00146"></a>00146         <span class="keywordtype">int</span> <a class="code" href="class_text.html#a2753a439476795e1d63815912e948e0e">indexOfIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; toFind, const <span class="keywordtype">int</span> startIndex = 0) const throw();
+<a name="l00147"></a>00147         <span class="keywordtype">int</span> <a class="code" href="class_text.html#a2e061ffa271b9b5ac080b51664d02741">indexOfAnyIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; toFind, const <span class="keywordtype">int</span> startIndex = 0) const throw();
+<a name="l00148"></a>00148         <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_text.html#a390ea2de1307909c181875096c98f343">replaceIgnoreCase</a> (<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; find, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; substitute) const throw();
 <a name="l00149"></a>00149         
-<a name="l00150"></a>00150         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a6055aad336b152fb30db326e13813175">getPrintable</a>() throw();
-<a name="l00151"></a>00151         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a5d70c75758164b9fca4931d0377b1515">getAlphabetLower</a>() throw();
-<a name="l00152"></a>00152         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a937ab150bb7d51624489543f893740c7">getAlphabetUpper</a>() throw();
-<a name="l00153"></a>00153         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a908680a697b632ac53a5402996b30f43">getAlphabetAll</a>() throw();
-<a name="l00154"></a>00154         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a81cbdb0031dd14595bfdb336e74a86d8">getDigits</a>() throw();
-<a name="l00155"></a>00155         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a3bf0755c09a9f91423d12c91b54a5405">getAlphabetAndDigits</a>() throw();
-<a name="l00156"></a>00156         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a59888f1f2cc0a22f0110f8e53975ad77">getPunctuation</a>() throw();
-<a name="l00157"></a>00157         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a287843189990f46cb0143251f993621e">getStandardDelimiters</a>() throw();
-<a name="l00158"></a>00158 };
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> operator+ (const <span class="keywordtype">char</span>* text1, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; text2) throw();
-<a name="l00161"></a>00161 <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> operator+ (const <span class="keywordtype">wchar_t</span>* text1, <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> const&amp; text2) throw();
-<a name="l00162"></a>00162 
+<a name="l00150"></a>00150         <span class="keywordtype">void</span> <a class="code" href="class_text.html#ae42f88028d42a7905c430376a923e246">print</a> (const <span class="keywordtype">char</span> *prefix = 0) const throw();
+<a name="l00151"></a>00151         
+<a name="l00152"></a>00152         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a6055aad336b152fb30db326e13813175">getPrintable</a>() throw();
+<a name="l00153"></a>00153         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a5d70c75758164b9fca4931d0377b1515">getAlphabetLower</a>() throw();
+<a name="l00154"></a>00154         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a937ab150bb7d51624489543f893740c7">getAlphabetUpper</a>() throw();
+<a name="l00155"></a>00155         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a908680a697b632ac53a5402996b30f43">getAlphabetAll</a>() throw();
+<a name="l00156"></a>00156         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a81cbdb0031dd14595bfdb336e74a86d8">getDigits</a>() throw();
+<a name="l00157"></a>00157         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a3bf0755c09a9f91423d12c91b54a5405">getAlphabetAndDigits</a>() throw();
+<a name="l00158"></a>00158         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a59888f1f2cc0a22f0110f8e53975ad77">getPunctuation</a>() throw();
+<a name="l00159"></a>00159         static const <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>&amp; <a class="code" href="class_text.html#a287843189990f46cb0143251f993621e">getStandardDelimiters</a>() throw();
+<a name="l00160"></a>00160     
+<a name="l00161"></a><a class="code" href="class_text.html#a08f8fa766d32ed5a8bae34d256a3c5e2">00161</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a>);
+<a name="l00162"></a>00162 };
 <a name="l00163"></a>00163 
-<a name="l00164"></a>00164 <span class="preprocessor">#endif // PLONK_TEXT_H</span>
+<a name="l00164"></a>00164 Text operator+ (const <span class="keywordtype">char</span>* text1, Text const&amp; text2) throw();
+<a name="l00165"></a>00165 Text operator+ (const <span class="keywordtype">wchar_t</span>* text1, Text const&amp; text2) throw();
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168 <span class="preprocessor">#endif // PLONK_TEXT_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -237,7 +232,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

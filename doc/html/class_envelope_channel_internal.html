@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,21 +71,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="EnvelopeChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;" -->
 <p>Envelope channel performs a series of breakpoints.  
  <a href="class_envelope_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___envelope_channel_8h_source.html">plonk_EnvelopeChannel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for EnvelopeChannelInternal&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_envelope_channel_internal.png" usemap="#EnvelopeChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="EnvelopeChannelInternal&lt; SampleType &gt;_map" name="EnvelopeChannelInternal&lt; SampleType &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="817,168,1352,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="545,112,1080,136"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;" shape="rect" coords="817,224,1352,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="545,168,1080,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1090,168,1625,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,535,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="545,112,1080,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1090,112,1625,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,535,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="545,56,1080,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="1090,56,1625,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,535,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,535,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,535,24"/>
 </map>
  </div></div>
 
@@ -132,55 +130,6 @@ class EnvelopeChannelInternal&lt; SampleType &gt;</h3>
 
 <p>Envelope channel performs a series of breakpoints. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a73e71dc525a334966dfeb47617e1ba46"></a><!-- doxytag: member="EnvelopeChannelInternal::BreakpointsType" ref="a73e71dc525a334966dfeb47617e1ba46" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoints_base.html">BreakpointsType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#af6b286e570993cf54804a8d823e3a399">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4f2da3eb64afd86b8d0b649fb0d1a920"></a><!-- doxytag: member="EnvelopeChannelInternal::BreakpointType" ref="a4f2da3eb64afd86b8d0b649fb0d1a920" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_breakpoint_base.html">BreakpointBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoint_base.html">BreakpointType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8b6256b23ed6049c141c05d094dba755"></a><!-- doxytag: member="EnvelopeChannelInternal::ChannelType" ref="a8b6256b23ed6049c141c05d094dba755" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="aeab184f7e86603b3f2eff437873020ae"></a><!-- doxytag: member="EnvelopeChannelInternal::Data" ref="aeab184f7e86603b3f2eff437873020ae" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -201,6 +150,23 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a8b6256b23ed6049c141c05d094dba755"></a><!-- doxytag: member="EnvelopeChannelInternal::ChannelType" ref="a8b6256b23ed6049c141c05d094dba755" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a37a6fe70829d15f1f738728a0bcc4311"></a><!-- doxytag: member="EnvelopeChannelInternal::EnvelopeInternal" ref="a37a6fe70829d15f1f738728a0bcc4311" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -213,23 +179,6 @@ template&lt;class SampleType &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab83d7943609eea9ca2b6c2641af89000"></a><!-- doxytag: member="EnvelopeChannelInternal::Inputs" ref="ab83d7943609eea9ca2b6c2641af89000" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -282,6 +231,55 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ab83d7943609eea9ca2b6c2641af89000"></a><!-- doxytag: member="EnvelopeChannelInternal::Inputs" ref="ab83d7943609eea9ca2b6c2641af89000" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a73e71dc525a334966dfeb47617e1ba46"></a><!-- doxytag: member="EnvelopeChannelInternal::BreakpointsType" ref="a73e71dc525a334966dfeb47617e1ba46" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoints_base.html">BreakpointsType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal_base.html#af6b286e570993cf54804a8d823e3a399">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4f2da3eb64afd86b8d0b649fb0d1a920"></a><!-- doxytag: member="EnvelopeChannelInternal::BreakpointType" ref="a4f2da3eb64afd86b8d0b649fb0d1a920" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_breakpoint_base.html">BreakpointBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoint_base.html">BreakpointType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a350f3c005bdb91cbb787bacb964bb08a"></a><!-- doxytag: member="EnvelopeChannelInternal::EnvelopeChannelInternal" ref="a350f3c005bdb91cbb787bacb964bb08a" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
 <div class="memitem">
@@ -325,24 +323,23 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a76cb03b8ba470d8a2ff786bfe6c02e04"></a><!-- doxytag: member="EnvelopeChannelInternal::getChannel" ref="a76cb03b8ba470d8a2ff786bfe6c02e04" args="(const int)" -->
+<a class="anchor" id="a51ec7e11b17fb5c2945759dd47a501c8"></a><!-- doxytag: member="EnvelopeChannelInternal::getName" ref="a51ec7e11b17fb5c2945759dd47a501c8" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::getName </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -366,23 +363,24 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a51ec7e11b17fb5c2945759dd47a501c8"></a><!-- doxytag: member="EnvelopeChannelInternal::getName" ref="a51ec7e11b17fb5c2945759dd47a501c8" args="() const " -->
+<a class="anchor" id="a76cb03b8ba470d8a2ff786bfe6c02e04"></a><!-- doxytag: member="EnvelopeChannelInternal::getChannel" ref="a76cb03b8ba470d8a2ff786bfe6c02e04" args="(const int)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::getName </td>
+          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
           <td>(</td>
+          <td class="paramtype">const int&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
+          <td>  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -410,6 +408,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a5f1dd84dc2839dc0b79ab2f49fd6103f"></a><!-- doxytag: member="EnvelopeChannelInternal::setTargetPoint" ref="a5f1dd84dc2839dc0b79ab2f49fd6103f" args="(const int index, const int samplesRemaining)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::setTargetPoint </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>samplesRemaining</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3d484bd5449da88f26ffa58f64bc5e8e"></a><!-- doxytag: member="EnvelopeChannelInternal::nextTargetPoint" ref="a3d484bd5449da88f26ffa58f64bc5e8e" args="(const bool gate, const int samplesRemaining)" -->
 <div class="memitem">
 <div class="memproto">
@@ -427,6 +454,35 @@ template&lt;class SampleType &gt; </div>
           <td></td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>samplesRemaining</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a78a4603ea1a67b7a86d1802809a86b7c"></a><!-- doxytag: member="EnvelopeChannelInternal::processLinear" ref="a78a4603ea1a67b7a86d1802809a86b7c" args="(SampleType *const outputSamples, const int numSamples)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::processLinear </td>
+          <td>(</td>
+          <td class="paramtype">SampleType *const&#160;</td>
+          <td class="paramname"><em>outputSamples</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>numSamples</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -473,64 +529,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a78a4603ea1a67b7a86d1802809a86b7c"></a><!-- doxytag: member="EnvelopeChannelInternal::processLinear" ref="a78a4603ea1a67b7a86d1802809a86b7c" args="(SampleType *const outputSamples, const int numSamples)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::processLinear </td>
-          <td>(</td>
-          <td class="paramtype">SampleType *const&#160;</td>
-          <td class="paramname"><em>outputSamples</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>numSamples</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5f1dd84dc2839dc0b79ab2f49fd6103f"></a><!-- doxytag: member="EnvelopeChannelInternal::setTargetPoint" ref="a5f1dd84dc2839dc0b79ab2f49fd6103f" args="(const int index, const int samplesRemaining)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt;::setTargetPoint </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>samplesRemaining</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___envelope_channel_8h_source.html">plonk_EnvelopeChannel.h</a></li>
 </ul>
@@ -549,7 +547,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

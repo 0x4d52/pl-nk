@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,22 +71,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="FFTChannelInternal" --><!-- doxytag: inherits="ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" -->
 <p>FFT channel.  
  <a href="class_f_f_t_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___f_f_t_channel_8h_source.html">plonk_FFTChannel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for FFTChannelInternal&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_f_f_t_channel_internal.png" usemap="#FFTChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="FFTChannelInternal&lt; SampleType &gt;_map" name="FFTChannelInternal&lt; SampleType &gt;_map">
-<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="649,224,1072,248"/>
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="649,168,1072,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="433,112,856,136"/>
+<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="649,280,1072,304"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="649,224,1072,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="433,168,856,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="866,168,1289,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,423,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="433,112,856,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="866,112,1289,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,423,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="433,56,856,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="866,56,1289,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,423,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,423,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,423,24"/>
 </map>
  </div></div>
 
@@ -102,6 +100,7 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">ChannelInternalCore::Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#ad940c21a65e1c23499c85d65b06004b0">Data</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#ad940c21a65e1c23499c85d65b06004b0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#ab8d7b9e973668ccc24a401ef3f0abcfc">ChannelType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_simple_array.html">SimpleArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#a2afbcff023d9c6a06f390635ecb0f029">ChannelArrayType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a><br class="typebreak"/>
 &lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#a88200fedd227acc196740337f5d1ca49">FFTInternal</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
@@ -114,7 +113,7 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#aef4f963c72e96963b8ce12c908a211bc">FFTEngineType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#a514032c708aa57922bb1ee24b8a76fdc">FFTChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#a2a43b86dc7075f1727fcf8ee74f96ccd">FFTChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate, <a class="el" href="class_simple_array.html">ChannelArrayType</a> &amp;channels)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#abe812ce3ebf5ba04e86fb7b7872373cc">getName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#a242c0d2739e61ef97758af1269c04911">getInputKeys</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_f_t_channel_internal.html#af77c5e3abe973f0be23d554dd4a71969">initChannel</a> (const int channel)  throw ()</td></tr>
@@ -128,40 +127,6 @@ class FFTChannelInternal&lt; SampleType &gt;</h3>
 
 <p>FFT channel. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a2d0ebf995c97e0f96ad48979d9efe29a"></a><!-- doxytag: member="FFTChannelInternal::Buffer" ref="a2d0ebf995c97e0f96ad48979d9efe29a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab8d7b9e973668ccc24a401ef3f0abcfc"></a><!-- doxytag: member="FFTChannelInternal::ChannelType" ref="ab8d7b9e973668ccc24a401ef3f0abcfc" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ad940c21a65e1c23499c85d65b06004b0"></a><!-- doxytag: member="FFTChannelInternal::Data" ref="ad940c21a65e1c23499c85d65b06004b0" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -182,18 +147,37 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aef4f963c72e96963b8ce12c908a211bc"></a><!-- doxytag: member="FFTChannelInternal::FFTEngineType" ref="aef4f963c72e96963b8ce12c908a211bc" args="" -->
+<a class="anchor" id="ab8d7b9e973668ccc24a401ef3f0abcfc"></a><!-- doxytag: member="FFTChannelInternal::ChannelType" ref="ab8d7b9e973668ccc24a401ef3f0abcfc" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_f_f_t_engine_base.html">FFTEngineType</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2afbcff023d9c6a06f390635ecb0f029"></a><!-- doxytag: member="FFTChannelInternal::ChannelArrayType" ref="a2afbcff023d9c6a06f390635ecb0f029" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_simple_array.html">SimpleArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_simple_array.html">ChannelArrayType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a73b428803deec77d33f77e5198c8aca1">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
 
 </div>
 </div>
@@ -209,23 +193,6 @@ template&lt;class SampleType &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af68d6fcd6a63b5d9f5b59401094360b3"></a><!-- doxytag: member="FFTChannelInternal::Inputs" ref="af68d6fcd6a63b5d9f5b59401094360b3" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
 
 </div>
 </div>
@@ -263,6 +230,55 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="af68d6fcd6a63b5d9f5b59401094360b3"></a><!-- doxytag: member="FFTChannelInternal::Inputs" ref="af68d6fcd6a63b5d9f5b59401094360b3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2d0ebf995c97e0f96ad48979d9efe29a"></a><!-- doxytag: member="FFTChannelInternal::Buffer" ref="a2d0ebf995c97e0f96ad48979d9efe29a" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aef4f963c72e96963b8ce12c908a211bc"></a><!-- doxytag: member="FFTChannelInternal::FFTEngineType" ref="aef4f963c72e96963b8ce12c908a211bc" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_f_f_t_engine_base.html">FFTEngineBase</a>&lt;SampleType&gt; <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_f_f_t_engine_base.html">FFTEngineType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Enumeration Documentation</h2>
 <a class="anchor" id="a06d27685d27868b5f3597f7194117f3f"></a><!-- doxytag: member="FFTChannelInternal::OutputIndices" ref="a06d27685d27868b5f3597f7194117f3f" args="" -->
 <div class="memitem">
@@ -290,7 +306,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a514032c708aa57922bb1ee24b8a76fdc"></a><!-- doxytag: member="FFTChannelInternal::FFTChannelInternal" ref="a514032c708aa57922bb1ee24b8a76fdc" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
+<a class="anchor" id="a2a43b86dc7075f1727fcf8ee74f96ccd"></a><!-- doxytag: member="FFTChannelInternal::FFTChannelInternal" ref="a2a43b86dc7075f1727fcf8ee74f96ccd" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate, ChannelArrayType &amp;channels)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -318,7 +334,13 @@ template&lt;class SampleType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
+          <td class="paramname"><em>sampleRate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_simple_array.html">ChannelArrayType</a> &amp;&#160;</td>
+          <td class="paramname"><em>channels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -332,26 +354,6 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a242c0d2739e61ef97758af1269c04911"></a><!-- doxytag: member="FFTChannelInternal::getInputKeys" ref="a242c0d2739e61ef97758af1269c04911" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::getInputKeys </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="abe812ce3ebf5ba04e86fb7b7872373cc"></a><!-- doxytag: member="FFTChannelInternal::getName" ref="abe812ce3ebf5ba04e86fb7b7872373cc" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -369,6 +371,26 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a242c0d2739e61ef97758af1269c04911"></a><!-- doxytag: member="FFTChannelInternal::getInputKeys" ref="a242c0d2739e61ef97758af1269c04911" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_f_f_t_channel_internal.html">FFTChannelInternal</a>&lt; SampleType &gt;::getInputKeys </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -448,7 +470,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

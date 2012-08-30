@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -182,6 +181,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_saw_channel_internal.html#a5f61d3c501aecf836e225d2629170d01">SawChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_saw_unit.html#aee43a5c8c126af28d95fe292b1678951">SawUnit&lt; SampleType &gt;</a>
 </li>
+<li>ScopedPointerContainer()
+: <a class="el" href="class_scoped_pointer_container.html#aed429cf005f586464427100a76eba690">ScopedPointerContainer&lt; ScopedPointerType &gt;</a>
+</li>
 <li>Seconds
 : <a class="el" href="class_measure.html#af74c37cd245b1262c0602548b4027e86afb8239f9b7614807276cb09e9f635522">Measure</a>
 </li>
@@ -201,10 +203,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a223750209235639cc8da740550ba3083">Measure</a>
 </li>
 <li>Sender
-: <a class="el" href="class_variable.html#ae049ea2f108eacee0025dd1b5624c334">Variable&lt; Type &gt;</a>
-, <a class="el" href="class_process_info.html#a62200703ca08c2699a1dbec961ebfedf">ProcessInfo</a>
-, <a class="el" href="class_binary_op_variable_internal.html#a7878f42f084aaeb54cd11d1bb1f31766">BinaryOpVariableInternal&lt; Type, op &gt;</a>
+: <a class="el" href="class_binary_op_variable_internal.html#a7878f42f084aaeb54cd11d1bb1f31766">BinaryOpVariableInternal&lt; Type, op &gt;</a>
 , <a class="el" href="class_unary_op_variable_internal.html#aa864386baec9f2f3594d1fde5c4cb509">UnaryOpVariableInternal&lt; Type, op &gt;</a>
+, <a class="el" href="class_variable.html#ae049ea2f108eacee0025dd1b5624c334">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_process_info.html#a62200703ca08c2699a1dbec961ebfedf">ProcessInfo</a>
 </li>
 <li>SenderContainer()
 : <a class="el" href="class_sender_container.html#aebac1333f221974172f44debc1b6efdc">SenderContainer&lt; SenderInternalType &gt;</a>
@@ -225,8 +227,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classffft_1_1_osc_sin_cos.html#ad41139a76b16a5af136d1e730a9143dc">ffft::OscSinCos&lt; T &gt;</a>
 </li>
 <li>setAll()
-: <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#abe42932efb5409ffb01317865390c884">AtomicExtended&lt; Type * &gt;</a>
+: <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a898188174879f7e441437476e8da3670">AtomicExtended&lt; Type * &gt;</a>
 , <a class="el" href="class_atomic_extended_3_01_long_01_4.html#a4b60db2adca0162a72981089452a0deb">AtomicExtended&lt; Long &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_int_01_4.html#a8f8a2c25f34ff07ac0bc7b1cf5ca567a">AtomicExtended&lt; Int &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_short_01_4.html#ab72e06f049b79706b3f77642edfdb807">AtomicExtended&lt; Short &gt;</a>
+</li>
+<li>setAudioThreadID()
+: <a class="el" href="class_threading.html#a80cbc490a9390a7a6faadff865ea3ca2">Threading</a>
 </li>
 <li>setBlockSize()
 : <a class="el" href="class_channel_base.html#a2288639c8e81dccadf64700e326e0186">ChannelBase&lt; SampleType &gt;</a>
@@ -252,6 +259,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>setFunctions()
 : <a class="el" href="class_memory.html#a7a757c7c084b64be333fb7e97786c2b1">Memory</a>
+</li>
+<li>setIfLarger()
+: <a class="el" href="class_atomic_value_3_01_plank_i_01_4.html#a6708a7543eca3e84f3dddf3f3d1d6c18">AtomicValue&lt; PlankI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_i_01_4.html#a54fa8fb5913a7af703ccf7b32c198022">AtomicValue&lt; PlankUI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_01_4.html#a540eae93be0565ef3d12f0bd1d56e718">AtomicValue&lt; PlankL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_01_4.html#a1844ec235bbe4b649e6bff171f52ad6f">AtomicValue&lt; PlankUL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_l_01_4.html#a04915cfb27c2f3f7463dca61fd21227d">AtomicValue&lt; PlankLL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_l_01_4.html#aafb4072d32315a58e39f0c6c81d96d1c">AtomicValue&lt; PlankULL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_f_01_4.html#a2ae2b6a84363f3e7ab22a548f20a58fd">AtomicValue&lt; PlankF &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_d_01_4.html#aeb05c456e7d117fb77a9196e54be6a1a">AtomicValue&lt; PlankD &gt;</a>
+</li>
+<li>setIfSmaller()
+: <a class="el" href="class_atomic_value_3_01_plank_i_01_4.html#a4d3dfe72eb61cf91e2a24533c4be0a18">AtomicValue&lt; PlankI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_i_01_4.html#a3e1eb2585f025f46961eb6581943f7c4">AtomicValue&lt; PlankUI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_01_4.html#a1f0cb6c89990ce27a1b6e692823d98f1">AtomicValue&lt; PlankL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_01_4.html#a8878f0b57e6b2b20fcca4e0d7266e1bb">AtomicValue&lt; PlankUL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_l_01_4.html#a89dc4c9c3511a124cc5a28ca19008aec">AtomicValue&lt; PlankLL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_l_01_4.html#a503a02bdeb09981b382f8ae641afdd05">AtomicValue&lt; PlankULL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_f_01_4.html#a966fd9585241f9b53a45b677961a5cfc">AtomicValue&lt; PlankF &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_d_01_4.html#a9204086f3d262c23b152b142253edfce">AtomicValue&lt; PlankD &gt;</a>
 </li>
 <li>setInternal()
 : <a class="el" href="class_smart_pointer_container_base.html#a0937fdc04eafc3a2146a6af5320e5a37">SmartPointerContainerBase&lt; SmartPointerType &gt;</a>
@@ -287,12 +314,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setNumOutputs()
 : <a class="el" href="class_audio_host_base.html#a3b86efabd19949082d704f54aa1362db">AudioHostBase&lt; SampleType &gt;</a>
 </li>
-<li>setObject()
-: <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aaf3ccca5be5c8e930ff957e278ae709c">AtomicValue&lt; Type * &gt;</a>
-, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a07789b1152609366c1295f49e2093d49">AtomicExtended&lt; Type * &gt;</a>
-</li>
 <li>setOutputBuffer()
-: <a class="el" href="class_channel_base.html#abc2b39a0ea0f1425ccc4da256f98108b">ChannelBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_unit_base.html#a5971dc08c2dc28db827df3b7ea671e94">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_base.html#abc2b39a0ea0f1425ccc4da256f98108b">ChannelBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_channel_internal_base.html#aacb1ff84d0396cd791651a43f7dc8d7f">ChannelInternalBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_unit_base.html#aed36ad8bca094f3fa98d0a134cb2d36f">UnitBase&lt; SampleType &gt;</a>
 </li>
@@ -318,8 +342,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_audio_host_base.html#a1fc69b53e4bf08ca25ed534c34814739">AudioHostBase&lt; SampleType &gt;</a>
 </li>
 <li>setPtr()
-: <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aa1aa459f79ad9bb9da6204caaf5d1a16">AtomicValue&lt; Type * &gt;</a>
-, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a4be29e09de2bb78a44a7a5aa9a5beb30">AtomicExtended&lt; Type * &gt;</a>
+: <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#af17b4d0dc7171cf63ac1dc77bcfba6cf">AtomicValue&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_value_3_01void_01_5_01_4.html#a80107f912e5a7ad3a5113941e585dd94">AtomicValue&lt; void * &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a9d67797dd0796e2b7fe4da6e7efd1fa4">AtomicExtended&lt; Type * &gt;</a>
 </li>
 <li>setSampleRate()
 : <a class="el" href="class_channel_base.html#aeed4398ae9f246586ced1c7f5613ad81">ChannelBase&lt; SampleType &gt;</a>
@@ -338,6 +363,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setShouldExit()
 : <a class="el" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9">Threading::Thread</a>
 </li>
+<li>setShouldExitAndWait()
+: <a class="el" href="class_threading_1_1_thread.html#afac6cb66c5ab59a6a3f371dbea00e898">Threading::Thread</a>
+</li>
 <li>setSize()
 : <a class="el" href="class_object_array.html#a33721e5dd4e7ed9374073ca2b8b6f750">ObjectArray&lt; ObjectType &gt;</a>
 , <a class="el" href="class_object_array_internal_base.html#ab3c874932198baa23e4b85351654e816">ObjectArrayInternalBase&lt; ObjectType, BaseType &gt;</a>
@@ -352,10 +380,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setToNull()
 : <a class="el" href="class_unit_base.html#af32d1a3c659048be9d9dc8b22c693491">UnitBase&lt; SampleType &gt;</a>
 </li>
+<li>setUserData()
+: <a class="el" href="class_memory.html#a306ca72aa7a537b6e6d69c04d00d922b">Memory</a>
+</li>
 <li>setValue()
-: <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aec612bc290fa6ff8872805dd9711a00a">AtomicValue&lt; Type * &gt;</a>
-, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a6b74a5675734d848b5cad9d5c96cc788">AtomicExtended&lt; Type * &gt;</a>
+: <a class="el" href="class_atomic_value_3_01_plank_i_01_4.html#abb51b68d6d17734cd62b0465be712a47">AtomicValue&lt; PlankI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_i_01_4.html#a08fbbbb6add2690f77abec4ee730e579">AtomicValue&lt; PlankUI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_01_4.html#a9dcccde052d70bc5dede57f6a1369acf">AtomicValue&lt; PlankL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_01_4.html#a20b566dab4e4c46a5de8e5a0a602c994">AtomicValue&lt; PlankUL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_l_01_4.html#a1199dc20aa0ddc04bb135899cc16347e">AtomicValue&lt; PlankLL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_l_01_4.html#a8b6032fbd9fec83a128ce44a091e1274">AtomicValue&lt; PlankULL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_f_01_4.html#a8204db2ab11897c6a9494b5bf193e73a">AtomicValue&lt; PlankF &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_d_01_4.html#a046042c9b2c2c0c359be02c3fb9dbd47">AtomicValue&lt; PlankD &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#aa44dec2d0fafea02673c36c8413f26d1">AtomicValue&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_value_3_01void_01_5_01_4.html#a3b0bef7c0d5a4f4ad0477b4268417bf8">AtomicValue&lt; void * &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#ac47ff4dc7b67f30cbb4f8b80d6f50137">AtomicExtended&lt; Type * &gt;</a>
 , <a class="el" href="class_atomic_extended_3_01_long_01_4.html#a4307705cf19e153970051e3b7a9516fb">AtomicExtended&lt; Long &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_int_01_4.html#ad745cc805e622c1d03785d4d489c935f">AtomicExtended&lt; Int &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_short_01_4.html#af33a7f2ee18da98a31a27c5097cae740">AtomicExtended&lt; Short &gt;</a>
 , <a class="el" href="class_binary_op_variable_internal.html#ae8f81f563578e7843c7d182d25d14049">BinaryOpVariableInternal&lt; Type, op &gt;</a>
 , <a class="el" href="class_type_variable_internal.html#ab26f6c1f535544ea15d5a0723954bb5f">TypeVariableInternal&lt; Type, OtherType &gt;</a>
 , <a class="el" href="class_unary_op_variable_internal.html#ae1c98137f0d5edcb1c596d4b1df75ba9">UnaryOpVariableInternal&lt; Type, op &gt;</a>
@@ -364,10 +406,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_variable_internal_base.html#aeb59d98cf979fdec63175f6884ee8bd3">VariableInternalBase&lt; Type &gt;</a>
 , <a class="el" href="class_variable_internal.html#aaa7337d8b439aed0563734469f90ef1b">VariableInternal&lt; Type &gt;</a>
 , <a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html#abf63deaa45abf057d8f60d9cd447b895">VariableInternal&lt; Type &amp; &gt;</a>
-</li>
-<li>setWeakPointer()
-: <a class="el" href="class_weak_pointer.html#af0da7b77be58a80485e5389d254ee418">WeakPointer</a>
-, <a class="el" href="class_weak_pointer_container.html#aba200a2c00f7f4019c4cf1a3ac0eb95c">WeakPointerContainer&lt; OriginalType &gt;</a>
+, <a class="el" href="class_locked_value_internal.html#a5df6880570b8a72279436c023c6c67e4">LockedValueInternal&lt; ValueType &gt;</a>
+, <a class="el" href="class_locked_value.html#a88b01338fd5832437cec873f1748a6c6">LockedValue&lt; Type &gt;</a>
 </li>
 <li>Short
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ae61b4ab46764d0eddb43f76e58b2b07c">TypeCode</a>
@@ -375,8 +415,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>ShortArray
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6c6aa319e9c649dcc73b1ba346ceb317">TypeCode</a>
 </li>
+<li>ShortArrayVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91adeae4d77da7aba6a80436332d52ecc37">TypeCode</a>
+</li>
 <li>ShortBreakpoints
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a762b267059f84d8e175c24397b1d27d9">TypeCode</a>
+</li>
+<li>ShortBreakpointsVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91af4b613d9ea094af7df45903d8b43b6cc">TypeCode</a>
 </li>
 <li>ShortBus
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a2433c130f8c274ed9394aea9bc2fb2b5">TypeCode</a>
@@ -384,11 +430,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>ShortBusses
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91af48fba0de83509eb5af92aa7c0b9824c">TypeCode</a>
 </li>
+<li>ShortBussesVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6e43ead52d34ec5d472aa0f25c90a799">TypeCode</a>
+</li>
+<li>ShortBusVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a3545c4cf38aa888d8a5c13b3b9cc9653">TypeCode</a>
+</li>
 <li>ShortChannel
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ab37c428dbb4ccb27c25fcfff7a78f8b0">TypeCode</a>
 </li>
+<li>ShortChannelVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a0147b5f58a379bead9b0c688faccd028">TypeCode</a>
+</li>
 <li>ShortSignal
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91af6c632287a65e656747a1bdb1ab7bfc8">TypeCode</a>
+</li>
+<li>ShortSignalVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ac93872c240756ea79535ea71f567e097">TypeCode</a>
 </li>
 <li>ShortUnit
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ab1e56f87abe79c741907b064c4c61077">TypeCode</a>
@@ -396,19 +454,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>ShortUnits
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a9c58b7a61c7e6a1d1e119b5d1dfa78ec">TypeCode</a>
 </li>
+<li>ShortUnitsVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad3459994eed5978ec1d20633271bbb07">TypeCode</a>
+</li>
+<li>ShortUnitVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad89f13bf0da9b233f9ca001309884855">TypeCode</a>
+</li>
 <li>ShortVariable
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ae0a8b8feb6735f8a2cff4c3f648b9f91">TypeCode</a>
 </li>
 <li>ShortWavetable
 : <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a42a6e7ddf80293f7e6f5a70763b65b8d">TypeCode</a>
 </li>
+<li>ShortWavetableVariable
+: <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a6e8dda6c11697e6ada526057ccb5d69c">TypeCode</a>
+</li>
 <li>shouldBeDeletedNow()
 : <a class="el" href="class_channel_base.html#a5136a964e5d4a60aee04b04e041bebb3">ChannelBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_channel_internal_core.html#af2185f2ceb6d22ba4d3ac2a8a20ddbac">ChannelInternalCore</a>
 </li>
 <li>sign()
-: <a class="el" href="class_numerical_array.html#a2c97c407bb1d944e3c357c7ff22eb91d">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_variable.html#a8a5d19cc6f61bc34b526cee17fb95134">Variable&lt; Type &gt;</a>
+: <a class="el" href="class_variable.html#a8a5d19cc6f61bc34b526cee17fb95134">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_numerical_array.html#a2c97c407bb1d944e3c357c7ff22eb91d">NumericalArray&lt; NumericalType &gt;</a>
 , <a class="el" href="class_unit_base.html#a498954490886e3acd13d5747f65d290a">UnitBase&lt; SampleType &gt;</a>
 </li>
 <li>signal()
@@ -417,8 +484,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Signal
 : <a class="el" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a5698ab43cec4e3a53e3ba0fff75fa8bb">IOKey</a>
 </li>
+<li>signal()
+: <a class="el" href="class_lock_internal_base.html#a11aae654c722dd2942e94ec3137c33be">LockInternalBase</a>
+, <a class="el" href="class_no_lock_internal.html#aa4c7576bfdcc703d1229772cee557314">NoLockInternal</a>
+, <a class="el" href="class_lock_internal.html#a5e70df6987ea35bfc7d7b28c31cf304e">LockInternal</a>
+, <a class="el" href="class_spin_lock_internal.html#a524fa018f0e255121cd2434f693a710e">SpinLockInternal</a>
+, <a class="el" href="class_thread_spin_lock_internal.html#a941e28bd10f2f013c6688843ee42cc6e">ThreadSpinLockInternal</a>
+</li>
 <li>SignalBase()
-: <a class="el" href="class_signal_base.html#a73e2b67d690533a31c48a09b7b5c1a7f">SignalBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_signal_base.html#a6e9190bf13b13cdc8be935102988f965">SignalBase&lt; SampleType &gt;</a>
 </li>
 <li>SignalBase&lt; SampleType &gt;
 : <a class="el" href="class_signal_internal.html#afa8936b09520dbd23da2c2a9e1e0fb76">SignalInternal&lt; SampleType &gt;</a>
@@ -434,15 +508,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_signal_play_unit.html#a79123e1b1ce3b2026ac3ad1f882932e9">SignalPlayUnit&lt; SampleType &gt;</a>
 </li>
 <li>SignalType
-: <a class="el" href="class_signal_play_channel_internal.html#a35d05b76e1f6feebb6a62356217d74ec">SignalPlayChannelInternal&lt; SampleType &gt;</a>
+: <a class="el" href="class_signal_play_unit.html#ac8d1757b39333b6a74e931409eebd7ca">SignalPlayUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_channel_internal_base.html#afca304124c223341438c0bb1a93dd3ec">ChannelInternalBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_signal_play_unit.html#ac8d1757b39333b6a74e931409eebd7ca">SignalPlayUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_signal_play_channel_internal.html#a35d05b76e1f6feebb6a62356217d74ec">SignalPlayChannelInternal&lt; SampleType &gt;</a>
+</li>
+<li>SignalVariable
+: <a class="el" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a52605c673dbc764ad217438fffeb7c8a">IOKey</a>
 </li>
 <li>SimpleArray()
-: <a class="el" href="class_simple_array.html#aa2c58bbca10904ed0824c9c1ba1d7474">SimpleArray&lt; ObjectType &gt;</a>
+: <a class="el" href="class_simple_array.html#a93642b58a067185fedd427679fde6fb9">SimpleArray&lt; ObjectType &gt;</a>
 </li>
 <li>SimpleLinkedList()
-: <a class="el" href="class_simple_linked_list.html#a40d94077c00c1a82a965210ed7e4be79">SimpleLinkedList&lt; ValueType &gt;</a>
+: <a class="el" href="class_simple_linked_list.html#a6dd08ecd2bdc125b91eca4f0518bc24f">SimpleLinkedList&lt; ValueType &gt;</a>
 </li>
 <li>SimpleLinkedList&lt; ValueType * &gt;
 : <a class="el" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#ab1eea4dd7681cea8dc5c8a4b575df9ce">SimpleLinkedListInternal&lt; ValueType * &gt;</a>
@@ -455,7 +532,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a6857c228344d8bff9de13140b9154a76">SimpleLinkedListInternal&lt; ValueType * &gt;</a>
 </li>
 <li>SimpleQueue()
-: <a class="el" href="class_simple_queue.html#a24b441826a3c32b6bef1ae66e40bb283">SimpleQueue&lt; ValueType &gt;</a>
+: <a class="el" href="class_simple_queue.html#a037ee89b13e08d9aaf4b26c3adc36df9">SimpleQueue&lt; ValueType &gt;</a>
 </li>
 <li>SimpleQueue&lt; ValueType * &gt;
 : <a class="el" href="class_simple_queue_internal_3_01_value_type_01_5_01_4.html#aaf37b16083293470520655c9a8f0553d">SimpleQueueInternal&lt; ValueType * &gt;</a>
@@ -464,11 +541,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_simple_queue_internal.html#a38b90c8542d4bbe9ae3f247789b0a999">SimpleQueueInternal&lt; ValueType &gt;</a>
 </li>
 <li>SimpleQueueInternal()
-: <a class="el" href="class_simple_queue_internal.html#a91eb4c4a132585dca0402421216c6e7d">SimpleQueueInternal&lt; ValueType &gt;</a>
-, <a class="el" href="class_simple_queue_internal_3_01_value_type_01_5_01_4.html#a313c7055e2a76bd2e6d27e3f9d71f267">SimpleQueueInternal&lt; ValueType * &gt;</a>
+: <a class="el" href="class_simple_queue_internal_3_01_value_type_01_5_01_4.html#a313c7055e2a76bd2e6d27e3f9d71f267">SimpleQueueInternal&lt; ValueType * &gt;</a>
+, <a class="el" href="class_simple_queue_internal.html#a91eb4c4a132585dca0402421216c6e7d">SimpleQueueInternal&lt; ValueType &gt;</a>
 </li>
 <li>SimpleStack()
-: <a class="el" href="class_simple_stack.html#abce157387481acb9aa7b986d49d4b8de">SimpleStack&lt; ValueType &gt;</a>
+: <a class="el" href="class_simple_stack.html#aa2ce3df7212e7636d2ece17a54597feb">SimpleStack&lt; ValueType &gt;</a>
 </li>
 <li>SimpleStack&lt; ValueType * &gt;
 : <a class="el" href="class_simple_stack_internal_3_01_value_type_01_5_01_4.html#aa1de9e2964315b1f354ccdd5790d900e">SimpleStackInternal&lt; ValueType * &gt;</a>
@@ -477,13 +554,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_simple_stack_internal.html#a954f632280dda9f09b2aa4b27de9d23e">SimpleStackInternal&lt; ValueType &gt;</a>
 </li>
 <li>SimpleStackInternal()
-: <a class="el" href="class_simple_stack_internal_3_01_value_type_01_5_01_4.html#a6465b1374ced1c4e030728dc23cb733c">SimpleStackInternal&lt; ValueType * &gt;</a>
-, <a class="el" href="class_simple_stack_internal.html#af61624a63c41d97a68f66637f684e448">SimpleStackInternal&lt; ValueType &gt;</a>
+: <a class="el" href="class_simple_stack_internal.html#af61624a63c41d97a68f66637f684e448">SimpleStackInternal&lt; ValueType &gt;</a>
+, <a class="el" href="class_simple_stack_internal_3_01_value_type_01_5_01_4.html#a6465b1374ced1c4e030728dc23cb733c">SimpleStackInternal&lt; ValueType * &gt;</a>
 </li>
 <li>sin()
-: <a class="el" href="class_unit_base.html#adfd01e6c59c15369e4bfda8f5776b570">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_numerical_array.html#a8c6a229a1ca6aa62ce2f16a7cddc81c7">NumericalArray&lt; NumericalType &gt;</a>
+: <a class="el" href="class_numerical_array.html#a8c6a229a1ca6aa62ce2f16a7cddc81c7">NumericalArray&lt; NumericalType &gt;</a>
 , <a class="el" href="class_variable.html#ae71d0c4eb460c994534923cbcbfc4926">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_unit_base.html#adfd01e6c59c15369e4bfda8f5776b570">UnitBase&lt; SampleType &gt;</a>
 </li>
 <li>sine512()
 : <a class="el" href="class_wavetable_base.html#ac119f4a663444522a8638d7a73a1d7d7">WavetableBase&lt; SampleType &gt;</a>
@@ -496,31 +573,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_wavetable_base.html#af5120a4f019ecc5bde53314ddd471e65">WavetableBase&lt; SampleType &gt;</a>
 </li>
 <li>sinh()
-: <a class="el" href="class_numerical_array.html#a93eff4090af911add420281e8825debc">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_variable.html#a1a3d9e65cf0d34e3425450efb4157c6d">Variable&lt; Type &gt;</a>
+: <a class="el" href="class_variable.html#a1a3d9e65cf0d34e3425450efb4157c6d">Variable&lt; Type &gt;</a>
 , <a class="el" href="class_unit_base.html#a7042232fed9247cb1c185a4405e62638">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_numerical_array.html#a93eff4090af911add420281e8825debc">NumericalArray&lt; NumericalType &gt;</a>
 </li>
 <li>size()
-: <a class="el" href="class_simple_linked_list.html#a8b7b2e5cc89ad38d1817b5fb0a72a6f4">SimpleLinkedList&lt; ValueType &gt;</a>
-, <a class="el" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">SimpleLinkedListInternal&lt; ValueType &gt;</a>
-, <a class="el" href="classffft_1_1_dyn_array.html#aab5a878741b62b079c94db354357127d">ffft::DynArray&lt; T &gt;</a>
-, <a class="el" href="class_wavetable_base.html#a1d94a8a4afa129cc74829b06c258ba96">WavetableBase&lt; SampleType &gt;</a>
+: <a class="el" href="classffft_1_1_dyn_array.html#aab5a878741b62b079c94db354357127d">ffft::DynArray&lt; T &gt;</a>
+, <a class="el" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">ObjectArrayInternalBase&lt; ObjectType, BaseType &gt;</a>
+, <a class="el" href="classffft_1_1_array.html#ab8bcd460790868c4d3aa7e9706d8a0b2">ffft::Array&lt; T, LEN &gt;</a>
 , <a class="el" href="class_dictionary.html#a63c0c7e86f5935ea9ae4dce27be28355">Dictionary&lt; ValueType, KeyType &gt;</a>
 , <a class="el" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb">ObjectArray&lt; ObjectType &gt;</a>
-, <a class="el" href="class_object_array_internal_base.html#a18b6b43a324bd29f80397f059be0deca">ObjectArrayInternalBase&lt; ObjectType, BaseType &gt;</a>
 , <a class="el" href="class_simple_linked_list_internal_3_01_value_type_01_5_01_4.html#a05bca103fb6c6416bf1f6069371f20fb">SimpleLinkedListInternal&lt; ValueType * &gt;</a>
-, <a class="el" href="classffft_1_1_array.html#ab8bcd460790868c4d3aa7e9706d8a0b2">ffft::Array&lt; T, LEN &gt;</a>
+, <a class="el" href="class_wavetable_base.html#a1d94a8a4afa129cc74829b06c258ba96">WavetableBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_simple_linked_list_internal.html#a952b707a52ed1f02e6699cda1987d773">SimpleLinkedListInternal&lt; ValueType &gt;</a>
+, <a class="el" href="class_simple_linked_list.html#a8b7b2e5cc89ad38d1817b5fb0a72a6f4">SimpleLinkedList&lt; ValueType &gt;</a>
 </li>
 <li>size_
 : <a class="el" href="class_numerical_array_spec.html#a144de79b0eda4af2b79aa2dfb182591d">NumericalArraySpec</a>
 </li>
 <li>sizeAllocated()
-: <a class="el" href="class_object_array_internal_base.html#ac68fb289f852f6335196e28e8cf1e642">ObjectArrayInternalBase&lt; ObjectType, BaseType &gt;</a>
-, <a class="el" href="class_object_array.html#acef05cc6ee40be483f69f6ed3decf081">ObjectArray&lt; ObjectType &gt;</a>
+: <a class="el" href="class_object_array.html#acef05cc6ee40be483f69f6ed3decf081">ObjectArray&lt; ObjectType &gt;</a>
+, <a class="el" href="class_object_array_internal_base.html#ac68fb289f852f6335196e28e8cf1e642">ObjectArrayInternalBase&lt; ObjectType, BaseType &gt;</a>
 </li>
 <li>sleep()
-: <a class="el" href="class_threading_1_1_thread.html#a6e52ef55ffcba982eb270909564f607e">Threading::Thread</a>
-, <a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684">Threading</a>
+: <a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684">Threading</a>
+, <a class="el" href="class_threading_1_1_thread.html#a6e52ef55ffcba982eb270909564f607e">Threading::Thread</a>
 </li>
 <li>Slope
 : <a class="el" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a97616ccaf2ba8496474edfe4829f94d5">Measure</a>
@@ -529,11 +606,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_smart_pointer.html#a279a99170aded5dad1d4cf939bbc8fbe">SmartPointer</a>
 </li>
 <li>SmartPointerContainer()
-: <a class="el" href="class_smart_pointer_container.html#a91c21d1da616006d4c3618e3bd9e5e76">SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;</a>
-, <a class="el" href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html#af1d8b6a79d0a4331133f68ff35b67b83">SmartPointerContainer&lt; SmartPointerType, true &gt;</a>
+: <a class="el" href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html#a743833dcdaa4b3ae6c0f41c86e1f12c4">SmartPointerContainer&lt; SmartPointerType, true &gt;</a>
+, <a class="el" href="class_smart_pointer_container.html#a4087a64436d45a952b062423d2e89bff">SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;</a>
 </li>
 <li>SmartPointerContainerBase()
-: <a class="el" href="class_smart_pointer_container_base.html#ab97a4bb2acb102167efbdb7bb5f4194e">SmartPointerContainerBase&lt; SmartPointerType &gt;</a>
+: <a class="el" href="class_smart_pointer_container_base.html#abf47d2517e818529f0245f288db2758c">SmartPointerContainerBase&lt; SmartPointerType &gt;</a>
+</li>
+<li>SmartPointerCounter()
+: <a class="el" href="class_smart_pointer_counter.html#ab7597e415f7c8c4b384680706f51d5fa">SmartPointerCounter</a>
 </li>
 <li>sourceLength()
 : <a class="el" href="class_numerical_array.html#a9d0221e7893c6657228bcc689c1a25d3">NumericalArray&lt; NumericalType &gt;</a>
@@ -544,102 +624,148 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>space
 : <a class="el" href="class_text.html#adccc0430a2134a9846b8f4925f9ac45b">Text</a>
 </li>
+<li>SpinLock
+: <a class="el" href="class_lock.html#ab95046aacdff47710fc1e20f5730caada0cd353fc5af5908107d8980ef63d227c">Lock</a>
+</li>
+<li>SpinLockInternal()
+: <a class="el" href="class_spin_lock_internal.html#a3527c6b5f7a870eb33332aa703851ee0">SpinLockInternal</a>
+</li>
 <li>split()
-: <a class="el" href="class_numerical_array.html#aef03cef1ffbdb6a8fa740096d721a349">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_object_array.html#a1b9f73b45869002f410e320c68d8c068">ObjectArray&lt; ObjectType &gt;</a>
+: <a class="el" href="class_object_array.html#a1b9f73b45869002f410e320c68d8c068">ObjectArray&lt; ObjectType &gt;</a>
+, <a class="el" href="class_numerical_array.html#aef03cef1ffbdb6a8fa740096d721a349">NumericalArray&lt; NumericalType &gt;</a>
 </li>
 <li>splitSequence()
-: <a class="el" href="class_numerical_array.html#a72b4cb932183d87707907e488e1d70ee">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_object_array.html#a664370848338525597ca379ce6da43de">ObjectArray&lt; ObjectType &gt;</a>
+: <a class="el" href="class_object_array.html#a664370848338525597ca379ce6da43de">ObjectArray&lt; ObjectType &gt;</a>
+, <a class="el" href="class_numerical_array.html#a72b4cb932183d87707907e488e1d70ee">NumericalArray&lt; NumericalType &gt;</a>
 </li>
 <li>sqrdif()
-: <a class="el" href="class_unit_base.html#ad44f311b28ebda6d59a8aca92b937ae9">UnitBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_variable.html#ae88845d0e4cb45c17de36479bde76788">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_unit_base.html#ad44f311b28ebda6d59a8aca92b937ae9">UnitBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_numerical_array.html#ab4e73c2285c197d84a4d838d83295b1d">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_variable.html#ae88845d0e4cb45c17de36479bde76788">Variable&lt; Type &gt;</a>
 </li>
 <li>sqrsum()
 : <a class="el" href="class_unit_base.html#adb1fc080c1b85651ab0f0a2da2a37fbe">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_numerical_array.html#a2940eaa8ba181697048db60993d501eb">NumericalArray&lt; NumericalType &gt;</a>
 , <a class="el" href="class_variable.html#ab7c84c48863c981bba6627de7648eca7">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_numerical_array.html#a2940eaa8ba181697048db60993d501eb">NumericalArray&lt; NumericalType &gt;</a>
 </li>
 <li>sqrt()
-: <a class="el" href="class_variable.html#a01586350b26418e2d007ff9a293f1550">Variable&lt; Type &gt;</a>
+: <a class="el" href="class_numerical_array.html#a99590a6747640c9adf4ecd0dab889507">NumericalArray&lt; NumericalType &gt;</a>
+, <a class="el" href="class_variable.html#a01586350b26418e2d007ff9a293f1550">Variable&lt; Type &gt;</a>
 , <a class="el" href="class_unit_base.html#ad3c6085937821c153209ae38a6471d85">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_numerical_array.html#a99590a6747640c9adf4ecd0dab889507">NumericalArray&lt; NumericalType &gt;</a>
 </li>
 <li>squared()
-: <a class="el" href="class_numerical_array.html#a10c88d42c1a68c2cf019ba599ce39386">NumericalArray&lt; NumericalType &gt;</a>
-, <a class="el" href="class_unit_base.html#ad1bd91b6d6644cc438f16489ada2da9f">UnitBase&lt; SampleType &gt;</a>
+: <a class="el" href="class_unit_base.html#ad1bd91b6d6644cc438f16489ada2da9f">UnitBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_numerical_array.html#a10c88d42c1a68c2cf019ba599ce39386">NumericalArray&lt; NumericalType &gt;</a>
 , <a class="el" href="class_variable.html#a6ce54f286ec81993b685286f6993ca4a">Variable&lt; Type &gt;</a>
 </li>
 <li>StackType
-: <a class="el" href="class_simple_queue_internal_3_01_value_type_01_5_01_4.html#ad46d7644c488f11d3b6a1a2edc182019">SimpleQueueInternal&lt; ValueType * &gt;</a>
+: <a class="el" href="class_lock_free_stack_internal_3_01_value_type_01_5_01_4.html#a95f3f81d3f0a3267782b3a271071edd7">LockFreeStackInternal&lt; ValueType * &gt;</a>
 , <a class="el" href="class_simple_stack_internal_3_01_value_type_01_5_01_4.html#a590a04f14084c862d07394c773a057ac">SimpleStackInternal&lt; ValueType * &gt;</a>
 , <a class="el" href="class_simple_queue_internal.html#a68308900f42d38420dcb61b49a0512ac">SimpleQueueInternal&lt; ValueType &gt;</a>
-, <a class="el" href="class_lock_free_stack_internal.html#a9b77ec5d80012fb0463c3b3ae80e8b0a">LockFreeStackInternal&lt; ValueType &gt;</a>
+, <a class="el" href="class_simple_queue_internal_3_01_value_type_01_5_01_4.html#ad46d7644c488f11d3b6a1a2edc182019">SimpleQueueInternal&lt; ValueType * &gt;</a>
 , <a class="el" href="class_simple_stack_internal.html#a736d918e4d77e0f261fa185d54dc5886">SimpleStackInternal&lt; ValueType &gt;</a>
-, <a class="el" href="class_lock_free_stack_internal_3_01_value_type_01_5_01_4.html#a95f3f81d3f0a3267782b3a271071edd7">LockFreeStackInternal&lt; ValueType * &gt;</a>
+, <a class="el" href="class_lock_free_stack_internal.html#a9b77ec5d80012fb0463c3b3ae80e8b0a">LockFreeStackInternal&lt; ValueType &gt;</a>
 </li>
 <li>start()
 : <a class="el" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">Threading::Thread</a>
 </li>
-<li>startHost()
-: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#af0f7edce30e5b72eaab5129e186cd0d7">PLONK_NAMESPACE::PortAudioAudioHost</a>
+<li>startHost
+: <a class="el" href="interface_p_l_audio_host.html#a4632229b1b2bf8910f552147b4b125ce">PLAudioHost</a>
 , <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a25f4ae2af2f9930099efb2bbea6ddd35">PLONK_NAMESPACE::JuceAudioHost</a>
-, <a class="el" href="interface_p_l_audio_host.html#a4632229b1b2bf8910f552147b4b125ce">PLAudioHost</a>
-, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a854410e425ffad47ae51f935c59461ee">PLONK_NAMESPACE::IOSAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#af0f7edce30e5b72eaab5129e186cd0d7">PLONK_NAMESPACE::PortAudioAudioHost</a>
 , <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87">AudioHostBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a854410e425ffad47ae51f935c59461ee">PLONK_NAMESPACE::IOSAudioHost</a>
 </li>
 <li>startHostInternal()
 : <a class="el" href="class_audio_host_base.html#a662b8c69ef7ac1d3e47fc5b93c196e04">AudioHostBase&lt; SampleType &gt;</a>
+</li>
+<li>staticAlloc()
+: <a class="el" href="class_object_memory_defer_free.html#ac3c2497b17f81c6cbd64ba79162ba7f8">ObjectMemoryDeferFree</a>
+, <a class="el" href="class_object_memory_pools.html#a1ece933bcb592088d03937cd7ac0bd7d">ObjectMemoryPools</a>
+</li>
+<li>staticFree()
+: <a class="el" href="class_object_memory_pools.html#a601072e823cc4e604915a54d5472f02f">ObjectMemoryPools</a>
+, <a class="el" href="class_object_memory_defer_free.html#a87190d40adca430cf1b9745f1a6b9325">ObjectMemoryDeferFree</a>
 </li>
 <li>step()
 : <a class="el" href="classffft_1_1_osc_sin_cos.html#a442975ce6388271ea78998c080364e08">ffft::OscSinCos&lt; T &gt;</a>
 </li>
 <li>stopHost()
-: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a74895bf82ff77c069494a40c67132458">PLONK_NAMESPACE::JuceAudioHost</a>
-, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#ade92122ce11e7149bbd5a48e1876b90b">PLONK_NAMESPACE::PortAudioAudioHost</a>
-, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a69059aee7d03f74d1a25e50baa5e155e">PLONK_NAMESPACE::IOSAudioHost</a>
+: <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#ade92122ce11e7149bbd5a48e1876b90b">PLONK_NAMESPACE::PortAudioAudioHost</a>
 , <a class="el" href="interface_p_l_audio_host.html#a0340697ab1516d826ca775e70fe2cf77">PLAudioHost</a>
 , <a class="el" href="class_audio_host_base.html#a461a85d786386a56216fc80057b4f657">AudioHostBase&lt; SampleType &gt;</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a69059aee7d03f74d1a25e50baa5e155e">PLONK_NAMESPACE::IOSAudioHost</a>
+, <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a74895bf82ff77c069494a40c67132458">PLONK_NAMESPACE::JuceAudioHost</a>
 </li>
 <li>subop()
 : <a class="el" href="class_unit_base.html#a007485d6e5d46ba2f1c081b9f156d932">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_variable.html#aac049b45484a41b74aed4de6f48e23b3">Variable&lt; Type &gt;</a>
 , <a class="el" href="class_numerical_array.html#ad5d8e1ee2c8d69ab21b94ad128192166">NumericalArray&lt; NumericalType &gt;</a>
+, <a class="el" href="class_variable.html#aac049b45484a41b74aed4de6f48e23b3">Variable&lt; Type &gt;</a>
 </li>
 <li>sumsqr()
-: <a class="el" href="class_variable.html#a25ddb483dc9a0b40c40f6e5a9fc5c2d6">Variable&lt; Type &gt;</a>
+: <a class="el" href="class_numerical_array.html#a70834d522831e39b19e514066a65f987">NumericalArray&lt; NumericalType &gt;</a>
 , <a class="el" href="class_unit_base.html#a9859d688170b57861e5373728a4304f4">UnitBase&lt; SampleType &gt;</a>
-, <a class="el" href="class_numerical_array.html#a70834d522831e39b19e514066a65f987">NumericalArray&lt; NumericalType &gt;</a>
+, <a class="el" href="class_variable.html#a25ddb483dc9a0b40c40f6e5a9fc5c2d6">Variable&lt; Type &gt;</a>
 </li>
 <li>swap()
-: <a class="el" href="class_endian_utility.html#a84a9f060dafb4436c426cc840a6e0b1a">EndianUtility&lt; length &gt;</a>
-, <a class="el" href="class_endian_utility_3_018_01_4.html#a620553b81e4b6a88a0fd7beb71d714e6">EndianUtility&lt; 8 &gt;</a>
-, <a class="el" href="class_endian.html#a7252bd0bdeb0a764159f4be2a197c1fa">Endian</a>
-, <a class="el" href="class_endian_utility_3_012_01_4.html#a755dcc8774810518a769bd49f8ea0f34">EndianUtility&lt; 2 &gt;</a>
-, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a97f66821fa59aa4759d56f906a864924">AtomicValue&lt; Type * &gt;</a>
-, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a54724ba6f39d61f33111b50347f2641e">AtomicExtended&lt; Type * &gt;</a>
-, <a class="el" href="class_endian.html#a956265260b6cad55239ae0cdb881b596">Endian</a>
-, <a class="el" href="class_endian_utility_3_014_01_4.html#ae98c4461db30aaa4eab478a9f4d5422a">EndianUtility&lt; 4 &gt;</a>
-, <a class="el" href="class_endian_utility_3_011_01_4.html#a9f7e25660f7ebbfc460bf464c89d79a9">EndianUtility&lt; 1 &gt;</a>
-, <a class="el" href="class_endian.html#a1245520c975ce70f52c264c79b6b56a0">Endian</a>
-, <a class="el" href="class_endian_utility_3_011_01_4.html#af0531b7a3fd7704e23333f470385ea9e">EndianUtility&lt; 1 &gt;</a>
-, <a class="el" href="class_endian_utility_3_014_01_4.html#ab84b2b20fba54a99131b11debdd2e578">EndianUtility&lt; 4 &gt;</a>
-, <a class="el" href="class_endian_utility_3_013_01_4.html#a535a2582e8af547ba3a21292d3367ce2">EndianUtility&lt; 3 &gt;</a>
-, <a class="el" href="class_endian_utility_3_018_01_4.html#aa7648abce7140af22155bd245d26889e">EndianUtility&lt; 8 &gt;</a>
-, <a class="el" href="class_endian_utility.html#a3138515db51d1b6c92eab331e98fda55">EndianUtility&lt; length &gt;</a>
-, <a class="el" href="class_endian_utility_3_012_01_4.html#aa66fd67fc4d28343975b7b7d0d976b3a">EndianUtility&lt; 2 &gt;</a>
-, <a class="el" href="class_endian_utility_3_013_01_4.html#ad15287912dd62b9efaaced886e9bc356">EndianUtility&lt; 3 &gt;</a>
-, <a class="el" href="class_endian.html#aa7753303e7d010cb893cf2a712f0f373">Endian</a>
+: <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#a97f66821fa59aa4759d56f906a864924">AtomicValue&lt; Type * &gt;</a>
 , <a class="el" href="class_atomic_extended_3_01_long_01_4.html#a2b4da67e910e04282dd8237b14b8e171">AtomicExtended&lt; Long &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_short_01_4.html#aeb4c26f7eed58d0365f48b75b27abac1">AtomicExtended&lt; Short &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_f_01_4.html#a684a25b6a828f702ba4dc49a41ae51c7">AtomicValue&lt; PlankF &gt;</a>
+, <a class="el" href="class_endian_utility_3_018_01_4.html#aa7648abce7140af22155bd245d26889e">EndianUtility&lt; 8 &gt;</a>
+, <a class="el" href="class_endian_utility_3_012_01_4.html#aa66fd67fc4d28343975b7b7d0d976b3a">EndianUtility&lt; 2 &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#aa9b98dfd7379ba9facce70d648e7c8a5">AtomicExtended&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_value_3_01void_01_5_01_4.html#a029255c2cdcd442186d92de6d6d81c36">AtomicValue&lt; void * &gt;</a>
+, <a class="el" href="class_endian_utility.html#a84a9f060dafb4436c426cc840a6e0b1a">EndianUtility&lt; length &gt;</a>
+, <a class="el" href="class_endian_utility_3_013_01_4.html#a535a2582e8af547ba3a21292d3367ce2">EndianUtility&lt; 3 &gt;</a>
+, <a class="el" href="class_endian_utility_3_014_01_4.html#ae98c4461db30aaa4eab478a9f4d5422a">EndianUtility&lt; 4 &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_l_01_4.html#adcda43472dc6b827db36b3b9e5fd8a17">AtomicValue&lt; PlankULL &gt;</a>
+, <a class="el" href="class_endian.html#a1245520c975ce70f52c264c79b6b56a0">Endian</a>
+, <a class="el" href="class_endian_utility_3_014_01_4.html#ab84b2b20fba54a99131b11debdd2e578">EndianUtility&lt; 4 &gt;</a>
+, <a class="el" href="class_endian_utility_3_012_01_4.html#a755dcc8774810518a769bd49f8ea0f34">EndianUtility&lt; 2 &gt;</a>
+, <a class="el" href="class_endian_utility_3_013_01_4.html#ad15287912dd62b9efaaced886e9bc356">EndianUtility&lt; 3 &gt;</a>
+, <a class="el" href="class_endian.html#a956265260b6cad55239ae0cdb881b596">Endian</a>
+, <a class="el" href="class_atomic_value_3_01_plank_d_01_4.html#a9b86074d46aa9209a800cc9a774ad8b1">AtomicValue&lt; PlankD &gt;</a>
+, <a class="el" href="class_endian_utility_3_018_01_4.html#a620553b81e4b6a88a0fd7beb71d714e6">EndianUtility&lt; 8 &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_01_4.html#a0f01a17eb06925ae0dbd8434f5cf7b89">AtomicValue&lt; PlankL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_01_4.html#a255af2d17af82df18886452e3396f577">AtomicValue&lt; PlankUL &gt;</a>
+, <a class="el" href="class_endian_utility_3_011_01_4.html#af0531b7a3fd7704e23333f470385ea9e">EndianUtility&lt; 1 &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_l_01_4.html#ab70c5980c26f5692c740a9a7b754a877">AtomicValue&lt; PlankLL &gt;</a>
+, <a class="el" href="class_endian_utility.html#a3138515db51d1b6c92eab331e98fda55">EndianUtility&lt; length &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_i_01_4.html#ab4f5c6020b27c51cfc2f17299a1fe85a">AtomicValue&lt; PlankI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_i_01_4.html#ab91f7e996100f5b3e6fad9a48d72c60c">AtomicValue&lt; PlankUI &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_int_01_4.html#af07281cc283314fddac96fe16b82d3e3">AtomicExtended&lt; Int &gt;</a>
+, <a class="el" href="class_endian_utility_3_011_01_4.html#a9f7e25660f7ebbfc460bf464c89d79a9">EndianUtility&lt; 1 &gt;</a>
+, <a class="el" href="class_endian.html#a7252bd0bdeb0a764159f4be2a197c1fa">Endian</a>
 </li>
 <li>swapAll()
-: <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#ae69961d4eb2dbcf9d0ce0f6c14ee0aa1">AtomicExtended&lt; Type * &gt;</a>
-, <a class="el" href="class_atomic_extended_3_01_long_01_4.html#a5fc97d3fcb52004c86504812af612887">AtomicExtended&lt; Long &gt;</a>
+: <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a77b3f249affa25e14fef067ac875d62c">AtomicExtended&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_short_01_4.html#a70b539a2372cb7ff5650802550cc6b09">AtomicExtended&lt; Short &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_int_01_4.html#a40f716157a6a9a9225aa9a8d5599e977">AtomicExtended&lt; Int &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#a09b85e7d46d17427dd971ae3158c823a">AtomicExtended&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_long_01_4.html#a032adf2b88b1fb0bf809321eebd64d93">AtomicExtended&lt; Long &gt;</a>
+, <a class="el" href="class_atomic_extended_3_01_int_01_4.html#a85d824b12dd20217f91401a69c90a8a0">AtomicExtended&lt; Int &gt;</a>
+</li>
+<li>swapValues()
+: <a class="el" href="class_variable_internal.html#a0b1d7d01dc52a0537d53ae124084a9c8">VariableInternal&lt; Type &gt;</a>
+, <a class="el" href="class_variable.html#a5b6d637c82197496cf0f083b23360bf3">Variable&lt; Type &gt;</a>
+, <a class="el" href="class_variable_internal_3_01_type_01_6_01_4.html#a1b3a40a0c9892507566a48523f7958c0">VariableInternal&lt; Type &amp; &gt;</a>
+, <a class="el" href="class_variable_3_01_type_01_6_01_4.html#a5d426cb02252e07bf4f33117e1d4cdd5">Variable&lt; Type &amp; &gt;</a>
 </li>
 <li>swapWith()
-: <a class="el" href="class_smart_pointer_container_base.html#ac528ab1b24b5bb9607ceee3f7c1b0b8e">SmartPointerContainerBase&lt; SmartPointerType &gt;</a>
+: <a class="el" href="class_atomic_extended_3_01_type_01_5_01_4.html#ac9f1013d3ec688dde9aa492d27ab01c2">AtomicExtended&lt; Type * &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_f_01_4.html#acbca26ccc753eaf87e50f0bd5db2515d">AtomicValue&lt; PlankF &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_i_01_4.html#a0117000bbe152dba30d21676a510a020">AtomicValue&lt; PlankI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_l_01_4.html#a7a3a5070da5a3d953f711efddead8b16">AtomicValue&lt; PlankLL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_l_01_4.html#a0e716f881da3d5f506342597ec300dfc">AtomicValue&lt; PlankL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01void_01_5_01_4.html#ae3f895cd59a9b90d7e71a5abf57eba5d">AtomicValue&lt; void * &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_01_4.html#a93dd7a5fc17e019ac32f6f076aa5995c">AtomicValue&lt; PlankUL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_i_01_4.html#abadafca67a66a6cd24c44700de727ab5">AtomicValue&lt; PlankUI &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_u_l_l_01_4.html#a7d504bcc872f239c8b1ba757932e7537">AtomicValue&lt; PlankULL &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_plank_d_01_4.html#ab5736ea4ffdbaf81036df359562c220a">AtomicValue&lt; PlankD &gt;</a>
+, <a class="el" href="class_atomic_value_3_01_type_01_5_01_4.html#af2e2a6c690996cec2f4bbe9f4464be54">AtomicValue&lt; Type * &gt;</a>
+, <a class="el" href="class_smart_pointer_container_base.html#a49dec06541146fd3ff775138ce5f1bf4">SmartPointerContainerBase&lt; SmartPointerType &gt;</a>
+, <a class="el" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">ScopedPointerContainer&lt; ScopedPointerType &gt;</a>
 </li>
 </ul>
 </div>
@@ -657,7 +783,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

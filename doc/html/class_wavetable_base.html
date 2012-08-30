@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">WavetableBase&lt; SampleType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="WavetableBase" --><!-- doxytag: inherits="NumericalArray&lt; SampleType &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___wavetable_8h_source.html">plonk_Wavetable.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="WavetableBase" --><!-- doxytag: inherits="NumericalArray&lt; SampleType &gt;" --><div class="dynheader">
 Inheritance diagram for WavetableBase&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
@@ -110,6 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wavetable_base.html#add764b9a04c287dc694fff7afaa2f639">put</a> (const int index, SampleType const &amp;value)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Places an item at the given index.  <a href="#add764b9a04c287dc694fff7afaa2f639"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_wavetable_base.html">WavetableBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wavetable_base.html#a5d6eaf55f3567f0de28a5509fd463b2e">normalise</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_wavetable_base.html">WavetableBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wavetable_base.html#a66b2d7c7ba152a36242e3e686ee4b4f5">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_wavetable_base.html">WavetableBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wavetable_base.html#a9b23de9b07c5b2c97c376a4da0da6389">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_wavetable_base.html">WavetableBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wavetable_base.html#af5120a4f019ecc5bde53314ddd471e65">sineTable</a> (const int size, const double repeats=1.0)  throw ()</td></tr>
@@ -231,6 +230,119 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a1306c0d71af2fcc48cfc2e9f6efc323c"></a><!-- doxytag: member="WavetableBase::operator=" ref="a1306c0d71af2fcc48cfc2e9f6efc323c" args="(WavetableBase const &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a241b111cbfc895bc0056064677fe27d8"></a><!-- doxytag: member="WavetableBase::length" ref="a241b111cbfc895bc0056064677fe27d8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Length is the number of real elements of storage available. </p>
+<p>For arrays that are NOT null terminated this is synonymous with <a class="el" href="class_wavetable_base.html#a1d94a8a4afa129cc74829b06c258ba96" title="Size is the actual number of elements of storage needed for the array.">size()</a>. If this is a null terminated array the length is one less than the size. </p>
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260">ObjectArray&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1d94a8a4afa129cc74829b06c258ba96"></a><!-- doxytag: member="WavetableBase::size" ref="a1d94a8a4afa129cc74829b06c258ba96" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Size is the actual number of elements of storage needed for the array. </p>
+<p>If this is a null terminated array the null value is inlcuded in the size. </p>
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb">ObjectArray&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a123079cd06c41edc4a25eb86efc82bc8"></a><!-- doxytag: member="WavetableBase::getArray" ref="a123079cd06c41edc4a25eb86efc82bc8" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const SampleType* <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::getArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a pointer to the raw array for read-only ops. </p>
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#adf43b8f7395f9fbc7c904c307059659f">ObjectArray&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5bf606de6291b3730b5f7b620ac3bae4"></a><!-- doxytag: member="WavetableBase::operator[]" ref="a5bf606de6291b3730b5f7b620ac3bae4" args="(const int index) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">SampleType <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns a reference to an item at the specified index. </p>
+<p>If you are not sure about the index being in range check for the object being "null" as a separate internal null value may have been returned instead. </p>
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a0bc80ee77d245f592d75f480293937b6">ObjectArray&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a58303a9b8149814f0a4a97349c471e7d"></a><!-- doxytag: member="WavetableBase::atUnchecked" ref="a58303a9b8149814f0a4a97349c471e7d" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -255,35 +367,68 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a486e04944573d7044d33b437bddce4f2"></a><!-- doxytag: member="WavetableBase::bartlettWindow" ref="a486e04944573d7044d33b437bddce4f2" args="(const int size)" -->
+<a class="anchor" id="add764b9a04c287dc694fff7afaa2f639"></a><!-- doxytag: member="WavetableBase::put" ref="add764b9a04c287dc694fff7afaa2f639" args="(const int index, SampleType const &amp;value)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::bartlettWindow </td>
+          <td class="memname">void <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::put </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SampleType const &amp;&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Creates a Wavetable with a given size (length) containing one or more Bartlett windows. </p>
+<p>Places an item at the given index. </p>
+<p>Indices out of range will be ignored. </p>
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#ad675f23eada53adcadda78f096b3642d">ObjectArray&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1321640270ac7c17b69d5bb6b9d98113"></a><!-- doxytag: member="WavetableBase::blackmanWindow" ref="a1321640270ac7c17b69d5bb6b9d98113" args="(const int size, const double alpha=0.16)" -->
+<a class="anchor" id="a5d6eaf55f3567f0de28a5509fd463b2e"></a><!-- doxytag: member="WavetableBase::normalise" ref="a5d6eaf55f3567f0de28a5509fd463b2e" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::blackmanWindow </td>
+          <td class="memname"><a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::normalise </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a4196939f3d55c0140578d24d5646b39a">NumericalArray&lt; SampleType &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af5120a4f019ecc5bde53314ddd471e65"></a><!-- doxytag: member="WavetableBase::sineTable" ref="af5120a4f019ecc5bde53314ddd471e65" args="(const int size, const double repeats=1.0)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::sineTable </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -292,7 +437,7 @@ template&lt;class SampleType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>alpha</em> = <code>0.16</code>&#160;</td>
+          <td class="paramname"><em>repeats</em> = <code>1.0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -302,8 +447,6 @@ template&lt;class SampleType &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Creates a Wavetable with a given size (length) containing one or more Blackman windows. </p>
 
 </div>
 </div>
@@ -369,25 +512,66 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a123079cd06c41edc4a25eb86efc82bc8"></a><!-- doxytag: member="WavetableBase::getArray" ref="a123079cd06c41edc4a25eb86efc82bc8" args="() const " -->
+<a class="anchor" id="a95507fcd1fc673e3acd64877f25610d7"></a><!-- doxytag: member="WavetableBase::triangleWindow" ref="a95507fcd1fc673e3acd64877f25610d7" args="(const int size)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const SampleType* <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::getArray </td>
+          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::triangleWindow </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Returns a pointer to the raw array for read-only ops. </p>
+<p>Creates a Wavetable with a given size (length) containing one or more triangle windows. </p>
 
-<p>Reimplemented from <a class="el" href="class_object_array.html#adf43b8f7395f9fbc7c904c307059659f">ObjectArray&lt; SampleType &gt;</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a486e04944573d7044d33b437bddce4f2"></a><!-- doxytag: member="WavetableBase::bartlettWindow" ref="a486e04944573d7044d33b437bddce4f2" args="(const int size)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::bartlettWindow </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates a Wavetable with a given size (length) containing one or more Bartlett windows. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4b8e940525fc8f024db2ce004d01e012"></a><!-- doxytag: member="WavetableBase::hannWindow" ref="a4b8e940525fc8f024db2ce004d01e012" args="(const int size)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::hannWindow </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates a Wavetable with a given size (length) containing one or more von Hann (Hanning) windows. </p>
 
 </div>
 </div>
@@ -412,24 +596,70 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4b8e940525fc8f024db2ce004d01e012"></a><!-- doxytag: member="WavetableBase::hannWindow" ref="a4b8e940525fc8f024db2ce004d01e012" args="(const int size)" -->
+<a class="anchor" id="a1321640270ac7c17b69d5bb6b9d98113"></a><!-- doxytag: member="WavetableBase::blackmanWindow" ref="a1321640270ac7c17b69d5bb6b9d98113" args="(const int size, const double alpha=0.16)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::hannWindow </td>
+          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::blackmanWindow </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em> = <code>0.16</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates a Wavetable with a given size (length) containing one or more Blackman windows. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac119f4a663444522a8638d7a73a1d7d7"></a><!-- doxytag: member="WavetableBase::sine512" ref="ac119f4a663444522a8638d7a73a1d7d7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static const <a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::sine512 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Creates a Wavetable with a given size (length) containing one or more von Hann (Hanning) windows. </p>
+</div>
+</div>
+<a class="anchor" id="aa463735968275e3be8472b75bcb35cab"></a><!-- doxytag: member="WavetableBase::sine8192" ref="aa463735968275e3be8472b75bcb35cab" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static const <a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::sine8192 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -481,37 +711,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a241b111cbfc895bc0056064677fe27d8"></a><!-- doxytag: member="WavetableBase::length" ref="a241b111cbfc895bc0056064677fe27d8" args="() const " -->
+<a class="anchor" id="a66b2d7c7ba152a36242e3e686ee4b4f5"></a><!-- doxytag: member="WavetableBase::operator&#45;&gt;" ref="a66b2d7c7ba152a36242e3e686ee4b4f5" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::length </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Length is the number of real elements of storage available. </p>
-<p>For arrays that are NOT null terminated this is synonymous with <a class="el" href="class_wavetable_base.html#a1d94a8a4afa129cc74829b06c258ba96" title="Size is the actual number of elements of storage needed for the array.">size()</a>. If this is a null terminated array the length is one less than the size. </p>
-
-<p>Reimplemented from <a class="el" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260">ObjectArray&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5d6eaf55f3567f0de28a5509fd463b2e"></a><!-- doxytag: member="WavetableBase::normalise" ref="a5d6eaf55f3567f0de28a5509fd463b2e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::normalise </td>
+          <td class="memname"><a class="el" href="class_wavetable_base.html">WavetableBase</a>* <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
@@ -520,162 +727,18 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_numerical_array.html#a4196939f3d55c0140578d24d5646b39a">NumericalArray&lt; SampleType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a8eb7fb87741fcb4f53a8c8580ea5f68d">NumericalArray&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1306c0d71af2fcc48cfc2e9f6efc323c"></a><!-- doxytag: member="WavetableBase::operator=" ref="a1306c0d71af2fcc48cfc2e9f6efc323c" args="(WavetableBase const &amp;other)" -->
+<a class="anchor" id="a9b23de9b07c5b2c97c376a4da0da6389"></a><!-- doxytag: member="WavetableBase::operator&#45;&gt;" ref="a9b23de9b07c5b2c97c376a4da0da6389" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Assignment operator. </p>
-
-</div>
-</div>
-<a class="anchor" id="a5bf606de6291b3730b5f7b620ac3bae4"></a><!-- doxytag: member="WavetableBase::operator[]" ref="a5bf606de6291b3730b5f7b620ac3bae4" args="(const int index) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">SampleType <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::operator[] </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns a reference to an item at the specified index. </p>
-<p>If you are not sure about the index being in range check for the object being "null" as a separate internal null value may have been returned instead. </p>
-
-<p>Reimplemented from <a class="el" href="class_object_array.html#a0bc80ee77d245f592d75f480293937b6">ObjectArray&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="add764b9a04c287dc694fff7afaa2f639"></a><!-- doxytag: member="WavetableBase::put" ref="add764b9a04c287dc694fff7afaa2f639" args="(const int index, SampleType const &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::put </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SampleType const &amp;&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Places an item at the given index. </p>
-<p>Indices out of range will be ignored. </p>
-
-<p>Reimplemented from <a class="el" href="class_object_array.html#ad675f23eada53adcadda78f096b3642d">ObjectArray&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac119f4a663444522a8638d7a73a1d7d7"></a><!-- doxytag: member="WavetableBase::sine512" ref="ac119f4a663444522a8638d7a73a1d7d7" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static const <a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::sine512 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa463735968275e3be8472b75bcb35cab"></a><!-- doxytag: member="WavetableBase::sine8192" ref="aa463735968275e3be8472b75bcb35cab" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static const <a class="el" href="class_wavetable_base.html">WavetableBase</a>&amp; <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::sine8192 </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af5120a4f019ecc5bde53314ddd471e65"></a><!-- doxytag: member="WavetableBase::sineTable" ref="af5120a4f019ecc5bde53314ddd471e65" args="(const int size, const double repeats=1.0)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::sineTable </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>repeats</em> = <code>1.0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1d94a8a4afa129cc74829b06c258ba96"></a><!-- doxytag: member="WavetableBase::size" ref="a1d94a8a4afa129cc74829b06c258ba96" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::size </td>
+          <td class="memname">const <a class="el" href="class_wavetable_base.html">WavetableBase</a>* <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -684,31 +747,7 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Size is the actual number of elements of storage needed for the array. </p>
-<p>If this is a null terminated array the null value is inlcuded in the size. </p>
-
-<p>Reimplemented from <a class="el" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb">ObjectArray&lt; SampleType &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a95507fcd1fc673e3acd64877f25610d7"></a><!-- doxytag: member="WavetableBase::triangleWindow" ref="a95507fcd1fc673e3acd64877f25610d7" args="(const int size)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_wavetable_base.html">WavetableBase</a> <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt; SampleType &gt;::triangleWindow </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates a Wavetable with a given size (length) containing one or more triangle windows. </p>
+<p>Reimplemented from <a class="el" href="class_numerical_array.html#a41102ee59673f3abead0fcabb23b5e8b">NumericalArray&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -730,7 +769,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

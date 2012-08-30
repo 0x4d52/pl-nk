@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_3f1b4f3ea3075fcfdf842d116a9177d8.html">graph</a>      </li>
-      <li class="navelem"><a class="el" href="dir_3ea3bcfc0220311d087aced9ed9d6334.html">filters</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_FilterCoeffs1Param.h</div>  </div>
@@ -129,233 +119,235 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00056"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a866de898dc712c36174d3e081289fb22">00056</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> ShapeType::FormType                        <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a866de898dc712c36174d3e081289fb22">FormType</a>;
 <a name="l00057"></a>00057     
 <a name="l00058"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a7d7372b8175b5d2b2f07e2f1a595a116">00058</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                             <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a7d7372b8175b5d2b2f07e2f1a595a116">ChannelType</a>;
-<a name="l00059"></a>00059         
-<a name="l00060"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">00060</a>     <span class="keyword">typedef</span> <a class="code" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal&lt;SampleType,Data&gt;</a>          <a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">Internal</a>;
-<a name="l00061"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">00061</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">UnitType</a>;
-<a name="l00062"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">00062</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                     <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">Inputs</a>;
-<a name="l00063"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">00063</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                          <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">Buffer</a>;
-<a name="l00064"></a>00064         
-<a name="l00065"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab406cd6325eb8b391ea21b00f6d903f6">00065</a>     <a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab406cd6325eb8b391ea21b00f6d903f6">FilterCoeffs1ParamChannelInternal</a> (<a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> <span class="keyword">const</span>&amp; inputs, 
-<a name="l00066"></a>00066                                        <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> <span class="keyword">const</span>&amp; data, 
-<a name="l00067"></a>00067                                        <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; blockSize,
-<a name="l00068"></a>00068                                        <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate) <span class="keywordflow">throw</span>()
-<a name="l00069"></a>00069     :   <a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">Internal</a> (FormType::NumCoeffs, inputs, data, blockSize, sampleRate),
-<a name="l00070"></a>00070         inputKeys (ShapeType::getInputKeys())
-<a name="l00071"></a>00071     {
-<a name="l00072"></a>00072         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (ShapeType::NumParams == 1);
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; filterSampleRate = this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>);
-<a name="l00075"></a>00075         filterSampleRate.<a class="code" href="class_sender_container.html#ae4d0ef7f4145d1ab12727839280e21a7">addReceiver</a> (<span class="keyword">this</span>);
-<a name="l00076"></a>00076         
-<a name="l00077"></a>00077         <a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">updateFilterSampleRateInData</a>();
-<a name="l00078"></a>00078     }
-<a name="l00079"></a>00079     
-<a name="l00080"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#aa2454d229d43c1bbffe8d1518388c996">00080</a>     <a class="code" href="class_filter_coeffs1_param_channel_internal.html#aa2454d229d43c1bbffe8d1518388c996">~FilterCoeffs1ParamChannelInternal</a>()
-<a name="l00081"></a>00081     {
-<a name="l00082"></a>00082         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; filterSampleRate = this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>);
-<a name="l00083"></a>00083         filterSampleRate.<a class="code" href="class_sender_container.html#ad67bb1ee11503fce1810369f87d77720">removeReceiver</a> (<span class="keyword">this</span>);
-<a name="l00084"></a>00084     }
-<a name="l00085"></a>00085             
-<a name="l00086"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a05beed32a2a620b5a252ea4f0dc7aab3">00086</a>     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a05beed32a2a620b5a252ea4f0dc7aab3">getName</a>() <span class="keyword">const</span> throw()
-<a name="l00087"></a>00087     {
-<a name="l00088"></a>00088         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Filter Coeffs 1 Param (&quot;</span> + ShapeType::getFormName() + <span class="stringliteral">&quot; / &quot;</span> + ShapeType::getShapeName() + <span class="stringliteral">&quot;)&quot;</span>;
-<a name="l00089"></a>00089     }       
-<a name="l00090"></a>00090     
-<a name="l00091"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a29313573485b341a1714d7aaec258550">00091</a>     <a class="code" href="class_numerical_array.html">IntArray</a> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a29313573485b341a1714d7aaec258550">getInputKeys</a>() <span class="keyword">const</span> throw()
-<a name="l00092"></a>00092     {
-<a name="l00093"></a>00093         <span class="keywordflow">return</span> inputKeys;
-<a name="l00094"></a>00094     }    
-<a name="l00095"></a>00095         
-<a name="l00096"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#aada67ea502eed0f355657d66b38a290c">00096</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#aada67ea502eed0f355657d66b38a290c" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
-<a name="l00097"></a>00097     {        
-<a name="l00098"></a>00098         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (ShapeType::NumParams == 1);
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; param0Unit = this-&gt;<a class="code" href="class_channel_internal_base.html#a0eefaad39c06f04bbb89979fdcbfa153">getInputAsUnit</a> (inputKeys.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0));
-<a name="l00101"></a>00101         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (param0Unit.<a class="code" href="class_unit_base.html#a2a7a1b5cbe1b247e20d48927ec5fb676">getOverlap</a> (0) == <a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;DoubleVariable&gt;::get1</a>());
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103         <span class="keywordflow">if</span> ((channel % this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#a5f3d2b85beb2f9062bc70110af73a121">getNumChannels</a>()) == 0)
-<a name="l00104"></a>00104         {
-<a name="l00105"></a>00105             this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#a5d1193dd9223e46fd906d578e71dde8b">setBlockSize</a> (<a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">BlockSize::decide</a> (param0Unit.<a class="code" href="class_unit_base.html#a9e6663d2783b9de78f1f06442c395532" title="Get the block size of a specific channel in this unit.">getBlockSize</a> (0),
-<a name="l00106"></a>00106                                                    this-&gt;<a class="code" href="class_channel_internal_core.html#a358bc6511d582450b6cabdbf1bc63b8a">getBlockSize</a>()));
-<a name="l00107"></a>00107             this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">setSampleRate</a> (<a class="code" href="class_sample_rate.html#a17ecb104d9a67ca7dbd0a076f0aa6bbf">SampleRate::decide</a> (param0Unit.<a class="code" href="class_unit_base.html#ae75214256d2240c537462510737bdd61" title="Get the sample rate of a specific channel in this unit.">getSampleRate</a> (0),
-<a name="l00108"></a>00108                                                      this-&gt;<a class="code" href="class_channel_internal_core.html#afd271ba08b388a2132c8d73a6ec3259f">getSampleRate</a>()));
-<a name="l00109"></a>00109             
-<a name="l00110"></a>00110             <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&amp; data = this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>();
-<a name="l00111"></a>00111             data.params[0] = param0Unit.<a class="code" href="class_unit_base.html#a0abca48d077f3f49b5c9639ac64eec5a" title="Get the current value of a specific channel in this unit.">getValue</a> (0);
-<a name="l00112"></a>00112             
-<a name="l00113"></a>00113             ShapeType::calculate (data);
+<a name="l00059"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#af07555216de0b90d0023ef9fa4d8834b">00059</a>     <span class="keyword">typedef</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray&lt;ChannelType&gt;</a>                            <a class="code" href="class_filter_coeffs1_param_channel_internal.html#af07555216de0b90d0023ef9fa4d8834b">ChannelArrayType</a>;
+<a name="l00060"></a>00060         
+<a name="l00061"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">00061</a>     <span class="keyword">typedef</span> <a class="code" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal&lt;SampleType,Data&gt;</a>          <a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">Internal</a>;
+<a name="l00062"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">00062</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                                <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a13c77da9265384ba29ba0abefb569d72">UnitType</a>;
+<a name="l00063"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">00063</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                     <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a710e1ee16b04feb32cafc36f6c571416">Inputs</a>;
+<a name="l00064"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">00064</a>     <span class="keyword">typedef</span> <a class="code" href="class_numerical_array.html">NumericalArray&lt;SampleType&gt;</a>                          <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a85773c6307fc5eb159b44accb9c06410">Buffer</a>;
+<a name="l00065"></a>00065         
+<a name="l00066"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a8da448e72f9b98ad2249711a78191eea">00066</a>     <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a8da448e72f9b98ad2249711a78191eea">FilterCoeffs1ParamChannelInternal</a> (<a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> <span class="keyword">const</span>&amp; inputs, 
+<a name="l00067"></a>00067                                        <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> <span class="keyword">const</span>&amp; data, 
+<a name="l00068"></a>00068                                        <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; blockSize,
+<a name="l00069"></a>00069                                        <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate,
+<a name="l00070"></a>00070                                        <a class="code" href="class_object_array.html" title="This is the base class for arrays.">ChannelArrayType</a>&amp; channels) <span class="keywordflow">throw</span>()
+<a name="l00071"></a>00071     :   <a class="code" href="class_filter_coeffs1_param_channel_internal.html#ab57c9148e652d477d442efa73315e9c6">Internal</a> (FormType::NumCoeffs, inputs, data, blockSize, sampleRate, channels),
+<a name="l00072"></a>00072         inputKeys (ShapeType::getInputKeys())
+<a name="l00073"></a>00073     {
+<a name="l00074"></a>00074         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (ShapeType::NumParams == 1);
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; filterSampleRate = this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>);
+<a name="l00077"></a>00077         filterSampleRate.<a class="code" href="class_sender_container.html#ae4d0ef7f4145d1ab12727839280e21a7">addReceiver</a> (<span class="keyword">this</span>);
+<a name="l00078"></a>00078         
+<a name="l00079"></a>00079         <a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">updateFilterSampleRateInData</a>();
+<a name="l00080"></a>00080     }
+<a name="l00081"></a>00081     
+<a name="l00082"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#aa2454d229d43c1bbffe8d1518388c996">00082</a>     <a class="code" href="class_filter_coeffs1_param_channel_internal.html#aa2454d229d43c1bbffe8d1518388c996">~FilterCoeffs1ParamChannelInternal</a>()
+<a name="l00083"></a>00083     {
+<a name="l00084"></a>00084         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; filterSampleRate = this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>);
+<a name="l00085"></a>00085         filterSampleRate.<a class="code" href="class_sender_container.html#ad67bb1ee11503fce1810369f87d77720">removeReceiver</a> (<span class="keyword">this</span>);
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087             
+<a name="l00088"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a05beed32a2a620b5a252ea4f0dc7aab3">00088</a>     <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a05beed32a2a620b5a252ea4f0dc7aab3">getName</a>() <span class="keyword">const</span> throw()
+<a name="l00089"></a>00089     {
+<a name="l00090"></a>00090         <span class="keywordflow">return</span> <span class="stringliteral">&quot;Filter Coeffs 1 Param (&quot;</span> + ShapeType::getFormName() + <span class="stringliteral">&quot; / &quot;</span> + ShapeType::getShapeName() + <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00091"></a>00091     }       
+<a name="l00092"></a>00092     
+<a name="l00093"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a29313573485b341a1714d7aaec258550">00093</a>     <a class="code" href="class_numerical_array.html">IntArray</a> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a29313573485b341a1714d7aaec258550">getInputKeys</a>() <span class="keyword">const</span> throw()
+<a name="l00094"></a>00094     {
+<a name="l00095"></a>00095         <span class="keywordflow">return</span> inputKeys;
+<a name="l00096"></a>00096     }    
+<a name="l00097"></a>00097         
+<a name="l00098"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#aada67ea502eed0f355657d66b38a290c">00098</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#aada67ea502eed0f355657d66b38a290c" title="Called to initialise the channel&#39;s initial value.">initChannel</a> (<span class="keyword">const</span> <span class="keywordtype">int</span> channel) <span class="keywordflow">throw</span>()
+<a name="l00099"></a>00099     {        
+<a name="l00100"></a>00100         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (ShapeType::NumParams == 1);
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; param0Unit = this-&gt;<a class="code" href="class_channel_internal_base.html#a0eefaad39c06f04bbb89979fdcbfa153">getInputAsUnit</a> (inputKeys.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0));
+<a name="l00103"></a>00103         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (param0Unit.<a class="code" href="class_unit_base.html#a3e8cc9f7b3ffc03fd4224207ae03a34c">getOverlap</a> (0) == <a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;DoubleVariable&gt;::get1</a>());
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105         <span class="keywordflow">if</span> ((channel % this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#a5f3d2b85beb2f9062bc70110af73a121">getNumChannels</a>()) == 0)
+<a name="l00106"></a>00106         {
+<a name="l00107"></a>00107             this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#a5d1193dd9223e46fd906d578e71dde8b">setBlockSize</a> (<a class="code" href="class_block_size.html#afcc989dcc540a3d62f67d939f16c6457" title="Select a block size based on a unit&#39;s preference and its inputs.">BlockSize::decide</a> (param0Unit.<a class="code" href="class_unit_base.html#a9e6663d2783b9de78f1f06442c395532" title="Get the block size of a specific channel in this unit.">getBlockSize</a> (0),
+<a name="l00108"></a>00108                                                    this-&gt;<a class="code" href="class_channel_internal_core.html#a39653f4cdda1c47d2827fad92bfe0fd6">getBlockSize</a>()));
+<a name="l00109"></a>00109             this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#abafbbd9538b9b60fe67fdb9d704d42d2">setSampleRate</a> (<a class="code" href="class_sample_rate.html#a17ecb104d9a67ca7dbd0a076f0aa6bbf">SampleRate::decide</a> (param0Unit.<a class="code" href="class_unit_base.html#ae75214256d2240c537462510737bdd61" title="Get the sample rate of a specific channel in this unit.">getSampleRate</a> (0),
+<a name="l00110"></a>00110                                                      this-&gt;<a class="code" href="class_channel_internal_core.html#a56c8b6a5cbe0f7678eaf2af4d8d45d4c">getSampleRate</a>()));
+<a name="l00111"></a>00111             
+<a name="l00112"></a>00112             <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&amp; data = this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>();
+<a name="l00113"></a>00113             data.params[0] = param0Unit.<a class="code" href="class_unit_base.html#a0abca48d077f3f49b5c9639ac64eec5a" title="Get the current value of a specific channel in this unit.">getValue</a> (0);
 <a name="l00114"></a>00114             
-<a name="l00115"></a>00115             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; FormType::NumCoeffs; ++i)
-<a name="l00116"></a>00116                 this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#ab7136ee4e6c3d8751202a0e583114df5">initProxyValue</a> (i, data.coeffs[i]);            
-<a name="l00117"></a>00117         }
-<a name="l00118"></a>00118     }    
-<a name="l00119"></a>00119     
-<a name="l00120"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a590df3a221129ef3940c4c2fce48456b">00120</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a590df3a221129ef3940c4c2fce48456b">changed</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">DoubleVariable::Sender</a> <span class="keyword">const</span>&amp; source) <span class="keywordflow">throw</span>()
-<a name="l00121"></a>00121     {
-<a name="l00122"></a>00122         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> sampleRateSource = <span class="keyword">static_cast&lt;</span><a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a><span class="keyword">&gt;</span> (source);
-<a name="l00123"></a>00123         
-<a name="l00124"></a>00124         <span class="keywordflow">if</span> (sampleRateSource == this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>))
-<a name="l00125"></a>00125         {
-<a name="l00126"></a>00126             this-&gt;<a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">updateFilterSampleRateInData</a>();
-<a name="l00127"></a>00127             <span class="keywordflow">return</span>;
-<a name="l00128"></a>00128         }
-<a name="l00129"></a>00129                 
-<a name="l00130"></a>00130         <a class="code" href="class_channel_internal.html#a9243aead95b3f12bab5f8afdd482f4fe">Internal::changed</a> (source); <span class="comment">// process others</span>
-<a name="l00131"></a>00131     }    
-<a name="l00132"></a>00132     
-<a name="l00133"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">00133</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">updateFilterSampleRateInData</a>() throw()
-<a name="l00134"></a>00134     {
-<a name="l00135"></a>00135         <span class="keyword">const</span> <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; filterSampleRate = this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>);
-<a name="l00136"></a>00136         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&amp; data = this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>();
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = filterSampleRate.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>();
-<a name="l00139"></a>00139         
-<a name="l00140"></a>00140         data.filterSampleRate = sampleRate;
-<a name="l00141"></a>00141         data.filterSampleDuration = 1.0 / sampleRate;
-<a name="l00142"></a>00142     }
-<a name="l00143"></a>00143     
-<a name="l00144"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a159799bb8c59e4b439f5b24eae122672">00144</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a159799bb8c59e4b439f5b24eae122672" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <span class="keyword">const</span> <span class="keywordtype">int</span> <span class="comment">/*channel*/</span>) throw()
-<a name="l00145"></a>00145     {   
-<a name="l00146"></a>00146         <span class="keywordtype">int</span> i, j;
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&amp; data = this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>();
-<a name="l00149"></a>00149                             
-<a name="l00150"></a>00150         <span class="keyword">const</span> <span class="keywordtype">int</span> outputLength = this-&gt;<a class="code" href="class_channel_internal_base.html#a6a2abcf8641b00549e4ed81a5693e90d">getOutputBuffer</a> (0).<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
-<a name="l00151"></a>00151             
-<a name="l00152"></a>00152         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; param0Unit = this-&gt;<a class="code" href="class_channel_internal_base.html#a0eefaad39c06f04bbb89979fdcbfa153">getInputAsUnit</a> (inputKeys.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0));
-<a name="l00153"></a>00153         
-<a name="l00154"></a>00154         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">Buffer</a> param0Buffer (param0Unit.<a class="code" href="class_unit_base.html#a03ff4846d93ac89f7afab49972a9762d" title="Process a specific channel in this unit.">process</a> (info, 0));
-<a name="l00155"></a>00155         <span class="keyword">const</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a2118c8de656e88ea270e1eb725def733">SampleType</a>* <span class="keyword">const</span> param0Samples = param0Buffer.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
-<a name="l00156"></a>00156         <span class="keyword">const</span> <span class="keywordtype">int</span> param0Length = param0Buffer.length();
-<a name="l00157"></a>00157         
-<a name="l00158"></a>00158         <span class="keywordflow">if</span> (outputLength == param0Length)
-<a name="l00159"></a>00159         {
-<a name="l00160"></a>00160             <span class="keywordflow">for</span> (i = 0; i &lt; outputLength; ++i)
-<a name="l00161"></a>00161             {
-<a name="l00162"></a>00162                 data.params[0] = param0Samples[i];
-<a name="l00163"></a>00163                 
-<a name="l00164"></a>00164                 ShapeType::calculate (data);
+<a name="l00115"></a>00115             ShapeType::calculate (data);
+<a name="l00116"></a>00116             
+<a name="l00117"></a>00117             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; FormType::NumCoeffs; ++i)
+<a name="l00118"></a>00118                 this-&gt;<a class="code" href="class_proxy_owner_channel_internal.html#ab7136ee4e6c3d8751202a0e583114df5">initProxyValue</a> (i, data.coeffs[i]);            
+<a name="l00119"></a>00119         }
+<a name="l00120"></a>00120     }    
+<a name="l00121"></a>00121     
+<a name="l00122"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a590df3a221129ef3940c4c2fce48456b">00122</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a590df3a221129ef3940c4c2fce48456b">changed</a> (<a class="code" href="class_variable.html" title="A template class for storing any variable type.">DoubleVariable::Sender</a> <span class="keyword">const</span>&amp; source) <span class="keywordflow">throw</span>()
+<a name="l00123"></a>00123     {
+<a name="l00124"></a>00124         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> sampleRateSource = <span class="keyword">static_cast&lt;</span><a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a><span class="keyword">&gt;</span> (source);
+<a name="l00125"></a>00125         
+<a name="l00126"></a>00126         <span class="keywordflow">if</span> (sampleRateSource == this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>))
+<a name="l00127"></a>00127         {
+<a name="l00128"></a>00128             this-&gt;<a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">updateFilterSampleRateInData</a>();
+<a name="l00129"></a>00129             <span class="keywordflow">return</span>;
+<a name="l00130"></a>00130         }
+<a name="l00131"></a>00131                 
+<a name="l00132"></a>00132         <a class="code" href="class_channel_internal.html#a9243aead95b3f12bab5f8afdd482f4fe">Internal::changed</a> (source); <span class="comment">// process others</span>
+<a name="l00133"></a>00133     }    
+<a name="l00134"></a>00134     
+<a name="l00135"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">00135</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#afeb312fbc974284320c991e9477a20b5">updateFilterSampleRateInData</a>() throw()
+<a name="l00136"></a>00136     {
+<a name="l00137"></a>00137         <span class="keyword">const</span> <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a>&amp; filterSampleRate = this-&gt;<a class="code" href="class_channel_internal_base.html#ac47564a27864c299b6c4e65aa8a58c62">getInputAsSampleRate</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>);
+<a name="l00138"></a>00138         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&amp; data = this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>();
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = filterSampleRate.<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
+<a name="l00141"></a>00141         
+<a name="l00142"></a>00142         data.filterSampleRate = sampleRate;
+<a name="l00143"></a>00143         data.filterSampleDuration = 1.0 / sampleRate;
+<a name="l00144"></a>00144     }
+<a name="l00145"></a>00145     
+<a name="l00146"></a><a class="code" href="class_filter_coeffs1_param_channel_internal.html#a159799bb8c59e4b439f5b24eae122672">00146</a>     <span class="keywordtype">void</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a159799bb8c59e4b439f5b24eae122672" title="The DSP function.">process</a> (<a class="code" href="class_process_info.html" title="Holds information about the Unit graph.">ProcessInfo</a>&amp; info, <span class="keyword">const</span> <span class="keywordtype">int</span> <span class="comment">/*channel*/</span>) throw()
+<a name="l00147"></a>00147     {   
+<a name="l00148"></a>00148         <span class="keywordtype">int</span> i, j;
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150         <a class="code" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a>&amp; data = this-&gt;<a class="code" href="class_channel_internal.html#aa0fba1693bbfe6dae4dfedaa0cc0f079">getState</a>();
+<a name="l00151"></a>00151                             
+<a name="l00152"></a>00152         <span class="keyword">const</span> <span class="keywordtype">int</span> outputLength = this-&gt;<a class="code" href="class_channel_internal_base.html#a48f5cfad8e3c1977412e357a2e41b41f">getOutputBuffer</a> (0).<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();
+<a name="l00153"></a>00153             
+<a name="l00154"></a>00154         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a>&amp; param0Unit = this-&gt;<a class="code" href="class_channel_internal_base.html#a0eefaad39c06f04bbb89979fdcbfa153">getInputAsUnit</a> (inputKeys.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0));
+<a name="l00155"></a>00155         
+<a name="l00156"></a>00156         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">Buffer</a>&amp; param0Buffer (param0Unit.<a class="code" href="class_unit_base.html#a78e56679819dde06c3beb022cbdb13a4" title="Process a specific channel in this unit.">process</a> (info, 0));
+<a name="l00157"></a>00157         <span class="keyword">const</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a2118c8de656e88ea270e1eb725def733">SampleType</a>* <span class="keyword">const</span> param0Samples = param0Buffer.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();
+<a name="l00158"></a>00158         <span class="keyword">const</span> <span class="keywordtype">int</span> param0Length = param0Buffer.length();
+<a name="l00159"></a>00159         
+<a name="l00160"></a>00160         <span class="keywordflow">if</span> (outputLength == param0Length)
+<a name="l00161"></a>00161         {
+<a name="l00162"></a>00162             <span class="keywordflow">for</span> (i = 0; i &lt; outputLength; ++i)
+<a name="l00163"></a>00163             {
+<a name="l00164"></a>00164                 data.params[0] = param0Samples[i];
 <a name="l00165"></a>00165                 
-<a name="l00166"></a>00166                 <span class="keywordflow">for</span> (j = 0; j &lt; FormType::NumCoeffs; ++j)
-<a name="l00167"></a>00167                     this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (j) [i] = data.coeffs[j];
-<a name="l00168"></a>00168             }
-<a name="l00169"></a>00169         }
-<a name="l00170"></a>00170         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (param0Length == 1)
-<a name="l00171"></a>00171         {
-<a name="l00172"></a>00172             data.params[0] = param0Samples[0];
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174             ShapeType::calculate (data);
+<a name="l00166"></a>00166                 ShapeType::calculate (data);
+<a name="l00167"></a>00167                 
+<a name="l00168"></a>00168                 <span class="keywordflow">for</span> (j = 0; j &lt; FormType::NumCoeffs; ++j)
+<a name="l00169"></a>00169                     this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (j) [i] = data.coeffs[j];
+<a name="l00170"></a>00170             }
+<a name="l00171"></a>00171         }
+<a name="l00172"></a>00172         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (param0Length == 1)
+<a name="l00173"></a>00173         {
+<a name="l00174"></a>00174             data.params[0] = param0Samples[0];
 <a name="l00175"></a>00175 
-<a name="l00176"></a>00176             <span class="keywordflow">for</span> (j = 0; j &lt; FormType::NumCoeffs; ++j)
-<a name="l00177"></a>00177             {
-<a name="l00178"></a>00178                 <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a2118c8de656e88ea270e1eb725def733">SampleType</a>* <span class="keyword">const</span> samples = this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (j);
-<a name="l00179"></a>00179                 <span class="keyword">const</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a2118c8de656e88ea270e1eb725def733">SampleType</a> coeff = data.coeffs[j];
-<a name="l00180"></a>00180                 
-<a name="l00181"></a>00181                 <span class="keywordflow">for</span> (i = 0; i &lt; outputLength; ++i)
-<a name="l00182"></a>00182                     samples[i] = coeff;                
-<a name="l00183"></a>00183             }            
-<a name="l00184"></a>00184         }
-<a name="l00185"></a>00185         <span class="keywordflow">else</span>
-<a name="l00186"></a>00186         {
-<a name="l00187"></a>00187             <span class="keywordtype">double</span> param0Position = 0.0;
-<a name="l00188"></a>00188             <span class="keyword">const</span> <span class="keywordtype">double</span> param0Increment = double (param0Length) / double (outputLength);
-<a name="l00189"></a>00189             
-<a name="l00190"></a>00190             <span class="keywordflow">for</span> (i = 0; i &lt; outputLength; ++i)
-<a name="l00191"></a>00191             {
-<a name="l00192"></a>00192                 data.params[0] = param0Samples[int (param0Position)];
-<a name="l00193"></a>00193                 
-<a name="l00194"></a>00194                 ShapeType::calculate (data);
+<a name="l00176"></a>00176             ShapeType::calculate (data);
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178             <span class="keywordflow">for</span> (j = 0; j &lt; FormType::NumCoeffs; ++j)
+<a name="l00179"></a>00179             {
+<a name="l00180"></a>00180                 <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a2118c8de656e88ea270e1eb725def733">SampleType</a>* <span class="keyword">const</span> samples = this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (j);
+<a name="l00181"></a>00181                 <span class="keyword">const</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html#a2118c8de656e88ea270e1eb725def733">SampleType</a> coeff = data.coeffs[j];
+<a name="l00182"></a>00182                 
+<a name="l00183"></a>00183                 <span class="keywordflow">for</span> (i = 0; i &lt; outputLength; ++i)
+<a name="l00184"></a>00184                     samples[i] = coeff;                
+<a name="l00185"></a>00185             }            
+<a name="l00186"></a>00186         }
+<a name="l00187"></a>00187         <span class="keywordflow">else</span>
+<a name="l00188"></a>00188         {
+<a name="l00189"></a>00189             <span class="keywordtype">double</span> param0Position = 0.0;
+<a name="l00190"></a>00190             <span class="keyword">const</span> <span class="keywordtype">double</span> param0Increment = double (param0Length) / double (outputLength);
+<a name="l00191"></a>00191             
+<a name="l00192"></a>00192             <span class="keywordflow">for</span> (i = 0; i &lt; outputLength; ++i)
+<a name="l00193"></a>00193             {
+<a name="l00194"></a>00194                 data.params[0] = param0Samples[int (param0Position)];
 <a name="l00195"></a>00195                 
-<a name="l00196"></a>00196                 <span class="keywordflow">for</span> (j = 0; j &lt; FormType::NumCoeffs; ++j)
-<a name="l00197"></a>00197                     this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (j) [i] = data.coeffs[j];
-<a name="l00198"></a>00198                 
-<a name="l00199"></a>00199                 param0Position += param0Increment;
-<a name="l00200"></a>00200             }
-<a name="l00201"></a>00201         }
-<a name="l00202"></a>00202     }
-<a name="l00203"></a>00203     
-<a name="l00204"></a>00204 <span class="keyword">private</span>:
-<a name="l00205"></a>00205     <a class="code" href="class_numerical_array.html">IntArray</a> inputKeys;
-<a name="l00206"></a>00206 };
-<a name="l00207"></a>00207 
-<a name="l00208"></a>00208 
+<a name="l00196"></a>00196                 ShapeType::calculate (data);
+<a name="l00197"></a>00197                 
+<a name="l00198"></a>00198                 <span class="keywordflow">for</span> (j = 0; j &lt; FormType::NumCoeffs; ++j)
+<a name="l00199"></a>00199                     this-&gt;<a class="code" href="class_channel_internal_base.html#a87680feef8745429802ff10ca3887012">getOutputSamples</a> (j) [i] = data.coeffs[j];
+<a name="l00200"></a>00200                 
+<a name="l00201"></a>00201                 param0Position += param0Increment;
+<a name="l00202"></a>00202             }
+<a name="l00203"></a>00203         }
+<a name="l00204"></a>00204     }
+<a name="l00205"></a>00205     
+<a name="l00206"></a>00206 <span class="keyword">private</span>:
+<a name="l00207"></a>00207     <a class="code" href="class_numerical_array.html">IntArray</a> inputKeys;
+<a name="l00208"></a>00208 };
 <a name="l00209"></a>00209 
 <a name="l00210"></a>00210 
 <a name="l00211"></a>00211 
-<a name="l00214"></a>00214 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ShapeType&gt;
-<a name="l00215"></a><a class="code" href="class_filter_coeffs1_param_unit.html">00215</a> <span class="keyword">class </span><a class="code" href="class_filter_coeffs1_param_unit.html" title="Filter coefficients generator for an IIR filter using one control parameter.">FilterCoeffs1ParamUnit</a>
-<a name="l00216"></a>00216 {
-<a name="l00217"></a>00217 <span class="keyword">public</span>:        
-<a name="l00218"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">00218</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> ShapeType::SampleDataType              <a class="code" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">SampleType</a>;
-<a name="l00219"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a65fb40fb73c8770f9eb919852adf8b45">00219</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> ShapeType::Data                        <a class="code" href="class_filter_coeffs1_param_unit.html#a65fb40fb73c8770f9eb919852adf8b45">Data</a>;
-<a name="l00220"></a><a class="code" href="class_filter_coeffs1_param_unit.html#ad87cd8f7a11f0100fd3e33a420336dd5">00220</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> ShapeType::FormType                    <a class="code" href="class_filter_coeffs1_param_unit.html#ad87cd8f7a11f0100fd3e33a420336dd5">FormType</a>;
-<a name="l00221"></a>00221     
-<a name="l00222"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a25379128f88893651a725f16eaec1db1">00222</a>     <span class="keyword">typedef</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html" title="Filter coefficient generator from one control parameter.">FilterCoeffs1ParamChannelInternal&lt;ShapeType&gt;</a>    <a class="code" href="class_filter_coeffs1_param_unit.html#a25379128f88893651a725f16eaec1db1">FilterCoeffsInternal</a>;
-<a name="l00223"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a68d6f92562ea50af19bd46f312da026a">00223</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                         <a class="code" href="class_filter_coeffs1_param_unit.html#a68d6f92562ea50af19bd46f312da026a">ChannelType</a>;
-<a name="l00224"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a482a93813e6a30ae328f377521450717">00224</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                <a class="code" href="class_filter_coeffs1_param_unit.html#a482a93813e6a30ae328f377521450717">Internal</a>;
-<a name="l00225"></a><a class="code" href="class_filter_coeffs1_param_unit.html#abbdb7ea3396d96b5da8e54d21f3dfad3">00225</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                            <a class="code" href="class_filter_coeffs1_param_unit.html#abbdb7ea3396d96b5da8e54d21f3dfad3">UnitType</a>;
-<a name="l00226"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a56522ba02f8f354bf74c10920bd77a26">00226</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                 <a class="code" href="class_filter_coeffs1_param_unit.html#a56522ba02f8f354bf74c10920bd77a26">Inputs</a>;
-<a name="l00227"></a>00227     
-<a name="l00228"></a><a class="code" href="class_filter_coeffs1_param_unit.html#afa2baae1e0e426ab0c17d96c6a21da11">00228</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> <a class="code" href="class_filter_coeffs1_param_unit.html#afa2baae1e0e426ab0c17d96c6a21da11">getInfo</a>() throw()
-<a name="l00229"></a>00229     {
-<a name="l00230"></a>00230         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = <a class="code" href="class_sample_rate.html#ab8f9226a01308b2e18951c2b83faccec">SampleRate::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="A convenience for setValue() mainly for atomic types.">getValue</a>();
-<a name="l00231"></a>00231         
-<a name="l00232"></a>00232         <span class="keywordflow">return</span> <a class="code" href="class_unit_info.html">UnitInfo</a> (<span class="stringliteral">&quot;Filter Coeffs 1 Param&quot;</span>, <span class="stringliteral">&quot;Filter coefficients generator for an IIR filter using one control parameter.&quot;</span>,
-<a name="l00233"></a>00233                          
-<a name="l00234"></a>00234                          <span class="comment">// output</span>
-<a name="l00235"></a>00235                          FormType::NumCoeffs, 
-<a name="l00236"></a>00236                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a3855484b53c34793d75ff3364587d553" title="Filter coefficients.">IOKey::Coeffs</a>,             <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a96e0f0c474527b39d2dc8f506a993156">Measure::Coeffs</a>,    0.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00237"></a>00237                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>,
-<a name="l00238"></a>00238                          
-<a name="l00239"></a>00239                          <span class="comment">// inputs</span>
-<a name="l00240"></a>00240                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>,            <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad0b3d811a52daed88d30354a3e9a759f" title="Not known.">Measure::Unknown</a>,   <a class="code" href="class_i_o_info.html#a9023a2547ca686e6c0def6032c02145c">IOInfo::NoDefault</a>,  <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
-<a name="l00241"></a>00241                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,     sampleRate,         <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,             0.0,
-<a name="l00242"></a>00242                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab9487086113a53cfe13ff5785e8dad24" title="Audio processing block size.">IOKey::BlockSize</a>,          <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,   0.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,           1.0,
-<a name="l00243"></a>00243                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a7a965484c296e56d16eee78fd2397ca7" title="Audio processing sample rate.">IOKey::SampleRate</a>,         <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,     -1.0,               <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,             0.0,
-<a name="l00244"></a>00244                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>);
-<a name="l00245"></a>00245     }
-<a name="l00246"></a>00246     
-<a name="l00247"></a>00247     
-<a name="l00249"></a><a class="code" href="class_filter_coeffs1_param_unit.html#ad340003b900e2ef01237b10540a2a801">00249</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_filter_coeffs1_param_unit.html#ad340003b900e2ef01237b10540a2a801" title="Filter coefficients from one control parameter.">ar</a> (<a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; param0,
-<a name="l00250"></a>00250                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">SampleRates</a> <span class="keyword">const</span> filterSampleRates = <a class="code" href="class_sample_rate.html#ab8f9226a01308b2e18951c2b83faccec">SampleRate::getDefault</a>(),
-<a name="l00251"></a>00251                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84" title="A dummy block size used to indicate no preference.">BlockSize::noPreference</a>(),
-<a name="l00252"></a>00252                         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate = <a class="code" href="class_sample_rate.html#a2c73817f04514911a2a8993ea10b3a31">SampleRate::noPreference</a>()) throw()
-<a name="l00253"></a>00253     {                
-<a name="l00254"></a>00254         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> inputKeys = ShapeType::getInputKeys();
-<a name="l00255"></a>00255         
-<a name="l00256"></a>00256         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (inputKeys.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() == 1);
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213 
+<a name="l00216"></a>00216 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ShapeType&gt;
+<a name="l00217"></a><a class="code" href="class_filter_coeffs1_param_unit.html">00217</a> <span class="keyword">class </span><a class="code" href="class_filter_coeffs1_param_unit.html" title="Filter coefficients generator for an IIR filter using one control parameter.">FilterCoeffs1ParamUnit</a>
+<a name="l00218"></a>00218 {
+<a name="l00219"></a>00219 <span class="keyword">public</span>:        
+<a name="l00220"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">00220</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> ShapeType::SampleDataType              <a class="code" href="class_filter_coeffs1_param_unit.html#a29e2189a01626850faf37da47c5296f3">SampleType</a>;
+<a name="l00221"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a65fb40fb73c8770f9eb919852adf8b45">00221</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> ShapeType::Data                        <a class="code" href="class_filter_coeffs1_param_unit.html#a65fb40fb73c8770f9eb919852adf8b45">Data</a>;
+<a name="l00222"></a><a class="code" href="class_filter_coeffs1_param_unit.html#ad87cd8f7a11f0100fd3e33a420336dd5">00222</a>     <span class="keyword">typedef</span> <span class="keyword">typename</span> ShapeType::FormType                    <a class="code" href="class_filter_coeffs1_param_unit.html#ad87cd8f7a11f0100fd3e33a420336dd5">FormType</a>;
+<a name="l00223"></a>00223     
+<a name="l00224"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a25379128f88893651a725f16eaec1db1">00224</a>     <span class="keyword">typedef</span> <a class="code" href="class_filter_coeffs1_param_channel_internal.html" title="Filter coefficient generator from one control parameter.">FilterCoeffs1ParamChannelInternal&lt;ShapeType&gt;</a>    <a class="code" href="class_filter_coeffs1_param_unit.html#a25379128f88893651a725f16eaec1db1">FilterCoeffsInternal</a>;
+<a name="l00225"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a68d6f92562ea50af19bd46f312da026a">00225</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_base.html" title="A single output signal.">ChannelBase&lt;SampleType&gt;</a>                         <a class="code" href="class_filter_coeffs1_param_unit.html#a68d6f92562ea50af19bd46f312da026a">ChannelType</a>;
+<a name="l00226"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a482a93813e6a30ae328f377521450717">00226</a>     <span class="keyword">typedef</span> <a class="code" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal&lt;SampleType,Data&gt;</a>                <a class="code" href="class_filter_coeffs1_param_unit.html#a482a93813e6a30ae328f377521450717">Internal</a>;
+<a name="l00227"></a><a class="code" href="class_filter_coeffs1_param_unit.html#abbdb7ea3396d96b5da8e54d21f3dfad3">00227</a>     <span class="keyword">typedef</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase&lt;SampleType&gt;</a>                            <a class="code" href="class_filter_coeffs1_param_unit.html#abbdb7ea3396d96b5da8e54d21f3dfad3">UnitType</a>;
+<a name="l00228"></a><a class="code" href="class_filter_coeffs1_param_unit.html#a56522ba02f8f354bf74c10920bd77a26">00228</a>     <span class="keyword">typedef</span> <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">InputDictionary</a>                                 <a class="code" href="class_filter_coeffs1_param_unit.html#a56522ba02f8f354bf74c10920bd77a26">Inputs</a>;
+<a name="l00229"></a>00229     
+<a name="l00230"></a><a class="code" href="class_filter_coeffs1_param_unit.html#afa2baae1e0e426ab0c17d96c6a21da11">00230</a>     <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="class_object_array.html" title="This is the base class for arrays.">UnitInfos</a> <a class="code" href="class_filter_coeffs1_param_unit.html#afa2baae1e0e426ab0c17d96c6a21da11">getInfo</a>() throw()
+<a name="l00231"></a>00231     {
+<a name="l00232"></a>00232         <span class="keyword">const</span> <span class="keywordtype">double</span> sampleRate = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>().<a class="code" href="class_variable.html#a3f05fc2768b1de80706b39ee14f3c360" title="Returns the current value.">getValue</a>();
+<a name="l00233"></a>00233         
+<a name="l00234"></a>00234         <span class="keywordflow">return</span> <a class="code" href="class_unit_info.html">UnitInfo</a> (<span class="stringliteral">&quot;Filter Coeffs 1 Param&quot;</span>, <span class="stringliteral">&quot;Filter coefficients generator for an IIR filter using one control parameter.&quot;</span>,
+<a name="l00235"></a>00235                          
+<a name="l00236"></a>00236                          <span class="comment">// output</span>
+<a name="l00237"></a>00237                          FormType::NumCoeffs, 
+<a name="l00238"></a>00238                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a3855484b53c34793d75ff3364587d553" title="Filter coefficients.">IOKey::Coeffs</a>,             <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a96e0f0c474527b39d2dc8f506a993156">Measure::Coeffs</a>,    0.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
+<a name="l00239"></a>00239                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>,
+<a name="l00240"></a>00240                          
+<a name="l00241"></a>00241                          <span class="comment">// inputs</span>
+<a name="l00242"></a>00242                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37aa60b1c99f5ef2914e94ca6115fba0983" title="A generic audio (commonly used where there is only one input or output).">IOKey::Generic</a>,            <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad0b3d811a52daed88d30354a3e9a759f" title="Not known.">Measure::Unknown</a>,   <a class="code" href="class_i_o_info.html#a9023a2547ca686e6c0def6032c02145c">IOInfo::NoDefault</a>,  <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a59a0af582036349f1b8d209f197154ee">IOLimit::None</a>,
+<a name="l00243"></a>00243                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,     sampleRate,         <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,             0.0,
+<a name="l00244"></a>00244                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab9487086113a53cfe13ff5785e8dad24" title="Audio processing block size.">IOKey::BlockSize</a>,          <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,   0.0,                <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86ad61a89d635b70cb1d07df5a4f73cbfaa" title="A number of audio samples.">Measure::Samples</a>,           1.0,
+<a name="l00245"></a>00245                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37a7a965484c296e56d16eee78fd2397ca7" title="Audio processing sample rate.">IOKey::SampleRate</a>,         <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,     -1.0,               <a class="code" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263a54bbbe9142ad0dafcbeba7afd0311fc1">IOLimit::Minimum</a>,   <a class="code" href="class_measure.html#af74c37cd245b1262c0602548b4027e86a4194b7eabb65cf6a0de419798724ea23" title="Frequency in Hertz.">Measure::Hertz</a>,             0.0,
+<a name="l00246"></a>00246                          <a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab4c7f3ea28d6e5e763b97934501d650c" title="Used to terminate a list of IOKeys.">IOKey::End</a>);
+<a name="l00247"></a>00247     }
+<a name="l00248"></a>00248     
+<a name="l00249"></a>00249     
+<a name="l00251"></a><a class="code" href="class_filter_coeffs1_param_unit.html#ad340003b900e2ef01237b10540a2a801">00251</a>     <span class="keyword">static</span> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <a class="code" href="class_filter_coeffs1_param_unit.html#ad340003b900e2ef01237b10540a2a801" title="Filter coefficients from one control parameter.">ar</a> (<a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> <span class="keyword">const</span>&amp; param0,
+<a name="l00252"></a>00252                         <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">SampleRates</a> <span class="keyword">const</span> filterSampleRates = <a class="code" href="class_sample_rate.html#a892e4d1aae2bee986ee38fd371011f04">SampleRate::getDefault</a>(),
+<a name="l00253"></a>00253                         <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; preferredBlockSize = <a class="code" href="class_block_size.html#aa6ada18e533ad70d58aae4e0549fab84" title="A dummy block size used to indicate no preference.">BlockSize::noPreference</a>(),
+<a name="l00254"></a>00254                         <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; preferredSampleRate = <a class="code" href="class_sample_rate.html#a2c73817f04514911a2a8993ea10b3a31">SampleRate::noPreference</a>()) throw()
+<a name="l00255"></a>00255     {                
+<a name="l00256"></a>00256         <span class="keyword">const</span> <a class="code" href="class_numerical_array.html">IntArray</a> inputKeys = ShapeType::getInputKeys();
 <a name="l00257"></a>00257         
-<a name="l00258"></a>00258         <span class="keyword">const</span> <span class="keywordtype">int</span> numInputChannels = param0.<a class="code" href="class_unit_base.html#a1f8d49c0651e927f3583fa6458a5b908" title="Gets the number of channels in this unit.">getNumChannels</a>();
-<a name="l00259"></a>00259         <span class="keyword">const</span> <span class="keywordtype">int</span> numSampleRates = filterSampleRates.length();
-<a name="l00260"></a>00260         <span class="keyword">const</span> <span class="keywordtype">int</span> numChannels = filterSampleRates.areAllEqual() ? numInputChannels : <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (numInputChannels, numSampleRates);
-<a name="l00261"></a>00261         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> result (<a class="code" href="class_object_array.html#afc0c8de5e14b9b5257f072c26fe7a5b5" title="Returns an empty array with a given size of allocated storage.">UnitType::emptyWithAllocatedSize</a> (numChannels * FormType::NumCoeffs));
-<a name="l00262"></a>00262         
-<a name="l00263"></a>00263         <a class="code" href="class_filter_coeffs1_param_unit.html#a65fb40fb73c8770f9eb919852adf8b45">Data</a> data;
-<a name="l00264"></a>00264         <a class="code" href="class_memory.html#ac7521d0acb6823daa4578779b2ee8833">Memory::zero</a> (data);
-<a name="l00265"></a>00265         data.base.sampleRate = -1.0;
-<a name="l00266"></a>00266         data.base.sampleDuration = -1.0;
-<a name="l00267"></a>00267         
-<a name="l00268"></a>00268         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numChannels; ++i)
-<a name="l00269"></a>00269         {
-<a name="l00270"></a>00270             <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
-<a name="l00271"></a>00271             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (inputKeys.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0), param0[i]);
-<a name="l00272"></a>00272             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>, filterSampleRates.wrapAt (i));
-<a name="l00273"></a>00273             
-<a name="l00274"></a>00274             result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (UnitType::template proxiesFromInputs&lt;FilterCoeffsInternal&gt; (inputs, 
-<a name="l00275"></a>00275                                                                                     data, 
-<a name="l00276"></a>00276                                                                                     preferredBlockSize, 
-<a name="l00277"></a>00277                                                                                     preferredSampleRate));
-<a name="l00278"></a>00278         }
-<a name="l00279"></a>00279         
-<a name="l00280"></a>00280         <span class="keywordflow">return</span> result;
-<a name="l00281"></a>00281     }
-<a name="l00282"></a>00282 };
-<a name="l00283"></a>00283 
-<a name="l00284"></a>00284 
+<a name="l00258"></a>00258         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (inputKeys.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>() == 1);
+<a name="l00259"></a>00259         
+<a name="l00260"></a>00260         <span class="keyword">const</span> <span class="keywordtype">int</span> numInputChannels = param0.<a class="code" href="class_unit_base.html#a1f8d49c0651e927f3583fa6458a5b908" title="Gets the number of channels in this unit.">getNumChannels</a>();
+<a name="l00261"></a>00261         <span class="keyword">const</span> <span class="keywordtype">int</span> numSampleRates = filterSampleRates.length();
+<a name="l00262"></a>00262         <span class="keyword">const</span> <span class="keywordtype">int</span> numChannels = filterSampleRates.areAllEqual() ? numInputChannels : <a class="code" href="group___plonk_binary_op_functions.html#gae9767f40737087f6253040a0aaee4146" title="Returns maximum of a and b.">plonk::max</a> (numInputChannels, numSampleRates);
+<a name="l00263"></a>00263         <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitType</a> result (<a class="code" href="class_object_array.html#afc0c8de5e14b9b5257f072c26fe7a5b5" title="Returns an empty array with a given size of allocated storage.">UnitType::emptyWithAllocatedSize</a> (numChannels * FormType::NumCoeffs));
+<a name="l00264"></a>00264         
+<a name="l00265"></a>00265         <a class="code" href="class_filter_coeffs1_param_unit.html#a65fb40fb73c8770f9eb919852adf8b45">Data</a> data;
+<a name="l00266"></a>00266         <a class="code" href="class_memory.html#ac7521d0acb6823daa4578779b2ee8833">Memory::zero</a> (data);
+<a name="l00267"></a>00267         data.base.sampleRate = -1.0;
+<a name="l00268"></a>00268         data.base.sampleDuration = -1.0;
+<a name="l00269"></a>00269         
+<a name="l00270"></a>00270         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numChannels; ++i)
+<a name="l00271"></a>00271         {
+<a name="l00272"></a>00272             <a class="code" href="class_input_dictionary.html" title="For storing named Dynamic objects.">Inputs</a> inputs;
+<a name="l00273"></a>00273             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (inputKeys.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0), param0[i]);
+<a name="l00274"></a>00274             inputs.<a class="code" href="class_dictionary.html#a6ee81b793caf6c652e9d6545ce848a13" title="Put an item into the dicionary associated with the specified key.">put</a> (<a class="code" href="class_i_o_key.html#a31bc497f7606db39aa57aa0366b87e37ab3f16844a5636dbecfca34ea1bbf0cbe" title="Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates...">IOKey::FilterSampleRate</a>, filterSampleRates.wrapAt (i));
+<a name="l00275"></a>00275             
+<a name="l00276"></a>00276             result.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (UnitType::template proxiesFromInputs&lt;FilterCoeffsInternal&gt; (inputs, 
+<a name="l00277"></a>00277                                                                                     data, 
+<a name="l00278"></a>00278                                                                                     preferredBlockSize, 
+<a name="l00279"></a>00279                                                                                     preferredSampleRate));
+<a name="l00280"></a>00280         }
+<a name="l00281"></a>00281         
+<a name="l00282"></a>00282         <span class="keywordflow">return</span> result;
+<a name="l00283"></a>00283     }
+<a name="l00284"></a>00284 };
 <a name="l00285"></a>00285 
 <a name="l00286"></a>00286 
-<a name="l00287"></a>00287 <span class="preprocessor">#endif // PLONK_FILTERCOEFFS1PARAM_H</span>
-<a name="l00288"></a>00288 <span class="preprocessor"></span>
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288 
+<a name="l00289"></a>00289 <span class="preprocessor">#endif // PLONK_FILTERCOEFFS1PARAM_H</span>
+<a name="l00290"></a>00290 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -372,7 +364,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:47 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -64,7 +63,322 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 </table>
 <p>An outline of the core concepts used in Plonk. </p>
-</div>
+<div class="textblock"><h2><a class="anchor" id="Introduction"></a>
+Introduction</h2>
+<h2><a class="anchor" id="FundamentalTypes"></a>
+Fundamental types</h2>
+<p>Plonk generally makes use of the standard C++ types, <code>char</code>, <code>int</code>, <code>float</code>, <code>double</code> etc. To keep consistent types on all platforms these are <code>typedef</code> 'd in the plonk namespace as follows:</p>
+<ul>
+<li><code>Char</code> (generally built-in <code>char</code>) always an 8-bit signed integer.</li>
+<li><code>Short</code> (generally built-in <code>short</code>) always a 16-bit signed integer.</li>
+<li><code>Int</code> (generally built-in <code>int_</code> always a 32-bit signed integer.</li>
+<li><code>Long</code> - a 32-bit signed integer on 32-bit architectures and 64-bits on 64-bit architectures. NB this is therefore not the same as a <code>long</code> on Windows under Visual Studio.</li>
+<li><code>LongLong</code> - a 64-bit signed integer.</li>
+<li><code>UnsignedChar</code> (generally built-in <code>unsigned</code> <code>char</code>) always an 8-bit unsigned integer.</li>
+<li><code>UnsignedShort</code> (generally built-in <code>unsigned</code> <code>short</code>) always a 16-bit unsigned integer.</li>
+<li><code>UnsignedInt</code> (generally built-in <code>unsigned</code> <code>int</code>) always a 32-bit unsigned integer.</li>
+<li><code>UnsignedLong</code> - a 32-bit unsigned integer on 32-bit architectures and 64-bits on 64-bit architectures.</li>
+<li><code>UnsignedLongLong</code> - a 64-bit unsigned integer.</li>
+<li><code>Float</code> (generally built-in <code>float</code>) always a 32-bit floating point type.</li>
+<li><code>Double</code> (generally built-in <code>double</code>) always a 64-bit floating point type.</li>
+<li><code>Bool</code> - built-in <code>bool</code>.</li>
+</ul>
+<p>There is also an <a class="el" href="class_int24.html" title="An emulated 24-bit integer type.">Int24</a> class to assist with manipulating 24-bit audio data.</p>
+<h2><a class="anchor" id="CoreClasses"></a>
+Core classes</h2>
+<p>Plonk is designed to fully support a range of audio sample types in the future. Currently, only 32-bit float support is extensively tested but 64-bit support should work (and the infrastructure is in place to make integer and maybe fixed-point processing a possibility in the future). To help support this many Plonk classes are C++ template classes. For example, The <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> class is a template. Essentially, this allows you to store another value or object in a rerefence counted container (<a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> has other useful features too which are outlined below). To store an <code>int</code> in a <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> you would use a Variable&lt;Int&gt;, for convenience (and to avoid many nested angle brackets that can result from templated code) commonly used types are <code>typedef</code> 'd. For example, IntVariable is equivalent to Variable&lt;Int&gt; (and this naming scheme is used throughout Plonk for similar <code>typedef</code> s</p>
+<p>Plonk classes are divided into "user" classes and "internal" (i.e., implementation) classes. Most internal classes are denoted by the <code>Internal</code> suffix added to the class name (should you come across them in the documentation). Generally, Plonk classes come in pairs (e.g., <code>SomeClass</code> and <code>SomeClassInternal</code>). As a user you will generally deal with the user classes and almost never the internal classes directly (unless of course you write your own extensions using the same pattern). Almost all Plonk classes like this are built on a custom reference counting base class (which incidentally is thread safe and lock free) to help manage object lifetimes. You should never need to deal with the reference counting system, simply create user classes on the stack, store them by value in your own classes, and pass around by value (or by reference if you're careful).</p>
+<p>For example, to use the <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> class to store and manipulate integers you could do something like:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> a (1); <span class="comment">// &#39;a&#39; initialised to 1</span>
+ <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> b (2); <span class="comment">// &#39;b&#39; initialised to 2</span>
+ <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> c (b); <span class="comment">// &#39;c&#39; shares same state as &#39;b&#39;</span>
+ 
+ a = 3; <span class="comment">// &#39;a&#39; now set to 3 - &quot;a.setValue(3)&quot; is equivalent</span>
+ a = b; <span class="comment">// &#39;a&#39; now shares &#39;b&#39; (the original internal from &#39;a&#39; is destroyed as it&#39;s no longer referenced) </span>
+ b = 4; <span class="comment">// &#39;a&#39;, &#39;b&#39; and &#39;c&#39; all store 4 since they all share the same state</span>
+</pre></div><p>This technique should mean that you can avoid the use of explicit memory allocation in your own user code. You should rarely need to use <code>new</code>, <code>delete</code>, <code>malloc</code> or <code>free</code> (etc). One use of the <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> class is to store values you wish to use in an audio process that you wish to manipulate from elsewhere (e.g., from A GUI).</p>
+<p>As mentioned previously, the <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> class has other useful features. Instances of <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> can be combined into expressions that are evaluated at a later time. For example:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> a (1);
+ <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> b (2);
+ <a class="code" href="class_variable.html" title="A template class for storing any variable type.">IntVariable</a> c = a + b; <span class="comment">// creates a variable that will evaluate &quot;a + b&quot; at a later time;</span>
+ 
+ <span class="keywordtype">int</span> t1 = a; <span class="comment">// is 1 - implies &quot;t1 = a.getValue()&quot;</span>
+ <span class="keywordtype">int</span> t2 = b; <span class="comment">// is 2</span>
+ <span class="keywordtype">int</span> t3 = c; <span class="comment">// is 3 - evaluates &quot;a.getValue() + b.getValue()&quot;</span>
+ 
+ a = 100;
+ 
+ <span class="keywordtype">int</span> t4 = c; <span class="comment">// is 102</span>
+</pre></div><p><a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> supports many unary and binary arithmetic operators in this way including <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>pow</code>, and so on. The <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> documentation page provides a full list.</p>
+<h3><a class="anchor" id="Arrays"></a>
+Arrays</h3>
+<p>Plonk provides its own dynamic array class <a class="el" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a> (which is also a template class and employs the same reference counted lifetime management as the <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> class). <a class="el" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a> is very generalised. Please note that while assignment of a Plonk array is thread safe, manipulations of the array are not. To store and manipulate numerical data there is the specialised class <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> (which inherits from <a class="el" href="class_object_array.html" title="This is the base class for arrays.">ObjectArray</a>).</p>
+<p>As with the <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> class there are <code>typedef</code> s for many of the common types. One convention in Plonk is to use the plural form to imply an array e.g., Ints is a <a class="el" href="class_numerical_array.html">NumericalArray&lt;Int&gt;</a>. It is appreciated that this style may not suit all users and there are alternative forms using the word 'Array', thus IntArray is equivalent to Ints (both are <a class="el" href="class_numerical_array.html">NumericalArray&lt;Int&gt;</a>). There is nothing to prevent you from using an <a class="el" href="class_object_array.html">ObjectArray&lt;Int&gt;</a> but the <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> has added arithmetic functionality.</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_numerical_array.html">Ints</a> a;              <span class="comment">// empty array</span>
+ <a class="code" href="class_numerical_array.html">Ints</a> b (1);          <span class="comment">// an array containing a single element &#39;1&#39;</span>
+ <a class="code" href="class_numerical_array.html">Ints</a> c (1, 2, 3, 4); <span class="comment">// initialise with array {1, 2, 3, 4}, up to 32 items can be used to initialise this way</span>
+ 
+ <span class="keywordtype">int</span> cn = c.length(); <span class="comment">// is 4, the number of items stored in &#39;c&#39;</span>
+ <span class="keywordtype">int</span> cs = c.size();   <span class="comment">// is also 4, &#39;size&#39; and &#39;length&#39; are only different for null terminated arrays (see Text below)</span>
+ 
+ b.add (10);          <span class="comment">// &#39;b&#39; is now {1, 10}</span>
+ b.add (100);         <span class="comment">// &#39;b&#39; is now {1, 10, 100}</span>
+ 
+ c[1] = 20;           <span class="comment">// &#39;c&#39; is now {1, 20, 3, 4}</span>
+ b[2] = c[1];         <span class="comment">// &#39;b&#39; is now {1, 10, 20}</span>
+ a = b;               <span class="comment">// &#39;a&#39; now shares &#39;b&#39;</span>
+ 
+ a.<a class="code" href="class_object_array.html#a6b2d22402553fb5e22ed7c2966d74de7" title="Removes an item at the given index in-place.">remove</a> (0);        <span class="comment">// remove at index 0, &#39;a&#39; and &#39;b&#39; are now both {10, 20}</span>
+ c.removeItem (20);   <span class="comment">// removes item &#39;20&#39;, &#39;c&#39; is now { 1, 3, 4}</span>
+ c.removeItem (100);  <span class="comment">// has no effect as &#39;c&#39; doesn&#39;t contain &#39;100&#39;</span>
+ cn = c.length();     <span class="comment">// is now 3</span>
+</pre></div><p>By default Plonk checks inidices to ensure they are not out of bounds. If you wish to avoid these checks and are sure that array indices are within the bounds you can call faster versions:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_numerical_array.html">Ints</a> a (1, 2, 3);
+ <span class="keywordtype">int</span> b = a[0]; <span class="comment">// is 1</span>
+ <span class="keywordtype">int</span> c = a[1]; <span class="comment">// is 2</span>
+ <span class="keywordtype">int</span> d = a[2]; <span class="comment">// is 3</span>
+ <span class="keywordtype">int</span> e = a[3]; <span class="comment">// index out-of-bounds, returns zero (or a &#39;null&#39; object if this is not a NumericalArray)</span>
+ <span class="keywordtype">int</span> f = a.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (0); <span class="comment">// is 1</span>
+ <span class="keywordtype">int</span> g = a.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (1); <span class="comment">// is 2</span>
+ <span class="keywordtype">int</span> h = a.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (2); <span class="comment">// is 3</span>
+ <span class="keywordtype">int</span> i = a.<a class="code" href="class_object_array.html#a3027a6cfd4eef94f604a7d446c244cfc" title="Returns a new array by iterating through an array of indices provided.">atUnchecked</a> (3); <span class="comment">// returns garbage or may crash, raises an assertion though in a Debug build</span>
+</pre></div><p>As dicsussed above, arithmetic can be performed on <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> types. For example:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_numerical_array.html">Ints</a> a (1, 2, 3);          
+ <a class="code" href="class_numerical_array.html">Ints</a> b (4, 5, 6);
+ <a class="code" href="class_numerical_array.html">Ints</a> c (a + b);            <span class="comment">// &#39;c&#39; is {5, 7, 9}</span>
+ <a class="code" href="class_numerical_array.html">Ints</a> d (1, 10, 100, 1000); 
+ <a class="code" href="class_numerical_array.html">Ints</a> e (c * d);            <span class="comment">// &#39;e&#39; is {5, 70, 900, 5000} i.e., the shorter array &#39;loops&#39; to complete the pattern</span>
+ <a class="code" href="class_numerical_array.html">Ints</a> f (e);                <span class="comment">// &#39;f&#39; shares &#39;e&#39;</span>
+ e *= 10;                   <span class="comment">// &#39;e&#39; is now {50, 700, 9000, 50000} but &#39;f&#39; is still {5, 70, 900, 5000}</span>
+</pre></div><p>These arithmetic operations are evaluated on assignment unlike the <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> class (although you could wrap a <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> in a <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> if you wish, to leverage the deferred evaluation capabiltiies of <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a>).</p>
+<p>Numerical arrays can be filled with commonly required data e.g., sine wave tables, random values. For example:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> a (<a class="code" href="class_numerical_array.html#a35333c3e01ef69f3a2915165c2d3ab83" title="Creates a NumericalArray with a given size (length) with all items set to zero.">Floats::newClear</a> (10));        <span class="comment">// array with 10 items all zero</span>
+ <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> b (<a class="code" href="class_numerical_array.html#aa474beef987896c1d5122828b433a958" title="Creates a NumericalArray with a given size (length) with a linear random distribution.">Floats::sineTable</a> (8));        <span class="comment">// sine wave shape using 8 items (bipolar -1...+1) starting at 0</span>
+ <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> c (<a class="code" href="class_numerical_array.html#abd89c7757fc3ea124480f8f47de2bbfc" title="Creates a NumericalArray with a given size (length) containing one or more cosine tables...">Floats::cosineTable</a> (8));      <span class="comment">// cosine wave shape using 8 items (bipolar -1...+1) starting at 1</span>
+ <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> d (<a class="code" href="class_numerical_array.html#ae89ecb5b770c242fd6ed6393a8401bf5" title="Creates a NumericalArray with a given size (length) containing one or more cosine windows...">Floats::cosineWindow</a> (8));     <span class="comment">// cosine wave shape using 8 items (unipolar 0...+1) starting at 0</span>
+ <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> e (<a class="code" href="class_numerical_array.html#ab98a6073517a23189d9f8ca7c64b1cef" title="Creates a NumericalArray with a given size (length) randomly distributed.">Floats::rand</a> (4, 10, 100));    <span class="comment">// array of 4 random values 10...100 uniformly distributed</span>
+ <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> f (<a class="code" href="class_numerical_array.html#a91f325eeff8bd44e9774cf92b1bb438e" title="Creates a NumericalArray with a given size (length) with an exponential random distribution.">Floats::exprand</a> (4, 10, 100)); <span class="comment">// array of 4 random values 10...100 exponentially distributed</span>
+</pre></div><p><a class="el" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> is a specially adapted Chars (CharArray or <a class="el" href="class_numerical_array.html">NumericalArray&lt;Char&gt;</a>) for dealing with text strings.</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> a (<span class="stringliteral">&quot;Hello&quot;</span>);
+ <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> b (<span class="stringliteral">&quot;World!&quot;</span>);
+ <a class="code" href="class_text.html" title="A class for storing and manipulating text strings.">Text</a> c (a + <span class="stringliteral">&quot; &quot;</span> + b); <span class="comment">// is &quot;Hello World!&quot; as &#39;+&#39; is overidden to do concatenation</span>
+ <span class="keywordtype">int</span> an = a.<a class="code" href="class_object_array.html#a6eb3d6ad48798a021d3dc9f23e9c5260" title="Length is the number of real elements of storage available.">length</a>();  <span class="comment">// is 5</span>
+ <span class="keywordtype">int</span> bn = b.length();  <span class="comment">// is 6</span>
+ <span class="keywordtype">int</span> cn = c.length();  <span class="comment">// is 12</span>
+ <span class="keywordtype">int</span> as = a.<a class="code" href="class_object_array.html#a53983ca686506e7f8c87b77175b148fb" title="Size is the actual number of elements of storage needed for the array.">size</a>();    <span class="comment">// is 6  (size is one larger to hold the null terminating character</span>
+ <span class="keywordtype">int</span> bs = b.size();    <span class="comment">// is 7</span>
+ <span class="keywordtype">int</span> cs = c.size();    <span class="comment">// is 13</span>
+</pre></div><p>If you need to access the raw C++ array stored in the Plonk array you can use getArray() or cast the Plonk array to a pointer to the array's value type:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_numerical_array.html">Ints</a> a (1, 2, 3);
+ 
+ <span class="comment">// all of these are equivalent</span>
+ <span class="keywordtype">int</span>* ptr1 = a.<a class="code" href="class_object_array.html#a49f3b9719cdeefc07c0ac52f1735d93d" title="Returns a pointer to the raw array.">getArray</a>();           <span class="comment">// explicit getArray()</span>
+ <span class="keywordtype">int</span>* ptr2 = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span>*<span class="keyword">&gt;</span> (a);  <span class="comment">// explicit cast, calls getArray() internally </span>
+ <span class="keywordtype">int</span>* ptr3 (a);                      <span class="comment">// implicit cast, calls getArray() internally</span>
+ <span class="keywordtype">int</span>* ptr4 = a;                      <span class="comment">// implicit cast, calls getArray() internally</span>
+ <span class="keywordtype">int</span>* ptr5 = (<span class="keywordtype">int</span>*)a;                <span class="comment">// should work, but not C casts are not recommended in C++</span>
+</pre></div><p>It is best not to store any of the pointers obtained this way as the array could be reallocated if it is modified (e.g., by adding items). If you are iterating through an array this may be faster than repeated calls to atUnchecked() or the [] operator.</p>
+<h3><a class="anchor" id="ChannelsUnitsAndGraphs"></a>
+Channels, units and graphs</h3>
+<p>Channels, units and graphs are concepts used to represent audio processing configurations in Plonk.</p>
+<ul>
+<li>channel: a single channel of audio (i.e, mono)</li>
+<li>unit: an array of channels</li>
+<li>graph: an interconnected collection of units</li>
+</ul>
+<p>In fact in Plonk there is no separate "graph" object, rather graphs are built by passing units to other units during construction. There are channel objects (the ChannelBase&lt;SampleType&gt; class) although you rarely deal with these directly in user code. Most user code will create and manipulate unit objects (via the UnitBase&lt;SampleType&gt; class). By default Plonk is setup to deal with 32-bit floating point data throughout its graphs. This is achieved by the macro PLONK_TYPE_DEFAULT which is set to 'float'. This macro is used to set the default type for the <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> class and the unit factory classes. The convention is for the base types (<a class="el" href="class_channel_base.html" title="A single output signal.">ChannelBase</a>, <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a>) to become simply 'Channel' and 'Unit' for the default sample type. For factory classes, these are generally names like SomethingUnit, which becomes simply 'Something' for the default sample type.</p>
+<p>For example, the <a class="el" href="class_sine_unit.html" title="Sine oscillator.">SineUnit</a> factory class is used to create wavetable-based sine wave oscillators. To create one using the default sample type you would do this:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1000, 0.1);
+</pre></div><p>This creates a single channel 1kHz sine oscillator unit at an amplitude of 0.1 and stores it in the variable 'u' (of type Unit). The 'ar' factory function name is common throughout the factory classes and denotes 'audio rate' in a similar way to other Music-N languages (Csound, SuperCollider etc). This means it will output one sample for each sample required by the audio hardware. It is possible to create 'control rate' units too although this will be discussed later (in fact there isn't really a global notion of 'control rate' as there is in other Music-N langauges as Plonk channels can run at arbitrary sample rates and block sizes).</p>
+<p>To create a non-bandlimited sawtooth with amplitude 0.1 and frequency 1kHz you would use:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (1000, 0.1);
+</pre></div><p>The arguments, or 'inputs', for the factory functions are documented in the factory class documentation. For example, <a class="el" href="class_sine_unit.html" title="Sine oscillator.">SineUnit</a> documentation states:</p>
+<table class="doxtable">
+<tr>
+<td><p class="starttd">Factory functions:</p>
+<ul>
+<li>ar (frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (frequency=440, mul=1, add=0)</li>
+</ul>
+<p class="endtd">Inputs:</p>
+<ul>
+<li>frequency: (unit, multi) the frequency of the oscillator in Hz</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure) </li>
+</ul>
+</td></tr>
+</table>
+<p>The 'mul' and 'add' inputs are common to many factory classes these are applied after the output of the unit at full ampltitude. The default for float and double sample types is ±1. Thus Sine::ar(1000) would output a full scale sine wave at 1kHz. While the 'add' input can be used to mix units, this is not its primary purpose nor the most convenient way of achieving this. The 'add' input is more useful for creating modulators. E.g.,</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (5, 100, 1000), 0.1);
+</pre></div><p>Here the 5Hz sine is used to modulate another sine. This could be rewritten a follows:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> m = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (5, 100, 1000);
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (m, 0.1);
+</pre></div><p>(Both of these versions produce identical graphs, the processing required to render either graph will be exactly the same. The latter version <em>may</em> be a fraction slower to construct but most compilers should be able to optimise.)</p>
+<p>The 'mul' input for 'm' is 100, this is effectively the modulation depth. The 'add' input is 1000, this is effectively the centre value for the modulation. Thus the modulator will have a centre value of 1000 and deviate by ±100 (i.e., 900...1100). The unit 'm' is then used as the frequency input for the unit 'u'. Any input marked as 'unit' can be any other unit. Units can be created explicitly using the factory classes, or in some cases implicitly from constants, <a class="el" href="class_variable.html" title="A template class for storing any variable type.">Variable</a> types, <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> types and so on. Inputs marked as 'multi' can be used to create multichannel units by passing in a multichannel unit to this input. For example, the following code creates a two-channel unit, both with amplitude 0.1 but one with frequency 995Hz and the other 1005Hz:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005), 0.1);
+</pre></div><p>Or alternatively:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> (995, 1005), 0.1);
+</pre></div><p>This is equivalent to:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="plonk___graph_forward_declarations_8h.html#af31f3e20e5e9212f42f71b0bd9477ebb">Unit</a> (<a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (995, 0.1), <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1005, 0.1));
+</pre></div><p>Similarly, multichannel units can be passed into all inputs labelled 'multi'. The following code creates two sines with frequencies as above but with different amplitudes too:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.09, 0.11));
+</pre></div><p>This is equivalent to:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="plonk___graph_forward_declarations_8h.html#af31f3e20e5e9212f42f71b0bd9477ebb">Unit</a> (<a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (995, 0.09), <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1005, 0.11));
+</pre></div><h3><a class="anchor" id="RunningProcessesAndAudioHosts"></a>
+Running processes and 'audio hosts'</h3>
+<p>Plonk is not tied to any particular platform or audio IO system. Plonk does provide some built-in "audio hosts" which interface with commonly available IO APIs. For example, there are audio hosts for PortAudio (PortAudioAudioHost), iOS (IOSAudioHost) and Juce (JuceAudioHost). It's reasonably trivial to add hosts, each derives from the <a class="el" href="class_audio_host_base.html" title="An abstract class to interface with audio devices.">AudioHostBase</a> class.</p>
+<p>In each case the audio host class communicates with the host API. As a user you simply need to inherit from the desired audio host, implement the constructGraph() function (see below) and call startHost().</p>
+<p>The constructGraph() function needs to return the graph (i.e., a unit) that contains the audio processing algorithm you want to play. For example, here is a PortAudio-based example:</p>
+<div class="fragment"><pre class="fragment"> <span class="keyword">class </span>AudioHost : <span class="keyword">public</span> PortAudioAudioHost
+ {
+ <span class="keyword">public</span>:
+    AudioHost()
+    {
+        <span class="comment">// ..DO NOT call startHost() here.. </span>
+    }
+    
+    ~AudioHost();
+    {
+    }
+    
+    <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> constructGraph()
+    {
+        <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="plonk___variable_8h.html#a409ea60e07a699c2dabd264e3944ab83">Sine::ar</a> (1000, 0.1);
+        <span class="keywordflow">return</span> u;
+    }
+ };
+</pre></div><p>Then you need to create an instance of this class and call its startHost() function. For a naive implementation could be:</p>
+<div class="fragment"><pre class="fragment"> <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])
+ {
+    AudioHost host;
+    host.startHost();
+ 
+    <span class="keywordflow">while</span>(<span class="keyword">true</span>) <span class="comment">// pause forever..</span>
+        <a class="code" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684" title="Sleeps the current thread.">Threading::sleep</a> (0.001);
+ 
+    <span class="keywordflow">return</span> 0;
+ }
+</pre></div><p>In reality, you would probably use your AudioHost class within the context of an event driven system (e.g., on Mac OS X and iOS you could store your AudioHost in your AppDelegate class as per the macplnk and iosplnk examples).</p>
+<p>In each of the examples below you would be able to return the 'u' variable from a constructGraph() function as above.</p>
+<h3><a class="anchor" id="ImplicitArithmeticUnits"></a>
+Implicit arithmetic units</h3>
+<p>Arithmetic can be performed on units in an intuitive fashion. For example, the following lines are all equivalent to each other:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005), 0.1);
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005)) * 0.1;
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005)) * <a class="code" href="plonk___graph_forward_declarations_8h.html#af31f3e20e5e9212f42f71b0bd9477ebb">Unit</a> (0.1);
+</pre></div><p>Similarly, the following lines are also equivalent to each other:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.09, 0.11));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005)) * <a class="code" href="plonk___container_forward_declarations_8h.html#a71176dcb1ffecfafbe96374f76413f21">Floats</a> (0.09, 0.11);
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (995, 1005)) * <a class="code" href="plonk___graph_forward_declarations_8h.html#af31f3e20e5e9212f42f71b0bd9477ebb">Unit</a> (0.1, 0.11);
+</pre></div><p>Mixing can be performed using the addition operator:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (200, 0.1) +
+          <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (400, 0.1 / 2) +
+          <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (600, 0.1 / 3) +
+          <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (800, 0.1 / 4);
+</pre></div><p>(This creates the first four harmonics of a sawtooth wave.)</p>
+<p>Ring modulation can be achieved using the '*' operator too:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1000) * <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1200) * 0.1;
+</pre></div><p>As can amplitude modulation:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1000) * <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (0.5, 0.1, 0.1);
+</pre></div><p>Here the amplitude modulation is at a rate of 0.5Hz and the 'mul' and 'add' of 0.1 scales and shifts the sine wave to fit betweem 0...0.2. Alternatives to this are:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1000, <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (0.5, 0.1, 0.1));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1000, <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (0.5).<a class="code" href="group___plonk_misc_arithmetic_functions.html#gaa19c984c156500ac98f5186ac33edad7">linlin</a> (-1, 1, 0.0, 0.2));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1000, <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (0.5).<a class="code" href="group___plonk_misc_arithmetic_functions.html#gaa19c984c156500ac98f5186ac33edad7">linlin</a> (0.0, 0.2));
+</pre></div><p>Here the latter two versions use the 'linlin' functionwhich maps one linear range onto another. With all four arguments, the first two are the input range of the source unit (-1, 1) and the second two are the desired output range (0.0, 0.2). As most units' use a default output range (i.e., ±1 for float and double sample types) only the output range needs specifying (i.e., the last of the three forms).</p>
+<p>Plonk units also support unary operators such as standard trig functions (sin, cos etc) and some useful coverters (for dBs, MIDI note numbers etc). For example, an inefficient way to synthesise a sine wave would be:</p>
+<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> <span class="keywordtype">float</span> pi = <a class="code" href="class_math.html#ab6e0c98a975f0061b75554d3249074c5">FloatMath::getPi</a>();      <span class="comment">// Math&lt;Type&gt; contains some useful constants</span>
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> p = <a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (1000).linlin (-pi, pi); <span class="comment">// phasor ±pi (i.e., ±180° in radians)</span>
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="group___plonk_unary_op_functions.html#ga731baf3de4ee31dbd113dc6dd30e03b9" title="Returns the sine of the input argument.">sin</a> (p) * 0.1;                   <span class="comment">// call sin() on the phasor and scale</span>
+</pre></div><p>The <a class="el" href="group___plonk_unary_op_functions.html#ga731baf3de4ee31dbd113dc6dd30e03b9" title="Returns the sine of the input argument.">sin()</a> function can be called like this or in "message passing" format when called on Plonk units or arrays but not built-in types. This can often make reading a chain of arithmetic functions easier):</p>
+<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> <span class="keywordtype">float</span> pi = <a class="code" href="class_math.html#ab6e0c98a975f0061b75554d3249074c5">FloatMath::getPi</a>();      <span class="comment">// Math&lt;Type&gt; contains some useful constants</span>
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> p = <a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (1000).linlin (-pi, pi); <span class="comment">// phasor ±pi (i.e., ±180° in radians)</span>
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = p.<a class="code" href="class_unit_base.html#adfd01e6c59c15369e4bfda8f5776b570" title="Create a new UnitBase by applying the unary &#39;sin&#39; function to this one.">sin</a>() * 0.1;                   <span class="comment">// call sin() on the phasor and scale</span>
+</pre></div><p>Coversions from MIDI note to frequency in Hertz is often useful:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="group___plonk_unary_op_functions.html#ga181f59f1188049529a16a2cf5f508501" title="Returns the input argument converted from MIDI note numbers to frequency (in Hz).">m2f</a> (69), 0.1); <span class="comment">// MIDI note 69 = 440Hz</span>
+</pre></div><p>This also works on units, of course, where message passing format can be used:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> f = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (0.5).linlin (60, 72).m2f(); <span class="comment">// sweep between 60 and 72, middle-C to the next octave</span>
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (f, 0.1);
+</pre></div><p>For a similar sweep with discrete steps <a class="el" href="group___plonk_binary_op_functions.html#ga324267060ce21c18f1255e69f823edc3">round()</a> can be used to quantise the MIDI not numbers to integers before conversion to Hz:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> f = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (0.5).linlin (60, 72).round (1).m2f();
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (f, 0.1);
+</pre></div><p>Similar coversions are available from frequency back to MIDI notes (f2m) and between dB and linear amplitude (dB2a and a2dB):</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1000, <a class="code" href="group___plonk_unary_op_functions.html#ga0a730e2e046bf1e584745ce86d4e834b" title="Returns the input argument converted from decibels to linear amplitude where 0dB is an amplitude of 1...">dB2a</a> (-18)); <span class="comment">// -18dB is amplitude 0.125</span>
+</pre></div><p>See the <a class="el" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">UnitBase</a> for full list of supported operators and arithmetic functions.</p>
+<h3><a class="anchor" id="Mixing"></a>
+Mixing</h3>
+<p>Returning to techniques for mixing units, in most cases it is more straightforward and efficient to use the <a class="el" href="class_mixer_unit.html" title="Mixer.">MixerUnit</a> rather than chains of '+' operators:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_mixer_unit.html#ac6358840aff51693d2061dcab5f72c07" title="Create an audio rate channel mixer.">Mixer::ar</a> (<a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (200, 400, 600, 800), 
+                               <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1, 0.1/2, 0.1/3, 0.1/4)));
+</pre></div><p>Or more clearly:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> s = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (200, 400, 600, 800), 
+                    <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1, 0.1/2, 0.1/3, 0.1/4));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_mixer_unit.html#ac6358840aff51693d2061dcab5f72c07" title="Create an audio rate channel mixer.">Mixer::ar</a> (s);
+</pre></div><p>Or:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (200, 400, 600, 800), 
+                    <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1, 0.1/2, 0.1/3, 0.1/4)).mix();
+</pre></div><p>Thus Mixer and <a class="el" href="class_unit_base.html#afd8d0797e935d3c384910a8090f0202b" title="Mixes this unit down to a single channel.">Unit::mix()</a> mix down multiple channels to a single channel. Mixing multiple channels is as straightforward but requires the use of arrays of units i.e. a Units or UnitArray. Take the following example:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> a = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (200, 600), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1, 0.1/3));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> b = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (400, 800), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1/2, 0.1/4));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = a + b;
+</pre></div><p>Here 200Hz and 400Hz are mixed in one channel and 600Hz and 800Hz are mixed in another channel. Using Mixer this could be:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> a = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (200, 600), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1, 0.1/3));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> b = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (400, 800), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1/2, 0.1/4));
+ <a class="code" href="class_numerical_array2_d.html">Units</a> us = <a class="code" href="plonk___graph_forward_declarations_8h.html#a20426efc8042f1c905c6506acccd0b8f">Units</a> (a, b);
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_mixer_unit.html#ac6358840aff51693d2061dcab5f72c07" title="Create an audio rate channel mixer.">Mixer::ar</a> (us);
+</pre></div><p>Clearly in this case this results in <em>more</em> code but with larger numbers of units to mix this can be more convenient.</p>
+<p>An equivalent would be:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_numerical_array2_d.html">Units</a> us;
+ us.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (<a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (200, 600), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1, 0.1/3)));
+ us.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (<a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (400, 800), <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">Floats</a> (0.1/2, 0.1/4)));
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_mixer_unit.html#ac6358840aff51693d2061dcab5f72c07" title="Create an audio rate channel mixer.">Mixer::ar</a> (us);
+</pre></div><p>This technique allows you to build arrays of units using conventional C++ loops:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_numerical_array2_d.html">Units</a> us;
+ 
+ <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i)
+ {
+    us.<a class="code" href="class_object_array.html#aa15b17d07062a81fa7fbc0fb275d18af" title="Adds an item in-place.">add</a> (<a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (<a class="code" href="class_numerical_array.html#a91f325eeff8bd44e9774cf92b1bb438e" title="Creates a NumericalArray with a given size (length) with an exponential random distribution.">Floats::exprand</a> (2, 100, 1000), 
+                      <a class="code" href="class_numerical_array.html#ab98a6073517a23189d9f8ca7c64b1cef" title="Creates a NumericalArray with a given size (length) randomly distributed.">Floats::rand</a> (2, 0.05, 0.1)));
+ }
+ 
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_mixer_unit.html#ac6358840aff51693d2061dcab5f72c07" title="Create an audio rate channel mixer.">Mixer::ar</a> (us);
+</pre></div><h3><a class="anchor" id="OscillatorsAndGenerators"></a>
+Oscillators and generators</h3>
+<p>See the <a class="el" href="group___generator_units.html">oscillator </a> and <a class="el" href="group___noise_units.html">noise </a> unit documentation for a list of available unit factories. [todo]</p>
+<h3><a class="anchor" id="Filters"></a>
+Filters</h3>
+<p>The underlying code for the filter units can look daunting but the classes designed to be used in user code are straightforward. These are as follows:</p>
+<ul>
+<li><a class="el" href="class_l_p_f_unit.html" title="Butterworth 2nd-order low-pass filter.">LPFUnit</a>: a Butterworth 2nd-order low-pass filter</li>
+<li><a class="el" href="class_l_p_f_p1_unit.html" title="One-pole low-pass filter.">LPFP1Unit</a>: a one-pole low-pass filter</li>
+<li><a class="el" href="class_r_l_p_f_unit.html" title="Resonant low-pass filter.">RLPFUnit</a>: a resonant low-pass filter</li>
+<li><a class="el" href="class_h_p_f_unit.html" title="Butterworth 2nd-order high-pass filter.">HPFUnit</a>: a Butterworth 2nd-order high-pass filter</li>
+<li><a class="el" href="class_h_p_f_p1_unit.html" title="One-pole high-pass filter.">HPFP1Unit</a>: a one-pole high-pass filter</li>
+<li><a class="el" href="class_r_h_p_f_unit.html" title="Resonant high-pass filter.">RHPFUnit</a>: a resonant high-pass filter</li>
+<li><a class="el" href="class_b_p_f_unit.html" title="Bandpass filter.">BPFUnit</a>: a band-pass filter</li>
+<li><a class="el" href="class_b_r_f_unit.html" title="Bandreject (band-elimination) filter.">BRFUnit</a>: a band-reject (band-elimination) filter</li>
+<li><a class="el" href="class_notch_unit.html" title="Notch filter (i.e, parametric mid-EQ).">NotchUnit</a>: a notching filter (i.e., a parametric EQ, or peaking filter)</li>
+<li><a class="el" href="class_low_shelf_unit.html" title="Low-shelving (bass) filter.">LowShelfUnit</a>: a low-shelving filter</li>
+<li><a class="el" href="class_high_shelf_unit.html" title="High-shelving (treble) filter.">HighShelfUnit</a>: a high-shelving filter</li>
+<li><a class="el" href="class_lag_unit.html" title="Exponential lag filter.">LagUnit</a>: an exponential lag filter for parameter smoothing</li>
+<li><a class="el" href="class_decay_unit.html" title="Exponential decay filter.">DecayUnit</a>: an exponential decay filter</li>
+</ul>
+<p>You need to view each filter's documentation for the inputs each accepts but in general the first input is the signal to filter. For example, to apply a low-pass filter to a sawtooth wave you could do the following:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> s = <a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (200, 0.1);
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_l_p_f_unit.html#a394fb174ebbbd2f6b9f6d0993794a2e1" title="Create a simple Butterworth 2nd-order low-pass filter.">LPF::ar</a> (s, 400); <span class="comment">// cut-off at 400Hz</span>
+</pre></div><p>Of course, the cutoff frequency can be modulated, here with a resonant low-pass: </p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> s = <a class="code" href="class_saw_unit.html#ac227416ad5260b17557db86b03762e5d" title="Create an audio rate sawtooth oscillator.">Saw::ar</a> (200, 0.1);
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> m = <a class="code" href="class_sine_unit.html#a3a5dee949336bc3a5291179568a9805e" title="Create an audio rate sine oscillator.">Sine::ar</a> (1).linexp (400, 1600); <span class="comment">// exponential map ±1 to 400...1600</span>
+ <a class="code" href="class_unit_base.html" title="A Unit is effectively an array of Channel objects.">Unit</a> u = <a class="code" href="class_r_l_p_f_unit.html#aa09f9ea176fb45f969a58ab36e3aeda5" title="Create a resonant low-pass filter.">RLPF::ar</a> (s, m, 5);              <span class="comment">// Q-factor of 5</span>
+</pre></div><p>[todo]</p>
+<h3><a class="anchor" id="Delay"></a>
+Delay</h3>
+<p>[todo]</p>
+<h3><a class="anchor" id="FFTProcessing"></a>
+FFT processing</h3>
+<p>[todo] </p>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -79,7 +393,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_20dda8dcfdd9f0882af8de99e25f841d.html">containers</a>      </li>
-      <li class="navelem"><a class="el" href="dir_33635cde1c3b53c6618cb4806d78b524.html">variables</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -74,12 +65,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plonk_VariableForwardDeclarations.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;../../maths/plonk_InlineBinaryOps.h&quot;</code><br/>
-<code>#include &quot;../../maths/plonk_InlineUnaryOps.h&quot;</code><br/>
-<code>#include &quot;../../core/plonk_CoreForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../plonk_ContainerForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../plonk_Atomic.h&quot;</code><br/>
-</div>
+
 <p><a href="plonk___variable_forward_declarations_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
@@ -104,131 +90,68 @@ Typedefs</h2></td></tr>
 &lt; <a class="el" href="class_atomic_extended.html">AtomicExtendedPointer</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ad9fbfb915ce904d46cf2fcd7d87709f7">AtomicExtendedPointerVariable</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
 &lt; <a class="el" href="class_atomic_extended.html">AtomicDynamicPointer</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a6843a2ffb49c82d6a8ac7e8ed9c4881a">AtomicDynamicPointerVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">FloatArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ac13a48c601194fd53699f0171649e4c6">FloatArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">DoubleArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a6baa588de41decaf6fc3379d1ed0c776">DoubleArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">IntArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ad58b076ba64970ccec01f64f4f3ae42d">IntArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">ShortArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#afcf235e4479c5ff924fc2371dd981c44">ShortArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">Int24Array</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a3be46e200c3b769a08e1934240d3b84f">Int24ArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">LongArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a512022a6cb3452a29eb4c9854ec8fd6b">LongArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">CharArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a363442a11ffddcf074c6ab40c51fef28">CharArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">BoolArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#adc280b62e9eb5085c8cfd85f6b8a9fbe">BoolArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_numerical_array.html">Buffer</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a5d4cdc51dffa29300f1cc09ff930d2f2">BufferVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_text.html">Text</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#aaf9ccf878a0c62adab2c0a5288a3a765">TextVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_text_array.html">TextArray</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a4691f74b2f622eae65ab9a611414cf53">TextArrayVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoint_base.html">FloatBreakpoint</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ab80cbf0f81ad15f986bfef19636c8b65">FloatBreakpointVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoint_base.html">DoubleBreakpoint</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a21ef40926547ecd7b626e9680121601b">DoubleBreakpointVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_breakpoint_base.html">IntBreakpoint</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a4d0459e133370e31e704730027a64573">IntBreakpointVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoint_base.html">ShortBreakpoint</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a2be0dc4dd93dd87769615fb0acdcc249">ShortBreakpointVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoint_base.html">Int24Breakpoint</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#af6ac377d892fe9062f30dbfff78b5e92">Int24BreakpointVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoint_base.html">LongBreakpoint</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ad554ae3fd3f5d292bddb3b1a1305755f">LongBreakpointVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_breakpoint_base.html">Breakpoint</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a8a207302cc66dd227c4af16ecef06c64">BreakpointVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoints_base.html">FloatBreakpoints</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#aa43c06fd37055e3e7659d55d45eb002a">FloatBreakpointsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoints_base.html">DoubleBreakpoints</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#abfd77a5c47b116602feaebf5527cb4f5">DoubleBreakpointsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoints_base.html">IntBreakpoints</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#afa8d51518566a6bbfc883ed32992247e">IntBreakpointsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoints_base.html">ShortBreakpoints</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a5a053ff8714555ad7dadbbc3e8213eb2">ShortBreakpointsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoints_base.html">Int24Breakpoints</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a3ac694ebe1f986c722a84465f6c5d3d2">Int24BreakpointsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_breakpoints_base.html">LongBreakpoints</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a1e9b28f247fff95f29118a3cda9f5bf5">LongBreakpointsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_breakpoints_base.html">Breakpoints</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#aaa7c8bf8dbe4ce0eaf276c3755bfda50">BreakpointsVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_wavetable_base.html">FloatWavetable</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ac713cb3c76b83a5ce1047c5082f0d781">FloatWavetableVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_wavetable_base.html">DoubleWavetable</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#aa7242f44cd5a7faa025e9f29bf99ae93">DoubleWavetableVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_wavetable_base.html">IntWavetable</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ab4dac73bdafbdcae4115bf98b2b7f499">IntWavetableVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_wavetable_base.html">ShortWavetable</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a2a51565725a77555d93852a278223bf9">ShortWavetableVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a><br class="typebreak"/>
+&lt; <a class="el" href="class_wavetable_base.html">Int24Wavetable</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a0e81a2452b6af7101ac62390063265aa">Int24WavetableVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_wavetable_base.html">LongWavetable</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a0dbe7a53c76c231775668bfd2d1e51a8">LongWavetableVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_wavetable_base.html">Wavetable</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#af11414750a46267b18bca49ea79bc73e">WavetableVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_signal_base.html">FloatSignal</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a4d91d075de5a4b0936764236686ab122">FloatSignalVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_signal_base.html">DoubleSignal</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ab0846f8fc30505464afcf63b329d37ed">DoubleSignalVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_signal_base.html">IntSignal</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#ae885b4179d98e5f4585304159f9320c6">IntSignalVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_signal_base.html">ShortSignal</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a3666b09c2884425cd68cd29e8e01b106">ShortSignalVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_signal_base.html">Int24Signal</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a1b5df34475f8e05a0803316d6d49d87f">Int24SignalVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_signal_base.html">LongSignal</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a86909225c022f8f7cb01bddb061ab18b">LongSignalVariable</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">Variable</a>&lt; <a class="el" href="class_signal_base.html">Signal</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___variable_forward_declarations_8h.html#a41014f28a04092f091ad56747db3e0d2">SignalVariable</a></td></tr>
 </table>
 <hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="a8c350a6894fc790b49c2374a6c65c3da"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicDoubleVariable" ref="a8c350a6894fc790b49c2374a6c65c3da" args="" -->
+<a class="anchor" id="a994c2719501165413e3d152466b99165"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::FloatVariable" ref="a994c2719501165413e3d152466b99165" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicDouble</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicDoubleVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6843a2ffb49c82d6a8ac7e8ed9c4881a"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicDynamicPointerVariable" ref="a6843a2ffb49c82d6a8ac7e8ed9c4881a" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_extended.html">AtomicDynamicPointer</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicDynamicPointerVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad9fbfb915ce904d46cf2fcd7d87709f7"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicExtendedPointerVariable" ref="ad9fbfb915ce904d46cf2fcd7d87709f7" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_extended.html">AtomicExtendedPointer</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicExtendedPointerVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af79f2c3ff5766324859cdc8931399674"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicFloatVariable" ref="af79f2c3ff5766324859cdc8931399674" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicFloat</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicFloatVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1a9ea1c92f7418eeb90a2a228b898278"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicIntVariable" ref="a1a9ea1c92f7418eeb90a2a228b898278" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicInt</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicIntVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1e8591bee9963c14eb28f0a137e6a8cc"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicLongLongVariable" ref="a1e8591bee9963c14eb28f0a137e6a8cc" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicLongLong</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicLongLongVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a21b1d95e503465535e325c2959b440f2"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicLongVariable" ref="a21b1d95e503465535e325c2959b440f2" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicLong</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicLongVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afe13c4b83cd5b1d7bf87a2b276db61cb"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicPointerVariable" ref="afe13c4b83cd5b1d7bf87a2b276db61cb" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicPointer</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicPointerVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6c9fa65320011ab4a2e2ae0ee4b2020b"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::BoolVariable" ref="a6c9fa65320011ab4a2e2ae0ee4b2020b" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;bool&gt; <a class="el" href="class_variable.html">BoolVariable</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aef09299647df6e095dad8a5288018773"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::CharVariable" ref="aef09299647df6e095dad8a5288018773" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;char&gt; <a class="el" href="class_variable.html">CharVariable</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;float&gt; <a class="el" href="class_variable.html">FloatVariable</a></td>
         </tr>
       </table>
 </div>
@@ -249,12 +172,25 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a994c2719501165413e3d152466b99165"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::FloatVariable" ref="a994c2719501165413e3d152466b99165" args="" -->
+<a class="anchor" id="a4fd5c923cd03476dfaddcd5d56fe4f36"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::IntVariable" ref="a4fd5c923cd03476dfaddcd5d56fe4f36" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;float&gt; <a class="el" href="class_variable.html">FloatVariable</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;int&gt; <a class="el" href="class_variable.html">IntVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa28ecd89570d3c918c0a752a44c39a0d"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::ShortVariable" ref="aa28ecd89570d3c918c0a752a44c39a0d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;short&gt; <a class="el" href="class_variable.html">ShortVariable</a></td>
         </tr>
       </table>
 </div>
@@ -275,12 +211,12 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4fd5c923cd03476dfaddcd5d56fe4f36"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::IntVariable" ref="a4fd5c923cd03476dfaddcd5d56fe4f36" args="" -->
+<a class="anchor" id="a4d1840c29827048d9ab557fb9209a254"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::LongVariable" ref="a4d1840c29827048d9ab557fb9209a254" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;int&gt; <a class="el" href="class_variable.html">IntVariable</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;Long&gt; <a class="el" href="class_variable.html">LongVariable</a></td>
         </tr>
       </table>
 </div>
@@ -301,12 +237,12 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4d1840c29827048d9ab557fb9209a254"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::LongVariable" ref="a4d1840c29827048d9ab557fb9209a254" args="" -->
+<a class="anchor" id="aef09299647df6e095dad8a5288018773"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::CharVariable" ref="aef09299647df6e095dad8a5288018773" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;Long&gt; <a class="el" href="class_variable.html">LongVariable</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;char&gt; <a class="el" href="class_variable.html">CharVariable</a></td>
         </tr>
       </table>
 </div>
@@ -314,12 +250,623 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa28ecd89570d3c918c0a752a44c39a0d"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::ShortVariable" ref="aa28ecd89570d3c918c0a752a44c39a0d" args="" -->
+<a class="anchor" id="a6c9fa65320011ab4a2e2ae0ee4b2020b"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::BoolVariable" ref="a6c9fa65320011ab4a2e2ae0ee4b2020b" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;short&gt; <a class="el" href="class_variable.html">ShortVariable</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;bool&gt; <a class="el" href="class_variable.html">BoolVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af79f2c3ff5766324859cdc8931399674"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicFloatVariable" ref="af79f2c3ff5766324859cdc8931399674" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicFloat</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicFloatVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8c350a6894fc790b49c2374a6c65c3da"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicDoubleVariable" ref="a8c350a6894fc790b49c2374a6c65c3da" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicDouble</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicDoubleVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1a9ea1c92f7418eeb90a2a228b898278"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicIntVariable" ref="a1a9ea1c92f7418eeb90a2a228b898278" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicInt</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicIntVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a21b1d95e503465535e325c2959b440f2"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicLongVariable" ref="a21b1d95e503465535e325c2959b440f2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicLong</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicLongVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1e8591bee9963c14eb28f0a137e6a8cc"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicLongLongVariable" ref="a1e8591bee9963c14eb28f0a137e6a8cc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicLongLong</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicLongLongVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afe13c4b83cd5b1d7bf87a2b276db61cb"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicPointerVariable" ref="afe13c4b83cd5b1d7bf87a2b276db61cb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_value.html">AtomicPointer</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicPointerVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad9fbfb915ce904d46cf2fcd7d87709f7"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicExtendedPointerVariable" ref="ad9fbfb915ce904d46cf2fcd7d87709f7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_extended.html">AtomicExtendedPointer</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicExtendedPointerVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6843a2ffb49c82d6a8ac7e8ed9c4881a"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::AtomicDynamicPointerVariable" ref="a6843a2ffb49c82d6a8ac7e8ed9c4881a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_atomic_extended.html">AtomicDynamicPointer</a>&amp;&gt; <a class="el" href="class_variable.html">AtomicDynamicPointerVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac13a48c601194fd53699f0171649e4c6"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::FloatArrayVariable" ref="ac13a48c601194fd53699f0171649e4c6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">FloatArray</a>&amp;&gt; <a class="el" href="class_variable.html">FloatArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6baa588de41decaf6fc3379d1ed0c776"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::DoubleArrayVariable" ref="a6baa588de41decaf6fc3379d1ed0c776" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">DoubleArray</a>&amp;&gt; <a class="el" href="class_variable.html">DoubleArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad58b076ba64970ccec01f64f4f3ae42d"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::IntArrayVariable" ref="ad58b076ba64970ccec01f64f4f3ae42d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">IntArray</a>&amp;&gt; <a class="el" href="class_variable.html">IntArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afcf235e4479c5ff924fc2371dd981c44"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::ShortArrayVariable" ref="afcf235e4479c5ff924fc2371dd981c44" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">ShortArray</a>&amp;&gt; <a class="el" href="class_variable.html">ShortArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3be46e200c3b769a08e1934240d3b84f"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::Int24ArrayVariable" ref="a3be46e200c3b769a08e1934240d3b84f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">Int24Array</a>&amp;&gt; <a class="el" href="class_variable.html">Int24ArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a512022a6cb3452a29eb4c9854ec8fd6b"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::LongArrayVariable" ref="a512022a6cb3452a29eb4c9854ec8fd6b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">LongArray</a>&amp;&gt; <a class="el" href="class_variable.html">LongArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a363442a11ffddcf074c6ab40c51fef28"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::CharArrayVariable" ref="a363442a11ffddcf074c6ab40c51fef28" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">CharArray</a>&amp;&gt; <a class="el" href="class_variable.html">CharArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adc280b62e9eb5085c8cfd85f6b8a9fbe"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::BoolArrayVariable" ref="adc280b62e9eb5085c8cfd85f6b8a9fbe" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">BoolArray</a>&amp;&gt; <a class="el" href="class_variable.html">BoolArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5d4cdc51dffa29300f1cc09ff930d2f2"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::BufferVariable" ref="a5d4cdc51dffa29300f1cc09ff930d2f2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_numerical_array.html">Buffer</a>&amp;&gt; <a class="el" href="class_variable.html">BufferVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaf9ccf878a0c62adab2c0a5288a3a765"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::TextVariable" ref="aaf9ccf878a0c62adab2c0a5288a3a765" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_text.html">Text</a>&amp;&gt; <a class="el" href="class_variable.html">TextVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4691f74b2f622eae65ab9a611414cf53"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::TextArrayVariable" ref="a4691f74b2f622eae65ab9a611414cf53" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_text_array.html">TextArray</a>&amp;&gt; <a class="el" href="class_variable.html">TextArrayVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab80cbf0f81ad15f986bfef19636c8b65"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::FloatBreakpointVariable" ref="ab80cbf0f81ad15f986bfef19636c8b65" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoint_base.html">FloatBreakpoint</a>&amp;&gt; <a class="el" href="class_variable.html">FloatBreakpointVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a21ef40926547ecd7b626e9680121601b"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::DoubleBreakpointVariable" ref="a21ef40926547ecd7b626e9680121601b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoint_base.html">DoubleBreakpoint</a>&amp;&gt; <a class="el" href="class_variable.html">DoubleBreakpointVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4d0459e133370e31e704730027a64573"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::IntBreakpointVariable" ref="a4d0459e133370e31e704730027a64573" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoint_base.html">IntBreakpoint</a>&amp;&gt; <a class="el" href="class_variable.html">IntBreakpointVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2be0dc4dd93dd87769615fb0acdcc249"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::ShortBreakpointVariable" ref="a2be0dc4dd93dd87769615fb0acdcc249" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoint_base.html">ShortBreakpoint</a>&amp;&gt; <a class="el" href="class_variable.html">ShortBreakpointVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af6ac377d892fe9062f30dbfff78b5e92"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::Int24BreakpointVariable" ref="af6ac377d892fe9062f30dbfff78b5e92" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoint_base.html">Int24Breakpoint</a>&amp;&gt; <a class="el" href="class_variable.html">Int24BreakpointVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad554ae3fd3f5d292bddb3b1a1305755f"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::LongBreakpointVariable" ref="ad554ae3fd3f5d292bddb3b1a1305755f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoint_base.html">LongBreakpoint</a>&amp;&gt; <a class="el" href="class_variable.html">LongBreakpointVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8a207302cc66dd227c4af16ecef06c64"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::BreakpointVariable" ref="a8a207302cc66dd227c4af16ecef06c64" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoint_base.html">Breakpoint</a>&amp;&gt; <a class="el" href="class_variable.html">BreakpointVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa43c06fd37055e3e7659d55d45eb002a"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::FloatBreakpointsVariable" ref="aa43c06fd37055e3e7659d55d45eb002a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoints_base.html">FloatBreakpoints</a>&amp;&gt; <a class="el" href="class_variable.html">FloatBreakpointsVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abfd77a5c47b116602feaebf5527cb4f5"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::DoubleBreakpointsVariable" ref="abfd77a5c47b116602feaebf5527cb4f5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoints_base.html">DoubleBreakpoints</a>&amp;&gt; <a class="el" href="class_variable.html">DoubleBreakpointsVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afa8d51518566a6bbfc883ed32992247e"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::IntBreakpointsVariable" ref="afa8d51518566a6bbfc883ed32992247e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoints_base.html">IntBreakpoints</a>&amp;&gt; <a class="el" href="class_variable.html">IntBreakpointsVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5a053ff8714555ad7dadbbc3e8213eb2"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::ShortBreakpointsVariable" ref="a5a053ff8714555ad7dadbbc3e8213eb2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoints_base.html">ShortBreakpoints</a>&amp;&gt; <a class="el" href="class_variable.html">ShortBreakpointsVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3ac694ebe1f986c722a84465f6c5d3d2"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::Int24BreakpointsVariable" ref="a3ac694ebe1f986c722a84465f6c5d3d2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoints_base.html">Int24Breakpoints</a>&amp;&gt; <a class="el" href="class_variable.html">Int24BreakpointsVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1e9b28f247fff95f29118a3cda9f5bf5"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::LongBreakpointsVariable" ref="a1e9b28f247fff95f29118a3cda9f5bf5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoints_base.html">LongBreakpoints</a>&amp;&gt; <a class="el" href="class_variable.html">LongBreakpointsVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaa7c8bf8dbe4ce0eaf276c3755bfda50"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::BreakpointsVariable" ref="aaa7c8bf8dbe4ce0eaf276c3755bfda50" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_breakpoints_base.html">Breakpoints</a>&amp;&gt; <a class="el" href="class_variable.html">BreakpointsVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac713cb3c76b83a5ce1047c5082f0d781"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::FloatWavetableVariable" ref="ac713cb3c76b83a5ce1047c5082f0d781" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_wavetable_base.html">FloatWavetable</a>&amp;&gt; <a class="el" href="class_variable.html">FloatWavetableVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa7242f44cd5a7faa025e9f29bf99ae93"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::DoubleWavetableVariable" ref="aa7242f44cd5a7faa025e9f29bf99ae93" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_wavetable_base.html">DoubleWavetable</a>&amp;&gt; <a class="el" href="class_variable.html">DoubleWavetableVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab4dac73bdafbdcae4115bf98b2b7f499"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::IntWavetableVariable" ref="ab4dac73bdafbdcae4115bf98b2b7f499" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_wavetable_base.html">IntWavetable</a>&amp;&gt; <a class="el" href="class_variable.html">IntWavetableVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2a51565725a77555d93852a278223bf9"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::ShortWavetableVariable" ref="a2a51565725a77555d93852a278223bf9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_wavetable_base.html">ShortWavetable</a>&amp;&gt; <a class="el" href="class_variable.html">ShortWavetableVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0e81a2452b6af7101ac62390063265aa"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::Int24WavetableVariable" ref="a0e81a2452b6af7101ac62390063265aa" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_wavetable_base.html">Int24Wavetable</a>&amp;&gt; <a class="el" href="class_variable.html">Int24WavetableVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0dbe7a53c76c231775668bfd2d1e51a8"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::LongWavetableVariable" ref="a0dbe7a53c76c231775668bfd2d1e51a8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_wavetable_base.html">LongWavetable</a>&amp;&gt; <a class="el" href="class_variable.html">LongWavetableVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af11414750a46267b18bca49ea79bc73e"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::WavetableVariable" ref="af11414750a46267b18bca49ea79bc73e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_wavetable_base.html">Wavetable</a>&amp;&gt; <a class="el" href="class_variable.html">WavetableVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4d91d075de5a4b0936764236686ab122"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::FloatSignalVariable" ref="a4d91d075de5a4b0936764236686ab122" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_signal_base.html">FloatSignal</a>&amp;&gt; <a class="el" href="class_variable.html">FloatSignalVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab0846f8fc30505464afcf63b329d37ed"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::DoubleSignalVariable" ref="ab0846f8fc30505464afcf63b329d37ed" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_signal_base.html">DoubleSignal</a>&amp;&gt; <a class="el" href="class_variable.html">DoubleSignalVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae885b4179d98e5f4585304159f9320c6"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::IntSignalVariable" ref="ae885b4179d98e5f4585304159f9320c6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_signal_base.html">IntSignal</a>&amp;&gt; <a class="el" href="class_variable.html">IntSignalVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3666b09c2884425cd68cd29e8e01b106"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::ShortSignalVariable" ref="a3666b09c2884425cd68cd29e8e01b106" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_signal_base.html">ShortSignal</a>&amp;&gt; <a class="el" href="class_variable.html">ShortSignalVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1b5df34475f8e05a0803316d6d49d87f"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::Int24SignalVariable" ref="a1b5df34475f8e05a0803316d6d49d87f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_signal_base.html">Int24Signal</a>&amp;&gt; <a class="el" href="class_variable.html">Int24SignalVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a86909225c022f8f7cb01bddb061ab18b"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::LongSignalVariable" ref="a86909225c022f8f7cb01bddb061ab18b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_signal_base.html">LongSignal</a>&amp;&gt; <a class="el" href="class_variable.html">LongSignalVariable</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a41014f28a04092f091ad56747db3e0d2"></a><!-- doxytag: member="plonk_VariableForwardDeclarations.h::SignalVariable" ref="a41014f28a04092f091ad56747db3e0d2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_variable.html">Variable</a>&lt;<a class="el" href="class_signal_base.html">Signal</a>&amp;&gt; <a class="el" href="class_variable.html">SignalVariable</a></td>
         </tr>
       </table>
 </div>
@@ -342,7 +889,7 @@ Typedefs</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

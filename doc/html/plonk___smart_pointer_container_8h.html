@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,25 +57,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_32165843d27efd022843dfaad1c0372c.html">core</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Defines</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">plonk_SmartPointerContainer.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="plonk___smart_pointer_8h_source.html">plonk_SmartPointer.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___weak_pointer_8h_source.html">plonk_WeakPointer.h</a>&quot;</code><br/>
-</div>
+
 <p><a href="plonk___smart_pointer_container_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
@@ -85,13 +76,37 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This manages a <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> pointer.  <a href="class_smart_pointer_container_base.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container.html">SmartPointerContainer&lt; SmartPointerType, enableWeak &gt;</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_pointer_container_3_01_smart_pointer_type_00_01true_01_4.html">SmartPointerContainer&lt; SmartPointerType, true &gt;</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer&lt; ScopedPointerType &gt;</a></td></tr>
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Defines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(Type)</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SmartPointerContainerType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="plonk___smart_pointer_container_8h.html#a6b263c7a668e5ae72e56daa0c29bd498">swap</a> (SmartPointerContainerType const &amp;a, SmartPointerContainerType const &amp;b)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="plonk___smart_pointer_container_8h.html#a077748671563863fb92c4ae0bf0270b8">swap</a> (SmartPointerContainerType &amp;a, SmartPointerContainerType &amp;b)  throw ()</td></tr>
 </table>
+<hr/><h2>Define Documentation</h2>
+<a class="anchor" id="a0544c934438d4bc87b159fc1675a69fd"></a><!-- doxytag: member="plonk_SmartPointerContainer.h::PLONK_OBJECTARROWOPERATOR" ref="a0544c934438d4bc87b159fc1675a69fd" args="(Type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLONK_OBJECTARROWOPERATOR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment"><span class="keyword">inline</span> Type* operator-&gt;() throw() { <span class="keywordflow">return</span> <span class="keyword">this</span>; } \
+        <span class="keyword">inline</span> <span class="keyword">const</span> Type* operator-&gt;() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> <span class="keyword">this</span>; }
+</pre></div>
+</div>
+</div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a6b263c7a668e5ae72e56daa0c29bd498"></a><!-- doxytag: member="plonk_SmartPointerContainer.h::swap" ref="a6b263c7a668e5ae72e56daa0c29bd498" args="(SmartPointerContainerType const &amp;a, SmartPointerContainerType const &amp;b)" -->
+<a class="anchor" id="a077748671563863fb92c4ae0bf0270b8"></a><!-- doxytag: member="plonk_SmartPointerContainer.h::swap" ref="a077748671563863fb92c4ae0bf0270b8" args="(SmartPointerContainerType &amp;a, SmartPointerContainerType &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -100,13 +115,13 @@ template&lt;class SmartPointerContainerType &gt; </div>
         <tr>
           <td class="memname">void swap </td>
           <td>(</td>
-          <td class="paramtype">SmartPointerContainerType const &amp;&#160;</td>
+          <td class="paramtype">SmartPointerContainerType &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">SmartPointerContainerType const &amp;&#160;</td>
+          <td class="paramtype">SmartPointerContainerType &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -135,7 +150,7 @@ template&lt;class SmartPointerContainerType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

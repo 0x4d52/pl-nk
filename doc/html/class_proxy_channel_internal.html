@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,21 +68,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ProxyChannelInternal&lt; SampleType &gt; Class Template Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="ProxyChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___proxy_channel_internal_8h_source.html">plonk_ProxyChannelInternal.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="ProxyChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" --><div class="dynheader">
 Inheritance diagram for ProxyChannelInternal&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_proxy_channel_internal.png" usemap="#ProxyChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="ProxyChannelInternal&lt; SampleType &gt;_map" name="ProxyChannelInternal&lt; SampleType &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,168,895,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,112,714,136"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,224,895,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,168,714,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,168,1076,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,352,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,112,714,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,112,1076,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,352,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,56,714,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,56,1076,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,352,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,352,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,352,24"/>
 </map>
  </div></div>
 
@@ -115,8 +113,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#a2d6f5daadf3f1f0b26faedb8ee90c840">getNumChannels</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#aeaf9c14f6cd394b352e2d8828bff44f8">initChannel</a> (const int channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to initialise the channel's initial value.  <a href="#aeaf9c14f6cd394b352e2d8828bff44f8"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#a461146a715e59e231ce1ddb9ea39c0e0">deleteIfOnlyMutualReferencesRemain</a> ()  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To check for mutual-only references remaining.  <a href="#a461146a715e59e231ce1ddb9ea39c0e0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proxy_channel_internal.html#ae0f6c255c3b8fcc8a9e98fd4dd471bd9">process</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The DSP function.  <a href="#ae0f6c255c3b8fcc8a9e98fd4dd471bd9"></a><br/></td></tr>
 </table>
@@ -124,55 +120,6 @@ Public Member Functions</h2></td></tr>
  class ProxyChannelInternal&lt; SampleType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="abb12698db4f8ceed9ac2062a35a37ca4"></a><!-- doxytag: member="ProxyChannelInternal::Buffer" ref="abb12698db4f8ceed9ac2062a35a37ca4" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab4f1338500ac7c180fa7d9a95230be5a"></a><!-- doxytag: member="ProxyChannelInternal::ChannelArrayType" ref="ab4f1338500ac7c180fa7d9a95230be5a" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_object_array.html">ChannelArrayType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1c0b256463e67c38a632711e920d5483"></a><!-- doxytag: member="ProxyChannelInternal::ChannelType" ref="a1c0b256463e67c38a632711e920d5483" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="aeb338274a6276759880ff05e8d57eca9"></a><!-- doxytag: member="ProxyChannelInternal::Data" ref="aeb338274a6276759880ff05e8d57eca9" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -193,20 +140,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afa6ce98a6b6d4dd3f617aa83f8b9c992"></a><!-- doxytag: member="ProxyChannelInternal::Inputs" ref="afa6ce98a6b6d4dd3f617aa83f8b9c992" args="" -->
+<a class="anchor" id="a1c0b256463e67c38a632711e920d5483"></a><!-- doxytag: member="ProxyChannelInternal::ChannelType" ref="a1c0b256463e67c38a632711e920d5483" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab4f1338500ac7c180fa7d9a95230be5a"></a><!-- doxytag: member="ProxyChannelInternal::ChannelArrayType" ref="ab4f1338500ac7c180fa7d9a95230be5a" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_object_array.html">ChannelArrayType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -259,6 +221,40 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="afa6ce98a6b6d4dd3f617aa83f8b9c992"></a><!-- doxytag: member="ProxyChannelInternal::Inputs" ref="afa6ce98a6b6d4dd3f617aa83f8b9c992" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abb12698db4f8ceed9ac2062a35a37ca4"></a><!-- doxytag: member="ProxyChannelInternal::Buffer" ref="abb12698db4f8ceed9ac2062a35a37ca4" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a0c8ed6a2e64b3729f283f56afe23653c"></a><!-- doxytag: member="ProxyChannelInternal::ProxyChannelInternal" ref="a0c8ed6a2e64b3729f283f56afe23653c" args="(ChannelType const &amp;proxyOwner, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate, const int index)" -->
 <div class="memitem">
@@ -308,48 +304,23 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a461146a715e59e231ce1ddb9ea39c0e0"></a><!-- doxytag: member="ProxyChannelInternal::deleteIfOnlyMutualReferencesRemain" ref="a461146a715e59e231ce1ddb9ea39c0e0" args="()" -->
+<a class="anchor" id="a0c4bc8b6562f013b7a08d2245f93463a"></a><!-- doxytag: member="ProxyChannelInternal::getName" ref="a0c4bc8b6562f013b7a08d2245f93463a" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::deleteIfOnlyMutualReferencesRemain </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::getName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>To check for mutual-only references remaining. </p>
-<p>Most <a class="el" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a> subclass don't need this but some which naturally form circular references may need to detect this state and release themselves. </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_proxy_owner_channel_internal.html" title="Where true multiple-input-multiple-output units are needed This is where all outputs depend on all in...">ProxyOwnerChannelInternal</a>, <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a> </dd></dl>
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer.html#a7926abda357aff5a8f40c9dc9873c6da">SmartPointer</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6c85c72f54c4908c2a303396959889ec"></a><!-- doxytag: member="ProxyChannelInternal::getChannel" ref="a6c85c72f54c4908c2a303396959889ec" args="(const int)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -393,14 +364,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0c4bc8b6562f013b7a08d2245f93463a"></a><!-- doxytag: member="ProxyChannelInternal::getName" ref="a0c4bc8b6562f013b7a08d2245f93463a" args="() const " -->
+<a class="anchor" id="a278f8a2f0b4880b7b65d586b681020d7"></a><!-- doxytag: member="ProxyChannelInternal::setLabel" ref="a278f8a2f0b4880b7b65d586b681020d7" args="(Text const &amp;newId)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::getName </td>
+          <td class="memname">void <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::setLabel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
+          <td class="paramname"><em>newId</em></td><td>)</td>
+          <td>  throw ()<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#ab2074527635ab833ba3cd9b98e759731">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a35e4616aba2878b70f0ff28c865cf6bf"></a><!-- doxytag: member="ProxyChannelInternal::isProxy" ref="a35e4616aba2878b70f0ff28c865cf6bf" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::isProxy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline, virtual]</code></td>
@@ -409,7 +401,28 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#af679e95482b03a76e5f6c78200ba1d24">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6c85c72f54c4908c2a303396959889ec"></a><!-- doxytag: member="ProxyChannelInternal::getChannel" ref="a6c85c72f54c4908c2a303396959889ec" args="(const int)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="class_channel_internal_base.html#a73d7491f2a14b4724f7852272fd6632d">ChannelInternalBase&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -457,26 +470,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a35e4616aba2878b70f0ff28c865cf6bf"></a><!-- doxytag: member="ProxyChannelInternal::isProxy" ref="a35e4616aba2878b70f0ff28c865cf6bf" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::isProxy </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#af679e95482b03a76e5f6c78200ba1d24">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ae0f6c255c3b8fcc8a9e98fd4dd471bd9"></a><!-- doxytag: member="ProxyChannelInternal::process" ref="ae0f6c255c3b8fcc8a9e98fd4dd471bd9" args="(ProcessInfo &amp;info, const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -511,27 +504,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a278f8a2f0b4880b7b65d586b681020d7"></a><!-- doxytag: member="ProxyChannelInternal::setLabel" ref="a278f8a2f0b4880b7b65d586b681020d7" args="(Text const &amp;newId)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_proxy_channel_internal.html">ProxyChannelInternal</a>&lt; SampleType &gt;::setLabel </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_text.html">Text</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newId</em></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal_core.html#ab2074527635ab833ba3cd9b98e759731">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___proxy_channel_internal_8h_source.html">plonk_ProxyChannelInternal.h</a></li>
 </ul>
@@ -550,7 +522,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

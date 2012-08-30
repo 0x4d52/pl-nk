@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -77,11 +76,14 @@ This is the complete list of members for <a class="el" href="class_threading_1_1
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#ae8f792258076e7a3d886cf3eca777b8c">getID</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e">getShouldExit</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#aa09e7addc297931a3dab8740e88b624f">isRunning</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a9403dc7ff1d22254e706a720bed6297f">pause</a>(const double duration=PLONK_INFINITY)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#adcdf6643b10513084505dd9403be5e13">resume</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32">run</a>()=0</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9">setShouldExit</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#afac6cb66c5ab59a6a3f371dbea00e898">setShouldExitAndWait</a>(const double interval=0.000001)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a6e52ef55ffcba982eb270909564f607e">sleep</a>(const double seconds)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [protected, static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">start</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a434228db8b77856420ba78166849c820">Thread</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#ae985d730801d4679590869393ef044a8">Thread</a>(const char *name=0)</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a69a1d2b26ec63699833c4b3c86719fb4">wait</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#afd1de33dbda00617731d7b5498af1b88">yield</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [protected, static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_threading_1_1_thread.html#a7fb203f137956ef48da44e4426b73ab1">~Thread</a>()</td><td><a class="el" href="class_threading_1_1_thread.html">Threading::Thread</a></td><td><code> [virtual]</code></td></tr>
@@ -100,7 +102,7 @@ This is the complete list of members for <a class="el" href="class_threading_1_1
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

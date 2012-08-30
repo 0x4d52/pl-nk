@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,18 +68,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ObjectArray2DBase&lt; ArrayType, RowType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="ObjectArray2DBase" --><!-- doxytag: inherits="ObjectArray&lt; RowType &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___object_array2_d_8h_source.html">plonk_ObjectArray2D.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="ObjectArray2DBase" --><!-- doxytag: inherits="ObjectArray&lt; RowType &gt;" --><div class="dynheader">
 Inheritance diagram for ObjectArray2DBase&lt; ArrayType, RowType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_object_array2_d_base.png" usemap="#ObjectArray2DBase&lt; ArrayType, RowType &gt;_map" alt=""/>
   <map id="ObjectArray2DBase&lt; ArrayType, RowType &gt;_map" name="ObjectArray2DBase&lt; ArrayType, RowType &gt;_map">
-<area href="class_object_array.html" alt="ObjectArray&lt; RowType &gt;" shape="rect" coords="0,112,379,136"/>
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,56,379,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,0,379,24"/>
-<area href="class_object_array2_d.html" alt="ObjectArray2D&lt; ArrayType, RowType &gt;" shape="rect" coords="0,224,379,248"/>
+<area href="class_object_array.html" alt="ObjectArray&lt; RowType &gt;" shape="rect" coords="0,168,379,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,112,379,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; ObjectArrayInternal&lt; RowType &gt; &gt;" shape="rect" coords="0,56,379,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,379,24"/>
+<area href="class_object_array2_d.html" alt="ObjectArray2D&lt; ArrayType, RowType &gt;" shape="rect" coords="0,280,379,304"/>
 </map>
  </div></div>
 
@@ -96,6 +94,7 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; ArrayType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#ac0172794d04ff0e0a3b53991cacc064e">ObjectArrayType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a><br class="typebreak"/>
 &lt; <a class="el" href="class_object_array.html">ObjectArrayType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#ae89d9e78a5541db757f788be14fd8ffa">ObjectArray2DType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef Base::InitialObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#adfea50ecaa644057453f697343f44ed2">ObjectArray2DBase</a> (const int rows=0)  throw ()</td></tr>
@@ -106,7 +105,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a4ec5ba03d39166042be95c1a5efa2022">ObjectArray2DBase</a> (<a class="el" href="class_dynamic.html">Dynamic</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a859f7ef320df9065003bfc7d2466edbb">operator=</a> (<a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#a859f7ef320df9065003bfc7d2466edbb"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a7a7d522d1af5033d5d9f0c86d6abf87d">ObjectArray2DBase</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03=RowType())  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#ad6379689c32fc1486e239c4817899b5f">ObjectArray2DBase</a> (<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i00, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i01, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i02, <a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;i03=<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>())  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a7b07f733d12e88933b37e55d21dc6a1a">ObjectArray2DBase</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05=RowType(), RowType const &amp;i06=RowType(), RowType const &amp;i07=RowType())  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a23cce44048e6ca3f26ee87b6d2154817">ObjectArray2DBase</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05, RowType const &amp;i06, RowType const &amp;i07, RowType const &amp;i08, RowType const &amp;i09=RowType(), RowType const &amp;i10=RowType(), RowType const &amp;i11=RowType(), RowType const &amp;i12=RowType(), RowType const &amp;i13=RowType(), RowType const &amp;i14=RowType(), RowType const &amp;i15=RowType())  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_array2_d_base.html#a75da4622e910481c754e2c78ca4c0d57">ObjectArray2DBase</a> (RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03, RowType const &amp;i04, RowType const &amp;i05, RowType const &amp;i06, RowType const &amp;i07, RowType const &amp;i08, RowType const &amp;i09, RowType const &amp;i10, RowType const &amp;i11, RowType const &amp;i12, RowType const &amp;i13, RowType const &amp;i14, RowType const &amp;i15, RowType const &amp;i16, RowType const &amp;i17=RowType(), RowType const &amp;i18=RowType(), RowType const &amp;i19=RowType(), RowType const &amp;i20=RowType(), RowType const &amp;i21=RowType(), RowType const &amp;i22=RowType(), RowType const &amp;i23=RowType(), RowType const &amp;i24=RowType(), RowType const &amp;i25=RowType(), RowType const &amp;i26=RowType(), RowType const &amp;i27=RowType(), RowType const &amp;i28=RowType(), RowType const &amp;i29=RowType(), RowType const &amp;i30=RowType(), RowType const &amp;i31=RowType())  throw ()</td></tr>
@@ -132,25 +131,6 @@ Public Member Functions</h2></td></tr>
  class ObjectArray2DBase&lt; ArrayType, RowType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a9a46eca4c5a894f4ecb3d7cbf7a3462c"></a><!-- doxytag: member="ObjectArray2DBase::Base" ref="a9a46eca4c5a894f4ecb3d7cbf7a3462c" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ArrayType, class RowType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;RowType&gt; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">Base</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_object_array.html#ac7bfd85e2cea665ac9d4e01e8589f422">ObjectArray&lt; RowType &gt;</a>.</p>
-
-<p>Reimplemented in <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text_array.html#a8d408f4f51410b6562659e2d7b5ee5ac">TextArray</a>, <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; SampleType &gt;</a>, and <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; float &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a141a85933e2f5cbd19112237189e1dbb"></a><!-- doxytag: member="ObjectArray2DBase::Internal" ref="a141a85933e2f5cbd19112237189e1dbb" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -170,22 +150,41 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae89d9e78a5541db757f788be14fd8ffa"></a><!-- doxytag: member="ObjectArray2DBase::ObjectArray2DType" ref="ae89d9e78a5541db757f788be14fd8ffa" args="" -->
+<a class="anchor" id="a9a46eca4c5a894f4ecb3d7cbf7a3462c"></a><!-- doxytag: member="ObjectArray2DBase::Base" ref="a9a46eca4c5a894f4ecb3d7cbf7a3462c" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_object_array.html">ObjectArrayType</a>&gt; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">ObjectArray2DType</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;RowType&gt; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">Base</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_object_array.html#a1a434ddf2302f5be2f1bfa6e1d6f3ebe">ObjectArray&lt; RowType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_object_array.html#ac7bfd85e2cea665ac9d4e01e8589f422">ObjectArray&lt; RowType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#afb24269ea2a87c3820774bed41d0e5a8">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; SampleType &gt;</a>, and <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; float &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#aa6956459229b6dfe6a1b7efc5de322e6">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_text_array.html#a8d408f4f51410b6562659e2d7b5ee5ac">TextArray</a>, <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; SampleType &gt;</a>, and <a class="el" href="class_numerical_array2_d.html#ab92dab0b59337d3c22e3c3ae254990ce">NumericalArray2D&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab9129e37869c62293f498c4fb3708b27"></a><!-- doxytag: member="ObjectArray2DBase::Weak" ref="ab9129e37869c62293f498c4fb3708b27" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&gt; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_object_array.html#a504f13d11d38fe6afb48147cbe1b59e4">ObjectArray&lt; RowType &gt;</a>.</p>
+
+<p>Reimplemented in <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#a34387565e8e74e2e94e434ea1eeaad46">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; SampleType &gt;</a>, and <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -208,22 +207,39 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab9129e37869c62293f498c4fb3708b27"></a><!-- doxytag: member="ObjectArray2DBase::Weak" ref="ab9129e37869c62293f498c4fb3708b27" args="" -->
+<a class="anchor" id="ae89d9e78a5541db757f788be14fd8ffa"></a><!-- doxytag: member="ObjectArray2DBase::ObjectArray2DType" ref="ae89d9e78a5541db757f788be14fd8ffa" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&gt; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_object_array.html">ObjectArrayType</a>&gt; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array.html">ObjectArray2DType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_object_array.html#a504f13d11d38fe6afb48147cbe1b59e4">ObjectArray&lt; RowType &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_object_array.html#a1a434ddf2302f5be2f1bfa6e1d6f3ebe">ObjectArray&lt; RowType &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#a34387565e8e74e2e94e434ea1eeaad46">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; SampleType &gt;</a>, and <a class="el" href="class_numerical_array2_d.html#a77e3365acbbee32d05f7404fee924b9f">NumericalArray2D&lt; float &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#afb24269ea2a87c3820774bed41d0e5a8">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; SampleType &gt;</a>, and <a class="el" href="class_numerical_array2_d.html#ad29de714f65b46c01b3b828765eb019d">NumericalArray2D&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6feb47eddc56e4dc7040fd996e721379"></a><!-- doxytag: member="ObjectArray2DBase::InitialObject" ref="a6feb47eddc56e4dc7040fd996e721379" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Base::InitialObject <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_numerical_array2_d.html#af808c02c826e8d9077bafce3ea3110f9">NumericalArray2D&lt; NumericalType, RowType &gt;</a>, <a class="el" href="class_object_array2_d.html#a0c1ef8383f9b39c7f67b266eb41e16b7">ObjectArray2D&lt; ArrayType, RowType &gt;</a>, <a class="el" href="class_numerical_array2_d.html#af808c02c826e8d9077bafce3ea3110f9">NumericalArray2D&lt; SampleType &gt;</a>, and <a class="el" href="class_numerical_array2_d.html#af808c02c826e8d9077bafce3ea3110f9">NumericalArray2D&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -326,7 +342,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a7a7d522d1af5033d5d9f0c86d6abf87d"></a><!-- doxytag: member="ObjectArray2DBase::ObjectArray2DBase" ref="a7a7d522d1af5033d5d9f0c86d6abf87d" args="(RowType const &amp;i00, RowType const &amp;i01, RowType const &amp;i02, RowType const &amp;i03=RowType())" -->
+<a class="anchor" id="ad6379689c32fc1486e239c4817899b5f"></a><!-- doxytag: member="ObjectArray2DBase::ObjectArray2DBase" ref="ad6379689c32fc1486e239c4817899b5f" args="(InitialObject const &amp;i00, InitialObject const &amp;i01, InitialObject const &amp;i02, InitialObject const &amp;i03=InitialObject())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -335,26 +351,26 @@ template&lt;class ArrayType, class RowType&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::<a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a> </td>
           <td>(</td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i00</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i01</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
           <td class="paramname"><em>i02</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RowType const &amp;&#160;</td>
-          <td class="paramname"><em>i03</em> = <code>RowType()</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a> const &amp;&#160;</td>
+          <td class="paramname"><em>i03</em> = <code><a class="el" href="class_object_array2_d_base.html#a6feb47eddc56e4dc7040fd996e721379">InitialObject</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -784,18 +800,49 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aebfb577a164022b86222822e1187318e"></a><!-- doxytag: member="ObjectArray2DBase::columnWrapAt" ref="aebfb577a164022b86222822e1187318e" args="(const int index)" -->
+<a class="anchor" id="a859f7ef320df9065003bfc7d2466edbb"></a><!-- doxytag: member="ObjectArray2DBase::operator=" ref="a859f7ef320df9065003bfc7d2466edbb" args="(ObjectArray2DBase const &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">RowType <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::columnWrapAt </td>
+          <td class="memname"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&amp; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Assignment operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a228f1b0ffdd13ea3d0f88cffe994afbb"></a><!-- doxytag: member="ObjectArray2DBase::ObjectArrayAssignmentDefinition" ref="a228f1b0ffdd13ea3d0f88cffe994afbb" args="(ObjectArray2DBase, RowType)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::ObjectArrayAssignmentDefinition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RowType&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -821,26 +868,6 @@ template&lt;class ArrayType, class RowType&gt; </div>
 <div class="memdoc">
 
 <p>Does the item contain a particular item. </p>
-
-</div>
-</div>
-<a class="anchor" id="adbed4457ecfc4ead043257d91ae700dd"></a><!-- doxytag: member="ObjectArray2DBase::flatten" ref="adbed4457ecfc4ead043257d91ae700dd" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ArrayType, class RowType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">RowType <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::flatten </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Flatten the array to a one dimensional array. </p>
 
 </div>
 </div>
@@ -882,35 +909,6 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a48a1a46956adc5c15b0cfec6d297f3dd"></a><!-- doxytag: member="ObjectArray2DBase::interleave" ref="a48a1a46956adc5c15b0cfec6d297f3dd" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ArrayType, class RowType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_object_array.html">ObjectArrayType</a> <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::interleave </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Interleave the 2D array into one dimension. </p>
-<p>The result will contain the same number of array items but flattened to a one dimensional array.</p>
-<p>Example: </p>
-<div class="fragment"><pre class="fragment">     <a class="code" href="class_numerical_array.html">IntArray</a> source1d (1, 2, 3, 4, 5, 6, 7);
-     
-     <a class="code" href="class_numerical_array2_d.html">IntArray2D</a> dest2d = source1d.<a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="Deinternleave this array into a 2D array with a particular number of groups.">deinterleave</a> (2);
-     <span class="comment">// result will be {{1, 3, 5, 7}, {2, 4, 6}}</span>
-     
-     <a class="code" href="class_numerical_array.html">IntArray</a> dest1d = dest2d.<a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd" title="Interleave the 2D array into one dimension.">interleave</a>();
-     <span class="comment">// result will be {1, 2, 3, 4, 5, 6, 7}</span>
-</pre></div> 
-</div>
-</div>
 <a class="anchor" id="a45476db2dcbb85fd62d1f193cc99a5ba"></a><!-- doxytag: member="ObjectArray2DBase::isMatrix" ref="a45476db2dcbb85fd62d1f193cc99a5ba" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -928,6 +926,26 @@ template&lt;class ArrayType, class RowType&gt; </div>
 <div class="memdoc">
 
 <p>Does each of the rows of the 2D array contain the same number of items. </p>
+
+</div>
+</div>
+<a class="anchor" id="abab907a4c2f115abd51b2b74b92bcd11"></a><!-- doxytag: member="ObjectArray2DBase::numRows" ref="abab907a4c2f115abd51b2b74b92bcd11" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::numRows </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Return the number rows in the 2D array. </p>
 
 </div>
 </div>
@@ -952,14 +970,14 @@ template&lt;class ArrayType, class RowType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="abab907a4c2f115abd51b2b74b92bcd11"></a><!-- doxytag: member="ObjectArray2DBase::numRows" ref="abab907a4c2f115abd51b2b74b92bcd11" args="() const " -->
+<a class="anchor" id="adbed4457ecfc4ead043257d91ae700dd"></a><!-- doxytag: member="ObjectArray2DBase::flatten" ref="adbed4457ecfc4ead043257d91ae700dd" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::numRows </td>
+          <td class="memname">RowType <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::flatten </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -968,58 +986,56 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Return the number rows in the 2D array. </p>
+<p>Flatten the array to a one dimensional array. </p>
 
 </div>
 </div>
-<a class="anchor" id="a228f1b0ffdd13ea3d0f88cffe994afbb"></a><!-- doxytag: member="ObjectArray2DBase::ObjectArrayAssignmentDefinition" ref="a228f1b0ffdd13ea3d0f88cffe994afbb" args="(ObjectArray2DBase, RowType)" -->
+<a class="anchor" id="aebfb577a164022b86222822e1187318e"></a><!-- doxytag: member="ObjectArray2DBase::columnWrapAt" ref="aebfb577a164022b86222822e1187318e" args="(const int index)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ArrayType, class RowType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::ObjectArrayAssignmentDefinition </td>
+          <td class="memname">RowType <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::columnWrapAt </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">RowType&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a859f7ef320df9065003bfc7d2466edbb"></a><!-- doxytag: member="ObjectArray2DBase::operator=" ref="a859f7ef320df9065003bfc7d2466edbb" args="(ObjectArray2DBase const &amp;other)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ArrayType, class RowType&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&amp; <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Assignment operator. </p>
+</div>
+</div>
+<a class="anchor" id="a48a1a46956adc5c15b0cfec6d297f3dd"></a><!-- doxytag: member="ObjectArray2DBase::interleave" ref="a48a1a46956adc5c15b0cfec6d297f3dd" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ArrayType, class RowType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_object_array.html">ObjectArrayType</a> <a class="el" href="class_object_array2_d_base.html">ObjectArray2DBase</a>&lt; ArrayType, RowType &gt;::interleave </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
+<p>Interleave the 2D array into one dimension. </p>
+<p>The result will contain the same number of array items but flattened to a one dimensional array.</p>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment">     <a class="code" href="class_numerical_array.html">IntArray</a> source1d (1, 2, 3, 4, 5, 6, 7);
+     
+     <a class="code" href="class_numerical_array2_d.html">IntArray2D</a> dest2d = source1d.<a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="De-interleave an array into a 2D array.">deinterleave</a> (2);
+     <span class="comment">// result will be {{1, 3, 5, 7}, {2, 4, 6}}</span>
+     
+     <a class="code" href="class_numerical_array.html">IntArray</a> dest1d = dest2d.<a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd" title="Interleave the 2D array into one dimension.">interleave</a>();
+     <span class="comment">// result will be {1, 2, 3, 4, 5, 6, 7}</span>
+</pre></div> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -1040,7 +1056,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:00 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

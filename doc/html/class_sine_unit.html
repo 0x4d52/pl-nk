@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Sine oscillator.  
  <a href="class_sine_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___table_8h_source.html">plonk_Table.h</a>&gt;</code></p>
-
 <p><a href="class_sine_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -108,16 +105,29 @@ Static Public Member Functions</h2></td></tr>
 class SineUnit&lt; SampleType &gt;</h3>
 
 <p>Sine oscillator. </p>
+<p>Factory functions:</p>
+<ul>
+<li>ar (frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)</li>
+<li>kr (frequency=440, mul=1, add=0)</li>
+</ul>
+<p>Inputs:</p>
+<ul>
+<li>frequency: (unit, multi) the frequency of the oscillator in Hz</li>
+<li>mul: (unit, multi) the multiplier applied to the output</li>
+<li>add: (unit, multi) the offset aded to the output</li>
+<li>preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)</li>
+<li>preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)</li>
+</ul>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_table_unit.html" title="Wavetable oscillator.">TableUnit</a> </dd></dl>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="afeff49d5c26e77f42264cf62e99f0695"></a><!-- doxytag: member="SineUnit::ChannelType" ref="afeff49d5c26e77f42264cf62e99f0695" args="" -->
+<a class="anchor" id="a938c848968e5497f90cf908d23e9aba9"></a><!-- doxytag: member="SineUnit::TableInternal" ref="a938c848968e5497f90cf908d23e9aba9" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html">TableInternal</a></td>
         </tr>
       </table>
 </div>
@@ -140,14 +150,89 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af949bc500de2adb7fc2133f0df496bcc"></a><!-- doxytag: member="SineUnit::FrequencyBufferType" ref="af949bc500de2adb7fc2133f0df496bcc" args="" -->
+<a class="anchor" id="afeff49d5c26e77f42264cf62e99f0695"></a><!-- doxytag: member="SineUnit::ChannelType" ref="afeff49d5c26e77f42264cf62e99f0695" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a> <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4b52fa43dd75bb997997907ad6bbe142"></a><!-- doxytag: member="SineUnit::Internal" ref="a4b52fa43dd75bb997997907ad6bbe142" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a>&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51c8ed0a761baf796bb7b64b5e0bbde3"></a><!-- doxytag: member="SineUnit::UnitType" ref="a51c8ed0a761baf796bb7b64b5e0bbde3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a09e602b3fcbbe4e0d50bd51ef85451bf"></a><!-- doxytag: member="SineUnit::Inputs" ref="a09e602b3fcbbe4e0d50bd51ef85451bf" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a61d97f3bd2646e988b09af8ab6e16efd"></a><!-- doxytag: member="SineUnit::WavetableType" ref="a61d97f3bd2646e988b09af8ab6e16efd" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_wavetable_base.html">WavetableType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af9e27ae3d77e97791b1af9e61924ef2e"></a><!-- doxytag: member="SineUnit::TableType" ref="af9e27ae3d77e97791b1af9e61924ef2e" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_table_unit.html">TableUnit</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_unit.html">TableType</a></td>
         </tr>
       </table>
 </div>
@@ -185,89 +270,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a09e602b3fcbbe4e0d50bd51ef85451bf"></a><!-- doxytag: member="SineUnit::Inputs" ref="a09e602b3fcbbe4e0d50bd51ef85451bf" args="" -->
+<a class="anchor" id="af949bc500de2adb7fc2133f0df496bcc"></a><!-- doxytag: member="SineUnit::FrequencyBufferType" ref="af949bc500de2adb7fc2133f0df496bcc" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4b52fa43dd75bb997997907ad6bbe142"></a><!-- doxytag: member="SineUnit::Internal" ref="a4b52fa43dd75bb997997907ad6bbe142" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal.html">ChannelInternal</a>&lt;SampleType,<a class="el" href="struct_channel_data_3_01_table_channel_internal_3_01_sample_type_01_4_01_4.html">Data</a>&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a938c848968e5497f90cf908d23e9aba9"></a><!-- doxytag: member="SineUnit::TableInternal" ref="a938c848968e5497f90cf908d23e9aba9" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_table_channel_internal.html">TableChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_channel_internal.html">TableInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af9e27ae3d77e97791b1af9e61924ef2e"></a><!-- doxytag: member="SineUnit::TableType" ref="af9e27ae3d77e97791b1af9e61924ef2e" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_table_unit.html">TableUnit</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_table_unit.html">TableType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a51c8ed0a761baf796bb7b64b5e0bbde3"></a><!-- doxytag: member="SineUnit::UnitType" ref="a51c8ed0a761baf796bb7b64b5e0bbde3" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_unit_base.html">UnitType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a61d97f3bd2646e988b09af8ab6e16efd"></a><!-- doxytag: member="SineUnit::WavetableType" ref="a61d97f3bd2646e988b09af8ab6e16efd" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_wavetable_base.html">WavetableBase</a>&lt;SampleType&gt; <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_wavetable_base.html">WavetableType</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">TableInternal::FrequencyBufferType</a> <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">FrequencyBufferType</a></td>
         </tr>
       </table>
 </div>
@@ -276,6 +286,24 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ac77db8979031da62dcbb8b1fa764bc85"></a><!-- doxytag: member="SineUnit::getInfo" ref="ac77db8979031da62dcbb8b1fa764bc85" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3a5dee949336bc3a5291179568a9805e"></a><!-- doxytag: member="SineUnit::ar" ref="a3a5dee949336bc3a5291179568a9805e" args="(FrequencyUnitType const &amp;frequency=FrequencyType(440), UnitType const &amp;mul=SampleType(1), UnitType const &amp;add=SampleType(0), BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
@@ -322,24 +350,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Create an audio rate sine oscillator. </p>
-
-</div>
-</div>
-<a class="anchor" id="ac77db8979031da62dcbb8b1fa764bc85"></a><!-- doxytag: member="SineUnit::getInfo" ref="ac77db8979031da62dcbb8b1fa764bc85" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_sine_unit.html">SineUnit</a>&lt; SampleType &gt;::getInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -398,7 +408,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:57 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:03 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

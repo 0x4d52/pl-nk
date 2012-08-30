@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -93,19 +92,6 @@ Functions</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>A simple linked list. </p>
 <hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="gab69c6db82ddd425ecc5676320c6cfb59"></a><!-- doxytag: member="plank_SimpleLinkedList.h::PlankSimpleLinkedListFreeElementDataFunction" ref="gab69c6db82ddd425ecc5676320c6cfb59" args=")(PlankP)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(* <a class="el" href="group___plank_simple_linked_list_class.html#gab69c6db82ddd425ecc5676320c6cfb59">PlankSimpleLinkedListFreeElementDataFunction</a>)(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga3342f22a84c0e412fdcacdc6bfd36c68"></a><!-- doxytag: member="plank_SimpleLinkedList.h::PlankSimpleLinkedListRef" ref="ga3342f22a84c0e412fdcacdc6bfd36c68" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -119,7 +105,147 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gab69c6db82ddd425ecc5676320c6cfb59"></a><!-- doxytag: member="plank_SimpleLinkedList.h::PlankSimpleLinkedListFreeElementDataFunction" ref="gab69c6db82ddd425ecc5676320c6cfb59" args=")(PlankP)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(* <a class="el" href="group___plank_simple_linked_list_class.html#gab69c6db82ddd425ecc5676320c6cfb59">PlankSimpleLinkedListFreeElementDataFunction</a>)(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gae96c88c0a7194126b427d08c8091156f"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_CreateAndInit" ref="gae96c88c0a7194126b427d08c8091156f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a> pl_SimpleLinkedList_CreateAndInit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gacfe01b40682cbf9dbddf02d66c368ab4"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Create" ref="gacfe01b40682cbf9dbddf02d66c368ab4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a> pl_SimpleLinkedList_Create </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga5fe8895d218ad62d37575e7ed5cd7ab2"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Init" ref="ga5fe8895d218ad62d37575e7ed5cd7ab2" args="(PlankSimpleLinkedListRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga41c4eee94c21b7ae33003f17ae79e80b"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_DeInit" ref="ga41c4eee94c21b7ae33003f17ae79e80b" args="(PlankSimpleLinkedListRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_DeInit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gae2323e13ddf21cde1aece4cfbe4f5df4"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Destroy" ref="gae2323e13ddf21cde1aece4cfbe4f5df4" args="(PlankSimpleLinkedListRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_Destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga8becd3c3678bf04cb4d6f68407faebab"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Clear" ref="ga8becd3c3678bf04cb4d6f68407faebab" args="(PlankSimpleLinkedListRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_Clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga5b40a519258dd2d5a854dbb9aa0d8f8a"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_SetFreeElementDataFunction" ref="ga5b40a519258dd2d5a854dbb9aa0d8f8a" args="(PlankSimpleLinkedListRef p, PlankSimpleLinkedListFreeElementDataFunction freeFunction)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_SetFreeElementDataFunction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#gab69c6db82ddd425ecc5676320c6cfb59">PlankSimpleLinkedListFreeElementDataFunction</a>&#160;</td>
+          <td class="paramname"><em>freeFunction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga2a36814a42ab3f713bd6f8def2b9c990"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Add" ref="ga2a36814a42ab3f713bd6f8def2b9c990" args="(PlankSimpleLinkedListRef p, const PlankSimpleLinkedListElementRef element)" -->
 <div class="memitem">
 <div class="memproto">
@@ -129,6 +255,39 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a>&#160;</td>
+          <td class="paramname"><em>element</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga9df0ee45c1ac452565c000fe4ff2d5b1"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_InsertAtIndex" ref="ga9df0ee45c1ac452565c000fe4ff2d5b1" args="(PlankSimpleLinkedListRef p, const PlankLL index, const PlankSimpleLinkedListElementRef element)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_InsertAtIndex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -180,89 +339,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga8becd3c3678bf04cb4d6f68407faebab"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Clear" ref="ga8becd3c3678bf04cb4d6f68407faebab" args="(PlankSimpleLinkedListRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_Clear </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gacfe01b40682cbf9dbddf02d66c368ab4"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Create" ref="gacfe01b40682cbf9dbddf02d66c368ab4" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a> pl_SimpleLinkedList_Create </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gae96c88c0a7194126b427d08c8091156f"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_CreateAndInit" ref="gae96c88c0a7194126b427d08c8091156f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a> pl_SimpleLinkedList_CreateAndInit </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga41c4eee94c21b7ae33003f17ae79e80b"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_DeInit" ref="ga41c4eee94c21b7ae33003f17ae79e80b" args="(PlankSimpleLinkedListRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_DeInit </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gae2323e13ddf21cde1aece4cfbe4f5df4"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Destroy" ref="gae2323e13ddf21cde1aece4cfbe4f5df4" args="(PlankSimpleLinkedListRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_Destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga394b1659789f55f1089942c35b0b738f"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_GetFirst" ref="ga394b1659789f55f1089942c35b0b738f" args="(PlankSimpleLinkedListRef p, PlankSimpleLinkedListElementRef *element)" -->
 <div class="memitem">
 <div class="memproto">
@@ -304,106 +380,6 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a> *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga1dcd6f46a3eb06a39f837dd1722a53b5"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_GetSize" ref="ga1dcd6f46a3eb06a39f837dd1722a53b5" args="(PlankSimpleLinkedListRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> pl_SimpleLinkedList_GetSize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga1d07aef5d806897830e4b9aa54bc509e"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_IndexOf" ref="ga1d07aef5d806897830e4b9aa54bc509e" args="(PlankSimpleLinkedListRef p, const PlankSimpleLinkedListElementRef element, PlankLL *index)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_IndexOf </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a>&#160;</td>
-          <td class="paramname"><em>element</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga5fe8895d218ad62d37575e7ed5cd7ab2"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_Init" ref="ga5fe8895d218ad62d37575e7ed5cd7ab2" args="(PlankSimpleLinkedListRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga9df0ee45c1ac452565c000fe4ff2d5b1"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_InsertAtIndex" ref="ga9df0ee45c1ac452565c000fe4ff2d5b1" args="(PlankSimpleLinkedListRef p, const PlankLL index, const PlankSimpleLinkedListElementRef element)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_InsertAtIndex </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a>&#160;</td>
           <td class="paramname"><em>element</em>&#160;</td>
         </tr>
         <tr>
@@ -504,12 +480,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga5b40a519258dd2d5a854dbb9aa0d8f8a"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_SetFreeElementDataFunction" ref="ga5b40a519258dd2d5a854dbb9aa0d8f8a" args="(PlankSimpleLinkedListRef p, PlankSimpleLinkedListFreeElementDataFunction freeFunction)" -->
+<a class="anchor" id="ga1d07aef5d806897830e4b9aa54bc509e"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_IndexOf" ref="ga1d07aef5d806897830e4b9aa54bc509e" args="(PlankSimpleLinkedListRef p, const PlankSimpleLinkedListElementRef element, PlankLL *index)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_SetFreeElementDataFunction </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_SimpleLinkedList_IndexOf </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -517,13 +493,36 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#gab69c6db82ddd425ecc5676320c6cfb59">PlankSimpleLinkedListFreeElementDataFunction</a>&#160;</td>
-          <td class="paramname"><em>freeFunction</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="group___plank_simple_linked_list_element_class.html#ga7be78756c1ee22c2787888107538af8d">PlankSimpleLinkedListElementRef</a>&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> *&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga1dcd6f46a3eb06a39f837dd1722a53b5"></a><!-- doxytag: member="plank_SimpleLinkedList.h::pl_SimpleLinkedList_GetSize" ref="ga1dcd6f46a3eb06a39f837dd1722a53b5" args="(PlankSimpleLinkedListRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> pl_SimpleLinkedList_GetSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_simple_linked_list_class.html#ga3342f22a84c0e412fdcacdc6bfd36c68">PlankSimpleLinkedListRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -546,7 +545,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

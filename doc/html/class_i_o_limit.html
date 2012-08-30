@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -71,8 +70,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="IOLimit" -->
-<p><code>#include &lt;<a class="el" href="plonk___i_o_limit_8h_source.html">plonk_IOLimit.h</a>&gt;</code></p>
-
 <p><a href="class_i_o_limit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -138,12 +135,28 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a0acc6fb90d0f64d36aa86ada96d33b96"></a><!-- doxytag: member="IOLimit::createClipped" ref="a0acc6fb90d0f64d36aa86ada96d33b96" args="(Measure::Name measure, const double minimum, const double maximum)" -->
+<a class="anchor" id="a8ef56228f47be61e76c8954f7eb557de"></a><!-- doxytag: member="IOLimit::createNone" ref="a8ef56228f47be61e76c8954f7eb557de" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_i_o_limit.html">IOLimit</a> IOLimit::createClipped </td>
+          <td class="memname"><a class="el" href="class_i_o_limit.html">IOLimit</a> IOLimit::createNone </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a445b9138b43f084fd5310da7e994fd1c"></a><!-- doxytag: member="IOLimit::createMinimum" ref="a445b9138b43f084fd5310da7e994fd1c" args="(Measure::Name measure, const double minimum)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_o_limit.html">IOLimit</a> IOLimit::createMinimum </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_measure.html#af74c37cd245b1262c0602548b4027e86">Measure::Name</a>&#160;</td>
           <td class="paramname"><em>measure</em>, </td>
@@ -152,13 +165,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>minimum</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>maximum</em>&#160;</td>
+          <td class="paramname"><em>minimum</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -198,12 +205,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a445b9138b43f084fd5310da7e994fd1c"></a><!-- doxytag: member="IOLimit::createMinimum" ref="a445b9138b43f084fd5310da7e994fd1c" args="(Measure::Name measure, const double minimum)" -->
+<a class="anchor" id="a0acc6fb90d0f64d36aa86ada96d33b96"></a><!-- doxytag: member="IOLimit::createClipped" ref="a0acc6fb90d0f64d36aa86ada96d33b96" args="(Measure::Name measure, const double minimum, const double maximum)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_i_o_limit.html">IOLimit</a> IOLimit::createMinimum </td>
+          <td class="memname"><a class="el" href="class_i_o_limit.html">IOLimit</a> IOLimit::createClipped </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_measure.html#af74c37cd245b1262c0602548b4027e86">Measure::Name</a>&#160;</td>
           <td class="paramname"><em>measure</em>, </td>
@@ -212,28 +219,18 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>minimum</em>&#160;</td>
+          <td class="paramname"><em>minimum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>maximum</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
           <td></td><td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8ef56228f47be61e76c8954f7eb557de"></a><!-- doxytag: member="IOLimit::createNone" ref="a8ef56228f47be61e76c8954f7eb557de" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_i_o_limit.html">IOLimit</a> IOLimit::createNone </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -258,12 +255,97 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a25e38d59cced89d56a7fd4d2e3a63f2b"></a><!-- doxytag: member="IOLimit::getMaximum" ref="a25e38d59cced89d56a7fd4d2e3a63f2b" args="() const " -->
+<a class="anchor" id="ad9d3b58070ed67d6642e1d237ba3a34f"></a><!-- doxytag: member="IOLimit::getName" ref="ad9d3b58070ed67d6642e1d237ba3a34f" args="(const int keyIndex)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double IOLimit::getMaximum </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> IOLimit::getName </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>keyIndex</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aeb839a95b06c81431959ac55b0c8eccc"></a><!-- doxytag: member="IOLimit::isNone" ref="aeb839a95b06c81431959ac55b0c8eccc" args="(const IOLimit::LimitType type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IOLimit::isNone </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7f913d49a20ca817da9a6b0f408b6915"></a><!-- doxytag: member="IOLimit::isClipped" ref="a7f913d49a20ca817da9a6b0f408b6915" args="(const IOLimit::LimitType type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IOLimit::isClipped </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af0ea60cf91f8c69e74990e337d0d15a0"></a><!-- doxytag: member="IOLimit::hasMinimum" ref="af0ea60cf91f8c69e74990e337d0d15a0" args="(const IOLimit::LimitType type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IOLimit::hasMinimum </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1bc8b36ae710dd56ff529ee4d6634674"></a><!-- doxytag: member="IOLimit::hasMaximum" ref="a1bc8b36ae710dd56ff529ee4d6634674" args="(const IOLimit::LimitType type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IOLimit::hasMaximum </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td>  throw ()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adb3e73287a90ef3c6c13be48bf51f9b7"></a><!-- doxytag: member="IOLimit::getName" ref="adb3e73287a90ef3c6c13be48bf51f9b7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_text.html">Text</a> IOLimit::getName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()</td>
@@ -290,131 +372,15 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad2bdb059a1f2bd8b5fd23367fa64185f"></a><!-- doxytag: member="IOLimit::getMinimum" ref="ad2bdb059a1f2bd8b5fd23367fa64185f" args="() const " -->
+<a class="anchor" id="ae0216833c6576bc48d7315522707c9d0"></a><!-- doxytag: member="IOLimit::isNone" ref="ae0216833c6576bc48d7315522707c9d0" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double IOLimit::getMinimum </td>
+          <td class="memname">bool IOLimit::isNone </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adb3e73287a90ef3c6c13be48bf51f9b7"></a><!-- doxytag: member="IOLimit::getName" ref="adb3e73287a90ef3c6c13be48bf51f9b7" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_text.html">Text</a> IOLimit::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad9d3b58070ed67d6642e1d237ba3a34f"></a><!-- doxytag: member="IOLimit::getName" ref="ad9d3b58070ed67d6642e1d237ba3a34f" args="(const int keyIndex)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> IOLimit::getName </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>keyIndex</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1bc8b36ae710dd56ff529ee4d6634674"></a><!-- doxytag: member="IOLimit::hasMaximum" ref="a1bc8b36ae710dd56ff529ee4d6634674" args="(const IOLimit::LimitType type)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool IOLimit::hasMaximum </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a714fb13e65bdbfb083b326258b4fde59"></a><!-- doxytag: member="IOLimit::hasMaximum" ref="a714fb13e65bdbfb083b326258b4fde59" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool IOLimit::hasMaximum </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af0ea60cf91f8c69e74990e337d0d15a0"></a><!-- doxytag: member="IOLimit::hasMinimum" ref="af0ea60cf91f8c69e74990e337d0d15a0" args="(const IOLimit::LimitType type)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool IOLimit::hasMinimum </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7786c6ec4c3e5057e839b40a923aeba5"></a><!-- doxytag: member="IOLimit::hasMinimum" ref="a7786c6ec4c3e5057e839b40a923aeba5" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool IOLimit::hasMinimum </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7f913d49a20ca817da9a6b0f408b6915"></a><!-- doxytag: member="IOLimit::isClipped" ref="a7f913d49a20ca817da9a6b0f408b6915" args="(const IOLimit::LimitType type)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool IOLimit::isClipped </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -438,12 +404,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae0216833c6576bc48d7315522707c9d0"></a><!-- doxytag: member="IOLimit::isNone" ref="ae0216833c6576bc48d7315522707c9d0" args="() const " -->
+<a class="anchor" id="a7786c6ec4c3e5057e839b40a923aeba5"></a><!-- doxytag: member="IOLimit::hasMinimum" ref="a7786c6ec4c3e5057e839b40a923aeba5" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool IOLimit::isNone </td>
+          <td class="memname">bool IOLimit::hasMinimum </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()</td>
@@ -454,16 +420,47 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aeb839a95b06c81431959ac55b0c8eccc"></a><!-- doxytag: member="IOLimit::isNone" ref="aeb839a95b06c81431959ac55b0c8eccc" args="(const IOLimit::LimitType type)" -->
+<a class="anchor" id="a714fb13e65bdbfb083b326258b4fde59"></a><!-- doxytag: member="IOLimit::hasMaximum" ref="a714fb13e65bdbfb083b326258b4fde59" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool IOLimit::isNone </td>
+          <td class="memname">bool IOLimit::hasMaximum </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_i_o_limit.html#a221d406cacbba8286e3fde4220ffe263">IOLimit::LimitType</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td>  throw ()<code> [static]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad2bdb059a1f2bd8b5fd23367fa64185f"></a><!-- doxytag: member="IOLimit::getMinimum" ref="ad2bdb059a1f2bd8b5fd23367fa64185f" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double IOLimit::getMinimum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a25e38d59cced89d56a7fd4d2e3a63f2b"></a><!-- doxytag: member="IOLimit::getMaximum" ref="a25e38d59cced89d56a7fd4d2e3a63f2b" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double IOLimit::getMaximum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()</td>
         </tr>
       </table>
 </div>
@@ -490,7 +487,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

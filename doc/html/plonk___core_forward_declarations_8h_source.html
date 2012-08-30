@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_32165843d27efd022843dfaad1c0372c.html">core</a>      </li>
-    </ul>
-  </div>
-</div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_CoreForwardDeclarations.h</div>  </div>
@@ -113,23 +104,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#define PLONK_COREFORWARDDECLARATIONS_H</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
 <a name="l00042"></a>00042 <span class="keyword">class </span><a class="code" href="class_smart_pointer.html" title="Reference counted pointer base class.">SmartPointer</a>;
-<a name="l00043"></a>00043 <span class="keyword">class </span><a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>;
-<a name="l00044"></a>00044 <span class="keyword">class </span><a class="code" href="class_type_code.html" title="Used to determine information about some types.">TypeCode</a>;
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;                        <span class="keyword">class </span><a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility</a>;
-<a name="l00047"></a>00047 <span class="keyword">template</span>&lt;<span class="keyword">class</span> OriginalType&gt;                <span class="keyword">class </span><a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a>;
-<a name="l00048"></a>00048 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SmartPo<span class="keywordtype">int</span>erType&gt;            <span class="keyword">class </span><a class="code" href="class_smart_pointer_container_base.html" title="This manages a SmartPointer pointer.">SmartPointerContainerBase</a>;
-<a name="l00049"></a>00049 <span class="keyword">template</span>&lt;<span class="keyword">class </span>SmartPointerType,
-<a name="l00050"></a>00050          <span class="keywordtype">bool</span> enableWeak = <span class="keyword">true</span>&gt;            <span class="keyword">class </span><a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>;
-<a name="l00051"></a>00051 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SenderContainerBaseType&gt;     <span class="keyword">class </span><a class="code" href="class_receiver_internal.html">ReceiverInternal</a>;
-<a name="l00052"></a>00052 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ReceiverInternalType&gt;        <span class="keyword">class </span><a class="code" href="class_receiver_container.html">ReceiverContainer</a>;
-<a name="l00053"></a>00053 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SenderContainerBaseType&gt;     <span class="keyword">class </span><a class="code" href="class_sender_internal.html">SenderInternal</a>;
-<a name="l00054"></a>00054 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SenderInternalType&gt;          <span class="keyword">class </span><a class="code" href="class_sender_container.html">SenderContainer</a>;
-<a name="l00055"></a>00055 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;                        <span class="keyword">class </span><a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility</a>;
-<a name="l00056"></a>00056 <span class="keyword">template</span>&lt;<span class="keyword">class</span> TypeA, <span class="keyword">class</span> TypeB&gt;          <span class="keyword">class </span><a class="code" href="class_binary_op_type_utility.html">BinaryOpTypeUtility</a>;
-<a name="l00057"></a>00057 
+<a name="l00043"></a>00043 <span class="keyword">class </span><a class="code" href="class_smart_pointer_counter.html">SmartPointerCounter</a>;
+<a name="l00044"></a>00044 <span class="keyword">class </span><a class="code" href="class_weak_pointer.html" title="Holds a weak reference to a SmartPointer.">WeakPointer</a>;
+<a name="l00045"></a>00045 <span class="keyword">class </span><a class="code" href="class_type_code.html" title="Used to determine information about some types.">TypeCode</a>;
+<a name="l00046"></a>00046     
+<a name="l00047"></a>00047 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;                                <span class="keyword">class </span><a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility</a>;
+<a name="l00048"></a>00048 <span class="keyword">template</span>&lt;<span class="keyword">class</span> OriginalType&gt;                        <span class="keyword">class </span><a class="code" href="class_weak_pointer_container.html" title="This stores a weak reference using a WeakPointer.">WeakPointerContainer</a>;
+<a name="l00049"></a>00049 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SmartPo<span class="keywordtype">int</span>erType&gt;                    <span class="keyword">class </span><a class="code" href="class_smart_pointer_container_base.html" title="This manages a SmartPointer pointer.">SmartPointerContainerBase</a>;
+<a name="l00050"></a>00050 <span class="keyword">template</span>&lt;<span class="keyword">class </span>SmartPointerType,
+<a name="l00051"></a>00051          <span class="keywordtype">bool</span> enableWeak = <span class="keyword">true</span>&gt;                    <span class="keyword">class </span><a class="code" href="class_smart_pointer_container.html">SmartPointerContainer</a>;
+<a name="l00052"></a>00052 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SenderContainerBaseType&gt;             <span class="keyword">class </span><a class="code" href="class_receiver_internal.html">ReceiverInternal</a>;
+<a name="l00053"></a>00053 <span class="keyword">template</span>&lt;<span class="keyword">class</span> ReceiverInternalType&gt;                <span class="keyword">class </span><a class="code" href="class_receiver_container.html">ReceiverContainer</a>;
+<a name="l00054"></a>00054 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SenderContainerBaseType&gt;             <span class="keyword">class </span><a class="code" href="class_sender_internal.html">SenderInternal</a>;
+<a name="l00055"></a>00055 <span class="keyword">template</span>&lt;<span class="keyword">class</span> SenderInternalType&gt;                  <span class="keyword">class </span><a class="code" href="class_sender_container.html">SenderContainer</a>;
+<a name="l00056"></a>00056 <span class="keyword">template</span>&lt;<span class="keyword">class</span> Type&gt;                                <span class="keyword">class </span><a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility</a>;
+<a name="l00057"></a>00057 <span class="keyword">template</span>&lt;<span class="keyword">class</span> TypeA, <span class="keyword">class</span> TypeB&gt;                  <span class="keyword">class </span><a class="code" href="class_binary_op_type_utility.html">BinaryOpTypeUtility</a>;
 <a name="l00058"></a>00058 
-<a name="l00059"></a>00059 <span class="preprocessor">#endif // PLONK_GRAPHFORWARDDECLARATIONS_H</span>
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="preprocessor">#endif // PLONK_GRAPHFORWARDDECLARATIONS_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -146,7 +138,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:46 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:44 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

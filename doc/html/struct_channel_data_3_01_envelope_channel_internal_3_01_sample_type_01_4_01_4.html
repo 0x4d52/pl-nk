@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,8 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___envelope_channel_8h_source.html">plonk_EnvelopeChannel.h</a>&gt;</code></p>
-
 <p><a href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
@@ -80,6 +77,7 @@ Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SampleType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a8ed0572dca895c6c994b3ea5f4a25a3d">currentLevel</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SampleType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#aaba611dd33267366c9da31b16f744e53">grow</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a924b2030ed485a17cb7dacc3bbced173">targetPointIndex</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a4c2999a511c3233205f71914266f523d">prevGate</a>:1</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#ab63856bc54ea2bf141d4170cc2e55482">done</a>:1</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a2eccd65886b21e759e12ce531e1aa3ff">deleteWhenDone</a>:1</td></tr>
 </table>
@@ -102,6 +100,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aede4b4f1aecc4f8a8c8879b695989ace"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::samplesUntilTarget" ref="aede4b4f1aecc4f8a8c8879b695989ace" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">LongLong <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#aede4b4f1aecc4f8a8c8879b695989ace">samplesUntilTarget</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8ed0572dca895c6c994b3ea5f4a25a3d"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::currentLevel" ref="a8ed0572dca895c6c994b3ea5f4a25a3d" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -110,36 +123,6 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">SampleType <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a8ed0572dca895c6c994b3ea5f4a25a3d">currentLevel</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2eccd65886b21e759e12ce531e1aa3ff"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::deleteWhenDone" ref="a2eccd65886b21e759e12ce531e1aa3ff" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a2eccd65886b21e759e12ce531e1aa3ff">deleteWhenDone</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab63856bc54ea2bf141d4170cc2e55482"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::done" ref="ab63856bc54ea2bf141d4170cc2e55482" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#ab63856bc54ea2bf141d4170cc2e55482">done</a></td>
         </tr>
       </table>
 </div>
@@ -162,21 +145,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aede4b4f1aecc4f8a8c8879b695989ace"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::samplesUntilTarget" ref="aede4b4f1aecc4f8a8c8879b695989ace" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">LongLong <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#aede4b4f1aecc4f8a8c8879b695989ace">samplesUntilTarget</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a924b2030ed485a17cb7dacc3bbced173"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::targetPointIndex" ref="a924b2030ed485a17cb7dacc3bbced173" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -185,6 +153,51 @@ template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a924b2030ed485a17cb7dacc3bbced173">targetPointIndex</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4c2999a511c3233205f71914266f523d"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::prevGate" ref="a4c2999a511c3233205f71914266f523d" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a4c2999a511c3233205f71914266f523d">prevGate</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab63856bc54ea2bf141d4170cc2e55482"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::done" ref="ab63856bc54ea2bf141d4170cc2e55482" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#ab63856bc54ea2bf141d4170cc2e55482">done</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2eccd65886b21e759e12ce531e1aa3ff"></a><!-- doxytag: member="ChannelData&lt; EnvelopeChannelInternal&lt; SampleType &gt; &gt;::deleteWhenDone" ref="a2eccd65886b21e759e12ce531e1aa3ff" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="struct_channel_data.html">ChannelData</a>&lt; <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt; SampleType &gt; &gt;::<a class="el" href="struct_channel_data_3_01_envelope_channel_internal_3_01_sample_type_01_4_01_4.html#a2eccd65886b21e759e12ce531e1aa3ff">deleteWhenDone</a></td>
         </tr>
       </table>
 </div>
@@ -210,7 +223,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:54 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

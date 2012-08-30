@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,21 +71,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="BlockChannelInternal" --><!-- doxytag: inherits="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" -->
 <p>Block channel.  
  <a href="class_block_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___block_channel_8h_source.html">plonk_BlockChannel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BlockChannelInternal&lt; SampleType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_block_channel_internal.png" usemap="#BlockChannelInternal&lt; SampleType &gt;_map" alt=""/>
   <map id="BlockChannelInternal&lt; SampleType &gt;_map" name="BlockChannelInternal&lt; SampleType &gt;_map">
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,168,895,192"/>
-<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,112,714,136"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;" shape="rect" coords="543,224,895,248"/>
+<area href="class_channel_internal_base.html" title="The templated base class for all internal channel processes." alt="ChannelInternalBase&lt; SampleType &gt;" shape="rect" coords="362,168,714,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,168,1076,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,112,352,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,112,714,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,112,1076,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; SampleType &gt; &gt;" shape="rect" coords="0,56,352,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="362,56,714,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="724,56,1076,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,352,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,352,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,352,24"/>
 </map>
  </div></div>
 
@@ -126,55 +124,6 @@ class BlockChannelInternal&lt; SampleType &gt;</h3>
 <p>Block channel. </p>
 <p>Copies a buffer to a output block. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="af43d254b123124e86c5c66f69bc33ae3"></a><!-- doxytag: member="BlockChannelInternal::BlockInternal" ref="af43d254b123124e86c5c66f69bc33ae3" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_block_channel_internal.html">BlockInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a825de657ff05901ca011065337365969"></a><!-- doxytag: member="BlockChannelInternal::Buffer" ref="a825de657ff05901ca011065337365969" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a72aade4e2f7e48253c3a2169cf5c8dfa"></a><!-- doxytag: member="BlockChannelInternal::ChannelType" ref="a72aade4e2f7e48253c3a2169cf5c8dfa" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a5b9e94072bcc238f4e50d75fdf72ae30"></a><!-- doxytag: member="BlockChannelInternal::Data" ref="a5b9e94072bcc238f4e50d75fdf72ae30" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -195,20 +144,35 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae08954f5c38c38b6e17fc9cbb02d9aca"></a><!-- doxytag: member="BlockChannelInternal::Inputs" ref="ae08954f5c38c38b6e17fc9cbb02d9aca" args="" -->
+<a class="anchor" id="a72aade4e2f7e48253c3a2169cf5c8dfa"></a><!-- doxytag: member="BlockChannelInternal::ChannelType" ref="a72aade4e2f7e48253c3a2169cf5c8dfa" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a3ff51af2f5629cdb9f81c7af3a3ec672">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af43d254b123124e86c5c66f69bc33ae3"></a><!-- doxytag: member="BlockChannelInternal::BlockInternal" ref="af43d254b123124e86c5c66f69bc33ae3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_block_channel_internal.html">BlockInternal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -261,6 +225,40 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ae08954f5c38c38b6e17fc9cbb02d9aca"></a><!-- doxytag: member="BlockChannelInternal::Inputs" ref="ae08954f5c38c38b6e17fc9cbb02d9aca" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#aaad27a4ef43a757a678695a406757706">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a825de657ff05901ca011065337365969"></a><!-- doxytag: member="BlockChannelInternal::Buffer" ref="a825de657ff05901ca011065337365969" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a16c6a9a8471f62660653e9c5921aac70">ChannelInternal&lt; SampleType, ChannelInternalCore::Data &gt;</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a7929e85a958e1532ab38a8db6f7276f4"></a><!-- doxytag: member="BlockChannelInternal::BlockChannelInternal" ref="a7929e85a958e1532ab38a8db6f7276f4" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
 <div class="memitem">
@@ -304,21 +302,43 @@ template&lt;class SampleType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a1c59bb05b776664f72ceaa6504e00932"></a><!-- doxytag: member="BlockChannelInternal::copyBlock" ref="a1c59bb05b776664f72ceaa6504e00932" args="()" -->
+<a class="anchor" id="a2faf60032b15d306c63845c219a0685e"></a><!-- doxytag: member="BlockChannelInternal::getName" ref="a2faf60032b15d306c63845c219a0685e" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::copyBlock </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::getName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2fc741106130d144ecfea5c539d58d93"></a><!-- doxytag: member="BlockChannelInternal::getInputKeys" ref="a2fc741106130d144ecfea5c539d58d93" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::getInputKeys </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -343,46 +363,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2fc741106130d144ecfea5c539d58d93"></a><!-- doxytag: member="BlockChannelInternal::getInputKeys" ref="a2fc741106130d144ecfea5c539d58d93" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_numerical_array.html">IntArray</a> <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::getInputKeys </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2faf60032b15d306c63845c219a0685e"></a><!-- doxytag: member="BlockChannelInternal::getName" ref="a2faf60032b15d306c63845c219a0685e" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ac173d940de43107905bb0aeff6930abe"></a><!-- doxytag: member="BlockChannelInternal::initChannel" ref="ac173d940de43107905bb0aeff6930abe" args="(const int)" -->
 <div class="memitem">
 <div class="memproto">
@@ -404,6 +384,24 @@ template&lt;class SampleType &gt; </div>
 <p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling <a class="el" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue()</a>. </p>
 
 <p>Implements <a class="el" href="class_channel_internal_core.html#a0d5725cc71173dcff25b08f992acf1ea">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1c59bb05b776664f72ceaa6504e00932"></a><!-- doxytag: member="BlockChannelInternal::copyBlock" ref="a1c59bb05b776664f72ceaa6504e00932" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_block_channel_internal.html">BlockChannelInternal</a>&lt; SampleType &gt;::copyBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -459,7 +457,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:51 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -78,8 +77,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="PLONK_NAMESPACE::IOSAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" -->
 <p>An audio host for the iOS platform.  
  <a href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#details">More...</a></p>
-
-<p><code>#import &lt;<a class="el" href="plonk___i_o_s_audio_host_8h_source.html">plonk_IOSAudioHost.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for PLONK_NAMESPACE::IOSAudioHost:</div>
 <div class="dyncontent">
@@ -98,7 +95,7 @@ Public Types</h2></td></tr>
 ::<a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a9b7ea788a002496c40d23759e440e606">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a9b7ea788a002496c40d23759e440e606">UnitType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">()&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a956583e0aa18e50f89fc38d0fe3d93ce">IOSAudioHost</a>  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">()&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#acc92a0d2eb05e7ecd76e58229d23c15e">IOSAudioHost</a>  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">()&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a0ec078ebe76a78402aa759c83d7943c7">~IOSAudioHost</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(<a class="el" href="class_text.html">Text</a>)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#aab2e3c42ad0ab2827b701cb7b8a1ef41">getHostName</a>  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the audio host.  <a href="#aab2e3c42ad0ab2827b701cb7b8a1ef41"></a><br/></td></tr>
@@ -138,14 +135,15 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a956583e0aa18e50f89fc38d0fe3d93ce"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::IOSAudioHost" ref="a956583e0aa18e50f89fc38d0fe3d93ce" args="()" -->
+<a class="anchor" id="acc92a0d2eb05e7ecd76e58229d23c15e"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::IOSAudioHost" ref="acc92a0d2eb05e7ecd76e58229d23c15e" args="(ObjectMemoryBase *omb=ObjectMemory&lt; ObjectMemoryDefault &gt;::create())" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">- PLONK_NAMESPACE: </td>
           <td></td>
-          <td class="paramname"></td>
+          <td class="paramtype">(<a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *)&#160;</td>
+          <td class="paramname"><em>omb</em> = <code><a class="el" href="class_object_memory.html">ObjectMemory</a>&lt;&#160;<a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a>&#160;&gt;::create()</code></td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -171,26 +169,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ac81d36522a2c627dc7916fc7158b212b"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::getCpuUsage" ref="ac81d36522a2c627dc7916fc7158b212b" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (double) IOSAudioHost: </td>
-          <td></td>
-          <td class="paramname"></td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the current CPU usage for the DSP loop. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="aab2e3c42ad0ab2827b701cb7b8a1ef41"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::getHostName" ref="aab2e3c42ad0ab2827b701cb7b8a1ef41" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -208,26 +186,6 @@ Public Member Functions</h2></td></tr>
 <p>Get the name of the audio host. </p>
 
 <p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a6acd613c2d7d92a840ccdcf38dc78bd7"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::getInputName" ref="a6acd613c2d7d92a840ccdcf38dc78bd7" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (<a class="el" href="class_text.html">Text</a>) IOSAudioHost: </td>
-          <td></td>
-          <td class="paramname"></td>
-          <td> const  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio input device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -251,6 +209,26 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a6acd613c2d7d92a840ccdcf38dc78bd7"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::getInputName" ref="a6acd613c2d7d92a840ccdcf38dc78bd7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (<a class="el" href="class_text.html">Text</a>) IOSAudioHost: </td>
+          <td></td>
+          <td class="paramname"></td>
+          <td> const  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio input device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a8fa224402128d8357b19775723803628"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::getOutputName" ref="a8fa224402128d8357b19775723803628" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -271,92 +249,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9b787824c64cb6f6ceb780196dc1b1fb"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::interruptionCallback" ref="a9b787824c64cb6f6ceb780196dc1b1fb" args="(UInt32 inInterruption)" -->
+<a class="anchor" id="ac81d36522a2c627dc7916fc7158b212b"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::getCpuUsage" ref="ac81d36522a2c627dc7916fc7158b212b" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">- (void) IOSAudioHost: </td>
+          <td class="memname">- (double) IOSAudioHost: </td>
           <td></td>
-          <td class="paramtype">(UInt32)&#160;</td>
-          <td class="paramname"><em>inInterruption</em></td>
-          <td>  throw ()</td>
+          <td class="paramname"></td>
+          <td> const  throw ()</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a24fabf4d56a92ac745e7d627c4881e2a"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::propertyCallback" ref="a24fabf4d56a92ac745e7d627c4881e2a" args="(AudioSessionPropertyID inID, UInt32 inDataSize, const void *inPropertyValue)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (void) IOSAudioHost: </td>
-          <td></td>
-          <td class="paramtype">(AudioSessionPropertyID)&#160;</td>
-          <td class="paramname"><em>inID</em></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">(UInt32)&#160;</td>
-          <td class="paramname"><em>inDataSize</em></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">(const void *)&#160;</td>
-          <td class="paramname"><em>inPropertyValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Get the current CPU usage for the DSP loop. </p>
 
-</div>
-</div>
-<a class="anchor" id="a5ce530c371f9a48e863f2fdbf179bccd"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::renderCallback" ref="a5ce530c371f9a48e863f2fdbf179bccd" args="(UInt32 inNumberFrames, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, AudioBufferList *ioData)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">- (OSStatus) IOSAudioHost: </td>
-          <td></td>
-          <td class="paramtype">(UInt32)&#160;</td>
-          <td class="paramname"><em>inNumberFrames</em></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">(AudioUnitRenderActionFlags *)&#160;</td>
-          <td class="paramname"><em>ioActionFlags</em></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">(const AudioTimeStamp *)&#160;</td>
-          <td class="paramname"><em>inTimeStamp</em></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">(AudioBufferList *)&#160;</td>
-          <td class="paramname"><em>ioData</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -400,6 +309,95 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5ce530c371f9a48e863f2fdbf179bccd"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::renderCallback" ref="a5ce530c371f9a48e863f2fdbf179bccd" args="(UInt32 inNumberFrames, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, AudioBufferList *ioData)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (OSStatus) IOSAudioHost: </td>
+          <td></td>
+          <td class="paramtype">(UInt32)&#160;</td>
+          <td class="paramname"><em>inNumberFrames</em></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">(AudioUnitRenderActionFlags *)&#160;</td>
+          <td class="paramname"><em>ioActionFlags</em></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">(const AudioTimeStamp *)&#160;</td>
+          <td class="paramname"><em>inTimeStamp</em></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">(AudioBufferList *)&#160;</td>
+          <td class="paramname"><em>ioData</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a24fabf4d56a92ac745e7d627c4881e2a"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::propertyCallback" ref="a24fabf4d56a92ac745e7d627c4881e2a" args="(AudioSessionPropertyID inID, UInt32 inDataSize, const void *inPropertyValue)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (void) IOSAudioHost: </td>
+          <td></td>
+          <td class="paramtype">(AudioSessionPropertyID)&#160;</td>
+          <td class="paramname"><em>inID</em></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">(UInt32)&#160;</td>
+          <td class="paramname"><em>inDataSize</em></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">(const void *)&#160;</td>
+          <td class="paramname"><em>inPropertyValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9b787824c64cb6f6ceb780196dc1b1fb"></a><!-- doxytag: member="PLONK_NAMESPACE::IOSAudioHost::interruptionCallback" ref="a9b787824c64cb6f6ceb780196dc1b1fb" args="(UInt32 inInterruption)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (void) IOSAudioHost: </td>
+          <td></td>
+          <td class="paramtype">(UInt32)&#160;</td>
+          <td class="paramname"><em>inInterruption</em></td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___i_o_s_audio_host_8h_source.html">plonk_IOSAudioHost.h</a></li>
 </ul>
@@ -418,7 +416,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

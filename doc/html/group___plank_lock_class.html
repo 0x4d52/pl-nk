@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -86,7 +85,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_class.html#ga8faa8bcbafc49baf83b9a07c0eaa893d">pl_Lock_Unlock</a> (<a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the lock.  <a href="#ga8faa8bcbafc49baf83b9a07c0eaa893d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_class.html#ga3ee574b6a39516bd5e0ea11c2645b58b">pl_Lock_TryLock</a> (<a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a> p)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to obtin the lock but doesn't block if this fails.  <a href="#ga3ee574b6a39516bd5e0ea11c2645b58b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to obtain the lock but doesn't block if this fails.  <a href="#ga3ee574b6a39516bd5e0ea11c2645b58b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_class.html#gac1baaa40c6b23a73b6194e13600f2e31">pl_Lock_Wait</a> (<a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait on the lock.  <a href="#gac1baaa40c6b23a73b6194e13600f2e31"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_lock_class.html#gad8176b9ce343ca5c6199d534ab4fd3e9">pl_Lock_Signal</a> (<a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a> p)</td></tr>
@@ -112,6 +111,25 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gaa0b9a96a7e182cde6a10d6d5eb79258a"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_CreateAndInit" ref="gaa0b9a96a7e182cde6a10d6d5eb79258a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a> pl_Lock_CreateAndInit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create and intitialise a <em>Plank Lock</em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank Lock</em> object as an opaque reference or PLANK_NULL. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga6216a61e4dd15f7760aff6d8d613385a"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Create" ref="ga6216a61e4dd15f7760aff6d8d613385a" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -131,22 +149,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaa0b9a96a7e182cde6a10d6d5eb79258a"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_CreateAndInit" ref="gaa0b9a96a7e182cde6a10d6d5eb79258a" args="()" -->
+<a class="anchor" id="gaaf69da53793e9f3030aa8e056b0680f0"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Init" ref="gaaf69da53793e9f3030aa8e056b0680f0" args="(PlankLockRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a> pl_Lock_CreateAndInit </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Lock_Init </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create and intitialise a <em>Plank Lock</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank Lock</em> object as an opaque reference or PLANK_NULL. </dd></dl>
+<p>Initialise a <em>Plank Lock</em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
 
 </div>
 </div>
@@ -202,32 +227,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaaf69da53793e9f3030aa8e056b0680f0"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Init" ref="gaaf69da53793e9f3030aa8e056b0680f0" args="(PlankLockRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Lock_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initialise a <em>Plank Lock</em> object. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="gaec25a57c9cb58b31ab9486bc0aeb2392"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Lock" ref="gaec25a57c9cb58b31ab9486bc0aeb2392" args="(PlankLockRef p)" -->
 <div class="memitem">
 <div class="memproto">
@@ -245,6 +244,83 @@ Functions</h2></td></tr>
 
 <p>Obtain the lock. </p>
 <p>This will block until the lock can be obtained. Be sure to release the lock using <a class="el" href="group___plank_lock_class.html#ga8faa8bcbafc49baf83b9a07c0eaa893d" title="Release the lock.">pl_Lock_Unlock()</a> otherwise your application will freeze. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga8faa8bcbafc49baf83b9a07c0eaa893d"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Unlock" ref="ga8faa8bcbafc49baf83b9a07c0eaa893d" args="(PlankLockRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pl_Lock_Unlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Release the lock. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga3ee574b6a39516bd5e0ea11c2645b58b"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_TryLock" ref="ga3ee574b6a39516bd5e0ea11c2645b58b" args="(PlankLockRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_Lock_TryLock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Tries to obtain the lock but doesn't block if this fails. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the lock was obtained, otherwise <code>false</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gac1baaa40c6b23a73b6194e13600f2e31"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Wait" ref="gac1baaa40c6b23a73b6194e13600f2e31" args="(PlankLockRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pl_Lock_Wait </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Wait on the lock. </p>
+<p>[todo docs] </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
@@ -280,83 +356,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga3ee574b6a39516bd5e0ea11c2645b58b"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_TryLock" ref="ga3ee574b6a39516bd5e0ea11c2645b58b" args="(PlankLockRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_Lock_TryLock </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Tries to obtin the lock but doesn't block if this fails. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the lock was obtained, otherwise <code>false</code>. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga8faa8bcbafc49baf83b9a07c0eaa893d"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Unlock" ref="ga8faa8bcbafc49baf83b9a07c0eaa893d" args="(PlankLockRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void pl_Lock_Unlock </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Release the lock. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="gac1baaa40c6b23a73b6194e13600f2e31"></a><!-- doxytag: member="plank_Lock.h::pl_Lock_Wait" ref="gac1baaa40c6b23a73b6194e13600f2e31" args="(PlankLockRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void pl_Lock_Wait </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_lock_class.html#gac6f2239e7a2c081b75b56b203e4523ba">PlankLockRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Wait on the lock. </p>
-<p>[todo docs] </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Lock</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -372,7 +371,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

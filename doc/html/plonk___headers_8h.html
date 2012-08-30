@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,133 +57,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6cd53a9969f15d7e1f26b9a49c542933.html">plonk</a>      </li>
-      <li class="navelem"><a class="el" href="dir_32165843d27efd022843dfaad1c0372c.html">core</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="headertitle">
 <div class="title">plonk_Headers.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="plonk___core_forward_declarations_8h_source.html">plonk_CoreForwardDeclarations.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___memory_8h_source.html">plonk_Memory.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___smart_pointer_8h_source.html">plonk_SmartPointer.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___weak_pointer_8h_source.html">plonk_WeakPointer.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___smart_pointer_container_8h_source.html">plonk_SmartPointerContainer.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___weak_pointer_container_8h_source.html">plonk_WeakPointerContainer.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___deleter_8h_source.html">plonk_Deleter.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___sender_8h_source.html">plonk_Sender.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___sender_container_8h_source.html">plonk_SenderContainer.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___receiver_8h_source.html">plonk_Receiver.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___type_utility_8h_source.html">plonk_TypeUtility.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___lock_8h_source.html">plonk_Lock.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plonk___thread_8h_source.html">plonk_Thread.h</a>&quot;</code><br/>
-<code>#include &quot;../containers/plonk_ContainerForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_Atomic.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_DynamicContainer.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_ObjectArrayInternal.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_SimpleArray.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_SimpleStack.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_SimpleQueue.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_SimpleLinkedList.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_ObjectArray.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_ObjectArray2D.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_NumericalArray.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_NumericalArray2D.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_Collections.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_Text.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_TextArray.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_BreakPoints.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_Wavetable.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_Signal.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_Int24.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_Function.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_LockFreeQueue.h&quot;</code><br/>
-<code>#include &quot;../containers/plonk_LockFreeStack.h&quot;</code><br/>
-<code>#include &quot;../containers/variables/plonk_VariableForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../containers/variables/plonk_Variable.h&quot;</code><br/>
-<code>#include &quot;../containers/variables/plonk_VariableInternal.h&quot;</code><br/>
-<code>#include &quot;../containers/variables/plonk_BinaryOpVariable.h&quot;</code><br/>
-<code>#include &quot;../containers/variables/plonk_UnaryOpVariable.h&quot;</code><br/>
-<code>#include &quot;../containers/variables/plonk_TypeVariable.h&quot;</code><br/>
-<code>#include &quot;../maths/plonk_Constants.h&quot;</code><br/>
-<code>#include &quot;../maths/plonk_Endian.h&quot;</code><br/>
-<code>#include &quot;../random/plonk_RNG.h&quot;</code><br/>
-<code>#include &quot;../files/plonk_TextFile.h&quot;</code><br/>
-<code>#include &quot;../files/plonk_BinaryFile.h&quot;</code><br/>
-<code>#include &quot;../files/audio/plonk_AudioFileReader.h&quot;</code><br/>
-<code>#include &quot;../fft/plonk_FFTEngine.h&quot;</code><br/>
-<code>#include &quot;../fft/plonk_FFTEngineInternal.h&quot;</code><br/>
-<code>#include &quot;../graph/plonk_GraphForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../graph/channel/plonk_Channel.h&quot;</code><br/>
-<code>#include &quot;../graph/channel/plonk_ChannelInternalBase.h&quot;</code><br/>
-<code>#include &quot;../graph/channel/plonk_ChannelInternal.h&quot;</code><br/>
-<code>#include &quot;../graph/channel/plonk_ChannelData.h&quot;</code><br/>
-<code>#include &quot;../graph/channel/plonk_ProxyChannelInternal.h&quot;</code><br/>
-<code>#include &quot;../graph/channel/plonk_ProxyOwnerChannelInternal.h&quot;</code><br/>
-<code>#include &quot;../graph/utility/plonk_InputDictionary.h&quot;</code><br/>
-<code>#include &quot;../graph/utility/plonk_BlockSize.h&quot;</code><br/>
-<code>#include &quot;../graph/utility/plonk_SampleRate.h&quot;</code><br/>
-<code>#include &quot;../graph/utility/plonk_Bus.h&quot;</code><br/>
-<code>#include &quot;../graph/utility/plonk_TimeStamp.h&quot;</code><br/>
-<code>#include &quot;../graph/utility/plonk_ProcessInfo.h&quot;</code><br/>
-<code>#include &quot;../graph/utility/plonk_ProcessInfoInternal.h&quot;</code><br/>
-<code>#include &quot;../graph/info/plonk_InfoHeaders.h&quot;</code><br/>
-<code>#include &quot;../graph/plonk_Unit.h&quot;</code><br/>
-<code>#include &quot;../graph/converters/plonk_TypeChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/converters/plonk_ResampleChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/converters/plonk_OverlapMakeChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/converters/plonk_OverlapMixChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_BinaryOpChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_ConstantChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_LinearPanChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_UnaryOpChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_BusReadChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_BusWriteChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_Mixers.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_BlockChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_VariableChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/simple/plonk_AtomicVariableChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/generators/plonk_Saw.h&quot;</code><br/>
-<code>#include &quot;../graph/generators/plonk_WhiteNoise.h&quot;</code><br/>
-<code>#include &quot;../graph/generators/plonk_Table.h&quot;</code><br/>
-<code>#include &quot;../graph/generators/plonk_SignalPlay.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterTypes.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterForms.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterShapes.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_Filter.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterCoeffs1Param.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterCoeffs2Param.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterCoeffs3Param.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/plonk_FilterShortcuts.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/shapes/plonk_FilterShapesSimple.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/shapes/plonk_FilterShapesP2Z2.h&quot;</code><br/>
-<code>#include &quot;../graph/filters/shapes/plonk_FilterShapesB.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayForwardDeclarations.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayBase.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayTypes.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayForms.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayFormDelay.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayFormCombDecay.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayFormCombFB.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayFormCombFilter1Param.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayFormAllpassDecay.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_DelayFormAllpassFFFB.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_Delay1Param.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_Delay2Param.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_Delay3Param.h&quot;</code><br/>
-<code>#include &quot;../graph/delay/plonk_Delay4Param.h&quot;</code><br/>
-<code>#include &quot;../graph/control/plonk_EnvelopeChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/fft/plonk_FFTChannel.h&quot;</code><br/>
-<code>#include &quot;../graph/fft/plonk_IFFTChannel.h&quot;</code><br/>
-<code>#include &quot;../hosts/plonk_AudioHostBase.h&quot;</code><br/>
-</div>
+
 <p><a href="plonk___headers_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 </table>
@@ -203,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

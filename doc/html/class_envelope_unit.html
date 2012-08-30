@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,8 +72,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Envelope unit performs a series of breakpoints.  
  <a href="class_envelope_unit.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="plonk___envelope_channel_8h_source.html">plonk_EnvelopeChannel.h</a>&gt;</code></p>
-
 <p><a href="class_envelope_unit-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
@@ -95,38 +92,26 @@ Public Types</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_object_array.html">UnitInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#ab9c3c5f3d6dbf577828740800b3206c7">getInfo</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a341de13f19c7dca6a5094d594f556ad9">ar</a> (<a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;breakpoints, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;gate=SampleType(0), const bool deleteWhenDone=true, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate envelope generator.  <a href="#a341de13f19c7dca6a5094d594f556ad9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#a6d9ba57b2c959d64b1bff74992c6876d">ar</a> (<a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;breakpoints, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;gate=SampleType(1), const bool deleteWhenDone=true, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;preferredBlockSize=BlockSize::getDefault(), <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;preferredSampleRate=SampleRate::getDefault())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio rate envelope generator.  <a href="#a6d9ba57b2c959d64b1bff74992c6876d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_unit_base.html">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_envelope_unit.html#ad419ad7942ca9f5837db3fb477e006b1">kr</a> (<a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;breakpoints, <a class="el" href="class_unit_base.html">UnitType</a> const &amp;gate=SampleType(1), const bool deleteWhenDone=true)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a control rate envelope generator.  <a href="#ad419ad7942ca9f5837db3fb477e006b1"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class SampleType&gt;<br/>
 class EnvelopeUnit&lt; SampleType &gt;</h3>
 
 <p>Envelope unit performs a series of breakpoints. </p>
+<p>[args-todo] </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a06fc9cbc5a1d142b6b86d2166a36debf"></a><!-- doxytag: member="EnvelopeUnit::BreakpointsType" ref="a06fc9cbc5a1d142b6b86d2166a36debf" args="" -->
+<a class="anchor" id="ac0b20b078766fcbbd0f0e5db1249da86"></a><!-- doxytag: member="EnvelopeUnit::EnvelopeInternal" ref="ac0b20b078766fcbbd0f0e5db1249da86" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoints_base.html">BreakpointsType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9ac4252493b0a84904fbcf7d91049788"></a><!-- doxytag: member="EnvelopeUnit::ChannelType" ref="a9ac4252493b0a84904fbcf7d91049788" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
+          <td class="memname">typedef <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_envelope_channel_internal.html">EnvelopeInternal</a></td>
         </tr>
       </table>
 </div>
@@ -149,44 +134,14 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac0b20b078766fcbbd0f0e5db1249da86"></a><!-- doxytag: member="EnvelopeUnit::EnvelopeInternal" ref="ac0b20b078766fcbbd0f0e5db1249da86" args="" -->
+<a class="anchor" id="a9ac4252493b0a84904fbcf7d91049788"></a><!-- doxytag: member="EnvelopeUnit::ChannelType" ref="a9ac4252493b0a84904fbcf7d91049788" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_envelope_channel_internal.html">EnvelopeChannelInternal</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_envelope_channel_internal.html">EnvelopeInternal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0ede5b714ec4c77cab39b5eefb65aa30"></a><!-- doxytag: member="EnvelopeUnit::Inputs" ref="a0ede5b714ec4c77cab39b5eefb65aa30" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1c1e9040df41dc34d342af50fbd65bf1"></a><!-- doxytag: member="EnvelopeUnit::InternaBase" ref="a1c1e9040df41dc34d342af50fbd65bf1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
@@ -209,6 +164,21 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a1c1e9040df41dc34d342af50fbd65bf1"></a><!-- doxytag: member="EnvelopeUnit::InternaBase" ref="a1c1e9040df41dc34d342af50fbd65bf1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternaBase</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a65bdd3b9b261c617bd26d585462912b9"></a><!-- doxytag: member="EnvelopeUnit::UnitType" ref="a65bdd3b9b261c617bd26d585462912b9" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -224,8 +194,56 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a0ede5b714ec4c77cab39b5eefb65aa30"></a><!-- doxytag: member="EnvelopeUnit::Inputs" ref="a0ede5b714ec4c77cab39b5eefb65aa30" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a06fc9cbc5a1d142b6b86d2166a36debf"></a><!-- doxytag: member="EnvelopeUnit::BreakpointsType" ref="a06fc9cbc5a1d142b6b86d2166a36debf" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_breakpoints_base.html">BreakpointsBase</a>&lt;SampleType&gt; <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::<a class="el" href="class_breakpoints_base.html">BreakpointsType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a341de13f19c7dca6a5094d594f556ad9"></a><!-- doxytag: member="EnvelopeUnit::ar" ref="a341de13f19c7dca6a5094d594f556ad9" args="(BreakpointsType const &amp;breakpoints, UnitType const &amp;gate=SampleType(0), const bool deleteWhenDone=true, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
+<a class="anchor" id="ab9c3c5f3d6dbf577828740800b3206c7"></a><!-- doxytag: member="EnvelopeUnit::getInfo" ref="ab9c3c5f3d6dbf577828740800b3206c7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6d9ba57b2c959d64b1bff74992c6876d"></a><!-- doxytag: member="EnvelopeUnit::ar" ref="a6d9ba57b2c959d64b1bff74992c6876d" args="(BreakpointsType const &amp;breakpoints, UnitType const &amp;gate=SampleType(1), const bool deleteWhenDone=true, BlockSize const &amp;preferredBlockSize=BlockSize::getDefault(), SampleRate const &amp;preferredSampleRate=SampleRate::getDefault())" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -241,7 +259,7 @@ template&lt;class SampleType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
-          <td class="paramname"><em>gate</em> = <code>SampleType&#160;(0)</code>, </td>
+          <td class="paramname"><em>gate</em> = <code>SampleType&#160;(1)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -274,21 +292,40 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab9c3c5f3d6dbf577828740800b3206c7"></a><!-- doxytag: member="EnvelopeUnit::getInfo" ref="ab9c3c5f3d6dbf577828740800b3206c7" args="()" -->
+<a class="anchor" id="ad419ad7942ca9f5837db3fb477e006b1"></a><!-- doxytag: member="EnvelopeUnit::kr" ref="ad419ad7942ca9f5837db3fb477e006b1" args="(BreakpointsType const &amp;breakpoints, UnitType const &amp;gate=SampleType(1), const bool deleteWhenDone=true)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="class_object_array.html">UnitInfos</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::getInfo </td>
+          <td class="memname">static <a class="el" href="class_unit_base.html">UnitType</a> <a class="el" href="class_envelope_unit.html">EnvelopeUnit</a>&lt; SampleType &gt;::kr </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, static]</code></td>
+          <td class="paramtype"><a class="el" href="class_breakpoints_base.html">BreakpointsType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>breakpoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_unit_base.html">UnitType</a> const &amp;&#160;</td>
+          <td class="paramname"><em>gate</em> = <code>SampleType&#160;(1)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>deleteWhenDone</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()<code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Create a control rate envelope generator. </p>
 
 </div>
 </div>
@@ -310,7 +347,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

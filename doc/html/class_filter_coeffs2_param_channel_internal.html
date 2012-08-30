@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,22 +71,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="FilterCoeffs2ParamChannelInternal" --><!-- doxytag: inherits="ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" -->
 <p>Filter coefficient generator from two control parameters.  
  <a href="class_filter_coeffs2_param_channel_internal.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___filter_coeffs2_param_8h_source.html">plonk_FilterCoeffs2Param.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_filter_coeffs2_param_channel_internal.png" usemap="#FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;_map" alt=""/>
   <map id="FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;_map" name="FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;_map">
-<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" shape="rect" coords="714,224,1180,248"/>
-<area href="class_channel_internal.html" alt="ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" shape="rect" coords="714,168,1180,192"/>
-<area href="class_channel_internal_base.html" alt="ChannelInternalBase&lt; ShapeType::SampleDataType &gt;" shape="rect" coords="476,112,942,136"/>
+<area href="class_proxy_owner_channel_internal.html" alt="ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" shape="rect" coords="714,280,1180,304"/>
+<area href="class_channel_internal.html" alt="ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;" shape="rect" coords="714,224,1180,248"/>
+<area href="class_channel_internal_base.html" alt="ChannelInternalBase&lt; ShapeType::SampleDataType &gt;" shape="rect" coords="476,168,942,192"/>
+<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="952,168,1418,192"/>
+<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; ShapeType::SampleDataType &gt; &gt;" shape="rect" coords="0,112,466,136"/>
+<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="476,112,942,136"/>
 <area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="952,112,1418,136"/>
-<area href="class_sender_internal.html" alt="SenderInternal&lt; ChannelBase&lt; ShapeType::SampleDataType &gt; &gt;" shape="rect" coords="0,56,466,80"/>
-<area href="class_channel_internal_core.html" title="The base, core class for all internal channel processes." alt="ChannelInternalCore" shape="rect" coords="476,56,942,80"/>
-<area href="class_receiver_internal.html" alt="ReceiverInternal&lt; SenderContainerBaseType &gt;" shape="rect" coords="952,56,1418,80"/>
-<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,0,466,24"/>
+<area href="class_smart_pointer.html" title="Reference counted pointer base class." alt="SmartPointer" shape="rect" coords="0,56,466,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,466,24"/>
 </map>
  </div></div>
 
@@ -100,6 +98,7 @@ Public Types</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To store channel state data.  <a href="#afdcd6b09cc690ecf84e255dbf195ec10"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef ShapeType::FormType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#a2b44cf90c82bfbbfab6e825f3f9a3427">FormType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#a5410ca29623aec5bd24d4273790d9e53">ChannelType</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt; <a class="el" href="class_channel_base.html">ChannelType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#a4d205a8c6c727034cfcf298d223b39b3">ChannelArrayType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
 <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a><br class="typebreak"/>
 &lt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a>, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#ad271d80e235fc004cec984147b28ca91">Internal</a></td></tr>
@@ -109,7 +108,7 @@ Public Types</h2></td></tr>
 &lt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#a2b1059092344012b86ae6570212bc4c1">Buffer</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#a6f785ac62e4f6190ccbbfdbb752f9046">FilterCoeffs2ParamChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#a24e73bbef6b2f536717ba76b1bd2d1b1">FilterCoeffs2ParamChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate, <a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;channels)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#aad469d3f08a314aa1649e9c11308be66">~FilterCoeffs2ParamChannelInternal</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#ae9c529bdd47c6a51869d56c980149a00">getName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_filter_coeffs2_param_channel_internal.html#a4eb62a3157de7b3a7dc3516281a38761">getInputKeys</a> () const   throw ()</td></tr>
@@ -126,37 +125,18 @@ class FilterCoeffs2ParamChannelInternal&lt; ShapeType &gt;</h3>
 
 <p>Filter coefficient generator from two control parameters. </p>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a2b1059092344012b86ae6570212bc4c1"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::Buffer" ref="a2b1059092344012b86ae6570212bc4c1" args="" -->
+<a class="anchor" id="a8838a6cc2b6e7996c19f135040f88183"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::SampleType" ref="a8838a6cc2b6e7996c19f135040f88183" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ShapeType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a>&gt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+          <td class="memname">typedef ShapeType::SampleDataType <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5410ca29623aec5bd24d4273790d9e53"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::ChannelType" ref="a5410ca29623aec5bd24d4273790d9e53" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a>&gt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
 
 </div>
 </div>
@@ -195,20 +175,37 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac1497894293b4ebd8fdb68c3aa6283e2"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::Inputs" ref="ac1497894293b4ebd8fdb68c3aa6283e2" args="" -->
+<a class="anchor" id="a5410ca29623aec5bd24d4273790d9e53"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::ChannelType" ref="a5410ca29623aec5bd24d4273790d9e53" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ShapeType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+          <td class="memname">typedef <a class="el" href="class_channel_base.html">ChannelBase</a>&lt;<a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a>&gt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_channel_base.html">ChannelType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a66b854dcf0db11c050c69dff2f3e374f">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4d205a8c6c727034cfcf298d223b39b3"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::ChannelArrayType" ref="a4d205a8c6c727034cfcf298d223b39b3" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_object_array.html">ObjectArray</a>&lt;<a class="el" href="class_channel_base.html">ChannelType</a>&gt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_object_array.html">ChannelArrayType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a73b428803deec77d33f77e5198c8aca1">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
 
 </div>
 </div>
@@ -229,21 +226,6 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8838a6cc2b6e7996c19f135040f88183"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::SampleType" ref="a8838a6cc2b6e7996c19f135040f88183" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef ShapeType::SampleDataType <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="adeeaf67d9dadbf8fc49e348faf7ce73e"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::UnitType" ref="adeeaf67d9dadbf8fc49e348faf7ce73e" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -261,8 +243,42 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ac1497894293b4ebd8fdb68c3aa6283e2"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::Inputs" ref="ac1497894293b4ebd8fdb68c3aa6283e2" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a> <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_input_dictionary.html">Inputs</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#ae43c4c8567ce1a67c51281a7c546ca06">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2b1059092344012b86ae6570212bc4c1"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::Buffer" ref="a2b1059092344012b86ae6570212bc4c1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;<a class="el" href="class_filter_coeffs2_param_channel_internal.html#a8838a6cc2b6e7996c19f135040f88183">SampleType</a>&gt; <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#abc5718f7325a88f1b4f589e306f683b5">ProxyOwnerChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a6f785ac62e4f6190ccbbfdbb752f9046"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::FilterCoeffs2ParamChannelInternal" ref="a6f785ac62e4f6190ccbbfdbb752f9046" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate)" -->
+<a class="anchor" id="a24e73bbef6b2f536717ba76b1bd2d1b1"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::FilterCoeffs2ParamChannelInternal" ref="a24e73bbef6b2f536717ba76b1bd2d1b1" args="(Inputs const &amp;inputs, Data const &amp;data, BlockSize const &amp;blockSize, SampleRate const &amp;sampleRate, ChannelArrayType &amp;channels)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -290,7 +306,13 @@ template&lt;class ShapeType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
+          <td class="paramname"><em>sampleRate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;&#160;</td>
+          <td class="paramname"><em>channels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -322,24 +344,23 @@ template&lt;class ShapeType &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a71e1fde005ab607d6bb041cb70b3b177"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::changed" ref="a71e1fde005ab607d6bb041cb70b3b177" args="(DoubleVariable::Sender const &amp;source)" -->
+<a class="anchor" id="ae9c529bdd47c6a51869d56c980149a00"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::getName" ref="ae9c529bdd47c6a51869d56c980149a00" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class ShapeType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::changed </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::getName </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable::Sender</a> const &amp;&#160;</td>
-          <td class="paramname"><em>source</em></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9243aead95b3f12bab5f8afdd482f4fe">ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
+<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -360,26 +381,6 @@ template&lt;class ShapeType &gt; </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="class_channel_internal_core.html#a5f731843efea658e869a27e0529b5c6c">ChannelInternalCore</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae9c529bdd47c6a51869d56c980149a00"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::getName" ref="ae9c529bdd47c6a51869d56c980149a00" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::getName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="class_channel_internal_core.html#afab91268bb677531d7a921554681ffae">ChannelInternalCore</a>.</p>
 
 </div>
 </div>
@@ -404,6 +405,45 @@ template&lt;class ShapeType &gt; </div>
 <p>The <a class="el" href="class_channel_internal.html" title="The base class from which most ChannelInternals should be derived.">ChannelInternal</a> subclass should initialise itself using this channel of its inputs, calling <a class="el" href="class_channel_internal_base.html#aed88288e0eb608e998b3f7ccf6bf2aaf">initValue()</a>. </p>
 
 <p>Implements <a class="el" href="class_channel_internal_core.html#a0d5725cc71173dcff25b08f992acf1ea">ChannelInternalCore</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a71e1fde005ab607d6bb041cb70b3b177"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::changed" ref="a71e1fde005ab607d6bb041cb70b3b177" args="(DoubleVariable::Sender const &amp;source)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::changed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_variable.html">DoubleVariable::Sender</a> const &amp;&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_channel_internal.html#a9243aead95b3f12bab5f8afdd482f4fe">ChannelInternal&lt; ShapeType::SampleDataType, ShapeType::Data &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae20a80059cf1d3cfe1dcba7b93bda2ac"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::updateFilterSampleRateInData" ref="ae20a80059cf1d3cfe1dcba7b93bda2ac" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ShapeType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::updateFilterSampleRateInData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -441,24 +481,6 @@ template&lt;class ShapeType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae20a80059cf1d3cfe1dcba7b93bda2ac"></a><!-- doxytag: member="FilterCoeffs2ParamChannelInternal::updateFilterSampleRateInData" ref="ae20a80059cf1d3cfe1dcba7b93bda2ac" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ShapeType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_filter_coeffs2_param_channel_internal.html">FilterCoeffs2ParamChannelInternal</a>&lt; ShapeType &gt;::updateFilterSampleRateInData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___filter_coeffs2_param_8h_source.html">plonk_FilterCoeffs2Param.h</a></li>
 </ul>
@@ -477,7 +499,7 @@ template&lt;class ShapeType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

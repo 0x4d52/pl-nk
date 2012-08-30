@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -74,9 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">PLONK_NAMESPACE::JuceAudioHost Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="PLONK_NAMESPACE::JuceAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___juce_audio_host_8h_source.html">plonk_JuceAudioHost.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="PLONK_NAMESPACE::JuceAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" --><div class="dynheader">
 Inheritance diagram for PLONK_NAMESPACE::JuceAudioHost:</div>
 <div class="dyncontent">
  <div class="center">
@@ -90,7 +87,7 @@ Inheritance diagram for PLONK_NAMESPACE::JuceAudioHost:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#aa328edef3d5adcc6d925ae41cb0e526f">JuceAudioHost</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#ac766dda65a1c9010291c60db83d80aab">JuceAudioHost</a> (<a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *omb=<a class="el" href="class_object_memory.html">ObjectMemory</a>&lt; <a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a> &gt;::create())  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a0364340aa29ecd9147ff08e0d831cbe8">~JuceAudioHost</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#a8f422b0307da6e958e50a9eb998cb20c">getHostName</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the audio host.  <a href="#a8f422b0307da6e958e50a9eb998cb20c"></a><br/></td></tr>
@@ -111,14 +108,15 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_juce_audio_host.html#ac03f86d13e2ec99a4100f41ab7ad2e02">audioDeviceStopped</a> ()  throw ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa328edef3d5adcc6d925ae41cb0e526f"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::JuceAudioHost" ref="aa328edef3d5adcc6d925ae41cb0e526f" args="()" -->
+<a class="anchor" id="ac766dda65a1c9010291c60db83d80aab"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::JuceAudioHost" ref="ac766dda65a1c9010291c60db83d80aab" args="(ObjectMemoryBase *omb=ObjectMemory&lt; ObjectMemoryDefault &gt;::create())" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">PLONK_NAMESPACE::JuceAudioHost::JuceAudioHost </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *&#160;</td>
+          <td class="paramname"><em>omb</em> = <code><a class="el" href="class_object_memory.html">ObjectMemory</a>&lt;&#160;<a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a>&#160;&gt;::create()</code></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -144,20 +142,143 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a308e832e1f4a322a014ea602f3856958"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::audioDeviceAboutToStart" ref="a308e832e1f4a322a014ea602f3856958" args="(AudioIODevice *device)" -->
+<a class="anchor" id="a8f422b0307da6e958e50a9eb998cb20c"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getHostName" ref="a8f422b0307da6e958e50a9eb998cb20c" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void PLONK_NAMESPACE::JuceAudioHost::audioDeviceAboutToStart </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getHostName </td>
           <td>(</td>
-          <td class="paramtype">AudioIODevice *&#160;</td>
-          <td class="paramname"><em>device</em></td><td>)</td>
-          <td>  throw ()</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Get the name of the audio host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a766ab8692fe633a24860d2fbe1be2d1d"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getNativeHostName" ref="a766ab8692fe633a24860d2fbe1be2d1d" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getNativeHostName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the native host audio API. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a9f3d7131d5e3b466319783f4362eefa4">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1a219edcb47dc7cc716c33ae76b20789"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getInputName" ref="a1a219edcb47dc7cc716c33ae76b20789" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getInputName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio input device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac118773fbed1f24a0afc5615c5d47745"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getOutputName" ref="ac118773fbed1f24a0afc5615c5d47745" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getOutputName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio output device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ad46ac3e85653530dead5e504c1f73984">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a632749ca4707dc0d8cf06892e1c767ce"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getCpuUsage" ref="a632749ca4707dc0d8cf06892e1c767ce" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PLONK_NAMESPACE::JuceAudioHost::getCpuUsage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the current CPU usage for the DSP loop. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a25f4ae2af2f9930099efb2bbea6ddd35"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::startHost" ref="a25f4ae2af2f9930099efb2bbea6ddd35" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PLONK_NAMESPACE::JuceAudioHost::startHost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Start the host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a74895bf82ff77c069494a40c67132458"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::stopHost" ref="a74895bf82ff77c069494a40c67132458" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PLONK_NAMESPACE::JuceAudioHost::stopHost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Stop the host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a461a85d786386a56216fc80057b4f657">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -206,6 +327,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a308e832e1f4a322a014ea602f3856958"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::audioDeviceAboutToStart" ref="a308e832e1f4a322a014ea602f3856958" args="(AudioIODevice *device)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PLONK_NAMESPACE::JuceAudioHost::audioDeviceAboutToStart </td>
+          <td>(</td>
+          <td class="paramtype">AudioIODevice *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac03f86d13e2ec99a4100f41ab7ad2e02"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::audioDeviceStopped" ref="ac03f86d13e2ec99a4100f41ab7ad2e02" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -219,146 +357,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a632749ca4707dc0d8cf06892e1c767ce"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getCpuUsage" ref="a632749ca4707dc0d8cf06892e1c767ce" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double PLONK_NAMESPACE::JuceAudioHost::getCpuUsage </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the current CPU usage for the DSP loop. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8f422b0307da6e958e50a9eb998cb20c"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getHostName" ref="a8f422b0307da6e958e50a9eb998cb20c" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getHostName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1a219edcb47dc7cc716c33ae76b20789"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getInputName" ref="a1a219edcb47dc7cc716c33ae76b20789" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getInputName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio input device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a766ab8692fe633a24860d2fbe1be2d1d"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getNativeHostName" ref="a766ab8692fe633a24860d2fbe1be2d1d" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getNativeHostName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the native host audio API. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a9f3d7131d5e3b466319783f4362eefa4">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac118773fbed1f24a0afc5615c5d47745"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::getOutputName" ref="ac118773fbed1f24a0afc5615c5d47745" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PLONK_NAMESPACE::JuceAudioHost::getOutputName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio output device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ad46ac3e85653530dead5e504c1f73984">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a25f4ae2af2f9930099efb2bbea6ddd35"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::startHost" ref="a25f4ae2af2f9930099efb2bbea6ddd35" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void PLONK_NAMESPACE::JuceAudioHost::startHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Start the host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a74895bf82ff77c069494a40c67132458"></a><!-- doxytag: member="PLONK_NAMESPACE::JuceAudioHost::stopHost" ref="a74895bf82ff77c069494a40c67132458" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void PLONK_NAMESPACE::JuceAudioHost::stopHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Stop the host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a461a85d786386a56216fc80057b4f657">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -380,7 +378,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:59:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

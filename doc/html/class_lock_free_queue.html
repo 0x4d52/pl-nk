@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -70,16 +69,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">LockFreeQueue&lt; ValueType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group___plonk_container_classes.html">Plonk container classes</a></div></div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="LockFreeQueue" --><!-- doxytag: inherits="SmartPointerContainer&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___lock_free_queue_8h_source.html">plonk_LockFreeQueue.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="LockFreeQueue" --><!-- doxytag: inherits="SmartPointerContainer&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;" --><div class="dynheader">
 Inheritance diagram for LockFreeQueue&lt; ValueType &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_lock_free_queue.png" usemap="#LockFreeQueue&lt; ValueType &gt;_map" alt=""/>
   <map id="LockFreeQueue&lt; ValueType &gt;_map" name="LockFreeQueue&lt; ValueType &gt;_map">
-<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,56,410,80"/>
-<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,0,410,24"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,112,410,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;" shape="rect" coords="0,56,410,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="0,0,410,24"/>
 </map>
  </div></div>
 
@@ -104,6 +102,15 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#a11045c9191c12ccf4cd8b8363d85aacb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#aa88634e36a130f7cdd5d4be247f37c40">push</a> (ValueType const &amp;value)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a08cc45ba4b0e204f3f6356a7808227dc">pop</a> ()  throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a8dc388e4862cd99e22b2b903a7860d57">pop</a> (OtherType &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a354a46d98058518ffd1bb1479e13b429">clear</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a21685c8ce51d00eb73e2f32b21540f7a">clearCache</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a7caa327f0a81cae3739ed8afd82e2be9">clearAll</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a4b9afacf6b6c4868d713ec5eae0c9bfb">increaseCache</a> (const int count)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">LongLong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#ab1b2a0be3f93e2c92865f675fd716430">length</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_lock_free_queue.html">LockFreeQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a22c625cadfe57595b39c9df0eb586910">operator-&gt;</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#a761bca97fd15e7dc4d8db86a5553fdfd">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html#ae0870a9cd9e0dda7a53f3f74b608c5b2">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -113,11 +120,26 @@ Static Public Member Functions</h2></td></tr>
  class LockFreeQueue&lt; ValueType &gt;</h3>
 
 <hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a846e28b43ac5db6c000e6be3338d2bf1"></a><!-- doxytag: member="LockFreeQueue::Internal" ref="a846e28b43ac5db6c000e6be3338d2bf1" args="" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt;ValueType&gt; <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_lock_free_queue_internal.html">Internal</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a19532d62083e51fd3c37f7e0ff6436d8"></a><!-- doxytag: member="LockFreeQueue::Base" ref="a19532d62083e51fd3c37f7e0ff6436d8" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_smart_pointer_container.html">SmartPointerContainer</a>&lt;<a class="el" href="class_lock_free_queue_internal.html">Internal</a>&gt; <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_smart_pointer_container.html">Base</a></td>
@@ -128,28 +150,11 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a846e28b43ac5db6c000e6be3338d2bf1"></a><!-- doxytag: member="LockFreeQueue::Internal" ref="a846e28b43ac5db6c000e6be3338d2bf1" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ValueType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_lock_free_queue_internal.html">LockFreeQueueInternal</a>&lt;ValueType&gt; <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_lock_free_queue_internal.html">Internal</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a1594152c81c4a984102fbe4dd15a96cb">SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ab91a21fc748af2f93ddce74ea6cbd8be"></a><!-- doxytag: member="LockFreeQueue::Weak" ref="ab91a21fc748af2f93ddce74ea6cbd8be" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a>&lt;<a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&gt; <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_weak_pointer_container.html">Weak</a></td>
@@ -165,7 +170,7 @@ template&lt;class ValueType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_lock_free_queue.html">LockFreeQueue</a> </td>
@@ -183,7 +188,7 @@ template&lt;class ValueType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_lock_free_queue.html">LockFreeQueue</a> </td>
@@ -202,7 +207,7 @@ template&lt;class ValueType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_lock_free_queue.html">LockFreeQueue</a> </td>
@@ -223,7 +228,7 @@ template&lt;class ValueType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::<a class="el" href="class_lock_free_queue.html">LockFreeQueue</a> </td>
@@ -243,7 +248,7 @@ template&lt;class ValueType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">static <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a> <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::fromWeak </td>
@@ -265,7 +270,7 @@ template&lt;class ValueType &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&amp; <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::operator= </td>
@@ -282,11 +287,30 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="aa88634e36a130f7cdd5d4be247f37c40"></a><!-- doxytag: member="LockFreeQueue::push" ref="aa88634e36a130f7cdd5d4be247f37c40" args="(ValueType const &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a08cc45ba4b0e204f3f6356a7808227dc"></a><!-- doxytag: member="LockFreeQueue::pop" ref="a08cc45ba4b0e204f3f6356a7808227dc" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">ValueType <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::pop </td>
@@ -300,22 +324,155 @@ template&lt;class ValueType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa88634e36a130f7cdd5d4be247f37c40"></a><!-- doxytag: member="LockFreeQueue::push" ref="aa88634e36a130f7cdd5d4be247f37c40" args="(ValueType const &amp;value)" -->
+<a class="anchor" id="a8dc388e4862cd99e22b2b903a7860d57"></a><!-- doxytag: member="LockFreeQueue::pop" ref="a8dc388e4862cd99e22b2b903a7860d57" args="(OtherType &amp;value)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ValueType &gt; </div>
+template&lt;class ValueType&gt; </div>
+<div class="memtemplate">
+template&lt;class OtherType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::push </td>
+          <td class="memname">bool <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::pop </td>
           <td>(</td>
-          <td class="paramtype">ValueType const &amp;&#160;</td>
+          <td class="paramtype">OtherType &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a354a46d98058518ffd1bb1479e13b429"></a><!-- doxytag: member="LockFreeQueue::clear" ref="a354a46d98058518ffd1bb1479e13b429" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a21685c8ce51d00eb73e2f32b21540f7a"></a><!-- doxytag: member="LockFreeQueue::clearCache" ref="a21685c8ce51d00eb73e2f32b21540f7a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::clearCache </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7caa327f0a81cae3739ed8afd82e2be9"></a><!-- doxytag: member="LockFreeQueue::clearAll" ref="a7caa327f0a81cae3739ed8afd82e2be9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::clearAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4b9afacf6b6c4868d713ec5eae0c9bfb"></a><!-- doxytag: member="LockFreeQueue::increaseCache" ref="a4b9afacf6b6c4868d713ec5eae0c9bfb" args="(const int count)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::increaseCache </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab1b2a0be3f93e2c92865f675fd716430"></a><!-- doxytag: member="LockFreeQueue::length" ref="ab1b2a0be3f93e2c92865f675fd716430" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">LongLong <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a22c625cadfe57595b39c9df0eb586910"></a><!-- doxytag: member="LockFreeQueue::operator&#45;&gt;" ref="a22c625cadfe57595b39c9df0eb586910" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>* <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a761bca97fd15e7dc4d8db86a5553fdfd"></a><!-- doxytag: member="LockFreeQueue::operator&#45;&gt;" ref="a761bca97fd15e7dc4d8db86a5553fdfd" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ValueType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>* <a class="el" href="class_lock_free_queue.html">LockFreeQueue</a>&lt; ValueType &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; LockFreeQueueInternal&lt; ValueType &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -337,7 +494,7 @@ template&lt;class ValueType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:59 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

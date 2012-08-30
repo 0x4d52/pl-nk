@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -58,14 +57,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><a class="el" href="dir_32e9b716b525e55ddd6949ed964198cf.html">src</a>      </li>
-      <li class="navelem"><a class="el" href="dir_66de319f4396a2b7916472e434c6bf60.html">plank</a>      </li>
-      <li class="navelem"><a class="el" href="dir_55acb8a3572514eb98b6cea648adb87c.html">files</a>      </li>
-      <li class="navelem"><a class="el" href="dir_6c4a58545874dea69350fbfdc742ea5d.html">audio</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
@@ -74,11 +65,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">plank_AudioFileReader.c File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;../../core/plank_StandardHeader.h&quot;</code><br/>
-<code>#include &quot;../plank_File.h&quot;</code><br/>
-<code>#include &quot;../plank_IffFileReader.h&quot;</code><br/>
-<code>#include &quot;<a class="el" href="plank___audio_file_reader_8h_source.html">plank_AudioFileReader.h</a>&quot;</code><br/>
-</div><table class="memberdecls">
+<table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___audio_file_reader_8c.html#acc61cd309ade5c7a07d8f5c34ddd3369">pl_AudioFileReader_WAV_ParseFormat</a> (<a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a> p, const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a> chunkLength, const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a> chunkDataPos)</td></tr>
@@ -118,12 +105,12 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_audio_file_reader_class.html#ga11507022a82e7b9ab39e460b399f1139">pl_AudioFileReader_ReadFrames</a> (<a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a> p, const int numFrames, void *data, int *framesRead)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a7789250f96e7c7d25babbee8e019a2bb"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFC_ParseData" ref="a7789250f96e7c7d25babbee8e019a2bb" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
+<a class="anchor" id="acc61cd309ade5c7a07d8f5c34ddd3369"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_WAV_ParseFormat" ref="acc61cd309ade5c7a07d8f5c34ddd3369" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFC_ParseData </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_WAV_ParseFormat </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -151,78 +138,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a49204dafab643aa8deaaf4537c10bec7"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFC_ParseFormat" ref="a49204dafab643aa8deaaf4537c10bec7" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
+<a class="anchor" id="ae14fafe1edb2cb28a98766aae71fd4bf"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_WAV_ParseData" ref="ae14fafe1edb2cb28a98766aae71fd4bf" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFC_ParseFormat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
-          <td class="paramname"><em>chunkLength</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abfa78710a15a48867ae09915762bf89b"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFC_ParseVersion" ref="abfa78710a15a48867ae09915762bf89b" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFC_ParseVersion </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
-          <td class="paramname"><em>chunkLength</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a226b40defac686d5777bdfaa14fe936b"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFF_ParseData" ref="a226b40defac686d5777bdfaa14fe936b" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFF_ParseData </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_WAV_ParseData </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
@@ -283,6 +204,138 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a226b40defac686d5777bdfaa14fe936b"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFF_ParseData" ref="a226b40defac686d5777bdfaa14fe936b" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFF_ParseData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
+          <td class="paramname"><em>chunkLength</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abfa78710a15a48867ae09915762bf89b"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFC_ParseVersion" ref="abfa78710a15a48867ae09915762bf89b" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFC_ParseVersion </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
+          <td class="paramname"><em>chunkLength</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a49204dafab643aa8deaaf4537c10bec7"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFC_ParseFormat" ref="a49204dafab643aa8deaaf4537c10bec7" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFC_ParseFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
+          <td class="paramname"><em>chunkLength</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7789250f96e7c7d25babbee8e019a2bb"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_AIFC_ParseData" ref="a7789250f96e7c7d25babbee8e019a2bb" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_AIFC_ParseData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
+          <td class="paramname"><em>chunkLength</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
+          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a07a30ba267abd268e8c780dac41d4fbf"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_ParseMain" ref="a07a30ba267abd268e8c780dac41d4fbf" args="(PlankAudioFileReaderRef p, const PlankFourCharCode mainID, const PlankFourCharCode formatID)" -->
 <div class="memitem">
 <div class="memproto">
@@ -316,72 +369,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae14fafe1edb2cb28a98766aae71fd4bf"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_WAV_ParseData" ref="ae14fafe1edb2cb28a98766aae71fd4bf" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_WAV_ParseData </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
-          <td class="paramname"><em>chunkLength</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acc61cd309ade5c7a07d8f5c34ddd3369"></a><!-- doxytag: member="plank_AudioFileReader.c::pl_AudioFileReader_WAV_ParseFormat" ref="acc61cd309ade5c7a07d8f5c34ddd3369" args="(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_AudioFileReader_WAV_ParseFormat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_audio_file_reader_class.html#ga7b9ce129b7bc8b2861faa3be49fe656a">PlankAudioFileReaderRef</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a534ce6be2740f71e6fdde856c4ce8ee2">PlankUI</a>&#160;</td>
-          <td class="paramname"><em>chunkLength</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="plank___standard_header_8h.html#a854e96ed6d678b7cbcbedffce1c0844d">PlankLL</a>&#160;</td>
-          <td class="paramname"><em>chunkDataPos</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -397,7 +384,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:49 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:49 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

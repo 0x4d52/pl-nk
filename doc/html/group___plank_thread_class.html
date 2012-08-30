@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,8 +68,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef struct PlankThread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An opaque reference to the <em>Plank Thread</em> object.  <a href="#gae37e4606c7f40ef7b6f2363fc3def081"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread ID.  <a href="#gad843f5ed1d1e7c678d01f6d74dfd4fbf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread ID.  <a href="#ga8e4ce91496e1d22a26bac03aba31d9f3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gaea51d83e80774e4dd3ae98da1105eddc">PlankThreadFunction</a> )(<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The Thread run function.  <a href="#gaea51d83e80774e4dd3ae98da1105eddc"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
@@ -79,7 +78,7 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps the calling thread.  <a href="#gae36320b30104e9ff93c9fd762e0add53"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga7f201cf30774cf30ff06f006ad661d89">pl_ThreadYield</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Yield the calling thread.  <a href="#ga7f201cf30774cf30ff06f006ad661d89"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga961e5eee58364f31cfc4d28e97bdf249">pl_ThreadCurrentID</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga961e5eee58364f31cfc4d28e97bdf249">pl_ThreadCurrentID</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the thread ID of the calling thread.  <a href="#ga961e5eee58364f31cfc4d28e97bdf249"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga5d8b8d89d5e9d33d7ff2b76b89c9ba21">pl_Thread_CreateAndInit</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialise a <em>Plank Thread</em> object and return an oqaque reference to it.  <a href="#ga5d8b8d89d5e9d33d7ff2b76b89c9ba21"></a><br/></td></tr>
@@ -91,8 +90,10 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialise a <em>Plank Thread</em> object.  <a href="#ga6035c458003182397300f5b7e4085b60"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga328bb5e57b769e08b1c43941a60a703c">pl_Thread_Destroy</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <em>Plank Thread</em> object.  <a href="#ga328bb5e57b769e08b1c43941a60a703c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gab489859d981e8b61dc68e203abcc2960">pl_Thread_GetID</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gab489859d981e8b61dc68e203abcc2960">pl_Thread_GetID</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the thread ID.  <a href="#gab489859d981e8b61dc68e203abcc2960"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga9d6e3dbef83ad7369bed1ee956266070">pl_Thread_SetName</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p, const char *name)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the name of the thread.  <a href="#ga9d6e3dbef83ad7369bed1ee956266070"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gad1a2f4dda5278e78ce0147862450268b">pl_Thread_SetFunction</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p, <a class="el" href="group___plank_thread_class.html#gaea51d83e80774e4dd3ae98da1105eddc">PlankThreadFunction</a> function)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the thread run function.  <a href="#gad1a2f4dda5278e78ce0147862450268b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga1ba619bc81148a7ab5369bc1d4bcccb6">pl_Thread_SetUserData</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p, <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> userData)</td></tr>
@@ -105,6 +106,9 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels the Thread.  <a href="#ga4f30fcaae6853be24435b60e68f9fbcd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gabce141a91ce41ceec730e292ec8b9c41">pl_Thread_Wait</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the Thread.  <a href="#gabce141a91ce41ceec730e292ec8b9c41"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga88cc9d5ed1c1be0bfa4ac18e6eeff866">pl_Thread_Pause</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#gaf47ba72f4008038bb21272e6a727a566">pl_Thread_PauseWithTimeout</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p, double duration)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga0d3ee32b2d395566983dea5f8aeca22f">pl_Thread_Resume</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga95318580d7b5e9d34b32d7b3adf811ce">pl_Thread_IsRunning</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the Thread is still running.  <a href="#ga95318580d7b5e9d34b32d7b3adf811ce"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_thread_class.html#ga11a80eb0b114468aa1b672c5a9f98d04">pl_Thread_SetShouldExit</a> (<a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> p)</td></tr>
@@ -116,6 +120,36 @@ Functions</h2></td></tr>
 <p>A crossplatform thread implementation. </p>
 <p>[example tba] </p>
 <hr/><h2>Typedef Documentation</h2>
+<a class="anchor" id="gae37e4606c7f40ef7b6f2363fc3def081"></a><!-- doxytag: member="plank_Thread.h::PlankThreadRef" ref="gae37e4606c7f40ef7b6f2363fc3def081" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct PlankThread* <a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>An opaque reference to the <em>Plank Thread</em> object. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga8e4ce91496e1d22a26bac03aba31d9f3"></a><!-- doxytag: member="plank_Thread.h::PlankThreadID" ref="ga8e4ce91496e1d22a26bac03aba31d9f3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> <a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Thread ID. </p>
+
+</div>
+</div>
 <a class="anchor" id="gaea51d83e80774e4dd3ae98da1105eddc"></a><!-- doxytag: member="plank_Thread.h::PlankThreadFunction" ref="gaea51d83e80774e4dd3ae98da1105eddc" args=")(PlankThreadRef)" -->
 <div class="memitem">
 <div class="memproto">
@@ -147,61 +181,88 @@ Functions</h2></td></tr>
 </pre></div> 
 </div>
 </div>
-<a class="anchor" id="gad843f5ed1d1e7c678d01f6d74dfd4fbf"></a><!-- doxytag: member="plank_Thread.h::PlankThreadID" ref="gad843f5ed1d1e7c678d01f6d74dfd4fbf" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef long <a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Thread ID. </p>
-
-</div>
-</div>
-<a class="anchor" id="gae37e4606c7f40ef7b6f2363fc3def081"></a><!-- doxytag: member="plank_Thread.h::PlankThreadRef" ref="gae37e4606c7f40ef7b6f2363fc3def081" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct PlankThread* <a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>An opaque reference to the <em>Plank Thread</em> object. </p>
-
-</div>
-</div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ga4f30fcaae6853be24435b60e68f9fbcd"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_Cancel" ref="ga4f30fcaae6853be24435b60e68f9fbcd" args="(PlankThreadRef p)" -->
+<a class="anchor" id="gae36320b30104e9ff93c9fd762e0add53"></a><!-- doxytag: member="plank_Thread.h::pl_ThreadSleep" ref="gae36320b30104e9ff93c9fd762e0add53" args="(PlankD seconds)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_Cancel </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_ThreadSleep </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a>&#160;</td>
+          <td class="paramname"><em>seconds</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Cancels the Thread. </p>
-<p>Ideally you should provide a method of checking the return value of <a class="el" href="group___plank_thread_class.html#gac68217524df0345ebb0f5e20c40e93e5" title="Checks if the Thread has been asked to exit.">pl_Thread_GetShouldExit()</a> regularly within your Thread run function and return from the function if it signals that the thread should exit. </p>
+<p>Sleeps the calling thread. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
+    <tr><td class="paramname">seconds</td><td>The duration to sleep in seconds. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga7f201cf30774cf30ff06f006ad661d89"></a><!-- doxytag: member="plank_Thread.h::pl_ThreadYield" ref="ga7f201cf30774cf30ff06f006ad661d89" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_ThreadYield </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Yield the calling thread. </p>
+<p>This signals to the operating system that other threads could have some scheduler time. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga961e5eee58364f31cfc4d28e97bdf249"></a><!-- doxytag: member="plank_Thread.h::pl_ThreadCurrentID" ref="ga961e5eee58364f31cfc4d28e97bdf249" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a> pl_ThreadCurrentID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the thread ID of the calling thread. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The thread's ID. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga5d8b8d89d5e9d33d7ff2b76b89c9ba21"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_CreateAndInit" ref="ga5d8b8d89d5e9d33d7ff2b76b89c9ba21" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> pl_Thread_CreateAndInit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create and initialise a <em>Plank Thread</em> object and return an oqaque reference to it. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank Thread</em> object as an opaque reference or PLANK_NULL. </dd></dl>
 
 </div>
 </div>
@@ -224,22 +285,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga5d8b8d89d5e9d33d7ff2b76b89c9ba21"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_CreateAndInit" ref="ga5d8b8d89d5e9d33d7ff2b76b89c9ba21" args="()" -->
+<a class="anchor" id="ga17502d8ff1c19cb2bd5d0e97155d5789"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_Init" ref="ga17502d8ff1c19cb2bd5d0e97155d5789" args="(PlankThreadRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a> pl_Thread_CreateAndInit </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_Init </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Create and initialise a <em>Plank Thread</em> object and return an oqaque reference to it. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <em>Plank Thread</em> object as an opaque reference or PLANK_NULL. </dd></dl>
+<p>Initialise a <em>Plank Thread</em> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
 
 </div>
 </div>
@@ -300,7 +368,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a> pl_Thread_GetID </td>
+          <td class="memname"><a class="el" href="group___plank_thread_class.html#ga8e4ce91496e1d22a26bac03aba31d9f3">PlankThreadID</a> pl_Thread_GetID </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
@@ -321,109 +389,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gac68217524df0345ebb0f5e20c40e93e5"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_GetShouldExit" ref="gac68217524df0345ebb0f5e20c40e93e5" args="(PlankThreadRef p)" -->
+<a class="anchor" id="ga9d6e3dbef83ad7369bed1ee956266070"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_SetName" ref="ga9d6e3dbef83ad7369bed1ee956266070" args="(PlankThreadRef p, const char *name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_Thread_GetShouldExit </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_SetName </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Checks if the Thread has been asked to exit. </p>
-<p>This relies on you checking the return value of this function regularly within your Thread run function and return from the function if it signals that the thread should exit. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the Thread should exit, otherwise <code>false</code>. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga1fb96725fd5710ec31e8308982ef3a6f"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_GetUserData" ref="ga1fb96725fd5710ec31e8308982ef3a6f" args="(PlankThreadRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_Thread_GetUserData </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the user data pointer. </p>
-<p>This allows the Thread to access data while it is running. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The user data pointer. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga17502d8ff1c19cb2bd5d0e97155d5789"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_Init" ref="ga17502d8ff1c19cb2bd5d0e97155d5789" args="(PlankThreadRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Initialise a <em>Plank Thread</em> object. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga95318580d7b5e9d34b32d7b3adf811ce"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_IsRunning" ref="ga95318580d7b5e9d34b32d7b3adf811ce" args="(PlankThreadRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_Thread_IsRunning </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Determines if the Thread is still running. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the Thread is still running, otherwise <code>false</code>. </dd></dl>
+<p>Set the name of the thread. </p>
+<p>Useful for debugging. This must be called before <a class="el" href="group___plank_thread_class.html#gaac35ad7b87f142c831f2fcd2842e927e" title="Starts the Thread.">pl_Thread_Start()</a>. Not implemented on all platforms. </p>
 
 </div>
 </div>
@@ -458,33 +450,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
     <tr><td class="paramname">function</td><td>The function to use as the Thread run function. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga11a80eb0b114468aa1b672c5a9f98d04"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_SetShouldExit" ref="ga11a80eb0b114468aa1b672c5a9f98d04" args="(PlankThreadRef p)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_SetShouldExit </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Signals that the Thread should exit. </p>
-<p>This relies on you checking the return value of <a class="el" href="group___plank_thread_class.html#gac68217524df0345ebb0f5e20c40e93e5" title="Checks if the Thread has been asked to exit.">pl_Thread_GetShouldExit()</a> regularly within your Thread run function and return from the function if it signals that the thread should exit. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -530,6 +495,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga1fb96725fd5710ec31e8308982ef3a6f"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_GetUserData" ref="ga1fb96725fd5710ec31e8308982ef3a6f" args="(PlankThreadRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_Thread_GetUserData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the user data pointer. </p>
+<p>This allows the Thread to access data while it is running. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The user data pointer. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="gaac35ad7b87f142c831f2fcd2842e927e"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_Start" ref="gaac35ad7b87f142c831f2fcd2842e927e" args="(PlankThreadRef p)" -->
 <div class="memitem">
 <div class="memproto">
@@ -547,6 +539,33 @@ Functions</h2></td></tr>
 
 <p>Starts the Thread. </p>
 <p>The calls the function set using <a class="el" href="group___plank_thread_class.html#gad1a2f4dda5278e78ce0147862450268b" title="Set the thread run function.">pl_Thread_SetFunction()</a>. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga4f30fcaae6853be24435b60e68f9fbcd"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_Cancel" ref="ga4f30fcaae6853be24435b60e68f9fbcd" args="(PlankThreadRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_Cancel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Cancels the Thread. </p>
+<p>Ideally you should provide a method of checking the return value of <a class="el" href="group___plank_thread_class.html#gac68217524df0345ebb0f5e20c40e93e5" title="Checks if the Thread has been asked to exit.">pl_Thread_GetShouldExit()</a> regularly within your Thread run function and return from the function if it signals that the thread should exit. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
@@ -583,44 +602,113 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga961e5eee58364f31cfc4d28e97bdf249"></a><!-- doxytag: member="plank_Thread.h::pl_ThreadCurrentID" ref="ga961e5eee58364f31cfc4d28e97bdf249" args="()" -->
+<a class="anchor" id="ga88cc9d5ed1c1be0bfa4ac18e6eeff866"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_Pause" ref="ga88cc9d5ed1c1be0bfa4ac18e6eeff866" args="(PlankThreadRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___plank_thread_class.html#gad843f5ed1d1e7c678d01f6d74dfd4fbf">PlankThreadID</a> pl_ThreadCurrentID </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_Pause </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Get the thread ID of the calling thread. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The thread's ID. </dd></dl>
-
 </div>
 </div>
-<a class="anchor" id="gae36320b30104e9ff93c9fd762e0add53"></a><!-- doxytag: member="plank_Thread.h::pl_ThreadSleep" ref="gae36320b30104e9ff93c9fd762e0add53" args="(PlankD seconds)" -->
+<a class="anchor" id="gaf47ba72f4008038bb21272e6a727a566"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_PauseWithTimeout" ref="gaf47ba72f4008038bb21272e6a727a566" args="(PlankThreadRef p, double duration)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_ThreadSleep </td>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_PauseWithTimeout </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a>&#160;</td>
-          <td class="paramname"><em>seconds</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga0d3ee32b2d395566983dea5f8aeca22f"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_Resume" ref="ga0d3ee32b2d395566983dea5f8aeca22f" args="(PlankThreadRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_Resume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Sleeps the calling thread. </p>
+</div>
+</div>
+<a class="anchor" id="ga95318580d7b5e9d34b32d7b3adf811ce"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_IsRunning" ref="ga95318580d7b5e9d34b32d7b3adf811ce" args="(PlankThreadRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_Thread_IsRunning </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Determines if the Thread is still running. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">seconds</td><td>The duration to sleep in seconds. </td></tr>
+    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the Thread is still running, otherwise <code>false</code>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga11a80eb0b114468aa1b672c5a9f98d04"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_SetShouldExit" ref="ga11a80eb0b114468aa1b672c5a9f98d04" args="(PlankThreadRef p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Thread_SetShouldExit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Signals that the Thread should exit. </p>
+<p>This relies on you checking the return value of <a class="el" href="group___plank_thread_class.html#gac68217524df0345ebb0f5e20c40e93e5" title="Checks if the Thread has been asked to exit.">pl_Thread_GetShouldExit()</a> regularly within your Thread run function and return from the function if it signals that the thread should exit. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -628,23 +716,30 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga7f201cf30774cf30ff06f006ad661d89"></a><!-- doxytag: member="plank_Thread.h::pl_ThreadYield" ref="ga7f201cf30774cf30ff06f006ad661d89" args="()" -->
+<a class="anchor" id="gac68217524df0345ebb0f5e20c40e93e5"></a><!-- doxytag: member="plank_Thread.h::pl_Thread_GetShouldExit" ref="gac68217524df0345ebb0f5e20c40e93e5" args="(PlankThreadRef p)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_ThreadYield </td>
+          <td class="memname"><a class="el" href="plank___standard_header_8h.html#a77a635edbd85b965990b54c23abd2a7a">PlankB</a> pl_Thread_GetShouldExit </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___plank_thread_class.html#gae37e4606c7f40ef7b6f2363fc3def081">PlankThreadRef</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Yield the calling thread. </p>
-<p>This signals to the operating system that other threads could have some scheduler time. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>PlankResult_OK if successful, otherwise an error code. </dd></dl>
+<p>Checks if the Thread has been asked to exit. </p>
+<p>This relies on you checking the return value of this function regularly within your Thread run function and return from the function if it signals that the thread should exit. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The <em>Plank Thread</em> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the Thread should exit, otherwise <code>false</code>. </dd></dl>
 
 </div>
 </div>
@@ -663,7 +758,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 22:58:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
