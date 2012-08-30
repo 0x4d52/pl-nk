@@ -154,7 +154,7 @@ public:
 
         Data& data = this->getState();
                             
-        const int outputLength = this->getOutputBuffer (0).length();
+        const int outputBufferLength = this->getOutputBuffer (0).length();
             
         UnitType& param0Unit = this->getInputAsUnit (inputKeys.atUnchecked (0));
         UnitType& param1Unit = this->getInputAsUnit (inputKeys.atUnchecked (1));
@@ -167,15 +167,15 @@ public:
         const SampleType* const param1Samples = param1Buffer.getArray();
         const SampleType* const param2Samples = param2Buffer.getArray();
         
-        const int param0Length = param0Buffer.length();
-        const int param1Length = param1Buffer.length();
-        const int param2Length = param2Buffer.length();
+        const int param0BufferLength = param0Buffer.length();
+        const int param1BufferLength = param1Buffer.length();
+        const int param2BufferLength = param2Buffer.length();
         
-        if ((outputLength == param0Length) &&
-            (outputLength == param1Length) &&
-            (outputLength == param2Length))
+        if ((outputBufferLength == param0BufferLength) &&
+            (outputBufferLength == param1BufferLength) &&
+            (outputBufferLength == param2BufferLength))
         {
-            for (i = 0; i < outputLength; ++i)
+            for (i = 0; i < outputBufferLength; ++i)
             {
                 data.params[0] = param0Samples[i];
                 data.params[1] = param1Samples[i];
@@ -185,25 +185,41 @@ public:
                 
                 for (j = 0; j < FormType::NumCoeffs; ++j)
                     this->getOutputSamples (j) [i] = data.coeffs[j];
-            }
+            }            
         }
         else
         {
-            data.params[0] = param0Samples[0];
-            data.params[1] = param1Samples[0];
-            data.params[2] = param2Samples[0];
-            
-            ShapeType::calculate (data);
-            
-            for (j = 0; j < FormType::NumCoeffs; ++j)
-            {
-                SampleType* const samples = this->getOutputSamples (j);
-                const SampleType coeff = data.coeffs[j];
-                
-                for (i = 0; i < outputLength; ++i)
-                    samples[i] = coeff;
-            }                        
+            goto fallback;                       
         }        
+        
+        return;
+        
+    fallback:
+        {
+            double param0Position = 0.0;
+            const double param0Increment = double (param0BufferLength) / double (outputBufferLength);
+            double param1Position = 0.0;
+            const double param1Increment = double (param1BufferLength) / double (outputBufferLength);
+            double param2Position = 0.0;
+            const double param2Increment = double (param2BufferLength) / double (outputBufferLength);
+            
+            for (i = 0; i < outputBufferLength; ++i)
+            {
+                data.params[0] = param0Samples[int (param0Position)];
+                data.params[1] = param1Samples[int (param1Position)];
+                data.params[2] = param2Samples[int (param2Position)];
+                
+                ShapeType::calculate (data);
+                
+                for (j = 0; j < FormType::NumCoeffs; ++j)
+                    this->getOutputSamples (j) [i] = data.coeffs[j];
+                
+                param0Position += param0Increment;
+                param1Position += param1Increment;
+                param2Position += param2Increment;
+            }        
+        }
+
     }
     
 private:

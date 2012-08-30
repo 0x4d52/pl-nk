@@ -151,7 +151,7 @@ public:
 
         Data& data = this->getState();
                             
-        const int outputLength = this->getOutputBuffer (0).length();
+        const int outputBufferLength = this->getOutputBuffer (0).length();
             
         UnitType& param0Unit = this->getInputAsUnit (inputKeys.atUnchecked (0));
         UnitType& param1Unit = this->getInputAsUnit (inputKeys.atUnchecked (1));
@@ -160,17 +160,17 @@ public:
         const Buffer& param1Buffer (param1Unit.process (info, 0));
         const SampleType* const param0Samples = param0Buffer.getArray();
         const SampleType* const param1Samples = param1Buffer.getArray();
-        const int param0Length = param0Buffer.length();
-        const int param1Length = param1Buffer.length();
+        const int param0BufferLength = param0Buffer.length();
+        const int param1BufferLength = param1Buffer.length();
         
-        if (outputLength == param0Length)
+        if (outputBufferLength == param0BufferLength)
         {
-            if (outputLength == param1Length)
+            if (outputBufferLength == param1BufferLength)
             {
                 // full rate (although for brest performance in many cases this should be at a lower rate 
                 // than the hardware sample rate and resampled before using with the filter)
                 
-                for (i = 0; i < outputLength; ++i)
+                for (i = 0; i < outputBufferLength; ++i)
                 {
                     data.params[0] = param0Samples[i];
                     data.params[1] = param1Samples[i];
@@ -179,59 +179,44 @@ public:
                     
                     for (j = 0; j < FormType::NumCoeffs; ++j)
                         this->getOutputSamples (j) [i] = data.coeffs[j];
-                }
+                }                
             }
-            else
+            else // add cases where param lengths are 1
             {
-                // just use the first sample in the params
-                
-                data.params[0] = param0Samples[0];
-                data.params[1] = param1Samples[0];
-
-                ShapeType::calculate (data);
-                
-                for (j = 0; j < FormType::NumCoeffs; ++j)
-                {
-                    SampleType* const samples = this->getOutputSamples (j);
-                    const SampleType coeff = data.coeffs[j];
-
-                    for (i = 0; i < outputLength; ++i)
-                        samples[i] = coeff;
-                }
+                goto fallback;
             }
         }
-        else if (outputLength == param1Length)
+        else if (outputBufferLength == param1BufferLength)
         {
-            // just use the first sample in the first param and the other one at full rate
-            data.params[0] = param0Samples[0];
-
-            for (i = 0; i < outputLength; ++i)
+            goto fallback;
+        }
+        else // add cases where param lengths are 1
+        {
+            goto fallback;
+        }
+        
+        return;
+        
+    fallback:
+        {
+            double param0Position = 0.0;
+            const double param0Increment = double (param0BufferLength) / double (outputBufferLength);
+            double param1Position = 0.0;
+            const double param1Increment = double (param1BufferLength) / double (outputBufferLength);
+            
+            for (i = 0; i < outputBufferLength; ++i)
             {
-                data.params[1] = param1Samples[i];
+                data.params[0] = param0Samples[int (param0Position)];
+                data.params[1] = param1Samples[int (param1Position)];
                 
                 ShapeType::calculate (data);
                 
                 for (j = 0; j < FormType::NumCoeffs; ++j)
                     this->getOutputSamples (j) [i] = data.coeffs[j];
-            }
-        }
-        else
-        {
-            // just use the first sample in the params
 
-            data.params[0] = param0Samples[0];
-            data.params[1] = param1Samples[0];
-            
-            ShapeType::calculate (data);
-            
-            for (j = 0; j < FormType::NumCoeffs; ++j)
-            {
-                SampleType* const samples = this->getOutputSamples (j);
-                const SampleType coeff = data.coeffs[j];
-                
-                for (i = 0; i < outputLength; ++i)
-                    samples[i] = coeff;
-            }            
+                param0Position += param0Increment;
+                param1Position += param1Increment;
+            }        
         }
     }
     
