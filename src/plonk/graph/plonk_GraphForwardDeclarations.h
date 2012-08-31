@@ -82,6 +82,7 @@ template<class SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)>       class Un
 template<class SampleType>                                              class MulAddChannelInternal;
 
 // common units
+template<class SampleType>                                              class MulAddUnit;
 template<class SampleType>                                              class ResampleUnit;
 template<class SampleType>                                              class MixerUnit;
 template<class SampleType>                                              class OverlapMakeUnit;

@@ -66,7 +66,7 @@
                                 BlockSize const& blockSize, SampleRate const& sampleRate) throw()\
         :   Internal (inputs, data, blockSize, sampleRate)\
         {\
-            plonk_assert (NumBuffers == (NumInputs + NumOutputs));\
+            plonk_staticassert (NumBuffers == (NumInputs + NumOutputs));\
             Process::init (&p, this, NumOutputs, NumInputs);\
         }
         

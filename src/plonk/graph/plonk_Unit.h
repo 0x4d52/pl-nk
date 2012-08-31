@@ -671,13 +671,14 @@ public:
         if (add.isNull() || (add.isConstant() && (add.getValue (0) == SampleType (0))))
             hasAdd = false;
         
-        // could apply an all-in-one muladd if we had one...
         
-        if (hasMul)
+        if (hasMul && hasAdd)
+            result = MulAddUnit<SampleType>::ar (result, mul, add);
+        else if (hasMul)
             result *= mul;
-        
-        if (hasAdd)
+        else if (hasAdd)
             result += add;
+        
             
         return result;        
     }

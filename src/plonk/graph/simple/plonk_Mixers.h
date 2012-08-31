@@ -178,8 +178,9 @@ public:
     typedef UnitBase<float>                                            UnitType;
     typedef InputDictionary                                            Inputs;
     typedef NumericalArray<float>                                      Buffer;
-        
-    typedef typename BinaryOpChannelInternal<float,plonk::addop>::Process Process;
+
+    typedef BinaryOpChannelInternal<float,plonk::addop>                BinaryOpChannel;
+    typedef typename BinaryOpChannel::Process                          Process;
     
     ChannelMixerChannelInternal (Inputs const& inputs, 
                                  Data const& data, 
@@ -187,7 +188,8 @@ public:
                                  SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
-//        Process::init (&p, this, NumOutputs, NumInputs);
+        plonk_staticassert (BinaryOpChannel::NumBuffers == (BinaryOpChannel::NumInputs + BinaryOpChannel::NumOutputs));
+        Process::init (&p, this, BinaryOpChannel::NumOutputs, BinaryOpChannel::NumInputs);
     }
     
     Text getName() const throw()
@@ -266,6 +268,8 @@ public:
 private:
     Process p;
 };
+
+// unitmixer plink...!?
 
 #endif //PLONK_USEPLINK
 

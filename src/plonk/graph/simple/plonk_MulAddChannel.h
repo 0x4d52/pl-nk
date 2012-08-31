@@ -169,6 +169,24 @@ public:
                 outputSamples[i] = inputSamples[i] * multiplyValue + addValue;
   
         }
+        else if ((inputBufferLength == outputBufferLength) && 
+                 (multiplyBufferLength == outputBufferLength) &&
+                 (addBufferLength == 1))
+        {
+            const SampleType addValue (addBuffer[0]);
+
+            for (i = 0; i < outputBufferLength; ++i) 
+                outputSamples[i] = inputSamples[i] * multiplySamples[i] + addValue;
+        }
+        else if ((inputBufferLength == outputBufferLength) && 
+                 (multiplyBufferLength == 1) &&
+                 (addBufferLength == outputBufferLength))
+        {
+            const SampleType multiplyValue (multiplyBuffer[0]);
+
+            for (i = 0; i < outputBufferLength; ++i) 
+                outputSamples[i] = inputSamples[i] * multiplyValue + addSamples[i];
+        }
         else goto fallback;
         
         return;
@@ -239,9 +257,9 @@ public:
     }
     
     /** Create a control rate multiply-add unit. */
-    static UnitType kr (UnitType const& input, 
-                        UnitType const& mul,
-                        UnitType const& add) throw()
+    static inline UnitType kr (UnitType const& input, 
+                               UnitType const& mul,
+                               UnitType const& add) throw()
     {
         return ar (input, mul, add, 
                    BlockSize::getControlRateBlockSize(), 
