@@ -79,6 +79,7 @@ template<class SampleType>                                              class Nu
 
 template<class SampleType, PLONK_BINARYOPFUNCTION(SampleType, op)>      class BinaryOpChannelInternal;
 template<class SampleType, PLONK_UNARYOPFUNCTION(SampleType, op)>       class UnaryOpChannelInternal;
+template<class SampleType>                                              class MulAddChannelInternal;
 
 // common units
 template<class SampleType>                                              class ResampleUnit;

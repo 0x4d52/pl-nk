@@ -250,10 +250,12 @@
  (via the UnitBase<SampleType> class). By default Plonk is setup to deal with 32-bit 
  floating point data throughout its graphs. This is achieved by the macro
  PLONK_TYPE_DEFAULT which is set to 'float'. This macro is used to set the default
- type for the UnitBase class and the unit factory classes. The convention is for the
- base types (ChannelBase, UnitBase) to become simply 'Channel' and 'Unit' for the
- default sample type. For factory classes, these are generally names like 
- SomethingUnit, which becomes simply 'Something' for the default sample type.
+ type for the UnitBase class and the unit factory classes. A NumericalArray<PLONK_TYPE_DEFAULT>
+ is @c typedef 'd to Buffer (thus a Buffer is by default the same as a Floats or FloatArray
+ object). Another convention is for the base types (ChannelBase, UnitBase) to become simply 
+ 'Channel' and 'Unit' for the default sample type. For factory classes, these are 
+ generally names like SomethingUnit, which becomes simply 'Something' for the default 
+ sample type.
  
  For example, the SineUnit factory class is used to create wavetable-based sine
  wave oscillators. To create one using the default sample type you would do this:

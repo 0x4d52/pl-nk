@@ -129,6 +129,7 @@
 #include "../graph/simple/plonk_ConstantChannel.h"
 #include "../graph/simple/plonk_LinearPanChannel.h"
 #include "../graph/simple/plonk_UnaryOpChannel.h"
+#include "../graph/simple/plonk_MulAddChannel.h"
 #include "../graph/simple/plonk_BusReadChannel.h"
 #include "../graph/simple/plonk_BusWriteChannel.h"
 #include "../graph/simple/plonk_Mixers.h"
