@@ -226,13 +226,12 @@ public:
     typedef float                           FrequencyType;
     typedef UnitBase<float>                 FrequencyUnitType;
     typedef NumericalArray<float>           FrequencyBufferType;
-    typedef InterpLinear<float,float>       InterpType; //? not needed done by plink ?
     
     enum Outputs { Output, NumOutputs };
     enum InputIndices  { Frequency, NumInputs };
     enum Buffers { OutputBuffer, FrequencyBuffer, TableBuffer, NumBuffers };
     
-    typedef PlinkProcess<NumBuffers> Process;
+    typedef PlinkProcess<NumBuffers>        Process;
     
     TableChannelInternal (Inputs const& inputs, 
                           Data const& data, 
@@ -241,7 +240,6 @@ public:
     :   Internal (inputs, data, blockSize, sampleRate)
     {
         plonk_staticassert (NumBuffers == (NumInputs + NumOutputs + 1));
-        
         Process::init (&p, this, NumOutputs, NumInputs);
     }
     
@@ -295,88 +293,6 @@ public:
         
         plink_TableProcessF (&p, &this->getState());
     }
-        
-//    void process (ProcessInfo& info, const int channel) throw()
-//    {                
-//        FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
-//        const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
-//        
-//        SampleType* const outputSamples = this->getOutputSamples();
-//        const int outputBufferLength = this->getOutputBuffer().length();
-//        
-//        const FrequencyType* const frequencySamples = frequencyBuffer.getArray();
-//        const int frequencyBufferLength = frequencyBuffer.length();
-//        
-//        const WavetableType& table (this->getInputAsWavetable (IOKey::Wavetable));
-//        const SampleType* const tableSamples = table.getArray();
-//        const FrequencyType tableLength = FrequencyType (table.length());
-//        const FrequencyType table0 (0);
-//        const FrequencyType tableLengthOverSampleRate = FrequencyType (tableLength * sampleDuration); 
-//        
-//        FrequencyType currentPosition = data.currentPosition;
-//        int i;
-//        
-//        if (frequencyBufferLength == outputBufferLength)
-//        {
-//            for (i = 0; i < outputBufferLength; ++i) 
-//            {
-//                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
-//                currentPosition += frequencySamples[i] * tableLengthOverSampleRate;
-//                
-//                if (currentPosition >= tableLength)
-//                    currentPosition -= tableLength;
-//                else if (currentPosition < table0)	
-//                    currentPosition += tableLength;                
-//            }                    
-//        }
-//        else if (frequencyBufferLength == 1)
-//        {
-//            const FrequencyType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
-//            
-//            if (valueIncrement > table0)
-//            {
-//                for (i = 0; i < outputBufferLength; ++i) 
-//                {
-//                    outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
-//                    currentPosition += valueIncrement;
-//                    
-//                    if (currentPosition >= tableLength)
-//                        currentPosition -= tableLength;
-//                }            
-//            }
-//            else
-//            {
-//                for (i = 0; i < outputBufferLength; ++i) 
-//                {
-//                    outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
-//                    currentPosition += valueIncrement;
-//                    
-//                    if (currentPosition < table0)	
-//                        currentPosition += tableLength;                
-//                }            
-//            }
-//        }
-//        else
-//        {
-//            double frequencyPosition = 0.0;
-//            const double frequencyIncrement = double (frequencyBufferLength) / double (outputBufferLength);
-//            
-//            for (i = 0; i < outputBufferLength; ++i) 
-//            {
-//                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
-//                currentPosition += frequencySamples[int (frequencyPosition)] * tableLengthOverSampleRate;
-//                
-//                if (currentPosition >= tableLength)
-//                    currentPosition -= tableLength;
-//                else if (currentPosition < table0)	
-//                    currentPosition += tableLength;                
-//                
-//                frequencyPosition += frequencyIncrement;
-//            }        
-//        }
-//        
-//        data.currentPosition = currentPosition;
-//    }
     
 private:
     Process p;

@@ -252,7 +252,7 @@ public:
     enum InputIndices  { Frequency, NumInputs };
     enum Buffers { OutputBuffer, FrequencyBuffer, NumBuffers };
     
-    typedef PlinkProcess<NumBuffers> Process;
+    typedef PlinkProcess<NumBuffers>        Process;
     
     SawChannelInternal (Inputs const& inputs, 
                         Data const& data, 
@@ -300,7 +300,6 @@ public:
     void process (ProcessInfo& info, const int channel) throw()
     {                
         FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
-
         const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
                         
         p.buffers[0].bufferSize = this->getOutputBuffer().length();;

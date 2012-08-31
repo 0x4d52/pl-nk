@@ -58,7 +58,6 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;
     typedef NumericalArray<SampleType>              Buffer;
-    typedef BinaryOpUtility<SampleType>             UtilityType;
         
     MulAddChannelInternal (Inputs const& inputs, 
                            Data const& data, 
@@ -155,6 +154,7 @@ public:
             (multiplyBufferLength == outputBufferLength) &&
             (addBufferLength == outputBufferLength))
         {
+            // NNNN
             for (i = 0; i < outputBufferLength; ++i) 
                 outputSamples[i] = inputSamples[i] * multiplySamples[i] + addSamples[i];
         }
@@ -162,6 +162,7 @@ public:
                  (multiplyBufferLength == 1) &&
                  (addBufferLength == 1))
         {
+            // NN11
             const SampleType multiplyValue (multiplyBuffer[0]);
             const SampleType addValue (addBuffer[0]);
             
@@ -173,6 +174,7 @@ public:
                  (multiplyBufferLength == outputBufferLength) &&
                  (addBufferLength == 1))
         {
+            // NNN1
             const SampleType addValue (addBuffer[0]);
 
             for (i = 0; i < outputBufferLength; ++i) 
@@ -182,6 +184,7 @@ public:
                  (multiplyBufferLength == 1) &&
                  (addBufferLength == outputBufferLength))
         {
+            // NN1N
             const SampleType multiplyValue (multiplyBuffer[0]);
 
             for (i = 0; i < outputBufferLength; ++i) 
@@ -213,6 +216,126 @@ public:
         }
     }
 };
+
+//------------------------------------------------------------------------------
+
+template<>
+class MulAddChannelInternal<float>
+:   public ChannelInternal<float, MulAddProcessStateF>
+{
+public:
+    typedef MulAddProcessStateF                     Data;    
+    typedef ChannelBase<float>                      ChannelType;
+    typedef MulAddChannelInternal<float>            MulAddInternal;
+    typedef ChannelInternal<float,Data>             Internal;
+    typedef ChannelInternalBase<float>              InternalBase;
+    typedef UnitBase<float>                         UnitType;
+    typedef InputDictionary                         Inputs;
+    typedef NumericalArray<float>                   Buffer;
+    
+    enum Outputs { Output, NumOutputs };
+    enum InputIndices  { Input, Multiply, Add, NumInputs };
+    enum Buffers { OutputBuffer, InputBuffer, MultiplyBuffer, AddBuffer, NumBuffers };
+    
+    typedef PlinkProcess<NumBuffers>                Process;
+
+    MulAddChannelInternal (Inputs const& inputs, 
+                           Data const& data, 
+                           BlockSize const& blockSize,
+                           SampleRate const& sampleRate) throw()
+    :   Internal (inputs, data, blockSize, sampleRate)
+    {
+        plonk_staticassert (NumBuffers == (NumInputs + NumOutputs));
+        Process::init (&p, this, NumOutputs, NumInputs);
+    }
+    
+    Text getName() const throw()
+    {        
+        return "MulAdd";
+    }    
+    
+    IntArray getInputKeys() const throw()
+    {
+        const IntArray keys (IOKey::Generic,
+                             IOKey::Multiply,
+                             IOKey::Add);
+        return keys;
+    }
+    
+    
+    InternalBase* getChannel (const int index) throw()
+    {
+        const Inputs channelInputs = this->getInputs().getChannel (index);
+        return new MulAddChannelInternal (channelInputs, 
+                                          this->getState(), 
+                                          this->getBlockSize(), 
+                                          this->getSampleRate());
+    }        
+    
+    void initChannel(const int channel) throw()
+    {
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        const float inputValue = inputUnit.getValue (channel);
+        UnitType& multiplyUnit (this->getInputAsUnit (IOKey::Multiply));
+        const float multiplyValue = multiplyUnit.getValue (channel);
+        UnitType& addUnit (this->getInputAsUnit (IOKey::Add));
+        const float addValue = addUnit.getValue (channel);
+        
+        const BlockSize tempBlockSize = inputUnit.getBlockSize (channel)
+                                        .selectMax (multiplyUnit.getBlockSize (channel))
+                                        .selectMax (addUnit.getBlockSize (channel));
+        const SampleRate tempSampleRate = inputUnit.getSampleRate (channel)
+                                          .selectMax (multiplyUnit.getSampleRate (channel))
+                                          .selectMax (addUnit.getSampleRate (channel));
+        
+        this->setBlockSize (BlockSize::decide (tempBlockSize, this->getBlockSize()));
+        this->setSampleRate (SampleRate::decide (tempSampleRate, this->getSampleRate()));                        
+        
+        const DoubleVariable inputOverlap = inputUnit.getOverlap (channel);
+        const DoubleVariable multiplyOverlap = multiplyUnit.getOverlap (channel);
+        const DoubleVariable addOverlap = addUnit.getOverlap (channel);
+        
+        if ((inputOverlap == multiplyOverlap) && (inputOverlap == addOverlap))
+            this->setOverlap (inputOverlap);
+        else if ((inputUnit.isConstant (channel)) && (multiplyUnit.isConstant (channel)))
+            this->setOverlap (addOverlap);
+        else if ((inputUnit.isConstant (channel)) && (addUnit.isConstant (channel)))
+            this->setOverlap (multiplyOverlap);
+        else if ((addUnit.isConstant (channel)) && (multiplyUnit.isConstant (channel)))
+            this->setOverlap (inputOverlap);
+        else
+            plonk_assertfalse;
+        
+        this->initValue (inputValue * multiplyValue + addValue);
+    }    
+    
+    void process (ProcessInfo& info, const int channel) throw()
+    {
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+        UnitType& multiplyUnit (this->getInputAsUnit (IOKey::Multiply));
+        UnitType& addUnit (this->getInputAsUnit (IOKey::Add));
+        
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
+        const Buffer& multiplyBuffer (multiplyUnit.process (info, channel));
+        const Buffer& addBuffer (addUnit.process (info, channel));
+                
+        p.buffers[0].bufferSize = this->getOutputBuffer().length();;
+        p.buffers[0].buffer     = this->getOutputSamples();
+        p.buffers[1].bufferSize = inputBuffer.length();
+        p.buffers[1].buffer     = inputBuffer.getArray();
+        p.buffers[2].bufferSize = multiplyBuffer.length();
+        p.buffers[2].buffer     = multiplyBuffer.getArray();
+        p.buffers[3].bufferSize = addBuffer.length();
+        p.buffers[3].buffer     = addBuffer.getArray();
+
+        plink_MulAddProcessF (&p, &this->getState());
+    }
+    
+private:
+    Process p;
+};
+
+//------------------------------------------------------------------------------
 
 template<class SampleType>
 class MulAddUnit
