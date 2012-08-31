@@ -60,7 +60,6 @@ class TableChannelInternal
 :   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(TableChannelInternal,SampleType)>
 {
 public:
-
     typedef PLONK_CHANNELDATA_NAME(TableChannelInternal,SampleType)     Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
     typedef TableChannelInternal<SampleType>                            TableInternal;
@@ -207,6 +206,186 @@ public:
 };
 
 //------------------------------------------------------------------------------
+
+#ifdef PLONK_USEPLINK
+
+template<>
+class TableChannelInternal<float> :   public ChannelInternal<float, TableProcessStateF>
+{
+public:
+    typedef TableProcessStateF              Data;
+    typedef ChannelBase<float>              ChannelType;
+    typedef TableChannelInternal<float>     TableInternal;
+    typedef ChannelInternal<float,Data>     Internal;
+    typedef ChannelInternalBase<float>      InternalBase;
+    typedef UnitBase<float>                 UnitType;
+    typedef InputDictionary                 Inputs;
+    typedef NumericalArray<float>           Buffer;
+    typedef WavetableBase<float>            WavetableType;
+    
+    typedef float                           FrequencyType;
+    typedef UnitBase<float>                 FrequencyUnitType;
+    typedef NumericalArray<float>           FrequencyBufferType;
+    typedef InterpLinear<float,float>       InterpType; //? not needed done by plink ?
+    
+    enum Outputs { Output, NumOutputs };
+    enum InputIndices  { Frequency, NumInputs };
+    enum Buffers { OutputBuffer, FrequencyBuffer, TableBuffer, NumBuffers };
+    
+    typedef PlinkProcess<NumBuffers> Process;
+    
+    TableChannelInternal (Inputs const& inputs, 
+                          Data const& data, 
+                          BlockSize const& blockSize,
+                          SampleRate const& sampleRate) throw()
+    :   Internal (inputs, data, blockSize, sampleRate)
+    {
+        plonk_staticassert (NumBuffers == (NumInputs + NumOutputs + 1));
+        
+        Process::init (&p, this, NumOutputs, NumInputs);
+    }
+    
+    Text getName() const throw()
+    {
+        return "Table";
+    }       
+    
+    IntArray getInputKeys() const throw()
+    {
+        const IntArray keys (IOKey::Wavetable, 
+                             IOKey::Frequency);
+        return keys;
+    }    
+    
+    InternalBase* getChannel (const int index) throw()
+    {
+        const Inputs channelInputs = this->getInputs().getChannel (index);
+        return new TableInternal (channelInputs, 
+                                  this->getState(), 
+                                  this->getBlockSize(), 
+                                  this->getSampleRate());
+    }
+    
+    void initChannel (const int channel) throw()
+    {        
+        const FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
+        
+        this->setBlockSize (BlockSize::decide (frequencyUnit.getBlockSize (channel),
+                                               this->getBlockSize()));
+        this->setSampleRate (SampleRate::decide (frequencyUnit.getSampleRate (channel),
+                                                 this->getSampleRate()));
+        
+        this->setOverlap (frequencyUnit.getOverlap (channel));
+        
+        this->initValue (this->getState().currentPosition);
+    }    
+    
+    void process (ProcessInfo& info, const int channel) throw()
+    {                
+        FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
+        const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
+        const WavetableType& table (this->getInputAsWavetable (IOKey::Wavetable));
+
+        p.buffers[0].bufferSize = this->getOutputBuffer().length();;
+        p.buffers[0].buffer     = this->getOutputSamples();
+        p.buffers[1].bufferSize = frequencyBuffer.length();
+        p.buffers[1].buffer     = frequencyBuffer.getArray();
+        p.buffers[2].bufferSize = table.length();
+        p.buffers[2].buffer     = table.getArray();
+        
+        plink_TableProcessF (&p, &this->getState());
+    }
+        
+//    void process (ProcessInfo& info, const int channel) throw()
+//    {                
+//        FrequencyUnitType& frequencyUnit = ChannelInternalCore::getInputAs<FrequencyUnitType> (IOKey::Frequency);
+//        const FrequencyBufferType& frequencyBuffer (frequencyUnit.process (info, channel));
+//        
+//        SampleType* const outputSamples = this->getOutputSamples();
+//        const int outputBufferLength = this->getOutputBuffer().length();
+//        
+//        const FrequencyType* const frequencySamples = frequencyBuffer.getArray();
+//        const int frequencyBufferLength = frequencyBuffer.length();
+//        
+//        const WavetableType& table (this->getInputAsWavetable (IOKey::Wavetable));
+//        const SampleType* const tableSamples = table.getArray();
+//        const FrequencyType tableLength = FrequencyType (table.length());
+//        const FrequencyType table0 (0);
+//        const FrequencyType tableLengthOverSampleRate = FrequencyType (tableLength * sampleDuration); 
+//        
+//        FrequencyType currentPosition = data.currentPosition;
+//        int i;
+//        
+//        if (frequencyBufferLength == outputBufferLength)
+//        {
+//            for (i = 0; i < outputBufferLength; ++i) 
+//            {
+//                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
+//                currentPosition += frequencySamples[i] * tableLengthOverSampleRate;
+//                
+//                if (currentPosition >= tableLength)
+//                    currentPosition -= tableLength;
+//                else if (currentPosition < table0)	
+//                    currentPosition += tableLength;                
+//            }                    
+//        }
+//        else if (frequencyBufferLength == 1)
+//        {
+//            const FrequencyType valueIncrement (frequencySamples[0] * tableLengthOverSampleRate);
+//            
+//            if (valueIncrement > table0)
+//            {
+//                for (i = 0; i < outputBufferLength; ++i) 
+//                {
+//                    outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
+//                    currentPosition += valueIncrement;
+//                    
+//                    if (currentPosition >= tableLength)
+//                        currentPosition -= tableLength;
+//                }            
+//            }
+//            else
+//            {
+//                for (i = 0; i < outputBufferLength; ++i) 
+//                {
+//                    outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
+//                    currentPosition += valueIncrement;
+//                    
+//                    if (currentPosition < table0)	
+//                        currentPosition += tableLength;                
+//                }            
+//            }
+//        }
+//        else
+//        {
+//            double frequencyPosition = 0.0;
+//            const double frequencyIncrement = double (frequencyBufferLength) / double (outputBufferLength);
+//            
+//            for (i = 0; i < outputBufferLength; ++i) 
+//            {
+//                outputSamples[i] = InterpType::lookup (tableSamples, currentPosition);
+//                currentPosition += frequencySamples[int (frequencyPosition)] * tableLengthOverSampleRate;
+//                
+//                if (currentPosition >= tableLength)
+//                    currentPosition -= tableLength;
+//                else if (currentPosition < table0)	
+//                    currentPosition += tableLength;                
+//                
+//                frequencyPosition += frequencyIncrement;
+//            }        
+//        }
+//        
+//        data.currentPosition = currentPosition;
+//    }
+    
+private:
+    Process p;
+};    
+
+#endif // PLONK_USEPLINK
+
+//------------------------------------------------------------------------------
+
 
 /** Wavetable oscillator. 
  

@@ -60,6 +60,7 @@
 #include "processes/simple/plink_UnaryOpProcess.h"
 #include "processes/simple/plink_BinaryOpProcess.h"
 #include "processes/generators/plink_Saw.h"
+#include "processes/generators/plink_Table.h"
 #include "processes/generators/plink_WhiteNoise.h"
 
 /** Plink modules....

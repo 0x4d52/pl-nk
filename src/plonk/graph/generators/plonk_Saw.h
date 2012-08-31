@@ -247,7 +247,6 @@ public:
     typedef float                           FrequencyType;
     typedef UnitBase<float>                 FrequencyUnitType;
     typedef NumericalArray<float>           FrequencyBufferType;
-
     
     enum Outputs { Output, NumOutputs };
     enum InputIndices  { Frequency, NumInputs };
@@ -261,7 +260,7 @@ public:
                         SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
-        plonk_assert (NumBuffers == (NumInputs + NumOutputs));
+        plonk_staticassert (NumBuffers == (NumInputs + NumOutputs));
         
         Process::init (&p, this, NumOutputs, NumInputs);
     }
