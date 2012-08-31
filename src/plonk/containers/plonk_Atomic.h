@@ -828,7 +828,7 @@ private:
 };
 
 template<>
-class AtomicExtended<Int> : public AtomicBase<Long>
+class AtomicExtended<Int> : public AtomicBase<LongLong>
 {
 public:
     inline AtomicExtended() throw() 
@@ -847,8 +847,8 @@ public:
     
     inline ~AtomicExtended() 
     {
-        plonk_staticassert (sizeof (Separate) == sizeof (Long));
-        plonk_staticassert (sizeof (Element) == sizeof (Long));
+        plonk_staticassert (sizeof (Separate) == sizeof (LongLong));
+        plonk_staticassert (sizeof (Element) == sizeof (LongLong));
     }
     
     inline AtomicExtended& operator= (AtomicExtended const& other) throw() 
@@ -1022,7 +1022,7 @@ private:
     union Element
     {
         Separate separate;
-        Long whole;
+        LongLong whole;
     };
     
     static inline Long fromParts (const Int value, const Int extra) throw()
@@ -1031,7 +1031,7 @@ private:
         return element.whole;
     }
     
-    static inline Separate fromWhole (Long const& whole) throw()
+    static inline Separate fromWhole (LongLong const& whole) throw()
     {
         Element element;
         element.whole = whole;
