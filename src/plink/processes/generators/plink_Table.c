@@ -43,8 +43,10 @@ void plink_TableProcessF_NN (void* ppv, TableProcessStateF* state)
 {
     PlinkProcessF* pp;
     int i, N, M;
+    unsigned index, mask;
     float fM;
     float factor, currentPosition;
+    float frac;
     float *output;
     float *freq;
     float *table;
@@ -56,6 +58,7 @@ void plink_TableProcessF_NN (void* ppv, TableProcessStateF* state)
     
     N = pp->buffers[0].bufferSize;
     M = pp->buffers[2].bufferSize;
+    mask = M - 1;
     fM = (float)M;
     
     output = pp->buffers[0].buffer;
@@ -68,28 +71,27 @@ void plink_TableProcessF_NN (void* ppv, TableProcessStateF* state)
     
     for (i = 0; i < N; ++i) 
     {
+        index = currentPosition;
+        frac = currentPosition - index;
+
         temp = output[i];
-        output[i] = currentPosition;
+        output[i] = pl_LinInterpF (table[index & mask], table[(index + 1) & mask], frac);
         currentPosition += temp;
-        
-        if (currentPosition >= M)
-            currentPosition -= M;
-        else if (currentPosition < 0)	
-            currentPosition += M;                
     }                    
-    
-    pl_VectorLookupF_NnN (output, table, M, output, N);
-    
-    state->currentPosition = currentPosition;
-    state->fractionPosition = currentPosition - state->currentPosition;
+        
+    index = currentPosition;
+    state->currentPosition = index & mask;
+    state->fractionPosition = currentPosition - index;
 }
 
 void plink_TableProcessF_N1 (void* ppv, TableProcessStateF* state)
 {
     PlinkProcessF* pp;
     int i, N, M;
+    unsigned index, mask;
     float fM;
     float currentPosition;
+    float frac;
     float *output;
     float freqFactor;
     float *table;
@@ -100,47 +102,35 @@ void plink_TableProcessF_N1 (void* ppv, TableProcessStateF* state)
     
     N = pp->buffers[0].bufferSize;
     M = pp->buffers[2].bufferSize;
+    mask = M - 1;
     fM = (float)M;
     
     output = pp->buffers[0].buffer;
     freqFactor = pp->buffers[1].buffer[0] * (float)state->base.sampleDuration * M;
     table = pp->buffers[2].buffer;
-    
-    if (freqFactor > 0.f)
+
+    for (i = 0; i < N; ++i) 
     {
-        for (i = 0; i < N; ++i) 
-        {
-            output[i] = currentPosition;
-            currentPosition += freqFactor;
-            
-            if (currentPosition >= M)
-                currentPosition -= M;
-        }                    
-    }
-    else 
-    {
-        for (i = 0; i < N; ++i) 
-        {
-            output[i] = currentPosition;
-            currentPosition += freqFactor;
-            
-            if (currentPosition < 0)	
-                currentPosition += M;                
-        }                    
-    }
-    
-    pl_VectorLookupF_NnN (output, table, M, output, N);
-    
-    state->currentPosition = currentPosition;
-    state->fractionPosition = currentPosition - state->currentPosition;
+        index = currentPosition;
+        frac = currentPosition - index;
+        
+        output[i] = pl_LinInterpF (table[index & mask], table[(index + 1) & mask], frac);
+        currentPosition += freqFactor;        
+    }                    
+        
+    index = currentPosition;
+    state->currentPosition = index & mask;
+    state->fractionPosition = currentPosition - index;
 }
 
 void plink_TableProcessF_Nn (void* ppv, TableProcessStateF* state)
 {
     PlinkProcessF* pp;
     int i, N, M;
+    unsigned index, mask;
     float fM;
     float factor, currentPosition;
+    float frac;
     float *output;
     float *freq;
     float *table;
@@ -152,6 +142,7 @@ void plink_TableProcessF_Nn (void* ppv, TableProcessStateF* state)
     
     N = pp->buffers[0].bufferSize;
     M = pp->buffers[2].bufferSize;
+    mask = M - 1;
     fM = (float)M;
     
     output = pp->buffers[0].buffer;
@@ -165,21 +156,18 @@ void plink_TableProcessF_Nn (void* ppv, TableProcessStateF* state)
     
     for (i = 0; i < N; ++i) 
     {
-        output[i] = currentPosition;
+        index = currentPosition;
+        frac = currentPosition - index;
+
+        output[i] = pl_LinInterpF (table[index & mask], table[(index + 1) & mask], frac);
         currentPosition += freq[(int)freqPos] * factor;
-        
-        if (currentPosition >= fM)
-            currentPosition -= fM;
-        else if (currentPosition < 0)	
-            currentPosition += fM;   
-        
+                
         freqPos += freqInc;
     }                    
     
-    pl_VectorLookupF_NnN (output, table, M, output, N);
-
-    state->currentPosition = currentPosition;
-    state->fractionPosition = currentPosition - state->currentPosition;
+    index = currentPosition;
+    state->currentPosition = index & mask;
+    state->fractionPosition = currentPosition - index;
 }
 
 void plink_TableProcessF (void* ppv, TableProcessStateF* state) 
