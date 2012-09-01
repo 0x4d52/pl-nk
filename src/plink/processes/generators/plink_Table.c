@@ -52,7 +52,7 @@ void plink_TableProcessF_NN (void* ppv, TableProcessStateF* state)
     
     pp = (PlinkProcessF*)ppv;
     
-    currentPosition = state->currentPosition;
+    currentPosition = state->currentPosition + state->fractionPosition;
     
     N = pp->buffers[0].bufferSize;
     M = pp->buffers[2].bufferSize;
@@ -62,7 +62,7 @@ void plink_TableProcessF_NN (void* ppv, TableProcessStateF* state)
     freq = pp->buffers[1].buffer;
     table = pp->buffers[2].buffer;
     
-    factor = (float)state->common.sampleDuration * M;    
+    factor = (float)state->base.sampleDuration * M;    
     
     pl_VectorMulF_NN1 (output, freq, factor, N);
     
@@ -81,6 +81,7 @@ void plink_TableProcessF_NN (void* ppv, TableProcessStateF* state)
     pl_VectorLookupF_NnN (output, table, M, output, N);
     
     state->currentPosition = currentPosition;
+    state->fractionPosition = currentPosition - state->currentPosition;
 }
 
 void plink_TableProcessF_N1 (void* ppv, TableProcessStateF* state)
@@ -95,14 +96,14 @@ void plink_TableProcessF_N1 (void* ppv, TableProcessStateF* state)
     
     pp = (PlinkProcessF*)ppv;
     
-    currentPosition = state->currentPosition;
+    currentPosition = state->currentPosition + state->fractionPosition;
     
     N = pp->buffers[0].bufferSize;
     M = pp->buffers[2].bufferSize;
     fM = (float)M;
     
     output = pp->buffers[0].buffer;
-    freqFactor = pp->buffers[1].buffer[0] * (float)state->common.sampleDuration * M;
+    freqFactor = pp->buffers[1].buffer[0] * (float)state->base.sampleDuration * M;
     table = pp->buffers[2].buffer;
     
     if (freqFactor > 0.f)
@@ -131,6 +132,7 @@ void plink_TableProcessF_N1 (void* ppv, TableProcessStateF* state)
     pl_VectorLookupF_NnN (output, table, M, output, N);
     
     state->currentPosition = currentPosition;
+    state->fractionPosition = currentPosition - state->currentPosition;
 }
 
 void plink_TableProcessF_Nn (void* ppv, TableProcessStateF* state)
@@ -146,7 +148,7 @@ void plink_TableProcessF_Nn (void* ppv, TableProcessStateF* state)
     
     pp = (PlinkProcessF*)ppv;
     
-    currentPosition = state->currentPosition;
+    currentPosition = state->currentPosition + state->fractionPosition;
     
     N = pp->buffers[0].bufferSize;
     M = pp->buffers[2].bufferSize;
@@ -156,7 +158,7 @@ void plink_TableProcessF_Nn (void* ppv, TableProcessStateF* state)
     freq = pp->buffers[1].buffer;
     table = pp->buffers[2].buffer;
     
-    factor = (float)state->common.sampleDuration * M;    
+    factor = (float)state->base.sampleDuration * M;    
     
     freqPos = 0.0;
     freqInc = (double)pp->buffers[1].bufferSize / (double)N;
@@ -177,6 +179,7 @@ void plink_TableProcessF_Nn (void* ppv, TableProcessStateF* state)
     pl_VectorLookupF_NnN (output, table, M, output, N);
 
     state->currentPosition = currentPosition;
+    state->fractionPosition = currentPosition - state->currentPosition;
 }
 
 void plink_TableProcessF (void* ppv, TableProcessStateF* state) 

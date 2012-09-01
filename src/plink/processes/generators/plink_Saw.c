@@ -49,7 +49,7 @@ void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
     
     pp = (PlinkProcessF*)ppv;
     
-    sampleDuration = (float)state->common.sampleDuration;    
+    sampleDuration = (float)state->base.sampleDuration;    
     currentValue = state->currentValue;
     peak = state->peak;
     peak2peak = state->peak2peak;
@@ -82,7 +82,7 @@ void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
     
     pp = (PlinkProcessF*)ppv;
     
-    sampleDuration = (float)state->common.sampleDuration;    
+    sampleDuration = (float)state->base.sampleDuration;    
     currentValue = state->currentValue;
     peak = state->peak;
     peak2peak = state->peak2peak;
@@ -130,7 +130,7 @@ void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
 
     pp = (PlinkProcessF*)ppv;
     
-    sampleDuration = (float)state->common.sampleDuration;    
+    sampleDuration = (float)state->base.sampleDuration;    
     currentValue = state->currentValue;
     peak = state->peak;
     peak2peak = state->peak2peak;

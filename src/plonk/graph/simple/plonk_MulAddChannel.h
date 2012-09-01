@@ -221,10 +221,10 @@ public:
 
 template<>
 class MulAddChannelInternal<float>
-:   public ChannelInternal<float, MulAddProcessStateF>
+:   public ChannelInternal<float, ChannelInternalCore::Data>
 {
 public:
-    typedef MulAddProcessStateF                     Data;    
+    typedef ChannelInternalCore::Data               Data;    
     typedef ChannelBase<float>                      ChannelType;
     typedef MulAddChannelInternal<float>            MulAddInternal;
     typedef ChannelInternal<float,Data>             Internal;
@@ -328,7 +328,7 @@ public:
         p.buffers[3].bufferSize = addBuffer.length();
         p.buffers[3].buffer     = addBuffer.getArray();
 
-        plink_MulAddProcessF (&p, &this->getState());
+        plink_MulAddProcessF (&p, 0);
     }
     
 private:

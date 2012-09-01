@@ -50,8 +50,9 @@
 
 typedef struct TableProcessStateF
 {
-    PlinkState common;
-    float currentPosition;
+    PlinkState base;
+    int currentPosition;
+    float fractionPosition;
 } TableProcessStateF;
 
 PLINK_BEGIN_C_LINKAGE

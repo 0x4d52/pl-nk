@@ -39,7 +39,7 @@
 #include "../../core/plink_StandardHeader.h"
 #include "plink_MulAddProcess.h"
 
-void plink_MulAddProcessF_NNNN (void* ppv, MulAddProcessStateF* state)
+void plink_MulAddProcessF_NNNN (void* ppv, MulAddProcessState* state)
 {
     PlinkProcessF* pp;
     int N;
@@ -55,7 +55,7 @@ void plink_MulAddProcessF_NNNN (void* ppv, MulAddProcessStateF* state)
     pl_VectorMulAddF_NNNN (output, input, mul, add, N);
 }
 
-void plink_MulAddProcessF_NN11 (void* ppv, MulAddProcessStateF* state)
+void plink_MulAddProcessF_NN11 (void* ppv, MulAddProcessState* state)
 {
     PlinkProcessF* pp;
     int N;
@@ -73,7 +73,7 @@ void plink_MulAddProcessF_NN11 (void* ppv, MulAddProcessStateF* state)
     pl_VectorMulAddF_NNN1(output, input, output, add, N);
 }
 
-void plink_MulAddProcessF_NNN1 (void* ppv, MulAddProcessStateF* state)
+void plink_MulAddProcessF_NNN1 (void* ppv, MulAddProcessState* state)
 {
     PlinkProcessF* pp;
     int N;
@@ -90,7 +90,7 @@ void plink_MulAddProcessF_NNN1 (void* ppv, MulAddProcessStateF* state)
     pl_VectorMulAddF_NNN1 (output, input, mul, add, N);
 }
 
-void plink_MulAddProcessF_NN1N (void* ppv, MulAddProcessStateF* state)
+void plink_MulAddProcessF_NN1N (void* ppv, MulAddProcessState* state)
 {
     PlinkProcessF* pp;
     int N;
@@ -108,7 +108,7 @@ void plink_MulAddProcessF_NN1N (void* ppv, MulAddProcessStateF* state)
     pl_VectorMulAddF_NNNN (output, input, output, add, N);    
 }
 
-void plink_MulAddProcessF_Nnnn (void* ppv, MulAddProcessStateF* state)
+void plink_MulAddProcessF_Nnnn (void* ppv, MulAddProcessState* state)
 {
     PlinkProcessF* pp;
     int i, N;
@@ -138,7 +138,7 @@ void plink_MulAddProcessF_Nnnn (void* ppv, MulAddProcessStateF* state)
     }
 }
 
-void plink_MulAddProcessF (void* ppv, MulAddProcessStateF* state) 
+void plink_MulAddProcessF (void* ppv, MulAddProcessState* state) 
 {
     PlinkProcessF* pp;
     int N, n1, n2, n3;

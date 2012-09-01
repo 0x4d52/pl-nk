@@ -50,7 +50,7 @@
 
 typedef struct SawProcessStateF
 {
-    PlinkState common;
+    PlinkState base;
     float currentValue;
     float peak;
     float peak2peak;

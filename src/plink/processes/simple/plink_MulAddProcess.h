@@ -48,19 +48,16 @@
  @{
  */
 
-typedef struct MulAddProcessStateF
-{
-    PlinkState common;
-} MulAddProcessStateF;
+typedef PlinkState MulAddProcessState;
 
 PLINK_BEGIN_C_LINKAGE
 
-void PLINK_API plink_MulAddProcessF_NNNN (void* pp, MulAddProcessStateF* state);
-void PLINK_API plink_MulAddProcessF_NN11 (void* pp, MulAddProcessStateF* state);
-void PLINK_API plink_MulAddProcessF_NNN1 (void* pp, MulAddProcessStateF* state);
-void PLINK_API plink_MulAddProcessF_NN1N (void* pp, MulAddProcessStateF* state);
-void PLINK_API plink_MulAddProcessF_Nnnn (void* pp, MulAddProcessStateF* state);
-void PLINK_API plink_MulAddProcessF      (void* pp, MulAddProcessStateF* state);
+void PLINK_API plink_MulAddProcessF_NNNN (void* pp, MulAddProcessState* state);
+void PLINK_API plink_MulAddProcessF_NN11 (void* pp, MulAddProcessState* state);
+void PLINK_API plink_MulAddProcessF_NNN1 (void* pp, MulAddProcessState* state);
+void PLINK_API plink_MulAddProcessF_NN1N (void* pp, MulAddProcessState* state);
+void PLINK_API plink_MulAddProcessF_Nnnn (void* pp, MulAddProcessState* state);
+void PLINK_API plink_MulAddProcessF      (void* pp, MulAddProcessState* state);
 
 PLINK_END_C_LINKAGE
 

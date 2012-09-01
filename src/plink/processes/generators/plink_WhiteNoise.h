@@ -50,7 +50,7 @@
 
 typedef struct WhiteNoiseProcessStateF
 {
-    PlinkState common;
+    PlinkState base;
     float minValue;
     float maxValue;
     PlankRNG rng;

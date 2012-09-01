@@ -373,7 +373,10 @@ public:
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
                         
-        Data data = { { -1.0, -1.0 }, FrequencyType (0) };
+        Data data;
+        Memory::zero (data);
+        data.base.sampleRate = -1.0;
+        data.base.sampleDuration = -1.0;
         
         return UnitType::template createFromInputs<TableInternal> (inputs, 
                                                                    data, 
