@@ -240,6 +240,8 @@ public:
     :   Internal (inputs, data, blockSize, sampleRate)
     {
         plonk_staticassert (NumBuffers == (NumInputs + NumOutputs + 1));
+        plonk_assert (Bits::isPowerOf2 (this->getInputAsWavetable (IOKey::Wavetable).length())); // wavetable must be a power of 2 length for Plink
+        
         Process::init (&p, this, NumOutputs, NumInputs);
     }
     

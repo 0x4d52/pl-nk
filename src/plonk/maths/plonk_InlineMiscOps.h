@@ -296,20 +296,34 @@ PLONK_BITSBASE_DECLARE(I,4);
 PLONK_BITSBASE_DECLARE(LL,8);
 
 /** Some useful bitwise functions. */
-template<class Type>
-class Bits : public BitsBase<Type,sizeof(Type)>
+class Bits
 {
 public:
-    typedef BitsBase<Type,sizeof(Type)> Base;
-    static inline Type countOnes             (Type const& value) throw() { return Base::countOnes (value);              }
-    static inline Type countLeadingZeros     (Type const& value) throw() { return Base::countLeadingZeros (value);      }
-    static inline Type countTrailingZeroes   (Type const& value) throw() { return Base::countTrailingZeroes (value);    }
-    static inline Type countLeadingOnes      (Type const& value) throw() { return Base::countLeadingOnes (value);       }
-    static inline Type countTrailingOnes     (Type const& value) throw() { return Base::countTrailingOnes (value);      }
-    static inline Type numBitsRequired       (Type const& value) throw() { return Base::numBitsRequired (value);        }
-    static inline Type nextPowerOf2          (Type const& value) throw() { return Base::nextPowerOf2 (value);           }
-    static inline bool isPowerOf2            (Type const& value) throw() { return Base::isPowerOf2 (value);             }
+    template<class Type> static inline Type countOnes             (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countOnes (value);              }
+    template<class Type> static inline Type countLeadingZeros     (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countLeadingZeros (value);      }
+    template<class Type> static inline Type countTrailingZeroes   (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countTrailingZeroes (value);    }
+    template<class Type> static inline Type countLeadingOnes      (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countLeadingOnes (value);       }
+    template<class Type> static inline Type countTrailingOnes     (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::countTrailingOnes (value);      }
+    template<class Type> static inline Type numBitsRequired       (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::numBitsRequired (value);        }
+    template<class Type> static inline Type nextPowerOf2          (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::nextPowerOf2 (value);           }
+    template<class Type> static inline bool isPowerOf2            (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::isPowerOf2 (value);             }
 };
+
+//template<class Type>
+//class Bits : public BitsBase<Type,sizeof(Type)>
+//{
+//public:
+//    typedef BitsBase<Type,sizeof(Type)> Base;
+//    static inline Type countOnes             (Type const& value) throw() { return Base::countOnes (value);              }
+//    static inline Type countLeadingZeros     (Type const& value) throw() { return Base::countLeadingZeros (value);      }
+//    static inline Type countTrailingZeroes   (Type const& value) throw() { return Base::countTrailingZeroes (value);    }
+//    static inline Type countLeadingOnes      (Type const& value) throw() { return Base::countLeadingOnes (value);       }
+//    static inline Type countTrailingOnes     (Type const& value) throw() { return Base::countTrailingOnes (value);      }
+//    static inline Type numBitsRequired       (Type const& value) throw() { return Base::numBitsRequired (value);        }
+//    static inline Type nextPowerOf2          (Type const& value) throw() { return Base::nextPowerOf2 (value);           }
+//    static inline bool isPowerOf2            (Type const& value) throw() { return Base::isPowerOf2 (value);             }
+//};
+
 
 
 /// @}

@@ -65,7 +65,7 @@ void ObjectMemoryPools::staticFree (void* userData, void* ptr)
 static inline void* staticDoAlloc (void* userData, UnsignedLong requestedSize) throw()
 {    
     const UnsignedLong align = PLONK_WORDSIZE * 2;
-    const UnsignedLong size = Bits<UnsignedLong>::nextPowerOf2 (requestedSize + align);
+    const UnsignedLong size = Bits::nextPowerOf2 (requestedSize + align);
     UnsignedChar* raw = static_cast<UnsignedChar*> (pl_MemoryDefaultAllocateBytes (userData, size));
     *reinterpret_cast<UnsignedLong*> (raw) = size;
     
@@ -113,8 +113,8 @@ ObjectMemoryPools::~ObjectMemoryPools()
 void* ObjectMemoryPools::allocateBytes (UnsignedLong requestedSize)
 {    
     const UnsignedLong align = PLONK_WORDSIZE * 2;
-    const UnsignedLong size = Bits<UnsignedLong>::nextPowerOf2 (requestedSize + align);
-    const UnsignedLong sizeLog2 = size > 0 ? Bits<UnsignedLong>::countTrailingZeroes (size) : 0;
+    const UnsignedLong size = Bits::nextPowerOf2 (requestedSize + align);
+    const UnsignedLong sizeLog2 = size > 0 ? Bits::countTrailingZeroes (size) : 0;
     plonk_assert (sizeLog2 >= 0 && sizeLog2 < NumQueues);
     
     void* rtn = 0;
@@ -143,7 +143,7 @@ void ObjectMemoryPools::free (void* ptr)
         const UnsignedLong align = PLONK_WORDSIZE * 2;
         UnsignedChar* const raw = static_cast<UnsignedChar*> (ptr) - align;
         const UnsignedLong size = *reinterpret_cast<UnsignedLong*> (raw);
-        const UnsignedLong sizeLog2 = size > 0 ? Bits<UnsignedLong>::countTrailingZeroes (size) : 0;
+        const UnsignedLong sizeLog2 = size > 0 ? Bits::countTrailingZeroes (size) : 0;
         plonk_assert (sizeLog2 >= 0 && sizeLog2 < NumQueues);
 
         Element e (ptr);
