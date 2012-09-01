@@ -39,19 +39,133 @@
 #include "../../core/plink_StandardHeader.h"
 #include "plink_Saw.h"
 
+void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
+{
+    PlinkProcessF* pp;
+    int i, N;
+    float sampleDuration, currentValue, factor;
+    float *output;
+    float *freq;
+    
+    pp = (PlinkProcessF*)ppv;
+    
+    sampleDuration = (float)state->base.sampleDuration;    
+    currentValue = state->currentValue;
+    factor = 2.f * sampleDuration;
+    
+    N = pp->buffers[0].bufferSize;
+    output = pp->buffers[0].buffer;
+    freq = pp->buffers[1].buffer;
+    
+    for (i = 0; i < N; ++i) 
+    {
+        output[i] = currentValue;
+        currentValue += freq[i] * factor;
+        
+        if (currentValue >= 1.f)
+            currentValue -= 2.f;
+        else if (currentValue < -1.f)
+            currentValue += 2.f;
+    }    
+    
+    state->currentValue = currentValue;
+}
+
+void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
+{
+    PlinkProcessF* pp;
+    int i, N;
+    float sampleDuration, currentValue, valueIncrement;
+    float *output;
+    
+    pp = (PlinkProcessF*)ppv;
+    
+    sampleDuration = (float)state->base.sampleDuration;    
+    currentValue = state->currentValue;
+    
+    N = pp->buffers[0].bufferSize;
+    output = pp->buffers[0].buffer;
+    valueIncrement = pp->buffers[1].buffer[0] * 2.f * sampleDuration;
+    
+    if (valueIncrement > 0.f)
+    {
+        for (i = 0; i < N; ++i) 
+        {
+            output[i] = currentValue;
+            currentValue += valueIncrement;
+            
+            if (currentValue >= 1.f)
+                currentValue -= 2.f;
+        }  
+    }
+    else 
+    {
+        for (i = 0; i < N; ++i) 
+        {
+            output[i] = currentValue;
+            currentValue += valueIncrement;
+            
+            if (currentValue < -1.f)
+                currentValue += 2.f;
+        }  
+
+    }
+    
+    state->currentValue = currentValue;    
+}
+
+void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
+{
+    PlinkProcessF* pp;
+    int i, N;
+    float sampleDuration, currentValue, factor;
+    float *output;
+    float *freq;
+    double freqPos, freqInc;
+
+    pp = (PlinkProcessF*)ppv;
+    
+    sampleDuration = (float)state->base.sampleDuration;    
+    currentValue = state->currentValue;
+    factor = 2.f * sampleDuration;
+    
+    N = pp->buffers[0].bufferSize;
+    output = pp->buffers[0].buffer;
+    freq = pp->buffers[1].buffer;
+    
+    freqPos = 0.0;
+    freqInc = (double)pp->buffers[1].bufferSize / (double)N;
+    
+    for (i = 0; i < N; ++i) 
+    {
+        output[i] = currentValue;
+        currentValue += freq[(int)freqPos] * factor;
+        
+        if (currentValue >= 1.f)
+            currentValue -= 2.f;
+        else if (currentValue < -1.f)
+            currentValue += 2.f;
+        
+        freqPos += freqInc;
+    }    
+    
+    state->currentValue = currentValue;    
+}
+
+
 //void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
 //{
 //    PlinkProcessF* pp;
 //    int i, N;
-//    float sampleDuration, currentValue, peak, peak2peak, factor;
+//    float sampleDuration, currentValue, peak2peak, factor;
 //    float *output;
 //    float *freq;
+//    float temp;
 //    
 //    pp = (PlinkProcessF*)ppv;
 //    
 //    sampleDuration = (float)state->base.sampleDuration;    
-//    currentValue = state->currentValue;
-//    peak = state->peak;
+//    currentValue = state->currentValue + 3.f;    // pre-inc for the clip function
 //    peak2peak = state->peak2peak;
 //    factor = peak2peak * sampleDuration;
 //    
@@ -59,20 +173,81 @@
 //    output = pp->buffers[0].buffer;
 //    freq = pp->buffers[1].buffer;
 //    
+//    pl_VectorMulF_NN1 (output, freq, factor, N);
+//    
+//    for (i = 0; i < N; ++i) 
+//    {
+//        temp = output[i];
+//        output[i] = currentValue;
+//        currentValue = pl_Wrap24F (currentValue + temp);  
+//    }    
+//    
+//    pl_VectorAddF_NN1 (output, output, -3.f, N); // post decrement after the clip function
+//    state->currentValue = output[N-1];
+//}
+//
+//void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
+//{
+//    PlinkProcessF* pp;
+//    int i, N;
+//    float sampleDuration, currentValue, peak2peak, factor, valueIncrement;
+//    float *output;
+//    
+//    pp = (PlinkProcessF*)ppv;
+//    
+//    sampleDuration = (float)state->base.sampleDuration;    
+//    currentValue = state->currentValue + 3.f;                 // pre-inc for the clip function
+//    peak2peak = state->peak2peak;
+//    factor = peak2peak * sampleDuration;
+//    
+//    N = pp->buffers[0].bufferSize;
+//    output = pp->buffers[0].buffer;
+//    valueIncrement = pp->buffers[1].buffer[0] * factor;
+//    
 //    for (i = 0; i < N; ++i) 
 //    {
 //        output[i] = currentValue;
-//        currentValue += freq[i] * factor;
-//        
-//        if (currentValue >= peak)
-//            currentValue -= peak2peak;
-//        else if (currentValue < -peak)
-//            currentValue += peak2peak;
+//        currentValue = pl_Wrap24F (currentValue + valueIncrement);        
 //    }    
 //    
-//    state->currentValue = currentValue;
+//    pl_VectorAddF_NN1 (output, output, -3.f, N);              // post decrement after the clip function
+//    state->currentValue = output[N-1];    
 //}
 //
+//void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
+//{
+//    PlinkProcessF* pp;
+//    int i, N;
+//    float sampleDuration, currentValue, peak2peak, factor;
+//    float *output;
+//    float *freq;
+//    double freqPos, freqInc;
+//    
+//    pp = (PlinkProcessF*)ppv;
+//    
+//    sampleDuration = (float)state->base.sampleDuration;    
+//    currentValue = state->currentValue + 3.f;                 // pre-inc for the clip function
+//    peak2peak = state->peak2peak;
+//    factor = peak2peak * sampleDuration;
+//    
+//    N = pp->buffers[0].bufferSize;
+//    output = pp->buffers[0].buffer;
+//    freq = pp->buffers[1].buffer;
+//    
+//    freqPos = 0.0;
+//    freqInc = (double)pp->buffers[1].bufferSize / (double)N;
+//    
+//    for (i = 0; i < N; ++i) 
+//    {
+//        output[i] = currentValue;
+//        currentValue = pl_Wrap24F (currentValue + freq[(int)freqPos] * factor);
+//        freqPos += freqInc;
+//    }    
+//    
+//    pl_VectorAddF_NN1 (output, output, -3.f, N);              // post decrement after the clip function
+//    state->currentValue = output[N-1];
+//}
+
 //void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
 //{
 //    PlinkProcessF* pp;
@@ -92,263 +267,28 @@
 //    output = pp->buffers[0].buffer;
 //    valueIncrement = pp->buffers[1].buffer[0] * factor;
 //    
+//    pl_VectorRampF_N11 (output, currentValue, valueIncrement, N);
+//    
 //    if (valueIncrement > 0.f)
 //    {
 //        for (i = 0; i < N; ++i) 
 //        {
-//            output[i] = currentValue;
-//            currentValue += valueIncrement;
-//            
-//            if (currentValue >= peak)
-//                currentValue -= 2.f;
+//            while (output[i] >= 1.f)
+//                output[i] -= 2.f;
 //        }  
 //    }
 //    else 
 //    {
 //        for (i = 0; i < N; ++i) 
 //        {
-//            output[i] = currentValue;
-//            currentValue += valueIncrement;
-//            
-//            if (currentValue < -peak)
-//                currentValue += 2.f;
+//            while (output[i] < -1.f)
+//                output[i] += 2.f;
 //        }  
-//
 //    }
 //    
-//    state->currentValue = currentValue;    
-//}
-//
-//void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
-//{
-//    PlinkProcessF* pp;
-//    int i, N;
-//    float sampleDuration, currentValue, peak, peak2peak, factor;
-//    float *output;
-//    float *freq;
-//    double freqPos, freqInc;
-//
-//    pp = (PlinkProcessF*)ppv;
-//    
-//    sampleDuration = (float)state->base.sampleDuration;    
-//    currentValue = state->currentValue;
-//    peak = state->peak;
-//    peak2peak = state->peak2peak;
-//    factor = peak2peak * sampleDuration;
-//    
-//    N = pp->buffers[0].bufferSize;
-//    output = pp->buffers[0].buffer;
-//    freq = pp->buffers[1].buffer;
-//    
-//    freqPos = 0.0;
-//    freqInc = (double)pp->buffers[1].bufferSize / (double)N;
-//    
-//    for (i = 0; i < N; ++i) 
-//    {
-//        output[i] = currentValue;
-//        currentValue += freq[(int)freqPos] * factor;
-//        
-//        if (currentValue >= peak)
-//            currentValue -= 2.f;
-//        else if (currentValue < -peak)
-//            currentValue += 2.f;
-//        
-//        freqPos += freqInc;
-//    }    
-//    
-//    state->currentValue = currentValue;    
+//    state->currentValue = output[N-1];    
 //}
 
-//void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
-//{
-//    PlinkProcessF* pp;
-//    int i, N;
-//    float sampleDuration, currentValue, peak2peak, factor;
-//    float *output;
-//    float *freq;
-//    float temp;
-//    
-//    pp = (PlinkProcessF*)ppv;
-//    
-//    sampleDuration = (float)state->base.sampleDuration;    
-//    currentValue = state->currentValue + 1.f;    // pre-inc for the clip function
-//    peak2peak = state->peak2peak;
-//    factor = peak2peak * sampleDuration;
-//    
-//    N = pp->buffers[0].bufferSize;
-//    output = pp->buffers[0].buffer;
-//    freq = pp->buffers[1].buffer;
-//    
-//    // need a vector scalar multiply, scalar add
-//    pl_VectorMulF_NN1 (output, freq, factor, N);
-//    
-//    for (i = 0; i < N; ++i) 
-//    {
-//        temp = output[i];
-//        output[i] = currentValue;
-//        currentValue = pl_Clip02F (currentValue + temp);        
-//    }    
-//    
-//    pl_VectorAddF_NN1 (output, output, -1.f, N); // post decrement after the clip function
-//    state->currentValue = currentValue - 1.f;    // post decrement after the clip function
-//}
-//
-//void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
-//{
-//    PlinkProcessF* pp;
-//    int i, N;
-//    float sampleDuration, currentValue, peak2peak, factor, valueIncrement;
-//    float *output;
-//    
-//    pp = (PlinkProcessF*)ppv;
-//    
-//    sampleDuration = (float)state->base.sampleDuration;    
-//    currentValue = state->currentValue + 1.f;                 // pre-inc for the clip function
-//    peak2peak = state->peak2peak;
-//    factor = peak2peak * sampleDuration;
-//    
-//    N = pp->buffers[0].bufferSize;
-//    output = pp->buffers[0].buffer;
-//    valueIncrement = pp->buffers[1].buffer[0] * factor;
-//    
-//    for (i = 0; i < N; ++i) 
-//    {
-//        output[i] = currentValue;
-//        currentValue = pl_Clip02F (currentValue + valueIncrement);        
-//    }    
-//    
-//    pl_VectorAddF_NN1 (output, output, -1.f, N);              // post decrement after the clip function
-//    state->currentValue = currentValue - 1.f;    
-//}
-//
-//void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
-//{
-//    PlinkProcessF* pp;
-//    int i, N;
-//    float sampleDuration, currentValue, peak2peak, factor;
-//    float *output;
-//    float *freq;
-//    double freqPos, freqInc;
-//    
-//    pp = (PlinkProcessF*)ppv;
-//    
-//    sampleDuration = (float)state->base.sampleDuration;    
-//    currentValue = state->currentValue + 1.f;                 // pre-inc for the clip function
-//    peak2peak = state->peak2peak;
-//    factor = peak2peak * sampleDuration;
-//    
-//    N = pp->buffers[0].bufferSize;
-//    output = pp->buffers[0].buffer;
-//    freq = pp->buffers[1].buffer;
-//    
-//    freqPos = 0.0;
-//    freqInc = (double)pp->buffers[1].bufferSize / (double)N;
-//    
-//    for (i = 0; i < N; ++i) 
-//    {
-//        output[i] = currentValue;
-//        currentValue = pl_Clip02F (currentValue + freq[(int)freqPos] * factor);
-//        freqPos += freqInc;
-//    }    
-//    
-//    pl_VectorAddF_NN1 (output, output, -1.f, N);              // post decrement after the clip function
-//    state->currentValue = currentValue - 1.f;    
-//}
-
-void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
-{
-    PlinkProcessF* pp;
-    int i, N;
-    float sampleDuration, currentValue, peak2peak, factor;
-    float *output;
-    float *freq;
-    float temp;
-    
-    pp = (PlinkProcessF*)ppv;
-    
-    sampleDuration = (float)state->base.sampleDuration;    
-    currentValue = state->currentValue + 3.f;    // pre-inc for the clip function
-    peak2peak = state->peak2peak;
-    factor = peak2peak * sampleDuration;
-    
-    N = pp->buffers[0].bufferSize;
-    output = pp->buffers[0].buffer;
-    freq = pp->buffers[1].buffer;
-    
-    pl_VectorMulF_NN1 (output, freq, factor, N);
-    
-    for (i = 0; i < N; ++i) 
-    {
-        temp = output[i];
-        output[i] = currentValue;
-        currentValue = pl_Wrap24F (currentValue + temp);  
-    }    
-    
-    pl_VectorAddF_NN1 (output, output, -3.f, N); // post decrement after the clip function
-    state->currentValue = output[N-1];
-}
-
-void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
-{
-    PlinkProcessF* pp;
-    int i, N;
-    float sampleDuration, currentValue, peak2peak, factor, valueIncrement;
-    float *output;
-    
-    pp = (PlinkProcessF*)ppv;
-    
-    sampleDuration = (float)state->base.sampleDuration;    
-    currentValue = state->currentValue + 3.f;                 // pre-inc for the clip function
-    peak2peak = state->peak2peak;
-    factor = peak2peak * sampleDuration;
-    
-    N = pp->buffers[0].bufferSize;
-    output = pp->buffers[0].buffer;
-    valueIncrement = pp->buffers[1].buffer[0] * factor;
-    
-    for (i = 0; i < N; ++i) 
-    {
-        output[i] = currentValue;
-        currentValue = pl_Wrap24F (currentValue + valueIncrement);        
-    }    
-    
-    pl_VectorAddF_NN1 (output, output, -3.f, N);              // post decrement after the clip function
-    state->currentValue = output[N-1];    
-}
-
-void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
-{
-    PlinkProcessF* pp;
-    int i, N;
-    float sampleDuration, currentValue, peak2peak, factor;
-    float *output;
-    float *freq;
-    double freqPos, freqInc;
-    
-    pp = (PlinkProcessF*)ppv;
-    
-    sampleDuration = (float)state->base.sampleDuration;    
-    currentValue = state->currentValue + 3.f;                 // pre-inc for the clip function
-    peak2peak = state->peak2peak;
-    factor = peak2peak * sampleDuration;
-    
-    N = pp->buffers[0].bufferSize;
-    output = pp->buffers[0].buffer;
-    freq = pp->buffers[1].buffer;
-    
-    freqPos = 0.0;
-    freqInc = (double)pp->buffers[1].bufferSize / (double)N;
-    
-    for (i = 0; i < N; ++i) 
-    {
-        output[i] = currentValue;
-        currentValue = pl_Wrap24F (currentValue + freq[(int)freqPos] * factor);
-        freqPos += freqInc;
-    }    
-    
-    pl_VectorAddF_NN1 (output, output, -3.f, N);              // post decrement after the clip function
-    state->currentValue = output[N-1];
-}
 
 void plink_SawProcessF (void* ppv, SawProcessStateF* state) 
 {
