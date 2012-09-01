@@ -623,6 +623,56 @@
  @subsection OscillatorsAndGenerators Oscillators and generators
  See the @link GeneratorUnits oscillator @endlink and @link NoiseUnits 
  noise @endlink unit documentation for a list of available unit factories.
+ These include sine, saw, square oscillators and white noise.
+ 
+ @subsection AudioRateControlRate Audio rate and control rate
+ As mentioned previously, most Music-N style langauges have a notion of 
+ "audio rate" (where signals are calculated every hardware sample "tick"); and,
+ "control rate" (where some signals are calulcated only every few samples). This can
+ often lead to more efficient processing although care needs to be taken
+ to achieve similar audio quality since it is easy to introduce discontinuities
+ into the signal path when <strong>not</strong> performing the calculations on 
+ every sample.  Take for example a hardware sampling rate of 44100Hz, a typical "control
+ rate" might be every 64 samples; this gives a control rate of 44100/64 = 689.0625Hz.
+ All channels in Plonk have their own sample rate, thus an audio rate channel might
+ run at 44100Hz and a control rate channel might run at a lower frequency. It wouldn't make sense
+ to run many different rates but in theory it is possible in Plonk.
+ 
+ Closeluy linked to sample rate is the processing "block size". Rather than processing one
+ sample from each channel in a Plonk graph before moving onto the next sample, it is common
+ to process a block of samples using the same process then apply another process to that 
+ (and so on). This makes all sorts of optimisations possible (either manually or by clever
+ compiler tricks that we never see). In Plonk all channels can run at differnt block sizes.
+ 
+ The default sample rate in Plonk is intially 44100Hz, although this is changed very soon
+ after starting an audio host if the hardware sample rate is different. Similarly, the default
+ block size is 512 samples, although this may also be changed by an audio host to match
+ the hardware block size. Also by default the "control rate" is governed by the default block
+ size so in fact the default control rate is 44100/512 or around 86Hz.
+ 
+ These defaults are stored in two specially adapted Variable classes: SampleRate (which is 
+ as special kind of Variable<double>); and, BlockSize (which is a special kind of Variable<int>).
+ 
+ If you need to, these values can be obtained:
+ 
+ @code
+ double sr = SampleRate::getDefault().getValue();
+ int bs = BlockSize::getDefault().getValue();
+ @endcode
+ 
+ Here is an example where control rate can be appropriately used 
+ (based on an example above where all units/channels were audio rate):
+ @code
+ Unit f = Sine::kr (0.5).linlin (60, 72).m2f(); // use a control rate 'kr' modulator
+ Unit u = Sine::ar (f.ar(), 0.1);               // resample modulator to audio rate
+ @endcode
+
+ Here the 'linlin' code and the 'm2f' code (which in fact contains some expensive 
+ mathematical functions) are only called once every control rate 'tick'. In fact,
+ the default here is once every block. This is then resampled before being used
+ as the modulator in the second Sine in order to remove discontinuities. A quick
+ test of this example showed it was 40% faster to use the control rate in this way.
+ 
  [todo]
  
  @subsection Filters Filters
@@ -668,7 +718,16 @@
  be a useful compromise in some circumstances even when explonential mapping is more
  appropriate.
  
- [todo]
+ In addition to the audio filters, LagUnit is useful for smoothing out discontinuities
+ in control signals (e.g., form a slider). For example:
+ 
+ @code
+ Unit f = Sine::ar (0.1).linlin (60, 72).round (1).m2f();
+ Unit u = Sine::ar (Lag::ar (f, 0.075), 0.1);
+ @endcode
+ 
+ Here the quantised control signal (from an example earlier) is rounded off slightly
+ to give a gentle portamento effect (it takes 0.075s to glide to the desired note).
  
  @subsection Delay Delay
  [todo]
