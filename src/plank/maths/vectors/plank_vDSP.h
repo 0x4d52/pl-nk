@@ -838,52 +838,124 @@ PLANK_VECTORLOOKUP_DEFINE(D)
 #undef I
 
 // float dest
-PLANK_VECTORCONVERT_DEFINE(F,F) // move
+static inline void pl_VectorConvertF2F_NN (float *result, const float* input, PlankUL N) 
+{
+    pl_VectorMoveF_NN (result, input, N);
+}
 
-static inline void pl_VectorD2F_NN (float *result, const double* input, PlankUL N) 
+static inline void pl_VectorConvertD2F_NN (float *result, const double* input, PlankUL N) 
 {
     vDSP_vdpsp ((double*)input, 1, result, 1, N);
 }
 
-PLANK_VECTORCONVERT_DEFINE(F,C) // vDSP_vflt8
-PLANK_VECTORCONVERT_DEFINE(F,I) // vDSP_vflt32  
-PLANK_VECTORCONVERT_DEFINE(F,S) // vDSP_vflt16
+static inline void pl_VectorConvertC2F_NN (float *result, const char* input, PlankUL N) 
+{
+    vDSP_vflt8 ((char*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertI2F_NN (float *result, const int* input, PlankUL N) 
+{
+    vDSP_vflt32 ((int*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertS2F_NN (float *result, const short* input, PlankUL N) 
+{
+    vDSP_vflt16 ((short*)input, 1, result, 1, N);
+}
+
 //PLANK_VECTORCONVERT_DEFINE(F,L)
 
-static inline void pl_VectorF2D_NN (double *result, const float* input, PlankUL N) 
+static inline void pl_VectorConvertF2D_NN (double *result, const float* input, PlankUL N) 
 {
     vDSP_vspdp ((float*)input, 1, result, 1, N);
 }
 
 // double dest
-PLANK_VECTORCONVERT_DEFINE(D,D) // move
-PLANK_VECTORCONVERT_DEFINE(D,C) // vDSP_vflt8D
-PLANK_VECTORCONVERT_DEFINE(D,I) // vDSP_vflt32D
-PLANK_VECTORCONVERT_DEFINE(D,S) // vDSP_vflt16D
+static inline void pl_VectorConvertD2D_NN (double *result, const double* input, PlankUL N) 
+{
+    pl_VectorMoveD_NN (result, input, N);
+}
+
+static inline void pl_VectorConvertC2D_NN (double *result, const char* input, PlankUL N) 
+{
+    vDSP_vflt8D ((char*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertI2D_NN (double *result, const int* input, PlankUL N) 
+{
+    vDSP_vflt32D ((int*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertS2D_NN (double *result, const short* input, PlankUL N) 
+{
+    vDSP_vflt16D ((short*)input, 1, result, 1, N);
+}
+
 //PLANK_VECTORCONVERT_DEFINE(D,L)
 
 // char dest
-PLANK_VECTORCONVERT_DEFINE(C,F) // vDSP_vfix8
-PLANK_VECTORCONVERT_DEFINE(C,D) // vDSP_vfix8D
-PLANK_VECTORCONVERT_DEFINE(C,C) // move
+static inline void pl_VectorConvertF2C_NN (char *result, const float* input, PlankUL N) 
+{
+    vDSP_vfix8 ((float*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertD2C_NN (char *result, const double* input, PlankUL N) 
+{
+    vDSP_vfix8D ((double*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertC2C_NN (char *result, const char* input, PlankUL N) 
+{
+    pl_MemoryCopy (result, input, N);
+}
+
+
 PLANK_VECTORCONVERT_DEFINE(C,I)
 PLANK_VECTORCONVERT_DEFINE(C,S)
 //PLANK_VECTORCONVERT_DEFINE(C,L)
 
 // int dest
-PLANK_VECTORCONVERT_DEFINE(I,F) // vDSP_vfix32
-PLANK_VECTORCONVERT_DEFINE(I,D) // vDSP_vfix32D
+static inline void pl_VectorConvertF2I_NN (int *result, const float* input, PlankUL N) 
+{
+    vDSP_vfix32 ((float*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertD2I_NN (int *result, const double* input, PlankUL N) 
+{
+    vDSP_vfix32D ((double*)input, 1, result, 1, N);
+}
+
 PLANK_VECTORCONVERT_DEFINE(I,C)
-PLANK_VECTORCONVERT_DEFINE(I,I) // move
+
+static inline void pl_VectorConvertI2I_NN (int *result, const int* input, PlankUL N) 
+{
+    pl_MemoryCopy (result, input, sizeof (int) * N);
+}
+
+
 PLANK_VECTORCONVERT_DEFINE(I,S)
 //PLANK_VECTORCONVERT_DEFINE(I,L)
 
 // short dest
-PLANK_VECTORCONVERT_DEFINE(S,F) // vDSP_vfix16
-PLANK_VECTORCONVERT_DEFINE(S,D) // vDSP_vfix16D
+static inline void pl_VectorConvertF2S_NN (short *result, const float* input, PlankUL N) 
+{
+    vDSP_vfix16 ((float*)input, 1, result, 1, N);
+}
+
+static inline void pl_VectorConvertD2S_NN (short *result, const double* input, PlankUL N) 
+{
+    vDSP_vfix16D ((double*)input, 1, result, 1, N);
+}
+
 PLANK_VECTORCONVERT_DEFINE(S,C) 
 PLANK_VECTORCONVERT_DEFINE(S,I)
-PLANK_VECTORCONVERT_DEFINE(S,S) // move
+
+static inline void pl_VectorConvertS2S_NN (short *result, const short* input, PlankUL N) 
+{
+    pl_MemoryCopy (result, input, sizeof (short) * N);
+}
+
+
 //PLANK_VECTORCONVERT_DEFINE(S,L)
 
 //PLANK_VECTORCONVERTERS_DEFINE(L)

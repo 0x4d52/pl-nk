@@ -90,8 +90,8 @@ PortAudioAudioHost::PortAudioAudioHost (ObjectMemoryBase* omb) throw()
     
     setNumInputs (1);
     setNumOutputs (2);
-    setPreferredBlockSize (512);
-    setPreferredSampleRate (44100.0);    
+    setPreferredHostBlockSize (512);
+    setPreferredHostSampleRate (44100.0);    
 }
 
 PortAudioAudioHost::~PortAudioAudioHost()
@@ -154,15 +154,15 @@ void PortAudioAudioHost::startHost() throw()
 {        
     PaError err;
     err = Pa_OpenDefaultStream (&stream, 
-                                getNumInputs(), getNumOutputs(),                     // ins, outs
+                                getNumInputs(), getNumOutputs(),
                                 paFloat32 | paNonInterleaved,
-                                getPreferredSampleRate(), getPreferredBlockSize(),   // sr, bs
+                                getPreferredHostSampleRate(), getPreferredHostBlockSize(),
                                 paCallback, 
                                 this);
     paCheckError (err);
     
-    SampleRate::getDefault().setValue (getPreferredSampleRate());
-    BlockSize::getDefault().setValue (getPreferredBlockSize()); 
+    SampleRate::getDefault().setValue (getPreferredHostSampleRate());
+    BlockSize::getDefault().setValue (getPreferredHostBlockSize()); 
     startHostInternal();
     
     err = Pa_StartStream (stream);

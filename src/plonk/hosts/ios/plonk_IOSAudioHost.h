@@ -210,8 +210,8 @@ END_PLONK_NAMESPACE
 @property (nonatomic, readonly) PLUNIT outputUnit;          ///< The output unit of the host.
 @property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.
-@property (nonatomic) int preferredBlockSize;               ///< The preferred block size, only set this BEFORE sending the startHost message.
-@property (nonatomic) double preferredSampleRate;           ///< The preferred sample rate, only set this BEFORE sending the startHost message.
+@property (nonatomic) int preferredHostBlockSize;           ///< The preferred block size, only set this BEFORE sending the startHost message.
+@property (nonatomic) double preferredHostSampleRate;       ///< The preferred sample rate, only set this BEFORE sending the startHost message.
 @property (nonatomic) UInt32 category;                      ///< The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.
 @property (nonatomic) UInt32 mode;                          ///< The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.
 

@@ -76,6 +76,7 @@
 		A801E4C215F23AF7002B91BF /* plonk_JuceAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A801E46F15F23AF7002B91BF /* plonk_JuceAudioHost.cpp */; };
 		A801E4C315F23AF7002B91BF /* plonk_PortAudioAudioHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A801E47315F23AF7002B91BF /* plonk_PortAudioAudioHost.cpp */; };
 		A801E4C415F23AF7002B91BF /* plonk_RNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A801E47E15F23AF7002B91BF /* plonk_RNG.cpp */; };
+		A801E4D215F2A8D1002B91BF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A801E4D115F2A8D1002B91BF /* Accelerate.framework */; };
 		A80D17C71585EAB500AAB01B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80D17C61585EAB500AAB01B /* UIKit.framework */; };
 		A80D17C91585EAB500AAB01B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80D17C81585EAB500AAB01B /* Foundation.framework */; };
 		A80D17CB1585EAB500AAB01B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80D17CA1585EAB500AAB01B /* CoreGraphics.framework */; };
@@ -375,6 +376,7 @@
 		A801E47C15F23AF7002B91BF /* plonk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk.h; sourceTree = "<group>"; };
 		A801E47E15F23AF7002B91BF /* plonk_RNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plonk_RNG.cpp; sourceTree = "<group>"; };
 		A801E47F15F23AF7002B91BF /* plonk_RNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plonk_RNG.h; sourceTree = "<group>"; };
+		A801E4D115F2A8D1002B91BF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A80D17C21585EAB500AAB01B /* iosplnk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosplnk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A80D17C61585EAB500AAB01B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A80D17C81585EAB500AAB01B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -411,6 +413,7 @@
 				A80D17C91585EAB500AAB01B /* Foundation.framework in Frameworks */,
 				A80D17CB1585EAB500AAB01B /* CoreGraphics.framework in Frameworks */,
 				A80D194A158633CF00AAB01B /* AudioToolbox.framework in Frameworks */,
+				A801E4D215F2A8D1002B91BF /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1062,7 @@
 		A80D17C51585EAB500AAB01B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A801E4D115F2A8D1002B91BF /* Accelerate.framework */,
 				A80D1949158633CF00AAB01B /* AudioToolbox.framework */,
 				A80D17C61585EAB500AAB01B /* UIKit.framework */,
 				A80D17C81585EAB500AAB01B /* Foundation.framework */,
@@ -1315,6 +1319,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PLONK_AUDIOHOST_IOS=1",
+					"PLANK_VEC_VDSP=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -1340,7 +1345,9 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PLONK_AUDIOHOST_IOS=1",
+					"PLANK_VEC_VDSP=1",
 					"NDEBUG=1",
+					"$(inherited)",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

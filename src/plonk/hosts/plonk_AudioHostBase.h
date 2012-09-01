@@ -47,12 +47,7 @@ class AudioHostBase;
 template<class SampleType>
 class AudioHostBase // don't inherit from PlonkBase...!
 {
-public:
-//    typedef NumericalArray<SampleType>          Buffer;
-//    typedef NumericalArray2D<SampleType>        BufferArray;
-//    typedef NumericalArray<const SampleType>    ConstBuffer;
-//    typedef NumericalArray2D<const SampleType>  ConstBufferArray;
-    
+public:    
     typedef ObjectArray<SampleType*>            BufferArray;
     typedef ObjectArray<const SampleType*>      ConstBufferArray;
 
@@ -64,8 +59,8 @@ public:
     /** Constructor */
     AudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw()
     :   om (omb),
-        preferredSampleRate (0.0),
-        preferredBlockSize (0),
+        preferredHostSampleRate (0.0),
+        preferredHostBlockSize (0),
         isRunning (false)
     { 
         om->init();
@@ -89,18 +84,18 @@ public:
     inline int getNumOutputs() const throw() { return this->outputs.length(); }
     
     /** Get the current preferred sample rate for the host. */
-    inline double getPreferredSampleRate() const throw() { return preferredSampleRate; }
+    inline double getPreferredHostSampleRate() const throw() { return preferredHostSampleRate; }
     
     /** Get the current preferred block size for the host. */
-    inline int getPreferredBlockSize() const throw() { return preferredBlockSize; }
+    inline int getPreferredHostBlockSize() const throw() { return preferredHostBlockSize; }
     
     /** Set the host's preferred sample rate.
      This must be called before startHost() to have any effect. */
-    inline void setPreferredSampleRate (const double newRate) throw() { preferredSampleRate = newRate; }
+    inline void setPreferredHostSampleRate (const double newRate) throw() { preferredHostSampleRate = newRate; }
     
     /** Set the host's preferred block size.
      This must be called before startHost() to have any effect. */
-    inline void setPreferredBlockSize (const int newSize) throw() {  preferredBlockSize = newSize; }
+    inline void setPreferredHostBlockSize (const int newSize) throw() {  preferredHostBlockSize = newSize; }
     
     /** Set the number of audio inputs required.
      This must be called before startHost() to have any effect. */
@@ -215,8 +210,8 @@ protected:
 private:
     ScopedPointerContainer<ObjectMemoryBase> om;
 
-    double preferredSampleRate;
-    int preferredBlockSize;
+    double preferredHostSampleRate;
+    int preferredHostBlockSize;
 	bool isRunning;    
     OptionDictionary otherOptions;
 

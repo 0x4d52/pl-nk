@@ -83,14 +83,14 @@ static inline void InterruptionListener (void *inClientData,
     host->interruptionCallback (inInterruption);
 }
 
-static inline void audioFloatToShort (const float * const src, short* const dst, const unsigned int length) throw()
+static inline void audioFloatToShort (float * const src, short* const dst, const unsigned int length) throw()
 {
-	static const float scale = 32767.f;
+	static const float scale = 32767.f;    
     pl_VectorMulF_N1N (src, scale, src, length);
     pl_VectorConvertF2S_NN (dst, src, length);
 }
 
-static inline void audioFloatToShortChannels (const float * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
+static inline void audioFloatToShortChannels (float * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
@@ -232,20 +232,20 @@ void IOSAudioHost::startHost() throw()
 	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, PropertyListener, this);
 	fixAudioRouteIfSetToReceiver();
 	
-    const double preferredSampleRate = getPreferredSampleRate();
-    size = sizeof (preferredSampleRate);
+    const double preferredHostSampleRate = getPreferredHostSampleRate();
+    size = sizeof (preferredHostSampleRate);
     
-	if (preferredSampleRate > 0.0)
+	if (preferredHostSampleRate > 0.0)
 	{
-		AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareSampleRate, size, &preferredSampleRate);
+		AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareSampleRate, size, &preferredHostSampleRate);
 	}		
     
     size = sizeof (hwSampleRate);
     AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareSampleRate, &size, &hwSampleRate);
 	
-    if (getPreferredBlockSize() > 0)
+    if (getPreferredHostBlockSize() > 0)
     {
-        bufferDuration = getPreferredBlockSize() / hwSampleRate;
+        bufferDuration = getPreferredHostBlockSize() / hwSampleRate;
         AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof (bufferDuration), &bufferDuration);
 	}
     
@@ -582,24 +582,24 @@ using namespace plonk;
     PLPEER->setNumOutputs (numOutputs);
 }
 
-- (int)preferredBlockSize
+- (int)preferredHostBlockSize
 {
-    return PLPEER->getPreferredBlockSize();
+    return PLPEER->getPreferredHostBlockSize();
 }
 
-- (void)setPreferredBlockSize:(int)preferredBlockSize
+- (void)setPreferredHostBlockSize:(int)preferredHostBlockSize
 {
-    PLPEER->setPreferredBlockSize (preferredBlockSize);
+    PLPEER->setPreferredHostBlockSize (preferredHostBlockSize);
 }
 
-- (double)preferredSampleRate
+- (double)preferredHostSampleRate
 {
-    return PLPEER->getPreferredSampleRate();
+    return PLPEER->getPreferredHostSampleRate();
 }
 
-- (void)setPreferredSampleRate:(double)preferredSampleRate
+- (void)setPreferredHostSampleRate:(double)preferredHostSampleRate
 {
-    PLPEER->setPreferredSampleRate (preferredSampleRate);
+    PLPEER->setPreferredHostSampleRate (preferredHostSampleRate);
 }
 
 - (UInt32)category
