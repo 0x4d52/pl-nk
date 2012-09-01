@@ -83,34 +83,34 @@ static inline void InterruptionListener (void *inClientData,
     host->interruptionCallback (inInterruption);
 }
 
-static inline void audioFloatToShort (float *src, short* dst, unsigned int length) throw()
+static inline void audioFloatToShort (const float * const src, short* const dst, const unsigned int length) throw()
 {
 	static const float scale = 32767.f;
     pl_VectorMulF_N1N (src, scale, src, length);
     pl_VectorConvertF2S_NN (dst, src, length);
 }
 
-static inline void audioFloatToShortChannels (float *src[], AudioBufferList* dst, unsigned int length, unsigned int numChannels) throw()
+static inline void audioFloatToShortChannels (const float * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
 {
-	for (UInt32 channel = 0; channel < numChannels; channel++)
+	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
-		AudioSampleType *audioUnitBuffer = (AudioSampleType*)dst->mBuffers[channel].mData;		
+		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)dst->mBuffers[channel].mData;		
 		audioFloatToShort (src[channel], audioUnitBuffer, length);
 	}
 }
 
-static inline void audioShortToFloat (short *src, float* dst, unsigned int length) throw()
+static inline void audioShortToFloat (const short * const src, float* const dst, const unsigned int length) throw()
 {
 	static const float scale = 1.f / 32767.f;	
 	pl_VectorConvertS2F_NN (dst, src, length);
     pl_VectorMulF_N1N (dst, scale, dst, length);
 }
 
-static inline void audioShortToFloatChannels (AudioBufferList* src, float* dst[], unsigned int length, unsigned int numChannels) throw()
+static inline void audioShortToFloatChannels (AudioBufferList* src, float* const dst[], const unsigned int length, const unsigned int numChannels) throw()
 {
-	for (UInt32 channel = 0; channel < numChannels; channel++)
+	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
-		AudioSampleType *audioUnitBuffer = (AudioSampleType*)src->mBuffers[0].mData; // need this other than 0?...		
+		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)src->mBuffers[0].mData; // need this other than 0?...		
 		audioShortToFloat (audioUnitBuffer, dst[channel], length);
 	}	
 }
@@ -376,6 +376,7 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
 		delete [] floatBuffer;
 		bufferSize = inNumberFrames;
 		
+        // should use a FloatArray!!
 		floatBuffer = new float[inNumberFrames * plonk::max (getNumInputs(), getNumOutputs())];
 	}
 	
@@ -400,10 +401,10 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
 	else memset (floatBuffer, 0, numInputChannels * inNumberFrames * sizeof (float));
 	        
     for (i = 0; i < numInputChannels; ++i)
-        getInputs().atUnchecked (i).referTo (inNumberFrames, floatBufferData[i]);
+        getInputs().atUnchecked (i) = floatBufferData[i];//.referTo (inNumberFrames, floatBufferData[i]);
     
     for (i = 0; i < numOutputChannels; ++i)
-        getOutputs().atUnchecked (i).referTo (inNumberFrames, floatBufferData[i]);
+        getOutputs().atUnchecked (i) = floatBufferData[i];//.referTo (inNumberFrames, floatBufferData[i]);
 
     process();
         

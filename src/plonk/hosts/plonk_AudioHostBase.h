@@ -48,10 +48,14 @@ template<class SampleType>
 class AudioHostBase // don't inherit from PlonkBase...!
 {
 public:
-    typedef NumericalArray<SampleType>          Buffer;
-    typedef NumericalArray2D<SampleType>        BufferArray;
+//    typedef NumericalArray<SampleType>          Buffer;
+//    typedef NumericalArray2D<SampleType>        BufferArray;
 //    typedef NumericalArray<const SampleType>    ConstBuffer;
 //    typedef NumericalArray2D<const SampleType>  ConstBufferArray;
+    
+    typedef ObjectArray<SampleType*>            BufferArray;
+//    typedef ObjectArray<const SampleType*>      ConstBufferArray;
+
     typedef UnitBase<SampleType>                UnitType;
     typedef BusBuffer<SampleType>               BusType;
     typedef PLONK_BUSARRAYBASETYPE<BusType>     BussesType;
@@ -170,17 +174,14 @@ protected:
         for (i = 0; i < numInputs; ++i)
             this->busses.atUnchecked (i).write (this->info.getTimeStamp(), 
                                                 blockSize, 
-                                                this->inputs.atUnchecked (i).getArray());
-        
-        //this->lock.lock();   // perhaps replace with virtual function call?
+                                                this->inputs.atUnchecked (i));//.getArray());        
         this->outputUnit.process (info);
-        //this->lock.unlock(); // perhaps replace with virtual function call?
         
         if (this->outputUnit.isNotNull())
         {
             for (i = 0; i < numOutputs; ++i)
             {
-                float* const output = this->outputs.atUnchecked (i).getArray();
+                float* const output = this->outputs.atUnchecked (i);//.getArray();
                 const float* const unitOutput = this->outputUnit.getOutputSamples (i);
                 Floats::copyData (output, unitOutput, blockSize);            
             }
@@ -189,7 +190,7 @@ protected:
         {
             for (i = 0; i < numOutputs; ++i)
             {
-                float* const output = this->outputs.atUnchecked (i).getArray();
+                float* const output = this->outputs.atUnchecked (i);//.getArray();
                 Floats::zeroData (output, blockSize);         
             }
         }
@@ -239,11 +240,11 @@ void AudioHostBase<SampleType>::setNumInputs (const int numInputs) throw()
         
         if (numInputs != 0)
         {
-            inputs = BufferArray (numInputs);
+            inputs = BufferArray::withSize (numInputs);
             
             for (int i = 0; i < numInputs; ++i)
             {
-                this->inputs.atUnchecked (i).referTo (0, 0);
+                this->inputs.atUnchecked (i) = 0;//.referTo (0, 0);
                 this->busses.add (BusType (i));
             }
         }
@@ -260,10 +261,10 @@ void AudioHostBase<SampleType>::setNumOutputs (const int numOutputs) throw()
     {            
         if (numOutputs != 0)
         {
-            outputs = BufferArray (numOutputs);
+            outputs = BufferArray::withSize (numOutputs);
             
             for (int i = 0; i < numOutputs; ++i)
-                this->outputs.atUnchecked (i).referTo (0, 0);
+                this->outputs.atUnchecked (i) = 0;//.referTo (0, 0);
         }
         else this->outputs.clear();
     }

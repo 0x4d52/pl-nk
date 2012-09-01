@@ -186,10 +186,10 @@ void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInput
     int i;
     
     for (i = 0; i < numInputs; ++i)
-        getInputs().atUnchecked (i).referTo (blockSize, const_cast<float*> (inputData[i]));
+        getInputs().atUnchecked (i) = const_cast<float*> (inputData[i]);//.referTo (blockSize, const_cast<float*> (inputData[i]));
 
     for (i = 0; i < numOutputs; ++i)
-        getOutputs().atUnchecked (i).referTo (blockSize, outputData[i]);
+        getOutputs().atUnchecked (i) = outputData[i];//.referTo (blockSize, outputData[i]);
     
     process();
 }

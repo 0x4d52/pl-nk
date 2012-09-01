@@ -46,7 +46,7 @@ BEGIN_PLONK_NAMESPACE
 class PortAudioAudioHost : public AudioHostBase<float>
 {
 public:
-    typedef AudioHostBase<float>::Buffer Buffer;
+//    typedef AudioHostBase<float>::Buffer Buffer;
     typedef AudioHostBase<float>::BufferArray BufferArray;
 
     /** Default constructor. */
