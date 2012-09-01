@@ -39,130 +39,10 @@
 #include "../../core/plink_StandardHeader.h"
 #include "plink_MulAddProcess.h"
 
-//void plink_SawProcessF_NN (void* ppv, SawProcessStateF* state)
-//{
-//    PlinkProcessF* pp;
-//    int i, N;
-//    float sampleDuration, currentValue, peak, peak2peak, factor;
-//    float *output;
-//    float *freq;
-//    
-//    pp = (PlinkProcessF*)ppv;
-//    
-//    sampleDuration = (float)state->common.sampleDuration;    
-//    currentValue = state->currentValue;
-//    peak = state->peak;
-//    peak2peak = state->peak2peak;
-//    factor = peak2peak * sampleDuration;
-//    
-//    N = pp->buffers[0].bufferSize;
-//    output = pp->buffers[0].buffer;
-//    freq = pp->buffers[1].buffer;
-//    
-//    for (i = 0; i < N; ++i) 
-//    {
-//        output[i] = currentValue;
-//        currentValue += freq[i] * factor;
-//        
-//        if (currentValue >= peak)
-//            currentValue -= peak2peak;
-//        else if (currentValue < -peak)
-//            currentValue += peak2peak;
-//    }    
-//    
-//    state->currentValue = currentValue;
-//}
-//
-//void plink_SawProcessF_N1 (void* ppv, SawProcessStateF* state)
-//{
-//    PlinkProcessF* pp;
-//    int i, N;
-//    float sampleDuration, currentValue, peak, peak2peak, factor, valueIncrement;
-//    float *output;
-//    
-//    pp = (PlinkProcessF*)ppv;
-//    
-//    sampleDuration = (float)state->common.sampleDuration;    
-//    currentValue = state->currentValue;
-//    peak = state->peak;
-//    peak2peak = state->peak2peak;
-//    factor = peak2peak * sampleDuration;
-//    
-//    N = pp->buffers[0].bufferSize;
-//    output = pp->buffers[0].buffer;
-//    valueIncrement = pp->buffers[1].buffer[0] * factor;
-//    
-//    if (valueIncrement > 0.f)
-//    {
-//        for (i = 0; i < N; ++i) 
-//        {
-//            output[i] = currentValue;
-//            currentValue += valueIncrement;
-//            
-//            if (currentValue >= peak)
-//                currentValue -= 2.f;
-//        }  
-//    }
-//    else 
-//    {
-//        for (i = 0; i < N; ++i) 
-//        {
-//            output[i] = currentValue;
-//            currentValue += valueIncrement;
-//            
-//            if (currentValue < -peak)
-//                currentValue += 2.f;
-//        }  
-//
-//    }
-//    
-//    state->currentValue = currentValue;    
-//}
-//
-//void plink_SawProcessF_Nn (void* ppv, SawProcessStateF* state)
-//{
-//    PlinkProcessF* pp;
-//    int i, N;
-//    float sampleDuration, currentValue, peak, peak2peak, factor;
-//    float *output;
-//    float *freq;
-//    double freqPos, freqInc;
-//
-//    pp = (PlinkProcessF*)ppv;
-//    
-//    sampleDuration = (float)state->common.sampleDuration;    
-//    currentValue = state->currentValue;
-//    peak = state->peak;
-//    peak2peak = state->peak2peak;
-//    factor = peak2peak * sampleDuration;
-//    
-//    N = pp->buffers[0].bufferSize;
-//    output = pp->buffers[0].buffer;
-//    freq = pp->buffers[1].buffer;
-//    
-//    freqPos = 0.0;
-//    freqInc = (double)pp->buffers[1].bufferSize / (double)N;
-//    
-//    for (i = 0; i < N; ++i) 
-//    {
-//        output[i] = currentValue;
-//        currentValue += freq[(int)freqPos] * factor;
-//        
-//        if (currentValue >= peak)
-//            currentValue -= 2.f;
-//        else if (currentValue < -peak)
-//            currentValue += 2.f;
-//        
-//        freqPos += freqInc;
-//    }    
-//    
-//    state->currentValue = currentValue;    
-//}
-
 void plink_MulAddProcessF_NNNN (void* ppv, MulAddProcessStateF* state)
 {
     PlinkProcessF* pp;
-    int i, N;
+    int N;
     float *output, *input, *mul, *add;
     
     pp     = (PlinkProcessF*)ppv;
@@ -172,14 +52,13 @@ void plink_MulAddProcessF_NNNN (void* ppv, MulAddProcessStateF* state)
     mul    = pp->buffers[2].buffer;
     add    = pp->buffers[3].buffer;
     
-    for (i = 0; i < N; ++i) 
-        output[i] = input[i] * mul[i] + add[i];
+    pl_VectorMulAddF_NNNN (output, input, mul, add, N);
 }
 
 void plink_MulAddProcessF_NN11 (void* ppv, MulAddProcessStateF* state)
 {
     PlinkProcessF* pp;
-    int i, N;
+    int N;
     float *output, *input; 
     float mul, add;
     
@@ -189,15 +68,15 @@ void plink_MulAddProcessF_NN11 (void* ppv, MulAddProcessStateF* state)
     input  = pp->buffers[1].buffer;
     mul    = pp->buffers[2].buffer[0];
     add    = pp->buffers[3].buffer[0];
-    
-    for (i = 0; i < N; ++i) 
-        output[i] = input[i] * mul + add;
+        
+    pl_VectorFillF_N1(output, mul, N);
+    pl_VectorMulAddF_NNN1(output, input, output, add, N);
 }
 
 void plink_MulAddProcessF_NNN1 (void* ppv, MulAddProcessStateF* state)
 {
     PlinkProcessF* pp;
-    int i, N;
+    int N;
     float *output, *input, *mul;
     float add;
     
@@ -207,15 +86,14 @@ void plink_MulAddProcessF_NNN1 (void* ppv, MulAddProcessStateF* state)
     input  = pp->buffers[1].buffer;
     mul    = pp->buffers[2].buffer;
     add    = pp->buffers[3].buffer[0];
-    
-    for (i = 0; i < N; ++i) 
-        output[i] = input[i] * mul[i] + add;
+        
+    pl_VectorMulAddF_NNN1 (output, input, mul, add, N);
 }
 
 void plink_MulAddProcessF_NN1N (void* ppv, MulAddProcessStateF* state)
 {
     PlinkProcessF* pp;
-    int i, N;
+    int N;
     float *output, *input, *add;
     float mul;
     
@@ -226,8 +104,8 @@ void plink_MulAddProcessF_NN1N (void* ppv, MulAddProcessStateF* state)
     mul    = pp->buffers[2].buffer[0];
     add    = pp->buffers[3].buffer;
     
-    for (i = 0; i < N; ++i) 
-        output[i] = input[i] * mul + add[i];
+    pl_VectorFillF_N1 (output, mul, N);
+    pl_VectorMulAddF_NNNN (output, input, output, add, N);    
 }
 
 void plink_MulAddProcessF_Nnnn (void* ppv, MulAddProcessStateF* state)

@@ -109,18 +109,45 @@
     PLANK_VECTORBINARYOPSCALAR_DEFINE(OP,TYPECODE)\
     PLANK_SCALARBINARYOPVECTOR_DEFINE(OP,TYPECODE)
 
-#define PLANK_VECTORMULADD_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(MulAdd,TYPECODE,_NNN)
+#define PLANK_VECTORMULADD_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(MulAdd,TYPECODE,_NNNN)
+#define PLANK_VECTORMULADDINPLACE_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(MulAdd,TYPECODE,_NNN)
+#define PLANK_VECTORMULSCALARADD_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(MulAdd,TYPECODE,_NNN1)
 
 #define PLANK_VECTORMULADD_DEFINE(TYPECODE) \
+    /** Applies the multiply and add operator to a set of vectors.
+    @f$ result = input * mul + add @f$
+    @param result The output vector.
+    @param input The input vector.
+    @param mul A vector containing the value to multiply the input by.
+    @param add A vector containing the value to add after the multiply.
+    @param N The number of items in the vectors. */\
+    static inline void PLANK_VECTORMULADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, const Plank##TYPECODE* mul, const Plank##TYPECODE* add, PlankUL N) {\
+        PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (input[i], mul[i]), add[i]); }\
+    }
+
+
+#define PLANK_VECTORMULADDINPLACE_DEFINE(TYPECODE) \
     /** Applies the multiply and add operator to a set of vectors.
     @f$ io = io * mul + add @f$
     @param io The input and output vector.
     @param mul A vector containing the value to multiply the input by.
-    @param add Input vector @e b and the source of the right operand of the operation.
+    @param add A vector containing the value to add after the multiply.
     @param N The number of items in the vectors. */\
-    static inline void PLANK_VECTORMULADD_NAME(TYPECODE) (Plank##TYPECODE *io, const Plank##TYPECODE* mul, const Plank##TYPECODE* add, PlankUL N) {\
+    static inline void PLANK_VECTORMULADDINPLACE_NAME(TYPECODE) (Plank##TYPECODE *io, const Plank##TYPECODE* mul, const Plank##TYPECODE* add, PlankUL N) {\
 		PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { io[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (io[i], mul[i]), add[i]); }\
     }
+
+#define PLANK_VECTORMULSCALARADD_DEFINE(TYPECODE) \
+    /** Applies the multiply and add operator to a set of vectors.
+    @f$ io = io * mul + add @f$
+    @param io The input and output vector.
+    @param mul A vector containing the value to multiply the input by.
+    @param add A scalar to add after the multiply.
+    @param N The number of items in the vectors. */\
+    static inline void PLANK_VECTORMULSCALARADD_NAME(TYPECODE) (Plank##TYPECODE *result, const Plank##TYPECODE* input, const Plank##TYPECODE* mul, Plank##TYPECODE add, PlankUL N) {\
+        PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (input[i], mul[i]), add); }\
+    }
+
 
 #define PLANK_VECTORFILL_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(Fill,TYPECODE,_N1)
 
@@ -251,6 +278,8 @@
     PLANK_VECTORBINARYOP_DEFINE(Thresh,TYPECODE)\
     \
     PLANK_VECTORMULADD_DEFINE(TYPECODE)\
+    PLANK_VECTORMULADDINPLACE_DEFINE(TYPECODE)\
+    PLANK_VECTORMULSCALARADD_DEFINE(TYPECODE)\
     \
     PLANK_VECTORLOOKUP_DEFINE(TYPECODE)
 

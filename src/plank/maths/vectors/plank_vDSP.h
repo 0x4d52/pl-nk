@@ -338,9 +338,19 @@ static inline void pl_VectorHypotF_N1N (float *result, float a, const float* b, 
     vDSP_vdist ((float*)b, 1, result, 1, result, 1, N); 
 }
 
+static inline void pl_VectorMulAddF_NNNN (float *result, const float* input, const float* a, const float* b, PlankUL N) 
+{ 
+    vDSP_vma ((float*)input, 1, (float*)a, 1, (float*)b, 1, (float*)result, 1, N); 
+}
+
 static inline void pl_VectorMulAddF_NNN (float *io, const float* a, const float* b, PlankUL N) 
 { 
     vDSP_vma ((float*)io, 1, (float*)a, 1, (float*)b, 1, (float*)io, 1, N); 
+}
+
+static inline void pl_VectorMulAddF_NNN1 (float *result, const float* input, const float* a, float b, PlankUL N) 
+{ 
+    vDSP_vmsa ((float*)input, 1, (float*)a, 1, &b, result, 1, N);
 }
 
 
@@ -648,10 +658,21 @@ static inline void pl_VectorHypotD_N1N (double *result, double a, const double* 
     vDSP_vdistD ((double*)b, 1, result, 1, result, 1, N); 
 }
 
+static inline void pl_VectorMulAddD_NNNN (double *result, const double* input, const double* a, const double* b, PlankUL N) 
+{ 
+    vDSP_vmaD ((double*)input, 1, (double*)a, 1, (double*)b, 1, (double*)result, 1, N); 
+}
+
 static inline void pl_VectorMulAddD_NNN (double *io, const double* a, const double* b, PlankUL N) 
 { 
     vDSP_vmaD ((double*)io, 1, (double*)a, 1, (double*)b, 1, (double*)io, 1, N); 
 }
+
+static inline void pl_VectorMulAddD_NNN1 (double *result, const double* input, const double* a, double b, PlankUL N) 
+{ 
+    vDSP_vmsaD ((double*)input, 1, (double*)a, 1, &b, result, 1, N);
+}
+
 
 // works as documented but seems useless as it interpolates thr "wrong" two samples
 // fixed in 10.7.2 but is that seems to be the runtime lib so would still 
