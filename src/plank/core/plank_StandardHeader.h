@@ -224,6 +224,13 @@ typedef PlankI PlankFourCharCode;
     #define PLANK_INFINITY (PLANK_INFINITY_HACK.Value)
 #endif
 
+#define PLANK_FLOAT_ONE         0x3f800000
+#define PLANK_FLOAT_ONEMASK     0x007fffff
+#define PLANK_DOUBLE_ONE        0x3ff0000000000000
+#define PLANK_DOUBLE_ONEMASK    0x000fffffffffffff
+
+
+
 #include "plank_Result.h"
 
 

@@ -219,6 +219,8 @@ public:
 
 //------------------------------------------------------------------------------
 
+#ifdef PLONK_USEPLINK
+
 template<>
 class MulAddChannelInternal<float>
 :   public ChannelInternal<float, ChannelInternalCore::Data>
@@ -334,6 +336,8 @@ public:
 private:
     Process p;
 };
+
+#endif // PLONK_USEPLINK
 
 //------------------------------------------------------------------------------
 

@@ -246,6 +246,44 @@ inline Type zap (Type const& x) throw()
     return ((absx > smallest) && (absx < biggest)) ? x : Math<Type>::get0();
 }
 
+//template<class Type>
+//class ClipNormalHelper
+//{
+//public:
+//    static inline Type clipNormal (Type const& a) throw()
+//    {
+//        return a; // integer type wrap around peak anyway;
+//    }
+//};
+//
+//template<>
+//class ClipNormalHelper<float>
+//{
+//public:
+//    static inline float clipNormal (float const& a) throw()
+//    {
+//        return pl_ClipNormalF (a);
+//    }
+//};
+//
+//template<>
+//class ClipNormalHelper<double>
+//{
+//public:
+//    static inline double clipNormal (double const& a) throw()
+//    {
+//        return pl_ClipNormalD (a);
+//    }
+//};
+//
+//
+//template<class Type> 
+//inline Type clipNormal (Type const& a) throw()       
+//{ 
+//    return ClipNormalHelper<Type>::clipNormal (a);
+//}
+
+
 /// @}
 
 #endif // PLONK_INLINEUNARYOPS_H

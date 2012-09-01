@@ -297,9 +297,10 @@
  
  The 'mul' and 'add' inputs are common to many factory classes these are applied
  after the output of the unit at full ampltitude. The default for float and double sample types
- is ±1. Thus Sine::ar(1000) would output a full scale sine wave at 1kHz. While the 'add'
- input can be used to mix units, this is not its primary purpose nor the most convenient
- way of achieving this. The 'add' input is more useful for creating modulators. E.g.,
+ is ±1. Thus Sine::ar(1000) would output a full scale sine wave at 1kHz. The 'add' input
+ can be used to mix a unit with the output of another unit. Depending on which optimisations
+ are turned on this may be the most efficient way of mixing signals (if not the most
+ convenient). The 'add' input is also useful for creating modulators. E.g.,
  
  @code
  Unit u = Sine::ar (Sine::ar (5, 100, 1000), 0.1);
@@ -571,6 +572,9 @@
  @endcode
 
  Thus Mixer and Unit::mix() mix down multiple channels to a single channel.
+ 
+ [todo: example using the add input to leverage optimised performance]
+ 
  Mixing multiple channels is as straightforward but requires the use of arrays
  of units i.e. a Units or UnitArray. Take the following example:
  

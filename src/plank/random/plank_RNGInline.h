@@ -46,12 +46,12 @@ typedef struct PlankRNG
 } PlankRNG;
 #endif
 
-#define PLANK_RNG_MAGIC1      1664525
-#define PLANK_RNG_MAGIC2      1013904223
-#define PLANK_RNG_FLOAT_ONE   0x3f800000
-#define PLANK_RNG_FLOAT_MASK  0x007fffff
-#define PLANK_RNG_DOUBLE_ONE  0x3ff0000000000000
-#define PLANK_RNG_DOUBLE_MASK 0x000fffffffffffff
+#define PLANK_RNG_MAGIC1            1664525
+#define PLANK_RNG_MAGIC2            1013904223
+#define PLANK_RNG_FLOAT_ONE         PLANK_FLOAT_ONE
+#define PLANK_RNG_FLOAT_ONEMASK     PLANK_FLOAT_ONEMASK
+#define PLANK_RNG_DOUBLE_ONE        PLANK_DOUBLE_ONE
+#define PLANK_RNG_DOUBLE_ONEMASK    PLANK_DOUBLE_ONEMASK
 
 static inline int pl_RNG_Next (PlankRNGRef p)
 {
@@ -69,7 +69,7 @@ static inline float pl_RNG_NextFloat (PlankRNGRef p)
 {    
     unsigned int bits;
 	float value;
-	bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_MASK & pl_RNG_Next (p));
+	bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_ONEMASK & pl_RNG_Next (p));
     value = *(float*)(&bits);
     return value - 1.f;
 }
@@ -78,7 +78,7 @@ static inline double pl_RNG_NextDouble (PlankRNGRef p)
 {    
     unsigned int bits;
 	float value;
-	bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_MASK & pl_RNG_Next (p));
+	bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_ONEMASK & pl_RNG_Next (p));
     value = *(float*)(&bits);
     return (double)value - 1.0;
 }

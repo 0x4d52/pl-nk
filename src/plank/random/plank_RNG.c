@@ -40,13 +40,6 @@
 #include "plank_RNG.h"
 #include "../containers/plank_Atomic.h"
 
-#define PLANK_RNG_MAGIC1      1664525
-#define PLANK_RNG_MAGIC2      1013904223
-#define PLANK_RNG_FLOAT_ONE   0x3f800000
-#define PLANK_RNG_FLOAT_MASK  0x007fffff
-#define PLANK_RNG_DOUBLE_ONE  0x3ff0000000000000
-#define PLANK_RNG_DOUBLE_MASK 0x000fffffffffffff
-
 PlankRNGRef pl_RNGGlobal()
 {
     static PlankAtomicI init = { 0 };

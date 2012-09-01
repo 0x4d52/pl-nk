@@ -399,4 +399,12 @@ const Text& Text::getStandardDelimiters() throw()
 	return t;
 }
 
+/* add a toBinary function?
+ for (int i = 31; i >= 0; --i)
+ {
+ unsigned int mask = (int)1 << i;
+ printf ("%d", value & mask ? 1 : 0);
+ }
+*/
+
 END_PLONK_NAMESPACE
