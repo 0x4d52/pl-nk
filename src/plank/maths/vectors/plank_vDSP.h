@@ -182,19 +182,108 @@ PLANK_VECTORBINARYOP_DEFINE(IsGreaterThan,F)
 PLANK_VECTORBINARYOP_DEFINE(IsGreaterThanOrEqualTo,F)
 PLANK_VECTORBINARYOP_DEFINE(IsLessThan,F)
 PLANK_VECTORBINARYOP_DEFINE(IsLessThanOrEqualTo,F)
-PLANK_VECTORBINARYOP_DEFINE(SumSqr,F)
-PLANK_VECTORBINARYOP_DEFINE(DifSqr,F)
-PLANK_VECTORBINARYOP_DEFINE(SqrSum,F)
-PLANK_VECTORBINARYOP_DEFINE(SqrDif,F)
-PLANK_VECTORBINARYOP_DEFINE(AbsDif,F)
+
+static inline void pl_VectorSumSqrF_NNN (float *result, const float* a, const float* b, PlankUL N) 
+{
+    vDSP_vmma ((float*)a, 1, (float*)a, 1, (float*)b, 1, (float*)b, 1, result, 1, N);
+}
+
+static inline void pl_VectorSumSqrF_NN1 (float *result, const float* a, float b, PlankUL N) 
+{ 
+    vDSP_vfill (&b, result, 1, N);
+    vDSP_vmma ((float*)a, 1, (float*)a, 1, result, 1, result, 1, result, 1, N);
+}
+
+static inline void pl_VectorSumSqrF_N1N (float *result, float a, const float* b, PlankUL N) 
+{
+    vDSP_vfill (&a, result, 1, N);
+    vDSP_vmma (result, 1, result, 1, (float*)b, 1, (float*)b, 1, result, 1, N);
+}
+
+static inline void pl_VectorDifSqrF_NNN (float *result, const float* a, const float* b, PlankUL N) 
+{
+    vDSP_vmmsb ((float*)a, 1, (float*)a, 1, (float*)b, 1, (float*)b, 1, result, 1, N);
+}
+
+static inline void pl_VectorDifSqrF_NN1 (float *result, const float* a, float b, PlankUL N) 
+{ 
+    vDSP_vfill (&b, result, 1, N);
+    vDSP_vmmsb ((float*)a, 1, (float*)a, 1, result, 1, result, 1, result, 1, N);
+}
+
+static inline void pl_VectorDifSqrF_N1N (float *result, float a, const float* b, PlankUL N) 
+{
+    vDSP_vfill (&a, result, 1, N);
+    vDSP_vmmsb (result, 1, result, 1, (float*)b, 1, (float*)b, 1, result, 1, N);
+}
+
+static inline void pl_VectorSqrSumF_NNN (float *result, const float* a, const float* b, PlankUL N) 
+{
+    vDSP_vadd (a, 1, b, 1, result, 1, N);
+    vDSP_vsq (result, 1, result, 1, N);
+}
+
+static inline void pl_VectorSqrSumF_NN1 (float *result, const float* a, float b, PlankUL N) 
+{ 
+    vDSP_vsadd ((float*)a, 1, &b, result, 1, N);
+    vDSP_vsq (result, 1, result, 1, N);
+}
+
+static inline void pl_VectorSqrSumF_N1N (float *result, float a, const float* b, PlankUL N) 
+{
+    vDSP_vsadd ((float*)b, 1, &a, result, 1, N);
+    vDSP_vsq (result, 1, result, 1, N);
+}
+
+static inline void pl_VectorSqrDifF_NNN (float *result, const float* a, const float* b, PlankUL N) 
+{
+    float mone = -1.f;
+    vDSP_vsmul ((float*)b, 1, &mone, result, 1, N); 
+    vDSP_vadd ((float*)a, 1, result, 1, result, 1, N); 
+    vDSP_vsq (result, 1, result, 1, N);
+}
+
+static inline void pl_VectorSqrDifF_NN1 (float *result, const float* a, float b, PlankUL N) 
+{ 
+    float nb = -b;
+    vDSP_vsadd ((float*)a, 1, &nb, result, 1, N);
+    vDSP_vsq (result, 1, result, 1, N);
+}
+
+static inline void pl_VectorSqrDifF_N1N (float *result, float a, const float* b, PlankUL N) 
+{
+    float na = -a;
+    vDSP_vsadd ((float*)b, 1, &na, result, 1, N);
+    vDSP_vsq (result, 1, result, 1, N);
+}
+
+static inline void pl_VectorAbsDifF_NNN (float *result, const float* a, const float* b, PlankUL N) 
+{
+    float mone = -1.f;
+    vDSP_vsmul ((float*)b, 1, &mone, result, 1, N); 
+    vDSP_vadd ((float*)a, 1, result, 1, result, 1, N); 
+    vDSP_vabs (result, 1, result, 1, N); 
+}
+
+static inline void pl_VectorAbsDifF_NN1 (float *result, const float* a, float b, PlankUL N) 
+{ 
+    float nb = -b;
+    vDSP_vsadd ((float*)a, 1, &nb, result, 1, N);
+    vDSP_vabs (result, 1, result, 1, N); 
+}
+
+static inline void pl_VectorAbsDifF_N1N (float *result, float a, const float* b, PlankUL N) 
+{
+    float na = -a;
+    vDSP_vsadd ((float*)b, 1, &na, result, 1, N);
+    vDSP_vabs (result, 1, result, 1, N); 
+}
 
 PLANK_VECTORBINARYOPVECTOR_DEFINE(Thresh,F)
-
 static inline void pl_VectorThreshF_NN1 (float *result, const float* a, float b, PlankUL N) 
 { 
     vDSP_vthres ((float*)a, 1, &b, result, 1, N);
 }
-
 PLANK_SCALARBINARYOPVECTOR_DEFINE(Thresh,F)
 
 static inline void pl_VectorSquaredF_NN (float *result, const float* a, PlankUL N) 
@@ -208,12 +297,54 @@ static inline void pl_VectorCubedF_NN (float *result, const float* a, PlankUL N)
     vDSP_vmul ((float*)a, 1, result, 1, result, 1, N);
 }
 
-PLANK_VECTORUNARYOP_DEFINE(Frac,F)
+static inline void pl_VectorFracF_NN (float *result, const float* a, PlankUL N) 
+{ 
+    // vDSP_vfrac!!
+    float mone = -1.f;
+    pl_VectorFloorF_NN (result, a, N);
+    vDSP_vsmul (result, 1, &mone, result, 1, N); 
+    vDSP_vadd ((float*)a, 1, result, 1, result, 1, N);    
+}
+
 PLANK_VECTORUNARYOP_DEFINE(Sign,F)
-PLANK_VECTORUNARYOP_DEFINE(M2F,F)
+
+static inline void pl_VectorM2FF_NN (float *result, const float* a, PlankUL N) 
+{
+    float m69 = -69.f;
+    float twelve = 12.f;
+    float a440 = 440.f;
+    int i;
+    
+    vDSP_vsadd ((float*)a, 1, &m69, result, 1, N);
+    vDSP_vsdiv (result, 1, &twelve, result, 1, N);
+    
+    for (i = 0; i < N; ++i)
+        result[i] = pl_PowF (2.f, result[i]);
+    
+    vDSP_vsmul(result, 1, &a440, result, 1, N);
+}
+
 PLANK_VECTORUNARYOP_DEFINE(F2M,F)
-PLANK_VECTORUNARYOP_DEFINE(A2dB,F)
-PLANK_VECTORUNARYOP_DEFINE(dB2A,F)
+
+static inline void pl_VectorA2dBF_NN (float *result, const float* a, PlankUL N) 
+{
+    //vDSP_vdbcon
+    float twenty = 20.f;
+    pl_VectorLog10F_NN (result, a, N);
+    vDSP_vsmul (result, 1, &twenty, result, 1, N);
+}
+    
+static inline void pl_VectordB2AF_NN (float *result, const float* a, PlankUL N) 
+{
+    float twenty = 20.f;
+    int i;
+    
+    vDSP_vsdiv ((float*)a, 1, &twenty, result, 1, N);
+    
+    for (i = 0; i < N; ++i)
+        result[i] = pl_PowF (10.f, result[i]);
+}
+
 PLANK_VECTORUNARYOP_DEFINE(D2R,F)
 PLANK_VECTORUNARYOP_DEFINE(R2D,F)
 PLANK_VECTORUNARYOP_DEFINE(Distort,F)
@@ -519,12 +650,10 @@ PLANK_VECTORBINARYOP_DEFINE(SqrDif,D)
 PLANK_VECTORBINARYOP_DEFINE(AbsDif,D)
 
 PLANK_VECTORBINARYOPVECTOR_DEFINE(Thresh,D)
-
 static inline void pl_VectorThreshD_NN1 (double *result, const double* a, double b, PlankUL N) 
 { 
     vDSP_vthresD ((double*)a, 1, &b, result, 1, N);
 }
-
 PLANK_SCALARBINARYOPVECTOR_DEFINE(Thresh,D)
 
 static inline void pl_VectorSquaredD_NN (double *result, const double* a, PlankUL N) 
@@ -540,7 +669,7 @@ static inline void pl_VectorCubedD_NN (double *result, const double* a, PlankUL 
 
 PLANK_VECTORUNARYOP_DEFINE(Frac,D)
 PLANK_VECTORUNARYOP_DEFINE(Sign,D)
-PLANK_VECTORUNARYOP_DEFINE(M2F,D) // pl_M2FF (float a) { return 440.f * powf(2.f, (a - 69.f) * (1.f / 12.f)); }
+PLANK_VECTORUNARYOP_DEFINE(M2F,D)
 PLANK_VECTORUNARYOP_DEFINE(F2M,D)
 PLANK_VECTORUNARYOP_DEFINE(A2dB,D)
 PLANK_VECTORUNARYOP_DEFINE(dB2A,D)
@@ -707,16 +836,59 @@ PLANK_VECTORLOOKUP_DEFINE(D)
 
 
 #undef I
-PLANK_VECTORCONVERTERS_DEFINE(F)
-PLANK_VECTORCONVERTERS_DEFINE(D)
-PLANK_VECTORCONVERTERS_DEFINE(C)
-PLANK_VECTORCONVERTERS_DEFINE(I)
-PLANK_VECTORCONVERTERS_DEFINE(S)
-PLANK_VECTORCONVERTERS_DEFINE(L)
+
+// float dest
+PLANK_VECTORCONVERT_DEFINE(F,F) // move
+
+static inline void pl_VectorD2F_NN (float *result, const double* input, PlankUL N) 
+{
+    vDSP_vdpsp ((double*)input, 1, result, 1, N);
+}
+
+PLANK_VECTORCONVERT_DEFINE(F,C) // vDSP_vflt8
+PLANK_VECTORCONVERT_DEFINE(F,I) // vDSP_vflt32  
+PLANK_VECTORCONVERT_DEFINE(F,S) // vDSP_vflt16
+//PLANK_VECTORCONVERT_DEFINE(F,L)
+
+static inline void pl_VectorF2D_NN (double *result, const float* input, PlankUL N) 
+{
+    vDSP_vspdp ((float*)input, 1, result, 1, N);
+}
+
+// double dest
+PLANK_VECTORCONVERT_DEFINE(D,D) // move
+PLANK_VECTORCONVERT_DEFINE(D,C) // vDSP_vflt8D
+PLANK_VECTORCONVERT_DEFINE(D,I) // vDSP_vflt32D
+PLANK_VECTORCONVERT_DEFINE(D,S) // vDSP_vflt16D
+//PLANK_VECTORCONVERT_DEFINE(D,L)
+
+// char dest
+PLANK_VECTORCONVERT_DEFINE(C,F) // vDSP_vfix8
+PLANK_VECTORCONVERT_DEFINE(C,D) // vDSP_vfix8D
+PLANK_VECTORCONVERT_DEFINE(C,C) // move
+PLANK_VECTORCONVERT_DEFINE(C,I)
+PLANK_VECTORCONVERT_DEFINE(C,S)
+//PLANK_VECTORCONVERT_DEFINE(C,L)
+
+// int dest
+PLANK_VECTORCONVERT_DEFINE(I,F) // vDSP_vfix32
+PLANK_VECTORCONVERT_DEFINE(I,D) // vDSP_vfix32D
+PLANK_VECTORCONVERT_DEFINE(I,C)
+PLANK_VECTORCONVERT_DEFINE(I,I) // move
+PLANK_VECTORCONVERT_DEFINE(I,S)
+//PLANK_VECTORCONVERT_DEFINE(I,L)
+
+// short dest
+PLANK_VECTORCONVERT_DEFINE(S,F) // vDSP_vfix16
+PLANK_VECTORCONVERT_DEFINE(S,D) // vDSP_vfix16D
+PLANK_VECTORCONVERT_DEFINE(S,C) 
+PLANK_VECTORCONVERT_DEFINE(S,I)
+PLANK_VECTORCONVERT_DEFINE(S,S) // move
+//PLANK_VECTORCONVERT_DEFINE(S,L)
+
+//PLANK_VECTORCONVERTERS_DEFINE(L)
 
 
-// vDSP_vspdp
-// vDSP_vdpsp
 
 #endif // !DOXYGEN
 #endif // PLANK_VDSP_H
