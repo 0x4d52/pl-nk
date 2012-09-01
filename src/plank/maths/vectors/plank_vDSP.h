@@ -218,9 +218,6 @@ PLANK_VECTORUNARYOP_DEFINE(D2R,F)
 PLANK_VECTORUNARYOP_DEFINE(R2D,F)
 PLANK_VECTORUNARYOP_DEFINE(Distort,F)
 PLANK_VECTORUNARYOP_DEFINE(Zap,F)
-PLANK_VECTORUNARYOP_DEFINE(ClipNormal,F)
-PLANK_VECTORUNARYOP_DEFINE(Clip02,F)
-PLANK_VECTORUNARYOP_DEFINE(Wrap24,F)
 
 
 static inline void pl_VectorAddF_NNN (float *result, const float* a, const float* b, PlankUL N) 
@@ -354,6 +351,16 @@ static inline void pl_VectorMulAddF_NNN (float *io, const float* a, const float*
 static inline void pl_VectorMulAddF_NNN1 (float *result, const float* input, const float* a, float b, PlankUL N) 
 { 
     vDSP_vmsa ((float*)input, 1, (float*)a, 1, &b, result, 1, N);
+}
+
+static inline void pl_VectorMulAddF_NN11 (float *result, const float* input, float a, float b, PlankUL N) 
+{ 
+    vDSP_vsmsa ((float*)input, 1, &a, &b, result, 1, N);
+}
+
+static inline void pl_VectorMulAddF_NN1N (float *result, const float* input, float a, const float* b, PlankUL N) 
+{ 
+    vDSP_vsma (input, 1, &a, b, 1, result, 1, N);
 }
 
 
@@ -541,9 +548,6 @@ PLANK_VECTORUNARYOP_DEFINE(D2R,D)
 PLANK_VECTORUNARYOP_DEFINE(R2D,D)
 PLANK_VECTORUNARYOP_DEFINE(Distort,D)
 PLANK_VECTORUNARYOP_DEFINE(Zap,D)
-PLANK_VECTORUNARYOP_DEFINE(ClipNormal,D)
-PLANK_VECTORUNARYOP_DEFINE(Clip02,D)
-PLANK_VECTORUNARYOP_DEFINE(Wrap24,D)
 
 
 static inline void pl_VectorAddD_NNN (double *result, const double* a, const double* b, PlankUL N) 
@@ -679,6 +683,15 @@ static inline void pl_VectorMulAddD_NNN1 (double *result, const double* input, c
     vDSP_vmsaD ((double*)input, 1, (double*)a, 1, &b, result, 1, N);
 }
 
+static inline void pl_VectorMulAddD_NN11 (double *result, const double* input, double a, double b, PlankUL N) 
+{ 
+    vDSP_vsmsaD ((double*)input, 1, &a, &b, result, 1, N);
+}
+
+static inline void pl_VectorMulAddD_NN1N (double *result, const double* input, double a, const double* b, PlankUL N) 
+{ 
+    vDSP_vsmaD (input, 1, &a, b, 1, result, 1, N);
+}
 
 // works as documented but seems useless as it interpolates thr "wrong" two samples
 // fixed in 10.7.2 but is that seems to be the runtime lib so would still 

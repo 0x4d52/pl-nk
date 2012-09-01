@@ -164,6 +164,7 @@ public:
 
 #ifdef PLONK_USEPLINK
 #include "plonk_BinaryOpPlink.h"
+#include "plonk_UnaryOpPlink.h"
 
 template<>
 class ChannelMixerChannelInternal<float>
@@ -228,7 +229,6 @@ public:
     
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {        
-        this->getOutputBuffer().zero();
         float* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
         pl_VectorClearF_N (outputSamples, outputBufferLength);
@@ -236,10 +236,34 @@ public:
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         const int numChannels = inputUnit.getNumChannels();
         
-        p.buffers[0].bufferSize = p.buffers[1].bufferSize = outputBufferLength;
-        p.buffers[0].buffer     = p.buffers[1].buffer     = outputSamples;
+        p.buffers[0].bufferSize = outputBufferLength;
+        p.buffers[0].buffer     = outputSamples;
+
+        // channel 0
+        {
+            plonk_assert (inputUnit.getOverlap (0) == Math<DoubleVariable>::get1());
+            
+            const Buffer& inputBuffer (inputUnit.process (info, 0));
+            const float* const inputSamples = inputBuffer.getArray();
+            const int inputBufferLength = inputBuffer.length();
+            
+            if (outputBufferLength == inputBufferLength)
+            {
+                pl_VectorMoveF_NN (outputSamples, inputSamples, outputBufferLength);
+            }
+            else
+            {
+                p.buffers[1].bufferSize = inputBuffer.length();
+                p.buffers[1].buffer     = inputBuffer.getArray();
+                plink_UnaryOpProcessMoveF_Nn (&p, 0);
+            }
+        }
         
-        for (int channel = 0; channel < numChannels; ++channel)
+        p.buffers[1].bufferSize = outputBufferLength;
+        p.buffers[1].buffer     = outputSamples;
+
+        // channel 1+
+        for (int channel = 1; channel < numChannels; ++channel)
         {
             plonk_assert (inputUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
             
@@ -255,7 +279,7 @@ public:
             {
                 p.buffers[2].bufferSize = inputBuffer.length();
                 p.buffers[2].buffer     = inputBuffer.getArray();
-                plink_BinaryOpProcessAddF (&p, 0);
+                plink_BinaryOpProcessAddF_NNn (&p, 0);
             }
         }
         

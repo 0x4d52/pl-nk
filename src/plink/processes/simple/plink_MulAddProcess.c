@@ -68,9 +68,8 @@ void plink_MulAddProcessF_NN11 (void* ppv, MulAddProcessState* state)
     input  = pp->buffers[1].buffer;
     mul    = pp->buffers[2].buffer[0];
     add    = pp->buffers[3].buffer[0];
-        
-    pl_VectorFillF_N1(output, mul, N);
-    pl_VectorMulAddF_NNN1(output, input, output, add, N);
+            
+    pl_VectorMulAddF_NN11(output, input, mul, add, N);
 }
 
 void plink_MulAddProcessF_NNN1 (void* ppv, MulAddProcessState* state)
@@ -103,9 +102,8 @@ void plink_MulAddProcessF_NN1N (void* ppv, MulAddProcessState* state)
     input  = pp->buffers[1].buffer;
     mul    = pp->buffers[2].buffer[0];
     add    = pp->buffers[3].buffer;
-    
-    pl_VectorFillF_N1 (output, mul, N);
-    pl_VectorMulAddF_NNNN (output, input, output, add, N);    
+        
+    pl_VectorMulAddF_NN1N (output, input, mul, add, N);
 }
 
 void plink_MulAddProcessF_Nnnn (void* ppv, MulAddProcessState* state)

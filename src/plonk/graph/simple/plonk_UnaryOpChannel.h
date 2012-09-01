@@ -85,7 +85,6 @@ private:
         names.put (&plonk::r2d<SampleType>,         "Radians to Degrees");
         names.put (&plonk::distort<SampleType>,     "distort");
         names.put (&plonk::zap<SampleType>,         "zap");
-//        names.put (&plonk::clipNormal<SampleType>,  "Clip to Normalised");
     }
     
 public:

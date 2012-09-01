@@ -279,98 +279,98 @@ static inline double pl_ZapD (double x)
 
 /////****** EXPERIMENTAL STARTS ******///////
 
-/** Clips a float to between -1...+1 without a branch. */
-static inline float pl_ClipNormalF (float v)
-{
-    PlankUI bits;
-    
-    v = v + PLANK_1_F;
-    bits = *(PlankUI*)&v;
-    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
-    
-    return (*(float*)&bits) - PLANK_1_F;
-}
-
-/** Clips a float to between -1...+1 without a branch. 
- In input value should be offset by 1 (i.e., 0...2), output is -1...+1.
- An input value of 1 would output 0. */
-static inline float pl_ClipNormalPreIncF (float v)
-{
-    PlankUI bits;
-    
-    bits = *(PlankUI*)&v;
-    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
-    
-    return (*(float*)&bits) - PLANK_1_F;
-}
-
-/** Clips a float to between 0...2 without a branch. */
-static inline float pl_Clip02F (float v)
-{
-    PlankUI bits;
-    
-    bits = *(PlankUI*)&v;
-    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
-    
-    return (*(float*)&bits);
-}
-
-static inline float pl_Wrap24F (float v)
-{
-    PlankUI bits;
-    
-    bits = *(PlankUI*)&v;
-    bits = ((bits & PLANK_FLOAT_ONEMASK) | 0x40000000);
-    
-    return (*(float*)&bits);
-}
-
-/** Clips a double to between -1...+1 without a branch. */
-static inline double pl_ClipNormalD (double v)
-{
-    PlankULL bits;
-    
-    v = v + PLANK_1_D;
-    bits = *(PlankULL*)&v;
-    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
-    
-    return (*(double*)&bits) - PLANK_1_D;
-}
-
-/** Clips a float to between -1...+1 without a branch. 
- In input value should be offset by 1 (i.e., 0...2), output is -1...+1.
- An input value of 1 would output 0. */
-static inline double pl_ClipNormalPreIncD (double v)
-{
-    PlankULL bits;
-    
-    bits = *(PlankULL*)&v;
-    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
-    
-    return (*(double*)&bits) - PLANK_1_D;
-}
-
-/** Clips a double to between 0...2 without a branch. */
-static inline double pl_Clip02D (double v)
-{
-    PlankULL bits;
-    
-    bits = *(PlankULL*)&v;
-    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
-    
-    return (*(double*)&bits);
-}
-
-static inline double pl_Wrap24D (double v)
-{
-    PlankULL bits;
-    
-    bits = *(PlankULL*)&v;
-    bits = ((bits & PLANK_DOUBLE_ONEMASK) | 0x4000000000000000);
-    
-    return (*(double*)&bits);
-}
-
+///** Clips a float to between -1...+1 without a branch. */
+//static inline float pl_ClipNormalF (float v)
+//{
+//    PlankUI bits;
+//    
+//    v = v + PLANK_1_F;
+//    bits = *(PlankUI*)&v;
+//    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
+//    
+//    return (*(float*)&bits) - PLANK_1_F;
+//}
+//
+///** Clips a float to between -1...+1 without a branch. 
+// In input value should be offset by 1 (i.e., 0...2), output is -1...+1.
+// An input value of 1 would output 0. */
+//static inline float pl_ClipNormalPreIncF (float v)
+//{
+//    PlankUI bits;
+//    
+//    bits = *(PlankUI*)&v;
+//    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
+//    
+//    return (*(float*)&bits) - PLANK_1_F;
+//}
+//
+///** Clips a float to between 0...2 without a branch. */
+//static inline float pl_Clip02F (float v)
+//{
+//    PlankUI bits;
+//    
+//    bits = *(PlankUI*)&v;
+//    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
+//    
+//    return (*(float*)&bits);
+//}
+//
+//static inline float pl_Wrap24F (float v)
+//{
+//    PlankUI bits;
+//    
+//    bits = *(PlankUI*)&v;
+//    bits = ((bits & PLANK_FLOAT_ONEMASK) | 0x40000000);
+//    
+//    return (*(float*)&bits);
+//}
+//
+///** Clips a double to between -1...+1 without a branch. */
+//static inline double pl_ClipNormalD (double v)
+//{
+//    PlankULL bits;
+//    
+//    v = v + PLANK_1_D;
+//    bits = *(PlankULL*)&v;
+//    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
+//    
+//    return (*(double*)&bits) - PLANK_1_D;
+//}
+//
+///** Clips a float to between -1...+1 without a branch. 
+// In input value should be offset by 1 (i.e., 0...2), output is -1...+1.
+// An input value of 1 would output 0. */
+//static inline double pl_ClipNormalPreIncD (double v)
+//{
+//    PlankULL bits;
+//    
+//    bits = *(PlankULL*)&v;
+//    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
+//    
+//    return (*(double*)&bits) - PLANK_1_D;
+//}
+//
+///** Clips a double to between 0...2 without a branch. */
+//static inline double pl_Clip02D (double v)
+//{
+//    PlankULL bits;
+//    
+//    bits = *(PlankULL*)&v;
+//    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
+//    
+//    return (*(double*)&bits);
+//}
+//
+//static inline double pl_Wrap24D (double v)
+//{
+//    PlankULL bits;
+//    
+//    bits = *(PlankULL*)&v;
+//    bits = ((bits & PLANK_DOUBLE_ONEMASK) | 0x4000000000000000);
+//    
+//    return (*(double*)&bits);
+//}
+//
 /////****** EXPERIMENTAL ENDS ******///////
 
 
