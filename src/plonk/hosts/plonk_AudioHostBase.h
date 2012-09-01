@@ -54,7 +54,7 @@ public:
 //    typedef NumericalArray2D<const SampleType>  ConstBufferArray;
     
     typedef ObjectArray<SampleType*>            BufferArray;
-//    typedef ObjectArray<const SampleType*>      ConstBufferArray;
+    typedef ObjectArray<const SampleType*>      ConstBufferArray;
 
     typedef UnitBase<SampleType>                UnitType;
     typedef BusBuffer<SampleType>               BusType;
@@ -115,10 +115,10 @@ public:
                 
 protected:
     /** Get the input buffers. @internal */
-    inline const BufferArray& getInputs() const throw()  { return this->inputs; }
+    inline const ConstBufferArray& getInputs() const throw()  { return this->inputs; }
     
     /** Get the input buffers. @internal */
-    inline BufferArray& getInputs() throw()              { return this->inputs; }
+    inline ConstBufferArray& getInputs() throw()              { return this->inputs; }
 
     /** Get the output buffers. @internal */
     inline const BufferArray& getOutputs() const throw() { return this->outputs; }
@@ -223,7 +223,7 @@ private:
     ProcessInfo info;
     UnitType outputUnit;  
     BussesType busses;
-    BufferArray inputs;
+    ConstBufferArray inputs;
     BufferArray outputs;    
 };
 
