@@ -45,6 +45,8 @@
 #include "../graph/plonk_GraphForwardDeclarations.h"
 #include "../containers/plonk_Text.h"
 
+class AudioFileReader;
+
 /** Used to determine information about some types.
  Especially used to determine information about sample buffer types
  and the Dynamic class uses it to identify which type it currently stores. 
@@ -111,6 +113,8 @@ public:
     // signals
         FloatSignalVariable, DoubleSignalVariable, IntSignalVariable, ShortSignalVariable, Int24SignalVariable, LongSignalVariable,
 
+        AudioFileReader,
+        
     // count (??)
         NumTypeCodes
     };    
@@ -170,8 +174,9 @@ public:
 
             "FloatWavetableVariable", "DoubleWavetableVariable", "IntWavetableVariable", "ShortWavetableVariable", "Int24WavetableVariable", "LongWavetableVariable",
 
-            "FloatSignalVariable", "DoubleSignalVariable", "IntSignalVariable", "ShortSignalVariable", "Int24SignalVariable", "LongSignalVariable"
+            "FloatSignalVariable", "DoubleSignalVariable", "IntSignalVariable", "ShortSignalVariable", "Int24SignalVariable", "LongSignalVariable",
 
+            "AudioFileReader"
         };
         
         if ((code >= 0) && (code < TypeCode::NumTypeCodes))
@@ -230,6 +235,7 @@ public:
     static inline bool isBreakpoints (const int code) throw()       { return (code >= TypeCode::FloatBreakpoints) && (code <= TypeCode::LongBreakpoints); }
     static inline bool isWavetable (const int code) throw()         { return (code >= TypeCode::FloatWavetable) && (code <= TypeCode::LongWavetable); }
     static inline bool isSignal (const int code) throw()            { return (code >= TypeCode::FloatSignal) && (code <= TypeCode::LongSignal); }
+    static inline bool isAudioFileReader (const int code) throw()   { return (code == TypeCode::AudioFileReader); }
 
     // could replace these later by designing the enum to be bit-mask based
     
@@ -3797,6 +3803,31 @@ public:
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
+template<>
+class TypeUtilityBase<AudioFileReader>
+{
+public:
+    typedef AudioFileReader               TypeName;
+    typedef AudioFileReader               OriginalType;
+    typedef AudioFileReader const&        PassType;
+    typedef void                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::AudioFileReader; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<const AudioFileReader>
+{
+public:
+    typedef const AudioFileReader         TypeName;
+    typedef AudioFileReader               OriginalType;
+    typedef AudioFileReader const&        PassType;
+    typedef void                          IndexType;
+    static inline int  getTypeCode() { return TypeCode::AudioFileReader; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+
 //------------------------------------------------------------------------------
 
 /** A utility for finding out information about certain other classes and types.
@@ -3828,6 +3859,7 @@ public:
     static inline bool isBusses() throw()            { return TypeCode::isBusses (TypeUtility<Type>::getTypeCode()); }
     static inline bool isWavetable() throw()         { return TypeCode::isWavetable (TypeUtility<Type>::getTypeCode()); }
     static inline bool isSignal() throw()            { return TypeCode::isSignal (TypeUtility<Type>::getTypeCode()); }
+    static inline bool isAudioFileReader() throw()   { return TypeCode::isAudioFileReader (TypeUtility<Type>::getTypeCode()); }
     
     static inline bool isFloatType() throw()         { return TypeCode::isFloatType (TypeUtility<Type>::getTypeCode()); }
     static inline bool isDoubleType() throw()        { return TypeCode::isDoubleType (TypeUtility<Type>::getTypeCode()); }

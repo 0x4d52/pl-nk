@@ -719,7 +719,7 @@
  appropriate.
  
  In addition to the audio filters, LagUnit is useful for smoothing out discontinuities
- in control signals (e.g., form a slider). For example:
+ in control signals (e.g., from a slider). For example:
  
  @code
  Unit f = Sine::ar (0.1).linlin (60, 72).round (1).m2f();

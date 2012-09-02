@@ -67,7 +67,6 @@ public:
     typedef ObjectArray<ChannelType>                                    ChannelArrayType;
     typedef PatchChannelInternal<SampleType>                            PatchChannelInternalType;
     typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
-    typedef ChannelInternalBase<SampleType>                             InternalBase;
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
@@ -98,12 +97,7 @@ public:
         const IntArray keys (IOKey::UnitVariable);
         return keys;
     }    
-    
-    InternalBase* getChannel (const int /*index*/) throw()
-    {
-        return this;
-    }        
-    
+        
     void initChannel (const int channel) throw()
     {
         if ((channel % this->getNumChannels()) == 0)
@@ -248,7 +242,7 @@ private:
     
     static inline int numChannelsInSource (Inputs const& inputs) throw()
     {
-        const UnitVariableType& var = inputs[IOKey::UnitVariable].asUnchecked<UnitVariableType> ();
+        const UnitVariableType& var = inputs[IOKey::UnitVariable].asUnchecked<UnitVariableType>();
         return var.getValue().getNumChannels();
     }
     

@@ -142,6 +142,7 @@
 #include "../graph/generators/plonk_WhiteNoise.h"
 #include "../graph/generators/plonk_Table.h"
 #include "../graph/generators/plonk_SignalPlay.h"
+#include "../graph/generators/plonk_FilePlay.h"
 
 #include "../graph/filters/plonk_FilterForwardDeclarations.h"
 #include "../graph/filters/plonk_FilterTypes.h"

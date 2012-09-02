@@ -86,7 +86,7 @@ public:
             
     Text getName() const throw()
     {
-        return "SignalPlay";
+        return "Signal Play";
     }       
     
     IntArray getInputKeys() const throw()
@@ -116,7 +116,7 @@ public:
         
         this->setOverlap (rateUnit.getOverlap (channel));
         
-        this->initValue (this->getState().currentPosition);
+        this->initValue (0);//this->getState().currentPosition);
     }    
     
     void process (ProcessInfo& info, const int channel) throw()
@@ -267,7 +267,7 @@ public:
                          IOKey::End);
     }
     
-    /** Create an audio rate signal player oscillator. */
+    /** Create an audio rate signal player. */
     static UnitType ar (SignalType const& signal, 
                         RateUnitType const& rate = RateType (1), 
                         UnitType const& mul = SampleType (1),
@@ -289,7 +289,7 @@ public:
                                                                         preferredSampleRate);
     }
     
-    /** Create a control rate sawtooth oscillator. */
+    /** Create a control rate signal player.. */
     static UnitType kr (SignalType const& signal,
                         RateUnitType const& rate, 
                         UnitType const& mul = SampleType (1),

@@ -83,6 +83,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Wavetable,
         IOKey::Signal,
         IOKey::Breakpoints,
+        IOKey::AudioFileReader,
         IOKey::UnitVariable,
         IOKey::UnitsVariable,
         IOKey::BusVariable,
@@ -162,6 +163,8 @@ Text IOKey::getName (const int keyIndex) throw()
         "Signal",
         "Breakpoints",
         
+        "AudioFileReader",
+        
         "UnitVariable",
         "UnitsVariable",
         "BusVariable",
@@ -226,6 +229,8 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeWavetable,       //"Wavetable",
         IOKey::TypeSignal,          //"Signal",
         IOKey::TypeBreakpoints,     //"Breakpoints"
+        
+        IOKey::TypeAudioFileReader,
         
         IOKey::TypeUnitVariable,
         IOKey::TypeUnitsVariable,
@@ -301,6 +306,8 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "WavetableVariable",
         "SignalVariable",
         "BreakpointsVariable",
+        
+        "AudioFileReader",
         
         "Bool",             //"Auto Delete Flag"
         "Bool",             //"Purge Null Units Flag"

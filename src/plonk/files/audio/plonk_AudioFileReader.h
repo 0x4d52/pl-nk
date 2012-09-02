@@ -66,7 +66,7 @@ public:
     bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave) throw();
     
     template<class SampleType>
-    inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) throw()
+    inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) const throw()
     {
         const int numChannels = getNumChannels();
         const int length = (numFrames > 0) ? numFrames * numChannels : getNumFrames() * numChannels;
@@ -235,6 +235,11 @@ public:
     typedef SmartPointerContainer<Internal>         Base;
     typedef WeakPointerContainer<AudioFileReader>   Weak;
     
+    static const AudioFileReader& getNull() throw()
+    {
+        static AudioFileReader null;        
+        return null;
+    }
     /** Creates a null object. 
      This can't be used for reading or writing. */
     AudioFileReader() throw()
@@ -351,7 +356,7 @@ public:
      @param signal    The Signal object to initialise.
      @param numFrames The number of frames the Signal should store. */
     template<class SampleType>
-    inline void initSignal (SignalBase<SampleType>& signal, const int numFrames = 0) throw()
+    void initSignal (SignalBase<SampleType>& signal, const int numFrames = 0) const throw()
     {
         getInternal()->initSignal (signal, numFrames);
     }

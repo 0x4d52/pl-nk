@@ -68,6 +68,7 @@ public:
         TypeWavetableVariable,
         TypeSignalVariable,
         TypeBreakpointsVariable,
+        TypeAudioFileReader,
         TypeBlockSize,
         TypeSampleRate,
 //        TypeBlockSizes,
@@ -130,6 +131,8 @@ public:
         WavetableVariable,      ///< A variable wavetable
         SignalVariable,         ///< A variable signal buffer
         BreakpointsVariable,    ///< A variable Breakpoints object (i.e., an envelope specification)
+        
+        AudioFileReader,        ///< An AudioFileReader
 
         AutoDeleteFlag, ///< To control the auto deletion
         PurgeNullUnitsFlag,
