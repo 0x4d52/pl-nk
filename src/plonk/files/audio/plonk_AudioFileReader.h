@@ -63,7 +63,7 @@ public:
     void resetFramePosition() throw();
     
     template<class SampleType>
-    bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave) throw();
+    bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, const bool loop) throw();
     
     template<class SampleType>
     inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) const throw()
@@ -107,8 +107,9 @@ private:
 template<class SampleType>
 bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, 
                                           const bool applyScaling, 
-                                          const bool deinterleave) throw()
-{    
+                                          const bool deinterleave,
+                                          const bool loop) throw()
+{        
     typedef NumericalArray<SampleType> SampleArray;
 
     ResultCode result;
@@ -211,6 +212,12 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
         dataArray += samplesRead;
         dataIndex += samplesRead;
         dataRemaining -= samplesRead;
+        
+        if ((framesRead < framesToRead) && loop)
+        {
+            result = pl_AudioFileReader_ResetFramePosition (getPeerRef());              
+            plonk_assert (result == PlankResult_OK);
+        }
     }
     
     if (dataIndex < dataLength)
@@ -240,6 +247,7 @@ public:
         static AudioFileReader null;        
         return null;
     }
+    
     /** Creates a null object. 
      This can't be used for reading or writing. */
     AudioFileReader() throw()
@@ -336,20 +344,22 @@ public:
      Here the samples are automatically scaled depending on the destination 
      data type of the NumericalArray. 
      @param data    The NumericalArray object to read interleaved frames into. 
+     @param loop    Whether to read the file in a loop.
      @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
     template<class SampleType>
-    inline bool readFrames (NumericalArray<SampleType>& data) throw()
+    inline bool readFrames (NumericalArray<SampleType>& data, const bool loop) throw()
     {
-        return getInternal()->readFrames (data, true, false);
+        return getInternal()->readFrames (data, true, false, loop);
     }
     
     /** Read frames into a pre-allocated NumericalArray without scaling. 
      @param data    The NumericalArray object to read interleaved frames into. 
+     @param loop    Whether to read the file in a loop.
      @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
     template<class SampleType>
-    inline bool readFramesDirect (NumericalArray<SampleType>& data) throw()
+    inline bool readFramesDirect (NumericalArray<SampleType>& data, const bool loop) throw()
     {
-        return getInternal()->readFrames (data, false, false);
+        return getInternal()->readFrames (data, false, false, loop);
     }
     
     /** Initialises a Signal object in the appropriate format for the audio in the file.
@@ -396,7 +406,7 @@ public:
         typedef NumericalArray<SampleType> SampleArray;
         SampleArray data = SampleArray::withSize (getNumFrames() * getNumChannels());
         resetFramePosition();
-        getInternal()->readFrames (data, applyScaling, false);
+        getInternal()->readFrames (data, applyScaling, false, false);
         return data;
     }
 

@@ -108,7 +108,7 @@ public:
         
         const int fileNumChannels = file.getNumChannels();
         buffer.setSize (this->getBlockSize().getValue() * fileNumChannels, false);
-        file.readFrames (buffer);
+        file.readFrames (buffer, true);
         
         const int numChannels = this->getNumChannels();
         
