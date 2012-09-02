@@ -66,7 +66,7 @@ public:
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
-    typedef SignalBase<SampleType>                                      SignalType;
+    //typedef SignalBase<SampleType>                                      SignalType;
 
     FilePlayChannelInternal (Inputs const& inputs, 
                              Data const& data, 
@@ -96,7 +96,7 @@ public:
         {
             const AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
             this->setSampleRate (SampleRate::decide (file.getSampleRate(), this->getSampleRate()));
-            file.initSignal (signalBuffer, this->getBlockSize().getValue());
+            buffer.setSize (this->getBlockSize().getValue() * file.getNumChannels(), false);
         }
         
         this->initValue (0);
@@ -105,10 +105,11 @@ public:
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {        
         AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
-        file.initSignal (signalBuffer, this->getBlockSize().getValue());
-        file.readSignal (signalBuffer);
         
-        const int signalFrameStride = signalBuffer.getFrameStride();
+        const int fileNumChannels = file.getNumChannels();
+        buffer.setSize (this->getBlockSize().getValue() * fileNumChannels, false);
+        file.readFrames (buffer);
+        
         const int numChannels = this->getNumChannels();
         
         for (int channel = 0; channel < numChannels; ++channel)
@@ -117,15 +118,15 @@ public:
             SampleType* const outputSamples = outputBuffer.getArray();
             const int outputBufferLength = outputBuffer.length();        
 
-            const SampleType* signalSamples = signalBuffer.getSamples (channel);         
+            const SampleType* bufferSamples = buffer.getArray() + channel;         
 
-            for (int i = 0; i < outputBufferLength; ++i, signalSamples += signalFrameStride)
-                outputSamples[i] = *signalSamples;
+            for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
+                outputSamples[i] = *bufferSamples;
         }
     }
     
 private:
-    SignalType signalBuffer;
+    Buffer buffer;
     
     static const int decideNumChannels (Inputs const& inputs, Data const& data) throw()
     {
