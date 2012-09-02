@@ -60,6 +60,7 @@ JuceAudioHost::JuceAudioHost (ObjectMemoryBase* omb) throw()
 {    
     setNumInputs (2);
     setNumOutputs (2);
+    setPreferredGraphBlockSize (64);
 }
 
 JuceAudioHost::~JuceAudioHost()
@@ -178,7 +179,7 @@ void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInput
                                            float** outputData, int numOutputs, 
                                            int blockSize) throw()
 {
-    BlockSize::getDefault().setValue (blockSize);
+    //BlockSize::getDefault().setValue (blockSize);
     
     plonk_assert (numInputs == getInputs().length());
     plonk_assert (numOutputs == getOutputs().length());
@@ -196,8 +197,8 @@ void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInput
 
 void JuceAudioHost::audioDeviceAboutToStart (AudioIODevice* device) throw()
 {
-    SampleRate::getDefault().setValue (device->getCurrentSampleRate());
-    BlockSize::getDefault().setValue (device->getCurrentBufferSizeSamples()); 
+    setPreferredHostSampleRate (device->getCurrentSampleRate());
+    setPreferredHostBlockSize (device->getCurrentBufferSizeSamples());
     startHostInternal();
 }
 

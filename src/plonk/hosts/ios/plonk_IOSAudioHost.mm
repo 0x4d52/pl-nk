@@ -120,9 +120,9 @@ static inline void audioShortToFloatChannels (AudioBufferList* src, float* const
 IOSAudioHost::IOSAudioHost (ObjectMemoryBase* omb) throw()
 :   AudioHostBase (omb),
     hwSampleRate (0.0),         // let the hardware choose
-    cpuUsage (0.0)//,
-//    audioCategory (kAudioSessionCategory_PlayAndRecord)
+    cpuUsage (0.0)
 {    
+    setPreferredGraphBlockSize (256);
 }
 
 IOSAudioHost::~IOSAudioHost()
@@ -236,9 +236,7 @@ void IOSAudioHost::startHost() throw()
     size = sizeof (preferredHostSampleRate);
     
 	if (preferredHostSampleRate > 0.0)
-	{
 		AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareSampleRate, size, &preferredHostSampleRate);
-	}		
     
     size = sizeof (hwSampleRate);
     AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareSampleRate, &size, &hwSampleRate);
@@ -265,14 +263,10 @@ void IOSAudioHost::startHost() throw()
 	reciprocalBufferDuration = 1.0 / double (bufferDuration); 
 	
 	bufferSize = (int)(hwSampleRate * bufferDuration + 0.5);
-	//floatBuffer = new float[bufferSize * plonk::max (getNumOutputs(), getNumInputs())];
     convertBuffer.setSize (bufferSize * plonk::max (getNumOutputs(), getNumInputs()), false);
     
-    
-//	printf("IOSAudioHost: SR=%f buffer=%fs (%d samples)\n", hwSampleRate, bufferDuration, bufferSize);
-    
-    SampleRate::getDefault().setValue (hwSampleRate);
-    BlockSize::getDefault().setValue (bufferSize); 
+    setPreferredHostSampleRate (hwSampleRate);
+    setPreferredHostBlockSize (bufferSize);
     startHostInternal();
     
     restart();
@@ -329,9 +323,7 @@ void IOSAudioHost::restart() throw()
 	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
 	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
 	AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
-	
-//	printf ("inputs=%d outputs=%d audioInputIsAvailable=%d\n", (int)numInputChannels, (int)numOutputChannels, (int)audioInputIsAvailable);
-	
+		
 	if (rioUnit)	
         AudioComponentInstanceDispose (rioUnit);
         
@@ -375,16 +367,11 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
 	
 	if (inNumberFrames > bufferSize)
 	{
-		//delete [] floatBuffer;
-		bufferSize = inNumberFrames;
-		
-        // should use a FloatArray!!
-		//floatBuffer = new float[inNumberFrames * plonk::max (getNumInputs(), getNumOutputs())];
-        
+		bufferSize = inNumberFrames;        
         convertBuffer.setSize (inNumberFrames * plonk::max (getNumInputs(), getNumOutputs()), false);
 	}
 	
-    BlockSize::getDefault().setValue (inNumberFrames);
+    //BlockSize::getDefault().setValue (inNumberFrames);
 	
 	float *floatBufferData[2];
 	floatBufferData[0] = convertBuffer.getArray();
@@ -393,23 +380,18 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
 	if (audioInputIsAvailable)
 	{
 		err = AudioUnitRender (rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
-		
-//        if (err) 
-//        { 
-//            printf ("renderCallback: error %d %s\n", (int)err, (err == -10863) ? "(harmless)" : ""); 
-//            return err; 
-//        }
-		
 		audioShortToFloatChannels (ioData, floatBufferData, inNumberFrames, numInputChannels);				
 	}
-	//else memset (floatBuffer, 0, numInputChannels * inNumberFrames * sizeof (float));
 	else convertBuffer.clear();  
     
+    ConstBufferArray& inputs = getInputs();
+    BufferArray& outputs = getOutputs();
+        
     for (i = 0; i < numInputChannels; ++i)
-        getInputs().atUnchecked (i) = floatBufferData[i];//.referTo (inNumberFrames, floatBufferData[i]);
+        inputs.atUnchecked (i) = floatBufferData[i];
     
     for (i = 0; i < numOutputChannels; ++i)
-        getOutputs().atUnchecked (i) = floatBufferData[i];//.referTo (inNumberFrames, floatBufferData[i]);
+        outputs.atUnchecked (i) = floatBufferData[i];
 
     process();
         

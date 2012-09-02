@@ -85,7 +85,7 @@ BlockSize::BlockSize (BlockSizeNoPreference const& copy) throw()
 
 BlockSize& BlockSize::getDefault() throw()
 {
-    static BlockSize blockSize (512);
+    static BlockSize blockSize (64);
     return blockSize;
 }
 

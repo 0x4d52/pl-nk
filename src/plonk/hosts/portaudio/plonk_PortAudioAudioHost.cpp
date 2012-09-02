@@ -61,10 +61,15 @@ static inline int paCallback (const void *input, void *output,
                            frameCount, timeInfo, statusFlags);
 }
 
-static inline void paCheckError (PaError err)
+static inline bool paCheckError (PaError err)
 {
     if (err != paNoError)
+    {
         printf ("paerror '%s' (%d)\n", Pa_GetErrorText (err), err);
+        return true;
+    }
+    
+    return false; 
 }
 
 //static inline void paGetInfo()
@@ -91,6 +96,7 @@ PortAudioAudioHost::PortAudioAudioHost (ObjectMemoryBase* omb) throw()
     setNumInputs (1);
     setNumOutputs (2);
     setPreferredHostBlockSize (512);
+    setPreferredGraphBlockSize (128);
     setPreferredHostSampleRate (44100.0);    
 }
 
@@ -159,10 +165,12 @@ void PortAudioAudioHost::startHost() throw()
                                 getPreferredHostSampleRate(), getPreferredHostBlockSize(),
                                 paCallback, 
                                 this);
-    paCheckError (err);
     
-    SampleRate::getDefault().setValue (getPreferredHostSampleRate());
-    BlockSize::getDefault().setValue (getPreferredHostBlockSize()); 
+    // if our preferred sample rate and block size are invalid hopefully we get an error
+    if (paCheckError (err)) 
+        return;
+    
+
     startHostInternal();
     
     err = Pa_StartStream (stream);
@@ -177,7 +185,7 @@ int PortAudioAudioHost::callback (const float **inputData, float **outputData,
     (void)timeInfo;
     (void)statusFlags;
     
-    BlockSize::getDefault().setValue (frameCount);
+    //BlockSize::getDefault().setValue (frameCount);
     
     ConstBufferArray& inputs = getInputs();
     BufferArray& outputs = getOutputs();
@@ -188,10 +196,10 @@ int PortAudioAudioHost::callback (const float **inputData, float **outputData,
     int i;
     
     for (i = 0; i < numInputs; ++i)
-        inputs.atUnchecked (i) = inputData[i];//.referTo (frameCount, const_cast<float*> (inputData[i]));
+        inputs.atUnchecked (i) = inputData[i];
 
     for (i = 0; i < numOutputs; ++i)
-        outputs.atUnchecked (i) = outputData[i];//.referTo (frameCount, outputData[i]);
+        outputs.atUnchecked (i) = outputData[i];
     
     process();
     

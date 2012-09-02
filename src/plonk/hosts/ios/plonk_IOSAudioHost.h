@@ -51,7 +51,9 @@ BEGIN_PLONK_NAMESPACE
 class IOSAudioHost : public AudioHostBase<float>
 {
 public:
-    typedef AudioHostBase<float>::UnitType UnitType;
+    typedef AudioHostBase<float>::BufferArray      BufferArray;
+    typedef AudioHostBase<float>::ConstBufferArray ConstBufferArray;
+    typedef AudioHostBase<float>::UnitType         UnitType;
     
     IOSAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
     ~IOSAudioHost();
@@ -90,7 +92,6 @@ private:
     int							bufferSize;
 	float						bufferDuration;
 	double						reciprocalBufferDuration;
-	//float						*floatBuffer;
     Floats                      convertBuffer;
 	UInt32						audioInputIsAvailable;
 	UInt32						numInputChannels;

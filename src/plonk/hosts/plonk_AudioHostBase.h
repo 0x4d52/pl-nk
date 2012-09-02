@@ -48,8 +48,8 @@ template<class SampleType>
 class AudioHostBase // don't inherit from PlonkBase...!
 {
 public:    
-    typedef ObjectArray<SampleType*>            BufferArray;
-    typedef ObjectArray<const SampleType*>      ConstBufferArray;
+    typedef NumericalArray<SampleType*>            BufferArray;
+    typedef NumericalArray<const SampleType*>      ConstBufferArray;
 
     typedef UnitBase<SampleType>                UnitType;
     typedef BusBuffer<SampleType>               BusType;
@@ -61,6 +61,7 @@ public:
     :   om (omb),
         preferredHostSampleRate (0.0),
         preferredHostBlockSize (0),
+        preferredGraphBlockSize (0),
         isRunning (false)
     { 
         om->init();
@@ -96,6 +97,13 @@ public:
     /** Set the host's preferred block size.
      This must be called before startHost() to have any effect. */
     inline void setPreferredHostBlockSize (const int newSize) throw() {  preferredHostBlockSize = newSize; }
+    
+    /** Get the current preferred block size for the graph. */
+    inline int getPreferredGraphBlockSize() const throw() { return preferredGraphBlockSize; }
+        
+    /** Set the graph's preferred block size.
+     This must be called before startHost() to have any effect. */
+    inline void setPreferredGraphBlockSize (const int newSize) throw() {  preferredGraphBlockSize = newSize; }
     
     /** Set the number of audio inputs required.
      This must be called before startHost() to have any effect. */
@@ -148,7 +156,7 @@ protected:
     /** This must be implemented by your application.
      It should return the audio graph that is rendered to the host. */
     virtual UnitType constructGraph() = 0;
-
+    
     /** @internal */
     inline void process() throw()
     {
@@ -157,45 +165,60 @@ protected:
         if (currentThreadID != Threading::getAudioThreadID())
             Threading::setAudioThreadID (Threading::getCurrentThreadID());
 #endif
-        
-        const int blockSize = BlockSize::getDefault().getValue();
+        const int graphBlockSize = BlockSize::getDefault().getValue();
         const int numInputs = this->inputs.length();
         const int numOutputs = this->outputs.length();
-        
         plonk_assert (this->busses.length() == numInputs);
-        
+
+        int blockRemain = preferredHostBlockSize;
         int i;
         
-        for (i = 0; i < numInputs; ++i)
-            this->busses.atUnchecked (i).write (this->info.getTimeStamp(), 
-                                                blockSize, 
-                                                this->inputs.atUnchecked (i));//.getArray());        
-        this->outputUnit.process (info);
-        
-        if (this->outputUnit.isNotNull())
+        while (blockRemain > 0)
         {
-            for (i = 0; i < numOutputs; ++i)
+            for (i = 0; i < numInputs; ++i)
             {
-                float* const output = this->outputs.atUnchecked (i);//.getArray();
-                const float* const unitOutput = this->outputUnit.getOutputSamples (i);
-                Floats::copyData (output, unitOutput, blockSize);            
+                this->busses.atUnchecked (i).write (this->info.getTimeStamp(), 
+                                                    graphBlockSize, 
+                                                    this->inputs.atUnchecked (i)); 
+                this->inputs.atUnchecked (i) += graphBlockSize;
             }
-        }
-        else if (numOutputs > 0)
-        {
-            for (i = 0; i < numOutputs; ++i)
+            
+            this->outputUnit.process (info);
+            
+            if (this->outputUnit.isNotNull())
             {
-                float* const output = this->outputs.atUnchecked (i);//.getArray();
-                Floats::zeroData (output, blockSize);         
+                for (i = 0; i < numOutputs; ++i)
+                {
+                    const float* const unitOutput = this->outputUnit.getOutputSamples (i);
+                    Floats::copyData (this->outputs.atUnchecked (i), unitOutput, graphBlockSize);   
+                    this->outputs.atUnchecked (i) += graphBlockSize;
+                }
             }
+            else if (numOutputs > 0)
+            {
+                for (i = 0; i < numOutputs; ++i)
+                {
+                    Floats::zeroData (this->outputs.atUnchecked (i), graphBlockSize);   
+                    this->outputs.atUnchecked (i) += graphBlockSize;
+                }
+            }
+                        
+            this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * graphBlockSize);
+            
+            blockRemain -= graphBlockSize;
         }
         
-        this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * blockSize);
+#if PLONK_DEBUG
+        // null the pointers to cause crash if buffers are not updated each HW block
+        this->inputs.zero();
+        this->outputs.zero();
+#endif
     }
     
     /** @internal */
     void startHostInternal() throw()
     {
+        initFormat();
         outputUnit = constructGraph();
         hostStarting();
         setIsRunning (true);
@@ -212,6 +235,7 @@ private:
 
     double preferredHostSampleRate;
     int preferredHostBlockSize;
+    int preferredGraphBlockSize;
 	bool isRunning;    
     OptionDictionary otherOptions;
 
@@ -220,6 +244,23 @@ private:
     BussesType busses;
     ConstBufferArray inputs;
     BufferArray outputs;    
+    
+    inline void initFormat() throw()
+    {
+        SampleRate::getDefault().setValue (preferredHostSampleRate);
+        
+        // preferredGraphBlockSize must be less that the hardware size 
+        // and divide into the hardware size without a remainder.
+        if ((preferredGraphBlockSize == 0) ||
+            (preferredHostBlockSize <= preferredGraphBlockSize) ||
+            ((preferredHostBlockSize % preferredGraphBlockSize) != 0))
+        {
+            preferredGraphBlockSize = preferredHostBlockSize;
+        }
+        
+        BlockSize::getDefault().setValue (preferredGraphBlockSize); 
+    }
+
 };
 
 //------------------------------------------------------------------------------
@@ -235,7 +276,8 @@ void AudioHostBase<SampleType>::setNumInputs (const int numInputs) throw()
         
         if (numInputs != 0)
         {
-            inputs = BufferArray::withSize (numInputs);
+            //inputs = BufferArray::withSize (numInputs);
+            inputs.setSize (numInputs, false);
             
             for (int i = 0; i < numInputs; ++i)
             {
@@ -256,7 +298,8 @@ void AudioHostBase<SampleType>::setNumOutputs (const int numOutputs) throw()
     {            
         if (numOutputs != 0)
         {
-            outputs = BufferArray::withSize (numOutputs);
+            //outputs = BufferArray::withSize (numOutputs);
+            outputs.setSize (numOutputs, false);
             
             for (int i = 0; i < numOutputs; ++i)
                 this->outputs.atUnchecked (i) = 0;//.referTo (0, 0);
