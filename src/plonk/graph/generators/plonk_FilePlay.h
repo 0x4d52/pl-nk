@@ -77,7 +77,6 @@ public:
                   inputs, data, blockSize, sampleRate,
                   channels)
     {
-        plonk_assertfalse;
     }
             
     Text getName() const throw()
@@ -109,11 +108,19 @@ public:
         file.initSignal (signalBuffer, this->getBlockSize().getValue());
         file.readSignal (signalBuffer);
         
+        const int signalFrameStride = signalBuffer.getFrameStride();
         const int numChannels = this->getNumChannels();
         
         for (int channel = 0; channel < numChannels; ++channel)
         {
-            //
+            Buffer& outputBuffer = this->getOutputBuffer (channel);
+            SampleType* const outputSamples = outputBuffer.getArray();
+            const int outputBufferLength = outputBuffer.length();        
+
+            const SampleType* signalSamples = signalBuffer.getSamples (channel);         
+
+            for (int i = 0; i < outputBufferLength; ++i, signalSamples += signalFrameStride)
+                outputSamples[i] = *signalSamples;
         }
     }
     
