@@ -46,7 +46,7 @@
 #include "../../core/plonk_SenderContainer.h"
 #include "../../core/plonk_Receiver.h"
 #include "../utility/plonk_TimeStamp.h"
-
+//#include "plonk_ProcessInfoInternal.h"
 
 
 /** Holds information about the Unit graph.
@@ -87,5 +87,40 @@ public:
         
     PLONK_OBJECTARROWOPERATOR(ProcessInfo);
 };
+
+
+//------------------------------------------------------------------------------
+
+
+//inline const TimeStamp& ProcessInfo::getTimeStamp() const throw()             
+//{ 
+//    return this->getInternal()->getTimeStamp(); 
+//}
+//
+//inline void ProcessInfo::setTimeStamp (const TimeStamp timeStamp) throw()
+//{
+//    this->getInternal()->setTimeStamp (timeStamp);
+//}
+//
+//inline void ProcessInfo::offsetTimeStamp (const double offset) throw()
+//{
+//    this->getInternal()->offsetTimeStamp (offset);
+//}
+//
+//inline void ProcessInfo::setShouldDelete() throw()
+//{
+//    this->getInternal()->setShouldDelete();
+//}
+//
+//inline void ProcessInfo::resetShouldDelete() throw()
+//{
+//    this->getInternal()->resetShouldDelete();
+//}
+//
+//inline bool ProcessInfo::getShouldDelete() const throw()
+//{
+//    return this->getInternal()->getShouldDelete();
+//}
+
 
 #endif // PLONK_PROCESSINFO_H

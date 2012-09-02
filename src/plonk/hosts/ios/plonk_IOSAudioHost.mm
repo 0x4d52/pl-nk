@@ -371,7 +371,7 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
         convertBuffer.setSize (inNumberFrames * plonk::max (getNumInputs(), getNumOutputs()), false);
 	}
 	
-    //BlockSize::getDefault().setValue (inNumberFrames);
+    setPreferredHostBlockSize (inNumberFrames);
 	
 	float *floatBufferData[2];
 	floatBufferData[0] = convertBuffer.getArray();

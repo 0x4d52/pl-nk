@@ -67,42 +67,42 @@ TimeStamp::TimeStamp (TimeStamp const& other) throw()
 {
 }
 
-TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
-{
-    if (&other != this)
-    {
-        this->time = other.time;
-        this->fraction = other.fraction;
-    }
-    
-    return *this;
-}
+//TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
+//{
+//    if (&other != this)
+//    {
+//        this->time = other.time;
+//        this->fraction = other.fraction;
+//    }
+//    
+//    return *this;
+//}
 
-TimeStamp& TimeStamp::operator+= (const double offset) throw()
-{
-    if (pl_IsInfD (offset))
-    {
-        this->time = 0;
-        this->fraction = offset;
-    }
-    else
-    {
-        const double correctedOffset = offset + this->fraction;
-        const LongLong timeOffset = LongLong (correctedOffset);
-        this->time += timeOffset;
-        this->fraction = correctedOffset - timeOffset; // carry the fraction
-        
-        if (this->fraction < 0.0)
-        {
-            this->time--;
-            this->fraction += 1.0;
-        }
-        
-        plonk_assert (fractionIsValid (this->fraction));
-    }
-    
-    return *this;
-}
+//TimeStamp& TimeStamp::operator+= (const double offset) throw()
+//{
+//    if (pl_IsInfD (offset))
+//    {
+//        this->time = 0;
+//        this->fraction = offset;
+//    }
+//    else
+//    {
+//        const double correctedOffset = offset + this->fraction;
+//        const LongLong timeOffset = LongLong (correctedOffset);
+//        this->time += timeOffset;
+//        this->fraction = correctedOffset - timeOffset; // carry the fraction
+//        
+//        if (this->fraction < 0.0)
+//        {
+//            this->time--;
+//            this->fraction += 1.0;
+//        }
+//        
+//        plonk_assert (fractionIsValid (this->fraction));
+//    }
+//    
+//    return *this;
+//}
 
 TimeStamp& TimeStamp::operator+= (TimeStamp const& other) throw()
 {

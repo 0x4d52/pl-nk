@@ -165,13 +165,16 @@ protected:
         if (currentThreadID != Threading::getAudioThreadID())
             Threading::setAudioThreadID (Threading::getCurrentThreadID());
 #endif
-        const int graphBlockSize = BlockSize::getDefault().getValue();
         const int numInputs = this->inputs.length();
         const int numOutputs = this->outputs.length();
         plonk_assert (this->busses.length() == numInputs);
 
         int blockRemain = preferredHostBlockSize;
         int i;
+        
+        const int graphBlockSize = BlockSize::getDefault().getValue();
+        
+        // must do more checks in case the block sizes are not compatible on this run
         
         while (blockRemain > 0)
         {

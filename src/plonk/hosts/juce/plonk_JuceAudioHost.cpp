@@ -179,7 +179,7 @@ void JuceAudioHost::audioDeviceIOCallback (const float** inputData, int numInput
                                            float** outputData, int numOutputs, 
                                            int blockSize) throw()
 {
-    //BlockSize::getDefault().setValue (blockSize);
+    setPreferredHostBlockSize (blockSize);
     
     plonk_assert (numInputs == getInputs().length());
     plonk_assert (numOutputs == getOutputs().length());

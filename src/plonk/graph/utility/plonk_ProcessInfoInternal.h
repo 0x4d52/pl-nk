@@ -65,5 +65,30 @@ private:
 };
 
 
+//------------------------------------------------------------------------------
+
+
+inline void ProcessInfoInternal::setTimeStamp (const TimeStamp time) throw()
+{
+    timeStamp = time;
+}
+
+inline void ProcessInfoInternal::offsetTimeStamp (const double offset) throw()
+{
+    timeStamp += offset;
+}
+
+inline void ProcessInfoInternal::setShouldDelete() throw()
+{
+    shouldDelete = true;
+}
+
+inline void ProcessInfoInternal::resetShouldDelete() throw()
+{
+    shouldDelete = false;
+}
+
+
+
 
 #endif // PLONK_PROCESSINFOINTERNAL_H

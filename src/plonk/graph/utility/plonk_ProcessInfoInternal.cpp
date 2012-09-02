@@ -50,25 +50,25 @@ ProcessInfoInternal::ProcessInfoInternal (const TimeStamp time,
 {
 }
 
-void ProcessInfoInternal::setTimeStamp (const TimeStamp time) throw()
-{
-    timeStamp = time;
-}
-
-void ProcessInfoInternal::offsetTimeStamp (const double offset) throw()
-{
-    timeStamp += offset;
-}
-
-void ProcessInfoInternal::setShouldDelete() throw()
-{
-    shouldDelete = true;
-}
-
-void ProcessInfoInternal::resetShouldDelete() throw()
-{
-    shouldDelete = false;
-}
+//void ProcessInfoInternal::setTimeStamp (const TimeStamp time) throw()
+//{
+//    timeStamp = time;
+//}
+//
+//void ProcessInfoInternal::offsetTimeStamp (const double offset) throw()
+//{
+//    timeStamp += offset;
+//}
+//
+//void ProcessInfoInternal::setShouldDelete() throw()
+//{
+//    shouldDelete = true;
+//}
+//
+//void ProcessInfoInternal::resetShouldDelete() throw()
+//{
+//    shouldDelete = false;
+//}
 
 
 END_PLONK_NAMESPACE

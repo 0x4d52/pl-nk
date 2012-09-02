@@ -185,7 +185,7 @@ int PortAudioAudioHost::callback (const float **inputData, float **outputData,
     (void)timeInfo;
     (void)statusFlags;
     
-    //BlockSize::getDefault().setValue (frameCount);
+    setPreferredHostBlockSize (frameCount);
     
     ConstBufferArray& inputs = getInputs();
     BufferArray& outputs = getOutputs();
