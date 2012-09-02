@@ -90,7 +90,8 @@ private:
     int							bufferSize;
 	float						bufferDuration;
 	double						reciprocalBufferDuration;
-	float						*floatBuffer;
+	//float						*floatBuffer;
+    Floats                      convertBuffer;
 	UInt32						audioInputIsAvailable;
 	UInt32						numInputChannels;
 	UInt32						numOutputChannels;
