@@ -13,3 +13,5 @@
 \form#12:$ outHigh = outLow + outRange $
 \form#13:$ a + (frac \times (b - a)) $
 \form#14:$ io = io * mul + add $
+\form#15:$ result = input * mul + add $
+\form#16:$ result= input * mul + add $

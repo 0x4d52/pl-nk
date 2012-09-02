@@ -114,7 +114,7 @@ Defines</h2></td></tr>
                                 <a class="code" href="class_block_size.html" title="A specialised Variable&lt;int&gt; for handling block sizes.">BlockSize</a> <span class="keyword">const</span>&amp; blockSize, <a class="code" href="class_sample_rate.html" title="A specialised Variable&lt;double&gt; for handling sample rates.">SampleRate</a> <span class="keyword">const</span>&amp; sampleRate) <span class="keywordflow">throw</span>()\
         :   <a class="code" href="class_unary_op_channel_internal.html#ad3868022bd78f0a6a4c9ed7cd74f0445">Internal</a> (inputs, data, blockSize, sampleRate)\
         {\
-            <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (NumBuffers == (NumInputs + NumOutputs));\
+            <a class="code" href="plonk___standard_header_8h.html#a0365426efc1f7fc14635b5ff0c78a92a">plonk_staticassert</a> (NumBuffers == (NumInputs + NumOutputs));\
             Process::init (&amp;p, <span class="keyword">this</span>, NumOutputs, NumInputs);\
         }
 </pre></div>
@@ -235,7 +235,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:44 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

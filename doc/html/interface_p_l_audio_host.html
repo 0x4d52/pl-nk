@@ -107,10 +107,10 @@ Properties</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of audio inputs, only set this BEFORE sending the startHost message.  <a href="#a2d99079f809dd7669d0a818cd0fe9292"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ae95c772181f43c44e71a5f064f732e5e">numOutputs</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of audio outputs, only set this BEFORE sending the startHost message.  <a href="#ae95c772181f43c44e71a5f064f732e5e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ab5947e54205d567c6e3c90a28744f113">preferredBlockSize</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred block size, only set this BEFORE sending the startHost message.  <a href="#ab5947e54205d567c6e3c90a28744f113"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a8ea6a37f5fc152939306b77636669552">preferredSampleRate</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred sample rate, only set this BEFORE sending the startHost message.  <a href="#a8ea6a37f5fc152939306b77636669552"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a597a74efc968d07e81fe7a0a933cadc1">preferredHostBlockSize</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred block size, only set this BEFORE sending the startHost message.  <a href="#a597a74efc968d07e81fe7a0a933cadc1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a797691d1aee1e61a85f942ab16a38976">preferredHostSampleRate</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The preferred sample rate, only set this BEFORE sending the startHost message.  <a href="#a797691d1aee1e61a85f942ab16a38976"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">UInt32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#a0d6e194b401bb33f632da21c37a0fa64">category</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.  <a href="#a0d6e194b401bb33f632da21c37a0fa64"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">UInt32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_p_l_audio_host.html#ad1f823296fe6ab0b28d983f75556a24c">mode</a></td></tr>
@@ -336,12 +336,12 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab5947e54205d567c6e3c90a28744f113"></a><!-- doxytag: member="PLAudioHost::preferredBlockSize" ref="ab5947e54205d567c6e3c90a28744f113" args="" -->
+<a class="anchor" id="a597a74efc968d07e81fe7a0a933cadc1"></a><!-- doxytag: member="PLAudioHost::preferredHostBlockSize" ref="a597a74efc968d07e81fe7a0a933cadc1" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">- (int) preferredBlockSize<code> [read, write, assign]</code></td>
+          <td class="memname">- (int) preferredHostBlockSize<code> [read, write, assign]</code></td>
         </tr>
       </table>
 </div>
@@ -351,12 +351,12 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8ea6a37f5fc152939306b77636669552"></a><!-- doxytag: member="PLAudioHost::preferredSampleRate" ref="a8ea6a37f5fc152939306b77636669552" args="" -->
+<a class="anchor" id="a797691d1aee1e61a85f942ab16a38976"></a><!-- doxytag: member="PLAudioHost::preferredHostSampleRate" ref="a797691d1aee1e61a85f942ab16a38976" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">- (double) preferredSampleRate<code> [read, write, assign]</code></td>
+          <td class="memname">- (double) preferredHostSampleRate<code> [read, write, assign]</code></td>
         </tr>
       </table>
 </div>
@@ -414,7 +414,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:56 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -214,9 +214,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00167"></a>00167     {
 <a name="l00168"></a>00168         <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="class_binary_op_type_utility.html#a174306b02676d5b398558eb5cf07db17">BinaryOpTypeUtility&lt;NumericalType, OtherType&gt;::CalcType</a> CalcType;
 <a name="l00169"></a>00169         
-<a name="l00170"></a>00170         CalcType typePeak (<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;NumericalType&gt;::getTypePeak</a>());
-<a name="l00171"></a>00171         CalcType otherTypePeak (<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;OtherType&gt;::getTypePeak</a>());
-<a name="l00172"></a>00172         CalcType otherTypePeakFactor = CalcType (1) / otherTypePeak;
+<a name="l00170"></a>00170         <span class="keyword">const</span> CalcType typePeak (<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;NumericalType&gt;::getTypePeak</a>());
+<a name="l00171"></a>00171         <span class="keyword">const</span> CalcType otherTypePeak (<a class="code" href="class_type_utility.html" title="A utility for finding out information about certain other classes and types.">TypeUtility&lt;OtherType&gt;::getTypePeak</a>());
+<a name="l00172"></a>00172         <span class="keyword">const</span> CalcType otherTypePeakFactor = <a class="code" href="class_math.html" title="Some useful maths constants.">Math&lt;CalcType&gt;::get1</a>() / otherTypePeak;
 <a name="l00173"></a>00173         
 <a name="l00174"></a>00174                 <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a3ebed4495ee1835dd4e020f59b282432">UnsignedLong</a> i;
 <a name="l00175"></a>00175 
@@ -1254,7 +1254,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:47 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:42 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

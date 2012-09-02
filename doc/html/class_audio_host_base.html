@@ -78,9 +78,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a909240e4783a3ad7928029094d84a6a6">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a4c6eca2d93fbe1a595f501115695c777">BufferArray</a></td></tr>
+&lt; SampleType * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a8ca5b6117cc61f13ecf7cc701c412f8b">BufferArray</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; const <br class="typebreak"/>
+SampleType * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#aa7312370132fc29cbe204f29a6fa0429">ConstBufferArray</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a03e48ee620f681bba04dd45274d69a1c">UnitType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_bus_buffer.html">BusBuffer</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#aaf535d143eb5e6949946653d3ebea504">BusType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; <a class="el" href="class_bus_buffer.html">BusType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#acff56806ad92744ed173da6bf4763491">BussesType</a></td></tr>
@@ -99,14 +99,18 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of audio inputs.  <a href="#a2a91a9dce214bddabc6033daaae43782"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a242c4cc90d94494041bfab0510936ca4">getNumOutputs</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of audio outputs.  <a href="#a242c4cc90d94494041bfab0510936ca4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#aac396998adbec2714d062425c6f76911">getPreferredSampleRate</a> () const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current preferred sample rate for the host.  <a href="#aac396998adbec2714d062425c6f76911"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a06a4f0e1eef14b02154bcb40008095f2">getPreferredBlockSize</a> () const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current preferred block size for the host.  <a href="#a06a4f0e1eef14b02154bcb40008095f2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a1fc69b53e4bf08ca25ed534c34814739">setPreferredSampleRate</a> (const double newRate)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the host's preferred sample rate.  <a href="#a1fc69b53e4bf08ca25ed534c34814739"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a2a3aa606beec3296a15fd936e5b15f28">setPreferredBlockSize</a> (const int newSize)  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the host's preferred block size.  <a href="#a2a3aa606beec3296a15fd936e5b15f28"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#ad6ceb35480c9b9d4deba35f5dab776cc">getPreferredHostSampleRate</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current preferred sample rate for the host.  <a href="#ad6ceb35480c9b9d4deba35f5dab776cc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#aea4e832ce14bd48f9526f24d8c69aeba">getPreferredHostBlockSize</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current preferred block size for the host.  <a href="#aea4e832ce14bd48f9526f24d8c69aeba"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#ac583ac2d2c440ac46cac5421b5e4c16c">setPreferredHostSampleRate</a> (const double newRate)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the host's preferred sample rate.  <a href="#ac583ac2d2c440ac46cac5421b5e4c16c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a620b1c602c4ec0b776c91513bcf69acd">setPreferredHostBlockSize</a> (const int newSize)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the host's preferred block size.  <a href="#a620b1c602c4ec0b776c91513bcf69acd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a7c8307fd6ea243cb3615dbcfd9c6a607">getPreferredGraphBlockSize</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current preferred block size for the graph.  <a href="#a7c8307fd6ea243cb3615dbcfd9c6a607"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a2cbc668367944f7c092dcaa96aadd81f">setPreferredGraphBlockSize</a> (const int newSize)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the graph's preferred block size.  <a href="#a2cbc668367944f7c092dcaa96aadd81f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a97e22b16e99cf8c2b3c3223441e9ceea">setNumInputs</a> (const int numInputs)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the number of audio inputs required.  <a href="#a97e22b16e99cf8c2b3c3223441e9ceea"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a3b86efabd19949082d704f54aa1362db">setNumOutputs</a> (const int numOutputs)  throw ()</td></tr>
@@ -115,13 +119,13 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get other (normally platform dependent) options.  <a href="#a5233dc06e3164004226e8ff61f4ab6eb"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array2_d.html">BufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#adec9c565d5fae77d64a749b092a1b241">getInputs</a> () const   throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the input buffers.  <a href="#adec9c565d5fae77d64a749b092a1b241"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array2_d.html">BufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a153e5c021ee1d2dcb9f57b420c893bd0">getInputs</a> ()  throw ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the input buffers.  <a href="#a153e5c021ee1d2dcb9f57b420c893bd0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array2_d.html">BufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a86bc339bff7f68e2618226e83621ca3a">getOutputs</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">ConstBufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a15e756329a09c014416ce31ac269ebf6">getInputs</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the input buffers.  <a href="#a15e756329a09c014416ce31ac269ebf6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">ConstBufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a22beb9feb80398040b4f4090889fcfc3">getInputs</a> ()  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the input buffers.  <a href="#a22beb9feb80398040b4f4090889fcfc3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">BufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a86bc339bff7f68e2618226e83621ca3a">getOutputs</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the output buffers.  <a href="#a86bc339bff7f68e2618226e83621ca3a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array2_d.html">BufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a6b507e6562d32184e54a4f0cff083a4d">getOutputs</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">BufferArray</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a6b507e6562d32184e54a4f0cff083a4d">getOutputs</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the output buffers.  <a href="#a6b507e6562d32184e54a4f0cff083a4d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">getHostName</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the audio host.  <a href="#a4d5cf02b8df0d3934449b527b0072317"></a><br/></td></tr>
@@ -153,37 +157,37 @@ class AudioHostBase&lt; SampleType &gt;</h3>
 <p>An abstract class to interface with audio devices. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd>PortAudioAudioHost, IOSAudioHost, JuceAudioHost </dd></dl>
 </div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="a909240e4783a3ad7928029094d84a6a6"></a><!-- doxytag: member="AudioHostBase::Buffer" ref="a909240e4783a3ad7928029094d84a6a6" args="" -->
+<a class="anchor" id="a8ca5b6117cc61f13ecf7cc701c412f8b"></a><!-- doxytag: member="AudioHostBase::BufferArray" ref="a8ca5b6117cc61f13ecf7cc701c412f8b" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType&gt; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">Buffer</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;SampleType*&gt; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">BufferArray</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#acb9aff8725added47f182764bf5ab1b4">PLONK_NAMESPACE::PortAudioAudioHost</a>.</p>
+<p>Reimplemented in <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a836a32159c6737394edc0757e1a335dd">PLONK_NAMESPACE::IOSAudioHost</a>, and <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a3d52a1cb727b4949fbca17109f02afea">PLONK_NAMESPACE::PortAudioAudioHost</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4c6eca2d93fbe1a595f501115695c777"></a><!-- doxytag: member="AudioHostBase::BufferArray" ref="a4c6eca2d93fbe1a595f501115695c777" args="" -->
+<a class="anchor" id="aa7312370132fc29cbe204f29a6fa0429"></a><!-- doxytag: member="AudioHostBase::ConstBufferArray" ref="aa7312370132fc29cbe204f29a6fa0429" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_numerical_array2_d.html">NumericalArray2D</a>&lt;SampleType&gt; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array2_d.html">BufferArray</a></td>
+          <td class="memname">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a>&lt;const SampleType*&gt; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::<a class="el" href="class_numerical_array.html">ConstBufferArray</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a3d52a1cb727b4949fbca17109f02afea">PLONK_NAMESPACE::PortAudioAudioHost</a>.</p>
+<p>Reimplemented in <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#aef4965df2e84084593cc912f291ade9c">PLONK_NAMESPACE::IOSAudioHost</a>, and <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a2aad6e2b4ff8734a27bf7c230a528c8d">PLONK_NAMESPACE::PortAudioAudioHost</a>.</p>
 
 </div>
 </div>
@@ -372,14 +376,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aac396998adbec2714d062425c6f76911"></a><!-- doxytag: member="AudioHostBase::getPreferredSampleRate" ref="aac396998adbec2714d062425c6f76911" args="() const " -->
+<a class="anchor" id="ad6ceb35480c9b9d4deba35f5dab776cc"></a><!-- doxytag: member="AudioHostBase::getPreferredHostSampleRate" ref="ad6ceb35480c9b9d4deba35f5dab776cc" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getPreferredSampleRate </td>
+          <td class="memname">double <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getPreferredHostSampleRate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -392,14 +396,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a06a4f0e1eef14b02154bcb40008095f2"></a><!-- doxytag: member="AudioHostBase::getPreferredBlockSize" ref="a06a4f0e1eef14b02154bcb40008095f2" args="() const " -->
+<a class="anchor" id="aea4e832ce14bd48f9526f24d8c69aeba"></a><!-- doxytag: member="AudioHostBase::getPreferredHostBlockSize" ref="aea4e832ce14bd48f9526f24d8c69aeba" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getPreferredBlockSize </td>
+          <td class="memname">int <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getPreferredHostBlockSize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline]</code></td>
@@ -412,14 +416,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1fc69b53e4bf08ca25ed534c34814739"></a><!-- doxytag: member="AudioHostBase::setPreferredSampleRate" ref="a1fc69b53e4bf08ca25ed534c34814739" args="(const double newRate)" -->
+<a class="anchor" id="ac583ac2d2c440ac46cac5421b5e4c16c"></a><!-- doxytag: member="AudioHostBase::setPreferredHostSampleRate" ref="ac583ac2d2c440ac46cac5421b5e4c16c" args="(const double newRate)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::setPreferredSampleRate </td>
+          <td class="memname">void <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::setPreferredHostSampleRate </td>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>newRate</em></td><td>)</td>
@@ -434,14 +438,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a2a3aa606beec3296a15fd936e5b15f28"></a><!-- doxytag: member="AudioHostBase::setPreferredBlockSize" ref="a2a3aa606beec3296a15fd936e5b15f28" args="(const int newSize)" -->
+<a class="anchor" id="a620b1c602c4ec0b776c91513bcf69acd"></a><!-- doxytag: member="AudioHostBase::setPreferredHostBlockSize" ref="a620b1c602c4ec0b776c91513bcf69acd" args="(const int newSize)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::setPreferredBlockSize </td>
+          <td class="memname">void <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::setPreferredHostBlockSize </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>newSize</em></td><td>)</td>
@@ -452,6 +456,48 @@ template&lt;class SampleType&gt; </div>
 <div class="memdoc">
 
 <p>Set the host's preferred block size. </p>
+<p>This must be called before <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87" title="Start the host.">startHost()</a> to have any effect. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7c8307fd6ea243cb3615dbcfd9c6a607"></a><!-- doxytag: member="AudioHostBase::getPreferredGraphBlockSize" ref="a7c8307fd6ea243cb3615dbcfd9c6a607" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getPreferredGraphBlockSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the current preferred block size for the graph. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2cbc668367944f7c092dcaa96aadd81f"></a><!-- doxytag: member="AudioHostBase::setPreferredGraphBlockSize" ref="a2cbc668367944f7c092dcaa96aadd81f" args="(const int newSize)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::setPreferredGraphBlockSize </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>newSize</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the graph's preferred block size. </p>
 <p>This must be called before <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87" title="Start the host.">startHost()</a> to have any effect. </p>
 
 </div>
@@ -520,14 +566,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="adec9c565d5fae77d64a749b092a1b241"></a><!-- doxytag: member="AudioHostBase::getInputs" ref="adec9c565d5fae77d64a749b092a1b241" args="() const " -->
+<a class="anchor" id="a15e756329a09c014416ce31ac269ebf6"></a><!-- doxytag: member="AudioHostBase::getInputs" ref="a15e756329a09c014416ce31ac269ebf6" args="() const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_numerical_array2_d.html">BufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getInputs </td>
+          <td class="memname">const <a class="el" href="class_numerical_array.html">ConstBufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getInputs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline, protected]</code></td>
@@ -540,14 +586,14 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a153e5c021ee1d2dcb9f57b420c893bd0"></a><!-- doxytag: member="AudioHostBase::getInputs" ref="a153e5c021ee1d2dcb9f57b420c893bd0" args="()" -->
+<a class="anchor" id="a22beb9feb80398040b4f4090889fcfc3"></a><!-- doxytag: member="AudioHostBase::getInputs" ref="a22beb9feb80398040b4f4090889fcfc3" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_numerical_array2_d.html">BufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getInputs </td>
+          <td class="memname"><a class="el" href="class_numerical_array.html">ConstBufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getInputs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, protected]</code></td>
@@ -567,7 +613,7 @@ template&lt;class SampleType&gt; </div>
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_numerical_array2_d.html">BufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getOutputs </td>
+          <td class="memname">const <a class="el" href="class_numerical_array.html">BufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getOutputs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const  throw ()<code> [inline, protected]</code></td>
@@ -587,7 +633,7 @@ template&lt;class SampleType&gt; </div>
 template&lt;class SampleType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_numerical_array2_d.html">BufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getOutputs </td>
+          <td class="memname"><a class="el" href="class_numerical_array.html">BufferArray</a>&amp; <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; SampleType &gt;::getOutputs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [inline, protected]</code></td>
@@ -887,7 +933,7 @@ template&lt;class SampleType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

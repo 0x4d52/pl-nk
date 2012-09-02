@@ -83,6 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_type_0x69.html#index_i"><span>i</span></a></li>
       <li><a href="functions_type_0x6b.html#index_k"><span>k</span></a></li>
       <li><a href="functions_type_0x6c.html#index_l"><span>l</span></a></li>
+      <li><a href="functions_type_0x6d.html#index_m"><span>m</span></a></li>
       <li><a href="functions_type_0x6e.html#index_n"><span>n</span></a></li>
       <li><a href="functions_type_0x6f.html#index_o"><span>o</span></a></li>
       <li><a href="functions_type_0x70.html#index_p"><span>p</span></a></li>
@@ -135,7 +136,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_mixer_unit.html#a0e2caa939a3b86248ec0f8471cd85715">MixerUnit&lt; SampleType &gt;</a>
 </li>
 <li>UnitType
-: <a class="el" href="class_block_channel_internal.html#a917d2f87f53d075f66d47cf54d0ece5b">BlockChannelInternal&lt; SampleType &gt;</a>
+: <a class="el" href="class_bus_read_channel_internal.html#aa526ec188b9b9ba5fcaee694b718a574">BusReadChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_block_unit.html#a41163e7af50605678aaa6c107fc15e62">BlockUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_block_channel_internal.html#a917d2f87f53d075f66d47cf54d0ece5b">BlockChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_binary_op_channel_internal.html#a3df9b0d02210bd4d8a62d13fd2ccc5cb">BinaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_atomic_variable_unit.html#ab7551c8e9e01ad67c6d4807a70bda1be">AtomicVariableUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_atomic_variable_channel_internal.html#a052ec2abc968d1f7bea225afa84e5c0f">AtomicVariableChannelInternal&lt; SampleType &gt;</a>
@@ -153,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_saw_channel_internal.html#a8e983ff3261968b13523b750764e0d22">SawChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_h_p_f_unit.html#a8a3fc0ef464179ae447d6f3d87592529">HPFUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_l_p_f_unit.html#a54ceaa867bfda23e5d76bad10aa719f4">LPFUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_block_unit.html#a41163e7af50605678aaa6c107fc15e62">BlockUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_bus_read_unit.html#a2b3f65b1a9b479effa577cccbb3cbceb">BusReadUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_b_p_f_unit.html#a4b9addc78ec4cdb198db9736e1479dd8">BPFUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_notch_unit.html#a3c639fef347dda589e5e1e7c273f8bea">NotchUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_high_shelf_unit.html#a2d74a0faa8d6e9b409921344d694706e">HighShelfUnit&lt; SampleType &gt;</a>
@@ -161,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_r_h_p_f_unit.html#af690822992a551133473ba32bfe6489c">RHPFUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_r_l_p_f_unit.html#a5fc27394322db2e4dfcb7dbdd15cbbad">RLPFUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_decay_unit.html#a1ce607f439b6fc6f29c99a6e83614dd9">DecayUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_bus_write_unit.html#a8569454a00be9559f488ec4b2a60e2d6">BusWriteUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_linear_pan_unit.html#a0abbb1a2ce6a8fd2d41545a5516f5200">LinearPanUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_lag_unit.html#a986fc0d3dc186d9b1b71ef82b96dd6b3">LagUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_l_p_f_p1_unit.html#a611a89b4278fd98c89317ecb2f02da46">LPFP1Unit&lt; SampleType &gt;</a>
 , <a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_b2_01_4.html#afb719284becd80e720de59cbcf3d693c">FilterForm&lt; SampleType, FilterFormType::B2 &gt;</a>
@@ -214,19 +217,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_audio_host_base.html#a03e48ee620f681bba04dd45274d69a1c">AudioHostBase&lt; SampleType &gt;</a>
 , <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_i_o_s_audio_host.html#a9b7ea788a002496c40d23759e440e606">PLONK_NAMESPACE::IOSAudioHost</a>
 , <a class="el" href="class_delay4_param_channel_internal.html#a8d3e21c415b006ea885c7f6e6d206098">Delay4ParamChannelInternal&lt; FormType &gt;</a>
-, <a class="el" href="class_linear_pan_unit.html#a0abbb1a2ce6a8fd2d41545a5516f5200">LinearPanUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitMixerChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_filter_form_3_01_sample_type_00_01_filter_form_type_1_1_p2_z2_01_4.html#ae6304859860699e0823a4e4694772e6e">FilterForm&lt; SampleType, FilterFormType::P2Z2 &gt;</a>
-, <a class="el" href="class_linear_pan_channel_internal.html#a82b2055732c73361f50718d7a90e1457">LinearPanChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_channel_mixer_channel_internal.html#af3b50bb40e2c374b23965a934afc6a4a">ChannelMixerChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_resample_unit.html#a91e32100bda958a3683d27f7f0df9d5b">ResampleUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_mixer_unit.html#a06319e63fdb9682de95614e4bcb4f6e0">MixerUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_mul_add_unit.html#a4dad94896f69b4729f9b21bf7329cf21">MulAddUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_patch_channel_internal.html#af842acc580d8a1d8008c7db71411cbd2">PatchChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_unary_op_channel_internal.html#a2725ad82d83a2eb6c4971128a5d72eed">UnaryOpChannelInternal&lt; SampleType, op &gt;</a>
 , <a class="el" href="class_variable_channel_internal.html#ae9492fe982e154e1774e71987866fa5f">VariableChannelInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_bus_read_unit.html#a2b3f65b1a9b479effa577cccbb3cbceb">BusReadUnit&lt; SampleType &gt;</a>
-, <a class="el" href="class_bus_read_channel_internal.html#aa526ec188b9b9ba5fcaee694b718a574">BusReadChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_bus_write_unit.html#a8569454a00be9559f488ec4b2a60e2d6">BusWriteUnit&lt; SampleType &gt;</a>
 , <a class="el" href="class_bus_write_channel_internal.html#a2ab9869ee89b9bba4f711c6c039b913c">BusWriteChannelInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_channel_mixer_channel_internal.html#af3b50bb40e2c374b23965a934afc6a4a">ChannelMixerChannelInternal&lt; SampleType &gt;</a>
-, <a class="el" href="class_unit_mixer_channel_internal.html#aa6c4d8af86e4cab58f7eeab1d3f73e0c">UnitMixerChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_linear_pan_channel_internal.html#a82b2055732c73361f50718d7a90e1457">LinearPanChannelInternal&lt; SampleType &gt;</a>
+, <a class="el" href="class_mixer_unit.html#a06319e63fdb9682de95614e4bcb4f6e0">MixerUnit&lt; SampleType &gt;</a>
+, <a class="el" href="class_mul_add_channel_internal.html#ad4643f25335a7c4690de2d2ececb0763">MulAddChannelInternal&lt; SampleType &gt;</a>
 , <a class="el" href="class_patch_unit.html#a4553091a6a3ccad5b49a67adf9d1a108">PatchUnit&lt; SampleType &gt;</a>
 </li>
 <li>UnitVariableType
@@ -253,7 +256,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:46 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

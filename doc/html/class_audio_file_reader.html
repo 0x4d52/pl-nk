@@ -105,32 +105,50 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_audio_file_reader.html">AudioFileReader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a7afa4ad6506034a5a46fa4b56f82dcfa">operator=</a> (<a class="el" href="class_audio_file_reader.html">AudioFileReader</a> const &amp;other)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator.  <a href="#a7afa4ad6506034a5a46fa4b56f82dcfa"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#afff578970ab52d7f1c1cdf09bd345ccd">getBitsPerSample</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of bits used per sample in the file.  <a href="#afff578970ab52d7f1c1cdf09bd345ccd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a68677a87177469263d6b9cd3eb13afd8">getBytesPerFrame</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of bytes in each frame of the file.  <a href="#a68677a87177469263d6b9cd3eb13afd8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a1138597bbc2940255a7d96e95e2c678c">getNumChannels</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of channels in the file.  <a href="#a1138597bbc2940255a7d96e95e2c678c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a5300866a9cc6a471f14e712e935d884e">getSampleRate</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sample rate of the file.  <a href="#a5300866a9cc6a471f14e712e935d884e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a223db297ec896f5eb5a4cb73e9162b2f">getNumFrames</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the total number of frames in the file.  <a href="#a223db297ec896f5eb5a4cb73e9162b2f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a8c074dc10caa68d401b4a8449f3cffa9">getFramePosition</a> () const   throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current frame position.  <a href="#a8c074dc10caa68d401b4a8449f3cffa9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#addc624424d28a63cb9eeade229c0e878">setFramePosition</a> (const int position)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the frame position to a particular frame.  <a href="#addc624424d28a63cb9eeade229c0e878"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#af578e0ff6a4847b0b22640ef2ae92890">resetFramePosition</a> ()  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the frame position back to the start of the frames.  <a href="#af578e0ff6a4847b0b22640ef2ae92890"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a612ed7973ca7e40e5d2a80631e5b9c04">readFrames</a> (<a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;data)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#aaef0aa6a18a1db5da2ca9406d0b52ca8">readFrames</a> (<a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;data)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read frames into a pre-allocated <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> and apply scaling.  <a href="#aaef0aa6a18a1db5da2ca9406d0b52ca8"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a857c568a30c1841efa31b28c553399e4">readFramesDirect</a> (<a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;data)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a108b89b23859c657027fe04ecce410a7">readFramesDirect</a> (<a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;data)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read frames into a pre-allocated <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> without scaling.  <a href="#a108b89b23859c657027fe04ecce410a7"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#ab1b88bf2945f90f8a6447a60e33136bb">initSignal</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal, const int numFrames=0)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises a Signal object in the appropriate format for the audio in the file.  <a href="#ab1b88bf2945f90f8a6447a60e33136bb"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a6e1323184695ecfb5037095e2bcd9df7">readSignal</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a5651b56a7f9bd552181ab4beb0febaf6">readSignal</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read frames into a pre-allocated Signal object and apply scaling.  <a href="#a5651b56a7f9bd552181ab4beb0febaf6"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a7ca098839bbf0e3faeaa99a923d6c69c">readSignalDirect</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal)  throw ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a1cd1544937b08cbf0c99a90cfde95512">readSignalDirect</a> (<a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;signal)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read frames into a pre-allocated Signal object without scaling.  <a href="#a1cd1544937b08cbf0c99a90cfde95512"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a637f0571dad789053ce27c34f15b560f">readAllFrames</a> (const bool applyScaling)  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all the frames in the file and returns them in an interleaved array.  <a href="#a637f0571dad789053ce27c34f15b560f"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#abf56fb8289381f145c25416f8bcc7668">operator NumericalArray&lt; SampleType &gt;</a> ()  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all the frames in the file and returns them in an interleaved array.  <a href="#abf56fb8289381f145c25416f8bcc7668"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#ab1a712b784b24e83fd5630ce16e3437e">operator SignalBase&lt; SampleType &gt;</a> ()  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all the frames in the file and returns them in Signal object.  <a href="#ab1a712b784b24e83fd5630ce16e3437e"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;class SampleType &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a00200d3a16d0fa133813ea3155da2237">getOtherSignal</a> ()  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all the frames in the file and returns them in Signal object.  <a href="#a00200d3a16d0fa133813ea3155da2237"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; PLONK_TYPE_DEFAULT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a3c7594f805fe65648eb79dfb73aa59c2">getSignal</a> ()  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all the frames in the file and returns them in Signal object.  <a href="#a3c7594f805fe65648eb79dfb73aa59c2"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_audio_file_reader.html">AudioFileReader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_file_reader.html#a979c7c92bd446e70e9f7af0df76d748f">fromWeak</a> (<a class="el" href="class_weak_pointer_container.html">Weak</a> const &amp;weak)  throw ()</td></tr>
@@ -315,6 +333,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Get the number of bits used per sample in the file. </p>
+
 </div>
 </div>
 <a class="anchor" id="a68677a87177469263d6b9cd3eb13afd8"></a><!-- doxytag: member="AudioFileReader::getBytesPerFrame" ref="a68677a87177469263d6b9cd3eb13afd8" args="() const " -->
@@ -330,6 +350,8 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Get the number of bytes in each frame of the file. </p>
 
 </div>
 </div>
@@ -347,6 +369,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Get the number of channels in the file. </p>
+
 </div>
 </div>
 <a class="anchor" id="a5300866a9cc6a471f14e712e935d884e"></a><!-- doxytag: member="AudioFileReader::getSampleRate" ref="a5300866a9cc6a471f14e712e935d884e" args="() const " -->
@@ -362,6 +386,8 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Get the sample rate of the file. </p>
 
 </div>
 </div>
@@ -379,6 +405,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Get the total number of frames in the file. </p>
+
 </div>
 </div>
 <a class="anchor" id="a8c074dc10caa68d401b4a8449f3cffa9"></a><!-- doxytag: member="AudioFileReader::getFramePosition" ref="a8c074dc10caa68d401b4a8449f3cffa9" args="() const " -->
@@ -394,6 +422,8 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Get the current frame position. </p>
 
 </div>
 </div>
@@ -412,6 +442,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Set the frame position to a particular frame. </p>
+
 </div>
 </div>
 <a class="anchor" id="af578e0ff6a4847b0b22640ef2ae92890"></a><!-- doxytag: member="AudioFileReader::resetFramePosition" ref="af578e0ff6a4847b0b22640ef2ae92890" args="()" -->
@@ -428,16 +460,18 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Resets the frame position back to the start of the frames. </p>
+
 </div>
 </div>
-<a class="anchor" id="a612ed7973ca7e40e5d2a80631e5b9c04"></a><!-- doxytag: member="AudioFileReader::readFrames" ref="a612ed7973ca7e40e5d2a80631e5b9c04" args="(NumericalArray&lt; SampleType &gt; &amp;data)" -->
+<a class="anchor" id="aaef0aa6a18a1db5da2ca9406d0b52ca8"></a><!-- doxytag: member="AudioFileReader::readFrames" ref="aaef0aa6a18a1db5da2ca9406d0b52ca8" args="(NumericalArray&lt; SampleType &gt; &amp;data)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void AudioFileReader::readFrames </td>
+          <td class="memname">bool AudioFileReader::readFrames </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
@@ -447,16 +481,26 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Read frames into a pre-allocated <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> and apply scaling. </p>
+<p>Here the samples are automatically scaled depending on the destination data type of the <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a>. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> object to read interleaved frames into. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the array was resized as fewer samples were available, otherwise <code>false</code>. </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="a857c568a30c1841efa31b28c553399e4"></a><!-- doxytag: member="AudioFileReader::readFramesDirect" ref="a857c568a30c1841efa31b28c553399e4" args="(NumericalArray&lt; SampleType &gt; &amp;data)" -->
+<a class="anchor" id="a108b89b23859c657027fe04ecce410a7"></a><!-- doxytag: member="AudioFileReader::readFramesDirect" ref="a108b89b23859c657027fe04ecce410a7" args="(NumericalArray&lt; SampleType &gt; &amp;data)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void AudioFileReader::readFramesDirect </td>
+          <td class="memname">bool AudioFileReader::readFramesDirect </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_numerical_array.html">NumericalArray</a>&lt; SampleType &gt; &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
@@ -465,6 +509,15 @@ template&lt;class SampleType &gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Read frames into a pre-allocated <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> without scaling. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> object to read interleaved frames into. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the array was resized as fewer samples were available, otherwise <code>false</code>. </dd></dl>
 
 </div>
 </div>
@@ -495,16 +548,25 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Initialises a Signal object in the appropriate format for the audio in the file. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signal</td><td>The Signal object to initialise. </td></tr>
+    <tr><td class="paramname">numFrames</td><td>The number of frames the Signal should store. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a class="anchor" id="a6e1323184695ecfb5037095e2bcd9df7"></a><!-- doxytag: member="AudioFileReader::readSignal" ref="a6e1323184695ecfb5037095e2bcd9df7" args="(SignalBase&lt; SampleType &gt; &amp;signal)" -->
+<a class="anchor" id="a5651b56a7f9bd552181ab4beb0febaf6"></a><!-- doxytag: member="AudioFileReader::readSignal" ref="a5651b56a7f9bd552181ab4beb0febaf6" args="(SignalBase&lt; SampleType &gt; &amp;signal)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void AudioFileReader::readSignal </td>
+          <td class="memname">bool AudioFileReader::readSignal </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;&#160;</td>
           <td class="paramname"><em>signal</em></td><td>)</td>
@@ -514,16 +576,26 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Read frames into a pre-allocated Signal object and apply scaling. </p>
+<p>The Signal object MUST be an interleaved type. Here the samples are automatically scaled depending on the destination data type of the Signal. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signal</td><td>The Signal object to read frames into. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the array was resized as fewer samples were available, otherwise <code>false</code>. </dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="a7ca098839bbf0e3faeaa99a923d6c69c"></a><!-- doxytag: member="AudioFileReader::readSignalDirect" ref="a7ca098839bbf0e3faeaa99a923d6c69c" args="(SignalBase&lt; SampleType &gt; &amp;signal)" -->
+<a class="anchor" id="a1cd1544937b08cbf0c99a90cfde95512"></a><!-- doxytag: member="AudioFileReader::readSignalDirect" ref="a1cd1544937b08cbf0c99a90cfde95512" args="(SignalBase&lt; SampleType &gt; &amp;signal)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class SampleType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void AudioFileReader::readSignalDirect </td>
+          <td class="memname">bool AudioFileReader::readSignalDirect </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_signal_base.html">SignalBase</a>&lt; SampleType &gt; &amp;&#160;</td>
           <td class="paramname"><em>signal</em></td><td>)</td>
@@ -532,6 +604,16 @@ template&lt;class SampleType &gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Read frames into a pre-allocated Signal object without scaling. </p>
+<p>The Signal object MUST be an interleaved type. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signal</td><td>The Signal object to read frames into. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><code>true</code> if the array was resized as fewer samples were available, otherwise <code>false</code>. </dd></dl>
 
 </div>
 </div>
@@ -552,6 +634,16 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Reads all the frames in the file and returns them in an interleaved array. </p>
+<p>Here the samples can be automatically scaled depending on the destination data type. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">applyScaling</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> containing the interleaved sample frames. </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="abf56fb8289381f145c25416f8bcc7668"></a><!-- doxytag: member="AudioFileReader::operator NumericalArray&lt; SampleType &gt;" ref="abf56fb8289381f145c25416f8bcc7668" args="()" -->
@@ -569,6 +661,9 @@ template&lt;class SampleType &gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reads all the frames in the file and returns them in an interleaved array. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">NumericalArray</a> containing the interleaved sample frames. </dd></dl>
 
 </div>
 </div>
@@ -588,6 +683,9 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Reads all the frames in the file and returns them in Signal object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A Signal containing sample frames. </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a00200d3a16d0fa133813ea3155da2237"></a><!-- doxytag: member="AudioFileReader::getOtherSignal" ref="a00200d3a16d0fa133813ea3155da2237" args="()" -->
@@ -606,6 +704,9 @@ template&lt;class SampleType &gt; </div>
 </div>
 <div class="memdoc">
 
+<p>Reads all the frames in the file and returns them in Signal object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A Signal containing sample frames. </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a3c7594f805fe65648eb79dfb73aa59c2"></a><!-- doxytag: member="AudioFileReader::getSignal" ref="a3c7594f805fe65648eb79dfb73aa59c2" args="()" -->
@@ -621,6 +722,9 @@ template&lt;class SampleType &gt; </div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reads all the frames in the file and returns them in Signal object. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A Signal containing sample frames. </dd></dl>
 
 </div>
 </div>
@@ -642,7 +746,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:53 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:48 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

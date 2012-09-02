@@ -219,7 +219,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_maths_functions.html#ga95dcdb9612f2e6349e9dc07c587562ce">pl_ZapD</a> (double x)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input argument with infinities, NaNs and denormallised numbers removed.  <a href="#ga95dcdb9612f2e6349e9dc07c587562ce"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_maths_functions.html#ga94049aff0b7b8e6710ecde60cd58be33">pl_AddF</a> (float a, float b)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ a + b $" src="form_1.png"/>.  <a href="#ga94049aff0b7b8e6710ecde60cd58be33"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Clips a float to between -1...+1 without a branch.  <a href="#ga94049aff0b7b8e6710ecde60cd58be33"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_maths_functions.html#ga978ae5cc15df8c6bc50c6a9187de3f24">pl_AddD</a> (double a, double b)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <img class="formulaInl" alt="$ a + b $" src="form_1.png"/>.  <a href="#ga978ae5cc15df8c6bc50c6a9187de3f24"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_maths_functions.html#ga3195b8723443d971f4b67b6af5f13124">pl_SubF</a> (float a, float b)</td></tr>
@@ -1926,7 +1926,8 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Returns <img class="formulaInl" alt="$ a + b $" src="form_1.png"/>. </p>
+<p>Clips a float to between -1...+1 without a branch. </p>
+<p>Clips a float to between -1...+1 without a branch. In input value should be offset by 1 (i.e., 0...2), output is -1...+1. An input value of 1 would output 0. Clips a float to between 0...2 without a branch. Clips a double to between -1...+1 without a branch. Clips a float to between -1...+1 without a branch. In input value should be offset by 1 (i.e., 0...2), output is -1...+1. An input value of 1 would output 0. Clips a double to between 0...2 without a branch. Returns <img class="formulaInl" alt="$ a + b $" src="form_1.png"/>. </p>
 
 </div>
 </div>
@@ -3820,7 +3821,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:50 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:45 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

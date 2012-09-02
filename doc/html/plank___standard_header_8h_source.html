@@ -288,47 +288,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00224"></a><a class="code" href="plank___standard_header_8h.html#aa01b6e7ba4f113659d06d6b084696653">00224</a> <span class="preprocessor">    #define PLANK_INFINITY (PLANK_INFINITY_HACK.Value)</span>
 <a name="l00225"></a>00225 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
 <a name="l00226"></a>00226 <span class="preprocessor"></span>
-<a name="l00227"></a>00227 <span class="preprocessor">#include &quot;<a class="code" href="plank___result_8h.html">plank_Result.h</a>&quot;</span>
-<a name="l00228"></a>00228 
-<a name="l00229"></a>00229 
-<a name="l00230"></a>00230 <span class="preprocessor">#ifdef PLANK_32BIT</span>
-<a name="l00231"></a>00231 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_WORDSIZE 4</span>
-<a name="l00232"></a>00232 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00233"></a>00233 <span class="preprocessor"></span>
-<a name="l00234"></a>00234 <span class="preprocessor">#ifdef PLANK_64BIT</span>
-<a name="l00235"></a>00235 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_WORDSIZE 8</span>
-<a name="l00236"></a>00236 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00237"></a>00237 <span class="preprocessor"></span>
-<a name="l00238"></a>00238 <span class="preprocessor">#ifndef PLANK_LITTLEENDIAN</span>
-<a name="l00239"></a>00239 <span class="preprocessor"></span><span class="preprocessor">    #ifdef __LITTLE_ENDIAN__</span>
-<a name="l00240"></a>00240 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  1</span>
-<a name="l00241"></a>00241 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     0</span>
-<a name="l00242"></a>00242 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
-<a name="l00243"></a><a class="code" href="plank___standard_header_8h.html#ad1ea5874a35da801d80b80c98258a1a6">00243</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  0</span>
-<a name="l00244"></a><a class="code" href="plank___standard_header_8h.html#adebe0b7e9b5a43ca0fccfad6a2c73d5a">00244</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     1</span>
-<a name="l00245"></a>00245 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00246"></a>00246 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00247"></a>00247 <span class="preprocessor"></span>
-<a name="l00248"></a>00248 <span class="preprocessor">#include &quot;<a class="code" href="plank___memory_8h.html">plank_Memory.h</a>&quot;</span>
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250 <span class="comment">// this must be after the PLANK_LITTLEENDIAN / PLANK_BIGENDIAN defs</span>
-<a name="l00251"></a>00251 <span class="preprocessor">#include &quot;../containers/plank_ContainersMisc.h&quot;</span>
-<a name="l00252"></a>00252 
-<a name="l00253"></a><a class="code" href="plank___standard_header_8h.html#a3f7c6d61206f23beaa3f91a4a2ba105a">00253</a> <span class="preprocessor">#define PLANK_NAMEJOININTERNAL2(a,b)        a ## b</span>
-<a name="l00254"></a><a class="code" href="plank___standard_header_8h.html#a6683914fdf30bc8768d97fa2af369b63">00254</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL3(a,b,c)      a ## b ## c</span>
-<a name="l00255"></a><a class="code" href="plank___standard_header_8h.html#a17e56482e0f199203edd6c6934fbf489">00255</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL4(a,b,c,d)    a ## b ## c ## d</span>
-<a name="l00256"></a>00256 <span class="preprocessor"></span>
-<a name="l00257"></a><a class="code" href="plank___standard_header_8h.html#a22117047ca1658c456074c0ec341e6f7">00257</a> <span class="preprocessor">#define PLANK_NAMEJOIN2(a,b)       PLANK_NAMEJOININTERNAL2(a,b)</span>
-<a name="l00258"></a><a class="code" href="plank___standard_header_8h.html#a496b19b2391a61788fddfe3ce2eff2fc">00258</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN3(a,b,c)     PLANK_NAMEJOININTERNAL3(a,b,c)</span>
-<a name="l00259"></a><a class="code" href="plank___standard_header_8h.html#aac511e7d63fd338847a334f8d8095b52">00259</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN4(a,b,c,d)   PLANK_NAMEJOININTERNAL4(a,b,c,d)</span>
-<a name="l00260"></a>00260 <span class="preprocessor"></span>
-<a name="l00261"></a><a class="code" href="plank___standard_header_8h.html#ac55a1abfe9d28e22767c9d8fc80406c5">00261</a> <span class="preprocessor">#define PLANK_MAJOR_VERSION      0</span>
-<a name="l00262"></a><a class="code" href="plank___standard_header_8h.html#aa23fd3ea9705a4372f00e38fade23d19">00262</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_MINOR_VERSION      1</span>
-<a name="l00263"></a><a class="code" href="plank___standard_header_8h.html#a619b528c0d7bff67e8467cd033b9e890">00263</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_BUILDNUMBER        1</span>
-<a name="l00264"></a>00264 <span class="preprocessor"></span>
-<a name="l00265"></a>00265 
-<a name="l00266"></a>00266 
-<a name="l00267"></a>00267 <span class="preprocessor">#endif // PLANK_STANDARDHEADER_H</span>
+<a name="l00227"></a><a class="code" href="plank___standard_header_8h.html#a1fcab62a0aee09793166dcb9f7e2101a">00227</a> <span class="preprocessor">#define PLANK_FLOAT_ONE         0x3f800000</span>
+<a name="l00228"></a><a class="code" href="plank___standard_header_8h.html#a0059708966884b5c941830033f95959c">00228</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_FLOAT_ONEMASK     0x007fffff</span>
+<a name="l00229"></a><a class="code" href="plank___standard_header_8h.html#ae7830d2d97f02dc7fa648c8389250c10">00229</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_DOUBLE_ONE        0x3ff0000000000000</span>
+<a name="l00230"></a><a class="code" href="plank___standard_header_8h.html#a517dc79e6d04543e8617c4364e991105">00230</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_DOUBLE_ONEMASK    0x000fffffffffffff</span>
+<a name="l00231"></a>00231 <span class="preprocessor"></span>
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234 <span class="preprocessor">#include &quot;<a class="code" href="plank___result_8h.html">plank_Result.h</a>&quot;</span>
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237 <span class="preprocessor">#ifdef PLANK_32BIT</span>
+<a name="l00238"></a>00238 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_WORDSIZE 4</span>
+<a name="l00239"></a>00239 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00240"></a>00240 <span class="preprocessor"></span>
+<a name="l00241"></a>00241 <span class="preprocessor">#ifdef PLANK_64BIT</span>
+<a name="l00242"></a>00242 <span class="preprocessor"></span><span class="preprocessor">    #define PLANK_WORDSIZE 8</span>
+<a name="l00243"></a>00243 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00244"></a>00244 <span class="preprocessor"></span>
+<a name="l00245"></a>00245 <span class="preprocessor">#ifndef PLANK_LITTLEENDIAN</span>
+<a name="l00246"></a>00246 <span class="preprocessor"></span><span class="preprocessor">    #ifdef __LITTLE_ENDIAN__</span>
+<a name="l00247"></a>00247 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  1</span>
+<a name="l00248"></a>00248 <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     0</span>
+<a name="l00249"></a>00249 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
+<a name="l00250"></a><a class="code" href="plank___standard_header_8h.html#ad1ea5874a35da801d80b80c98258a1a6">00250</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_LITTLEENDIAN  0</span>
+<a name="l00251"></a><a class="code" href="plank___standard_header_8h.html#adebe0b7e9b5a43ca0fccfad6a2c73d5a">00251</a> <span class="preprocessor"></span><span class="preprocessor">        #define PLANK_BIGENDIAN     1</span>
+<a name="l00252"></a>00252 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00253"></a>00253 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00254"></a>00254 <span class="preprocessor"></span>
+<a name="l00255"></a>00255 <span class="preprocessor">#include &quot;<a class="code" href="plank___memory_8h.html">plank_Memory.h</a>&quot;</span>
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 <span class="comment">// this must be after the PLANK_LITTLEENDIAN / PLANK_BIGENDIAN defs</span>
+<a name="l00258"></a>00258 <span class="preprocessor">#include &quot;../containers/plank_ContainersMisc.h&quot;</span>
+<a name="l00259"></a>00259 
+<a name="l00260"></a><a class="code" href="plank___standard_header_8h.html#a3f7c6d61206f23beaa3f91a4a2ba105a">00260</a> <span class="preprocessor">#define PLANK_NAMEJOININTERNAL2(a,b)        a ## b</span>
+<a name="l00261"></a><a class="code" href="plank___standard_header_8h.html#a6683914fdf30bc8768d97fa2af369b63">00261</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL3(a,b,c)      a ## b ## c</span>
+<a name="l00262"></a><a class="code" href="plank___standard_header_8h.html#a17e56482e0f199203edd6c6934fbf489">00262</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOININTERNAL4(a,b,c,d)    a ## b ## c ## d</span>
+<a name="l00263"></a>00263 <span class="preprocessor"></span>
+<a name="l00264"></a><a class="code" href="plank___standard_header_8h.html#a22117047ca1658c456074c0ec341e6f7">00264</a> <span class="preprocessor">#define PLANK_NAMEJOIN2(a,b)       PLANK_NAMEJOININTERNAL2(a,b)</span>
+<a name="l00265"></a><a class="code" href="plank___standard_header_8h.html#a496b19b2391a61788fddfe3ce2eff2fc">00265</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN3(a,b,c)     PLANK_NAMEJOININTERNAL3(a,b,c)</span>
+<a name="l00266"></a><a class="code" href="plank___standard_header_8h.html#aac511e7d63fd338847a334f8d8095b52">00266</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_NAMEJOIN4(a,b,c,d)   PLANK_NAMEJOININTERNAL4(a,b,c,d)</span>
+<a name="l00267"></a>00267 <span class="preprocessor"></span>
+<a name="l00268"></a><a class="code" href="plank___standard_header_8h.html#ac55a1abfe9d28e22767c9d8fc80406c5">00268</a> <span class="preprocessor">#define PLANK_MAJOR_VERSION      0</span>
+<a name="l00269"></a><a class="code" href="plank___standard_header_8h.html#aa23fd3ea9705a4372f00e38fade23d19">00269</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_MINOR_VERSION      1</span>
+<a name="l00270"></a><a class="code" href="plank___standard_header_8h.html#a619b528c0d7bff67e8467cd033b9e890">00270</a> <span class="preprocessor"></span><span class="preprocessor">#define PLANK_BUILDNUMBER        1</span>
+<a name="l00271"></a>00271 <span class="preprocessor"></span>
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274 <span class="preprocessor">#endif // PLANK_STANDARDHEADER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -345,7 +352,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:44 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:39 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

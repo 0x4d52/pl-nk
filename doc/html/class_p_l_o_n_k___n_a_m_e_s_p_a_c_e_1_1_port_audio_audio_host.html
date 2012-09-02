@@ -89,9 +89,9 @@ Inheritance diagram for PLONK_NAMESPACE::PortAudioAudioHost:</div>
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
-::<a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#acb9aff8725added47f182764bf5ab1b4">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#acb9aff8725added47f182764bf5ab1b4">Buffer</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
 ::<a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a3d52a1cb727b4949fbca17109f02afea">BufferArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a3d52a1cb727b4949fbca17109f02afea">BufferArray</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
+::<a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a2aad6e2b4ff8734a27bf7c230a528c8d">ConstBufferArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a2aad6e2b4ff8734a27bf7c230a528c8d">ConstBufferArray</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#ab975a37d2e1be8a4c9047576bc7cb026">PortAudioAudioHost</a> (<a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *omb=<a class="el" href="class_object_memory.html">ObjectMemory</a>&lt; <a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a> &gt;::create())  throw ()</td></tr>
@@ -114,21 +114,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a3cfec419b45097f2def3f5d6723623c7">callback</a> (const float **inputData, float **outputData, unsigned long frameCount, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags)  throw ()</td></tr>
 </table>
 <hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="acb9aff8725added47f182764bf5ab1b4"></a><!-- doxytag: member="PLONK_NAMESPACE::PortAudioAudioHost::Buffer" ref="acb9aff8725added47f182764bf5ab1b4" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt;float&gt;::<a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#acb9aff8725added47f182764bf5ab1b4">Buffer</a> <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#acb9aff8725added47f182764bf5ab1b4">PLONK_NAMESPACE::PortAudioAudioHost::Buffer</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_audio_host_base.html#a909240e4783a3ad7928029094d84a6a6">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a3d52a1cb727b4949fbca17109f02afea"></a><!-- doxytag: member="PLONK_NAMESPACE::PortAudioAudioHost::BufferArray" ref="a3d52a1cb727b4949fbca17109f02afea" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +125,22 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_audio_host_base.html#a4c6eca2d93fbe1a595f501115695c777">AudioHostBase&lt; float &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_audio_host_base.html#a8ca5b6117cc61f13ecf7cc701c412f8b">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2aad6e2b4ff8734a27bf7c230a528c8d"></a><!-- doxytag: member="PLONK_NAMESPACE::PortAudioAudioHost::ConstBufferArray" ref="a2aad6e2b4ff8734a27bf7c230a528c8d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt;float&gt;::<a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a2aad6e2b4ff8734a27bf7c230a528c8d">ConstBufferArray</a> <a class="el" href="class_p_l_o_n_k___n_a_m_e_s_p_a_c_e_1_1_port_audio_audio_host.html#a2aad6e2b4ff8734a27bf7c230a528c8d">PLONK_NAMESPACE::PortAudioAudioHost::ConstBufferArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_audio_host_base.html#aa7312370132fc29cbe204f29a6fa0429">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -384,7 +384,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:36:06 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:14:02 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

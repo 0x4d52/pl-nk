@@ -208,8 +208,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00149"></a>00149     <span class="keywordflow">return</span> *timeZero;
 <a name="l00150"></a>00150 }
 <a name="l00151"></a>00151 
-<a name="l00152"></a>00152 
-<a name="l00153"></a>00153 <span class="preprocessor">#endif // PLONK_TIMESTAMP_H</span>
+<a name="l00152"></a><a class="code" href="class_time_stamp.html#a96477988b28487014163e97f16ad07cb">00152</a> <span class="keyword">inline</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#a96477988b28487014163e97f16ad07cb">TimeStamp::operator= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00153"></a>00153 {
+<a name="l00154"></a>00154     <span class="keywordflow">if</span> (&amp;other != <span class="keyword">this</span>)
+<a name="l00155"></a>00155     {
+<a name="l00156"></a>00156         this-&gt;time = other.time;
+<a name="l00157"></a>00157         this-&gt;fraction = other.fraction;
+<a name="l00158"></a>00158     }
+<a name="l00159"></a>00159     
+<a name="l00160"></a>00160     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00161"></a>00161 }
+<a name="l00162"></a>00162 
+<a name="l00163"></a><a class="code" href="class_time_stamp.html#aa3e63843143326c61c3c32d1e27147d1">00163</a> <span class="keyword">inline</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#aa3e63843143326c61c3c32d1e27147d1">TimeStamp::operator+= </a>(<span class="keyword">const</span> <span class="keywordtype">double</span> offset) <span class="keywordflow">throw</span>()
+<a name="l00164"></a>00164 {
+<a name="l00165"></a>00165     <span class="keywordflow">if</span> (<a class="code" href="group___plank_maths_functions.html#ga4752651a060cce9faa75c0f5ea938680">pl_IsInfD</a> (offset))
+<a name="l00166"></a>00166     {
+<a name="l00167"></a>00167         this-&gt;time = 0;
+<a name="l00168"></a>00168         this-&gt;fraction = offset;
+<a name="l00169"></a>00169     }
+<a name="l00170"></a>00170     <span class="keywordflow">else</span>
+<a name="l00171"></a>00171     {
+<a name="l00172"></a>00172         <span class="keyword">const</span> <span class="keywordtype">double</span> correctedOffset = offset + this-&gt;fraction;
+<a name="l00173"></a>00173         <span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> timeOffset = <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> (correctedOffset);
+<a name="l00174"></a>00174         this-&gt;time += timeOffset;
+<a name="l00175"></a>00175         this-&gt;fraction = correctedOffset - timeOffset; <span class="comment">// carry the fraction</span>
+<a name="l00176"></a>00176         
+<a name="l00177"></a>00177         <span class="keywordflow">if</span> (this-&gt;fraction &lt; 0.0)
+<a name="l00178"></a>00178         {
+<a name="l00179"></a>00179             this-&gt;time--;
+<a name="l00180"></a>00180             this-&gt;fraction += 1.0;
+<a name="l00181"></a>00181         }
+<a name="l00182"></a>00182         
+<a name="l00183"></a>00183         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a> (fractionIsValid (this-&gt;fraction));
+<a name="l00184"></a>00184     }
+<a name="l00185"></a>00185     
+<a name="l00186"></a>00186     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00187"></a>00187 }
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190 <span class="preprocessor">#endif // PLONK_TIMESTAMP_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -226,7 +263,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:42 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

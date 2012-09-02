@@ -110,16 +110,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00046"></a>00046 } PlankRNG;
 <a name="l00047"></a>00047 <span class="preprocessor">#endif</span>
 <a name="l00048"></a>00048 <span class="preprocessor"></span>
-<a name="l00049"></a>00049 <span class="preprocessor">#define PLANK_RNG_MAGIC1      1664525</span>
-<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_MAGIC2      1013904223</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_FLOAT_ONE   0x3f800000</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_FLOAT_MASK  0x007fffff</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_DOUBLE_ONE  0x3ff0000000000000</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_DOUBLE_MASK 0x000fffffffffffff</span>
+<a name="l00049"></a>00049 <span class="preprocessor">#define PLANK_RNG_MAGIC1            1664525</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_MAGIC2            1013904223</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_FLOAT_ONE         PLANK_FLOAT_ONE</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_FLOAT_ONEMASK     PLANK_FLOAT_ONEMASK</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_DOUBLE_ONE        PLANK_DOUBLE_ONE</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">#define PLANK_RNG_DOUBLE_ONEMASK    PLANK_DOUBLE_ONEMASK</span>
 <a name="l00055"></a>00055 <span class="preprocessor"></span>
 <a name="l00056"></a>00056 <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="group___plank_r_n_g_class.html#ga7366f413a659c0633e5ef89595a032cc" title="Generate a random integer.">pl_RNG_Next</a> (<a class="code" href="group___plank_r_n_g_class.html#ga4b77483ed0e59c1b55fb0b6682ef82cb" title="An opaque reference to the Plank RNG object.">PlankRNGRef</a> p)
 <a name="l00057"></a>00057 {
-<a name="l00058"></a>00058     p-&gt;value = (<span class="keywordtype">unsigned</span> int)<a class="code" href="plank___r_n_g_8c.html#aa3f4848bb7668062213f2495eac096ad">PLANK_RNG_MAGIC1</a> * p-&gt;value + (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)<a class="code" href="plank___r_n_g_8c.html#a5b4a929cab05e3a7325f59fd88021fa1">PLANK_RNG_MAGIC2</a>;
+<a name="l00058"></a>00058     p-&gt;value = (<span class="keywordtype">unsigned</span> int)PLANK_RNG_MAGIC1 * p-&gt;value + (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)PLANK_RNG_MAGIC2;
 <a name="l00059"></a>00059     <span class="keywordflow">return</span> p-&gt;value;
 <a name="l00060"></a>00060 }
 <a name="l00061"></a>00061 
@@ -133,7 +133,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00069"></a>00069 {    
 <a name="l00070"></a>00070     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bits;
 <a name="l00071"></a>00071         <span class="keywordtype">float</span> value;
-<a name="l00072"></a>00072         bits = <a class="code" href="plank___r_n_g_8c.html#ab7911794e6c23d240a276e4d67018769">PLANK_RNG_FLOAT_ONE</a> | (<a class="code" href="plank___r_n_g_8c.html#a94890519bd6aee1f10bcc1290a44b788">PLANK_RNG_FLOAT_MASK</a> &amp; <a class="code" href="group___plank_r_n_g_class.html#ga7366f413a659c0633e5ef89595a032cc" title="Generate a random integer.">pl_RNG_Next</a> (p));
+<a name="l00072"></a>00072         bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_ONEMASK &amp; <a class="code" href="group___plank_r_n_g_class.html#ga7366f413a659c0633e5ef89595a032cc" title="Generate a random integer.">pl_RNG_Next</a> (p));
 <a name="l00073"></a>00073     value = *(<span class="keywordtype">float</span>*)(&amp;bits);
 <a name="l00074"></a>00074     <span class="keywordflow">return</span> value - 1.f;
 <a name="l00075"></a>00075 }
@@ -142,7 +142,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00078"></a>00078 {    
 <a name="l00079"></a>00079     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bits;
 <a name="l00080"></a>00080         <span class="keywordtype">float</span> value;
-<a name="l00081"></a>00081         bits = <a class="code" href="plank___r_n_g_8c.html#ab7911794e6c23d240a276e4d67018769">PLANK_RNG_FLOAT_ONE</a> | (<a class="code" href="plank___r_n_g_8c.html#a94890519bd6aee1f10bcc1290a44b788">PLANK_RNG_FLOAT_MASK</a> &amp; <a class="code" href="group___plank_r_n_g_class.html#ga7366f413a659c0633e5ef89595a032cc" title="Generate a random integer.">pl_RNG_Next</a> (p));
+<a name="l00081"></a>00081         bits = PLANK_RNG_FLOAT_ONE | (PLANK_RNG_FLOAT_ONEMASK &amp; <a class="code" href="group___plank_r_n_g_class.html#ga7366f413a659c0633e5ef89595a032cc" title="Generate a random integer.">pl_RNG_Next</a> (p));
 <a name="l00082"></a>00082     value = *(<span class="keywordtype">float</span>*)(&amp;bits);
 <a name="l00083"></a>00083     <span class="keywordflow">return</span> (<span class="keywordtype">double</span>)value - 1.0;
 <a name="l00084"></a>00084 }
@@ -164,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Aug 30 2012 10:35:44 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:39 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
