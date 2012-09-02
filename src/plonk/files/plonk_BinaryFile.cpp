@@ -328,18 +328,6 @@ void BinaryFileInternal::write (const Int24 value) throw()
 #endif    
 }
 
-/*
-void BinaryFileInternal::write (const long value) throw()
-{
-    const ResultCode result = pl_File_WriteL (getPeerRef(), value);
-    plonk_assert (result == PlankResult_OK);
-    
-#ifndef PLONK_DEBUG
-    (void)result;
-#endif
-}
-*/
-
 void BinaryFileInternal::write (const LongLong value) throw()
 {
     const ResultCode result = pl_File_WriteLL (getPeerRef(), value);
@@ -379,18 +367,6 @@ void BinaryFileInternal::write (const unsigned int value) throw()
     (void)result;
 #endif
 }
-
-/*
-void BinaryFileInternal::write (const unsigned long value) throw()
-{
-    const ResultCode result = pl_File_WriteUL (getPeerRef(), value);
-    plonk_assert (result == PlankResult_OK);
-    
-#ifndef PLONK_DEBUG
-    (void)result;
-#endif
-}
-*/
 
 void BinaryFileInternal::write (const UnsignedLongLong value) throw()
 {

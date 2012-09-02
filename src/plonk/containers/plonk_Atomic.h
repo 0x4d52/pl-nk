@@ -356,12 +356,17 @@ public:
         return oldPtr; 
     }
     
-    inline PlankAtomicPRef getAtomicRef() { return static_cast<PlankAtomicPRef> (&atomic); }
-    inline const PlankAtomicPRef getAtomicRef() const { return const_cast<PlankAtomicPRef> (&atomic); }
+    inline PlankAtomicPRef getAtomicRef() { return static_cast<PlankAtomicPRef> (&u.atomic); }
+    inline const PlankAtomicPRef getAtomicRef() const { return const_cast<PlankAtomicPRef> (&u.atomic); }
     
 private:
-    PLONK_ALIGN(sizeof(PlankAtomicP)) 
-    PlankAtomicP atomic;
+    union Union
+    {
+        PlankAtomicP atomic;
+        Type* ptr;
+    };
+    
+    PLONK_ALIGN(sizeof(PlankAtomicP)) Union u;
 };
 
 template<>
@@ -680,12 +685,23 @@ public:
         return oldPtr; 
     }
     
-    inline PlankAtomicPXRef getAtomicRef() { return static_cast<PlankAtomicPXRef> (&atomic); }
-    inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<PlankAtomicPXRef> (&atomic); }
+    inline PlankAtomicPXRef getAtomicRef() { return static_cast<PlankAtomicPXRef> (&u.atomic); }
+    inline const PlankAtomicPXRef getAtomicRef() const { return const_cast<PlankAtomicPXRef> (&u.atomic); }
     
 private:
-    PLONK_ALIGN(sizeof(PlankAtomicPX)) 
-    PlankAtomicPX atomic;
+    struct Debug
+    {
+        Type* ptr;
+        PlankL extra;
+    };
+    
+    union Union
+    {
+        PlankAtomicPX atomic;
+        Debug debug;
+    };
+
+    PLONK_ALIGN(sizeof(Union)) Union u;
 };
 
 

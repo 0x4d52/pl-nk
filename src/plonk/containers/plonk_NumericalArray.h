@@ -167,9 +167,9 @@ public:
     {
         typedef typename BinaryOpTypeUtility<NumericalType, OtherType>::CalcType CalcType;
         
-        CalcType typePeak (TypeUtility<NumericalType>::getTypePeak());
-        CalcType otherTypePeak (TypeUtility<OtherType>::getTypePeak());
-        CalcType otherTypePeakFactor = CalcType (1) / otherTypePeak;
+        const CalcType typePeak (TypeUtility<NumericalType>::getTypePeak());
+        const CalcType otherTypePeak (TypeUtility<OtherType>::getTypePeak());
+        const CalcType otherTypePeakFactor = Math<CalcType>::get1() / otherTypePeak;
         
 		UnsignedLong i;
 

@@ -206,7 +206,7 @@ PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
     if (p == PLANK_NULL)
         return PlankResult_FileCloseFailed;
     
-    return pl_File_Close ((PlankFileRef)p); //pl_File_Close (pl_AudioFileReader_GetFile (p));
+    return pl_File_Close ((PlankFileRef)p); 
 }
 
 PlankResult pl_AudioFileReader_GetFormat (PlankAudioFileReaderRef p, int *format)
