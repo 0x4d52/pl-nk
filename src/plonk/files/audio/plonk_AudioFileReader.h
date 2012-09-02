@@ -108,12 +108,10 @@ template<class SampleType>
 bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, 
                                           const bool applyScaling, 
                                           const bool deinterleave) throw()
-{
-    // this needs to do many more checks...
-    
-    ResultCode result;
-    
+{    
     typedef NumericalArray<SampleType> SampleArray;
+
+    ResultCode result;
     
     const int dataLength = data.length();
     int dataRemaining = dataLength;
@@ -157,27 +155,23 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 3)
             {
                 Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 4)
             {
                 Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 1)
             {
                 Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-                // could deinterleve here using the temp readBufferArray 
             }
             else
             {
@@ -192,20 +186,26 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-                // could deinterleve here using the temp readBufferArray 
             }
             else if (bytesPerSample == 8)
             {
                 Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
                 swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
                 SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-                // could deinterleve here using the temp readBufferArray 
             }
             else
             {
                 plonk_assertfalse;
                 return false;
             }
+        }
+        
+        if (deinterleave)
+        {
+            plonk_assertfalse; // haven't tested this yet...
+            SampleType* const deinterleaveBuffer = static_cast<SampleType*> (readBufferArray); 
+            SampleArray::deinterleave (deinterleaveBuffer, dataArray, samplesRead, channels);
+            SampleArray::convertDirect (dataArray, deinterleaveBuffer, samplesRead);
         }
         
         dataArray += samplesRead;
@@ -216,8 +216,6 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     if (dataIndex < dataLength)
         data.setSize (dataIndex, true);
    
-	(void)deinterleave; // until implemented...
-
 #ifndef PLONK_DEBUG
     (void)result;
 #endif

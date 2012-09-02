@@ -1449,7 +1449,10 @@ public:
         
         plonk_assert (numGroups > 0);
                 
-        const int subLength = (length % numGroups) == 0 ? length / numGroups : length / numGroups + 1;
+        const int subLength = ((unsigned int)length % (unsigned int)numGroups) == 0 
+                              ? (unsigned int)length / (unsigned int)numGroups 
+                              : (unsigned int)length / (unsigned int)numGroups + 1;
+        
         ObjectArray2DType result = ObjectArray2DType::withSize (numGroups);
         ObjectArray* const resultArray = result.getArray();
         
@@ -1475,6 +1478,35 @@ public:
 
     PLONK_OBJECTARROWOPERATOR(ObjectArray);
 
+    static void deinterleave (ObjectType* dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
+    {
+        if (numGroups <= 1)
+        {
+            Memory::copy (dst, src, srcSize * sizeof (ObjectType));
+        }
+        else
+        {
+            plonk_assert (srcSize % numGroups);
+
+            const int dstSize = srcSize / numGroups;
+            int i, j;
+            
+            if (numGroups == 2)
+            {
+                for (i = 0; i < srcSize; ++i, ++dst, src += 2)
+                {
+                    dst[0] = src[0];
+                    dst[dstSize] = src[1];
+                }
+            }
+            else 
+            {
+                for (i = 0; i < srcSize; ++i, ++dst, src += numGroups)
+                    for (j = 0; j < numGroups; ++j)
+                        dst[j * dstSize] = src[j];
+            }
+        }
+    }
 };
 
 
