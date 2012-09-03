@@ -214,6 +214,8 @@ PlankResult pl_Thread_SetShouldExit (PlankThreadRef p);
  @return @c true if the %Thread should exit, otherwise @c false. */
 PlankB pl_Thread_GetShouldExit (PlankThreadRef p);
 
+PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority);
+
 /** @} */
 
 PLANK_END_C_LINKAGE

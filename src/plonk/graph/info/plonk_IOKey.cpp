@@ -95,6 +95,7 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::AutoDeleteFlag,
         IOKey::PurgeNullUnitsFlag,
         IOKey::HarmonicCount,
+        IOKey::BufferCount,
         IOKey::MaximumDuration,
         IOKey::PreferredNumChannels,
     };
@@ -177,6 +178,7 @@ Text IOKey::getName (const int keyIndex) throw()
         "Auto Delete Flag",
         "Purge Null Units Flag",
         "Harmonic Count",
+        "Buffer Count",
         "Maximum Duration",
         "Preferred Num Channels",
     };
@@ -244,6 +246,7 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeBool,            //"Auto Delete Flag"
         IOKey::TypeBool,            //"Purge Null Units Flag"
         IOKey::TypeNumerical,       //"Harmonic Count"
+        IOKey::TypeNumerical,       //"Buffer Count"
         IOKey::TypeNumerical,       //"Maximum Duration"
         IOKey::TypeNumerical,       //"Preferred NumChannels"
     };
@@ -312,6 +315,7 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Bool",             //"Auto Delete Flag"
         "Bool",             //"Purge Null Units Flag"
         "Numerical",        //"Harmonic Count"
+        "Numerical",        //"Buffer Count"
         "Numerical",        //"Maximum Duration"
         "Numerical",        //"Preferred NumChannels"
     };

@@ -199,6 +199,11 @@ bool Threading::Thread::getShouldExit() throw()
     return pl_Thread_GetShouldExit (getPeerRef());
 }
 
+bool Threading::Thread::setPriority (const int priority) throw()
+{
+    return pl_Thread_SetPriority (getPeerRef(), priority) == PlankResult_OK;
+}
+
 Threading::ID Threading::Thread::getID() throw()
 {
     return pl_Thread_GetID (getPeerRef());

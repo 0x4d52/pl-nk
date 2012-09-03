@@ -88,6 +88,8 @@ public:
                 
         ResultCode run() throw()
         {
+            setPriority (10);
+            
             const int numChannels = owner->getNumChannels();
             const int numBuffers = owner->getState().numBuffers;;
             
@@ -131,8 +133,12 @@ public:
                                         
                     Threading::yield();
                 }
-                
-                Threading::sleep (inputUnit.getBlockSize (0).getValue() / inputUnit.getSampleRate (0).getValue() * 0.5);
+                else 
+                {
+                    // need to improve this, using signals..
+                    // sleep for one buffer duration
+                    Threading::sleep (inputUnit.getBlockSize (0).getValue() / inputUnit.getSampleRate (0).getValue());
+                }
             }
             
             freeBuffers.clearAll();
@@ -237,8 +243,12 @@ private:
 
 //------------------------------------------------------------------------------
 
-/** Defer a unit's processing to a separate. 
+/** Defer a unit's processing to a separate thread. 
   
+ Can also be used to distribute proessing acros threads.
+ Very important to use this to wrap units that access files etc
+ (e.g., FilePlayUnit).
+ 
  Factory functions:
  - ar (input, preferredBlockSize=default, preferredSampleRate=default)
  
@@ -247,7 +257,7 @@ private:
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 
-  @ingroup GeneratorUnits */
+  @ingroup ConverterUnits */
 template<class SampleType>
 class ThreadedUnit
 {
@@ -259,35 +269,37 @@ public:
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;
         
-//    static inline UnitInfos getInfo() throw()
-//    {
-//        const double blockSize = (double)BlockSize::getDefault().getValue();
-//        const double sampleRate = SampleRate::getDefault().getValue();
-//        
-//        return UnitInfo ("FilePlay", "A signal player generator.",
-//                         
-//                         // output
-//                         ChannelCount::VariableChannelCount, 
-//                         IOKey::Generic,            Measure::None,      0.0,        IOLimit::None,
-//                         IOKey::End,
-//                         
-//                         // inputs
-//                         IOKey::AudioFileReader,    Measure::None,
-//                         IOKey::Multiply,           Measure::Factor,    1.0,        IOLimit::None,
-//                         IOKey::Add,                Measure::None,      0.0,        IOLimit::None,
-//                         IOKey::BlockSize,          Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
-//                         IOKey::SampleRate,         Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
-//                         IOKey::End);
-//    }
+    static inline UnitInfos getInfo() throw()
+    {
+        const double blockSize = (double)BlockSize::getDefault().getValue();
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("Threaded", "Defer a unit's processing to a separate thread.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount, 
+                         IOKey::Generic,            Measure::None,      0.0,        IOLimit::None,
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Generic,            Measure::None,
+                         IOKey::BufferCount,        Measure::Count,     16.0,       IOLimit::Minimum,   Measure::Count,             1.0,
+                         IOKey::Multiply,           Measure::Factor,    1.0,        IOLimit::None,
+                         IOKey::Add,                Measure::None,      0.0,        IOLimit::None,
+                         IOKey::BlockSize,          Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
+                         IOKey::SampleRate,         Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::End);
+    }
     
     static UnitType ar (UnitType const& input,
+                        const int numBuffers = 16,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
                         
-        Data data = { { -1.0, -1.0 }, 0, 16 };
+        Data data = { { -1.0, -1.0 }, 0, numBuffers };
         
         return UnitType::template proxiesFromInputs<ThreadedInternal> (inputs, 
                                                                        data, 

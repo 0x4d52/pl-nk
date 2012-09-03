@@ -79,6 +79,7 @@ const char* pl_ResultString (PlankResult result)
         "Waiting a Thread failed",                                                      //PlankResult_ThreadWaitFailed
         "The Thread function is invalid",                                               //PlankResult_ThreadFunctionInvalid
         "A thread was signalled to exit that has already set set to exit",              //PlankResult_ThreadShouldExitAlreadySet
+        "Setting the thread's priority failed",                                         //PlankResult_ThreadSetPriorityFailed
         
         "One or more callback functions were null",                                     //PlankResult_FunctionsInvalid
         

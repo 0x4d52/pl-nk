@@ -137,6 +137,7 @@ public:
         AutoDeleteFlag, ///< To control the auto deletion
         PurgeNullUnitsFlag,
         HarmonicCount,
+        BufferCount,
         MaximumDuration,
         PreferredNumChannels,
 

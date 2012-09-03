@@ -79,6 +79,7 @@ enum PlankResultIdentifiers
     PlankResult_ThreadWaitFailed,           ///< Waiting a Thread failed
     PlankResult_ThreadFunctionInvalid,      ///< The Thread function is invalid.
     PlankResult_ThreadShouldExitAlreadySet, ///< Signaling a thread to exit that has already set set to exit.
+    PlankResult_ThreadSetPriorityFailed,    ///< Setting the thread's priority failed.
     
     PlankResult_FunctionsInvalid, 
     

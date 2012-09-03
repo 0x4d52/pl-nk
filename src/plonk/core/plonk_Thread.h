@@ -127,6 +127,8 @@ public:
          This is thread-safe. */
         bool getShouldExit() throw();
         
+        bool setPriority (const int priority) throw();
+        
         /** Get this thread's ID. */
         Threading::ID getID() throw();
         

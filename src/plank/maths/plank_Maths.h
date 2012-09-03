@@ -408,7 +408,6 @@ static inline PlankL pl_MinL (PlankL a, PlankL b)                       { return
 /** Returns minimum of @e a and @e b. */
 static inline PlankLL pl_MinLL (PlankLL a, PlankLL b)                   { return (a > b) ? b : a; }
 
-
 /** Returns maximum of @e a and @e b. */
 static inline float pl_MaxF (float a, float b)                          { return (a < b) ? b : a; }
 /** Returns maximum of @e a and @e b. */
@@ -420,6 +419,8 @@ static inline PlankL pl_MaxL (PlankL a, PlankL b)                       { return
 /** Returns maximum of @e a and @e b. */
 static inline PlankLL pl_MaxLL (PlankLL a, PlankLL b)                    { return (a < b) ? b : a; }
 
+// need more of these
+static inline PlankI pl_ClipI (PlankI a, PlankI lo, PlankI hi)          { return pl_MinI (pl_MaxI (a, lo), hi); }
 
 
 /** Returns @e a raised to the power @e b. */

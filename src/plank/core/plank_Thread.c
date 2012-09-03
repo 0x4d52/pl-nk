@@ -396,5 +396,28 @@ PlankB pl_Thread_GetShouldExit (PlankThreadRef p)
     return pl_AtomicI_Get (&p->shouldExitAtom) != 0;
 }
 
-
+PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
+{
+#if PLANK_APPLE
+    struct sched_param param;
+    int policy, minPriority, maxPriority;
+    priority = pl_ClipI (priority, 0, 10);
+                
+    if (pthread_getschedparam (p->thread, &policy, &param) != 0)
+        return PlankResult_ThreadSetPriorityFailed;
+    
+    policy = (priority == 0) ? SCHED_OTHER : SCHED_RR;
+    minPriority = sched_get_priority_min (policy);
+    maxPriority = sched_get_priority_max (policy);
+    
+    param.sched_priority = ((maxPriority - minPriority) * priority) / 10 + minPriority;
+    return pthread_setschedparam (p->thread, policy, &param) == 0 
+           ? PlankResult_OK 
+           : PlankResult_ThreadSetPriorityFailed;
+#else
+    (void)p;
+    (void)priority;
+    return PlankResult_ThreadSetPriorityFailed;
+#endif
+}
 
