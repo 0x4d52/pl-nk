@@ -285,7 +285,7 @@ public:
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
         Inputs inputs;
-        inputs.put (IOKey::Generic, Resample::ar (input, preferredBlockSize, preferredSampleRate));
+        inputs.put (IOKey::Generic, input);
                         
         Data data = { { -1.0, -1.0 }, 0, 16 };
         
