@@ -84,7 +84,7 @@ public:
     inline bool pop (OtherType& value)
     {
         ValueType tmp;
-        ValueType* valuePtr = popInternal (tmp);
+        ValueType* valuePtr = popInternal (&tmp);
  
         if (valuePtr != 0)
         {

@@ -98,7 +98,7 @@ public:
             buffer.setSize (this->getBlockSize().getValue() * file.getNumChannels(), false);
         }
         
-        this->initValue (0);
+        this->initProxyValue (channel, 0);
     }    
     
     void process (ProcessInfo& info, const int /*channel*/) throw()

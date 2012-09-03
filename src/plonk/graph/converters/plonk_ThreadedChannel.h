@@ -44,13 +44,15 @@
 
 template<class SampleType> class ThreadedChannelInternal;
 
-PLONK_CHANNELDATA_DECLARE(FilePlayChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(ThreadedChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     int numChannels;
+    int numBuffers;
 };      
 
 //------------------------------------------------------------------------------
+
 
 /** File player generator. */
 template<class SampleType>
@@ -67,15 +69,103 @@ public:
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
 
+    //--------------------------------------------------------------------------
+    
+    class Thread : public Threading::Thread
+    {
+    public:
+        typedef LockFreeQueue<Buffer> BufferQueue;
+        
+        Thread (ThreadedChannelInternal* o) throw()
+        :   Threading::Thread (Text ("ThreadedChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
+            owner (o),
+            info (owner->getProcessInfo())
+        {
+        }
+        
+        BufferQueue& getActiveBufferQueue() throw() { return activeBuffers; }
+        BufferQueue& getFreeBufferQueue() throw() { return freeBuffers; }
+                
+        ResultCode run() throw()
+        {
+            const int numChannels = owner->getNumChannels();
+            const int numBuffers = owner->getState().numBuffers;;
+            
+            plonk_assert (numBuffers > 0);
+            plonk_assert (owner->getBlockSize().getValue() > 0);
+            
+            const int bufferSize = numChannels * owner->getBlockSize().getValue();
+            
+            for (int i = 0; i < numBuffers; ++i)
+                activeBuffers.push (Buffer::newClear (bufferSize));
+            
+            while (!getShouldExit())
+            {                     
+                UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
+
+                if (freeBuffers.length() > 0)
+                {
+                    plonk_assert (inputUnit.channelsHaveSameBlockSize());
+                    const int blockSize = inputUnit.getBlockSize (0).getValue();
+                    
+                    Buffer buffer = freeBuffers.pop();
+                    buffer.setSize (blockSize * numChannels, false);
+                    
+                    SampleType* bufferSamples = buffer.getArray();
+
+                    for (int channel = 0; channel < numChannels; ++channel)
+                    {
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));                    
+                        const SampleType* const inputSamples = inputBuffer.getArray();
+                        const int inputBufferLength = inputBuffer.length();
+
+                        plonk_assert (buffer.length() == (numChannels * inputBufferLength));
+                        
+                        for (int i = 0; i < inputBufferLength; ++i)
+                            *bufferSamples++ = inputSamples[i];
+                    }
+                    activeBuffers.push (buffer);
+
+                    plonk_assert (inputUnit.channelsHaveSameSampleRate());
+                    info.offsetTimeStamp (inputUnit.getSampleRate (0).getSampleDurationInTicks() * blockSize);
+                                        
+                    Threading::yield();
+                }
+                
+                Threading::sleep (inputUnit.getBlockSize (0).getValue() / inputUnit.getSampleRate (0).getValue() * 0.5);
+            }
+            
+            freeBuffers.clearAll();
+            activeBuffers.clearAll();
+            
+            return 0;
+        }
+        
+    private:
+        ThreadedChannelInternal* owner;
+        ProcessInfo& info;
+        BufferQueue activeBuffers;
+        BufferQueue freeBuffers;
+    };
+    
+    //--------------------------------------------------------------------------
+    
     ThreadedChannelInternal (Inputs const& inputs, 
                              Data const& data, 
                              BlockSize const& blockSize,
                              SampleRate const& sampleRate,
                              ChannelArrayType& channels) throw()
-    :   Internal (1, 
+    :   Internal (numChannelsInSource (inputs), 
                   inputs, data, blockSize, sampleRate,
-                  channels)
+                  channels),
+        thread (this)
+    {        
+        thread.start();
+    }
+    
+    ~ThreadedChannelInternal()
     {
+        thread.setShouldExitAndWait (0.000001); // will block though...
     }
             
     Text getName() const throw()
@@ -91,28 +181,58 @@ public:
         
     void initChannel (const int channel) throw()
     {       
-        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
-        
-        if ((channel % this->getNumChannels()) == 0)
-        {
-            // use sample rate and block size of the input unless another 
-            // preference has been indicated on construction
-            this->setBlockSize (BlockSize::decide (input.getBlockSize (0),
-                                                   this->getBlockSize()));
-            this->setSampleRate (SampleRate::decide (input.getSampleRate (0),
-                                                     this->getSampleRate()));      
-        }
-
-        this->initValue (0);
+        this->initProxyValue (channel, 0);
     }    
     
     void process (ProcessInfo& info, const int /*channel*/) throw()
-    {        
-        //
+    {                
+        const int numChannels = this->getNumChannels();
+        
+        Buffer buffer;
+
+        if (thread.getActiveBufferQueue().pop (buffer)) 
+        {
+            // could be smarter in here in case the buffer size changes
+            
+            SampleType* bufferSamples = buffer.getArray();
+            
+            for (int channel = 0; channel < numChannels; ++channel)
+            {
+                Buffer& outputBuffer = this->getOutputBuffer (channel);
+                SampleType* const outputSamples = outputBuffer.getArray();
+                const int outputBufferLength = outputBuffer.length();  
+                
+                plonk_assert (buffer.length() == (numChannels * outputBufferLength));
+                
+                for (int i = 0; i < outputBufferLength; ++i)
+                    outputSamples[i] = *bufferSamples++;
+            }
+            
+            buffer.zero();
+            thread.getFreeBufferQueue().push (buffer);
+        }
+        else
+        {
+            // buffer underrun or other error
+            for (int channel = 0; channel < numChannels; ++channel)
+            {
+                Buffer& outputBuffer = this->getOutputBuffer (channel);
+                outputBuffer.zero();
+            }
+        }
     }
     
+    ProcessInfo& getProcessInfo() throw() { return info; }
+    
 private:
-    // thread..!
+    Thread thread;
+    ProcessInfo info; // private info for this object as we're running out of sync with everything else
+    
+    static inline int numChannelsInSource (Inputs const& inputs) throw()
+    {
+        return inputs[IOKey::Generic].asUnchecked<UnitType>().getNumChannels();
+    }
+    
 };
 
 //------------------------------------------------------------------------------
@@ -120,10 +240,12 @@ private:
 /** Defer a unit's processing to a separate. 
   
  Factory functions:
- - ar (input)
+ - ar (input, preferredBlockSize=default, preferredSampleRate=default)
  
  Inputs:
  - input: (input, multi) the input unit to defer to a separate thread
+ - preferredBlockSize: the preferred output block size 
+ - preferredSampleRate: the preferred output sample rate
 
   @ingroup GeneratorUnits */
 template<class SampleType>
@@ -158,12 +280,14 @@ public:
 //                         IOKey::End);
 //    }
     
-    static UnitType ar (UnitType const& input) throw()
+    static UnitType ar (UnitType const& input,
+                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
         Inputs inputs;
-        inputs.put (IOKey::Generic, input);
+        inputs.put (IOKey::Generic, Resample::ar (input, preferredBlockSize, preferredSampleRate));
                         
-        Data data = { { -1.0, -1.0 }, 0 };
+        Data data = { { -1.0, -1.0 }, 0, 16 };
         
         return UnitType::template proxiesFromInputs<ThreadedInternal> (inputs, 
                                                                        data, 

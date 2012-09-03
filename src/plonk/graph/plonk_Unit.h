@@ -992,6 +992,16 @@ public:
         return true;
     }
     
+    inline bool channelsHaveSameBlockSize() throw()
+    {
+        return true;
+    }
+    
+    inline bool channelsHaveSameSampleRate() throw()
+    {
+        return true;
+    }
+    
     /** Get the output buffer of a specific channel.  
      Indices out of range will be wrapped to the available channels. */
     inline const Buffer& getOutputBuffer (const int index) const throw() 
