@@ -128,6 +128,7 @@ public:
         bool getShouldExit() throw();
         
         bool setPriority (const int priority) throw();
+        bool setPriorityAudio (const int blockSize, const double sampleRate) throw();
         
         /** Get this thread's ID. */
         Threading::ID getID() throw();

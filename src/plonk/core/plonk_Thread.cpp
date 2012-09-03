@@ -204,6 +204,11 @@ bool Threading::Thread::setPriority (const int priority) throw()
     return pl_Thread_SetPriority (getPeerRef(), priority) == PlankResult_OK;
 }
 
+bool Threading::Thread::setPriorityAudio (const int blockSize, const double sampleRate) throw()
+{
+    return pl_Thread_SetPriorityAudio (getPeerRef(), blockSize, sampleRate) == PlankResult_OK;
+}
+
 Threading::ID Threading::Thread::getID() throw()
 {
     return pl_Thread_GetID (getPeerRef());

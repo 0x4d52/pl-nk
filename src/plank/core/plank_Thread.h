@@ -187,7 +187,6 @@ PlankResult pl_Thread_Cancel (PlankThreadRef p);
  @return PlankResult_OK if successful, otherwise an error code. */
 PlankResult pl_Thread_Wait (PlankThreadRef p);
 
-
 PlankResult pl_Thread_Pause (PlankThreadRef p);
 PlankResult pl_Thread_PauseWithTimeout (PlankThreadRef p, double duration);
 PlankResult pl_Thread_Resume (PlankThreadRef p);
@@ -215,6 +214,8 @@ PlankResult pl_Thread_SetShouldExit (PlankThreadRef p);
 PlankB pl_Thread_GetShouldExit (PlankThreadRef p);
 
 PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority);
+PlankResult pl_Thread_SetPriorityAudio (PlankThreadRef p, int blockSize, double sampleRate);
+PlankResult pl_Thread_SetAffinity (PlankThreadRef p, int affinity);
 
 /** @} */
 
@@ -246,6 +247,8 @@ typedef struct PlankThread
     PLANK_ALIGN(4) PlankAtomicI isRunningAtom;
     PLANK_ALIGN(4) PlankAtomicI paused;
     char name[PLANK_THREAD_MAXNAMELENGTH];
+    int priority;
+    int affinity;
 } PlankThread;
 #endif
 

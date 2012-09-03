@@ -40,7 +40,9 @@
 #include "plank_Thread.h"
 #include "../maths/plank_Maths.h"
 
-#define PLANK_THREAD_PAUSEQUANTA 0.00001
+#define PLANK_THREAD_PAUSEQUANTA (0.00001)
+#define PLANK_THREAD_NOPRIORITY  (-1)
+#define PLANK_THREAD_NOAFFINITY  (-1)
 
 typedef PlankThreadNativeReturn (PLANK_THREADCALL *PlankThreadNativeFunction)(PlankP);
 PlankThreadNativeReturn PLANK_THREADCALL pl_ThreadNativeFunction (PlankP argument);
@@ -190,6 +192,8 @@ PlankResult pl_Thread_Init (PlankThreadRef p)
     
     p->function = (PlankThreadFunction)0;
     p->name[0] = '\0';
+    p->priority = PLANK_THREAD_NOPRIORITY;
+    p->affinity = PLANK_THREAD_NOAFFINITY;
     
     pl_AtomicI_Init (&p->shouldExitAtom);
     pl_AtomicI_Init (&p->isRunningAtom);
@@ -296,6 +300,13 @@ PlankResult pl_Thread_Start (PlankThreadRef p)
 #endif    
     pl_AtomicI_Set (&p->isRunningAtom, PLANK_TRUE);
     
+    if (p->priority != PLANK_THREAD_NOPRIORITY)
+        pl_Thread_SetPriority (p, p->priority);
+    
+    // need to be before running?
+    if (p->affinity != PLANK_THREAD_NOAFFINITY)
+        pl_Thread_SetAffinity (p, p->affinity);
+    
     return PlankResult_OK;
 }
 
@@ -398,7 +409,13 @@ PlankB pl_Thread_GetShouldExit (PlankThreadRef p)
 
 PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
 {
-#if PLANK_APPLE
+#if PLANK_MAC
+    if (!pl_Thread_IsRunning (p))
+    {
+        p->priority = priority;
+        return PlankResult_OK;
+    }   
+        
     struct sched_param param;
     int policy, minPriority, maxPriority;
     priority = pl_ClipI (priority, 0, 10);
@@ -421,3 +438,64 @@ PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
 #endif
 }
 
+PlankResult pl_Thread_SetPriorityAudio (PlankThreadRef p, int blockSize, double sampleRate) 
+{    
+#if PLANK_MAC
+    int period = PLANK_BILLION_D / sampleRate * blockSize;
+    struct thread_time_constraint_policy ttcpolicy;
+    thread_port_t threadport = pthread_mach_thread_np (p->thread);
+    
+    ttcpolicy.period        = period;       // HZ/160
+    ttcpolicy.computation   = period - 2;   // HZ/3300
+    ttcpolicy.constraint    = period - 1;   // HZ/2200
+    ttcpolicy.preemptible   = 0;
+    
+    kern_return_t success = thread_policy_set (threadport, 
+                                               THREAD_TIME_CONSTRAINT_POLICY, 
+                                               (thread_policy_t)&ttcpolicy,
+                                               THREAD_TIME_CONSTRAINT_POLICY_COUNT);
+    if (success != KERN_SUCCESS) 
+        return pl_Thread_SetPriority (p, 10);
+    
+    return PlankResult_OK;
+#else
+    retrun pl_Thread_SetPriority (p, 10);
+#endif
+}
+
+PlankResult pl_Thread_SetAffinity (PlankThreadRef p, int affinity)
+{
+    if (!pl_Thread_IsRunning (p))
+    {
+        p->affinity = affinity;
+        return PlankResult_OK;
+    }   
+
+#if PLANK_MAC
+    
+    (void)p;
+    (void)affinity;
+    return PlankResult_ThreadSetAffinityFailed;
+    
+#elif defined(CPU_ZERO)
+    
+    int numCores = sysconf (_SC_NPROCESSORS_ONLN);
+
+    if (affinity >= numCores)
+        return PlankResult_ThreadSetAffinityFailed;
+    
+    cpu_set_t cpuset;
+    CPU_ZERO (&cpuset);
+    int status = CPU_SET (i, &cpuset);
+    int error = pthread_setaffinity_np (thread, sizeof (cpu_set_t), &cpuset);
+    
+    return PlankResult_OK;
+    
+#else
+    
+    (void)p;
+    (void)affinity;
+    return PlankResult_ThreadSetAffinityFailed;
+    
+#endif
+}

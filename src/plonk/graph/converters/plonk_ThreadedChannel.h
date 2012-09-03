@@ -88,6 +88,8 @@ public:
                 
         ResultCode run() throw()
         {
+//            setPriorityAudio (owner->getBlockSize().getValue(), 
+//                              owner->getSampleRate().getValue());
             setPriority (10);
             
             const int numChannels = owner->getNumChannels();
@@ -104,11 +106,11 @@ public:
             while (!getShouldExit())
             {                     
                 UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
+                const int blockSize = owner->getBlockSize().getValue();
 
                 if (freeBuffers.length() > 0)
                 {
                     plonk_assert (inputUnit.channelsHaveSameBlockSize());
-                    const int blockSize = inputUnit.getBlockSize (0).getValue();
                     
                     Buffer buffer = freeBuffers.pop();
                     buffer.setSize (blockSize * numChannels, false);
@@ -129,7 +131,7 @@ public:
                     activeBuffers.push (buffer);
 
                     plonk_assert (inputUnit.channelsHaveSameSampleRate());
-                    info.offsetTimeStamp (inputUnit.getSampleRate (0).getSampleDurationInTicks() * blockSize);
+                    info.offsetTimeStamp (owner->getSampleRate().getSampleDurationInTicks() * blockSize);
                                         
                     Threading::yield();
                 }
@@ -137,7 +139,7 @@ public:
                 {
                     // need to improve this, using signals..
                     // sleep for one buffer duration
-                    Threading::sleep (inputUnit.getBlockSize (0).getValue() / inputUnit.getSampleRate (0).getValue());
+                    Threading::sleep (blockSize / owner->getSampleRate().getValue());
                 }
             }
             

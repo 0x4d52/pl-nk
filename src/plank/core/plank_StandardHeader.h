@@ -174,6 +174,11 @@
         #else
             #define PLANK_MAC 1
 
+            #include <mach/mach.h>
+            #include <mach/mach_init.h>
+            #include <mach/thread_policy.h>
+//            #include <mach/sched.h>
+
             #if defined (__ppc__) || defined (__ppc64__)
                 #define PLANK_PPC 1
                 #define PLANK_NOATOMIC64BIT 1
