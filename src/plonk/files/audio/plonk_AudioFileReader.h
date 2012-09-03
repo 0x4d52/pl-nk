@@ -141,12 +141,12 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
     while ((dataRemaining > 0) && (result != PlankResult_FileEOF))
     {
-        int framesRead, samplesRead, framesToRead;
-        framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
+        int framesRead;
+        int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), framesToRead, readBufferArray, &framesRead);
         plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF);
 
-        samplesRead = framesRead * channels;
+        int samplesRead = framesRead * channels;
         plonk_assert (samplesRead <= dataRemaining);
         
         if (isPCM)
@@ -206,7 +206,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             plonk_assertfalse; // haven't tested this yet...
             SampleType* const deinterleaveBuffer = static_cast<SampleType*> (readBufferArray); 
             SampleArray::deinterleave (deinterleaveBuffer, dataArray, samplesRead, channels);
-            SampleArray::convertDirect (dataArray, deinterleaveBuffer, samplesRead);
+            SampleArray::copyData (dataArray, deinterleaveBuffer, samplesRead);
         }
         
         dataArray += samplesRead;

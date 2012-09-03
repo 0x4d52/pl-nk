@@ -66,7 +66,6 @@ public:
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
-    //typedef SignalBase<SampleType>                                      SignalType;
 
     FilePlayChannelInternal (Inputs const& inputs, 
                              Data const& data, 
@@ -118,7 +117,7 @@ public:
             SampleType* const outputSamples = outputBuffer.getArray();
             const int outputBufferLength = outputBuffer.length();        
 
-            const SampleType* bufferSamples = buffer.getArray() + channel;         
+            const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
 
             for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
                 outputSamples[i] = *bufferSamples;
@@ -148,7 +147,7 @@ private:
  
  NB This should not be used directly in a real-time audio thread. It should
  be wrapped in a ThreadedUnit (not yet implemented!) which buffers the audio on 
- a background thread.
+ a separate thread.
  
  Factory functions:
  - ar (file, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
