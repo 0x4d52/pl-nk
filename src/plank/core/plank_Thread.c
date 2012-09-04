@@ -440,27 +440,29 @@ PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
 
 PlankResult pl_Thread_SetPriorityAudio (PlankThreadRef p, int blockSize, double sampleRate) 
 {    
-#if PLANK_MAC
-    int period = PLANK_BILLION_D / sampleRate * blockSize;
-    struct thread_time_constraint_policy ttcpolicy;
-    thread_port_t threadport = pthread_mach_thread_np (p->thread);
-    
-    ttcpolicy.period        = period;       // HZ/160
-    ttcpolicy.computation   = period - 2;   // HZ/3300
-    ttcpolicy.constraint    = period - 1;   // HZ/2200
-    ttcpolicy.preemptible   = 0;
-    
-    kern_return_t success = thread_policy_set (threadport, 
-                                               THREAD_TIME_CONSTRAINT_POLICY, 
-                                               (thread_policy_t)&ttcpolicy,
-                                               THREAD_TIME_CONSTRAINT_POLICY_COUNT);
-    if (success != KERN_SUCCESS) 
-        return pl_Thread_SetPriority (p, 10);
-    
-    return PlankResult_OK;
-#else
-    retrun pl_Thread_SetPriority (p, 10);
-#endif
+//#if PLANK_MAC
+//    int period = PLANK_BILLION_D / sampleRate * blockSize;
+//    struct thread_time_constraint_policy ttcpolicy;
+//    thread_port_t threadport = pthread_mach_thread_np (p->thread);
+//    
+//    ttcpolicy.period        = period; //HZ/160; //period;       // HZ/160
+//    ttcpolicy.computation   = period / blockSize / 4; //HZ/3300;//period - 2;   // HZ/3300
+//    ttcpolicy.constraint    = ttcpolicy.computation; //HZ/2200;//period - 1;   // HZ/2200
+//    ttcpolicy.preemptible   = 1;
+//    
+//    kern_return_t success = thread_policy_set (threadport, 
+//                                               THREAD_TIME_CONSTRAINT_POLICY, 
+//                                               (thread_policy_t)&ttcpolicy,
+//                                               THREAD_TIME_CONSTRAINT_POLICY_COUNT);
+//    if (success != KERN_SUCCESS) 
+//        return pl_Thread_SetPriority (p, 10);
+//    
+//    return PlankResult_OK;
+//#else
+    (void)blockSize;
+    (void)sampleRate;
+    return pl_Thread_SetPriority (p, 10);
+//#endif
 }
 
 PlankResult pl_Thread_SetAffinity (PlankThreadRef p, int affinity)

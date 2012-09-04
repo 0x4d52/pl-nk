@@ -88,9 +88,7 @@ public:
                 
         ResultCode run() throw()
         {
-//            setPriorityAudio (owner->getBlockSize().getValue(), 
-//                              owner->getSampleRate().getValue());
-            setPriority (10);
+            setPriorityAudio (owner->getBlockSize().getValue(), owner->getSampleRate().getValue());
             
             const int numChannels = owner->getNumChannels();
             const int numBuffers = owner->getState().numBuffers;;
@@ -105,11 +103,12 @@ public:
             
             while (!getShouldExit())
             {                     
-                UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
                 const int blockSize = owner->getBlockSize().getValue();
-
-                if (freeBuffers.length() > 0)
+                const int numFreeBuffers = freeBuffers.length();
+                
+                if (numFreeBuffers > 0)
                 {
+                    UnitType& inputUnit (owner->getInputAsUnit (IOKey::Generic));
                     plonk_assert (inputUnit.channelsHaveSameBlockSize());
                     
                     Buffer buffer = freeBuffers.pop();
@@ -128,6 +127,7 @@ public:
                         for (int i = 0; i < inputBufferLength; ++i)
                             *bufferSamples++ = inputSamples[i];
                     }
+                    
                     activeBuffers.push (buffer);
 
                     plonk_assert (inputUnit.channelsHaveSameSampleRate());
@@ -137,9 +137,7 @@ public:
                 }
                 else 
                 {
-                    // need to improve this, using signals..
-                    // sleep for one buffer duration
-                    Threading::sleep (blockSize / owner->getSampleRate().getValue());
+                    Threading::sleep (blockSize / owner->getSampleRate().getValue() * (numBuffers - 1));
                 }
             }
             
@@ -152,6 +150,7 @@ public:
     private:
         ThreadedChannelInternal* owner;
         ProcessInfo& info;
+        Lock lock;
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
     };
@@ -227,7 +226,7 @@ public:
                 Buffer& outputBuffer = this->getOutputBuffer (channel);
                 outputBuffer.zero();
             }
-        }
+        }        
     }
     
     ProcessInfo& getProcessInfo() throw() { return info; }
@@ -251,11 +250,15 @@ private:
  Very important to use this to wrap units that access files etc
  (e.g., FilePlayUnit).
  
+ The latency of this will be equal to: 
+ @f$ preferredBlockSize * numBuffers / preferredSampleRate @f$
+ 
  Factory functions:
- - ar (input, preferredBlockSize=default, preferredSampleRate=default)
+ - ar (input, numBuffers=16, preferredBlockSize=default, preferredSampleRate=default)
  
  Inputs:
  - input: (input, multi) the input unit to defer to a separate thread
+ - numBuffers: (int) the number of buffers to queue, also affects latency
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 
