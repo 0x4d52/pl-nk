@@ -247,6 +247,11 @@ class ScopedPointerContainer
 public:
     typedef AtomicValue<ScopedPointerType*> AtomicPointer;
 
+    ScopedPointerContainer() throw()
+    :   internal (0)
+    {
+    }
+    
     ScopedPointerContainer (ScopedPointerType* const raw) throw()
     :   internal (raw)
     {
@@ -262,6 +267,13 @@ public:
 	{
         this->swapWith (copy);        
 	}
+
+    inline ScopedPointerContainer& operator= (ScopedPointerType* const raw) throw()
+	{
+		ScopedPointerContainer tmp (raw);
+        this->swapWith (tmp);                
+		return *this;		
+	}    
     
 	inline ScopedPointerContainer& operator= (ScopedPointerContainer& other) throw()
 	{
@@ -298,6 +310,18 @@ public:
         plonk_assert(internal.getPtrUnchecked() != 0);
         return internal.getPtr(); 
     }
+    
+    template<class OtherType>
+    inline bool operator== (OtherType const& other) const throw()
+	{
+		return internal.getPtrUnchcked() == other;
+	}
+	
+    template<class OtherType>
+	inline bool operator!= (OtherType const& other) const throw()
+	{
+		return internal.getPtrUnchcked() != other;
+	}
         
 private:
     AtomicPointer internal;    

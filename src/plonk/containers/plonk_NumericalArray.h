@@ -50,23 +50,76 @@
 #include "plonk_Int24.h"
 
     
+
+template<class NumericalType, class OtherType>
+class NumericalArrayConverter
+{
+public:
+    static inline void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            NumericalConverter::roundCopy (src[i], dst[i]);
+    }
+    
+    static inline void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
+    {
+        typedef typename BinaryOpTypeUtility<NumericalType, OtherType>::CalcType CalcType;
+        
+        const CalcType typePeak (TypeUtility<NumericalType>::getTypePeak());
+        const CalcType otherTypePeak (TypeUtility<OtherType>::getTypePeak());
+        const CalcType otherTypePeakFactor = Math<CalcType>::get1() / otherTypePeak;
+        
+		UnsignedLong i;
+        
+        if (typePeak == Math<CalcType>::get1())
+        {
+            for (i = 0; i < numItems; ++i)
+            {
+                NumericalType temp;
+                NumericalConverter::roundCopy (src[i], temp);
+                dst[i] = NumericalType (CalcType (temp) * otherTypePeakFactor);
+            }
+        }
+        else
+        {
+            for (i = 0; i < numItems; ++i)
+            {
+                NumericalType temp;
+                NumericalConverter::roundCopy (src[i], temp);
+                dst[i] = NumericalType (CalcType (temp) * typePeak * otherTypePeakFactor);
+            }
+        }
+    }
+    
+    static inline void convert (NumericalType* const dst, 
+                                const OtherType* const src, 
+                                const UnsignedLong numItems,
+                                const bool applyScaling) throw()
+    {
+        if (applyScaling)   convertScaled (dst, src, numItems);
+        else                convertDirect (dst, src, numItems);
+    }
+
+};
+
+//------------------------------------------------------------------------------
+
 /** For specificying the initial state of a NumericalArray. */
 class NumericalArraySpec
 {
 public:
 	NumericalArraySpec (const int size, const bool zeroData) throw() 
 	:	size_ (size), 
-		zeroData_ (zeroData) 
+        zeroData_ (zeroData) 
 	{ 
 	}
 	
 	const int size_;
 	const bool zeroData_;
-
+    
 private:
 	NumericalArraySpec& operator= (NumericalArraySpec const&); // to prevent assignment and MSVC complaining!
 };
-
 
 /** Stores arrays of simple numerical values. 
  A subclass of ObjectArray that is designed to store numerical types (float, 
@@ -144,59 +197,37 @@ public:
     {
         Memory::copy (dst, src, numItems * sizeof (NumericalType));
     }
-    
+        
     static inline void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
-        Memory::copy (dst, src, numItems * sizeof (NumericalType));
+        copyData (dst, src, numItems);
     }
     
     static inline void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
     {
-        Memory::copy (dst, src, numItems * sizeof (NumericalType));
+        copyData (dst, src, numItems);
     }
 
     template<class OtherType>
     static inline void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
-        for (UnsignedLong i = 0; i < numItems; ++i)
-            roundCopy (src[i], dst[i]);
+        NumericalArrayConverter<NumericalType,OtherType>::convertDirect (dst, src, numItems);        
     }
     
     template<class OtherType>
     static inline void convertScaled (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
     {
-        typedef typename BinaryOpTypeUtility<NumericalType, OtherType>::CalcType CalcType;
-        
-        const CalcType typePeak (TypeUtility<NumericalType>::getTypePeak());
-        const CalcType otherTypePeak (TypeUtility<OtherType>::getTypePeak());
-        const CalcType otherTypePeakFactor = Math<CalcType>::get1() / otherTypePeak;
-        
-		UnsignedLong i;
-
-        if (typePeak == CalcType (1))
-        {
-            for (i = 0; i < numItems; ++i)
-            {
-                NumericalType temp;
-                roundCopy (src[i], temp);
-                dst[i] = CalcType (temp) * otherTypePeakFactor;
-            }
-        }
-        else
-        {
-            for (i = 0; i < numItems; ++i)
-            {
-                NumericalType temp;
-                roundCopy (src[i], temp);
-                
-                CalcType calc = temp;
-                calc *= typePeak;
-                calc *= otherTypePeakFactor;
-                
-                dst[i] = NumericalType (calc);
-            }
-        }
+        NumericalArrayConverter<NumericalType,OtherType>::convertScaled (dst, src, numItems);        
     }
+    
+    static inline void convert (NumericalType* const dst, 
+                                const NumericalType* const src, 
+                                const UnsignedLong numItems,
+                                const bool applyScaling) throw()
+    {
+        (void)applyScaling;
+        copyData (dst, src, numItems);
+    }    
     
     template<class OtherType>
     static inline void convert (NumericalType* const dst, 
@@ -204,10 +235,7 @@ public:
                                 const UnsignedLong numItems,
                                 const bool applyScaling) throw()
     {
-        if (applyScaling)
-            convertScaled (dst, src, numItems);
-        else
-            convertDirect (dst, src, numItems);
+        NumericalArrayConverter<NumericalType,OtherType>::convert (dst, src, numItems, applyScaling);        
     }
     
     static inline void zeroData (NumericalType* const dst, const UnsignedLong numItems) throw()
@@ -238,24 +266,6 @@ public:
     :   Base (other.as<NumericalArray>().getInternal())
     {
     }    
-    
-	static inline void roundCopy (const double inValue, char& outValue) throw()        { outValue = char (inValue + 0.5); }
-	static inline void roundCopy (const double inValue, short& outValue) throw()       { outValue = short (inValue + 0.5); }
-	static inline void roundCopy (const double inValue, int& outValue) throw()         { outValue = int (inValue + 0.5); }
-	static inline void roundCopy (const double inValue, Int24& outValue) throw()       { outValue = Int24 (inValue + 0.5); }
-//    static inline void roundCopy (const double inValue, Long& outValue) throw()        { outValue = Long (inValue + 0.5); }    
-    static inline void roundCopy (const double inValue, LongLong& outValue) throw()    { outValue = LongLong (inValue + 0.5); }    
-
-    static inline void roundCopy (const float inValue, char& outValue) throw()         { outValue = char (inValue + 0.5f); }
-	static inline void roundCopy (const float inValue, short& outValue) throw()        { outValue = short (inValue + 0.5f); }
-	static inline void roundCopy (const float inValue, int& outValue) throw()          { outValue = int (inValue + 0.5f); }
-    static inline void roundCopy (const float inValue, Int24& outValue) throw()        { outValue = Int24 (inValue + 0.5f); }
-//    static inline void roundCopy (const float inValue, Long& outValue) throw()         { outValue = Long (inValue + 0.5f); }
-    static inline void roundCopy (const float inValue, LongLong& outValue) throw()     { outValue = LongLong (inValue + 0.5f); }
-    
-    template<class InType, class OutType>
-    static inline void roundCopy (const InType inValue, OutType& outValue) throw()     { outValue = OutType (inValue); }	
-    
 	
 public:
 	/** Construct a NumericalArray by copying a NumericalArray of a different type. */
@@ -351,7 +361,7 @@ public:
 		
 		for (int i = 0; i < numValues; ++i)
 		{
-			roundCopy(currentValue, outputValues[i]);
+            NumericalConverter::roundCopy (currentValue, outputValues[i]);
 			currentValue += inc;
 		}
 		

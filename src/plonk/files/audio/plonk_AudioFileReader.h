@@ -45,6 +45,68 @@
 #include "../../core/plonk_SmartPointerContainer.h"
 #include "../../containers/plonk_Text.h"
 
+/** Some audio file common constants. */
+class AudioFile
+{
+public:
+    enum Format
+    {
+        FormatInvalid               = PLANKAUDIOFILE_FORMAT_INVALID,
+        FormatUnknown               = PLANKAUDIOFILE_FORMAT_UNKNOWN,
+        FormatWAV                   = PLANKAUDIOFILE_FORMAT_WAV,
+        FormatAIFF                  = PLANKAUDIOFILE_FORMAT_AIFF,
+        FormatAIFC                  = PLANKAUDIOFILE_FORMAT_AIFC
+    };
+    
+    enum EncodingFlag
+    {
+        EncodingFlagBigEndian       = PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG,
+        EncodingFlagPCM             = PLANKAUDIOFILE_ENCODING_PCM_FLAG,
+        EncodingFlagFloat           = PLANKAUDIOFILE_ENCODING_FLOAT_FLAG
+    };
+    
+    enum Encoding
+    {
+        EncodingInvalid             = PLANKAUDIOFILE_ENCODING_INVALID,
+        EncodingUnknown             = PLANKAUDIOFILE_ENCODING_UNKNOWN,
+        EncodingUnused1             = PLANKAUDIOFILE_ENCODING_UNUSED1,
+                
+        EncodingPCMLittleEndian     = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN,
+        EncodingPCMBigEndian        = PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN,
+        EncodingFloatLittleEndian   = PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN,
+        EncodingFloatBigEndian      = PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN,
+                
+        EncodingMin                 = PLANKAUDIOFILE_ENCODING_MIN,
+        EncodingMax                 = PLANKAUDIOFILE_ENCODING_MAX
+    };
+    
+    enum WAVOption
+    {
+CompressionPCM              = PLANKAUDIOFILE_WAV_COMPRESSION_PCM,
+        CompressionFloat            = PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT,
+        CompressionExtensible       = PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE
+    };
+    
+    enum AIFFOption
+    {
+        AIFCVersion                 = PLANKAUDIOFILE_AIFC_VERSION
+    };
+    
+    enum SampleType
+    {
+        Invalid,
+        Short,
+        Int24,
+        Int,
+        Char,
+        Float,
+        Double,
+        NumSampleTypes
+    };
+};
+
+//------------------------------------------------------------------------------
+
 
 class AudioFileReaderInternal : public SmartPointer
 {
@@ -53,8 +115,12 @@ public:
     AudioFileReaderInternal (Text const& path, const int bufferSize = 32768) throw();
     ~AudioFileReaderInternal();
     
+    AudioFile::Format getFormat() const throw();
+    AudioFile::Encoding getEncoding() const throw();
+    AudioFile::SampleType getSampleType() const throw();
     int getBitsPerSample() const throw();
     int getBytesPerFrame() const throw();
+    int getBytesPerSample() const throw();
     int getNumChannels() const throw();
     double getSampleRate() const throw();
     int getNumFrames() const throw();
@@ -83,6 +149,9 @@ public:
         return readFrames (signal.getBuffers().first(), applyScaling, false);
     }
     
+    void setOwner (void* owner) throw();
+    bool isOwned() const throw();
+    
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
@@ -102,6 +171,7 @@ private:
     PlankAudioFileReader peer;
     Chars readBuffer;
     int numFramesPerBuffer;
+    AtomicValue<void*> owner;
 };
 
 template<class SampleType>
@@ -284,6 +354,7 @@ public:
         return *this;
 	}
         
+    
     /** Get a weakly linked copy of this object. 
      This will return a blank/empty/null object of this type if
      the original has already been deleted. */    
@@ -291,6 +362,30 @@ public:
     {
         return weak.fromWeak();
     }    
+    
+    /** Get the format of the audio file. 
+     i.e., WAV, AIFF etc 
+     See AudioFile::Format the available types. */
+    inline AudioFile::Format getFormat() const throw()
+    {
+        return getInternal()->getFormat();
+    }
+    
+    /** Get the encoding of the audio file. 
+     i.e., PCM (integer), floating point, whether big or little endian 
+     See AudioFile::Encoding the available types. */
+    inline AudioFile::Encoding getEncoding() const throw()
+    {
+        return getInternal()->getEncoding();
+    }
+    
+    /** Get the sample type of the audio file. 
+     i.e., Char (8-bit), Short (16-bit) etc 
+     See AudioFile::SampleType the available types. */
+    inline AudioFile::SampleType getSampleType() const throw()
+    {
+        return getInternal()->getSampleType();   
+    }
     
     /** Get the number of bits used per sample in the file. */
     inline int getBitsPerSample() const throw()
@@ -302,6 +397,12 @@ public:
     inline int getBytesPerFrame() const throw()
     {
         return getInternal()->getBytesPerFrame();
+    }
+    
+    /** Get the number of bytes in each sample of the file. */
+    inline int getBytesPerSample() const throw()
+    {
+        return getInternal()->getBytesPerSample();
     }
     
     /** Get the number of channels in the file. */
@@ -441,6 +542,16 @@ public:
     inline SignalBase<PLONK_TYPE_DEFAULT> getSignal() throw()
     {
         return getOtherSignal<PLONK_TYPE_DEFAULT>();
+    }    
+    
+    void setOwner (void* owner) throw()
+    {
+        getInternal()->setOwner (owner);
+    }
+    
+    bool isOwned() const throw()
+    {
+        return getInternal()->isOwned();
     }
 };
 

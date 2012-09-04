@@ -295,6 +295,7 @@ PLONK_BITSBASE_DECLARE(S,2);
 PLONK_BITSBASE_DECLARE(I,4);
 PLONK_BITSBASE_DECLARE(LL,8);
 
+
 /** Some useful bitwise functions. */
 class Bits
 {
@@ -309,20 +310,26 @@ public:
     template<class Type> static inline bool isPowerOf2            (Type const& value) throw() { return BitsBase<Type,sizeof(Type)>::isPowerOf2 (value);             }
 };
 
-//template<class Type>
-//class Bits : public BitsBase<Type,sizeof(Type)>
-//{
-//public:
-//    typedef BitsBase<Type,sizeof(Type)> Base;
-//    static inline Type countOnes             (Type const& value) throw() { return Base::countOnes (value);              }
-//    static inline Type countLeadingZeros     (Type const& value) throw() { return Base::countLeadingZeros (value);      }
-//    static inline Type countTrailingZeroes   (Type const& value) throw() { return Base::countTrailingZeroes (value);    }
-//    static inline Type countLeadingOnes      (Type const& value) throw() { return Base::countLeadingOnes (value);       }
-//    static inline Type countTrailingOnes     (Type const& value) throw() { return Base::countTrailingOnes (value);      }
-//    static inline Type numBitsRequired       (Type const& value) throw() { return Base::numBitsRequired (value);        }
-//    static inline Type nextPowerOf2          (Type const& value) throw() { return Base::nextPowerOf2 (value);           }
-//    static inline bool isPowerOf2            (Type const& value) throw() { return Base::isPowerOf2 (value);             }
-//};
+
+/** For rounding values from float/double to int types. */
+class NumericalConverter
+{
+public:
+    template<class InType, class OutType>
+    static inline void roundCopy (const InType inValue, OutType& outValue) throw()     { outValue = OutType (inValue); }	
+    
+    static inline void roundCopy (const double inValue, char& outValue) throw()        { outValue = char (inValue + 0.5); }
+	static inline void roundCopy (const double inValue, short& outValue) throw()       { outValue = short (inValue + 0.5); }
+	static inline void roundCopy (const double inValue, int& outValue) throw()         { outValue = int (inValue + 0.5); }
+	static inline void roundCopy (const double inValue, Int24& outValue) throw()       { outValue = Int24 (inValue + 0.5); }
+    static inline void roundCopy (const double inValue, LongLong& outValue) throw()    { outValue = LongLong (inValue + 0.5); }    
+    
+    static inline void roundCopy (const float inValue, char& outValue) throw()         { outValue = char (inValue + 0.5f); }
+	static inline void roundCopy (const float inValue, short& outValue) throw()        { outValue = short (inValue + 0.5f); }
+	static inline void roundCopy (const float inValue, int& outValue) throw()          { outValue = int (inValue + 0.5f); }
+    static inline void roundCopy (const float inValue, Int24& outValue) throw()        { outValue = Int24 (inValue + 0.5f); }
+    static inline void roundCopy (const float inValue, LongLong& outValue) throw()     { outValue = LongLong (inValue + 0.5f); }
+};
 
 
 

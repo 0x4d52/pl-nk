@@ -671,14 +671,12 @@ public:
         if (add.isNull() || (add.isConstant() && (add.getValue (0) == SampleType (0))))
             hasAdd = false;
         
-        
         if (hasMul && hasAdd)
             result = MulAddUnit<SampleType>::ar (result, mul, add);
         else if (hasMul)
             result *= mul;
         else if (hasAdd)
             result += add;
-        
             
         return result;        
     }

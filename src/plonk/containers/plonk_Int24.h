@@ -106,35 +106,35 @@ public:
     Int24 operator++ (int) throw();
     Int24 operator-- (int) throw();
     
-    Int24 operator+ (Int24 const& leftOperand) const throw();
-    Int24 operator- (Int24 const& leftOperand) const throw();
-    Int24 operator* (Int24 const& leftOperand) const throw();
-    Int24 operator/ (Int24 const& leftOperand) const throw();
-    Int24 operator% (Int24 const& leftOperand) const throw();
-    Int24 operator| (Int24 const& leftOperand) const throw();
-    Int24 operator& (Int24 const& leftOperand) const throw();
-    Int24 operator^ (Int24 const& leftOperand) const throw();
+    Int24 operator+ (Int24 const& rightOperand) const throw();
+    Int24 operator- (Int24 const& rightOperand) const throw();
+    Int24 operator* (Int24 const& rightOperand) const throw();
+    Int24 operator/ (Int24 const& rightOperand) const throw();
+    Int24 operator% (Int24 const& rightOperand) const throw();
+    Int24 operator| (Int24 const& rightOperand) const throw();
+    Int24 operator& (Int24 const& rightOperand) const throw();
+    Int24 operator^ (Int24 const& rightOperand) const throw();
 
-    Int24 pow (Int24 const& leftOperand) const throw();
+    Int24 pow (Int24 const& rightOperand) const throw();
     
-    Int24& operator+= (Int24 const& leftOperand) throw();
-    Int24& operator-= (Int24 const& leftOperand) throw();
-    Int24& operator*= (Int24 const& leftOperand) throw();
-    Int24& operator/= (Int24 const& leftOperand) throw();
-    Int24& operator%= (Int24 const& leftOperand) throw();
-    Int24& operator|= (Int24 const& leftOperand) throw();
-    Int24& operator&= (Int24 const& leftOperand) throw();
-    Int24& operator^= (Int24 const& leftOperand) throw();
+    Int24& operator+= (Int24 const& rightOperand) throw();
+    Int24& operator-= (Int24 const& rightOperand) throw();
+    Int24& operator*= (Int24 const& rightOperand) throw();
+    Int24& operator/= (Int24 const& rightOperand) throw();
+    Int24& operator%= (Int24 const& rightOperand) throw();
+    Int24& operator|= (Int24 const& rightOperand) throw();
+    Int24& operator&= (Int24 const& rightOperand) throw();
+    Int24& operator^= (Int24 const& rightOperand) throw();
     
-    bool operator== (Int24 const& leftOperand) const throw();
-    bool operator!= (Int24 const& leftOperand) const throw();
-    bool operator< (Int24 const& leftOperand) const throw();
-    bool operator<= (Int24 const& leftOperand) const throw();
-    bool operator> (Int24 const& leftOperand) const throw();
-    bool operator>= (Int24 const& leftOperand) const throw();
+    bool operator== (Int24 const& rightOperand) const throw();
+    bool operator!= (Int24 const& rightOperand) const throw();
+    bool operator< (Int24 const& rightOperand) const throw();
+    bool operator<= (Int24 const& rightOperand) const throw();
+    bool operator> (Int24 const& rightOperand) const throw();
+    bool operator>= (Int24 const& rightOperand) const throw();
 
-    bool operator&& (Int24 const& leftOperand) const throw();
-    bool operator|| (Int24 const& leftOperand) const throw();
+    bool operator&& (Int24 const& rightOperand) const throw();
+    bool operator|| (Int24 const& rightOperand) const throw();
 
     Int24 operator<< (const int shift) const throw();
     Int24 operator>> (const int shift) const throw();
@@ -147,6 +147,13 @@ public:
 private:
     Internal data;
 } PLONK_PACKED;
+
+//template<class OtherType>
+//typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator/ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
+//    return CalcType (leftOperand) / CalcType (rightOperand);
+//}
 
 #if PLANK_WIN
     #pragma pack (pop)

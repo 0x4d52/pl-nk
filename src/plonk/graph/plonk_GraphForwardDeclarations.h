@@ -104,12 +104,14 @@ typedef TypeUnit<Int24,float>   TypeFloat2In24;
 
 typedef TypeUnit<PLONK_TYPE_DEFAULT,float>      TypeFloat2Default;
 typedef TypeUnit<PLONK_TYPE_DEFAULT,double>     TypeDouble2Default;
+typedef TypeUnit<PLONK_TYPE_DEFAULT,char>       TypeChar2Default;
 typedef TypeUnit<PLONK_TYPE_DEFAULT,int>        TypeInt2Default;
 typedef TypeUnit<PLONK_TYPE_DEFAULT,short>      TypeShort2Default;
 typedef TypeUnit<PLONK_TYPE_DEFAULT,Int24>      TypeInt242Default;
 
 typedef TypeUnit<float,PLONK_TYPE_DEFAULT>      TypeDefault2Float;
 typedef TypeUnit<double,PLONK_TYPE_DEFAULT>     TypeDefault2Double;
+typedef TypeUnit<char,PLONK_TYPE_DEFAULT>       TypeDefault2Char;
 typedef TypeUnit<int,PLONK_TYPE_DEFAULT>        TypeDefault2Int;
 typedef TypeUnit<short,PLONK_TYPE_DEFAULT>      TypeDefault2Short;
 typedef TypeUnit<Int24,PLONK_TYPE_DEFAULT>      TypeDefault2Int24;
@@ -126,12 +128,14 @@ typedef ChannelBase<Long>               LongChannel;
 typedef UnitBase<float>                 FloatUnit;
 typedef UnitBase<double>                DoubleUnit;
 typedef UnitBase<short>                 ShortUnit;
+typedef UnitBase<char>                  CharUnit;
 typedef UnitBase<int>                   IntUnit;
 typedef UnitBase<Int24>                 Int24Unit;
 typedef UnitBase<Long>                  LongUnit;
 
 typedef BusBuffer<float>                FloatBus;
 typedef BusBuffer<double>               DoubleBus;
+typedef BusBuffer<char>                  CharBus;
 typedef BusBuffer<int>                  IntBus;
 typedef BusBuffer<Int24>                Int24Bus;
 typedef BusBuffer<short>                ShortBus;

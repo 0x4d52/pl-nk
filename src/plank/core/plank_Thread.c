@@ -76,7 +76,11 @@ PlankResult pl_ThreadSleep (PlankD seconds)
 
 PlankResult pl_ThreadYield()
 {
-    pl_ThreadSleep (0.0);
+#if PLANK_APPLE
+    sched_yield();
+#elif PLANK_WIN    
+    Sleep (0;
+#endif
     return PlankResult_OK;
 }
 

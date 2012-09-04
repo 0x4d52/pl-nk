@@ -76,6 +76,14 @@ public:
                   inputs, data, blockSize, sampleRate,
                   channels)
     {
+        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
+        file.setOwner (this);
+    }
+    
+    ~FilePlayChannelInternal()
+    {
+        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
+        file.setOwner (0);
     }
             
     Text getName() const throw()
@@ -226,6 +234,46 @@ public:
 };
 
 typedef FilePlayUnit<PLONK_TYPE_DEFAULT> FilePlay;
+
+//class FilePlayDirectInternalBase : public SmartPointer
+//{
+//public:
+//    FilePlayDirectInternalBase (AudioFileReader const& f) throw()
+//    :   file (f)
+//    {
+//    }
+//    
+//private:
+//    AudioFileReader file;
+//};
+//
+//template<class SampleType>
+//class FilePlayDirectInternal : public FilePlayDirectInternalBase
+//{
+//public:
+//    FilePlayDirectInternal (AudioFileReader const& file) throw()
+//    :   FilePlayDirectInternalBase (file)
+//    {
+//    }
+//};
+//
+//class FilePlayDirect : public SmartPointerContainer<FilePlayDirectInternalBase>
+//{
+//public:
+//    typedef SmartPointerContainer<FilePlayDirectInternalBase> Base;
+//    
+//    FilePlayDirect (AudioFileReader const& file) throw()
+//    :   Base (createInternal (file))
+//    {
+//    }
+//    
+//private:
+//    
+//    inline static FilePlayDirectInternalBase* createInternal (AudioFileReader const& file) throw()
+//    {
+//        
+//    }
+//};
 
 
 #endif // PLONK_FILEPLAY_H

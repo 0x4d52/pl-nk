@@ -69,6 +69,83 @@ AudioFileReaderInternal::~AudioFileReaderInternal()
     pl_AudioFileReader_DeInit (getPeerRef());
 }
 
+AudioFile::Format AudioFileReaderInternal::getFormat() const throw()
+{
+    int value;
+    ResultCode result = pl_AudioFileReader_GetFormat (getPeerRef(), &value);
+    plonk_assert (result == PlankResult_OK);
+#ifndef PLONK_DEBUG
+    (void)result;
+#endif
+        
+    const int format = value;
+    
+    switch (format)
+    {
+        case AudioFile::FormatInvalid: return AudioFile::FormatInvalid;
+        case AudioFile::FormatUnknown: return AudioFile::FormatUnknown;
+        case AudioFile::FormatWAV:     return AudioFile::FormatWAV;
+        case AudioFile::FormatAIFF:    return AudioFile::FormatAIFF;
+        case AudioFile::FormatAIFC:    return AudioFile::FormatAIFC;
+        default: return AudioFile::FormatInvalid;
+    }
+}
+
+AudioFile::Encoding AudioFileReaderInternal::getEncoding() const throw()
+{
+    int value;
+    ResultCode result = pl_AudioFileReader_GetFormat (getPeerRef(), &value);
+    plonk_assert (result == PlankResult_OK);
+#ifndef PLONK_DEBUG
+    (void)result;
+#endif
+    
+    const int format = value;
+    
+    switch (format)
+    {
+        case AudioFile::EncodingInvalid:            return AudioFile::EncodingInvalid;
+        case AudioFile::EncodingUnknown:            return AudioFile::EncodingUnknown;
+        case AudioFile::EncodingPCMLittleEndian:    return AudioFile::EncodingPCMLittleEndian;
+        case AudioFile::EncodingPCMBigEndian:       return AudioFile::EncodingPCMBigEndian;
+        case AudioFile::EncodingFloatLittleEndian:  return AudioFile::EncodingFloatLittleEndian;
+        case AudioFile::EncodingFloatBigEndian:     return AudioFile::EncodingFloatBigEndian;
+        default: return AudioFile::EncodingInvalid;
+    }
+}
+
+AudioFile::SampleType AudioFileReaderInternal::getSampleType() const throw()
+{    
+    const AudioFile::Encoding encoding = getEncoding();
+    const int bytesPerSample = getBytesPerSample();
+    const bool isPCM = encoding & AudioFile::EncodingFlagPCM;// PLANKAUDIOFILE_ENCODING_PCM_FLAG;
+    const bool isFloat = encoding & AudioFile::EncodingFlagFloat;// PLANKAUDIOFILE_ENCODING_FLOAT_FLAG;
+
+    if (isPCM)
+    {        
+        switch (bytesPerSample)
+        {
+            case 2: return AudioFile::Short;
+            case 3: return AudioFile::Int24;
+            case 4: return AudioFile::Int;
+            case 1: return AudioFile::Char;
+            default: goto exit;
+        }        
+    }
+    else if (isFloat)
+    {
+        switch (bytesPerSample)
+        {
+            case 4: return AudioFile::Float;
+            case 8: return AudioFile::Double;
+            default: goto exit;
+        }                
+    }
+    
+exit:
+    return AudioFile::Invalid;
+}
+
 int AudioFileReaderInternal::getBitsPerSample() const throw()
 {
     int value;
@@ -91,6 +168,11 @@ int AudioFileReaderInternal::getBytesPerFrame() const throw()
     return value;
 }
 
+int AudioFileReaderInternal::getBytesPerSample() const throw()
+{ 
+    return getBytesPerFrame() / getNumChannels();
+}
+    
 int AudioFileReaderInternal::getNumChannels() const throw()
 {
     int value;
@@ -153,6 +235,16 @@ void AudioFileReaderInternal::resetFramePosition() throw()
 #endif
 }
 
+void AudioFileReaderInternal::setOwner (void* o) throw()
+{
+    plonk_assert ((o == 0) || (owner == 0));
+    owner = o;
+}
+
+bool AudioFileReaderInternal::isOwned() const throw()
+{
+    return owner != 0;
+}
 
 
 END_PLONK_NAMESPACE
