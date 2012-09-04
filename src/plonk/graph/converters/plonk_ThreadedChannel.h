@@ -137,7 +137,7 @@ public:
                 }
                 else 
                 {
-                    Threading::sleep (blockSize / owner->getSampleRate().getValue() * (numBuffers - 1));
+                    Threading::sleep (blockSize / owner->getSampleRate().getValue() * rng.uniform (1, numBuffers - 1));
                 }
             }
             
@@ -151,6 +151,7 @@ public:
         ThreadedChannelInternal* owner;
         ProcessInfo& info;
         Lock lock;
+        RNG rng;
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
     };
