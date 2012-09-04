@@ -410,15 +410,14 @@ PlankB pl_Thread_GetShouldExit (PlankThreadRef p)
 PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
 {
 #if PLANK_MAC
+    p->priority = priority;
+
     if (!pl_Thread_IsRunning (p))
-    {
-        p->priority = priority;
         return PlankResult_OK;
-    }   
         
     struct sched_param param;
     int policy, minPriority, maxPriority;
-    priority = pl_ClipI (priority, 0, 10);
+    priority = pl_ClipI (priority, 0, 100);
                 
     if (pthread_getschedparam (p->thread, &policy, &param) != 0)
         return PlankResult_ThreadSetPriorityFailed;
@@ -427,7 +426,7 @@ PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
     minPriority = sched_get_priority_min (policy);
     maxPriority = sched_get_priority_max (policy);
     
-    param.sched_priority = ((maxPriority - minPriority) * priority) / 10 + minPriority;
+    param.sched_priority = ((maxPriority - minPriority) * priority) / 100 + minPriority;
     return pthread_setschedparam (p->thread, policy, &param) == 0 
            ? PlankResult_OK 
            : PlankResult_ThreadSetPriorityFailed;
@@ -461,7 +460,7 @@ PlankResult pl_Thread_SetPriorityAudio (PlankThreadRef p, int blockSize, double 
 //#else
     (void)blockSize;
     (void)sampleRate;
-    return pl_Thread_SetPriority (p, 10);
+    return pl_Thread_SetPriority (p, 100);
 //#endif
 }
 

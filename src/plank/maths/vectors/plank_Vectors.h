@@ -117,7 +117,7 @@
 
 #define PLANK_VECTORMULADD_DEFINE(TYPECODE) \
     /** Applies the multiply and add operator to a set of vectors.
-    @f$ result = input * mul + add @f$
+    @f$ result = input \times mul + add @f$
     @param result The output vector.
     @param input The input vector.
     @param mul A vector containing the value to multiply the input by.
@@ -130,7 +130,7 @@
 
 #define PLANK_VECTORMULADDINPLACE_DEFINE(TYPECODE) \
     /** Applies the multiply and add operator to a set of vectors.
-    @f$ io = io * mul + add @f$
+    @f$ io = io \times mul + add @f$
     @param io The input and output vector.
     @param mul A vector containing the value to multiply the input by.
     @param add A vector containing the value to add after the multiply.
@@ -141,7 +141,7 @@
 
 #define PLANK_VECTORMULSCALARADD_DEFINE(TYPECODE) \
     /** Applies the multiply and add operator to a set of vectors.
-    @f$ result= input * mul + add @f$
+    @f$ result= input \times mul + add @f$
     @param io The input and output vector.
     @param mul A vector containing the value to multiply the input by.
     @param add A scalar to add after the multiply.
@@ -152,7 +152,7 @@
 
 #define PLANK_VECTORSCALARMULSCALARADD_DEFINE(TYPECODE) \
     /** Applies the multiply and add operator to a set of vectors.
-    @f$ result= input * mul + add @f$
+    @f$ result= input \times mul + add @f$
     @param io The input and output vector.
     @param mul A scalar to multiply the input by.
     @param add A scalar to add after the multiply.
@@ -163,7 +163,7 @@
 
 #define PLANK_VECTORSCALARMULADD_DEFINE(TYPECODE) \
     /** Applies the multiply and add operator to a set of vectors.
-    @f$ result= input * mul + add @f$
+    @f$ result= input \times mul + add @f$
     @param io The input and output vector.
     @param mul A scalar to multiply the input by.
     @param add A vector containing the value to add after the multiply.

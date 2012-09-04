@@ -138,6 +138,7 @@ public:
         PurgeNullUnitsFlag,
         HarmonicCount,
         BufferCount,
+        Priority,
         MaximumDuration,
         PreferredNumChannels,
 

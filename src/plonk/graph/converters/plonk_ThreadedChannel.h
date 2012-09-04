@@ -49,6 +49,7 @@ PLONK_CHANNELDATA_DECLARE(ThreadedChannelInternal,SampleType)
     ChannelInternalCore::Data base;
     int numChannels;
     int numBuffers;
+    int priority;
 };      
 
 //------------------------------------------------------------------------------
@@ -88,10 +89,12 @@ public:
                 
         ResultCode run() throw()
         {
-            setPriorityAudio (owner->getBlockSize().getValue(), owner->getSampleRate().getValue());
+            const Data& data = owner->getState();
+            setPriority (data.priority);
             
             const int numChannels = owner->getNumChannels();
             const int numBuffers = owner->getState().numBuffers;;
+            const int halfNumBuffers = numBuffers >> 1;
             
             plonk_assert (numBuffers > 0);
             plonk_assert (owner->getBlockSize().getValue() > 0);
@@ -100,6 +103,8 @@ public:
             
             for (int i = 0; i < numBuffers; ++i)
                 activeBuffers.push (Buffer::newClear (bufferSize));
+            
+            Threading::yield();
             
             while (!getShouldExit())
             {                     
@@ -119,13 +124,37 @@ public:
                     for (int channel = 0; channel < numChannels; ++channel)
                     {
                         const Buffer& inputBuffer (inputUnit.process (info, channel));                    
-                        const SampleType* const inputSamples = inputBuffer.getArray();
+                        const SampleType* inputSamples = inputBuffer.getArray();
                         const int inputBufferLength = inputBuffer.length();
-
+                        
                         plonk_assert (buffer.length() == (numChannels * inputBufferLength));
                         
-                        for (int i = 0; i < inputBufferLength; ++i)
-                            *bufferSamples++ = inputSamples[i];
+                        int i;
+
+                        if (numFreeBuffers >= halfNumBuffers)
+                        {
+                            for (i = 0; i < inputBufferLength; ++i)
+                                *bufferSamples++ = *inputSamples++;
+                        }
+                        else 
+                        {
+                            const int num4 = inputBufferLength >> 2;
+                            const int remain4 = inputBufferLength & 3;
+                                 
+                            for (i = 0; i < num4; ++i)
+                            {
+                                *bufferSamples++ = *inputSamples++;
+                                *bufferSamples++ = *inputSamples++;
+                                *bufferSamples++ = *inputSamples++;
+                                *bufferSamples++ = *inputSamples++;
+                                Threading::yield();
+                            }
+                            
+                            for (i = 0; i < remain4; ++i)
+                                *bufferSamples++ = *inputSamples++;
+                            
+                            Threading::yield();
+                        }
                     }
                     
                     activeBuffers.push (buffer);
@@ -137,7 +166,7 @@ public:
                 }
                 else 
                 {
-                    Threading::sleep (blockSize / owner->getSampleRate().getValue() * rng.uniform (1, numBuffers - 1));
+                    Threading::sleep (blockSize / owner->getSampleRate().getValue() * rng.uniform (1, halfNumBuffers));
                 }
             }
             
@@ -150,7 +179,6 @@ public:
     private:
         ThreadedChannelInternal* owner;
         ProcessInfo& info;
-        Lock lock;
         RNG rng;
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
@@ -252,14 +280,15 @@ private:
  (e.g., FilePlayUnit).
  
  The latency of this will be equal to: 
- @f$ preferredBlockSize * numBuffers / preferredSampleRate @f$
+ @f$ \frac{preferredBlockSize \times numBuffers}{preferredSampleRate} @f$
  
- Factory functions:
- - ar (input, numBuffers=16, preferredBlockSize=default, preferredSampleRate=default)
+ @subsection FactoryFunctions Factory functions:
+ - ar (input, numBuffers=16, priority=50, preferredBlockSize=default, preferredSampleRate=default)
  
- Inputs:
+ @subsection Inputs Inputs:
  - input: (input, multi) the input unit to defer to a separate thread
  - numBuffers: (int) the number of buffers to queue, also affects latency
+ - priority: (int) the priority of the thread (0-100, 100 is highest)
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 
@@ -290,6 +319,7 @@ public:
                          // inputs
                          IOKey::Generic,            Measure::None,
                          IOKey::BufferCount,        Measure::Count,     16.0,       IOLimit::Minimum,   Measure::Count,             1.0,
+                         IOKey::Priority,           Measure::Percent,   50.0,       IOLimit::Clipped,   Measure::Percent,           0.0, 100.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,        IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,        IOLimit::None,
                          IOKey::BlockSize,          Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
@@ -299,13 +329,14 @@ public:
     
     static UnitType ar (UnitType const& input,
                         const int numBuffers = 16,
+                        const int priority = 50,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
                         
-        Data data = { { -1.0, -1.0 }, 0, numBuffers };
+        Data data = { { -1.0, -1.0 }, 0, numBuffers, priority };
         
         return UnitType::template proxiesFromInputs<ThreadedInternal> (inputs, 
                                                                        data, 
