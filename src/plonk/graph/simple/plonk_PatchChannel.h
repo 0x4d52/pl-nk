@@ -214,10 +214,7 @@ public:
             }
             else if (sourceBufferLength == 1)
             {
-                const SampleType value (sourceSamples[0]);
-                
-                for (i = 0; i < outputBufferLength; ++i) 
-                    outputSamples[i] = value;
+                NumericalArrayFiller<SampleType>::fill (outputSamples, sourceSamples[0], outputBufferLength);
             }
             else
             {

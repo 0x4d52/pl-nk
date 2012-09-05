@@ -133,11 +133,11 @@ public:
 
                         if (numFreeBuffers >= halfNumBuffers)
                         {
-                            for (i = 0; i < inputBufferLength; ++i)
-                                *bufferSamples++ = *inputSamples++;
+                            NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);                            
                         }
                         else 
                         {
+                            // buffers are nicely filled so let's yield a little more often this time
                             const int num4 = inputBufferLength >> 2;
                             const int remain4 = inputBufferLength & 3;
                                  
@@ -240,8 +240,8 @@ public:
                 
                 plonk_assert (buffer.length() == (numChannels * outputBufferLength));
                 
-                for (int i = 0; i < outputBufferLength; ++i)
-                    outputSamples[i] = *bufferSamples++;
+                NumericalArray<SampleType>::copyData (outputSamples, bufferSamples, outputBufferLength);
+                bufferSamples += outputBufferLength;                
             }
             
             buffer.zero();

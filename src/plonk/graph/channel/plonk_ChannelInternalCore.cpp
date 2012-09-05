@@ -61,33 +61,6 @@ ChannelInternalCore::ChannelInternalCore (Inputs const& inputsToUse,
     plonk_assert (overlap.getValue() <= 1.0);
 }
 
-//void ChannelInternalCore::setNextTimeStamp (TimeStamp const& time) throw()
-//{
-//    plonk_assert ((nextTimeStamp.isInfinite() && time.isInfinite()) || (time > nextTimeStamp)); // gone backwards or wraparound
-//    nextTimeStamp = time;
-//}
-//
-//void ChannelInternalCore::setLastTimeStamp (TimeStamp const& time) throw()
-//{
-//    plonk_assert (time.isFinite());
-//    lastTimeStamp = time;
-//}
-//
-//void ChannelInternalCore::setExpiryTimeStamp (TimeStamp const& time) throw()
-//{
-//    expiryTimeStamp = time;
-//}
-//
-//bool ChannelInternalCore::shouldBeDeletedNow (TimeStamp const& time) const throw()
-//{
-//    return time >= expiryTimeStamp;
-//}
-//
-//double ChannelInternalCore::getBlockDurationInTicks() const throw()                          
-//{ 
-//    return this->getSampleDurationInTicks() * double (this->getBlockSize().getValue()) * overlap.getValue();
-//}
-
 void ChannelInternalCore::updateTimeStamp() throw()
 {
     if (this->lastTimeStamp >= TimeStamp::getZero()) // would like to avoid this condition..

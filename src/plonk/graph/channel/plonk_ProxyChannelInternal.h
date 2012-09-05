@@ -129,18 +129,7 @@ public:
         
         proxyOwner->initChannel (channel);
     }    
-    
-//    bool deleteIfOnlyMutualReferencesRemain() throw()
-//    {
-//        InternalBase* proxyOwner 
-//            = static_cast<InternalBase*> (owner.getInternal());
-//        
-//        if (proxyOwner != 0)
-//            return proxyOwner->deleteIfOnlyMutualReferencesRemain();    
-//
-//		return false;
-//    }
-            
+                
     void process (ProcessInfo& info, const int channel) throw()
     {        
         owner.process (info, channel);

@@ -130,15 +130,11 @@ public:
             
             if (inputBufferLength == outputBufferLength)
             {
-                for (i = 0; i < outputBufferLength; ++i) 
-                    outputSamples[i] += inputSamples[i];
+                NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);                
             }
             else if (inputBufferLength == 1)
             {
-                const SampleType value (inputSamples[0]);
-                
-                for (i = 0; i < outputBufferLength; ++i) 
-                    outputSamples[i] += value;
+                NumericalArrayBinaryOp<SampleType,plonk::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);                
             }
             else
             {
@@ -272,15 +268,11 @@ public:
                     
                     if (inputBufferLength == outputBufferLength)
                     {
-                        for (i = 0; i < outputBufferLength; ++i) 
-                            outputSamples[i] += inputSamples[i];
+                        NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);                
                     }
                     else if (inputBufferLength == 1)
                     {
-                        const SampleType value (inputSamples[0]);
-                        
-                        for (i = 0; i < outputBufferLength; ++i) 
-                            outputSamples[i] += value;
+                        NumericalArrayBinaryOp<SampleType,plonk::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);                
                     }
                     else
                     {

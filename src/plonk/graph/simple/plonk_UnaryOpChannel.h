@@ -192,15 +192,11 @@ public:
         
         if (operandBufferLength == outputBufferLength)
         {
-            for (i = 0; i < outputBufferLength; ++i) 
-                outputSamples[i] = op (operandSamples[i]);
+            NumericalArrayUnaryOp<SampleType,op>::calc (outputSamples, operandSamples, outputBufferLength);
         }
         else if (operandBufferLength == 1)
         {
-            const SampleType value (op (operandSamples[0]));
-            
-            for (i = 0; i < outputBufferLength; ++i) 
-                outputSamples[i] = value;
+            NumericalArrayFiller<SampleType>::fill (outputSamples, operandSamples[0], outputBufferLength);
         }
         else
         {

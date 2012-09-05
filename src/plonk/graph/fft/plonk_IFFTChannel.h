@@ -98,7 +98,9 @@ public:
     }    
             
     void process (ProcessInfo& info, const int channel) throw()
-    {                
+    {               
+        /* Be careful optimising this with the new NumericalArray vector stuff */
+
         const int realIndex = channel * 2;
         const int imagIndex = realIndex + 1;
         

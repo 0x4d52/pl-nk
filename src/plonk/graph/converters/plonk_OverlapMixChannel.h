@@ -107,6 +107,8 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {                
+        /* Be careful optimising this with the new NumericalArray vector stuff */
+
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
         
         const int outputBufferLength = this->getOutputBuffer().length();

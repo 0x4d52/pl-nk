@@ -97,8 +97,10 @@ public:
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();        
         
-        for (int i = 0; i < outputBufferLength; ++i) 
-            outputSamples[i] = value;          
+        if (outputBufferLength == 1)
+            outputSamples[0] = value;
+        else
+            NumericalArrayFiller<SampleType>::fill (outputSamples, value, outputBufferLength);
     }
             
 private:

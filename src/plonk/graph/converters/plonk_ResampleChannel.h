@@ -119,6 +119,8 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {        
+        /* Be careful optimising this with the new NumericalArray vector stuff */
+        
         int i;
         
         const Data& data = this->getState();

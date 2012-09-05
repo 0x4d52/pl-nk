@@ -202,17 +202,13 @@ public:
         
         if ((leftBufferLength == outputBufferLength) && (rightBufferLength == outputBufferLength))
         {
-            for (i = 0; i < outputBufferLength; ++i) 
-                outputSamples[i] = op (leftSamples[i], rightSamples[i]);
+            NumericalArrayBinaryOp<SampleType,op>::calcNN (outputSamples, leftSamples, rightSamples, outputBufferLength);
         }
         else if (rightBufferLength == outputBufferLength)
         {
             if (leftBufferLength == 1)
             {
-                const SampleType leftValue (leftBuffer[0]);
-                
-                for (i = 0; i < outputBufferLength; ++i) 
-                    outputSamples[i] = op (leftValue, rightSamples[i]);
+                NumericalArrayBinaryOp<SampleType,op>::calc1N (outputSamples, leftSamples[0], rightSamples, outputBufferLength);
             }
             else
             {
@@ -232,10 +228,7 @@ public:
         {
             if (rightBufferLength == 1)
             {
-                const SampleType rightValue (rightBuffer[0]);
-                
-                for (i = 0; i < outputBufferLength; ++i) 
-                    outputSamples[i] = op (leftSamples[i], rightValue);
+                NumericalArrayBinaryOp<SampleType,op>::calcN1 (outputSamples, leftSamples, rightSamples[0], outputBufferLength);
             }
             else
             {

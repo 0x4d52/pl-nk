@@ -122,7 +122,6 @@ public:
                                     
         SampleType* const bufferSamples = buffer.getArray();
         
-        int i;
         int numSamplesRemaining = numWriteSamples;
         
         bool shouldMix = false;
@@ -166,11 +165,26 @@ public:
                                                     bufferSamplesRemaining);
 
             if (shouldMix)
-                for (i = 0; i < samplesThisTime; ++i)
-                    bufferSamples[bufferOffsetSamples + i] += sourceData[i];
+            {
+                NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (bufferSamples + bufferOffsetSamples, 
+                                                                          bufferSamples + bufferOffsetSamples,
+                                                                          sourceData,
+                                                                          samplesThisTime);
+            }
             else             
-                for (i = 0; i < samplesThisTime; ++i)
-                    bufferSamples[bufferOffsetSamples + i] = sourceData[i];
+            {
+                NumericalArray<SampleType>::copyData (bufferSamples + bufferOffsetSamples, 
+                                                      sourceData, 
+                                                      samplesThisTime);
+            }
+            
+
+//            if (shouldMix)
+//                for (i = 0; i < samplesThisTime; ++i)
+//                    bufferSamples[bufferOffsetSamples + i] += sourceData[i];
+//            else                         
+//                for (i = 0; i < samplesThisTime; ++i)
+//                    bufferSamples[bufferOffsetSamples + i] = sourceData[i];
 
             numSamplesRemaining -= samplesThisTime;
             sourceData += samplesThisTime;
@@ -185,9 +199,7 @@ public:
     void read (TimeStamp& readStartTime,
                const int numReadSamples, 
                SampleType* destData) throw()
-    {                        
-        int i;
-        
+    {                                
         const int currentBufferSize = bufferSize.getValue();
         const double currentSampleRate = sampleRate.getValue();
                 
@@ -217,8 +229,9 @@ public:
                 const int samplesThisTime = plonk::min (numSamplesRemaining, 
                                                         bufferSamplesRemaining);
                 
-                for (i = 0; i < samplesThisTime; ++i)
-                    destData[i] = bufferSamples[bufferOffsetSamples + i];
+                NumericalArray<SampleType>::copyData (destData, bufferSamples + bufferOffsetSamples, samplesThisTime);    
+//                for (i = 0; i < samplesThisTime; ++i)
+//                    destData[i] = bufferSamples[bufferOffsetSamples + i];
                 
                 numSamplesRemaining -= samplesThisTime;
                 
@@ -238,8 +251,9 @@ public:
             if ((diff > 0.0) && (diff >= readDiff))
                 this->growBufferSize();
             
-            for (i = 0; i < numReadSamples; ++i)
-                destData[i] = SampleType (0);
+            NumericalArray<SampleType>::zero (destData, numReadSamples);
+//            for (i = 0; i < numReadSamples; ++i)
+//                destData[i] = SampleType (0);
             
         }
 

@@ -158,11 +158,7 @@ public:
         {
             OutputSampleType temp;
             NumericalConverter::roundCopy (inputSamples[0], temp);
-            
-            const OutputSampleType value = temp;
-            
-            for (i = 0; i < outputBufferLength; ++i) 
-                outputSamples[i] = value;
+            NumericalArrayFiller<OutputSampleType>::fill (outputSamples, temp, outputBufferLength);
         }
         else
         {
@@ -171,7 +167,7 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {                
-                NumericalConverter::roundCopy(inputSamples[int (inputPosition)], outputSamples[i]);
+                NumericalConverter::roundCopy (inputSamples[int (inputPosition)], outputSamples[i]);
                 inputPosition += inputIncrement;
             }        
         }

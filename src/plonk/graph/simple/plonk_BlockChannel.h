@@ -106,8 +106,6 @@ public:
         plonk_assert (outputBufferLength == buffer.length());
         
         Buffer::copyData (outputSamples, bufferSamples, outputBufferLength);
-//        for (int i = 0; i < outputBufferLength; ++i)
-//            outputSamples[i] = bufferSamples[i];
     }
         
     void process (ProcessInfo& /*info*/, const int /*channel*/) throw()
