@@ -50,6 +50,175 @@
 #include "plonk_Int24.h"
 
     
+template<class NumericalType>
+class NumericalArrayFillerBase
+{
+public:
+    static inline void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = value;
+    }
+    
+    static inline void line (NumericalType* const dst, const UnsignedLong size, const NumericalType start, const NumericalType end) throw()
+	{
+        if (size >= 2)
+        {
+            double inc = double (end - start) / (size - 1);
+            double currentValue = start;
+            
+            for (int i = 0; i < size; ++i)
+            {
+                NumericalConverter::roundCopy (currentValue, dst[i]);
+                currentValue += inc;
+            }
+		}
+        else plonk_assertfalse;
+	}
+	
+	static inline void series (NumericalType* const dst,
+                               const UnsignedLong size, 
+                               const NumericalType start, 
+                               const NumericalType grow) throw()
+	{
+        if (size >= 2)
+        {                        
+            NumericalType currentValue = start;
+            
+            for (int i = 0; i < size; ++i)
+            {
+                dst[i] = currentValue;
+                currentValue += grow;
+            }
+		}
+        else plonk_assertfalse;
+	}
+	
+	static inline void geom (NumericalType* const dst,
+                             const UnsignedLong size, 
+                             const NumericalType start, 
+                             const NumericalType grow) throw()
+	{
+        if (size >= 2)
+        {                        
+            NumericalType currentValue = start;
+            
+            for (int i = 0; i < size; ++i)
+            {
+                dst[i] = currentValue;
+                currentValue *= grow;
+            }
+		}
+        else plonk_assertfalse;
+	}
+	
+	static inline void rand (NumericalType* const dst,
+                             const UnsignedLong size, 
+                             const NumericalType lower, 
+                             const NumericalType upper) throw()
+	{
+        if (size >= 1)
+        {                                    
+            for (int i = 0; i < size; ++i)
+                dst[i] = plonk::rand (lower, upper);
+		}
+        else plonk_assertfalse;
+    }
+    
+    static inline void rand (NumericalType* const dst,
+                             const UnsignedLong size, 
+                             const NumericalType upper) throw()
+    {
+        return rand (dst, size, NumericalType (0), upper);
+    }
+	
+	static inline void rand2 (NumericalType* const dst,
+                              const UnsignedLong size, 
+                              const NumericalType positive) throw()
+	{
+		return rand (dst, size, -positive, positive);
+	}
+	
+	static inline void exprand (NumericalType* const dst,
+                                const UnsignedLong size, 
+                                const NumericalType lower, 
+                                const NumericalType upper) throw()
+	{
+        if (size >= 1)
+        {                                    
+            for (int i = 0; i < size; ++i)
+                dst[i] = plonk::exprand (lower, upper);
+		}
+        else plonk_assertfalse;
+	}
+};
+
+template<class NumericalType>
+class NumericalArrayFiller : public NumericalArrayFillerBase<NumericalType>
+{
+};
+
+template<>
+class NumericalArrayFiller<float> : public NumericalArrayFillerBase<float>
+{
+public:
+    static inline void fill (float* const dst, const float value, const UnsignedLong numItems) throw()
+    {        
+        pl_VectorFillF_N1 (dst, value, numItems);
+    }
+    
+    static inline void line (float* const dst, const UnsignedLong size, const float start, const float end) throw()
+	{
+        if (size >= 2)
+        {
+            pl_VectorLineF_N11 (dst, start, end, size);
+		}
+        else plonk_assertfalse;
+	}
+	
+	static inline void series (float* const dst,
+                               const UnsignedLong size, 
+                               const float start, 
+                               const float grow) throw()
+	{
+        if (size >= 2)
+        {                        
+            pl_VectorRampF_N11 (dst, start, grow, size);
+		}
+        else plonk_assertfalse;
+	}
+};
+
+template<>
+class NumericalArrayFiller<double> : public NumericalArrayFillerBase<double>
+{
+public:
+    static inline void fill (double* const dst, const float value, const UnsignedLong numItems) throw()
+    {        
+        pl_VectorFillD_N1 (dst, value, numItems);
+    }
+    
+    static inline void line (double* const dst, const UnsignedLong size, const double start, const double end) throw()
+	{
+        if (size >= 2)
+        {
+            pl_VectorLineD_N11 (dst, start, end, size);
+		}
+        else plonk_assertfalse;
+	}
+	
+	static inline void series (double* const dst,
+                               const UnsignedLong size, 
+                               const double start, 
+                               const double grow) throw()
+	{
+        if (size >= 2)
+        {                        
+            pl_VectorRampD_N11 (dst, start, grow, size);
+		}
+        else plonk_assertfalse;
+	}
+};
 
 
 template<class NumericalType, class OtherType>
@@ -178,14 +347,15 @@ public:
         const UnsignedLong numRemain = numItems & PLANK_SIMDF_MASK;
         
         DstType* dstPtr = dst;
+        const float* srcPtr = src;
         
-        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDF_LENGTH)
+        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDF_LENGTH, srcPtr += PLANK_SIMDF_LENGTH)
         {
             pl_VectorMulF_NN1 (temp, src, factor, PLANK_SIMDF_LENGTH);
             NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, PLANK_SIMDF_LENGTH);
         }
         
-        if (numRemain > 0)
+        if (numRemain)
         {
             pl_VectorMulF_NN1 (temp, src, factor, numRemain);
             NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, numRemain);
@@ -208,14 +378,15 @@ public:
         const UnsignedLong numRemain = numItems & PLANK_SIMDD_MASK;
         
         DstType* dstPtr = dst;
-        
-        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDD_LENGTH)
+        const double* srcPtr = src;
+
+        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDD_LENGTH, srcPtr += PLANK_SIMDD_LENGTH)
         {
             pl_VectorMulD_NN1 (temp, src, factor, PLANK_SIMDD_LENGTH);
             NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, PLANK_SIMDD_LENGTH);
         }
         
-        if (numRemain > 0)
+        if (numRemain)
         {
             pl_VectorMulD_NN1 (temp, src, factor, numRemain);
             NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, numRemain);
@@ -261,7 +432,7 @@ public:
     static inline void convertDirect (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
-            dst[i] = src[i];
+            dst[i] = Int24 (src[i]);
     }
     
     static inline void convertScaled (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
@@ -300,6 +471,143 @@ public:
         else                Base::convertDirect (dst, src, numItems);
     }
 };
+
+//------------------------------------------------------------------------------
+
+template<class NumericalType, PLONK_BINARYOPFUNCTION(NumericalType, op)>
+class NumericalArrayBinaryOpBase
+{
+public:
+    static inline void calcNN (NumericalType* dst, const NumericalType* left, const NumericalType* right, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = op (left[i], right[i]);
+    }
+    
+    static inline void calcN1 (NumericalType* dst, const NumericalType* left, const NumericalType right, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = op (left[i], right);
+    }
+    
+    static inline void calc1N (NumericalType* dst, const NumericalType left, const NumericalType* right, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = op (left, right[i]);
+    }
+};
+
+template<class NumericalType, PLONK_BINARYOPFUNCTION(NumericalType, op)>
+class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,op>
+{
+};
+
+#define PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE,PLONKOP,PLANKOP)\
+    template<>\
+    class NumericalArrayBinaryOp<Plank##TYPECODE,PLONKOP> : public NumericalArrayBinaryOpBase<Plank##TYPECODE,PLONKOP> {\
+    public:\
+        static inline void calcNN (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
+            pl_Vector##PLANKOP##TYPECODE##_NNN (dst, left, right, numItems);\
+        }\
+        \
+        static inline void calcN1 (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE right, const UnsignedLong numItems) throw() {\
+            pl_Vector##PLANKOP##TYPECODE##_NN1 (dst, left, right, numItems);\
+        }\
+        \
+        static inline void calc1N (Plank##TYPECODE* dst, const Plank##TYPECODE left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
+            pl_Vector##PLANKOP##TYPECODE##_N1N (dst, left, right, numItems);\
+        }\
+    }
+
+#define PLONK_NUMERICALARRAYBINARYOPS_DEFINE(TYPECODE)\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::addop, Add);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::subop, Sub);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::mulop, Mul);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::divop, Div);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::min, Min);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::max, Max);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::pow, Pow);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isEqualTo, IsEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isNotEqualTo, IsNotEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isGreaterThan, IsGreaterThan);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isGreaterThanOrEqualTo, IsGreaterThanOrEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isLessThan, IsLessThan);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isLessThanOrEqualTo, IsLessThanOrEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::hypot, Hypot);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::atan2, Atan2);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::sumsqr, SumSqr);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::difsqr, DifSqr);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::sqrsum, SqrSum);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::sqrdif, SqrDif);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::absdif, AbsDif);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::thresh, Thresh)
+
+PLONK_NUMERICALARRAYBINARYOPS_DEFINE(F);
+PLONK_NUMERICALARRAYBINARYOPS_DEFINE(D);
+
+//------------------------------------------------------------------------------
+
+template<class NumericalType, PLONK_UNARYOPFUNCTION(NumericalType, op)>
+class NumericalArrayUnaryOpBase
+{
+public:
+    static inline void calc (NumericalType* dst, const NumericalType* src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = op (src[i]);
+    }    
+};
+
+template<class NumericalType, PLONK_UNARYOPFUNCTION(NumericalType, op)>
+class NumericalArrayUnaryOp : public NumericalArrayUnaryOpBase<NumericalType,op>
+{
+};
+
+#define PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE,PLONKOP,PLANKOP)\
+    template<>\
+    class NumericalArrayUnaryOp<Plank##TYPECODE,PLONKOP> : public NumericalArrayUnaryOpBase<Plank##TYPECODE,PLONKOP> {\
+    public:\
+        static inline void calc (Plank##TYPECODE* dst, const Plank##TYPECODE* src, const UnsignedLong numItems) throw() {\
+            pl_Vector##PLANKOP##TYPECODE##_NN (dst, src, numItems);\
+        }\
+    }
+
+#define PLONK_NUMERICALARRAYUNARYOPS_DEFINE(TYPECODE)\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::move, Move);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::neg, Neg);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::abs, Abs);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::log2, Log2);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::reciprocal, Reciprocal);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sin, Sin);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::cos, Cos);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::tan, Tan);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::asin, Asin);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::acos, Acos);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::atan, Atan);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sinh, Sinh);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::cosh, Cosh);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::tanh, Tanh);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sqrt, Sqrt);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::log, Log);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::log10, Log10);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::exp, Exp);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::squared, Squared);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::cubed, Cubed);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::ceil, Ceil);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::floor, Floor);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::frac, Frac);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sign , Sign);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::m2f, M2F);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::f2m, F2M);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::a2dB, A2dB);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::dB2a, dB2A);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::d2r, D2R);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::r2d, R2D);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::distort, Distort);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::zap, Zap)
+
+PLONK_NUMERICALARRAYUNARYOPS_DEFINE(F);
+PLONK_NUMERICALARRAYUNARYOPS_DEFINE(D);
 
 
 //------------------------------------------------------------------------------
@@ -443,6 +751,22 @@ public:
         Memory::zero (dst, numItems * sizeof (NumericalType));
     }
     
+    static inline void fill (NumericalType* const dst, const NumericalType value, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayFiller<NumericalType>::fill (dst, value, numItems);
+    }
+    
+    inline void fill (const NumericalType value) throw()
+    {
+        const int length = this->length();
+        
+        if (length > 0)
+        {
+            NumericalType *thisArray = this->getArray();
+            NumericalArrayFiller<NumericalType>::fill (this->getArray(), value, length);
+        }
+    }
+    
     inline NumericalArray (NumericalArray const& copy) throw()
 	:	Base (static_cast<Base const&> (copy))
 	{
@@ -452,7 +776,7 @@ public:
     inline NumericalArray& operator= (NumericalArray const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}
@@ -554,17 +878,8 @@ public:
 		const int numValues = size < 2 ? 2 : size;
 		
 		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
-		
-		double inc = double(end - start) / (numValues - 1);
-		double currentValue = start;
-		NumericalType *outputValues = newArray.getArray();
-		
-		for (int i = 0; i < numValues; ++i)
-		{
-            NumericalConverter::roundCopy (currentValue, outputValues[i]);
-			currentValue += inc;
-		}
-		
+        NumericalArrayFiller<NumericalType>::line (newArray.getArray(), numValues, start, end);
+
 		return newArray;
 	}
 	
@@ -578,18 +893,9 @@ public:
 		const int numValues = size < 2 ? 2 : size;
 		
 		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
+        NumericalArrayFiller<NumericalType>::series (newArray.getArray(), numValues, start, grow);
 		
-		NumericalType currentValue = start;
-		NumericalType *outputValues = newArray.getArray();
-		
-		for (int i = 0; i < numValues; ++i)
-		{
-			outputValues[i] = currentValue;
-			currentValue += grow;
-		}
-		
-		return newArray;
-		
+		return newArray;		
 	}
 	
 	/** Creates a NumericalArray with a given size (length) using a geometric series. */
@@ -602,15 +908,7 @@ public:
 		const int numValues = size < 2 ? 2 : size;
 		
 		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
-		
-		NumericalType currentValue = start;
-		NumericalType *outputValues = newArray.getArray();
-		
-		for (int i = 0; i < numValues; i++)
-		{
-			outputValues[i] = currentValue;
-			currentValue *= grow;
-		}
+        NumericalArrayFiller<NumericalType>::geom (newArray.getArray(), numValues, start, grow);
 		
 		return newArray;		
 	}
@@ -626,12 +924,7 @@ public:
 		const int numValues = size < 1 ? 1 : size;
 		
 		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
-		NumericalType *outputValues = newArray.getArray();
-		
-		for (int i = 0; i < numValues; i++)
-		{
-			outputValues[i] = plonk::rand (lower, upper);
-		}
+        NumericalArrayFiller<NumericalType>::rand (newArray.getArray(), numValues, lower, upper);
 		
 		return newArray;
 	}
@@ -641,7 +934,14 @@ public:
     static NumericalArray<NumericalType> rand (const int size, 
 											   const NumericalType upper) throw()
     {
-        return rand (size, NumericalType (0), upper);
+		plonk_assert (size > 0);
+		
+		const int numValues = size < 1 ? 1 : size;
+		
+		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
+        NumericalArrayFiller<NumericalType>::rand (newArray.getArray(), numValues, upper);
+		
+		return newArray;
     }
 	
 	/** Creates a NumericalArray with a given size (length) randomly distributed. 
@@ -649,7 +949,14 @@ public:
 	static NumericalArray<NumericalType> rand2 (const int size, 
 											    const NumericalType positive) throw()
 	{
-		return rand (size, -positive, positive);
+		plonk_assert (size > 0);
+		
+		const int numValues = size < 1 ? 1 : size;
+		
+		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
+        NumericalArrayFiller<NumericalType>::rand2 (newArray.getArray(), numValues, positive);
+		
+		return newArray;
 	}
 	
 	/** Creates a NumericalArray with a given size (length) with an exponential random distribution. 
@@ -665,37 +972,11 @@ public:
 		const int numValues = size < 1 ? 1 : size;
 		
 		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
-		NumericalType *outputValues = newArray.getArray();
-		
-		for (int i = 0; i < numValues; i++)
-		{
-			outputValues[i] = plonk::exprand (lower, upper);
-		}
+        NumericalArrayFiller<NumericalType>::exprand (newArray.getArray(), numValues, lower, upper);
 		
 		return newArray;
 	}
 	
-//	/** Creates a NumericalArray with a given size (length) with a linear random distribution. */
-//	static NumericalArray<NumericalType> linrand (const int size, 
-//												  const NumericalType lower, 
-//												  const NumericalType upper) throw()
-//	{
-//		plonk_assert (size > 0);
-//		
-//		const int numValues = size < 1 ? 1 : size;
-//		
-//		NumericalArray<NumericalType> newArray = NumericalArray<NumericalType>::withSize (numValues);
-//		NumericalType *outputValues = newArray.getArray();
-//		NumericalType diff = upper-lower;
-//		
-//		for (int i = 0; i < numValues; i++)
-//		{
-//            NumericalType value = plonk::rand (diff);
-//			outputValues[i] = plonk::rand (value) + lower;
-//		}
-//		
-//		return newArray;
-//	}
 	
 	/** Creates a NumericalArray with a given size (length) containing one or more sine tables. */
 	static NumericalArray<NumericalType> sineTable (const int size, 
@@ -809,13 +1090,7 @@ public:
 		NumericalType *thisArray = this->getArray();
 		
 		if (thisArray != 0)
-		{
-			const int size = this->size();
-			for (int i = 0; i < size; ++i)
-			{
-				thisArray[i] = nullTerminatedSourceArray[i];
-			}			
-		}
+            copyData (thisArray, nullTerminatedSourceArray, this->size());
 	}
 	
 	/** Creates an array by copying data from another source. */
@@ -831,22 +1106,16 @@ public:
 		NumericalType *thisArray = result.getArray();
 		
 		if (thisArray != 0)
-		{
-            int i;
-            
+		{            
 			if (needsNullTermination)
 			{
-				const int length = size - 1;
-				
-                for (i = 0; i < length; ++i)
-					thisArray[i] = sourceArray[i];
-
-				thisArray[length] = 0;
+				const int length = size - 1;				
+                copyData (thisArray, sourceArray, length);
+				thisArray[length] = NumericalType (0);
 			}
 			else
 			{
-				for (i = 0; i < size; ++i)
-					thisArray[i] = sourceArray[i];
+                copyData (thisArray, sourceArray, size);
 			}
 		}
 		
@@ -1140,8 +1409,15 @@ public:
         
         if (leftLength == rightLength)
         {
-            for (i = 0; i < newLength; ++i)	
-                resultArray[i] = op (leftArray[i], rightArray[i]);			
+            NumericalArrayBinaryOp<NumericalType,op>::calcNN (resultArray, leftArray, rightArray, newLength);            
+        }
+        else if (rightLength == 1)
+        {
+            NumericalArrayBinaryOp<NumericalType,op>::calcN1 (resultArray, leftArray, rightArray[0], newLength);            
+        }
+        else if (leftLength == 1)
+        {
+            NumericalArrayBinaryOp<NumericalType,op>::calc1N (resultArray, leftArray[0], rightArray, newLength);            
         }
         else
         {
@@ -1166,8 +1442,7 @@ public:
         const NumericalType *thisArray = this->getArray();
         NumericalType *resultArray = result.getArray();
         
-        for (int i = 0; i < newSize; i++)
-            resultArray[i] = op (thisArray[i]);
+        NumericalArrayUnaryOp<NumericalType,op>::calc (resultArray, thisArray, newLength); // was newSize but ure that was a bug
         
         if (needsNull) 
             resultArray[newLength] = 0;
@@ -1183,12 +1458,7 @@ public:
 		NumericalType *array = this->getArray();
 		
 		if (array != 0)
-		{
-			const int size = this->size();
-			
-            for (int i = 0; i < size; ++i)
-				array[i] = NumericalType (0);
-		}		
+            zeroData (array, this->size());            
 	}
     
     NumericalType findMaximum() const throw()
@@ -1204,9 +1474,7 @@ public:
                 result = array[0];
             
             for (int i = 1; i < length; ++i)
-            {
                 result = plonk::max (result, array[i]);
-            }            
 		}		
         
         return result;
@@ -1225,9 +1493,7 @@ public:
                 result = array[0];
             
             for (int i = 1; i < length; ++i)
-            {
                 result = plonk::max (result, plonk::abs (array[i]));
-            }            
 		}		
         
         return result;
@@ -1247,9 +1513,7 @@ public:
                 result = array[0];
             
             for (int i = 1; i < length; ++i)
-            {
                 result = plonk::min (result, array[i]);
-            }            
 		}		
         
         return result;

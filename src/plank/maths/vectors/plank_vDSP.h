@@ -298,12 +298,8 @@ static inline void pl_VectorCubedF_NN (float *result, const float* a, PlankUL N)
 }
 
 static inline void pl_VectorFracF_NN (float *result, const float* a, PlankUL N) 
-{ 
-    // vDSP_vfrac!!
-    float mone = -1.f;
-    pl_VectorFloorF_NN (result, a, N);
-    vDSP_vsmul (result, 1, &mone, result, 1, N); 
-    vDSP_vadd ((float*)a, 1, result, 1, result, 1, N);    
+{     
+    vDSP_vfrac ((float*)a, 1, result, 1, N);
 }
 
 PLANK_VECTORUNARYOP_DEFINE(Sign,F)
@@ -315,34 +311,57 @@ static inline void pl_VectorM2FF_NN (float *result, const float* a, PlankUL N)
     float a440 = 440.f;
     int i;
     
-    vDSP_vsadd ((float*)a, 1, &m69, result, 1, N);
-    vDSP_vsdiv (result, 1, &twelve, result, 1, N);
+    PLANK_ALIGN (PLANK_SIMDF_LENGTH * sizeof (float))
+    float temp[PLANK_SIMDF_LENGTH];
+    int Nsimd = N >> PLANK_SIMDF_SHIFT;
+    int Nremain = N & PLANK_SIMDF_MASK;
+
+    for (i = 0; i < Nsimd; ++i, result += PLANK_SIMDF_LENGTH, a += PLANK_SIMDF_LENGTH)
+    {
+        vDSP_vsadd ((float*)a, 1, &m69, result, 1, PLANK_SIMDF_LENGTH);
+        vDSP_vsdiv (result, 1, &twelve, temp, 1, PLANK_SIMDF_LENGTH);
+        pl_VectorPowF_N1N (result, 2.f, temp, PLANK_SIMDF_LENGTH);        
+        vDSP_vsmul (result, 1, &a440, result, 1, PLANK_SIMDF_LENGTH);
+    }
     
-    for (i = 0; i < N; ++i)
-        result[i] = pl_PowF (2.f, result[i]);
-    
-    vDSP_vsmul(result, 1, &a440, result, 1, N);
+    if (Nremain)
+    {
+        vDSP_vsadd ((float*)a, 1, &m69, result, 1, Nremain);
+        vDSP_vsdiv (result, 1, &twelve, temp, 1, Nremain);
+        pl_VectorPowF_N1N (result, 2.f, temp, Nremain);        
+        vDSP_vsmul (result, 1, &a440, result, 1, Nremain);
+    }
 }
 
 PLANK_VECTORUNARYOP_DEFINE(F2M,F)
 
 static inline void pl_VectorA2dBF_NN (float *result, const float* a, PlankUL N) 
 {
-    //vDSP_vdbcon
-    float twenty = 20.f;
-    pl_VectorLog10F_NN (result, a, N);
-    vDSP_vsmul (result, 1, &twenty, result, 1, N);
+    float one = 1.f;
+    vDSP_vdbcon ((float*)a, 1, &one, result, 1, N, 1);
 }
     
 static inline void pl_VectordB2AF_NN (float *result, const float* a, PlankUL N) 
 {
     float twenty = 20.f;
-    int i;
+    int i;    
     
-    vDSP_vsdiv ((float*)a, 1, &twenty, result, 1, N);
+    PLANK_ALIGN (PLANK_SIMDF_LENGTH * sizeof (float))
+    float temp[PLANK_SIMDF_LENGTH];
+    int Nsimd = N >> PLANK_SIMDF_SHIFT;
+    int Nremain = N & PLANK_SIMDF_MASK;
     
-    for (i = 0; i < N; ++i)
-        result[i] = pl_PowF (10.f, result[i]);
+    for (i = 0; i < Nsimd; ++i, result += PLANK_SIMDF_LENGTH, a += PLANK_SIMDF_LENGTH)
+    {
+        vDSP_vsdiv ((float*)a, 1, &twenty, temp, 1, PLANK_SIMDF_LENGTH);
+        pl_VectorPowF_N1N (result, 10.f, temp, PLANK_SIMDF_LENGTH);        
+    }
+    
+    if (Nremain)
+    {
+        vDSP_vsdiv ((float*)a, 1, &twenty, temp, 1, Nremain);
+        pl_VectorPowF_N1N (result, 10.f, temp, Nremain);
+    }
 }
 
 PLANK_VECTORUNARYOP_DEFINE(D2R,F)
@@ -522,12 +541,12 @@ static inline void pl_VectorClearD_N (double *result, PlankUL N)
     vDSP_vclrD (result, 1, N);
 }
 
-static inline void pl_VectorRampD_N1 (double *result, double a, double b, PlankUL N) 
+static inline void pl_VectorRampD_N11 (double *result, double a, double b, PlankUL N) 
 { 
     vDSP_vrampD (&a, &b, result, 1, N); 
 }
 
-static inline void pl_VectorLineD_N1 (double *result, double a, double b, PlankUL N) 
+static inline void pl_VectorLineD_N11 (double *result, double a, double b, PlankUL N) 
 { 
     vDSP_vgenD (&a, &b, result, 1, N); 
 }

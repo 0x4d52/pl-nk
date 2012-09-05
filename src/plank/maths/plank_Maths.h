@@ -88,12 +88,16 @@
 #define PLANK_INT24PEAK_D ((double)PLANK_INT24PEAK_I)
 
 
-#define PLANK_SIMDF_LENGTH 4  // vector 4
-#define PLANK_SIMDF_SHIFT 2   // divide by 4
-#define PLANK_SIMDF_MASK 3    // remainder
-#define PLANK_SIMDD_LENGTH 2  // vector 4
-#define PLANK_SIMDD_SHIFT 1   // divide by 4
-#define PLANK_SIMDD_MASK 1    // remainder
+#if 1 // just to remind us theses should be dependent on the CPU..
+#define PLANK_SIMDF_LENGTH  4   // vector 4 floats
+#define PLANK_SIMDF_SHIFT   2   // divide by 4 for length
+#define PLANK_SIMDF_MASK    3   // remainder mask for non-multiples of 4
+#define PLANK_SIMDD_LENGTH  2   // vector 2 doubles
+#define PLANK_SIMDD_SHIFT   1   // divide by 2 for length
+#define PLANK_SIMDD_MASK    1   // remainder mask for non-even lengths
+#endif
+
+
 
 #if (defined (_WIN32) || defined (_WIN64))
 //    #define PLANK_INC(a) a = a + 1
