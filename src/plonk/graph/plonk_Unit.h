@@ -1200,6 +1200,16 @@ public:
         return TypeUtility<SampleType>::getTypeCode();
     }          
     
+    typename TypeUtility<SampleType>::PeakType getTypePeak() const throw()
+    {
+        return TypeUtility<SampleType>::getTypePeak();
+    }
+    
+    typename TypeUtility<SampleType>::IndexType getTypeScale() const throw()
+    {
+        return TypeUtility<SampleType>::getTypeScale();
+    }
+    
     PLONK_OBJECTARROWOPERATOR(UnitBase);
     
 private:

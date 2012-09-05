@@ -4135,6 +4135,7 @@ public:
     
     static inline Text getTypeName()                 { return TypeCode::getName (TypeUtility<Type>::getTypeCode()); }
     static inline PeakType getTypePeak()             { return TypeCode::getPeak (TypeUtility<Type>::getTypeCode()); }
+    static inline IndexType getTypeScale()           { return Math<IndexType>::get1() / getTypePeak(); }
     static inline double getTypeEpsilon()            { return TypeCode::getEpsilon (TypeUtility<Type>::getTypeCode()); }
     static inline Text getIndexTypeName()            { return TypeCode::getName (TypeUtility<IndexType>::getTypeCode()); }
 
