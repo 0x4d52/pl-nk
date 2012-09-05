@@ -701,7 +701,7 @@ private:
         Debug debug;
     };
 
-    PLONK_ALIGN(sizeof(Union)) Union u;
+    PLONK_ALIGN(sizeof(PlankAtomicPX)) Union u;
 };
 
 

@@ -146,10 +146,10 @@ double Int24::toDouble() const throw()
     return double (pl_ConvertI24ToI (data));
 }
 
-Int24::Internal Int24::getRaw() const throw()
-{
-    return data;
-}
+//Int24::Internal Int24::getRaw() const throw()
+//{
+//    return data;
+//}
 
 Int24 Int24::operator~() const throw()
 {
@@ -191,155 +191,155 @@ Int24 Int24::operator-- (int) throw()
     return result;    
 }
 
-Int24 Int24::operator+ (Int24 const& leftOperand) const throw()
+Int24 Int24::operator+ (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) + pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) + pl_ConvertI24ToI (rightOperand.data));
     return result;
 }
 
-Int24 Int24::operator- (Int24 const& leftOperand) const throw()
+Int24 Int24::operator- (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) - pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) - pl_ConvertI24ToI (rightOperand.data));
     return result;
 }
 
-Int24 Int24::operator* (Int24 const& leftOperand) const throw()
+Int24 Int24::operator* (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) * pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) * pl_ConvertI24ToI (rightOperand.data));
     return result;
 }
 
-Int24 Int24::operator/ (Int24 const& leftOperand) const throw()
+Int24 Int24::operator/ (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) / pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) / pl_ConvertI24ToI (rightOperand.data));
     return result;
 }
 
-Int24 Int24::operator% (Int24 const& leftOperand) const throw()
+Int24 Int24::operator% (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) % pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) % pl_ConvertI24ToI (rightOperand.data));
     return result;
 }
 
-Int24 Int24::operator| (Int24 const& leftOperand) const throw()
+Int24 Int24::operator| (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) | pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) | pl_ConvertI24ToI (rightOperand.data));
     return result;    
 }
 
-Int24 Int24::operator& (Int24 const& leftOperand) const throw()
+Int24 Int24::operator& (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) & pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) & pl_ConvertI24ToI (rightOperand.data));
     return result;        
 }
 
-Int24 Int24::operator^ (Int24 const& leftOperand) const throw()
+Int24 Int24::operator^ (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) ^ pl_ConvertI24ToI (leftOperand.data));
+    result.data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) ^ pl_ConvertI24ToI (rightOperand.data));
     return result;            
 }
 
-Int24 Int24::pow (Int24 const& leftOperand) const throw()
+Int24 Int24::pow (Int24 const& rightOperand) const throw()
 {
     Int24 result;
-    result.data = pl_ConvertIToI24 (plonk::pow (pl_ConvertI24ToI (data), pl_ConvertI24ToI (leftOperand.data)));
+    result.data = pl_ConvertIToI24 (plonk::pow (pl_ConvertI24ToI (data), pl_ConvertI24ToI (rightOperand.data)));
     return result;            
 }
 
-Int24& Int24::operator+= (Int24 const& leftOperand) throw()
+Int24& Int24::operator+= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) + pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) + pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-Int24& Int24::operator-= (Int24 const& leftOperand) throw()
+Int24& Int24::operator-= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) - pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) - pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-Int24& Int24::operator*= (Int24 const& leftOperand) throw()
+Int24& Int24::operator*= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) * pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) * pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-Int24& Int24::operator/= (Int24 const& leftOperand) throw()
+Int24& Int24::operator/= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) / pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) / pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-Int24& Int24::operator%= (Int24 const& leftOperand) throw()
+Int24& Int24::operator%= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) % pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) % pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-Int24& Int24::operator|= (Int24 const& leftOperand) throw()
+Int24& Int24::operator|= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) | pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) | pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-Int24& Int24::operator&= (Int24 const& leftOperand) throw()
+Int24& Int24::operator&= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) & pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) & pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-Int24& Int24::operator^= (Int24 const& leftOperand) throw()
+Int24& Int24::operator^= (Int24 const& rightOperand) throw()
 {
-    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) ^ pl_ConvertI24ToI (leftOperand.data));
+    data = pl_ConvertIToI24 (pl_ConvertI24ToI (data) ^ pl_ConvertI24ToI (rightOperand.data));
     return *this;
 }
 
-bool Int24::operator== (Int24 const& leftOperand) const throw()
+bool Int24::operator== (Int24 const& rightOperand) const throw()
 {
-    return pl_ConvertI24ToI (data) == pl_ConvertI24ToI (leftOperand.data);
+    return pl_ConvertI24ToI (data) == pl_ConvertI24ToI (rightOperand.data);
 }
 
-bool Int24::operator!= (Int24 const& leftOperand) const throw()
+bool Int24::operator!= (Int24 const& rightOperand) const throw()
 {
-    return pl_ConvertI24ToI (data) != pl_ConvertI24ToI (leftOperand.data);
+    return pl_ConvertI24ToI (data) != pl_ConvertI24ToI (rightOperand.data);
 }
 
-bool Int24::operator< (Int24 const& leftOperand) const throw()
+bool Int24::operator< (Int24 const& rightOperand) const throw()
 {
-    return pl_ConvertI24ToI (data) < pl_ConvertI24ToI (leftOperand.data);
+    return pl_ConvertI24ToI (data) < pl_ConvertI24ToI (rightOperand.data);
 }
 
-bool Int24::operator<= (Int24 const& leftOperand) const throw()
+bool Int24::operator<= (Int24 const& rightOperand) const throw()
 {
-    return pl_ConvertI24ToI (data) <= pl_ConvertI24ToI (leftOperand.data);
+    return pl_ConvertI24ToI (data) <= pl_ConvertI24ToI (rightOperand.data);
 }
 
-bool Int24::operator> (Int24 const& leftOperand) const throw()
+bool Int24::operator> (Int24 const& rightOperand) const throw()
 {
-    return pl_ConvertI24ToI (data) > pl_ConvertI24ToI (leftOperand.data);
+    return pl_ConvertI24ToI (data) > pl_ConvertI24ToI (rightOperand.data);
 }
 
-bool Int24::operator>= (Int24 const& leftOperand) const throw()
+bool Int24::operator>= (Int24 const& rightOperand) const throw()
 {
-    return pl_ConvertI24ToI (data) >= pl_ConvertI24ToI (leftOperand.data);
+    return pl_ConvertI24ToI (data) >= pl_ConvertI24ToI (rightOperand.data);
 }
 
-bool Int24::operator&& (Int24 const& leftOperand) const throw()
+bool Int24::operator&& (Int24 const& rightOperand) const throw()
 {
-    return (pl_ConvertI24ToI (data) != 0) && (pl_ConvertI24ToI (leftOperand.data) != 0);
+    return (pl_ConvertI24ToI (data) != 0) && (pl_ConvertI24ToI (rightOperand.data) != 0);
 }
 
-bool Int24::operator|| (Int24 const& leftOperand) const throw()
+bool Int24::operator|| (Int24 const& rightOperand) const throw()
 {
-    return (pl_ConvertI24ToI (data) != 0) || (pl_ConvertI24ToI (leftOperand.data) != 0);
+    return (pl_ConvertI24ToI (data) != 0) || (pl_ConvertI24ToI (rightOperand.data) != 0);
 }
 
 Int24 Int24::operator<< (const int shift) const throw()
@@ -368,6 +368,8 @@ Int24& Int24::operator>>= (const int shift) throw()
     return *this;
 }                             
 
+// global functions
+
 std::istream& operator>> (std::istream &inputStream, Int24& value)
 {
     int intValue;
@@ -381,5 +383,15 @@ std::ostream& operator<< (std::ostream &outputStream, Int24 const& value)
     outputStream << (int)value;
     return outputStream;
 }
+
+//const LongLong operator+ (Int24 const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    return pl_ConvertI24ToI (leftOperand.getRaw()) + pl_ConvertI24ToI (rightOperand.getRaw());
+//}
+//
+//const float operator+ (float const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    return leftOperand + float (pl_ConvertI24ToI (rightOperand.getRaw()));
+//}
 
 END_PLONK_NAMESPACE

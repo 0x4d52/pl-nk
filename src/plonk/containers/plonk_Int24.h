@@ -97,7 +97,7 @@ public:
     int toInt() const throw();
     float toFloat() const throw();
     double toDouble() const throw();
-    Internal getRaw() const throw();
+    inline const Internal& getRaw() const throw() { return data; }
     
     Int24 operator~() const throw();
     Int24 operator-() const throw();
@@ -114,7 +114,7 @@ public:
     Int24 operator| (Int24 const& rightOperand) const throw();
     Int24 operator& (Int24 const& rightOperand) const throw();
     Int24 operator^ (Int24 const& rightOperand) const throw();
-
+    
     Int24 pow (Int24 const& rightOperand) const throw();
     
     Int24& operator+= (Int24 const& rightOperand) throw();
@@ -148,13 +148,68 @@ private:
     Internal data;
 } PLONK_PACKED;
 
+#if PLANK_WIN
+#pragma pack (pop)
+#endif
+
+#undef PLONK_PACKED
+
+template<> class BinaryOpTypeUtility<double,Int24>   { public: typedef double CalcType; };
+template<> class BinaryOpTypeUtility<Int24,double>   { public: typedef double CalcType; };
+template<> class BinaryOpTypeUtility<char,Int24>     { public: typedef int CalcType; };
+template<> class BinaryOpTypeUtility<Int24,char>     { public: typedef int CalcType; };
+template<> class BinaryOpTypeUtility<short,Int24>    { public: typedef LongLong CalcType; };
+template<> class BinaryOpTypeUtility<Int24,short>    { public: typedef LongLong CalcType; };
+template<> class BinaryOpTypeUtility<Int24,LongLong> { public: typedef LongLong CalcType; };
+template<> class BinaryOpTypeUtility<LongLong,Int24> { public: typedef LongLong CalcType; };
+template<> class BinaryOpTypeUtility<Int24,Int24>    { public: typedef LongLong CalcType; };
+
+template<class OtherType>
+class Int24Ops
+{
+public:
+    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
+    typedef CalcType ReturnType;
+
+    static inline ReturnType addop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    {
+        return CalcType (leftOperand) + CalcType (rightOperand);
+    }
+    
+    static inline ReturnType subop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    {
+        return CalcType (leftOperand) - CalcType (rightOperand);
+    }
+
+    static inline ReturnType mulop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    {
+        return CalcType (leftOperand) * CalcType (rightOperand);
+    }
+
+    static inline ReturnType divop (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+    {
+        return CalcType (leftOperand) / CalcType (rightOperand);
+    }
+
+};
+
+//template<class OtherType>
+//const typename Int24Ops<OtherType>::ReturnType operator+ (OtherType leftOperand, Int24 const& rightOperand) throw()
+//{
+//    return Int24Ops<OtherType>::addop (leftOperand, rightOperand);
+//}
+//
+//const LongLong operator+ (Int24 const& leftOperand, Int24 const& rightOperand) throw();
+//const float operator+ (float const& leftOperand, Int24 const& rightOperand) throw();
+
+
 //template<class OtherType>
 //const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator+ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
 //{
 //    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
 //    return CalcType (leftOperand) + CalcType (rightOperand);
 //}
-//
+
 //template<class OtherType>
 //const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator- (OtherType const& leftOperand, Int24 const& rightOperand) throw()
 //{
@@ -200,14 +255,6 @@ private:
 //{
 //    return Int24 (LongLong (leftOperand) ^ LongLong (rightOperand));
 //}
-
-
-
-#if PLANK_WIN
-    #pragma pack (pop)
-#endif
-
-#undef PLONK_PACKED
 
 std::istream& operator>> (std::istream &inputStream, Int24& value);
 std::ostream& operator<< (std::ostream &outputStream, Int24 const& value);

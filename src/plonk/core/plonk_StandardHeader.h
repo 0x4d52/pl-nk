@@ -251,6 +251,87 @@ struct ForceErrorStruct { int dummy; };
 
 #include "plonk_Memory.h"
 
+template<class TypeA, class TypeB>
+class BinaryOpTypeUtility
+{
+public:
+    typedef double CalcType;
+};
+
+#define PLONK_BINARYOPTYPEUTILITY_DEFINE(TYPEA,TYPEB,CALCTYPE)\
+    template<> class BinaryOpTypeUtility<TYPEA,TYPEB>\
+    {\
+    public:\
+        typedef CALCTYPE CalcType;\
+    }
+
+PLONK_BINARYOPTYPEUTILITY_DEFINE(float,float,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(float,int,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(int,float,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(float,short,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(short,float,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(float,char,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(char,float,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(float,LongLong,float);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(LongLong,float,float);
+
+PLONK_BINARYOPTYPEUTILITY_DEFINE(double,double,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(double,int,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(int,double,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(double,short,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(short,double,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(double,char,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(char,double,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(double,LongLong,double);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(LongLong,double,double);
+
+PLONK_BINARYOPTYPEUTILITY_DEFINE(char,char,short);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(char,short,int);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(short,char,int);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(char,int,LongLong);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(int,char,LongLong);
+
+PLONK_BINARYOPTYPEUTILITY_DEFINE(short,short,int);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(short,int,LongLong);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(int,short,LongLong);
+
+PLONK_BINARYOPTYPEUTILITY_DEFINE(int,int,LongLong);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(int,LongLong,LongLong);
+PLONK_BINARYOPTYPEUTILITY_DEFINE(LongLong,int,LongLong);
+
+
+
+// getting the calc type for ternary ops (or two chained binary ops)
+template<class TypeA, class TypeB, class TypeC>
+class TernaryOpTypeUtility
+{
+public:
+    typedef typename BinaryOpTypeUtility<TypeA,TypeB>::CalcType TypeD;
+    typedef typename BinaryOpTypeUtility<TypeD,TypeC>::CalcType CalcType;
+};
+
+// getting the calc type for quaternary ops (or three chained binary ops)
+template<class TypeA, class TypeB, class TypeC, class TypeD>
+class QuaternaryOpTypeUtility
+{
+public:
+    typedef typename BinaryOpTypeUtility<TypeA,TypeB>::CalcType TypeE;
+    typedef typename BinaryOpTypeUtility<TypeE,TypeC>::CalcType TypeF;
+    typedef typename BinaryOpTypeUtility<TypeF,TypeD>::CalcType CalcType;
+};
+
+// getting the calc type for quinary ops (or four chained binary ops)
+template<class TypeA, class TypeB, class TypeC, class TypeD, class TypeE>
+class QuinaryOpTypeUtility
+{
+public:
+    typedef typename BinaryOpTypeUtility<TypeA,TypeB>::CalcType TypeF;
+    typedef typename BinaryOpTypeUtility<TypeF,TypeC>::CalcType TypeG;
+    typedef typename BinaryOpTypeUtility<TypeG,TypeD>::CalcType TypeH;
+    typedef typename BinaryOpTypeUtility<TypeH,TypeE>::CalcType CalcType;
+};
+
+
 END_PLONK_NAMESPACE
 
 #define PLONK_INFINITY PLANK_INFINITY
