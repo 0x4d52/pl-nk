@@ -262,6 +262,21 @@ public:
     }        
 };
 
+template<class NumericalType>
+class NumericalArrayConverterCopy
+{
+public:
+    static inline void convertDirect (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArray<NumericalType>::copyData (dst, src, numItems);
+    }
+    
+    static inline void convertScaled (NumericalType* const dst, const NumericalType* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArray<NumericalType>::copyData (dst, src, numItems);
+    }        
+};
+
 template<>
 class NumericalArrayConverterBase<float, char>
 {
@@ -301,7 +316,7 @@ public:
     static inline void convertDirect (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
     {
         for (UnsignedLong i = 0; i < numItems; ++i)
-            dst[i] = src[i];
+            dst[i] = float (src[i]);
     }
     
     static inline void convertScaled (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
@@ -471,6 +486,15 @@ public:
         else                Base::convertDirect (dst, src, numItems);
     }
 };
+
+// copy types when src and dst types are the same
+template<> class NumericalArrayConverter<float,float>       : public NumericalArrayConverterCopy<float> { };
+template<> class NumericalArrayConverter<double,double>     : public NumericalArrayConverterCopy<double> { };
+template<> class NumericalArrayConverter<char,char>         : public NumericalArrayConverterCopy<char> { };
+template<> class NumericalArrayConverter<short,short>       : public NumericalArrayConverterCopy<short> { };
+template<> class NumericalArrayConverter<int,int>           : public NumericalArrayConverterCopy<int> { };
+template<> class NumericalArrayConverter<Int24,Int24>       : public NumericalArrayConverterCopy<Int24> { };
+template<> class NumericalArrayConverter<LongLong,LongLong> : public NumericalArrayConverterCopy<LongLong> { };
 
 //------------------------------------------------------------------------------
 

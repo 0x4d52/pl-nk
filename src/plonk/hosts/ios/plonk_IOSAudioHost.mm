@@ -83,37 +83,69 @@ static inline void InterruptionListener (void *inClientData,
     host->interruptionCallback (inInterruption);
 }
 
-static inline void audioFloatToShort (float * const src, short* const dst, const unsigned int length) throw()
+static inline void audioTypeToShort (float * const src, short* const dst, const unsigned int length) throw()
 {
 	static const float scale = 32767.f;    
     pl_VectorMulF_N1N (src, scale, src, length);
     pl_VectorConvertF2S_NN (dst, src, length);
 }
 
-static inline void audioFloatToShortChannels (float * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
+static inline void audioTypeToShortChannels (float * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
 		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)dst->mBuffers[channel].mData;		
-		audioFloatToShort (src[channel], audioUnitBuffer, length);
+		audioTypeToShort (src[channel], audioUnitBuffer, length);
 	}
 }
 
-static inline void audioShortToFloat (const short * const src, float* const dst, const unsigned int length) throw()
+static inline void audioShortToType (const short * const src, float* const dst, const unsigned int length) throw()
 {
 	static const float scale = 1.f / 32767.f;	
 	pl_VectorConvertS2F_NN (dst, src, length);
     pl_VectorMulF_N1N (dst, scale, dst, length);
 }
 
-static inline void audioShortToFloatChannels (AudioBufferList* src, float* const dst[], const unsigned int length, const unsigned int numChannels) throw()
+static inline void audioShortToTypeChannels (AudioBufferList* src, float* const dst[], const unsigned int length, const unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
 		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)src->mBuffers[0].mData; // need this other than 0?...		
-		audioShortToFloat (audioUnitBuffer, dst[channel], length);
+		audioShortToType (audioUnitBuffer, dst[channel], length);
 	}	
 }
+
+//template<class SrcType>
+//static inline void audioTypeToShort (const SrcType * const src, short* const dst, const unsigned int length) throw()
+//{
+//    NumericalArrayConverter<short,SrcType>::convertScaled (dst, src, length);    
+//}
+//
+//template<class SrcType>
+//static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
+//{
+//	for (UInt32 channel = 0; channel < numChannels; ++channel)
+//	{
+//		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)dst->mBuffers[channel].mData;		
+//		audioTypeToShort (src[channel], audioUnitBuffer, length);
+//	}
+//}
+//
+//template<class DstType>
+//static inline void audioShortToType (const short * const src, DstType* const dst, const unsigned int length) throw()
+//{
+//    NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);    
+//}
+//
+//template<class DstType>
+//static inline void audioShortToTypeChannels (AudioBufferList* src, DstType* const dst[], const unsigned int length, const unsigned int numChannels) throw()
+//{
+//	for (UInt32 channel = 0; channel < numChannels; ++channel)
+//	{
+//		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)src->mBuffers[0].mData; // need this other than 0?...		
+//		audioShortToType (audioUnitBuffer, dst[channel], length);
+//	}	
+//}
 
 //------------------------------------------------------------------------------
 
@@ -385,7 +417,7 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
 	if (audioInputIsAvailable)
 	{
 		err = AudioUnitRender (rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
-		audioShortToFloatChannels (ioData, floatBufferData, inNumberFrames, numInputChannels);				
+		audioShortToTypeChannels (ioData, floatBufferData, inNumberFrames, numInputChannels);				
 	}
 	else convertBuffer.clear();  
     
@@ -400,7 +432,7 @@ OSStatus IOSAudioHost::renderCallback (UInt32                     inNumberFrames
 
     process();
         
-	audioFloatToShortChannels (floatBufferData, ioData, inNumberFrames, ioData->mNumberBuffers);
+	audioTypeToShortChannels (floatBufferData, ioData, inNumberFrames, ioData->mNumberBuffers);
     
 	renderTime = CFAbsoluteTimeGetCurrent() - renderTime;
 	
