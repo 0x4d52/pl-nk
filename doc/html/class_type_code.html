@@ -264,6 +264,7 @@ Public Types</h2></td></tr>
 <br/>
 &#160;&#160;<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a26604333f2ad63b82f3ffc76e61efaa4">Int24SignalVariable</a>, 
 <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91a5def8a726e7a048de563b067cd215f88">LongSignalVariable</a>, 
+<a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ac8801a78fdaac3bb35b3ea7998e64b7f">AudioFileReader</a>, 
 <a class="el" href="class_type_code.html#aa38a0802e31a7f24bb409e9930438f91ad3877376396ffb86a7834525fb418be4">NumTypeCodes</a>
 <br/>
  }</td></tr>
@@ -271,7 +272,7 @@ Public Types</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static plonk::Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a21afb093939a27cef0d35f8b69a6eac7">getName</a> (const int code)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a type code as a text string.  <a href="#a21afb093939a27cef0d35f8b69a6eac7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static plonk::LongLong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a5b1252e7cce6e76014bed9861768ba5f">getPeak</a> (const int code)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">plonk::LongLong</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a5b1252e7cce6e76014bed9861768ba5f">getPeak</a> (const int code)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for sample types to determine the minimum / maximum peaks.  <a href="#a5b1252e7cce6e76014bed9861768ba5f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a390c1a46498983aa069f25912e4203b0">getEpsilon</a> (const int code)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for sample types to determine the smallest non-zero value.  <a href="#a390c1a46498983aa069f25912e4203b0"></a><br/></td></tr>
@@ -291,6 +292,7 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a4f4a225e75ab916395684c14cad9afc7">isBreakpoints</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a81521106e50bee26629d434e515f1ec4">isWavetable</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a07d33871edccfcb2ee111dbfe30c848d">isSignal</a> (const int code)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a932c6a03c00481ed88ba814e5c1fc9bc">isAudioFileReader</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a2ebd3f553d7557cfc4aaeb91f7946f73">isFloatType</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#af1c25c328bdeefa506cbeb958e3b4f0e">isDoubleType</a> (const int code)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_code.html#a1654b9af98033ab1b8131d96eeca8ba3">isIntType</a> (const int code)  throw ()</td></tr>
@@ -618,6 +620,8 @@ Static Public Member Functions</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91a5def8a726e7a048de563b067cd215f88"></a><!-- doxytag: member="LongSignalVariable" ref="aa38a0802e31a7f24bb409e9930438f91a5def8a726e7a048de563b067cd215f88" args="" -->LongSignalVariable</em>&nbsp;</td><td>
 </td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ac8801a78fdaac3bb35b3ea7998e64b7f"></a><!-- doxytag: member="AudioFileReader" ref="aa38a0802e31a7f24bb409e9930438f91ac8801a78fdaac3bb35b3ea7998e64b7f" args="" -->AudioFileReader</em>&nbsp;</td><td>
+</td></tr>
 <tr><td valign="top"><em><a class="anchor" id="aa38a0802e31a7f24bb409e9930438f91ad3877376396ffb86a7834525fb418be4"></a><!-- doxytag: member="NumTypeCodes" ref="aa38a0802e31a7f24bb409e9930438f91ad3877376396ffb86a7834525fb418be4" args="" -->NumTypeCodes</em>&nbsp;</td><td>
 </td></tr>
 </table>
@@ -651,7 +655,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static plonk::LongLong TypeCode::getPeak </td>
+          <td class="memname">static <a class="el" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">plonk::LongLong</a> TypeCode::getPeak </td>
           <td>(</td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -958,6 +962,23 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a932c6a03c00481ed88ba814e5c1fc9bc"></a><!-- doxytag: member="TypeCode::isAudioFileReader" ref="a932c6a03c00481ed88ba814e5c1fc9bc" args="(const int code)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool TypeCode::isAudioFileReader </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td>  throw ()<code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a2ebd3f553d7557cfc4aaeb91f7946f73"></a><!-- doxytag: member="TypeCode::isFloatType" ref="a2ebd3f553d7557cfc4aaeb91f7946f73" args="(const int code)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1163,7 +1184,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:14:00 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:11 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

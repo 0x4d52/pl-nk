@@ -375,7 +375,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00321"></a><a class="code" href="class_locked_value.html#acc3e83eaee6f5d084a2fec7c4fac8828">00321</a>     <a class="code" href="plonk___smart_pointer_container_8h.html#a0544c934438d4bc87b159fc1675a69fd">PLONK_OBJECTARROWOPERATOR</a>(<a class="code" href="class_locked_value.html" title="A class that stores a value that is stored and retieved using a lock.">LockedValue</a>);
 <a name="l00322"></a>00322     
 <a name="l00323"></a>00323     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function&gt;
-<a name="l00324"></a><a class="code" href="class_locked_value.html#ad20b38ea0eb579937009dd36830125b3">00324</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (VoidReturn::Type ret, <a class="code" href="class_function.html">Function</a> function)
+<a name="l00324"></a><a class="code" href="class_locked_value.html#ad20b38ea0eb579937009dd36830125b3">00324</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315">VoidReturn::Type</a> ret, <a class="code" href="class_function.html">Function</a> function)
 <a name="l00325"></a>00325     {
 <a name="l00326"></a>00326         (void)ret;
 <a name="l00327"></a>00327         Type value = this-&gt;getValue();
@@ -384,7 +384,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00330"></a>00330     }
 <a name="l00331"></a>00331 
 <a name="l00332"></a>00332     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, <span class="keyword">class</span> Arg1Type&gt;
-<a name="l00333"></a><a class="code" href="class_locked_value.html#a4f2a300b76a3b62da8c1d905aaa296fc">00333</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (VoidReturn::Type ret, <a class="code" href="class_function.html">Function</a> function, Arg1Type arg1)
+<a name="l00333"></a><a class="code" href="class_locked_value.html#a4f2a300b76a3b62da8c1d905aaa296fc">00333</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315">VoidReturn::Type</a> ret, <a class="code" href="class_function.html">Function</a> function, Arg1Type arg1)
 <a name="l00334"></a>00334     {
 <a name="l00335"></a>00335         (void)ret;
 <a name="l00336"></a>00336         Type value = this-&gt;getValue();
@@ -393,7 +393,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00339"></a>00339     }
 <a name="l00340"></a>00340     
 <a name="l00341"></a>00341     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, <span class="keyword">class</span> Arg1Type, <span class="keyword">class</span> Arg2Type&gt;
-<a name="l00342"></a><a class="code" href="class_locked_value.html#a329708cd99ab5fa30789979aeac7f49b">00342</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (VoidReturn::Type ret, <a class="code" href="class_function.html">Function</a> function, Arg1Type arg1, Arg2Type arg2)
+<a name="l00342"></a><a class="code" href="class_locked_value.html#a329708cd99ab5fa30789979aeac7f49b">00342</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315">VoidReturn::Type</a> ret, <a class="code" href="class_function.html">Function</a> function, Arg1Type arg1, Arg2Type arg2)
 <a name="l00343"></a>00343     {
 <a name="l00344"></a>00344         (void)ret;
 <a name="l00345"></a>00345         Type value = this-&gt;getValue();
@@ -402,7 +402,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00348"></a>00348     }
 <a name="l00349"></a>00349 
 <a name="l00350"></a>00350     <span class="keyword">template</span>&lt;<span class="keyword">class</span> ReturnType, <span class="keyword">typename</span> Function, <span class="keyword">class</span> Arg1Type, <span class="keyword">class</span> Arg2Type, <span class="keyword">class</span> Arg3Type&gt;
-<a name="l00351"></a><a class="code" href="class_locked_value.html#a680a3670f39568ad6ed39edee4d25be1">00351</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (VoidReturn::Type ret, <a class="code" href="class_function.html">Function</a> function, Arg1Type arg1, Arg2Type arg2, Arg3Type arg3)
+<a name="l00351"></a><a class="code" href="class_locked_value.html#a680a3670f39568ad6ed39edee4d25be1">00351</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> operator() (<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315">VoidReturn::Type</a> ret, <a class="code" href="class_function.html">Function</a> function, Arg1Type arg1, Arg2Type arg2, Arg3Type arg3)
 <a name="l00352"></a>00352     {
 <a name="l00353"></a>00353         (void)ret;
 <a name="l00354"></a>00354         Type value = this-&gt;getValue();
@@ -422,7 +422,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00368"></a>00368         }
 <a name="l00369"></a>00369         <span class="keywordflow">else</span>
 <a name="l00370"></a>00370         {
-<a name="l00371"></a>00371             (*this)(VoidReturn::Pass, function);
+<a name="l00371"></a>00371             (*this)(<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315a7d357fec6d1b2db33e8263d2c442197d">VoidReturn::Pass</a>, function);
 <a name="l00372"></a>00372         }   
 <a name="l00373"></a>00373     }
 <a name="l00374"></a>00374 
@@ -438,7 +438,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00384"></a>00384         }
 <a name="l00385"></a>00385         <span class="keywordflow">else</span>
 <a name="l00386"></a>00386         {
-<a name="l00387"></a>00387             (*this)(VoidReturn::Pass, function, arg1);
+<a name="l00387"></a>00387             (*this)(<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315a7d357fec6d1b2db33e8263d2c442197d">VoidReturn::Pass</a>, function, arg1);
 <a name="l00388"></a>00388         }   
 <a name="l00389"></a>00389     }
 <a name="l00390"></a>00390     
@@ -454,7 +454,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00400"></a>00400         }
 <a name="l00401"></a>00401         <span class="keywordflow">else</span>
 <a name="l00402"></a>00402         {
-<a name="l00403"></a>00403             (*this)(VoidReturn::Pass, function, arg1, arg2);
+<a name="l00403"></a>00403             (*this)(<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315a7d357fec6d1b2db33e8263d2c442197d">VoidReturn::Pass</a>, function, arg1, arg2);
 <a name="l00404"></a>00404         }   
 <a name="l00405"></a>00405     }
 <a name="l00406"></a>00406     
@@ -470,7 +470,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00416"></a>00416         }
 <a name="l00417"></a>00417         <span class="keywordflow">else</span>
 <a name="l00418"></a>00418         {
-<a name="l00419"></a>00419             (*this)(VoidReturn::Pass, function, arg1, arg2, arg3);
+<a name="l00419"></a>00419             (*this)(<a class="code" href="struct_void_return.html#a57a3ed82a71382f6db01a39a4c89d315a7d357fec6d1b2db33e8263d2c442197d">VoidReturn::Pass</a>, function, arg1, arg2, arg3);
 <a name="l00420"></a>00420         }   
 <a name="l00421"></a>00421     }
 <a name="l00422"></a>00422     
@@ -514,7 +514,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:42 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

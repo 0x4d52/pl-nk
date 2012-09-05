@@ -83,8 +83,9 @@ Inheritance diagram for Threading::Thread:</div>
  <div class="center">
   <img src="class_threading_1_1_thread.png" usemap="#Threading::Thread_map" alt=""/>
   <map id="Threading::Thread_map" name="Threading::Thread_map">
-<area href="class_object_memory_defer_free.html" alt="ObjectMemoryDeferFree" shape="rect" coords="0,56,154,80"/>
-<area href="class_object_memory_pools.html" alt="ObjectMemoryPools" shape="rect" coords="164,56,318,80"/>
+<area href="class_object_memory_defer_free.html" alt="ObjectMemoryDeferFree" shape="rect" coords="0,56,294,80"/>
+<area href="class_object_memory_pools.html" alt="ObjectMemoryPools" shape="rect" coords="304,56,598,80"/>
+<area href="class_threaded_channel_internal_1_1_thread.html" alt="ThreadedChannelInternal&lt; SampleType &gt;::Thread" shape="rect" coords="608,56,902,80"/>
 </map>
  </div></div>
 
@@ -94,29 +95,31 @@ Inheritance diagram for Threading::Thread:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#ae985d730801d4679590869393ef044a8">Thread</a> (const char *name=0)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a7fb203f137956ef48da44e4426b73ab1">~Thread</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">start</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a161d0f429aa7f7a1ae63e11dca204fa6">cancel</a> ()  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a69a1d2b26ec63699833c4b3c86719fb4">wait</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#aec62063348aad6daca0c6c51d7270b2d">start</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a161d0f429aa7f7a1ae63e11dca204fa6">cancel</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a69a1d2b26ec63699833c4b3c86719fb4">wait</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the thread to exit.  <a href="#a69a1d2b26ec63699833c4b3c86719fb4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a9403dc7ff1d22254e706a720bed6297f">pause</a> (const double duration=PLONK_INFINITY)  throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#adcdf6643b10513084505dd9403be5e13">resume</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a9403dc7ff1d22254e706a720bed6297f">pause</a> (const double duration=PLONK_INFINITY)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#adcdf6643b10513084505dd9403be5e13">resume</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#aa09e7addc297931a3dab8740e88b624f">isRunning</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if the thread is running, otherwise <code>false</code>.  <a href="#aa09e7addc297931a3dab8740e88b624f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9">setShouldExit</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#af7b4f2a7a1cd0fac3734f3873dfa96c9">setShouldExit</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals that the thread should exit.  <a href="#af7b4f2a7a1cd0fac3734f3873dfa96c9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#afac6cb66c5ab59a6a3f371dbea00e898">setShouldExitAndWait</a> (const double interval=0.000001)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#afac6cb66c5ab59a6a3f371dbea00e898">setShouldExitAndWait</a> (const double interval=0.000001)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals that the thread should exit then waits for it to exit.  <a href="#afac6cb66c5ab59a6a3f371dbea00e898"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e">getShouldExit</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> if the thread has been signalled to exit, otherwise <code>false</code>.  <a href="#a8f420000728f97481fda9c4be5388c3e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#ad8398a87c8ecb0fdd33b86dc3846df4e">setPriority</a> (const int priority)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a631c4fb0ed54e287f49adbea112dc0fb">setPriorityAudio</a> (const int blockSize, const double sampleRate)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_threading.html#ac072dacd374bc2543081179faa801e27">Threading::ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#ae8f792258076e7a3d886cf3eca777b8c">getID</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get this thread's ID.  <a href="#ae8f792258076e7a3d886cf3eca777b8c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32">run</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32">run</a> ()=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run()</a> function: you must implement this in your sublcass.  <a href="#a30d723c645d98a76e58f692d5ac26b32"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a6e52ef55ffcba982eb270909564f607e">sleep</a> (const double seconds)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#a6e52ef55ffcba982eb270909564f607e">sleep</a> (const double seconds)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A shortcut for <a class="el" href="class_threading.html#af06e4d7a02ac3054e17b01ae78e39684" title="Sleeps the current thread.">Threading::sleep()</a>  <a href="#a6e52ef55ffcba982eb270909564f607e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static ResultCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#afd1de33dbda00617731d7b5498af1b88">yield</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_threading_1_1_thread.html#afd1de33dbda00617731d7b5498af1b88">yield</a> ()  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A shortcut for <a class="el" href="class_threading.html#a064c003b9a820cabb3768f7466d4d05a" title="Yield the current thread.">Threading::yield()</a>  <a href="#afd1de33dbda00617731d7b5498af1b88"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -125,7 +128,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">     <span class="keyword">class </span>MyThread: <span class="keyword">public</span> <a class="code" href="class_threading.html" title="Crossplatform threading support.">Threading</a>::<a class="code" href="class_threading_1_1_thread.html#ae985d730801d4679590869393ef044a8">Thread</a>
      {
      <span class="keyword">public</span>:
-        <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#ae324f5dcfe48b276c1d1b1662e0e0417">ResultCode</a> <a class="code" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run</a>()
+        <a class="code" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> <a class="code" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run</a>()
         {
             <span class="keywordflow">while</span> (<a class="code" href="class_threading_1_1_thread.html#a8f420000728f97481fda9c4be5388c3e" title="Returns true if the thread has been signalled to exit, otherwise false.">getShouldExit</a>() == <span class="keyword">false</span>)
             {
@@ -180,7 +183,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::start </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::start </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
@@ -196,7 +199,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::cancel </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::cancel </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
@@ -212,7 +215,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::wait </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::wait </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
@@ -231,7 +234,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::pause </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::pause </td>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>duration</em> = <code>PLONK_INFINITY</code></td><td>)</td>
@@ -248,7 +251,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::resume </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::resume </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
@@ -283,7 +286,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::setShouldExit </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::setShouldExit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
@@ -302,7 +305,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::setShouldExitAndWait </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::setShouldExitAndWait </td>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>interval</em> = <code>0.000001</code></td><td>)</td>
@@ -342,6 +345,50 @@ Static Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad8398a87c8ecb0fdd33b86dc3846df4e"></a><!-- doxytag: member="Threading::Thread::setPriority" ref="ad8398a87c8ecb0fdd33b86dc3846df4e" args="(const int priority)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Threading::Thread::setPriority </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>priority</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a631c4fb0ed54e287f49adbea112dc0fb"></a><!-- doxytag: member="Threading::Thread::setPriorityAudio" ref="a631c4fb0ed54e287f49adbea112dc0fb" args="(const int blockSize, const double sampleRate)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Threading::Thread::setPriorityAudio </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>blockSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>sampleRate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ae8f792258076e7a3d886cf3eca777b8c"></a><!-- doxytag: member="Threading::Thread::getID" ref="ae8f792258076e7a3d886cf3eca777b8c" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -365,7 +412,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual ResultCode Threading::Thread::run </td>
+          <td class="memname">virtual <a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::run </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [pure virtual]</code></td>
@@ -376,7 +423,7 @@ Static Protected Member Functions</h2></td></tr>
 
 <p>The <a class="el" href="class_threading_1_1_thread.html#a30d723c645d98a76e58f692d5ac26b32" title="The run() function: you must implement this in your sublcass.">run()</a> function: you must implement this in your sublcass. </p>
 
-<p>Implemented in <a class="el" href="class_object_memory_defer_free.html#aa72e25ddb0652cdda6cb8bc4018a4e2e">ObjectMemoryDeferFree</a>, and <a class="el" href="class_object_memory_pools.html#ab6fd2bd25e4e3b8da8743de29f99aca5">ObjectMemoryPools</a>.</p>
+<p>Implemented in <a class="el" href="class_object_memory_defer_free.html#aa72e25ddb0652cdda6cb8bc4018a4e2e">ObjectMemoryDeferFree</a>, <a class="el" href="class_object_memory_pools.html#ab6fd2bd25e4e3b8da8743de29f99aca5">ObjectMemoryPools</a>, and <a class="el" href="class_threaded_channel_internal_1_1_thread.html#ade99738d9d8b8596e4bbad902e5bf9ac">ThreadedChannelInternal&lt; SampleType &gt;::Thread</a>.</p>
 
 </div>
 </div>
@@ -385,7 +432,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::sleep </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::sleep </td>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>seconds</em></td><td>)</td>
@@ -404,7 +451,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ResultCode Threading::Thread::yield </td>
+          <td class="memname"><a class="el" href="plonk___standard_header_8h.html#a677077d87aa175d7a3ee2e5c9e51c2e7">ResultCode</a> Threading::Thread::yield </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()<code> [static, protected]</code></td>
@@ -436,7 +483,7 @@ Static Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:59 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:11 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

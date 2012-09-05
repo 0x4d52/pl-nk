@@ -114,17 +114,20 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a7c11d0a19cfdb36c8b6525846b6f4d7f">PlankResult_ThreadWaitFailed</a>, 
 <a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a3e0ce37a45ba46f73721f9f80b4b19ad">PlankResult_ThreadFunctionInvalid</a>, 
 <a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50adc5af881e05088cf726da81cc92307c0">PlankResult_ThreadShouldExitAlreadySet</a>, 
-<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac659fff7913cdc327ce076acdc6d0c44">PlankResult_FunctionsInvalid</a>, 
+<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a89352d01a9577232ad50355da1486a8e">PlankResult_ThreadSetPriorityFailed</a>, 
 <br/>
-&#160;&#160;<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac90720aabcd2e3318132bc65a36803c6">PlankResult_IndexOutOfRange</a>, 
+&#160;&#160;<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a5281e421c8221f9f9256fe538f74b95d">PlankResult_ThreadSetAffinityFailed</a>, 
+<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac659fff7913cdc327ce076acdc6d0c44">PlankResult_FunctionsInvalid</a>, 
+<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ac90720aabcd2e3318132bc65a36803c6">PlankResult_IndexOutOfRange</a>, 
 <a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a98fc6f9a7fd359be832cb944f8a372ae">PlankResult_ContainerNotEmptyOnDeInit</a>, 
-<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a1439df4894f173505d02c34dffba1de3">PlankResult_ThreadLocalStorageMaximumIdentifiersReached</a>, 
+<br/>
+&#160;&#160;<a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50a1439df4894f173505d02c34dffba1de3">PlankResult_ThreadLocalStorageMaximumIdentifiersReached</a>, 
 <a class="el" href="plank___result_8h.html#a4c2af0ef478e9a7a7ebc85def149cb50ab6875c54eef96a178c33daede2fb2bc8">PlankNumResults</a>
 <br/>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___result_8h.html#aa148cdc60032487aa6231578e3bdd312">pl_ResultString</a> (<a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> result)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PLANK_BEGIN_C_LINKAGE const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___result_8h.html#ad37c37665816b994f632b3f3936495e2">pl_ResultString</a> (<a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> result)</td></tr>
 </table>
 <hr/><h2>Typedef Documentation</h2>
 <a class="anchor" id="ae9964708ead91ea2db66788746b937eb"></a><!-- doxytag: member="plank_Result.h::PlankResult" ref="ae9964708ead91ea2db66788746b937eb" args="" -->
@@ -245,6 +248,12 @@ Functions</h2></td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a4c2af0ef478e9a7a7ebc85def149cb50adc5af881e05088cf726da81cc92307c0"></a><!-- doxytag: member="PlankResult_ThreadShouldExitAlreadySet" ref="a4c2af0ef478e9a7a7ebc85def149cb50adc5af881e05088cf726da81cc92307c0" args="" -->PlankResult_ThreadShouldExitAlreadySet</em>&nbsp;</td><td>
 <p>Signaling a thread to exit that has already set set to exit. </p>
 </td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a4c2af0ef478e9a7a7ebc85def149cb50a89352d01a9577232ad50355da1486a8e"></a><!-- doxytag: member="PlankResult_ThreadSetPriorityFailed" ref="a4c2af0ef478e9a7a7ebc85def149cb50a89352d01a9577232ad50355da1486a8e" args="" -->PlankResult_ThreadSetPriorityFailed</em>&nbsp;</td><td>
+<p>Setting the thread's priority failed. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a4c2af0ef478e9a7a7ebc85def149cb50a5281e421c8221f9f9256fe538f74b95d"></a><!-- doxytag: member="PlankResult_ThreadSetAffinityFailed" ref="a4c2af0ef478e9a7a7ebc85def149cb50a5281e421c8221f9f9256fe538f74b95d" args="" -->PlankResult_ThreadSetAffinityFailed</em>&nbsp;</td><td>
+<p>Setting the thread's affinity failed. </p>
+</td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a4c2af0ef478e9a7a7ebc85def149cb50ac659fff7913cdc327ce076acdc6d0c44"></a><!-- doxytag: member="PlankResult_FunctionsInvalid" ref="a4c2af0ef478e9a7a7ebc85def149cb50ac659fff7913cdc327ce076acdc6d0c44" args="" -->PlankResult_FunctionsInvalid</em>&nbsp;</td><td>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a4c2af0ef478e9a7a7ebc85def149cb50ac90720aabcd2e3318132bc65a36803c6"></a><!-- doxytag: member="PlankResult_IndexOutOfRange" ref="a4c2af0ef478e9a7a7ebc85def149cb50ac90720aabcd2e3318132bc65a36803c6" args="" -->PlankResult_IndexOutOfRange</em>&nbsp;</td><td>
@@ -265,12 +274,12 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="aa148cdc60032487aa6231578e3bdd312"></a><!-- doxytag: member="plank_Result.h::pl_ResultString" ref="aa148cdc60032487aa6231578e3bdd312" args="(PlankResult result)" -->
+<a class="anchor" id="ad37c37665816b994f632b3f3936495e2"></a><!-- doxytag: member="plank_Result.h::pl_ResultString" ref="ad37c37665816b994f632b3f3936495e2" args="(PlankResult result)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* pl_ResultString </td>
+          <td class="memname">PLANK_BEGIN_C_LINKAGE const char* pl_ResultString </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td>
           <td class="paramname"><em>result</em></td><td>)</td>
@@ -297,7 +306,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:44 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

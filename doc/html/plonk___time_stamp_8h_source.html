@@ -106,11 +106,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00047"></a><a class="code" href="class_time_stamp.html">00047</a> <span class="keyword">class </span><a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>
 <a name="l00048"></a>00048 {
 <a name="l00049"></a>00049 <span class="keyword">public</span>:
-<a name="l00050"></a>00050     <a class="code" href="class_time_stamp.html#a0da4e12693f10b0c0f408d0fdb7f3ec4">TimeStamp</a> (<span class="keywordtype">int</span> initialTime) <span class="keywordflow">throw</span>();
-<a name="l00051"></a>00051     <a class="code" href="class_time_stamp.html#a0da4e12693f10b0c0f408d0fdb7f3ec4">TimeStamp</a> (<a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> initialTime) <span class="keywordflow">throw</span>();
-<a name="l00052"></a>00052     <a class="code" href="class_time_stamp.html#a0da4e12693f10b0c0f408d0fdb7f3ec4">TimeStamp</a> (<a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> initialTime = 0, <span class="keywordtype">double</span> initialFraction = 0.0) <span class="keywordflow">throw</span>();
+<a name="l00050"></a>00050     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<span class="keywordtype">int</span> initialTime) <span class="keywordflow">throw</span>();
+<a name="l00051"></a>00051     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> initialTime) <span class="keywordflow">throw</span>();
+<a name="l00052"></a>00052     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> initialTime = 0, <span class="keywordtype">double</span> initialFraction = 0.0) <span class="keywordflow">throw</span>();
 <a name="l00053"></a>00053     
-<a name="l00054"></a>00054     <a class="code" href="class_time_stamp.html#a0da4e12693f10b0c0f408d0fdb7f3ec4">TimeStamp</a> (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
+<a name="l00054"></a>00054     <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
 <a name="l00055"></a>00055     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#a96477988b28487014163e97f16ad07cb">operator= </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keywordflow">throw</span>();
 <a name="l00056"></a>00056     
 <a name="l00057"></a>00057     <span class="keywordtype">bool</span> <a class="code" href="class_time_stamp.html#a53455ae1c9bbf80a4382dac698592c40">isFinite</a>() <span class="keyword">const</span> <span class="keywordflow">throw</span>();
@@ -127,8 +127,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00068"></a>00068     <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <a class="code" href="class_time_stamp.html#a8aaafba4380df61710ddb361c1f2869f">operator- </a>(<a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a> <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>();
 <a name="l00069"></a>00069     
 <a name="l00070"></a>00070     
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> <span class="keyword">set</span> (<a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> newTime, <span class="keywordtype">double</span> newFraction = 0.0) <span class="keywordflow">throw</span>();
-<a name="l00072"></a><a class="code" href="class_time_stamp.html#a8f76bf0a76946c10f6cb8a103cf7c4a0">00072</a>     <span class="keyword">inline</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> <a class="code" href="class_time_stamp.html#a8f76bf0a76946c10f6cb8a103cf7c4a0">getTime</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> time; }
+<a name="l00071"></a>00071     <span class="keywordtype">void</span> <span class="keyword">set</span> (<a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> newTime, <span class="keywordtype">double</span> newFraction = 0.0) <span class="keywordflow">throw</span>();
+<a name="l00072"></a><a class="code" href="class_time_stamp.html#a8f76bf0a76946c10f6cb8a103cf7c4a0">00072</a>     <span class="keyword">inline</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> <a class="code" href="class_time_stamp.html#a8f76bf0a76946c10f6cb8a103cf7c4a0">getTime</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> time; }
 <a name="l00073"></a><a class="code" href="class_time_stamp.html#a513254a5db567ed79238f744eecb2dc5">00073</a>     <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="class_time_stamp.html#a513254a5db567ed79238f744eecb2dc5">getFraction</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> fraction; }
 <a name="l00074"></a><a class="code" href="class_time_stamp.html#a213ba0bf3ec944cb10ccea4904b7a519">00074</a>     <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_time_stamp.html#a213ba0bf3ec944cb10ccea4904b7a519">getFractionInTicks</a>() <span class="keyword">const</span> throw() { <span class="keywordflow">return</span> int (fraction * <a class="code" href="class_time_stamp.html#a9b07cd3f2f12e3a11834f55c2400e130">getTicks</a>()); }
 <a name="l00075"></a>00075     
@@ -159,7 +159,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00100"></a>00100     static const <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#ab0dd73c80396763164d4596580227351">getMaximum</a>() throw();
 <a name="l00101"></a>00101 
 <a name="l00102"></a>00102 private:
-<a name="l00103"></a>00103     <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> time;
+<a name="l00103"></a>00103     <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> time;
 <a name="l00104"></a>00104     <span class="keywordtype">double</span> fraction;
 <a name="l00105"></a>00105     
 <a name="l00106"></a>00106     static <span class="keywordtype">bool</span> fractionIsValid (const <span class="keywordtype">double</span> f) throw();
@@ -204,7 +204,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00145"></a>00145 
 <a name="l00146"></a><a class="code" href="class_time_stamp.html#a3b177f0b402c2d1bb51c404e0397449b">00146</a> <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>&amp; <a class="code" href="class_time_stamp.html#a3b177f0b402c2d1bb51c404e0397449b">TimeStamp::getZero</a>() throw()
 <a name="l00147"></a>00147 {
-<a name="l00148"></a>00148     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>* timeZero = <span class="keyword">new</span> <a class="code" href="class_time_stamp.html#a0da4e12693f10b0c0f408d0fdb7f3ec4">TimeStamp</a> (0, 0.0);
+<a name="l00148"></a>00148     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_time_stamp.html" title="Measures time.">TimeStamp</a>* timeZero = <span class="keyword">new</span> <a class="code" href="class_time_stamp.html#ac2421bf37bdf6dfc067ec4a5117d2ce0">TimeStamp</a> (0, 0.0);
 <a name="l00149"></a>00149     <span class="keywordflow">return</span> *timeZero;
 <a name="l00150"></a>00150 }
 <a name="l00151"></a>00151 
@@ -229,7 +229,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00170"></a>00170     <span class="keywordflow">else</span>
 <a name="l00171"></a>00171     {
 <a name="l00172"></a>00172         <span class="keyword">const</span> <span class="keywordtype">double</span> correctedOffset = offset + this-&gt;fraction;
-<a name="l00173"></a>00173         <span class="keyword">const</span> <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> timeOffset = <a class="code" href="namespace_p_l_o_n_k___n_a_m_e_s_p_a_c_e.html#a570572784920e5f5c26f49626b7de624">LongLong</a> (correctedOffset);
+<a name="l00173"></a>00173         <span class="keyword">const</span> <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> timeOffset = <a class="code" href="plonk___standard_header_8h.html#a4cc04fb5f1e8703e725c5952c9601ef5">LongLong</a> (correctedOffset);
 <a name="l00174"></a>00174         this-&gt;time += timeOffset;
 <a name="l00175"></a>00175         this-&gt;fraction = correctedOffset - timeOffset; <span class="comment">// carry the fraction</span>
 <a name="l00176"></a>00176         
@@ -263,7 +263,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:42 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:56 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -96,8 +96,12 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga81d5410ab8f2e8b4c6adb9dbc1884633">PLANK_VECTORLOOKUP_NAME</a>(TYPECODE)&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Lookup,TYPECODE,_NnN)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga4d995aa4fa14c8223593c8f51a0b1ceb">PLANK_VECTORLOOKUP_DEFINE</a>(TYPECODE)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga1f93264b731f30ecf938c74e3b5c59ab">PLANK_VECTORCONVERT_NAME</a>(DSTTYPECODE, SRCTYPECODE)&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(Convert,SRCTYPECODE##2##DSTTYPECODE,_NN)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#gabfb231739ddadb1d2e9de764f8f90bb8">PLANK_VECTORCONVERTROUND_NAME</a>(DSTTYPECODE, SRCTYPECODE)&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(ConvertRound,SRCTYPECODE##2##DSTTYPECODE,_NN)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE, SRCTYPECODE)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#gade11f0765ae8af2defa3b31e81be5b5e">PLANK_VECTORCONVERTERS_DEFINE</a>(DSTTYPECODE)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga9da244f4e793f73ba19a01adcbb4ede8">PLANK_VECTORCONVERTROUNDF_DEFINE</a>(SRCTYPECODE)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga69d32d8c86cb98aa59c346cd40c69e8b">PLANK_VECTORCONVERTROUNDD_DEFINE</a>(SRCTYPECODE)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga1f398ffae8a1b3c1227105cb9c7f3045">PLANK_VECTORCONVERTERS_DEFINE</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga660204cd3638426e3e75f8aedd735e5d">PLANK_VECTORCONVERTERSROUND_DEFINE</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___plank_vector_macros.html#ga1003d48aab416b139a234bcd9bba28c3">PLANK_VECTOR_OPS</a>(TYPECODE)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -805,6 +809,33 @@ Defines</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gabfb231739ddadb1d2e9de764f8f90bb8"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTROUND_NAME" ref="gabfb231739ddadb1d2e9de764f8f90bb8" args="(DSTTYPECODE, SRCTYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCONVERTROUND_NAME</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">DSTTYPECODE, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SRCTYPECODE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;PLANK_VECTOR_NAMEINTERNAL(ConvertRound,SRCTYPECODE##2##DSTTYPECODE,_NN)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga0d0c9c6b897c9b48e3ecdc765e5afa11"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERT_DEFINE" ref="ga0d0c9c6b897c9b48e3ecdc765e5afa11" args="(DSTTYPECODE, SRCTYPECODE)" -->
 <div class="memitem">
 <div class="memproto">
@@ -836,26 +867,97 @@ Defines</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="gade11f0765ae8af2defa3b31e81be5b5e"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTERS_DEFINE" ref="gade11f0765ae8af2defa3b31e81be5b5e" args="(DSTTYPECODE)" -->
+<a class="anchor" id="ga9da244f4e793f73ba19a01adcbb4ede8"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTROUNDF_DEFINE" ref="ga9da244f4e793f73ba19a01adcbb4ede8" args="(SRCTYPECODE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PLANK_VECTORCONVERTERS_DEFINE</td>
+          <td class="memname">#define PLANK_VECTORCONVERTROUNDF_DEFINE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">DSTTYPECODE</td><td>)</td>
+          <td class="paramname">SRCTYPECODE</td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,F)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,D)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,C)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,I)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,S)\
-    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(DSTTYPECODE,L)
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gabfb231739ddadb1d2e9de764f8f90bb8">PLANK_VECTORCONVERTROUND_NAME</a>(F,SRCTYPECODE) (<a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">PlankF</a> *result, <span class="keyword">const</span> Plank##SRCTYPECODE* a, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = (<a class="code" href="plank___standard_header_8h.html#a112bc0a07d6c7fa2ac00ab91046f7a4c">PlankF</a>)a[i] + 0.5f; }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga69d32d8c86cb98aa59c346cd40c69e8b"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTROUNDD_DEFINE" ref="ga69d32d8c86cb98aa59c346cd40c69e8b" args="(SRCTYPECODE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCONVERTROUNDD_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SRCTYPECODE</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment">\
+    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group___plank_vector_macros.html#gabfb231739ddadb1d2e9de764f8f90bb8">PLANK_VECTORCONVERTROUND_NAME</a>(D,SRCTYPECODE) (<a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a> *result, <span class="keyword">const</span> Plank##SRCTYPECODE* a, <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> N) {\
+        <a class="code" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> i; <span class="keywordflow">for</span> (i = 0; i &lt; N; <a class="code" href="group___plank_maths_functions.html#gac67c0543c86121360bb663a0293ceab8">PLANK_INC</a>(i)) { result[i] = (<a class="code" href="plank___standard_header_8h.html#af1b487c8f51d07cf53b0341c67ce2d03">PlankD</a>)a[i] + 0.5; }\
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga1f398ffae8a1b3c1227105cb9c7f3045"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTERS_DEFINE" ref="ga1f398ffae8a1b3c1227105cb9c7f3045" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCONVERTERS_DEFINE</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(I,C)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(S,C)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(F,C)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(D,C)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(C,I)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(S,I)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(F,I)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(D,I)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(C,S)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(I,S)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(F,S)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(D,S)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(C,F)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(I,F)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(S,F)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(D,F)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(C,D)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(I,D)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(S,D)\
+    <a class="code" href="group___plank_vector_macros.html#ga0d0c9c6b897c9b48e3ecdc765e5afa11">PLANK_VECTORCONVERT_DEFINE</a>(F,D)\
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ga660204cd3638426e3e75f8aedd735e5d"></a><!-- doxytag: member="plank_Vectors.h::PLANK_VECTORCONVERTERSROUND_DEFINE" ref="ga660204cd3638426e3e75f8aedd735e5d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLANK_VECTORCONVERTERSROUND_DEFINE</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="group___plank_vector_macros.html#ga9da244f4e793f73ba19a01adcbb4ede8">PLANK_VECTORCONVERTROUNDF_DEFINE</a>(C)\
+    <a class="code" href="group___plank_vector_macros.html#ga9da244f4e793f73ba19a01adcbb4ede8">PLANK_VECTORCONVERTROUNDF_DEFINE</a>(I)\
+    <a class="code" href="group___plank_vector_macros.html#ga9da244f4e793f73ba19a01adcbb4ede8">PLANK_VECTORCONVERTROUNDF_DEFINE</a>(S)\
+    <a class="code" href="group___plank_vector_macros.html#ga69d32d8c86cb98aa59c346cd40c69e8b">PLANK_VECTORCONVERTROUNDD_DEFINE</a>(C)\
+    <a class="code" href="group___plank_vector_macros.html#ga69d32d8c86cb98aa59c346cd40c69e8b">PLANK_VECTORCONVERTROUNDD_DEFINE</a>(I)\
+    <a class="code" href="group___plank_vector_macros.html#ga69d32d8c86cb98aa59c346cd40c69e8b">PLANK_VECTORCONVERTROUNDD_DEFINE</a>(S)
 </pre></div>
 </div>
 </div>
@@ -891,7 +993,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:45 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

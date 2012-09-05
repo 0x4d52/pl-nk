@@ -379,6 +379,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_variable.html">DoubleVariable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a3e8cc9f7b3ffc03fd4224207ae03a34c">getOverlap</a> (const int index) const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">DoubleVariable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a3237791190b8fcc4f90ffdcac747ebf9">getOverlap</a> (const int index)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a33079afffb4c6cb3de7cd8c62841022b">channelsHaveSameOverlap</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#af880735de727f28a27f58f8df6f3a5a6">channelsHaveSameBlockSize</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a277c3588be4e53ac1fe572f9b9d53b7f">channelsHaveSameSampleRate</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_numerical_array.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a7c474ba662fa612be89573e4176b8526">getOutputBuffer</a> (const int index) const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the output buffer of a specific channel.  <a href="#a7c474ba662fa612be89573e4176b8526"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const SampleType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a43faf13fd6fba7d41104578862a65863">getOutputSamples</a> (const int index) const   throw ()</td></tr>
@@ -413,6 +415,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Process all channels in this unit.  <a href="#a0b69c2c88f25b4289ba2ac4ed01bebba"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a2891d6c1839d13315f8f950631688518">getTypeCode</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#aea8acd5fba79b7fe97712e2e9a09275c">getSampleTypeCode</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_type_utility.html">TypeUtility</a>&lt; SampleType &gt;::PeakType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#a49e2da28e9a983ac3fe344578e2a7262">getTypePeak</a> () const   throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_type_utility.html">TypeUtility</a>&lt; SampleType &gt;<br class="typebreak"/>
+::IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#ab0e08543abfe008447caa15439be805c">getTypeScale</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_unit_base.html">UnitBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#abc0513028b2305fd7423c74cf6ae8cd4">operator-&gt;</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_unit_base.html">UnitBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit_base.html#adffe277c06e098888002052483cf955c">operator-&gt;</a> () const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
@@ -4392,6 +4397,42 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="af880735de727f28a27f58f8df6f3a5a6"></a><!-- doxytag: member="UnitBase::channelsHaveSameBlockSize" ref="af880735de727f28a27f58f8df6f3a5a6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::channelsHaveSameBlockSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a277c3588be4e53ac1fe572f9b9d53b7f"></a><!-- doxytag: member="UnitBase::channelsHaveSameSampleRate" ref="a277c3588be4e53ac1fe572f9b9d53b7f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::channelsHaveSameSampleRate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a7c474ba662fa612be89573e4176b8526"></a><!-- doxytag: member="UnitBase::getOutputBuffer" ref="a7c474ba662fa612be89573e4176b8526" args="(const int index) const " -->
 <div class="memitem">
 <div class="memproto">
@@ -4858,6 +4899,42 @@ template&lt;class SampleType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a49e2da28e9a983ac3fe344578e2a7262"></a><!-- doxytag: member="UnitBase::getTypePeak" ref="a49e2da28e9a983ac3fe344578e2a7262" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt;::PeakType <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getTypePeak </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab0e08543abfe008447caa15439be805c"></a><!-- doxytag: member="UnitBase::getTypeScale" ref="ab0e08543abfe008447caa15439be805c" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SampleType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_type_utility.html">TypeUtility</a>&lt;SampleType&gt;::IndexType <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;::getTypeScale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="abc0513028b2305fd7423c74cf6ae8cd4"></a><!-- doxytag: member="UnitBase::operator&#45;&gt;" ref="abc0513028b2305fd7423c74cf6ae8cd4" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -4916,7 +4993,7 @@ template&lt;class SampleType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:14:01 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:14 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

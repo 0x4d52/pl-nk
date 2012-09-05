@@ -75,7 +75,9 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a2f35c7cdc1e90ae214e0bc431898a98f">PLANK_INLINING_FUNCTIONS</a>&#160;&#160;&#160;1</td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef struct PlankMemory *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
+typedefPLANK_BEGIN_C_LINKAGE <br class="typebreak"/>
+struct PlankMemory *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a5a95ddf938d593c0d56c30c97307184e">PlankMemoryAllocateBytesFunction</a> )(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>, <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a53cc90c2e75a1021173f756afaedf6eb">PlankMemoryFreeFunction</a> )(<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>, void *)</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
@@ -84,19 +86,19 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a044004bc4104368c1a3da53773485608">pl_MemoryDefaultFree</a> (<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> p, void *ptr)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a5870f741f51e5662497890173fe74afb">pl_MemoryZero</a> (<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> ptr, const <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> numBytes)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a54add745d78682667722b8bc3e17e682">pl_MemoryCopy</a> (<a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> dst, <a class="el" href="plank___standard_header_8h.html#a7000576d0ca505b484564ed79dc526c0">PlankConstantP</a> src, const <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> numBytes)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a936d8ec874f777ab78d38c365a6f8b38">pl_MemoryGlobal</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a9e63f60f47317f3915c110d5726e6d93">pl_Memory_CreateAndInit</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#ab0300d5849143412a1b451567f5f46af">pl_Memory_Create</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a92185a7537b8489fcb712b2088f68ad8">pl_Memory_Init</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#aa8de7bb22dc8f5e079f009234391deec">pl_Memory_DeInit</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a98f2bd54757dcd5933dbc1efece4c447">pl_Memory_Destroy</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a84fcc37f2c4b19f64a71d907a0a0c3eb">pl_Memory_SetUserData</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p, <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> userData)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a936d8ec874f777ab78d38c365a6f8b38">pl_MemoryGlobal</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a9e63f60f47317f3915c110d5726e6d93">pl_Memory_CreateAndInit</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#ab0300d5849143412a1b451567f5f46af">pl_Memory_Create</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a92185a7537b8489fcb712b2088f68ad8">pl_Memory_Init</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#aa8de7bb22dc8f5e079f009234391deec">pl_Memory_DeInit</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a98f2bd54757dcd5933dbc1efece4c447">pl_Memory_Destroy</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a84fcc37f2c4b19f64a71d907a0a0c3eb">pl_Memory_SetUserData</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p, <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> userData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a user data pointer.  <a href="#a84fcc37f2c4b19f64a71d907a0a0c3eb"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#ade31a2205768486ae94f1bbdc9a99aa7">pl_Memory_GetUserData</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#ade31a2205768486ae94f1bbdc9a99aa7">pl_Memory_GetUserData</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the user data pointer.  <a href="#ade31a2205768486ae94f1bbdc9a99aa7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a496703676a6f50df45965dabc514f73a">pl_Memory_SetFunctions</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p, <a class="el" href="plank___memory_8h.html#a5a95ddf938d593c0d56c30c97307184e">PlankMemoryAllocateBytesFunction</a> allocateBytesFunction, <a class="el" href="plank___memory_8h.html#a53cc90c2e75a1021173f756afaedf6eb">PlankMemoryFreeFunction</a> freeFunction)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#af73219a9dbde87d051b0e0d9b33d9773">pl_Memory_AllocateBytes</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p, <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> numBytes)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#aeda6bd7ae84820e71b0d0fdc0c4f9ab9">pl_Memory_Free</a> (<a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> p, <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> ptr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#a496703676a6f50df45965dabc514f73a">pl_Memory_SetFunctions</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p, <a class="el" href="plank___memory_8h.html#a5a95ddf938d593c0d56c30c97307184e">PlankMemoryAllocateBytesFunction</a> allocateBytesFunction, <a class="el" href="plank___memory_8h.html#a53cc90c2e75a1021173f756afaedf6eb">PlankMemoryFreeFunction</a> freeFunction)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#af73219a9dbde87d051b0e0d9b33d9773">pl_Memory_AllocateBytes</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p, <a class="el" href="plank___standard_header_8h.html#aadd8b55b4dce98c3c059523e13f065fe">PlankUL</a> numBytes)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plank___memory_8h.html#aeda6bd7ae84820e71b0d0fdc0c4f9ab9">pl_Memory_Free</a> (<a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> p, <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> ptr)</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a2f35c7cdc1e90ae214e0bc431898a98f"></a><!-- doxytag: member="plank_Memory.h::PLANK_INLINING_FUNCTIONS" ref="a2f35c7cdc1e90ae214e0bc431898a98f" args="" -->
@@ -113,12 +115,12 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="a68250ed30b4ae340097a17521d931f70"></a><!-- doxytag: member="plank_Memory.h::PlankMemoryRef" ref="a68250ed30b4ae340097a17521d931f70" args="" -->
+<a class="anchor" id="a43b96cb885241d2b7cfe1322b499c849"></a><!-- doxytag: member="plank_Memory.h::PlankMemoryRef" ref="a43b96cb885241d2b7cfe1322b499c849" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct PlankMemory* <a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a></td>
+          <td class="memname">typedef typedefPLANK_BEGIN_C_LINKAGE struct PlankMemory* <a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a></td>
         </tr>
       </table>
 </div>
@@ -272,7 +274,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> pl_MemoryGlobal </td>
+          <td class="memname"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> pl_MemoryGlobal </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -288,7 +290,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> pl_Memory_CreateAndInit </td>
+          <td class="memname"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> pl_Memory_CreateAndInit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -304,7 +306,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a> pl_Memory_Create </td>
+          <td class="memname"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a> pl_Memory_Create </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -322,7 +324,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Memory_Init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
@@ -339,7 +341,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Memory_DeInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
@@ -356,7 +358,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Memory_Destroy </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
@@ -373,7 +375,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Memory_SetUserData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
@@ -411,7 +413,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_Memory_GetUserData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
@@ -438,7 +440,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Memory_SetFunctions </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
@@ -471,7 +473,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static <a class="el" href="plank___standard_header_8h.html#a6461616175af5df334c3067edbe0b6c3">PlankP</a> pl_Memory_AllocateBytes </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
@@ -498,7 +500,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static <a class="el" href="plank___result_8h.html#ae9964708ead91ea2db66788746b937eb">PlankResult</a> pl_Memory_Free </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a68250ed30b4ae340097a17521d931f70">PlankMemoryRef</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="plank___memory_8h.html#a43b96cb885241d2b7cfe1322b499c849">PlankMemoryRef</a>&#160;</td>
           <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
@@ -533,7 +535,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:44 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:57 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

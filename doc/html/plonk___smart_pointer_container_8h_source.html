@@ -301,66 +301,90 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00247"></a>00247 <span class="keyword">public</span>:
 <a name="l00248"></a><a class="code" href="class_scoped_pointer_container.html#a1c426c27e377064b85c74329d8f047fe">00248</a>     <span class="keyword">typedef</span> <a class="code" href="class_atomic_value.html">AtomicValue&lt;ScopedPointerType*&gt;</a> <a class="code" href="class_scoped_pointer_container.html#a1c426c27e377064b85c74329d8f047fe">AtomicPointer</a>;
 <a name="l00249"></a>00249 
-<a name="l00250"></a><a class="code" href="class_scoped_pointer_container.html#aed429cf005f586464427100a76eba690">00250</a>     <a class="code" href="class_scoped_pointer_container.html#aed429cf005f586464427100a76eba690">ScopedPointerContainer</a> (ScopedPointerType* <span class="keyword">const</span> raw) <span class="keywordflow">throw</span>()
-<a name="l00251"></a>00251     :   <span class="keyword">internal</span> (raw)
+<a name="l00250"></a><a class="code" href="class_scoped_pointer_container.html#ac7423074ad039165c560322bcad1dfc9">00250</a>     <a class="code" href="class_scoped_pointer_container.html#ac7423074ad039165c560322bcad1dfc9">ScopedPointerContainer</a>() throw()
+<a name="l00251"></a>00251     :   internal (0)
 <a name="l00252"></a>00252     {
 <a name="l00253"></a>00253     }
 <a name="l00254"></a>00254     
-<a name="l00255"></a><a class="code" href="class_scoped_pointer_container.html#a2b28398dc64f79f6194ba91a661744bf">00255</a>     <a class="code" href="class_scoped_pointer_container.html#a2b28398dc64f79f6194ba91a661744bf">~ScopedPointerContainer</a>()
-<a name="l00256"></a>00256     {
-<a name="l00257"></a>00257         <a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">destroy</a> (*<span class="keyword">this</span>);
+<a name="l00255"></a><a class="code" href="class_scoped_pointer_container.html#aed429cf005f586464427100a76eba690">00255</a>     <a class="code" href="class_scoped_pointer_container.html#ac7423074ad039165c560322bcad1dfc9">ScopedPointerContainer</a> (ScopedPointerType* <span class="keyword">const</span> raw) <span class="keywordflow">throw</span>()
+<a name="l00256"></a>00256     :   <span class="keyword">internal</span> (raw)
+<a name="l00257"></a>00257     {
 <a name="l00258"></a>00258     }
 <a name="l00259"></a>00259     
-<a name="l00260"></a><a class="code" href="class_scoped_pointer_container.html#acf156231fdbcf48e4c1670e45af95b98">00260</a>     <span class="keyword">inline</span> <a class="code" href="class_scoped_pointer_container.html#aed429cf005f586464427100a76eba690">ScopedPointerContainer</a> (<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; copy) <span class="keywordflow">throw</span>()
-<a name="l00261"></a>00261     :   <span class="keyword">internal</span> (0)
-<a name="l00262"></a>00262         {
-<a name="l00263"></a>00263         this-&gt;<a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (copy);        
-<a name="l00264"></a>00264         }
-<a name="l00265"></a>00265     
-<a name="l00266"></a><a class="code" href="class_scoped_pointer_container.html#ae24a0eadfc2ee2b999b14f69333e60dc">00266</a>         <span class="keyword">inline</span> <a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; <a class="code" href="class_scoped_pointer_container.html#ae24a0eadfc2ee2b999b14f69333e60dc">operator= </a>(<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00260"></a><a class="code" href="class_scoped_pointer_container.html#a2b28398dc64f79f6194ba91a661744bf">00260</a>     <a class="code" href="class_scoped_pointer_container.html#a2b28398dc64f79f6194ba91a661744bf">~ScopedPointerContainer</a>()
+<a name="l00261"></a>00261     {
+<a name="l00262"></a>00262         <a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">destroy</a> (*<span class="keyword">this</span>);
+<a name="l00263"></a>00263     }
+<a name="l00264"></a>00264     
+<a name="l00265"></a><a class="code" href="class_scoped_pointer_container.html#acf156231fdbcf48e4c1670e45af95b98">00265</a>     <span class="keyword">inline</span> <a class="code" href="class_scoped_pointer_container.html#ac7423074ad039165c560322bcad1dfc9">ScopedPointerContainer</a> (<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; copy) <span class="keywordflow">throw</span>()
+<a name="l00266"></a>00266     :   <span class="keyword">internal</span> (0)
 <a name="l00267"></a>00267         {
-<a name="l00268"></a>00268                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
-<a name="l00269"></a>00269         {
-<a name="l00270"></a>00270             <a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">destroy</a> (*<span class="keyword">this</span>);
-<a name="l00271"></a>00271             this-&gt;<a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (other);
-<a name="l00272"></a>00272         }
-<a name="l00273"></a>00273         
-<a name="l00274"></a>00274                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;           
-<a name="l00275"></a>00275         }    
-<a name="l00276"></a>00276     
-<a name="l00277"></a><a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">00277</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">destroy</a> (<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; container) <span class="keywordflow">throw</span>()
-<a name="l00278"></a>00278     {
-<a name="l00279"></a>00279         <a class="code" href="class_atomic_value.html">AtomicPointer</a> tmp (0);
-<a name="l00280"></a>00280         container.internal.swapWith (tmp);
-<a name="l00281"></a>00281         <span class="keyword">delete</span> tmp.getPtrUnchecked(); <span class="comment">// unchecked is fine here</span>
-<a name="l00282"></a>00282     }
-<a name="l00283"></a>00283     
-<a name="l00284"></a><a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">00284</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; other) <span class="keywordflow">throw</span>()
-<a name="l00285"></a>00285     {
-<a name="l00286"></a>00286         <span class="comment">// other might be contended</span>
-<a name="l00287"></a>00287         <span class="keyword">internal</span>.swapWith (other.internal);
-<a name="l00288"></a>00288     }
-<a name="l00289"></a>00289     
-<a name="l00290"></a><a class="code" href="class_scoped_pointer_container.html#ae8244954860fedc1c87e35e75cb58b4c">00290</a>     <span class="keyword">inline</span> ScopedPointerType* <a class="code" href="class_scoped_pointer_container.html#ae8244954860fedc1c87e35e75cb58b4c">operator-&gt;</a>() throw() 
-<a name="l00291"></a>00291     { 
-<a name="l00292"></a>00292         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(<span class="keyword">internal</span>.getPtrUnchecked() != 0);
-<a name="l00293"></a>00293         <span class="keywordflow">return</span> <span class="keyword">internal</span>.getPtr(); 
+<a name="l00268"></a>00268         this-&gt;<a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (copy);        
+<a name="l00269"></a>00269         }
+<a name="l00270"></a>00270 
+<a name="l00271"></a><a class="code" href="class_scoped_pointer_container.html#a6af2419873d809ff37e7021e34b36e30">00271</a>     <span class="keyword">inline</span> <a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; <a class="code" href="class_scoped_pointer_container.html#a6af2419873d809ff37e7021e34b36e30">operator= </a>(ScopedPointerType* <span class="keyword">const</span> raw) <span class="keywordflow">throw</span>()
+<a name="l00272"></a>00272         {
+<a name="l00273"></a>00273                 <a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> tmp (raw);
+<a name="l00274"></a>00274         this-&gt;<a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (tmp);                
+<a name="l00275"></a>00275                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;           
+<a name="l00276"></a>00276         }    
+<a name="l00277"></a>00277     
+<a name="l00278"></a><a class="code" href="class_scoped_pointer_container.html#ae24a0eadfc2ee2b999b14f69333e60dc">00278</a>         <span class="keyword">inline</span> <a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; <a class="code" href="class_scoped_pointer_container.html#a6af2419873d809ff37e7021e34b36e30">operator= </a>(<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00279"></a>00279         {
+<a name="l00280"></a>00280                 <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other)
+<a name="l00281"></a>00281         {
+<a name="l00282"></a>00282             <a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">destroy</a> (*<span class="keyword">this</span>);
+<a name="l00283"></a>00283             this-&gt;<a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (other);
+<a name="l00284"></a>00284         }
+<a name="l00285"></a>00285         
+<a name="l00286"></a>00286                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;           
+<a name="l00287"></a>00287         }    
+<a name="l00288"></a>00288     
+<a name="l00289"></a><a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">00289</a>     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">destroy</a> (<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; container) <span class="keywordflow">throw</span>()
+<a name="l00290"></a>00290     {
+<a name="l00291"></a>00291         <a class="code" href="class_atomic_value.html">AtomicPointer</a> tmp (0);
+<a name="l00292"></a>00292         container.internal.swapWith (tmp);
+<a name="l00293"></a>00293         <span class="keyword">delete</span> tmp.getPtrUnchecked(); <span class="comment">// unchecked is fine here</span>
 <a name="l00294"></a>00294     }
 <a name="l00295"></a>00295     
-<a name="l00296"></a><a class="code" href="class_scoped_pointer_container.html#a30083860072ffe8b171e04782f936b93">00296</a>         <span class="keyword">inline</span> <span class="keyword">const</span> ScopedPointerType* <a class="code" href="class_scoped_pointer_container.html#ae8244954860fedc1c87e35e75cb58b4c">operator-&gt;</a>() <span class="keyword">const</span> throw() 
-<a name="l00297"></a>00297     { 
-<a name="l00298"></a>00298         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(<span class="keyword">internal</span>.getPtrUnchecked() != 0);
-<a name="l00299"></a>00299         <span class="keywordflow">return</span> <span class="keyword">internal</span>.getPtr(); 
+<a name="l00296"></a><a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">00296</a>     <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (<a class="code" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; other) <span class="keywordflow">throw</span>()
+<a name="l00297"></a>00297     {
+<a name="l00298"></a>00298         <span class="comment">// other might be contended</span>
+<a name="l00299"></a>00299         <span class="keyword">internal</span>.swapWith (other.internal);
 <a name="l00300"></a>00300     }
-<a name="l00301"></a>00301         
-<a name="l00302"></a>00302 <span class="keyword">private</span>:
-<a name="l00303"></a>00303     <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicPointer</a> <span class="keyword">internal</span>;    
-<a name="l00304"></a>00304 };
-<a name="l00305"></a>00305 
-<a name="l00306"></a>00306 <span class="comment">//------------------------------------------------------------------------------</span>
-<a name="l00307"></a>00307 
-<a name="l00308"></a>00308 
-<a name="l00309"></a>00309 <span class="preprocessor">#endif // PLONK_SMARTPOINTERCONTAINER_H</span>
+<a name="l00301"></a>00301     
+<a name="l00302"></a><a class="code" href="class_scoped_pointer_container.html#ae8244954860fedc1c87e35e75cb58b4c">00302</a>     <span class="keyword">inline</span> ScopedPointerType* <a class="code" href="class_scoped_pointer_container.html#ae8244954860fedc1c87e35e75cb58b4c">operator-&gt;</a>() throw() 
+<a name="l00303"></a>00303     { 
+<a name="l00304"></a>00304         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(<span class="keyword">internal</span>.getPtrUnchecked() != 0);
+<a name="l00305"></a>00305         <span class="keywordflow">return</span> <span class="keyword">internal</span>.getPtr(); 
+<a name="l00306"></a>00306     }
+<a name="l00307"></a>00307     
+<a name="l00308"></a><a class="code" href="class_scoped_pointer_container.html#a30083860072ffe8b171e04782f936b93">00308</a>         <span class="keyword">inline</span> <span class="keyword">const</span> ScopedPointerType* <a class="code" href="class_scoped_pointer_container.html#ae8244954860fedc1c87e35e75cb58b4c">operator-&gt;</a>() <span class="keyword">const</span> throw() 
+<a name="l00309"></a>00309     { 
+<a name="l00310"></a>00310         <a class="code" href="plonk___standard_header_8h.html#aa0e90d4921c332cee7138b4b019ca26e">plonk_assert</a>(<span class="keyword">internal</span>.getPtrUnchecked() != 0);
+<a name="l00311"></a>00311         <span class="keywordflow">return</span> <span class="keyword">internal</span>.getPtr(); 
+<a name="l00312"></a>00312     }
+<a name="l00313"></a>00313     
+<a name="l00314"></a>00314     <span class="keyword">template</span>&lt;<span class="keyword">class</span> OtherType&gt;
+<a name="l00315"></a><a class="code" href="class_scoped_pointer_container.html#ad4835064df4be4ec4ec099540c27eed3">00315</a>     <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_scoped_pointer_container.html#ad4835064df4be4ec4ec099540c27eed3">operator== </a>(OtherType <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00316"></a>00316         {
+<a name="l00317"></a>00317                 <span class="keywordflow">return</span> <span class="keyword">internal</span>.getPtrUnchcked() == other;
+<a name="l00318"></a>00318         }
+<a name="l00319"></a>00319         
+<a name="l00320"></a>00320     <span class="keyword">template</span>&lt;<span class="keyword">class</span> OtherType&gt;
+<a name="l00321"></a><a class="code" href="class_scoped_pointer_container.html#a29e5ec4af4643d2a61c5406aa50272c4">00321</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_scoped_pointer_container.html#a29e5ec4af4643d2a61c5406aa50272c4">operator!= </a>(OtherType <span class="keyword">const</span>&amp; other) <span class="keyword">const</span> <span class="keywordflow">throw</span>()
+<a name="l00322"></a>00322         {
+<a name="l00323"></a>00323                 <span class="keywordflow">return</span> <span class="keyword">internal</span>.getPtrUnchcked() != other;
+<a name="l00324"></a>00324         }
+<a name="l00325"></a>00325         
+<a name="l00326"></a>00326 <span class="keyword">private</span>:
+<a name="l00327"></a>00327     <a class="code" href="class_atomic_value.html" title="Enables atomic operations on a range of types.">AtomicPointer</a> <span class="keyword">internal</span>;    
+<a name="l00328"></a>00328 };
+<a name="l00329"></a>00329 
+<a name="l00330"></a>00330 <span class="comment">//------------------------------------------------------------------------------</span>
+<a name="l00331"></a>00331 
+<a name="l00332"></a>00332 
+<a name="l00333"></a>00333 <span class="preprocessor">#endif // PLONK_SMARTPOINTERCONTAINER_H</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -377,7 +401,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:42 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:04:55 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

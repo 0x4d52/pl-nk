@@ -1028,12 +1028,12 @@ template&lt;class ArrayType, class RowType&gt; </div>
 <p>Interleave the 2D array into one dimension. </p>
 <p>The result will contain the same number of array items but flattened to a one dimensional array.</p>
 <p>Example: </p>
-<div class="fragment"><pre class="fragment">     <a class="code" href="class_numerical_array.html">IntArray</a> source1d (1, 2, 3, 4, 5, 6, 7);
+<div class="fragment"><pre class="fragment">     <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">IntArray</a> source1d (1, 2, 3, 4, 5, 6, 7);
      
      <a class="code" href="class_numerical_array2_d.html">IntArray2D</a> dest2d = source1d.<a class="code" href="class_object_array.html#ae4f769c721e3b332257513b88e8ed748" title="De-interleave an array into a 2D array.">deinterleave</a> (2);
      <span class="comment">// result will be {{1, 3, 5, 7}, {2, 4, 6}}</span>
      
-     <a class="code" href="class_numerical_array.html">IntArray</a> dest1d = dest2d.<a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd" title="Interleave the 2D array into one dimension.">interleave</a>();
+     <a class="code" href="class_numerical_array.html" title="Stores arrays of simple numerical values.">IntArray</a> dest1d = dest2d.<a class="code" href="class_object_array2_d_base.html#a48a1a46956adc5c15b0cfec6d297f3dd" title="Interleave the 2D array into one dimension.">interleave</a>();
      <span class="comment">// result will be {1, 2, 3, 4, 5, 6, 7}</span>
 </pre></div> 
 </div>
@@ -1056,7 +1056,7 @@ template&lt;class ArrayType, class RowType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:55 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:07 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -68,9 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">JuceAudioHost Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="JuceAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___juce_audio_host_8h_source.html">plonk_JuceAudioHost.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="JuceAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" --><div class="dynheader">
 Inheritance diagram for JuceAudioHost:</div>
 <div class="dyncontent">
  <div class="center">
@@ -84,7 +81,7 @@ Inheritance diagram for JuceAudioHost:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_juce_audio_host.html#a70231c9e5847a5efba9ee13e96ba9b4e">JuceAudioHost</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_juce_audio_host.html#a253b24481d9a4e9b6145e31f02e8e94c">JuceAudioHost</a> (<a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *omb=<a class="el" href="class_object_memory.html">ObjectMemory</a>&lt; <a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a> &gt;::create())  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_juce_audio_host.html#a03057d06e68acb98b31a969447eb91c5">~JuceAudioHost</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_juce_audio_host.html#ada1e6460f3712aa1b628a2b1ee336b52">getHostName</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the audio host.  <a href="#ada1e6460f3712aa1b628a2b1ee336b52"></a><br/></td></tr>
@@ -105,14 +102,15 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_juce_audio_host.html#ab0fdc64d19b0bde53add7296d9d3d2b5">audioDeviceStopped</a> ()  throw ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a70231c9e5847a5efba9ee13e96ba9b4e"></a><!-- doxytag: member="JuceAudioHost::JuceAudioHost" ref="a70231c9e5847a5efba9ee13e96ba9b4e" args="()" -->
+<a class="anchor" id="a253b24481d9a4e9b6145e31f02e8e94c"></a><!-- doxytag: member="JuceAudioHost::JuceAudioHost" ref="a253b24481d9a4e9b6145e31f02e8e94c" args="(ObjectMemoryBase *omb=ObjectMemory&lt; ObjectMemoryDefault &gt;::create())" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">JuceAudioHost::JuceAudioHost </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *&#160;</td>
+          <td class="paramname"><em>omb</em> = <code><a class="el" href="class_object_memory.html">ObjectMemory</a>&lt;&#160;<a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a>&#160;&gt;::create()</code></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -138,20 +136,143 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a7faa2a658607c55389b949d3ee3eae57"></a><!-- doxytag: member="JuceAudioHost::audioDeviceAboutToStart" ref="a7faa2a658607c55389b949d3ee3eae57" args="(AudioIODevice *device)" -->
+<a class="anchor" id="ada1e6460f3712aa1b628a2b1ee336b52"></a><!-- doxytag: member="JuceAudioHost::getHostName" ref="ada1e6460f3712aa1b628a2b1ee336b52" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void JuceAudioHost::audioDeviceAboutToStart </td>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getHostName </td>
           <td>(</td>
-          <td class="paramtype">AudioIODevice *&#160;</td>
-          <td class="paramname"><em>device</em></td><td>)</td>
-          <td>  throw ()</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Get the name of the audio host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa1b5341d4e2c3a052e74d25d91d61dc6"></a><!-- doxytag: member="JuceAudioHost::getNativeHostName" ref="aa1b5341d4e2c3a052e74d25d91d61dc6" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getNativeHostName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the native host audio API. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a9f3d7131d5e3b466319783f4362eefa4">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa21eccee6a496368d997f858aed942dd"></a><!-- doxytag: member="JuceAudioHost::getInputName" ref="aa21eccee6a496368d997f858aed942dd" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getInputName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio input device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4027a4ade1fcc79486186e1749df5b52"></a><!-- doxytag: member="JuceAudioHost::getOutputName" ref="a4027a4ade1fcc79486186e1749df5b52" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getOutputName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio output device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ad46ac3e85653530dead5e504c1f73984">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adc6d54e10aa7e5fe8a8d25fd19f5657d"></a><!-- doxytag: member="JuceAudioHost::getCpuUsage" ref="adc6d54e10aa7e5fe8a8d25fd19f5657d" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double JuceAudioHost::getCpuUsage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the current CPU usage for the DSP loop. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a61e9e3e0b4a7f866fb4a7c077c6391c1"></a><!-- doxytag: member="JuceAudioHost::startHost" ref="a61e9e3e0b4a7f866fb4a7c077c6391c1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JuceAudioHost::startHost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Start the host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9edecccdc0d5915057d965f3b4b7392d"></a><!-- doxytag: member="JuceAudioHost::stopHost" ref="a9edecccdc0d5915057d965f3b4b7392d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JuceAudioHost::stopHost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Stop the host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a461a85d786386a56216fc80057b4f657">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -200,6 +321,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7faa2a658607c55389b949d3ee3eae57"></a><!-- doxytag: member="JuceAudioHost::audioDeviceAboutToStart" ref="a7faa2a658607c55389b949d3ee3eae57" args="(AudioIODevice *device)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JuceAudioHost::audioDeviceAboutToStart </td>
+          <td>(</td>
+          <td class="paramtype">AudioIODevice *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ab0fdc64d19b0bde53add7296d9d3d2b5"></a><!-- doxytag: member="JuceAudioHost::audioDeviceStopped" ref="ab0fdc64d19b0bde53add7296d9d3d2b5" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -213,146 +351,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adc6d54e10aa7e5fe8a8d25fd19f5657d"></a><!-- doxytag: member="JuceAudioHost::getCpuUsage" ref="adc6d54e10aa7e5fe8a8d25fd19f5657d" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double JuceAudioHost::getCpuUsage </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the current CPU usage for the DSP loop. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ada1e6460f3712aa1b628a2b1ee336b52"></a><!-- doxytag: member="JuceAudioHost::getHostName" ref="ada1e6460f3712aa1b628a2b1ee336b52" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getHostName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa21eccee6a496368d997f858aed942dd"></a><!-- doxytag: member="JuceAudioHost::getInputName" ref="aa21eccee6a496368d997f858aed942dd" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getInputName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio input device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa1b5341d4e2c3a052e74d25d91d61dc6"></a><!-- doxytag: member="JuceAudioHost::getNativeHostName" ref="aa1b5341d4e2c3a052e74d25d91d61dc6" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getNativeHostName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the native host audio API. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a9f3d7131d5e3b466319783f4362eefa4">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4027a4ade1fcc79486186e1749df5b52"></a><!-- doxytag: member="JuceAudioHost::getOutputName" ref="a4027a4ade1fcc79486186e1749df5b52" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> JuceAudioHost::getOutputName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio output device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ad46ac3e85653530dead5e504c1f73984">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a61e9e3e0b4a7f866fb4a7c077c6391c1"></a><!-- doxytag: member="JuceAudioHost::startHost" ref="a61e9e3e0b4a7f866fb4a7c077c6391c1" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void JuceAudioHost::startHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Start the host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9edecccdc0d5915057d965f3b4b7392d"></a><!-- doxytag: member="JuceAudioHost::stopHost" ref="a9edecccdc0d5915057d965f3b4b7392d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void JuceAudioHost::stopHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Stop the host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a461a85d786386a56216fc80057b4f657">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -374,7 +372,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 17:32:47 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:05 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

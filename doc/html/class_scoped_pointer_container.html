@@ -78,13 +78,19 @@ Public Types</h2></td></tr>
 &lt; ScopedPointerType * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#a1c426c27e377064b85c74329d8f047fe">AtomicPointer</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#ac7423074ad039165c560322bcad1dfc9">ScopedPointerContainer</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#aed429cf005f586464427100a76eba690">ScopedPointerContainer</a> (ScopedPointerType *const raw)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#a2b28398dc64f79f6194ba91a661744bf">~ScopedPointerContainer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#acf156231fdbcf48e4c1670e45af95b98">ScopedPointerContainer</a> (<a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> &amp;copy)  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#a6af2419873d809ff37e7021e34b36e30">operator=</a> (ScopedPointerType *const raw)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#ae24a0eadfc2ee2b999b14f69333e60dc">operator=</a> (<a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> &amp;other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#a788fae36962f73c99bcdd0e578468075">swapWith</a> (<a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> &amp;other)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ScopedPointerType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#ae8244954860fedc1c87e35e75cb58b4c">operator-&gt;</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const ScopedPointerType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#a30083860072ffe8b171e04782f936b93">operator-&gt;</a> () const   throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#ad4835064df4be4ec4ec099540c27eed3">operator==</a> (OtherType const &amp;other) const   throw ()</td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;class OtherType &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#a29e5ec4af4643d2a61c5406aa50272c4">operator!=</a> (OtherType const &amp;other) const   throw ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scoped_pointer_container.html#a33d030e17fb27e51957c3b1f9625da44">destroy</a> (<a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> &amp;container)  throw ()</td></tr>
@@ -109,6 +115,24 @@ template&lt;class ScopedPointerType&gt; </div>
 </div>
 </div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ac7423074ad039165c560322bcad1dfc9"></a><!-- doxytag: member="ScopedPointerContainer::ScopedPointerContainer" ref="ac7423074ad039165c560322bcad1dfc9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ScopedPointerType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&lt; ScopedPointerType &gt;::<a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aed429cf005f586464427100a76eba690"></a><!-- doxytag: member="ScopedPointerContainer::ScopedPointerContainer" ref="aed429cf005f586464427100a76eba690" args="(ScopedPointerType *const raw)" -->
 <div class="memitem">
 <div class="memproto">
@@ -166,6 +190,25 @@ template&lt;class ScopedPointerType&gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a6af2419873d809ff37e7021e34b36e30"></a><!-- doxytag: member="ScopedPointerContainer::operator=" ref="a6af2419873d809ff37e7021e34b36e30" args="(ScopedPointerType *const raw)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ScopedPointerType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&amp; <a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&lt; ScopedPointerType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">ScopedPointerType *const&#160;</td>
+          <td class="paramname"><em>raw</em></td><td>)</td>
+          <td>  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ae24a0eadfc2ee2b999b14f69333e60dc"></a><!-- doxytag: member="ScopedPointerContainer::operator=" ref="ae24a0eadfc2ee2b999b14f69333e60dc" args="(ScopedPointerContainer &amp;other)" -->
 <div class="memitem">
 <div class="memproto">
@@ -259,6 +302,48 @@ template&lt;class ScopedPointerType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ad4835064df4be4ec4ec099540c27eed3"></a><!-- doxytag: member="ScopedPointerContainer::operator==" ref="ad4835064df4be4ec4ec099540c27eed3" args="(OtherType const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ScopedPointerType&gt; </div>
+<div class="memtemplate">
+template&lt;class OtherType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&lt; ScopedPointerType &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a29e5ec4af4643d2a61c5406aa50272c4"></a><!-- doxytag: member="ScopedPointerContainer::operator!=" ref="a29e5ec4af4643d2a61c5406aa50272c4" args="(OtherType const &amp;other) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ScopedPointerType&gt; </div>
+<div class="memtemplate">
+template&lt;class OtherType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_scoped_pointer_container.html">ScopedPointerContainer</a>&lt; ScopedPointerType &gt;::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">OtherType const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const  throw ()<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___smart_pointer_container_8h_source.html">plonk_SmartPointerContainer.h</a></li>
 </ul>
@@ -277,7 +362,7 @@ template&lt;class ScopedPointerType&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:10 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

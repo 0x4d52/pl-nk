@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -63,14 +62,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">PortAudioAudioHost Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="PortAudioAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" -->
-<p><code>#include &lt;<a class="el" href="plonk___port_audio_audio_host_8h_source.html">plonk_PortAudioAudioHost.h</a>&gt;</code></p>
-<div class="dynheader">
+<!-- doxytag: class="PortAudioAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" --><div class="dynheader">
 Inheritance diagram for PortAudioAudioHost:</div>
 <div class="dyncontent">
  <div class="center">
@@ -82,9 +80,16 @@ Inheritance diagram for PortAudioAudioHost:</div>
 
 <p><a href="class_port_audio_audio_host-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
+::<a class="el" href="class_port_audio_audio_host.html#a17bee8805f1c9767b92573becdd692ee">BufferArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_port_audio_audio_host.html#a17bee8805f1c9767b92573becdd692ee">BufferArray</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
+::<a class="el" href="class_port_audio_audio_host.html#aace4cd12b923dcbc60a278383798ea77">ConstBufferArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_port_audio_audio_host.html#aace4cd12b923dcbc60a278383798ea77">ConstBufferArray</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_port_audio_audio_host.html#a909e9770ce6955a84d6c3b4be72fbd1c">PortAudioAudioHost</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_port_audio_audio_host.html#a2a5c2178f7ea135a6db5eb2b92b3bf7d">PortAudioAudioHost</a> (<a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *omb=<a class="el" href="class_object_memory.html">ObjectMemory</a>&lt; <a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a> &gt;::create())  throw ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#a2a5c2178f7ea135a6db5eb2b92b3bf7d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_port_audio_audio_host.html#a194e8343166ed08a5b6128399508cfb2">~PortAudioAudioHost</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_port_audio_audio_host.html#a57229bcdd1ed0bf0758ea8730cd0adbe">getHostName</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the audio host.  <a href="#a57229bcdd1ed0bf0758ea8730cd0adbe"></a><br/></td></tr>
@@ -102,20 +107,54 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the host.  <a href="#aa25807e2d7528daf1cf348c7af2acb6f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_port_audio_audio_host.html#abf62aede8c425de31aa5aa16d5bf210f">callback</a> (const float **inputData, float **outputData, unsigned long frameCount, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags)  throw ()</td></tr>
 </table>
+<hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a17bee8805f1c9767b92573becdd692ee"></a><!-- doxytag: member="PortAudioAudioHost::BufferArray" ref="a17bee8805f1c9767b92573becdd692ee" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt;float&gt;::<a class="el" href="class_port_audio_audio_host.html#a17bee8805f1c9767b92573becdd692ee">BufferArray</a> <a class="el" href="class_port_audio_audio_host.html#a17bee8805f1c9767b92573becdd692ee">PortAudioAudioHost::BufferArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_audio_host_base.html#a8ca5b6117cc61f13ecf7cc701c412f8b">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aace4cd12b923dcbc60a278383798ea77"></a><!-- doxytag: member="PortAudioAudioHost::ConstBufferArray" ref="aace4cd12b923dcbc60a278383798ea77" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt;float&gt;::<a class="el" href="class_port_audio_audio_host.html#aace4cd12b923dcbc60a278383798ea77">ConstBufferArray</a> <a class="el" href="class_port_audio_audio_host.html#aace4cd12b923dcbc60a278383798ea77">PortAudioAudioHost::ConstBufferArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_audio_host_base.html#aa7312370132fc29cbe204f29a6fa0429">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a909e9770ce6955a84d6c3b4be72fbd1c"></a><!-- doxytag: member="PortAudioAudioHost::PortAudioAudioHost" ref="a909e9770ce6955a84d6c3b4be72fbd1c" args="()" -->
+<a class="anchor" id="a2a5c2178f7ea135a6db5eb2b92b3bf7d"></a><!-- doxytag: member="PortAudioAudioHost::PortAudioAudioHost" ref="a2a5c2178f7ea135a6db5eb2b92b3bf7d" args="(ObjectMemoryBase *omb=ObjectMemory&lt; ObjectMemoryDefault &gt;::create())" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">PortAudioAudioHost::PortAudioAudioHost </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *&#160;</td>
+          <td class="paramname"><em>omb</em> = <code><a class="el" href="class_object_memory.html">ObjectMemory</a>&lt;&#160;<a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a>&#160;&gt;::create()</code></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Default constructor. </p>
 
 </div>
 </div>
@@ -136,6 +175,146 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a57229bcdd1ed0bf0758ea8730cd0adbe"></a><!-- doxytag: member="PortAudioAudioHost::getHostName" ref="a57229bcdd1ed0bf0758ea8730cd0adbe" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getHostName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8153804facf8763b46931ab58ea24fcd"></a><!-- doxytag: member="PortAudioAudioHost::getNativeHostName" ref="a8153804facf8763b46931ab58ea24fcd" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getNativeHostName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the native host audio API. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a9f3d7131d5e3b466319783f4362eefa4">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a593b705d936549cc02cef5b9f1c88c23"></a><!-- doxytag: member="PortAudioAudioHost::getInputName" ref="a593b705d936549cc02cef5b9f1c88c23" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getInputName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio input device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4dede4e5a0a8bf6cb63702bcac0359f7"></a><!-- doxytag: member="PortAudioAudioHost::getOutputName" ref="a4dede4e5a0a8bf6cb63702bcac0359f7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getOutputName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio output device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ad46ac3e85653530dead5e504c1f73984">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0452b64734b12bdb056830dc1e11d309"></a><!-- doxytag: member="PortAudioAudioHost::getCpuUsage" ref="a0452b64734b12bdb056830dc1e11d309" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PortAudioAudioHost::getCpuUsage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the current CPU usage for the DSP loop. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a96e8b27c731da3bbc836fa0eb511d008"></a><!-- doxytag: member="PortAudioAudioHost::startHost" ref="a96e8b27c731da3bbc836fa0eb511d008" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PortAudioAudioHost::startHost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Start the host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa25807e2d7528daf1cf348c7af2acb6f"></a><!-- doxytag: member="PortAudioAudioHost::stopHost" ref="aa25807e2d7528daf1cf348c7af2acb6f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PortAudioAudioHost::stopHost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Stop the host. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#a461a85d786386a56216fc80057b4f657">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="abf62aede8c425de31aa5aa16d5bf210f"></a><!-- doxytag: member="PortAudioAudioHost::callback" ref="abf62aede8c425de31aa5aa16d5bf210f" args="(const float **inputData, float **outputData, unsigned long frameCount, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags)" -->
 <div class="memitem">
 <div class="memproto">
@@ -181,146 +360,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0452b64734b12bdb056830dc1e11d309"></a><!-- doxytag: member="PortAudioAudioHost::getCpuUsage" ref="a0452b64734b12bdb056830dc1e11d309" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double PortAudioAudioHost::getCpuUsage </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the current CPU usage for the DSP loop. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a57229bcdd1ed0bf0758ea8730cd0adbe"></a><!-- doxytag: member="PortAudioAudioHost::getHostName" ref="a57229bcdd1ed0bf0758ea8730cd0adbe" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getHostName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a593b705d936549cc02cef5b9f1c88c23"></a><!-- doxytag: member="PortAudioAudioHost::getInputName" ref="a593b705d936549cc02cef5b9f1c88c23" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getInputName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio input device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8153804facf8763b46931ab58ea24fcd"></a><!-- doxytag: member="PortAudioAudioHost::getNativeHostName" ref="a8153804facf8763b46931ab58ea24fcd" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getNativeHostName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the native host audio API. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a9f3d7131d5e3b466319783f4362eefa4">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4dede4e5a0a8bf6cb63702bcac0359f7"></a><!-- doxytag: member="PortAudioAudioHost::getOutputName" ref="a4dede4e5a0a8bf6cb63702bcac0359f7" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> PortAudioAudioHost::getOutputName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio output device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ad46ac3e85653530dead5e504c1f73984">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a96e8b27c731da3bbc836fa0eb511d008"></a><!-- doxytag: member="PortAudioAudioHost::startHost" ref="a96e8b27c731da3bbc836fa0eb511d008" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void PortAudioAudioHost::startHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Start the host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a21d2959b9d731a3b226682f1fb87af87">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa25807e2d7528daf1cf348c7af2acb6f"></a><!-- doxytag: member="PortAudioAudioHost::stopHost" ref="aa25807e2d7528daf1cf348c7af2acb6f" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void PortAudioAudioHost::stopHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Stop the host. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a461a85d786386a56216fc80057b4f657">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___port_audio_audio_host_8h_source.html">plonk_PortAudioAudioHost.h</a></li>
 </ul>
@@ -339,7 +378,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 17:32:48 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:08 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

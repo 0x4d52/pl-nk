@@ -104,8 +104,6 @@ Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <br class="typebreak"/>
 <a class="el" href="class_proxy_owner_channel_internal.html">ProxyOwnerChannelInternal</a><br class="typebreak"/>
 &lt; SampleType, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#acc0fb3143198421d2e2c19d401aafd75">Internal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a><br class="typebreak"/>
-&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#ac90394b13651971f8e2c6a8e19ed1e75">InternalBase</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_unit_base.html">UnitBase</a>&lt; SampleType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#af842acc580d8a1d8008c7db71411cbd2">UnitType</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_input_dictionary.html">InputDictionary</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#a3cc31a8d754afa9b4b57efd5cf6fe997">Inputs</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_numerical_array.html">NumericalArray</a><br class="typebreak"/>
@@ -121,7 +119,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#a0a42a823be84d40c0aefc9d6e1c574b7">PatchChannelInternal</a> (<a class="el" href="class_input_dictionary.html">Inputs</a> const &amp;inputs, <a class="el" href="struct_channel_data_3_01_channel_internal_core_01_4.html">Data</a> const &amp;data, <a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize, <a class="el" href="class_sample_rate.html">SampleRate</a> const &amp;sampleRate, <a class="el" href="class_object_array.html">ChannelArrayType</a> &amp;channels)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#a0ddc05c4ee3f7ca17f1dbb228d6a0731">getName</a> () const   throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_numerical_array.html">IntArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#aaa0c648de039979ffb9c42dea70ec7d1">getInputKeys</a> () const   throw ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_channel_internal_base.html">InternalBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#aeccb4462cd15009ab2a79bf5bf51ccc5">getChannel</a> (const int)  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#ad10afb19d875cc5db9f04967066f66ac">initChannel</a> (const int channel)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to initialise the channel's initial value.  <a href="#ad10afb19d875cc5db9f04967066f66ac"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_patch_channel_internal.html#a7cc1ad5770449333576b1fa1cf539d18">process</a> (<a class="el" href="class_process_info.html">ProcessInfo</a> &amp;info, const int)  throw ()</td></tr>
@@ -219,23 +216,6 @@ template&lt;class SampleType &gt; </div>
 <div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#aa9a9d2faaa7e36be592755c2b40cfba7">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac90394b13651971f8e2c6a8e19ed1e75"></a><!-- doxytag: member="PatchChannelInternal::InternalBase" ref="ac90394b13651971f8e2c6a8e19ed1e75" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="class_channel_internal_base.html">ChannelInternalBase</a>&lt;SampleType&gt; <a class="el" href="class_patch_channel_internal.html">PatchChannelInternal</a>&lt; SampleType &gt;::<a class="el" href="class_channel_internal_base.html">InternalBase</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a5104c81d97d0e53b9a2827dc502cf155">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -439,27 +419,6 @@ template&lt;class SampleType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aeccb4462cd15009ab2a79bf5bf51ccc5"></a><!-- doxytag: member="PatchChannelInternal::getChannel" ref="aeccb4462cd15009ab2a79bf5bf51ccc5" args="(const int)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class SampleType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_channel_internal_base.html">InternalBase</a>* <a class="el" href="class_patch_channel_internal.html">PatchChannelInternal</a>&lt; SampleType &gt;::getChannel </td>
-          <td>(</td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td>  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="class_proxy_owner_channel_internal.html#a75407545f0517c5df9c0c76d38145a3d">ProxyOwnerChannelInternal&lt; SampleType, ChannelData&lt; PatchChannelInternal&lt; SampleType &gt; &gt; &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ad10afb19d875cc5db9f04967066f66ac"></a><!-- doxytag: member="PatchChannelInternal::initChannel" ref="ad10afb19d875cc5db9f04967066f66ac" args="(const int channel)" -->
 <div class="memitem">
 <div class="memproto">
@@ -574,7 +533,7 @@ template&lt;class SampleType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:56 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:07 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SampleRate Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="SampleRate" --><!-- doxytag: inherits="Variable&lt; double &gt;" -->
+<!-- doxytag: class="SampleRate" --><!-- doxytag: inherits="Variable" -->
 <p>A specialised <a class="el" href="class_variable.html">Variable&lt;double&gt;</a> for handling sample rates.  
  <a href="class_sample_rate.html#details">More...</a></p>
 <div class="dynheader">
@@ -78,8 +78,13 @@ Inheritance diagram for SampleRate:</div>
  <div class="center">
   <img src="class_sample_rate.png" usemap="#SampleRate_map" alt=""/>
   <map id="SampleRate_map" name="SampleRate_map">
-<area href="class_sample_rate_default.html" alt="SampleRateDefault" shape="rect" coords="0,56,158,80"/>
-<area href="class_sample_rate_no_preference.html" alt="SampleRateNoPreference" shape="rect" coords="168,56,326,80"/>
+<area href="class_variable.html" title="A template class for storing any variable type." alt="Variable&lt; Type &gt;" shape="rect" coords="185,224,546,248"/>
+<area href="class_sender_container.html" alt="SenderContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,168,546,192"/>
+<area href="class_smart_pointer_container.html" alt="SmartPointerContainer&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,112,546,136"/>
+<area href="class_smart_pointer_container_base.html" alt="SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;" shape="rect" coords="185,56,546,80"/>
+<area href="class_plonk_base.html" alt="PlonkBase" shape="rect" coords="185,0,546,24"/>
+<area href="class_sample_rate_default.html" alt="SampleRateDefault" shape="rect" coords="0,336,361,360"/>
+<area href="class_sample_rate_no_preference.html" alt="SampleRateNoPreference" shape="rect" coords="371,336,732,360"/>
 </map>
  </div></div>
 
@@ -87,13 +92,13 @@ Inheritance diagram for SampleRate:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt; <a class="el" href="class_variable.html">Base</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#a24ab2a49d5e9d9aae022d212a014fa0f">Internal</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt; <a class="el" href="class_sender_container.html">Base</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#a24ab2a49d5e9d9aae022d212a014fa0f">Internal</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_variable.html">DoubleVariable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#af86f9b391c8bdabd7fac07c8b112d6a6">Base</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_weak_pointer_container.html">WeakPointerContainer</a><br class="typebreak"/>
 &lt; <a class="el" href="class_sample_rate.html">SampleRate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#a1adcb77fd56fc961d3c311019d9dafd8">Weak</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#a7012fcb06fad9946b4e9104ea66f220b">SampleRate</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#abed9171c6660f9bbb44149a6e73cca40">SampleRate</a> ()  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#aad9ead2daa5f892adbc9714d4050c35e">SampleRate</a> (<a class="el" href="class_block_size.html">BlockSize</a> const &amp;blockSize)  throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To catch a potential programming error.  <a href="#aad9ead2daa5f892adbc9714d4050c35e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_rate.html#a51720e5ae3c25ef2be86a9101ceed410">SampleRate</a> (const double initValue)  throw ()</td></tr>
@@ -133,13 +138,13 @@ Static Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt;<a class="el" href="class_variable.html">Base</a>&gt; <a class="el" href="class_variable_internal.html">SampleRate::Internal</a></td>
+          <td class="memname">typedef <a class="el" href="class_variable_internal.html">VariableInternal</a>&lt;<a class="el" href="class_sender_container.html">Base</a>&gt; <a class="el" href="class_variable_internal.html">SampleRate::Internal</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_variable.html#aa48b89eeec4c57a9648acdaab46d9e49">Variable&lt; double &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_variable.html#aa48b89eeec4c57a9648acdaab46d9e49">Variable&lt; Type &gt;</a>.</p>
 
 </div>
 </div>
@@ -154,7 +159,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Variable&lt; double &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_variable.html#a7d33a8832aa7de89feb902833102589a">Variable&lt; Type &gt;</a>.</p>
 
 </div>
 </div>
@@ -169,17 +174,17 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_variable.html#a36b782ed60391366e7bc3ac12ed61860">Variable&lt; double &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_variable.html#a36b782ed60391366e7bc3ac12ed61860">Variable&lt; Type &gt;</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a7012fcb06fad9946b4e9104ea66f220b"></a><!-- doxytag: member="SampleRate::SampleRate" ref="a7012fcb06fad9946b4e9104ea66f220b" args="()" -->
+<a class="anchor" id="abed9171c6660f9bbb44149a6e73cca40"></a><!-- doxytag: member="SampleRate::SampleRate" ref="abed9171c6660f9bbb44149a6e73cca40" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">SampleRate::SampleRate </td>
+          <td class="memname">BEGIN_PLONK_NAMESPACE SampleRate::SampleRate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>  throw ()</td>
@@ -542,7 +547,7 @@ template&lt;class OtherType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; VariableInternalBase&lt; double &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#ab65284d17f2082ce89f6b1017011e418">SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -560,7 +565,7 @@ template&lt;class OtherType &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; VariableInternalBase&lt; double &gt; &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="class_smart_pointer_container_base.html#a2ba4f8902c0316ee3b8dbe10c3332002">SmartPointerContainerBase&lt; VariableInternalBase&lt; Type &gt; &gt;</a>.</p>
 
 </div>
 </div>
@@ -583,7 +588,7 @@ template&lt;class OtherType &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Sep 2 2012 11:13:58 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:09 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

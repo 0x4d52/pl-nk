@@ -33,7 +33,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -72,8 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- doxytag: class="IOSAudioHost" --><!-- doxytag: inherits="AudioHostBase&lt; float &gt;" -->
 <p>An audio host for the iOS platform.  
  <a href="class_i_o_s_audio_host.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="plonk___i_o_s_audio_host_8h_source.html">plonk_IOSAudioHost.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for IOSAudioHost:</div>
 <div class="dyncontent">
@@ -89,10 +86,14 @@ Inheritance diagram for IOSAudioHost:</div>
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
+::<a class="el" href="class_i_o_s_audio_host.html#a80e44e86f90843d273da17e04035b6d5">BufferArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_s_audio_host.html#a80e44e86f90843d273da17e04035b6d5">BufferArray</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
+::<a class="el" href="class_i_o_s_audio_host.html#a8c64162a23d54f2ec8054bb49f17d191">ConstBufferArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_s_audio_host.html#a8c64162a23d54f2ec8054bb49f17d191">ConstBufferArray</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt; float &gt;<br class="typebreak"/>
 ::<a class="el" href="class_i_o_s_audio_host.html#a12732b4b8ffa38d04beb90cddf4bd600">UnitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_s_audio_host.html#a12732b4b8ffa38d04beb90cddf4bd600">UnitType</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_s_audio_host.html#ac622434ceee8ef146f569e4b28c43c71">IOSAudioHost</a> ()  throw ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_s_audio_host.html#aa79ba54c2bfc5481f961e2663958c840">IOSAudioHost</a> (<a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *omb=<a class="el" href="class_object_memory.html">ObjectMemory</a>&lt; <a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a> &gt;::create())  throw ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_s_audio_host.html#a71868ddb82438dee9d14854945f3b10a">~IOSAudioHost</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_text.html">Text</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_s_audio_host.html#aa9d54a838e1b63189f25491f206d172e">getHostName</a> () const   throw ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the audio host.  <a href="#aa9d54a838e1b63189f25491f206d172e"></a><br/></td></tr>
@@ -116,6 +117,36 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>An audio host for the iOS platform. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="interface_p_l_audio_host.html" title="An Objective-C audio host for the iOS platform.">PLAudioHost</a> </dd></dl>
 </div><hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a80e44e86f90843d273da17e04035b6d5"></a><!-- doxytag: member="IOSAudioHost::BufferArray" ref="a80e44e86f90843d273da17e04035b6d5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt;float&gt;::<a class="el" href="class_i_o_s_audio_host.html#a80e44e86f90843d273da17e04035b6d5">BufferArray</a> <a class="el" href="class_i_o_s_audio_host.html#a80e44e86f90843d273da17e04035b6d5">IOSAudioHost::BufferArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_audio_host_base.html#a8ca5b6117cc61f13ecf7cc701c412f8b">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8c64162a23d54f2ec8054bb49f17d191"></a><!-- doxytag: member="IOSAudioHost::ConstBufferArray" ref="a8c64162a23d54f2ec8054bb49f17d191" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_audio_host_base.html">AudioHostBase</a>&lt;float&gt;::<a class="el" href="class_i_o_s_audio_host.html#a8c64162a23d54f2ec8054bb49f17d191">ConstBufferArray</a> <a class="el" href="class_i_o_s_audio_host.html#a8c64162a23d54f2ec8054bb49f17d191">IOSAudioHost::ConstBufferArray</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_audio_host_base.html#aa7312370132fc29cbe204f29a6fa0429">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a12732b4b8ffa38d04beb90cddf4bd600"></a><!-- doxytag: member="IOSAudioHost::UnitType" ref="a12732b4b8ffa38d04beb90cddf4bd600" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -132,14 +163,15 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac622434ceee8ef146f569e4b28c43c71"></a><!-- doxytag: member="IOSAudioHost::IOSAudioHost" ref="ac622434ceee8ef146f569e4b28c43c71" args="()" -->
+<a class="anchor" id="aa79ba54c2bfc5481f961e2663958c840"></a><!-- doxytag: member="IOSAudioHost::IOSAudioHost" ref="aa79ba54c2bfc5481f961e2663958c840" args="(ObjectMemoryBase *omb=ObjectMemory&lt; ObjectMemoryDefault &gt;::create())" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">IOSAudioHost::IOSAudioHost </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_object_memory_base.html">ObjectMemoryBase</a> *&#160;</td>
+          <td class="paramname"><em>omb</em> = <code><a class="el" href="class_object_memory.html">ObjectMemory</a>&lt;&#160;<a class="el" href="class_object_memory_default.html">ObjectMemoryDefault</a>&#160;&gt;::create()</code></td><td>)</td>
           <td>  throw ()</td>
         </tr>
       </table>
@@ -165,26 +197,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a1c3abbab2d2103e059a984c433efb120"></a><!-- doxytag: member="IOSAudioHost::getCpuUsage" ref="a1c3abbab2d2103e059a984c433efb120" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double IOSAudioHost::getCpuUsage </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the current CPU usage for the DSP loop. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="aa9d54a838e1b63189f25491f206d172e"></a><!-- doxytag: member="IOSAudioHost::getHostName" ref="aa9d54a838e1b63189f25491f206d172e" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -202,26 +214,6 @@ Public Member Functions</h2></td></tr>
 <p>Get the name of the audio host. </p>
 
 <p>Implements <a class="el" href="class_audio_host_base.html#a4d5cf02b8df0d3934449b527b0072317">AudioHostBase&lt; float &gt;</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3e517d1b0d047dfa004c559f6cf78462"></a><!-- doxytag: member="IOSAudioHost::getInputName" ref="a3e517d1b0d047dfa004c559f6cf78462" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_text.html">Text</a> IOSAudioHost::getInputName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const  throw ()<code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the name of the audio input device. </p>
-
-<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -245,6 +237,26 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a3e517d1b0d047dfa004c559f6cf78462"></a><!-- doxytag: member="IOSAudioHost::getInputName" ref="a3e517d1b0d047dfa004c559f6cf78462" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_text.html">Text</a> IOSAudioHost::getInputName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the name of the audio input device. </p>
+
+<p>Implements <a class="el" href="class_audio_host_base.html#ab79046689f535c13ef7e4317d36ab266">AudioHostBase&lt; float &gt;</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a7a95b486ca8b568045dc8fe4de434392"></a><!-- doxytag: member="IOSAudioHost::getOutputName" ref="a7a95b486ca8b568045dc8fe4de434392" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -265,92 +277,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2b12d5bfd4aaf81b7df81c1e146d938d"></a><!-- doxytag: member="IOSAudioHost::interruptionCallback" ref="a2b12d5bfd4aaf81b7df81c1e146d938d" args="(UInt32 inInterruption)" -->
+<a class="anchor" id="a1c3abbab2d2103e059a984c433efb120"></a><!-- doxytag: member="IOSAudioHost::getCpuUsage" ref="a1c3abbab2d2103e059a984c433efb120" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void IOSAudioHost::interruptionCallback </td>
+          <td class="memname">double IOSAudioHost::getCpuUsage </td>
           <td>(</td>
-          <td class="paramtype">UInt32&#160;</td>
-          <td class="paramname"><em>inInterruption</em></td><td>)</td>
-          <td>  throw ()</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const  throw ()<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="aa7b9ab46a4d799b381a1bf8c1a4fd0dd"></a><!-- doxytag: member="IOSAudioHost::propertyCallback" ref="aa7b9ab46a4d799b381a1bf8c1a4fd0dd" args="(AudioSessionPropertyID inID, UInt32 inDataSize, const void *inPropertyValue)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void IOSAudioHost::propertyCallback </td>
-          <td>(</td>
-          <td class="paramtype">AudioSessionPropertyID&#160;</td>
-          <td class="paramname"><em>inID</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">UInt32&#160;</td>
-          <td class="paramname"><em>inDataSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>inPropertyValue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Get the current CPU usage for the DSP loop. </p>
 
-</div>
-</div>
-<a class="anchor" id="a6f153b92f6771c6d0759f93efb0ba6bf"></a><!-- doxytag: member="IOSAudioHost::renderCallback" ref="a6f153b92f6771c6d0759f93efb0ba6bf" args="(UInt32 inNumberFrames, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, AudioBufferList *ioData)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">OSStatus IOSAudioHost::renderCallback </td>
-          <td>(</td>
-          <td class="paramtype">UInt32&#160;</td>
-          <td class="paramname"><em>inNumberFrames</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">AudioUnitRenderActionFlags *&#160;</td>
-          <td class="paramname"><em>ioActionFlags</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const AudioTimeStamp *&#160;</td>
-          <td class="paramname"><em>inTimeStamp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">AudioBufferList *&#160;</td>
-          <td class="paramname"><em>ioData</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>  throw ()</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Implements <a class="el" href="class_audio_host_base.html#a958e9e5a8a1c7dc5b9eed9c5094d8e61">AudioHostBase&lt; float &gt;</a>.</p>
 
 </div>
 </div>
@@ -394,6 +337,95 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a6f153b92f6771c6d0759f93efb0ba6bf"></a><!-- doxytag: member="IOSAudioHost::renderCallback" ref="a6f153b92f6771c6d0759f93efb0ba6bf" args="(UInt32 inNumberFrames, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, AudioBufferList *ioData)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">OSStatus IOSAudioHost::renderCallback </td>
+          <td>(</td>
+          <td class="paramtype">UInt32&#160;</td>
+          <td class="paramname"><em>inNumberFrames</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AudioUnitRenderActionFlags *&#160;</td>
+          <td class="paramname"><em>ioActionFlags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const AudioTimeStamp *&#160;</td>
+          <td class="paramname"><em>inTimeStamp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AudioBufferList *&#160;</td>
+          <td class="paramname"><em>ioData</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa7b9ab46a4d799b381a1bf8c1a4fd0dd"></a><!-- doxytag: member="IOSAudioHost::propertyCallback" ref="aa7b9ab46a4d799b381a1bf8c1a4fd0dd" args="(AudioSessionPropertyID inID, UInt32 inDataSize, const void *inPropertyValue)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IOSAudioHost::propertyCallback </td>
+          <td>(</td>
+          <td class="paramtype">AudioSessionPropertyID&#160;</td>
+          <td class="paramname"><em>inID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UInt32&#160;</td>
+          <td class="paramname"><em>inDataSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>inPropertyValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2b12d5bfd4aaf81b7df81c1e146d938d"></a><!-- doxytag: member="IOSAudioHost::interruptionCallback" ref="a2b12d5bfd4aaf81b7df81c1e146d938d" args="(UInt32 inInterruption)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IOSAudioHost::interruptionCallback </td>
+          <td>(</td>
+          <td class="paramtype">UInt32&#160;</td>
+          <td class="paramname"><em>inInterruption</em></td><td>)</td>
+          <td>  throw ()</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="plonk___i_o_s_audio_host_8h_source.html">plonk_IOSAudioHost.h</a></li>
 </ul>
@@ -412,7 +444,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jul 10 2012 17:32:47 for pl-nk by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Sep 5 2012 17:05:05 for pl-nk by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
