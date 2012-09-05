@@ -384,14 +384,4 @@ std::ostream& operator<< (std::ostream &outputStream, Int24 const& value)
     return outputStream;
 }
 
-//const LongLong operator+ (Int24 const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    return pl_ConvertI24ToI (leftOperand.getRaw()) + pl_ConvertI24ToI (rightOperand.getRaw());
-//}
-//
-//const float operator+ (float const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    return leftOperand + float (pl_ConvertI24ToI (rightOperand.getRaw()));
-//}
-
 END_PLONK_NAMESPACE

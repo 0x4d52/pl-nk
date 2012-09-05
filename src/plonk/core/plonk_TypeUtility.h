@@ -290,6 +290,7 @@ class TypeUtilityBase
 {
 public:
     typedef void*           TypeName;
+    typedef TypeName        PeakType;
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
@@ -302,6 +303,7 @@ class TypeUtilityBase<Type&>
 {
 public:
     typedef void*           TypeName;
+    typedef TypeName        PeakType;
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
@@ -314,6 +316,7 @@ class TypeUtilityBase<Type const&>
 {
 public:
     typedef void*           TypeName;
+    typedef TypeName        PeakType;
     typedef Type            OriginalType;
     typedef Type const&     PassType;
     typedef float           IndexType;
@@ -335,6 +338,7 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Dynamic; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -347,6 +351,7 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Dynamic; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -354,6 +359,7 @@ class TypeUtilityBase<float>
 {
 public:
     typedef float           TypeName;
+    typedef float           PeakType;
     typedef float           OriginalType;
     typedef float           PassType;
     typedef float           IndexType;
@@ -366,6 +372,7 @@ class TypeUtilityBase<double>
 {
 public:
     typedef double           TypeName;
+    typedef double           PeakType;
     typedef double           OriginalType;
     typedef double           PassType;
     typedef double           IndexType;
@@ -378,6 +385,7 @@ class TypeUtilityBase<int>
 {
 public:
     typedef int             TypeName;
+    typedef int             PeakType;
     typedef int             OriginalType;
     typedef int             PassType;
     typedef float           IndexType;
@@ -390,6 +398,7 @@ class TypeUtilityBase<short>
 {
 public:
     typedef short           TypeName;
+    typedef short           PeakType;
     typedef short           OriginalType;
     typedef short           PassType;
     typedef float           IndexType;
@@ -402,6 +411,7 @@ class TypeUtilityBase<Int24>
 {
 public:
     typedef Int24           TypeName;
+    typedef int             PeakType;
     typedef Int24           OriginalType;
     typedef Int24           PassType;
     typedef float           IndexType;
@@ -428,6 +438,7 @@ class TypeUtilityBase<LongLong>
 {
 public:
     typedef LongLong        TypeName;
+    typedef LongLong        PeakType;
     typedef LongLong        OriginalType;
     typedef LongLong        PassType;
     typedef float           IndexType;
@@ -440,6 +451,7 @@ class TypeUtilityBase<char>
 {
 public:
     typedef char            TypeName;
+    typedef char            PeakType;
     typedef char            OriginalType;
     typedef char            PassType;
     typedef float           IndexType;
@@ -452,6 +464,7 @@ class TypeUtilityBase<bool>
 {
 public:
     typedef bool            TypeName;
+    typedef bool            PeakType;
     typedef bool            OriginalType;
     typedef bool            PassType;
     typedef float           IndexType;
@@ -469,6 +482,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloat; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -481,6 +495,7 @@ public:
     typedef float IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloat; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -493,6 +508,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDouble; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -505,6 +521,7 @@ public:
     typedef double              IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDouble; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -517,6 +534,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicInt; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -529,6 +547,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicInt; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 /*
@@ -567,6 +586,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongLong; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -579,6 +599,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongLong; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -591,6 +612,7 @@ public:
     typedef int                    IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -603,6 +625,7 @@ public:
     typedef int                    IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointer; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -615,6 +638,7 @@ public:
     typedef int                            IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -627,6 +651,7 @@ public:
     typedef int                            IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointer; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -639,6 +664,7 @@ public:
     typedef int                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -651,6 +677,7 @@ public:
     typedef int                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointer; }
     static inline const OriginalType& getNull() { static OriginalType null; return null; }
+    typedef void PeakType;
 };
 
 template<>
@@ -663,6 +690,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -675,6 +703,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -687,6 +716,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -699,6 +729,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -711,6 +742,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -723,6 +755,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -735,6 +768,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -747,6 +781,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -759,6 +794,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Variable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -771,6 +807,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Variable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -783,6 +820,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -795,6 +833,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -807,6 +846,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::CharVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -819,6 +859,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::CharVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -831,6 +872,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -843,6 +885,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -855,6 +898,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -867,6 +911,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicFloatVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -879,6 +924,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -891,6 +937,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDoubleVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -903,6 +950,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicIntVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -915,6 +963,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicIntVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -927,6 +976,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -939,6 +989,7 @@ public:
     typedef float IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicLongVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -951,6 +1002,7 @@ public:
     typedef int                                IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -963,6 +1015,7 @@ public:
     typedef int                                IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicPointerVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -975,6 +1028,7 @@ public:
     typedef int                                        IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -987,6 +1041,7 @@ public:
     typedef int                                        IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicExtendedPointerVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -999,6 +1054,7 @@ public:
     typedef int                                       IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1011,6 +1067,7 @@ public:
     typedef int                                       IndexType;
     static inline int  getTypeCode() { return TypeCode::AtomicDynamicPointerVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 //------------------------------------------------------------------------------
@@ -1025,6 +1082,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1037,6 +1095,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1049,6 +1108,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1061,6 +1121,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1073,6 +1134,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1085,6 +1147,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1097,6 +1160,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1109,6 +1173,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1121,6 +1186,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Array; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1133,6 +1199,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Array; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1145,6 +1212,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1157,6 +1225,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1169,6 +1238,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::CharArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1181,6 +1251,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::CharArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1193,6 +1264,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1205,6 +1277,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1217,6 +1290,7 @@ public:
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::Text; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1229,6 +1303,7 @@ public:
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::Text; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1241,6 +1316,7 @@ public:
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::TextArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1253,6 +1329,7 @@ public:
     typedef int                 IndexType;
     static inline int  getTypeCode() { return TypeCode::TextArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1265,6 +1342,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1277,6 +1355,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1289,6 +1368,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1301,6 +1381,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1313,6 +1394,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1325,6 +1407,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1337,6 +1420,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1349,6 +1433,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1361,6 +1446,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Channel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1373,6 +1459,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Channel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1385,6 +1472,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1397,6 +1485,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::LongChannel; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1409,6 +1498,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1421,6 +1511,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1433,6 +1524,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1445,6 +1537,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1457,6 +1550,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1469,6 +1563,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1481,6 +1576,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1493,6 +1589,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1505,6 +1602,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Unit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1517,6 +1615,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Unit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1529,6 +1628,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1541,6 +1641,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnit; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1553,6 +1654,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1565,6 +1667,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1577,6 +1680,7 @@ public:
     typedef double              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1589,6 +1693,7 @@ public:
     typedef double              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1601,6 +1706,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1613,6 +1719,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1625,6 +1732,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1637,6 +1745,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1649,6 +1758,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Bus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1661,6 +1771,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Bus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1673,6 +1784,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1685,6 +1797,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBus; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1697,6 +1810,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1709,6 +1823,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1721,6 +1836,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1733,6 +1849,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1745,6 +1862,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1757,6 +1875,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1769,6 +1888,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1781,6 +1901,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1793,6 +1914,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Units; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1805,6 +1927,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Units; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1817,6 +1940,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1829,6 +1953,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnits; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1841,6 +1966,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1853,6 +1979,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1865,6 +1992,7 @@ public:
     typedef double IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1877,6 +2005,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1889,6 +2018,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1901,6 +2031,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1913,6 +2044,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1925,6 +2057,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1937,6 +2070,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Busses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1949,6 +2083,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Busses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1961,6 +2096,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1973,6 +2109,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBusses; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1985,6 +2122,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -1997,6 +2135,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2009,6 +2148,7 @@ public:
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2021,6 +2161,7 @@ public:
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2033,6 +2174,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2045,6 +2187,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2057,6 +2200,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2069,6 +2213,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2081,6 +2226,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Breakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2093,6 +2239,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Breakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2105,6 +2252,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2117,6 +2265,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBreakpoints; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2129,6 +2278,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2141,6 +2291,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2153,6 +2304,7 @@ public:
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2165,6 +2317,7 @@ public:
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2177,6 +2330,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2189,6 +2343,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::IntWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2201,6 +2356,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2213,6 +2369,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2225,6 +2382,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Wavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2237,6 +2395,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Wavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2249,6 +2408,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2261,6 +2421,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongWavetable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2273,6 +2434,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2285,6 +2447,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2297,6 +2460,7 @@ public:
     typedef double                   IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2309,6 +2473,7 @@ public:
     typedef double                   IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2321,6 +2486,7 @@ public:
     typedef float                IndexType;
     static inline int  getTypeCode() { return TypeCode::IntSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2333,6 +2499,7 @@ public:
     typedef float                IndexType;
     static inline int  getTypeCode() { return TypeCode::IntSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2345,6 +2512,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2357,6 +2525,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2369,6 +2538,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Signal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2381,6 +2551,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24Signal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2393,6 +2564,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::LongSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2405,6 +2577,7 @@ public:
     typedef float                    IndexType;
     static inline int  getTypeCode() { return TypeCode::LongSignal; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 
@@ -2420,6 +2593,7 @@ public:
     typedef float                   IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2432,6 +2606,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 
@@ -2445,6 +2620,7 @@ public:
     typedef double                  IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2457,6 +2633,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2469,6 +2646,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2481,6 +2659,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2493,6 +2672,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2505,6 +2685,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2517,6 +2698,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2529,6 +2711,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24ArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2541,6 +2724,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2553,6 +2737,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2565,6 +2750,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::CharArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2577,6 +2763,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::CharArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2589,6 +2776,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2601,6 +2789,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2613,6 +2802,7 @@ public:
     typedef int                  IndexType;
     static inline int  getTypeCode() { return TypeCode::TextVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2625,6 +2815,7 @@ public:
     typedef int                  IndexType;
     static inline int  getTypeCode() { return TypeCode::TextVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2637,6 +2828,7 @@ public:
     typedef int                         IndexType;
     static inline int  getTypeCode() { return TypeCode::TextArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2649,6 +2841,7 @@ public:
     typedef int                         IndexType;
     static inline int  getTypeCode() { return TypeCode::TextArrayVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2661,6 +2854,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2673,6 +2867,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2685,6 +2880,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2697,6 +2893,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2709,6 +2906,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::IntChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2721,6 +2919,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::IntChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2733,6 +2932,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2745,6 +2945,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2757,6 +2958,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2769,6 +2971,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24ChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2781,6 +2984,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::LongChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2793,6 +2997,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::LongChannelVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2805,6 +3010,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2817,6 +3023,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2829,6 +3036,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2841,6 +3049,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2853,6 +3062,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2865,6 +3075,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2877,6 +3088,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2889,6 +3101,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2901,6 +3114,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24UnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2913,6 +3127,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24UnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2925,6 +3140,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2937,6 +3153,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnitVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2949,6 +3166,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2961,6 +3179,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2973,6 +3192,7 @@ public:
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2985,6 +3205,7 @@ public:
     typedef double                      IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -2997,6 +3218,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3009,6 +3231,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3021,6 +3244,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3033,6 +3257,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3045,6 +3270,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24BusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3057,6 +3283,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24BusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3069,6 +3296,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3081,6 +3309,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBusVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3093,6 +3322,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3105,6 +3335,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3117,6 +3348,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3129,6 +3361,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3141,6 +3374,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3153,6 +3387,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3165,6 +3400,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3177,6 +3413,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3189,6 +3426,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3201,6 +3439,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24UnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3213,6 +3452,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3225,6 +3465,7 @@ public:
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongUnitsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3237,6 +3478,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3249,6 +3491,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3261,6 +3504,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3273,6 +3517,7 @@ public:
     typedef double                          IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3285,6 +3530,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3297,6 +3543,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3309,6 +3556,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3321,6 +3569,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3333,6 +3582,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24BussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3345,6 +3595,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24BussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3357,6 +3608,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3369,6 +3621,7 @@ public:
     typedef float                       IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBussesVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3381,6 +3634,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3393,6 +3647,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3405,6 +3660,7 @@ public:
     typedef double                              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3417,6 +3673,7 @@ public:
     typedef double                              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3429,6 +3686,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3441,6 +3699,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::IntBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3453,6 +3712,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3465,6 +3725,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3477,6 +3738,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3489,6 +3751,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24BreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3501,6 +3764,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3513,6 +3777,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongBreakpointsVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3525,6 +3790,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3537,6 +3803,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3549,6 +3816,7 @@ public:
     typedef double                              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3561,6 +3829,7 @@ public:
     typedef double                              IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3573,6 +3842,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::IntWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3585,6 +3855,7 @@ public:
     typedef float                           IndexType;
     static inline int  getTypeCode() { return TypeCode::IntWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3597,6 +3868,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3609,6 +3881,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3621,6 +3894,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3633,6 +3907,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24WavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3645,6 +3920,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3657,6 +3933,7 @@ public:
     typedef float                               IndexType;
     static inline int  getTypeCode() { return TypeCode::LongWavetableVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3669,6 +3946,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3681,6 +3959,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::FloatSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3693,6 +3972,7 @@ public:
     typedef double                           IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3705,6 +3985,7 @@ public:
     typedef double                           IndexType;
     static inline int  getTypeCode() { return TypeCode::DoubleSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3717,6 +3998,7 @@ public:
     typedef float                        IndexType;
     static inline int  getTypeCode() { return TypeCode::IntSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3729,6 +4011,7 @@ public:
     typedef float                        IndexType;
     static inline int  getTypeCode() { return TypeCode::IntSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3741,6 +4024,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3753,6 +4037,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::ShortSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3765,6 +4050,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24SignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3777,6 +4063,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::Int24SignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3789,6 +4076,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::LongSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3801,6 +4089,7 @@ public:
     typedef float                            IndexType;
     static inline int  getTypeCode() { return TypeCode::LongSignalVariable; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3813,6 +4102,7 @@ public:
     typedef void                          IndexType;
     static inline int  getTypeCode() { return TypeCode::AudioFileReader; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 template<>
@@ -3825,6 +4115,7 @@ public:
     typedef void                          IndexType;
     static inline int  getTypeCode() { return TypeCode::AudioFileReader; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef void PeakType;
 };
 
 
@@ -3837,12 +4128,13 @@ class TypeUtility : public TypeUtilityBase<Type>
 {
 public:
     typedef typename TypeUtilityBase<Type>::TypeName        TypeName;
+    typedef typename TypeUtilityBase<Type>::PeakType        PeakType;
     typedef typename TypeUtilityBase<Type>::OriginalType    OriginalType;
     typedef typename TypeUtilityBase<Type>::PassType        PassType;
     typedef typename TypeUtilityBase<Type>::IndexType       IndexType;
     
     static inline Text getTypeName()                 { return TypeCode::getName (TypeUtility<Type>::getTypeCode()); }
-    static inline TypeName getTypePeak()             { return TypeCode::getPeak (TypeUtility<Type>::getTypeCode()); }
+    static inline PeakType getTypePeak()             { return TypeCode::getPeak (TypeUtility<Type>::getTypeCode()); }
     static inline double getTypeEpsilon()            { return TypeCode::getEpsilon (TypeUtility<Type>::getTypeCode()); }
     static inline Text getIndexTypeName()            { return TypeCode::getName (TypeUtility<IndexType>::getTypeCode()); }
 

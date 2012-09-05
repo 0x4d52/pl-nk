@@ -193,69 +193,6 @@ public:
 
 };
 
-//template<class OtherType>
-//const typename Int24Ops<OtherType>::ReturnType operator+ (OtherType leftOperand, Int24 const& rightOperand) throw()
-//{
-//    return Int24Ops<OtherType>::addop (leftOperand, rightOperand);
-//}
-//
-//const LongLong operator+ (Int24 const& leftOperand, Int24 const& rightOperand) throw();
-//const float operator+ (float const& leftOperand, Int24 const& rightOperand) throw();
-
-
-//template<class OtherType>
-//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator+ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
-//    return CalcType (leftOperand) + CalcType (rightOperand);
-//}
-
-//template<class OtherType>
-//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator- (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
-//    return CalcType (leftOperand) - CalcType (rightOperand);
-//}
-//
-//template<class OtherType>
-//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator* (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
-//    return CalcType (leftOperand) * CalcType (rightOperand);
-//}
-//
-//template<class OtherType>
-//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator/ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
-//    return CalcType (leftOperand) / CalcType (rightOperand);
-//}
-//
-//template<class OtherType>
-//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator% (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
-//    return CalcType (leftOperand) % CalcType (rightOperand);
-//}
-//
-//template<class OtherType>
-//const Int24 operator| (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    return Int24 (LongLong (leftOperand) | LongLong (rightOperand));
-//}
-//
-//template<class OtherType>
-//const Int24 operator& (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    return Int24 (LongLong (leftOperand) & LongLong (rightOperand));
-//}
-//
-//template<class OtherType>
-//const Int24 operator^ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
-//{
-//    return Int24 (LongLong (leftOperand) ^ LongLong (rightOperand));
-//}
-
 std::istream& operator>> (std::istream &inputStream, Int24& value);
 std::ostream& operator<< (std::ostream &outputStream, Int24 const& value);
 

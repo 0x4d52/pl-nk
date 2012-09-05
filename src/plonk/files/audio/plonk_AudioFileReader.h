@@ -103,6 +103,12 @@ CompressionPCM              = PLANKAUDIOFILE_WAV_COMPRESSION_PCM,
         Double,
         NumSampleTypes
     };
+    
+    enum Defaults
+    {
+        DefaultBufferSize = 32768
+    };
+
 };
 
 //------------------------------------------------------------------------------
@@ -110,9 +116,10 @@ CompressionPCM              = PLANKAUDIOFILE_WAV_COMPRESSION_PCM,
 
 class AudioFileReaderInternal : public SmartPointer
 {
-public:
+public:    
     AudioFileReaderInternal() throw();
-    AudioFileReaderInternal (Text const& path, const int bufferSize = 32768) throw();
+    AudioFileReaderInternal (const char* path) throw();
+    AudioFileReaderInternal (const char* path, const int bufferSize) throw();
     ~AudioFileReaderInternal();
     
     AudioFile::Format getFormat() const throw();
@@ -152,11 +159,13 @@ public:
     void setOwner (void* owner) throw();
     void* getOwner() const throw();
     bool isOwned() const throw();
+    bool isReady() const throw();
     
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
-    
+    void init (const char* path) throw();
+
     template<class Type>
     static inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
     {
@@ -327,9 +336,26 @@ public:
     }
     
     /** Creates a binary file reader from the given path. 
+     The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (Text const& path) throw()
+	:	Base (new Internal (path.getArray()))
+	{
+	}
+        
+    /** Creates a binary file reader from the given path. 
+     The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
+     @param path        The path of the file to read.  */
+	AudioFileReader (const char* path) throw()
 	:	Base (new Internal (path))
+	{
+	}
+    
+    /** Creates a binary file reader from the given path. 
+     @param path        The path of the file to read.  
+     @param bufferSize  The buffer size to use when reading. */
+	AudioFileReader (const char* path, const int bufferSize) throw()
+	:	Base (new Internal (path, bufferSize))
 	{
 	}
            
@@ -558,6 +584,13 @@ public:
     bool isOwned() const throw()
     {
         return getInternal()->isOwned();
+    }
+    
+    /** Determines whether the audio data is ready to be read.
+     This should return true if the file open and header read operations succeeded. */
+    bool isReady() const throw()
+    {
+        return getInternal()->isReady();
     }
 };
 

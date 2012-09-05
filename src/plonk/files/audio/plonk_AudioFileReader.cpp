@@ -43,25 +43,35 @@ BEGIN_PLONK_NAMESPACE
 #include "../../core/plonk_Headers.h"
 
 AudioFileReaderInternal::AudioFileReaderInternal() throw()
+:   numFramesPerBuffer (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
 }
 
-AudioFileReaderInternal::AudioFileReaderInternal (Text const& path, const int bufferSize) throw()
-:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : 32768))
+AudioFileReaderInternal::AudioFileReaderInternal (const char* path) throw()
+:   readBuffer (Chars::withSize (AudioFile::DefaultBufferSize)),
+    numFramesPerBuffer (0)
+{
+    init (path);
+}
+
+AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bufferSize) throw()
+:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
+    numFramesPerBuffer (0)
 {
     plonk_assert (bufferSize > 0);
+    init (path);
+}
+
+void AudioFileReaderInternal::init (const char* path) throw()
+{
+    plonk_assert (path != 0);
     
     pl_AudioFileReader_Init (getPeerRef());
-    ResultCode result = pl_AudioFileReader_Open (getPeerRef(), path.getArray());
-    plonk_assert (result == PlankResult_OK);
+    ResultCode result = pl_AudioFileReader_Open (getPeerRef(), path);
     
-    numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
-
-    
-#ifndef PLONK_DEBUG
-    (void)result;
-#endif
+    if (result == PlankResult_OK)
+        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
 }
 
 AudioFileReaderInternal::~AudioFileReaderInternal()
@@ -251,5 +261,9 @@ bool AudioFileReaderInternal::isOwned() const throw()
     return owner != 0;
 }
 
+bool AudioFileReaderInternal::isReady() const throw()
+{
+    return numFramesPerBuffer != 0;
+}
 
 END_PLONK_NAMESPACE
