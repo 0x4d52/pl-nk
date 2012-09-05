@@ -149,11 +149,59 @@ private:
 } PLONK_PACKED;
 
 //template<class OtherType>
-//typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator/ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator+ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
+//    return CalcType (leftOperand) + CalcType (rightOperand);
+//}
+//
+//template<class OtherType>
+//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator- (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
+//    return CalcType (leftOperand) - CalcType (rightOperand);
+//}
+//
+//template<class OtherType>
+//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator* (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
+//    return CalcType (leftOperand) * CalcType (rightOperand);
+//}
+//
+//template<class OtherType>
+//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator/ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
 //{
 //    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
 //    return CalcType (leftOperand) / CalcType (rightOperand);
 //}
+//
+//template<class OtherType>
+//const typename BinaryOpTypeUtility<OtherType,Int24>::CalcType operator% (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    typedef typename BinaryOpTypeUtility<OtherType,Int24>::CalcType CalcType;
+//    return CalcType (leftOperand) % CalcType (rightOperand);
+//}
+//
+//template<class OtherType>
+//const Int24 operator| (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    return Int24 (LongLong (leftOperand) | LongLong (rightOperand));
+//}
+//
+//template<class OtherType>
+//const Int24 operator& (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    return Int24 (LongLong (leftOperand) & LongLong (rightOperand));
+//}
+//
+//template<class OtherType>
+//const Int24 operator^ (OtherType const& leftOperand, Int24 const& rightOperand) throw()
+//{
+//    return Int24 (LongLong (leftOperand) ^ LongLong (rightOperand));
+//}
+
+
 
 #if PLANK_WIN
     #pragma pack (pop)

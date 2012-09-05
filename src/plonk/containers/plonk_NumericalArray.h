@@ -51,8 +51,9 @@
 
     
 
+
 template<class NumericalType, class OtherType>
-class NumericalArrayConverter
+class NumericalArrayConverterBase
 {
 public:
     static inline void convertDirect (NumericalType* const dst, const OtherType* const src, const UnsignedLong numItems) throw()
@@ -89,18 +90,217 @@ public:
                 dst[i] = NumericalType (CalcType (temp) * typePeak * otherTypePeakFactor);
             }
         }
+    }        
+};
+
+template<>
+class NumericalArrayConverterBase<float, char>
+{
+public:
+    static inline void convertDirect (float* const dst, const char* const src, const UnsignedLong numItems) throw()
+    {
+        pl_VectorConvertC2F_NN (dst, src, numItems);
     }
+    
+    static inline void convertScaled (float* const dst, const char* const src, const UnsignedLong numItems) throw()
+    {
+        convertDirect (dst, src, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_CHARPEAK_F, numItems);
+    }    
+};
+
+template<>
+class NumericalArrayConverterBase<float, short>
+{
+public:
+    static inline void convertDirect (float* const dst, const short* const src, const UnsignedLong numItems) throw()
+    {
+        pl_VectorConvertS2F_NN (dst, src, numItems);
+    }
+    
+    static inline void convertScaled (float* const dst, const short* const src, const UnsignedLong numItems) throw()
+    {
+        convertDirect (dst, src, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_SHORTPEAK_F, numItems);
+    }    
+};
+
+template<>
+class NumericalArrayConverterBase<float, Int24>
+{
+public:
+    static inline void convertDirect (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = src[i];
+    }
+    
+    static inline void convertScaled (float* const dst, const Int24* const src, const UnsignedLong numItems) throw()
+    {
+        convertDirect (dst, src, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_INT24PEAK_F, numItems);
+    }    
+};
+
+template<>
+class NumericalArrayConverterBase<float, int>
+{
+public:
+    static inline void convertDirect (float* const dst, const int* const src, const UnsignedLong numItems) throw()
+    {
+        pl_VectorConvertI2F_NN (dst, src, numItems);
+    }
+    
+    static inline void convertScaled (float* const dst, const int* const src, const UnsignedLong numItems) throw()
+    {
+        convertDirect (dst, src, numItems);
+        pl_VectorMulF_NN1 (dst, dst, 1.f / PLANK_INTPEAK_F, numItems);
+    }    
+};
+
+template<class SrcType>
+class NumericalArrayConverterSIMD
+{
+};
+
+template<>
+class NumericalArrayConverterSIMD<float>
+{
+public:
+    template<class DstType>
+    static inline void convertScaled (DstType* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        PLANK_ALIGN (PLANK_SIMDF_LENGTH * sizeof(float)) 
+        float temp[PLANK_SIMDF_LENGTH];
+        
+        const float factor = 1.f / float (TypeUtility<DstType>::getTypePeak());
+        const UnsignedLong numSIMD = numItems >> PLANK_SIMDF_SHIFT;
+        const UnsignedLong numRemain = numItems & PLANK_SIMDF_MASK;
+        
+        DstType* dstPtr = dst;
+        
+        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDF_LENGTH)
+        {
+            pl_VectorMulF_NN1 (temp, src, factor, PLANK_SIMDF_LENGTH);
+            NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, PLANK_SIMDF_LENGTH);
+        }
+        
+        if (numRemain > 0)
+        {
+            pl_VectorMulF_NN1 (temp, src, factor, numRemain);
+            NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, numRemain);
+        }
+    }    
+};
+
+template<>
+class NumericalArrayConverterSIMD<double>
+{
+public:
+    template<class DstType>
+    static inline void convertScaled (DstType* const dst, const double* const src, const UnsignedLong numItems) throw()
+    {
+        PLANK_ALIGN (PLANK_SIMDD_LENGTH * sizeof(double)) 
+        double temp[PLANK_SIMDD_LENGTH];
+        
+        const double factor = 1.0 / double (TypeUtility<DstType>::getTypePeak());
+        const UnsignedLong numSIMD = numItems >> PLANK_SIMDD_SHIFT;
+        const UnsignedLong numRemain = numItems & PLANK_SIMDD_MASK;
+        
+        DstType* dstPtr = dst;
+        
+        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDD_LENGTH)
+        {
+            pl_VectorMulD_NN1 (temp, src, factor, PLANK_SIMDD_LENGTH);
+            NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, PLANK_SIMDD_LENGTH);
+        }
+        
+        if (numRemain > 0)
+        {
+            pl_VectorMulD_NN1 (temp, src, factor, numRemain);
+            NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, numRemain);
+        }
+    }    
+};
+
+
+template<>
+class NumericalArrayConverterBase<char, float>
+{
+public:
+    static inline void convertDirect (char* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        pl_VectorConvertF2C_NN (dst, src, numItems);
+    }
+    
+    static inline void convertScaled (char* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
+    }    
+};
+
+template<>
+class NumericalArrayConverterBase<short, float>
+{
+public:
+    static inline void convertDirect (short* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        pl_VectorConvertF2S_NN (dst, src, numItems);
+    }
+    
+    static inline void convertScaled (short* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
+    }    
+};
+
+template<>
+class NumericalArrayConverterBase<Int24, float>
+{
+public:
+    static inline void convertDirect (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = src[i];
+    }
+    
+    static inline void convertScaled (Int24* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
+    }    
+};
+
+template<>
+class NumericalArrayConverterBase<int, float>
+{
+public:
+    static inline void convertDirect (int* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        pl_VectorConvertF2I_NN (dst, src, numItems);
+    }
+    
+    static inline void convertScaled (int* const dst, const float* const src, const UnsignedLong numItems) throw()
+    {
+        NumericalArrayConverterSIMD<float>::convertScaled (dst, src, numItems);
+    }    
+};
+
+template<class NumericalType, class OtherType>
+class NumericalArrayConverter : public NumericalArrayConverterBase<NumericalType,OtherType>
+{
+public:
+    typedef NumericalArrayConverterBase<NumericalType,OtherType> Base;
     
     static inline void convert (NumericalType* const dst, 
                                 const OtherType* const src, 
                                 const UnsignedLong numItems,
                                 const bool applyScaling) throw()
     {
-        if (applyScaling)   convertScaled (dst, src, numItems);
-        else                convertDirect (dst, src, numItems);
+        if (applyScaling)   Base::convertScaled (dst, src, numItems);
+        else                Base::convertDirect (dst, src, numItems);
     }
-
 };
+
 
 //------------------------------------------------------------------------------
 

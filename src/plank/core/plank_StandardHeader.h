@@ -233,6 +233,7 @@ typedef PlankI PlankFourCharCode;
 #define PLANK_FLOAT_ONEMASK     0x007fffff
 #define PLANK_DOUBLE_ONE        0x3ff0000000000000
 #define PLANK_DOUBLE_ONEMASK    0x000fffffffffffff
+#define PLANK_INT24_MAX         0x7fffff
 
 
 

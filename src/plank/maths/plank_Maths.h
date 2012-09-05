@@ -71,6 +71,29 @@
 #define PLANK_0_D     0.0
 #define PLANK_0_F     0.f
 
+#define PLANK_CHARPEAK_I CHAR_MAX
+#define PLANK_CHARPEAK_F ((float)PLANK_CHARPEAK_I)
+#define PLANK_CHARPEAK_D ((double)PLANK_CHARPEAK_I)
+
+#define PLANK_SHORTPEAK_I SHRT_MAX
+#define PLANK_SHORTPEAK_F ((float)PLANK_SHORTPEAK_I)
+#define PLANK_SHORTPEAK_D ((double)PLANK_SHORTPEAK_I)
+
+#define PLANK_INTPEAK_I INT_MAX
+#define PLANK_INTPEAK_F ((float)PLANK_INTPEAK_I)
+#define PLANK_INTPEAK_D ((double)PLANK_INTPEAK_I)
+
+#define PLANK_INT24PEAK_I PLANK_INT24_MAX
+#define PLANK_INT24PEAK_F ((float)PLANK_INT24PEAK_I)
+#define PLANK_INT24PEAK_D ((double)PLANK_INT24PEAK_I)
+
+
+#define PLANK_SIMDF_LENGTH 4  // vector 4
+#define PLANK_SIMDF_SHIFT 2   // divide by 4
+#define PLANK_SIMDF_MASK 3    // remainder
+#define PLANK_SIMDD_LENGTH 2  // vector 4
+#define PLANK_SIMDD_SHIFT 1   // divide by 4
+#define PLANK_SIMDD_MASK 1    // remainder
 
 #if (defined (_WIN32) || defined (_WIN64))
 //    #define PLANK_INC(a) a = a + 1

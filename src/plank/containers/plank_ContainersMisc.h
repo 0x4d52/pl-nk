@@ -67,7 +67,6 @@ typedef struct PlankF80
     PlankUC data[10];
 } PlankF80;
 
-#define PLANK_INT24_MAX 0x7fffff
 
 /** Storage for a 255 character Pascal string. */
 typedef struct PlankPascalString255

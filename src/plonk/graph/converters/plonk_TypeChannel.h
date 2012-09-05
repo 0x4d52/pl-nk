@@ -152,12 +152,14 @@ public:
         
         if (inputBufferLength == outputBufferLength)
         {
-            for (i = 0; i < outputBufferLength; ++i) 
-                outputSamples[i] = OutputSampleType (inputSamples[i]);
+            NumericalArrayConverter<OutputSampleType,InputSampleType>::convertDirect (outputSamples, inputSamples, outputBufferLength);            
         }
         else if (inputBufferLength == 1)
         {
-            const OutputSampleType value = OutputSampleType (inputSamples[0]); 
+            OutputSampleType temp;
+            NumericalConverter::roundCopy (inputSamples[0], temp);
+            
+            const OutputSampleType value = temp;
             
             for (i = 0; i < outputBufferLength; ++i) 
                 outputSamples[i] = value;
@@ -168,8 +170,8 @@ public:
             const double inputIncrement = double (inputBufferLength) / double (outputBufferLength);
             
             for (i = 0; i < outputBufferLength; ++i) 
-            {
-                outputSamples[i] = OutputSampleType (inputSamples[int (inputPosition)]);
+            {                
+                NumericalConverter::roundCopy(inputSamples[int (inputPosition)], outputSamples[i]);
                 inputPosition += inputIncrement;
             }        
         }
