@@ -155,14 +155,16 @@ private:
 
 /** Audio file player generator. 
  
- The AudioFileReader object passed in must not
+ The AudioFileReader object passed in must not be used by any other code.
+ 
+ The sample rate of the unit is by default set to the sample rate of the audio file.
  
  NB This should not be used directly in a real-time audio thread. It should
  be wrapped in a ThreadedUnit (not yet implemented!) which buffers the audio on 
  a separate thread.
  
  Factory functions:
- - ar (file, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - ar (file, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=noPref)
  - kr (file, mul=1, add=0) 
  
  Inputs:
@@ -210,9 +212,9 @@ public:
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
-                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+                        SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {             
-        if (!file.isOwned())
+        if (file.isReady() && !file.isOwned())
         {
             Inputs inputs;
             inputs.put (IOKey::AudioFileReader, file);

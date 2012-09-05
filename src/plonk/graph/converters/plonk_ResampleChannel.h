@@ -238,7 +238,7 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                
-        plonk_assert (preferredSampleRate.getValue() > 0.0); // no  need to resample a DC signal
+        plonk_assert (preferredSampleRate.getValue() > 0.0); // no need to resample a DC signal
                 
         Inputs inputs;
         inputs.put (IOKey::Generic, input);

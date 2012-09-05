@@ -216,7 +216,7 @@ public:
     }    
         
     void initChannel (const int channel) throw()
-    {       
+    {               
         this->initProxyValue (channel, 0);
     }    
     
@@ -283,7 +283,7 @@ private:
  @f$ \frac{preferredBlockSize \times numBuffers}{preferredSampleRate} @f$
  
  @subsection FactoryFunctions Factory functions:
- - ar (input, numBuffers=16, priority=50, preferredBlockSize=default, preferredSampleRate=default)
+ - ar (input, numBuffers=16, priority=50, preferredBlockSize=noPref, preferredSampleRate=noPref)
  
  @subsection Inputs Inputs:
  - input: (input, multi) the input unit to defer to a separate thread
@@ -330,18 +330,23 @@ public:
     static UnitType ar (UnitType const& input,
                         const int numBuffers = 16,
                         const int priority = 50,
-                        BlockSize const& preferredBlockSize = BlockSize::getDefault(),
-                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {             
+                        BlockSize const& preferredBlockSize = BlockSize::noPreference(),
+                        SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
+    {                     
+        BlockSize blockSize = BlockSize::decide (input.getBlockSize (0), preferredBlockSize);
+        SampleRate sampleRate = SampleRate::decide (input.getSampleRate (0), preferredSampleRate);
+        
+        // could avoid the resample if we added the function the check if all bs/sr are the same in each channel
+        
         Inputs inputs;
-        inputs.put (IOKey::Generic, input);
+        inputs.put (IOKey::Generic, ResampleUnit<SampleType>::ar (input, blockSize, sampleRate));
                         
         Data data = { { -1.0, -1.0 }, 0, numBuffers, priority };
         
         return UnitType::template proxiesFromInputs<ThreadedInternal> (inputs, 
                                                                        data, 
-                                                                       preferredBlockSize, 
-                                                                       preferredSampleRate);
+                                                                       blockSize, 
+                                                                       sampleRate);
     }
 };
 
