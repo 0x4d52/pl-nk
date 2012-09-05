@@ -94,7 +94,7 @@ AudioFile::Format AudioFileReaderInternal::getFormat() const throw()
 AudioFile::Encoding AudioFileReaderInternal::getEncoding() const throw()
 {
     int value;
-    ResultCode result = pl_AudioFileReader_GetFormat (getPeerRef(), &value);
+    ResultCode result = pl_AudioFileReader_GetEncoding (getPeerRef(), &value);
     plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
     (void)result;
@@ -118,8 +118,8 @@ AudioFile::SampleType AudioFileReaderInternal::getSampleType() const throw()
 {    
     const AudioFile::Encoding encoding = getEncoding();
     const int bytesPerSample = getBytesPerSample();
-    const bool isPCM = encoding & AudioFile::EncodingFlagPCM;// PLANKAUDIOFILE_ENCODING_PCM_FLAG;
-    const bool isFloat = encoding & AudioFile::EncodingFlagFloat;// PLANKAUDIOFILE_ENCODING_FLOAT_FLAG;
+    const bool isPCM = encoding & AudioFile::EncodingFlagPCM;
+    const bool isFloat = encoding & AudioFile::EncodingFlagFloat;
 
     if (isPCM)
     {        
@@ -239,6 +239,11 @@ void AudioFileReaderInternal::setOwner (void* o) throw()
 {
     plonk_assert ((o == 0) || (owner == 0));
     owner = o;
+}
+
+void* AudioFileReaderInternal::getOwner() const throw()
+{
+    return owner;
 }
 
 bool AudioFileReaderInternal::isOwned() const throw()

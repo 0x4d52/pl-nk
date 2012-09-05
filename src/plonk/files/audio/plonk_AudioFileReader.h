@@ -150,6 +150,7 @@ public:
     }
     
     void setOwner (void* owner) throw();
+    void* getOwner() const throw();
     bool isOwned() const throw();
     
 private:
@@ -174,6 +175,8 @@ private:
     AtomicValue<void*> owner;
 };
 
+//------------------------------------------------------------------------------
+
 template<class SampleType>
 bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, 
                                           const bool applyScaling, 
@@ -181,7 +184,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                                           const bool loop) throw()
 {        
     typedef NumericalArray<SampleType> SampleArray;
-
+    
     ResultCode result;
     
     const int dataLength = data.length();
@@ -190,22 +193,18 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     SampleType* dataArray = data.getArray();
     void* const readBufferArray = readBuffer.getArray();
     
-    int encoding, bits, channels, bytesPerFrame, bytesPerSample;
-    result = pl_AudioFileReader_GetEncoding (getPeerRef(), &encoding);              plonk_assert (result == PlankResult_OK);
-    result = pl_AudioFileReader_GetBitsPerSample (getPeerRef(), &bits);             plonk_assert (result == PlankResult_OK);
-    result = pl_AudioFileReader_GetNumChannels (getPeerRef(), &channels);           plonk_assert (result == PlankResult_OK);
-    result = pl_AudioFileReader_GetBytesPerFrame (getPeerRef(), &bytesPerFrame);    plonk_assert (result == PlankResult_OK);
+    const int encoding = getEncoding();
+    const int channels = getNumChannels();
+    const int bytesPerSample = getBytesPerSample();
     
-    plonk_assert ((encoding >= PLANKAUDIOFILE_ENCODING_MIN) && (encoding <= PLANKAUDIOFILE_ENCODING_MAX));
-    plonk_assert (bits > 0);
+    plonk_assert ((encoding >= AudioFile::EncodingMin) && (encoding <= AudioFile::EncodingMax));
+    plonk_assert (getBitsPerSample() > 0);
     plonk_assert (channels > 0);
-    plonk_assert (bytesPerFrame > 0);
+    plonk_assert (getBytesPerFrame() > 0);
     
-    bytesPerSample = bytesPerFrame / channels;
-    
-    const bool isPCM = encoding & PLANKAUDIOFILE_ENCODING_PCM_FLAG;
-    const bool isFloat = encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG;
-    const bool isBigEndian = encoding & PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG;
+    const bool isPCM = encoding & AudioFile::EncodingFlagPCM;
+    const bool isFloat = encoding & AudioFile::EncodingFlagFloat;
+    const bool isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
     
     int dataIndex = 0;
     
@@ -215,7 +214,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
         int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), framesToRead, readBufferArray, &framesRead);
         plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF);
-
+        
         int samplesRead = framesRead * channels;
         plonk_assert (samplesRead <= dataRemaining);
         
@@ -292,7 +291,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
     if (dataIndex < dataLength)
         data.setSize (dataIndex, true);
-   
+    
 #ifndef PLONK_DEBUG
     (void)result;
 #endif
@@ -300,6 +299,8 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     return dataIndex < dataLength;
 }
 
+
+//------------------------------------------------------------------------------
 
 
 /** Audio file reader. 
@@ -547,6 +548,11 @@ public:
     void setOwner (void* owner) throw()
     {
         getInternal()->setOwner (owner);
+    }
+    
+    void* getOwner() const throw()
+    {
+        return getInternal()->getOwner();
     }
     
     bool isOwned() const throw()

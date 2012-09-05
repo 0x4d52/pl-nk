@@ -113,6 +113,8 @@ public:
     {        
         AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
         
+        plonk_assert (file.getOwner() == this);
+        
         const int fileNumChannels = file.getNumChannels();
         buffer.setSize (this->getBlockSize().getValue() * fileNumChannels, false);
         file.readFrames (buffer, true);
@@ -152,6 +154,8 @@ private:
 //------------------------------------------------------------------------------
 
 /** Audio file player generator. 
+ 
+ The AudioFileReader object passed in must not
  
  NB This should not be used directly in a real-time audio thread. It should
  be wrapped in a ThreadedUnit (not yet implemented!) which buffers the audio on 
@@ -208,17 +212,21 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {             
-        Inputs inputs;
-        inputs.put (IOKey::AudioFileReader, file);
-        inputs.put (IOKey::Multiply, mul);
-        inputs.put (IOKey::Add, add);
-                        
-        Data data = { { -1.0, -1.0 }, 0 };
-        
-        return UnitType::template proxiesFromInputs<FilePlayInternal> (inputs, 
-                                                                       data, 
-                                                                       preferredBlockSize, 
-                                                                       preferredSampleRate);
+        if (!file.isOwned())
+        {
+            Inputs inputs;
+            inputs.put (IOKey::AudioFileReader, file);
+            inputs.put (IOKey::Multiply, mul);
+            inputs.put (IOKey::Add, add);
+                            
+            Data data = { { -1.0, -1.0 }, 0 };
+            
+            return UnitType::template proxiesFromInputs<FilePlayInternal> (inputs, 
+                                                                           data, 
+                                                                           preferredBlockSize, 
+                                                                           preferredSampleRate);
+        } 
+        else return UnitType::getNull();
     }
     
 //    /** Create a control rate audio file player. */
