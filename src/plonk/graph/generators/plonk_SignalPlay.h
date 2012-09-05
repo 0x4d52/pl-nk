@@ -216,11 +216,11 @@ private:
 
 /** Signal player generator. 
  
- Factory functions:
+ @par Factory functions:
  - ar (signal, rate=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (signal, rate=1, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - signal: (signal, multi) the signal to play
  - rate: (unit, multi) the rate of playback (1= normal speed)
  - mul: (unit, multi) the multiplier applied to the output

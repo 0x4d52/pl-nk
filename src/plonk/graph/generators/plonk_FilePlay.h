@@ -163,11 +163,11 @@ private:
  be wrapped in a ThreadedUnit (not yet implemented!) which buffers the audio on 
  a separate thread.
  
- Factory functions:
+ @par Factory functions:
  - ar (file, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=noPref)
  - kr (file, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - file: (audiofilereader, multi) the audio file reader to use
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output

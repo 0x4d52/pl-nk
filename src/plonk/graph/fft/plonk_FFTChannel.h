@@ -140,10 +140,10 @@ private:
  Each input channel generates two output channels. The even number channel is the real data and 
  the odd numbered channel contains the imaginary data. (The IFFTUnit expects the data in this format.)
  
- Factory functions:
+ @par Factory functions:
  - ar (input)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the input unit
  
 

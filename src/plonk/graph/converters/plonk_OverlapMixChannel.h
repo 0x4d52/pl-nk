@@ -186,10 +186,10 @@ private:
 
 /** Mix down an overlapped processing stream to a continuous one. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, overlap=0.5)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to de-overlap
  - overlap: (doublevariable) the source overlap (1= is no overlap, 0.5= blocks overlap by half their length)
 

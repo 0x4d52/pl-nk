@@ -48,11 +48,11 @@
 
 /** One-pole low-pass filter. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output
@@ -143,11 +143,11 @@ typedef LPFP1Unit<PLONK_TYPE_DEFAULT> LPFP1;
 /** Exponential lag filter. 
  Useful for smoothing control signals. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, duration=0.2, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input duration=0.2, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - duration: (unit, multi) The -60dB lag time in seconds
  - mul: (unit, multi) the multiplier applied to the output
@@ -237,11 +237,11 @@ typedef LagUnit<PLONK_TYPE_DEFAULT> Lag;
 
 /** One-pole high-pass filter. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output
@@ -332,11 +332,11 @@ typedef HPFP1Unit<PLONK_TYPE_DEFAULT> HPFP1;
 /** Exponential decay filter. 
  Useful for creating simple decaying envlopes from impulses. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, duration=0.2, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input duration=0.2, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - duration: (unit, multi) The -60dB decay time in seconds
  - mul: (unit, multi) the multiplier applied to the output
@@ -429,11 +429,11 @@ typedef DecayUnit<PLONK_TYPE_DEFAULT> Decay;
 
 /** Resonant low-pass filter. 
 
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, q=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, q=1, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - q: (unit, multi) the filter Q factor
@@ -529,11 +529,11 @@ typedef RLPFUnit<PLONK_TYPE_DEFAULT> RLPF;
 
 /** Resonant high-pass filter. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, q=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, q=1, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - q: (unit, multi) the filter Q factor
@@ -629,11 +629,11 @@ typedef RHPFUnit<PLONK_TYPE_DEFAULT> RHPF;
 
 /** Low-shelving (bass) filter. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, s=1, gain=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, s=1, gain=0, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - s: (unit, multi) the slope factor (keep to 1 or below for no strange resonances)
@@ -737,11 +737,11 @@ typedef LowShelfUnit<PLONK_TYPE_DEFAULT> LowShelf;
 
 /** High-shelving (treble) filter. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, s=1, gain=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, s=1, gain=0, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - s: (unit, multi) the slope factor (keep to 1 or below for no strange resonances)
@@ -845,11 +845,11 @@ typedef HighShelfUnit<PLONK_TYPE_DEFAULT> HighShelf;
 
 /** Notch filter (i.e, parametric mid-EQ). 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, q=1, gain=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, q=1, gain=0, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - q: (unit, multi) the filter Q factor
@@ -953,11 +953,11 @@ typedef NotchUnit<PLONK_TYPE_DEFAULT> Notch;
 
 /** Bandpass filter. 
 
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, bandwidth=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, bandwidth=1, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - bandwidth: (unit, multi) The bandwidth of the passband in octaves
@@ -1053,11 +1053,11 @@ typedef BPFUnit<PLONK_TYPE_DEFAULT> BPF;
 
 /** Bandreject (band-elimination) filter. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, bandwidth=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, bandwidth=1, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - bandwidth: (unit, multi) The bandwidth of the stopband in octaves
@@ -1157,11 +1157,11 @@ typedef BRFUnit<PLONK_TYPE_DEFAULT> BRF;
 /** Butterworth 2nd-order low-pass filter.
  This has good linearity in the passband. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output
@@ -1254,11 +1254,11 @@ typedef LPFUnit<PLONK_TYPE_DEFAULT> LPF;
 /** Butterworth 2nd-order high-pass filter.
  This has good linearity in the passband. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, frequency=1200, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input frequency=1200, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to filter
  - frequency: (unit, multi) the -3dB point cut-off frequency in Hz
  - mul: (unit, multi) the multiplier applied to the output

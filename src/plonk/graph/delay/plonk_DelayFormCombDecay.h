@@ -150,10 +150,10 @@ public:
 
 /** A comb filter setting the decay as a time to decay by 60dB. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, duration=0.5, decay=1, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to which delay is applied
  - duration: (unit, multi) the delay duration in seconds
  - decay: (unit, multi) the -60dB decay time

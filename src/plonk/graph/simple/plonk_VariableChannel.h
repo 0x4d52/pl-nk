@@ -108,11 +108,11 @@ private:
 
 /** Variable unit. 
  
- Factory functions:
+ @par Factory functions:
  - ar (variable=0, preferredBlockSize=default)
  - kr (variable=0) 
  
- Inputs:
+ @par Inputs:
  - variable: (variable) the variable to use as a unit
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
 

@@ -283,11 +283,11 @@
  documentation. For example, SineUnit documentation states:
  
  <table><tr><td>
- Factory functions:
+ @par Factory functions:
  - ar (frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (frequency=440, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output

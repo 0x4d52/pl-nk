@@ -276,10 +276,10 @@ private:
 /** Patch channel.
  Safe repatching of signals. 
  
- Factory functions:
+ @par Factory functions:
  - ar (initialSource, allowAutoDelete=true, preferredNumChannels=0, fadeDuration=0.1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  
- Inputs:
+ @par Inputs:
  - initialSource: (unitvariable, multi)
  - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit it contains
  - preferredNumChannels: (int) force this unit to have a certain number of channels (0= the channel count in initialSource)

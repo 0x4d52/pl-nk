@@ -151,10 +151,10 @@ private:
  the real data and the odd numbered channel should contain the imaginary data. (This is the same
  output format as the FFTUnit.)
  
- Factory functions:
+ @par Factory functions:
  - ar (input)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi, fft) the input unit in FFT format
  
 

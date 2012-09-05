@@ -188,10 +188,10 @@ private:
 
 /** Create and overlapped processing stream.
  
- Factory functions:
+ @par Factory functions:
  - ar (input, overlap=0.5)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to overlap
  - overlap: (doublevariable) the desired overlap (1= is no overlap, 0.5= blocks overlap by half their length)
 

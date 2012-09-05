@@ -199,6 +199,11 @@ void IOSAudioHost::stopHost() throw()
     if (getIsRunning())
     {
         AudioOutputUnitStop (rioUnit);
+        
+//        AudioUnitUninitialize (rioUnit);
+//        AudioComponentInstanceDispose (rioUnit);
+//        rioUnit = NULL;
+        
         setIsRunning (false);
         hostStopped();
     }

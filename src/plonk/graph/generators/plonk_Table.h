@@ -307,11 +307,11 @@ private:
 
 /** Wavetable oscillator. 
  
- Factory functions:
+ @par Factory functions:
  - ar (table, frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (table, frequency=440, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - table: (wavetable) the wavetable to use for the oscillator
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
@@ -402,11 +402,11 @@ typedef TableUnit<PLONK_TYPE_DEFAULT> Table;
 
 /** Sine oscillator. 
  
- Factory functions:
+ @par Factory functions:
  - ar (frequency=440, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - kr (frequency=440, mul=1, add=0) 
  
- Inputs:
+ @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output
@@ -476,11 +476,11 @@ typedef SineUnit<PLONK_TYPE_DEFAULT> Sine;
 
 /** Harmonic sawtooth wave oscillator. 
  
- Factory functions:
+ @par Factory functions:
  - ar (frequency=440, mul=1, add=0, numHarmonics=21, preferredBlockSize=default, preferredSampleRate=default)
  - kr (frequency=440, mul=1, add=0, numHarmonics=21) 
  
- Inputs:
+ @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output
@@ -558,11 +558,11 @@ typedef HarmonicSawUnit<PLONK_TYPE_DEFAULT> HarmonicSaw;
 
 /** Harmonic square wave oscillator. 
  
- Factory functions:
+ @par Factory functions:
  - ar (frequency=440, mul=1, add=0, numHarmonics=21, preferredBlockSize=default, preferredSampleRate=default)
  - kr (frequency=440, mul=1, add=0, numHarmonics=21) 
  
- Inputs:
+ @par Inputs:
  - frequency: (unit, multi) the frequency of the oscillator in Hz
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output

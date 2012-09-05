@@ -145,11 +145,11 @@ private:
 
 /** Reads data from a Bus. 
  
- Factory functions:
+ @par Factory functions:
  - ar (busses, preferredBlockSize=default)
  - kr (busses) 
  
- Inputs:
+ @par Inputs:
  - busses: (busses, multi) the busses from which to read the signal(s)
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
 

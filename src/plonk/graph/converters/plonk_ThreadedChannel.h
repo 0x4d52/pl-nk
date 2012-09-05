@@ -282,10 +282,10 @@ private:
  The latency of this will be equal to: 
  @f$ \frac{preferredBlockSize \times numBuffers}{preferredSampleRate} @f$
  
- @subsection FactoryFunctions Factory functions:
+ @par @par Factory functions:
  - ar (input, numBuffers=16, priority=50, preferredBlockSize=noPref, preferredSampleRate=noPref)
  
- @subsection Inputs Inputs:
+ @par @par Inputs:
  - input: (input, multi) the input unit to defer to a separate thread
  - numBuffers: (int) the number of buffers to queue, also affects latency
  - priority: (int) the priority of the thread (0-100, 100 is highest)

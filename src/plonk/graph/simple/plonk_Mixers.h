@@ -565,11 +565,11 @@ private:
 
 /** Mixer. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, allowAutoDelete=true, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  - ar (array, allowAutoDelete=true, purgeNullUnits=true, preferredNumChannels=0, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  
- Inputs:
+ @par Inputs:
  - input: (unit) the input unit to mix
  - array: (units, multi) the array of units to mix
  - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit(s) it contains

@@ -204,10 +204,10 @@ public:
 
 /** A comb filter setting the feedback amount directly. 
 
- Factory functions:
+ @par Factory functions:
  - ar (input, duration=0.5, feedback=0.5, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to which delay is applied
  - duration: (unit, multi) the delay duration in seconds
  - feedback: (unit, multi) the feedback amount multiplier

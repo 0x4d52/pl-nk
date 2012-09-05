@@ -181,11 +181,11 @@ private:
 /** Convert from one sample type to another.
  E.g., from float to short (i.e, 16bit)
  
- Factory functions:
+ @par Factory functions:
  - ar (input, preferredBlockSize=noPref, preferredSampleRate=noPref)
  - kr (input)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to convert
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate

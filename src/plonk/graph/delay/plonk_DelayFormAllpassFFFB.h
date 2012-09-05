@@ -204,10 +204,10 @@ public:
 
 /** An allpass delay setting the feedforward and feeback coefficient directly. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, duration=0.5, coeff=0.5, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to which delay is applied
  - duration: (unit, multi) the delay duration in seconds
  - coeff: (unit, multi) the feedforward amount and feedback amount multipliers (the feedback amount is negated internally)

@@ -211,10 +211,10 @@ public:
 
 /** Simple delay processor. 
  
- Factory functions:
+ @par Factory functions:
  - ar (input, duration=0.5, maximumDuration=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to which delay is applied
  - duration: (unit, multi) the delay duration in seconds
  - maximumDuration: (real) the maximum delay time in seconds (this can be equal to duration if duration is a constant)

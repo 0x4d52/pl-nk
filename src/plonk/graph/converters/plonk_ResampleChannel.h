@@ -194,11 +194,11 @@ private:
 
 /** Resample a unit to a different sample rate and/or block size.
  
- Factory functions:
+ @par Factory functions:
  - ar (input, preferredBlockSize=default, preferredSampleRate=default)
  - kr (input)
  
- Inputs:
+ @par Inputs:
  - input: (unit, multi) the unit to resample
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
