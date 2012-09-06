@@ -52,18 +52,51 @@ END_PLONK_NAMESPACE
 BEGIN_PLONK_NAMESPACE
 
 template<class SampleType>
-class IOSAudioHostPeer : public IOSAudioHostBase<SampleType>
+class IOSAudioHostPeerBase : public IOSAudioHostBase<SampleType>
 {
 public:
     typedef typename IOSAudioHostBase<SampleType>::UnitType UnitType;
     
-    IOSAudioHostPeer (PLAudioHost* peerToUse)
-    :   peer (peerToUse)
+    IOSAudioHostPeerBase (PLAudioHost* p)
+    :   peer (p)
+    {
+    }
+
+    void hostStarting() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostStarting:)])
+            [peer.delegate hostStarting:peer];
+    }
+    
+    void hostStopped() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostStopped:)])
+            [peer.delegate hostStopped:peer];
+    }
+    
+    PLAudioHost* getPeer() const throw() { return peer; }
+    
+private:
+    PLAudioHost* peer; // no need to retain as the Obj-C peer owns this object
+
+    IOSAudioHostPeerBase();
+};
+
+template<class SampleType>
+class IOSAudioHostPeer : public IOSAudioHostPeerBase<SampleType>
+{
+public:
+    typedef typename IOSAudioHostBase<SampleType>::UnitType UnitType;
+    
+    IOSAudioHostPeer (PLAudioHost* peer)
+    :   IOSAudioHostPeerBase<SampleType> (peer)
     {
     }
     
     UnitType constructGraph() throw()
     {
+        PLAudioHost* const peer = this->getPeer();
+        
         plonk_assert (peer.delegate != nil);
         
         // could do this with template specialisation..
@@ -89,24 +122,7 @@ public:
     exit:
         plonk_assertfalse; 
         return UnitType::getNull();
-    }
-    
-    void hostStarting() throw()
-    {
-        if ([peer.delegate respondsToSelector:@selector(hostStarting:)])
-            [peer.delegate hostStarting:peer];
-    }
-    
-    void hostStopped() throw()
-    {
-        if ([peer.delegate respondsToSelector:@selector(hostStopped:)])
-            [peer.delegate hostStopped:peer];
-    }
-    
-private:
-    PLAudioHost* peer; // no need to retain as the Obj-C peer owns this object
-
-    IOSAudioHostPeer();
+    }    
 };
 
 END_PLONK_NAMESPACE
