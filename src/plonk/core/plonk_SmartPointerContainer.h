@@ -299,6 +299,11 @@ public:
         internal.swapWith (other.internal);
     }
     
+    inline ScopedPointerType* getInternal() throw() 
+    {
+        return internal.getPtr(); 
+    }
+    
     inline ScopedPointerType* operator->() throw() 
     { 
         plonk_assert(internal.getPtrUnchecked() != 0);

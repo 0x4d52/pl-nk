@@ -39,6 +39,7 @@
 #ifndef PLONK_AUDIOHOSTBASE_H
 #define PLONK_AUDIOHOSTBASE_H
 
+
 template<class SampleType>
 class AudioHostBase;
 
@@ -55,6 +56,7 @@ public:
     typedef BusBuffer<SampleType>               BusType;
     typedef PLONK_BUSARRAYBASETYPE<BusType>     BussesType;
     typedef Dictionary<Dynamic>                 OptionDictionary;
+    typedef NumericalArray<SampleType>          BufferType;
     
     /** Constructor */
     AudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw()
@@ -192,8 +194,8 @@ protected:
             {
                 for (i = 0; i < numOutputs; ++i)
                 {
-                    const float* const unitOutput = this->outputUnit.getOutputSamples (i);
-                    Floats::copyData (this->outputs.atUnchecked (i), unitOutput, graphBlockSize);   
+                    const SampleType* const unitOutput = this->outputUnit.getOutputSamples (i);
+                    BufferType::copyData (this->outputs.atUnchecked (i), unitOutput, graphBlockSize);   
                     this->outputs.atUnchecked (i) += graphBlockSize;
                 }
             }
@@ -201,7 +203,7 @@ protected:
             {
                 for (i = 0; i < numOutputs; ++i)
                 {
-                    Floats::zeroData (this->outputs.atUnchecked (i), graphBlockSize);   
+                    BufferType::zeroData (this->outputs.atUnchecked (i), graphBlockSize);   
                     this->outputs.atUnchecked (i) += graphBlockSize;
                 }
             }

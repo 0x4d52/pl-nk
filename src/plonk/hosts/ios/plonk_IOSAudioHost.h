@@ -185,14 +185,19 @@ END_PLONK_NAMESPACE
 
 @class PLAudioHost;
 
+using namespace plonk;
+
 /** A protocol for a PLAudioHost delegate.
  This class should contain a constructGraph method that returns a Unit 
  conatining the audio graph to render at runtime. 
  @see PLAudioHost */
 @protocol PLAudioHostDelegate <NSObject>
-@required
-- (PLUNIT)constructGraph:(PLAudioHost*)host;
 @optional
+- (FloatUnit)constructGraphFloat:(PLAudioHost*)host;
+- (ShortUnit)constructGraphShort:(PLAudioHost*)host;
+- (IntUnit)constructGraphInt:(PLAudioHost*)host;
+- (DoubleUnit)constructGraphDouble:(PLAudioHost*)host;
+- (Unit)constructGraph:(PLAudioHost*)host DEPRECATED_ATTRIBUTE;
 - (void)hostStarting:(PLAudioHost*)host;
 - (void)hostStopped:(PLAudioHost*)host;
 @end
@@ -211,6 +216,7 @@ END_PLONK_NAMESPACE
 {
     void* peer;
     id<PLAudioHostDelegate> delegate;
+    int type;
 }
 
 @property (nonatomic, retain) id delegate;                  ///< The delegat that contains the constructGraph method.
@@ -220,13 +226,14 @@ END_PLONK_NAMESPACE
 @property (nonatomic, readonly) NSString* outputName;       ///< The name of the output device. May be "Default Output" on the simulator.
 @property (nonatomic, readonly) double cpuUsage;            ///< The current CPU usage of the DSP loop.
 @property (nonatomic, readonly) BOOL isRunning;             ///< Is the host running?
-@property (nonatomic, readonly) PLUNIT outputUnit;          ///< The output unit of the host.
+//@property (nonatomic, readonly) PLUNIT outputUnit;          ///< The output unit of the host.
 @property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.
-@property (nonatomic) int preferredHostBlockSize;           ///< The preferred block size, only set this BEFORE sending the startHost message.
+@property (nonatomic) int preferredHostBlockSize;           ///< The preferred host block size, only set this BEFORE sending the startHost message.
+@property (nonatomic) int preferredGraphBlockSize;          ///< The preferred graph block size, only set this BEFORE sending the startHost message.
 @property (nonatomic) double preferredHostSampleRate;       ///< The preferred sample rate, only set this BEFORE sending the startHost message.
-@property (nonatomic) UInt32 category;                      ///< The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.
-@property (nonatomic) UInt32 mode;                          ///< The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.
+//@property (nonatomic) UInt32 category;                      ///< The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.
+//@property (nonatomic) UInt32 mode;                          ///< The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.
 
 /** Start the host running. */
 - (void)startHost;
