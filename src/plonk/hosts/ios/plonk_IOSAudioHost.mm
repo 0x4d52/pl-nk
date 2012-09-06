@@ -83,14 +83,14 @@ static inline void InterruptionListener (void *inClientData,
     host->interruptionCallback (inInterruption);
 }
 
-static inline void audioTypeToShort (float * const src, short* const dst, const unsigned int length) throw()
+template<class SrcType>
+static inline void audioTypeToShort (const SrcType * const src, short* const dst, const unsigned int length) throw()
 {
-	static const float scale = 32767.f;    
-    pl_VectorMulF_N1N (src, scale, src, length);
-    pl_VectorConvertF2S_NN (dst, src, length);
+    NumericalArrayConverter<short,SrcType>::convertScaled (dst, src, length);    
 }
 
-static inline void audioTypeToShortChannels (float * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
+template<class SrcType>
+static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
@@ -99,14 +99,14 @@ static inline void audioTypeToShortChannels (float * const src[], AudioBufferLis
 	}
 }
 
-static inline void audioShortToType (const short * const src, float* const dst, const unsigned int length) throw()
+template<class DstType>
+static inline void audioShortToType (const short * const src, DstType* const dst, const unsigned int length) throw()
 {
-	static const float scale = 1.f / 32767.f;	
-	pl_VectorConvertS2F_NN (dst, src, length);
-    pl_VectorMulF_N1N (dst, scale, dst, length);
+    NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);    
 }
 
-static inline void audioShortToTypeChannels (AudioBufferList* src, float* const dst[], const unsigned int length, const unsigned int numChannels) throw()
+template<class DstType>
+static inline void audioShortToTypeChannels (AudioBufferList* src, DstType* const dst[], const unsigned int length, const unsigned int numChannels) throw()
 {
 	for (UInt32 channel = 0; channel < numChannels; ++channel)
 	{
@@ -115,42 +115,10 @@ static inline void audioShortToTypeChannels (AudioBufferList* src, float* const 
 	}	
 }
 
-//template<class SrcType>
-//static inline void audioTypeToShort (const SrcType * const src, short* const dst, const unsigned int length) throw()
-//{
-//    NumericalArrayConverter<short,SrcType>::convertScaled (dst, src, length);    
-//}
-//
-//template<class SrcType>
-//static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferList* const dst, const unsigned int length, const unsigned int numChannels) throw()
-//{
-//	for (UInt32 channel = 0; channel < numChannels; ++channel)
-//	{
-//		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)dst->mBuffers[channel].mData;		
-//		audioTypeToShort (src[channel], audioUnitBuffer, length);
-//	}
-//}
-//
-//template<class DstType>
-//static inline void audioShortToType (const short * const src, DstType* const dst, const unsigned int length) throw()
-//{
-//    NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);    
-//}
-//
-//template<class DstType>
-//static inline void audioShortToTypeChannels (AudioBufferList* src, DstType* const dst[], const unsigned int length, const unsigned int numChannels) throw()
-//{
-//	for (UInt32 channel = 0; channel < numChannels; ++channel)
-//	{
-//		AudioSampleType* const audioUnitBuffer = (AudioSampleType*)src->mBuffers[0].mData; // need this other than 0?...		
-//		audioShortToType (audioUnitBuffer, dst[channel], length);
-//	}	
-//}
-
 //------------------------------------------------------------------------------
 
 IOSAudioHost::IOSAudioHost (ObjectMemoryBase* omb) throw()
-:   AudioHostBase (omb),
+:   IOSAudioHostBase (omb),
     hwSampleRate (0.0),         // let the hardware choose
     cpuUsage (0.0)
 {    

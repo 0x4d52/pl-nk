@@ -46,9 +46,21 @@
 
 BEGIN_PLONK_NAMESPACE
 
+template<class SampleType>
+class IOSAudioHostBase : public AudioHostBase<SampleType>
+{
+public:
+    IOSAudioHostBase (ObjectMemoryBase* omb) throw()
+    :   AudioHostBase<SampleType> (omb)
+    {
+    }
+
+};
+
+
 /** An audio host for the iOS platform.
  @see PLAudioHost */
-class IOSAudioHost : public AudioHostBase<float>
+class IOSAudioHost : public IOSAudioHostBase<float>
 {
 public:
     typedef AudioHostBase<float>::BufferArray      BufferArray;

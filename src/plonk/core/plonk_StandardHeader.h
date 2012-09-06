@@ -367,6 +367,12 @@ typedef PLONK_TYPE_DEFAULT TypeDefault;
 	#define LONG_LONG_MAX LLONG_MAX
 #endif
 
+// unreference a variable in an inner scope to help prevent accidental usage
+struct ShadowType { };
+
+#define PLONK_SHADOW(VAR) ShadowType* VAR; (void)VAR;
+
 END_PLONK_NAMESPACE
+
 
 #endif // PLONK_STANDARDHEADER_H

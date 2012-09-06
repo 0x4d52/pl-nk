@@ -357,23 +357,28 @@ public:
         PLANK_ALIGN (PLANK_SIMDF_LENGTH * sizeof(float)) 
         float temp[PLANK_SIMDF_LENGTH];
         
-        const float factor = 1.f / float (TypeUtility<DstType>::getTypePeak());
+        const float factor = TypeUtility<DstType>::getTypePeak();
         const UnsignedLong numSIMD = numItems >> PLANK_SIMDF_SHIFT;
         const UnsignedLong numRemain = numItems & PLANK_SIMDF_MASK;
         
         DstType* dstPtr = dst;
         const float* srcPtr = src;
         
-        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDF_LENGTH, srcPtr += PLANK_SIMDF_LENGTH)
         {
-            pl_VectorMulF_NN1 (temp, src, factor, PLANK_SIMDF_LENGTH);
-            NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, PLANK_SIMDF_LENGTH);
-        }
-        
-        if (numRemain)
-        {
-            pl_VectorMulF_NN1 (temp, src, factor, numRemain);
-            NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, numRemain);
+            PLONK_SHADOW (src);
+            PLONK_SHADOW (dst);
+            
+            for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDF_LENGTH, srcPtr += PLANK_SIMDF_LENGTH)
+            {
+                pl_VectorMulF_NN1 (temp, srcPtr, factor, PLANK_SIMDF_LENGTH);
+                NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, PLANK_SIMDF_LENGTH);
+            }
+            
+            if (numRemain)
+            {
+                pl_VectorMulF_NN1 (temp, srcPtr, factor, numRemain);
+                NumericalArrayConverterBase<DstType,float>::convertDirect (dstPtr, temp, numRemain);
+            }
         }
     }    
 };
@@ -388,23 +393,28 @@ public:
         PLANK_ALIGN (PLANK_SIMDD_LENGTH * sizeof(double)) 
         double temp[PLANK_SIMDD_LENGTH];
         
-        const double factor = 1.0 / double (TypeUtility<DstType>::getTypePeak());
+        const double factor = TypeUtility<DstType>::getTypePeak();
         const UnsignedLong numSIMD = numItems >> PLANK_SIMDD_SHIFT;
         const UnsignedLong numRemain = numItems & PLANK_SIMDD_MASK;
         
         DstType* dstPtr = dst;
         const double* srcPtr = src;
 
-        for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDD_LENGTH, srcPtr += PLANK_SIMDD_LENGTH)
         {
-            pl_VectorMulD_NN1 (temp, src, factor, PLANK_SIMDD_LENGTH);
-            NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, PLANK_SIMDD_LENGTH);
-        }
-        
-        if (numRemain)
-        {
-            pl_VectorMulD_NN1 (temp, src, factor, numRemain);
-            NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, numRemain);
+            PLONK_SHADOW (src);
+            PLONK_SHADOW (dst);
+            
+            for (int i = 0; i < numSIMD; ++i, dstPtr += PLANK_SIMDD_LENGTH, srcPtr += PLANK_SIMDD_LENGTH)
+            {
+                pl_VectorMulD_NN1 (temp, srcPtr, factor, PLANK_SIMDD_LENGTH);
+                NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, PLANK_SIMDD_LENGTH);
+            }
+            
+            if (numRemain)
+            {
+                pl_VectorMulD_NN1 (temp, srcPtr, factor, numRemain);
+                NumericalArrayConverterBase<DstType,double>::convertDirect (dstPtr, temp, numRemain);
+            }
         }
     }    
 };
