@@ -86,42 +86,84 @@ template<class SampleType>
 class IOSAudioHostPeer : public IOSAudioHostPeerBase<SampleType>
 {
 public:
-    typedef typename IOSAudioHostBase<SampleType>::UnitType UnitType;
-    
+    UnitBase<SampleType> constructGraph() throw()
+    {
+        return 0;
+    }
+};
+
+template<>
+class IOSAudioHostPeer<float> : public IOSAudioHostPeerBase<float>
+{
+public:    
     IOSAudioHostPeer (PLAudioHost* peer)
-    :   IOSAudioHostPeerBase<SampleType> (peer)
+    :   IOSAudioHostPeerBase<float> (peer)
     {
     }
     
-    UnitType constructGraph() throw()
+    FloatUnit constructGraph() throw()
     {
         PLAudioHost* const peer = this->getPeer();
-        
         plonk_assert (peer.delegate != nil);
         
-        // could do this with template specialisation..
-        
-        const int typeCode = TypeUtility<SampleType>::getTypeCode();
-        
-        switch (typeCode) 
-        {
-            case TypeCode::Float: { 
-                if ([peer.delegate respondsToSelector:@selector(constructGraphFloat:)])
-                    return [peer.delegate constructGraphFloat:peer];
-                else if ([peer.delegate respondsToSelector:@selector(constructGraph:)])
-                    return [peer.delegate constructGraph:peer];
-                else
-                    goto exit;
-            };
-            case TypeCode::Short: return [peer.delegate constructGraphShort:peer];  
-            case TypeCode::Int: return [peer.delegate constructGraphInt:peer];
-            case TypeCode::Double: return [peer.delegate constructGraphDouble:peer];
-            default: goto exit;  
-        }
-        
-    exit:
+        if ([peer.delegate respondsToSelector:@selector(constructGraphFloat:)])
+            return [peer.delegate constructGraphFloat:peer];
+        else if ([peer.delegate respondsToSelector:@selector(constructGraph:)])
+            return [peer.delegate constructGraph:peer];
+
         plonk_assertfalse; 
         return UnitType::getNull();
+    }    
+};
+
+template<>
+class IOSAudioHostPeer<short> : public IOSAudioHostPeerBase<short>
+{
+public:    
+    IOSAudioHostPeer (PLAudioHost* peer)
+    :   IOSAudioHostPeerBase<short> (peer)
+    {
+    }
+    
+    ShortUnit constructGraph() throw()
+    {
+        PLAudioHost* const peer = this->getPeer();
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraphShort:peer];  
+    }    
+};
+
+template<>
+class IOSAudioHostPeer<int> : public IOSAudioHostPeerBase<int>
+{
+public:    
+    IOSAudioHostPeer (PLAudioHost* peer)
+    :   IOSAudioHostPeerBase<int> (peer)
+    {
+    }
+    
+    IntUnit constructGraph() throw()
+    {
+        PLAudioHost* const peer = this->getPeer();
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraphInt:peer];  
+    }    
+};
+
+template<>
+class IOSAudioHostPeer<double> : public IOSAudioHostPeerBase<double>
+{
+public:    
+    IOSAudioHostPeer (PLAudioHost* peer)
+    :   IOSAudioHostPeerBase<double> (peer)
+    {
+    }
+    
+    DoubleUnit constructGraph() throw()
+    {
+        PLAudioHost* const peer = this->getPeer();
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraphInt:peer];  
     }    
 };
 
@@ -150,6 +192,8 @@ using namespace plonk;
 
 - (NSString*)hostName
 {    
+    if (peer == nil) return @"";
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   
@@ -171,6 +215,8 @@ using namespace plonk;
 
 - (NSString*)nativeHostName
 {
+    if (peer == nil) return @"";
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   
@@ -192,6 +238,8 @@ using namespace plonk;
 
 - (NSString*)inputName
 {
+    if (peer == nil) return @"";
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   
@@ -213,6 +261,8 @@ using namespace plonk;
 
 - (NSString*)outputName
 {
+    if (peer == nil) return @""; 
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   
@@ -234,6 +284,8 @@ using namespace plonk;
 
 - (double)cpuUsage
 {
+    if (peer == nil) return 0.0;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getCpuUsage();
@@ -246,6 +298,8 @@ using namespace plonk;
 
 - (BOOL)isRunning
 {    
+    if (peer == nil) return NO;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getIsRunning() ? YES : NO;
@@ -263,6 +317,8 @@ using namespace plonk;
 
 - (int)numInputs
 {    
+    if (peer == nil) return 0;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getNumInputs();
@@ -275,6 +331,8 @@ using namespace plonk;
 
 - (void)setNumInputs:(int)numInputs
 {    
+    if (peer == nil) return;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setNumInputs (numInputs);
@@ -287,6 +345,8 @@ using namespace plonk;
 
 - (int)numOutputs
 {
+    if (peer == nil) return 0;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getNumOutputs();
@@ -299,18 +359,22 @@ using namespace plonk;
 
 - (void)setNumOutputs:(int)numOutputs
 {    
+    if (peer == nil) return;
+    
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setNumOutputs (numOutputs);
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setNumOutputs (numOutputs);
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setNumOutputs (numOutputs);
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setNumOutputs (numOutputs);
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setNumOutputs (numOutputs); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setNumOutputs (numOutputs); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setNumOutputs (numOutputs); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setNumOutputs (numOutputs); break;
         default: { }
     }
 }
 
 - (int)preferredHostBlockSize
 {
+    if (peer == nil) return 0;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getPreferredHostBlockSize();
@@ -323,18 +387,22 @@ using namespace plonk;
 
 - (void)setPreferredHostBlockSize:(int)preferredHostBlockSize
 {    
+    if (peer == nil) return;
+    
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize);
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize);
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize);
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize);
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
         default: { }
     }
 }
 
 - (int)preferredGraphBlockSize
 {
+    if (peer == nil) return 0;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getPreferredGraphBlockSize();
@@ -347,18 +415,22 @@ using namespace plonk;
 
 - (void)setPreferredGraphBlockSize:(int)preferredGraphBlockSize
 {    
+    if (peer == nil) return;
+    
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize);
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize);
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize);
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize);
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
         default: { }
     }
 }
 
 - (double)preferredHostSampleRate
 {    
+    if (peer == nil) return 0.0;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getPreferredHostSampleRate();
@@ -371,58 +443,103 @@ using namespace plonk;
 
 - (void)setPreferredHostSampleRate:(double)preferredHostSampleRate
 {    
+    if (peer == nil) return;
+    
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate);
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate);
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate);
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate);
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
         default: { }
     }
 }
 
-//- (UInt32)category
-//{    
-//    if (((IOAudioHostPeer*)peer)->getOtherOptions().containsKey (categoryKey))
-//    {
-//        return (UInt32)((IOAudioHostPeer*)peer)->getOtherOptions().at (categoryKey).asUnchecked<IntVariable>().getValue();
-//    }
-//    else 
-//    {
-//        UInt32 property;
-//        UInt32 size = sizeof (property); 
-//        AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &property);
-//        return property;
-//    }
-//}
-//
-//- (void)setCategory:(UInt32)category
-//{
-//    ((IOAudioHostPeer*)peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
-//}
-//
-//- (UInt32)mode
-//{    
-//    if (((IOAudioHostPeer*)peer)->getOtherOptions().containsKey (categoryKey))
-//    {
-//        return (UInt32)((IOAudioHostPeer*)peer)->getOtherOptions().at (modeKey).asUnchecked<IntVariable>().getValue();
-//    }
-//    else 
-//    {
-//        UInt32 property;
-//        UInt32 size = sizeof (property); 
-//        AudioSessionGetProperty (kAudioSessionProperty_Mode, &size, &property);
-//        return property;
-//    }
-//}
-//
-//- (void)setMode:(UInt32)mode
-//{
-//    ((IOAudioHostPeer*)peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
-//}
+- (UInt32)category
+{    
+    typedef Dictionary<Dynamic> OptionDictionary;
+    OptionDictionary options; // must be before the goto
+    
+    if (peer == nil) goto fallback;
+    
+    switch ((const int)type) 
+    {
+        case TypeCode::Float:   options = static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions(); break;
+        case TypeCode::Short:   options = static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions(); break;
+        case TypeCode::Int:     options = static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions(); break;
+        case TypeCode::Double:  options = static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions(); break;
+        default: { }
+    }
+    
+    if (options.containsKey (categoryKey))
+        return (UInt32)options.at (categoryKey).asUnchecked<IntVariable>().getValue();
+    
+fallback:
+    UInt32 property;
+    UInt32 size = sizeof (property); 
+    AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &property);
+    return property;
+
+}
+
+- (void)setCategory:(UInt32)category
+{    
+    if (peer == nil) return;
+    
+    switch ((const int)type) 
+    {
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
+        default: { }
+    }
+}
+
+- (UInt32)mode
+{    
+    typedef Dictionary<Dynamic> OptionDictionary;
+    OptionDictionary options; // must be before the goto
+
+    if (peer == nil) goto fallback;
+    
+    switch ((const int)type) 
+    {
+        case TypeCode::Float:   options = static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions(); break;
+        case TypeCode::Short:   options = static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions(); break;
+        case TypeCode::Int:     options = static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions(); break;
+        case TypeCode::Double:  options = static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions(); break;
+        default: { }
+    }
+
+    if (options.containsKey (modeKey))
+        return (UInt32)options.at (modeKey).asUnchecked<IntVariable>().getValue();
+    
+fallback:
+    UInt32 property;
+    UInt32 size = sizeof (property); 
+    AudioSessionGetProperty (kAudioSessionProperty_Mode, &size, &property);
+    return property;
+}
+
+- (void)setMode:(UInt32)mode
+{    
+    if (peer == nil) return;
+    
+    switch ((const int)type) 
+    {
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
+        default: { }
+    }
+}
 
 - (void)startHost
 {    
+    if (peer == nil) return;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->startHost();
@@ -435,6 +552,8 @@ using namespace plonk;
 
 - (void)stopHost
 {    
+    if (peer == nil) return;
+    
     switch ((const int)type) 
     {
         case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->stopHost();
@@ -476,7 +595,7 @@ using namespace plonk;
     
     if (delegate)
     {
-        const unsigned int isFloat = [delegate respondsToSelector:@selector(constructGraphFloat:)] || 
+        const unsigned int isFloat = [delegate respondsToSelector:@selector(constructGraphFloat:)] ^ 
                                      [delegate respondsToSelector:@selector(constructGraph:)]
                                      ? (1 << TypeCode::Float) : 0;
         const unsigned int isShort = [delegate respondsToSelector:@selector(constructGraphShort:)] ? (1 << TypeCode::Short) : 0;
@@ -500,7 +619,7 @@ using namespace plonk;
                     type = 0;
             }
         }
-        else plonk_assertfalse;
+        else plonk_assertfalse; // either none or more than one constructGraph.. function was implemented
     }
 }
 
