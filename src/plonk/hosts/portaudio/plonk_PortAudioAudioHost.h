@@ -43,11 +43,12 @@
 
 BEGIN_PLONK_NAMESPACE
 
-class PortAudioAudioHost : public AudioHostBase<float>
+template<class SampleType>
+class PortAudioAudioHost : public AudioHostBase<SampleType>
 {
 public:
-    typedef AudioHostBase<float>::BufferArray      BufferArray;
-    typedef AudioHostBase<float>::ConstBufferArray ConstBufferArray;
+    typedef NumericalArray<SampleType*>            BufferArray;
+    typedef NumericalArray<const SampleType*>      ConstBufferArray;
 
     /** Default constructor. */
     PortAudioAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
@@ -62,7 +63,7 @@ public:
     void startHost() throw();
     void stopHost() throw();
     
-    int callback (const float** inputData, float** outputData,
+    int callback (const SampleType** inputData, SampleType** outputData,
                   unsigned long frameCount,
                   const PaStreamCallbackTimeInfo* timeInfo,
                   PaStreamCallbackFlags statusFlags) throw();
@@ -70,6 +71,10 @@ public:
 private:
     PaStream* stream;    
 };
+
+#define PLANK_INLINING_FUNCTIONS 1
+#include "plonk_PortAudioAudioHostInline.h"
+#undef PLANK_INLINING_FUNCTIONS
 
 END_PLONK_NAMESPACE
 

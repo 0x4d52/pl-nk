@@ -82,14 +82,13 @@ private:
     IOSAudioHostPeerBase();
 };
 
+/** A base, actual implementations are all in template specialisations. */
 template<class SampleType>
 class IOSAudioHostPeer : public IOSAudioHostPeerBase<SampleType>
 {
 public:
-    UnitBase<SampleType> constructGraph() throw()
-    {
-        return 0;
-    }
+    // pure virtual constructGraph not implemented to cause a compile-time error
+    // only float, short, int and double sample types are supported
 };
 
 template<>
@@ -310,10 +309,24 @@ using namespace plonk;
     }
 }
 
-//- (PLUNIT)outputUnit
-//{
-//    return PLPEER->getOutputUnit();
-//}
+- (Dynamic)outputUnit
+{
+    Dynamic dyn;
+    
+    if (peer != nil)
+    {
+        switch ((const int)type) 
+        {
+            case TypeCode::Float:   dyn = static_cast< IOSAudioHostPeer<float>* > (peer)->getOutputUnit();
+            case TypeCode::Short:   dyn = static_cast< IOSAudioHostPeer<short>* > (peer)->getOutputUnit();
+            case TypeCode::Int:     dyn = static_cast< IOSAudioHostPeer<int>* > (peer)->getOutputUnit();
+            case TypeCode::Double:  dyn = static_cast< IOSAudioHostPeer<double>* > (peer)->getOutputUnit();
+            default: { }
+        }
+    }
+    
+    return dyn;
+}
 
 - (int)numInputs
 {    
