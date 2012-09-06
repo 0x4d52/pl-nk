@@ -46,29 +46,19 @@
 
 BEGIN_PLONK_NAMESPACE
 
+/** An audio host for the iOS platform.
+ @see PLAudioHost */
 template<class SampleType>
 class IOSAudioHostBase : public AudioHostBase<SampleType>
 {
 public:
-    IOSAudioHostBase (ObjectMemoryBase* omb) throw()
-    :   AudioHostBase<SampleType> (omb)
-    {
-    }
-
-};
-
-
-/** An audio host for the iOS platform.
- @see PLAudioHost */
-class IOSAudioHost : public IOSAudioHostBase<float>
-{
-public:
-    typedef AudioHostBase<float>::BufferArray      BufferArray;
-    typedef AudioHostBase<float>::ConstBufferArray ConstBufferArray;
-    typedef AudioHostBase<float>::UnitType         UnitType;
+    typedef typename AudioHostBase<SampleType>::BufferArray      BufferArray;
+    typedef typename AudioHostBase<SampleType>::ConstBufferArray ConstBufferArray;
+    typedef typename AudioHostBase<SampleType>::UnitType         UnitType;
+    typedef NumericalArray<SampleType>                           Buffer;
     
-    IOSAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
-    ~IOSAudioHost();
+    IOSAudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
+    ~IOSAudioHostBase();
     
     Text getHostName() const throw();
     Text getNativeHostName() const throw();
@@ -104,11 +94,20 @@ private:
     int							bufferSize;
 	float						bufferDuration;
 	double						reciprocalBufferDuration;
-    Floats                      convertBuffer;
+    Buffer                      convertBuffer;
 	UInt32						audioInputIsAvailable;
 	UInt32						numInputChannels;
 	UInt32						numOutputChannels;
 	double						cpuUsage;
+};
+
+class IOSAudioHost : public IOSAudioHostBase<float>
+{
+public:
+    IOSAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw()
+    :   IOSAudioHostBase<float> (omb)
+    {
+    }
 };
 
 END_PLONK_NAMESPACE
@@ -239,5 +238,8 @@ END_PLONK_NAMESPACE
 
 #endif
 
+#define PLANK_INLINING_FUNCTIONS 1
+#include "plonk_IOSAudioHostInline.h"
+#undef PLANK_INLINING_FUNCTIONS
 
 #endif  // PLONK_IOSAUDIOHOST_H
