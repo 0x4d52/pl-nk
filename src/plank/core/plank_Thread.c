@@ -365,12 +365,14 @@ PlankResult pl_Thread_Pause (PlankThreadRef p)
 
 PlankResult pl_Thread_PauseWithTimeout (PlankThreadRef p, double duration)
 {
+    double time;
+    
     if (pl_ThreadCurrentID() != pl_Thread_GetID (p)) // a thread can only pause itself
         return PlankResult_ThreadInvalid;
     
     pl_AtomicI_Set (&p->paused, PLANK_TRUE);
     
-    double time = 0.0;
+    time = 0.0;
     
     while (pl_AtomicI_GetUnchecked (&p->paused) && (time < duration))
     {
@@ -414,13 +416,14 @@ PlankB pl_Thread_GetShouldExit (PlankThreadRef p)
 PlankResult pl_Thread_SetPriority (PlankThreadRef p, int priority)
 {
 #if PLANK_MAC
+    struct sched_param param;
+    int policy, minPriority, maxPriority;
+
     p->priority = priority;
 
     if (!pl_Thread_IsRunning (p))
         return PlankResult_OK;
         
-    struct sched_param param;
-    int policy, minPriority, maxPriority;
     priority = pl_ClipI (priority, 0, 100);
                 
     if (pthread_getschedparam (p->thread, &policy, &param) != 0)

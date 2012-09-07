@@ -399,6 +399,7 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Int; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    typedef unsigned int UnsignedType;
 };
 
 template<>
@@ -413,6 +414,7 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Short; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    typedef unsigned short UnsignedType;
 };
 
 template<>
@@ -455,6 +457,7 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::LongLong; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    typedef UnsignedLongLong UnsignedType;
 };
 
 template<>
@@ -469,6 +472,7 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Char; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+    typedef unsigned char UnsignedType;
 };
 
 template<>

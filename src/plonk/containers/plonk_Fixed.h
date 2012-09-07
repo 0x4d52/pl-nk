@@ -36,8 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_INT24_H
-#define PLONK_INT24_H
+#ifndef PLONK_FIXED_H
+#define PLONK_FIXED_H
 
 #include "../core/plonk_CoreForwardDeclarations.h"
 
@@ -50,11 +50,54 @@
     #warning Data packing macros haven't been handled for this build system
 #endif
 
-/** An emulated 24-bit integer type.
- This overloads all the required operators and function to behave like
- an integer type but uses only 24 bits of storage.
- @ingroup PlonkContainerClasses
- */
+template<class Base>
+class FixBase
+{
+private:
+    FixBase(); // to prevent using unsupported Base internal types (must be char, short, int or LongLong).
+};
+
+// supported Base type specialisations
+template<> class FixBase<char>        { public: FixBase(){} };
+template<> class FixBase<short>       { public: FixBase(){} };
+template<> class FixBase<int>         { public: FixBase(){} };
+template<> class FixBase<LongLong>    { public: FixBase(){} };
+
+/** A generic fixed point numerical class. */
+template<class Base, unsigned IBits, unsigned FBits>                
+class Fix : public FixBase<Base>
+{
+public:
+    typedef typename TypeUtility<Base>::UnsignedType UnsignedBase;
+    
+    union UnsignedConversion
+    {
+        Base b;
+        UnsignedBase u;
+    };
+            
+    Fix() throw()
+    {
+        plonk_assertfalse; // not yet implemented
+    }
+    
+    ~Fix()
+    {
+        plonk_staticassert ((sizeof (Base) * 8) == (IBits + FBits));
+    }
+    
+private:
+    
+} PLONK_PACKED;
+
+#if PLANK_WIN
+    #pragma pack (pop)
+#endif
+
+#undef PLONK_PACKED
+
+
+/*
 class Int24
 {
 public:
@@ -283,7 +326,7 @@ LongLong operator+ (LongLong const& leftOperand, Int24 const& rightOperand) thro
 LongLong operator- (LongLong const& leftOperand, Int24 const& rightOperand) throw();
 LongLong operator* (LongLong const& leftOperand, Int24 const& rightOperand) throw();
 LongLong operator/ (LongLong const& leftOperand, Int24 const& rightOperand) throw();
+*/
 
 
-
-#endif // PLONK_INT24_H
+#endif // PLONK_FIXED_H

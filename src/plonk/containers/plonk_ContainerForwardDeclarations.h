@@ -46,6 +46,7 @@ class Globals;
 class Int24;
 class Function;
 
+template<class Base, unsigned IBits, unsigned FBits>                    class Fixed;
 template<class Type>                                                    class AtomicValue;
 template<class Type>                                                    class AtomicExtended;
 template<class ObjectType>                                              class SimpleArray;

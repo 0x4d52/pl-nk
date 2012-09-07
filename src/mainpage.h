@@ -62,6 +62,7 @@
  - PLANK_FFT_VDSP=1 : Use Apple's Accelerate vDSP library for FFT processing 
                       (the default is to use FFTReal which is included in the source tree).
                       You must also link to the Accelerate framework.
+
  
  <strong>Plonk</strong>
  - PLONK_USEPLINK=1 : Use the Plink library where possible. This effectively enables optimised versions of
