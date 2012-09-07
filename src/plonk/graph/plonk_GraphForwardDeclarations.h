@@ -89,6 +89,7 @@ template<class SampleType>                                              class Ov
 template<class SampleType>                                              class OverlapMixUnit;
 template<class SampleType>                                              class VariableUnit;
 template<class SampleType>                                              class AtomicVariableUnit;
+template<class SampleType>                                              class TaskUnit;
 
 // type conversion units
 template<class OutputSampleType, class InputSampleType>                 class TypeUnit;
