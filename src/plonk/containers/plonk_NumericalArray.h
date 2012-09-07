@@ -699,7 +699,7 @@ public:
 
 		template<class OtherType>
 		InitialNumber (OtherType initialValue) throw()
-		:	value (static_cast<NumericalType> (initialValue)), 
+		:	value (static_cast<const NumericalType> (initialValue)), 
             valid (true) 
 		{ 
 		}
@@ -1168,10 +1168,16 @@ public:
 	}
 	
 	/** Construct an array with a single value. */
-	NumericalArray (NumericalType value) throw()
-	:	Base (value)
+    template<class OtherType>
+    NumericalArray (OtherType const& value) throw()
+	:	Base (NumericalType (value))
 	{
 	}
+    
+//	NumericalArray (NumericalType value) throw()
+//	:	Base (value)
+//	{
+//	}
 
 protected:
 	static int countValidInitialisers (InitialNumber const& i03) throw()

@@ -247,6 +247,26 @@ Int24 Int24::operator^ (Int24 const& rightOperand) const throw()
     return result;            
 }
 
+float Int24::operator+ (const float rightOperand) const throw()
+{
+    return float (pl_ConvertI24ToI (data)) + rightOperand;
+}
+
+float Int24::operator- (const float rightOperand) const throw()
+{
+    return float (pl_ConvertI24ToI (data)) - rightOperand;
+}
+
+float Int24::operator* (const float rightOperand) const throw()
+{
+    return float (pl_ConvertI24ToI (data)) * rightOperand;
+}
+
+float Int24::operator/ (const float rightOperand) const throw()
+{
+    return float (pl_ConvertI24ToI (data)) / rightOperand;
+}
+
 Int24 Int24::pow (Int24 const& rightOperand) const throw()
 {
     Int24 result;

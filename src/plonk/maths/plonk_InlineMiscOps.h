@@ -234,7 +234,7 @@ class InterpLinear
 public:
     static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
-        return value0 + ValueType (frac * (value1 - value0));
+        return value0 + ValueType ((value1 - value0) * frac);
     }
     
     static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()

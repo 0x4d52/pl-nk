@@ -228,8 +228,9 @@ Text operator+ (const wchar_t* text1, Text const& text2) throw()
 
 Text Text::offset (Text const& rightOperand) const throw()
 {
-	CharArray left = *this;
-	CharArray right = rightOperand;
+    Text tmp1 (*this), tmp2 (rightOperand);
+	CharArray left (tmp1.size(), tmp1.getArray(), true);
+	CharArray right (tmp2.length(), tmp2.getArray(), true);
 	return left + right;
 }
 

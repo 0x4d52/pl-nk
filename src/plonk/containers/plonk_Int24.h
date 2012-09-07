@@ -115,6 +115,12 @@ public:
     Int24 operator& (Int24 const& rightOperand) const throw();
     Int24 operator^ (Int24 const& rightOperand) const throw();
     
+    float operator+ (const float rightOperand) const throw();
+    float operator- (const float rightOperand) const throw();
+    float operator* (const float rightOperand) const throw();
+    float operator/ (const float rightOperand) const throw();
+
+        
     Int24 pow (Int24 const& rightOperand) const throw();
     
     Int24& operator+= (Int24 const& rightOperand) throw();
@@ -195,6 +201,8 @@ public:
 
 std::istream& operator>> (std::istream &inputStream, Int24& value);
 std::ostream& operator<< (std::ostream &outputStream, Int24 const& value);
+
+
 
 
 #endif // PLONK_INT24_H
