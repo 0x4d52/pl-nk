@@ -132,13 +132,14 @@ IOSAudioHostBase<SampleType>::~IOSAudioHostBase()
 template<class SampleType>
 Text IOSAudioHostBase<SampleType>::getHostName() const throw()
 {
-    return "iOS";
+    return "iOS (" + TypeUtility<SampleType>::getTypeName() + ")";
+
 }
 
 template<class SampleType>
 Text IOSAudioHostBase<SampleType>::getNativeHostName() const throw()
 {
-    return "RemoteIO";
+    return "RemoteIO (Short)";
 }
 
 template<class SampleType>

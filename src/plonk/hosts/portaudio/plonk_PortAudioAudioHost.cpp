@@ -37,3 +37,28 @@
  */
 
 // depracated, now a template class for different sample types
+
+#if PLONK_AUDIOHOST_PORTAUDIO
+
+#include "../../core/plonk_StandardHeader.h"
+
+BEGIN_PLONK_NAMESPACE
+
+#include "../../core/plonk_Headers.h"
+
+END_PLONK_NAMESPACE
+#include "plonk_PortAudioAudioHost.h"
+BEGIN_PLONK_NAMESPACE
+
+PortAudioAudioHost::PortAudioAudioHost (ObjectMemoryBase* omb) throw()
+:   PortAudioAudioHostBase<float> (omb)
+{
+}
+
+PortAudioAudioHost::~PortAudioAudioHost()
+{
+}
+
+END_PLONK_NAMESPACE
+
+#endif

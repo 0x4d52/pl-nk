@@ -45,7 +45,7 @@ static inline int paCallback (const void *input, void *output,
                               PaStreamCallbackFlags statusFlags,
                               void *userData)
 {
-    PortAudioAudioHost<SampleType>* host = (PortAudioAudioHost<SampleType>*)userData;
+    PortAudioAudioHostBase<SampleType>* host = static_cast<PortAudioAudioHostBase<SampleType>*> (userData);
     return host->callback ((const SampleType**)input, (SampleType**)output, 
                            frameCount, timeInfo, statusFlags);
 }
@@ -75,7 +75,7 @@ static inline bool paCheckError (PaError err)
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-PortAudioAudioHost<SampleType>::PortAudioAudioHost (ObjectMemoryBase* omb) throw() 
+PortAudioAudioHostBase<SampleType>::PortAudioAudioHostBase (ObjectMemoryBase* omb) throw() 
 :   AudioHostBase<SampleType> (omb),
     stream (0)
 {
@@ -91,7 +91,7 @@ PortAudioAudioHost<SampleType>::PortAudioAudioHost (ObjectMemoryBase* omb) throw
 }
 
 template<class SampleType>
-PortAudioAudioHost<SampleType>::~PortAudioAudioHost()
+PortAudioAudioHostBase<SampleType>::~PortAudioAudioHostBase()
 {
     if (stream)
         this->stopHost();
@@ -102,13 +102,13 @@ PortAudioAudioHost<SampleType>::~PortAudioAudioHost()
 }
 
 template<class SampleType>
-Text PortAudioAudioHost<SampleType>::getHostName() const throw()
+Text PortAudioAudioHostBase<SampleType>::getHostName() const throw()
 {
-    return "PortAudio";
+    return "PortAudio (" + TypeUtility<SampleType>::getTypeName() + ")";
 }
 
 template<class SampleType>
-Text PortAudioAudioHost<SampleType>::getNativeHostName() const throw()
+Text PortAudioAudioHostBase<SampleType>::getNativeHostName() const throw()
 {
     const PaHostApiIndex paHostIndex = Pa_GetDefaultHostApi();
     const PaHostApiInfo* info = Pa_GetHostApiInfo (paHostIndex);
@@ -116,7 +116,7 @@ Text PortAudioAudioHost<SampleType>::getNativeHostName() const throw()
 }
 
 template<class SampleType>
-Text PortAudioAudioHost<SampleType>::getInputName() const throw()
+Text PortAudioAudioHostBase<SampleType>::getInputName() const throw()
 {
     const PaDeviceIndex deviceId = Pa_GetDefaultInputDevice();    
     const PaDeviceInfo* info = Pa_GetDeviceInfo (deviceId);
@@ -124,7 +124,7 @@ Text PortAudioAudioHost<SampleType>::getInputName() const throw()
 }
 
 template<class SampleType>
-Text PortAudioAudioHost<SampleType>::getOutputName() const throw()
+Text PortAudioAudioHostBase<SampleType>::getOutputName() const throw()
 {
     const PaDeviceIndex deviceId = Pa_GetDefaultOutputDevice();    
     const PaDeviceInfo* info = Pa_GetDeviceInfo (deviceId);
@@ -132,14 +132,14 @@ Text PortAudioAudioHost<SampleType>::getOutputName() const throw()
 }
 
 template<class SampleType>
-double PortAudioAudioHost<SampleType>::getCpuUsage() const throw()
+double PortAudioAudioHostBase<SampleType>::getCpuUsage() const throw()
 {
     if (!stream) return 0.0;
     return Pa_GetStreamCpuLoad (stream);
 }
 
 template<class SampleType>
-void PortAudioAudioHost<SampleType>::stopHost() throw()
+void PortAudioAudioHostBase<SampleType>::stopHost() throw()
 {
     PaError err;
     
@@ -154,7 +154,7 @@ void PortAudioAudioHost<SampleType>::stopHost() throw()
 }
 
 template<class SampleType>
-void PortAudioAudioHost<SampleType>::startHost() throw()
+void PortAudioAudioHostBase<SampleType>::startHost() throw()
 {        
     PaError err;
     
@@ -192,10 +192,10 @@ void PortAudioAudioHost<SampleType>::startHost() throw()
 }
 
 template<class SampleType>
-int PortAudioAudioHost<SampleType>::callback (const SampleType **inputData, SampleType **outputData,
-                                  unsigned long frameCount,
-                                  const PaStreamCallbackTimeInfo* timeInfo,
-                                  PaStreamCallbackFlags statusFlags) throw()
+int PortAudioAudioHostBase<SampleType>::callback (const SampleType **inputData, SampleType **outputData,
+                                                  unsigned long frameCount,
+                                                  const PaStreamCallbackTimeInfo* timeInfo,
+                                                  PaStreamCallbackFlags statusFlags) throw()
 {
     (void)timeInfo;
     (void)statusFlags;

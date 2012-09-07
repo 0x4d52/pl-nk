@@ -44,15 +44,15 @@
 BEGIN_PLONK_NAMESPACE
 
 template<class SampleType>
-class PortAudioAudioHost : public AudioHostBase<SampleType>
+class PortAudioAudioHostBase : public AudioHostBase<SampleType>
 {
 public:
     typedef NumericalArray<SampleType*>            BufferArray;
     typedef NumericalArray<const SampleType*>      ConstBufferArray;
 
     /** Default constructor. */
-    PortAudioAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
-    ~PortAudioAudioHost();
+    PortAudioAudioHostBase (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
+    ~PortAudioAudioHostBase();
     
     Text getHostName() const throw();
     Text getNativeHostName() const throw();
@@ -70,6 +70,13 @@ public:
                 
 private:
     PaStream* stream;    
+};
+
+class PortAudioAudioHost : public PortAudioAudioHostBase<float>
+{
+public:
+    PortAudioAudioHost (ObjectMemoryBase* omb = ObjectMemory<ObjectMemoryDefault>::create()) throw();
+    ~PortAudioAudioHost();
 };
 
 #define PLANK_INLINING_FUNCTIONS 1
