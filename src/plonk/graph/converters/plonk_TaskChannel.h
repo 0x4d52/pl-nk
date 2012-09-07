@@ -55,7 +55,7 @@ PLONK_CHANNELDATA_DECLARE(TaskChannelInternal,SampleType)
 //------------------------------------------------------------------------------
 
 
-#define PLONK_TASK_GDC 1
+#define PLONK_TASK_GDC 0
 
 /** File player generator. */
 template<class SampleType>
@@ -63,7 +63,7 @@ class TaskChannelInternal
 :   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(TaskChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(TaskChannelInternal,SampleType)  Data;
+    typedef PLONK_CHANNELDATA_NAME(TaskChannelInternal,SampleType)      Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
     typedef ObjectArray<ChannelType>                                    ChannelArrayType;
     typedef TaskChannelInternal<SampleType>                             TaskInternal;
@@ -76,36 +76,51 @@ public:
     
     
 #if PLONK_TASK_GDC
-    class Task : public Threading::Thread
+    class Task
     {
     public:
         typedef LockFreeQueue<Buffer> BufferQueue;
         
         Task (TaskChannelInternal* o) throw()
-        :   Threading::Thread (Text ("TaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),        
+        :   gcd (dispatch_queue_create (NULL, DISPATCH_QUEUE_SERIAL)),
             owner (o),
-            info (owner->getProcessInfo())
+            info (owner->getProcessInfo()),
+            shouldExit (0)
         {
         }
         
+        ~Task()
+        {
+            dispatch_release (gcd);
+        }
+                
         BufferQueue& getActiveBufferQueue() throw() { return activeBuffers; }
         BufferQueue& getFreeBufferQueue() throw() { return freeBuffers; }
         
-        friend void init (Task* task) throw();
-        static void init (Task* task) throw()
+        friend void init (void* x) throw();
+        static void init (void* x) throw()
         {
+            Task* task = static_cast<Task*> (x);
             const int numChannels = task->owner->getNumChannels();
             const int numBuffers = task->owner->getState().numBuffers;
             plonk_assert (task->owner->getBlockSize().getValue() > 0);
             const int bufferSize = numChannels * task->owner->getBlockSize().getValue();
             
             for (int i = 0; i < numBuffers; ++i)
-                task->activeBuffers.push (Buffer::newClear (bufferSize));
+                task->activeBuffers.push (Buffer::newClear (bufferSize));            
+        }
+                
+        friend void schedule (void* x) throw();
+        static void schedule (void* x) throw()
+        {
+            Task* task = static_cast<Task*> (x);
+            dispatch_async_f (task->gcd, x, tick);
         }
         
-        friend void tick (Task* task) throw();
-        static void tick (Task* task) throw()
+        friend void tick (void* x) throw();
+        static void tick (void* x) throw()
         {
+            Task* task = static_cast<Task*> (x);
             const int blockSize = task->owner->getBlockSize().getValue();
             const int numFreeBuffers = task->freeBuffers.length();
             const int numChannels = task->owner->getNumChannels();
@@ -128,53 +143,54 @@ public:
                     
                     plonk_assert (buffer.length() == (numChannels * inputBufferLength));
                                         
-                    NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);                            
+                    NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);
+                    bufferSamples += inputBufferLength;
                 }
                 
                 task->activeBuffers.push (buffer);
                 
                 plonk_assert (inputUnit.channelsHaveSameSampleRate());
                 task->info.offsetTimeStamp (task->owner->getSampleRate().getSampleDurationInTicks() * blockSize);                
-            }
-            else 
-            {
-                Threading::sleep (blockSize / task->owner->getSampleRate().getValue());
-            }
+            }            
+            else
+                dispatch_after_f (dispatch_walltime (NULL, 1e9 / task->owner->getSampleRate().getValue() * blockSize), task->gcd, x, tick);
+            
+            if (task->shouldExit.getValue())
+                deinit (x);
         }
         
-        friend void deinit (Task* task) throw();
-        static void deinit (Task* task) throw()
+        friend void deinit (void* x) throw();
+        static void deinit (void* x) throw()
         {
+            Task* task = static_cast<Task*> (x);
             task->freeBuffers.clearAll();
             task->activeBuffers.clearAll();
         }
 
-        
-        ResultCode run() throw()
+        void start() throw()
         {
-            init (this);
-            
-            while (!getShouldExit())
-            {
-                tick (this);
-            }
-            
-            deinit (this);
-            
-            return 0;
+            dispatch_async_f (gcd, static_cast<void*> (this), init);
+            schedule();
+        }
+        
+        void schedule() throw()
+        {
+            schedule (this);
         }
         
         void end() throw()
         {
-            setShouldExitAndWait (0.000001); // will block though...
+            shouldExit = 1;
         }
         
     private:
+        dispatch_queue_t gcd;
         TaskChannelInternal* owner;
         ProcessInfo& info;
         RNG rng;
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
+        AtomicInt shouldExit;
     };
 
 #else
@@ -239,7 +255,8 @@ public:
 
                         if (numFreeBuffers >= halfNumBuffers)
                         {
-                            NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);                            
+                            NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);   
+                            bufferSamples += inputBufferLength;
                         }
                         else 
                         {
@@ -249,10 +266,9 @@ public:
                                  
                             for (i = 0; i < num4; ++i)
                             {
-                                *bufferSamples++ = *inputSamples++;
-                                *bufferSamples++ = *inputSamples++;
-                                *bufferSamples++ = *inputSamples++;
-                                *bufferSamples++ = *inputSamples++;
+                                NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, 4);  
+                                bufferSamples += 4;
+                                inputSamples += 4;
                                 Threading::yield();
                             }
                             
@@ -281,7 +297,7 @@ public:
             
             return 0;
         }
-        
+                
         void end() throw()
         {
             setShouldExitAndWait (0.000001); // will block though...
