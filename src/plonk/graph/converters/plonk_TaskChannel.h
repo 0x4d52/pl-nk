@@ -55,6 +55,8 @@ PLONK_CHANNELDATA_DECLARE(TaskChannelInternal,SampleType)
 //------------------------------------------------------------------------------
 
 
+#define PLONK_TASK_GDC 1
+
 /** File player generator. */
 template<class SampleType>
 class TaskChannelInternal
@@ -72,6 +74,110 @@ public:
 
     //--------------------------------------------------------------------------
     
+    
+#if PLONK_TASK_GDC
+    class Task : public Threading::Thread
+    {
+    public:
+        typedef LockFreeQueue<Buffer> BufferQueue;
+        
+        Task (TaskChannelInternal* o) throw()
+        :   Threading::Thread (Text ("TaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),        
+            owner (o),
+            info (owner->getProcessInfo())
+        {
+        }
+        
+        BufferQueue& getActiveBufferQueue() throw() { return activeBuffers; }
+        BufferQueue& getFreeBufferQueue() throw() { return freeBuffers; }
+        
+        friend void init (Task* task) throw();
+        static void init (Task* task) throw()
+        {
+            const int numChannels = task->owner->getNumChannels();
+            const int numBuffers = task->owner->getState().numBuffers;
+            plonk_assert (task->owner->getBlockSize().getValue() > 0);
+            const int bufferSize = numChannels * task->owner->getBlockSize().getValue();
+            
+            for (int i = 0; i < numBuffers; ++i)
+                task->activeBuffers.push (Buffer::newClear (bufferSize));
+        }
+        
+        friend void tick (Task* task) throw();
+        static void tick (Task* task) throw()
+        {
+            const int blockSize = task->owner->getBlockSize().getValue();
+            const int numFreeBuffers = task->freeBuffers.length();
+            const int numChannels = task->owner->getNumChannels();
+            
+            if (numFreeBuffers > 0)
+            {
+                UnitType& inputUnit (task->owner->getInputAsUnit (IOKey::Generic));
+                plonk_assert (inputUnit.channelsHaveSameBlockSize());
+                
+                Buffer buffer = task->freeBuffers.pop();
+                buffer.setSize (blockSize * numChannels, false);
+                
+                SampleType* bufferSamples = buffer.getArray();
+                
+                for (int channel = 0; channel < numChannels; ++channel)
+                {
+                    const Buffer& inputBuffer (inputUnit.process (task->info, channel));                    
+                    const SampleType* inputSamples = inputBuffer.getArray();
+                    const int inputBufferLength = inputBuffer.length();
+                    
+                    plonk_assert (buffer.length() == (numChannels * inputBufferLength));
+                                        
+                    NumericalArray<SampleType>::copyData (bufferSamples, inputSamples, inputBufferLength);                            
+                }
+                
+                task->activeBuffers.push (buffer);
+                
+                plonk_assert (inputUnit.channelsHaveSameSampleRate());
+                task->info.offsetTimeStamp (task->owner->getSampleRate().getSampleDurationInTicks() * blockSize);                
+            }
+            else 
+            {
+                Threading::sleep (blockSize / task->owner->getSampleRate().getValue());
+            }
+        }
+        
+        friend void deinit (Task* task) throw();
+        static void deinit (Task* task) throw()
+        {
+            task->freeBuffers.clearAll();
+            task->activeBuffers.clearAll();
+        }
+
+        
+        ResultCode run() throw()
+        {
+            init (this);
+            
+            while (!getShouldExit())
+            {
+                tick (this);
+            }
+            
+            deinit (this);
+            
+            return 0;
+        }
+        
+        void end() throw()
+        {
+            setShouldExitAndWait (0.000001); // will block though...
+        }
+        
+    private:
+        TaskChannelInternal* owner;
+        ProcessInfo& info;
+        RNG rng;
+        BufferQueue activeBuffers;
+        BufferQueue freeBuffers;
+    };
+
+#else
     class Task : public Threading::Thread
     {
     public:
@@ -188,6 +294,7 @@ public:
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
     };
+#endif
     
     //--------------------------------------------------------------------------
     
