@@ -61,7 +61,8 @@ template<class Base, unsigned IBits, unsigned FBits>
 class Fix : public FixBase<Base>
 {
 public:
-    typedef Math<Fix> MathType;
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef Math<FixType> MathType;
     typedef typename TypeUtility<Base>::UnsignedType UnsignedBase;
     typedef typename TypeUtility<Base>::WideType WideBase;
     typedef typename TypeUtility<Base>::UnsignedWideType UnsignedWideBase;
@@ -224,7 +225,7 @@ private:
     
     inline static Base getIMaskInternal() throw()
     {
-        Base v;
+        Base v = 0;
         
         for (int i = 0; i < IBits; ++i)
             v = (v << 1) | 1;
@@ -234,7 +235,7 @@ private:
         
     inline static Base getFMaskInternal() throw()
     {
-        Base v;
+        Base v = 0;
         
         for (int i = 0; i < FBits; ++i)
             v = (v << 1) | 1;
@@ -374,6 +375,8 @@ inline Fix<Base,IBits,FBits> sqrt (Fix<Base,IBits,FBits> const& a) throw()
 { 
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
+    typedef typename FixType::WideBase WideBase;
+    typedef typename FixType::UnsignedBase UnsignedBase;
     plonk_assertfalse;
     return 0; 
 }
@@ -440,19 +443,13 @@ inline Fix<Base,IBits,FBits> exp (Fix<Base,IBits,FBits> const& a) throw()
 template<class Base, unsigned IBits, unsigned FBits> 
 inline Fix<Base,IBits,FBits> squared (Fix<Base,IBits,FBits> const& a) throw()            
 { 
-    typedef Fix<Base,IBits,FBits> FixType;
-    typedef typename FixType::Internal Internal;
-    plonk_assertfalse;
-    return 0; 
+    return a * a; 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
 inline Fix<Base,IBits,FBits> cubed (Fix<Base,IBits,FBits> const& a) throw()            
 { 
-    typedef Fix<Base,IBits,FBits> FixType;
-    typedef typename FixType::Internal Internal;
-    plonk_assertfalse;
-    return 0; 
+    return a * a * a; 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -475,14 +472,12 @@ inline Fix<Base,IBits,FBits> ceil (Fix<Base,IBits,FBits> const& a) throw()
     return FixType (Internal ((internal & imask) + (internal & fmask ? one : 0))); 
 }
 
-
 template<class Base, unsigned IBits, unsigned FBits> 
 inline Fix<Base,IBits,FBits> frac (Fix<Base,IBits,FBits> const& a) throw()            
 { 
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
-    plonk_assertfalse;
-    return 0; 
+    return FixType (Internal (a.getRaw() & FixType::getFMask())); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -490,8 +485,8 @@ inline Fix<Base,IBits,FBits> sign (Fix<Base,IBits,FBits> const& a) throw()
 { 
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
-    plonk_assertfalse;
-    return 0; 
+    const Base araw (a.getRaw());
+    return araw == 0 ? Math<FixType>::get0() : araw < 0 ? Math<FixType>::get_1() : Math<FixType>::get1(); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -553,8 +548,7 @@ inline Fix<Base,IBits,FBits> distort (Fix<Base,IBits,FBits> const& a) throw()
 { 
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
-    plonk_assertfalse;
-    return 0; 
+    return reciprocal (a) + abs (a); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -602,75 +596,25 @@ inline Fix<Base,IBits,FBits> divop (Fix<Base,IBits,FBits> const& a, Fix<Base,IBi
     return FixType (Internal ((WideBase (a.getRaw()) << FBits) / WideBase (b.getRaw()))); 
 }
 
-
-//template<class Base, unsigned IBits, unsigned FBits> 
-//inline Fix<Base,IBits,FBits> divop (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
-//{ 
-//    typedef Fix<Base,IBits,FBits> FixType;
-//    typedef typename FixType::Internal Internal;
-//    typedef typename FixType::WideBase WideType;
-//    typedef typename FixType::UnsignedBase UnsignedType;
-//    typedef typename FixType::UnsignedWideBase UnsignedWideType;
-//    
-//    const Base araw (a.getRaw());
-//    const Base braw (b.getRaw());
-//    const Base imask (FixType::getIMask());
-//    const Base dmask (imask << 4);
-//    const Base signmask (FixType::getMinimum().getRaw());
-//
-//    if (braw == 0)
-//        return FixType::getMinimum();
-//	
-//	UnsignedType remainder = (araw >= 0) ? araw : (-araw);
-//	UnsignedType divider = (braw >= 0) ? braw : (-braw);
-//	UnsignedType quotient = 0;
-//	int bitPos = FBits + 1; // unsigned?
-//	
-//    // Kick-start the division a bit.
-//	// This improves speed in the worst-case scenarios where N and D are large
-//	// It gets a lower estimate for the result by N/(D >> 17 + 1).
-//	if (divider & dmask)
-//	{
-//		UnsignedType shifted_div = ((divider >> bitPos) + 1);
-//		quotient = remainder / shifted_div;
-//		remainder -= (UnsignedWideType (quotient) * divider) >> bitPos;
-//	}
-//	
-//	// If the divider is divisible by 2^n, take advantage of it.
-//	while (!(divider & 0xF) && bitPos >= 4)
-//	{
-//		divider >>= 4;
-//		bitPos -= 4;
-//	}
-//	
-//	while (remainder && bitPos >= 0)
-//	{
-//		// Shift remainder as much as we can without overflowing
-//		int shift = Bits::countLeadingZeros (remainder);
-//		
-//        if (shift > bitPos) 
-//            shift = bitPos;
-//        
-//		remainder <<= shift;
-//		bitPos -= shift;
-//		
-//		UnsignedType div = remainder / divider;
-//		remainder = remainder % divider;
-//		quotient += div << bitPos;
-//        		
-//		remainder <<= 1;
-//		bitPos--;
-//	}
-//		
-//	Base result = quotient >> 1;
-//	
-//	// Figure out the sign of the result
-//	if ((araw ^ braw) & signmask)
-//		result = -result;
-//	
-//	return FixType (Internal (result));
-//}
-
+/*
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::min, Min);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::max, Max);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::pow, Pow);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::isEqualTo, IsEqualTo);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::isNotEqualTo, IsNotEqualTo);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::isGreaterThan, IsGreaterThan);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::isGreaterThanOrEqualTo, IsGreaterThanOrEqualTo);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::isLessThan, IsLessThan);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::isLessThanOrEqualTo, IsLessThanOrEqualTo);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::hypot, Hypot);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::atan2, Atan2);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::sumsqr, SumSqr);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::difsqr, DifSqr);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::sqrsum, SqrSum);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::sqrdif, SqrDif);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::absdif, AbsDif);
+ PLONK_PLINK_BINARYOPCHANNEL(plonk::thresh, Thresh);
+*/
 
 typedef Fix<Char,6,2> FixI6F2;
 typedef Fix<Short,8,8> FixI8F8;
