@@ -61,7 +61,7 @@ template<class Base, unsigned IBits, unsigned FBits>
 class Fix : public FixBase<Base>
 {
 public:
-    
+    typedef Math<Fix> MathType;
     typedef typename TypeUtility<Base>::UnsignedType UnsignedBase;
     typedef typename TypeUtility<Base>::WideType WideBase;
     typedef typename TypeUtility<Base>::UnsignedWideType UnsignedWideBase;
@@ -72,14 +72,18 @@ public:
         UnsignedBase u;
     };
     
-    struct Internal
+    class Internal
     {
+    public:
         inline Internal (Base const& value) throw() 
         :   internal (value)
         {
         }
         
         Base internal;
+        
+    private:
+        Internal();
     };
             
     Fix() throw()
@@ -153,14 +157,30 @@ public:
     inline Fix operator* (int const& rightOperand) const throw()    { return mulop (*this, Fix (rightOperand)); }
     inline Fix operator/ (int const& rightOperand) const throw()    { return divop (*this, Fix (rightOperand)); }
 
-    
+    inline Fix& operator+= (Fix const& rightOperand) throw()    { return operator=  ( (*this) + rightOperand); }
+    inline Fix& operator-= (Fix const& rightOperand) throw()    { return operator=  ( (*this) - rightOperand); }
+    inline Fix& operator*= (Fix const& rightOperand) throw()    { return operator=  ( (*this) * rightOperand); }
+    inline Fix& operator/= (Fix const& rightOperand) throw()    { return operator=  ( (*this) / rightOperand); }
+    inline Fix& operator+= (float const& rightOperand) throw()  { return operator=  ( (*this) + Fix (rightOperand)); }
+    inline Fix& operator-= (float const& rightOperand) throw()  { return operator=  ( (*this) - Fix (rightOperand)); }
+    inline Fix& operator*= (float const& rightOperand) throw()  { return operator=  ( (*this) * Fix (rightOperand)); }
+    inline Fix& operator/= (float const& rightOperand) throw()  { return operator=  ( (*this) / Fix (rightOperand)); }
+    inline Fix& operator+= (double const& rightOperand) throw() { return operator=  ( (*this) + Fix (rightOperand)); }
+    inline Fix& operator-= (double const& rightOperand) throw() { return operator=  ( (*this) - Fix (rightOperand)); }
+    inline Fix& operator*= (double const& rightOperand) throw() { return operator=  ( (*this) * Fix (rightOperand)); }
+    inline Fix& operator/= (double const& rightOperand) throw() { return operator=  ( (*this) / Fix (rightOperand)); }
+    inline Fix& operator+= (int const& rightOperand) throw()    { return operator=  ( (*this) + Fix (rightOperand)); }
+    inline Fix& operator-= (int const& rightOperand) throw()    { return operator=  ( (*this) - Fix (rightOperand)); }
+    inline Fix& operator*= (int const& rightOperand) throw()    { return operator=  ( (*this) * Fix (rightOperand)); }
+    inline Fix& operator/= (int const& rightOperand) throw()    { return operator=  ( (*this) / Fix (rightOperand)); }
+
     
     inline static const Fix& getOne() throw()
     {
         static Fix v (Internal (Base (1) << FBits));
         return v;
     }
-    
+        
     inline static const Fix& getMinimum() throw()
     {
         static Fix v (Internal (Base (1) << (IBits + FBits - 1)));
@@ -255,8 +275,8 @@ inline Fix<Base,IBits,FBits> reciprocal (Fix<Base,IBits,FBits> const& a) throw()
 { 
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
-    plonk_assertfalse;
-    return 0; 
+
+    return FixType::getOne() / a; 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -381,8 +401,40 @@ inline Fix<Base,IBits,FBits> exp (Fix<Base,IBits,FBits> const& a) throw()
 { 
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
-    plonk_assertfalse;
-    return 0; 
+    
+    const Base raw1 (FixType::getOne().getRaw());
+    Base araw (a.getRaw());
+    
+    if(araw == 0) 
+        return FixType::getOne();
+    
+	if(araw == raw1) 
+        return Math<FixType>::getE();
+    
+//	if(a >= 681391   ) return fix16_maximum;
+//	if(a <= -772243  ) return 0;
+    
+	bool neg (araw < 0);
+	
+    if (neg) 
+        araw = -araw;
+    
+	Base result (araw + raw1);
+	FixType term = FixType (Internal (araw));
+    
+	int i;        
+	for (i = 2; i < (IBits + FBits - 2); ++i)
+	{
+		term *= FixType (Internal (araw)) / FixType (i);
+        
+        const Base rawterm (term.getRaw());
+		result += rawterm;
+        
+		if ((rawterm < 500) && ((i > (FBits - 1)) || (rawterm < (FBits + 4))))
+			break;
+	}
+    
+	return neg ? reciprocal (FixType (Internal (result))) : FixType (Internal (result));
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -545,74 +597,86 @@ inline Fix<Base,IBits,FBits> divop (Fix<Base,IBits,FBits> const& a, Fix<Base,IBi
 { 
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
-    typedef typename FixType::WideBase WideType;
-    typedef typename FixType::UnsignedBase UnsignedType;
-    typedef typename FixType::UnsignedWideBase UnsignedWideType;
+    typedef typename FixType::WideBase WideBase;
     
-    const Base araw (a.getRaw());
-    const Base braw (b.getRaw());
-    const Base imask (FixType::getIMask());
-    const Base dmask (imask << 4);
-    const Base signmask (FixType::getMinimum().getRaw());
-
-    if (braw == 0)
-        return FixType::getMinimum();
-	
-	UnsignedType remainder = (araw >= 0) ? araw : (-araw);
-	UnsignedType divider = (braw >= 0) ? braw : (-braw);
-	UnsignedType quotient = 0;
-	int bitPos = FBits + 1; // unsigned?
-	
-    // Kick-start the division a bit.
-	// This improves speed in the worst-case scenarios where N and D are large
-	// It gets a lower estimate for the result by N/(D >> 17 + 1).
-	if (divider & dmask)
-	{
-		UnsignedType shifted_div = ((divider >> bitPos) + 1);
-		quotient = remainder / shifted_div;
-		remainder -= (UnsignedWideType (quotient) * divider) >> bitPos;
-	}
-	
-	// If the divider is divisible by 2^n, take advantage of it.
-	while (!(divider & 0xF) && bitPos >= 4)
-	{
-		divider >>= 4;
-		bitPos -= 4;
-	}
-	
-	while (remainder && bitPos >= 0)
-	{
-		// Shift remainder as much as we can without overflowing
-		int shift = Bits::countLeadingZeros (remainder);
-		
-        if (shift > bitPos) 
-            shift = bitPos;
-        
-		remainder <<= shift;
-		bitPos -= shift;
-		
-		UnsignedType div = remainder / divider;
-		remainder = remainder % divider;
-		quotient += div << bitPos;
-        		
-		remainder <<= 1;
-		bitPos--;
-	}
-		
-	Base result = quotient >> 1;
-	
-	// Figure out the sign of the result
-	if ((araw ^ braw) & signmask)
-		result = -result;
-	
-	return FixType (Internal (result));
+    return FixType (Internal ((WideBase (a.getRaw()) << FBits) / WideBase (b.getRaw()))); 
 }
+
+
+//template<class Base, unsigned IBits, unsigned FBits> 
+//inline Fix<Base,IBits,FBits> divop (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+//{ 
+//    typedef Fix<Base,IBits,FBits> FixType;
+//    typedef typename FixType::Internal Internal;
+//    typedef typename FixType::WideBase WideType;
+//    typedef typename FixType::UnsignedBase UnsignedType;
+//    typedef typename FixType::UnsignedWideBase UnsignedWideType;
+//    
+//    const Base araw (a.getRaw());
+//    const Base braw (b.getRaw());
+//    const Base imask (FixType::getIMask());
+//    const Base dmask (imask << 4);
+//    const Base signmask (FixType::getMinimum().getRaw());
+//
+//    if (braw == 0)
+//        return FixType::getMinimum();
+//	
+//	UnsignedType remainder = (araw >= 0) ? araw : (-araw);
+//	UnsignedType divider = (braw >= 0) ? braw : (-braw);
+//	UnsignedType quotient = 0;
+//	int bitPos = FBits + 1; // unsigned?
+//	
+//    // Kick-start the division a bit.
+//	// This improves speed in the worst-case scenarios where N and D are large
+//	// It gets a lower estimate for the result by N/(D >> 17 + 1).
+//	if (divider & dmask)
+//	{
+//		UnsignedType shifted_div = ((divider >> bitPos) + 1);
+//		quotient = remainder / shifted_div;
+//		remainder -= (UnsignedWideType (quotient) * divider) >> bitPos;
+//	}
+//	
+//	// If the divider is divisible by 2^n, take advantage of it.
+//	while (!(divider & 0xF) && bitPos >= 4)
+//	{
+//		divider >>= 4;
+//		bitPos -= 4;
+//	}
+//	
+//	while (remainder && bitPos >= 0)
+//	{
+//		// Shift remainder as much as we can without overflowing
+//		int shift = Bits::countLeadingZeros (remainder);
+//		
+//        if (shift > bitPos) 
+//            shift = bitPos;
+//        
+//		remainder <<= shift;
+//		bitPos -= shift;
+//		
+//		UnsignedType div = remainder / divider;
+//		remainder = remainder % divider;
+//		quotient += div << bitPos;
+//        		
+//		remainder <<= 1;
+//		bitPos--;
+//	}
+//		
+//	Base result = quotient >> 1;
+//	
+//	// Figure out the sign of the result
+//	if ((araw ^ braw) & signmask)
+//		result = -result;
+//	
+//	return FixType (Internal (result));
+//}
 
 
 typedef Fix<Char,6,2> FixI6F2;
 typedef Fix<Short,8,8> FixI8F8;
 typedef Fix<Int,16,16> FixI16F16;
-typedef Fix<LongLong,32,32> FixI32F32;
+typedef Fix<Int,8,24> FixI8F24;
+
 
 /*
 class Int24
