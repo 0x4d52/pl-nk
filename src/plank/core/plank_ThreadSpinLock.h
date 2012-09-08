@@ -100,6 +100,8 @@ static PlankB pl_ThreadSpinLock_TryLock (PlankThreadSpinLockRef p);
  @param p The <i>Plank %ThreadSpinLock</i> object. */
 void pl_ThreadSpinLock_Wait (PlankThreadSpinLockRef p);
 
+void pl_ThreadSpinLock_WaitTimeout (PlankThreadSpinLockRef p, double time);
+
 /** Signal the lock. 
  [todo docs]
  @param p The <i>Plank %ThreadSpinLock</i> object. */

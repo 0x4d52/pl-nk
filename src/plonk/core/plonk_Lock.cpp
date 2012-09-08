@@ -68,9 +68,12 @@ bool LockInternal::tryLock() throw()
     return pl_Lock_TryLock (getPeerRef()) != 0;
 }
 
-void LockInternal::wait() throw()
+void LockInternal::wait (const double time) throw()
 {
-    pl_Lock_Wait (getPeerRef());
+    if (time <= 0.0)
+        pl_Lock_Wait (getPeerRef());
+    else
+        pl_Lock_WaitTimeout (getPeerRef(), time);
 }
 
 void LockInternal::signal() throw()
@@ -105,9 +108,12 @@ bool SpinLockInternal::tryLock() throw()
     return pl_SpinLock_TryLock (getPeerRef()) != 0;
 }
 
-void SpinLockInternal::wait() throw()
+void SpinLockInternal::wait (const double time) throw()
 {
-    pl_SpinLock_Wait (getPeerRef());
+    if (time <= 0.0)
+        pl_SpinLock_Wait (getPeerRef());
+    else
+        pl_SpinLock_WaitTimeout (getPeerRef(), time);
 }
 
 void SpinLockInternal::signal() throw()
@@ -145,10 +151,14 @@ bool ThreadSpinLockInternal::tryLock() throw()
     return pl_ThreadSpinLock_TryLock (getPeerRef()) != 0;
 }
 
-void ThreadSpinLockInternal::wait() throw()
+void ThreadSpinLockInternal::wait (const double time) throw()
 {
     plonk_assert (Threading::getCurrentThreadID() != getPeerRef()->flag.value); // you're asking the thread that locked to wait! how is that going to work?
-    pl_ThreadSpinLock_Wait (getPeerRef());
+    
+    if (time <= 0.0)
+        pl_ThreadSpinLock_Wait (getPeerRef());
+    else
+        pl_ThreadSpinLock_WaitTimeout (getPeerRef(), time);
 }
 
 void ThreadSpinLockInternal::signal() throw()

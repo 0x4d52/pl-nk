@@ -151,6 +151,7 @@
         #include <CoreFoundation/CoreFoundation.h> 
         #include <libkern/OSAtomic.h>
         #include <pthread.h>
+        #include <sys/time.h>
 
         #ifdef __llvm__
             #ifdef __clang__
@@ -177,7 +178,6 @@
             #include <mach/mach.h>
             #include <mach/mach_init.h>
             #include <mach/thread_policy.h>
-//            #include <mach/sched.h>
 
             #if defined (__ppc__) || defined (__ppc64__)
                 #define PLANK_PPC 1
@@ -275,6 +275,25 @@ typedef PlankI PlankFourCharCode;
 #define PLANK_MINOR_VERSION      1
 #define PLANK_BUILDNUMBER        1
 
+
+static inline double pl_TimeNow()
+{
+#if PLANK_APPLE
+    struct timeval now;
+    gettimeofday (&now, 0);
+    return (double)now.tv_sec + now.tv_usec * 0.000001;
+#else
+    return 0.0;
+#endif
+}
+
+#if PLANK_APPLE
+static inline void pl_TimeToTimeSpec (struct timespec* time, double seconds)
+{
+    time->tv_sec = (long)seconds;
+    time->tv_nsec = (long)((seconds - time->tv_sec) * 0.000000001);
+}
+#endif
 
 
 #endif // PLANK_STANDARDHEADER_H

@@ -158,6 +158,11 @@ void pl_SpinLock_Wait (PlankSpinLockRef p)
 
 }
 
+void pl_SpinLock_WaitTimeout (PlankSpinLockRef p, double time)
+{
+    
+}
+
 void pl_SpinLock_Signal (PlankSpinLockRef p)
 {
     pl_SpinLock_Unlock (p);

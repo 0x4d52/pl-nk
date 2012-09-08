@@ -96,6 +96,8 @@ PlankB pl_Lock_TryLock (PlankLockRef p);
  @param p The <i>Plank %Lock</i> object. */
 void pl_Lock_Wait (PlankLockRef p);
 
+void pl_Lock_WaitTimeout (PlankLockRef p, double time);
+
 /** Signal the lock. 
  [todo docs]
  @param p The <i>Plank %Lock</i> object. */
@@ -111,6 +113,7 @@ typedef struct PlankLock
 {
     pthread_mutex_t mutex;
     pthread_cond_t condition;
+    PlankB flag;
 } PlankLock;
 #endif
 

@@ -112,6 +112,7 @@ PlankResult pl_Lock_Init (PlankLockRef p)
     pthread_mutexattr_setprotocol (&attr, PTHREAD_PRIO_INHERIT);
     pthread_mutex_init (&p->mutex, &attr);
     pthread_cond_init (&p->condition, NULL);    
+    p->flag = PLANK_FALSE;
     
 exit:
     return result;    
@@ -151,12 +152,36 @@ PlankB pl_Lock_TryLock (PlankLockRef p)
 
 void pl_Lock_Wait (PlankLockRef p)
 {
-    pthread_cond_wait (&p->condition, &p->mutex);
+    int err;
+    pthread_mutex_lock (&p->mutex);
+    
+//    do 
+//    {
+        err = pthread_cond_wait (&p->condition, &p->mutex);
+//    } while ((err == 0) && !p->flag);
+    
+    p->flag = PLANK_FALSE;
+    pthread_mutex_unlock (&p->mutex);
+}
+
+void pl_Lock_WaitTimeout (PlankLockRef p, double time)
+{
+    struct timespec timeout;
+    pthread_mutex_lock (&p->mutex);
+    
+    pl_TimeToTimeSpec (&timeout, pl_TimeNow() + time);
+    pthread_cond_timedwait (&p->condition, &p->mutex, &timeout);
+    p->flag = PLANK_FALSE;
+
+    pthread_mutex_unlock (&p->mutex);
 }
 
 void pl_Lock_Signal (PlankLockRef p)
 {
-    pthread_cond_signal(&p->condition);
+    pthread_mutex_lock (&p->mutex);
+    pthread_cond_signal (&p->condition);
+    p->flag = PLANK_TRUE;
+    pthread_mutex_unlock (&p->mutex);
 }
 
 #endif // PLANK_APPLE
@@ -225,6 +250,11 @@ PlankB pl_Lock_TryLock (PlankLockRef p)
 }
 
 void pl_Lock_Wait (PlankLockRef p)
+{
+    WaitForMultipleObjects (1, &p->condition, PLANK_FALSE, INFINITE);
+}
+
+void pl_Lock_WaitTimeout (PlankLockRef p, double time)
 {
     WaitForMultipleObjects (1, &p->condition, PLANK_FALSE, INFINITE);
 }

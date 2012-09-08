@@ -99,6 +99,8 @@ static PlankB pl_SpinLock_TryLock (PlankSpinLockRef p);
  @param p The <i>Plank %SpinLock</i> object. */
 void pl_SpinLock_Wait (PlankSpinLockRef p);
 
+void pl_SpinLock_WaitTimeout (PlankSpinLockRef p, double time);
+
 /** Signal the lock. 
  [todo docs]
  @param p The <i>Plank %SpinLock</i> object. */

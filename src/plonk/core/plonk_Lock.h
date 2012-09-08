@@ -53,7 +53,7 @@ public:
     virtual void lock() throw() = 0;
     virtual void unlock() throw() = 0;
     virtual bool tryLock() throw() = 0;
-    virtual void wait() throw() = 0;
+    virtual void wait (const double time) throw() = 0;
     virtual void signal() throw() = 0;
 
 };
@@ -67,7 +67,7 @@ public:
     void lock() throw() { }
     void unlock() throw() { }
     bool tryLock() throw() { return true; }
-    void wait() throw() { }
+    void wait (const double time) throw() { (void)time; }
     void signal() throw() { }
     
 private:
@@ -82,7 +82,7 @@ public:
     void lock() throw();
     void unlock() throw();
     bool tryLock() throw();
-    void wait() throw();
+    void wait (const double time) throw();
     void signal() throw();
 
 private:
@@ -99,7 +99,7 @@ public:
     void lock() throw();
     void unlock() throw();
     bool tryLock() throw();
-    void wait() throw();
+    void wait (const double time) throw();
     void signal() throw();
     
 private:
@@ -116,7 +116,7 @@ public:
     void lock() throw();
     void unlock() throw();
     bool tryLock() throw();
-    void wait() throw();
+    void wait (const double time) throw();
     void signal() throw();
     
 private:
@@ -150,11 +150,12 @@ public:
     Lock (Lock const& copy) throw();
     Lock& operator= (Lock const& other) throw();
     
-    inline void lock() throw()      { getInternal()->lock(); }
-    inline void unlock() throw()    { getInternal()->unlock(); }
-    inline bool tryLock() throw()   { return getInternal()->tryLock(); }
-    inline void wait() throw()      { getInternal()->wait(); }
-    inline void signal() throw()    { getInternal()->signal(); }
+    inline void lock() throw()                      { getInternal()->lock(); }
+    inline void unlock() throw()                    { getInternal()->unlock(); }
+    inline bool tryLock() throw()                   { return getInternal()->tryLock(); }
+    inline void wait() throw()                      { getInternal()->wait (0.0); }
+    inline void wait (const double time) throw()    { getInternal()->wait (time); }
+    inline void signal() throw()                    { getInternal()->signal(); }
     
     PLONK_OBJECTARROWOPERATOR(Lock);
     
