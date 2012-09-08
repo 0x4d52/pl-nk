@@ -139,19 +139,11 @@ public:
 
                     plonk_assert (inputUnit.channelsHaveSameSampleRate());
                     info.offsetTimeStamp (owner->getSampleRate().getSampleDurationInTicks() * blockSize);
-//                }
-//                else
-//                {
-////                    lock.wait (blockSize * numBuffers / owner->getSampleRate().getValue());
-//                    lock.wait();
-//                }
                 
-                    //data.priority = plonk::clip (++data.priority, 0, 100);
                     Threading::sleep (blockSize / owner->getSampleRate().getValue() * rng.uniform (0.0, 0.5));
                 }
                 else 
                 {
-                    //data.priority = plonk::clip (--data.priority, 0, 100);
                     Threading::sleep (blockSize / owner->getSampleRate().getValue() * rng.uniform (halfNumBuffers, numBuffers - 1));
                 }
             }
@@ -166,19 +158,13 @@ public:
         {
             setShouldExitAndWait (0.000001); // will block though...
         }
-        
-        void signal() throw()
-        {
-            lock.signal();
-        }
-        
+                
     private:
         TaskChannelInternal* owner;
         ProcessInfo& info;
         RNG rng;
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
-        Lock lock;
     };
     
     //--------------------------------------------------------------------------
@@ -243,7 +229,6 @@ public:
             
             buffer.zero();
             task.getFreeBufferQueue().push (buffer);
-//            task.signal();
         }
         else
         {

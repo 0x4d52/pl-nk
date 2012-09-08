@@ -400,6 +400,9 @@ public:
     static inline int  getTypeCode() { return TypeCode::Int; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef unsigned int UnsignedType;
+    typedef LongLong WideType;
+    typedef UnsignedLongLong UnsignedWideType;
+
 };
 
 template<>
@@ -415,6 +418,8 @@ public:
     static inline int  getTypeCode() { return TypeCode::Short; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef unsigned short UnsignedType;
+    typedef int WideType;
+    typedef unsigned int UnsignedWideType;
 };
 
 template<>
@@ -458,6 +463,8 @@ public:
     static inline int  getTypeCode() { return TypeCode::LongLong; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef UnsignedLongLong UnsignedType;
+    typedef struct { LongLong a; LongLong b; } WideType;
+    typedef struct { UnsignedLongLong a; UnsignedLongLong b; } UnsignedWideType;
 };
 
 template<>
@@ -473,6 +480,8 @@ public:
     static inline int  getTypeCode() { return TypeCode::Char; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
     typedef unsigned char UnsignedType;
+    typedef short WideType;
+    typedef unsigned short UnsignedWideType;
 };
 
 template<>

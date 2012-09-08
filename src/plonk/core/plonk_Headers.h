@@ -72,7 +72,7 @@
 #include "../containers/plonk_Wavetable.h"
 #include "../containers/plonk_Signal.h"
 #include "../containers/plonk_Int24.h"
-#include "../containers/plonk_Fixed.h"
+#include "../containers/plonk_Fix.h"
 #include "../containers/plonk_Function.h"
 #include "../containers/plonk_LockFreeQueue.h"
 #include "../containers/plonk_LockFreeStack.h"
