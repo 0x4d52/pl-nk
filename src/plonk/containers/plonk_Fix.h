@@ -36,7 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
-/* Algorithm from libfixmath - see doc/license.txt included in the distribution */
+/* Algorithms from libfixmath and Fixed Point Math Library
+ - see doc/license.txt included in the distribution */
 
 #ifndef PLONK_FIXED_H
 #define PLONK_FIXED_H
@@ -55,6 +56,21 @@ template<> class FixBase<char>        { public: FixBase(){} };
 template<> class FixBase<short>       { public: FixBase(){} };
 template<> class FixBase<int>         { public: FixBase(){} };
 
+template<class DstBase, class SrcBase>
+class FixBaseConvert
+{
+};
+
+template<> class FixBaseConvert<char,char>      { public: typedef char  ConvertBase; };
+template<> class FixBaseConvert<char,short>     { public: typedef short ConvertBase; };
+template<> class FixBaseConvert<char,int>       { public: typedef int   ConvertBase; };
+template<> class FixBaseConvert<short,short>    { public: typedef short ConvertBase; };
+template<> class FixBaseConvert<short,char>     { public: typedef short ConvertBase; };
+template<> class FixBaseConvert<short,int>      { public: typedef int   ConvertBase; };
+template<> class FixBaseConvert<int,int>        { public: typedef int   ConvertBase; };
+template<> class FixBaseConvert<int,char>       { public: typedef int   ConvertBase; };
+template<> class FixBaseConvert<int,short>      { public: typedef int   ConvertBase; };
+
 /** A generic fixed point numerical class. 
  This does not detect overflows, and does not use saturating arithmetic. */
 template<class Base, unsigned IBits, unsigned FBits>                
@@ -63,16 +79,11 @@ class Fix : public FixBase<Base>
 public:
     typedef Fix<Base,IBits,FBits> FixType;
     typedef Math<FixType> MathType;
+    typedef Base BaseType;
     typedef typename TypeUtility<Base>::UnsignedType UnsignedBase;
     typedef typename TypeUtility<Base>::WideType WideBase;
     typedef typename TypeUtility<Base>::UnsignedWideType UnsignedWideBase;
-    
-    union UnsignedConversion
-    {
-        Base b;
-        UnsignedBase u;
-    };
-    
+            
     class Internal
     {
     public:
@@ -111,7 +122,7 @@ public:
     {
     }
     
-    inline Fix (const double value) throw()
+    inline Fix (double const& value) throw()
     :   internal (value * getOneDouble())
     {
     }
@@ -121,8 +132,21 @@ public:
     {
     }
     
+    inline Fix (Fix const& copy) throw()
+    :   internal (copy.internal)
+    {
+    }
+    
+    template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
+    inline Fix (Fix<BaseOther,IBitsOther,FBitsOther> const& other) throw()
+    :   internal (Base (convert (other) << convertShift (FBits, FBitsOther)))
+    {
+    }
+            
     inline ~Fix()
     {
+        plonk_staticassert (IBits != 0);
+        plonk_staticassert (FBits != 0);
         plonk_staticassert ((sizeof (Base) * 8) == (IBits + FBits));
     }
 
@@ -158,6 +182,19 @@ public:
     inline Fix operator* (int const& rightOperand) const throw()    { return mulop (*this, Fix (rightOperand)); }
     inline Fix operator/ (int const& rightOperand) const throw()    { return divop (*this, Fix (rightOperand)); }
 
+    inline Fix& operator= (Fix const& other) throw()            { if (this != &other) internal = other.internal; return *this; }
+    inline Fix& operator= (float const& other) throw()          { internal = Fix (other).internal; return *this; }
+    inline Fix& operator= (double const& other) throw()         { internal = Fix (other).internal; return *this; }
+    inline Fix& operator= (int const& other) throw()            { internal = Fix (other).internal; return *this; }
+    inline Fix& operator= (Internal const& other) throw()       { internal = other; return *this; }
+    
+    template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
+    inline Fix& operator= (Fix<BaseOther,IBitsOther,FBitsOther> const& other) throw()
+    { 
+        const Fix copy (other);
+        return operator= (copy); 
+    }
+    
     inline Fix& operator+= (Fix const& rightOperand) throw()    { return operator=  ( (*this) + rightOperand); }
     inline Fix& operator-= (Fix const& rightOperand) throw()    { return operator=  ( (*this) - rightOperand); }
     inline Fix& operator*= (Fix const& rightOperand) throw()    { return operator=  ( (*this) * rightOperand); }
@@ -174,8 +211,47 @@ public:
     inline Fix& operator-= (int const& rightOperand) throw()    { return operator=  ( (*this) - Fix (rightOperand)); }
     inline Fix& operator*= (int const& rightOperand) throw()    { return operator=  ( (*this) * Fix (rightOperand)); }
     inline Fix& operator/= (int const& rightOperand) throw()    { return operator=  ( (*this) / Fix (rightOperand)); }
+    inline Fix& operator+= (Internal const& rightOperand) throw()    { return operator=  ( (*this) + Fix (rightOperand)); }
+    inline Fix& operator-= (Internal const& rightOperand) throw()    { return operator=  ( (*this) - Fix (rightOperand)); }
+    inline Fix& operator*= (Internal const& rightOperand) throw()    { return operator=  ( (*this) * Fix (rightOperand)); }
+    inline Fix& operator/= (Internal const& rightOperand) throw()    { return operator=  ( (*this) / Fix (rightOperand)); }
 
-    
+    inline bool operator== (Fix const& rightOperand) const throw()      { return internal == rightOperand.internal; }
+    inline bool operator== (float const& rightOperand) const throw()    { return internal == Fix (rightOperand).internal; }
+    inline bool operator== (double const& rightOperand) const throw()   { return internal == Fix (rightOperand).internal; }
+    inline bool operator== (int const& rightOperand) const throw()      { return internal == Fix (rightOperand).internal; }
+    inline bool operator== (Internal const& rightOperand) const throw() { return internal == rightOperand; }
+
+    inline bool operator!= (Fix const& rightOperand) const throw()      { return internal != rightOperand.internal; }
+    inline bool operator!= (float const& rightOperand) const throw()    { return internal != Fix (rightOperand).internal; }
+    inline bool operator!= (double const& rightOperand) const throw()   { return internal != Fix (rightOperand).internal; }
+    inline bool operator!= (int const& rightOperand) const throw()      { return internal != Fix (rightOperand).internal; }
+    inline bool operator!= (Internal const& rightOperand) const throw() { return internal != rightOperand; }
+
+    inline bool operator<  (Fix const& rightOperand) const throw()      { return internal <  rightOperand.internal; }
+    inline bool operator<  (float const& rightOperand) const throw()    { return internal <  Fix (rightOperand).internal; }
+    inline bool operator<  (double const& rightOperand) const throw()   { return internal <  Fix (rightOperand).internal; }
+    inline bool operator<  (int const& rightOperand) const throw()      { return internal <  Fix (rightOperand).internal; }
+    inline bool operator<  (Internal const& rightOperand) const throw() { return internal <  rightOperand; }
+
+    inline bool operator<= (Fix const& rightOperand) const throw()      { return internal <= rightOperand.internal; }
+    inline bool operator<= (float const& rightOperand) const throw()    { return internal <= Fix (rightOperand).internal; }
+    inline bool operator<= (double const& rightOperand) const throw()   { return internal <= Fix (rightOperand).internal; }
+    inline bool operator<= (int const& rightOperand) const throw()      { return internal <= Fix (rightOperand).internal; }
+    inline bool operator<= (Internal const& rightOperand) const throw() { return internal <= rightOperand; }
+
+    inline bool operator>  (Fix const& rightOperand) const throw()      { return internal >  rightOperand.internal; }
+    inline bool operator>  (float const& rightOperand) const throw()    { return internal >  Fix (rightOperand).internal; }
+    inline bool operator>  (double const& rightOperand) const throw()   { return internal >  Fix (rightOperand).internal; }
+    inline bool operator>  (int const& rightOperand) const throw()      { return internal >  Fix (rightOperand).internal; }
+    inline bool operator>  (Internal const& rightOperand) const throw() { return internal >  rightOperand; }
+
+    inline bool operator>= (Fix const& rightOperand) const throw()      { return internal >= rightOperand.internal; }
+    inline bool operator>= (float const& rightOperand) const throw()    { return internal >= Fix (rightOperand).internal; }
+    inline bool operator>= (double const& rightOperand) const throw()   { return internal >= Fix (rightOperand).internal; }
+    inline bool operator>= (int const& rightOperand) const throw()      { return internal >= Fix (rightOperand).internal; }
+    inline bool operator>= (Internal const& rightOperand) const throw() { return internal >= rightOperand; }
+
     inline static const Fix& getOne() throw()
     {
         static Fix v (Internal (Base (1) << FBits));
@@ -196,13 +272,13 @@ public:
     
     inline static const Base& getIMask() throw()
     {
-        static Base v (getIMaskInternal());
+        static Base v (getIMaskInternal()); // getIMaskInternal() is slow but only happens once at init
         return v;
     }
 
     inline static const Base& getFMask() throw()
     {
-        static Base v (getFMaskInternal());
+        static Base v (getFMaskInternal()); // getFMaskInternal() is slow but only happens once at init
         return v;
     }
     
@@ -243,6 +319,16 @@ private:
         return v;
     }
 
+    template<class OtherFixType>
+    static inline typename FixBaseConvert<Base,typename OtherFixType::BaseType>::ConvertBase convert (OtherFixType const& other) throw()
+    {
+        return other.getRaw();
+    }
+
+    static inline unsigned convertShift (const unsigned dstBits, const unsigned srcBits) throw()
+    {
+        return dstBits - srcBits;
+    }
 };
 
 
@@ -286,7 +372,7 @@ inline Fix<Base,IBits,FBits> log2 (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return log2 (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -295,7 +381,7 @@ inline Fix<Base,IBits,FBits> sin (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return sin (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -304,7 +390,7 @@ inline Fix<Base,IBits,FBits> cos (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return cos (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -322,7 +408,7 @@ inline Fix<Base,IBits,FBits> asin (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return asin (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -331,7 +417,7 @@ inline Fix<Base,IBits,FBits> acos (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return acos (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -340,7 +426,7 @@ inline Fix<Base,IBits,FBits> atan (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return atan (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -349,7 +435,7 @@ inline Fix<Base,IBits,FBits> sinh (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return sinh (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -358,7 +444,7 @@ inline Fix<Base,IBits,FBits> cosh (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return cosh (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -367,7 +453,7 @@ inline Fix<Base,IBits,FBits> tanh (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return tanh (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -378,7 +464,7 @@ inline Fix<Base,IBits,FBits> sqrt (Fix<Base,IBits,FBits> const& a) throw()
     typedef typename FixType::WideBase WideBase;
     typedef typename FixType::UnsignedBase UnsignedBase;
     plonk_assertfalse;
-    return 0; 
+    return sqrt (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -387,7 +473,7 @@ inline Fix<Base,IBits,FBits> log (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return log (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -396,7 +482,7 @@ inline Fix<Base,IBits,FBits> log10 (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return log10 (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -495,7 +581,7 @@ inline Fix<Base,IBits,FBits> m2f (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return m2f (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -504,7 +590,7 @@ inline Fix<Base,IBits,FBits> f2m (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return f2m (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -513,7 +599,7 @@ inline Fix<Base,IBits,FBits> a2dB (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return a2dB (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -522,7 +608,7 @@ inline Fix<Base,IBits,FBits> dB2a (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return dB2a (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -531,7 +617,7 @@ inline Fix<Base,IBits,FBits> d2r (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return d2r (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -540,7 +626,7 @@ inline Fix<Base,IBits,FBits> r2d (Fix<Base,IBits,FBits> const& a) throw()
     typedef Fix<Base,IBits,FBits> FixType;
     typedef typename FixType::Internal Internal;
     plonk_assertfalse;
-    return 0; 
+    return r2d (float (a)); 
 }
 
 template<class Base, unsigned IBits, unsigned FBits> 
@@ -596,25 +682,142 @@ inline Fix<Base,IBits,FBits> divop (Fix<Base,IBits,FBits> const& a, Fix<Base,IBi
     return FixType (Internal ((WideBase (a.getRaw()) << FBits) / WideBase (b.getRaw()))); 
 }
 
-/*
- PLONK_PLINK_BINARYOPCHANNEL(plonk::min, Min);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::max, Max);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::pow, Pow);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::isEqualTo, IsEqualTo);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::isNotEqualTo, IsNotEqualTo);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::isGreaterThan, IsGreaterThan);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::isGreaterThanOrEqualTo, IsGreaterThanOrEqualTo);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::isLessThan, IsLessThan);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::isLessThanOrEqualTo, IsLessThanOrEqualTo);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::hypot, Hypot);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::atan2, Atan2);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::sumsqr, SumSqr);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::difsqr, DifSqr);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::sqrsum, SqrSum);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::sqrdif, SqrDif);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::absdif, AbsDif);
- PLONK_PLINK_BINARYOPCHANNEL(plonk::thresh, Thresh);
-*/
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> fmod (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    return FixType (Internal (a.getRaw() % b.getRaw())); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> min (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return (a > b) ? b : a; 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> max (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return (a < b) ? b : a; 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> pow (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return pow (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> hypot (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return hypot (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> atan2 (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return atan2 (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> sumsqr (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return pow (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> difsqr (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return difsqr (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> sqrsum (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return sqrsum (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> sqrdif (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return sqrdif (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> absdif (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return absdif (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> thresh (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    typedef Fix<Base,IBits,FBits> FixType;
+    typedef typename FixType::Internal Internal;
+    plonk_assertfalse;
+    return thresh (float (a), float (b)); 
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> isEqualTo (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return a == b;
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> isNotEqualTo (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return a != b;
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> isGreaterThan (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return a > b;
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> isGreaterThanOrEqualTo (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return a >= b;
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> isLessThan (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return a < b;
+}
+
+template<class Base, unsigned IBits, unsigned FBits> 
+inline Fix<Base,IBits,FBits> isLessThanOrEqualTo (Fix<Base,IBits,FBits> const& a, Fix<Base,IBits,FBits> const& b) throw()              
+{ 
+    return a <= b;
+}
 
 typedef Fix<Char,6,2> FixI6F2;
 typedef Fix<Short,8,8> FixI8F8;
