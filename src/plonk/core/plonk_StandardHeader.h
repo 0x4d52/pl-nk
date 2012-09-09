@@ -251,6 +251,12 @@ struct ForceErrorStruct { int dummy; };
 
 #include "plonk_Memory.h"
 
+#define PLONK_UNARYOPFUNCTION(TYPE,NAME)        TYPE (*NAME)(TYPE const&)
+#define PLONK_BINARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE const&, TYPE const&)
+#define PLONK_TERNARYOPFUNCTION(TYPE,NAME)      TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&)
+#define PLONK_QUATERNARYOPFUNCTION(TYPE,NAME)   TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&)
+#define PLONK_QUINARYOPFUNCTION(TYPE,NAME)      TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&, TYPE const&)
+
 template<class TypeA, class TypeB>
 class BinaryOpTypeUtility
 {

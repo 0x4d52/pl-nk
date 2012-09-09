@@ -46,74 +46,74 @@ class Globals;
 class Int24;
 class Function;
 
-template<class Base, unsigned IBits, unsigned FBits>                    class Fixed;
-template<class Type>                                                    class AtomicValue;
-template<class Type>                                                    class AtomicExtended;
-template<class ObjectType>                                              class SimpleArray;
-template<class ObjectType>                                              class ObjectArray;
-//template<class ObjectType, 
-//         class BaseType = SenderInternal<ObjectArray<ObjectType> > >    class ObjectArrayInternal;
+template<class Base, unsigned IBits, unsigned FBits>                        class Fixed;
+template<class Type>                                                        class AtomicValue;
+template<class Type>                                                        class AtomicExtended;
+template<class ObjectType>                                                  class SimpleArray;
+template<class ObjectType>                                                  class ObjectArray;
 template<class ObjectType, 
-         class BaseType = SmartPointer>                                 class ObjectArrayInternal;
+         class BaseType = SmartPointer>                                     class ObjectArrayInternal;
 template<class ArrayType, 
-         class RowType = ObjectArray<ArrayType> >                       class ObjectArray2DBase;
+         class RowType = ObjectArray<ArrayType> >                           class ObjectArray2DBase;
 template<class ArrayType, 
-         class RowType = ObjectArray<ArrayType> >                       class ObjectArray2D;
-template<class NumericalType>                                           class NumericalArray;
+         class RowType = ObjectArray<ArrayType> >                           class ObjectArray2D;
+template<class NumericalType>                                               class NumericalArray;
+template<class NumericalType, PLONK_BINARYOPFUNCTION(NumericalType, op)>    class NumericalArrayBinaryOp;
+template<class NumericalType, PLONK_UNARYOPFUNCTION(NumericalType, op)>     class NumericalArrayUnaryOp;
 template<class NumericalType, 
-         class RowType = NumericalArray<NumericalType> >                class NumericalArray2D;
-template<class ValueType, class KeyType = Text>                         class KeyValuePair;
-template<class ValueType, class KeyType = Text>                         class DictionaryInternal;
-template<class ValueType, class KeyType = Text>                         class Dictionary;
-template<class ValueType>                                               class LinkedList;
-template<class ValueType>                                               class LinkedListElement;
+         class RowType = NumericalArray<NumericalType> >                    class NumericalArray2D;
+template<class ValueType, class KeyType = Text>                             class KeyValuePair;
+template<class ValueType, class KeyType = Text>                             class DictionaryInternal;
+template<class ValueType, class KeyType = Text>                             class Dictionary;
+template<class ValueType>                                                   class LinkedList;
+template<class ValueType>                                                   class LinkedListElement;
 
-template<class ValueType>                                               class LockFreeQueue;
-template<class ValueType>                                               class LockFreeStack;
+template<class ValueType>                                                   class LockFreeQueue;
+template<class ValueType>                                                   class LockFreeStack;
 
-template<class ValueType>                                               class SimpleQueue;
-template<class ValueType>                                               class SimpleStack;
-template<class ValueType>                                               class SimpleLinkedList;
-template<class ValueType>                                               class SimpleMap;
+template<class ValueType>                                                   class SimpleQueue;
+template<class ValueType>                                                   class SimpleStack;
+template<class ValueType>                                                   class SimpleLinkedList;
+template<class ValueType>                                                   class SimpleMap;
 
-template<class SampleType>                                              class BreakpointInternal;
-template<class SampleType>                                              class BreakpointBase;
-template<class SampleType>                                              class BreakpointsInternal;
-template<class SampleType>                                              class BreakpointsBase;
-template<class SampleType>                                              class WavetableBase;
-template<class SampleType>                                              class SignalBase;
+template<class SampleType>                                                  class BreakpointInternal;
+template<class SampleType>                                                  class BreakpointBase;
+template<class SampleType>                                                  class BreakpointsInternal;
+template<class SampleType>                                                  class BreakpointsBase;
+template<class SampleType>                                                  class WavetableBase;
+template<class SampleType>                                                  class SignalBase;
 
 template<class ReturnType,
          class ArgType1 = void, 
          class ArgType2 = void,
-         class ArgType3 = void>                                         class FunctionContainer;
+         class ArgType3 = void>                                             class FunctionContainer;
 template<class ReturnType,
          class ArgType1 = void, 
          class ArgType2 = void,
-         class ArgType3 = void>                                         class FunctionContainerProxy;
+         class ArgType3 = void>                                             class FunctionContainerProxy;
 template<class FunctionType,
          class ReturnType,
          class ArgType1 = void, 
          class ArgType2 = void,
-         class ArgType3 = void>                                         class FunctionCallerInternal;
+         class ArgType3 = void>                                             class FunctionCallerInternal;
 template<class FunctionType,
          class ReturnType,
          class ArgType1 = void, 
          class ArgType2 = void,
-         class ArgType3 = void>                                         class FunctionProxyCallerInternal;
+         class ArgType3 = void>                                             class FunctionProxyCallerInternal;
 template<class FunctionType,
          class ReturnType,
          class ArgType1 = void, 
          class ArgType2 = void,
-         class ArgType3 = void>                                         class FunctionCallerBase;
+         class ArgType3 = void>                                             class FunctionCallerBase;
 template<class FunctionType,
          class ReturnType,
          class ArgType1 = void, 
          class ArgType2 = void,
-         class ArgType3 = void>                                         class FunctionProxyCallerBase;
+         class ArgType3 = void>                                             class FunctionProxyCallerBase;
 template<class FunctionType, 
          int argumentCount = FunctionType::argumentCount,
-         bool isProxy = FunctionType::isProxy>                          class FunctionCaller;
+         bool isProxy = FunctionType::isProxy>                              class FunctionCaller;
 
 typedef ObjectArray<Dynamic>            DynamicArray;
 typedef ObjectArray<Dynamic>            Dynamics;

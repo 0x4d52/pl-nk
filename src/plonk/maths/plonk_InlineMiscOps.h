@@ -42,10 +42,6 @@
 #include "plonk_Constants.h"
 #include "plonk_InlineUnaryOps.h"
 
-#define PLONK_TERNARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&)
-#define PLONK_QUATERNARYOPFUNCTION(TYPE,NAME)    TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&)
-#define PLONK_QUINARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&, TYPE const&)
-
 //------------------------------------------------------------------------------
 
 /** Miscellaneous arithmetic functions.

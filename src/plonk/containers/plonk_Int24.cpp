@@ -619,7 +619,7 @@ std::istream& operator>> (std::istream &inputStream, Int24& value)
 
 std::ostream& operator<< (std::ostream &outputStream, Int24 const& value)
 {
-    outputStream << (int)value;
+    outputStream << int (value);
     return outputStream;
 }
 

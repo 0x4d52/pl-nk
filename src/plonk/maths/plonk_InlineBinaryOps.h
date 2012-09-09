@@ -46,7 +46,6 @@
 
 //------------------------------------------------------------------------------
 
-#define PLONK_BINARYOPFUNCTION(TYPE,NAME) TYPE (*NAME)(TYPE const&, TYPE const&)
 
 #define PLONK_BINARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the binary '##OP##' function to this one and the @e right argument. */\

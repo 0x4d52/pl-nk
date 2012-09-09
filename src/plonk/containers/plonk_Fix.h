@@ -39,10 +39,11 @@
 /* Algorithms from libfixmath and Fixed Point Math Library
  - see doc/license.txt included in the distribution */
 
-#ifndef PLONK_FIXED_H
-#define PLONK_FIXED_H
+#ifndef PLONK_FIX_H
+#define PLONK_FIX_H
 
 #include "../core/plonk_CoreForwardDeclarations.h"
+#include "plonk_ContainerForwardDeclarations.h"
 
 template<class Base>
 class FixBase
@@ -59,8 +60,10 @@ template<> class FixBase<int>         { public: FixBase(){} };
 template<class DstBase, class SrcBase>
 class FixBaseConvert
 {
+    // prevent unsupported conversions
 };
 
+// supported conversions
 template<> class FixBaseConvert<char,char>      { public: typedef char  ConvertBase; };
 template<> class FixBaseConvert<char,short>     { public: typedef short ConvertBase; };
 template<> class FixBaseConvert<char,int>       { public: typedef int   ConvertBase; };
@@ -290,6 +293,21 @@ public:
     }
     
     inline const Base& getRaw() const throw() { return internal; }
+    
+    friend std::istream& operator>> (std::istream &inputStream, Fix& value)
+    {
+        float floatValue;
+        inputStream >> floatValue;
+        value = Fix (floatValue);
+        return inputStream;
+    }
+    
+    friend std::ostream& operator<< (std::ostream &outputStream, Fix const& value)
+    {
+        outputStream << float (value);
+        return outputStream;
+    }
+
     
 private:
     Base internal;
@@ -828,9 +846,43 @@ inline Fix<Base,IBits,FBits> isLessThanOrEqualTo (Fix<Base,IBits,FBits> const& a
 
 typedef Fix<Char,6,2> FixI6F2;
 typedef Fix<Short,8,8> FixI8F8;
+typedef Fix<Short,4,12> FixI4F12;
 typedef Fix<Int,16,16> FixI16F16;
 typedef Fix<Int,8,24> FixI8F24;
 
+typedef NumericalArray<FixI6F2>     FixI6F2Array;
+typedef NumericalArray<FixI8F8>     FixI8F8Array;
+typedef NumericalArray<FixI4F12>    FixI4F12Array;
+typedef NumericalArray<FixI16F16>   FixI16F16Array;
+typedef NumericalArray<FixI8F24>    FixI8F24Array;
+
+
+template<>
+class NumericalArrayBinaryOp<FixI8F8,plonk::mulop>
+{
+public:
+    typedef FixI8F8 FixType;
+    static inline FixI8F8 op (FixI8F8 const& left, FixI8F8 const& right) throw() { return plonk::mulop (left, right); }
+    
+    static inline void calcNN (FixType* dst, const FixType* left, const FixType* right, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = op (left[i], right[i]);
+    }
+    
+    static inline void calcN1 (FixType* dst, const FixType* left, const FixType right, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = op (left[i], right);
+    }
+    
+    static inline void calc1N (FixType* dst, const FixType left, const FixType* right, const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+            dst[i] = op (left, right[i]);
+    }
+
+};
 
 /*
 class Int24
@@ -1064,4 +1116,4 @@ LongLong operator/ (LongLong const& leftOperand, Int24 const& rightOperand) thro
 */
 
 
-#endif // PLONK_FIXED_H
+#endif // PLONK_FIX_H
