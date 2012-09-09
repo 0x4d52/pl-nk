@@ -143,6 +143,11 @@ static inline double pl_IncD (double a)             { return a + 1.0; }
 static inline short pl_IncS (short a)               { return a + 1; } 
 static inline int pl_IncI (int a)                   { return a + 1; } 
 
+static inline float pl_DecF (float a)               { return a - 1.f; }
+static inline double pl_DecD (double a)             { return a - 1.0; } 
+static inline short pl_DecS (short a)               { return a - 1; } 
+static inline int pl_DecI (int a)                   { return a - 1; } 
+
 
 /** Returns the negative of the input argument. */
 static inline float pl_NegF (float a)               { return -a; }

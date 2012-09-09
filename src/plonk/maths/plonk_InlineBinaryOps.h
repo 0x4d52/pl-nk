@@ -80,6 +80,24 @@
         PLONK_BINARYOP(CLASSNAME, clip2)\
         PLONK_BINARYOP(CLASSNAME, decayFeedback)\
         /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator+   (CLASSNAME const& right) const throw() { return binary<plonk::addop> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator-   (CLASSNAME const& right) const throw() { return binary<plonk::subop> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '*' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator*   (CLASSNAME const& right) const throw() { return binary<plonk::mulop> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '/' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator/   (CLASSNAME const& right) const throw() { return binary<plonk::divop> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '%' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator%   (CLASSNAME const& right) const throw() { return binary<plonk::modop> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '<' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator<   (CLASSNAME const& right) const throw() { return binary<plonk::isLessThan> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '<=' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator<=  (CLASSNAME const& right) const throw() { return binary<plonk::isLessThanOrEqualTo> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '>' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator>   (CLASSNAME const& right) const throw() { return binary<plonk::isGreaterThan> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '>=' operator to this and the @e right argument. **/\
+        inline CLASSNAME operator>=  (CLASSNAME const& right) const throw() { return binary<plonk::isGreaterThanOrEqualTo> ((right)); }\
+        /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME operator+   (RightType const& right) const throw() { return binary<plonk::addop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME operator-   (RightType const& right) const throw() { return binary<plonk::subop> (CLASSNAME (right)); }\

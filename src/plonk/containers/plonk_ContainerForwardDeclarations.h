@@ -46,7 +46,7 @@ class Globals;
 class Int24;
 class Function;
 
-template<class Base, unsigned IBits, unsigned FBits>                        class Fixed;
+template<class Base, unsigned IBits, unsigned FBits>                        class Fix;
 template<class Type>                                                        class AtomicValue;
 template<class Type>                                                        class AtomicExtended;
 template<class ObjectType>                                                  class SimpleArray;
@@ -230,6 +230,19 @@ typedef AtomicValue<Double>             AtomicDouble;
 typedef AtomicValue<char*>              AtomicPointer;
 typedef AtomicExtended<char*>           AtomicExtendedPointer;
 typedef AtomicExtended<Dynamic*>        AtomicDynamicPointer;
+
+// fixed types
+typedef Fix<Char,6,2> FixI6F2;
+typedef Fix<Short,8,8> FixI8F8;
+typedef Fix<Short,4,12> FixI4F12;
+typedef Fix<Int,16,16> FixI16F16;
+typedef Fix<Int,8,24> FixI8F24;
+
+typedef NumericalArray<FixI6F2>     FixI6F2Array;
+typedef NumericalArray<FixI8F8>     FixI8F8Array;
+typedef NumericalArray<FixI4F12>    FixI4F12Array;
+typedef NumericalArray<FixI16F16>   FixI16F16Array;
+typedef NumericalArray<FixI8F24>    FixI8F24Array;
 
 
 #endif // PLONK_CONTAINERFORWARDDECLARATIONS_H

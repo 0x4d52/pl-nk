@@ -253,6 +253,7 @@ struct ForceErrorStruct { int dummy; };
 
 #define PLONK_UNARYOPFUNCTION(TYPE,NAME)        TYPE (*NAME)(TYPE const&)
 #define PLONK_BINARYOPFUNCTION(TYPE,NAME)       TYPE (*NAME)(TYPE const&, TYPE const&)
+#define PLONK_BINARYOPFUNCTION_TYPE(TYPE)       TYPE (TYPE const&, TYPE const&)
 #define PLONK_TERNARYOPFUNCTION(TYPE,NAME)      TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&)
 #define PLONK_QUATERNARYOPFUNCTION(TYPE,NAME)   TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&)
 #define PLONK_QUINARYOPFUNCTION(TYPE,NAME)      TYPE (*NAME)(TYPE const&, TYPE const&, TYPE const&, TYPE const&, TYPE const&)

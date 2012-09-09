@@ -48,6 +48,7 @@
 #include "../maths/plonk_InlineMiscOps.h"
 #include "../random/plonk_RNG.h"
 #include "plonk_Int24.h"
+//#include "plonk_Fix.h"
 
     
 template<class NumericalType>
@@ -536,9 +537,15 @@ class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,o
 {
 };
 
+//class NumericalArrayBinaryOp<Plank##TYPECODE,PLONKOP> : public NumericalArrayBinaryOpBase<Plank##TYPECODE,PLONKOP> {\
+//    :   public NumericalArrayBinaryOpBase<Plank##TYPECODE,static_cast<PLONK_BINARYOPFUNCTION(NumericalType,*)>(PLONKOP)> \
+
+
 #define PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE,PLONKOP,PLANKOP)\
     template<>\
-    class NumericalArrayBinaryOp<Plank##TYPECODE,PLONKOP> : public NumericalArrayBinaryOpBase<Plank##TYPECODE,PLONKOP> {\
+    class NumericalArrayBinaryOp< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
+    :   public NumericalArrayBinaryOpBase< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
+    {\
     public:\
         static inline void calcNN (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
             pl_Vector##PLANKOP##TYPECODE##_NNN (dst, left, right, numItems);\
@@ -558,6 +565,7 @@ class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,o
     PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::subop, Sub);\
     PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::mulop, Mul);\
     PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::divop, Div);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::modop, Mod);\
     PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::min, Min);\
     PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::max, Max);\
     PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::pow, Pow);\
@@ -579,6 +587,9 @@ class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,o
 PLONK_NUMERICALARRAYBINARYOPS_DEFINE(F);
 PLONK_NUMERICALARRAYBINARYOPS_DEFINE(D);
 
+
+
+
 //------------------------------------------------------------------------------
 
 template<class NumericalType, PLONK_UNARYOPFUNCTION(NumericalType, op)>
@@ -599,7 +610,9 @@ class NumericalArrayUnaryOp : public NumericalArrayUnaryOpBase<NumericalType,op>
 
 #define PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE,PLONKOP,PLANKOP)\
     template<>\
-    class NumericalArrayUnaryOp<Plank##TYPECODE,PLONKOP> : public NumericalArrayUnaryOpBase<Plank##TYPECODE,PLONKOP> {\
+    class NumericalArrayUnaryOp< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
+    : public NumericalArrayUnaryOpBase< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
+    {\
     public:\
         static inline void calc (Plank##TYPECODE* dst, const Plank##TYPECODE* src, const UnsignedLong numItems) throw() {\
             pl_Vector##PLANKOP##TYPECODE##_NN (dst, src, numItems);\

@@ -844,45 +844,31 @@ inline Fix<Base,IBits,FBits> isLessThanOrEqualTo (Fix<Base,IBits,FBits> const& a
     return a <= b;
 }
 
-typedef Fix<Char,6,2> FixI6F2;
-typedef Fix<Short,8,8> FixI8F8;
-typedef Fix<Short,4,12> FixI4F12;
-typedef Fix<Int,16,16> FixI16F16;
-typedef Fix<Int,8,24> FixI8F24;
 
-typedef NumericalArray<FixI6F2>     FixI6F2Array;
-typedef NumericalArray<FixI8F8>     FixI8F8Array;
-typedef NumericalArray<FixI4F12>    FixI4F12Array;
-typedef NumericalArray<FixI16F16>   FixI16F16Array;
-typedef NumericalArray<FixI8F24>    FixI8F24Array;
-
-
-template<>
-class NumericalArrayBinaryOp<FixI8F8,plonk::mulop>
-{
-public:
-    typedef FixI8F8 FixType;
-    static inline FixI8F8 op (FixI8F8 const& left, FixI8F8 const& right) throw() { return plonk::mulop (left, right); }
-    
-    static inline void calcNN (FixType* dst, const FixType* left, const FixType* right, const UnsignedLong numItems) throw()
-    {
-        for (UnsignedLong i = 0; i < numItems; ++i)
-            dst[i] = op (left[i], right[i]);
-    }
-    
-    static inline void calcN1 (FixType* dst, const FixType* left, const FixType right, const UnsignedLong numItems) throw()
-    {
-        for (UnsignedLong i = 0; i < numItems; ++i)
-            dst[i] = op (left[i], right);
-    }
-    
-    static inline void calc1N (FixType* dst, const FixType left, const FixType* right, const UnsignedLong numItems) throw()
-    {
-        for (UnsignedLong i = 0; i < numItems; ++i)
-            dst[i] = op (left, right[i]);
-    }
-
-};
+// stuff like this will work for vector specialisations too..
+//template<>
+//class NumericalArrayBinaryOp< FixI8F8,plonk::mulop<FixI8F8> >
+//{
+//public:    
+//    static inline void calcNN (FixI8F8* dst, const FixI8F8* left, const FixI8F8* right, const UnsignedLong numItems) throw()
+//    {
+//        for (UnsignedLong i = 0; i < numItems; ++i)
+//            dst[i] = plonk::mulop (left[i], right[i]);
+//    }
+//    
+//    static inline void calcN1 (FixI8F8* dst, const FixI8F8* left, const FixI8F8 right, const UnsignedLong numItems) throw()
+//    {
+//        for (UnsignedLong i = 0; i < numItems; ++i)
+//            dst[i] = plonk::mulop (left[i], right);
+//    }
+//    
+//    static inline void calc1N (FixI8F8* dst, const FixI8F8 left, const FixI8F8* right, const UnsignedLong numItems) throw()
+//    {
+//        for (UnsignedLong i = 0; i < numItems; ++i)
+//            dst[i] = plonk::mulop (left, right[i]);
+//    }
+//
+//};
 
 /*
 class Int24
