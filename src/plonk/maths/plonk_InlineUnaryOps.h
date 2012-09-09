@@ -87,7 +87,11 @@
         PLONK_UNARYOP(CLASSNAME, distort)\
         PLONK_UNARYOP(CLASSNAME, zap)\
         /** Create a new CLASSNAME by applying the unary '-' operator to this one. **/\
-        inline CLASSNAME operator-() const throw()  { return unary<plonk::neg>(); }
+        inline CLASSNAME operator-() const throw()  { return unary<plonk::neg>(); }\
+        /** Create a new CLASSNAME by applying the unary '++' operator to this one. **/\
+        inline CLASSNAME operator++() const throw()  { return unary<plonk::inc>(); }\
+        /** Create a new CLASSNAME by applying the unary '++' operator to this one. **/\
+        inline CLASSNAME operator++ (int) const throw()  { CLASSNAME temp = *this; operator= (unary<plonk::inc>()); return temp; }
 
 
 #define PLONK_UNARYOPGLOBAL(CLASSNAME,OP)\
@@ -157,6 +161,9 @@ template<class Type> inline Type dec (Type const& a) throw()           { return 
 /** Returns the logarithm base 2 of the input argument. */
 template<class Type> inline Type log2 (Type const& a) throw()          { return static_cast<Type> (pl_Log2D (double (a)));}
 
+inline float log2 (float const& a) throw()                             { return pl_Log2F (a); }
+inline double log2 (double const& a) throw()                           { return pl_Log2D (a); }
+
 /** Returns the negative of the input argument. */
 template<class Type> inline Type neg (Type const& a) throw()           { return -a; }
 
@@ -166,41 +173,80 @@ template<class Type> inline Type reciprocal (Type const& a) throw()    { return 
 /** Returns the sine of the input argument. */
 template<class Type> inline Type sin (Type const& a) throw()           { return static_cast<Type> (::sin (double (a))); }
 
+inline float sin (float const& a) throw()                              { return pl_SinF (a); }
+inline double sin (double const& a) throw()                            { return pl_SinD (a); }
+
 /** Returns the cosine of the input argument. */
 template<class Type> inline Type cos (Type const& a) throw()           { return static_cast<Type> (::cos (double (a))); }
+
+inline float cos (float const& a) throw()                              { return pl_CosF (a); }
+inline double cos (double const& a) throw()                            { return pl_CosD (a); }
 
 /** Returns the tangent of the input argument. */
 template<class Type> inline Type tan (Type const& a) throw()           { return static_cast<Type> (::tan (double (a))); }
 
+inline float tan (float const& a) throw()                              { return pl_TanF (a); }
+inline double tan (double const& a) throw()                            { return pl_TanD (a); }
+
 /** Returns the arcsine of the input argument. */
 template<class Type> inline Type asin (Type const& a) throw()          { return static_cast<Type> (::asin (double (a))); }
+
+inline float asin (float const& a) throw()                              { return pl_AsinF (a); }
+inline double asin (double const& a) throw()                            { return pl_AsinD (a); }
 
 /** Returns the arcosine of the input argument. */
 template<class Type> inline Type acos (Type const& a) throw()          { return static_cast<Type> (::acos (double (a))); }
 
+inline float acos (float const& a) throw()                              { return pl_AcosF (a); }
+inline double acos (double const& a) throw()                            { return pl_AcosD (a); }
+
 /** Returns the arctangent of the input argument. */
 template<class Type> inline Type atan (Type const& a) throw()          { return static_cast<Type> (::atan (double (a))); }
+
+inline float atan (float const& a) throw()                              { return pl_AtanF (a); }
+inline double atan (double const& a) throw()                            { return pl_AtanD (a); }
 
 /** Returns the hyperbolic sine of the input argument. */
 template<class Type> inline Type sinh (Type const& a) throw()          { return static_cast<Type> (::sinh (double (a))); }
 
+inline float sinh (float const& a) throw()                              { return pl_SinhF (a); }
+inline double sinh (double const& a) throw()                            { return pl_SinhD (a); }
+
 /** Returns the hyperbolic cosine of the input argument. */
 template<class Type> inline Type cosh (Type const& a) throw()          { return static_cast<Type> (::cosh (double (a))); }
+
+inline float cosh (float const& a) throw()                              { return pl_CoshF (a); }
+inline double cosh (double const& a) throw()                            { return pl_CoshD (a); }
 
 /** Returns the hyperbolic tangent of the input argument. */
 template<class Type> inline Type tanh (Type const& a) throw()          { return static_cast<Type> (::tanh (double (a))); }
 
+inline float tanh (float const& a) throw()                              { return pl_TanhF (a); }
+inline double tanh (double const& a) throw()                            { return pl_TanhD (a); }
+
 /** Returns the square root of the input argument. */
 template<class Type> inline Type sqrt (Type const& a) throw()          { return static_cast<Type> (::sqrt (double (a))); }
+
+inline float sqrt (float const& a) throw()                              { return pl_SqrtF (a); }
+inline double sqrt (double const& a) throw()                            { return pl_SqrtD (a); }
 
 /** Returns the natural logarithm of the input argument. */
 template<class Type> inline Type log (Type const& a) throw()           { return static_cast<Type> (::log (double (a))); }
 
+inline float log (float const& a) throw()                              { return pl_LogF (a); }
+inline double log (double const& a) throw()                            { return pl_LogD (a); }
+
 /** Returns the logarithm base 10 of the input argument. */
 template<class Type> inline Type log10 (Type const& a) throw()         { return static_cast<Type> (::log10 (double (a))); }
 
+inline float log10 (float const& a) throw()                              { return pl_Log10F (a); }
+inline double log10 (double const& a) throw()                            { return pl_Log10D (a); }
+
 /** Returns the exponent of the input argument. */
 template<class Type> inline Type exp (Type const& a) throw()           { return static_cast<Type> (::exp (double (a))); }
+
+inline float exp (float const& a) throw()                              { return pl_ExpF (a); }
+inline double exp (double const& a) throw()                            { return pl_ExpD (a); }
 
 /** Returns the input argument rounded up to the next highest integer. */
 template<class Type> inline Type ceil (Type const& a) throw()          { const long n = long (a); return Type (n + 1); }

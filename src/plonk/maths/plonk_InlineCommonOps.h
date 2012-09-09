@@ -64,6 +64,9 @@ template<class Type> inline Type max (Type const& a, Type const& b) throw() { re
  @ingroup PlonkBinaryOpFunctions*/
 template<class Type> inline Type pow (Type const& a, Type const& b) throw() { return ::pow ((double)a, (double)b);    }
 
+inline float pow  (float const& a, float const& b) throw() { return pl_PowF (a, b); }
+inline double pow  (double const& a, double const& b) throw() { return pl_PowD (a, b); }
+
 /** Returns the input argument squared. 
  @ingroup PlonkBinaryOpFunctions */
 template<class Type> inline Type squared (Type const& a) throw()       { return a * a; }

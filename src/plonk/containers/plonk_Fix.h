@@ -165,6 +165,13 @@ public:
         return double (internal) / getOneDouble();
     }
     
+    template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
+    inline operator Fix<BaseOther,IBitsOther,FBitsOther> () const throw()
+    {
+        return Fix<BaseOther,IBitsOther,FBitsOther> (*this);
+    }
+
+    
     inline Fix operator+ (Fix const& rightOperand) const throw()    { return addop (*this, rightOperand); }
     inline Fix operator- (Fix const& rightOperand) const throw()    { return subop (*this, rightOperand); }
     inline Fix operator* (Fix const& rightOperand) const throw()    { return mulop (*this, rightOperand); }

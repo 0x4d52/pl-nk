@@ -58,6 +58,7 @@
         PLONK_BINARYOP(CLASSNAME, subop)\
         PLONK_BINARYOP(CLASSNAME, mulop)\
         PLONK_BINARYOP(CLASSNAME, divop)\
+        PLONK_BINARYOP(CLASSNAME, modop)\
         PLONK_BINARYOP(CLASSNAME, isEqualTo)\
         PLONK_BINARYOP(CLASSNAME, isNotEqualTo)\
         PLONK_BINARYOP(CLASSNAME, isGreaterThan)\
@@ -87,6 +88,8 @@
         template<class RightType> inline CLASSNAME operator*   (RightType const& right) const throw() { return binary<plonk::mulop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '/' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME operator/   (RightType const& right) const throw() { return binary<plonk::divop> (CLASSNAME (right)); }\
+        /** Create a new CLASSNAME by applying the binary '%' operator to this and the @e right argument. **/\
+        template<class RightType> inline CLASSNAME operator%   (RightType const& right) const throw() { return binary<plonk::modop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '+' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME& operator+= (RightType const& right) throw() { return operator= (*this + right); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '-' operator to this and the @e right argument. **/\
@@ -95,6 +98,8 @@
         template<class RightType> inline CLASSNAME& operator*= (RightType const& right) throw() { return operator= (*this * right); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '/' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME& operator/= (RightType const& right) throw() { return operator= (*this / right); }\
+        /** Create a new CLASSNAME and assign it to this one by applying the binary '%' operator to this and the @e right argument. **/\
+        template<class RightType> inline CLASSNAME& operator%= (RightType const& right) throw() { return operator= (*this % right); }\
         /** Create a new CLASSNAME by applying the binary '<' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME operator<   (RightType const& right) const throw() { return binary<plonk::isLessThan> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '<=' operator to this and the @e right argument. **/\
@@ -117,6 +122,7 @@
         BINARYOPGLOBAL(CLASSNAME, subop)\
         BINARYOPGLOBAL(CLASSNAME, mulop)\
         BINARYOPGLOBAL(CLASSNAME, divop)\
+        BINARYOPGLOBAL(CLASSNAME, modop)\
         BINARYOPGLOBAL(CLASSNAME, isEqualTo)\
         BINARYOPGLOBAL(CLASSNAME, isNotEqualTo)\
         BINARYOPGLOBAL(CLASSNAME, isGreaterThan)\
@@ -165,6 +171,15 @@ template<class Type> inline Type mulop (Type const& a, Type const& b) throw() { 
 /** Convenient inline function for the '/' operator. */
 template<class Type> inline Type divop (Type const& a, Type const& b) throw() { return a / b; }
 
+/** Convenient inline function for the '%' operator. */
+template<class Type> inline Type modop (Type const& a, Type const& b) throw() { return (LongLong)a % (LongLong)b; }
+
+/** Convenient inline function for the '%' operator (float). */
+inline float modop (float const& a, float const& b) throw() { return pl_ModF (a, b); }
+
+/** Convenient inline function for the '%' operator (double). */
+inline double modop (double const& a, double const& b) throw() { return pl_ModD (a, b); }
+
 /** Returns 1 if the inputs are equal otherwise returns 0.  */
 template<class Type> inline Type isEqualTo              (Type const& a, Type const& b) throw()  { return (a == b) ? Math<Type>::get1() : Math<Type>::get0(); }
 
@@ -186,8 +201,14 @@ template<class Type> inline Type isLessThanOrEqualTo    (Type const& a, Type con
 /** Returns @f$ \sqrt{ a^2 + b^2 } @f$.  */
 template<class Type> inline Type hypot  (Type const& a, Type const& b) throw() { return static_cast<Type> (::hypot (double (a), double (b))); }
 
+inline float hypot  (float const& a, float const& b) throw() { return pl_HypotF (a, b); }
+inline double hypot  (double const& a, double const& b) throw() { return pl_HypotD (a, b); }
+
 /** Returns @f$ atan2(a,b) @f$.  */
 template<class Type> inline Type atan2  (Type const& a, Type const& b) throw() { return static_cast<Type> (::atan2 (double (a), double (b))); }
+
+inline float atan2  (float const& a, float const& b) throw() { return pl_Atan2F (a, b); }
+inline double atan2  (double const& a, double const& b) throw() { return pl_Atan2D (a, b); }
 
 /** Returns @f$ a * a + b * b @f$.  */
 template<class Type> inline Type sumsqr (Type const& a, Type const& b) throw() { return squared (a) + squared (b); }

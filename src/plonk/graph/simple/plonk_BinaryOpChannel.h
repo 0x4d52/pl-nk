@@ -55,6 +55,7 @@ private:
         names.put (&plonk::subop<SampleType>,                   "subtract");
         names.put (&plonk::mulop<SampleType>,                   "multiply");
         names.put (&plonk::divop<SampleType>,                   "divide");
+        names.put (&plonk::modop<SampleType>,                   "modulo");
         names.put (&plonk::isEqualTo<SampleType>,               "==");
         names.put (&plonk::isNotEqualTo<SampleType>,            "=");
         names.put (&plonk::isGreaterThan<SampleType>,           ">");

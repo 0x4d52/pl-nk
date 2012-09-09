@@ -76,6 +76,12 @@ static inline void pl_VectorMoveF_NN (float *result, const float* a, PlankUL N)
     vDSP_mmov ((float*)a, result, N, 1, N, N); 
 }
 
+static inline void pl_VectorIncF_NN (float *result, const float* a, PlankUL N) 
+{ 
+    float one = 1.f;
+    vDSP_vsadd ((float*)a, 1, &one, result, 1, N); 
+}
+
 static inline void pl_VectorNegF_NN (float *result, const float* a, PlankUL N) 
 { 
     vDSP_vneg ((float*)a, 1, result, 1, N); 
@@ -437,6 +443,8 @@ static inline void pl_VectorDivF_N1N (float *result, float a, const float* b, Pl
     vDSP_vsmul ((float*)b, 1, &ra, result, 1, N); 
 }
 
+PLANK_VECTORBINARYOP_DEFINE(Mod,F)
+
 static inline void pl_VectorMinF_NNN (float *result, const float* a, const float* b, PlankUL N) 
 { 
     vDSP_vmin ((float*)a, 1, (float*)b, 1, result, 1, N); 
@@ -554,6 +562,12 @@ static inline void pl_VectorLineD_N11 (double *result, double a, double b, Plank
 static inline void pl_VectorMoveD_NN (double *result, const double* a, PlankUL N) 
 { 
     vDSP_mmovD ((double*)a, result, N, 1, N, N); 
+}
+
+static inline void pl_VectorIncD_NN (double *result, const double* a, PlankUL N) 
+{ 
+    double one = 1.f;
+    vDSP_vsaddD ((double*)a, 1, &one, result, 1, N); 
 }
 
 static inline void pl_VectorNegD_NN (double *result, const double* a, PlankUL N) 
@@ -765,6 +779,8 @@ static inline void pl_VectorDivD_N1N (double *result, double a, const double* b,
     vDSP_vsmulD ((double*)b, 1, &ra, result, 1, N); 
 }
 
+PLANK_VECTORBINARYOP_DEFINE(Mod,D)
+
 static inline void pl_VectorMinD_NNN (double *result, const double* a, const double* b, PlankUL N) 
 { 
     vDSP_vminD ((double*)a, 1, (double*)b, 1, result, 1, N); 
@@ -945,10 +961,9 @@ PLANK_VECTORCONVERTROUNDD_DEFINE(S)
 
 
 
+PLANK_VECTOR_OPS_COMMON(S)
+PLANK_VECTOR_OPS_COMMON(I)
 
-//PLANK_VECTORCONVERT_DEFINE(S,L)
-
-//PLANK_VECTORCONVERTERS_DEFINE(L)
 
 
 

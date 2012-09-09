@@ -138,15 +138,23 @@ static inline float pl_MoveF (float a)              { return a; }
  This is just added as a convenience for the vector-based functions. */
 static inline double pl_MoveD (double a)            { return a; } 
 
+static inline float pl_IncF (float a)               { return a + 1.f; }
+static inline double pl_IncD (double a)             { return a + 1.0; } 
+static inline short pl_IncS (short a)               { return a + 1; } 
+static inline int pl_IncI (int a)                   { return a + 1; } 
+
+
 /** Returns the negative of the input argument. */
 static inline float pl_NegF (float a)               { return -a; }
 /** Returns the negative of the input argument. */
 static inline double pl_NegD (double a)             { return -a; }  
 
+
 /** Returns the absolute of the input argument. */
 static inline float pl_AbsF (float a)               { return fabsf (a); }
 /** Returns the absolute of the input argument. */
 static inline double pl_AbsD (double a)             { return fabs (a); }
+
 
 #if (defined (_WIN32) || defined (_WIN64))
 static inline float pl_Log2F (float a)              { return logf (a) / logf (2.f); }
@@ -308,102 +316,6 @@ static inline double pl_ZapD (double x)
     return (absx > 1e-15 && absx < 1e15) ? x : 0.0;
 }
 
-/////****** EXPERIMENTAL STARTS ******///////
-
-///** Clips a float to between -1...+1 without a branch. */
-//static inline float pl_ClipNormalF (float v)
-//{
-//    PlankUI bits;
-//    
-//    v = v + PLANK_1_F;
-//    bits = *(PlankUI*)&v;
-//    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
-//    
-//    return (*(float*)&bits) - PLANK_1_F;
-//}
-//
-///** Clips a float to between -1...+1 without a branch. 
-// In input value should be offset by 1 (i.e., 0...2), output is -1...+1.
-// An input value of 1 would output 0. */
-//static inline float pl_ClipNormalPreIncF (float v)
-//{
-//    PlankUI bits;
-//    
-//    bits = *(PlankUI*)&v;
-//    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
-//    
-//    return (*(float*)&bits) - PLANK_1_F;
-//}
-//
-///** Clips a float to between 0...2 without a branch. */
-//static inline float pl_Clip02F (float v)
-//{
-//    PlankUI bits;
-//    
-//    bits = *(PlankUI*)&v;
-//    bits = (bits & PLANK_FLOAT_ONE) | (bits & PLANK_FLOAT_ONEMASK);
-//    
-//    return (*(float*)&bits);
-//}
-//
-//static inline float pl_Wrap24F (float v)
-//{
-//    PlankUI bits;
-//    
-//    bits = *(PlankUI*)&v;
-//    bits = ((bits & PLANK_FLOAT_ONEMASK) | 0x40000000);
-//    
-//    return (*(float*)&bits);
-//}
-//
-///** Clips a double to between -1...+1 without a branch. */
-//static inline double pl_ClipNormalD (double v)
-//{
-//    PlankULL bits;
-//    
-//    v = v + PLANK_1_D;
-//    bits = *(PlankULL*)&v;
-//    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
-//    
-//    return (*(double*)&bits) - PLANK_1_D;
-//}
-//
-///** Clips a float to between -1...+1 without a branch. 
-// In input value should be offset by 1 (i.e., 0...2), output is -1...+1.
-// An input value of 1 would output 0. */
-//static inline double pl_ClipNormalPreIncD (double v)
-//{
-//    PlankULL bits;
-//    
-//    bits = *(PlankULL*)&v;
-//    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
-//    
-//    return (*(double*)&bits) - PLANK_1_D;
-//}
-//
-///** Clips a double to between 0...2 without a branch. */
-//static inline double pl_Clip02D (double v)
-//{
-//    PlankULL bits;
-//    
-//    bits = *(PlankULL*)&v;
-//    bits = (bits & PLANK_DOUBLE_ONE) | (bits & PLANK_DOUBLE_ONEMASK);
-//    
-//    return (*(double*)&bits);
-//}
-//
-//static inline double pl_Wrap24D (double v)
-//{
-//    PlankULL bits;
-//    
-//    bits = *(PlankULL*)&v;
-//    bits = ((bits & PLANK_DOUBLE_ONEMASK) | 0x4000000000000000);
-//    
-//    return (*(double*)&bits);
-//}
-//
-/////****** EXPERIMENTAL ENDS ******///////
-
 
 // binary ops
 
@@ -428,30 +340,21 @@ static inline float pl_DivF (float a, float b)                          { return
 /** Returns @f$ \frac{a}{b} @f$. */
 static inline double pl_DivD (double a, double b)                       { return a / b; }
 
+/** Returns @f$ a % b @f$. */
+static inline float pl_ModF (float a, float b)                          { return fmodf (a, b); }
+/** Returns @f$ a % b @f$. */
+static inline double pl_ModD (double a, double b)                       { return fmod (a, b); }
+
+
 /** Returns minimum of @e a and @e b. */
 static inline float pl_MinF (float a, float b)                          { return (a > b) ? b : a; }
 /** Returns minimum of @e a and @e b. */
 static inline double pl_MinD (double a, double b)                       { return (a > b) ? b : a; }
-/** Returns minimum of @e a and @e b. */
-static inline PlankI pl_MinI (PlankI a, PlankI b)                       { return (a > b) ? b : a; }
-/** Returns minimum of @e a and @e b. */
-static inline PlankL pl_MinL (PlankL a, PlankL b)                       { return (a > b) ? b : a; }
-/** Returns minimum of @e a and @e b. */
-static inline PlankLL pl_MinLL (PlankLL a, PlankLL b)                   { return (a > b) ? b : a; }
 
 /** Returns maximum of @e a and @e b. */
 static inline float pl_MaxF (float a, float b)                          { return (a < b) ? b : a; }
 /** Returns maximum of @e a and @e b. */
 static inline double pl_MaxD (double a, double b)                       { return (a < b) ? b : a; }
-/** Returns maximum of @e a and @e b. */
-static inline PlankI pl_MaxI (PlankI a, PlankI b)                       { return (a < b) ? b : a; }
-/** Returns maximum of @e a and @e b. */
-static inline PlankL pl_MaxL (PlankL a, PlankL b)                       { return (a < b) ? b : a; }
-/** Returns maximum of @e a and @e b. */
-static inline PlankLL pl_MaxLL (PlankLL a, PlankLL b)                    { return (a < b) ? b : a; }
-
-// need more of these
-static inline PlankI pl_ClipI (PlankI a, PlankI lo, PlankI hi)          { return pl_MinI (pl_MaxI (a, lo), hi); }
 
 
 /** Returns @e a raised to the power @e b. */
@@ -530,6 +433,80 @@ static inline float pl_ThreshF (float a, float b)                       { return
 static inline double pl_ThreshD (double a, double b)                    { return (a < b) ? 0.0 : a; }
 
 
+// integer versions
+
+static inline short pl_MoveS (short a)              { return a; } 
+static inline int pl_MoveI (int a)                  { return a; } 
+static inline short pl_NegS (short a)               { return -a; }  
+static inline int pl_NegI (int a)                   { return -a; }  
+static inline short pl_AbsS (short a)               { return a < 0 ? -a : a; }
+static inline int pl_AbsI (int a)                   { return a < 0 ? -a : a; }
+static inline short pl_SquaredS (short a)           { return a * a; }
+static inline int pl_SquaredI (int a)               { return a * a; }
+static inline short pl_CubedS (short a)             { return a * a * a; }
+static inline int pl_CubedI (int a)                 { return a * a * a; }
+static inline short pl_SignS (short a)              { return (a == 0) ? 0 : (a < 0) ? -1 : 1; }
+static inline int pl_SignI (int a)                  { return (a == 0) ? 0 : (a < 0) ? -1 : 1; }
+static inline short pl_AddS (short a, short b)      { return a + b; }
+static inline int pl_AddI (int a, int b)            { return a + b; }
+static inline short pl_SubS (short a, short b)      { return a - b; }
+static inline int pl_SubI (int a, int b)            { return a - b; }
+static inline short pl_MulS (short a, short b)      { return a * b; }
+static inline int pl_MulI (int a, int b)            { return a * b; }
+static inline short pl_DivS (short a, short b)      { return a / b; }
+static inline int pl_DivI (int a, int b)            { return a / b; }
+static inline short pl_ModS (short a, short b)      { return a % b; }
+static inline int pl_ModI (int a, int b)            { return a % b; }
+
+/** Returns minimum of @e a and @e b. */
+static inline short pl_MinS (short a, short b)                      { return (a > b) ? b : a; }
+static inline int pl_MinI (int a, int b)                            { return (a > b) ? b : a; }
+/** Returns maximum of @e a and @e b. */
+static inline short pl_MaxS (short a, short b)                      { return (a < b) ? b : a; }
+static inline int pl_MaxI (int a, int b)                            { return (a < b) ? b : a; }
+
+static inline short pl_IsEqualToS (short a, short b)                { return a == b ? 1 : 0; }
+static inline int pl_IsEqualToI (int a, int b)                      { return a == b ? 1 : 0; }
+static inline short pl_IsNotEqualToS (short a, short b)             { return a != b ? 1 : 0; }
+static inline int pl_IsNotEqualToI (int a, int b)                   { return a != b ? 1 : 0; }
+static inline short pl_IsGreaterThanS (short a, short b)            { return a > b ? 1 : 0; }
+static inline int pl_IsGreaterThanI (int a, int b)                  { return a > b ? 1 : 0; }
+static inline short pl_IsGreaterThanOrEqualToS (short a, short b)   { return a >= b ? 1 : 0; }
+static inline int pl_IsGreaterThanOrEqualToI (int a, int b)         { return a >= b ? 1 : 0; }
+static inline short pl_IsLessThanS (short a, short b)               { return a < b ? 1 : 0; }
+static inline int pl_IsLessThanI (int a, int b)                     { return a < b ? 1 : 0; }
+static inline short pl_IsLessThanOrEqualToS (short a, short b)      { return a <= b ? 1 : 0; }
+static inline int pl_IsLessThanOrEqualToI (int a, int b)            { return a <= b ? 1 : 0; }
+
+
+static inline short pl_SumSqrS (short a, short b)                   { return a * a + b * b; }
+static inline int pl_SumSqrI (int a, int b)                         { return a * a + b * b; }
+static inline short pl_DifSqrS (short a, short b)                   { return a * a - b * b; }
+static inline int pl_DifSqrI (int a, int b)                         { return a * a - b * b; }
+static inline short pl_SqrSumS (short a, short b)                   { a += b; return a * a; }
+static inline int pl_SqrSumI (int a, int b)                         { a += b; return a * a; }
+static inline short pl_SqrDifS (short a, short b)                   { a -= b; return a * a; }
+static inline int pl_SqrDifI (int a, int b)                         { a -= b; return a * a; }
+static inline short pl_AbsDifS (short a, short b)                   { return pl_AbsS (a - b); }
+static inline int pl_AbsDifI (int a, int b)                           { return pl_AbsI (a - b); }
+static inline short pl_ThreshS (float a, short b)                   { return (a < b) ? 0 : a; }
+static inline int pl_ThreshI (int a, int b)                         { return (a < b) ? 0 : a; }
+
+
+
+/** Returns minimum of @e a and @e b. */
+static inline PlankL pl_MinL (PlankL a, PlankL b)                       { return (a > b) ? b : a; }
+/** Returns minimum of @e a and @e b. */
+static inline PlankLL pl_MinLL (PlankLL a, PlankLL b)                   { return (a > b) ? b : a; }
+/** Returns maximum of @e a and @e b. */
+static inline PlankL pl_MaxL (PlankL a, PlankL b)                       { return (a < b) ? b : a; }
+/** Returns maximum of @e a and @e b. */
+static inline PlankLL pl_MaxLL (PlankLL a, PlankLL b)                   { return (a < b) ? b : a; }
+
+static inline PlankI pl_ClipI (PlankI a, PlankI lo, PlankI hi)          { return pl_MinI (pl_MaxI (a, lo), hi); }
+static inline PlankS pl_ClipS (PlankS a, PlankS lo, PlankS hi)          { return pl_MinS (pl_MaxS (a, lo), hi); }
+static inline PlankL pl_ClipL (PlankL a, PlankL lo, PlankL hi)          { return pl_MinL (pl_MaxL (a, lo), hi); }
+static inline PlankLL pl_ClipLL (PlankLL a, PlankLL lo, PlankLL hi)     { return pl_MinLL (pl_MaxLL (a, lo), hi); }
 
 //round
 //trunc
@@ -697,6 +674,8 @@ static inline double pl_LookupD (const double* table, double index)
     return pl_LinInterpD (table[index0], table[index0 + 1], frac);
 }
 
+static inline short pl_LookupS (const short* table, short index) { return table[index]; }
+static inline int pl_LookupI (const int* table, int index) { return table[index]; }
 
 /// @} // End group PlankMathsFunctions
 
