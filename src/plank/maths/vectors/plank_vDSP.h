@@ -46,8 +46,41 @@
 #endif
 
 #define PLANK_VEC_CUSTOM
-//#include "plank_Vectors.h"
 #include <Accelerate/Accelerate.h>
+
+#define PLANK_SIMDF_LENGTH  4   // vector 4 floats
+#define PLANK_SIMDF_SHIFT   2   // divide by 4 for length
+#define PLANK_SIMDF_MASK    3   // remainder mask for non-multiples of 4
+typedef vFloat PlankVF;
+
+#define PLANK_SIMDD_LENGTH  2   // vector 2 doubles
+#define PLANK_SIMDD_SHIFT   1   // divide by 2 for length
+#define PLANK_SIMDD_MASK    1   // remainder mask for non-even lengths
+typedef vDouble PlankVD;
+
+#define PLANK_SIMDI_LENGTH  4   // vector 4 ints
+#define PLANK_SIMDI_SHIFT   2   // divide by 4 for length
+#define PLANK_SIMDI_MASK    3   // remainder mask for non-multiples of 4
+typedef vSInt32 PlankVI;
+
+#define PLANK_SIMDS_LENGTH  8   // vector 8 shorts
+#define PLANK_SIMDS_SHIFT   3   // divide by 8 for length
+#define PLANK_SIMDS_MASK    7   // remainder mask for non-multiples of 8
+typedef vSInt16 PlankVS;
+
+#if PLANK_ARM || PLANK_PPC // no 64-bit int SIMD
+    #define PLANK_SIMDLL_LENGTH  1   // vector 1 LongLong
+    #define PLANK_SIMDLL_SHIFT   0   // no shift
+    #define PLANK_SIMDLL_MASK    0   // no remainder
+    typedef PlankLL PlankVLL;
+#else
+    #define PLANK_SIMDLL_LENGTH  2   // vector 2 LongLongs
+    #define PLANK_SIMDLL_SHIFT   1   // divide by 2 for length
+    #define PLANK_SIMDLL_MASK    1   // remainder mask for non-even lengths
+    typedef vSInt64 PlankVLL;
+#endif
+
+
 
 //------------------------------- float ----------------------------------------
 

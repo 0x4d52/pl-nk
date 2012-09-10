@@ -49,7 +49,8 @@
 
 #define PLONK_BINARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the binary '##OP##' function to this one and the @e right argument. */\
-        inline CLASSNAME OP (CLASSNAME const& right) const throw() { return binary<plonk::OP> (right); }
+        inline CLASSNAME OP (CLASSNAME const& right) const throw() { return binary< BinaryOpFunctionsType::OP > (right); } 
+
 
 
 #define PLONK_BINARYOPS(CLASSNAME) \
@@ -80,33 +81,33 @@
         PLONK_BINARYOP(CLASSNAME, clip2)\
         PLONK_BINARYOP(CLASSNAME, decayFeedback)\
         /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator+   (CLASSNAME const& right) const throw() { return binary<plonk::addop> ((right)); }\
+        inline CLASSNAME operator+   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::addop> (right); }\
         /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator-   (CLASSNAME const& right) const throw() { return binary<plonk::subop> ((right)); }\
+        inline CLASSNAME operator-   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::subop> (right); }\
         /** Create a new CLASSNAME by applying the binary '*' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator*   (CLASSNAME const& right) const throw() { return binary<plonk::mulop> ((right)); }\
+        inline CLASSNAME operator*   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::mulop> (right); }\
         /** Create a new CLASSNAME by applying the binary '/' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator/   (CLASSNAME const& right) const throw() { return binary<plonk::divop> ((right)); }\
+        inline CLASSNAME operator/   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::divop> (right); }\
         /** Create a new CLASSNAME by applying the binary '%' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator%   (CLASSNAME const& right) const throw() { return binary<plonk::modop> ((right)); }\
+        inline CLASSNAME operator%   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::modop> (right); }\
         /** Create a new CLASSNAME by applying the binary '<' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator<   (CLASSNAME const& right) const throw() { return binary<plonk::isLessThan> ((right)); }\
+        inline CLASSNAME operator<   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThan> (right); }\
         /** Create a new CLASSNAME by applying the binary '<=' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator<=  (CLASSNAME const& right) const throw() { return binary<plonk::isLessThanOrEqualTo> ((right)); }\
+        inline CLASSNAME operator<=  (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThanOrEqualTo> (right); }\
         /** Create a new CLASSNAME by applying the binary '>' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator>   (CLASSNAME const& right) const throw() { return binary<plonk::isGreaterThan> ((right)); }\
+        inline CLASSNAME operator>   (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThan> (right); }\
         /** Create a new CLASSNAME by applying the binary '>=' operator to this and the @e right argument. **/\
-        inline CLASSNAME operator>=  (CLASSNAME const& right) const throw() { return binary<plonk::isGreaterThanOrEqualTo> ((right)); }\
+        inline CLASSNAME operator>=  (CLASSNAME const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThanOrEqualTo> (right); }\
         /** Create a new CLASSNAME by applying the binary '+' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator+   (RightType const& right) const throw() { return binary<plonk::addop> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator+   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::addop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '-' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator-   (RightType const& right) const throw() { return binary<plonk::subop> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator-   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::subop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '*' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator*   (RightType const& right) const throw() { return binary<plonk::mulop> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator*   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::mulop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '/' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator/   (RightType const& right) const throw() { return binary<plonk::divop> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator/   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::divop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '%' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator%   (RightType const& right) const throw() { return binary<plonk::modop> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator%   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::modop> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '+' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME& operator+= (RightType const& right) throw() { return operator= (*this + right); }\
         /** Create a new CLASSNAME and assign it to this one by applying the binary '-' operator to this and the @e right argument. **/\
@@ -118,53 +119,52 @@
         /** Create a new CLASSNAME and assign it to this one by applying the binary '%' operator to this and the @e right argument. **/\
         template<class RightType> inline CLASSNAME& operator%= (RightType const& right) throw() { return operator= (*this % right); }\
         /** Create a new CLASSNAME by applying the binary '<' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator<   (RightType const& right) const throw() { return binary<plonk::isLessThan> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator<   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThan> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '<=' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator<=  (RightType const& right) const throw() { return binary<plonk::isLessThanOrEqualTo> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator<=  (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isLessThanOrEqualTo> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '>' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator>   (RightType const& right) const throw() { return binary<plonk::isGreaterThan> (CLASSNAME (right)); }\
+        template<class RightType> inline CLASSNAME operator>   (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThan> (CLASSNAME (right)); }\
         /** Create a new CLASSNAME by applying the binary '>=' operator to this and the @e right argument. **/\
-        template<class RightType> inline CLASSNAME operator>=  (RightType const& right) const throw() { return binary<plonk::isGreaterThanOrEqualTo> (CLASSNAME (right)); }
+        template<class RightType> inline CLASSNAME operator>=  (RightType const& right) const throw() { return binary<BinaryOpFunctionsType::isGreaterThanOrEqualTo> (CLASSNAME (right)); }
 
-
-#define PLONK_BINARYOPGLOBAL(CLASSNAME,OP)\
+#define PLONK_BINARYOPGLOBAL(CLASSNAME,T,OP)\
     /** Create a new CLASSNAME by applying the binary '##OP##' function to the @e left and @e right inputs. */\
     inline CLASSNAME OP (CLASSNAME const& left, CLASSNAME const& right) throw() { return left.OP (right); }
 
-#define PLONK_BINARYOPGLOBAL_TEMPLATE(CLASSNAME,OP)\
-    template<class T> PLONK_BINARYOPGLOBAL(CLASSNAME<T>,OP)
+#define PLONK_BINARYOPGLOBAL_TEMPLATE(CLASSNAME,T,OP)\
+    template<class T> PLONK_BINARYOPGLOBAL(CLASSNAME<T>,PLONK_EMPTYDEFINE,OP)
 
-#define PLONK_BINARYOPGLOBALS_DEFINE(BINARYOPGLOBAL,CLASSNAME) \
-        BINARYOPGLOBAL(CLASSNAME, addop)\
-        BINARYOPGLOBAL(CLASSNAME, subop)\
-        BINARYOPGLOBAL(CLASSNAME, mulop)\
-        BINARYOPGLOBAL(CLASSNAME, divop)\
-        BINARYOPGLOBAL(CLASSNAME, modop)\
-        BINARYOPGLOBAL(CLASSNAME, isEqualTo)\
-        BINARYOPGLOBAL(CLASSNAME, isNotEqualTo)\
-        BINARYOPGLOBAL(CLASSNAME, isGreaterThan)\
-        BINARYOPGLOBAL(CLASSNAME, isGreaterThanOrEqualTo)\
-        BINARYOPGLOBAL(CLASSNAME, isLessThan)\
-        BINARYOPGLOBAL(CLASSNAME, isLessThanOrEqualTo)\
-        BINARYOPGLOBAL(CLASSNAME, hypot)\
-        BINARYOPGLOBAL(CLASSNAME, pow)\
-        BINARYOPGLOBAL(CLASSNAME, atan2)\
-        BINARYOPGLOBAL(CLASSNAME, min)\
-        BINARYOPGLOBAL(CLASSNAME, max)\
-        BINARYOPGLOBAL(CLASSNAME, sumsqr)\
-        BINARYOPGLOBAL(CLASSNAME, difsqr)\
-        BINARYOPGLOBAL(CLASSNAME, sqrsum)\
-        BINARYOPGLOBAL(CLASSNAME, sqrdif)\
-        BINARYOPGLOBAL(CLASSNAME, absdif)\
-        BINARYOPGLOBAL(CLASSNAME, thresh)\
-        BINARYOPGLOBAL(CLASSNAME, round)\
-        BINARYOPGLOBAL(CLASSNAME, trunc)\
-        BINARYOPGLOBAL(CLASSNAME, clip2)\
-        BINARYOPGLOBAL(CLASSNAME, decayFeedback)
+#define PLONK_BINARYOPGLOBALS_DEFINE(BINARYOPGLOBAL,CLASSNAME,T) \
+        BINARYOPGLOBAL(CLASSNAME, T, addop)\
+        BINARYOPGLOBAL(CLASSNAME, T, subop)\
+        BINARYOPGLOBAL(CLASSNAME, T, mulop)\
+        BINARYOPGLOBAL(CLASSNAME, T, divop)\
+        BINARYOPGLOBAL(CLASSNAME, T, modop)\
+        BINARYOPGLOBAL(CLASSNAME, T, isEqualTo)\
+        BINARYOPGLOBAL(CLASSNAME, T, isNotEqualTo)\
+        BINARYOPGLOBAL(CLASSNAME, T, isGreaterThan)\
+        BINARYOPGLOBAL(CLASSNAME, T, isGreaterThanOrEqualTo)\
+        BINARYOPGLOBAL(CLASSNAME, T, isLessThan)\
+        BINARYOPGLOBAL(CLASSNAME, T, isLessThanOrEqualTo)\
+        BINARYOPGLOBAL(CLASSNAME, T, hypot)\
+        BINARYOPGLOBAL(CLASSNAME, T, pow)\
+        BINARYOPGLOBAL(CLASSNAME, T, atan2)\
+        BINARYOPGLOBAL(CLASSNAME, T, min)\
+        BINARYOPGLOBAL(CLASSNAME, T, max)\
+        BINARYOPGLOBAL(CLASSNAME, T, sumsqr)\
+        BINARYOPGLOBAL(CLASSNAME, T, difsqr)\
+        BINARYOPGLOBAL(CLASSNAME, T, sqrsum)\
+        BINARYOPGLOBAL(CLASSNAME, T, sqrdif)\
+        BINARYOPGLOBAL(CLASSNAME, T, absdif)\
+        BINARYOPGLOBAL(CLASSNAME, T, thresh)\
+        BINARYOPGLOBAL(CLASSNAME, T, round)\
+        BINARYOPGLOBAL(CLASSNAME, T, trunc)\
+        BINARYOPGLOBAL(CLASSNAME, T, clip2)\
+        BINARYOPGLOBAL(CLASSNAME, T, decayFeedback)
 
 
-#define PLONK_BINARYOPGLOBALS(CLASSNAME) PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME)
-#define PLONK_BINARYOPGLOBALS_TEMPLATE(CLASSNAME) PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL_TEMPLATE,CLASSNAME)
+#define PLONK_BINARYOPGLOBALS(CLASSNAME)            PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL,CLASSNAME,PLONK_EMPTYDEFINE)
+#define PLONK_BINARYOPGLOBALS_TEMPLATE(CLASSNAME,T) PLONK_BINARYOPGLOBALS_DEFINE(PLONK_BINARYOPGLOBAL_TEMPLATE,CLASSNAME,T)
 
 
 //------------------------------------------------------------------------------
@@ -268,13 +268,56 @@ template<class Type> inline Type decayFeedback (Type const& delayTime, Type cons
     const Type zero (Math<Type>::get0());
     const Type log001 (Math<Type>::getLog0_001());
         
-    if (delayTime > zero)       return Type (plonk::exp (log001 * delayTime / decayTime));
-    else if (delayTime < zero)  return -Type (plonk::exp (log001 * delayTime / -decayTime));
+    if (delayTime > zero)       return Type (exp (log001 * delayTime / decayTime));
+    else if (delayTime < zero)  return -Type (exp (log001 * delayTime / -decayTime));
     else                        return zero;
 
 }
 
 /// @}
+
+#define PLONK_BINARYOPFUNCTION_DEFINE(OP)\
+    static inline OperandType OP (OperandType const& a, OperandType const& b) throw() { return plonk::OP (a, b); }
+
+template<class OperandType>
+class BinaryOpFunctions
+{
+public:    
+    PLONK_BINARYOPFUNCTION_DEFINE(addop)
+    PLONK_BINARYOPFUNCTION_DEFINE(subop)
+    PLONK_BINARYOPFUNCTION_DEFINE(mulop)
+    PLONK_BINARYOPFUNCTION_DEFINE(divop)
+    PLONK_BINARYOPFUNCTION_DEFINE(modop)
+    PLONK_BINARYOPFUNCTION_DEFINE(isEqualTo)
+    PLONK_BINARYOPFUNCTION_DEFINE(isNotEqualTo)
+    PLONK_BINARYOPFUNCTION_DEFINE(isGreaterThan)
+    PLONK_BINARYOPFUNCTION_DEFINE(isGreaterThanOrEqualTo)
+    PLONK_BINARYOPFUNCTION_DEFINE(isLessThan)
+    PLONK_BINARYOPFUNCTION_DEFINE(isLessThanOrEqualTo)
+    PLONK_BINARYOPFUNCTION_DEFINE(hypot)
+    PLONK_BINARYOPFUNCTION_DEFINE(atan2)
+    PLONK_BINARYOPFUNCTION_DEFINE(pow)
+    PLONK_BINARYOPFUNCTION_DEFINE(min)
+    PLONK_BINARYOPFUNCTION_DEFINE(max)
+    PLONK_BINARYOPFUNCTION_DEFINE(sumsqr)
+    PLONK_BINARYOPFUNCTION_DEFINE(difsqr)
+    PLONK_BINARYOPFUNCTION_DEFINE(sqrsum)
+    PLONK_BINARYOPFUNCTION_DEFINE(sqrdif)
+    PLONK_BINARYOPFUNCTION_DEFINE(absdif)
+    PLONK_BINARYOPFUNCTION_DEFINE(thresh)
+    PLONK_BINARYOPFUNCTION_DEFINE(round)
+    PLONK_BINARYOPFUNCTION_DEFINE(trunc)
+    PLONK_BINARYOPFUNCTION_DEFINE(clip2)
+    PLONK_BINARYOPFUNCTION_DEFINE(decayFeedback)
+};
+
+template<class OperandType>
+class BinaryOpFunctionsHelper
+{
+public:
+    typedef BinaryOpFunctions<OperandType> BinaryOpFunctionsType;
+};
+
 
 #endif // PLONK_INLINEBINARYOPS_H
 

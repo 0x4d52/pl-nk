@@ -537,14 +537,11 @@ class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,o
 {
 };
 
-//class NumericalArrayBinaryOp<Plank##TYPECODE,PLONKOP> : public NumericalArrayBinaryOpBase<Plank##TYPECODE,PLONKOP> {\
-//    :   public NumericalArrayBinaryOpBase<Plank##TYPECODE,static_cast<PLONK_BINARYOPFUNCTION(NumericalType,*)>(PLONKOP)> \
-
-
 #define PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE,PLONKOP,PLANKOP)\
     template<>\
-    class NumericalArrayBinaryOp< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
-    :   public NumericalArrayBinaryOpBase< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
+    class  NumericalArrayBinaryOp    <Plank##TYPECODE, BinaryOpFunctionsHelper<Plank##TYPECODE>::BinaryOpFunctionsType::PLONKOP> \
+    :\
+    public NumericalArrayBinaryOpBase<Plank##TYPECODE, BinaryOpFunctionsHelper<Plank##TYPECODE>::BinaryOpFunctionsType::PLONKOP> \
     {\
     public:\
         static inline void calcNN (Plank##TYPECODE* dst, const Plank##TYPECODE* left, const Plank##TYPECODE* right, const UnsignedLong numItems) throw() {\
@@ -561,28 +558,28 @@ class NumericalArrayBinaryOp : public NumericalArrayBinaryOpBase<NumericalType,o
     }
 
 #define PLONK_NUMERICALARRAYBINARYOPS_DEFINE(TYPECODE)\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::addop, Add);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::subop, Sub);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::mulop, Mul);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::divop, Div);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::modop, Mod);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::min, Min);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::max, Max);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::pow, Pow);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isEqualTo, IsEqualTo);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isNotEqualTo, IsNotEqualTo);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isGreaterThan, IsGreaterThan);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isGreaterThanOrEqualTo, IsGreaterThanOrEqualTo);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isLessThan, IsLessThan);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::isLessThanOrEqualTo, IsLessThanOrEqualTo);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::hypot, Hypot);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::atan2, Atan2);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::sumsqr, SumSqr);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::difsqr, DifSqr);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::sqrsum, SqrSum);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::sqrdif, SqrDif);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::absdif, AbsDif);\
-    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, plonk::thresh, Thresh)
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, addop, Add);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, subop, Sub);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, mulop, Mul);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, divop, Div);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, modop, Mod);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, min, Min);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, max, Max);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, pow, Pow);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, isEqualTo, IsEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, isNotEqualTo, IsNotEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, isGreaterThan, IsGreaterThan);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, isGreaterThanOrEqualTo, IsGreaterThanOrEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, isLessThan, IsLessThan);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, isLessThanOrEqualTo, IsLessThanOrEqualTo);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, hypot, Hypot);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, atan2, Atan2);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, sumsqr, SumSqr);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, difsqr, DifSqr);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, sqrsum, SqrSum);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, sqrdif, SqrDif);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, absdif, AbsDif);\
+    PLONK_NUMERICALARRAYBINARYOP_DEFINE(TYPECODE, thresh, Thresh)
 
 PLONK_NUMERICALARRAYBINARYOPS_DEFINE(F);
 PLONK_NUMERICALARRAYBINARYOPS_DEFINE(D);
@@ -608,10 +605,13 @@ class NumericalArrayUnaryOp : public NumericalArrayUnaryOpBase<NumericalType,op>
 {
 };
 
+
+
 #define PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE,PLONKOP,PLANKOP)\
     template<>\
-    class NumericalArrayUnaryOp< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
-    : public NumericalArrayUnaryOpBase< Plank##TYPECODE,PLONKOP<Plank##TYPECODE> > \
+    class  NumericalArrayUnaryOp    <Plank##TYPECODE, UnaryOpFunctionsHelper<Plank##TYPECODE>::UnaryOpFunctionsType::PLONKOP> \
+    :\
+    public NumericalArrayUnaryOpBase<Plank##TYPECODE, UnaryOpFunctionsHelper<Plank##TYPECODE>::UnaryOpFunctionsType::PLONKOP> \
     {\
     public:\
         static inline void calc (Plank##TYPECODE* dst, const Plank##TYPECODE* src, const UnsignedLong numItems) throw() {\
@@ -620,38 +620,38 @@ class NumericalArrayUnaryOp : public NumericalArrayUnaryOpBase<NumericalType,op>
     }
 
 #define PLONK_NUMERICALARRAYUNARYOPS_DEFINE(TYPECODE)\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::move, Move);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::neg, Neg);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::abs, Abs);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::log2, Log2);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::reciprocal, Reciprocal);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sin, Sin);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::cos, Cos);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::tan, Tan);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::asin, Asin);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::acos, Acos);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::atan, Atan);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sinh, Sinh);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::cosh, Cosh);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::tanh, Tanh);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sqrt, Sqrt);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::log, Log);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::log10, Log10);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::exp, Exp);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::squared, Squared);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::cubed, Cubed);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::ceil, Ceil);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::floor, Floor);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::frac, Frac);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::sign , Sign);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::m2f, M2F);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::f2m, F2M);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::a2dB, A2dB);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::dB2a, dB2A);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::d2r, D2R);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::r2d, R2D);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::distort, Distort);\
-    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, plonk::zap, Zap)
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, move, Move);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, neg, Neg);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, abs, Abs);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, log2, Log2);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, reciprocal, Reciprocal);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, sin, Sin);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, cos, Cos);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, tan, Tan);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, asin, Asin);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, acos, Acos);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, atan, Atan);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, sinh, Sinh);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, cosh, Cosh);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, tanh, Tanh);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, sqrt, Sqrt);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, log, Log);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, log10, Log10);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, exp, Exp);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, squared, Squared);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, cubed, Cubed);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, ceil, Ceil);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, floor, Floor);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, frac, Frac);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, sign , Sign);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, m2f, M2F);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, f2m, F2M);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, a2dB, A2dB);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, dB2a, dB2A);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, d2r, D2R);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, r2d, R2D);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, distort, Distort);\
+    PLONK_NUMERICALARRAYUNARYOP_DEFINE(TYPECODE, zap, Zap)
 
 PLONK_NUMERICALARRAYUNARYOPS_DEFINE(F);
 PLONK_NUMERICALARRAYUNARYOPS_DEFINE(D);
@@ -697,8 +697,11 @@ public:
     typedef ObjectArray<NumericalType>                  Base;   
     typedef WeakPointerContainer<NumericalArray>        Weak;
     
-    typedef ObjectArray<NumericalType>          ObjectArrayType;
-    typedef ObjectArray<ObjectArrayType>        ObjectArray2DType;
+    typedef ObjectArray<NumericalType>                  ObjectArrayType;
+    typedef ObjectArray<ObjectArrayType>                ObjectArray2DType;
+    
+    typedef typename BinaryOpFunctionsHelper<NumericalType>::BinaryOpFunctionsType BinaryOpFunctionsType;
+    typedef typename UnaryOpFunctionsHelper<NumericalType>::UnaryOpFunctionsType UnaryOpFunctionsType;
 
 	class InitialNumber
 	{
@@ -1527,7 +1530,7 @@ public:
                 result = array[0];
             
             for (int i = 1; i < length; ++i)
-                result = plonk::max (result, array[i]);
+                result = BinaryOpFunctionsType::max (result, array[i]);
 		}		
         
         return result;
@@ -1546,7 +1549,7 @@ public:
                 result = array[0];
             
             for (int i = 1; i < length; ++i)
-                result = plonk::max (result, plonk::abs (array[i]));
+                result = BinaryOpFunctionsType::max (result, BinaryOpFunctionsType::abs (array[i]));
 		}		
         
         return result;
@@ -1566,7 +1569,7 @@ public:
                 result = array[0];
             
             for (int i = 1; i < length; ++i)
-                result = plonk::min (result, array[i]);
+                result = BinaryOpFunctionsType::min (result, array[i]);
 		}		
         
         return result;
@@ -1640,7 +1643,7 @@ public:
             
             if (maximum > NumericalType (0))
             {
-                const NumericalType factor = plonk::reciprocal (maximum);
+                const NumericalType factor = BinaryOpFunctionsType::reciprocal (maximum);
                 const int size = this->size();
                 
                 for (int i = 0; i < size; ++i)
@@ -1759,8 +1762,8 @@ public:
 
 };
 
-PLONK_BINARYOPGLOBALS_TEMPLATE(NumericalArray); // declares global functions with the same name as the binary operators
-PLONK_UNARYOPGLOBALS_TEMPLATE(NumericalArray);  // declares global functions with the same name as the unary operators
+PLONK_BINARYOPGLOBALS_TEMPLATE(NumericalArray,NumericalType); // declares global functions with the same name as the binary operators
+PLONK_UNARYOPGLOBALS_TEMPLATE(NumericalArray,NumericalType);  // declares global functions with the same name as the unary operators
 
 
 

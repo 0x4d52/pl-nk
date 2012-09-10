@@ -91,6 +91,9 @@ protected:
     typedef Variable<AtomicType&>                   AtomicVariableType;
     typedef AtomicVariableUnit<SampleType>          AtomicVariableUnitType;
 
+    typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;
+    typedef typename UnaryOpFunctionsHelper<SampleType>::UnaryOpFunctionsType UnaryOpFunctionsType;
+
 public:
     typedef ObjectArrayInternal<ChannelType>    Internal;    
     typedef UnitType                            Base;    
@@ -1232,8 +1235,8 @@ private:
     }        
 };
 
-PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase); // declares global functions with the same name as the binary operators
-PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase);  // declares global functions with the same name as the unary operators
+PLONK_BINARYOPGLOBALS_TEMPLATE(UnitBase,SampleType); // declares global functions with the same name as the binary operators
+PLONK_UNARYOPGLOBALS_TEMPLATE(UnitBase,SampleType);  // declares global functions with the same name as the unary operators
 
 //template<class SampleType>
 //inline UnitBase<SampleType> explin (UnitBase<SampleType> const& input, 

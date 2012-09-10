@@ -46,8 +46,7 @@
 
 #define PLONK_UNARYOP(CLASSNAME, OP) \
         /** Create a new CLASSNAME by applying the unary '##OP##' function to this one. */\
-        inline CLASSNAME OP() const throw() { return unary<plonk::OP>(); }
-
+        inline CLASSNAME OP() const throw() { return unary<UnaryOpFunctionsType::OP>(); }
 
 #define PLONK_UNARYOPS(CLASSNAME) \
         PLONK_UNARYOP(CLASSNAME, move)\
@@ -85,58 +84,58 @@
         PLONK_UNARYOP(CLASSNAME, distort)\
         PLONK_UNARYOP(CLASSNAME, zap)\
         /** Create a new CLASSNAME by applying the unary '-' operator to this one. **/\
-        inline CLASSNAME operator-() const throw()  { return unary<plonk::neg>(); }\
+        inline CLASSNAME operator-() const throw()  { return unary<UnaryOpFunctionsType::neg>(); }\
         /** Create a new CLASSNAME by applying the unary '++' operator to this one. **/\
-        inline CLASSNAME operator++() const throw()  { return unary<plonk::inc>(); }\
+        inline CLASSNAME operator++() const throw()  { return unary<UnaryOpFunctionsType::inc>(); }\
         /** Create a new CLASSNAME by applying the unary '++' operator to this one. **/\
-        inline CLASSNAME operator++ (int) const throw()  { CLASSNAME temp = *this; operator= (unary<plonk::inc>()); return temp; }
+        inline CLASSNAME operator++ (int) const throw()  { CLASSNAME temp = *this; operator= (unary<UnaryOpFunctionsType::inc>()); return temp; }
 
 
-#define PLONK_UNARYOPGLOBAL(CLASSNAME,OP)\
+#define PLONK_UNARYOPGLOBAL(CLASSNAME,T,OP)\
     /** Create a new CLASSNAME by applying the unary '##OP##' function to @e operand. */\
     CLASSNAME OP (CLASSNAME const& operand) throw() { return operand.OP(); }
 
-#define PLONK_UNARYOPGLOBAL_TEMPLATE(CLASSNAME,OP)\
-    template<class T> PLONK_UNARYOPGLOBAL(CLASSNAME<T>,OP)
+#define PLONK_UNARYOPGLOBAL_TEMPLATE(CLASSNAME,T,OP)\
+    template<class T> PLONK_UNARYOPGLOBAL(CLASSNAME<T>,PLONK_EMPTYDEFINE,OP)
 
-#define PLONK_UNARYOPGLOBALS_DEFINE(UNARYOPGLOBAL,CLASSNAME) \
-        UNARYOPGLOBAL(CLASSNAME, move)\
-        UNARYOPGLOBAL(CLASSNAME, inc)\
-        UNARYOPGLOBAL(CLASSNAME, dec)\
-        UNARYOPGLOBAL(CLASSNAME, abs)\
-        UNARYOPGLOBAL(CLASSNAME, log2)\
-        UNARYOPGLOBAL(CLASSNAME, neg)\
-        UNARYOPGLOBAL(CLASSNAME, reciprocal)\
-        UNARYOPGLOBAL(CLASSNAME, sin)\
-        UNARYOPGLOBAL(CLASSNAME, cos)\
-        UNARYOPGLOBAL(CLASSNAME, tan)\
-        UNARYOPGLOBAL(CLASSNAME, asin)\
-        UNARYOPGLOBAL(CLASSNAME, acos)\
-        UNARYOPGLOBAL(CLASSNAME, atan)\
-        UNARYOPGLOBAL(CLASSNAME, sinh)\
-        UNARYOPGLOBAL(CLASSNAME, cosh)\
-        UNARYOPGLOBAL(CLASSNAME, tanh)\
-        UNARYOPGLOBAL(CLASSNAME, sqrt)\
-        UNARYOPGLOBAL(CLASSNAME, log)\
-        UNARYOPGLOBAL(CLASSNAME, log10)\
-        UNARYOPGLOBAL(CLASSNAME, exp)\
-        UNARYOPGLOBAL(CLASSNAME, squared)\
-        UNARYOPGLOBAL(CLASSNAME, cubed)\
-        UNARYOPGLOBAL(CLASSNAME, ceil)\
-        UNARYOPGLOBAL(CLASSNAME, floor)\
-        UNARYOPGLOBAL(CLASSNAME, frac)\
-        UNARYOPGLOBAL(CLASSNAME, sign)\
-        UNARYOPGLOBAL(CLASSNAME, m2f)\
-        UNARYOPGLOBAL(CLASSNAME, f2m)\
-        UNARYOPGLOBAL(CLASSNAME, a2dB)\
-        UNARYOPGLOBAL(CLASSNAME, dB2a)\
-        UNARYOPGLOBAL(CLASSNAME, d2r)\
-        UNARYOPGLOBAL(CLASSNAME, r2d)\
-        UNARYOPGLOBAL(CLASSNAME, distort)\
-        UNARYOPGLOBAL(CLASSNAME, zap)
+#define PLONK_UNARYOPGLOBALS_DEFINE(UNARYOPGLOBAL,CLASSNAME,T) \
+        UNARYOPGLOBAL(CLASSNAME, T, move)\
+        UNARYOPGLOBAL(CLASSNAME, T, inc)\
+        UNARYOPGLOBAL(CLASSNAME, T, dec)\
+        UNARYOPGLOBAL(CLASSNAME, T, abs)\
+        UNARYOPGLOBAL(CLASSNAME, T, log2)\
+        UNARYOPGLOBAL(CLASSNAME, T, neg)\
+        UNARYOPGLOBAL(CLASSNAME, T, reciprocal)\
+        UNARYOPGLOBAL(CLASSNAME, T, sin)\
+        UNARYOPGLOBAL(CLASSNAME, T, cos)\
+        UNARYOPGLOBAL(CLASSNAME, T, tan)\
+        UNARYOPGLOBAL(CLASSNAME, T, asin)\
+        UNARYOPGLOBAL(CLASSNAME, T, acos)\
+        UNARYOPGLOBAL(CLASSNAME, T, atan)\
+        UNARYOPGLOBAL(CLASSNAME, T, sinh)\
+        UNARYOPGLOBAL(CLASSNAME, T, cosh)\
+        UNARYOPGLOBAL(CLASSNAME, T, tanh)\
+        UNARYOPGLOBAL(CLASSNAME, T, sqrt)\
+        UNARYOPGLOBAL(CLASSNAME, T, log)\
+        UNARYOPGLOBAL(CLASSNAME, T, log10)\
+        UNARYOPGLOBAL(CLASSNAME, T, exp)\
+        UNARYOPGLOBAL(CLASSNAME, T, squared)\
+        UNARYOPGLOBAL(CLASSNAME, T, cubed)\
+        UNARYOPGLOBAL(CLASSNAME, T, ceil)\
+        UNARYOPGLOBAL(CLASSNAME, T, floor)\
+        UNARYOPGLOBAL(CLASSNAME, T, frac)\
+        UNARYOPGLOBAL(CLASSNAME, T, sign)\
+        UNARYOPGLOBAL(CLASSNAME, T, m2f)\
+        UNARYOPGLOBAL(CLASSNAME, T, f2m)\
+        UNARYOPGLOBAL(CLASSNAME, T, a2dB)\
+        UNARYOPGLOBAL(CLASSNAME, T, dB2a)\
+        UNARYOPGLOBAL(CLASSNAME, T, d2r)\
+        UNARYOPGLOBAL(CLASSNAME, T, r2d)\
+        UNARYOPGLOBAL(CLASSNAME, T, distort)\
+        UNARYOPGLOBAL(CLASSNAME, T, zap)
 
-#define PLONK_UNARYOPGLOBALS(CLASSNAME) PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL,CLASSNAME)
-#define PLONK_UNARYOPGLOBALS_TEMPLATE(CLASSNAME) PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL_TEMPLATE,CLASSNAME)
+#define PLONK_UNARYOPGLOBALS(CLASSNAME) PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL,CLASSNAME,PLONK_EMPTYDEFINE)
+#define PLONK_UNARYOPGLOBALS_TEMPLATE(CLASSNAME,T) PLONK_UNARYOPGLOBALS_DEFINE(PLONK_UNARYOPGLOBAL_TEMPLATE,CLASSNAME,T)
 
 //------------------------------------------------------------------------------
 
@@ -290,44 +289,57 @@ inline Type zap (Type const& x) throw()
     return ((absx > smallest) && (absx < biggest)) ? x : Math<Type>::get0();
 }
 
-//template<class Type>
-//class ClipNormalHelper
-//{
-//public:
-//    static inline Type clipNormal (Type const& a) throw()
-//    {
-//        return a; // integer type wrap around peak anyway;
-//    }
-//};
-//
-//template<>
-//class ClipNormalHelper<float>
-//{
-//public:
-//    static inline float clipNormal (float const& a) throw()
-//    {
-//        return pl_ClipNormalF (a);
-//    }
-//};
-//
-//template<>
-//class ClipNormalHelper<double>
-//{
-//public:
-//    static inline double clipNormal (double const& a) throw()
-//    {
-//        return pl_ClipNormalD (a);
-//    }
-//};
-//
-//
-//template<class Type> 
-//inline Type clipNormal (Type const& a) throw()       
-//{ 
-//    return ClipNormalHelper<Type>::clipNormal (a);
-//}
-
-
 /// @}
+
+#define PLONK_UNARYOPFUNCTION_DEFINE(OP)\
+    static inline OperandType OP (OperandType const& a) throw() { return plonk::OP (a); }
+
+template<class OperandType>
+class UnaryOpFunctions
+{
+public:        
+    PLONK_UNARYOPFUNCTION_DEFINE(move)
+    PLONK_UNARYOPFUNCTION_DEFINE(inc)
+    PLONK_UNARYOPFUNCTION_DEFINE(dec)
+    PLONK_UNARYOPFUNCTION_DEFINE(abs)
+    PLONK_UNARYOPFUNCTION_DEFINE(log2)
+    PLONK_UNARYOPFUNCTION_DEFINE(neg)
+    PLONK_UNARYOPFUNCTION_DEFINE(reciprocal)
+    PLONK_UNARYOPFUNCTION_DEFINE(sin)
+    PLONK_UNARYOPFUNCTION_DEFINE(cos)
+    PLONK_UNARYOPFUNCTION_DEFINE(tan)
+    PLONK_UNARYOPFUNCTION_DEFINE(asin)
+    PLONK_UNARYOPFUNCTION_DEFINE(acos)
+    PLONK_UNARYOPFUNCTION_DEFINE(atan)
+    PLONK_UNARYOPFUNCTION_DEFINE(sinh)
+    PLONK_UNARYOPFUNCTION_DEFINE(cosh)
+    PLONK_UNARYOPFUNCTION_DEFINE(tanh)
+    PLONK_UNARYOPFUNCTION_DEFINE(sqrt)
+    PLONK_UNARYOPFUNCTION_DEFINE(log)
+    PLONK_UNARYOPFUNCTION_DEFINE(log10)
+    PLONK_UNARYOPFUNCTION_DEFINE(exp)
+    PLONK_UNARYOPFUNCTION_DEFINE(squared)
+    PLONK_UNARYOPFUNCTION_DEFINE(cubed)
+    PLONK_UNARYOPFUNCTION_DEFINE(ceil)
+    PLONK_UNARYOPFUNCTION_DEFINE(floor)
+    PLONK_UNARYOPFUNCTION_DEFINE(frac)
+    PLONK_UNARYOPFUNCTION_DEFINE(sign)
+    PLONK_UNARYOPFUNCTION_DEFINE(m2f)
+    PLONK_UNARYOPFUNCTION_DEFINE(f2m)
+    PLONK_UNARYOPFUNCTION_DEFINE(a2dB)
+    PLONK_UNARYOPFUNCTION_DEFINE(dB2a)
+    PLONK_UNARYOPFUNCTION_DEFINE(d2r)
+    PLONK_UNARYOPFUNCTION_DEFINE(r2d)
+    PLONK_UNARYOPFUNCTION_DEFINE(distort)
+    PLONK_UNARYOPFUNCTION_DEFINE(zap)
+};
+
+template<class OperandType>
+class UnaryOpFunctionsHelper
+{
+public:
+    typedef UnaryOpFunctions<OperandType> UnaryOpFunctionsType;
+};
+
 
 #endif // PLONK_INLINEUNARYOPS_H

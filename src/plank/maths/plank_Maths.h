@@ -88,17 +88,6 @@
 #define PLANK_INT24PEAK_D ((double)PLANK_INT24PEAK_I)
 
 
-#if 1 // just to remind us theses should be dependent on the CPU..
-#define PLANK_SIMDF_LENGTH  4   // vector 4 floats
-#define PLANK_SIMDF_SHIFT   2   // divide by 4 for length
-#define PLANK_SIMDF_MASK    3   // remainder mask for non-multiples of 4
-#define PLANK_SIMDD_LENGTH  2   // vector 2 doubles
-#define PLANK_SIMDD_SHIFT   1   // divide by 2 for length
-#define PLANK_SIMDD_MASK    1   // remainder mask for non-even lengths
-#endif
-
-
-
 #if (defined (_WIN32) || defined (_WIN64))
 //    #define PLANK_INC(a) a = a + 1
     #define PLANK_INC(a) ++a
@@ -140,13 +129,9 @@ static inline double pl_MoveD (double a)            { return a; }
 
 static inline float pl_IncF (float a)               { return a + 1.f; }
 static inline double pl_IncD (double a)             { return a + 1.0; } 
-static inline short pl_IncS (short a)               { return a + 1; } 
-static inline int pl_IncI (int a)                   { return a + 1; } 
 
 static inline float pl_DecF (float a)               { return a - 1.f; }
 static inline double pl_DecD (double a)             { return a - 1.0; } 
-static inline short pl_DecS (short a)               { return a - 1; } 
-static inline int pl_DecI (int a)                   { return a - 1; } 
 
 
 /** Returns the negative of the input argument. */
@@ -442,6 +427,10 @@ static inline double pl_ThreshD (double a, double b)                    { return
 
 static inline short pl_MoveS (short a)              { return a; } 
 static inline int pl_MoveI (int a)                  { return a; } 
+static inline short pl_IncS (short a)               { return a + 1; } 
+static inline int pl_IncI (int a)                   { return a + 1; } 
+static inline short pl_DecS (short a)               { return a - 1; } 
+static inline int pl_DecI (int a)                   { return a - 1; } 
 static inline short pl_NegS (short a)               { return -a; }  
 static inline int pl_NegI (int a)                   { return -a; }  
 static inline short pl_AbsS (short a)               { return a < 0 ? -a : a; }

@@ -410,6 +410,32 @@ PLANK_VECTOR_OPS_COMMON(I)
 PLANK_VECTORCONVERTERS_DEFINE
 PLANK_VECTORCONVERTERSROUND_DEFINE
 
+
+#define PLANK_SIMDF_LENGTH   1   
+#define PLANK_SIMDF_SHIFT    0   
+#define PLANK_SIMDF_MASK     0  
+typedef PlankF PlankVF;
+
+#define PLANK_SIMDD_LENGTH   1   
+#define PLANK_SIMDD_SHIFT    0  
+#define PLANK_SIMDD_MASK     0  
+typedef PlankD PlankVD;
+
+#define PLANK_SIMDI_LENGTH   1  
+#define PLANK_SIMDI_SHIFT    0   
+#define PLANK_SIMDI_MASK     0  
+typedef PlankI PlankVI;
+
+#define PLANK_SIMDS_LENGTH   1   
+#define PLANK_SIMDS_SHIFT    0  
+#define PLANK_SIMDS_MASK     0   
+typedef PlankS PlankVS;
+
+#define PLANK_SIMDLL_LENGTH  1   // vector 1 LongLong
+#define PLANK_SIMDLL_SHIFT   0   // no shift
+#define PLANK_SIMDLL_MASK    0   // no remainder
+typedef PlankLL PlankVLL;
+
 /// @} // End group PlankVectorFunctions
 
 #endif // PLANK_VEC_CUSTOM

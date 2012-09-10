@@ -41,6 +41,8 @@
 
 #include "../../plank/plank.h"
 
+#define PLONK_EMPTYDEFINE
+
 #define PLONK_BIGENDIAN     PLANK_BIGENDIAN
 #define PLONK_LITTLEENDIAN  PLANK_LITTLEENDIAN
 

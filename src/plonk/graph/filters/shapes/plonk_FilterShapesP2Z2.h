@@ -210,7 +210,7 @@ public:
         const CalcType two (Math<CalcType>::get2());
         const CalcType ten (Math<CalcType>::get10());
                 
-        const CalcType a = plonk::pow(ten, data.params[Gain] * (Math<CalcType>::get1_40()));
+        const CalcType a = plonk::pow (ten, data.params[Gain] * (Math<CalcType>::get1_40()));
         const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
         const CalcType cos_w0 = plonk::cos (w0);
         const CalcType sin_w0 = plonk::sin (w0);		
@@ -275,7 +275,7 @@ public:
         const CalcType two (Math<CalcType>::get2());
         const CalcType ten (Math<CalcType>::get10());
         
-        const CalcType a = plonk::pow(ten, data.params[Gain] * (Math<CalcType>::get1_40()));
+        const CalcType a = plonk::pow (ten, data.params[Gain] * (Math<CalcType>::get1_40()));
         const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
         const CalcType cos_w0 = plonk::cos (w0);
         const CalcType sin_w0 = plonk::sin (w0);		
@@ -339,7 +339,7 @@ public:
         const CalcType two (Math<CalcType>::get2());
         const CalcType ten (Math<CalcType>::get10());
                 
-        const CalcType a = plonk::pow(ten, data.params[Gain] * (Math<CalcType>::get1_40()));
+        const CalcType a = plonk::pow (ten, data.params[Gain] * (Math<CalcType>::get1_40()));
         const CalcType w0 = Math<CalcType>::get2Pi() * data.params[Frequency] * data.filterSampleDuration;
         const CalcType cos_w0 = plonk::cos (w0);
         const CalcType sin_w0 = plonk::sin (w0);		

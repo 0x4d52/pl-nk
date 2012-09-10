@@ -74,7 +74,10 @@ public:
     typedef Variable                        Sender;
     typedef WeakPointerContainer<Variable>  Weak;
     typedef UnitBase<Type>                  UnitType;
-    
+
+    typedef typename BinaryOpFunctionsHelper<Type>::BinaryOpFunctionsType BinaryOpFunctionsType;
+    typedef typename UnaryOpFunctionsHelper<Type>::UnaryOpFunctionsType UnaryOpFunctionsType;
+
     /** Default constructor. */
     inline Variable() throw()
     :   Base (new VariableInternalType (Type()))
@@ -225,6 +228,9 @@ public:
     }
     
 };
+
+PLONK_BINARYOPGLOBALS_TEMPLATE(Variable,Type); // declares global functions with the same name as the binary operators
+PLONK_UNARYOPGLOBALS_TEMPLATE(Variable,Type);  // declares global functions with the same name as the unary operators
 
 template<class Type>
 inline UnitBase<Type> ar (Variable<Type> v) throw()
