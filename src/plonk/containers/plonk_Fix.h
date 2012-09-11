@@ -161,12 +161,27 @@ public:
         return internal >> FBits;
     }
     
+    inline int toInt() const throw()
+    {
+        return internal >> FBits;
+    }
+
     inline operator float () const throw()
+    {
+        return float (internal) / getOneFloat();
+    }
+    
+    inline float toFloat() const throw()
     {
         return float (internal) / getOneFloat();
     }
 
     inline operator double () const throw()
+    {
+        return double (internal) / getOneDouble();
+    }
+    
+    inline double toDouble() const throw()
     {
         return double (internal) / getOneDouble();
     }
@@ -177,26 +192,28 @@ public:
         return Fix<BaseOther,IBitsOther,FBitsOther> (*this);
     }
 
-    inline Fix operator+ (Fix const& rightOperand) const throw()    { return addop (*this, rightOperand); }
-    inline Fix operator- (Fix const& rightOperand) const throw()    { return subop (*this, rightOperand); }
-    inline Fix operator* (Fix const& rightOperand) const throw()    { return mulop (*this, rightOperand); }
-    inline Fix operator/ (Fix const& rightOperand) const throw()    { return divop (*this, rightOperand); }
-    inline Fix operator% (Fix const& rightOperand) const throw()    { return modop (*this, rightOperand); }
-    inline Fix operator+ (float const& rightOperand) const throw()  { return addop (*this, Fix (rightOperand)); }
-    inline Fix operator- (float const& rightOperand) const throw()  { return subop (*this, Fix (rightOperand)); }
-    inline Fix operator* (float const& rightOperand) const throw()  { return mulop (*this, Fix (rightOperand)); }
-    inline Fix operator/ (float const& rightOperand) const throw()  { return divop (*this, Fix (rightOperand)); }
-    inline Fix operator% (float const& rightOperand) const throw()  { return modop (*this, Fix (rightOperand)); }
-    inline Fix operator+ (double const& rightOperand) const throw() { return addop (*this, Fix (rightOperand)); }
-    inline Fix operator- (double const& rightOperand) const throw() { return subop (*this, Fix (rightOperand)); }
-    inline Fix operator* (double const& rightOperand) const throw() { return mulop (*this, Fix (rightOperand)); }
-    inline Fix operator/ (double const& rightOperand) const throw() { return divop (*this, Fix (rightOperand)); }
-    inline Fix operator% (double const& rightOperand) const throw() { return modop (*this, Fix (rightOperand)); }
-    inline Fix operator+ (int const& rightOperand) const throw()    { return addop (*this, Fix (rightOperand)); }
-    inline Fix operator- (int const& rightOperand) const throw()    { return subop (*this, Fix (rightOperand)); }
-    inline Fix operator* (int const& rightOperand) const throw()    { return mulop (*this, Fix (rightOperand)); }
-    inline Fix operator/ (int const& rightOperand) const throw()    { return divop (*this, Fix (rightOperand)); }
-    inline Fix operator% (int const& rightOperand) const throw()    { return modop (*this, Fix (rightOperand)); }
+    inline Fix operator-() const throw()    { return neg(); }
+    
+    inline Fix operator+ (Fix const& rightOperand) const throw()    { return addop (rightOperand); }
+    inline Fix operator- (Fix const& rightOperand) const throw()    { return subop (rightOperand); }
+    inline Fix operator* (Fix const& rightOperand) const throw()    { return mulop (rightOperand); }
+    inline Fix operator/ (Fix const& rightOperand) const throw()    { return divop (rightOperand); }
+    inline Fix operator% (Fix const& rightOperand) const throw()    { return modop (rightOperand); }
+    inline Fix operator+ (float const& rightOperand) const throw()  { return addop (Fix (rightOperand)); }
+    inline Fix operator- (float const& rightOperand) const throw()  { return subop (Fix (rightOperand)); }
+    inline Fix operator* (float const& rightOperand) const throw()  { return mulop (Fix (rightOperand)); }
+    inline Fix operator/ (float const& rightOperand) const throw()  { return divop (Fix (rightOperand)); }
+    inline Fix operator% (float const& rightOperand) const throw()  { return modop (Fix (rightOperand)); }
+    inline Fix operator+ (double const& rightOperand) const throw() { return addop (Fix (rightOperand)); }
+    inline Fix operator- (double const& rightOperand) const throw() { return subop (Fix (rightOperand)); }
+    inline Fix operator* (double const& rightOperand) const throw() { return mulop (Fix (rightOperand)); }
+    inline Fix operator/ (double const& rightOperand) const throw() { return divop (Fix (rightOperand)); }
+    inline Fix operator% (double const& rightOperand) const throw() { return modop ((rightOperand)); }
+    inline Fix operator+ (int const& rightOperand) const throw()    { return addop (Fix (rightOperand)); }
+    inline Fix operator- (int const& rightOperand) const throw()    { return subop (Fix (rightOperand)); }
+    inline Fix operator* (int const& rightOperand) const throw()    { return mulop (Fix (rightOperand)); }
+    inline Fix operator/ (int const& rightOperand) const throw()    { return divop (Fix (rightOperand)); }
+    inline Fix operator% (int const& rightOperand) const throw()    { return modop (Fix (rightOperand)); }
 
     friend inline Fix operator+ (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
     friend inline Fix operator- (float const& leftOperand, Fix const& rightOperand) throw()  { return Fix (leftOperand) + rightOperand; }
@@ -356,8 +373,25 @@ public:
     
     inline Fix sin() const throw()            
     { 
-        plonk_assertfalse;
-        return sin (float (*this)); 
+        const Fix pi (Math<Fix>::getPi());
+        const Fix twoPi (Math<Fix>::get2Pi());
+        
+        Fix x = modop (twoPi);
+        
+		if (x > pi)
+			x -= twoPi;
+        
+		const Fix xx = x.squared();
+        
+		Fix y = -xx * Series<Fix,7>::get1_Factorial();
+		y += Series<Fix,5>::get1_Factorial();
+		y *= xx;
+		y -= Series<Fix,3>::get1_Factorial();
+		y *= xx;
+		y += Fix::getOne();
+		y *= x;
+        
+        return y;
     }
 
     friend inline Fix cos (Fix const& a) throw()            
@@ -520,7 +554,7 @@ public:
                 break;
         }
         
-        return neg ? reciprocal (Fix (Internal (result))) : Fix (Internal (result));
+        return neg ? plonk::reciprocal (Fix (Internal (result))) : Fix (Internal (result));
     }
     
     friend inline Fix squared (Fix const& a) throw()            
@@ -674,12 +708,7 @@ public:
     }
 
     // -- binary ops -------------------------------------------------------- //
-    
-//    friend inline Fix mulop (Fix const& a, Fix const& b) throw()              
-//    { 
-//        return a.mulop (b); 
-//    }
-        
+            
     friend inline Fix addop (Fix const& a, Fix const& b) throw()              
     { 
         return a.addop (b); 
@@ -917,12 +946,18 @@ public:
         static Fix v (Internal (Base (1) << (IBits + FBits - 1)));
         return v;
     }
-    
+
     inline static const Fix& getMaximum() throw()
     {
-        static Fix v (Internal (~(Base (1) << (IBits + FBits - 1))));
+        static Fix v (Internal (~getMinimum().internal));
         return v;
     }
+
+//    inline static const Fix& getMaximum() throw()
+//    {
+//        static Fix v (Internal (~(Base (1) << (IBits + FBits - 1))));
+//        return v;
+//    }
     
     inline static const Base& getIMask() throw()
     {

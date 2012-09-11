@@ -94,6 +94,41 @@ public:
     static inline const Type& get1_2Pi() throw()      { static const Type v (1.0 / Math<double>::getPi()); return v; }
     static inline const Type& get4_Pi() throw()       { static const Type v (4.0 / Math<double>::getPi()); return v; }
     static inline const Type& get_4_Pi() throw()      { static const Type v (-4.0 / Math<double>::getPi()); return v; }
+
+};
+
+template<class Type, unsigned N>
+class Series
+{
+public:
+    static inline const Type& getFactorial() throw()        { static const Type v (getFactorialInternal()); return v; }
+    static inline const Type& get1_Factorial() throw()      { static const Type v (1.0 / getFactorial()); return v; }
+    static inline const Type& getSum() throw()              { static const Type v (getSumInternal()); return v; }
+    static inline const Type& get1_Sum() throw()            { static const Type v (1.0 / getSumInternal()); return v; }
+    
+private:
+    static void check() { plonk_staticassert (N != 0); }
+
+    static inline const Type getFactorialInternal() throw() 
+    { 
+        Type v = 1;
+        
+        for (int i = 2; i <= N; ++i)
+            v *= i;
+        
+        return v;
+    }
+    
+    static inline const Type getFactorialInternal() throw() 
+    { 
+        Type v = 1;
+        
+        for (int i = 2; i <= N; ++i)
+            v += i;
+        
+        return v;
+    }
+
 };
 
 typedef Math<Float> FloatMath;

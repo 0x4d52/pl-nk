@@ -55,6 +55,9 @@ template<class SenderContainerBaseType>             class SenderInternal;
 template<class SenderInternalType>                  class SenderContainer;
 template<class Type>                                class TypeUtility;
 template<class TypeA, class TypeB>                  class BinaryOpTypeUtility;
-
+template<class OperandType>                         class BinaryOpFunctions;
+template<class OperandType>                         class BinaryOpFunctionsHelper;
+template<class OperandType>                         class UnaryOpFunctions;
+template<class OperandType>                         class UnaryOpFunctionsHelper;
 
 #endif // PLONK_GRAPHFORWARDDECLARATIONS_H
