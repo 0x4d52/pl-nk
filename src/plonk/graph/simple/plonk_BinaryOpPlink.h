@@ -43,18 +43,20 @@
 
 #define PLONK_PLINK_BINARYOPCHANNEL_COMMON_START(PLONKOP) \
     template<>\
-    class BinaryOpChannelInternal<float, PLONKOP> : public ChannelInternal<float, ChannelInternalCore::Data>\
+    class BinaryOpChannelInternal<float, BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType::PLONKOP>\
+    : public ChannelInternal<float, ChannelInternalCore::Data>\
     {\
     public:\
-        typedef ChannelInternalCore::Data               Data;\
-        typedef ChannelBase<float>                      ChannelType;\
-        typedef BinaryOpChannelInternal<float,PLONKOP>  BinaryOpInternal;\
-        typedef ChannelInternal<float,Data>             Internal;\
-        typedef ChannelInternalBase<float>              InternalBase;\
-        typedef UnitBase<float>                         UnitType;\
-        typedef InputDictionary                         Inputs;\
-        typedef NumericalArray<float>                   Buffer;\
-        typedef BinaryOpUtility<float>                  UtilityType;\
+        typedef ChannelInternalCore::Data                                       Data;\
+        typedef typename BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType  BinaryOpFunctionsType;\
+        typedef ChannelBase<float>                                              ChannelType;\
+        typedef BinaryOpChannelInternal<float,BinaryOpFunctionsType::PLONKOP>   BinaryOpInternal;\
+        typedef ChannelInternal<float,Data>                                     Internal;\
+        typedef ChannelInternalBase<float>                                      InternalBase;\
+        typedef UnitBase<float>                                                 UnitType;\
+        typedef InputDictionary                                                 Inputs;\
+        typedef NumericalArray<float>                                           Buffer;\
+        typedef BinaryOpUtility<float>                                          UtilityType;\
         \
         enum InputIndices { LeftOperand, RightOperand, NumInputs };\
         enum Outputs { Output, NumOutputs };\
@@ -79,7 +81,7 @@
 
 #define PLONK_PLINK_BINARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP) \
     Text getName() const throw() {\
-        Text variant = UtilityType::global().getName (PLONKOP);\
+        Text variant = UtilityType::global().getName (BinaryOpFunctionsType::PLONKOP);\
         if (variant.length() < 1) variant = "unknown type";\
         return "Binary Operator (" + variant + ")";\
     }\
@@ -134,28 +136,28 @@
     PLONK_PLINK_BINARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP)\
     PLONK_PLINK_BINARYOPCHANNEL_COMMON_END
 
-PLONK_PLINK_BINARYOPCHANNEL(plonk::addop, Add);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::subop, Sub);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::mulop, Mul);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::divop, Div);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::modop, Mod);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::min, Min);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::max, Max);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::pow, Pow);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::isEqualTo, IsEqualTo);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::isNotEqualTo, IsNotEqualTo);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::isGreaterThan, IsGreaterThan);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::isGreaterThanOrEqualTo, IsGreaterThanOrEqualTo);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::isLessThan, IsLessThan);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::isLessThanOrEqualTo, IsLessThanOrEqualTo);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::hypot, Hypot);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::atan2, Atan2);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::sumsqr, SumSqr);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::difsqr, DifSqr);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::sqrsum, SqrSum);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::sqrdif, SqrDif);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::absdif, AbsDif);
-PLONK_PLINK_BINARYOPCHANNEL(plonk::thresh, Thresh);
+PLONK_PLINK_BINARYOPCHANNEL(addop, Add);
+PLONK_PLINK_BINARYOPCHANNEL(subop, Sub);
+PLONK_PLINK_BINARYOPCHANNEL(mulop, Mul);
+PLONK_PLINK_BINARYOPCHANNEL(divop, Div);
+PLONK_PLINK_BINARYOPCHANNEL(modop, Mod);
+PLONK_PLINK_BINARYOPCHANNEL(min, Min);
+PLONK_PLINK_BINARYOPCHANNEL(max, Max);
+PLONK_PLINK_BINARYOPCHANNEL(pow, Pow);
+PLONK_PLINK_BINARYOPCHANNEL(isEqualTo, IsEqualTo);
+PLONK_PLINK_BINARYOPCHANNEL(isNotEqualTo, IsNotEqualTo);
+PLONK_PLINK_BINARYOPCHANNEL(isGreaterThan, IsGreaterThan);
+PLONK_PLINK_BINARYOPCHANNEL(isGreaterThanOrEqualTo, IsGreaterThanOrEqualTo);
+PLONK_PLINK_BINARYOPCHANNEL(isLessThan, IsLessThan);
+PLONK_PLINK_BINARYOPCHANNEL(isLessThanOrEqualTo, IsLessThanOrEqualTo);
+PLONK_PLINK_BINARYOPCHANNEL(hypot, Hypot);
+PLONK_PLINK_BINARYOPCHANNEL(atan2, Atan2);
+PLONK_PLINK_BINARYOPCHANNEL(sumsqr, SumSqr);
+PLONK_PLINK_BINARYOPCHANNEL(difsqr, DifSqr);
+PLONK_PLINK_BINARYOPCHANNEL(sqrsum, SqrSum);
+PLONK_PLINK_BINARYOPCHANNEL(sqrdif, SqrDif);
+PLONK_PLINK_BINARYOPCHANNEL(absdif, AbsDif);
+PLONK_PLINK_BINARYOPCHANNEL(thresh, Thresh);
 
 
 #endif // PLONK_BINARYOPPLINK_H

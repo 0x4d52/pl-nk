@@ -248,9 +248,9 @@ public:
 										    ObjectArray<CollectionType2> const& collection2,
 										    ObjectArray<CollectionType3> const& collection3) throw()
 	{
-		const int length = plonk::max (plonk::max (collection1.length(), 
-                                                   collection2.length()), 
-                                                   collection3.length());
+		const int length = plonk::max (collection1.length(), 
+                                       collection2.length(), 
+                                       collection3.length());
 		
 		ObjectArray<ObjectType> result (length, false);
 		
@@ -271,10 +271,10 @@ public:
 										    ObjectArray<CollectionType3> const& collection3,
 										    ObjectArray<CollectionType4> const& collection4) throw()
 	{
-		const int length = plonk::max (plonk::max (plonk::max (collection1.length(), 
-                                                               collection2.length()), 
-                                                               collection3.length()),
-                                                               collection4.length());
+		const int length = plonk::max (collection1.length(), 
+                                       collection2.length(), 
+                                       collection3.length(),
+                                       collection4.length());
 		
 		ObjectArray<ObjectType> result (length, false);
 		
@@ -911,7 +911,7 @@ public:
 				thresholds[i] = sum;
 			}
 			
-			WeightType random = plonk::rand (sum);
+			const WeightType random = plonk::rand (sum);
 			
 			for (i = 0; i < length; ++i)
 			{
@@ -951,7 +951,7 @@ public:
 				thresholds[i] = sum;
 			}
 			
-			WeightType random = plonk::rand (sum);
+			const WeightType random = plonk::rand (sum);
 			
 			for (i = 0; i < length; i++)
 			{

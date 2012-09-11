@@ -44,18 +44,20 @@
 
 #define PLONK_PLINK_UNARYOPCHANNEL_COMMON_START(PLONKOP) \
     template<>\
-    class UnaryOpChannelInternal<float, PLONKOP> : public ChannelInternal<float, ChannelInternalCore::Data>\
+    class UnaryOpChannelInternal<float, UnaryOpFunctionsHelper<float>::UnaryOpFunctionsType::PLONKOP> \
+    : public ChannelInternal<float, ChannelInternalCore::Data>\
     {\
     public:\
-        typedef ChannelInternalCore::Data               Data;\
-        typedef ChannelBase<float>                      ChannelType;\
-        typedef UnaryOpChannelInternal<float,PLONKOP>   UnaryOpInternal;\
-        typedef ChannelInternal<float,Data>             Internal;\
-        typedef ChannelInternalBase<float>              InternalBase;\
-        typedef UnitBase<float>                         UnitType;\
-        typedef InputDictionary                         Inputs;\
-        typedef NumericalArray<float>                   Buffer;\
-        typedef UnaryOpUtility<float>                   UtilityType;\
+        typedef ChannelInternalCore::Data                                   Data;\
+        typedef UnaryOpFunctionsHelper<float>::UnaryOpFunctionsType         UnaryOpFunctionsType;\
+        typedef ChannelBase<float>                                          ChannelType;\
+        typedef UnaryOpChannelInternal<float,UnaryOpFunctionsType::PLONKOP> UnaryOpInternal;\
+        typedef ChannelInternal<float,Data>                                 Internal;\
+        typedef ChannelInternalBase<float>                                  InternalBase;\
+        typedef UnitBase<float>                                             UnitType;\
+        typedef InputDictionary                                             Inputs;\
+        typedef NumericalArray<float>                                       Buffer;\
+        typedef UnaryOpUtility<float>                                       UtilityType;\
         \
         enum InputIndices { Operand, NumInputs };\
         enum Outputs { Output, NumOutputs };\
@@ -80,7 +82,7 @@
 
 #define PLONK_PLINK_UNARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP) \
     Text getName() const throw() {\
-        Text variant = UtilityType::global().getName (PLONKOP);\
+        Text variant = UtilityType::global().getName (UnaryOpFunctionsType::PLONKOP);\
         if (variant.length() < 1) variant = "unknown type";\
         return "Unary Operator (" + variant + ")";\
     }\
@@ -121,38 +123,38 @@
     PLONK_PLINK_UNARYOPCHANNEL_PROCESS(PLONKOP, PLANKOP)\
     PLONK_PLINK_UNARYOPCHANNEL_COMMON_END
 
-PLONK_PLINK_UNARYOPCHANNEL(plonk::move, Move)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::inc, Inc)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::neg, Neg)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::abs, Abs)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::log2, Log2)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::reciprocal, Reciprocal)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::sin, Sin)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::cos, Cos)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::tan, Tan)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::asin, Asin)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::acos, Acos)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::atan, Atan)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::sinh, Sinh)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::cosh, Cosh)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::tanh, Tanh)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::sqrt, Sqrt)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::log, Log)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::log10, Log10)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::exp, Exp)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::squared, Squared)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::cubed, Cubed)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::ceil, Ceil)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::floor, Floor)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::frac, Frac)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::sign , Sign)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::m2f, M2F)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::f2m, F2M)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::a2dB, A2dB)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::dB2a, dB2A)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::d2r, D2R)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::r2d, R2D)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::distort, Distort)
-PLONK_PLINK_UNARYOPCHANNEL(plonk::zap, Zap)
+PLONK_PLINK_UNARYOPCHANNEL(move, Move)
+PLONK_PLINK_UNARYOPCHANNEL(inc, Inc)
+PLONK_PLINK_UNARYOPCHANNEL(neg, Neg)
+PLONK_PLINK_UNARYOPCHANNEL(abs, Abs)
+PLONK_PLINK_UNARYOPCHANNEL(log2, Log2)
+PLONK_PLINK_UNARYOPCHANNEL(reciprocal, Reciprocal)
+PLONK_PLINK_UNARYOPCHANNEL(sin, Sin)
+PLONK_PLINK_UNARYOPCHANNEL(cos, Cos)
+PLONK_PLINK_UNARYOPCHANNEL(tan, Tan)
+PLONK_PLINK_UNARYOPCHANNEL(asin, Asin)
+PLONK_PLINK_UNARYOPCHANNEL(acos, Acos)
+PLONK_PLINK_UNARYOPCHANNEL(atan, Atan)
+PLONK_PLINK_UNARYOPCHANNEL(sinh, Sinh)
+PLONK_PLINK_UNARYOPCHANNEL(cosh, Cosh)
+PLONK_PLINK_UNARYOPCHANNEL(tanh, Tanh)
+PLONK_PLINK_UNARYOPCHANNEL(sqrt, Sqrt)
+PLONK_PLINK_UNARYOPCHANNEL(log, Log)
+PLONK_PLINK_UNARYOPCHANNEL(log10, Log10)
+PLONK_PLINK_UNARYOPCHANNEL(exp, Exp)
+PLONK_PLINK_UNARYOPCHANNEL(squared, Squared)
+PLONK_PLINK_UNARYOPCHANNEL(cubed, Cubed)
+PLONK_PLINK_UNARYOPCHANNEL(ceil, Ceil)
+PLONK_PLINK_UNARYOPCHANNEL(floor, Floor)
+PLONK_PLINK_UNARYOPCHANNEL(frac, Frac)
+PLONK_PLINK_UNARYOPCHANNEL(sign , Sign)
+PLONK_PLINK_UNARYOPCHANNEL(m2f, M2F)
+PLONK_PLINK_UNARYOPCHANNEL(f2m, F2M)
+PLONK_PLINK_UNARYOPCHANNEL(a2dB, A2dB)
+PLONK_PLINK_UNARYOPCHANNEL(dB2a, dB2A)
+PLONK_PLINK_UNARYOPCHANNEL(d2r, D2R)
+PLONK_PLINK_UNARYOPCHANNEL(r2d, R2D)
+PLONK_PLINK_UNARYOPCHANNEL(distort, Distort)
+PLONK_PLINK_UNARYOPCHANNEL(zap, Zap)
 
 #endif // PLONK_UNARYOPPLINK_H

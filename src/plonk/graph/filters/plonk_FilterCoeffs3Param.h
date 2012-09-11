@@ -413,7 +413,7 @@ public:
         
         plonk_assert (inputKeys.length() == 3);
         
-        const int numInputChannels = plonk::max (plonk::max (param0.getNumChannels(), param1.getNumChannels()), param2.getNumChannels());
+        const int numInputChannels = plonk::max (param0.getNumChannels(), param1.getNumChannels(), param2.getNumChannels());
         const int numSampleRates = filterSampleRates.length();
         const int numChannels = filterSampleRates.areAllEqual() ? numInputChannels : plonk::max (numInputChannels, numSampleRates);
         UnitType result (UnitType::emptyWithAllocatedSize (numChannels * FormType::NumCoeffs));

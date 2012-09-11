@@ -680,7 +680,7 @@ public:
 //        return a.mulop (b); 
 //    }
         
-    friend inline Fix addop (Fix const& b, Fix const& b) throw()              
+    friend inline Fix addop (Fix const& a, Fix const& b) throw()              
     { 
         return a.addop (b); 
     }

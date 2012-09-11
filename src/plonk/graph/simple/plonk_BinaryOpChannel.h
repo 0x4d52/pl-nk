@@ -48,35 +48,36 @@ class BinaryOpUtility
 {
 private:
     typedef SampleType (*Function)(SampleType const&,SampleType const&);
+    typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;    
     
     BinaryOpUtility() throw()
     {
-        names.put (&plonk::addop<SampleType>,                   "add");
-        names.put (&plonk::subop<SampleType>,                   "subtract");
-        names.put (&plonk::mulop<SampleType>,                   "multiply");
-        names.put (&plonk::divop<SampleType>,                   "divide");
-        names.put (&plonk::modop<SampleType>,                   "modulo");
-        names.put (&plonk::isEqualTo<SampleType>,               "==");
-        names.put (&plonk::isNotEqualTo<SampleType>,            "=");
-        names.put (&plonk::isGreaterThan<SampleType>,           ">");
-        names.put (&plonk::isGreaterThanOrEqualTo<SampleType>,  ">=");
-        names.put (&plonk::isLessThan<SampleType>,              "<");
-        names.put (&plonk::isLessThanOrEqualTo<SampleType>,     "<=");
-        names.put (&plonk::hypot<SampleType>,                   "hypot");
-        names.put (&plonk::pow<SampleType>,                     "pow");
-        names.put (&plonk::atan2<SampleType>,                   "atan2");
-        names.put (&plonk::min<SampleType>,                     "min");
-        names.put (&plonk::max<SampleType>,                     "max");
-        names.put (&plonk::sumsqr<SampleType>,                  "sumsqr");
-        names.put (&plonk::difsqr<SampleType>,                  "difsqr");
-        names.put (&plonk::sqrsum<SampleType>,                  "sqrsum");
-        names.put (&plonk::sqrdif<SampleType>,                  "sqrdif");
-        names.put (&plonk::absdif<SampleType>,                  "absdif");
-        names.put (&plonk::thresh<SampleType>,                  "thresh");
-        names.put (&plonk::round<SampleType>,                   "round");
-        names.put (&plonk::trunc<SampleType>,                   "trunc");
-        names.put (&plonk::clip2<SampleType>,                   "clip2");
-        names.put (&plonk::decayFeedback<SampleType>,           "decayFeedback");
+        names.put (&BinaryOpFunctionsType::addop,                   "add");
+        names.put (&BinaryOpFunctionsType::subop,                   "subtract");
+        names.put (&BinaryOpFunctionsType::mulop,                   "multiply");
+        names.put (&BinaryOpFunctionsType::divop,                   "divide");
+        names.put (&BinaryOpFunctionsType::modop,                   "modulo");
+        names.put (&BinaryOpFunctionsType::isEqualTo,               "==");
+        names.put (&BinaryOpFunctionsType::isNotEqualTo,            "=");
+        names.put (&BinaryOpFunctionsType::isGreaterThan,           ">");
+        names.put (&BinaryOpFunctionsType::isGreaterThanOrEqualTo,  ">=");
+        names.put (&BinaryOpFunctionsType::isLessThan,              "<");
+        names.put (&BinaryOpFunctionsType::isLessThanOrEqualTo,     "<=");
+        names.put (&BinaryOpFunctionsType::hypot,                   "hypot");
+        names.put (&BinaryOpFunctionsType::pow,                     "pow");
+        names.put (&BinaryOpFunctionsType::atan2,                   "atan2");
+        names.put (&BinaryOpFunctionsType::min,                     "min");
+        names.put (&BinaryOpFunctionsType::max,                     "max");
+        names.put (&BinaryOpFunctionsType::sumsqr,                  "sumsqr");
+        names.put (&BinaryOpFunctionsType::difsqr,                  "difsqr");
+        names.put (&BinaryOpFunctionsType::sqrsum,                  "sqrsum");
+        names.put (&BinaryOpFunctionsType::sqrdif,                  "sqrdif");
+        names.put (&BinaryOpFunctionsType::absdif,                  "absdif");
+        names.put (&BinaryOpFunctionsType::thresh,                  "thresh");
+        names.put (&BinaryOpFunctionsType::round,                   "round");
+        names.put (&BinaryOpFunctionsType::trunc,                   "trunc");
+        names.put (&BinaryOpFunctionsType::clip2,                   "clip2");
+        names.put (&BinaryOpFunctionsType::decayFeedback,           "decayFeedback");
     }
     
 public:
@@ -111,6 +112,7 @@ class BinaryOpChannelInternal
 {
 public:
     typedef typename ChannelInternalCore::Data      Data;
+    typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;
 
     typedef ChannelBase<SampleType>                 ChannelType;
     typedef BinaryOpChannelInternal<SampleType,op>  BinaryOpInternal;
@@ -121,6 +123,7 @@ public:
     typedef NumericalArray<SampleType>              Buffer;
     typedef BinaryOpUtility<SampleType>             UtilityType;
         
+
     BinaryOpChannelInternal (Inputs const& inputs, 
                              Data const& data, 
                              BlockSize const& blockSize,

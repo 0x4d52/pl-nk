@@ -48,43 +48,44 @@ class UnaryOpUtility
 {
 private:
     typedef SampleType (*Function)(SampleType const&);
-    
+    typedef typename UnaryOpFunctionsHelper<SampleType>::UnaryOpFunctionsType UnaryOpFunctionsType;
+
     UnaryOpUtility() throw()
     {
-        names.put (&plonk::move<SampleType>,        "move");
-        names.put (&plonk::inc<SampleType>,         "inc");
-        names.put (&plonk::dec<SampleType>,         "dec");
-        names.put (&plonk::abs<SampleType>,         "abs");
-        names.put (&plonk::log2<SampleType>,        "log2");
-        names.put (&plonk::neg<SampleType>,         "neg");
-        names.put (&plonk::reciprocal<SampleType>,  "reciprocal");
-        names.put (&plonk::sin<SampleType>,         "sin");
-        names.put (&plonk::cos<SampleType>,         "cos");
-        names.put (&plonk::tan<SampleType>,         "tan");
-        names.put (&plonk::asin<SampleType>,        "asin");
-        names.put (&plonk::acos<SampleType>,        "acos");
-        names.put (&plonk::atan<SampleType>,        "atan");
-        names.put (&plonk::sinh<SampleType>,        "sinh");
-        names.put (&plonk::cosh<SampleType>,        "cosh");
-        names.put (&plonk::tanh<SampleType>,        "tanh");
-        names.put (&plonk::sqrt<SampleType>,        "sqrt");
-        names.put (&plonk::log<SampleType>,         "log");
-        names.put (&plonk::log10<SampleType>,       "log10");
-        names.put (&plonk::exp<SampleType>,         "exp");
-        names.put (&plonk::squared<SampleType>,     "squared");
-        names.put (&plonk::cubed<SampleType>,       "cubed");
-        names.put (&plonk::ceil<SampleType>,        "ceil");
-        names.put (&plonk::floor<SampleType>,       "floor");
-        names.put (&plonk::frac<SampleType>,        "frac");
-        names.put (&plonk::sign<SampleType>,        "sign");
-        names.put (&plonk::m2f<SampleType>,         "MIDI to frequency");
-        names.put (&plonk::f2m<SampleType>,         "Frequency to MIDI");
-        names.put (&plonk::a2dB<SampleType>,        "Amplitude to dB");
-        names.put (&plonk::dB2a<SampleType>,        "dB to Amplitude");
-        names.put (&plonk::d2r<SampleType>,         "Degrees to Radians");
-        names.put (&plonk::r2d<SampleType>,         "Radians to Degrees");
-        names.put (&plonk::distort<SampleType>,     "distort");
-        names.put (&plonk::zap<SampleType>,         "zap");
+        names.put (&UnaryOpFunctionsType::move,        "move");
+        names.put (&UnaryOpFunctionsType::inc,         "inc");
+        names.put (&UnaryOpFunctionsType::dec,         "dec");
+        names.put (&UnaryOpFunctionsType::abs,         "abs");
+        names.put (&UnaryOpFunctionsType::log2,        "log2");
+        names.put (&UnaryOpFunctionsType::neg,         "neg");
+        names.put (&UnaryOpFunctionsType::reciprocal,  "reciprocal");
+        names.put (&UnaryOpFunctionsType::sin,         "sin");
+        names.put (&UnaryOpFunctionsType::cos,         "cos");
+        names.put (&UnaryOpFunctionsType::tan,         "tan");
+        names.put (&UnaryOpFunctionsType::asin,        "asin");
+        names.put (&UnaryOpFunctionsType::acos,        "acos");
+        names.put (&UnaryOpFunctionsType::atan,        "atan");
+        names.put (&UnaryOpFunctionsType::sinh,        "sinh");
+        names.put (&UnaryOpFunctionsType::cosh,        "cosh");
+        names.put (&UnaryOpFunctionsType::tanh,        "tanh");
+        names.put (&UnaryOpFunctionsType::sqrt,        "sqrt");
+        names.put (&UnaryOpFunctionsType::log,         "log");
+        names.put (&UnaryOpFunctionsType::log10,       "log10");
+        names.put (&UnaryOpFunctionsType::exp,         "exp");
+        names.put (&UnaryOpFunctionsType::squared,     "squared");
+        names.put (&UnaryOpFunctionsType::cubed,       "cubed");
+        names.put (&UnaryOpFunctionsType::ceil,        "ceil");
+        names.put (&UnaryOpFunctionsType::floor,       "floor");
+        names.put (&UnaryOpFunctionsType::frac,        "frac");
+        names.put (&UnaryOpFunctionsType::sign,        "sign");
+        names.put (&UnaryOpFunctionsType::m2f,         "MIDI to frequency");
+        names.put (&UnaryOpFunctionsType::f2m,         "Frequency to MIDI");
+        names.put (&UnaryOpFunctionsType::a2dB,        "Amplitude to dB");
+        names.put (&UnaryOpFunctionsType::dB2a,        "dB to Amplitude");
+        names.put (&UnaryOpFunctionsType::d2r,         "Degrees to Radians");
+        names.put (&UnaryOpFunctionsType::r2d,         "Radians to Degrees");
+        names.put (&UnaryOpFunctionsType::distort,     "distort");
+        names.put (&UnaryOpFunctionsType::zap,         "zap");
     }
     
 public:
@@ -119,6 +120,7 @@ class UnaryOpChannelInternal
 {
 public:
     typedef typename ChannelInternalCore::Data  Data;
+    typedef typename UnaryOpFunctionsHelper<SampleType>::UnaryOpFunctionsType UnaryOpFunctionsType;
 
     typedef ChannelBase<SampleType>                 ChannelType;
     typedef UnaryOpChannelInternal<SampleType,op>   UnaryOpInternal;
@@ -129,6 +131,7 @@ public:
     typedef NumericalArray<SampleType>              Buffer;
     typedef UnaryOpUtility<SampleType>              UtilityType;
     
+
     UnaryOpChannelInternal (Inputs const& inputs, 
                             Data const& data, 
                             BlockSize const& blockSize,

@@ -57,14 +57,15 @@ class ChannelMixerChannelInternal
 :   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)  Data;
-    typedef ChannelBase<SampleType>                                         ChannelType;
-    typedef ChannelMixerChannelInternal<SampleType>                         ChannelMixerInternal;
-    typedef ChannelInternal<SampleType,Data>                                Internal;
-    typedef ChannelInternalBase<SampleType>                                 InternalBase;
-    typedef UnitBase<SampleType>                                            UnitType;
-    typedef InputDictionary                                                 Inputs;
-    typedef NumericalArray<SampleType>                                      Buffer;
+    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,SampleType)      Data;
+    typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;    
+    typedef ChannelBase<SampleType>                                             ChannelType;
+    typedef ChannelMixerChannelInternal<SampleType>                             ChannelMixerInternal;
+    typedef ChannelInternal<SampleType,Data>                                    Internal;
+    typedef ChannelInternalBase<SampleType>                                     InternalBase;
+    typedef UnitBase<SampleType>                                                UnitType;
+    typedef InputDictionary                                                     Inputs;
+    typedef NumericalArray<SampleType>                                          Buffer;
     
     ChannelMixerChannelInternal (Inputs const& inputs, 
                                  Data const& data, 
@@ -130,11 +131,11 @@ public:
             
             if (inputBufferLength == outputBufferLength)
             {
-                NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);                
+                NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);                
             }
             else if (inputBufferLength == 1)
             {
-                NumericalArrayBinaryOp<SampleType,plonk::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);                
+                NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);                
             }
             else
             {
@@ -175,14 +176,15 @@ class UnitMixerChannelInternal
 :   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType) Data;
-    typedef ChannelBase<SampleType>                                     ChannelType;
-    typedef ObjectArray<ChannelType>                                    ChannelArrayType;
-    typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
-    typedef UnitBase<SampleType>                                        UnitType;
-    typedef InputDictionary                                             Inputs;
-    typedef NumericalArray<SampleType>                                  Buffer;
-    typedef NumericalArray2D<ChannelType,UnitType>                      UnitsType;
+    typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,SampleType)         Data;
+    typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;    
+    typedef ChannelBase<SampleType>                                             ChannelType;
+    typedef ObjectArray<ChannelType>                                            ChannelArrayType;
+    typedef ProxyOwnerChannelInternal<SampleType,Data>                          Internal;
+    typedef UnitBase<SampleType>                                                UnitType;
+    typedef InputDictionary                                                     Inputs;
+    typedef NumericalArray<SampleType>                                          Buffer;
+    typedef NumericalArray2D<ChannelType,UnitType>                              UnitsType;
         
     UnitMixerChannelInternal (Inputs const& inputs, 
                               Data const& data, 
@@ -268,11 +270,11 @@ public:
                     
                     if (inputBufferLength == outputBufferLength)
                     {
-                        NumericalArrayBinaryOp<SampleType,plonk::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);                
+                        NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcNN (outputSamples, outputSamples, inputSamples, outputBufferLength);                
                     }
                     else if (inputBufferLength == 1)
                     {
-                        NumericalArrayBinaryOp<SampleType,plonk::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);                
+                        NumericalArrayBinaryOp<SampleType,BinaryOpFunctionsType::addop>::calcN1 (outputSamples, outputSamples, inputSamples[0], outputBufferLength);                
                     }
                     else
                     {
@@ -305,19 +307,22 @@ class ChannelMixerChannelInternal<float>
 :   public ChannelInternal<float, PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,float)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,float)  Data;
-    typedef ChannelBase<float>                                         ChannelType;
-    typedef ChannelMixerChannelInternal<float>                         ChannelMixerInternal;
-    typedef ChannelInternal<float,Data>                                Internal;
-    typedef ChannelInternalBase<float>                                 InternalBase;
-    typedef UnitBase<float>                                            UnitType;
-    typedef InputDictionary                                            Inputs;
-    typedef NumericalArray<float>                                      Buffer;
+    typedef PLONK_CHANNELDATA_NAME(ChannelMixerChannelInternal,float)   Data;
+    typedef ChannelBase<float>                                          ChannelType;
+    typedef ChannelMixerChannelInternal<float>                          ChannelMixerInternal;
+    typedef ChannelInternal<float,Data>                                 Internal;
+    typedef ChannelInternalBase<float>                                  InternalBase;
+    typedef UnitBase<float>                                             UnitType;
+    typedef InputDictionary                                             Inputs;
+    typedef NumericalArray<float>                                       Buffer;
     
-    typedef BinaryOpChannelInternal<float,plonk::addop>                BinaryOpChannel;
-    typedef typename BinaryOpChannel::Process                          Process;
-    typedef UnaryOpChannelInternal<float,plonk::move>                  UnaryOpChannel;
-    typedef typename UnaryOpChannel::Process                           UnaryProcess;
+    typedef BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType       BinaryOpFunctionsType;    
+    typedef UnaryOpFunctionsHelper<float>::UnaryOpFunctionsType         UnaryOpFunctionsType;    
+
+    typedef BinaryOpChannelInternal<float,BinaryOpFunctionsType::addop> BinaryOpChannel;
+    typedef typename BinaryOpChannel::Process                           Process;
+    typedef UnaryOpChannelInternal<float,UnaryOpFunctionsType::move>    UnaryOpChannel;
+    typedef typename UnaryOpChannel::Process                            UnaryProcess;
     
     ChannelMixerChannelInternal (Inputs const& inputs, 
                                  Data const& data, 
@@ -435,17 +440,18 @@ class UnitMixerChannelInternal<float>
 :   public ProxyOwnerChannelInternal<float, PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,float)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,float) Data;
-    typedef ChannelBase<float>                                     ChannelType;
-    typedef ObjectArray<ChannelType>                               ChannelArrayType;
-    typedef ProxyOwnerChannelInternal<float,Data>                  Internal;
-    typedef UnitBase<float>                                        UnitType;
-    typedef InputDictionary                                        Inputs;
-    typedef NumericalArray<float>                                  Buffer;
-    typedef NumericalArray2D<ChannelType,UnitType>                 UnitsType;
-    
-    typedef BinaryOpChannelInternal<float,plonk::addop>            BinaryOpChannel;
-    typedef typename BinaryOpChannel::Process                      Process;
+    typedef PLONK_CHANNELDATA_NAME(UnitMixerChannelInternal,float)      Data;
+    typedef ChannelBase<float>                                          ChannelType;
+    typedef ObjectArray<ChannelType>                                    ChannelArrayType;
+    typedef ProxyOwnerChannelInternal<float,Data>                       Internal;
+    typedef UnitBase<float>                                             UnitType;
+    typedef InputDictionary                                             Inputs;
+    typedef NumericalArray<float>                                       Buffer;
+    typedef NumericalArray2D<ChannelType,UnitType>                      UnitsType;
+    typedef BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType       BinaryOpFunctionsType;    
+
+    typedef BinaryOpChannelInternal<float,BinaryOpFunctionsType::addop> BinaryOpChannel;
+    typedef typename BinaryOpChannel::Process                           Process;
 
     UnitMixerChannelInternal (Inputs const& inputs, 
                               Data const& data, 

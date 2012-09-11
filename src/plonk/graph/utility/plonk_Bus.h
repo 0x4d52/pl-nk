@@ -52,10 +52,11 @@ class BusBufferInternal : public SmartPointer,
                           public BlockSize::Receiver // what about samplerate changes?
 {
 public:    
-    typedef NumericalArray<SampleType>      Buffer;
-    typedef BusBuffer<SampleType>           BusType;
-    typedef Dictionary<BusType>             BusDictionary;
-    
+    typedef NumericalArray<SampleType>                                          Buffer;
+    typedef BusBuffer<SampleType>                                               BusType;
+    typedef Dictionary<BusType>                                                 BusDictionary;
+    typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;    
+
     BusBufferInternal() throw()
     {
         this->bufferSize.addReceiver(this);
@@ -166,10 +167,10 @@ public:
 
             if (shouldMix)
             {
-                NumericalArrayBinaryOp<SampleType, plonk::addop>::calcNN (bufferSamples + bufferOffsetSamples, 
-                                                                          bufferSamples + bufferOffsetSamples,
-                                                                          sourceData,
-                                                                          samplesThisTime);
+                NumericalArrayBinaryOp<SampleType, BinaryOpFunctionsType::addop>::calcNN (bufferSamples + bufferOffsetSamples, 
+                                                                                          bufferSamples + bufferOffsetSamples,
+                                                                                          sourceData,
+                                                                                          samplesThisTime);
             }
             else             
             {
@@ -178,14 +179,6 @@ public:
                                                       samplesThisTime);
             }
             
-
-//            if (shouldMix)
-//                for (i = 0; i < samplesThisTime; ++i)
-//                    bufferSamples[bufferOffsetSamples + i] += sourceData[i];
-//            else                         
-//                for (i = 0; i < samplesThisTime; ++i)
-//                    bufferSamples[bufferOffsetSamples + i] = sourceData[i];
-
             numSamplesRemaining -= samplesThisTime;
             sourceData += samplesThisTime;
             
