@@ -49,6 +49,8 @@
  @ingroup PlonkUnaryOpFunctions*/
 template<class Type> inline Type abs (Type const& a) throw() { return (a < Math<Type>::get0()) ? -a : a; }
 
+inline float abs  (float const& a) throw() { return pl_AbsF (a); }
+inline double abs  (double const& a) throw() { return pl_AbsD (a); }
 
 // common binary
 

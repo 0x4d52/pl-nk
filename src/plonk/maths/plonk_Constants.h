@@ -106,6 +106,13 @@ public:
     static inline const Type& getSum() throw()              { static const Type v (getSumInternal()); return v; }
     static inline const Type& get1_Sum() throw()            { static const Type v (1.0 / getSumInternal()); return v; }
     
+    static inline const Type& getFibonacciSum() throw()     { static const Type v (getFibonacciInternal<double> (N)); return v; }
+    static inline const Type& getGolden() throw()           
+    { 
+        static const Type v (getFibonacciInternal<double> (N - 1) / getFibonacciInternal<double> (N));
+        return v;
+    }
+    
 private:
     static void check() { plonk_staticassert (N != 0); }
 
@@ -118,6 +125,23 @@ private:
         
         return v;
     }
+    
+    template<class CalcType>
+    static inline const double getFibonacciInternal (const int n) throw() 
+    { 
+        CalcType y0 = 1;
+        CalcType y1 = 1;
+        
+        for (int i = 2; i <= N; ++i)
+        {
+            const CalcType temp = y0 + y1;
+            y1 = y0;
+            y0 = temp;
+        }
+        
+        return y0;
+    }
+
     
     static inline const double getSumInternal() throw() 
     { 

@@ -238,7 +238,7 @@ public:
     inline Fix& operator= (float const& other) throw()          { internal = Fix (other).internal; return *this; }
     inline Fix& operator= (double const& other) throw()         { internal = Fix (other).internal; return *this; }
     inline Fix& operator= (int const& other) throw()            { internal = Fix (other).internal; return *this; }
-    inline Fix& operator= (Internal const& other) throw()       { internal = other; return *this; }
+    inline Fix& operator= (Internal const& other) throw()       { internal = other.internal; return *this; }
     
     template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
     inline Fix& operator= (Fix<BaseOther,IBitsOther,FBitsOther> const& other) throw()
@@ -371,63 +371,6 @@ public:
         return a.sin();
     }
     
-//    inline Fix sin() const throw()            
-//    { 
-//        std::cout << "this = " << *this << std::endl;
-//        
-//        const Fix pi (Math<Fix>::getPi());
-//        std::cout << "pi = " << pi << std::endl;
-//        
-//        const Fix twoPi (Math<Fix>::get2Pi());
-//        std::cout << "twoPi = " << twoPi << std::endl;
-//        
-//        Fix x = modop (twoPi);
-//        std::cout << "mod(this,twoPi) " << x << std::endl;
-//        
-//		if (x > pi)
-//			x -= twoPi;
-//        
-//        std::cout << "wrapped = " << x << std::endl;
-//
-//		const Fix xx = x.squared();  
-//        std::cout << "x * x = " << xx << std::endl;
-//
-//        
-//        const Fix f_7 = Series<Fix,7>::get1_Factorial();
-//        const Fix f_5 = Series<Fix,5>::get1_Factorial();
-//        const Fix f_3 = Series<Fix,3>::get1_Factorial();
-//        
-//        std::cout << "1/f7 = " << f_7 << std::endl;
-//        std::cout << "1/f5 = " << f_5 << std::endl;
-//        std::cout << "1/f3 = " << f_3 << std::endl;
-//        
-//		Fix y = -xx;
-//        std::cout << "-xx = " << y << std::endl;
-//
-//        y *= f_7;
-//        std::cout << "y = " << y << std::endl;
-//        
-//		y += f_5;
-//        std::cout << "y = " << y << std::endl;
-//
-//		y *= xx;
-//        std::cout << "y = " << y << std::endl;
-//
-//		y -= f_3;
-//        std::cout << "y = " << y << std::endl;
-//
-//		y *= xx;
-//        std::cout << "y = " << y << std::endl;
-//
-//		y += Fix::getOne();
-//        std::cout << "y = " << y << std::endl;
-//
-//		y *= x;
-//        std::cout << "y = " << y << std::endl;
-//
-//        return y;
-//    }
-    
     inline Fix sin() const throw()            
     { 
         const Fix pi (Math<Fix>::getPi());        
@@ -478,8 +421,7 @@ public:
     
     inline Fix tan() const throw()            
     { 
-        plonk_assertfalse;
-        return tan (float (*this)); 
+        return  sin().divsat (cos());
     }
 
     friend inline Fix asin (Fix const& a) throw()            
@@ -489,8 +431,12 @@ public:
     
     inline Fix asin() const throw()            
     { 
-        plonk_assertfalse;
-        return asin (float (*this)); 
+        const Fix one = Fix::getOne();
+        
+        if (isGreaterThan (one) || (isLessThan(Math<Fix>::get_1())))
+            return Math<Fix>::get0();
+        
+        return divop ((one - squared()).sqrt()).atan();
     }
     
     friend inline Fix acos (Fix const& a) throw()            
@@ -500,8 +446,7 @@ public:
 
     inline Fix acos() const throw()            
     { 
-        plonk_assertfalse;
-        return acos (float (*this)); 
+        return Math<Fix>::getPi_2() - sin();
     }
 
     friend inline Fix atan (Fix const& a) throw()            
@@ -511,8 +456,7 @@ public:
     
     inline Fix atan() const throw()            
     { 
-        plonk_assertfalse;
-        return atan (float (*this)); 
+        return atan2 (Fix::getOne());
     }
     
     friend inline Fix sinh (Fix const& a) throw()            
@@ -554,13 +498,9 @@ public:
     }
     
     inline Fix sqrt() const throw()            
-    { 
-        const Fix zero (Math<Fix>::get0());
-        
-        Fix x = *this;
-        
-        if (x < zero)
-			return 0;
+    {                 
+        if (internal < 0)
+			return Math<Fix>::get0();;
         
         UnsignedWideBase op = UnsignedWideBase (internal) << (FBits - 1);
         UnsignedWideBase res = 0;		
@@ -841,6 +781,80 @@ public:
         return FixType (Internal ((WideBase (internal) << FBits) / WideBase (b.internal))); 
     }
     
+    friend inline Fix addsat (Fix const& a, Fix const& b) throw()              
+    { 
+        return a.addsat (b); 
+    }
+    
+    inline Fix addsat (Fix const& b) const throw()              
+    { 
+        const Fix result = addop (b);
+        
+        if (internal > 0 && b.internal > 0)
+            return result.internal < 0 ? Fix::getOverflow() : result;
+        else if (internal < 0 && b.internal < 0)
+            return result.internal > 0 ? Fix::getOverflow() : result;
+            
+        return result;
+    }
+    
+    friend inline Fix subsat (Fix const& a, Fix const& b) throw()              
+    { 
+        return a.subsat (b); 
+    }
+    
+    inline Fix subsat (Fix const& b) const throw()              
+    { 
+        const Fix result = subop (b);
+        
+        if (internal > 0 && b.internal < 0)
+            return result.internal < 0 ? Fix::getOverflow() : result;
+        else if (internal < 0 && b.internal > 0)
+            return result.internal > 0 ? Fix::getOverflow() : result;
+        
+        return result;
+    }
+    
+    friend inline Fix mulsat (Fix const& a, Fix const& b) throw()              
+    { 
+        return a.mulsat (b); 
+    }
+    
+    inline Fix mulsat (Fix const& b) const throw()              
+    { 
+        const WideBase product = WideBase (internal) * WideBase (b.internal);
+        const UnsignedBase upper = product >> ((FBits + IBits) * 2 - FBits - 1);
+        
+        if (((product < 0) && ~upper) || upper)
+            return Fix::getOverflow();
+        
+        return Fix (Internal (product >> FBits)); 
+    }
+    
+    friend inline Fix divsat (Fix const& a, Fix const& b) throw()              
+    { 
+        return a.divsat (b); 
+    }
+    
+    inline Fix divsat (Fix const& b) const throw()              
+    { 
+        if (b.internal == 0)
+            return Fix::getOverflow();
+
+        WideBase calc = (WideBase (internal) << FBits) / WideBase (b.internal);
+        
+        if (plonk::abs (internal) > plonk::abs (b.internal))
+        {        
+            const bool aIsPos = internal >= 0;
+            const bool bIsPos = b.internal >= 0;
+            
+            if ((aIsPos == bIsPos) && (calc <= 0))
+                return Fix::getOverflow();
+        }
+        
+        return FixType (Internal (calc)); 
+    }
+    
     friend inline Fix modop (Fix const& a, Fix const& b) throw()              
     { 
         return a.modop (b); 
@@ -889,8 +903,7 @@ public:
 
     inline Fix hypot (Fix const& b) const throw()              
     { 
-        plonk_assertfalse;
-        return hypot (float (*this), float (b)); 
+        return sumsqr (b).sqrt();
     }
     
     friend inline Fix atan2 (Fix const& a, Fix const& b) throw()              
@@ -898,10 +911,77 @@ public:
         return a.atan2 (b); 
     }
 
+    
+//    atan2 alt
+//    {
+//#define PI_FLOAT     3.14159265f
+//#define PIBY2_FLOAT  1.5707963f // pi/2
+//        float fast_atan2f( float y, float x )
+//        {
+//            if ( x == 0.0f )
+//            {
+//                if ( y > 0.0f ) return PIBY2_FLOAT;
+//                if ( y == 0.0f ) return 0.0f;
+//                return -PIBY2_FLOAT;
+//            }
+//            float atan;
+//            float z = y/x;
+//            if ( fabsf( z ) < 1.0f )
+//            {
+//                atan = z/(1.0f + 0.28f*z*z);
+//                if ( x < 0.0f )
+//                {
+//                    if ( y < 0.0f ) return atan - PI_FLOAT;
+//                    return atan + PI_FLOAT;
+//                }
+//            }
+//            else
+//            {
+//                atan = PIBY2_FLOAT - z/(z*z + 0.28f);
+//                if ( y < 0.0f ) return atan - PI_FLOAT;
+//            }
+//            return atan;
+//        }
+//    }
+    
+//    {
+//        static public float atan2_fast (float y, float x) {
+//            // From: http://dspguru.com/comp.dsp/tricks/alg/fxdatan2.htm
+//            float abs_y = y < 0 ? -y : y;
+//            float angle;
+//            if (x >= 0)
+//                angle = 0.7853981633974483f - 0.7853981633974483f * (x - abs_y) / (x + abs_y);
+//            else
+//                angle = 2.356194490192345f - 0.7853981633974483f * (x + abs_y) / (abs_y - x);
+//            return y < 0 ? -angle : angle;
+//        }
+//    }
+     
     inline Fix atan2 (Fix const& b) const throw()              
     { 
-        plonk_assertfalse;
-        return atan2 (float (*this), float (b)); 
+        Fix angle;
+        
+        /* Absolute inY */
+        const Base mask = internal >> (IBits + FBits - 1);
+        const Fix absa (Internal ((internal + mask) ^ mask));
+        
+        if (b.internal >= 0)
+        {
+            Fix r = (b - absa) / (b + absa);
+            Fix rrr = r.cubed();
+            angle = Fix::getAtan2Magic1() * rrr - Fix::getAtan2Magic2() * r + Math<Fix>::getPi_4();
+        } 
+        else 
+        {
+            Fix r = (b + absa) / (absa - b);
+            Fix rrr = r.cubed();
+            angle = Fix::getAtan2Magic1() * rrr - Fix::getAtan2Magic2() * r + Math<Fix>::get3Pi_4();
+        }
+        
+        if (internal < 0)
+            angle = -angle;
+        
+        return angle;
     }
     
     friend inline Fix sumsqr (Fix const& a, Fix const& b) throw()              
@@ -1044,6 +1124,24 @@ public:
         return v;
     }
 
+    inline static const Fix& getOverflow() throw()
+    {
+        static Fix v (getMinimum());
+        return v;
+    }
+    
+    inline static const Fix& getAtan2Magic1() throw()
+    {
+        static Fix v (0.1963);
+        return v;
+    }
+    
+    inline static const Fix& getAtan2Magic2() throw()
+    {
+        static Fix v (0.9817);
+        return v;
+    }
+    
 //    inline static const Fix& getMaximum() throw()
 //    {
 //        static Fix v (Internal (~(Base (1) << (IBits + FBits - 1))));
