@@ -362,8 +362,7 @@ public:
     
     inline Fix log2 () const throw()            
     { 
-        plonk_assertfalse;
-        return log2 (float (*this)); 
+        return log() * Math<Fix>::get1_Log2();
     }
     
     friend inline Fix sin (Fix const& a) throw()            
@@ -531,8 +530,48 @@ public:
     
     inline Fix log() const throw()            
     { 
-        plonk_assertfalse;
-        return log (float (*this)); 
+        if (internal <= 0)
+            return Fix::getMinimum();
+        
+        // Bring the value to the most accurate range (1 < x < 100)
+        const Fix e4 = Math<Fix>::getE4();
+        
+        Fix value = *this;
+        int scaling = 0;
+
+        while (internal > Math<Fix>::get100().internal)
+        {
+            value /= e4;
+            scaling += 4;
+        }
+        
+        while (value < Fix::getOne())
+        {
+            value *= e4;
+            scaling -= 4;
+        }
+        
+        const Fix three = Math<Fix>::get3();
+        Fix guess = Math<Fix>::get2();
+        Fix delta;
+        int count = 0;
+
+        do
+        {
+            // Solving e(x) = y using Newton's method
+            // f(x) = e(x) - y
+            // f'(x) = e(x)
+            Fix e = guess.exp();
+            delta = (value - e) / e;
+            
+            // It's unlikely that logarithm is very large, so avoid overshooting.
+            if (delta > three)
+                delta = three;
+            
+            guess += delta;
+        } while ((count++ < 10) && ((delta.internal > 1) || (delta.internal < -1)));
+        
+        return guess + Fix (scaling);
     }
     
     friend inline Fix log10 (Fix const& a) throw()            
@@ -542,8 +581,7 @@ public:
     
     inline Fix log10() const throw()            
     { 
-        plonk_assertfalse;
-        return log10 (float (*this)); 
+        return log() * Math<Fix>::get1_Log10();
     }
     
     friend inline Fix exp (Fix const& a) throw()            
@@ -576,7 +614,7 @@ public:
         int i;        
         for (i = 2; i < (IBits + FBits - 2); ++i)
         {
-            term *= Fix (Internal (araw)) / Fix  (i);
+            term *= Fix (Internal (araw)) / Fix (i);
             
             const Base rawterm (term.getRaw());
             result += rawterm;
