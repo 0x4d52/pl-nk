@@ -102,29 +102,29 @@ class Series
 {
 public:
     static inline const Type& getFactorial() throw()        { static const Type v (getFactorialInternal()); return v; }
-    static inline const Type& get1_Factorial() throw()      { static const Type v (1.0 / getFactorial()); return v; }
+    static inline const Type& get1_Factorial() throw()      { static const Type v (1.0 / getFactorialInternal()); return v; }
     static inline const Type& getSum() throw()              { static const Type v (getSumInternal()); return v; }
     static inline const Type& get1_Sum() throw()            { static const Type v (1.0 / getSumInternal()); return v; }
     
 private:
     static void check() { plonk_staticassert (N != 0); }
 
-    static inline const Type getFactorialInternal() throw() 
+    static inline const double getFactorialInternal() throw() 
     { 
-        Type v = 1;
+        double v = 1.0;
         
         for (int i = 2; i <= N; ++i)
-            v *= i;
+            v *= double (i);
         
         return v;
     }
     
-    static inline const Type getFactorialInternal() throw() 
+    static inline const double getSumInternal() throw() 
     { 
-        Type v = 1;
+        double v = 1.0;
         
         for (int i = 2; i <= N; ++i)
-            v += i;
+            v += double (i);
         
         return v;
     }

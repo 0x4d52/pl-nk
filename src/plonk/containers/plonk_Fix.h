@@ -332,7 +332,7 @@ public:
     
     inline Fix neg() const throw()              
     { 
-        return Fix  (Internal (-internal)); 
+        return Fix (Internal (-internal)); 
     }
     
     friend inline Fix abs (Fix const& a) throw()            
@@ -371,27 +371,80 @@ public:
         return a.sin();
     }
     
+//    inline Fix sin() const throw()            
+//    { 
+//        std::cout << "this = " << *this << std::endl;
+//        
+//        const Fix pi (Math<Fix>::getPi());
+//        std::cout << "pi = " << pi << std::endl;
+//        
+//        const Fix twoPi (Math<Fix>::get2Pi());
+//        std::cout << "twoPi = " << twoPi << std::endl;
+//        
+//        Fix x = modop (twoPi);
+//        std::cout << "mod(this,twoPi) " << x << std::endl;
+//        
+//		if (x > pi)
+//			x -= twoPi;
+//        
+//        std::cout << "wrapped = " << x << std::endl;
+//
+//		const Fix xx = x.squared();  
+//        std::cout << "x * x = " << xx << std::endl;
+//
+//        
+//        const Fix f_7 = Series<Fix,7>::get1_Factorial();
+//        const Fix f_5 = Series<Fix,5>::get1_Factorial();
+//        const Fix f_3 = Series<Fix,3>::get1_Factorial();
+//        
+//        std::cout << "1/f7 = " << f_7 << std::endl;
+//        std::cout << "1/f5 = " << f_5 << std::endl;
+//        std::cout << "1/f3 = " << f_3 << std::endl;
+//        
+//		Fix y = -xx;
+//        std::cout << "-xx = " << y << std::endl;
+//
+//        y *= f_7;
+//        std::cout << "y = " << y << std::endl;
+//        
+//		y += f_5;
+//        std::cout << "y = " << y << std::endl;
+//
+//		y *= xx;
+//        std::cout << "y = " << y << std::endl;
+//
+//		y -= f_3;
+//        std::cout << "y = " << y << std::endl;
+//
+//		y *= xx;
+//        std::cout << "y = " << y << std::endl;
+//
+//		y += Fix::getOne();
+//        std::cout << "y = " << y << std::endl;
+//
+//		y *= x;
+//        std::cout << "y = " << y << std::endl;
+//
+//        return y;
+//    }
+    
     inline Fix sin() const throw()            
     { 
-        const Fix pi (Math<Fix>::getPi());
+        const Fix pi (Math<Fix>::getPi());        
         const Fix twoPi (Math<Fix>::get2Pi());
         
         Fix x = modop (twoPi);
         
 		if (x > pi)
 			x -= twoPi;
+                
+		const Fix xx = x.squared();          
+        const Fix f_7 = Series<Fix,7>::get1_Factorial();
+        const Fix f_5 = Series<Fix,5>::get1_Factorial();
+        const Fix f_3 = Series<Fix,3>::get1_Factorial();
+        const Fix one = Fix::getOne();
         
-		const Fix xx = x.squared();
-        
-		Fix y = -xx * Series<Fix,7>::get1_Factorial();
-		y += Series<Fix,5>::get1_Factorial();
-		y *= xx;
-		y -= Series<Fix,3>::get1_Factorial();
-		y *= xx;
-		y += Fix::getOne();
-		y *= x;
-        
-        return y;
+        return (((-xx * f_7 + f_5) * xx - f_3) * xx + one) * x;
     }
 
     friend inline Fix cos (Fix const& a) throw()            
@@ -401,8 +454,21 @@ public:
     
     inline Fix cos() const throw()            
     { 
-        plonk_assertfalse;
-        return cos (float (*this)); 
+        const Fix pi (Math<Fix>::getPi());        
+        const Fix twoPi (Math<Fix>::get2Pi());
+        
+        Fix x = modop (twoPi);
+        
+		if (x > pi)
+			x -= twoPi;
+        
+		const Fix xx = x.squared();          
+        const Fix f_6 = Series<Fix,6>::get1_Factorial();
+        const Fix f_4 = Series<Fix,4>::get1_Factorial();
+        const Fix f_2 = Series<Fix,2>::get1_Factorial();
+        const Fix one = Fix::getOne();
+        
+        return ((-xx * f_6 + f_4) * xx - f_2) * xx + one;
     }
     
     friend inline Fix tan (Fix const& a) throw()            
@@ -489,8 +555,33 @@ public:
     
     inline Fix sqrt() const throw()            
     { 
-        plonk_assertfalse;
-        return sqrt (float (*this)); 
+        const Fix zero (Math<Fix>::get0());
+        
+        Fix x = *this;
+        
+        if (x < zero)
+			return 0;
+        
+        UnsignedWideBase op = UnsignedWideBase (internal) << (FBits - 1);
+        UnsignedWideBase res = 0;		
+        UnsignedWideBase one = UnsignedWideBase (1) << ((FBits + IBits) * 2 - 1);
+         
+		while (one > op)
+			one >>= 2;
+        
+		while (one != 0)
+		{
+			if (op >= (res + one))
+			{
+				op = op - (res + one);
+				res = res + (one << 1);
+			}
+            
+			res >>= 1;
+			one >>= 2;
+		}
+        
+		return Fix (Internal (Base (res)));
     }
     
     friend inline Fix log (Fix const& a) throw()            
