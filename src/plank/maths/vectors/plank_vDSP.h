@@ -1019,10 +1019,142 @@ PLANK_VECTORCONVERTROUNDD_DEFINE(S)
 PLANK_VECTORCONVERTROUNDD_DEFINE(LL)
 
 
-
+// short
 PLANK_VECTOR_OPS_COMMON(S)
-PLANK_VECTOR_OPS_COMMON(I)
-//PLANK_VECTOR_OPS_COMMON(LL)
+
+// int
+PLANK_VECTORFILL_DEFINE(I)
+PLANK_VECTORCLEAR_DEFINE(I)
+PLANK_VECTORRAMP_DEFINE(I)
+PLANK_VECTORLINE_DEFINE(I)
+
+PLANK_VECTORUNARYOP_DEFINE(Move,I)
+PLANK_VECTORUNARYOP_DEFINE(Inc,I)
+PLANK_VECTORUNARYOP_DEFINE(Dec,I)
+PLANK_VECTORUNARYOP_DEFINE(Neg,I)
+PLANK_VECTORUNARYOP_DEFINE(Abs,I)
+PLANK_VECTORUNARYOP_DEFINE(Squared,I)
+PLANK_VECTORUNARYOP_DEFINE(Cubed,I)
+PLANK_VECTORUNARYOP_DEFINE(Sign,I)
+
+static inline void pl_VectorAddI_NNN (int *result, const int* a, const int* b, PlankUL N) 
+{ 
+    PlankUL vN, Nr, i;
+    PlankVI* vResult;
+    PlankVI* vA;
+    PlankVI* vB;
+    
+    vN = N >> PLANK_SIMDI_SHIFT;
+    Nr = N & PLANK_SIMDI_MASK;
+    
+    vResult = (PlankVI*)result;
+    vA = (PlankVI*)a;
+    vB = (PlankVI*)b;
+    
+    for (i = 0; i < vN; ++i)
+        *vResult++ = *vA++ + *vB++;
+    
+    if (Nr)
+    {
+        result = (int*)vResult;
+        a = (int*)vA;
+        b = (int*)vB;
+        
+        for (i = 0; i < Nr; ++i)
+            *result++ = *a++ + *b++;
+    }
+}
+
+static inline void pl_VectorAddI_NN1 (int *result, const int* a, int b, PlankUL N)        
+{ 
+    PlankVI vB;
+    PlankUL vN, Nr, i;
+    PlankVI* vResult;
+    PlankVI* vA;
+    
+    vN = N >> PLANK_SIMDI_SHIFT;
+    Nr = N & PLANK_SIMDI_MASK;
+    
+    vResult = (PlankVI*)result;
+    vA = (PlankVI*)a;
+    
+    for (i = 0; i < PLANK_SIMDI_LENGTH; ++i)
+        ((int*)&vB)[i] = b;
+    
+    for (i = 0; i < vN; ++i)
+        *vResult++ = *vA++ + vB;
+    
+    if (Nr)
+    {
+        result = (int*)vResult;
+        a = (int*)vA;
+        
+        for (i = 0; i < Nr; ++i)
+            *result++ = *a++ + b;
+    }
+}
+
+static inline void pl_VectorAddI_N1N (int *result, int a, const int* b, PlankUL N)        
+{ 
+    PlankVI vA;
+    PlankUL vN, Nr, i;
+    PlankVI* vResult;
+    PlankVI* vB;
+    
+    vN = N >> PLANK_SIMDI_SHIFT;
+    Nr = N & PLANK_SIMDI_MASK;
+    
+    vResult = (PlankVI*)result;
+    vB = (PlankVI*)b;
+    
+    for (i = 0; i < PLANK_SIMDI_LENGTH; ++i)
+        ((int*)&vA)[i] = a;
+    
+    for (i = 0; i < vN; ++i)
+        *vResult++ = vA + *vB++;
+    
+    if (Nr)
+    {
+        result = (int*)vResult;
+        b = (int*)vB;
+        
+        for (i = 0; i < Nr; ++i)
+            *result++ = a + *b++;
+    }
+}
+
+
+PLANK_VECTORBINARYOP_DEFINE(Sub,I)
+PLANK_VECTORBINARYOP_DEFINE(Mul,I)
+PLANK_VECTORBINARYOP_DEFINE(Div,I)
+PLANK_VECTORBINARYOP_DEFINE(Mod,I)
+PLANK_VECTORBINARYOP_DEFINE(Min,I)
+PLANK_VECTORBINARYOP_DEFINE(Max,I)
+
+PLANK_VECTORBINARYOP_DEFINE(IsEqualTo,I)
+PLANK_VECTORBINARYOP_DEFINE(IsNotEqualTo,I)
+PLANK_VECTORBINARYOP_DEFINE(IsGreaterThan,I)
+PLANK_VECTORBINARYOP_DEFINE(IsGreaterThanOrEqualTo,I)
+PLANK_VECTORBINARYOP_DEFINE(IsLessThan,I)
+PLANK_VECTORBINARYOP_DEFINE(IsLessThanOrEqualTo,I)
+
+PLANK_VECTORBINARYOP_DEFINE(SumSqr,I)
+PLANK_VECTORBINARYOP_DEFINE(DifSqr,I)
+PLANK_VECTORBINARYOP_DEFINE(SqrSum,I)
+PLANK_VECTORBINARYOP_DEFINE(SqrDif,I)
+PLANK_VECTORBINARYOP_DEFINE(AbsDif,I)
+PLANK_VECTORBINARYOP_DEFINE(Thresh,I)
+
+PLANK_VECTORMULADD_DEFINE(I)
+PLANK_VECTORMULADDINPLACE_DEFINE(I)
+PLANK_VECTORMULSCALARADD_DEFINE(I)
+PLANK_VECTORSCALARMULSCALARADD_DEFINE(I)
+PLANK_VECTORSCALARMULADD_DEFINE(I)
+
+PLANK_VECTORLOOKUP_DEFINE(I)
+
+// longlong
+PLANK_VECTOR_OPS_COMMON(LL)
 
 
 
