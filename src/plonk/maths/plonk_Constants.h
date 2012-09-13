@@ -86,7 +86,7 @@ public:
     static inline const Type& get1_Sqrt2() throw()    { static const Type v (1.0 / Math<double>::getSqrt2()); return v; }
     static inline const Type& getSqrt2_2() throw()    { static const Type v (Math<double>::getSqrt2() * 0.5); return v; }
     static inline const Type& getSqrt2_1() throw()    { static const Type v (Math<double>::getSqrt2() - 1.0); return v; }
-    
+
     static inline const Type& getLogSqrt2() throw()   { static const Type v (std::log (Math<double>::getSqrt2())); return v; }
     static inline const Type& getE() throw()          { static const Type v (std::exp (1.0)); return v; }
     static inline const Type& getE4() throw()         { static const Type v (std::exp (1.0) * std::exp (1.0) * std::exp (1.0) * std::exp (1.0)); return v; }
@@ -121,8 +121,10 @@ public:
     }
     
 private:
+#if PLONK_DEBUG
     static void checkN() { plonk_staticassert (N != 0); }
-
+#endif
+    
     static inline const double getFactorialInternal() throw() 
     { 
         double v = 1.0;

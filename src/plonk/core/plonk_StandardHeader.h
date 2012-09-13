@@ -156,10 +156,14 @@
  plonk headers is not a C++ file. To make an Obj-C file (.m) 
  an Obj-C++ file use .mm as the file extension. */
 BEGIN_PLONK_NAMESPACE
-
 template <bool x> struct PlonkStaticAssertUtility;
-template <> struct PlonkStaticAssertUtility<true> { static void plonkStaticAssertionFailure() {} };
-#define plonk_staticassert(x) plonk::PlonkStaticAssertUtility<x>::plonkStaticAssertionFailure();
+template <> struct PlonkStaticAssertUtility<true> { static inline void plonkStaticAssertionFailure() {} };
+
+#ifdef PLONK_DEBUG
+    #define plonk_staticassert(x) plonk::PlonkStaticAssertUtility<x>::plonkStaticAssertionFailure();
+#else
+    #define plonk_staticassert(x) { }
+#endif
 
 typedef PlankResult ResultCode;
 

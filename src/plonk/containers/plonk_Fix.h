@@ -148,17 +148,24 @@ public:
     :   internal (Base (convert (other) << (FBits - FBitsOther)))
     {
     }
-            
+          
+#if PLONK_DEBUG
     inline ~Fix()
     {
         plonk_staticassert (IBits != 0);
         plonk_staticassert (FBits != 0);
         plonk_staticassert ((sizeof (Base) * 8) == (IBits + FBits));
     }
-
+#endif
+    
     inline operator int () const throw()
     {
         return internal >> FBits;
+    }
+    
+    inline operator bool () const throw()
+    {
+        return internal;
     }
     
     inline int toInt() const throw()
@@ -185,7 +192,7 @@ public:
     {
         return double (internal) / getOneDouble();
     }
-    
+        
     template<class BaseOther, unsigned IBitsOther, unsigned FBitsOther>
     inline operator Fix<BaseOther,IBitsOther,FBitsOther> () const throw()
     {
@@ -360,9 +367,33 @@ public:
         return a.log2();
     }
     
-    inline Fix log2 () const throw()            
-    { 
-        return log() * Math<Fix>::get1_Log2();
+//    inline Fix log2 () const throw()            
+//    { 
+//        return log() * Math<Fix>::get1_Log2();
+//    }
+
+    inline Fix log2() const throw()            
+    {
+        // Note that a negative x gives a non-real result.
+        // If x == 0, the limit of log2(x)  as x -> 0 = -infinity.
+        // log2(-ve) gives a complex result.
+        if (internal <= 0) 
+            return Fix::getOverflow();
+        
+        // If the input is less than one, the result is -log2(1.0 / in)
+        if (isLessThan (Fix::getOne()))
+        {
+            // Note that the inverse of this would overflow.
+            // This is the exact answer for log2(1.0 / (1<<FBits))
+            if (internal == 1) 
+                return Fix (Internal (-FBits));
+                
+            return -log2Internal (reciprocal());
+        }
+        
+        // If input >= 1, just proceed as normal.
+        // Note that x == fix16_one is a special case, where the answer is 0.
+        return log2Internal (*this);
     }
     
     friend inline Fix sin (Fix const& a) throw()            
@@ -465,8 +496,8 @@ public:
     
     inline Fix sinh() const throw()            
     { 
-        plonk_assertfalse;
-        return sinh (float (*this)); 
+        const Fix e = exp();
+        return (e - e.reciprocal()) >> 1;
     }
     
     friend inline Fix cosh (Fix const& a) throw()            
@@ -476,8 +507,8 @@ public:
     
     inline Fix cosh() const throw()            
     { 
-        plonk_assertfalse;
-        return cosh (float (*this)); 
+        const Fix e = exp();
+        return (e + e.reciprocal()) >> 1;
     }
     
     friend inline Fix tanh (Fix const& a) throw()            
@@ -487,8 +518,9 @@ public:
     
     inline Fix tanh() const throw()            
     { 
-        plonk_assertfalse;
-        return tanh (float (*this)); 
+        const Fix e = exp();
+        const Fix ne = e.reciprocal();
+        return (e - ne) / (e + ne);
     }
 
     friend inline Fix sqrt (Fix const& a) throw()            
@@ -697,8 +729,7 @@ public:
     
     inline Fix m2f() const throw()            
     { 
-        plonk_assertfalse;
-        return m2f (float (*this)); 
+        return Math<Fix>::get440() * ((subop (69) / Math<Fix>::get12()) * Math<Fix>::getLog2()).exp();
     }
     
     friend inline Fix f2m (Fix const& a) throw()            
@@ -708,8 +739,7 @@ public:
     
     inline Fix f2m() const throw()            
     { 
-        plonk_assertfalse;
-        return f2m (float (*this)); 
+        return mulop (Math<Fix>::get1_440()).log2() * Math<Fix>::get12() + Math<Fix>::get69();
     }
     
     friend inline Fix a2dB (Fix const& a) throw()            
@@ -930,8 +960,7 @@ public:
 
     inline Fix pow (Fix const& b) const throw()              
     { 
-        plonk_assertfalse;
-        return pow (float (*this), float (b)); 
+        return (b * log()).exp();
     }
     
     friend inline Fix hypot (Fix const& a, Fix const& b) throw()              
@@ -948,58 +977,11 @@ public:
     { 
         return a.atan2 (b); 
     }
-
-    
-//    atan2 alt
-//    {
-//#define PI_FLOAT     3.14159265f
-//#define PIBY2_FLOAT  1.5707963f // pi/2
-//        float fast_atan2f( float y, float x )
-//        {
-//            if ( x == 0.0f )
-//            {
-//                if ( y > 0.0f ) return PIBY2_FLOAT;
-//                if ( y == 0.0f ) return 0.0f;
-//                return -PIBY2_FLOAT;
-//            }
-//            float atan;
-//            float z = y/x;
-//            if ( fabsf( z ) < 1.0f )
-//            {
-//                atan = z/(1.0f + 0.28f*z*z);
-//                if ( x < 0.0f )
-//                {
-//                    if ( y < 0.0f ) return atan - PI_FLOAT;
-//                    return atan + PI_FLOAT;
-//                }
-//            }
-//            else
-//            {
-//                atan = PIBY2_FLOAT - z/(z*z + 0.28f);
-//                if ( y < 0.0f ) return atan - PI_FLOAT;
-//            }
-//            return atan;
-//        }
-//    }
-    
-//    {
-//        static public float atan2_fast (float y, float x) {
-//            // From: http://dspguru.com/comp.dsp/tricks/alg/fxdatan2.htm
-//            float abs_y = y < 0 ? -y : y;
-//            float angle;
-//            if (x >= 0)
-//                angle = 0.7853981633974483f - 0.7853981633974483f * (x - abs_y) / (x + abs_y);
-//            else
-//                angle = 2.356194490192345f - 0.7853981633974483f * (x + abs_y) / (abs_y - x);
-//            return y < 0 ? -angle : angle;
-//        }
-//    }
      
     inline Fix atan2 (Fix const& b) const throw()              
     { 
         Fix angle;
         
-        /* Absolute inY */
         const Base mask = internal >> (IBits + FBits - 1);
         const Fix absa (Internal ((internal + mask) ^ mask));
         
@@ -1029,7 +1011,7 @@ public:
 
     inline Fix sumsqr (Fix const& b) const throw()              
     { 
-        return squared (*this) + squared (b); 
+        return squared() + b.squared(); 
     }
     
     friend inline Fix difsqr (Fix const& a, Fix const& b) throw()              
@@ -1039,7 +1021,7 @@ public:
     
     inline Fix difsqr (Fix const& b) const throw()              
     { 
-        return squared (*this) - squared (b); 
+        return squared() - b.squared(); 
     }
     
     friend inline Fix sqrsum (Fix const& a, Fix const& b) throw()              
@@ -1049,7 +1031,7 @@ public:
     
     inline Fix sqrsum (Fix const& b) const throw()              
     { 
-        return addop (*this, b).squared();
+        return addop (b).squared();
     }
     
     friend inline Fix sqrdif (Fix const& a, Fix const& b) throw()              
@@ -1059,7 +1041,7 @@ public:
     
     inline Fix sqrdif (Fix const& b) const throw()              
     { 
-        return subop (*this, b).squared();
+        return subop (b).squared();
     }
     
     friend inline Fix absdif (Fix const& a, Fix const& b) throw()              
@@ -1069,7 +1051,7 @@ public:
 
     inline Fix absdif (Fix const& b) const throw()              
     { 
-        return subop (*this, b).abs();
+        return subop (b).abs();
     }
     
     friend inline Fix thresh (Fix const& a, Fix const& b) throw()              
@@ -1158,7 +1140,7 @@ public:
 
     inline static const Fix& getMaximum() throw()
     {
-        static Fix v (Internal (~getMinimum().internal));
+        static Fix v (Internal (~(getMinimum().internal)));
         return v;
     }
 
@@ -1179,13 +1161,7 @@ public:
         static Fix v (0.9817);
         return v;
     }
-    
-//    inline static const Fix& getMaximum() throw()
-//    {
-//        static Fix v (Internal (~(Base (1) << (IBits + FBits - 1))));
-//        return v;
-//    }
-    
+        
     inline static const Base& getIMask() throw()
     {
         static Base v (getIMaskInternal()); // getIMaskInternal() is slow but only happens once at init
@@ -1250,6 +1226,37 @@ private:
         return v;
     }
 
+    static Fix log2Internal (Fix const& a) throw()
+    {
+        const Fix two (Math<Fix>::get2());
+        Fix x = a;
+        Fix result = 0;
+        
+        while (x.internal >= two.internal)
+        {
+            result.internal++;
+            x.internal >>= 1;
+        }
+        
+        if (x.internal == 0) 
+            return Fix (Internal (result.internal << 16));
+        
+        for(int i = 16; i > 0; --i)
+        {
+            x *= x;
+            result.internal <<= 1;
+            
+            if (x.internal >= two.internal)
+            {
+                result.internal |= 1;
+                x.internal >>= 1;
+            }
+        }
+        
+        return result;
+    }
+
+    
     /** Converts to a wider/narrower word depending on the conversion. */
     template<class OtherFixType>
     static inline typename FixBaseConvert<Base,typename OtherFixType::BaseType>::ConvertBase convert (OtherFixType const& other) throw()
