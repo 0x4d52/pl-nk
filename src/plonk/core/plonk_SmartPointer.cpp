@@ -148,8 +148,7 @@ void PlonkBase::operator delete[] (void* ptr)
 }
 
 SmartPointer::SmartPointer (const bool allocateWeakPointer) throw()
-:	counter (0),
-    weakPointer (0)
+:	counter (0), weakPointer (0)
 {		
     counter = new SmartPointerCounter (this);
     
@@ -205,6 +204,7 @@ void SmartPointer::decrementRefCount()  throw()
 void* SmartPointer::getWeak() const throw()               
 { 
     return weakPointer.getPtrUnchecked(); 
+//    return counter->getSmartPointer();
 }
 
 int SmartPointer::getRefCount() const throw()            

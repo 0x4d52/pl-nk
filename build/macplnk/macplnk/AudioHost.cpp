@@ -51,7 +51,7 @@ AudioHost::~AudioHost()
 Unit AudioHost::constructGraph()
 {    
     // src is a UnitVariable, the Patch is set up to received new sources
-    // via this but crossfades
+    // via this but crossfades between old and new sources
     return Patch::ar (src, false, 2, 0.5);    
 }
 

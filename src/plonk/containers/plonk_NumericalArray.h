@@ -1549,7 +1549,7 @@ public:
                 result = array[0];
             
             for (int i = 1; i < length; ++i)
-                result = BinaryOpFunctionsType::max (result, BinaryOpFunctionsType::abs (array[i]));
+                result = BinaryOpFunctionsType::max (result, UnaryOpFunctionsType::abs (array[i]));
 		}		
         
         return result;
@@ -1643,7 +1643,7 @@ public:
             
             if (maximum > NumericalType (0))
             {
-                const NumericalType factor = BinaryOpFunctionsType::reciprocal (maximum);
+                const NumericalType factor = UnaryOpFunctionsType::reciprocal (maximum);
                 const int size = this->size();
                 
                 for (int i = 0; i < size; ++i)
