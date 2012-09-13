@@ -79,7 +79,7 @@ PlankResult pl_ThreadYield()
 #if PLANK_APPLE
     sched_yield();
 #elif PLANK_WIN    
-    Sleep (0;
+    Sleep (0);
 #endif
     return PlankResult_OK;
 }

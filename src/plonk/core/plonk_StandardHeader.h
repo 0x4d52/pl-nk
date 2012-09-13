@@ -83,6 +83,7 @@
     #define PLONK_WORDBITS 32
     #define PLONK_HALFWORDBITS 16
     #define PLONK_WORDSIZE 4
+	#define PLONK_WIDESIZE 8
 #endif
 
 #if PLANK_64BIT
@@ -90,6 +91,7 @@
     #define PLONK_WORDBITS 64
     #define PLONK_HALFWORDBITS 32
     #define PLONK_WORDSIZE 8
+	#define PLONK_WIDESIZE 16
 #endif
 
 #define PLONK_ALIGN(X) PLANK_ALIGN(X)

@@ -355,7 +355,7 @@ public:
     template<class DstType>
     static inline void convertScaled (DstType* const dst, const float* const src, const UnsignedLong numItems) throw()
     {
-        PLANK_ALIGN (PLANK_SIMDF_LENGTH * sizeof(float)) 
+        PLANK_ALIGN (PLANK_SIMDF_SIZE) 
         float temp[PLANK_SIMDF_LENGTH];
         
         const float factor = TypeUtility<DstType>::getTypePeak();
@@ -391,7 +391,7 @@ public:
     template<class DstType>
     static inline void convertScaled (DstType* const dst, const double* const src, const UnsignedLong numItems) throw()
     {
-        PLANK_ALIGN (PLANK_SIMDD_LENGTH * sizeof(double)) 
+        PLANK_ALIGN (PLANK_SIMDD_SIZE) 
         double temp[PLANK_SIMDD_LENGTH];
         
         const double factor = TypeUtility<DstType>::getTypePeak();

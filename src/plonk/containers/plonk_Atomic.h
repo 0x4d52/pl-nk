@@ -89,7 +89,7 @@ class AtomicExtended : public AtomicBase<Type>
 };
 
 
-#define PLONK_ATOMIC_DEFINE(ATOMIC_CLASS,TYPECODE,FUNCCODE,NUMCODE) \
+#define PLONK_ATOMIC_DEFINE(ATOMIC_CLASS,TYPECODE,FUNCCODE,NUMCODE,ALIGN) \
     template<>\
     class ATOMIC_CLASS<Plank##TYPECODE> : public AtomicBase<Plank##TYPECODE>\
     {\
@@ -160,14 +160,14 @@ class AtomicExtended : public AtomicBase<Type>
         inline const Plank##TYPECODE operator++ (int) throw() { const Plank##TYPECODE oldValue = pl_Atomic##FUNCCODE##_Get (getAtomicRef()); ++(*this); return oldValue; }\
         inline const Plank##TYPECODE operator-- (int) throw() { const Plank##TYPECODE oldValue = pl_Atomic##FUNCCODE##_Get (getAtomicRef()); --(*this); return oldValue; }\
         \
-        template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == other; }\
-        template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != other; }\
-        template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  other; }\
-        template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= other; }\
-        template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  other; }\
-        template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= other; }\
+        template<class OtherType> bool operator== (OtherType const& other) const throw() { return this->getValueUnchecked() == Plank##TYPECODE (other); }\
+        template<class OtherType> bool operator!= (OtherType const& other) const throw() { return this->getValueUnchecked() != Plank##TYPECODE (other); }\
+        template<class OtherType> bool operator<  (OtherType const& other) const throw() { return this->getValueUnchecked() <  Plank##TYPECODE (other); }\
+        template<class OtherType> bool operator<= (OtherType const& other) const throw() { return this->getValueUnchecked() <= Plank##TYPECODE (other); }\
+        template<class OtherType> bool operator>  (OtherType const& other) const throw() { return this->getValueUnchecked() >  Plank##TYPECODE (other); }\
+        template<class OtherType> bool operator>= (OtherType const& other) const throw() { return this->getValueUnchecked() >= Plank##TYPECODE (other); }\
         \
-        inline const void setIfLarger (const Plank##NUMCODE newValue) throw()\
+        inline const void setIfLarger (const Plank##TYPECODE newValue) throw()\
         {\
             Plank##TYPECODE oldValue;\
             bool success;\
@@ -177,7 +177,7 @@ class AtomicExtended : public AtomicBase<Type>
             } while (!success);\
         }\
         \
-        inline const void setIfSmaller (const Plank##NUMCODE newValue) throw()\
+        inline const void setIfSmaller (const Plank##TYPECODE newValue) throw()\
         {\
             Plank##TYPECODE oldValue;\
             bool success;\
@@ -191,24 +191,24 @@ class AtomicExtended : public AtomicBase<Type>
         inline const AtomTypeRef getAtomicRef() const { return const_cast<AtomTypeRef> (&atomic); }\
     private:\
         \
-        PLONK_ALIGN(sizeof(AtomType))\
+        PLONK_ALIGN(ALIGN)\
         AtomType atomic;\
     };
 
-#define PLONK_ATOMIC_DEFINE_SIMPLE(TYPECODE) PLONK_ATOMIC_DEFINE(AtomicValue,TYPECODE,TYPECODE,TYPECODE)
+#define PLONK_ATOMIC_DEFINE_SIMPLE(TYPECODE,ALIGN) PLONK_ATOMIC_DEFINE(AtomicValue,TYPECODE,TYPECODE,TYPECODE,ALIGN)
 
-PLONK_ATOMIC_DEFINE_SIMPLE(I);
-PLONK_ATOMIC_DEFINE(AtomicValue,UI,I,I);
-PLONK_ATOMIC_DEFINE_SIMPLE(L);
-PLONK_ATOMIC_DEFINE(AtomicValue,UL,L,L);
+PLONK_ATOMIC_DEFINE_SIMPLE(I,4);
+PLONK_ATOMIC_DEFINE(AtomicValue,UI,I,I,4);
+PLONK_ATOMIC_DEFINE_SIMPLE(L,PLONK_WORDSIZE);
+PLONK_ATOMIC_DEFINE(AtomicValue,UL,L,L,PLONK_WORDSIZE);
 
 #if !(PLANK_WIN && PLANK_64BIT) || DOXYGEN
-PLONK_ATOMIC_DEFINE_SIMPLE(LL);
-PLONK_ATOMIC_DEFINE(AtomicValue,ULL,LL,LL);
+PLONK_ATOMIC_DEFINE_SIMPLE(LL,8);
+PLONK_ATOMIC_DEFINE(AtomicValue,ULL,LL,LL,8);
 #endif
 
-PLONK_ATOMIC_DEFINE_SIMPLE(F);
-PLONK_ATOMIC_DEFINE_SIMPLE(D);
+PLONK_ATOMIC_DEFINE_SIMPLE(F,4);
+PLONK_ATOMIC_DEFINE_SIMPLE(D,8);
 
 template<class Type>
 class AtomicValue<Type*> : public AtomicBase<Type*>
@@ -366,7 +366,7 @@ private:
         Type* ptr;
     };
     
-    PLONK_ALIGN(sizeof(PlankAtomicP)) Union u;
+    PLONK_ALIGN(PLONK_WORDSIZE) Union u;
 };
 
 template<>
@@ -504,7 +504,7 @@ public:
     inline const PlankAtomicPRef getAtomicRef() const { return const_cast<PlankAtomicPRef> (&atomic); }
    
 private:
-    PLONK_ALIGN(sizeof(PlankAtomicP)) 
+    PLONK_ALIGN(PLONK_WORDSIZE) 
     PlankAtomicP atomic;
 };
 
@@ -701,7 +701,7 @@ private:
         Debug debug;
     };
 
-    PLONK_ALIGN(sizeof(PlankAtomicPX)) Union u;
+    PLONK_ALIGN(PLONK_WIDESIZE) Union u;
 };
 
 
@@ -839,7 +839,7 @@ public:
     inline const PlankAtomicLXRef getAtomicRef() const { return const_cast<PlankAtomicLXRef> (&atomic); }
     
 private:
-    PLONK_ALIGN(sizeof(PlankAtomicLX)) 
+    PLONK_ALIGN(PLONK_WIDESIZE) 
     PlankAtomicLX atomic;
 };
 
@@ -1027,7 +1027,7 @@ public:
     }
     
 private:    
-    AtomicValue<Long> atom;
+    AtomicValue<LongLong> atom;
     
     struct Separate
     {
