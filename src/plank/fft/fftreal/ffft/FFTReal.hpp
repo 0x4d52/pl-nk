@@ -364,7 +364,7 @@ void	FFTReal <DT>::init_trigo_lut ()
 
 			for (long i = 0; i < level_len; ++ i)
 			{
-				level_ptr [i] = static_cast <DataType> (cos (i * mul));
+				level_ptr [i] = static_cast <DataType> (::cos (i * mul));
 			}
 		}
 	}

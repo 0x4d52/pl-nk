@@ -62,6 +62,8 @@ public:
         Unknown, Dynamic,
     // built-in types (2)
         Float, Double, Int, Short, Int24, Long, LongLong, Char, Bool,
+    // fixed point types
+        FixI8F8, FixI8F24, FixI16F16,
     // atomic types (11)    
         AtomicFloat, AtomicDouble, 
         AtomicInt, AtomicLong, AtomicLongLong, AtomicPointer, AtomicExtendedPointer, AtomicDynamicPointer,
@@ -126,6 +128,8 @@ public:
             "Unknown", "Dynamic",
             
             "Float", "Double", "Int", "Short", "Int24", "Long", "LongLong", "Char", "Bool",
+            
+            "FixI8F8", "FixI8F24", "FixI16F16",
             
             "AtomicFloat", "AtomicDouble", 
             "AtomicInt", "AtomicLong", "AtomicLongLong", "AtomicPointer", "AtomicExtendedPointer", "AtomicDynamicPointer",
@@ -192,6 +196,7 @@ public:
         static const plonk::LongLong peaks[] = {
             0, 0, // invalid
             1, 1, INT_MAX, SHRT_MAX, PLONK_INT24_MAX, LONG_MAX, LONG_LONG_MAX, CHAR_MAX, 1, // built-ins
+            1, 1, 1, // fixeds
             1, 1, INT_MAX, LONG_MAX, LONG_LONG_MAX, // atomics
         };
         
@@ -208,6 +213,7 @@ public:
         static const double epsilons[] = {
             0, 0, // invalid
             FLT_MIN, DBL_MIN, 1, 1, 1, 1, 1, 1, 1, // built-ins
+            1.0 / (1 << 8), 1.0 / (1 << 24), 1.0 / (1 << 16), 
             FLT_MIN, DBL_MIN, 1, 1, 1 // atomics
         };
         
@@ -222,6 +228,7 @@ public:
     static inline bool isDynamic (const int code) throw()           { return (code == TypeCode::Dynamic); }
     
     static inline bool isBuiltIn (const int code) throw()           { return (code >= TypeCode::Float) && (code <= TypeCode::Bool) && code != TypeCode::Int24; }
+    static inline bool isFixed (const int code) throw()             { return (code >= TypeCode::FixI8F8) && (code <= TypeCode::FixI16F16); }
     static inline bool isAtomic (const int code) throw()            { return (code >= TypeCode::AtomicFloat) && (code <= TypeCode::AtomicDynamicPointer); }
     static inline bool isVariable (const int code) throw()          { return (code >= TypeCode::FloatVariable) && (code <= TypeCode::BoolVariable); }
     static inline bool isAtomicVariable (const int code) throw()    { return (code >= TypeCode::AtomicFloatVariable) && (code <= TypeCode::AtomicDynamicPointerVariable); } 
@@ -496,6 +503,48 @@ public:
     typedef float           IndexType;
     static inline int  getTypeCode() { return TypeCode::Bool; }
     static inline const OriginalType& getNull() { static OriginalType null (0); return null; }
+};
+
+template<>
+class TypeUtilityBase<FixI8F8>
+{
+public:
+    typedef FixI8F8           TypeName;
+    typedef FixI8F8           PeakType;
+    typedef FixI8F8           ScaleType;
+    typedef FixI8F8           OriginalType;
+    typedef FixI8F8           PassType;
+    typedef FixI8F8           IndexType;
+    static inline int getTypeCode() { return TypeCode::FixI8F8; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FixI8F24>
+{
+public:
+    typedef FixI8F24           TypeName;
+    typedef FixI8F24           PeakType;
+    typedef FixI8F24           ScaleType;
+    typedef FixI8F24           OriginalType;
+    typedef FixI8F24           PassType;
+    typedef FixI8F24           IndexType;
+    static inline int getTypeCode() { return TypeCode::FixI8F24; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+};
+
+template<>
+class TypeUtilityBase<FixI16F16>
+{
+public:
+    typedef FixI16F16           TypeName;
+    typedef FixI16F16           PeakType;
+    typedef FixI16F16           ScaleType;
+    typedef FixI16F16           OriginalType;
+    typedef FixI16F16           PassType;
+    typedef FixI16F16           IndexType;
+    static inline int getTypeCode() { return TypeCode::FixI8F24; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
 };
 
 template<>

@@ -123,6 +123,11 @@ public:
     {
     }
     
+    inline Fix (LongLong const& value) throw()
+    :   internal (value * getOne().internal)
+    {
+    }
+    
     inline Fix (const float value) throw()
     :   internal (value * getOneFloat())
     {
@@ -158,14 +163,14 @@ public:
     }
 #endif
     
-    inline operator int () const throw()
-    {
-        return internal >> FBits;
-    }
-    
     inline operator bool () const throw()
     {
         return internal;
+    }
+    
+    inline operator int () const throw()
+    {
+        return internal >> FBits;
     }
     
     inline int toInt() const throw()
@@ -173,6 +178,16 @@ public:
         return internal >> FBits;
     }
 
+    inline operator LongLong () const throw()
+    {
+        return internal >> FBits;
+    }
+    
+    inline int toLongLong() const throw()
+    {
+        return internal >> FBits;
+    }
+    
     inline operator float () const throw()
     {
         return float (internal) / getOneFloat();
@@ -1135,6 +1150,12 @@ public:
     inline static const Fix& getMinimum() throw()
     {
         static Fix v (Internal (Base (1) << (IBits + FBits - 1)));
+        return v;
+    }
+    
+    inline static const Fix& getEpsilson() throw()
+    {
+        static Fix v (Internal (Base (1)));
         return v;
     }
 
