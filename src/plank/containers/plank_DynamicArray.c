@@ -102,6 +102,21 @@ exit:
     return result;    
 }
 
+PlankResult pl_DynamicArray_InitWithItemSizeAndSize (PlankDynamicArrayRef p, const PlankLL itemSize, const PlankLL initialCapacity, PlankB zero)
+{
+    PlankResult result;
+    
+    if ((result = pl_DynamicArray_InitWithItemSizeAndCapacity (p, itemSize, initialCapacity)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_SetSize (p, initialCapacity)) != PlankResult_OK) goto exit;
+
+    if (zero)
+        result = pl_DynamicArray_Zero (p);
+    
+exit:
+    return result;
+}
+
+
 PlankResult pl_DynamicArray_DeInit (PlankDynamicArrayRef p)
 {
     PlankResult result = PlankResult_OK;
@@ -154,6 +169,28 @@ PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankLL ind
 PlankLL pl_DynamicArray_GetSize (PlankDynamicArrayRef p)
 {
     return p->usedItems;
+}
+
+PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankLL capacity)
+{
+    PlankResult result;
+    
+    if ((result = pl_DynamicArray_EnsureSize (p, capacity)) != PlankResult_OK) goto exit;
+    
+    p->usedItems = capacity;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_DynamicArray_Zero (PlankDynamicArrayRef p)
+{
+    return pl_MemoryZero (p->data, p->itemSize * p->allocatedItems);
+}
+
+PlankP pl_DynamicArray_GetArray (PlankDynamicArrayRef p)
+{
+    return p->data;
 }
 
 PlankResult pl_DynamicArray_AddItem (PlankDynamicArrayRef p, const PlankP item)

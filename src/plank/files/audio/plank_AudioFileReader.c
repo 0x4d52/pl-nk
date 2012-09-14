@@ -40,10 +40,13 @@
 #include "../plank_File.h"
 #include "../plank_IffFileReader.h"
 #include "plank_AudioFileReader.h"
+#include "../../maths/plank_Maths.h"
 
 // private structures
 
 // private functions and data
+typedef PlankResult (*PlankAudioFileReaderReadFramesFunction)(PlankAudioFileReaderRef, const int, void*, int *);
+
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
 
@@ -55,14 +58,22 @@ PlankResult pl_AudioFileReader_AIFC_ParseFormat (PlankAudioFileReaderRef p, cons
 PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
 
 PlankResult pl_AudioFileReader_Iff_ParseMain  (PlankAudioFileReaderRef p, const PlankFourCharCode mainID, const PlankFourCharCode formatID);
+PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 
+PlankResult pl_AudioFileReader_OggVorbis_Init  (PlankAudioFileReaderRef p, const char* filepath);
+PlankResult pl_AudioFileReader_OggVorbis_DeInit (PlankAudioFileReaderRef p);
+PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 
 #if PLANK_OGGVORBIS
+#include "../../containers/plank_DynamicArray.h"
 typedef struct PlankOggFileReader
 {
     PlankFile file;
     OggVorbis_File oggVorbisFile;
     ov_callbacks callbacks;
+    PlankDynamicArray buffer;
+    int bufferPosition;
+    int bufferFrames;
 } PlankOggFileReader;
 
 typedef PlankOggFileReader* PlankOggFileReaderRef;
@@ -120,13 +131,15 @@ PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
     p->numFrames                   = 0;
     p->dataPosition                = -1;
     
+    p->readFramesFunction          = PLANK_NULL;
+    
     return result;
 }
 
 PlankResult pl_AudioFileReader_DeInit (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
-    
+
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
@@ -141,9 +154,11 @@ PlankResult pl_AudioFileReader_DeInit (PlankAudioFileReaderRef p)
         case PLANKAUDIOFILE_FORMAT_UNKNOWNIFF:
             result = pl_IffFileReader_Destroy ((PlankIffFileReader*)p->peer);
             break;
+#if PLANK_OGGVORBIS
         case PLANKAUDIOFILE_FORMAT_OGGVORBIS:
-            result = PlankResult_UnknownError;
+            result = pl_AudioFileReader_OggVorbis_DeInit (p);
             break;
+#endif
         default:
             if (p->peer != PLANK_NULL)
                 result = PlankResult_UnknownError;
@@ -180,20 +195,14 @@ PlankFileRef pl_AudioFileReader_GetFile (PlankAudioFileReaderRef p)
 
 PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* filepath)
 {
-    PlankMemoryRef m;
     PlankResult result;
     PlankUI chunkLength;
     PlankLL chunkDataPos;
     PlankFourCharCode mainID, formatID;
     PlankIffFileReaderRef iff;
-#if PLANK_OGGVORBIS
-    PlankOggFileReaderRef ogg;
-    int err;
-#endif
     
     result = PlankResult_OK;
     iff = PLANK_NULL;
-    m = pl_MemoryGlobal();
     
     if ((iff = pl_IffFileReader_CreateAndInit()) == PLANK_NULL)
     {
@@ -254,42 +263,20 @@ PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* file
             goto exit;
         }    
         
-        if ((result = pl_AudioFileReader_ResetFramePosition (p)) != PlankResult_OK) goto exit;    
+        if ((result = pl_AudioFileReader_ResetFramePosition (p)) != PlankResult_OK) goto exit; 
+        
+        p->readFramesFunction = pl_AudioFileReader_Iff_ReadFrames;
     }
 #if PLANK_OGGVORBIS
     else if (mainID == pl_FourCharCode ("OggS")) //Ogg
     {
+        // close the Iff file and start again
         if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
         
         p->peer = PLANK_NULL;
         p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
         
-        // open as ogg
-        
-        ogg = (PlankOggFileReaderRef)pl_Memory_AllocateBytes (m, sizeof (PlankOggFileReader));
-        p->peer = ogg;
-        p->formatInfo.format = PLANKAUDIOFILE_FORMAT_OGGVORBIS;
-        pl_MemoryZero (ogg, sizeof (PlankOggFileReader));
-        
-        if ((result = pl_File_Init (&ogg->file)) != PlankResult_OK) goto exit;
-        
-        // open as binary, not writable, litte endian
-        if ((result = pl_File_OpenBinaryRead (&ogg->file, filepath, PLANK_FALSE, PLANK_FALSE)) != PlankResult_OK) goto exit;
-        
-        ogg->callbacks.read_func  = &pl_OggFileReader_ReadCallback;
-        ogg->callbacks.seek_func  = &pl_OggFileReader_SeekCallback;
-        ogg->callbacks.close_func = &pl_OggFileReader_CloseCallback;
-        ogg->callbacks.tell_func  = &pl_OggFileReader_TellCallback;
-        
-        err = ov_open_callbacks (p, &ogg->oggVorbisFile, 0, 0, ogg->callbacks);
-        
-        if (err != 0)
-        {
-            result = PlankResult_AudioFileReaderInavlidType;
-            goto exit;
-        }
-        
-        // okk..
+        pl_AudioFileReader_OggVorbis_Init (p, filepath);
     }
 #endif
     else 
@@ -414,6 +401,11 @@ exit:
 
 PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead)
 {
+    return ((PlankAudioFileReaderReadFramesFunction)p->readFramesFunction)(p, numFrames, data, framesRead);
+}
+
+PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead)
+{
     PlankResult result = PlankResult_OK;
     int startFrame, endFrame, framesToRead, bytesToRead, bytesRead;
     
@@ -422,7 +414,7 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
         result = PlankResult_AudioFileReaderNotReady;
         goto exit;
     }
-
+    
     if ((p->dataPosition < 0) || (p->formatInfo.bytesPerFrame <= 0))
     {
         result = PlankResult_AudioFileReaderNotReady;
@@ -438,7 +430,7 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
     }
     
     endFrame = startFrame + numFrames;
-
+    
     framesToRead = (endFrame > p->numFrames) ? (p->numFrames - startFrame) : (numFrames);
     bytesToRead = framesToRead * p->formatInfo.bytesPerFrame;
     
@@ -446,7 +438,7 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
     
     if (framesRead != PLANK_NULL)
         *framesRead = bytesRead / p->formatInfo.bytesPerFrame;
-
+    
     // should zero if framesToRead < numFrames
     
 exit:
@@ -638,38 +630,35 @@ PlankResult pl_AudioFileReader_Iff_ParseMain  (PlankAudioFileReaderRef p,
     PlankIffFileReader* iff = PLANK_NULL;
     PlankB isBigEndian = PLANK_FALSE;
     
-    if (PLANK_TRUE) // for branching later when ogg is done
+    iff = (PlankIffFileReader*)p->peer;
+
+    if (mainID == pl_FourCharCode ("RIFF"))
     {
-        iff = (PlankIffFileReader*)p->peer;
+        isBigEndian = PLANK_FALSE;
 
-        if (mainID == pl_FourCharCode ("RIFF"))
+        if (formatID == pl_FourCharCode ("WAVE"))
         {
-            isBigEndian = PLANK_FALSE;
-
-            if (formatID == pl_FourCharCode ("WAVE"))
-            {
-                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_WAV;
-            }
-            else goto exit;
-        }
-        else if (mainID == pl_FourCharCode ("FORM"))
-        {
-            isBigEndian = PLANK_TRUE;
-            
-            if (formatID == pl_FourCharCode ("AIFF"))
-            {
-                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFF;
-            }
-            else if (formatID == pl_FourCharCode ("AIFC"))
-            {
-                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFC;
-            }
-            else goto exit;
+            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_WAV;
         }
         else goto exit;
-        
-        pl_IffFileReader_SetEndian (iff, isBigEndian);
     }
+    else if (mainID == pl_FourCharCode ("FORM"))
+    {
+        isBigEndian = PLANK_TRUE;
+        
+        if (formatID == pl_FourCharCode ("AIFF"))
+        {
+            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFF;
+        }
+        else if (formatID == pl_FourCharCode ("AIFC"))
+        {
+            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFC;
+        }
+        else goto exit;
+    }
+    else goto exit;
+    
+    pl_IffFileReader_SetEndian (iff, isBigEndian);
     
     return PlankResult_OK;
     
@@ -677,36 +666,232 @@ exit:
     return PlankResult_AudioFileReaderInavlidType;
 }
 
-size_t pl_OggFileReader_ReadCallback (PlankP ptr, size_t size, size_t size2, PlankP ref)
+#if PLANK_OGGVORBIS
+PlankResult pl_AudioFileReader_OggVorbis_Init  (PlankAudioFileReaderRef p, const char* filepath)
 {
-    (void)ptr; // ptr 
-    (void)size; // size
-    (void)size2; // nmemb
-    (void)ref; // datasource // is the audio file reader
-
+    PlankResult result;
+    PlankOggFileReaderRef ogg;
+    PlankMemoryRef m;
     
+    int err, bufferSize;
+    vorbis_info* info;
+    PlankLL totalSamples;
     
-    //return (size_t) (static_cast <InputStream*> (datasource)->read (ptr, (int) (size * nmemb)) / size);
-
-    return 0;
+    m = pl_MemoryGlobal();
+    
+    // open as ogg
+    ogg = (PlankOggFileReaderRef)pl_Memory_AllocateBytes (m, sizeof (PlankOggFileReader));
+    
+    if (ogg == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    p->peer = ogg;
+    p->formatInfo.format = PLANKAUDIOFILE_FORMAT_OGGVORBIS;
+    p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN;
+    p->formatInfo.bitsPerSample = 8 * 2;
+        
+    pl_MemoryZero (ogg, sizeof (PlankOggFileReader));
+    
+    ogg->bufferPosition = 0;
+    ogg->bufferFrames = 0;
+    
+    if ((result = pl_File_Init (&ogg->file)) != PlankResult_OK) goto exit;
+    
+    // open as binary, not writable, litte endian
+    if ((result = pl_File_OpenBinaryRead (&ogg->file, filepath, PLANK_FALSE, PLANK_FALSE)) != PlankResult_OK) goto exit;
+    
+    ogg->callbacks.read_func  = &pl_OggFileReader_ReadCallback;
+    ogg->callbacks.seek_func  = &pl_OggFileReader_SeekCallback;
+    ogg->callbacks.close_func = &pl_OggFileReader_CloseCallback;
+    ogg->callbacks.tell_func  = &pl_OggFileReader_TellCallback;
+    
+    err = ov_open_callbacks (p, &ogg->oggVorbisFile, 0, 0, ogg->callbacks);
+    
+    if (err != 0)
+    {
+        result = PlankResult_AudioFileReaderInavlidType;
+        goto exit;
+    }
+    
+    info = ov_info (&ogg->oggVorbisFile, -1);
+    totalSamples = ov_pcm_total (&ogg->oggVorbisFile, -1);
+    
+    p->formatInfo.numChannels = info->channels;
+    p->formatInfo.sampleRate = info->rate;
+    p->formatInfo.bytesPerFrame = info->channels * 2;
+    
+    bufferSize = pl_MinLL (totalSamples, (PlankLL)(1 << 12));
+    
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&ogg->buffer, 1, bufferSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
+    
+    p->readFramesFunction = pl_AudioFileReader_OggVorbis_ReadFrames;
+    
+exit:
+    return result;
 }
 
-int pl_OggFileReader_SeekCallback (PlankP ref, PlankLL offset, int code)
+PlankResult pl_AudioFileReader_OggVorbis_DeInit (PlankAudioFileReaderRef p)
 {
-    (void)ref; // datasource // is the audio file reader
-    (void)offset; // offset
-    (void)code; // whence
+    PlankOggFileReaderRef ogg;
+    PlankResult result = PlankResult_OK;
+    PlankMemoryRef m = pl_MemoryGlobal();
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    ogg = (PlankOggFileReaderRef)p->peer;
+    
+    ov_clear (&ogg->oggVorbisFile);
+    
+    if ((result = pl_DynamicArray_DeInit (&ogg->buffer)) != PlankResult_OK) goto exit;
+
+    pl_Memory_Free (m, ogg);
+
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesReadOut)
+{
+//    (void)p;
+//    (void)numFrames;
+//    (void)data;
+//    (void)framesRead;
+//    return PlankResult_UnknownError;
+    
+    PlankResult result;
+    PlankOggFileReaderRef ogg;
+    int numFramesRemaining, bufferFrames, bufferPosition;
+    int bufferSize, bytesPerFrame, bufferEnd, bitStream;
+    int framesThisTime, numChannels, framesRead;
+    long bytesRead;
+    char* buffer;
+    short* dst;
+    OggVorbis_File* file;
+    
+    result = PlankResult_OK;
+    ogg = (PlankOggFileReaderRef)p->peer;
+    file = &ogg->oggVorbisFile;
+    
+    numFramesRemaining = numFrames;
+    bufferFrames = ogg->bufferFrames;      // starts at 0
+    bufferPosition = ogg->bufferPosition;   // starts at 0
+    bufferSize = pl_DynamicArray_GetSize (&ogg->buffer);
+    bytesPerFrame = p->formatInfo.bytesPerFrame;
+    numChannels = p->formatInfo.numChannels;
+    bufferEnd = bufferSize / bytesPerFrame;
+    buffer = (char*)pl_DynamicArray_GetArray (&ogg->buffer);
+    dst = (short*)data;
+    
+    framesRead = 0;
+    
+    while (numFramesRemaining > 0)
+    {
+        if (bufferFrames > 0)
+        {
+            framesThisTime = pl_MinI (bufferFrames, numFramesRemaining);
+            
+            pl_MemoryCopy (dst, buffer + bufferPosition * bytesPerFrame, framesThisTime * bytesPerFrame);
+            
+            bufferPosition += framesThisTime;
+            bufferFrames -= framesThisTime;
+            numFramesRemaining -= framesThisTime;
+            framesRead += framesThisTime;
+            
+            dst += framesThisTime * numChannels;
+        }
+        
+        if (bufferFrames == 0)
+        {
+            // little endian, 2-byte (16-bit), signed
+            bytesRead = ov_read (file, buffer, bufferSize, 0, 2, 1, &bitStream);
+            
+//            OV_HOLE;
+//            OV_EINVAL;
+            
+            if (bytesRead == 0)
+            {
+                result = PlankResult_FileEOF;
+                break;
+            }
+            else if (bytesRead < 0)
+            {
+                // OV_HOLE or OV_EINVAL
+                result = PlankResult_FileReadError;
+                break;
+            }
+            
+            bufferPosition = 0;
+            bufferFrames = bytesRead / bytesPerFrame;
+        }
+    }
+    
+    if (numFramesRemaining > 0)
+        pl_MemoryZero (dst, numFramesRemaining * bytesPerFrame);
+    
+    ogg->bufferFrames = bufferFrames;
+    ogg->bufferPosition = bufferPosition;
+    
+    *framesReadOut = framesRead;
+    
+    return result;
+}
+
+size_t pl_OggFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, PlankP datasource)
+{
+    PlankAudioFileReaderRef p;
+    PlankOggFileReaderRef ogg;
+    int bytesRead;
+    
+    p = (PlankAudioFileReaderRef)datasource;
+    ogg = (PlankOggFileReaderRef)p->peer;
+    
+    pl_File_Read ((PlankFileRef)ogg, ptr, (int)(size * nmemb) / size, &bytesRead);
+    
+    return (size_t)bytesRead;
+}
+
+int pl_OggFileReader_SeekCallback (PlankP datasource, PlankLL offset, int code)
+{    
+    PlankAudioFileReaderRef p;
+    PlankOggFileReaderRef ogg;
+    PlankFileRef file;
+    
+    p = (PlankAudioFileReaderRef)datasource;
+    ogg = (PlankOggFileReaderRef)p->peer;
+    file = (PlankFileRef)ogg;
+    
+    (file->setPositionFunction) (file, offset, code);
+        
     return 0;
 }
 
-int pl_OggFileReader_CloseCallback (PlankP ref)
+int pl_OggFileReader_CloseCallback (PlankP datasource)
 {
-    (void)ref; // datasource // is the audio file reader
+    (void)datasource;
     return 0;
 }
 
-long pl_OggFileReader_TellCallback (PlankP ref)
+long pl_OggFileReader_TellCallback (PlankP datasource)
 {
-    (void)ref; // datasource // is the audio file reader
-    return 0;
+    PlankAudioFileReaderRef p;
+    PlankOggFileReaderRef ogg;
+    PlankFileRef file;
+    PlankLL position;
+    
+    p = (PlankAudioFileReaderRef)datasource;
+    ogg = (PlankOggFileReaderRef)p->peer;
+    file = (PlankFileRef)ogg;
+    
+    pl_File_GetPosition(file, &position);
+
+    return (long)position;
 }
+#endif // PLANK_OGGVORBIS
+

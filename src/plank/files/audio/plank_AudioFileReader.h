@@ -163,6 +163,8 @@ typedef struct PlankAudioFileReader
     PlankLL dataLength;
     PlankLL numFrames;
     PlankLL dataPosition;
+    
+    void* readFramesFunction;
 } PlankAudioFileReader;
 #endif
 

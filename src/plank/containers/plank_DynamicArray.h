@@ -77,6 +77,8 @@ PlankResult pl_DynamicArray_InitWithItemSize (PlankDynamicArrayRef p, const Plan
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_DynamicArray_InitWithItemSizeAndCapacity (PlankDynamicArrayRef p, const PlankLL itemSize, const PlankLL initialCapacity);
 
+PlankResult pl_DynamicArray_InitWithItemSizeAndSize (PlankDynamicArrayRef p, const PlankLL itemSize, const PlankLL initialCapacity, PlankB zero);
+
 /** Denitialise the array.
  @param p The <i>Plank DynamicArray</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
@@ -92,6 +94,14 @@ PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankLL ind
 
 /** Get the number of items stored in the array. */
 PlankLL pl_DynamicArray_GetSize (PlankDynamicArrayRef p);
+
+PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankLL capacity);
+
+PlankResult pl_DynamicArray_Zero (PlankDynamicArrayRef p);
+
+
+/** Get the raw array. */
+PlankP pl_DynamicArray_GetArray (PlankDynamicArrayRef p);
 
 /** Add an item to the array.
  This copies the bytes from one memory location to the array data based on the item
