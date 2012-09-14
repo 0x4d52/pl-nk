@@ -87,23 +87,6 @@ exit:
     return result;
 }
 
-PlankResult pl_IffFileReader_InitWithFile (PlankIffFileReaderRef p, PlankFileRef file)
-{
-    PlankResult result = PlankResult_OK;
-    
-    if (p == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    pl_MemoryZero (p, sizeof (PlankIffFileReader));
-    pl_MemoryCopy (&p->file, file, sizeof(PlankFile));
-    
-exit:
-    return result;    
-}
-
 PlankResult pl_IffFileReader_DeInit (PlankIffFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;

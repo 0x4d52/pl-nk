@@ -42,10 +42,12 @@
 
 #define PLANKAUDIOFILE_FORMAT_INVALID                -1
 #define PLANKAUDIOFILE_FORMAT_UNKNOWN                 0
-#define PLANKAUDIOFILE_FORMAT_WAV                     1
-#define PLANKAUDIOFILE_FORMAT_AIFF                    2
-#define PLANKAUDIOFILE_FORMAT_AIFC                    3
-#define PLANKAUDIOFILE_FORMAT_OGGVORBIS               4
+#define PLANKAUDIOFILE_FORMAT_UNKNOWNIFF              1
+#define PLANKAUDIOFILE_FORMAT_WAV                     2
+#define PLANKAUDIOFILE_FORMAT_AIFF                    3
+#define PLANKAUDIOFILE_FORMAT_AIFC                    4
+#define PLANKAUDIOFILE_FORMAT_OGGVORBIS               5
+
 
 #define PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG        1
 #define PLANKAUDIOFILE_ENCODING_PCM_FLAG              2
