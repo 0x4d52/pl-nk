@@ -81,6 +81,8 @@ typedef struct PlankFile* PlankFileRef;
 /** The maximum length of the file path. */
 #define PLANKFILE_FILENAMEMAX   FILENAME_MAX
 
+#define PLANKFILE_STATUS_EOF    1
+
 /** Delete a file with the given path form the filesystem. */
 PlankResult pl_FileErase (const char* filepath);
 
@@ -252,7 +254,7 @@ PlankResult pl_File_SetEndian (PlankFileRef p, const PlankB isBigEndian);
  @param maximumBytes The number of bytes to read.
  @param bytesRead On return contains the number of bytes read (pass PLANK_NULL to ignore this).
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_File_Read (PlankFileRef p, void* data, const int maximumBytes, int* bytesRead);
+PlankResult pl_File_Read (PlankFileRef p, PlankP data, const int maximumBytes, int* bytesRead);
 
 /** Read one signed byte from the file.
  @param p The <i>Plank %File</i> object. 
@@ -479,6 +481,14 @@ PlankResult pl_File_WriteLine (PlankFileRef p, const char* text);
 /** */
 PlankResult pl_File_WritePascalString255 (PlankFileRef p, PlankPascalString255* string);
 
+PlankResult pl_FileDefaultOpenCallback (PlankFileRef p);
+PlankResult pl_FileDefaultCloseCallback (PlankFileRef p);
+PlankResult pl_FileDefaultGetStatusCallback (PlankFileRef p, int type, int* status);
+PlankResult pl_FileDefaultReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesRead);
+PlankResult pl_FileDefaultWriteCallback (PlankFileRef p, const void* data, const int maximumBytes);
+PlankResult pl_FileDefaultSetPositionCallback (PlankFileRef p, PlankLL offset, int code);
+PlankResult pl_FileDefaultGetPositionCallback (PlankFileRef p, PlankLL* position);
+
 
 /// @} // End group PlankFileClass
 
@@ -487,7 +497,7 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankFile
 {
-    FILE *file;
+    void *stream;
     int mode;
     PlankLL position;
     char path[PLANKFILE_FILENAMEMAX];

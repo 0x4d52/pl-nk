@@ -216,7 +216,7 @@ PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* file
     {
         // deterimine the IFF file format, could be IFF or RIFF
         if ((result = pl_IffFileReader_GetFormatID (iff, &formatID)) != PlankResult_OK) goto exit;
-        if ((result = pl_AudioFileReader_ParseMain (p, mainID, formatID)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileReader_Iff_ParseMain (p, mainID, formatID)) != PlankResult_OK) goto exit;
 
         // parse based on the format
         if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_WAV)
