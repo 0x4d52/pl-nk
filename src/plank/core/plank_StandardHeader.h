@@ -52,6 +52,7 @@
 #define PLANK_API
 #endif
 
+#define PLANK_CDECL
 
 #ifdef __cplusplus
 	#define PLANK_UNUSED(a) (void)a

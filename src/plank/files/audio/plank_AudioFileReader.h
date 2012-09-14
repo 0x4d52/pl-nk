@@ -157,7 +157,7 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileReader
 {
-    PlankIffFileReader iff;    
+    PlankP peer;    
     PlankAudioFileFormatInfo formatInfo;
     
     PlankLL dataLength;

@@ -39,11 +39,13 @@
 #ifndef PLANK_AUDIOFILECOMMON_H
 #define PLANK_AUDIOFILECOMMON_H
 
+
 #define PLANKAUDIOFILE_FORMAT_INVALID                -1
 #define PLANKAUDIOFILE_FORMAT_UNKNOWN                 0
 #define PLANKAUDIOFILE_FORMAT_WAV                     1
 #define PLANKAUDIOFILE_FORMAT_AIFF                    2
 #define PLANKAUDIOFILE_FORMAT_AIFC                    3
+#define PLANKAUDIOFILE_FORMAT_OGGVORBIS               4
 
 #define PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG        1
 #define PLANKAUDIOFILE_ENCODING_PCM_FLAG              2
@@ -61,12 +63,18 @@
 #define PLANKAUDIOFILE_ENCODING_MIN                   PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN
 #define PLANKAUDIOFILE_ENCODING_MAX                   PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN
 
-
 #define PLANKAUDIOFILE_WAV_COMPRESSION_PCM            0x0001
 #define PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT          0x0003
 #define PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE     0xFFFE
 
 #define PLANKAUDIOFILE_AIFC_VERSION                   0xA2805140
+
+#if PLANK_OGGVORBIS
+    //#include "oggvorbis/vorbisenc.h"
+    #include "oggvorbis/codec.h"
+    #include "oggvorbis/vorbisfile.h"
+#endif
+
 
 typedef struct PlankAudioFileFormatInfo
 {
