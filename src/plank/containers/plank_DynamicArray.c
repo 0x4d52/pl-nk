@@ -172,7 +172,7 @@ PlankResult pl_DynamicArray_AddItem (PlankDynamicArrayRef p, const PlankP item)
             goto exit;
     }
     
-    memcpy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
+    pl_MemoryCopy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
     
 exit:
     return result;
@@ -188,7 +188,7 @@ PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankLL index
         goto exit;
     }
     
-    memcpy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
+    pl_MemoryCopy ((unsigned char*)p->data + index * p->itemSize, item, p->itemSize);
     
 exit:
     return result;        
@@ -213,19 +213,19 @@ PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankLL in
         src = (unsigned char*)p->data + index * p->itemSize;
         dst = (unsigned char*)p->data + (index + 1) * p->itemSize;
         size = p->itemSize * (p->usedItems - index);
-        memcpy (dst, src, size);
+        pl_MemoryCopy (dst, src, size);
     
         dst = src;
         src = item;
         size = p->itemSize;
-        memcpy (dst, src, size);
+        pl_MemoryCopy (dst, src, size);
     }
     else
     {
         dst = (unsigned char*)p->data + p->usedItems * p->itemSize;
         src = item;
         size = p->itemSize;
-        memcpy (dst, src, size);        
+        pl_MemoryCopy (dst, src, size);        
     }
     
     p->usedItems++;
@@ -244,7 +244,7 @@ PlankResult pl_DynamicArray_GetItem (PlankDynamicArrayRef p, const PlankLL index
         goto exit;
     }
     
-    memcpy (item, (unsigned char*)p->data + index * p->itemSize, p->itemSize);
+    pl_MemoryCopy (item, (unsigned char*)p->data + index * p->itemSize, p->itemSize);
     
 exit:
     return result;    
@@ -269,7 +269,7 @@ PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankLL in
         dst = (unsigned char*)p->data + index * p->itemSize;
         src = (unsigned char*)p->data + (index + 1) * p->itemSize;
         size = p->itemSize * (p->usedItems - index);
-        memcpy (dst, src, size);
+        pl_MemoryCopy (dst, src, size);
     }
     
 exit:
@@ -297,7 +297,7 @@ PlankResult pl_DynamicArray_EnsureSize (PlankDynamicArrayRef p, const PlankLL ca
         goto exit;
     }
     
-    memcpy (newData, p->data, p->itemSize * p->allocatedItems);
+    pl_MemoryCopy (newData, p->data, p->itemSize * p->allocatedItems);
     
     pl_Memory_Free (m, p->data);
     p->data = newData;
@@ -344,7 +344,7 @@ PlankResult pl_DynamicArray_Purge (PlankDynamicArrayRef p)
         goto exit;
     }
     
-    memcpy (newData, p->data, p->itemSize * p->usedItems);
+    pl_MemoryCopy (newData, p->data, p->itemSize * p->usedItems);
     
     pl_Memory_Free (m, p->data);
     p->data = newData;

@@ -67,6 +67,13 @@ PlankIffFileReaderRef pl_IffFileReader_Create();
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_IffFileReader_Init (PlankIffFileReaderRef p);
 
+/** Initialise a <i>Plank IffFileReader</i> object with an existing file. 
+ The IffFileReader takes ownership of the file.
+ @param p The <i>Plank IffFileReader</i> object. 
+ @param file The <i>Plank File</i> object
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_IffFileReader_InitWithFile (PlankIffFileReaderRef p, PlankFileRef file);
+
 /** Deinitialise a <i>Plank IffFileReader</i> object. 
  @param p The <i>Plank IffFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
