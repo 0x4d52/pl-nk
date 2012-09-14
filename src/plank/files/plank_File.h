@@ -81,10 +81,19 @@ typedef struct PlankFile* PlankFileRef;
 /** The maximum length of the file path. */
 #define PLANKFILE_FILENAMEMAX   FILENAME_MAX
 
-#define PLANKFILE_STATUS_EOF    1
+#define PLANKFILE_STATUS_EOF                1
+#define PLANKFILE_STATUS_ISPOSITIONABLE     2
 
 /** Delete a file with the given path form the filesystem. */
 PlankResult pl_FileErase (const char* filepath);
+
+typedef PlankResult (*PlankFileOpenFunction)(PlankFileRef);
+typedef PlankResult (*PlankFileCloseFunction)(PlankFileRef);
+typedef PlankResult (*PlankFileGetStatusFunction)(PlankFileRef, int, int*);
+typedef PlankResult (*PlankFileReadFunction)(PlankFileRef, PlankP ptr, int, int*);
+typedef PlankResult (*PlankFileWriteFunction)(PlankFileRef, const void*, const int);
+typedef PlankResult (*PlankFileSetPositionFunction)(PlankFileRef, PlankLL, int);
+typedef PlankResult (*PlankFileGetPositionFunction)(PlankFileRef, PlankLL*);
 
 /** Create and initialise a <i>Plank %File</i> object and return an oqaque reference to it.
  @return A <i>Plank %File</i> object as an opaque reference or PLANK_NULL. */
@@ -110,6 +119,15 @@ PlankResult pl_File_DeInit (PlankFileRef p);
  @param p The <i>Plank %File</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_File_Destroy (PlankFileRef p);
+
+PlankResult pl_File_SetFunction (PlankFileRef p, 
+                                 PlankFileOpenFunction openFunction, 
+                                 PlankFileCloseFunction closeFunction, 
+                                 PlankFileGetStatusFunction statusFunction,
+                                 PlankFileReadFunction readFunction,
+                                 PlankFileWriteFunction writeFunction,
+                                 PlankFileSetPositionFunction setPosFunction,
+                                 PlankFileGetPositionFunction getPosFunction);
 
 /** Open a file.
  @param p The <i>Plank %File</i> object. 
@@ -501,6 +519,14 @@ typedef struct PlankFile
     int mode;
     PlankLL position;
     char path[PLANKFILE_FILENAMEMAX];
+        
+    PlankFileOpenFunction           openFunction;
+    PlankFileCloseFunction          closeFunction;
+    PlankFileGetStatusFunction      statusFunction;
+    PlankFileReadFunction           readFunction;
+    PlankFileWriteFunction          writeFunction;
+    PlankFileSetPositionFunction    setPositionFunction;
+    PlankFileGetPositionFunction    getPositionFunction;
 } PlankFile;
 #endif
 

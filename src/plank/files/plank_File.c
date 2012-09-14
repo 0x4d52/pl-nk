@@ -89,6 +89,9 @@ PlankResult pl_File_Init (PlankFileRef p)
     p->position = 0;
     p->path[0] = '\0';    
     
+    // initialise to default functions
+    pl_File_SetFunction (p, 0, 0, 0, 0, 0, 0, 0);
+    
     return PlankResult_OK;
 }
 
@@ -126,6 +129,39 @@ exit:
     return result;       
 }
 
+PlankResult pl_File_SetFunction (PlankFileRef p, 
+                                 PlankFileOpenFunction openFunction, 
+                                 PlankFileCloseFunction closeFunction, 
+                                 PlankFileGetStatusFunction statusFunction,
+                                 PlankFileReadFunction readFunction,
+                                 PlankFileWriteFunction writeFunction,
+                                 PlankFileSetPositionFunction setPositionFunction,
+                                 PlankFileGetPositionFunction getPositionFunction)
+{
+    if (openFunction != PLANK_NULL) p->openFunction = openFunction; 
+    else p->openFunction = pl_FileDefaultOpenCallback;
+    
+    if (closeFunction != PLANK_NULL) p->closeFunction = closeFunction; 
+    else p->closeFunction = pl_FileDefaultCloseCallback;
+    
+    if (statusFunction != PLANK_NULL) p->statusFunction = statusFunction; 
+    else p->statusFunction = pl_FileDefaultGetStatusCallback;
+    
+    if (readFunction != PLANK_NULL) p->readFunction = readFunction; 
+    else p->readFunction = pl_FileDefaultReadCallback;
+    
+    if (writeFunction != PLANK_NULL) p->writeFunction = writeFunction; 
+    else p->writeFunction = pl_FileDefaultWriteCallback;
+    
+    if (setPositionFunction != PLANK_NULL) p->setPositionFunction = setPositionFunction; 
+    else p->setPositionFunction = pl_FileDefaultSetPositionCallback;
+    
+    if (getPositionFunction != PLANK_NULL) p->getPositionFunction = getPositionFunction; 
+    else p->getPositionFunction = pl_FileDefaultGetPositionCallback;
+    
+    return PlankResult_OK;
+}
+
 PlankResult pl_File_Open (PlankFileRef p, const char* filepath, const int mode)
 {
     PlankResult result;
@@ -144,7 +180,7 @@ PlankResult pl_File_Open (PlankFileRef p, const char* filepath, const int mode)
     strncpy (p->path, filepath, PLANKFILE_FILENAMEMAX);
     
     p->mode = mode & PLANKFILE_MASK;    // without the big endian flag
-    result = pl_FileDefaultOpenCallback (p);
+    result = (p->openFunction) (p);
     p->mode = mode & PLANKFILE_ALL;     // including big endian flag
     
     if (result != PlankResult_OK)
@@ -276,23 +312,37 @@ PlankResult pl_File_Close (PlankFileRef p)
     if (p->stream == 0)
         return PlankResult_FileInvalid;
     
-    return pl_FileDefaultCloseCallback (p);
+    return (p->closeFunction) (p);
 }
 
 PlankResult pl_File_SetPosition (PlankFileRef p, const PlankLL position)
 {
+    int isPositionable;
+    
     if (p->stream == 0)
         return PlankResult_FileInvalid;
     
-    return pl_FileDefaultSetPositionCallback (p, position, SEEK_SET);
+    (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
+    
+    if (!isPositionable)
+        return PlankResult_FileSeekFailed;
+    
+    return (p->setPositionFunction) (p, position, SEEK_SET);
 }
 
 PlankResult pl_File_OffsetPosition (PlankFileRef p, const PlankLL offset)
 {
+    int isPositionable;
+
     if (p->stream == 0)
         return PlankResult_FileInvalid;
     
-    return pl_FileDefaultSetPositionCallback (p, offset, SEEK_CUR);
+    (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
+    
+    if (!isPositionable)
+        return PlankResult_FileSeekFailed;
+    
+    return (p->setPositionFunction) (p, offset, SEEK_CUR);
 }
 
 PlankResult pl_File_ResetPosition (PlankFileRef p)
@@ -313,17 +363,24 @@ PlankB pl_File_IsEOF (PlankFileRef p)
         return PLANK_FALSE;
 
     status = PLANK_FALSE;
-    pl_FileDefaultGetStatusCallback (p, PLANKFILE_STATUS_EOF, &status);
+    (p->statusFunction) (p, PLANKFILE_STATUS_EOF, &status);
     
     return status != 0;
 }
 
 PlankResult pl_File_SetEOF (PlankFileRef p)
 {
+    int isPositionable;
+
     if (p->stream == 0)
         return PlankResult_FileInvalid;
     
-    return pl_FileDefaultSetPositionCallback (p, 0L, SEEK_END);  
+    (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
+    
+    if (!isPositionable)
+        return PlankResult_FileSeekFailed;
+    
+    return (p->setPositionFunction) (p, 0L, SEEK_END);  
 }
 
 PlankResult pl_File_GetPosition (PlankFileRef p, PlankLL* position)
@@ -331,7 +388,7 @@ PlankResult pl_File_GetPosition (PlankFileRef p, PlankLL* position)
     if (p->stream == 0)
         return PlankResult_FileInvalid;
     
-    return pl_FileDefaultGetPositionCallback (p, position);
+    return (p->getPositionFunction) (p, position);
 }
 
 PlankResult pl_File_SetMode (PlankFileRef p, const int mode)
@@ -375,7 +432,7 @@ PlankResult pl_File_Read (PlankFileRef p, PlankP data, const int maximumBytes, i
     if (! (p->mode & PLANKFILE_READ))
         return PlankResult_FileReadError;
         
-    return pl_FileDefaultReadCallback (p, data, maximumBytes, bytesRead);    
+    return (p->readFunction) (p, data, maximumBytes, bytesRead);    
 }
 
 PlankResult pl_File_ReadC (PlankFileRef p, char* data)
@@ -620,7 +677,7 @@ PlankResult pl_File_Write (PlankFileRef p, const void* data, const int maximumBy
     if (! (p->mode & PLANKFILE_WRITE))
         return PlankResult_FileWriteError;
     
-    return pl_FileDefaultWriteCallback (p, data, maximumBytes);
+    return (p->writeFunction) (p, data, maximumBytes);
 }
 
 PlankResult pl_File_WriteC (PlankFileRef p, char data)
@@ -799,7 +856,7 @@ PlankResult pl_File_WriteString (PlankFileRef p, const char* text)
     if (! (p->mode & PLANKFILE_WRITE))
         return PlankResult_FileWriteError;
     
-    return pl_FileDefaultWriteCallback (p, text, strlen (text));
+    return (p->writeFunction) (p, text, strlen (text));
 }
 
 PlankResult pl_File_WriteLine (PlankFileRef p, const char* text)
@@ -884,13 +941,15 @@ PlankResult pl_FileDefaultCloseCallback (PlankFileRef p)
 
 PlankResult pl_FileDefaultGetStatusCallback (PlankFileRef p, int type, int* status)
 {
-    if (type == PLANKFILE_STATUS_EOF)
+    switch (type) 
     {
-        *status = feof ((FILE*)p->stream);
-        return PlankResult_OK;
+        case PLANKFILE_STATUS_EOF:              *status = feof ((FILE*)p->stream); break;
+        case PLANKFILE_STATUS_ISPOSITIONABLE:   *status = PLANK_TRUE; break;
+            
+        default: return PlankResult_UnknownError;
     }
     
-    return PlankResult_UnknownError;
+    return PlankResult_OK;
 }
 
 PlankResult pl_FileDefaultReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesRead)
