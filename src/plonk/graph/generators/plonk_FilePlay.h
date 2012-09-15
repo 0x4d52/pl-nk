@@ -186,6 +186,7 @@ public:
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;
         
+    
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -241,6 +242,22 @@ public:
 //                   BlockSize::getControlRateBlockSize(), 
 //                   SampleRate::getControlRate());
 //    }        
+    
+    class Simple
+    {
+    public:
+        
+        static UnitType ar (AudioFileReader const& file, 
+                            const int blockSizeMultiplier = 4,
+                            const int numBuffers = 8)
+        {
+            return Resample::ar (Task::ar (FilePlayUnit::ar (file, 
+                                                             SampleType (1), 
+                                                             SampleType (0), 
+                                                             BlockSize::getDefault() * blockSizeMultiplier), 
+                                           numBuffers));
+        }
+    };
 };
 
 typedef FilePlayUnit<PLONK_TYPE_DEFAULT> FilePlay;

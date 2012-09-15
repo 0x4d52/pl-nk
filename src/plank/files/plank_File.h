@@ -210,6 +210,8 @@ PlankB pl_File_IsLittleEndian (PlankFileRef p);
          the machine on which this is running, othewise returns @c false. */
 PlankB pl_File_IsNativeEndian (PlankFileRef p);
 
+PlankB pl_File_IsPositionable (PlankFileRef p);
+
 /** Close a file.
  @param p The <i>Plank %File</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */

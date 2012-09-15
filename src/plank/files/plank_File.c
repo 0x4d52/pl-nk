@@ -307,6 +307,13 @@ PlankB pl_File_IsNativeEndian (PlankFileRef p)
 #endif
 }
 
+PlankB pl_File_IsPositionable (PlankFileRef p)
+{
+    int isPositionable;
+    (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
+    return isPositionable ? PLANK_TRUE : PLANK_FALSE;
+}
+
 PlankResult pl_File_Close (PlankFileRef p)
 {
     if (p->stream == 0)
