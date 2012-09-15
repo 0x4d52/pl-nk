@@ -243,18 +243,28 @@ public:
 //                   SampleRate::getControlRate());
 //    }        
     
+    /** A simple file player to handle buffering and sample rate conversion.
+     This just adds a Task and Resample unit to the chain to buffer the 
+     file playing on a background thread and resample the audio back to the
+     default block size and sample rate. */
     class Simple
     {
     public:
         
         static UnitType ar (AudioFileReader const& file, 
-                            const int blockSizeMultiplier = 4,
+                            const int blockSizeMultiplier = 0,
                             const int numBuffers = 8)
         {
+//            const DoubleVariable multiplier = blockSizeMultiplier <= 0 ? 
+//                                              DoubleVariable (file.getSampleRate()) / SampleRate::getDefault().ceil() * 2.0:
+//                                              DoubleVariable (blockSizeMultiplier);
+
+            const DoubleVariable multiplier (4);
+            
             return Resample::ar (Task::ar (FilePlayUnit::ar (file, 
                                                              SampleType (1), 
                                                              SampleType (0), 
-                                                             BlockSize::getDefault() * blockSizeMultiplier), 
+                                                             BlockSize::getMultipleOfDefault (multiplier)), 
                                            numBuffers));
         }
     };

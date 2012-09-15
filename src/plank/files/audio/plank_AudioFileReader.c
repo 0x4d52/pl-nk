@@ -49,7 +49,9 @@ typedef PlankResult (*PlankAudioFileReaderReadFramesFunction)(PlankAudioFileRead
 typedef PlankResult (*PlankAudioFileReaderSetFramePositionFunction)(PlankAudioFileReaderRef, const int);
 typedef PlankResult (*PlankAudioFileReaderGetFramePositionFunction)(PlankAudioFileReaderRef, int *);
 
+#if PLANK_APPLE
 #pragma mark Private Function Declarations
+#endif
 
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
@@ -95,7 +97,9 @@ long pl_OggFileReader_TellCallback (PlankP ref);
 #endif
 
 
+#if PLANK_APPLE
 #pragma mark Generic Functions
+#endif
 
 PlankAudioFileReaderRef pl_AudioFileReader_CreateAndInit()
 {
@@ -355,7 +359,9 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
 }
 
 // -- WAV Functions -- /////////////////////////////////////////////////////////
+#if PLANK_APPLE
 #pragma mark WAV Functions
+#endif
 
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
 {
@@ -420,7 +426,9 @@ PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const P
 }
 
 // -- AIFF Functions -- ////////////////////////////////////////////////////////
+#if PLANK_APPLE
 #pragma mark AIFF Functions
+#endif
 
 PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
 {
@@ -468,7 +476,9 @@ exit:
 }
 
 // -- AIFC Functions -- ////////////////////////////////////////////////////////
+#if PLANK_APPLE
 #pragma mark AIFC Functions
+#endif
 
 PlankResult pl_AudioFileReader_AIFC_ParseVersion (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
 {
@@ -542,7 +552,9 @@ PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const 
 }
 
 // -- Generic Iff Functions -- /////////////////////////////////////////////////
+#if PLANK_APPLE
 #pragma mark Generic Iff Functions
+#endif
 
 PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p, const char* filepath)
 {
@@ -596,11 +608,11 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p, const char* 
         goto exit;
     }    
     
-    if ((result = pl_AudioFileReader_ResetFramePosition (p)) != PlankResult_OK) goto exit; 
-    
     p->readFramesFunction       = pl_AudioFileReader_Iff_ReadFrames;
     p->setFramePositionFunction = pl_AudioFileReader_Iff_SetFramePosition;
     p->getFramePositionFunction = pl_AudioFileReader_Iff_GetFramePosition;
+
+    if ((result = pl_AudioFileReader_ResetFramePosition (p)) != PlankResult_OK) goto exit;     
     
 exit:
     return result;
@@ -730,7 +742,9 @@ exit:
 // -- Ogg Vorbis Functions -- //////////////////////////////////////////////////
 
 #if PLANK_OGGVORBIS
+#if PLANK_APPLE
 #pragma mark Ogg Vorbis Functions
+#endif
 
 PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const char* filepath)
 {
@@ -950,7 +964,9 @@ PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderR
     return PlankResult_OK;
 }
 
+#if PLANK_APPLE
 #pragma mark Ogg Vorbis Callbacks
+#endif
 
 size_t pl_OggFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, PlankP datasource)
 {
