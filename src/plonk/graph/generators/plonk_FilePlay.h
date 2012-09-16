@@ -115,22 +115,30 @@ public:
         
         plonk_assert (file.getOwner() == this);
         
-        const int fileNumChannels = file.getNumChannels();
-        buffer.setSize (this->getBlockSize().getValue() * fileNumChannels, false);
-        file.readFrames (buffer, true);
-        
         const int numChannels = this->getNumChannels();
+        const int fileNumChannels = file.getNumChannels();
+        const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
+        buffer.setSize (bufferSize, false);
         
-        for (int channel = 0; channel < numChannels; ++channel)
+        const bool hitEOF = file.readFrames (buffer, true); // loop could be a flag but would need to check for a partial buffer
+                        
+        if (! hitEOF)
         {
-            Buffer& outputBuffer = this->getOutputBuffer (channel);
-            SampleType* const outputSamples = outputBuffer.getArray();
-            const int outputBufferLength = outputBuffer.length();        
+            for (int channel = 0; channel < numChannels; ++channel)
+            {
+                Buffer& outputBuffer = this->getOutputBuffer (channel);
+                SampleType* const outputSamples = outputBuffer.getArray();
+                const int outputBufferLength = outputBuffer.length();        
 
-            const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
+                const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
 
-            for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
-                outputSamples[i] = *bufferSamples;
+                for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
+                    outputSamples[i] = *bufferSamples;
+            }
+        }
+        else
+        {
+            plonk_assertfalse; // once we allow non-looping we need to handle partial buffers...
         }
     }
     

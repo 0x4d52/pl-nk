@@ -55,7 +55,8 @@ public:
         FormatUnknown               = PLANKAUDIOFILE_FORMAT_UNKNOWN,
         FormatWAV                   = PLANKAUDIOFILE_FORMAT_WAV,
         FormatAIFF                  = PLANKAUDIOFILE_FORMAT_AIFF,
-        FormatAIFC                  = PLANKAUDIOFILE_FORMAT_AIFC
+        FormatAIFC                  = PLANKAUDIOFILE_FORMAT_AIFC,
+        FormatOggVorbis             = PLANKAUDIOFILE_FORMAT_OGGVORBIS
     };
     
     enum EncodingFlag
@@ -82,7 +83,7 @@ public:
     
     enum WAVOption
     {
-CompressionPCM              = PLANKAUDIOFILE_WAV_COMPRESSION_PCM,
+        CompressionPCM              = PLANKAUDIOFILE_WAV_COMPRESSION_PCM,
         CompressionFloat            = PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT,
         CompressionExtensible       = PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE
     };
@@ -220,78 +221,81 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     while ((dataRemaining > 0) && (result != PlankResult_FileEOF))
     {
         int framesRead;
-        int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
+        const int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), framesToRead, readBufferArray, &framesRead);
         plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF);
         
-        int samplesRead = framesRead * channels;
-        plonk_assert (samplesRead <= dataRemaining);
-        
-        if (isPCM)
-        {            
-            if (bytesPerSample == 2)
-            {
-                Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
-                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-            }
-            else if (bytesPerSample == 3)
-            {
-                Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
-                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-            }
-            else if (bytesPerSample == 4)
-            {
-                Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
-                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-            }
-            else if (bytesPerSample == 1)
-            {
-                Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
-                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
-            }
-            else
-            {
-                plonk_assertfalse;
-                return false;
-            }
-        }
-        else if (isFloat)
+        if (framesRead > 0)
         {
-            if (bytesPerSample == 4)
-            {
-                Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
-                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+            const int samplesRead = framesRead * channels;
+            plonk_assert (samplesRead <= dataRemaining);
+            
+            if (isPCM)
+            {            
+                if (bytesPerSample == 2)
+                {
+                    Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
+                    swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                }
+                else if (bytesPerSample == 3)
+                {
+                    Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
+                    swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                }
+                else if (bytesPerSample == 4)
+                {
+                    Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
+                    swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                }
+                else if (bytesPerSample == 1)
+                {
+                    Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
+                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                }
+                else
+                {
+                    plonk_assertfalse;
+                    return false;
+                }
             }
-            else if (bytesPerSample == 8)
+            else if (isFloat)
             {
-                Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
-                swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                if (bytesPerSample == 4)
+                {
+                    Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
+                    swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                }
+                else if (bytesPerSample == 8)
+                {
+                    Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
+                    swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
+                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                }
+                else
+                {
+                    plonk_assertfalse;
+                    return false;
+                }
             }
-            else
+            
+            if (deinterleave)
             {
-                plonk_assertfalse;
-                return false;
+                plonk_assertfalse; // haven't tested this yet...
+                SampleType* const deinterleaveBuffer = static_cast<SampleType*> (readBufferArray); 
+                SampleArray::deinterleave (deinterleaveBuffer, dataArray, samplesRead, channels);
+                SampleArray::copyData (dataArray, deinterleaveBuffer, samplesRead);
             }
+            
+            dataArray += samplesRead;
+            dataIndex += samplesRead;
+            dataRemaining -= samplesRead;
         }
-        
-        if (deinterleave)
-        {
-            plonk_assertfalse; // haven't tested this yet...
-            SampleType* const deinterleaveBuffer = static_cast<SampleType*> (readBufferArray); 
-            SampleArray::deinterleave (deinterleaveBuffer, dataArray, samplesRead, channels);
-            SampleArray::copyData (dataArray, deinterleaveBuffer, samplesRead);
-        }
-        
-        dataArray += samplesRead;
-        dataIndex += samplesRead;
-        dataRemaining -= samplesRead;
-        
-        if ((framesRead < framesToRead) && loop)
+            
+        if (((result == PlankResult_FileEOF) || (framesRead < framesToRead)) && loop)
         {
             result = pl_AudioFileReader_ResetFramePosition (getPeerRef());              
             plonk_assert (result == PlankResult_OK);
