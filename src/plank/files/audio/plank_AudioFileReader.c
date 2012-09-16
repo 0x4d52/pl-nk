@@ -804,7 +804,7 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     numFrames = ov_pcm_total (&ogg->oggVorbisFile, -1);
 //    numFrames = (int)(ov_time_total (&ogg->oggVorbisFile, -1) * info->rate);
 
-    bufferSize = pl_MinLL (numFrames * info->channels * 2, (PlankLL)(1 << 12));
+    bufferSize = pl_MinLL (numFrames * p->formatInfo.bytesPerFrame, (PlankLL)(1 << 12));
     
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&ogg->buffer, 1, bufferSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
         

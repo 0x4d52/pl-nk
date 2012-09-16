@@ -134,8 +134,8 @@ public:
         
         const SignalType& signal (this->getInputAsSignal (IOKey::Signal));
         const SampleType* const signalSamples = signal.getSamples (channel);         
-        const int signalFrameStride = signal.getFrameStride();
-        const RateType numSignalFrames (signal.getNumFrames());
+        const unsigned int signalFrameStride = signal.getFrameStride();
+        const unsigned int numSignalFrames (signal.getNumFrames());
         const RateType rateScale (signal.getSampleRate().getValue() * data.base.sampleDuration);
         
         int i;
@@ -144,12 +144,12 @@ public:
         {
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                const int sampleA (data.currentPosition);
-                const int sampleB (sampleA + 1);
-                const RateType frac (data.currentPosition - RateType (sampleA));
+                const unsigned int sampleA (data.currentPosition);
+                const unsigned int sampleB (sampleA + 1);
+                const RateType frac (plonk::frac (data.currentPosition));
                 
-                outputSamples[i] = InterpType::interp (signalSamples[sampleA * signalFrameStride], 
-                                                       signalSamples[sampleB * signalFrameStride], 
+                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
+                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
                                                        frac);
                 
                 data.currentPosition += rateSamples[i] * rateScale;
@@ -166,12 +166,12 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                const int sampleA (data.currentPosition);
-                const int sampleB (sampleA + 1);
-                const RateType frac (data.currentPosition - RateType (sampleA));
+                const unsigned int sampleA (data.currentPosition);
+                const unsigned int sampleB (sampleA + 1);
+                const RateType frac (plonk::frac (data.currentPosition));
                 
-                outputSamples[i] = InterpType::interp (signalSamples[sampleA * signalFrameStride], 
-                                                       signalSamples[sampleB * signalFrameStride], 
+                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
+                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
                                                        frac);
                 data.currentPosition += increment;
                 
@@ -188,12 +188,12 @@ public:
             
             for (i = 0; i < outputBufferLength; ++i) 
             {
-                const int sampleA (data.currentPosition);
-                const int sampleB (sampleA + 1);
-                const RateType frac (data.currentPosition - RateType (sampleA));
+                const unsigned int sampleA (data.currentPosition);
+                const unsigned int sampleB (sampleA + 1);
+                const RateType frac (plonk::frac (data.currentPosition));
                 
-                outputSamples[i] = InterpType::interp (signalSamples[sampleA * signalFrameStride], 
-                                                       signalSamples[sampleB * signalFrameStride], 
+                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
+                                                       signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
                                                        frac);
                 
                 data.currentPosition += rateSamples[int (ratePosition)] * rateScale;

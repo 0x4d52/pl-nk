@@ -43,6 +43,7 @@ typedef struct {
   long   (*tell_func)  (void *datasource);
 } ov_callbacks;
 
+#define OV_EXCLUDE_STATIC_CALLBACKS
 #ifndef OV_EXCLUDE_STATIC_CALLBACKS
 
 /* a few sets of convenient callbacks, especially for use under
@@ -50,7 +51,7 @@ typedef struct {
  * ov_open() to avoid problems with incompatible crt.o version linking
  * issues. */
 
-/*static int _ov_header_fseek_wrap(FILE *f,ogg_int64_t off,int whence){
+static int _ov_header_fseek_wrap(FILE *f,ogg_int64_t off,int whence){
   if(f==NULL)return(-1);
 
 #ifdef __MINGW32__
@@ -60,7 +61,7 @@ typedef struct {
 #else
   return fseek(f,off,whence);
 #endif
-}*/
+}
 
 /* These structs below (OV_CALLBACKS_DEFAULT etc) are defined here as
  * static data. That means that every file which includes this header
@@ -72,7 +73,7 @@ typedef struct {
  * we're using (the same one as the main application).
  */
 
-/*static ov_callbacks OV_CALLBACKS_DEFAULT = {
+static ov_callbacks OV_CALLBACKS_DEFAULT = {
   (size_t (*)(void *, size_t, size_t, void *))  fread,
   (int (*)(void *, ogg_int64_t, int))           _ov_header_fseek_wrap,
   (int (*)(void *))                             fclose,
@@ -98,7 +99,7 @@ static ov_callbacks OV_CALLBACKS_STREAMONLY_NOCLOSE = {
   (int (*)(void *, ogg_int64_t, int))           NULL,
   (int (*)(void *))                             NULL,
   (long (*)(void *))                            NULL
-};*/
+};
 
 #endif
 
@@ -203,3 +204,4 @@ extern int ov_halfrate_p(OggVorbis_File *vf);
 #endif /* __cplusplus */
 
 #endif
+
