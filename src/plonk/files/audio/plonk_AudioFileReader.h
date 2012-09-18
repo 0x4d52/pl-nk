@@ -298,8 +298,10 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             }
             else if (!deinterleave && !isInterleaved)
             {
-                plonk_assertfalse;
-                // ..then interleave
+                plonk_assertfalse; // haven't tested this yet...
+                SampleType* const interleaveBuffer = static_cast<SampleType*> (readBufferArray); 
+                Buffer::interleave (interleaveBuffer, dataArray, samplesRead / channels, channels);
+                Buffer::copyData (dataArray, interleaveBuffer, samplesRead);
             }
             
             dataArray += samplesRead;

@@ -39,6 +39,7 @@
 #ifndef PLANK_AUDIOFILECOMMON_H
 #define PLANK_AUDIOFILECOMMON_H
 
+#define PLANKAUDIOFILE_CHARBITS                       8
 
 #define PLANKAUDIOFILE_FORMAT_INVALID                -1
 #define PLANKAUDIOFILE_FORMAT_UNKNOWN                 0

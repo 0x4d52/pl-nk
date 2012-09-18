@@ -1478,6 +1478,36 @@ public:
 
     PLONK_OBJECTARROWOPERATOR(ObjectArray);
 
+//    static void deinterleave (ObjectType* dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
+//    {
+//        if (numGroups <= 1)
+//        {
+//            Memory::copy (dst, src, srcSize * sizeof (ObjectType));
+//        }
+//        else
+//        {
+//            plonk_assert (srcSize % numGroups);
+//
+//            const int dstSize = srcSize / numGroups;
+//            int i, j;
+//            
+//            if (numGroups == 2)
+//            {
+//                for (i = 0; i < srcSize; ++i, ++dst, src += 2)
+//                {
+//                    dst[0] = src[0];
+//                    dst[dstSize] = src[1];
+//                }
+//            }
+//            else 
+//            {
+//                for (i = 0; i < srcSize; ++i, ++dst, src += numGroups)
+//                    for (j = 0; j < numGroups; ++j)
+//                        dst[j * dstSize] = src[j];
+//            }
+//        }
+//    }
+
     static void deinterleave (ObjectType* dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
     {
         if (numGroups <= 1)
@@ -1487,42 +1517,76 @@ public:
         else
         {
             plonk_assert (srcSize % numGroups);
-
+            
             const int dstSize = srcSize / numGroups;
             int i, j;
             
-            if (numGroups == 2)
+            for (i = 0; i < numGroups; ++i)
             {
-                for (i = 0; i < srcSize; ++i, ++dst, src += 2)
-                {
-                    dst[0] = src[0];
-                    dst[dstSize] = src[1];
-                }
-            }
-            else 
-            {
-                for (i = 0; i < srcSize; ++i, ++dst, src += numGroups)
-                    for (j = 0; j < numGroups; ++j)
-                        dst[j * dstSize] = src[j];
-            }
+                ObjectType* const dstTemp = dst + srcSize * i;
+                const ObjectType* srcTemp = src + i;
+                
+                for (j = 0; j < dstSize; ++j, srcTemp += numGroups)
+                    dstTemp[j] = *srcTemp;
+            }        
         }
     }
-    
+
     static void deinterleave (ObjectType** dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
     {
-        plonk_assertfalse;
+        plonk_assert (srcSize % numGroups);
+        
+        const int dstSize = srcSize / numGroups;
+        int i, j;
+        
+        for (i = 0; i < numGroups; ++i)
+        {
+            const ObjectType* srcTemp = src + i;
+            ObjectType* const dstTemp = dst[i];
+            
+            for (j = 0; j < dstSize; ++j, srcTemp += numGroups)
+                dstTemp[j] = *srcTemp;
+        }        
     }
     
     static void interleave (ObjectType* dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
-    {
-        plonk_assertfalse;
+    {        
+        if (numGroups <= 1)
+        {
+            Memory::copy (dst, src, srcSize * sizeof (ObjectType));
+        }
+        else
+        {            
+            const int dstSize = srcSize * numGroups;
+            int i, j;
+
+            for (i = 0; i < numGroups; ++i)
+            {
+                ObjectType* dstTemp = dst + i;
+                const ObjectType* const srcTemp = src + srcSize * i;
+                
+                for (j = 0; j < dstSize; ++j, dstTemp += numGroups)
+                    *dstTemp = srcTemp[j];
+            }        
+        }
     }
     
     static void interleave (ObjectType* dst, const ObjectType** src, const int srcSize, const int numGroups) throw()
     {
-        plonk_assertfalse;
-    }
+        plonk_assert (srcSize % numGroups);
+ 
+        const int dstSize = srcSize * numGroups;
+        int i, j;
 
+        for (i = 0; i < numGroups; ++i)
+        {
+            ObjectType* dstTemp = dst + i;
+            const ObjectType* const srcTemp = src[i];
+            
+            for (j = 0; j < dstSize; ++j, dstTemp += numGroups)
+                *dstTemp = srcTemp[j];
+        }        
+    }
 };
 
 

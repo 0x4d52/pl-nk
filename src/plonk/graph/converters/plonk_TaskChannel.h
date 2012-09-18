@@ -207,7 +207,8 @@ public:
     {                
         const int numChannels = this->getNumChannels();
         
-        Buffer buffer;
+        // prevent memory alloc
+        Buffer buffer (static_cast<typename Buffer::Internal*> (0));
 
         if (task.getActiveBufferQueue().pop (buffer)) 
         {
@@ -223,7 +224,7 @@ public:
                 
                 plonk_assert (buffer.length() == (numChannels * outputBufferLength));
                 
-                NumericalArray<SampleType>::copyData (outputSamples, bufferSamples, outputBufferLength);
+                Buffer::copyData (outputSamples, bufferSamples, outputBufferLength);
                 bufferSamples += outputBufferLength;                
             }
             

@@ -235,7 +235,7 @@ typedef PlankI PlankFourCharCode;
 #define PLANK_DOUBLE_ONE        0x3ff0000000000000
 #define PLANK_DOUBLE_ONEMASK    0x000fffffffffffff
 #define PLANK_INT24_MAX         0x7fffff
-
+#define PLANK_CHARBITS          8
 
 
 #include "plank_Result.h"
