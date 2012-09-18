@@ -961,28 +961,41 @@ PlankResult pl_FileDefaultGetStatusCallback (PlankFileRef p, int type, int* stat
 
 PlankResult pl_FileDefaultReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesRead)
 {
+    PlankResult result;
     int size, err;
-    size = fread (ptr, 1, (size_t)maximumBytes, (FILE*)p->stream);
     
-    if (bytesRead != PLANK_NULL)
-        *bytesRead = size;
-        
+    result = PlankResult_OK;
+    
+    size = fread (ptr, 1, (size_t)maximumBytes, (FILE*)p->stream);
+            
     if (size != maximumBytes)
     {
         err = ferror ((FILE*)p->stream);
         
         if (err != 0)
-            return PlankResult_FileReadError;
+        {
+            result = PlankResult_FileReadError;
+            goto exit;
+        }
         
         err = feof ((FILE*)p->stream);
         
         if (err != 0)
-            return PlankResult_FileEOF;
+        {
+            result = PlankResult_FileEOF;
+            goto exit;
+        }
         
-        return PlankResult_UnknownError;
+        result = PlankResult_UnknownError;
     }
     
-    return PlankResult_OK;
+exit:
+    clearerr ((FILE*)p->stream);
+    
+    if (bytesRead != PLANK_NULL)
+        *bytesRead = size;
+
+    return result;
 }
 
 PlankResult pl_FileDefaultWriteCallback (PlankFileRef p, const void* data, const int maximumBytes)

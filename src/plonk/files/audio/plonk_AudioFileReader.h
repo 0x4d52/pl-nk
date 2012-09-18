@@ -141,6 +141,7 @@ public:
     int getFramePosition() const throw();
     void setFramePosition (const int position) throw();
     void resetFramePosition() throw();
+    void setFramePositionOnNextRead (const int position) throw();
     
     template<class SampleType>
     bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, const bool loop) throw();
@@ -188,6 +189,7 @@ private:
     PlankAudioFileReader peer;
     Chars readBuffer;
     int numFramesPerBuffer;
+    AtomicInt newPositionOnNextRead;
     AtomicValue<void*> owner;
 };
 
@@ -227,6 +229,15 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
     while ((dataRemaining > 0) && (result != PlankResult_FileEOF))
     {
+        AtomicInt newPosition (-1);
+        newPositionOnNextRead.swapWith (newPosition);
+        
+        if (newPosition.getValueUnchecked() >= 0)
+        {
+            result = pl_AudioFileReader_SetFramePosition (getPeerRef(), newPosition.getValueUnchecked());
+            plonk_assert (result == PlankResult_OK); // just continue though in release
+        }
+        
         int framesRead;
         const int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), framesToRead, readBufferArray, &framesRead);
@@ -474,10 +485,19 @@ public:
         return getInternal()->getFramePosition();
     }
     
-    /** Set the frame position to a particular frame. */
+    /** Set the frame position to a particular frame. 
+     This is not thread safe, use setFramePositionOnNextRead() to call this from another
+     thread (e.g., a GUI) while playing a file (e.g., in real time). */
     inline void setFramePosition (const int position) throw()
     {
         return getInternal()->setFramePosition (position);
+    }
+    
+    /** Set the frame position to a particular frame just before the next read operation.
+     This is thread safe. */
+    inline void setFramePositionOnNextRead (const int position) throw()
+    {
+        return getInternal()->setFramePositionOnNextRead (position);
     }
     
     /** Resets the frame position back to the start of the frames. */

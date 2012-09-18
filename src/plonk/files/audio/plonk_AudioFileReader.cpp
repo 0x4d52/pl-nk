@@ -43,21 +43,24 @@ BEGIN_PLONK_NAMESPACE
 #include "../../core/plonk_Headers.h"
 
 AudioFileReaderInternal::AudioFileReaderInternal() throw()
-:   numFramesPerBuffer (0)
+:   numFramesPerBuffer (0),
+    newPositionOnNextRead (-1)
 {
     pl_AudioFileReader_Init (getPeerRef());
 }
 
 AudioFileReaderInternal::AudioFileReaderInternal (const char* path) throw()
 :   readBuffer (Chars::withSize (AudioFile::DefaultBufferSize)),
-    numFramesPerBuffer (0)
+    numFramesPerBuffer (0),
+    newPositionOnNextRead (-1)
 {
     init (path);
 }
 
 AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bufferSize) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
-    numFramesPerBuffer (0)
+    numFramesPerBuffer (0),
+    newPositionOnNextRead (-1)
 {
     plonk_assert (bufferSize > 0);
     init (path);
@@ -247,6 +250,11 @@ void AudioFileReaderInternal::resetFramePosition() throw()
 #ifndef PLONK_DEBUG
     (void)result;
 #endif
+}
+
+void AudioFileReaderInternal::setFramePositionOnNextRead (const int position) throw()
+{
+    newPositionOnNextRead = position; // atomic!
 }
 
 void AudioFileReaderInternal::setOwner (void* o) throw()
