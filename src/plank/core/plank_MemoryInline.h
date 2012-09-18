@@ -61,7 +61,7 @@ static inline PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
 }
 
 static inline PlankResult pl_MemoryCopy (PlankP dst, PlankConstantP src, const PlankUL numBytes)
-{
+{    
     if (src == PLANK_NULL || dst == PLANK_NULL || numBytes == 0)
         return PlankResult_MemoryError;
     

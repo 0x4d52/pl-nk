@@ -1507,6 +1507,22 @@ public:
             }
         }
     }
+    
+    static void deinterleave (ObjectType** dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
+    {
+        plonk_assertfalse;
+    }
+    
+    static void interleave (ObjectType* dst, const ObjectType* src, const int srcSize, const int numGroups) throw()
+    {
+        plonk_assertfalse;
+    }
+    
+    static void interleave (ObjectType* dst, const ObjectType** src, const int srcSize, const int numGroups) throw()
+    {
+        plonk_assertfalse;
+    }
+
 };
 
 

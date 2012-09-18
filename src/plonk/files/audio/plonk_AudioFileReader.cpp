@@ -114,12 +114,16 @@ AudioFile::Encoding AudioFileReaderInternal::getEncoding() const throw()
     
     switch (format)
     {
-        case AudioFile::EncodingInvalid:            return AudioFile::EncodingInvalid;
-        case AudioFile::EncodingUnknown:            return AudioFile::EncodingUnknown;
-        case AudioFile::EncodingPCMLittleEndian:    return AudioFile::EncodingPCMLittleEndian;
-        case AudioFile::EncodingPCMBigEndian:       return AudioFile::EncodingPCMBigEndian;
-        case AudioFile::EncodingFloatLittleEndian:  return AudioFile::EncodingFloatLittleEndian;
-        case AudioFile::EncodingFloatBigEndian:     return AudioFile::EncodingFloatBigEndian;
+        case AudioFile::EncodingInvalid:                            return AudioFile::EncodingInvalid;
+        case AudioFile::EncodingUnknown:                            return AudioFile::EncodingUnknown;
+        case AudioFile::EncodingPCMLittleEndian:                    return AudioFile::EncodingPCMLittleEndian;
+        case AudioFile::EncodingPCMBigEndian:                       return AudioFile::EncodingPCMBigEndian;
+        case AudioFile::EncodingFloatLittleEndian:                  return AudioFile::EncodingFloatLittleEndian;
+        case AudioFile::EncodingFloatBigEndian:                     return AudioFile::EncodingFloatBigEndian;
+        case AudioFile::EncodingPCMLittleEndianNonInterleaved:      return AudioFile::EncodingPCMLittleEndianNonInterleaved;
+        case AudioFile::EncodingPCMBigEndianNonInterleaved:         return AudioFile::EncodingPCMBigEndianNonInterleaved;
+        case AudioFile::EncodingFloatLittleEndianNonInterleaved:    return AudioFile::EncodingFloatLittleEndianNonInterleaved;
+        case AudioFile::EncodingFloatBigEndianNonInterleaved:       return AudioFile::EncodingFloatBigEndianNonInterleaved;
         default: return AudioFile::EncodingInvalid;
     }
 }

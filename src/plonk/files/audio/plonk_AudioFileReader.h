@@ -63,22 +63,28 @@ public:
     {
         EncodingFlagBigEndian       = PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG,
         EncodingFlagPCM             = PLANKAUDIOFILE_ENCODING_PCM_FLAG,
-        EncodingFlagFloat           = PLANKAUDIOFILE_ENCODING_FLOAT_FLAG
+        EncodingFlagFloat           = PLANKAUDIOFILE_ENCODING_FLOAT_FLAG,
+        EncodingFlagNonIntervleaved = PLANKAUDIOFILE_ENCODING_NONINTERLEAVED_FLAG
     };
     
     enum Encoding
     {
-        EncodingInvalid             = PLANKAUDIOFILE_ENCODING_INVALID,
-        EncodingUnknown             = PLANKAUDIOFILE_ENCODING_UNKNOWN,
-        EncodingUnused1             = PLANKAUDIOFILE_ENCODING_UNUSED1,
+        EncodingInvalid                         = PLANKAUDIOFILE_ENCODING_INVALID,
+        EncodingUnknown                         = PLANKAUDIOFILE_ENCODING_UNKNOWN,
+        EncodingUnused1                         = PLANKAUDIOFILE_ENCODING_UNUSED1,
                 
-        EncodingPCMLittleEndian     = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN,
-        EncodingPCMBigEndian        = PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN,
-        EncodingFloatLittleEndian   = PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN,
-        EncodingFloatBigEndian      = PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN,
+        EncodingPCMLittleEndian                 = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN,
+        EncodingPCMBigEndian                    = PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN,
+        EncodingFloatLittleEndian               = PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN,
+        EncodingFloatBigEndian                  = PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN,
+        
+        EncodingPCMLittleEndianNonInterleaved   = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN_NONINTERLEAVED,
+        EncodingPCMBigEndianNonInterleaved      = PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN_NONINTERLEAVED,
+        EncodingFloatLittleEndianNonInterleaved = PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN_NONINTERLEAVED,
+        EncodingFloatBigEndianNonInterleaved    = PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN_NONINTERLEAVED,
                 
-        EncodingMin                 = PLANKAUDIOFILE_ENCODING_MIN,
-        EncodingMax                 = PLANKAUDIOFILE_ENCODING_MAX
+        EncodingMin                             = PLANKAUDIOFILE_ENCODING_MIN,
+        EncodingMax                             = PLANKAUDIOFILE_ENCODING_MAX
     };
     
     enum WAVOption
@@ -193,7 +199,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                                           const bool deinterleave,
                                           const bool loop) throw()
 {        
-    typedef NumericalArray<SampleType> SampleArray;
+    typedef NumericalArray<SampleType> Buffer;
     
     ResultCode result;
     
@@ -215,6 +221,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     const bool isPCM = encoding & AudioFile::EncodingFlagPCM;
     const bool isFloat = encoding & AudioFile::EncodingFlagFloat;
     const bool isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
+    const bool isInterleaved = !(encoding & AudioFile::EncodingFlagNonIntervleaved);
     
     int dataIndex = 0;
     
@@ -236,24 +243,24 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 {
                     Short* const convertBuffer = static_cast<Short*> (readBufferArray); 
                     swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                    Buffer::convert (dataArray, convertBuffer, samplesRead, applyScaling);
                 }
                 else if (bytesPerSample == 3)
                 {
                     Int24* const convertBuffer = static_cast<Int24*> (readBufferArray); 
                     swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                    Buffer::convert (dataArray, convertBuffer, samplesRead, applyScaling);
                 }
                 else if (bytesPerSample == 4)
                 {
                     Int* const convertBuffer = static_cast<Int*> (readBufferArray); 
                     swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                    Buffer::convert (dataArray, convertBuffer, samplesRead, applyScaling);
                 }
                 else if (bytesPerSample == 1)
                 {
                     Char* const convertBuffer = static_cast<Char*> (readBufferArray); 
-                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                    Buffer::convert (dataArray, convertBuffer, samplesRead, applyScaling);
                 }
                 else
                 {
@@ -267,13 +274,13 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 {
                     Float* const convertBuffer = static_cast<Float*> (readBufferArray); 
                     swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                    Buffer::convert (dataArray, convertBuffer, samplesRead, applyScaling);
                 }
                 else if (bytesPerSample == 8)
                 {
                     Double* const convertBuffer = static_cast<Double*> (readBufferArray); 
                     swapEndianIfNotNative (convertBuffer, samplesRead, isBigEndian);
-                    SampleArray::convert (dataArray, convertBuffer, samplesRead, applyScaling);
+                    Buffer::convert (dataArray, convertBuffer, samplesRead, applyScaling);
                 }
                 else
                 {
@@ -282,12 +289,17 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 }
             }
             
-            if (deinterleave)
+            if (deinterleave && isInterleaved)
             {
                 plonk_assertfalse; // haven't tested this yet...
                 SampleType* const deinterleaveBuffer = static_cast<SampleType*> (readBufferArray); 
-                SampleArray::deinterleave (deinterleaveBuffer, dataArray, samplesRead, channels);
-                SampleArray::copyData (dataArray, deinterleaveBuffer, samplesRead);
+                Buffer::deinterleave (deinterleaveBuffer, dataArray, samplesRead, channels);
+                Buffer::copyData (dataArray, deinterleaveBuffer, samplesRead);
+            }
+            else if (!deinterleave && !isInterleaved)
+            {
+                plonk_assertfalse;
+                // ..then interleave
             }
             
             dataArray += samplesRead;

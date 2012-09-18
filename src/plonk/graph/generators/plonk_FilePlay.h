@@ -143,7 +143,7 @@ public:
     }
     
 private:
-    Buffer buffer;
+    Buffer buffer; // might need to use a signal...
     
     static const int decideNumChannels (Inputs const& inputs, Data const& data) throw()
     {
