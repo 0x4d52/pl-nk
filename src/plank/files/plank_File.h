@@ -55,22 +55,22 @@ PLANK_BEGIN_C_LINKAGE
 typedef struct PlankFile* PlankFileRef; 
 
 /** Flag to identify 'read' mode. */
-#define PLANKFILE_READ          (1L << 0)
+#define PLANKFILE_READ          (1 << 0)
 
 /** Flag to identify 'write' mode. */
-#define PLANKFILE_WRITE         (1L << 1)
+#define PLANKFILE_WRITE         (1 << 1)
 
 /** Flag to identify 'binary' mode. */
-#define PLANKFILE_BINARY        (1L << 2)
+#define PLANKFILE_BINARY        (1 << 2)
 
 /** Flag to identify 'append' mode. */
-#define PLANKFILE_APPEND        (1L << 3)
+#define PLANKFILE_APPEND        (1 << 3)
 
 /** Flag to identify 'new' mode. */
-#define PLANKFILE_NEW           (1L << 4)
+#define PLANKFILE_NEW           (1 << 4)
 
 /** Flag to identify big endian mode for binary files (otherwise it will be little endian). */
-#define PLANKFILE_BIGENDIAN     (1L << 5)
+#define PLANKFILE_BIGENDIAN     (1 << 5)
 
 /** Mode mask with all the mode flags except PLANKFILE_BIGENDIAN. */
 #define PLANKFILE_MASK          (PLANKFILE_READ | PLANKFILE_WRITE | PLANKFILE_BINARY | PLANKFILE_APPEND | PLANKFILE_NEW)

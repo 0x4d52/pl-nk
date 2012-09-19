@@ -863,7 +863,7 @@ PlankResult pl_File_WriteString (PlankFileRef p, const char* text)
     if (! (p->mode & PLANKFILE_WRITE))
         return PlankResult_FileWriteError;
     
-    return (p->writeFunction) (p, text, strlen (text));
+    return (p->writeFunction) (p, text, (int)strlen (text));
 }
 
 PlankResult pl_File_WriteLine (PlankFileRef p, const char* text)
@@ -966,7 +966,7 @@ PlankResult pl_FileDefaultReadCallback (PlankFileRef p, PlankP ptr, int maximumB
     
     result = PlankResult_OK;
     
-    size = fread (ptr, 1, (size_t)maximumBytes, (FILE*)p->stream);
+    size = (int)fread (ptr, 1, (size_t)maximumBytes, (FILE*)p->stream);
             
     if (size != maximumBytes)
     {

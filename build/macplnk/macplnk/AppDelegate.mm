@@ -12,7 +12,7 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize window;
 
 - (id)init
 {

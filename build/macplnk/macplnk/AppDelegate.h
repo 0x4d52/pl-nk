@@ -12,6 +12,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
     AudioHost* host;
+    IBOutlet NSWindow *window;
 }
 
 -(IBAction)buttonTapped:(NSButton*)sender;

@@ -70,14 +70,14 @@ PlankResult pl_DynamicArray_Init (PlankDynamicArrayRef p);
 /** Initialise the array.
  @param p The <i>Plank DynamicArray</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_DynamicArray_InitWithItemSize (PlankDynamicArrayRef p, const PlankLL itemSize);
+PlankResult pl_DynamicArray_InitWithItemSize (PlankDynamicArrayRef p, const PlankL itemSize);
 
 /** Initialise the array with specified capacity.
  @param p The <i>Plank DynamicArray</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_DynamicArray_InitWithItemSizeAndCapacity (PlankDynamicArrayRef p, const PlankLL itemSize, const PlankLL initialCapacity);
+PlankResult pl_DynamicArray_InitWithItemSizeAndCapacity (PlankDynamicArrayRef p, const PlankL itemSize, const PlankL initialCapacity);
 
-PlankResult pl_DynamicArray_InitWithItemSizeAndSize (PlankDynamicArrayRef p, const PlankLL itemSize, const PlankLL initialCapacity, PlankB zero);
+PlankResult pl_DynamicArray_InitWithItemSizeAndSize (PlankDynamicArrayRef p, const PlankL itemSize, const PlankL initialCapacity, PlankB zero);
 
 /** Denitialise the array.
  @param p The <i>Plank DynamicArray</i> object.
@@ -90,12 +90,12 @@ PlankResult pl_DynamicArray_DeInit (PlankDynamicArrayRef p);
 PlankResult pl_DynamicArray_Destroy (PlankDynamicArrayRef p);
 
 /** Determines if an index is in range for this array. */
-PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankLL index);
+PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankL index);
 
 /** Get the number of items stored in the array. */
-PlankLL pl_DynamicArray_GetSize (PlankDynamicArrayRef p);
+PlankL pl_DynamicArray_GetSize (PlankDynamicArrayRef p);
 
-PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankLL capacity);
+PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankL capacity);
 
 PlankResult pl_DynamicArray_Zero (PlankDynamicArrayRef p);
 
@@ -118,7 +118,7 @@ PlankResult pl_DynamicArray_AddItem (PlankDynamicArrayRef p, const PlankP item);
  @param index The desired index. This must be between 0 and one less that the current size.  
  @param item The item to add to the array.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankLL index, const PlankP item);
+PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item);
 
 /** Inserts an item into the specified index. 
  This copies the bytes from one memory location to the array data based on the item
@@ -129,7 +129,7 @@ PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankLL index
               size of the array the item will be added to the end. 
  @param item The item to add to the array.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankLL index, const PlankP item);
+PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item);
 
 /** Retrieves an item at the specified index.
  @param p The <i>Plank DynamicArray</i> object.
@@ -137,13 +137,13 @@ PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankLL in
  @param item The destination to copy the specified item. This must point to memory of 
              sufficient size to hold the item.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_DynamicArray_GetItem (PlankDynamicArrayRef p, const PlankLL index, PlankP item);
+PlankResult pl_DynamicArray_GetItem (PlankDynamicArrayRef p, const PlankL index, PlankP item);
 
 /** Removes an item from the specified index.
  @param p The <i>Plank DynamicArray</i> object.
  @param index The desired index to remove. This must be between 0 and one less that the current size. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankLL index);
+PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankL index);
 
 /** Ensures that the array is sufficient to hold a certain number of items.
  This will resize the array if necessary to hold the specified capacity. This only
@@ -152,7 +152,7 @@ PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankLL in
  @param p The <i>Plank DynamicArray</i> object.
  @param capacity The number of items the array should be set to hold.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_DynamicArray_EnsureSize (PlankDynamicArrayRef p, const PlankLL capacity);
+PlankResult pl_DynamicArray_EnsureSize (PlankDynamicArrayRef p, const PlankL capacity);
 
 /** Inreases the array's capcity by a spefcified number of items.
  @param p The <i>Plank DynamicArray</i> object.
@@ -174,9 +174,9 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankDynamicArray
 {
-    PlankLL itemSize;
-    PlankLL allocatedItems;
-    PlankLL usedItems;
+    PlankL itemSize;
+    PlankL allocatedItems;
+    PlankL usedItems;
     PlankP data;
 } PlankDynamicArray;
 #endif

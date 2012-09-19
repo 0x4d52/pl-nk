@@ -75,12 +75,12 @@ PlankResult pl_DynamicArray_Init (PlankDynamicArrayRef p)
     return pl_DynamicArray_InitWithItemSize (p, PLANKDYNAMICARRAY_DEFAULTITEMSIZE);
 }
 
-PlankResult pl_DynamicArray_InitWithItemSize (PlankDynamicArrayRef p, const PlankLL itemSize)
+PlankResult pl_DynamicArray_InitWithItemSize (PlankDynamicArrayRef p, const PlankL itemSize)
 {
     return pl_DynamicArray_InitWithItemSizeAndCapacity (p, itemSize, PLANKDYNAMICARRAY_DEFAULTGRANULARITY);
 }
 
-PlankResult pl_DynamicArray_InitWithItemSizeAndCapacity (PlankDynamicArrayRef p, const PlankLL itemSize, const PlankLL initialCapacity)
+PlankResult pl_DynamicArray_InitWithItemSizeAndCapacity (PlankDynamicArrayRef p, const PlankL itemSize, const PlankL initialCapacity)
 {
     PlankResult result = PlankResult_OK;
     PlankMemoryRef m;
@@ -102,7 +102,7 @@ exit:
     return result;    
 }
 
-PlankResult pl_DynamicArray_InitWithItemSizeAndSize (PlankDynamicArrayRef p, const PlankLL itemSize, const PlankLL initialCapacity, PlankB zero)
+PlankResult pl_DynamicArray_InitWithItemSizeAndSize (PlankDynamicArrayRef p, const PlankL itemSize, const PlankL initialCapacity, PlankB zero)
 {
     PlankResult result;
     
@@ -161,17 +161,17 @@ exit:
     return result;
 }
 
-PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankLL index)
+PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankL index)
 {
     return (index >= 0) && (index < p->usedItems);
 }
 
-PlankLL pl_DynamicArray_GetSize (PlankDynamicArrayRef p)
+PlankL pl_DynamicArray_GetSize (PlankDynamicArrayRef p)
 {
     return p->usedItems;
 }
 
-PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankLL capacity)
+PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankL capacity)
 {
     PlankResult result;
     
@@ -196,7 +196,7 @@ PlankP pl_DynamicArray_GetArray (PlankDynamicArrayRef p)
 PlankResult pl_DynamicArray_AddItem (PlankDynamicArrayRef p, const PlankP item)
 {
     PlankResult result = PlankResult_OK;
-    PlankLL index;
+    PlankL index;
     
     index = p->usedItems;
     p->usedItems++;
@@ -215,7 +215,7 @@ exit:
     return result;
 }
 
-PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankLL index, const PlankP item)
+PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item)
 {
     PlankResult result = PlankResult_OK;
     
@@ -231,11 +231,11 @@ exit:
     return result;        
 }
 
-PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankLL index, const PlankP item)
+PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item)
 {
     PlankResult result = PlankResult_OK;
     PlankP src, dst;
-    PlankLL size;
+    PlankL size;
     
     if (index < 0)
     {
@@ -271,7 +271,7 @@ exit:
     return result;
 }
 
-PlankResult pl_DynamicArray_GetItem (PlankDynamicArrayRef p, const PlankLL index, PlankP item)
+PlankResult pl_DynamicArray_GetItem (PlankDynamicArrayRef p, const PlankL index, PlankP item)
 {
     PlankResult result = PlankResult_OK;
 
@@ -287,11 +287,11 @@ exit:
     return result;    
 }
 
-PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankLL index)
+PlankResult pl_DynamicArray_RemoveItem (PlankDynamicArrayRef p, const PlankL index)
 {
     PlankResult result = PlankResult_OK;
     PlankP src, dst;
-    PlankLL size;
+    PlankL size;
     
     if ((index < 0) || (index >= p->usedItems))
     {
@@ -313,11 +313,11 @@ exit:
     return result;            
 }
 
-PlankResult pl_DynamicArray_EnsureSize (PlankDynamicArrayRef p, const PlankLL capacity)
+PlankResult pl_DynamicArray_EnsureSize (PlankDynamicArrayRef p, const PlankL capacity)
 {
     PlankResult result = PlankResult_OK;
     PlankMemoryRef m;
-    PlankLL newAllocatedItems;
+    PlankL newAllocatedItems;
     PlankP newData;
     
     if (capacity <= p->allocatedItems)
@@ -325,7 +325,7 @@ PlankResult pl_DynamicArray_EnsureSize (PlankDynamicArrayRef p, const PlankLL ca
     
     m = pl_MemoryGlobal();
     
-    newAllocatedItems = pl_MaxLL (capacity, p->allocatedItems + PLANKDYNAMICARRAY_DEFAULTGRANULARITY);
+    newAllocatedItems = pl_MaxL (capacity, p->allocatedItems + PLANKDYNAMICARRAY_DEFAULTGRANULARITY);
     newData = pl_Memory_AllocateBytes (m, p->itemSize * newAllocatedItems);
     
     if (newData == PLANK_NULL)
@@ -364,7 +364,7 @@ PlankResult pl_DynamicArray_Purge (PlankDynamicArrayRef p)
 {
     PlankResult result = PlankResult_OK;
     PlankMemoryRef m;
-    PlankLL newAllocatedItems;
+    PlankL newAllocatedItems;
     PlankP newData;
     
     if (p->usedItems == p->allocatedItems)

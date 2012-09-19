@@ -1041,7 +1041,7 @@ private:
         LongLong whole;
     };
     
-    static inline Long fromParts (const Int value, const Int extra) throw()
+    static inline LongLong fromParts (const Int value, const Int extra) throw()
     {
         Element element = { { value, extra } };
         return element.whole;
