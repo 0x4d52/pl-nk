@@ -169,26 +169,6 @@
 		A86939141602347D00F7E6A2 /* plank_Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_Thread.h; sourceTree = "<group>"; };
 		A86939151602347D00F7E6A2 /* plank_ThreadSpinLock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_ThreadSpinLock.c; sourceTree = "<group>"; };
 		A86939161602347D00F7E6A2 /* plank_ThreadSpinLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_ThreadSpinLock.h; sourceTree = "<group>"; };
-		A869391A1602347D00F7E6A2 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
-		A869391B1602347D00F7E6A2 /* Array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Array.hpp; sourceTree = "<group>"; };
-		A869391C1602347D00F7E6A2 /* def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = def.h; sourceTree = "<group>"; };
-		A869391D1602347D00F7E6A2 /* DynArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynArray.h; sourceTree = "<group>"; };
-		A869391E1602347D00F7E6A2 /* DynArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DynArray.hpp; sourceTree = "<group>"; };
-		A869391F1602347D00F7E6A2 /* FFTReal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTReal.h; sourceTree = "<group>"; };
-		A86939201602347D00F7E6A2 /* FFTReal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTReal.hpp; sourceTree = "<group>"; };
-		A86939211602347D00F7E6A2 /* FFTRealFixLen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealFixLen.h; sourceTree = "<group>"; };
-		A86939221602347D00F7E6A2 /* FFTRealFixLen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealFixLen.hpp; sourceTree = "<group>"; };
-		A86939231602347D00F7E6A2 /* FFTRealFixLenParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealFixLenParam.h; sourceTree = "<group>"; };
-		A86939241602347D00F7E6A2 /* FFTRealPassDirect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealPassDirect.h; sourceTree = "<group>"; };
-		A86939251602347D00F7E6A2 /* FFTRealPassDirect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealPassDirect.hpp; sourceTree = "<group>"; };
-		A86939261602347D00F7E6A2 /* FFTRealPassInverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealPassInverse.h; sourceTree = "<group>"; };
-		A86939271602347D00F7E6A2 /* FFTRealPassInverse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealPassInverse.hpp; sourceTree = "<group>"; };
-		A86939281602347D00F7E6A2 /* FFTRealSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealSelect.h; sourceTree = "<group>"; };
-		A86939291602347D00F7E6A2 /* FFTRealSelect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealSelect.hpp; sourceTree = "<group>"; };
-		A869392A1602347D00F7E6A2 /* FFTRealUseTrigo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTRealUseTrigo.h; sourceTree = "<group>"; };
-		A869392B1602347D00F7E6A2 /* FFTRealUseTrigo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFTRealUseTrigo.hpp; sourceTree = "<group>"; };
-		A869392C1602347D00F7E6A2 /* OscSinCos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscSinCos.h; sourceTree = "<group>"; };
-		A869392D1602347D00F7E6A2 /* OscSinCos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OscSinCos.hpp; sourceTree = "<group>"; };
 		A869392E1602347D00F7E6A2 /* plank_FFTRealInternal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plank_FFTRealInternal.cpp; sourceTree = "<group>"; };
 		A869392F1602347D00F7E6A2 /* plank_FFTRealInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plank_FFTRealInternal.h; sourceTree = "<group>"; };
 		A86939301602347D00F7E6A2 /* plank_FFT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plank_FFT.c; sourceTree = "<group>"; };
@@ -595,38 +575,10 @@
 		A86939181602347D00F7E6A2 /* fftreal */ = {
 			isa = PBXGroup;
 			children = (
-				A86939191602347D00F7E6A2 /* ffft */,
 				A869392E1602347D00F7E6A2 /* plank_FFTRealInternal.cpp */,
 				A869392F1602347D00F7E6A2 /* plank_FFTRealInternal.h */,
 			);
 			path = fftreal;
-			sourceTree = "<group>";
-		};
-		A86939191602347D00F7E6A2 /* ffft */ = {
-			isa = PBXGroup;
-			children = (
-				A869391A1602347D00F7E6A2 /* Array.h */,
-				A869391B1602347D00F7E6A2 /* Array.hpp */,
-				A869391C1602347D00F7E6A2 /* def.h */,
-				A869391D1602347D00F7E6A2 /* DynArray.h */,
-				A869391E1602347D00F7E6A2 /* DynArray.hpp */,
-				A869391F1602347D00F7E6A2 /* FFTReal.h */,
-				A86939201602347D00F7E6A2 /* FFTReal.hpp */,
-				A86939211602347D00F7E6A2 /* FFTRealFixLen.h */,
-				A86939221602347D00F7E6A2 /* FFTRealFixLen.hpp */,
-				A86939231602347D00F7E6A2 /* FFTRealFixLenParam.h */,
-				A86939241602347D00F7E6A2 /* FFTRealPassDirect.h */,
-				A86939251602347D00F7E6A2 /* FFTRealPassDirect.hpp */,
-				A86939261602347D00F7E6A2 /* FFTRealPassInverse.h */,
-				A86939271602347D00F7E6A2 /* FFTRealPassInverse.hpp */,
-				A86939281602347D00F7E6A2 /* FFTRealSelect.h */,
-				A86939291602347D00F7E6A2 /* FFTRealSelect.hpp */,
-				A869392A1602347D00F7E6A2 /* FFTRealUseTrigo.h */,
-				A869392B1602347D00F7E6A2 /* FFTRealUseTrigo.hpp */,
-				A869392C1602347D00F7E6A2 /* OscSinCos.h */,
-				A869392D1602347D00F7E6A2 /* OscSinCos.hpp */,
-			);
-			path = ffft;
 			sourceTree = "<group>";
 		};
 		A86939321602347D00F7E6A2 /* files */ = {

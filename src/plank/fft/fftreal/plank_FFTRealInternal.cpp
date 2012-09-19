@@ -37,11 +37,8 @@
  */
 
 #include "../../core/plank_StandardHeader.h"
-#include "ffft/FFTReal.h"
-
+#include "../../../../ext/fftreal/ffft/FFTReal.h"
 #include "plank_FFTRealInternal.h"
-
-// possibly use placement new ffft::FFTReal<float> ?? not
 
 void* pl_FFTRealF_CreateAndInitWithLength (const long length)
 {
@@ -51,18 +48,18 @@ void* pl_FFTRealF_CreateAndInitWithLength (const long length)
 
 void pl_FFTRealF_Destroy (void* peer)
 {
-    ffft::FFTReal<float>* fft = static_cast<ffft::FFTReal<float>*> (peer);
+    ffft::FFTReal<float>* const fft = static_cast<ffft::FFTReal<float>*> (peer);
     delete fft;
 }
 
 void pl_FFTRealF_Forward (void* peer, float* output, const float* input)
 {
-    ffft::FFTReal<float>* fft = static_cast<ffft::FFTReal<float>*> (peer);
+    ffft::FFTReal<float>* const fft = static_cast<ffft::FFTReal<float>*> (peer);
     fft->do_fft (output, input);
 }
 
 void pl_FFTRealF_Inverse (void* peer, float* output, const float* input)
 {
-    ffft::FFTReal<float>* fft = static_cast<ffft::FFTReal<float>*> (peer);
+    ffft::FFTReal<float>* const fft = static_cast<ffft::FFTReal<float>*> (peer);
     fft->do_ifft (input, output);
 }
