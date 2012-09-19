@@ -79,9 +79,11 @@
 #define PLANKAUDIOFILE_AIFC_VERSION                   0xA2805140
 
 #if PLANK_OGGVORBIS
-    //#include "oggvorbis/vorbisenc.h"
-    #include "oggvorbis/codec.h"
-    #include "oggvorbis/vorbisfile.h"
+    #include "../../../../ext/vorbis/vorbis/vorbisenc.h"
+    #include "../../../../ext/vorbis/vorbis/codec.h"
+    #include "../../../../ext/vorbis/vorbis/vorbisfile.h"
+//    #include <vorbis/codec.h>
+//    #include <vorbis/vorbisfile.h>
 #endif
 
 

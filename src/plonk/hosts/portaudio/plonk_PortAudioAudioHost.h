@@ -39,7 +39,7 @@
 #ifndef PLONK_PORTAUDIOAUDIOHOST_H
 #define PLONK_PORTAUDIOAUDIOHOST_H
 
-#include "portaudio.h"
+#include "../../../../ext/portaudio/portaudio/portaudio.h"
 
 BEGIN_PLONK_NAMESPACE
 

@@ -228,7 +228,7 @@ PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* file
         p->peer = PLANK_NULL;
         p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
         
-        pl_AudioFileReader_OggVorbis_Open (p, filepath);
+        result = pl_AudioFileReader_OggVorbis_Open (p, filepath);
     }
 #endif
     else 

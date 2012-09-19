@@ -77,8 +77,9 @@
  <strong>Plink</strong>
  <em>None</em>
 
- You should read the section @link PlonkCoreConcepts core concepts in Plonk @endlink then use the macplnk or
- iosplnk projects as a starting point. (Windows project - winplnk - coming soon.)
+ You should read the section @link PlonkCoreConcepts core concepts in Plonk @endlink then use the macplnk 
+ (requires Xcode 3.2.6 or later) or iosplnk (requires Xcode 4.3.3 or later) projects as a starting point. 
+ (Windows project - winplnk - coming soon.)
  
  */
 
@@ -172,4 +173,57 @@
  that are all @c blockSize in length. There should be @c numOutputs pointers in the
  @c outputs array.
 
+*/
+
+
+/*
+ cd libogg-1.3.0 
+ 
+ ./configure 
+ make clean
+ make
+ sudo make install
+ 
+ cp /usr/local/lib/libogg.a libogg-x86_64.a
+ cp /usr/local/lib/libogg.0.dylib libogg-x86_64.dylib 
+ 
+ make clean
+ make CC="gcc -m32"
+ sudo make install
+ 
+ cp /usr/local/lib/libogg.a libogg-i386.a
+ cp /usr/local/lib/libogg.0.dylib libogg-i386.dylib 
+ 
+ sudo rm /usr/local/lib/libogg.a
+ sudo rm /usr/local/lib/libogg.0.dylib
+ sudo lipo -create libogg-i386.a libogg-x86_64.a -output /usr/local/lib/libogg.a
+ sudo lipo -create libogg-i386.dylib libogg-x86_64.dylib -output /usr/local/lib/libogg.0.dylib
+ */
+
+/*
+ cd libvorbis-1.3.3 
+ ./configure
+ make clean
+ make CC="clang -arch x86_64"
+ sudo make install
+ 
+ cp /usr/local/lib/libvorbisenc.2.dylib libvorbisenc-x86_64.dylib 
+ cp /usr/local/lib/libvorbisfile.3.dylib libvorbisfile-x86_64.dylib 
+ cp /usr/local/lib/libvorbis.0.dylib libvorbis-x86_64.dylib 
+ 
+ make clean
+ make CC="clang -arch i386"
+ sudo make install
+ 
+ cp /usr/local/lib/libvorbisenc.2.dylib libvorbisenc-i386.dylib 
+ cp /usr/local/lib/libvorbisfile.3.dylib libvorbisfile-i386.dylib 
+ cp /usr/local/lib/libvorbis.0.dylib libvorbis-i386.dylib 
+ 
+ sudo rm /usr/local/lib/libvorbisenc.2.dylib
+ sudo rm /usr/local/lib/libvorbisfile.3.dylib
+ sudo rm /usr/local/lib/libvorbis.0.dylib
+ 
+ sudo lipo -create libvorbisenc-i386.dylib libvorbisenc-x86_64.dylib -output /usr/local/lib/libvorbisenc.2.dylib
+ sudo lipo -create libvorbisfile-i386.dylib libvorbisfile-x86_64.dylib -output /usr/local/lib/libvorbisfile.3.dylib
+ sudo lipo -create libvorbis-i386.dylib libvorbis-x86_64.dylib -output /usr/local/lib/libvorbis.0.dylib
 */
