@@ -320,9 +320,9 @@ public:
     typedef UnaryOpFunctionsHelper<float>::UnaryOpFunctionsType         UnaryOpFunctionsType;    
 
     typedef BinaryOpChannelInternal<float,BinaryOpFunctionsType::addop> BinaryOpChannel;
-    typedef typename BinaryOpChannel::Process                           Process;
+    typedef BinaryOpChannel::Process                                    Process;
     typedef UnaryOpChannelInternal<float,UnaryOpFunctionsType::move>    UnaryOpChannel;
-    typedef typename UnaryOpChannel::Process                            UnaryProcess;
+    typedef UnaryOpChannel::Process                                     UnaryProcess;
     
     ChannelMixerChannelInternal (Inputs const& inputs, 
                                  Data const& data, 
@@ -451,7 +451,7 @@ public:
     typedef BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType       BinaryOpFunctionsType;    
 
     typedef BinaryOpChannelInternal<float,BinaryOpFunctionsType::addop> BinaryOpChannel;
-    typedef typename BinaryOpChannel::Process                           Process;
+    typedef BinaryOpChannel::Process                                    Process;
 
     UnitMixerChannelInternal (Inputs const& inputs, 
                               Data const& data, 

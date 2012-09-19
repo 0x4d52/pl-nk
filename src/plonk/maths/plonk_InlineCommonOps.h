@@ -64,7 +64,7 @@ template<class Type> inline Type max (Type const& a, Type const& b) throw() { re
 
 /** Returns @e a raised to the power @e b. 
  @ingroup PlonkBinaryOpFunctions*/
-template<class Type> inline Type pow (Type const& a, Type const& b) throw() { return ::pow ((double)a, (double)b);    }
+template<class Type> inline Type pow (Type const& a, Type const& b) throw() { return (Type)::pow ((double)a, (double)b);    }
 
 inline float pow  (float const& a, float const& b) throw() { return pl_PowF (a, b); }
 inline double pow  (double const& a, double const& b) throw() { return pl_PowD (a, b); }

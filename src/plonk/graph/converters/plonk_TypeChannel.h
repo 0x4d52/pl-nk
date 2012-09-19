@@ -158,7 +158,7 @@ public:
         {
             OutputSampleType temp;
             NumericalConverter::roundCopy (inputSamples[0], temp);
-            NumericalArrayFiller<OutputSampleType>::fill (outputSamples, temp, outputBufferLength);
+            NumericalArrayFiller<OutputSampleType>::fill (outputSamples, temp, (UnsignedLong)outputBufferLength);
         }
         else
         {

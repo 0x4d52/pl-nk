@@ -48,7 +48,7 @@
     {\
     public:\
         typedef ChannelInternalCore::Data                                       Data;\
-        typedef typename BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType  BinaryOpFunctionsType;\
+        typedef BinaryOpFunctionsHelper<float>::BinaryOpFunctionsType           BinaryOpFunctionsType;\
         typedef ChannelBase<float>                                              ChannelType;\
         typedef BinaryOpChannelInternal<float,BinaryOpFunctionsType::PLONKOP>   BinaryOpInternal;\
         typedef ChannelInternal<float,Data>                                     Internal;\

@@ -291,7 +291,7 @@ PlankResult pl_AudioFileReader_GetSampleRate (PlankAudioFileReaderRef p, double 
 
 PlankResult pl_AudioFileReader_GetNumFrames (PlankAudioFileReaderRef p, int *numFrames)
 {
-    *numFrames = p->numFrames;
+    *numFrames = (int)p->numFrames;
     return PlankResult_OK;
 }
 
@@ -667,7 +667,7 @@ PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const 
     
     endFrame = startFrame + numFrames;
     
-    framesToRead = (endFrame > p->numFrames) ? (p->numFrames - startFrame) : (numFrames);
+    framesToRead = (endFrame > p->numFrames) ? ((int)p->numFrames - startFrame) : (numFrames);
     bytesToRead = framesToRead * p->formatInfo.bytesPerFrame;
     
     result = pl_File_Read ((PlankFileRef)p->peer, data, bytesToRead, &bytesRead);
@@ -712,7 +712,7 @@ PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, 
     
     if ((result = pl_File_GetPosition ((PlankFileRef)p->peer, &pos)) != PlankResult_OK) goto exit;
     
-    *frameIndex = (pos - p->dataPosition) / p->formatInfo.bytesPerFrame;
+    *frameIndex = (int)(pos - p->dataPosition) / p->formatInfo.bytesPerFrame;
     
 exit:
     return result;

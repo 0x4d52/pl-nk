@@ -168,60 +168,60 @@ PLANK_VECTORBINARYOP_DEFINE(Pow,F)
 PLANK_VECTORBINARYOP_DEFINE(Atan2,F)
 #else
 // use vForce on MacOS
-static inline void pl_VectorReciprocalF_NN (float *result, const float* a, PlankUL N)   { const int n = N; vvrecf (result, a, &n); }
+static inline void pl_VectorReciprocalF_NN (float *result, const float* a, PlankUL N)   { const int n = (int)N; vvrecf (result, a, &n); }
 PLANK_VECTORUNARYOP_DEFINE(Log2,F)
-static inline void pl_VectorSinF_NN (float *result, const float* a, PlankUL N)          { const int n = N; vvsinf (result, a, &n); }
-static inline void pl_VectorCosF_NN (float *result, const float* a, PlankUL N)          { const int n = N; vvcosf (result, a, &n); }
-static inline void pl_VectorTanF_NN (float *result, const float* a, PlankUL N)          { const int n = N; vvtanf (result, a, &n); }
-static inline void pl_VectorAsinF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvasinf (result, a, &n); }
-static inline void pl_VectorAcosF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvacosf (result, a, &n); }
-static inline void pl_VectorAtanF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvatanf (result, a, &n); }
-static inline void pl_VectorSinhF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvsinhf (result, a, &n); }
-static inline void pl_VectorCoshF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvcoshf (result, a, &n); }
-static inline void pl_VectorTanhF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvtanhf (result, a, &n); }
-static inline void pl_VectorSqrtF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvsqrtf (result, a, &n); }
-static inline void pl_VectorLogF_NN (float *result, const float* a, PlankUL N)          { const int n = N; vvlogf (result, a, &n); }
-static inline void pl_VectorLog10F_NN (float *result, const float* a, PlankUL N)        { const int n = N; vvlog10f (result, a, &n); }
-static inline void pl_VectorExpF_NN (float *result, const float* a, PlankUL N)          { const int n = N; vvexpf (result, a, &n); }
-static inline void pl_VectorCeilF_NN (float *result, const float* a, PlankUL N)         { const int n = N; vvceilf (result, a, &n); }
-static inline void pl_VectorFloorF_NN (float *result, const float* a, PlankUL N)        { const int n = N; vvfloorf (result, a, &n); }
+static inline void pl_VectorSinF_NN (float *result, const float* a, PlankUL N)          { const int n = (int)N; vvsinf (result, a, &n); }
+static inline void pl_VectorCosF_NN (float *result, const float* a, PlankUL N)          { const int n = (int)N; vvcosf (result, a, &n); }
+static inline void pl_VectorTanF_NN (float *result, const float* a, PlankUL N)          { const int n = (int)N; vvtanf (result, a, &n); }
+static inline void pl_VectorAsinF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvasinf (result, a, &n); }
+static inline void pl_VectorAcosF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvacosf (result, a, &n); }
+static inline void pl_VectorAtanF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvatanf (result, a, &n); }
+static inline void pl_VectorSinhF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvsinhf (result, a, &n); }
+static inline void pl_VectorCoshF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvcoshf (result, a, &n); }
+static inline void pl_VectorTanhF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvtanhf (result, a, &n); }
+static inline void pl_VectorSqrtF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvsqrtf (result, a, &n); }
+static inline void pl_VectorLogF_NN (float *result, const float* a, PlankUL N)          { const int n = (int)N; vvlogf (result, a, &n); }
+static inline void pl_VectorLog10F_NN (float *result, const float* a, PlankUL N)        { const int n = (int)N; vvlog10f (result, a, &n); }
+static inline void pl_VectorExpF_NN (float *result, const float* a, PlankUL N)          { const int n = (int)N; vvexpf (result, a, &n); }
+static inline void pl_VectorCeilF_NN (float *result, const float* a, PlankUL N)         { const int n = (int)N; vvceilf (result, a, &n); }
+static inline void pl_VectorFloorF_NN (float *result, const float* a, PlankUL N)        { const int n = (int)N; vvfloorf (result, a, &n); }
 
 static inline void pl_VectorPowF_NNN (float *result, const float* a, const float *b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vvpowf (result, b, a, &n); 
 }
 
 static inline void pl_VectorPowF_NN1 (float *result, const float* a, float b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfill (&b, result, 1, N); 
     vvpowf (result, result, a, &n); 
 }
 
 static inline void pl_VectorPowF_N1N (float *result, float a, const float* b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfill (&a, result, 1, N); 
     vvpowf (result, b, result, &n); 
 }
 
 static inline void pl_VectorAtan2F_NNN (float *result, const float* a, const float *b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vvatan2f (result, a, b, &n); 
 }
 
 static inline void pl_VectorAtan2F_NN1 (float *result, const float* a, float b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfill (&b, result, 1, N); 
     vvatan2f (result, a, result, &n); 
 }
 
 static inline void pl_VectorAtan2F_N1N (float *result, float a, const float* b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfill (&a, result, 1, N); 
     vvatan2f (result, result, b, &n); 
 }
@@ -364,8 +364,8 @@ static inline void pl_VectorM2FF_NN (float *result, const float* a, PlankUL N)
     
     PLANK_ALIGN (PLANK_SIMDF_LENGTH * sizeof (float))
     float temp[PLANK_SIMDF_LENGTH];
-    int Nsimd = N >> PLANK_SIMDF_SHIFT;
-    int Nremain = N & PLANK_SIMDF_MASK;
+    PlankUL Nsimd = N >> PLANK_SIMDF_SHIFT;
+    PlankUL Nremain = N & PLANK_SIMDF_MASK;
 
     for (i = 0; i < Nsimd; ++i, result += PLANK_SIMDF_LENGTH, a += PLANK_SIMDF_LENGTH)
     {
@@ -399,8 +399,8 @@ static inline void pl_VectordB2AF_NN (float *result, const float* a, PlankUL N)
     
     PLANK_ALIGN (PLANK_SIMDF_LENGTH * sizeof (float))
     float temp[PLANK_SIMDF_LENGTH];
-    int Nsimd = N >> PLANK_SIMDF_SHIFT;
-    int Nremain = N & PLANK_SIMDF_MASK;
+    PlankUL Nsimd = N >> PLANK_SIMDF_SHIFT;
+    PlankUL Nremain = N & PLANK_SIMDF_MASK;
     
     for (i = 0; i < Nsimd; ++i, result += PLANK_SIMDF_LENGTH, a += PLANK_SIMDF_LENGTH)
     {
@@ -662,60 +662,60 @@ PLANK_VECTORBINARYOP_DEFINE(Pow,D)
 PLANK_VECTORBINARYOP_DEFINE(Atan2,D)
 #else
 // use vForce on MacOS
-static inline void pl_VectorReciprocalD_NN (double *result, const double* a, PlankUL N)   { const int n = N; vvrec (result, a, &n); }
+static inline void pl_VectorReciprocalD_NN (double *result, const double* a, PlankUL N)   { const int n = (int)N; vvrec (result, a, &n); }
 PLANK_VECTORUNARYOP_DEFINE(Log2,D)
-static inline void pl_VectorSinD_NN (double *result, const double* a, PlankUL N)          { const int n = N; vvsin (result, a, &n); }
-static inline void pl_VectorCosD_NN (double *result, const double* a, PlankUL N)          { const int n = N; vvcos (result, a, &n); }
-static inline void pl_VectorTanD_NN (double *result, const double* a, PlankUL N)          { const int n = N; vvtan (result, a, &n); }
-static inline void pl_VectorAsinD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvasin (result, a, &n); }
-static inline void pl_VectorAcosD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvacos (result, a, &n); }
-static inline void pl_VectorAtanD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvatan (result, a, &n); }
-static inline void pl_VectorSinhD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvsinh (result, a, &n); }
-static inline void pl_VectorCoshD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvcosh (result, a, &n); }
-static inline void pl_VectorTanhD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvtanh (result, a, &n); }
-static inline void pl_VectorSqrtD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvsqrt (result, a, &n); }
-static inline void pl_VectorLogD_NN (double *result, const double* a, PlankUL N)          { const int n = N; vvlog (result, a, &n); }
-static inline void pl_VectorLog10D_NN (double *result, const double* a, PlankUL N)        { const int n = N; vvlog10 (result, a, &n); }
-static inline void pl_VectorExpD_NN (double *result, const double* a, PlankUL N)          { const int n = N; vvexp (result, a, &n); }
-static inline void pl_VectorCeilD_NN (double *result, const double* a, PlankUL N)         { const int n = N; vvceil (result, a, &n); }
-static inline void pl_VectorFloorD_NN (double *result, const double* a, PlankUL N)        { const int n = N; vvfloor (result, a, &n); }
+static inline void pl_VectorSinD_NN (double *result, const double* a, PlankUL N)          { const int n = (int)N; vvsin (result, a, &n); }
+static inline void pl_VectorCosD_NN (double *result, const double* a, PlankUL N)          { const int n = (int)N; vvcos (result, a, &n); }
+static inline void pl_VectorTanD_NN (double *result, const double* a, PlankUL N)          { const int n = (int)N; vvtan (result, a, &n); }
+static inline void pl_VectorAsinD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvasin (result, a, &n); }
+static inline void pl_VectorAcosD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvacos (result, a, &n); }
+static inline void pl_VectorAtanD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvatan (result, a, &n); }
+static inline void pl_VectorSinhD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvsinh (result, a, &n); }
+static inline void pl_VectorCoshD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvcosh (result, a, &n); }
+static inline void pl_VectorTanhD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvtanh (result, a, &n); }
+static inline void pl_VectorSqrtD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvsqrt (result, a, &n); }
+static inline void pl_VectorLogD_NN (double *result, const double* a, PlankUL N)          { const int n = (int)N; vvlog (result, a, &n); }
+static inline void pl_VectorLog10D_NN (double *result, const double* a, PlankUL N)        { const int n = (int)N; vvlog10 (result, a, &n); }
+static inline void pl_VectorExpD_NN (double *result, const double* a, PlankUL N)          { const int n = (int)N; vvexp (result, a, &n); }
+static inline void pl_VectorCeilD_NN (double *result, const double* a, PlankUL N)         { const int n = (int)N; vvceil (result, a, &n); }
+static inline void pl_VectorFloorD_NN (double *result, const double* a, PlankUL N)        { const int n = (int)N; vvfloor (result, a, &n); }
 
 static inline void pl_VectorPowD_NNN (double *result, const double* a, const double *b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vvpow (result, b, a, &n); 
 }
 
 static inline void pl_VectorPowD_NN1 (double *result, const double* a, double b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfillD (&b, result, 1, N); 
     vvpow (result, result, a, &n); 
 }
 
 static inline void pl_VectorPowD_N1N (double *result, double a, const double* b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfillD (&a, result, 1, N); 
     vvpow (result, b, result, &n); 
 }
 
 static inline void pl_VectorAtan2D_NNN (double *result, const double* a, const double *b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vvatan2 (result, a, b, &n); 
 }
 
 static inline void pl_VectorAtan2D_NN1 (double *result, const double* a, double b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfillD (&b, result, 1, N); 
     vvatan2 (result, a, result, &n); 
 }
 
 static inline void pl_VectorAtan2D_N1N (double *result, double a, const double* b, PlankUL N)        
 { 
-    const int n = N;
+    const int n = (int)N;
     vDSP_vfillD (&a, result, 1, N); 
     vvatan2 (result, result, b, &n); 
 }

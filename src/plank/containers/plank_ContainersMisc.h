@@ -314,7 +314,7 @@ static inline PlankUI pl_Log2CeilUI (PlankUI x)
 
 static inline PlankUI pl_NextPowerOf2UI (PlankUI x) 
 {
-    return 1LL << pl_Log2CeilUI (x);
+    return 1 << pl_Log2CeilUI (x);
 }
 
 static inline PlankB pl_IsPowerOf2UI (PlankUI x) 

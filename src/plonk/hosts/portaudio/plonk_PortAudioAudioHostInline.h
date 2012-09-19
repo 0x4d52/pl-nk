@@ -200,7 +200,7 @@ int PortAudioAudioHostBase<SampleType>::callback (const SampleType **inputData, 
     (void)timeInfo;
     (void)statusFlags;
     
-    this->setPreferredHostBlockSize (frameCount);
+    this->setPreferredHostBlockSize ((int)frameCount);
     
     ConstBufferArray& inputs = this->getInputs();
     BufferArray& outputs = this->getOutputs();

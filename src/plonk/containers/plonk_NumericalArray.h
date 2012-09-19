@@ -194,7 +194,7 @@ template<>
 class NumericalArrayFiller<double> : public NumericalArrayFillerBase<double>
 {
 public:
-    static inline void fill (double* const dst, const float value, const UnsignedLong numItems) throw()
+    static inline void fill (double* const dst, const double value, const UnsignedLong numItems) throw()
     {        
         pl_VectorFillD_N1 (dst, value, numItems);
     }

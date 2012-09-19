@@ -4488,7 +4488,7 @@ public:
     typedef typename TypeUtilityBase<Type>::IndexType       IndexType;
     
     static inline Text getTypeName()                 { return TypeCode::getName (TypeUtility<Type>::getTypeCode()); }
-    static inline const PeakType& getTypePeak()      { static PeakType v = TypeCode::getPeak (TypeUtility<Type>::getTypeCode()); return v; }
+    static inline const PeakType& getTypePeak()      { static PeakType v = (PeakType)TypeCode::getPeak (TypeUtility<Type>::getTypeCode()); return v; }
     static inline const ScaleType& getTypeScale()    { static ScaleType v = Math<ScaleType>::get1() / ScaleType (getTypePeak()); return v; }
     static inline double getTypeEpsilon()            { return TypeCode::getEpsilon (TypeUtility<Type>::getTypeCode()); }
     static inline Text getIndexTypeName()            { return TypeCode::getName (TypeUtility<IndexType>::getTypeCode()); }

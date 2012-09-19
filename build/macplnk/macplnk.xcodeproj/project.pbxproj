@@ -1322,11 +1322,9 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1348,11 +1346,9 @@
 					"PLONK_AUDIOHOST_PORTAUDIO=1",
 					"NDEBUG=1",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				SDKROOT = macosx;
 			};
@@ -1364,6 +1360,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macplnk/macplnk-Prefix.pch";
+				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = (
 					../../../ext/portaudio/include/,
 					"$(inherited)",
@@ -1373,6 +1370,7 @@
 					"$(inherited)",
 					../../ext/portaudio/lib/osx/,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1384,6 +1382,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macplnk/macplnk-Prefix.pch";
+				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = (
 					../../../ext/portaudio/include/,
 					"$(inherited)",
@@ -1393,6 +1392,7 @@
 					"$(inherited)",
 					../../ext/portaudio/lib/osx/,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

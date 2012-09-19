@@ -189,7 +189,7 @@ template<class Type> inline Type mulop (Type const& a, Type const& b) throw() { 
 template<class Type> inline Type divop (Type const& a, Type const& b) throw() { return a / b; }
 
 /** Convenient inline function for the '%' operator. */
-template<class Type> inline Type modop (Type const& a, Type const& b) throw() { return (LongLong)a % (LongLong)b; }
+template<class Type> inline Type modop (Type const& a, Type const& b) throw() { return (Type)((LongLong)a % (LongLong)b); }
 
 /** Convenient inline function for the '%' operator (float). */
 inline float modop (float const& a, float const& b) throw() { return pl_ModF (a, b); }

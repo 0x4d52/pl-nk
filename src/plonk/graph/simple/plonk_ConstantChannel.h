@@ -64,7 +64,7 @@ public:
                   Data::create(-1.0),
                   BlockSize::getBlockSize1(), 
                   SampleRate::getSampleRate0()),
-        value (valueInit)
+        value ((SampleType)valueInit)
     {
     }
     
@@ -100,7 +100,7 @@ public:
         if (outputBufferLength == 1)
             outputSamples[0] = value;
         else
-            NumericalArrayFiller<SampleType>::fill (outputSamples, value, outputBufferLength);
+            NumericalArrayFiller<SampleType>::fill (outputSamples, value, (UnsignedLong)outputBufferLength);
     }
             
 private:
