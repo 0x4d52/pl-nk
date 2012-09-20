@@ -219,16 +219,19 @@ PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* file
     {
         result = pl_AudioFileReader_Iff_Open (p, filepath);
     }
-#if PLANK_OGGVORBIS
-    else if (mainID == pl_FourCharCode ("OggS")) //Ogg
+#if PLANK_OGGVORBIS || PLANK_OPUS
+    else if (mainID == pl_FourCharCode ("OggS")) //Ogg this needs to handle any Ogg e.g., Vorbis or Opus
     {
         // close the Iff file and start again
         if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
         
         p->peer = PLANK_NULL;
         p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
-        
+
+        // something to decide what type of ogg it is...
+#if PLANK_OGGVORBIS        
         result = pl_AudioFileReader_OggVorbis_Open (p, filepath);
+#endif
     }
 #endif
     else 
