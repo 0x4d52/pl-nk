@@ -4,6 +4,8 @@ Adds Ogg Vorbis support to Plank and Plonk. Add this folder to a
 project (all all the files in it) and define the preprocessor macro 
 PLANK_OGGVORBIS=1
 
+You also need to add the ext/ogg folder.
+
 
 
 ---------------------------------------------------------------------
