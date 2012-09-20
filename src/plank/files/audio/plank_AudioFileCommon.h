@@ -79,11 +79,18 @@
 #define PLANKAUDIOFILE_AIFC_VERSION                   0xA2805140
 
 #if PLANK_OGGVORBIS
+    #ifndef OV_EXCLUDE_STATIC_CALLBACKS
+        #define OV_EXCLUDE_STATIC_CALLBACKS
+    #endif
+
     #include "../../../../ext/vorbis/vorbis/vorbisenc.h"
     #include "../../../../ext/vorbis/vorbis/codec.h"
     #include "../../../../ext/vorbis/vorbis/vorbisfile.h"
-//    #include <vorbis/codec.h>
-//    #include <vorbis/vorbisfile.h>
+#endif
+
+#if PLANK_OPUS
+    #include "../../../../ext/ogg/ogg.h"
+    #include "../../../../ext/opus/opus.h"
 #endif
 
 

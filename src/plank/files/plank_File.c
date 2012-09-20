@@ -990,7 +990,7 @@ PlankResult pl_FileDefaultReadCallback (PlankFileRef p, PlankP ptr, int maximumB
     }
     
 exit:
-    clearerr ((FILE*)p->stream);
+//    clearerr ((FILE*)p->stream);
     
     if (bytesRead != PLANK_NULL)
         *bytesRead = size;
@@ -1015,6 +1015,7 @@ PlankResult pl_FileDefaultSetPositionCallback (PlankFileRef p, PlankLL offset, i
 #if PLANK_WIN
     int err;
 
+    clearerr ((FILE*)p->stream);
     err = _fseeki64 ((FILE*)p->stream, temp, code);
     
     if (err != 0)
@@ -1025,6 +1026,7 @@ PlankResult pl_FileDefaultSetPositionCallback (PlankFileRef p, PlankLL offset, i
     int err;
     off_t temp;
 
+    clearerr ((FILE*)p->stream);
     temp = offset;
     err = fseeko ((FILE*)p->stream, temp, code);
     
