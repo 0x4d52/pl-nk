@@ -75,6 +75,12 @@ PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, 
 PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex);
 PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex);
 
+PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char* filepath);
+PlankResult pl_AudioFileReader_Opus_Close (PlankAudioFileReaderRef p);
+PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
+PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex);
+PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex);
+
 
 #if PLANK_APPLE
 #pragma mark Generic Functions
@@ -729,7 +735,7 @@ exit:
 #endif
 
 #include "../../containers/plank_DynamicArray.h"
-typedef struct PlankOggFileReader
+typedef struct PlankOggVorbisFileReader
 {
     PlankFile file;
     OggVorbis_File oggVorbisFile;
@@ -739,20 +745,20 @@ typedef struct PlankOggFileReader
     int bufferFrames;
     PlankLL totalFramesRead;
     int bitStream;
-} PlankOggFileReader;
+} PlankOggVorbisFileReader;
 
-typedef PlankOggFileReader* PlankOggFileReaderRef;
+typedef PlankOggVorbisFileReader* PlankOggVorbisFileReaderRef;
 
-size_t pl_OggFileReader_ReadCallback (PlankP ptr, size_t size, size_t size2, PlankP ref);
-int pl_OggFileReader_SeekCallback (PlankP ref, PlankLL offset, int code);
-int pl_OggFileReader_CloseCallback (PlankP ref);
-long pl_OggFileReader_TellCallback (PlankP ref);
+size_t pl_OggVorbisFileReader_ReadCallback (PlankP ptr, size_t size, size_t size2, PlankP ref);
+int pl_OggVorbisFileReader_SeekCallback (PlankP ref, PlankLL offset, int code);
+int pl_OggVorbisFileReader_CloseCallback (PlankP ref);
+long pl_OggVorbisFileReader_TellCallback (PlankP ref);
 
 
 PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const char* filepath)
 {
     PlankResult result;
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     PlankMemoryRef m;
     PlankLL numFrames;
     PlankI bytesPerSample;
@@ -763,7 +769,7 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     m = pl_MemoryGlobal();
     
     // open as ogg
-    ogg = (PlankOggFileReaderRef)pl_Memory_AllocateBytes (m, sizeof (PlankOggFileReader));
+    ogg = (PlankOggVorbisFileReaderRef)pl_Memory_AllocateBytes (m, sizeof (PlankOggVorbisFileReader));
     
     if (ogg == PLANK_NULL)
     {
@@ -777,7 +783,7 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
     p->formatInfo.bitsPerSample = PLANKAUDIOFILE_CHARBITS * bytesPerSample;
     
-    pl_MemoryZero (ogg, sizeof (PlankOggFileReader));
+    pl_MemoryZero (ogg, sizeof (PlankOggVorbisFileReader));
     
     ogg->bufferPosition  = 0;
     ogg->bufferFrames    = 0;
@@ -789,10 +795,10 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     // open as binary, not writable, litte endian
     if ((result = pl_File_OpenBinaryRead (&ogg->file, filepath, PLANK_FALSE, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
-    ogg->callbacks.read_func  = &pl_OggFileReader_ReadCallback;
-    ogg->callbacks.seek_func  = &pl_OggFileReader_SeekCallback;
-    ogg->callbacks.close_func = &pl_OggFileReader_CloseCallback;
-    ogg->callbacks.tell_func  = &pl_OggFileReader_TellCallback;
+    ogg->callbacks.read_func  = &pl_OggVorbisFileReader_ReadCallback;
+    ogg->callbacks.seek_func  = &pl_OggVorbisFileReader_SeekCallback;
+    ogg->callbacks.close_func = &pl_OggVorbisFileReader_CloseCallback;
+    ogg->callbacks.tell_func  = &pl_OggVorbisFileReader_TellCallback;
     
     err = ov_open_callbacks (p, &ogg->oggVorbisFile, 0, 0, ogg->callbacks); // docs suggest this should be on the other thread if threaded...
     
@@ -831,7 +837,7 @@ exit:
 
 PlankResult pl_AudioFileReader_OggVorbis_Close (PlankAudioFileReaderRef p)
 {
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     PlankResult result = PlankResult_OK;
     int err;
     PlankMemoryRef m = pl_MemoryGlobal();
@@ -842,7 +848,7 @@ PlankResult pl_AudioFileReader_OggVorbis_Close (PlankAudioFileReaderRef p)
         goto exit;
     }
     
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     
     err = ov_clear (&ogg->oggVorbisFile); // closes our PlankFile in the close callback
     
@@ -863,7 +869,7 @@ exit:
 PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesReadOut)
 {    
     PlankResult result;
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     int numFramesRemaining, bufferFramesRemaining, bufferFramePosition;
     int bufferSizeInBytes, bytesPerFrame, bufferFrameEnd, bitStream;
     int framesThisTime, numChannels, framesRead, streamFrameEnd, i, j;
@@ -882,7 +888,7 @@ PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, 
     numCalls = calls;
     
     result = PlankResult_OK;
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     file = &ogg->oggVorbisFile;
 
     numFramesRemaining      = numFrames;
@@ -985,10 +991,10 @@ exit:
 
 PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex)
 {
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     int err;
     
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     err = ov_pcm_seek_lap (&ogg->oggVorbisFile, frameIndex); // should probably eventually do my own lapping in readframes?
     
     if (err != 0)
@@ -999,10 +1005,10 @@ PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderR
 
 PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex)
 {
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     PlankLL pos;
     
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     pos = ov_pcm_tell (&ogg->oggVorbisFile);
     
     if (pos < 0)
@@ -1017,16 +1023,16 @@ PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderR
 #pragma mark Ogg Vorbis Callbacks
 #endif
 
-size_t pl_OggFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, PlankP datasource)
+size_t pl_OggVorbisFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, PlankP datasource)
 {
     size_t ret;
     PlankResult result;
     PlankAudioFileReaderRef p;
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     int bytesRead;
     
     p = (PlankAudioFileReaderRef)datasource;
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     
     result = pl_File_Read ((PlankFileRef)ogg, ptr, (int)(size * nmemb) / size, &bytesRead);
     ret = bytesRead > 0 ? bytesRead : 0;
@@ -1037,15 +1043,15 @@ size_t pl_OggFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, Pla
     return ret;
 }
 
-int pl_OggFileReader_SeekCallback (PlankP datasource, PlankLL offset, int code)
+int pl_OggVorbisFileReader_SeekCallback (PlankP datasource, PlankLL offset, int code)
 {    
     PlankResult result;
     PlankAudioFileReaderRef p;
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     PlankFileRef file;
     
     p = (PlankAudioFileReaderRef)datasource;
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     file = (PlankFileRef)ogg;
     
     // API says return -1 (OV_FALSE) if the file is not seekable    
@@ -1055,15 +1061,15 @@ int pl_OggFileReader_SeekCallback (PlankP datasource, PlankLL offset, int code)
     return result == PlankResult_OK ? 0 : OV_FALSE;
 }
 
-int pl_OggFileReader_CloseCallback (PlankP datasource)
+int pl_OggVorbisFileReader_CloseCallback (PlankP datasource)
 {
     PlankResult result;
     PlankAudioFileReaderRef p;
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     PlankFileRef file;
     
     p = (PlankAudioFileReaderRef)datasource;
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     file = (PlankFileRef)ogg;
     
     result = pl_File_DeInit (file);
@@ -1071,16 +1077,16 @@ int pl_OggFileReader_CloseCallback (PlankP datasource)
     return result == PlankResult_OK ? 0 : OV_FALSE;
 }
 
-long pl_OggFileReader_TellCallback (PlankP datasource)
+long pl_OggVorbisFileReader_TellCallback (PlankP datasource)
 {
     PlankResult result;
     PlankAudioFileReaderRef p;
-    PlankOggFileReaderRef ogg;
+    PlankOggVorbisFileReaderRef ogg;
     PlankFileRef file;
     PlankLL position;
     
     p = (PlankAudioFileReaderRef)datasource;
-    ogg = (PlankOggFileReaderRef)p->peer;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
     file = (PlankFileRef)ogg;
     
     result = pl_File_GetPosition (file, &position);
@@ -1089,3 +1095,322 @@ long pl_OggFileReader_TellCallback (PlankP datasource)
 }
 #endif // PLANK_OGGVORBIS
 
+// -- Opus Functions -- ////////////////////////////////////////////////////////
+
+#if PLANK_OPUS
+#if PLANK_APPLE
+#pragma mark Opus Functions
+#endif
+
+typedef struct PlankOpusFileReader
+{
+    PlankFile file;
+    
+    ogg_sync_state      oy;
+    ogg_page            og;
+    ogg_packet          op;
+    ogg_stream_state    os;
+    
+    PlankLL page_granule;
+    PlankLL link_out;
+    PlankLL packet_count;
+    
+    OpusMSDecoder *st;
+    
+    int maxFrameSize;
+    int stream_init;
+    int eos;
+    int has_opus_stream;
+    int opus_serialno;
+    int total_links;
+    int mapping_family;
+    int preskip;
+    int streams;
+    int gran_offset;
+    
+    int rate;
+    int channels;
+    
+    float gain;
+    float manual_gain;
+    float *output;
+} PlankOpusFileReader;
+
+typedef PlankOpusFileReader* PlankOpusFileReaderRef;
+
+static PlankResult pl_AudioFileReader_Opus_ProcessHeader (PlankAudioFileReaderRef p, 
+                                                          ogg_packet *op, 
+                                                          float manual_gain, 
+                                                          OpusMSDecoder** decoder)
+{
+    PlankResult result;
+    PlankOpusFileReaderRef opus;
+    int err;
+    OpusMSDecoder *st;
+    OpusHeader header;
+    
+    result = PlankResult_OK;
+    opus = (PlankOpusFileReaderRef)p->peer;
+    st = PLANK_NULL;
+    
+    if (opus_header_parse (op->packet, (int)op->bytes, &header) == 0)
+        goto exit;
+    
+    opus->mapping_family = header.channel_mapping;
+    opus->channels = header.channels;
+    
+    
+    if (!opus->rate)
+        opus->rate = header.input_sample_rate;
+    
+    /*If the rate is unspecified we decode to 48000*/
+    if (opus->rate == 0)
+        opus->rate = 48000;
+    
+    if (opus->rate < 8000 || opus->rate > 192000)
+        opus->rate = 48000;
+    
+    opus->preskip = header.preskip;
+    
+    st = opus_multistream_decoder_create (48000, header.channels, header.nb_streams, header.nb_coupled, header.stream_map, &err);
+    
+    if (err != OPUS_OK)
+        goto exit;
+    
+    if (!st)
+        goto exit;
+    
+    opus->streams = header.nb_streams;
+    
+    if (header.gain != 0 || manual_gain != 0)
+    {
+        /*Gain API added in a newer libopus version, if we don't have it
+         we apply the gain ourselves. We also add in a user provided
+         manual gain at the same time.*/
+        int gainadj = (int)(manual_gain * 256.) + header.gain;
+        
+        err = opus_multistream_decoder_ctl (st, OPUS_SET_GAIN (gainadj));
+        
+        if (err == OPUS_UNIMPLEMENTED)
+            opus->gain = pl_PowD (10., gainadj/5120.);
+        else if (err != OPUS_OK)
+            goto exit;
+    }
+    
+exit:
+    *decoder = st;  // could st leak from one of the error checks?
+    return result;    
+}
+
+PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char* filepath)
+{
+    PlankResult result;
+    PlankOpusFileReaderRef opus;
+    PlankMemoryRef m;
+    //PlankLL numFrames;
+    PlankI bytesPerSample;
+
+    int err;
+    
+    m = pl_MemoryGlobal();
+    
+    // open as opus
+    opus = (PlankOpusFileReaderRef)pl_Memory_AllocateBytes (m, sizeof (PlankOpusFileReader));
+    
+    if (opus == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    p->peer = opus;
+    bytesPerSample = sizeof (float);
+    p->formatInfo.format = PLANKAUDIOFILE_FORMAT_OPUS;
+    p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
+    p->formatInfo.bitsPerSample = PLANKAUDIOFILE_CHARBITS * bytesPerSample;
+    
+    pl_MemoryZero (opus, sizeof (PlankOggVorbisFileReader));
+    opus->channels = -1;
+    opus->gain = 1.f;
+    
+    result = pl_File_Init (&opus->file);
+    result = pl_File_OpenBinaryRead (&opus->file, filepath, PLANK_FALSE, PLANK_FALSE);
+    err = ogg_sync_init (&opus->oy);
+    
+    opus->maxFrameSize = 960 * 6;
+    
+
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileReader_Opus_Close (PlankAudioFileReaderRef p)
+{
+    PlankResult result;
+    PlankOpusFileReaderRef opus;
+    int err;
+    
+    opus = (PlankOpusFileReaderRef)p->peer;
+
+    if (opus->stream_init)
+        err = ogg_stream_clear (&opus->os);
+        
+    err = ogg_sync_clear (&opus->oy);
+        
+    if (opus->output)
+        free (opus->output);
+            
+    opus->output = PLANK_NULL;
+    
+    result = pl_File_DeInit (&opus->file);
+    
+    return result;
+}
+
+PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* frameData, int *framesReadOut)
+{
+    PlankResult fileResult, errResult;
+    PlankOpusFileReaderRef opus;
+    int err;
+    char *data;
+    int i, nb_read;
+    int ret;
+    int frame_size;
+    PlankLL maxout;
+    PlankLL outsamp;
+
+    PlankB frameDone;
+    
+    opus = (PlankOpusFileReaderRef)p->peer;
+
+    frameDone = PLANK_FALSE;
+    
+    while (!frameDone)
+    {
+        /*Get the ogg buffer for writing*/
+        data = ogg_sync_buffer(&opus->oy, 200);
+        
+        /*Read bitstream from input file*/
+        fileResult = pl_File_Read (&opus->file, data, 200, &nb_read);
+        
+        err = ogg_sync_wrote (&opus->oy, nb_read);
+        
+        /*Loop for all complete pages we got (most likely only one)*/
+        while ((err = ogg_sync_pageout (&opus->oy, &opus->og)) == 1) 
+        {
+            if (opus->stream_init == 0) 
+            {
+                err = ogg_stream_init (&opus->os, ogg_page_serialno (&opus->og));
+                opus->stream_init = 1;
+            }
+            
+            if (ogg_page_serialno (&opus->og) != opus->os.serialno) 
+            {
+                /* so all streams are read. */
+                err = ogg_stream_reset_serialno (&opus->os, ogg_page_serialno (&opus->og));
+            }
+            
+            /*Add page to the bitstream*/
+            err = ogg_stream_pagein (&opus->os, &opus->og);
+            opus->page_granule = ogg_page_granulepos (&opus->og);
+            
+            /*Extract all available packets*/
+            while ((err = ogg_stream_packetout (&opus->os, &opus->op)) == 1)
+            {
+                /*OggOpus streams are identified by a magic string in the initial stream header.*/
+                if (opus->op.b_o_s && opus->op.bytes >= 8 && !memcmp (opus->op.packet, "OpusHead", 8)) 
+                {
+                    if (!opus->has_opus_stream)
+                    {
+                        opus->opus_serialno     = opus->os.serialno;
+                        opus->has_opus_stream   = 1;
+                        opus->link_out          = 0;
+                        opus->packet_count      = 0;
+                        opus->eos               = 0;
+                        opus->total_links++;
+                    }
+                }
+                
+                if (!opus->has_opus_stream || opus->os.serialno != opus->opus_serialno)
+                    break;
+                
+                /*If first packet in a logical stream, process the Opus header*/
+                if (opus->packet_count == 0)
+                {
+                    errResult = pl_AudioFileReader_Opus_ProcessHeader (p, &opus->op, opus->manual_gain, &opus->st);
+                    
+                    if (!opus->st)
+                        goto exit;
+                    
+                    /*Remember how many samples at the front we were told to skip
+                     so that we can adjust the timestamp counting.*/
+                    opus->gran_offset = opus->preskip;
+                    
+                    if (!opus->output)
+                        opus->output = (float*)malloc (sizeof (float) * opus->maxFrameSize * opus->channels);
+                }
+                else if (opus->packet_count == 1)
+                {
+                    // comments
+                }
+                else 
+                {
+                    // other packets
+                    
+                    /*End of stream condition*/
+                    if (opus->op.e_o_s && opus->os.serialno == opus->opus_serialno)
+                        opus->eos = 1; /* don't care for anything except opus eos */
+                    
+                    ret = opus_multistream_decode_float (opus->st, 
+                                                         opus->op.packet, 
+                                                         opus->op.bytes, 
+                                                         opus->output, 
+                                                         opus->maxFrameSize, 0);
+                    
+                    if (ret < 0)
+                        break;
+                    
+                    frame_size = ret;
+                    
+                    if (opus->gain != 0)
+                    {
+                        for (i = 0; i < frame_size * opus->channels; i++)
+                            opus->output[i] *= opus->gain;
+                    }
+                    
+                    maxout = ((opus->page_granule - opus->gran_offset) * opus->rate / 48000) - opus->link_out;
+                    outsamp = maxout; // should be actual samples output..
+                    opus->link_out += outsamp;
+                    
+                    frameDone = PLANK_TRUE;
+                    *framesReadOut = (int)outsamp; // or just frame_size ??
+                }
+                
+                opus->packet_count++;
+            }
+            
+            if (opus->eos)
+            {
+                opus->has_opus_stream = 0;
+                
+                if (opus->st)
+                    opus_multistream_decoder_destroy (opus->st);
+                
+                opus->st = NULL;
+            }
+            
+        }
+        
+        if (fileResult == PlankResult_FileEOF) // or pl_File_IsEOF (&file) ??
+            frameDone = PLANK_TRUE;
+    }
+    
+exit:
+    return fileResult;
+}
+
+//PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex);
+//PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex);
+
+
+#endif

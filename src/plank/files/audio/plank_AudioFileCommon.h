@@ -48,7 +48,7 @@
 #define PLANKAUDIOFILE_FORMAT_AIFF                    3
 #define PLANKAUDIOFILE_FORMAT_AIFC                    4
 #define PLANKAUDIOFILE_FORMAT_OGGVORBIS               5
-
+#define PLANKAUDIOFILE_FORMAT_OPUS                    6
 
 #define PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG        1
 #define PLANKAUDIOFILE_ENCODING_PCM_FLAG              2
