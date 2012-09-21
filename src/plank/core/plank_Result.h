@@ -82,7 +82,7 @@ enum PlankResultIdentifiers
     PlankResult_ThreadSetPriorityFailed,    ///< Setting the thread's priority failed.
     PlankResult_ThreadSetAffinityFailed,    ///< Setting the thread's affinity failed.
 
-    PlankResult_FunctionsInvalid, 
+    PlankResult_FunctionsInvalid,           ///< One or more callback functions were null
     
     PlankResult_IndexOutOfRange,            ///< An index for a list, array etc was out of range.
     PlankResult_ContainerNotEmptyOnDeInit,  ///< A container (list, queue, stack) is being de-initialised but is non-empty.

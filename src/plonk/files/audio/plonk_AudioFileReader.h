@@ -320,7 +320,8 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             dataRemaining -= samplesRead;
         }
             
-        if (((result == PlankResult_FileEOF) || (framesRead < framesToRead)) && loop)
+//        if (((result == PlankResult_FileEOF) || (framesRead < framesToRead)) && loop)
+        if ((result == PlankResult_FileEOF) && loop)
         {
             result = pl_AudioFileReader_ResetFramePosition (getPeerRef());              
             plonk_assert (result == PlankResult_OK);
