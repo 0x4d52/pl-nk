@@ -93,6 +93,12 @@
     #include "../../../../ext/opus/opus.h"
     #include "../../../../ext/opus/opus_multistream.h"
     #include "../../../../ext/opus/opus_header.h"
+    #define PLANKAUDIOFILE_OPUS_MAXFRAMESIZE             5760  // (960 * 6)
+    #define PLANKAUDIOFILE_OPUS_READBYTES                 200
+    #define PLANKAUDIOFILE_OPUS_MINSAMPLERATE            8000
+    #define PLANKAUDIOFILE_OPUS_MAXSAMPLERATE          192000
+    #define PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE       48000
+    #define PLANKAUDIOFILE_OPUS_HEAD                "OpusHead"
 #endif
 
 
