@@ -91,6 +91,8 @@
 #if PLANK_OPUS
     #include "../../../../ext/ogg/ogg.h"
     #include "../../../../ext/opus/opus.h"
+    #include "../../../../ext/opus/opus_multistream.h"
+    #include "../../../../ext/opus/opus_header.h"
 #endif
 
 

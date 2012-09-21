@@ -20,6 +20,11 @@ typedef short ogg_int16_t;
 typedef unsigned short ogg_uint16_t;
 typedef int ogg_int32_t;
 typedef unsigned int ogg_uint32_t;
-typedef long ogg_int64_t;
+
+#if (defined (_WIN32) || defined (_WIN64) || defined (WIN64))
+typedef __int64 ogg_int64_t;
+#else
+typedef long long ogg_int64_t;
+#endif
 
 #endif
