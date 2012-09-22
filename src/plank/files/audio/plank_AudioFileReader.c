@@ -1484,26 +1484,27 @@ PlankResult pl_AudioFileReader_Opus_FillBuffer (PlankAudioFileReaderRef p)
                                                  buffer, 
                                                  numFrames, 0);
             
-            if (ret < 0)
-                break; // what if we keep hitting this? we end up in an infinite loop! in the outer while()
+            frame_size = ret < 0 ? 0 : ret;
             
-            frame_size = ret;
-            
-            if (opus->gain != 0)
+            if (frame_size > 0)
             {
-                for (i = 0; i < frame_size * opus->channels; i++)
-                    buffer[i] *= opus->gain;
+                if (opus->gain != 0)
+                {
+                    for (i = 0; i < frame_size * opus->channels; i++)
+                        buffer[i] *= opus->gain;
+                }
+                
+                maxout = ((opus->page_granule - opus->gran_offset) * opus->rate / PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE);
+                maxout -= opus->link_out;
+                outsamp = maxout; // should be actual samples output..?
+                opus->link_out += outsamp;
+                
+                opus->bufferFramePosition = 0;
+                opus->bufferFramesRemaining = frame_size;
+                
+                frameDone = PLANK_TRUE;            
+                opus->packet_count++;
             }
-            
-            maxout = ((opus->page_granule - opus->gran_offset) * opus->rate / PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE) - opus->link_out;
-            outsamp = maxout; // should be actual samples output..
-            opus->link_out += outsamp;
-            
-            opus->bufferFramePosition = 0;
-            opus->bufferFramesRemaining = frame_size;
-            
-            frameDone = PLANK_TRUE;            
-            opus->packet_count++;
         }
         else 
         {

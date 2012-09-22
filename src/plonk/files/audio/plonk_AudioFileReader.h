@@ -227,7 +227,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
     int dataIndex = 0;
     
-    const int numFailsAllowed = 2;
+    const int numFailsAllowed = 3;
     int numFails = 0;
     
     while ((dataRemaining > 0) && 
@@ -329,7 +329,6 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             numFails++;
         }
             
-//        if (((result == PlankResult_FileEOF) || (framesRead < framesToRead)) && loop)
         if ((result == PlankResult_FileEOF) && loop)
         {
             result = pl_AudioFileReader_ResetFramePosition (getPeerRef());              
