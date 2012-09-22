@@ -227,7 +227,12 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
     int dataIndex = 0;
     
-    while ((dataRemaining > 0) && (result != PlankResult_FileEOF))
+    const int numFailsAllowed = 2;
+    int numFails = 0;
+    
+    while ((dataRemaining > 0) && 
+           (result != PlankResult_FileEOF) &&
+           (numFails < numFailsAllowed))
     {
         AtomicInt newPosition (-1);
         newPositionOnNextRead.swapWith (newPosition);
@@ -318,6 +323,10 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             dataArray += samplesRead;
             dataIndex += samplesRead;
             dataRemaining -= samplesRead;
+        }
+        else
+        {
+            numFails++;
         }
             
 //        if (((result == PlankResult_FileEOF) || (framesRead < framesToRead)) && loop)

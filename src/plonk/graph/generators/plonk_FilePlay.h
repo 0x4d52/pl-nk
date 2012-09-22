@@ -122,9 +122,11 @@ public:
         
         const bool hitEOF = file.readFrames (buffer, true); // loop could be a flag but would need to check for a partial buffer
                         
+        int channel;
+        
         if (! hitEOF)
         {
-            for (int channel = 0; channel < numChannels; ++channel)
+            for (channel = 0; channel < numChannels; ++channel)
             {
                 Buffer& outputBuffer = this->getOutputBuffer (channel);
                 SampleType* const outputSamples = outputBuffer.getArray();
@@ -138,7 +140,32 @@ public:
         }
         else
         {
-            plonk_assertfalse; // once we allow non-looping we need to handle partial buffers...
+            // zero
+            for (channel = 0; channel < numChannels; ++channel)
+            {
+                Buffer& outputBuffer = this->getOutputBuffer (channel);
+                outputBuffer.zero();
+            }
+            
+            const int bufferAvailable = buffer.length();
+            
+            // copy partial buffer
+            if (bufferAvailable > 0)
+            {
+                const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
+                
+                for (channel = 0; channel < numChannels; ++channel)
+                {
+                    Buffer& outputBuffer = this->getOutputBuffer (channel);
+                    SampleType* const outputSamples = outputBuffer.getArray();
+                    const int outputBufferLength = plonk::min (bufferFramesAvailable, outputBuffer.length());        
+                    
+                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
+                    
+                    for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
+                        outputSamples[i] = *bufferSamples;
+                }
+            }
         }
     }
     
@@ -168,8 +195,7 @@ private:
  The sample rate of the unit is by default set to the sample rate of the audio file.
  
  NB This should not be used directly in a real-time audio thread. It should
- be wrapped in a ThreadedUnit (not yet implemented!) which buffers the audio on 
- a separate thread.
+ be wrapped in a TaskUnit which buffers the audio on a separate thread.
  
  @par Factory functions:
  - ar (file, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=noPref)

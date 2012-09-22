@@ -1369,7 +1369,6 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
                 
                 headerDone = PLANK_TRUE;
                 opus->packet_count++;
-                break;
             }
         }
         else 
@@ -1381,89 +1380,6 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
         }
     }
     
-//    while (!headerDone)
-//    {
-//        /*Get the ogg buffer for writing*/
-//        data = ogg_sync_buffer (&opus->oy, PLANKAUDIOFILE_OPUS_READBYTES);
-//        
-//        /*Read bitstream from input file*/
-//        result = pl_File_Read (&opus->file, data, PLANKAUDIOFILE_OPUS_READBYTES, &numBytes);
-//        
-//        if (result != PlankResult_OK)
-//            goto exit; // can't be enough data... quit now!
-//        
-//        err = ogg_sync_wrote (&opus->oy, numBytes);
-//        
-//        /*Loop for all complete pages we got (most likely only one)*/
-//        while ((err = ogg_sync_pageout (&opus->oy, &opus->og)) == 1) 
-//        {
-//            if (opus->stream_init == 0) 
-//            {
-//                err = ogg_stream_init (&opus->os, ogg_page_serialno (&opus->og));
-//                opus->stream_init = 1;
-//            }
-//            
-//            if (ogg_page_serialno (&opus->og) != opus->os.serialno) 
-//            {
-//                /* so all streams are read. */
-//                err = ogg_stream_reset_serialno (&opus->os, ogg_page_serialno (&opus->og));
-//            }
-//            
-//            /*Add page to the bitstream*/
-//            err = ogg_stream_pagein (&opus->os, &opus->og);
-//            opus->page_granule = ogg_page_granulepos (&opus->og);
-//            
-//            /*Extract all available packets*/
-//            while ((err = ogg_stream_packetout (&opus->os, &opus->op)) == 1)
-//            {
-//                /*OggOpus streams are identified by a magic string in the initial stream header.*/
-//                if (opus->op.b_o_s && opus->op.bytes >= 8 && !memcmp (opus->op.packet, PLANKAUDIOFILE_OPUS_HEAD, 8)) 
-//                {
-//                    if (!opus->has_opus_stream)
-//                    {
-//                        opus->opus_serialno     = opus->os.serialno;
-//                        opus->has_opus_stream   = 1;
-//                        opus->link_out          = 0;
-//                        opus->packet_count      = 0;
-//                        opus->eos               = 0;
-//                        opus->total_links++;
-//                    }
-//                }
-//                
-//                if (!opus->has_opus_stream || opus->os.serialno != opus->opus_serialno)
-//                {
-//                    result = PlankResult_AudioFileReaderInavlidType;
-//                    goto exit;
-//                }
-//                
-//                /*If first packet in a logical stream, process the Opus header*/
-//                if (opus->packet_count == 0)
-//                {
-//                    result = pl_AudioFileReader_Opus_ProcessHeader (p, &opus->op, opus->manual_gain, &opus->st);
-//                    
-//                    if (!opus->st)
-//                    {
-//                        result = PlankResult_AudioFileReaderInavlidType;
-//                        goto exit;
-//                    }
-//                    
-//                    /*Remember how many samples at the front we were told to skip
-//                     so that we can adjust the timestamp counting.*/
-//                    opus->gran_offset = opus->preskip;
-//                    opus->packet_count++;
-//                }
-//                else if (opus->packet_count == 1)
-//                {
-//                    // comments
-//                    // ..etc
-//                    headerDone = PLANK_TRUE;
-//                    opus->packet_count++;
-//                    break;
-//                }
-//            }           
-//        }
-//    }
-
     p->formatInfo.numChannels   = opus->channels;
     p->formatInfo.sampleRate    = opus->rate;
     p->formatInfo.bytesPerFrame = opus->channels * bytesPerSample;
