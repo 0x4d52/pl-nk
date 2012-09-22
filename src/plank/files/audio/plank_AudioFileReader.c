@@ -1238,6 +1238,49 @@ exit:
     return result;    
 }
 
+static PlankResult pl_AudioFileReader_Opus_NextPage (PlankAudioFileReaderRef p)
+{
+    PlankResult result;
+    PlankOpusFileReaderRef opus;
+    int err, numBytes;
+    char *data;
+    
+    result = PlankResult_OK;
+    err = 0;
+    opus = (PlankOpusFileReaderRef)p->peer;
+    
+    if (pl_File_IsEOF (&opus->file))
+        return PlankResult_FileEOF;
+    
+    while (!(err = ogg_sync_pageout (&opus->oy, &opus->og)) && (result == PlankResult_OK)) 
+    {
+        data = ogg_sync_buffer (&opus->oy, PLANKAUDIOFILE_OPUS_READBYTES);
+        result = pl_File_Read (&opus->file, data, PLANKAUDIOFILE_OPUS_READBYTES, &numBytes);
+        
+        if ((err = ogg_sync_wrote (&opus->oy, numBytes)))
+            goto exit;
+    }
+    
+    if (opus->stream_init == 0) 
+    {
+        err = ogg_stream_init (&opus->os, ogg_page_serialno (&opus->og));
+        opus->stream_init = 1;
+    }
+
+    if (ogg_page_serialno (&opus->og) != opus->os.serialno) 
+        if ((err = ogg_stream_reset_serialno (&opus->os, ogg_page_serialno (&opus->og))))
+            goto exit;
+    
+    if ((err = ogg_stream_pagein (&opus->os, &opus->og)))
+        goto exit;
+    
+    opus->page_granule = ogg_page_granulepos (&opus->og);
+    err = 0;
+    
+exit:
+    return err == 0 ? PlankResult_OK : PlankResult_UnknownError;
+}
+
 PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char* filepath)
 {
     PlankResult result;
@@ -1278,89 +1321,148 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     err = ogg_sync_init (&opus->oy);
     
     headerDone = PLANK_FALSE;
-    
+
     while (!headerDone)
     {
-        /*Get the ogg buffer for writing*/
-        data = ogg_sync_buffer (&opus->oy, PLANKAUDIOFILE_OPUS_READBYTES);
-        
-        /*Read bitstream from input file*/
-        result = pl_File_Read (&opus->file, data, PLANKAUDIOFILE_OPUS_READBYTES, &numBytes);
-        
-        if (result != PlankResult_OK)
-            goto exit; // can't be enough data... quit now!
-        
-        err = ogg_sync_wrote (&opus->oy, numBytes);
-        
-        /*Loop for all complete pages we got (most likely only one)*/
-        while ((err = ogg_sync_pageout (&opus->oy, &opus->og)) == 1) 
+        if ((err = ogg_stream_packetout (&opus->os, &opus->op)) == 1)
         {
-            if (opus->stream_init == 0) 
+            /*OggOpus streams are identified by a magic string in the initial stream header.*/
+            if (opus->op.b_o_s && opus->op.bytes >= 8 && !memcmp (opus->op.packet, PLANKAUDIOFILE_OPUS_HEAD, 8)) 
             {
-                err = ogg_stream_init (&opus->os, ogg_page_serialno (&opus->og));
-                opus->stream_init = 1;
-            }
-            
-            if (ogg_page_serialno (&opus->og) != opus->os.serialno) 
-            {
-                /* so all streams are read. */
-                err = ogg_stream_reset_serialno (&opus->os, ogg_page_serialno (&opus->og));
-            }
-            
-            /*Add page to the bitstream*/
-            err = ogg_stream_pagein (&opus->os, &opus->og);
-            opus->page_granule = ogg_page_granulepos (&opus->og);
-            
-            /*Extract all available packets*/
-            while ((err = ogg_stream_packetout (&opus->os, &opus->op)) == 1)
-            {
-                /*OggOpus streams are identified by a magic string in the initial stream header.*/
-                if (opus->op.b_o_s && opus->op.bytes >= 8 && !memcmp (opus->op.packet, PLANKAUDIOFILE_OPUS_HEAD, 8)) 
+                if (!opus->has_opus_stream)
                 {
-                    if (!opus->has_opus_stream)
-                    {
-                        opus->opus_serialno     = opus->os.serialno;
-                        opus->has_opus_stream   = 1;
-                        opus->link_out          = 0;
-                        opus->packet_count      = 0;
-                        opus->eos               = 0;
-                        opus->total_links++;
-                    }
+                    opus->opus_serialno     = opus->os.serialno;
+                    opus->has_opus_stream   = 1;
+                    opus->link_out          = 0;
+                    opus->packet_count      = 0;
+                    opus->eos               = 0;
+                    opus->total_links++;
                 }
+            }
+            
+            if (!opus->has_opus_stream || opus->os.serialno != opus->opus_serialno)
+            {
+                result = PlankResult_AudioFileReaderInavlidType;
+                goto exit;
+            }
+            
+            /*If first packet in a logical stream, process the Opus header*/
+            if (opus->packet_count == 0)
+            {
+                result = pl_AudioFileReader_Opus_ProcessHeader (p, &opus->op, opus->manual_gain, &opus->st);
                 
-                if (!opus->has_opus_stream || opus->os.serialno != opus->opus_serialno)
+                if (!opus->st)
                 {
                     result = PlankResult_AudioFileReaderInavlidType;
                     goto exit;
                 }
                 
-                /*If first packet in a logical stream, process the Opus header*/
-                if (opus->packet_count == 0)
-                {
-                    result = pl_AudioFileReader_Opus_ProcessHeader (p, &opus->op, opus->manual_gain, &opus->st);
-                    
-                    if (!opus->st)
-                    {
-                        result = PlankResult_AudioFileReaderInavlidType;
-                        goto exit;
-                    }
-                    
-                    /*Remember how many samples at the front we were told to skip
-                     so that we can adjust the timestamp counting.*/
-                    opus->gran_offset = opus->preskip;
-                    opus->packet_count++;
-                }
-                else if (opus->packet_count == 1)
-                {
-                    // comments
-                    // ..etc
-                    headerDone = PLANK_TRUE;
-                    opus->packet_count++;
-                    break;
-                }
-            }           
+                /*Remember how many samples at the front we were told to skip
+                 so that we can adjust the timestamp counting.*/
+                opus->gran_offset = opus->preskip;
+                opus->packet_count++;
+            }
+            else if (opus->packet_count == 1)
+            {
+                // comments
+                // ..etc
+                
+                headerDone = PLANK_TRUE;
+                opus->packet_count++;
+                break;
+            }
+        }
+        else 
+        {
+            result = pl_AudioFileReader_Opus_NextPage (p);
+            
+            if (result != PlankResult_OK)
+                goto exit;
         }
     }
+    
+//    while (!headerDone)
+//    {
+//        /*Get the ogg buffer for writing*/
+//        data = ogg_sync_buffer (&opus->oy, PLANKAUDIOFILE_OPUS_READBYTES);
+//        
+//        /*Read bitstream from input file*/
+//        result = pl_File_Read (&opus->file, data, PLANKAUDIOFILE_OPUS_READBYTES, &numBytes);
+//        
+//        if (result != PlankResult_OK)
+//            goto exit; // can't be enough data... quit now!
+//        
+//        err = ogg_sync_wrote (&opus->oy, numBytes);
+//        
+//        /*Loop for all complete pages we got (most likely only one)*/
+//        while ((err = ogg_sync_pageout (&opus->oy, &opus->og)) == 1) 
+//        {
+//            if (opus->stream_init == 0) 
+//            {
+//                err = ogg_stream_init (&opus->os, ogg_page_serialno (&opus->og));
+//                opus->stream_init = 1;
+//            }
+//            
+//            if (ogg_page_serialno (&opus->og) != opus->os.serialno) 
+//            {
+//                /* so all streams are read. */
+//                err = ogg_stream_reset_serialno (&opus->os, ogg_page_serialno (&opus->og));
+//            }
+//            
+//            /*Add page to the bitstream*/
+//            err = ogg_stream_pagein (&opus->os, &opus->og);
+//            opus->page_granule = ogg_page_granulepos (&opus->og);
+//            
+//            /*Extract all available packets*/
+//            while ((err = ogg_stream_packetout (&opus->os, &opus->op)) == 1)
+//            {
+//                /*OggOpus streams are identified by a magic string in the initial stream header.*/
+//                if (opus->op.b_o_s && opus->op.bytes >= 8 && !memcmp (opus->op.packet, PLANKAUDIOFILE_OPUS_HEAD, 8)) 
+//                {
+//                    if (!opus->has_opus_stream)
+//                    {
+//                        opus->opus_serialno     = opus->os.serialno;
+//                        opus->has_opus_stream   = 1;
+//                        opus->link_out          = 0;
+//                        opus->packet_count      = 0;
+//                        opus->eos               = 0;
+//                        opus->total_links++;
+//                    }
+//                }
+//                
+//                if (!opus->has_opus_stream || opus->os.serialno != opus->opus_serialno)
+//                {
+//                    result = PlankResult_AudioFileReaderInavlidType;
+//                    goto exit;
+//                }
+//                
+//                /*If first packet in a logical stream, process the Opus header*/
+//                if (opus->packet_count == 0)
+//                {
+//                    result = pl_AudioFileReader_Opus_ProcessHeader (p, &opus->op, opus->manual_gain, &opus->st);
+//                    
+//                    if (!opus->st)
+//                    {
+//                        result = PlankResult_AudioFileReaderInavlidType;
+//                        goto exit;
+//                    }
+//                    
+//                    /*Remember how many samples at the front we were told to skip
+//                     so that we can adjust the timestamp counting.*/
+//                    opus->gran_offset = opus->preskip;
+//                    opus->packet_count++;
+//                }
+//                else if (opus->packet_count == 1)
+//                {
+//                    // comments
+//                    // ..etc
+//                    headerDone = PLANK_TRUE;
+//                    opus->packet_count++;
+//                    break;
+//                }
+//            }           
+//        }
+//    }
 
     p->formatInfo.numChannels   = opus->channels;
     p->formatInfo.sampleRate    = opus->rate;
@@ -1407,43 +1509,6 @@ PlankResult pl_AudioFileReader_Opus_Close (PlankAudioFileReaderRef p)
     
 exit:
     return result;
-}
-
-static PlankResult pl_AudioFileReader_Opus_NextPage (PlankAudioFileReaderRef p)
-{
-    PlankResult result;
-    PlankOpusFileReaderRef opus;
-    int err, numBytes;
-    char *data;
-
-    result = PlankResult_OK;
-    err = 0;
-    opus = (PlankOpusFileReaderRef)p->peer;
-    
-    if (pl_File_IsEOF (&opus->file))
-        return PlankResult_FileEOF;
-
-    while (!(err = ogg_sync_pageout (&opus->oy, &opus->og)) && (result == PlankResult_OK)) 
-    {
-        data = ogg_sync_buffer (&opus->oy, PLANKAUDIOFILE_OPUS_READBYTES);
-        result = pl_File_Read (&opus->file, data, PLANKAUDIOFILE_OPUS_READBYTES, &numBytes);
-        
-        if ((err = ogg_sync_wrote (&opus->oy, numBytes)))
-            goto exit;
-    }
-        
-    if (ogg_page_serialno (&opus->og) != opus->os.serialno) 
-        if ((err = ogg_stream_reset_serialno (&opus->os, ogg_page_serialno (&opus->og))))
-            goto exit;
-    
-    if ((err = ogg_stream_pagein (&opus->os, &opus->og)))
-        goto exit;
-            
-    opus->page_granule = ogg_page_granulepos (&opus->og);
-    err = 0;
-    
-exit:
-    return err == 0 ? PlankResult_OK : PlankResult_UnknownError;
 }
 
 PlankResult pl_AudioFileReader_Opus_FillBuffer (PlankAudioFileReaderRef p)
@@ -1599,132 +1664,18 @@ exit:
     
 }
 
-
-//PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* frameData, int *framesReadOut)
-//{
-//    PlankResult result;
-//    PlankOpusFileReaderRef opus;
-//    int err;
-//    char *data;
-//    int i, nb_read;
-//    int ret;
-//    int frame_size;
-//    PlankLL maxout;
-//    PlankLL outsamp;
-//    PlankB frameDone;
-//    float* output;
-//    
-//    if (numFrames > PLANKAUDIOFILE_OPUS_MAXFRAMESIZE)
-//        return PlankResult_FileReadError; // could handle better than this...
-//    
-//    opus = (PlankOpusFileReaderRef)p->peer;
-//    
-//    if ((opus->stream_init != 1) || 
-//        (opus->has_opus_stream != 1) ||
-//        (opus->packet_count < 2))
-//    {
-//        result = PlankResult_AudioFileReaderNotReady;
-//        goto exit;
-//    }
-//
-//    frameDone = PLANK_FALSE;
-//    output = (float*)frameData;
-//    
-//    // we probably need to jump back into the inner loop where we left off
-//    // parsing the last page
-//    if ((err = ogg_stream_packetout (&opus->os, &opus->op)) == 1)
-//        goto innerloop; 
-//    
-//    while (!frameDone)
-//    {
-//        /*Get the ogg buffer for writing*/
-//        data = ogg_sync_buffer (&opus->oy, PLANKAUDIOFILE_OPUS_READBYTES);
-//        
-//        /*Read bitstream from input file*/
-//        result = pl_File_Read (&opus->file, data, PLANKAUDIOFILE_OPUS_READBYTES, &nb_read);
-//        
-//        err = ogg_sync_wrote (&opus->oy, nb_read);
-//        
-//        /*Loop for all complete pages we got (most likely only one)*/
-//        while ((err = ogg_sync_pageout (&opus->oy, &opus->og)) == 1) 
-//        {            
-//            if (ogg_page_serialno (&opus->og) != opus->os.serialno) 
-//            {
-//                /* so all streams are read. */
-//                err = ogg_stream_reset_serialno (&opus->os, ogg_page_serialno (&opus->og));
-//            }
-//            
-//            /*Add page to the bitstream*/
-//            err = ogg_stream_pagein (&opus->os, &opus->og);
-//            opus->page_granule = ogg_page_granulepos (&opus->og);
-//            
-//            /*Extract all available packets*/
-//            // need to extract ONLY one!....
-//            while ((err = ogg_stream_packetout (&opus->os, &opus->op)) == 1)
-//            {  
-//            innerloop:
-//                if (!opus->has_opus_stream || opus->os.serialno != opus->opus_serialno)
-//                {
-//                    result = PlankResult_UnknownError;
-//                    goto exit;
-//                }
-//                                    
-//                /*End of stream condition*/
-//                if (opus->op.e_o_s && opus->os.serialno == opus->opus_serialno)
-//                    opus->eos = 1; /* don't care for anything except opus eos */
-//                
-//                ret = opus_multistream_decode_float (opus->st, 
-//                                                     opus->op.packet, 
-//                                                     opus->op.bytes, 
-//                                                     output, 
-//                                                     numFrames, 0);
-//                
-//                if (ret < 0)
-//                    break; // what if we keep hitting this? we end up in an infinite loop! in the outer while()
-//                
-//                frame_size = ret;
-//                
-//                if (opus->gain != 0)
-//                {
-//                    for (i = 0; i < frame_size * opus->channels; i++)
-//                        output[i] *= opus->gain;
-//                }
-//                
-//                maxout = ((opus->page_granule - opus->gran_offset) * opus->rate / PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE) - opus->link_out;
-//                outsamp = maxout; // should be actual samples output..
-//                opus->link_out += outsamp;
-//                
-//                frameDone = PLANK_TRUE;
-//                *framesReadOut = frame_size; // (int)outsamp; // or just frame_size ??
-//                
-//                opus->packet_count++;
-//            }
-//            
-//            // need to think what happens here...
-//            if (opus->eos)
-//            {
-//                opus->has_opus_stream = 0;
-//                
-//                if (opus->st)
-//                    opus_multistream_decoder_destroy (opus->st); // possibly don't do this???, not sure how to try and loop
-//                
-//                opus->st = NULL;
-//            }
-//        }
-//        
-//        if (result == PlankResult_FileEOF) // or pl_File_IsEOF (&file) ??
-//            frameDone = PLANK_TRUE;
-//    }
-//    
-//exit:
-//    return result;
-//}
-
 PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex)
 {
-    (void)p;
-    (void)frameIndex;
-    return PlankResult_UnknownError;
+    PlankResult result;
+    PlankOpusFileReaderRef opus;
+    
+    result = PlankResult_OK;
+    opus = (PlankOpusFileReaderRef)p->peer;
+    
+    if (frameIndex != 0)
+        return PlankResult_UnknownError;
+    
+    return pl_File_SetPosition (&opus->file, opus->preskip);
 }
 
 PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex)
