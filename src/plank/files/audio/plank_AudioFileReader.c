@@ -1135,6 +1135,14 @@ long pl_OggVorbisFileReader_TellCallback (PlankP datasource)
 #pragma mark Opus Functions
 #endif
 
+/*
+ Notes..
+ 
+ - Granule position is time in PCM frames of the last PCM frame in a page at 48kHz
+ 
+ 
+ */
+
 typedef struct PlankOpusFileReader
 {
     PlankFile file;
@@ -1195,7 +1203,6 @@ static PlankResult pl_AudioFileReader_Opus_ProcessHeader (PlankAudioFileReaderRe
     opus->mapping_family = header.channel_mapping;
     opus->channels = header.channels;
     
-    
     if (!opus->rate)
         opus->rate = header.input_sample_rate;
     
@@ -1211,7 +1218,12 @@ static PlankResult pl_AudioFileReader_Opus_ProcessHeader (PlankAudioFileReaderRe
     st = opus_multistream_decoder_create (PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE, header.channels, header.nb_streams, header.nb_coupled, header.stream_map, &err);
     
     if (err != OPUS_OK)
-        goto exit;
+    {
+        if (st)
+            opus_multistream_decoder_destroy (st);
+        
+        st = PLANK_NULL;
+    }
     
     if (!st)
         goto exit;
@@ -1234,7 +1246,7 @@ static PlankResult pl_AudioFileReader_Opus_ProcessHeader (PlankAudioFileReaderRe
     }
     
 exit:
-    *decoder = st;  // could st leak from one of the error checks?
+    *decoder = st;
     return result;    
 }
 
@@ -1291,8 +1303,6 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     PlankB headerDone;
     
     int err;
-    char *data;
-    int numBytes;
     int bufferSize;
 
     m = pl_MemoryGlobal();
@@ -1384,7 +1394,7 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     p->formatInfo.sampleRate    = opus->rate;
     p->formatInfo.bytesPerFrame = opus->channels * bytesPerSample;
     
-    bufferSize = PLANKAUDIOFILE_OPUS_MAXFRAMESIZE * opus->channels;
+    bufferSize = PLANKAUDIOFILE_OPUS_MAXFRAMESIZE * p->formatInfo.bytesPerFrame;
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->buffer, 1, bufferSize, PLANK_FALSE)) != PlankResult_OK) 
         goto exit;
 
@@ -1532,10 +1542,13 @@ PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const
     int numChannels;
     int framesRead;
     int framesThisTime;
+    //PlankLL temp;
     
     result = PlankResult_OK;
     opus = (PlankOpusFileReaderRef)p->peer;
             
+    //pl_File_GetPosition(&opus->file, &temp);
+    
     numFramesRemaining      = numFrames;
     bufferSizeInBytes       = pl_DynamicArray_GetSize (&opus->buffer);
     bytesPerFrame           = p->formatInfo.bytesPerFrame;
@@ -1585,14 +1598,45 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
 {
     PlankResult result;
     PlankOpusFileReaderRef opus;
+    int err;
     
     result = PlankResult_OK;
     opus = (PlankOpusFileReaderRef)p->peer;
     
     if (frameIndex != 0)
         return PlankResult_UnknownError;
+        
+    opus->eos = 0;
     
-    return pl_File_SetPosition (&opus->file, opus->preskip);
+    if ((err = ogg_sync_reset (&opus->oy)) != 0)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+        
+    if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((err = opus_multistream_decoder_ctl (opus->st, OPUS_RESET_STATE)) != OPUS_OK)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    
+    // reset to start of stream...
+    if ((result = pl_File_SetPosition (&opus->file, 0)) != PlankResult_OK) goto exit;
+    
+    // then read 2 pages.
+    if ((result = pl_AudioFileReader_Opus_NextPage (p)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileReader_Opus_NextPage (p)) != PlankResult_OK) goto exit;
+
+    
+exit:
+    return result;
 }
 
 PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex)
