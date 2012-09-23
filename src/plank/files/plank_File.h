@@ -234,6 +234,11 @@ PlankResult pl_File_OffsetPosition (PlankFileRef p, const PlankLL offset);
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_File_ResetPosition (PlankFileRef p);
 
+/** Set the current position of the file read/write pointer to the end of the file.
+ @param p The <i>Plank %File</i> object. 
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_File_SetPositionEnd (PlankFileRef p);
+
 /** Determine if a file object is valid.
  This currently checks only if the file object is null.
  @param p The <i>Plank %File</i> object. 

@@ -357,6 +357,21 @@ PlankResult pl_File_ResetPosition (PlankFileRef p)
     return pl_File_SetPosition (p, 0);
 }
 
+PlankResult pl_File_SetPositionEnd (PlankFileRef p)
+{
+    int isPositionable;
+    
+    if (p->stream == 0)
+        return PlankResult_FileInvalid;
+    
+    (p->statusFunction) (p, PLANKFILE_STATUS_ISPOSITIONABLE, &isPositionable);
+    
+    if (!isPositionable)
+        return PlankResult_FileSeekFailed;
+    
+    return (p->setPositionFunction) (p, 0, SEEK_END);
+}
+
 PlankB pl_File_IsValid (PlankFileRef p)
 {
     return p->stream != 0;
