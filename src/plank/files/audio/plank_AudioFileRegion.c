@@ -47,9 +47,21 @@ PlankAudioFileRegionRef pl_AudioFileRegion_Create()
     return (PlankAudioFileRegionRef)PLANK_NULL;
 }
 
-void pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p)
+PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p)
 {
 	(void)p;
+    return PlankResult_OK;
 }
 
+PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p)
+{
+	(void)p;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p)
+{
+	(void)p;
+    return PlankResult_OK;
+}
 

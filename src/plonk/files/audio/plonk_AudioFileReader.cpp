@@ -212,9 +212,9 @@ double AudioFileReaderInternal::getSampleRate() const throw()
     return value;
 }
 
-int AudioFileReaderInternal::getNumFrames() const throw()
+LongLong AudioFileReaderInternal::getNumFrames() const throw()
 {
-    int value;
+    LongLong value;
     ResultCode result = pl_AudioFileReader_GetNumFrames (getPeerRef(), &value);
     plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -223,9 +223,9 @@ int AudioFileReaderInternal::getNumFrames() const throw()
     return value;
 }
 
-int AudioFileReaderInternal::getFramePosition() const throw()
+LongLong AudioFileReaderInternal::getFramePosition() const throw()
 {
-    int value;
+    LongLong value;
     ResultCode result = pl_AudioFileReader_GetFramePosition (getPeerRef(), &value);
     plonk_assert (result == PlankResult_OK);
 #ifndef PLONK_DEBUG
@@ -234,7 +234,7 @@ int AudioFileReaderInternal::getFramePosition() const throw()
     return value;
 }
 
-void AudioFileReaderInternal::setFramePosition (const int position) throw()
+void AudioFileReaderInternal::setFramePosition (const LongLong position) throw()
 {
     ResultCode result = pl_AudioFileReader_SetFramePosition (getPeerRef(), position);
     plonk_assert (result == PlankResult_OK);
@@ -252,7 +252,7 @@ void AudioFileReaderInternal::resetFramePosition() throw()
 #endif
 }
 
-void AudioFileReaderInternal::setFramePositionOnNextRead (const int position) throw()
+void AudioFileReaderInternal::setFramePositionOnNextRead (const LongLong position) throw()
 {
     newPositionOnNextRead = position; // atomic!
 }

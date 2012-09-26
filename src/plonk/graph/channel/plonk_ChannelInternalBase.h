@@ -83,31 +83,31 @@ public:
         this->getBlockSize().removeReceiver (this);
     }
             
-    inline const UnitType& getInputAsUnit (const int key) const throw()                     { return this->getInputAs<UnitType> (key); }
-    inline const UnitsType& getInputAsUnits (const int key) const throw()                   { return this->getInputAs<UnitsType> (key); }
-    inline const BusType& getInputAsBus (const int key) const throw()                       { return this->getInputAs<BusType> (key); }
-    inline const BussesType& getInputAsBusses (const int key) const throw()                 { return this->getInputAs<BussesType> (key); }
-    inline const Buffer& getInputAsBuffer (const int key) const throw()                     { return this->getInputAs<Buffer> (key); }
-    inline const VariableType& getInputAsVariable (const int key) const throw()             { return this->getInputAs<VariableType> (key); }
-    inline const BreakpointsType& getInputAsBreakpoints (const int key) const throw()       { return this->getInputAs<BreakpointsType> (key); }
-    inline const WavetableType& getInputAsWavetable (const int key) const throw()           { return this->getInputAs<WavetableType> (key); }
-    inline const SignalType& getInputAsSignal (const int key) const throw()                 { return this->getInputAs<SignalType> (key); }
-    inline const SampleRate& getInputAsSampleRate (const int key) const throw()             { return this->getInputAs<SampleRate> (key); }
-    inline const BlockSize& getInputAsBlockSize (const int key) const throw()               { return this->getInputAs<BlockSize> (key); }
-    inline const AudioFileReader& getInputAsAudioFileReader (const int key) const throw()   { return this->getInputAs<AudioFileReader> (key); }
+    inline const UnitType& getInputAsUnit (const int key) const throw()                     { return this->template getInputAs<UnitType> (key); }
+    inline const UnitsType& getInputAsUnits (const int key) const throw()                   { return this->template getInputAs<UnitsType> (key); }
+    inline const BusType& getInputAsBus (const int key) const throw()                       { return this->template getInputAs<BusType> (key); }
+    inline const BussesType& getInputAsBusses (const int key) const throw()                 { return this->template getInputAs<BussesType> (key); }
+    inline const Buffer& getInputAsBuffer (const int key) const throw()                     { return this->template getInputAs<Buffer> (key); }
+    inline const VariableType& getInputAsVariable (const int key) const throw()             { return this->template getInputAs<VariableType> (key); }
+    inline const BreakpointsType& getInputAsBreakpoints (const int key) const throw()       { return this->template getInputAs<BreakpointsType> (key); }
+    inline const WavetableType& getInputAsWavetable (const int key) const throw()           { return this->template getInputAs<WavetableType> (key); }
+    inline const SignalType& getInputAsSignal (const int key) const throw()                 { return this->template getInputAs<SignalType> (key); }
+    inline const SampleRate& getInputAsSampleRate (const int key) const throw()             { return this->template getInputAs<SampleRate> (key); }
+    inline const BlockSize& getInputAsBlockSize (const int key) const throw()               { return this->template getInputAs<BlockSize> (key); }
+    inline const AudioFileReader& getInputAsAudioFileReader (const int key) const throw()   { return this->template getInputAs<AudioFileReader> (key); }
 
-    inline UnitType& getInputAsUnit (const int key) throw()                                 { return this->getInputAs<UnitType> (key); }
-    inline UnitsType& getInputAsUnits (const int key) throw()                               { return this->getInputAs<UnitsType> (key); }
-    inline BusType& getInputAsBus (const int key) throw()                                   { return this->getInputAs<BusType> (key); }
-    inline BussesType& getInputAsBusses (const int key) throw()                             { return this->getInputAs<BussesType> (key); }
-    inline Buffer& getInputAsBuffer (const int key) throw()                                 { return this->getInputAs<Buffer> (key); }
-    inline VariableType& getInputAsVariable (const int key) throw()                         { return this->getInputAs<VariableType> (key); }
-    inline BreakpointsType& getInputAsBreakpoints (const int key) throw()                   { return this->getInputAs<BreakpointsType> (key); }
-    inline WavetableType& getInputAsWavetable (const int key) throw()                       { return this->getInputAs<WavetableType> (key); }
-    inline SignalType& getInputAsSignal (const int key) throw()                             { return this->getInputAs<SignalType> (key); }
-    inline SampleRate& getInputAsSampleRate (const int key) throw()                         { return this->getInputAs<SampleRate> (key); }
-    inline BlockSize& getInputAsBlockSize (const int key) throw()                           { return this->getInputAs<BlockSize> (key); }
-    inline AudioFileReader& getInputAsAudioFileReader (const int key) throw()               { return this->getInputAs<AudioFileReader> (key); }
+    inline UnitType& getInputAsUnit (const int key) throw()                                 { return this->template getInputAs<UnitType> (key); }
+    inline UnitsType& getInputAsUnits (const int key) throw()                               { return this->template getInputAs<UnitsType> (key); }
+    inline BusType& getInputAsBus (const int key) throw()                                   { return this->template getInputAs<BusType> (key); }
+    inline BussesType& getInputAsBusses (const int key) throw()                             { return this->template getInputAs<BussesType> (key); }
+    inline Buffer& getInputAsBuffer (const int key) throw()                                 { return this->template getInputAs<Buffer> (key); }
+    inline VariableType& getInputAsVariable (const int key) throw()                         { return this->template getInputAs<VariableType> (key); }
+    inline BreakpointsType& getInputAsBreakpoints (const int key) throw()                   { return this->template getInputAs<BreakpointsType> (key); }
+    inline WavetableType& getInputAsWavetable (const int key) throw()                       { return this->template getInputAs<WavetableType> (key); }
+    inline SignalType& getInputAsSignal (const int key) throw()                             { return this->template getInputAs<SignalType> (key); }
+    inline SampleRate& getInputAsSampleRate (const int key) throw()                         { return this->template getInputAs<SampleRate> (key); }
+    inline BlockSize& getInputAsBlockSize (const int key) throw()                           { return this->template getInputAs<BlockSize> (key); }
+    inline AudioFileReader& getInputAsAudioFileReader (const int key) throw()               { return this->template getInputAs<AudioFileReader> (key); }
 
     inline const Buffer& getOutputBuffer() const throw()                                    { return outputBuffer; }
     inline Buffer& getOutputBuffer() throw()                                                { return outputBuffer; }

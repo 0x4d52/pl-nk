@@ -37,17 +37,18 @@
  */
 
 #include "../../core/plank_StandardHeader.h"
+#include "../../maths/plank_Maths.h"
 #include "../plank_File.h"
 #include "../plank_IffFileReader.h"
 #include "plank_AudioFileReader.h"
-#include "../../maths/plank_Maths.h"
+#include "plank_AudioFileMetaData.h"
 
 // private structures
 
 // private functions and data
 typedef PlankResult (*PlankAudioFileReaderReadFramesFunction)(PlankAudioFileReaderRef, const int, void*, int *);
-typedef PlankResult (*PlankAudioFileReaderSetFramePositionFunction)(PlankAudioFileReaderRef, const int);
-typedef PlankResult (*PlankAudioFileReaderGetFramePositionFunction)(PlankAudioFileReaderRef, int *);
+typedef PlankResult (*PlankAudioFileReaderSetFramePositionFunction)(PlankAudioFileReaderRef, const PlankLL);
+typedef PlankResult (*PlankAudioFileReaderGetFramePositionFunction)(PlankAudioFileReaderRef, PlankLL *);
 
 #if PLANK_APPLE
 #pragma mark Private Function Declarations
@@ -66,20 +67,20 @@ PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const 
 PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p, const char* filepath);
 PlankResult pl_AudioFileReader_Iff_ParseMain  (PlankAudioFileReaderRef p, const PlankFourCharCode mainID, const PlankFourCharCode formatID);
 PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
-PlankResult pl_AudioFileReader_Iff_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex);
-PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex);
+PlankResult pl_AudioFileReader_Iff_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
+PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
 PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const char* filepath);
 PlankResult pl_AudioFileReader_OggVorbis_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_OggVorbis_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
-PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex);
-PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex);
+PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
+PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
 PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char* filepath);
 PlankResult pl_AudioFileReader_Opus_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
-PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex);
-PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex);
+PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
+PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
 
 #if PLANK_APPLE
@@ -130,6 +131,8 @@ PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
     p->dataLength                  = 0;
     p->numFrames                   = 0;
     p->dataPosition                = -1;
+    
+    p->metaData                    = PLANK_NULL;
     
     p->readFramesFunction          = PLANK_NULL;
     p->setFramePositionFunction    = PLANK_NULL;
@@ -197,12 +200,25 @@ PlankFileRef pl_AudioFileReader_GetFile (PlankAudioFileReaderRef p)
 
 PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* filepath)
 {
+    return pl_AudioFileReader_OpenInternal (p, filepath, PLANK_FALSE);
+}
+
+PlankResult pl_AudioFileReader_OpenWithMetaData (PlankAudioFileReaderRef p, const char* filepath)
+{
+    return pl_AudioFileReader_OpenInternal (p, filepath, PLANK_TRUE);
+}
+
+PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankB readMetaData)
+{
     PlankResult result;
     PlankFourCharCode mainID;
     PlankIffFileReaderRef iff;
-    
+        
     result = PlankResult_OK;
     iff = PLANK_NULL;
+    
+    if (readMetaData)
+        p->metaData = pl_AudioFileMetaData_Create();
     
     if ((iff = pl_IffFileReader_CreateAndInit()) == PLANK_NULL)
     {
@@ -322,13 +338,13 @@ PlankResult pl_AudioFileReader_GetSampleRate (PlankAudioFileReaderRef p, double 
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_GetNumFrames (PlankAudioFileReaderRef p, int *numFrames)
+PlankResult pl_AudioFileReader_GetNumFrames (PlankAudioFileReaderRef p, PlankLL *numFrames)
 {
-    *numFrames = (int)p->numFrames;
+    *numFrames = p->numFrames;
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex)
+PlankResult pl_AudioFileReader_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
 {
     PlankResult result = PlankResult_OK;
     
@@ -355,7 +371,7 @@ PlankResult pl_AudioFileReader_ResetFramePosition (PlankAudioFileReaderRef p)
     return pl_AudioFileReader_SetFramePosition (p, 0);
 }
 
-PlankResult pl_AudioFileReader_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex)
+PlankResult pl_AudioFileReader_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
 {
     PlankResult result = PlankResult_OK;
     
@@ -691,7 +707,8 @@ exit:
 PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead)
 {
     PlankResult result = PlankResult_OK;
-    int startFrame, endFrame, framesToRead, bytesToRead, bytesRead;
+    PlankLL startFrame, endFrame;
+    int framesToRead, bytesToRead, bytesRead;
     
     if (p->peer == PLANK_NULL)
     {
@@ -715,7 +732,7 @@ PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const 
     
     endFrame = startFrame + numFrames;
     
-    framesToRead = (endFrame > p->numFrames) ? ((int)p->numFrames - startFrame) : (numFrames);
+    framesToRead = (endFrame > p->numFrames) ? (int)(p->numFrames - startFrame) : (numFrames);
     bytesToRead = framesToRead * p->formatInfo.bytesPerFrame;
     
     result = pl_File_Read ((PlankFileRef)p->peer, data, bytesToRead, &bytesRead);
@@ -729,7 +746,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_Iff_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex)
+PlankResult pl_AudioFileReader_Iff_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
 {
     PlankResult result;
     PlankLL pos;
@@ -747,7 +764,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex)
+PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
 {
     PlankResult result = PlankResult_OK;
     PlankLL pos;
@@ -760,7 +777,7 @@ PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, 
     
     if ((result = pl_File_GetPosition ((PlankFileRef)p->peer, &pos)) != PlankResult_OK) goto exit;
     
-    *frameIndex = (int)(pos - p->dataPosition) / p->formatInfo.bytesPerFrame;
+    *frameIndex = (pos - p->dataPosition) / p->formatInfo.bytesPerFrame;
     
 exit:
     return result;
@@ -930,9 +947,10 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     PlankOggVorbisFileReaderRef ogg;
     PlankMemoryRef m;
     PlankLL numFrames;
+    PlankL bufferSize;
     PlankI bytesPerSample;
     
-    int err, bufferSize;
+    int err;
     vorbis_info* info;
     
     m = pl_MemoryGlobal();
@@ -985,7 +1003,7 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     
     numFrames = ov_pcm_total (&ogg->oggVorbisFile, -1);
     
-    bufferSize = pl_MinLL (numFrames * p->formatInfo.bytesPerFrame, (PlankLL)4096);
+    bufferSize = pl_MinL (numFrames * p->formatInfo.bytesPerFrame, (PlankL)4096);
     
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&ogg->buffer, 1, bufferSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
@@ -1152,7 +1170,7 @@ exit:
 }
 
 
-PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex)
+PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
 {
     PlankOggVorbisFileReaderRef ogg;
     int err;
@@ -1166,7 +1184,7 @@ PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderR
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex)
+PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
 {
     PlankOggVorbisFileReaderRef ogg;
     PlankLL pos;
@@ -1177,7 +1195,7 @@ PlankResult pl_AudioFileReader_OggVorbis_GetFramePosition (PlankAudioFileReaderR
     if (pos < 0)
         return PlankResult_FileSeekFailed;
     
-    *frameIndex = (int)pos;
+    *frameIndex = pos;
     
     return PlankResult_OK;
 }
@@ -1792,16 +1810,23 @@ exit:
     
 }
 
-PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex)
+PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
 {
     PlankResult result;
     PlankOpusFileReaderRef opus;
+    PlankLL prevGranule;
+    PlankLL frameIndexPreRoll;
+    
     int err;
+    int minDiscard;
+    int pageLength;
+    int pageRemainPreRoll;
     
     result = PlankResult_OK;
     opus = (PlankOpusFileReaderRef)p->peer;
     
     opus->eos = 0;
+    minDiscard = opus->rate * PLANKAUDIOFILE_OPUS_PREROLL_MS / 1000;
     
     if ((err = ogg_sync_reset (&opus->oy)) != 0)
     {
@@ -1831,11 +1856,12 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
         
         if (opus->stream_primed)
-            opus->need_discard = opus->rate * 80 / 1000; // discard 80ms
+            opus->need_discard = 0;
     }
     else 
     {
         // slow but works..
+        frameIndexPreRoll = frameIndex - minDiscard;
         
         // reset to start of stream...
         if ((result = pl_File_SetPosition (&opus->file, 0)) != PlankResult_OK) goto exit;
@@ -1843,23 +1869,34 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         // then read 2 pages.
         if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-        
-        while ((int)opus->page_granule < frameIndex)
+                        
+        while (opus->page_granule < frameIndex)
         {
+            prevGranule = opus->page_granule;
             if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
         }
         
-        opus->need_discard = (int)opus->page_granule - frameIndex;
+        pageLength = (int)(opus->page_granule - prevGranule);
+        pageRemainPreRoll = (int)(opus->page_granule - frameIndexPreRoll);
+        
+        if (pageRemainPreRoll <= minDiscard)
+            opus->need_discard = pageLength + (minDiscard - pageRemainPreRoll);
+        else 
+            opus->need_discard = (int)(frameIndex - prevGranule);
         
     }
     
+    opus->need_discard = pl_MaxI (opus->need_discard, minDiscard);
+    
     opus->stream_primed = 0;
+    opus->bufferFramePosition = 0;
+    opus->bufferFramesRemaining = 0;
     
 exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex)
+PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
 {
     (void)p;
     (void)frameIndex;

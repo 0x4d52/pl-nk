@@ -40,6 +40,7 @@
 #define PLANK_AUDIOFILEREGION_H
 
 #include "plank_AudioFileCommon.h"
+#include "plank_AudioFileCuePoint.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -51,6 +52,10 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
+#define PLANKAUDIOFILE_REGIONTYPE_REGION     0
+#define PLANKAUDIOFILE_REGIONTYPE_SELECTION  1
+#define PLANKAUDIOFILE_REGIONTYPE_LOOP       2
+
 /** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
 typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef; 
 
@@ -60,7 +65,11 @@ PlankAudioFileRegionRef pl_AudioFileRegion_Create();
 
 /** Destroy a <i>Plank AudioFileRegion</i> object. 
  @param p The <i>Plank AudioFileRegion</i> object. */
-void pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p);
+PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p);
+
+PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p);
+
+PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p);
 
 /** @} */
 
@@ -69,7 +78,9 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileRegion
 {
-	int dummy;
+	PlankAudioFileCuePoint start;
+    PlankAudioFileCuePoint end;
+    int regionType;
 } PlankAudioFileRegion;
 #endif
 

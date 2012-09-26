@@ -41,14 +41,101 @@
 #include "plank_AudioFileRegion.h"
 #include "plank_AudioFileCuePoint.h"
 
+/*
+ 
+ Should support the LEVL WAV chunk somehow as BBC are moving towards supporting it
+ 
+ */
+
+typedef struct PlankAudioFileIffSpecificMetaData
+{
+	PlankFourCharCode chunkID;
+    PlankUI length;
+    char data[1];
+} PlankAudioFileIffSpecificMetaData;
+
+typedef struct PlankAudioFileFormatSpecificMetaData
+{
+	int format;
+    char data[1]; // for Iff would be a PlankAudioFileIffSpecificMetaData
+} PlankAudioFileFormatSpecificMetaData;
+
+
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_Create()
 {
-    return (PlankAudioFileMetaDataRef)PLANK_NULL;
+    PlankMemoryRef m;
+    PlankAudioFileMetaDataRef p;
+    
+    m = pl_MemoryGlobal();
+    p = (PlankAudioFileMetaDataRef)pl_Memory_AllocateBytes (m, sizeof (PlankAudioFileMetaData));
+    
+    if (p != PLANK_NULL)
+        pl_MemoryZero (p, sizeof (PlankAudioFileMetaData));
+    
+    return p;
 }
 
-void pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p)
+PlankResult pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p)
 {
-	(void)p;
+    PlankResult result = PlankResult_OK;
+    PlankMemoryRef m = pl_MemoryGlobal();
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    if ((result = pl_AudioFileMetaData_DeInit (p)) != PlankResult_OK)
+        goto exit;
+    
+    result = pl_Memory_Free (m, p);
+    
+exit:
+    return result;
 }
+
+PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pl_MemoryZero (p, sizeof (PlankAudioFileMetaData));
+    
+    // for some settings use -1 to indicate not set, others 0 is OK
+    // but 0 should be checked for in some case to avoid errors (e.g., sample duration)
+    p->midiUnityNote    = -1;
+    p->lowNote          = -1;
+    p->highNote         = -1;
+    p->lowVelocity      = -1;
+    p->highVelocity     = -1;
+    p->year             = -1;
+    p->trackNum         = -1;
+    p->trackTotal       = -1;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+        
+exit:
+    return result;
+}
+
+
 
 

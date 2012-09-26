@@ -40,6 +40,8 @@
 #define PLANK_AUDIOFILEMETADATA_H
 
 #include "plank_AudioFileCommon.h"
+#include "../../containers/plank_DynamicArray.h"
+#include "../../containers/plank_SimpleLinkedList.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -50,8 +52,10 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
-/** An opaque reference to the <i>Plank AudioFileMetaData</i> object. */
-typedef struct PlankAudioFileMetaData* PlankAudioFileMetaDataRef; 
+#define PLANKAUDIOFILEMETADATA_TEXTENCODING_ASCII  0
+#define PLANKAUDIOFILEMETADATA_TEXTENCODING_UTF8   1
+#define PLANKAUDIOFILEMETADATA_TEXTENCODING_UTF16  2
+#define PLANKAUDIOFILEMETADATA_TEXTENCODING_LATIN1 0
 
 /** Create a <i>Plank AudioFileMetaData</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileMetaData</i> object as an opaque reference or PLANK_NULL. */
@@ -59,16 +63,69 @@ PlankAudioFileMetaDataRef pl_AudioFileMetaData_Create();
 
 /** Destroy a <i>Plank AudioFileMetaData</i> object. 
  @param p The <i>Plank AudioFileMetaData</i> object. */
-void pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p);
+PlankResult pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p);
+
+PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
+
+PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
+
 
 /** @} */
 
 PLANK_END_C_LINKAGE
 
+
 #if !DOXYGEN
 typedef struct PlankAudioFileMetaData
 {
-	int dummy;
+    // smpl / inst
+    PlankI midiUnityNote;
+    PlankUI midiPitchFraction; // detune
+    PlankUI gain;
+    PlankI lowNote;
+    PlankI highNote;
+    PlankI lowVelocity;
+    PlankI highVelocity;
+    
+    PlankUI manufacturer;
+    PlankUI product;
+    PlankUI samplePeriod;
+    PlankUI smpteFormat;
+    PlankUI smpteOffset;
+    
+    PlankUI textEncoding;
+
+    PlankDynamicArray descriptionComments; // an array of comments to allow for Ogg comments
+    PlankDynamicArray originatorArtist;
+    PlankDynamicArray originatorRef;
+    PlankDynamicArray originationDate;
+    PlankDynamicArray originationTime;
+    
+    PlankDynamicArray title;
+    PlankDynamicArray album;
+    PlankDynamicArray genre;
+    PlankDynamicArray lyrics;
+    
+    PlankDynamicArray art;
+    
+    PlankI year;
+    PlankI trackNum;
+    PlankI trackTotal;
+    
+    PlankUI timeRefLow;
+    PlankUI timeRefHigh;
+    PlankUS version;
+    PlankDynamicArray umid; //?? bwav
+    PlankDynamicArray codingHistory;
+
+	PlankDynamicArray cuePoints;
+    PlankDynamicArray loopPoints;
+    PlankDynamicArray regions;
+    
+    // just a list of unparsed data - if we write the same format
+    // wih no change this can be simply piped out
+    PlankSimpleLinkedList formatSpecific; 
+    
 } PlankAudioFileMetaData;
 #endif 
 

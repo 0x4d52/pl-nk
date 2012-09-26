@@ -137,11 +137,11 @@ public:
     int getBytesPerSample() const throw();
     int getNumChannels() const throw();
     double getSampleRate() const throw();
-    int getNumFrames() const throw();
-    int getFramePosition() const throw();
-    void setFramePosition (const int position) throw();
+    LongLong getNumFrames() const throw();
+    LongLong getFramePosition() const throw();
+    void setFramePosition (const LongLong position) throw();
     void resetFramePosition() throw();
-    void setFramePositionOnNextRead (const int position) throw();
+    void setFramePositionOnNextRead (const LongLong position) throw();
     
     template<class SampleType>
     bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, const bool loop) throw();
@@ -150,7 +150,7 @@ public:
     inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) const throw()
     {
         const int numChannels = getNumChannels();
-        const int length = (numFrames > 0) ? numFrames * numChannels : getNumFrames() * numChannels;
+        const int length = (numFrames > 0) ? numFrames * numChannels : (int)getNumFrames() * numChannels;
         NumericalArray<SampleType> buffer = NumericalArray<SampleType>::withSize (length);
         signal = SignalBase<SampleType> (buffer, getSampleRate(), numChannels);
     }
@@ -189,7 +189,7 @@ private:
     PlankAudioFileReader peer;
     Chars readBuffer;
     int numFramesPerBuffer;
-    AtomicInt newPositionOnNextRead;
+    AtomicLongLong newPositionOnNextRead;
     AtomicValue<void*> owner;
 };
 
@@ -234,7 +234,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
            (result != PlankResult_FileEOF) &&
            (numFails < numFailsAllowed))
     {
-        AtomicInt newPosition (-1);
+        AtomicLongLong newPosition (-1);
         newPositionOnNextRead.swapWith (newPosition);
         
         if (newPosition.getValueUnchecked() >= 0)
@@ -483,13 +483,13 @@ public:
     }
     
     /** Get the total number of frames in the file. */
-    inline int getNumFrames() const throw()
+    inline LongLong getNumFrames() const throw()
     {
         return getInternal()->getNumFrames();
     }
     
     /** Get the current frame position. */
-    inline int getFramePosition() const throw()
+    inline LongLong getFramePosition() const throw()
     {
         return getInternal()->getFramePosition();
     }
@@ -497,14 +497,14 @@ public:
     /** Set the frame position to a particular frame. 
      This is not thread safe, use setFramePositionOnNextRead() to call this from another
      thread (e.g., a GUI) while playing a file (e.g., in real time). */
-    inline void setFramePosition (const int position) throw()
+    inline void setFramePosition (const LongLong position) throw()
     {
         return getInternal()->setFramePosition (position);
     }
     
     /** Set the frame position to a particular frame just before the next read operation.
      This is thread safe. */
-    inline void setFramePositionOnNextRead (const int position) throw()
+    inline void setFramePositionOnNextRead (const LongLong position) throw()
     {
         return getInternal()->setFramePositionOnNextRead (position);
     }
@@ -513,6 +513,26 @@ public:
     inline void resetFramePosition() throw()
     {
         return getInternal()->resetFramePosition();
+    }
+    
+    inline double getDuration() const throw()
+    {
+        return getInternal()->getNumFrames() / getInternal()->getSampleRate();
+    }
+    
+    inline double getTime() const throw()
+    {
+        return getInternal()->getFramePosition() / getInternal()->getSampleRate();
+    }
+    
+    inline void setTime (const double time) throw()
+    {
+        return getInternal()->setFramePosition (LongLong (time * getInternal()->getSampleRate()));
+    }
+    
+    inline void setTimeOnNextRead (const double time) throw()
+    {
+        return getInternal()->setFramePositionOnNextRead (LongLong (time * getInternal()->getSampleRate()));
     }
     
     /** Read frames into a pre-allocated NumericalArray and apply scaling. 
@@ -579,7 +599,7 @@ public:
     inline NumericalArray<SampleType> readAllFrames (const bool applyScaling) throw()
     {
         typedef NumericalArray<SampleType> SampleArray;
-        SampleArray data = SampleArray::withSize (getNumFrames() * getNumChannels());
+        SampleArray data = SampleArray::withSize ((int)getNumFrames() * getNumChannels());
         resetFramePosition();
         getInternal()->readFrames (data, applyScaling, false, false);
         return data;

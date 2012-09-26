@@ -62,7 +62,7 @@ void oggpack_writetrunc(oggpack_buffer *b,long bits){
   if(b->ptr){
     bits-=bytes*8;
     b->ptr=b->buffer+bytes;
-    b->endbit=bits;
+    b->endbit=(int)bits;
     b->endbyte=bytes;
     *b->ptr&=mask[bits];
   }
@@ -73,7 +73,7 @@ void oggpackB_writetrunc(oggpack_buffer *b,long bits){
   if(b->ptr){
     bits-=bytes*8;
     b->ptr=b->buffer+bytes;
-    b->endbit=bits;
+    b->endbit=(int)bits;
     b->endbyte=bytes;
     *b->ptr&=mask8B[bits];
   }
@@ -215,9 +215,9 @@ static void oggpack_writecopy_helper(oggpack_buffer *b,
   }
   if(bits){
     if(msb)
-      w(b,(unsigned long)(ptr[bytes]>>(8-bits)),bits);
+      w(b,(unsigned long)(ptr[bytes]>>(8-bits)),(int)bits);
     else
-      w(b,(unsigned long)(ptr[bytes]),bits);
+      w(b,(unsigned long)(ptr[bytes]),(int)bits);
   }
   return;
  err:

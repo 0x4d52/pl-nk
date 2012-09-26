@@ -124,7 +124,7 @@ public:
 #endif
     }
     
-    inline LongLong length() throw()
+    inline int length() throw()
     {
         return pl_LockFreeQueue_GetSize (&liveQueue);
     }
@@ -302,7 +302,7 @@ public:
         clear();
     }
         
-    LongLong length() throw()
+    int length() throw()
     {
         return pl_LockFreeQueue_GetSize (&queue);
     }
@@ -407,7 +407,7 @@ public:
         clear(); // moves items to the dead queue
     }
     
-    inline LongLong length() throw()
+    inline int length() throw()
     {
         return this->getInternal()->length();
     }

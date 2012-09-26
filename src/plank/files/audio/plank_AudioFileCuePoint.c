@@ -44,8 +44,20 @@ PlankAudioFileCuePointRef pl_AudioFileCuePoint_Create()
     return (PlankAudioFileCuePointRef)PLANK_NULL;
 }
 
-void pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p)
+PlankResult pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p)
 {
 	(void)p;
+    return PlankResult_OK;
 }
 
+PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p)
+{
+    (void)p;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
+{
+    (void)p;
+    return PlankResult_OK;
+}

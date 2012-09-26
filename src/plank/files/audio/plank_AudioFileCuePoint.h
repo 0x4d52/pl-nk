@@ -50,6 +50,12 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
+#define PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT        0
+#define PLANKAUDIOFILE_CUEPOINTTYPE_INSERTPOINT     1
+#define PLANKAUDIOFILE_CUEPOINTTYPE_PLAYPOSITION    2
+#define PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART     3
+#define PLANKAUDIOFILE_CUEPOINTTYPE_REGIOEND        4
+
 /** An opaque reference to the <i>Plank AudioFileCuePoint</i> object. */
 typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef; 
 
@@ -59,7 +65,12 @@ PlankAudioFileCuePointRef pl_AudioFileCuePoint_Create();
 
 /** Destroy a <i>Plank AudioFileCuePoint</i> object. 
  @param p The <i>Plank AudioFileCuePoint</i> object. */
-void pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p);
+PlankResult pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p);
+
+PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p);
+
+PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
+
 
 /** @} */
 
@@ -68,7 +79,9 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileCuePoint
 {
-	int dummy;
+	PlankLL position;
+    char* label;
+    int cuePointType;
 } PlankAudioFileCuePoint;
 #endif
 

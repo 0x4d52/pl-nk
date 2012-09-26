@@ -99,6 +99,7 @@
     #define PLANKAUDIOFILE_OPUS_MAXSAMPLERATE          192000
     #define PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE       48000
     #define PLANKAUDIOFILE_OPUS_HEAD                "OpusHead"
+    #define PLANKAUDIOFILE_OPUS_PREROLL_MS                 80
 #endif
 
 
@@ -113,5 +114,9 @@ typedef struct PlankAudioFileFormatInfo
     PlankD sampleRate;
 
 } PlankAudioFileFormatInfo;
+
+/** An opaque reference to the <i>Plank AudioFileMetaData</i> object. */
+typedef struct PlankAudioFileMetaData* PlankAudioFileMetaDataRef;
+
 
 #endif // PLANK_AUDIOFILECOMMON_H

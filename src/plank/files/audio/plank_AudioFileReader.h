@@ -87,6 +87,11 @@ PlankFileRef pl_AudioFileReader_GetFile (PlankAudioFileReaderRef p);
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_AudioFileReader_Open (PlankAudioFileReaderRef p, const char* filepath);
 
+PlankResult pl_AudioFileReader_OpenWithMetaData (PlankAudioFileReaderRef p, const char* filepath);
+
+PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankB readMetaData);
+
+
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
@@ -127,12 +132,12 @@ PlankResult pl_AudioFileReader_GetSampleRate (PlankAudioFileReaderRef p, double 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_AudioFileReader_GetNumFrames (PlankAudioFileReaderRef p, int *numFrames);
+PlankResult pl_AudioFileReader_GetNumFrames (PlankAudioFileReaderRef p, PlankLL *numFrames);
 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_AudioFileReader_SetFramePosition (PlankAudioFileReaderRef p, const int frameIndex);
+PlankResult pl_AudioFileReader_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
@@ -142,7 +147,7 @@ PlankResult pl_AudioFileReader_ResetFramePosition (PlankAudioFileReaderRef p);
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_AudioFileReader_GetFramePosition (PlankAudioFileReaderRef p, int *frameIndex);
+PlankResult pl_AudioFileReader_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
@@ -163,6 +168,8 @@ typedef struct PlankAudioFileReader
     PlankLL dataLength;
     PlankLL numFrames;
     PlankLL dataPosition;
+    
+    PlankAudioFileMetaDataRef metaData;
     
     PlankP readFramesFunction;
     PlankP setFramePositionFunction;
