@@ -852,7 +852,15 @@ PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const 
     framesToRead = (endFrame > p->numFrames) ? (int)(p->numFrames - startFrame) : (numFrames);
     bytesToRead = framesToRead * p->formatInfo.bytesPerFrame;
     
-    result = pl_File_Read ((PlankFileRef)p->peer, data, bytesToRead, &bytesRead);
+    if (bytesToRead > 0)
+    {
+        result = pl_File_Read ((PlankFileRef)p->peer, data, bytesToRead, &bytesRead);
+    }
+    else
+    {
+        bytesRead = 0;
+        result = PlankResult_FileEOF;
+    }
     
     if (framesRead != PLANK_NULL)
         *framesRead = bytesRead / p->formatInfo.bytesPerFrame;
