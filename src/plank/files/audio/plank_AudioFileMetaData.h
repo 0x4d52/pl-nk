@@ -69,6 +69,9 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
 
+/** Adds a format specific block of data.
+ The AudioFileMetaData object takes ownership of the block. */
+PlankResult pl_AudioFileMetaData_AddFormatSpecific (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block);
 
 /** @} */
 

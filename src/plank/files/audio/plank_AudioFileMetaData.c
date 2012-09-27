@@ -136,6 +136,10 @@ exit:
     return result;
 }
 
-
-
+PlankResult pl_AudioFileMetaData_AddFormatSpecific (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block)
+{
+    (void)p;
+    (void)block;
+    return PlankResult_UnknownError;
+}
 

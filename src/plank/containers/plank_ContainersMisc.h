@@ -501,13 +501,15 @@ static inline void pl_SwapEndianD (double *data)
 
 /** Convert four characters to a int as used by IFF file formats to identify data chunks. 
  @ingroup PlankMiscFunctions */
-static inline PlankFourCharCode pl_FourCharCode (const char* data)
+static inline const PlankFourCharCode pl_FourCharCode (const char* data)
 {
 #if PLANK_BIGENDIAN
     pl_SwapEndianI ((int*)data);
 #endif
     return *(PlankFourCharCode*)data;
 }
+
+#define PLANKFOURCHARCODE(data) (*(const PlankFourCharCode*)data)
 
 /** Convert a positive 80-bit extended float value to an unsigned integer. */
 static inline PlankUI pl_F802I (const PlankF80 extended)

@@ -468,15 +468,71 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
     PlankFourCharCode readChunkID;
     PlankUI readChunkLength;
     PlankIffFileReaderRef iff;
+    PlankDynamicArrayRef block;
+    PlankC* data;
+    int bytesRead;
 
     iff = (PlankIffFileReaderRef)p->peer;
     
     if ((result = pl_File_SetPosition (&iff->file, pos)) != PlankResult_OK) goto exit;
     
-    // then get every chunk,
-    // - parse the ones we need for meta data
-    // - ignore the other ones we already know about (data, fmt etc)
-    // - copy unknown chunks as blocks of data
+    while ((pos < iff->headerInfo.mainEnd) && (pl_File_IsEOF (&iff->file) == PLANK_FALSE))
+    {
+        if ((result = pl_File_ReadFourCharCode (&iff->file, &readChunkID)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI (&iff->file, &readChunkLength)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_GetPosition (&iff->file, &pos)) != PlankResult_OK) goto exit;
+        
+        readChunkEnd = pos + readChunkLength + (readChunkLength & 1);
+        
+        if ((readChunkID == pl_FourCharCode ("fmt ")) ||
+            (readChunkID == pl_FourCharCode ("data")))
+        {
+            goto next;
+        }
+        else if (readChunkID == pl_FourCharCode ("bext"))
+        {
+            
+        }
+        else if (readChunkID == pl_FourCharCode ("smpl"))
+        {
+            
+        }
+        else if ((readChunkID == pl_FourCharCode ("inst")) ||
+                 (readChunkID == pl_FourCharCode ("INST")))
+        {
+            
+        }
+        else if (readChunkID == pl_FourCharCode ("cue "))
+        {
+            
+        }
+        else if (readChunkID == pl_FourCharCode ("LIST"))
+        {
+            
+        }
+        else
+        {
+            block = pl_DynamicArray_Create();
+            
+            if (block != PLANK_NULL)
+            {
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
+                
+                data = (PlankC*)pl_DynamicArray_GetArray (block);
+                
+                *(PlankFourCharCode*)data = readChunkID;
+                data += 4;
+                *(PlankUI*)data = readChunkLength;
+                data += 4;
+                
+                if ((result = pl_File_Read (&iff->file, data, readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileMetaData_AddFormatSpecific (p->metaData, block)) != PlankResult_OK) goto exit;
+            }
+        }
+        
+    next:
+        if ((result = pl_File_SetPosition (&iff->file, readChunkEnd)) != PlankResult_OK) goto exit;
+    }
 
 exit:
     return result;
