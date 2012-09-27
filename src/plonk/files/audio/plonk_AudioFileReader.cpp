@@ -49,29 +49,28 @@ AudioFileReaderInternal::AudioFileReaderInternal() throw()
     pl_AudioFileReader_Init (getPeerRef());
 }
 
-AudioFileReaderInternal::AudioFileReaderInternal (const char* path) throw()
-:   readBuffer (Chars::withSize (AudioFile::DefaultBufferSize)),
-    numFramesPerBuffer (0),
-    newPositionOnNextRead (-1)
-{
-    init (path);
-}
+//AudioFileReaderInternal::AudioFileReaderInternal (const char* path) throw()
+//:   readBuffer (Chars::withSize (AudioFile::DefaultBufferSize)),
+//    numFramesPerBuffer (0),
+//    newPositionOnNextRead (-1)
+//{
+//    init (path);
+//}
 
-AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bufferSize) throw()
+AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
     newPositionOnNextRead (-1)
 {
-    plonk_assert (bufferSize > 0);
-    init (path);
+    init (path, readMetaData);
 }
 
-void AudioFileReaderInternal::init (const char* path) throw()
+void AudioFileReaderInternal::init (const char* path, const bool readMetaData) throw()
 {
     plonk_assert (path != 0);
     
     pl_AudioFileReader_Init (getPeerRef());
-    ResultCode result = pl_AudioFileReader_Open (getPeerRef(), path);
+    ResultCode result = pl_AudioFileReader_OpenInternal (getPeerRef(), path, readMetaData);
     
     if (result == PlankResult_OK)
         numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();

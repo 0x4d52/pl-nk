@@ -226,7 +226,7 @@ PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const ch
     iff = PLANK_NULL;
     
     if (readMetaData)
-        p->metaData = pl_AudioFileMetaData_Create();
+        p->metaData = pl_AudioFileMetaData_CreateAndInit();
     
     if ((iff = pl_IffFileReader_CreateAndInit()) == PLANK_NULL)
     {
@@ -491,27 +491,29 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
         }
         else if (readChunkID == pl_FourCharCode ("bext"))
         {
-            
+            printf("bext - %d bytes\n", readChunkLength);
         }
         else if (readChunkID == pl_FourCharCode ("smpl"))
         {
-            
+            printf("smpl - %d bytes\n", readChunkLength);
         }
         else if ((readChunkID == pl_FourCharCode ("inst")) ||
                  (readChunkID == pl_FourCharCode ("INST")))
         {
-            
+            printf("inst - %d bytes\n", readChunkLength);
         }
         else if (readChunkID == pl_FourCharCode ("cue "))
         {
-            
+            printf("cue  - %d bytes\n", readChunkLength);
         }
         else if (readChunkID == pl_FourCharCode ("LIST"))
         {
-            
+            printf("LIST - %d bytes\n", readChunkLength);
         }
         else
         {
+            printf("%s - %d bytes\n", pl_FourCharCode2String (readChunkID).string, readChunkLength);
+
             block = pl_DynamicArray_Create();
             
             if (block != PLANK_NULL)
@@ -526,7 +528,7 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
                 data += 4;
                 
                 if ((result = pl_File_Read (&iff->file, data, readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
-                if ((result = pl_AudioFileMetaData_AddFormatSpecific (p->metaData, block)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileMetaData_AddFormatSpecificBlock (p->metaData, block)) != PlankResult_OK) goto exit;
             }
         }
         
@@ -720,7 +722,10 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p, const char* 
         
         if (p->metaData)
         {
-            if ((result = pl_AudioFileReader_WAV_ParseMetaData (p)) != PlankResult_OK) goto exit;
+            result = pl_AudioFileReader_WAV_ParseMetaData (p);
+            
+            if ((result != PlankResult_OK) && result != PlankResult_FileEOF)
+                goto exit;
         }
         
         if ((result = pl_IffFileReader_SeekChunk (iff, pl_FourCharCode ("data"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;

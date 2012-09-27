@@ -61,6 +61,9 @@ PLANK_BEGIN_C_LINKAGE
  @return A <i>Plank AudioFileMetaData</i> object as an opaque reference or PLANK_NULL. */
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_Create();
 
+PlankAudioFileMetaDataRef pl_AudioFileMetaData_CreateAndInit();
+
+
 /** Destroy a <i>Plank AudioFileMetaData</i> object. 
  @param p The <i>Plank AudioFileMetaData</i> object. */
 PlankResult pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p);
@@ -71,7 +74,7 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
 
 /** Adds a format specific block of data.
  The AudioFileMetaData object takes ownership of the block. */
-PlankResult pl_AudioFileMetaData_AddFormatSpecific (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block);
+PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block);
 
 /** @} */
 

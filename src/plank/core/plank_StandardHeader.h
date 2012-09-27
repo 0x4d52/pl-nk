@@ -218,6 +218,11 @@ typedef const void* PlankConstantP;
 
 typedef PlankI PlankFourCharCode;
 
+typedef struct PlankFourCharCodeString
+{
+    char string[5];
+} PlankFourCharCodeString;
+
 #ifdef INFINITY
     #define PLANK_INFINITY (INFINITY)
 #else

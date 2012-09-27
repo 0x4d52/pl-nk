@@ -503,13 +503,31 @@ static inline void pl_SwapEndianD (double *data)
  @ingroup PlankMiscFunctions */
 static inline const PlankFourCharCode pl_FourCharCode (const char* data)
 {
+    PlankFourCharCode code;
+    
+    code = *(PlankFourCharCode*)data;
+    
 #if PLANK_BIGENDIAN
-    pl_SwapEndianI ((int*)data);
+    pl_SwapEndianI ((int*)code);
 #endif
-    return *(PlankFourCharCode*)data;
+    return code;
 }
 
 #define PLANKFOURCHARCODE(data) (*(const PlankFourCharCode*)data)
+
+static inline const PlankFourCharCodeString pl_FourCharCode2String (const PlankFourCharCode code)
+{   
+    PlankFourCharCodeString string;
+    *(PlankFourCharCode*)string.string = code;
+    
+#if PLANK_BIGENDIAN
+    pl_SwapEndianI ((int*)code);
+#endif
+    
+    string.string[4] = '\0';
+
+    return string;
+}
 
 /** Convert a positive 80-bit extended float value to an unsigned integer. */
 static inline PlankUI pl_F802I (const PlankF80 extended)

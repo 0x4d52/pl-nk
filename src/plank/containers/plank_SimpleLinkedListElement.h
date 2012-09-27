@@ -56,6 +56,7 @@ typedef PlankSimpleLinkedListElementRef PlankSimpleQueueElementRef;
 typedef PlankSimpleLinkedListElementRef PlankSimpleStackElementRef;
 
 PlankSimpleLinkedListElementRef pl_SimpleLinkedListElement_CreateAndInit();
+PlankSimpleLinkedListElementRef pl_SimpleLinkedListElement_CreateAndInitWthData (const PlankP data);
 PlankSimpleLinkedListElementRef pl_SimpleLinkedListElement_Create();
 PlankResult pl_SimpleLinkedListElement_Init (PlankSimpleLinkedListElementRef p);
 PlankResult pl_SimpleLinkedListElement_DeInit (PlankSimpleLinkedListElementRef p);
@@ -75,24 +76,26 @@ PLANK_END_C_LINKAGE
 
 // make these inline at some point..
 
-#define pl_SimpleQueueElement_CreateAndInit  pl_SimpleLinkedListElement_CreateAndInit
-#define pl_SimpleQueueElement_Create  pl_SimpleLinkedListElement_Create
-#define pl_SimpleQueueElement_Init  pl_SimpleLinkedListElement_Init
-#define pl_SimpleQueueElement_DeInit  pl_SimpleLinkedListElement_DeInit
-#define pl_SimpleQueueElement_Destroy pl_SimpleLinkedListElement_Destroy
-#define pl_SimpleQueueElement_GetData pl_SimpleLinkedListElement_GetData
-#define pl_SimpleQueueElement_SetData pl_SimpleLinkedListElement_SetData
-#define pl_SimpleQueueElement_GetNext pl_SimpleLinkedListElement_GetNext
-#define pl_SimpleQueueElement_SetNext pl_SimpleLinkedListElement_SetNext
+#define pl_SimpleQueueElement_CreateAndInit             pl_SimpleLinkedListElement_CreateAndInit
+#define pl_SimpleQueueElement_CreateAndInitWithData     pl_SimpleLinkedListElement_CreateAndInitWithData
+#define pl_SimpleQueueElement_Create                    pl_SimpleLinkedListElement_Create
+#define pl_SimpleQueueElement_Init                      pl_SimpleLinkedListElement_Init
+#define pl_SimpleQueueElement_DeInit                    pl_SimpleLinkedListElement_DeInit
+#define pl_SimpleQueueElement_Destroy                   pl_SimpleLinkedListElement_Destroy
+#define pl_SimpleQueueElement_GetData                   pl_SimpleLinkedListElement_GetData
+#define pl_SimpleQueueElement_SetData                   pl_SimpleLinkedListElement_SetData
+#define pl_SimpleQueueElement_GetNext                   pl_SimpleLinkedListElement_GetNext
+#define pl_SimpleQueueElement_SetNext                   pl_SimpleLinkedListElement_SetNext
 
-#define pl_SimpleStackElement_CreateAndInit  pl_SimpleLinkedListElement_CreateAndInit
-#define pl_SimpleStackElement_Create  pl_SimpleLinkedListElement_Create
-#define pl_SimpleStackElement_Init  pl_SimpleLinkedListElement_Init
-#define pl_SimpleStackElement_DeInit  pl_SimpleLinkedListElement_DeInit
-#define pl_SimpleStackElement_Destroy pl_SimpleLinkedListElement_Destroy
-#define pl_SimpleStackElement_GetData pl_SimpleLinkedListElement_GetData
-#define pl_SimpleStackElement_SetData pl_SimpleLinkedListElement_SetData
-#define pl_SimpleStackElement_GetNext pl_SimpleLinkedListElement_GetNext
-#define pl_SimpleStackElement_SetNext pl_SimpleLinkedListElement_SetNext
+#define pl_SimpleStackElement_CreateAndInit             pl_SimpleLinkedListElement_CreateAndInit
+#define pl_SimpleStackElement_CreateAndInitWithData     pl_SimpleLinkedListElement_CreateAndInitWithData
+#define pl_SimpleStackElement_Create                    pl_SimpleLinkedListElement_Create
+#define pl_SimpleStackElement_Init                      pl_SimpleLinkedListElement_Init
+#define pl_SimpleStackElement_DeInit                    pl_SimpleLinkedListElement_DeInit
+#define pl_SimpleStackElement_Destroy                   pl_SimpleLinkedListElement_Destroy
+#define pl_SimpleStackElement_GetData                   pl_SimpleLinkedListElement_GetData
+#define pl_SimpleStackElement_SetData                   pl_SimpleLinkedListElement_SetData
+#define pl_SimpleStackElement_GetNext                   pl_SimpleLinkedListElement_GetNext
+#define pl_SimpleStackElement_SetNext                   pl_SimpleLinkedListElement_SetNext
 
 #endif // PLANK_SIMPLELINKEDLISTELEMENT_H

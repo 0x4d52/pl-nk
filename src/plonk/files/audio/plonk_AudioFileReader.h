@@ -125,8 +125,8 @@ class AudioFileReaderInternal : public SmartPointer
 {
 public:    
     AudioFileReaderInternal() throw();
-    AudioFileReaderInternal (const char* path) throw();
-    AudioFileReaderInternal (const char* path, const int bufferSize) throw();
+//    AudioFileReaderInternal (const char* path) throw();
+    AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw();
     ~AudioFileReaderInternal();
     
     AudioFile::Format getFormat() const throw();
@@ -172,7 +172,7 @@ public:
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
-    void init (const char* path) throw();
+    void init (const char* path, const bool readMetaData) throw();
 
     template<class Type>
     static inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
@@ -377,7 +377,7 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (Text const& path) throw()
-	:	Base (new Internal (path.getArray()))
+	:	Base (new Internal (path.getArray(), 0, false))
 	{
 	}
         
@@ -385,15 +385,15 @@ public:
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (const char* path) throw()
-	:	Base (new Internal (path))
+	:	Base (new Internal (path, 0, false))
 	{
 	}
     
     /** Creates a binary file reader from the given path. 
      @param path        The path of the file to read.  
      @param bufferSize  The buffer size to use when reading. */
-	AudioFileReader (const char* path, const int bufferSize) throw()
-	:	Base (new Internal (path, bufferSize))
+	AudioFileReader (const char* path, const int bufferSize, const bool readMetaData) throw()
+	:	Base (new Internal (path, bufferSize, readMetaData))
 	{
 	}
            

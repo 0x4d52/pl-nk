@@ -61,6 +61,27 @@ typedef struct PlankAudioFileFormatSpecificMetaData
 } PlankAudioFileFormatSpecificMetaData;
 
 
+static PlankResult pl_AudioFileMetaDataFormatSpecificFree (PlankP ptr)
+{
+    return pl_DynamicArray_Destroy ((PlankDynamicArrayRef)ptr);
+}
+
+PlankAudioFileMetaDataRef pl_AudioFileMetaData_CreateAndInit()
+{
+    PlankAudioFileMetaDataRef p;
+    p = pl_AudioFileMetaData_Create();
+    
+    if (p != PLANK_NULL)
+    {
+        if (pl_AudioFileMetaData_Init (p) != PlankResult_OK)
+            pl_AudioFileMetaData_Destroy (p);
+        else
+            return p;
+    }
+    
+    return PLANK_NULL;
+}
+
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_Create()
 {
     PlankMemoryRef m;
@@ -118,6 +139,9 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
     p->trackNum         = -1;
     p->trackTotal       = -1;
     
+    // the formatSpecific linked list contains elements that are DynamicArrays
+    pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);
+    
 exit:
     return result;
 }
@@ -132,14 +156,21 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
         goto exit;
     }
         
+    // this should free any extra data stored as dynamic arrays in the linked list
+    if ((result = pl_SimpleLinkedList_Clear (&p->formatSpecific)) != PlankResult_OK) goto exit;
+    
 exit:
     return result;
 }
 
-PlankResult pl_AudioFileMetaData_AddFormatSpecific (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block)
+PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block)
 {
-    (void)p;
-    (void)block;
-    return PlankResult_UnknownError;
+    PlankResult result;
+    result = PlankResult_OK;
+    
+    if ((result = pl_SimpleLinkedList_Add (&p->formatSpecific, pl_SimpleLinkedListElement_CreateAndInitWthData (block))) != PlankResult_OK) goto exit;
+    
+exit:
+    return result;
 }
 

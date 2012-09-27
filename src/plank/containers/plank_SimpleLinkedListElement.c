@@ -55,6 +55,17 @@ PlankSimpleLinkedListElementRef pl_SimpleLinkedListElement_CreateAndInit()
     return PLANK_NULL;
 }
 
+PlankSimpleLinkedListElementRef pl_SimpleLinkedListElement_CreateAndInitWthData (const PlankP data)
+{
+    PlankSimpleLinkedListElementRef p;
+    p = pl_SimpleLinkedListElement_CreateAndInit();
+
+    if (p != PLANK_NULL)
+        pl_SimpleLinkedListElement_SetData (p, data);
+    
+    return p;
+}
+
 PlankSimpleLinkedListElementRef pl_SimpleLinkedListElement_Create()
 {
     PlankMemoryRef m;
