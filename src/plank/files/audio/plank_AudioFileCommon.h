@@ -50,6 +50,23 @@
 #define PLANKAUDIOFILE_FORMAT_OGGVORBIS               5
 #define PLANKAUDIOFILE_FORMAT_OPUS                    6
 
+static inline const char* pl_PlankAudioFileGetFormatName (int format)
+{
+    switch (format)
+    {
+        case PLANKAUDIOFILE_FORMAT_INVALID:     return "Invalid";
+        case PLANKAUDIOFILE_FORMAT_UNKNOWN:     return "Unknown";
+        case PLANKAUDIOFILE_FORMAT_UNKNOWNIFF:  return "Unknown IFF";
+        case PLANKAUDIOFILE_FORMAT_WAV:         return "WAV";
+        case PLANKAUDIOFILE_FORMAT_AIFF:        return "AIFF";
+        case PLANKAUDIOFILE_FORMAT_AIFC:        return "AIFC";
+        case PLANKAUDIOFILE_FORMAT_OGGVORBIS:   return "Ogg Vorbis";
+        case PLANKAUDIOFILE_FORMAT_OPUS:        return "Opus";
+
+        default: return "invalid";
+    }
+}
+
 #define PLANKAUDIOFILE_ENCODING_BIGENDIAN_FLAG        1
 #define PLANKAUDIOFILE_ENCODING_PCM_FLAG              2
 #define PLANKAUDIOFILE_ENCODING_FLOAT_FLAG            4
