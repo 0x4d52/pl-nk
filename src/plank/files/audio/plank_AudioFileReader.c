@@ -461,6 +461,41 @@ exit:
     return result;
 }
 
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderRef p, const PlankUI chunkLength)
+{
+    (void)p;
+    printf("bext - %d bytes\n", chunkLength);
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderRef p, const PlankUI chunkLength)
+{
+    (void)p;
+    printf("smpl  - %d bytes\n", chunkLength);
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_inst (PlankAudioFileReaderRef p, const PlankUI chunkLength)
+{
+    (void)p;
+    printf("inst  - %d bytes\n", chunkLength);
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRef p, const PlankUI chunkLength)
+{
+    (void)p;
+    printf("cue  - %d bytes\n", chunkLength);
+    return PlankResult_OK;
+}
+
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderRef p, const PlankUI chunkLength)
+{
+    (void)p;
+    printf("LIST - %d bytes\n", chunkLength);
+    return PlankResult_OK;
+}
+
 PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
@@ -491,24 +526,24 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
         }
         else if (readChunkID == pl_FourCharCode ("bext"))
         {
-            printf("bext - %d bytes\n", readChunkLength);
+            if ((result = pl_AudioFileReader_WAV_ParseChunk_bext (p, readChunkLength)) != PlankResult_OK) goto exit;
         }
         else if (readChunkID == pl_FourCharCode ("smpl"))
         {
-            printf("smpl - %d bytes\n", readChunkLength);
+            if ((result = pl_AudioFileReader_WAV_ParseChunk_smpl (p, readChunkLength)) != PlankResult_OK) goto exit;
         }
         else if ((readChunkID == pl_FourCharCode ("inst")) ||
                  (readChunkID == pl_FourCharCode ("INST")))
         {
-            printf("inst - %d bytes\n", readChunkLength);
+            if ((result = pl_AudioFileReader_WAV_ParseChunk_inst (p, readChunkLength)) != PlankResult_OK) goto exit;
         }
         else if (readChunkID == pl_FourCharCode ("cue "))
         {
-            printf("cue  - %d bytes\n", readChunkLength);
+            if ((result = pl_AudioFileReader_WAV_ParseChunk_cue (p, readChunkLength)) != PlankResult_OK) goto exit;
         }
         else if (readChunkID == pl_FourCharCode ("LIST"))
         {
-            printf("LIST - %d bytes\n", readChunkLength);
+            if ((result = pl_AudioFileReader_WAV_ParseChunk_LIST (p, readChunkLength)) != PlankResult_OK) goto exit;
         }
         else
         {
