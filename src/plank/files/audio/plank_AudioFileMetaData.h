@@ -68,12 +68,14 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
 
+/** Adds a cue point.
+ Copies the data from another cue point. The source cue point is zeroed on return to help avoid memory allocation/deallocation issues. */
 PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint);
-
-//PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, const PlankUI cueID, const PlankUI offset, const char* label, const int cuePointType);
 PlankResult pl_AudioFileMetaData_FindCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef* cuePoint, PlankL* index);
 PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef cuePoint, PlankB* success);
 
+/** Adds a region.
+ Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
 PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
 
 /** Adds a format specific block of data.

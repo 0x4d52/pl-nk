@@ -624,6 +624,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
         {
             // notes:
             // - amadeus uses 'mcol' for marker colours
+            // - 'file' chunk? for media file e.g. album art?
             printf("%s - chunk in LIST\n", pl_FourCharCode2String (adtlChunkID).string);
         }
         
