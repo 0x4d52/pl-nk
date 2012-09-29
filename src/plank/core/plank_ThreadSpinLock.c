@@ -121,6 +121,7 @@ PlankResult pl_ThreadSpinLock_DeInit (PlankThreadSpinLockRef p)
     }
     
     pl_AtomicL_DeInit (&p->flag);
+    pl_MemoryZero (p, sizeof (PlankThreadSpinLock));
 
 exit:
     return result;

@@ -40,6 +40,7 @@
 #define PLANK_AUDIOFILECUEPOINT_H
 
 #include "plank_AudioFileCommon.h"
+#include "../../containers/plank_DynamicArray.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -49,12 +50,6 @@ PLANK_BEGIN_C_LINKAGE
  @ingroup PlankClasses
  @{
  */
-
-#define PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT        0
-#define PLANKAUDIOFILE_CUEPOINTTYPE_INSERTPOINT     1
-#define PLANKAUDIOFILE_CUEPOINTTYPE_PLAYPOSITION    2
-#define PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART     3
-#define PLANKAUDIOFILE_CUEPOINTTYPE_REGIOEND        4
 
 /** An opaque reference to the <i>Plank AudioFileCuePoint</i> object. */
 typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef; 
@@ -71,6 +66,16 @@ PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p);
 
 PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
 
+PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const PlankLL position);
+PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankUI cueID);
+PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const char* label);
+PlankResult pl_AudioFileCuePoint_SetType (PlankAudioFileCuePointRef p, const int type);
+
+PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p);
+PlankUI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p);
+const char* pl_AudioFileCuePoint_GetLabel (PlankAudioFileCuePointRef p);
+int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
+
 
 /** @} */
 
@@ -80,8 +85,9 @@ PLANK_END_C_LINKAGE
 typedef struct PlankAudioFileCuePoint
 {
 	PlankLL position;
-    char* label;
-    int cuePointType;
+    PlankDynamicArray label;
+    PlankUI cueID;
+    int type;
 } PlankAudioFileCuePoint;
 #endif
 

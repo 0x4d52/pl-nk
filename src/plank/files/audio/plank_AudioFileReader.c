@@ -176,6 +176,8 @@ PlankResult pl_AudioFileReader_DeInit (PlankAudioFileReaderRef p)
     {
         if ((result = pl_AudioFileMetaData_Destroy (p->metaData)) != PlankResult_OK) goto exit;
     }
+    
+    pl_MemoryZero (p, sizeof (PlankAudioFileReader));
 
 exit:
     return result;
@@ -487,17 +489,49 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_inst (PlankAudioFileReaderR
 
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
-    (void)p;
-    (void)chunkEnd;
-    printf("cue  - %d bytes\n", chunkLength);
-    return PlankResult_OK;
+    PlankResult result = PlankResult_OK;
+    PlankUI numCuePoints, i;
+    PlankIffFileReaderRef iff;
+    PlankUI cueID, order, chunkID, chunkStart, blockStart, offset;
+    
+    iff = (PlankIffFileReaderRef)p->peer;
+    
+    if ((result = pl_File_ReadUI (&iff->file, &numCuePoints)) != PlankResult_OK) goto exit;
+    
+    for (i = 0; i < numCuePoints; ++i)
+    {
+        if ((result = pl_File_ReadUI (&iff->file, &cueID)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI (&iff->file, &order)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI (&iff->file, &chunkID)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI (&iff->file, &chunkStart)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI (&iff->file, &blockStart)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI (&iff->file, &offset)) != PlankResult_OK) goto exit;
+        
+        // assume there is no playlist, wavl or slnt chunks
+        if ((chunkID == pl_FourCharCode ("data")) &&
+            (chunkStart == 0) &&
+            (blockStart == 0))
+        {
+            // now store it..
+            // offset is the frame no, cueID is the ID
+            // order should be 0 but sometimes isn't
+            
+            if ((result = pl_AudioFileMetaData_AddCuePoint (p->metaData, cueID, offset, 0, PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT)) != PlankResult_OK) goto exit;
+
+        }
+    }
+    
+exit:
+    return result;
 }
 
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
-    PlankFourCharCode typeID;
+    PlankFourCharCode typeID, adtlChunkID;
+    PlankUI adtlChunkLength, cueID, textLength;
+    PlankLL pos, adtlChunkEnd;
     
     iff = (PlankIffFileReaderRef)p->peer;
     
@@ -508,6 +542,53 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
         result = PlankResult_AudioFileReaderInavlidType;
         goto exit;
     }
+    
+    if ((result = pl_File_GetPosition (&iff->file, &pos)) != PlankResult_OK) goto exit;
+    
+    while ((pos < chunkEnd) && (pl_File_IsEOF (&iff->file) == PLANK_FALSE))
+    {
+        if ((result = pl_IffFileReader_ParseChunkHeader (iff, &adtlChunkID, &adtlChunkLength, &adtlChunkEnd, &pos)) != PlankResult_OK) goto exit;
+        
+        if ((adtlChunkID == pl_FourCharCode ("labl")) ||
+            (adtlChunkID == pl_FourCharCode ("note")))
+        {
+            // 'labl' or 'note'
+            
+            if ((result = pl_File_ReadUI (&iff->file, &cueID)) != PlankResult_OK) goto exit;
+
+            textLength = adtlChunkLength - 4;
+            
+//            MemoryBlock textBlock;
+//            input->readIntoMemoryBlock (textBlock, stringLength);
+//            
+        }
+        else if (adtlChunkID == pl_FourCharCode ("ltxt"))
+        {
+//            const String prefix ("CueRegion" + String (cueRegionIndex++));
+//            const uint32 identifier     = (uint32) input->readInt();
+//            const uint32 sampleLength   = (uint32) input->readInt();
+//            const uint32 purpose        = (uint32) input->readInt();
+//            const uint16 country        = (uint16) input->readInt();
+//            const uint16 language       = (uint16) input->readInt();
+//            const uint16 dialect        = (uint16) input->readInt();
+//            const uint16 codePage       = (uint16) input->readInt();
+//            const uint32 stringLength   = adtlLength - 20;
+//            
+//            MemoryBlock textBlock;
+//            input->readIntoMemoryBlock (textBlock, stringLength);
+         }
+        else
+        {
+            // notes:
+            // - amadeus uses 'mcol' for marker colours
+            printf("%s - chunk in LIST\n", pl_FourCharCode2String (adtlChunkID).string);
+        }
+        
+    next:
+        if ((result = pl_File_SetPosition (&iff->file, adtlChunkEnd)) != PlankResult_OK) goto exit;
+        pos = adtlChunkEnd;
+    }
+
     
     printf("LIST - %d bytes\n", chunkLength);
     
@@ -532,11 +613,7 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
     
     while ((pos < iff->headerInfo.mainEnd) && (pl_File_IsEOF (&iff->file) == PLANK_FALSE))
     {
-        if ((result = pl_File_ReadFourCharCode (&iff->file, &readChunkID)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadUI (&iff->file, &readChunkLength)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_GetPosition (&iff->file, &pos)) != PlankResult_OK) goto exit;
-        
-        readChunkEnd = pos + readChunkLength + (readChunkLength & 1);
+        if ((result = pl_IffFileReader_ParseChunkHeader (iff, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
         
         if ((readChunkID == pl_FourCharCode ("fmt ")) ||
             (readChunkID == pl_FourCharCode ("data")))
@@ -589,6 +666,7 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
         
     next:
         if ((result = pl_File_SetPosition (&iff->file, readChunkEnd)) != PlankResult_OK) goto exit;
+        pos = readChunkEnd;
     }
 
 exit:
@@ -969,40 +1047,6 @@ exit:
 #if PLANK_APPLE
 #pragma mark Useful Ogg Functions
 #endif
-
-//static PlankResult pl_OggFile_SetPositionAndSync (PlankFileRef p, const PlankLL position)
-//{
-//    PlankResult result;
-//    char sync[4]; // could initialise here if not for C89!
-//    int syncIndex;
-//    char byte;
-//    
-//    // seek to the position
-//    if ((result = pl_File_SetPosition (p, position)) != PlankResult_OK)
-//        goto exit;
-//    
-//    sync[0] = 'O';
-//    sync[1] = 'g';
-//    sync[2] = 'g';
-//    sync[3] = 'S';
-//    syncIndex = 0;
-//    
-//    // now find 'OggS'
-//    while (syncIndex < 4)
-//    {
-//        if ((result = pl_File_ReadC (p, &byte)) != PlankResult_OK)
-//            goto exit; // will hit EOF
-//        
-//        syncIndex = (byte == sync[syncIndex]) ? syncIndex + 1 : 0;
-//    }
-//    
-//    // we found 'OggS' - now seek back 4 bytes
-//    if ((result = pl_File_OffsetPosition (p, -4)) != PlankResult_OK)
-//        goto exit;
-//
-//exit:
-//    return result;
-//}
 
 static PlankResult pl_OggFile_FindNextPageOffset (PlankFileRef p, const PlankLL total, PlankLL left, PlankLL right, PlankLL* offset)
 {

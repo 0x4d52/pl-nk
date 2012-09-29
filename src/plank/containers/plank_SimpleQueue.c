@@ -98,6 +98,8 @@ PlankResult pl_SimpleQueue_DeInit (PlankSimpleQueueRef p)
     if (pl_SimpleQueue_GetSize (p) != 0)
         result = PlankResult_ContainerNotEmptyOnDeInit;
     
+    pl_MemoryZero (p, sizeof (PlankSimpleQueue));
+
 exit:
     return result;    
 }

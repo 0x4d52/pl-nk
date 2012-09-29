@@ -151,7 +151,9 @@ PlankResult pl_SimpleMap_DeInit (PlankSimpleMapRef p)
     
     if ((result = pl_SimpleLinkedList_DeInit (&p->list)) != PlankResult_OK)
         goto exit;
-        
+            
+    pl_MemoryZero (p, sizeof (PlankSimpleMap));
+
 exit:
     return result;    
 }

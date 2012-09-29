@@ -99,6 +99,8 @@ PlankResult pl_SimpleLinkedList_DeInit (PlankSimpleLinkedListRef p)
     if (pl_SimpleLinkedList_GetSize (p) != 0)
         result = PlankResult_ContainerNotEmptyOnDeInit;
     
+    pl_MemoryZero (p, sizeof (PlankSimpleLinkedList));
+
 exit:
     return result;    
 }

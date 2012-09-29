@@ -131,6 +131,8 @@ PlankResult pl_Lock_DeInit (PlankLockRef p)
     pthread_mutex_destroy (&p->mutex);
     pthread_cond_destroy (&p->condition);
 
+    pl_MemoryZero (p, sizeof (PlankLock));
+
 exit:
     return result;
 }
@@ -228,8 +230,9 @@ PlankResult pl_Lock_DeInit (PlankLockRef p)
     }
     
     DeleteCriticalSection (&p->mutex);
-    CloseHandle (p->condition);
-    
+    CloseHandle (p->condition);    
+    pl_MemoryZero (p, sizeof (PlankLock));
+
 exit:
     return result;
 }

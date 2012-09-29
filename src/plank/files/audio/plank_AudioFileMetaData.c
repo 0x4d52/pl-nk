@@ -156,9 +156,37 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
         goto exit;
     }
         
+    if ((result = pl_DynamicArray_DeInit (&p->cuePoints)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->loopPoints)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->regions)) != PlankResult_OK) goto exit;
+
     // this should free any extra data stored as dynamic arrays in the linked list
     if ((result = pl_SimpleLinkedList_Clear (&p->formatSpecific)) != PlankResult_OK) goto exit;
+
+    pl_MemoryZero (p, sizeof (PlankAudioFileMetaData));
     
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, const PlankUI cueID, const PlankUI offset, const char* label, const int cuePointType)
+{
+    PlankResult result = PlankResult_OK;
+    PlankAudioFileCuePoint cuePoint;
+    
+    if ((result = pl_AudioFileCuePoint_Init (&cuePoint)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_SetID (&cuePoint, cueID)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_SetPosition (&cuePoint, offset)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_SetLabel (&cuePoint, label)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_SetType (&cuePoint, cuePointType)) != PlankResult_OK) goto exit;
+
+    if (pl_DynamicArray_GetItemSize (&p->cuePoints) == 0)
+    {
+        if ((result = pl_DynamicArray_InitWithItemSize (&p->cuePoints, sizeof (PlankAudioFileCuePoint))) != PlankResult_OK) goto exit;
+    }
+    
+    if ((result = pl_DynamicArray_AddItem (&p->cuePoints, &cuePoint)) != PlankResult_OK) goto exit;
+        
 exit:
     return result;
 }

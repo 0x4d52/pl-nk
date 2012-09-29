@@ -98,6 +98,8 @@ PlankResult pl_SimpleStack_DeInit (PlankSimpleStackRef p)
     if (pl_SimpleStack_GetSize (p) != 0)
         result = PlankResult_ContainerNotEmptyOnDeInit;
     
+    pl_MemoryZero (p, sizeof (PlankSimpleStack));
+
 exit:
     return result;    
 }

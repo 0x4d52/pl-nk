@@ -94,6 +94,7 @@ PlankResult pl_Memory_DeInit (PlankMemoryRef p)
     
     pl_AtomicPX_SwapAll (&p->funcs, 0, 0, 0);
     pl_AtomicPX_DeInit (&p->funcs);
+    pl_MemoryZero (p, sizeof (PlankMemory));
     
     return PlankResult_OK;
 }

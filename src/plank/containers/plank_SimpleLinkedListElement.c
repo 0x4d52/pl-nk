@@ -106,6 +106,8 @@ PlankResult pl_SimpleLinkedListElement_DeInit (PlankSimpleLinkedListElementRef p
         goto exit;
     }
 
+    pl_MemoryZero (p, sizeof (PlankSimpleLinkedListElement));
+
 exit:
     return result;    
 }

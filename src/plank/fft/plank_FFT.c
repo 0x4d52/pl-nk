@@ -174,6 +174,8 @@ PlankResult pl_FFTF_DeInit (PlankFFTFRef p)
     p->peer = PLANK_NULL;
     result = pl_Memory_Free (m, p->buffer);
     
+    pl_MemoryZero (p, sizeof (PlankFFTF));
+
 exit:
     return result;
 }

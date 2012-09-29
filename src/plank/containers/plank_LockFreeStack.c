@@ -104,6 +104,7 @@ PlankResult pl_LockFreeStack_DeInit (PlankLockFreeStackRef p)
     }
     
     result = pl_AtomicPX_DeInit (&p->atom);
+    pl_MemoryZero (p, sizeof (PlankLockFreeStack));
 
 exit:
     return result;    

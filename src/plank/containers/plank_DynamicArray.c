@@ -134,6 +134,8 @@ PlankResult pl_DynamicArray_DeInit (PlankDynamicArrayRef p)
             goto exit;
     }
     
+    pl_MemoryZero (p, sizeof (PlankDynamicArray));
+    
 exit:
     return result;
 }
@@ -169,6 +171,11 @@ PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankL inde
 PlankL pl_DynamicArray_GetSize (PlankDynamicArrayRef p)
 {
     return p->usedItems;
+}
+
+PlankL pl_DynamicArray_GetItemSize (PlankDynamicArrayRef p)
+{
+    return p->itemSize;
 }
 
 PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankL capacity)

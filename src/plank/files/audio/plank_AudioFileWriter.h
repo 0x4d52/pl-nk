@@ -41,64 +41,64 @@
 
 #include "plank_AudioFileCommon.h"
 
-PLANK_BEGIN_C_LINKAGE
-
-/** An audio file writer.
-  
- @defgroup PlankAudioFileWriterClass Plank AudioFileWriter class
- @ingroup PlankClasses
- @{
- */
-
-/** An opaque reference to the <i>Plank AudioFileWriter</i> object. */
-typedef struct PlankAudioFileWriter* PlankAudioFileWriterRef; 
-
-/** Create and intitialise a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
- @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
-PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit();
-
-/** Create a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
- @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
-PlankAudioFileWriterRef pl_AudioFileWriter_Create();
-
-/** Inititalise a <i>Plank AudioFileWriter</i> object. 
- @param p The <i>Plank AudioFileWriter</i> object. 
- @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p);
-
-/** Deinitialise a <i>Plank AudioFileWriter</i> object. 
- @param p The <i>Plank AudioFileWriter</i> object. 
- @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p);
-
-/** Destroy a <i>Plank AudioFileWriter</i> object. 
- @param p The <i>Plank AudioFileWriter</i> object. 
- @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_AudioFileWriter_Destroy (PlankAudioFileWriterRef p);
-
-/** Gets the underlying <i>Plank %File</i> object. 
- This is the raw file object the is performing the fundamental file access operations.
- @param p The <i>Plank AudioFileWriter</i> object.
- @return The <i>Plank %File</i> object. */
-PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p);
-
-/** */
-PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath);
-
-/** */
-PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p);
-
-/** @} */
-
-PLANK_END_C_LINKAGE
-
-#if !DOXYGEN
-typedef struct PlankAudioFileWriter
-{
-    PlankIffFileWriter iff;
-    PlankAudioFileFormatInfo formatInfo;
-    
-} PlankAudioFileWriter;
-#endif
+//PLANK_BEGIN_C_LINKAGE
+//
+///** An audio file writer.
+//  
+// @defgroup PlankAudioFileWriterClass Plank AudioFileWriter class
+// @ingroup PlankClasses
+// @{
+// */
+//
+///** An opaque reference to the <i>Plank AudioFileWriter</i> object. */
+//typedef struct PlankAudioFileWriter* PlankAudioFileWriterRef; 
+//
+///** Create and intitialise a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
+// @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
+//PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit();
+//
+///** Create a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
+// @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
+//PlankAudioFileWriterRef pl_AudioFileWriter_Create();
+//
+///** Inititalise a <i>Plank AudioFileWriter</i> object. 
+// @param p The <i>Plank AudioFileWriter</i> object. 
+// @return A result code which will be PlankResult_OK if the operation was completely successful. */
+//PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p);
+//
+///** Deinitialise a <i>Plank AudioFileWriter</i> object. 
+// @param p The <i>Plank AudioFileWriter</i> object. 
+// @return A result code which will be PlankResult_OK if the operation was completely successful. */
+//PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p);
+//
+///** Destroy a <i>Plank AudioFileWriter</i> object. 
+// @param p The <i>Plank AudioFileWriter</i> object. 
+// @return A result code which will be PlankResult_OK if the operation was completely successful. */
+//PlankResult pl_AudioFileWriter_Destroy (PlankAudioFileWriterRef p);
+//
+///** Gets the underlying <i>Plank %File</i> object. 
+// This is the raw file object the is performing the fundamental file access operations.
+// @param p The <i>Plank AudioFileWriter</i> object.
+// @return The <i>Plank %File</i> object. */
+//PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p);
+//
+///** */
+//PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath);
+//
+///** */
+//PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p);
+//
+///** @} */
+//
+//PLANK_END_C_LINKAGE
+//
+//#if !DOXYGEN
+//typedef struct PlankAudioFileWriter
+//{
+//    PlankIffFileWriter iff;
+//    PlankAudioFileFormatInfo formatInfo;
+//    
+//} PlankAudioFileWriter;
+//#endif
 
 #endif // PLANK_AUDIOFILEWRITER_H

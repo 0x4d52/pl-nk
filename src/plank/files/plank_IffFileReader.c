@@ -100,6 +100,8 @@ PlankResult pl_IffFileReader_DeInit (PlankIffFileReaderRef p)
     if ((result = pl_File_DeInit (&p->file)) != PlankResult_OK)
         goto exit;
 
+    pl_MemoryZero (p, sizeof (PlankIffFileReader));
+
 exit:
     return result;    
 }
@@ -212,6 +214,46 @@ PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB is
     return PlankResult_OK;
 }
 
+//PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankLL readChunkEnd, pos = PLANKIFFFILE_FIRSTCHUNKPOSITION;
+//    PlankFourCharCode readChunkID;
+//    PlankUI readChunkLength;
+//    
+//    if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;
+//
+//    while ((pos < p->headerInfo.mainEnd) && (pl_File_IsEOF (&p->file) == PLANK_FALSE))
+//    {
+//        if ((result = pl_File_ReadFourCharCode (&p->file, &readChunkID)) != PlankResult_OK) goto exit;
+//        if ((result = pl_File_ReadUI (&p->file, &readChunkLength)) != PlankResult_OK) goto exit;
+//        if ((result = pl_File_GetPosition (&p->file, &pos)) != PlankResult_OK) goto exit;
+//        
+//        readChunkEnd = pos + readChunkLength + (readChunkLength & 1);
+//        
+//        if (chunkID == readChunkID)
+//        {
+//            if (chunkLength) 
+//                *chunkLength = readChunkLength;
+//            
+//            if (chunkDataPos)
+//                *chunkDataPos = pos;
+//            
+//            result = PlankResult_OK;
+//            goto exit;
+//        }
+//        
+//        pos = readChunkEnd;
+//        if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;        
+//    }
+//    
+//    result = PlankResult_IffFileReaderChunkNotFound;
+//    
+//exit:
+//    return result;
+//}
+
+
 PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
@@ -220,18 +262,14 @@ PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFour
     PlankUI readChunkLength;
     
     if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;
-
+    
     while ((pos < p->headerInfo.mainEnd) && (pl_File_IsEOF (&p->file) == PLANK_FALSE))
     {
-        if ((result = pl_File_ReadFourCharCode (&p->file, &readChunkID)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadUI (&p->file, &readChunkLength)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_GetPosition (&p->file, &pos)) != PlankResult_OK) goto exit;
-        
-        readChunkEnd = pos + readChunkLength + (readChunkLength & 1);
-        
+        if ((result = pl_IffFileReader_ParseChunkHeader (p, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
+
         if (chunkID == readChunkID)
         {
-            if (chunkLength) 
+            if (chunkLength)
                 *chunkLength = readChunkLength;
             
             if (chunkDataPos)
@@ -242,11 +280,41 @@ PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFour
         }
         
         pos = readChunkEnd;
-        if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;        
+        if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;
     }
     
     result = PlankResult_IffFileReaderChunkNotFound;
     
 exit:
+    return result;
+}
+
+
+PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, PlankFourCharCode* chunkID, PlankUI* chunkLength, PlankLL* chunkEnd, PlankLL* posOut)
+{
+    PlankResult result;
+    PlankFourCharCode cid;
+    PlankLL pos;
+    PlankUI len;
+    
+    result = PlankResult_OK;
+    
+    if ((result = pl_File_ReadFourCharCode (&p->file, &cid)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadUI (&p->file, &len)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_GetPosition (&p->file, &pos)) != PlankResult_OK) goto exit;
+    
+    if (chunkID != PLANK_NULL)
+        *chunkID = cid;
+    
+    if (chunkLength != PLANK_NULL)
+        *chunkLength = len;
+
+    if (chunkEnd)
+        *chunkEnd = pos + len + (len & 1);
+        
+    if (posOut)
+        *posOut = pos;
+    
+exit:    
     return result;
 }

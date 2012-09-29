@@ -219,7 +219,9 @@ PlankResult pl_Thread_DeInit (PlankThreadRef p)
     pl_AtomicI_DeInit (&p->paused);
     pl_AtomicPX_DeInit (&p->userDataAtom);
 
-    return result;    
+    pl_MemoryZero (p, sizeof (PlankThread));
+
+    return result;
 }
 
 PlankResult pl_Thread_Destroy (PlankThreadRef p)

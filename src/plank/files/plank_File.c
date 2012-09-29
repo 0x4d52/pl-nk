@@ -102,6 +102,8 @@ PlankResult pl_File_DeInit (PlankFileRef p)
     if (p->stream != PLANK_NULL)
         result = pl_File_Close (p);    
 
+    pl_MemoryZero (p, sizeof (PlankFile));
+
 exit:
     return result;
 }

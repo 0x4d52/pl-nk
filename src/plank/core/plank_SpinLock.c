@@ -122,6 +122,7 @@ PlankResult pl_SpinLock_DeInit (PlankSpinLockRef p)
     }
     
     pl_AtomicI_DeInit (&p->flag);
+    pl_MemoryZero (p, sizeof (PlankSpinLock));
 
 exit:
     return result;

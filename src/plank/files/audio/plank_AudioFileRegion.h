@@ -52,10 +52,6 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
-#define PLANKAUDIOFILE_REGIONTYPE_REGION     0
-#define PLANKAUDIOFILE_REGIONTYPE_SELECTION  1
-#define PLANKAUDIOFILE_REGIONTYPE_LOOP       2
-
 /** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
 typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef; 
 

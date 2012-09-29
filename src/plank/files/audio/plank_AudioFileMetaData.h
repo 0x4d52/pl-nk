@@ -52,11 +52,6 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
-#define PLANKAUDIOFILEMETADATA_TEXTENCODING_ASCII  0
-#define PLANKAUDIOFILEMETADATA_TEXTENCODING_UTF8   1
-#define PLANKAUDIOFILEMETADATA_TEXTENCODING_UTF16  2
-#define PLANKAUDIOFILEMETADATA_TEXTENCODING_LATIN1 0
-
 /** Create a <i>Plank AudioFileMetaData</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileMetaData</i> object as an opaque reference or PLANK_NULL. */
 PlankAudioFileMetaDataRef pl_AudioFileMetaData_Create();
@@ -72,6 +67,8 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
 
+PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, const PlankUI cueID, const PlankUI offset, const char* label, const int cuePointType);
+
 /** Adds a format specific block of data.
  The AudioFileMetaData object takes ownership of the block. */
 PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block);
@@ -82,6 +79,13 @@ PLANK_END_C_LINKAGE
 
 
 #if !DOXYGEN
+typedef struct PlankAudioFileMetaDataParseState
+{
+    PlankUI cueLabelIndex;
+    PlankUI cueNoteIndex;
+} PlankAudioFileMetaDataParseState;
+
+
 typedef struct PlankAudioFileMetaData
 {
     // smpl / inst
@@ -130,7 +134,9 @@ typedef struct PlankAudioFileMetaData
     
     // just a list of unparsed data - if we write the same format
     // wih no change this can be simply piped out
-    PlankSimpleLinkedList formatSpecific; 
+    PlankSimpleLinkedList formatSpecific;
+    
+    PlankAudioFileMetaDataParseState parseState;
     
 } PlankAudioFileMetaData;
 #endif 

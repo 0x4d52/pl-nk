@@ -104,6 +104,7 @@ PlankResult pl_LockFreeLinkedListElement_DeInit (PlankLockFreeLinkedListElementR
         
     pl_AtomicPX_DeInit (&p->next);
     pl_AtomicPX_DeInit (&p->data);
+    pl_MemoryZero (p, sizeof (PlankLockFreeLinkedListElement));
 
 exit:
     return result;    

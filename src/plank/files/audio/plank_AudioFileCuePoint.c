@@ -52,12 +52,95 @@ PlankResult pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p)
 
 PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p)
 {
-    (void)p;
-    return PlankResult_OK;
+    PlankResult result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pl_MemoryZero (p, sizeof (PlankAudioFileCuePoint));
+    
+exit:
+    return result;
 }
 
 PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
 {
-    (void)p;
+    PlankResult result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    if ((result = pl_DynamicArray_DeInit (&p->label)) != PlankResult_OK)
+        goto exit;
+        
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const PlankLL position)
+{
+    p->position = position;
     return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankUI cueID)
+{
+    p->cueID = cueID;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const char* label)
+{
+    PlankResult result = PlankResult_OK;
+    PlankL labelSize;
+    
+    if (pl_DynamicArray_GetItemSize (&p->label) == 0)
+        pl_DynamicArray_InitWithItemSize (&p->label, 1);
+
+    if (label == PLANK_NULL)
+    {
+        result = pl_DynamicArray_DeInit (&p->label);
+        goto exit;
+    }
+    
+    labelSize = strlen (label) + 1;
+    
+    if ((result = pl_DynamicArray_EnsureSize (&p->label, labelSize)) != PlankResult_OK) goto exit;
+
+    pl_MemoryCopy (pl_DynamicArray_GetArray (&p->label), label, labelSize);
+        
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileCuePoint_SetType (PlankAudioFileCuePointRef p, const int type)
+{
+    p->type = type;
+    return PlankResult_OK;
+}
+
+PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p)
+{
+    return p->position;
+}
+
+PlankUI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p)
+{
+    return p->cueID;
+}
+
+const char* pl_AudioFileCuePoint_GetLabel (PlankAudioFileCuePointRef p)
+{
+    return pl_DynamicArray_GetArray (&p->label);
+}
+
+int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p)
+{
+    return p->type;
 }

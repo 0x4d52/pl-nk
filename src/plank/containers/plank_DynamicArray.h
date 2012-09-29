@@ -95,6 +95,10 @@ PlankB pl_DynamicArray_IsIndexInRange (PlankDynamicArrayRef p, const PlankL inde
 /** Get the number of items stored in the array. */
 PlankL pl_DynamicArray_GetSize (PlankDynamicArrayRef p);
 
+/** Get the size of a single item stored in the array. */
+PlankL pl_DynamicArray_GetItemSize (PlankDynamicArrayRef p);
+
+
 PlankResult pl_DynamicArray_SetSize (PlankDynamicArrayRef p, const PlankL capacity);
 
 PlankResult pl_DynamicArray_Zero (PlankDynamicArrayRef p);

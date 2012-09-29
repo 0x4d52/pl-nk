@@ -125,7 +125,8 @@ PlankResult pl_LockFreeQueue_DeInit (PlankLockFreeQueueRef p)
     
     pl_AtomicPX_DeInit (&p->head);
     pl_AtomicPX_DeInit (&p->tail);
-    
+    pl_MemoryZero (p, sizeof (PlankLockFreeQueue));
+
 exit:
     return result;    
 }
