@@ -468,10 +468,46 @@ exit:
 
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
-    (void)p;
-    (void)chunkEnd;
-    printf("bext - %d bytes\n", chunkLength);
-    return PlankResult_OK;
+    PlankResult result = PlankResult_OK;
+    char description [256];
+    char originator [32];
+    char originatorRef [32];
+    char originationDate [10];
+    char originationTime [8];
+    PlankUI timeRefLow;
+    PlankUI timeRefHigh;
+    PlankUS version;
+    PlankUC umid[64];
+    PlankUC reserved[190];
+    PlankUI fixedSize, lengthRemain;
+    PlankIffFileReaderRef iff;
+
+    iff = (PlankIffFileReaderRef)p->peer;
+
+    fixedSize = 256 + 32 + 32 + 10 + 8 + 4 + 4 + 4 + 64 + 190;
+
+    if ((result = pl_File_Read (&iff->file, description, 256, PLANK_NULL)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Read (&iff->file, originator, 32, PLANK_NULL)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Read (&iff->file, originatorRef, 32, PLANK_NULL)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Read (&iff->file, originationDate, 10, PLANK_NULL)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Read (&iff->file, originationTime, 8, PLANK_NULL)) != PlankResult_OK) goto exit;
+
+    if ((result = pl_File_ReadUI (&iff->file, &timeRefLow)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadUI (&iff->file, &timeRefHigh)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadUS (&iff->file, &version)) != PlankResult_OK) goto exit;
+
+    if ((result = pl_File_Read (&iff->file, umid, 64, PLANK_NULL)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Read (&iff->file, reserved, 190, PLANK_NULL)) != PlankResult_OK) goto exit;
+    
+    // copy these into the metadata
+    
+    lengthRemain = chunkLength - fixedSize;
+    
+    // then add the coding history
+    
+    
+exit:
+    return result;
 }
 
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
@@ -482,12 +518,27 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderR
     return PlankResult_OK;
 }
 
+
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_inst (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
-    (void)p;
-    (void)chunkEnd;
-    printf("inst  - %d bytes\n", chunkLength);
-    return PlankResult_OK;
+    PlankResult result = PlankResult_OK;
+    char baseNote, detune, gain, lowNote, highNote, lowVelocity, highVelocity;
+    PlankIffFileReaderRef iff;
+    
+    iff = (PlankIffFileReaderRef)p->peer;
+
+    if ((result = pl_File_ReadC (&iff->file, &baseNote)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadC (&iff->file, &detune)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadC (&iff->file, &gain)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadC (&iff->file, &lowNote)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadC (&iff->file, &highNote)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadC (&iff->file, &lowVelocity)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadC (&iff->file, &highVelocity)) != PlankResult_OK) goto exit;
+
+    // copy to metadata
+    
+exit:
+    return result;
 }
 
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)

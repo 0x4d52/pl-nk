@@ -78,11 +78,8 @@ PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
         goto exit;
     }
     
-    if ((result = pl_DynamicArray_DeInit (&p->label)) != PlankResult_OK)
-        goto exit;
-
-    if ((result = pl_DynamicArray_DeInit (&p->comment)) != PlankResult_OK)
-        goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->label)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->comment)) != PlankResult_OK) goto exit;
     
     if (p->extra != PLANK_NULL)
     {

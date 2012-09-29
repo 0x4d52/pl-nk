@@ -222,6 +222,28 @@ exit:
     return result;
 }
 
+PlankResult pl_DynamicArray_AddItems (PlankDynamicArrayRef p, PlankConstantP items, const PlankL numItems)
+{
+    PlankResult result = PlankResult_OK;
+    PlankL index;
+    
+    index = p->usedItems;
+    p->usedItems += numItems;
+    
+    if (p->usedItems > p->allocatedItems)
+    {
+        result = pl_DynamicArray_EnsureSize (p, p->usedItems + PLANKDYNAMICARRAY_DEFAULTGRANULARITY);
+        
+        if (result != PlankResult_OK)
+            goto exit;
+    }
+    
+    pl_MemoryCopy ((unsigned char*)p->data + index * p->itemSize, items, p->itemSize * numItems);
+    
+exit:
+    return result;
+}
+
 PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item)
 {
     PlankResult result = PlankResult_OK;

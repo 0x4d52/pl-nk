@@ -78,6 +78,9 @@ PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef
  Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
 PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
 
+PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text);
+
+
 /** Adds a format specific block of data.
  The AudioFileMetaData object takes ownership of the block. */
 PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block);
@@ -131,8 +134,7 @@ typedef struct PlankAudioFileMetaData
     PlankI trackNum;
     PlankI trackTotal;
     
-    PlankUI timeRefLow;
-    PlankUI timeRefHigh;
+    PlankLL timeRef;
     PlankUS version;
     PlankDynamicArray umid; //?? bwav
     PlankDynamicArray codingHistory;

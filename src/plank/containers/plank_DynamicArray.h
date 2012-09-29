@@ -115,6 +115,8 @@ PlankP pl_DynamicArray_GetArray (PlankDynamicArrayRef p);
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_DynamicArray_AddItem (PlankDynamicArrayRef p, const PlankP item);
 
+PlankResult pl_DynamicArray_AddItems (PlankDynamicArrayRef p, PlankConstantP items, const PlankL numItems);
+
 /** Copies an item to the specified index. 
  This copies the bytes from one memory location to the array data based on the item
  size set during initialisation. 
