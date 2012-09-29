@@ -61,6 +61,7 @@ PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p)
     }
     
     pl_MemoryZero (p, sizeof (PlankAudioFileCuePoint));
+    p->cueID = -1;
     
 exit:
     return result;
@@ -69,7 +70,8 @@ exit:
 PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
 {
     PlankResult result = PlankResult_OK;
-    
+    PlankMemoryRef m;
+
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
@@ -78,6 +80,19 @@ PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
     
     if ((result = pl_DynamicArray_DeInit (&p->label)) != PlankResult_OK)
         goto exit;
+
+    if ((result = pl_DynamicArray_DeInit (&p->comment)) != PlankResult_OK)
+        goto exit;
+    
+    if (p->extra != PLANK_NULL)
+    {
+        m = pl_MemoryGlobal();
+        
+        if ((result = pl_Memory_Free (m, p->extra)) != PlankResult_OK)
+            goto exit;
+    }
+    
+    pl_MemoryZero (p, sizeof (PlankAudioFileCuePoint));
         
 exit:
     return result;
@@ -89,7 +104,7 @@ PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankUI cueID)
+PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankI cueID)
 {
     p->cueID = cueID;
     return PlankResult_OK;
@@ -111,10 +126,64 @@ PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const ch
     
     labelSize = strlen (label) + 1;
     
-    if ((result = pl_DynamicArray_EnsureSize (&p->label, labelSize)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_SetSize (&p->label, labelSize)) != PlankResult_OK) goto exit;
 
     pl_MemoryCopy (pl_DynamicArray_GetArray (&p->label), label, labelSize);
         
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileCuePoint_SetComment (PlankAudioFileCuePointRef p, const char* comment)
+{
+    PlankResult result = PlankResult_OK;
+    PlankL size;
+    
+    if (pl_DynamicArray_GetItemSize (&p->comment) == 0)
+        pl_DynamicArray_InitWithItemSize (&p->comment, 1);
+    
+    if (comment == PLANK_NULL)
+    {
+        result = pl_DynamicArray_DeInit (&p->comment);
+        goto exit;
+    }
+    
+    size = strlen (comment) + 1;
+    
+    if ((result = pl_DynamicArray_SetSize (&p->comment, size)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryCopy (pl_DynamicArray_GetArray (&p->comment), comment, size);
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileCuePoint_SetLabelSizeClear (PlankAudioFileCuePointRef p, const PlankL size)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (pl_DynamicArray_GetItemSize (&p->label) == 0)
+        pl_DynamicArray_InitWithItemSize (&p->label, 1);
+    
+    if ((result = pl_DynamicArray_SetSize (&p->label, size)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryZero (pl_DynamicArray_GetArray (&p->label), size);
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileCuePoint_SetCommentSizeClear (PlankAudioFileCuePointRef p, const PlankL size)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (pl_DynamicArray_GetItemSize (&p->comment) == 0)
+        pl_DynamicArray_InitWithItemSize (&p->comment, 1);
+    
+    if ((result = pl_DynamicArray_SetSize (&p->comment, size)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryZero (pl_DynamicArray_GetArray (&p->comment), size);
+    
 exit:
     return result;
 }
@@ -125,12 +194,41 @@ PlankResult pl_AudioFileCuePoint_SetType (PlankAudioFileCuePointRef p, const int
     return PlankResult_OK;
 }
 
+PlankResult pl_AudioFileCuePoint_SetExtra (PlankAudioFileCuePointRef p, PlankUI purpose, PlankUS country, PlankUS language, PlankUS dialect, PlankUS codePage)
+{
+    PlankResult result = PlankResult_OK;
+    PlankMemoryRef m;
+    
+    if (p->extra == PLANK_NULL)
+    {
+        m = pl_MemoryGlobal();
+        p->extra = pl_Memory_AllocateBytes (m, sizeof (PlankAudioFileCuePointExtra));
+        
+        if (p->extra == PLANK_NULL)
+        {
+            result = PlankResult_MemoryError;
+            goto exit;
+        }
+        
+        pl_MemoryZero (p->extra, sizeof (PlankAudioFileCuePointExtra));
+    }
+    
+    p->extra->purpose  = purpose;
+    p->extra->country  = country;
+    p->extra->language = language;
+    p->extra->dialect  = dialect;
+    p->extra->codePage = codePage;
+
+exit:
+    return result;
+}
+
 PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p)
 {
     return p->position;
 }
 
-PlankUI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p)
+PlankI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p)
 {
     return p->cueID;
 }
@@ -138,6 +236,21 @@ PlankUI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p)
 const char* pl_AudioFileCuePoint_GetLabel (PlankAudioFileCuePointRef p)
 {
     return pl_DynamicArray_GetArray (&p->label);
+}
+
+char* pl_AudioFileCuePoint_GetLabelRaw (PlankAudioFileCuePointRef p)
+{
+    return pl_DynamicArray_GetArray (&p->label);
+}
+
+const char* pl_AudioFileCuePoint_GetComment (PlankAudioFileCuePointRef p)
+{
+    return pl_DynamicArray_GetArray (&p->comment);
+}
+
+char* pl_AudioFileCuePoint_GetCommentRaw (PlankAudioFileCuePointRef p)
+{
+    return pl_DynamicArray_GetArray (&p->comment);
 }
 
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p)

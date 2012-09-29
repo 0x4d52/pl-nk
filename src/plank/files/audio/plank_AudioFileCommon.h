@@ -116,11 +116,12 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_CUEPOINTTYPE_INSERTPOINT     1
 #define PLANKAUDIOFILE_CUEPOINTTYPE_PLAYPOSITION    2
 #define PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART     3
-#define PLANKAUDIOFILE_CUEPOINTTYPE_REGIOEND        4
+#define PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND       4
 
 #define PLANKAUDIOFILE_REGIONTYPE_REGION            0
 #define PLANKAUDIOFILE_REGIONTYPE_SELECTION         1
 #define PLANKAUDIOFILE_REGIONTYPE_LOOP              2
+#define PLANKAUDIOFILE_REGIONTYPE_LYRICS            3
 
 #if PLANK_OGGVORBIS
     #ifndef OV_EXCLUDE_STATIC_CALLBACKS
@@ -161,6 +162,12 @@ typedef struct PlankAudioFileFormatInfo
 
 /** An opaque reference to the <i>Plank AudioFileMetaData</i> object. */
 typedef struct PlankAudioFileMetaData* PlankAudioFileMetaDataRef;
+
+/** An opaque reference to the <i>Plank AudioFileCuePoint</i> object. */
+typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef;
+
+/** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
+typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef;
 
 
 #endif // PLANK_AUDIOFILECOMMON_H

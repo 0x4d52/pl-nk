@@ -51,9 +51,6 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
-/** An opaque reference to the <i>Plank AudioFileCuePoint</i> object. */
-typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef; 
-
 /** Create a <i>Plank AudioFileCuePoint</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileCuePoint</i> object as an opaque reference or PLANK_NULL. */
 PlankAudioFileCuePointRef pl_AudioFileCuePoint_Create();
@@ -67,13 +64,20 @@ PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p);
 PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
 
 PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const PlankLL position);
-PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankUI cueID);
+PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankI cueID);
 PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const char* label);
+PlankResult pl_AudioFileCuePoint_SetLabelSizeClear (PlankAudioFileCuePointRef p, const PlankL size);
+PlankResult pl_AudioFileCuePoint_SetComment (PlankAudioFileCuePointRef p, const char* comment);
+PlankResult pl_AudioFileCuePoint_SetCommentSizeClear (PlankAudioFileCuePointRef p, const PlankL size);
 PlankResult pl_AudioFileCuePoint_SetType (PlankAudioFileCuePointRef p, const int type);
+PlankResult pl_AudioFileCuePoint_SetExtra (PlankAudioFileCuePointRef p, PlankUI purpose, PlankUS country, PlankUS language, PlankUS dialect, PlankUS codePage);
 
 PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p);
-PlankUI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p);
+PlankI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p);
 const char* pl_AudioFileCuePoint_GetLabel (PlankAudioFileCuePointRef p);
+char* pl_AudioFileCuePoint_GetLabelRaw (PlankAudioFileCuePointRef p);
+const char* pl_AudioFileCuePoint_GetComment (PlankAudioFileCuePointRef p);
+char* pl_AudioFileCuePoint_GetCommentRaw (PlankAudioFileCuePointRef p);
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
 
 
@@ -82,11 +86,22 @@ int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
 PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
+typedef struct PlankAudioFileCuePointExtra
+{
+    PlankUI purpose;
+    PlankUS country;
+    PlankUS language;
+    PlankUS dialect;
+    PlankUS codePage;
+} PlankAudioFileCuePointExtra;
+
 typedef struct PlankAudioFileCuePoint
 {
 	PlankLL position;
     PlankDynamicArray label;
-    PlankUI cueID;
+    PlankDynamicArray comment;
+    PlankAudioFileCuePointExtra* extra;
+    PlankI cueID;
     int type;
 } PlankAudioFileCuePoint;
 #endif

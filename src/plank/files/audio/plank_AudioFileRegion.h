@@ -52,9 +52,6 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
-/** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
-typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef; 
-
 /** Create a <i>Plank AudioFileRegion</i> object and return an oqaque reference to it.
  @return A <i>Plank AudioFileRegion</i> object as an opaque reference or PLANK_NULL. */
 PlankAudioFileRegionRef pl_AudioFileRegion_Create();
@@ -66,6 +63,26 @@ PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p);
 PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p);
 
 PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p);
+
+PlankAudioFileCuePointRef pl_AudioFileRegion_GetStartCuePoint (PlankAudioFileRegionRef p);
+PlankAudioFileCuePointRef pl_AudioFileRegion_GetEndCuePoint (PlankAudioFileRegionRef p);
+
+PlankLL pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p);
+PlankLL pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p);
+PlankLL pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p);
+int pl_AudioFileRegion_GetType (PlankAudioFileRegionRef p);
+const char* pl_AudioFileRegion_GetLabel (PlankAudioFileRegionRef p);
+char* pl_AudioFileRegion_GetLabelRaw (PlankAudioFileRegionRef p);
+
+PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const PlankLL position);
+PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const PlankLL position);
+PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const PlankLL length);
+PlankResult pl_AudioFileRegion_SetType (PlankAudioFileRegionRef p, const int type);
+
+PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* start, PlankLL* end);
+PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end);
+
+
 
 /** @} */
 
