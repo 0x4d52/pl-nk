@@ -61,6 +61,25 @@ typedef struct PlankAudioFileFormatSpecificMetaData
 } PlankAudioFileFormatSpecificMetaData;
 
 
+PlankResult pl_AudioFileMetaDataSetText (PlankDynamicArrayRef p, const char* text)
+{
+    PlankResult result = PlankResult_OK;
+    PlankL length;
+    
+    length = strlen (text);
+    
+    if (pl_DynamicArray_GetItemSize (p) == 0)
+        pl_DynamicArray_InitWithItemSize (p, 1);
+    
+    if ((result = pl_DynamicArray_SetSize (p, length + 1)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryCopy (pl_DynamicArray_GetArray (p), text, length + 1);
+    
+exit:
+    return result;
+}
+
+
 static PlankResult pl_AudioFileMetaDataFormatSpecificFree (PlankP ptr)
 {
     return pl_DynamicArray_Destroy ((PlankDynamicArrayRef)ptr);
@@ -130,7 +149,7 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p)
     
     // for some settings use -1 to indicate not set, others 0 is OK
     // but 0 should be checked for in some case to avoid errors (e.g., sample duration)
-    p->midiUnityNote    = -1;
+    p->baseNote         = -1;
     p->lowNote          = -1;
     p->highNote         = -1;
     p->lowVelocity      = -1;
@@ -197,7 +216,8 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
         goto exit;
     }
     
-    if ((result = pl_DynamicArray_DeInit (&p->descriptionComments)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_ClearDescriptionComments (p)) != PlankResult_OK) goto exit;
+    
     if ((result = pl_DynamicArray_DeInit (&p->originatorArtist)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->originatorRef)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->originationDate)) != PlankResult_OK) goto exit;
@@ -224,6 +244,221 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
     
 exit:
     return result;
+}
+
+PlankResult pl_AudioFileMetaData_DeInit_SetInstrumentData (PlankAudioFileMetaDataRef p,
+                                                           PlankI baseNote,
+                                                           PlankI detune,
+                                                           PlankI gain,
+                                                           PlankI lowNote,
+                                                           PlankI highNote,
+                                                           PlankI lowVelocity,
+                                                           PlankI highVelocity)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (baseNote >= 0)      p->baseNote = baseNote;
+    
+    p->detune = detune;
+    p->gain = gain;
+    
+    if (lowNote >= 0)       p->lowNote = lowNote;
+    if (highNote >= 0)      p->highNote = highNote;
+    if (lowVelocity >= 0)   p->lowVelocity = lowVelocity;
+    if (highVelocity >= 0)  p->highVelocity = highVelocity;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileMetaData_DeInit_GetInstrumentData (PlankAudioFileMetaDataRef p,
+                                                           PlankI* baseNote,
+                                                           PlankI* detune,
+                                                           PlankI* gain,
+                                                           PlankI* lowNote,
+                                                           PlankI* highNote,
+                                                           PlankI* lowVelocity,
+                                                           PlankI* highVelocity)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (baseNote != PLANK_NULL)     *baseNote = p->baseNote;
+    if (detune != PLANK_NULL)       *detune = p->detune;
+    if (gain != PLANK_NULL)         *gain = p->gain;
+    if (lowNote != PLANK_NULL)      *lowNote = p->lowNote;
+    if (highNote != PLANK_NULL)     *highNote = p->highNote;
+    if (lowVelocity != PLANK_NULL)  *lowVelocity = p->lowVelocity;
+    if (highVelocity != PLANK_NULL) *highVelocity = p->highVelocity;
+    
+exit:
+    return result;    
+}
+
+PlankResult pl_AudioFileMetaData_DeInit_SetSamplerData (PlankAudioFileMetaDataRef p,
+                                                        PlankUI manufacturer,
+                                                        PlankUI product,
+                                                        PlankUI samplePeriod,
+                                                        PlankUI smpteFormat,
+                                                        PlankUI smpteOffset)
+{
+    PlankResult result = PlankResult_OK;
+    
+    p->manufacturer = manufacturer;
+    p->product = product;
+    p->samplePeriod = samplePeriod;
+    p->smpteFormat = smpteFormat;
+    p->smpteOffset = smpteOffset;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileMetaData_DeInit_GetSamplerData (PlankAudioFileMetaDataRef p,
+                                                        PlankUI* manufacturer,
+                                                        PlankUI* product,
+                                                        PlankUI* samplePeriod,
+                                                        PlankUI* smpteFormat,
+                                                        PlankUI* smpteOffset)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (manufacturer != PLANK_NULL) *manufacturer = p->manufacturer;
+    if (product != PLANK_NULL)      *product = p->product;
+    if (samplePeriod != PLANK_NULL) *samplePeriod = p->samplePeriod;
+    if (smpteFormat != PLANK_NULL)  *smpteFormat = p->smpteFormat;
+    if (smpteOffset != PLANK_NULL)  *smpteOffset = p->smpteOffset;
+
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDataRef p)
+{
+    PlankResult result = PlankResult_OK;
+    int i, numComments;
+    PlankDynamicArray* comments;
+        
+    numComments = pl_AudioFileMetaData_GetDescriptionCommentsCount (p);
+    comments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
+    
+    for (i = 0; i < numComments; ++i)
+    {
+        if ((result = pl_DynamicArray_DeInit (&comments[i])) != PlankResult_OK) goto exit;
+    }
+        
+    pl_MemoryZero (&p->descriptionComments, sizeof (PlankDynamicArray));
+    
+exit:
+    return result;
+    
+}
+
+PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text)
+{
+    PlankResult result = PlankResult_OK;
+    PlankDynamicArray comment;
+    
+    if ((result = pl_AudioFileMetaDataSetText (&comment, text)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_AddItem (&p->descriptionComments, &comment)) != PlankResult_OK) goto exit;
+
+exit:
+    return result;
+}
+
+int pl_AudioFileMetaData_GetDescriptionCommentsCount (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetSize (&p->descriptionComments);
+}
+
+const char* pl_AudioFileMetaData_GetCommentDescription (PlankAudioFileMetaDataRef p, const int index)
+{
+    int size;
+    PlankDynamicArray* comments;
+    
+    size = pl_DynamicArray_GetSize (&p->descriptionComments);
+    comments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
+
+    return pl_DynamicArray_GetArray (&comments[index]);
+}
+
+PlankResult pl_AudioFileMetaData_SetOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->originatorArtist, text);
+}
+
+PlankResult pl_AudioFileMetaData_SetOriginatorRef (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->originatorRef, text);
+}
+
+PlankResult pl_AudioFileMetaData_SetOriginationDate (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->originationDate, text);
+}
+
+PlankResult pl_AudioFileMetaData_SetOriginationTime (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->originationTime, text);
+}
+
+const char* pl_AudioFileMetaData_GetOriginatorArtist (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->originatorArtist);
+}
+
+const char* pl_AudioFileMetaData_GetOriginatorRef (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->originatorRef);
+}
+
+const char* pl_AudioFileMetaData_GetOriginationDate (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->originationDate);
+}
+
+const char* pl_AudioFileMetaData_GetOriginationTime (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->originationTime);
+}
+
+PlankResult pl_AudioFileMetaData_SetTitle (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->title, text);
+}
+
+PlankResult pl_AudioFileMetaData_SetAlbum (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->album, text);
+}
+
+PlankResult pl_AudioFileMetaData_SetGenre (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->genre, text);
+    }
+
+PlankResult pl_AudioFileMetaData_SetLyrics (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_AudioFileMetaDataSetText (&p->lyrics, text);
+}
+
+const char* pl_AudioFileMetaData_GetTitle (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->title);
+}
+
+const char* pl_AudioFileMetaData_GetAlbum (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->album);
+}
+
+const char* pl_AudioFileMetaData_GetGenre (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->genre);
+}
+
+const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->lyrics);
 }
 
 PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint)
@@ -326,6 +561,8 @@ PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, 
     
     if ((result = pl_DynamicArray_AddItems (&p->codingHistory, text, size)) != PlankResult_OK) goto exit;
 
+    // needs to take into account null termination and add /r/n
+    
 exit:
     return result;
 }
