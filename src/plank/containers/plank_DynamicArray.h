@@ -126,6 +126,10 @@ PlankResult pl_DynamicArray_AddItems (PlankDynamicArrayRef p, PlankConstantP ite
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item);
 
+PlankResult pl_DynamicArray_SetAsClearText (PlankDynamicArrayRef p, const PlankL length);
+
+PlankResult pl_DynamicArray_SetAsText (PlankDynamicArrayRef p, const char* text);
+
 /** Inserts an item into the specified index. 
  This copies the bytes from one memory location to the array data based on the item
  size set during initialisation. Items above the specified index will be moved one

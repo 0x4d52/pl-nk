@@ -107,82 +107,104 @@ PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const Plank
     return PlankResult_OK;
 }
 
+//PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const char* label)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankL labelSize;
+//    
+//    if (pl_DynamicArray_GetItemSize (&p->label) == 0)
+//        pl_DynamicArray_InitWithItemSize (&p->label, 1);
+//
+//    if (label == PLANK_NULL)
+//    {
+//        result = pl_DynamicArray_DeInit (&p->label);
+//        goto exit;
+//    }
+//    
+//    labelSize = strlen (label) + 1;
+//    
+//    if ((result = pl_DynamicArray_SetSize (&p->label, labelSize)) != PlankResult_OK) goto exit;
+//
+//    pl_MemoryCopy (pl_DynamicArray_GetArray (&p->label), label, labelSize);
+//        
+//exit:
+//    return result;
+//}
+
 PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const char* label)
 {
-    PlankResult result = PlankResult_OK;
-    PlankL labelSize;
-    
-    if (pl_DynamicArray_GetItemSize (&p->label) == 0)
-        pl_DynamicArray_InitWithItemSize (&p->label, 1);
-
-    if (label == PLANK_NULL)
-    {
-        result = pl_DynamicArray_DeInit (&p->label);
-        goto exit;
-    }
-    
-    labelSize = strlen (label) + 1;
-    
-    if ((result = pl_DynamicArray_SetSize (&p->label, labelSize)) != PlankResult_OK) goto exit;
-
-    pl_MemoryCopy (pl_DynamicArray_GetArray (&p->label), label, labelSize);
-        
-exit:
-    return result;
+    return pl_DynamicArray_SetAsText (&p->label, label);
 }
+
+
+//PlankResult pl_AudioFileCuePoint_SetComment (PlankAudioFileCuePointRef p, const char* comment)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankL size;
+//    
+//    if (pl_DynamicArray_GetItemSize (&p->comment) == 0)
+//        pl_DynamicArray_InitWithItemSize (&p->comment, 1);
+//    
+//    if (comment == PLANK_NULL)
+//    {
+//        result = pl_DynamicArray_DeInit (&p->comment);
+//        goto exit;
+//    }
+//    
+//    size = strlen (comment) + 1;
+//    
+//    if ((result = pl_DynamicArray_SetSize (&p->comment, size)) != PlankResult_OK) goto exit;
+//    
+//    pl_MemoryCopy (pl_DynamicArray_GetArray (&p->comment), comment, size);
+//    
+//exit:
+//    return result;
+//}
 
 PlankResult pl_AudioFileCuePoint_SetComment (PlankAudioFileCuePointRef p, const char* comment)
 {
-    PlankResult result = PlankResult_OK;
-    PlankL size;
-    
-    if (pl_DynamicArray_GetItemSize (&p->comment) == 0)
-        pl_DynamicArray_InitWithItemSize (&p->comment, 1);
-    
-    if (comment == PLANK_NULL)
-    {
-        result = pl_DynamicArray_DeInit (&p->comment);
-        goto exit;
-    }
-    
-    size = strlen (comment) + 1;
-    
-    if ((result = pl_DynamicArray_SetSize (&p->comment, size)) != PlankResult_OK) goto exit;
-    
-    pl_MemoryCopy (pl_DynamicArray_GetArray (&p->comment), comment, size);
-    
-exit:
-    return result;
+    return pl_DynamicArray_SetAsText (&p->comment, comment);
 }
 
-PlankResult pl_AudioFileCuePoint_SetLabelSizeClear (PlankAudioFileCuePointRef p, const PlankL size)
+
+//PlankResult pl_AudioFileCuePoint_SetLabelLengthClear (PlankAudioFileCuePointRef p, const PlankL size)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (pl_DynamicArray_GetItemSize (&p->label) == 0)
+//        pl_DynamicArray_InitWithItemSize (&p->label, 1);
+//    
+//    if ((result = pl_DynamicArray_SetSize (&p->label, size)) != PlankResult_OK) goto exit;
+//    
+//    pl_MemoryZero (pl_DynamicArray_GetArray (&p->label), size);
+//    
+//exit:
+//    return result;
+//}
+
+PlankResult pl_AudioFileCuePoint_SetLabelLengthClear (PlankAudioFileCuePointRef p, const PlankL length)
 {
-    PlankResult result = PlankResult_OK;
-    
-    if (pl_DynamicArray_GetItemSize (&p->label) == 0)
-        pl_DynamicArray_InitWithItemSize (&p->label, 1);
-    
-    if ((result = pl_DynamicArray_SetSize (&p->label, size)) != PlankResult_OK) goto exit;
-    
-    pl_MemoryZero (pl_DynamicArray_GetArray (&p->label), size);
-    
-exit:
-    return result;
+    return pl_DynamicArray_SetAsClearText (&p->label, length);
 }
 
-PlankResult pl_AudioFileCuePoint_SetCommentSizeClear (PlankAudioFileCuePointRef p, const PlankL size)
+//PlankResult pl_AudioFileCuePoint_SetCommentLengthClear (PlankAudioFileCuePointRef p, const PlankL size)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (pl_DynamicArray_GetItemSize (&p->comment) == 0)
+//        pl_DynamicArray_InitWithItemSize (&p->comment, 1);
+//    
+//    if ((result = pl_DynamicArray_SetSize (&p->comment, size)) != PlankResult_OK) goto exit;
+//    
+//    pl_MemoryZero (pl_DynamicArray_GetArray (&p->comment), size);
+//    
+//exit:
+//    return result;
+//}
+
+PlankResult pl_AudioFileCuePoint_SetCommentLengthClear (PlankAudioFileCuePointRef p, const PlankL length)
 {
-    PlankResult result = PlankResult_OK;
-    
-    if (pl_DynamicArray_GetItemSize (&p->comment) == 0)
-        pl_DynamicArray_InitWithItemSize (&p->comment, 1);
-    
-    if ((result = pl_DynamicArray_SetSize (&p->comment, size)) != PlankResult_OK) goto exit;
-    
-    pl_MemoryZero (pl_DynamicArray_GetArray (&p->comment), size);
-    
-exit:
-    return result;
+    return pl_DynamicArray_SetAsClearText (&p->comment, length);
 }
 
 PlankResult pl_AudioFileCuePoint_SetType (PlankAudioFileCuePointRef p, const int type)

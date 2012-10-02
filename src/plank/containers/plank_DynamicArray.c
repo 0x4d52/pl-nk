@@ -72,7 +72,10 @@ PlankDynamicArrayRef pl_DynamicArray_Create()
 
 PlankResult pl_DynamicArray_Init (PlankDynamicArrayRef p)
 {
-    return pl_DynamicArray_InitWithItemSize (p, PLANKDYNAMICARRAY_DEFAULTITEMSIZE);
+//    return pl_DynamicArray_InitWithItemSize (p, PLANKDYNAMICARRAY_DEFAULTITEMSIZE);
+    
+    pl_MemoryZero (p, sizeof (PlankDynamicArray));
+    return PlankResult_OK;
 }
 
 PlankResult pl_DynamicArray_InitWithItemSize (PlankDynamicArrayRef p, const PlankL itemSize)
@@ -258,6 +261,51 @@ PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankL index,
     
 exit:
     return result;        
+}
+
+PlankResult pl_DynamicArray_SetAsClearText (PlankDynamicArrayRef p, const PlankL length)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (p->itemSize == 0)
+        pl_DynamicArray_InitWithItemSize (p, 1);
+    
+    if (p->itemSize != 1)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((result = pl_DynamicArray_SetSize (p, length + 1)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryZero (pl_DynamicArray_GetArray (p), length + 1);
+    
+exit:
+    return result;
+}
+
+PlankResult pl_DynamicArray_SetAsText (PlankDynamicArrayRef p, const char* text)
+{
+    PlankResult result = PlankResult_OK;
+    PlankL length;
+        
+    if (p->itemSize == 0)
+        pl_DynamicArray_InitWithItemSize (p, 1);
+    
+    if (p->itemSize != 1)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+
+    length = strlen (text);
+
+    if ((result = pl_DynamicArray_SetSize (p, length + 1)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryCopy (pl_DynamicArray_GetArray (p), text, length + 1);
+    
+exit:
+    return result;
 }
 
 PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item)

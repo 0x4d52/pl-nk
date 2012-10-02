@@ -469,11 +469,11 @@ exit:
 static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
-    char description [256];
-    char originator [32];
-    char originatorRef [32];
-    char originationDate [10];
-    char originationTime [8];
+    char description [257];
+    char originator [33];
+    char originatorRef [33];
+    char originationDate [11];
+    char originationTime [9];
     PlankUI timeRefLow;
     PlankUI timeRefHigh;
     PlankUS version;
@@ -485,6 +485,11 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderR
     iff = (PlankIffFileReaderRef)p->peer;
 
     fixedSize = 256 + 32 + 32 + 10 + 8 + 4 + 4 + 4 + 64 + 190;
+    description[256] = '\0';
+    originator[32] = '\0';
+    originatorRef[32] = '\0';
+    originationDate[10] = '\0';
+    originationTime[8] = '\0';
 
     if ((result = pl_File_Read (&iff->file, description, 256, PLANK_NULL)) != PlankResult_OK) goto exit;
     if ((result = pl_File_Read (&iff->file, originator, 32, PLANK_NULL)) != PlankResult_OK) goto exit;
@@ -501,13 +506,13 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderR
     
     // copy these into the metadata
 
+    
     if ((result = pl_AudioFileMetaData_ClearDescriptionComments (p->metaData)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_AddDescriptionComment (p->metaData, description)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_SetOriginatorArtist (p->metaData, originator)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_SetOriginatorRef (p->metaData, originatorRef)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_SetOriginationDate (p->metaData, originationDate)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_SetOriginationTime (p->metaData, originationTime)) != PlankResult_OK) goto exit;
-
     
     lengthRemain = chunkLength - fixedSize;
     
@@ -628,7 +633,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
             {
                 textLength = adtlChunkLength - 4;
                 
-                if ((result = pl_AudioFileCuePoint_SetLabelSizeClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileCuePoint_SetLabelLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
                 if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetLabelRaw (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
             }
         }
@@ -643,7 +648,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
             {
                 textLength = adtlChunkLength - 4;
                 
-                if ((result = pl_AudioFileCuePoint_SetCommentSizeClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileCuePoint_SetCommentLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
                 if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetCommentRaw (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
             }
         }
@@ -670,7 +675,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
                 textLength = adtlChunkLength - 20;
 
                 if ((result = pl_AudioFileCuePoint_SetExtra (cuePointRef, purpose, country, language, dialect, codePage)) != PlankResult_OK) goto exit;
-                if ((result = pl_AudioFileCuePoint_SetLabelSizeClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileCuePoint_SetLabelLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
                 if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetLabelRaw (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
 
                 if ((result = pl_AudioFileRegion_SetLength (&region, sampleLength)) != PlankResult_OK) goto exit;

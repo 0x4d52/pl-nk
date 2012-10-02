@@ -66,9 +66,9 @@ PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
 PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const PlankLL position);
 PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankI cueID);
 PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const char* label);
-PlankResult pl_AudioFileCuePoint_SetLabelSizeClear (PlankAudioFileCuePointRef p, const PlankL size);
+PlankResult pl_AudioFileCuePoint_SetLabelLengthClear (PlankAudioFileCuePointRef p, const PlankL length);
 PlankResult pl_AudioFileCuePoint_SetComment (PlankAudioFileCuePointRef p, const char* comment);
-PlankResult pl_AudioFileCuePoint_SetCommentSizeClear (PlankAudioFileCuePointRef p, const PlankL size);
+PlankResult pl_AudioFileCuePoint_SetCommentLengthClear (PlankAudioFileCuePointRef p, const PlankL length);
 PlankResult pl_AudioFileCuePoint_SetType (PlankAudioFileCuePointRef p, const int type);
 PlankResult pl_AudioFileCuePoint_SetExtra (PlankAudioFileCuePointRef p, PlankUI purpose, PlankUS country, PlankUS language, PlankUS dialect, PlankUS codePage);
 

@@ -61,23 +61,23 @@ typedef struct PlankAudioFileFormatSpecificMetaData
 } PlankAudioFileFormatSpecificMetaData;
 
 
-PlankResult pl_AudioFileMetaDataSetText (PlankDynamicArrayRef p, const char* text)
-{
-    PlankResult result = PlankResult_OK;
-    PlankL length;
-    
-    length = strlen (text);
-    
-    if (pl_DynamicArray_GetItemSize (p) == 0)
-        pl_DynamicArray_InitWithItemSize (p, 1);
-    
-    if ((result = pl_DynamicArray_SetSize (p, length + 1)) != PlankResult_OK) goto exit;
-    
-    pl_MemoryCopy (pl_DynamicArray_GetArray (p), text, length + 1);
-    
-exit:
-    return result;
-}
+//PlankResult pl_AudioFileMetaDataSetText (PlankDynamicArrayRef p, const char* text)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankL length;
+//    
+//    length = strlen (text);
+//    
+//    if (pl_DynamicArray_GetItemSize (p) == 0)
+//        pl_DynamicArray_InitWithItemSize (p, 1);
+//    
+//    if ((result = pl_DynamicArray_SetSize (p, length + 1)) != PlankResult_OK) goto exit;
+//    
+//    pl_MemoryCopy (pl_DynamicArray_GetArray (p), text, length + 1);
+//    
+//exit:
+//    return result;
+//}
 
 
 static PlankResult pl_AudioFileMetaDataFormatSpecificFree (PlankP ptr)
@@ -358,7 +358,8 @@ PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRe
     PlankResult result = PlankResult_OK;
     PlankDynamicArray comment;
     
-    if ((result = pl_AudioFileMetaDataSetText (&comment, text)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_Init (&comment)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_SetAsText (&comment, text)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_AddItem (&p->descriptionComments, &comment)) != PlankResult_OK) goto exit;
 
 exit:
@@ -383,22 +384,22 @@ const char* pl_AudioFileMetaData_GetCommentDescription (PlankAudioFileMetaDataRe
 
 PlankResult pl_AudioFileMetaData_SetOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->originatorArtist, text);
+    return pl_DynamicArray_SetAsText (&p->originatorArtist, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetOriginatorRef (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->originatorRef, text);
+    return pl_DynamicArray_SetAsText (&p->originatorRef, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetOriginationDate (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->originationDate, text);
+    return pl_DynamicArray_SetAsText (&p->originationDate, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetOriginationTime (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->originationTime, text);
+    return pl_DynamicArray_SetAsText (&p->originationTime, text);
 }
 
 const char* pl_AudioFileMetaData_GetOriginatorArtist (PlankAudioFileMetaDataRef p)
@@ -423,22 +424,22 @@ const char* pl_AudioFileMetaData_GetOriginationTime (PlankAudioFileMetaDataRef p
 
 PlankResult pl_AudioFileMetaData_SetTitle (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->title, text);
+    return pl_DynamicArray_SetAsText (&p->title, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetAlbum (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->album, text);
+    return pl_DynamicArray_SetAsText (&p->album, text);
 }
 
 PlankResult pl_AudioFileMetaData_SetGenre (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->genre, text);
+    return pl_DynamicArray_SetAsText (&p->genre, text);
     }
 
 PlankResult pl_AudioFileMetaData_SetLyrics (PlankAudioFileMetaDataRef p, const char* text)
 {
-    return pl_AudioFileMetaDataSetText (&p->lyrics, text);
+    return pl_DynamicArray_SetAsText (&p->lyrics, text);
 }
 
 const char* pl_AudioFileMetaData_GetTitle (PlankAudioFileMetaDataRef p)
