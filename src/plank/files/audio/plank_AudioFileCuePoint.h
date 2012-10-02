@@ -75,9 +75,9 @@ PlankResult pl_AudioFileCuePoint_SetExtra (PlankAudioFileCuePointRef p, PlankUI 
 PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p);
 PlankI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p);
 const char* pl_AudioFileCuePoint_GetLabel (PlankAudioFileCuePointRef p);
-char* pl_AudioFileCuePoint_GetLabelRaw (PlankAudioFileCuePointRef p);
+char* pl_AudioFileCuePoint_GetLabelWritable (PlankAudioFileCuePointRef p);
 const char* pl_AudioFileCuePoint_GetComment (PlankAudioFileCuePointRef p);
-char* pl_AudioFileCuePoint_GetCommentRaw (PlankAudioFileCuePointRef p);
+char* pl_AudioFileCuePoint_GetCommentWritable (PlankAudioFileCuePointRef p);
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
 
 

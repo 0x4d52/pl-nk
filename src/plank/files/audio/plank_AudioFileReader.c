@@ -634,7 +634,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
                 textLength = adtlChunkLength - 4;
                 
                 if ((result = pl_AudioFileCuePoint_SetLabelLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
-                if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetLabelRaw (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
+                if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetLabelWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
             }
         }
         if (adtlChunkID == pl_FourCharCode ("note"))
@@ -649,7 +649,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
                 textLength = adtlChunkLength - 4;
                 
                 if ((result = pl_AudioFileCuePoint_SetCommentLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
-                if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetCommentRaw (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
+                if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetCommentWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
             }
         }
         else if (adtlChunkID == pl_FourCharCode ("ltxt"))
@@ -676,7 +676,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
 
                 if ((result = pl_AudioFileCuePoint_SetExtra (cuePointRef, purpose, country, language, dialect, codePage)) != PlankResult_OK) goto exit;
                 if ((result = pl_AudioFileCuePoint_SetLabelLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
-                if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetLabelRaw (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
+                if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetLabelWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
 
                 if ((result = pl_AudioFileRegion_SetLength (&region, sampleLength)) != PlankResult_OK) goto exit;
                 if ((result = pl_AudioFileRegion_SetType (&region, PLANKAUDIOFILE_REGIONTYPE_REGION)) != PlankResult_OK) goto exit;

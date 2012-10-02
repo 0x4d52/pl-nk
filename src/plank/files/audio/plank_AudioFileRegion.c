@@ -125,7 +125,7 @@ const char* pl_AudioFileRegion_GetLabel (PlankAudioFileRegionRef p)
 
 char* pl_AudioFileRegion_GetLabelRaw (PlankAudioFileRegionRef p)
 {
-    return pl_AudioFileCuePoint_GetLabelRaw (&p->start);
+    return pl_AudioFileCuePoint_GetLabelWritable (&p->start);
 }
 
 PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const PlankLL position)
