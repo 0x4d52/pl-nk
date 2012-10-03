@@ -246,39 +246,37 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileMetaData_DeInit_SetInstrumentData (PlankAudioFileMetaDataRef p,
-                                                           PlankI baseNote,
-                                                           PlankI detune,
-                                                           PlankI gain,
-                                                           PlankI lowNote,
-                                                           PlankI highNote,
-                                                           PlankI lowVelocity,
-                                                           PlankI highVelocity)
+PlankResult pl_AudioFileMetaData_SetInstrumentData (PlankAudioFileMetaDataRef p,
+                                                    PlankI baseNote,
+                                                    PlankI detune,
+                                                    PlankI gain,
+                                                    PlankI lowNote,
+                                                    PlankI highNote,
+                                                    PlankI lowVelocity,
+                                                    PlankI highVelocity)
 {
     PlankResult result = PlankResult_OK;
     
-    if (baseNote >= 0)      p->baseNote = baseNote;
-    
+    p->baseNote = baseNote;
     p->detune = detune;
     p->gain = gain;
-    
-    if (lowNote >= 0)       p->lowNote = lowNote;
-    if (highNote >= 0)      p->highNote = highNote;
-    if (lowVelocity >= 0)   p->lowVelocity = lowVelocity;
-    if (highVelocity >= 0)  p->highVelocity = highVelocity;
+    p->lowNote = lowNote;
+    p->highNote = highNote;
+    p->lowVelocity = lowVelocity;
+    p->highVelocity = highVelocity;
     
 exit:
     return result;
 }
 
-PlankResult pl_AudioFileMetaData_DeInit_GetInstrumentData (PlankAudioFileMetaDataRef p,
-                                                           PlankI* baseNote,
-                                                           PlankI* detune,
-                                                           PlankI* gain,
-                                                           PlankI* lowNote,
-                                                           PlankI* highNote,
-                                                           PlankI* lowVelocity,
-                                                           PlankI* highVelocity)
+PlankResult pl_AudioFileMetaData_GetInstrumentData (PlankAudioFileMetaDataRef p,
+                                                    PlankI* baseNote,
+                                                    PlankI* detune,
+                                                    PlankI* gain,
+                                                    PlankI* lowNote,
+                                                    PlankI* highNote,
+                                                    PlankI* lowVelocity,
+                                                    PlankI* highVelocity)
 {
     PlankResult result = PlankResult_OK;
     
@@ -294,12 +292,12 @@ exit:
     return result;    
 }
 
-PlankResult pl_AudioFileMetaData_DeInit_SetSamplerData (PlankAudioFileMetaDataRef p,
-                                                        PlankUI manufacturer,
-                                                        PlankUI product,
-                                                        PlankUI samplePeriod,
-                                                        PlankUI smpteFormat,
-                                                        PlankUI smpteOffset)
+PlankResult pl_AudioFileMetaData_SetSamplerData (PlankAudioFileMetaDataRef p,
+                                                 PlankUI manufacturer,
+                                                 PlankUI product,
+                                                 PlankUI samplePeriod,
+                                                 PlankUI smpteFormat,
+                                                 PlankUI smpteOffset)
 {
     PlankResult result = PlankResult_OK;
     
@@ -313,12 +311,12 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileMetaData_DeInit_GetSamplerData (PlankAudioFileMetaDataRef p,
-                                                        PlankUI* manufacturer,
-                                                        PlankUI* product,
-                                                        PlankUI* samplePeriod,
-                                                        PlankUI* smpteFormat,
-                                                        PlankUI* smpteOffset)
+PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
+                                                 PlankUI* manufacturer,
+                                                 PlankUI* product,
+                                                 PlankUI* samplePeriod,
+                                                 PlankUI* smpteFormat,
+                                                 PlankUI* smpteOffset)
 {
     PlankResult result = PlankResult_OK;
     
@@ -345,9 +343,9 @@ PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDat
     {
         if ((result = pl_DynamicArray_DeInit (&comments[i])) != PlankResult_OK) goto exit;
     }
-        
-    pl_MemoryZero (&p->descriptionComments, sizeof (PlankDynamicArray));
     
+    if ((result = pl_DynamicArray_DeInit (&p->descriptionComments)) != PlankResult_OK) goto exit;
+        
 exit:
     return result;
     
@@ -358,8 +356,12 @@ PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRe
     PlankResult result = PlankResult_OK;
     PlankDynamicArray comment;
     
+    if (pl_DynamicArray_GetItemSize (&p->descriptionComments) == 0)
+        pl_DynamicArray_InitWithItemSize (&p->descriptionComments, sizeof (PlankDynamicArray));
+    
     if ((result = pl_DynamicArray_Init (&comment)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_SetAsText (&comment, text)) != PlankResult_OK) goto exit;
+
     if ((result = pl_DynamicArray_AddItem (&p->descriptionComments, &comment)) != PlankResult_OK) goto exit;
 
 exit:
@@ -435,7 +437,7 @@ PlankResult pl_AudioFileMetaData_SetAlbum (PlankAudioFileMetaDataRef p, const ch
 PlankResult pl_AudioFileMetaData_SetGenre (PlankAudioFileMetaDataRef p, const char* text)
 {
     return pl_DynamicArray_SetAsText (&p->genre, text);
-    }
+}
 
 PlankResult pl_AudioFileMetaData_SetLyrics (PlankAudioFileMetaDataRef p, const char* text)
 {
@@ -460,6 +462,17 @@ const char* pl_AudioFileMetaData_GetGenre (PlankAudioFileMetaDataRef p)
 const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p)
 {
     return pl_DynamicArray_GetArray (&p->lyrics);
+}
+
+PlankResult pl_AudioFileMetaData_SetTimeRef (PlankAudioFileMetaDataRef p, const PlankLL timeRef)
+{
+    p->timeRef = timeRef;
+    return PlankResult_OK;
+}
+
+PlankLL pl_AudioFileMetaData_GetTimeRef (PlankAudioFileMetaDataRef p)
+{
+    return p->timeRef;;
 }
 
 PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, PlankAudioFileCuePointRef cuePoint)

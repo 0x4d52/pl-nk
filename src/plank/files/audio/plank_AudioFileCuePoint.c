@@ -61,7 +61,6 @@ PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p)
     }
     
     pl_MemoryZero (p, sizeof (PlankAudioFileCuePoint));
-    p->cueID = -1;
     
 exit:
     return result;
@@ -101,7 +100,7 @@ PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankI cueID)
+PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankUI cueID)
 {
     p->cueID = cueID;
     return PlankResult_OK;
@@ -168,7 +167,7 @@ PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p)
     return p->position;
 }
 
-PlankI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p)
+PlankUI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p)
 {
     return p->cueID;
 }

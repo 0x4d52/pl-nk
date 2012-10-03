@@ -118,15 +118,36 @@ int pl_AudioFileRegion_GetType (PlankAudioFileRegionRef p)
     return p->regionType;
 }
 
+PlankUI pl_AudioFileRegion_GetFraction (PlankAudioFileRegionRef p)
+{
+    return p->fraction;
+}
+
+PlankUI pl_AudioFileRegion_GetPlayCount (PlankAudioFileRegionRef p)
+{
+    return p->playCount;
+}
+
 const char* pl_AudioFileRegion_GetLabel (PlankAudioFileRegionRef p)
 {
     return pl_AudioFileCuePoint_GetLabel (&p->start);
 }
 
-char* pl_AudioFileRegion_GetLabelRaw (PlankAudioFileRegionRef p)
+char* pl_AudioFileRegion_GetLabelWritable (PlankAudioFileRegionRef p)
 {
     return pl_AudioFileCuePoint_GetLabelWritable (&p->start);
 }
+
+const char* pl_AudioFileRegion_GetComment (PlankAudioFileRegionRef p)
+{
+    return pl_AudioFileCuePoint_GetComment (&p->start);
+}
+
+char* pl_AudioFileRegion_GetCommentWritable (PlankAudioFileRegionRef p)
+{
+    return pl_AudioFileCuePoint_GetCommentWritable (&p->start);
+}
+
 
 PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const PlankLL position)
 {
@@ -152,6 +173,28 @@ PlankResult pl_AudioFileRegion_SetType (PlankAudioFileRegionRef p, const int typ
     p->end.type = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND;
     p->regionType = type;
     return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileRegion_SetFraction (PlankAudioFileRegionRef p, const PlankUI fraction)
+{
+    p->fraction = fraction;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileRegion_SetPlayCount (PlankAudioFileRegionRef p, const PlankUI playCount)
+{
+    p->playCount = playCount;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileRegion_SetLabel (PlankAudioFileRegionRef p, const char* label)
+{
+    return pl_AudioFileCuePoint_SetLabel (&p->start, label);
+}
+
+PlankResult pl_AudioFileRegion_SetComment (PlankAudioFileRegionRef p, const char* comment)
+{
+    return pl_AudioFileCuePoint_SetComment (&p->start, comment);
 }
 
 PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* start, PlankLL* end)

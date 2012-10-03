@@ -68,37 +68,37 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
 
-PlankResult pl_AudioFileMetaData_DeInit_SetInstrumentData (PlankAudioFileMetaDataRef p,
-                                                           PlankI baseNote,
-                                                           PlankI detune,
-                                                           PlankI gain,
-                                                           PlankI lowNote,
-                                                           PlankI highNote,
-                                                           PlankI lowVelocity,
-                                                           PlankI highVelocity);
+PlankResult pl_AudioFileMetaData_SetInstrumentData (PlankAudioFileMetaDataRef p,
+                                                    PlankI baseNote,
+                                                    PlankI detune,
+                                                    PlankI gain,
+                                                    PlankI lowNote,
+                                                    PlankI highNote,
+                                                    PlankI lowVelocity,
+                                                    PlankI highVelocity);
 
-PlankResult pl_AudioFileMetaData_DeInit_GetInstrumentData (PlankAudioFileMetaDataRef p,
-                                                           PlankI* baseNote,
-                                                           PlankI* midiPitchFraction,
-                                                           PlankI* gain,
-                                                           PlankI* lowNote,
-                                                           PlankI* highNote,
-                                                           PlankI* lowVelocity,
-                                                           PlankI* highVelocity);
+PlankResult pl_AudioFileMetaData_GetInstrumentData (PlankAudioFileMetaDataRef p,
+                                                    PlankI* baseNote,
+                                                    PlankI* midiPitchFraction,
+                                                    PlankI* gain,
+                                                    PlankI* lowNote,
+                                                    PlankI* highNote,
+                                                    PlankI* lowVelocity,
+                                                    PlankI* highVelocity);
 
-PlankResult pl_AudioFileMetaData_DeInit_SetSamplerData (PlankAudioFileMetaDataRef p,
-                                                        PlankUI manufacturer,
-                                                        PlankUI product,
-                                                        PlankUI samplePeriod,
-                                                        PlankUI smpteFormat,
-                                                        PlankUI smpteOffset);
+PlankResult pl_AudioFileMetaData_SetSamplerData (PlankAudioFileMetaDataRef p,
+                                                 PlankUI manufacturer,
+                                                 PlankUI product,
+                                                 PlankUI samplePeriod,
+                                                 PlankUI smpteFormat,
+                                                 PlankUI smpteOffset);
 
-PlankResult pl_AudioFileMetaData_DeInit_GetSamplerData (PlankAudioFileMetaDataRef p,
-                                                        PlankUI* manufacturer,
-                                                        PlankUI* product,
-                                                        PlankUI* samplePeriod,
-                                                        PlankUI* smpteFormat,
-                                                        PlankUI* smpteOffset);
+PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
+                                                 PlankUI* manufacturer,
+                                                 PlankUI* product,
+                                                 PlankUI* samplePeriod,
+                                                 PlankUI* smpteFormat,
+                                                 PlankUI* smpteOffset);
 
 PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDataRef p);
 PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text);
@@ -124,6 +124,10 @@ const char* pl_AudioFileMetaData_GetTitle (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetAlbum (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetGenre (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p);
+
+PlankResult pl_AudioFileMetaData_SetTimeRef (PlankAudioFileMetaDataRef p, const PlankLL timeRef);
+PlankLL pl_AudioFileMetaData_GetTimeRef (PlankAudioFileMetaDataRef p);
+
 
 /** Adds a cue point.
  Copies the data from another cue point. The source cue point is zeroed on return to help avoid memory allocation/deallocation issues. */
@@ -168,6 +172,7 @@ typedef struct PlankAudioFileMetaData
     
     PlankUI manufacturer;
     PlankUI product;
+    PlankUI samplerData;
     PlankUI samplePeriod;
     PlankUI smpteFormat;
     PlankUI smpteOffset;
