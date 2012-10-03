@@ -308,6 +308,52 @@ exit:
     return result;
 }
 
+PlankResult pl_DynamicArray_AppendText (PlankDynamicArrayRef p, const char* text)
+{
+    PlankResult result = PlankResult_OK;
+    PlankL length;
+    
+    if (p->itemSize == 0)
+        pl_DynamicArray_InitWithItemSize (p, 1);
+    
+    if (p->itemSize != 1)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    length = strlen (text);
+    
+    if ((result = pl_DynamicArray_AddItems (p, text, length + 1)) != PlankResult_OK) goto exit;
+
+exit:
+    return result;
+}
+
+PlankResult pl_DynamicArray_AppendTextLine (PlankDynamicArrayRef p, const char* text, const char* seps)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (p->usedItems == 0)
+        return pl_DynamicArray_SetAsText (p, text);
+    
+    if ((result = pl_DynamicArray_AppendText (p, seps)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_AppendText (p, text)) != PlankResult_OK) goto exit;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_DynamicArray_AppendTextLineLF (PlankDynamicArrayRef p, const char* text)
+{
+    return pl_DynamicArray_AppendTextLine (p, text, "\n");
+}
+
+PlankResult pl_DynamicArray_AppendTextLineCRLF (PlankDynamicArrayRef p, const char* text)
+{
+    return pl_DynamicArray_AppendTextLine (p, text, "\r\n");
+}
+
 PlankResult pl_DynamicArray_InsertItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item)
 {
     PlankResult result = PlankResult_OK;

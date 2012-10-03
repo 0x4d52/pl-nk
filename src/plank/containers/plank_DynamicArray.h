@@ -130,6 +130,14 @@ PlankResult pl_DynamicArray_SetAsClearText (PlankDynamicArrayRef p, const PlankL
 
 PlankResult pl_DynamicArray_SetAsText (PlankDynamicArrayRef p, const char* text);
 
+PlankResult pl_DynamicArray_AppendText (PlankDynamicArrayRef p, const char* text);
+
+PlankResult pl_DynamicArray_AppendTextLine (PlankDynamicArrayRef p, const char* text, const char* seps);
+PlankResult pl_DynamicArray_AppendTextLineLF (PlankDynamicArrayRef p, const char* text);
+PlankResult pl_DynamicArray_AppendTextLineCRLF (PlankDynamicArrayRef p, const char* text);
+
+
+
 /** Inserts an item into the specified index. 
  This copies the bytes from one memory location to the array data based on the item
  size set during initialisation. Items above the specified index will be moved one
