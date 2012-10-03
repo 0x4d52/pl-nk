@@ -125,6 +125,15 @@ const char* pl_AudioFileMetaData_GetAlbum (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetGenre (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p);
 
+PlankResult pl_AudioFileMetaData_SetArt (PlankAudioFileMetaDataRef p, PlankConstantP data, const PlankL size);
+PlankResult pl_AudioFileMetaData_GetArt (PlankAudioFileMetaDataRef p, PlankConstantP* data, PlankL* size);
+
+PlankResult pl_AudioFileMetaData_SetYear (PlankAudioFileMetaDataRef p, const PlankI year);
+PlankI pl_AudioFileMetaData_GetYear (PlankAudioFileMetaDataRef p);
+
+PlankResult pl_AudioFileMetaData_SetTrackInfo (PlankAudioFileMetaDataRef p, const PlankI trackNum, const PlankI trackTotal);
+PlankResult pl_AudioFileMetaData_GetTrackInfo (PlankAudioFileMetaDataRef p, PlankI* trackNum, PlankI* trackTotal);
+
 PlankResult pl_AudioFileMetaData_SetTimeRef (PlankAudioFileMetaDataRef p, const PlankLL timeRef);
 PlankLL pl_AudioFileMetaData_GetTimeRef (PlankAudioFileMetaDataRef p);
 
@@ -145,6 +154,11 @@ PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, 
 /** Adds a format specific block of data.
  The AudioFileMetaData object takes ownership of the block. */
 PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block);
+
+
+PlankResult pl_AudioFileMetaData_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length);
+PlankResult pl_AudioFileMetaData_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length);
+
 
 /** @} */
 
@@ -197,7 +211,8 @@ typedef struct PlankAudioFileMetaData
     PlankI trackTotal;
     
     PlankLL timeRef;
-    PlankUS version;
+    PlankUI sourceType; // AIFF, WAV, BWAV
+    PlankUI version;
     PlankDynamicArray umid; //?? bwav
     PlankDynamicArray codingHistory;
 

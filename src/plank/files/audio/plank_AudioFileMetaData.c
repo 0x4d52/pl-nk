@@ -464,6 +464,63 @@ const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p)
     return pl_DynamicArray_GetArray (&p->lyrics);
 }
 
+PlankResult pl_AudioFileMetaData_SetArt (PlankAudioFileMetaDataRef p, PlankConstantP data, const PlankL size)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (pl_DynamicArray_GetItemSize (&p->art) == 0)
+        pl_DynamicArray_InitWithItemSize (&p->art, 1);
+    
+    if (pl_DynamicArray_GetItemSize (&p->art) != 1)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((result = pl_DynamicArray_SetSize (&p->art, size)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryCopy (pl_DynamicArray_GetArray (&p->art), data, size);
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileMetaData_GetArt (PlankAudioFileMetaDataRef p, PlankConstantP* data, PlankL* size)
+{
+    *data = pl_DynamicArray_GetArray (&p->art);
+    *size = pl_DynamicArray_GetSize (&p->art);
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileMetaData_SetYear (PlankAudioFileMetaDataRef p, const PlankI year)
+{
+    p->year = year;
+    return PlankResult_OK;
+}
+
+PlankI pl_AudioFileMetaData_GetYear (PlankAudioFileMetaDataRef p)
+{
+    return p->year;
+}
+
+PlankResult pl_AudioFileMetaData_SetTrackInfo (PlankAudioFileMetaDataRef p, const PlankI trackNum, const PlankI trackTotal)
+{
+    p->trackNum = trackNum;
+    p->trackTotal = trackTotal;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileMetaData_GetTrackInfo (PlankAudioFileMetaDataRef p, PlankI* trackNum, PlankI* trackTotal)
+{
+    if (trackNum != PLANK_NULL)
+        *trackNum = p->trackNum;
+    
+    if (trackTotal != PLANK_NULL)
+        *trackTotal = p->trackTotal;
+    
+    return PlankResult_OK;
+}
+
 PlankResult pl_AudioFileMetaData_SetTimeRef (PlankAudioFileMetaDataRef p, const PlankLL timeRef)
 {
     p->timeRef = timeRef;
@@ -563,22 +620,28 @@ exit:
     return result;
 }
 
+//PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankL size;
+//    
+//    if (pl_DynamicArray_GetItemSize (&p->codingHistory) == 0)
+//        pl_DynamicArray_InitWithItemSize (&p->codingHistory, 1);
+//    
+//    size = strlen (text);
+//    
+//    if ((result = pl_DynamicArray_AddItems (&p->codingHistory, text, size)) != PlankResult_OK) goto exit;
+//
+//    // needs to take into account null termination and add /r/n
+//    
+//exit:
+//    return result;
+//}
+
 PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text)
 {
-    PlankResult result = PlankResult_OK;
-    PlankL size;
-    
-    if (pl_DynamicArray_GetItemSize (&p->codingHistory) == 0)
-        pl_DynamicArray_InitWithItemSize (&p->codingHistory, 1);
-    
-    size = strlen (text);
-    
-    if ((result = pl_DynamicArray_AddItems (&p->codingHistory, text, size)) != PlankResult_OK) goto exit;
-
-    // needs to take into account null termination and add /r/n
-    
-exit:
-    return result;
+    pl_DynamicArray_AppendTextLineCRLF (&p->codingHistory, text);
+    return 0;
 }
 
 PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block)
@@ -592,5 +655,14 @@ exit:
     return result;
 }
 
+PlankResult pl_AudioFileMetaData_InsertFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+{
+    return PlankResult_UnknownError;
+}
+
+PlankResult pl_AudioFileMetaData_RemoveFrames (PlankAudioFileMetaDataRef p, const PlankLL start, const PlankLL length)
+{
+    return PlankResult_UnknownError;
+}
 
 
