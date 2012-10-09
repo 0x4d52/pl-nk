@@ -1305,7 +1305,6 @@ static PlankResult pl_OggFile_FindPrevPageOffset (PlankFileRef p, const PlankLL 
         
         syncIndex = (byte == sync[syncIndex]) ? syncIndex + 1 : 0;
         right--;
-        
     }
     
     *offset = (syncIndex == 4) ? right + 1 : -1; 
@@ -1711,7 +1710,7 @@ typedef struct PlankOpusFileReader
     PlankLL packet_count;
     PlankLL totalStreamBytes;
     
-    PlankLL audioPagesStart;
+//    PlankLL audioPagesStart;
 
     OpusMSDecoder *st;
     
@@ -1824,7 +1823,8 @@ static PlankResult pl_AudioFileReader_Opus_ReadNextPage (PlankAudioFileReaderRef
     if (pl_File_IsEOF (&opus->file))
         return PlankResult_FileEOF;
     
-    while (!(err = ogg_sync_pageout (&opus->oy, &opus->og)) && (result == PlankResult_OK)) 
+//    while (!(err = ogg_sync_pageout (&opus->oy, &opus->og)) && (result == PlankResult_OK))
+    while (((err = ogg_sync_pageout (&opus->oy, &opus->og)) != 1) && (result == PlankResult_OK))
     {
         data = ogg_sync_buffer (&opus->oy, PLANKAUDIOFILE_OPUS_READBYTES);
         result = pl_File_Read (&opus->file, data, PLANKAUDIOFILE_OPUS_READBYTES, &numBytes);
@@ -1861,8 +1861,8 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     //PlankLL numFrames;  ?? how ??
     PlankI bytesPerSample;
     PlankB headerDone;
-    PlankLL firstPageOffset;
-    PlankLL lastPageOffset;
+    PlankLL firstPageOffset, lastPageOffset, pos;
+    
     
     int err;
     int bufferSize;
@@ -1946,8 +1946,10 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
                 headerDone = PLANK_TRUE;
                 opus->packet_count++;
                 
-                if ((result = pl_File_GetPosition (&opus->file, &opus->audioPagesStart)) != PlankResult_OK)
-                    goto exit;
+//                if ((result = pl_File_GetPosition (&opus->file, &pos)) != PlankResult_OK)
+//                    goto exit;
+                
+                p->dataPosition = opus->oy.returned;
             }
         }
         else 
@@ -1968,26 +1970,19 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
         
         if ((result = pl_File_SetPosition (&opus->file, lastPageOffset)) != PlankResult_OK) goto exit;
         
-        if ((err = ogg_sync_reset (&opus->oy)) != 0)
-        {
-            result = PlankResult_UnknownError;
-            goto exit;
-        }
-        
-        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK)
-        {
-            result = PlankResult_UnknownError;
-            goto exit;
-        }
+        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
+        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
         
         result = pl_AudioFileReader_Opus_ReadNextPage (p);
         
         if (result == PlankResult_OK)
-            p->numFrames = opus->page_granule;
+            p->numFrames = opus->page_granule - opus->gran_offset;
         
         // resync
         if ((result = pl_AudioFileReader_Opus_SetFramePosition (p, 0)) != PlankResult_OK) goto exit;
     }
+    
+    // OK if result is not PlankResult_OK at this point... just unseekable...
     
     p->formatInfo.numChannels   = opus->channels;
     p->formatInfo.sampleRate    = opus->rate;
@@ -2220,7 +2215,7 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
 {
     PlankResult result;
     PlankOpusFileReaderRef opus;
-    PlankLL prevGranule;
+    PlankLL prevGranule, thisGranule;
     PlankLL frameIndexPreRoll;
     
     int err;
@@ -2234,7 +2229,7 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
     opus->eos = 0;
     minDiscard = opus->rate * PLANKAUDIOFILE_OPUS_PREROLL_MS / 1000;
     
-    if ((err = ogg_sync_reset (&opus->oy)) != 0)
+    if ((err = ogg_sync_reset (&opus->oy)) != OPUS_OK)
     {
         result = PlankResult_UnknownError;
         goto exit;
@@ -2252,19 +2247,33 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         goto exit;
     }
 
+//    if (frameIndex == 0)
+//    {
+//        // reset to start of stream...
+//        if ((result = pl_File_SetPosition (&opus->file, 0)) != PlankResult_OK) goto exit;
+//        
+//        // then read 2 pages.
+//        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
+//        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
+//        
+//        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
+//        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
+//        
+//        
+//        //if (opus->stream_primed)
+//            opus->need_discard = 0;
+//    }
+
     if (frameIndex == 0)
     {
-        // reset to start of stream...
-        if ((result = pl_File_SetPosition (&opus->file, 0)) != PlankResult_OK) goto exit;
+        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
+        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
+
+        if ((result = pl_File_SetPosition (&opus->file, p->dataPosition)) != PlankResult_OK) goto exit;
         
-        // then read 2 pages.
-        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-        
-        if (opus->stream_primed)
-            opus->need_discard = 0;
+        opus->need_discard = 0;
     }
-    else 
+    else
     {
         // slow but works..
         frameIndexPreRoll = frameIndex - minDiscard;
@@ -2272,18 +2281,30 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         // reset to start of stream...
         if ((result = pl_File_SetPosition (&opus->file, 0)) != PlankResult_OK) goto exit;
         
-        // then read 2 pages.
+        // then read 2 pages
+        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
+        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
+        
         if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
+        
+//        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
+        
         if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-                        
-        while (opus->page_granule < frameIndex)
+        
+//        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
+//        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
+
+        
+        thisGranule = opus->page_granule - opus->gran_offset;
+        
+        while (thisGranule < frameIndex)
         {
-            prevGranule = opus->page_granule;
+            prevGranule = thisGranule;
             if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
         }
         
-        pageLength = (int)(opus->page_granule - prevGranule);
-        pageRemainPreRoll = (int)(opus->page_granule - frameIndexPreRoll);
+        pageLength = (int)(thisGranule - prevGranule);
+        pageRemainPreRoll = (int)(thisGranule - frameIndexPreRoll);
         
         if (pageRemainPreRoll <= minDiscard)
             opus->need_discard = pageLength + (minDiscard - pageRemainPreRoll);
@@ -2292,11 +2313,11 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         
     }
     
-    opus->need_discard = pl_MaxI (opus->need_discard, minDiscard);
+    //opus->need_discard = pl_MaxI (opus->need_discard, minDiscard);
     
     opus->stream_primed = 0;
-    opus->bufferFramePosition = 0;
-    opus->bufferFramesRemaining = 0;
+//    opus->bufferFramePosition = 0;
+//    opus->bufferFramesRemaining = 0;
     
 exit:
     return result;
