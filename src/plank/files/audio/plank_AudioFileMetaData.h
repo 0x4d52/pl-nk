@@ -137,6 +137,12 @@ PlankResult pl_AudioFileMetaData_GetTrackInfo (PlankAudioFileMetaDataRef p, Plan
 PlankResult pl_AudioFileMetaData_SetTimeRef (PlankAudioFileMetaDataRef p, const PlankLL timeRef);
 PlankLL pl_AudioFileMetaData_GetTimeRef (PlankAudioFileMetaDataRef p);
 
+PlankResult pl_AudioFileMetaData_SetSource (PlankAudioFileMetaDataRef p, const PlankUI source);
+PlankUI pl_AudioFileMetaData_GetSource (PlankAudioFileMetaDataRef p);
+
+PlankResult pl_AudioFileMetaData_SetUMID (PlankAudioFileMetaDataRef p, const PlankUC* umid);
+const PlankUC* pl_AudioFileMetaData_GetUMID (PlankAudioFileMetaDataRef p);
+
 
 /** Adds a cue point.
  Copies the data from another cue point. The source cue point is zeroed on return to help avoid memory allocation/deallocation issues. */
@@ -147,6 +153,10 @@ PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef
 /** Adds a region.
  Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
 PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
+
+/** Adds a loop.
+ Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
+PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
 
 PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text);
 
@@ -213,7 +223,7 @@ typedef struct PlankAudioFileMetaData
     PlankLL timeRef;
     PlankUI sourceType; // AIFF, WAV, BWAV
     PlankUI version;
-    PlankDynamicArray umid; //?? bwav
+    PlankUC umid[64];
     PlankDynamicArray codingHistory;
 
 	PlankDynamicArray cuePoints;

@@ -196,3 +196,9 @@ int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p)
 {
     return p->type;
 }
+
+PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset)
+{
+    p->position += offset;
+    return PlankResult_OK;
+}

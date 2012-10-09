@@ -80,6 +80,7 @@ const char* pl_AudioFileCuePoint_GetComment (PlankAudioFileCuePointRef p);
 char* pl_AudioFileCuePoint_GetCommentWritable (PlankAudioFileCuePointRef p);
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
 
+PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset);
 
 /** @} */
 

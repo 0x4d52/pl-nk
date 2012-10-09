@@ -62,9 +62,11 @@ PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p);
 PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p);
 PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p);
 
+PlankAudioFileCuePointRef pl_AudioFileRegion_GetAnchorCuePoint (PlankAudioFileRegionRef p);
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetStartCuePoint (PlankAudioFileRegionRef p);
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetEndCuePoint (PlankAudioFileRegionRef p);
 
+PlankLL pl_AudioFileRegion_GetAnchorPosition (PlankAudioFileRegionRef p);
 PlankLL pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p);
 PlankLL pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p);
 PlankLL pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p);
@@ -77,6 +79,7 @@ char* pl_AudioFileRegion_GetLabelWritable (PlankAudioFileRegionRef p);
 const char* pl_AudioFileRegion_GetComment (PlankAudioFileRegionRef p);
 char* pl_AudioFileRegion_GetCommentWritable (PlankAudioFileRegionRef p);
 
+PlankResult pl_AudioFileRegion_SetAnchorPosition (PlankAudioFileRegionRef p, const PlankLL position);
 PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, const PlankLL position);
 PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const PlankLL position);
 PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const PlankLL length);
@@ -86,10 +89,11 @@ PlankResult pl_AudioFileRegion_SetPlayCount (PlankAudioFileRegionRef p, const Pl
 PlankResult pl_AudioFileRegion_SetLabel (PlankAudioFileRegionRef p, const char* label);
 PlankResult pl_AudioFileRegion_SetComment (PlankAudioFileRegionRef p, const char* comment);
 
-
-PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* start, PlankLL* end);
+PlankResult pl_AudioFileRegion_GetRegion (PlankAudioFileRegionRef p, PlankLL* start, PlankLL* end, PlankLL* anchor);
 PlankResult pl_AudioFileRegion_SetRegion (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end);
+PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, const PlankLL start, const PlankLL end, const PlankLL anchor);
 
+PlankResult pl_AudioFileRegion_OffsetPosition (PlankAudioFileRegionRef p, const PlankLL offset);
 
 
 /** @} */
@@ -99,13 +103,13 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileRegion
 {
+	PlankAudioFileCuePoint anchor;
 	PlankAudioFileCuePoint start;
     PlankAudioFileCuePoint end;
     int regionType;
     PlankUI fraction;
     PlankUI playCount;
 } PlankAudioFileRegion;
-
 #endif
 
 #endif // PLANK_AUDIOFILEREGION_H

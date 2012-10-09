@@ -480,8 +480,11 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderR
     PlankUC umid[64];
     PlankUC reserved[190];
     PlankUI fixedSize, lengthRemain;
+    PlankDynamicArray tmp;
     PlankIffFileReaderRef iff;
 
+    if ((result = pl_DynamicArray_Init (&tmp)) != PlankResult_OK) goto exit;
+    
     pl_MemoryZero (description, 257);
     pl_MemoryZero (originator, 33);
     pl_MemoryZero (originatorRef, 33);
@@ -513,13 +516,17 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderR
     if ((result = pl_AudioFileMetaData_SetOriginationTime (p->metaData, originationTime)) != PlankResult_OK) goto exit;
     
     if ((result = pl_AudioFileMetaData_SetTimeRef (p->metaData, ((PlankLL)timeRefHigh << 32) | timeRefLow)) != PlankResult_OK) goto exit;
-        
+    if ((result = pl_AudioFileMetaData_SetUMID (p->metaData, umid)) != PlankResult_OK) goto exit;
+    
     lengthRemain = chunkLength - fixedSize;
-    
-    // then add the coding history
-    
-    
+        
+    if ((result = pl_DynamicArray_SetAsClearText (&tmp, lengthRemain)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Read (&iff->file, pl_DynamicArray_GetArray (&tmp), lengthRemain, PLANK_NULL)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_AddCodingHistory (p->metaData, pl_DynamicArray_GetArray (&tmp))) != PlankResult_OK) goto exit;
+
 exit:
+    pl_DynamicArray_DeInit (&tmp);
+    
     return result;
 }
 
@@ -527,6 +534,9 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (PlankAudioFileRe
 {
     PlankResult result = PlankResult_OK;
     PlankUI cueID, type, start, end, fraction, playCount;
+    PlankAudioFileRegion loop;
+    PlankAudioFileCuePointRef cuePointRef;
+    PlankB success;
     PlankIffFileReaderRef iff;
     
     iff = (PlankIffFileReaderRef)p->peer;
@@ -539,7 +549,15 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (PlankAudioFileRe
     if ((result = pl_File_ReadUI (&iff->file, &end)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI (&iff->file, &fraction)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI (&iff->file, &playCount)) != PlankResult_OK) goto exit;
-
+    
+    if ((result = pl_AudioFileRegion_Init (&loop)) != PlankResult_OK) goto exit;
+    cuePointRef = pl_AudioFileRegion_GetAnchorCuePoint (&loop);
+    
+    if ((result = pl_AudioFileMetaData_RemoveCuePointWithID (p->metaData, cueID, cuePointRef, &success)) != PlankResult_OK) goto exit;
+    
+    if ((result = pl_AudioFileRegion_SetRegionWithAnchor (&loop, start, end, cuePointRef->position)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileRegion_SetType (&loop, PLANKAUDIOFILE_REGIONTYPE_LOOP)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileMetaData_AddLoopPoint (p->metaData, &loop)) != PlankResult_OK) goto exit;
     
 exit:
     return result;
@@ -654,7 +672,6 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
     PlankAudioFileCuePointRef cuePointRef;
     PlankAudioFileRegion region;
     PlankB success;
-
     
     iff = (PlankIffFileReaderRef)p->peer;
     
@@ -714,7 +731,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
             cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
             
             if ((result = pl_AudioFileRegion_Init (&region)) != PlankResult_OK) goto exit;
-            cuePointRef = pl_AudioFileRegion_GetStartCuePoint (&region);
+            cuePointRef = pl_AudioFileRegion_GetAnchorCuePoint (&region);
             
             if ((result = pl_AudioFileMetaData_RemoveCuePointWithID (p->metaData, cueID, cuePointRef, &success)) != PlankResult_OK) goto exit;
 
@@ -733,7 +750,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
                 if ((result = pl_AudioFileCuePoint_SetLabelLengthClear (cuePointRef, textLength)) != PlankResult_OK) goto exit;
                 if ((result = pl_File_Read (&iff->file, pl_AudioFileCuePoint_GetLabelWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
 
-                if ((result = pl_AudioFileRegion_SetLength (&region, sampleLength)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileRegion_SetRegion (&region, cuePointRef->position, cuePointRef->position + sampleLength)) != PlankResult_OK) goto exit;                
                 if ((result = pl_AudioFileRegion_SetType (&region, PLANKAUDIOFILE_REGIONTYPE_REGION)) != PlankResult_OK) goto exit;
 
                 if ((result = pl_AudioFileMetaData_AddRegion (p->metaData, &region)) != PlankResult_OK) goto exit;
@@ -771,6 +788,8 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
     int bytesRead;
 
     iff = (PlankIffFileReaderRef)p->peer;
+    
+    if ((result = pl_AudioFileMetaData_SetSource (p->metaData, PLANKAUDIOFILE_FORMAT_WAV)) != PlankResult_OK) goto exit;
     
     if ((result = pl_File_SetPosition (&iff->file, pos)) != PlankResult_OK) goto exit;
     
