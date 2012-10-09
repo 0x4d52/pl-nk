@@ -1498,6 +1498,7 @@ PREDEFINED             = DOXYGEN=1 \
 EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLONK_BINARYOP \
                          PLONK_BINARYOPS \
+                         PLONK_BINARYOPS_TEMPLATE\
                          PLONK_UNARYOP \
                          PLONK_UNARYOPS \
                          PLONK_BINARYOPGLOBAL \
@@ -1506,6 +1507,8 @@ EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLONK_UNARYOPGLOBALS \
                          PLONK_BINARYOPFUNCTION \
                          PLONK_UNARYOPFUNCTION \
+                         PLONK_BINARYOPFUNCTION_DEFINE \
+                         PLONK_UNARYOPFUNCTION_DEFINE \
                          PLONK_TERNARYOPFUNCTION \
                          PLONK_QUATERNARYOPFUNCTION \
                          PLONK_QUINARYOPFUNCTION \
@@ -1522,6 +1525,11 @@ EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLONK_NUMERICALARRAYUNARYOP_DEFINE\
                          PLONK_NUMERICALARRAYBINARYOPS_DEFINE\
                          PLONK_NUMERICALARRAYUNARYOPS_DEFINE\
+                         PLONK_FIXBINARYOPFUNCTION_DEFINE\
+                         PLONK_FIXUNARYOPFUNCTION_DEFINE\
+                         PLONK_OPFUNCTIONSHELPERS_DEFINE\
+                         PLONK_NUMERICALARRAYBINARYOP_DEFINE\
+                         PLONK_NUMERICALARRAYBINARYOPS_DEFINE\
                          END_PLONK_NAMESPACE \
                          BEGIN_PLONK_NAMESPACE \
                          PLANK_BEGIN_C_LINKAGE \
@@ -1561,7 +1569,8 @@ EXPAND_AS_DEFINED      = PLONK_BITSBASE_DECLARE \
                          PLANK_VECTORCONVERT_NAME \
                          PLANK_VECTORCONVERT_DEFINE \
                          PLANK_VECTORCONVERTERS_DEFINE \
-                         PLANK_VECTOR_OPS \
+                         PLANK_VECTOR_OPS_COMMON \
+                         PLANK_VECTOR_OPS_ALL \
                          PLINK_BINARYOPPROCESS_DECLARE \
                          PLINK_UNARYOPPROCESS_DECLARE
                          
