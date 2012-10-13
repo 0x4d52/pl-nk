@@ -1706,6 +1706,7 @@ typedef struct PlankOpusFileReader
     ogg_stream_state    os;
     
     PlankLL page_granule;
+    PlankLL prev_page_granule;
     PlankLL link_out;
     PlankLL packet_count;
     PlankLL totalStreamBytes;
@@ -1719,6 +1720,7 @@ typedef struct PlankOpusFileReader
     int has_opus_stream;
     int opus_serialno;
     int total_links;
+    int pageframes_remain;
     int mapping_family;
     int preskip;
     int streams;
@@ -1813,6 +1815,7 @@ static PlankResult pl_AudioFileReader_Opus_ReadNextPage (PlankAudioFileReaderRef
 {
     PlankResult result;
     PlankOpusFileReaderRef opus;
+    PlankLL page_granule;
     int err, numBytes;
     char *data;
     
@@ -1846,7 +1849,12 @@ static PlankResult pl_AudioFileReader_Opus_ReadNextPage (PlankAudioFileReaderRef
     if ((err = ogg_stream_pagein (&opus->os, &opus->og)))
         goto exit;
     
-    opus->page_granule = ogg_page_granulepos (&opus->og);
+    
+    page_granule = ogg_page_granulepos (&opus->og);
+    opus->prev_page_granule = opus->page_granule;
+    opus->pageframes_remain = pl_MaxI (0, (int)(page_granule - opus->page_granule));
+    opus->page_granule = page_granule;
+    
     err = 0;
     
 exit:
@@ -1861,7 +1869,7 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     //PlankLL numFrames;  ?? how ??
     PlankI bytesPerSample;
     PlankB headerDone;
-    PlankLL firstPageOffset, lastPageOffset, pos;
+    PlankLL firstPageOffset, lastPageOffset;//, pos;
     
     
     int err;
@@ -1949,7 +1957,7 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
 //                if ((result = pl_File_GetPosition (&opus->file, &pos)) != PlankResult_OK)
 //                    goto exit;
                 
-                p->dataPosition = opus->oy.returned;
+                p->dataPosition = opus->oy.returned; //  FIXME: not quite right if the comments pages is larger..
             }
         }
         else 
@@ -2092,7 +2100,7 @@ PlankResult pl_AudioFileReader_Opus_FillBuffer (PlankAudioFileReaderRef p)
             
             if (frame_size > 0)
             {
-                if (opus->gain != 0)
+                if ((opus->gain != 0.f) && (opus->gain != 1.f))
                 {
                     for (i = 0; i < frame_size * opus->channels; i++)
                         buffer[i] *= opus->gain;
@@ -2104,7 +2112,13 @@ PlankResult pl_AudioFileReader_Opus_FillBuffer (PlankAudioFileReaderRef p)
                 opus->link_out += outsamp;
                 
                 opus->bufferFramePosition = 0;
-                opus->bufferFramesRemaining = frame_size;
+                opus->bufferFramesRemaining = opus->pageframes_remain > 0 ? pl_MinI (frame_size, opus->pageframes_remain) : frame_size;
+                opus->pageframes_remain -= opus->bufferFramesRemaining;
+                
+                if (opus->packet_count == 240)
+                {
+                    printf("");
+                }
                 
                 frameDone = PLANK_TRUE;            
                 opus->packet_count++;
@@ -2272,6 +2286,8 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         if ((result = pl_File_SetPosition (&opus->file, p->dataPosition)) != PlankResult_OK) goto exit;
         
         opus->need_discard = 0;
+        opus->prev_page_granule = 0;
+        opus->pageframes_remain = 0;
     }
     else
     {
