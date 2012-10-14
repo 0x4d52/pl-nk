@@ -2099,27 +2099,12 @@ PlankResult pl_AudioFileReader_Opus_FillBuffer (PlankAudioFileReaderRef p)
             frame_size = ret < 0 ? 0 : ret;
             
             if (frame_size > 0)
-            {
-                if ((opus->gain != 0.f) && (opus->gain != 1.f))
-                {
-                    for (i = 0; i < frame_size * opus->channels; i++)
-                        buffer[i] *= opus->gain;
-                }
-                
+            {                
                 maxout = ((opus->page_granule - opus->gran_offset) * opus->rate / PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE);
                 maxout -= opus->link_out;
                 outsamp = maxout; // should be actual samples output..?
                 opus->link_out += outsamp;
-                
-                opus->bufferFramePosition = 0;
-                opus->bufferFramesRemaining = opus->pageframes_remain > 0 ? pl_MinI (frame_size, opus->pageframes_remain) : frame_size;
-                opus->pageframes_remain -= opus->bufferFramesRemaining;
-                
-                if (opus->packet_count == 240)
-                {
-                    printf("");
-                }
-                
+                                
                 frameDone = PLANK_TRUE;            
                 opus->packet_count++;
                 opus->stream_primed = 1;
@@ -2144,6 +2129,19 @@ PlankResult pl_AudioFileReader_Opus_FillBuffer (PlankAudioFileReaderRef p)
                         
                         opus->need_discard = 0;
                     }
+                }
+                
+                opus->bufferFramePosition = 0;
+                opus->bufferFramesRemaining = opus->pageframes_remain > 0 ? pl_MinI (frame_size, opus->pageframes_remain) : frame_size;
+                opus->pageframes_remain -= opus->bufferFramesRemaining;
+            }
+            
+            if (frameDone)
+            {
+                if ((opus->gain != 0.f) && (opus->gain != 1.f))
+                {
+                    for (i = 0; i < frame_size * opus->channels; i++)
+                        buffer[i] *= opus->gain;
                 }
             }
         }
@@ -2225,7 +2223,7 @@ exit:
     
 }
 
-PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
+static PlankResult pl_AudioFileReader_Opus_SetFramePositionInternal (PlankAudioFileReaderRef p, const PlankLL frameIndex, const PlankB resetBuffer)
 {
     PlankResult result;
     PlankOpusFileReaderRef opus;
@@ -2260,29 +2258,12 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         result = PlankResult_UnknownError;
         goto exit;
     }
-
-//    if (frameIndex == 0)
-//    {
-//        // reset to start of stream...
-//        if ((result = pl_File_SetPosition (&opus->file, 0)) != PlankResult_OK) goto exit;
-//        
-//        // then read 2 pages.
-//        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
-//        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
-//        
-//        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-//        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-//        
-//        
-//        //if (opus->stream_primed)
-//            opus->need_discard = 0;
-//    }
-
+    
     if (frameIndex == 0)
     {
         if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
         if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
-
+        
         if ((result = pl_File_SetPosition (&opus->file, p->dataPosition)) != PlankResult_OK) goto exit;
         
         opus->need_discard = 0;
@@ -2301,15 +2282,8 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
         if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
         
+        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;        
         if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-        
-//        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
-        
-        if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
-        
-//        if ((err = ogg_sync_reset (&opus->oy)) != 0) { result = PlankResult_UnknownError; goto exit; }
-//        if ((err = ogg_stream_reset (&opus->os)) != OPUS_OK) { result = PlankResult_UnknownError; goto exit; }
-
         
         thisGranule = opus->page_granule - opus->gran_offset;
         
@@ -2317,6 +2291,7 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         {
             prevGranule = thisGranule;
             if ((result = pl_AudioFileReader_Opus_ReadNextPage (p)) != PlankResult_OK) goto exit;
+            thisGranule = opus->page_granule - opus->gran_offset;
         }
         
         pageLength = (int)(thisGranule - prevGranule);
@@ -2324,19 +2299,27 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
         
         if (pageRemainPreRoll <= minDiscard)
             opus->need_discard = pageLength + (minDiscard - pageRemainPreRoll);
-        else 
+        else
             opus->need_discard = (int)(frameIndex - prevGranule);
         
+        // need to go back one page..
     }
-    
-    //opus->need_discard = pl_MaxI (opus->need_discard, minDiscard);
-    
+        
     opus->stream_primed = 0;
-//    opus->bufferFramePosition = 0;
-//    opus->bufferFramesRemaining = 0;
+    
+    if (resetBuffer)
+    {
+        opus->bufferFramePosition = 0;
+        opus->bufferFramesRemaining = 0;
+    }
     
 exit:
     return result;
+}
+
+PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
+{
+    return pl_AudioFileReader_Opus_SetFramePositionInternal (p, frameIndex, true);
 }
 
 PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
