@@ -1586,6 +1586,9 @@ PlankResult pl_AudioFileReader_OggVorbis_SetFramePosition (PlankAudioFileReaderR
     if (err != 0)
         return PlankResult_FileSeekFailed;
     
+    ogg->bufferFrames   = 0;
+    ogg->bufferPosition = 0;
+    
     return PlankResult_OK;
 }
 
@@ -1769,7 +1772,7 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     p->formatInfo.bytesPerFrame = p->formatInfo.numChannels * bytesPerSample;
     
     numFrames = op_pcm_total (opus->oggOpusFile, -1);    
-    bufferSize = PLANKAUDIOFILE_OPUS_MAXFRAMESIZE * p->formatInfo.numChannels;
+    bufferSize = PLANKAUDIOFILE_OPUS_MAXFRAMESIZE * p->formatInfo.bytesPerFrame;
     
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->buffer, 1, bufferSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
@@ -1879,7 +1882,7 @@ PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const
             }
             else if (framesThisTime < 0)
             {
-                // OV_HOLE or OV_EINVAL
+                // other error
                 result = PlankResult_FileReadError;
                 goto exit;
             }
@@ -1912,6 +1915,9 @@ PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p,
     
     if (err != 0)
         return PlankResult_FileSeekFailed;
+    
+    opus->bufferFrames   = 0;
+    opus->bufferPosition = 0;
     
     return PlankResult_OK;
 }
