@@ -351,7 +351,7 @@ exit:
 
 int pl_AudioFileMetaData_GetDescriptionCommentsCount (PlankAudioFileMetaDataRef p)
 {
-    return pl_DynamicArray_GetSize (&p->descriptionComments);
+    return (int)pl_DynamicArray_GetSize (&p->descriptionComments);
 }
 
 const char* pl_AudioFileMetaData_GetCommentDescription (PlankAudioFileMetaDataRef p, const int index)
@@ -359,7 +359,7 @@ const char* pl_AudioFileMetaData_GetCommentDescription (PlankAudioFileMetaDataRe
     int size;
     PlankDynamicArray* comments;
     
-    size = pl_DynamicArray_GetSize (&p->descriptionComments);
+    size = (int)pl_DynamicArray_GetSize (&p->descriptionComments);
     comments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
 
     return pl_DynamicArray_GetArray (&comments[index]);

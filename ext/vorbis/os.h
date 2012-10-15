@@ -17,7 +17,7 @@
 
  ********************************************************************/
 
-#if 1 // HAVE_CONFIG_H
+#if 0 // HAVE_CONFIG_H
 #include "config.h"
 #endif
 
