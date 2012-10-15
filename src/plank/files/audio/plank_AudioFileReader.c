@@ -1683,10 +1683,32 @@ long pl_OggVorbisFileReader_TellCallback (PlankP datasource)
 
 // -- Opus Functions -- ////////////////////////////////////////////////////////
 
+
+
 #if PLANK_OPUS
 #if PLANK_APPLE
 #pragma mark Opus Functions
 #endif
+
+#include "../../containers/plank_DynamicArray.h"
+typedef struct PlankOpusFileReader
+{
+    PlankFile file;
+//    OggVorbis_File oggVorbisFile;
+//    ov_callbacks callbacks;
+//    PlankDynamicArray buffer;
+//    int bufferPosition;
+//    int bufferFrames;
+//    PlankLL totalFramesRead;
+//    int bitStream;
+} PlankOpusFileReader;
+
+typedef PlankOpusFileReader* PlankOpusFileReaderRef;
+
+size_t pl_OpusFileReader_ReadCallback (PlankP ptr, size_t size, size_t size2, PlankP ref);
+int pl_OpusFileReader_SeekCallback (PlankP ref, PlankLL offset, int code);
+int pl_OpusFileReader_CloseCallback (PlankP ref);
+long pl_OpusFileReader_TellCallback (PlankP ref);
 
 PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char* filepath)
 {
@@ -1713,7 +1735,81 @@ PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p,
     return PlankResult_OK;
 }
 
+#if PLANK_APPLE
+#pragma mark Opus Callbacks
 #endif
+
+size_t pl_OpusFileReader_ReadCallback (PlankP ptr, size_t size, size_t nmemb, PlankP datasource)
+{
+    size_t ret;
+    PlankResult result;
+    PlankAudioFileReaderRef p;
+    PlankOggVorbisFileReaderRef ogg;
+    int bytesRead;
+    
+    p = (PlankAudioFileReaderRef)datasource;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
+    
+    result = pl_File_Read ((PlankFileRef)ogg, ptr, (int)(size * nmemb) / size, &bytesRead);
+    ret = bytesRead > 0 ? bytesRead : 0;
+    
+    if ((result != PlankResult_OK) && (result != PlankResult_FileEOF))
+        errno = -1;
+    
+    return ret;
+}
+
+int pl_OpusFileReader_SeekCallback (PlankP datasource, PlankLL offset, int code)
+{
+    PlankResult result;
+    PlankAudioFileReaderRef p;
+    PlankOggVorbisFileReaderRef ogg;
+    PlankFileRef file;
+    
+    p = (PlankAudioFileReaderRef)datasource;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
+    file = (PlankFileRef)ogg;
+    
+    // API says return -1 (OV_FALSE) if the file is not seekable
+    // call inner callback directly
+    result = (file->setPositionFunction) (file, offset, code);
+    
+    return result == PlankResult_OK ? 0 : OV_FALSE;
+}
+
+int pl_OpusFileReader_CloseCallback (PlankP datasource)
+{
+    PlankResult result;
+    PlankAudioFileReaderRef p;
+    PlankOggVorbisFileReaderRef ogg;
+    PlankFileRef file;
+    
+    p = (PlankAudioFileReaderRef)datasource;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
+    file = (PlankFileRef)ogg;
+    
+    result = pl_File_DeInit (file);
+    
+    return result == PlankResult_OK ? 0 : OV_FALSE;
+}
+
+long pl_OpusFileReader_TellCallback (PlankP datasource)
+{
+    PlankResult result;
+    PlankAudioFileReaderRef p;
+    PlankOggVorbisFileReaderRef ogg;
+    PlankFileRef file;
+    PlankLL position;
+    
+    p = (PlankAudioFileReaderRef)datasource;
+    ogg = (PlankOggVorbisFileReaderRef)p->peer;
+    file = (PlankFileRef)ogg;
+    
+    result = pl_File_GetPosition (file, &position);
+    
+    return result == PlankResult_OK ? (long)position : (long)OV_FALSE;
+}
+#endif // PLANK_OPUS
 
 
 //#if PLANK_OPUS
