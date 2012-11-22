@@ -427,8 +427,8 @@ OSStatus IOSAudioHostBase<SampleType>::renderCallback (UInt32                   
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID,
-                                     UInt32                 inDataSize,
-                                     const void *           inPropertyValue) throw()
+                                                     UInt32                 inDataSize,
+                                                     const void *           inPropertyValue) throw()
 {
     if (this->getIsRunning()) return;
 	

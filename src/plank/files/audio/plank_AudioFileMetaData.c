@@ -209,6 +209,7 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
     if ((result = pl_DynamicArray_DeInit (&p->album)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->genre)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_DeInit (&p->lyrics)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->vendor)) != PlankResult_OK) goto exit;
 
     if ((result = pl_DynamicArray_DeInit (&p->art)) != PlankResult_OK) goto exit;
     
@@ -425,6 +426,11 @@ PlankResult pl_AudioFileMetaData_SetLyrics (PlankAudioFileMetaDataRef p, const c
     return pl_DynamicArray_SetAsText (&p->lyrics, text);
 }
 
+PlankResult pl_AudioFileMetaData_SetVendor (PlankAudioFileMetaDataRef p, const char* text)
+{
+    return pl_DynamicArray_SetAsText (&p->vendor, text);
+}
+
 const char* pl_AudioFileMetaData_GetTitle (PlankAudioFileMetaDataRef p)
 {
     return pl_DynamicArray_GetArray (&p->title);
@@ -443,6 +449,11 @@ const char* pl_AudioFileMetaData_GetGenre (PlankAudioFileMetaDataRef p)
 const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p)
 {
     return pl_DynamicArray_GetArray (&p->lyrics);
+}
+
+const char* pl_AudioFileMetaData_GetVendor (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->vendor);
 }
 
 PlankResult pl_AudioFileMetaData_SetArt (PlankAudioFileMetaDataRef p, PlankConstantP data, const PlankL size)

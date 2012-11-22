@@ -138,9 +138,6 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 
 #if PLANK_OPUS
     #include "../../../../ext/ogg/ogg.h"
-//    #include "../../../../ext/opus/opus.h"
-//    #include "../../../../ext/opus/opus_multistream.h"
-//    #include "../../../../ext/opus/opus_header.h"
     #include "../../../../ext/opus/opusfile/opusfile.h"
     #define PLANKAUDIOFILE_OPUS_MAXFRAMESIZE             5760  // (960 * 6)
     #define PLANKAUDIOFILE_OPUS_READBYTES                 200
@@ -161,6 +158,8 @@ typedef struct PlankAudioFileFormatInfo
     PlankI bytesPerFrame;
     PlankI numChannels;
     PlankD sampleRate;
+    
+    PlankUI channelMask;
 
 } PlankAudioFileFormatInfo;
 

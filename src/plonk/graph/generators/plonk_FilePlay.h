@@ -289,11 +289,11 @@ public:
                             const int blockSizeMultiplier = 0,
                             const int numBuffers = 8)
         {
-//            const DoubleVariable multiplier = blockSizeMultiplier <= 0 ? 
-//                                              DoubleVariable (file.getSampleRate()) / SampleRate::getDefault().ceil() * 2.0:
-//                                              DoubleVariable (blockSizeMultiplier);
+            const DoubleVariable multiplier = blockSizeMultiplier <= 0 ? 
+                                              (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
+                                              DoubleVariable (blockSizeMultiplier);
 
-            const DoubleVariable multiplier (4);
+//            const DoubleVariable multiplier (4);
             
             return Resample::ar (Task::ar (FilePlayUnit::ar (file, 
                                                              SampleType (1), 

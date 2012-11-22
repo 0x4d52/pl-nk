@@ -386,6 +386,13 @@ PlankResult pl_File_ReadPascalString255 (PlankFileRef p, PlankPascalString255* s
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_File_ReadLine (PlankFileRef p, char* text, const int maximumLength);
 
+/** Skip over a number of bytes in the file.
+ @param p The <i>Plank %File</i> object.
+ @param numBytes The number of bytes to skip.
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_File_SkipBytes (PlankFileRef p, const int numBytes);
+
+
 /** Write an array of bytes to the file.
  NB as this reads raw bytes it takes no account of the likely endian format
  of any data read.

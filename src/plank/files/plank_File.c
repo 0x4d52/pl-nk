@@ -38,6 +38,7 @@
 
 #include "../core/plank_StandardHeader.h"
 #include "plank_File.h"
+#include "../maths/plank_Maths.h"
 
 
 PlankResult pl_FileErase (const char* filepath)
@@ -690,6 +691,29 @@ PlankResult pl_File_ReadLine (PlankFileRef p, char* text, const int maximumLengt
         i++;
     }
     
+    return result;
+}
+
+#define PLANKFILE_SKIPBYTES_SIZE 256
+
+PlankResult pl_File_SkipBytes (PlankFileRef p, const int numBytes)
+{
+    PlankResult result;
+    int bytesRemaining, bytesThisTime;
+    char temp[PLANKFILE_SKIPBYTES_SIZE];
+
+    result = PlankResult_OK;
+    bytesRemaining = numBytes;
+    
+    while (bytesRemaining > 0)
+    {
+        bytesThisTime = pl_MinI (bytesRemaining, PLANKFILE_SKIPBYTES_SIZE);
+        bytesRemaining -= bytesThisTime;
+        
+        if ((result = pl_File_Read (p, temp, bytesThisTime, PLANK_NULL)) != PlankResult_OK) goto exit;
+    }
+    
+exit:
     return result;
 }
 

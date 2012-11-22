@@ -66,6 +66,7 @@ enum PlankResultIdentifiers
     PlankResult_IffFileReaderChunkNotFound,                   ///< The specified chunk ID was not found.
     
     PlankResult_AudioFileReaderInavlidType,                   ///< Invalid data while reading an audio file.
+    PlankResult_AudioFileReaderUnsupportedType,               ///< Found a valid audio file but not yet supported.
     PlankResult_AudioFileReaderNotReady,                      ///< The file is not ready for this operation.
     PlankResult_AudioFileReaderDataChunkInvalid,              ///< The data chunks appears to be invalid. 
     PlankResult_AudioFileReaderInvalidFilePosition,           ///< A read operation was attempted when the file was at an invalid read position.
