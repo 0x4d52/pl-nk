@@ -292,7 +292,6 @@ public:
         
         static UnitType ar (AudioFileReader const& file,
                             RateUnitType const& rate = Math<RateUnitType>::get1(),
-                            const int maximumRate = 4,
                             const int blockSizeMultiplier = 0,
                             const int numBuffers = 8)
         {
@@ -303,7 +302,7 @@ public:
             UnitType play = FilePlayUnit::ar (file,
                                               SampleType (1),
                                               SampleType (0),
-                                              BlockSize::getMultipleOfDefault (multiplier * maximumRate));
+                                              BlockSize::getMultipleOfDefault (multiplier));
             
             UnitType task = TaskType::ar (play, numBuffers);
             

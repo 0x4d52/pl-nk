@@ -152,9 +152,13 @@ public:
                 
         void end() throw()
         {
-            setShouldExitAndWait (0.000001); // will block though...
+            setShouldExit();
+            event.signal();
+    
+            while (isRunning())
+                Threading::sleep (0.0001); // will block!
         }
-        
+
         Lock& getEvent() { return event; }
                 
     private:
@@ -232,9 +236,7 @@ public:
             task.getEvent().signal();
         }
         else
-        {
-            printf ("Task::process - buffer underrun\n");
-            
+        {            
             // buffer underrun or other error
             for (int channel = 0; channel < numChannels; ++channel)
             {

@@ -152,7 +152,7 @@ public:
             SampleType* const outputSamplesEnd = outputSamples + outputBufferLength;
             
             const RateBufferType& rateBuffer (rateUnit.process (info, channel));
-            const RateType* const rateSamples = rateBuffer.getArray();
+            const RateType* rateSamples = rateBuffer.getArray();
             const int rateBufferLength = rateBuffer.length();
             
             if (rateBufferLength == 1)
@@ -193,7 +193,84 @@ public:
                     }
                 }
             }
-            else plonk_assertfalse; // not yet inplemented
+            else if (rateBufferLength == outputBufferLength)
+            {                
+                while (outputSamples < outputSamplesEnd)
+                {
+                    int tempBufferLength = this->tempBuffer.length();
+                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
+                    
+                    if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+                    {
+                        info.setTimeStamp (nextInputTimeStamp);
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));
+                        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
+                        
+                        const SampleType* const inputSamples = inputBuffer.getArray();
+                        const int inputBufferLength = inputBuffer.length();
+                        
+                        const SampleType interpolationValue = tempBufferSamples[tempBufferLength - 1];
+                        
+                        tempBufferPos -= tempBufferPosMax;        // move this before resize
+                        tempBufferLength = inputBufferLength + 1; // one larger for interpolation
+                        resizeTempBuffer (tempBufferLength);
+                        tempBufferSamples = this->tempBuffer.getArray();
+                        
+                        tempBufferSamples[0] = interpolationValue;
+                        
+                        for (i = 0; i < inputBufferLength; ++i)
+                            tempBufferSamples[i + 1] = inputSamples[i];
+                    }
+                    
+                    while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+                    {
+                        *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
+                        const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * *rateSamples++);
+                        tempBufferPos += tempBufferIncrement;
+                    }
+                }
+            }
+            else
+            {
+                while (outputSamples < outputSamplesEnd)
+                {
+                    int tempBufferLength = this->tempBuffer.length();
+                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
+                    
+                    if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+                    {
+                        info.setTimeStamp (nextInputTimeStamp);
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));
+                        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
+                        
+                        const SampleType* const inputSamples = inputBuffer.getArray();
+                        const int inputBufferLength = inputBuffer.length();
+                        
+                        const SampleType interpolationValue = tempBufferSamples[tempBufferLength - 1];
+                        
+                        tempBufferPos -= tempBufferPosMax;        // move this before resize
+                        tempBufferLength = inputBufferLength + 1; // one larger for interpolation
+                        resizeTempBuffer (tempBufferLength);
+                        tempBufferSamples = this->tempBuffer.getArray();
+                        
+                        tempBufferSamples[0] = interpolationValue;
+                        
+                        for (i = 0; i < inputBufferLength; ++i)
+                            tempBufferSamples[i + 1] = inputSamples[i];
+                    }
+                    
+                    double ratePosition = 0.0;
+                    const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
+                    
+                    while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+                    {
+                        *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
+                        const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[int (ratePosition)]);
+                        tempBufferPos += tempBufferIncrement;
+                        ratePosition += rateIncrement;
+                    }
+                }
+            }
             
             info.setTimeStamp (infoTimeStamp); // reset for the parent graph
         }
