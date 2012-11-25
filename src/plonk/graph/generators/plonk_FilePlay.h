@@ -284,22 +284,29 @@ public:
     class Simple
     {
     public:
+        typedef TaskUnit<SampleType>                             TaskType;
+
+        typedef ResampleUnit<SampleType>                         ResampleType;
+        typedef typename ResampleUnit<SampleType>::RateType      RateType;
+        typedef typename ResampleUnit<SampleType>::RateUnitType  RateUnitType;
         
-        static UnitType ar (AudioFileReader const& file, 
+        static UnitType ar (AudioFileReader const& file,
+                            RateUnitType const& rate = Math<RateUnitType>::get1(),
                             const int blockSizeMultiplier = 0,
                             const int numBuffers = 8)
         {
             const DoubleVariable multiplier = blockSizeMultiplier <= 0 ? 
                                               (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
                                               DoubleVariable (blockSizeMultiplier);
-
-//            const DoubleVariable multiplier (4);
             
-            return Resample::ar (Task::ar (FilePlayUnit::ar (file, 
-                                                             SampleType (1), 
-                                                             SampleType (0), 
-                                                             BlockSize::getMultipleOfDefault (multiplier)), 
-                                           numBuffers));
+            UnitType play = FilePlayUnit::ar (file,
+                                              SampleType (1),
+                                              SampleType (0),
+                                              BlockSize::getMultipleOfDefault (multiplier));
+            
+            UnitType task = TaskType::ar (play, numBuffers);
+            
+            return ResampleType::ar (task, rate);
         }
     };
 };

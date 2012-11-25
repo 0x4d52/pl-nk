@@ -155,9 +155,9 @@ public:
             const RateType* const rateSamples = rateBuffer.getArray();
             const int rateBufferLength = rateBuffer.length();
             
-            if ((rateBufferLength == 1) && (rateSamples[0] == Math<RateType>::get1()))
+            if (rateBufferLength == 1)
             {
-                const IndexType tempBufferIncrement = inputSampleRate * IndexType (data.sampleDuration);
+                const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[0]);
 
                 while (outputSamples < outputSamplesEnd)
                 {
@@ -216,7 +216,7 @@ private:
  
  @par Inputs:
  - input: (unit, multi) the unit to resample
- - rate: (unit, multi) must be 1, varispeed to be implemented...
+ - rate: (unit, multi) must be constant and >= 0, varispeed to be implemented...
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 
@@ -257,7 +257,7 @@ public:
     
     /** Create an audio rate sample rate converter. */
     static UnitType ar (UnitType const& input,
-                        RateUnitType const& rate = Math<RateType>::get1(),
+                        RateUnitType const& rate = Math<RateUnitType>::get1(),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                
@@ -276,7 +276,7 @@ public:
     }
     
     static inline UnitType kr (UnitType const& input,
-                               RateUnitType const& rate = Math<RateType>::get1()) throw()
+                               RateUnitType const& rate = Math<RateUnitType>::get1()) throw()
     {
         return ar (input,
                    rate,
