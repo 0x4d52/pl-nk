@@ -58,7 +58,11 @@ public:
     typedef InputDictionary                             Inputs;
     typedef NumericalArray<SampleType>                  Buffer;
     typedef typename TypeUtility<SampleType>::IndexType IndexType;
-    typedef InterpLinear<SampleType,IndexType>          InterpType;
+    
+    typedef typename TypeUtility<SampleType>::IndexType             RateType;
+    typedef UnitBase<RateType>                                      RateUnitType;
+    typedef NumericalArray<RateType>                                RateBufferType;
+    typedef InterpLinear<SampleType,IndexType>                      InterpType;
         
     ResampleChannelInternal (Inputs const& inputs, 
                              Data const& data, 
@@ -94,8 +98,10 @@ public:
     void initChannel (const int channel) throw()
     {        
         const UnitType& input = this->getInputAsUnit (IOKey::Generic);
-                
+        const RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
+        
         plonk_assert (input.getOverlap (channel) == Math<DoubleVariable>::get1());
+        plonk_assert (rateUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
         
         const SampleType sourceValue = input.getValue (channel);
         this->initValue (sourceValue);        
@@ -126,8 +132,9 @@ public:
         const Data& data = this->getState();
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
-
         const IndexType inputSampleRate = IndexType (inputUnit.getSampleRate (channel));
+        
+        RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         
         const int outputBufferLength = this->getOutputBuffer().length();
         SampleType* outputSamples = this->getOutputSamples();
@@ -142,42 +149,51 @@ public:
         else
         {
             const TimeStamp infoTimeStamp = info.getTimeStamp();
-            const IndexType tempBufferIncrement = inputSampleRate * IndexType (data.sampleDuration); 
             SampleType* const outputSamplesEnd = outputSamples + outputBufferLength;
             
-            while (outputSamples < outputSamplesEnd)
+            const RateBufferType& rateBuffer (rateUnit.process (info, channel));
+            const RateType* const rateSamples = rateBuffer.getArray();
+            const int rateBufferLength = rateBuffer.length();
+            
+            if ((rateBufferLength == 1) && (rateSamples[0] == Math<RateType>::get1()))
             {
-                int tempBufferLength = this->tempBuffer.length();
-                SampleType* tempBufferSamples = this->tempBuffer.getArray();
+                const IndexType tempBufferIncrement = inputSampleRate * IndexType (data.sampleDuration);
 
-                if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+                while (outputSamples < outputSamplesEnd)
                 {
-                    info.setTimeStamp (nextInputTimeStamp);
-                    const Buffer& inputBuffer (inputUnit.process (info, channel));
-                    nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
-                    
-                    const SampleType* const inputSamples = inputBuffer.getArray();
-                    const int inputBufferLength = inputBuffer.length();
-                                    
-                    const SampleType interpolationValue = tempBufferSamples[tempBufferLength - 1];
-                    
-                    tempBufferPos -= tempBufferPosMax;        // move this before resize
-                    tempBufferLength = inputBufferLength + 1; // one larger for interpolation
-                    resizeTempBuffer (tempBufferLength);
-                    tempBufferSamples = this->tempBuffer.getArray();
-                    
-                    tempBufferSamples[0] = interpolationValue;
-                    
-                    for (i = 0; i < inputBufferLength; ++i)
-                        tempBufferSamples[i + 1] = inputSamples[i];
-                }
-                            
-                while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
-                {
-                    *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
-                    tempBufferPos += tempBufferIncrement;
+                    int tempBufferLength = this->tempBuffer.length();
+                    SampleType* tempBufferSamples = this->tempBuffer.getArray();
+
+                    if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+                    {
+                        info.setTimeStamp (nextInputTimeStamp);
+                        const Buffer& inputBuffer (inputUnit.process (info, channel));
+                        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
+                        
+                        const SampleType* const inputSamples = inputBuffer.getArray();
+                        const int inputBufferLength = inputBuffer.length();
+                                        
+                        const SampleType interpolationValue = tempBufferSamples[tempBufferLength - 1];
+                        
+                        tempBufferPos -= tempBufferPosMax;        // move this before resize
+                        tempBufferLength = inputBufferLength + 1; // one larger for interpolation
+                        resizeTempBuffer (tempBufferLength);
+                        tempBufferSamples = this->tempBuffer.getArray();
+                        
+                        tempBufferSamples[0] = interpolationValue;
+                        
+                        for (i = 0; i < inputBufferLength; ++i)
+                            tempBufferSamples[i + 1] = inputSamples[i];
+                    }
+                                
+                    while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+                    {
+                        *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
+                        tempBufferPos += tempBufferIncrement;
+                    }
                 }
             }
+            else plonk_assertfalse; // not yet inplemented
             
             info.setTimeStamp (infoTimeStamp); // reset for the parent graph
         }
@@ -195,11 +211,12 @@ private:
 /** Resample a unit to a different sample rate and/or block size.
  
  @par Factory functions:
- - ar (input, preferredBlockSize=default, preferredSampleRate=default)
- - kr (input)
+ - ar (input, rate=1, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (input, rate=1)
  
  @par Inputs:
  - input: (unit, multi) the unit to resample
+ - rate: (unit, multi) must be 1, varispeed to be implemented...
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 
@@ -215,6 +232,10 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;    
 
+    typedef typename ResampleInternal::RateType         RateType;
+    typedef typename ResampleInternal::RateUnitType     RateUnitType;
+    typedef typename ResampleInternal::RateBufferType   RateBufferType;
+    
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -224,17 +245,19 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,     Measure::None,     IOInfo::NoDefault,   IOLimit::None,      IOKey::End,
+                         IOKey::Generic,    Measure::None,     IOInfo::NoDefault,   IOLimit::None,      IOKey::End,
 
                          // inputs
-                         IOKey::Generic,     Measure::None,     IOInfo::NoDefault,   IOLimit::None,
+                         IOKey::Generic,    Measure::None,     IOInfo::NoDefault,   IOLimit::None,
+                         IOKey::Rate,       Measure::Factor,   1.0,                 IOLimit::Minimum,   Measure::Factor,    0.0,
                          IOKey::BlockSize,  Measure::Samples,  blockSize,           IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::SampleRate, Measure::Hertz,    sampleRate,          IOLimit::Minimum,   Measure::Hertz,     0.0,
                          IOKey::End);
     }    
     
     /** Create an audio rate sample rate converter. */
-    static UnitType ar (UnitType const& input, 
+    static UnitType ar (UnitType const& input,
+                        RateUnitType const& rate = Math<RateType>::get1(),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                
@@ -242,6 +265,7 @@ public:
                 
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
+        inputs.put (IOKey::Rate, rate);
         
         Data data = { -1.0, -1.0 };
                 
@@ -251,9 +275,11 @@ public:
                                                                       preferredSampleRate);
     }
     
-    static inline UnitType kr (UnitType const& input) throw()
+    static inline UnitType kr (UnitType const& input,
+                               RateUnitType const& rate = Math<RateType>::get1()) throw()
     {
-        return ar (input, 
+        return ar (input,
+                   rate,
                    BlockSize::getControlRateBlockSize(), 
                    SampleRate::getControlRate());
     }

@@ -129,9 +129,12 @@ public:
     AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw();
     ~AudioFileReaderInternal();
     
+    ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw();
+    
     AudioFile::Format getFormat() const throw();
     AudioFile::Encoding getEncoding() const throw();
     AudioFile::SampleType getSampleType() const throw();
+    
     int getBitsPerSample() const throw();
     int getBytesPerFrame() const throw();
     int getBytesPerSample() const throw();
@@ -172,7 +175,7 @@ public:
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
-    void init (const char* path, const bool readMetaData) throw();
+    ResultCode init (const char* path, const bool readMetaData) throw();
 
     template<class Type>
     static inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
@@ -367,7 +370,7 @@ public:
     }
     
     /** Creates a null object. 
-     This can't be used for reading or writing. */
+     Use open to open a file. */
     AudioFileReader() throw()
     :   Base (new Internal())
     {
@@ -418,7 +421,17 @@ public:
         
         return *this;
 	}
-        
+    
+    ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw()
+    {
+        return getInternal()->open (path, bufferSize, readMetaData);
+    }
+
+    ResultCode open (Text const& path) throw()
+    {
+        return getInternal()->open (path.getArray(), 0, false);
+    }
+
     
     /** Get a weakly linked copy of this object. 
      This will return a blank/empty/null object of this type if

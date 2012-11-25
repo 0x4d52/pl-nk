@@ -689,7 +689,7 @@ public:
     inline UnitBase ar (BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) const throw()
     {
-        return ResampleUnit<SampleType>::ar (*this, preferredBlockSize, preferredSampleRate);
+        return ResampleUnit<SampleType>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
     }    
     
     /** Resamples this unit to the default control rate sample rate and block size. */

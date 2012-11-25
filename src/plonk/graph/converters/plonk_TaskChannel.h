@@ -323,7 +323,7 @@ public:
         // could avoid the resample if we added the function the check if all bs/sr are the same in each channel
         
         Inputs inputs;
-        inputs.put (IOKey::Generic, ResampleUnit<SampleType>::ar (input, blockSize, sampleRate));
+        inputs.put (IOKey::Generic, ResampleUnit<SampleType>::ar (input, 1, blockSize, sampleRate));
                         
         Data data = { { -1.0, -1.0 }, 0, numBuffers, priority };
         

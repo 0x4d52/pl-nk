@@ -728,6 +728,39 @@
  
  Here the quantised control signal (from an example earlier) is rounded off slightly
  to give a gentle portamento effect (it takes 0.075s to glide to the desired note).
+
+ @subsection SoundFiles Sound files
+ Plonk inlcudes range of sound file reading routines. It currently supports WAV and
+ AIFF (and AIFC) by default and optionally Ogg Vorbis and Opus formats (by adding
+ the appropriate files from the /ext directory and enabling the relevant 
+ preprocessor macro).
+ 
+ Sound files may be read into a memory and played back from there or streamed from
+ disk. In either case the AudioFileReader class does the work of reading and
+ decoding the sample data.
+ 
+ @code
+ AudioFileReader reader ("/path/to/file.wav");
+ if (reader.isReady())
+ {
+    // do something with the file 
+ }
+ @endcode
+ 
+ An entire sound file can be read into a Signal object. This can then be played back
+ using the SignalPlay unit.
+ 
+ @code
+ AudioFileReader reader ("/path/to/file.wav");
+ Unit u;
+ if (reader.isReady())
+ {
+    Signal signal = reader.getSignal();
+    u = SignalPlay::ar (signal);
+ }
+ @endcode
+
+ 
  
  @subsection Delay Delay
  [todo]

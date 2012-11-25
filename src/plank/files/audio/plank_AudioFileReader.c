@@ -231,6 +231,9 @@ PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const ch
     result = PlankResult_OK;
     iff = PLANK_NULL;
     
+    if ((result = pl_AudioFileReader_DeInit (p)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileReader_Init (p)) != PlankResult_OK) goto exit;
+    
     if (readMetaData)
         p->metaData = pl_AudioFileMetaData_CreateAndInit();
     
@@ -255,7 +258,6 @@ PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const ch
     {
         if ((result = pl_AudioFileReader_Iff_Open (p, filepath)) != PlankResult_OK) goto exit;
     }
-#if PLANK_OGGVORBIS || PLANK_OPUS
     else if (mainID == pl_FourCharCode ("OggS")) //Ogg this needs to handle any Ogg e.g., Vorbis or Opus
     {
         // close the Iff file and start again
@@ -293,7 +295,6 @@ PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const ch
         }
 #endif
     }
-#endif
     else 
     {
         if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
