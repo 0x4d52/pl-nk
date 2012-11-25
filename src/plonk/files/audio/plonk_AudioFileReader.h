@@ -422,17 +422,6 @@ public:
         return *this;
 	}
     
-    ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw()
-    {
-        return getInternal()->open (path, bufferSize, readMetaData);
-    }
-
-    ResultCode open (Text const& path) throw()
-    {
-        return getInternal()->open (path.getArray(), 0, false);
-    }
-
-    
     /** Get a weakly linked copy of this object. 
      This will return a blank/empty/null object of this type if
      the original has already been deleted. */    
@@ -671,6 +660,20 @@ public:
     bool isReady() const throw()
     {
         return getInternal()->isReady();
+    }
+    
+private:
+    // these could be currently dangerous across threads, need to look at a safer way to open
+    // a new file once one is already running...
+    
+    ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw()
+    {
+        return getInternal()->open (path, bufferSize, readMetaData);
+    }
+    
+    ResultCode open (Text const& path) throw()
+    {
+        return getInternal()->open (path.getArray(), 0, false);
     }
 };
 
