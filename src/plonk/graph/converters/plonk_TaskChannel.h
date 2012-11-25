@@ -82,7 +82,8 @@ public:
         Task (TaskChannelInternal* o) throw()
         :   Threading::Thread (Text ("TaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
             owner (o),
-            info (owner->getProcessInfo())
+            info (owner->getProcessInfo()),
+            event (Lock::MutexLock)
         {
         }
         
@@ -96,8 +97,7 @@ public:
             
             const int numChannels = owner->getNumChannels();
             const int numBuffers = owner->getState().numBuffers;;
-            const int halfNumBuffers = numBuffers >> 1;
-            
+                
             plonk_assert (numBuffers > 0);
             plonk_assert (owner->getBlockSize().getValue() > 0);
             
@@ -139,13 +139,9 @@ public:
 
                     plonk_assert (inputUnit.channelsHaveSameSampleRate());
                     info.offsetTimeStamp (owner->getSampleRate().getSampleDurationInTicks() * blockSize);
+                }
                 
-                    Threading::sleep (blockSize / owner->getSampleRate().getValue() * rng.uniform (0.0, 0.5));
-                }
-                else 
-                {
-                    Threading::sleep (blockSize / owner->getSampleRate().getValue() * rng.uniform (halfNumBuffers, numBuffers - 1));
-                }
+                event.wait();
             }
             
             freeBuffers.clearAll();
@@ -158,6 +154,8 @@ public:
         {
             setShouldExitAndWait (0.000001); // will block though...
         }
+        
+        Lock& getEvent() { return event; }
                 
     private:
         TaskChannelInternal* owner;
@@ -165,15 +163,16 @@ public:
         RNG rng;
         BufferQueue activeBuffers;
         BufferQueue freeBuffers;
+        Lock event;
     };
     
     //--------------------------------------------------------------------------
     
     TaskChannelInternal (Inputs const& inputs, 
-                             Data const& data, 
-                             BlockSize const& blockSize,
-                             SampleRate const& sampleRate,
-                             ChannelArrayType& channels) throw()
+                         Data const& data,
+                         BlockSize const& blockSize,
+                         SampleRate const& sampleRate,
+                         ChannelArrayType& channels) throw()
     :   Internal (numChannelsInSource (inputs), 
                   inputs, data, blockSize, sampleRate,
                   channels),
@@ -230,9 +229,12 @@ public:
             
             buffer.zero();
             task.getFreeBufferQueue().push (buffer);
+            task.getEvent().signal();
         }
         else
         {
+            printf ("Task::process - buffer underrun\n");
+            
             // buffer underrun or other error
             for (int channel = 0; channel < numChannels; ++channel)
             {
