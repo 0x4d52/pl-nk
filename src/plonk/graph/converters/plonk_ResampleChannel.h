@@ -293,7 +293,7 @@ private:
  
  @par Inputs:
  - input: (unit, multi) the unit to resample
- - rate: (unit, multi) must be constant and >= 0, varispeed to be implemented...
+ - rate: (unit, multi) a modulatable rate multiplier (e.g., for varispeed playback)
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 

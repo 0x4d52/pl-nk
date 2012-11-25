@@ -87,9 +87,9 @@ public:
         {
         }
         
-        BufferQueue& getActiveBufferQueue() throw() { return activeBuffers; }
-        BufferQueue& getFreeBufferQueue() throw() { return freeBuffers; }
-                
+//        BufferQueue& getActiveBufferQueue() throw() { return activeBuffers; }
+//        BufferQueue& getFreeBufferQueue() throw() { return freeBuffers; }
+        
         ResultCode run() throw()
         {
             Data& data = owner->getState();
@@ -158,9 +158,20 @@ public:
             while (isRunning())
                 Threading::sleep (0.0001); // will block!
         }
+    
+        inline bool pop (Buffer& buffer) throw()
+        {
+            return activeBuffers.pop (buffer);
+        }
+    
+        inline void push (Buffer const& buffer) throw()
+        {
+            freeBuffers.push (buffer);
+            event.signal();
+        }
 
-        Lock& getEvent() { return event; }
-                
+//        Lock& getEvent() { return event; }
+    
     private:
         TaskChannelInternal* owner;
         ProcessInfo& info;
@@ -213,7 +224,7 @@ public:
         // prevent memory alloc
         Buffer buffer (static_cast<typename Buffer::Internal*> (0));
 
-        if (task.getActiveBufferQueue().pop (buffer)) 
+        if (task.pop (buffer)) 
         {
             // could be smarter in here in case the buffer size changes
             
@@ -232,8 +243,9 @@ public:
             }
             
             buffer.zero();
-            task.getFreeBufferQueue().push (buffer);
-            task.getEvent().signal();
+            task.push (buffer);
+//            task.getFreeBufferQueue().push (buffer);
+//            task.getEvent().signal();
         }
         else
         {            
