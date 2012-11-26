@@ -86,10 +86,7 @@ public:
             event (Lock::MutexLock)
         {
         }
-        
-//        BufferQueue& getActiveBufferQueue() throw() { return activeBuffers; }
-//        BufferQueue& getFreeBufferQueue() throw() { return freeBuffers; }
-        
+                
         ResultCode run() throw()
         {
             Data& data = owner->getState();
@@ -169,8 +166,6 @@ public:
             freeBuffers.push (buffer);
             event.signal();
         }
-
-//        Lock& getEvent() { return event; }
     
     private:
         TaskChannelInternal* owner;
@@ -244,8 +239,6 @@ public:
             
             buffer.zero();
             task.push (buffer);
-//            task.getFreeBufferQueue().push (buffer);
-//            task.getEvent().signal();
         }
         else
         {            

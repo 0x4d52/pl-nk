@@ -100,6 +100,7 @@ public:
         S,              ///< S factor for filters.
         Gain,           ///< Gain specifically (usually in dB as opposed to Multiply).
         Bandwidth,      ///< Bandwidth (could be in Semitones, Octaves or Hertz).
+        Time,           ///< Time position in seconds.
         Duration,       ///< Duration in seconds.
         Decay,          ///< Decay time in seconds
         Feedback,       ///< A feedback amount

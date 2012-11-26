@@ -46,6 +46,21 @@
 
 BEGIN_PLONK_NAMESPACE
 
+/** Some utilties for the iOS platform. */
+class IOSUtilities
+{
+public:
+    enum Locations
+    {
+        Bundle,		///< In the \<MyApp\>.app/ bundle, files can be placed here during compilation in Xcode.
+        Documents,	///< The application's Documents directory, files here will be backed up during iTunes sync.
+        Temporary	///< The application's tmp directory, NB this is cleared when the device is restarted.
+    };
+    
+    static Text pathInDirectory (Locations location, const char *filename) throw();
+};
+
+
 /** An audio host for the iOS platform.
  @see PLAudioHost */
 template<class SampleType>
@@ -79,6 +94,8 @@ public:
                            const void *             inPropertyValue) throw();
     
     void interruptionCallback (UInt32 inInterruption) throw();
+    
+
         
 private:
     void setFormat() throw();    
