@@ -179,6 +179,12 @@ public:
     int getNumChannels() const throw();
     Dynamic getChannel (const int index) throw();
     
+    inline static const Dynamic& getNull() throw()
+	{
+		static Dynamic null;
+		return null;
+	}
+    
     PLONK_OBJECTARROWOPERATOR(Dynamic);
 
 private:

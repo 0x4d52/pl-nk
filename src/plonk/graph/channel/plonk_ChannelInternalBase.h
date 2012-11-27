@@ -170,8 +170,10 @@ public:
     inline int getOutputTypeCode() const throw()                { return TypeUtility<SampleType>::getTypeCode(); }
     virtual int getInputTypeCode() const throw()                { return TypeUtility<SampleType>::getTypeCode(); }
     
-    void changed (IntVariable::Sender const& source) throw()
+    void changed (IntVariable::Sender const& source, Dynamic const& message) throw()
     {
+        (void)message;
+        
         BlockSize blockSizeSource = static_cast<BlockSize> (source);
         
         if (blockSizeSource == this->getBlockSize())

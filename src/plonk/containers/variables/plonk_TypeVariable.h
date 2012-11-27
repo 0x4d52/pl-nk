@@ -59,10 +59,11 @@ public:
         operand.removeReceiver (this);
     }
     
-    void changed (typename Variable<OtherType>::Sender const& sender) throw()
+    void changed (typename Variable<OtherType>::Sender const& sender, Dynamic const& message) throw()
     {
         (void)sender;
-        this->update(); // transmit the change down the chain..
+        (void)message;
+        this->update (Dynamic::getNull()); // transmit the change down the chain..
     }    
     
     const Type getValue() const throw()
@@ -78,7 +79,7 @@ public:
         if (result != this->cachedValue)
         {
             this->cachedValue = result;
-            this->update();
+            this->update (Dynamic::getNull());
         }
         
         return result;

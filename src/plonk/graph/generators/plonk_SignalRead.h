@@ -119,9 +119,7 @@ public:
     }    
     
     void process (ProcessInfo& info, const int channel) throw()
-    {        
-        Data& data = this->getState();
-        
+    {                
         PositionUnitType& positionUnit = ChannelInternalCore::getInputAs<PositionUnitType> (IOKey::Time);
         const PositionBufferType& positionBuffer (positionUnit.process (info, channel));
         

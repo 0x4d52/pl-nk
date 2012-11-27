@@ -62,10 +62,11 @@ public:
         operand.removeReceiver (this);
     }
     
-    void changed (Sender const& sender) throw()
+    void changed (Sender const& sender, Dynamic const& message) throw()
     {
         (void)sender;
-        this->update(); // transmit the change down the chain..
+        (void)message;
+        this->update (Dynamic::getNull()); // transmit the change down the chain..
     }    
     
     const Type getValue() const throw()

@@ -126,8 +126,10 @@ public:
         }
     }    
     
-    void changed (DoubleVariable::Sender const& source) throw()
+    void changed (DoubleVariable::Sender const& source, Dynamic const& message) throw()
     {
+        (void)message;
+        
         SampleRate sampleRateSource = static_cast<SampleRate> (source);
         
         if (sampleRateSource == this->getInputAsSampleRate (IOKey::FilterSampleRate))
@@ -136,7 +138,7 @@ public:
             return;
         }
                 
-        Internal::changed (source); // process others
+        Internal::changed (source, Dynamic::getNull()); // process others
     }    
     
     void updateFilterSampleRateInData() throw()

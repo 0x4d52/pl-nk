@@ -163,10 +163,10 @@ void PortAudioAudioHostBase<SampleType>::startHost() throw()
     switch (TypeUtility<SampleType>::getTypeCode()) 
     {
         case TypeCode::Float: sampleFormat = paFloat32; break;
-        case TypeCode::Short: sampleFormat = paInt16; break;
-        case TypeCode::Int: sampleFormat = paInt32; break;
-        case TypeCode::Int24: sampleFormat = paInt24; break;
-        case TypeCode::Char: sampleFormat = paInt8; break;
+        case TypeCode::Short: sampleFormat = paInt16;   break;
+        case TypeCode::Int:   sampleFormat = paInt32;   break;
+        case TypeCode::Int24: sampleFormat = paInt24;   break;
+        case TypeCode::Char:  sampleFormat = paInt8;    break;
         default: sampleFormat = 0; break;
     }
         

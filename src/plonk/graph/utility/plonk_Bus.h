@@ -86,8 +86,10 @@ public:
         this->writeBlockSize.removeReceiver(this);
     }
     
-    void changed (BlockSize::Sender const& source) throw()
+    void changed (BlockSize::Sender const& source, Dynamic const& message) throw()
     {
+        (void)message;
+        
         BlockSize blockSizeSource = static_cast<BlockSize> (source);
         
         if (blockSizeSource == bufferSize)

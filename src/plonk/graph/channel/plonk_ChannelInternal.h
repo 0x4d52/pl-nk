@@ -115,8 +115,10 @@ public:
         }
     }
     
-    void changed (DoubleVariable::Sender const& source) throw()
+    void changed (DoubleVariable::Sender const& source, Dynamic const& message) throw()
     {
+        (void) message;
+        
         SampleRate sampleRateSource = static_cast<SampleRate> (source);
         
         if (sampleRateSource == this->getSampleRate())
