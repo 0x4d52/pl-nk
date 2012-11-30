@@ -82,7 +82,7 @@ public:
         if (result != this->cachedValue)
         {
             this->cachedValue = result;
-            this->update();
+            this->update (Dynamic::getNull());
         }
         
         return result;

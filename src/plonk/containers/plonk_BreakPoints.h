@@ -49,6 +49,45 @@
 #include "plonk_SimpleArray.h"
 
 
+class Shape
+{
+public:
+    enum ShapeType
+    {
+        Linear,
+        Numerical,
+        NumShapeTypes
+    };
+    
+    Shape() throw()
+    :   type (Linear),
+        curve (0.f)
+    {
+    }
+    
+    Shape (const float curveToUse) throw()
+    :   type (Numerical),
+        curve (curveToUse)
+    {
+    }
+    
+    Shape (ShapeType const& typeToUse) throw()
+    :   type (typeToUse),
+        curve (0.f)
+    {
+    }
+
+    ShapeType getType() const throw()				{ return type; }
+	float getCurve() const throw()					{ return curve; }
+	void setType (ShapeType const& newType) throw()	{ type = newType; }
+	void setCurve (const float newCurve) throw()	{ type = Numerical; curve = newCurve; }
+
+private:
+    ShapeType type;
+    float curve;
+};
+
+
 template<class SampleType>
 class BreakpointInternal : public SenderInternal< BreakpointBase<SampleType> >
 {
@@ -57,10 +96,12 @@ public:
         
     BreakpointInternal (const SampleType targetLevel, 
                         const double targetTime,
+                        Shape const& shapeToUse,
                         const int nextGateOn,
                         const int nextGateOff) throw()
     :   level (targetLevel),
         time (targetTime),
+        shape (shapeToUse),
         nextOn (nextGateOn),
         nextOff (nextGateOff)
     {
@@ -68,12 +109,14 @@ public:
     
     SampleType getTargetLevel() const throw()   { return this->level; }
     double getTargetTime() const throw()        { return this->time; }
+    const Shape& getShape() const throw()       { return this->shape; }
     int getNextGateOn() const throw()           { return this->nextOn; }
     int getNextGateOff() const throw()          { return this->nextOff; }
 
 private:
     SampleType level;
     double time;
+    Shape shape;
     int nextOn;
     int nextOff;
 };
@@ -98,10 +141,12 @@ public:
     
 	BreakpointBase(const SampleType targetLevel = SampleType (0), 
                    const double targetTime = 0.0,
+                   Shape const& shape = Shape::Linear,
                    const int nextGateOn = BreakpointBase::Next,
                    const int nextGateOff = BreakpointBase::Next) throw()
 	:	Base (new Internal (targetLevel,
                             targetTime,
+                            shape,
                             nextGateOn,
                             nextGateOff))
 	{
@@ -149,6 +194,7 @@ public:
     
     inline SampleType getTargetLevel() const throw()   { return this->getInternal()->getTargetLevel(); }
     inline double getTargetTime() const throw()        { return this->getInternal()->getTargetTime(); }
+    inline const Shape& getShape() const throw()       { return this->getInternal()->getShape(); }
     inline bool isSustainPoint() const throw()         { return this->getInternal()->getNextGateOn() == BreakpointBase::This; }
     inline int getNextGateOn() const throw()           { return this->getInternal()->getNextGateOn(); }
     inline int getNextGateOff() const throw()          { return this->getInternal()->getNextGateOff(); }
@@ -176,10 +222,12 @@ public:
     
     typedef NumericalArray<SampleType>      LevelsArray;
     typedef NumericalArray<double>          TimesArray;
+    typedef ObjectArray<Shape>              ShapeArray;
     typedef NumericalArray<int>             NextArray;
     
 	BreakpointsInternal(LevelsArray const& levels,
                         TimesArray const& times,
+                        ShapeArray const& shapes,
                         NextArray const& nextGateOns,
                         NextArray const& nextGateOffs) throw()
     :   breakpoints (BreakpointArrayType::withSize (times.length()))
@@ -204,6 +252,7 @@ public:
             {
                 this->breakpoints.put (i, BreakpointType (levelsArray[i],
                                                           timesArray[i],
+                                                          shapes.wrapAt (i),
                                                           nextOnsArray[i],
                                                           nextOffsArray[i]));
             }
@@ -213,7 +262,8 @@ public:
             for (int i = 0; i < numBreakpoints; ++i)
             {
                 this->breakpoints.put (i, BreakpointType (levelsArray[i],
-                                                          timesArray[i]));  
+                                                          timesArray[i],
+                                                          shapes.wrapAt (i)));
             }
         }
 	}
@@ -256,6 +306,7 @@ public:
     
     typedef NumericalArray<SampleType>              LevelsArray;
     typedef NumericalArray<double>                  TimesArray;
+    typedef ObjectArray<Shape>              ShapeArray;
     typedef NumericalArray<int>                     NextArray;
     
     typedef BreakpointBase<SampleType>              BreakpointType;
@@ -265,9 +316,10 @@ public:
     
 	BreakpointsBase (LevelsArray const& levels = LevelsArray (SampleType (0), SampleType (0)),
                      TimesArray const& times = TimesArray (0.0),
+                     ShapeArray const& shapes = ShapeArray (Shape::Linear),
                      NextArray const& nextGateOns = NextArray::getNull(),
                      NextArray const& nextGateOffs = NextArray::getNull()) throw()
-	:	Base (new Internal(levels, times, nextGateOns, nextGateOffs))
+	:	Base (new Internal(levels, times, shapes, nextGateOns, nextGateOffs))
 	{
 	}
 	
@@ -311,33 +363,39 @@ public:
     
     static BreakpointsBase linen (const double attackTime, 
                                   const double sustainTime,
-                                  const double releaseTime) throw()
+                                  const double releaseTime,
+                                  Shape const& shape = Shape::Linear) throw()
     {
         const SampleType peak = SampleTypeUtility::getTypePeak();
         return BreakpointsBase (LevelsArray (SampleType (0), peak, peak, SampleType (0)),
-                                TimesArray (attackTime, sustainTime, releaseTime));
+                                TimesArray (attackTime, sustainTime, releaseTime),
+                                ShapeArray (shape));
     }
     
     static BreakpointsBase adsr (const double attackTime, 
                                  const double decayTime,
                                  const SampleType sustainLevel,
-                                 const double releaseTime) throw()
+                                 const double releaseTime,
+                                 Shape const& shape = Shape::Linear) throw()
     {
         const int lastPoint = 2;
         const SampleType peak = SampleTypeUtility::getTypePeak();
         return BreakpointsBase (LevelsArray (SampleType (0), peak, sustainLevel, SampleType (0)),
                                 TimesArray (attackTime, decayTime, releaseTime),
+                                ShapeArray (shape),
                                 NextArray (BreakpointType::Next, BreakpointType::This, BreakpointType::End),
                                 NextArray (lastPoint, lastPoint, BreakpointType::End));
     }
     
     static BreakpointsBase asr (const double attackTime, 
                                 const SampleType sustainLevel,
-                                const double releaseTime) throw()
+                                const double releaseTime,
+                                Shape const& shape = Shape::Linear) throw()
     {
         const int lastPoint = 1;
         return BreakpointsBase (LevelsArray (SampleType (0), sustainLevel, SampleType (0)),
                                 TimesArray (attackTime, releaseTime),
+                                ShapeArray (shape),
                                 NextArray (BreakpointType::This, BreakpointType::End),
                                 NextArray (lastPoint, BreakpointType::End));
     }

@@ -107,7 +107,7 @@ public:
 	/// @name Miscellaneous
 	/// @{
 	
-    inline void update() throw() { } // needed as a dummy in place of Sender::update?
+    inline void update (Dynamic const& message) throw() { (void)message; } // needed as a dummy in place of Sender::update?
     void* getWeak() const throw();
     int getRefCount() const throw();    
     

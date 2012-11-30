@@ -51,8 +51,15 @@ PLONK_CHANNELDATA_DECLARE(EnvelopeChannelInternal,SampleType)
     
     LongLong samplesUntilTarget;
     SampleType currentLevel;
+    SampleType targetLevel;
     SampleType grow;
+    SampleType a2;
+    SampleType b1;
+    SampleType y1;
+    SampleType y2;
     int targetPointIndex;
+    int shapeType;
+    float curve;
     
     bool prevGate:1;
     bool done:1;
@@ -109,14 +116,14 @@ public:
         data.currentLevel = breakpoints.getStartLevel();
         this->initValue (data.currentLevel);
         
-        this->setTargetPoint (0, 0);
+        this->setTargetPoint (-1, 0);
     }    
     
     void setTargetPoint (const int index, const int samplesRemaining) throw()
     {
         Data& data = this->getState();
         
-        if ((index != 0) && (index == data.targetPointIndex))
+        if ((index != -1) && (index == data.targetPointIndex)) // ?? ugh can't be right
         {
             // sustain
             data.grow = SampleType (0);
@@ -126,12 +133,23 @@ public:
         {
             const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
 
-            plonk_assert (index >= 0);
+//            plonk_assert (index >= 0);
             
-            if (index >= breakpoints.getNumBreakpoints())
+            if (index < 0)
+            {
+                // start
+                data.targetPointIndex = -1;
+                data.shapeType = Shape::Linear;
+                data.curve = 0.f;
+                data.grow = SampleType (0);
+                data.samplesUntilTarget = samplesRemaining;
+            }
+            else if (index >= breakpoints.getNumBreakpoints())
             {
                 // finished...
                 data.targetPointIndex = breakpoints.getNumBreakpoints();
+                data.shapeType = Shape::Linear;
+                data.curve = 0.f;
                 data.grow = SampleType (0);
                 data.samplesUntilTarget = TypeUtility<LongLong>::getTypePeak();
                 data.done = true;
@@ -142,9 +160,16 @@ public:
                 data.targetPointIndex = index;
                 const BreakpointType& targetBreakpoint = breakpoints.atUnchecked (index);
                 
-                const SampleType diff = targetBreakpoint.getTargetLevel() - data.currentLevel;
-                data.samplesUntilTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
-                data.grow = diff / data.samplesUntilTarget;
+                const Shape& shape = targetBreakpoint.getShape();
+                data.shapeType = shape.getType();
+                data.curve = shape.getCurve();
+                
+                if (data.shapeType == Shape::Linear)
+                    initLinear (targetBreakpoint);
+                else if (data.shapeType == Shape::Numerical)
+                    initNumerical (targetBreakpoint);
+                else
+                    initLinear (targetBreakpoint);
             }
         }        
     }
@@ -153,9 +178,8 @@ public:
     {
         const Data& data = this->getState();
         const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
-        const BreakpointType& targetBreakpoint = breakpoints.atUnchecked (data.targetPointIndex);
         
-        const int next = targetBreakpoint.getNext (gate);
+        const int next = (data.targetPointIndex < 0) ? 0 : breakpoints.atUnchecked (data.targetPointIndex).getNext (gate);
         
         if (next == BreakpointType::This)
             this->setTargetPoint (data.targetPointIndex, samplesRemaining);
@@ -164,20 +188,115 @@ public:
         else 
             this->setTargetPoint (next, samplesRemaining);
     }
-            
-    inline void processLinear (SampleType* const outputSamples, const int numSamples) throw()
+    
+    inline void initLinear (BreakpointType const& targetBreakpoint) throw()
     {
         Data& data = this->getState();
+        data.targetLevel = targetBreakpoint.getTargetLevel();
 
-        for (int i = 0; i < numSamples; ++i)
+        const SampleType diff = data.targetLevel - data.currentLevel;
+        data.samplesUntilTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
+        data.grow = diff / data.samplesUntilTarget;
+    }
+    
+    inline void initNumerical (BreakpointType const& targetBreakpoint) throw()
+    {
+        Data& data = this->getState();
+        const SampleType& zero = Math<SampleType>::get0();
+        
+        data.targetLevel = targetBreakpoint.getTargetLevel();
+        const SampleType diff = data.targetLevel - data.currentLevel;
+        
+        if ((plonk::abs (data.curve) < 0.001f) || (diff == zero))
         {
-            outputSamples[i] = data.currentLevel;
-            data.currentLevel += data.grow;
+            data.shapeType = Shape::Linear;
+            data.curve = 0.f;
+
+            initLinear (targetBreakpoint);
+        }
+        else
+        {
+            const SampleType& one = Math<SampleType>::get1();
+            const SampleType a1 = diff / (one - plonk::exp (data.curve));
+            data.samplesUntilTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
+            data.a2 = data.currentLevel + a1;
+            data.b1 = a1;
+            data.grow = plonk::exp (data.curve / SampleType (data.samplesUntilTarget));
         }
     }
     
+    inline void processLinear (SampleType* const outputSamples, const int numSamples) throw()
+    {
+        Data& data = this->getState();
+        const SampleType& zero = Math<SampleType>::get0();
+
+        if (data.grow == zero)
+        {
+            for (int i = 0; i < numSamples; ++i)
+                outputSamples[i] = data.currentLevel;
+        }
+        else if (numSamples == data.samplesUntilTarget)
+        {
+            const int lastIndex = numSamples - 1;
+            
+            for (int i = 0; i < lastIndex; ++i)
+            {
+                outputSamples[i] = data.currentLevel;
+                data.currentLevel += data.grow;
+            }
+            
+            outputSamples[lastIndex] = data.currentLevel = data.targetLevel;
+        }
+        else
+        {
+            for (int i = 0; i < numSamples; ++i)
+            {
+                outputSamples[i] = data.currentLevel;
+                data.currentLevel += data.grow;
+            }
+        }
+    }
+    
+    inline void processNumerical (SampleType* const outputSamples, const int numSamples) throw()
+    {
+        Data& data = this->getState();
+        
+        if (numSamples == data.samplesUntilTarget)
+        {
+            const int lastIndex = numSamples - 1;
+
+            for (int i = 0; i < lastIndex; ++i)
+            {
+                outputSamples[i] = data.currentLevel;
+                data.b1 *= data.grow;
+                data.currentLevel = data.a2 - data.b1;
+            }
+            
+            outputSamples[lastIndex] = data.currentLevel = data.targetLevel;
+        }
+        else
+        {
+            for (int i = 0; i < numSamples; ++i)
+            {
+                outputSamples[i] = data.currentLevel;
+                data.b1 *= data.grow;
+                data.currentLevel = data.a2 - data.b1;
+            }
+        }
+    }
+    
+    inline void processShape (SampleType* const outputSamples, const int numSamples, const int shapeType)
+    {
+        if (shapeType == Shape::Linear)
+            processLinear (outputSamples, numSamples);
+        else if (shapeType == Shape::Numerical)
+            processNumerical (outputSamples, numSamples);
+        else
+            processLinear (outputSamples, numSamples);
+    }
+
     void process (ProcessInfo& info, const int /*channel*/) throw()
-    {                
+    {
         Data& data = this->getState();
         
         SampleType* outputSamples = this->getOutputSamples();
@@ -204,8 +323,8 @@ public:
                 
                 if (samplesThisTime > 0)
                 {
-                    processLinear (outputSamples, samplesThisTime);
-                    
+                    processShape (outputSamples, samplesThisTime, data.shapeType);
+                                        
                     outputSamples += samplesThisTime;
                     samplesRemaining -= samplesThisTime;
                     data.samplesUntilTarget -= samplesThisTime;
@@ -225,8 +344,8 @@ public:
                 
                 if (currGate != data.prevGate)
                     this->nextTargetPoint (currGate, 1);
-                
-                processLinear (outputSamples++, 1);
+                                    
+                processShape (outputSamples++, 1, data.shapeType);
                 
                 if (data.samplesUntilTarget-- == 0)
                     this->nextTargetPoint (currGate, 1);
@@ -246,8 +365,8 @@ public:
                 if (currGate != data.prevGate)
                     this->nextTargetPoint (currGate, 1);
                 
-                processLinear (outputSamples++, 1);
-                
+                processShape (outputSamples++, 1, data.shapeType);
+                    
                 if (data.samplesUntilTarget-- == 0)
                     this->nextTargetPoint (currGate, 1);
                 
@@ -319,7 +438,11 @@ public:
         inputs.put (IOKey::Breakpoints, breakpoints);
         inputs.put (IOKey::Control, gate);
         
-        Data data = { { -1.0, -1.0 }, 0, 0, 0, -1, false, false, deleteWhenDone };
+        Data data = { { -1.0, -1.0 },
+            0, 0, 0, 0,
+            0, 0, 0, 0, // coeffs
+            -1, Shape::Linear, 0.f,
+            false, false, deleteWhenDone };
         
         return UnitType::template createFromInputs<EnvelopeInternal> (inputs, 
                                                                       data, 

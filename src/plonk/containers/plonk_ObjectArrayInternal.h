@@ -46,6 +46,7 @@
 #include "../core/plonk_WeakPointer.h"
 //#include "../core/plonk_Sender.h"
 #include "../maths/plonk_InlineCommonOps.h"
+//#include "plonk_DynamicContainer.h"
 
 
 template<class ObjectType, class BaseType>
@@ -142,8 +143,8 @@ bool ObjectArrayInternalBase<ObjectType,BaseType>
     const int oldSize = sizeUsed;
     const bool didResize = setSizeIfNeeded (newSize, keepContents);
     
-    if (sizeUsed != oldSize)
-        this->update();
+//    if (sizeUsed != oldSize)
+//        this->update (Dynamic::getNull());
     
     return didResize;
 }
@@ -234,7 +235,7 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     
     setSizeIfNeeded (sizeUsed + 1, true);
     array[this->length() - 1] = item;
-    this->update();
+//    this->update (Dynamic::getNull());
 }
 
 
@@ -253,7 +254,7 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     for (int i = originalLength; i < newSize; ++i)
         array[i] = *items++;
     
-    this->update();
+//    this->update (Dynamic::getNull());
 }
 
 template<class ObjectType, class BaseType>
@@ -282,7 +283,7 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         sizeUsed = newSize;
     }
     
-    this->update();
+//    this->update (Dynamic::getNull());
 }
 
 template<class ObjectType, class BaseType>
@@ -346,8 +347,8 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         }
     }
     
-    if (needsUpdate)
-        this->update();
+//    if (needsUpdate)
+//        this->update (Dynamic::getNull());
 }
 
 template<class ObjectType, class BaseType>
@@ -366,7 +367,7 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     array = 0;    
     ownsTheData = true;
     
-    this->update();
+//    this->update (Dynamic::getNull());
 }
 
 
