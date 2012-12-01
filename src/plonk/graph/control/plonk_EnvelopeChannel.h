@@ -132,8 +132,6 @@ public:
         else 
         {
             const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
-
-//            plonk_assert (index >= 0);
             
             if (index < 0)
             {
@@ -153,6 +151,8 @@ public:
                 data.grow = SampleType (0);
                 data.samplesUntilTarget = TypeUtility<LongLong>::getTypePeak();
                 data.done = true;
+                
+                this->update (Text ("done!"));
             }
             else
             {

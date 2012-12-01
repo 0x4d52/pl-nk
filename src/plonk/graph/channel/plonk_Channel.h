@@ -71,6 +71,7 @@ public:
     typedef NumericalArray<SampleType>                  Buffer;
     typedef InputDictionary                             Inputs;
     typedef Variable<SampleType>                        VariableType;
+    typedef ReceiverInternal<ChannelBase>               Receiver;
 
 
     /** Default constructor.

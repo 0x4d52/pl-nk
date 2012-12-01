@@ -140,7 +140,7 @@ template<class ObjectType, class BaseType>
 bool ObjectArrayInternalBase<ObjectType,BaseType>
 ::setSize (const int newSize, const bool keepContents) throw()
 {
-    const int oldSize = sizeUsed;
+//    const int oldSize = sizeUsed;
     const bool didResize = setSizeIfNeeded (newSize, keepContents);
     
 //    if (sizeUsed != oldSize)

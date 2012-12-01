@@ -79,17 +79,18 @@ template<class SampleType>
 class UnitBase : public NumericalArray<ChannelBase<SampleType> >
 {
 protected:
-    typedef ChannelBase<SampleType>                 ChannelType;
-    typedef ObjectArray<ChannelType>                ChannelArrayType;          
-    typedef ChannelInternalBase<SampleType>         ChannelInternalType;
-    typedef NumericalArray<ChannelType>             UnitType;
-    typedef NumericalArray2D<ChannelType,UnitBase>  UnitArray;
-    typedef NumericalArray2D<SampleType>            BufferArrayType;
-    typedef NullChannelInternal<SampleType>         NullInternal;
-    typedef Variable<SampleType>                    VariableType;
-    typedef AtomicValue<SampleType>                 AtomicType;
-    typedef Variable<AtomicType&>                   AtomicVariableType;
-    typedef AtomicVariableUnit<SampleType>          AtomicVariableUnitType;
+    typedef ChannelBase<SampleType>                     ChannelType;
+    typedef ObjectArray<ChannelType>                    ChannelArrayType;          
+    typedef ChannelInternalBase<SampleType>             ChannelInternalType;
+    typedef NumericalArray<ChannelType>                 UnitType;
+    typedef NumericalArray2D<ChannelType,UnitBase>      UnitArray;
+    typedef NumericalArray2D<SampleType>                BufferArrayType;
+    typedef NullChannelInternal<SampleType>             NullInternal;
+    typedef Variable<SampleType>                        VariableType;
+    typedef AtomicValue<SampleType>                     AtomicType;
+    typedef Variable<AtomicType&>                       AtomicVariableType;
+    typedef AtomicVariableUnit<SampleType>              AtomicVariableUnitType;
+    typedef typename ChannelBase<SampleType>::Receiver  Receiver;
 
     typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;
     typedef typename UnaryOpFunctionsHelper<SampleType>::UnaryOpFunctionsType UnaryOpFunctionsType;
@@ -1212,6 +1213,25 @@ public:
     {
         return TypeUtility<SampleType>::getTypeScale();
     }
+    
+    void addReceiverToChannels (Receiver* const receiver)
+    {
+        const int numChannels = this->getNumChannels();
+        ChannelType* channels = this->getArray();
+
+        for (int i = 0; i < numChannels; ++i)
+            channels[i].getInternal()->addReceiver (receiver);
+    }
+    
+    void removeReceiverFromChannels (Receiver* const receiver)
+    {
+        const int numChannels = this->getNumChannels();
+        ChannelType* channels = this->getArray();
+        
+        for (int i = 0; i < numChannels; ++i)
+            channels[i].getInternal()->removeReceiver (receiver);
+    }
+
     
     PLONK_OBJECTARROWOPERATOR(UnitBase);
     
