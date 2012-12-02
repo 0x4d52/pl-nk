@@ -44,6 +44,7 @@
 #include "../../core/plonk_WeakPointer.h"
 #include "../../core/plonk_SmartPointerContainer.h"
 #include "../../containers/plonk_Text.h"
+#include "../../core/plonk_Sender.h"
 
 /** Some audio file common constants. */
 class AudioFile
@@ -121,9 +122,13 @@ public:
 //------------------------------------------------------------------------------
 
 
-class AudioFileReaderInternal : public SmartPointer
+class AudioFileReaderInternal :
+//public SenderInternal<AudioFileReader>
+public SmartPointer
 {
-public:    
+public:
+    typedef AudioFileReader Container;
+
     AudioFileReaderInternal() throw();
 //    AudioFileReaderInternal (const char* path) throw();
     AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw();
@@ -356,12 +361,18 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
 /** Audio file reader. 
  @see BinaryFile 
  @ingroup PlonkOtherUserClasses */
-class AudioFileReader : public SmartPointerContainer<AudioFileReaderInternal>
+class AudioFileReader :
+//public SenderContainer<AudioFileReaderInternal>
+    public SmartPointerContainer<AudioFileReaderInternal>
 {
 public:
     typedef AudioFileReaderInternal                 Internal;
-    typedef SmartPointerContainer<Internal>         Base;
+    typedef SmartPointerContainer<Internal>         Base;    
+//    typedef SenderContainer<Internal>               Base;
+//    typedef ReceiverInternal<AudioFileReader>       Receiver;
+//    typedef AudioFileReader                         Sender;
     typedef WeakPointerContainer<AudioFileReader>   Weak;
+
     
     static const AudioFileReader& getNull() throw()
     {
@@ -417,7 +428,7 @@ public:
     AudioFileReader& operator= (AudioFileReader const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}

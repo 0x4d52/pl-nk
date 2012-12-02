@@ -400,6 +400,18 @@ const Text& Text::getStandardDelimiters() throw()
 	return t;
 }
 
+const Text& Text::getMessageDone() throw()
+{
+    static const Text t = "done";
+	return t;
+}
+
+const Text& Text::getMessageLooped() throw()
+{
+    static const Text t = "looped";
+	return t;
+}
+
 /* add a toBinary function?
  for (int i = 31; i >= 0; --i)
  {

@@ -90,7 +90,7 @@ public:
         Multiply,       ///< A multiplier.
         Add,            ///< An offset.
         Generic,        ///< A generic audio (commonly used where there is only one input or output).
-        Control,        ///< A generic control (e.g., used for the gate input of envelope).
+        Control,        ///< A generic control.
         LeftOperand,    ///< Left operand of a binary operation or stereo signal.
         RightOperand,   ///< Right operand of a binary operation or stereo signal.
         Position,       ///< Position, e.g., pan position.
@@ -107,8 +107,10 @@ public:
         Feedforward,    ///< A feedforward amount
         Coeffs,         ///< Filter coefficients
         FFT,            ///< FFT data
-        Real,
-        Imaginary,
+        Real,           ///< Real parts of complex data.
+        Imaginary,      ///< Imaginary parts of complex data.
+        Gate,           ///< Gate control.
+        Loop,           ///< Loop control.
         
         BlockSize,          ///< Audio processing block size.
         SampleRate,         ///< Audio processing sample rate.

@@ -50,7 +50,10 @@ PLONK_CHANNELDATA_DECLARE(SignalPlayChannelInternal,SampleType)
 
     ChannelInternalCore::Data base;
     RateType currentPosition;
-};      
+    
+    bool done:1;
+    bool deleteWhenDone:1;
+};
 
 //------------------------------------------------------------------------------
 
@@ -117,7 +120,39 @@ public:
         this->setOverlap (rateUnit.getOverlap (channel));
         
         this->initValue (0);//this->getState().currentPosition);
-    }    
+    }
+    
+    inline bool checkPosition (ProcessInfo& info, Data& data, const int numSignalFrames, const bool loop) throw()
+    {        
+        if (data.currentPosition >= numSignalFrames)
+        {
+            if (loop)
+            {
+                data.currentPosition -= numSignalFrames;
+                this->update (Text::getMessageLooped());
+            }
+            else
+            {
+                data.done = true;
+                this->update (Text::getMessageDone());
+            }
+        }
+        else if (data.currentPosition < RateType (0))
+        {
+            if (loop)
+            {
+                data.currentPosition += numSignalFrames;
+                this->update (Text::getMessageLooped());
+            }
+            else
+            {
+                data.done = true;
+                this->update (Text::getMessageDone());
+            }
+        }
+        
+        return data.done;
+    }
     
     void process (ProcessInfo& info, const int channel) throw()
     {        
@@ -126,11 +161,16 @@ public:
         RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         const RateBufferType& rateBuffer (rateUnit.process (info, channel));
         
-        SampleType* const outputSamples = this->getOutputSamples();
+        SampleType* outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
         
-        const RateType* const rateSamples = rateBuffer.getArray();
+        const RateType* rateSamples = rateBuffer.getArray();
         const int rateBufferLength = rateBuffer.length();
+        
+        UnitType& loop (this->getInputAsUnit (IOKey::Loop));
+        const Buffer& loopBuffer (loop.process (info, channel));
+        const SampleType* const loopSamples = loopBuffer.getArray();
+        const bool loopFlag = loopSamples[0] >= SampleType (0.5);
         
         const SignalType& signal (this->getInputAsSignal (IOKey::Signal));
         const SampleType* const signalSamples = signal.getSamples (channel);         
@@ -138,75 +178,77 @@ public:
         const unsigned int numSignalFrames (signal.getNumFrames());
         const RateType rateScale (signal.getSampleRate().getValue() * data.base.sampleDuration);
         
-        int i;
+        int numSamplesRemaining = outputBufferLength;
         
         if (rateBufferLength == outputBufferLength)
         {
-            for (i = 0; i < outputBufferLength; ++i) 
+            while (numSamplesRemaining--)
             {
                 const unsigned int sampleA (data.currentPosition);
                 const unsigned int sampleB (sampleA + 1);
                 const RateType frac (plonk::frac (data.currentPosition));
                 
-                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
+                *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
                                                        signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
                                                        frac);
                 
-                data.currentPosition += rateSamples[i] * rateScale;
+                data.currentPosition += *rateSamples++ * rateScale;
                 
-                if (data.currentPosition >= numSignalFrames)
-                    data.currentPosition -= numSignalFrames;
-                else if (data.currentPosition < RateType (0))	
-                    data.currentPosition += numSignalFrames;
-            }                    
+                if (checkPosition (info, data, numSignalFrames, loopFlag))
+                    break;
+            }
         }
         else if (rateBufferLength == 1)
         {
             const RateType increment = rateSamples[0] * rateScale;
             
-            for (i = 0; i < outputBufferLength; ++i) 
+            while (numSamplesRemaining--)
             {
                 const unsigned int sampleA (data.currentPosition);
                 const unsigned int sampleB (sampleA + 1);
                 const RateType frac (plonk::frac (data.currentPosition));
                 
-                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
+                *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
                                                        signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
                                                        frac);
                 data.currentPosition += increment;
                 
-                if (data.currentPosition >= numSignalFrames)
-                    data.currentPosition -= numSignalFrames;
-                else if (data.currentPosition < RateType (0))	
-                    data.currentPosition += numSignalFrames;                
-            }                    
+                if (checkPosition (info, data, numSignalFrames, loopFlag))
+                    break;
+            }
         }
         else
         {
             double ratePosition = 0.0;
             const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);
             
-            for (i = 0; i < outputBufferLength; ++i) 
+            while (numSamplesRemaining--)
             {
                 const unsigned int sampleA (data.currentPosition);
                 const unsigned int sampleB (sampleA + 1);
                 const RateType frac (plonk::frac (data.currentPosition));
                 
-                outputSamples[i] = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride], 
+                *outputSamples++ = InterpType::interp (signalSamples[(sampleA % numSignalFrames) * signalFrameStride],
                                                        signalSamples[(sampleB % numSignalFrames) * signalFrameStride], 
                                                        frac);
                 
                 data.currentPosition += rateSamples[int (ratePosition)] * rateScale;
                 
-                if (data.currentPosition >= numSignalFrames)
-                    data.currentPosition -= numSignalFrames;
-                else if (data.currentPosition < RateType (0))	
-                    data.currentPosition += numSignalFrames;
+                if (checkPosition (info, data, numSignalFrames, loopFlag))
+                    break;
                 
                 ratePosition += rateIncrement;
             }                    
         }
         
+        if (numSamplesRemaining > 0)
+        {
+            while (numSamplesRemaining--)
+                *outputSamples++ = SampleType (0);
+        }
+        
+        if (data.done && data.deleteWhenDone)
+            info.setShouldDelete();
     }
     
 private:
@@ -217,14 +259,16 @@ private:
 /** Signal player generator. 
  
  @par Factory functions:
- - ar (signal, rate=1, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
- - kr (signal, rate=1, mul=1, add=0) 
+ - ar (signal, rate=1, loop=1, mul=1, add=0, allowAutoDelete=true, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (signal, rate=1, loop=1, mul=1, add=0, allowAutoDelete=true) 
  
  @par Inputs:
  - signal: (signal, multi) the signal to play
  - rate: (unit, multi) the rate of playback (1= normal speed)
+ - loop: (unit, multi) a flag to tell the file player to loop
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output
+ - allowAutoDelete: (bool) whether this unit can be caused to be deleted by the unit it contains
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -254,34 +298,39 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,    Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,        Measure::None,      0.0,            IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Signal,     Measure::None,
-                         IOKey::Rate,       Measure::Factor,    1.0,        IOLimit::None,
-                         IOKey::Multiply,   Measure::Factor,    1.0,        IOLimit::None,
-                         IOKey::Add,        Measure::None,      0.0,        IOLimit::None,
-                         IOKey::BlockSize,  Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
-                         IOKey::SampleRate, Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::Signal,         Measure::None,
+                         IOKey::Rate,           Measure::Factor,    1.0,            IOLimit::None,
+                         IOKey::Loop,           Measure::Bool,      1.0,            IOLimit::Clipped,   Measure::NormalisedUnipolar,    0.0, 1.0,
+                         IOKey::Multiply,       Measure::Factor,    1.0,            IOLimit::None,
+                         IOKey::Add,            Measure::None,      0.0,            IOLimit::None,
+                         IOKey::AutoDeleteFlag, Measure::Bool,      IOInfo::True,   IOLimit::None,
+                         IOKey::BlockSize,      Measure::Samples,   blockSize,      IOLimit::Minimum,   Measure::Samples,           1.0,
+                         IOKey::SampleRate,     Measure::Hertz,     sampleRate,     IOLimit::Minimum,   Measure::Hertz,             0.0,
                          IOKey::End);
     }
     
     /** Create an audio rate signal player. */
     static UnitType ar (SignalType const& signal, 
                         RateUnitType const& rate = RateType (1), 
+                        UnitType const& loop = SampleType (1),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
+                        const bool deleteWhenDone = true,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
-    {             
+    {        
         Inputs inputs;
         inputs.put (IOKey::Signal, signal);
         inputs.put (IOKey::Rate, rate);
+        inputs.put (IOKey::Loop, loop);
         inputs.put (IOKey::Multiply, mul);
         inputs.put (IOKey::Add, add);
                         
-        Data data = { { -1.0, -1.0 }, RateType (0) };
+        Data data = { { -1.0, -1.0 }, RateType (0), false, deleteWhenDone };
         
         return UnitType::template createFromInputs<SignalPlayInternal> (inputs, 
                                                                         data, 
@@ -292,10 +341,12 @@ public:
     /** Create a control rate signal player.. */
     static UnitType kr (SignalType const& signal,
                         RateUnitType const& rate, 
+                        UnitType const& loop = SampleType (1),
                         UnitType const& mul = SampleType (1),
-                        UnitType const& add = SampleType (0)) throw()
+                        UnitType const& add = SampleType (0),
+                        const bool deleteWhenDone = true) throw()
     {
-        return ar (signal, rate, mul, add, 
+        return ar (signal, rate, loop, mul, add, deleteWhenDone,
                    BlockSize::getControlRateBlockSize(), 
                    SampleRate::getControlRate());
     }        

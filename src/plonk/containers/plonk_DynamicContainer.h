@@ -65,7 +65,7 @@ public:
     
     template<class ContainerType>
     DynamicInternal (ContainerType const& other) throw()
-    :   item (static_cast<SmartPointer*> (other.getInternal())),//(static_cast<SmartPointer*> (other.containerCopy().getInternal())),
+    :   item (static_cast<SmartPointer*> (other.getInternal())),
         typeCode (TypeUtility<ContainerType>::getTypeCode())
     {
     }
@@ -75,7 +75,7 @@ public:
     {
         typeCode = 0; // unknown
         AtomicOps::memoryBarrier();
-        item = static_cast<SmartPointer*> (other.getInternal());//(other.containerCopy().getInternal());
+        item = static_cast<SmartPointer*> (other.getInternal());
         typeCode = TypeUtility<ContainerType>::getTypeCode();
     }
     
@@ -184,6 +184,21 @@ public:
 		static Dynamic null;
 		return null;
 	}
+    
+    template<class OtherType>
+    bool operator== (OtherType const& other) const throw()
+    {
+        if (this->getTypeCode() != TypeUtility<OtherType>::getTypeCode())
+            return false;
+        
+        return this->as<OtherType>() == other;
+    }
+    
+    template<class OtherType>
+    inline bool operator!= (OtherType const& other) const throw()
+    {
+        return !this->operator== (other);
+    }
     
     PLONK_OBJECTARROWOPERATOR(Dynamic);
 

@@ -281,7 +281,7 @@ private:
  
  @par Inputs:
  - initialSource: (unitvariable, multi)
- - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit it contains
+ - allowAutoDelete: (bool) whether this unit can be caused to be deleted by the unit it contains
  - preferredNumChannels: (int) force this unit to have a certain number of channels (0= the channel count in initialSource)
  - fadeDuration: (unit, mono) the crossfade time in seconds to be used when patch sources are changed
  - mul: (unit) the multiplier applied to the output (NB NOT multi)

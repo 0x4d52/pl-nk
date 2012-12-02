@@ -873,6 +873,16 @@ public:
      channel has in turn stripped out the other multiple channels during the process. */    
     inline UnitBase getChannel (const int index) const throw() { return this->copy().wrapAt (index).getChannel (index); }
 
+    /** Returns a single channel object.
+     This wraps the index so that it is always in range. It is also recursive such that the returned
+     channel has in turn stripped out the other multiple channels during the process. */
+    inline ChannelType getChannelObject (const int index) throw() { return this->wrapAt (index).getChannel (index); }
+    
+    /** Returns a single channel object.
+     This wraps the index so that it is always in range. It is also recursive such that the returned
+     channel has in turn stripped out the other multiple channels during the process. */
+    inline ChannelType getChannelObject (const int index) const throw() { return this->copy().wrapAt (index).getChannel (index); }
+    
     /** Returns a unit with the single channel specified.
      This wraps the index so that it is always in range. It is also recursive such that the returned
      channel has in turn stripped out the other multiple channels during the process. */    
@@ -1070,6 +1080,12 @@ public:
     inline const TimeStamp getNextTimeStamp(const int index) const throw()
     {
         return this->wrapAt (index).getNextTimeStamp();
+    }
+    
+    inline UnitBase setNull() throw()
+    {
+        this->operator= (UnitBase::getNull());
+        return *this;
     }
     
     inline bool isNull (const int index) const throw()

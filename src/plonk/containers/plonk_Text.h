@@ -158,6 +158,9 @@ public:
 	static const Text& getPunctuation() throw();
 	static const Text& getStandardDelimiters() throw();
     
+    static const Text& getMessageDone() throw();
+    static const Text& getMessageLooped() throw();
+    
     PLONK_OBJECTARROWOPERATOR(Text);
 };
 

@@ -48,7 +48,10 @@ PLONK_CHANNELDATA_DECLARE(FilePlayChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     int numChannels;
-};      
+    
+    bool done:1;
+    bool deleteWhenDone:1;
+};
 
 //------------------------------------------------------------------------------
 
@@ -93,7 +96,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::AudioFileReader);
+        const IntArray keys (IOKey::AudioFileReader, IOKey::Loop);
         return keys;
     }    
         
@@ -107,21 +110,26 @@ public:
         }
         
         this->initProxyValue (channel, 0);
-    }    
-    
+    }
+
     void process (ProcessInfo& info, const int /*channel*/) throw()
-    {        
+    {
+        Data& data = this->getState();
         AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
         
         plonk_assert (file.getOwner() == this);
         
+        UnitType& loop (this->getInputAsUnit (IOKey::Loop));
+        const Buffer& loopBuffer (loop.process (info, 0));
+        const SampleType* const loopSamples = loopBuffer.getArray();
+
         const int numChannels = this->getNumChannels();
         const int fileNumChannels = file.getNumChannels();
         const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
         buffer.setSize (bufferSize, false);
         
-        const bool hitEOF = file.readFrames (buffer, true); // loop could be a flag but would need to check for a partial buffer
-                        
+        const bool hitEOF = file.readFrames (buffer, loopSamples[0] >= SampleType (0.5));
+        
         int channel;
         
         if (! hitEOF)
@@ -130,44 +138,102 @@ public:
             {
                 Buffer& outputBuffer = this->getOutputBuffer (channel);
                 SampleType* const outputSamples = outputBuffer.getArray();
-                const int outputBufferLength = outputBuffer.length();        
-
-                const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
-
+                const int outputBufferLength = outputBuffer.length();
+                
+                const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
+                
                 for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
                     outputSamples[i] = *bufferSamples;
             }
         }
         else
-        {
-            // zero
+        {            
+            const int bufferAvailable = buffer.length();            
+            const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
+            
             for (channel = 0; channel < numChannels; ++channel)
             {
                 Buffer& outputBuffer = this->getOutputBuffer (channel);
-                outputBuffer.zero();
-            }
-            
-            const int bufferAvailable = buffer.length();
-            
-            // copy partial buffer
-            if (bufferAvailable > 0)
-            {
-                const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
+                SampleType* const outputSamples = outputBuffer.getArray();
+                const int outputBufferLength = outputBuffer.length();
+                const int outputLengthToWrite = plonk::min (bufferFramesAvailable, outputBufferLength);
                 
-                for (channel = 0; channel < numChannels; ++channel)
-                {
-                    Buffer& outputBuffer = this->getOutputBuffer (channel);
-                    SampleType* const outputSamples = outputBuffer.getArray();
-                    const int outputBufferLength = plonk::min (bufferFramesAvailable, outputBuffer.length());        
+                const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
+                
+                for (int i = 0; i < outputLengthToWrite; ++i, bufferSamples += fileNumChannels)
+                    outputSamples[i] = *bufferSamples;
                     
-                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
-                    
-                    for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
-                        outputSamples[i] = *bufferSamples;
-                }
+                for (int i = outputLengthToWrite; i < outputBufferLength; ++i)
+                    outputSamples[i] = SampleType (0);
             }
+            
+            data.done = true;
+            this->update (Text::getMessageDone());
         }
+        
+        if (data.done && data.deleteWhenDone)
+            info.setShouldDelete();
     }
+
+//    void process (ProcessInfo& info, const int /*channel*/) throw()
+//    {        
+//        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
+//        
+//        plonk_assert (file.getOwner() == this);
+//        
+//        const int numChannels = this->getNumChannels();
+//        const int fileNumChannels = file.getNumChannels();
+//        const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
+//        buffer.setSize (bufferSize, false);
+//        
+//        const bool hitEOF = file.readFrames (buffer, true); // loop could be a flag but would need to check for a partial buffer
+//                        
+//        int channel;
+//        
+//        if (! hitEOF)
+//        {
+//            for (channel = 0; channel < numChannels; ++channel)
+//            {
+//                Buffer& outputBuffer = this->getOutputBuffer (channel);
+//                SampleType* const outputSamples = outputBuffer.getArray();
+//                const int outputBufferLength = outputBuffer.length();        
+//
+//                const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
+//
+//                for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
+//                    outputSamples[i] = *bufferSamples;
+//            }
+//        }
+//        else
+//        {
+//            // zero
+//            for (channel = 0; channel < numChannels; ++channel)
+//            {
+//                Buffer& outputBuffer = this->getOutputBuffer (channel);
+//                outputBuffer.zero();
+//            }
+//            
+//            const int bufferAvailable = buffer.length();
+//            
+//            // copy partial buffer
+//            if (bufferAvailable > 0)
+//            {
+//                const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
+//                
+//                for (channel = 0; channel < numChannels; ++channel)
+//                {
+//                    Buffer& outputBuffer = this->getOutputBuffer (channel);
+//                    SampleType* const outputSamples = outputBuffer.getArray();
+//                    const int outputBufferLength = plonk::min (bufferFramesAvailable, outputBuffer.length());        
+//                    
+//                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);         
+//                    
+//                    for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
+//                        outputSamples[i] = *bufferSamples;
+//                }
+//            }
+//        }
+//    }
     
 private:
     Buffer buffer; // might need to use a signal...
@@ -198,13 +264,15 @@ private:
  be wrapped in a TaskUnit which buffers the audio on a separate thread.
  
  @par Factory functions:
- - ar (file, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=noPref)
- - kr (file, mul=1, add=0) 
+ - ar (file, loop=1, mul=1, add=0, allowAutoDelete=true, preferredBlockSize=default, preferredSampleRate=noPref)
+ - kr (file, loop=1, mul=1, add=0, allowAutoDelete=true) 
  
  @par Inputs:
  - file: (audiofilereader, multi) the audio file reader to use
+ - loop: (unit) a flag to tell the file player to loop
  - mul: (unit, multi) the multiplier applied to the output
  - add: (unit, multi) the offset aded to the output
+ - allowAutoDelete: (bool) whether this unit can be caused to be deleted by the unit it contains
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
@@ -230,33 +298,40 @@ public:
                          
                          // output
                          ChannelCount::VariableChannelCount, 
-                         IOKey::Generic,            Measure::None,      0.0,        IOLimit::None,
+                         IOKey::Generic,            Measure::None,      0.0,            IOLimit::None,
                          IOKey::End,
                          
                          // inputs
                          IOKey::AudioFileReader,    Measure::None,
-                         IOKey::Multiply,           Measure::Factor,    1.0,        IOLimit::None,
-                         IOKey::Add,                Measure::None,      0.0,        IOLimit::None,
-                         IOKey::BlockSize,          Measure::Samples,   blockSize,  IOLimit::Minimum,   Measure::Samples,           1.0,
-                         IOKey::SampleRate,         Measure::Hertz,     sampleRate, IOLimit::Minimum,   Measure::Hertz,             0.0,
+                         IOKey::Loop,               Measure::Bool,      1.0,            IOLimit::Clipped,   Measure::NormalisedUnipolar,    0.0, 1.0,
+                         IOKey::Multiply,           Measure::Factor,    1.0,            IOLimit::None,
+                         IOKey::Add,                Measure::None,      0.0,            IOLimit::None,
+                         IOKey::AutoDeleteFlag,     Measure::Bool,      IOInfo::True,   IOLimit::None,
+                         IOKey::BlockSize,          Measure::Samples,   blockSize,      IOLimit::Minimum,   Measure::Samples,               1.0,
+                         IOKey::SampleRate,         Measure::Hertz,     sampleRate,     IOLimit::Minimum,   Measure::Hertz,                 0.0,
                          IOKey::End);
     }
     
     /** Create an audio rate audio file player. */
-    static UnitType ar (AudioFileReader const& file, 
+    static UnitType ar (AudioFileReader const& file,
+                        UnitType const& loop = SampleType (1),
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
+                        const bool deleteWhenDone = true,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {             
         if (file.isReady() && !file.isOwned())
         {
+            plonk_assert (loop.getNumChannels() == 1);
+            
             Inputs inputs;
             inputs.put (IOKey::AudioFileReader, file);
+            inputs.put (IOKey::Loop, loop);
             inputs.put (IOKey::Multiply, mul);
             inputs.put (IOKey::Add, add);
                             
-            Data data = { { -1.0, -1.0 }, 0 };
+            Data data = { { -1.0, -1.0 }, 0, false, deleteWhenDone };
             
             return UnitType::template proxiesFromInputs<FilePlayInternal> (inputs, 
                                                                            data, 
@@ -292,6 +367,7 @@ public:
         
         static UnitType ar (AudioFileReader const& file,
                             RateUnitType const& rate = Math<RateUnitType>::get1(),
+                            UnitType const& loop = SampleType (1),
                             const int blockSizeMultiplier = 0,
                             const int numBuffers = 8)
         {
@@ -300,8 +376,10 @@ public:
                                               DoubleVariable (blockSizeMultiplier);
             
             UnitType play = FilePlayUnit::ar (file,
+                                              loop,
                                               SampleType (1),
                                               SampleType (0),
+                                              false,
                                               BlockSize::getMultipleOfDefault (multiplier));
             
             UnitType task = TaskType::ar (play, numBuffers);

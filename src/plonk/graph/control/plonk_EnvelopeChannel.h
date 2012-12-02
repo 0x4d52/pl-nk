@@ -99,7 +99,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Breakpoints);
+        const IntArray keys (IOKey::Breakpoints, IOKey::Gate);
         return keys;
     }    
     
@@ -108,11 +108,14 @@ public:
         return this;
     }        
     
-    void initChannel (const int /*channel*/) throw()
+    void initChannel (const int channel) throw()
     {
         Data& data = this->getState();
         const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
         
+        const UnitType& gate = this->getInputAsUnit (IOKey::Gate);
+        plonk_assert (gate.getOverlap (channel) == Math<DoubleVariable>::get1());
+
         data.currentLevel = breakpoints.getStartLevel();
         this->initValue (data.currentLevel);
         
@@ -152,7 +155,7 @@ public:
                 data.samplesUntilTarget = TypeUtility<LongLong>::getTypePeak();
                 data.done = true;
                 
-                this->update (Text ("done!"));
+                this->update (Text::getMessageDone());
             }
             else
             {
@@ -302,7 +305,7 @@ public:
         SampleType* outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
 
-        UnitType& gate (this->getInputAsUnit (IOKey::Control));
+        UnitType& gate (this->getInputAsUnit (IOKey::Gate));
         const Buffer& gateBuffer (gate.process (info, 0));
         const SampleType* const gateSamples = gateBuffer.getArray();
         const int gateBufferLength = gateBuffer.length();        
@@ -390,6 +393,9 @@ private:
  
  [args-todo]
  
+ - allowAutoDelete: (bool) whether this unit can be casued to be deleted by the unit it contains
+
+ 
  @ingroup EnvelopeUnits */
 template<class SampleType>
 class EnvelopeUnit
@@ -418,7 +424,7 @@ public:
                          
                          // inputs
                          IOKey::Breakpoints,    Measure::None,
-                         IOKey::Control,        Measure::NormalisedBipolar,     0.0,            IOLimit::Clipped, Measure::NormalisedBipolar,  -1.0, 1.0, 
+                         IOKey::Gate,           Measure::NormalisedBipolar,     0.0,            IOLimit::Clipped, Measure::NormalisedBipolar,  -1.0, 1.0,
                          IOKey::AutoDeleteFlag, Measure::Bool,                  IOInfo::True,   IOLimit::None,
                          IOKey::BlockSize,      Measure::Samples,               blockSize,      IOLimit::Minimum, Measure::Samples,             1.0,
                          IOKey::SampleRate,     Measure::Hertz,                 sampleRate,     IOLimit::Minimum, Measure::Hertz,               0.0,
@@ -436,7 +442,7 @@ public:
         
         Inputs inputs;
         inputs.put (IOKey::Breakpoints, breakpoints);
-        inputs.put (IOKey::Control, gate);
+        inputs.put (IOKey::Gate, gate);
         
         Data data = { { -1.0, -1.0 },
             0, 0, 0, 0,

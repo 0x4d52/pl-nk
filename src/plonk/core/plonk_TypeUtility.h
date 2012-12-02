@@ -74,24 +74,24 @@ public:
         AtomicFloatVariable, AtomicDoubleVariable, AtomicIntVariable, AtomicLongVariable, 
         AtomicPointerVariable, AtomicExtendedPointerVariable, AtomicDynamicPointerVariable,
     // arrays (34)
-        FloatArray, DoubleArray, IntArray, ShortArray, Int24Array, LongArray, CharArray, BoolArray,
+        FloatArray, DoubleArray, IntArray, ShortArray, Int24Array, LongArray, CharArray, BoolArray, DynamicArray,
     // other
         Text, TextArray,
-    // channels (44)
+    // channels (45)
         FloatChannel, DoubleChannel, IntChannel, ShortChannel, Int24Channel, LongChannel,
-    // units (50)
+    // units (51)
         FloatUnit, DoubleUnit, IntUnit, ShortUnit, Int24Unit, LongUnit,
-    // bus (56)
+    // bus (57)
         FloatBus, DoubleBus, IntBus, ShortBus, Int24Bus, LongBus, 
-    // unit arrays (62)
+    // unit arrays (63)
         FloatUnits, DoubleUnits, IntUnits, ShortUnits, Int24Units, LongUnits,
-    // bus arrays (68)
+    // bus arrays (69)
         FloatBusses, DoubleBusses, IntBusses, ShortBusses, Int24Busses, LongBusses, 
-    // breakpoints (74)
+    // breakpoints (75)
         FloatBreakpoints, DoubleBreakpoints, IntBreakpoints, ShortBreakpoints, Int24Breakpoints, LongBreakpoints,
-    // wavetables (80)
+    // wavetables (81)
         FloatWavetable, DoubleWavetable, IntWavetable, ShortWavetable, Int24Wavetable, LongWavetable,
-    // signals (87)
+    // signals (88)
         FloatSignal, DoubleSignal, IntSignal, ShortSignal, Int24Signal, LongSignal,
     // arrays
         FloatArrayVariable, DoubleArrayVariable, IntArrayVariable, ShortArrayVariable, 
@@ -102,7 +102,7 @@ public:
         FloatChannelVariable, DoubleChannelVariable, IntChannelVariable, ShortChannelVariable, Int24ChannelVariable, LongChannelVariable,
     // units
         FloatUnitVariable, DoubleUnitVariable, IntUnitVariable, ShortUnitVariable, Int24UnitVariable, LongUnitVariable,
-    // bus (56)
+    // bus (57)
         FloatBusVariable, DoubleBusVariable, IntBusVariable, ShortBusVariable, Int24BusVariable, LongBusVariable, 
     // unit arrays
         FloatUnitsVariable, DoubleUnitsVariable, IntUnitsVariable, ShortUnitsVariable, Int24UnitsVariable, LongUnitsVariable,
@@ -140,7 +140,7 @@ public:
             "AtomicFloatVariable", "AtomicDoubleVariable", "AtomicIntVariable", "AtomicLongVariable",
             "AtomicPointerVariable", "AtomicExtendedPointerVariable", "AtomicDynamicPointerVariable",
             
-            "FloatArray", "DoubleArray", "IntArray", "ShortArray", "Int24Array", "LongArray", "CharArray", "BoolArray",
+            "FloatArray", "DoubleArray", "IntArray", "ShortArray", "Int24Array", "LongArray", "CharArray", "BoolArray", "DynamicArray",
             "Text", "TextArray", 
 
             "FloatChannel", "DoubleChannel", "IntChannel", "ShortChannel", "Int24Channel", "LongChannel",
@@ -1410,6 +1410,34 @@ public:
     typedef BoolArray const&    PassType;
     typedef float               IndexType;
     static inline int  getTypeCode() { return TypeCode::BoolArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<DynamicArray>
+{
+public:
+    typedef DynamicArray           TypeName;
+    typedef DynamicArray           OriginalType;
+    typedef DynamicArray const&    PassType;
+    typedef float                  IndexType;
+    static inline int  getTypeCode() { return TypeCode::DynamicArray; }
+    static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
+    typedef int PeakType;
+    typedef double ScaleType;
+};
+
+template<>
+class TypeUtilityBase<const DynamicArray>
+{
+public:
+    typedef const DynamicArray     TypeName;
+    typedef DynamicArray           OriginalType;
+    typedef DynamicArray const&    PassType;
+    typedef float                  IndexType;
+    static inline int  getTypeCode() { return TypeCode::DynamicArray; }
     static inline const OriginalType& getNull() { return TypeUtilityBase<const OriginalType&>::getNull(); }
     typedef int PeakType;
     typedef double ScaleType;
