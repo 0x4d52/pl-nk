@@ -66,9 +66,9 @@ public:
     void addReceiver(WeakPointer* const owner, Receiver* const receiver) throw();
     void removeReceiver(WeakPointer* const owner, Receiver* const receiver) throw();
     
-    void update (Dynamic const& message) throw();
-    void updateRaw (Dynamic const& message) throw();
-    void updateWeak (Dynamic const& message) throw();
+    void update (Text const& message, Dynamic const& payload) throw();
+    void updateRaw (Text const& message, Dynamic const& payload) throw();
+    void updateWeak (Text const& message, Dynamic const& payload) throw();
     
 private:
     SimpleArray<Receiver*>      rawReceivers;
@@ -147,14 +147,14 @@ void SenderInternal<SenderContainerBaseType>::removeReceiver (WeakPointer* const
 }
 
 template<class SenderContainerBaseType>
-void SenderInternal<SenderContainerBaseType>::update (Dynamic const& message) throw()
+void SenderInternal<SenderContainerBaseType>::update (Text const& message, Dynamic const& payload) throw()
 {    
-    this->updateRaw (message);
-    this->updateWeak (message);
+    this->updateRaw (message, payload);
+    this->updateWeak (message, payload);
 }    
 
 template<class SenderContainerBaseType>
-void SenderInternal<SenderContainerBaseType>::updateRaw (Dynamic const& message) throw()
+void SenderInternal<SenderContainerBaseType>::updateRaw (Text const& message, Dynamic const& payload) throw()
 {    
     RawReceiverArrayInternal* arrayInternal = rawReceivers.getInternal();
     plonk_assert (arrayInternal != 0);
@@ -167,13 +167,13 @@ void SenderInternal<SenderContainerBaseType>::updateRaw (Dynamic const& message)
         
         for (int i = numReceivers; --i >= 0;)
         {
-            arrayInternal->getArray()[i]->changed (sender, message);
+            arrayInternal->getArray()[i]->changed (sender, message, payload);
         }
     }    
 }    
 
 template<class SenderContainerBaseType>
-void SenderInternal<SenderContainerBaseType>::updateWeak (Dynamic const& message) throw()
+void SenderInternal<SenderContainerBaseType>::updateWeak (Text const& message, Dynamic const& payload) throw()
 {    
     WeakReceiverOwnerArrayInternal* ownerArray = weakReceiverOwners.getInternal();
     plonk_assert (ownerArray != 0);
@@ -196,7 +196,7 @@ void SenderInternal<SenderContainerBaseType>::updateWeak (Dynamic const& message
             Receiver* receiver = reveiverArray->getArray()[i];
             
             if (owner->getWeakPointer() != 0)
-                receiver->changed (sender, message);
+                receiver->changed (sender, message, payload);
             else
                 this->removeReceiver (owner, receiver);
         }

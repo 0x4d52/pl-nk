@@ -108,7 +108,7 @@ public:
         if (value != newValue)
         {
             value = newValue;
-            this->update (Dynamic::getNull());
+            this->update (Text::getEmpty(), Dynamic::getNull());
         }
     }
     

@@ -129,7 +129,7 @@ public:
             if (loop)
             {
                 data.currentPosition -= numSignalFrames;
-                this->update (Text::getMessageLooped());
+                this->update (Text::getMessageLooped(), Dynamic::getNull());
             }
             else
             {
@@ -142,12 +142,12 @@ public:
             if (loop)
             {
                 data.currentPosition += numSignalFrames;
-                this->update (Text::getMessageLooped());
+                this->update (Text::getMessageLooped(), Dynamic::getNull());
             }
             else
             {
                 data.done = true;
-                this->update (Text::getMessageDone());
+                this->update (Text::getMessageDone(), Dynamic::getNull());
             }
         }
         

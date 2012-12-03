@@ -412,6 +412,20 @@ const Text& Text::getMessageLooped() throw()
 	return t;
 }
 
+const Text& Text::getMessagePatchStart() throw()
+{
+    static const Text t = "patch.start";
+	return t;
+}
+
+const Text& Text::getMessagePatchEnd() throw()
+{
+    static const Text t = "patch.end";
+	return t;
+}
+
+
+
 /* add a toBinary function?
  for (int i = 31; i >= 0; --i)
  {

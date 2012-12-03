@@ -160,6 +160,9 @@ public:
     
     static const Text& getMessageDone() throw();
     static const Text& getMessageLooped() throw();
+    static const Text& getMessagePatchStart() throw();
+    static const Text& getMessagePatchEnd() throw();
+
     
     PLONK_OBJECTARROWOPERATOR(Text);
 };

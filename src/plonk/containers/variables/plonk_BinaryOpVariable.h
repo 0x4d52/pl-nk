@@ -66,11 +66,10 @@ public:
         rightOperand.removeReceiver (this);
     }
     
-    void changed (Sender const& sender, Dynamic const& message) throw()
+    void changed (Sender const& sender, Text const& message, Dynamic const& payload) throw()
     {
         (void)sender;
-        (void)message;
-        this->update (Dynamic::getNull()); // transmit the change down the chain..
+        this->update (message, payload); // transmit the change down the chain..
     }
     
     const Type getValue() const throw()
@@ -88,7 +87,7 @@ public:
         if (result != this->cachedValue)
         {
             this->cachedValue = result;
-            this->update (Dynamic::getNull());
+            this->update (Text::getEmpty(), Dynamic::getNull());
         }
         
         return result;

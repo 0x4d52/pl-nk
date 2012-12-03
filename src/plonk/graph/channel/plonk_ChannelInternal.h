@@ -115,9 +115,10 @@ public:
         }
     }
     
-    void changed (DoubleVariable::Sender const& source, Dynamic const& message) throw()
+    void changed (DoubleVariable::Sender const& source, Text const& message, Dynamic const& payload) throw()
     {
-        (void) message;
+        (void)message;
+        (void)payload;
         
         SampleRate sampleRateSource = static_cast<SampleRate> (source);
         

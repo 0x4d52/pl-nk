@@ -53,7 +53,7 @@ public:
     virtual ~ReceiverInternal() { }
         
     /** Must implement this in the sublcass. */
-    virtual void changed (SenderContainerBaseType const& source, Dynamic const& message) = 0;
+    virtual void changed (SenderContainerBaseType const& source, Text const& message, Dynamic const& payload) = 0;
 };     
 
 

@@ -155,7 +155,7 @@ public:
                 data.samplesUntilTarget = TypeUtility<LongLong>::getTypePeak();
                 data.done = true;
                 
-                this->update (Text::getMessageDone());
+                this->update (Text::getMessageDone(), Dynamic::getNull());
             }
             else
             {

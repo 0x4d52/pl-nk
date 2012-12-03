@@ -188,7 +188,10 @@ public:
         data.fadeLevel = fadeOutLevel;
         
         if (fadeOutLevel <= fadeMin)
+        {
+            this->update (Text::getMessagePatchEnd(), fadeSource);
             fadeSource = UnitType::getNull();
+        }
     }
     
     void processCopy (ProcessInfo& info)
@@ -252,6 +255,8 @@ private:
             fadeSource = currentSource;
             currentSource = UnitType::getNull();
             var.swapValues (currentSource);
+            
+            this->update (Text::getMessagePatchStart(), currentSource);
             
             Data& data = this->getState();
 

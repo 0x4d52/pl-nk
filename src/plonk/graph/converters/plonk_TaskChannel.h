@@ -54,10 +54,7 @@ PLONK_CHANNELDATA_DECLARE(TaskChannelInternal,SampleType)
 
 //------------------------------------------------------------------------------
 
-
-#define PLONK_TASK_GDC 0
-
-/** File player generator. */
+/** Defer a unit's processing to a separate task, thread, process or core. */
 template<class SampleType>
 class TaskChannelInternal
 :   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(TaskChannelInternal,SampleType)>

@@ -1139,7 +1139,7 @@ public:
     {
         if (this->getNumChannels() != 1)
             return false;
-        else if (this->at(0).isConstant())
+        else if (this->at (0).isConstant())
             return true;
         else
             return false;
