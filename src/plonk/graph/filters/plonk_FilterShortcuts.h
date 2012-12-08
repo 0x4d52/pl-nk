@@ -425,6 +425,88 @@ public:
 typedef DecayUnit<PLONK_TYPE_DEFAULT> Decay;
 
 
+/** DC removal filter.
+ 
+ @par Factory functions:
+ - ar (input, control=0.99, mul=1, add=0, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (input control=0.99, mul=1, add=0)
+ 
+ @par Inputs:
+ - input: (unit, multi) the unit to filter
+ - control: (unit, multi) the leakage control coefficient
+ - mul: (unit, multi) the multiplier applied to the output
+ - add: (unit, multi) the offset aded to the output
+ - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
+ - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
+ 
+ @ingroup AllUnits FilterUnits ControlUnits*/
+template<class SampleType>
+class DCUnit
+{
+public:
+    typedef UnitBase<SampleType>                                                UnitType;
+    typedef FilterShape<SampleType, FilterFormType::P1b, FilterShapeType::DC>   FilterShape;
+    typedef FilterForm<SampleType, FilterFormType::P1b>                         FormType;
+    typedef FilterUnit<FormType>                                                FilterType;
+    typedef ResampleUnit<SampleType>                                            ResampleType;
+    
+    static inline UnitInfos getInfo() throw()
+    {
+        const double sampleRate = SampleRate::getDefault().getValue();
+        
+        return UnitInfo ("DC", "DC removal filter.",
+                         
+                         // output
+                         ChannelCount::VariableChannelCount,
+                         IOKey::Generic,            Measure::Unknown,    0.0,               IOLimit::None,
+                         IOKey::End,
+                         
+                         // inputs
+                         IOKey::Generic,            Measure::Unknown,   IOInfo::NoDefault,  IOLimit::None,
+                         IOKey::Control,            Measure::Factor,    0.99,               IOLimit::Clipped,   Measure::Factor,    0.0, 1.0,
+                         IOKey::Multiply,           Measure::Factor,    1.0,                IOLimit::None,
+                         IOKey::Add,                Measure::None,      0.0,                IOLimit::None,
+                         IOKey::FilterSampleRate,   Measure::Hertz,     sampleRate,         IOLimit::Minimum,   Measure::Hertz,     0.0,
+                         IOKey::BlockSize,          Measure::Samples,   0.0,                IOLimit::Minimum,   Measure::Samples,   1.0,
+                         IOKey::SampleRate,         Measure::Hertz,    -1.0,                IOLimit::Minimum,   Measure::Hertz,     0.0,
+                         IOKey::End);
+    }
+    
+    /** Creates a DC removal filter.
+     @param input The input signal to filter.
+     @param control The leakage control coefficient.
+     @param mul An optional multiplier.
+     @param add An optional offset.
+     @param preferredBlockSize (Optional) The preferred block size for the process.
+     @param preferredSampleRate (Optional) The preferred sample rate for the process. */
+    static UnitType ar (UnitType const& input,
+                        UnitType const& control = SampleType (0.99),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0),
+                        BlockSize const& preferredBlockSize = BlockSize::noPreference(),
+                        SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
+    {                
+        return FilterType::ar (input, control, mul, add, preferredBlockSize, preferredSampleRate);
+    }
+    
+    /** Creates a control rate exponential deacy filter.
+     @param input The input signal to filter.
+     @param control The leakage control coefficient.
+     @param mul An optional multiplier.
+     @param add An optional offset. */
+    static UnitType kr (UnitType const& input,
+                        UnitType const& control = SampleType (0.99),
+                        UnitType const& mul = SampleType (1),
+                        UnitType const& add = SampleType (0)) throw()
+    {                
+        return FilterType::ar (input, control, mul, add,
+                               BlockSize::getControlRateBlockSize(),
+                               SampleRate::getControlRate());
+    }
+};
+typedef DCUnit<PLONK_TYPE_DEFAULT> DC;
+
+
 /////////////////////////////////// biquads ////////////////////////////////////
 
 /** Resonant low-pass filter. 

@@ -68,6 +68,7 @@ public:
         Unknown = 0,
         P1,
         P1a,
+        P1b,
         P2,
         Z1,
         Z2,
@@ -98,6 +99,7 @@ public:
         HighShelf,
         Notch,
         Allpass,
+        DC,
         Other,
         NumNames
     };

@@ -163,6 +163,8 @@ public:
     static const Text& getMessagePatchStart() throw();
     static const Text& getMessagePatchEnd() throw();
 
+    static const Text& getMessageTrigger() throw();
+
     
     PLONK_OBJECTARROWOPERATOR(Text);
 };

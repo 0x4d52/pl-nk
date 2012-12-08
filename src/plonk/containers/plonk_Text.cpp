@@ -424,6 +424,11 @@ const Text& Text::getMessagePatchEnd() throw()
 	return t;
 }
 
+const Text& Text::getMessageTrigger() throw()
+{
+    static const Text t = "trigger";
+	return t;
+}
 
 
 /* add a toBinary function?

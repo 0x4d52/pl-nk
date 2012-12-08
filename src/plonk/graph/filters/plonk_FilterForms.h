@@ -65,6 +65,14 @@ struct FilterData<SampleType, FilterFormType::B2>
     SampleType y1, y2;
 };      
 
+template<class SampleType>
+struct FilterData<SampleType, FilterFormType::P1b>
+{
+    ChannelInternalCore::Data base;
+    
+    SampleType y1, x1;
+};
+
 
 //------------------------------------------------------------------------------
 
@@ -284,7 +292,7 @@ public:
                 const SampleType b1 = b1Samples[0];
                 
                 for (i = 0; i < outputLength; ++i)
-                    outputSamples[i] = process(inputSamples[i], b1, y1);
+                    outputSamples[i] = process (inputSamples[i], b1, y1);
             }
             else
             {
@@ -293,7 +301,7 @@ public:
                 
                 for (i = 0; i < outputLength; ++i)
                 {
-                    outputSamples[i] = process(inputSamples[i], b1Samples[int (coeffPosition)], y1);
+                    outputSamples[i] = process (inputSamples[i], b1Samples[int (coeffPosition)], y1);
                     coeffPosition += coeffIncrement;
                 }
             }
@@ -307,12 +315,115 @@ public:
             
             for (i = 0; i < outputLength; ++i)
             {
-                outputSamples[i] = process(inputSamples[int (inputPosition)], b1, y1);
+                outputSamples[i] = process (inputSamples[int (inputPosition)], b1, y1);
                 inputPosition += inputIncrement;
             }            
         }
         
         data.y1 = zap (y1);
+    }
+};
+
+//------------------------------------------------------------------------------
+
+/** One-pole form, special simplified case for DC removal. */
+template<class SampleType>
+class FilterForm<SampleType, FilterFormType::P1b>
+:   public FilterFormBase<SampleType, FilterFormType::P1b>
+{
+public:
+    typedef SampleType                                          SampleDataType;
+    typedef UnitBase<SampleType>                                UnitType;
+    typedef NumericalArray<SampleType>                          Buffer;
+    typedef FilterData<SampleType, FilterFormType::P1b>         Data;
+    
+    enum Coeffs
+    {
+        CoeffB1,
+        NumCoeffs
+    };
+    
+    static inline SampleType process (SampleType const& input,
+                                      SampleType const& b1,
+                                      SampleType& y1,
+                                      SampleType& x1) throw()
+    {
+        const SampleType x0 = input;
+        y1 = x0 - x1 + b1 * y1;
+        x1 = x0;
+        return y1;
+    }
+    
+    static inline SampleType process (SampleType const& input,
+                                      const SampleType* coeffs,
+                                      Data& data) throw()
+    {
+        return process (input, coeffs[CoeffB1], data.y1, data.x1);
+    }
+    
+    static void process (SampleType* const outputSamples,
+                         const int outputLength,
+                         UnitType& inputUnit,
+                         UnitType& coeffsUnit,
+                         Data& data,
+                         ProcessInfo& info,
+                         const int channel) throw()
+    {
+        const int firstCoeff = NumCoeffs * channel;
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
+        const SampleType* const inputSamples = inputBuffer.getArray();
+        
+        const Buffer& b1Buffer (coeffsUnit.process (info, firstCoeff + CoeffB1));
+        const SampleType* const b1Samples = b1Buffer.getArray();
+        const int b1Length = b1Buffer.length();
+        const int inputLength = inputBuffer.length();
+        
+        SampleType y1 = data.y1;
+        SampleType x1 = data.x1;
+        int i;
+        
+        if (inputLength == outputLength)
+        {
+            if (b1Length == inputLength)
+            {
+                for (i = 0; i < outputLength; ++i)
+                    outputSamples[i] = process (inputSamples[i], b1Samples[i], y1, x1);
+            }
+            else if (b1Length == 1)
+            {
+                const SampleType b1 = b1Samples[0];
+                
+                for (i = 0; i < outputLength; ++i)
+                    outputSamples[i] = process(inputSamples[i], b1, y1, x1);
+            }
+            else
+            {
+                double coeffPosition = 0.0;
+                const double coeffIncrement = double (b1Length) / double (outputLength);
+                
+                for (i = 0; i < outputLength; ++i)
+                {
+                    outputSamples[i] = process(inputSamples[i], b1Samples[int (coeffPosition)], y1, x1);
+                    coeffPosition += coeffIncrement;
+                }
+            }
+        }
+        else
+        {
+            const SampleType b1 = b1Samples[0];
+            
+            double inputPosition = 0.0;
+            const double inputIncrement = double (inputLength) / double (outputLength);
+            
+            for (i = 0; i < outputLength; ++i)
+            {
+                outputSamples[i] = process (inputSamples[int (inputPosition)], b1, y1, x1);
+                inputPosition += inputIncrement;
+            }
+        }
+        
+        data.y1 = zap (y1);
+        data.x1 = x1;
     }
 };
 

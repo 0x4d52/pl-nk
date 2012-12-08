@@ -176,6 +176,7 @@
 #include "../graph/delay/plonk_Delay4Param.h"
 
 #include "../graph/control/plonk_EnvelopeChannel.h"
+#include "../graph/control/plonk_TriggerChannel.h"
 
 #include "../graph/fft/plonk_FFTChannel.h"
 #include "../graph/fft/plonk_IFFTChannel.h"

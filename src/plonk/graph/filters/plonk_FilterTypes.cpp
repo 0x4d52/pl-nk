@@ -49,6 +49,7 @@ FilterFormType::Name FilterFormType::fromInt (const int value) throw()
         FilterFormType::Unknown,
         FilterFormType::P1,
         FilterFormType::P1a,
+        FilterFormType::P1b,
         FilterFormType::P2,
         FilterFormType::Z1,
         FilterFormType::Z2,
@@ -74,6 +75,7 @@ Text FilterFormType::getName (const int index) throw()
         "Unknown",
         "One-Pole",
         "One-Pole [simplified form]",
+        "One-Pole [DC removal form]",
         "Two-Pole",
         "One-Zero",
         "Two-Zero",
@@ -102,6 +104,7 @@ FilterShapeType::Name FilterShapeType::fromInt (const int value) throw()
         FilterShapeType::HighShelf,
         FilterShapeType::Notch,
         FilterShapeType::Allpass,
+        FilterShapeType::DC,
         FilterShapeType::Other
     };
     
@@ -128,6 +131,7 @@ Text FilterShapeType::getName (const int index) throw()
         "HighShelf",
         "Notch",
         "Allpass",
+        "DC",
         "Other"
     };
     

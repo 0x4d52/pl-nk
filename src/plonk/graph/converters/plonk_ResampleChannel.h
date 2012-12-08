@@ -82,7 +82,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Generic);
+        const IntArray keys (IOKey::Generic, IOKey::Rate);
         return keys;
     }
     
@@ -367,6 +367,6 @@ typedef ResampleUnit<PLONK_TYPE_DEFAULT> Resample;
 
 
 
-#endif // PLONK_BLOCKRESIZECHANNEL_H
+#endif // PLONK_RESAMPLECHANNEL_H
 
 
