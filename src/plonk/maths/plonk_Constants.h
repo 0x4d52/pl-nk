@@ -68,7 +68,10 @@ public:
     static inline const Type& get12() throw()         { static const Type v ((Type)12); return v; }
     static inline const Type& get69() throw()         { static const Type v ((Type)69); return v; }
     static inline const Type& get360() throw()        { static const Type v ((Type)360); return v; }    
-    
+
+    static inline const Type& get1_3() throw()       { static const Type v ((Type)(1.0 / 3.0)); return v; }
+    static inline const Type& get1_6() throw()       { static const Type v ((Type)(1.0 / 6.0)); return v; }
+
     static inline const Type& get1_40() throw()       { static const Type v ((Type)(1.0 / 40.0)); return v; }
     static inline const Type& get1_440() throw()      { static const Type v ((Type)(1.0 / 440.0)); return v; }
     static inline const Type& get1_12() throw()       { static const Type v ((Type)(1.0 / 12.0)); return v; }

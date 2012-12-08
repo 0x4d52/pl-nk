@@ -225,9 +225,9 @@ class InterpBase
 };
 
 template<class ValueType, class IndexType>
-class InterpLinear
+class InterpLinear : public InterpBase<ValueType,IndexType>
 {
-public:
+public:    
     static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
         return value0 + ValueType ((value1 - value0) * frac);
@@ -243,7 +243,7 @@ public:
 };
 
 template<class ValueType>
-class InterpLinear<ValueType,int>
+class InterpLinear<ValueType,int> : public InterpBase<ValueType,int>
 {
 public:
     typedef int IndexType;
@@ -251,6 +251,62 @@ public:
     static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
     {
         (void)value1;
+        (void)frac;
+        return value0;
+    }
+    
+    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    {
+        return table[index];
+    }
+};
+
+template<class ValueType, class IndexType>
+class InterpLagrange3 : public InterpBase<ValueType,IndexType>
+{
+public:
+    static inline ValueType interp (ValueType const& value_1,
+                                    ValueType const& value0,
+                                    ValueType const& value1,
+                                    ValueType const& value2,
+                                    IndexType const& frac) throw()
+    {
+        const ValueType half = Math<ValueType>::get0_5();
+        const ValueType third = Math<ValueType>::get1_3();
+        const ValueType sixth = Math<ValueType>::get1_6();
+        const ValueType c0 = value0;
+        const ValueType c1 = value1 - third * value_1 - half * value0 - third * value2;
+        const ValueType c2 = half * (value_1 + value1) - value0;
+        const ValueType c3 = sixth * (value2 - value_1) + half * (value0 - value1);
+        return ((c3 * frac + c2) * frac + c1) * frac + c0;
+    }
+    
+    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    {
+        const int index0 = int (index);
+        const int index1 = index0 + 1;
+        const int index_1 = index0 - 1;
+        const int index2 = index1 + 1;
+        const IndexType frac = index - IndexType (index0);
+        return interp (table[index_1], table[index0], table[index1], table[index2], frac);
+    }
+};
+
+template<class ValueType>
+class InterpLagrange3<ValueType,int> : public InterpBase<ValueType,int>
+{
+public:
+    typedef int IndexType;
+
+    static inline ValueType interp (ValueType const& value_1,
+                                    ValueType const& value0,
+                                    ValueType const& value1,
+                                    ValueType const& value2,
+                                    IndexType const& frac) throw()
+    {
+        (void)value_1;
+        (void)value1;
+        (void)value2;
         (void)frac;
         return value0;
     }

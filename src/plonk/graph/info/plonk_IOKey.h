@@ -111,6 +111,8 @@ public:
         Imaginary,      ///< Imaginary parts of complex data.
         Gate,           ///< Gate control.
         Loop,           ///< Loop control.
+        Minimum,        ///< A minimum (e.g., threshold)
+        Maximum,        ///< A maximum (e.g., threshold)
         
         BlockSize,          ///< Audio processing block size.
         SampleRate,         ///< Audio processing sample rate.

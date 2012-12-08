@@ -36,43 +36,36 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_TRIGGERCHANNEL_H
-#define PLONK_TRIGGERCHANNEL_H
+#ifndef PLONK_SCHMIDTCHANNEL_H
+#define PLONK_SCHMIDTCHANNEL_H
 
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
-template<class SampleType> class TriggerChannelInternal;
+template<class SampleType> class SchmidtChannelInternal;
 
-PLONK_CHANNELDATA_DECLARE(TriggerChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(SchmidtChannelInternal,SampleType)
 {
     ChannelInternalCore::Data base;
-    
-    int durationRemainingInSamples;
-    SampleType prevValue;
+    SampleType currentState;
 };
 
-/** Trigger. */
+/** Schmidt. */
 template<class SampleType>
-class TriggerChannelInternal
-:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(TriggerChannelInternal,SampleType)>
+class SchmidtChannelInternal 
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(SchmidtChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(TriggerChannelInternal,SampleType)   Data;
+    typedef PLONK_CHANNELDATA_NAME(SchmidtChannelInternal,SampleType)   Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
-    typedef TriggerChannelInternal<SampleType>                          TriggerInternal;
+    typedef SchmidtChannelInternal<SampleType>                          SchmidtInternal;
     typedef ChannelInternal<SampleType,Data>                            Internal;
     typedef ChannelInternalBase<SampleType>                             InternalBase;
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
     typedef NumericalArray<SampleType>                                  Buffer;
-    typedef typename TypeUtility<SampleType>::IndexType                 IndexType;
-    
-    typedef typename TypeUtility<SampleType>::IndexType                 DurationType;
-    typedef UnitBase<DurationType>                                      DurationUnitType;
-    typedef NumericalArray<DurationType>                                DurationBufferType;
-        
-    TriggerChannelInternal (Inputs const& inputs, 
+            
+    SchmidtChannelInternal (Inputs const& inputs, 
                             Data const& data,
                             BlockSize const& blockSize,
                             SampleRate const& sampleRate) throw()
@@ -82,19 +75,19 @@ public:
     
     Text getName() const throw()
     {
-        return "Trigger";
+        return "Schmidt";
     }        
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Generic, IOKey::Duration);
+        const IntArray keys (IOKey::Generic, IOKey::Minimum, IOKey::Maximum);
         return keys;
     }
     
     InternalBase* getChannel (const int index) throw()
     {
         const Inputs channelInputs = this->getInputs().getChannel (index);
-        return new TriggerInternal (channelInputs, 
+        return new SchmidtInternal (channelInputs, 
                                     this->getState(), 
                                     this->getBlockSize(),
                                     this->getSampleRate());
@@ -122,139 +115,137 @@ public:
         const SampleType* inputSamples = inputBuffer.getArray();
         const int inputBufferLength = inputBuffer.length();
 
-        DurationUnitType& durationUnit = ChannelInternalCore::getInputAs<DurationUnitType> (IOKey::Duration);
-        const DurationBufferType& durationBuffer (durationUnit.process (info, channel));
-        const DurationType* durationSamples = durationBuffer.getArray();
-        const int durationBufferLength = durationBuffer.length();
+        UnitType& minimumUnit (this->getInputAsUnit (IOKey::Minimum));
+        const Buffer& minimumBuffer (minimumUnit.process (info, channel));
+        const SampleType* minimumSamples = minimumBuffer.getArray();
+        const int minimumBufferLength = minimumBuffer.length();
+
+        UnitType& maximumUnit (this->getInputAsUnit (IOKey::Maximum));
+        const Buffer& maximumBuffer (maximumUnit.process (info, channel));
+        const SampleType* maximumSamples = maximumBuffer.getArray();
+        const int maximumBufferLength = maximumBuffer.length();
 
         SampleType* outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();
         
-        SampleType prevValue = data.prevValue;
-        DurationType durationRemainingInSamples = data.durationRemainingInSamples;
-        
         const SampleType sampleZero = Math<SampleType>::get0();
         const SampleType sampleOne = Math<SampleType>::get1();
-
-        int i;
+        SampleType currentState = data.currentState;
+        
+        int i = 0;
         
         if (inputBufferLength == outputBufferLength)
         {
-            if (inputBufferLength == durationBufferLength)
+            if ((inputBufferLength == minimumBufferLength) &&
+                (inputBufferLength == maximumBufferLength))
             {
                 for (i = 0; i < outputBufferLength; ++i)
                 {
-                    const SampleType currValue = inputSamples[i];
-                    
-                    if (prevValue <= sampleZero && currValue > sampleZero)
+                    if (currentState == sampleZero)
                     {
-                        durationRemainingInSamples = plonk::max (1, int (durationSamples[i] * data.base.sampleRate));
-                        this->update (Text::getMessageTrigger(), Dynamic::getNull());
+                        if (inputSamples[i] > maximumSamples[i])
+                            currentState = sampleOne;
                     }
-                    
-                    outputSamples[i] = durationRemainingInSamples > 0 ? sampleOne : sampleZero;
-                        
-                    --durationRemainingInSamples;
-                    prevValue = currValue;
+                    else
+                    {
+                        if (inputSamples[i] < minimumSamples[i])
+                            currentState = sampleZero;
+                    }
+
+                    outputSamples[i] = currentState;
                 }
             }
-            else // if (durationBufferLength == 1)
+            else if ((minimumBufferLength == 1) &&
+                     (maximumBufferLength == 1))
             {
-                const DurationType durationInSamples = plonk::max (1, int (durationSamples[0] * data.base.sampleRate));
+                const SampleType minimum = minimumSamples[0];
+                const SampleType maximum = maximumSamples[0];
                 
                 for (i = 0; i < outputBufferLength; ++i)
                 {
-                    const SampleType currValue = inputSamples[i];
-                    
-                    if (prevValue <= sampleZero && currValue > sampleZero)
+                    if (currentState == sampleZero)
                     {
-                        durationRemainingInSamples = durationInSamples;
-                        this->update (Text::getMessageTrigger(), Dynamic::getNull());
+                        if (inputSamples[i] > maximum)
+                            currentState = sampleOne;
+                    }
+                    else
+                    {
+                        if (inputSamples[i] < minimum)
+                            currentState = sampleZero;
                     }
                     
-                    outputSamples[i] = durationRemainingInSamples > 0 ? sampleOne : sampleZero;
-                    
-                    --durationRemainingInSamples;
-                    prevValue = currValue;
+                    outputSamples[i] = currentState;
                 }
             }
         }
-        else
+        else if (i == 0) // none of the other routines executed..
         {
             double inputPosition = 0.0;
             const double inputIncrement = double (inputBufferLength) / double (outputBufferLength);
-            
-            double durationPosition = 0.0;
-            const double durationIncrement = double (durationBufferLength) / double (outputBufferLength);
-            
+            double minimumPosition = 0.0;
+            const double minimumIncrement = double (minimumBufferLength) / double (outputBufferLength);
+            double maximumPosition = 0.0;
+            const double maximumIncrement = double (maximumBufferLength) / double (outputBufferLength);
+   
             for (i = 0; i < outputBufferLength; ++i)
             {
-                const SampleType currValue = inputSamples[int (inputPosition)];
-                
-                if (prevValue <= sampleZero && currValue > sampleZero)
+                if (currentState == sampleZero)
                 {
-                    durationRemainingInSamples = plonk::max (1, int (durationSamples[int (durationPosition)] * data.base.sampleRate));
-                    this->update (Text::getMessageTrigger(), Dynamic::getNull());
+                    if (inputSamples[int (inputPosition)] > maximumSamples[int (maximumPosition)])
+                        currentState = sampleOne;
+                }
+                else
+                {
+                    if (inputSamples[int (inputPosition)] < minimumSamples[int (minimumPosition)])
+                        currentState = sampleZero;
                 }
                 
-                outputSamples[i] = durationRemainingInSamples > 0 ? sampleOne : sampleZero;
-                    
-                --durationRemainingInSamples;
+                outputSamples[i] = currentState;
+                
                 inputPosition += inputIncrement;
-                durationPosition += durationIncrement;
-                prevValue = currValue;
+                minimumPosition += minimumIncrement;
+                maximumPosition += maximumIncrement;
             }
-
         }
-        
-        // prevent overflow
-        if (durationRemainingInSamples < 0)
-            durationRemainingInSamples = 0;
-        
-        data.prevValue = prevValue;
-        data.durationRemainingInSamples = durationRemainingInSamples;
+                            
+                        
+        data.currentState = currentState;
     }
 };
 
 //------------------------------------------------------------------------------
 
-/** Trigger detects signal transitions from zero or less to greater than zero.
- 
- Trigger outputs 1 for the specified duration when the trigger is detected. Then 
- goes back to 0.
+/** Schmidt trigger.
  
  @par Factory functions:
- - ar (input, duration=0.005, preferredBlockSize=default, preferredSampleRate=default)
- - kr (input, duration=0.005)
+ - ar (input, minimum, maximum, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (input, minimum, maximum)
  
  @par Inputs:
  - input: (unit, multi) the input unit within which triggers are detected
- - duration: (unit, multi) the durations of the output trigger signal
+ - minimum: (unit, multi) the lower threshold
+ - maximum: (unit, multi) the upper threshold
  - preferredBlockSize: the preferred output block size 
  - preferredSampleRate: the preferred output sample rate
 
  @ingroup ConverterUnits */
 template<class SampleType>
-class TriggerUnit
+class SchmidtUnit
 {
 public:    
-    typedef TriggerChannelInternal<SampleType>              TriggerInternal;
-    typedef typename TriggerInternal::Data                  Data;
-    typedef ChannelBase<SampleType>                         ChannelType;
-    typedef ChannelInternal<SampleType,Data>                Internal;
-    typedef UnitBase<SampleType>                            UnitType;
-    typedef InputDictionary                                 Inputs;
-
-    typedef typename TriggerInternal::DurationType          DurationType;
-    typedef typename TriggerInternal::DurationUnitType      DurationUnitType;
-    typedef typename TriggerInternal::DurationBufferType    DurationBufferType;
+    typedef SchmidtChannelInternal<SampleType>      SchmidtInternal;
+    typedef typename SchmidtInternal::Data          Data;
+    typedef ChannelBase<SampleType>                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>        Internal;
+    typedef UnitBase<SampleType>                    UnitType;
+    typedef InputDictionary                         Inputs;    
     
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
 
-        return UnitInfo ("Trigger", "Trigger detects signal transitions from zero or less to greater than zero.",
+        return UnitInfo ("Schmidt", "Trigger with hysteresis.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
@@ -262,7 +253,8 @@ public:
 
                          // inputs
                          IOKey::Generic,    Measure::None,     IOInfo::NoDefault,   IOLimit::None,
-                         IOKey::Duration,   Measure::Seconds,  0.005,               IOLimit::Minimum,   Measure::Seconds,   0.0,
+                         IOKey::Minimum,    Measure::None,     IOInfo::NoDefault,   IOLimit::None,
+                         IOKey::Maximum,    Measure::None,     IOInfo::NoDefault,   IOLimit::None,
                          IOKey::BlockSize,  Measure::Samples,  blockSize,           IOLimit::Minimum,   Measure::Samples,   1.0,
                          IOKey::SampleRate, Measure::Hertz,    sampleRate,          IOLimit::Minimum,   Measure::Hertz,     0.0,
                          IOKey::End);
@@ -270,37 +262,39 @@ public:
     
     /** Create an audio rate sample rate converter. */
     static UnitType ar (UnitType const& input,
-                        DurationUnitType const& duration = DurationType (0.005),
+                        UnitType const& minimum,
+                        UnitType const& maximum,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {                                
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
-        inputs.put (IOKey::Duration, duration);
+        inputs.put (IOKey::Minimum, minimum);
+        inputs.put (IOKey::Maximum, maximum);
         
-        Data data = { { -1.0, -1.0 }, 0, 0 };
+        Data data = { { -1.0, -1.0 }, 0 };
                 
-        return UnitType::template createFromInputs<TriggerInternal> (inputs, 
+        return UnitType::template createFromInputs<SchmidtInternal> (inputs, 
                                                                      data,
                                                                      preferredBlockSize,
                                                                      preferredSampleRate);
     }
     
     static inline UnitType kr (UnitType const& input,
-                               DurationUnitType const& duration = DurationType (0.005)) throw()
+                               UnitType const& minimum,
+                               UnitType const& maximum) throw()
     {
-        return ar (input,
-                   duration,
+        return ar (input, minimum, maximum,
                    BlockSize::getControlRateBlockSize(), 
                    SampleRate::getControlRate());
     }
     
 };
 
-typedef TriggerUnit<PLONK_TYPE_DEFAULT> Trigger;
+typedef SchmidtUnit<PLONK_TYPE_DEFAULT> Schmidt;
 
 
 
-#endif // PLONK_TRIGGERCHANNEL_H
+#endif // PLONK_SCHMIDTCHANNEL_H
 
 
