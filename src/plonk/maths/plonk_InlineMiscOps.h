@@ -271,11 +271,17 @@ public:
                                     ValueType const& value2,
                                     IndexType const& frac) throw()
     {
+//        float c0 = y[0];
+//        float c1 = y[1] - 1/3.0*y[-1] - 1/2.0*y[0] - 1/6.0*y[2];
+//        float c2 = 1/2.0*(y[-1]+y[1]) - y[0];
+//        float c3 = 1/6.0*(y[2]-y[-1]) + 1/2.0*(y[0]-y[1]);
+//        return ((c3*x+c2)*x+c1)*x+c0;
+        
         const ValueType half = Math<ValueType>::get0_5();
         const ValueType third = Math<ValueType>::get1_3();
         const ValueType sixth = Math<ValueType>::get1_6();
         const ValueType c0 = value0;
-        const ValueType c1 = value1 - third * value_1 - half * value0 - third * value2;
+        const ValueType c1 = value1 - third * value_1 - half * value0 - sixth * value2;
         const ValueType c2 = half * (value_1 + value1) - value0;
         const ValueType c3 = sixth * (value2 - value_1) + half * (value0 - value1);
         return ((c3 * frac + c2) * frac + c1) * frac + c0;

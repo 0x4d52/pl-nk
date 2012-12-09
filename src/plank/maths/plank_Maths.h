@@ -706,6 +706,29 @@ static inline int pl_LookupI (const int* table, int index) { return table[index]
 static inline PlankLL pl_LookupLL (const PlankLL* table, PlankLL index) { return table[index]; }
 
 
+static inline float pl_Lag3InterpF (float value_1, float value0, float value1, float value2, float frac)
+{    
+    float c0 = value0;
+    float c1 = value1 - (1.f/3.f) * value_1 - 0.5f * value0 - (1.f/3.f) * value2;
+    float c2 = 0.5f * (value_1 + value1) - value0;
+    float c3 = (1.f/6.f) * (value2 - value_1) + 0.5f * (value0 - value1);
+    return ((c3 * frac + c2) * frac + c1) * frac + c0;
+}
+
+static inline float pl_LookupLag3F (const float* table, float index)
+{
+    int index0, index1, index_1, index2;
+    float frac;
+    index0 = (int)index;
+    index1 = index0 + 1;
+    index_1 = index0 - 1;
+    index2 = index1 + 1;
+    frac = index - (float)index0;
+    return pl_Lag3InterpF (table[index_1], table[index0], table[index1], table[index2], frac);
+}
+
+
+
 /// @} // End group PlankMathsFunctions
 
 #endif // PLANK_MATHS_H
