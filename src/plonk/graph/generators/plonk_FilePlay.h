@@ -280,18 +280,7 @@ public:
         } 
         else return UnitType::getNull();
     }
-    
-//    /** Create a control rate audio file player. */
-//    static UnitType kr (SignalType const& signal,
-//                        RateUnitType const& rate, 
-//                        UnitType const& mul = SampleType (1),
-//                        UnitType const& add = SampleType (0)) throw()
-//    {
-//        return ar (signal, rate, mul, add, 
-//                   BlockSize::getControlRateBlockSize(), 
-//                   SampleRate::getControlRate());
-//    }        
-    
+        
     /** A simple file player to handle buffering and sample rate conversion.
      This just adds a Task and Resample unit to the chain to buffer the 
      file playing on a background thread and resample the audio back to the

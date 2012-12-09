@@ -49,6 +49,20 @@
 #include "plonk_SimpleArray.h"
 
 
+template<class ValueType>
+struct ShapeState
+{
+    ValueType currentLevel;
+    ValueType targetLevel;
+    ValueType grow;
+    ValueType a2;
+    ValueType b1;
+    ValueType y1;
+    ValueType y2;
+    int shapeType;
+    float curve;
+};
+
 class Shape
 {
 public:
