@@ -44,7 +44,7 @@
 
 
 /** Resampler. */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode= Interp::Linear>
 class ResampleChannelInternal
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {
@@ -63,8 +63,10 @@ public:
     typedef UnitBase<RateType>                                      RateUnitType;
     typedef NumericalArray<RateType>                                RateBufferType;
 //    typedef InterpLinear<SampleType,IndexType>                      InterpType;
-    typedef InterpLagrange3<SampleType,IndexType>                   InterpType;
-    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
+//    typedef InterpLagrange3<SampleType,IndexType>                   InterpType;
+    
+    typedef typename InterpSelect<SampleType,IndexType,InterpTypeCode>::InterpType  InterpType;
+    typedef typename InterpType::ExtensionBuffer                                    ExtensionBuffer;
     
     ResampleChannelInternal (Inputs const& inputs,
                              Data const& data,
@@ -160,7 +162,6 @@ public:
     
     void process (ProcessInfo& info, const int channel) throw()
     {
-        int i;        
         const Data& data = this->getState();
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
@@ -191,7 +192,6 @@ public:
                 
                 if (tempBufferIncrement == Math<IndexType>::get0())
                 {
-                    int tempBufferLength = this->tempBuffer.length();
                     SampleType* tempBufferSamples = this->tempBuffer.getArray();
                     const SampleType dcOutput = InterpType::lookup (tempBufferSamples, tempBufferPos);
                     NumericalArrayFiller<SampleType>::fill (outputSamples, dcOutput, outputBufferLength);

@@ -219,8 +219,43 @@ inline Type explin (Type const& input,
 
 //------------------------------------------------------------------------------
 
-template<class ValueType, class IndexType, signed Extension, signed Offset>
+template<class ValueType, class IndexType, signed Extension, signed Offset> class InterpBase;
+template<class ValueType, class IndexType> class InterpLinear;
+template<class ValueType, class IndexType> class InterpLagrange3;
+
 class Interp
+{
+public:
+    enum TypeCode
+    {
+        Linear,
+        Lagrange3,
+        NumTypes
+    };
+};
+
+template<class ValueType, class IndexType, Interp::TypeCode TypeCode>
+class InterpSelect
+{
+};
+
+template<class ValueType, class IndexType>
+class InterpSelect<ValueType, IndexType, Interp::Linear>
+{
+public:
+    typedef InterpLinear<ValueType,IndexType> InterpType;
+};
+
+template<class ValueType, class IndexType>
+class InterpSelect<ValueType, IndexType, Interp::Lagrange3>
+{
+public:
+    typedef InterpLagrange3<ValueType,IndexType> InterpType;
+};
+
+
+template<class ValueType, class IndexType, signed Extension, signed Offset>
+class InterpBase : public Interp
 {
 public:
     struct ExtensionBuffer
@@ -241,7 +276,7 @@ public:
 };
 
 template<class ValueType, class IndexType>
-class InterpLinear : public Interp<ValueType,IndexType,1,0>
+class InterpLinear : public InterpBase<ValueType,IndexType,1,0>
 {
 public:    
     static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
@@ -259,7 +294,7 @@ public:
 };
 
 template<class ValueType>
-class InterpLinear<ValueType,int> : public Interp<ValueType,int,1,0>
+class InterpLinear<ValueType,int> : public InterpBase<ValueType,int,1,0>
 {
 public:
     typedef int IndexType;
@@ -278,7 +313,7 @@ public:
 };
 
 template<class ValueType, class IndexType>
-class InterpLagrange3 : public Interp<ValueType,IndexType,4,1>
+class InterpLagrange3 : public InterpBase<ValueType,IndexType,4,1>
 {
 public:
     static inline ValueType interp (ValueType const& value_1,
@@ -309,7 +344,7 @@ public:
 };
 
 template<class ValueType>
-class InterpLagrange3<ValueType,int> : public Interp<ValueType,int,4,1>
+class InterpLagrange3<ValueType,int> : public InterpBase<ValueType,int,4,1>
 {
 public:
     typedef int IndexType;
