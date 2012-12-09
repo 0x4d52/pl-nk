@@ -62,8 +62,9 @@ public:
     typedef typename TypeUtility<SampleType>::IndexType             RateType;
     typedef UnitBase<RateType>                                      RateUnitType;
     typedef NumericalArray<RateType>                                RateBufferType;
-    typedef InterpLinear<SampleType,IndexType>                      InterpType;
-//    typedef InterpLagrange3<SampleType,IndexType>                   InterpType;
+//    typedef InterpLinear<SampleType,IndexType>                      InterpType;
+    typedef InterpLagrange3<SampleType,IndexType>                   InterpType;
+    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     ResampleChannelInternal (Inputs const& inputs,
                              Data const& data,
@@ -108,7 +109,7 @@ public:
         this->initValue (sourceValue);
         
         // larger for interpolation
-        resizeTempBuffer (input.getBlockSize (channel).getValue() + 4);
+        resizeTempBuffer (input.getBlockSize (channel).getValue() + InterpType::getExtension());
         tempBuffer.zero(); // was a bug on interpolation here..
         tempBufferPos = tempBufferPosMax;
         
@@ -120,17 +121,46 @@ public:
         if (inputBufferLength != tempBuffer.length())
         {
             tempBuffer.setSize (inputBufferLength, false);
-            tempBufferUsableLength = IndexType (inputBufferLength) - Math<IndexType>::get4();
-            tempBufferPosMax = tempBufferUsableLength + Math<IndexType>::get1();
+            tempBufferUsableLength = IndexType (inputBufferLength) - InterpType::getExtensionAsIndex();
+            tempBufferPosMax = tempBufferUsableLength + InterpType::getOffsetAsIndex();
         }
+    }
+    
+    inline void getNextInputBuffer (ProcessInfo& info, const int channel, SampleType* &tempBufferSamples, int& tempBufferLength) throw()
+    {
+        const int extension = InterpType::getExtension();
+
+        UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
+
+        info.setTimeStamp (nextInputTimeStamp);
+        const Buffer& inputBuffer (inputUnit.process (info, channel));
+        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
+        
+        const SampleType* const inputSamples = inputBuffer.getArray();
+        const int inputBufferLength = inputBuffer.length();
+        
+        ExtensionBuffer interpolationValues;
+        Buffer::copyData (interpolationValues.buffer,
+                          tempBufferSamples + tempBufferLength - extension,
+                          extension);
+        
+        tempBufferPos -= tempBufferUsableLength;               // move this before resize
+        tempBufferLength = inputBufferLength + extension;      // larger for interpolation
+        resizeTempBuffer (tempBufferLength);
+        tempBufferSamples = this->tempBuffer.getArray();
+        
+        Buffer::copyData (tempBufferSamples,
+                          interpolationValues.buffer,
+                          extension);
+        
+        Buffer::copyData (tempBufferSamples + extension,
+                          inputSamples,
+                          inputBufferLength);
     }
     
     void process (ProcessInfo& info, const int channel) throw()
     {
-        /* Be careful optimising this with the new NumericalArray vector stuff */
-        
-        int i;
-        
+        int i;        
         const Data& data = this->getState();
         
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
@@ -143,10 +173,8 @@ public:
         
         if (inputSampleRate <= 0.0)
         {
-            const SampleType inputValue = inputUnit.process (info, channel).atUnchecked (0);
-            
-            for (i = 0; i < outputBufferLength; ++i)
-                outputSamples[i] = inputValue;
+            const SampleType inputValue = inputUnit.process (info, channel).atUnchecked (0);            
+            NumericalArrayFiller<SampleType>::fill (outputSamples, inputValue, outputBufferLength);
         }
         else
         {
@@ -156,48 +184,33 @@ public:
             const RateBufferType& rateBuffer (rateUnit.process (info, channel));
             const RateType* rateSamples = rateBuffer.getArray();
             const int rateBufferLength = rateBuffer.length();
-            
+                        
             if (rateBufferLength == 1)
             {
                 const IndexType tempBufferIncrement (inputSampleRate * IndexType (data.sampleDuration) * rateSamples[0]);
                 
-                while (outputSamples < outputSamplesEnd)
+                if (tempBufferIncrement == Math<IndexType>::get0())
                 {
                     int tempBufferLength = this->tempBuffer.length();
                     SampleType* tempBufferSamples = this->tempBuffer.getArray();
-                    
-                    if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+                    const SampleType dcOutput = InterpType::lookup (tempBufferSamples, tempBufferPos);
+                    NumericalArrayFiller<SampleType>::fill (outputSamples, dcOutput, outputBufferLength);
+                }
+                else
+                {
+                    while (outputSamples < outputSamplesEnd)
                     {
-                        info.setTimeStamp (nextInputTimeStamp);
-                        const Buffer& inputBuffer (inputUnit.process (info, channel));
-                        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
+                        int tempBufferLength = this->tempBuffer.length();
+                        SampleType* tempBufferSamples = this->tempBuffer.getArray();
                         
-                        const SampleType* const inputSamples = inputBuffer.getArray();
-                        const int inputBufferLength = inputBuffer.length();
+                        if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
+                            getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
                         
-                        const SampleType interpolationValues[4] = { tempBufferSamples[tempBufferLength - 4],
-                                                                    tempBufferSamples[tempBufferLength - 3],
-                                                                    tempBufferSamples[tempBufferLength - 2],
-                                                                    tempBufferSamples[tempBufferLength - 1] };
-                        
-                        tempBufferPos -= tempBufferUsableLength;        // move this before resize
-                        tempBufferLength = inputBufferLength + 4;       // larger for interpolation
-                        resizeTempBuffer (tempBufferLength);
-                        tempBufferSamples = this->tempBuffer.getArray();
-                        
-                        tempBufferSamples[0] = interpolationValues[0];
-                        tempBufferSamples[1] = interpolationValues[1];
-                        tempBufferSamples[2] = interpolationValues[2];
-                        tempBufferSamples[3] = interpolationValues[3];
-                        
-                        for (i = 0; i < inputBufferLength; ++i)
-                            tempBufferSamples[i + 4] = inputSamples[i];
-                    }
-                    
-                    while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
-                    {
-                        *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
-                        tempBufferPos += tempBufferIncrement;
+                        while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
+                        {
+                            *outputSamples++ = InterpType::lookup (tempBufferSamples, tempBufferPos);
+                            tempBufferPos += tempBufferIncrement;
+                        }
                     }
                 }
             }
@@ -209,32 +222,7 @@ public:
                     SampleType* tempBufferSamples = this->tempBuffer.getArray();
                     
                     if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
-                    {
-                        info.setTimeStamp (nextInputTimeStamp);
-                        const Buffer& inputBuffer (inputUnit.process (info, channel));
-                        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
-                        
-                        const SampleType* const inputSamples = inputBuffer.getArray();
-                        const int inputBufferLength = inputBuffer.length();
-                        
-                        const SampleType interpolationValues[4] = { tempBufferSamples[tempBufferLength - 4],
-                                                                    tempBufferSamples[tempBufferLength - 3],
-                                                                    tempBufferSamples[tempBufferLength - 2],
-                                                                    tempBufferSamples[tempBufferLength - 1] };
-                        
-                        tempBufferPos -= tempBufferUsableLength;        // move this before resize
-                        tempBufferLength = inputBufferLength + 4;       // larger for interpolation
-                        resizeTempBuffer (tempBufferLength);
-                        tempBufferSamples = this->tempBuffer.getArray();
-                        
-                        tempBufferSamples[0] = interpolationValues[0];
-                        tempBufferSamples[1] = interpolationValues[1];
-                        tempBufferSamples[2] = interpolationValues[2];
-                        tempBufferSamples[3] = interpolationValues[3];
-                        
-                        for (i = 0; i < inputBufferLength; ++i)
-                            tempBufferSamples[i + 4] = inputSamples[i];
-                    }
+                        getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
                     
                     while ((outputSamples < outputSamplesEnd) && (tempBufferPos < tempBufferPosMax))
                     {
@@ -243,8 +231,6 @@ public:
                         tempBufferPos += tempBufferIncrement;
                     }
                 }
-                
-                //                outputSamplesEnd[-1] = 0.5; // intentional glitch to see buffer ends
             }
             else
             {
@@ -254,32 +240,7 @@ public:
                     SampleType* tempBufferSamples = this->tempBuffer.getArray();
                     
                     if (tempBufferPos >= tempBufferPosMax) // ran out of buffer
-                    {
-                        info.setTimeStamp (nextInputTimeStamp);
-                        const Buffer& inputBuffer (inputUnit.process (info, channel));
-                        nextInputTimeStamp = inputUnit.getNextTimeStamp (channel);
-                        
-                        const SampleType* const inputSamples = inputBuffer.getArray();
-                        const int inputBufferLength = inputBuffer.length();
-                        
-                        const SampleType interpolationValues[4] = { tempBufferSamples[tempBufferLength - 4],
-                                                                    tempBufferSamples[tempBufferLength - 3],
-                                                                    tempBufferSamples[tempBufferLength - 2],
-                                                                    tempBufferSamples[tempBufferLength - 1] };
-                        
-                        tempBufferPos -= tempBufferUsableLength;        // move this before resize
-                        tempBufferLength = inputBufferLength + 4;       // larger for interpolation
-                        resizeTempBuffer (tempBufferLength);
-                        tempBufferSamples = this->tempBuffer.getArray();
-                        
-                        tempBufferSamples[0] = interpolationValues[0];
-                        tempBufferSamples[1] = interpolationValues[1];
-                        tempBufferSamples[2] = interpolationValues[2];
-                        tempBufferSamples[3] = interpolationValues[3];
-                        
-                        for (i = 0; i < inputBufferLength; ++i)
-                            tempBufferSamples[i + 4] = inputSamples[i];
-                    }
+                        getNextInputBuffer (info, channel, tempBufferSamples, tempBufferLength);
                     
                     double ratePosition = 0.0;
                     const double rateIncrement = double (rateBufferLength) / double (outputBufferLength);

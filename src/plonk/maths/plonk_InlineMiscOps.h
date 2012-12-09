@@ -219,13 +219,29 @@ inline Type explin (Type const& input,
 
 //------------------------------------------------------------------------------
 
-template<class ValueType, class IndexType>
-class InterpBase
+template<class ValueType, class IndexType, signed Extension, signed Offset>
+class Interp
 {
+public:
+    struct ExtensionBuffer
+    {
+        ValueType buffer[Extension];
+    };
+    
+    enum InterpType
+    {
+        Linear,
+        Lagrange3,
+    };
+    
+    static inline int getExtension() throw() { return Extension; }
+    static inline int getOffset() throw() { return Offset; }
+    static inline const IndexType& getExtensionAsIndex() throw() { static const IndexType v (Extension); return v; }
+    static inline const IndexType& getOffsetAsIndex() throw() { static const IndexType v (Offset); return v; }
 };
 
 template<class ValueType, class IndexType>
-class InterpLinear : public InterpBase<ValueType,IndexType>
+class InterpLinear : public Interp<ValueType,IndexType,1,0>
 {
 public:    
     static inline ValueType interp (ValueType const& value0, ValueType const& value1, IndexType const& frac) throw()
@@ -243,7 +259,7 @@ public:
 };
 
 template<class ValueType>
-class InterpLinear<ValueType,int> : public InterpBase<ValueType,int>
+class InterpLinear<ValueType,int> : public Interp<ValueType,int,1,0>
 {
 public:
     typedef int IndexType;
@@ -262,7 +278,7 @@ public:
 };
 
 template<class ValueType, class IndexType>
-class InterpLagrange3 : public InterpBase<ValueType,IndexType>
+class InterpLagrange3 : public Interp<ValueType,IndexType,4,1>
 {
 public:
     static inline ValueType interp (ValueType const& value_1,
@@ -270,13 +286,7 @@ public:
                                     ValueType const& value1,
                                     ValueType const& value2,
                                     IndexType const& frac) throw()
-    {
-//        float c0 = y[0];
-//        float c1 = y[1] - 1/3.0*y[-1] - 1/2.0*y[0] - 1/6.0*y[2];
-//        float c2 = 1/2.0*(y[-1]+y[1]) - y[0];
-//        float c3 = 1/6.0*(y[2]-y[-1]) + 1/2.0*(y[0]-y[1]);
-//        return ((c3*x+c2)*x+c1)*x+c0;
-        
+    {        
         const ValueType half = Math<ValueType>::get0_5();
         const ValueType third = Math<ValueType>::get1_3();
         const ValueType sixth = Math<ValueType>::get1_6();
@@ -299,7 +309,7 @@ public:
 };
 
 template<class ValueType>
-class InterpLagrange3<ValueType,int> : public InterpBase<ValueType,int>
+class InterpLagrange3<ValueType,int> : public Interp<ValueType,int,4,1>
 {
 public:
     typedef int IndexType;
