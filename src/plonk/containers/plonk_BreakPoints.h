@@ -52,6 +52,7 @@
 template<class ValueType>
 struct ShapeState
 {
+    LongLong stepsToTarget;
     ValueType currentLevel;
     ValueType targetLevel;
     ValueType grow;
@@ -95,6 +96,36 @@ public:
 	float getCurve() const throw()					{ return curve; }
 	void setType (ShapeType const& newType) throw()	{ type = newType; }
 	void setCurve (const float newCurve) throw()	{ type = Numerical; curve = newCurve; }
+    
+    template<class ValueType>
+    static inline void initLinear (ShapeState<ValueType>& shapeState) throw()
+    {        
+        const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
+        shapeState.grow = diff / shapeState.stepsToTarget;
+    }
+
+    template<class ValueType>
+    static inline void initNumerical (ShapeState<ValueType>& shapeState) throw()
+    {
+        const ValueType& zero = Math<ValueType>::get0();
+        const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
+        
+        if ((plonk::abs (shapeState.curve) < 0.001f) || (diff == zero))
+        {
+            shapeState.shapeType = Shape::Linear;
+            shapeState.curve = 0.f;
+            
+            initLinear (shapeState);
+        }
+        else
+        {
+            const ValueType& one = Math<ValueType>::get1();
+            const ValueType a1 = diff / (one - plonk::exp (shapeState.curve));
+            shapeState.a2 = shapeState.currentLevel + a1;
+            shapeState.b1 = a1;
+            shapeState.grow = plonk::exp (shapeState.curve / ValueType (shapeState.stepsToTarget));
+        }
+    }
 
 private:
     ShapeType type;

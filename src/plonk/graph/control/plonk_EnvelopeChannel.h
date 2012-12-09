@@ -49,7 +49,6 @@ PLONK_CHANNELDATA_DECLARE(EnvelopeChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     
-    LongLong samplesUntilTarget;
     ShapeState<SampleType> shapeState;
     int targetPointIndex;
 
@@ -122,7 +121,7 @@ public:
         {
             // sustain
             data.shapeState.grow = SampleType (0);
-            data.samplesUntilTarget = samplesRemaining;
+            data.shapeState.stepsToTarget = samplesRemaining;
         }
         else 
         {
@@ -135,7 +134,7 @@ public:
                 data.shapeState.shapeType = Shape::Linear;
                 data.shapeState.curve = 0.f;
                 data.shapeState.grow = SampleType (0);
-                data.samplesUntilTarget = samplesRemaining;
+                data.shapeState.stepsToTarget = samplesRemaining;
             }
             else if (index >= breakpoints.getNumBreakpoints())
             {
@@ -144,7 +143,7 @@ public:
                 data.shapeState.shapeType = Shape::Linear;
                 data.shapeState.curve = 0.f;
                 data.shapeState.grow = SampleType (0);
-                data.samplesUntilTarget = TypeUtility<LongLong>::getTypePeak();
+                data.shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
                 data.done = true;
                 
                 this->update (Text::getMessageDone(), Dynamic::getNull());
@@ -188,36 +187,18 @@ public:
     {
         Data& data = this->getState();
         data.shapeState.targetLevel = targetBreakpoint.getTargetLevel();
+        data.shapeState.stepsToTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
 
-        const SampleType diff = data.shapeState.targetLevel - data.shapeState.currentLevel;
-        data.samplesUntilTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
-        data.shapeState.grow = diff / data.samplesUntilTarget;
+        Shape::initLinear (data.shapeState);
     }
     
     inline void initNumerical (BreakpointType const& targetBreakpoint) throw()
     {
-        Data& data = this->getState();
-        const SampleType& zero = Math<SampleType>::get0();
-        
+        Data& data = this->getState();        
         data.shapeState.targetLevel = targetBreakpoint.getTargetLevel();
-        const SampleType diff = data.shapeState.targetLevel - data.shapeState.currentLevel;
-        
-        if ((plonk::abs (data.shapeState.curve) < 0.001f) || (diff == zero))
-        {
-            data.shapeState.shapeType = Shape::Linear;
-            data.shapeState.curve = 0.f;
+        data.shapeState.stepsToTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
 
-            initLinear (targetBreakpoint);
-        }
-        else
-        {
-            const SampleType& one = Math<SampleType>::get1();
-            const SampleType a1 = diff / (one - plonk::exp (data.shapeState.curve));
-            data.samplesUntilTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
-            data.shapeState.a2 = data.shapeState.currentLevel + a1;
-            data.shapeState.b1 = a1;
-            data.shapeState.grow = plonk::exp (data.shapeState.curve / SampleType (data.samplesUntilTarget));
-        }
+        Shape::initNumerical (data.shapeState);
     }
     
     inline void processLinear (SampleType* const outputSamples, const int numSamples) throw()
@@ -230,7 +211,7 @@ public:
             for (int i = 0; i < numSamples; ++i)
                 outputSamples[i] = data.shapeState.currentLevel;
         }
-        else if (numSamples == data.samplesUntilTarget)
+        else if (numSamples == data.shapeState.stepsToTarget)
         {
             const int lastIndex = numSamples - 1;
             
@@ -256,7 +237,7 @@ public:
     {
         Data& data = this->getState();
         
-        if (numSamples == data.samplesUntilTarget)
+        if (numSamples == data.shapeState.stepsToTarget)
         {
             const int lastIndex = numSamples - 1;
 
@@ -314,7 +295,7 @@ public:
             
             while (samplesRemaining > 0)
             {
-                const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.samplesUntilTarget));
+                const int samplesThisTime = int (plonk::min (LongLong (samplesRemaining), data.shapeState.stepsToTarget));
                 
                 if (samplesThisTime > 0)
                 {
@@ -322,10 +303,10 @@ public:
                                         
                     outputSamples += samplesThisTime;
                     samplesRemaining -= samplesThisTime;
-                    data.samplesUntilTarget -= samplesThisTime;
+                    data.shapeState.stepsToTarget -= samplesThisTime;
                 }
                 
-                if (data.samplesUntilTarget == 0)
+                if (data.shapeState.stepsToTarget == 0)
                     this->nextTargetPoint (currGate, samplesRemaining);
             }
             
@@ -342,7 +323,7 @@ public:
                                     
                 processShape (outputSamples++, 1, data.shapeState.shapeType);
                 
-                if (data.samplesUntilTarget-- == 0)
+                if (data.shapeState.stepsToTarget-- == 0)
                     this->nextTargetPoint (currGate, 1);
                 
                 data.prevGate = currGate;
@@ -360,9 +341,9 @@ public:
                 if (currGate != data.prevGate)
                     this->nextTargetPoint (currGate, 1);
                 
-                processShape (outputSamples++, 1, data.shapeState.shapeType);
+                processShape (outputSamples++, 1, data.shapeState.  shapeType);
                     
-                if (data.samplesUntilTarget-- == 0)
+                if (data.shapeState.stepsToTarget-- == 0)
                     this->nextTargetPoint (currGate, 1);
                 
                 data.prevGate = currGate;
@@ -437,9 +418,9 @@ public:
         inputs.put (IOKey::Gate, gate);
         
         Data data = { { -1.0, -1.0 },
-            0, 0, 0, 0,
-            0, 0, 0, 0, // coeffs
-            Shape::Linear, 0.f,
+            { 0, 0, 0, 0,
+              0, 0, 0, 0, // coeffs
+              Shape::Linear, 0.f },
             -1,
             false, false, deleteWhenDone };
         
