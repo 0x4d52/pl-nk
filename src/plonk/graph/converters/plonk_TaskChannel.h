@@ -293,7 +293,9 @@ public:
     typedef ChannelInternal<SampleType,Data>            Internal;
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;
-        
+    typedef ResampleUnit<SampleType,Interp::Linear>     ResampleType;
+
+    
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
@@ -329,7 +331,7 @@ public:
         // could avoid the resample if we added the function the check if all bs/sr are the same in each channel
         
         Inputs inputs;
-        inputs.put (IOKey::Generic, ResampleUnit<SampleType>::ar (input, 1, blockSize, sampleRate));
+        inputs.put (IOKey::Generic, ResampleType::ar (input, 1, blockSize, sampleRate));
                         
         Data data = { { -1.0, -1.0 }, 0, numBuffers, priority };
         

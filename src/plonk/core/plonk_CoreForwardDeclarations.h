@@ -43,7 +43,7 @@ class SmartPointer;
 class SmartPointerCounter;
 class WeakPointer;
 class TypeCode;
-    
+
 template<class Type>                                class TypeUtility;
 template<class OriginalType>                        class WeakPointerContainer;
 template<class SmartPointerType>                    class SmartPointerContainerBase;

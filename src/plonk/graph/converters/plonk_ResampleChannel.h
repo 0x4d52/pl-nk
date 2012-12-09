@@ -44,29 +44,28 @@
 
 
 /** Resampler. */
-template<class SampleType, Interp::TypeCode InterpTypeCode= Interp::Linear>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class ResampleChannelInternal
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
-    typedef ChannelInternalCore::Data                   Data;
-    typedef ChannelBase<SampleType>                     ChannelType;
-    typedef ResampleChannelInternal<SampleType>         ResampleInternal;
-    typedef ChannelInternal<SampleType,Data>            Internal;
-    typedef ChannelInternalBase<SampleType>             InternalBase;
-    typedef UnitBase<SampleType>                        UnitType;
-    typedef InputDictionary                             Inputs;
-    typedef NumericalArray<SampleType>                  Buffer;
-    typedef typename TypeUtility<SampleType>::IndexType IndexType;
+    typedef ChannelInternalCore::Data                               Data;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ResampleChannelInternal<SampleType,InterpTypeCode>      ResampleInternal;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef ChannelInternalBase<SampleType>                         InternalBase;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
+    typedef NumericalArray<SampleType>                              Buffer;
+    typedef typename TypeUtility<SampleType>::IndexType             IndexType;
     
     typedef typename TypeUtility<SampleType>::IndexType             RateType;
     typedef UnitBase<RateType>                                      RateUnitType;
     typedef NumericalArray<RateType>                                RateBufferType;
-//    typedef InterpLinear<SampleType,IndexType>                      InterpType;
-//    typedef InterpLagrange3<SampleType,IndexType>                   InterpType;
     
-    typedef typename InterpSelect<SampleType,IndexType,InterpTypeCode>::InterpType  InterpType;
-    typedef typename InterpType::ExtensionBuffer                                    ExtensionBuffer;
+    typedef InterpSelect<SampleType,IndexType,InterpTypeCode>       InterpSelect;
+    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     ResampleChannelInternal (Inputs const& inputs,
                              Data const& data,
@@ -522,16 +521,16 @@ private:
  - preferredSampleRate: the preferred output sample rate
 
  @ingroup ConverterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class ResampleUnit
 {
 public:    
-    typedef ResampleChannelInternal<SampleType>     ResampleInternal;
-    typedef typename ResampleInternal::Data         Data;
-    typedef ChannelBase<SampleType>                 ChannelType;
-    typedef ChannelInternal<SampleType,Data>        Internal;
-    typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;    
+    typedef ResampleChannelInternal<SampleType,InterpTypeCode>      ResampleInternal;
+    typedef typename ResampleInternal::Data                         Data;
+    typedef ChannelBase<SampleType>                                 ChannelType;
+    typedef ChannelInternal<SampleType,Data>                        Internal;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;    
 
     typedef typename ResampleInternal::RateType         RateType;
     typedef typename ResampleInternal::RateUnitType     RateUnitType;
@@ -587,8 +586,8 @@ public:
     
 };
 
-typedef ResampleUnit<PLONK_TYPE_DEFAULT> Resample;
-
+typedef ResampleUnit<PLONK_TYPE_DEFAULT,Interp::Linear>     ResampleLinear;
+typedef ResampleUnit<PLONK_TYPE_DEFAULT,Interp::Lagrange3>  ResampleLagrange3;
 
 
 #endif // PLONK_RESAMPLECHANNEL_H

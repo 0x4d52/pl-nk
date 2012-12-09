@@ -299,11 +299,11 @@ public:
     class Simple
     {
     public:
-        typedef TaskUnit<SampleType>                             TaskType;
+        typedef TaskUnit<SampleType>                            TaskType;
 
-        typedef ResampleUnit<SampleType>                         ResampleType;
-        typedef typename ResampleUnit<SampleType>::RateType      RateType;
-        typedef typename ResampleUnit<SampleType>::RateUnitType  RateUnitType;
+        typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+        typedef typename ResampleType::RateType                 RateType;
+        typedef typename ResampleType::RateUnitType             RateUnitType;
         
         static UnitType ar (AudioFileReader const& file,
                             RateUnitType const& rate = Math<RateUnitType>::get1(),

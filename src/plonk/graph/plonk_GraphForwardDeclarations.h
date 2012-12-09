@@ -41,6 +41,7 @@
 
 #include "../maths/plonk_InlineBinaryOps.h"
 #include "../maths/plonk_InlineUnaryOps.h"
+#include "../maths/plonk_InlineMiscOps.h"
 #include "../core/plonk_CoreForwardDeclarations.h"
 #include "../containers/plonk_ContainerForwardDeclarations.h"
 #include "../containers/variables/plonk_VariableForwardDeclarations.h"
@@ -83,7 +84,7 @@ template<class SampleType>                                              class Mu
 
 // common units
 template<class SampleType>                                              class MulAddUnit;
-template<class SampleType>                                              class ResampleUnit;
+template<class SampleType,Interp::TypeCode>                             class ResampleUnit;
 template<class SampleType>                                              class MixerUnit;
 template<class SampleType>                                              class OverlapMakeUnit;
 template<class SampleType>                                              class OverlapMixUnit;

@@ -687,16 +687,27 @@ public:
     
     /** Resamples this unit to a different sample rate and/or block size. 
      By default the default sample rate and default block size are used. */
-    inline UnitBase ar (BlockSize const& preferredBlockSize = BlockSize::getDefault(),
-                        SampleRate const& preferredSampleRate = SampleRate::getDefault()) const throw()
+    UnitBase ar (const Interp::TypeCode interpType = Interp::Linear,
+                 BlockSize const& preferredBlockSize = BlockSize::getDefault(),
+                 SampleRate const& preferredSampleRate = SampleRate::getDefault()) const throw()
     {
-        return ResampleUnit<SampleType>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
+        switch (interpType)
+        {
+            case Interp::Linear:    return ResampleUnit<SampleType,Interp::Linear>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
+            case Interp::Lagrange3: return ResampleUnit<SampleType,Interp::Lagrange3>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
+            default:                return ResampleUnit<SampleType,Interp::Linear>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
+        }
     }    
     
     /** Resamples this unit to the default control rate sample rate and block size. */
-    inline UnitBase kr() const throw()
+    UnitBase kr (const Interp::TypeCode interpType = Interp::Linear) const throw()
     {
-        return ResampleUnit<SampleType>::kr (*this);
+        switch (interpType)
+        {
+            case Interp::Linear:    return ResampleUnit<SampleType,Interp::Linear>::kr (*this);
+            case Interp::Lagrange3: return ResampleUnit<SampleType,Interp::Lagrange3>::kr (*this);
+            default:                return ResampleUnit<SampleType,Interp::Linear>::kr (*this);
+        }
     }
     
     /** Mixes this unit down to a single channel. */

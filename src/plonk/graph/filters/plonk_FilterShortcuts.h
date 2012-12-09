@@ -70,7 +70,7 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -165,7 +165,7 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -259,7 +259,7 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -354,7 +354,7 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -448,7 +448,7 @@ public:
     typedef FilterShape<SampleType, FilterFormType::P1b, FilterShapeType::DC>   FilterShape;
     typedef FilterForm<SampleType, FilterFormType::P1b>                         FormType;
     typedef FilterUnit<FormType>                                                FilterType;
-    typedef ResampleUnit<SampleType>                                            ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>                             ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -534,7 +534,7 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
 
     static inline UnitInfos getInfo() throw()
     {
@@ -634,7 +634,7 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -735,7 +735,7 @@ public:
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -843,7 +843,7 @@ public:
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -951,7 +951,7 @@ public:
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -1058,7 +1058,7 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -1158,7 +1158,7 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -1252,7 +1252,7 @@ typedef BRFUnit<PLONK_TYPE_DEFAULT> BRF;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class LPFUnit
 {
 public:
@@ -1261,9 +1261,11 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef typename FormType::Data                         FormData;
     typedef typename FilterShape::Data                      FilterShapeData;
+    
+    typedef LPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -1358,7 +1360,7 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType>                        ResampleType;
+    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
     
     static inline UnitInfos getInfo() throw()
     {
