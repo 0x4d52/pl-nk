@@ -53,16 +53,6 @@ public:
     virtual void setValue (Type const& newValue) = 0;
 };
 
-//template<class Type>
-//class VariableInternalBase<Type&> : public SmartPointer
-//{
-//public:
-//    ~VariableInternalBase() { }
-//    virtual Type& getValue() = 0;
-//    virtual void setValue (Type& newValue) = 0;
-//};
-
-
 
 //------------------------------------------------------------------------------
 

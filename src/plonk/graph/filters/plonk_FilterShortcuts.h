@@ -61,7 +61,7 @@
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class LPFP1Unit
 {
 public:
@@ -70,7 +70,8 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef LPFP1Unit<SampleType,Interp::Lagrange3>         HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -156,7 +157,7 @@ typedef LPFP1Unit<PLONK_TYPE_DEFAULT> LPFP1;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits ControlUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class LagUnit
 {
 public:
@@ -165,7 +166,8 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef LagUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -250,7 +252,7 @@ typedef LagUnit<PLONK_TYPE_DEFAULT> Lag;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class HPFP1Unit
 {
 public:
@@ -259,7 +261,8 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef HPFP1Unit<SampleType,Interp::Lagrange3>         HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -345,7 +348,7 @@ typedef HPFP1Unit<PLONK_TYPE_DEFAULT> HPFP1;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits ControlUnits*/
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class DecayUnit
 {
 public:
@@ -354,7 +357,8 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef DecayUnit<SampleType,Interp::Lagrange3>         HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -440,7 +444,7 @@ typedef DecayUnit<PLONK_TYPE_DEFAULT> Decay;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
  @ingroup AllUnits FilterUnits ControlUnits*/
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class DCUnit
 {
 public:
@@ -448,7 +452,8 @@ public:
     typedef FilterShape<SampleType, FilterFormType::P1b, FilterShapeType::DC>   FilterShape;
     typedef FilterForm<SampleType, FilterFormType::P1b>                         FormType;
     typedef FilterUnit<FormType>                                                FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>                             ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>                             ResampleType;
+    typedef DCUnit<SampleType,Interp::Lagrange3>                                HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -525,7 +530,7 @@ typedef DCUnit<PLONK_TYPE_DEFAULT> DC;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class RLPFUnit
 {
 public:
@@ -534,7 +539,8 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RLPFUnit<SampleType,Interp::Lagrange3>          HQ;
 
     static inline UnitInfos getInfo() throw()
     {
@@ -625,7 +631,7 @@ typedef RLPFUnit<PLONK_TYPE_DEFAULT> RLPF;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class RHPFUnit
 {
 public:
@@ -634,7 +640,8 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef RHPFUnit<SampleType,Interp::Lagrange3>          HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -726,7 +733,7 @@ typedef RHPFUnit<PLONK_TYPE_DEFAULT> RHPF;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class LowShelfUnit
 {
 public:
@@ -735,7 +742,8 @@ public:
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef LowShelfUnit<SampleType,Interp::Lagrange3>      HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -834,7 +842,7 @@ typedef LowShelfUnit<PLONK_TYPE_DEFAULT> LowShelf;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class HighShelfUnit
 {
 public:
@@ -843,7 +851,8 @@ public:
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef HighShelfUnit<SampleType,Interp::Lagrange3>     HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -942,7 +951,7 @@ typedef HighShelfUnit<PLONK_TYPE_DEFAULT> HighShelf;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class NotchUnit
 {
 public:
@@ -951,7 +960,8 @@ public:
     typedef FilterCoeffs3ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef NotchUnit<SampleType,Interp::Lagrange3>         HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -1049,7 +1059,7 @@ typedef NotchUnit<PLONK_TYPE_DEFAULT> Notch;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class BPFUnit
 {
 public:
@@ -1058,7 +1068,8 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef BPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -1149,7 +1160,7 @@ typedef BPFUnit<PLONK_TYPE_DEFAULT> BPF;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class BRFUnit
 {
 public:
@@ -1158,7 +1169,8 @@ public:
     typedef FilterCoeffs2ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef BRFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -1261,10 +1273,9 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef typename FormType::Data                         FormData;
     typedef typename FilterShape::Data                      FilterShapeData;
-    
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
     typedef LPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static inline UnitInfos getInfo() throw()
@@ -1351,7 +1362,7 @@ typedef LPFUnit<PLONK_TYPE_DEFAULT> LPF;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
 class HPFUnit
 {
 public:
@@ -1360,7 +1371,8 @@ public:
     typedef FilterCoeffs1ParamUnit<FilterShape>             FilterCoeffsType;
     typedef typename FilterCoeffsType::FormType             FormType;
     typedef FilterUnit<FormType>                            FilterType;
-    typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef HPFUnit<SampleType,Interp::Lagrange3>           HQ;
     
     static inline UnitInfos getInfo() throw()
     {

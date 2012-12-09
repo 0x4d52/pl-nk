@@ -283,7 +283,7 @@ private:
  - preferredSampleRate: the preferred output sample rate
 
   @ingroup ConverterUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class TaskUnit
 {
 public:    
@@ -293,8 +293,8 @@ public:
     typedef ChannelInternal<SampleType,Data>            Internal;
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;
-    typedef ResampleUnit<SampleType,Interp::Linear>     ResampleType;
-
+    typedef ResampleUnit<SampleType,InterpTypeCode>     ResampleType;
+    typedef TaskUnit<SampleType,Interp::Lagrange3>      HQ;
     
     static inline UnitInfos getInfo() throw()
     {

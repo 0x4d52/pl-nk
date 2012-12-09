@@ -220,6 +220,7 @@ inline Type explin (Type const& input,
 //------------------------------------------------------------------------------
 
 template<class ValueType, class IndexType, signed Extension, signed Offset> class InterpBase;
+template<class ValueType, class IndexType> class InterpNone;
 template<class ValueType, class IndexType> class InterpLinear;
 template<class ValueType, class IndexType> class InterpLagrange3;
 
@@ -228,6 +229,7 @@ class Interp
 public:
     enum TypeCode
     {
+        None,
         Linear,
         Lagrange3,
         NumTypes
@@ -237,6 +239,13 @@ public:
 template<class ValueType, class IndexType, Interp::TypeCode TypeCode>
 class InterpSelect
 {
+};
+
+template<class ValueType, class IndexType>
+class InterpSelect<ValueType, IndexType, Interp::None>
+{
+public:
+    typedef InterpNone<ValueType,IndexType> InterpType;
 };
 
 template<class ValueType, class IndexType>
@@ -262,17 +271,21 @@ public:
     {
         ValueType buffer[Extension];
     };
-    
-    enum InterpType
-    {
-        Linear,
-        Lagrange3,
-    };
-    
+
     static inline int getExtension() throw() { return Extension; }
     static inline int getOffset() throw() { return Offset; }
     static inline const IndexType& getExtensionAsIndex() throw() { static const IndexType v (Extension); return v; }
-    static inline const IndexType& getOffsetAsIndex() throw() { static const IndexType v (Offset); return v; }
+    static inline const IndexType& getOffsetAsIndex() throw() { static const IndexType v (Offset); return v; }    
+};
+
+template<class ValueType, class IndexType>
+class InterpNone : public InterpBase<ValueType,IndexType,0,0>
+{
+public:    
+    static inline ValueType lookup (const ValueType* table, IndexType const& index) throw()
+    {
+        return table[int (index)];
+    }
 };
 
 template<class ValueType, class IndexType>

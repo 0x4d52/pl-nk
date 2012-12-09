@@ -227,6 +227,17 @@ public:
         return UnitType (*this).kr();
     }
     
+    inline UnitType ar (const Interp::TypeCode interpType) const throw()
+    {
+        return UnitType (*this).ar (interpType);
+    }
+    
+    inline UnitType kr (const Interp::TypeCode interpType) const throw()
+    {
+        return UnitType (*this).kr (interpType);
+    }
+
+    
 };
 
 PLONK_BINARYOPGLOBALS_TEMPLATE(Variable,Type); // declares global functions with the same name as the binary operators

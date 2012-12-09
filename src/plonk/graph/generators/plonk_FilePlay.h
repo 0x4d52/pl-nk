@@ -299,8 +299,7 @@ public:
     class Simple
     {
     public:
-        typedef TaskUnit<SampleType>                            TaskType;
-
+        typedef TaskUnit<SampleType,Interp::Linear>             TaskType;
         typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
         typedef typename ResampleType::RateType                 RateType;
         typedef typename ResampleType::RateUnitType             RateUnitType;
@@ -315,10 +314,8 @@ public:
                                               (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
                                               DoubleVariable (blockSizeMultiplier);
             
-            UnitType play = FilePlayUnit::ar (file,
-                                              loop,
-                                              SampleType (1),
-                                              SampleType (0),
+            UnitType play = FilePlayUnit::ar (file, loop,
+                                              SampleType (1), SampleType (0),
                                               false,
                                               BlockSize::getMultipleOfDefault (multiplier));
             
@@ -326,6 +323,36 @@ public:
             
             return ResampleType::ar (task, rate);
         }
+        
+        class HQ
+        {
+        public:
+            typedef TaskUnit<SampleType,Interp::Lagrange3>          TaskType;
+            typedef ResampleUnit<SampleType,Interp::Lagrange3>      ResampleType;
+            typedef typename ResampleType::RateType                 RateType;
+            typedef typename ResampleType::RateUnitType             RateUnitType;
+            
+            static UnitType ar (AudioFileReader const& file,
+                                RateUnitType const& rate = Math<RateUnitType>::get1(),
+                                UnitType const& loop = SampleType (1),
+                                const int blockSizeMultiplier = 0,
+                                const int numBuffers = 8)
+            {
+                const DoubleVariable multiplier = blockSizeMultiplier <= 0 ?
+                                                  (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
+                                                  DoubleVariable (blockSizeMultiplier);
+                
+                UnitType play = FilePlayUnit::ar (file, loop,
+                                                  SampleType (1), SampleType (0),
+                                                  false,
+                                                  BlockSize::getMultipleOfDefault (multiplier));
+                
+                UnitType task = TaskType::ar (play, numBuffers);
+                
+                return ResampleType::ar (task, rate);
+            }
+        };
+
     };
 };
 

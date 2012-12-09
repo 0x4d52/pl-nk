@@ -85,6 +85,7 @@
 #include "../containers/variables/plonk_BinaryOpVariable.h"
 #include "../containers/variables/plonk_UnaryOpVariable.h"
 #include "../containers/variables/plonk_TypeVariable.h"
+#include "../containers/variables/plonk_ShapeVariable.h"
 
 #include "../maths/plonk_Constants.h"
 #include "../maths/plonk_Endian.h"
