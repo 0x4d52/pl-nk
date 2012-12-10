@@ -126,6 +126,66 @@ public:
             shapeState.grow = plonk::exp (shapeState.curve / ValueType (shapeState.stepsToTarget));
         }
     }
+    
+    template<class ValueType>
+    static inline void processLinear (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    {
+        const ValueType& zero = Math<ValueType>::get0();
+        
+        if (shapeState.grow == zero)
+        {
+            for (int i = 0; i < numSamples; ++i)
+                outputSamples[i] = shapeState.currentLevel;
+        }
+        else if (numSamples == shapeState.stepsToTarget)
+        {
+            const int lastIndex = numSamples - 1;
+            
+            for (int i = 0; i < lastIndex; ++i)
+            {
+                outputSamples[i] = shapeState.currentLevel;
+                shapeState.currentLevel += shapeState.grow;
+            }
+            
+            outputSamples[lastIndex] = shapeState.currentLevel = shapeState.targetLevel;
+        }
+        else
+        {
+            for (int i = 0; i < numSamples; ++i)
+            {
+                outputSamples[i] = shapeState.currentLevel;
+                shapeState.currentLevel += shapeState.grow;
+            }
+        }
+    }
+    
+    template<class ValueType>
+    static inline void processNumerical (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    {        
+        if (numSamples == shapeState.stepsToTarget)
+        {
+            const int lastIndex = numSamples - 1;
+            
+            for (int i = 0; i < lastIndex; ++i)
+            {
+                outputSamples[i] = shapeState.currentLevel;
+                shapeState.b1 *= shapeState.grow;
+                shapeState.currentLevel = shapeState.a2 - shapeState.b1;
+            }
+            
+            outputSamples[lastIndex] = shapeState.currentLevel = shapeState.targetLevel;
+        }
+        else
+        {
+            for (int i = 0; i < numSamples; ++i)
+            {
+                outputSamples[i] = shapeState.currentLevel;
+                shapeState.b1 *= shapeState.grow;
+                shapeState.currentLevel = shapeState.a2 - shapeState.b1;
+            }
+        }
+    }
+
 
 private:
     ShapeType type;

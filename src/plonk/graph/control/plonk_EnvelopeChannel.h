@@ -204,61 +204,13 @@ public:
     inline void processLinear (SampleType* const outputSamples, const int numSamples) throw()
     {
         Data& data = this->getState();
-        const SampleType& zero = Math<SampleType>::get0();
-
-        if (data.shapeState.grow == zero)
-        {
-            for (int i = 0; i < numSamples; ++i)
-                outputSamples[i] = data.shapeState.currentLevel;
-        }
-        else if (numSamples == data.shapeState.stepsToTarget)
-        {
-            const int lastIndex = numSamples - 1;
-            
-            for (int i = 0; i < lastIndex; ++i)
-            {
-                outputSamples[i] = data.shapeState.currentLevel;
-                data.shapeState.currentLevel += data.shapeState.grow;
-            }
-            
-            outputSamples[lastIndex] = data.shapeState.currentLevel = data.shapeState.targetLevel;
-        }
-        else
-        {
-            for (int i = 0; i < numSamples; ++i)
-            {
-                outputSamples[i] = data.shapeState.currentLevel;
-                data.shapeState.currentLevel += data.shapeState.grow;
-            }
-        }
+        Shape::processLinear (data.shapeState, outputSamples, numSamples);
     }
     
     inline void processNumerical (SampleType* const outputSamples, const int numSamples) throw()
     {
         Data& data = this->getState();
-        
-        if (numSamples == data.shapeState.stepsToTarget)
-        {
-            const int lastIndex = numSamples - 1;
-
-            for (int i = 0; i < lastIndex; ++i)
-            {
-                outputSamples[i] = data.shapeState.currentLevel;
-                data.shapeState.b1 *= data.shapeState.grow;
-                data.shapeState.currentLevel = data.shapeState.a2 - data.shapeState.b1;
-            }
-            
-            outputSamples[lastIndex] = data.shapeState.currentLevel = data.shapeState.targetLevel;
-        }
-        else
-        {
-            for (int i = 0; i < numSamples; ++i)
-            {
-                outputSamples[i] = data.shapeState.currentLevel;
-                data.shapeState.b1 *= data.shapeState.grow;
-                data.shapeState.currentLevel = data.shapeState.a2 - data.shapeState.b1;
-            }
-        }
+        Shape::processNumerical (data.shapeState, outputSamples, numSamples);        
     }
     
     inline void processShape (SampleType* const outputSamples, const int numSamples, const int shapeType)
