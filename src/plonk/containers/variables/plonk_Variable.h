@@ -179,30 +179,41 @@ public:
                     
     /** Builds a binary operation from two source Variables. */
     template<PLONK_BINARYOPFUNCTION(Type, op)>
-    const Variable binary (Variable const& rightOperand) const throw()
+    Variable binary (Variable const& rightOperand) const throw()
     {
-        Internal* internal = new BinaryOpVariableInternal<Type,op> (*this, 
-                                                                    rightOperand);
+        Internal* internal = new BinaryOpVariableInternal<Type,op> (*this, rightOperand);
         return Variable (internal);
     }
     
     /** Builds a unary operation from a source Variable. */
     template<PLONK_UNARYOPFUNCTION(Type, op)>
-    const Variable unary() const throw()
+    Variable unary() const throw()
     {
         Internal* internal = new UnaryOpVariableInternal<Type,op> (*this);
         return Variable (internal);
     }
     
     PLONK_BINARYOPS(Variable)
-    PLONK_UNARYOPS(Variable)    
+    PLONK_UNARYOPS(Variable)
     
-    const Variable selectMin (Variable const& other) const throw()
+    typedef ShapeVariableInternal<Type>     ShapeVariableInternalType;
+    typedef IntVariable                     StepsVariable;
+    typedef Variable<Shape::ShapeType>      ShapeTypeVariable;
+    typedef FloatVariable                   CurveVariable;
+    
+    /** Create a shape variable that can transition in different ways to new values. */
+    Variable shape (StepsVariable const& numSteps, ShapeTypeVariable const& shapeType, CurveVariable const& curve) throw()
+    {
+        Internal* internal = new ShapeVariableInternalType (*this, numSteps, shapeType, curve);
+        return Variable (internal);
+    }
+    
+    Variable selectMin (Variable const& other) const throw()
     {
         return (this->getValue() > other.getValue()) ? other : *this;
     }    
     
-    const Variable selectMax (Variable const& other) const throw()
+    Variable selectMax (Variable const& other) const throw()
     {
         return (this->getValue() < other.getValue()) ? other : *this;
     }

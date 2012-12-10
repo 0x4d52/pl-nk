@@ -52,6 +52,7 @@ template<class Type>                                        class VariableIntern
 template<class Type, PLONK_BINARYOPFUNCTION(Type, op)>      class BinaryOpVariableInternal;
 template<class Type, PLONK_UNARYOPFUNCTION(Type, op)>       class UnaryOpVariableInternal;
 template<class Type, class OtherType>                       class TypeVariableInternal;
+template<class Type>                                        class ShapeVariableInternal;
 
 typedef Variable<float>     FloatVariable;
 typedef Variable<double>    DoubleVariable;

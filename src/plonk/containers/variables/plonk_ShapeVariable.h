@@ -48,18 +48,27 @@ class ShapeVariableInternal :   public VariableInternalBase<Type>,
 {
 public:
     typedef Variable<Type>                 VariableType;
+    typedef IntVariable                    StepsVariable;
+    typedef Variable<Shape::ShapeType>     ShapeTypeVariable;
+    typedef FloatVariable                  CurveVariable;
     typedef typename VariableType::Sender  Sender;
 
-    ShapeVariableInternal (VariableType const& input) throw()
-    :   operand (input),
-        currentValue (input.getValue())
+    ShapeVariableInternal (VariableType const& inputToUse,
+                           StepsVariable const& numStepsToUse,
+                           ShapeTypeVariable const& shapeToUse,
+                           CurveVariable const& curveToUse) throw()
+    :   input (inputToUse),
+        numSteps (numStepsToUse),
+        shape (shapeToUse),
+        curve (curveToUse)
     {
-        operand.addReceiver (this);
+        shapeState.currentLevel = input.getValue();
+        input.addReceiver (this);
     }
     
     ~ShapeVariableInternal()
     {
-        operand.removeReceiver (this);
+        input.removeReceiver (this);
     }
     
     void changed (Sender const& sender, Text const& message, Dynamic const& payload) throw()
@@ -69,34 +78,60 @@ public:
     
     const Type getValue() const throw()
     {
-        return this->currentValue;
+        return shapeState.currentLevel;
     }
     
     const Type nextValue() throw()
     {
-        const Type nextValue = operand.nextValue();
+        const Type nextValue = input.nextValue();
         
-        if (nextValue != this->targetValue)
+        if (nextValue != shapeState.targetLevel)
         {
-            targetValue = nextValue;
-            
-            //.. init the curve settings
+            shapeState.targetLevel = nextValue;
+            shapeState.shapeType = shape.nextValue();
+            shapeState.curve = (shapeState.shapeType == Shape::Numerical) ? curve.nextValue() : 0.f;
+            shapeState.stepsToTarget = plonk::max (1, numSteps.getValue());
+            Shape::initShape (shapeState);
         }
-        
-        // then calculate the next value...
-        
-        return currentValue;
+                
+        return Shape::next (shapeState);
     }
     
     void setValue(Type const& newValue) throw()
     {
         plonk_assertfalse;
-    }    
+    }
     
 private:
-    Variable<Type> operand; 
-    Type currentValue;
-    Type targetValue;
+    VariableType input;
+    StepsVariable numSteps;
+    ShapeTypeVariable shape;
+    CurveVariable curve;
+    ShapeState<Type> shapeState;
 };
+
+//template<class Type>
+//class ShapeVariable : public Variable<Type>
+//{
+//public:
+//    typedef VariableInternalBase<Type>                              VariableInternalType;
+//    typedef ShapeVariableInternal<Type>                             ShapeVariableInternalType;
+//    typedef typename ShapeVariableInternalType::VariableType        VariableType;
+//    typedef typename ShapeVariableInternalType::StepsVariable       StepsVariable;
+//    typedef typename ShapeVariableInternalType::ShapeTypeVariable   ShapeTypeVariable;
+//    typedef typename ShapeVariableInternalType::CurveVariable       CurveVariable;
+//
+//    ShapeVariable (VariableType const& input,
+//                   StepsVariable const& numSteps = 1,
+//                   ShapeTypeVariable const& shape = Shape::Linear,
+//                   CurveVariable const& curve = 0.f) throw()
+//    :   VariableType (static_cast<VariableInternalType*> (new ShapeVariableInternalType (input, numSteps, shape, curve)))
+//    {
+//    }
+//};
+//
+//typedef ShapeVariable<float>    FloatShapeVariable;
+//typedef ShapeVariable<double>   DoubleShapeVariable;
+//typedef ShapeVariable<int>      IntShapeVariable;
 
 #endif // PLONK_SHAPEVARIABLE_H

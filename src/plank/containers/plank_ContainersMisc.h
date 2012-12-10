@@ -501,7 +501,7 @@ static inline void pl_SwapEndianD (double *data)
 
 /** Convert four characters to a int as used by IFF file formats to identify data chunks. 
  @ingroup PlankMiscFunctions */
-static inline const PlankFourCharCode pl_FourCharCode (const char* data)
+static inline PlankFourCharCode pl_FourCharCode (const char* data)
 {
     PlankFourCharCode code;
     
@@ -515,7 +515,7 @@ static inline const PlankFourCharCode pl_FourCharCode (const char* data)
 
 #define PLANKFOURCHARCODE(data) (*(const PlankFourCharCode*)data)
 
-static inline const PlankFourCharCodeString pl_FourCharCode2String (const PlankFourCharCode code)
+static inline PlankFourCharCodeString pl_FourCharCode2String (const PlankFourCharCode code)
 {   
     PlankFourCharCodeString string;
     *(PlankFourCharCode*)string.string = code;

@@ -48,7 +48,6 @@
 #include "plonk_ObjectArray.h"
 #include "plonk_SimpleArray.h"
 
-
 template<class ValueType>
 struct ShapeState
 {
@@ -109,12 +108,69 @@ public:
     }
     
     template<class ValueType>
+    static inline ValueType next (ShapeState<ValueType>& shapeState)
+    {
+        if (shapeState.stepsToTarget == 1)
+        {
+            const ValueType result = shapeState.currentLevel;
+            shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
+            shapeState.currentLevel = shapeState.targetLevel;
+            shapeState.shapeType = Shape::Linear;
+            shapeState.grow = 0.f;
+            return result;
+        }
+        else
+        {
+            --shapeState.stepsToTarget;
+            
+            if (shapeState.shapeType == Shape::Linear)
+                return nextLinear (shapeState);
+            else if (shapeState.shapeType == Shape::Numerical)
+                return nextNumerical (shapeState);
+            else
+                return nextLinear (shapeState);
+        }
+    }
+    
+    template<class ValueType>
+    static inline void processShape (ShapeState<ValueType>& shapeState, ValueType* outputSamples, const int numSamples)
+    {
+        plonk_assert (outputSamples != &shapeState.currentLevel);
+        
+        int numSamplesRemaining = numSamples;
+        
+        while (numSamplesRemaining > 0)
+        {
+            const int numSamplesThisTime = int (plonk::min (LongLong (numSamples), shapeState.stepsToTarget));
+        
+            if (shapeState.shapeType == Shape::Linear)
+                processLinear (shapeState, outputSamples, numSamplesThisTime);
+            else if (shapeState.shapeType == Shape::Numerical)
+                processNumerical (shapeState, outputSamples, numSamplesThisTime);
+            else
+                processLinear (shapeState, outputSamples, numSamplesThisTime);
+            
+            numSamplesRemaining -= numSamplesThisTime;
+            outputSamples += numSamplesThisTime;
+            
+            if (numSamplesRemaining > 0)
+            {
+                shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
+                shapeState.currentLevel = shapeState.targetLevel;
+                shapeState.shapeType = Shape::Linear;
+                shapeState.grow = 0.f;
+            }
+        }
+    }
+    
+private:
+    template<class ValueType>
     static inline void initLinear (ShapeState<ValueType>& shapeState) throw()
-    {        
+    {
         const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
         shapeState.grow = diff / shapeState.stepsToTarget;
     }
-
+    
     template<class ValueType>
     static inline void initNumerical (ShapeState<ValueType>& shapeState) throw()
     {
@@ -125,7 +181,6 @@ public:
         {
             shapeState.shapeType = Shape::Linear;
             shapeState.curve = 0.f;
-            
             initLinear (shapeState);
         }
         else
@@ -139,15 +194,20 @@ public:
     }
     
     template<class ValueType>
-    static inline void processShape (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples)
+    static inline ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
     {
-        if (shapeState.shapeType == Shape::Linear)
-            processLinear (shapeState, outputSamples, numSamples);
-        else if (shapeState.shapeType == Shape::Numerical)
-            processNumerical (shapeState, outputSamples, numSamples);
-        else
-            processLinear (shapeState, outputSamples, numSamples);
-        
+        const ValueType result = shapeState.currentLevel;
+        shapeState.currentLevel += shapeState.grow;
+        return result;
+    }
+    
+    template<class ValueType>
+    static inline ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
+    {
+        const ValueType result = shapeState.currentLevel;
+        shapeState.b1 *= shapeState.grow;
+        shapeState.currentLevel = shapeState.a2 - shapeState.b1;                    
+        return result;
     }
     
     template<class ValueType>
@@ -165,20 +225,14 @@ public:
             const int lastIndex = numSamples - 1;
             
             for (int i = 0; i < lastIndex; ++i)
-            {
-                outputSamples[i] = shapeState.currentLevel;
-                shapeState.currentLevel += shapeState.grow;
-            }
+                outputSamples[i] = nextLinear (shapeState);
             
             outputSamples[lastIndex] = shapeState.currentLevel = shapeState.targetLevel;
         }
         else
         {
             for (int i = 0; i < numSamples; ++i)
-            {
-                outputSamples[i] = shapeState.currentLevel;
-                shapeState.currentLevel += shapeState.grow;
-            }
+                outputSamples[i] = nextLinear (shapeState);
         }
         
         shapeState.stepsToTarget -= numSamples;
@@ -192,27 +246,18 @@ public:
             const int lastIndex = numSamples - 1;
             
             for (int i = 0; i < lastIndex; ++i)
-            {
-                outputSamples[i] = shapeState.currentLevel;
-                shapeState.b1 *= shapeState.grow;
-                shapeState.currentLevel = shapeState.a2 - shapeState.b1;
-            }
+                outputSamples[i] = nextNumerical (shapeState);
             
             outputSamples[lastIndex] = shapeState.currentLevel = shapeState.targetLevel;
         }
         else
         {
             for (int i = 0; i < numSamples; ++i)
-            {
-                outputSamples[i] = shapeState.currentLevel;
-                shapeState.b1 *= shapeState.grow;
-                shapeState.currentLevel = shapeState.a2 - shapeState.b1;
-            }
+                outputSamples[i] = nextNumerical (shapeState);
         }
         
         shapeState.stepsToTarget -= numSamples;
     }
-
 
 private:
     ShapeType type;
