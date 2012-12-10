@@ -44,13 +44,13 @@
 
 /** Variable channel. */
 template<class SampleType>
-class VariableChannelInternal 
+class ParamChannelInternal 
 :   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
     typedef ChannelInternalCore::Data                           Data;
     typedef ChannelBase<SampleType>                             ChannelType;
-    typedef VariableChannelInternal<SampleType>                 VariableChannelInternalType;
+    typedef ParamChannelInternal<SampleType>                    ParamChannelInternalType;
     typedef ChannelInternal<SampleType,Data>                    Internal;
     typedef ChannelInternalBase<SampleType>                     InternalBase;
     typedef UnitBase<SampleType>                                UnitType;
@@ -58,17 +58,17 @@ public:
     typedef NumericalArray<SampleType>                          Buffer;
     typedef Variable<SampleType>                                VariableType;
     
-    VariableChannelInternal (Inputs const& inputs, 
-                             Data const& data, 
-                             BlockSize const& blockSize,
-                             SampleRate const& sampleRate) throw()
+    ParamChannelInternal (Inputs const& inputs, 
+                          Data const& data,
+                          BlockSize const& blockSize,
+                          SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate)
     {
     }
     
     Text getName() const throw()
     {        
-        return "Variable";
+        return "Param";
     }        
     
     IntArray getInputKeys() const throw()
@@ -95,18 +95,19 @@ public:
         SampleType* const outputSamples = this->getOutputSamples();
         const int outputBufferLength = this->getOutputBuffer().length();        
         
-        for (int i = 0; i < outputBufferLength; ++i) 
-            outputSamples[i] = variable.nextValue();          
+        for (int i = 0; i < outputBufferLength; ++i)
+        {
+            const SampleType value = variable.nextValue();
+            outputSamples[i] = value;
+        }
     }
-
-private:
 };
 
 
 
 //------------------------------------------------------------------------------
 
-/** Variable unit. 
+/** Param unit. 
  
  @par Factory functions:
  - ar (variable=0, preferredBlockSize=default)
@@ -118,11 +119,11 @@ private:
 
  @ingroup ControlUnits */
 template<class SampleType>
-class VariableUnit
+class ParamUnit
 {
 public:    
-    typedef VariableChannelInternal<SampleType>         VariableChannelInternalType;
-    typedef typename VariableChannelInternalType::Data  Data;
+    typedef ParamChannelInternal<SampleType>            ParamChannelInternalType;
+    typedef typename ParamChannelInternalType::Data     Data;
     typedef ChannelBase<SampleType>                     ChannelType;
     typedef ChannelInternal<SampleType,Data>            Internal;
     typedef ChannelInternalBase<SampleType>             InternaBase;
@@ -134,22 +135,21 @@ public:
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
-//        const double sampleRate = SampleRate::getDefault().getValue();
 
-        return UnitInfo ("Variable", "A variable value.",
+        return UnitInfo ("Param", "A parameter value.",
                          
                          // output
                          1, 
-                         IOKey::Generic,         Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
+                         IOKey::Generic,        Measure::None,      IOInfo::NoDefault,  IOLimit::None, 
                          IOKey::End,
                          
                          // inputs
-                         IOKey::Variable,       Measure::None,      0.0,        IOLimit::None,
-                         IOKey::BlockSize,      Measure::Samples,   blockSize,  IOLimit::Minimum, Measure::Samples,             1.0,
+                         IOKey::Variable,       Measure::None,      0.0,                IOLimit::None,
+                         IOKey::BlockSize,      Measure::Samples,   blockSize,          IOLimit::Minimum, Measure::Samples,             1.0,
                          IOKey::End);
     }    
     
-    /** Create control rate variable. */
+    /** Create audio rate parameter. */
     static UnitType ar (VariableType const& variable = SampleType (0),
                         BlockSize const& preferredBlockSize = BlockSize::getDefault()) throw()
     {        
@@ -162,12 +162,13 @@ public:
                                                 SampleRate::getDefault() :
                                                 (SampleRate::getDefault() / BlockSize::getDefault()) * preferredBlockSize;
         
-        return UnitType::template createFromInputs<VariableChannelInternalType> (inputs, 
-                                                                                 data, 
-                                                                                 preferredBlockSize, 
-                                                                                 preferredSampleRate);
+        return UnitType::template createFromInputs<ParamChannelInternalType> (inputs, 
+                                                                              data,
+                                                                              preferredBlockSize,
+                                                                              preferredSampleRate);
     }   
 
+    /** Create control rate parameter. */
     static UnitType kr (VariableType const& variable = SampleType (0)) throw()
     {
         Inputs inputs;
@@ -175,12 +176,15 @@ public:
         
         Data data = { -1.0, -1.0 };
                 
-        return UnitType::template createFromInputs<VariableChannelInternalType> (inputs, 
-                                                                                 data, 
-                                                                                 BlockSize::getControlRateBlockSize(), 
-                                                                                 SampleRate::getControlRate());        
+        return UnitType::template createFromInputs<ParamChannelInternalType> (inputs, 
+                                                                              data, 
+                                                                              BlockSize::getControlRateBlockSize(), 
+                                                                              SampleRate::getControlRate());        
     }
 };
+    
+typedef ParamUnit<PLONK_TYPE_DEFAULT> Param;
+
 
 
 

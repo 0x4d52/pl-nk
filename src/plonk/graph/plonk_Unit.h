@@ -197,7 +197,7 @@ public:
     }    
     
     UnitBase (VariableType const& variable) throw()
-    :   UnitType (VariableUnit<SampleType>::kr (variable))
+    :   UnitType (ParamUnit<SampleType>::kr (variable))
     {
     }
     

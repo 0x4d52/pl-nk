@@ -161,7 +161,7 @@ public:
     /** Returns the next value. 
      By default this returns the current value. More complex Variable subclasses
      might generate sequences or random numbers (for example).*/
-    const Type nextValue() throw()
+    inline const Type nextValue() throw()
     {
         return this->getInternal()->nextValue();
     }
@@ -202,7 +202,24 @@ public:
     typedef FloatVariable                   CurveVariable;
     
     /** Create a shape variable that can transition in different ways to new values. */
-    Variable shape (StepsVariable const& numSteps, ShapeTypeVariable const& shapeType, CurveVariable const& curve) throw()
+    Variable shape (StepsVariable const& numSteps) throw()
+    {
+        Internal* internal = new ShapeVariableInternalType (*this, numSteps, Shape::Linear, 0.f);
+        return Variable (internal);
+    }
+    
+    /** Create a shape variable that can transition in different ways to new values. */
+    Variable shape (StepsVariable const& numSteps,
+                    ShapeTypeVariable const& shapeType) throw()
+    {
+        Internal* internal = new ShapeVariableInternalType (*this, numSteps, shapeType, 0.f);
+        return Variable (internal);
+    }
+    
+    /** Create a shape variable that can transition in different ways to new values. */
+    Variable shape (StepsVariable const& numSteps,
+                    ShapeTypeVariable const& shapeType,
+                    CurveVariable const& curve) throw()
     {
         Internal* internal = new ShapeVariableInternalType (*this, numSteps, shapeType, curve);
         return Variable (internal);

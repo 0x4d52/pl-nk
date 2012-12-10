@@ -88,7 +88,7 @@ template<class SampleType,Interp::TypeCode>                             class Re
 template<class SampleType>                                              class MixerUnit;
 template<class SampleType>                                              class OverlapMakeUnit;
 template<class SampleType>                                              class OverlapMixUnit;
-template<class SampleType>                                              class VariableUnit;
+template<class SampleType>                                              class ParamUnit;
 template<class SampleType>                                              class AtomicVariableUnit;
 template<class SampleType,
          Interp::TypeCode InterpTypeCode = Interp::Linear>              class TaskUnit;

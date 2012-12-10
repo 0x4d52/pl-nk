@@ -83,17 +83,17 @@ public:
     {
     }
 
-    inline const Type getValue() const throw()
+    const Type getValue() const throw()
     {
         return value;
     }
     
-    inline const Type nextValue() throw()
+    const Type nextValue() throw()
     {        
         return value;
     }
     
-    inline void setValue (Type const& newValue) throw()
+    void setValue (Type const& newValue) throw()
     {
         if (value != newValue)
         {
@@ -110,7 +110,7 @@ public:
     }
     
 private:
-    Type value;
+    PLONK_ALIGN(PLONK_WORDSIZE) Type value;
 };
 
 
@@ -131,18 +131,18 @@ public:
         setValue (initValue);
     }
     
-    inline Type& getValue() throw()
+    Type& getValue() throw()
     {
         return value;
     }
         
     template<class ValueType>
-    inline void setValue (ValueType const& newValue) throw()
+    void setValue (ValueType const& newValue) throw()
     {
         value = newValue;
     }
     
-    inline void swapValues (Type& other) throw()
+    void swapValues (Type& other) throw()
     {
         value.swapWith (other);
     }
