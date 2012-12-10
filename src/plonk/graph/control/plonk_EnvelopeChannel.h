@@ -157,13 +157,9 @@ public:
                 const Shape& shape = targetBreakpoint.getShape();
                 data.shapeState.shapeType = shape.getType();
                 data.shapeState.curve = shape.getCurve();
-                
-                if (data.shapeState.shapeType == Shape::Linear)
-                    initLinear (targetBreakpoint);
-                else if (data.shapeState.shapeType == Shape::Numerical)
-                    initNumerical (targetBreakpoint);
-                else
-                    initLinear (targetBreakpoint);
+                data.shapeState.targetLevel = targetBreakpoint.getTargetLevel();
+                data.shapeState.stepsToTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
+                Shape::initShape (data.shapeState);
             }
         }        
     }
@@ -183,46 +179,6 @@ public:
             this->setTargetPoint (next, samplesRemaining);
     }
     
-    inline void initLinear (BreakpointType const& targetBreakpoint) throw()
-    {
-        Data& data = this->getState();
-        data.shapeState.targetLevel = targetBreakpoint.getTargetLevel();
-        data.shapeState.stepsToTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
-
-        Shape::initLinear (data.shapeState);
-    }
-    
-    inline void initNumerical (BreakpointType const& targetBreakpoint) throw()
-    {
-        Data& data = this->getState();        
-        data.shapeState.targetLevel = targetBreakpoint.getTargetLevel();
-        data.shapeState.stepsToTarget = targetBreakpoint.getTargetTime() * data.base.sampleRate;
-
-        Shape::initNumerical (data.shapeState);
-    }
-    
-    inline void processLinear (SampleType* const outputSamples, const int numSamples) throw()
-    {
-        Data& data = this->getState();
-        Shape::processLinear (data.shapeState, outputSamples, numSamples);
-    }
-    
-    inline void processNumerical (SampleType* const outputSamples, const int numSamples) throw()
-    {
-        Data& data = this->getState();
-        Shape::processNumerical (data.shapeState, outputSamples, numSamples);        
-    }
-    
-    inline void processShape (SampleType* const outputSamples, const int numSamples, const int shapeType)
-    {
-        if (shapeType == Shape::Linear)
-            processLinear (outputSamples, numSamples);
-        else if (shapeType == Shape::Numerical)
-            processNumerical (outputSamples, numSamples);
-        else
-            processLinear (outputSamples, numSamples);
-    }
-
     void process (ProcessInfo& info, const int /*channel*/) throw()
     {
         Data& data = this->getState();
@@ -251,11 +207,10 @@ public:
                 
                 if (samplesThisTime > 0)
                 {
-                    processShape (outputSamples, samplesThisTime, data.shapeState.shapeType);
+                    Shape::processShape (data.shapeState, outputSamples, samplesThisTime);
                                         
                     outputSamples += samplesThisTime;
                     samplesRemaining -= samplesThisTime;
-                    data.shapeState.stepsToTarget -= samplesThisTime;
                 }
                 
                 if (data.shapeState.stepsToTarget == 0)
@@ -272,10 +227,10 @@ public:
                 
                 if (currGate != data.prevGate)
                     this->nextTargetPoint (currGate, 1);
-                                    
-                processShape (outputSamples++, 1, data.shapeState.shapeType);
+                    
+                Shape::processShape (data.shapeState, outputSamples++, 1);
                 
-                if (data.shapeState.stepsToTarget-- == 0)
+                if (data.shapeState.stepsToTarget == 0)
                     this->nextTargetPoint (currGate, 1);
                 
                 data.prevGate = currGate;
@@ -293,9 +248,9 @@ public:
                 if (currGate != data.prevGate)
                     this->nextTargetPoint (currGate, 1);
                 
-                processShape (outputSamples++, 1, data.shapeState.  shapeType);
+                Shape::processShape (data.shapeState, outputSamples++, 1);
                     
-                if (data.shapeState.stepsToTarget-- == 0)
+                if (data.shapeState.stepsToTarget == 0)
                     this->nextTargetPoint (currGate, 1);
                 
                 data.prevGate = currGate;

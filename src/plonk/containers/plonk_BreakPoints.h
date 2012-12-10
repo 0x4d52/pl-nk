@@ -98,6 +98,17 @@ public:
 	void setCurve (const float newCurve) throw()	{ type = Numerical; curve = newCurve; }
     
     template<class ValueType>
+    static inline void initShape (ShapeState<ValueType>& shapeState)
+    {
+        if (shapeState.shapeType == Shape::Linear)
+            initLinear (shapeState);
+        else if (shapeState.shapeType == Shape::Numerical)
+            initNumerical (shapeState);
+        else
+            initLinear (shapeState);
+    }
+    
+    template<class ValueType>
     static inline void initLinear (ShapeState<ValueType>& shapeState) throw()
     {        
         const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
@@ -125,6 +136,18 @@ public:
             shapeState.b1 = a1;
             shapeState.grow = plonk::exp (shapeState.curve / ValueType (shapeState.stepsToTarget));
         }
+    }
+    
+    template<class ValueType>
+    static inline void processShape (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples)
+    {
+        if (shapeState.shapeType == Shape::Linear)
+            processLinear (shapeState, outputSamples, numSamples);
+        else if (shapeState.shapeType == Shape::Numerical)
+            processNumerical (shapeState, outputSamples, numSamples);
+        else
+            processLinear (shapeState, outputSamples, numSamples);
+        
     }
     
     template<class ValueType>
@@ -157,6 +180,8 @@ public:
                 shapeState.currentLevel += shapeState.grow;
             }
         }
+        
+        shapeState.stepsToTarget -= numSamples;
     }
     
     template<class ValueType>
@@ -184,6 +209,8 @@ public:
                 shapeState.currentLevel = shapeState.a2 - shapeState.b1;
             }
         }
+        
+        shapeState.stepsToTarget -= numSamples;
     }
 
 
