@@ -70,6 +70,7 @@ public:
     {
         Linear,
         Numerical,
+        Sine,
         NumShapeTypes
     };
     
@@ -103,6 +104,8 @@ public:
             initLinear (shapeState);
         else if (shapeState.shapeType == Shape::Numerical)
             initNumerical (shapeState);
+        else if (shapeState.shapeType == Shape::Sine)
+            initSine (shapeState);
         else
             initLinear (shapeState);
     }
@@ -127,6 +130,8 @@ public:
                 return nextLinear (shapeState);
             else if (shapeState.shapeType == Shape::Numerical)
                 return nextNumerical (shapeState);
+            else if (shapeState.shapeType == Shape::Sine)
+                return nextSine (shapeState);
             else
                 return nextLinear (shapeState);
         }
@@ -147,6 +152,8 @@ public:
                 processLinear (shapeState, outputSamples, numSamplesThisTime);
             else if (shapeState.shapeType == Shape::Numerical)
                 processNumerical (shapeState, outputSamples, numSamplesThisTime);
+            else if (shapeState.shapeType == Shape::Sine)
+                processSine (shapeState, outputSamples, numSamplesThisTime);
             else
                 processLinear (shapeState, outputSamples, numSamplesThisTime);
             
@@ -168,7 +175,7 @@ private:
     static inline void initLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
-        shapeState.grow = diff / shapeState.stepsToTarget;
+        shapeState.grow = diff / ValueType (shapeState.stepsToTarget);
     }
     
     template<class ValueType>
@@ -194,6 +201,24 @@ private:
     }
     
     template<class ValueType>
+    static inline void initSine (ShapeState<ValueType>& shapeState) throw()
+    {
+        const ValueType pi = Math<ValueType>::getPi();
+        const ValueType piOverTwo = Math<ValueType>::getPi_2();
+        const ValueType half = Math<ValueType>::get0_5();
+        const ValueType two = Math<ValueType>::get2();
+        const ValueType sum = shapeState.targetLevel + shapeState.currentLevel;
+        const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
+        const ValueType w = pi / ValueType (shapeState.stepsToTarget);
+        
+        shapeState.a2 = sum * half;
+        shapeState.b1 = two * plonk::cos (w);
+        shapeState.y1 = diff * half;
+        shapeState.y2 = shapeState.y1 * plonk::sin (piOverTwo - w);
+        shapeState.currentLevel = shapeState.a2 - shapeState.y1;
+    }
+    
+    template<class ValueType>
     static inline ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
@@ -207,6 +232,17 @@ private:
         const ValueType result = shapeState.currentLevel;
         shapeState.b1 *= shapeState.grow;
         shapeState.currentLevel = shapeState.a2 - shapeState.b1;                    
+        return result;
+    }
+    
+    template<class ValueType>
+    static inline ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
+    {
+        const ValueType result = shapeState.currentLevel;
+        const ValueType y0 = shapeState.b1 * shapeState.y1 - shapeState.y2;
+        shapeState.currentLevel = shapeState.a2 - y0;
+        shapeState.y2 = shapeState.y1;
+        shapeState.y1 = y0;
         return result;
     }
     
@@ -254,6 +290,29 @@ private:
         {
             for (int i = 0; i < numSamples; ++i)
                 outputSamples[i] = nextNumerical (shapeState);
+        }
+        
+        shapeState.stepsToTarget -= numSamples;
+    }
+    
+    template<class ValueType>
+    static inline void processSine (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
+    {
+        const ValueType& zero = Math<ValueType>::get0();
+        
+        if (numSamples == shapeState.stepsToTarget)
+        {
+            const int lastIndex = numSamples - 1;
+            
+            for (int i = 0; i < lastIndex; ++i)
+                outputSamples[i] = nextSine (shapeState);
+                
+            outputSamples[lastIndex] = shapeState.currentLevel = shapeState.targetLevel;
+        }
+        else
+        {
+            for (int i = 0; i < numSamples; ++i)
+                outputSamples[i] = nextSine (shapeState);
         }
         
         shapeState.stepsToTarget -= numSamples;

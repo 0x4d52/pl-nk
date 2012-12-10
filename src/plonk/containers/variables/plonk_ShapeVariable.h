@@ -43,8 +43,7 @@
 
 
 template<class Type>
-class ShapeVariableInternal :   public VariableInternalBase<Type>,
-                                public Variable<Type>::Receiver
+class ShapeVariableInternal :   public VariableInternalBase<Type>
 {
 public:
     typedef Variable<Type>                 VariableType;
@@ -62,13 +61,11 @@ public:
         shape (shapeToUse),
         curve (curveToUse)
     {
-        shapeState.currentLevel = input.getValue();
-        input.addReceiver (this);
+        shapeState.targetLevel = shapeState.currentLevel = input.getValue();
     }
     
     ~ShapeVariableInternal()
     {
-        input.removeReceiver (this);
     }
     
     void changed (Sender const& sender, Text const& message, Dynamic const& payload) throw()
@@ -93,8 +90,13 @@ public:
             shapeState.stepsToTarget = plonk::max (1, numSteps.getValue());
             Shape::initShape (shapeState);
         }
-                
-        return Shape::next (shapeState);
+        
+        const Type result = Shape::next (shapeState);
+        
+        if (shapeState.stepsToTarget == TypeUtility<LongLong>::getTypePeak())
+            this->update (Text::getEmpty(), Dynamic::getNull());
+            
+        return result;
     }
     
     void setValue(Type const& newValue) throw()
@@ -109,29 +111,5 @@ private:
     CurveVariable curve;
     ShapeState<Type> shapeState;
 };
-
-//template<class Type>
-//class ShapeVariable : public Variable<Type>
-//{
-//public:
-//    typedef VariableInternalBase<Type>                              VariableInternalType;
-//    typedef ShapeVariableInternal<Type>                             ShapeVariableInternalType;
-//    typedef typename ShapeVariableInternalType::VariableType        VariableType;
-//    typedef typename ShapeVariableInternalType::StepsVariable       StepsVariable;
-//    typedef typename ShapeVariableInternalType::ShapeTypeVariable   ShapeTypeVariable;
-//    typedef typename ShapeVariableInternalType::CurveVariable       CurveVariable;
-//
-//    ShapeVariable (VariableType const& input,
-//                   StepsVariable const& numSteps = 1,
-//                   ShapeTypeVariable const& shape = Shape::Linear,
-//                   CurveVariable const& curve = 0.f) throw()
-//    :   VariableType (static_cast<VariableInternalType*> (new ShapeVariableInternalType (input, numSteps, shape, curve)))
-//    {
-//    }
-//};
-//
-//typedef ShapeVariable<float>    FloatShapeVariable;
-//typedef ShapeVariable<double>   DoubleShapeVariable;
-//typedef ShapeVariable<int>      IntShapeVariable;
 
 #endif // PLONK_SHAPEVARIABLE_H
