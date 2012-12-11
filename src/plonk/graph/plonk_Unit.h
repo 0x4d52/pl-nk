@@ -134,7 +134,7 @@ public:
     
     /** Default constructor.
      This creates a Unit with a single null Channel. */
-    UnitBase() throw()
+    inline UnitBase() throw()
     :   Base (ChannelType())
     {
     }
@@ -179,7 +179,7 @@ public:
      This creates a Unit with a single constant Channel. Ideally you could/should cache frequently used
      constants (e.g., 1, pi, etc). */
     template<class ValueType>
-    UnitBase (ValueType const& valueInit) throw()
+    inline UnitBase (ValueType const& valueInit) throw()
     :   UnitType (ChannelType (valueInit))
     {
         this->atUnchecked (0).initChannel (0);
@@ -189,14 +189,14 @@ public:
      This creates a Unit with a multiple constant Channel objects derived 
      from an array of numerical values. */
     template<class ValueType>
-    UnitBase (NumericalArray<ValueType> const& values) throw()
+    inline UnitBase (NumericalArray<ValueType> const& values) throw()
     :   UnitType (UnitType::template collect<ChannelType> (values))
     {
         for (int i = 0; i < this->getNumChannels(); ++i)
             this->atUnchecked (i).initChannel (i);
     }    
     
-    UnitBase (VariableType const& variable) throw()
+    inline UnitBase (VariableType const& variable) throw()
     :   UnitType (ParamUnit<SampleType>::kr (variable))
     {
     }
@@ -217,14 +217,14 @@ public:
     }
     
     /** Copy constructor from the base array type. */
-    UnitBase (UnitBase const& copy) throw()
+    inline UnitBase (UnitBase const& copy) throw()
 	:	UnitType (static_cast<UnitType const&> (copy))
 	{
 	}                
     
     
     template<template <typename> class OtherUnitType, class OtherSampleType>
-    UnitBase (OtherUnitType<OtherSampleType> const& other)
+    inline UnitBase (OtherUnitType<OtherSampleType> const& other)
     :   UnitType (TypeUnit<SampleType,OtherSampleType>::ar (other))
     {
     }

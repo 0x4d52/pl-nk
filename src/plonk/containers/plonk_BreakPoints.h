@@ -48,17 +48,28 @@
 #include "plonk_ObjectArray.h"
 #include "plonk_SimpleArray.h"
 
+// allow some shapes to use double calculations
+template<class ValueType>
+struct ShapeCalcType
+{
+    union Elem
+    {
+        ValueType norm;
+        double dbl;
+    } u;
+};
+
 template<class ValueType>
 struct ShapeState
 {
     LongLong stepsToTarget;
     ValueType currentLevel;
     ValueType targetLevel;
-    ValueType grow;
-    ValueType a2;
-    ValueType b1;
-    ValueType y1;
-    ValueType y2;
+    ShapeCalcType<ValueType> grow;
+    ShapeCalcType<ValueType> a2;
+    ShapeCalcType<ValueType> b1;
+    ShapeCalcType<ValueType> y1;
+    ShapeCalcType<ValueType> y2;
     int shapeType;
     float curve;
 };
@@ -96,6 +107,16 @@ public:
 	float getCurve() const throw()					{ return curve; }
 	void setType (ShapeType const& newType) throw()	{ type = newType; }
 	void setCurve (const float newCurve) throw()	{ type = Numerical; curve = newCurve; }
+
+    template<class ValueType>
+    static inline void sustain (ShapeState<ValueType>& shapeState)
+    {
+        shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
+        shapeState.currentLevel = shapeState.targetLevel;
+        shapeState.shapeType = Shape::Linear;
+        shapeState.curve = 0.f;
+        shapeState.grow.u.norm = Math<ValueType>::get0();
+    }
     
     template<class ValueType>
     static inline void initShape (ShapeState<ValueType>& shapeState)
@@ -116,10 +137,7 @@ public:
         if (shapeState.stepsToTarget == 1)
         {
             const ValueType result = shapeState.currentLevel;
-            shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
-            shapeState.currentLevel = shapeState.targetLevel;
-            shapeState.shapeType = Shape::Linear;
-            shapeState.grow = 0.f;
+            sustain (shapeState);
             return result;
         }
         else
@@ -175,7 +193,7 @@ private:
     static inline void initLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
-        shapeState.grow = diff / ValueType (shapeState.stepsToTarget);
+        shapeState.grow.u.norm = diff / ValueType (shapeState.stepsToTarget);
     }
     
     template<class ValueType>
@@ -194,35 +212,35 @@ private:
         {
             const ValueType& one = Math<ValueType>::get1();
             const ValueType a1 = diff / (one - plonk::exp (shapeState.curve));
-            shapeState.a2 = shapeState.currentLevel + a1;
-            shapeState.b1 = a1;
-            shapeState.grow = plonk::exp (shapeState.curve / ValueType (shapeState.stepsToTarget));
+            shapeState.a2.u.norm = shapeState.currentLevel + a1;
+            shapeState.b1.u.norm = a1;
+            shapeState.grow.u.norm = plonk::exp (shapeState.curve / ValueType (shapeState.stepsToTarget));
         }
     }
     
     template<class ValueType>
     static inline void initSine (ShapeState<ValueType>& shapeState) throw()
     {
-        const ValueType pi = Math<ValueType>::getPi();
-        const ValueType piOverTwo = Math<ValueType>::getPi_2();
-        const ValueType half = Math<ValueType>::get0_5();
-        const ValueType two = Math<ValueType>::get2();
-        const ValueType sum = shapeState.targetLevel + shapeState.currentLevel;
-        const ValueType diff = shapeState.targetLevel - shapeState.currentLevel;
-        const ValueType w = pi / ValueType (shapeState.stepsToTarget);
+        const double pi = Math<double>::getPi();
+        const double piOverTwo = Math<double>::getPi_2();
+        const double half = Math<double>::get0_5();
+        const double two = Math<double>::get2();
+        const double sum = shapeState.targetLevel + shapeState.currentLevel;
+        const double diff = shapeState.targetLevel - shapeState.currentLevel;
+        const double w = pi / double (shapeState.stepsToTarget);
         
-        shapeState.a2 = sum * half;
-        shapeState.b1 = two * plonk::cos (w);
-        shapeState.y1 = diff * half;
-        shapeState.y2 = shapeState.y1 * plonk::sin (piOverTwo - w);
-        shapeState.currentLevel = shapeState.a2 - shapeState.y1;
+        shapeState.a2.u.dbl = sum * half;
+        shapeState.b1.u.dbl = two * plonk::cos (w);
+        shapeState.y1.u.dbl = diff * half;
+        shapeState.y2.u.dbl = shapeState.y1.u.dbl * plonk::sin (piOverTwo - w);
+        shapeState.currentLevel = ValueType (shapeState.a2.u.dbl - shapeState.y1.u.dbl);
     }
     
     template<class ValueType>
     static inline ValueType nextLinear (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
-        shapeState.currentLevel += shapeState.grow;
+        shapeState.currentLevel += shapeState.grow.u.norm;
         return result;
     }
     
@@ -230,8 +248,8 @@ private:
     static inline ValueType nextNumerical (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
-        shapeState.b1 *= shapeState.grow;
-        shapeState.currentLevel = shapeState.a2 - shapeState.b1;                    
+        shapeState.b1.u.norm *= shapeState.grow.u.norm;
+        shapeState.currentLevel = shapeState.a2.u.norm - shapeState.b1.u.norm;                    
         return result;
     }
     
@@ -239,10 +257,10 @@ private:
     static inline ValueType nextSine (ShapeState<ValueType>& shapeState) throw()
     {
         const ValueType result = shapeState.currentLevel;
-        const ValueType y0 = shapeState.b1 * shapeState.y1 - shapeState.y2;
-        shapeState.currentLevel = shapeState.a2 - y0;
-        shapeState.y2 = shapeState.y1;
-        shapeState.y1 = y0;
+        const double y0 = shapeState.b1.u.dbl * shapeState.y1.u.dbl - shapeState.y2.u.dbl;
+        shapeState.currentLevel = ValueType (shapeState.a2.u.dbl - y0);
+        shapeState.y2.u.dbl = shapeState.y1.u.dbl;
+        shapeState.y1.u.dbl = y0;
         return result;
     }
     
@@ -251,7 +269,7 @@ private:
     {
         const ValueType& zero = Math<ValueType>::get0();
         
-        if (shapeState.grow == zero)
+        if (shapeState.grow.u.norm == zero)
         {
             for (int i = 0; i < numSamples; ++i)
                 outputSamples[i] = shapeState.currentLevel;
@@ -542,11 +560,11 @@ public:
     
     typedef NumericalArray<SampleType>              LevelsArray;
     typedef NumericalArray<double>                  TimesArray;
-    typedef ObjectArray<Shape>              ShapeArray;
+    typedef ObjectArray<Shape>                      ShapeArray;
     typedef NumericalArray<int>                     NextArray;
-    
+
+    typedef SignalBase<SampleType>                  SignalType;
     typedef BreakpointBase<SampleType>              BreakpointType;
-    
     typedef TypeUtility<SampleType>                 SampleTypeUtility;
     
     
@@ -649,6 +667,18 @@ public:
     inline const BreakpointType& atUnchecked (const int index) const throw()
     {
         return this->getInternal()->getBreakpoints().atUnchecked (index);
+    }
+    
+    SampleType lookup (const double time) const throw()
+    {
+        (void)time;
+        plonk_assertfalse; // todo
+    }
+    
+    void toSignal (SignalType& signal) throw()
+    {
+        (void)signal;
+        plonk_assertfalse; // todo
     }
     
     PLONK_OBJECTARROWOPERATOR(BreakpointsBase);

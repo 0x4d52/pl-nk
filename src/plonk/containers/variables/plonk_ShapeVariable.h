@@ -61,6 +61,8 @@ public:
         shape (shapeToUse),
         curve (curveToUse)
     {
+        Memory::zero (shapeState);
+        shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
         shapeState.targetLevel = shapeState.currentLevel = input.getValue();
     }
     
@@ -87,7 +89,7 @@ public:
             shapeState.targetLevel = nextValue;
             shapeState.shapeType = shape.nextValue();
             shapeState.curve = (shapeState.shapeType == Shape::Numerical) ? curve.nextValue() : 0.f;
-            shapeState.stepsToTarget = plonk::max (1, numSteps.getValue());
+            shapeState.stepsToTarget = plonk::max (1, numSteps.nextValue());
             Shape::initShape (shapeState);
         }
         

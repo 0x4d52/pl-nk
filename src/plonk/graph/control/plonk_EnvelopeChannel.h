@@ -139,11 +139,9 @@ public:
             else if (index >= breakpoints.getNumBreakpoints())
             {
                 // finished...
-                data.targetPointIndex = breakpoints.getNumBreakpoints();
-                data.shapeState.shapeType = Shape::Linear;
-                data.shapeState.curve = 0.f;
-                data.shapeState.grow = SampleType (0);
-                data.shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
+                data.targetPointIndex = breakpoints.getNumBreakpoints();                
+                Shape::sustain (data.shapeState);
+                
                 data.done = true;
                 
                 this->update (Text::getMessageDone(), Dynamic::getNull());
