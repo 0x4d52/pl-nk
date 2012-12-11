@@ -36,63 +36,39 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_SHAPEVARIABLE_H
-#define PLONK_SHAPEVARIABLE_H
+#ifndef PLONK_PATTERNVARIABLE_H
+#define PLONK_PATTERNVARIABLE_H
 
 #include "plonk_VariableInternal.h"
 
-
 template<class Type>
-class ShapeVariableInternal : public VariableInternalBase<Type>
+class PatternVariableInternal : public VariableInternalBase<Type>
 {
 public:
-    typedef Variable<Type>                 VariableType;
-    typedef IntVariable                    StepsVariable;
-    typedef Variable<Shape::ShapeType>     ShapeTypeVariable;
-    typedef FloatVariable                  CurveVariable;
+    typedef Variable<Type>                  VariableType;
+    typedef NumericalArray<VariableType>    PatternType;
 
-    ShapeVariableInternal (VariableType const& inputToUse,
-                           StepsVariable const& numStepsToUse,
-                           ShapeTypeVariable const& shapeToUse,
-                           CurveVariable const& curveToUse) throw()
-    :   input (inputToUse),
-        numSteps (numStepsToUse),
-        shape (shapeToUse),
-        curve (curveToUse)
+
+    PatternVariableInternal (PatternType const& pat) throw()
+    :   pattern (pat),
+        index (0),
+        cachedValue (pattern[index].getValue())
     {
-        Memory::zero (shapeState);
-        shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
-        shapeState.targetLevel = shapeState.currentLevel = input.getValue();
     }
     
-    ~ShapeVariableInternal()
+    ~PatternVariableInternal()
     {
     }
         
     const Type getValue() const throw()
     {
-        return shapeState.currentLevel;
+        return this->cachedValue;
     }
     
     const Type nextValue() throw()
     {
-        const Type nextValue = input.nextValue();
-        
-        if (nextValue != shapeState.targetLevel)
-        {
-            shapeState.targetLevel = nextValue;
-            shapeState.shapeType = shape.nextValue();
-            shapeState.curve = (shapeState.shapeType == Shape::Numerical) ? curve.nextValue() : 0.f;
-            shapeState.stepsToTarget = plonk::max (1, numSteps.nextValue());
-            Shape::initShape (shapeState);
-        }
-        
-        const Type result = Shape::next (shapeState);
-        
-        if (shapeState.stepsToTarget == TypeUtility<LongLong>::getTypePeak())
-            this->update (Text::getEmpty(), Dynamic::getNull());
-            
-        return result;
+        this->cachedValue = pattern.wrapAt (index++).nextValue();
+        return this->cachedValue;
     }
     
     void setValue(Type const& newValue) throw()
@@ -101,11 +77,9 @@ public:
     }
     
 private:
-    VariableType input;
-    StepsVariable numSteps;
-    ShapeTypeVariable shape;
-    CurveVariable curve;
-    ShapeState<Type> shapeState;
+    PatternType pattern;
+    int index;
+    mutable Type cachedValue;
 };
 
-#endif // PLONK_SHAPEVARIABLE_H
+#endif // PLONK_PATTERNVARIABLE_H

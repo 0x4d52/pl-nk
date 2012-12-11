@@ -53,6 +53,7 @@ template<class Type, PLONK_BINARYOPFUNCTION(Type, op)>      class BinaryOpVariab
 template<class Type, PLONK_UNARYOPFUNCTION(Type, op)>       class UnaryOpVariableInternal;
 template<class Type, class OtherType>                       class TypeVariableInternal;
 template<class Type>                                        class ShapeVariableInternal;
+template<class Type>                                        class PatternVariableInternal;
 
 typedef Variable<float>     FloatVariable;
 typedef Variable<double>    DoubleVariable;
@@ -119,6 +120,24 @@ typedef Variable<Int24Signal&>                      Int24SignalVariable;
 typedef Variable<LongSignal&>                       LongSignalVariable;
 typedef Variable<Signal&>                           SignalVariable;
 
+typedef NumericalArray< Variable<float> >           FloatVariableArray;
+typedef NumericalArray< Variable<double> >          DoubleVariableArray;
+typedef NumericalArray< Variable<int> >             IntVariableArray;
+typedef NumericalArray< Variable<short> >           ShortVariableArray;
+typedef NumericalArray< Variable<Int24> >           Int24VariableArray;
+typedef NumericalArray< Variable<Long> >            LongVariableArray;
+typedef NumericalArray< Variable<LongLong> >        LongLongVariableArray;
+typedef NumericalArray< Variable<char> >            CharVariableArray;
+typedef NumericalArray< Variable<bool> >            BoolVariableArray;
 
+typedef NumericalArray< Variable<float> >           FloatVariables;
+typedef NumericalArray< Variable<double> >          DoubleVariables;
+typedef NumericalArray< Variable<int> >             IntVariables;
+typedef NumericalArray< Variable<short> >           ShortVariables;
+typedef NumericalArray< Variable<Int24> >           Int24Variables;
+typedef NumericalArray< Variable<Long> >            LongVariables;
+typedef NumericalArray< Variable<LongLong> >        LongLongVariables;
+typedef NumericalArray< Variable<char> >            CharVariables;
+typedef NumericalArray< Variable<bool> >            BoolVariables;
 
 #endif // PLONK_VARIABLEFORWARDDECLARATIONS_H

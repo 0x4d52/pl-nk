@@ -78,6 +78,9 @@ public:
     typedef typename BinaryOpFunctionsHelper<Type>::BinaryOpFunctionsType BinaryOpFunctionsType;
     typedef typename UnaryOpFunctionsHelper<Type>::UnaryOpFunctionsType UnaryOpFunctionsType;
 
+    typedef PatternVariableInternal<Type>   PatternVariableInternalType;
+    typedef NumericalArray<Variable>        PatternType;
+    
     /** Default constructor. */
     inline Variable() throw()
     :   Base (new VariableInternalType (Type()))
@@ -128,6 +131,12 @@ public:
     /** Initialised with a specific value. */
     inline Variable (Type const& initValue) throw()
     :   Base (new VariableInternalType (initValue))
+    {
+    }
+    
+    /** Initialised with a pattern/sequence. */
+    Variable (PatternType const& pat) throw()
+    :   Base (new PatternVariableInternalType (pat))
     {
     }
     
@@ -202,7 +211,7 @@ public:
     typedef FloatVariable                   CurveVariable;
     
     /** Create a shape variable that can transition in different ways to new values. */
-    Variable shape (StepsVariable const& numSteps) throw()
+    Variable shape (StepsVariable const& numSteps) const throw()
     {
         Internal* internal = new ShapeVariableInternalType (*this, numSteps, Shape::Linear, 0.f);
         return Variable (internal);
@@ -210,7 +219,7 @@ public:
     
     /** Create a shape variable that can transition in different ways to new values. */
     Variable shape (StepsVariable const& numSteps,
-                    ShapeTypeVariable const& shapeType) throw()
+                    ShapeTypeVariable const& shapeType) const throw()
     {
         Internal* internal = new ShapeVariableInternalType (*this, numSteps, shapeType, 0.f);
         return Variable (internal);
@@ -219,7 +228,7 @@ public:
     /** Create a shape variable that can transition in different ways to new values. */
     Variable shape (StepsVariable const& numSteps,
                     ShapeTypeVariable const& shapeType,
-                    CurveVariable const& curve) throw()
+                    CurveVariable const& curve) const throw()
     {
         Internal* internal = new ShapeVariableInternalType (*this, numSteps, shapeType, curve);
         return Variable (internal);
