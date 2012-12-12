@@ -79,7 +79,7 @@ public:
 private:
     PatternType pattern;
     int index;
-    mutable Type cachedValue;
+    Type cachedValue;
 };
 
 #endif // PLONK_PATTERNVARIABLE_H

@@ -66,7 +66,6 @@ public:
     
     const Type getValue() const throw()
     {
-        this->cachedValue = Type (operand.getValue());
         return this->cachedValue;
     }
     
@@ -97,7 +96,7 @@ public:
     
 private:
     Variable<OtherType> operand; 
-    mutable Type cachedValue;
+    Type cachedValue;
 };
 
 #endif // PLONK_TYPEVARIABLE_H

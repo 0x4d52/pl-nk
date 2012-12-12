@@ -140,6 +140,14 @@ public:
     {
     }
     
+    /** Initialised with a pattern/sequence. */
+    template<class OtherType>
+    Variable (NumericalArray< Variable<OtherType> > const& pat) throw()
+    :   Base (new TypeVariableInternal<Type,OtherType> (Variable<OtherType> (static_cast< VariableInternalBase<OtherType>* > (new PatternVariableInternal<OtherType> (pat)))))
+    {
+        // what a nasty expression!
+    }
+    
     /** Create a Variable that converts from one type to another. */
     template<class OtherType>
     inline Variable (OtherType const& other) throw()
@@ -273,8 +281,6 @@ public:
     {
         return UnitType (*this).kr (interpType);
     }
-
-    
 };
 
 PLONK_BINARYOPGLOBALS_TEMPLATE(Variable,Type); // declares global functions with the same name as the binary operators
