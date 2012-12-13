@@ -43,7 +43,7 @@
 #include "plonk_DelayForwardDeclarations.h"
 
 
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class DelayFormDelay
 :   public DelayForm<SampleType, DelayFormType::Delay, 1, 1>
 {
@@ -82,7 +82,9 @@ public:
     typedef NumericalArray2D<DurationChannelType,DurationUnitType>  DurationUnitArrayType;
     
     typedef NumericalArray2D<ChannelType,UnitType>                  UnitArrayType;
-    typedef InterpLinear<SampleType,DurationType>                   InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
+    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
 
     typedef void (*InputFunction)  (Data&, DelayState&);
     typedef void (*ReadFunction)   (Data&, DelayState&);
@@ -224,19 +226,20 @@ public:
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup DelayUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class DelayUnit
 {
 public:    
-    typedef DelayFormDelay<SampleType>              FormType;
+    typedef DelayFormDelay<SampleType,InterpTypeCode>   FormType;
     
-    typedef Delay1ParamChannelInternal<FormType>    DelayInternal;
-    typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;
+    typedef Delay1ParamChannelInternal<FormType>        DelayInternal;
+    typedef UnitBase<SampleType>                        UnitType;
+    typedef InputDictionary                             Inputs;
     
-    typedef typename DelayInternal::Param1Type      DurationType;
-    typedef UnitBase<DurationType>                  DurationUnitType;
-    
+    typedef typename DelayInternal::Param1Type          DurationType;
+    typedef UnitBase<DurationType>                      DurationUnitType;
+
+    typedef DelayUnit<SampleType, Interp::Lagrange3>    HQ;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -274,6 +277,7 @@ public:
     
 };
 
+typedef DelayUnit<PLONK_TYPE_DEFAULT> Delay;
 typedef DelayUnit<PLONK_TYPE_DEFAULT> Delay;
 
 

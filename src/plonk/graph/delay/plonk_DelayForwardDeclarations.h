@@ -50,10 +50,19 @@ template<class FormType> class Delay2ParamChannelInternal;
 template<class FormType> class Delay3ParamChannelInternal;
 template<class FormType> class Delay4ParamChannelInternal;
 
-template<class SampleType> class DelayFormDelay;
-template<class SampleType> class DelayFormCombFB;
-template<class SampleType> class DelayFormCombDecay;
-template<class SampleType> class DelayFormAllpassFFFB;
-template<class SampleType> class DelayFormAllPassDecay;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class DelayFormDelay;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class DelayFormCombFB;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class DelayFormCombDecay;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class DelayFormAllpassFFFB;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class DelayFormAllPassDecay;
+
+template<class FilterShape, Interp::TypeCode InterpTypeCode = Interp::Linear> class CombFilter1ParamUnit;
+
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class DelayUnit;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class CombFBUnit;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class CombDecayUnit;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class AllpassFFFBUnit;
+template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear> class AllpassDecayUnit;
+
 
 #endif // PLONK_DELAYFORWARDDECLARATIONS_H

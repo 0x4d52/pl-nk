@@ -42,7 +42,7 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "plonk_DelayForwardDeclarations.h"
 
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class DelayFormCombFB
 :   public DelayForm<SampleType, DelayFormType::CombFB, 2, 2>
 {
@@ -83,7 +83,9 @@ public:
     typedef Param2Type                                              FeedbackType;    
     typedef UnitBase<FeedbackType>                                  FeedbackUnitType;
     
-    typedef InterpLinear<SampleType,DurationType>                   InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
+    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     typedef void (*InputFunction)  (Data&, DelayState&);
     typedef void (*ReadFunction)   (Data&, DelayState&);
@@ -219,22 +221,24 @@ public:
  
 
  @ingroup DelayUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class CombFBUnit
 {
 public:    
-    typedef DelayFormCombFB<SampleType>             FormType;
+    typedef DelayFormCombFB<SampleType,InterpTypeCode>      FormType;
     
-    typedef Delay2ParamChannelInternal<FormType>    DelayInternal;
-    typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;
+    typedef Delay2ParamChannelInternal<FormType>            DelayInternal;
+    typedef UnitBase<SampleType>                            UnitType;
+    typedef InputDictionary                                 Inputs;
     
-    typedef typename DelayInternal::Param1Type      DurationType;
-    typedef UnitBase<DurationType>                  DurationUnitType;
+    typedef typename DelayInternal::Param1Type              DurationType;
+    typedef UnitBase<DurationType>                          DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type      FeedbackType;
-    typedef UnitBase<FeedbackType>                  FeedbackUnitType;
+    typedef typename DelayInternal::Param2Type              FeedbackType;
+    typedef UnitBase<FeedbackType>                          FeedbackUnitType;
     
+    typedef CombFBUnit<SampleType, Interp::Lagrange3>       HQ;
+
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();

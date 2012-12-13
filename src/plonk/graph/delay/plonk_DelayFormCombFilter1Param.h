@@ -42,7 +42,7 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "plonk_DelayForwardDeclarations.h"
 
-template<class FilterShape>
+template<class FilterShape, Interp::TypeCode InterpTypeCode>
 class DelayFormCombFilter1Param
 :   public DelayForm<typename FilterShape::SampleDataType, 
                      DelayFormType::CombFilter1Param, 
@@ -102,7 +102,9 @@ public:
     typedef Param3Type                                              FrequencyType;    
     typedef UnitBase<FrequencyType>                                 FrequencyUnitType;
 
-    typedef InterpLinear<SampleType,DurationType>                   InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
+    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     typedef void (*InputFunction)  (Data&, DelayState&);
     typedef void (*ReadFunction)   (Data&, DelayState&);
@@ -262,25 +264,27 @@ public:
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
  @ingroup DelayUnits */
-template<class FilterShape>
+template<class FilterShape, Interp::TypeCode InterpTypeCode>
 class CombFilter1ParamUnit
 {
 public:    
-    typedef typename FilterShape::SampleDataType    SampleType;
-    typedef DelayFormCombFilter1Param<FilterShape>  FormType;
+    typedef typename FilterShape::SampleDataType                    SampleType;
+    typedef DelayFormCombFilter1Param<FilterShape,InterpTypeCode>   FormType;
     
-    typedef Delay3ParamChannelInternal<FormType>    DelayInternal;
-    typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;
+    typedef Delay3ParamChannelInternal<FormType>                    DelayInternal;
+    typedef UnitBase<SampleType>                                    UnitType;
+    typedef InputDictionary                                         Inputs;
     
-    typedef typename DelayInternal::Param1Type      DurationType;
-    typedef UnitBase<DurationType>                  DurationUnitType;
+    typedef typename DelayInternal::Param1Type                      DurationType;
+    typedef UnitBase<DurationType>                                  DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type      FeedbackType;
-    typedef UnitBase<FeedbackType>                  FeedbackUnitType;
+    typedef typename DelayInternal::Param2Type                      FeedbackType;
+    typedef UnitBase<FeedbackType>                                  FeedbackUnitType;
 
-    typedef typename DelayInternal::Param3Type      FrequencyType;
-    typedef UnitBase<FrequencyType>                 FrequencyUnitType;
+    typedef typename DelayInternal::Param3Type                      FrequencyType;
+    typedef UnitBase<FrequencyType>                                 FrequencyUnitType;
+
+    typedef CombFilter1ParamUnit<FilterShape, Interp::Lagrange3>    HQ;
 
     static inline UnitInfos getInfo() throw()
     {

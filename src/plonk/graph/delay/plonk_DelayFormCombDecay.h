@@ -43,7 +43,7 @@
 #include "plonk_DelayForwardDeclarations.h"
 
 
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class DelayFormCombDecay
 :   public DelayFormCombFB<SampleType>
 {
@@ -77,7 +77,9 @@ public:
     typedef Param2Type                                              DecayType;    
     typedef UnitBase<DecayType>                                     DecayUnitType;
     
-    typedef InterpLinear<SampleType,DurationType>                   InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
+    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     
     static inline IntArray getInputKeys() throw()
@@ -164,23 +166,24 @@ public:
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup DelayUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class CombDecayUnit
 {
 public:    
-    typedef DelayFormCombDecay<SampleType>              FormType;
-    typedef DelayFormCombFB<SampleType>                 AltFormType;
+    typedef DelayFormCombDecay<SampleType,InterpTypeCode>       FormType;
+    typedef DelayFormCombFB<SampleType,InterpTypeCode>          AltFormType;
 
-    typedef Delay2ParamChannelInternal<FormType>        DelayInternal;
-    typedef UnitBase<SampleType>                        UnitType;
-    typedef InputDictionary                             Inputs;
+    typedef Delay2ParamChannelInternal<FormType>                DelayInternal;
+    typedef UnitBase<SampleType>                                UnitType;
+    typedef InputDictionary                                     Inputs;
     
-    typedef typename DelayInternal::Param1Type          DurationType;
-    typedef UnitBase<DurationType>                      DurationUnitType;
+    typedef typename DelayInternal::Param1Type                  DurationType;
+    typedef UnitBase<DurationType>                              DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type          DecayType;
-    typedef UnitBase<DecayType>                         DecayUnitType;
+    typedef typename DelayInternal::Param2Type                  DecayType;
+    typedef UnitBase<DecayType>                                 DecayUnitType;
     
+    typedef CombDecayUnit<SampleType, Interp::Lagrange3>        HQ;
     
     static inline UnitInfos getInfo() throw()
     {

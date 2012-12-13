@@ -42,7 +42,7 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "plonk_DelayForwardDeclarations.h"
 
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class DelayFormAllpassFFFB
 :   public DelayForm<SampleType, DelayFormType::AllpassFFFB, 2, 2>
 {
@@ -83,7 +83,9 @@ public:
     typedef Param2Type                                              CoeffType;    
     typedef UnitBase<CoeffType>                                     CoeffUnitType;
     
-    typedef InterpLinear<SampleType,DurationType>                   InterpType;
+    typedef InterpSelect<SampleType,DurationType,InterpTypeCode>    InterpSelect;
+    typedef typename InterpSelect::InterpType                       InterpType;
+    typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
     typedef void (*InputFunction)  (Data&, DelayState&);
     typedef void (*ReadFunction)   (Data&, DelayState&);
@@ -218,22 +220,23 @@ public:
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup DelayUnits */
-template<class SampleType>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class AllpassFFFBUnit
 {
 public:    
-    typedef DelayFormAllpassFFFB<SampleType>        FormType;
+    typedef DelayFormAllpassFFFB<SampleType,InterpTypeCode>     FormType;
     
-    typedef Delay2ParamChannelInternal<FormType>    DelayInternal;
-    typedef UnitBase<SampleType>                    UnitType;
-    typedef InputDictionary                         Inputs;
+    typedef Delay2ParamChannelInternal<FormType>                DelayInternal;
+    typedef UnitBase<SampleType>                                UnitType;
+    typedef InputDictionary                                     Inputs;
     
-    typedef typename DelayInternal::Param1Type      DurationType;
-    typedef UnitBase<DurationType>                  DurationUnitType;
+    typedef typename DelayInternal::Param1Type                  DurationType;
+    typedef UnitBase<DurationType>                              DurationUnitType;
     
-    typedef typename DelayInternal::Param2Type      CoeffType;
-    typedef UnitBase<CoeffType>                     CoeffUnitType;
+    typedef typename DelayInternal::Param2Type                  CoeffType;
+    typedef UnitBase<CoeffType>                                 CoeffUnitType;
     
+    typedef AllpassFFFBUnit<SampleType, Interp::Lagrange3>      HQ;
     
     static inline UnitInfos getInfo() throw()
     {
