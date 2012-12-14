@@ -101,10 +101,12 @@ public:
     void initChannel (const int channel) throw()
     {
         const UnitType& input = this->getInputAsUnit (IOKey::Generic);
-        const RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         
+#ifdef PLONK_DEBUG
+        const RateUnitType& rateUnit = ChannelInternalCore::getInputAs<RateUnitType> (IOKey::Rate);
         plonk_assert (input.getOverlap (channel) == Math<DoubleVariable>::get1());
         plonk_assert (rateUnit.getOverlap (channel) == Math<DoubleVariable>::get1());
+#endif
         
         const SampleType sourceValue = input.getValue (channel);
         this->initValue (sourceValue);

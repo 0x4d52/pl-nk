@@ -284,7 +284,7 @@ public:
     typedef typename DelayInternal::Param3Type                      FrequencyType;
     typedef UnitBase<FrequencyType>                                 FrequencyUnitType;
 
-    typedef CombFilter1ParamUnit<FilterShape, Interp::Lagrange3>    HQ;
+//    typedef CombFilter1ParamUnit<FilterShape, Interp::Lagrange3>    HQ;
 
     static inline UnitInfos getInfo() throw()
     {

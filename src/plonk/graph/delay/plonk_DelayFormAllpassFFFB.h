@@ -236,7 +236,7 @@ public:
     typedef typename DelayInternal::Param2Type                  CoeffType;
     typedef UnitBase<CoeffType>                                 CoeffUnitType;
     
-    typedef AllpassFFFBUnit<SampleType, Interp::Lagrange3>      HQ;
+//    typedef AllpassFFFBUnit<SampleType, Interp::Lagrange3>      HQ;
     
     static inline UnitInfos getInfo() throw()
     {

@@ -387,6 +387,75 @@ struct ShadowType { };
 
 #define PLONK_SHADOW(VAR) ShadowType* VAR; (void)VAR;
 
+//#if PLONK_APPLE && defined(__OBJC__)
+//BEGIN_PLONK_NAMESPACE
+//
+///** Some utilties for the Mac/iOS platform. */
+//class AppleUtilities
+//{
+//public:
+//    enum Locations
+//    {
+//        Bundle,		///< In the \<MyApp\>.app/ bundle, files can be placed here during compilation in Xcode.
+//        Documents,	///< The application's Documents directory, files here will be backed up during iTunes sync.
+//        Temporary	///< The application's tmp directory, NB this is cleared when the device is restarted.
+//    };
+//    
+//    static Text pathInDirectory (Locations location, const char *filename) throw()
+//    {
+//        plonk_assert (filename != 0);
+//        
+//        switch (location)
+//        {
+//            case Bundle: {
+//                NSString *nsFilename = [[NSString alloc] initWithUTF8String: filename];
+//                NSString* nspath = [[NSBundle mainBundle] pathForResource:nsFilename ofType:nil];
+//                [nsFilename release];
+//                
+//                if(!nspath)
+//                    return "";
+//                else
+//                    return [nspath UTF8String];
+//                
+//            } break;
+//                
+//            case Documents: {
+//                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//                NSString *documentsDirectory = [paths objectAtIndex:0];
+//                if (!documentsDirectory)
+//                    return "";
+//                else
+//                {
+//                    NSString *nsFilename = [[NSString alloc] initWithUTF8String: filename];
+//                    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:nsFilename];
+//                    [nsFilename release];
+//                    return [appFile UTF8String];
+//                }
+//                
+//            } break;
+//                
+//            case Temporary: {
+//                
+//                NSString *home = NSHomeDirectory();
+//                if(!home)
+//                    return "";
+//                else
+//                {
+//                    return Text ([home UTF8String]) << Text ("/tmp/") << Text (filename);
+//                }
+//                
+//            }
+//                
+//            default:
+//                return "";
+//        }
+//    }
+//};
+//
+//END_PLONK_NAMESPACE
+//#endif // PLONK_APPLE && __OBJC__
+
+
 END_PLONK_NAMESPACE
 
 

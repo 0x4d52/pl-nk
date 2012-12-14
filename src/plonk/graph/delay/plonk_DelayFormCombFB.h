@@ -237,7 +237,7 @@ public:
     typedef typename DelayInternal::Param2Type              FeedbackType;
     typedef UnitBase<FeedbackType>                          FeedbackUnitType;
     
-    typedef CombFBUnit<SampleType, Interp::Lagrange3>       HQ;
+//    typedef CombFBUnit<SampleType, Interp::Lagrange3>       HQ;
 
     static inline UnitInfos getInfo() throw()
     {

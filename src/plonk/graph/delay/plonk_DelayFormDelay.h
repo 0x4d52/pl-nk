@@ -239,7 +239,7 @@ public:
     typedef typename DelayInternal::Param1Type          DurationType;
     typedef UnitBase<DurationType>                      DurationUnitType;
 
-    typedef DelayUnit<SampleType, Interp::Lagrange3>    HQ;
+//    typedef DelayUnit<SampleType, Interp::Lagrange3>    HQ;
     
     static inline UnitInfos getInfo() throw()
     {
