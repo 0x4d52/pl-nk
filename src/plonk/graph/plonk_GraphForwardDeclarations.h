@@ -92,6 +92,10 @@ template<class SampleType>                                              class Pa
 template<class SampleType>                                              class AtomicVariableUnit;
 template<class SampleType,
          Interp::TypeCode InterpTypeCode = Interp::Linear>              class TaskUnit;
+template<class SampleType,
+         Interp::TypeCode InterpTypeCode = Interp::Linear>              class LagUnit;
+template<class SampleType,
+         Interp::TypeCode InterpTypeCode = Interp::Linear>              class DCUnit;
 
 // type conversion units
 template<class OutputSampleType, class InputSampleType>                 class TypeUnit;

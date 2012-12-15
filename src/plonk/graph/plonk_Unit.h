@@ -739,6 +739,26 @@ public:
     {
         return ar();
     }
+    
+    inline UnitBase lag (UnitBase const& duration) const throw()
+    {
+        return LagUnit<SampleType>::ar (*this, duration);
+    }
+
+    inline UnitBase lag() const throw()
+    {
+        return LagUnit<SampleType>::ar (*this);
+    }
+    
+    inline UnitBase dc (UnitBase const& control) const throw()
+    {
+        return DCUnit<SampleType>::ar (*this, control);
+    }
+    
+    inline UnitBase dc() const throw()
+    {
+        return DCUnit<SampleType>::ar (*this);
+    }
 
     /** Mixes this unit down to a single channel. */
     inline UnitBase mix() const throw()

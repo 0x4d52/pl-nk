@@ -157,7 +157,7 @@ typedef LPFP1Unit<PLONK_TYPE_DEFAULT> LPFP1;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
 
  @ingroup AllUnits FilterUnits ControlUnits */
-template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class LagUnit
 {
 public:
@@ -444,7 +444,7 @@ typedef DecayUnit<PLONK_TYPE_DEFAULT> Decay;
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
  
  @ingroup AllUnits FilterUnits ControlUnits*/
-template<class SampleType, Interp::TypeCode InterpTypeCode = Interp::Linear>
+template<class SampleType, Interp::TypeCode InterpTypeCode>
 class DCUnit
 {
 public:
