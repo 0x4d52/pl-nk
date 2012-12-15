@@ -50,7 +50,7 @@ class FFTChannelInternal
 public:
     typedef ChannelInternalCore::Data                           Data;
     typedef ChannelBase<SampleType>                             ChannelType;
-    typedef SimpleArray<ChannelType>                            ChannelArrayType;
+    typedef ObjectArray<ChannelType>                            ChannelArrayType;
     typedef FFTChannelInternal<SampleType>                      FFTInternal;
     typedef ProxyOwnerChannelInternal<SampleType,Data>          Internal;
     typedef UnitBase<SampleType>                                UnitType;

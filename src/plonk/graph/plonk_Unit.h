@@ -95,6 +95,8 @@ protected:
     typedef typename BinaryOpFunctionsHelper<SampleType>::BinaryOpFunctionsType BinaryOpFunctionsType;
     typedef typename UnaryOpFunctionsHelper<SampleType>::UnaryOpFunctionsType UnaryOpFunctionsType;
 
+    typedef typename TypeUtility<SampleType>::IndexType IndexType;
+
 public:
     typedef ObjectArrayInternal<ChannelType>    Internal;    
     typedef UnitType                            Base;    
@@ -691,11 +693,14 @@ public:
                  BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                  SampleRate const& preferredSampleRate = SampleRate::getDefault()) const throw()
     {
+        typedef UnitBase<IndexType> RateUnitType;
+        const RateUnitType& rateOne (Math<RateUnitType>::get1());
+
         switch (interpType)
         {
-            case Interp::Linear:    return ResampleUnit<SampleType,Interp::Linear>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
-            case Interp::Lagrange3: return ResampleUnit<SampleType,Interp::Lagrange3>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
-            default:                return ResampleUnit<SampleType,Interp::Linear>::ar (*this, 1, preferredBlockSize, preferredSampleRate);
+            case Interp::Linear:    return ResampleUnit<SampleType,Interp::Linear>::ar (*this, rateOne, preferredBlockSize, preferredSampleRate);
+            case Interp::Lagrange3: return ResampleUnit<SampleType,Interp::Lagrange3>::ar (*this, rateOne, preferredBlockSize, preferredSampleRate);
+            default:                return ResampleUnit<SampleType,Interp::Linear>::ar (*this, rateOne, preferredBlockSize, preferredSampleRate);
         }
     }
     
@@ -703,12 +708,12 @@ public:
      By default the default sample rate and default block size are used. */
     inline UnitBase ar() const throw()
     {
-        return ResampleUnit<SampleType,Interp::Linear>::ar (*this, 1, BlockSize::getDefault(), SampleRate::getDefault());
+        return ResampleUnit<SampleType,Interp::Linear>::ar (*this);
     }
     
     /** Resamples this unit to the default control rate sample rate and block size. */
     UnitBase kr (const Interp::TypeCode interpType) const throw()
-    {
+    {        
         switch (interpType)
         {
             case Interp::Linear:    return ResampleUnit<SampleType,Interp::Linear>::kr (*this);
@@ -721,6 +726,18 @@ public:
     inline UnitBase kr() const throw()
     {
         return ResampleUnit<SampleType,Interp::Linear>::kr (*this);
+    }
+    
+    inline UnitBase reblock (BlockSize const& newBlockSize) const throw()
+    {
+        typedef UnitBase<IndexType> RateUnitType;
+        const RateUnitType& rateOne (Math<RateUnitType>::get1());
+        return ResampleUnit<SampleType,Interp::Linear>::ar (*this, rateOne, newBlockSize);
+    }
+
+    inline UnitBase reblock() const throw()
+    {
+        return ar();
     }
 
     /** Mixes this unit down to a single channel. */
