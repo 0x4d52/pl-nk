@@ -566,6 +566,21 @@ static inline void pl_VectorMulAddF_NN1N (float *result, const float* input, flo
     vDSP_vsma (input, 1, &a, b, 1, result, 1, N);
 }
 
+static inline void pl_VectorZMulF_ZNNNNN (float *resultReal, float *resultImag,
+                                          const float* leftReal, const float* leftImag,
+                                          const float* rightReal, const float* rightImag,
+                                          PlankUL N)
+{
+    DSPSplitComplex result, left, right;
+    result.realp = resultReal;
+    result.imagp = resultImag;
+    left.realp = (float*)leftReal;
+    left.imagp = (float*)leftImag;
+    right.realp = (float*)rightReal;
+    right.imagp = (float*)rightImag;
+    vDSP_zvmul (&left, 1, &right, 1, &result, 1, N, 1);
+}
+
 
 // works as documented but seems useless as it interpolates thr "wrong" two samples
 // fixed in 10.7.2 but is that seems to be the runtime lib so would still 
@@ -906,6 +921,21 @@ static inline void pl_VectorMulAddD_NN11 (double *result, const double* input, d
 static inline void pl_VectorMulAddD_NN1N (double *result, const double* input, double a, const double* b, PlankUL N) 
 { 
     vDSP_vsmaD (input, 1, &a, b, 1, result, 1, N);
+}
+
+static inline void pl_VectorZMulD_ZNNNNN (double *resultReal, double *resultImag,
+                                          const double* leftReal, const double* leftImag,
+                                          const double* rightReal, const double* rightImag,
+                                          PlankUL N)
+{
+    DSPDoubleSplitComplex result, left, right;
+    result.realp = resultReal;
+    result.imagp = resultImag;
+    left.realp = (double*)leftReal;
+    left.imagp = (double*)leftImag;
+    right.realp = (double*)rightReal;
+    right.imagp = (double*)rightImag;
+    vDSP_zvmulD (&left, 1, &right, 1, &result, 1, N, 1);
 }
 
 // works as documented but seems useless as it interpolates thr "wrong" two samples

@@ -659,6 +659,61 @@ PLONK_NUMERICALARRAYUNARYOPS_DEFINE(D);
 
 //------------------------------------------------------------------------------
 
+template<class NumericalType>
+class NumericalArrayComplex
+{
+public:
+    inline static void zmul (NumericalType* dstReal,
+                             NumericalType* dstimag,
+                             const NumericalType* leftReal,
+                             const NumericalType* leftImag,
+                             const NumericalType* rightReal,
+                             const NumericalType* rightImag,
+                             const UnsignedLong numItems) throw()
+    {
+        for (UnsignedLong i = 0; i < numItems; ++i)
+        {
+            dstReal[i] = leftReal[i] * rightReal[i] - leftImag[i] * rightImag[i];
+            dstimag[i] = leftReal[i] * rightImag[i] + leftImag[i] * rightReal[i];
+        }
+    }
+};
+
+template<>
+class NumericalArrayComplex<float>
+{
+public:
+    inline static void zmul (float* dstReal,
+                             float* dstimag,
+                             const float* leftReal,
+                             const float* leftImag,
+                             const float* rightReal,
+                             const float* rightImag,
+                             const UnsignedLong numItems) throw()
+    {
+        pl_VectorZMulF_ZNNNNN (dstReal, dstimag, leftReal, leftImag, rightReal, rightImag, numItems);
+    }
+};
+
+template<>
+class NumericalArrayComplex<double>
+{
+public:
+    inline static void zmul (double* dstReal,
+                             double* dstimag,
+                             const double* leftReal,
+                             const double* leftImag,
+                             const double* rightReal,
+                             const double* rightImag,
+                             const UnsignedLong numItems) throw()
+    {
+        pl_VectorZMulD_ZNNNNN (dstReal, dstimag, leftReal, leftImag, rightReal, rightImag, numItems);
+    }
+};
+
+
+//------------------------------------------------------------------------------
+
 /** For specificying the initial state of a NumericalArray. */
 class NumericalArraySpec
 {

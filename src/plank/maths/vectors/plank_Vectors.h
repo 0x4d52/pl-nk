@@ -172,6 +172,27 @@
         PlankUL i; for (i = 0; i < N; PLANK_INC(i)) { result[i] = pl_Add##TYPECODE (pl_Mul##TYPECODE (input[i], mul), add[i]); }\
     }
 
+#define PLANK_VECTORZMUL_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(ZMul,TYPECODE,_ZNNNNN)
+
+#define PLANK_VECTORZMUL_DEFINE(TYPECODE) \
+    /** Complex multiply.
+     @param resultReal The real output vector.
+     @param resultImag The imag output vector.
+     @param leftReal The real left input vector.
+     @param leftImag The imag right input vector.
+     @param rightReal The real left input vector.
+     @param rightImag The imag right input vector.
+     @param N The number of items in the vectors. */\
+    static inline void PLANK_VECTORZMUL_NAME(TYPECODE) (Plank##TYPECODE *resultReal, Plank##TYPECODE *resultImag,\
+                                                        const Plank##TYPECODE* leftReal, const Plank##TYPECODE* leftImag,\
+                                                        const Plank##TYPECODE* rightReal, const Plank##TYPECODE* rightImag,\
+                                                        PlankUL N) {\
+        PlankUL i;\
+        for (i = 0; i < N; PLANK_INC(i)) {\
+            resultReal[i] = leftReal[i] * rightReal[i] - leftImag[i] * rightImag[i];\
+            resultImag[i] = leftReal[i] * rightImag[i] + leftImag[i] * rightReal[i];\
+        }\
+    }
 
 #define PLANK_VECTORFILL_NAME(TYPECODE) PLANK_VECTOR_NAMEINTERNAL(Fill,TYPECODE,_N1)
 
@@ -410,6 +431,8 @@ PLANK_VECTOR_OPS_COMMON(LL)
 PLANK_VECTORCONVERTERS_DEFINE
 PLANK_VECTORCONVERTERSROUND_DEFINE
 
+PLANK_VECTORZMUL_DEFINE(F)
+PLANK_VECTORZMUL_DEFINE(D)
 
 #define PLANK_SIMDF_LENGTH   1 
 #define PLANK_SIMDF_SIZE     4 

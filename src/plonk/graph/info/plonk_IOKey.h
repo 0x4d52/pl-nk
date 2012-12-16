@@ -106,7 +106,7 @@ public:
         Feedback,       ///< A feedback amount
         Feedforward,    ///< A feedforward amount
         Coeffs,         ///< Filter coefficients
-        FFT,            ///< FFT data
+        FFT,            ///< Complex FFT data with real on even channels, imag on odd channels
         Real,           ///< Real parts of complex data.
         Imaginary,      ///< Imaginary parts of complex data.
         Gate,           ///< Gate control.

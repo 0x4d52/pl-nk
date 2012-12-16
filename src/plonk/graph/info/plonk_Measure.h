@@ -67,6 +67,7 @@ public:
         Decibels,               ///< Decibels.
         Radians,                ///< Angle in radians.
         Degrees,                ///< Angle in degrees.
+        FFT,                    ///< Complex data with real data in even channels, imag data in odd channels
         Real,
         Imaginary,
         Coeffs,

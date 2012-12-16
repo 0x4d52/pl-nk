@@ -65,6 +65,7 @@ Measure::Name Measure::fromInt (const int value) throw()
         Measure::Decibels,
         Measure::Radians,
         Measure::Degrees,
+        Measure::FFT,
         Measure::Real,
         Measure::Imaginary,
         Measure::Coeffs,
@@ -109,6 +110,7 @@ Text Measure::getName (const int index) throw()
         "Decibels",       
         "Radians",
         "Degrees",
+        "FFT",
         "Real",
         "Imaginary",
         "Coeffs",
@@ -143,6 +145,7 @@ Text Measure::getSymbol (const int index) throw()
         "dB",       //"Decibels",  
         "",         //"Radians"
         "o",        //"Degrees" maybe do this in Unicode?
+        "z",        //"FFT"
         "",         //"Real"
         "i",        //"Imaginary"
         "",         //"Coeffs"
