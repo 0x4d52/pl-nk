@@ -43,20 +43,28 @@
 #include "../plonk_GraphForwardDeclarations.h"
 
 
+template<class SampleType> class OverlapMakeChannelInternal;
+
+PLONK_CHANNELDATA_DECLARE(OverlapMakeChannelInternal,SampleType)
+{
+    ChannelInternalCore::Data base;
+    bool zeroPad;
+};
+
 /** Output overlapped block. */
 template<class SampleType>
 class OverlapMakeChannelInternal 
-:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
+:   public ChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(OverlapMakeChannelInternal,SampleType)>
 {
 public:
-    typedef ChannelInternalCore::Data                               Data;
-    typedef ChannelBase<SampleType>                                 ChannelType;
-    typedef OverlapMakeChannelInternal<SampleType>                  OverlapMakeInternal;
-    typedef ChannelInternal<SampleType,Data>                        Internal;
-    typedef ChannelInternalBase<SampleType>                         InternalBase;
-    typedef UnitBase<SampleType>                                    UnitType;
-    typedef InputDictionary                                         Inputs;
-    typedef NumericalArray<SampleType>                              Buffer;
+    typedef PLONK_CHANNELDATA_NAME(OverlapMakeChannelInternal,SampleType)   Data;
+    typedef ChannelBase<SampleType>                                         ChannelType;
+    typedef OverlapMakeChannelInternal<SampleType>                          OverlapMakeInternal;
+    typedef ChannelInternal<SampleType,Data>                                Internal;
+    typedef ChannelInternalBase<SampleType>                                 InternalBase;
+    typedef UnitBase<SampleType>                                            UnitType;
+    typedef InputDictionary                                                 Inputs;
+    typedef NumericalArray<SampleType>                                      Buffer;
     
     OverlapMakeChannelInternal (Inputs const& inputs, 
                                 Data const& data, 
@@ -102,10 +110,11 @@ public:
         tempBufferPos = 0;
         tempBufferFill = 0;
     }    
-        
-    void process (ProcessInfo& info, const int channel) throw()
+    
+    inline void process (ProcessInfo& info, const int channel) throw()
     {                
         /* Be careful optimising this with the new NumericalArray vector stuff */
+        const Data& data = this->getState();
 
         UnitType& inputUnit (this->getInputAsUnit (IOKey::Generic));
                 
@@ -141,12 +150,29 @@ public:
             }
             
             // output one buffer
-            for (i = 0; i < outputBufferLength; ++i)
-                outputSamples[i] = tempBufferSamples[tempBufferPos++];
-            
-            // adjust the position pointer
-            tempBufferPos -= outputBufferLength;
-            tempBufferPos += overlapHop;
+            if (data.zeroPad == false)
+            {
+                // filled with overlapping data
+                
+                for (i = 0; i < outputBufferLength; ++i)
+                    outputSamples[i] = tempBufferSamples[tempBufferPos++];
+                    
+                // adjust the position pointer
+                tempBufferPos -= outputBufferLength;
+                tempBufferPos += overlapHop;
+            }
+            else
+            {
+                // overlaps are zero-padded
+                
+                const SampleType& zero = Math<SampleType>::get0();
+                
+                for (i = 0; i < overlapHop; ++i)
+                    outputSamples[i] = tempBufferSamples[tempBufferPos++];
+
+                for (i = overlapHop; i < outputBufferLength; ++i)
+                    outputSamples[i] = zero;
+            }
             
             // if we're over 1/2 way move the 2nd half to the start 
             // (the 2nd half will be re-filled next time if needed)
@@ -170,12 +196,9 @@ public:
             plonk_assert (outputBufferLength == inputBuffer.length());
             
             Buffer::copyData (outputSamples, inputSamples, outputBufferLength);
-            
-//            for (i = 0; i < outputBufferLength; ++i)
-//                outputSamples[i] = inputSamples[i];
-            
         }
     }
+    
     
 private:
     Buffer tempBuffer;
@@ -189,11 +212,12 @@ private:
 /** Create and overlapped processing stream.
  
  @par Factory functions:
- - ar (input, overlap=0.5)
+ - ar (input, overlap=0.5, zeroPad=false)
  
  @par Inputs:
  - input: (unit, multi) the unit to overlap
  - overlap: (doublevariable) the desired overlap (1= is no overlap, 0.5= blocks overlap by half their length)
+ - zeroPad: (bool) whether the overlapping (latter) part of the buffer is zero filled
 
  
  @ingroup ConverterUnits */
@@ -226,7 +250,8 @@ public:
     
     /**  */
     static UnitType ar (UnitType const& input, 
-                        DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) throw()
+                        DoubleVariable const& overlap = Math<DoubleVariable>::get0_5(),
+                        const bool zeroPad = false) throw()
     {                        
         plonk_assert (overlap.getValue() >= TypeUtility<double>::getTypeEpsilon());
         plonk_assert (overlap.getValue() <= 1.0);
@@ -235,7 +260,7 @@ public:
         inputs.put (IOKey::Generic, input);
         inputs.put (IOKey::OverlapMake, overlap);
         
-        Data data = { -1.0, -1.0 };
+        Data data = { { -1.0, -1.0 }, zeroPad };
         
         return UnitType::template createFromInputs<OverlapMakeInternal> (inputs, 
                                                                          data, 

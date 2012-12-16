@@ -774,13 +774,19 @@ public:
     }
     
     /** Create an overlapping process from this unit's contrinuous stream. */
-    inline UnitBase overlapMake (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) const throw()
+    UnitBase overlapMake (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5(), const bool zeroPad = false) const throw()
     {
-        return OverlapMakeUnit<SampleType>::ar (*this, overlap);
+        return OverlapMakeUnit<SampleType>::ar (*this, overlap, zeroPad);
+    }
+    
+    /** Create an overlapping process from this unit's contrinuous stream. */
+    UnitBase overlapZeroPad (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) const throw()
+    {
+        return OverlapMakeUnit<SampleType>::ar (*this, overlap, true);
     }
     
     /** Mix down overlapping process to a continuous stream. */
-    inline UnitBase overlapMix (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) const throw()
+    UnitBase overlapMix (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) const throw()
     {
         return OverlapMixUnit<SampleType>::ar (*this, overlap);
     }
@@ -826,14 +832,14 @@ public:
     PLONK_UNARYOPS(UnitBase);
     
     /** Linear to linear mapping. */
-    UnitBase linlin (UnitBase const& inLow, UnitBase const& inHigh, 
-                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    inline UnitBase linlin (UnitBase const& inLow, UnitBase const& inHigh,
+                            UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linlin (*this, inLow, inHigh, outLow, outHigh);
     }
     
     /** Linear to linear mapping assuming the input is in the range -1...+1. */
-    UnitBase linlin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    inline UnitBase linlin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         const SampleType peak2peak (peak * Math<SampleType>::get2());
@@ -844,15 +850,15 @@ public:
     
     /** Linear to exponential mapping. 
      Note that the output range must not cross or meet zero. */
-    UnitBase linexp (UnitBase const& inLow, UnitBase const& inHigh, 
-                     UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    inline UnitBase linexp (UnitBase const& inLow, UnitBase const& inHigh,
+                            UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linexp (*this, inLow, inHigh, outLow, outHigh);
     }
     
     /** Linear to exponential mapping assuming the input is in the range -1...+1. 
      Note that the output range must not cross or meet zero. */
-    UnitBase linexp (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    inline UnitBase linexp (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         const SampleType peak2peak (peak * Math<SampleType>::get2());
@@ -863,28 +869,28 @@ public:
     }
     
     /** Linear to sinusoidal mapping. */
-    UnitBase linsin (UnitBase const& inLow, UnitBase const& inHigh, 
+    inline UnitBase linsin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linsin (*this, inLow, inHigh, outLow, outHigh);
     }
     
     /** Linear to sinusoidal mapping assuming the input is in the range -1...+1. */
-    UnitBase linsin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    inline UnitBase linsin (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         return plonk::linsin2 (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
     }
     
     /** Linear to Welch curve mapping. */
-    UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
+    inline UnitBase linwelch (UnitBase const& inLow, UnitBase const& inHigh, 
                        UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::linwelch (*this, inLow, inHigh, outLow, outHigh);
     }
     
     /** Linear to Welch curve mapping assuming the input is in the range -1...+1. */
-    UnitBase linwelch (UnitBase const& outLow, UnitBase const& outHigh) const throw()
+    inline UnitBase linwelch (UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         const SampleType peak (TypeUtility<SampleType>::getTypePeak());
         return plonk::linwelch (*this, UnitBase (-peak), UnitBase (peak), outLow, outHigh);
@@ -892,7 +898,7 @@ public:
     
     /** Exponential to linear mapping. 
      Note that the intput range must not cross or meet zero. */
-    UnitBase explin (UnitBase const& inLow, UnitBase const& inHigh, 
+    inline UnitBase explin (UnitBase const& inLow, UnitBase const& inHigh, 
                      UnitBase const& outLow, UnitBase const& outHigh) const throw()
     {
         return plonk::explin (*this, inLow, inHigh, outLow, outHigh);
