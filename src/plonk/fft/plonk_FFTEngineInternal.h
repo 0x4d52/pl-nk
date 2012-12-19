@@ -66,11 +66,13 @@ public:
     
     inline void forward (float* output, const float* input) throw()
     {
+        plonk_assert (output != input);
         pl_FFTF_Forward (this->fft, output, input);
     }
         
     inline void inverse (float* output, const float* input) throw()
     {
+        plonk_assert (output != input);
         pl_FFTF_Inverse (this->fft, output, input);
     }
     

@@ -169,8 +169,8 @@ public:
                          IOKey::End,
                          
                          // inputs
-                         IOKey::LeftOperand,     Measure::FFT,          IOInfo::NoDefault,      IOLimit::None, 
-                         IOKey::RightOperand,    Measure::FFT,          IOInfo::NoDefault,      IOLimit::None, 
+                         IOKey::LeftOperand,     Measure::FFTUnpacked,          IOInfo::NoDefault,      IOLimit::None,
+                         IOKey::RightOperand,    Measure::FFTUnpacked,          IOInfo::NoDefault,      IOLimit::None,
                          IOKey::End);
     }    
     

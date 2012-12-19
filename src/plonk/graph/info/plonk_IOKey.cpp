@@ -69,7 +69,8 @@ IOKey::Name IOKey::fromInt (const int value) throw()
         IOKey::Feedback,
         IOKey::Feedforward,
         IOKey::Coeffs,
-        IOKey::FFT,
+        IOKey::FFTPacked,
+        IOKey::FFTUnacked,
         IOKey::Real,
         IOKey::Imaginary,
         IOKey::Gate,
@@ -153,7 +154,8 @@ Text IOKey::getName (const int keyIndex) throw()
         "Feedforward"
         "Coeffs",
         
-        "FFT",
+        "FFTPacked",
+        "FFTUnpacked",
         "Real",
         "Imaginary",
         "Gate",
@@ -227,7 +229,8 @@ IOKey::IOType IOKey::getType (const int keyIndex) throw()
         IOKey::TypeUnit,            //"Feedback"
         IOKey::TypeUnit,            //"Feedforward"
         IOKey::TypeUnit,            //"Coeffs",
-        IOKey::TypeUnit,            //"FFT",
+        IOKey::TypeUnit,            //"FFTPacked",
+        IOKey::TypeUnit,            //"FFTUnpacked",
         IOKey::TypeUnit,            //"Real",
         IOKey::TypeUnit,            //"Imaginary",
         IOKey::TypeUnit,            //"Gate",
@@ -302,7 +305,8 @@ Text IOKey::getTypeName (const int keyIndex) throw()
         "Unit",             //"Feedforward",
 
         "Unit",             //"Coeffs",
-        "Unit",             //"FFT",
+        "Unit",             //"FFTPacked",
+        "Unit",             //"FFTUnpacked",
         "Unit",             //"Real",
         "Unit",             //"Imaginary",
         "Unit",             //"Gate",

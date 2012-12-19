@@ -67,7 +67,8 @@ public:
         Decibels,               ///< Decibels.
         Radians,                ///< Angle in radians.
         Degrees,                ///< Angle in degrees.
-        FFT,                    ///< Complex data with real data in even channels, imag data in odd channels
+        FFTUnpacked,            ///< Complex FFT data in packed format, real/imag in the same channel, imag for DC/Nyquist removed
+        FFTPacked,              ///< Complex FFT data unpacked with real data in even channels, imag data in odd channels
         Real,
         Imaginary,
         Coeffs,
