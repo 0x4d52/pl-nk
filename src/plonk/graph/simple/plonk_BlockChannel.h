@@ -88,7 +88,7 @@ public:
         
         if (buffer.length() == BlockSize::getDefault().getValue())
             this->setBlockSize (BlockSize::getDefault());
-        else
+        else if (this->getBlockSize() == BlockSize::noPreference())
             this->setBlockSize (buffer.length());
         
         this->initValue (SampleType (0));

@@ -779,7 +779,7 @@ public:
         return OverlapMakeUnit<SampleType>::ar (*this, overlap, zeroPad);
     }
     
-    /** Create an overlapping process from this unit's contrinuous stream. */
+    /** Create an overlapping process from this unit's contrinuous stream, zero-padding the overlapping sections. */
     UnitBase overlapZeroPad (DoubleVariable const& overlap = Math<DoubleVariable>::get0_5()) const throw()
     {
         return OverlapMakeUnit<SampleType>::ar (*this, overlap, true);

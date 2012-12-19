@@ -124,28 +124,27 @@ public:
         const SampleType* const leftImagSamples = leftRealSamples + outputBufferLengthHalved;
         const SampleType* const rightImagSamples = rightRealSamples + outputBufferLengthHalved;
 
-//        const SampleType leftDC = leftRealSamples[0];
-//        const SampleType rightDC = rightRealSamples[0];
-//        const SampleType leftNyquist = leftImagSamples[0];
-//        const SampleType rightNyquist = rightImagSamples[0];
-//        
-//        NumericalArrayComplex<SampleType>::zmul (realOutputSamples, imagOutputSamples,
-//                                                 leftRealSamples, leftImagSamples,
-//                                                 rightRealSamples, rightImagSamples,
-//                                                 outputBufferLengthHalved);
-//        
-//        realOutputSamples[0] = leftDC * rightDC;
-//        imagOutputSamples[0] = leftNyquist * rightNyquist;
-
-        realOutputSamples[0] = leftRealSamples[0] * rightRealSamples[0];
-        imagOutputSamples[0] = leftImagSamples[0] * rightImagSamples[0];
-
-        for (int i = 1; i < outputBufferLengthHalved; ++i)
-        {
-            realOutputSamples[i] = leftRealSamples[i] * rightRealSamples[i] - leftImagSamples[i] * rightImagSamples[i];
-            imagOutputSamples[i] = leftRealSamples[i] * rightImagSamples[i] + rightRealSamples[i] * leftImagSamples[i];
-        }
+        const SampleType leftDC = leftRealSamples[0];
+        const SampleType rightDC = rightRealSamples[0];
+        const SampleType leftNyquist = leftImagSamples[0];
+        const SampleType rightNyquist = rightImagSamples[0];
         
+        NumericalArrayComplex<SampleType>::zmul (realOutputSamples, imagOutputSamples,
+                                                 leftRealSamples, leftImagSamples,
+                                                 rightRealSamples, rightImagSamples,
+                                                 outputBufferLengthHalved);
+        
+        realOutputSamples[0] = leftDC * rightDC;
+        imagOutputSamples[0] = leftNyquist * rightNyquist;
+
+//        realOutputSamples[0] = leftRealSamples[0] * rightRealSamples[0];
+//        imagOutputSamples[0] = leftImagSamples[0] * rightImagSamples[0];
+//
+//        for (int i = 1; i < outputBufferLengthHalved; ++i)
+//        {
+//            realOutputSamples[i] = leftRealSamples[i] * rightRealSamples[i] - leftImagSamples[i] * rightImagSamples[i];
+//            imagOutputSamples[i] = leftRealSamples[i] * rightImagSamples[i] + rightRealSamples[i] * leftImagSamples[i];
+//        }        
     }
 };
 
