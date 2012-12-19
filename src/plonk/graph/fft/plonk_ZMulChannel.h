@@ -45,27 +45,24 @@
 /** Complex multiplication channel. */
 template<class SampleType>
 class ZMulChannelInternal
-:   public ProxyOwnerChannelInternal<SampleType, ChannelInternalCore::Data>
+:   public ChannelInternal<SampleType, ChannelInternalCore::Data>
 {
 public:
     typedef ChannelInternalCore::Data                           Data;
     typedef ChannelBase<SampleType>                             ChannelType;
     typedef ObjectArray<ChannelType>                            ChannelArrayType;
     typedef ZMulChannelInternal<SampleType>                     ZMulInternal;
-    typedef ProxyOwnerChannelInternal<SampleType,Data>          Internal;
+    typedef ChannelInternal<SampleType,Data>                    Internal;
+    typedef ChannelInternalBase<SampleType>                     InternalBase;
     typedef UnitBase<SampleType>                                UnitType;
     typedef InputDictionary                                     Inputs;
     typedef NumericalArray<SampleType>                          Buffer;
-
-    enum InputIndices { RealInput, ImagInput, NumInputs };
-    enum OutputIndices { RealOutput, ImagOutput, NumOutputs };
     
     ZMulChannelInternal (Inputs const& inputs,
                          Data const& data,
                          BlockSize const& blockSize,
-                         SampleRate const& sampleRate,
-                         ChannelArrayType& channels) throw()
-    :   Internal (NumOutputs, inputs, data, blockSize, sampleRate, channels)
+                         SampleRate const& sampleRate) throw()
+    :   Internal (inputs, data, blockSize, sampleRate)
     {
     }
     
@@ -78,59 +75,77 @@ public:
     {
         const IntArray keys (IOKey::LeftOperand, IOKey::RightOperand);
         return keys;
-    }    
-            
-    void initChannel (const int channel) throw()
-    {
-        if ((channel % this->getNumChannels()) == 0)
-        {
-            const UnitType& leftOperand = this->getInputAsUnit (IOKey::LeftOperand);
-            this->setBlockSize (leftOperand.getBlockSize (0));
-            this->setSampleRate (leftOperand.getSampleRate (0));    
-            this->setOverlap (leftOperand.getOverlap (0));
-
-#ifdef PLONK_DEBUG
-            const UnitType& rightOperand = this->getInputAsUnit (IOKey::RightOperand);
-            plonk_assert (leftOperand.getBlockSize (0) == leftOperand.getBlockSize (1));
-            plonk_assert (leftOperand.getSampleRate (0) == leftOperand.getSampleRate (1));
-            plonk_assert (leftOperand.getOverlap (0) == leftOperand.getOverlap (1));
-            plonk_assert (leftOperand.getBlockSize (0) == rightOperand.getBlockSize (0));
-            plonk_assert (leftOperand.getSampleRate (0) == rightOperand.getSampleRate (0));
-            plonk_assert (leftOperand.getOverlap (0) == rightOperand.getOverlap (0));
-#endif
-        }
-        
-        this->initProxyValue (channel, SampleType (0)); // todo: should really calculate this...
     }
     
-    void process (ProcessInfo& info, const int /*channel*/) throw()
+    InternalBase* getChannel (const int index) throw()
+    {
+        const Inputs channelInputs = this->getInputs().getChannel (index);
+        return new ZMulInternal (channelInputs,
+                                 this->getState(),
+                                 this->getBlockSize(),
+                                 this->getSampleRate());
+    }
+    
+    void initChannel (const int channel) throw()
+    {
+        const UnitType& leftOperand = this->getInputAsUnit (IOKey::LeftOperand);
+        this->setBlockSize (leftOperand.getBlockSize (channel));
+        this->setSampleRate (leftOperand.getSampleRate (channel));
+        this->setOverlap (leftOperand.getOverlap (channel));
+
+#ifdef PLONK_DEBUG
+        const UnitType& rightOperand = this->getInputAsUnit (IOKey::RightOperand);
+        plonk_assert (leftOperand.getBlockSize (channel) == rightOperand.getBlockSize (channel));
+        plonk_assert (leftOperand.getSampleRate (channel) == rightOperand.getSampleRate (channel));
+        plonk_assert (leftOperand.getOverlap (channel) == rightOperand.getOverlap (channel));
+#endif
+        
+        this->initValue (SampleType (0)); // todo: should really calculate this...
+    }
+    
+    void process (ProcessInfo& info, const int channel) throw()
     {
         UnitType& leftUnit (this->getInputAsUnit (IOKey::LeftOperand));
         UnitType& rightUnit (this->getInputAsUnit (IOKey::RightOperand));
         
-        const Buffer& leftRealBuffer (leftUnit.process (info, RealInput));
-        const Buffer& rightRealBuffer (rightUnit.process (info, RealInput));
-        const Buffer& leftImagBuffer (leftUnit.process (info, ImagInput));
-        const Buffer& rightImagBuffer (rightUnit.process (info, ImagInput));
+        const Buffer& leftBuffer (leftUnit.process (info, channel));
+        const Buffer& rightBuffer (rightUnit.process (info, channel));
         
-        SampleType* const realOutputSamples = this->getOutputSamples (RealOutput);
-        SampleType* const imagOutputSamples = this->getOutputSamples (ImagOutput);
-        const int outputBufferLength = this->getOutputBuffer (0).length();
+        const int outputBufferLength = this->getOutputBuffer().length();
+        const int outputBufferLengthHalved = (unsigned int)outputBufferLength / 2;
+        SampleType* const realOutputSamples = this->getOutputSamples();
+        SampleType* const imagOutputSamples = realOutputSamples + outputBufferLengthHalved;
         
-        plonk_assert ((outputBufferLength == leftRealBuffer.length()) &&
-                      (outputBufferLength == rightRealBuffer.length()) &&
-                      (outputBufferLength == leftImagBuffer.length()) &&
-                      (outputBufferLength == rightImagBuffer.length()));
+        plonk_assert ((outputBufferLength == leftBuffer.length()) &&
+                      (outputBufferLength == rightBuffer.length()));
         
-        const SampleType* const leftRealSamples = leftRealBuffer.getArray();
-        const SampleType* const rightRealSamples = rightRealBuffer.getArray();
-        const SampleType* const leftImagSamples = leftImagBuffer.getArray();
-        const SampleType* const rightImagSamples = rightImagBuffer.getArray();
+        const SampleType* const leftRealSamples = leftBuffer.getArray();
+        const SampleType* const rightRealSamples = rightBuffer.getArray();
+        const SampleType* const leftImagSamples = leftRealSamples + outputBufferLengthHalved;
+        const SampleType* const rightImagSamples = rightRealSamples + outputBufferLengthHalved;
 
-        NumericalArrayComplex<SampleType>::zmul (realOutputSamples, imagOutputSamples,
-                                                 leftRealSamples, rightRealSamples,
-                                                 leftImagSamples, rightImagSamples,
-                                                 outputBufferLength);
+//        const SampleType leftDC = leftRealSamples[0];
+//        const SampleType rightDC = rightRealSamples[0];
+//        const SampleType leftNyquist = leftImagSamples[0];
+//        const SampleType rightNyquist = rightImagSamples[0];
+//        
+//        NumericalArrayComplex<SampleType>::zmul (realOutputSamples, imagOutputSamples,
+//                                                 leftRealSamples, leftImagSamples,
+//                                                 rightRealSamples, rightImagSamples,
+//                                                 outputBufferLengthHalved);
+//        
+//        realOutputSamples[0] = leftDC * rightDC;
+//        imagOutputSamples[0] = leftNyquist * rightNyquist;
+
+        realOutputSamples[0] = leftRealSamples[0] * rightRealSamples[0];
+        imagOutputSamples[0] = leftImagSamples[0] * rightImagSamples[0];
+
+        for (int i = 1; i < outputBufferLengthHalved; ++i)
+        {
+            realOutputSamples[i] = leftRealSamples[i] * rightRealSamples[i] - leftImagSamples[i] * rightImagSamples[i];
+            imagOutputSamples[i] = leftRealSamples[i] * rightImagSamples[i] + rightRealSamples[i] * leftImagSamples[i];
+        }
+        
     }
 };
 
@@ -144,8 +159,8 @@ public:
  - ar (leftOperand, rightOperand)
  
  @par Inputs:
- - leftOperand: (unit, multi) the left operand in FFT complex format with real data in even channels and imag data in odd channels
- - rightOperand: (unit, multi) the right operand in FFT complex format with real data in even channels and imag data in odd channels
+ - leftOperand: (unit, multi) the left operand in FFT packed complex format
+ - rightOperand: (unit, multi) the right operand in FFT packed complex format
  
 
  @ingroup ConverterUnits FFTUnits */
@@ -163,45 +178,31 @@ public:
         return UnitInfo ("ZMul", "Complex multiplication.",
                          
                          // output
-                         2, 
-                         IOKey::Real,            Measure::Real,          IOInfo::NoDefault,     IOLimit::None,
-                         IOKey::Imaginary,       Measure::Imaginary,     IOInfo::NoDefault,     IOLimit::None, 
+                         ChannelCount::VariableChannelCount,
+                         IOKey::FFTPacked,       Measure::FFTPacked,          IOInfo::NoDefault,     IOLimit::None,
                          IOKey::End,
                          
                          // inputs
-                         IOKey::LeftOperand,     Measure::FFTUnpacked,          IOInfo::NoDefault,      IOLimit::None,
-                         IOKey::RightOperand,    Measure::FFTUnpacked,          IOInfo::NoDefault,      IOLimit::None,
+                         IOKey::LeftOperand,     Measure::FFTPacked,          IOInfo::NoDefault,      IOLimit::None,
+                         IOKey::RightOperand,    Measure::FFTPacked,          IOInfo::NoDefault,      IOLimit::None,
                          IOKey::End);
     }    
     
     /** Complex multiplication of signals. */
     static inline UnitType ar (UnitType const& leftOperand, UnitType const& rightOperand) throw()
-    {                     
-        const int numLeftOperandChannels = leftOperand.getNumChannels();
-        const int numRightOperandChannels = rightOperand.getNumChannels();
-
-        plonk_assert ((numLeftOperandChannels % 2) == 0);
-        plonk_assert ((numRightOperandChannels % 2) == 0);
+    {        
+        Inputs inputs;
+        inputs.put (IOKey::LeftOperand, leftOperand);
+        inputs.put (IOKey::RightOperand, rightOperand);
         
-        const int numChannels = plonk::max (numLeftOperandChannels, numRightOperandChannels);
-        
-        UnitType result (UnitType::emptyWithAllocatedSize (numChannels));
         Data data = { -1.0, -1.0 };
-
-        for (int i = 0; i < numChannels; i += 2)
-        {
-            Inputs inputs;
-            inputs.put (IOKey::LeftOperand,  UnitType (leftOperand[i],  leftOperand[i + 1]));
-            inputs.put (IOKey::RightOperand, UnitType (rightOperand[i], rightOperand[i + 1]));
-            
-            result.add (UnitType::template proxiesFromInputs<ZMulInternal> (inputs,
-                                                                            data,
-                                                                            BlockSize::noPreference(),
-                                                                            SampleRate::noPreference()));
-        }
         
-        return result;
+        return UnitType::template createFromInputs<ZMulInternal> (inputs,
+                                                                  data,
+                                                                  BlockSize::noPreference(),
+                                                                  SampleRate::noPreference());
     }
+
 };
 
 typedef ZMulUnit<PLONK_TYPE_DEFAULT> ZMul;
