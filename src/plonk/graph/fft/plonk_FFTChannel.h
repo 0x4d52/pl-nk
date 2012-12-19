@@ -115,6 +115,8 @@ public:
         
         // transform
         this->fft.forward (realOutputSamples, inputSamples);
+                
+        imagOutputSamples[0] = SampleType (0);
         
         int i, j;
         

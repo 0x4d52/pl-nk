@@ -168,9 +168,6 @@ public:
             plonk_assert (outputBufferLength == inputBuffer.length());
             
             Buffer::copyData (outputSamples, inputSamples, outputBufferLength);
-
-//            for (i = 0; i < outputBufferLength; ++i)
-//                outputSamples[i] = inputSamples[i];
         }
     }
     

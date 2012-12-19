@@ -159,7 +159,6 @@ typedef NumericalArray<UnsignedInt>         UnsignedInt1D;
 typedef NumericalArray<UnsignedLong>        UnsignedLong1D;
 typedef NumericalArray<Float>               Float1D;
 typedef NumericalArray<Double>              Double1D;
-typedef NumericalArray<PLONK_TYPE_DEFAULT>  Buffer;
 
 typedef NumericalArray2D<Char>				CharArray2D;
 typedef NumericalArray2D<Short>				ShortArray2D;
@@ -186,6 +185,10 @@ typedef NumericalArray2D<UnsignedInt>		UnsignedInt2D;
 typedef NumericalArray2D<UnsignedLong>		UnsignedLong2D;
 typedef NumericalArray2D<Float>				Float2D;
 typedef NumericalArray2D<Double>			Double2D;
+
+typedef NumericalArray<PLONK_TYPE_DEFAULT>      Buffer;
+typedef NumericalArray2D<PLONK_TYPE_DEFAULT>    Buffers;
+
 
 typedef ObjectArray2D<Text,TextArray>       TextArray2D;
 typedef ObjectArray2D<Text,TextArray>       Text2D;

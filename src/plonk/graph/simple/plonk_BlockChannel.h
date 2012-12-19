@@ -125,10 +125,12 @@ private:
  
  @par Factory functions:
  - ar (buffer, overlap=1, preferredBlockSize=default, preferredSampleRate=default)
- - kr (buffer, overlap=1) 
+ - ar (buffers, overlap=1, preferredBlockSize=default, preferredSampleRate=default)
+ - kr (buffer, overlap=1)
  
  @par Inputs:
  - buffer: (buffer) the buffer to use
+ - buffers: (buffers) an array of buffers to use
  - overlap: (doublevariable) the overlap to use 1= no overlap, 0.5= blocks overlap by half their length
  - preferredBlockSize: the preferred output block size (for advanced usage, leave on default if unsure)
  - preferredSampleRate: the preferred output sample rate (for advanced usage, leave on default if unsure)
@@ -146,6 +148,7 @@ public:
     typedef UnitBase<SampleType>                    UnitType;
     typedef InputDictionary                         Inputs;
     typedef NumericalArray<SampleType>              Buffer;
+    typedef NumericalArray2D<SampleType>            BufferArray;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -184,7 +187,32 @@ public:
                                                                    preferredBlockSize, 
                                                                    preferredSampleRate);
     }
+    
+    /** Create an audio rate block generator. */
+    static inline UnitType ar (BufferArray const& buffers,
+                               DoubleVariable const& overlap = Math<DoubleVariable>::get1(),
+                               BlockSize const& preferredBlockSize = BlockSize::noPreference(),
+                               SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
+    {
+        const int numChannels = buffers.length();
+        UnitType result (UnitType::emptyWithAllocatedSize (numChannels));
+        Data data = { -1.0, -1.0 };
         
+        for (int i = 0; i < numChannels; ++i)
+        {
+            Inputs inputs;
+            inputs.put (IOKey::Buffer, buffers[i]);
+            inputs.put (IOKey::OverlapMake, overlap);
+            
+            result.add (UnitType::template createFromInputs<BlockInternal> (inputs,
+                                                                            data,
+                                                                            preferredBlockSize,
+                                                                            preferredSampleRate));
+        }
+        
+        return result;
+    }
+    
     static inline UnitType kr (Buffer const& buffer,                                
                                DoubleVariable const& overlap = Math<DoubleVariable>::get1()) throw()
     {

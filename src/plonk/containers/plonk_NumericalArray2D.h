@@ -110,7 +110,7 @@ public:
 	
 	NumericalArray2D (InitialObject const &i00,
 					  InitialObject const &i01,
-					  InitialObject const &i02 = InitialObject(),
+					  InitialObject const &i02,// = InitialObject(),
 					  InitialObject const &i03 = InitialObject()) throw()
 	:	Base (i00, i01, i02, i03) 
 	{
