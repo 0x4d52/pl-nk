@@ -128,6 +128,8 @@
 #include "../graph/converters/plonk_OverlapMakeChannel.h"
 #include "../graph/converters/plonk_OverlapMixChannel.h"
 #include "../graph/converters/plonk_TaskChannel.h"
+#include "../graph/converters/plonk_ReblockChannel.h"
+
 
 #include "../graph/simple/plonk_BinaryOpChannel.h"
 #include "../graph/simple/plonk_ConstantChannel.h"

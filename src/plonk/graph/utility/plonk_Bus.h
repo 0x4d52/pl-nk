@@ -225,10 +225,7 @@ public:
                 const int samplesThisTime = plonk::min (numSamplesRemaining, 
                                                         bufferSamplesRemaining);
                 
-                NumericalArray<SampleType>::copyData (destData, bufferSamples + bufferOffsetSamples, samplesThisTime);    
-//                for (i = 0; i < samplesThisTime; ++i)
-//                    destData[i] = bufferSamples[bufferOffsetSamples + i];
-                
+                NumericalArray<SampleType>::copyData (destData, bufferSamples + bufferOffsetSamples, samplesThisTime);                    
                 numSamplesRemaining -= samplesThisTime;
                 
                 if (numSamplesRemaining > 0)
@@ -247,10 +244,7 @@ public:
             if ((diff > 0.0) && (diff >= readDiff))
                 this->growBufferSize();
             
-            NumericalArray<SampleType>::zero (destData, numReadSamples);
-//            for (i = 0; i < numReadSamples; ++i)
-//                destData[i] = SampleType (0);
-            
+            NumericalArray<SampleType>::zero (destData, numReadSamples);            
         }
 
         readDiff = diff; // keep track of the read difference to determine if we're actually getting anywhere
