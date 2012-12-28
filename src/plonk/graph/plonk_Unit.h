@@ -1223,6 +1223,20 @@ public:
         this->setSize (1, true);
         this->put (0, ChannelType::getNull());
     }
+    
+    inline TextArray getNames() throw()
+    {
+        TextArray names;
+        for (int i = 0; i < this->getNumChannels(); ++i)
+            names.add (this->at (i).getName());
+        return names;
+    }
+    
+    /** Returns @c true if this unit needs to process for the given timestamp. */
+    inline bool needsToProcess (ProcessInfo& info, const int channel) throw()
+    {        
+        return this->wrapAt (channel).needsToProcess (info, channel);
+    }
         
     /** Process a specific channel in this unit.
      The host should prepare a ProcessInfo which is passed to this function

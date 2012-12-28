@@ -197,15 +197,21 @@ public:
     inline const TimeStamp getNextTimeStamp() const throw()                 { return this->getInternal()->getNextTimeStamp(); }
     inline bool shouldBeDeletedNow (TimeStamp const& time) const throw()    { return this->getInternal()->shouldBeDeletedNow (time); }
     
-    inline void process (ProcessInfo& info, const int channel) throw()
+    /** Returns @c true if this unit needs to process for the given timestamp. */
+    inline bool needsToProcess (ProcessInfo& info, const int channel) throw()
     {
         const TimeStamp& nextTimeStamp = this->getInternal()->getNextTimeStamp();
         const TimeStamp& infoTimeStamp = info.getTimeStamp();
-        
-        if (infoTimeStamp >= nextTimeStamp)
+
+        return (infoTimeStamp >= nextTimeStamp);
+    }
+    
+    inline void process (ProcessInfo& info, const int channel) throw()
+    {        
+        if (this->needsToProcess (info, channel))
         {
             this->getInternal()->process (info, channel);
-            this->getInternal()->setLastTimeStamp (infoTimeStamp);
+            this->getInternal()->setLastTimeStamp (info.getTimeStamp());
             this->getInternal()->updateTimeStamp();
             
             if (info.getShouldDelete() == true)

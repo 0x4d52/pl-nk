@@ -620,7 +620,7 @@ public:
                         BlockSize const& preferredBlockSize = BlockSize::getDefault(),
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {            
-        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
+        const WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
         return TableType::ar (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add, preferredBlockSize, preferredSampleRate);
     }
     
@@ -630,7 +630,7 @@ public:
                         UnitType const& add = SampleType (0),
                         const int numHarmonics = 21) throw()
     {
-        WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
+        const WeightsType weights = WeightsType::series (numHarmonics, 1, 1).reciprocal() * WeightsType (SampleType (1), SampleType (0));
         return TableType::kr (WavetableType::harmonic (8192, weights).normalise(), frequency, mul, add);
     }        
 };

@@ -72,7 +72,7 @@ public:
     
     IntArray getInputKeys() const throw()
     {
-        const IntArray keys (IOKey::Generic);
+        const IntArray keys (IOKey::Generic, IOKey::Busses);
         return keys;
     }
     
@@ -87,24 +87,37 @@ public:
     }
     
     void initChannel (const int channel) throw()
-    {                
-    }    
+    {
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);        
+        plonk_assert (input.getOverlap (channel) == Math<DoubleVariable>::get1());
+        this->setSampleRate (input.getSampleRate (channel));        
+        this->initValue (input.getValue (channel));        
+    }
     
     void process (ProcessInfo& info, const int channel) throw()
-    {                
+    {
+        UnitType& input = this->getInputAsUnit (IOKey::Generic);
+        Busses& busses = this->getInputAsBusses (IOKey::Busses);
+        
+        if (busses.atUnchecked (0).getEarliestValidTime() < info.getTimeStamp())
+        {
+            // bus all the channels in input
+        }
+        
+        // output one channel..
     }
 };
 
 //------------------------------------------------------------------------------
 
-/** Re-buffer to a different blocm size. 
+/** Re-buffer to a different block size. 
  
  @par Factory functions:
- - ar (input, overlap=0.5)
+ - ar (input, preferredBlockSize=default)
  
  @par Inputs:
- - input: (unit, multi) the unit to de-overlap
- - overlap: (doublevariable) the source overlap (1= is no overlap, 0.5= blocks overlap by half their length)
+ - input: (unit, multi) the unit to re-buffer
+ - preferredBlockSize: the preferred output block size
 
  
  @ingroup ConverterUnits */
@@ -118,6 +131,9 @@ public:
     typedef ChannelInternal<SampleType,Data>            Internal;
     typedef UnitBase<SampleType>                        UnitType;
     typedef InputDictionary                             Inputs;    
+    typedef NumericalArray<SampleType>                  Buffer;
+    typedef BusBuffer<SampleType>                       Bus;
+    typedef PLONK_BUSARRAYBASETYPE<Bus>                 Busses;
     
     static inline UnitInfos getInfo() throw()
     {
@@ -138,10 +154,16 @@ public:
     /**  */
     static UnitType ar (UnitType const& input,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault()) throw()
-    {                        
+    {
+        const int numChannels = input.getNumChannels();
+        Busses busses (Busses::emptyWithAllocatedSize (numChannels));
+        
+        for (int i = 0; i < numChannels; ++i)
+            busses.add (Bus (preferredBlockSize, input.getBlockSize (i), input.getSampleRate (i)));
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
+        inputs.put (IOKey::Busses, busses);
         
         Data data = { -1.0, -1.0 };
         
@@ -150,8 +172,6 @@ public:
                                                                      preferredBlockSize,
                                                                      SampleRate::noPreference());
     }
-    
-    
 };
 
 typedef ReblockUnit<PLONK_TYPE_DEFAULT> Reblock;

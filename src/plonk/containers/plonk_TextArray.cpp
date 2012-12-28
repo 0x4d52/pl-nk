@@ -231,6 +231,24 @@ int TextArray::indexOfIgnoreCase (Text const& item, const int startIndex) const 
 	return -1;
 }
 
+Text TextArray::asText() const throw()
+{
+    Text result = "[\"";
+    
+    const int length = this->length();
+    
+    for (int i = 0; i < length - 1; ++i)
+    {
+        result.add (this->at (i));
+        result.add ("\", ");
+    }
+    
+    result.add (this->at (length - 1));
+    result.add ("\"]");
+    
+    return result;
+}
+
 void TextArray::print (const char *prefix) const throw()
 {
 	const Text *textArray = this->getArray();

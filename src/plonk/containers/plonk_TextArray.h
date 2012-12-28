@@ -146,6 +146,8 @@ public:
 	int indexOf (Text const& item, const int startIndex = 0) const throw();
 	int indexOfIgnoreCase (Text const& item, const int startIndex = 0) const throw();
 	
+    Text asText() const throw();
+    
 	void print (const char *prefix = 0) const throw();
     
     PLONK_OBJECTARROWOPERATOR(TextArray);
