@@ -244,7 +244,7 @@ public:
             if ((diff > 0.0) && (diff >= readDiff))
                 this->growBufferSize();
             
-            NumericalArray<SampleType>::zero (destData, numReadSamples);            
+            NumericalArray<SampleType>::zeroData (destData, numReadSamples);
         }
 
         readDiff = diff; // keep track of the read difference to determine if we're actually getting anywhere

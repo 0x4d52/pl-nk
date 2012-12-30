@@ -194,7 +194,7 @@ public:
     inline ChannelBase getChannel (const int index) throw()                 { return ChannelBase (this->getInternal()->getChannel (index)); }
     inline ChannelBase operator[] (const int index) throw()                 { return ChannelBase (this->getInternal()->getChannel (index)); }
 
-    inline const TimeStamp getNextTimeStamp() const throw()                 { return this->getInternal()->getNextTimeStamp(); }
+    inline const TimeStamp& getNextTimeStamp() const throw()                { return this->getInternal()->getNextTimeStamp(); }
     inline bool shouldBeDeletedNow (TimeStamp const& time) const throw()    { return this->getInternal()->shouldBeDeletedNow (time); }
     
     /** Returns @c true if this unit needs to process for the given timestamp. */

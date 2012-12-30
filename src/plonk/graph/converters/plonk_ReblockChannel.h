@@ -78,12 +78,17 @@ public:
     
     InternalBase* getChannel (const int index) throw()
     {
-        return this;
-//        const Inputs channelInputs = this->getInputs().getChannel (index);
-//        return new ReblockChannelInternal (channelInputs, 
-//                                           this->getState(),
-//                                           this->getBlockSize(),
-//                                           this->getSampleRate());
+        const UnitType& input = this->getInputAsUnit (IOKey::Generic);
+        const Busses& busses = this->getInputAsBusses (IOKey::Busses);
+
+        Inputs channelInputs;
+        channelInputs.put (IOKey::Generic, input[index]);
+        channelInputs.put (IOKey::Busses, busses); // must be all of them in this case
+
+        return new ReblockChannelInternal (channelInputs, 
+                                           this->getState(),
+                                           this->getBlockSize(),
+                                           this->getSampleRate());
     }
     
     void initChannel (const int channel) throw()
@@ -94,18 +99,62 @@ public:
         this->initValue (input.getValue (channel));        
     }
     
-    void process (ProcessInfo& info, const int channel) throw()
+    static inline TimeStamp minLatestValidTIme (Busses const& busses) throw()
     {
-        UnitType& input = this->getInputAsUnit (IOKey::Generic);
-        Busses& busses = this->getInputAsBusses (IOKey::Busses);
+        plonk_assert (busses.length() > 0);
         
-        if (busses.atUnchecked (0).getEarliestValidTime() < info.getTimeStamp())
+        TimeStamp result = busses.atUnchecked (0).getLatestValidTime();
+        
+        for (int i = 1; i < busses.length(); ++i)
         {
-            // bus all the channels in input
+            const TimeStamp newTime = busses.atUnchecked (i).getLatestValidTime();
+            
+            if (newTime < result)
+                result = newTime;
         }
         
-        // output one channel..
+        return result;
     }
+    
+    void process (ProcessInfo& info, const int channel) throw()
+    {
+        UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
+        Busses& busses = this->getInputAsBusses (IOKey::Busses);
+        
+        plonk_assert (busses.length() == inputUnit.getNumChannels());
+        
+        const int outputBufferLength = this->getOutputBuffer().length();
+        SampleType* const outputSamples = this->getOutputSamples();
+        
+        const TimeStamp infoTimeStamp = info.getTimeStamp();
+        const TimeStamp latestTimeNeeded = infoTimeStamp + this->getSampleDurationInTicks() * outputBufferLength;
+
+        while (minLatestValidTIme (busses) < latestTimeNeeded)
+        {                        
+            for (int i = 0; i < busses.length(); ++i)
+            {
+                if (busses.atUnchecked (i).getLatestValidTime() < latestTimeNeeded)
+                {
+                    const TimeStamp& thisTimeStamp = inputUnit.wrapAt (i).getNextTimeStamp();
+                    info.setTimeStamp (thisTimeStamp);
+                    
+                    const Buffer& inputBuffer (inputUnit.process (info, i));
+                    const SampleType* const inputSamples = inputBuffer.getArray();
+                    const int inputBufferLength = inputBuffer.length();
+
+                    busses.atUnchecked (i).write (thisTimeStamp, inputBufferLength, inputSamples);
+                }
+            }
+        }
+        
+        info.setTimeStamp (infoTimeStamp); // ensure it is reset for parent graph
+        
+        // output one channel..
+        busses.atUnchecked (channel).read (nextValidReadTime, outputBufferLength, outputSamples);
+    }
+    
+private:
+    TimeStamp nextValidReadTime;
 };
 
 //------------------------------------------------------------------------------
@@ -139,7 +188,7 @@ public:
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
 
-        return UnitInfo ("Reblock", "Re-buffer to a different blocm size.",
+        return UnitInfo ("Reblock", "Re-buffer to a different block size.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
@@ -157,9 +206,14 @@ public:
     {
         const int numChannels = input.getNumChannels();
         Busses busses (Busses::emptyWithAllocatedSize (numChannels));
-        
+                
         for (int i = 0; i < numChannels; ++i)
-            busses.add (Bus (preferredBlockSize, input.getBlockSize (i), input.getSampleRate (i)));
+        {
+            const Bus bus ((preferredBlockSize + input.getBlockSize (i)) * 2,
+                           input.getBlockSize (i),
+                           input.getSampleRate (i));
+            busses.add (bus);
+        }
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);

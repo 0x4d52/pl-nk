@@ -46,7 +46,6 @@
 #include "../../core/plonk_SenderContainer.h"
 #include "../../core/plonk_Receiver.h"
 #include "../utility/plonk_TimeStamp.h"
-//#include "plonk_ProcessInfoInternal.h"
 
 
 /** Holds information about the Unit graph.

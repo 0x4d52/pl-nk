@@ -1049,8 +1049,8 @@ public:
         return result;
     }
     
-    inline double getSampleDurationInTicks(const int index) const throw()          { return this->wrapAt (index)->getSampleDurationInTicks(); }
-    inline double getBlockDurationInTicks(const int index) const throw()           { return this->wrapAt (index)->getBlockDurationInTicks(); }
+    inline double getSampleDurationInTicks (const int index) const throw()         { return this->wrapAt (index)->getSampleDurationInTicks(); }
+    inline double getBlockDurationInTicks (const int index) const throw()          { return this->wrapAt (index)->getBlockDurationInTicks(); }
     
     inline const DoubleVariable& getOverlap (const int index) const throw()        { return this->wrapAt (index).getOverlap(); }
     inline DoubleVariable& getOverlap (const int index) throw()                    { return this->wrapAt (index).getOverlap(); }

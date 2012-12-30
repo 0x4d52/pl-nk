@@ -83,11 +83,11 @@ PortAudioAudioHostBase<SampleType>::PortAudioAudioHostBase (ObjectMemoryBase* om
 	err = Pa_Initialize();
     paCheckError (err);
     
-    this->setNumInputs (1);
-    this->setNumOutputs (2);
     this->setPreferredHostBlockSize (512);
     this->setPreferredGraphBlockSize (128);
-    this->setPreferredHostSampleRate (44100.0);    
+    this->setPreferredHostSampleRate (44100.0);
+    this->setNumInputs (1);
+    this->setNumOutputs (2);
 }
 
 template<class SampleType>
