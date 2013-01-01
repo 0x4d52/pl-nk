@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-12
+ Copyright University of the West of England, Bristol 2011-13
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -58,10 +58,13 @@ class SignalInternal : public SmartPointer
 public:
     typedef NumericalArray<SampleType>      Buffer;
     typedef NumericalArray2D<SampleType>    Buffers;
+    typedef Variable<SampleType>            SampleVariable;
+    typedef NumericalArray<SampleVariable>  SampleVariableArray;
     
     inline SignalInternal() throw()
     :   numInterleavedChannels (1)
     {
+        init();
     }
    
     inline SignalInternal (Buffers const& buffersToUse, 
@@ -71,6 +74,7 @@ public:
         numInterleavedChannels (1)
     {
         plonk_assert ((buffers.length() == 1) || buffers.isMatrix()); // each channel must be the same length
+        init();
     }
     
     inline SignalInternal (Buffer const& buffer, 
@@ -81,6 +85,7 @@ public:
         numInterleavedChannels (interleavedChannelsInBuffer)
     {
         plonk_assert (numInterleavedChannels > 0);
+        init();
     }
     
     inline int getNumFrames() const throw()
@@ -154,6 +159,15 @@ private:
     Buffers buffers;
     SampleRate sampleRate;
     const int numInterleavedChannels;
+        
+    SampleVariableArray sampleVariables;
+    IntVariableArray intVariables;
+        
+    void init() throw()
+    {
+        sampleVariables.setSize (buffers.length(), false);
+        intVariables.setSize (buffers.length(), false);
+    }
 };
 
 //------------------------------------------------------------------------------
@@ -163,12 +177,14 @@ template<class SampleType>
 class SignalBase : public SmartPointerContainer< SignalInternal<SampleType> >
 {
 public:
-    typedef SignalInternal<SampleType>          Internal;
-    typedef SmartPointerContainer<Internal>     Base;
-    typedef WeakPointerContainer<SignalBase>    Weak;    
+    typedef SignalInternal<SampleType>              Internal;
+    typedef SmartPointerContainer<Internal>         Base;
+    typedef WeakPointerContainer<SignalBase>        Weak;    
     
-    typedef typename Internal::Buffer           Buffer;
-    typedef typename Internal::Buffers          Buffers;
+    typedef typename Internal::Buffer               Buffer;
+    typedef typename Internal::Buffers              Buffers;
+    typedef typename Internal::SampleVariable       SampleVariable;
+    typedef typename Internal::SampleVariableArray  SampleVariableArray;
     
     SignalBase() throw()
     :   Base (new Internal ())
@@ -285,6 +301,27 @@ public:
     {
         return this->getInternal()->getDeinterleaved();
     }
+    
+    inline SampleVariableArray& getSampleVariables() throw()
+    {
+        return this->getInternal()->sampleVariables;
+    }
+
+    inline const SampleVariableArray& getSampleVariables() const throw()
+    {
+        return this->getInternal()->sampleVariables;
+    }
+
+    inline IntVariableArray& getIntVariables() throw()
+    {
+        return this->getInternal()->intVariables;
+    }
+    
+    inline const IntVariableArray& getIntVariables() const throw()
+    {
+        return this->getInternal()->intVariables;
+    }
+
 
     PLONK_OBJECTARROWOPERATOR(SignalBase);
 

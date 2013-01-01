@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-12
+ Copyright University of the West of England, Bristol 2011-13
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -99,7 +99,7 @@ public:
         this->initValue (input.getValue (channel));        
     }
     
-    static inline TimeStamp minLatestValidTIme (Busses const& busses) throw()
+    static inline TimeStamp minLatestValidTime (Busses const& busses) throw()
     {
         plonk_assert (busses.length() > 0);
         
@@ -126,14 +126,14 @@ public:
         const int outputBufferLength = this->getOutputBuffer().length();
         SampleType* const outputSamples = this->getOutputSamples();
         
-        const TimeStamp infoTimeStamp = info.getTimeStamp();
+        TimeStamp infoTimeStamp = info.getTimeStamp();
         const TimeStamp latestTimeNeeded = infoTimeStamp + this->getSampleDurationInTicks() * outputBufferLength;
 
-        while (minLatestValidTIme (busses) < latestTimeNeeded)
+        while (minLatestValidTime (busses) <= latestTimeNeeded)
         {                        
             for (int i = 0; i < busses.length(); ++i)
             {
-                if (busses.atUnchecked (i).getLatestValidTime() < latestTimeNeeded)
+                if (busses.atUnchecked (i).getLatestValidTime() <= latestTimeNeeded)
                 {
                     const TimeStamp& thisTimeStamp = inputUnit.wrapAt (i).getNextTimeStamp();
                     info.setTimeStamp (thisTimeStamp);
@@ -150,11 +150,11 @@ public:
         info.setTimeStamp (infoTimeStamp); // ensure it is reset for parent graph
         
         // output one channel..
-        busses.atUnchecked (channel).read (nextValidReadTime, outputBufferLength, outputSamples);
+        busses.atUnchecked (channel).read (infoTimeStamp, outputBufferLength, outputSamples);
     }
     
-private:
-    TimeStamp nextValidReadTime;
+//private:
+//    TimeStamp nextValidReadTime;
 };
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-12
+ Copyright University of the West of England, Bristol 2011-13
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -728,16 +728,26 @@ public:
         return ResampleUnit<SampleType,Interp::Linear>::kr (*this);
     }
     
+//    inline UnitBase reblock (BlockSize const& newBlockSize) const throw()
+//    {
+//        typedef UnitBase<IndexType> RateUnitType;
+//        const RateUnitType& rateOne (Math<RateUnitType>::get1());
+//        return ResampleUnit<SampleType,Interp::Linear>::ar (*this, rateOne, newBlockSize);
+//    }
+//    inline UnitBase reblock() const throw()
+//    {
+//        return ar();
+//    }
+
+
     inline UnitBase reblock (BlockSize const& newBlockSize) const throw()
     {
-        typedef UnitBase<IndexType> RateUnitType;
-        const RateUnitType& rateOne (Math<RateUnitType>::get1());
-        return ResampleUnit<SampleType,Interp::Linear>::ar (*this, rateOne, newBlockSize);
+        return ReblockUnit<SampleType>::ar (*this, newBlockSize);
     }
-
+    
     inline UnitBase reblock() const throw()
     {
-        return ar();
+        return ReblockUnit<SampleType>::ar (*this, BlockSize::getDefault());
     }
     
     inline UnitBase lag (UnitBase const& duration) const throw()

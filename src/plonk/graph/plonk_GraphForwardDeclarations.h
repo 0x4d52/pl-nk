@@ -5,7 +5,7 @@
  
  http://code.google.com/p/pl-nk/
  
- Copyright University of the West of England, Bristol 2011-12
+ Copyright University of the West of England, Bristol 2011-13
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -84,6 +84,7 @@ template<class SampleType>                                              class Mu
 
 // common units
 template<class SampleType>                                              class MulAddUnit;
+template<class SampleType>                                              class ReblockUnit;
 template<class SampleType,Interp::TypeCode>                             class ResampleUnit;
 template<class SampleType>                                              class MixerUnit;
 template<class SampleType>                                              class OverlapMakeUnit;
