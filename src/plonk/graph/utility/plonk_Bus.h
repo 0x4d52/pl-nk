@@ -117,81 +117,171 @@ public:
     void setLabel (Text const& newId) throw()                       { identifier = newId; }
 
     
-    void write (TimeStamp writeStartTime, 
-                const int numWriteSamples, 
+//    void write (TimeStamp writeStartTime, 
+//                const int numWriteSamples, 
+//                const SampleType* sourceData) throw()
+//    {        
+//        const int currentBufferSize = bufferSize.getValue();
+//        const double currentSampleRate = sampleRate.getValue(); // should it be double, was int??
+//                                    
+//        SampleType* const bufferSamples = buffer.getArray();
+//        
+//        int numSamplesRemaining = numWriteSamples;
+//        
+//        bool shouldMix = false;
+//        
+//        if (latestValidTime - TimeStamp::fromSamples (numWriteSamples, 
+//                                                      currentSampleRate) >= writeStartTime)
+//        {
+//            shouldMix = true;
+//            
+//            // if mixing on a bus the write size must match the write size set for this bus on this block
+//            plonk_assert (numWriteSamples == firstWriteSize); 
+//        }
+//        else
+//        {
+//            // keep a record of the size used to write the first block at this time
+//            firstWriteSize = writeBlockSize.getValue();
+//        }
+//                
+//        while (numSamplesRemaining > 0)
+//        {
+//            int bufferOffsetSamples;
+//            
+//            if (writeStartTime >= bufferEndTime)
+//            {
+//                // we are trying to write ahead of where the buffer has got to..
+//                // not sure this is right
+//                /*
+//                 perhaps?
+//                 bufferStartTime = bufferEndTime
+//                 bufferEndTime - as below..
+//                 
+//                 check again if we are beyond the end time
+//                 need to zero anything?
+//                 */
+//                
+//                bufferStartTime = writeStartTime;
+//                bufferEndTime = bufferStartTime + TimeStamp::fromSamples (currentBufferSize, 
+//                                                                          currentSampleRate);
+//                bufferOffsetSamples = 0;                                
+//            }        
+//            else
+//            {
+//                const TimeStamp bufferOffsetTime = writeStartTime - bufferStartTime;
+//                bufferOffsetSamples = int (bufferOffsetTime.toSamples (currentSampleRate) + 0.5);
+//                
+//                if (bufferOffsetSamples >= currentBufferSize)
+//                    bufferOffsetSamples -= currentBufferSize;
+//            }
+//            
+//            const int bufferSamplesRemaining = currentBufferSize - bufferOffsetSamples;
+//            const int samplesThisTime = plonk::min (numSamplesRemaining, 
+//                                                    bufferSamplesRemaining);
+//
+//            if (shouldMix)
+//            {
+//                NumericalArrayBinaryOp<SampleType, BinaryOpFunctionsType::addop>::calcNN (bufferSamples + bufferOffsetSamples, 
+//                                                                                          bufferSamples + bufferOffsetSamples,
+//                                                                                          sourceData,
+//                                                                                          samplesThisTime);
+//            }
+//            else             
+//            {
+//                NumericalArray<SampleType>::copyData (bufferSamples + bufferOffsetSamples, 
+//                                                      sourceData, 
+//                                                      samplesThisTime);
+//            }
+//            
+//            numSamplesRemaining -= samplesThisTime;
+//            sourceData += samplesThisTime;
+//            
+//            const double timestampOffset = TimeStamp::fromSamples (samplesThisTime, 
+//                                                                   currentSampleRate);
+//            writeStartTime += timestampOffset;
+//            latestValidTime = writeStartTime;
+//        }                
+//    }
+
+    void write (TimeStamp writeStartTime,
+                const int numWriteSamples,
                 const SampleType* sourceData) throw()
-    {        
+    {
         const int currentBufferSize = bufferSize.getValue();
         const double currentSampleRate = sampleRate.getValue(); // should it be double, was int??
-                                    
+        
         SampleType* const bufferSamples = buffer.getArray();
         
         int numSamplesRemaining = numWriteSamples;
         
         bool shouldMix = false;
         
-        if (latestValidTime - TimeStamp::fromSamples (numWriteSamples, 
+        if (latestValidTime - TimeStamp::fromSamples (numWriteSamples,
                                                       currentSampleRate) >= writeStartTime)
         {
             shouldMix = true;
             
             // if mixing on a bus the write size must match the write size set for this bus on this block
-            plonk_assert (numWriteSamples == firstWriteSize); 
+            plonk_assert (numWriteSamples == firstWriteSize);
         }
         else
         {
             // keep a record of the size used to write the first block at this time
             firstWriteSize = writeBlockSize.getValue();
         }
-                
+        
         while (numSamplesRemaining > 0)
-        {
-            int bufferOffsetSamples;
-            
+        {            
             if (writeStartTime >= bufferEndTime)
             {
-                bufferStartTime = writeStartTime;
-                bufferEndTime = bufferStartTime + TimeStamp::fromSamples (currentBufferSize, 
+                bufferStartTime = bufferEndTime;
+                bufferEndTime = bufferStartTime + TimeStamp::fromSamples (currentBufferSize,
                                                                           currentSampleRate);
-                bufferOffsetSamples = 0;                                
-            }        
-            else
+            }
+
+            const TimeStamp bufferOffsetTime = writeStartTime - bufferStartTime;
+            int bufferOffsetSamples = int (bufferOffsetTime.toSamples (currentSampleRate) + 0.5);
+            
+            if (bufferOffsetSamples >= currentBufferSize)
+                bufferOffsetSamples -= currentBufferSize;
+            
+            if (bufferOffsetSamples >= currentBufferSize)
             {
-                const TimeStamp bufferOffsetTime = writeStartTime - bufferStartTime;
-                bufferOffsetSamples = int (bufferOffsetTime.toSamples (currentSampleRate) + 0.5);
-                
-                if (bufferOffsetSamples >= currentBufferSize)
-                    bufferOffsetSamples -= currentBufferSize;
+                bufferStartTime = writeStartTime;
+                bufferEndTime = bufferStartTime + TimeStamp::fromSamples (currentBufferSize,
+                                                                          currentSampleRate);
+                bufferOffsetSamples = 0;
+                buffer.zero();
             }
             
             const int bufferSamplesRemaining = currentBufferSize - bufferOffsetSamples;
-            const int samplesThisTime = plonk::min (numSamplesRemaining, 
+            const int samplesThisTime = plonk::min (numSamplesRemaining,
                                                     bufferSamplesRemaining);
-
+            
             if (shouldMix)
             {
-                NumericalArrayBinaryOp<SampleType, BinaryOpFunctionsType::addop>::calcNN (bufferSamples + bufferOffsetSamples, 
+                NumericalArrayBinaryOp<SampleType, BinaryOpFunctionsType::addop>::calcNN (bufferSamples + bufferOffsetSamples,
                                                                                           bufferSamples + bufferOffsetSamples,
                                                                                           sourceData,
                                                                                           samplesThisTime);
             }
-            else             
+            else
             {
-                NumericalArray<SampleType>::copyData (bufferSamples + bufferOffsetSamples, 
-                                                      sourceData, 
+                NumericalArray<SampleType>::copyData (bufferSamples + bufferOffsetSamples,
+                                                      sourceData,
                                                       samplesThisTime);
             }
             
             numSamplesRemaining -= samplesThisTime;
             sourceData += samplesThisTime;
             
-            const double timestampOffset = TimeStamp::fromSamples (samplesThisTime, 
+            const double timestampOffset = TimeStamp::fromSamples (samplesThisTime,
                                                                    currentSampleRate);
             writeStartTime += timestampOffset;
             latestValidTime = writeStartTime;
-        }                
+        }
     }
-    
+
     void read (TimeStamp& readStartTime,
                const int numReadSamples, 
                SampleType* destData) throw()
@@ -252,16 +342,16 @@ public:
         
 
 private:
-    BlockSize bufferSize;
-    BlockSize writeBlockSize;
-    SampleRate sampleRate;
-    Buffer buffer;    
-    TimeStamp bufferStartTime;
-    TimeStamp bufferEndTime;
-    TimeStamp latestValidTime;
+    BlockSize bufferSize;       // size of the circular buffer
+    BlockSize writeBlockSize;   // estimated size of the write operations
+    SampleRate sampleRate;      // sample rate of the audio
+    Buffer buffer;              // the circular buffer
+    TimeStamp bufferStartTime;  // timestamp of the first sample in the buffer
+    TimeStamp bufferEndTime;    // calculated timestamp of the sample past the end of the buffer but this may not be where we have written to yet
+    TimeStamp latestValidTime;  // the latest time that has been written to the bus
     double readDiff;
-    int firstWriteSize;
-    Text identifier;
+    int firstWriteSize;         // size of the actual first write
+    Text identifier;            // named ID for the buffer
 };
 
 
