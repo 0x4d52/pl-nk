@@ -1065,13 +1065,12 @@ public:
     inline const DoubleVariable& getOverlap (const int index) const throw()        { return this->wrapAt (index).getOverlap(); }
     inline DoubleVariable& getOverlap (const int index) throw()                    { return this->wrapAt (index).getOverlap(); }
     
-    inline bool channelsHaveSameOverlap() throw()
+    inline bool channelsHaveSameOverlap() const throw()
     {
         const int numChannels = this->getNumChannels();
         plonk_assert (numChannels > 0);
 
-        ChannelType* channels = this->getArray();
-                
+        const ChannelType* channels = this->getArray();
         DoubleVariable overlap = channels[0].getOverlap();
         
         for (int i = 1; i < numChannels; ++i)
@@ -1081,13 +1080,33 @@ public:
         return true;
     }
     
-    inline bool channelsHaveSameBlockSize() throw()
+    inline bool channelsHaveSameBlockSize() const throw()
     {
+        const int numChannels = this->getNumChannels();
+        plonk_assert (numChannels > 0);
+        
+        const ChannelType* channels = this->getArray();
+        BlockSize blockSize = channels[0].getBlockSize();
+        
+        for (int i = 1; i < numChannels; ++i)
+            if (channels[i].getBlockSize() != blockSize)
+                return false;
+        
         return true;
     }
     
-    inline bool channelsHaveSameSampleRate() throw()
+    inline bool channelsHaveSameSampleRate() const throw()
     {
+        const int numChannels = this->getNumChannels();
+        plonk_assert (numChannels > 0);
+        
+        const ChannelType* channels = this->getArray();
+        SampleRate sampleRate = channels[0].getSampleRate();
+        
+        for (int i = 1; i < numChannels; ++i)
+            if (channels[i].getSampleRate() != sampleRate)
+                return false;
+        
         return true;
     }
     

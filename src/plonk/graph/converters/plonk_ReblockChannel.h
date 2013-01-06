@@ -99,23 +99,6 @@ public:
         this->initValue (input.getValue (channel));        
     }
     
-    static inline TimeStamp minLatestValidTime (Busses const& busses) throw()
-    {
-        plonk_assert (busses.length() > 0);
-        
-        TimeStamp result = busses.atUnchecked (0).getLatestValidTime();
-        
-        for (int i = 1; i < busses.length(); ++i)
-        {
-            const TimeStamp newTime = busses.atUnchecked (i).getLatestValidTime();
-            
-            if (newTime < result)
-                result = newTime;
-        }
-        
-        return result;
-    }
-    
     void process (ProcessInfo& info, const int channel) throw()
     {
         UnitType& inputUnit = this->getInputAsUnit (IOKey::Generic);
@@ -139,32 +122,29 @@ public:
          
          */
         
-        while (minLatestValidTime (busses) <= latestTimeNeeded)
-        {                        
+        while (busses.atUnchecked (0).getLatestValidTime() <= latestTimeNeeded)
+        {
+            const TimeStamp& thisTimeStamp = inputUnit.wrapAt (0).getNextTimeStamp();
+            info.setTimeStamp (thisTimeStamp);
+
             for (int i = 0; i < busses.length(); ++i)
             {
-                if (busses.atUnchecked (i).getLatestValidTime() <= latestTimeNeeded)
-                {
-                    const TimeStamp& thisTimeStamp = inputUnit.wrapAt (i).getNextTimeStamp();
-                    info.setTimeStamp (thisTimeStamp);
-                    
-                    const Buffer& inputBuffer (inputUnit.process (info, i));
-                    const SampleType* const inputSamples = inputBuffer.getArray();
-                    const int inputBufferLength = inputBuffer.length();
+                const Buffer& inputBuffer (inputUnit.process (info, i));
+                const SampleType* const inputSamples = inputBuffer.getArray();
+                const int inputBufferLength = inputBuffer.length();
 
-                    busses.atUnchecked (i).write (thisTimeStamp, inputBufferLength, inputSamples);
-                }
+                busses.atUnchecked (i).write (thisTimeStamp, inputBufferLength, inputSamples);
             }
         }
         
         info.setTimeStamp (infoTimeStamp); // ensure it is reset for parent graph
         
         // output one channel..
-        busses.atUnchecked (channel).read (infoTimeStamp, outputBufferLength, outputSamples);
+        busses.atUnchecked (channel).read (nextValidReadTime, outputBufferLength, outputSamples);
     }
     
-//private:
-//    TimeStamp nextValidReadTime;
+private:
+    TimeStamp nextValidReadTime;
 };
 
 //------------------------------------------------------------------------------
@@ -214,14 +194,20 @@ public:
     static UnitType ar (UnitType const& input,
                         BlockSize const& preferredBlockSize = BlockSize::getDefault()) throw()
     {
+        plonk_assert (input.channelsHaveSameBlockSize());
+        plonk_assert (input.channelsHaveSameSampleRate());
+        plonk_assert (input.channelsHaveSameOverlap());
+        
         const int numChannels = input.getNumChannels();
         Busses busses (Busses::emptyWithAllocatedSize (numChannels));
-                
+        
+        BlockSize inputBlockSize = input.getBlockSize (0);
+        BlockSize bufferSize = (preferredBlockSize + inputBlockSize) * 2;
+        SampleRate sampleRate = input.getSampleRate (0);
+        
         for (int i = 0; i < numChannels; ++i)
         {
-            const Bus bus ((preferredBlockSize + input.getBlockSize (i)) * 2,
-                           input.getBlockSize (i),
-                           input.getSampleRate (i));
+            const Bus bus (bufferSize, inputBlockSize, sampleRate);
             busses.add (bus);
         }
         
