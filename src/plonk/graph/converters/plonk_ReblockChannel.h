@@ -112,16 +112,6 @@ public:
         TimeStamp infoTimeStamp = info.getTimeStamp();
         const TimeStamp latestTimeNeeded = infoTimeStamp + this->getSampleDurationInTicks() * outputBufferLength;
 
-        /*
-         
-         Think there needs to be some restictions on how to use reblock to make this simpler
-         A single Reblock may only be used on inputs with the same blocksize and SR.
-         This can be checked with assertions.
-         Then we'll need to store the current input read timestamp and use that to feed to the input process and write bus time.
-         Bus read time can be the original info timestamp
-         
-         */
-        
         while (busses.atUnchecked (0).getLatestValidTime() <= latestTimeNeeded)
         {
             const TimeStamp& thisTimeStamp = inputUnit.wrapAt (0).getNextTimeStamp();
@@ -202,14 +192,11 @@ public:
         Busses busses (Busses::emptyWithAllocatedSize (numChannels));
         
         BlockSize inputBlockSize = input.getBlockSize (0);
-        BlockSize bufferSize = (preferredBlockSize + inputBlockSize) * 2;
+        BlockSize bufferSize = preferredBlockSize.max (inputBlockSize) * 2;
         SampleRate sampleRate = input.getSampleRate (0);
         
         for (int i = 0; i < numChannels; ++i)
-        {
-            const Bus bus (bufferSize, inputBlockSize, sampleRate);
-            busses.add (bus);
-        }
+            busses.add (Bus (bufferSize, inputBlockSize, sampleRate));
         
         Inputs inputs;
         inputs.put (IOKey::Generic, input);
