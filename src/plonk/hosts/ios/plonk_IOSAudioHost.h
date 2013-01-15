@@ -83,6 +83,8 @@ public:
     
     void startHost() throw();
     void stopHost() throw();
+    void pauseHost() throw();
+    void resumeHost() throw();
 
     OSStatus renderCallback (UInt32                     inNumberFrames,
                              AudioUnitRenderActionFlags *ioActionFlags, 
@@ -216,7 +218,10 @@ using namespace plonk;
 - (Unit)constructGraph:(PLAudioHost*)host DEPRECATED_ATTRIBUTE;
 - (void)hostStarting:(PLAudioHost*)host;
 - (void)hostStopped:(PLAudioHost*)host;
+- (void)hostPaused:(PLAudioHost*)host;
+- (void)hostResuming:(PLAudioHost*)host;
 @end
+
 
 /** An Objective-C audio host for the iOS platform.
  This is simply an adapter for the C++ IOSAudioHost. You need to set an object
@@ -242,7 +247,8 @@ using namespace plonk;
 @property (nonatomic, readonly) NSString* outputName;       ///< The name of the output device. May be "Default Output" on the simulator.
 @property (nonatomic, readonly) double cpuUsage;            ///< The current CPU usage of the DSP loop.
 @property (nonatomic, readonly) BOOL isRunning;             ///< Is the host running?
-@property (nonatomic, readonly) Dynamic outputUnit;          ///< The output unit of the host.
+@property (nonatomic, readonly) BOOL isPaused;              ///< Is the host paused?
+@property (nonatomic, readonly) Dynamic outputUnit;         ///< The output unit of the host.
 @property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int preferredHostBlockSize;           ///< The preferred host block size, only set this BEFORE sending the startHost message.
@@ -256,6 +262,12 @@ using namespace plonk;
 
 /** Stop the host running. */
 - (void)stopHost;
+
+/** Pause the host. */
+- (void)pauseHost;
+
+/** Resume the host. */
+- (void)resumeHost;
 
 @end
 

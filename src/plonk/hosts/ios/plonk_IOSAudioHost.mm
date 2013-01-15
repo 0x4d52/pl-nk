@@ -125,6 +125,18 @@ public:
             [peer.delegate hostStopped:peer];
     }
     
+    void hostPaused() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostPaused:)])
+            [peer.delegate hostPaused:peer];
+    }
+
+    void hostResuming() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostResuming:)])
+            [peer.delegate hostResuming:peer];
+    }
+    
     PLAudioHost* getPeer() const throw() { return peer; }
     
 private:
@@ -356,6 +368,20 @@ using namespace plonk;
         case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->getIsRunning() ? YES : NO;
         case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->getIsRunning() ? YES : NO;
         case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->getIsRunning() ? YES : NO;
+        default: return NO;
+    }
+}
+
+- (BOOL)isPaused
+{
+    if (peer == nil) return NO;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->getIsPaused() ? YES : NO;
+        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->getIsPaused() ? YES : NO;
+        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->getIsPaused() ? YES : NO;
+        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->getIsPaused() ? YES : NO;
         default: return NO;
     }
 }
@@ -624,6 +650,34 @@ fallback:
         case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->stopHost();
         case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->stopHost();
         case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->stopHost();
+        default: { }
+    }
+}
+
+- (void)pauseHost
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->pauseHost();
+        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->pauseHost();
+        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->pauseHost();
+        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->pauseHost();
+        default: { }
+    }
+}
+
+- (void)resumeHost
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->resumeHost();
+        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->resumeHost();
+        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->resumeHost();
+        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->resumeHost();
         default: { }
     }
 }

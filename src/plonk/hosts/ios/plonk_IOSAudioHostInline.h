@@ -68,6 +68,15 @@ static inline void PropertyListener (void *                  inClientData,
                                      const void *            inPropertyValue)
 {	
 	IOSAudioHostBase<SampleType> *host = (IOSAudioHostBase<SampleType> *)inClientData;
+#if PLONK_DEBUG
+    const char* idstring = pl_FourCharCode2String (inID).string; (void)idstring;
+    pl_SwapEndianUI ((PlankUI*)idstring);
+    const int valueint = *(int*)inPropertyValue; (void)valueint;
+    const UInt32 valueuint = *(UInt32*)inPropertyValue; (void)valueuint;
+    const float valuefloat = *(float*)inPropertyValue; (void)valuefloat;
+    const char* valuestring = (const char*)inPropertyValue; (void)valuestring;
+    const char* valueptr = *(const char**)inPropertyValue; (void)valueptr;
+#endif
     host->propertyCallback (inID, inDataSize, inPropertyValue);
 }
 
@@ -204,11 +213,6 @@ void IOSAudioHostBase<SampleType>::stopHost() throw()
     if (this->getIsRunning())
     {
         AudioOutputUnitStop (rioUnit);
-        
-//        AudioUnitUninitialize (rioUnit);
-//        AudioComponentInstanceDispose (rioUnit);
-//        rioUnit = NULL;
-        
         this->setIsRunning (false);
         this->hostStopped();
     }
@@ -240,7 +244,10 @@ void IOSAudioHostBase<SampleType>::startHost() throw()
         AudioSessionSetProperty (kAudioSessionProperty_Mode, sizeof (mode), &mode);
     }
     
-	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, PropertyListener<SampleType>, this);
+	AudioSessionAddPropertyListener (kAudioSessionProperty_AudioRouteChange, PropertyListener<SampleType>, this);
+    AudioSessionAddPropertyListener (kAudioSessionProperty_InterruptionType, PropertyListener<SampleType>, this);
+    AudioSessionAddPropertyListener (kAudioSessionProperty_AudioCategory, PropertyListener<SampleType>, this);
+    
 	fixAudioRouteIfSetToReceiver();
 	
     const double preferredHostSampleRate = this->getPreferredHostSampleRate();
@@ -288,6 +295,40 @@ void IOSAudioHostBase<SampleType>::startHost() throw()
 	AudioUnitGetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, &size);
 }
 
+template<class SampleType>
+void IOSAudioHostBase<SampleType>::pauseHost() throw()
+{
+    if (this->getIsRunning())
+    {
+        this->hostPaused();
+        AudioOutputUnitStop (rioUnit);
+        AudioSessionSetActive (false);
+
+        dispatch_after (dispatch_time (DISPATCH_TIME_NOW, NSEC_PER_SEC / 4),
+                        dispatch_get_main_queue(), ^{
+            this->setIsPaused (true);
+        });
+    }
+    else
+    {
+        this->setIsPaused (true);
+        this->hostPaused();
+    }
+}
+
+template<class SampleType>
+void IOSAudioHostBase<SampleType>::resumeHost() throw()
+{
+    this->hostResuming();
+    this->setIsPaused (false);
+
+    if (this->getIsRunning())
+    {
+        AudioSessionSetActive (true);
+        AudioOutputUnitStart (rioUnit);
+    }
+    
+}
 
 // need to call hostStopped() - may be in the property listener?
 
@@ -430,7 +471,6 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
                                                      UInt32                 inDataSize,
                                                      const void *           inPropertyValue) throw()
 {
-    if (this->getIsRunning()) return;
 	
     if (inID == kAudioSessionProperty_AudioRouteChange)
     {
@@ -447,20 +487,30 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
             UInt32 propertySize = sizeof (CFStringRef);
             AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &newAudioRoute);
             
-            printf ("route=%s\n", CFStringGetCStringPtr (newAudioRoute, CFStringGetSystemEncoding()));
+            NSLog (@"route: %s\n", CFStringGetCStringPtr (newAudioRoute, CFStringGetSystemEncoding()));
         }
 
-        restart();
+        if (!this->getIsRunning())
+            restart();
     }
 }
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::interruptionCallback (UInt32 inInterruption) throw()
 {
-    if (inInterruption == kAudioSessionEndInterruption) 
+    if (inInterruption == kAudioSessionBeginInterruption)
+    {
+        this->setIsPaused (true);
+        this->setIsRunning (false);
+		AudioSessionSetActive (false);
+        this->hostPaused();
+    }
+    else if (inInterruption == kAudioSessionEndInterruption)
     {
 		// make sure we are again the active session
-		AudioSessionSetActive(true);
+        this->hostResuming();
+		AudioSessionSetActive (true);
+        this->setIsPaused (false);
 		this->setIsRunning (true);
 		AudioOutputUnitStart (rioUnit);
 	}

@@ -189,27 +189,27 @@ typedef PlankP Pointer;
 
 struct VoidReturn { enum Type { Pass = 1 }; };
 
-#if defined (__clang__) && defined (__has_feature)
-    #if !__has_feature (cxx_noexcept)
-        #define PLONK_USING_NEWCXXFEATURES 1
-    #endif
-#endif
-
-#if PLONK_USING_NEWCXXFEATURES
-    #define noexcept throw()
-    const                           // this is a const object...
-    class {
-    public:
-        template<class T>           // convertible to any type
-        operator T*() const         // of null non-member
-        { return 0; }               // pointer...
-        template<class C, class T>  // or any type of null
-        operator T C::*() const     // member pointer...
-        { return 0; }
-    private:
-        void operator&() const;     // whose address can't be taken
-    } nullptr = {};                 // and whose name is nullptr
-#endif
+//#if defined (__clang__) && defined (__has_feature)
+//    #if !__has_feature (cxx_noexcept)
+//        #define PLONK_USING_NEWCXXFEATURES 1
+//    #endif
+//#endif
+//
+//#if PLONK_USING_NEWCXXFEATURES
+//    #define noexcept throw()
+//    const                           // this is a const object...
+//    class {
+//    public:
+//        template<class T>           // convertible to any type
+//        operator T*() const         // of null non-member
+//        { return 0; }               // pointer...
+//        template<class C, class T>  // or any type of null
+//        operator T C::*() const     // member pointer...
+//        { return 0; }
+//    private:
+//        void operator&() const;     // whose address can't be taken
+//    } nullptr = {};                 // and whose name is nullptr
+//#endif
 
 #define PLONK_INT24_MAX PLANK_INT24_MAX
 

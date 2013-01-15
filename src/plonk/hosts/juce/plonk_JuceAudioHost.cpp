@@ -60,7 +60,7 @@ JuceAudioHost::JuceAudioHost (ObjectMemoryBase* omb) throw()
 {    
     setNumInputs (2);
     setNumOutputs (2);
-    setPreferredGraphBlockSize (64);
+    setPreferredGraphBlockSize (512);
 }
 
 JuceAudioHost::~JuceAudioHost()
@@ -154,11 +154,11 @@ void JuceAudioHost::startHost() throw()
 	AudioDeviceManager::AudioDeviceSetup setup;
 	audioDeviceManager.getAudioDeviceSetup (setup);
     
-    if (getPreferredBlockSize() > 0)
-        setup.bufferSize = getPreferredBlockSize();
+    if (getPreferredHostBlockSize() > 0)
+        setup.bufferSize = getPreferredHostBlockSize();
     
-    if (getPreferredSampleRate() > 0.0)
-        setup.sampleRate = getPreferredSampleRate();
+    if (getPreferredHostSampleRate() > 0.0)
+        setup.sampleRate = getPreferredHostSampleRate();
     
     audioDeviceManager.setAudioDeviceSetup (setup, false);
     

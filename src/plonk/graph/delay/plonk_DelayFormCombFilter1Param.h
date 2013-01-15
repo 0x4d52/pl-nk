@@ -232,10 +232,10 @@ public:
             inputs.put (IOKey::Feedback, feedback[i]);
             inputs.put (IOKey::Frequency, frequency[i]);
             
-            UnitType unit = UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                                data, 
-                                                                                preferredBlockSize, 
-                                                                                preferredSampleRate);
+            UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs,
+                                                                                 data,
+                                                                                 preferredBlockSize,
+                                                                                 preferredSampleRate);
             mainUnit.put (i, unit);
         }
         

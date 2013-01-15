@@ -81,7 +81,6 @@ public:
     typedef typename InterpSelect::InterpType                       InterpType;
     typedef typename InterpType::ExtensionBuffer                    ExtensionBuffer;
     
-    
     static inline IntArray getInputKeys() throw()
     {
         const IntArray keys (IOKey::Generic, IOKey::Duration, IOKey::Decay);
@@ -135,7 +134,7 @@ public:
             inputs.put (IOKey::Duration, duration[i]);
             inputs.put (IOKey::Decay, decay[i]);
             
-            UnitType unit = UnitType::template createFromInputs<DelayInternal> (inputs, 
+            UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
                                                                                 data, 
                                                                                 preferredBlockSize, 
                                                                                 preferredSampleRate);

@@ -141,10 +141,10 @@ public:
             inputs.put (IOKey::Duration, duration[i]);
             inputs.put (IOKey::Decay, decay[i]);
             
-            UnitType unit = UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                                data, 
-                                                                                preferredBlockSize, 
-                                                                                preferredSampleRate);
+            UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs,
+                                                                                 data,
+                                                                                 preferredBlockSize,
+                                                                                 preferredSampleRate);
             mainUnit.put (i, unit);
         }
         
@@ -227,7 +227,6 @@ public:
                         SampleRate const& preferredSampleRate = SampleRate::getDefault()) throw()
     {          
         if (duration.isEachChannelConstant() && decay.isEachChannelConstant())
-            
             return AltFormType::ar (input, duration, duration.getValues().decayFeedback (decay.getValues()), maximumDuration,
                                     mul, add, preferredBlockSize, preferredSampleRate);
         else 

@@ -189,10 +189,10 @@ public:
             inputs.put (IOKey::Duration, duration[i]);
             inputs.put (IOKey::Feedback, feedback[i]);
             
-            UnitType unit = UnitType::template createFromInputs<DelayInternal> (inputs, 
-                                                                                data, 
-                                                                                preferredBlockSize, 
-                                                                                preferredSampleRate);
+            UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
+                                                                                 data,
+                                                                                 preferredBlockSize,
+                                                                                 preferredSampleRate);
             mainUnit.put (i, unit);
         }
         

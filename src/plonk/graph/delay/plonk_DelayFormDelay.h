@@ -194,9 +194,9 @@ public:
                 inputs.put (IOKey::Generic, input[i]);
                 inputs.put (IOKey::Duration, durationsGrouped.wrapAt (i));
                 
-                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs, 
-                                                                                     data, 
-                                                                                     preferredBlockSize, 
+                UnitType unit = UnitType::template proxiesFromInputs<DelayInternal> (inputs,
+                                                                                     data,
+                                                                                     preferredBlockSize,
                                                                                      preferredSampleRate);
                 resultGrouped.add (unit);
             }

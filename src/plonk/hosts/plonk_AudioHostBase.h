@@ -64,7 +64,8 @@ public:
         preferredHostSampleRate (0.0),
         preferredHostBlockSize (0),
         preferredGraphBlockSize (0),
-        isRunning (false)
+        isRunning (false),
+        isPaused (false)
     { 
         om->init();
     }
@@ -74,9 +75,12 @@ public:
     {
     }
         
-    /** Determine whether the audio device is runnging. */
+    /** Determine whether the audio device is running. */
     inline bool getIsRunning() const throw() { return isRunning; }
     
+    /** Determine whether the audio device is paused. */
+    inline bool getIsPaused() const throw() { return isPaused; }
+
     /** Get a reference to the output unit. */
     inline const UnitType& getOutputUnit() const throw() { return outputUnit; }
     
@@ -117,7 +121,10 @@ public:
     
     /** Get other (normally platform dependent) options. */
     OptionDictionary getOtherOptions() const throw() { return otherOptions; }
-                
+    
+    virtual void pauseHost() throw() { isPaused = true; hostPaused(); }
+    virtual void resumeHost() throw() { hostResuming(); isPaused = false; }
+    
 protected:
     /** Get the input buffers. @internal */
     inline const ConstBufferArray& getInputs() const throw()  { return this->inputs; }
@@ -151,9 +158,12 @@ protected:
     
     /** Stop the host. */
     virtual void stopHost() = 0;
-    
+        
     virtual void hostStopped() throw()  { }
     virtual void hostStarting() throw() { }
+    virtual void hostPaused() throw()  { }
+    virtual void hostResuming() throw() { }
+
 
     /** This must be implemented by your application.
      It should return the audio graph that is rendered to the host. */
@@ -162,55 +172,63 @@ protected:
     /** @internal */
     inline void process() throw()
     {
-#ifdef PLONK_DEBUG
-        Threading::ID currentThreadID = Threading::getCurrentThreadID();
-        if (currentThreadID != Threading::getAudioThreadID())
-            Threading::setAudioThreadID (Threading::getCurrentThreadID());
-#endif
-        const int numInputs = this->inputs.length();
-        const int numOutputs = this->outputs.length();
-        plonk_assert (this->busses.length() == numInputs);
-
-        int blockRemain = preferredHostBlockSize;
         int i;
-        
-        const int graphBlockSize = BlockSize::getDefault().getValue();
-        
-        // must do more checks in case the block sizes are not compatible on this run
-        
-        while (blockRemain > 0)
+
+        if (!isPaused)
         {
-            for (i = 0; i < numInputs; ++i)
-            {
-                this->busses.atUnchecked (i).write (this->info.getTimeStamp(), 
-                                                    graphBlockSize, 
-                                                    this->inputs.atUnchecked (i)); 
-                this->inputs.atUnchecked (i) += graphBlockSize;
-            }
+#ifdef PLONK_DEBUG
+            Threading::ID currentThreadID = Threading::getCurrentThreadID();
+            if (currentThreadID != Threading::getAudioThreadID())
+                Threading::setAudioThreadID (Threading::getCurrentThreadID());
+#endif
+            const int numInputs = this->inputs.length();
+            const int numOutputs = this->outputs.length();
+            plonk_assert (this->busses.length() == numInputs);
+
+            int blockRemain = preferredHostBlockSize;        
+            const int graphBlockSize = BlockSize::getDefault().getValue();
             
-            this->outputUnit.process (info);
+            // must do more checks in case the block sizes are not compatible on this run
             
-            if (this->outputUnit.isNotNull())
+            while (blockRemain > 0)
             {
-                for (i = 0; i < numOutputs; ++i)
+                for (i = 0; i < numInputs; ++i)
                 {
-                    const SampleType* const unitOutput = this->outputUnit.getOutputSamples (i);
-                    BufferType::copyData (this->outputs.atUnchecked (i), unitOutput, graphBlockSize);   
-                    this->outputs.atUnchecked (i) += graphBlockSize;
+                    this->busses.atUnchecked (i).write (this->info.getTimeStamp(), 
+                                                        graphBlockSize, 
+                                                        this->inputs.atUnchecked (i)); 
+                    this->inputs.atUnchecked (i) += graphBlockSize;
                 }
-            }
-            else if (numOutputs > 0)
-            {
-                for (i = 0; i < numOutputs; ++i)
+                
+                this->outputUnit.process (info);
+                
+                if (this->outputUnit.isNotNull())
                 {
-                    BufferType::zeroData (this->outputs.atUnchecked (i), graphBlockSize);   
-                    this->outputs.atUnchecked (i) += graphBlockSize;
+                    for (i = 0; i < numOutputs; ++i)
+                    {
+                        const SampleType* const unitOutput = this->outputUnit.getOutputSamples (i);
+                        BufferType::copyData (this->outputs.atUnchecked (i), unitOutput, graphBlockSize);   
+                        this->outputs.atUnchecked (i) += graphBlockSize;
+                    }
                 }
+                else if (numOutputs > 0)
+                {
+                    for (i = 0; i < numOutputs; ++i)
+                    {
+                        BufferType::zeroData (this->outputs.atUnchecked (i), graphBlockSize);   
+                        this->outputs.atUnchecked (i) += graphBlockSize;
+                    }
+                }
+                            
+                this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * graphBlockSize);
+                
+                blockRemain -= graphBlockSize;
             }
-                        
-            this->info.offsetTimeStamp (SampleRate::getDefault().getSampleDurationInTicks() * graphBlockSize);
-            
-            blockRemain -= graphBlockSize;
+        }
+        else
+        {
+            for (i = 0; i < this->outputs.length(); ++i)
+                BufferType::zeroData (this->outputs.atUnchecked (i), preferredHostBlockSize);
         }
         
 #if PLONK_DEBUG
@@ -229,11 +247,13 @@ protected:
         setIsRunning (true);
     }
     
+protected:
     /** Set a flag to indicate the audio host is running.
      NB This does not start or stop the host use startHost() and stopHost() 
      respectively. */
     inline void setIsRunning (const bool state) throw() { isRunning = state; }
 
+    inline void setIsPaused (const bool state) throw() { isPaused = state; }
     
 private:
     ScopedPointerContainer<ObjectMemoryBase> om;
@@ -241,7 +261,8 @@ private:
     double preferredHostSampleRate;
     int preferredHostBlockSize;
     int preferredGraphBlockSize;
-	bool isRunning;    
+	bool isRunning;
+    bool isPaused;
     OptionDictionary otherOptions;
 
     ProcessInfo info;
