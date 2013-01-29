@@ -60,6 +60,11 @@ public:
     static Text pathInDirectory (Locations location, const char *filename) throw();
 };
 
+typedef OSStatus (*RenderCallbackFunction)(void*                      refCon,
+                                           UInt32                     inNumberFrames,
+                                           AudioUnitRenderActionFlags *ioActionFlags,
+                                           const AudioTimeStamp 	  *inTimeStamp,
+                                           AudioBufferList            *ioData);
 
 /** An audio host for the iOS platform.
  @see PLAudioHost */
@@ -86,6 +91,8 @@ public:
     void pauseHost() throw();
     void resumeHost() throw();
 
+    void resetIO() throw();
+    
     OSStatus renderCallback (UInt32                     inNumberFrames,
                              AudioUnitRenderActionFlags *ioActionFlags, 
                              const AudioTimeStamp 		*inTimeStamp, 
@@ -97,6 +104,7 @@ public:
     
     void interruptionCallback (UInt32 inInterruption) throw();
     
+    void setCustomRenderCallbacks (void* refCon, RenderCallbackFunction preRender, RenderCallbackFunction postRender) throw();
 
         
 private:
@@ -118,7 +126,11 @@ private:
 	UInt32						numInputChannels;
 	UInt32						numOutputChannels;
 	double						cpuUsage;
-//    UnitType                    preFadeOutput;
+
+    void*                       customRenderCallbackRef;
+    RenderCallbackFunction      customPreRender;
+    RenderCallbackFunction      customPostRender;
+    
 };
 
 
@@ -285,6 +297,8 @@ using namespace plonk;
 
 /** Resume the host. */
 - (void)resumeHost;
+
+- (void)setCustomRenderCallbacksWithRef:(void*)refCon pre:(RenderCallbackFunction)preFunc post:(RenderCallbackFunction)postFunc;
 
 @end
 

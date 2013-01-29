@@ -128,8 +128,11 @@ template<class SampleType>
 IOSAudioHostBase<SampleType>::IOSAudioHostBase (ObjectMemoryBase* omb) throw()
 :   AudioHostBase<SampleType> (omb),
     hwSampleRate (0.0),         // let the hardware choose
-    cpuUsage (0.0)
-{    
+    cpuUsage (0.0),
+    customRenderCallbackRef (NULL),
+    customPreRender (NULL),
+    customPostRender (NULL)
+{
     this->setPreferredGraphBlockSize (256);
 }
 
@@ -263,28 +266,12 @@ void IOSAudioHostBase<SampleType>::startHost() throw()
     if (this->getPreferredHostBlockSize() > 0)
     {
         bufferDuration = this->getPreferredHostBlockSize() / hwSampleRate;
-        AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof (bufferDuration), &bufferDuration);
+        AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof (bufferDuration), &bufferDuration);
 	}
-    
-	size = sizeof (UInt32);
-	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
-	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
-	AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
     
     rioUnit = NULL;
 
-    this->setNumInputs (numInputChannels);
-    this->setNumOutputs (numOutputChannels);
-    	
-	size = sizeof (bufferDuration);
-	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareIOBufferDuration, &size, &bufferDuration);
-	
-	reciprocalBufferDuration = 1.0 / double (bufferDuration); 
-	
-	bufferSize = (int)(hwSampleRate * bufferDuration + 0.5);
-    convertBuffer.setSize (bufferSize * plonk::max (this->getNumOutputs(), 
-                                                    this->getNumInputs()), 
-                           false);
+    resetIO();
     
     this->setPreferredHostSampleRate (hwSampleRate);
     this->setPreferredHostBlockSize (bufferSize);
@@ -375,21 +362,23 @@ int IOSAudioHostBase<SampleType>::setupRemoteIO() throw()
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::restart() throw()
-{
-    UInt32 size = sizeof(UInt32);
-	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
-	AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
-	AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
-		
-	if (rioUnit)	
+{		
+    if (rioUnit)
+    {
         AudioComponentInstanceDispose (rioUnit);
-        
-    rioUnit = NULL;
+        rioUnit = NULL;
+    }
+    
+    resetIO();
+    
+    this->setPreferredHostSampleRate (hwSampleRate);
+    this->setPreferredHostBlockSize (bufferSize);
         
     setFormat();
 	setupRemoteIO();
 	
-	AudioSessionSetActive (true);
+    AudioSessionSetActive(false);
+    AudioSessionSetActive(true);
 	AudioOutputUnitStart (rioUnit);
 }
 
@@ -456,9 +445,15 @@ OSStatus IOSAudioHostBase<SampleType>::renderCallback (UInt32                   
     for (i = 0; i < outputs.length(); ++i)
         outputs.atUnchecked (i) = convertBufferData[i];
 
+    if (customPreRender)
+        customPreRender (customRenderCallbackRef, inNumberFrames, ioActionFlags, inTimeStamp, ioData);
+    
     this->process();
         
 	audioTypeToShortChannels (convertBufferData, ioData, inNumberFrames, ioData->mNumberBuffers);
+    
+    if (customPostRender)
+        customPostRender (customRenderCallbackRef, inNumberFrames, ioActionFlags, inTimeStamp, ioData);
     
 	renderTime = CFAbsoluteTimeGetCurrent() - renderTime;
 	
@@ -495,6 +490,37 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
         if (!this->getIsRunning())
             restart();
     }
+    else if (inID == kAudioSessionProperty_AudioCategory)
+    {
+        resetIO();
+    }
+}
+
+template<class SampleType>
+void IOSAudioHostBase<SampleType>::resetIO() throw()
+{
+    OSStatus err;
+    UInt32 size = sizeof(UInt32);
+    err = AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
+    
+    if (err != noErr)
+        numInputChannels = 0;
+    
+    err = AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &numOutputChannels);
+    err = AudioSessionGetProperty (kAudioSessionProperty_AudioInputAvailable, &size, &audioInputIsAvailable);
+    
+    this->setNumInputs (numInputChannels);
+    this->setNumOutputs (numOutputChannels);
+    
+    size = sizeof (bufferDuration);
+    AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareIOBufferDuration, &size, &bufferDuration);
+    
+    reciprocalBufferDuration = 1.0 / double (bufferDuration);
+    
+    bufferSize = (int)(hwSampleRate * bufferDuration + 0.5);
+    convertBuffer.setSize (bufferSize * plonk::max (this->getNumOutputs(),
+                                                    this->getNumInputs()),
+                           false);        
 }
 
 template<class SampleType>
@@ -516,6 +542,16 @@ void IOSAudioHostBase<SampleType>::interruptionCallback (UInt32 inInterruption) 
 		this->setIsRunning (true);
 		AudioOutputUnitStart (rioUnit);
 	}
+}
+
+template<class SampleType>
+void IOSAudioHostBase<SampleType>::setCustomRenderCallbacks (void* refCon,
+                                                             RenderCallbackFunction preRender,
+                                                             RenderCallbackFunction postRender) throw()
+{
+    customRenderCallbackRef = refCon;
+    customPreRender = preRender;
+    customPostRender = postRender;
 }
 
 END_PLONK_NAMESPACE

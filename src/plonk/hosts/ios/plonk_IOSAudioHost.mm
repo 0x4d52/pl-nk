@@ -394,10 +394,10 @@ using namespace plonk;
     {
         switch ((const int)type) 
         {
-            case TypeCode::Float:   dyn = static_cast< IOSAudioHostPeer<float>* > (peer)->getOutputUnit();
-            case TypeCode::Short:   dyn = static_cast< IOSAudioHostPeer<short>* > (peer)->getOutputUnit();
-            case TypeCode::Int:     dyn = static_cast< IOSAudioHostPeer<int>* > (peer)->getOutputUnit();
-            case TypeCode::Double:  dyn = static_cast< IOSAudioHostPeer<double>* > (peer)->getOutputUnit();
+            case TypeCode::Float:   dyn = static_cast< IOSAudioHostPeer<float>* > (peer)->getOutputUnit(); break;
+            case TypeCode::Short:   dyn = static_cast< IOSAudioHostPeer<short>* > (peer)->getOutputUnit(); break;
+            case TypeCode::Int:     dyn = static_cast< IOSAudioHostPeer<int>* > (peer)->getOutputUnit(); break;
+            case TypeCode::Double:  dyn = static_cast< IOSAudioHostPeer<double>* > (peer)->getOutputUnit(); break;
             default: { }
         }
     }
@@ -425,10 +425,10 @@ using namespace plonk;
     
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setNumInputs (numInputs);
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setNumInputs (numInputs);
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setNumInputs (numInputs);
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setNumInputs (numInputs);
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setNumInputs (numInputs); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setNumInputs (numInputs); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setNumInputs (numInputs); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setNumInputs (numInputs); break;
         default: { }
     }
 }
@@ -569,7 +569,6 @@ fallback:
     UInt32 size = sizeof (property); 
     AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &property);
     return property;
-
 }
 
 - (void)setCategory:(UInt32)category
@@ -578,10 +577,10 @@ fallback:
     
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
         default: { }
     }
 }
@@ -618,10 +617,10 @@ fallback:
     
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
         default: { }
     }
 }
@@ -632,10 +631,10 @@ fallback:
     
     switch ((const int)type) 
     {
-        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->startHost();
-        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->startHost();
-        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->startHost();
-        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->startHost();
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->startHost(); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->startHost(); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->startHost(); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->startHost(); break;
         default: { }
     }
 }
@@ -646,10 +645,10 @@ fallback:
     
     switch ((const int)type) 
     {
-        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->stopHost();
-        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->stopHost();
-        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->stopHost();
-        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->stopHost();
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->stopHost(); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->stopHost(); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->stopHost(); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->stopHost(); break;
         default: { }
     }
 }
@@ -660,10 +659,10 @@ fallback:
     
     switch ((const int)type)
     {
-        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->pauseHost();
-        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->pauseHost();
-        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->pauseHost();
-        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->pauseHost();
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->pauseHost(); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->pauseHost(); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->pauseHost(); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->pauseHost(); break;
         default: { }
     }
 }
@@ -674,10 +673,24 @@ fallback:
     
     switch ((const int)type)
     {
-        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->resumeHost();
-        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->resumeHost();
-        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->resumeHost();
-        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->resumeHost();
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->resumeHost(); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->resumeHost(); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->resumeHost(); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->resumeHost(); break;
+        default: { }
+    }
+}
+
+- (void)setCustomRenderCallbacksWithRef:(void*)refCon pre:(RenderCallbackFunction)preFunc post:(RenderCallbackFunction)postFunc
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->setCustomRenderCallbacks (refCon, preFunc, postFunc); break;
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->setCustomRenderCallbacks (refCon, preFunc, postFunc); break;
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->setCustomRenderCallbacks (refCon, preFunc, postFunc); break;
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->setCustomRenderCallbacks (refCon, preFunc, postFunc); break;
         default: { }
     }
 }
