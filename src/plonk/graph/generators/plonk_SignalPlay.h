@@ -134,7 +134,7 @@ public:
             else
             {
                 data.done = true;
-                this->update (Text::getMessageDone());
+                this->update (Text::getMessageDone(), Dynamic::getNull());
             }
         }
         else if (data.currentPosition < RateType (0))

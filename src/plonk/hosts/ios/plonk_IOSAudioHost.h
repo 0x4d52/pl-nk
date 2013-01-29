@@ -118,6 +118,7 @@ private:
 	UInt32						numInputChannels;
 	UInt32						numOutputChannels;
 	double						cpuUsage;
+//    UnitType                    preFadeOutput;
 };
 
 
@@ -200,6 +201,22 @@ END_PLONK_NAMESPACE
     - (void)set##Name:(Type)value {\
         Name.setValue (value);\
     }
+
+
+#define PLONK_OBJC_PROPERTY_MEMBER_UNIT(Type,Name)\
+    Variable< UnitBase<Type>& > Name
+
+#define PLONK_OBJC_PROPERTY_DECLARE_UNIT(Type,Name)\
+    @property (nonatomic,getter=get##Name,setter=set##Name:) UnitBase<Type> Name
+
+#define PLONK_OBJC_PROPERTY_SYNTH_UNIT(Type,Name)\
+    - (UnitBase<Type>)get##Name {\
+        return Name.getValue();\
+    }\
+    - (void)set##Name:(UnitBase<Type>)value {\
+        Name.setValue (value);\
+    }
+
 
 @class PLAudioHost;
 

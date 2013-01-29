@@ -399,7 +399,7 @@ public:
         this->getInternal()->swapValues (other);
     }
     
-    inline void swapValues (Variable const& other) throw()
+    inline void swapValues (Variable& other) throw()
     {
         this->getInternal()->swapValues (other.getValue());
     }

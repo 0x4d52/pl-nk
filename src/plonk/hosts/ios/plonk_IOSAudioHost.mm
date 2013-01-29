@@ -578,10 +578,10 @@ fallback:
     
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().at (categoryKey) = IntVariable ((int)category);
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category));
         default: { }
     }
 }
@@ -618,10 +618,10 @@ fallback:
     
     switch ((const int)type) 
     {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().at (modeKey) = IntVariable ((int)mode);
+        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
+        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
+        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
+        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode));
         default: { }
     }
 }

@@ -76,10 +76,10 @@ public:
     }
         
     /** Determine whether the audio device is running. */
-    inline bool getIsRunning() const throw() { return isRunning; }
+    inline bool getIsRunning() const throw() { return isRunning.getValue(); }
     
     /** Determine whether the audio device is paused. */
-    inline bool getIsPaused() const throw() { return isPaused; }
+    inline bool getIsPaused() const throw() { return isPaused.getValue(); }
 
     /** Get a reference to the output unit. */
     inline const UnitType& getOutputUnit() const throw() { return outputUnit; }
@@ -174,7 +174,7 @@ protected:
     {
         int i;
 
-        if (!isPaused)
+        if (!isPaused.getValueUnchecked())
         {
 #ifdef PLONK_DEBUG
             Threading::ID currentThreadID = Threading::getCurrentThreadID();
@@ -261,12 +261,12 @@ private:
     double preferredHostSampleRate;
     int preferredHostBlockSize;
     int preferredGraphBlockSize;
-	bool isRunning;
-    bool isPaused;
+	AtomicInt isRunning;
+    AtomicInt isPaused;
     OptionDictionary otherOptions;
 
     ProcessInfo info;
-    UnitType outputUnit;  
+    UnitType outputUnit;
     BussesType busses;
     ConstBufferArray inputs;
     BufferArray outputs;    

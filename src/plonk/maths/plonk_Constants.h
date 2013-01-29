@@ -76,6 +76,7 @@ public:
     static inline const Type& get1_440() throw()      { static const Type v ((Type)(1.0 / 440.0)); return v; }
     static inline const Type& get1_12() throw()       { static const Type v ((Type)(1.0 / 12.0)); return v; }
     static inline const Type& get1_360() throw()      { static const Type v ((Type)(1.0 / 360.0)); return v; }
+    static inline const Type& get1_1200() throw()     { static const Type v ((Type)(1.0 / 1200.0)); return v; }
     
     static inline const Type& getPi() throw()         { static const Type v ((Type)std::acos (-1.0)); return v; }
     static inline const Type& getLog0_001() throw()   { static const Type v ((Type)std::log (0.001)); return v; }

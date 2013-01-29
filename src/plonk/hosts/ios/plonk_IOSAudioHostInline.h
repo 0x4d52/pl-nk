@@ -108,7 +108,8 @@ static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferL
 template<class DstType>
 static inline void audioShortToType (const short * const src, DstType* const dst, const unsigned int length) throw()
 {
-    NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);    
+//    if (dst != NULL)
+        NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);
 }
 
 template<class DstType>
@@ -327,7 +328,6 @@ void IOSAudioHostBase<SampleType>::resumeHost() throw()
         AudioSessionSetActive (true);
         AudioOutputUnitStart (rioUnit);
     }
-    
 }
 
 // need to call hostStopped() - may be in the property listener?
@@ -421,7 +421,7 @@ OSStatus IOSAudioHostBase<SampleType>::renderCallback (UInt32                   
 {
     OSStatus err = 0;
     int i;
-   
+    
 	double renderTime = CFAbsoluteTimeGetCurrent();
 	
 	if (inNumberFrames > bufferSize)
@@ -438,20 +438,22 @@ OSStatus IOSAudioHostBase<SampleType>::renderCallback (UInt32                   
 	convertBufferData[0] = convertBuffer.getArray();
 	convertBufferData[1] = convertBufferData[0] + inNumberFrames;	
     
-	if (audioInputIsAvailable)
-	{
-		err = AudioUnitRender (rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
-		audioShortToTypeChannels (ioData, convertBufferData, inNumberFrames, numInputChannels);				
-	}
-	else convertBuffer.clear();  
-    
     ConstBufferArray& inputs = this->getInputs();
     BufferArray& outputs = this->getOutputs();
+    
+	if (audioInputIsAvailable && (inputs.length() > 0))
+	{
+		err = AudioUnitRender (rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
         
-    for (i = 0; i < numInputChannels; ++i)
+        if (err == noErr)
+            audioShortToTypeChannels (ioData, convertBufferData, inNumberFrames, numInputChannels);				
+	}
+	else convertBuffer.clear();  
+            
+    for (i = 0; i < inputs.length(); ++i)
         inputs.atUnchecked (i) = convertBufferData[i];
     
-    for (i = 0; i < numOutputChannels; ++i)
+    for (i = 0; i < outputs.length(); ++i)
         outputs.atUnchecked (i) = convertBufferData[i];
 
     this->process();
