@@ -39,17 +39,17 @@
 #ifndef PLINK_H
 #define PLINK_H
 
-/* 19/8/2012
- http://cloc.sourceforge.net v 1.52  T=0.5 s (22.0 files/s, 2500.0 lines/s)
+/* 29/01/2013
+ http://cloc.sourceforge.net v 1.52  T=0.5 s (30.0 files/s, 3470.0 lines/s)
  -------------------------------------------------------------------------------
  Language                     files          blank        comment           code
  -------------------------------------------------------------------------------
- C/C++ Header                     7            163            338            372
- C                                4             67            124            186
+ C/C++ Header                     9            195            412            405
+ C                                6            134            186            403
  -------------------------------------------------------------------------------
- SUM:                            11            230            462            558
+ SUM:                            15            329            598            808
  -------------------------------------------------------------------------------
- */ 
+ */
 
 // this must be before the standard header incase we want it different in user code?
 #define PLINK_API 
