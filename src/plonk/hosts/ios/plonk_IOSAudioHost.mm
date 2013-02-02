@@ -137,6 +137,12 @@ public:
             [peer.delegate hostResuming:peer];
     }
     
+    void hostInterruption (const bool flag) throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostInterruption:withFlag:)])
+            [peer.delegate hostInterruption:peer withFlag:flag];
+    }
+    
     PLAudioHost* getPeer() const throw() { return peer; }
     
 private:
@@ -382,6 +388,20 @@ using namespace plonk;
         case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->getIsPaused() ? YES : NO;
         case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->getIsPaused() ? YES : NO;
         case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->getIsPaused() ? YES : NO;
+        default: return NO;
+    }
+}
+
+- (BOOL)wasInterrupted
+{
+    if (peer == nil) return NO;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< IOSAudioHostPeer<float>* > (peer)->wasInterrupted() ? YES : NO;
+        case TypeCode::Short:   return static_cast< IOSAudioHostPeer<short>* > (peer)->wasInterrupted() ? YES : NO;
+        case TypeCode::Int:     return static_cast< IOSAudioHostPeer<int>* > (peer)->wasInterrupted() ? YES : NO;
+        case TypeCode::Double:  return static_cast< IOSAudioHostPeer<double>* > (peer)->wasInterrupted() ? YES : NO;
         default: return NO;
     }
 }

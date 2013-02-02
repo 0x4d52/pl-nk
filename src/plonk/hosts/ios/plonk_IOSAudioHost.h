@@ -90,8 +90,9 @@ public:
     void stopHost() throw();
     void pauseHost() throw();
     void resumeHost() throw();
-
-    void resetIO() throw();
+    
+    virtual void hostInterruption (const bool flag) throw() { }
+    inline bool wasInterrupted() throw() { return interrupted.getValue() != 0; }
     
     OSStatus renderCallback (UInt32                     inNumberFrames,
                              AudioUnitRenderActionFlags *ioActionFlags, 
@@ -110,6 +111,8 @@ public:
 private:
     void setFormat() throw();    
     int setupRemoteIO() throw();
+    void killRemoteIO() throw();
+    void resetIO() throw();
     void restart() throw();
     void fixAudioRouteIfSetToReceiver() throw();
 
@@ -127,10 +130,11 @@ private:
 	UInt32						numOutputChannels;
 	double						cpuUsage;
 
+    AtomicInt                   interrupted;
+    
     void*                       customRenderCallbackRef;
     RenderCallbackFunction      customPreRender;
     RenderCallbackFunction      customPostRender;
-    
 };
 
 
@@ -249,6 +253,7 @@ using namespace plonk;
 - (void)hostStopped:(PLAudioHost*)host;
 - (void)hostPaused:(PLAudioHost*)host;
 - (void)hostResuming:(PLAudioHost*)host;
+- (void)hostInterruption:(PLAudioHost*)host withFlag:(BOOL)flag;
 @end
 
 
@@ -277,6 +282,7 @@ using namespace plonk;
 @property (nonatomic, readonly) double cpuUsage;            ///< The current CPU usage of the DSP loop.
 @property (nonatomic, readonly) BOOL isRunning;             ///< Is the host running?
 @property (nonatomic, readonly) BOOL isPaused;              ///< Is the host paused?
+@property (nonatomic, readonly) BOOL wasInterrupted;        ///< Was the host interrupted?
 @property (nonatomic, readonly) Dynamic outputUnit;         ///< The output unit of the host.
 @property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
 @property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.

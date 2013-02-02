@@ -46,12 +46,12 @@ static const plonk::Text modeKey        = "mode";
 BEGIN_PLONK_NAMESPACE
 
 template<class SampleType>
-static inline OSStatus Render (void							*inRefCon, 
-                               AudioUnitRenderActionFlags 	*ioActionFlags, 
-                               const AudioTimeStamp         *inTimeStamp, 
-                               UInt32 						inBusNumber, 
-                               UInt32 						inNumberFrames, 
-                               AudioBufferList				*ioData)
+static OSStatus Render (void                        *inRefCon,
+                        AudioUnitRenderActionFlags 	*ioActionFlags,
+                        const AudioTimeStamp        *inTimeStamp,
+                        UInt32 						inBusNumber,
+                        UInt32 						inNumberFrames,
+                        AudioBufferList				*ioData)
 {	
 	IOSAudioHostBase<SampleType> *host = (IOSAudioHostBase<SampleType> *)inRefCon;
 	const OSStatus result =  host->renderCallback (inNumberFrames, 
@@ -62,10 +62,10 @@ static inline OSStatus Render (void							*inRefCon,
 }
 
 template<class SampleType>
-static inline void PropertyListener (void *                  inClientData,
-                                     AudioSessionPropertyID  inID,
-                                     UInt32                  inDataSize,
-                                     const void *            inPropertyValue)
+static void PropertyListener (void *                  inClientData,
+                              AudioSessionPropertyID  inID,
+                              UInt32                  inDataSize,
+                              const void *            inPropertyValue)
 {	
 	IOSAudioHostBase<SampleType> *host = (IOSAudioHostBase<SampleType> *)inClientData;
 #if PLONK_DEBUG
@@ -81,8 +81,8 @@ static inline void PropertyListener (void *                  inClientData,
 }
 
 template<class SampleType>
-static inline void InterruptionListener (void *inClientData, 
-                                         UInt32 inInterruption)
+static void InterruptionListener (void *inClientData,
+                                  UInt32 inInterruption)
 {	
 	IOSAudioHostBase<SampleType> *host = (IOSAudioHostBase<SampleType> *)inClientData;
     host->interruptionCallback (inInterruption);
@@ -108,8 +108,7 @@ static inline void audioTypeToShortChannels (SrcType * const src[], AudioBufferL
 template<class DstType>
 static inline void audioShortToType (const short * const src, DstType* const dst, const unsigned int length) throw()
 {
-//    if (dst != NULL)
-        NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);
+    NumericalArrayConverter<DstType,short>::convertScaled (dst, src, length);
 }
 
 template<class DstType>
@@ -128,7 +127,9 @@ template<class SampleType>
 IOSAudioHostBase<SampleType>::IOSAudioHostBase (ObjectMemoryBase* omb) throw()
 :   AudioHostBase<SampleType> (omb),
     hwSampleRate (0.0),         // let the hardware choose
+    rioUnit (NULL),
     cpuUsage (0.0),
+    interrupted (NO),
     customRenderCallbackRef (NULL),
     customPreRender (NULL),
     customPostRender (NULL)
@@ -140,13 +141,13 @@ template<class SampleType>
 IOSAudioHostBase<SampleType>::~IOSAudioHostBase()
 {
     this->stopHost();
+    this->killRemoteIO();
 }
 
 template<class SampleType>
 Text IOSAudioHostBase<SampleType>::getHostName() const throw()
 {
     return "iOS (" + TypeUtility<SampleType>::getTypeName() + ")";
-
 }
 
 template<class SampleType>
@@ -224,85 +225,96 @@ void IOSAudioHostBase<SampleType>::stopHost() throw()
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::startHost() throw()
-{    
-    UInt32 size;
-    
-	// render proc
-	inputProc.inputProc = Render<SampleType>;
-	inputProc.inputProcRefCon = this;
-		
-	// session
-	AudioSessionInitialize (NULL, NULL, InterruptionListener<SampleType>, this);
-	AudioSessionSetActive (true);
-    
-    UInt32 audioCategory = kAudioSessionCategory_PlayAndRecord; 
-        
-    if (this->getOtherOptions().containsKey (categoryKey))
-        audioCategory = (UInt32)this->getOtherOptions().at (categoryKey).template asUnchecked<IntVariable>();
-	
-	AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (audioCategory), &audioCategory);
-    
-    if (this->getOtherOptions().containsKey (modeKey))
+{
+    if (rioUnit != NULL)
     {
-        UInt32 mode = (UInt32)this->getOtherOptions().at (modeKey).template asUnchecked<IntVariable>();
-        AudioSessionSetProperty (kAudioSessionProperty_Mode, sizeof (mode), &mode);
+        this->setIsRunning (true);
+        AudioSessionSetActive (true);
+        restart();
     }
-    
-	AudioSessionAddPropertyListener (kAudioSessionProperty_AudioRouteChange, PropertyListener<SampleType>, this);
-    AudioSessionAddPropertyListener (kAudioSessionProperty_InterruptionType, PropertyListener<SampleType>, this);
-    AudioSessionAddPropertyListener (kAudioSessionProperty_AudioCategory, PropertyListener<SampleType>, this);
-    
-	fixAudioRouteIfSetToReceiver();
-	
-    const double preferredHostSampleRate = this->getPreferredHostSampleRate();
-    size = sizeof (preferredHostSampleRate);
-    
-	if (preferredHostSampleRate > 0.0)
-		AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareSampleRate, size, &preferredHostSampleRate);
-    
-    size = sizeof (hwSampleRate);
-    AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareSampleRate, &size, &hwSampleRate);
-	
-    if (this->getPreferredHostBlockSize() > 0)
+    else
     {
-        bufferDuration = this->getPreferredHostBlockSize() / hwSampleRate;
-        AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof (bufferDuration), &bufferDuration);
-	}
-    
-    rioUnit = NULL;
-
-    resetIO();
-    
-    this->setPreferredHostSampleRate (hwSampleRate);
-    this->setPreferredHostBlockSize (bufferSize);
-    this->startHostInternal();
-    
-    restart();
-    
-    size = sizeof (format);
-	AudioUnitGetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, &size);
+        UInt32 size;
+        
+        // render proc
+        inputProc.inputProc = Render<SampleType>;
+        inputProc.inputProcRefCon = this;
+            
+        // session
+        AudioSessionInitialize (NULL, NULL, InterruptionListener<SampleType>, this);
+        AudioSessionSetActive (true);
+        
+        UInt32 audioCategory = kAudioSessionCategory_PlayAndRecord; 
+            
+        if (this->getOtherOptions().containsKey (categoryKey))
+            audioCategory = (UInt32)this->getOtherOptions().at (categoryKey).template asUnchecked<IntVariable>();
+        
+        AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (audioCategory), &audioCategory);
+        
+        if (this->getOtherOptions().containsKey (modeKey))
+        {
+            UInt32 mode = (UInt32)this->getOtherOptions().at (modeKey).template asUnchecked<IntVariable>();
+            AudioSessionSetProperty (kAudioSessionProperty_Mode, sizeof (mode), &mode);
+        }
+        
+        AudioSessionAddPropertyListener (kAudioSessionProperty_AudioRouteChange, PropertyListener<SampleType>, this);
+        AudioSessionAddPropertyListener (kAudioSessionProperty_InterruptionType, PropertyListener<SampleType>, this);
+        AudioSessionAddPropertyListener (kAudioSessionProperty_AudioCategory, PropertyListener<SampleType>, this);
+        
+        fixAudioRouteIfSetToReceiver();
+        
+        const double preferredHostSampleRate = this->getPreferredHostSampleRate();
+        size = sizeof (preferredHostSampleRate);
+        
+        if (preferredHostSampleRate > 0.0)
+            AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareSampleRate, size, &preferredHostSampleRate);
+            
+        resetIO();
+        
+        this->setPreferredHostSampleRate (hwSampleRate);
+        this->setPreferredHostBlockSize (bufferSize);
+        this->startHostInternal();
+        
+        restart();
+        
+        size = sizeof (format);
+        AudioUnitGetProperty (rioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &format, &size);
+    }    
 }
+
+//template<class SampleType>
+//void IOSAudioHostBase<SampleType>::pauseHost() throw()
+//{
+//    if (this->getIsRunning())
+//    {
+//        this->hostPaused();
+//        AudioOutputUnitStop (rioUnit);
+//        //AudioSessionSetActive (false);
+//
+//        dispatch_after (dispatch_time (DISPATCH_TIME_NOW, NSEC_PER_SEC / 4),
+//                        dispatch_get_main_queue(), ^{
+//            this->setIsPaused (true);
+//        });
+//    }
+//    else
+//    {
+//        this->setIsPaused (true);
+//        this->hostPaused();
+//    }
+//}
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::pauseHost() throw()
 {
     if (this->getIsRunning())
     {
-        this->hostPaused();
         AudioOutputUnitStop (rioUnit);
-        AudioSessionSetActive (false);
+    }
 
-        dispatch_after (dispatch_time (DISPATCH_TIME_NOW, NSEC_PER_SEC / 4),
-                        dispatch_get_main_queue(), ^{
-            this->setIsPaused (true);
-        });
-    }
-    else
-    {
-        this->setIsPaused (true);
-        this->hostPaused();
-    }
+    this->setIsPaused (true);
+    this->hostPaused();
 }
+
 
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::resumeHost() throw()
@@ -317,15 +329,13 @@ void IOSAudioHostBase<SampleType>::resumeHost() throw()
     }
 }
 
-// need to call hostStopped() - may be in the property listener?
-
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::setFormat() throw()
 {
 	memset (&format, 0, sizeof (AudioStreamBasicDescription));
 	format.mSampleRate = hwSampleRate;
 	format.mFormatID = kAudioFormatLinearPCM;
-	int sampleSize = sizeof (AudioSampleType);
+	const int sampleSize = sizeof (AudioSampleType);
 	format.mFormatFlags = kAudioFormatFlagsCanonical;
 	format.mBitsPerChannel = 8 * sampleSize;
 	format.mChannelsPerFrame = this->getNumOutputs();
@@ -361,24 +371,30 @@ int IOSAudioHostBase<SampleType>::setupRemoteIO() throw()
 }
 
 template<class SampleType>
-void IOSAudioHostBase<SampleType>::restart() throw()
-{		
+void IOSAudioHostBase<SampleType>::killRemoteIO() throw()
+{
     if (rioUnit)
     {
+        AudioOutputUnitStop (rioUnit);
         AudioComponentInstanceDispose (rioUnit);
         rioUnit = NULL;
     }
-    
+}
+
+template<class SampleType>
+void IOSAudioHostBase<SampleType>::restart() throw()
+{		    
     resetIO();
     
     this->setPreferredHostSampleRate (hwSampleRate);
     this->setPreferredHostBlockSize (bufferSize);
         
-    setFormat();
-	setupRemoteIO();
-	
-    AudioSessionSetActive(false);
-    AudioSessionSetActive(true);
+    if (!rioUnit)
+    {
+        setFormat();
+        setupRemoteIO();
+	}
+    
 	AudioOutputUnitStart (rioUnit);
 }
 
@@ -480,15 +496,23 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
             SInt32 routeChangeReason;
             CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, &routeChangeReason);
             
+            static const char* reasons[] = {
+                "Unknown",
+                "NewDeviceAvailable", "OldDeviceUnavailable", "CategoryChange", "Override",
+                "(Invalid)",
+                "WakeFromSleep", "NoSuitableRouteForCategory"
+            };
+            
             CFStringRef newAudioRoute;
             UInt32 propertySize = sizeof (CFStringRef);
             AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &newAudioRoute);
-            
-            NSLog (@"route: %s\n", CFStringGetCStringPtr (newAudioRoute, CFStringGetSystemEncoding()));
+            NSLog (@"route: %s reason = '%s' (%ld)\n",
+                   CFStringGetCStringPtr (newAudioRoute,CFStringGetSystemEncoding()),
+                   reasons[routeChangeReason], routeChangeReason);
         }
 
-        if (!this->getIsRunning())
-            restart();
+//        if (!this->getIsRunning())
+//            restart();
     }
     else if (inID == kAudioSessionProperty_AudioCategory)
     {
@@ -500,7 +524,18 @@ template<class SampleType>
 void IOSAudioHostBase<SampleType>::resetIO() throw()
 {
     OSStatus err;
-    UInt32 size = sizeof(UInt32);
+    UInt32 size;
+    
+    size = sizeof (hwSampleRate);
+    AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareSampleRate, &size, &hwSampleRate);
+    
+    if (this->getPreferredHostBlockSize() > 0)
+    {
+        bufferDuration = this->getPreferredHostBlockSize() / hwSampleRate;
+        AudioSessionSetProperty (kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof (bufferDuration), &bufferDuration);
+    }
+
+    size = sizeof(UInt32);
     err = AudioSessionGetProperty (kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &numInputChannels);
     
     if (err != noErr)
@@ -523,24 +558,54 @@ void IOSAudioHostBase<SampleType>::resetIO() throw()
                            false);        
 }
 
+//template<class SampleType>
+//void IOSAudioHostBase<SampleType>::interruptionCallback (UInt32 inInterruption) throw()
+//{
+//    if (inInterruption == kAudioSessionBeginInterruption)
+//    {
+//        OSStatus err = AudioOutputUnitStop (rioUnit);
+//        this->setIsPaused (true);
+//        this->setIsRunning (false);
+//		//AudioSessionSetActive (false);
+//        this->hostPaused();
+//        NSLog (@"Interruption %s: err = %ld", inInterruption ? "begin" : "end", err);
+//    }
+//    else if (inInterruption == kAudioSessionEndInterruption)
+//    {
+//        dispatch_after (dispatch_time (DISPATCH_TIME_NOW, NSEC_PER_SEC / 4),
+//                        dispatch_get_main_queue(), ^{
+//                            this->hostResuming();
+//                            this->setIsPaused (false);
+//                            this->setIsRunning (true);
+//                            //AudioOutputUnitStart (rioUnit);
+//                            //this->killRemoteIO();
+//                            OSStatus err = AudioSessionSetActive (true);
+//                            this->restart();
+//                            NSLog (@"Interruption %s: err = %ld", inInterruption ? "begin" : "end", err);
+//                        });
+//	}
+//}
+
 template<class SampleType>
 void IOSAudioHostBase<SampleType>::interruptionCallback (UInt32 inInterruption) throw()
 {
+    NSLog (@"...Interruption...");
+    
     if (inInterruption == kAudioSessionBeginInterruption)
     {
-        this->setIsPaused (true);
-        this->setIsRunning (false);
-		AudioSessionSetActive (false);
-        this->hostPaused();
+        interrupted = true;
+        this->hostInterruption (true);
+        this->stopHost();
+        
+        NSLog (@"Interruption %s", inInterruption ? "begin" : "end");
     }
     else if (inInterruption == kAudioSessionEndInterruption)
     {
-		// make sure we are again the active session
-        this->hostResuming();
-		AudioSessionSetActive (true);
-        this->setIsPaused (false);
-		this->setIsRunning (true);
-		AudioOutputUnitStart (rioUnit);
+        this->hostInterruption (false);
+        this->startHost();
+        interrupted = false;
+
+        NSLog (@"Interruption %s", inInterruption ? "begin" : "end");
 	}
 }
 

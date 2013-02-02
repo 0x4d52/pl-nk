@@ -1568,7 +1568,7 @@ public:
 	{
 		NumericalType *array = this->getArray();
 		
-		if (array != 0)
+		if ((array != 0) && (this->size() > 0))
             zeroData (array, this->size());            
 	}
     
@@ -1577,8 +1577,8 @@ public:
 		const NumericalType *array = this->getArray();
 		NumericalType result (0);
         
-		if (array != 0)
-		{            
+		if ((array != 0) && (this->size() > 0))
+		{
 			const int length = this->length();
 			
             if (length > 0)
@@ -1596,8 +1596,8 @@ public:
 		const NumericalType *array = this->getArray();
 		NumericalType result (0);
         
-		if (array != 0)
-		{            
+		if ((array != 0) && (this->size() > 0))
+		{
 			const int length = this->length();
 			
             if (length > 0)
@@ -1616,8 +1616,8 @@ public:
 		const NumericalType *array = this->getArray();
 		NumericalType result (0);
         
-		if (array != 0)
-		{            
+		if ((array != 0) && (this->size() > 0))
+		{
 			const int length = this->length();
 			
             if (length > 0)
@@ -1636,8 +1636,8 @@ public:
 		NumericalType currentMax (0);
         int index = -1;
         
-		if (array != 0)
-		{            
+		if ((array != 0) && (this->size() > 0))
+		{
 			const int length = this->length();
 			
             if (length > 0)
@@ -1665,8 +1665,8 @@ public:
 		NumericalType currentMin (0);
         int index = -1;
         
-		if (array != 0)
-		{            
+		if ((array != 0) && (this->size() > 0))
+		{
 			const int length = this->length();
 			
             if (length > 0)
@@ -1692,7 +1692,7 @@ public:
     {
         NumericalType *array = this->getArray();
 		
-		if (array != 0)
+		if ((array != 0) && (this->size() > 0))
 		{
             const NumericalType maximum = this->findMaximumAbs();
             
