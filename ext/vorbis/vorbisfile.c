@@ -1904,6 +1904,11 @@ long ov_read_filter(OggVorbis_File *vf,char *buffer,int length,
     long channels=ov_info(vf,-1)->channels;
     long bytespersample=word * channels;
     vorbis_fpu_control fpu;
+      
+#ifndef VORBIS_FPU_CONTROL
+    (void)fpu;
+#endif
+      
     if(samples>length/bytespersample)samples=length/bytespersample;
 
     if(samples <= 0)

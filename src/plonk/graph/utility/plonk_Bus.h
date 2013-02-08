@@ -116,93 +116,21 @@ public:
     Text getLabel() const throw()                                   { return identifier; }
     void setLabel (Text const& newId) throw()                       { identifier = newId; }
 
+    SampleType getPeak() const throw()
+    {
+        return buffer.findMaximumAbs();
+    }
     
-//    void write (TimeStamp writeStartTime, 
-//                const int numWriteSamples, 
-//                const SampleType* sourceData) throw()
-//    {        
-//        const int currentBufferSize = bufferSize.getValue();
-//        const double currentSampleRate = sampleRate.getValue(); // should it be double, was int??
-//                                    
-//        SampleType* const bufferSamples = buffer.getArray();
-//        
-//        int numSamplesRemaining = numWriteSamples;
-//        
-//        bool shouldMix = false;
-//        
-//        if (latestValidTime - TimeStamp::fromSamples (numWriteSamples, 
-//                                                      currentSampleRate) >= writeStartTime)
-//        {
-//            shouldMix = true;
-//            
-//            // if mixing on a bus the write size must match the write size set for this bus on this block
-//            plonk_assert (numWriteSamples == firstWriteSize); 
-//        }
-//        else
-//        {
-//            // keep a record of the size used to write the first block at this time
-//            firstWriteSize = writeBlockSize.getValue();
-//        }
-//                
-//        while (numSamplesRemaining > 0)
-//        {
-//            int bufferOffsetSamples;
-//            
-//            if (writeStartTime >= bufferEndTime)
-//            {
-//                // we are trying to write ahead of where the buffer has got to..
-//                // not sure this is right
-//                /*
-//                 perhaps?
-//                 bufferStartTime = bufferEndTime
-//                 bufferEndTime - as below..
-//                 
-//                 check again if we are beyond the end time
-//                 need to zero anything?
-//                 */
-//                
-//                bufferStartTime = writeStartTime;
-//                bufferEndTime = bufferStartTime + TimeStamp::fromSamples (currentBufferSize, 
-//                                                                          currentSampleRate);
-//                bufferOffsetSamples = 0;                                
-//            }        
-//            else
-//            {
-//                const TimeStamp bufferOffsetTime = writeStartTime - bufferStartTime;
-//                bufferOffsetSamples = int (bufferOffsetTime.toSamples (currentSampleRate) + 0.5);
-//                
-//                if (bufferOffsetSamples >= currentBufferSize)
-//                    bufferOffsetSamples -= currentBufferSize;
-//            }
-//            
-//            const int bufferSamplesRemaining = currentBufferSize - bufferOffsetSamples;
-//            const int samplesThisTime = plonk::min (numSamplesRemaining, 
-//                                                    bufferSamplesRemaining);
-//
-//            if (shouldMix)
-//            {
-//                NumericalArrayBinaryOp<SampleType, BinaryOpFunctionsType::addop>::calcNN (bufferSamples + bufferOffsetSamples, 
-//                                                                                          bufferSamples + bufferOffsetSamples,
-//                                                                                          sourceData,
-//                                                                                          samplesThisTime);
-//            }
-//            else             
-//            {
-//                NumericalArray<SampleType>::copyData (bufferSamples + bufferOffsetSamples, 
-//                                                      sourceData, 
-//                                                      samplesThisTime);
-//            }
-//            
-//            numSamplesRemaining -= samplesThisTime;
-//            sourceData += samplesThisTime;
-//            
-//            const double timestampOffset = TimeStamp::fromSamples (samplesThisTime, 
-//                                                                   currentSampleRate);
-//            writeStartTime += timestampOffset;
-//            latestValidTime = writeStartTime;
-//        }                
-//    }
-
+    SampleType getMean() const throw()
+    {
+        return buffer.findMeanAbs();
+    }
+    
+    SampleType getRMS() const throw()
+    {
+        return buffer.findRMS();
+    }
+    
     void write (TimeStamp writeStartTime,
                 const int numWriteSamples,
                 const SampleType* sourceData) throw()
@@ -288,9 +216,20 @@ public:
     {                                
         const int currentBufferSize = bufferSize.getValue();
         const double currentSampleRate = sampleRate.getValue();
-                
-        const TimeStamp readEndTime = readStartTime + TimeStamp::fromSamples (numReadSamples, 
-                                                                              currentSampleRate);   
+        
+        const TimeStamp duration = TimeStamp::fromSamples (numReadSamples, currentSampleRate);
+        TimeStamp readEndTime;
+        
+        if (readStartTime < TimeStamp::getZero())
+        {
+            readEndTime = latestValidTime;
+            readStartTime = readEndTime - duration;
+        }
+        else
+        {
+            readEndTime = readStartTime + duration;
+        }
+
         const TimeStamp earliestValidTime = this->getEarliestValidTime();
         const double diff = (latestValidTime - readEndTime).getValue();
         
@@ -407,16 +346,7 @@ public:
 	:	Base (static_cast<Base const&> (copy))
 	{
 	}        
-    
-//    BusBuffer (Dynamic const& other) throw()
-//    :   Base (static_cast<Internal*> (other.getItem().getInternal()))
-//    {
-//        if (this->getInternal() == 0)
-//            operator= (BusBuffer());
-//        else
-//            plonk_assert (other.getTypeCode() == TypeUtility<BusBuffer>::getTypeCode());
-//    }       
-        
+            
     static const BusBuffer& getNull() throw()
 	{
 		static BusBuffer null;
@@ -446,6 +376,21 @@ public:
     inline void read (TimeStamp& timeStamp, const int numSamples, SampleType* destData) throw()
     {
         this->getInternal()->read (timeStamp, numSamples, destData);
+    }
+    
+    inline SampleType getPeak() const throw()
+    {
+        return this->getInternal()->getPeak();
+    }
+    
+    inline SampleType getMean() const throw()
+    {
+        return this->getInternal()->getMean();
+    }
+    
+    inline SampleType getRMS() const throw()
+    {
+        return this->getInternal()->getRMS();
     }
     
     Text getName() const throw()
@@ -489,7 +434,7 @@ public:
         
     static BlockSize getDefaultBufferSize() throw()
     {
-        static BlockSize defaultBufferSize (32768);
+        static BlockSize defaultBufferSize (4096);
         return defaultBufferSize;
     }    
     

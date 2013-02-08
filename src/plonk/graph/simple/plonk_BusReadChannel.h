@@ -65,6 +65,7 @@ public:
                             BlockSize const& blockSize,
                             SampleRate const& sampleRate) throw()
     :   Internal (inputs, data, blockSize, sampleRate),
+        nextValidReadTime (TimeStamp::getSentinel()),
         latency (0.0)
     {
     }

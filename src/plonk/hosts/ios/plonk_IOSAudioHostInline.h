@@ -230,6 +230,7 @@ void IOSAudioHostBase<SampleType>::startHost() throw()
     {
         this->setIsRunning (true);
         AudioSessionSetActive (true);
+        this->hostStarting();
         restart();
     }
     else
@@ -509,6 +510,8 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
             NSLog (@"route: %s reason = '%s' (%ld)\n",
                    CFStringGetCStringPtr (newAudioRoute,CFStringGetSystemEncoding()),
                    reasons[routeChangeReason], routeChangeReason);
+            
+            this->fixAudioRouteIfSetToReceiver();
         }
 
 //        if (!this->getIsRunning())

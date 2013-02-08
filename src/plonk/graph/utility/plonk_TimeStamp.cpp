@@ -67,43 +67,6 @@ TimeStamp::TimeStamp (TimeStamp const& other) throw()
 {
 }
 
-//TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
-//{
-//    if (&other != this)
-//    {
-//        this->time = other.time;
-//        this->fraction = other.fraction;
-//    }
-//    
-//    return *this;
-//}
-
-//TimeStamp& TimeStamp::operator+= (const double offset) throw()
-//{
-//    if (pl_IsInfD (offset))
-//    {
-//        this->time = 0;
-//        this->fraction = offset;
-//    }
-//    else
-//    {
-//        const double correctedOffset = offset + this->fraction;
-//        const LongLong timeOffset = LongLong (correctedOffset);
-//        this->time += timeOffset;
-//        this->fraction = correctedOffset - timeOffset; // carry the fraction
-//        
-//        if (this->fraction < 0.0)
-//        {
-//            this->time--;
-//            this->fraction += 1.0;
-//        }
-//        
-//        plonk_assert (fractionIsValid (this->fraction));
-//    }
-//    
-//    return *this;
-//}
-
 TimeStamp& TimeStamp::operator+= (TimeStamp const& other) throw()
 {
     this->time += other.time;
@@ -264,43 +227,6 @@ bool TimeStamp::operator> (TimeStamp const& other) const throw()
         return false;    
 }
 
-//bool TimeStamp::operator>= (TimeStamp const& other) const throw()
-//{
-//    plonk_assert (fractionIsValid (this->fraction));
-//    plonk_assert (fractionIsValid (other.fraction));
-//    
-//    if (this->isInfinite())
-//        if (other.isInfinite())
-//            return false;
-//        else
-//            return true;
-//    else if (time > other.time)
-//        return true;
-//    else if ((time == other.time) && (fraction >= other.fraction))
-//        return true;
-//    else
-//        return false;    
-//}
-
-//bool TimeStamp::operator>= (TimeStamp const& other) const throw()
-//{
-//    plonk_assert (fractionIsValid (this->fraction));
-//    plonk_assert (fractionIsValid (other.fraction));
-//    
-//    if (this->isInfinite())
-//    {
-//        if (other.isInfinite())
-//            return false;
-//        else
-//            return true;
-//    }
-//    else if ((time > other.time) || ((time == other.time) && (fraction >= other.fraction)))
-//        return true;
-//    else
-//        return false;    
-//}
-
-
 bool TimeStamp::fractionIsValid (const double f) throw()
 {
     if ((f >= 0.0) && (f < 1.0)) 
@@ -310,16 +236,6 @@ bool TimeStamp::fractionIsValid (const double f) throw()
     else
         return false;
 }
-
-//double TimeStamp::getTicks() throw()
-//{
-//    return 1000000.0; // microseconds
-//}
-//
-//double TimeStamp::getReciprocalTicks() throw()
-//{
-//    return 1.0 / 1000000.0; // 1/microseconds
-//}
 
 TimeStamp TimeStamp::fromSeconds (const double seconds) throw()
 {
@@ -332,12 +248,6 @@ TimeStamp TimeStamp::fromSamples (const double samples, const double sampleRate)
 {
     return fromSeconds (samples / sampleRate);    
 }
-
-//const TimeStamp& TimeStamp::getZero() throw()
-//{
-//    static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
-//    return *timeZero;
-//}
 
 const TimeStamp& TimeStamp::getMaximum() throw()
 {

@@ -205,4 +205,8 @@ struct OggOpusFile{
 
 int op_strncasecmp(const char *_a,const char *_b,int _n);
 
+//#ifndef OP_ENABLE_HTTP
+//# define OP_ENABLE_HTTP (1)
+//#endif
+
 #endif

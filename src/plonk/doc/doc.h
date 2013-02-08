@@ -773,4 +773,14 @@
 
 
 
+/* Creating a new iOS Project
+ 
+ - In Xcode -> Preferences -> Source trees add a PL_NK_SOURCE tree to point to the pl-nk /src folder
+ - Create a project using any of the iOS templates in Xcode.
+ - change all .m files to .mm (Objective-C++)
+ - add the /src folder to the project/target (selecting don't copy files)
+ - change this to be "relative to PL_NK_SOURCE" in the right hand side-bar
+ - add $(PL_NK_SOURCE) to the header search paths in the project
+ - add PLONK_AUDIOHOST_IOS=1 to the preprocessor macros (in all configurations, debug, release etc)
+ */
 

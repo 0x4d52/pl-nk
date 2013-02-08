@@ -48,7 +48,6 @@
 #include "../maths/plonk_InlineMiscOps.h"
 #include "../random/plonk_RNG.h"
 #include "plonk_Int24.h"
-//#include "plonk_Fix.h"
 
     
 template<class NumericalType>
@@ -1572,6 +1571,60 @@ public:
             zeroData (array, this->size());            
 	}
     
+    NumericalType findMean() const throw()
+    {
+		const NumericalType *array = this->getArray();
+		NumericalType result (0);
+        
+        const int length = this->length();
+        
+        if ((array != 0) && (length > 0))
+        {            
+            for (int i = 0; i < length; ++i)
+                result += array[i];
+                
+            result /= NumericalType (length);
+        }
+        
+        return result;
+    }
+
+    NumericalType findMeanAbs() const throw()
+    {
+        const NumericalType *array = this->getArray();
+        NumericalType result (0);
+        
+        const int length = this->length();
+        
+        if ((array != 0) && (length > 0))
+        {                            
+            for (int i = 0; i < length; ++i)
+                result += UnaryOpFunctionsType::abs (array[i]);
+                    
+            result /= NumericalType (length);
+        }
+        
+        return result;
+    }
+
+    NumericalType findRMS() const throw()
+    {
+        const NumericalType *array = this->getArray();
+        NumericalType result (0);
+        
+        const int length = this->length();
+
+        if ((array != 0) && (length > 0))
+        {
+            for (int i = 0; i < length; ++i)
+                result += UnaryOpFunctionsType::squared (array[i]);
+                    
+            result = UnaryOpFunctionsType::sqrt (result) / NumericalType (length);
+        }
+        
+        return result;        
+    }
+
     NumericalType findMaximum() const throw()
     {
 		const NumericalType *array = this->getArray();

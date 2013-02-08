@@ -96,6 +96,7 @@ public:
     
     static TimeStamp fromSeconds (const double seconds) throw();
     static TimeStamp fromSamples (const double samples, const double sampleRate) throw();
+    static const TimeStamp& getSentinel() throw();
     static const TimeStamp& getZero() throw();
     static const TimeStamp& getMaximum() throw();
 
@@ -147,6 +148,12 @@ inline const TimeStamp& TimeStamp::getZero() throw()
 {
     static const TimeStamp* timeZero = new TimeStamp (0, 0.0);
     return *timeZero;
+}
+
+inline const TimeStamp& TimeStamp::getSentinel() throw()
+{
+    static const TimeStamp* sentinel = new TimeStamp (-1, 0.0);
+    return *sentinel;
 }
 
 inline TimeStamp& TimeStamp::operator= (TimeStamp const& other) throw()
