@@ -88,6 +88,8 @@
 #include "../containers/variables/plonk_ShapeVariable.h"
 #include "../containers/variables/plonk_PatternVariable.h"
 
+#include "../misc/nn/plonk_NeuralNetwork.h"
+
 #include "../maths/plonk_Constants.h"
 #include "../maths/plonk_Endian.h"
 
