@@ -79,6 +79,10 @@
 #include "maths/plank_Maths.h"
 #include "maths/vectors/plank_Vectors.h"
 
+#include "misc/nn/plank_NeuralNode.h"
+#include "misc/nn/plank_NeuralLayer.h"
+#include "misc/nn/plank_NeuralNetwork.h"
+
 #include "files/plank_File.h"
 #include "files/plank_IffFileReader.h"
 #include "files/plank_IffFileWriter.h"

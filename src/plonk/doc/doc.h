@@ -782,5 +782,51 @@
  - change this to be "relative to PL_NK_SOURCE" in the right hand side-bar
  - add $(PL_NK_SOURCE) to the header search paths in the project
  - add PLONK_AUDIOHOST_IOS=1 to the preprocessor macros (in all configurations, debug, release etc)
+ 
+ Then you need an AudioHost class e.g.,:
+ 
+ @interface AudioHost : PLAudioHost<PLAudioHostDelegate>
+ @end
+ 
+ @implementation AudioHost
+ 
+ - (id)init
+ {
+ if (self = [super init])
+ {
+ self.delegate = self; // set which class contains the constructGraph method
+ }
+ 
+ return self;
+ }
+ 
+ - (Unit)constructGraphFloat:(PLAudioHost*)host
+ {
+ return Sine::ar (1000, 0.1);
+ }
+ 
+ @end
+
+ Finally you need to make one of these in the AppDelegate (or the main ViewController for single view apps would be OK):
+ 
+ e.g.,:
+ 
+ @interface AppDelegate : UIResponder <UIApplicationDelegate>
+ 
+ @property (strong, nonatomic) UIWindow *window;
+ @property (strong, nonatomic) AudioHost *host;
+ 
+ @end
+
+ - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+ {
+ _host = [[AudioHost alloc] init];
+ [_host startHost];
+ 
+ return YES;
+ }
+
+ 
+
  */
 

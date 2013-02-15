@@ -86,6 +86,7 @@ enum PlankResultIdentifiers
     PlankResult_FunctionsInvalid,           ///< One or more callback functions were null
     
     PlankResult_IndexOutOfRange,            ///< An index for a list, array etc was out of range.
+    PlankResult_ItemCountInvalid,           ///< An item count was invalid (e.g., 0 or too small for the context).
     PlankResult_ContainerNotEmptyOnDeInit,  ///< A container (list, queue, stack) is being de-initialised but is non-empty.
     
     PlankResult_ThreadLocalStorageMaximumIdentifiersReached, ///< The maximum number of identifiers for thread-local storage has been reached.

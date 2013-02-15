@@ -86,6 +86,7 @@ const char* pl_ResultString (PlankResult result)
         "One or more callback functions were null",                                     //PlankResult_FunctionsInvalid
         
         "An index for a list, array etc was out of range",                                      //PlankResult_IndexOutOfRange
+        "An item count was invalid (e.g., 0 or too small for the context)",                     //PlankResult_ItemCountInvalid
         "A container (e.g., list, queue, stack) is being de-initialised but is non-empty",      //PlankResult_ContainerNotEmptyOnDeInit
 
         "The maximum number of identifiers for thread-local storage has been reached"           //PlankResult_ThreadLocalStorageMaximumIdentifiersReached
