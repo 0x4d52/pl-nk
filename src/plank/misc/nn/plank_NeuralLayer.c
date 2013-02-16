@@ -46,12 +46,12 @@
 
 
 
-PlankResult pl_NeuralLayerF_InitNumNodesAndPrevious (PlankNeuralLayerFRef p, const int numNodes, const int numPreviousNodes)
+PlankResult pl_NeuralLayerF_InitNumNodesAndPrevious (PlankNeuralLayerFRef p, PlankNeuralNetworkFRef network, const int numNodes, const int numPreviousNodes)
 {
-    return pl_NeuralLayerF_InitNumNodesPreviousWithRange (p, numNodes, numPreviousNodes, 0.1f);
+    return pl_NeuralLayerF_InitNumNodesPreviousWithRange (p, network, numNodes, numPreviousNodes, 0.1f);
 }
 
-PlankResult pl_NeuralLayerF_InitNumNodesPreviousWithRange (PlankNeuralLayerFRef p, const int numNodes, const int numPreviousNodes, const float range)
+PlankResult pl_NeuralLayerF_InitNumNodesPreviousWithRange (PlankNeuralLayerFRef p, PlankNeuralNetworkFRef network, const int numNodes, const int numPreviousNodes, const float range)
 {
     PlankResult result;
     int numNodesChecked, numPreviousNodesChecked, i;
@@ -77,7 +77,7 @@ PlankResult pl_NeuralLayerF_InitNumNodesPreviousWithRange (PlankNeuralLayerFRef 
     
     for (i = 0; i < numNodesChecked; ++i)
     {
-        if ((result = pl_NeuralNodeF_InitWithNumWeightsAndRange (&nodeArray[i], numPreviousNodesChecked, range)) != PlankResult_OK)
+        if ((result = pl_NeuralNodeF_InitWithNumWeightsAndRange (&nodeArray[i], network, numPreviousNodesChecked, range)) != PlankResult_OK)
             goto exit;
     }
 

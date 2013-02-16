@@ -42,6 +42,8 @@
 #define PLANK_NEURALLAYER_H
 
 #include "../../containers/plank_DynamicArray.h"
+#include "plank_NeuralNode.h"
+#include "plank_NeuralNetwork.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -61,8 +63,8 @@ typedef struct PlankNeuralLayerF* PlankNeuralLayerFRef;
  @param numNodes The number of nodes on this layer.
  @param numPreviousNodes The number of nodes on the previous layer (i.e., connected into this one).
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_NeuralLayerF_InitNumNodesAndPrevious (PlankNeuralLayerFRef p, const int numNodes, const int numPreviousNodes);
-PlankResult pl_NeuralLayerF_InitNumNodesPreviousWithRange (PlankNeuralLayerFRef p, const int numNodes, const int numPreviousNodes, const float range);
+PlankResult pl_NeuralLayerF_InitNumNodesAndPrevious (PlankNeuralLayerFRef p, PlankNeuralNetworkFRef network, const int numNodes, const int numPreviousNodes);
+PlankResult pl_NeuralLayerF_InitNumNodesPreviousWithRange (PlankNeuralLayerFRef p, PlankNeuralNetworkFRef network, const int numNodes, const int numPreviousNodes, const float range);
 
 /** Deinitialise a <i>Plank %NeuralLayerF</i> object.
  @param p The <i>Plank %NeuralLayerF</i> object.

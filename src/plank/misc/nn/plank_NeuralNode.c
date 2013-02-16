@@ -43,22 +43,22 @@
 #include "../../maths/vectors/plank_Vectors.h"
 #include "../../random/plank_RNG.h"
 
+float pl_NeuralNodeF_PropogateScalar (PlankNeuralNodeFRef p, const float* inputVector);
+PlankResult pl_NeuralNodeF_BackPropVector (PlankNeuralNodeFRef p, const float* inputVector, const float error, const float actFuncOffset, const float learnRate, float* adjustVector);
+float pl_NeuralNodeF_PropogateVector (PlankNeuralNodeFRef p, const float* inputVector);
+PlankResult pl_NeuralNodeF_BackPropScalar (PlankNeuralNodeFRef p, const float* inputVector, const float error, const float actFuncOffset, const float learnRate, float* adjustVector);
 
-static const float NeuralFE1 = 2.7182818284590452354f;
-
-
-
-PlankResult pl_NeuralNodeF_Init (PlankNeuralNodeFRef p)
+PlankResult pl_NeuralNodeF_Init (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network)
 {
-    return pl_NeuralNodeF_InitWithNumWeightsAndRange (p, 1, 0.1f);
+    return pl_NeuralNodeF_InitWithNumWeightsAndRange (p, network, 1, 0.1f);
 }
 
-PlankResult pl_NeuralNodeF_InitWithNumWeights (PlankNeuralNodeFRef p, const int numWeights)
+PlankResult pl_NeuralNodeF_InitWithNumWeights (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, const int numWeights)
 {
-    return pl_NeuralNodeF_InitWithNumWeightsAndRange (p, numWeights, 0.1f);
+    return pl_NeuralNodeF_InitWithNumWeightsAndRange (p, network, numWeights, 0.1f);
 }
 
-PlankResult pl_NeuralNodeF_InitWithNumWeightsAndRange (PlankNeuralNodeFRef p, const int numWeights, const float range)
+PlankResult pl_NeuralNodeF_InitWithNumWeightsAndRange (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, const int numWeights, const float range)
 {
     PlankResult result = PlankResult_OK;
     
@@ -69,6 +69,19 @@ PlankResult pl_NeuralNodeF_InitWithNumWeightsAndRange (PlankNeuralNodeFRef p, co
     }
     
     pl_MemoryZero (p, sizeof (PlankNeuralNodeF));
+    
+    p->network = network;
+    
+    if (numWeights < 8)
+    {
+        p->propogate = pl_NeuralNodeF_PropogateScalar;
+        p->backProp = pl_NeuralNodeF_BackPropScalar;
+    }
+    else
+    {
+        p->propogate = pl_NeuralNodeF_PropogateVector;
+        p->backProp = pl_NeuralNodeF_BackPropVector;
+    }
     
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->weightVector, sizeof (PlankF), pl_MaxI (1, numWeights), PLANK_TRUE)) != PlankResult_OK)
         goto exit;
@@ -228,7 +241,69 @@ PlankResult pl_NeuralNodeF_Randomise (PlankNeuralNodeFRef p, const float amount)
 	return PlankResult_OK;
 }
 
-float pl_NeuralNodeF_Propogate (PlankNeuralNodeFRef p, const float* inputVector)
+PlankResult pl_NeuralNodeF_BackPropVector (PlankNeuralNodeFRef p, const float* inputVector, const float error, const float actFuncOffset, const float learnRate, float* adjustVector)
+{
+	float output, adjust, learn;
+	float* weightVectorPtr;
+    int size;
+    
+    output = p->output;
+    adjust = error * (actFuncOffset + (output * (1.f - output)));
+    learn = adjust * learnRate;
+
+	weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
+
+	size = pl_DynamicArray_GetSize (&p->weightVector);
+        
+    pl_VectorMulAddF_NN1N (weightVectorPtr, inputVector, learn, weightVectorPtr, size);
+    pl_VectorMulAddF_NN1N (adjustVector, weightVectorPtr, adjust, adjustVector, size);
+    	   
+	p->threshold += learn;
+    
+    return PlankResult_OK;
+}
+
+float pl_NeuralNodeF_PropogateVector (PlankNeuralNodeFRef p, const float* inputVector)
+{
+	float input;
+    const float* weightVectorPtr;
+    int size;
+    
+    input = 0.f;
+    weightVectorPtr = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
+    size = pl_DynamicArray_GetSize (&p->weightVector);
+    
+    pl_VectorAddMulF_1NN (&input, inputVector, weightVectorPtr, size);
+    p->output = p->network->actFunc (input + p->threshold);
+	
+	return p->output;
+}
+
+PlankResult pl_NeuralNodeF_BackPropScalar (PlankNeuralNodeFRef p, const float* inputVector, const float error, const float actFuncOffset, const float learnRate, float* adjustVector)
+{
+	float output, adjust, learn;
+	float* weightVectorPtr;
+    int size, i;
+    
+    output = p->output;
+    adjust = error * (actFuncOffset + (output * (1.f - output)));
+    learn = adjust * learnRate;
+    
+	weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
+	size = pl_DynamicArray_GetSize (&p->weightVector);
+    
+    for (i = 0; i < size; ++i)
+    {
+        weightVectorPtr[i] += inputVector[i] * learn;
+        adjustVector[i] += weightVectorPtr[i] * adjust;
+    }
+    
+	p->threshold += learn;
+    
+    return PlankResult_OK;
+}
+
+float pl_NeuralNodeF_PropogateScalar (PlankNeuralNodeFRef p, const float* inputVector)
 {
 	float input;
     const float* weightVectorPtr;
@@ -238,41 +313,22 @@ float pl_NeuralNodeF_Propogate (PlankNeuralNodeFRef p, const float* inputVector)
     weightVectorPtr = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
     size = pl_DynamicArray_GetSize (&p->weightVector);
     
-    // can vectorise this..
-    
-	for (i = 0; i < size; ++i)
-		input += inputVector[i] * weightVectorPtr[i];
-
-	p->output = 1.f / (1.f + pl_PowF (NeuralFE1, -(input + p->threshold)));
+    for (i = 0; i < size; ++i)
+        input += inputVector[i] * weightVectorPtr[i];
+        
+    p->output = p->network->actFunc (input + p->threshold);
 	
 	return p->output;
 }
 
 PlankResult pl_NeuralNodeF_BackProp (PlankNeuralNodeFRef p, const float* inputVector, const float error, const float actFuncOffset, const float learnRate, float* adjustVector)
 {
-	float output, adjust, learn;
-	float* weightVectorPtr;
-    int size, i;
-    
-    output = p->output;
-    adjust = error * (actFuncOffset + (output * (1.f - output)));
-    learn = adjust * learnRate;
+    return p->backProp (p, inputVector, error, actFuncOffset, learnRate, adjustVector);
+}
 
-	weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
-
-	size = pl_DynamicArray_GetSize (&p->weightVector);
-    
-    // can vectorise this..
-    
-	for (i = 0; i < size; ++i)
-	{
-		weightVectorPtr[i] += inputVector[i] * learn;
-		adjustVector[i] += weightVectorPtr[i] * adjust;
-	}
-	
-	p->threshold += learn;
-    
-    return PlankResult_OK;
+float pl_NeuralNodeF_Propogate (PlankNeuralNodeFRef p, const float* inputVector)
+{
+    return p->propogate (p, inputVector);
 }
 
 float pl_NeuralNodeF_GetOutput (PlankNeuralNodeFRef p)

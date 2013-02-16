@@ -43,7 +43,12 @@
 #include "plank_NeuralNetwork.h"
 #include "../../maths/vectors/plank_Vectors.h"
 
+static const float NeuralFE1 = 2.7182818284590452354f;
 
+static PlankF pl_NeuralNetworkFDefaultActFunction (PlankF value)
+{
+    return 1.f / (1.f + pl_PowF (NeuralFE1, -value));
+}
 
 PlankResult pl_NeuralNetworkF_InitWithLayersAndRange (PlankNeuralNetworkFRef p, const int* layers, const int numLayers, const float range)
 {
@@ -61,6 +66,8 @@ PlankResult pl_NeuralNetworkF_InitWithLayersAndRange (PlankNeuralNetworkFRef p, 
     
     pl_MemoryZero (p, sizeof (PlankNeuralNetworkF));
     
+    pl_NeuralNetworkF_SetActFunc (p, PLANK_NULL);
+    
     if (numLayers < 2)
     {
         result = PlankResult_ItemCountInvalid;
@@ -72,7 +79,7 @@ PlankResult pl_NeuralNetworkF_InitWithLayersAndRange (PlankNeuralNetworkFRef p, 
     
     for (i = 1; i < numLayers; ++i)
     {
-        if ((result = pl_NeuralLayerF_InitNumNodesPreviousWithRange (&layerArray[i - 1], layers[i], layers[i - 1], range)) != PlankResult_OK)
+        if ((result = pl_NeuralLayerF_InitNumNodesPreviousWithRange (&layerArray[i - 1], p, layers[i], layers[i - 1], range)) != PlankResult_OK)
             goto exit;
     }
 
@@ -335,12 +342,9 @@ PlankResult pl_NeuralNetworkF_BackProp (PlankNeuralNetworkFRef p, const float* i
     
     if ((result = pl_NeuralNetworkF_Propogate (p, inputs)) != PlankResult_OK) goto exit;
     actualOutputs = pl_NeuralLayerF_GetOutputsPtr (&layerArray[numLayers - 1]);
-
-    // can vectorise this
     
-    for (i = 0; i < numOutputs; i++)
-		outputErrors[i] = targets[i] - actualOutputs[i];
-		
+    pl_VectorSubF_NNN (outputErrors, targets, actualOutputs, numOutputs);
+    		
     adjusts = outputErrors;
     
 	for (i = numLayers - 1; i >= 0; --i)
@@ -376,4 +380,10 @@ const float* pl_NeuralNetworkF_GetOutputsPtr (PlankNeuralNetworkFRef p)
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     return pl_NeuralLayerF_GetOutputsPtr (&layerArray[numLayers - 1]);
+}
+
+PlankResult pl_NeuralNetworkF_SetActFunc (PlankNeuralNetworkFRef p, PlankNeuralNetworkFActFunction actFunc)
+{
+    p->actFunc = actFunc ? actFunc : pl_NeuralNetworkFDefaultActFunction;
+    return PlankResult_OK;
 }

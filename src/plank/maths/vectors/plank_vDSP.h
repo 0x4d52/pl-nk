@@ -566,6 +566,11 @@ static inline void pl_VectorMulAddF_NN1N (float *result, const float* input, flo
     vDSP_vsma (input, 1, &a, b, 1, result, 1, N);
 }
 
+static inline void pl_VectorAddMulF_1NN (float *result, const float* a, const float* b, PlankUL N)
+{
+    vDSP_dotpr (a, 1, b, 1, result, N);
+}
+
 static inline void pl_VectorZMulF_ZNNNNN (float *resultReal, float *resultImag,
                                           const float* leftReal, const float* leftImag,
                                           const float* rightReal, const float* rightImag,

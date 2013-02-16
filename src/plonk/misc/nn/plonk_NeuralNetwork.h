@@ -56,8 +56,9 @@ template<>
 class NeuralNetworkInternal<float> : public SmartPointer
 {
 public:
-    typedef NeuralNetworkBase<float>        NetworkType;
-    typedef NumericalArray<float>           VectorType;
+    typedef NeuralNetworkBase<float>            NetworkType;
+    typedef NumericalArray<float>               VectorType;
+    typedef PlankNeuralNetworkFActFunction      ActFunc;
 
     NeuralNetworkInternal (IntArray const& layers, const float range) throw()
     {
@@ -131,6 +132,16 @@ private:
 #endif
     }
     
+    inline void setActFunc (ActFunc const& function) throw()
+    {
+        ResultCode result = pl_NeuralNetworkF_SetActFunc (&network, function);
+        plonk_assert (result == PlankResult_OK);
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
     friend class NeuralNetworkBase<float>;
     
     PlankNeuralNetworkF network;
@@ -150,7 +161,26 @@ public:
     typedef SmartPointerContainer<Internal>             Base;
     typedef WeakPointerContainer<NeuralNetworkBase>     Weak;
     typedef typename Internal::VectorType               VectorType;
-
+    typedef typename Internal::ActFunc                  ActFunc;
+    
+    class Pattern
+    {
+    public:
+        Pattern() throw() { }
+        Pattern (VectorType const& input, VectorType const& target) throw()
+        :   i (input), t (target)
+        {
+        }
+        
+        friend class NeuralNetworkBase;
+        
+    private:
+        VectorType i;
+        VectorType t;
+    };
+    
+    typedef ObjectArray<Pattern> Patterns;
+    
     NeuralNetworkBase (IntArray const& layers, const float range = 0.1f)
     :   Base (new Internal (layers, range))
     {
@@ -203,6 +233,24 @@ public:
     inline void backProp (VectorType const& inputs, VectorType const& targets) throw()
     {
         return this->getInternal()->backProp (inputs, targets);
+    }
+    
+    inline void train (Patterns const& patterns, const int numEpochs) throw()
+    {
+        const int numPatterns = patterns.length();
+        const Pattern* patternArray = patterns.getArray();
+        
+        for (int i = 0; i < numEpochs; ++i)
+        {
+            for (int j = 0; j < numPatterns; ++j)
+                this->backProp (patternArray[j].i, patternArray[j].t);
+        }
+    }
+    
+    inline void setActFunc (ActFunc const& function) throw()
+    {
+        return this->getInternal()->setActFunc (function);
+
     }
     
     PLONK_OBJECTARROWOPERATOR(NeuralNetworkBase);

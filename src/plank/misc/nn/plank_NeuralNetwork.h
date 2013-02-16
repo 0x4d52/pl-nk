@@ -42,6 +42,8 @@
 #define PLANK_NEURALNETWORK_H
 
 #include "../../containers/plank_DynamicArray.h"
+#include "plank_NeuralNode.h"
+#include "plank_NeuralLayer.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -54,6 +56,8 @@ PLANK_BEGIN_C_LINKAGE
 
 /** An opaque reference to the <i>Plank %NeuralNetworkF</i> object. */
 typedef struct PlankNeuralNetworkF* PlankNeuralNetworkFRef;
+
+typedef PlankF (*PlankNeuralNetworkFActFunction)(PlankF);
 
 /** Initialise a <i>Plank %NeuralNetworkF</i> object.
  Deafults to have one wieght. pl_NeuralNetworkF_InitWithNumWeights() is more useful.
@@ -88,6 +92,7 @@ PlankResult pl_NeuralNetworkF_Propogate (PlankNeuralNetworkFRef p, const float* 
 PlankResult pl_NeuralNetworkF_BackProp (PlankNeuralNetworkFRef p, const float* inputs, const float* targets);
 PlankResult pl_NeuralNetworkF_GetOutputs (PlankNeuralNetworkFRef p, float* outputs);
 const float* pl_NeuralNetworkF_GetOutputsPtr (PlankNeuralNetworkFRef p);
+PlankResult pl_NeuralNetworkF_SetActFunc (PlankNeuralNetworkFRef p, PlankNeuralNetworkFActFunction actFunc);
 
 
 
@@ -103,6 +108,7 @@ typedef struct PlankNeuralNetworkF
     int numInputs, numOutputs;
 	PlankDynamicArray layers;
 	PlankDynamicArray errorVector;
+    PlankNeuralNetworkFActFunction actFunc;
 } PlankNeuralNetworkF;
 #endif
 

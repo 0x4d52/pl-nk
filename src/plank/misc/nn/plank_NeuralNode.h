@@ -42,6 +42,8 @@
 #define PLANK_NEURALNODE_H
 
 #include "../../containers/plank_DynamicArray.h"
+#include "plank_NeuralLayer.h"
+#include "plank_NeuralNetwork.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -60,14 +62,14 @@ typedef struct PlankNeuralNodeF* PlankNeuralNodeFRef;
  Deafults to have one wieght. pl_NeuralNodeF_InitWithNumWeights() is more useful.
  @param p The <i>Plank %NeuralNodeF</i> object.
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_NeuralNodeF_Init (PlankNeuralNodeFRef p);
+PlankResult pl_NeuralNodeF_Init (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network);
 
 /** Initialise a <i>Plank %NeuralNodeF</i> object.
  @param p The <i>Plank %NeuralNodeF</i> object.
  @param numWeights The number of weights.
  @return PlankResult_OK if successful, otherwise an error code. */
-PlankResult pl_NeuralNodeF_InitWithNumWeights (PlankNeuralNodeFRef p, const int numWeights);
-PlankResult pl_NeuralNodeF_InitWithNumWeightsAndRange (PlankNeuralNodeFRef p, const int numWeights, const float range);
+PlankResult pl_NeuralNodeF_InitWithNumWeights (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, const int numWeights);
+PlankResult pl_NeuralNodeF_InitWithNumWeightsAndRange (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, const int numWeights, const float range);
 
 /** Deinitialise a <i>Plank %NeuralNodeF</i> object.
  @param p The <i>Plank %NeuralNodeF</i> object.
@@ -94,10 +96,17 @@ float pl_NeuralNodeF_GetOutput (PlankNeuralNodeFRef p);
 PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
+
+typedef PlankResult (*PlankNeuralNodeFBackPropFunction)(PlankNeuralNodeFRef, const float*, const float, const float, const float, float*);
+typedef float (*PlankNeuralNodeFPropogateFunction)(PlankNeuralNodeFRef, const float*);
+
 typedef struct PlankNeuralNodeF
 {
+    PlankNeuralNetworkFRef network;
     PlankF threshold, output;
     PlankDynamicArray weightVector;
+    PlankNeuralNodeFPropogateFunction propogate;
+    PlankNeuralNodeFBackPropFunction backProp;
 } PlankNeuralNodeF;
 #endif
 
