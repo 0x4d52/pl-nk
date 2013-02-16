@@ -83,6 +83,8 @@
 #include "misc/nn/plank_NeuralLayer.h"
 #include "misc/nn/plank_NeuralNetwork.h"
 
+#include "misc/json/plank_JSON.h"
+
 #include "files/plank_File.h"
 #include "files/plank_IffFileReader.h"
 #include "files/plank_IffFileWriter.h"
