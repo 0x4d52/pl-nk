@@ -38,7 +38,7 @@
  
  */
 
-#include "plank_StandardHeader.h"
+#include "../../core/plank_StandardHeader.h"
 #include "plank_NeuralLayer.h"
 #include "plank_NeuralNetwork.h"
 #include "../../maths/vectors/plank_Vectors.h"

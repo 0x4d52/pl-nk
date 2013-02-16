@@ -36,16 +36,8 @@
  -------------------------------------------------------------------------------
  */
 
-#include "../../core/plank_StandardHeader.h"
-#include "plank_JSON.h"
+#ifndef PLANK_BASE64_H
+#define PLANK_BASE64_H
 
-#include "../../../../ext/jansson/hashtable.c"
-#include "../../../../ext/jansson/memory.c"
-#include "../../../../ext/jansson/dump.c"
-#include "../../../../ext/jansson/pack_unpack.c"
-#include "../../../../ext/jansson/strconv.c"
-#include "../../../../ext/jansson/value.c"
-#include "../../../../ext/jansson/error.c"
-#include "../../../../ext/jansson/load.c"
-#include "../../../../ext/jansson/strbuffer.c"
-#include "../../../../ext/jansson/utf.c"
+
+#endif // PLANK_BASE64_H

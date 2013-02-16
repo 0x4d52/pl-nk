@@ -84,6 +84,7 @@
 #include "misc/nn/plank_NeuralNetwork.h"
 
 #include "misc/json/plank_JSON.h"
+#include "misc/base64/plank_Base64.h"
 
 #include "files/plank_File.h"
 #include "files/plank_IffFileReader.h"
