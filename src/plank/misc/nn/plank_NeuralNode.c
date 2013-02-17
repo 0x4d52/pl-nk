@@ -71,6 +71,12 @@ PlankResult pl_NeuralNodeF_InitWithNumWeightsAndRange (PlankNeuralNodeFRef p, Pl
     pl_MemoryZero (p, sizeof (PlankNeuralNodeF));
     
     p->network = network;
+        
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->weightVector, sizeof (PlankF), pl_MaxI (1, numWeights), PLANK_TRUE)) != PlankResult_OK)
+        goto exit;
+        
+    if ((result = pl_NeuralNodeF_Randomise (p, range)) != PlankResult_OK)
+        goto exit;
     
     if (numWeights < 8)
     {
@@ -82,13 +88,7 @@ PlankResult pl_NeuralNodeF_InitWithNumWeightsAndRange (PlankNeuralNodeFRef p, Pl
         p->propogate = pl_NeuralNodeF_PropogateVector;
         p->backProp = pl_NeuralNodeF_BackPropVector;
     }
-    
-    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->weightVector, sizeof (PlankF), pl_MaxI (1, numWeights), PLANK_TRUE)) != PlankResult_OK)
-        goto exit;
-        
-    if ((result = pl_NeuralNodeF_Randomise (p, range)) != PlankResult_OK)
-        goto exit;
-    
+
 exit:
     return result;
 }
@@ -219,6 +219,8 @@ PlankResult pl_NeuralNodeF_Reset (PlankNeuralNodeFRef p, const float amount)
 	for (i = 0; i < size; ++i)
 		weightVectorPtr[i] = pl_RNG_NextFloat (r) * amount2 - amount;
     
+    p->threshold = pl_RNG_NextFloat (r) * amount2 - amount;
+    
 	return PlankResult_OK;
 }
 
@@ -237,6 +239,8 @@ PlankResult pl_NeuralNodeF_Randomise (PlankNeuralNodeFRef p, const float amount)
     
 	for (i = 0; i < size; ++i)
 		weightVectorPtr[i] += pl_RNG_NextFloat (r) * amount2 - amount;
+
+    p->threshold += pl_RNG_NextFloat (r) * amount2 - amount;
     
 	return PlankResult_OK;
 }
@@ -335,3 +339,129 @@ float pl_NeuralNodeF_GetOutput (PlankNeuralNodeFRef p)
 {
     return p->output;
 }
+
+PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, json_t* j)
+{
+    PlankResult result;
+    int i, numWeights;
+    const float* weightArray;
+    json_t* jnode;
+    json_t* jweights;
+    
+    result = PlankResult_OK;
+    jnode = json_object();
+    jweights = json_array();
+    
+    if (json_object_set_new (jnode, PLANK_JSON_TYPE, json_string_nocheck (PLANK_NEURALNODEF_JSON_TYPE)) != 0)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+
+    numWeights = pl_DynamicArray_GetSize (&p->weightVector);
+    
+    if (json_object_set_new (jnode, "threshold", json_real ((double)p->threshold)) != 0)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+
+    weightArray = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
+    
+    for (i = 0; i < numWeights; ++i)
+	{
+        if (json_array_append_new (jweights, json_real ((double)weightArray[i])) != 0)
+        {
+            result = PlankResult_JSONError;
+            goto exit;
+        }
+    }
+    
+    if (json_object_set_new (jnode, "weights", jweights) != 0)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if (json_array_append_new (j, jnode) != 0)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+exit:
+    return result;
+}
+
+PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, json_t* j)
+{
+    PlankResult result;
+    json_t* jtype;
+    json_t* jweights;
+    int numWeights, i;
+    float* weights;
+    
+    result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pl_MemoryZero (p, sizeof (PlankNeuralNodeF));
+    
+    p->network = network;
+    
+    if (!json_is_string ((jtype = json_object_get (j, PLANK_JSON_TYPE))))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if (strcmp (json_string_value (jtype), PLANK_NEURALNODEF_JSON_TYPE) != 0)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if (!json_is_array ((jweights = json_object_get (j, PLANK_NEURALNODEF_JSON_WEIGHTS))))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+
+    numWeights = (int)json_array_size (jweights);
+    
+    if (numWeights < 1)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->weightVector, sizeof (PlankF), numWeights, PLANK_TRUE)) != PlankResult_OK)
+        goto exit;
+    
+    weights = (float*)pl_DynamicArray_GetArray (&p->weightVector);
+    
+    for (i = 0; i < numWeights; ++i)
+        weights[i] = (float)json_real_value (json_array_get (jweights, i));
+    
+    p->threshold = (float)json_real_value (json_object_get (j, PLANK_NEURALNODEF_JSON_THRESHOLD));
+    
+    if (numWeights < 8)
+    {
+        p->propogate = pl_NeuralNodeF_PropogateScalar;
+        p->backProp = pl_NeuralNodeF_BackPropScalar;
+    }
+    else
+    {
+        p->propogate = pl_NeuralNodeF_PropogateVector;
+        p->backProp = pl_NeuralNodeF_BackPropVector;
+    }
+
+exit:
+    return result;
+}
+
+

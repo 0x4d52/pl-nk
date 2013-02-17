@@ -36,24 +36,32 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLANK_JSON_H
-#define PLANK_JSON_H
+#include "../../core/plank_StandardHeader.h"
+#include "plank_Zip.h"
 
-#define PLANK_JSON_TYPE "type"
+#include "../../../../ext/zlib/compress.c"
+#include "../../../../ext/zlib/inffast.c"
+#include "../../../../ext/zlib/adler32.c"
+#undef DO1
+#undef DO8
+#include "../../../../ext/zlib/crc32.c"
+#include "../../../../ext/zlib/deflate.c"
+#include "../../../../ext/zlib/infback.c"
+#undef LOAD
+#undef RESTORE
+#undef INITBITS
+#undef PULLBYTE
+#undef NEEDBITS
+#undef DROPBITS
+#undef BYTEBITS
+#include "../../../../ext/zlib/inflate.c"
+#include "../../../../ext/zlib/inftrees.c"
+#include "../../../../ext/zlib/trees.c"
+#include "../../../../ext/zlib/uncompr.c"
+#include "../../../../ext/zlib/zutil.c"
 
-PLANK_BEGIN_C_LINKAGE
+#include "../../../../ext/minizip/ioapi.c"
+#include "../../../../ext/minizip/mztools.c"
+#include "../../../../ext/minizip/zip.c"
+#include "../../../../ext/minizip/unzip.c" // must be after zip.c because of the way crypt.h is inlcuded.
 
-typedef struct PlankJSON* PlankJSONRef;
-
-//PlankResult pl_JSON_Init (PlankJSONRef p);
-//PlankResult pl_JSON_DeInit (PlankJSONRef p);
-
-
-PLANK_END_C_LINKAGE
-
-#define PLANK_INLINING_FUNCTIONS 1
-#include "plank_JSONInline.h"
-#undef PLANK_INLINING_FUNCTIONS
-
-
-#endif // PLANK_JSON_H

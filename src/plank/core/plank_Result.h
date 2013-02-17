@@ -90,6 +90,7 @@ enum PlankResultIdentifiers
     PlankResult_ContainerNotEmptyOnDeInit,  ///< A container (list, queue, stack) is being de-initialised but is non-empty.
     
     PlankResult_ThreadLocalStorageMaximumIdentifiersReached, ///< The maximum number of identifiers for thread-local storage has been reached.
+    PlankResult_JSONError,                  ///< A JSON error occurred.
     
     PlankNumResults
 };

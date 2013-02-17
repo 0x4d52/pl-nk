@@ -36,24 +36,15 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLANK_JSON_H
-#define PLANK_JSON_H
+#if PLANK_INLINING_FUNCTIONS
 
-#define PLANK_JSON_TYPE "type"
+#include "../../../../ext/jansson/jansson.h"
 
-PLANK_BEGIN_C_LINKAGE
+typedef struct PlankJSON
+{
+    json_t json;
+} PlankJSON;
 
-typedef struct PlankJSON* PlankJSONRef;
-
-//PlankResult pl_JSON_Init (PlankJSONRef p);
-//PlankResult pl_JSON_DeInit (PlankJSONRef p);
-
-
-PLANK_END_C_LINKAGE
-
-#define PLANK_INLINING_FUNCTIONS 1
-#include "plank_JSONInline.h"
-#undef PLANK_INLINING_FUNCTIONS
+#endif // PLANK_INLINING_FUNCTIONS
 
 
-#endif // PLANK_JSON_H

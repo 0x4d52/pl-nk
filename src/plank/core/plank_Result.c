@@ -89,7 +89,8 @@ const char* pl_ResultString (PlankResult result)
         "An item count was invalid (e.g., 0 or too small for the context)",                     //PlankResult_ItemCountInvalid
         "A container (e.g., list, queue, stack) is being de-initialised but is non-empty",      //PlankResult_ContainerNotEmptyOnDeInit
 
-        "The maximum number of identifiers for thread-local storage has been reached"           //PlankResult_ThreadLocalStorageMaximumIdentifiersReached
+        "The maximum number of identifiers for thread-local storage has been reached",          //PlankResult_ThreadLocalStorageMaximumIdentifiersReached
+        "A JSON error occurred"                                                                 //PlankResult_JSONError
     };
     
     if ((result < 0) || (result >= PlankNumResults))

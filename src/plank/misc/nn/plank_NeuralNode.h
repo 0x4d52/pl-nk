@@ -41,9 +41,15 @@
 #ifndef PLANK_NEURALNODE_H
 #define PLANK_NEURALNODE_H
 
+#include "../json/plank_JSON.h"
 #include "../../containers/plank_DynamicArray.h"
 #include "plank_NeuralLayer.h"
 #include "plank_NeuralNetwork.h"
+
+#define PLANK_NEURALNODEF_JSON_TYPE          "plank::NeuralNodeF"
+#define PLANK_NEURALNODEF_JSON_WEIGHTS       "weights"
+#define PLANK_NEURALNODEF_JSON_THRESHOLD     "threshold"
+
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -91,6 +97,9 @@ PlankResult pl_NeuralNodeF_Randomise (PlankNeuralNodeFRef p, const float amount)
 float pl_NeuralNodeF_Propogate (PlankNeuralNodeFRef p, const float* inputVector);
 PlankResult pl_NeuralNodeF_BackProp (PlankNeuralNodeFRef p, const float* inputVector, const float error, const float actFuncOffset, const float learnRate, float* adjustVector);
 float pl_NeuralNodeF_GetOutput (PlankNeuralNodeFRef p);
+
+PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, json_t* j);
+PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, json_t* j);
 
 
 PLANK_END_C_LINKAGE

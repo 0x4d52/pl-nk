@@ -49,3 +49,39 @@
 #include "../../../../ext/jansson/load.c"
 #include "../../../../ext/jansson/strbuffer.c"
 #include "../../../../ext/jansson/utf.c"
+
+
+//PlankResult pl_JSON_Init (PlankJSONRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }
+//    
+//    p->json = json_array();
+//    
+//exit:
+//    return result;
+//}
+//
+//
+//PlankResult pl_JSON_DeInit (PlankJSONRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    
+//    if (p == PLANK_NULL)
+//    {
+//        result = PlankResult_MemoryError;
+//        goto exit;
+//    }
+//    
+//    json_decref (p->json);
+//    p->json = PLANK_NULL;
+//    
+//exit:
+//    return result;
+//}
+

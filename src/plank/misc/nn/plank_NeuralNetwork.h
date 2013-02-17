@@ -44,6 +44,13 @@
 #include "../../containers/plank_DynamicArray.h"
 #include "plank_NeuralNode.h"
 #include "plank_NeuralLayer.h"
+#include "../json/plank_JSON.h"
+
+#define PLANK_NEURALNETWORKF_JSON_TYPE           "plank::NeuralNetworkF"
+#define PLANK_NEURALNETWORKF_JSON_LEARNRATE      "learnRate"
+#define PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET  "actFuncOffset"
+#define PLANK_NEURALNETWORKF_JSON_STRUCTURE      "structure"
+#define PLANK_NEURALNETWORKF_JSON_LAYERS         "layers"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -94,9 +101,10 @@ PlankResult pl_NeuralNetworkF_GetOutputs (PlankNeuralNetworkFRef p, float* outpu
 const float* pl_NeuralNetworkF_GetOutputsPtr (PlankNeuralNetworkFRef p);
 PlankResult pl_NeuralNetworkF_SetActFunc (PlankNeuralNetworkFRef p, PlankNeuralNetworkFActFunction actFunc);
 
+PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, json_t* j);
+PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, json_t* j);
 
 
-//virtual void train(NeuralPatternArray const& patterns, const int count) = 0;
 
 
 PLANK_END_C_LINKAGE

@@ -36,24 +36,11 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLANK_JSON_H
-#define PLANK_JSON_H
+#ifndef PLANK_ZIP_H
+#define PLANK_ZIP_H
 
-#define PLANK_JSON_TYPE "type"
+#include "../../../../ext/zlib/zlib.h"
+#include "../../../../ext/minizip/zip.h"
+#include "../../../../ext/minizip/unzip.h"
 
-PLANK_BEGIN_C_LINKAGE
-
-typedef struct PlankJSON* PlankJSONRef;
-
-//PlankResult pl_JSON_Init (PlankJSONRef p);
-//PlankResult pl_JSON_DeInit (PlankJSONRef p);
-
-
-PLANK_END_C_LINKAGE
-
-#define PLANK_INLINING_FUNCTIONS 1
-#include "plank_JSONInline.h"
-#undef PLANK_INLINING_FUNCTIONS
-
-
-#endif // PLANK_JSON_H
+#endif // PLANK_ZIP_H
