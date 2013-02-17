@@ -394,12 +394,10 @@ PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, json_t* j)
     int numLayers, i, numNodes;
     PlankNeuralLayerF* layerArray;
     json_t* jnetwork;
-    json_t* jstructure;
     json_t* jlayers;
     
     result = PlankResult_OK;
     jnetwork = json_object();
-    jstructure = json_array();
     jlayers = json_array();
     
     if (json_object_set_new (jnetwork, PLANK_JSON_TYPE, json_string_nocheck (PLANK_NEURALNETWORKF_JSON_TYPE)) != 0)
@@ -425,33 +423,10 @@ PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, json_t* j)
     
     for (i = 0; i < numLayers; ++i)
 	{
-        if (i == 0)
-        {
-            numNodes = pl_NeuralLayerF_GetNumInputs (&layerArray[i]);
-            if (json_array_append_new (jstructure, json_integer (numNodes)) != 0)
-            {
-                result = PlankResult_JSONError;
-                goto exit;
-            }
-        }
-        
-        numNodes = pl_NeuralLayerF_GetNumOutputs (&layerArray[i]);
-        if (json_array_append_new (jstructure, json_integer (numNodes)) != 0)
-        {
-            result = PlankResult_JSONError;
-            goto exit;
-        }
-        
         if ((result = pl_NeuralLayerF_ToJSON (&layerArray[i], jlayers)) != PlankResult_OK)
             goto exit;
     }
     
-    if (json_object_set_new (jnetwork, PLANK_NEURALNETWORKF_JSON_STRUCTURE, jstructure) != 0)
-    {
-        result = PlankResult_JSONError;
-        goto exit;
-    }
-
     if (json_object_set_new (jnetwork, PLANK_NEURALNETWORKF_JSON_LAYERS, jlayers) != 0)
     {
         result = PlankResult_JSONError;
@@ -498,14 +473,14 @@ PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, json_t* j)
         result = PlankResult_JSONError;
         goto exit;
     }
- 
-    if (!json_is_array ((jstructure = json_object_get (j, PLANK_NEURALNETWORKF_JSON_STRUCTURE))))
+    
+    if (!json_is_array ((jlayers = json_object_get (j, PLANK_NEURALNETWORKF_JSON_LAYERS))))
     {
         result = PlankResult_JSONError;
         goto exit;
     }
     
-    numLayers = json_array_size (jstructure);
+    numLayers = (int)json_array_size (jlayers) + 1;
     
     if (numLayers < 2)
     {
@@ -516,32 +491,14 @@ PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, json_t* j)
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->layers, sizeof (PlankNeuralLayerF), numLayers - 1, PLANK_FALSE)) != PlankResult_OK) goto exit;
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
-    if (!json_is_array ((jlayers = json_object_get (j, PLANK_NEURALNETWORKF_JSON_LAYERS))))
-    {
-        result = PlankResult_JSONError;
-        goto exit;
-    }
-    
-    if (json_array_size (jlayers) != (numLayers - 1))
-    {
-        result = PlankResult_JSONError;
-        goto exit;
-    }
-    
     for (i = 1; i < numLayers; ++i)
     {
-        if ((result = pl_NeuralLayerF_InitFromJSON (&layerArray[i - 1], p, json_array_get(jlayers, i - 1))) != PlankResult_OK)
+        if ((result = pl_NeuralLayerF_InitFromJSON (&layerArray[i - 1], p, json_array_get (jlayers, i - 1))) != PlankResult_OK)
             goto exit;
     }
     
-    numOutputs = (int)json_integer_value (json_array_get (jstructure, numLayers - 1));
-    
-    if (numOutputs != pl_NeuralNetworkF_GetNumOutputs (p))
-    {
-        result = PlankResult_JSONError;
-        goto exit;
-    }
-    
+    numOutputs = pl_NeuralLayerF_GetNumOutputs (&layerArray[numLayers - 1]);
+        
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->errorVector, sizeof (PlankF), numOutputs, PLANK_TRUE)) != PlankResult_OK) goto exit;
     
     p->learnRate = json_real_value (json_object_get (j, PLANK_NEURALNETWORKF_JSON_LEARNRATE));

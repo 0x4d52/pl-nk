@@ -73,6 +73,19 @@ public:
 #endif
     }
     
+    NeuralNetworkInternal (json_t* json) throw()
+    {
+        ResultCode result = pl_NeuralNetworkF_InitFromJSON (&network, json);
+        plonk_assert (result == PlankResult_OK);
+        
+        networkOutputs.referTo (pl_NeuralNetworkF_GetNumOutputs (&network),
+                                const_cast<float*> (pl_NeuralNetworkF_GetOutputsPtr (&network)));
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
     ~NeuralNetworkInternal()
     {
         ResultCode result = pl_NeuralNetworkF_DeInit (&network);
@@ -142,6 +155,16 @@ private:
 #endif
     }
     
+    inline void toJSON (json_t* json) throw()
+    {
+        ResultCode result = pl_NeuralNetworkF_ToJSON (&network, json);
+        plonk_assert (result == PlankResult_OK);
+        
+#ifndef PLONK_DEBUG
+        (void)result;
+#endif
+    }
+    
     friend class NeuralNetworkBase<float>;
     
     PlankNeuralNetworkF network;
@@ -181,8 +204,13 @@ public:
     
     typedef ObjectArray<Pattern> Patterns;
     
-    NeuralNetworkBase (IntArray const& layers, const float range = 0.1f)
+    NeuralNetworkBase (IntArray const& layers, const float range = 0.1f) throw()
     :   Base (new Internal (layers, range))
+    {
+    }
+    
+    NeuralNetworkBase (json_t* json) throw()
+    :   Base (new Internal (json))
     {
     }
     
@@ -250,7 +278,11 @@ public:
     inline void setActFunc (ActFunc const& function) throw()
     {
         return this->getInternal()->setActFunc (function);
-
+    }
+    
+    inline void toJSON (json_t* json) throw()
+    {
+        this->getInternal()->toJSON (json);
     }
     
     PLONK_OBJECTARROWOPERATOR(NeuralNetworkBase);
