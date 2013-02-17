@@ -68,6 +68,8 @@ static PlankResult pl_JSON_SetFloat (PlankJSONRef p, const float value);
 static PlankResult pl_JSON_SetDouble (PlankJSONRef p, const double value);
 static PlankResult pl_JSON_SetBool (PlankJSONRef p, const PlankB state);
 static PlankResult pl_JSON_SetNull (PlankJSONRef p);
+
+static PlankResult pl_JSON_DeInit (PlankJSONRef p);
 static PlankResult pl_JSON_IncrementRefCount (PlankJSONRef p);
 static PlankResult pl_JSON_DecrementRefCount (PlankJSONRef p);
 

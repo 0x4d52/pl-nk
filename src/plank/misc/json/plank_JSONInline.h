@@ -172,6 +172,11 @@ static inline PlankResult pl_JSON_DecrementRefCount (PlankJSONRef p)
     return PlankResult_OK;
 }
 
+static inline PlankResult pl_JSON_DeInit (PlankJSONRef p)
+{
+    return pl_JSON_DecrementRefCount (p);
+}
+
 static inline PlankResult pl_JSON_ObjectGetSize (PlankJSONRef p, int* size)
 {
     if (!p) return PlankResult_MemoryError;
@@ -183,6 +188,7 @@ static inline PlankResult pl_JSON_ObjectGetSize (PlankJSONRef p, int* size)
 static inline PlankResult pl_JSON_ObjectGetValue (PlankJSONRef p, const char* key, PlankJSONRef value)
 {
     if (!p) return PlankResult_MemoryError;
+    if (!value) return PlankResult_MemoryError;
     if (!json_is_object (p->json)) return PlankResult_JSONError;
     if (value->json) pl_JSON_DecrementRefCount (value);
     value->json = json_object_get (p->json, key);
@@ -193,8 +199,10 @@ static inline PlankResult pl_JSON_ObjectSetValue (PlankJSONRef p, const char* ke
 {
     int jerr;
     if (!p) return PlankResult_MemoryError;
+    if (!value) return PlankResult_MemoryError;
     if (!json_is_object (p->json)) return PlankResult_JSONError;    
-    jerr = json_object_set_new (p->json, key, value->json ? value->json : json_null());    
+    jerr = json_object_set_new (p->json, key, value->json ? value->json : json_null());
+    value->json = 0;
     return jerr == 0 ? PlankResult_OK : PlankResult_JSONError;
 }
 
@@ -209,6 +217,7 @@ static inline PlankResult pl_JSON_ArrayGetSize (PlankJSONRef p, int* size)
 static inline PlankResult pl_JSON_ArrayAt (PlankJSONRef p, const int index, PlankJSONRef value)
 {
     if (!p) return PlankResult_MemoryError;
+    if (!value) return PlankResult_MemoryError;
     if (!json_is_array (p->json)) return PlankResult_JSONError;
     if (value->json) pl_JSON_DecrementRefCount (value);
     value->json = json_array_get (p->json, index);
@@ -219,8 +228,10 @@ static inline PlankResult pl_JSON_ArrayPut (PlankJSONRef p, const int index, con
 {
     int jerr;
     if (!p) return PlankResult_MemoryError;
+    if (!value) return PlankResult_MemoryError;
     if (!json_is_array (p->json)) return PlankResult_JSONError;
     jerr = json_array_set_new (p->json, index, value->json ? value->json : json_null());
+    value->json = 0;
     return jerr == 0 ? PlankResult_OK : PlankResult_JSONError;
 }
 
@@ -228,8 +239,10 @@ static inline PlankResult pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRe
 {
     int jerr;
     if (!p) return PlankResult_MemoryError;
+    if (!value) return PlankResult_MemoryError;
     if (!json_is_array (p->json)) return PlankResult_JSONError;
     jerr = json_array_append_new (p->json, value->json ? value->json : json_null());
+    value->json = 0;
     return jerr == 0 ? PlankResult_OK : PlankResult_JSONError;
 }
 

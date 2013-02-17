@@ -1,4 +1,4 @@
-/*
+    /*
  -------------------------------------------------------------------------------
  This file is part of the Plink, Plonk, Plank libraries
   by Martin Robinson
@@ -60,7 +60,7 @@ size_t pl_JSONLoadCallback (void *buffer, size_t buflen, void *data)
     
     result = pl_File_Read (f, buffer, (int)buflen, &bytesRead);
     
-    return (size_t)(result == PlankResult_OK ? 0 : -1);
+    return (size_t)((result == PlankResult_OK) || (result == PlankResult_FileEOF) ? bytesRead : -1);
 }
 
 int pl_JSONDumpCallback (const char *buffer, size_t size, void *data)
@@ -102,10 +102,7 @@ PlankResult pl_JSON_InitFromFile (PlankJSONRef p, PlankFileRef f)
         result = PlankResult_MemoryError;
         goto exit;
     }
-    
-    if (p->json)
-        pl_JSON_DecrementRefCount (p);
-    
+        
     p->json = json_load_callback (pl_JSONLoadCallback, f, 0, &jerror);
     
 exit:

@@ -192,11 +192,14 @@ PlankResult pl_File_Open (PlankFileRef p, const char* filepath, const int mode)
     if (p->stream == 0)
         return PlankResult_FileOpenFailed;
     
-    result = pl_File_SetPosition (p, p->position);
-    
-    if (result != PlankResult_OK)
-        return result;
+    if (pl_File_IsPositionable (p))
+    {
+        result = pl_File_SetPosition (p, p->position);
         
+        if (result != PlankResult_OK)
+            return result;
+    }
+    
     return PlankResult_OK;
 }
 
