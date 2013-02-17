@@ -39,15 +39,51 @@
 #ifndef PLANK_JSON_H
 #define PLANK_JSON_H
 
+#include "../../files/plank_File.h"
+
 #define PLANK_JSON_TYPE "type"
 
 PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankJSON* PlankJSONRef;
 
-//PlankResult pl_JSON_Init (PlankJSONRef p);
-//PlankResult pl_JSON_DeInit (PlankJSONRef p);
+static PlankResult pl_JSON_Init (PlankJSONRef p);
+PlankResult pl_JSON_InitFromFile (PlankJSONRef p, PlankFileRef f);
+PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f);
 
+static PlankB pl_JSON_IsObject (PlankJSONRef p);
+static PlankB pl_JSON_IsArray (PlankJSONRef p);
+static PlankB pl_JSON_IsString (PlankJSONRef p);
+static PlankB pl_JSON_IsInt(PlankJSONRef p);
+static PlankB pl_JSON_IsFloat (PlankJSONRef p);
+static PlankB pl_JSON_IsDouble (PlankJSONRef p);
+static PlankB pl_JSON_IsBool (PlankJSONRef p);
+static PlankB pl_JSON_IsNull (PlankJSONRef p);
+
+static PlankResult pl_JSON_SetObject (PlankJSONRef p);
+static PlankResult pl_JSON_SetArray (PlankJSONRef p);
+static PlankResult pl_JSON_SetString (PlankJSONRef p, const char* string);
+static PlankResult pl_JSON_SetInt(PlankJSONRef p, const int value);
+static PlankResult pl_JSON_SetFloat (PlankJSONRef p, const float value);
+static PlankResult pl_JSON_SetDouble (PlankJSONRef p, const double value);
+static PlankResult pl_JSON_SetBool (PlankJSONRef p, const PlankB state);
+static PlankResult pl_JSON_SetNull (PlankJSONRef p);
+static PlankResult pl_JSON_IncrementRefCount (PlankJSONRef p);
+static PlankResult pl_JSON_DecrementRefCount (PlankJSONRef p);
+
+static PlankResult pl_JSON_ObjectGetSize (PlankJSONRef p, int* size); 
+static PlankResult pl_JSON_ObjectGetValue (PlankJSONRef p, const char* key, PlankJSONRef value);
+static PlankResult pl_JSON_ObjectSetValue (PlankJSONRef p, const char* key, const PlankJSONRef value);
+
+static PlankResult pl_JSON_ArrayGetSize (PlankJSONRef p, int* size);
+static PlankResult pl_JSON_ArrayAt (PlankJSONRef p, const int index, PlankJSONRef value);
+static PlankResult pl_JSON_ArrayPut (PlankJSONRef p, const int index, const PlankJSONRef value);
+static PlankResult pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value);
+
+static PlankResult pl_JSON_DoubleGet (PlankJSONRef p, double* value);
+static PlankResult pl_JSON_FloatGet (PlankJSONRef p, float* value);
+static PlankResult pl_JSON_IntGet (PlankJSONRef p, int* value);
+static PlankResult pl_JSON_StringGet (PlankJSONRef p, const char** value);
 
 PLANK_END_C_LINKAGE
 

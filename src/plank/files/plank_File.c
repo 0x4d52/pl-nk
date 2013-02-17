@@ -439,6 +439,12 @@ PlankResult pl_File_SetMode (PlankFileRef p, const int mode)
     return PlankResult_OK;
 }
 
+PlankResult pl_File_GetMode (PlankFileRef p, int* mode)
+{
+    *mode = p->mode;
+    return PlankResult_OK;
+}
+
 PlankResult pl_File_SetEndian (PlankFileRef p, const PlankB isBigEndian)
 {
     if (isBigEndian)

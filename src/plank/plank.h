@@ -85,6 +85,7 @@
 
 #include "misc/json/plank_JSON.h"
 #include "misc/base64/plank_Base64.h"
+#include "misc/zip/plank_Zip.h"
 
 #include "files/plank_File.h"
 #include "files/plank_IffFileReader.h"

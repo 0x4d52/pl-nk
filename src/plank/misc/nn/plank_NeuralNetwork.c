@@ -391,7 +391,7 @@ PlankResult pl_NeuralNetworkF_SetActFunc (PlankNeuralNetworkFRef p, PlankNeuralN
 PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, json_t* j)
 {
     PlankResult result;
-    int numLayers, i, numNodes;
+    int numLayers, i;
     PlankNeuralLayerF* layerArray;
     json_t* jnetwork;
     json_t* jlayers;

@@ -50,38 +50,112 @@
 #include "../../../../ext/jansson/strbuffer.c"
 #include "../../../../ext/jansson/utf.c"
 
+size_t pl_JSONLoadCallback (void *buffer, size_t buflen, void *data)
+{
+    PlankResult result;
+    int bytesRead;
+    PlankFileRef f;
+    
+    f = (PlankFileRef)data;
+    
+    result = pl_File_Read (f, buffer, (int)buflen, &bytesRead);
+    
+    return (size_t)(result == PlankResult_OK ? 0 : -1);
+}
 
-//PlankResult pl_JSON_Init (PlankJSONRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    
-//    if (p == PLANK_NULL)
-//    {
-//        result = PlankResult_MemoryError;
-//        goto exit;
-//    }
-//    
-//    p->json = json_array();
-//    
-//exit:
-//    return result;
-//}
-//
-//
-//PlankResult pl_JSON_DeInit (PlankJSONRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    
-//    if (p == PLANK_NULL)
-//    {
-//        result = PlankResult_MemoryError;
-//        goto exit;
-//    }
-//    
-//    json_decref (p->json);
-//    p->json = PLANK_NULL;
-//    
-//exit:
-//    return result;
-//}
+int pl_JSONDumpCallback (const char *buffer, size_t size, void *data)
+{
+    PlankResult result;
+    PlankFileRef f;
+    
+    f = (PlankFileRef)data;
+    
+    result = pl_File_Write (f, buffer, (int)size);
+    
+    return result == PlankResult_OK ? 0 : -1;
+}
+
+PlankResult pl_JSON_InitFromFile (PlankJSONRef p, PlankFileRef f)
+{
+    PlankResult result;
+    int fileMode;
+    json_error_t jerror;
+    
+    result = PlankResult_OK;
+    
+    if ((result = pl_File_GetMode (f, &fileMode)) != PlankResult_OK) goto exit;
+    
+    if (!(fileMode & PLANKFILE_READ))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if (!(fileMode & PLANKFILE_BINARY))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if (!p)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    if (p->json)
+        pl_JSON_DecrementRefCount (p);
+    
+    p->json = json_load_callback (pl_JSONLoadCallback, f, 0, &jerror);
+    
+exit:
+    return result;
+}
+
+PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f)
+{
+    PlankResult result;
+    int fileMode;
+    int jerror;
+
+    result = PlankResult_OK;
+    
+    if (! (pl_JSON_IsArray (p) || pl_JSON_IsObject (p)))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+
+    if ((result = pl_File_GetMode (f, &fileMode)) != PlankResult_OK) goto exit;
+    
+    if (!(fileMode & PLANKFILE_WRITE))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if (!(fileMode & PLANKFILE_BINARY))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if (!p)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    jerror = json_dump_callback (p->json, pl_JSONDumpCallback, f, JSON_PRESERVE_ORDER | JSON_INDENT (2));
+
+    if (jerror != 0)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+exit:
+    return PlankResult_OK;
+}
+
 
