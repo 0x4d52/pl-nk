@@ -73,7 +73,7 @@ public:
 #endif
     }
     
-    NeuralNetworkInternal (json_t* json) throw()
+    NeuralNetworkInternal (PlankJSONRef json) throw()
     {
         ResultCode result = pl_NeuralNetworkF_InitFromJSON (&network, json);
         plonk_assert (result == PlankResult_OK);
@@ -155,7 +155,7 @@ private:
 #endif
     }
     
-    inline void toJSON (json_t* json) throw()
+    inline void toJSON (PlankJSONRef json) throw()
     {
         ResultCode result = pl_NeuralNetworkF_ToJSON (&network, json);
         plonk_assert (result == PlankResult_OK);
@@ -209,7 +209,7 @@ public:
     {
     }
     
-    NeuralNetworkBase (json_t* json) throw()
+    NeuralNetworkBase (PlankJSONRef json) throw()
     :   Base (new Internal (json))
     {
     }
@@ -280,7 +280,7 @@ public:
         return this->getInternal()->setActFunc (function);
     }
     
-    inline void toJSON (json_t* json) throw()
+    inline void toJSON (PlankJSONRef json) throw()
     {
         this->getInternal()->toJSON (json);
     }

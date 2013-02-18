@@ -98,8 +98,8 @@ float pl_NeuralNodeF_Propogate (PlankNeuralNodeFRef p, const float* inputVector)
 PlankResult pl_NeuralNodeF_BackProp (PlankNeuralNodeFRef p, const float* inputVector, const float error, const float actFuncOffset, const float learnRate, float* adjustVector);
 float pl_NeuralNodeF_GetOutput (PlankNeuralNodeFRef p);
 
-PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, json_t* j);
-PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, json_t* j);
+PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, PlankJSONRef j);
+PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, PlankJSONRef j);
 
 
 PLANK_END_C_LINKAGE
