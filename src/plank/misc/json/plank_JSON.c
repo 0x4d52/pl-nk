@@ -75,12 +75,14 @@ int pl_JSONDumpCallback (const char *buffer, size_t size, void *data)
     return result == PlankResult_OK ? 0 : -1;
 }
 
-PlankResult pl_JSON_InitFromFile (PlankJSONRef p, PlankFileRef f)
+PlankJSONRef pl_JSON_FromFile (PlankFileRef f)
 {
+    PlankJSONRef j;
     PlankResult result;
     int fileMode;
     json_error_t jerror;
     
+    j = 0;
     result = PlankResult_OK;
     
     if ((result = pl_File_GetMode (f, &fileMode)) != PlankResult_OK) goto exit;
@@ -95,18 +97,12 @@ PlankResult pl_JSON_InitFromFile (PlankJSONRef p, PlankFileRef f)
     {
         result = PlankResult_JSONError;
         goto exit;
-    }
+    }    
     
-    if (!p)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-        
-    p->json = json_load_callback (pl_JSONLoadCallback, f, 0, &jerror);
+    j = (PlankJSONRef)json_load_callback (pl_JSONLoadCallback, f, 0, &jerror);
     
 exit:
-    return result;
+    return j;
 }
 
 PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f)
@@ -143,7 +139,7 @@ PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f)
         goto exit;
     }
     
-    jerror = json_dump_callback (p->json, pl_JSONDumpCallback, f, JSON_PRESERVE_ORDER | JSON_INDENT (2));
+    jerror = json_dump_callback ((json_t*)p, pl_JSONDumpCallback, f, JSON_PRESERVE_ORDER | JSON_INDENT (2));
 
     if (jerror != 0)
     {

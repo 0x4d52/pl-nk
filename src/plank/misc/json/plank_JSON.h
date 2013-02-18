@@ -47,18 +47,16 @@ PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankJSON* PlankJSONRef;
 
-static PlankResult pl_JSON_Init (PlankJSONRef p);
+static PlankJSONRef pl_JSON_Object();
+static PlankJSONRef pl_JSON_Array();
+static PlankJSONRef pl_JSON_String (const char* string);
+static PlankJSONRef pl_JSON_Int(const int value);
+static PlankJSONRef pl_JSON_Float (const float value);
+static PlankJSONRef pl_JSON_Double (const double value);
+static PlankJSONRef pl_JSON_Bool (const PlankB state);
+static PlankJSONRef pl_JSON_Null();
 
-static PlankResult pl_JSON_InitObject (PlankJSONRef p);
-static PlankResult pl_JSON_InitArray (PlankJSONRef p);
-static PlankResult pl_JSON_InitString (PlankJSONRef p, const char* string);
-static PlankResult pl_JSON_InitInt(PlankJSONRef p, const int value);
-static PlankResult pl_JSON_InitFloat (PlankJSONRef p, const float value);
-static PlankResult pl_JSON_InitDouble (PlankJSONRef p, const double value);
-static PlankResult pl_JSON_InitBool (PlankJSONRef p, const PlankB state);
-static PlankResult pl_JSON_InitNull (PlankJSONRef p);
-
-PlankResult pl_JSON_InitFromFile (PlankJSONRef p, PlankFileRef f);
+PlankJSONRef pl_JSON_FromFile (PlankFileRef f);
 PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f);
 
 static PlankB pl_JSON_IsObject (PlankJSONRef p);
@@ -72,55 +70,22 @@ static PlankB pl_JSON_IsNull (PlankJSONRef p);
 
 static PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type);
 
-static PlankResult pl_JSON_SetObject (PlankJSONRef p);
-static PlankResult pl_JSON_SetArray (PlankJSONRef p);
-static PlankResult pl_JSON_SetString (PlankJSONRef p, const char* string);
-static PlankResult pl_JSON_SetInt(PlankJSONRef p, const int value);
-static PlankResult pl_JSON_SetFloat (PlankJSONRef p, const float value);
-static PlankResult pl_JSON_SetDouble (PlankJSONRef p, const double value);
-static PlankResult pl_JSON_SetBool (PlankJSONRef p, const PlankB state);
-static PlankResult pl_JSON_SetNull (PlankJSONRef p);
+static PlankJSONRef pl_JSON_IncrementRefCount (PlankJSONRef p);
+static void pl_JSON_DecrementRefCount (PlankJSONRef p);
 
+static PlankL pl_JSON_ObjectGetSize (PlankJSONRef p);
+static PlankJSONRef pl_JSON_ObjectAtKey (PlankJSONRef p, const char* key);
+static void pl_JSON_ObjectPutKey (PlankJSONRef p, const char* key, const PlankJSONRef value);
 
-static PlankResult pl_JSON_DeInit (PlankJSONRef p);
-static PlankResult pl_JSON_IncrementRefCount (PlankJSONRef p);
-static PlankResult pl_JSON_DecrementRefCount (PlankJSONRef p);
+static PlankL pl_JSON_ArrayGetSize (PlankJSONRef p);
+static PlankJSONRef pl_JSON_ArrayAt (PlankJSONRef p, const PlankL index);
+static void pl_JSON_ArrayPut (PlankJSONRef p, const PlankL index, const PlankJSONRef value);
+static void pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value);
 
-static PlankResult pl_JSON_ObjectGetSize (PlankJSONRef p, int* size); 
-static PlankResult pl_JSON_ObjectGetValue (PlankJSONRef p, const char* key, PlankJSONRef value);
-static PlankResult pl_JSON_ObjectGetValueFloat (PlankJSONRef p, const char* key, float* value);
-static PlankResult pl_JSON_ObjectGetValueDouble (PlankJSONRef p, const char* key, double* value);
-static PlankResult pl_JSON_ObjectGetValueInt (PlankJSONRef p, const char* key, int* value);
-static PlankResult pl_JSON_ObjectGetValueString (PlankJSONRef p, const char* key, const char** value);
-static PlankResult pl_JSON_ObjectSetValue (PlankJSONRef p, const char* key, const PlankJSONRef value);
-static PlankResult pl_JSON_ObjectSetValueFloat (PlankJSONRef p, const char* key, const float value);
-static PlankResult pl_JSON_ObjectSetValueDouble (PlankJSONRef p, const char* key, const double value);
-static PlankResult pl_JSON_ObjectSetValueInt (PlankJSONRef p, const char* key, const int value);
-static PlankResult pl_JSON_ObjectSetValueString (PlankJSONRef p, const char* key, const char* value);
-
-
-static PlankResult pl_JSON_ArrayGetSize (PlankJSONRef p, int* size);
-static PlankResult pl_JSON_ArrayAt (PlankJSONRef p, const int index, PlankJSONRef value);
-static PlankResult pl_JSON_ArrayPut (PlankJSONRef p, const int index, const PlankJSONRef value);
-static PlankResult pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value);
-
-static PlankResult pl_JSON_ArrayPutFloat (PlankJSONRef p, const int index, const float value);
-static PlankResult pl_JSON_ArrayPutDouble (PlankJSONRef p, const int index, const double value);
-static PlankResult pl_JSON_ArrayPutInt (PlankJSONRef p, const int index, const int value);
-static PlankResult pl_JSON_ArrayPutString (PlankJSONRef p, const int index, const char* value);
-static PlankResult pl_JSON_ArrayAtFloat (PlankJSONRef p, const int index, float* value);
-static PlankResult pl_JSON_ArrayAtDouble (PlankJSONRef p, const int index, double* value);
-static PlankResult pl_JSON_ArrayAtInt (PlankJSONRef p, const int index, int* value);
-static PlankResult pl_JSON_ArrayAtString (PlankJSONRef p, const int index, const char** value);
-static PlankResult pl_JSON_ArrayAppendFloat (PlankJSONRef p, const float value);
-static PlankResult pl_JSON_ArrayAppendDouble (PlankJSONRef p, const double value);
-static PlankResult pl_JSON_ArrayAppendInt (PlankJSONRef p, const int value);
-static PlankResult pl_JSON_ArrayAppendString (PlankJSONRef p, const char* value);
-
-static PlankResult pl_JSON_DoubleGet (PlankJSONRef p, double* value);
-static PlankResult pl_JSON_FloatGet (PlankJSONRef p, float* value);
-static PlankResult pl_JSON_IntGet (PlankJSONRef p, int* value);
-static PlankResult pl_JSON_StringGet (PlankJSONRef p, const char** value);
+static double pl_JSON_DoubleGet (PlankJSONRef p);
+static float pl_JSON_FloatGet (PlankJSONRef p);
+static int pl_JSON_IntGet (PlankJSONRef p);
+static const char* pl_JSON_StringGet (PlankJSONRef p);
 
 PLANK_END_C_LINKAGE
 

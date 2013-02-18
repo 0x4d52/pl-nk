@@ -42,461 +42,160 @@
 
 typedef struct PlankJSON
 {
-    json_t* json;
+    json_t json;
 } PlankJSON;
 
-static inline PlankResult pl_JSON_Init (PlankJSONRef p)
+
+static inline PlankJSONRef pl_JSON_Object()
 {
-    if (!p) return PlankResult_MemoryError;
-    p->json = (json_t*)PLANK_NULL;
-    return PlankResult_OK;
+    return (PlankJSONRef)json_object();
 }
 
-static inline PlankResult pl_JSON_InitObject (PlankJSONRef p)
+static inline PlankJSONRef pl_JSON_Array()
 {
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetObject (p);
+    return (PlankJSONRef)json_array();
 }
 
-static inline PlankResult pl_JSON_InitArray (PlankJSONRef p)
+static inline PlankJSONRef pl_JSON_String (const char* string)
 {
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetArray (p);
+    return (PlankJSONRef)json_string (string);
 }
 
-static inline PlankResult pl_JSON_InitString (PlankJSONRef p, const char* string)
+static inline PlankJSONRef pl_JSON_Int(const int value)
 {
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetString (p, string);
+    return (PlankJSONRef)json_integer (value);
 }
 
-static inline PlankResult pl_JSON_InitInt(PlankJSONRef p, const int value)
+static inline PlankJSONRef pl_JSON_Float (const float value)
 {
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetInt (p, value);
+    return (PlankJSONRef)json_real ((double)value);
 }
 
-static inline PlankResult pl_JSON_InitFloat (PlankJSONRef p, const float value)
+static inline PlankJSONRef pl_JSON_Double (const double value)
 {
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetFloat (p, value);
+    return (PlankJSONRef)json_real (value);
 }
 
-static inline PlankResult pl_JSON_InitDouble (PlankJSONRef p, const double value)
+static inline PlankJSONRef pl_JSON_Bool (const PlankB state)
 {
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetDouble (p, value);
+    return (PlankJSONRef)json_boolean (state);
 }
 
-static inline PlankResult pl_JSON_InitBool (PlankJSONRef p, const PlankB state)
+static inline PlankJSONRef pl_JSON_Null()
 {
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetBool (p, state);
-}
-
-static inline PlankResult pl_JSON_InitNull (PlankJSONRef p)
-{
-    PlankResult result;
-    if ((result = pl_JSON_Init (p)) != PlankResult_OK) return result;
-    return pl_JSON_SetNull (p);
+    return (PlankJSONRef)json_null();
 }
 
 static inline PlankB pl_JSON_IsObject (PlankJSONRef p)
 {
-    return p ? json_is_object (p->json) : PLANK_FALSE;
+    return json_is_object ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsArray (PlankJSONRef p)
 {
-    return p ? json_is_array (p->json) : PLANK_FALSE;
+    return json_is_array ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsString (PlankJSONRef p)
 {
-    return p ? json_is_string (p->json) : PLANK_FALSE;
+    return json_is_string ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsInt(PlankJSONRef p)
 {
-    return p ? json_is_integer (p->json) : PLANK_FALSE;
+    return json_is_integer ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsFloat (PlankJSONRef p)
 {
-    return p ? json_is_real (p->json) : PLANK_FALSE;
+    return json_is_real ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsDouble (PlankJSONRef p)
 {
-    return p ? json_is_real (p->json) : PLANK_FALSE;
+    return json_is_real ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsBool (PlankJSONRef p)
 {
-    return p ? json_is_boolean (p->json) : PLANK_FALSE;
+    return json_is_real ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsNull (PlankJSONRef p)
 {
-    return p ? json_is_null (p->json) : PLANK_FALSE;
+    return json_is_null ((json_t*)p);
 }
 
-static PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type)
+static inline PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type)
 {
-    PlankJSON jtype;
-    const char* ptype;
-    
-    if (!pl_JSON_IsObject (p)) return PLANK_FALSE;
-    
-    pl_JSON_Init (&jtype);
-    pl_JSON_ObjectGetValue (p, PLANK_JSON_TYPE, &jtype);
-    
-    if (!pl_JSON_IsString (&jtype)) return PLANK_FALSE;
-    if (pl_JSON_StringGet (&jtype, &ptype) != PlankResult_OK) return PLANK_FALSE;
-    
-    return strcmp (ptype, type) == 0;
+    return pl_JSON_IsObject (p) && (strcmp (pl_JSON_StringGet (pl_JSON_ObjectAtKey (p, PLANK_JSON_TYPE)), type) == 0);
 }
 
-static inline PlankResult pl_JSON_SetObject (PlankJSONRef p)
+static inline PlankJSONRef pl_JSON_IncrementRefCount (PlankJSONRef p)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_object();
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    return (PlankJSONRef)json_incref ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_SetArray (PlankJSONRef p)
+static inline void pl_JSON_DecrementRefCount (PlankJSONRef p)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_array();
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    json_decref ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_SetString (PlankJSONRef p, const char* string)
+static inline PlankL pl_JSON_ObjectGetSize (PlankJSONRef p)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_string (string);
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    return (PlankL)json_object_size ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_SetInt(PlankJSONRef p, const int value)
+static inline PlankJSONRef pl_JSON_ObjectAtKey (PlankJSONRef p, const char* key)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_integer (value);
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    return (PlankJSONRef)json_object_get ((json_t*)p, key);
 }
 
-static inline PlankResult pl_JSON_SetFloat (PlankJSONRef p, const float value)
+static inline void pl_JSON_ObjectPutKey (PlankJSONRef p, const char* key, const PlankJSONRef value)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_real ((double)value);
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    json_object_set_new ((json_t*)p, key, (json_t*)value);
 }
 
-static inline PlankResult pl_JSON_SetDouble (PlankJSONRef p, const double value)
+static inline PlankL pl_JSON_ArrayGetSize (PlankJSONRef p)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_real (value);
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    return (PlankL)json_array_size ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_SetBool (PlankJSONRef p, const PlankB state)
+static inline PlankJSONRef pl_JSON_ArrayAt (PlankJSONRef p, const PlankL index)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_boolean (state);
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    return (PlankJSONRef)json_array_get ((json_t*)p, (size_t)index);
 }
 
-static inline PlankResult pl_JSON_SetNull (PlankJSONRef p)
+static inline void pl_JSON_ArrayPut (PlankJSONRef p, const PlankL index, const PlankJSONRef value)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (p->json) pl_JSON_DecrementRefCount (p);
-    p->json = json_null();
-    return p->json ? PlankResult_OK : PlankResult_JSONError;
+    json_array_set_new ((json_t*)p, (size_t)index, (json_t*)value);
 }
 
-static inline PlankResult pl_JSON_IncrementRefCount (PlankJSONRef p)
+static inline void pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (!p->json) return PlankResult_JSONError;
-    json_incref (p->json);
-    return PlankResult_OK;
+    json_array_append_new ((json_t*)p, (json_t*)value);
 }
 
-static inline PlankResult pl_JSON_DecrementRefCount (PlankJSONRef p)
+static inline double pl_JSON_DoubleGet (PlankJSONRef p)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (!p->json) return PlankResult_JSONError;
-    json_decref (p->json);
-    return PlankResult_OK;
+    return json_real_value ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_DeInit (PlankJSONRef p)
+static inline float pl_JSON_FloatGet (PlankJSONRef p)
 {
-    return pl_JSON_DecrementRefCount (p);
+    return (float)json_real_value ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_ObjectGetSize (PlankJSONRef p, int* size)
+static inline int pl_JSON_IntGet (PlankJSONRef p)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (!json_is_object (p->json)) return PlankResult_JSONError;
-    *size = json_object_size (p->json);
-    return PlankResult_OK;
+    return json_integer_value ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_ObjectGetValue (PlankJSONRef p, const char* key, PlankJSONRef value)
+static inline const char* pl_JSON_StringGet (PlankJSONRef p)
 {
-    if (!p) return PlankResult_MemoryError;
-    if (!value) return PlankResult_MemoryError;
-    if (!json_is_object (p->json)) return PlankResult_JSONError;
-    if (value->json) pl_JSON_DecrementRefCount (value);
-    value->json = json_object_get (p->json, key);
-    return PlankResult_OK;
+    return json_string_value ((json_t*)p);
 }
 
-static inline PlankResult pl_JSON_ObjectSetValue (PlankJSONRef p, const char* key, const PlankJSONRef value)
-{
-    int jerr;
-    if (!p) return PlankResult_MemoryError;
-    if (!value) return PlankResult_MemoryError;
-    if (!json_is_object (p->json)) return PlankResult_JSONError;
-    jerr = json_object_set_new (p->json, key, value->json ? value->json : json_null());
-    value->json = 0;
-    return jerr == 0 ? PlankResult_OK : PlankResult_JSONError;
-}
-
-static inline PlankResult pl_JSON_ObjectSetValueFloat (PlankJSONRef p, const char* key, const float value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitFloat (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ObjectSetValue (p, key, &jvalue);
-}
-
-static inline PlankResult pl_JSON_ObjectSetValueDouble (PlankJSONRef p, const char* key, const double value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitDouble (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ObjectSetValue (p, key, &jvalue);
-}
-
-static inline PlankResult pl_JSON_ObjectSetValueInt (PlankJSONRef p, const char* key, const int value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitInt (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ObjectSetValue (p, key, &jvalue);
-}
-
-static inline PlankResult pl_JSON_ObjectSetValueString (PlankJSONRef p, const char* key, const char* value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitString (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ObjectSetValue (p, key, &jvalue);
-}
-
-static inline PlankResult pl_JSON_ObjectGetValueFloat (PlankJSONRef p, const char* key, float* value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ObjectGetValue (p, key, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_FloatGet (&jvalue, value);
-}
-
-static inline PlankResult pl_JSON_ObjectGetValueDouble (PlankJSONRef p, const char* key, double* value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ObjectGetValue (p, key, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_DoubleGet (&jvalue, value);
-}
-
-static inline PlankResult pl_JSON_ObjectGetValueInt (PlankJSONRef p, const char* key, int* value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ObjectGetValue (p, key, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_IntGet (&jvalue, value);
-}
-
-static inline PlankResult pl_JSON_ObjectGetValueString (PlankJSONRef p, const char* key, const char** value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ObjectGetValue (p, key, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_StringGet (&jvalue, value);
-}
-
-static inline PlankResult pl_JSON_ArrayGetSize (PlankJSONRef p, int* size)
-{
-    if (!p) return PlankResult_MemoryError;
-    if (!json_is_array (p->json)) return PlankResult_JSONError;
-    *size = json_array_size (p->json);
-    return PlankResult_OK;
-}
-
-static inline PlankResult pl_JSON_ArrayAt (PlankJSONRef p, const int index, PlankJSONRef value)
-{
-    if (!p) return PlankResult_MemoryError;
-    if (!value) return PlankResult_MemoryError;
-    if (!json_is_array (p->json)) return PlankResult_JSONError;
-    if (value->json) pl_JSON_DecrementRefCount (value);
-    value->json = json_array_get (p->json, index);
-    return PlankResult_OK;
-}
-
-static inline PlankResult pl_JSON_ArrayPut (PlankJSONRef p, const int index, const PlankJSONRef value)
-{
-    int jerr;
-    if (!p) return PlankResult_MemoryError;
-    if (!value) return PlankResult_MemoryError;
-    if (!json_is_array (p->json)) return PlankResult_JSONError;
-    jerr = json_array_set_new (p->json, index, value->json ? value->json : json_null());
-    value->json = 0;
-    return jerr == 0 ? PlankResult_OK : PlankResult_JSONError;
-}
-
-static inline PlankResult pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value)
-{
-    int jerr;
-    if (!p) return PlankResult_MemoryError;
-    if (!value) return PlankResult_MemoryError;
-    if (!json_is_array (p->json)) return PlankResult_JSONError;
-    jerr = json_array_append_new (p->json, value->json ? value->json : json_null());
-    value->json = 0;
-    return jerr == 0 ? PlankResult_OK : PlankResult_JSONError;
-}
-
-static PlankResult pl_JSON_ArrayPutFloat (PlankJSONRef p, const int index, const float value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitFloat (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayPut (p, index, &jvalue);
-}
-
-static PlankResult pl_JSON_ArrayPutDouble (PlankJSONRef p, const int index, const double value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitDouble (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayPut (p, index, &jvalue);   
-}
-
-static PlankResult pl_JSON_ArrayPutInt (PlankJSONRef p, const int index, const int value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitInt (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayPut (p, index, &jvalue);
-}
-
-static PlankResult pl_JSON_ArrayPutString (PlankJSONRef p, const int index, const char* value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitString (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayPut (p, index, &jvalue);
-}
-
-static PlankResult pl_JSON_ArrayAtFloat (PlankJSONRef p, const int index, float* value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ArrayAt (p, index, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_FloatGet (&jvalue, value);
-}
-
-static PlankResult pl_JSON_ArrayAtDouble (PlankJSONRef p, const int index, double* value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ArrayAt (p, index, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_DoubleGet (&jvalue, value);
-}
-
-static PlankResult pl_JSON_ArrayAtInt (PlankJSONRef p, const int index, int* value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ArrayAt (p, index, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_IntGet (&jvalue, value);
-}
-
-static PlankResult pl_JSON_ArrayAtString (PlankJSONRef p, const int index, const char** value)
-{
-    PlankJSON jvalue;
-    pl_JSON_Init (&jvalue);
-    if (pl_JSON_ArrayAt (p, index, &jvalue) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_StringGet (&jvalue, value);
-}
-
-static PlankResult pl_JSON_ArrayAppendFloat (PlankJSONRef p, const float value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitFloat (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayAppend (p, &jvalue);
-}
-
-static PlankResult pl_JSON_ArrayAppendDouble (PlankJSONRef p, const double value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitDouble (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayAppend (p, &jvalue);
-}
-
-static PlankResult pl_JSON_ArrayAppendInt (PlankJSONRef p, const int value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitInt (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayAppend (p, &jvalue);
-}
-
-static PlankResult pl_JSON_ArrayAppendString (PlankJSONRef p, const char* value)
-{
-    PlankJSON jvalue;
-    if (pl_JSON_InitString (&jvalue, value) != PlankResult_OK) return PlankResult_JSONError;
-    return pl_JSON_ArrayAppend (p, &jvalue);
-}
-
-static inline PlankResult pl_JSON_DoubleGet (PlankJSONRef p, double* value)
-{
-    if (!p) return PlankResult_MemoryError;
-    if (!json_is_real (p->json)) return PlankResult_JSONError;
-    *value = json_real_value (p->json);
-    return PlankResult_OK;
-}
-
-static inline PlankResult pl_JSON_FloatGet (PlankJSONRef p, float* value)
-{
-    if (!p) return PlankResult_MemoryError;
-    if (!json_is_real (p->json)) return PlankResult_JSONError;
-    *value = (float)json_real_value (p->json);
-    return PlankResult_OK;
-}
-
-static inline PlankResult pl_JSON_IntGet (PlankJSONRef p, int* value)
-{
-    if (!p) return PlankResult_MemoryError;
-    if (!json_is_integer (p->json)) return PlankResult_JSONError;
-    *value = (int)json_integer_value (p->json);
-    return PlankResult_OK;
-}
-
-static inline PlankResult pl_JSON_StringGet (PlankJSONRef p, const char** value)
-{
-    if (!p) return PlankResult_MemoryError;
-    if (!json_is_string (p->json)) return PlankResult_JSONError;
-    *value = json_string_value (p->json);
-    return PlankResult_OK;
-}
 
 
 
