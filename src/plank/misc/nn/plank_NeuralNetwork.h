@@ -47,6 +47,7 @@
 #include "../json/plank_JSON.h"
 
 #define PLANK_NEURALNETWORKF_JSON_TYPE           "plank::NeuralNetworkF"
+#define PLANK_NEURALNETWORKF_JSON_VERSION        0, 1, 0, 0
 #define PLANK_NEURALNETWORKF_JSON_LEARNRATE      "learnRate"
 #define PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET  "actFuncOffset"
 #define PLANK_NEURALNETWORKF_JSON_STRUCTURE      "structure"

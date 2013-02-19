@@ -47,6 +47,7 @@
 #include "plank_NeuralNetwork.h"
 
 #define PLANK_NEURALLAYERF_JSON_TYPE          "plank::NeuralLayerF"
+#define PLANK_NEURALLAYERF_JSON_VERSION       0, 1, 0, 0
 #define PLANK_NEURALLAYERF_JSON_NODES         "nodes"
 
 PLANK_BEGIN_C_LINKAGE

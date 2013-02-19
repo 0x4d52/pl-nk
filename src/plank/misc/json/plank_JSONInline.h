@@ -126,11 +126,6 @@ static inline PlankB pl_JSON_IsNull (PlankJSONRef p)
     return json_is_null ((json_t*)p);
 }
 
-static inline PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type)
-{
-    return pl_JSON_IsObject (p) && (strcmp (pl_JSON_StringGet (pl_JSON_ObjectAtKey (p, PLANK_JSON_TYPE)), type) == 0);
-}
-
 static inline PlankJSONRef pl_JSON_IncrementRefCount (PlankJSONRef p)
 {
     return (PlankJSONRef)json_incref ((json_t*)p);

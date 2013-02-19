@@ -47,6 +47,7 @@
 #include "plank_NeuralNetwork.h"
 
 #define PLANK_NEURALNODEF_JSON_TYPE          "plank::NeuralNodeF"
+#define PLANK_NEURALNODEF_JSON_VERSION       0, 1, 0, 0
 #define PLANK_NEURALNODEF_JSON_WEIGHTS       "weights"
 #define PLANK_NEURALNODEF_JSON_THRESHOLD     "threshold"
 

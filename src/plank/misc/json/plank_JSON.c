@@ -151,4 +151,117 @@ exit:
     return PlankResult_OK;
 }
 
+//
+
+PlankJSONRef pl_JSON_VersionString (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro)
+{
+    char string[64];
+    snprintf (string, 64, "%d.%d.%d.%d", ex, major, minor, micro);
+    return pl_JSON_String (string);
+}
+
+PlankUI pl_JSON_VersionCode (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro)
+{
+    PlankUI code;
+    code = (ex << 24) | (major << 16) | (minor << 8) | micro;
+    return code;
+}
+
+static PlankUI pl_JSON_VersionCodeFromString (PlankJSONRef p)
+{
+    int ex, major, minor, micro;
+            
+    ex = 0;
+    major = 0;
+    minor = 0;
+    micro = 0;
+    
+    sscanf (pl_JSON_StringGet (p), "%d.%d.%d.%d", &ex, &major, &minor, &micro);
+    
+    return pl_JSON_VersionCode ((PlankUC)ex, (PlankUC)major, (PlankUC)minor, (PlankUC)micro);
+}
+
+void pl_JSON_ObjectSetType (PlankJSONRef p, const char* type)
+{
+    pl_JSON_ObjectPutKey (p, PLANK_JSON_TYPE, pl_JSON_String (type));
+}
+
+void pl_JSON_ObjectSetVersionString (PlankJSONRef p, const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro)
+{
+    pl_JSON_ObjectPutKey (p, PLANK_JSON_VERSION, pl_JSON_VersionString (ex, major, minor, micro));
+}
+
+void pl_JSON_ObjectSetVersionCode (PlankJSONRef p, const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro)
+{
+    pl_JSON_ObjectPutKey (p, PLANK_JSON_VERSION, pl_JSON_Int ((int)pl_JSON_VersionCode (ex, major, minor, micro)));
+}
+
+PlankUI pl_JSON_ObjectGetVersion (PlankJSONRef p)
+{
+    return pl_JSON_IsObject (p) ? pl_JSON_VersionGet (pl_JSON_ObjectAtKey (p, PLANK_JSON_VERSION)) : 0;
+}
+
+PlankUI pl_JSON_VersionGet (PlankJSONRef p)
+{
+    if (pl_JSON_IsString (p))
+        return pl_JSON_VersionCodeFromString (p);
+    else
+        return pl_JSON_IntGet (p);
+}
+
+static void pl_JSON_ObjectSetFormat (PlankJSONRef p, const char* format)
+{
+    pl_JSON_ObjectPutKey (p, PLANK_JSON_FORMAT, pl_JSON_String (format));
+}
+
+void pl_JSON_ObjectSetFormatBinary (PlankJSONRef p)
+{
+    pl_JSON_ObjectSetFormat (p, PLANK_JSON_FORMATBINARY);
+}
+
+void pl_JSON_ObjectSetFormatText (PlankJSONRef p)
+{
+    pl_JSON_ObjectSetFormat (p, PLANK_JSON_FORMATTEXT);
+}
+
+void pl_JSON_ObjectSetFormatZip (PlankJSONRef p)
+{
+    pl_JSON_ObjectSetFormat (p, PLANK_JSON_FORMATTEXT);
+}
+
+PlankB pl_JSON_IsFormatBinary (PlankJSONRef p)
+{
+    return p ? strcmp (pl_JSON_StringGet (p), PLANK_JSON_FORMATBINARY) == 0 : PLANK_FALSE;
+}
+
+PlankB pl_JSON_IsFormatText (PlankJSONRef p)
+{
+    return p ? strcmp (pl_JSON_StringGet (p), PLANK_JSON_FORMATTEXT) == 0 : PLANK_FALSE;
+}
+
+PlankB pl_JSON_IsFormatZip (PlankJSONRef p)
+{
+    return p ? strcmp (pl_JSON_StringGet (p), PLANK_JSON_FORMATZIP) == 0 : PLANK_FALSE;
+}
+
+PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type)
+{
+    return pl_JSON_IsObject (p) && (strcmp (pl_JSON_StringGet (pl_JSON_ObjectAtKey (p, PLANK_JSON_TYPE)), type) == 0);
+}
+
+PlankB pl_JSON_IsObjectFormatBinary (PlankJSONRef p)
+{
+    return pl_JSON_IsObject (p) && pl_JSON_IsFormatBinary (pl_JSON_ObjectAtKey (p, PLANK_JSON_FORMAT));
+}
+
+PlankB pl_JSON_IsObjectFormatText (PlankJSONRef p)
+{
+    return pl_JSON_IsObject (p) && pl_JSON_IsFormatText (pl_JSON_ObjectAtKey (p, PLANK_JSON_FORMAT));
+}
+
+PlankB pl_JSON_IsObjectFormatZip (PlankJSONRef p)
+{
+    return pl_JSON_IsObject (p) && pl_JSON_IsFormatZip (pl_JSON_ObjectAtKey (p, PLANK_JSON_FORMAT));
+}
+
 
