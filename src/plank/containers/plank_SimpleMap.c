@@ -232,7 +232,6 @@ PlankResult pl_SimpleMap_Clear (PlankSimpleMapRef p)
                 goto exit;
         }
     }
-
     
 exit:
     return result;    

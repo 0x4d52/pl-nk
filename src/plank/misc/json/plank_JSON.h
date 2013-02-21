@@ -41,12 +41,14 @@
 
 #include "../../files/plank_File.h"
 
-#define PLANK_JSON_TYPE         "type"
-#define PLANK_JSON_VERSION      "vers"
-#define PLANK_JSON_FORMAT       "fmt"
-#define PLANK_JSON_FORMATBINARY "bin"
-#define PLANK_JSON_FORMATZIP    "zip"
-#define PLANK_JSON_FORMATTEXT   "txt"
+#define PLANK_JSON_TYPE                 "type"
+#define PLANK_JSON_VERSION              "vers"
+#define PLANK_JSON_FLOATBINARY          "f"
+#define PLANK_JSON_INTBINARY            "i"
+#define PLANK_JSON_DOUBLEBINARY         "d"
+#define PLANK_JSON_FLOATARRAYBINARY     "f[]"
+#define PLANK_JSON_INTARRAYBINARY       "i[]"
+#define PLANK_JSON_DOUBLEARRAYBINARY    "d[]"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -55,7 +57,7 @@ typedef struct PlankJSON* PlankJSONRef;
 static PlankJSONRef pl_JSON_Object();
 static PlankJSONRef pl_JSON_Array();
 static PlankJSONRef pl_JSON_String (const char* string);
-static PlankJSONRef pl_JSON_Int(const int value);
+static PlankJSONRef pl_JSON_Int (const int value);
 static PlankJSONRef pl_JSON_Float (const float value);
 static PlankJSONRef pl_JSON_Double (const double value);
 static PlankJSONRef pl_JSON_Bool (const PlankB state);
@@ -93,29 +95,24 @@ static const char* pl_JSON_StringGet (PlankJSONRef p);
 
 //
 
+//PlankJSONRef pl_JSON_IntBinary (const int value);
+//PlankJSONRef pl_JSON_FloatBinary (const float value);
+//PlankJSONRef pl_JSON_DoubleBinary (const double value);
+//PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count);
+//PlankJSONRef pl_JSON_FloatArrayBinary (const float* values, const PlankL count);
+//PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count);
+
+
 PlankJSONRef pl_JSON_VersionString (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro);
 PlankUI pl_JSON_VersionCode (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro);
 PlankUI pl_JSON_VersionGet (PlankJSONRef p);
-
 
 void pl_JSON_ObjectSetType (PlankJSONRef p, const char* type);
 void pl_JSON_ObjectSetVersionString (PlankJSONRef p, const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro);
 void pl_JSON_ObjectSetVersionCode (PlankJSONRef p, const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro);
 PlankUI pl_JSON_ObjectGetVersion (PlankJSONRef p);
-
-void pl_JSON_ObjectSetFormatBinary (PlankJSONRef p);
-void pl_JSON_ObjectSetFormatText (PlankJSONRef p);
-void pl_JSON_ObjectSetFormatZip (PlankJSONRef p);
-
-PlankB pl_JSON_IsFormatBinary (PlankJSONRef p);
-PlankB pl_JSON_IsFormatIsText (PlankJSONRef p);
-PlankB pl_JSON_IsFormatZip (PlankJSONRef p);
-
 PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type);
 
-PlankB pl_JSON_IsObjectFormatBinary (PlankJSONRef p);
-PlankB pl_JSON_IsObjectFormatText (PlankJSONRef p);
-PlankB pl_JSON_IsObjectFormatZip (PlankJSONRef p);
 
 PLANK_END_C_LINKAGE
 

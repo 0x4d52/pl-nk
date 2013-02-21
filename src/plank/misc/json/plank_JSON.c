@@ -153,6 +153,36 @@ exit:
 
 //
 
+//PlankJSONRef pl_JSON_IntBinary (const int value)
+//{
+//    // make it an object { "i" : "9f8"}
+//}
+//
+//PlankJSONRef pl_JSON_FloatBinary (const float value)
+//{
+//    
+//}
+//
+//PlankJSONRef pl_JSON_DoubleBinary (const double value)
+//{
+//    
+//}
+//
+//PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count)
+//{
+//    
+//}
+//
+//PlankJSONRef pl_JSON_FloatArrayBinary (const float* values, const PlankL count)
+//{
+//    
+//}
+//
+//PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count)
+//{
+//    
+//}
+
 PlankJSONRef pl_JSON_VersionString (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro)
 {
     char string[64];
@@ -209,59 +239,10 @@ PlankUI pl_JSON_VersionGet (PlankJSONRef p)
         return pl_JSON_IntGet (p);
 }
 
-static void pl_JSON_ObjectSetFormat (PlankJSONRef p, const char* format)
-{
-    pl_JSON_ObjectPutKey (p, PLANK_JSON_FORMAT, pl_JSON_String (format));
-}
-
-void pl_JSON_ObjectSetFormatBinary (PlankJSONRef p)
-{
-    pl_JSON_ObjectSetFormat (p, PLANK_JSON_FORMATBINARY);
-}
-
-void pl_JSON_ObjectSetFormatText (PlankJSONRef p)
-{
-    pl_JSON_ObjectSetFormat (p, PLANK_JSON_FORMATTEXT);
-}
-
-void pl_JSON_ObjectSetFormatZip (PlankJSONRef p)
-{
-    pl_JSON_ObjectSetFormat (p, PLANK_JSON_FORMATTEXT);
-}
-
-PlankB pl_JSON_IsFormatBinary (PlankJSONRef p)
-{
-    return p ? strcmp (pl_JSON_StringGet (p), PLANK_JSON_FORMATBINARY) == 0 : PLANK_FALSE;
-}
-
-PlankB pl_JSON_IsFormatText (PlankJSONRef p)
-{
-    return p ? strcmp (pl_JSON_StringGet (p), PLANK_JSON_FORMATTEXT) == 0 : PLANK_FALSE;
-}
-
-PlankB pl_JSON_IsFormatZip (PlankJSONRef p)
-{
-    return p ? strcmp (pl_JSON_StringGet (p), PLANK_JSON_FORMATZIP) == 0 : PLANK_FALSE;
-}
-
 PlankB pl_JSON_IsObjectType (PlankJSONRef p, const char* type)
 {
     return pl_JSON_IsObject (p) && (strcmp (pl_JSON_StringGet (pl_JSON_ObjectAtKey (p, PLANK_JSON_TYPE)), type) == 0);
 }
 
-PlankB pl_JSON_IsObjectFormatBinary (PlankJSONRef p)
-{
-    return pl_JSON_IsObject (p) && pl_JSON_IsFormatBinary (pl_JSON_ObjectAtKey (p, PLANK_JSON_FORMAT));
-}
-
-PlankB pl_JSON_IsObjectFormatText (PlankJSONRef p)
-{
-    return pl_JSON_IsObject (p) && pl_JSON_IsFormatText (pl_JSON_ObjectAtKey (p, PLANK_JSON_FORMAT));
-}
-
-PlankB pl_JSON_IsObjectFormatZip (PlankJSONRef p)
-{
-    return pl_JSON_IsObject (p) && pl_JSON_IsFormatZip (pl_JSON_ObjectAtKey (p, PLANK_JSON_FORMAT));
-}
 
 

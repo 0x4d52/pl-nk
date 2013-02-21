@@ -355,7 +355,6 @@ PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, PlankJSONRef j)
     
     pl_JSON_ObjectSetType (jnode, PLANK_NEURALNODEF_JSON_TYPE);
     pl_JSON_ObjectSetVersionString (jnode, PLANK_NEURALNODEF_JSON_VERSION);
-    pl_JSON_ObjectSetFormatText (jnode);
     
     pl_JSON_ObjectPutKey (jnode, PLANK_NEURALNODEF_JSON_THRESHOLD, pl_JSON_Float (p->threshold));
 
@@ -404,38 +403,35 @@ PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetwo
         goto exit;
     }
     
-    if (pl_JSON_IsObjectFormatText (j))
+    if ((jweights = pl_JSON_ObjectAtKey (j, PLANK_NEURALNODEF_JSON_WEIGHTS)) == 0)
     {
-        if ((jweights = pl_JSON_ObjectAtKey (j, PLANK_NEURALNODEF_JSON_WEIGHTS)) == 0)
-        {
-            result = PlankResult_JSONError;
-            goto exit;
-        }
-        
-        if (!pl_JSON_IsArray (jweights))
-        {
-            result = PlankResult_JSONError;
-            goto exit;
-        }
-        
-        numWeights = (int)pl_JSON_ArrayGetSize (jweights);
-            
-        if (numWeights < 1)
-        {
-            result = PlankResult_JSONError;
-            goto exit;
-        }
-        
-        if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->weightVector, sizeof (PlankF), numWeights, PLANK_TRUE)) != PlankResult_OK)
-            goto exit;
-        
-        weights = (float*)pl_DynamicArray_GetArray (&p->weightVector);
-        
-        for (i = 0; i < numWeights; ++i)
-            weights[i] = pl_JSON_FloatGet (pl_JSON_ArrayAt (jweights, i));
-        
-        p->threshold = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNODEF_JSON_THRESHOLD));
+        result = PlankResult_JSONError;
+        goto exit;
     }
+    
+    if (!pl_JSON_IsArray (jweights))
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    numWeights = (int)pl_JSON_ArrayGetSize (jweights);
+        
+    if (numWeights < 1)
+    {
+        result = PlankResult_JSONError;
+        goto exit;
+    }
+    
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->weightVector, sizeof (PlankF), numWeights, PLANK_TRUE)) != PlankResult_OK)
+        goto exit;
+    
+    weights = (float*)pl_DynamicArray_GetArray (&p->weightVector);
+    
+    for (i = 0; i < numWeights; ++i)
+        weights[i] = pl_JSON_FloatGet (pl_JSON_ArrayAt (jweights, i));
+    
+    p->threshold = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNODEF_JSON_THRESHOLD));
     
     if (numWeights < 8)
     {
