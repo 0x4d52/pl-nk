@@ -39,10 +39,12 @@
 #ifndef PLANK_TEXT_H
 #define PLANK_TEXT_H
 
+#include "../containers/plank_DynamicArray.h"
+
 PLANK_BEGIN_C_LINKAGE
 
 /** A crossplatform file reading/writing utility.
-  
+ 
  Most of the "member functions" return a PlankResult which is a status and/or
  error code.
  
@@ -55,22 +57,25 @@ PLANK_BEGIN_C_LINKAGE
 typedef struct PlankFile* PlankFileRef; 
 
 /** Flag to identify 'read' mode. */
-#define PLANKFILE_READ          (1 << 0)
+#define PLANKFILE_READ                  (1 << 0)
 
 /** Flag to identify 'write' mode. */
-#define PLANKFILE_WRITE         (1 << 1)
+#define PLANKFILE_WRITE                 (1 << 1)
 
 /** Flag to identify 'binary' mode. */
-#define PLANKFILE_BINARY        (1 << 2)
+#define PLANKFILE_BINARY                (1 << 2)
 
 /** Flag to identify 'append' mode. */
-#define PLANKFILE_APPEND        (1 << 3)
+#define PLANKFILE_APPEND                (1 << 3)
 
 /** Flag to identify 'new' mode. */
-#define PLANKFILE_NEW           (1 << 4)
+#define PLANKFILE_NEW                   (1 << 4)
 
 /** Flag to identify big endian mode for binary files (otherwise it will be little endian). */
-#define PLANKFILE_BIGENDIAN     (1 << 5)
+#define PLANKFILE_BIGENDIAN             (1 << 5)
+
+/** Flag to identify when in DynamciArray mode that the array is owned by this object. */
+#define PLANKFILE_DYNAMICARRAYOWNED     (1 << 6)
 
 /** Mode mask with all the mode flags except PLANKFILE_BIGENDIAN. */
 #define PLANKFILE_MASK          (PLANKFILE_READ | PLANKFILE_WRITE | PLANKFILE_BINARY | PLANKFILE_APPEND | PLANKFILE_NEW)
@@ -83,6 +88,16 @@ typedef struct PlankFile* PlankFileRef;
 
 #define PLANKFILE_STATUS_EOF                1
 #define PLANKFILE_STATUS_ISPOSITIONABLE     2
+
+#define PLANKFILE_STREAMTYPE_UNKNOWN        0
+#define PLANKFILE_STREAMTYPE_FILE           1
+#define PLANKFILE_STREAMTYPE_MEMORY         2
+#define PLANKFILE_STREAMTYPE_DYNAMICARRAY   3
+#define PLANKFILE_STREAMTYPE_NETWORK        4
+
+#define PLANKFILE_SETPOSITION_ABSOLUTE       SEEK_SET
+#define PLANKFILE_SETPOSITION_RELATIVE       SEEK_CUR
+#define PLANKFILE_SETPOSITION_RELATIVEEND    SEEK_END
 
 /** Delete a file with the given path form the filesystem. */
 PlankResult pl_FileErase (const char* filepath);
@@ -191,6 +206,11 @@ PlankResult pl_File_OpenBinaryNativeEndianRead (PlankFileRef p, const char* file
                             data will be appended to the existing file.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_File_OpenBinaryNativeEndianWrite (PlankFileRef p, const char* filepath, const PlankB andRead, const PlankB replaceExistingFile);
+
+PlankResult pl_File_OpenMemory (PlankFileRef p, void* memory, const PlankLL size, const int mode);
+
+PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memory, const int mode);
+
 
 /** Determine if a file object is in big endian format.
  @param p The <i>Plank %File</i> object. 
@@ -530,8 +550,10 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankFile
 {
-    void *stream;
-    int mode;
+    void *stream; // must be first?
+    PlankUS mode;
+    PlankUS type;
+    PlankLL size;
     PlankLL position;
     char path[PLANKFILE_FILENAMEMAX];
         

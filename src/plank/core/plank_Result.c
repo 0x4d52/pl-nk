@@ -90,7 +90,8 @@ const char* pl_ResultString (PlankResult result)
         "A container (e.g., list, queue, stack) is being de-initialised but is non-empty",      //PlankResult_ContainerNotEmptyOnDeInit
 
         "The maximum number of identifiers for thread-local storage has been reached",          //PlankResult_ThreadLocalStorageMaximumIdentifiersReached
-        "A JSON error occurred"                                                                 //PlankResult_JSONError
+        "A generic JSON error occurred",                                                        //PlankResult_JSONError
+        "A JSON error occurred with a file"                                                     //PlankResult_JSONFileError
     };
     
     if ((result < 0) || (result >= PlankNumResults))

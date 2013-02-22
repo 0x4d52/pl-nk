@@ -89,13 +89,13 @@ PlankJSONRef pl_JSON_FromFile (PlankFileRef f)
     
     if (!(fileMode & PLANKFILE_READ))
     {
-        result = PlankResult_JSONError;
+        result = PlankResult_JSONFileError;
         goto exit;
     }
     
     if (!(fileMode & PLANKFILE_BINARY))
     {
-        result = PlankResult_JSONError;
+        result = PlankResult_JSONFileError;
         goto exit;
     }    
     
@@ -115,7 +115,7 @@ PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f)
     
     if (! (pl_JSON_IsArray (p) || pl_JSON_IsObject (p)))
     {
-        result = PlankResult_JSONError;
+        result = PlankResult_JSONFileError;
         goto exit;
     }
 
@@ -123,13 +123,13 @@ PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f)
     
     if (!(fileMode & PLANKFILE_WRITE))
     {
-        result = PlankResult_JSONError;
+        result = PlankResult_JSONFileError;
         goto exit;
     }
     
     if (!(fileMode & PLANKFILE_BINARY))
     {
-        result = PlankResult_JSONError;
+        result = PlankResult_JSONFileError;
         goto exit;
     }
     

@@ -43,12 +43,15 @@
 
 #define PLANK_JSON_TYPE                 "type"
 #define PLANK_JSON_VERSION              "vers"
-#define PLANK_JSON_FLOATBINARY          "f"
-#define PLANK_JSON_INTBINARY            "i"
-#define PLANK_JSON_DOUBLEBINARY         "d"
-#define PLANK_JSON_FLOATARRAYBINARY     "f[]"
-#define PLANK_JSON_INTARRAYBINARY       "i[]"
-#define PLANK_JSON_DOUBLEARRAYBINARY    "d[]"
+#define PLANK_JSON_FLOATBINARY          "Bf"
+#define PLANK_JSON_INTBINARY            "Bi"
+#define PLANK_JSON_DOUBLEBINARY         "Bd"
+#define PLANK_JSON_FLOATARRAYBINARY     "Bf[]"
+#define PLANK_JSON_INTARRAYBINARY       "Bi[]"
+#define PLANK_JSON_DOUBLEARRAYBINARY    "Bd[]"
+#define PLANK_JSON_FLOATARRAYZIP        "Zf[]"
+#define PLANK_JSON_INTARRAYZIP          "Zi[]"
+#define PLANK_JSON_DOUBLEARRAYZIP       "Zd[]"
 
 PLANK_BEGIN_C_LINKAGE
 
