@@ -223,21 +223,25 @@ static PlankResult pl_FileMemoryGetStatusCallback (PlankFileRef p, int type, int
     return PlankResult_OK;
 }
 
-static PlankResult pl_FileMemoryReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesRead)
+static PlankResult pl_FileMemoryReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesReadOut)
 {
     PlankResult result;
     PlankUC* src;
+    int bytesRead;
     
     result = PlankResult_OK;
     src = (PlankUC*)p->stream + p->position;
-    *bytesRead = (int)pl_MinLL (maximumBytes, p->size - p->position);
+    bytesRead = (int)pl_MinLL (maximumBytes, p->size - p->position);
     
-    if ((result = pl_MemoryCopy (ptr, src, *bytesRead)) != PlankResult_OK) goto exit;
+    if ((result = pl_MemoryCopy (ptr, src, bytesRead)) != PlankResult_OK) goto exit;
     
-    p->position += *bytesRead;
+    p->position += bytesRead;
     
     if (p->position >= p->size)
         result = PlankResult_FileEOF;
+    
+    if (bytesReadOut)
+        *bytesReadOut = bytesRead;
     
 exit:
     return result;
@@ -321,7 +325,7 @@ static PlankResult pl_FileDynamicArrayCloseCallback (PlankFileRef p)
     result = PlankResult_OK;
     
     if (p->mode & PLANKFILE_DYNAMICARRAYOWNED)
-        result = pl_DynamicArray_DeInit ((PlankDynamicArrayRef)p->stream);
+        result = pl_DynamicArray_Destroy ((PlankDynamicArrayRef)p->stream);
     
     if (result == PlankResult_OK)
         result = pl_File_Init (p);
@@ -353,25 +357,29 @@ static PlankResult pl_FileDynamicArrayGetStatusCallback (PlankFileRef p, int typ
     return PlankResult_OK;
 }
 
-static PlankResult pl_FileDynamicArrayReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesRead)
+static PlankResult pl_FileDynamicArrayReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesReadOut)
 {
     PlankResult result;
     PlankUC* src;
     PlankDynamicArrayRef array;
     PlankLL size;
+    int bytesRead;
     
     result = PlankResult_OK;
     array = (PlankDynamicArrayRef)p->stream;
     size = (PlankLL)pl_DynamicArray_GetSize (array) * (PlankLL)pl_DynamicArray_GetItemSize (array);
     src = (PlankUC*)pl_DynamicArray_GetArray (array) + p->position;
-    *bytesRead = (int)pl_MinLL (maximumBytes, size - p->position);
+    bytesRead = (int)pl_MinLL (maximumBytes, size - p->position);
     
-    if ((result = pl_MemoryCopy (ptr, src, *bytesRead)) != PlankResult_OK) goto exit;
+    if ((result = pl_MemoryCopy (ptr, src, bytesRead)) != PlankResult_OK) goto exit;
     
-    p->position += *bytesRead;
+    p->position += bytesRead;
     
     if (p->position >= p->size)
         result = PlankResult_FileEOF;
+    
+    if (bytesReadOut)
+        *bytesReadOut = bytesRead;
     
 exit:
     return result;
@@ -385,18 +393,20 @@ static PlankResult pl_FileDynamicArrayWriteCallback (PlankFileRef p, const void*
     PlankLL size, sizeNeeded;
     PlankL itemSize, capacity;
     
-    result = PlankResult_OK;
-    array = (PlankDynamicArrayRef)p->stream;
-    itemSize = pl_DynamicArray_GetItemSize (array);
-    size = (PlankLL)pl_DynamicArray_GetSize (array) * (PlankLL)itemSize;
-    sizeNeeded = p->position + maximumBytes;
-    dst = (PlankUC*)pl_DynamicArray_GetArray (array) + p->position;
+    result      = PlankResult_OK;
+    array       = (PlankDynamicArrayRef)p->stream;
+    itemSize    = pl_DynamicArray_GetItemSize (array);
+    size        = (PlankLL)pl_DynamicArray_GetSize (array) * (PlankLL)itemSize;
+    sizeNeeded  = p->position + maximumBytes;
+    dst         = (PlankUC*)pl_DynamicArray_GetArray (array) + p->position;
     
     if (sizeNeeded > size)
     {
         capacity = (sizeNeeded % itemSize) ? sizeNeeded / itemSize + 1 : sizeNeeded / itemSize;
         if ((result = pl_DynamicArray_SetSize (array, capacity)) != PlankResult_OK) goto exit;
     }
+    
+    dst = (PlankUC*)pl_DynamicArray_GetArray (array);
         
     if ((result = pl_MemoryCopy (dst, data, maximumBytes)) != PlankResult_OK) goto exit;
     

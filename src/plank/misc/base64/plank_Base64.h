@@ -42,6 +42,8 @@
 #include "../../containers/plank_DynamicArray.h"
 #include "../../files/plank_File.h"
 
+PLANK_BEGIN_C_LINKAGE
+
 typedef struct PlankBase64* PlankBase64Ref;
 
 PlankL pl_Base64EncodedLength (const PlankL binaryLength);
@@ -56,13 +58,12 @@ const void* pl_Base64_Decode (PlankBase64Ref p, const char* text, PlankL* binary
 PlankResult pl_Base64_SetBufferSize (PlankBase64Ref p, const PlankL size);
 PlankResult pl_Base64_PurgeBuffer (PlankBase64Ref p);
 
+PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
 typedef struct PlankBase64
 {
     PlankDynamicArray buffer;
-//    PlankFile inputFile;
-//    PlankFile outputFile;
 } PlankBase64;
 #endif
 

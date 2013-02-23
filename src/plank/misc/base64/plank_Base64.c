@@ -107,12 +107,196 @@ PlankResult pl_Base64_DeInit (PlankBase64Ref p)
 
 PlankResult pl_Base64_EncodeFile (PlankBase64Ref p, PlankFileRef outputTextFile, PlankFileRef inputBinaryFile)
 {
-    return PlankResult_UnknownError;
+    PlankResult result;
+    PlankUI octetA, octetB, octetC, triple;
+    const char* table;
+    int outputMode, inputMode, pad;
+    PlankUC data;
+    PlankB done;
+    PlankC char0, char1, char2, char3;
+    
+    result = PlankResult_OK;
+    if ((result = pl_File_GetMode (outputTextFile, &outputMode)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_GetMode (inputBinaryFile, &inputMode)) != PlankResult_OK) goto exit;
+    
+    if (!((outputMode & PLANKFILE_WRITE) && (outputMode & ~PLANKFILE_BINARY)))
+    {
+        result = PlankResult_FileWriteError;
+        goto exit;
+    }
+    
+    if (!((inputMode & PLANKFILE_READ) && (inputMode & PLANKFILE_BINARY)))
+    {
+        result = PlankResult_FileReadError;
+        goto exit;
+    }
+    
+    table = pl_Base64Tables()->encoding;
+    done = PLANK_FALSE;
+    
+    while (!done)
+    {
+        pad = 0;
+                
+        if ((result = pl_File_ReadUC (inputBinaryFile, &data)) == PlankResult_OK)
+        {
+            octetA = data;
+        }
+        else if (result == PlankResult_FileEOF)
+        {
+            octetA = data;
+            octetB = 0;
+            octetC = 0;
+            pad = 2;
+            done = PLANK_TRUE;
+            goto encode;
+        }
+        else goto exit;
+
+        if ((result = pl_File_ReadUC (inputBinaryFile, &data)) == PlankResult_OK)
+        {
+            octetB = data;
+        }
+        else if (result == PlankResult_FileEOF)
+        {
+            octetB = data;
+            octetC = 0;
+            pad = 1;
+            done = PLANK_TRUE;
+            goto encode;
+        }
+        else goto exit;
+        
+        if ((result = pl_File_ReadUC (inputBinaryFile, &data)) == PlankResult_OK)
+        {
+            octetC = data;
+        }
+        else if (result == PlankResult_FileEOF)
+        {
+            octetC = data;
+            done = PLANK_TRUE;
+        }
+        else goto exit;
+        
+    encode:
+        triple = (octetA << 0x10) + (octetB << 0x08) + octetC;
+
+        char0 = table[(triple >> 3 * 6) & 0x3F];
+        char1 = table[(triple >> 2 * 6) & 0x3F];
+        char2 = (pad == 2) ? '=' : table[(triple >> 1 * 6) & 0x3F];
+        char3 = (pad >  0) ? '=' : table[(triple >> 0 * 6) & 0x3F];
+        
+        if ((result = pl_File_WriteC (outputTextFile, char0)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC (outputTextFile, char1)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC (outputTextFile, char2)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteC (outputTextFile, char3)) != PlankResult_OK) goto exit;
+    }
+    
+exit:
+    return result;
 }
 
 PlankResult pl_Base64_DecodeFile (PlankBase64Ref p, PlankFileRef outputBinaryFile, PlankFileRef inputTextFile)
 {
-    return PlankResult_UnknownError;
+    PlankResult result;
+    PlankUI sextetA, sextetB, sextetC, sextetD, triple, code;
+    const char* table;
+    int outputMode, inputMode, bytesRead, binaryBytes;
+    PlankB done;
+    PlankC quad[4];
+    
+    result = PlankResult_OK;
+    if ((result = pl_File_GetMode (inputTextFile, &inputMode)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_GetMode (outputBinaryFile, &outputMode)) != PlankResult_OK) goto exit;
+    
+    if (!((outputMode & PLANKFILE_WRITE) && (outputMode & PLANKFILE_BINARY)))
+    {
+        result = PlankResult_FileWriteError;
+        goto exit;
+    }
+    
+    if (!((inputMode & PLANKFILE_READ) && (inputMode & ~PLANKFILE_BINARY)))
+    {
+        result = PlankResult_FileReadError;
+        goto exit;
+    }
+    
+    table = pl_Base64Tables()->decoding;
+    done = PLANK_FALSE;
+    
+    while (!done)
+    {        
+        result = pl_File_Read (inputTextFile, quad, 4, &bytesRead); // zczMPc3MTD6amZk+zczMPgAAAD+amRk/MzMzP83MTD8=
+        
+        if ((result == PlankResult_OK) || (result == PlankResult_FileEOF))
+        {
+            if (result == PlankResult_FileEOF)
+            {
+                done = PLANK_TRUE;
+                
+                if (bytesRead == 0)
+                    continue;
+            }
+            
+            if (bytesRead != 4)
+            {
+                result = PlankResult_ItemCountInvalid;
+                goto exit;
+            }
+            
+        }
+
+        sextetA = table[quad[0]];
+        sextetB = table[quad[1]];
+        code = (quad[2] == '=' ? 0x02 : 0x00) | (quad[3] == '=' ? 0x01 : 0x00);
+        
+        switch (code)
+        {
+            case 0x00:
+                sextetC = table[quad[2]];
+                sextetD = table[quad[3]];
+                binaryBytes = 3;
+                break;
+            case 0x01:
+                sextetC = table[quad[2]];
+                sextetD = 0;
+                binaryBytes = 2;
+                done = PLANK_TRUE;
+                break;
+            case 0x03:
+                sextetC = 0;
+                sextetD = 0;
+                binaryBytes = 1;
+                done = PLANK_TRUE;
+                break;
+            default:
+                result = PlankResult_UnknownError;
+                goto exit;
+        }
+            
+        triple = (sextetA << 3 * 6) + (sextetB << 2 * 6) + (sextetC << 1 * 6) + (sextetD << 0 * 6);
+
+        if (binaryBytes-- > 0)
+        {
+            result = pl_File_WriteUC (outputBinaryFile, (triple >> 2 * 8) & 0xFF);
+            if ((result != PlankResult_OK) && (result != PlankResult_FileEOF)) goto exit;
+        }
+        
+        if (binaryBytes-- > 0)
+        {
+            result = pl_File_WriteUC (outputBinaryFile, (triple >> 1 * 8) & 0xFF);
+            if ((result != PlankResult_OK) && (result != PlankResult_FileEOF)) goto exit;
+        }
+
+        if (binaryBytes-- > 0)
+        {
+            result = pl_File_WriteUC (outputBinaryFile, (triple >> 0 * 8) & 0xFF);
+            if ((result != PlankResult_OK) && (result != PlankResult_FileEOF)) goto exit;
+        }
+    }
+    
+exit:
+    return result;
 }
 
 const char* pl_Base64_Encode (PlankBase64Ref p, const void* binary, const PlankL binaryLength)
@@ -124,7 +308,7 @@ const char* pl_Base64_Encode (PlankBase64Ref p, const void* binary, const PlankL
     int i, j;
     PlankUI octetA, octetB, octetC, triple;
     const char* table;
-    const int* mod;
+    int modLength;
     
     stringLength = pl_Base64EncodedLength (binaryLength);
     data = (PlankUC*)binary;
@@ -134,7 +318,7 @@ const char* pl_Base64_Encode (PlankBase64Ref p, const void* binary, const PlankL
     if (result == PlankResult_OK)
     {
         table = pl_Base64Tables()->encoding;
-        mod = pl_Base64Tables()->mod;
+        modLength = pl_Base64Tables()->mod[binaryLength % 3];
         string = (PlankC*)pl_DynamicArray_GetArray (&p->buffer);
 
         for (i = 0, j = 0; i < binaryLength;)
@@ -151,7 +335,7 @@ const char* pl_Base64_Encode (PlankBase64Ref p, const void* binary, const PlankL
             string[j++] = table[(triple >> 0 * 6) & 0x3F];
         }
 
-        for (i = 0; i < mod[binaryLength % 3]; i++)
+        for (i = 0; i < modLength; i++)
             string[stringLength - 1 - i] = '=';
         
         string[stringLength] = '\0';

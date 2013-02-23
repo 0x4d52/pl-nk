@@ -74,6 +74,12 @@ typedef struct PlankFile* PlankFileRef;
 /** Flag to identify big endian mode for binary files (otherwise it will be little endian). */
 #define PLANKFILE_BIGENDIAN             (1 << 5)
 
+#if PLANK_BIGENDIAN
+    #define PLANKFILE_NATIVEENDIAN      PLANKFILE_BIGENDIAN
+#elif PLANK_LITTLEENDIAN
+    #define PLANKFILE_NATIVEENDIAN      (0)
+#endif
+
 /** Flag to identify when in DynamciArray mode that the array is owned by this object. */
 #define PLANKFILE_DYNAMICARRAYOWNED     (1 << 6)
 
