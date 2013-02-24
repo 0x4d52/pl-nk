@@ -92,7 +92,8 @@ enum PlankResultIdentifiers
     PlankResult_ThreadLocalStorageMaximumIdentifiersReached, ///< The maximum number of identifiers for thread-local storage has been reached.
     PlankResult_JSONError,                  ///< A generic JSON error occurred.
     PlankResult_JSONFileError,              ///< A JSON error occurred with a file.
-    
+    PlankResult_ZipError,                   ///< A generic Zip error occurred.
+
     PlankNumResults
 };
 

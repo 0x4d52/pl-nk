@@ -217,6 +217,8 @@ PlankResult pl_File_OpenMemory (PlankFileRef p, void* memory, const PlankLL size
 
 PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memory, const int mode);
 
+PlankResult pl_File_Copy (PlankFileRef p, PlankFileRef source, const PlankLL size);
+
 
 /** Determine if a file object is in big endian format.
  @param p The <i>Plank %File</i> object. 

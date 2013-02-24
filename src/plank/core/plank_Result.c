@@ -91,7 +91,10 @@ const char* pl_ResultString (PlankResult result)
 
         "The maximum number of identifiers for thread-local storage has been reached",          //PlankResult_ThreadLocalStorageMaximumIdentifiersReached
         "A generic JSON error occurred",                                                        //PlankResult_JSONError
-        "A JSON error occurred with a file"                                                     //PlankResult_JSONFileError
+        "A JSON error occurred with a file",                                                    //PlankResult_JSONFileError
+        "A generic Zip error occurred",                                                         //PlankResult_ZipError
+        
+        ""
     };
     
     if ((result < 0) || (result >= PlankNumResults))

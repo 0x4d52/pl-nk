@@ -318,33 +318,28 @@ const void* pl_Base64_Decode (PlankBase64Ref p, const char* text, PlankL* binary
     PlankResult result;
     PlankFile textInputStream;
     PlankFile binaryOutputStream;
-    PlankLL stringLength, binaryLength;
+    PlankLL stringLength;//, binaryLength;
     const void* data;
-    void* raw;
     int mode;
     
     result = PlankResult_OK;
     data = (const void*)PLANK_NULL;
     stringLength = strlen (text);
     *binaryLengthOut = 0;
-    
-    binaryLength = pl_Base64DecodedLength (stringLength);
-    
-    if ((result = pl_DynamicArray_SetSize (&p->buffer, binaryLength)) != PlankResult_OK) goto exit;
+        
+    if ((result = pl_DynamicArray_SetSize (&p->buffer, 0)) != PlankResult_OK) goto exit;
     if ((result = pl_File_Init (&textInputStream)) != PlankResult_OK) goto exit;
     if ((result = pl_File_Init (&binaryOutputStream)) != PlankResult_OK) goto exit;
     
     mode = PLANKFILE_READ;
     if ((result = pl_File_OpenMemory (&textInputStream, (void*)text, stringLength, mode)) != PlankResult_OK) goto exit;
-    
-    raw = (void*)pl_DynamicArray_GetArray (&p->buffer);
-    
+        
     mode = PLANKFILE_BINARY | PLANKFILE_WRITE | PLANKFILE_NATIVEENDIAN;
-    if ((result = pl_File_OpenMemory (&binaryOutputStream, raw, binaryLength, mode)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_OpenDynamicArray (&binaryOutputStream, &p->buffer, mode)) != PlankResult_OK) goto exit;
     if ((result = pl_Base64_DecodeFile (p, &binaryOutputStream, &textInputStream)) != PlankResult_OK) goto exit;
     
     data = (const void*)pl_DynamicArray_GetArray (&p->buffer);
-    *binaryLengthOut = binaryLength;
+    *binaryLengthOut = pl_DynamicArray_GetSize (&p->buffer);
     
 exit:
     pl_File_DeInit (&textInputStream);

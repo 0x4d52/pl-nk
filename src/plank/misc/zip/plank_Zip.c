@@ -38,6 +38,7 @@
 
 #include "../../core/plank_StandardHeader.h"
 #include "plank_Zip.h"
+#include "../../maths/plank_Maths.h"
 
 #include "../../../../ext/zlib/compress.c"
 #include "../../../../ext/zlib/inffast.c"
@@ -60,10 +61,214 @@
 #include "../../../../ext/zlib/uncompr.c"
 #include "../../../../ext/zlib/zutil.c"
 
-#include "../../../../ext/minizip/ioapi.c"
-#include "../../../../ext/minizip/mztools.c"
-#include "../../../../ext/minizip/zip.c"
-#include "../../../../ext/minizip/unzip.c" // must be after zip.c because of the way crypt.h is inlcuded.
+//#include "../../../../ext/minizip/ioapi.c"
+//#include "../../../../ext/minizip/mztools.c"
+//#include "../../../../ext/minizip/zip.c"
+//#include "../../../../ext/minizip/unzip.c" // must be after zip.c because of the way crypt.h is inlcuded.
+
+
+PlankResult pl_Zip_Init (PlankZipRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    
+    return pl_DynamicArray_InitWithItemSize (&p->buffer, 1);
+}
+
+PlankResult pl_Zip_DeInit (PlankZipRef p)
+{
+    if (p == PLANK_NULL)
+        return PlankResult_MemoryError;
+    
+    return pl_DynamicArray_DeInit (&p->buffer);
+}
+
+#define PLANKZIP_CHUNK 16384
+
+PlankResult pl_Zip_EncodeFile (PlankZipRef p, PlankFileRef outputZipFile, PlankFileRef inputFile, const int amount)
+{
+    PlankResult result;
+    int ret, flush, outputMode, inputMode, bytesRead;
+    unsigned have;
+    z_stream strm;
+    unsigned char in[PLANKZIP_CHUNK];
+    unsigned char out[PLANKZIP_CHUNK];
+
+    result = PlankResult_OK;
+    if ((result = pl_File_GetMode (inputFile, &inputMode)) != PlankResult_OK) goto earlyExit;
+    if ((result = pl_File_GetMode (outputZipFile, &outputMode)) != PlankResult_OK) goto earlyExit;
+    
+    if (!((outputMode & PLANKFILE_WRITE) && (outputMode & PLANKFILE_BINARY)))
+    {
+        result = PlankResult_FileWriteError;
+        goto earlyExit;
+    }
+    
+    if (!(inputMode & PLANKFILE_READ))
+    {
+        result = PlankResult_FileReadError;
+        goto earlyExit;
+    }
+
+    /* allocate deflate state */
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    strm.opaque = Z_NULL;
+        
+    if ((ret = deflateInit (&strm, pl_ClipI (amount, 0, 9))) != Z_OK)
+    {
+        result = PlankResult_ZipError;
+        goto earlyExit;
+    }
+
+    do
+    {
+        result = pl_File_Read (inputFile, in, PLANKZIP_CHUNK, &bytesRead);
+        strm.avail_in = bytesRead;
+        
+        if ((result != PlankResult_OK) && (result != PlankResult_FileEOF)) goto exit;
+       
+        flush = pl_File_IsEOF (inputFile) ? Z_FINISH : Z_NO_FLUSH;
+        strm.next_in = in;
+
+        do {
+            strm.avail_out = PLANKZIP_CHUNK;
+            strm.next_out = out;
+            ret = deflate (&strm, flush);    /* no bad return value */
+            
+            if (ret == Z_STREAM_ERROR)
+            {
+                result = PlankResult_ZipError;
+                goto exit;
+            }
+            
+            have = PLANKZIP_CHUNK - strm.avail_out;
+            
+            if ((result = pl_File_Write (outputZipFile, out, have)) != PlankResult_OK) goto exit;
+        } while (strm.avail_out == 0);
+        
+        if (strm.avail_in != 0)
+        {
+            result = PlankResult_ZipError;
+            goto exit;
+        }
+        
+    } while (flush != Z_FINISH);
+    
+    if (ret != Z_STREAM_END)
+    {
+        result = PlankResult_ZipError;
+        goto exit;
+    }
+        
+exit:
+    (void)deflateEnd (&strm);
+
+earlyExit:
+    return result;
+}
+
+PlankResult pl_Zip_DecodeFile (PlankZipRef p, PlankFileRef outputFile, PlankFileRef inputZipFile)
+{
+    PlankResult result;
+    int ret, outputMode, inputMode, bytesRead;
+    unsigned have;
+    z_stream strm;
+    unsigned char in[PLANKZIP_CHUNK];
+    unsigned char out[PLANKZIP_CHUNK];
+
+    result = PlankResult_OK;
+    if ((result = pl_File_GetMode (inputZipFile, &inputMode)) != PlankResult_OK) goto earlyExit;
+    if ((result = pl_File_GetMode (outputFile, &outputMode)) != PlankResult_OK) goto earlyExit;
+    
+    if (!(outputMode & PLANKFILE_WRITE))
+    {
+        result = PlankResult_FileWriteError;
+        goto earlyExit;
+    }
+    
+    if (!((inputMode & PLANKFILE_READ) && (inputMode & PLANKFILE_BINARY)))
+    {
+        result = PlankResult_FileReadError;
+        goto earlyExit;
+    }
+    
+    /* allocate inflate state */
+    strm.zalloc     = Z_NULL;
+    strm.zfree      = Z_NULL;
+    strm.opaque     = Z_NULL;
+    strm.avail_in   = 0;
+    strm.next_in    = Z_NULL;
+        
+    if ((ret = inflateInit (&strm)) != Z_OK)
+    {
+        result = PlankResult_ZipError;
+        goto earlyExit;
+    }
+
+    do {
+        result = pl_File_Read (inputZipFile, in, PLANKZIP_CHUNK, &bytesRead);
+        strm.avail_in = bytesRead;
+        
+        if ((result != PlankResult_OK) && (result != PlankResult_FileEOF)) goto exit;
+        
+        if (strm.avail_in == 0)
+            break;
+        
+        strm.next_in = in;
+
+        do {
+            strm.avail_out = PLANKZIP_CHUNK;
+            strm.next_out = out;
+            ret = inflate (&strm, Z_NO_FLUSH);
+            
+            if (ret == Z_STREAM_ERROR)
+            {
+                result = PlankResult_ZipError;
+                goto exit;
+            }
+            
+            switch (ret)
+            {
+                case Z_NEED_DICT:
+                case Z_DATA_ERROR:
+                case Z_MEM_ERROR:
+                    result = PlankResult_ZipError;
+                    goto exit;
+            }
+            
+            have = PLANKZIP_CHUNK - strm.avail_out;
+            
+            if ((result = pl_File_Write (outputFile, out, have)) != PlankResult_OK) goto exit;            
+        } while (strm.avail_out == 0);
+    } while (ret != Z_STREAM_END);
+    
+exit:
+    (void)inflateEnd (&strm);
+    
+earlyExit:
+    return result;
+}
+
+const void* pl_Zip_Encode (PlankZipRef p, const void* data, const PlankL dataLength, const int amount)
+{
+    
+}
+
+const void* pl_Zip_Decode (PlankZipRef p, const void* text, PlankL* dataLength)
+{
+    
+}
+
+PlankResult pl_Zip_SetBufferSize (PlankZipRef p, const PlankL size)
+{
+    return pl_DynamicArray_SetSize (&p->buffer, size);
+}
+
+PlankResult pl_Zip_PurgeBuffer (PlankZipRef p)
+{
+    return pl_DynamicArray_Purge (&p->buffer);
+}
 
 
 

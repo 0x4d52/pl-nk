@@ -197,6 +197,9 @@ PlankResult pl_FileDefaultGetPositionCallback (PlankFileRef p, PlankLL* position
 
 static PlankResult pl_FileMemoryOpenCallback (PlankFileRef p)
 {
+    if (p->mode & PLANKFILE_APPEND)
+        return PlankResult_FileModeInvalid;
+    
     p->position = 0;
     return PlankResult_OK;
 }
@@ -269,8 +272,6 @@ static PlankResult pl_FileMemoryWriteCallback (PlankFileRef p, const void* data,
     
     p->position += maximumBytes;
     
-//    if (p->position >= p->size)
-//        result = PlankResult_FileEOF;
 exit:
     return result;
 }
@@ -315,7 +316,20 @@ static PlankResult pl_FileMemoryGetPositionCallback (PlankFileRef p, PlankLL* po
 
 static PlankResult pl_FileDynamicArrayOpenCallback (PlankFileRef p)
 {
-    p->position = 0;
+    PlankDynamicArrayRef array;
+    PlankLL size;
+
+    if ((p->mode & PLANKFILE_WRITE) && (p->mode & PLANKFILE_APPEND))
+    {
+        array = (PlankDynamicArrayRef)p->stream;
+        size = (PlankLL)pl_DynamicArray_GetSize (array) * (PlankLL)pl_DynamicArray_GetItemSize (array);
+        p->position = size;
+    }
+    else
+    {
+        p->position = 0;
+    }
+    
     return PlankResult_OK;
 }
 
@@ -403,7 +417,6 @@ static PlankResult pl_FileDynamicArrayWriteCallback (PlankFileRef p, const void*
     itemSize    = pl_DynamicArray_GetItemSize (array);
     size        = (PlankLL)pl_DynamicArray_GetSize (array) * (PlankLL)itemSize;
     sizeNeeded  = p->position + maximumBytes;
-    dst         = (PlankUC*)pl_DynamicArray_GetArray (array) + p->position;
     
     if (sizeNeeded > size)
     {
@@ -411,8 +424,8 @@ static PlankResult pl_FileDynamicArrayWriteCallback (PlankFileRef p, const void*
         if ((result = pl_DynamicArray_SetSize (array, capacity)) != PlankResult_OK) goto exit;
     }
     
-    dst = (PlankUC*)pl_DynamicArray_GetArray (array);
-        
+    dst = (PlankUC*)pl_DynamicArray_GetArray (array) + p->position;
+    
     if ((result = pl_MemoryCopy (dst, data, maximumBytes)) != PlankResult_OK) goto exit;
     
     p->position += maximumBytes;
@@ -792,6 +805,33 @@ PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memor
     
     result = (p->openFunction) (p);
     if (result != PlankResult_OK) goto exit;
+    
+exit:
+    return result;
+}
+
+#define PLANKFILE_COPYCHUNKSIZE 512
+
+PlankResult pl_File_Copy (PlankFileRef p, PlankFileRef source, const PlankLL size)
+{
+    PlankResult result;
+    PlankLL remaining;
+    PlankUC buffer[PLANKFILE_COPYCHUNKSIZE];
+    int bytesRead;
+    
+    result = PlankResult_OK;
+
+    remaining = (size <= 0) ? (((PlankULL)1 << 63) - 1) : size;
+    
+    while (!pl_File_IsEOF (source))
+    {
+        result = pl_File_Read (source, buffer, PLANKFILE_COPYCHUNKSIZE, &bytesRead);
+        
+        if (((result != PlankResult_OK) && (result != PlankResult_FileEOF)) || (bytesRead == 0)) goto exit;
+        if ((result = pl_File_Write (p, buffer, bytesRead)) != PlankResult_OK) goto exit;
+        
+        remaining -= bytesRead;
+    }
     
 exit:
     return result;

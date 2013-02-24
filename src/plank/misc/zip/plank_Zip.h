@@ -39,8 +39,35 @@
 #ifndef PLANK_ZIP_H
 #define PLANK_ZIP_H
 
+#include "../../containers/plank_DynamicArray.h"
+#include "../../files/plank_File.h"
 #include "../../../../ext/zlib/zlib.h"
-#include "../../../../ext/minizip/zip.h"
-#include "../../../../ext/minizip/unzip.h"
+
+//#include "../../../../ext/minizip/zip.h"
+//#include "../../../../ext/minizip/unzip.h"
+
+PLANK_BEGIN_C_LINKAGE
+
+typedef struct PlankZip* PlankZipRef;
+
+PlankResult pl_Zip_Init (PlankZipRef p);
+PlankResult pl_Zip_DeInit (PlankZipRef p);
+PlankResult pl_Zip_EncodeFile (PlankZipRef p, PlankFileRef outputZipFile, PlankFileRef inputFile, const int amount);
+PlankResult pl_Zip_DecodeFile (PlankZipRef p, PlankFileRef outputFile, PlankFileRef inputZipFile);
+const void* pl_Zip_Encode (PlankZipRef p, const void* data, const PlankL dataLength, const int amount);
+const void* pl_Zip_Decode (PlankZipRef p, const void* text, PlankL* dataLength);
+PlankResult pl_Zip_SetBufferSize (PlankZipRef p, const PlankL size);
+PlankResult pl_Zip_PurgeBuffer (PlankZipRef p);
+
+PLANK_END_C_LINKAGE
+
+#if !DOXYGEN
+typedef struct PlankZip
+{
+    PlankDynamicArray buffer;
+} PlankZip;
+#endif
+
+
 
 #endif // PLANK_ZIP_H
