@@ -269,8 +269,8 @@ static PlankResult pl_FileMemoryWriteCallback (PlankFileRef p, const void* data,
     
     p->position += maximumBytes;
     
-    if (p->position >= p->size)
-        result = PlankResult_FileEOF;
+//    if (p->position >= p->size)
+//        result = PlankResult_FileEOF;
 exit:
     return result;
 }
@@ -297,10 +297,7 @@ static PlankResult pl_FileMemorySetPositionCallback (PlankFileRef p, PlankLL off
     }
     
     if (newPosition >= p->size)
-    {
         newPosition = p->size;
-        result = PlankResult_FileEOF;
-    }
     
     p->position = newPosition;
 
@@ -369,10 +366,10 @@ static PlankResult pl_FileDynamicArrayReadCallback (PlankFileRef p, PlankP ptr, 
     PlankLL size;
     int bytesRead;
     
-    result = PlankResult_OK;
-    array = (PlankDynamicArrayRef)p->stream;
-    size = (PlankLL)pl_DynamicArray_GetSize (array) * (PlankLL)pl_DynamicArray_GetItemSize (array);
-    bytesRead = (int)pl_MinLL (maximumBytes, size - p->position);
+    result      = PlankResult_OK;
+    array       = (PlankDynamicArrayRef)p->stream;
+    size        = (PlankLL)pl_DynamicArray_GetSize (array) * (PlankLL)pl_DynamicArray_GetItemSize (array);
+    bytesRead   = (int)pl_MinLL (maximumBytes, size - p->position);
 
     if (bytesRead <= 0)
     {
@@ -385,10 +382,7 @@ static PlankResult pl_FileDynamicArrayReadCallback (PlankFileRef p, PlankP ptr, 
     if ((result = pl_MemoryCopy (ptr, src, bytesRead)) != PlankResult_OK) goto exit;
     
     p->position += bytesRead;
-    
-    if (p->position >= p->size)
-        result = PlankResult_FileEOF;
-    
+        
     if (bytesReadOut)
         *bytesReadOut = bytesRead;
     
@@ -453,10 +447,7 @@ static PlankResult pl_FileDynamicArraySetPositionCallback (PlankFileRef p, Plank
     }
     
     if (newPosition >= size)
-    {
         newPosition = size;
-        result = PlankResult_FileEOF;
-    }
     
     p->position = newPosition;
     
@@ -518,7 +509,7 @@ PlankFileRef pl_File_Create()
 
 PlankResult pl_File_Init (PlankFileRef p)
 {
-    if (p->stream == PLANK_NULL)
+    if (p == PLANK_NULL)
         return PlankResult_MemoryError;
         
     p->stream = 0;

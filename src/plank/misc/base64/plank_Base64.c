@@ -279,44 +279,36 @@ exit:
 const char* pl_Base64_Encode (PlankBase64Ref p, const void* binary, const PlankL binaryLength)
 {
     PlankResult result;
+    PlankFile binaryInputStream;
+    PlankFile textOutputStream;
     PlankL stringLength;
-    PlankUC* data;
-    PlankC* string;
-    int i, j;
-    PlankUI octetA, octetB, octetC, triple;
-    const char* table;
-    int modLength;
+    char* string;
+    void* data;
+    int mode;
     
+    result = PlankResult_OK;
+    string = (char*)PLANK_NULL;
     stringLength = pl_Base64EncodedLength (binaryLength);
-    data = (PlankUC*)binary;
-    string = (PlankC*)PLANK_NULL;
-    result = pl_DynamicArray_SetSize (&p->buffer, stringLength + 1);
     
-    if (result == PlankResult_OK)
-    {
-        table = pl_Base64Tables()->encoding;
-        modLength = pl_Base64Tables()->mod[binaryLength % 3];
-        string = (PlankC*)pl_DynamicArray_GetArray (&p->buffer);
+    if ((result = pl_DynamicArray_SetSize (&p->buffer, stringLength + 1)) != PlankResult_OK) goto exit;    
+    if ((result = pl_File_Init (&binaryInputStream)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Init (&textOutputStream)) != PlankResult_OK) goto exit;
+    
+    mode = PLANKFILE_BINARY | PLANKFILE_READ | PLANKFILE_NATIVEENDIAN;
+    if ((result = pl_File_OpenMemory (&binaryInputStream, (void*)binary, (PlankLL)binaryLength, mode)) != PlankResult_OK) goto exit;
 
-        for (i = 0, j = 0; i < binaryLength;)
-        {
-            octetA = i < binaryLength ? data[i++] : 0;
-            octetB = i < binaryLength ? data[i++] : 0;
-            octetC = i < binaryLength ? data[i++] : 0;
-
-            triple = (octetA << 0x10) + (octetB << 0x08) + octetC;
-
-            string[j++] = table[(triple >> 3 * 6) & 0x3F];
-            string[j++] = table[(triple >> 2 * 6) & 0x3F];
-            string[j++] = table[(triple >> 1 * 6) & 0x3F];
-            string[j++] = table[(triple >> 0 * 6) & 0x3F];
-        }
-
-        for (i = 0; i < modLength; i++)
-            string[stringLength - 1 - i] = '=';
-        
-        string[stringLength] = '\0';
-    }
+    data = (void*)pl_DynamicArray_GetArray (&p->buffer);
+    
+    mode = PLANKFILE_WRITE;
+    if ((result = pl_File_OpenMemory (&textOutputStream, data, (PlankLL)stringLength, mode)) != PlankResult_OK) goto exit;
+    if ((result = pl_Base64_EncodeFile (p, &textOutputStream, &binaryInputStream)) != PlankResult_OK) goto exit;
+    
+    string = (char*)data;
+    string[stringLength] = '\0';
+    
+exit:    
+    pl_File_DeInit (&binaryInputStream);
+    pl_File_DeInit (&textOutputStream);
 
     return string;
 }
@@ -324,53 +316,139 @@ const char* pl_Base64_Encode (PlankBase64Ref p, const void* binary, const PlankL
 const void* pl_Base64_Decode (PlankBase64Ref p, const char* text, PlankL* binaryLengthOut)
 {
     PlankResult result;
-    PlankL stringLength, binaryLength;
-    PlankUC* data;
-    int i, j;
-    PlankUI sextetA, sextetB, sextetC, sextetD, triple;
-    const char* table;
-
+    PlankFile textInputStream;
+    PlankFile binaryOutputStream;
+    PlankLL stringLength, binaryLength;
+    const void* data;
+    void* raw;
+    int mode;
+    
     result = PlankResult_OK;
-    data = (PlankUC*)PLANK_NULL;
+    data = (const void*)PLANK_NULL;
     stringLength = strlen (text);
     *binaryLengthOut = 0;
     
-    if ((stringLength & 3) != 0)
-    {
-        result = PlankResult_ItemCountInvalid;
-        return 0;
-    }
-    
     binaryLength = pl_Base64DecodedLength (stringLength);
-
-    if (text[stringLength - 1] == '=') binaryLength--;
-    if (text[stringLength - 2] == '=') binaryLength--;
-
-    result = pl_DynamicArray_SetSize (&p->buffer, binaryLength);
-
-    if (result == PlankResult_OK)
-    {
-        table = pl_Base64Tables()->decoding;
-        data = (PlankUC*)pl_DynamicArray_GetArray (&p->buffer);
-        
-        for (i = 0, j = 0; i < stringLength;)
-        {
-            sextetA = (text[i] == '=') ? 0 : table[text[i]]; ++i;
-            sextetB = (text[i] == '=') ? 0 : table[text[i]]; ++i;
-            sextetC = (text[i] == '=') ? 0 : table[text[i]]; ++i;
-            sextetD = (text[i] == '=') ? 0 : table[text[i]]; ++i;
-
-            triple = (sextetA << 3 * 6) + (sextetB << 2 * 6) + (sextetC << 1 * 6) + (sextetD << 0 * 6);
-
-            if (j < binaryLength) data[j++] = (triple >> 2 * 8) & 0xFF;
-            if (j < binaryLength) data[j++] = (triple >> 1 * 8) & 0xFF;
-            if (j < binaryLength) data[j++] = (triple >> 0 * 8) & 0xFF;
-        }
-    }
     
+    if ((result = pl_DynamicArray_SetSize (&p->buffer, binaryLength)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Init (&textInputStream)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Init (&binaryOutputStream)) != PlankResult_OK) goto exit;
+    
+    mode = PLANKFILE_READ;
+    if ((result = pl_File_OpenMemory (&textInputStream, (void*)text, stringLength, mode)) != PlankResult_OK) goto exit;
+    
+    raw = (void*)pl_DynamicArray_GetArray (&p->buffer);
+    
+    mode = PLANKFILE_BINARY | PLANKFILE_WRITE | PLANKFILE_NATIVEENDIAN;
+    if ((result = pl_File_OpenMemory (&binaryOutputStream, raw, binaryLength, mode)) != PlankResult_OK) goto exit;
+    if ((result = pl_Base64_DecodeFile (p, &binaryOutputStream, &textInputStream)) != PlankResult_OK) goto exit;
+    
+    data = (const void*)pl_DynamicArray_GetArray (&p->buffer);
     *binaryLengthOut = binaryLength;
+    
+exit:
+    pl_File_DeInit (&textInputStream);
+    pl_File_DeInit (&binaryOutputStream);
+    
     return data;
 }
+
+
+//const char* pl_Base64_Encode (PlankBase64Ref p, const void* binary, const PlankL binaryLength)
+//{
+//    PlankResult result;
+//    PlankL stringLength;
+//    PlankUC* data;
+//    PlankC* string;
+//    int i, j;
+//    PlankUI octetA, octetB, octetC, triple;
+//    const char* table;
+//    int modLength;
+//    
+//    stringLength = pl_Base64EncodedLength (binaryLength);
+//    data = (PlankUC*)binary;
+//    string = (PlankC*)PLANK_NULL;
+//    result = pl_DynamicArray_SetSize (&p->buffer, stringLength + 1);
+//    
+//    if (result == PlankResult_OK)
+//    {
+//        table = pl_Base64Tables()->encoding;
+//        modLength = pl_Base64Tables()->mod[binaryLength % 3];
+//        string = (PlankC*)pl_DynamicArray_GetArray (&p->buffer);
+//
+//        for (i = 0, j = 0; i < binaryLength;)
+//        {
+//            octetA = i < binaryLength ? data[i++] : 0;
+//            octetB = i < binaryLength ? data[i++] : 0;
+//            octetC = i < binaryLength ? data[i++] : 0;
+//
+//            triple = (octetA << 0x10) + (octetB << 0x08) + octetC;
+//
+//            string[j++] = table[(triple >> 3 * 6) & 0x3F];
+//            string[j++] = table[(triple >> 2 * 6) & 0x3F];
+//            string[j++] = table[(triple >> 1 * 6) & 0x3F];
+//            string[j++] = table[(triple >> 0 * 6) & 0x3F];
+//        }
+//
+//        for (i = 0; i < modLength; i++)
+//            string[stringLength - 1 - i] = '=';
+//        
+//        string[stringLength] = '\0';
+//    }
+//
+//    return string;
+//}
+//
+//const void* pl_Base64_Decode (PlankBase64Ref p, const char* text, PlankL* binaryLengthOut)
+//{
+//    PlankResult result;
+//    PlankL stringLength, binaryLength;
+//    PlankUC* data;
+//    int i, j;
+//    PlankUI sextetA, sextetB, sextetC, sextetD, triple;
+//    const char* table;
+//
+//    result = PlankResult_OK;
+//    data = (PlankUC*)PLANK_NULL;
+//    stringLength = strlen (text);
+//    *binaryLengthOut = 0;
+//    
+//    if ((stringLength & 3) != 0)
+//    {
+//        result = PlankResult_ItemCountInvalid;
+//        return 0;
+//    }
+//    
+//    binaryLength = pl_Base64DecodedLength (stringLength);
+//
+//    if (text[stringLength - 1] == '=') binaryLength--;
+//    if (text[stringLength - 2] == '=') binaryLength--;
+//
+//    result = pl_DynamicArray_SetSize (&p->buffer, binaryLength);
+//
+//    if (result == PlankResult_OK)
+//    {
+//        table = pl_Base64Tables()->decoding;
+//        data = (PlankUC*)pl_DynamicArray_GetArray (&p->buffer);
+//        
+//        for (i = 0, j = 0; i < stringLength;)
+//        {
+//            sextetA = (text[i] == '=') ? 0 : table[text[i]]; ++i;
+//            sextetB = (text[i] == '=') ? 0 : table[text[i]]; ++i;
+//            sextetC = (text[i] == '=') ? 0 : table[text[i]]; ++i;
+//            sextetD = (text[i] == '=') ? 0 : table[text[i]]; ++i;
+//
+//            triple = (sextetA << 3 * 6) + (sextetB << 2 * 6) + (sextetC << 1 * 6) + (sextetD << 0 * 6);
+//
+//            if (j < binaryLength) data[j++] = (triple >> 2 * 8) & 0xFF;
+//            if (j < binaryLength) data[j++] = (triple >> 1 * 8) & 0xFF;
+//            if (j < binaryLength) data[j++] = (triple >> 0 * 8) & 0xFF;
+//        }
+//    }
+//    
+//    *binaryLengthOut = binaryLength;
+//    return data;
+//}
 
 PlankResult pl_Base64_SetBufferSize (PlankBase64Ref p, const PlankL size)
 {
