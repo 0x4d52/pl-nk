@@ -85,7 +85,7 @@ PlankResult pl_Zip_DeInit (PlankZipRef p)
 
 #define PLANKZIP_CHUNK 16384
 
-PlankResult pl_Zip_EncodeFile (PlankZipRef p, PlankFileRef outputZipFile, PlankFileRef inputFile, const int amount)
+PlankResult pl_Zip_DeflateStream (PlankZipRef p, const int amount,  PlankFileRef outputZipFile, PlankFileRef inputFile)
 {
     PlankResult result;
     int ret, flush, outputMode, inputMode, bytesRead;
@@ -168,7 +168,7 @@ earlyExit:
     return result;
 }
 
-PlankResult pl_Zip_DecodeFile (PlankZipRef p, PlankFileRef outputFile, PlankFileRef inputZipFile)
+PlankResult pl_Zip_InflateStream (PlankZipRef p, PlankFileRef outputFile, PlankFileRef inputZipFile)
 {
     PlankResult result;
     int ret, outputMode, inputMode, bytesRead;
@@ -250,14 +250,70 @@ earlyExit:
     return result;
 }
 
-const void* pl_Zip_Encode (PlankZipRef p, const void* data, const PlankL dataLength, const int amount)
+const void* pl_Zip_DeflateData (PlankZipRef p, const int amount, const void* dataInput, const PlankL dataInputLength, PlankL* dataOutputLength)
 {
+    PlankResult result;
+    PlankFile inputStream;
+    PlankFile outputStream;
+    const void* dataOutput;
+    int mode;
     
+    result = PlankResult_OK;
+    dataOutput = (const void*)PLANK_NULL;
+    *dataOutputLength = 0;
+    
+    if ((result = pl_DynamicArray_SetSize (&p->buffer, 0)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Init (&inputStream)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Init (&outputStream)) != PlankResult_OK) goto exit;
+    
+    mode = PLANKFILE_BINARY | PLANKFILE_READ | PLANKFILE_NATIVEENDIAN;
+    if ((result = pl_File_OpenMemory (&inputStream, (void*)dataInput, dataInputLength, mode)) != PlankResult_OK) goto exit;
+    
+    mode = PLANKFILE_BINARY | PLANKFILE_WRITE | PLANKFILE_NATIVEENDIAN;
+    if ((result = pl_File_OpenDynamicArray (&outputStream, &p->buffer, mode)) != PlankResult_OK) goto exit;
+    if ((result = pl_Zip_DeflateStream (p, amount, &outputStream, &inputStream)) != PlankResult_OK) goto exit;
+    
+    dataOutput = (const void*)pl_DynamicArray_GetArray (&p->buffer);
+    *dataOutputLength = pl_DynamicArray_GetSize (&p->buffer);
+    
+exit:
+    pl_File_DeInit (&inputStream);
+    pl_File_DeInit (&outputStream);
+    
+    return dataOutput;
 }
 
-const void* pl_Zip_Decode (PlankZipRef p, const void* text, PlankL* dataLength)
+const void* pl_Zip_InflateData (PlankZipRef p, const void* dataInput, const PlankL dataInputLength, PlankL* dataOutputLength)
 {
+    PlankResult result;
+    PlankFile inputStream;
+    PlankFile outputStream;
+    const void* dataOutput;
+    int mode;
     
+    result = PlankResult_OK;
+    dataOutput = (const void*)PLANK_NULL;
+    *dataOutputLength = 0;
+    
+    if ((result = pl_DynamicArray_SetSize (&p->buffer, 0)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Init (&inputStream)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Init (&outputStream)) != PlankResult_OK) goto exit;
+    
+    mode = PLANKFILE_BINARY | PLANKFILE_READ | PLANKFILE_NATIVEENDIAN;
+    if ((result = pl_File_OpenMemory (&inputStream, (void*)dataInput, dataInputLength, mode)) != PlankResult_OK) goto exit;
+    
+    mode = PLANKFILE_BINARY | PLANKFILE_WRITE | PLANKFILE_NATIVEENDIAN;
+    if ((result = pl_File_OpenDynamicArray (&outputStream, &p->buffer, mode)) != PlankResult_OK) goto exit;
+    if ((result = pl_Zip_InflateStream (p, &outputStream, &inputStream)) != PlankResult_OK) goto exit;
+    
+    dataOutput = (const void*)pl_DynamicArray_GetArray (&p->buffer);
+    *dataOutputLength = pl_DynamicArray_GetSize (&p->buffer);
+    
+exit:
+    pl_File_DeInit (&inputStream);
+    pl_File_DeInit (&outputStream);
+    
+    return dataOutput;
 }
 
 PlankResult pl_Zip_SetBufferSize (PlankZipRef p, const PlankL size)

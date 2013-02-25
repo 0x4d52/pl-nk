@@ -52,10 +52,10 @@ typedef struct PlankZip* PlankZipRef;
 
 PlankResult pl_Zip_Init (PlankZipRef p);
 PlankResult pl_Zip_DeInit (PlankZipRef p);
-PlankResult pl_Zip_EncodeFile (PlankZipRef p, PlankFileRef outputZipFile, PlankFileRef inputFile, const int amount);
-PlankResult pl_Zip_DecodeFile (PlankZipRef p, PlankFileRef outputFile, PlankFileRef inputZipFile);
-const void* pl_Zip_Encode (PlankZipRef p, const void* data, const PlankL dataLength, const int amount);
-const void* pl_Zip_Decode (PlankZipRef p, const void* text, PlankL* dataLength);
+PlankResult pl_Zip_DeflateStream (PlankZipRef p, const int amount, PlankFileRef outputZipFile, PlankFileRef inputFile);
+PlankResult pl_Zip_InflateStream (PlankZipRef p, PlankFileRef outputFile, PlankFileRef inputZipFile);
+const void* pl_Zip_DeflateData (PlankZipRef p, const int amount, const void* dataInput, const PlankL dataInputLength, PlankL* dataOutputLength);
+const void* pl_Zip_InflateData (PlankZipRef p, const void* dataInput, const PlankL dataInputLength, PlankL* dataOutputLength);
 PlankResult pl_Zip_SetBufferSize (PlankZipRef p, const PlankL size);
 PlankResult pl_Zip_PurgeBuffer (PlankZipRef p);
 
