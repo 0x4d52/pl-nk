@@ -573,7 +573,7 @@
 
  Thus Mixer and Unit::mix() mix down multiple channels to a single channel.
  
- [todo: example using the add input to leverage optimised performance]
+ <!-- [todo: example using the add input to leverage optimised performance] -->
  
  Mixing multiple channels is as straightforward but requires the use of arrays
  of units i.e. a Units or UnitArray. Take the following example:
@@ -636,9 +636,9 @@
  rate" might be every 64 samples; this gives a control rate of 44100/64 = 689.0625Hz.
  All channels in Plonk have their own sample rate, thus an audio rate channel might
  run at 44100Hz and a control rate channel might run at a lower frequency. It wouldn't make sense
- to run many different rates but in theory it is possible in Plonk.
+ to run many, many different rates but in theory it is possible in Plonk.
  
- Closeluy linked to sample rate is the processing "block size". Rather than processing one
+ Closely linked to sample rate is the processing "block size". Rather than processing one
  sample from each channel in a Plonk graph before moving onto the next sample, it is common
  to process a block of samples using the same process then apply another process to that 
  (and so on). This makes all sorts of optimisations possible (either manually or by clever
@@ -671,7 +671,8 @@
  mathematical functions) are only called once every control rate 'tick'. In fact,
  the default here is once every block. This is then resampled before being used
  as the modulator in the second Sine in order to remove discontinuities. A quick
- test of this example showed it was 40% faster to use the control rate in this way.
+ test of this example showed it was 40% faster to use the control rate in this way, 
+ rather than using an audio rate modulator that is calling 'm2f' every sample.
  
  [todo]
  

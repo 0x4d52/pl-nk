@@ -38,6 +38,8 @@
 
 #include "../../core/plank_StandardHeader.h"
 #include "plank_JSON.h"
+#include "../base64/plank_Base64.h"
+#include "../zip/plank_Zip.h"
 
 #include "../../../../ext/jansson/hashtable.c"
 #include "../../../../ext/jansson/memory.c"
@@ -49,6 +51,7 @@
 #include "../../../../ext/jansson/load.c"
 #include "../../../../ext/jansson/strbuffer.c"
 #include "../../../../ext/jansson/utf.c"
+
 
 size_t pl_JSONLoadCallback (void *buffer, size_t buflen, void *data)
 {
@@ -153,35 +156,485 @@ exit:
 
 //
 
-//PlankJSONRef pl_JSON_IntBinary (const int value)
-//{
-//    // make it an object { "i" : "9f8"}
-//}
-//
-//PlankJSONRef pl_JSON_FloatBinary (const float value)
-//{
-//    
-//}
-//
-//PlankJSONRef pl_JSON_DoubleBinary (const double value)
-//{
-//    
-//}
-//
-//PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count)
-//{
-//    
-//}
-//
-//PlankJSONRef pl_JSON_FloatArrayBinary (const float* values, const PlankL count)
-//{
-//    
-//}
-//
-//PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count)
-//{
-//    
-//}
+PlankJSONRef pl_JSON_IntBinary (const int value)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    
+    pl_Base64_Init (&b64);
+    j = pl_JSON_Object();
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_INTBINARY, pl_JSON_String (pl_Base64_Encode (&b64, &value, sizeof (value))));
+    pl_Base64_DeInit (&b64);
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_FloatBinary (const float value)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    
+    pl_Base64_Init (&b64);
+    j = pl_JSON_Object();
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_FLOATBINARY, pl_JSON_String (pl_Base64_Encode (&b64, &value, sizeof (value))));
+    pl_Base64_DeInit (&b64);
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_DoubleBinary (const double value)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    
+    pl_Base64_Init (&b64);
+    j = pl_JSON_Object();
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_DOUBLEBINARY, pl_JSON_String (pl_Base64_Encode (&b64, &value, sizeof (value))));
+    pl_Base64_DeInit (&b64);
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    
+    pl_Base64_Init (&b64);
+    j = pl_JSON_Object();
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_INTARRAYBINARY, pl_JSON_String (pl_Base64_Encode (&b64, values, sizeof (values[0]) * count)));
+    pl_Base64_DeInit (&b64);
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_FloatArrayBinary (const float* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    
+    pl_Base64_Init (&b64);
+    j = pl_JSON_Object();
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_FLOATARRAYBINARY, pl_JSON_String (pl_Base64_Encode (&b64, values, sizeof (values[0]) * count)));
+    pl_Base64_DeInit (&b64);
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    
+    pl_Base64_Init (&b64);
+    j = pl_JSON_Object();
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_DOUBLEARRAYBINARY, pl_JSON_String (pl_Base64_Encode (&b64, values, sizeof (values[0]) * count)));
+    pl_Base64_DeInit (&b64);
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_IntArrayCompressed (const int* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    PlankZip z;
+    PlankL zlength;
+    const void* zdata;
+    const char* text;
+    
+    pl_Base64_Init (&b64);
+    pl_Zip_Init (&z);
+    
+    j = pl_JSON_Object();
+    zdata = pl_Zip_DeflateData(&z, PLANK_JSON_COMPRESSIONLEVEL, values, sizeof (values[0]) * count, &zlength);
+    text = pl_Base64_Encode (&b64, zdata, zlength);
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_INTARRAYCOMPRESSED, pl_JSON_String (text));
+    pl_Base64_DeInit (&b64);
+    pl_Zip_DeInit (&z);
+
+    return j;
+}
+
+PlankJSONRef pl_JSON_FloatArrayCompressed (const float* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    PlankZip z;
+    PlankL zlength;
+    const void* zdata;
+    const char* text;
+    
+    pl_Base64_Init (&b64);
+    pl_Zip_Init (&z);
+    
+    j = pl_JSON_Object();
+    zdata = pl_Zip_DeflateData(&z, PLANK_JSON_COMPRESSIONLEVEL, values, sizeof (values[0]) * count, &zlength);
+    text = pl_Base64_Encode (&b64, zdata, zlength);
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_FLOATARRAYCOMPRESSED, pl_JSON_String (text));
+    pl_Base64_DeInit (&b64);
+    pl_Zip_DeInit (&z);
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_DoubleArrayCompressed (const double* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankBase64 b64;
+    PlankZip z;
+    PlankL zlength;
+    const void* zdata;
+    const char* text;
+    
+    pl_Base64_Init (&b64);
+    pl_Zip_Init (&z);
+    
+    j = pl_JSON_Object();
+    zdata = pl_Zip_DeflateData(&z, PLANK_JSON_COMPRESSIONLEVEL, values, sizeof (values[0]) * count, &zlength);
+    text = pl_Base64_Encode (&b64, zdata, zlength);
+    pl_JSON_ObjectPutKey (j, PLANK_JSON_DOUBLEARRAYCOMPRESSED, pl_JSON_String (text));
+    pl_Base64_DeInit (&b64);
+    pl_Zip_DeInit (&z);
+    
+    return j;
+}
+
+int pl_JSON_IntEncodedGet (PlankJSONRef p)
+{
+    PlankBase64 b64;
+    PlankL binaryLength;
+    int value;
+    const char* key;
+    const void* data;
+
+    value = 0;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    
+    if (key && (strcmp (key, PLANK_JSON_INTBINARY) == 0))
+    {
+        p = pl_JSON_ObjectAtKey (p, key);
+        
+        if (pl_JSON_IsString (p))
+        {
+            pl_Base64_Init (&b64);
+            
+            data = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &binaryLength);
+            
+            if ((data != 0) && (binaryLength == sizeof (value)))
+                value = *(const int*)data;
+            
+            pl_Base64_DeInit (&b64);
+        }
+    }
+
+    return value;
+}
+
+float pl_JSON_FloatEncodedGet (PlankJSONRef p)
+{
+    PlankBase64 b64;
+    PlankL binaryLength;
+    float value;
+    const char* key;
+    const void* data;
+    
+    value = 0;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    
+    if (key && (strcmp (key, PLANK_JSON_FLOATBINARY) == 0))
+    {
+        p = pl_JSON_ObjectAtKey (p, key);
+        
+        if (pl_JSON_IsString (p))
+        {
+            pl_Base64_Init (&b64);
+            
+            data = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &binaryLength);
+            
+            if ((data != 0) && (binaryLength == sizeof (value)))
+                value = *(const float*)data;
+            
+            pl_Base64_DeInit (&b64);
+        }
+    }
+    
+    return value;
+}
+
+double pl_JSON_DoubleEncodedGet (PlankJSONRef p)
+{
+    PlankBase64 b64;
+    PlankL binaryLength;
+    double value;
+    const char* key;
+    const void* data;
+    
+    value = 0;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    
+    if (key && (strcmp (key, PLANK_JSON_DOUBLEBINARY) == 0))
+    {
+        p = pl_JSON_ObjectAtKey (p, key);
+        
+        if (pl_JSON_IsString (p))
+        {
+            pl_Base64_Init (&b64);
+            
+            data = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &binaryLength);
+            
+            if ((data != 0) && (binaryLength == sizeof (value)))
+                value = *(const double*)data;
+            
+            pl_Base64_DeInit (&b64);
+        }
+    }
+    
+    return value;
+}
+
+PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
+{
+    PlankResult result;
+    PlankBase64 b64;
+    PlankZip z;
+    PlankL binaryLength, zlength;
+    const char* key;
+    const void* data;
+    const void* zdata;
+    PlankUL itemSize, sz;
+    
+    result = PlankResult_OK;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    sz = sizeof (int);
+    
+    pl_Base64_Init (&b64);
+    pl_Zip_Init (&z);
+
+    if (key)
+    {
+        data = 0;
+        binaryLength = 0;
+        
+        if (strcmp (key, PLANK_JSON_INTARRAYCOMPRESSED) == 0)
+        {
+            p = pl_JSON_ObjectAtKey (p, key);
+
+            if (pl_JSON_IsString (p))
+            {
+                zdata = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &zlength);
+                data = pl_Zip_InflateData (&z, zdata, zlength, &binaryLength);
+            }
+        }
+        else if (strcmp (key, PLANK_JSON_INTARRAYBINARY) == 0)
+        {
+            p = pl_JSON_ObjectAtKey (p, key);
+            
+            if (pl_JSON_IsString (p))
+                data = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &binaryLength);
+        }
+        
+        if ((data != 0) && (((PlankUL)binaryLength % sz) == 0))
+        {
+            itemSize = pl_DynamicArray_GetItemSize (array);
+            
+            if (itemSize == 0)
+            {
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (array, sz, binaryLength / sz, PLANK_FALSE)) != PlankResult_OK)
+                    goto exit;
+            }
+            else
+            {
+                if ((result = pl_DynamicArray_SetSize (array, binaryLength / itemSize)) != PlankResult_OK)
+                    goto exit;
+            }
+            
+            result = pl_MemoryCopy (pl_DynamicArray_GetArray (array), data, binaryLength);
+        }
+    }
+    
+exit:
+    pl_Zip_DeInit (&z);
+    pl_Base64_DeInit (&b64);
+
+    return result;
+}
+
+PlankResult pl_JSON_FloatArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
+{
+    PlankResult result;
+    PlankBase64 b64;
+    PlankZip z;
+    PlankL binaryLength, zlength;
+    const char* key;
+    const void* data;
+    const void* zdata;
+    PlankUL itemSize, sz;
+    
+    result = PlankResult_OK;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    sz = sizeof (float);
+    
+    pl_Base64_Init (&b64);
+    pl_Zip_Init (&z);
+    
+    if (key)
+    {
+        data = 0;
+        binaryLength = 0;
+        
+        if (strcmp (key, PLANK_JSON_FLOATARRAYCOMPRESSED) == 0)
+        {
+            p = pl_JSON_ObjectAtKey (p, key);
+            
+            if (pl_JSON_IsString (p))
+            {
+                zdata = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &zlength);
+                data = pl_Zip_InflateData (&z, zdata, zlength, &binaryLength);
+            }
+        }
+        else if (strcmp (key, PLANK_JSON_FLOATARRAYBINARY) == 0)
+        {
+            p = pl_JSON_ObjectAtKey (p, key);
+            
+            if (pl_JSON_IsString (p))
+                data = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &binaryLength);
+        }
+        
+        if ((data != 0) && (((PlankUL)binaryLength % sz) == 0))
+        {
+            itemSize = pl_DynamicArray_GetItemSize (array);
+            
+            if (itemSize == 0)
+            {
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (array, sz, binaryLength / sz, PLANK_FALSE)) != PlankResult_OK)
+                    goto exit;
+            }
+            else
+            {
+                if ((result = pl_DynamicArray_SetSize (array, binaryLength / itemSize)) != PlankResult_OK)
+                    goto exit;
+            }
+            
+            result = pl_MemoryCopy (pl_DynamicArray_GetArray (array), data, binaryLength);
+        }
+    }
+    
+exit:
+    pl_Zip_DeInit (&z);
+    pl_Base64_DeInit (&b64);
+    
+    return result;
+}
+
+PlankResult pl_JSON_DoubleArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
+{
+    PlankResult result;
+    PlankBase64 b64;
+    PlankZip z;
+    PlankL binaryLength, zlength;
+    const char* key;
+    const void* data;
+    const void* zdata;
+    PlankUL itemSize, sz;
+    
+    result = PlankResult_OK;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    sz = sizeof (double);
+    
+    pl_Base64_Init (&b64);
+    pl_Zip_Init (&z);
+    
+    if (key)
+    {
+        data = 0;
+        binaryLength = 0;
+        
+        if (strcmp (key, PLANK_JSON_DOUBLEARRAYCOMPRESSED) == 0)
+        {
+            p = pl_JSON_ObjectAtKey (p, key);
+            
+            if (pl_JSON_IsString (p))
+            {
+                zdata = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &zlength);
+                data = pl_Zip_InflateData (&z, zdata, zlength, &binaryLength);
+            }
+        }
+        else if (strcmp (key, PLANK_JSON_DOUBLEARRAYBINARY) == 0)
+        {
+            p = pl_JSON_ObjectAtKey (p, key);
+            
+            if (pl_JSON_IsString (p))
+                data = pl_Base64_Decode (&b64, pl_JSON_StringGet (p), &binaryLength);
+        }
+        
+        if ((data != 0) && (((PlankUL)binaryLength % sz) == 0))
+        {
+            itemSize = pl_DynamicArray_GetItemSize (array);
+            
+            if (itemSize == 0)
+            {
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (array, sz, binaryLength / sz, PLANK_FALSE)) != PlankResult_OK)
+                    goto exit;
+            }
+            else
+            {
+                if ((result = pl_DynamicArray_SetSize (array, binaryLength / itemSize)) != PlankResult_OK)
+                    goto exit;
+            }
+            
+            result = pl_MemoryCopy (pl_DynamicArray_GetArray (array), data, binaryLength);
+        }
+    }
+    
+exit:
+    pl_Zip_DeInit (&z);
+    pl_Base64_DeInit (&b64);
+    
+    return result;
+}
+
+PlankB pl_JSON_IsIntEncoded (PlankJSONRef p)
+{
+    const char* key;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    return key && (strcmp (key, PLANK_JSON_INTBINARY) == 0);
+}
+
+PlankB pl_JSON_IsFloatEncoded (PlankJSONRef p)
+{
+    const char* key;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    return key && (strcmp (key, PLANK_JSON_FLOATBINARY) == 0);
+}
+
+PlankB pl_JSON_IsDoubleEncoded (PlankJSONRef p)
+{
+    const char* key;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    return key && (strcmp (key, PLANK_JSON_DOUBLEBINARY) == 0);
+}
+
+PlankB pl_JSON_IsIntArrayEncoded (PlankJSONRef p)
+{
+    const char* key;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    return key && ((strcmp (key, PLANK_JSON_INTARRAYBINARY) == 0) && (strcmp (key, PLANK_JSON_INTARRAYCOMPRESSED) == 0));
+}
+
+PlankB pl_JSON_IsFloatArrayEncoded (PlankJSONRef p)
+{
+    const char* key;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    return key && ((strcmp (key, PLANK_JSON_FLOATARRAYBINARY) == 0) && (strcmp (key, PLANK_JSON_FLOATARRAYCOMPRESSED) == 0));
+}
+
+PlankB pl_JSON_IsDoubleArrayEncoded (PlankJSONRef p)
+{
+    const char* key;
+    key = json_object_iter_key (json_object_iter ((json_t*)p));
+    return key && ((strcmp (key, PLANK_JSON_DOUBLEARRAYBINARY) == 0) && (strcmp (key, PLANK_JSON_DOUBLEARRAYCOMPRESSED) == 0));
+}
 
 PlankJSONRef pl_JSON_VersionString (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro)
 {

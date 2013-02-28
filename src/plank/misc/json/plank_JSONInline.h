@@ -103,22 +103,22 @@ static inline PlankB pl_JSON_IsString (PlankJSONRef p)
 
 static inline PlankB pl_JSON_IsInt(PlankJSONRef p)
 {
-    return json_is_integer ((json_t*)p);
+    return json_is_integer ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsIntEncoded(p);
 }
 
 static inline PlankB pl_JSON_IsFloat (PlankJSONRef p)
 {
-    return json_is_real ((json_t*)p);
+    return json_is_real ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsFloatEncoded (p);
 }
 
 static inline PlankB pl_JSON_IsDouble (PlankJSONRef p)
 {
-    return json_is_real ((json_t*)p);
+    return json_is_real ((json_t*)p) ? PLANK_TRUE : pl_JSON_IsDoubleEncoded (p);
 }
 
 static inline PlankB pl_JSON_IsBool (PlankJSONRef p)
 {
-    return json_is_real ((json_t*)p);
+    return json_is_boolean ((json_t*)p);
 }
 
 static inline PlankB pl_JSON_IsNull (PlankJSONRef p)
@@ -173,17 +173,50 @@ static inline void pl_JSON_ArrayAppend (PlankJSONRef p, const PlankJSONRef value
 
 static inline double pl_JSON_DoubleGet (PlankJSONRef p)
 {
-    return json_real_value ((json_t*)p);
+    double value = 0.0;
+    
+    if (json_is_real ((json_t*)p))
+    {
+        value = json_real_value ((json_t*)p);
+    }
+    else if (pl_JSON_ObjectGetSize (p) == 1)
+    {
+        value = pl_JSON_DoubleEncodedGet (p);
+    }
+    
+    return value;
 }
 
 static inline float pl_JSON_FloatGet (PlankJSONRef p)
 {
-    return (float)json_real_value ((json_t*)p);
+    float value = 0.f;
+    
+    if (json_is_real ((json_t*)p))
+    {
+        value = (float)json_real_value ((json_t*)p);
+    }
+    else if (pl_JSON_ObjectGetSize (p) == 1)
+    {
+        value = pl_JSON_FloatEncodedGet (p);
+    }
+    
+    return value;
 }
 
 static inline int pl_JSON_IntGet (PlankJSONRef p)
 {
-    return json_integer_value ((json_t*)p);
+    int value = 0;
+    
+    if (json_is_integer ((json_t*)p))
+    {
+        value = json_integer_value ((json_t*)p);
+    }
+    else if (pl_JSON_ObjectGetSize (p) == 1)
+    {
+        value = pl_JSON_IntEncodedGet (p);
+    }
+    
+    return value;
 }
 
 static inline const char* pl_JSON_StringGet (PlankJSONRef p)

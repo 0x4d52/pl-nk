@@ -43,9 +43,6 @@
 #include "../../files/plank_File.h"
 #include "../../../../ext/zlib/zlib.h"
 
-//#include "../../../../ext/minizip/zip.h"
-//#include "../../../../ext/minizip/unzip.h"
-
 PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankZip* PlankZipRef;

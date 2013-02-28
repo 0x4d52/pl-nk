@@ -40,18 +40,20 @@
 #define PLANK_JSON_H
 
 #include "../../files/plank_File.h"
+    
+#define PLANK_JSON_TYPE                     "type"  ///< Plank's custom JSON object "type" key
+#define PLANK_JSON_VERSION                  "vers"  ///< Plank's custom JSON object "versions" key
+#define PLANK_JSON_FLOATBINARY              "Bf"    ///< Plank's custom JSON binary float, - Base64 encoded
+#define PLANK_JSON_INTBINARY                "Bi"    ///< Plank's custom JSON binary int, - Base64 encoded
+#define PLANK_JSON_DOUBLEBINARY             "Bd"    ///< Plank's custom JSON binary double, - Base64 encoded
+#define PLANK_JSON_FLOATARRAYBINARY         "Bf[]"  ///< Plank's custom JSON binary float array, - Base64 encoded
+#define PLANK_JSON_INTARRAYBINARY           "Bi[]"  ///< Plank's custom JSON binary int array, - Base64 encoded
+#define PLANK_JSON_DOUBLEARRAYBINARY        "Bd[]"  ///< Plank's custom JSON binary double array, - Base64 encoded
+#define PLANK_JSON_FLOATARRAYCOMPRESSED     "Zf[]"  ///< Plank's custom JSON compressed float array, - deflated, then Base64 encoded
+#define PLANK_JSON_INTARRAYCOMPRESSED       "Zi[]"  ///< Plank's custom JSON compressed int array, - deflated, then Base64 encoded
+#define PLANK_JSON_DOUBLEARRAYCOMPRESSED    "Zd[]"  ///< Plank's custom JSON compressed double array, - deflated, then Base64 encoded
 
-#define PLANK_JSON_TYPE                 "type"
-#define PLANK_JSON_VERSION              "vers"
-#define PLANK_JSON_FLOATBINARY          "Bf"
-#define PLANK_JSON_INTBINARY            "Bi"
-#define PLANK_JSON_DOUBLEBINARY         "Bd"
-#define PLANK_JSON_FLOATARRAYBINARY     "Bf[]"
-#define PLANK_JSON_INTARRAYBINARY       "Bi[]"
-#define PLANK_JSON_DOUBLEARRAYBINARY    "Bd[]"
-#define PLANK_JSON_FLOATARRAYZIP        "Zf[]"
-#define PLANK_JSON_INTARRAYZIP          "Zi[]"
-#define PLANK_JSON_DOUBLEARRAYZIP       "Zd[]"
+#define PLANK_JSON_COMPRESSIONLEVEL         9
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -98,12 +100,31 @@ static const char* pl_JSON_StringGet (PlankJSONRef p);
 
 //
 
-//PlankJSONRef pl_JSON_IntBinary (const int value);
-//PlankJSONRef pl_JSON_FloatBinary (const float value);
-//PlankJSONRef pl_JSON_DoubleBinary (const double value);
-//PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count);
-//PlankJSONRef pl_JSON_FloatArrayBinary (const float* values, const PlankL count);
-//PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count);
+PlankJSONRef pl_JSON_IntBinary (const int value);
+PlankJSONRef pl_JSON_FloatBinary (const float value);
+PlankJSONRef pl_JSON_DoubleBinary (const double value);
+PlankJSONRef pl_JSON_IntArrayBinary (const int* values, const PlankL count);
+PlankJSONRef pl_JSON_FloatArrayBinary (const float* values, const PlankL count);
+PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count);
+PlankJSONRef pl_JSON_IntArrayCompressed (const int* values, const PlankL count);
+PlankJSONRef pl_JSON_FloatArrayCompressed (const float* values, const PlankL count);
+PlankJSONRef pl_JSON_DoubleArrayCompressed (const double* values, const PlankL count);
+
+
+PlankB pl_JSON_IsIntEncoded (PlankJSONRef p);
+PlankB pl_JSON_IsFloatEncoded (PlankJSONRef p);
+PlankB pl_JSON_IsDoubleEncoded (PlankJSONRef p);
+PlankB pl_JSON_IsIntArrayEncoded (PlankJSONRef p);
+PlankB pl_JSON_IsFloatArrayEncoded (PlankJSONRef p);
+PlankB pl_JSON_IsDoubleArrayEncoded (PlankJSONRef p);
+
+
+int pl_JSON_IntEncodedGet (PlankJSONRef p);
+float pl_JSON_FloatEncodedGet (PlankJSONRef p);
+double pl_JSON_DoubleEncodedGet (PlankJSONRef p);
+PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array);
+PlankResult pl_JSON_FloatArrayGet (PlankJSONRef p, PlankDynamicArrayRef array);
+PlankResult pl_JSON_DoubleArrayGet (PlankJSONRef p, PlankDynamicArrayRef array);
 
 
 PlankJSONRef pl_JSON_VersionString (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro);
