@@ -55,6 +55,11 @@
 
 #define PLANK_JSON_COMPRESSIONLEVEL         9
 
+/** Encoded binary/compressed string length.
+ Encoded binary/compressed strings longer that this will be divided into chunks 
+ this size and put into a JSON array. This must be a multiple of 4. */
+#define PLANK_JSON_ENCODEDSTRINGLENGTH      16
+
 PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankJSON* PlankJSONRef;
@@ -125,6 +130,12 @@ double pl_JSON_DoubleEncodedGet (PlankJSONRef p);
 PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array);
 PlankResult pl_JSON_FloatArrayGet (PlankJSONRef p, PlankDynamicArrayRef array);
 PlankResult pl_JSON_DoubleArrayGet (PlankJSONRef p, PlankDynamicArrayRef array);
+
+/** Split a long string into an array of substrings. 
+ If the array is less than or equal to count a JSON string is returned,
+ otherwise a JSON array of JSON strings is returned split into chunks
+ of count characters (thus the last string may be smaller). */
+PlankJSONRef pl_JSON_StringSplit (const char* string, const PlankL count);
 
 
 PlankJSONRef pl_JSON_VersionString (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro);
