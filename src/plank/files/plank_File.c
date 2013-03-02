@@ -36,6 +36,7 @@
  -------------------------------------------------------------------------------
  */
 
+#include <sys/stat.h>
 #include "../core/plank_StandardHeader.h"
 #include "plank_File.h"
 #include "../maths/plank_Maths.h"
@@ -488,75 +489,94 @@ PlankResult pl_FileErase (const char* filepath)
     return PlankResult_OK;
 }
 
+PlankB pl_FileExists (const char* filepath, const PlankB isDirectory)
+{
+    struct stat st;
+    pl_MemoryZero   (&st, sizeof (st));
+    stat (filepath, &st);
+    return isDirectory ? (st.st_mode & S_IFDIR ? PLANK_TRUE : PLANK_FALSE) : (st.st_mode & S_IFREG ? PLANK_TRUE : PLANK_FALSE);
+}
 
-// #include <sstream>
-// #include <sys/stat.h>
-//
-// // for windows mkdir
-// #ifdef _WIN32
-// #include <direct.h>
-// #endif
-// 
-// namespace utils
-// {
-// /**
-// * Checks if a folder exists
-// * @param foldername path to the folder to check.
-// * @return true if the folder exists, false otherwise.
-// */
-//bool folder_exists(std::string foldername)
-//{
-//    struct stat st;
-//    stat(foldername.c_str(), &st);
-//    return st.st_mode & S_IFDIR;
-//}
-//
-///**
-// * Portable wrapper for mkdir. Internally used by mkdir()
-// * @param[in] path the full path of the directory to create.
-// * @return zero on success, otherwise -1.
-// */
-//int _mkdir(const char *path)
-//{
-//#ifdef _WIN32
-//    return ::_mkdir(path);
-//#else
-//#if _POSIX_C_SOURCE
-//    return ::mkdir(path);
-//#else
-//    return ::mkdir(path, 0755); // not sure if this works on mac
-//#endif
-//#endif
-//}
-//
-///**
-// * Recursive, portable wrapper for mkdir.
-// * @param[in] path the full path of the directory to create.
-// * @return zero on success, otherwise -1.
-// */
-//int mkdir(const char *path)
-//{
-//    std::string current_level = "";
-//    std::string level;
-//    std::stringstream ss(path);
-//    
-//    // split path using slash as a separator
-//    while (std::getline(ss, level, '/'))
-//    {
-//        current_level += level; // append folder to the current level
-//        
-//        // create current level
-//        if (!folder_exists(current_level) && _mkdir(current_level.c_str()) != 0)
-//            return -1;
-//        
-//        current_level += "/"; // don't forget to append a slash
-//    }
-//    
-//    return 0;
-//}
-//}
+static int pl_mkdir (const char* filepath)
+{
+#if (defined (_WIN32) || defined (_WIN64) || defined (WIN64))
+    return _mkdir (filepath);
+#else
+# if _POSIX_C_SOURCE
+    return mkdir (filepath);
+# else
+    return mkdir (filepath, 0755); // not sure if this works on mac
+# endif
+#endif
+}
 
+PlankResult pl_FileMakeDirectory (const char* filepath)
+{
+    PlankResult result;
+    PlankDynamicArray pathBuild;
+    PlankFile pathBuildStream;
+    PlankFile pathSourceStream;
+    PlankL pathLength;
+    PlankC chr;
+    const char* currentLevel;
+    
+    result = PlankResult_OK;
+    
+    pl_File_Init (&pathBuildStream);
+    pl_File_Init (&pathSourceStream);
+    
+    pathLength = strlen (filepath);
 
+    if ((result = pl_DynamicArray_InitWithItemSizeAndCapacity (&pathBuild, 1, pathLength + 1)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_Zero (&pathBuild)) != PlankResult_OK) goto exit;
+    
+    if ((pathLength < 1) || (pathLength >= PLANKPATH_MAXLENGTH))
+    {
+        result = PlankResult_FilePathInvalid;
+        goto exit;
+    }
+    
+    if (filepath[pathLength - 1] != '/')
+    {
+        result = PlankResult_FilePathInvalid;
+        goto exit;
+    }
+    
+    if ((result = pl_File_OpenMemory (&pathSourceStream, (void*)filepath, pathLength, PLANKFILE_READ)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_OpenDynamicArray (&pathBuildStream, &pathBuild, PLANKFILE_WRITE)) != PlankResult_OK) goto exit;
+    
+    while ((result = pl_File_ReadC (&pathSourceStream, &chr)) == PlankResult_OK)
+    {
+        if ((result = pl_File_WriteC (&pathBuildStream, chr)) != PlankResult_OK) goto exit;
+        
+        if (chr == '/')
+        {
+            currentLevel = (const char*)pl_DynamicArray_GetArray (&pathBuild);
+            
+            if (!pl_FileExists (currentLevel, PLANK_TRUE))
+            {
+                if (pl_mkdir (currentLevel) != 0)
+                {
+                    result = PlankResult_FileMakeDirectoryFailed;
+                    goto exit;
+                }
+            }
+        }
+    }
+    
+    if (result != PlankResult_FileEOF)
+    {
+        result = PlankResult_FileMakeDirectoryFailed;
+        goto exit;
+    }
+    
+exit:
+    pl_File_DeInit (&pathSourceStream);
+    pl_File_DeInit (&pathBuildStream);
+    pl_DynamicArray_DeInit (&pathBuild);
+    
+    return result;
+}
 
 // class
 
@@ -692,7 +712,7 @@ PlankResult pl_File_Open (PlankFileRef p, const char* filepath, const int mode)
     if ((filepath == 0) || (filepath[0] == 0))
         return PlankResult_FilePathInvalid;
     
-    strncpy (p->path, filepath, PLANKFILE_FILENAMEMAX);
+    strncpy (p->path, filepath, PLANKPATH_MAXLENGTH);
     
     p->mode = mode & PLANKFILE_MASK;    // without the big endian flag
     result = (p->openFunction) (p);

@@ -58,7 +58,7 @@
 /** Encoded binary/compressed string length.
  Encoded binary/compressed strings longer that this will be divided into chunks 
  this size and put into a JSON array. This must be a multiple of 4. */
-#define PLANK_JSON_ENCODEDSTRINGLENGTH      16
+#define PLANK_JSON_ENCODEDSTRINGLENGTH      80
 
 PLANK_BEGIN_C_LINKAGE
 

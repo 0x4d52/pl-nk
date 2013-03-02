@@ -40,6 +40,7 @@
 #define PLANK_TEXT_H
 
 #include "../containers/plank_DynamicArray.h"
+#include "plank_Path.h"
 
 PLANK_BEGIN_C_LINKAGE
 
@@ -84,13 +85,10 @@ typedef struct PlankFile* PlankFileRef;
 #define PLANKFILE_DYNAMICARRAYOWNED     (1 << 6)
 
 /** Mode mask with all the mode flags except PLANKFILE_BIGENDIAN. */
-#define PLANKFILE_MASK          (PLANKFILE_READ | PLANKFILE_WRITE | PLANKFILE_BINARY | PLANKFILE_APPEND | PLANKFILE_NEW)
+#define PLANKFILE_MASK                  (PLANKFILE_READ | PLANKFILE_WRITE | PLANKFILE_BINARY | PLANKFILE_APPEND | PLANKFILE_NEW)
 
 /** Mode mask with all the mode flags. */
-#define PLANKFILE_ALL           (PLANKFILE_MASK | PLANKFILE_BIGENDIAN)
-
-/** The maximum length of the file path. */
-#define PLANKFILE_FILENAMEMAX   FILENAME_MAX
+#define PLANKFILE_ALL                   (PLANKFILE_MASK | PLANKFILE_BIGENDIAN)
 
 #define PLANKFILE_STATUS_EOF                1
 #define PLANKFILE_STATUS_ISPOSITIONABLE     2
@@ -107,6 +105,11 @@ typedef struct PlankFile* PlankFileRef;
 
 /** Delete a file with the given path form the filesystem. */
 PlankResult pl_FileErase (const char* filepath);
+
+PlankB pl_FileExists (const char* filepath, const PlankB isDirectory);
+PlankResult pl_FileMakeDirectory (const char* filepath);
+
+
 
 typedef PlankResult (*PlankFileOpenFunction)(PlankFileRef);
 typedef PlankResult (*PlankFileCloseFunction)(PlankFileRef);
@@ -563,7 +566,7 @@ typedef struct PlankFile
     PlankUS type;
     PlankLL size;
     PlankLL position;
-    char path[PLANKFILE_FILENAMEMAX];
+    char path[PLANKPATH_MAXLENGTH];
         
     PlankFileOpenFunction           openFunction;
     PlankFileCloseFunction          closeFunction;

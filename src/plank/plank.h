@@ -87,6 +87,7 @@
 #include "misc/base64/plank_Base64.h"
 #include "misc/zip/plank_Zip.h"
 
+#include "files/plank_Path.h"
 #include "files/plank_File.h"
 #include "files/plank_IffFileReader.h"
 #include "files/plank_IffFileWriter.h"

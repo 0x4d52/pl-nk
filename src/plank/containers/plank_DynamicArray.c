@@ -225,12 +225,12 @@ exit:
     return result;
 }
 
-PlankResult pl_DynamicArray_AddItems (PlankDynamicArrayRef p, PlankConstantP items, const PlankL numItems)
+static inline PlankResult pl_DynamicArray_AddItemsInternal (PlankDynamicArrayRef p, PlankConstantP items, const PlankL numItems, const PlankB isText)
 {
     PlankResult result = PlankResult_OK;
     PlankL index;
     
-    index = p->usedItems;
+    index = isText ? p->usedItems - 1 : p->usedItems;
     p->usedItems += numItems;
     
     if (p->usedItems > p->allocatedItems)
@@ -245,6 +245,12 @@ PlankResult pl_DynamicArray_AddItems (PlankDynamicArrayRef p, PlankConstantP ite
     
 exit:
     return result;
+}
+
+
+PlankResult pl_DynamicArray_AddItems (PlankDynamicArrayRef p, PlankConstantP items, const PlankL numItems)
+{
+    return pl_DynamicArray_AddItemsInternal (p, items, numItems, PLANK_FALSE);
 }
 
 PlankResult pl_DynamicArray_SetItem (PlankDynamicArrayRef p, const PlankL index, const PlankP item)
@@ -324,7 +330,7 @@ PlankResult pl_DynamicArray_AppendText (PlankDynamicArrayRef p, const char* text
     
     length = strlen (text);
     
-    if ((result = pl_DynamicArray_AddItems (p, text, length + 1)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_AddItemsInternal (p, text, length + 1, PLANK_TRUE)) != PlankResult_OK) goto exit;
 
 exit:
     return result;

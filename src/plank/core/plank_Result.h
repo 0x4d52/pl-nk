@@ -51,17 +51,18 @@ enum PlankResultIdentifiers
     PlankResult_NullPointerError,   ///< A null pointer was passed to a function where this is invalid.
     PlankResult_ArrayParameterError, ///< There was an error in a parameter to an array function.
     
-    PlankResult_FileModeInvalid,    ///< The requested file mode is invalid.
-    PlankResult_FileOpenFailed,     ///< A request to open a file failed for some reason.
-    PlankResult_FileCloseFailed,    ///< A request to close a file failed for some reason
-    PlankResult_FileAlreadyOpen,    ///< A request to open a file failed because a file is already open.
-    PlankResult_FileInvalid,        ///< A file handle is invalid, probably null.
-    PlankResult_FilePathInvalid,    ///< The file path passed to the function is invalid.
-    PlankResult_FileReadError,      ///< A file read operation failed with an error.
-    PlankResult_FileWriteError,     ///< A file write operation failed with an error.
-    PlankResult_FileEOF,            ///< A file position pointer hit the end of the file.
-    PlankResult_FileSeekFailed,     ///< The file failed to seek.
-    PlankResult_FileRemoveFailed,   ///< A request to remove a file from the filesystem failed.
+    PlankResult_FileModeInvalid,            ///< The requested file mode is invalid.
+    PlankResult_FileOpenFailed,             ///< A request to open a file failed for some reason.
+    PlankResult_FileCloseFailed,            ///< A request to close a file failed for some reason
+    PlankResult_FileAlreadyOpen,            ///< A request to open a file failed because a file is already open.
+    PlankResult_FileInvalid,                ///< A file handle is invalid, probably null.
+    PlankResult_FilePathInvalid,            ///< The file path passed to the function is invalid.
+    PlankResult_FileReadError,              ///< A file read operation failed with an error.
+    PlankResult_FileWriteError,             ///< A file write operation failed with an error.
+    PlankResult_FileEOF,                    ///< A file position pointer hit the end of the file.
+    PlankResult_FileSeekFailed,             ///< The file failed to seek.
+    PlankResult_FileRemoveFailed,           ///< A request to remove a file from the filesystem failed.
+    PlankResult_FileMakeDirectoryFailed,    ///< Failed to make a directory.
     
     PlankResult_IffFileReaderChunkNotFound,                   ///< The specified chunk ID was not found.
     

@@ -62,6 +62,7 @@ const char* pl_ResultString (PlankResult result)
         "File end-of-file reached",             //PlankResult_FileEOF,
         "File seek failed",                     //PlankResult_FileSeekFailed,
         "File remove failed",                   //PlankResult_FileRemoveFailed
+        "Failed to make a directory",           //PlankResult_FileMakeDirectoryFailed
         
         "The specified chunk ID was not found",                                 //PlankResult_IffFileReaderChunkNotFound
         

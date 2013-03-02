@@ -106,10 +106,10 @@
     #include <process.h>
     #include <float.h>
     #include <intrin.h>
+    #include <direct.h>
 
 	#undef min
 	#undef max
-
 
 	#pragma warning(disable : 4244) // loss of precision
 	#pragma warning(disable : 4996) // security of snprintf etc
