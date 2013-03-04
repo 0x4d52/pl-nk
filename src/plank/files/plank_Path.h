@@ -44,6 +44,14 @@
 /** The maximum length of the file path. */
 #define PLANKPATH_MAXLENGTH           FILENAME_MAX
 
+#define PLANKPATH_SYSTEMUSERHOME            (1)
+#define PLANKPATH_SYSTEMUSERDOCUMENTS       (2)
+#define PLANKPATH_SYSTEMUSERDESKTOP         (3)
+#define PLANKPATH_SYSTEMUSERAPPDATA         (4)
+#define PLANKPATH_SYSTEMAPPDATA             (5)
+#define PLANKPATH_SYSTEMAPP                 (7)
+#define PLANKPATH_SYSTEMTEMP                (8)
+
 PLANK_BEGIN_C_LINKAGE
 
 typedef struct PlankPath* PlankPathRef;
@@ -53,6 +61,7 @@ PlankResult pl_Path_InitPath (PlankPathRef p, const char* path);
 PlankResult pl_Path_InitParent (PlankPathRef p, PlankPathRef fullpath);
 PlankResult pl_Path_InitChild (PlankPathRef p, PlankPathRef parentpath, const char* child);
 PlankResult pl_Path_InitSibling (PlankPathRef p, PlankPathRef siblingpath, const char* child);
+PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child);
 PlankResult pl_Path_DeInit (PlankPathRef p);
 
 PlankResult pl_Path_Set (PlankPathRef p, const char* path);

@@ -231,7 +231,7 @@ static inline PlankResult pl_DynamicArray_AddItemsInternal (PlankDynamicArrayRef
     PlankL index;
     
     index = isText ? p->usedItems - 1 : p->usedItems;
-    p->usedItems += numItems;
+    p->usedItems += isText ? numItems - 1 : numItems;
     
     if (p->usedItems > p->allocatedItems)
     {

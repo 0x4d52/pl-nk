@@ -39,6 +39,18 @@
 #include "../core/plank_StandardHeader.h"
 #include "plank_Path.h"
 
+#if PLANK_MAC
+# include <pwd.h>
+//# include <dlfcn.h>
+#elif PLANK_IOS
+//
+#elif PLANK_WIN
+//
+#else
+//
+#endif
+
+
 PlankResult pl_Path_Init (PlankPathRef p)
 {
     if (p == PLANK_NULL)
@@ -68,7 +80,7 @@ PlankResult pl_Path_InitParent (PlankPathRef p, PlankPathRef full)
     
     result = PlankResult_OK;
     
-    if ((p == PLANK_NULL) || (fullpath == PLANK_NULL))
+    if ((p == PLANK_NULL) || (full == PLANK_NULL))
     {
         result = PlankResult_MemoryError;
         goto exit;
@@ -155,6 +167,247 @@ earlyExit:
 exit:
     return result;
 }
+
+#if PLANK_MAC
+
+static const char* pl_Path_MacSystemUserHome()
+{
+    struct passwd *pw = getpwuid (getuid());
+    return pw ? pw->pw_dir : "";
+}
+
+static CFURLRef pl_Path_MacSystemCopyAppBundleURL()
+{
+    CFBundleRef bundle = CFBundleGetMainBundle();
+    CFURLRef url = CFBundleCopyBundleURL (bundle);
+    return  url;
+}
+
+PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child)
+{
+    PlankResult result;
+    CFURLRef cfurl;
+    CFStringRef cfstring;
+    const char* parent;
+    const char* append;
+    char temp[1024];
+    
+    result = PlankResult_OK;
+    cfurl = nil;
+    cfstring = nil;
+    parent = "";
+    append = "";
+
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    switch (systemPath)
+    {
+        case PLANKPATH_SYSTEMUSERHOME: {
+            parent = pl_Path_MacSystemUserHome();
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMUSERDOCUMENTS: {
+            parent = pl_Path_MacSystemUserHome();
+            append = "/Documents/";
+        } break;
+        case PLANKPATH_SYSTEMUSERDESKTOP: {
+            parent = pl_Path_MacSystemUserHome();
+            append = "/Desktop/";
+        } break;
+        case PLANKPATH_SYSTEMUSERAPPDATA: {
+            parent = pl_Path_MacSystemUserHome();
+            append = "/Library/";
+        } break;
+        case PLANKPATH_SYSTEMAPPDATA: {
+            parent = "/Library/";
+            append = "";
+        } break;
+        case PLANKPATH_SYSTEMAPP: {
+            cfurl = pl_Path_MacSystemCopyAppBundleURL();
+            cfstring = CFURLCopyFileSystemPath (cfurl, kCFURLPOSIXPathStyle);
+            parent = CFStringGetCStringPtr (cfstring, kCFStringEncodingUTF8);
+            
+            if (!parent)
+            {
+                if (CFStringGetCString (cfstring, temp, 1024, kCFStringEncodingUTF8))
+                    parent = temp;
+                else
+                    parent = "";
+            }
+            
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMTEMP: {
+            parent = pl_Path_MacSystemUserHome();
+            append = "/Library/Caches/";
+        } break;
+        default: {
+            result = PlankResult_FilePathInvalid;
+            goto exit;
+        }
+    }
+    
+    if (parent)
+    {
+        if ((result = pl_DynamicArray_InitWithItemSize (&p->buffer, 1)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_SetAsText (&p->buffer, parent)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_AppendText (&p->buffer, append)) != PlankResult_OK) goto exit;
+        
+        if (child)
+        {
+            if ((result = pl_DynamicArray_AppendText (&p->buffer, child)) != PlankResult_OK) goto exit;
+        }
+    }
+    else
+    {
+        result = PlankResult_FilePathInvalid;
+        goto exit;
+    }
+    
+exit:
+    if (cfurl)
+        CFRelease (cfurl);
+    
+    if (cfstring)
+        CFRelease (cfstring);
+    
+    return result;
+}
+
+#elif PLANK_IOS
+
+static CFURLRef pl_Path_IOSSystemCopyAppBundleURL()
+{
+    CFBundleRef bundle = CFBundleGetMainBundle();
+    CFURLRef url = CFBundleCopyBundleURL (bundle);
+    return  url;
+}
+
+PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child)
+{
+    PlankResult result;
+    CFURLRef cfurl;
+    CFStringRef cfstring;
+    const char* parent;
+    const char* append;
+    char temp[1024];
+    PlankL pos;
+    
+    result = PlankResult_OK;
+    cfurl = nil;
+    parent = "";
+    append = "";
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    cfurl = pl_Path_IOSSystemCopyAppBundleURL();
+    cfstring = CFURLCopyFileSystemPath (cfurl, kCFURLPOSIXPathStyle);
+    
+    if (CFStringGetCString (cfstring, temp, 1024, kCFStringEncodingUTF8))
+    {
+        parent = temp;
+    }
+    else
+    {
+        result = PlankResult_FilePathInvalid;
+        goto exit;
+    }
+    
+    if (systemPath != PLANKPATH_SYSTEMAPP)
+    {
+        pos = strlen (temp);
+        
+        while (temp[--pos] != '/')
+            ;
+        
+        temp[pos] = '\0';
+    }
+    
+    switch (systemPath)
+    {
+        case PLANKPATH_SYSTEMUSERHOME: {
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMUSERDOCUMENTS: {
+            append = "/Documents/";
+        } break;
+        case PLANKPATH_SYSTEMUSERDESKTOP: {
+            parent = "";
+            append = "";
+        } break;
+        case PLANKPATH_SYSTEMUSERAPPDATA: {
+            append = "/Documents/";
+        } break;
+        case PLANKPATH_SYSTEMAPPDATA: {
+            append = "/Documents/";
+        } break;
+        case PLANKPATH_SYSTEMAPP: {            
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMTEMP: {
+            append = "/tmp/";
+        } break;            
+        default: {
+            result = PlankResult_FilePathInvalid;
+            goto exit;
+        }
+    }
+    
+    if (parent)
+    {
+        if ((result = pl_DynamicArray_InitWithItemSize (&p->buffer, 1)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_SetAsText (&p->buffer, parent)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_AppendText (&p->buffer, append)) != PlankResult_OK) goto exit;
+        
+        if (child)
+        {
+            if ((result = pl_DynamicArray_AppendText (&p->buffer, child)) != PlankResult_OK) goto exit;
+        }
+    }
+    else
+    {
+        result = PlankResult_FilePathInvalid;
+        goto exit;
+    }
+    
+exit:
+    if (cfurl)
+        CFRelease (cfurl);
+    
+    if (cfstring)
+        CFRelease (cfstring);
+    
+    return result;
+}
+#elif PLANK_WIN
+PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child)
+{
+    PlankResult result;
+    
+    result = PlankResult_OK;
+    
+exit:
+    return result;
+}
+#else
+PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child)
+{
+    PlankResult result;
+    
+    result = PlankResult_OK;
+    
+exit:
+    return result;
+}
+#endif
 
 PlankResult pl_Path_DeInit (PlankPathRef p)
 {
