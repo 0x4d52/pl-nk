@@ -45,9 +45,9 @@
 
 typedef struct PlankBase64Tables
 {
-    char decoding[256];
-    char encoding[64];
-    int mod[3];
+    const char decoding[256];
+    const char encoding[64];
+//    const int mod[3];
 } PlankBase64Tables;
 
 PlankL pl_Base64EncodedLength (const PlankL inputLength)
@@ -65,14 +65,14 @@ static void pl_Base64TablesInit (PlankBase64Tables* tables)
     int i;
     
     // overflow by 1 on the null is OK as long as mod is after it and done last
-    strcpy (tables->encoding, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"); 
+    strcpy ((char*)tables->encoding, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
 
     for (i = 0; i < 64; ++i)
-        tables->decoding[tables->encoding[i]] = i;
+        ((char*)(tables->decoding))[tables->encoding[i]] = i;
     
-    tables->mod[0] = 0;
-    tables->mod[1] = 2;
-    tables->mod[2] = 1;
+//    ((int*)(tables->mod))[0] = 0;
+//    ((int*)(tables->mod))[1] = 2;
+//    ((int*)(tables->mod))[2] = 1;
 }
 
 static const PlankBase64Tables* pl_Base64Tables()

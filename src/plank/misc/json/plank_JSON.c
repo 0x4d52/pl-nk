@@ -314,7 +314,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
     pl_Base64_Init (&b64);
     pl_Zip_Init (&z);
     pl_File_Init (&decodedStream);
-    pl_File_OpenDynamicArray (&decodedStream, array, PLANKFILE_NATIVEENDIAN | PLANKFILE_WRITE);
+    pl_File_OpenDynamicArray (&decodedStream, array, PLANKFILE_NATIVEENDIAN | PLANKFILE_WRITE | PLANKFILE_BINARY);
     
     itemSize = pl_DynamicArray_GetItemSize (array);
     
@@ -425,18 +425,132 @@ exit:
 }
 
 PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
-{
-    return pl_JSON_EncodedArrayGet (p, array, PLANK_JSON_INTARRAYBINARY, PLANK_JSON_INTARRAYCOMPRESSED, sizeof (int));
+{    
+    PlankResult result;
+    PlankL size, itemSize, i, sz;
+    int* values;
+    
+    sz = sizeof (values[0]);
+    
+    if (pl_JSON_IsObject (p))
+    {
+        result = pl_JSON_EncodedArrayGet (p, array, PLANK_JSON_INTARRAYBINARY, PLANK_JSON_INTARRAYCOMPRESSED, sz);
+    }
+    else if (pl_JSON_IsArray (p))
+    {
+        itemSize = pl_DynamicArray_GetItemSize (array);
+        
+        if (itemSize == 0)
+        {
+            if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
+                goto exit;
+        }
+        else if (itemSize != sz)
+        {
+            result = PlankResult_JSONError;
+            goto exit;
+        }
+        
+        size = pl_JSON_ArrayGetSize (p);
+        
+        if ((result = pl_DynamicArray_SetSize (array, size)) != PlankResult_OK)
+            goto exit;
+        
+        values = (int*)pl_DynamicArray_GetArray (array);
+        
+        for (i = 0; i < size; ++i)
+            values[i] = pl_JSON_IntGet (pl_JSON_ArrayAt (p, i));
+    }
+    else result = PlankResult_JSONError;
+    
+exit:
+    return result;
 }
 
 PlankResult pl_JSON_FloatArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
 {
-    return pl_JSON_EncodedArrayGet (p, array, PLANK_JSON_FLOATARRAYBINARY, PLANK_JSON_FLOATARRAYCOMPRESSED, sizeof (float));
+    PlankResult result;
+    PlankL size, itemSize, i, sz;
+    float* values;
+    
+    sz = sizeof (values[0]);
+    
+    if (pl_JSON_IsObject (p))
+    {
+        result = pl_JSON_EncodedArrayGet (p, array, PLANK_JSON_FLOATARRAYBINARY, PLANK_JSON_FLOATARRAYCOMPRESSED, sz);
+    }
+    else if (pl_JSON_IsArray (p))
+    {
+        itemSize = pl_DynamicArray_GetItemSize (array);
+        
+        if (itemSize == 0)
+        {
+            if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
+                goto exit;
+        }
+        else if (itemSize != sz)
+        {
+            result = PlankResult_JSONError;
+            goto exit;
+        }
+        
+        size = pl_JSON_ArrayGetSize (p);
+        
+        if ((result = pl_DynamicArray_SetSize (array, size)) != PlankResult_OK)
+            goto exit;
+        
+        values = (float*)pl_DynamicArray_GetArray (array);
+        
+        for (i = 0; i < size; ++i)
+            values[i] = pl_JSON_FloatGet (pl_JSON_ArrayAt (p, i));
+    }
+    else result = PlankResult_JSONError;
+    
+exit:
+    return result;
 }
 
 PlankResult pl_JSON_DoubleArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
-{
-    return pl_JSON_EncodedArrayGet (p, array, PLANK_JSON_DOUBLEARRAYBINARY, PLANK_JSON_DOUBLEARRAYCOMPRESSED, sizeof (double));
+{    
+    PlankResult result;
+    PlankL size, itemSize, i, sz;
+    double* values;
+    
+    sz = sizeof (values[0]);
+    
+    if (pl_JSON_IsObject (p))
+    {
+        result = pl_JSON_EncodedArrayGet (p, array, PLANK_JSON_DOUBLEARRAYBINARY, PLANK_JSON_DOUBLEARRAYCOMPRESSED, sz);
+    }
+    else if (pl_JSON_IsArray (p))
+    {
+        itemSize = pl_DynamicArray_GetItemSize (array);
+        
+        if (itemSize == 0)
+        {
+            if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
+                goto exit;
+        }
+        else if (itemSize != sz)
+        {
+            result = PlankResult_JSONError;
+            goto exit;
+        }
+        
+        size = pl_JSON_ArrayGetSize (p);
+        
+        if ((result = pl_DynamicArray_SetSize (array, size)) != PlankResult_OK)
+            goto exit;
+        
+        values = (double*)pl_DynamicArray_GetArray (array);
+        
+        for (i = 0; i < size; ++i)
+            values[i] = pl_JSON_DoubleGet (pl_JSON_ArrayAt (p, i));
+    }
+    else result = PlankResult_JSONError;
+    
+exit:
+    return result;
 }
 
 PlankJSONRef pl_JSON_StringSplit (const char* string, const PlankL count)

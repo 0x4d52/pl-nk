@@ -41,11 +41,10 @@
 
 #if PLANK_MAC
 # include <pwd.h>
-//# include <dlfcn.h>
 #elif PLANK_IOS
 //
 #elif PLANK_WIN
-//
+# include <Shlobj.h>
 #else
 //
 #endif
@@ -63,7 +62,7 @@ PlankResult pl_Path_InitPath (PlankPathRef p, const char* path)
 {
     PlankResult result;
     
-    if ((result = pl_Path_Init(p)) != PlankResult_OK) goto exit;
+    if ((result = pl_Path_Init (p)) != PlankResult_OK) goto exit;
     
     result = pl_Path_Set (p, path);
     
@@ -387,14 +386,100 @@ exit:
     
     return result;
 }
+
 #elif PLANK_WIN
+
+PlankResult pl_Path_WinSystemCSIDL (const int csidl, char* path, int max)
+{
+    HRESULT hr = SHGetFolderPath (0, csidl, 0, SHGFP_TYPE_CURRENT, path);
+    return (hr == S_OK) ? PlankResult_OK : PlankResult_FilePathInvalid;
+}
+
 PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child)
 {
     PlankResult result;
+    const char* parent;
+    const char* append;
+    char temp[2048]; // must be > MAX_PATH i.e., 260 chars
     
     result = PlankResult_OK;
+    parent = "";
+    append = "";
+    temp[0] = '\0';
     
-exit:
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    // need to deal with \\ and / seps
+    
+    switch (systemPath)
+    {
+        case PLANKPATH_SYSTEMUSERHOME: {
+            if ((result = pl_Path_WinSystemCSIDL (CSIDL_PROFILE, temp, MAX_PATH)) != PlankResult_OK) goto exit;
+            parent = temp;
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMUSERDOCUMENTS: {
+            if ((result = pl_Path_WinSystemCSIDL (CSIDL_PERSONAL, temp, MAX_PATH)) != PlankResult_OK) goto exit;
+            parent = temp;
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMUSERDESKTOP: {
+            if ((result = pl_Path_WinSystemCSIDL (CSIDL_DESKTOP, temp, MAX_PATH)) != PlankResult_OK) goto exit;
+            parent = temp;
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMUSERAPPDATA: {
+            if ((result = pl_Path_WinSystemCSIDL (CSIDL_APPDATA, temp, MAX_PATH)) != PlankResult_OK) goto exit;
+            parent = temp;
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMAPPDATA: {
+            if ((result = pl_Path_WinSystemCSIDL (CSIDL_COMMON_APPDATA, temp, MAX_PATH)) != PlankResult_OK) goto exit;
+            parent = temp;
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMAPP: {            
+
+            GetModuleFileName (GetModuleHandleA (0), temp, 2048);
+
+            // ned to get up to the last sep
+            
+            parent = temp;
+            append = "/";
+        } break;
+        case PLANKPATH_SYSTEMTEMP: {
+            GetTempPath (2048, temp);
+            parent = temp;
+            append = "";
+        } break;
+        default: {
+            result = PlankResult_FilePathInvalid;
+            goto exit;
+        }
+    }
+    
+    if (parent)
+    {
+        if ((result = pl_DynamicArray_InitWithItemSize (&p->buffer, 1)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_SetAsText (&p->buffer, parent)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_AppendText (&p->buffer, append)) != PlankResult_OK) goto exit;
+        
+        if (child)
+        {
+            if ((result = pl_DynamicArray_AppendText (&p->buffer, child)) != PlankResult_OK) goto exit;
+        }
+    }
+    else
+    {
+        result = PlankResult_FilePathInvalid;
+        goto exit;
+    }
+    
+exit:    
     return result;
 }
 #else
@@ -402,7 +487,7 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
 {
     PlankResult result;
     
-    result = PlankResult_OK;
+    result = PlankResult_UnknownError;
     
 exit:
     return result;
@@ -458,6 +543,9 @@ const char* pl_Path_GetLastPath (PlankPathRef p)
         return "";
     
     fullpath = pl_Path_GetFullPath (p);
+
+    if ((end == 2) && (fullpath[1] == ':') && (fullpath[2] == '/'))
+        return fullpath;
     
     do {
         --pos;

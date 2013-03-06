@@ -73,7 +73,6 @@ static PlankJSONRef pl_JSON_Double (const double value);
 static PlankJSONRef pl_JSON_Bool (const PlankB state);
 static PlankJSONRef pl_JSON_Null();
 
-
 PlankJSONRef pl_JSON_FromFile (PlankFileRef f);
 PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f);
 
