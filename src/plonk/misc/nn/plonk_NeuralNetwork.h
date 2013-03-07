@@ -155,9 +155,9 @@ private:
 #endif
     }
     
-    inline void toJSON (PlankJSONRef json) throw()
+    inline void toJSON (PlankJSONRef json, const bool useBinary) throw()
     {
-        ResultCode result = pl_NeuralNetworkF_ToJSON (&network, json);
+        ResultCode result = pl_NeuralNetworkF_ToJSON (&network, json, useBinary);
         plonk_assert (result == PlankResult_OK);
         
 #ifndef PLONK_DEBUG
@@ -280,9 +280,9 @@ public:
         return this->getInternal()->setActFunc (function);
     }
     
-    inline void toJSON (PlankJSONRef json) throw()
+    void toJSON (PlankJSONRef json, const bool useBinary = false) throw()
     {
-        this->getInternal()->toJSON (json);
+        this->getInternal()->toJSON (json, useBinary);
     }
     
     PLONK_OBJECTARROWOPERATOR(NeuralNetworkBase);

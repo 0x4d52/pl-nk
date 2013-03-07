@@ -89,7 +89,7 @@ const float* pl_NeuralLayerF_GetOutputsPtr (PlankNeuralLayerFRef p);
 const float* pl_NeuralLayerF_GetAdjustPtr (PlankNeuralLayerFRef p);
 int pl_NeuralLayerF_GetNumInputs (PlankNeuralLayerFRef p);
 int pl_NeuralLayerF_GetNumOutputs (PlankNeuralLayerFRef p);
-PlankResult pl_NeuralLayerF_ToJSON (PlankNeuralLayerFRef p, PlankJSONRef j);
+PlankResult pl_NeuralLayerF_ToJSON (PlankNeuralLayerFRef p, PlankJSONRef j, const PlankB useBinary);
 PlankResult pl_NeuralLayerF_InitFromJSON (PlankNeuralLayerFRef p, PlankNeuralNetworkFRef network, PlankJSONRef j);
 
 

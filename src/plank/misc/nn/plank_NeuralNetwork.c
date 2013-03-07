@@ -388,7 +388,7 @@ PlankResult pl_NeuralNetworkF_SetActFunc (PlankNeuralNetworkFRef p, PlankNeuralN
     return PlankResult_OK;
 }
 
-PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, PlankJSONRef j)
+PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, PlankJSONRef j, const PlankB useBinary)
 {
     PlankResult result;
     int numLayers, i;
@@ -404,15 +404,20 @@ PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, PlankJSONRef j)
     pl_JSON_ObjectSetType (jnetwork, PLANK_NEURALNETWORKF_JSON_TYPE);
     pl_JSON_ObjectSetVersionString (jnetwork, PLANK_NEURALNETWORKF_JSON_VERSION);
 
-    pl_JSON_ObjectPutKey (jnetwork, PLANK_NEURALNETWORKF_JSON_LEARNRATE, pl_JSON_Float (p->learnRate));
-    pl_JSON_ObjectPutKey (jnetwork, PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET, pl_JSON_Float (p->actFuncOffset));
+    pl_JSON_ObjectPutKey (jnetwork,
+                          PLANK_NEURALNETWORKF_JSON_LEARNRATE,
+                          useBinary ? pl_JSON_FloatBinary (p->learnRate) : pl_JSON_Float (p->learnRate));
+    
+    pl_JSON_ObjectPutKey (jnetwork,
+                          PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET,
+                          useBinary ? pl_JSON_FloatBinary (p->actFuncOffset) : pl_JSON_Float (p->actFuncOffset));
     
     numLayers = pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     for (i = 0; i < numLayers; ++i)
 	{
-        if ((result = pl_NeuralLayerF_ToJSON (&layerArray[i], jlayers)) != PlankResult_OK)
+        if ((result = pl_NeuralLayerF_ToJSON (&layerArray[i], jlayers, useBinary)) != PlankResult_OK)
             goto exit;
     }
     

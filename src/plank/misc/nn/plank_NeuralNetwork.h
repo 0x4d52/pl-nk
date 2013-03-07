@@ -102,7 +102,7 @@ PlankResult pl_NeuralNetworkF_GetOutputs (PlankNeuralNetworkFRef p, float* outpu
 const float* pl_NeuralNetworkF_GetOutputsPtr (PlankNeuralNetworkFRef p);
 PlankResult pl_NeuralNetworkF_SetActFunc (PlankNeuralNetworkFRef p, PlankNeuralNetworkFActFunction actFunc);
 
-PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, PlankJSONRef j);
+PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, PlankJSONRef j, const PlankB useBinary);
 PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, PlankJSONRef j);
 
 

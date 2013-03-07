@@ -71,9 +71,7 @@ PlankDynamicArrayRef pl_DynamicArray_Create()
 }
 
 PlankResult pl_DynamicArray_Init (PlankDynamicArrayRef p)
-{
-//    return pl_DynamicArray_InitWithItemSize (p, PLANKDYNAMICARRAY_DEFAULTITEMSIZE);
-    
+{    
     pl_MemoryZero (p, sizeof (PlankDynamicArray));
     return PlankResult_OK;
 }

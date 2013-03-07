@@ -113,6 +113,9 @@ PlankJSONRef pl_JSON_DoubleArrayBinary (const double* values, const PlankL count
 PlankJSONRef pl_JSON_IntArrayCompressed (const int* values, const PlankL count);
 PlankJSONRef pl_JSON_FloatArrayCompressed (const float* values, const PlankL count);
 PlankJSONRef pl_JSON_DoubleArrayCompressed (const double* values, const PlankL count);
+PlankJSONRef pl_JSON_IntArray (const int* values, const PlankL count);
+PlankJSONRef pl_JSON_FloatArray (const float* values, const PlankL count);
+PlankJSONRef pl_JSON_DoubleArray (const double* values, const PlankL count);
 
 
 PlankB pl_JSON_IsIntEncoded (PlankJSONRef p);

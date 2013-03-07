@@ -340,139 +340,38 @@ float pl_NeuralNodeF_GetOutput (PlankNeuralNodeFRef p)
     return p->output;
 }
 
-//PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, PlankJSONRef j)
-//{
-//    PlankResult result;
-//    int i, numWeights;
-//    const float* weightArray;
-//    PlankJSONRef jnode;
-//    PlankJSONRef jweights;
-//    
-//    result = PlankResult_OK;
-//    
-//    jnode = pl_JSON_Object();
-//    jweights = pl_JSON_Array();
-//    
-//    pl_JSON_ObjectSetType (jnode, PLANK_NEURALNODEF_JSON_TYPE);
-//    pl_JSON_ObjectSetVersionString (jnode, PLANK_NEURALNODEF_JSON_VERSION);
-//    
-//    pl_JSON_ObjectPutKey (jnode, PLANK_NEURALNODEF_JSON_THRESHOLD, pl_JSON_Float (p->threshold));
-//
-//    numWeights = pl_DynamicArray_GetSize (&p->weightVector);
-//    weightArray = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
-//    
-//    for (i = 0; i < numWeights; ++i)
-//	{
-//        pl_JSON_ArrayAppend (jweights, pl_JSON_Float (weightArray[i]));
-//    }
-//    
-//    pl_JSON_ObjectPutKey (jnode, PLANK_NEURALNODEF_JSON_WEIGHTS, jweights);
-//    pl_JSON_ArrayAppend (j, jnode);
-//
-//exit:
-//    return result;
-//}
-
-PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, PlankJSONRef j)
+PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, PlankJSONRef j, const PlankB useBinary)
 {
     PlankResult result;
     int numWeights;
     const float* weightArray;
     PlankJSONRef jnode;
+    PlankJSONRef jweights;
     
     result = PlankResult_OK;
     
     jnode = pl_JSON_Object();
+    jweights = (PlankJSONRef)PLANK_NULL;
     
     pl_JSON_ObjectSetType (jnode, PLANK_NEURALNODEF_JSON_TYPE);
     pl_JSON_ObjectSetVersionString (jnode, PLANK_NEURALNODEF_JSON_VERSION);
     
-    pl_JSON_ObjectPutKey (jnode, PLANK_NEURALNODEF_JSON_THRESHOLD, pl_JSON_FloatBinary (p->threshold));
-    
     numWeights = pl_DynamicArray_GetSize (&p->weightVector);
     weightArray = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
-        
-    pl_JSON_ObjectPutKey (jnode, PLANK_NEURALNODEF_JSON_WEIGHTS, pl_JSON_FloatArrayBinary (weightArray, numWeights));
+
+    pl_JSON_ObjectPutKey (jnode,
+                          PLANK_NEURALNODEF_JSON_THRESHOLD,
+                          useBinary ? pl_JSON_FloatBinary (p->threshold) : pl_JSON_Float (p->threshold));
+    
+    pl_JSON_ObjectPutKey (jnode,
+                          PLANK_NEURALNODEF_JSON_WEIGHTS,
+                          useBinary ? pl_JSON_FloatArrayBinary (weightArray, numWeights) : pl_JSON_FloatArray (weightArray, numWeights));    
+    
     pl_JSON_ArrayAppend (j, jnode);
     
 exit:
     return result;
 }
-
-//PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, PlankJSONRef j)
-//{
-//    PlankResult result;
-//    PlankJSONRef jweights;
-//    int numWeights, i;
-//    float* weights;
-//    
-//    result = PlankResult_OK;
-//    
-//    if (p == PLANK_NULL)
-//    {
-//        result = PlankResult_MemoryError;
-//        goto exit;
-//    }
-//    
-//    pl_MemoryZero (p, sizeof (PlankNeuralNodeF));
-//    p->network = network;
-//    
-//    if (!pl_JSON_IsObjectType (j, PLANK_NEURALNODEF_JSON_TYPE))
-//    {
-//        result = PlankResult_JSONError;
-//        goto exit;
-//    }
-//    
-//    if (pl_JSON_ObjectGetVersion (j) > pl_JSON_VersionCode (PLANK_NEURALNODEF_JSON_VERSION))
-//    {
-//        result = PlankResult_JSONError;
-//        goto exit;
-//    }
-//    
-//    if ((jweights = pl_JSON_ObjectAtKey (j, PLANK_NEURALNODEF_JSON_WEIGHTS)) == 0)
-//    {
-//        result = PlankResult_JSONError;
-//        goto exit;
-//    }
-//    
-//    if (!pl_JSON_IsArray (jweights))
-//    {
-//        result = PlankResult_JSONError;
-//        goto exit;
-//    }
-//    
-//    numWeights = (int)pl_JSON_ArrayGetSize (jweights);
-//        
-//    if (numWeights < 1)
-//    {
-//        result = PlankResult_JSONError;
-//        goto exit;
-//    }
-//    
-//    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->weightVector, sizeof (PlankF), numWeights, PLANK_TRUE)) != PlankResult_OK)
-//        goto exit;
-//    
-//    weights = (float*)pl_DynamicArray_GetArray (&p->weightVector);
-//    
-//    for (i = 0; i < numWeights; ++i)
-//        weights[i] = pl_JSON_FloatGet (pl_JSON_ArrayAt (jweights, i));
-//    
-//    p->threshold = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNODEF_JSON_THRESHOLD));
-//    
-//    if (numWeights < 8)
-//    {
-//        p->propogate = pl_NeuralNodeF_PropogateScalar;
-//        p->backProp = pl_NeuralNodeF_BackPropScalar;
-//    }
-//    else
-//    {
-//        p->propogate = pl_NeuralNodeF_PropogateVector;
-//        p->backProp = pl_NeuralNodeF_BackPropVector;
-//    }
-//    
-//exit:
-//    return result;
-//}
 
 PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetworkFRef network, PlankJSONRef j)
 {

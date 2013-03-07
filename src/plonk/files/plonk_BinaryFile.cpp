@@ -130,6 +130,20 @@ bool BinaryFileInternal::isNativeEndian() const throw()
     return pl_File_IsNativeEndian (getPeerRef());
 }
 
+bool BinaryFileInternal::canRead() const throw()
+{
+    int mode;
+    pl_File_GetMode(getPeerRef(), &mode);
+    return mode & PLANKFILE_READ;
+}
+
+bool BinaryFileInternal::canWrite() const throw()
+{
+    int mode;
+    pl_File_GetMode(getPeerRef(), &mode);
+    return mode & PLANKFILE_WRITE;
+}
+
 int BinaryFileInternal::read (void* data, const int maximumBytes) throw()
 {   
     int bytesRead;

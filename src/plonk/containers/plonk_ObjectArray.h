@@ -180,8 +180,8 @@ public:
 	/** Wraps an existing array in an ObjectArray.
 	 @warning This does NOT copy the data so take care that the array passed in
 			  does not get deallocated before the ObjectArray that uses it. */
-	ObjectArray (const int size, ObjectType *dataToUse, const bool needsNullTermination = false) throw()
-	:	Base (new Internal (size, dataToUse, needsNullTermination))
+	ObjectArray (const int size, ObjectType *dataToUse, const bool needsNullTermination = false, const bool shouldTakeOwnership = false) throw()
+	:	Base (new Internal (size, dataToUse, needsNullTermination, shouldTakeOwnership))
 	{
 	}
 	    

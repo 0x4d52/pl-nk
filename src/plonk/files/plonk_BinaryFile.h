@@ -65,6 +65,8 @@ public:
     bool isBigEndian() const throw();
     bool isLittleEndian() const throw();
     bool isNativeEndian() const throw();
+    bool canRead() const throw();
+    bool canWrite() const throw();
 
     int read (void* data, const int maximumBytes) throw();
     void read (char& value) throw();
@@ -98,6 +100,8 @@ public:
     template<class NumericalType>
     void write (NumericalArray<NumericalType> const& array) throw();
 
+    friend class JSON;
+    
 private:
     inline PlankFileRef getPeerRef() { return static_cast<PlankFileRef> (&peer); }
     inline const PlankFileRef getPeerRef() const { return const_cast<const PlankFileRef> (&peer); }
@@ -118,7 +122,7 @@ int BinaryFileInternal::read (NumericalArray<NumericalType>& array) throw()
     
     plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF); 
     
-    if (! isNativeEndian())
+    if (sizeof (NumericalType) > 1 && !isNativeEndian())
         Endian::swap (array);
     
 #ifndef PLONK_DEBUG
@@ -262,36 +266,46 @@ public:
     }    
     	
     /** Gets the position of the file stream. */
-    LongLong getPosition() throw()
+    inline LongLong getPosition() throw()
     {
         return getInternal()->getPosition();
     }
     
     /** Sets the position of the file stream. 
      0 is the start of the stream. */
-    void setPosition (const LongLong position) throw()
+    inline void setPosition (const LongLong position) throw()
     {
         getInternal()->setPosition (position);
     }
 
     /** Sets the position of the file stream to the end of the file. */
-    void setEof() throw()
+    inline void setEof() throw()
     {
         getInternal()->setEof();
     }    
     
     /** Determines if the file stream is positioned at its end. */
-	bool isEof() const throw()
+	inline bool isEof() const throw()
 	{
 		return getInternal()->isEof();
 	}
     
+    inline bool canRead() const throw()
+    {
+        return getInternal()->canRead();
+    }
+
+    inline bool canWrite() const throw()
+    {
+        return getInternal()->canWrite();
+    }
+
     /** Reads a numerical value from the file.
      This must be one of: char, short, int, long or LongLong 
      (and their unsigned versions). This is read in the endian format
      specified in the constructor. */    
     template<class ValueType>
-    ValueType read() throw()
+    inline ValueType read() throw()
     {
         ValueType value;
         getInternal()->read (value);
@@ -307,6 +321,20 @@ public:
     {
         getInternal()->read (value);
     }    
+    
+    
+    template<class NumericalType>
+    int read (NumericalArray<NumericalType>& array) throw()
+    {
+        return getInternal()->read (array);
+    }
+    
+    template<class NumericalType>
+    void write (NumericalArray<NumericalType> const& array) throw()
+    {
+        return getInternal()->write (array);
+    }
+
     
     /** Write a numerical value to the file.
      This must be one of: char, short, int, long or LongLong 

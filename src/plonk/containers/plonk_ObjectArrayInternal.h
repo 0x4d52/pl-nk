@@ -56,7 +56,7 @@ public:
     typedef ObjectArray<ObjectType> Container;
     
 	ObjectArrayInternalBase (const int size, const bool isNullTerminated) throw();
-	ObjectArrayInternalBase (const int size, ObjectType *dataToUse, const bool isNullTerminated) throw();
+	ObjectArrayInternalBase (const int size, ObjectType *dataToUse, const bool isNullTerminated, const bool shouldTakeOwnership) throw();
 	~ObjectArrayInternalBase();
 	
 	inline int size() const throw() { return sizeUsed; }
@@ -117,12 +117,13 @@ template<class ObjectType, class BaseType>
 ObjectArrayInternalBase<ObjectType,BaseType>
 ::ObjectArrayInternalBase (const int initSize, 
                            ObjectType *dataToUse, 
-                           const bool isNullTerminated) throw()
-:	allocatedSize (0), 
+                           const bool isNullTerminated,
+                           const bool shouldTakeOwnership) throw()
+:	allocatedSize (shouldTakeOwnership ? initSize : 0),
     sizeUsed (initSize),
     array (dataToUse),
     arrayIsNullTerminated (isNullTerminated),
-    ownsTheData (false)
+    ownsTheData (shouldTakeOwnership)
 {
 }
 
@@ -140,12 +141,7 @@ template<class ObjectType, class BaseType>
 bool ObjectArrayInternalBase<ObjectType,BaseType>
 ::setSize (const int newSize, const bool keepContents) throw()
 {
-//    const int oldSize = sizeUsed;
     const bool didResize = setSizeIfNeeded (newSize, keepContents);
-    
-//    if (sizeUsed != oldSize)
-//        this->update (Dynamic::getNull());
-    
     return didResize;
 }
 
@@ -235,7 +231,6 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     
     setSizeIfNeeded (sizeUsed + 1, true);
     array[this->length() - 1] = item;
-//    this->update (Dynamic::getNull());
 }
 
 
@@ -253,8 +248,6 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     
     for (int i = originalLength; i < newSize; ++i)
         array[i] = *items++;
-    
-//    this->update (Dynamic::getNull());
 }
 
 template<class ObjectType, class BaseType>
@@ -281,9 +274,7 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         array[newSize] = null;//ObjectType();
         
         sizeUsed = newSize;
-    }
-    
-//    this->update (Dynamic::getNull());
+    }    
 }
 
 template<class ObjectType, class BaseType>
@@ -329,7 +320,6 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     {
         if (ownsTheData)
             ArrayAllocator<ObjectType>::free (array);
-            //delete [] array;
         
         allocatedSize = 0;
         sizeUsed = newSize;
@@ -346,9 +336,6 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
             array[this->length()] = null;//ObjectType();
         }
     }
-    
-//    if (needsUpdate)
-//        this->update (Dynamic::getNull());
 }
 
 template<class ObjectType, class BaseType>
@@ -360,14 +347,11 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
         
     if (ownsTheData)
         ArrayAllocator<ObjectType>::free (array);
-        //delete [] array;
     
     allocatedSize = 0;
     sizeUsed = 0;
     array = 0;    
     ownsTheData = true;
-    
-//    this->update (Dynamic::getNull());
 }
 
 
@@ -382,8 +366,8 @@ public:
     {
     }
     
-	ObjectArrayInternal (const int size, ObjectType *dataToUse, const bool isNullTerminated) throw()
-    :   ObjectArrayInternalBaseType (size, dataToUse, isNullTerminated)
+	ObjectArrayInternal (const int size, ObjectType *dataToUse, const bool isNullTerminated, const bool shouldTakeOwnership) throw()
+    :   ObjectArrayInternalBaseType (size, dataToUse, isNullTerminated, shouldTakeOwnership)
     {
     }
 

@@ -239,6 +239,45 @@ PlankJSONRef pl_JSON_DoubleArrayCompressed (const double* values, const PlankL c
     return pl_JSON_Compressed (PLANK_JSON_DOUBLEARRAYCOMPRESSED, values, sizeof (values[0]) * count);
 }
 
+PlankJSONRef pl_JSON_IntArray (const int* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankL i;
+
+    j = pl_JSON_Array();
+    
+    for (i = 0; i < count; ++i)
+        pl_JSON_ArrayAppend (j, pl_JSON_Int (values[i]));
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_FloatArray (const float* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankL i;
+    
+    j = pl_JSON_Array();
+    
+    for (i = 0; i < count; ++i)
+        pl_JSON_ArrayAppend (j, pl_JSON_Float (values[i]));
+    
+    return j;
+}
+
+PlankJSONRef pl_JSON_DoubleArray (const double* values, const PlankL count)
+{
+    PlankJSONRef j;
+    PlankL i;
+    
+    j = pl_JSON_Array();
+    
+    for (i = 0; i < count; ++i)
+        pl_JSON_ArrayAppend (j, pl_JSON_Double (values[i]));
+    
+    return j;
+}
+
 static inline const void* pl_JSON_EncodedGet (PlankJSONRef p, const char* keyType, const PlankL expectedLength)
 {
     PlankBase64 b64;
@@ -424,12 +463,38 @@ exit:
     return result;
 }
 
-PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
-{    
+static PlankL pl_JSON_NumericalArrayCheckSize (PlankJSONRef p, PlankDynamicArrayRef array, const PlankL sz)
+{
     PlankResult result;
-    PlankL size, itemSize, i, sz;
+    PlankL itemSize, size;
+    
+    itemSize = pl_DynamicArray_GetItemSize (array);
+    
+    if (itemSize == 0)
+    {
+        if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
+            return 0;
+    }
+    else if (itemSize != sz)
+    {
+        return 0;
+    }
+    
+    size = pl_JSON_ArrayGetSize (p);
+    
+    if ((result = pl_DynamicArray_SetSize (array, size)) != PlankResult_OK)
+        return 0;
+
+    return size;
+}
+
+PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
+{
+    PlankResult result;
+    PlankL size, i, sz;
     int* values;
     
+    result = PlankResult_OK;
     sz = sizeof (values[0]);
     
     if (pl_JSON_IsObject (p))
@@ -438,28 +503,16 @@ PlankResult pl_JSON_IntArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
     }
     else if (pl_JSON_IsArray (p))
     {
-        itemSize = pl_DynamicArray_GetItemSize (array);
+        size = pl_JSON_NumericalArrayCheckSize (p, array, sz);
         
-        if (itemSize == 0)
+        if (size)
         {
-            if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
-                goto exit;
+            values = (int*)pl_DynamicArray_GetArray (array);
+            
+            for (i = 0; i < size; ++i)
+                values[i] = pl_JSON_IntGet (pl_JSON_ArrayAt (p, i));
         }
-        else if (itemSize != sz)
-        {
-            result = PlankResult_JSONError;
-            goto exit;
-        }
-        
-        size = pl_JSON_ArrayGetSize (p);
-        
-        if ((result = pl_DynamicArray_SetSize (array, size)) != PlankResult_OK)
-            goto exit;
-        
-        values = (int*)pl_DynamicArray_GetArray (array);
-        
-        for (i = 0; i < size; ++i)
-            values[i] = pl_JSON_IntGet (pl_JSON_ArrayAt (p, i));
+        else result = PlankResult_JSONError;
     }
     else result = PlankResult_JSONError;
     
@@ -470,9 +523,10 @@ exit:
 PlankResult pl_JSON_FloatArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
 {
     PlankResult result;
-    PlankL size, itemSize, i, sz;
+    PlankL size, i, sz;
     float* values;
     
+    result = PlankResult_OK;
     sz = sizeof (values[0]);
     
     if (pl_JSON_IsObject (p))
@@ -481,28 +535,16 @@ PlankResult pl_JSON_FloatArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
     }
     else if (pl_JSON_IsArray (p))
     {
-        itemSize = pl_DynamicArray_GetItemSize (array);
+        size = pl_JSON_NumericalArrayCheckSize (p, array, sz);
         
-        if (itemSize == 0)
+        if (size)
         {
-            if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
-                goto exit;
+            values = (float*)pl_DynamicArray_GetArray (array);
+            
+            for (i = 0; i < size; ++i)
+                values[i] = pl_JSON_FloatGet (pl_JSON_ArrayAt (p, i));
         }
-        else if (itemSize != sz)
-        {
-            result = PlankResult_JSONError;
-            goto exit;
-        }
-        
-        size = pl_JSON_ArrayGetSize (p);
-        
-        if ((result = pl_DynamicArray_SetSize (array, size)) != PlankResult_OK)
-            goto exit;
-        
-        values = (float*)pl_DynamicArray_GetArray (array);
-        
-        for (i = 0; i < size; ++i)
-            values[i] = pl_JSON_FloatGet (pl_JSON_ArrayAt (p, i));
+        else result = PlankResult_JSONError;
     }
     else result = PlankResult_JSONError;
     
@@ -513,9 +555,10 @@ exit:
 PlankResult pl_JSON_DoubleArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
 {    
     PlankResult result;
-    PlankL size, itemSize, i, sz;
+    PlankL size, i, sz;
     double* values;
     
+    result = PlankResult_OK;
     sz = sizeof (values[0]);
     
     if (pl_JSON_IsObject (p))
@@ -524,28 +567,16 @@ PlankResult pl_JSON_DoubleArrayGet (PlankJSONRef p, PlankDynamicArrayRef array)
     }
     else if (pl_JSON_IsArray (p))
     {
-        itemSize = pl_DynamicArray_GetItemSize (array);
+        size = pl_JSON_NumericalArrayCheckSize (p, array, sz);
         
-        if (itemSize == 0)
+        if (size)
         {
-            if ((result = pl_DynamicArray_InitWithItemSize (array, sz)) != PlankResult_OK)
-                goto exit;
+            values = (double*)pl_DynamicArray_GetArray (array);
+            
+            for (i = 0; i < size; ++i)
+                values[i] = pl_JSON_DoubleGet (pl_JSON_ArrayAt (p, i));
         }
-        else if (itemSize != sz)
-        {
-            result = PlankResult_JSONError;
-            goto exit;
-        }
-        
-        size = pl_JSON_ArrayGetSize (p);
-        
-        if ((result = pl_DynamicArray_SetSize (array, size)) != PlankResult_OK)
-            goto exit;
-        
-        values = (double*)pl_DynamicArray_GetArray (array);
-        
-        for (i = 0; i < size; ++i)
-            values[i] = pl_JSON_DoubleGet (pl_JSON_ArrayAt (p, i));
+        else result = PlankResult_JSONError;
     }
     else result = PlankResult_JSONError;
     

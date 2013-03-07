@@ -329,7 +329,7 @@ int pl_NeuralLayerF_GetNumOutputs (PlankNeuralLayerFRef p)
     return pl_DynamicArray_GetSize (&p->outputVector);
 }
 
-PlankResult pl_NeuralLayerF_ToJSON (PlankNeuralLayerFRef p, PlankJSONRef j)
+PlankResult pl_NeuralLayerF_ToJSON (PlankNeuralLayerFRef p, PlankJSONRef j, const PlankB useBinary)
 {
     PlankResult result;
     int i, numNodes;
@@ -350,7 +350,7 @@ PlankResult pl_NeuralLayerF_ToJSON (PlankNeuralLayerFRef p, PlankJSONRef j)
     
     for (i = 0; i < numNodes; ++i)
 	{        
-        if ((result = pl_NeuralNodeF_ToJSON (&nodeArray[i], jnodes)) != PlankResult_OK)
+        if ((result = pl_NeuralNodeF_ToJSON (&nodeArray[i], jnodes, useBinary)) != PlankResult_OK)
             goto exit;
     }
     

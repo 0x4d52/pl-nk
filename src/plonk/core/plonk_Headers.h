@@ -88,8 +88,6 @@
 #include "../containers/variables/plonk_ShapeVariable.h"
 #include "../containers/variables/plonk_PatternVariable.h"
 
-#include "../misc/nn/plonk_NeuralNetwork.h"
-
 #include "../maths/plonk_Constants.h"
 #include "../maths/plonk_Endian.h"
 
@@ -99,6 +97,9 @@
 #include "../files/plonk_BinaryFile.h"
 
 #include "../files/audio/plonk_AudioFileReader.h"
+
+#include "../misc/nn/plonk_NeuralNetwork.h"
+#include "../misc/json/plonk_JSON.h"
 
 #include "../fft/plonk_FFTEngine.h"
 #include "../fft/plonk_FFTEngineInternal.h"

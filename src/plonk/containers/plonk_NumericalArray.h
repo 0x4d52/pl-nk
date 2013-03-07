@@ -760,15 +760,15 @@ public:
 	class InitialNumber
 	{
 	public:
-		InitialNumber() throw() : value (0), valid (false) { }
-		InitialNumber (NumericalType initialValue) throw()
+		inline InitialNumber() throw() : value (0), valid (false) { }
+		inline InitialNumber (NumericalType initialValue) throw()
 		:	value (initialValue), 
             valid (true) 
 		{ 
 		}
 
 		template<class OtherType>
-		InitialNumber (OtherType initialValue) throw()
+		inline InitialNumber (OtherType initialValue) throw()
 		:	value (static_cast<const NumericalType> (initialValue)), 
             valid (true) 
 		{ 
@@ -956,8 +956,8 @@ public:
 	 @param dataToUse A pointer to the data. 
 	 @param needsNullTermination Whether the data is null terminated ot not. 
 	 @see withArrayNoCopy */
-	NumericalArray (const int size, NumericalType* dataToUse, const bool needsNullTermination) throw()
-	:	Base (size, dataToUse, needsNullTermination)
+	NumericalArray (const int size, NumericalType* dataToUse, const bool needsNullTermination, const bool shouldTakeOwnership = false) throw()
+	:	Base (size, dataToUse, needsNullTermination, shouldTakeOwnership)
 	{
 		plonk_assert (size > 0);
 	}
