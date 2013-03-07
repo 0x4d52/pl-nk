@@ -138,7 +138,7 @@ typedef NumericalArray<Short>			Shorts;
 typedef NumericalArray<Int>				Ints;
 typedef NumericalArray<Int24>			Int24s;
 typedef NumericalArray<Long>			Longs;
-typedef NumericalArray<UnsignedChar>	Unsigneds;
+typedef NumericalArray<UnsignedChar>	UnsignedChars;
 typedef UnsignedCharArray				Bytes;
 typedef NumericalArray<UnsignedShort>	UnsignedShorts;
 typedef NumericalArray<UnsignedInt>     UnsignedInts;

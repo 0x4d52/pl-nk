@@ -177,4 +177,24 @@ private:
 //------------------------------------------------------------------------------
 
 
+//template<class PlankType, class ContainerType>
+//class PlankContainerInternal : public SmartPointer
+//{
+//public:
+//    typedef PlankType* PlankTypeRef;
+//    
+//    PlankContainerInternal() throw()
+//    {
+//        Memory::zero (peer);
+//    }
+//    
+//    friend ContainerType;
+//    
+//private:
+//    inline PlankTypeRef getPeerRef() { return static_cast<PlankTypeRef> (&peer); }
+//    inline const PlankTypeRef getPeerRef() const { return const_cast<const PlankTypeRef> (&peer); }
+//
+//    PlankType peer;
+//};
+
 #endif // PLONK_SMARTPOINTER_H

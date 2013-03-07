@@ -206,54 +206,6 @@ public:
         return FloatArray::getNull();
     }
 
-//    operator IntArray () const throw()
-//    {
-//        if (isIntArrayEncoded() || isArray())
-//        {
-//            PlankDynamicArray array;
-//            pl_DynamicArray_Init (&array);
-//            pl_JSON_IntArrayGet (json, &array);
-//            IntArray values (IntArray::withArray (pl_DynamicArray_GetSize (&array),
-//                                                  static_cast<int*> (pl_DynamicArray_GetArray (&array))));
-//            pl_DynamicArray_DeInit (&array);
-//            return values;
-//        }
-//        
-//        return FloatArray::getNull();
-//    }
-//
-//    operator FloatArray () const throw()
-//    {
-//        if (isFloatArrayEncoded() || isArray())
-//        {
-//            PlankDynamicArray array;
-//            pl_DynamicArray_Init (&array);
-//            pl_JSON_FloatArrayGet (json, &array);
-//            FloatArray values (FloatArray::withArray (pl_DynamicArray_GetSize (&array),
-//                                                      static_cast<float*> (pl_DynamicArray_GetArray (&array))));
-//            pl_DynamicArray_DeInit (&array);
-//            return values;
-//        }
-//
-//        return FloatArray::getNull();
-//    }
-//        
-//    operator DoubleArray () const throw()
-//    {
-//        if (isDoubleArrayEncoded() || isArray())
-//        {
-//            PlankDynamicArray array;
-//            pl_DynamicArray_Init (&array);
-//            pl_JSON_DoubleArrayGet (json, &array);
-//            DoubleArray values (DoubleArray::withArray (pl_DynamicArray_GetSize (&array),
-//                                                        static_cast<double*> (pl_DynamicArray_GetArray (&array))));
-//            pl_DynamicArray_DeInit (&array);
-//            return values;
-//        }
-//        
-//        return FloatArray::getNull();
-//    }
-
     inline JSON operator[] (const Long index) throw()
     {
         return JSON (pl_JSON_ArrayAt (json, index));

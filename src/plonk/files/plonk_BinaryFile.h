@@ -54,7 +54,17 @@ public:
                         const bool writable = false, 
                         const bool clearContents = false,
                         const bool bigEndian = false) throw();
+    BinaryFileInternal (ByteArray const& bytes,
+                        const bool writable = false) throw();
     ~BinaryFileInternal();
+    
+    static PlankResult dynamicMemoryOpenCallback (PlankFileRef p);
+    static PlankResult dynamicMemoryCloseCallback (PlankFileRef p);
+    static PlankResult dynamicMemoryGetStatusCallback (PlankFileRef p, int type, int* status);
+    static PlankResult dynamicMemoryReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesReadOut);
+    static PlankResult dynamicMemoryWriteCallback (PlankFileRef p, const void* data, const int maximumBytes);
+    static PlankResult dynamicMemorySetPositionCallback (PlankFileRef p, PlankLL offset, int code);
+    static PlankResult dynamicMemoryGetPositionCallback (PlankFileRef p, PlankLL* position);
     
     LongLong getPosition() const throw();
     void setPosition (const LongLong position) throw();
@@ -139,7 +149,7 @@ void BinaryFileInternal::write (NumericalArray<NumericalType> const& array) thro
     
     if (length > 0)
     {        
-        if (isNativeEndian())
+        if (isNativeEndian() || (sizeof(NumericalType) == 1))
         {
             ResultCode result = pl_File_Write (getPeerRef(), 
                                                reinterpret_cast<const void*> (array.getArray()), 
@@ -233,7 +243,12 @@ public:
     BinaryFile (const char* path, const bool writable, const bool clearContents, const bool bigEndian = PLANK_BIGENDIAN) throw()
 	:	Base (new Internal (path, writable, clearContents, bigEndian))
 	{
-	}            
+	}
+    
+    BinaryFile (ByteArray const& bytes, const bool writable = false) throw()
+	:	Base (new Internal (bytes, writable))
+    {
+    }
     
     /** @internal */
     explicit BinaryFile (Internal* internalToUse) throw() 

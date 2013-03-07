@@ -60,8 +60,10 @@ public:
     
     void setEof() throw();
     bool isEof() const throw();
-    
-    Text readLine (const int maximumLength = 1024) throw(); 
+    bool canRead() const throw();
+    bool canWrite() const throw();
+
+    Text readLine (const int maximumLength = 1024) throw();
     
 	void writeValue (const char value) throw();
 	void writeValue (const short value) throw();

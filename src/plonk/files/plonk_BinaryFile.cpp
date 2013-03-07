@@ -42,6 +42,142 @@ BEGIN_PLONK_NAMESPACE
 
 #include "../core/plonk_Headers.h"
 
+// memory stream callbacks...
+
+PlankResult BinaryFileInternal::dynamicMemoryOpenCallback (PlankFileRef p)
+{
+    ByteArray* array = 0;
+    
+    if ((p->mode & PLANKFILE_WRITE) && (p->mode & PLANKFILE_APPEND))
+    {
+        array = static_cast<ByteArray*> (p->stream);
+        p->position = array->length();;
+    }
+    else
+    {
+        p->position = 0;
+    }
+    
+    return PlankResult_OK;
+}
+
+PlankResult BinaryFileInternal::dynamicMemoryCloseCallback (PlankFileRef p)
+{
+    ByteArray* array = static_cast<ByteArray*> (p->stream);
+    delete array;
+    return pl_File_Init (p);
+}
+
+PlankResult BinaryFileInternal::dynamicMemoryGetStatusCallback (PlankFileRef p, int type, int* status)
+{
+    ByteArray* array = static_cast<ByteArray*> (p->stream);
+    LongLong size = array->length();
+        
+    switch (type)
+    {
+        case PLANKFILE_STATUS_EOF:
+            *status = (p->position < size) ? PLANK_FALSE : PLANK_TRUE;
+            break;
+        case PLANKFILE_STATUS_ISPOSITIONABLE:
+            *status = PLANK_TRUE;
+            break;
+            
+        default: return PlankResult_UnknownError;
+    }
+    
+    return PlankResult_OK;
+}
+
+PlankResult BinaryFileInternal::dynamicMemoryReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesReadOut)
+{
+    PlankResult result;
+    UnsignedChar* src;
+    ByteArray* array = static_cast<ByteArray*> (p->stream);
+    LongLong size = array->length();
+    int bytesRead;
+    
+    result      = PlankResult_OK;
+    bytesRead   = (int)pl_MinLL (maximumBytes, size - p->position);
+    
+    if (bytesRead <= 0)
+    {
+        result = PlankResult_FileEOF;
+        goto exit;
+    }
+    
+    src = (UnsignedChar*)array->getArray() + p->position;
+    
+    if ((result = pl_MemoryCopy (ptr, src, bytesRead)) != PlankResult_OK) goto exit;
+    
+    p->position += bytesRead;
+    
+    if (bytesReadOut)
+        *bytesReadOut = bytesRead;
+    
+exit:
+    return result;
+}
+
+PlankResult BinaryFileInternal::dynamicMemoryWriteCallback (PlankFileRef p, const void* data, const int maximumBytes)
+{
+    PlankResult result;
+    UnsignedChar* dst;
+    ByteArray* array = static_cast<ByteArray*> (p->stream);
+    LongLong sizeNeeded;
+    
+    result      = PlankResult_OK;
+    sizeNeeded  = p->position + maximumBytes;
+    
+    array->setSize (sizeNeeded, true);
+    dst = (UnsignedChar*)array->getArray() + p->position;
+    
+    if ((result = pl_MemoryCopy (dst, data, maximumBytes)) != PlankResult_OK) goto exit;
+    
+    p->position += maximumBytes;
+    
+exit:
+    return result;
+}
+
+PlankResult BinaryFileInternal::dynamicMemorySetPositionCallback (PlankFileRef p, LongLong offset, int code)
+{
+    PlankResult result;
+    ByteArray* array = static_cast<ByteArray*> (p->stream);
+    LongLong size = array->length();
+    LongLong newPosition;
+
+    result = PlankResult_OK;
+    
+    switch (code)
+    {
+        case PLANKFILE_SETPOSITION_ABSOLUTE: newPosition = offset; break;
+        case PLANKFILE_SETPOSITION_RELATIVE: newPosition = p->position + offset; break;
+        case PLANKFILE_SETPOSITION_RELATIVEEND: newPosition = size + offset; break;
+        default: newPosition = 0;
+    }
+    
+    if (newPosition < 0)
+    {
+        newPosition = 0;
+        result = PlankResult_FileSeekFailed;
+    }
+    
+    if (newPosition >= size)
+        newPosition = size;
+    
+    p->position = newPosition;
+    
+exit:
+    return result;
+}
+
+PlankResult BinaryFileInternal::dynamicMemoryGetPositionCallback (PlankFileRef p, LongLong* position)
+{
+    *position = p->position;
+    return PlankResult_OK;
+}
+
+
 BinaryFileInternal::BinaryFileInternal() throw()
 {
     pl_File_Init (getPeerRef());
@@ -69,6 +205,48 @@ BinaryFileInternal::BinaryFileInternal (Text const& path,
 #ifndef PLONK_DEBUG
     (void)result;
 #endif
+}
+
+BinaryFileInternal::BinaryFileInternal (ByteArray const& bytes,
+                                        const bool writable) throw()
+{
+    PlankResult result;
+    PlankFileRef p = getPeerRef();
+    
+    pl_File_Init (p);
+    
+    if (p->stream != 0)
+    {
+        if ((result = pl_File_Close (p)) != PlankResult_OK)
+        {
+            plonk_assertfalse;
+            return;
+        }
+    }
+    
+    p->path[0] = '\0';
+    p->stream = new ByteArray (bytes);
+    p->size = 0;
+    p->mode = PLANKFILE_BINARY | PLANKFILE_NATIVEENDIAN | PLANKFILE_READ;
+    
+    if (writable)
+        p->mode |= PLANKFILE_WRITE;
+    
+    p->type = PLANKFILE_STREAMTYPE_OTHER;
+    
+    result = pl_File_SetFunction (p,
+                                  dynamicMemoryOpenCallback,
+                                  dynamicMemoryCloseCallback,
+                                  dynamicMemoryGetStatusCallback,
+                                  dynamicMemoryReadCallback,
+                                  dynamicMemoryWriteCallback,
+                                  dynamicMemorySetPositionCallback,
+                                  dynamicMemoryGetPositionCallback);
+    
+    plonk_assert (result == PlankResult_OK);
+    result = (p->openFunction) (p);
+    plonk_assert (result == PlankResult_OK);
+    return;
 }
 
 BinaryFileInternal::~BinaryFileInternal()
@@ -133,14 +311,14 @@ bool BinaryFileInternal::isNativeEndian() const throw()
 bool BinaryFileInternal::canRead() const throw()
 {
     int mode;
-    pl_File_GetMode(getPeerRef(), &mode);
+    pl_File_GetMode (getPeerRef(), &mode);
     return mode & PLANKFILE_READ;
 }
 
 bool BinaryFileInternal::canWrite() const throw()
 {
     int mode;
-    pl_File_GetMode(getPeerRef(), &mode);
+    pl_File_GetMode (getPeerRef(), &mode);
     return mode & PLANKFILE_WRITE;
 }
 

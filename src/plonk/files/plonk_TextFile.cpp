@@ -114,6 +114,20 @@ bool TextFileInternal::isEof() const throw()
     return pl_File_IsEOF (getPeerRef());
 }
 
+bool TextFileInternal::canRead() const throw()
+{
+    int mode;
+    pl_File_GetMode (getPeerRef(), &mode);
+    return mode & PLANKFILE_READ;
+}
+
+bool TextFileInternal::canWrite() const throw()
+{
+    int mode;
+    pl_File_GetMode (getPeerRef(), &mode);
+    return mode & PLANKFILE_WRITE;
+}
+
 Text TextFileInternal::readLine (const int maximumLength) throw()
 {
     Text buffer (Text::withSize (maximumLength));
