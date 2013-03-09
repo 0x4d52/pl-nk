@@ -201,7 +201,7 @@ static PlankResult pl_FileMemoryOpenCallback (PlankFileRef p)
     if (p->mode & PLANKFILE_APPEND)
         return PlankResult_FileModeInvalid;
     
-    p->position = 0;
+//    p->position = 0;
     return PlankResult_OK;
 }
 
@@ -328,7 +328,7 @@ static PlankResult pl_FileDynamicArrayOpenCallback (PlankFileRef p)
     }
     else
     {
-        p->position = 0;
+//        p->position = 0;
     }
     
     return PlankResult_OK;
@@ -492,7 +492,7 @@ PlankResult pl_FileErase (const char* filepath)
 PlankB pl_FileExists (const char* filepath, const PlankB isDirectory)
 {
     struct stat st;
-    pl_MemoryZero   (&st, sizeof (st));
+    pl_MemoryZero (&st, sizeof (st));
     stat (filepath, &st);
     return isDirectory ? (st.st_mode & S_IFDIR ? PLANK_TRUE : PLANK_FALSE) : (st.st_mode & S_IFREG ? PLANK_TRUE : PLANK_FALSE);
 }
@@ -1292,6 +1292,52 @@ exit:
     return result;        
 }
 
+//PlankResult pl_File_ReadLine (PlankFileRef p, char* text, const int maximumLength)
+//{
+//    PlankResult result;
+//    int i;
+//    char temp;
+//    
+//    text[0] = '\0';
+//
+//    if (p->stream == 0)
+//        return PlankResult_FileInvalid;
+//    
+//    if (p->mode & PLANKFILE_BINARY)
+//        return PlankResult_FileReadError;
+//    
+//    if (! (p->mode & PLANKFILE_READ))
+//        return PlankResult_FileReadError;
+//    
+//    result = PlankResult_OK;
+//    
+//    do 
+//    {
+//        result = pl_File_ReadC (p, &temp);
+//    } while ((result == PlankResult_OK) && ((temp != '\r') || (temp != '\n')));
+//
+//    if (result == PlankResult_OK)
+//        text[0] = temp;
+//
+//    i = 1;
+//    
+//    while ((i < (maximumLength - 1)) && (result == PlankResult_OK))
+//    {
+//        result = pl_File_ReadC (p, &temp);
+//        
+//        if ((result != PlankResult_OK) || (temp == '\r') || (temp == '\n') || (temp == '\0'))
+//        {
+//            text[i] = '\0';
+//            break;
+//        }
+//        
+//        text[i] = temp;
+//        i++;
+//    }
+//    
+//    return result;
+//}
+
 PlankResult pl_File_ReadLine (PlankFileRef p, char* text, const int maximumLength)
 {
     PlankResult result;
@@ -1299,7 +1345,7 @@ PlankResult pl_File_ReadLine (PlankFileRef p, char* text, const int maximumLengt
     char temp;
     
     text[0] = '\0';
-
+    
     if (p->stream == 0)
         return PlankResult_FileInvalid;
     
@@ -1311,14 +1357,14 @@ PlankResult pl_File_ReadLine (PlankFileRef p, char* text, const int maximumLengt
     
     result = PlankResult_OK;
     
-    do 
+    do
     {
         result = pl_File_ReadC (p, &temp);
-    } while ((result == PlankResult_OK) && ((temp != '\r') || (temp != '\n')));
-
+    } while ((result == PlankResult_OK) && ((temp == '\r') || (temp == '\n')));
+    
     if (result == PlankResult_OK)
         text[0] = temp;
-
+    
     i = 1;
     
     while ((i < (maximumLength - 1)) && (result == PlankResult_OK))

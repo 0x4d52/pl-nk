@@ -50,7 +50,7 @@
 #include "plonk_NumericalArray.h"
 #include "plonk_NumericalArray2D.h"
 
-
+class FilePath;
 
 /** A class for storing and manipulating text strings.
  Similar to std:string this is plonk's default text format. 
@@ -90,6 +90,7 @@ public:
     
     Text (Text const& copy) throw();
     Text (Dynamic const& other) throw();
+//    Text (FilePath const& path) throw();
     Text& operator= (Text const& other) throw();
 
         
@@ -146,6 +147,7 @@ public:
 	int indexOfIgnoreCase (Text const& toFind, const int startIndex = 0) const throw();
 	int indexOfAnyIgnoreCase (Text const& toFind, const int startIndex = 0) const throw();
 	Text replaceIgnoreCase (Text const& find, Text const& substitute) const throw();
+	Text replace (Text const& find, Text const& substitute) const throw();
 	
 	void print (const char *prefix = 0) const throw();
 	

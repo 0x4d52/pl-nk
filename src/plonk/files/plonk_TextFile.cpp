@@ -142,6 +142,23 @@ Text TextFileInternal::readLine (const int maximumLength) throw()
     return buffer.getArray(); // copies, reducing size
 }
 
+Text TextFileInternal::readAll() throw()
+{
+    Text buffer (Text::emptyWithAllocatedSize (512));
+    ResultCode result = PlankResult_OK;
+    int bytesRead;
+    char temp[17];
+    
+    while (result == PlankResult_OK)
+    {
+        result = pl_File_Read (getPeerRef(), temp, 16, &bytesRead);
+        temp[bytesRead] = '\0';
+        buffer.add (temp);
+    }
+    
+    return buffer;
+}
+
 void TextFileInternal::writeValue (const char value) throw()
 {
     const int size (64);

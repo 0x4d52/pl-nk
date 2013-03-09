@@ -39,11 +39,11 @@
 #ifndef PLONK_NEURALNETWORK_H
 #define PLONK_NEURALNETWORK_H
 
-#include "../../core/plonk_CoreForwardDeclarations.h"
-#include "../../containers/plonk_ContainerForwardDeclarations.h"
+#include "../core/plonk_CoreForwardDeclarations.h"
+#include "../containers/plonk_ContainerForwardDeclarations.h"
 
-#include "../../core/plonk_SmartPointer.h"
-#include "../../core/plonk_WeakPointer.h"
+#include "../core/plonk_SmartPointer.h"
+#include "../core/plonk_WeakPointer.h"
 
 template<class ValueType> class NeuralNetworkBase;
 

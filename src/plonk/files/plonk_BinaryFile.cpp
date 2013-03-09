@@ -46,11 +46,11 @@ BEGIN_PLONK_NAMESPACE
 
 PlankResult BinaryFileInternal::dynamicMemoryOpenCallback (PlankFileRef p)
 {
-    ByteArray* array = 0;
-    
+    plonk_assert (p != 0);
+
     if ((p->mode & PLANKFILE_WRITE) && (p->mode & PLANKFILE_APPEND))
     {
-        array = static_cast<ByteArray*> (p->stream);
+        ByteArray* array = static_cast<ByteArray*> (p->stream);
         p->position = array->length();;
     }
     else
@@ -63,13 +63,15 @@ PlankResult BinaryFileInternal::dynamicMemoryOpenCallback (PlankFileRef p)
 
 PlankResult BinaryFileInternal::dynamicMemoryCloseCallback (PlankFileRef p)
 {
+    plonk_assert (p != 0);
     ByteArray* array = static_cast<ByteArray*> (p->stream);
-    delete array;
+    delete array; // deletes the container, which of course holds a ref-counted object
     return pl_File_Init (p);
 }
 
 PlankResult BinaryFileInternal::dynamicMemoryGetStatusCallback (PlankFileRef p, int type, int* status)
 {
+    plonk_assert (p != 0);
     ByteArray* array = static_cast<ByteArray*> (p->stream);
     LongLong size = array->length();
         
@@ -90,6 +92,10 @@ PlankResult BinaryFileInternal::dynamicMemoryGetStatusCallback (PlankFileRef p, 
 
 PlankResult BinaryFileInternal::dynamicMemoryReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesReadOut)
 {
+    plonk_assert (p != 0);
+    plonk_assert (ptr != 0);
+    plonk_assert (maximumBytes > 0);
+
     PlankResult result;
     UnsignedChar* src;
     ByteArray* array = static_cast<ByteArray*> (p->stream);
@@ -97,7 +103,7 @@ PlankResult BinaryFileInternal::dynamicMemoryReadCallback (PlankFileRef p, Plank
     int bytesRead;
     
     result      = PlankResult_OK;
-    bytesRead   = (int)pl_MinLL (maximumBytes, size - p->position);
+    bytesRead   = int (plonk::min (LongLong (maximumBytes), size - p->position));
     
     if (bytesRead <= 0)
     {
@@ -106,9 +112,7 @@ PlankResult BinaryFileInternal::dynamicMemoryReadCallback (PlankFileRef p, Plank
     }
     
     src = (UnsignedChar*)array->getArray() + p->position;
-    
-    if ((result = pl_MemoryCopy (ptr, src, bytesRead)) != PlankResult_OK) goto exit;
-    
+    Memory::copy (ptr, src, bytesRead);
     p->position += bytesRead;
     
     if (bytesReadOut)
@@ -120,6 +124,10 @@ exit:
 
 PlankResult BinaryFileInternal::dynamicMemoryWriteCallback (PlankFileRef p, const void* data, const int maximumBytes)
 {
+    plonk_assert (p != 0);
+    plonk_assert (data != 0);
+    plonk_assert (maximumBytes > 0);
+    
     PlankResult result;
     UnsignedChar* dst;
     ByteArray* array = static_cast<ByteArray*> (p->stream);
@@ -130,9 +138,7 @@ PlankResult BinaryFileInternal::dynamicMemoryWriteCallback (PlankFileRef p, cons
     
     array->setSize (sizeNeeded, true);
     dst = (UnsignedChar*)array->getArray() + p->position;
-    
-    if ((result = pl_MemoryCopy (dst, data, maximumBytes)) != PlankResult_OK) goto exit;
-    
+    Memory::copy (dst, data, maximumBytes);
     p->position += maximumBytes;
     
 exit:
@@ -141,6 +147,8 @@ exit:
 
 PlankResult BinaryFileInternal::dynamicMemorySetPositionCallback (PlankFileRef p, LongLong offset, int code)
 {
+    plonk_assert (p != 0);
+
     PlankResult result;
     ByteArray* array = static_cast<ByteArray*> (p->stream);
     LongLong size = array->length();
@@ -161,9 +169,10 @@ PlankResult BinaryFileInternal::dynamicMemorySetPositionCallback (PlankFileRef p
         newPosition = 0;
         result = PlankResult_FileSeekFailed;
     }
-    
-    if (newPosition >= size)
+    else if (newPosition >= size)
+    {
         newPosition = size;
+    }
     
     p->position = newPosition;
     
@@ -173,6 +182,7 @@ exit:
 
 PlankResult BinaryFileInternal::dynamicMemoryGetPositionCallback (PlankFileRef p, LongLong* position)
 {
+    plonk_assert (position != 0);
     *position = p->position;
     return PlankResult_OK;
 }

@@ -64,6 +64,7 @@ public:
     bool canWrite() const throw();
 
     Text readLine (const int maximumLength = 1024) throw();
+    Text readAll() throw();
     
 	void writeValue (const char value) throw();
 	void writeValue (const short value) throw();
@@ -180,13 +181,10 @@ public:
         return getInternal()->readLine (maximumLength);
 	}
 	
-//	Text readAll (Text const& lineEndings = "\n") throw()
-//	{
-//		if (getInternal() != 0)
-//			return getInternal()->readAll (lineEndings);
-//		else 
-//            return Text()::getNull();
-//	}
+	Text readAll() throw()
+	{
+		return getInternal()->readAll();
+	}
 	
     /** Gets the position of the file stream. */
     LongLong getPosition() const throw()

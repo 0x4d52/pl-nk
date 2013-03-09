@@ -107,7 +107,12 @@ Text::Text (Text const& copy) throw()
 Text::Text (Dynamic const& other) throw()
 :   Base (other.as<Text>().getInternal())
 {
-}    
+}
+
+//Text::Text (FilePath const& path) throw()
+//:	Base (static_cast<Base const&> (Text (path.fullpath())))
+//{
+//}
 
 Text::Text (const wchar_t* string) throw()
 :	Base (NumericalArray<wchar_t> (string))
@@ -320,10 +325,36 @@ int Text::indexOfAnyIgnoreCase (Text const& toFind, const int startIndex) const 
 	return this->toLower().indexOfAny (toFind.toLower(), startIndex);
 }
 
+//Text Text::replaceIgnoreCase (Text const& find, Text const& substitute) const throw()
+//{
+//	Text thisLower = this->toLower();
+//	Text findLower = find.toLower();
+//	const int size = this->size();
+//	const int findLength = find.length();
+//	int startIndex = 0;
+//	int findIndex;
+//	
+//	Text result;
+//	
+//	while ((findIndex = thisLower.indexOf (findLower, startIndex)) >= 0)
+//	{
+//		result <<= this->range (startIndex, findIndex);
+//		result <<= substitute;
+//		startIndex = findIndex + findLength;
+//	}
+//	
+//	result <<= this->range (startIndex, size);
+//	
+//	return result;
+//}
+
 Text Text::replaceIgnoreCase (Text const& find, Text const& substitute) const throw()
+{	
+	return this->toLower().replace (find.toLower(), substitute);
+}
+
+Text Text::replace (Text const& find, Text const& substitute) const throw()
 {
-	Text thisLower = this->toLower();
-	Text findLower = find.toLower();
 	const int size = this->size();
 	const int findLength = find.length();
 	int startIndex = 0;
@@ -331,7 +362,7 @@ Text Text::replaceIgnoreCase (Text const& find, Text const& substitute) const th
 	
 	Text result;
 	
-	while ((findIndex = thisLower.indexOf (findLower, startIndex)) >= 0)
+	while ((findIndex = this->indexOf (find, startIndex)) >= 0)
 	{
 		result <<= this->range (startIndex, findIndex);
 		result <<= substitute;
@@ -342,6 +373,12 @@ Text Text::replaceIgnoreCase (Text const& find, Text const& substitute) const th
 	
 	return result;
 }
+
+
+//Text Text::replace (Text const& find, Text const& substitute) const throw()
+//{
+//    return CharArray::replace (find.getArray(), substitute.getArray());
+//}
 
 void Text::print (const char *prefix) const throw()
 {

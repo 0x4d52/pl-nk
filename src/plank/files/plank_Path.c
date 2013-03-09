@@ -38,6 +38,7 @@
 
 #include "../core/plank_StandardHeader.h"
 #include "plank_Path.h"
+#include "../maths/plank_Maths.h"
 
 #if PLANK_MAC
 # include <pwd.h>
@@ -54,7 +55,9 @@ PlankResult pl_Path_Init (PlankPathRef p)
 {
     if (p == PLANK_NULL)
         return PlankResult_MemoryError;
-        
+    
+    p->temp[0] = '\0';
+    
     return pl_DynamicArray_InitWithItemSize (&p->buffer, 1);
 }
 
@@ -84,6 +87,8 @@ PlankResult pl_Path_InitParent (PlankPathRef p, PlankPathRef full)
         result = PlankResult_MemoryError;
         goto exit;
     }
+    
+    p->temp[0] = '\0';
     
     length = pl_Path_GetFullPathLength (full);
     fullpath = pl_Path_GetFullPath (full);
@@ -130,6 +135,8 @@ PlankResult pl_Path_InitChild (PlankPathRef p, PlankPathRef parentpath, const ch
         goto exit;
     }
     
+    p->temp[0] = '\0';
+    
     if (!pl_Path_IsDirectory (parentpath))
     {
         result = PlankResult_FilePathInvalid;
@@ -154,6 +161,8 @@ PlankResult pl_Path_InitSibling (PlankPathRef p, PlankPathRef siblingpath, const
         result = PlankResult_MemoryError;
         goto exit;
     }
+    
+    p->temp[0] = '\0';
     
     if ((result = pl_Path_InitParent (&parent, siblingpath)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_InitWithItemSize (&p->buffer, 1)) != PlankResult_OK) goto earlyExit;
@@ -202,6 +211,8 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
         result = PlankResult_MemoryError;
         goto exit;
     }
+    
+    p->temp[0] = '\0';
     
     switch (systemPath)
     {
@@ -307,6 +318,8 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
         goto exit;
     }
     
+    p->temp[0] = '\0';
+    
     cfurl = pl_Path_IOSSystemCopyAppBundleURL();
     cfstring = CFURLCopyFileSystemPath (cfurl, kCFURLPOSIXPathStyle);
     
@@ -395,6 +408,20 @@ PlankResult pl_Path_WinSystemCSIDL (const int csidl, char* path, int max)
     return (hr == S_OK) ? PlankResult_OK : PlankResult_FilePathInvalid;
 }
 
+void pl_Path_WinReplaceBackslash (char* path)
+{
+    if (path)
+    {
+        while (*path != '\0')
+        {
+            if (*path == '\\')
+                *path = '/';
+            
+            ++path;
+        }
+    }
+}
+
 PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child)
 {
     PlankResult result;
@@ -413,7 +440,7 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
         goto exit;
     }
     
-    // need to deal with \\ and / seps
+    p->temp[0] = '\0';
     
     switch (systemPath)
     {
@@ -446,7 +473,7 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
 
             GetModuleFileName (GetModuleHandleA (0), temp, 2048);
 
-            // ned to get up to the last sep
+            // need to get up to the last sep
             
             parent = temp;
             append = "/";
@@ -464,6 +491,8 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
     
     if (parent)
     {
+        pl_Path_WinReplaceBackslash (parent);
+        
         if ((result = pl_DynamicArray_InitWithItemSize (&p->buffer, 1)) != PlankResult_OK) goto exit;
         if ((result = pl_DynamicArray_SetAsText (&p->buffer, parent)) != PlankResult_OK) goto exit;
         if ((result = pl_DynamicArray_AppendText (&p->buffer, append)) != PlankResult_OK) goto exit;
@@ -576,8 +605,42 @@ const char* pl_Path_GetFileExtension (PlankPathRef p)
 PlankL pl_Path_GetFullPathLength (PlankPathRef p)
 {
     return pl_DynamicArray_GetSize (&p->buffer) - 1;
-
 }
+
+const char* pl_Path_GetRoot (PlankPathRef p)
+{
+    PlankL length, i;
+    const char* fullpath;
+    
+    length = pl_MinL (pl_Path_GetFullPathLength (p), 63);
+    
+    if (length == 0)
+        return "";
+    
+    fullpath = pl_Path_GetFullPath (p);
+
+    if (length > 2)
+    {
+        if ((fullpath[0] == '/') && (fullpath[1] == '/'))
+        {
+            fullpath += 2;
+            length -= 2;
+        }
+    }
+    
+    for (i = 0; i < length; ++i)
+    {
+        p->temp[i] = fullpath[i];
+        
+        if (fullpath[i] == '/')
+            break;
+    }
+    
+    p->temp[i + 1] = '\0';
+    
+    return p->temp;
+}
+
 
 PlankB pl_Path_IsDirectory (PlankPathRef p)
 {
@@ -601,6 +664,75 @@ PlankB pl_Path_IsFile (PlankPathRef p)
     return length < 1 ? PLANK_FALSE : fullpath[length - 1] != '/' ? PLANK_TRUE : PLANK_FALSE;
 }
 
+PlankResult pl_Path_Resolve (PlankPathRef p)
+{
+    PlankResult result;
+    PlankL length, pos, pppos, nextpos;
+    char* fullpath;
+    char* temp;
+    
+    result = PlankResult_OK;
+    length = pl_Path_GetFullPathLength (p);
+    fullpath = (char*)pl_Path_GetFullPath (p);
+
+    if (length < 3)
+        goto exit;
+    
+    length -= 1; // as last possible './'
+    pos = 0;
+    
+    while ((pos < length) && (fullpath[pos] != '\0'))
+    {
+        temp = fullpath + pos;
+        
+        if ((fullpath[pos + 0] == '.') &&
+            (fullpath[pos + 1] == '.') &&
+            (fullpath[pos + 2] == '/'))
+        {
+            nextpos = pos + 2;
+            
+            pos -= 2;
+            
+            while ((pos >= 0) && (fullpath[pos] != '/'))
+                --pos;
+            
+            pppos = pos + 1;
+            temp = fullpath + pppos;
+            
+            if (pos >= 0)
+            {
+                while (fullpath[nextpos] != '\0')
+                    fullpath[pos++] = fullpath[nextpos++];
+                
+                fullpath[pos] = '\0';
+            }
+            
+            pos = pppos;
+        }
+        else if ((fullpath[pos + 0] == '.') &&
+                 (fullpath[pos + 1] == '/'))
+        {
+            nextpos = pos + 1;
+            pos -= 1;
+            pppos = pos + 1;
+            temp = fullpath + pppos;
+            
+            if (pos >= 0)
+            {
+                while (fullpath[nextpos] != '\0')
+                    fullpath[pos++] = fullpath[nextpos++];
+                
+                fullpath[pos] = '\0';
+            }
+            
+            pos = pppos;
+        }
+        else ++pos;
+    }
+    
+exit:
+    return result;
+}
 
 
 

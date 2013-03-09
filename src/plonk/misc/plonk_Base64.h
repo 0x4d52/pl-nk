@@ -75,15 +75,21 @@ public:
         return pl_Base64_Encode (&getInternal()->peer, binary, binaryLength);
     }
     
+    template<class NumericalType>
+    const char* encode (NumericalArray<NumericalType> const& array) throw()
+    {
+        return encode (array.getArray(), array.length() * sizeof (NumericalType));
+    }
+
+    template<class PODType>
+    const char* encode (PODType const& data) throw()
+    {
+        return encode (&data, sizeof (PODType));
+    }
+
     inline const void* decode (const char* text, Long* binaryLength)
     {
         return pl_Base64_Decode (&getInternal()->peer, text, binaryLength);
-    }
-    
-    template<class NumericalType>
-    Text encode (NumericalArray<NumericalType> const& array) throw()
-    {
-        return encode (array.getArray(), array.length() * sizeof (NumericalType));
     }
 
     template<class NumericalType>
@@ -93,7 +99,15 @@ public:
         const NumericalType* const array = static_cast<const NumericalType*> (decode (text.getArray(), &length));
         return NumericalArray<NumericalType>::withArray  (length / sizeof (NumericalType), array);
     }
-
+    
+    template<class PODType>
+    const PODType& decodePOD (Text const& text) throw()
+    {
+        plonk_assert (pl_Base64DecodedLength (text.length()) == sizeof (PODType));
+        Long length;
+        const PODType* data = static_cast<const PODType*> (decode (text.getArray(), &length));
+        return *data;
+    }
 };
 
 #endif // PLONK_BASE64_H

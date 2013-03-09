@@ -69,10 +69,12 @@ const char* pl_Path_GetFullPath (PlankPathRef p);
 const char* pl_Path_GetFilename (PlankPathRef p);
 const char* pl_Path_GetLastPath (PlankPathRef p);
 const char* pl_Path_GetFileExtension (PlankPathRef p);
+const char* pl_Path_GetRoot (PlankPathRef p);
 PlankL pl_Path_GetFullPathLength (PlankPathRef p);
 
 PlankB pl_Path_IsDirectory (PlankPathRef p);
 PlankB pl_Path_IsFile (PlankPathRef p);
+PlankResult pl_Path_Resolve (PlankPathRef p);
 
 
 
@@ -82,6 +84,7 @@ PLANK_END_C_LINKAGE
 typedef struct PlankPath
 {
     PlankDynamicArray buffer;
+    char temp[64];
 } PlankPath;
 #endif
 

@@ -245,6 +245,7 @@ public:
 	{
 	}
     
+    /** Memory stream */
     BinaryFile (ByteArray const& bytes, const bool writable = false) throw()
 	:	Base (new Internal (bytes, writable))
     {
