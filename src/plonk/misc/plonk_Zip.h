@@ -36,34 +36,67 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLANK_ZIP_H
-#define PLANK_ZIP_H
+#ifndef PLONK_ZIP_H
+#define PLONK_ZIP_H
 
-#include "../../containers/plank_DynamicArray.h"
-#include "../../files/plank_File.h"
 
-PLANK_BEGIN_C_LINKAGE
-
-typedef struct PlankZip* PlankZipRef;
-
-PlankResult pl_Zip_Init (PlankZipRef p);
-PlankResult pl_Zip_DeInit (PlankZipRef p);
-PlankResult pl_Zip_DeflateStream (PlankZipRef p, const int amount, PlankFileRef outputZipFile, PlankFileRef inputFile);
-PlankResult pl_Zip_InflateStream (PlankZipRef p, PlankFileRef outputFile, PlankFileRef inputZipFile);
-const void* pl_Zip_DeflateData (PlankZipRef p, const int amount, const void* dataInput, const PlankL dataInputLength, PlankL* dataOutputLength);
-const void* pl_Zip_InflateData (PlankZipRef p, const void* dataInput, const PlankL dataInputLength, PlankL* dataOutputLength);
-PlankResult pl_Zip_SetBufferSize (PlankZipRef p, const PlankL size);
-PlankResult pl_Zip_PurgeBuffer (PlankZipRef p);
-
-PLANK_END_C_LINKAGE
-
-#if !DOXYGEN
-typedef struct PlankZip
+class ZipInternal : public SmartPointer
 {
-    PlankDynamicArray buffer;
-} PlankZip;
-#endif
+public:
+    inline ZipInternal() throw()
+    {
+        pl_Zip_Init (&peer);
+    }
+    
+    inline ~ZipInternal()
+    {
+        pl_Zip_DeInit (&peer);
+    }
+    
+    friend class Zip;
+    
+private:
+    PlankZip peer;
+};
 
 
+class Zip : public SmartPointerContainer<ZipInternal>
+{
+public:
+    typedef SmartPointerContainer<ZipInternal> Base;
+    
+    inline Zip() throw()
+    :   Base (new ZipInternal())
+    {
+    }
+        
+    inline const void* deflate (const int amount, const void* dataInput, const Long dataInputLength, Long* dataOutputLength)
+    {
+        plonk_assert (dataOutputLength != 0);
+        return pl_Zip_DeflateData (&getInternal()->peer, amount, dataInput, dataInputLength, dataOutputLength);
+    }
+    
+    template<class NumericalType>
+    ByteArray deflate (const int amount, NumericalArray<NumericalType> const& array) throw()
+    {        
+        Long dataOutputLength;
+        const void* data = deflate (amount, array.getArray(), array.length() * sizeof (NumericalType), &dataOutputLength);
+        return ByteArray::withArray (dataOutputLength, static_cast<const Byte*> (data), false);
+    }
 
-#endif // PLANK_ZIP_H
+    inline const void* inflate (const void* dataInput, const Long dataInputLength, Long* dataOutputLength)
+    {
+        return pl_Zip_InflateData (&getInternal()->peer, dataInput, dataInputLength, dataOutputLength);
+    }
+
+    template<class NumericalType>
+    NumericalArray<NumericalType> inflate (ByteArray const& bytes) throw()
+    {
+        Long dataOutputLength;
+        const void* data = inflate (bytes.getArray(), bytes.length(), &dataOutputLength);
+        plonk_assert ((dataOutputLength % sizeof (NumericalType)) == 0);
+        return NumericalArray<NumericalType>::withArray (dataOutputLength / sizeof (NumericalType), static_cast<const float*> (data), false);
+    }    
+};
+
+#endif // PLONK_ZIP_H

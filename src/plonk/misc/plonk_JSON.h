@@ -77,7 +77,7 @@ public:
     : json (useBinary ? pl_JSON_DoubleArrayBinary (values.getArray(), values.length()) : pl_JSON_DoubleArray (values.getArray(), values.length()))
     { }
 
-    inline JSON (BinaryFile& file) throw()
+    inline JSON (BinaryFile const& file) throw()
     : json (0)
     {
         if (file.canRead())
@@ -112,7 +112,7 @@ public:
         pl_JSON_DecrementRefCount (json);
     }
     
-    inline ResultCode toFile (BinaryFile& file) throw()
+    inline ResultCode toFile (BinaryFile const& file) throw()
     {        
         return file.canWrite() ? pl_JSON_WriteToFile (json, file.getInternal()->getPeerRef()) : PlankResult_FileWriteError;
     }

@@ -39,6 +39,8 @@
 #include "../../core/plank_StandardHeader.h"
 #include "plank_Zip.h"
 #include "../../maths/plank_Maths.h"
+#include "../../../../ext/zlib/zlib.h"
+
 
 #include "../../../../ext/zlib/compress.c"
 #include "../../../../ext/zlib/inffast.c"
@@ -320,5 +322,52 @@ PlankResult pl_Zip_PurgeBuffer (PlankZipRef p)
     return pl_DynamicArray_Purge (&p->buffer);
 }
 
+#undef deflateInit_
+#undef deflate
+#undef deflateEnd
+#undef inflateInit_
+#undef inflate
+#undef inflateEnd
+#undef inflatePrime
+#undef inflateGetHeader
+#undef adler32_combine
+#undef crc32_combine
+#undef deflateInit2_
+#undef deflateSetDictionary
+#undef deflateCopy
+#undef deflateReset
+#undef deflateParams
+#undef deflateBound
+#undef deflatePrime
+#undef inflateInit2_
+#undef inflateSetDictionary
+#undef inflateSync
+#undef inflateSyncPoint
+#undef inflateCopy
+#undef inflateReset
+#undef inflateBack
+#undef inflateBackEnd
+#undef compress
+#undef compress2
+#undef compressBound
+#undef uncompress
+#undef adler32
+#undef crc32
+#undef get_crc_table
+#undef zError
+#undef alloc_func
+#undef free_func
+#undef in_func
+#undef out_func
+#undef Byte
+#undef uInt
+#undef uLong
+#undef Bytef
+#undef charf
+#undef intf
+#undef uIntf
+#undef uLongf
+#undef voidpf
+#undef voidp
 
 

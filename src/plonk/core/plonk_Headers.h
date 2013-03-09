@@ -102,6 +102,7 @@
 #include "../misc/plonk_NeuralNetwork.h"
 #include "../misc/plonk_JSON.h"
 #include "../misc/plonk_Base64.h"
+#include "../misc/plonk_Zip.h"
 
 #include "../fft/plonk_FFTEngine.h"
 #include "../fft/plonk_FFTEngineInternal.h"
