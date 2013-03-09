@@ -790,6 +790,8 @@ public:
 	:	Base (internal)
 	{
 	}
+    
+    PLONKSMARTPOINTERCONTAINER_DEEPCOPY(NumericalArray,Internal)
         
     /** Get a weakly linked copy of this object. 
      This will return a blank/empty/null object of this type if

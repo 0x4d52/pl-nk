@@ -81,7 +81,7 @@ public:
     int indexOf (ObjectType const& itemToSearchFor, const int startIndex = 0) const throw();
 	void referTo (const int size, ObjectType *dataToUse, const bool needsNullTermination = false) throw();
     void clear() throw();
-    
+        
 private:
 	int allocatedSize, sizeUsed;
 	ObjectType *array;
@@ -354,7 +354,6 @@ void ObjectArrayInternalBase<ObjectType,BaseType>
     ownsTheData = true;
 }
 
-
 template<class ObjectType, class BaseType>
 class ObjectArrayInternal : public ObjectArrayInternalBase<ObjectType,BaseType>
 {
@@ -371,6 +370,16 @@ public:
     {
     }
 
+    SmartPointer* deepCopy() const throw()
+    {
+        const int size = this->size();
+        ObjectArrayInternal *theCopy = new ObjectArrayInternal (size, this->isNullTerminated());
+        const ObjectType* const src = this->getArray();
+        ObjectType* const dst = theCopy->getArray();
+        Memory::copy(dst, src, size * sizeof (ObjectType));
+        return theCopy;
+    }
+    
 };
 
 #endif // PLONK_OBJECTARRAYINTERNAL_H

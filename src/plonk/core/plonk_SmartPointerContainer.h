@@ -132,7 +132,7 @@ public:
         // is this a problem is other.internal is contended?
         internal.swapWith (other.internal);
     }
-	
+    	
 	inline SmartPointerContainerBase (SmartPointerContainerBase const& copy) throw()
     :   internal (getNullSmartPointer())
 	{
@@ -333,6 +333,14 @@ private:
 };
 
 //------------------------------------------------------------------------------
+
+#define PLONKSMARTPOINTERCONTAINER_DEEPCOPY(CONTAINERTYPE,SMARTPOINTERTYPE)\
+    inline CONTAINERTYPE deepCopy() const throw()\
+    {\
+        SMARTPOINTERTYPE* const theCopy = static_cast<SMARTPOINTERTYPE*> (this->getInternal()->deepCopy());\
+        plonk_assert (theCopy != 0);\
+        return CONTAINERTYPE (theCopy);\
+    }
 
 
 #endif // PLONK_SMARTPOINTERCONTAINER_H

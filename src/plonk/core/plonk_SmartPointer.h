@@ -109,7 +109,9 @@ public:
 	
 //    inline void update (Text const& message, Dynamic const& payload) throw() { (void)message; (void)payload; } // needed as a dummy in place of Sender::update?
     void* getWeak() const throw();
-    int getRefCount() const throw();    
+    int getRefCount() const throw();
+    
+    virtual SmartPointer* deepCopy() const throw() { return 0; }
     
 	/// @} <!-- end Miscellaneous -->
     

@@ -66,6 +66,16 @@ private:
     PlankPath peer;
 };
 
+/** File path construction, manipulation and operations.
+ A semi-cross platform file path class. Rules are:
+ - internally, the path separator must be '/' the native() method can be used to return
+   a '\\' sepatated path on Windows if desired.
+ - paths to a directory ALWAYS will and must end in a trailing '/'
+ - paths created from explicit text containg parent shortcuts i.e., '../' will be
+   kept in the internal string until the resolve() function is called, the child(),
+   parent() and sibling() functions default to resolving these paths when constructing
+   new paths.
+ */
 class FilePath : public SmartPointerContainer<FilePathInternal>
 {
 public:

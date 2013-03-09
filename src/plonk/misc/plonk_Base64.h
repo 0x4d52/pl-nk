@@ -60,6 +60,9 @@ private:
 };
 
 
+/** Base64 encoding and decoding. 
+ Many of these functions return data that refers to memory allocated by
+ this function so */
 class Base64 : public SmartPointerContainer<Base64Internal>
 {
 public:
@@ -97,7 +100,7 @@ public:
     {
         Long length;
         const NumericalType* const array = static_cast<const NumericalType*> (decode (text.getArray(), &length));
-        return NumericalArray<NumericalType>::withArray  (length / sizeof (NumericalType), array);
+        return NumericalArray<NumericalType>::withArray (length / sizeof (NumericalType), array);
     }
     
     template<class PODType>
