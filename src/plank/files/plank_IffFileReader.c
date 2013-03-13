@@ -134,27 +134,64 @@ PlankFileRef pl_IffFileReader_GetFile (PlankIffFileReaderRef p)
     return &p->file;
 }
 
-PlankResult pl_IffFileReader_Open (PlankIffFileReaderRef p, const char* filepath)
+static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
     PlankUI chunkLength;
-    PlankB bigEndian = PLANK_FALSE; // little endian at least at first
-        
-    result = pl_File_OpenBinaryRead (&p->file, 
-                                     filepath, 
-                                     PLANK_FALSE,   // not writable
-                                     bigEndian); 
-
-    if (result != PlankResult_OK)
-        goto exit;
 
     if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.mainID)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_ReadUI (&p->file, &chunkLength)) != PlankResult_OK) goto exit;    
+    if ((result = pl_File_ReadUI (&p->file, &chunkLength)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.formatID)) != PlankResult_OK) goto exit;
     
     p->headerInfo.mainLength = (PlankLL)chunkLength;
     p->headerInfo.mainEnd = p->headerInfo.mainLength + 8;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_IffFileReader_Open (PlankIffFileReaderRef p, const char* filepath)
+{
+    PlankResult result = PlankResult_OK;
         
+    result = pl_File_OpenBinaryRead (&p->file, 
+                                     filepath, 
+                                     PLANK_FALSE,   // not writable
+                                     PLANK_FALSE);  // little endian at least at first
+
+    if (result != PlankResult_OK)
+        goto exit;
+
+    result = pl_IffFileReader_ParseMain (p);
+    
+exit:
+    return result;
+}
+
+PlankResult pl_IffFileReader_OpenWithFile (PlankIffFileReaderRef p, PlankFileRef file)
+{
+    PlankResult result = PlankResult_OK;
+    int mode;
+    
+    if ((result = pl_File_GetMode (file, &mode)) != PlankResult_OK) goto exit;
+    
+    if (!(mode & PLANKFILE_READ))
+    {
+        result = PlankResult_FileReadError;
+        goto exit;
+    }
+    
+    if ((mode & PLANKFILE_BIGENDIAN))
+    {
+        result = PlankResult_FileReadError;
+        goto exit;
+    }
+    
+    pl_MemoryCopy (&p->file, file, sizeof (PlankFile));
+    pl_MemoryZero (file, sizeof (PlankFile));
+
+    result = pl_IffFileReader_ParseMain (p);
+    
 exit:
     return result;
 }

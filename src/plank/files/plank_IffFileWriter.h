@@ -41,83 +41,87 @@
 
 #include "plank_IffFileCommon.h"
 #include "plank_File.h"
-//
-//PLANK_BEGIN_C_LINKAGE
-//
-///** A generic IFF/RIFF file writer helper.
-//  
-// @defgroup PlankIffFileWriterClass Plank IffFileWriter class
-// @ingroup PlankClasses
-// @{
-// */
-//
-///** An opaque reference to the <i>Plank IffFileWriter</i> object. */
-//typedef struct PlankIffFileWriter* PlankIffFileWriterRef; 
-//
-///** Create and initialise a <i>Plank IffFileWriter</i> object and return an oqaque reference to it.
-// @return A <i>Plank IffFileWriter</i> object as an opaque reference or PLANK_NULL. */
-//PlankIffFileWriterRef pl_IffFileWriter_CreateAndInit();
-//
-///** Create a <i>Plank IffFileWriter</i> object and return an oqaque reference to it.
-// @return A <i>Plank IffFileWriter</i> object as an opaque reference or PLANK_NULL. */
-//PlankIffFileWriterRef pl_IffFileWriter_Create();
-//
-///** Initialise a <i>Plank IffFileWriter</i> object. 
-// @param p The <i>Plank IffFileWriter</i> object. 
-// @return A result code which will be PlankResult_OK if the operation was completely successful. */
-//PlankResult pl_IffFileWriter_Init (PlankIffFileWriterRef p);
-//
-///** Deinitialise a <i>Plank IffFileWriter</i> object. 
-// @param p The <i>Plank IffFileWriter</i> object. 
-// @return A result code which will be PlankResult_OK if the operation was completely successful. */
-//PlankResult pl_IffFileWriter_DeInit (PlankIffFileWriterRef p);
-//
-///** Destroy a <i>Plank IffFileWriter</i> object. 
-// @param p The <i>Plank IffFileWriter</i> object. 
-// @return A result code which will be PlankResult_OK if the operation was completely successful. */
-//PlankResult pl_IffFileWriter_Destroy (PlankIffFileWriterRef p);
-//
-///** Gets the underlying <i>Plank %File</i> object. 
-// This is the raw file object the is performing the fundamental file access operations.
-// @param p The <i>Plank IffFileWriter</i> object.
-// @return The <i>Plank %File</i> object. */
-//PlankFileRef pl_IffFileWriter_GetFile (PlankIffFileWriterRef p);
-//
+
+PLANK_BEGIN_C_LINKAGE
+
+/** A generic IFF/RIFF file writer helper.
+  
+ @defgroup PlankIffFileWriterClass Plank IffFileWriter class
+ @ingroup PlankClasses
+ @{
+ */
+
+/** An opaque reference to the <i>Plank IffFileWriter</i> object. */
+typedef struct PlankIffFileWriter* PlankIffFileWriterRef; 
+
+/** Create and initialise a <i>Plank IffFileWriter</i> object and return an oqaque reference to it.
+ @return A <i>Plank IffFileWriter</i> object as an opaque reference or PLANK_NULL. */
+PlankIffFileWriterRef pl_IffFileWriter_CreateAndInit();
+
+/** Create a <i>Plank IffFileWriter</i> object and return an oqaque reference to it.
+ @return A <i>Plank IffFileWriter</i> object as an opaque reference or PLANK_NULL. */
+PlankIffFileWriterRef pl_IffFileWriter_Create();
+
+/** Initialise a <i>Plank IffFileWriter</i> object. 
+ @param p The <i>Plank IffFileWriter</i> object. 
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_IffFileWriter_Init (PlankIffFileWriterRef p);
+
+/** Deinitialise a <i>Plank IffFileWriter</i> object. 
+ @param p The <i>Plank IffFileWriter</i> object. 
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_IffFileWriter_DeInit (PlankIffFileWriterRef p);
+
+/** Destroy a <i>Plank IffFileWriter</i> object. 
+ @param p The <i>Plank IffFileWriter</i> object. 
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_IffFileWriter_Destroy (PlankIffFileWriterRef p);
+
+/** Gets the underlying <i>Plank %File</i> object. 
+ This is the raw file object the is performing the fundamental file access operations.
+ @param p The <i>Plank IffFileWriter</i> object.
+ @return The <i>Plank %File</i> object. */
+PlankFileRef pl_IffFileWriter_GetFile (PlankIffFileWriterRef p);
+
+/** */
+PlankResult pl_IffFileWriter_OpenReplacing (PlankIffFileWriterRef p, 
+                                            const char* filepath, 
+                                            const PlankB bigEndian, 
+                                            const PlankFourCharCode mainID, 
+                                            const PlankFourCharCode formatID);
+
+/** */
+PlankResult pl_IffFileWriter_Close (PlankIffFileWriterRef p);
+
+PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos, PlankB* isLastChunk);
+
+PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
+
+
 ///** */
-//PlankResult pl_IffFileWriter_OpenReplacing (PlankIffFileWriterRef p, 
-//                                            const char* filepath, 
-//                                            const PlankB bigEndian, 
-//                                            const PlankFourCharCode mainID, 
-//                                            const PlankFourCharCode formatID);
-//
-///** */
-//PlankResult pl_IffFileWriter_Close (PlankIffFileWriterRef p);
-//
-/////** */
-////PlankResult pl_IffFileWriter_AddChunk (PlankIffFileWriterRef p, PlankFourCharCode chunkID, PlankLL chunkLength);
-//
-///** @} */
-//
-//PLANK_END_C_LINKAGE
-//
-//#if !DOXYGEN
-//typedef struct PlankIffFileWriterChunkInfo
-//{
-//    PlankFourCharCode chunkID;
-//    PlankLL chunkLength;
-//    PlankLL chunkPos;
-//} PlankIffFileWriterChunkInfo;
-//
-//typedef struct PlankIffFileWriter
-//{
-//    PlankFile file;
-//    PlankIffFileHeaderInfo headerInfo;
-//    
-//    int allocatedChunks;
-//    int numChunks;
-//    PlankIffFileWriterChunkInfo* chunkInfo;
-//    
-//} PlankIffFileWriter;
-//#endif
+//PlankResult pl_IffFileWriter_AddChunk (PlankIffFileWriterRef p, PlankFourCharCode chunkID, PlankLL chunkLength);
+
+/** @} */
+
+PLANK_END_C_LINKAGE
+
+#if !DOXYGEN
+typedef struct PlankIffFileWriterChunkInfo
+{
+    PlankFourCharCode chunkID;
+    PlankUI chunkLength;
+    PlankLL chunkPos;
+} PlankIffFileWriterChunkInfo;
+
+typedef struct PlankIffFileWriter
+{
+    PlankFile file;
+    PlankIffFileHeaderInfo headerInfo;
+    PlankDynamicArray chunkInfos;
+    
+    PlankIffFileWriterChunkInfo* currentChunk;
+    
+} PlankIffFileWriter;
+#endif
 
 #endif // PLANK_IFFFILEWRITER_H

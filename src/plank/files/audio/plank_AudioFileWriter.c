@@ -61,31 +61,31 @@
 //{
 //    return (PlankAudioFileWriterRef)PLANK_NULL;
 //}
-//
-//PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p)
-//{
-//	(void)p;
-//    return PlankResult_UnknownError;
-//}
-//
-//PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    
-//    if (p == PLANK_NULL)
-//    {
-//        result = PlankResult_MemoryError;
-//        goto exit;
-//    }
-//    
-//    result = pl_IffFileWriter_DeInit (&p->iff);
-//    
-//    pl_MemoryZero (p, sizeof (PlankAudioFileWriter));
-//
-//exit:
-//    return result;
-//}
-//
+
+PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p)
+{
+	(void)p;
+    return PlankResult_UnknownError;
+}
+
+PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    result = pl_IffFileWriter_DeInit (&p->iff);
+    
+    pl_MemoryZero (p, sizeof (PlankAudioFileWriter));
+
+exit:
+    return result;
+}
+
 //PlankResult pl_AudioFileWriter_Destroy (PlankAudioFileWriterRef p)
 //{
 //    PlankResult result = PlankResult_OK;
@@ -105,23 +105,23 @@
 //exit:
 //    return result;
 //}
-//
-//PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p)
-//{
-//    return pl_IffFileWriter_GetFile (&p->iff); 
-//}
-//
-//PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath)
-//{
-//	(void)p;
-//	(void)filepath;
-//    return PlankResult_OK;
-//}
-//
-//PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
-//{
-//	(void)p;
-//    return PlankResult_OK;
-//}
-//
+
+PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p)
+{
+    return pl_IffFileWriter_GetFile (&p->iff); 
+}
+
+PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath)
+{
+	(void)p;
+	(void)filepath;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
+{
+	(void)p;
+    return PlankResult_OK;
+}
+
 

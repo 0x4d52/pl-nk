@@ -88,6 +88,10 @@ PlankFileRef pl_IffFileReader_GetFile (PlankIffFileReaderRef p);
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_IffFileReader_Open (PlankIffFileReaderRef p, const char* filepath);
 
+/** Open from a file object.
+ Takes ownership and zeros the input file. The file must be little endian to start with. */
+PlankResult pl_IffFileReader_OpenWithFile (PlankIffFileReaderRef p, PlankFileRef file);
+
 /** 
  @param p The <i>Plank IffFileReader</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */

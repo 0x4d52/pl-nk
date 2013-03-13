@@ -403,6 +403,14 @@ public:
 	{
 	}
     
+    /** Creates a binary file reader from the given path.
+     The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
+     @param path        The path of the file to read.  */
+	AudioFileReader (FilePath const& path) throw()
+	:	Base (new Internal (path.fullpath().getArray(), 0, false))
+	{
+	}
+    
     /** Creates a binary file reader from the given path. 
      @param path        The path of the file to read.  
      @param bufferSize  The buffer size to use when reading. */

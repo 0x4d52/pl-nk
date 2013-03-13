@@ -91,6 +91,10 @@ PlankResult pl_AudioFileReader_OpenWithMetaData (PlankAudioFileReaderRef p, cons
 
 PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankB readMetaData);
 
+/** Open from a file object.
+ The AudioFileReader takes ownership of the file and zeros the incomming file object. */
+PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankB readMetaData);
+
 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 

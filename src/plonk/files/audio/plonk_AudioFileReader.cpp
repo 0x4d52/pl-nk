@@ -70,6 +70,24 @@ ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaD
     return result;
 }
 
+//ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaData) throw()
+//{
+//    plonk_assert (path != 0);
+//    
+//    pl_AudioFileReader_Init (getPeerRef());
+//    ResultCode result;
+//    
+//    pl_File_OpenBinaryRead (pl_AudioFileReader_GetFile(getPeerRef()), path, false, false);
+//    
+//    pl_AudioFileReader_OpenInternal (getPeerRef(), path, readMetaData);
+//    
+//    if (result == PlankResult_OK)
+//        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+//    
+//    return result;
+//}
+
+
 AudioFileReaderInternal::~AudioFileReaderInternal()
 {
     pl_AudioFileReader_DeInit (getPeerRef());
