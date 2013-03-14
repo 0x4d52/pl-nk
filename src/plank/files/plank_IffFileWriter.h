@@ -95,7 +95,7 @@ PlankResult pl_IffFileWriter_Close (PlankIffFileWriterRef p);
 
 PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos, PlankB* isLastChunk);
 
-PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
+PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankB append);
 
 
 ///** */

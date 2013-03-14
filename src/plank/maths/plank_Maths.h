@@ -474,6 +474,8 @@ static inline PlankLL pl_MinLL (PlankLL a, PlankLL b)               { return (a 
 /** Returns maximum of @e a and @e b. */
 static inline short pl_MaxS (short a, short b)                      { return (a < b) ? b : a; }
 static inline int pl_MaxI (int a, int b)                            { return (a < b) ? b : a; }
+static inline PlankUI pl_MaxUI (PlankUI a, PlankUI b)               { return (a < b) ? b : a; }
+
 /** Returns maximum of @e a and @e b. */
 static inline PlankLL pl_MaxLL (PlankLL a, PlankLL b)               { return (a < b) ? b : a; }
 
