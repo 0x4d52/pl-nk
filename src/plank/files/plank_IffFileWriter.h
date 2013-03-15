@@ -42,6 +42,10 @@
 #include "plank_IffFileCommon.h"
 #include "plank_File.h"
 
+#define PLANKIFFFILEWRITER_MODEREPLACEGROW      0
+#define PLANKIFFFILEWRITER_MODEREPLACESHRINK    1
+#define PLANKIFFFILEWRITER_MODEAPPEND           2
+
 PLANK_BEGIN_C_LINKAGE
 
 /** A generic IFF/RIFF file writer helper.
@@ -53,6 +57,8 @@ PLANK_BEGIN_C_LINKAGE
 
 /** An opaque reference to the <i>Plank IffFileWriter</i> object. */
 typedef struct PlankIffFileWriter* PlankIffFileWriterRef; 
+typedef struct PlankIffFileWriterChunkInfo* PlankIffFileWriterChunkInfoRef;
+typedef int PlankIffFileWriterMode;
 
 /** Create and initialise a <i>Plank IffFileWriter</i> object and return an oqaque reference to it.
  @return A <i>Plank IffFileWriter</i> object as an opaque reference or PLANK_NULL. */
@@ -93,9 +99,9 @@ PlankResult pl_IffFileWriter_OpenReplacing (PlankIffFileWriterRef p,
 /** */
 PlankResult pl_IffFileWriter_Close (PlankIffFileWriterRef p);
 
-PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos, PlankB* isLastChunk);
+PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk);
 
-PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankB append);
+PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode);
 
 
 ///** */

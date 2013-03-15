@@ -41,6 +41,8 @@
 #include "plank_IffFileReader.h"
 #include "../maths/plank_Maths.h"
 
+#define PLANKIFFFILEWRITER_COPYLENGTH 256
+
 // private functions
 PlankResult pl_IffFileWriter_WriteHeader (PlankIffFileWriterRef p);
 PlankResult pl_IffFileWriter_FindLastChunk (PlankIffFileWriterRef p, PlankIffFileWriterChunkInfo** lastChunkInfo);
@@ -171,7 +173,7 @@ exit:
     return result;
 }
 
-PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos, PlankB* isLastChunk)
+PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk)
 {
     PlankLL pos;
     PlankIffFileWriterChunkInfo* chunkInfos;
@@ -185,6 +187,7 @@ PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFour
     chunkInfos = (PlankIffFileWriterChunkInfo*)pl_DynamicArray_GetArray (&p->chunkInfos);
     pos = 0;
     len = 0;
+    currentChunk = 0;
     
     for (i = 0; i < numChunks; ++i)
     {
@@ -203,12 +206,10 @@ PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFour
         }
     }
     
-    if (chunkLength)
-        *chunkLength = len;
     
-    if (chunkDataPos)
-        *chunkDataPos = pos;
-        
+    if (chunkInfo)
+        *chunkInfo = currentChunk;
+            
     if (isLastChunk)
         *isLastChunk = (i == (numChunks - 1)) ? PLANK_TRUE : PLANK_FALSE;
     
@@ -226,10 +227,11 @@ exit:
  - need a method of shortening chunks...!
  */
 
-PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankB append)
+PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode)
 {
     PlankIffFileWriterChunkInfo* lastChunkInfo;
-    PlankIffFileWriterChunkInfo chunkInfo;
+    PlankIffFileWriterChunkInfo newChunkInfo;
+    PlankIffFileWriterChunkInfo* origChunkInfo;
     PlankResult result;
     PlankLL chunkDataPos;
     PlankLL chunkStartPos;
@@ -242,9 +244,9 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFou
     updateMain = PLANK_FALSE;
     isNewChunk = PLANK_FALSE;
     
-    if ((result = pl_IffFileWriter_SeekChunk (p, chunkID, &originalChunkLength, &chunkDataPos, &isLastChunk)) != PlankResult_OK) goto exit;
+    if ((result = pl_IffFileWriter_SeekChunk (p, chunkID, &origChunkInfo, &isLastChunk)) != PlankResult_OK) goto exit;
 
-    if (chunkDataPos == 0)
+    if (origChunkInfo == 0)
     {
         // chunk doesn't exist...
         
@@ -268,71 +270,92 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFou
         updateMain = PLANK_TRUE;
         isNewChunk = PLANK_TRUE;
     }
+    else
+    {
+        originalChunkLength = origChunkInfo->chunkLength;
+        chunkDataPos = origChunkInfo->chunkPos;
+        chunkStartPos = chunkDataPos - 8;
+    }
     
-    chunkInfo.chunkID       = chunkID;
-    chunkInfo.chunkLength   = append ? originalChunkLength + dataLength : pl_MaxUI (dataLength, originalChunkLength);
-    chunkInfo.chunkPos      = chunkDataPos; // store the data pos
+    newChunkInfo.chunkID       = chunkID;
+    newChunkInfo.chunkPos      = chunkDataPos; // store the data pos
+
+    switch (mode)
+    {
+        case PLANKIFFFILEWRITER_MODEAPPEND:         newChunkInfo.chunkLength = originalChunkLength + dataLength;           break;
+        case PLANKIFFFILEWRITER_MODEREPLACEGROW:    newChunkInfo.chunkLength = pl_MaxUI (dataLength, originalChunkLength); break;
+        case PLANKIFFFILEWRITER_MODEREPLACESHRINK:  newChunkInfo.chunkLength = pl_MinUI (dataLength, originalChunkLength); break;
+        default:
+            result = PlankResult_FileModeInvalid;
+            goto exit;
+    }
     
-    if (chunkInfo.chunkLength > originalChunkLength)
+    if (newChunkInfo.chunkLength > originalChunkLength)
     {
         if (!isLastChunk)
         {
-            result = PlankResult_FileWriteError;
-            goto exit;
+            if (isNewChunk)
+            {
+                // shouldn't happen but the next few lines assume this is not a new chunk
+                result = PlankResult_FileWriteError;
+                goto exit;
+            }
+            
+            if (mode != PLANKIFFFILEWRITER_MODEREPLACEGROW)
+            {
+                result = PlankResult_FileModeInvalid;
+                goto exit;
+            }
+            
+            if ((result = pl_IffFileWriter_RewriteFileUpdatingChunkInfo (p, &newChunkInfo)) != PlankResult_OK) goto exit;
+            
+            // will have been done with the rewrite if necessary in the above call
+            updateMain = PLANK_FALSE;
         }
         else
         {
             updateMain = PLANK_TRUE;
         }
     }
-
-//    if (dataLength > originalChunkLength)
-//    {
-//        if (!isLastChunk)
-//        {
-//            if (isNewChunk)
-//            {
-//                // shouldn't happen but the next few lines assume this is not a new chunk
-//                result = PlankResult_FileWriteError;
-//                goto exit;
-//            }
-//            
-//            if ((result = pl_IffFileWriter_RewriteFileUpdatingChunkInfo (p, &chunkInfo)) != PlankResult_OK) goto exit;
-//            
-//            updateMain = PLANK_FALSE;
-//        }
-//        else
-//        {
-//            // will have been done with the rewrite if necessary in the above call
-//            updateMain = PLANK_TRUE;
-//        }
-//    }
+    else if (newChunkInfo.chunkLength < originalChunkLength)
+    {
+        if (!isNewChunk && (mode == PLANKIFFFILEWRITER_MODEREPLACESHRINK))
+        {
+            if ((result = pl_IffFileWriter_RewriteFileUpdatingChunkInfo (p, &newChunkInfo)) != PlankResult_OK) goto exit;
+            
+            // will have been done with the rewrite if necessary in the above call
+            updateMain = PLANK_FALSE;
+        }
+    }
+    
+    // chunkInfo should still be valid as only chunks after it may have moved position
     
     if ((result = pl_File_SetPosition (&p->file, chunkStartPos)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteFourCharCode (&p->file, chunkID)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_WriteUI (&p->file, chunkInfo.chunkLength)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI (&p->file, newChunkInfo.chunkLength)) != PlankResult_OK) goto exit;
     
-    if (append)
+    if (mode == PLANKIFFFILEWRITER_MODEAPPEND)
     {
-        if ((result = pl_File_SetPosition (&p->file, chunkInfo.chunkPos + originalChunkLength)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_SetPosition (&p->file, newChunkInfo.chunkPos + originalChunkLength)) != PlankResult_OK) goto exit;
     }
     
     if ((result = pl_File_Write (&p->file, data, (int)dataLength)) != PlankResult_OK) goto exit;
     
-    if (chunkInfo.chunkLength & 1)
+    if (newChunkInfo.chunkLength & 1)
     {
         if ((result = pl_File_WriteUC (&p->file, 0)) != PlankResult_OK) goto exit;
         
-        newChunkLengthPadded = chunkInfo.chunkLength + 1;        
+        newChunkLengthPadded = newChunkInfo.chunkLength + 1;        
     }
     else
     {
-        newChunkLengthPadded = chunkInfo.chunkLength;
+        newChunkLengthPadded = newChunkInfo.chunkLength;
     }
     
     if (updateMain)
     {
-        p->headerInfo.mainLength += newChunkLengthPadded - originalChunkLength; // take off original length which will be zero
+        // take off original length which will be zero for new chunks anyway
+        p->headerInfo.mainLength += newChunkLengthPadded - originalChunkLength;
         
         if (isNewChunk)
             p->headerInfo.mainLength += 8;
@@ -340,9 +363,12 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFou
     
     if (isNewChunk)
     {        
-        if ((result = pl_DynamicArray_AddItem (&p->chunkInfos, &chunkInfo)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_AddItem (&p->chunkInfos, &newChunkInfo)) != PlankResult_OK) goto exit;
     }
-
+    else
+    {
+        origChunkInfo->chunkLength = newChunkInfo.chunkLength;
+    }
 
 exit:
     return result;
@@ -391,21 +417,117 @@ exit:
     return result;
 }
 
-//PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef p, PlankIffFileWriterChunkInfo* updatedChunkInfo)
-//{
-//    PlankResult result = PlankResult_OK;
-//    int mode;
-//    
-//    if ((result = pl_File_GetMode (&p->file, &mode)) != PlankResult_OK) goto exit;
-//
-//    if (!(mode & PLANKFILE_READ))
-//    {
-//        result = PlankResult_FileReadError;
-//        goto exit;
-//    }
-//    
-//    
-//exit:
-//    return result;    
-//}
-//
+PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef p, PlankIffFileWriterChunkInfo* updatedChunkInfo)
+{
+    PlankUC copyBuffer[PLANKIFFFILEWRITER_COPYLENGTH];
+    PlankResult result = PlankResult_OK;
+    PlankIffFileWriterChunkInfo* chunkInfos;
+    PlankIffFileWriter tempWriter;
+    PlankPath tempPath;
+    int mode, numChunks, i, bytesRead;
+    PlankUI copyChunkLengthRemain, bytesThisTime;
+    
+    if ((result = pl_File_GetMode (&p->file, &mode)) != PlankResult_OK) goto exit;
+
+    if (!(mode & PLANKFILE_READ))
+    {
+        result = PlankResult_FileReadError;
+        goto exit;
+    }
+        
+    if ((result = pl_Path_InitTemp (&tempPath)) != PlankResult_OK) goto exit;
+    if ((result = pl_IffFileWriter_Init (&tempWriter)) != PlankResult_OK) goto exit;
+    
+    result = pl_IffFileWriter_OpenReplacing (&tempWriter,
+                                             pl_Path_GetFullPath (&tempPath),
+                                             pl_File_IsBigEndian (&p->file),
+                                             p->headerInfo.mainID,
+                                             p->headerInfo.formatID);
+    
+    if (result != PlankResult_OK) goto exit;
+
+    numChunks = pl_DynamicArray_GetSize (&p->chunkInfos);
+    chunkInfos = (PlankIffFileWriterChunkInfo*)pl_DynamicArray_GetArray (&p->chunkInfos);
+    
+    for (i = 0; i < numChunks; ++i)
+    {
+        if (chunkInfos[i].chunkID != updatedChunkInfo->chunkID)
+        {            
+            if ((result = pl_File_SetPosition (&p->file, chunkInfos[i].chunkPos)) != PlankResult_OK) goto exit;
+            
+            copyChunkLengthRemain = chunkInfos[i].chunkLength;
+            
+            while (copyChunkLengthRemain > 0)
+            {
+                bytesThisTime = pl_MinUI (copyChunkLengthRemain, PLANKIFFFILEWRITER_COPYLENGTH);
+                
+                if ((result = pl_File_Read (&p->file, copyBuffer, bytesThisTime, &bytesRead)) != PlankResult_OK) goto exit;
+                
+                if ((int)bytesThisTime != bytesRead)
+                {
+                    // something is wrong if these don't match here
+                    result = PlankResult_FileReadError;
+                    goto exit;
+                }
+                
+                if ((result = pl_IffFileWriter_WriteChunk (&tempWriter, chunkInfos[i].chunkID, copyBuffer, bytesThisTime, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+                
+                copyChunkLengthRemain -= bytesThisTime;
+            }            
+        }
+        else
+        {
+            if (chunkInfos[i].chunkPos != updatedChunkInfo->chunkPos)
+            {
+                // something is wrong if these don't match here
+                result = PlankResult_FileReadError;
+                goto exit;
+            }
+
+            if ((result = pl_File_SetPosition (&p->file, chunkInfos[i].chunkPos)) != PlankResult_OK) goto exit;
+            
+            copyChunkLengthRemain = pl_MinUI (chunkInfos[i].chunkLength, updatedChunkInfo->chunkLength);
+
+            while (copyChunkLengthRemain > 0)
+            {
+                bytesThisTime = pl_MinUI (copyChunkLengthRemain, PLANKIFFFILEWRITER_COPYLENGTH);
+                
+                if ((result = pl_File_Read (&p->file, copyBuffer, bytesThisTime, &bytesRead)) != PlankResult_OK) goto exit;
+
+                if ((int)bytesThisTime != bytesRead)
+                {
+                    // something is wrong if these don't match here
+                    result = PlankResult_FileReadError;
+                    goto exit;
+                }
+                
+                if ((result = pl_IffFileWriter_WriteChunk (&tempWriter, chunkInfos[i].chunkID, copyBuffer, bytesThisTime, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+                
+                copyChunkLengthRemain -= bytesThisTime;
+            }
+            
+            // pad with zero for the larger size, no need to round to even bytes as pl_IffFileWriter_WriteChunk does this for us
+            if (updatedChunkInfo->chunkLength > chunkInfos[i].chunkLength)
+            {
+                bytesThisTime = updatedChunkInfo->chunkLength - chunkInfos[i].chunkLength;
+                
+                pl_MemoryZero (copyBuffer, bytesThisTime);
+                
+                if ((result = pl_IffFileWriter_WriteChunk (&tempWriter, chunkInfos[i].chunkID, copyBuffer, bytesThisTime, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+            }
+        }
+    }
+
+    if ((result = pl_File_ResetPosition (&p->file)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ResetPosition (pl_IffFileWriter_GetFile (&tempWriter))) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Copy (&p->file, pl_IffFileWriter_GetFile (&tempWriter), 0)) != PlankResult_OK) goto exit;
+    
+    // think where? if early exit..
+    pl_IffFileWriter_DeInit (&tempWriter);
+    //pl_FileErase (pl_Path_GetFullPath (&tempPath));
+    pl_Path_DeInit (&tempPath);
+
+exit:
+    return result;    
+}
+

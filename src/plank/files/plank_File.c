@@ -147,6 +147,10 @@ PlankResult pl_FileDefaultWriteCallback (PlankFileRef p, const void* data, const
     if (size != maximumBytes)
         return PlankResult_FileWriteError;
     
+#if PLANK_DEBUG
+    fflush (p->stream);
+#endif
+    
     return PlankResult_OK;
 }
 

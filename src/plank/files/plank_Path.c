@@ -39,6 +39,7 @@
 #include "../core/plank_StandardHeader.h"
 #include "plank_Path.h"
 #include "../maths/plank_Maths.h"
+#include "../random/plank_RNG.h"
 
 #if PLANK_MAC
 # include <pwd.h>
@@ -522,6 +523,17 @@ exit:
     return result;
 }
 #endif
+
+PlankResult pl_Path_InitTemp (PlankPathRef p)
+{
+    PlankRNGRef rng;
+    char name[256];
+
+    rng = pl_RNGGlobal();
+    
+    snprintf (name, 256, "temp_%08x", (PlankUI)(((size_t)p + pl_RNG_Next (rng)) & 0xFFFFFFFF));
+    return pl_Path_InitSystem (p, PLANKPATH_SYSTEMTEMP, name);
+}
 
 PlankResult pl_Path_DeInit (PlankPathRef p)
 {

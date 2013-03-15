@@ -465,19 +465,19 @@ static inline short pl_ModS (short a, short b)              { return a % b; }
 static inline int pl_ModI (int a, int b)                    { return a % b; }
 static inline PlankLL pl_ModLL (PlankLL a, PlankLL b)       { return a % b; }
 
-/** Returns minimum of @e a and @e b. */
-static inline short pl_MinS (short a, short b)                      { return (a > b) ? b : a; }
-static inline int pl_MinI (int a, int b)                            { return (a > b) ? b : a; }
-/** Returns minimum of @e a and @e b. */
-static inline PlankLL pl_MinLL (PlankLL a, PlankLL b)               { return (a > b) ? b : a; }
+static inline PlankS pl_MinS (PlankS a, PlankS b)           { return (a > b) ? b : a; }
+static inline PlankI pl_MinI (PlankI a, PlankI b)           { return (a > b) ? b : a; }
+static inline PlankLL pl_MinLL (PlankLL a, PlankLL b)       { return (a > b) ? b : a; }
+static inline PlankS pl_MaxS (PlankS a, PlankS b)           { return (a < b) ? b : a; }
+static inline PlankI pl_MaxI (PlankI a, PlankI b)           { return (a < b) ? b : a; }
+static inline PlankLL pl_MaxLL (PlankLL a, PlankLL b)       { return (a < b) ? b : a; }
 
-/** Returns maximum of @e a and @e b. */
-static inline short pl_MaxS (short a, short b)                      { return (a < b) ? b : a; }
-static inline int pl_MaxI (int a, int b)                            { return (a < b) ? b : a; }
-static inline PlankUI pl_MaxUI (PlankUI a, PlankUI b)               { return (a < b) ? b : a; }
-
-/** Returns maximum of @e a and @e b. */
-static inline PlankLL pl_MaxLL (PlankLL a, PlankLL b)               { return (a < b) ? b : a; }
+static inline PlankUS pl_MinUS (PlankUS a, PlankUS b)           { return (a > b) ? b : a; }
+static inline PlankUI pl_MinUI (PlankUI a, PlankUI b)           { return (a > b) ? b : a; }
+static inline PlankULL pl_MinULL (PlankULL a, PlankULL b)       { return (a > b) ? b : a; }
+static inline PlankUS pl_MaxUS (PlankUS a, PlankUS b)           { return (a < b) ? b : a; }
+static inline PlankUI pl_MaxUI (PlankUI a, PlankUI b)           { return (a < b) ? b : a; }
+static inline PlankULL pl_MaxULL (PlankULL a, PlankULL b)       { return (a < b) ? b : a; }
 
 static inline short pl_IsEqualToS (short a, short b)                        { return a == b ? 1 : 0; }
 static inline int pl_IsEqualToI (int a, int b)                              { return a == b ? 1 : 0; }
