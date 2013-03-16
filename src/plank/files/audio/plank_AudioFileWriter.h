@@ -93,7 +93,7 @@ PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* file
 /** */
 PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p);
 
-PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, void* data);
+PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
 
 
 /** @} */

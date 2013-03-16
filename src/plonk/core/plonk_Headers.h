@@ -98,6 +98,7 @@
 #include "../files/plonk_FilePath.h"
 
 #include "../files/audio/plonk_AudioFileReader.h"
+#include "../files/audio/plonk_AudioFileWriter.h"
 
 #include "../misc/plonk_NeuralNetwork.h"
 #include "../misc/plonk_JSON.h"

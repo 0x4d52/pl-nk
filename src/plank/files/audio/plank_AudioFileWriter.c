@@ -46,13 +46,13 @@
 
 // private
 
-typedef PlankResult (*PlankAudioFileWriterWriteFramesFunction)(PlankAudioFileWriterRef, const int, void*);
+typedef PlankResult (*PlankAudioFileWriterWriteFramesFunction)(PlankAudioFileWriterRef, const int, const void*);
 typedef PlankResult (*PlankAudioFileWriterSetFramePositionFunction)(PlankAudioFileWriterRef, const PlankLL);
 typedef PlankResult (*PlankAudioFileWriterGetFramePositionFunction)(PlankAudioFileWriterRef, PlankLL *);
 
 PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p);
-PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, void* data);
+PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
 
 //PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit()
 //{
@@ -225,7 +225,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, void* data)
+PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
 {
     if (!p->writeFramesFunction)
         return PlankResult_FunctionsInvalid;
@@ -317,7 +317,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, void* data)
+PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
