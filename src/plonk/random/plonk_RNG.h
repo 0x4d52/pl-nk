@@ -181,6 +181,22 @@ inline int rand2 (const int scale) throw()
 	return RNG::global().uniform (-scale, scale);
 }
 
+inline Int24 rand (const Int24 scale) throw()
+{
+	return RNG::global().uniform (int (scale));
+}
+
+inline Int24 rand (const Int24 min, const Int24 max) throw()
+{
+	return RNG::global().uniform (int (min), int (max));
+}
+
+inline Int24 rand2 (const Int24 scale) throw()
+{
+    const int intScale (scale);
+	return RNG::global().uniform (-intScale, intScale);
+}
+
 inline double exprand (const int min, const int max) throw()
 {
 	return RNG::global().exponential (double (min), double (max));

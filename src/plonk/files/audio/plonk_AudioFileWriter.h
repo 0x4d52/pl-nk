@@ -63,7 +63,11 @@ template<class SampleType>
 class AudioFileWriterInternal : public AudioFileWriterInternalBase<SampleType>
 {
 public:
+    typedef NumericalArray<SampleType>      Buffer;
+    typedef NumericalArray2D<SampleType>    Buffers;
+    
     AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize) throw()
+    :   buffer (Buffer::withSize (numChannels * bufferSize, false))
     {
         pl_AudioFileWriter_Init (&peer);
 
@@ -86,8 +90,19 @@ public:
         pl_AudioFileWriter_WriteFrames (&peer, numFrames, frameData);
     }
     
+//    void writeFrames (Buffers const& frames) throw()
+//    {
+//    }
+    
+    void writeFrames (Buffer const& frames) throw()
+    {
+        pl_AudioFileWriter_WriteFrames (&peer, frames.length() / peer.formatInfo.numChannels, frames.getArray());
+    }
+
+    
 private:
     PlankAudioFileWriter peer;
+    Buffer buffer;
 };
 
 
@@ -97,6 +112,8 @@ class AudioFileWriter: public SmartPointerContainer< AudioFileWriterInternal<Sam
 public:
     typedef AudioFileWriterInternal<SampleType> Internal;
     typedef SmartPointerContainer<Internal>     Base;
+    typedef NumericalArray<SampleType>          Buffer;
+    typedef NumericalArray2D<SampleType>        Buffers;
 
     AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize = AudioFile::DefaultBufferSize) throw()
 	:	Base (new Internal (path, numChannels, sampleRate, bufferSize))
@@ -107,7 +124,12 @@ public:
     {
         this->getInternal()->writeFrames (numFrames, frameData);
     }
-    
+
+    void writeFrames (Buffer const& frames) throw()
+    {
+        this->getInternal()->writeFrames (frames);
+    }
+
 private:
     PlankAudioFileWriter peer;
 };
