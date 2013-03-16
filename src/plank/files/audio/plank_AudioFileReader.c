@@ -161,29 +161,8 @@ PlankResult pl_AudioFileReader_DeInit (PlankAudioFileReaderRef p)
         goto exit;
     }
     
-    switch (p->formatInfo.format)
-    {
-        case PLANKAUDIOFILE_FORMAT_WAV:
-        case PLANKAUDIOFILE_FORMAT_AIFF:
-        case PLANKAUDIOFILE_FORMAT_AIFC:
-        case PLANKAUDIOFILE_FORMAT_UNKNOWNIFF:
-            result = pl_IffFileReader_Destroy ((PlankIffFileReader*)p->peer);
-            break;
-#if PLANK_OGGVORBIS
-        case PLANKAUDIOFILE_FORMAT_OGGVORBIS:
-            result = pl_AudioFileReader_OggVorbis_Close (p);
-            break;
-#endif
-        default:
-            if (p->peer != PLANK_NULL)
-                result = PlankResult_UnknownError;
-    }
-    
-    if (p->metaData != PLANK_NULL)
-    {
-        if ((result = pl_AudioFileMetaData_Destroy (p->metaData)) != PlankResult_OK) goto exit;
-    }
-    
+    if ((result = pl_AudioFileReader_Close (p)) != PlankResult_OK) goto exit;
+        
     pl_MemoryZero (p, sizeof (PlankAudioFileReader));
 
 exit:
@@ -401,10 +380,41 @@ exit:
 
 PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
 {
+    PlankResult result = PlankResult_OK;
+
     if (p == PLANK_NULL || p->peer == PLANK_NULL)
         return PlankResult_FileCloseFailed;
     
-    return pl_File_Close ((PlankFileRef)p->peer); 
+    switch (p->formatInfo.format)
+    {
+        case PLANKAUDIOFILE_FORMAT_WAV:
+        case PLANKAUDIOFILE_FORMAT_AIFF:
+        case PLANKAUDIOFILE_FORMAT_AIFC:
+        case PLANKAUDIOFILE_FORMAT_UNKNOWNIFF:
+            result = pl_IffFileReader_Destroy ((PlankIffFileReader*)p->peer);
+            break;
+#if PLANK_OGGVORBIS
+        case PLANKAUDIOFILE_FORMAT_OGGVORBIS:
+            result = pl_AudioFileReader_OggVorbis_Close (p);
+            break;
+#endif
+        default:
+            if (p->peer != PLANK_NULL)
+                return PlankResult_UnknownError;
+    }
+    
+    if (result != PlankResult_OK)
+        goto exit;
+    
+    if (p->metaData != PLANK_NULL)
+    {
+        if ((result = pl_AudioFileMetaData_Destroy (p->metaData)) != PlankResult_OK) goto exit;
+    }
+
+    result = pl_File_Close ((PlankFileRef)p->peer);
+    
+exit:
+    return result;
 }
 
 PlankResult pl_AudioFileReader_GetFormat (PlankAudioFileReaderRef p, int *format)

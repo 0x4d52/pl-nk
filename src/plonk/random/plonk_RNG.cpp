@@ -115,9 +115,9 @@ int RNG::uniform (const int max) throw()
 
 int RNG::uniform (const int min, const int max) throw()
 {
-    plonk_assert (min >= 0);
-    plonk_assert (max > 0);
-    plonk_assert (max > min);    
+//    plonk_assert (min >= 0);
+//    plonk_assert (max > 0);
+    plonk_assert (max > min);
     return pl_RNG_NextInt (this->getInternal()->getRNGRef(), max - min) + min;
 }
 

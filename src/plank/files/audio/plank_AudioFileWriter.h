@@ -82,11 +82,19 @@ PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p);
  @return The <i>Plank %File</i> object. */
 PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p);
 
+/** Get format before open. */
+PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormat (PlankAudioFileWriterRef p);
+
+PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate);
+
 /** */
 PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath);
 
 /** */
 PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p);
+
+PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, void* data);
+
 
 /** @} */
 
@@ -94,10 +102,20 @@ PLANK_END_C_LINKAGE
 
 #if !DOXYGEN
 typedef struct PlankAudioFileWriter
-{
-    PlankIffFileWriter iff;
+{    
+    PlankP peer;
     PlankAudioFileFormatInfo formatInfo;
     
+    PlankLL dataLength;
+    PlankLL numFrames;
+    PlankLL dataPosition;
+    
+    PlankAudioFileMetaDataRef metaData;
+    
+    PlankP writeFramesFunction;
+    PlankP setFramePositionFunction;
+    PlankP getFramePositionFunction;
+
 } PlankAudioFileWriter;
 #endif
 
