@@ -920,7 +920,7 @@ exit:
 PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
-    PlankLL readChunkEnd, pos = PLANKIFFFILE_FIRSTCHUNKPOSITION;
+    PlankLL readChunkEnd, mainEnd, pos = PLANKIFFFILE_FIRSTCHUNKPOSITION;
     PlankFourCharCode readChunkID;
     PlankUI readChunkLength;
     PlankIffFileReaderRef iff;
@@ -932,9 +932,10 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
     
     if ((result = pl_AudioFileMetaData_SetSource (p->metaData, PLANKAUDIOFILE_FORMAT_WAV)) != PlankResult_OK) goto exit;
     
+    if ((result = pl_IffFileReader_GetMainEnd (iff, &mainEnd)) != PlankResult_OK) goto exit;
     if ((result = pl_File_SetPosition (&iff->file, pos)) != PlankResult_OK) goto exit;
     
-    while ((pos < iff->headerInfo.mainEnd) && (pl_File_IsEOF (&iff->file) == PLANK_FALSE))
+    while ((pos < mainEnd) && (pl_File_IsEOF (&iff->file) == PLANK_FALSE))
     {
         if ((result = pl_IffFileReader_ParseChunkHeader (iff, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
         
@@ -967,8 +968,6 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
         }
         else
         {
-//            printf("%s - %d bytes\n", pl_FourCharCode2String (readChunkID).string, readChunkLength);
-
             block = pl_DynamicArray_Create();
             
             if (block != PLANK_NULL)

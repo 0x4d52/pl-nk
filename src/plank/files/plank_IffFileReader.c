@@ -144,7 +144,7 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
     if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.formatID)) != PlankResult_OK) goto exit;
     
     p->headerInfo.mainLength = (PlankLL)chunkLength;
-    p->headerInfo.mainEnd = p->headerInfo.mainLength + 8;
+//    p->headerInfo.mainEnd = p->headerInfo.mainLength + 8;
     
 exit:
     return result;
@@ -224,7 +224,7 @@ PlankResult pl_IffFileReader_GetMainLength (PlankIffFileReaderRef p, PlankLL* re
 
 PlankResult pl_IffFileReader_GetMainEnd (PlankIffFileReaderRef p, PlankLL* result)
 {
-    *result = p->headerInfo.mainEnd;
+    *result = p->headerInfo.mainLength + 8;
     return PlankResult_OK;
 }
 
@@ -245,62 +245,23 @@ PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB is
         chunkLength = (PlankUI)p->headerInfo.mainLength;
         pl_SwapEndianUI (&chunkLength);
         p->headerInfo.mainLength = (PlankLL)chunkLength;
-        p->headerInfo.mainEnd = p->headerInfo.mainLength + 8;
+//        p->headerInfo.mainEnd = p->headerInfo.mainLength + 8;
     }
     
     return PlankResult_OK;
 }
 
-//PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankLL readChunkEnd, pos = PLANKIFFFILE_FIRSTCHUNKPOSITION;
-//    PlankFourCharCode readChunkID;
-//    PlankUI readChunkLength;
-//    
-//    if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;
-//
-//    while ((pos < p->headerInfo.mainEnd) && (pl_File_IsEOF (&p->file) == PLANK_FALSE))
-//    {
-//        if ((result = pl_File_ReadFourCharCode (&p->file, &readChunkID)) != PlankResult_OK) goto exit;
-//        if ((result = pl_File_ReadUI (&p->file, &readChunkLength)) != PlankResult_OK) goto exit;
-//        if ((result = pl_File_GetPosition (&p->file, &pos)) != PlankResult_OK) goto exit;
-//        
-//        readChunkEnd = pos + readChunkLength + (readChunkLength & 1);
-//        
-//        if (chunkID == readChunkID)
-//        {
-//            if (chunkLength) 
-//                *chunkLength = readChunkLength;
-//            
-//            if (chunkDataPos)
-//                *chunkDataPos = pos;
-//            
-//            result = PlankResult_OK;
-//            goto exit;
-//        }
-//        
-//        pos = readChunkEnd;
-//        if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;        
-//    }
-//    
-//    result = PlankResult_IffFileReaderChunkNotFound;
-//    
-//exit:
-//    return result;
-//}
-
-
 PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
-    PlankLL readChunkEnd, pos = PLANKIFFFILE_FIRSTCHUNKPOSITION;
+    PlankLL readChunkEnd, mainEnd, pos = PLANKIFFFILE_FIRSTCHUNKPOSITION;
     PlankFourCharCode readChunkID;
     PlankUI readChunkLength;
-    
+
+    if ((result = pl_IffFileReader_GetMainEnd (p, &mainEnd)) != PlankResult_OK) goto exit;
     if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;
     
-    while ((pos < p->headerInfo.mainEnd) && (pl_File_IsEOF (&p->file) == PLANK_FALSE))
+    while ((pos < mainEnd) && (pl_File_IsEOF (&p->file) == PLANK_FALSE))
     {
         if ((result = pl_IffFileReader_ParseChunkHeader (p, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
 
