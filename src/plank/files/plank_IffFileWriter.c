@@ -398,6 +398,9 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
     PlankPath tempPath;
     int mode, numChunks, i, bytesRead;
     PlankUI copyChunkLengthRemain, bytesThisTime;
+    PlankB eraseOriginalFile;
+    
+    eraseOriginalFile = PLANK_FALSE;
     
     if ((result = pl_File_GetMode (&p->file, &mode)) != PlankResult_OK)     return result;
     if (!(mode & PLANKFILE_READ))                                           return PlankResult_FileReadError;
@@ -449,6 +452,9 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
                 result = PlankResult_FileReadError;
                 goto exit;
             }
+            
+            if (updatedChunkInfo->chunkLength < chunkInfos[i].chunkLength)
+                eraseOriginalFile = PLANK_TRUE;
 
             if ((result = pl_File_SetPosition (&p->file, chunkInfos[i].chunkPos)) != PlankResult_OK) goto exit;
             
@@ -484,7 +490,15 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
         }
     }
 
-    if ((result = pl_File_ResetPosition (&p->file)) != PlankResult_OK) goto exit;
+    if (eraseOriginalFile)
+    {
+        if ((result = pl_File_Clear (&p->file)) != PlankResult_OK) goto exit;
+    }
+    else
+    {
+        if ((result = pl_File_ResetPosition (&p->file)) != PlankResult_OK) goto exit;
+    }
+    
     if ((result = pl_File_ResetPosition (pl_IffFileWriter_GetFile (&tempWriter))) != PlankResult_OK) goto exit;
     if ((result = pl_File_Copy (&p->file, pl_IffFileWriter_GetFile (&tempWriter), 0)) != PlankResult_OK) goto exit;
     

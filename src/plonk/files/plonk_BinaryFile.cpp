@@ -69,6 +69,14 @@ PlankResult BinaryFileInternal::dynamicMemoryCloseCallback (PlankFileRef p)
     return pl_File_Init (p);
 }
 
+PlankResult BinaryFileInternal::dynamicMemoryClearCallback (PlankFileRef p)
+{
+    plonk_assert (p != 0);
+    ByteArray* array = static_cast<ByteArray*> (p->stream);
+    array->setSize (0, false);
+    return PlankResult_OK;
+}
+
 PlankResult BinaryFileInternal::dynamicMemoryGetStatusCallback (PlankFileRef p, int type, int* status)
 {
     plonk_assert (p != 0);
@@ -247,6 +255,7 @@ BinaryFileInternal::BinaryFileInternal (ByteArray const& bytes,
     result = pl_File_SetFunction (p,
                                   dynamicMemoryOpenCallback,
                                   dynamicMemoryCloseCallback,
+                                  dynamicMemoryClearCallback,
                                   dynamicMemoryGetStatusCallback,
                                   dynamicMemoryReadCallback,
                                   dynamicMemoryWriteCallback,

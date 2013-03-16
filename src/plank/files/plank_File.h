@@ -114,6 +114,7 @@ PlankResult pl_FileMakeDirectory (const char* filepath);
 
 typedef PlankResult (*PlankFileOpenFunction)(PlankFileRef);
 typedef PlankResult (*PlankFileCloseFunction)(PlankFileRef);
+typedef PlankResult (*PlankFileClearFunction)(PlankFileRef);
 typedef PlankResult (*PlankFileGetStatusFunction)(PlankFileRef, int, int*);
 typedef PlankResult (*PlankFileReadFunction)(PlankFileRef, PlankP ptr, int, int*);
 typedef PlankResult (*PlankFileWriteFunction)(PlankFileRef, const void*, const int);
@@ -147,7 +148,8 @@ PlankResult pl_File_Destroy (PlankFileRef p);
 
 PlankResult pl_File_SetFunction (PlankFileRef p, 
                                  PlankFileOpenFunction openFunction, 
-                                 PlankFileCloseFunction closeFunction, 
+                                 PlankFileCloseFunction closeFunction,
+                                 PlankFileClearFunction clearFunction,
                                  PlankFileGetStatusFunction statusFunction,
                                  PlankFileReadFunction readFunction,
                                  PlankFileWriteFunction writeFunction,
@@ -223,6 +225,7 @@ PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memor
 
 PlankResult pl_File_Copy (PlankFileRef p, PlankFileRef source, const PlankLL size);
 
+PlankResult pl_File_Clear (PlankFileRef p);
 
 /** Determine if a file object is in big endian format.
  @param p The <i>Plank %File</i> object. 
@@ -571,6 +574,7 @@ typedef struct PlankFile
         
     PlankFileOpenFunction           openFunction;
     PlankFileCloseFunction          closeFunction;
+    PlankFileClearFunction          clearFunction;
     PlankFileGetStatusFunction      statusFunction;
     PlankFileReadFunction           readFunction;
     PlankFileWriteFunction          writeFunction;

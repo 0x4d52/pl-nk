@@ -88,6 +88,26 @@ PlankResult pl_FileDefaultCloseCallback (PlankFileRef p)
     return PlankResult_OK;
 }
 
+PlankResult pl_FileDefaultClearCallback (PlankFileRef p)
+{
+    int err;
+    PlankResult result;
+    
+    if (!(p->mode & PLANKFILE_WRITE))
+        return PlankResult_FileWriteError;
+    
+    err = fclose ((FILE*)p->stream);
+    p->stream = 0;
+    
+    if (err != 0)
+        return PlankResult_FileCloseFailed;
+    
+    if ((result = pl_FileErase (p->path)) != PlankResult_OK)
+        return result;
+    
+    return pl_FileDefaultOpenCallback (p);
+}
+
 PlankResult pl_FileDefaultGetStatusCallback (PlankFileRef p, int type, int* status)
 {
     switch (type)
@@ -212,6 +232,11 @@ static PlankResult pl_FileMemoryOpenCallback (PlankFileRef p)
 static PlankResult pl_FileMemoryCloseCallback (PlankFileRef p)
 {
     return pl_File_Init (p);
+}
+
+static PlankResult pl_FileMemoryClearCallback (PlankFileRef p)
+{
+    return pl_MemoryZero (p->stream, p->size);
 }
 
 static PlankResult pl_FileMemoryGetStatusCallback (PlankFileRef p, int type, int* status)
@@ -352,6 +377,11 @@ static PlankResult pl_FileDynamicArrayCloseCallback (PlankFileRef p)
 
 exit:
     return result;
+}
+
+static PlankResult pl_FileDynamicArrayClearCallback (PlankFileRef p)
+{
+    return pl_DynamicArray_SetSize ((PlankDynamicArrayRef)p->stream, 0);
 }
 
 static PlankResult pl_FileDynamicArrayGetStatusCallback (PlankFileRef p, int type, int* status)
@@ -627,7 +657,7 @@ PlankResult pl_File_Init (PlankFileRef p)
     p->path[0] = '\0';    
     
     // initialise to default functions
-    pl_File_SetFunction (p, 0, 0, 0, 0, 0, 0, 0);
+    pl_File_SetFunction (p, 0, 0, 0, 0, 0, 0, 0, 0);
     
     return PlankResult_OK;
 }
@@ -670,7 +700,8 @@ exit:
 
 PlankResult pl_File_SetFunction (PlankFileRef p, 
                                  PlankFileOpenFunction openFunction, 
-                                 PlankFileCloseFunction closeFunction, 
+                                 PlankFileCloseFunction closeFunction,
+                                 PlankFileClearFunction clearFunction,
                                  PlankFileGetStatusFunction statusFunction,
                                  PlankFileReadFunction readFunction,
                                  PlankFileWriteFunction writeFunction,
@@ -680,8 +711,11 @@ PlankResult pl_File_SetFunction (PlankFileRef p,
     if (openFunction != PLANK_NULL) p->openFunction = openFunction; 
     else p->openFunction = pl_FileDefaultOpenCallback;
     
-    if (closeFunction != PLANK_NULL) p->closeFunction = closeFunction; 
+    if (closeFunction != PLANK_NULL) p->closeFunction = closeFunction;
     else p->closeFunction = pl_FileDefaultCloseCallback;
+
+    if (clearFunction != PLANK_NULL) p->clearFunction = clearFunction;
+    else p->clearFunction = pl_FileDefaultClearCallback;
     
     if (statusFunction != PLANK_NULL) p->statusFunction = statusFunction; 
     else p->statusFunction = pl_FileDefaultGetStatusCallback;
@@ -855,6 +889,7 @@ PlankResult pl_File_OpenMemory (PlankFileRef p, void* memory, const PlankLL size
     result = pl_File_SetFunction (p,
                                   pl_FileMemoryOpenCallback,
                                   pl_FileMemoryCloseCallback,
+                                  pl_FileMemoryClearCallback,
                                   pl_FileMemoryGetStatusCallback,
                                   pl_FileMemoryReadCallback,
                                   pl_FileMemoryWriteCallback,
@@ -889,6 +924,7 @@ PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memor
     result = pl_File_SetFunction (p,
                                   pl_FileDynamicArrayOpenCallback,
                                   pl_FileDynamicArrayCloseCallback,
+                                  pl_FileDynamicArrayClearCallback,
                                   pl_FileDynamicArrayGetStatusCallback,
                                   pl_FileDynamicArrayReadCallback,
                                   pl_FileDynamicArrayWriteCallback,
@@ -929,6 +965,14 @@ PlankResult pl_File_Copy (PlankFileRef p, PlankFileRef source, const PlankLL siz
     
 exit:
     return result;
+}
+
+PlankResult pl_File_Clear (PlankFileRef p)
+{
+    if (p->stream == 0)
+        return PlankResult_FileInvalid;
+
+    return (p->clearFunction) (p);
 }
 
 PlankB pl_File_IsBigEndian (PlankFileRef p)

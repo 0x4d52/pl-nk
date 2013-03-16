@@ -60,6 +60,7 @@ public:
     
     static PlankResult dynamicMemoryOpenCallback (PlankFileRef p);
     static PlankResult dynamicMemoryCloseCallback (PlankFileRef p);
+    static PlankResult dynamicMemoryClearCallback (PlankFileRef p);
     static PlankResult dynamicMemoryGetStatusCallback (PlankFileRef p, int type, int* status);
     static PlankResult dynamicMemoryReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesReadOut);
     static PlankResult dynamicMemoryWriteCallback (PlankFileRef p, const void* data, const int maximumBytes);
