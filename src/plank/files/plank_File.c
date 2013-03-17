@@ -990,7 +990,7 @@ PlankB pl_File_IsNativeEndian (PlankFileRef p)
 #if PLANK_BIGENDIAN
     return !! (p->mode & PLANKFILE_BIGENDIAN);
 #elif PLANK_LITTLEENDIAN
-    return ! (p->mode & PLANKFILE_BIGENDIAN);
+    return  ! (p->mode & PLANKFILE_BIGENDIAN);
 #else
     #error Neither PLANK_BIGENDIAN or PLANK_LITTLEENDIAN are set to 1
 #endif
@@ -1316,10 +1316,10 @@ PlankResult pl_File_ReadFourCharCode (PlankFileRef p, PlankFourCharCode* data)
 {
     PlankResult result;
     
-    result = pl_File_Read (p, data, sizeof (PlankFourCharCode), PLANK_NULL);
+    result = pl_File_Read (p, data, sizeof (*data), PLANK_NULL);
     
 #if PLANK_BIGENDIAN
-    pl_SwapEndianI ((PlankI) data);
+    pl_SwapEndianI ((PlankI*) data);
 #endif
     
     return result;    
@@ -1650,7 +1650,7 @@ PlankResult pl_File_WriteD (PlankFileRef p, double data)
 
 PlankResult pl_File_WriteFourCharCode (PlankFileRef p, PlankFourCharCode data)
 {
-    return pl_File_WriteI (p, (PlankI)data);
+    return pl_File_Write (p, &data, sizeof (data));
 }
 
 PlankResult pl_File_WriteString (PlankFileRef p, const char* text)

@@ -330,7 +330,7 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFou
         if ((result = pl_File_WriteUC (&p->file, 0)) != PlankResult_OK) goto exit;
     }
     
-    mainLength = p->headerInfo.mainLength + chunkLengthChange + (newChunkInfo.chunkLength & 1);
+    mainLength = p->headerInfo.mainLength - (originalChunkLength & 1) + chunkLengthChange + (newChunkInfo.chunkLength & 1);
     
     if (isNewChunk)
         mainLength += 8;

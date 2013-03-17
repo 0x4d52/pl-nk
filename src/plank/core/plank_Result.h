@@ -66,11 +66,11 @@ enum PlankResultIdentifiers
     
     PlankResult_IffFileReaderChunkNotFound,                   ///< The specified chunk ID was not found.
     
-    PlankResult_AudioFileReaderInavlidType,                   ///< Invalid data while reading an audio file.
-    PlankResult_AudioFileReaderUnsupportedType,               ///< Found a valid audio file but not yet supported.
-    PlankResult_AudioFileReaderNotReady,                      ///< The file is not ready for this operation.
-    PlankResult_AudioFileReaderDataChunkInvalid,              ///< The data chunks appears to be invalid. 
-    PlankResult_AudioFileReaderInvalidFilePosition,           ///< A read operation was attempted when the file was at an invalid read position.
+    PlankResult_AudioFileInavlidType,                   ///< Invalid data while accessing an audio file.
+    PlankResult_AudioFileUnsupportedType,               ///< A potentially valid audio file but not yet supported.
+    PlankResult_AudioFileNotReady,                      ///< The file is not ready for this operation.
+    PlankResult_AudioFileDataChunkInvalid,              ///< The data chunks appears to be invalid.
+    PlankResult_AudioFileInvalidFilePosition,           ///< A file operation was attempted when the file was at an invalid position.
     
     PlankResult_ThreadSetFunctionFailed,    ///< Setting the run function failed, probably because the thread is already running.
     PlankResult_ThreadSetUserDataFailed,    ///< Setting the user data failed, probably because the thread is already running.

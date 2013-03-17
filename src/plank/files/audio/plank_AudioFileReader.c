@@ -284,7 +284,7 @@ PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const ch
         p->peer = PLANK_NULL;
         p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
         
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
     }
     
 exit:
@@ -371,7 +371,7 @@ PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFil
         p->peer = PLANK_NULL;
         p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
         
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
     }
     
 exit:
@@ -465,7 +465,7 @@ PlankResult pl_AudioFileReader_SetFramePosition (PlankAudioFileReaderRef p, cons
     
     if (p->peer == PLANK_NULL)
     {
-        result = PlankResult_AudioFileReaderNotReady;
+        result = PlankResult_AudioFileNotReady;
         goto exit;
     }
         
@@ -492,7 +492,7 @@ PlankResult pl_AudioFileReader_GetFramePosition (PlankAudioFileReaderRef p, Plan
     
     if (p->peer == PLANK_NULL)
     {
-        result = PlankResult_AudioFileReaderNotReady;
+        result = PlankResult_AudioFileNotReady;
         goto exit;
     }
     
@@ -603,7 +603,7 @@ exit:
     return result;
     
 invalid:
-    result = PlankResult_AudioFileReaderInavlidType;
+    result = PlankResult_AudioFileInavlidType;
     return result;
 }
 
@@ -820,7 +820,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
 
     if (typeID != pl_FourCharCode ("adtl"))
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
@@ -1005,7 +1005,7 @@ PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const P
         p->numFrames = chunkLength / p->formatInfo.bytesPerFrame;
 
     if ((chunkLength % p->formatInfo.bytesPerFrame) != 0)
-        result = PlankResult_AudioFileReaderDataChunkInvalid;
+        result = PlankResult_AudioFileDataChunkInvalid;
   
     return result;
 }
@@ -1080,7 +1080,7 @@ PlankResult pl_AudioFileReader_AIFC_ParseVersion (PlankAudioFileReaderRef p, con
     if (version == 0) goto exit;    
     if (version == PLANKAUDIOFILE_AIFC_VERSION) goto exit;
     
-    result = PlankResult_AudioFileReaderInavlidType;
+    result = PlankResult_AudioFileInavlidType;
     
 	(void)chunkDataPos;
 	(void)chunkLength;
@@ -1122,7 +1122,7 @@ PlankResult pl_AudioFileReader_AIFC_ParseFormat (PlankAudioFileReaderRef p, cons
     {
         if (p->formatInfo.bitsPerSample != 32)
         {
-            result = PlankResult_AudioFileReaderInavlidType;
+            result = PlankResult_AudioFileInavlidType;
             goto exit;
         }
         
@@ -1132,7 +1132,7 @@ PlankResult pl_AudioFileReader_AIFC_ParseFormat (PlankAudioFileReaderRef p, cons
     {
         if (p->formatInfo.bitsPerSample != 64)
         {
-            result = PlankResult_AudioFileReaderInavlidType;
+            result = PlankResult_AudioFileInavlidType;
             goto exit;
         }
         
@@ -1218,7 +1218,7 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p)
     }
     else
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }    
     
@@ -1272,7 +1272,7 @@ PlankResult pl_AudioFileReader_Iff_ParseMain  (PlankAudioFileReaderRef p,
     return PlankResult_OK;
     
 exit:
-    return PlankResult_AudioFileReaderInavlidType;
+    return PlankResult_AudioFileInavlidType;
 }
 
 PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead)
@@ -1283,13 +1283,13 @@ PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const 
     
     if (p->peer == PLANK_NULL)
     {
-        result = PlankResult_AudioFileReaderNotReady;
+        result = PlankResult_AudioFileNotReady;
         goto exit;
     }
     
     if ((p->dataPosition < 0) || (p->formatInfo.bytesPerFrame <= 0))
     {
-        result = PlankResult_AudioFileReaderNotReady;
+        result = PlankResult_AudioFileNotReady;
         goto exit;
     }
     
@@ -1297,7 +1297,7 @@ PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const 
     
     if (startFrame < 0)
     {
-        result = PlankResult_AudioFileReaderInvalidFilePosition;
+        result = PlankResult_AudioFileInvalidFilePosition;
         goto exit;
     }
     
@@ -1332,7 +1332,7 @@ PlankResult pl_AudioFileReader_Iff_SetFramePosition (PlankAudioFileReaderRef p, 
     
     if ((p->dataPosition < 0) || (p->formatInfo.bytesPerFrame <= 0))
     {
-        result = PlankResult_AudioFileReaderNotReady;
+        result = PlankResult_AudioFileNotReady;
         goto exit;
     }
     
@@ -1350,7 +1350,7 @@ PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, 
     
     if ((p->dataPosition < 0) || (p->formatInfo.bytesPerFrame <= 0))
     {
-        result = PlankResult_AudioFileReaderNotReady;
+        result = PlankResult_AudioFileNotReady;
         goto exit;
     }
     
@@ -1536,7 +1536,7 @@ PlankResult pl_AudioFileReader_OggVorbis_Open  (PlankAudioFileReaderRef p, const
     
     if (err != 0)
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
@@ -1609,19 +1609,19 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
     
     if (!(mode & PLANKFILE_BINARY))
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
 
     if (!(mode & PLANKFILE_READ))
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
     if (mode & PLANKFILE_BIGENDIAN)
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
@@ -1637,7 +1637,7 @@ PlankResult pl_AudioFileReader_OggVorbis_OpenWithFile  (PlankAudioFileReaderRef 
     
     if (err != 0)
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
@@ -2006,7 +2006,7 @@ PlankResult pl_AudioFileReader_Opus_Open  (PlankAudioFileReaderRef p, const char
     
     if (err != 0)
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
@@ -2077,19 +2077,19 @@ PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, Pl
     
     if (!(mode & PLANKFILE_BINARY))
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
     if (!(mode & PLANKFILE_READ))
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
     if (mode & PLANKFILE_BIGENDIAN)
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     
@@ -2105,7 +2105,7 @@ PlankResult pl_AudioFileReader_Opus_OpenWithFile  (PlankAudioFileReaderRef p, Pl
     
     if (err != 0)
     {
-        result = PlankResult_AudioFileReaderInavlidType;
+        result = PlankResult_AudioFileInavlidType;
         goto exit;
     }
     

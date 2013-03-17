@@ -64,13 +64,13 @@ const char* pl_ResultString (PlankResult result)
         "File remove failed",                   //PlankResult_FileRemoveFailed
         "Failed to make a directory",           //PlankResult_FileMakeDirectoryFailed
         
-        "The specified chunk ID was not found",                                 //PlankResult_IffFileReaderChunkNotFound
+        "The specified chunk ID was not found",                                         //PlankResult_IffFileReaderChunkNotFound
         
-        "Invalid data while reading an audio file",                                         //PlankResult_AudioFileReaderInavlidType
-        "Found a valid audio file but not yet supported",                                   //PlankResult_AudioFileReaderUnsupportedType
-        "The file is not ready for this operation",                                         //PlankResult_AudioFileReaderNotReady
-        "The data chunks appears to be invalid",                                            //PlankResult_AudioFileReaderDataChunkInvalid
-        "A read operation was attempted when the file was at an invalid read position",     //PlankResult_AudioFileReaderInvalidFilePosition
+        "Invalid data while accessing an audio file",                                   //PlankResult_AudioFileInavlidType
+        "A potentially valid audio file but not yet supported",                         //PlankResult_AudioFileUnsupportedType
+        "The file is not ready for this operation",                                     //PlankResult_AudioFileNotReady
+        "The data chunks appears to be invalid",                                        //PlankResult_AudioFileDataChunkInvalid
+        "A file operation was attempted when the file was at an invalid position",      //PlankResult_AudioFileInvalidFilePosition
         
         "Setting the Thread function failed",                                           //PlankResult_ThreadSetFunctionFailed
         "Setting the Thread user data failed",                                          //PlankResult_ThreadSetUserDataFailed

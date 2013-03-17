@@ -78,6 +78,34 @@ public:
             pl_AudioFileWriter_SetFormatWAV (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat);
             pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
         }
+        else if (ext.equalsIgnoreCase ("aif"))
+        {
+            // ideally we'd allow aiff but this is used to identify aifc (below)
+
+            if (this->isFloat)
+            {
+                pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, true, false);
+                pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+            }
+            else
+            {
+                pl_AudioFileWriter_SetFormatAIFF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate);
+                pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+            }
+        }
+        else if (ext.equalsIgnoreCase ("aiff") || ext.equalsIgnoreCase ("aifc"))
+        {
+            // ideally we'd use aifc only but some audio apps don't recognise this
+#if PLANK_LITTLEENDIAN
+            pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, !this->isFloat && sizeof (SampleType) == 2);
+            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+#endif
+#if PLANK_BIGENDIAN
+            pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, false);
+            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+#endif
+        }
+
     }
     
     ~AudioFileWriterInternal()

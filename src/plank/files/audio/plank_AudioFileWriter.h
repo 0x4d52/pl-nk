@@ -86,6 +86,8 @@ PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p);
 PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormat (PlankAudioFileWriterRef p);
 
 PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat);
+PlankResult pl_AudioFileWriter_SetFormatAIFF (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate);
+PlankResult pl_AudioFileWriter_SetFormatAIFC (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat, const PlankB isLittleEndian);
 
 /** */
 PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath);
@@ -95,6 +97,7 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p);
 
 PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
 
+PlankB pl_AudioFileWriter_IsEncodingNativeEndian (PlankAudioFileWriterRef p);
 
 /** @} */
 
@@ -113,6 +116,7 @@ typedef struct PlankAudioFileWriter
     PlankAudioFileMetaDataRef metaData;
     
     PlankP writeFramesFunction;
+    PlankP writeHeaderFunction;
     PlankP setFramePositionFunction;
     PlankP getFramePositionFunction;
 
