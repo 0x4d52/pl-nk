@@ -411,7 +411,7 @@ PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
         if ((result = pl_AudioFileMetaData_Destroy (p->metaData)) != PlankResult_OK) goto exit;
     }
 
-    result = pl_File_Close ((PlankFileRef)p->peer);
+//    result = pl_File_Close ((PlankFileRef)p->peer); ??
     
 exit:
     return result;

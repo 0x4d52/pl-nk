@@ -66,9 +66,11 @@ class AudioFileWriterInternal : public AudioFileWriterInternalBase<SampleType>
 public:
     typedef NumericalArray<SampleType>  Buffer;
     
-    AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize) throw()
+    AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const int quality, const int bufferSize) throw()
     :   buffer (Buffer::withSize (numChannels * bufferSize, false))
     {
+        (void)quality;
+    
         pl_AudioFileWriter_Init (&peer);
 
         const Text ext = path.extension();
@@ -105,7 +107,15 @@ public:
             pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
 #endif
         }
-
+#if PLANK_OGGVORBIS
+        else if (ext.equalsIgnoreCase ("ogg") &&
+                 (sizeof (SampleType) == 4) &&
+                 this->isFloat)
+        {
+            pl_AudioFileWriter_SetFormatOggVorbis (&peer, quality, numChannels, sampleRate);
+            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+        }
+#endif
     }
     
     ~AudioFileWriterInternal()
@@ -192,8 +202,8 @@ public:
     typedef SmartPointerContainer<Internal>     Base;
     typedef NumericalArray<SampleType>          Buffer;
 
-    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize = AudioFile::DefaultBufferSize) throw()
-	:	Base (new Internal (path, numChannels, sampleRate, bufferSize))
+    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate, const int quality = 0, const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	:	Base (new Internal (path, numChannels, sampleRate, quality, bufferSize))
 	{
 	}
 
