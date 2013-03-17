@@ -92,6 +92,9 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_WAV_COMPRESSION_PCM            0x0001
 #define PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT          0x0003
 #define PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE     0xFFFE
+#define PLANKAUDIOFILE_WAV_FMT_LENGTH                 16
+#define PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH      40
+
 
 //static const PlankFourCharCode PLANKAUDIOFILE_CHUNKID_RIFF = PLANKFOURCHARCODE("RIFF");
 //static const PlankFourCharCode PLANKAUDIOFILE_CHUNKID_WAVE = PLANKFOURCHARCODE("WAVE");
@@ -172,5 +175,70 @@ typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef;
 /** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
 typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef;
 
+
+typedef struct PlankAudioFileWAVExtensible
+{
+    PlankUI ext1;
+    PlankUS ext2;
+    PlankUS ext3;
+    PlankUC ext4[8];
+} PlankAudioFileWAVExtensible;
+
+static inline PlankAudioFileWAVExtensible* pl_AudioFileWAVExtensible_GetPCM()
+{
+    static PlankAudioFileWAVExtensible data;
+    static PlankB firstTime = PLANK_TRUE;
+    
+    if (firstTime)
+    {
+        firstTime = PLANK_FALSE;
+        pl_MemoryZero (&data, sizeof (PlankAudioFileWAVExtensible));
+        data.ext1 = 0x00000001;
+        data.ext2 = 0x0000;
+        data.ext3 = 0x0010;
+        data.ext4[0] = 0x80; data.ext4[1] = 0x00; data.ext4[2] = 0x00; data.ext4[3] = 0xAA;
+        data.ext4[4] = 0x00; data.ext4[5] = 0x38; data.ext4[6] = 0x9B; data.ext4[7] = 0x71;
+    }
+    
+    return &data;
+}
+
+static inline PlankAudioFileWAVExtensible* pl_AudioFileWAVExtensible_GetFloat()
+{
+    static PlankAudioFileWAVExtensible data;
+    static PlankB firstTime = PLANK_TRUE;
+    
+    if (firstTime)
+    {
+        firstTime = PLANK_FALSE;
+        pl_MemoryZero (&data, sizeof (PlankAudioFileWAVExtensible));
+        data.ext1 = 0x00000003;
+        data.ext2 = 0x0000;
+        data.ext3 = 0x0010;
+        data.ext4[0] = 0x80; data.ext4[1] = 0x00; data.ext4[2] = 0x00; data.ext4[3] = 0xAA;
+        data.ext4[4] = 0x00; data.ext4[5] = 0x38; data.ext4[6] = 0x9B; data.ext4[7] = 0x71;
+    }
+    
+    return &data;
+}
+
+static inline PlankAudioFileWAVExtensible* pl_AudioFileWAVExtensible_GetAmbisonic()
+{
+    static PlankAudioFileWAVExtensible data;
+    static PlankB firstTime = PLANK_TRUE;
+    
+    if (firstTime)
+    {
+        firstTime = PLANK_FALSE;
+        pl_MemoryZero (&data, sizeof (PlankAudioFileWAVExtensible));
+        data.ext1 = 0x00000001;
+        data.ext2 = 0x0721;
+        data.ext3 = 0x11D3;
+        data.ext4[0] = 0x86; data.ext4[1] = 0x44; data.ext4[2] = 0xC8; data.ext4[3] = 0xC1;
+        data.ext4[4] = 0xCA; data.ext4[5] = 0x00; data.ext4[6] = 0x00; data.ext4[7] = 0x00;
+    }
+    
+    return &data;
+}
 
 #endif // PLANK_AUDIOFILECOMMON_H

@@ -51,6 +51,11 @@ typedef struct PlankMemory
 } PlankMemory; 
 #endif
 
+static inline PlankB pl_MemoryCompare (PlankConstantP ptr1, PlankConstantP ptr2, const PlankUL numBytes)
+{
+    return memcmp (ptr1, ptr2, numBytes) == 0 ? PLANK_TRUE : PLANK_FALSE;
+}
+
 static inline PlankResult pl_MemoryZero (PlankP ptr, const PlankUL numBytes)
 {
     if (ptr == PLANK_NULL || numBytes == 0)

@@ -85,7 +85,7 @@ PlankFileRef pl_AudioFileWriter_GetFile (PlankAudioFileWriterRef p);
 /** Get format before open. */
 PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormat (PlankAudioFileWriterRef p);
 
-PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate);
+PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat);
 
 /** */
 PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* filepath);

@@ -1436,9 +1436,9 @@ PlankResult pl_File_ReadLine (PlankFileRef p, char* text, const int maximumLengt
 
 PlankResult pl_File_SkipBytes (PlankFileRef p, const int numBytes)
 {
+    char temp[PLANKFILE_SKIPBYTES_SIZE];
     PlankResult result;
     int bytesRemaining, bytesThisTime;
-    char temp[PLANKFILE_SKIPBYTES_SIZE];
 
     result = PlankResult_OK;
     bytesRemaining = numBytes;
@@ -1464,6 +1464,28 @@ PlankResult pl_File_Write (PlankFileRef p, const void* data, const int maximumBy
         return PlankResult_FileWriteError;
     
     return (p->writeFunction) (p, data, maximumBytes);
+}
+
+PlankResult pl_File_WriteZeros (PlankFileRef p, const int numBytes)
+{
+    char temp[PLANKFILE_SKIPBYTES_SIZE];
+    PlankResult result;
+    int bytesRemaining, bytesThisTime;
+    
+    result = PlankResult_OK;
+    bytesRemaining = numBytes;
+    pl_MemoryZero (temp, pl_MinI (numBytes, PLANKFILE_SKIPBYTES_SIZE));
+    
+    while (bytesRemaining > 0)
+    {
+        bytesThisTime = pl_MinI (bytesRemaining, PLANKFILE_SKIPBYTES_SIZE);
+        bytesRemaining -= bytesThisTime;
+        
+        if ((result = pl_File_Write (p, temp, bytesThisTime)) != PlankResult_OK) goto exit;
+    }
+    
+exit:
+    return result;    
 }
 
 PlankResult pl_File_WriteC (PlankFileRef p, char data)

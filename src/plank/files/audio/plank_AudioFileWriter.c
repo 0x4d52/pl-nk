@@ -52,6 +52,7 @@ typedef PlankResult (*PlankAudioFileWriterGetFramePositionFunction)(PlankAudioFi
 
 PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p);
+PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
 
 //PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit()
@@ -148,13 +149,19 @@ PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormat (PlankAudioFileWriterRef 
     return p->peer ? 0 : &p->formatInfo;
 }
 
-PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate)
+PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat)
 {
     if (p->peer)
         return PlankResult_UnknownError;
     
+    if (isFloat)
+    {
+        if ((bitsPerSample != 32) && (bitsPerSample != 64))
+            return PlankResult_UnknownError;
+    }
+    
     p->formatInfo.format        = PLANKAUDIOFILE_FORMAT_WAV;
-    p->formatInfo.encoding      = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN;
+    p->formatInfo.encoding      = isFloat ? PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN : PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN;
     p->formatInfo.bitsPerSample = bitsPerSample;
     p->formatInfo.numChannels   = numChannels;
     p->formatInfo.sampleRate    = sampleRate;
@@ -169,19 +176,7 @@ PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* file
     
     if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_WAV)
     {
-        p->peer = pl_IffFileWriter_CreateAndInit();
-        
-        result = pl_IffFileWriter_OpenReplacing ((PlankIffFileWriterRef)p->peer, filepath, PLANK_FALSE, pl_FourCharCode ("RIFF"), pl_FourCharCode ("WAVE"));
-        
-        if (result != PlankResult_OK)
-            goto exit;
-        
-        if ((result = pl_AudioFileWriter_WAV_WriteHeader (p)) != PlankResult_OK)
-            goto exit;
-        
-        p->writeFramesFunction = pl_AudioFileWriter_WAV_WriteFrames;
-        p->setFramePositionFunction = 0; // need ?
-        p->getFramePositionFunction = 0; // need ?
+        result = pl_AudioFileWriter_WAV_Open (p, filepath);
     }
         
 exit:
@@ -237,10 +232,9 @@ PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* 
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    
-    // some checks until more formats/encodings are implemented
-    
-    if (p->formatInfo.encoding != PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN)
+        
+    if (!((p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN) ||
+          (p->formatInfo.encoding == PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN)))
     {
         result = PlankResult_UnknownError;
         goto exit;
@@ -252,7 +246,14 @@ PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* 
         goto exit;
     }
     
-    if ((p->formatInfo.bitsPerSample < 8) || (p->formatInfo.bitsPerSample > 32))
+    if ((p->formatInfo.bitsPerSample > 32) &&
+        (p->formatInfo.encoding != PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN))
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((p->formatInfo.bitsPerSample < 8) || (p->formatInfo.bitsPerSample > 64))
     {
         result = PlankResult_UnknownError;
         goto exit;
@@ -270,8 +271,8 @@ PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* 
         goto exit;
     }
     
-    iff = pl_IffFileWriter_Create();
-        
+    iff = pl_IffFileWriter_CreateAndInit();
+    
     result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_FALSE, pl_FourCharCode ("RIFF"), pl_FourCharCode ("WAVE"));
     
     if (result != PlankResult_OK)
@@ -279,43 +280,154 @@ PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* 
     
     p->peer = iff;
     
+    if (p->formatInfo.numChannels > 2)
+    {
+        if ((result = pl_AudioFileWriter_WAVEXT_WriteHeader (p)) != PlankResult_OK) goto exit;
+    }
+    else
+    {
+        if ((result = pl_AudioFileWriter_WAV_WriteHeader (p)) != PlankResult_OK) goto exit;
+    }
+    
+    p->writeFramesFunction = pl_AudioFileWriter_WAV_WriteFrames;
+    p->setFramePositionFunction = 0; // need ?
+    p->getFramePositionFunction = 0; // need ?
+    
 exit:
     return result;
 }
 
+//PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
+//{
+//    PlankResult result = PlankResult_OK;
+//    PlankIffFileWriterRef iff;
+//    PlankFourCharCode fmt;
+//    
+//    PlankUS compression;
+//    PlankUS numChannels;
+//    PlankUI sampleRate;
+//    PlankUI byteRate;
+//    PlankUS bytesPerFrame;
+//    PlankUS bitsPerSample;
+//    
+//    iff = (PlankIffFileWriterRef)p->peer;
+//    fmt = pl_FourCharCode ("fmt ");
+//        
+//    compression     = PLANKAUDIOFILE_WAV_COMPRESSION_PCM;
+//    numChannels     = p->formatInfo.numChannels;
+//    sampleRate      = (PlankUI)p->formatInfo.sampleRate;
+//    byteRate        = (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate);
+//    bytesPerFrame   = (PlankUS)p->formatInfo.bytesPerFrame;
+//    bitsPerSample   = (PlankUS)p->formatInfo.bitsPerSample;
+//    
+//    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &compression, sizeof (compression), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+//    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &numChannels, sizeof (numChannels), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+//    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &sampleRate, sizeof (sampleRate), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+//    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &byteRate, sizeof (byteRate), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+//    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &bytesPerFrame, sizeof (bytesPerFrame), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+//    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &bitsPerSample, sizeof (bitsPerSample), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+//    
+//exit:
+//    return result;
+//}
+
 PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
 {
+    PlankIffFileWriterChunkInfoRef chunkInfo;
+    PlankResult result = PlankResult_OK;
+    PlankIffFileWriterRef iff;
+    PlankFourCharCode fmt;
+    PlankUS encoding;
+    
+    iff = (PlankIffFileWriterRef)p->peer;
+    fmt = pl_FourCharCode ("fmt ");
+    
+    switch (p->formatInfo.encoding)
+    {
+        case PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN:   encoding = PLANKAUDIOFILE_WAV_COMPRESSION_PCM;   break;
+        case PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN: encoding = PLANKAUDIOFILE_WAV_COMPRESSION_FLOAT; break;
+        default: result = PlankResult_UnknownError; goto exit;
+    }
+    
+    if ((result = pl_IffFileWriter_SeekChunk (iff, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+
+    if (!chunkInfo)
+    {
+        if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, 0, PLANKAUDIOFILE_WAV_FMT_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_SeekChunk (iff, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+        
+        if (!chunkInfo)
+        {
+            result = PlankResult_FileReadError;
+            goto exit;
+        }
+    }
+        
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, encoding)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.sampleRate)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate))) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
+
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
+{
+    PlankAudioFileWAVExtensible* ext;
+    PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
     PlankFourCharCode fmt;
     
-    PlankUS compression;
-    PlankUS numChannels;
-    PlankUI sampleRate;
-    PlankUI byteRate;
-    PlankUS bytesPerFrame;
-    PlankUS bitsPerSample;
-    
     iff = (PlankIffFileWriterRef)p->peer;
     fmt = pl_FourCharCode ("fmt ");
+    
+    switch (p->formatInfo.encoding)
+    {
+        case PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN:   ext = pl_AudioFileWAVExtensible_GetPCM();   break;
+        case PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN: ext = pl_AudioFileWAVExtensible_GetFloat(); break;
+        default: result = PlankResult_UnknownError; goto exit;
+    }
+    
+    if ((result = pl_IffFileWriter_SeekChunk (iff, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+    
+    if (!chunkInfo)
+    {
+        if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, 0, PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_SeekChunk (iff, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
-    compression     = PLANKAUDIOFILE_WAV_COMPRESSION_PCM;
-    numChannels     = p->formatInfo.numChannels;
-    sampleRate      = (PlankUI)p->formatInfo.sampleRate;
-    byteRate        = (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate);
-    bytesPerFrame   = (PlankUS)p->formatInfo.bytesPerFrame;
-    bitsPerSample   = (PlankUS)p->formatInfo.bitsPerSample;
+        if (!chunkInfo)
+        {
+            result = PlankResult_FileReadError;
+            goto exit;
+        }
+    }
     
-    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &compression, sizeof (compression), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &numChannels, sizeof (numChannels), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &sampleRate, sizeof (sampleRate), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &byteRate, sizeof (byteRate), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &bytesPerFrame, sizeof (bytesPerFrame), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-    if ((result = pl_IffFileWriter_WriteChunk (iff, fmt, &bitsPerSample, sizeof (bitsPerSample), PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-    
+    // regular WAV fmt
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.sampleRate)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)(p->formatInfo.bytesPerFrame * (int)p->formatInfo.sampleRate))) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
+
+    // extensible part
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH - PLANKAUDIOFILE_WAV_FMT_LENGTH - sizeof (PlankUS)))) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.channelMask)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)ext->ext1)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)ext->ext2)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)ext->ext3)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_Write   ((PlankFileRef)iff, ext->ext4, 8)) != PlankResult_OK) goto exit;
+
 exit:
     return result;
 }
+
+
 
 PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
 {

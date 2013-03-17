@@ -263,7 +263,7 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFou
     
     newChunkInfo.chunkID       = chunkID;
     newChunkInfo.chunkPos      = chunkDataPos; // store the data pos
-
+    
     switch (mode)
     {
         case PLANKIFFFILEWRITER_MODEAPPEND:         newChunkInfo.chunkLength = originalChunkLength + dataLength;           break;
@@ -312,10 +312,18 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFou
     
     if (mode == PLANKIFFFILEWRITER_MODEAPPEND)
     {
+        // add offset
         if ((result = pl_File_SetPosition (&p->file, newChunkInfo.chunkPos + originalChunkLength)) != PlankResult_OK) goto exit;
     }
-    
-    if ((result = pl_File_Write (&p->file, data, (int)dataLength)) != PlankResult_OK) goto exit;
+        
+    if (data)
+    {
+        if ((result = pl_File_Write (&p->file, data, (int)dataLength)) != PlankResult_OK) goto exit;
+    }
+    else
+    {
+        if ((result = pl_File_WriteZeros (&p->file, (int)dataLength)) != PlankResult_OK) goto exit;
+    }
     
     if (newChunkInfo.chunkLength & 1)
     {
@@ -341,7 +349,7 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFou
     {
         origChunkInfo->chunkLength = newChunkInfo.chunkLength;
     }
-
+    
 exit:
     return result;
 }

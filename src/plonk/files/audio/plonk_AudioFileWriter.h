@@ -53,18 +53,18 @@ private:
     AudioFileWriterInternalBase(); // incompatible SampleType
 };
 
-
-template<> class AudioFileWriterInternalBase<Char>  : public SmartPointer { };
-template<> class AudioFileWriterInternalBase<Short> : public SmartPointer { };
-template<> class AudioFileWriterInternalBase<Int24> : public SmartPointer { };
-template<> class AudioFileWriterInternalBase<Int>   : public SmartPointer { };
+template<> class AudioFileWriterInternalBase<Char>    : public SmartPointer { public: AudioFileWriterInternalBase<Char>()   : isFloat (false) { } protected: const bool isFloat; };
+template<> class AudioFileWriterInternalBase<Short>   : public SmartPointer { public: AudioFileWriterInternalBase<Short>()  : isFloat (false) { } protected: const bool isFloat; };
+template<> class AudioFileWriterInternalBase<Int24>   : public SmartPointer { public: AudioFileWriterInternalBase<Int24>()  : isFloat (false) { } protected: const bool isFloat; };
+template<> class AudioFileWriterInternalBase<Int>     : public SmartPointer { public: AudioFileWriterInternalBase<Int>()    : isFloat (false) { } protected: const bool isFloat; };
+template<> class AudioFileWriterInternalBase<Float>   : public SmartPointer { public: AudioFileWriterInternalBase<Float>()  : isFloat (true)  { } protected: const bool isFloat; };
+template<> class AudioFileWriterInternalBase<Double>  : public SmartPointer { public: AudioFileWriterInternalBase<Double>() : isFloat (true)  { } protected: const bool isFloat; };
 
 template<class SampleType>
 class AudioFileWriterInternal : public AudioFileWriterInternalBase<SampleType>
 {
 public:
-    typedef NumericalArray<SampleType>      Buffer;
-    typedef NumericalArray2D<SampleType>    Buffers;
+    typedef NumericalArray<SampleType>  Buffer;
     
     AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize) throw()
     :   buffer (Buffer::withSize (numChannels * bufferSize, false))
@@ -75,7 +75,7 @@ public:
         
         if (ext.equalsIgnoreCase ("wav"))
         {
-            pl_AudioFileWriter_SetFormatWAV (&peer, sizeof (SampleType) * 8, numChannels, sampleRate);
+            pl_AudioFileWriter_SetFormatWAV (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat);
             pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
         }
     }
@@ -89,15 +89,65 @@ public:
     {
         pl_AudioFileWriter_WriteFrames (&peer, numFrames, frameData);
     }
-    
-//    void writeFrames (Buffers const& frames) throw()
-//    {
-//    }
-    
+        
     void writeFrames (Buffer const& frames) throw()
     {
-        pl_AudioFileWriter_WriteFrames (&peer, frames.length() / peer.formatInfo.numChannels, frames.getArray());
+        const int numChannels = peer.formatInfo.numChannels;
+        plonk_assert ((frames.length() % numChannels) == 0);
+        pl_AudioFileWriter_WriteFrames (&peer, frames.length() / numChannels, frames.getArray());
     }
+        
+    template<class OtherType>
+    void writeFrames (NumericalArray<OtherType> const& frames) throw()
+    {
+        const int numChannels = peer.formatInfo.numChannels;
+
+        plonk_assert ((frames.length() % numChannels) == 0);
+
+        SampleType* const nativeSamples = buffer.getArray();
+        const OtherType* sourceSamples = frames.getArray();
+        const int nativeSamplesLength = buffer.length();
+        
+        int numSamplesRemainaing = frames.length();
+        
+        while (numSamplesRemainaing > 0)
+        {
+            const int numSamplesThisTime = plonk::min (nativeSamplesLength, numSamplesRemainaing);
+            NumericalArrayConverter<SampleType, OtherType>::convertScaled (nativeSamples, sourceSamples, numSamplesThisTime);
+            pl_AudioFileWriter_WriteFrames (&peer, numSamplesThisTime / numChannels, nativeSamples);
+            numSamplesRemainaing -= numSamplesThisTime;
+            sourceSamples += numSamplesThisTime;
+        }
+    }
+
+//    template<class OtherType>
+//    void writeFrames (NumericalArray2D<OtherType> const& frames) throw()
+//    {
+//        plonk_assert (frames.isMatrix());
+//        
+//        const int numChannels = peer.formatInfo.numChannels;
+//        plonk_assert (frames.length() == numChannels);  // could be cleverer with channel mapping
+//        
+//        const int nativeSamplesLength = buffer.length() >> 1; // need half for deinterleaving
+//        const int numNativeFrames = (nativeSamplesLength / numChannels);
+//        
+//        int numFramesRemainaing = frames.atUnchecked (0).length();
+//        
+//        while (numFramesRemainaing > 0)
+//        {
+//            const int numFramesThisTime = plonk::min (numNativeFrames, numFramesRemainaing);
+//
+//            for (int channel = 0; channel < numChannels; ++channel)
+//            {
+//                SampleType* const nativeSamples = buffer.getArray() + channel;
+//                const OtherType* sourceSamples = frames.atUnchecked (channel).getArray();
+//
+//                for (int i = 0; i < numFramesThisTime; ++i)
+//                    
+//
+//            }
+//        }
+//    }
 
     
 private:
@@ -113,7 +163,6 @@ public:
     typedef AudioFileWriterInternal<SampleType> Internal;
     typedef SmartPointerContainer<Internal>     Base;
     typedef NumericalArray<SampleType>          Buffer;
-    typedef NumericalArray2D<SampleType>        Buffers;
 
     AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize = AudioFile::DefaultBufferSize) throw()
 	:	Base (new Internal (path, numChannels, sampleRate, bufferSize))
@@ -126,6 +175,12 @@ public:
     }
 
     void writeFrames (Buffer const& frames) throw()
+    {
+        this->getInternal()->writeFrames (frames);
+    }
+    
+    template<class OtherType>
+    void writeFrames (NumericalArray<OtherType> const& frames) throw()
     {
         this->getInternal()->writeFrames (frames);
     }
