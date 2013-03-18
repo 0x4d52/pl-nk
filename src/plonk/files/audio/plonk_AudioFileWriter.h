@@ -66,7 +66,7 @@ class AudioFileWriterInternal : public AudioFileWriterInternalBase<SampleType>
 public:
     typedef NumericalArray<SampleType>  Buffer;
     
-    AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const int quality, const int bufferSize) throw()
+    AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const float quality, const int bufferSize) throw()
     :   buffer (Buffer::withSize (numChannels * bufferSize, false))
     {
         (void)quality;
@@ -116,6 +116,16 @@ public:
             pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
         }
 #endif
+#if PLANK_OPUS
+        else if (ext.equalsIgnoreCase ("opus") &&
+                 (sizeof (SampleType) == 4) &&
+                 this->isFloat)
+        {
+            pl_AudioFileWriter_SetFormatOpus (&peer, quality, numChannels, sampleRate);
+            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+        }
+#endif
+
     }
     
     ~AudioFileWriterInternal()
@@ -202,7 +212,7 @@ public:
     typedef SmartPointerContainer<Internal>     Base;
     typedef NumericalArray<SampleType>          Buffer;
 
-    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate, const int quality = 0, const int bufferSize = AudioFile::DefaultBufferSize) throw()
+    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate, const float quality = 0.f, const int bufferSize = AudioFile::DefaultBufferSize) throw()
 	:	Base (new Internal (path, numChannels, sampleRate, quality, bufferSize))
 	{
 	}

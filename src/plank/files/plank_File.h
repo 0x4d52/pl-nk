@@ -438,6 +438,8 @@ PlankResult pl_File_SkipBytes (PlankFileRef p, const int numBytes);
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_File_Write (PlankFileRef p, const void* data, const int maximumBytes);
 
+PlankResult pl_File_WriteDynamicArray (PlankFileRef p, PlankDynamicArrayRef array);
+
 PlankResult pl_File_WriteZeros (PlankFileRef p, const int numBytes);
 
 /** Write one signed byte to the file.

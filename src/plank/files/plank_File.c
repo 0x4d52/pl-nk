@@ -1466,6 +1466,11 @@ PlankResult pl_File_Write (PlankFileRef p, const void* data, const int maximumBy
     return (p->writeFunction) (p, data, maximumBytes);
 }
 
+PlankResult pl_File_WriteDynamicArray (PlankFileRef p, PlankDynamicArrayRef array)
+{
+    return pl_File_Write (p, pl_DynamicArray_GetArray (array), pl_DynamicArray_GetItemSize (array) * pl_DynamicArray_GetSize (array));
+}
+
 PlankResult pl_File_WriteZeros (PlankFileRef p, const int numBytes)
 {
     char temp[PLANKFILE_SKIPBYTES_SIZE];

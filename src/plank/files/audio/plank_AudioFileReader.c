@@ -402,16 +402,17 @@ PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
             if (p->peer != PLANK_NULL)
                 return PlankResult_UnknownError;
     }
-    
+        
     if (result != PlankResult_OK)
         goto exit;
+    
+    p->peer = PLANK_NULL;
     
     if (p->metaData != PLANK_NULL)
     {
         if ((result = pl_AudioFileMetaData_Destroy (p->metaData)) != PlankResult_OK) goto exit;
+        p->metaData = (PlankAudioFileMetaDataRef)PLANK_NULL;
     }
-
-//    result = pl_File_Close ((PlankFileRef)p->peer); ??
     
 exit:
     return result;

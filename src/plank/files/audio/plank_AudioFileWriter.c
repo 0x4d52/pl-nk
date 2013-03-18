@@ -76,6 +76,10 @@ PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const 
 PlankResult pl_AudioFileWriter_OggVorbis_Close (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_OggVorbis_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
 
+PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char* filepath);
+PlankResult pl_AudioFileWriter_Opus_Close (PlankAudioFileWriterRef p);
+PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
+
 
 //PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit()
 //{
@@ -110,10 +114,6 @@ PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p)
     p->formatInfo.numChannels      = 0;
     p->formatInfo.sampleRate       = 0.0;
     p->formatInfo.channelMask      = 0;
-    p->dataLength                  = 0;
-    p->numFrames                   = 0;
-    p->dataPosition                = -1;
-    
     p->metaData                    = PLANK_NULL;
     
     p->writeFramesFunction         = PLANK_NULL;
@@ -231,14 +231,31 @@ PlankResult pl_AudioFileWriter_SetFormatAIFC (PlankAudioFileWriterRef p, const i
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, const int quality, const int numChannels, const double sampleRate)
+PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, const float quality, const int numChannels, const double sampleRate)
 {
     if (p->peer)
         return PlankResult_UnknownError;
     
     p->formatInfo.format        = PLANKAUDIOFILE_FORMAT_OGGVORBIS;
     p->formatInfo.encoding      = PLANK_BIGENDIAN ? PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN : PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
-    p->formatInfo.bitsPerSample = pl_ClipI (quality, 0, 64);
+    p->formatInfo.bitsPerSample = 0;
+    p->formatInfo.quality       = pl_ClipF (quality, 0., 10.f);
+    p->formatInfo.numChannels   = numChannels;
+    p->formatInfo.sampleRate    = sampleRate;
+    p->formatInfo.bytesPerFrame = -1;
+    
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileWriter_SetFormatOpus (PlankAudioFileWriterRef p, const float quality, const int numChannels, const double sampleRate)
+{
+    if (p->peer)
+        return PlankResult_UnknownError;
+    
+    p->formatInfo.format        = PLANKAUDIOFILE_FORMAT_OPUS;
+    p->formatInfo.encoding      = PLANK_BIGENDIAN ? PLANKAUDIOFILE_ENCODING_FLOAT_BIGENDIAN : PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
+    p->formatInfo.bitsPerSample = 0;
+    p->formatInfo.quality       = pl_ClipF (quality, 0., 10.f);
     p->formatInfo.numChannels   = numChannels;
     p->formatInfo.sampleRate    = sampleRate;
     p->formatInfo.bytesPerFrame = -1;
@@ -266,6 +283,12 @@ PlankResult pl_AudioFileWriter_Open (PlankAudioFileWriterRef p, const char* file
     else if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_OGGVORBIS)
     {
         result = pl_AudioFileWriter_OggVorbis_Open (p, filepath);
+    }
+#endif
+#if PLANK_OPUS
+    else if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_OPUS)
+    {
+        result = pl_AudioFileWriter_Opus_Open (p, filepath);
     }
 #endif
     else
@@ -300,6 +323,9 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
         case PLANKAUDIOFILE_FORMAT_OGGVORBIS:
             result = pl_AudioFileWriter_OggVorbis_Close (p);
             break;
+        case PLANKAUDIOFILE_FORMAT_OPUS:
+            result = pl_AudioFileWriter_Opus_Close (p);
+            break;
         default:
             if (p->peer != PLANK_NULL)
                 result = PlankResult_UnknownError;
@@ -308,13 +334,14 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
     if (result != PlankResult_OK)
         goto exit;
     
+    p->peer = PLANK_NULL;
+    
     if (p->metaData != PLANK_NULL)
     {
         if ((result = pl_AudioFileMetaData_Destroy (p->metaData)) != PlankResult_OK) goto exit;
+        p->metaData = (PlankAudioFileMetaDataRef)PLANK_NULL;
     }
-    
-//    result = pl_File_Close ((PlankFileRef)p->peer);
-    
+        
 exit:
     return result;
 }
@@ -943,6 +970,25 @@ static PlankResult pl_AudioFileWriter_OggVorbis_CommentAddTag (PlankOggVorbisFil
     return PlankResult_OK;
 }
 
+static PlankResult pl_AudioFileWriter_OggVorbis_Clear (PlankOggVorbisFileWriterRef p)
+{
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
+
+    ogg_stream_clear (&p->os);
+    vorbis_block_clear (&p->vb);
+    vorbis_dsp_clear (&p->vd);
+    vorbis_comment_clear (&p->vc);
+    vorbis_info_clear (&p->vi);
+    
+    result = pl_Memory_Free (m, p);
+
+    return result;
+}
+
 PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const char* filepath)
 {
     ogg_packet header;
@@ -954,7 +1000,6 @@ PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const 
     PlankRNGRef rng;
     PlankMemoryRef m;    
     int err;
-    float quality;
     
     result = PlankResult_OK;
     
@@ -965,12 +1010,6 @@ PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const 
     }
     
     if (!(p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG))
-    {
-        result = PlankResult_AudioFileInavlidType;
-        goto exit;
-    }
-    
-    if ((p->formatInfo.bitsPerSample < 0) || (p->formatInfo.bitsPerSample > 64))
     {
         result = PlankResult_AudioFileInavlidType;
         goto exit;
@@ -991,19 +1030,17 @@ PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const 
         goto exit;
     }
     
-    pl_MemoryZero (ogg, sizeof(PlankOggVorbisFileWriter));
+    pl_MemoryZero (ogg, sizeof (PlankOggVorbisFileWriter));
     
     if ((result = pl_File_Init ((PlankFileRef)ogg)) != PlankResult_OK) goto exit;
     if ((result = pl_File_OpenBinaryWrite ((PlankFileRef)ogg, filepath, PLANK_FALSE, PLANK_TRUE, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
     vorbis_info_init (&ogg->vi);
-    
-    quality = p->formatInfo.bitsPerSample / 64.f;
-    
+        
     err = vorbis_encode_init_vbr (&ogg->vi,
                                   p->formatInfo.numChannels,
                                   (int)p->formatInfo.sampleRate,
-                                  pl_ClipF (quality, 0.f, 1.f));
+                                  pl_ClipF (p->formatInfo.quality, 0.f, 1.f));
     
     if (!err)
     {
@@ -1040,9 +1077,9 @@ PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const 
     }
 
 exit:
-    if ((result != PlankResult_OK) && (p->peer != 0))
+    if ((p->peer == 0) && (ogg != 0))
     {
-        // close and set peer to 0
+        pl_AudioFileWriter_OggVorbis_Clear (ogg);
     }
     
     return result;
@@ -1086,26 +1123,15 @@ PlankResult pl_AudioFileWriter_OggVorbis_Close (PlankAudioFileWriterRef p)
 {
     PlankResult result;
     PlankOggVorbisFileWriterRef ogg;
-    PlankMemoryRef m;
 
     result = PlankResult_OK;
-    m = pl_MemoryGlobal();
     ogg = (PlankOggVorbisFileWriterRef)p->peer;
     
     if (ogg)
     {
         pl_AudioFileWriter_OggVorbis_WriteData (p, 0);
-        
-        ogg_stream_clear (&ogg->os);
-        vorbis_block_clear (&ogg->vb);
-        vorbis_dsp_clear (&ogg->vd);
-        vorbis_comment_clear (&ogg->vc);
-        
-        vorbis_info_clear (&ogg->vi);
-        
         if ((result = pl_File_DeInit ((PlankFileRef)ogg)) != PlankResult_OK) goto exit;
-        
-        result = pl_Memory_Free (m, ogg);
+        if ((result = pl_AudioFileWriter_OggVorbis_Clear (ogg)) != PlankResult_OK) goto exit;
     }
     
     
@@ -1150,3 +1176,406 @@ exit:
 }
 #endif // PLANK_OGGVORBIS
 
+
+#if PLANK_OPUS
+
+#include "../../containers/plank_DynamicArray.h"
+typedef struct PlankOpusFileWriter
+{
+    PlankFile file;
+    OpusHeader header;
+    ogg_stream_state os;
+    ogg_page og;
+    ogg_packet op;
+    OpusMSEncoder* oe;
+    
+    float frameDuration;
+    int packetSize;
+    int frameSize;
+    PlankDynamicArray mapping;
+    PlankDynamicArray packet;
+    PlankDynamicArray buffer;
+    int bufferPos;
+    
+} PlankOpusFileWriter;
+
+typedef PlankOpusFileWriter* PlankOpusFileWriterRef;
+
+static PlankResult pl_AudioFileWriter_Opus_Clear (PlankOpusFileWriterRef p)
+{
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
+    
+    ogg_stream_clear (&p->os);
+    opus_multistream_encoder_destroy (p->oe);
+    
+    result = pl_Memory_Free (m, p);
+    
+    return result;
+}
+
+//ugggh!
+
+#define readint(buf, base) (((buf[base+3]<<24)&0xff000000)| \
+((buf[base+2]<<16)&0xff0000)| \
+((buf[base+1]<<8)&0xff00)| \
+(buf[base]&0xff))
+
+#define writeint(buf, base, val) do{ buf[base+3]=((val)>>24)&0xff; \
+buf[base+2]=((val)>>16)&0xff; \
+buf[base+1]=((val)>>8)&0xff; \
+buf[base]=(val)&0xff; \
+}while(0)
+
+
+static void pl_AudioFileWriter_Opus_CommentInit (char **comments, int* length, const char *vendor_string)
+{
+    int vendor_length=strlen(vendor_string);
+    int user_comment_list_length=0;
+    int len=8+4+vendor_length+4;
+    char *p=(char*)malloc(len);
+    if(p==NULL){
+        fprintf(stderr, "malloc failed in comment_init()\n");
+        exit(1);
+    }
+    memcpy(p, "OpusTags", 8);
+    writeint(p, 8, vendor_length);
+    memcpy(p+12, vendor_string, vendor_length);
+    writeint(p, 12+vendor_length, user_comment_list_length);
+    *length=len;
+    *comments=p;
+}
+
+static void pl_AudioFileWriter_Opus_CommentFree (char **comments)
+{
+    free (*comments);
+    *comments = 0;
+}
+
+static void pl_AudioFileWriter_Opus_CommentAdd (char **comments, int* length, char *tag, char *val)
+{
+    char* p=*comments;
+    int vendor_length=readint(p, 8);
+    int user_comment_list_length=readint(p, 8+4+vendor_length);
+    int tag_len=(tag?strlen(tag):0);
+    int val_len=strlen(val);
+    int len=(*length)+4+tag_len+val_len;
+    
+    p=(char*)realloc(p, len);
+    if(p==NULL){
+        fprintf(stderr, "realloc failed in comment_add()\n");
+        exit(1);
+    }
+    
+    writeint(p, *length, tag_len+val_len);      /* length of comment */
+    if(tag) memcpy(p+*length+4, tag, tag_len);  /* comment */
+    memcpy(p+*length+4+tag_len, val, val_len);  /* comment */
+    writeint(p, 8+4+vendor_length, user_comment_list_length+1);
+    *comments=p;
+    *length=len;
+}
+
+PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char* filepath)
+{
+    unsigned char headerData[100];
+    char* comments;
+    int commentsLength;
+    PlankResult result;
+    PlankOpusFileWriterRef opus;
+    PlankRNGRef rng;
+    PlankMemoryRef m;
+    int err, delay, bitRate, streamCount, coupledStreamCount, quality, headerPacketSize;
+    opus_int32 sampleRate;
+    
+    result = PlankResult_OK;
+    
+    if ((p->formatInfo.numChannels < 1) || (p->formatInfo.numChannels > 255))
+    {
+        result = PlankResult_AudioFileInavlidType;
+        goto exit;
+    }
+    
+    if (!(p->formatInfo.encoding & PLANKAUDIOFILE_ENCODING_FLOAT_FLAG))
+    {
+        result = PlankResult_AudioFileInavlidType;
+        goto exit;
+    }
+        
+    sampleRate = (opus_int32)p->formatInfo.sampleRate;
+    
+    switch (sampleRate)
+    {
+        //case 8000: case 12000: case 16000: case 24000: case 48000: break;
+        case 48000: // need to fix this
+        default:
+            result = PlankResult_AudioFileUnsupportedType;
+            goto exit;
+    }
+    
+    m = pl_MemoryGlobal();
+    opus = (PlankOpusFileWriterRef)pl_Memory_AllocateBytes (m, sizeof (PlankOpusFileWriter));
+    
+    if (opus == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pl_MemoryZero (opus, sizeof (PlankOggVorbisFileWriter));
+    
+    if ((result = pl_File_Init ((PlankFileRef)opus)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_OpenBinaryWrite ((PlankFileRef)opus, filepath, PLANK_FALSE, PLANK_TRUE, PLANK_FALSE)) != PlankResult_OK) goto exit;
+    
+    opus->frameDuration     = 0.02f; // 960 @ 48kHz
+    opus->frameSize         = (int)(opus->frameDuration * 48000.f);
+    streamCount             = p->formatInfo.numChannels;
+    coupledStreamCount      = 0;
+    bitRate                 = 64000 * streamCount + 32000 * coupledStreamCount;
+    opus->packetSize        = opus->frameSize * sampleRate / 48000;
+    quality                 = (int)p->formatInfo.quality;
+    
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->mapping, 1, p->formatInfo.numChannels, PLANK_TRUE)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->packet, 1, PLANKAUDIOFILE_OPUS_MAXPACKETSIZE * streamCount, PLANK_FALSE)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->buffer, sizeof (float), p->formatInfo.numChannels * opus->frameSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
+    
+    opus->bufferPos = 0;
+    
+    opus->oe = opus_multistream_encoder_create (sampleRate,
+                                                p->formatInfo.numChannels, // channels
+                                                p->formatInfo.numChannels, // streams
+                                                0, // coupled streams
+                                                (const unsigned char *)pl_DynamicArray_GetArray (&opus->mapping),
+                                                OPUS_APPLICATION_AUDIO,
+                                                &err);
+    if (err)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_BITRATE (bitRate))) != 0) { result = PlankResult_UnknownError; goto exit; }
+    if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_COMPLEXITY (quality))) != 0) { result = PlankResult_UnknownError; goto exit; }
+    
+//        if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_VBR (1))) != 0) { result = PlankResult_UnknownError; goto exit; }
+//        OPUS_SET_VBR_CONSTRAINT(0)
+//        OPUS_SET_PACKET_LOSS_PERC(0)
+//        OPUS_SET_MAX_BANDWIDTH(OPUS_BANDWIDTH_FULLBAND)
+    
+    if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_GET_LOOKAHEAD (&delay))) != 0) { result = PlankResult_UnknownError; goto exit; }
+
+    opus->header.version           = 1;
+    opus->header.channels          = p->formatInfo.numChannels;
+    opus->header.preskip           = delay;
+    opus->header.input_sample_rate = sampleRate;
+    opus->header.gain              = 0;
+    opus->header.channel_mapping   = 0;
+    
+    rng = pl_RNGGlobal();
+    ogg_stream_init (&opus->os, pl_RNG_Next (rng));
+
+    headerPacketSize = opus_header_to_packet (&opus->header, headerData, 100);
+    
+    opus->op.packet     = headerData;
+    opus->op.bytes      = headerPacketSize;
+    opus->op.b_o_s      = 1;
+    opus->op.e_o_s      = 0;
+    opus->op.granulepos = 0;
+    opus->op.packetno   = 0;
+    ogg_stream_packetin (&opus->os, &opus->op);
+    
+    do
+    {
+        if ((err = ogg_stream_flush (&opus->os, &opus->og)) != 0)
+        {
+            if ((result = pl_File_Write ((PlankFileRef)opus, opus->og.header, opus->og.header_len)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_Write ((PlankFileRef)opus, opus->og.body,   opus->og.body_len))   != PlankResult_OK) goto exit;
+        }
+    } while (err != 0);
+    
+    pl_AudioFileWriter_Opus_CommentInit (&comments, &commentsLength, opus_get_version_string());
+    pl_AudioFileWriter_Opus_CommentAdd (&comments, &commentsLength, "ENCODER=", "Plink|Plonk|Plank");
+
+    opus->op.packet     = (unsigned char *)comments;
+    opus->op.bytes      = commentsLength;
+    opus->op.b_o_s      = 0;
+    opus->op.e_o_s      = 0;
+    opus->op.granulepos = 0;
+    opus->op.packetno   = 1;
+    ogg_stream_packetin (&opus->os, &opus->op);
+    
+    do
+    {
+        if ((err = ogg_stream_flush (&opus->os, &opus->og)) != 0)
+        {
+            if ((result = pl_File_Write ((PlankFileRef)opus, opus->og.header, opus->og.header_len)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_Write ((PlankFileRef)opus, opus->og.body,   opus->og.body_len))   != PlankResult_OK) goto exit;
+        }
+    } while (err != 0);
+
+    pl_AudioFileWriter_Opus_CommentFree (&comments);
+    
+    p->peer = opus;
+    
+    p->writeFramesFunction = pl_AudioFileWriter_Opus_WriteFrames;
+    p->writeHeaderFunction = 0;
+    p->setFramePositionFunction = 0; // need ?
+    p->getFramePositionFunction = 0; // need ?
+
+    
+exit:
+    if ((p->peer == 0) && (opus != 0))
+    {
+        pl_AudioFileWriter_Opus_Clear (opus);
+    }
+    
+    return result;
+}
+
+static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef opus)
+{
+    PlankResult result;
+    int ret, bufferLength;
+    float* buffer;
+    unsigned char* packetData;
+    opus_int32 packetLength;
+    
+    result       = PlankResult_OK;
+    buffer       = (float*)pl_DynamicArray_GetArray (&opus->buffer);
+    bufferLength = (int)pl_DynamicArray_GetSize (&opus->buffer);
+    packetData   = (unsigned char*)pl_DynamicArray_GetArray (&opus->packet);
+    packetLength = (opus_int32)pl_DynamicArray_GetSize (&opus->packet);
+
+    if (opus->bufferPos < bufferLength)
+    {
+        // is last buffer - pad with zeros
+        pl_MemoryZero (buffer + opus->bufferPos, (bufferLength - opus->bufferPos) * sizeof (float));
+    }
+
+    ret = opus_multistream_encode_float (opus->oe, (float*)buffer, opus->packetSize, packetData, packetLength);
+    
+    if (ret < 0)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    opus->op.packet     = packetData;
+    opus->op.bytes      = ret;
+    opus->op.b_o_s      = 0;
+    opus->op.e_o_s      = opus->bufferPos < bufferLength ? 1 : 0;
+    opus->op.granulepos += opus->frameSize * 48000 / opus->header.input_sample_rate;
+    opus->op.packetno++;
+    ogg_stream_packetin (&opus->os, &opus->op);
+    
+    do
+    {
+        if ((ret = ogg_stream_flush (&opus->os, &opus->og)) != 0)
+        {
+            if ((result = pl_File_Write ((PlankFileRef)opus, opus->og.header, opus->og.header_len)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_Write ((PlankFileRef)opus, opus->og.body,   opus->og.body_len))   != PlankResult_OK) goto exit;
+        }
+    } while (ret != 0);
+
+    
+    //        if(op.e_o_s){
+    //            /*We compute the final GP as ceil(len*48k/input_rate). When a resampling
+    //             decoder does the matching floor(len*input/48k) conversion the length will
+    //             be exactly the same as the input.*/
+    //            op.granulepos=((original_samples*48000+rate-1)/rate)+header.preskip;
+    //        }
+
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileWriter_Opus_Close (PlankAudioFileWriterRef p)
+{
+    PlankResult result;
+    PlankOpusFileWriterRef opus;
+    
+    result = PlankResult_OK;
+    opus = (PlankOpusFileWriterRef)p->peer;
+    
+    if (opus)
+    {
+        if ((result = pl_AudioFileWriter_Opus_WriteBuffer (opus)) != PlankResult_OK) goto exit;
+
+        if ((result = pl_File_DeInit ((PlankFileRef)opus)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_DeInit(&opus->mapping)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_DeInit(&opus->packet)) != PlankResult_OK) goto exit;
+        if ((result = pl_DynamicArray_DeInit(&opus->buffer)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileWriter_Opus_Clear (opus)) != PlankResult_OK) goto exit;
+    }
+    
+exit:
+    return result;    
+}
+
+PlankResult pl_AudioFileWriter_Opus_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
+{
+    PlankResult result;
+    PlankOpusFileWriterRef opus;
+    float* buffer;
+    const float* src;
+    int bufferLength, bufferRemaining, numSamplesRemaining, bufferThisTime;
+    int numChannels, numSamples;
+    
+    result = PlankResult_OK;
+    opus = (PlankOpusFileWriterRef)p->peer;
+    
+    numChannels = p->formatInfo.numChannels;
+    buffer = (float*)pl_DynamicArray_GetArray (&opus->buffer);
+    bufferLength = (int)pl_DynamicArray_GetSize (&opus->buffer);
+    bufferRemaining = bufferLength - opus->bufferPos;
+    numSamples = numFrames * numChannels;
+    numSamplesRemaining = numSamples;
+    src = (const float*)data;
+    
+    while (numSamplesRemaining > 0)
+    {
+        bufferThisTime = pl_MinI (bufferRemaining, numSamplesRemaining);
+        pl_MemoryCopy (buffer + opus->bufferPos, src, bufferThisTime * sizeof (float));
+        
+        bufferRemaining -= bufferThisTime;
+        opus->bufferPos += bufferThisTime;
+        numSamplesRemaining -= bufferThisTime;
+        src += bufferThisTime;
+        
+        if (opus->bufferPos == bufferLength)
+        {
+            result = pl_AudioFileWriter_Opus_WriteBuffer (opus);
+            bufferRemaining = bufferLength;
+            opus->bufferPos = 0;
+        }
+    }
+        
+exit:
+    return result;
+}
+
+/*
+ if ((result = pl_File_Write ((PlankFileRef)opus, PLANKAUDIOFILE_OPUS_HEAD, PLANKAUDIOFILE_OPUS_HEAD_LEN)) != PlankResult_OK) goto exit;
+ if ((result = pl_File_WriteUC ((PlankFileRef)opus, 1)) != PlankResult_OK) goto exit; // version
+ if ((result = pl_File_WriteUC ((PlankFileRef)opus, p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
+ if ((result = pl_File_WriteUS ((PlankFileRef)opus, (PlankUS)delay)) != PlankResult_OK) goto exit;
+ if ((result = pl_File_WriteUI ((PlankFileRef)opus, sampleRate)) != PlankResult_OK) goto exit;
+ if ((result = pl_File_WriteUS ((PlankFileRef)opus, 0)) != PlankResult_OK) goto exit; // gain in dB
+ 
+ if (p->formatInfo.numChannels > 2)
+ {
+ if ((result = pl_File_WriteUC ((PlankFileRef)opus, p->formatInfo.numChannels <= 8 ? 1 : 255)) != PlankResult_OK) goto exit;
+ if ((result = pl_File_WriteUC ((PlankFileRef)opus, p->formatInfo.numChannels)) != PlankResult_OK) goto exit; // stream count
+ if ((result = pl_File_WriteUC ((PlankFileRef)opus, 0)) != PlankResult_OK) goto exit; // coupled streams
+ if ((result = pl_File_WriteDynamicArray ((PlankFileRef)opus, &opus->mapping)) != PlankResult_OK) goto exit; // coupled streams
+ }
+ else
+ {
+ if ((result = pl_File_WriteUC ((PlankFileRef)opus, 0)) != PlankResult_OK) goto exit;
+ }
+*/
+
+#endif // PLANK_OPUS
