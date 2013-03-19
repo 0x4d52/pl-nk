@@ -1663,8 +1663,8 @@ PlankResult pl_File_WriteString (PlankFileRef p, const char* text)
     if (p->stream == 0)
         return PlankResult_FileInvalid;
     
-    if (p->mode & PLANKFILE_BINARY)
-        return PlankResult_FileWriteError;
+//    if (p->mode & PLANKFILE_BINARY)
+//        return PlankResult_FileWriteError;
     
     if (! (p->mode & PLANKFILE_WRITE))
         return PlankResult_FileWriteError;

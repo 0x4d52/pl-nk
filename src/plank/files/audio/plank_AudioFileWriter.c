@@ -1192,10 +1192,12 @@ typedef struct PlankOpusFileWriter
     float frameDuration;
     int packetSize;
     int frameSize;
-    PlankDynamicArray mapping;
+    PlankUC mapping[256];
     PlankDynamicArray packet;
     PlankDynamicArray buffer;
     int bufferPos;
+    
+    PlankLL totalPCMFrames;
     
 } PlankOpusFileWriter;
 
@@ -1231,63 +1233,87 @@ buf[base]=(val)&0xff; \
 }while(0)
 
 
-static void pl_AudioFileWriter_Opus_CommentInit (char **comments, int* length, const char *vendor_string)
-{
-    int vendor_length=strlen(vendor_string);
-    int user_comment_list_length=0;
-    int len=8+4+vendor_length+4;
-    char *p=(char*)malloc(len);
-    if(p==NULL){
-        fprintf(stderr, "malloc failed in comment_init()\n");
-        exit(1);
-    }
-    memcpy(p, "OpusTags", 8);
-    writeint(p, 8, vendor_length);
-    memcpy(p+12, vendor_string, vendor_length);
-    writeint(p, 12+vendor_length, user_comment_list_length);
-    *length=len;
-    *comments=p;
-}
+//static void pl_AudioFileWriter_Opus_CommentInit (char **comments, int* length, const char *vendor_string)
+//{
+//    int vendor_length=strlen(vendor_string);
+//    int user_comment_list_length=0;
+//    int len=8+4+vendor_length+4;
+//    char *p=(char*)malloc(len);
+//    if(p==NULL){
+//        fprintf(stderr, "malloc failed in comment_init()\n");
+//        exit(1);
+//    }
+//    memcpy(p, "OpusTags", 8);
+//    writeint(p, 8, vendor_length);
+//    memcpy(p+12, vendor_string, vendor_length);
+//    writeint(p, 12+vendor_length, user_comment_list_length);
+//    *length=len;
+//    *comments=p;
+//}
+//
+//static void pl_AudioFileWriter_Opus_CommentFree (char **comments)
+//{
+//    free (*comments);
+//    *comments = 0;
+//}
+//
+//static void pl_AudioFileWriter_Opus_CommentAdd (char **comments, int* length, char *tag, char *val)
+//{
+//    char* p=*comments;
+//    int vendor_length=readint(p, 8);
+//    int user_comment_list_length=readint(p, 8+4+vendor_length);
+//    int tag_len=(tag?strlen(tag):0);
+//    int val_len=strlen(val);
+//    int len=(*length)+4+tag_len+val_len;
+//    
+//    p=(char*)realloc(p, len);
+//    if(p==NULL){
+//        fprintf(stderr, "realloc failed in comment_add()\n");
+//        exit(1);
+//    }
+//    
+//    writeint(p, *length, tag_len+val_len);      /* length of comment */
+//    if(tag) memcpy(p+*length+4, tag, tag_len);  /* comment */
+//    memcpy(p+*length+4+tag_len, val, val_len);  /* comment */
+//    writeint(p, 8+4+vendor_length, user_comment_list_length+1);
+//    *comments=p;
+//    *length=len;
+//}
 
-static void pl_AudioFileWriter_Opus_CommentFree (char **comments)
+static void pl_AudioFileWriter_Opus_CommentAdd (PlankFileRef commentWriter, const char *tag, const char *value)
 {
-    free (*comments);
-    *comments = 0;
-}
+    int vendorLength, numComments, tagLength, valueLength;
+    
+    pl_File_SetPosition (commentWriter, 8);
+    pl_File_ReadI (commentWriter, &vendorLength);
+    
+    pl_File_SetPosition (commentWriter, 8 + 4 + vendorLength);
+    pl_File_ReadI (commentWriter, &numComments);
 
-static void pl_AudioFileWriter_Opus_CommentAdd (char **comments, int* length, char *tag, char *val)
-{
-    char* p=*comments;
-    int vendor_length=readint(p, 8);
-    int user_comment_list_length=readint(p, 8+4+vendor_length);
-    int tag_len=(tag?strlen(tag):0);
-    int val_len=strlen(val);
-    int len=(*length)+4+tag_len+val_len;
+    tagLength = tag ? strlen (tag) : 0;
+    valueLength = strlen (value);
     
-    p=(char*)realloc(p, len);
-    if(p==NULL){
-        fprintf(stderr, "realloc failed in comment_add()\n");
-        exit(1);
-    }
+    pl_File_SetPositionEnd (commentWriter);
+    pl_File_WriteI (commentWriter, tagLength + valueLength);
     
-    writeint(p, *length, tag_len+val_len);      /* length of comment */
-    if(tag) memcpy(p+*length+4, tag, tag_len);  /* comment */
-    memcpy(p+*length+4+tag_len, val, val_len);  /* comment */
-    writeint(p, 8+4+vendor_length, user_comment_list_length+1);
-    *comments=p;
-    *length=len;
+    if (tag) pl_File_Write (commentWriter, tag, tagLength);
+    pl_File_Write (commentWriter, value, valueLength);
+
+    pl_File_SetPosition (commentWriter, 8 + 4 + vendorLength);
+    pl_File_WriteI (commentWriter, numComments + 1);
 }
 
 PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char* filepath)
 {
     unsigned char headerData[100];
-    char* comments;
-    int commentsLength;
+    const char* vendor;
     PlankResult result;
     PlankOpusFileWriterRef opus;
     PlankRNGRef rng;
+    PlankDynamicArray comments;
+    PlankFile commentWriter;
     PlankMemoryRef m;
-    int err, delay, bitRate, streamCount, coupledStreamCount, quality, headerPacketSize;
+    int err, delay, bitRate, streamCount, coupledStreamCount, quality, headerPacketSize, i;
     opus_int32 sampleRate;
     
     result = PlankResult_OK;
@@ -1308,8 +1334,7 @@ PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char*
     
     switch (sampleRate)
     {
-        //case 8000: case 12000: case 16000: case 24000: case 48000: break;
-        case 48000: // need to fix this
+        case 8000: case 12000: case 16000: case 24000: case 48000: break;
         default:
             result = PlankResult_AudioFileUnsupportedType;
             goto exit;
@@ -1329,25 +1354,28 @@ PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char*
     if ((result = pl_File_Init ((PlankFileRef)opus)) != PlankResult_OK) goto exit;
     if ((result = pl_File_OpenBinaryWrite ((PlankFileRef)opus, filepath, PLANK_FALSE, PLANK_TRUE, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
-    opus->frameDuration     = 0.02f; // 960 @ 48kHz
-    opus->frameSize         = (int)(opus->frameDuration * 48000.f);
+    opus->frameDuration     = sampleRate == 48000 ? 0.02f : 0.06f;
+    opus->frameSize         = (int)(opus->frameDuration * 48000.f); // is it 960 for 48kHz?
     streamCount             = p->formatInfo.numChannels;
     coupledStreamCount      = 0;
     bitRate                 = 64000 * streamCount + 32000 * coupledStreamCount;
     opus->packetSize        = opus->frameSize * sampleRate / 48000;
     quality                 = (int)p->formatInfo.quality;
     
-    if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->mapping, 1, p->formatInfo.numChannels, PLANK_TRUE)) != PlankResult_OK) goto exit;
+    for (i = 0; i < p->formatInfo.numChannels; ++i)
+        opus->mapping[i] = i;
+    
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->packet, 1, PLANKAUDIOFILE_OPUS_MAXPACKETSIZE * streamCount, PLANK_FALSE)) != PlankResult_OK) goto exit;
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&opus->buffer, sizeof (float), p->formatInfo.numChannels * opus->frameSize, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
     opus->bufferPos = 0;
+    opus->totalPCMFrames = 0;
     
     opus->oe = opus_multistream_encoder_create (sampleRate,
                                                 p->formatInfo.numChannels, // channels
                                                 p->formatInfo.numChannels, // streams
                                                 0, // coupled streams
-                                                (const unsigned char *)pl_DynamicArray_GetArray (&opus->mapping),
+                                                opus->mapping,
                                                 OPUS_APPLICATION_AUDIO,
                                                 &err);
     if (err)
@@ -1358,20 +1386,18 @@ PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char*
     
     if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_BITRATE (bitRate))) != 0) { result = PlankResult_UnknownError; goto exit; }
     if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_COMPLEXITY (quality))) != 0) { result = PlankResult_UnknownError; goto exit; }
-    
-//        if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_SET_VBR (1))) != 0) { result = PlankResult_UnknownError; goto exit; }
-//        OPUS_SET_VBR_CONSTRAINT(0)
-//        OPUS_SET_PACKET_LOSS_PERC(0)
-//        OPUS_SET_MAX_BANDWIDTH(OPUS_BANDWIDTH_FULLBAND)
-    
     if ((err = opus_multistream_encoder_ctl (opus->oe, OPUS_GET_LOOKAHEAD (&delay))) != 0) { result = PlankResult_UnknownError; goto exit; }
 
     opus->header.version           = 1;
     opus->header.channels          = p->formatInfo.numChannels;
-    opus->header.preskip           = delay;
+    opus->header.preskip           = delay * 48000 / sampleRate;
     opus->header.input_sample_rate = sampleRate;
     opus->header.gain              = 0;
     opus->header.channel_mapping   = 0;
+    opus->header.nb_streams        = streamCount;
+    opus->header.nb_coupled        = coupledStreamCount;
+    
+    pl_MemoryCopy (opus->header.stream_map, opus->mapping, opus->header.channels);
     
     rng = pl_RNGGlobal();
     ogg_stream_init (&opus->os, pl_RNG_Next (rng));
@@ -1395,11 +1421,24 @@ PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char*
         }
     } while (err != 0);
     
-    pl_AudioFileWriter_Opus_CommentInit (&comments, &commentsLength, opus_get_version_string());
-    pl_AudioFileWriter_Opus_CommentAdd (&comments, &commentsLength, "ENCODER=", "Plink|Plonk|Plank");
+    pl_DynamicArray_InitWithItemSizeAndCapacity (&comments, 1, 128);
+    pl_File_Init (&commentWriter);
+    pl_File_OpenDynamicArray (&commentWriter, &comments, PLANKFILE_BINARY | PLANKFILE_WRITE | PLANKFILE_READ);
+    
+    pl_File_WriteString (&commentWriter, "OpusTags");
+    vendor = opus_get_version_string();
+    
+    pl_File_WriteI (&commentWriter, strlen (vendor));
+    pl_File_WriteString (&commentWriter, vendor);
+    pl_File_WriteI (&commentWriter, 0);
 
-    opus->op.packet     = (unsigned char *)comments;
-    opus->op.bytes      = commentsLength;
+    pl_AudioFileWriter_Opus_CommentAdd (&commentWriter, "ENCODER=", "Plink|Plonk|Plank");
+    
+//    pl_AudioFileWriter_Opus_CommentInit (&comments, &commentsLength, opus_get_version_string());
+//    pl_AudioFileWriter_Opus_CommentAdd (&comments, &commentsLength, "ENCODER=", "Plink|Plonk|Plank");
+//
+    opus->op.packet     = (unsigned char *)pl_DynamicArray_GetArray (&comments);
+    opus->op.bytes      = pl_DynamicArray_GetSize(&comments);
     opus->op.b_o_s      = 0;
     opus->op.e_o_s      = 0;
     opus->op.granulepos = 0;
@@ -1415,7 +1454,10 @@ PlankResult pl_AudioFileWriter_Opus_Open (PlankAudioFileWriterRef p, const char*
         }
     } while (err != 0);
 
-    pl_AudioFileWriter_Opus_CommentFree (&comments);
+//    pl_AudioFileWriter_Opus_CommentFree (&comments);
+    
+    pl_File_DeInit (&commentWriter);
+    pl_DynamicArray_DeInit (&comments);
     
     p->peer = opus;
     
@@ -1441,6 +1483,7 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
     float* buffer;
     unsigned char* packetData;
     opus_int32 packetLength;
+    ogg_uint32_t sampleRate;
     
     result       = PlankResult_OK;
     buffer       = (float*)pl_DynamicArray_GetArray (&opus->buffer);
@@ -1448,6 +1491,8 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
     packetData   = (unsigned char*)pl_DynamicArray_GetArray (&opus->packet);
     packetLength = (opus_int32)pl_DynamicArray_GetSize (&opus->packet);
 
+    opus->totalPCMFrames += opus->bufferPos;
+    
     if (opus->bufferPos < bufferLength)
     {
         // is last buffer - pad with zeros
@@ -1466,7 +1511,17 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
     opus->op.bytes      = ret;
     opus->op.b_o_s      = 0;
     opus->op.e_o_s      = opus->bufferPos < bufferLength ? 1 : 0;
-    opus->op.granulepos += opus->frameSize * 48000 / opus->header.input_sample_rate;
+    
+    if (opus->op.e_o_s)
+    {
+        sampleRate = opus->header.input_sample_rate;
+        opus->op.granulepos = ((opus->totalPCMFrames * 48000 + sampleRate - 1) / sampleRate) + opus->header.preskip;
+    }
+    else
+    {
+        opus->op.granulepos += opus->frameSize * 48000 / opus->header.input_sample_rate;
+    }
+    
     opus->op.packetno++;
     ogg_stream_packetin (&opus->os, &opus->op);
     
@@ -1478,15 +1533,6 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
             if ((result = pl_File_Write ((PlankFileRef)opus, opus->og.body,   opus->og.body_len))   != PlankResult_OK) goto exit;
         }
     } while (ret != 0);
-
-    
-    //        if(op.e_o_s){
-    //            /*We compute the final GP as ceil(len*48k/input_rate). When a resampling
-    //             decoder does the matching floor(len*input/48k) conversion the length will
-    //             be exactly the same as the input.*/
-    //            op.granulepos=((original_samples*48000+rate-1)/rate)+header.preskip;
-    //        }
-
     
 exit:
     return result;
