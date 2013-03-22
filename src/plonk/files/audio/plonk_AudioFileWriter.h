@@ -66,11 +66,12 @@ class AudioFileWriterInternal : public AudioFileWriterInternalBase<SampleType>
 public:
     typedef NumericalArray<SampleType>  Buffer;
     
-    AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const float quality, const int bufferSize) throw()
+    AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const float quality, const float frameDuration, const int bufferSize) throw()
     :   buffer (Buffer::withSize (numChannels * bufferSize, false))
     {
         (void)quality;
-    
+        (void)frameDuration;
+        
         pl_AudioFileWriter_Init (&peer);
 
         const Text ext = path.extension();
@@ -121,7 +122,7 @@ public:
                  (sizeof (SampleType) == 4) &&
                  this->isFloat)
         {
-            pl_AudioFileWriter_SetFormatOpus (&peer, quality, numChannels, sampleRate);
+            pl_AudioFileWriter_SetFormatOpus (&peer, quality, numChannels, sampleRate, frameDuration == 0.f ? 0.02f : frameDuration);
             pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
         }
 #endif
@@ -212,8 +213,11 @@ public:
     typedef SmartPointerContainer<Internal>     Base;
     typedef NumericalArray<SampleType>          Buffer;
 
-    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate, const float quality = 0.f, const int bufferSize = AudioFile::DefaultBufferSize) throw()
-	:	Base (new Internal (path, numChannels, sampleRate, quality, bufferSize))
+    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate,
+                     const float quality = 0.f,
+                     const float frameDuration = 0.f,
+                     const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	:	Base (new Internal (path, numChannels, sampleRate, quality, frameDuration, bufferSize))
 	{
 	}
 

@@ -148,6 +148,8 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
     #include "../../../../ext/opus/opus_header.h"
     #define PLANKAUDIOFILE_OPUS_MAXFRAMESIZE         (960 * 6)
     #define PLANKAUDIOFILE_OPUS_MAXPACKETSIZE   (1275 * 3 + 7)
+    #define PALNKAUDIOFILE_OPUS_MAXSEGMENTS                255
+    #define PALNKAUDIOFILE_OPUS_FLUSHFILLSIZE      (255 * 255)
     #define PLANKAUDIOFILE_OPUS_DELAY                      312
     #define PLANKAUDIOFILE_OPUS_READBYTES                  200
     #define PLANKAUDIOFILE_OPUS_MINSAMPLERATE             8000
@@ -156,6 +158,7 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
     #define PLANKAUDIOFILE_OPUS_HEAD                 "OpusHead"
     #define PLANKAUDIOFILE_OPUS_HEAD_LEN                     8
     #define PLANKAUDIOFILE_OPUS_PREROLL_MS                  80
+    #define PALNKAUDIOFILE_OPUS_HEADERNUMSEGSPOS            26
 #endif
 
 
@@ -169,6 +172,7 @@ typedef struct PlankAudioFileFormatInfo
     PlankI numChannels;
     PlankD sampleRate;
     PlankF quality;
+    PlankF frameDuration;
     
     PlankUI channelMask;
 
