@@ -96,6 +96,11 @@ PlankResult pl_IffFileWriter_OpenReplacing (PlankIffFileWriterRef p,
                                             const PlankFourCharCode mainID, 
                                             const PlankFourCharCode formatID);
 
+PlankResult pl_IffFileWriter_OpenWithFile (PlankIffFileWriterRef p,
+                                           PlankFileRef file,
+                                           const PlankFourCharCode mainID,
+                                           const PlankFourCharCode formatID);
+
 /** */
 PlankResult pl_IffFileWriter_Close (PlankIffFileWriterRef p);
 

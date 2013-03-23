@@ -169,10 +169,13 @@ typedef struct PlankAudioFileFormatInfo
     
     PlankI bitsPerSample;
     PlankI bytesPerFrame;
+    PlankI minimumBitRate;
+    PlankI maximumBitRate;
+    PlankI nominalBitRate;
     PlankI numChannels;
     PlankD sampleRate;
+    PlankD frameDuration;
     PlankF quality;
-    PlankF frameDuration;
     
     PlankUI channelMask;
 

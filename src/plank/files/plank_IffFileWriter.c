@@ -154,7 +154,47 @@ PlankResult pl_IffFileWriter_OpenReplacing (PlankIffFileWriterRef p,
     p->headerInfo.mainID        = mainID;
     p->headerInfo.mainLength    = PLANKIFFFILE_MINIMUMMAINLENGTH;
     p->headerInfo.formatID      = formatID;
-//    p->headerInfo.mainEnd       = PLANKIFFFILE_FIRSTCHUNKPOSITION;
+    
+    if ((result = pl_IffFileWriter_WriteHeader (p)) != PlankResult_OK) goto exit;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_IffFileWriter_OpenWithFile (PlankIffFileWriterRef p,
+                                           PlankFileRef file,
+                                           const PlankFourCharCode mainID,
+                                           const PlankFourCharCode formatID)
+{
+    PlankResult result = PlankResult_OK;
+    int mode;
+    
+    if ((result = pl_File_GetMode (file, &mode)) != PlankResult_OK) goto exit;
+    
+    if (!(mode & PLANKFILE_BINARY))
+    {
+        result = PlankResult_AudioFileInavlidType;
+        goto exit;
+    }
+    
+    if (!(mode & PLANKFILE_READ))
+    {
+        result = PlankResult_AudioFileInavlidType;
+        goto exit;
+    }
+    
+    if (!(mode & PLANKFILE_WRITE))
+    {
+        result = PlankResult_AudioFileInavlidType;
+        goto exit;
+    }
+        
+    pl_MemoryCopy (&p->file, file, sizeof (PlankFile));
+    pl_MemoryZero (file, sizeof (PlankFile));
+
+    p->headerInfo.mainID        = mainID;
+    p->headerInfo.mainLength    = PLANKIFFFILE_MINIMUMMAINLENGTH;
+    p->headerInfo.formatID      = formatID;
     
     if ((result = pl_IffFileWriter_WriteHeader (p)) != PlankResult_OK) goto exit;
     
