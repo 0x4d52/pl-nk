@@ -101,6 +101,10 @@ PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFil
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p);
 
+
+const PlankAudioFileFormatInfo* pl_AudioFileReader_GetFormatInfoReadOnly (PlankAudioFileReaderRef p);
+
+
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */

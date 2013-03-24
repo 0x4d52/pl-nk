@@ -210,62 +210,119 @@ class AudioFileWriterInternal : public AudioFileWriterInternalBase<SampleType>
 public:
     typedef NumericalArray<SampleType>  Buffer;
     
-//    AudioFileWriterInternal (FilePath const& p) throw()
-//    :   path (p)
-//    {
-//        pl_AudioFileWriter_Init (&peer);
-//    }
-    
-    
-    AudioFileWriterInternal (FilePath const& path, const int numChannels, const double sampleRate, const float quality, const float frameDuration, const int bufferSize) throw()
-    :   buffer (Buffer::withSize (numChannels * bufferSize, false))
+    AudioFileWriterInternal (const int bufferSize) throw()
+    :   buffer (Buffer::withSize (bufferSize, false))
     {
-        (void)quality;
-        (void)frameDuration;
-        
         pl_AudioFileWriter_Init (&peer);
+    }
+    
+    static AudioFileWriterInternal* createPCM (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize) throw()
+    {
+        AudioFileWriterInternal* internal = new AudioFileWriterInternal (numChannels * bufferSize);
+        
+        const bool success = internal->openPCM (path, numChannels, sampleRate, bufferSize);
+        
+        if (!success)
+        {
+            internal->decrementRefCount();
+            return 0;
+        }
+        
+        return internal;
+    }
+
+    static AudioFileWriterInternal* createCompressedVBR (FilePath const& path, const int numChannels, const double sampleRate,
+                                                         const float quality, const double frameDuration, const int bufferSize) throw()
+    {
+        AudioFileWriterInternal* internal = new AudioFileWriterInternal (numChannels * bufferSize);
+        
+        const bool success = internal->openCompressedVBR (path, numChannels, sampleRate, quality, frameDuration, bufferSize);
+        
+        if (!success)
+        {
+            internal->decrementRefCount();
+            return 0;
+        }
+        
+        return internal;
+    }
+    
+    static AudioFileWriterInternal* createCompressedManaged (FilePath const& path, const int numChannels, const double sampleRate,
+                                                             const int minBitRate, const int nominalBitRate, const int maxBitRate,
+                                                             const double frameDuration, const int bufferSize) throw()
+    {
+        AudioFileWriterInternal* internal = new AudioFileWriterInternal (numChannels * bufferSize);
+        
+        const bool success = internal->openCompressedManaged (path, numChannels, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize);
+        
+        if (!success)
+        {
+            internal->decrementRefCount();
+            return 0;
+        }
+        
+        return internal;
+    }
+    
+    bool openPCM (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize) throw()
+    {
+        ResultCode result = PlankResult_UnknownError;
         
         const Text ext = path.extension();
-        
+
         if (ext.equalsIgnoreCase ("wav"))
         {
-            pl_AudioFileWriter_SetFormatWAV (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat);
-            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+            if ((result = pl_AudioFileWriter_SetFormatWAV (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat)) != PlankResult_OK) goto exit;
+            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
         else if (ext.equalsIgnoreCase ("aif"))
         {
             // ideally we'd allow aiff but this is used to identify aifc (below)
-            
+
             if (this->isFloat)
             {
-                pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, true, false);
-                pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+                if ((result = pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, true, false)) != PlankResult_OK) goto exit;;
+                if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
             }
             else
             {
-                pl_AudioFileWriter_SetFormatAIFF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate);
-                pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+                if ((result = pl_AudioFileWriter_SetFormatAIFF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate)) != PlankResult_OK) goto exit;;
+                if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
             }
         }
         else if (ext.equalsIgnoreCase ("aiff") || ext.equalsIgnoreCase ("aifc"))
         {
             // ideally we'd use aifc only but some audio apps don't recognise this
 #if PLANK_LITTLEENDIAN
-            pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, !this->isFloat && sizeof (SampleType) == 2);
-            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+            if ((result = pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, !this->isFloat && sizeof (SampleType) == 2)) != PlankResult_OK) goto exit;;
+            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
 #endif
 #if PLANK_BIGENDIAN
-            pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, false);
-            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+            if ((result = pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, false)) != PlankResult_OK) goto exit;;
+            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
 #endif
+        }
+      
+    exit:
+        return result == PlankResult_OK;
+    }
+    
+    bool openCompressedVBR (FilePath const& path, const int numChannels, const double sampleRate, const float quality, const double frameDuration, const int bufferSize) throw()
+    {
+        ResultCode result = PlankResult_UnknownError;
+        
+        const Text ext = path.extension();
+        
+        if (false)
+        {
         }
 #if PLANK_OGGVORBIS
         else if (ext.equalsIgnoreCase ("ogg") &&
                  (sizeof (SampleType) == 4) &&
                  this->isFloat)
         {
-            pl_AudioFileWriter_SetFormatOggVorbis (&peer, quality, numChannels, sampleRate);
-            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+            if ((result = pl_AudioFileWriter_SetFormatOggVorbis (&peer, quality, numChannels, sampleRate)) != PlankResult_OK) goto exit;;
+            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
 #endif
 #if PLANK_OPUS
@@ -273,10 +330,51 @@ public:
                  (sizeof (SampleType) == 4) &&
                  this->isFloat)
         {
-            pl_AudioFileWriter_SetFormatOpus (&peer, quality, numChannels, sampleRate, frameDuration == 0.f ? 0.02f : frameDuration);
-            pl_AudioFileWriter_Open (&peer, path.fullpath().getArray());
+            if ((result = pl_AudioFileWriter_SetFormatOpus (&peer, quality, numChannels, sampleRate, frameDuration <= 0.0 ? 0.02 : frameDuration)) != PlankResult_OK) goto exit;;
+            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
 #endif
+        
+    exit:
+        return result == PlankResult_OK;
+    }
+    
+    bool openCompressedManaged (FilePath const& path, const int numChannels, const double sampleRate,
+                                const int minBitRate, const int nominalBitRate, const int maxBitRate,
+                                const double frameDuration, const int bufferSize) throw()
+    {
+        ResultCode result = PlankResult_UnknownError;
+        
+        const Text ext = path.extension();
+        
+        if (false)
+        {
+        }
+#if PLANK_OGGVORBIS
+        else if (ext.equalsIgnoreCase ("ogg") &&
+                 (sizeof (SampleType) == 4) &&
+                 this->isFloat)
+        {
+            if ((result = pl_AudioFileWriter_SetFormatOggVorbisManaged (&peer,
+                                                                        minBitRate, nominalBitRate, maxBitRate,
+                                                                        numChannels, sampleRate)) != PlankResult_OK) goto exit;;
+            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
+        }
+#endif
+#if PLANK_OPUS
+        else if (ext.equalsIgnoreCase ("opus") &&
+                 (sizeof (SampleType) == 4) &&
+                 this->isFloat)
+        {
+            if ((result = pl_AudioFileWriter_SetFormatOpusManaged (&peer,
+                                                                   nominalBitRate == 0 ? (maxBitRate + minBitRate) / 2 : nominalBitRate,
+                                                                   numChannels, sampleRate, frameDuration <= 0.0 ? 0.02 : frameDuration)) != PlankResult_OK) goto exit;;
+            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
+        }
+#endif
+        
+    exit:
+        return result == PlankResult_OK;
     }
     
     ~AudioFileWriterInternal()
@@ -335,10 +433,22 @@ public:
     typedef NumericalArray<SampleType>          Buffer;
 
     AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate,
-                     const float quality = 0.f,
-                     const float frameDuration = 0.f,
                      const int bufferSize = AudioFile::DefaultBufferSize) throw()
-	:	Base (new Internal (path, numChannels, sampleRate, quality, frameDuration, bufferSize))
+	:	Base (Internal::createPCM (path, numChannels, sampleRate, 0, 0, bufferSize))
+	{
+	}
+    
+    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate,
+                     const float quality,
+                     const double frameDuration = 0.0, const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	:	Base (Internal::createCompressedVBR (path, numChannels, sampleRate, quality, frameDuration, bufferSize))
+	{
+	}
+    
+    AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate,
+                     const int minBitRate, const int nominalBitRate, const int maxBitRate,
+                     const double frameDuration = 0.0, const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	:	Base (Internal::createCompressedManaged (path, numChannels, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
 	{
 	}
 

@@ -146,19 +146,20 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
     #include "../../../../ext/ogg/ogg.h"
     #include "../../../../ext/opus/opusfile/opusfile.h"
     #include "../../../../ext/opus/opus_header.h"
-    #define PLANKAUDIOFILE_OPUS_MAXFRAMESIZE         (960 * 6)
-    #define PLANKAUDIOFILE_OPUS_MAXPACKETSIZE   (1275 * 3 + 7)
-    #define PALNKAUDIOFILE_OPUS_MAXSEGMENTS                255
-    #define PALNKAUDIOFILE_OPUS_FLUSHFILLSIZE      (255 * 255)
-    #define PLANKAUDIOFILE_OPUS_DELAY                      312
-    #define PLANKAUDIOFILE_OPUS_READBYTES                  200
-    #define PLANKAUDIOFILE_OPUS_MINSAMPLERATE             8000
-    #define PLANKAUDIOFILE_OPUS_MAXSAMPLERATE           192000
-    #define PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE        48000
-    #define PLANKAUDIOFILE_OPUS_HEAD                 "OpusHead"
-    #define PLANKAUDIOFILE_OPUS_HEAD_LEN                     8
-    #define PLANKAUDIOFILE_OPUS_PREROLL_MS                  80
-    #define PALNKAUDIOFILE_OPUS_HEADERNUMSEGSPOS            26
+    #define PLANKAUDIOFILE_OPUS_VENDOR    "libopus 1.01 in Plank " PLANK_VERSION
+    #define PLANKAUDIOFILE_OPUS_MAXFRAMESIZE                           (960 * 6)
+    #define PLANKAUDIOFILE_OPUS_MAXPACKETSIZE                     (1275 * 3 + 7)
+    #define PALNKAUDIOFILE_OPUS_MAXSEGMENTS                                  255
+    #define PALNKAUDIOFILE_OPUS_FLUSHFILLSIZE                        (255 * 255)
+    #define PLANKAUDIOFILE_OPUS_DELAY                                        312
+    #define PLANKAUDIOFILE_OPUS_READBYTES                                    200
+    #define PLANKAUDIOFILE_OPUS_MINSAMPLERATE                               8000
+    #define PLANKAUDIOFILE_OPUS_MAXSAMPLERATE                             192000
+    #define PLANKAUDIOFILE_OPUS_DEFAULTSAMPLERATE                          48000
+    #define PLANKAUDIOFILE_OPUS_HEAD                                  "OpusHead"
+    #define PLANKAUDIOFILE_OPUS_HEAD_LEN                                       8
+    #define PLANKAUDIOFILE_OPUS_PREROLL_MS                                    80
+    #define PALNKAUDIOFILE_OPUS_HEADERNUMSEGSPOS                              26
 #endif
 
 

@@ -280,10 +280,13 @@ typedef struct PlankFourCharCodeString
 #define PLANK_NAMEJOIN3(a,b,c)     PLANK_NAMEJOININTERNAL3(a,b,c)
 #define PLANK_NAMEJOIN4(a,b,c,d)   PLANK_NAMEJOININTERNAL4(a,b,c,d)
 
-#define PLANK_MAJOR_VERSION      0
-#define PLANK_MINOR_VERSION      1
-#define PLANK_BUILDNUMBER        1
+#define PLANK_PRESTRING2(a) #a
+#define PLANK_PRESTRING(a) PLANK_PRESTRING2(a)
 
+#define PLANK_MAJOR_VERSION      0
+#define PLANK_MINOR_VERSION      2
+#define PLANK_BUILDNUMBER        1
+#define PLANK_VERSION           "v" PLANK_PRESTRING(PLANK_MAJOR_VERSION) "." PLANK_PRESTRING(PLANK_MINOR_VERSION) "." PLANK_PRESTRING(PLANK_BUILDNUMBER)
 
 static inline double pl_TimeNow()
 {

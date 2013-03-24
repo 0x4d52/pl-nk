@@ -423,6 +423,11 @@ exit:
     return result;
 }
 
+const PlankAudioFileFormatInfo* pl_AudioFileReader_GetFormatInfoReadOnly (PlankAudioFileReaderRef p)
+{
+    return &p->formatInfo;
+}
+
 PlankResult pl_AudioFileReader_GetFormat (PlankAudioFileReaderRef p, int *format)
 {
     *format = (int)p->formatInfo.format;
