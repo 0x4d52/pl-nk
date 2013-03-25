@@ -1707,7 +1707,7 @@ static PlankResult pl_AudioFileWriter_Opus_OpenInternal (PlankAudioFileWriterRef
     p->peer = opus;
     
     p->writeFramesFunction = pl_AudioFileWriter_Opus_WriteFrames;
-    p->writeHeaderFunction = 0;
+    p->writeHeaderFunction = 0; // no header that needs rewriting later
     
 exit:
     if ((p->peer == 0) && (opus != 0))

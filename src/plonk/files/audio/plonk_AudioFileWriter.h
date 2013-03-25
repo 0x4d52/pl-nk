@@ -216,34 +216,125 @@ public:
         pl_AudioFileWriter_Init (&peer);
     }
     
+    bool openPath (FilePath const& path)
+    {
+        return pl_AudioFileWriter_Open (&peer, path.fullpath().getArray()) == PlankResult_OK;
+    }
+    
+    bool openFile (PlankFileRef file)
+    {
+        return pl_AudioFileWriter_OpenWithFile (&peer, file) == PlankResult_OK;
+    }
+    
+    bool initBytes (PlankFileRef file, ByteArray const& bytes) throw()
+    {
+        return BinaryFileInternal::setupBytes (file, bytes, true);
+    }
+    
     static AudioFileWriterInternal* createPCM (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize) throw()
     {
         AudioFileWriterInternal* internal = new AudioFileWriterInternal (numChannels * bufferSize);
+        const Text ext = path.extension();
         
-        const bool success = internal->openPCM (path, numChannels, sampleRate, bufferSize);
+        AudioFile::Format format = AudioFile::FormatInvalid;
         
-        if (!success)
+        if (ext.equalsIgnoreCase ("wav"))
         {
-            internal->decrementRefCount();
-            return 0;
+            format = AudioFile::FormatWAV;
+        }
+        else if (ext.equalsIgnoreCase ("aif"))
+        {
+            format = AudioFile::FormatAIFF;
+        }
+        else if (ext.equalsIgnoreCase ("aiff") || ext.equalsIgnoreCase ("aifc"))
+        {
+            format = AudioFile::FormatAIFC;
+        }
+            
+        if (!internal->initPCM (format, numChannels, sampleRate, bufferSize))
+        {
+            pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
         
+        if (!internal->openPath (path))
+        {
+            pl_AudioFileWriter_Close (&internal->peer);
+            pl_AudioFileWriter_Init (&internal->peer);
+        }
+        
+    exit:
         return internal;
     }
 
+    static AudioFileWriterInternal* createPCM (ByteArray const& bytes, AudioFile::Format format, const int numChannels, const double sampleRate, const int bufferSize) throw()
+    {
+        AudioFileWriterInternal* internal = new AudioFileWriterInternal (numChannels * bufferSize);
+        PlankFile file;
+        
+        if (!internal->initBytes (&file, bytes))
+        {
+            pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
+        }
+        
+        if (!internal->initPCM (format, numChannels, sampleRate, bufferSize))
+        {
+            pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
+        }
+        
+        if (!internal->openFile (&file))
+        {
+            pl_AudioFileWriter_Close (&internal->peer);
+            pl_AudioFileWriter_Init (&internal->peer);
+        }
+        
+    exit:
+        return internal;
+    }
+    
     static AudioFileWriterInternal* createCompressedVBR (FilePath const& path, const int numChannels, const double sampleRate,
                                                          const float quality, const double frameDuration, const int bufferSize) throw()
     {
         AudioFileWriterInternal* internal = new AudioFileWriterInternal (numChannels * bufferSize);
+        const Text ext = path.extension();
+
+        AudioFile::Format format = AudioFile::FormatInvalid;
         
-        const bool success = internal->openCompressedVBR (path, numChannels, sampleRate, quality, frameDuration, bufferSize);
-        
-        if (!success)
+        if (false)
         {
-            internal->decrementRefCount();
-            return 0;
+        }
+#if PLANK_OGGVORBIS
+        else if (ext.equalsIgnoreCase ("ogg") &&
+                 (sizeof (SampleType) == 4) &&
+                 internal->isFloat)
+        {
+            format = AudioFile::FormatOggVorbis;
+        }
+#endif
+#if PLANK_OPUS
+        else if (ext.equalsIgnoreCase ("opus") &&
+                 (sizeof (SampleType) == 4) &&
+                 internal->isFloat)
+        {
+            format = AudioFile::FormatOpus;
+        }
+#endif
+        
+        if (!internal->initCompressedVBR (format, numChannels, sampleRate, quality, frameDuration, bufferSize))
+        {
+            pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
         
+        if (!internal->openPath (path))
+        {
+            pl_AudioFileWriter_Close (&internal->peer);
+            pl_AudioFileWriter_Init (&internal->peer);
+        }
+        
+    exit:
         return internal;
     }
     
@@ -252,54 +343,75 @@ public:
                                                              const double frameDuration, const int bufferSize) throw()
     {
         AudioFileWriterInternal* internal = new AudioFileWriterInternal (numChannels * bufferSize);
+        const Text ext = path.extension();
+
+        AudioFile::Format format = AudioFile::FormatInvalid;
         
-        const bool success = internal->openCompressedManaged (path, numChannels, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize);
-        
-        if (!success)
+        if (false)
         {
-            internal->decrementRefCount();
-            return 0;
+        }
+#if PLANK_OGGVORBIS
+        else if (ext.equalsIgnoreCase ("ogg") &&
+                 (sizeof (SampleType) == 4) &&
+                 internal->isFloat)
+        {
+            format = AudioFile::FormatOggVorbis;
+        }
+#endif
+#if PLANK_OPUS
+        else if (ext.equalsIgnoreCase ("opus") &&
+                 (sizeof (SampleType) == 4) &&
+                 internal->isFloat)
+        {
+            format = AudioFile::FormatOpus;
+        }
+#endif
+
+        if (!internal->initCompressedManaged (format, numChannels, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
+        {
+            pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
         
+        if (!internal->openPath (path))
+        {
+            pl_AudioFileWriter_Close (&internal->peer);
+            pl_AudioFileWriter_Init (&internal->peer);
+        }
+        
+    exit:
         return internal;
     }
     
-    bool openPCM (FilePath const& path, const int numChannels, const double sampleRate, const int bufferSize) throw()
+    bool initPCM (const AudioFile::Format format, const int numChannels, const double sampleRate, const int bufferSize) throw()
     {
         ResultCode result = PlankResult_UnknownError;
         
-        const Text ext = path.extension();
-
-        if (ext.equalsIgnoreCase ("wav"))
+        if (format == AudioFile::FormatWAV)
         {
             if ((result = pl_AudioFileWriter_SetFormatWAV (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat)) != PlankResult_OK) goto exit;
-            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
-        else if (ext.equalsIgnoreCase ("aif"))
+        else if (format == AudioFile::FormatAIFF)
         {
             // ideally we'd allow aiff but this is used to identify aifc (below)
 
             if (this->isFloat)
             {
                 if ((result = pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, true, false)) != PlankResult_OK) goto exit;;
-                if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
             }
             else
             {
                 if ((result = pl_AudioFileWriter_SetFormatAIFF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate)) != PlankResult_OK) goto exit;;
-                if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
             }
         }
-        else if (ext.equalsIgnoreCase ("aiff") || ext.equalsIgnoreCase ("aifc"))
+        else if (format == AudioFile::FormatAIFC)
         {
             // ideally we'd use aifc only but some audio apps don't recognise this
 #if PLANK_LITTLEENDIAN
             if ((result = pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, !this->isFloat && sizeof (SampleType) == 2)) != PlankResult_OK) goto exit;;
-            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
 #endif
 #if PLANK_BIGENDIAN
             if ((result = pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, false)) != PlankResult_OK) goto exit;;
-            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
 #endif
         }
       
@@ -307,31 +419,24 @@ public:
         return result == PlankResult_OK;
     }
     
-    bool openCompressedVBR (FilePath const& path, const int numChannels, const double sampleRate, const float quality, const double frameDuration, const int bufferSize) throw()
+    bool initCompressedVBR (const AudioFile::Format format, const int numChannels, const double sampleRate, const float quality,
+                            const double frameDuration, const int bufferSize) throw()
     {
         ResultCode result = PlankResult_UnknownError;
-        
-        const Text ext = path.extension();
-        
+                
         if (false)
         {
         }
 #if PLANK_OGGVORBIS
-        else if (ext.equalsIgnoreCase ("ogg") &&
-                 (sizeof (SampleType) == 4) &&
-                 this->isFloat)
+        else if (format == AudioFile::FormatOggVorbis)
         {
             if ((result = pl_AudioFileWriter_SetFormatOggVorbis (&peer, quality, numChannels, sampleRate)) != PlankResult_OK) goto exit;;
-            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
 #endif
 #if PLANK_OPUS
-        else if (ext.equalsIgnoreCase ("opus") &&
-                 (sizeof (SampleType) == 4) &&
-                 this->isFloat)
+        else if (format == AudioFile::FormatOpus)
         {
             if ((result = pl_AudioFileWriter_SetFormatOpus (&peer, quality, numChannels, sampleRate, frameDuration <= 0.0 ? 0.02 : frameDuration)) != PlankResult_OK) goto exit;;
-            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
 #endif
         
@@ -339,37 +444,29 @@ public:
         return result == PlankResult_OK;
     }
     
-    bool openCompressedManaged (FilePath const& path, const int numChannels, const double sampleRate,
+    bool initCompressedManaged (const AudioFile::Format format, const int numChannels, const double sampleRate,
                                 const int minBitRate, const int nominalBitRate, const int maxBitRate,
                                 const double frameDuration, const int bufferSize) throw()
     {
         ResultCode result = PlankResult_UnknownError;
-        
-        const Text ext = path.extension();
-        
+            
         if (false)
         {
         }
 #if PLANK_OGGVORBIS
-        else if (ext.equalsIgnoreCase ("ogg") &&
-                 (sizeof (SampleType) == 4) &&
-                 this->isFloat)
+        else if (format == AudioFile::FormatOggVorbis)
         {
             if ((result = pl_AudioFileWriter_SetFormatOggVorbisManaged (&peer,
                                                                         minBitRate, nominalBitRate, maxBitRate,
                                                                         numChannels, sampleRate)) != PlankResult_OK) goto exit;;
-            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
 #endif
 #if PLANK_OPUS
-        else if (ext.equalsIgnoreCase ("opus") &&
-                 (sizeof (SampleType) == 4) &&
-                 this->isFloat)
+        else if (format == AudioFile::FormatOpus)
         {
             if ((result = pl_AudioFileWriter_SetFormatOpusManaged (&peer,
                                                                    nominalBitRate == 0 ? (maxBitRate + minBitRate) / 2 : nominalBitRate,
                                                                    numChannels, sampleRate, frameDuration <= 0.0 ? 0.02 : frameDuration)) != PlankResult_OK) goto exit;;
-            if ((result = pl_AudioFileWriter_Open (&peer, path.fullpath().getArray())) != PlankResult_OK) goto exit;;
         }
 #endif
         
@@ -382,21 +479,27 @@ public:
         pl_AudioFileWriter_DeInit (&peer);
     }
     
-    void writeFrames (const int numFrames, const SampleType* frameData) throw()
+//    void writeHeader() throw()
+//    {
+//        pl_AudioFileWriter_WriteHeader (&this->peer);
+//    }
+    
+    bool writeFrames (const int numFrames, const SampleType* frameData) throw()
     {
-        pl_AudioFileWriter_WriteFrames (&peer, numFrames, frameData);
+        return pl_AudioFileWriter_WriteFrames (&peer, numFrames, frameData) == PlankResult_OK;
     }
     
-    void writeFrames (Buffer const& frames) throw()
+    bool writeFrames (Buffer const& frames) throw()
     {
         const int numChannels = peer.formatInfo.numChannels;
         plonk_assert ((frames.length() % numChannels) == 0);
-        pl_AudioFileWriter_WriteFrames (&peer, frames.length() / numChannels, frames.getArray());
+        return pl_AudioFileWriter_WriteFrames (&peer, frames.length() / numChannels, frames.getArray()) == PlankResult_OK;
     }
     
     template<class OtherType>
-    void writeFrames (NumericalArray<OtherType> const& frames) throw()
+    bool writeFrames (NumericalArray<OtherType> const& frames) throw()
     {
+        bool success = true;
         const int numChannels = peer.formatInfo.numChannels;
         
         plonk_assert ((frames.length() % numChannels) == 0);
@@ -411,15 +514,19 @@ public:
         {
             const int numSamplesThisTime = plonk::min (nativeSamplesLength, numSamplesRemainaing);
             NumericalArrayConverter<SampleType, OtherType>::convertScaled (nativeSamples, sourceSamples, numSamplesThisTime);
-            pl_AudioFileWriter_WriteFrames (&peer, numSamplesThisTime / numChannels, nativeSamples);
+            success = pl_AudioFileWriter_WriteFrames (&peer, numSamplesThisTime / numChannels, nativeSamples) == PlankResult_OK;
+            
+            if (!success) break;
+            
             numSamplesRemainaing -= numSamplesThisTime;
             sourceSamples += numSamplesThisTime;
         }
+        
+        return success;
     }
     
 private:
     PlankAudioFileWriter peer;
-    FilePath path;
     Buffer buffer;
 };
 
@@ -434,7 +541,7 @@ public:
 
     AudioFileWriter (FilePath const& path, const int numChannels, const double sampleRate,
                      const int bufferSize = AudioFile::DefaultBufferSize) throw()
-	:	Base (Internal::createPCM (path, numChannels, sampleRate, 0, 0, bufferSize))
+	:	Base (Internal::createPCM (path, numChannels, sampleRate, bufferSize))
 	{
 	}
     
@@ -451,21 +558,32 @@ public:
 	:	Base (Internal::createCompressedManaged (path, numChannels, sampleRate, minBitRate, nominalBitRate, maxBitRate, frameDuration, bufferSize))
 	{
 	}
+    
+    AudioFileWriter (ByteArray const& bytes, const AudioFile::Format format, const int numChannels, const double sampleRate,
+                     const int bufferSize = AudioFile::DefaultBufferSize) throw()
+	:	Base (Internal::createPCM (bytes, format, numChannels, sampleRate, bufferSize))
+	{
+	}
 
-    void writeFrames (const int numFrames, const SampleType* frameData) throw()
+//    void writeHeader() throw()
+//    {
+//        this->getInternal()->writeHeader();
+//    }
+    
+    bool writeFrames (const int numFrames, const SampleType* frameData) throw()
     {
-        this->getInternal()->writeFrames (numFrames, frameData);
+        return this->getInternal()->writeFrames (numFrames, frameData);
     }
 
-    void writeFrames (Buffer const& frames) throw()
+    bool writeFrames (Buffer const& frames) throw()
     {
-        this->getInternal()->writeFrames (frames);
+        return this->getInternal()->writeFrames (frames);
     }
     
     template<class OtherType>
-    void writeFrames (NumericalArray<OtherType> const& frames) throw()
+    bool writeFrames (NumericalArray<OtherType> const& frames) throw()
     {
-        this->getInternal()->writeFrames (frames);
+        return this->getInternal()->writeFrames (frames);
     }
 };
 

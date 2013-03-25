@@ -50,7 +50,8 @@ public:
         FormatWAV                   = PLANKAUDIOFILE_FORMAT_WAV,
         FormatAIFF                  = PLANKAUDIOFILE_FORMAT_AIFF,
         FormatAIFC                  = PLANKAUDIOFILE_FORMAT_AIFC,
-        FormatOggVorbis             = PLANKAUDIOFILE_FORMAT_OGGVORBIS
+        FormatOggVorbis             = PLANKAUDIOFILE_FORMAT_OGGVORBIS,
+        FormatOpus                  = PLANKAUDIOFILE_FORMAT_OPUS
     };
     
     enum EncodingFlag

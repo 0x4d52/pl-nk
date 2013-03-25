@@ -56,8 +56,13 @@ public:
                         const bool bigEndian = false) throw();
     BinaryFileInternal (ByteArray const& bytes,
                         const bool writable = false) throw();
+    explicit BinaryFileInternal (PlankFileRef fileRef) throw();
+
     ~BinaryFileInternal();
     
+    void disown (PlankFileRef fileRef) throw();
+    
+    static bool setupBytes (PlankFileRef p, ByteArray const& bytes, const bool writable) throw();
     static PlankResult dynamicMemoryOpenCallback (PlankFileRef p);
     static PlankResult dynamicMemoryCloseCallback (PlankFileRef p);
     static PlankResult dynamicMemoryClearCallback (PlankFileRef p);
@@ -256,8 +261,14 @@ public:
     explicit BinaryFile (Internal* internalToUse) throw() 
 	:	Base (internalToUse)
 	{
-	}    
+	}
     
+    /** @internal */
+    explicit BinaryFile (PlankFileRef fileRef) throw()
+	:	Base (new Internal (fileRef))
+	{
+	}
+
     /** Copy constructor.
 	 Note that a deep copy is not made, the copy will refer to exactly the same data. */
     BinaryFile (BinaryFile const& copy) throw()
@@ -269,7 +280,7 @@ public:
     BinaryFile& operator= (BinaryFile const& other) throw()
 	{
 		if (this != &other)
-            this->setInternal (other.getInternal());//this->setInternal (other.containerCopy().getInternal());
+            this->setInternal (other.getInternal());
         
         return *this;
 	}
@@ -339,7 +350,6 @@ public:
         getInternal()->read (value);
     }    
     
-    
     template<class NumericalType>
     int read (NumericalArray<NumericalType>& array) throw()
     {
@@ -351,7 +361,6 @@ public:
     {
         return getInternal()->write (array);
     }
-
     
     /** Write a numerical value to the file.
      This must be one of: char, short, int, long or LongLong 

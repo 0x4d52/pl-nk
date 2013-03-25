@@ -144,7 +144,7 @@ PlankResult BinaryFileInternal::dynamicMemoryWriteCallback (PlankFileRef p, cons
     result      = PlankResult_OK;
     sizeNeeded  = p->position + maximumBytes;
     
-    array->setSize (sizeNeeded, true);
+    array->setSize (plonk::max ((int)sizeNeeded, array->length()), true);
     dst = (UnsignedChar*)array->getArray() + p->position;
     Memory::copy (dst, data, maximumBytes);
     p->position += maximumBytes;
@@ -227,10 +227,13 @@ BinaryFileInternal::BinaryFileInternal (Text const& path,
 
 BinaryFileInternal::BinaryFileInternal (ByteArray const& bytes,
                                         const bool writable) throw()
+{    
+    setupBytes (getPeerRef(), bytes, writable);
+}
+
+bool BinaryFileInternal::setupBytes (PlankFileRef p, ByteArray const& bytes, const bool writable) throw()
 {
-    PlankResult result;
-    PlankFileRef p = getPeerRef();
-    
+    ResultCode result = PlankResult_OK;
     pl_File_Init (p);
     
     if (p->stream != 0)
@@ -238,7 +241,7 @@ BinaryFileInternal::BinaryFileInternal (ByteArray const& bytes,
         if ((result = pl_File_Close (p)) != PlankResult_OK)
         {
             plonk_assertfalse;
-            return;
+            return false;
         }
     }
     
@@ -265,12 +268,27 @@ BinaryFileInternal::BinaryFileInternal (ByteArray const& bytes,
     plonk_assert (result == PlankResult_OK);
     result = (p->openFunction) (p);
     plonk_assert (result == PlankResult_OK);
-    return;
+    return result == PlankResult_OK;    
+}
+                                                                                    
+
+BinaryFileInternal::BinaryFileInternal (PlankFileRef fileRef) throw()
+{
+    Memory::copy (getPeerRef(), fileRef, sizeof (*fileRef));
+    Memory::zero (fileRef, sizeof (*fileRef));
+    pl_File_Init (fileRef);
 }
 
 BinaryFileInternal::~BinaryFileInternal()
 {
     pl_File_DeInit (getPeerRef());
+}
+
+void BinaryFileInternal::disown (PlankFileRef fileRef) throw()
+{
+    Memory::copy (fileRef, getPeerRef(), sizeof (*fileRef));
+    Memory::zero (getPeerRef(), sizeof (*fileRef));
+    pl_File_Init (getPeerRef());
 }
 
 LongLong BinaryFileInternal::getPosition() const throw()
