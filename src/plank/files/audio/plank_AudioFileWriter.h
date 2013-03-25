@@ -105,6 +105,8 @@ PlankResult pl_AudioFileWriter_OpenWithFile (PlankAudioFileWriterRef p, PlankFil
 /** */
 PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p);
 
+PlankResult pl_AudioFileWriter_WriteHeader (PlankAudioFileWriterRef p);
+
 PlankResult pl_AudioFileWriter_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
 
 PlankB pl_AudioFileWriter_IsEncodingNativeEndian (PlankAudioFileWriterRef p);

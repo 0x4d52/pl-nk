@@ -53,8 +53,6 @@
 typedef PlankResult (*PlankAudioFileWriterWriteHeaderFunction)(PlankAudioFileWriterRef);
 typedef PlankResult (*PlankAudioFileWriterWriteFramesFunction)(PlankAudioFileWriterRef, const int, const void*);
 
-PlankResult pl_AudioFileWriter_WriteHeader (PlankAudioFileWriterRef p);
-
 PlankResult pl_AudioFileWriter_WAV_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_WAV_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
 PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p);

@@ -54,6 +54,7 @@ public:
 
     AudioFileReaderInternal() throw();
     AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw();
+    AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw();
     ~AudioFileReaderInternal();
     
     ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw();
@@ -103,6 +104,7 @@ private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
     ResultCode init (const char* path, const bool readMetaData) throw();
+    ResultCode init (ByteArray const& bytes, const bool readMetaData) throw();
 
     template<class Type>
     static inline void swapEndianIfNotNative (Type* data, const int numItems, const bool dataIsBigEndian) throw()
@@ -110,7 +112,6 @@ private:
 #if PLONK_BIGENDIAN
         if (! dataIsBigEndian) Endian::swap (data, numItems);
 #endif
-        
 #if PLONK_LITTLEENDIAN
         if (dataIsBigEndian) Endian::swap (data, numItems);
 #endif
@@ -281,6 +282,9 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
 
 
 /** Audio file reader. 
+ This can read audio frames from WAV, AIFF, AIFC or (with the appropriately
+ enabled compile time options), Ogg Vorbis or Opus files.
+ 
  @see BinaryFile 
  @ingroup PlonkOtherUserClasses */
 class AudioFileReader : public SmartPointerContainer<AudioFileReaderInternal>
@@ -348,6 +352,11 @@ public:
     :   Base (static_cast<Base const&> (copy))
     {
     }
+    
+    AudioFileReader (ByteArray const& bytes, const int bufferSize = 0, const bool readMetaData = false) throw()
+	:	Base (new Internal (bytes, bufferSize, readMetaData))
+	{
+	}
     
     /** Assignment operator. */
     AudioFileReader& operator= (AudioFileReader const& other) throw()

@@ -70,23 +70,31 @@ ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaD
     return result;
 }
 
-//ResultCode AudioFileReaderInternal::init (const char* path, const bool readMetaData) throw()
-//{
-//    plonk_assert (path != 0);
-//    
-//    pl_AudioFileReader_Init (getPeerRef());
-//    ResultCode result;
-//    
-//    pl_File_OpenBinaryRead (pl_AudioFileReader_GetFile(getPeerRef()), path, false, false);
-//    
-//    pl_AudioFileReader_OpenInternal (getPeerRef(), path, readMetaData);
-//    
-//    if (result == PlankResult_OK)
-//        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
-//    
-//    return result;
-//}
+ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, const bool readMetaData) throw()
+{
+    pl_AudioFileReader_Init (getPeerRef());
+    
+    PlankFile file;
+    
+    if (BinaryFileInternal::setupBytes (&file, bytes, false))
+    {        
+        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, readMetaData) == PlankResult_OK)
+        {
+            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+            return PlankResult_OK;
+        }
+    }
 
+    return PlankResult_UnknownError;
+}
+
+AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw()
+:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
+    numFramesPerBuffer (0),
+    newPositionOnNextRead (-1)
+{
+    init (bytes, readMetaData);
+}
 
 AudioFileReaderInternal::~AudioFileReaderInternal()
 {
@@ -117,11 +125,13 @@ AudioFile::Format AudioFileReaderInternal::getFormat() const throw()
     
     switch (format)
     {
-        case AudioFile::FormatInvalid: return AudioFile::FormatInvalid;
-        case AudioFile::FormatUnknown: return AudioFile::FormatUnknown;
-        case AudioFile::FormatWAV:     return AudioFile::FormatWAV;
-        case AudioFile::FormatAIFF:    return AudioFile::FormatAIFF;
-        case AudioFile::FormatAIFC:    return AudioFile::FormatAIFC;
+        case AudioFile::FormatInvalid:      return AudioFile::FormatInvalid;
+        case AudioFile::FormatUnknown:      return AudioFile::FormatUnknown;
+        case AudioFile::FormatWAV:          return AudioFile::FormatWAV;
+        case AudioFile::FormatAIFF:         return AudioFile::FormatAIFF;
+        case AudioFile::FormatAIFC:         return AudioFile::FormatAIFC;
+        case AudioFile::FormatOggVorbis:    return AudioFile::FormatOggVorbis;
+        case AudioFile::FormatOpus:         return AudioFile::FormatOpus;
         default: return AudioFile::FormatInvalid;
     }
 }
