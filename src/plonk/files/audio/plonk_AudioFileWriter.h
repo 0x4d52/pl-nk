@@ -46,6 +46,8 @@
 #include "../../containers/plonk_Text.h"
 #include "plonk_AudioFile.h"
 
+template<class SampleType> class AudioFileWriter;
+
 template<class SampleType>
 class AudioFileWriterInternalBase : public SmartPointer
 {
@@ -444,6 +446,55 @@ public:
         return success;
     }
     
+    bool writeFrames (AudioFileReader& reader, const int numFrames) throw()
+    {
+        const int numChannels = peer.formatInfo.numChannels;
+        plonk_assert (peer.formatInfo.sampleRate == reader.getSampleRate());
+        plonk_assert (peer.formatInfo.numChannels == reader.getNumChannels());
+        
+        const int bufferLength = buffer.length();
+        const int bufferFrames = bufferLength / numChannels;
+        int framesRead;
+        
+        if (numFrames <= 0)
+        {
+            do
+            {
+                reader.readFrames (buffer, false);
+                framesRead = buffer.length() / numChannels;
+            
+                if (framesRead > 0)
+                {
+                    this->writeFrames (buffer);
+                }
+            }
+            while (framesRead == bufferFrames);
+        }
+        else
+        {
+            int numFramesRemaining = numFrames;
+            
+            do
+            {
+                buffer.setSize (plonk::min (numFramesRemaining * numChannels, bufferLength), false);
+                reader.readFrames (buffer, false);
+                framesRead = buffer.length() / numChannels;
+                
+                if (framesRead == 0) break;
+                
+                numFramesRemaining -= framesRead;
+                this->writeFrames (buffer);
+            }
+            while (numFramesRemaining > 0);
+        }
+        
+        buffer.setSize (bufferLength, false);
+        
+        return true;
+    }
+    
+    friend class AudioFileWriter<SampleType>;
+    
 private:
     PlankAudioFileWriter peer;
     Buffer buffer;
@@ -514,6 +565,18 @@ public:
         this->getInternal()->close();
     }
     
+    /** Get the number of channels in the file. */
+    inline int getNumChannels() const throw()
+    {
+        return this->getInternal()->peer.formatInfo.numChannels;
+    }
+    
+    /** Get the sample rate of the file. */
+    inline double getSampleRate() const throw()
+    {
+        return this->getInternal()->peer.formatInfo.sampleRate;
+    }
+    
     bool writeFrames (const int numFrames, const SampleType* frameData) throw()
     {
         return this->getInternal()->writeFrames (numFrames, frameData);
@@ -522,6 +585,11 @@ public:
     bool writeFrames (Buffer const& frames) throw()
     {
         return this->getInternal()->writeFrames (frames);
+    }
+    
+    bool writeFrames (AudioFileReader& reader, const int numFrames = 0) throw()
+    {
+        return this->getInternal()->writeFrames (reader, numFrames);
     }
     
     template<class OtherType>

@@ -422,6 +422,9 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
         goto exit;
     }
     
+    if (p->peer == PLANK_NULL)
+        return PlankResult_OK;
+    
     if ((result = pl_AudioFileWriter_WriteHeader (p)) != PlankResult_OK) goto exit;
     
     switch (p->formatInfo.format)

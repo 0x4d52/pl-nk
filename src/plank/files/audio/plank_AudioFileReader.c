@@ -387,8 +387,11 @@ PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
 
-    if (p == PLANK_NULL || p->peer == PLANK_NULL)
+    if (p == PLANK_NULL)
         return PlankResult_FileCloseFailed;
+    
+    if (p->peer == PLANK_NULL)
+        return PlankResult_OK;
     
     switch (p->formatInfo.format)
     {
