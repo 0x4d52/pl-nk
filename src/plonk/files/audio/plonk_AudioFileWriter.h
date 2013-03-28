@@ -69,7 +69,8 @@ public:
     typedef NumericalArray<SampleType>  Buffer;
     
     AudioFileWriterInternal (const int bufferSize) throw()
-    :   buffer (Buffer::withSize (bufferSize > 0 ? bufferSize : AudioFile::DefaultBufferSize, false))
+    :   buffer (Buffer::withSize (bufferSize > 0 ? bufferSize : AudioFile::DefaultBufferSize, false)),
+        ready (false)
     {
         pl_AudioFileWriter_Init (&peer);
     }
@@ -119,7 +120,10 @@ public:
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
+        
+        internal->ready = true;
         
     exit:
         return internal;
@@ -146,7 +150,10 @@ public:
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
+        
+        internal->ready = true;
         
     exit:
         return internal;
@@ -190,7 +197,10 @@ public:
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
+        
+        internal->ready = true;
         
     exit:
         return internal;
@@ -218,7 +228,10 @@ public:
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
+        
+        internal->ready = true;
         
     exit:
         return internal;
@@ -263,7 +276,10 @@ public:
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
+        
+        internal->ready = true;
         
     exit:
         return internal;
@@ -292,7 +308,10 @@ public:
         {
             pl_AudioFileWriter_Close (&internal->peer);
             pl_AudioFileWriter_Init (&internal->peer);
+            goto exit;
         }
+        
+        internal->ready = true;
         
     exit:
         return internal;
@@ -492,12 +511,13 @@ public:
         
         return true;
     }
-    
+        
     friend class AudioFileWriter<SampleType>;
     
 private:
     PlankAudioFileWriter peer;
     Buffer buffer;
+    bool ready;
 };
 
 
@@ -564,7 +584,12 @@ public:
     {
         this->getInternal()->close();
     }
-    
+
+    bool isReady() const throw()
+    {
+        return this->getInternal()->ready;
+    }
+
     /** Get the number of channels in the file. */
     inline int getNumChannels() const throw()
     {

@@ -106,7 +106,11 @@ PlankResult pl_IffFileWriter_Close (PlankIffFileWriterRef p);
 
 PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk);
 
-PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode);
+//PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode);
+
+PlankResult pl_IffFileWriter_WriteChunkAppending (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
+PlankResult pl_IffFileWriter_WriteChunkReplacingGrowIfLarger (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
+PlankResult pl_IffFileWriter_WriteChunkReplacingShrinkIfSmaller (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
 
 
 ///** */
@@ -120,7 +124,8 @@ PLANK_END_C_LINKAGE
 typedef struct PlankIffFileWriterChunkInfo
 {
     PlankFourCharCode chunkID;
-    PlankUI chunkLength;
+    PlankUI padding;
+    PlankLL chunkLength;
     PlankLL chunkPos;
 } PlankIffFileWriterChunkInfo;
 

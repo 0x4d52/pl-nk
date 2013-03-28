@@ -144,7 +144,6 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
     if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.formatID)) != PlankResult_OK) goto exit;
     
     p->headerInfo.mainLength = (PlankLL)chunkLength;
-//    p->headerInfo.mainEnd = p->headerInfo.mainLength + 8;
     
 exit:
     return result;
@@ -245,7 +244,6 @@ PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB is
         chunkLength = (PlankUI)p->headerInfo.mainLength;
         pl_SwapEndianUI (&chunkLength);
         p->headerInfo.mainLength = (PlankLL)chunkLength;
-//        p->headerInfo.mainEnd = p->headerInfo.mainLength + 8;
     }
     
     return PlankResult_OK;

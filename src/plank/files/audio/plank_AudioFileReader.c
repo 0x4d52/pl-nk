@@ -142,8 +142,9 @@ PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
     p->formatInfo.sampleRate       = 0.0;
     p->formatInfo.frameDuration    = 0.f;
     p->formatInfo.quality          = 0.f;
-    p->formatInfo.channelMask      = 0;
-    p->dataLength                  = 0;
+    
+    pl_MemoryZero (p->formatInfo.channelMap, PLANKAUDIOFILE_CHANNELMAPLENGTH);
+    
     p->numFrames                   = 0;
     p->dataPosition                = -1;
     
@@ -535,6 +536,11 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
 #pragma mark WAV Functions
 #endif
 
+static void pl_AudioFileWriter_WAVEXTChannelMaskToMap (PlankAudioFileFormatInfo* formatInfo, const PlankUI channelMask)
+{
+    pl_MemoryZero (formatInfo->channelMap, PLANKAUDIOFILE_CHANNELMAPLENGTH);
+}
+
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
 {
     PlankAudioFileWAVExtensible ext;
@@ -608,7 +614,9 @@ PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const
     
     p->formatInfo.numChannels       = (PlankI) numChannels;
     p->formatInfo.sampleRate        = (PlankD) sampleRate;
-    p->formatInfo.channelMask       = channelMask;
+    
+    pl_AudioFileWriter_WAVEXTChannelMaskToMap (&p->formatInfo, channelMask);
+
     p->formatInfo.nominalBitRate    = (int)(p->formatInfo.bytesPerFrame * p->formatInfo.sampleRate * p->formatInfo.numChannels * PLANKAUDIOFILE_CHARBITS);
     p->formatInfo.minimumBitRate    = p->formatInfo.nominalBitRate;
     p->formatInfo.maximumBitRate    = p->formatInfo.nominalBitRate;

@@ -120,6 +120,10 @@ typedef struct PlankAudioFileWriter
 {    
     PlankP peer;
     PlankAudioFileFormatInfo formatInfo;
+    
+    PlankLL numFrames;
+    PlankLL dataPosition;
+
     PlankAudioFileMetaDataRef metaData;
     
     PlankP writeFramesFunction;

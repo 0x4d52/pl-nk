@@ -40,6 +40,7 @@
 #define PLANK_AUDIOFILECOMMON_H
 
 #define PLANKAUDIOFILE_CHARBITS                       8
+#define PLANKAUDIOFILE_CHANNELMAPLENGTH             256
 
 #define PLANKAUDIOFILE_FORMAT_INVALID                -1
 #define PLANKAUDIOFILE_FORMAT_UNKNOWN                 0
@@ -94,6 +95,52 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE     0xFFFE
 #define PLANKAUDIOFILE_WAV_FMT_LENGTH                 16
 #define PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH      40
+#define PLANKAUDIOFILE_WAV_DS64_LENGTH                28
+#define PLANKAUDIOFILE_WAV_JUNK_LENGTH                (PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH - PLANKAUDIOFILE_WAV_FMT_LENGTH + PLANKAUDIOFILE_WAV_DS64_LENGTH)
+#define PLANKAUDIOFILE_WAVEXT_JUNK_LENGTH             PLANKAUDIOFILE_WAV_DS64_LENGTH
+
+
+/*
+1.	Front Left - FL
+2.	Front Right - FR
+3.	Front Center - FC
+4.	Low Frequency - LF
+5.	Back Left - BL
+6.	Back Right - BR
+7.	Front Left of Center - FLC
+8.	Front Right of Center - FRC
+9.	Back Center - BC
+10.	Side Left - SL
+11.	Side Right - SR
+12.	Top Center - TC
+13.	Top Front Left - TFL
+14.	Top Front Center - TFC
+15.	Top Front Right - TFR
+16.	Top Back Left - TBL
+17.	Top Back Center - TBC
+18.	Top Back Right - TBR
+*/
+
+#define PLANKAUDIOFILE_CHANNEL_NONE                         0
+#define PLANKAUDIOFILE_CHANNEL_FRONT_LEFT                   1 //   1.	Front Left - FL
+#define PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT                  2 //   2.	Front Right - FR
+#define PLANKAUDIOFILE_CHANNEL_FRONT_CENTER                 3 //   3.	Front Center - FC
+#define PLANKAUDIOFILE_CHANNEL_LOW_FREQUENCY                4 //   4.	Low Frequency - LF
+#define PLANKAUDIOFILE_CHANNEL_BACK_LEFT                    5 //   5.	Back Left - BL
+#define PLANKAUDIOFILE_CHANNEL_BACK_RIGHT                   6 //   6.	Back Right - BR
+#define PLANKAUDIOFILE_CHANNEL_FRONT_LEFT_OF_CENTER         7 //   7.	Front Left of Center - FLC
+#define PLANKAUDIOFILE_CHANNEL_FRONT_RIGHT_OF_CENTER        8 //   8.	Front Right of Center - FRC
+#define PLANKAUDIOFILE_CHANNEL_BACK_CENTER                  9 //   9.	Back Center - BC
+#define PLANKAUDIOFILE_CHANNEL_SIDE_LEFT                    10 // 10.	Side Left - SL
+#define PLANKAUDIOFILE_CHANNEL_SIDE_RIGHT                   11 // 11.	Side Right - SR
+#define PLANKAUDIOFILE_CHANNEL_TOP_CENTER                   12 // 12.	Top Center - TC
+#define PLANKAUDIOFILE_CHANNEL_TOP_FRONT_LEFT               13 // 13.	Top Front Left - TFL
+#define PLANKAUDIOFILE_CHANNEL_TOP_FRONT_CENTER             14 // 14.	Top Front Center - TFC
+#define PLANKAUDIOFILE_CHANNEL_TOP_FRONT_RIGHT              15 // 15.	Top Front Right - TFR
+#define PLANKAUDIOFILE_CHANNEL_TOP_BACK_LEFT                16 // 16.	Top Back Left - TBL
+#define PLANKAUDIOFILE_CHANNEL_TOP_BACK_CENTER              17 // 17.	Top Back Center - TBC
+#define PLANKAUDIOFILE_CHANNEL_TOP_BACK_RIGHT               18 // 18.	Top Back Right - TBR
+
 
 // EBU-TECH 3306
 #define PLANKAUDIOFILE_WAV_SPEAKER_FRONT_LEFT               0x00000001
@@ -115,6 +162,7 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_WAV_SPEAKER_TOP_BACK_CENTER          0x00010000
 #define PLANKAUDIOFILE_WAV_SPEAKER_TOP_BACK_RIGHT           0x00020000
 #define PLANKAUDIOFILE_WAV_SPEAKER_ALL                      0x80000000
+#define PLANKAUDIOFILE_WAV_SPEAKER_RESERVED                 0x80000000
 #define PLANKAUDIOFILE_WAV_SPEAKER_STEREO_LEFT              0x20000000
 #define PLANKAUDIOFILE_WAV_SPEAKER_STEREO_RIGHT             0x40000000
 
@@ -122,6 +170,8 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_WAV_SPEAKER_BITSTREAM_1_RIGHT        0x01000000
 #define PLANKAUDIOFILE_WAV_SPEAKER_BITSTREAM_2_LEFT         0x02000000
 #define PLANKAUDIOFILE_WAV_SPEAKER_BITSTREAM_2_RIGHT        0x04000000
+#define PLANKAUDIOFILE_WAV_SPEAKER_ANY                      0xffffffff
+
 
 //static const PlankFourCharCode PLANKAUDIOFILE_CHUNKID_RIFF = PLANKFOURCHARCODE("RIFF");
 //static const PlankFourCharCode PLANKAUDIOFILE_CHUNKID_WAVE = PLANKFOURCHARCODE("WAVE");
@@ -175,6 +225,26 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
     #include "../../../../ext/vorbis/vorbis/vorbisenc.h"
     #include "../../../../ext/vorbis/vorbis/codec.h"
     #include "../../../../ext/vorbis/vorbis/vorbisfile.h"
+
+/*
+one channel
+the stream is monophonic
+two channels
+the stream is stereo. channel order: left, right
+three channels
+the stream is a 1d-surround encoding. channel order: left, center, right
+four channels
+the stream is quadraphonic surround. channel order: front left, front right, rear left, rear right
+five channels
+the stream is five-channel surround. channel order: front left, center, front right, rear left, rear right
+six channels
+the stream is 5.1 surround. channel order: front left, center, front right, rear left, rear right, LFE
+seven channels
+the stream is 6.1 surround. channel order: front left, center, front right, side left, side right, rear center, LFE
+eight channels
+the stream is 7.1 surround. channel order: front left, center, front right, side left, side right, rear left, rear right, LFE
+*/
+
 #endif
 
 #if PLANK_OPUS
@@ -213,9 +283,24 @@ typedef struct PlankAudioFileFormatInfo
     PlankD frameDuration;
     PlankF quality;
     
-    PlankUI channelMask;
+    PlankUC channelMap[PLANKAUDIOFILE_CHANNELMAPLENGTH];
 
 } PlankAudioFileFormatInfo;
+
+
+static inline PlankB pl_AudioFileFormatInfo_IsChannelMapClear (const PlankAudioFileFormatInfo* info)
+{
+    int i;
+    
+    for (i = 0; i < info->numChannels; ++i)
+    {
+        if (info->channelMap[i] != PLANKAUDIOFILE_CHANNEL_NONE)
+            return PLANK_FALSE;
+    }
+    
+    return PLANK_TRUE;
+}
+
 
 /** An opaque reference to the <i>Plank AudioFileMetaData</i> object. */
 typedef struct PlankAudioFileMetaData* PlankAudioFileMetaDataRef;

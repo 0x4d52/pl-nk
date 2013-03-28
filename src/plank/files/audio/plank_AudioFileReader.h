@@ -173,7 +173,6 @@ typedef struct PlankAudioFileReader
     PlankP peer;    
     PlankAudioFileFormatInfo formatInfo;
     
-    PlankLL dataLength;
     PlankLL numFrames;
     PlankLL dataPosition;
     
