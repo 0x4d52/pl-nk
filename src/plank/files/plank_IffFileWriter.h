@@ -104,17 +104,12 @@ PlankResult pl_IffFileWriter_OpenWithFile (PlankIffFileWriterRef p,
 /** */
 PlankResult pl_IffFileWriter_Close (PlankIffFileWriterRef p);
 
-PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk);
+PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk);
 
-//PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode);
+PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode);
 
-PlankResult pl_IffFileWriter_WriteChunkAppending (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
-PlankResult pl_IffFileWriter_WriteChunkReplacingGrowIfLarger (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
-PlankResult pl_IffFileWriter_WriteChunkReplacingShrinkIfSmaller (PlankIffFileWriterRef p, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength);
+PlankResult pl_IffFileWriter_RenameChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode oldChunkID, const PlankFourCharCode newChunkID);
 
-
-///** */
-//PlankResult pl_IffFileWriter_AddChunk (PlankIffFileWriterRef p, PlankFourCharCode chunkID, PlankLL chunkLength);
 
 /** @} */
 

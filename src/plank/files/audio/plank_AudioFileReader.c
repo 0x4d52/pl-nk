@@ -538,7 +538,26 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
 
 static void pl_AudioFileWriter_WAVEXTChannelMaskToMap (PlankAudioFileFormatInfo* formatInfo, const PlankUI channelMask)
 {
+    PlankUI bit, mask;
+    int channel;
+    
     pl_MemoryZero (formatInfo->channelMap, PLANKAUDIOFILE_CHANNELMAPLENGTH);
+    
+    bit     = 0;
+    channel = 0;
+    
+    while (bit < 32)
+    {
+        mask = ((PlankUI)1) << bit;
+        
+        if (mask & channelMask)
+        {
+            formatInfo->channelMap[channel] = bit;
+            ++channel;
+        }
+        
+        ++bit;
+    }
 }
 
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
