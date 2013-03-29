@@ -110,6 +110,10 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL 
 
 PlankResult pl_IffFileWriter_RenameChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode oldChunkID, const PlankFourCharCode newChunkID);
 
+PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, const PlankLL newLength);
+
+PlankResult pl_IffFileWriter_SplitChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, const PlankLL offset);
+
 
 /** @} */
 

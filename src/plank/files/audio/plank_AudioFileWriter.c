@@ -607,7 +607,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode fmt, JUNK;
+    PlankFourCharCode fmt;
     PlankUS encoding;
         
     iff = (PlankIffFileWriterRef)p->peer;
@@ -616,7 +616,6 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
         return pl_AudioFileWriter_WAVEXT_WriteHeader (p);
     
     fmt  = pl_FourCharCode ("fmt ");
-    JUNK = pl_FourCharCode ("JUNK");
     
     switch (p->formatInfo.encoding)
     {
@@ -646,11 +645,15 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
 
-    if ((result = pl_IffFileWriter_SeekChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, JUNK, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+    if ((result = pl_IffFileWriter_SeekChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, iff->headerInfo.junkID, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
     if (!chunkInfo)
     {
-        if ((result = pl_IffFileWriter_WriteChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, JUNK, 0, PLANKAUDIOFILE_WAV_JUNK_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_WriteChunk (iff,
+                                                   PLANKIFFFILE_CURRENTCHUNKPOSITION,
+                                                   iff->headerInfo.junkID,
+                                                   0, PLANKAUDIOFILE_WAV_JUNK_LENGTH,
+                                                   PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
     }
     
 exit:
@@ -687,11 +690,10 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode fmt, JUNK;
+    PlankFourCharCode fmt;
     
     iff  = (PlankIffFileWriterRef)p->peer;
     fmt  = pl_FourCharCode ("fmt ");
-    JUNK = pl_FourCharCode ("JUNK");
 
     switch (p->formatInfo.encoding)
     {
@@ -733,11 +735,15 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     
     if (iff->headerInfo.mainLength < 0xffffffff)
     {
-        if ((result = pl_IffFileWriter_SeekChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, JUNK, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_SeekChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, iff->headerInfo.junkID, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         if (!chunkInfo)
         {
-            if ((result = pl_IffFileWriter_WriteChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, JUNK, 0, PLANKAUDIOFILE_WAVEXT_JUNK_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+            if ((result = pl_IffFileWriter_WriteChunk (iff,
+                                                       PLANKIFFFILE_CURRENTCHUNKPOSITION,
+                                                       iff->headerInfo.junkID,
+                                                       0, PLANKAUDIOFILE_WAVEXT_JUNK_LENGTH,
+                                                       PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         }        
     }
     else

@@ -48,6 +48,7 @@ typedef struct PlankIffFileHeaderInfo
 {
     PlankFourCharCode mainID;
     PlankFourCharCode formatID;
+    PlankFourCharCode junkID;
     PlankLL mainLength;
 } PlankIffFileHeaderInfo;
 
