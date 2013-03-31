@@ -609,10 +609,10 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterRef iff;
     PlankFourCharCode fmt;
     PlankUS encoding;
-        
+    
     iff = (PlankIffFileWriterRef)p->peer;
     
-    if ((p->formatInfo.numChannels > 2) || (p->numFrames > 0xffffffff) || (iff->headerInfo.mainLength > 0xffffffff))
+    if ((p->formatInfo.numChannels > 2) || (iff->headerInfo.mainLength > 0xffffffff))
         return pl_AudioFileWriter_WAVEXT_WriteHeader (p);
     
     fmt  = pl_FourCharCode ("fmt ");
@@ -625,10 +625,10 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     }
     
     if ((result = pl_IffFileWriter_SeekChunk (iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
-
+    
     if (!chunkInfo)
     {
-        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_FMT_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_HEADER_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileWriter_SeekChunk (iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         if (!chunkInfo)
@@ -637,7 +637,9 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
             goto exit;
         }
     }
-        
+    
+    if ((result = pl_IffFileWriter_ResizeChunk (iff, 0, fmt, PLANKAUDIOFILE_WAV_FMT_LENGTH)) != PlankResult_OK) goto exit;
+    
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, encoding)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUI ((PlankFileRef)iff, (PlankUI)p->formatInfo.sampleRate)) != PlankResult_OK) goto exit;
@@ -645,17 +647,6 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bytesPerFrame)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.bitsPerSample)) != PlankResult_OK) goto exit;
 
-    if ((result = pl_IffFileWriter_SeekChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, iff->headerInfo.junkID, &chunkInfo, 0)) != PlankResult_OK) goto exit;
-    
-    if (!chunkInfo)
-    {
-        if ((result = pl_IffFileWriter_WriteChunk (iff,
-                                                   PLANKIFFFILE_CURRENTCHUNKPOSITION,
-                                                   iff->headerInfo.junkID,
-                                                   0, PLANKAUDIOFILE_WAV_JUNK_LENGTH,
-                                                   PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-    }
-    
 exit:
     return result;
 }
@@ -690,7 +681,8 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode fmt;
+    PlankFourCharCode fmt, nextChunkID, ds64, RF64, JUNK, data;
+    PlankLL dataLength, nextSeekPos;
     
     iff  = (PlankIffFileWriterRef)p->peer;
     fmt  = pl_FourCharCode ("fmt ");
@@ -706,7 +698,7 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     
     if (!chunkInfo)
     {
-        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_HEADER_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileWriter_SeekChunk (iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         if (!chunkInfo)
@@ -715,6 +707,8 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
             goto exit;
         }
     }
+    
+    if ((result = pl_IffFileWriter_ResizeChunk (iff, 0, fmt, PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH)) != PlankResult_OK) goto exit;
     
     // regular WAV fmt
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)PLANKAUDIOFILE_WAV_COMPRESSION_EXTENSIBLE)) != PlankResult_OK) goto exit;
@@ -733,22 +727,60 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)ext->ext3)) != PlankResult_OK) goto exit;
     if ((result = pl_File_Write   ((PlankFileRef)iff, ext->ext4, 8)) != PlankResult_OK) goto exit;
     
-    if (iff->headerInfo.mainLength < 0xffffffff)
+    if (iff->headerInfo.mainLength > 0xffffffff)
     {
-        if ((result = pl_IffFileWriter_SeekChunk (iff, PLANKIFFFILE_CURRENTCHUNKPOSITION, iff->headerInfo.junkID, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+        ds64 = pl_FourCharCode ("ds64");
+        RF64 = pl_FourCharCode ("RF64");
+        data = pl_FourCharCode ("data");
+        JUNK = iff->headerInfo.junkID;
+
+        // rememember the position of the ds64/junk chunk
+        nextSeekPos = chunkInfo->chunkPos + chunkInfo->chunkLength + (chunkInfo->chunkLength & 1);
         
+        // seek to data to find its size
+        if ((result = pl_IffFileWriter_SeekChunk (iff, 0, data, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+
         if (!chunkInfo)
         {
-            if ((result = pl_IffFileWriter_WriteChunk (iff,
-                                                       PLANKIFFFILE_CURRENTCHUNKPOSITION,
-                                                       iff->headerInfo.junkID,
-                                                       0, PLANKAUDIOFILE_WAVEXT_JUNK_LENGTH,
-                                                       PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
-        }        
-    }
-    else
-    {
-        // DS64 !
+            // it should have been possible to seek to the data chunk for a file this large!
+            result = PlankResult_UnknownError;
+            goto exit;
+        }
+        
+        dataLength = chunkInfo->chunkLength;
+        
+        // seek ds64/junk
+        if ((result = pl_File_SetPosition      ((PlankFileRef)iff, nextSeekPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadFourCharCode ((PlankFileRef)iff, &nextChunkID)) != PlankResult_OK) goto exit;
+        
+        if (nextChunkID == JUNK)
+        {
+            if ((result = pl_IffFileWriter_RenameChunk (iff, nextSeekPos, JUNK, ds64)) != PlankResult_OK) goto exit;
+        }
+        else if (nextChunkID == ds64)
+        {
+            if ((result = pl_IffFileWriter_SeekChunk (iff, nextSeekPos, ds64, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+        }
+        else
+        {
+            // it should have been possible to seek to the ds64 or remname the junk
+            result = PlankResult_UnknownError;
+            goto exit;
+        }
+        
+        if ((result = pl_IffFileWriter_ResizeChunk (iff, 0, ds64, PLANKAUDIOFILE_WAV_DS64_MINIMUMLENGTH)) != PlankResult_OK) goto exit;
+        
+        // write the ds64 stuff...
+        if ((result = pl_File_WriteLL    ((PlankFileRef)iff, iff->headerInfo.mainLength)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_WriteLL    ((PlankFileRef)iff, dataLength)) != PlankResult_OK) goto exit;
+        
+        // could search all the chunks for those > 0xffffffff and inlcude a table
+        // ... but the
+        if ((result = pl_File_WriteZeros ((PlankFileRef)iff, 12)) != PlankResult_OK) goto exit;
+        
+        // update to RF64 header
+        iff->headerInfo.mainID = RF64;
+        if ((result = pl_IffFileWriter_WriteHeader (iff)) != PlankResult_OK) goto exit;
     }
     
 exit:

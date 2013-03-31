@@ -44,7 +44,6 @@
 #define PLANKIFFFILEWRITER_COPYLENGTH 256
 
 // private functions
-PlankResult pl_IffFileWriter_WriteHeader (PlankIffFileWriterRef p);
 PlankResult pl_IffFileWriter_FindLastChunk (PlankIffFileWriterRef p, PlankIffFileWriterChunkInfo** lastChunkInfo);
 PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef p, PlankIffFileWriterChunkInfo* updatedChunkInfo);
 
@@ -255,7 +254,7 @@ PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankLL s
         lastPosition = pl_MaxLL (lastPosition, chunkInfos[i].chunkPos);
         
         if ((currentChunk == 0) &&
-            (chunkInfos[i].chunkID == chunkID) &&
+            ((chunkInfos[i].chunkID == chunkID) || (chunkID == PLANKIFFFILE_ANYCHUNKID)) &&
             (chunkInfos[i].chunkPos >= startPosition))
         {
             currentChunk = &chunkInfos[i];
@@ -281,6 +280,15 @@ PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankLL s
 exit:
     return result;
 }
+
+//PlankResult pl_IffFileWriter_SeekNextChunk (PlankIffFileWriterRef p, PlankIffFileWriterChunkInfoRef* chunkInfo)
+//{
+//    PlankResult result = PlankResult_OK;
+//
+//    
+//exit:
+//    return result;    
+//}
 
 PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode)
 {
@@ -440,6 +448,8 @@ PlankResult pl_IffFileWriter_RenameChunk (PlankIffFileWriterRef p, const PlankLL
 
     // seek back to the position of the chunk's data
     if ((result = pl_File_SetPosition (&p->file, origChunkInfo->chunkPos)) != PlankResult_OK) goto exit;
+
+    p->currentChunk = origChunkInfo;
 
 exit:
     return result;
@@ -675,23 +685,25 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
     // seek back to the position of the chunk's data
     if ((result = pl_File_SetPosition (&p->file, thisChunkInfo->chunkPos)) != PlankResult_OK) goto exit;
     
-exit:
-    return result;
-}
-
-PlankResult pl_IffFileWriter_SplitChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, const PlankLL offset)
-{
-    PlankResult result;
-    result = PlankResult_OK;
-
-    // split the chunk at the offset into its data setting the size of the chunk appropriately,
-    // write the remainder of the chunk as junk
-    // the length of the chunk must be at least 8 bytes for this to work
-    // i.e., this would make this chunk zero-length and add a zero-length junk chunk but occupying 8 bytes for its ID and length fields
+    p->currentChunk = thisChunkInfo;
     
 exit:
     return result;
 }
+
+//PlankResult pl_IffFileWriter_SplitChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, const PlankLL offset)
+//{
+//    PlankResult result;
+//    result = PlankResult_OK;
+//
+//    // split the chunk at the offset into its data setting the size of the chunk appropriately,
+//    // write the remainder of the chunk as junk
+//    // the length of the chunk must be at least 8 bytes for this to work
+//    // i.e., this would make this chunk zero-length and add a zero-length junk chunk but occupying 8 bytes for its ID and length fields
+//    
+//exit:
+//    return result;
+//}
 
 PlankResult pl_IffFileWriter_FindLastChunk (PlankIffFileWriterRef p, PlankIffFileWriterChunkInfo** lastChunkInfo)
 {
