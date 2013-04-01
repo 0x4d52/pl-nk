@@ -68,6 +68,9 @@ PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
 
+PlankResult pl_AudioFileMetaData_SetEditCount (PlankAudioFileMetaDataRef p, const PlankUI count);
+PlankUI pl_AudioFileMetaData_GetEditCount (PlankAudioFileMetaDataRef p);
+
 PlankResult pl_AudioFileMetaData_SetInstrumentData (PlankAudioFileMetaDataRef p,
                                                     PlankI baseNote,
                                                     PlankI detune,
@@ -187,6 +190,8 @@ PLANK_END_C_LINKAGE
 
 typedef struct PlankAudioFileMetaData
 {
+    PlankUI editCount;
+    
     // smpl / inst
     PlankI baseNote;
     PlankI detune;

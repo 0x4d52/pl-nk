@@ -515,6 +515,7 @@ public:
             while (numFramesRemaining > 0);
         }
         
+        // and reset for next time
         buffer.setSize (bufferLength, false);
         
         return true;

@@ -228,6 +228,21 @@ exit:
     return result;
 }
 
+PlankResult pl_AudioFileMetaData_SetEditCount (PlankAudioFileMetaDataRef p, const PlankUI count)
+{
+    if (count < p->editCount)
+        return PlankResult_UnknownError;
+    
+    p->editCount = count;
+    
+    return PlankResult_OK;
+}
+
+PlankUI pl_AudioFileMetaData_GetEditCount (PlankAudioFileMetaDataRef p)
+{
+    return p->editCount;
+}
+
 PlankResult pl_AudioFileMetaData_SetInstrumentData (PlankAudioFileMetaDataRef p,
                                                     PlankI baseNote,
                                                     PlankI detune,

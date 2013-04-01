@@ -127,10 +127,13 @@ PlankResult pl_IffFileReader_IsBigEndian (PlankIffFileReaderRef p, PlankB* isBig
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB isBigEndian);
 
-/** 
- @param p The <i>Plank IffFileReader</i> object. 
+/** Seek to the data of a particular chunk.
+ @param p             The <i>Plank IffFileReader</i> object.
+ @param startPosition Where to start searching within the file, in bytes. There are two special values:
+                      -  0 : Specifies the start of the file (although this will be offset to the first chunk).
+                      - -1 : Specifies the current file position.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos);
+PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos);
 
 /**
  @param p The <i>Plank IffFileReader</i> object.

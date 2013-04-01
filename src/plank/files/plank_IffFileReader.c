@@ -180,6 +180,8 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
         if ((result = pl_File_ReadUS (&p->file, &vers)) != PlankResult_OK) goto exit;
         if ((result = pl_File_ReadUS (&p->file, &resv)) != PlankResult_OK) goto exit;
 
+        pl_SwapEndianUS (&vers); // while reading the header we're still LE
+        
         if ((vers != 1) || (resv != 0))
         {
             result = PlankResult_UnknownError;
@@ -275,7 +277,7 @@ PlankResult pl_IffFileReader_GetMainLength (PlankIffFileReaderRef p, PlankLL* re
 
 PlankResult pl_IffFileReader_GetMainEnd (PlankIffFileReaderRef p, PlankLL* result)
 {
-    *result = p->headerInfo.mainLength + p->headerInfo.mainEndOffset;
+    *result = (p->headerInfo.mainLength < 0) ? -1 : p->headerInfo.mainLength + p->headerInfo.mainEndOffset;
     return PlankResult_OK;
 }
 
@@ -309,19 +311,30 @@ PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB is
     return PlankResult_OK;
 }
 
-PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos)
+PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
     PlankLL readChunkEnd, mainEnd, pos;
     PlankFourCharCode readChunkID;
     PlankLL readChunkLength;
 
-    pos = p->headerInfo.mainEndOffset + p->headerInfo.initMainLength;
+    switch (startPosition)
+    {
+        case 0:
+            pos = p->headerInfo.mainEndOffset + p->headerInfo.initMainLength;
+            break;
+        case -1:
+            if ((result = pl_File_GetPosition (&p->file, &pos)) != PlankResult_OK) goto exit;
+            break;
+        default:
+            pos = startPosition;
+    }
     
     if ((result = pl_IffFileReader_GetMainEnd (p, &mainEnd)) != PlankResult_OK) goto exit;
     if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;
     
-    while ((pos < mainEnd) && (pl_File_IsEOF (&p->file) == PLANK_FALSE))
+    while (((mainEnd < 0) || (pos < mainEnd)) &&
+           (pl_File_IsEOF (&p->file) == PLANK_FALSE))
     {
         if ((result = pl_IffFileReader_ParseChunkHeader (p, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
 
