@@ -53,13 +53,13 @@ PLANK_BEGIN_C_LINKAGE
 /** An opaque reference to the <i>Plank AudioFileWriter</i> object. */
 typedef struct PlankAudioFileWriter* PlankAudioFileWriterRef; 
 
-///** Create and intitialise a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
-// @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
-//PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit();
-//
-///** Create a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
-// @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
-//PlankAudioFileWriterRef pl_AudioFileWriter_Create();
+/** Create and intitialise a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
+ @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
+PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit();
+
+/** Create a <i>Plank AudioFileWriter</i> object and return an oqaque reference to it.
+ @return A <i>Plank AudioFileWriter</i> object as an opaque reference or PLANK_NULL. */
+PlankAudioFileWriterRef pl_AudioFileWriter_Create();
 
 /** Inititalise a <i>Plank AudioFileWriter</i> object. 
  @param p The <i>Plank AudioFileWriter</i> object. 
@@ -71,10 +71,10 @@ PlankResult pl_AudioFileWriter_Init (PlankAudioFileWriterRef p);
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_AudioFileWriter_DeInit (PlankAudioFileWriterRef p);
 
-///** Destroy a <i>Plank AudioFileWriter</i> object. 
-// @param p The <i>Plank AudioFileWriter</i> object. 
-// @return A result code which will be PlankResult_OK if the operation was completely successful. */
-//PlankResult pl_AudioFileWriter_Destroy (PlankAudioFileWriterRef p);
+/** Destroy a <i>Plank AudioFileWriter</i> object. 
+ @param p The <i>Plank AudioFileWriter</i> object. 
+ @return A result code which will be PlankResult_OK if the operation was completely successful. */
+PlankResult pl_AudioFileWriter_Destroy (PlankAudioFileWriterRef p);
 
 /** Gets the underlying <i>Plank %File</i> object. 
  This is the raw file object the is performing the fundamental file access operations.
@@ -92,6 +92,7 @@ const PlankAudioFileFormatInfo* pl_AudioFileWriter_GetFormatInfoReadOnly (PlankA
 PlankResult pl_AudioFileWriter_SetFormatWAV (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat);
 PlankResult pl_AudioFileWriter_SetFormatAIFF (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate);
 PlankResult pl_AudioFileWriter_SetFormatAIFC (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat, const PlankB isLittleEndian);
+PlankResult pl_AudioFileWriter_SetFormatCAF (PlankAudioFileWriterRef p, const int bitsPerSample, const int numChannels, const double sampleRate, const PlankB isFloat, const PlankB isLittleEndian);
 PlankResult pl_AudioFileWriter_SetFormatOggVorbis (PlankAudioFileWriterRef p, const float quality, const int numChannels, const double sampleRate);
 PlankResult pl_AudioFileWriter_SetFormatOggVorbisManaged (PlankAudioFileWriterRef p, const int minBitRate, const int nominalBitRate, const int maxBitRate, const int numChannels, const double sampleRate);
 PlankResult pl_AudioFileWriter_SetFormatOpus (PlankAudioFileWriterRef p, const float quality, const int numChannels, const double sampleRate, const double frameDuration);

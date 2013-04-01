@@ -39,6 +39,29 @@
 #include "../core/plank_StandardHeader.h"
 #include "plank_IffFileReader.h"
 
+static inline PlankResult pl_IffFileReader_ReadChunkLength (PlankIffFileReaderRef p, PlankLL* length)
+{
+    PlankResult result = PlankResult_OK;
+    PlankUI length32;
+    
+    if (p->headerInfo.lengthSize == 4)
+    {
+        if ((result = pl_File_ReadUI (&p->file, &length32)) != PlankResult_OK) goto exit;
+        *length = length32;
+    }
+    else if (p->headerInfo.lengthSize == 8)
+    {
+        if ((result = pl_File_ReadLL (&p->file, length)) != PlankResult_OK) goto exit;
+    }
+    else
+    {
+        result = PlankResult_UnknownError;
+    }
+    
+exit:
+    return result;
+}
+
 PlankIffFileReaderRef pl_IffFileReader_CreateAndInit()
 {
     PlankIffFileReaderRef p;
@@ -80,7 +103,11 @@ PlankResult pl_IffFileReader_Init (PlankIffFileReaderRef p)
     }
     
     pl_MemoryZero (p, sizeof (PlankIffFileReader));
-        
+    
+    p->headerInfo.lengthSize         = 4;  // default to 32 bit, CAF is 64
+    p->headerInfo.mainEndOffset      = 8;  // default 8 bytes
+    p->headerInfo.initMainLength     = 4;
+    
     result = pl_File_Init (&p->file);
     
 exit:
@@ -137,13 +164,38 @@ PlankFileRef pl_IffFileReader_GetFile (PlankIffFileReaderRef p)
 static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
-    PlankUI chunkLength;
-
-    if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.mainID)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_ReadUI (&p->file, &chunkLength)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.formatID)) != PlankResult_OK) goto exit;
+    PlankUI chunkLength32;
+    PlankUS vers, resv;
     
-    p->headerInfo.mainLength = (PlankLL)chunkLength;
+    if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.mainID)) != PlankResult_OK) goto exit;
+    
+    if (p->headerInfo.mainID == pl_FourCharCode ("caff"))
+    {
+        p->headerInfo.formatID           = 0;
+        p->headerInfo.lengthSize         = 8;
+        p->headerInfo.mainEndOffset      = 8;
+        p->headerInfo.mainLength         = -1; // can't know with CAF
+        p->headerInfo.initMainLength     = 0;
+
+        if ((result = pl_File_ReadUS (&p->file, &vers)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUS (&p->file, &resv)) != PlankResult_OK) goto exit;
+
+        if ((vers != 1) || (resv != 0))
+        {
+            result = PlankResult_UnknownError;
+            goto exit;
+        }        
+    }
+    else
+    {
+        if ((result = pl_File_ReadUI (&p->file, &chunkLength32)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.formatID)) != PlankResult_OK) goto exit;
+        
+        // could check for 0xffffffff length here for RF64
+        
+        p->headerInfo.mainLength = (PlankLL)chunkLength32;
+    }
+    
     
 exit:
     return result;
@@ -223,7 +275,7 @@ PlankResult pl_IffFileReader_GetMainLength (PlankIffFileReaderRef p, PlankLL* re
 
 PlankResult pl_IffFileReader_GetMainEnd (PlankIffFileReaderRef p, PlankLL* result)
 {
-    *result = p->headerInfo.mainLength + 8;
+    *result = p->headerInfo.mainLength + p->headerInfo.mainEndOffset;
     return PlankResult_OK;
 }
 
@@ -235,27 +287,37 @@ PlankResult pl_IffFileReader_IsBigEndian (PlankIffFileReaderRef p, PlankB* resul
 
 PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB isBigEndian)
 {
-    PlankUI chunkLength;
+    PlankUI chunkLength32;
     
     if (pl_File_IsBigEndian (&p->file) != (PlankB)(!!isBigEndian))
     {
         pl_File_SetEndian (&p->file, isBigEndian);
         
-        chunkLength = (PlankUI)p->headerInfo.mainLength;
-        pl_SwapEndianUI (&chunkLength);
-        p->headerInfo.mainLength = (PlankLL)chunkLength;
+        if (p->headerInfo.lengthSize == 4)
+        {
+            chunkLength32 = (PlankUI)p->headerInfo.mainLength;
+            pl_SwapEndianUI (&chunkLength32);
+            p->headerInfo.mainLength = (PlankLL)chunkLength32;
+        }
+        else if (p->headerInfo.lengthSize == 8)
+        {
+            // nothing
+        }
+        else return PlankResult_UnknownError;
     }
     
     return PlankResult_OK;
 }
 
-PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos)
+PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
-    PlankLL readChunkEnd, mainEnd, pos = PLANKIFFFILE_FIRSTCHUNKPOSITION;
+    PlankLL readChunkEnd, mainEnd, pos;
     PlankFourCharCode readChunkID;
-    PlankUI readChunkLength;
+    PlankLL readChunkLength;
 
+    pos = p->headerInfo.mainEndOffset + p->headerInfo.initMainLength;
+    
     if ((result = pl_IffFileReader_GetMainEnd (p, &mainEnd)) != PlankResult_OK) goto exit;
     if ((result = pl_File_SetPosition (&p->file, pos)) != PlankResult_OK) goto exit;
     
@@ -286,17 +348,16 @@ exit:
 }
 
 
-PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, PlankFourCharCode* chunkID, PlankUI* chunkLength, PlankLL* chunkEnd, PlankLL* posOut)
+PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, PlankFourCharCode* chunkID, PlankLL* chunkLength, PlankLL* chunkEnd, PlankLL* posOut)
 {
     PlankResult result;
     PlankFourCharCode cid;
-    PlankLL pos;
-    PlankUI len;
+    PlankLL pos, len;
     
     result = PlankResult_OK;
     
     if ((result = pl_File_ReadFourCharCode (&p->file, &cid)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_ReadUI (&p->file, &len)) != PlankResult_OK) goto exit;
+    if ((result = pl_IffFileReader_ReadChunkLength (p, &len)) != PlankResult_OK) goto exit;
     if ((result = pl_File_GetPosition (&p->file, &pos)) != PlankResult_OK) goto exit;
     
     if (chunkID != PLANK_NULL)
@@ -314,3 +375,6 @@ PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, PlankFou
 exit:    
     return result;
 }
+
+
+

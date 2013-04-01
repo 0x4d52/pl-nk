@@ -109,6 +109,10 @@ public:
         {
             format = AudioFile::FormatAIFC;
         }
+        else if (ext.equalsIgnoreCase ("caf"))
+        {
+            format = AudioFile::FormatCAF;
+        }
             
         if (!internal->initPCM (format, numChannels, sampleRate, bufferSize))
         {
@@ -348,6 +352,10 @@ public:
 #if PLANK_BIGENDIAN
             if ((result = pl_AudioFileWriter_SetFormatAIFC (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, false)) != PlankResult_OK) goto exit;;
 #endif
+        }
+        else if (format == AudioFile::FormatCAF)
+        {
+            if ((result = pl_AudioFileWriter_SetFormatCAF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, PLANK_LITTLEENDIAN)) != PlankResult_OK) goto exit;;
         }
       
     exit:

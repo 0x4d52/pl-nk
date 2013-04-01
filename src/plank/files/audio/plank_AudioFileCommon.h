@@ -50,6 +50,7 @@
 #define PLANKAUDIOFILE_FORMAT_AIFC                    4
 #define PLANKAUDIOFILE_FORMAT_OGGVORBIS               5
 #define PLANKAUDIOFILE_FORMAT_OPUS                    6
+#define PLANKAUDIOFILE_FORMAT_CAF                     7
 
 static inline const char* pl_PlankAudioFileGetFormatName (int format)
 {
@@ -63,6 +64,7 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
         case PLANKAUDIOFILE_FORMAT_AIFC:        return "AIFC";
         case PLANKAUDIOFILE_FORMAT_OGGVORBIS:   return "Ogg Vorbis";
         case PLANKAUDIOFILE_FORMAT_OPUS:        return "Opus";
+        case PLANKAUDIOFILE_FORMAT_CAF:         return "CAF";
 
         default: return "invalid";
     }
@@ -208,6 +210,11 @@ COMM = 1296912195
 5: left, centre, right, surround
 6: left, left centre, centre, right, right centre, surround
 */
+
+
+#define PLANKAUDIOFILE_CAF_DESC_LENGTH              32
+#define PLANKAUDIOFILE_CAF_FLOAT_FLAG               0x00000001 // (1L << 0)
+#define PLANKAUDIOFILE_CAF_LITTLEENDIAN_FLAG        0x00000002 // (1L << 1)
 
 #define PLANKAUDIOFILEMETADATA_TEXTENCODING_ASCII   0
 #define PLANKAUDIOFILEMETADATA_TEXTENCODING_UTF8    1

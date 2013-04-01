@@ -39,8 +39,8 @@
 #ifndef PLANK_IFFFILECOMMON_H
 #define PLANK_IFFFILECOMMON_H
 
-#define PLANKIFFFILE_FIRSTCHUNKPOSITION     12
-#define PLANKIFFFILE_MINIMUMMAINLENGTH       4
+//#define PLANKIFFFILE_FIRSTCHUNKPOSITION     12 
+//#define PLANKIFFFILE_MINIMUMMAINLENGTH       4
 #define PLANKIFFFILE_CURRENTCHUNKPOSITION   -1
 #define PLANKIFFFILE_ANYCHUNKID             -1
 
@@ -50,6 +50,10 @@ typedef struct PlankIffFileHeaderInfo
     PlankFourCharCode mainID;
     PlankFourCharCode formatID;
     PlankFourCharCode junkID;
+    PlankUC lengthSize;
+    PlankUC mainEndOffset;
+    PlankUC initMainLength;
+    PlankUC reserved1;
     PlankLL mainLength;
 } PlankIffFileHeaderInfo;
 

@@ -130,12 +130,12 @@ PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB is
 /** 
  @param p The <i>Plank IffFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankUI* chunkLength, PlankLL* chunkDataPos);
+PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankFourCharCode chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos);
 
 /**
  @param p The <i>Plank IffFileReader</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, PlankFourCharCode* chunkID, PlankUI* chunkLength, PlankLL* chunkEnd, PlankLL* posOut);
+PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, PlankFourCharCode* chunkID, PlankLL* chunkLength, PlankLL* chunkEnd, PlankLL* posOut);
 
 /** @} */
 
