@@ -39,6 +39,8 @@
 #ifndef PLANK_AUDIOFILECOMMON_H
 #define PLANK_AUDIOFILECOMMON_H
 
+#include "../plank_IffFileCommon.h"
+
 #define PLANKAUDIOFILE_CHARBITS                       8
 #define PLANKAUDIOFILE_CHANNELMAPLENGTH             256
 
@@ -173,6 +175,19 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
 #define PLANKAUDIOFILE_WAV_SPEAKER_BITSTREAM_2_LEFT         0x02000000
 #define PLANKAUDIOFILE_WAV_SPEAKER_BITSTREAM_2_RIGHT        0x04000000
 #define PLANKAUDIOFILE_WAV_SPEAKER_ANY                      0xffffffff
+
+
+#define PLANKAUDIOFILE_W64_RIFF_ID          "junk-912E-11CF-A5D6-28DB04C10000"
+#define PLANKAUDIOFILE_W64_LIST_ID          "list-912F-11CF-A5D6-28DB04C10000"
+#define PLANKAUDIOFILE_W64_WAVE_ID          "wave-ACF3-11D3-8CD1-00C04F8EDB8A"
+#define PLANKAUDIOFILE_W64_FMT_ID           "fmt -ACF3-11D3-8CD1-00C04F8EDB8A"
+#define PLANKAUDIOFILE_W64_FACT_ID          "fact-ACF3-11D3-8CD1-00C04F8EDB8A"
+#define PLANKAUDIOFILE_W64_DATA_ID          "data-ACF3-11D3-8CD1-00C04F8EDB8A"
+#define PLANKAUDIOFILE_W64_LEVL_ID          "levl-ACF3-11D3-8CD1-00C04F8EDB8A"
+#define PLANKAUDIOFILE_W64_JUNK_ID          "junk-ACF3-11D3-8CD1-00C04f8EDB8A"
+#define PLANKAUDIOFILE_W64_BEXT_ID          "bext-ACF3-11D3-8CD1-00C04F8EDB8A"
+#define PLANKAUDIOFILE_W64_MARKER_ID        "ABF76256-392D-11D2-86C7-00C04F8EDB8A"
+#define PLANKAUDIOFILE_W64_SUMMARYLIST_ID   "925F94BC-525A-11D2-86DC-00C04F8EDB8A"
 
 /*
 RIFF = 1179011410
@@ -330,66 +345,66 @@ typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef;
 typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef;
 
 
-typedef struct PlankAudioFileWAVExtensible
+//typedef struct PlankAudioFileWAVExtensible
+//{
+//    PlankUI ext1;
+//    PlankUS ext2;
+//    PlankUS ext3;
+//    PlankUC ext4[8];
+//} PlankAudioFileWAVExtensible;
+//
+static inline PlankGUID* pl_AudioFileWAVExtensible_GetPCMGUID()
 {
-    PlankUI ext1;
-    PlankUS ext2;
-    PlankUS ext3;
-    PlankUC ext4[8];
-} PlankAudioFileWAVExtensible;
-
-static inline PlankAudioFileWAVExtensible* pl_AudioFileWAVExtensible_GetPCM()
-{
-    static PlankAudioFileWAVExtensible data;
+    static PlankGUID data;
     static PlankB firstTime = PLANK_TRUE;
     
     if (firstTime)
     {
         firstTime = PLANK_FALSE;
-        pl_MemoryZero (&data, sizeof (PlankAudioFileWAVExtensible));
-        data.ext1 = 0x00000001;
-        data.ext2 = 0x0000;
-        data.ext3 = 0x0010;
-        data.ext4[0] = 0x80; data.ext4[1] = 0x00; data.ext4[2] = 0x00; data.ext4[3] = 0xAA;
-        data.ext4[4] = 0x00; data.ext4[5] = 0x38; data.ext4[6] = 0x9B; data.ext4[7] = 0x71;
+        pl_MemoryZero (&data, sizeof (PlankGUID));
+        data.data1 = 0x00000001;
+        data.data2 = 0x0000;
+        data.data3 = 0x0010;
+        data.data4[0] = 0x80; data.data4[1] = 0x00; data.data4[2] = 0x00; data.data4[3] = 0xAA;
+        data.data4[4] = 0x00; data.data4[5] = 0x38; data.data4[6] = 0x9B; data.data4[7] = 0x71;
     }
     
     return &data;
 }
 
-static inline PlankAudioFileWAVExtensible* pl_AudioFileWAVExtensible_GetFloat()
+static inline PlankGUID* pl_AudioFileWAVExtensible_GetFloatGUID()
 {
-    static PlankAudioFileWAVExtensible data;
+    static PlankGUID data;
     static PlankB firstTime = PLANK_TRUE;
     
     if (firstTime)
     {
         firstTime = PLANK_FALSE;
-        pl_MemoryZero (&data, sizeof (PlankAudioFileWAVExtensible));
-        data.ext1 = 0x00000003;
-        data.ext2 = 0x0000;
-        data.ext3 = 0x0010;
-        data.ext4[0] = 0x80; data.ext4[1] = 0x00; data.ext4[2] = 0x00; data.ext4[3] = 0xAA;
-        data.ext4[4] = 0x00; data.ext4[5] = 0x38; data.ext4[6] = 0x9B; data.ext4[7] = 0x71;
+        pl_MemoryZero (&data, sizeof (PlankGUID));
+        data.data1 = 0x00000003;
+        data.data2 = 0x0000;
+        data.data3 = 0x0010;
+        data.data4[0] = 0x80; data.data4[1] = 0x00; data.data4[2] = 0x00; data.data4[3] = 0xAA;
+        data.data4[4] = 0x00; data.data4[5] = 0x38; data.data4[6] = 0x9B; data.data4[7] = 0x71;
     }
     
     return &data;
 }
 
-static inline PlankAudioFileWAVExtensible* pl_AudioFileWAVExtensible_GetAmbisonic()
+static inline PlankGUID* pl_AudioFileWAVExtensible_GetAmbisonicGUID()
 {
-    static PlankAudioFileWAVExtensible data;
+    static PlankGUID data;
     static PlankB firstTime = PLANK_TRUE;
     
     if (firstTime)
     {
         firstTime = PLANK_FALSE;
-        pl_MemoryZero (&data, sizeof (PlankAudioFileWAVExtensible));
-        data.ext1 = 0x00000001;
-        data.ext2 = 0x0721;
-        data.ext3 = 0x11D3;
-        data.ext4[0] = 0x86; data.ext4[1] = 0x44; data.ext4[2] = 0xC8; data.ext4[3] = 0xC1;
-        data.ext4[4] = 0xCA; data.ext4[5] = 0x00; data.ext4[6] = 0x00; data.ext4[7] = 0x00;
+        pl_MemoryZero (&data, sizeof (PlankGUID));
+        data.data1 = 0x00000001;
+        data.data2 = 0x0721;
+        data.data3 = 0x11D3;
+        data.data4[0] = 0x86; data.data4[1] = 0x44; data.data4[2] = 0xC8; data.data4[3] = 0xC1;
+        data.data4[4] = 0xCA; data.data4[5] = 0x00; data.data4[6] = 0x00; data.data4[7] = 0x00;
     }
     
     return &data;

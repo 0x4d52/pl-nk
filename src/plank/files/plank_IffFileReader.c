@@ -167,15 +167,16 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
     PlankUI chunkLength32;
     PlankUS vers, resv;
     
-    if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.mainID)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.mainID.fcc)) != PlankResult_OK) goto exit;
     
-    if (p->headerInfo.mainID == pl_FourCharCode ("caff"))
+    if (p->headerInfo.mainID.fcc == pl_FourCharCode ("caff"))
     {
-        p->headerInfo.formatID           = 0;
+        p->headerInfo.formatID.fcc       = 0;
         p->headerInfo.lengthSize         = 8;
         p->headerInfo.mainEndOffset      = 8;
         p->headerInfo.mainLength         = -1; // can't know with CAF
         p->headerInfo.initMainLength     = 0;
+        p->headerInfo.junkID.fcc         = pl_FourCharCode ("free");
 
         if ((result = pl_File_ReadUS (&p->file, &vers)) != PlankResult_OK) goto exit;
         if ((result = pl_File_ReadUS (&p->file, &resv)) != PlankResult_OK) goto exit;
@@ -190,8 +191,13 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
     }
     else
     {
+        if (p->headerInfo.mainID.fcc == pl_FourCharCode ("FORM"))
+            p->headerInfo.junkID.fcc = pl_FourCharCode ("    "); // Iff junk ID is four spaces
+        else if (p->headerInfo.mainID.fcc == pl_FourCharCode ("RIFF"))
+            p->headerInfo.junkID.fcc = pl_FourCharCode ("JUNK");
+        
         if ((result = pl_File_ReadUI (&p->file, &chunkLength32)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.formatID)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadFourCharCode (&p->file, &p->headerInfo.formatID.fcc)) != PlankResult_OK) goto exit;
         
         // could check for 0xffffffff length here for RF64
         
@@ -259,13 +265,13 @@ PlankResult pl_IffFileReader_Close (PlankIffFileReaderRef p)
 
 PlankResult pl_IffFileReader_GetMainID (PlankIffFileReaderRef p, PlankFourCharCode* result)
 {
-    *result = p->headerInfo.mainID;
+    *result = p->headerInfo.mainID.fcc;
     return PlankResult_OK;
 }
 
 PlankResult pl_IffFileReader_GetFormatID (PlankIffFileReaderRef p, PlankFourCharCode* result)
 {
-    *result = p->headerInfo.formatID;
+    *result = p->headerInfo.formatID.fcc;
     return PlankResult_OK;
 }
 

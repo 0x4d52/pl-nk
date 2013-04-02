@@ -569,14 +569,14 @@ static void pl_AudioFileWriter_WAVEXTChannelMaskToMap (PlankAudioFileFormatInfo*
 
 PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
 {
-    PlankAudioFileWAVExtensible ext;
+    PlankGUID ext;
     PlankResult result = PlankResult_OK;
     PlankUS compressionCode, numChannels;
     PlankUI sampleRate, byteRate, channelMask;
     PlankUS blockAlign, bitsPerSample;
-    PlankAudioFileWAVExtensible* extpcm;
-    PlankAudioFileWAVExtensible* extfloat;
-    PlankAudioFileWAVExtensible* extambisonic;
+    PlankGUID* extpcm;
+    PlankGUID* extfloat;
+    PlankGUID* extambisonic;
         
     if ((result = pl_File_ReadUS ((PlankFileRef)p->peer, &compressionCode)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUS ((PlankFileRef)p->peer, &numChannels)) != PlankResult_OK) goto exit;
@@ -600,25 +600,25 @@ PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const
     {
         if (chunkLength < PLANKAUDIOFILE_WAV_FMT_EXTENSIBLE_LENGTH) goto invalid;
         
-        pl_MemoryZero (&ext, sizeof (PlankAudioFileWAVExtensible));
+        pl_MemoryZero (&ext, sizeof (PlankGUID));
         
-        extpcm       = pl_AudioFileWAVExtensible_GetPCM();
-        extfloat     = pl_AudioFileWAVExtensible_GetFloat();
-        extambisonic = pl_AudioFileWAVExtensible_GetAmbisonic();
+        extpcm       = pl_AudioFileWAVExtensible_GetPCMGUID();
+        extfloat     = pl_AudioFileWAVExtensible_GetFloatGUID();
+        extambisonic = pl_AudioFileWAVExtensible_GetAmbisonicGUID();
 
         if ((result = pl_File_SkipBytes ((PlankFileRef)p->peer, 4)) != PlankResult_OK) goto exit;
         if ((result = pl_File_ReadUI ((PlankFileRef)p->peer, &channelMask)) != PlankResult_OK) goto exit;
         
-        if ((result = pl_File_ReadUI ((PlankFileRef)p->peer, &ext.ext1)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadUS ((PlankFileRef)p->peer, &ext.ext2)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_ReadUS ((PlankFileRef)p->peer, &ext.ext3)) != PlankResult_OK) goto exit;
-        if ((result = pl_File_Read ((PlankFileRef)p->peer, ext.ext4, 8, PLANK_NULL)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI ((PlankFileRef)p->peer, &ext.data1)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUS ((PlankFileRef)p->peer, &ext.data2)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUS ((PlankFileRef)p->peer, &ext.data3)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_Read ((PlankFileRef)p->peer, ext.data4, 8, PLANK_NULL)) != PlankResult_OK) goto exit;
         
-        if (pl_MemoryCompare (&ext, extpcm, sizeof (PlankAudioFileWAVExtensible)))
+        if (pl_MemoryCompare (&ext, extpcm, sizeof (PlankGUID)))
             p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN;
-        else if (pl_MemoryCompare (&ext, extfloat, sizeof (PlankAudioFileWAVExtensible)))
+        else if (pl_MemoryCompare (&ext, extfloat, sizeof (PlankGUID)))
             p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_FLOAT_LITTLEENDIAN;
-        else if (pl_MemoryCompare (&ext, extambisonic, sizeof (PlankAudioFileWAVExtensible)))
+        else if (pl_MemoryCompare (&ext, extambisonic, sizeof (PlankGUID)))
             p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_PCM_LITTLEENDIAN;
         else
             goto invalid;        

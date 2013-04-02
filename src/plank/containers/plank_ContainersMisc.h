@@ -607,6 +607,360 @@ static inline PlankF80 pl_I2F80 (const PlankUI value)
     
 exit:
     return extended;
-} 
+}
+
+/**  @defgroup PlankGUID Plank GUID class
+ @ingroup PlankClasses
+ @{
+ */
+typedef struct PlankGUID* PlankGUIDRef;
+
+typedef struct PlankGUID
+{
+    PlankUI  data1;
+    PlankUS  data2;
+    PlankUS  data3;
+    PlankUC  data4[8];
+} PlankGUID;
+
+static inline void pl_GUID_Init42244 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankUI data4hi, const PlankUI data4lo)
+{
+    p->data1 = data1;
+    p->data2 = data2;
+    p->data3 = data3;
+    *(PlankULL*)&p->data4 = (((PlankULL)data4hi) << 32) | data4lo;
+}
+
+static inline void pl_GUID_Init4228 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankULL data4)
+{
+    p->data1 = data1;
+    p->data2 = data2;
+    p->data3 = data3;
+    *(PlankULL*)&p->data4 = data4;
+}
+
+static inline void pl_GUID_Init4221x8 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3,
+                                        const PlankUC data4_0,
+                                        const PlankUC data4_1,
+                                        const PlankUC data4_2,
+                                        const PlankUC data4_3,
+                                        const PlankUC data4_4,
+                                        const PlankUC data4_5,
+                                        const PlankUC data4_6,
+                                        const PlankUC data4_7)
+{
+    p->data1 = data1;
+    p->data2 = data2;
+    p->data3 = data3;
+    p->data4[0] = data4_0;
+    p->data4[1] = data4_1;
+    p->data4[2] = data4_2;
+    p->data4[3] = data4_3;
+    p->data4[4] = data4_4;
+    p->data4[5] = data4_5;
+    p->data4[6] = data4_6;
+    p->data4[7] = data4_7;
+}
+
+static inline void pl_GUID_Init422p (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankUC* data4)
+{
+    p->data1 = data1;
+    p->data2 = data2;
+    p->data3 = data3;
+    pl_MemoryCopy (&p->data4, data4, 8);
+}
+
+static inline const char* pl_HexDigit2CharMap()
+{
+    static char map[16];
+    static PlankB firstTime = PLANK_TRUE;
+    
+    if (firstTime)
+    {
+        pl_MemoryCopy(map, "0123456789abcdef", 16);
+        firstTime = PLANK_FALSE;
+    }
+    
+    return map;
+}
+
+static inline const char* pl_Char2HexDigitMap()
+{
+    static char map[128];
+    static PlankB firstTime = PLANK_TRUE;
+    int i;
+    
+    if (firstTime)
+    {
+        // invalid chars
+        for (i = 0; i < 128; ++i)
+            map[i] = -2;
+        
+        // valid chars >= -1
+        map['-'] = -1;
+        map['0'] = 0;
+        map['1'] = 1;
+        map['2'] = 2;
+        map['3'] = 3;
+        map['4'] = 4;
+        map['5'] = 5;
+        map['6'] = 6;
+        map['7'] = 7;
+        map['8'] = 8;
+        map['9'] = 9;
+        map['a'] = 10;
+        map['b'] = 11;
+        map['c'] = 12;
+        map['d'] = 13;
+        map['e'] = 14;
+        map['f'] = 15;
+        map['A'] = 10;
+        map['B'] = 11;
+        map['C'] = 12;
+        map['D'] = 13;
+        map['E'] = 14;
+        map['F'] = 15;
+    }
+    
+    return map;
+}
+
+
+static inline PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string)
+{
+    const char *map;
+    PlankResult result;
+    int i, len;
+    
+    result = PlankResult_OK;
+    map = pl_Char2HexDigitMap();
+    len = strlen (string);
+    
+    if (len != 36)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((string[8] != '-') || (string[13] != '-') || (string[18] != '-') || (string[23] != '-'))
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    for (i = 0; i < 36; ++i)
+    {
+        if (map[string[i]] < -1)
+        {
+            result = PlankResult_UnknownError;
+            goto exit;
+        }
+    }
+    
+    p->data1 =  (((PlankUI)map[string[ 0]]) << 28) |
+                (((PlankUI)map[string[ 1]]) << 24) |
+                (((PlankUI)map[string[ 2]]) << 20) |
+                (((PlankUI)map[string[ 3]]) << 16) |
+                (((PlankUI)map[string[ 4]]) << 12) |
+                (((PlankUI)map[string[ 5]]) <<  8) |
+                (((PlankUI)map[string[ 6]]) <<  4) |
+                (((PlankUI)map[string[ 7]]) <<  0);
+    
+    p->data2 =  (((PlankUS)map[string[ 9]]) << 12) |
+                (((PlankUS)map[string[10]]) <<  8) |
+                (((PlankUS)map[string[11]]) <<  4) |
+                (((PlankUS)map[string[12]]) <<  0);
+    
+    p->data3 =  (((PlankUS)map[string[14]]) << 12) |
+                (((PlankUS)map[string[15]]) <<  8) |
+                (((PlankUS)map[string[16]]) <<  4) |
+                (((PlankUS)map[string[17]]) <<  0);
+    
+    p->data4[0] = (((PlankUC)map[string[19]]) << 4) | (((PlankUC)map[string[20]]) << 0);
+    p->data4[1] = (((PlankUC)map[string[21]]) << 4) | (((PlankUC)map[string[22]]) << 0);
+    
+    p->data4[2] = (((PlankUC)map[string[24]]) << 4) | (((PlankUC)map[string[25]]) << 0);
+    p->data4[3] = (((PlankUC)map[string[26]]) << 4) | (((PlankUC)map[string[27]]) << 0);
+    p->data4[4] = (((PlankUC)map[string[28]]) << 4) | (((PlankUC)map[string[29]]) << 0);
+    p->data4[5] = (((PlankUC)map[string[30]]) << 4) | (((PlankUC)map[string[31]]) << 0);
+    p->data4[6] = (((PlankUC)map[string[32]]) << 4) | (((PlankUC)map[string[33]]) << 0);
+    p->data4[7] = (((PlankUC)map[string[34]]) << 4) | (((PlankUC)map[string[35]]) << 0);
+    
+exit:
+    return result;
+}
+
+static inline PlankResult pl_GUID_InitChunkString (PlankGUIDRef p, const char* string)
+{
+    const char *map;
+    char chunkID[5];
+    PlankResult result;
+    int i, len;
+    
+    result = PlankResult_OK;
+    map = pl_Char2HexDigitMap();
+    len = strlen (string);
+    
+    if (len != 32)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((string[4] != '-') || (string[9] != '-') || (string[14] != '-') || (string[19] != '-'))
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    for (i = 5; i < 32; ++i)
+    {
+        if (map[string[i]] < -1)
+        {
+            result = PlankResult_UnknownError;
+            goto exit;
+        }
+    }
+    
+    chunkID[0] = string[0];
+    chunkID[1] = string[1];
+    chunkID[2] = string[2];
+    chunkID[3] = string[3];
+    chunkID[4] = '\0';
+    
+    p->data1 = pl_FourCharCode (chunkID);
+    
+    p->data2 =  (((PlankUS)map[string[ 5]]) << 12) |
+                (((PlankUS)map[string[ 6]]) <<  8) |
+                (((PlankUS)map[string[ 7]]) <<  4) |
+                (((PlankUS)map[string[ 8]]) <<  0);
+    
+    p->data3 =  (((PlankUS)map[string[10]]) << 12) |
+                (((PlankUS)map[string[11]]) <<  8) |
+                (((PlankUS)map[string[12]]) <<  4) |
+                (((PlankUS)map[string[13]]) <<  0);
+    
+    p->data4[0] = (((PlankUC)map[string[15]]) << 4) | (((PlankUC)map[string[16]]) << 0);
+    p->data4[1] = (((PlankUC)map[string[17]]) << 4) | (((PlankUC)map[string[18]]) << 0);
+    
+    p->data4[2] = (((PlankUC)map[string[20]]) << 4) | (((PlankUC)map[string[21]]) << 0);
+    p->data4[3] = (((PlankUC)map[string[22]]) << 4) | (((PlankUC)map[string[23]]) << 0);
+    p->data4[4] = (((PlankUC)map[string[24]]) << 4) | (((PlankUC)map[string[25]]) << 0);
+    p->data4[5] = (((PlankUC)map[string[26]]) << 4) | (((PlankUC)map[string[27]]) << 0);
+    p->data4[6] = (((PlankUC)map[string[28]]) << 4) | (((PlankUC)map[string[29]]) << 0);
+    p->data4[7] = (((PlankUC)map[string[30]]) << 4) | (((PlankUC)map[string[31]]) << 0);
+    
+exit:
+    return result;
+}
+
+
+static inline void pl_GUID_String (PlankGUID* p, char* string)
+{
+    const char *map;
+    
+    map = pl_HexDigit2CharMap();
+    
+    string[ 0] = map[(p->data1 >> 28) & 0x0f];
+    string[ 1] = map[(p->data1 >> 24) & 0x0f];
+    string[ 2] = map[(p->data1 >> 20) & 0x0f];
+    string[ 3] = map[(p->data1 >> 16) & 0x0f];
+    string[ 4] = map[(p->data1 >> 12) & 0x0f];
+    string[ 5] = map[(p->data1 >>  8) & 0x0f];
+    string[ 6] = map[(p->data1 >>  4) & 0x0f];
+    string[ 7] = map[(p->data1 >>  0) & 0x0f];
+    string[ 8] = '-';
+    string[ 9] = map[(p->data2 >> 12) & 0x0f];
+    string[10] = map[(p->data2 >>  8) & 0x0f];
+    string[11] = map[(p->data2 >>  4) & 0x0f];
+    string[12] = map[(p->data2 >>  0) & 0x0f];
+    string[13] = '-';
+    string[14] = map[(p->data3 >> 12) & 0x0f];
+    string[15] = map[(p->data3 >>  8) & 0x0f];
+    string[16] = map[(p->data3 >>  4) & 0x0f];
+    string[17] = map[(p->data3 >>  0) & 0x0f];
+    string[18] = '-';
+    string[19] = map[(p->data4[0] >>  4) & 0x0f];
+    string[20] = map[(p->data4[0] >>  0) & 0x0f];
+    string[21] = map[(p->data4[1] >>  4) & 0x0f];
+    string[22] = map[(p->data4[1] >>  0) & 0x0f];
+    string[23] = '-';
+    string[24] = map[(p->data4[2] >>  4) & 0x0f];
+    string[25] = map[(p->data4[2] >>  0) & 0x0f];
+    string[26] = map[(p->data4[3] >>  4) & 0x0f];
+    string[27] = map[(p->data4[3] >>  0) & 0x0f];
+    string[28] = map[(p->data4[4] >>  4) & 0x0f];
+    string[29] = map[(p->data4[4] >>  0) & 0x0f];
+    string[30] = map[(p->data4[5] >>  4) & 0x0f];
+    string[31] = map[(p->data4[5] >>  0) & 0x0f];
+    string[32] = map[(p->data4[6] >>  4) & 0x0f];
+    string[33] = map[(p->data4[6] >>  0) & 0x0f];
+    string[34] = map[(p->data4[7] >>  4) & 0x0f];
+    string[35] = map[(p->data4[7] >>  0) & 0x0f];
+    string[36] = '\0';
+}
+
+static inline void pl_GUID_ChunkString (PlankGUID* p, char* string)
+{
+    const char *map;
+    
+    map = pl_HexDigit2CharMap();
+    
+#if PLANK_LITTLEENDIAN
+    string[ 0] = ((char*)&p->data1)[0];
+    string[ 1] = ((char*)&p->data1)[1];
+    string[ 2] = ((char*)&p->data1)[2];
+    string[ 3] = ((char*)&p->data1)[3];
+#endif
+#if PLANK_BIGENDIAN
+    string[ 0] = ((char*)&p->data1)[3];
+    string[ 1] = ((char*)&p->data1)[2];
+    string[ 2] = ((char*)&p->data1)[1];
+    string[ 3] = ((char*)&p->data1)[0];
+#endif
+    string[ 4] = '-';
+    string[ 5] = map[(p->data2 >> 12) & 0x0f];
+    string[ 6] = map[(p->data2 >>  8) & 0x0f];
+    string[ 7] = map[(p->data2 >>  4) & 0x0f];
+    string[ 8] = map[(p->data2 >>  0) & 0x0f];
+    string[ 9] = '-';
+    string[10] = map[(p->data3 >> 12) & 0x0f];
+    string[11] = map[(p->data3 >>  8) & 0x0f];
+    string[12] = map[(p->data3 >>  4) & 0x0f];
+    string[13] = map[(p->data3 >>  0) & 0x0f];
+    string[14] = '-';
+    string[15] = map[(p->data4[0] >>  4) & 0x0f];
+    string[16] = map[(p->data4[0] >>  0) & 0x0f];
+    string[17] = map[(p->data4[1] >>  4) & 0x0f];
+    string[18] = map[(p->data4[1] >>  0) & 0x0f];
+    string[19] = '-';
+    string[20] = map[(p->data4[2] >>  4) & 0x0f];
+    string[21] = map[(p->data4[2] >>  0) & 0x0f];
+    string[22] = map[(p->data4[3] >>  4) & 0x0f];
+    string[23] = map[(p->data4[3] >>  0) & 0x0f];
+    string[24] = map[(p->data4[4] >>  4) & 0x0f];
+    string[25] = map[(p->data4[4] >>  0) & 0x0f];
+    string[26] = map[(p->data4[5] >>  4) & 0x0f];
+    string[27] = map[(p->data4[5] >>  0) & 0x0f];
+    string[28] = map[(p->data4[6] >>  4) & 0x0f];
+    string[29] = map[(p->data4[6] >>  0) & 0x0f];
+    string[30] = map[(p->data4[7] >>  4) & 0x0f];
+    string[31] = map[(p->data4[7] >>  0) & 0x0f];
+    string[32] = '\0';
+}
+
+
+static inline PlankB pl_GUID_Equal (const PlankGUID* p, const PlankGUID* other)
+{
+    return pl_MemoryCompare (p, other, sizeof(PlankGUID));
+}
+
+static inline PlankB pl_GUID_IsNull (const PlankGUID* p)
+{
+    return (p->data1 == 0) && (p->data2 == 0) && (p->data3 == 0) && ((*(PlankULL*)p->data4) == 0);
+}
+
+/// @} // End group PlankGUID
+
 
 #endif // PLANK_CONTAINERSMISC_H

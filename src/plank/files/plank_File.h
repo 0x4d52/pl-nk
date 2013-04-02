@@ -411,6 +411,9 @@ PlankResult pl_File_ReadD (PlankFileRef p, double* data);
 /** */
 PlankResult pl_File_ReadFourCharCode (PlankFileRef p, PlankFourCharCode* data);
 
+PlankResult pl_File_ReadGUID (PlankFileRef p, PlankGUIDRef guid);
+
+
 /** */
 PlankResult pl_File_ReadPascalString255 (PlankFileRef p, PlankPascalString255* string);
 
@@ -535,6 +538,9 @@ PlankResult pl_File_WriteD (PlankFileRef p, double data);
 /** */
 PlankResult pl_File_WriteFourCharCode (PlankFileRef p, PlankFourCharCode data);
 
+PlankResult pl_File_WriteGUID (PlankFileRef p, PlankGUIDRef guid);
+
+
 /** Write string to the file.
  This writes until it hits the first null character in the string.
  @param p The <i>Plank %File</i> object. 
@@ -586,5 +592,7 @@ typedef struct PlankFile
     PlankFileGetPositionFunction    getPositionFunction;
 } PlankFile;
 #endif
+
+
 
 #endif // PLANK_TEXT_H

@@ -39,22 +39,43 @@
 #ifndef PLANK_IFFFILECOMMON_H
 #define PLANK_IFFFILECOMMON_H
 
-//#define PLANKIFFFILE_FIRSTCHUNKPOSITION     12 
-//#define PLANKIFFFILE_MINIMUMMAINLENGTH       4
+#include "plank_File.h"
+
 #define PLANKIFFFILE_CURRENTCHUNKPOSITION   -1
 #define PLANKIFFFILE_ANYCHUNKID             -1
+#define PLANKIFFFILE_ID_FCC                  1
+#define PLANKIFFFILE_ID_GUID                 2
 
+typedef union PlankIffID
+{
+    PlankFourCharCode fcc;
+    PlankGUID guid;
+} PlankIffID;
+
+//typedef struct PlankIffFileHeaderInfo
+//{
+//    PlankFourCharCode mainID;
+//    PlankFourCharCode formatID;
+//    PlankFourCharCode junkID;
+//    PlankUC lengthSize;
+//    PlankUC mainEndOffset;
+//    PlankUC initMainLength;
+//    PlankUC reserved1;
+//    PlankLL mainLength;
+//} PlankIffFileHeaderInfo;
 
 typedef struct PlankIffFileHeaderInfo
 {
-    PlankFourCharCode mainID;
-    PlankFourCharCode formatID;
-    PlankFourCharCode junkID;
+    PlankIffID mainID;
+    PlankIffID formatID;
+    PlankIffID junkID;
     PlankUC lengthSize;
     PlankUC mainEndOffset;
     PlankUC initMainLength;
-    PlankUC reserved1;
+    PlankUC idType;
     PlankLL mainLength;
 } PlankIffFileHeaderInfo;
+
+
 
 #endif // PLANK_IFFFILECOMMON_H

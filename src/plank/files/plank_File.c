@@ -1325,6 +1325,13 @@ PlankResult pl_File_ReadFourCharCode (PlankFileRef p, PlankFourCharCode* data)
     return result;    
 }
 
+PlankResult pl_File_ReadGUID (PlankFileRef p, PlankGUIDRef data)
+{
+    PlankResult result;
+    result = pl_File_Read (p, data, sizeof (PlankGUID), PLANK_NULL);
+    return result;
+}
+
 PlankResult pl_File_ReadPascalString255 (PlankFileRef p, PlankPascalString255* string)
 {
     PlankResult result = PlankResult_OK;
@@ -1656,6 +1663,11 @@ PlankResult pl_File_WriteD (PlankFileRef p, double data)
 PlankResult pl_File_WriteFourCharCode (PlankFileRef p, PlankFourCharCode data)
 {
     return pl_File_Write (p, &data, sizeof (data));
+}
+
+PlankResult pl_File_WriteGUID (PlankFileRef p, PlankGUIDRef guid)
+{
+    return pl_File_Write (p, guid, sizeof (PlankGUID));
 }
 
 PlankResult pl_File_WriteString (PlankFileRef p, const char* text)

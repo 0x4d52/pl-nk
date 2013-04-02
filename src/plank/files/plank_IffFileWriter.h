@@ -116,7 +116,7 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankIffFileWriterChunkInfo
 {
-    PlankFourCharCode chunkID;
+    PlankIffID chunkID;
     PlankUI padding;
     PlankLL chunkLength;
     PlankLL chunkPos;
