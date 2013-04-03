@@ -119,7 +119,6 @@ PLANK_END_C_LINKAGE
 typedef struct PlankIffFileWriterChunkInfo
 {
     PlankIffID chunkID;
-    PlankUI padding;
     PlankLL chunkLength;
     PlankLL chunkPos;
 } PlankIffFileWriterChunkInfo;
@@ -129,7 +128,6 @@ typedef struct PlankIffFileWriter
     PlankFile file;
     PlankIffFileHeaderInfo headerInfo;
     PlankDynamicArray chunkInfos;
-    
     PlankIffFileWriterChunkInfo* currentChunk;
     
 } PlankIffFileWriter;
@@ -145,7 +143,12 @@ static inline PlankResult pl_IffFileWriter_WriteChunkLength (PlankIffFileWriterR
     }
     else if (p->headerInfo.lengthSize == 8)
     {
-        return pl_File_WriteLL (&p->file, length);
+        switch (p->headerInfo.idType)
+        {
+            case PLANKIFFFILE_ID_FCC:   return pl_File_WriteLL (&p->file, length);
+            case PLANKIFFFILE_ID_GUID:  return pl_File_WriteLL (&p->file, length + p->headerInfo.headerLength); // includes the chunk header
+            default: return PlankResult_UnknownError;
+        }
     }
     else
     {
@@ -157,7 +160,7 @@ static inline PlankResult pl_IffFileWriter_InitID (PlankIffFileWriterRef p, cons
 {
     switch (p->headerInfo.idType)
     {
-        case PLANKIFFFILE_ID_FCC: chunkID->fcc = pl_FourCharCode (string); return PlankResult_OK;
+        case PLANKIFFFILE_ID_FCC:  chunkID->fcc = pl_FourCharCode (string); return PlankResult_OK;
         case PLANKIFFFILE_ID_GUID: pl_GUID_InitString (&chunkID->guid, string); return PlankResult_OK;
         default: return PlankResult_UnknownError;
     }
