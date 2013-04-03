@@ -538,7 +538,7 @@ PlankResult pl_File_WriteD (PlankFileRef p, double data);
 /** */
 PlankResult pl_File_WriteFourCharCode (PlankFileRef p, PlankFourCharCode data);
 
-PlankResult pl_File_WriteGUID (PlankFileRef p, PlankGUIDRef guid);
+PlankResult pl_File_WriteGUID (PlankFileRef p, const PlankGUID* guid);
 
 
 /** Write string to the file.

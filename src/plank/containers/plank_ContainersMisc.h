@@ -39,6 +39,27 @@
 #ifndef PLANK_CONTAINERSMISC_H
 #define PLANK_CONTAINERSMISC_H
 
+static inline PlankI pl_AlignI (const PlankI value, const PlankI alignment)
+{
+    return value + (alignment - (value % alignment)) * !!(value % alignment);
+}
+
+static inline PlankUI pl_AlignUI (const PlankUI value, const PlankUI alignment)
+{
+    return value + (alignment - (value % alignment)) * !!(value % alignment);
+}
+
+static inline PlankLL pl_AlignLL (const PlankLL value, const PlankLL alignment)
+{
+    return value + (alignment - (value % alignment)) * !!(value % alignment);
+}
+
+static inline PlankULL pl_AlignULL (const PlankULL value, const PlankULL alignment)
+{
+    return value + (alignment - (value % alignment)) * !!(value % alignment);
+}
+
+
 static inline void pl_SwapP (PlankP* a, PlankP* b)
 {
     PlankP temp;
@@ -505,7 +526,7 @@ static inline PlankFourCharCode pl_FourCharCode (const char* data)
 {
     PlankFourCharCode code;
     
-    code = *(PlankFourCharCode*)data;
+    code = (data[0] == '\0') ? 0 : *(PlankFourCharCode*)data;
     
 #if PLANK_BIGENDIAN
     pl_SwapEndianI ((int*)code);
@@ -726,7 +747,7 @@ static inline const char* pl_Char2HexDigitMap()
 }
 
 
-static inline PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string)
+static inline PlankResult pl_GUID_InitHexString (PlankGUIDRef p, const char* string)
 {
     const char *map;
     PlankResult result;
@@ -854,8 +875,21 @@ exit:
     return result;
 }
 
+static inline PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string)
+{
+    int len;
+    
+    len = strlen (string);
 
-static inline void pl_GUID_String (PlankGUID* p, char* string)
+    if (len == 32)
+        return pl_GUID_InitChunkString (p, string);
+    else if (len == 36)
+        return pl_GUID_InitHexString (p, string);
+    else
+        return PlankResult_UnknownError;
+}
+
+static inline void pl_GUID_String (const PlankGUID* p, char* string)
 {
     const char *map;
     
@@ -900,7 +934,7 @@ static inline void pl_GUID_String (PlankGUID* p, char* string)
     string[36] = '\0';
 }
 
-static inline void pl_GUID_ChunkString (PlankGUID* p, char* string)
+static inline void pl_GUID_ChunkString (const PlankGUID* p, char* string)
 {
     const char *map;
     
@@ -952,8 +986,19 @@ static inline void pl_GUID_ChunkString (PlankGUID* p, char* string)
 
 static inline PlankB pl_GUID_Equal (const PlankGUID* p, const PlankGUID* other)
 {
-    return pl_MemoryCompare (p, other, sizeof(PlankGUID));
+    return pl_MemoryCompare (p, other, sizeof (PlankGUID));
 }
+
+static inline PlankB pl_GUID_EqualWithString (const PlankGUID* p, const char* other)
+{
+    PlankGUID guid;
+    
+    if (pl_GUID_InitString (&guid, other) != PlankResult_OK)
+        return PLANK_FALSE;
+    
+    return pl_MemoryCompare (p, &guid, sizeof (PlankGUID));
+}
+
 
 static inline PlankB pl_GUID_IsNull (const PlankGUID* p)
 {

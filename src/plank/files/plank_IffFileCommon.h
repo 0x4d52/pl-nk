@@ -46,35 +46,38 @@
 #define PLANKIFFFILE_ID_FCC                  1
 #define PLANKIFFFILE_ID_GUID                 2
 
+#define PLANKIFFFILE_W64_RIFF_ID          "riff-912E-11CF-A5D6-28DB04C10000"
+#define PLANKIFFFILE_W64_LIST_ID          "list-912F-11CF-A5D6-28DB04C10000"
+#define PLANKIFFFILE_W64_JUNK_ID          "junk-ACF3-11D3-8CD1-00C04f8EDB8A"
+
+
 typedef union PlankIffID
 {
     PlankFourCharCode fcc;
     PlankGUID guid;
 } PlankIffID;
 
-//typedef struct PlankIffFileHeaderInfo
-//{
-//    PlankFourCharCode mainID;
-//    PlankFourCharCode formatID;
-//    PlankFourCharCode junkID;
-//    PlankUC lengthSize;
-//    PlankUC mainEndOffset;
-//    PlankUC initMainLength;
-//    PlankUC reserved1;
-//    PlankLL mainLength;
-//} PlankIffFileHeaderInfo;
+
 
 typedef struct PlankIffFileHeaderInfo
 {
     PlankIffID mainID;
     PlankIffID formatID;
     PlankIffID junkID;
+    
+    PlankLL mainLength;
+
     PlankUC lengthSize;
+    PlankUC idType;
+    PlankUC headerLength;
+    PlankUC mainLengthOffset; // W64 inlcudes the main GUID and length !
     PlankUC mainEndOffset;
     PlankUC initMainLength;
-    PlankUC idType;
-    PlankLL mainLength;
+    PlankUC alignment;
+    PlankUC reserved7;
+    
 } PlankIffFileHeaderInfo;
+
 
 
 

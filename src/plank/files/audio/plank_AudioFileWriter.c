@@ -75,7 +75,7 @@ PlankResult pl_AudioFileWriter_CAF_OpenWithFile (PlankAudioFileWriterRef p, Plan
 PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_CAF_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data);
 
-PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const PlankFourCharCode chunkID, const int numFrames, const void* data);
+PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const char* chunkID, const int numFrames, const void* data);
 
 PlankResult pl_AudioFileWriter_OggVorbis_Open (PlankAudioFileWriterRef p, const char* filepath);
 PlankResult pl_AudioFileWriter_OggVorbis_OpenWithFile (PlankAudioFileWriterRef p, PlankFileRef file);
@@ -627,11 +627,11 @@ static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef 
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_FALSE, pl_FourCharCode ("RIFF"), pl_FourCharCode ("WAVE"));
+        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_FALSE, "RIFF", "WAVE", PLANKIFFFILE_ID_FCC);
     }
     else
     {
-        result = pl_IffFileWriter_OpenWithFile (iff, file, pl_FourCharCode ("RIFF"), pl_FourCharCode ("WAVE"));        
+        result = pl_IffFileWriter_OpenWithFile (iff, file, "RIFF", "WAVE", PLANKIFFFILE_ID_FCC);        
     }
     
     if (result != PlankResult_OK)
@@ -664,7 +664,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode fmt;
+    const char* fmt;
     PlankUS encoding;
     
     iff = (PlankIffFileWriterRef)p->peer;
@@ -672,7 +672,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
     if ((p->formatInfo.numChannels > 2) || (iff->headerInfo.mainLength > 0xffffffff))
         return pl_AudioFileWriter_WAVEXT_WriteHeader (p);
     
-    fmt  = pl_FourCharCode ("fmt ");
+    fmt = "fmt ";
     
     switch (p->formatInfo.encoding)
     {
@@ -738,14 +738,14 @@ PlankResult pl_AudioFileWriter_WAVEXT_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode fmt;
+    const char* fmt;
     
     iff  = (PlankIffFileWriterRef)p->peer;
     
     if (iff->headerInfo.mainLength > 0xffffffff)
         return pl_AudioFileWriter_WAVRF64_WriteHeader (p);
     
-    fmt  = pl_FourCharCode ("fmt ");
+    fmt = "fmt ";
     
     switch (p->formatInfo.encoding)
     {
@@ -797,18 +797,22 @@ PlankResult pl_AudioFileWriter_WAVRF64_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef fmtChunkInfo, junkChunkInfo, ds64ChunkInfo, dataChunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode fmt, ds64, RF64, JUNK, data;
+    const char* fmt;
+    const char* ds64;
+    const char* RF64;
+    const char* data;
     PlankLL dataLength;
-    
+    char JUNK[64];
+
     iff  = (PlankIffFileWriterRef)p->peer;
-    fmt  = pl_FourCharCode ("fmt ");
-    ds64 = pl_FourCharCode ("ds64");
-    RF64 = pl_FourCharCode ("RF64");
-    data = pl_FourCharCode ("data");
-    JUNK = iff->headerInfo.junkID.fcc;
+    fmt  = "fmt ";
+    ds64 = "ds64";
+    RF64 = "RF64";
+    data = "data";
+    pl_IffFileWriter_ChunkIDString (iff, &iff->headerInfo.junkID, JUNK);
     
     // update to RF64 header
-    iff->headerInfo.mainID.fcc = RF64;
+    iff->headerInfo.mainID.fcc = pl_FourCharCode (RF64);
     if ((result = pl_IffFileWriter_WriteHeader (iff)) != PlankResult_OK) goto exit;
     
     switch (p->formatInfo.encoding)
@@ -855,7 +859,7 @@ PlankResult pl_AudioFileWriter_WAVRF64_WriteHeader (PlankAudioFileWriterRef p)
         
         junkChunkInfo->chunkPos = fmtChunkInfo->chunkPos;
         fmtChunkInfo->chunkPos += junkChunkInfo->chunkLength + 4 + iff->headerInfo.lengthSize;
-        junkChunkInfo->chunkID.fcc = ds64;
+        junkChunkInfo->chunkID.fcc = pl_FourCharCode (ds64);
         
         // update chunk headers writing no other bytes
         if ((result = pl_IffFileWriter_WriteChunk (iff, 0, ds64, 0, 0, PLANKIFFFILEWRITER_MODEREPLACEGROW)) != PlankResult_OK) goto exit;
@@ -905,7 +909,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteFrames (PlankAudioFileWriterRef p, const
     result = PlankResult_OK;
     iff  = (PlankIffFileWriterRef)p->peer;
     
-    if ((result = pl_AudioFileWriter_Iff_WriteFrames (p, pl_FourCharCode ("data"), numFrames, data)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileWriter_Iff_WriteFrames (p, "data", numFrames, data)) != PlankResult_OK) goto exit;
     
     if (iff->headerInfo.mainLength > 0xffffffff)
     {
@@ -961,11 +965,11 @@ static PlankResult pl_AudioFileWriter_AIFF_OpenInternal (PlankAudioFileWriterRef
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, pl_FourCharCode ("FORM"), pl_FourCharCode ("AIFF"));
+        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, "FORM", "AIFF", PLANKIFFFILE_ID_FCC);
     }
     else
     {
-        result = pl_IffFileWriter_OpenWithFile (iff, file, pl_FourCharCode ("FORM"), pl_FourCharCode ("AIFF"));        
+        result = pl_IffFileWriter_OpenWithFile (iff, file, "FORM", "AIFF", PLANKIFFFILE_ID_FCC);
     }
     
     if (result != PlankResult_OK)
@@ -997,11 +1001,11 @@ PlankResult pl_AudioFileWriter_AIFF_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode COMM;
+    const char* COMM;
     PlankF80 sampleRate;
     
     iff = (PlankIffFileWriterRef)p->peer;
-    COMM = pl_FourCharCode ("COMM");
+    COMM = "COMM";
         
     if ((result = pl_IffFileWriter_SeekChunk (iff, 0, COMM, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
@@ -1036,7 +1040,7 @@ exit:
 
 PlankResult pl_AudioFileWriter_AIFF_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
 {
-    return pl_AudioFileWriter_Iff_WriteFrames (p, pl_FourCharCode ("SSND"), numFrames, data);
+    return pl_AudioFileWriter_Iff_WriteFrames (p, "SSND", numFrames, data);
 }
 
 static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
@@ -1086,7 +1090,7 @@ static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, pl_FourCharCode ("FORM"), pl_FourCharCode ("AIFC"));
+        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, "FORM", "AIFC", PLANKIFFFILE_ID_FCC);
     }
     else
     {
@@ -1098,7 +1102,7 @@ static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef
             goto exit;
         }
 
-        result = pl_IffFileWriter_OpenWithFile (iff, file, pl_FourCharCode ("FORM"), pl_FourCharCode ("AIFC"));
+        result = pl_IffFileWriter_OpenWithFile (iff, file, "FORM", "AIFC", PLANKIFFFILE_ID_FCC);
     }
     
     if (result != PlankResult_OK)
@@ -1130,13 +1134,15 @@ PlankResult pl_AudioFileWriter_AIFC_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode COMM, FVER, compressionID;
+    const char* COMM;
+    const char* FVER;
+    PlankFourCharCode compressionID;
     PlankF80 sampleRate;
     PlankUI fver;
     
     iff = (PlankIffFileWriterRef)p->peer;
-    COMM = pl_FourCharCode ("COMM");
-    FVER = pl_FourCharCode ("FVER");
+    COMM = "COMM";
+    FVER = "FVER";
     fver = PLANKAUDIOFILE_AIFC_VERSION;
     
 #if PLANK_LITTLEENDIAN
@@ -1205,7 +1211,7 @@ exit:
 
 PlankResult pl_AudioFileWriter_AIFC_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
 {
-    return pl_AudioFileWriter_Iff_WriteFrames (p, pl_FourCharCode ("SSND"), numFrames, data);
+    return pl_AudioFileWriter_Iff_WriteFrames (p, "SSND", numFrames, data);
 }
 
 static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
@@ -1255,7 +1261,7 @@ static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef 
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, pl_FourCharCode ("caff"), 0);
+        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, "caff", "", PLANKIFFFILE_ID_FCC);
     }
     else
     {
@@ -1267,7 +1273,7 @@ static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef 
             goto exit;
         }
 
-        result = pl_IffFileWriter_OpenWithFile (iff, file, pl_FourCharCode ("caff"), 0);
+        result = pl_IffFileWriter_OpenWithFile (iff, file, "caff", "", PLANKIFFFILE_ID_FCC);
     }
     
     if (result != PlankResult_OK)
@@ -1299,13 +1305,14 @@ PlankResult pl_AudioFileWriter_CAF_WriteHeader (PlankAudioFileWriterRef p)
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result;
     PlankIffFileWriterRef iff;
-    PlankFourCharCode desc, data;
+    const char* desc;
+    const char* data;
     PlankUI formatFlags;
     
     result = PlankResult_OK;
     iff    = (PlankIffFileWriterRef)p->peer;
-    desc   = pl_FourCharCode ("desc");
-    data   = pl_FourCharCode ("data");
+    desc   = "desc";
+    data   = "data";
     
     if ((result = pl_IffFileWriter_SeekChunk (iff, 0, desc, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
@@ -1358,10 +1365,10 @@ exit:
 
 PlankResult pl_AudioFileWriter_CAF_WriteFrames (PlankAudioFileWriterRef p, const int numFrames, const void* data)
 {
-    return pl_AudioFileWriter_Iff_WriteFrames (p, pl_FourCharCode ("data"), numFrames, data);
+    return pl_AudioFileWriter_Iff_WriteFrames (p, "data", numFrames, data);
 }
 
-PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const PlankFourCharCode chunkID, const int numFrames, const void* data)
+PlankResult pl_AudioFileWriter_Iff_WriteFrames (PlankAudioFileWriterRef p, const char* chunkID, const int numFrames, const void* data)
 {
     PlankUC buffer[PLANKAUDIOFILEWRITER_BUFFERLENGTH];
     PlankResult result = PlankResult_OK;

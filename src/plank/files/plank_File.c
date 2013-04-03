@@ -1665,7 +1665,7 @@ PlankResult pl_File_WriteFourCharCode (PlankFileRef p, PlankFourCharCode data)
     return pl_File_Write (p, &data, sizeof (data));
 }
 
-PlankResult pl_File_WriteGUID (PlankFileRef p, PlankGUIDRef guid)
+PlankResult pl_File_WriteGUID (PlankFileRef p, const PlankGUID* guid)
 {
     return pl_File_Write (p, guid, sizeof (PlankGUID));
 }
