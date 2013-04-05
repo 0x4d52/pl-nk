@@ -133,12 +133,17 @@ PlankResult pl_IffFileReader_SetEndian (PlankIffFileReaderRef p, const PlankB is
                       -  0 : Specifies the start of the file (although this will be offset to the first chunk).
                       - -1 : Specifies the current file position.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankLL startPosition, const PlankFourCharCode chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos);
+PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankLL startPosition, const char* chunkID, PlankLL* chunkLength, PlankLL* chunkDataPos);
 
 /**
  @param p The <i>Plank IffFileReader</i> object.
+ @param chunkIDstr The chunk ID as astring can be returned here. This should point to a string capable of holding at least 37 characters. Use 0 to ignore.
+ @param chunkID The chunk ID can be returned here. Use 0 to ignore.
+ @param chunkLength The chunk length is returned here. Use 0 to ignore.
+ @param chunkEnd The chunk end is returned here. Use 0 to ignore.
+ @param chunkPos The chunk data position is returned here. Use 0 to ignore.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, PlankFourCharCode* chunkID, PlankLL* chunkLength, PlankLL* chunkEnd, PlankLL* posOut);
+PlankResult pl_IffFileReader_ParseChunkHeader (PlankIffFileReaderRef p, char* chunkIDstr, PlankIffID* chunkID,  PlankLL* chunkLength, PlankLL* chunkEnd, PlankLL* chunkPos);
 
 /** @} */
 

@@ -149,7 +149,6 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.lengthSize         = 4;
             p->common.headerInfo.mainEndOffset      = 8;
             p->common.headerInfo.headerLength       = 4 + 4;
-//            p->common.headerInfo.mainLengthOffset   = 0;
             p->common.headerInfo.alignment          = 2;
         }
         else if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("FORM"))
@@ -159,7 +158,6 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.lengthSize         = 4;
             p->common.headerInfo.mainEndOffset      = 8;
             p->common.headerInfo.headerLength       = 4 + 4;
-//            p->common.headerInfo.mainLengthOffset   = 0;
             p->common.headerInfo.alignment          = 2;
         }
         else if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("caff"))
@@ -169,7 +167,6 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.lengthSize         = 8;
             p->common.headerInfo.mainEndOffset      = 8;
             p->common.headerInfo.headerLength       = 4 + 4;
-//            p->common.headerInfo.mainLengthOffset   = 0;
             p->common.headerInfo.alignment          = 2;
         }
         else
@@ -179,7 +176,6 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.lengthSize         = 4;
             p->common.headerInfo.mainEndOffset      = 8;
             p->common.headerInfo.headerLength       = 4 + 4;
-//            p->common.headerInfo.mainLengthOffset   = 0;
             p->common.headerInfo.alignment          = 2;
         }
     }
@@ -197,7 +193,6 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.lengthSize         = 8;
             p->common.headerInfo.mainEndOffset      = 0;
             p->common.headerInfo.headerLength       = 8 + 16;
-//            p->common.headerInfo.mainLengthOffset   = 0;
             p->common.headerInfo.alignment          = 8;
         }
         else
@@ -207,7 +202,6 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.lengthSize         = 8;
             p->common.headerInfo.mainEndOffset      = 0;
             p->common.headerInfo.headerLength       = 8 + 16;
-//            p->common.headerInfo.mainLengthOffset   = 0;
             p->common.headerInfo.alignment          = 8;
         }
     }
