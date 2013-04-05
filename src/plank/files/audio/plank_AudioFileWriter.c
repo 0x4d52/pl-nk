@@ -849,7 +849,7 @@ PlankResult pl_AudioFileWriter_WAVRF64_WriteHeader (PlankAudioFileWriterRef p)
     ds64 = "ds64";
     RF64 = "RF64";
     data = "data";
-    pl_IffFileWriter_ChunkIDString (iff, &iff->common.headerInfo.junkID, JUNK);
+    pl_IffFile_ChunkIDString ((PlankIffFileRef)iff, &iff->common.headerInfo.junkID, JUNK);
     
     // update to RF64 header
     iff->common.headerInfo.mainID.fcc = pl_FourCharCode (RF64);
