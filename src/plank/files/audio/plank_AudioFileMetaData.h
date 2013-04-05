@@ -123,12 +123,14 @@ PlankResult pl_AudioFileMetaData_SetAlbum (PlankAudioFileMetaDataRef p, const ch
 PlankResult pl_AudioFileMetaData_SetGenre (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetLyrics (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetVendor (PlankAudioFileMetaDataRef p, const char* text);
+PlankResult pl_AudioFileMetaData_SetISRC (PlankAudioFileMetaDataRef p, const char* text);
 
 const char* pl_AudioFileMetaData_GetTitle (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetAlbum (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetGenre (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetLyrics (PlankAudioFileMetaDataRef p);
 const char* pl_AudioFileMetaData_GetVendor (PlankAudioFileMetaDataRef p);
+const char* pl_AudioFileMetaData_GetISRC (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_SetArt (PlankAudioFileMetaDataRef p, PlankConstantP data, const PlankL size);
 PlankResult pl_AudioFileMetaData_GetArt (PlankAudioFileMetaDataRef p, PlankConstantP* data, PlankL* size);
@@ -222,7 +224,8 @@ typedef struct PlankAudioFileMetaData
     PlankDynamicArray lyrics;
     
     PlankDynamicArray vendor;
-    
+    PlankDynamicArray isrc;
+
     PlankDynamicArray art;
     
     PlankI year;

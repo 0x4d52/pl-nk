@@ -111,7 +111,6 @@ PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const ch
     return pl_DynamicArray_SetAsText (&p->label, label);
 }
 
-
 PlankResult pl_AudioFileCuePoint_SetComment (PlankAudioFileCuePointRef p, const char* comment)
 {
     return pl_DynamicArray_SetAsText (&p->comment, comment);

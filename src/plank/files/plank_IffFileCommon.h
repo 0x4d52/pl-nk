@@ -57,8 +57,6 @@ typedef union PlankIffID
     PlankGUID guid;
 } PlankIffID;
 
-
-
 typedef struct PlankIffFileHeaderInfo
 {
     PlankIffID mainID;
@@ -70,7 +68,7 @@ typedef struct PlankIffFileHeaderInfo
     PlankUC lengthSize;
     PlankUC idType;
     PlankUC headerLength;
-    PlankUC mainLengthOffset; // W64 inlcudes the main GUID and length !
+    PlankUC reserved3;
     PlankUC mainEndOffset;
     PlankUC initMainLength;
     PlankUC alignment;
@@ -78,6 +76,12 @@ typedef struct PlankIffFileHeaderInfo
     
 } PlankIffFileHeaderInfo;
 
+typedef struct PlankIffFile* PlankIffFileRef;
+typedef struct PlankIffFile
+{
+    PlankFile file;
+    PlankIffFileHeaderInfo headerInfo;
+} PlankIffFile;
 
 
 

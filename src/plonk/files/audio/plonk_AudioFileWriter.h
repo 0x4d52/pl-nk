@@ -113,6 +113,10 @@ public:
         {
             format = AudioFile::FormatCAF;
         }
+        else if (ext.equalsIgnoreCase ("w64"))
+        {
+            format = AudioFile::FormatW64;
+        }
             
         if (!internal->initPCM (format, numChannels, sampleRate, bufferSize))
         {
@@ -356,6 +360,10 @@ public:
         else if (format == AudioFile::FormatCAF)
         {
             if ((result = pl_AudioFileWriter_SetFormatCAF (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat, PLANK_LITTLEENDIAN)) != PlankResult_OK) goto exit;;
+        }
+        else if (format == AudioFile::FormatW64)
+        {
+            if ((result = pl_AudioFileWriter_SetFormatW64 (&peer, sizeof (SampleType) * 8, numChannels, sampleRate, this->isFloat)) != PlankResult_OK) goto exit;;
         }
       
     exit:

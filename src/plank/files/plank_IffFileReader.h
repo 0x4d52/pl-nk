@@ -147,8 +147,10 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankIffFileReader
 {
-    PlankFile file;
-    PlankIffFileHeaderInfo headerInfo;
+//    PlankFile file;
+//    PlankIffFileHeaderInfo headerInfo;
+
+    PlankIffFile common;
     
 } PlankIffFileReader;
 #endif

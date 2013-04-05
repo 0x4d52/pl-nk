@@ -50,13 +50,19 @@ BEGIN_PLONK_NAMESPACE
 class IOSUtilities
 {
 public:
+    /** @deprecated Use the FilePath class instead. */
     enum Locations
     {
-        Bundle,		///< In the \<MyApp\>.app/ bundle, files can be placed here during compilation in Xcode.
+        Bundle,		///< In the \<MyApp\>.app/ bundle, files can be placed here during compilation in Xcode. 
         Documents,	///< The application's Documents directory, files here will be backed up during iTunes sync.
         Temporary	///< The application's tmp directory, NB this is cleared when the device is restarted.
     };
     
+    /** @deprecated Use the FilePath class instead.
+     IOSUtilities::pathInDirectory(Bundle, filename) becomes FilePath::system(FilePath::App).child(filename).fullpath()
+     IOSUtilities::pathInDirectory(Documents, filename) becomes FilePath::system(FilePath::AppData).child(filename).fullpath()
+     IOSUtilities::pathInDirectory(Temporary, filename) becomes FilePath::system(FilePath::Temp).child(filename).fullpath()
+     */
     static Text pathInDirectory (Locations location, const char *filename) throw();
 };
 
