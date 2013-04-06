@@ -58,29 +58,31 @@ typedef PlankResult (*PlankAudioFileReaderGetFramePositionFunction)(PlankAudioFi
 #pragma mark Private Function Declarations
 #endif
 
-PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankB readMetaData);
+
+PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p);
-PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 
-PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_AIFF_ParseMetaData (PlankAudioFileReaderRef p);
-PlankResult pl_AudioFileReader_AIFF_ParseData(PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_AIFF_ParseData(PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 
-PlankResult pl_AudioFileReader_AIFC_ParseVersion (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
-PlankResult pl_AudioFileReader_AIFC_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_AIFC_ParseVersion (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_AIFC_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_AIFF_ParseMetaData (PlankAudioFileReaderRef p);
-PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 
-PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p);
-PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 
-PlankResult pl_AudioFileReader_W64_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_W64_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 PlankResult pl_AudioFileReader_W64_ParseMetaData (PlankAudioFileReaderRef p);
-PlankResult pl_AudioFileReader_W64_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos);
+PlankResult pl_AudioFileReader_W64_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos);
 
 PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p);
-PlankResult pl_AudioFileReader_Iff_ParseMain  (PlankAudioFileReaderRef p, const PlankFourCharCode mainID, const PlankFourCharCode formatID);
+PlankResult pl_AudioFileReader_Iff_ParseMain  (PlankAudioFileReaderRef p, const PlankIffID* mainID, const PlankIffID* formatID);
 PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 PlankResult pl_AudioFileReader_Iff_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Iff_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
@@ -218,14 +220,20 @@ PlankResult pl_AudioFileReader_OpenWithMetaData (PlankAudioFileReaderRef p, cons
     return pl_AudioFileReader_OpenInternal (p, filepath, PLANK_TRUE);
 }
 
-PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankB readMetaData)
+PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, const char* filepath, PlankFileRef file, const PlankB readMetaData)
 {
     PlankResult result;
-    PlankFourCharCode mainID;
+    PlankIffID mainID;
     PlankIffFileReaderRef iff;
         
     result = PlankResult_OK;
     iff = PLANK_NULL;
+    
+    if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
     
     if ((result = pl_AudioFileReader_DeInit (p)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileReader_Init (p)) != PlankResult_OK) goto exit;
@@ -244,55 +252,79 @@ PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const ch
     p->formatInfo.format = PLANKAUDIOFILE_FORMAT_UNKNOWNIFF;
     
     // open the file as an IFF
-    if ((result = pl_IffFileReader_Open (iff, filepath)) != PlankResult_OK) goto exit;
-
+    if (filepath)
+    {
+        if ((result = pl_IffFileReader_Open (iff, filepath)) != PlankResult_OK) goto exit;
+    }
+    else if (file)
+    {
+        if ((result = pl_IffFileReader_OpenWithFile (iff, file)) != PlankResult_OK) goto exit;
+    }
+    
     // deterimine the file format, could be IFF or Ogg
     if ((result = pl_IffFileReader_GetMainID (iff, &mainID)) != PlankResult_OK) goto exit;
 
-    if ((mainID == pl_FourCharCode ("RIFF")) ||     // Riff
-        (mainID == pl_FourCharCode ("FORM")) ||     // Iff
-        (mainID == pl_FourCharCode ("caff")))       // CAF
+    if (iff->common.headerInfo.idType == PLANKIFFFILE_ID_FCC)
     {
-        if ((result = pl_AudioFileReader_Iff_Open (p)) != PlankResult_OK) goto exit;
-    }
-    else if (mainID == pl_FourCharCode ("OggS")) //Ogg this needs to handle any Ogg e.g., Vorbis or Opus
-    {
-        // close the Iff file and start again
-        if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
-        
-        p->peer = PLANK_NULL;
-        p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
-                
-#if PLANK_OGGVORBIS    
-        if (p->peer == PLANK_NULL)
+        if ((mainID.fcc == pl_FourCharCode ("RIFF")) ||     // Riff
+            (mainID.fcc == pl_FourCharCode ("FORM")) ||     // Iff
+            (mainID.fcc == pl_FourCharCode ("caff")))       // CAF
         {
-            result = pl_AudioFileReader_OggVorbis_Open (p, filepath);
-            
-            if (result != PlankResult_OK)
-            {
-                pl_AudioFileReader_OggVorbis_Close (p);
-            
-                p->peer = PLANK_NULL;
-                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
-            }
+            if ((result = pl_AudioFileReader_Iff_Open (p)) != PlankResult_OK) goto exit;
         }
+        else if (mainID.fcc == pl_FourCharCode ("OggS")) //Ogg this needs to handle any Ogg e.g., Vorbis or Opus
+        {
+            // close the Iff file and start again
+            if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
+            
+            p->peer = PLANK_NULL;
+            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+                    
+#if PLANK_OGGVORBIS    
+            if (p->peer == PLANK_NULL)
+            {
+                if (filepath)
+                    result = pl_AudioFileReader_OggVorbis_Open (p, filepath);
+                else if (file)
+                    result = pl_AudioFileReader_OggVorbis_OpenWithFile (p, file);
+                
+                
+                if (result != PlankResult_OK)
+                {
+                    pl_AudioFileReader_OggVorbis_Close (p);
+                
+                    p->peer = PLANK_NULL;
+                    p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+                }
+            }
 #endif
 #if PLANK_OPUS
-        if (p->peer == PLANK_NULL)
-        {
-            result = pl_AudioFileReader_Opus_Open (p, filepath);
-            
-            if (result != PlankResult_OK)
+            if (p->peer == PLANK_NULL)
             {
-                pl_AudioFileReader_Opus_Close (p);
+                if (filepath)
+                    result = pl_AudioFileReader_Opus_Open (p, filepath);
+                else if (file)
+                    result = pl_AudioFileReader_Opus_OpenWithFile (p, file);
                 
-                p->peer = PLANK_NULL;
-                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+                if (result != PlankResult_OK)
+                {
+                    pl_AudioFileReader_Opus_Close (p);
+                    
+                    p->peer = PLANK_NULL;
+                    p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+                }
             }
-        }
 #endif
+        }
     }
-    else 
+    else if (iff->common.headerInfo.idType == PLANKIFFFILE_ID_GUID)
+    {
+        if (pl_GUID_EqualWithString (&mainID.guid, PLANKAUDIOFILE_W64_RIFF_ID))
+        {
+            if ((result = pl_AudioFileReader_Iff_Open (p)) != PlankResult_OK) goto exit;
+        }
+    }
+    else
     {
         if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
 
@@ -306,93 +338,101 @@ exit:
     return result;
 }
 
+PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const char* filepath, const PlankB readMetaData)
+{
+    return pl_AudioFileReader_OpenInternalInternal (p, filepath, 0, readMetaData);
+}
+
 PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankB readMetaData)
 {
-    PlankResult result;
-    PlankFourCharCode mainID;
-    PlankIffFileReaderRef iff;
-    
-    result = PlankResult_OK;
-    iff = PLANK_NULL;
-    
-    if ((result = pl_AudioFileReader_DeInit (p)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileReader_Init (p)) != PlankResult_OK) goto exit;
-    
-    if (readMetaData)
-        p->metaData = pl_AudioFileMetaData_CreateAndInit();
-    
-    if ((iff = pl_IffFileReader_CreateAndInit()) == PLANK_NULL)
-    {
-        result = PlankResult_MemoryError;
-        goto exit;
-    }
-    
-    // so the iff reader gets destroyed it we hit an error further down but before we're finished
-    p->peer = iff;
-    p->formatInfo.format = PLANKAUDIOFILE_FORMAT_UNKNOWNIFF;
-    
-    // open the file as an IFF
-    if ((result = pl_IffFileReader_OpenWithFile (iff, file)) != PlankResult_OK) goto exit;
-    
-    // deterimine the file format, could be IFF or Ogg
-    if ((result = pl_IffFileReader_GetMainID (iff, &mainID)) != PlankResult_OK) goto exit;
-    
-    if ((mainID == pl_FourCharCode ("RIFF")) ||     // Riff
-        (mainID == pl_FourCharCode ("FORM")) ||     // Iff
-        (mainID == pl_FourCharCode ("caff")))       // CAF
-    {
-        if ((result = pl_AudioFileReader_Iff_Open (p)) != PlankResult_OK) goto exit;
-    }
-    else if (mainID == pl_FourCharCode ("OggS")) //Ogg this needs to handle any Ogg e.g., Vorbis or Opus
-    {
-        // close the Iff file and start again
-        if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
-        
-        p->peer = PLANK_NULL;
-        p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
-        
-#if PLANK_OGGVORBIS
-        if (p->peer == PLANK_NULL)
-        {
-            result = pl_AudioFileReader_OggVorbis_OpenWithFile (p, file);
-            
-            if (result != PlankResult_OK)
-            {
-                pl_AudioFileReader_OggVorbis_Close (p);
-                
-                p->peer = PLANK_NULL;
-                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
-            }
-        }
-#endif
-#if PLANK_OPUS
-        if (p->peer == PLANK_NULL)
-        {
-            result = pl_AudioFileReader_Opus_OpenWithFile (p, file);
-            
-            if (result != PlankResult_OK)
-            {
-                pl_AudioFileReader_Opus_Close (p);
-                
-                p->peer = PLANK_NULL;
-                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
-            }
-        }
-#endif
-    }
-    else
-    {
-        if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
-        
-        p->peer = PLANK_NULL;
-        p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
-        
-        result = PlankResult_AudioFileInavlidType;
-    }
-    
-exit:
-    return result;    
+    return pl_AudioFileReader_OpenInternalInternal (p, 0, file, readMetaData);
 }
+
+//    PlankResult result;
+////    PlankFourCharCode mainID;
+////    PlankIffFileReaderRef iff;
+//    
+//    result = PlankResult_OK;
+////    iff = PLANK_NULL;
+////    
+////    if ((result = pl_AudioFileReader_DeInit (p)) != PlankResult_OK) goto exit;
+////    if ((result = pl_AudioFileReader_Init (p)) != PlankResult_OK) goto exit;
+////    
+////    if (readMetaData)
+////        p->metaData = pl_AudioFileMetaData_CreateAndInit();
+////    
+////    if ((iff = pl_IffFileReader_CreateAndInit()) == PLANK_NULL)
+////    {
+////        result = PlankResult_MemoryError;
+////        goto exit;
+////    }
+////    
+////    // so the iff reader gets destroyed it we hit an error further down but before we're finished
+////    p->peer = iff;
+////    p->formatInfo.format = PLANKAUDIOFILE_FORMAT_UNKNOWNIFF;
+////    
+////    // open the file as an IFF
+////    if ((result = pl_IffFileReader_OpenWithFile (iff, file)) != PlankResult_OK) goto exit;
+////    
+////    // deterimine the file format, could be IFF or Ogg
+////    if ((result = pl_IffFileReader_GetMainID (iff, &mainID)) != PlankResult_OK) goto exit;
+////    
+////    if ((mainID == pl_FourCharCode ("RIFF")) ||     // Riff
+////        (mainID == pl_FourCharCode ("FORM")) ||     // Iff
+////        (mainID == pl_FourCharCode ("caff")))       // CAF
+////    {
+////        if ((result = pl_AudioFileReader_Iff_Open (p)) != PlankResult_OK) goto exit;
+////    }
+////    else if (mainID == pl_FourCharCode ("OggS")) //Ogg this needs to handle any Ogg e.g., Vorbis or Opus
+////    {
+////        // close the Iff file and start again
+////        if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
+////        
+////        p->peer = PLANK_NULL;
+////        p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+////        
+////#if PLANK_OGGVORBIS
+////        if (p->peer == PLANK_NULL)
+////        {
+////            result = pl_AudioFileReader_OggVorbis_OpenWithFile (p, file);
+////            
+////            if (result != PlankResult_OK)
+////            {
+////                pl_AudioFileReader_OggVorbis_Close (p);
+////                
+////                p->peer = PLANK_NULL;
+////                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+////            }
+////        }
+////#endif
+////#if PLANK_OPUS
+////        if (p->peer == PLANK_NULL)
+////        {
+////            result = pl_AudioFileReader_Opus_OpenWithFile (p, file);
+////            
+////            if (result != PlankResult_OK)
+////            {
+////                pl_AudioFileReader_Opus_Close (p);
+////                
+////                p->peer = PLANK_NULL;
+////                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+////            }
+////        }
+////#endif
+////    }
+////    else
+////    {
+////        if ((result = pl_IffFileReader_Destroy (iff)) != PlankResult_OK) goto exit;
+////        
+////        p->peer = PLANK_NULL;
+////        p->formatInfo.format = PLANKAUDIOFILE_FORMAT_INVALID;
+////        
+////        result = PlankResult_AudioFileInavlidType;
+////    }
+////    
+////exit:
+//    return result;
+//}
 
 PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
 {
@@ -571,7 +611,7 @@ static void pl_AudioFileWriter_WAVEXTChannelMaskToMap (PlankAudioFileFormatInfo*
     }
 }
 
-PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_WAV_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankGUID ext;
     PlankResult result = PlankResult_OK;
@@ -860,7 +900,8 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
-    PlankFourCharCode typeID, adtlChunkID;
+    PlankFourCharCode typeID;
+    PlankIffID adtlChunkID;
     PlankUI cueID, textLength, sampleLength, purpose;
     PlankLL pos, adtlChunkLength, adtlChunkEnd;
     PlankUS country, language, dialect, codePage;
@@ -882,9 +923,9 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
     
     while ((pos < chunkEnd) && (pl_File_IsEOF ((PlankFileRef)iff) == PLANK_FALSE))
     {
-        if ((result = pl_IffFileReader_ParseChunkHeader (iff, &adtlChunkID, &adtlChunkLength, &adtlChunkEnd, &pos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_ParseChunkHeader (iff, 0, &adtlChunkID, &adtlChunkLength, &adtlChunkEnd, &pos)) != PlankResult_OK) goto exit;
         
-        if (adtlChunkID == pl_FourCharCode ("labl"))
+        if (adtlChunkID.fcc == pl_FourCharCode ("labl"))
         {
             // label or title
             
@@ -901,7 +942,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
                 if ((result = pl_File_Read ((PlankFileRef)iff, pl_AudioFileCuePoint_GetLabelWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
             }
         }
-        if (adtlChunkID == pl_FourCharCode ("note"))
+        if (adtlChunkID.fcc == pl_FourCharCode ("note"))
         {
             // comment
             
@@ -918,7 +959,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderR
                 if ((result = pl_File_Read ((PlankFileRef)iff, pl_AudioFileCuePoint_GetCommentWritable (cuePointRef), textLength, PLANK_NULL)) != PlankResult_OK) goto exit;
             }
         }
-        else if (adtlChunkID == pl_FourCharCode ("ltxt"))
+        else if (adtlChunkID.fcc == pl_FourCharCode ("ltxt"))
         {
             // labelled text chunk, add this as a region, removing the associated cue point from the cue array
             
@@ -975,14 +1016,14 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
     PlankLL readChunkLength, readChunkEnd, mainEnd, pos;
-    PlankFourCharCode readChunkID;
+    PlankIffID readChunkID;
     PlankIffFileReaderRef iff;
     PlankDynamicArrayRef block;
     PlankC* data;
     int bytesRead;
 
     iff = (PlankIffFileReaderRef)p->peer;
-    pos = iff->common.headerInfo.mainEndOffset + iff->common.headerInfo.initMainLength;
+    pos = iff->common.headerInfo.mainHeaderEnd;
     
     if ((result = pl_AudioFileMetaData_SetSource (p->metaData, PLANKAUDIOFILE_FORMAT_WAV)) != PlankResult_OK) goto exit;
     
@@ -991,36 +1032,36 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
     
     while ((pos < mainEnd) && (pl_File_IsEOF ((PlankFileRef)iff) == PLANK_FALSE))
     {
-        if ((result = pl_IffFileReader_ParseChunkHeader (iff, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_ParseChunkHeader (iff, 0, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
         
-        if ((readChunkID == pl_FourCharCode ("fmt ")) ||
-            (readChunkID == pl_FourCharCode ("data")))
+        if ((readChunkID.fcc == pl_FourCharCode ("fmt ")) ||
+            (readChunkID.fcc == pl_FourCharCode ("data")))
         {
             goto next;
         }
-        else if (readChunkID == pl_FourCharCode ("bext"))
+        else if (readChunkID.fcc == pl_FourCharCode ("bext"))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_bext (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID == pl_FourCharCode ("smpl"))
+        else if (readChunkID.fcc == pl_FourCharCode ("smpl"))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_smpl (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if ((readChunkID == pl_FourCharCode ("inst")) ||
-                 (readChunkID == pl_FourCharCode ("INST")))
+        else if ((readChunkID.fcc == pl_FourCharCode ("inst")) ||
+                 (readChunkID.fcc == pl_FourCharCode ("INST")))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_inst (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if (readChunkID == pl_FourCharCode ("cue "))
+        else if (readChunkID.fcc == pl_FourCharCode ("cue "))
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_cue (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else if ((readChunkID == pl_FourCharCode ("list")) ||
-                 (readChunkID == pl_FourCharCode ("LIST")) )
+        else if ((readChunkID.fcc == pl_FourCharCode ("list")) ||
+                 (readChunkID.fcc == pl_FourCharCode ("LIST")) )
         {
             if ((result = pl_AudioFileReader_WAV_ParseChunk_LIST (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
-        else
+        else if (readChunkID.fcc != iff->common.headerInfo.junkID.fcc)
         {
             block = pl_DynamicArray_Create();
             
@@ -1030,7 +1071,7 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
                 
                 data = (PlankC*)pl_DynamicArray_GetArray (block);
                 
-                *(PlankFourCharCode*)data = readChunkID;
+                *(PlankFourCharCode*)data = readChunkID.fcc;
                 data += 4;
                 *(PlankUI*)data = readChunkLength;
                 data += 4;
@@ -1049,7 +1090,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
         
@@ -1071,7 +1112,7 @@ PlankResult pl_AudioFileReader_WAV_ParseData (PlankAudioFileReaderRef p, const P
 #pragma mark AIFF Functions
 #endif
 
-PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_AIFF_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
     PlankS numChannels;
@@ -1108,7 +1149,7 @@ PlankResult pl_AudioFileReader_AIFF_ParseMetaData (PlankAudioFileReaderRef p)
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_AIFF_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_AIFF_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
     PlankUI offset, blockSize;
@@ -1132,7 +1173,7 @@ exit:
 #pragma mark AIFC Functions
 #endif
 
-PlankResult pl_AudioFileReader_AIFC_ParseVersion (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_AIFC_ParseVersion (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
     PlankUI version;
@@ -1156,7 +1197,7 @@ PlankResult pl_AudioFileReader_AIFC_ParseMetaData (PlankAudioFileReaderRef p)
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_AIFC_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_AIFC_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
     PlankFourCharCode compressionID;
@@ -1204,7 +1245,7 @@ exit:
     return result;
 }
 
-PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     return pl_AudioFileReader_AIFF_ParseData (p, chunkLength, chunkDataPos);
 }
@@ -1214,7 +1255,7 @@ PlankResult pl_AudioFileReader_AIFC_ParseData (PlankAudioFileReaderRef p, const 
 #pragma mark CAF Functions
 #endif
 
-PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_CAF_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankResult result = PlankResult_OK;
     PlankFourCharCode formatID;
@@ -1286,7 +1327,7 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
     return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     PlankResult result;
     PlankUI numEdits;
@@ -1296,15 +1337,22 @@ PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const P
     
     if ((result = pl_File_ReadUI ((PlankFileRef)p->peer, &numEdits)) != PlankResult_OK) goto exit;
     
-    p->dataPosition = chunkDataPos + 4; // plus the numEdits field
-    audioDataLength = chunkLength  - 4; // less the numEdits field
+    p->dataPosition = chunkDataPos + 4;                             // plus the numEdits field
+    audioDataLength = (chunkLength == -1) ? -1 : chunkLength  - 4;  // less the numEdits field
     
     if (p->formatInfo.bytesPerFrame > 0)
     {
-        p->numFrames = audioDataLength / p->formatInfo.bytesPerFrame;
-    
-        if ((chunkLength % p->formatInfo.bytesPerFrame) != 0)
-            result = PlankResult_AudioFileDataChunkInvalid;
+        if (audioDataLength == -1)
+        {
+            p->numFrames = -1;
+        }
+        else
+        {
+            p->numFrames = audioDataLength / p->formatInfo.bytesPerFrame;
+        
+            if ((chunkLength % p->formatInfo.bytesPerFrame) != 0)
+                result = PlankResult_AudioFileDataChunkInvalid;
+        }
     }
                         
 exit:
@@ -1316,19 +1364,32 @@ exit:
 #pragma mark W64 Functions
 #endif
 
-PlankResult pl_AudioFileReader_W64_ParseFormat (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_W64_ParseFormat (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
     return pl_AudioFileReader_WAV_ParseFormat (p, chunkLength, chunkDataPos);
 }
 
 PlankResult pl_AudioFileReader_W64_ParseMetaData (PlankAudioFileReaderRef p)
 {
-    return PlankResult_UnknownError;
+    (void)p;
+    return PlankResult_OK;
 }
 
-PlankResult pl_AudioFileReader_W64_ParseData (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkDataPos)
+PlankResult pl_AudioFileReader_W64_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
 {
-    return PlankResult_UnknownError;
+    PlankResult result = PlankResult_OK;
+    
+    p->dataPosition = chunkDataPos;
+    
+    if (p->formatInfo.bytesPerFrame > 0)
+    {
+        p->numFrames = chunkLength / p->formatInfo.bytesPerFrame;
+        
+        if ((chunkLength % p->formatInfo.bytesPerFrame) != 0)
+            result = PlankResult_AudioFileDataChunkInvalid;
+    }
+    
+    return result;
 }
 
 // -- Generic Iff Functions -- /////////////////////////////////////////////////
@@ -1341,19 +1402,19 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p)
     PlankResult result;
     PlankLL chunkLength, chunkDataPos;
     PlankIffFileReaderRef iff;
-    PlankFourCharCode mainID, formatID;
+    PlankIffID mainID, formatID;
     
     iff = (PlankIffFileReaderRef)p->peer;
     
     // deterimine the IFF file format, could be IFF or RIFF
     if ((result = pl_IffFileReader_GetMainID (iff, &mainID)) != PlankResult_OK) goto exit;
     if ((result = pl_IffFileReader_GetFormatID (iff, &formatID)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileReader_Iff_ParseMain (p, mainID, formatID)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileReader_Iff_ParseMain (p, &mainID, &formatID)) != PlankResult_OK) goto exit;
     
     // parse based on the format
     if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_WAV)
     {
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("fmt "), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "fmt ", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_WAV_ParseFormat (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
         
         if (p->metaData)
@@ -1364,12 +1425,12 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p)
                 goto exit;
         }
         
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("data"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "data", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_WAV_ParseData (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
     }
     else if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_AIFF)
     {
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("COMM"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "COMM", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_AIFF_ParseFormat (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
         
         p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_PCM_BIGENDIAN;
@@ -1379,15 +1440,15 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p)
             if ((result = pl_AudioFileReader_AIFF_ParseMetaData (p)) != PlankResult_OK) goto exit;
         }
         
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("SSND"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "SSND", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_AIFF_ParseData (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
     }
     else if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_AIFC)
     {
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("FVER"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "FVER", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_AIFC_ParseVersion (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
         
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("COMM"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "COMM", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_AIFC_ParseFormat (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
         
         if (p->metaData)
@@ -1395,12 +1456,12 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p)
             if ((result = pl_AudioFileReader_AIFC_ParseMetaData (p)) != PlankResult_OK) goto exit;
         }
         
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("SSND"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "SSND", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_AIFC_ParseData (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;        
     }
     else if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_CAF)
     {
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("desc"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "desc", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_CAF_ParseFormat (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
         
         if (p->metaData)
@@ -1411,8 +1472,24 @@ PlankResult pl_AudioFileReader_Iff_Open (PlankAudioFileReaderRef p)
                 goto exit;
         }
         
-        if ((result = pl_IffFileReader_SeekChunk (iff, 0, pl_FourCharCode ("data"), &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, "data", &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
         if ((result = pl_AudioFileReader_CAF_ParseData (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
+    }
+    else if (p->formatInfo.format == PLANKAUDIOFILE_FORMAT_W64)
+    {
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, PLANKAUDIOFILE_W64_FMT_ID, &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileReader_W64_ParseFormat (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
+        
+        if (p->metaData)
+        {
+            result = pl_AudioFileReader_W64_ParseMetaData (p);
+            
+            if ((result != PlankResult_OK) && result != PlankResult_FileEOF)
+                goto exit;
+        }
+        
+        if ((result = pl_IffFileReader_SeekChunk (iff, 0, PLANKAUDIOFILE_W64_DATA_ID, &chunkLength, &chunkDataPos)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileReader_W64_ParseData (p, chunkLength, chunkDataPos)) != PlankResult_OK) goto exit;
     }
     else
     {
@@ -1431,42 +1508,59 @@ exit:
 }
 
 PlankResult pl_AudioFileReader_Iff_ParseMain  (PlankAudioFileReaderRef p, 
-                                               const PlankFourCharCode mainID, 
-                                               const PlankFourCharCode formatID)
+                                               const PlankIffID* mainID,
+                                               const PlankIffID* formatID)
 {        
     PlankIffFileReader* iff = PLANK_NULL;
     PlankB isBigEndian = PLANK_FALSE;
     
     iff = (PlankIffFileReader*)p->peer;
     
-    if (mainID == pl_FourCharCode ("RIFF"))
+    if (iff->common.headerInfo.idType == PLANKIFFFILE_ID_FCC)
     {
-        isBigEndian = PLANK_FALSE;
-        
-        if (formatID == pl_FourCharCode ("WAVE"))
+        if (mainID->fcc == pl_FourCharCode ("RIFF"))
         {
-            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_WAV;
+            isBigEndian = PLANK_FALSE;
+            
+            if (formatID->fcc == pl_FourCharCode ("WAVE"))
+            {
+                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_WAV;
+            }
+            else goto exit;
         }
-        else goto exit;
+        else if (mainID->fcc == pl_FourCharCode ("FORM"))
+        {
+            isBigEndian = PLANK_TRUE;
+            
+            if (formatID->fcc == pl_FourCharCode ("AIFF"))
+            {
+                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFF;
+            }
+            else if (formatID->fcc == pl_FourCharCode ("AIFC"))
+            {
+                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFC;
+            }
+            else goto exit;
+        }
+        else if (mainID->fcc == pl_FourCharCode ("caff"))
+        {
+            isBigEndian = PLANK_TRUE;
+            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_CAF;
+        }
     }
-    else if (mainID == pl_FourCharCode ("FORM"))
+    else if (iff->common.headerInfo.idType == PLANKIFFFILE_ID_GUID)
     {
-        isBigEndian = PLANK_TRUE;
+        if (pl_GUID_EqualWithString (&mainID->guid, PLANKAUDIOFILE_W64_RIFF_ID))
+        {
+            isBigEndian = PLANK_FALSE;
+            
+            if (pl_GUID_EqualWithString (&formatID->guid, PLANKAUDIOFILE_W64_WAVE_ID))
+            {
+                p->formatInfo.format = PLANKAUDIOFILE_FORMAT_W64;
+            }
+            else goto exit;
+        }
         
-        if (formatID == pl_FourCharCode ("AIFF"))
-        {
-            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFF;
-        }
-        else if (formatID == pl_FourCharCode ("AIFC"))
-        {
-            p->formatInfo.format = PLANKAUDIOFILE_FORMAT_AIFC;
-        }
-        else goto exit;
-    }
-    else if (mainID == pl_FourCharCode ("caff"))
-    {
-        isBigEndian = PLANK_TRUE;
-        p->formatInfo.format = PLANKAUDIOFILE_FORMAT_CAF;
     }
     else goto exit;
     
@@ -1506,7 +1600,7 @@ PlankResult pl_AudioFileReader_Iff_ReadFrames (PlankAudioFileReaderRef p, const 
     
     endFrame = startFrame + numFrames;
     
-    framesToRead = (endFrame > p->numFrames) ? (int)(p->numFrames - startFrame) : (numFrames);
+    framesToRead = ((p->numFrames == -1) || (endFrame <= p->numFrames)) ? (numFrames) : (int)(p->numFrames - startFrame);
     bytesToRead = framesToRead * p->formatInfo.bytesPerFrame;
     
     if (bytesToRead > 0)

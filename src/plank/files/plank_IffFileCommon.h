@@ -69,7 +69,7 @@ typedef struct PlankIffFileHeaderInfo
     PlankUC idType;
     PlankUC headerLength;
     PlankUC reserved3;
-    PlankUC mainEndOffset;
+    PlankUC mainHeaderEnd;
     PlankUC initMainLength;
     PlankUC alignment;
     PlankUC reserved7;
@@ -122,9 +122,11 @@ static inline PlankResult pl_IffFile_ReadChunkLength (PlankIffFileRef p, PlankLL
         {
             case PLANKIFFFILE_ID_FCC:
                 result = pl_File_ReadLL (&p->file, length);
+                break;
             case PLANKIFFFILE_ID_GUID:
                 if ((result = pl_File_ReadLL (&p->file, length)) != PlankResult_OK) goto exit;
                 *length -= p->headerInfo.lengthSize + sizeof (PlankGUID); // includes the chunk header
+                break;
             default:
                 result = PlankResult_UnknownError;
         }

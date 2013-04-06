@@ -100,12 +100,12 @@ PlankResult pl_IffFileReader_Close (PlankIffFileReaderRef p);
 /** 
  @param p The <i>Plank IffFileReader</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_IffFileReader_GetMainID (PlankIffFileReaderRef p, PlankFourCharCode* mainID);
+PlankResult pl_IffFileReader_GetMainID (PlankIffFileReaderRef p, PlankIffID* mainID);
 
 /** 
  @param p The <i>Plank IffFileReader</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
-PlankResult pl_IffFileReader_GetFormatID (PlankIffFileReaderRef p, PlankFourCharCode* formatID);
+PlankResult pl_IffFileReader_GetFormatID (PlankIffFileReaderRef p, PlankIffID* formatID);
 
 /** 
  @param p The <i>Plank IffFileReader</i> object.

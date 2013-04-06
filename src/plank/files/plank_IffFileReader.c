@@ -104,8 +104,9 @@ PlankResult pl_IffFileReader_Init (PlankIffFileReaderRef p)
     
     pl_MemoryZero (p, sizeof (PlankIffFileReader));
     
-    p->common.headerInfo.lengthSize         = 4;  // default to 32 bit, CAF is 64
-    p->common.headerInfo.mainEndOffset      = 8;  // default 8 bytes
+    p->common.headerInfo.idType             = PLANKIFFFILE_ID_FCC;
+    p->common.headerInfo.lengthSize         = 4;   // default to 32 bit, CAF is 64
+    p->common.headerInfo.mainHeaderEnd      = 12;  // default 12 bytes
     p->common.headerInfo.initMainLength     = 4;
     p->common.headerInfo.alignment          = 2;
     p->common.headerInfo.headerLength       = 4 + 4;
@@ -172,13 +173,17 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
     
     if ((result = pl_File_ReadFourCharCode ((PlankFileRef)p, &p->common.headerInfo.mainID.fcc)) != PlankResult_OK) goto exit;
     
-    if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("caff"))
+    if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("OggS"))
+    {
+        goto exit;
+    }
+    else if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("caff"))
     {
         p->common.headerInfo.formatID.fcc       = 0;
         p->common.headerInfo.lengthSize         = 8;
-        p->common.headerInfo.mainEndOffset      = 8;
+        p->common.headerInfo.mainHeaderEnd      = 8;
         p->common.headerInfo.mainLength         = -1; // can't know with CAF
-        p->common.headerInfo.initMainLength     = 0;
+        p->common.headerInfo.initMainLength     = 0; // -1 ?
         p->common.headerInfo.junkID.fcc         = pl_FourCharCode ("free");
 
         if ((result = pl_File_ReadUS ((PlankFileRef)p, &vers)) != PlankResult_OK) goto exit;
@@ -191,6 +196,34 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
             result = PlankResult_UnknownError;
             goto exit;
         }        
+    }
+    else if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("riff"))
+    {
+        // this should be the start of the Wave64 RIFF GUID read - the remaining 96 bytes
+        result = pl_File_Read ((PlankFileRef)p,
+                               ((PlankUC*)(&p->common.headerInfo.mainID.guid)) + sizeof (PlankFourCharCode),
+                               sizeof (PlankGUID) - sizeof (PlankFourCharCode),
+                               0);
+        
+        if (result != PlankResult_OK)
+            goto exit;
+        
+        if (!pl_GUID_EqualWithString (&p->common.headerInfo.mainID.guid, PLANKIFFFILE_W64_RIFF_ID))
+        {
+            result = PlankResult_AudioFileInavlidType;
+            goto exit;
+        }
+        
+        if ((result = pl_File_ReadLL ((PlankFileRef)p, &p->common.headerInfo.mainLength)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadGUID ((PlankFileRef)p, &p->common.headerInfo.formatID.guid)) != PlankResult_OK) goto exit;
+
+        pl_GUID_InitChunkString (&p->common.headerInfo.junkID.guid, PLANKIFFFILE_W64_JUNK_ID);
+        p->common.headerInfo.initMainLength     = 16;
+        p->common.headerInfo.lengthSize         = 8;
+        p->common.headerInfo.mainHeaderEnd      = 16 + 8 + 16;
+        p->common.headerInfo.headerLength       = 8 + 16;
+        p->common.headerInfo.alignment          = 8;
+        p->common.headerInfo.idType             = PLANKIFFFILE_ID_GUID;
     }
     else
     {
@@ -206,7 +239,6 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
         
         p->common.headerInfo.mainLength = (PlankLL)chunkLength32;
     }
-    
     
 exit:
     return result;
@@ -266,15 +298,15 @@ PlankResult pl_IffFileReader_Close (PlankIffFileReaderRef p)
     return pl_File_Close ((PlankFileRef)p);
 }
 
-PlankResult pl_IffFileReader_GetMainID (PlankIffFileReaderRef p, PlankFourCharCode* result)
+PlankResult pl_IffFileReader_GetMainID (PlankIffFileReaderRef p, PlankIffID* result)
 {
-    *result = p->common.headerInfo.mainID.fcc;
+    *result = p->common.headerInfo.mainID;
     return PlankResult_OK;
 }
 
-PlankResult pl_IffFileReader_GetFormatID (PlankIffFileReaderRef p, PlankFourCharCode* result)
+PlankResult pl_IffFileReader_GetFormatID (PlankIffFileReaderRef p, PlankIffID* result)
 {
-    *result = p->common.headerInfo.formatID.fcc;
+    *result = p->common.headerInfo.formatID;
     return PlankResult_OK;
 }
 
@@ -286,7 +318,7 @@ PlankResult pl_IffFileReader_GetMainLength (PlankIffFileReaderRef p, PlankLL* re
 
 PlankResult pl_IffFileReader_GetMainEnd (PlankIffFileReaderRef p, PlankLL* result)
 {
-    *result = (p->common.headerInfo.mainLength < 0) ? -1 : p->common.headerInfo.mainLength + p->common.headerInfo.mainEndOffset;
+    *result = (p->common.headerInfo.mainLength < 0) ? -1 : p->common.headerInfo.mainLength + p->common.headerInfo.mainHeaderEnd; // fix ?
     return PlankResult_OK;
 }
 
@@ -332,7 +364,7 @@ PlankResult pl_IffFileReader_SeekChunk (PlankIffFileReaderRef p, const PlankLL s
     switch (startPosition)
     {
         case 0:
-            pos = p->common.headerInfo.mainEndOffset + p->common.headerInfo.initMainLength;
+            pos = p->common.headerInfo.mainHeaderEnd;
             break;
         case -1:
             if ((result = pl_File_GetPosition ((PlankFileRef)p, &pos)) != PlankResult_OK) goto exit;
