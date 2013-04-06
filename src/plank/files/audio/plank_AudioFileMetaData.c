@@ -255,12 +255,12 @@ PlankResult pl_AudioFileMetaData_SetInstrumentData (PlankAudioFileMetaDataRef p,
 {
     PlankResult result = PlankResult_OK;
     
-    p->baseNote = baseNote;
-    p->detune = detune;
-    p->gain = gain;
-    p->lowNote = lowNote;
-    p->highNote = highNote;
-    p->lowVelocity = lowVelocity;
+    p->baseNote     = baseNote;
+    p->detune       = detune;
+    p->gain         = gain;
+    p->lowNote      = lowNote;
+    p->highNote     = highNote;
+    p->lowVelocity  = lowVelocity;
     p->highVelocity = highVelocity;
     
 exit:
@@ -278,12 +278,12 @@ PlankResult pl_AudioFileMetaData_GetInstrumentData (PlankAudioFileMetaDataRef p,
 {
     PlankResult result = PlankResult_OK;
     
-    if (baseNote != PLANK_NULL)     *baseNote = p->baseNote;
-    if (detune != PLANK_NULL)       *detune = p->detune;
-    if (gain != PLANK_NULL)         *gain = p->gain;
-    if (lowNote != PLANK_NULL)      *lowNote = p->lowNote;
-    if (highNote != PLANK_NULL)     *highNote = p->highNote;
-    if (lowVelocity != PLANK_NULL)  *lowVelocity = p->lowVelocity;
+    if (baseNote     != PLANK_NULL)     *baseNote = p->baseNote;
+    if (detune       != PLANK_NULL)       *detune = p->detune;
+    if (gain         != PLANK_NULL)         *gain = p->gain;
+    if (lowNote      != PLANK_NULL)      *lowNote = p->lowNote;
+    if (highNote     != PLANK_NULL)     *highNote = p->highNote;
+    if (lowVelocity  != PLANK_NULL)  *lowVelocity = p->lowVelocity;
     if (highVelocity != PLANK_NULL) *highVelocity = p->highVelocity;
     
 exit:
@@ -300,10 +300,10 @@ PlankResult pl_AudioFileMetaData_SetSamplerData (PlankAudioFileMetaDataRef p,
     PlankResult result = PlankResult_OK;
     
     p->manufacturer = manufacturer;
-    p->product = product;
+    p->product      = product;
     p->samplePeriod = samplePeriod;
-    p->smpteFormat = smpteFormat;
-    p->smpteOffset = smpteOffset;
+    p->smpteFormat  = smpteFormat;
+    p->smpteOffset  = smpteOffset;
     
 exit:
     return result;
@@ -319,10 +319,10 @@ PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
     PlankResult result = PlankResult_OK;
     
     if (manufacturer != PLANK_NULL) *manufacturer = p->manufacturer;
-    if (product != PLANK_NULL)      *product = p->product;
+    if (product      != PLANK_NULL)      *product = p->product;
     if (samplePeriod != PLANK_NULL) *samplePeriod = p->samplePeriod;
-    if (smpteFormat != PLANK_NULL)  *smpteFormat = p->smpteFormat;
-    if (smpteOffset != PLANK_NULL)  *smpteOffset = p->smpteOffset;
+    if (smpteFormat  != PLANK_NULL)  *smpteFormat = p->smpteFormat;
+    if (smpteOffset  != PLANK_NULL)  *smpteOffset = p->smpteOffset;
 
 exit:
     return result;

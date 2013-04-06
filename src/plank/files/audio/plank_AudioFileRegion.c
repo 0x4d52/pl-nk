@@ -106,7 +106,7 @@ PlankAudioFileCuePointRef pl_AudioFileRegion_GetEndCuePoint (PlankAudioFileRegio
 
 PlankLL pl_AudioFileRegion_GetAnchorPosition (PlankAudioFileRegionRef p)
 {
-    return p->start.position;
+    return p->anchor.position;
 }
 
 PlankLL pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p)
@@ -182,7 +182,7 @@ PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const Plank
 PlankResult pl_AudioFileRegion_SetType (PlankAudioFileRegionRef p, const int type)
 {
     p->start.type = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART;
-    p->end.type = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND;
+    p->end.type   = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND;
     p->regionType = type;
     return PlankResult_OK;
 }
@@ -253,8 +253,8 @@ PlankResult pl_AudioFileRegion_SetRegionWithAnchor (PlankAudioFileRegionRef p, c
 
 PlankResult pl_AudioFileRegion_OffsetPosition (PlankAudioFileRegionRef p, const PlankLL offset)
 {
-    p->start.position += offset;
-    p->end.position += offset;
+    p->start.position  += offset;
+    p->end.position    += offset;
     p->anchor.position += offset;
     return PlankResult_OK;
 }
