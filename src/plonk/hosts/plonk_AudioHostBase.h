@@ -161,7 +161,7 @@ protected:
         
     virtual void hostStopped() throw()  { }
     virtual void hostStarting() throw() { }
-    virtual void hostPaused() throw()  { }
+    virtual void hostPaused() throw()   { }
     virtual void hostResuming() throw() { }
 
     /** This must be implemented by your application.

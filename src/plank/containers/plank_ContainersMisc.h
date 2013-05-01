@@ -39,6 +39,8 @@
 #ifndef PLANK_CONTAINERSMISC_H
 #define PLANK_CONTAINERSMISC_H
 
+#include "../random/plank_RNG.h"
+
 static inline PlankI pl_AlignI (const PlankI value, const PlankI alignment)
 {
     return value + (alignment - (value % alignment)) * !!(value % alignment);
@@ -644,6 +646,19 @@ typedef struct PlankGUID
     PlankUC  data4[8];
 } PlankGUID;
 
+
+static inline void pl_GUID_InitRandom (PlankGUIDRef p)
+{
+    PlankRNGRef rng;
+    rng = pl_RNGGlobal();
+    
+    p->data1 = pl_RNG_NextInt (rng, 0xffffffff);
+    p->data2 = (PlankUS)pl_RNG_NextInt (rng, 0xffff);
+    p->data3 = (PlankUS)pl_RNG_NextInt (rng, 0x0fff) | 0x4000;
+    *(PlankULL*)&p->data4 = (((PlankULL)pl_RNG_NextInt (rng, 0xffffffff)) << 32) | pl_RNG_NextInt (rng, 0xffffffff);
+    p->data4[0] = ((PlankUC)(pl_RNG_NextInt (rng, 4) + 8) << 4) | (PlankUC)(pl_RNG_NextInt (rng, 0x0f));
+}
+
 static inline void pl_GUID_Init42244 (PlankGUIDRef p, const PlankUI data1, const PlankUS data2, const PlankUS data3, const PlankUI data4hi, const PlankUI data4lo)
 {
     p->data1 = data1;
@@ -755,9 +770,19 @@ static inline PlankResult pl_GUID_InitHexString (PlankGUIDRef p, const char* str
     
     result = PlankResult_OK;
     map = pl_Char2HexDigitMap();
+    
+    if (string[0] == '{')
+        string++;
+    
     len = strlen (string);
     
-    if (len != 36)
+    if (len < 36 || len > 37 )
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((len == 37) && string[36] != '}')
     {
         result = PlankResult_UnknownError;
         goto exit;
@@ -820,9 +845,19 @@ static inline PlankResult pl_GUID_InitChunkString (PlankGUIDRef p, const char* s
     
     result = PlankResult_OK;
     map = pl_Char2HexDigitMap();
+    
+    if (string[0] == '{')
+        string++;
+
     len = strlen (string);
     
-    if (len != 32)
+    if (len < 32 || len > 33)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    if ((len == 33) && string[32] != '}')
     {
         result = PlankResult_UnknownError;
         goto exit;
@@ -881,106 +916,120 @@ static inline PlankResult pl_GUID_InitString (PlankGUIDRef p, const char* string
     
     len = strlen (string);
 
-    if (len == 32)
+    if (len == 32 || len == 34)
         return pl_GUID_InitChunkString (p, string);
-    else if (len == 36)
+    else if (len == 36 || len == 38)
         return pl_GUID_InitHexString (p, string);
     else
         return PlankResult_UnknownError;
 }
 
-static inline void pl_GUID_String (const PlankGUID* p, char* string)
+static inline void pl_GUID_HexString (const PlankGUID* p, const PlankB withBraces, char* string)
 {
     const char *map;
     
     map = pl_HexDigit2CharMap();
     
-    string[ 0] = map[(p->data1 >> 28) & 0x0f];
-    string[ 1] = map[(p->data1 >> 24) & 0x0f];
-    string[ 2] = map[(p->data1 >> 20) & 0x0f];
-    string[ 3] = map[(p->data1 >> 16) & 0x0f];
-    string[ 4] = map[(p->data1 >> 12) & 0x0f];
-    string[ 5] = map[(p->data1 >>  8) & 0x0f];
-    string[ 6] = map[(p->data1 >>  4) & 0x0f];
-    string[ 7] = map[(p->data1 >>  0) & 0x0f];
-    string[ 8] = '-';
-    string[ 9] = map[(p->data2 >> 12) & 0x0f];
-    string[10] = map[(p->data2 >>  8) & 0x0f];
-    string[11] = map[(p->data2 >>  4) & 0x0f];
-    string[12] = map[(p->data2 >>  0) & 0x0f];
-    string[13] = '-';
-    string[14] = map[(p->data3 >> 12) & 0x0f];
-    string[15] = map[(p->data3 >>  8) & 0x0f];
-    string[16] = map[(p->data3 >>  4) & 0x0f];
-    string[17] = map[(p->data3 >>  0) & 0x0f];
-    string[18] = '-';
-    string[19] = map[(p->data4[0] >>  4) & 0x0f];
-    string[20] = map[(p->data4[0] >>  0) & 0x0f];
-    string[21] = map[(p->data4[1] >>  4) & 0x0f];
-    string[22] = map[(p->data4[1] >>  0) & 0x0f];
-    string[23] = '-';
-    string[24] = map[(p->data4[2] >>  4) & 0x0f];
-    string[25] = map[(p->data4[2] >>  0) & 0x0f];
-    string[26] = map[(p->data4[3] >>  4) & 0x0f];
-    string[27] = map[(p->data4[3] >>  0) & 0x0f];
-    string[28] = map[(p->data4[4] >>  4) & 0x0f];
-    string[29] = map[(p->data4[4] >>  0) & 0x0f];
-    string[30] = map[(p->data4[5] >>  4) & 0x0f];
-    string[31] = map[(p->data4[5] >>  0) & 0x0f];
-    string[32] = map[(p->data4[6] >>  4) & 0x0f];
-    string[33] = map[(p->data4[6] >>  0) & 0x0f];
-    string[34] = map[(p->data4[7] >>  4) & 0x0f];
-    string[35] = map[(p->data4[7] >>  0) & 0x0f];
-    string[36] = '\0';
+    if (withBraces)
+        *string++ = '{';
+    
+    *string++ = map[(p->data1 >> 28) & 0x0f];
+    *string++ = map[(p->data1 >> 24) & 0x0f];
+    *string++ = map[(p->data1 >> 20) & 0x0f];
+    *string++ = map[(p->data1 >> 16) & 0x0f];
+    *string++ = map[(p->data1 >> 12) & 0x0f];
+    *string++ = map[(p->data1 >>  8) & 0x0f];
+    *string++ = map[(p->data1 >>  4) & 0x0f];
+    *string++ = map[(p->data1 >>  0) & 0x0f];
+    *string++ = '-';
+    *string++ = map[(p->data2 >> 12) & 0x0f];
+    *string++ = map[(p->data2 >>  8) & 0x0f];
+    *string++ = map[(p->data2 >>  4) & 0x0f];
+    *string++ = map[(p->data2 >>  0) & 0x0f];
+    *string++ = '-';
+    *string++ = map[(p->data3 >> 12) & 0x0f];
+    *string++ = map[(p->data3 >>  8) & 0x0f];
+    *string++ = map[(p->data3 >>  4) & 0x0f];
+    *string++ = map[(p->data3 >>  0) & 0x0f];
+    *string++ = '-';
+    *string++ = map[(p->data4[0] >>  4) & 0x0f];
+    *string++ = map[(p->data4[0] >>  0) & 0x0f];
+    *string++ = map[(p->data4[1] >>  4) & 0x0f];
+    *string++ = map[(p->data4[1] >>  0) & 0x0f];
+    *string++ = '-';
+    *string++ = map[(p->data4[2] >>  4) & 0x0f];
+    *string++ = map[(p->data4[2] >>  0) & 0x0f];
+    *string++ = map[(p->data4[3] >>  4) & 0x0f];
+    *string++ = map[(p->data4[3] >>  0) & 0x0f];
+    *string++ = map[(p->data4[4] >>  4) & 0x0f];
+    *string++ = map[(p->data4[4] >>  0) & 0x0f];
+    *string++ = map[(p->data4[5] >>  4) & 0x0f];
+    *string++ = map[(p->data4[5] >>  0) & 0x0f];
+    *string++ = map[(p->data4[6] >>  4) & 0x0f];
+    *string++ = map[(p->data4[6] >>  0) & 0x0f];
+    *string++ = map[(p->data4[7] >>  4) & 0x0f];
+    *string++ = map[(p->data4[7] >>  0) & 0x0f];
+    
+    if (withBraces)
+        *string++ = '}';
+    
+    *string++ = '\0';
 }
 
-static inline void pl_GUID_ChunkString (const PlankGUID* p, char* string)
+static inline void pl_GUID_ChunkString (const PlankGUID* p, const PlankB withBraces, char* string)
 {
     const char *map;
     
     map = pl_HexDigit2CharMap();
     
+    if (withBraces)
+        *string++ = '{';
+
 #if PLANK_LITTLEENDIAN
-    string[ 0] = ((char*)&p->data1)[0];
-    string[ 1] = ((char*)&p->data1)[1];
-    string[ 2] = ((char*)&p->data1)[2];
-    string[ 3] = ((char*)&p->data1)[3];
+    *string++ = ((char*)&p->data1)[0];
+    *string++ = ((char*)&p->data1)[1];
+    *string++ = ((char*)&p->data1)[2];
+    *string++ = ((char*)&p->data1)[3];
 #endif
 #if PLANK_BIGENDIAN
-    string[ 0] = ((char*)&p->data1)[3];
-    string[ 1] = ((char*)&p->data1)[2];
-    string[ 2] = ((char*)&p->data1)[1];
-    string[ 3] = ((char*)&p->data1)[0];
+    *string++ = ((char*)&p->data1)[3];
+    *string++ = ((char*)&p->data1)[2];
+    *string++ = ((char*)&p->data1)[1];
+    *string++ = ((char*)&p->data1)[0];
 #endif
-    string[ 4] = '-';
-    string[ 5] = map[(p->data2 >> 12) & 0x0f];
-    string[ 6] = map[(p->data2 >>  8) & 0x0f];
-    string[ 7] = map[(p->data2 >>  4) & 0x0f];
-    string[ 8] = map[(p->data2 >>  0) & 0x0f];
-    string[ 9] = '-';
-    string[10] = map[(p->data3 >> 12) & 0x0f];
-    string[11] = map[(p->data3 >>  8) & 0x0f];
-    string[12] = map[(p->data3 >>  4) & 0x0f];
-    string[13] = map[(p->data3 >>  0) & 0x0f];
-    string[14] = '-';
-    string[15] = map[(p->data4[0] >>  4) & 0x0f];
-    string[16] = map[(p->data4[0] >>  0) & 0x0f];
-    string[17] = map[(p->data4[1] >>  4) & 0x0f];
-    string[18] = map[(p->data4[1] >>  0) & 0x0f];
-    string[19] = '-';
-    string[20] = map[(p->data4[2] >>  4) & 0x0f];
-    string[21] = map[(p->data4[2] >>  0) & 0x0f];
-    string[22] = map[(p->data4[3] >>  4) & 0x0f];
-    string[23] = map[(p->data4[3] >>  0) & 0x0f];
-    string[24] = map[(p->data4[4] >>  4) & 0x0f];
-    string[25] = map[(p->data4[4] >>  0) & 0x0f];
-    string[26] = map[(p->data4[5] >>  4) & 0x0f];
-    string[27] = map[(p->data4[5] >>  0) & 0x0f];
-    string[28] = map[(p->data4[6] >>  4) & 0x0f];
-    string[29] = map[(p->data4[6] >>  0) & 0x0f];
-    string[30] = map[(p->data4[7] >>  4) & 0x0f];
-    string[31] = map[(p->data4[7] >>  0) & 0x0f];
-    string[32] = '\0';
+    *string++ = '-';
+    *string++ = map[(p->data2 >> 12) & 0x0f];
+    *string++ = map[(p->data2 >>  8) & 0x0f];
+    *string++ = map[(p->data2 >>  4) & 0x0f];
+    *string++ = map[(p->data2 >>  0) & 0x0f];
+    *string++ = '-';
+    *string++ = map[(p->data3 >> 12) & 0x0f];
+    *string++ = map[(p->data3 >>  8) & 0x0f];
+    *string++ = map[(p->data3 >>  4) & 0x0f];
+    *string++ = map[(p->data3 >>  0) & 0x0f];
+    *string++ = '-';
+    *string++ = map[(p->data4[0] >>  4) & 0x0f];
+    *string++ = map[(p->data4[0] >>  0) & 0x0f];
+    *string++ = map[(p->data4[1] >>  4) & 0x0f];
+    *string++ = map[(p->data4[1] >>  0) & 0x0f];
+    *string++ = '-';
+    *string++ = map[(p->data4[2] >>  4) & 0x0f];
+    *string++ = map[(p->data4[2] >>  0) & 0x0f];
+    *string++ = map[(p->data4[3] >>  4) & 0x0f];
+    *string++ = map[(p->data4[3] >>  0) & 0x0f];
+    *string++ = map[(p->data4[4] >>  4) & 0x0f];
+    *string++ = map[(p->data4[4] >>  0) & 0x0f];
+    *string++ = map[(p->data4[5] >>  4) & 0x0f];
+    *string++ = map[(p->data4[5] >>  0) & 0x0f];
+    *string++ = map[(p->data4[6] >>  4) & 0x0f];
+    *string++ = map[(p->data4[6] >>  0) & 0x0f];
+    *string++ = map[(p->data4[7] >>  4) & 0x0f];
+    *string++ = map[(p->data4[7] >>  0) & 0x0f];
+    
+    if (withBraces)
+        *string++ = '}';
+
+    *string++ = '\0';
 }
 
 

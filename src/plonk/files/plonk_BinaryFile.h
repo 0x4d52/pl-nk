@@ -45,7 +45,6 @@
 #include "../core/plonk_SmartPointerContainer.h"
 #include "../containers/plonk_Text.h"
 
-
 class BinaryFileInternal : public SmartPointer
 {
 public:
@@ -118,10 +117,11 @@ public:
 
     friend class JSON;
     
-private:
+    //private:
     inline PlankFileRef getPeerRef() { return static_cast<PlankFileRef> (&peer); }
     inline const PlankFileRef getPeerRef() const { return const_cast<const PlankFileRef> (&peer); }
-
+    
+private:
     PlankFile peer;
 };
 

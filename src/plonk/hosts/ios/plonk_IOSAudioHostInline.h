@@ -510,6 +510,7 @@ void IOSAudioHostBase<SampleType>::propertyCallback (AudioSessionPropertyID inID
             NSLog (@"route: %s reason = '%s' (%ld)\n",
                    CFStringGetCStringPtr (newAudioRoute,CFStringGetSystemEncoding()),
                    reasons[routeChangeReason], routeChangeReason);
+            CFRelease(newAudioRoute);
             
             this->fixAudioRouteIfSetToReceiver();
         }

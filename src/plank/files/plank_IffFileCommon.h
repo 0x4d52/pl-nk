@@ -195,7 +195,7 @@ static inline void pl_IffFile_ChunkIDString (PlankIffFileRef p, const PlankIffID
     switch (p->headerInfo.idType)
     {
         case PLANKIFFFILE_ID_FCC:   strcpy (string, pl_FourCharCode2String (chunkID->fcc).string); return;
-        case PLANKIFFFILE_ID_GUID:  pl_GUID_String (&chunkID->guid, string); return;
+        case PLANKIFFFILE_ID_GUID:  pl_GUID_HexString (&chunkID->guid, PLANK_FALSE, string); return;
         default: string[0] = '\0'; return;
     }
 }

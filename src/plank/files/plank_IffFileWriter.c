@@ -833,10 +833,10 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
     
     eraseOriginalFile = PLANK_FALSE;
     
-    if ((result = pl_File_GetMode ((PlankFileRef)p, &mode)) != PlankResult_OK)     return result;
-    if (!(mode & PLANKFILE_READ))                                           return PlankResult_FileReadError;
-    if ((result = pl_Path_InitTemp (&tempPath)) != PlankResult_OK)          return result;
-    if ((result = pl_IffFileWriter_Init (&tempWriter)) != PlankResult_OK)   goto earlyExit;
+    if ((result = pl_File_GetMode ((PlankFileRef)p, &mode)) != PlankResult_OK)              return result;
+    if (!(mode & PLANKFILE_READ))                                                           return PlankResult_FileReadError;
+    if ((result = pl_Path_InitTemp (&tempPath, "IffWriter-", "tmp")) != PlankResult_OK)     return result;
+    if ((result = pl_IffFileWriter_Init (&tempWriter)) != PlankResult_OK)                   goto earlyExit;
     
     pl_IffFile_ChunkIDString ((PlankIffFileRef)p, &p->common.headerInfo.mainID, chunkIDStr);
     pl_IffFile_ChunkIDString ((PlankIffFileRef)p, &p->common.headerInfo.formatID, otherIDStr);

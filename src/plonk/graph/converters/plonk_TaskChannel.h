@@ -42,9 +42,9 @@
 #include "../channel/plonk_ChannelInternalCore.h"
 #include "../plonk_GraphForwardDeclarations.h"
 
-template<class SampleType> class TaskChannelInternal;
+template<class SampleType> class InputTaskChannelInternal;
 
-PLONK_CHANNELDATA_DECLARE(TaskChannelInternal,SampleType)
+PLONK_CHANNELDATA_DECLARE(InputTaskChannelInternal,SampleType)
 {    
     ChannelInternalCore::Data base;
     int numChannels;
@@ -56,14 +56,14 @@ PLONK_CHANNELDATA_DECLARE(TaskChannelInternal,SampleType)
 
 /** Defer a unit's processing to a separate task, thread, process or core. */
 template<class SampleType>
-class TaskChannelInternal
-:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(TaskChannelInternal,SampleType)>
+class InputTaskChannelInternal
+:   public ProxyOwnerChannelInternal<SampleType, PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType)>
 {
 public:
-    typedef PLONK_CHANNELDATA_NAME(TaskChannelInternal,SampleType)      Data;
+    typedef PLONK_CHANNELDATA_NAME(InputTaskChannelInternal,SampleType) Data;
     typedef ChannelBase<SampleType>                                     ChannelType;
     typedef ObjectArray<ChannelType>                                    ChannelArrayType;
-    typedef TaskChannelInternal<SampleType>                             TaskInternal;
+    typedef InputTaskChannelInternal<SampleType>                        TaskInternal;
     typedef ProxyOwnerChannelInternal<SampleType,Data>                  Internal;
     typedef UnitBase<SampleType>                                        UnitType;
     typedef InputDictionary                                             Inputs;
@@ -71,13 +71,13 @@ public:
 
     //--------------------------------------------------------------------------
     
-    class Task : public Threading::Thread
+    class InputTask : public Threading::Thread
     {
     public:
         typedef LockFreeQueue<Buffer> BufferQueue;
         
-        Task (TaskChannelInternal* o) throw()
-        :   Threading::Thread (Text ("TaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
+        InputTask (InputTaskChannelInternal* o) throw()
+        :   Threading::Thread (Text ("InputTaskChannelInternal::Thread[" + Text (*(LongLong*)&o) + Text ("]"))),
             owner (o),
             info (owner->getProcessInfo()),
             event (Lock::MutexLock)
@@ -165,7 +165,7 @@ public:
         }
     
     private:
-        TaskChannelInternal* owner;
+        InputTaskChannelInternal* owner;
         ProcessInfo& info;
         RNG rng;
         BufferQueue activeBuffers;
@@ -175,11 +175,11 @@ public:
     
     //--------------------------------------------------------------------------
     
-    TaskChannelInternal (Inputs const& inputs, 
-                         Data const& data,
-                         BlockSize const& blockSize,
-                         SampleRate const& sampleRate,
-                         ChannelArrayType& channels) throw()
+    InputTaskChannelInternal (Inputs const& inputs,
+                              Data const& data,
+                              BlockSize const& blockSize,
+                              SampleRate const& sampleRate,
+                              ChannelArrayType& channels) throw()
     :   Internal (numChannelsInSource (inputs), 
                   inputs, data, blockSize, sampleRate,
                   channels),
@@ -188,7 +188,7 @@ public:
         task.start();
     }
     
-    ~TaskChannelInternal()
+    ~InputTaskChannelInternal()
     {
         task.end();
     }
@@ -251,7 +251,7 @@ public:
     ProcessInfo& getProcessInfo() throw() { return info; }
     
 private:
-    Task task;
+    InputTask task;
     ProcessInfo info; // private info for this object as we're running out of sync with everything else
     
     static inline int numChannelsInSource (Inputs const& inputs) throw()
@@ -284,24 +284,24 @@ private:
 
   @ingroup ConverterUnits */
 template<class SampleType, Interp::TypeCode InterpTypeCode>
-class TaskUnit
+class InputTaskUnit
 {
 public:    
-    typedef TaskChannelInternal<SampleType>             TaskInternal;
-    typedef typename TaskInternal::Data                 Data;
-    typedef ChannelBase<SampleType>                     ChannelType;
-    typedef ChannelInternal<SampleType,Data>            Internal;
-    typedef UnitBase<SampleType>                        UnitType;
-    typedef InputDictionary                             Inputs;
-    typedef ResampleUnit<SampleType,InterpTypeCode>     ResampleType;
-    typedef TaskUnit<SampleType,Interp::Lagrange3>      HQ;
+    typedef InputTaskChannelInternal<SampleType>            TaskInternal;
+    typedef typename TaskInternal::Data                     Data;
+    typedef ChannelBase<SampleType>                         ChannelType;
+    typedef ChannelInternal<SampleType,Data>                Internal;
+    typedef UnitBase<SampleType>                            UnitType;
+    typedef InputDictionary                                 Inputs;
+    typedef ResampleUnit<SampleType,InterpTypeCode>         ResampleType;
+    typedef InputTaskUnit<SampleType,Interp::Lagrange3>     HQ;
     
     static inline UnitInfos getInfo() throw()
     {
         const double blockSize = (double)BlockSize::getDefault().getValue();
         const double sampleRate = SampleRate::getDefault().getValue();
         
-        return UnitInfo ("Task", "Defer a unit's processing to a separate task, thread, process or core.",
+        return UnitInfo ("InputTask", "Defer a unit's processing to a separate task, thread, process or core.",
                          
                          // output
                          ChannelCount::VariableChannelCount, 
@@ -342,11 +342,11 @@ public:
     }
 };
 
-typedef TaskUnit<PLONK_TYPE_DEFAULT> Task;
+typedef InputTaskUnit<PLONK_TYPE_DEFAULT> InputTask;
 
-// deprecated
-typedef Task Threaded;
-#define ThreadedUnit TaskUnit
+//// deprecated
+//typedef Task Threaded;
+//#define ThreadedUnit TaskUnit
 
 
 #endif // PLONK_THREADEDCHANNEL_H

@@ -92,7 +92,7 @@ template<class SampleType>                                              class Ov
 template<class SampleType>                                              class ParamUnit;
 template<class SampleType>                                              class AtomicVariableUnit;
 template<class SampleType,
-         Interp::TypeCode InterpTypeCode = Interp::Linear>              class TaskUnit;
+         Interp::TypeCode InterpTypeCode = Interp::Linear>              class InputTaskUnit;
 template<class SampleType,
          Interp::TypeCode InterpTypeCode = Interp::Linear>              class LagUnit;
 template<class SampleType,

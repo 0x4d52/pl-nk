@@ -288,7 +288,7 @@ public:
     class Simple
     {
     public:
-        typedef TaskUnit<SampleType,Interp::Linear>             TaskType;
+        typedef InputTaskUnit<SampleType,Interp::Linear>        TaskType;
         typedef ResampleUnit<SampleType,Interp::Linear>         ResampleType;
         typedef typename ResampleType::RateType                 RateType;
         typedef typename ResampleType::RateUnitType             RateUnitType;
@@ -316,7 +316,7 @@ public:
         class HQ
         {
         public:
-            typedef TaskUnit<SampleType,Interp::Lagrange3>          TaskType;
+            typedef InputTaskUnit<SampleType,Interp::Lagrange3>     TaskType;
             typedef ResampleUnit<SampleType,Interp::Lagrange3>      ResampleType;
             typedef typename ResampleType::RateType                 RateType;
             typedef typename ResampleType::RateUnitType             RateUnitType;

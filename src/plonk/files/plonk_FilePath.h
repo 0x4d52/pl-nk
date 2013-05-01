@@ -113,6 +113,27 @@ public:
         pl_Path_InitSystem (&file.getInternal()->peer, type, 0);
         return file;
     }
+        
+    inline static FilePath temp() throw()
+    {
+        FilePath file (new FilePathInternal());
+        pl_Path_InitTemp (&file.getInternal()->peer, 0, 0);
+        return file;
+    }
+    
+    inline static FilePath temp (Text const& prefix) throw()
+    {
+        FilePath file (new FilePathInternal());
+        pl_Path_InitTemp (&file.getInternal()->peer, prefix.getArray(), 0);
+        return file;
+    }
+    
+    inline static FilePath temp (Text const& prefix, Text const& extension) throw()
+    {
+        FilePath file (new FilePathInternal());
+        pl_Path_InitTemp (&file.getInternal()->peer, prefix.getArray(), extension.getArray());
+        return file;
+    }
     
     inline FilePath parent() const throw()
     {

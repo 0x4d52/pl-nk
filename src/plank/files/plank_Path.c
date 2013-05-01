@@ -524,16 +524,39 @@ exit:
 }
 #endif
 
-PlankResult pl_Path_InitTemp (PlankPathRef p)
-{
-    PlankRNGRef rng;
-    char name[256];
+//PlankResult pl_Path_InitTemp (PlankPathRef p)
+//{
+//    PlankRNGRef rng;
+//    char name[256];
+//
+//    rng = pl_RNGGlobal();
+//    
+//    snprintf (name, 256, "temp_%08x", (PlankUI)(((size_t)p + pl_RNG_Next (rng)) & 0xFFFFFFFF));
+//    return pl_Path_InitSystem (p, PLANKPATH_SYSTEMTEMP, name);
+//}
 
-    rng = pl_RNGGlobal();
+PlankResult pl_Path_InitTemp (PlankPathRef p, const char* prefix, const char* ext)
+{
+    char name[1024];
+    PlankGUID guid;
     
-    snprintf (name, 256, "temp_%08x", (PlankUI)(((size_t)p + pl_RNG_Next (rng)) & 0xFFFFFFFF));
+    name[0] = '\0';
+    
+    if (prefix)
+        strncpy (name, prefix, 512);
+    
+    pl_GUID_InitRandom (&guid);
+    pl_GUID_HexString (&guid, PLANK_TRUE, name + strlen (name));
+    
+    if (ext && ext[0] != '\0')
+    {
+        strcat  (name, ".");
+        strncat (name, ext, 64);
+    }
+    
     return pl_Path_InitSystem (p, PLANKPATH_SYSTEMTEMP, name);
 }
+
 
 PlankResult pl_Path_DeInit (PlankPathRef p)
 {

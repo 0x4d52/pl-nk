@@ -62,7 +62,7 @@ PlankResult pl_Path_InitParent (PlankPathRef p, PlankPathRef fullpath);
 PlankResult pl_Path_InitChild (PlankPathRef p, PlankPathRef parentpath, const char* child);
 PlankResult pl_Path_InitSibling (PlankPathRef p, PlankPathRef siblingpath, const char* child);
 PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char* child);
-PlankResult pl_Path_InitTemp (PlankPathRef p);
+PlankResult pl_Path_InitTemp (PlankPathRef p, const char* prefix, const char* ext);
 PlankResult pl_Path_DeInit (PlankPathRef p);
 
 PlankResult pl_Path_Set (PlankPathRef p, const char* path);
