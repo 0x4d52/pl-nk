@@ -117,6 +117,7 @@ public:
         return file.canWrite() ? pl_JSON_WriteToFile (json, file.getInternal()->getPeerRef()) : PlankResult_FileWriteError;
     }
     
+    inline bool isEmpty() const throw() { return json == 0; }
     inline bool isInt() const throw() { return pl_JSON_IsInt (json); }
     inline bool isFloat() const throw() { return pl_JSON_IsFloat (json); }
     inline bool isDouble() const throw() { return pl_JSON_IsDouble (json); }
@@ -128,11 +129,17 @@ public:
     inline bool isIntArrayEncoded() const throw() { return pl_JSON_IsIntArrayEncoded (json); }
     inline bool isFloatArrayEncoded() const throw() { return pl_JSON_IsFloatArrayEncoded (json); }
     inline bool isDoubleArrayEncoded() const throw() { return pl_JSON_IsDoubleArrayEncoded (json); }
+    inline bool isError() const throw() { return pl_JSON_IsError (json); }
 
+    inline bool operator== (JSON const& other) const throw() { return json == other.json; }
+    inline bool operator!= (JSON const& other) const throw() { return json != other.json; }
+        
     operator int () const throw() { return pl_JSON_IntGet (json); }
+    operator PlankUI () const throw() { return PlankUI (pl_JSON_IntGet (json)); }
     operator float () const throw() { return pl_JSON_FloatGet (json); }
     operator double () const throw() { return pl_JSON_DoubleGet (json); }
     operator Text () const throw() { return pl_JSON_StringGet (json); }
+    operator const char* () const throw() { return pl_JSON_StringGet (json); }
        
     operator IntArray () const throw()
     {
@@ -204,6 +211,11 @@ public:
         }
         
         return FloatArray::getNull();
+    }
+
+    inline JSON operator[] (const int index) throw()
+    {
+        return JSON (pl_JSON_ArrayAt (json, index));
     }
 
     inline JSON operator[] (const Long index) throw()

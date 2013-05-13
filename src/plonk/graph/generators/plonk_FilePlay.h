@@ -79,14 +79,14 @@ public:
                   inputs, data, blockSize, sampleRate,
                   channels)
     {
-        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
-        file.setOwner (this);
+//        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
+//        file.setOwner (this);
     }
     
     ~FilePlayChannelInternal()
     {
-        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
-        file.setOwner (0);
+//        AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
+//        file.setOwner (0);
     }
             
     Text getName() const throw()
@@ -117,7 +117,7 @@ public:
         Data& data = this->getState();
         AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
         
-        plonk_assert (file.getOwner() == this);
+//        plonk_assert (file.getOwner() == this);
         
         UnitType& loop (this->getInputAsUnit (IOKey::Loop));
         const Buffer& loopBuffer (loop.process (info, 0));
@@ -128,7 +128,12 @@ public:
         const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
         buffer.setSize (bufferSize, false);
         
-        const bool hitEOF = file.readFrames (buffer, loopSamples[0] >= SampleType (0.5));
+        if (loopSamples[0] >= SampleType (0.5))
+            numLoops.setValue (0);
+        else
+            numLoops.setValue (1);
+            
+        const bool hitEOF = file.readFrames (buffer, numLoops);
         
         int channel;
         
@@ -177,6 +182,7 @@ public:
 
 private:
     Buffer buffer; // might need to use a signal...
+    IntVariable numLoops;
     
     static const int decideNumChannels (Inputs const& inputs, Data const& data) throw()
     {

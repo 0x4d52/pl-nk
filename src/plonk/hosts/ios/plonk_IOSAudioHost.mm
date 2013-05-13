@@ -49,56 +49,6 @@ END_PLONK_NAMESPACE
 
 #ifdef __OBJC__
 
-//Text IOSUtilities::pathInDirectory (Locations location, const char *filename) throw()
-//{
-//    plonk_assert (filename != 0);
-//    
-//    switch (location)
-//    {
-//        case Bundle: {
-//            NSString *nsFilename = [[NSString alloc] initWithUTF8String: filename];
-//            NSString* nspath = [[NSBundle mainBundle] pathForResource:nsFilename ofType:nil];
-//            [nsFilename release];
-//            
-//            if(!nspath)
-//                return "";
-//            else
-//                return [nspath UTF8String];
-//            
-//        } break;
-//            
-//        case Documents: {
-//            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//            NSString *documentsDirectory = [paths objectAtIndex:0];
-//            if (!documentsDirectory)
-//                return "";
-//            else
-//            {
-//                NSString *nsFilename = [[NSString alloc] initWithUTF8String: filename];
-//                NSString *appFile = [documentsDirectory stringByAppendingPathComponent:nsFilename];
-//                [nsFilename release];
-//                return [appFile UTF8String];
-//            }
-//            
-//        } break;
-//            
-//        case Temporary: {
-//            
-//            NSString *home = NSHomeDirectory();
-//            if(!home)
-//                return "";
-//            else
-//            {
-//                return Text ([home UTF8String]) << Text ("/tmp/") << Text (filename);
-//            }
-//            
-//        }
-//            
-//        default:
-//            return "";
-//    }
-//}
-
 Text IOSUtilities::pathInDirectory (Locations location, const char *filename) throw()
 {
     plonk_assert (filename != 0);
@@ -111,7 +61,6 @@ Text IOSUtilities::pathInDirectory (Locations location, const char *filename) th
         default: return Text::getEmpty();
     }
 }
-
 
 BEGIN_PLONK_NAMESPACE
 
@@ -752,10 +701,9 @@ fallback:
 {
     plonk_assert (delegate == nil || newDelegate == nil);
     
-    [delegate release];
     [self deletePeer];
     
-    delegate = [newDelegate retain];
+    delegate = newDelegate;
     
     if (delegate)
     {

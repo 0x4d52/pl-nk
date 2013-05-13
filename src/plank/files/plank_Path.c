@@ -770,7 +770,36 @@ exit:
 }
 
 
-
-
-
+///---
+//
+//PlankResult pl_PathIter_InitFullPath (PlankPathIterRef p, const char* fullPath)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//        
+//    pl_DynamicArray_InitWithItemSizeAndCapacity (&p->fullParentPath, 1, strlen(fullPath) + 1);
+//    pl_DynamicArray_SetAsText (&p->fullParentPath, fullPath);
+//    p->index = 0;
+//    
+//    return PlankResult_OK;
+//}
+//
+//PlankResult pl_PathIter_DeInit (PlankPathIterRef p)
+//{
+//    if (p == PLANK_NULL)
+//        return PlankResult_MemoryError;
+//    
+//    return pl_DynamicArray_DeInit (&p->fullParentPath);
+//}
+//
+//const char* pl_PathIter_GetFullParentPath (PlankPathIterRef p)
+//{
+//    return (const char*)pl_DynamicArray_GetArray (&p->fullParentPath);
+//}
+//
+//const char* pl_PathIter_GetNextChild (PlankPathIterRef p)
+//{
+//    
+//}
+//
 

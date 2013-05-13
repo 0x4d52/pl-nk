@@ -77,6 +77,11 @@ PlankB pl_Path_IsDirectory (PlankPathRef p);
 PlankB pl_Path_IsFile (PlankPathRef p);
 PlankResult pl_Path_Resolve (PlankPathRef p);
 
+//typedef struct PlankPathIter* PlankPathIterRef;
+//PlankResult pl_PathIter_InitFullPath (PlankPathIterRef p, const char* fullPath);
+//PlankResult pl_PathIter_DeInit (PlankPathIterRef p);
+//const char* pl_PathIter_GetFullParentPath (PlankPathIterRef p);
+//const char* pl_PathIter_GetNextChild (PlankPathIterRef p);
 
 
 PLANK_END_C_LINKAGE
@@ -87,6 +92,13 @@ typedef struct PlankPath
     PlankDynamicArray buffer;
     char temp[64];
 } PlankPath;
+
+typedef struct PlankPathIter
+{
+    PlankDynamicArray fullParentPath;
+    int index;
+} PlankPathIter;
+
 #endif
 
 

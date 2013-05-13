@@ -344,10 +344,5 @@ public:
 
 typedef InputTaskUnit<PLONK_TYPE_DEFAULT> InputTask;
 
-//// deprecated
-//typedef Task Threaded;
-//#define ThreadedUnit TaskUnit
-
-
 #endif // PLONK_THREADEDCHANNEL_H
 

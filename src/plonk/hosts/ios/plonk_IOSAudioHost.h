@@ -280,7 +280,7 @@ using namespace plonk;
     int type;
 }
 
-@property (nonatomic, retain) id delegate;                  ///< The delegat that contains the constructGraph method.
+@property (nonatomic, assign) id delegate;                  ///< The delegate that contains the constructGraph method.
 @property (nonatomic, readonly) NSString* hostName;         ///< The host name - always "iOS".
 @property (nonatomic, readonly) NSString* nativeHostName;   ///< The native host name - currently always "RemoteIO".
 @property (nonatomic, readonly) NSString* inputName;        ///< The name of the input device. May be "Default Input" on the simulator.

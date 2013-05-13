@@ -81,12 +81,13 @@ int pl_JSONDumpCallback (const char *buffer, size_t size, void *data)
 
 PlankJSONRef pl_JSON_FromFile (PlankFileRef f)
 {
-    PlankJSONRef j;
+    PlankJSONRef j, e;
     PlankResult result;
     int fileMode;
     json_error_t jerror;
     
     j = 0;
+    e = 0;
     result = PlankResult_OK;
     
     if ((result = pl_File_GetMode (f, &fileMode)) != PlankResult_OK) goto exit;
@@ -104,6 +105,19 @@ PlankJSONRef pl_JSON_FromFile (PlankFileRef f)
     }    
     
     j = (PlankJSONRef)json_load_callback (pl_JSONLoadCallback, f, 0, &jerror);
+    
+    if (!j)
+    {
+        j = pl_JSON_Object();
+        e = pl_JSON_Object();
+        
+        pl_JSON_ObjectPutKey (e, "text", pl_JSON_String (jerror.text));
+        pl_JSON_ObjectPutKey (e, "source", pl_JSON_String (jerror.source));
+        pl_JSON_ObjectPutKey (e, "line", pl_JSON_Int (jerror.line));
+        pl_JSON_ObjectPutKey (e, "column", pl_JSON_Int (jerror.column));
+        pl_JSON_ObjectPutKey (e, "position", pl_JSON_Int (jerror.position));
+        pl_JSON_ObjectPutKey (j, "error", e);
+    }
     
 exit:
     return j;
@@ -658,6 +672,11 @@ PlankB pl_JSON_IsFloatArrayEncoded (PlankJSONRef p)
 PlankB pl_JSON_IsDoubleArrayEncoded (PlankJSONRef p)
 {
     return pl_JSON_IsEncoded (p, PLANK_JSON_DOUBLEARRAYBINARY, PLANK_JSON_DOUBLEARRAYCOMPRESSED);
+}
+
+PlankB pl_JSON_IsError (PlankJSONRef p)
+{
+    return pl_JSON_IsObject (p) && (pl_JSON_ObjectGetSize (p) == 1) && (pl_JSON_ObjectAtKey (p, "error") != 0);
 }
 
 PlankJSONRef pl_JSON_VersionString (const PlankUC ex, const PlankUC major, const PlankUC minor, const PlankUC micro)

@@ -165,6 +165,24 @@
             #define PLANK_GCC 1
         #endif
 
+        #if __has_feature(objc_arc)
+            #define PLANK_OBJC_BRIDGE           __bridge
+            #define PLANK_OBJC_BRIDGE_RETAINED  __bridge_retained
+            #define PLANK_OBJC_BRIDGE_TRANSFER  __bridge_transfer
+            #define PLANK_OBJC_STRONG           __strong
+            #define PLANK_OBJC_WEAK             __weak
+            #define PLANK_OBJC_UNSAFE_RETAINED  __unsafe_unretained
+            #define PLANK_OBJC_AUTORELEASING    __autoreleasing
+        #else
+            #define PLANK_OBJC_BRIDGE           
+            #define PLANK_OBJC_BRIDGE_RETAINED  
+            #define PLANK_OBJC_BRIDGE_TRANSFER  
+            #define PLANK_OBJC_STRONG           
+            #define PLANK_OBJC_WEAK             
+            #define PLANK_OBJC_UNSAFE_RETAINED  
+            #define PLANK_OBJC_AUTORELEASING    
+        #endif
+
         #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
             #define PLANK_IOS 1
 

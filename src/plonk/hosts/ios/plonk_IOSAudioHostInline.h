@@ -407,7 +407,7 @@ void IOSAudioHostBase<SampleType>::fixAudioRouteIfSetToReceiver() throw()
     
 	if (AudioSessionGetProperty (kAudioSessionProperty_AudioRoute, &propertySize, &audioRoute) == noErr)
 	{
-		NSString* route = (NSString*)audioRoute;
+		NSString* route = (PLANK_OBJC_BRIDGE NSString*)audioRoute;
         
 		if ([route hasPrefix: @"Receiver"])
 		{

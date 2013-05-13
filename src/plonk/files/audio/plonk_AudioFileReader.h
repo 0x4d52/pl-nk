@@ -42,10 +42,13 @@
 #include "../../core/plonk_CoreForwardDeclarations.h"
 #include "../../core/plonk_SmartPointer.h"
 #include "../../core/plonk_WeakPointer.h"
+#include "../../core/plonk_SenderContainer.h"
 #include "../../core/plonk_SmartPointerContainer.h"
 #include "../../containers/plonk_Text.h"
-//#include "../../core/plonk_Sender.h"
+#include "../../core/plonk_Sender.h"
 #include "plonk_AudioFile.h"
+
+
 
 class AudioFileReaderInternal : public SmartPointer
 {
@@ -75,7 +78,7 @@ public:
     void setFramePositionOnNextRead (const LongLong position) throw();
     
     template<class SampleType>
-    bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, const bool loop) throw();
+    bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, IntVariable& numLoops) throw();
     
     template<class SampleType>
     inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) const throw()
@@ -92,7 +95,8 @@ public:
         // would need to decide in here to deinterleave..
         
         signal.getSampleRate().setValue (getSampleRate());
-        return readFrames (signal.getBuffers().first(), applyScaling, false);
+        IntVariable oneLoop (1);
+        return readFrames (signal.getBuffers().first(), applyScaling, false, oneLoop);
     }
     
     void setOwner (void* owner) throw();
@@ -130,7 +134,7 @@ template<class SampleType>
 bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, 
                                           const bool applyScaling, 
                                           const bool deinterleave,
-                                          const bool loop) throw()
+                                          IntVariable& numLoops) throw()
 {        
     typedef NumericalArray<SampleType> Buffer;
     
@@ -260,10 +264,13 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             numFails++;
         }
             
-        if ((result == PlankResult_FileEOF) && loop)
+        if ((result == PlankResult_FileEOF) && ((numLoops.getValue() == 0) || (numLoops.getValue() > 1)))
         {
             result = pl_AudioFileReader_ResetFramePosition (getPeerRef());              
             plonk_assert (result == PlankResult_OK);
+            
+            if (numLoops.getValue() > 1)
+                numLoops.setValue (numLoops.getValue() - 1);
         }
     }
     
@@ -280,7 +287,6 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
 
 //------------------------------------------------------------------------------
 
-
 /** Audio file reader. 
  This can read audio frames from WAV, AIFF, AIFC or (with the appropriately
  enabled compile time options), Ogg Vorbis or Opus files.
@@ -291,7 +297,7 @@ class AudioFileReader : public SmartPointerContainer<AudioFileReaderInternal>
 {
 public:
     typedef AudioFileReaderInternal                 Internal;
-    typedef SmartPointerContainer<Internal>         Base;    
+    typedef SmartPointerContainer<Internal>         Base;
     typedef WeakPointerContainer<AudioFileReader>   Weak;
 
     
@@ -486,22 +492,22 @@ public:
      Here the samples are automatically scaled depending on the destination 
      data type of the NumericalArray. 
      @param data    The NumericalArray object to read interleaved frames into. 
-     @param loop    Whether to read the file in a loop.
+     @param numLoops    How many loops to read, 0 means infinite loops.
      @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
     template<class SampleType>
-    inline bool readFrames (NumericalArray<SampleType>& data, const bool loop) throw()
+    inline bool readFrames (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
-        return getInternal()->readFrames (data, true, false, loop);
+        return getInternal()->readFrames (data, true, false, numLoops);
     }
     
     /** Read frames into a pre-allocated NumericalArray without scaling. 
      @param data    The NumericalArray object to read interleaved frames into. 
-     @param loop    Whether to read the file in a loop.
+     @param numLoops    How many loops to read, 0 means infinite loops.
      @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
     template<class SampleType>
-    inline bool readFramesDirect (NumericalArray<SampleType>& data, const bool loop) throw()
+    inline bool readFramesDirect (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
-        return getInternal()->readFrames (data, false, false, loop);
+        return getInternal()->readFrames (data, false, false, numLoops);
     }
     
     /** Initialises a Signal object in the appropriate format for the audio in the file.
@@ -548,7 +554,8 @@ public:
         typedef NumericalArray<SampleType> SampleArray;
         SampleArray data = SampleArray::withSize ((int)getNumFrames() * getNumChannels());
         resetFramePosition();
-        getInternal()->readFrames (data, applyScaling, false, false);
+        IntVariable oneLoop (1);
+        getInternal()->readFrames (data, applyScaling, false, oneLoop);
         return data;
     }
 

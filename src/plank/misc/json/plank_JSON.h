@@ -124,6 +124,7 @@ PlankB pl_JSON_IsDoubleEncoded (PlankJSONRef p);
 PlankB pl_JSON_IsIntArrayEncoded (PlankJSONRef p);
 PlankB pl_JSON_IsFloatArrayEncoded (PlankJSONRef p);
 PlankB pl_JSON_IsDoubleArrayEncoded (PlankJSONRef p);
+PlankB pl_JSON_IsError (PlankJSONRef p);
 
 
 int pl_JSON_IntEncodedGet (PlankJSONRef p);
