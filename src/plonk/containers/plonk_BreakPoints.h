@@ -183,7 +183,7 @@ public:
                 shapeState.stepsToTarget = TypeUtility<LongLong>::getTypePeak();
                 shapeState.currentLevel = shapeState.targetLevel;
                 shapeState.shapeType = Shape::Linear;
-                shapeState.grow = 0.f;
+                shapeState.grow.u.norm = 0;
             }
         }
     }
@@ -316,7 +316,7 @@ private:
     template<class ValueType>
     static inline void processSine (ShapeState<ValueType>& shapeState, ValueType* const outputSamples, const int numSamples) throw()
     {
-        const ValueType& zero = Math<ValueType>::get0();
+//        const ValueType& zero = Math<ValueType>::get0();
         
         if (numSamples == shapeState.stepsToTarget)
         {

@@ -120,6 +120,7 @@ public:
         FilterSampleRate,   ///< Sample rate of a filter, need to change this to FilterSampleRates and have it type SampleRates
         OverlapMake,
         OverlapMix,
+        LoopCount,
         
         Units,          ///< An array of units.
         Bus,            ///< A bus.

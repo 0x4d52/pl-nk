@@ -221,5 +221,586 @@ int PortAudioAudioHostBase<SampleType>::callback (const SampleType **inputData, 
     return paContinue;
 }
 
+
+#if defined(__OBJC__) || DOXYGEN
+END_PLONK_NAMESPACE
+
+@class PLAudioHost;
+
+using namespace plonk;
+
+/** A protocol for a PLAudioHost delegate.
+ This class should contain a constructGraph method that returns a Unit
+ conatining the audio graph to render at runtime.
+ @see PLAudioHost */
+@protocol PLAudioHostDelegate <NSObject>
+@optional
+- (FloatUnit)constructGraphFloat:(PLAudioHost*)host;
+- (ShortUnit)constructGraphShort:(PLAudioHost*)host;
+- (IntUnit)constructGraphInt:(PLAudioHost*)host;
+- (DoubleUnit)constructGraphDouble:(PLAudioHost*)host;
+- (void)hostStarting:(PLAudioHost*)host;
+- (void)hostStopped:(PLAudioHost*)host;
+@end
+
+
+/** An Objective-C audio host for the iOS platform.
+ This is simply an adapter for the C++ IOSAudioHost. You need to set an object
+ that implements the PLAudioGraph protocol in the init method of your derived
+ class.
+ 
+ When running in the simulator the preferred sample rate and block size
+ properties may be ignored and default to the hardware settings of the Mac
+ hosting the simulator.
+ 
+ @see PLAudioGraph */
+@interface PLAudioHost : NSObject
+{
+    void* peer;
+    id<PLAudioHostDelegate> delegate;
+    int type;
+}
+
+@property (nonatomic, assign) id delegate;                  ///< The delegate that contains the constructGraph method.
+@property (nonatomic, readonly) NSString* hostName;         ///< The host name - always "iOS".
+@property (nonatomic, readonly) NSString* nativeHostName;   ///< The native host name - currently always "RemoteIO".
+@property (nonatomic, readonly) NSString* inputName;        ///< The name of the input device. May be "Default Input" on the simulator.
+@property (nonatomic, readonly) NSString* outputName;       ///< The name of the output device. May be "Default Output" on the simulator.
+@property (nonatomic, readonly) double cpuUsage;            ///< The current CPU usage of the DSP loop.
+@property (nonatomic, readonly) BOOL isRunning;             ///< Is the host running?
+@property (nonatomic, readonly) Dynamic outputUnit;         ///< The output unit of the host.
+@property (nonatomic) int numInputs;                        ///< The number of audio inputs, only set this BEFORE sending the startHost message.
+@property (nonatomic) int numOutputs;                       ///< The number of audio outputs, only set this BEFORE sending the startHost message.
+@property (nonatomic) int preferredHostBlockSize;           ///< The preferred host block size, only set this BEFORE sending the startHost message.
+@property (nonatomic) int preferredGraphBlockSize;          ///< The preferred graph block size, only set this BEFORE sending the startHost message.
+@property (nonatomic) double preferredHostSampleRate;       ///< The preferred sample rate, only set this BEFORE sending the startHost message.
+
+/** Start the host running. */
+- (void)startHost;
+
+/** Stop the host running. */
+- (void)stopHost;
+
+@end
+
+BEGIN_PLONK_NAMESPACE
+
+template<class SampleType>
+class PortAudioAudioHostPeerBase : public PortAudioAudioHostBase<SampleType>
+{
+public:
+    typedef typename PortAudioAudioHostBase<SampleType>::UnitType UnitType;
+    
+    PortAudioAudioHostPeerBase (PLAudioHost* p)
+    :   peer (p)
+    {
+    }
+    
+    void hostStarting() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostStarting:)])
+            [peer.delegate hostStarting:peer];
+    }
+    
+    void hostStopped() throw()
+    {
+        if ([peer.delegate respondsToSelector:@selector(hostStopped:)])
+            [peer.delegate hostStopped:peer];
+    }
+        
+    PLAudioHost* getPeer() const throw() { return peer; }
+    
+private:
+    PLAudioHost* peer; // no need to retain as the Obj-C peer owns this object
+    
+    PortAudioAudioHostPeerBase();
+};
+
+/** A base, actual implementations are all in template specialisations. */
+template<class SampleType>
+class PortAudioAudioHostPeer : public PortAudioAudioHostPeerBase<SampleType>
+{
+public:
+    // pure virtual constructGraph not implemented to cause a compile-time error
+    // only float, short, int and double sample types are supported
+};
+
+template<>
+class PortAudioAudioHostPeer<float> : public PortAudioAudioHostPeerBase<float>
+{
+public:
+    PortAudioAudioHostPeer (PLAudioHost* peer)
+    :   PortAudioAudioHostPeerBase<float> (peer)
+    {
+    }
+    
+    FloatUnit constructGraph() throw()
+    {
+        PLAudioHost* const peer = this->getPeer();
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraphFloat:peer];
+    }
+};
+
+template<>
+class PortAudioAudioHostPeer<short> : public PortAudioAudioHostPeerBase<short>
+{
+public:
+    PortAudioAudioHostPeer (PLAudioHost* peer)
+    :   PortAudioAudioHostPeerBase<short> (peer)
+    {
+    }
+    
+    ShortUnit constructGraph() throw()
+    {
+        PLAudioHost* const peer = this->getPeer();
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraphShort:peer];
+    }
+};
+
+template<>
+class PortAudioAudioHostPeer<int> : public PortAudioAudioHostPeerBase<int>
+{
+public:
+    PortAudioAudioHostPeer (PLAudioHost* peer)
+    :   PortAudioAudioHostPeerBase<int> (peer)
+    {
+    }
+    
+    IntUnit constructGraph() throw()
+    {
+        PLAudioHost* const peer = this->getPeer();
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraphInt:peer];
+    }
+};
+
+template<>
+class PortAudioAudioHostPeer<double> : public PortAudioAudioHostPeerBase<double>
+{
+public:
+    PortAudioAudioHostPeer (PLAudioHost* peer)
+    :   PortAudioAudioHostPeerBase<double> (peer)
+    {
+    }
+    
+    DoubleUnit constructGraph() throw()
+    {
+        PLAudioHost* const peer = this->getPeer();
+        plonk_assert (peer.delegate != nil);
+        return [peer.delegate constructGraphInt:peer];
+    }
+};
+
+END_PLONK_NAMESPACE
+
+using namespace plonk;
+
+@implementation PLAudioHost
+
+- (id)init
+{
+    if (self = [super init])
+    {
+        peer = nil;
+        type = TypeCode::Unknown;
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    self.delegate = nil;
+    
+#if !__has_feature(objc_arc)
+    [super dealloc];
+#endif
+}
+
+- (NSString*)hostName
+{
+    if (peer == nil) return @"";
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<float>* > (peer)->getHostName().getArray()];
+            
+        case TypeCode::Short:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<short>* > (peer)->getHostName().getArray()];
+            
+        case TypeCode::Int:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<int>* > (peer)->getNativeHostName().getArray()];
+            
+        case TypeCode::Double:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<double>* > (peer)->getNativeHostName().getArray()];
+            
+        default:
+            return @"";
+    }
+}
+
+- (NSString*)nativeHostName
+{
+    if (peer == nil) return @"";
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<float>* > (peer)->getNativeHostName().getArray()];
+            
+        case TypeCode::Short:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<short>* > (peer)->getNativeHostName().getArray()];
+            
+        case TypeCode::Int:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<int>* > (peer)->getNativeHostName().getArray()];
+            
+        case TypeCode::Double:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<double>* > (peer)->getNativeHostName().getArray()];
+            
+        default:
+            return @"";
+    }
+}
+
+- (NSString*)inputName
+{
+    if (peer == nil) return @"";
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<float>* > (peer)->getInputName().getArray()];
+            
+        case TypeCode::Short:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<short>* > (peer)->getInputName().getArray()];
+            
+        case TypeCode::Int:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<int>* > (peer)->getInputName().getArray()];
+            
+        case TypeCode::Double:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<double>* > (peer)->getInputName().getArray()];
+            
+        default:
+            return @"";
+    }
+}
+
+- (NSString*)outputName
+{
+    if (peer == nil) return @"";
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<float>* > (peer)->getInputName().getArray()];
+            
+        case TypeCode::Short:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<short>* > (peer)->getInputName().getArray()];
+            
+        case TypeCode::Int:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<int>* > (peer)->getInputName().getArray()];
+            
+        case TypeCode::Double:
+            return [NSString stringWithUTF8String: static_cast< PortAudioAudioHostPeer<double>* > (peer)->getInputName().getArray()];
+            
+        default:
+            return @"";
+    }
+}
+
+- (double)cpuUsage
+{
+    if (peer == nil) return 0.0;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getCpuUsage();
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getCpuUsage();
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getCpuUsage();
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getCpuUsage();
+        default: return 0.0;
+    }
+}
+
+- (BOOL)isRunning
+{
+    if (peer == nil) return NO;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getIsRunning() ? YES : NO;
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getIsRunning() ? YES : NO;
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getIsRunning() ? YES : NO;
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getIsRunning() ? YES : NO;
+        default: return NO;
+    }
+}
+
+- (BOOL)isPaused
+{
+    if (peer == nil) return NO;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getIsPaused() ? YES : NO;
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getIsPaused() ? YES : NO;
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getIsPaused() ? YES : NO;
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getIsPaused() ? YES : NO;
+        default: return NO;
+    }
+}
+
+- (Dynamic)outputUnit
+{
+    Dynamic dyn;
+    
+    if (peer != nil)
+    {
+        switch ((const int)type)
+        {
+            case TypeCode::Float:   dyn = static_cast< PortAudioAudioHostPeer<float>* > (peer)->getOutputUnit(); break;
+            case TypeCode::Short:   dyn = static_cast< PortAudioAudioHostPeer<short>* > (peer)->getOutputUnit(); break;
+            case TypeCode::Int:     dyn = static_cast< PortAudioAudioHostPeer<int>* > (peer)->getOutputUnit(); break;
+            case TypeCode::Double:  dyn = static_cast< PortAudioAudioHostPeer<double>* > (peer)->getOutputUnit(); break;
+            default: { }
+        }
+    }
+    
+    return dyn;
+}
+
+- (int)numInputs
+{
+    if (peer == nil) return 0;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getNumInputs();
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getNumInputs();
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getNumInputs();
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getNumInputs();
+        default: return 0.0;
+    }
+}
+
+- (void)setNumInputs:(int)numInputs
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< PortAudioAudioHostPeer<float>* > (peer)->setNumInputs (numInputs); break;
+        case TypeCode::Short:   static_cast< PortAudioAudioHostPeer<short>* > (peer)->setNumInputs (numInputs); break;
+        case TypeCode::Int:     static_cast< PortAudioAudioHostPeer<int>* > (peer)->setNumInputs (numInputs); break;
+        case TypeCode::Double:  static_cast< PortAudioAudioHostPeer<double>* > (peer)->setNumInputs (numInputs); break;
+        default: { }
+    }
+}
+
+- (int)numOutputs
+{
+    if (peer == nil) return 0;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getNumOutputs();
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getNumOutputs();
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getNumOutputs();
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getNumOutputs();
+        default: return 0.0;
+    }
+}
+
+- (void)setNumOutputs:(int)numOutputs
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< PortAudioAudioHostPeer<float>* > (peer)->setNumOutputs (numOutputs); break;
+        case TypeCode::Short:   static_cast< PortAudioAudioHostPeer<short>* > (peer)->setNumOutputs (numOutputs); break;
+        case TypeCode::Int:     static_cast< PortAudioAudioHostPeer<int>* > (peer)->setNumOutputs (numOutputs); break;
+        case TypeCode::Double:  static_cast< PortAudioAudioHostPeer<double>* > (peer)->setNumOutputs (numOutputs); break;
+        default: { }
+    }
+}
+
+- (int)preferredHostBlockSize
+{
+    if (peer == nil) return 0;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getPreferredHostBlockSize();
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getPreferredHostBlockSize();
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getPreferredHostBlockSize();
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getPreferredHostBlockSize();
+        default: return 0;
+    }
+}
+
+- (void)setPreferredHostBlockSize:(int)preferredHostBlockSize
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< PortAudioAudioHostPeer<float>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
+        case TypeCode::Short:   static_cast< PortAudioAudioHostPeer<short>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
+        case TypeCode::Int:     static_cast< PortAudioAudioHostPeer<int>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
+        case TypeCode::Double:  static_cast< PortAudioAudioHostPeer<double>* > (peer)->setPreferredHostBlockSize (preferredHostBlockSize); break;
+        default: { }
+    }
+}
+
+- (int)preferredGraphBlockSize
+{
+    if (peer == nil) return 0;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getPreferredGraphBlockSize();
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getPreferredGraphBlockSize();
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getPreferredGraphBlockSize();
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getPreferredGraphBlockSize();
+        default: return 0;
+    }
+}
+
+- (void)setPreferredGraphBlockSize:(int)preferredGraphBlockSize
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< PortAudioAudioHostPeer<float>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
+        case TypeCode::Short:   static_cast< PortAudioAudioHostPeer<short>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
+        case TypeCode::Int:     static_cast< PortAudioAudioHostPeer<int>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
+        case TypeCode::Double:  static_cast< PortAudioAudioHostPeer<double>* > (peer)->setPreferredGraphBlockSize (preferredGraphBlockSize); break;
+        default: { }
+    }
+}
+
+- (double)preferredHostSampleRate
+{
+    if (peer == nil) return 0.0;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   return static_cast< PortAudioAudioHostPeer<float>* > (peer)->getPreferredHostSampleRate();
+        case TypeCode::Short:   return static_cast< PortAudioAudioHostPeer<short>* > (peer)->getPreferredHostSampleRate();
+        case TypeCode::Int:     return static_cast< PortAudioAudioHostPeer<int>* > (peer)->getPreferredHostSampleRate();
+        case TypeCode::Double:  return static_cast< PortAudioAudioHostPeer<double>* > (peer)->getPreferredHostSampleRate();
+        default: return 0.0;
+    }
+}
+
+- (void)setPreferredHostSampleRate:(double)preferredHostSampleRate
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< PortAudioAudioHostPeer<float>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
+        case TypeCode::Short:   static_cast< PortAudioAudioHostPeer<short>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
+        case TypeCode::Int:     static_cast< PortAudioAudioHostPeer<int>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
+        case TypeCode::Double:  static_cast< PortAudioAudioHostPeer<double>* > (peer)->setPreferredHostSampleRate (preferredHostSampleRate); break;
+        default: { }
+    }
+}
+
+- (void)startHost
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< PortAudioAudioHostPeer<float>* > (peer)->startHost(); break;
+        case TypeCode::Short:   static_cast< PortAudioAudioHostPeer<short>* > (peer)->startHost(); break;
+        case TypeCode::Int:     static_cast< PortAudioAudioHostPeer<int>* > (peer)->startHost(); break;
+        case TypeCode::Double:  static_cast< PortAudioAudioHostPeer<double>* > (peer)->startHost(); break;
+        default: { }
+    }
+}
+
+- (void)stopHost
+{
+    if (peer == nil) return;
+    
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   static_cast< PortAudioAudioHostPeer<float>* > (peer)->stopHost(); break;
+        case TypeCode::Short:   static_cast< PortAudioAudioHostPeer<short>* > (peer)->stopHost(); break;
+        case TypeCode::Int:     static_cast< PortAudioAudioHostPeer<int>* > (peer)->stopHost(); break;
+        case TypeCode::Double:  static_cast< PortAudioAudioHostPeer<double>* > (peer)->stopHost(); break;
+        default: { }
+    }
+}
+
+- (id)delegate
+{
+    return delegate;
+}
+
+- (void)deletePeer
+{
+    switch ((const int)type)
+    {
+        case TypeCode::Float:   delete static_cast< PortAudioAudioHostPeer<float>* > (peer);   break;
+        case TypeCode::Short:   delete static_cast< PortAudioAudioHostPeer<short>* > (peer);   break;
+        case TypeCode::Int:     delete static_cast< PortAudioAudioHostPeer<int>* > (peer);     break;
+        case TypeCode::Double:  delete static_cast< PortAudioAudioHostPeer<double>* > (peer);  break;
+        default: { }
+    }
+    
+    peer = nil;
+    type = TypeCode::Unknown;
+}
+
+- (void)setDelegate:(id)newDelegate
+{
+    plonk_assert (delegate == nil || newDelegate == nil);
+    
+    [self deletePeer];
+    
+    delegate = newDelegate;
+    
+    if (delegate)
+    {
+        const unsigned int isFloat = [delegate respondsToSelector:@selector(constructGraphFloat:)] ? (1 << TypeCode::Float) : 0;
+        const unsigned int isShort = [delegate respondsToSelector:@selector(constructGraphShort:)] ? (1 << TypeCode::Short) : 0;
+        const unsigned int isInt = [delegate respondsToSelector:@selector(constructGraphInt:)] ? (1 << TypeCode::Int) : 0;
+        const unsigned int isDouble = [delegate respondsToSelector:@selector(constructGraphDouble:)] ? (1 << TypeCode::Double) : 0;
+        const unsigned int typeFlags = isFloat | isShort | isInt | isDouble;
+        
+        if (typeFlags != 0 && Bits::isPowerOf2 (typeFlags))
+        {
+            type = Bits::countTrailingZeroes (typeFlags);
+            
+            switch ((const int)type)
+            {
+                case TypeCode::Float:   peer = new PortAudioAudioHostPeer<float> (self);   break;
+                case TypeCode::Short:   peer = new PortAudioAudioHostPeer<short> (self);   break;
+                case TypeCode::Int:     peer = new PortAudioAudioHostPeer<int> (self);     break;
+                case TypeCode::Double:  peer = new PortAudioAudioHostPeer<double> (self);  break;
+                    
+                default:
+                    peer = nil;
+                    type = 0;
+            }
+        }
+        else plonk_assertfalse; // either none or more than one constructGraph.. function was implemented
+    }
+}
+
+@end
+
+BEGIN_PLONK_NAMESPACE
+#endif
+
+
 #endif // PLANK_INLINING_FUNCTIONS
 

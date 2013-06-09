@@ -119,21 +119,13 @@ public:
         
 //        plonk_assert (file.getOwner() == this);
         
-        UnitType& loop (this->getInputAsUnit (IOKey::Loop));
-        const Buffer& loopBuffer (loop.process (info, 0));
-        const SampleType* const loopSamples = loopBuffer.getArray();
-
         const int numChannels = this->getNumChannels();
         const int fileNumChannels = file.getNumChannels();
         const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
         buffer.setSize (bufferSize, false);
         
-        if (loopSamples[0] >= SampleType (0.5))
-            numLoops.setValue (0);
-        else
-            numLoops.setValue (1);
-            
-        const bool hitEOF = file.readFrames (buffer, numLoops);
+        IntVariable& loopCount (this->template getInputAs<IntVariable> (IOKey::LoopCount));
+        const bool hitEOF = file.readFrames (buffer, loopCount);
         
         int channel;
         
@@ -182,7 +174,6 @@ public:
 
 private:
     Buffer buffer; // might need to use a signal...
-    IntVariable numLoops;
     
     static const int decideNumChannels (Inputs const& inputs, Data const& data) throw()
     {
@@ -249,7 +240,7 @@ public:
                          
                          // inputs
                          IOKey::AudioFileReader,    Measure::None,
-                         IOKey::Loop,               Measure::Bool,      1.0,            IOLimit::Clipped,   Measure::NormalisedUnipolar,    0.0, 1.0,
+                         IOKey::LoopCount,          Measure::Count,     0.0,            IOLimit::Minimum,   Measure::Count,                 0.0,
                          IOKey::Multiply,           Measure::Factor,    1.0,            IOLimit::None,
                          IOKey::Add,                Measure::None,      0.0,            IOLimit::None,
                          IOKey::AutoDeleteFlag,     Measure::Bool,      IOInfo::True,   IOLimit::None,
@@ -260,7 +251,7 @@ public:
     
     /** Create an audio rate audio file player. */
     static UnitType ar (AudioFileReader const& file,
-                        UnitType const& loop = SampleType (1),
+                        IntVariable const& loopCount = 0,
                         UnitType const& mul = SampleType (1),
                         UnitType const& add = SampleType (0),
                         const bool deleteWhenDone = true,
@@ -268,12 +259,10 @@ public:
                         SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
     {             
         if (file.isReady() && !file.isOwned())
-        {
-            plonk_assert (loop.getNumChannels() == 1);
-            
+        {            
             Inputs inputs;
             inputs.put (IOKey::AudioFileReader, file);
-            inputs.put (IOKey::Loop, loop);
+            inputs.put (IOKey::LoopCount, loopCount);
             inputs.put (IOKey::Multiply, mul);
             inputs.put (IOKey::Add, add);
                             
@@ -301,7 +290,7 @@ public:
         
         static UnitType ar (AudioFileReader const& file,
                             RateUnitType const& rate = Math<RateUnitType>::get1(),
-                            UnitType const& loop = SampleType (1),
+                            IntVariable const& loopCount = 0,
                             const int blockSizeMultiplier = 0,
                             const int numBuffers = 8)
         {
@@ -309,7 +298,7 @@ public:
                                               (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
                                               DoubleVariable (blockSizeMultiplier);
             
-            UnitType play = FilePlayUnit::ar (file, loop,
+            UnitType play = FilePlayUnit::ar (file, loopCount,
                                               SampleType (1), SampleType (0),
                                               false,
                                               BlockSize::getMultipleOfDefault (multiplier));
@@ -329,7 +318,7 @@ public:
             
             static UnitType ar (AudioFileReader const& file,
                                 RateUnitType const& rate = Math<RateUnitType>::get1(),
-                                UnitType const& loop = SampleType (1),
+                                IntVariable const& loopCount = 0,
                                 const int blockSizeMultiplier = 0,
                                 const int numBuffers = 8)
             {
@@ -337,7 +326,7 @@ public:
                                                   (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
                                                   DoubleVariable (blockSizeMultiplier);
                 
-                UnitType play = FilePlayUnit::ar (file, loop,
+                UnitType play = FilePlayUnit::ar (file, loopCount,
                                                   SampleType (1), SampleType (0),
                                                   false,
                                                   BlockSize::getMultipleOfDefault (multiplier));

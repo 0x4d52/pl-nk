@@ -124,7 +124,9 @@
     #endif
 #endif
 
-
+/* If you get a compiler error here you need to make sure you're using a C++
+ compiler. If you're using Objective C then use Objective C++ by using .mm files
+ instead of .m as an extension. */
 #include <cstdlib>
 #include <cstdarg>
 #include <climits>
@@ -388,73 +390,91 @@ struct ShadowType { };
 
 #define PLONK_SHADOW(VAR) ShadowType* VAR; (void)VAR;
 
-//#if PLONK_APPLE && defined(__OBJC__)
-//BEGIN_PLONK_NAMESPACE
-//
-///** Some utilties for the Mac/iOS platform. */
-//class AppleUtilities
-//{
-//public:
-//    enum Locations
-//    {
-//        Bundle,		///< In the \<MyApp\>.app/ bundle, files can be placed here during compilation in Xcode.
-//        Documents,	///< The application's Documents directory, files here will be backed up during iTunes sync.
-//        Temporary	///< The application's tmp directory, NB this is cleared when the device is restarted.
-//    };
-//    
-//    static Text pathInDirectory (Locations location, const char *filename) throw()
-//    {
-//        plonk_assert (filename != 0);
-//        
-//        switch (location)
-//        {
-//            case Bundle: {
-//                NSString *nsFilename = [[NSString alloc] initWithUTF8String: filename];
-//                NSString* nspath = [[NSBundle mainBundle] pathForResource:nsFilename ofType:nil];
-//                [nsFilename release];
-//                
-//                if(!nspath)
-//                    return "";
-//                else
-//                    return [nspath UTF8String];
-//                
-//            } break;
-//                
-//            case Documents: {
-//                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//                NSString *documentsDirectory = [paths objectAtIndex:0];
-//                if (!documentsDirectory)
-//                    return "";
-//                else
-//                {
-//                    NSString *nsFilename = [[NSString alloc] initWithUTF8String: filename];
-//                    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:nsFilename];
-//                    [nsFilename release];
-//                    return [appFile UTF8String];
-//                }
-//                
-//            } break;
-//                
-//            case Temporary: {
-//                
-//                NSString *home = NSHomeDirectory();
-//                if(!home)
-//                    return "";
-//                else
-//                {
-//                    return Text ([home UTF8String]) << Text ("/tmp/") << Text (filename);
-//                }
-//                
-//            }
-//                
-//            default:
-//                return "";
-//        }
-//    }
-//};
-//
-//END_PLONK_NAMESPACE
-//#endif // PLONK_APPLE && __OBJC__
+#if PLONK_APPLE && defined(__OBJC__)
+
+/** Convenience macro for adding member variables to Objective-C classes.
+ This helps declare the appropriate type of Plonk Variable<> e.g., for
+ providing an interface between a GUI and the audio engine. You then need to
+ declare the property using PLONK_OBJC_PROPERTY_DECLARE and synthesise the
+ getter and setter methods using PLONK_OBJC_PROPERTY_SYNTH.
+ 
+ For example:
+ 
+ @code
+ @interface MyClass : NSObject
+ {
+ PLONK_OBJC_PROPERTY_MEMBER(float,frequency);
+ PLONK_OBJC_PROPERTY_MEMBER(float,amplitude);
+ }
+ ...
+ @endcode
+ 
+ @see PLONK_OBJC_PROPERTY_DECLARE, PLONK_OBJC_PROPERTY_SYNTH */
+#define PLONK_OBJC_PROPERTY_MEMBER(Type,Name)\
+    Variable<Type> Name
+
+/** Convenience macro for declaring Objective-C properites.
+ This helps make the appropriate property declaration for a Plonk
+ member variable declared using PLONK_OBJC_PROPERTY_MEMBER.
+ 
+ For example:
+ 
+ @code
+ @interface MyClass : NSObject
+ {
+ PLONK_OBJC_PROPERTY_MEMBER(float,frequency);
+ PLONK_OBJC_PROPERTY_MEMBER(float,amplitude);
+ }
+ PLONK_OBJC_PROPERTY_DECLARE(float,frequency); // instead of @property ..etc
+ PLONK_OBJC_PROPERTY_DECLARE(float,amplitude); // instead of @property ..etc
+ @end
+ @endcode
+ 
+ @see PLONK_OBJC_PROPERTY_MEMBER, PLONK_OBJC_PROPERTY_SYNTH */
+#define PLONK_OBJC_PROPERTY_DECLARE(Type,Name)\
+    @property (nonatomic,getter=get##Name,setter=set##Name:) Type Name
+
+/** Convenience macro for synthesising properity methods.
+ This helps synthesise the getter and setter methods for properties declared
+ using PLONK_OBJC_PROPERTY_MEMBER and PLONK_OBJC_PROPERTY_DECLARE.
+ 
+ For example:
+ 
+ @code
+ @implementation AudioHost
+ 
+ PLONK_OBJC_PROPERTY_SYNTH (float,frequency); // instead of @synthesize frequency;
+ PLONK_OBJC_PROPERTY_SYNTH (float,amplitude); // instead of @synthesize amplitude;
+ ...
+ @end
+ @endcode
+ 
+ @see PLONK_OBJC_PROPERTY_MEMBER, PLONK_OBJC_PROPERTY_DECLARE */
+#define PLONK_OBJC_PROPERTY_SYNTH(Type,Name)\
+    - (Type)get##Name {\
+    return Name.getValue();\
+    }\
+    - (void)set##Name:(Type)value {\
+        Name.setValue (value);\
+    }
+
+
+#define PLONK_OBJC_PROPERTY_MEMBER_UNIT(Type,Name)\
+    Variable< UnitBase<Type>& > Name
+
+#define PLONK_OBJC_PROPERTY_DECLARE_UNIT(Type,Name)\
+    @property (nonatomic,getter=get##Name,setter=set##Name:) UnitBase<Type> Name
+
+#define PLONK_OBJC_PROPERTY_SYNTH_UNIT(Type,Name)\
+    - (UnitBase<Type>)get##Name {\
+    return Name.getValue();\
+    }\
+    - (void)set##Name:(UnitBase<Type>)value {\
+        Name.setValue (value);\
+    }
+
+
+#endif // PLONK_APPLE && __OBJC__
 
 
 END_PLONK_NAMESPACE

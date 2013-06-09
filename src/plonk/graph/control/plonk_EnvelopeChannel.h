@@ -104,8 +104,8 @@ public:
         Data& data = this->getState();
         const BreakpointsType& breakpoints = this->getInputAsBreakpoints (IOKey::Breakpoints);
         
-        const UnitType& gate = this->getInputAsUnit (IOKey::Gate);
-        plonk_assert (gate.getOverlap (channel) == Math<DoubleVariable>::get1());
+//        const UnitType& gate = this->getInputAsUnit (IOKey::Gate);
+        plonk_assert (this->getInputAsUnit (IOKey::Gate).getOverlap (channel) == Math<DoubleVariable>::get1());
 
         data.shapeState.currentLevel = breakpoints.getStartLevel();
         this->initValue (data.shapeState.currentLevel);
@@ -120,7 +120,7 @@ public:
         if ((index != -1) && (index == data.targetPointIndex)) // ?? ugh can't be right
         {
             // sustain
-            data.shapeState.grow = SampleType (0);
+            data.shapeState.grow.u.norm = 0;
             data.shapeState.stepsToTarget = samplesRemaining;
         }
         else 
@@ -133,7 +133,7 @@ public:
                 data.targetPointIndex = -1;
                 data.shapeState.shapeType = Shape::Linear;
                 data.shapeState.curve = 0.f;
-                data.shapeState.grow = SampleType (0);
+                data.shapeState.grow.u.norm = SampleType (0);
                 data.shapeState.stepsToTarget = samplesRemaining;
             }
             else if (index >= breakpoints.getNumBreakpoints())
