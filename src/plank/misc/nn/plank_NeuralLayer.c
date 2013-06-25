@@ -103,7 +103,7 @@ PlankResult pl_NeuralLayerF_DeInit (PlankNeuralLayerFRef p)
         goto exit;
     }
     
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     nodeArray = (PlankNeuralNodeF*)pl_DynamicArray_GetArray (&p->nodes);
 
     for (i = 0; i < numNodes; ++i)
@@ -127,7 +127,7 @@ PlankResult pl_NeuralLayerF_Reset (PlankNeuralLayerFRef p, const float amount)
     PlankNeuralNodeF* nodeArray;
     
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     nodeArray = (PlankNeuralNodeF*)pl_DynamicArray_GetArray (&p->nodes);
     
     for (i = 0; i < numNodes; ++i)
@@ -147,7 +147,7 @@ PlankResult pl_NeuralLayerF_Randomise (PlankNeuralLayerFRef p, const float amoun
     PlankNeuralNodeF* nodeArray;
     
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     nodeArray = (PlankNeuralNodeF*)pl_DynamicArray_GetArray (&p->nodes);
 
     for (i = 0; i < numNodes; ++i)
@@ -167,7 +167,7 @@ PlankResult pl_NeuralLayerF_SetNode (PlankNeuralLayerFRef p, const int nodeIndex
     PlankNeuralNodeF* nodeArray;
     
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
 
     if ((nodeIndex < 0) || (nodeIndex >= numNodes))
     {
@@ -189,7 +189,7 @@ PlankResult pl_NeuralLayerF_SetThreshold (PlankNeuralLayerFRef p, const int node
     PlankNeuralNodeF* nodeArray;
     
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     
     if ((nodeIndex < 0) || (nodeIndex >= numNodes))
     {
@@ -211,7 +211,7 @@ PlankResult pl_NeuralLayerF_SetWeight (PlankNeuralLayerFRef p, const int nodeInd
     PlankNeuralNodeF* nodeArray;
     
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     
     if ((nodeIndex < 0) || (nodeIndex >= numNodes))
     {
@@ -233,7 +233,7 @@ PlankResult pl_NeuralLayerF_GetNode (PlankNeuralLayerFRef p, const int nodeIndex
     PlankNeuralNodeF* nodeArray;
     
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     
     if ((nodeIndex < 0) || (nodeIndex >= numNodes))
     {
@@ -257,8 +257,8 @@ PlankResult pl_NeuralLayerF_Propogate (PlankNeuralLayerFRef p, const float* inpu
     float* outputVectorPtr;
     
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
-    numInputs = pl_DynamicArray_GetSize (&p->inputVector);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
+    numInputs = (int)pl_DynamicArray_GetSize (&p->inputVector);
     
     inputVectorPtr = (float*)pl_DynamicArray_GetArray (&p->inputVector);
     outputVectorPtr = (float*)pl_DynamicArray_GetArray (&p->outputVector);
@@ -282,7 +282,7 @@ PlankResult pl_NeuralLayerF_BackProp (PlankNeuralLayerFRef p, const float* error
     float* adjustVectorPtr;
    
     result = PlankResult_OK;
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     
     pl_DynamicArray_Zero (&p->adjustVector);
     
@@ -321,12 +321,12 @@ const float* pl_NeuralLayerF_GetAdjustPtr (PlankNeuralLayerFRef p)
 
 int pl_NeuralLayerF_GetNumInputs (PlankNeuralLayerFRef p)
 {
-    return pl_DynamicArray_GetSize (&p->inputVector);
+    return (int)pl_DynamicArray_GetSize (&p->inputVector);
 }
 
 int pl_NeuralLayerF_GetNumOutputs (PlankNeuralLayerFRef p)
 {
-    return pl_DynamicArray_GetSize (&p->outputVector);
+    return (int)pl_DynamicArray_GetSize (&p->outputVector);
 }
 
 PlankResult pl_NeuralLayerF_ToJSON (PlankNeuralLayerFRef p, PlankJSONRef j, const PlankB useBinary)
@@ -345,7 +345,7 @@ PlankResult pl_NeuralLayerF_ToJSON (PlankNeuralLayerFRef p, PlankJSONRef j, cons
     pl_JSON_ObjectSetType (jlayer, PLANK_NEURALLAYERF_JSON_TYPE);
     pl_JSON_ObjectSetVersionString (jlayer, PLANK_NEURALLAYERF_JSON_VERSION);
 
-    numNodes = pl_DynamicArray_GetSize (&p->nodes);
+    numNodes = (int)pl_DynamicArray_GetSize (&p->nodes);
     nodeArray = (PlankNeuralNodeF*)pl_DynamicArray_GetArray (&p->nodes);
     
     for (i = 0; i < numNodes; ++i)

@@ -398,7 +398,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
             }
             else if (pl_JSON_IsArray (p))
             {
-                numStrings = pl_JSON_ArrayGetSize (p);
+                numStrings = (int)pl_JSON_ArrayGetSize (p);
                 
                 pl_DynamicArray_InitWithItemSize (&zArray, 1);
                 pl_File_Init (&zStream);
@@ -446,7 +446,7 @@ static PlankResult pl_JSON_EncodedArrayGet (PlankJSONRef p, PlankDynamicArrayRef
             }
             else if (pl_JSON_IsArray (p))
             {
-                numStrings = pl_JSON_ArrayGetSize (p);
+                numStrings = (int)pl_JSON_ArrayGetSize (p);
                 
                 for (i = 0; i < numStrings; ++i)
                 {

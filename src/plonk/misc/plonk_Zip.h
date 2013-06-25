@@ -81,7 +81,7 @@ public:
     {        
         Long dataOutputLength;
         const void* data = deflate (amount, array.getArray(), array.length() * sizeof (NumericalType), &dataOutputLength);
-        return ByteArray::withArray (dataOutputLength, static_cast<const Byte*> (data), false);
+        return ByteArray::withArray ((int)dataOutputLength, static_cast<const Byte*> (data), false);
     }
 
     inline const void* inflate (const void* dataInput, const Long dataInputLength, Long* dataOutputLength)

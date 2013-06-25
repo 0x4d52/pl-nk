@@ -217,7 +217,10 @@ using namespace plonk;
 - (void)dealloc
 {
     self.delegate = nil;
+
+#if !__has_feature(objc_arc)
     [super dealloc];
+#endif
 }
 
 - (NSString*)hostName

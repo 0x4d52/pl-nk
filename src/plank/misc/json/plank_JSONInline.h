@@ -209,7 +209,7 @@ static inline int pl_JSON_IntGet (PlankJSONRef p)
     
     if (json_is_integer ((json_t*)p))
     {
-        value = json_integer_value ((json_t*)p);
+        value = (int)json_integer_value ((json_t*)p);
     }
     else if (pl_JSON_ObjectGetSize (p) == 1)
     {

@@ -106,7 +106,7 @@ PlankResult pl_NeuralNetworkF_DeInit (PlankNeuralNetworkFRef p)
         goto exit;
     }
     
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     for (i = 0; i < numLayers; ++i)
@@ -128,7 +128,7 @@ PlankResult pl_NeuralNetworkF_Reset (PlankNeuralNetworkFRef p, const float amoun
     PlankNeuralLayerF* layerArray;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     for (i = 0; i < numLayers; ++i)
@@ -148,7 +148,7 @@ PlankResult pl_NeuralNetworkF_Randomise (PlankNeuralNetworkFRef p, const float a
     PlankNeuralLayerF* layerArray;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     for (i = 0; i < numLayers; ++i)
@@ -188,12 +188,12 @@ PlankResult pl_NeuralNetworkF_SetActFuncOffset (PlankNeuralNetworkFRef p, const 
 
 int pl_NeuralNetworkF_GetNumLayers (PlankNeuralNetworkFRef p)
 {
-    return pl_DynamicArray_GetSize (&p->layers) + 1;
+    return (int)pl_DynamicArray_GetSize (&p->layers) + 1;
 }
 
 int pl_NeuralNetworkF_GetNumLayersExludingInput (PlankNeuralNetworkFRef p)
 {
-    return pl_DynamicArray_GetSize (&p->layers);
+    return (int)pl_DynamicArray_GetSize (&p->layers);
 }
 
 int pl_NeuralNetworkF_GetNumInputs (PlankNeuralNetworkFRef p)
@@ -208,10 +208,32 @@ int pl_NeuralNetworkF_GetNumOutputs (PlankNeuralNetworkFRef p)
     int numLayers;
     PlankNeuralLayerF* layerArray;
     
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     return pl_NeuralLayerF_GetNumOutputs (&layerArray[numLayers - 1]);
+}
+
+PlankResult pl_NeuralNetworkF_GetLayer (PlankNeuralNetworkFRef p, const int layerIndex, PlankNeuralLayerFRef* layer)
+{
+    PlankResult result;
+    int numLayers;
+    PlankNeuralLayerF* layerArray;
+    
+    result = PlankResult_OK;
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
+    
+    if ((layerIndex < 0) || (layerIndex >= numLayers))
+    {
+        result = PlankResult_IndexOutOfRange;
+        goto exit;
+    }
+    
+    layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
+    *layer = &layerArray[layerIndex];
+    
+exit:
+    return result;
 }
 
 PlankResult pl_NeuralNetworkF_Set (PlankNeuralNetworkFRef p, const int layerIndex, const int nodeIndex, const float* weights, const float threshold)
@@ -221,7 +243,7 @@ PlankResult pl_NeuralNetworkF_Set (PlankNeuralNetworkFRef p, const int layerInde
     PlankNeuralLayerF* layerArray;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     
     if ((layerIndex < 0) || (layerIndex >= numLayers))
     {
@@ -243,7 +265,7 @@ PlankResult pl_NeuralNetworkF_SetThreshold (PlankNeuralNetworkFRef p, const int 
     PlankNeuralLayerF* layerArray;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     
     if ((layerIndex < 0) || (layerIndex >= numLayers))
     {
@@ -265,7 +287,7 @@ PlankResult pl_NeuralNetworkF_SetWeight (PlankNeuralNetworkFRef p, const int lay
     PlankNeuralLayerF* layerArray;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     
     if ((layerIndex < 0) || (layerIndex >= numLayers))
     {
@@ -287,7 +309,7 @@ PlankResult pl_NeuralNetworkF_Get (PlankNeuralNetworkFRef p, const int layerInde
     PlankNeuralLayerF* layerArray;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     
     if ((layerIndex < 0) || (layerIndex >= numLayers))
     {
@@ -311,7 +333,7 @@ PlankResult pl_NeuralNetworkF_Propogate (PlankNeuralNetworkFRef p, const float* 
     const float* layerInputs;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     layerInputs = inputs;
     
@@ -335,9 +357,9 @@ PlankResult pl_NeuralNetworkF_BackProp (PlankNeuralNetworkFRef p, const float* i
     float* outputErrors;
 
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
-    numOutputs = pl_DynamicArray_GetSize (&p->errorVector);
+    numOutputs = (int)pl_DynamicArray_GetSize (&p->errorVector);
     outputErrors = (float*)pl_DynamicArray_GetArray (&p->errorVector);
     
     if ((result = pl_NeuralNetworkF_Propogate (p, inputs)) != PlankResult_OK) goto exit;
@@ -364,7 +386,7 @@ PlankResult pl_NeuralNetworkF_GetOutputs (PlankNeuralNetworkFRef p, float* outpu
     PlankNeuralLayerF* layerArray;
     
     result = PlankResult_OK;
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     result = pl_NeuralLayerF_GetOutputs (&layerArray[numLayers - 1], outputs);
     
@@ -376,7 +398,7 @@ const float* pl_NeuralNetworkF_GetOutputsPtr (PlankNeuralNetworkFRef p)
     int numLayers;
     PlankNeuralLayerF* layerArray;
     
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     return pl_NeuralLayerF_GetOutputsPtr (&layerArray[numLayers - 1]);
@@ -412,7 +434,7 @@ PlankResult pl_NeuralNetworkF_ToJSON (PlankNeuralNetworkFRef p, PlankJSONRef j, 
                           PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET,
                           useBinary ? pl_JSON_FloatBinary (p->actFuncOffset) : pl_JSON_Float (p->actFuncOffset));
     
-    numLayers = pl_DynamicArray_GetSize (&p->layers);
+    numLayers = (int)pl_DynamicArray_GetSize (&p->layers);
     layerArray = (PlankNeuralLayerF*)pl_DynamicArray_GetArray (&p->layers);
     
     for (i = 0; i < numLayers; ++i)
@@ -487,12 +509,12 @@ PlankResult pl_NeuralNetworkF_InitFromJSON (PlankNeuralNetworkFRef p, PlankJSONR
             goto exit;
     }
     
-    numOutputs = pl_NeuralLayerF_GetNumOutputs (&layerArray[numLayers - 1]);
+    numOutputs = pl_NeuralLayerF_GetNumOutputs (&layerArray[numLayers - 2]);
         
     if ((result = pl_DynamicArray_InitWithItemSizeAndSize (&p->errorVector, sizeof (PlankF), numOutputs, PLANK_TRUE)) != PlankResult_OK) goto exit;
     
     p->learnRate = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNETWORKF_JSON_LEARNRATE));    
-    p->learnRate = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET));
+    p->actFuncOffset = pl_JSON_FloatGet (pl_JSON_ObjectAtKey (j, PLANK_NEURALNETWORKF_JSON_ACTFUNCOFFSET));
     
     p->learnRate = p->learnRate > 0.f ? p->learnRate : 0.25f;
     p->actFuncOffset = p->actFuncOffset > 0.f ? p->actFuncOffset : 0.01f;

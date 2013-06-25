@@ -627,6 +627,13 @@ void BinaryFileInternal::write (const double value) throw()
 #endif
 }
 
+ResultCode BinaryFileInternal::copy (BinaryFileInternal* source, const LongLong size) throw()
+{
+    const ResultCode result = pl_File_Copy (getPeerRef(), source->getPeerRef(), size);
+    plonk_assert (result == PlankResult_OK);
+    return result;
+}
+
 
 
 END_PLONK_NAMESPACE

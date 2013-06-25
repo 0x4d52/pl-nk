@@ -112,7 +112,7 @@ exit:
 
 int pl_NeuralNodeF_GetNumWeights (PlankNeuralNodeFRef p)
 {
-    return pl_DynamicArray_GetSize (&p->weightVector);
+    return (int)pl_DynamicArray_GetSize (&p->weightVector);
 }
 
 PlankResult pl_NeuralNodeF_Set (PlankNeuralNodeFRef p, const float* weights, const float threshold)
@@ -152,7 +152,7 @@ PlankResult pl_NeuralNodeF_SetWeight (PlankNeuralNodeFRef p, const int index, co
     int size;
     
     result = PlankResult_OK;
-    size = pl_DynamicArray_GetSize (&p->weightVector);
+    size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     
     if ((index < 0) || (index >= size))
     {
@@ -211,7 +211,7 @@ PlankResult pl_NeuralNodeF_Reset (PlankNeuralNodeFRef p, const float amount)
     int size, i;
     
     weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
-    size = pl_DynamicArray_GetSize (&p->weightVector);
+    size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     r = pl_RNGGlobal();
     
     amount2 = amount * 2.f;
@@ -232,7 +232,7 @@ PlankResult pl_NeuralNodeF_Randomise (PlankNeuralNodeFRef p, const float amount)
     int size, i;
     
     weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
-    size = pl_DynamicArray_GetSize (&p->weightVector);
+    size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     r = pl_RNGGlobal();
     
     amount2 = amount * 2.f;
@@ -257,7 +257,7 @@ PlankResult pl_NeuralNodeF_BackPropVector (PlankNeuralNodeFRef p, const float* i
 
 	weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
 
-	size = pl_DynamicArray_GetSize (&p->weightVector);
+	size = (int)pl_DynamicArray_GetSize (&p->weightVector);
         
     pl_VectorMulAddF_NN1N (weightVectorPtr, inputVector, learn, weightVectorPtr, size);
     pl_VectorMulAddF_NN1N (adjustVector, weightVectorPtr, adjust, adjustVector, size);
@@ -275,7 +275,7 @@ float pl_NeuralNodeF_PropogateVector (PlankNeuralNodeFRef p, const float* inputV
     
     input = 0.f;
     weightVectorPtr = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
-    size = pl_DynamicArray_GetSize (&p->weightVector);
+    size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     
     pl_VectorAddMulF_1NN (&input, inputVector, weightVectorPtr, size);
     p->output = p->network->actFunc (input + p->threshold);
@@ -294,7 +294,7 @@ PlankResult pl_NeuralNodeF_BackPropScalar (PlankNeuralNodeFRef p, const float* i
     learn = adjust * learnRate;
     
 	weightVectorPtr = (float*)pl_DynamicArray_GetArray (&p->weightVector);
-	size = pl_DynamicArray_GetSize (&p->weightVector);
+	size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     
     for (i = 0; i < size; ++i)
     {
@@ -315,7 +315,7 @@ float pl_NeuralNodeF_PropogateScalar (PlankNeuralNodeFRef p, const float* inputV
     
     input = 0.f;
     weightVectorPtr = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
-    size = pl_DynamicArray_GetSize (&p->weightVector);
+    size = (int)pl_DynamicArray_GetSize (&p->weightVector);
     
     for (i = 0; i < size; ++i)
         input += inputVector[i] * weightVectorPtr[i];
@@ -356,7 +356,7 @@ PlankResult pl_NeuralNodeF_ToJSON (PlankNeuralNodeFRef p, PlankJSONRef j, const 
     pl_JSON_ObjectSetType (jnode, PLANK_NEURALNODEF_JSON_TYPE);
     pl_JSON_ObjectSetVersionString (jnode, PLANK_NEURALNODEF_JSON_VERSION);
     
-    numWeights = pl_DynamicArray_GetSize (&p->weightVector);
+    numWeights = (int)pl_DynamicArray_GetSize (&p->weightVector);
     weightArray = (const float*)pl_DynamicArray_GetArray (&p->weightVector);
 
     pl_JSON_ObjectPutKey (jnode,
@@ -416,7 +416,7 @@ PlankResult pl_NeuralNodeF_InitFromJSON (PlankNeuralNodeFRef p, PlankNeuralNetwo
     
     if ((result = pl_JSON_FloatArrayGet (jweights, &p->weightVector)) != PlankResult_OK) goto exit;
     
-    numWeights = pl_DynamicArray_GetSize (&p->weightVector);
+    numWeights = (int)pl_DynamicArray_GetSize (&p->weightVector);
     
     if (numWeights < 1)
     {

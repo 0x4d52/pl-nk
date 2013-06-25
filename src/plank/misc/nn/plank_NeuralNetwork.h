@@ -42,6 +42,7 @@
 #define PLANK_NEURALNETWORK_H
 
 #include "../../containers/plank_DynamicArray.h"
+#include "plank_NeuralCommon.h"
 #include "plank_NeuralNode.h"
 #include "plank_NeuralLayer.h"
 #include "../json/plank_JSON.h"
@@ -62,8 +63,10 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
+#if DOXYGEN
 /** An opaque reference to the <i>Plank %NeuralNetworkF</i> object. */
 typedef struct PlankNeuralNetworkF* PlankNeuralNetworkFRef;
+#endif 
 
 typedef PlankF (*PlankNeuralNetworkFActFunction)(PlankF);
 
@@ -91,6 +94,7 @@ int pl_NeuralNetworkF_GetNumLayers (PlankNeuralNetworkFRef p);
 int pl_NeuralNetworkF_GetNumLayersExludingInput (PlankNeuralNetworkFRef p);
 int pl_NeuralNetworkF_GetNumInputs (PlankNeuralNetworkFRef p);
 int pl_NeuralNetworkF_GetNumOutputs (PlankNeuralNetworkFRef p);
+PlankResult pl_NeuralNetworkF_GetLayer (PlankNeuralNetworkFRef p, const int layerIndex, PlankNeuralLayerFRef* layer);
 
 PlankResult pl_NeuralNetworkF_Set (PlankNeuralNetworkFRef p, const int layerIndex, const int nodeIndex, const float* weights, const float threshold);
 PlankResult pl_NeuralNetworkF_SetThreshold (PlankNeuralNetworkFRef p, const int layerIndex, const int nodeIndex, const float threshold);
@@ -114,7 +118,6 @@ PLANK_END_C_LINKAGE
 typedef struct PlankNeuralNetworkF
 {
     float learnRate, actFuncOffset;
-    int numInputs, numOutputs;
 	PlankDynamicArray layers;
 	PlankDynamicArray errorVector;
     PlankNeuralNetworkFActFunction actFunc;

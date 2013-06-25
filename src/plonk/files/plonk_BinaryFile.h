@@ -115,6 +115,8 @@ public:
     template<class NumericalType>
     void write (NumericalArray<NumericalType> const& array) throw();
 
+    ResultCode copy (BinaryFileInternal* source, const LongLong size) throw();
+    
     friend class JSON;
     
     //private:
@@ -370,6 +372,11 @@ public:
     void write (const ValueType value) throw()
     {
         getInternal()->write (value);
+    }
+    
+    ResultCode copy (BinaryFile const& source, const LongLong size = 0) throw()
+    {
+        return getInternal()->copy (source.getInternal(), size);
     }
 	        
     /** Creates a chunk name identifier.

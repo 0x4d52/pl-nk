@@ -222,7 +222,7 @@ int PortAudioAudioHostBase<SampleType>::callback (const SampleType **inputData, 
 }
 
 
-#if defined(__OBJC__) || DOXYGEN
+#if (defined(__OBJC__) && !PLONK_IOS)|| DOXYGEN
 END_PLONK_NAMESPACE
 
 @class PLAudioHost;
@@ -392,6 +392,8 @@ public:
         return [peer.delegate constructGraphInt:peer];
     }
 };
+
+#if PLONK_AUDIOHOST_PORTAUDIO_COMPILEOBJC
 
 END_PLONK_NAMESPACE
 
@@ -799,6 +801,8 @@ using namespace plonk;
 @end
 
 BEGIN_PLONK_NAMESPACE
+#endif
+
 #endif
 
 

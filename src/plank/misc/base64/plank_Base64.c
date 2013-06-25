@@ -46,7 +46,7 @@
 typedef struct PlankBase64Tables
 {
     const char decoding[256];
-    const char encoding[64];
+    const char encoding[64 + 16];
 } PlankBase64Tables;
 
 PlankL pl_Base64EncodedLength (const PlankL inputLength)

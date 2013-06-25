@@ -303,7 +303,7 @@ PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankLL s
     PlankIffID chunkID;
     
     result       = PlankResult_OK;
-    numChunks    = pl_DynamicArray_GetSize (&p->chunkInfos);
+    numChunks    = (int)pl_DynamicArray_GetSize (&p->chunkInfos);
     chunkInfos   = (PlankIffFileWriterChunkInfo*)pl_DynamicArray_GetArray (&p->chunkInfos);
     pos          = 0;
     len          = 0;
@@ -581,7 +581,7 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
     if (newLength == thisChunkInfo->chunkLength)
         goto exit; // nothing to do!
     
-    alignedNewLength = pl_AlignUI (newLength, p->common.headerInfo.alignment);
+    alignedNewLength = pl_AlignLL (newLength, p->common.headerInfo.alignment);
     chunkChange = newLength - thisChunkInfo->chunkLength;
     
     if ((p->common.headerInfo.lengthSize == 4) && (chunkChange > 0x7fffffff))
@@ -795,7 +795,7 @@ PlankResult pl_IffFileWriter_FindLastChunk (PlankIffFileWriterRef p, PlankIffFil
     int numChunks, i;
     
     result           = PlankResult_OK;
-    numChunks        = pl_DynamicArray_GetSize (&p->chunkInfos);
+    numChunks        = (int)pl_DynamicArray_GetSize (&p->chunkInfos);
     chunkInfos       = (PlankIffFileWriterChunkInfo*)pl_DynamicArray_GetArray (&p->chunkInfos);
     lastChunkPos     = 0;
     currentLastChunk = 0;
@@ -850,7 +850,7 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
     
     if (result != PlankResult_OK) goto earlyExit;
 
-    numChunks = pl_DynamicArray_GetSize (&p->chunkInfos);
+    numChunks = (int)pl_DynamicArray_GetSize (&p->chunkInfos);
     chunkInfos = (PlankIffFileWriterChunkInfo*)pl_DynamicArray_GetArray (&p->chunkInfos);
     
     for (i = 0; i < numChunks; ++i)
@@ -905,7 +905,7 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
 
             while (copyChunkLengthRemain > 0)
             {
-                bytesThisTime = pl_MinUI (copyChunkLengthRemain, PLANKIFFFILEWRITER_COPYLENGTH);
+                bytesThisTime = (int)pl_MinLL (copyChunkLengthRemain, PLANKIFFFILEWRITER_COPYLENGTH);
                 
                 if ((result = pl_File_Read ((PlankFileRef)p, copyBuffer, bytesThisTime, &bytesRead)) != PlankResult_OK) goto exit;
 
@@ -929,7 +929,7 @@ PlankResult pl_IffFileWriter_RewriteFileUpdatingChunkInfo (PlankIffFileWriterRef
             // pad with zero for the larger size, no need to round to even bytes as pl_IffFileWriter_WriteChunk does this for us
             if (updatedChunkInfo->chunkLength > chunkInfos[i].chunkLength)
             {
-                bytesThisTime = updatedChunkInfo->chunkLength - chunkInfos[i].chunkLength;
+                bytesThisTime = (int)(updatedChunkInfo->chunkLength - chunkInfos[i].chunkLength);
                 
                 pl_MemoryZero (copyBuffer, bytesThisTime);
                 pl_IffFile_ChunkIDString ((PlankIffFileRef)p, &chunkInfos[i].chunkID, chunkIDStr);

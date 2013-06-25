@@ -45,6 +45,13 @@
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
 
+#include "plonk_JSON.h"
+
+#define PLANK_NEURALPATTERNF_JSON_TYPE           "plank::NeuralPatternF"
+#define PLANK_NEURALPATTERNF_JSON_VERSION        0, 1, 1, 0
+#define PLANK_NEURALPATTERNF_JSON_INPUT          "input"
+#define PLANK_NEURALPATTERNF_JSON_TARGET         "target"
+
 template<class ValueType> class NeuralNetworkBase;
 
 template<class ValueType>                                               
@@ -95,10 +102,36 @@ public:
         (void)result;
 #endif
     }
+    
+    IntArray getStructure() const throw()
+    {
+        IntArray structure;
+        
+        structure.add (this->getNumInputs());
+        
+        const int numLayers = this->getNumLayers() - 1;
+        
+        for (int i = 0; i < numLayers; ++i)
+        {
+            PlankNeuralLayerFRef layer = 0;
+            
+            ResultCode result = pl_NeuralNetworkF_GetLayer (const_cast<PlankNeuralNetworkF*> (&network), i, &layer);
+
+            if (result == 0)
+            {
+                const int numNodes = pl_NeuralLayerF_GetNumOutputs (layer);
+                structure.add (numNodes);
+            }
+        }
+        
+        return structure;
+    }
    
 private:
     inline int getNumInputs() const throw() { return pl_NeuralNetworkF_GetNumInputs (const_cast<PlankNeuralNetworkF*> (&network)); }
     inline int getNumOutputs() const throw() { return pl_NeuralNetworkF_GetNumOutputs (const_cast<PlankNeuralNetworkF*> (&network)); }
+    inline int getNumLayers() const throw() { return pl_NeuralNetworkF_GetNumLayers (const_cast<PlankNeuralNetworkF*> (&network)); }
+
     inline const VectorType& getOutput() const throw() { return networkOutputs; }
     
     inline const VectorType& propogate (VectorType const& inputs) throw()
@@ -189,10 +222,51 @@ public:
     class Pattern
     {
     public:
+        typedef ObjectArray<Pattern> Patterns;
+
         Pattern() throw() { }
         Pattern (VectorType const& input, VectorType const& target) throw()
-        :   i (input), t (target)
+        :   i (input.deepCopy()), t (target.deepCopy())
         {
+        }
+        
+        Pattern (JSON const& json) throw()
+        {            
+            if (!json.isObject()) return;
+            if (!json.isObjectType (PLANK_NEURALPATTERNF_JSON_TYPE)) return;
+            if (json.getVersion() > JSON::versionCode (PLANK_NEURALNETWORKF_JSON_VERSION)) return;
+            
+            JSON inputJson = json[PLANK_NEURALPATTERNF_JSON_INPUT];
+            JSON targetJson = json[PLANK_NEURALPATTERNF_JSON_TARGET];
+            
+            i = inputJson;
+            t = targetJson;
+        }
+        
+        const VectorType& getInput() const throw() { return i; }
+        const VectorType& getTarget() const throw() { return t; }
+        int getInputLength() const throw() { return i.length(); }
+        int getTargetLength() const throw() { return t.length(); }
+        
+        void toJSON (JSON& json, const bool useBinary = false) const throw()
+        {
+            JSON jsonPattern = JSON::object();            
+            jsonPattern.setType (PLANK_NEURALPATTERNF_JSON_TYPE);
+            jsonPattern.setVersionString (PLANK_NEURALPATTERNF_JSON_VERSION);
+            jsonPattern.add (PLANK_NEURALPATTERNF_JSON_INPUT, JSON (i, useBinary));
+            jsonPattern.add (PLANK_NEURALPATTERNF_JSON_TARGET, JSON (t, useBinary));
+            json.add (jsonPattern);
+        }
+        
+        static void patternsToJSON (JSON& json, Patterns const& patterns, const bool useBinary = false) throw()
+        {
+            const int numPatterns = patterns.length();
+            const Pattern* patternArray = patterns.getArray();
+            
+            for (int j = 0; j < numPatterns; ++j)
+            {
+                patternArray[j].toJSON (json, useBinary);
+            }
         }
         
         friend class NeuralNetworkBase;
@@ -202,19 +276,29 @@ public:
         VectorType t;
     };
     
-    typedef ObjectArray<Pattern> Patterns;
+    typedef typename Pattern::Patterns Patterns;
+    
+    NeuralNetworkBase() throw()
+    :   Base (new Internal (IntArray (1, 1, 1), 0.1f))
+    {
+    }
     
     NeuralNetworkBase (IntArray const& layers, const float range = 0.1f) throw()
     :   Base (new Internal (layers, range))
     {
     }
     
-    NeuralNetworkBase (PlankJSONRef json) throw()
-    :   Base (new Internal (json))
+//    NeuralNetworkBase (PlankJSONRef json) throw()
+//    :   Base (new Internal (json))
+//    {
+//    }
+
+    NeuralNetworkBase (JSON const& json) throw()
+    :   Base (new Internal (json.getInternal()))
     {
     }
-    
-    explicit NeuralNetworkBase (Internal* internalToUse) throw() 
+
+    explicit NeuralNetworkBase (Internal* internalToUse) throw()
 	:	Base (internalToUse)
 	{
 	} 
@@ -275,14 +359,44 @@ public:
         }
     }
     
+    void reset (const ValueType amount = 0.1f) throw()
+    {
+        pl_NeuralNetworkF_Reset (&this->getInternal()->network, amount);
+    }
+    
+    void randomise (const ValueType amount = 0.1f) throw()
+    {
+        pl_NeuralNetworkF_Randomise (&this->getInternal()->network, amount);
+    }
+    
     inline void setActFunc (ActFunc const& function) throw()
     {
         return this->getInternal()->setActFunc (function);
     }
     
-    void toJSON (PlankJSONRef json, const bool useBinary = false) throw()
+//    void toJSON (PlankJSONRef json, const bool useBinary = false) throw()
+//    {
+//        this->getInternal()->toJSON (json, useBinary);
+//    }
+
+    void toJSON (JSON& json, const bool useBinary = false) throw()
     {
-        this->getInternal()->toJSON (json, useBinary);
+        this->getInternal()->toJSON (json.getInternal(), useBinary);
+    }
+    
+    int getNumInputs() const throw()
+    {
+        return this->getInternal()->getNumInputs();
+    }
+    
+    int getNumOutputs() const throw()
+    {
+        return this->getInternal()->getNumOutputs();
+    }
+    
+    IntArray getStructure() const throw()
+    {
+        return this->getInternal()->getStructure();
     }
     
     PLONK_OBJECTARROWOPERATOR(NeuralNetworkBase);

@@ -43,6 +43,7 @@
 
 #include "../json/plank_JSON.h"
 #include "../../containers/plank_DynamicArray.h"
+#include "plank_NeuralCommon.h"
 #include "plank_NeuralNode.h"
 #include "plank_NeuralNetwork.h"
 
@@ -59,8 +60,10 @@ PLANK_BEGIN_C_LINKAGE
  @{
  */
 
+#if DOXYGEN
 /** An opaque reference to the <i>Plank %NeuralLayerF</i> object. */
 typedef struct PlankNeuralLayerF* PlankNeuralLayerFRef;
+#endif
 
 /** Initialise a <i>Plank %NeuralLayerF</i> object.
  Deafults to have one wieght. pl_NeuralLayerF_InitWithNumWeights() is more useful.

@@ -141,7 +141,18 @@ public:
     operator Text () const throw() { return pl_JSON_StringGet (json); }
     operator const char* () const throw() { return pl_JSON_StringGet (json); }
        
-    operator IntArray () const throw()
+    int getInt() const throw() { return pl_JSON_IntGet (json); }
+    UnsignedInt getUnsignedInt() const throw() { return PlankUI (pl_JSON_IntGet (json)); }
+    float getFloat() const throw() { return pl_JSON_FloatGet (json); }
+    double getDouble() const throw() { return pl_JSON_DoubleGet (json); }
+    Text getText() const throw() { return pl_JSON_StringGet (json); }
+    const char* getCString() const throw() { return pl_JSON_StringGet (json); }
+                
+    operator IntArray () const throw() { return getIntArray();  }
+    operator FloatArray () const throw() { return getFloatArray(); }
+    operator DoubleArray () const throw() { return getDoubleArray(); }
+
+    IntArray getIntArray() const throw()
     {
         if (isIntArrayEncoded() || isArray())
         {
@@ -150,7 +161,7 @@ public:
             
             if (pl_JSON_IntArrayGet (json, &array) == PlankResult_OK)
             {
-                IntArray values (pl_DynamicArray_GetSize (&array),
+                IntArray values ((int)pl_DynamicArray_GetSize (&array),
                                  static_cast<int*> (pl_DynamicArray_GetArray (&array)),
                                  false, // not null terminated
                                  true); // shouldTakeOwnership
@@ -162,10 +173,10 @@ public:
             }
         }
         
-        return FloatArray::getNull();
+        return IntArray::getNull();
     }
     
-    operator FloatArray () const throw()
+    FloatArray getFloatArray() const throw()
     {
         if (isFloatArrayEncoded() || isArray())
         {
@@ -174,7 +185,7 @@ public:
             
             if (pl_JSON_FloatArrayGet (json, &array) == PlankResult_OK)
             {
-                FloatArray values (pl_DynamicArray_GetSize (&array),
+                FloatArray values ((int)pl_DynamicArray_GetSize (&array),
                                    static_cast<float*> (pl_DynamicArray_GetArray (&array)),
                                    false, // not null terminated
                                    true); // shouldTakeOwnership
@@ -189,7 +200,7 @@ public:
         return FloatArray::getNull();
     }
     
-    operator DoubleArray () const throw()
+    DoubleArray getDoubleArray() const throw()
     {
         if (isDoubleArrayEncoded() || isArray())
         {
@@ -198,7 +209,7 @@ public:
             
             if (pl_JSON_DoubleArrayGet (json, &array) == PlankResult_OK)
             {
-                DoubleArray values (pl_DynamicArray_GetSize (&array),
+                DoubleArray values ((int)pl_DynamicArray_GetSize (&array),
                                     static_cast<double*> (pl_DynamicArray_GetArray (&array)),
                                     false, // not null terminated
                                     true); // shouldTakeOwnership
@@ -210,20 +221,20 @@ public:
             }
         }
         
-        return FloatArray::getNull();
+        return DoubleArray::getNull();
     }
 
-    inline JSON operator[] (const int index) throw()
+    inline JSON operator[] (const int index) const throw()
     {
         return JSON (pl_JSON_ArrayAt (json, index));
     }
 
-    inline JSON operator[] (const Long index) throw()
+    inline JSON operator[] (const Long index) const throw()
     {
         return JSON (pl_JSON_ArrayAt (json, index));
     }
 
-    inline JSON operator[] (const char* key) throw()
+    inline JSON operator[] (const char* key) const throw()
     {
         return JSON (pl_JSON_ObjectAtKey (json, key));
     }
@@ -281,8 +292,45 @@ public:
             return 1;
         }
     }
+  
+    static JSON versionString (const UnsignedChar ex, const UnsignedChar major, const UnsignedChar minor, const UnsignedChar micro) throw()
+    {
+        return pl_JSON_VersionString (ex, major, minor, micro);
+    }
         
-    
+    static UnsignedInt versionCode (const UnsignedChar ex, const UnsignedChar major, const UnsignedChar minor, const UnsignedChar micro) throw()
+    {
+        return pl_JSON_VersionCode (ex, major, minor, micro);
+    }
+        
+    UnsignedInt getVersion() const throw()
+    {
+        return pl_JSON_ObjectGetVersion (json);
+    }
+        
+    void setType (const char* type) throw()
+    {
+        pl_JSON_ObjectSetType (json, type);
+    }
+        
+    void setVersionString (const UnsignedChar ex, const UnsignedChar major, const UnsignedChar minor, const UnsignedChar micro) throw()
+    {
+        pl_JSON_ObjectSetVersionString (json, ex, major, minor, micro);
+    }
+        
+    void setVersionCode (const UnsignedChar ex, const UnsignedChar major, const UnsignedChar minor, const UnsignedChar micro) throw()
+    {
+        pl_JSON_ObjectSetVersionCode (json, ex, major, minor, micro);
+    }
+        
+    bool isObjectType (const char* type) const throw()
+    {
+        return pl_JSON_IsObjectType (json, type);
+    }
+        
+    PlankJSONRef getInternal() throw() { return json; }
+    const PlankJSONRef getInternal() const throw() { return json; }
+        
 private:
     inline JSON (PlankJSONRef other) throw()
     : json (pl_JSON_IncrementRefCount (other))
