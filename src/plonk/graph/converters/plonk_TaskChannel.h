@@ -340,6 +340,29 @@ public:
                                                                    blockSize, 
                                                                    sampleRate);
     }
+    
+    static UnitType arNoResample (UnitType const& input,
+                                  const int numBuffers = 16,
+                                  const int priority = 50,
+                                  BlockSize const& preferredBlockSize = BlockSize::noPreference(),
+                                  SampleRate const& preferredSampleRate = SampleRate::noPreference()) throw()
+    {
+        BlockSize blockSize = BlockSize::decide (input.getBlockSize (0), preferredBlockSize);
+        SampleRate sampleRate = SampleRate::decide (input.getSampleRate (0), preferredSampleRate);
+        
+        // could avoid the resample if we added the function the check if all bs/sr are the same in each channel
+        
+        Inputs inputs;
+        inputs.put (IOKey::Generic, input);
+        
+        Data data = { { -1.0, -1.0 }, 0, numBuffers, priority };
+        
+        return UnitType::template proxiesFromInputs<TaskInternal> (inputs,
+                                                                   data,
+                                                                   blockSize,
+                                                                   sampleRate);
+    }
+
 };
 
 typedef InputTaskUnit<PLONK_TYPE_DEFAULT> InputTask;
