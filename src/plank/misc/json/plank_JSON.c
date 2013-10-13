@@ -297,7 +297,7 @@ static inline const void* pl_JSON_EncodedGet (PlankJSONRef p, const char* keyTyp
     PlankBase64 b64;
     PlankL binaryLength;
     const char* key;
-    const void* data;
+    const void* data = 0;
     
     key = json_object_iter_key (json_object_iter ((json_t*)p));
     

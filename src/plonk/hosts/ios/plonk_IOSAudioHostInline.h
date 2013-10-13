@@ -68,15 +68,15 @@ static void PropertyListener (void *                  inClientData,
                               const void *            inPropertyValue)
 {	
 	IOSAudioHostBase<SampleType> *host = (IOSAudioHostBase<SampleType> *)inClientData;
-#if PLONK_DEBUG
-    const char* idstring = pl_FourCharCode2String (inID).string; (void)idstring;
-    pl_SwapEndianUI ((PlankUI*)idstring);
-    const int valueint = *(int*)inPropertyValue; (void)valueint;
-    const UInt32 valueuint = *(UInt32*)inPropertyValue; (void)valueuint;
-    const float valuefloat = *(float*)inPropertyValue; (void)valuefloat;
-    const char* valuestring = (const char*)inPropertyValue; (void)valuestring;
-    const char* valueptr = *(const char**)inPropertyValue; (void)valueptr;
-#endif
+//#if PLONK_DEBUG
+//    const char* idstring = pl_FourCharCode2String (inID).string; (void)idstring;
+//    pl_SwapEndianUI ((PlankUI*)idstring);
+//    const int valueint = *(int*)inPropertyValue; (void)valueint;
+//    const UInt32 valueuint = *(UInt32*)inPropertyValue; (void)valueuint;
+//    const float valuefloat = *(float*)inPropertyValue; (void)valuefloat;
+//    const char* valuestring = (const char*)inPropertyValue; (void)valuestring;
+//    const char* valueptr = *(const char**)inPropertyValue; (void)valueptr;
+//#endif
     host->propertyCallback (inID, inDataSize, inPropertyValue);
 }
 

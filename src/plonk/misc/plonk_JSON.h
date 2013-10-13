@@ -328,6 +328,11 @@ public:
         return pl_JSON_IsObjectType (json, type);
     }
         
+    Text dump() const throw()
+    {
+        return json_dumps ((json_t*)json, 0);
+    }
+        
     PlankJSONRef getInternal() throw() { return json; }
     const PlankJSONRef getInternal() const throw() { return json; }
         

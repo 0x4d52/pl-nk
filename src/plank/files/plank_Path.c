@@ -310,6 +310,7 @@ PlankResult pl_Path_InitSystem (PlankPathRef p, const int systemPath, const char
     
     result = PlankResult_OK;
     cfurl = nil;
+    cfstring = nil;
     parent = "";
     append = "";
     
