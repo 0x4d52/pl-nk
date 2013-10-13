@@ -530,85 +530,85 @@ using namespace plonk;
     }
 }
 
-- (UInt32)category
-{    
-    typedef Dictionary<Dynamic> OptionDictionary;
-    OptionDictionary options; // must be before the goto
-    
-    if (peer == nil) goto fallback;
-    
-    switch ((const int)type) 
-    {
-        case TypeCode::Float:   options = static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions(); break;
-        case TypeCode::Short:   options = static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions(); break;
-        case TypeCode::Int:     options = static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions(); break;
-        case TypeCode::Double:  options = static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions(); break;
-        default: { }
-    }
-    
-    if (options.containsKey (categoryKey))
-        return (UInt32)options.at (categoryKey).asUnchecked<IntVariable>().getValue();
-    
-fallback:
-    UInt32 property;
-    UInt32 size = sizeof (property); 
-    AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &property);
-    return property;
-}
-
-- (void)setCategory:(UInt32)category
-{    
-    if (peer == nil) return;
-    
-    switch ((const int)type) 
-    {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
-        default: { }
-    }
-}
-
-- (UInt32)mode
-{    
-    typedef Dictionary<Dynamic> OptionDictionary;
-    OptionDictionary options; // must be before the goto
-
-    if (peer == nil) goto fallback;
-    
-    switch ((const int)type) 
-    {
-        case TypeCode::Float:   options = static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions(); break;
-        case TypeCode::Short:   options = static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions(); break;
-        case TypeCode::Int:     options = static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions(); break;
-        case TypeCode::Double:  options = static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions(); break;
-        default: { }
-    }
-
-    if (options.containsKey (modeKey))
-        return (UInt32)options.at (modeKey).asUnchecked<IntVariable>().getValue();
-    
-fallback:
-    UInt32 property;
-    UInt32 size = sizeof (property); 
-    AudioSessionGetProperty (kAudioSessionProperty_Mode, &size, &property);
-    return property;
-}
-
-- (void)setMode:(UInt32)mode
-{    
-    if (peer == nil) return;
-    
-    switch ((const int)type) 
-    {
-        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
-        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
-        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
-        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
-        default: { }
-    }
-}
+//- (UInt32)category
+//{    
+//    typedef Dictionary<Dynamic> OptionDictionary;
+//    OptionDictionary options; // must be before the goto
+//    
+//    if (peer == nil) goto fallback;
+//    
+//    switch ((const int)type) 
+//    {
+//        case TypeCode::Float:   options = static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions(); break;
+//        case TypeCode::Short:   options = static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions(); break;
+//        case TypeCode::Int:     options = static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions(); break;
+//        case TypeCode::Double:  options = static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions(); break;
+//        default: { }
+//    }
+//    
+//    if (options.containsKey (categoryKey))
+//        return (UInt32)options.at (categoryKey).asUnchecked<IntVariable>().getValue();
+//    
+//fallback:
+//    UInt32 property;
+//    UInt32 size = sizeof (property); 
+//    AudioSessionGetProperty (kAudioSessionProperty_AudioCategory, &size, &property);
+//    return property;
+//}
+//
+//- (void)setCategory:(UInt32)category
+//{    
+//    if (peer == nil) return;
+//    
+//    switch ((const int)type) 
+//    {
+//        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
+//        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
+//        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
+//        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (categoryKey, IntVariable (category)); break;
+//        default: { }
+//    }
+//}
+//
+//- (UInt32)mode
+//{    
+//    typedef Dictionary<Dynamic> OptionDictionary;
+//    OptionDictionary options; // must be before the goto
+//
+//    if (peer == nil) goto fallback;
+//    
+//    switch ((const int)type) 
+//    {
+//        case TypeCode::Float:   options = static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions(); break;
+//        case TypeCode::Short:   options = static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions(); break;
+//        case TypeCode::Int:     options = static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions(); break;
+//        case TypeCode::Double:  options = static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions(); break;
+//        default: { }
+//    }
+//
+//    if (options.containsKey (modeKey))
+//        return (UInt32)options.at (modeKey).asUnchecked<IntVariable>().getValue();
+//    
+//fallback:
+//    UInt32 property;
+//    UInt32 size = sizeof (property); 
+//    AudioSessionGetProperty (kAudioSessionProperty_Mode, &size, &property);
+//    return property;
+//}
+//
+//- (void)setMode:(UInt32)mode
+//{    
+//    if (peer == nil) return;
+//    
+//    switch ((const int)type) 
+//    {
+//        case TypeCode::Float:   static_cast< IOSAudioHostPeer<float>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
+//        case TypeCode::Short:   static_cast< IOSAudioHostPeer<short>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
+//        case TypeCode::Int:     static_cast< IOSAudioHostPeer<int>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
+//        case TypeCode::Double:  static_cast< IOSAudioHostPeer<double>* > (peer)->getOtherOptions().put (modeKey, IntVariable (mode)); break;
+//        default: { }
+//    }
+//}
 
 - (void)startHost
 {    

@@ -213,8 +213,8 @@ using namespace plonk;
 @property (nonatomic) int preferredHostBlockSize;           ///< The preferred host block size, only set this BEFORE sending the startHost message.
 @property (nonatomic) int preferredGraphBlockSize;          ///< The preferred graph block size, only set this BEFORE sending the startHost message.
 @property (nonatomic) double preferredHostSampleRate;       ///< The preferred sample rate, only set this BEFORE sending the startHost message.
-@property (nonatomic) UInt32 category;                      ///< The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.
-@property (nonatomic) UInt32 mode;                          ///< The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.
+//@property (nonatomic) UInt32 category;                      ///< The audio session category (kAudioSessionProperty_AudioCategory), only set this BEFORE sending the startHost message.
+//@property (nonatomic) UInt32 mode;                          ///< The audio session mode (kAudioSessionProperty_Mode), only set this BEFORE sending the startHost message.
 
 /** Start the host running. */
 - (void)startHost;

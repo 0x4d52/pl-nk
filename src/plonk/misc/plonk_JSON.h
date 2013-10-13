@@ -138,14 +138,14 @@ public:
     operator PlankUI () const throw() { return PlankUI (pl_JSON_IntGet (json)); }
     operator float () const throw() { return pl_JSON_FloatGet (json); }
     operator double () const throw() { return pl_JSON_DoubleGet (json); }
-    operator Text () const throw() { return pl_JSON_StringGet (json); }
+    operator Text () const throw() { return getText(); }
     operator const char* () const throw() { return pl_JSON_StringGet (json); }
        
     int getInt() const throw() { return pl_JSON_IntGet (json); }
     UnsignedInt getUnsignedInt() const throw() { return PlankUI (pl_JSON_IntGet (json)); }
     float getFloat() const throw() { return pl_JSON_FloatGet (json); }
     double getDouble() const throw() { return pl_JSON_DoubleGet (json); }
-    Text getText() const throw() { return pl_JSON_StringGet (json); }
+    Text getText() const throw() { const char* string = pl_JSON_StringGet (json); return string ? string : ""; }
     const char* getCString() const throw() { return pl_JSON_StringGet (json); }
                 
     operator IntArray () const throw() { return getIntArray();  }
