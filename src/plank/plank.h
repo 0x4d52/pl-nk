@@ -89,6 +89,7 @@
 
 #include "files/plank_Path.h"
 #include "files/plank_File.h"
+#include "files/plank_MultiFileReader.h"
 #include "files/plank_IffFileReader.h"
 #include "files/plank_IffFileWriter.h"
 

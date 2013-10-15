@@ -192,9 +192,14 @@ static inline PlankB pl_IffFile_IsNullID (PlankIffFileRef p, const PlankIffID* c
 
 static inline void pl_IffFile_ChunkIDString (PlankIffFileRef p, const PlankIffID* chunkID, char* string)
 {
+    PlankFourCharCodeString fccs;
+
     switch (p->headerInfo.idType)
     {
-        case PLANKIFFFILE_ID_FCC:   strcpy (string, pl_FourCharCode2String (chunkID->fcc).string); return;
+        case PLANKIFFFILE_ID_FCC:  {
+            fccs = pl_FourCharCode2String (chunkID->fcc);
+            strcpy (string, fccs.string); return;
+        }
         case PLANKIFFFILE_ID_GUID:  pl_GUID_HexString (&chunkID->guid, PLANK_FALSE, string); return;
         default: string[0] = '\0'; return;
     }

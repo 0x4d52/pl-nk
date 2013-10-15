@@ -1,0 +1,112 @@
+/*
+ -------------------------------------------------------------------------------
+ This file is part of the Plink, Plonk, Plank libraries
+  by Martin Robinson
+ 
+ http://code.google.com/p/pl-nk/
+ 
+ Copyright University of the West of England, Bristol 2011-13
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ 
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+ * Neither the name of University of the West of England, Bristol nor 
+   the names of its contributors may be used to endorse or promote products
+   derived from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ DISCLAIMED. IN NO EVENT SHALL UNIVERSITY OF THE WEST OF ENGLAND, BRISTOL BE 
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
+ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ 
+ This software makes use of third party libraries. For more information see:
+ doc/license.txt included in the distribution.
+ -------------------------------------------------------------------------------
+ */
+
+#ifndef PLANK_IFFFILEWRITER_H
+#define PLANK_IFFFILEWRITER_H
+
+#include "plank_File.h"
+#include "../containers/plank_DynamicArray.h"
+#include "../containers/plank_LockFreeQueue.h"
+
+
+PLANK_BEGIN_C_LINKAGE
+
+/** Holds references to multiple files.
+  
+ @defgroup PlankMultiFileClass Plank File class
+ @ingroup PlankClasses
+ @{
+ */
+
+#define PLANKMULITFILE_MODE_UNKNOWN                 0
+#define PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE       1       // DynamicArray of File objects
+#define PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP       2       // DynamicArray of File objects
+#define PLANKMULITFILE_MODE_ARRAYRANDOM             3       // DynamicArray of File objects randomly chosen
+#define PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT     4       // DynamicArray of File objects randomly chosen, not repeating
+#define PLANKMULITFILE_MODE_ARRAYCALLBACK           5       // DynamicArray of File objects chosen using a callback
+#define PLANKMULITFILE_MODE_QUEUE                   6       // LockFreeQueue of File objects
+
+typedef PlankResult (*PlankMultiFileArrayNextFunction)(PlankMulitFileReaderRef);
+
+//PlankMulitFileReaderRef pl_MultiFileReader_CreateAndInit();
+PlankMulitFileReaderRef pl_MultiFileReader_Create();
+//PlankResult pl_MultiFileReader_Init (PlankMulitFileReaderRef p);
+
+PlankResult pl_MultiFileReader_InitArraySequence (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB loop);
+PlankResult pl_MultiFileReader_InitArrayRandom (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB noRepeat);
+PlankResult pl_MultiFileReader_InitArrayCallback (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, PlankMultiFileArrayNextFunction callback);
+PlankResult pl_MultiFileReader_InitQueue (PlankMulitFileReaderRef p, PlankLockFreeQueueRef queue);
+
+PlankResult pl_MultiFileReader_DeInit (PlankMulitFileReaderRef p);
+PlankResult pl_MultiFileReader_Destroy (PlankMulitFileReaderRef p);
+
+PlankResult pl_MultiFileReader_Open (PlankMulitFileReaderRef p);
+PlankResult pl_MultiFileReader_Read (PlankMulitFileReaderRef p, PlankP ptr, int maximumBytes, int* bytesRead);
+
+
+/*
+ PlankResult pl_FileDefaultOpenCallback (PlankFileRef p);
+ PlankResult pl_FileDefaultCloseCallback (PlankFileRef p);
+ PlankResult pl_FileDefaultGetStatusCallback (PlankFileRef p, int type, int* status);
+ PlankResult pl_FileDefaultReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesRead);
+ PlankResult pl_FileDefaultWriteCallback (PlankFileRef p, const void* data, const int maximumBytes);
+ PlankResult pl_FileDefaultSetPositionCallback (PlankFileRef p, PlankLL offset, int code);
+ PlankResult pl_FileDefaultGetPositionCallback (PlankFileRef p, PlankLL* position);
+*/
+
+
+/** @} */
+
+PLANK_END_C_LINKAGE
+
+#if !DOXYGEN
+typedef struct PlankMulitFileReader
+{
+    void* source;
+    PlankFileRef currentFile;
+    PlankMultiFileArrayNextFunction nextFuntion;
+    int mode;
+    int index;
+} PlankMulitFileReader;
+#endif
+
+//------------------------------------------------------------------------------
+
+
+
+#endif // PLANK_IFFFILEWRITER_H

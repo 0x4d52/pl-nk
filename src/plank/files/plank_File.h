@@ -44,6 +44,8 @@
 
 PLANK_BEGIN_C_LINKAGE
 
+typedef struct PlankMulitFileReader* PlankMulitFileReaderRef; // would prefer to move this declaration
+
 /** A crossplatform file reading/writing utility.
  
  Most of the "member functions" return a PlankResult which is a status and/or
@@ -98,7 +100,8 @@ typedef struct PlankFile* PlankFileRef;
 #define PLANKFILE_STREAMTYPE_MEMORY         2
 #define PLANKFILE_STREAMTYPE_DYNAMICARRAY   3
 #define PLANKFILE_STREAMTYPE_NETWORK        4
-#define PLANKFILE_STREAMTYPE_OTHER          5
+#define PLANKFILE_STREAMTYPE_MULTI          5
+#define PLANKFILE_STREAMTYPE_OTHER          999
 
 #define PLANKFILE_SETPOSITION_ABSOLUTE       SEEK_SET
 #define PLANKFILE_SETPOSITION_RELATIVE       SEEK_CUR
@@ -109,7 +112,6 @@ PlankResult pl_FileErase (const char* filepath);
 
 PlankB pl_FileExists (const char* filepath, const PlankB isDirectory);
 PlankResult pl_FileMakeDirectory (const char* filepath);
-
 
 
 typedef PlankResult (*PlankFileOpenFunction)(PlankFileRef);
@@ -222,6 +224,8 @@ PlankResult pl_File_OpenBinaryNativeEndianWrite (PlankFileRef p, const char* fil
 PlankResult pl_File_OpenMemory (PlankFileRef p, void* memory, const PlankLL size, const int mode);
 
 PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memory, const int mode);
+
+PlankResult pl_File_OpenMulti (PlankFileRef p, PlankMulitFileReaderRef multi, const int mode);
 
 PlankResult pl_File_Copy (PlankFileRef p, PlankFileRef source, const PlankLL size);
 

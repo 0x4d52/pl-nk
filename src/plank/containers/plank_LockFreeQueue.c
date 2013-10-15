@@ -207,6 +207,11 @@ PlankResult pl_LockFreeQueue_SetFreeElementDataFunction (PlankLockFreeQueueRef p
     return result;
 }
 
+PlankLockFreeQueueFreeElementDataFunction pl_LockFreeQueue_GetFreeElementDataFunction (PlankLockFreeQueueRef p)
+{
+    return p ? p->freeFunction : (PlankLockFreeQueueFreeElementDataFunction)PLANK_NULL;
+}
+
 PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element)
 {
     PlankResult result;

@@ -61,6 +61,7 @@ PlankResult pl_LockFreeQueue_DeInit (PlankLockFreeQueueRef p);
 PlankResult pl_LockFreeQueue_Destroy (PlankLockFreeQueueRef p);
 PlankResult pl_LockFreeQueue_Clear (PlankLockFreeQueueRef p);
 PlankResult pl_LockFreeQueue_SetFreeElementDataFunction (PlankLockFreeQueueRef p, PlankLockFreeQueueFreeElementDataFunction freeFunction);
+PlankLockFreeQueueFreeElementDataFunction pl_LockFreeQueue_GetFreeElementDataFunction (PlankLockFreeQueueRef p);
 PlankResult pl_LockFreeQueue_Push (PlankLockFreeQueueRef p, const PlankLockFreeQueueElementRef element);
 PlankResult pl_LockFreeQueue_Pop (PlankLockFreeQueueRef p, PlankLockFreeQueueElementRef* element);
 

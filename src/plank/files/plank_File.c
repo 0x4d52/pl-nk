@@ -40,6 +40,7 @@
 #include "../core/plank_StandardHeader.h"
 #include "plank_File.h"
 #include "../maths/plank_Maths.h"
+#include "plank_MultiFileReader.h"
 
 // file callbacks
 
@@ -509,6 +510,84 @@ static PlankResult pl_FileDynamicArrayGetPositionCallback (PlankFileRef p, Plank
     return PlankResult_OK;
 }
 
+static PlankResult pl_FileMultiOpenCallback (PlankFileRef p)
+{
+    PlankMulitFileReaderRef multi;    
+    multi  = (PlankMulitFileReaderRef)p->stream;
+    return pl_MultiFileReader_Open (multi);
+}
+
+static PlankResult pl_FileMultiCloseCallback (PlankFileRef p)
+{
+    (void)p;
+    return PlankResult_OK;
+}
+
+static PlankResult pl_FileMultiClearCallback (PlankFileRef p)
+{
+    (void)p;
+    return PlankResult_FileWriteError;
+}
+
+static PlankResult pl_FileMultiGetStatusCallback (PlankFileRef p, int type, int* status)
+{
+    PlankMulitFileReaderRef multi;
+    
+    multi = (PlankMulitFileReaderRef)p->stream;
+    
+    switch (type)
+    {
+        case PLANKFILE_STATUS_EOF:
+            *status = (multi->currentFile == PLANK_NULL) ? PLANK_TRUE : PLANK_FALSE;
+            break;
+        case PLANKFILE_STATUS_ISPOSITIONABLE:
+            *status = PLANK_FALSE;
+            break;
+            
+        default: return PlankResult_UnknownError;
+    }
+    
+    return PlankResult_OK;
+}
+
+static PlankResult pl_FileMultiReadCallback (PlankFileRef p, PlankP ptr, int maximumBytes, int* bytesRead)
+{
+    PlankResult result;
+    PlankMulitFileReaderRef multi;
+    
+    result = PlankResult_OK;
+    multi  = (PlankMulitFileReaderRef)p->stream;
+    result = pl_MultiFileReader_Read (multi, ptr, maximumBytes, bytesRead);
+    
+exit:
+    return result;
+}
+
+static PlankResult pl_FileMultiWriteCallback (PlankFileRef p, const void* data, const int maximumBytes)
+{
+    (void)p;
+    (void)data;
+    (void)maximumBytes;
+    return PlankResult_FileWriteError;
+}
+
+static PlankResult pl_FileMultiSetPositionCallback (PlankFileRef p, PlankLL offset, int code)
+{
+    (void)p;
+    (void)offset;
+    (void)code;
+    return PlankResult_FileSeekFailed;
+}
+
+static PlankResult pl_FileMultiGetPositionCallback (PlankFileRef p, PlankLL* position)
+{
+    (void)p;
+    *position = 0;
+    return PlankResult_FileSeekFailed;
+}
+
+
+
 // global
 
 PlankResult pl_FileErase (const char* filepath)
@@ -907,14 +986,14 @@ exit:
 
 PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memory, const int mode)
 {
-    PlankResult result;
+    PlankResult result = PlankResult_OK;
     
     if (p->stream != 0)
     {
         if ((result = pl_File_Close (p)) != PlankResult_OK)
             goto exit;
     }
-        
+            
     p->path[0] = '\0';
     p->stream = memory;
     p->size = 0;
@@ -938,6 +1017,47 @@ PlankResult pl_File_OpenDynamicArray (PlankFileRef p, PlankDynamicArrayRef memor
     
 exit:
     return result;
+}
+
+PlankResult pl_File_OpenMulti (PlankFileRef p, PlankMulitFileReaderRef multi, const int mode)
+{
+    PlankResult result;
+    
+    if (mode & PLANKFILE_WRITE)
+    {
+        result = PlankResult_FileModeInvalid; // can't write to a multi
+        goto exit;
+    }
+    
+    if (p->stream != 0)
+    {
+        if ((result = pl_File_Close (p)) != PlankResult_OK)
+            goto exit;
+    }
+    
+    p->path[0] = '\0';
+    p->stream = multi;
+    p->size = 0;
+    p->mode = mode;
+    p->type = PLANKFILE_STREAMTYPE_MULTI;
+    
+    result = pl_File_SetFunction (p,
+                                  pl_FileMultiOpenCallback,
+                                  pl_FileMultiCloseCallback,
+                                  pl_FileMultiClearCallback,
+                                  pl_FileMultiGetStatusCallback,
+                                  pl_FileMultiReadCallback,
+                                  pl_FileMultiWriteCallback,
+                                  pl_FileMultiSetPositionCallback,
+                                  pl_FileMultiGetPositionCallback);
+
+    if (result != PlankResult_OK) goto exit;
+    
+    result = (p->openFunction) (p);
+    if (result != PlankResult_OK) goto exit;
+    
+exit:
+    return result;    
 }
 
 #define PLANKFILE_COPYCHUNKSIZE 512
