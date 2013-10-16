@@ -41,7 +41,13 @@
 #include "../maths/plank_Maths.h"
 #include "../random/plank_RNG.h"
 
-PlankResult pl_MultiFileReader_Queue_FreeCurrentFile (PlankMulitFileReaderRef p);
+
+PlankResult pl_MultiFileReaderArraySequenceOnceNextFunction (PlankMulitFileReaderRef p);
+PlankResult pl_MultiFileReaderArraySequenceLoopNextFunction (PlankMulitFileReaderRef p);
+PlankResult pl_MultiFileReaderArrayRandomNextFunction (PlankMulitFileReaderRef p);
+PlankResult pl_MultiFileReaderArrayRandomNoRepeatNextFunction (PlankMulitFileReaderRef p);
+PlankResult pl_MultiFileReaderQueueNextFunction (PlankMulitFileReaderRef p);
+
 
 //..
 
@@ -278,7 +284,7 @@ exit:
     return result;
 }
 
-PlankResult pl_MultiFileReader_InitArrayCallback (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, PlankMultiFileArrayNextFunction callback)
+PlankResult pl_MultiFileReader_InitArrayCallback (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, PlankMultiFileNextFunction callback)
 {
     PlankResult result = PlankResult_OK;
     pl_MemoryZero (p, sizeof (PlankMulitFileReader));
@@ -348,6 +354,58 @@ PlankResult pl_MultiFileReader_Destroy (PlankMulitFileReaderRef p)
     
 exit:
     return result;
+}
+
+PlankResult pl_MultiFileReader_GetMode (PlankMulitFileReaderRef p, int* mode)
+{
+    *mode = p->mode;
+    return PlankResult_OK;
+}
+
+PlankResult pl_MultiFileReader_GetArray (PlankMulitFileReaderRef p, PlankDynamicArrayRef* array)
+{
+    switch (p->mode)
+    {
+        case PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE:
+        case PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP:
+        case PLANKMULITFILE_MODE_ARRAYRANDOM:
+        case PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT:
+        case PLANKMULITFILE_MODE_ARRAYCALLBACK:
+            *array = (PlankDynamicArrayRef)p->source;
+            return PlankResult_OK;
+        default:
+            *array = (PlankDynamicArrayRef)PLANK_NULL;
+            break;
+    }
+    
+    return PlankResult_UnknownError;
+}
+
+PlankResult pl_MultiFileReader_GetQueue (PlankMulitFileReaderRef p, PlankLockFreeQueueRef* queue)
+{
+    switch (p->mode)
+    {
+        case PLANKMULITFILE_MODE_QUEUE:
+            *queue = (PlankLockFreeQueueRef)p->source;
+            return PlankResult_OK;
+        default:
+            *queue = (PlankLockFreeQueueRef)PLANK_NULL;
+            break;
+    }
+    
+    return PlankResult_UnknownError;
+}
+
+PlankResult pl_MultiFileReader_GetCurrentFile (PlankMulitFileReaderRef p, PlankFileRef* currentFile)
+{
+    *currentFile = p->currentFile;
+    return PlankResult_OK;
+}
+
+PlankResult pl_MultiFileReader_GetIndex (PlankMulitFileReaderRef p, int* index)
+{
+    *index = p->index;
+    return PlankResult_OK;
 }
 
 PlankResult pl_MultiFileReader_Open (PlankMulitFileReaderRef p)

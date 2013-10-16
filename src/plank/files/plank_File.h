@@ -306,7 +306,8 @@ PlankResult pl_File_GetPosition (PlankFileRef p, PlankLL* position);
  @param mode A bit mask code to identify the mode in which to open the file. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_File_SetMode (PlankFileRef p, const int mode);
-PlankResult pl_File_GetMode (PlankFileRef p, int* mode);
+
+PlankResult pl_File_GetStreamType (PlankFileRef p, int* type);
 
 /** */
 PlankResult pl_File_SetEndian (PlankFileRef p, const PlankB isBigEndian);

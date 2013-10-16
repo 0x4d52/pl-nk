@@ -54,6 +54,8 @@
 #define PLANKAUDIOFILE_FORMAT_OPUS                    6
 #define PLANKAUDIOFILE_FORMAT_CAF                     7
 #define PLANKAUDIOFILE_FORMAT_W64                     8
+#define PLANKAUDIOFILE_FORMAT_MULTI                 999
+
 
 static inline const char* pl_PlankAudioFileGetFormatName (int format)
 {
@@ -69,6 +71,7 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
         case PLANKAUDIOFILE_FORMAT_OPUS:        return "Opus";
         case PLANKAUDIOFILE_FORMAT_CAF:         return "CAF";
         case PLANKAUDIOFILE_FORMAT_W64:         return "W64";
+        case PLANKAUDIOFILE_FORMAT_MULTI:       return "Multi";
 
         default: return "invalid";
     }

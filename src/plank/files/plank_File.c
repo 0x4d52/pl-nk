@@ -1251,6 +1251,12 @@ PlankResult pl_File_GetMode (PlankFileRef p, int* mode)
     return PlankResult_OK;
 }
 
+PlankResult pl_File_GetStreamType (PlankFileRef p, int* type)
+{
+    *type = p->type;
+    return PlankResult_OK;
+}
+
 PlankResult pl_File_SetEndian (PlankFileRef p, const PlankB isBigEndian)
 {
     if (isBigEndian)
