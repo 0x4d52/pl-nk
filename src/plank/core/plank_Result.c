@@ -71,6 +71,8 @@ const char* pl_ResultString (PlankResult result)
         "The file is not ready for this operation",                                     //PlankResult_AudioFileNotReady
         "The data chunks appears to be invalid",                                        //PlankResult_AudioFileDataChunkInvalid
         "A file operation was attempted when the file was at an invalid position",      //PlankResult_AudioFileInvalidFilePosition
+        "The audio file frame format changed mid-stream.",                              //PlankResult_AudioFileFrameFormatChanged
+
         
         "Setting the Thread function failed",                                           //PlankResult_ThreadSetFunctionFailed
         "Setting the Thread user data failed",                                          //PlankResult_ThreadSetUserDataFailed

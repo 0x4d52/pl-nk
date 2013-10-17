@@ -107,6 +107,7 @@ PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 PlankResult pl_AudioFileReader_Multi_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Multi_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
+PlankResult pl_AudioFileReader_Multi_UpdateFormat (PlankAudioFileReaderRef p, const PlankAudioFileFormatInfo* newFormat, PlankB* frameFormatChanged);
 
 
 #if PLANK_APPLE
@@ -2691,6 +2692,14 @@ PlankResult pl_AudioFileReader_Multi_OpenWithFile (PlankAudioFileReaderRef p, Pl
             amul->currentAudioFile = (PlankAudioFileReaderRef)PLANK_NULL;
             pl_MultiFileReader_GetArray (multi, &fileArray);
             arraySize = pl_DynamicArray_GetSize (fileArray);
+            audioFileArray = pl_DynamicArray_Create();
+            
+            if (!audioFileArray)
+            {
+                result = PlankResult_MemoryError;
+                goto exit;
+            }
+            
             pl_DynamicArray_InitWithItemSizeAndSize (audioFileArray, sizeof (PlankAudioFileReader), arraySize, PLANK_TRUE);
             amul->source = audioFileArray;
             
@@ -2783,10 +2792,12 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
     PlankMultiAudioFileReaderRef amul;
     int framesThisTime, framesReadLocal, maximumFrames, bytesThisTime;
     PlankP ptr;
+    PlankB frameFormatChanged;
     
     amul = (PlankMultiAudioFileReaderRef)p->peer;
 
     framesReadLocal = 0;
+    frameFormatChanged = PLANK_FALSE;
     
     // try to get a new file if one isnt open
     
@@ -2798,7 +2809,7 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
             goto exit;
         
         if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
-            pl_MemoryCopy (&p->formatInfo, &amul->currentAudioFile->formatInfo, sizeof (PlankAudioFileFormatInfo));
+            pl_AudioFileReader_Multi_UpdateFormat (p, &amul->currentAudioFile->formatInfo, PLANK_NULL);
     }
     
     maximumFrames = numFrames;
@@ -2806,7 +2817,12 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
     
     while (maximumFrames > 0)
     {
-        if (!pl_AudioFileReader_GetFile (amul->currentAudioFile))
+        if (frameFormatChanged)
+        {
+            result = PlankResult_AudioFileFrameFormatChanged;
+            goto exit;
+        }
+        else if (!pl_AudioFileReader_GetFile (amul->currentAudioFile))
         {
             result = PlankResult_FileEOF;
             goto exit;
@@ -2828,7 +2844,7 @@ PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, cons
                     goto exit;
                 
                 if (pl_AudioFileReader_GetFile (amul->currentAudioFile) != PLANK_NULL)
-                    pl_MemoryCopy (&p->formatInfo, &amul->currentAudioFile->formatInfo, sizeof (PlankAudioFileFormatInfo));
+                    pl_AudioFileReader_Multi_UpdateFormat (p, &amul->currentAudioFile->formatInfo, &frameFormatChanged);
             }
         }
         
@@ -2858,6 +2874,46 @@ PlankResult pl_AudioFileReader_Multi_GetFramePosition (PlankAudioFileReaderRef p
     return PlankResult_FileSeekFailed;
 }
 
+PlankResult pl_AudioFileReader_Multi_UpdateFormat (PlankAudioFileReaderRef p, const PlankAudioFileFormatInfo* newFormat, PlankB* frameFormatChanged)
+{
+    PlankResult result = PlankResult_OK;
+    PlankB changed;
+    
+    changed = PLANK_FALSE;
+    
+    if (p->formatInfo.encoding != newFormat->encoding)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+    if (p->formatInfo.numChannels != newFormat->numChannels)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+    if (p->formatInfo.bytesPerFrame != newFormat->bytesPerFrame)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+    if (p->formatInfo.sampleRate != newFormat->sampleRate)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+exit:
+    pl_MemoryCopy (&p->formatInfo, newFormat, sizeof (PlankAudioFileFormatInfo));
+    
+    if (frameFormatChanged != PLANK_NULL)
+        *frameFormatChanged = changed;
+    
+    return result;
+}
+
 // multi callbacks
 
 PlankResult pl_MultiAudioFileReaderArrayNextFunction (PlankMultiAudioFileReaderRef p)
@@ -2879,7 +2935,8 @@ PlankResult pl_MultiAudioFileReaderArrayNextFunction (PlankMultiAudioFileReaderR
     {
         array     = (PlankDynamicArrayRef)p->source;
         arraySize = pl_DynamicArray_GetSize (array);
-        index     = pl_MultiFileReader_GetIndex (multi, &index);
+        
+        pl_MultiFileReader_GetIndex (multi, &index);
         
         if ((index >= 0) && (index < arraySize))
         {
@@ -2930,8 +2987,6 @@ PlankResult pl_MultiAudioFileReaderQueueNextFunction (PlankMultiAudioFileReaderR
 exit:    
     return result;
 }
-
-
 
 
 
