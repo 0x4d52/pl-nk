@@ -40,6 +40,7 @@
 #define PLONK_BINARYFILE_H
 
 #include "../core/plonk_CoreForwardDeclarations.h"
+#include "plonk_FilesForwardDeclarations.h"
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
 #include "../core/plonk_SmartPointerContainer.h"
@@ -55,6 +56,7 @@ public:
                         const bool bigEndian = false) throw();
     BinaryFileInternal (ByteArray const& bytes,
                         const bool writable = false) throw();
+    BinaryFileInternal (FilePathArray const& fileArray, const int multiMode, const bool bigEndian = false) throw();
     explicit BinaryFileInternal (PlankFileRef fileRef) throw();
 
     ~BinaryFileInternal();
@@ -62,6 +64,8 @@ public:
     void disown (PlankFileRef fileRef) throw();
     
     static bool setupBytes (PlankFileRef p, ByteArray const& bytes, const bool writable) throw();
+    static bool setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian) throw();
+
     static PlankResult dynamicMemoryOpenCallback (PlankFileRef p);
     static PlankResult dynamicMemoryCloseCallback (PlankFileRef p);
     static PlankResult dynamicMemoryClearCallback (PlankFileRef p);
@@ -259,6 +263,13 @@ public:
     {
     }
     
+    /** Creates a multiple binary file reader from the array of files.
+     */
+    BinaryFile (FilePathArray const& fileArray, const int multiMode, const bool bigEndian = PLANK_BIGENDIAN) throw()
+    :   Base (new Internal (fileArray, multiMode))
+    {
+    }
+
     /** @internal */
     explicit BinaryFile (Internal* internalToUse) throw() 
 	:	Base (internalToUse)

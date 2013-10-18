@@ -58,6 +58,7 @@ public:
     AudioFileReaderInternal() throw();
     AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw();
     AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw();
+    AudioFileReaderInternal (FilePathArray const& paths, const int multiMode, const int bufferSize) throw();
     ~AudioFileReaderInternal();
     
     ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw();
@@ -146,19 +147,19 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     SampleType* dataArray = data.getArray();
     void* const readBufferArray = readBuffer.getArray();
     
-    const int encoding = getEncoding();
-    const int channels = getNumChannels();
-    const int bytesPerSample = getBytesPerSample();
+    int encoding = getEncoding();
+    int channels = getNumChannels();
+    int bytesPerSample = getBytesPerSample();
     
     plonk_assert ((encoding >= AudioFile::EncodingMin) && (encoding <= AudioFile::EncodingMax));
     plonk_assert (getBitsPerSample() > 0);
     plonk_assert (channels > 0);
     plonk_assert (getBytesPerFrame() > 0);
     
-    const bool isPCM = encoding & AudioFile::EncodingFlagPCM;
-    const bool isFloat = encoding & AudioFile::EncodingFlagFloat;
-    const bool isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
-    const bool isInterleaved = !(encoding & AudioFile::EncodingFlagNonIntervleaved);
+    bool isPCM = encoding & AudioFile::EncodingFlagPCM;
+    bool isFloat = encoding & AudioFile::EncodingFlagFloat;
+    bool isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
+    bool isInterleaved = !(encoding & AudioFile::EncodingFlagNonIntervleaved);
     
     int dataIndex = 0;
     
@@ -167,6 +168,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     
     while ((dataRemaining > 0) && 
            (result != PlankResult_FileEOF) &&
+           (result != PlankResult_AudioFileFrameFormatChanged) &&
            (numFails < numFailsAllowed))
     {
         AtomicLongLong newPosition (-1);
@@ -181,7 +183,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
         int framesRead;
         const int framesToRead = plonk::min (dataRemaining / channels, numFramesPerBuffer);
         result = pl_AudioFileReader_ReadFrames (getPeerRef(), framesToRead, readBufferArray, &framesRead);
-        plonk_assert (result == PlankResult_OK || result == PlankResult_FileEOF);
+        plonk_assert ((result == PlankResult_OK) || (result == PlankResult_FileEOF) || (result == PlankResult_AudioFileFrameFormatChanged));
         
         if (framesRead > 0)
         {
@@ -272,6 +274,33 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             if (numLoops.getValue() > 1)
                 numLoops.setValue (numLoops.getValue() - 1);
         }
+        else if (result == PlankResult_AudioFileFrameFormatChanged)
+        {
+            encoding = getEncoding();
+            
+            const int newNumChannels = getNumChannels();
+            
+            if (newNumChannels == channels)
+            {
+                result = PlankResult_OK; // no need to exit our loop unless the number of channels changed
+            }
+            else
+            {
+                channels = getNumChannels();
+            }
+            
+            bytesPerSample = getBytesPerSample();
+            
+            plonk_assert ((encoding >= AudioFile::EncodingMin) && (encoding <= AudioFile::EncodingMax));
+            plonk_assert (getBitsPerSample() > 0);
+            plonk_assert (channels > 0);
+            plonk_assert (getBytesPerFrame() > 0);
+            
+            isPCM = encoding & AudioFile::EncodingFlagPCM;
+            isFloat = encoding & AudioFile::EncodingFlagFloat;
+            isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
+            isInterleaved = !(encoding & AudioFile::EncodingFlagNonIntervleaved);
+        }
     }
     
     if (dataIndex < dataLength)
@@ -314,7 +343,7 @@ public:
     {
     }
     
-    /** Creates a binary file reader from the given path. 
+    /** Creates an audio file reader from the given path. 
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (Text const& path) throw()
@@ -322,7 +351,7 @@ public:
 	{
 	}
         
-    /** Creates a binary file reader from the given path. 
+    /** Creates an audio file reader from the given path.
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (const char* path) throw()
@@ -330,7 +359,7 @@ public:
 	{
 	}
     
-    /** Creates a binary file reader from the given path.
+    /** Creates an audio file reader from the given path.
      The default buffer size is used given by AudioFile::DefaultBufferSize (32768).
      @param path        The path of the file to read.  */
 	AudioFileReader (FilePath const& path) throw()
@@ -338,14 +367,22 @@ public:
 	{
 	}
     
-    /** Creates a binary file reader from the given path. 
-     @param path        The path of the file to read.  
+    /** Creates an audio file reader from the given path.
+     @param path        The path of the file to read.
      @param bufferSize  The buffer size to use when reading. */
 	AudioFileReader (const char* path, const int bufferSize, const bool readMetaData) throw()
 	:	Base (new Internal (path, bufferSize, readMetaData))
 	{
 	}
-           
+
+    /** Creates a multiple audio file reader from the given paths.
+     @param paths       The paths of the files to read.
+     @param bufferSize  The buffer size to use when reading. */
+	AudioFileReader (FilePathArray const& paths, const int multiMode, const int bufferSize = 0) throw()
+	:	Base (new Internal (paths, multiMode, bufferSize))
+	{
+	}
+    
     /** @internal */
     explicit AudioFileReader (Internal* internalToUse) throw() 
 	:	Base (internalToUse)
@@ -500,6 +537,13 @@ public:
         return getInternal()->readFrames (data, true, false, numLoops);
     }
     
+    template<class SampleType>
+    inline bool readFrames (NumericalArray<SampleType>& data) throw()
+    {
+        IntVariable numLoops (1);
+        return getInternal()->readFrames (data, true, false, numLoops);
+    }
+    
     /** Read frames into a pre-allocated NumericalArray without scaling. 
      @param data    The NumericalArray object to read interleaved frames into. 
      @param numLoops    How many loops to read, 0 means infinite loops.
@@ -507,6 +551,13 @@ public:
     template<class SampleType>
     inline bool readFramesDirect (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
+        return getInternal()->readFrames (data, false, false, numLoops);
+    }
+    
+    template<class SampleType>
+    inline bool readFramesDirect (NumericalArray<SampleType>& data) throw()
+    {
+        IntVariable numLoops (1);
         return getInternal()->readFrames (data, false, false, numLoops);
     }
     

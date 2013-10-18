@@ -40,13 +40,13 @@
 #define PLONK_AUDIOFILEWRITER_H
 
 #include "../../core/plonk_CoreForwardDeclarations.h"
+#include "../plonk_FilesForwardDeclarations.h"
 #include "../../core/plonk_SmartPointer.h"
 #include "../../core/plonk_WeakPointer.h"
 #include "../../core/plonk_SmartPointerContainer.h"
 #include "../../containers/plonk_Text.h"
 #include "plonk_AudioFile.h"
 
-template<class SampleType> class AudioFileWriter;
 
 template<class SampleType>
 class AudioFileWriterInternalBase : public SmartPointer

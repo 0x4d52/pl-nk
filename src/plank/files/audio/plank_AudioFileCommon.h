@@ -291,8 +291,8 @@ the stream is 7.1 surround. channel order: front left, center, front right, side
     #define PLANKAUDIOFILE_OPUS_VENDOR    "libopus 1.01 in Plank " PLANK_VERSION
     #define PLANKAUDIOFILE_OPUS_MAXFRAMESIZE                           (960 * 6)
     #define PLANKAUDIOFILE_OPUS_MAXPACKETSIZE                     (1275 * 3 + 7)
-    #define PALNKAUDIOFILE_OPUS_MAXSEGMENTS                                  255
-    #define PALNKAUDIOFILE_OPUS_FLUSHFILLSIZE                        (255 * 255)
+    #define PLANKAUDIOFILE_OPUS_MAXSEGMENTS                                  255
+    #define PLANKAUDIOFILE_OPUS_FLUSHFILLSIZE                        (255 * 255)
     #define PLANKAUDIOFILE_OPUS_DELAY                                        312
     #define PLANKAUDIOFILE_OPUS_READBYTES                                    200
     #define PLANKAUDIOFILE_OPUS_MINSAMPLERATE                               8000

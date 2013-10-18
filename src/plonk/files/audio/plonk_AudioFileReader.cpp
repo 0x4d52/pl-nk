@@ -96,6 +96,22 @@ AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const 
     init (bytes, readMetaData);
 }
 
+AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray, const int multiMode, const int bufferSize) throw()
+:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
+    numFramesPerBuffer (0),
+    newPositionOnNextRead (-1)
+{
+    pl_AudioFileReader_Init (getPeerRef());
+    
+    PlankFile file;
+    
+    if (BinaryFileInternal::setupMulti (&file, fileArray, multiMode, PLANK_BIGENDIAN))
+    {
+        if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, false) == PlankResult_OK)
+            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+    }
+}
+
 AudioFileReaderInternal::~AudioFileReaderInternal()
 {
     pl_AudioFileReader_DeInit (getPeerRef());

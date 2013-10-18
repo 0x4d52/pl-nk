@@ -195,7 +195,6 @@ PlankResult BinaryFileInternal::dynamicMemoryGetPositionCallback (PlankFileRef p
     return PlankResult_OK;
 }
 
-
 BinaryFileInternal::BinaryFileInternal() throw()
 {
     pl_File_Init (getPeerRef());
@@ -270,7 +269,80 @@ bool BinaryFileInternal::setupBytes (PlankFileRef p, ByteArray const& bytes, con
     plonk_assert (result == PlankResult_OK);
     return result == PlankResult_OK;    
 }
-                                                                                    
+
+bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian) throw()
+{
+    pl_File_Init (p);
+    
+    const bool shouldTakeOwnership = true;
+    
+    ResultCode result;
+    PlankDynamicArrayRef array = pl_DynamicArray_Create();
+    pl_DynamicArray_InitWithItemSizeAndSize (array, sizeof (PlankFile), fileArray.length(), true);
+    PlankFile* rawArray = static_cast<PlankFile*> (pl_DynamicArray_GetArray (array));
+    
+    for (int i = 0; i < fileArray.length(); ++i)
+    {
+        result = pl_File_Init (&rawArray[i]);
+        plonk_assert (result == PlankResult_OK);
+        result = pl_File_OpenBinaryRead (&rawArray[i], fileArray.atUnchecked(i).fullpath().getArray(), false, bigEndian);
+        plonk_assert (result == PlankResult_OK);
+    }
+    
+    PlankMulitFileReaderRef multi = pl_MultiFileReader_Create();
+    
+    switch (multiMode)
+    {
+        case MultiFileArraySequenceOnce:
+        {
+            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, false);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        case MultiFileArraySequenceLoop:
+        {
+            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, true);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        case MultiFileArrayRandom:
+        {
+            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, false);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        case MultiFileArrayRandomNoRepeat:
+        {
+            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, true);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        default:
+            pl_DynamicArray_Destroy (array);
+            pl_MultiFileReader_Destroy (multi);
+            array = (PlankDynamicArrayRef)PLANK_NULL;
+            multi = (PlankMulitFileReaderRef)PLANK_NULL;
+            break;
+    }
+    
+    if (multi != PLANK_NULL)
+    {
+        int mode = PLANKFILE_READ | PLANKFILE_BINARY;
+        
+        if (bigEndian)
+            mode |= PLANKFILE_BIGENDIAN;
+        
+        result = pl_File_OpenMulti (p, multi, mode);
+        plonk_assert (result == PlankResult_OK);
+    }
+    
+    return result == PlankResult_OK;
+}
+
+BinaryFileInternal::BinaryFileInternal (FilePathArray const& fileArray, const int multiMode, const bool bigEndian) throw()
+{
+    setupMulti (getPeerRef(), fileArray, multiMode, bigEndian);
+}
 
 BinaryFileInternal::BinaryFileInternal (PlankFileRef fileRef) throw()
 {

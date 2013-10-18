@@ -77,6 +77,10 @@ typedef struct PlankFile* PlankFileRef;
 /** Flag to identify big endian mode for binary files (otherwise it will be little endian). */
 #define PLANKFILE_BIGENDIAN             (1 << 5)
 
+/** Flag to identify that a multi file object should be owned by the File object. */
+#define PLANKFILE_OWNMULTI              (1 << 6)
+
+
 #if PLANK_BIGENDIAN
     #define PLANKFILE_NATIVEENDIAN      PLANKFILE_BIGENDIAN
 #elif PLANK_LITTLEENDIAN

@@ -2329,12 +2329,12 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
         goto exit;
     }
     
-    numSegments = (ret + PALNKAUDIOFILE_OPUS_MAXSEGMENTS) / PALNKAUDIOFILE_OPUS_MAXSEGMENTS;
+    numSegments = (ret + PLANKAUDIOFILE_OPUS_MAXSEGMENTS) / PLANKAUDIOFILE_OPUS_MAXSEGMENTS;
     numFramesAt48K = opus->frameSize * 48000 / sampleRate;
     opus->currentGranulePos += numFramesAt48K;
     
-    while ((((numSegments <= PALNKAUDIOFILE_OPUS_MAXSEGMENTS) && (opus->totalNumSegments + numSegments > PALNKAUDIOFILE_OPUS_MAXSEGMENTS)) || (opus->currentGranulePos - opus->lastPageGranulePos > maxOggDelay)) &&
-          ogg_stream_flush_fill (&opus->os, &opus->og, PALNKAUDIOFILE_OPUS_FLUSHFILLSIZE))
+    while ((((numSegments <= PLANKAUDIOFILE_OPUS_MAXSEGMENTS) && (opus->totalNumSegments + numSegments > PLANKAUDIOFILE_OPUS_MAXSEGMENTS)) || (opus->currentGranulePos - opus->lastPageGranulePos > maxOggDelay)) &&
+          ogg_stream_flush_fill (&opus->os, &opus->og, PLANKAUDIOFILE_OPUS_FLUSHFILLSIZE))
     {        
         if ((result = pl_AudioFileWriter_Ogg_WritePage ((PlankFileRef)opus, &opus->og)) != PlankResult_OK) goto exit;
     }
@@ -2349,8 +2349,8 @@ static PlankResult pl_AudioFileWriter_Opus_WriteBuffer (PlankOpusFileWriterRef o
     ogg_stream_packetin (&opus->os, &opus->op);
     opus->totalNumSegments += numSegments;
     
-    while ((opus->op.e_o_s || (opus->currentGranulePos + numFramesAt48K - opus->lastPageGranulePos > maxOggDelay) || (opus->totalNumSegments >= PALNKAUDIOFILE_OPUS_MAXSEGMENTS)) ?
-           ogg_stream_flush_fill (&opus->os, &opus->og, PALNKAUDIOFILE_OPUS_FLUSHFILLSIZE) : ogg_stream_pageout_fill (&opus->os, &opus->og, PALNKAUDIOFILE_OPUS_FLUSHFILLSIZE))
+    while ((opus->op.e_o_s || (opus->currentGranulePos + numFramesAt48K - opus->lastPageGranulePos > maxOggDelay) || (opus->totalNumSegments >= PLANKAUDIOFILE_OPUS_MAXSEGMENTS)) ?
+           ogg_stream_flush_fill (&opus->os, &opus->og, PLANKAUDIOFILE_OPUS_FLUSHFILLSIZE) : ogg_stream_pageout_fill (&opus->os, &opus->og, PLANKAUDIOFILE_OPUS_FLUSHFILLSIZE))
     {
         if ((result = pl_AudioFileWriter_Opus_WritePage (opus)) != PlankResult_OK) goto exit;
     }

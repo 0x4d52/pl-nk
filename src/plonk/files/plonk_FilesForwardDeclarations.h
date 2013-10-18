@@ -36,28 +36,38 @@
  -------------------------------------------------------------------------------
  */
 
-#ifndef PLONK_COREFORWARDDECLARATIONS_H
-#define PLONK_COREFORWARDDECLARATIONS_H
+#ifndef PLONK_FILESFORWARDDECLARATIONS_H
+#define PLONK_FILESFORWARDDECLARATIONS_H
 
-class SmartPointer;
-class SmartPointerCounter;
-class WeakPointer;
-class TypeCode;
+#include "../core/plonk_CoreForwardDeclarations.h"
+#include "../containers/plonk_ContainerForwardDeclarations.h"
 
-template<class Type>                                class TypeUtility;
-template<class OriginalType>                        class WeakPointerContainer;
-template<class SmartPointerType>                    class SmartPointerContainerBase;
-template<class SmartPointerType,
-         bool enableWeak = true>                    class SmartPointerContainer;
-template<class SenderContainerBaseType>             class ReceiverInternal;
-template<class ReceiverInternalType>                class ReceiverContainer;
-template<class SenderContainerBaseType>             class SenderInternal;
-template<class SenderInternalType>                  class SenderContainer;
-template<class Type>                                class TypeUtility;
-template<class TypeA, class TypeB>                  class BinaryOpTypeUtility;
-template<class OperandType>                         class BinaryOpFunctions;
-template<class OperandType>                         class BinaryOpFunctionsHelper;
-template<class OperandType>                         class UnaryOpFunctions;
-template<class OperandType>                         class UnaryOpFunctionsHelper;
+class TextFile;
+class FilePath;
+class BinaryFile;
+class AudioFile;
+class AudioFileReader;
+template<class SampleType> class AudioFileWriter;
 
-#endif // PLONK_COREFORWARDDECLARATIONS_H
+typedef ObjectArray<TextFile> TextFileArray;
+typedef ObjectArray<BinaryFile> BinaryFileArray;
+typedef ObjectArray<AudioFileReader> AudioFileReaderArray;
+typedef ObjectArray<FilePath> FilePathArray;
+
+typedef LockFreeQueue<TextFile> TextFileQueue;
+typedef LockFreeQueue<BinaryFile> BinaryFileQueue;
+typedef LockFreeQueue<AudioFileReader> AudioFileReaderQueue;
+typedef LockFreeQueue<FilePath> FilePathQueue;
+
+enum MultiFileTypes
+{
+    MultiFileUnknown = PLANKMULITFILE_MODE_UNKNOWN,
+    MultiFileArraySequenceOnce = PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE,
+    MultiFileArraySequenceLoop = PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP,
+    MultiFileArrayRandom = PLANKMULITFILE_MODE_ARRAYRANDOM,
+    MultiFileArrayRandomNoRepeat = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT,
+    MultiFileArrayCallback = PLANKMULITFILE_MODE_ARRAYCALLBACK,
+    MultiFileQueue = PLANKMULITFILE_MODE_QUEUE
+};
+
+#endif // PLONK_FILESFORWARDDECLARATIONS_H

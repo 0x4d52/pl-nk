@@ -519,8 +519,20 @@ static PlankResult pl_FileMultiOpenCallback (PlankFileRef p)
 
 static PlankResult pl_FileMultiCloseCallback (PlankFileRef p)
 {
-    (void)p;
-    return PlankResult_OK;
+    PlankResult result = PlankResult_OK;
+    PlankMulitFileReaderRef multi;
+    int mode;
+    
+    pl_File_GetMode (p, &mode);
+    
+    if (mode & PLANKFILE_OWNMULTI)
+    {
+        multi  = (PlankMulitFileReaderRef)p->stream;
+        result = pl_MultiFileReader_Destroy (multi);
+        p->stream = PLANK_NULL;
+    }
+    
+    return result;
 }
 
 static PlankResult pl_FileMultiClearCallback (PlankFileRef p)
@@ -541,7 +553,7 @@ static PlankResult pl_FileMultiGetStatusCallback (PlankFileRef p, int type, int*
             *status = (multi->currentFile == PLANK_NULL) ? PLANK_TRUE : PLANK_FALSE;
             break;
         case PLANKFILE_STATUS_ISPOSITIONABLE:
-            *status = PLANK_FALSE;
+            *status = ((multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP) || (multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE)) ? PLANK_TRUE : PLANK_FALSE;
             break;
             
         default: return PlankResult_UnknownError;
@@ -573,10 +585,27 @@ static PlankResult pl_FileMultiWriteCallback (PlankFileRef p, const void* data, 
 
 static PlankResult pl_FileMultiSetPositionCallback (PlankFileRef p, PlankLL offset, int code)
 {
-    (void)p;
-    (void)offset;
-    (void)code;
-    return PlankResult_FileSeekFailed;
+    PlankResult result;
+    PlankMulitFileReaderRef multi;
+    
+    if ((code == PLANKFILE_SETPOSITION_RELATIVE) || (code == PLANKFILE_SETPOSITION_RELATIVEEND))
+    {
+        result = PlankResult_FileSeekFailed;
+        goto exit;
+    }
+    else if (((multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP) || (multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE)) && (offset == 0))
+    {    
+        result = PlankResult_OK;
+        p->position = 0;
+    }
+    else
+    {
+        result = PlankResult_FileSeekFailed;
+        goto exit;
+    }
+    
+exit:
+    return result;
 }
 
 static PlankResult pl_FileMultiGetPositionCallback (PlankFileRef p, PlankLL* position)

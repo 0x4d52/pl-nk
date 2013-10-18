@@ -40,6 +40,7 @@
 #define PLONK_TEXTFILE_H
 
 #include "../core/plonk_CoreForwardDeclarations.h"
+#include "plonk_FilesForwardDeclarations.h"
 #include "../core/plonk_SmartPointer.h"
 #include "../core/plonk_WeakPointer.h"
 #include "../core/plonk_SmartPointerContainer.h"
@@ -53,6 +54,9 @@ public:
     TextFileInternal (Text const& path, 
                       const bool writable = false, 
                       const bool clearContents = false) throw();
+    TextFileInternal (FilePathArray const& fileArray, const int multiMode) throw();
+//    TextFileInternal (TextFileQueue const& fileQueue) throw();
+
     ~TextFileInternal();
     
     LongLong getPosition() const throw();
@@ -65,6 +69,7 @@ public:
 
     Text readLine (const int maximumLength = 1024) throw();
     Text readAll() throw();
+    Text read (const int numBytes) throw();
     
 	void writeValue (const char value) throw();
 	void writeValue (const short value) throw();
@@ -142,7 +147,21 @@ public:
     TextFile (const char* path, const bool writable, const bool clearContents = false) throw()
 	:	Base (new Internal (path, writable, clearContents))
 	{
-	}    
+	}
+    
+    /** Creates a multiple text file reader from the array of files.
+     */
+    TextFile (FilePathArray const& fileArray, const int multiMode) throw()
+    :   Base (new Internal (fileArray, multiMode))
+    {
+    }
+    
+//    /** Creates a multiple text file reader with a queue of files.
+//     */
+//    TextFile (TextFileQueue const& fileQueue) throw()
+//    :   Base (new Internal (fileQueue))
+//    {
+//    }
 	
     /** @internal */
     explicit TextFile (Internal* internalToUse) throw() 
@@ -184,6 +203,11 @@ public:
 	Text readAll() throw()
 	{
 		return getInternal()->readAll();
+	}
+    
+    Text read (const int numBytes) throw()
+	{
+		return getInternal()->read (numBytes);
 	}
 	
     /** Gets the position of the file stream. */

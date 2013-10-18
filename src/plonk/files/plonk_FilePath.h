@@ -39,6 +39,8 @@
 #ifndef PLONK_FILEPATH_H
 #define PLONK_FILEPATH_H
 
+#include "plonk_FilesForwardDeclarations.h"
+
 class FilePathInternal : public SmartPointer
 {
 public:

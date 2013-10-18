@@ -61,14 +61,15 @@ PLANK_BEGIN_C_LINKAGE
 #define PLANKMULITFILE_MODE_ARRAYCALLBACK           5       // DynamicArray of File objects chosen using a callback
 #define PLANKMULITFILE_MODE_QUEUE                   6       // LockFreeQueue of File objects
 
+
 typedef PlankResult (*PlankMultiFileNextFunction)(PlankMulitFileReaderRef);
 
 PlankMulitFileReaderRef pl_MultiFileReader_Create();
 
-PlankResult pl_MultiFileReader_InitArraySequence (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB loop);
-PlankResult pl_MultiFileReader_InitArrayRandom (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB noRepeat);
-PlankResult pl_MultiFileReader_InitArrayCallback (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, PlankMultiFileNextFunction callback);
-PlankResult pl_MultiFileReader_InitQueue (PlankMulitFileReaderRef p, PlankLockFreeQueueRef queue);
+PlankResult pl_MultiFileReader_InitArraySequence (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB ownArray,  const PlankB loop);
+PlankResult pl_MultiFileReader_InitArrayRandom (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB ownArray, const PlankB noRepeat);
+PlankResult pl_MultiFileReader_InitArrayCallback (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB ownArray, PlankMultiFileNextFunction callback);
+PlankResult pl_MultiFileReader_InitQueue (PlankMulitFileReaderRef p, PlankLockFreeQueueRef queue, const PlankB ownQueue);
 
 PlankResult pl_MultiFileReader_DeInit (PlankMulitFileReaderRef p);
 PlankResult pl_MultiFileReader_Destroy (PlankMulitFileReaderRef p);
@@ -78,6 +79,8 @@ PlankResult pl_MultiFileReader_GetArray (PlankMulitFileReaderRef p, PlankDynamic
 PlankResult pl_MultiFileReader_GetQueue (PlankMulitFileReaderRef p, PlankLockFreeQueueRef* queue);
 PlankResult pl_MultiFileReader_GetCurrentFile (PlankMulitFileReaderRef p, PlankFileRef* currentFile);
 PlankResult pl_MultiFileReader_GetIndex (PlankMulitFileReaderRef p, int* index);
+PlankResult pl_MultiFileReader_SetIndex (PlankMulitFileReaderRef p, const int index);
+
 
 PlankResult pl_MultiFileReader_Open (PlankMulitFileReaderRef p);
 PlankResult pl_MultiFileReader_Read (PlankMulitFileReaderRef p, PlankP ptr, int maximumBytes, int* bytesRead);
@@ -95,6 +98,7 @@ typedef struct PlankMulitFileReader
     PlankFileRef currentFile;
     PlankMultiFileNextFunction nextFuntion;
     int mode;
+    PlankB ownSource;
     int index;
 } PlankMulitFileReader;
 #endif

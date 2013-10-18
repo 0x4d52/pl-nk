@@ -70,6 +70,77 @@ TextFileInternal::TextFileInternal (Text const& path,
 #endif    
 }
 
+TextFileInternal::TextFileInternal (FilePathArray const& fileArray, const int multiMode) throw()
+{
+    pl_File_Init (getPeerRef());
+
+    const bool shouldTakeOwnership = true;
+    
+    ResultCode result;
+    PlankDynamicArrayRef array = pl_DynamicArray_Create();
+    pl_DynamicArray_InitWithItemSizeAndSize (array, sizeof (PlankFile), fileArray.length(), true);
+    PlankFile* rawArray = static_cast<PlankFile*> (pl_DynamicArray_GetArray (array));
+    
+    for (int i = 0; i < fileArray.length(); ++i)
+    {
+        result = pl_File_Init (&rawArray[i]);
+        plonk_assert (result == PlankResult_OK);
+        result = pl_File_OpenTextRead (&rawArray[i], fileArray.atUnchecked(i).fullpath().getArray(), false);
+        plonk_assert (result == PlankResult_OK);
+    }
+    
+    PlankMulitFileReaderRef multi = pl_MultiFileReader_Create();
+    
+    switch (multiMode)
+    {
+        case MultiFileArraySequenceOnce:
+        {
+            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, false);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        case MultiFileArraySequenceLoop:
+        {
+            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, true);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        case MultiFileArrayRandom:
+        {
+            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, false);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        case MultiFileArrayRandomNoRepeat:
+        {
+            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, true);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+            
+        default:
+            pl_DynamicArray_Destroy (array);
+            pl_MultiFileReader_Destroy (multi);
+            array = (PlankDynamicArrayRef)PLANK_NULL;
+            multi = (PlankMulitFileReaderRef)PLANK_NULL;
+            break;
+    }
+    
+    if (multi != PLANK_NULL)
+    {
+        result = pl_File_OpenMulti (getPeerRef(), multi, PLANKFILE_READ);
+        plonk_assert (result == PlankResult_OK);
+    }
+    
+#ifndef PLONK_DEBUG
+    (void)result;
+#endif
+}
+
+//TextFileInternal::TextFileInternal (TextFileQueue const& fileQueue) throw()
+//{
+//    
+//}
+
 TextFileInternal::~TextFileInternal()
 {
     pl_File_DeInit (getPeerRef());
@@ -154,6 +225,27 @@ Text TextFileInternal::readAll() throw()
         result = pl_File_Read (getPeerRef(), temp, 16, &bytesRead);
         temp[bytesRead] = '\0';
         buffer.add (temp);
+    }
+    
+    return buffer;
+}
+
+Text TextFileInternal::read (const int numBytes) throw()
+{
+    Text buffer (Text::emptyWithAllocatedSize (numBytes));
+    ResultCode result = PlankResult_OK;
+    int bytesRead, bytesRemaining, bytesThisTime;
+    char temp[17];
+    
+    bytesRemaining = numBytes;
+    
+    while ((result == PlankResult_OK) && (bytesRemaining > 0))
+    {
+        bytesThisTime = plonk::min (bytesRemaining, 16);
+        result = pl_File_Read (getPeerRef(), temp, bytesThisTime, &bytesRead);
+        temp[bytesRead] = '\0';
+        buffer.add (temp);
+        bytesRemaining -= bytesRead;
     }
     
     return buffer;

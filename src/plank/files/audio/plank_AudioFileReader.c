@@ -2862,9 +2862,22 @@ exit:
 
 PlankResult pl_AudioFileReader_Multi_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
 {
-    (void)p;
-    (void)frameIndex;
-    return PlankResult_FileSeekFailed;
+    PlankResult result = PlankResult_OK;
+    PlankMultiAudioFileReaderRef amul;
+    PlankMulitFileReaderRef multi;
+    
+    amul = (PlankMultiAudioFileReaderRef)p->peer;
+
+    if (((amul->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP) || (amul->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE)) && (frameIndex == 0))
+    {
+        multi = (PlankMulitFileReaderRef)amul->originalMulti.stream;
+        pl_MultiFileReader_SetIndex (multi, 0);
+        amul->currentAudioFile = pl_DynamicArray_GetArray ((PlankDynamicArrayRef)amul->source);
+        pl_AudioFileReader_SetFramePosition (amul->currentAudioFile, 0);
+    }
+    
+exit:
+    return result;
 }
 
 PlankResult pl_AudioFileReader_Multi_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
