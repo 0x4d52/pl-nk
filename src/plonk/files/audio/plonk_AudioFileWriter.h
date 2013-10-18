@@ -488,9 +488,9 @@ public:
         plonk_assert (peer.formatInfo.numChannels == reader.getNumChannels());
         
         const int bufferLength = buffer.length();
-        const int bufferFrames = bufferLength / numChannels;
+//        const int bufferFrames = bufferLength / numChannels;
         int framesRead;
-        
+                
         if (numFrames <= 0)
         {
             do
@@ -498,12 +498,11 @@ public:
                 reader.readFrames (buffer, false);
                 framesRead = buffer.length() / numChannels;
             
-                if (framesRead > 0)
-                {
-                    this->writeFrames (buffer);
-                }
+                if (framesRead == 0) break;
+                
+                this->writeFrames (buffer);
             }
-            while (framesRead == bufferFrames);
+            while (!reader.didHitEOF());
         }
         else
         {
@@ -520,7 +519,7 @@ public:
                 numFramesRemaining -= framesRead;
                 this->writeFrames (buffer);
             }
-            while (numFramesRemaining > 0);
+            while ((numFramesRemaining > 0) && !reader.didHitEOF());
         }
         
         // and reset for next time

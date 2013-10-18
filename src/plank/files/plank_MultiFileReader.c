@@ -70,6 +70,10 @@ PlankResult pl_MultiFileReaderArraySequenceOnceNextFunction (PlankMulitFileReade
         fileArray = (PlankFile*)pl_DynamicArray_GetArray (array);
         file = fileArray + p->index;
     }
+    else
+    {
+        p->index = arraySize;
+    }
     
     p->currentFile = file;
     
@@ -91,7 +95,7 @@ PlankResult pl_MultiFileReaderArraySequenceLoopNextFunction (PlankMulitFileReade
     
     p->index = p->index + 1;
     
-    if ((p->index < 0) || (p->index > arraySize))
+    if ((p->index < 0) || (p->index >= arraySize))
         p->index = 0;
 
     fileArray = (PlankFile*)pl_DynamicArray_GetArray (array);

@@ -443,6 +443,12 @@ const Text& Text::getMessageDone() throw()
 	return t;
 }
 
+const Text& Text::getMessageNumChannelsChanged() throw()
+{
+    static const Text t = "numChannelsChanged";
+	return t;
+}
+
 const Text& Text::getMessageLooped() throw()
 {
     static const Text t = "looped";

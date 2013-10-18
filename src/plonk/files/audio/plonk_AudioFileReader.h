@@ -74,12 +74,14 @@ public:
     double getSampleRate() const throw();
     LongLong getNumFrames() const throw();
     LongLong getFramePosition() const throw();
+    
+    bool isPositionable() const throw();
     void setFramePosition (const LongLong position) throw();
     void resetFramePosition() throw();
     void setFramePositionOnNextRead (const LongLong position) throw();
     
     template<class SampleType>
-    bool readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, IntVariable& numLoops) throw();
+    void readFrames (NumericalArray<SampleType>& data, const bool applyScaling, const bool deinterleave, IntVariable& numLoops) throw();
     
     template<class SampleType>
     inline void initSignal (SignalBase<SampleType>& signal, const int numFrames) const throw()
@@ -91,19 +93,22 @@ public:
     }
     
     template<class SampleType>
-    inline bool readSignal (SignalBase<SampleType>& signal, const bool applyScaling) throw()
+    inline void readSignal (SignalBase<SampleType>& signal, const bool applyScaling) throw()
     {
         // would need to decide in here to deinterleave..
         
         signal.getSampleRate().setValue (getSampleRate());
         IntVariable oneLoop (1);
-        return readFrames (signal.getBuffers().first(), applyScaling, false, oneLoop);
+        readFrames (signal.getBuffers().first(), applyScaling, false, oneLoop);
     }
     
     void setOwner (void* owner) throw();
     void* getOwner() const throw();
     bool isOwned() const throw();
     bool isReady() const throw();
+    
+    bool didHitEOF() const throw() { return hitEndOfFile; }
+    bool didNumChannelsChange() const throw() { return numChannelsChanged; }
     
 private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
@@ -127,17 +132,22 @@ private:
     int numFramesPerBuffer;
     AtomicLongLong newPositionOnNextRead;
     AtomicValue<void*> owner;
+    bool hitEndOfFile;
+    bool numChannelsChanged;
 };
 
 //------------------------------------------------------------------------------
 
 template<class SampleType>
-bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data, 
+void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                                           const bool applyScaling, 
                                           const bool deinterleave,
                                           IntVariable& numLoops) throw()
 {        
     typedef NumericalArray<SampleType> Buffer;
+    
+    this->hitEndOfFile = false;
+    this->numChannelsChanged = false;
     
     ResultCode result;
     
@@ -218,7 +228,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 else
                 {
                     plonk_assertfalse;
-                    return false;
+                    return;
                 }
             }
             else if (isFloat)
@@ -238,7 +248,7 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
                 else
                 {
                     plonk_assertfalse;
-                    return false;
+                    return;
                 }
             }
             
@@ -304,13 +314,12 @@ bool AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     }
     
     if (dataIndex < dataLength)
+    {
         data.setSize (dataIndex, true);
     
-#ifndef PLONK_DEBUG
-    (void)result;
-#endif
-    
-    return dataIndex < dataLength;
+        this->hitEndOfFile = (result == PlankResult_FileEOF);
+        this->numChannelsChanged = (result == PlankResult_AudioFileFrameFormatChanged);
+    }    
 }
 
 
@@ -378,7 +387,7 @@ public:
     /** Creates a multiple audio file reader from the given paths.
      @param paths       The paths of the files to read.
      @param bufferSize  The buffer size to use when reading. */
-	AudioFileReader (FilePathArray const& paths, const int multiMode, const int bufferSize = 0) throw()
+	AudioFileReader (FilePathArray const& paths, const int multiMode = MultiFileArraySequenceLoop, const int bufferSize = 0) throw()
 	:	Base (new Internal (paths, multiMode, bufferSize))
 	{
 	}
@@ -478,6 +487,11 @@ public:
         return getInternal()->getNumFrames();
     }
     
+    inline bool isPositionable() const throw()
+    {
+        return getInternal()->isPositionable();
+    }
+    
     /** Get the current frame position. */
     inline LongLong getFramePosition() const throw()
     {
@@ -489,27 +503,27 @@ public:
      thread (e.g., a GUI) while playing a file (e.g., in real time). */
     inline void setFramePosition (const LongLong position) throw()
     {
-        return getInternal()->setFramePosition (position);
+        getInternal()->setFramePosition (position);
     }
     
     /** Set the frame position to a particular frame just before the next read operation.
      This is thread safe. */
     inline void setFramePositionOnNextRead (const LongLong position) throw()
     {
-        return getInternal()->setFramePositionOnNextRead (position);
+        getInternal()->setFramePositionOnNextRead (position);
     }
     
     /** Resets the frame position back to the start of the frames. */
     inline void resetFramePosition() throw()
     {
-        return getInternal()->resetFramePosition();
+        getInternal()->resetFramePosition();
     }
     
     inline double getDuration() const throw()
     {
         return getInternal()->getNumFrames() / getInternal()->getSampleRate();
     }
-    
+        
     inline double getTime() const throw()
     {
         return getInternal()->getFramePosition() / getInternal()->getSampleRate();
@@ -517,31 +531,30 @@ public:
     
     inline void setTime (const double time) throw()
     {
-        return getInternal()->setFramePosition (LongLong (time * getInternal()->getSampleRate()));
+        getInternal()->setFramePosition (LongLong (time * getInternal()->getSampleRate()));
     }
     
     inline void setTimeOnNextRead (const double time) throw()
     {
-        return getInternal()->setFramePositionOnNextRead (LongLong (time * getInternal()->getSampleRate()));
+        getInternal()->setFramePositionOnNextRead (LongLong (time * getInternal()->getSampleRate()));
     }
     
     /** Read frames into a pre-allocated NumericalArray and apply scaling. 
      Here the samples are automatically scaled depending on the destination 
      data type of the NumericalArray. 
      @param data    The NumericalArray object to read interleaved frames into. 
-     @param numLoops    How many loops to read, 0 means infinite loops.
-     @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
+     @param numLoops    How many loops to read, 0 means infinite loops. */
     template<class SampleType>
-    inline bool readFrames (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
+    inline void readFrames (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
-        return getInternal()->readFrames (data, true, false, numLoops);
+        getInternal()->readFrames (data, true, false, numLoops);
     }
     
     template<class SampleType>
-    inline bool readFrames (NumericalArray<SampleType>& data) throw()
+    inline void readFrames (NumericalArray<SampleType>& data) throw()
     {
         IntVariable numLoops (1);
-        return getInternal()->readFrames (data, true, false, numLoops);
+        getInternal()->readFrames (data, true, false, numLoops);
     }
     
     /** Read frames into a pre-allocated NumericalArray without scaling. 
@@ -549,16 +562,16 @@ public:
      @param numLoops    How many loops to read, 0 means infinite loops.
      @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
     template<class SampleType>
-    inline bool readFramesDirect (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
+    inline void readFramesDirect (NumericalArray<SampleType>& data, IntVariable& numLoops) throw()
     {
-        return getInternal()->readFrames (data, false, false, numLoops);
+        getInternal()->readFrames (data, false, false, numLoops);
     }
     
     template<class SampleType>
-    inline bool readFramesDirect (NumericalArray<SampleType>& data) throw()
+    inline void readFramesDirect (NumericalArray<SampleType>& data) throw()
     {
         IntVariable numLoops (1);
-        return getInternal()->readFrames (data, false, false, numLoops);
+        getInternal()->readFrames (data, false, false, numLoops);
     }
     
     /** Initialises a Signal object in the appropriate format for the audio in the file.
@@ -574,24 +587,22 @@ public:
      The Signal object MUST be an interleaved type.
      Here the samples are automatically scaled depending on the destination 
      data type of the Signal. 
-     @param signal    The Signal object to read frames into.
-     @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
+     @param signal    The Signal object to read frames into. */
     template<class SampleType>
-    inline bool readSignal (SignalBase<SampleType>& signal) throw()
+    inline void readSignal (SignalBase<SampleType>& signal) throw()
     {
         plonk_assert (signal.isInterleaved());
-        return getInternal()->readSignal (signal, true);
+        getInternal()->readSignal (signal, true);
     }
     
     /** Read frames into a pre-allocated Signal object without scaling. 
      The Signal object MUST be an interleaved type. 
-     @param signal    The Signal object to read frames into.
-     @return @c true if the array was resized as fewer samples were available, otherwise @c false. */
+     @param signal    The Signal object to read frames into. */
     template<class SampleType>
-    inline bool readSignalDirect (SignalBase<SampleType>& signal) throw()
+    inline void readSignalDirect (SignalBase<SampleType>& signal) throw()
     {
         plonk_assert (signal.isInterleaved());
-        return getInternal()->readSignal (signal, false);
+        getInternal()->readSignal (signal, false);
     }
     
     /** Reads all the frames in the file and returns them in an interleaved array.
@@ -663,6 +674,16 @@ public:
     bool isReady() const throw()
     {
         return getInternal()->isReady();
+    }
+    
+    bool didHitEOF() const throw()
+    {
+        return getInternal()->didHitEOF();
+    }
+    
+    bool didNumChannelsChange() const throw()
+    {
+        return getInternal()->didNumChannelsChange();
     }
     
 private:

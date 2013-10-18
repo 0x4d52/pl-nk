@@ -142,6 +142,8 @@ PlankResult pl_AudioFileReader_GetSampleRate (PlankAudioFileReaderRef p, double 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_AudioFileReader_GetNumFrames (PlankAudioFileReaderRef p, PlankLL *numFrames);
 
+PlankB pl_AudioFileReader_IsPositionable (PlankAudioFileReaderRef p);
+
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
  @return A result code which will be PlankResult_OK if the operation was completely successful. */

@@ -44,7 +44,9 @@ BEGIN_PLONK_NAMESPACE
 
 AudioFileReaderInternal::AudioFileReaderInternal() throw()
 :   numFramesPerBuffer (0),
-    newPositionOnNextRead (-1)
+    newPositionOnNextRead (-1),
+    hitEndOfFile (false),
+    numChannelsChanged (false)
 {
     pl_AudioFileReader_Init (getPeerRef());
 }
@@ -52,7 +54,9 @@ AudioFileReaderInternal::AudioFileReaderInternal() throw()
 AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
-    newPositionOnNextRead (-1)
+    newPositionOnNextRead (-1),
+    hitEndOfFile (false),
+    numChannelsChanged (false)
 {
     init (path, readMetaData);
 }
@@ -91,7 +95,9 @@ ResultCode AudioFileReaderInternal::init (ByteArray const& bytes, const bool rea
 AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
-    newPositionOnNextRead (-1)
+    newPositionOnNextRead (-1),
+    hitEndOfFile (false),
+    numChannelsChanged (false)
 {
     init (bytes, readMetaData);
 }
@@ -99,7 +105,9 @@ AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const 
 AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray, const int multiMode, const int bufferSize) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
-    newPositionOnNextRead (-1)
+    newPositionOnNextRead (-1),
+    hitEndOfFile (false),
+    numChannelsChanged (false)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -269,6 +277,11 @@ LongLong AudioFileReaderInternal::getNumFrames() const throw()
     (void)result;
 #endif
     return value;
+}
+
+bool AudioFileReaderInternal::isPositionable() const throw()
+{
+    return pl_AudioFileReader_IsPositionable (getPeerRef());
 }
 
 LongLong AudioFileReaderInternal::getFramePosition() const throw()

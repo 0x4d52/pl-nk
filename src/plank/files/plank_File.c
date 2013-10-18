@@ -588,6 +588,8 @@ static PlankResult pl_FileMultiSetPositionCallback (PlankFileRef p, PlankLL offs
     PlankResult result;
     PlankMulitFileReaderRef multi;
     
+    multi = (PlankMulitFileReaderRef)p->stream;
+    
     if ((code == PLANKFILE_SETPOSITION_RELATIVE) || (code == PLANKFILE_SETPOSITION_RELATIVEEND))
     {
         result = PlankResult_FileSeekFailed;

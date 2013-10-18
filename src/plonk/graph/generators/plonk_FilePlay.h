@@ -119,53 +119,87 @@ public:
         
 //        plonk_assert (file.getOwner() == this);
         
-        const int numChannels = this->getNumChannels();
-        const int fileNumChannels = file.getNumChannels();
-        const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
-        buffer.setSize (bufferSize, false);
-        
         IntVariable& loopCount (this->template getInputAs<IntVariable> (IOKey::LoopCount));
-        const bool hitEOF = file.readFrames (buffer, loopCount);
-        
         int channel;
+        int offset = 0;
+        bool done = false;
         
-        if (! hitEOF)
+        while (!done)
         {
-            for (channel = 0; channel < numChannels; ++channel)
-            {
-                Buffer& outputBuffer = this->getOutputBuffer (channel);
-                SampleType* const outputSamples = outputBuffer.getArray();
-                const int outputBufferLength = outputBuffer.length();
-                
-                const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
-                
-                for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
-                    outputSamples[i] = *bufferSamples;
-            }
-        }
-        else
-        {            
-            const int bufferAvailable = buffer.length();            
-            const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
+            const int numChannels = this->getNumChannels();
+            const int fileNumChannels = file.getNumChannels();
+            const int bufferSize = this->getBlockSize().getValue() * fileNumChannels;
+            buffer.setSize (bufferSize, false);
+
+            file.readFrames (buffer, loopCount);
             
-            for (channel = 0; channel < numChannels; ++channel)
+            const bool hitEOF = file.didHitEOF();
+            const bool changedNumChannels = file.didNumChannelsChange();
+
+            if (hitEOF)
             {
-                Buffer& outputBuffer = this->getOutputBuffer (channel);
-                SampleType* const outputSamples = outputBuffer.getArray();
-                const int outputBufferLength = outputBuffer.length();
-                const int outputLengthToWrite = plonk::min (bufferFramesAvailable, outputBufferLength);
+                const int bufferAvailable = buffer.length();
+                const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
                 
-                const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
-                
-                for (int i = 0; i < outputLengthToWrite; ++i, bufferSamples += fileNumChannels)
-                    outputSamples[i] = *bufferSamples;
+                for (channel = 0; channel < numChannels; ++channel)
+                {
+                    Buffer& outputBuffer = this->getOutputBuffer (channel);
+                    SampleType* const outputSamples = outputBuffer.getArray() + offset;
+                    const int outputBufferLength = outputBuffer.length() - offset;
+                    const int outputLengthToWrite = plonk::min (bufferFramesAvailable, outputBufferLength);
                     
-                for (int i = outputLengthToWrite; i < outputBufferLength; ++i)
-                    outputSamples[i] = SampleType (0);
+                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
+                    
+                    for (int i = 0; i < outputLengthToWrite; ++i, bufferSamples += fileNumChannels)
+                        outputSamples[i] = *bufferSamples;
+                        
+                    for (int i = outputLengthToWrite; i < outputBufferLength; ++i)
+                        outputSamples[i] = SampleType (0);
+                }
+                
+                data.done = true;
+                done = true;
+                this->update (Text::getMessageDone(), Dynamic::getNull());
             }
-            
-            data.done = true;
-            this->update (Text::getMessageDone(), Dynamic::getNull());
+            else if (changedNumChannels)
+            {
+                this->update (Text::getMessageNumChannelsChanged(), IntVariable (fileNumChannels));
+
+                const int bufferAvailable = buffer.length();
+                const int bufferFramesAvailable = bufferAvailable / fileNumChannels;
+                
+                for (channel = 0; channel < numChannels; ++channel)
+                {
+                    Buffer& outputBuffer = this->getOutputBuffer (channel); 
+                    SampleType* const outputSamples = outputBuffer.getArray() + offset;
+                    const int outputBufferLength = outputBuffer.length() - offset;
+                    const int outputLengthToWrite = plonk::min (bufferFramesAvailable, outputBufferLength);
+                    
+                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
+                    
+                    for (int i = 0; i < outputLengthToWrite; ++i, bufferSamples += fileNumChannels)
+                        outputSamples[i] = *bufferSamples;                        
+                }
+                
+                offset += bufferFramesAvailable;
+                done = false;
+            }
+            else
+            {
+                for (channel = 0; channel < numChannels; ++channel)
+                {
+                    Buffer& outputBuffer = this->getOutputBuffer (channel);
+                    SampleType* const outputSamples = outputBuffer.getArray() + offset;
+                    const int outputBufferLength = outputBuffer.length() - offset;
+                    
+                    const SampleType* bufferSamples = buffer.getArray() + ((unsigned int)channel % (unsigned int)fileNumChannels);
+                    
+                    for (int i = 0; i < outputBufferLength; ++i, bufferSamples += fileNumChannels)
+                        outputSamples[i] = *bufferSamples;
+                }
+                
+                done = true;
+            }
         }
         
         if (data.done && data.deleteWhenDone)

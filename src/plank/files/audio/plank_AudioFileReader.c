@@ -459,6 +459,13 @@ PlankResult pl_AudioFileReader_GetNumFrames (PlankAudioFileReaderRef p, PlankLL 
     return PlankResult_OK;
 }
 
+PlankB pl_AudioFileReader_IsPositionable (PlankAudioFileReaderRef p)
+{
+    PlankFileRef file;
+    file = pl_AudioFileReader_GetFile (p);
+    return file ? pl_File_IsPositionable (file) : PLANK_FALSE;
+}
+
 PlankResult pl_AudioFileReader_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
 {
     PlankResult result = PlankResult_OK;
@@ -2937,7 +2944,7 @@ PlankResult pl_MultiAudioFileReaderArrayNextFunction (PlankMultiAudioFileReaderR
     PlankAudioFileReaderRef audioFile;
     PlankAudioFileReader* audioFileArray;
     
-    int arraySize, index;
+    int arraySize, index, status;
 
     audioFile = (PlankAudioFileReaderRef)PLANK_NULL;
     multi = (PlankMulitFileReaderRef)p->originalMulti.stream;
@@ -2959,6 +2966,12 @@ PlankResult pl_MultiAudioFileReaderArrayNextFunction (PlankMultiAudioFileReaderR
         }
         
         p->currentAudioFile = audioFile;
+        
+        if (p->currentAudioFile)
+        {
+            if (pl_AudioFileReader_IsPositionable (p->currentAudioFile))
+                pl_AudioFileReader_SetFramePosition (p->currentAudioFile, 0);
+        }
     }
     
 exit:
