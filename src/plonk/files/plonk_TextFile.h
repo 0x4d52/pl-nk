@@ -103,6 +103,17 @@ public:
     typedef SmartPointerContainer<Internal>         Base;
     typedef WeakPointerContainer<TextFile>          Weak;
     
+    enum MultiFileTypes
+    {
+        MultiFileUnknown = PLANKMULITFILE_MODE_UNKNOWN,
+        MultiFileArraySequenceOnce = PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE,
+        MultiFileArraySequenceLoop = PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP,
+        MultiFileArrayRandom = PLANKMULITFILE_MODE_ARRAYRANDOM,
+        MultiFileArrayRandomNoRepeat = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT,
+        MultiFileArrayIndexRef = PLANKMULITFILE_MODE_ARRAYINDEXREF,
+        MultiFileQueue = PLANKMULITFILE_MODE_QUEUE
+    };
+    
     /** Creates a null object. 
      This can't be used for reading or writing. */
     TextFile() throw()

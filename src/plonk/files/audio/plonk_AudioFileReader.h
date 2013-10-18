@@ -58,7 +58,8 @@ public:
     AudioFileReaderInternal() throw();
     AudioFileReaderInternal (const char* path, const int bufferSize, const bool readMetaData) throw();
     AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw();
-    AudioFileReaderInternal (FilePathArray const& paths, const int multiMode, const int bufferSize) throw();
+    AudioFileReaderInternal (FilePathArray const& paths, const AudioFile::MultiFileTypes multiMode, const int bufferSize) throw();
+    AudioFileReaderInternal (FilePathArray const& paths, IntVariable const& indexRef, const int bufferSize) throw();
     ~AudioFileReaderInternal();
     
     ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw();
@@ -134,6 +135,7 @@ private:
     AtomicValue<void*> owner;
     bool hitEndOfFile;
     bool numChannelsChanged;
+    IntVariable nextMultiIndexRef;
 };
 
 //------------------------------------------------------------------------------
@@ -387,10 +389,19 @@ public:
     /** Creates a multiple audio file reader from the given paths.
      @param paths       The paths of the files to read.
      @param bufferSize  The buffer size to use when reading. */
-	AudioFileReader (FilePathArray const& paths, const int multiMode = MultiFileArraySequenceLoop, const int bufferSize = 0) throw()
+	AudioFileReader (FilePathArray const& paths, const AudioFile::MultiFileTypes multiMode = AudioFile::MultiFileArraySequenceLoop, const int bufferSize = 0) throw()
 	:	Base (new Internal (paths, multiMode, bufferSize))
 	{
 	}
+    
+    /** Creates a multiple audio file reader from the given paths.
+     @param paths       The paths of the files to read.
+     @param bufferSize  The buffer size to use when reading. */
+	AudioFileReader (FilePathArray const& paths, IntVariable const& nextIndex, const int bufferSize = 0) throw()
+	:	Base (new Internal (paths, nextIndex, bufferSize))
+	{
+	}
+
     
     /** @internal */
     explicit AudioFileReader (Internal* internalToUse) throw() 

@@ -64,7 +64,7 @@ public:
     void disown (PlankFileRef fileRef) throw();
     
     static bool setupBytes (PlankFileRef p, ByteArray const& bytes, const bool writable) throw();
-    static bool setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian) throw();
+    static bool setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian, IntVariable* indexRef = 0) throw();
 
     static PlankResult dynamicMemoryOpenCallback (PlankFileRef p);
     static PlankResult dynamicMemoryCloseCallback (PlankFileRef p);
@@ -193,6 +193,17 @@ public:
     typedef BinaryFileInternal                      Internal;
     typedef SmartPointerContainer<Internal>         Base;
     typedef WeakPointerContainer<BinaryFile>        Weak;
+    
+    enum MultiFileTypes
+    {
+        MultiFileUnknown = PLANKMULITFILE_MODE_UNKNOWN,
+        MultiFileArraySequenceOnce = PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE,
+        MultiFileArraySequenceLoop = PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP,
+        MultiFileArrayRandom = PLANKMULITFILE_MODE_ARRAYRANDOM,
+        MultiFileArrayRandomNoRepeat = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT,
+        MultiFileArrayIndexRef = PLANKMULITFILE_MODE_ARRAYINDEXREF,
+        MultiFileQueue = PLANKMULITFILE_MODE_QUEUE
+    };
     
     /** Creates a null object. 
      This can't be used for reading or writing. */

@@ -170,6 +170,12 @@ public:
     }
     
     /** Returns the current value. */
+    inline Type* getValuePtr() throw()
+    {
+        return this->getInternal()->getValuePtr();
+    }
+    
+    /** Returns the current value. */
     inline operator Type () const throw()
     {
         return this->getInternal()->getValue();

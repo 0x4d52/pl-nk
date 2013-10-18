@@ -59,15 +59,5 @@ typedef LockFreeQueue<BinaryFile> BinaryFileQueue;
 typedef LockFreeQueue<AudioFileReader> AudioFileReaderQueue;
 typedef LockFreeQueue<FilePath> FilePathQueue;
 
-enum MultiFileTypes
-{
-    MultiFileUnknown = PLANKMULITFILE_MODE_UNKNOWN,
-    MultiFileArraySequenceOnce = PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE,
-    MultiFileArraySequenceLoop = PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP,
-    MultiFileArrayRandom = PLANKMULITFILE_MODE_ARRAYRANDOM,
-    MultiFileArrayRandomNoRepeat = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT,
-    MultiFileArrayCallback = PLANKMULITFILE_MODE_ARRAYCALLBACK,
-    MultiFileQueue = PLANKMULITFILE_MODE_QUEUE
-};
 
 #endif // PLONK_FILESFORWARDDECLARATIONS_H

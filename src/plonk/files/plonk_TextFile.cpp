@@ -93,25 +93,25 @@ TextFileInternal::TextFileInternal (FilePathArray const& fileArray, const int mu
     
     switch (multiMode)
     {
-        case MultiFileArraySequenceOnce:
+        case TextFile::MultiFileArraySequenceOnce:
         {
             result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
-        case MultiFileArraySequenceLoop:
+        case TextFile::MultiFileArraySequenceLoop:
         {
             result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);
         } break;
             
-        case MultiFileArrayRandom:
+        case TextFile::MultiFileArrayRandom:
         {
             result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
-        case MultiFileArrayRandomNoRepeat:
+        case TextFile::MultiFileArrayRandomNoRepeat:
         {
             result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);

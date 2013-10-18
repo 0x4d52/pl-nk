@@ -2694,7 +2694,7 @@ PlankResult pl_AudioFileReader_Multi_OpenWithFile (PlankAudioFileReaderRef p, Pl
         case PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP:
         case PLANKMULITFILE_MODE_ARRAYRANDOM:
         case PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT:
-        case PLANKMULITFILE_MODE_ARRAYCALLBACK:
+        case PLANKMULITFILE_MODE_ARRAYINDEXREF:
             amul->nextFuntion = pl_MultiAudioFileReaderArrayNextFunction;
             amul->currentAudioFile = (PlankAudioFileReaderRef)PLANK_NULL;
             pl_MultiFileReader_GetArray (multi, &fileArray);
@@ -2762,7 +2762,7 @@ PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p)
         case PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP:
         case PLANKMULITFILE_MODE_ARRAYRANDOM:
         case PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT:
-        case PLANKMULITFILE_MODE_ARRAYCALLBACK:
+        case PLANKMULITFILE_MODE_ARRAYINDEXREF:
             // here currentAudioFile just points to one of the files in the array
             amul->currentAudioFile = (PlankAudioFileReaderRef)PLANK_NULL;
             audioFileArray = (PlankDynamicArrayRef)amul->source;
@@ -2944,12 +2944,12 @@ PlankResult pl_MultiAudioFileReaderArrayNextFunction (PlankMultiAudioFileReaderR
     PlankAudioFileReaderRef audioFile;
     PlankAudioFileReader* audioFileArray;
     
-    int arraySize, index, status;
+    int arraySize, index;//, status;
 
     audioFile = (PlankAudioFileReaderRef)PLANK_NULL;
     multi = (PlankMulitFileReaderRef)p->originalMulti.stream;
     
-    result = (multi->nextFuntion) (multi);
+    result = (multi->nextFunction) (multi);
     
     if (result == PlankResult_OK)
     {

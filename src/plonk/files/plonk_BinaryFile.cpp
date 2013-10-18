@@ -270,7 +270,7 @@ bool BinaryFileInternal::setupBytes (PlankFileRef p, ByteArray const& bytes, con
     return result == PlankResult_OK;    
 }
 
-bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian) throw()
+bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian, IntVariable* indexRef) throw()
 {
     pl_File_Init (p);
     
@@ -293,30 +293,37 @@ bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileAr
     
     switch (multiMode)
     {
-        case MultiFileArraySequenceOnce:
+        case BinaryFile::MultiFileArraySequenceOnce:
         {
             result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
-        case MultiFileArraySequenceLoop:
+        case BinaryFile::MultiFileArraySequenceLoop:
         {
             result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);
         } break;
             
-        case MultiFileArrayRandom:
+        case BinaryFile::MultiFileArrayRandom:
         {
             result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
-        case MultiFileArrayRandomNoRepeat:
+        case BinaryFile::MultiFileArrayRandomNoRepeat:
         {
             result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);
         } break;
             
+        case BinaryFile::MultiFileArrayIndexRef:
+        {
+            int *indexRefPtr = indexRef ? indexRef->getValuePtr() : 0;
+            result = pl_MultiFileReader_InitArrayIndexRef (multi, array, shouldTakeOwnership, indexRefPtr);
+            plonk_assert (result == PlankResult_OK);
+        } break;
+
         default:
             pl_DynamicArray_Destroy (array);
             pl_MultiFileReader_Destroy (multi);
