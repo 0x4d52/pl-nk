@@ -72,6 +72,8 @@ public:
     int getBytesPerFrame() const throw();
     int getBytesPerSample() const throw();
     int getNumChannels() const throw();
+    int getDefaultNumChannels() throw();
+    void setDefaultNumChannels (const int numChannels) throw();
     double getSampleRate() const throw();
     LongLong getNumFrames() const throw();
     LongLong getFramePosition() const throw();
@@ -136,6 +138,7 @@ private:
     bool hitEndOfFile;
     bool numChannelsChanged;
     IntVariable nextMultiIndexRef;
+    int defaultNumChannels;
 };
 
 //------------------------------------------------------------------------------
@@ -484,6 +487,20 @@ public:
     inline int getNumChannels() const throw()
     {
         return getInternal()->getNumChannels();
+    }
+    
+    /** Set the default number of channels in the file. 
+     This can be used to suggest a maximum number of channels especially where this file
+     is a multi-audiofile. */
+    inline void setDefaultNumChannels (const int numChannels) throw()
+    {
+        getInternal()->setDefaultNumChannels (numChannels);
+    }
+    
+    /** Get the default number of channels in the file. */
+    inline int getDefaultNumChannels() const throw()
+    {
+        return getInternal()->getDefaultNumChannels();
     }
     
     /** Get the sample rate of the file. */

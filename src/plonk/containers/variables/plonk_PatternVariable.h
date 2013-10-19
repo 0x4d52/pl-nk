@@ -65,6 +65,11 @@ public:
         return this->cachedValue;
     }
     
+    Type* getValuePtr() throw()
+    {
+        return &cachedValue;
+    }
+    
     const Type nextValue() throw()
     {
         this->cachedValue = pattern.wrapAt (index++).nextValue();

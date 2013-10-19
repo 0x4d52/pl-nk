@@ -69,6 +69,10 @@ public:
         return this->cachedValue;
     }
     
+    Type* getValuePtr() throw()
+    {
+        return &cachedValue;
+    }
     const Type nextValue() throw()
     {
         const Type result = Type (operand.nextValue());

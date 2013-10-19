@@ -74,6 +74,11 @@ public:
         return shapeState.currentLevel;
     }
     
+    Type* getValuePtr() throw()
+    {
+        return &shapeState.currentLevel;
+    }
+    
     const Type nextValue() throw()
     {
         const Type nextValue = input.nextValue();

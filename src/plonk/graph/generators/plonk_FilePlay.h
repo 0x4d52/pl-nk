@@ -300,7 +300,7 @@ public:
             inputs.put (IOKey::Multiply, mul);
             inputs.put (IOKey::Add, add);
                             
-            Data data = { { -1.0, -1.0 }, 0, false, deleteWhenDone };
+            Data data = { { -1.0, -1.0 }, file.getDefaultNumChannels(), false, deleteWhenDone };
             
             return UnitType::template proxiesFromInputs<FilePlayInternal> (inputs, 
                                                                            data, 

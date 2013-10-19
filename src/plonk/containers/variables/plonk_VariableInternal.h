@@ -49,7 +49,7 @@ class VariableInternalBase : public SenderInternal< Variable<Type> >
 public:
     ~VariableInternalBase() { }
     virtual const Type getValue() const = 0;
-    virtual Type* getValuePtr() const { return 0; }
+    virtual Type* getValuePtr() { return 0; }
     virtual const Type nextValue() = 0;
     virtual void setValue (Type const& newValue) = 0;
 };

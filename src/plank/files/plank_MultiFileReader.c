@@ -149,9 +149,7 @@ PlankResult pl_MultiFileReaderArrayRefNextIndexFunction (PlankMulitFileReaderRef
     
     if ((p->index < 0) || (p->index >= arraySize))
         p->index = arraySize;
-    else
-        p->index = index;
-    
+
 exit:
     return result;
 }

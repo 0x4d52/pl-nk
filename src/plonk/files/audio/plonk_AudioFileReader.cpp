@@ -46,7 +46,8 @@ AudioFileReaderInternal::AudioFileReaderInternal() throw()
 :   numFramesPerBuffer (0),
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
-    numChannelsChanged (false)
+    numChannelsChanged (false),
+    defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
 }
@@ -56,7 +57,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (const char* path, const int bu
     numFramesPerBuffer (0),
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
-    numChannelsChanged (false)
+    numChannelsChanged (false),
+    defaultNumChannels (0)
 {
     init (path, readMetaData);
 }
@@ -97,7 +99,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (ByteArray const& bytes, const 
     numFramesPerBuffer (0),
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
-    numChannelsChanged (false)
+    numChannelsChanged (false),
+    defaultNumChannels (0)
 {
     init (bytes, readMetaData);
 }
@@ -108,7 +111,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     numFramesPerBuffer (0),
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
-    numChannelsChanged (false)
+    numChannelsChanged (false),
+    defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -127,7 +131,8 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     newPositionOnNextRead (-1),
     hitEndOfFile (false),
     numChannelsChanged (false),
-    nextMultiIndexRef (indexRef)
+    nextMultiIndexRef (indexRef),
+    defaultNumChannels (0)
 {
     pl_AudioFileReader_Init (getPeerRef());
     
@@ -275,6 +280,16 @@ int AudioFileReaderInternal::getNumChannels() const throw()
     (void)result;
 #endif
     return value;
+}
+
+void AudioFileReaderInternal::setDefaultNumChannels (const int numChannels) throw()
+{
+    defaultNumChannels = plonk::max (0, numChannels);
+}
+
+int AudioFileReaderInternal::getDefaultNumChannels() throw()
+{
+    return defaultNumChannels;
 }
 
 double AudioFileReaderInternal::getSampleRate() const throw()
