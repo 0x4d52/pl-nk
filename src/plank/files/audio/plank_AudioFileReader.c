@@ -2650,6 +2650,8 @@ typedef struct PlankMultiAudioFileReader
 
 PlankResult pl_MultiAudioFileReaderArrayNextFunction (PlankMultiAudioFileReaderRef p);
 PlankResult pl_MultiAudioFileReaderQueueNextFunction (PlankMultiAudioFileReaderRef p);
+PlankResult pl_MultiAudioFileReaderCustomNextFunction (PlankMultiAudioFileReaderRef p);
+
 
 //..
 
@@ -2685,7 +2687,7 @@ PlankResult pl_AudioFileReader_Multi_OpenWithFile (PlankAudioFileReaderRef p, Pl
     // also, assume we have checked that the file is definitely a multi
 
     multi = (PlankMulitFileReaderRef)amul->originalMulti.stream;
-    pl_MultiFileReader_GetMode (multi, &amul->mode);
+    pl_MultiFileReader_GetMultiMode (multi, &amul->mode);
     pl_MultiFileReader_GetIndex (multi, &amul->index);
     
     switch (amul->mode)
@@ -2727,8 +2729,23 @@ PlankResult pl_AudioFileReader_Multi_OpenWithFile (PlankAudioFileReaderRef p, Pl
             amul->currentAudioFile = pl_AudioFileReader_CreateAndInit();
             amul->source = multi->source;
             
-            // get the first file (if it exists)
-            result = pl_MultiAudioFileReaderQueueNextFunction (amul);
+            if (multi->currentFile)
+            {
+                pl_AudioFileReader_OpenWithFile (amul->currentAudioFile, multi->currentFile, PLANK_FALSE);
+            }
+            
+            break;
+            
+        case PLANKMULITFILE_MODE_CUSTOM:
+            amul->nextFuntion = pl_MultiAudioFileReaderCustomNextFunction;
+            amul->currentAudioFile = pl_AudioFileReader_CreateAndInit();
+            amul->source = multi->source;
+
+            if (multi->currentFile)
+            {
+                pl_AudioFileReader_OpenWithFile (amul->currentAudioFile, multi->currentFile, PLANK_FALSE);
+            }
+
             break;
         default:
             result = PlankResult_UnknownError;
@@ -2752,7 +2769,10 @@ PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p)
     PlankMultiAudioFileReaderRef amul;
     PlankDynamicArrayRef audioFileArray;
     PlankAudioFileReaderRef audioFile;
+    PlankMemoryRef m;
     int arraySize, i;
+    
+    m = pl_MemoryGlobal();
 
     amul = (PlankMultiAudioFileReaderRef)p->peer;
     
@@ -2777,6 +2797,7 @@ PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p)
             pl_DynamicArray_Destroy (audioFileArray);
             break;
         case PLANKMULITFILE_MODE_QUEUE:
+        case PLANKMULITFILE_MODE_CUSTOM:
             // here currentAudioFile was allocated by us
             pl_AudioFileReader_Destroy (amul->currentAudioFile);
             amul->currentAudioFile = (PlankAudioFileReaderRef)PLANK_NULL;
@@ -2787,7 +2808,9 @@ PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p)
     }
     
     result = pl_File_DeInit (&amul->originalMulti);
-    pl_MemoryZero (amul, sizeof (PlankMultiAudioFileReader));
+//    pl_MemoryZero (amul, sizeof (PlankMultiAudioFileReader));
+    
+    pl_Memory_Free (m, amul);
     
 exit:
     return result;
@@ -3006,11 +3029,36 @@ PlankResult pl_MultiAudioFileReaderQueueNextFunction (PlankMultiAudioFileReaderR
     {
         pl_AudioFileReader_OpenWithFile (p->currentAudioFile, file, PLANK_FALSE);
         
+        if (pl_AudioFileReader_IsPositionable (p->currentAudioFile))
+            pl_AudioFileReader_SetFramePosition (p->currentAudioFile, 0);
+        
         if (q->freeFunction)
             result = (q->freeFunction) (file);
     }
     
 exit:    
+    return result;
+}
+
+PlankResult pl_MultiAudioFileReaderCustomNextFunction (PlankMultiAudioFileReaderRef p)
+{
+    PlankResult result = PlankResult_OK;
+    PlankMulitFileReaderRef multi;
+    multi = (PlankMulitFileReaderRef)p->originalMulti.stream;
+
+    pl_AudioFileReader_DeInit (p->currentAudioFile);
+    
+    (multi->nextFunction) (multi);
+    
+    if (pl_File_IsValid (multi->currentFile))
+    {
+        pl_AudioFileReader_OpenWithFile (p->currentAudioFile, multi->currentFile, PLANK_FALSE);
+        
+        if (pl_AudioFileReader_IsPositionable (p->currentAudioFile))
+            pl_AudioFileReader_SetFramePosition (p->currentAudioFile, 0);
+    }
+    
+exit:
     return result;
 }
 

@@ -140,12 +140,13 @@ PlankResult pl_MultiFileReaderArrayRefNextIndexFunction (PlankMulitFileReaderRef
 {
     PlankResult result = PlankResult_OK;
     PlankDynamicArrayRef array;
-    int arraySize;
+    int arraySize, *indexRef;
     
     array = (PlankDynamicArrayRef)p->source;
     arraySize = pl_DynamicArray_GetSize (array);
     
-    p->index = p->indexRef ? *p->indexRef : 0;
+    indexRef = (int*)p->otherRef;
+    p->index = indexRef ? *indexRef : 0;
     
     if ((p->index < 0) || (p->index >= arraySize))
         p->index = arraySize;
@@ -181,111 +182,6 @@ PlankResult pl_MultiFileReaderArrayNextFunction (PlankMulitFileReaderRef p)
 exit:
     return result;
 }
-
-//PlankResult pl_MultiFileReaderArraySequenceOnceNextFunction (PlankMulitFileReaderRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankDynamicArrayRef array;
-//    PlankFile* fileArray;
-//    PlankFileRef file;
-//    int arraySize;
-//    
-//    file = (PlankFileRef)PLANK_NULL;
-//    array = (PlankDynamicArrayRef)p->source;
-//    arraySize = pl_DynamicArray_GetSize (array);
-//    
-//    p->index = p->index + 1;
-//    
-//    if ((p->index >= 0) && (p->index < arraySize))
-//    {
-//        fileArray = (PlankFile*)pl_DynamicArray_GetArray (array);
-//        file = fileArray + p->index;
-//    }
-//    else
-//    {
-//        p->index = arraySize;
-//    }
-//    
-//    p->currentFile = file;
-//    
-//exit:
-//    return result;
-//}
-//
-//PlankResult pl_MultiFileReaderArraySequenceLoopNextFunction (PlankMulitFileReaderRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankDynamicArrayRef array;
-//    PlankFile* fileArray;
-//    PlankFileRef file;
-//    int arraySize;
-//    
-//    file = (PlankFileRef)PLANK_NULL;
-//    array = (PlankDynamicArrayRef)p->source;
-//    arraySize = pl_DynamicArray_GetSize (array);
-//    
-//    p->index = p->index + 1;
-//    
-//    if ((p->index < 0) || (p->index >= arraySize))
-//        p->index = 0;
-//
-//    fileArray = (PlankFile*)pl_DynamicArray_GetArray (array);
-//    file = fileArray + p->index;
-//    p->currentFile = file;
-//    
-//exit:
-//    return result;
-//}
-//
-//PlankResult pl_MultiFileReaderArrayRandomNextFunction (PlankMulitFileReaderRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankDynamicArrayRef array;
-//    PlankFile* fileArray;
-//    PlankFileRef file;
-//    int arraySize;
-//    
-//    file = (PlankFileRef)PLANK_NULL;
-//    array = (PlankDynamicArrayRef)p->source;
-//    arraySize = pl_DynamicArray_GetSize (array);
-//    
-//    p->index = pl_RNG_NextInt (pl_RNGGlobal(), arraySize);
-//    fileArray = (PlankFile*)pl_DynamicArray_GetArray (array);
-//    file = fileArray + p->index;
-//    p->currentFile = file;
-//
-//exit:
-//    return result;
-//}
-//
-//PlankResult pl_MultiFileReaderArrayRandomNoRepeatNextFunction (PlankMulitFileReaderRef p)
-//{
-//    PlankResult result = PlankResult_OK;
-//    PlankDynamicArrayRef array;
-//    PlankFile* fileArray;
-//    PlankFileRef file;
-//    int arraySize, index;
-//    
-//    file = (PlankFileRef)PLANK_NULL;
-//    array = (PlankDynamicArrayRef)p->source;
-//    arraySize = pl_DynamicArray_GetSize (array);
-//    
-//    if (arraySize < 2)
-//        return pl_MultiFileReaderArrayRandomNextFunction (p);
-//    
-//    index = p->index;
-//    
-//    while (index == p->index)
-//        index = pl_RNG_NextInt (pl_RNGGlobal(), arraySize);
-//    
-//    p->index = index;
-//    fileArray = (PlankFile*)pl_DynamicArray_GetArray (array);
-//    file = fileArray + p->index;
-//    p->currentFile = file;
-//    
-//exit:
-//    return result;
-//}
 
 PlankResult pl_MultiFileReader_Queue_FreeCurrentFile (PlankMulitFileReaderRef p)
 {
@@ -373,7 +269,7 @@ PlankMulitFileReaderRef pl_MultiFileReader_Create()
 //    return PlankResult_OK;
 //}
 
-PlankResult pl_MultiFileReader_InitArraySequence (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB ownArray, const PlankB loop)
+PlankResult pl_MultiFileReader_InitArraySequence (PlankMulitFileReaderRef p, const int fileMode, PlankDynamicArrayRef array, const PlankB ownArray, const PlankB loop)
 {
     PlankResult result = PlankResult_OK;
     pl_MemoryZero (p, sizeof (PlankMulitFileReader));
@@ -381,15 +277,16 @@ PlankResult pl_MultiFileReader_InitArraySequence (PlankMulitFileReaderRef p, Pla
     p->index = -1;
     p->source = array;
     p->nextFunction = pl_MultiFileReaderArrayNextFunction;
+    p->fileMode = fileMode;
     
     if (loop)
     {
-        p->mode = PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP;
+        p->multiMode = PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP;
         p->nextIndexFunction = pl_MultiFileReaderArraySequenceLoopNextIndexFunction;
     }
     else
     {
-        p->mode = PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE;
+        p->multiMode = PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE;
         p->nextIndexFunction = pl_MultiFileReaderArraySequenceOnceNextIndexFunction;
     }
     
@@ -399,7 +296,7 @@ exit:
     return result;
 }
 
-PlankResult pl_MultiFileReader_InitArrayRandom (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB ownArray, const PlankB noRepeat)
+PlankResult pl_MultiFileReader_InitArrayRandom (PlankMulitFileReaderRef p, const int fileMode,  PlankDynamicArrayRef array, const PlankB ownArray, const PlankB noRepeat)
 {
     PlankResult result = PlankResult_OK;
     pl_MemoryZero (p, sizeof (PlankMulitFileReader));
@@ -407,15 +304,16 @@ PlankResult pl_MultiFileReader_InitArrayRandom (PlankMulitFileReaderRef p, Plank
     p->index = -1;
     p->source = array;
     p->nextFunction = pl_MultiFileReaderArrayNextFunction;
-
+    p->fileMode = fileMode;
+    
     if (noRepeat)
     {
-        p->mode = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT;
+        p->multiMode = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT;
         p->nextIndexFunction = pl_MultiFileReaderArrayRandomNoRepeatNextIndexFunction;
     }
     else
     {
-        p->mode = PLANKMULITFILE_MODE_ARRAYRANDOM;
+        p->multiMode = PLANKMULITFILE_MODE_ARRAYRANDOM;
         p->nextIndexFunction = pl_MultiFileReaderArrayRandomNextIndexFunction;
     }
 
@@ -425,33 +323,52 @@ exit:
     return result;
 }
 
-PlankResult pl_MultiFileReader_InitArrayIndexRef (PlankMulitFileReaderRef p, PlankDynamicArrayRef array, const PlankB ownArray, int *indexRef)
+PlankResult pl_MultiFileReader_InitArrayIndexRef (PlankMulitFileReaderRef p, const int fileMode, PlankDynamicArrayRef array, const PlankB ownArray, int *indexRef)
 {
     PlankResult result = PlankResult_OK;
     pl_MemoryZero (p, sizeof (PlankMulitFileReader));
     
     p->index = -1;
     p->source = array;
-    p->mode = PLANKMULITFILE_MODE_ARRAYINDEXREF;
+    p->multiMode = PLANKMULITFILE_MODE_ARRAYINDEXREF;
     p->nextFunction = pl_MultiFileReaderArrayNextFunction;
     p->nextIndexFunction = pl_MultiFileReaderArrayRefNextIndexFunction;
-    p->indexRef = indexRef;
+    p->otherRef = indexRef;
     p->ownSource = ownArray;
-    
+    p->fileMode = fileMode;
 exit:
     return result;
 }
 
-PlankResult pl_MultiFileReader_InitQueue (PlankMulitFileReaderRef p, PlankLockFreeQueueRef queue, const PlankB ownQueue)
+PlankResult pl_MultiFileReader_InitQueue (PlankMulitFileReaderRef p, const int fileMode, PlankLockFreeQueueRef queue, const PlankB ownQueue)
 {
     PlankResult result = PlankResult_OK;
     pl_MemoryZero (p, sizeof (PlankMulitFileReader));
     
     p->index = -1;
     p->source = queue;
-    p->mode = PLANKMULITFILE_MODE_QUEUE;
+    p->multiMode = PLANKMULITFILE_MODE_QUEUE;
     p->nextFunction = pl_MultiFileReaderQueueNextFunction;
     p->ownSource = ownQueue;
+    p->fileMode = fileMode;
+exit:
+    return result;
+}
+
+PlankResult pl_MultiFileReader_InitCustom (PlankMulitFileReaderRef p, const int fileMode, PlankP custom, const PlankB ownCustom,
+                                           PlankMultiFileNextFunction nextFuntion,
+                                           PlankMultiFileDestroyCustomFunction destroyCustomFunction)
+{
+    PlankResult result = PlankResult_OK;
+    pl_MemoryZero (p, sizeof (PlankMulitFileReader));
+    
+    p->index = -1;
+    p->source = custom;
+    p->multiMode = PLANKMULITFILE_MODE_CUSTOM;
+    p->nextFunction = nextFuntion;
+    p->ownSource = ownCustom;
+    p->otherRef = destroyCustomFunction;
+    p->fileMode = fileMode;
     
 exit:
     return result;
@@ -460,14 +377,16 @@ exit:
 PlankResult pl_MultiFileReader_DeInit (PlankMulitFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
-    
+    PlankMultiFileDestroyCustomFunction destroyCustomFunction;
+    PlankMemoryRef m;
+        
     if (p == PLANK_NULL)
     {
         result = PlankResult_MemoryError;
         goto exit;
     }
     
-    switch (p->mode)
+    switch (p->multiMode)
     {
         case PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE:
         case PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP:
@@ -496,6 +415,22 @@ PlankResult pl_MultiFileReader_DeInit (PlankMulitFileReaderRef p)
             }
 
             break;
+            
+        case PLANKMULITFILE_MODE_CUSTOM:
+            if (p->ownSource)
+            {
+                if (p->otherRef)
+                {
+                    destroyCustomFunction = (PlankMultiFileDestroyCustomFunction)p->otherRef;
+                    result = (destroyCustomFunction) (p);
+                }
+                else
+                {
+                    m = pl_MemoryGlobal();
+                    result = pl_Memory_Free (m, p->source);
+                }
+            }
+
         default:
             break;
     }
@@ -529,15 +464,15 @@ exit:
     return result;
 }
 
-PlankResult pl_MultiFileReader_GetMode (PlankMulitFileReaderRef p, int* mode)
+PlankResult pl_MultiFileReader_GetMultiMode (PlankMulitFileReaderRef p, int* multiMode)
 {
-    *mode = p->mode;
+    *multiMode = p->multiMode;
     return PlankResult_OK;
 }
 
 PlankResult pl_MultiFileReader_GetArray (PlankMulitFileReaderRef p, PlankDynamicArrayRef* array)
 {
-    switch (p->mode)
+    switch (p->multiMode)
     {
         case PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE:
         case PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP:
@@ -556,7 +491,7 @@ PlankResult pl_MultiFileReader_GetArray (PlankMulitFileReaderRef p, PlankDynamic
 
 PlankResult pl_MultiFileReader_GetQueue (PlankMulitFileReaderRef p, PlankLockFreeQueueRef* queue)
 {
-    switch (p->mode)
+    switch (p->multiMode)
     {
         case PLANKMULITFILE_MODE_QUEUE:
             *queue = (PlankLockFreeQueueRef)p->source;
@@ -589,7 +524,7 @@ PlankResult pl_MultiFileReader_SetIndex (PlankMulitFileReaderRef p, const int in
     PlankFileRef file;
     int arraySize;
     
-    if (p->mode == PLANKMULITFILE_MODE_QUEUE)
+    if ((p->multiMode == PLANKMULITFILE_MODE_QUEUE) || (p->multiMode == PLANKMULITFILE_MODE_CUSTOM))
     {
         result = PlankResult_UnknownError;
         goto exit;
@@ -618,7 +553,7 @@ exit:
 
 PlankResult pl_MultiFileReader_GetNumFiles (PlankMulitFileReaderRef p, int* count)
 {
-    switch (p->mode)
+    switch (p->multiMode)
     {
         case PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE:
         case PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP:
@@ -627,9 +562,12 @@ PlankResult pl_MultiFileReader_GetNumFiles (PlankMulitFileReaderRef p, int* coun
         case PLANKMULITFILE_MODE_ARRAYINDEXREF:
             *count = (int)pl_DynamicArray_GetSize ((PlankDynamicArrayRef)p->source);
             break;
-        default:
+        case PLANKMULITFILE_MODE_QUEUE:
             *count = pl_LockFreeQueue_GetSize ((PlankLockFreeQueueRef)p->source) + (p->currentFile ? 1 : 0);
             break;
+        default:
+            *count = 0;
+        
     }
     
     return PlankResult_OK;

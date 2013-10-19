@@ -290,37 +290,42 @@ bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileAr
     }
     
     PlankMulitFileReaderRef multi = pl_MultiFileReader_Create();
+
+    int mode = PLANKFILE_READ | PLANKFILE_BINARY;
     
+    if (bigEndian)
+        mode |= PLANKFILE_BIGENDIAN;
+
     switch (multiMode)
     {
         case BinaryFile::MultiFileArraySequenceOnce:
         {
-            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, false);
+            result = pl_MultiFileReader_InitArraySequence (multi, mode, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
         case BinaryFile::MultiFileArraySequenceLoop:
         {
-            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, true);
+            result = pl_MultiFileReader_InitArraySequence (multi, mode, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);
         } break;
             
         case BinaryFile::MultiFileArrayRandom:
         {
-            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, false);
+            result = pl_MultiFileReader_InitArrayRandom (multi, mode, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
         case BinaryFile::MultiFileArrayRandomNoRepeat:
         {
-            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, true);
+            result = pl_MultiFileReader_InitArrayRandom (multi, mode, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);
         } break;
             
         case BinaryFile::MultiFileArrayIndexRef:
         {
             int *indexRefPtr = indexRef ? indexRef->getValuePtr() : 0;
-            result = pl_MultiFileReader_InitArrayIndexRef (multi, array, shouldTakeOwnership, indexRefPtr);
+            result = pl_MultiFileReader_InitArrayIndexRef (multi, mode, array, shouldTakeOwnership, indexRefPtr);
             plonk_assert (result == PlankResult_OK);
         } break;
 
@@ -333,12 +338,7 @@ bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileAr
     }
     
     if (multi != PLANK_NULL)
-    {
-        int mode = PLANKFILE_READ | PLANKFILE_BINARY;
-        
-        if (bigEndian)
-            mode |= PLANKFILE_BIGENDIAN;
-        
+    {        
         result = pl_File_OpenMulti (p, multi, mode);
         plonk_assert (result == PlankResult_OK);
     }
@@ -346,9 +346,128 @@ bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathArray const& fileAr
     return result == PlankResult_OK;
 }
 
+static PlankResult plonk_BinaryFileInternal_BinaryFileQueue_NextFuntion (PlankMulitFileReaderRef p)
+{
+    if (!p->currentFile)
+        p->currentFile = pl_File_CreateAndInit();
+    
+    BinaryFileQueue& queue = *static_cast<BinaryFileQueue*> (p->source);
+    BinaryFile binaryFile = queue.pop();
+    
+    pl_File_DeInit (p->currentFile);
+    binaryFile.disownPeer (p->currentFile);
+    
+    return PlankResult_OK;
+}
+
+static PlankResult plonk_BinaryFileInternal_BinaryFileQueue_DestroyCustomFuntion (PlankMulitFileReaderRef p)
+{
+    BinaryFileQueue* queue = static_cast<BinaryFileQueue*> (p->source);
+    delete queue;
+    
+    if (p->currentFile)
+    {
+        pl_File_Destroy (p->currentFile);
+        p->currentFile = (PlankFileRef)PLANK_NULL;
+    }
+    
+    return PlankResult_OK;
+}
+
+bool BinaryFileInternal::setupMulti (PlankFileRef p, BinaryFileQueue const& fileQueue, const bool bigEndian) throw()
+{
+    pl_File_Init (p);
+    
+    const bool shouldTakeOwnership = true;
+    ResultCode result;
+    PlankMulitFileReaderRef multi = pl_MultiFileReader_Create();
+    
+    int mode = PLANKFILE_READ | PLANKFILE_BINARY;
+    
+    if (bigEndian)
+        mode |= PLANKFILE_BIGENDIAN;
+
+    result = pl_MultiFileReader_InitCustom (multi,
+                                            mode,
+                                            new BinaryFileQueue (fileQueue),
+                                            shouldTakeOwnership,
+                                            plonk_BinaryFileInternal_BinaryFileQueue_NextFuntion,
+                                            plonk_BinaryFileInternal_BinaryFileQueue_DestroyCustomFuntion);
+
+    result = pl_File_OpenMulti (p, multi, mode);
+    plonk_assert (result == PlankResult_OK);
+    
+    return result == PlankResult_OK;
+}
+
 BinaryFileInternal::BinaryFileInternal (FilePathArray const& fileArray, const int multiMode, const bool bigEndian) throw()
 {
     setupMulti (getPeerRef(), fileArray, multiMode, bigEndian);
+}
+
+static PlankResult plonk_BinaryFileInternal_FilePathQueue_NextFuntion (PlankMulitFileReaderRef p)
+{
+    if (!p->currentFile)
+        p->currentFile = pl_File_CreateAndInit();
+    
+    FilePathQueue& queue = *static_cast<FilePathQueue*> (p->source);
+    FilePath path = queue.pop();
+    
+    pl_File_DeInit (p->currentFile);
+    pl_File_Init (p->currentFile);
+    pl_File_Open (p->currentFile, path.fullpath().getArray(), p->fileMode);
+    
+    return PlankResult_OK;
+}
+
+static PlankResult plonk_BinaryFileInternal_FilePathQueue_DestroyCustomFuntion (PlankMulitFileReaderRef p)
+{
+    FilePathQueue* queue = static_cast<FilePathQueue*> (p->source);
+    delete queue;
+    
+    if (p->currentFile)
+    {
+        pl_File_Destroy (p->currentFile);
+        p->currentFile = (PlankFileRef)PLANK_NULL;
+    }
+    
+    return PlankResult_OK;
+}
+
+bool BinaryFileInternal::setupMulti (PlankFileRef p, FilePathQueue const& fileQueue, const bool bigEndian) throw()
+{
+    pl_File_Init (p);
+    
+    const bool shouldTakeOwnership = true;
+    ResultCode result;
+    PlankMulitFileReaderRef multi = pl_MultiFileReader_Create();
+    
+    int mode = PLANKFILE_READ | PLANKFILE_BINARY;
+    
+    if (bigEndian)
+        mode |= PLANKFILE_BIGENDIAN;
+
+    result = pl_MultiFileReader_InitCustom (multi,
+                                            mode,
+                                            new FilePathQueue (fileQueue),
+                                            shouldTakeOwnership,
+                                            plonk_BinaryFileInternal_FilePathQueue_NextFuntion,
+                                            plonk_BinaryFileInternal_FilePathQueue_DestroyCustomFuntion);
+    
+    result = pl_File_OpenMulti (p, multi, mode);
+    plonk_assert (result == PlankResult_OK);
+    
+    return result == PlankResult_OK;
+}
+
+BinaryFileInternal::BinaryFileInternal (BinaryFileQueue const& fileQueue, const bool bigEndian) throw()
+{
+    setupMulti (getPeerRef(), fileQueue, bigEndian);
+}
+
+BinaryFileInternal::BinaryFileInternal (FilePathQueue const& fileQueue, const bool bigEndian) throw()
+{
+    setupMulti (getPeerRef(), fileQueue, bigEndian);
 }
 
 BinaryFileInternal::BinaryFileInternal (PlankFileRef fileRef) throw()
@@ -704,6 +823,12 @@ void BinaryFileInternal::write (const double value) throw()
 #ifndef PLONK_DEBUG
     (void)result;
 #endif
+}
+
+void BinaryFileInternal::disownPeer (PlankFileRef otherFile) throw()
+{
+    pl_MemoryCopy (otherFile, getPeerRef(), sizeof (PlankFile));
+    pl_MemoryZero (getPeerRef(), sizeof (PlankFile));
 }
 
 ResultCode BinaryFileInternal::copy (BinaryFileInternal* source, const LongLong size) throw()

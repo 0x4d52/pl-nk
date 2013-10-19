@@ -55,7 +55,7 @@ public:
                       const bool writable = false, 
                       const bool clearContents = false) throw();
     TextFileInternal (FilePathArray const& fileArray, const int multiMode) throw();
-//    TextFileInternal (TextFileQueue const& fileQueue) throw();
+    TextFileInternal (TextFileQueue const& fileQueue) throw();
 
     ~TextFileInternal();
     
@@ -85,6 +85,8 @@ public:
 	void writeValue (const double value) throw();
 	void write (const char* text) throw();
 	void writeLine (const char* text) throw();
+    
+    void disownPeer (PlankFileRef otherFile) throw();
 
 private:
     inline PlankFileRef getPeerRef() { return static_cast<PlankFileRef> (&peer); }
@@ -167,12 +169,12 @@ public:
     {
     }
     
-//    /** Creates a multiple text file reader with a queue of files.
-//     */
-//    TextFile (TextFileQueue const& fileQueue) throw()
-//    :   Base (new Internal (fileQueue))
-//    {
-//    }
+    /** Creates a multiple text file reader with a queue of files.
+     */
+    TextFile (TextFileQueue const& fileQueue) throw()
+    :   Base (new Internal (fileQueue))
+    {
+    }
 	
     /** @internal */
     explicit TextFile (Internal* internalToUse) throw() 
@@ -278,6 +280,11 @@ public:
     {
         getInternal()->writeLine (text.getArray());
     }    
+    
+    void disownPeer (PlankFileRef otherFile) throw()
+    {
+        getInternal()->disownPeer (otherFile);
+    }
     
     PLONK_OBJECTARROWOPERATOR(TextFile);
 

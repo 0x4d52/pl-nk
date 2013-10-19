@@ -56,7 +56,10 @@ public:
                         const bool bigEndian = false) throw();
     BinaryFileInternal (ByteArray const& bytes,
                         const bool writable = false) throw();
-    BinaryFileInternal (FilePathArray const& fileArray, const int multiMode, const bool bigEndian = false) throw();
+    BinaryFileInternal (FilePathArray const& fileArray, const int multiMode, const bool bigEndian) throw();
+    BinaryFileInternal (BinaryFileQueue const& fileQueue, const bool bigEndian) throw();
+    BinaryFileInternal (FilePathQueue const& fileQueue, const bool bigEndian) throw();
+
     explicit BinaryFileInternal (PlankFileRef fileRef) throw();
 
     ~BinaryFileInternal();
@@ -65,6 +68,8 @@ public:
     
     static bool setupBytes (PlankFileRef p, ByteArray const& bytes, const bool writable) throw();
     static bool setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian, IntVariable* indexRef = 0) throw();
+    static bool setupMulti (PlankFileRef p, BinaryFileQueue const& fileQueue, const bool bigEndian) throw();
+    static bool setupMulti (PlankFileRef p, FilePathQueue const& fileQueue, const bool bigEndian) throw();
 
     static PlankResult dynamicMemoryOpenCallback (PlankFileRef p);
     static PlankResult dynamicMemoryCloseCallback (PlankFileRef p);
@@ -115,7 +120,9 @@ public:
     void write (const UnsignedLongLong value) throw();
 	void write (const float value) throw();
 	void write (const double value) throw();
-        
+    
+    void disownPeer (PlankFileRef otherFile) throw();
+    
     template<class NumericalType>
     void write (NumericalArray<NumericalType> const& array) throw();
 
@@ -277,7 +284,12 @@ public:
     /** Creates a multiple binary file reader from the array of files.
      */
     BinaryFile (FilePathArray const& fileArray, const int multiMode, const bool bigEndian = PLANK_BIGENDIAN) throw()
-    :   Base (new Internal (fileArray, multiMode))
+    :   Base (new Internal (fileArray, multiMode, bigEndian))
+    {
+    }
+    
+    BinaryFile (BinaryFileQueue const& fileQueue, const bool bigEndian = PLANK_BIGENDIAN) throw()
+    :   Base (new Internal (fileQueue, bigEndian))
     {
     }
 
@@ -386,6 +398,11 @@ public:
         return getInternal()->write (array);
     }
     
+    void disownPeer (PlankFileRef otherFile) throw()
+    {
+        getInternal()->disownPeer (otherFile);
+    }
+
     /** Write a numerical value to the file.
      This must be one of: char, short, int, long or LongLong 
      (and their unsigned versions). This is written in the endian format

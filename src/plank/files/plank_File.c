@@ -553,7 +553,7 @@ static PlankResult pl_FileMultiGetStatusCallback (PlankFileRef p, int type, int*
             *status = (multi->currentFile == PLANK_NULL) ? PLANK_TRUE : PLANK_FALSE;
             break;
         case PLANKFILE_STATUS_ISPOSITIONABLE:
-            *status = ((multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP) || (multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE)) ? PLANK_TRUE : PLANK_FALSE;
+            *status = ((multi->multiMode == PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP) || (multi->multiMode == PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE)) ? PLANK_TRUE : PLANK_FALSE;
             break;
             
         default: return PlankResult_UnknownError;
@@ -595,7 +595,7 @@ static PlankResult pl_FileMultiSetPositionCallback (PlankFileRef p, PlankLL offs
         result = PlankResult_FileSeekFailed;
         goto exit;
     }
-    else if (((multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP) || (multi->mode == PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE)) && (offset == 0))
+    else if (((multi->multiMode == PLANKMULITFILE_MODE_ARRAYSEQUENCELOOP) || (multi->multiMode == PLANKMULITFILE_MODE_ARRAYSEQUENCEONCE)) && (offset == 0))
     {    
         result = PlankResult_OK;
         p->position = 0;
@@ -1214,7 +1214,7 @@ PlankResult pl_File_SetPositionEnd (PlankFileRef p)
 
 PlankB pl_File_IsValid (PlankFileRef p)
 {
-    return p->stream != 0;
+    return p ? p->stream != 0 : PLANK_FALSE;
 }
 
 PlankB pl_File_IsEOF (PlankFileRef p)

@@ -90,30 +90,30 @@ TextFileInternal::TextFileInternal (FilePathArray const& fileArray, const int mu
     }
     
     PlankMulitFileReaderRef multi = pl_MultiFileReader_Create();
-    
+        
     switch (multiMode)
     {
         case TextFile::MultiFileArraySequenceOnce:
         {
-            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, false);
+            result = pl_MultiFileReader_InitArraySequence (multi, PLANKFILE_READ, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
         case TextFile::MultiFileArraySequenceLoop:
         {
-            result = pl_MultiFileReader_InitArraySequence (multi, array, shouldTakeOwnership, true);
+            result = pl_MultiFileReader_InitArraySequence (multi, PLANKFILE_READ, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);
         } break;
             
         case TextFile::MultiFileArrayRandom:
         {
-            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, false);
+            result = pl_MultiFileReader_InitArrayRandom (multi, PLANKFILE_READ, array, shouldTakeOwnership, false);
             plonk_assert (result == PlankResult_OK);
         } break;
             
         case TextFile::MultiFileArrayRandomNoRepeat:
         {
-            result = pl_MultiFileReader_InitArrayRandom (multi, array, shouldTakeOwnership, true);
+            result = pl_MultiFileReader_InitArrayRandom (multi, PLANKFILE_READ, array, shouldTakeOwnership, true);
             plonk_assert (result == PlankResult_OK);
         } break;
             
@@ -136,10 +136,57 @@ TextFileInternal::TextFileInternal (FilePathArray const& fileArray, const int mu
 #endif
 }
 
-//TextFileInternal::TextFileInternal (TextFileQueue const& fileQueue) throw()
-//{
-//    
-//}
+static PlankResult plonk_TextFileInternal_TextFileQueue_NextFuntion (PlankMulitFileReaderRef p)
+{
+    if (!p->currentFile)
+        p->currentFile = pl_File_CreateAndInit();
+    
+    TextFileQueue& queue = *static_cast<TextFileQueue*> (p->source);
+    TextFile textFile = queue.pop();
+
+    pl_File_DeInit (p->currentFile);
+    textFile.disownPeer (p->currentFile);
+    
+    return PlankResult_OK;
+}
+
+static PlankResult plonk_TextFileInternal_TextFileQueue_DestroyCustomFuntion (PlankMulitFileReaderRef p)
+{
+    TextFileQueue* queue = static_cast<TextFileQueue*> (p->source);
+    delete queue;
+    
+    if (p->currentFile)
+    {
+        pl_File_Destroy (p->currentFile);
+        p->currentFile = (PlankFileRef)PLANK_NULL;
+    }
+    
+    return PlankResult_OK;
+}
+
+TextFileInternal::TextFileInternal (TextFileQueue const& fileQueue) throw()
+{
+    pl_File_Init (getPeerRef());
+    
+    const bool shouldTakeOwnership = true;
+    ResultCode result;
+    PlankMulitFileReaderRef multi = pl_MultiFileReader_Create();
+    
+    result = pl_MultiFileReader_InitCustom (multi,
+                                            PLANKFILE_READ, 
+                                            new TextFileQueue (fileQueue),
+                                            shouldTakeOwnership,
+                                            plonk_TextFileInternal_TextFileQueue_NextFuntion,
+                                            plonk_TextFileInternal_TextFileQueue_DestroyCustomFuntion);
+    plonk_assert (result == PlankResult_OK);
+
+    result = pl_File_OpenMulti (getPeerRef(), multi, PLANKFILE_READ);
+    plonk_assert (result == PlankResult_OK);
+    
+#ifndef PLONK_DEBUG
+    (void)result;
+#endif
+}
 
 TextFileInternal::~TextFileInternal()
 {
@@ -367,5 +414,10 @@ void TextFileInternal::writeLine (const char* text) throw()
 #endif    
 }
 
+void TextFileInternal::disownPeer (PlankFileRef otherFile) throw()
+{
+    pl_MemoryCopy (otherFile, getPeerRef(), sizeof (PlankFile));
+    pl_MemoryZero (getPeerRef(), sizeof (PlankFile));
+}
 
 END_PLONK_NAMESPACE

@@ -60,6 +60,8 @@ public:
     AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw();
     AudioFileReaderInternal (FilePathArray const& paths, const AudioFile::MultiFileTypes multiMode, const int bufferSize) throw();
     AudioFileReaderInternal (FilePathArray const& paths, IntVariable const& indexRef, const int bufferSize) throw();
+    AudioFileReaderInternal (FilePathQueue const& paths, const int bufferSize) throw();
+
     ~AudioFileReaderInternal();
     
     ResultCode open (const char* path, const int bufferSize, const bool readMetaData) throw();
@@ -404,6 +406,11 @@ public:
 	:	Base (new Internal (paths, nextIndex, bufferSize))
 	{
 	}
+    
+    AudioFileReader (FilePathQueue const& paths, const int bufferSize = 0) throw()
+    :	Base (new Internal (paths, bufferSize))
+    {
+    }
 
     
     /** @internal */
