@@ -97,6 +97,14 @@ PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFil
 
 PlankResult pl_AudioFileReader_OpenWithAudioFileArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int* indexRef);
 
+typedef PlankResult (*PlankAudioFileReaderCustomNextFunction)(PlankP, PlankAudioFileReaderRef*);
+typedef PlankResult (*PlankAudioFileReaderCustomFreeFunction)(PlankP);
+
+PlankResult pl_AudioFileReader_OpenWithCustomNextFunction (PlankAudioFileReaderRef p,
+                                                           PlankAudioFileReaderCustomNextFunction nextFunction,
+                                                           PlankAudioFileReaderCustomFreeFunction freeFunction,
+                                                           PlankP ref);
+
 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 

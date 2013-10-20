@@ -193,6 +193,42 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue
     }
 }
 
+static PlankResult AudioFileReaderInternal_Custom_NextFunction (PlankP ref, PlankAudioFileReaderRef* audioFile) throw()
+{
+    AudioFileReaderQueue& queue = *static_cast<AudioFileReaderQueue*> (ref);
+    AudioFileReader reader = queue.pop();
+    PlankAudioFileReaderRef file = pl_AudioFileReader_CreateAndInit();
+    reader.disownPeer (file);
+    *audioFile = file;
+    return PlankResult_OK;
+}
+
+static PlankResult AudioFileReaderInternal_Custom_FreeFunction (PlankP ref) throw()
+{
+    AudioFileReaderQueue* queue = static_cast<AudioFileReaderQueue*> (ref);
+    delete queue;
+    return PlankResult_OK;
+}
+
+AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& audioFiles, const int bufferSize) throw()
+:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
+    numFramesPerBuffer (0),
+    newPositionOnNextRead (-1),
+    hitEndOfFile (false),
+    numChannelsChanged (false),
+    defaultNumChannels (0)
+{
+    pl_AudioFileReader_Init (getPeerRef());
+    
+    if (pl_AudioFileReader_OpenWithCustomNextFunction (getPeerRef(),
+                                                       AudioFileReaderInternal_Custom_NextFunction,
+                                                       AudioFileReaderInternal_Custom_FreeFunction,
+                                                       new AudioFileReaderQueue (audioFiles)) == PlankResult_OK)
+    {
+        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+    }
+}
+
 AudioFileReaderInternal::~AudioFileReaderInternal()
 {
     pl_AudioFileReader_DeInit (getPeerRef());
