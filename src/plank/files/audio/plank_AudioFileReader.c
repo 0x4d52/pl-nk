@@ -102,28 +102,35 @@ PlankResult pl_AudioFileReader_Opus_ReadFrames (PlankAudioFileReaderRef p, const
 PlankResult pl_AudioFileReader_Opus_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Opus_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
-PlankResult pl_AudioFileReader_Multi_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file);
+PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileRef file);
 PlankResult pl_AudioFileReader_Multi_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_Multi_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 PlankResult pl_AudioFileReader_Multi_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Multi_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
-PlankResult pl_AudioFileReader_Array_OpenWithArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int *indexRef);
+PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int *indexRef);
 PlankResult pl_AudioFileReader_Array_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_Array_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 PlankResult pl_AudioFileReader_Array_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Array_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
-PlankResult pl_AudioFileReader_Custom_OpenWithNextFunction (PlankAudioFileReaderRef p,
-                                                            PlankAudioFileReaderCustomNextFunction nextFunction,
-                                                            PlankAudioFileReaderCustomFreeFunction freeFunction,
-                                                            PlankP ref);
+PlankResult pl_AudioFileReader_Custom_Open (PlankAudioFileReaderRef p,
+                                            PlankAudioFileReaderCustomNextFunction nextFunction,
+                                            PlankAudioFileReaderCustomFreeFunction freeFunction,
+                                            PlankP ref);
 PlankResult pl_AudioFileReader_Custom_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 PlankResult pl_AudioFileReader_Custom_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Custom_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
 PlankResult pl_AudioFileReader_UpdateFormat (PlankAudioFileReaderRef p, const PlankAudioFileFormatInfo* newFormat, PlankB* frameFormatChanged);
+
+PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original, PlankAudioFileRegionRef region);
+PlankResult pl_AudioFileReader_Region_Close (PlankAudioFileReaderRef p);
+PlankResult pl_AudioFileReader_Region_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
+PlankResult pl_AudioFileReader_Region_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
+PlankResult pl_AudioFileReader_Region_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
+
 
 #if PLANK_APPLE
 #pragma mark Generic Functions
@@ -269,7 +276,7 @@ PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, 
 
         if (fileStreamType == PLANKFILE_STREAMTYPE_MULTI)
         {
-            result = pl_AudioFileReader_Multi_OpenWithFile (p, file);
+            result = pl_AudioFileReader_Multi_Open (p, file);
             goto exit; // we're a multi
         }
     }
@@ -386,7 +393,7 @@ PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFil
 
 PlankResult pl_AudioFileReader_OpenWithAudioFileArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int* indexRef)
 {
-    return pl_AudioFileReader_Array_OpenWithArray( p, array, ownArray, multiMode, indexRef);
+    return pl_AudioFileReader_Array_Open( p, array, ownArray, multiMode, indexRef);
 }
 
 PlankResult pl_AudioFileReader_OpenWithCustomNextFunction (PlankAudioFileReaderRef p,
@@ -394,7 +401,76 @@ PlankResult pl_AudioFileReader_OpenWithCustomNextFunction (PlankAudioFileReaderR
                                                            PlankAudioFileReaderCustomFreeFunction freeFunction,
                                                            PlankP ref)
 {
-    return pl_AudioFileReader_Custom_OpenWithNextFunction (p, nextFunction, freeFunction, ref);
+    return pl_AudioFileReader_Custom_Open (p, nextFunction, freeFunction, ref);
+}
+
+PlankResult pl_AudioFileReader_OpenWithRegion (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original, PlankAudioFileRegionRef region)
+{
+    return pl_AudioFileReader_Region_Open (p, original, region);
+}
+
+PlankResult pl_AudioFileReader_OpenCopyWithoutMetaData (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original)
+{
+    PlankResult result = PlankResult_OK;
+    PlankFileRef originalFile;
+    PlankFileRef newFile;
+    int streamType, mode;
+    
+    originalFile = (PlankFileRef)PLANK_NULL;
+    
+    switch (original->format)
+    {
+        case PLANKAUDIOFILE_FORMAT_UNKNOWNIFF:
+        case PLANKAUDIOFILE_FORMAT_WAV:
+        case PLANKAUDIOFILE_FORMAT_AIFF:
+        case PLANKAUDIOFILE_FORMAT_AIFC:
+#if PLANK_OGGVORBIS
+        case PLANKAUDIOFILE_FORMAT_OGGVORBIS:
+#endif
+#if PLANK_OPUS
+        case PLANKAUDIOFILE_FORMAT_OPUS:
+#endif
+        case PLANKAUDIOFILE_FORMAT_CAF:
+        case PLANKAUDIOFILE_FORMAT_W64:
+            originalFile = pl_AudioFileReader_GetFile (original);
+            break;
+        case PLANKAUDIOFILE_FORMAT_REGION:
+        case PLANKAUDIOFILE_FORMAT_MULTI:
+        case PLANKAUDIOFILE_FORMAT_ARRAY:
+        case PLANKAUDIOFILE_FORMAT_QUEUE:
+        case PLANKAUDIOFILE_FORMAT_CUSTOM:
+        case PLANKAUDIOFILE_FORMAT_INVALID:
+        case PLANKAUDIOFILE_FORMAT_UNKNOWN:
+            result = PlankResult_FileInvalid;
+            goto exit;
+    }
+    
+    if (!originalFile)
+    {
+        result = PlankResult_UnknownError;
+        goto exit;
+    }
+    
+    pl_File_GetStreamType (originalFile, &streamType);
+    
+    if (streamType != PLANKFILE_STREAMTYPE_FILE)
+    {
+        result = PlankResult_FileInvalid;
+        goto exit;
+    }
+    
+    pl_File_GetMode (originalFile, &mode);
+    newFile = pl_File_CreateAndInit();
+    
+    if ((result = pl_File_Open (newFile, originalFile->path, mode)) != PlankResult_OK)
+        goto exit;
+    
+    pl_MemoryCopy(p, original, sizeof (PlankAudioFileReader));
+    p->peer = newFile;
+    p->metaData = PLANK_NULL;
+    
+exit:
+    return result;
 }
 
 PlankResult pl_AudioFileReader_Close (PlankAudioFileReaderRef p)
@@ -2699,7 +2775,7 @@ PlankResult pl_MultiAudioFileReaderCustomNextFunction (PlankMultiAudioFileReader
 
 //..
 
-PlankResult pl_AudioFileReader_Multi_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file)
+PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileRef file)
 {
     PlankResult result = PlankResult_OK;
     PlankMultiAudioFileReaderRef amul;
@@ -3096,7 +3172,7 @@ PlankResult pl_AudioFileReaderArrayIndexRefNextIndexFunction (PlankAudioFileRead
 PlankResult pl_AudioFileReaderArrayNextFunction (PlankAudioFileReaderArrayRef p);
 
 
-PlankResult pl_AudioFileReader_Array_OpenWithArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int *indexRef)
+PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int *indexRef)
 {
     PlankResult result = PlankResult_OK;
     PlankAudioFileReaderArrayRef audioFileArray;
@@ -3441,7 +3517,7 @@ typedef struct PlankAudioFileReaderCustom
 
 PlankResult pl_AudioFileReaderCustomNextFunction (PlankAudioFileReaderCustomRef p);
 
-PlankResult pl_AudioFileReader_Custom_OpenWithNextFunction (PlankAudioFileReaderRef p,
+PlankResult pl_AudioFileReader_Custom_Open (PlankAudioFileReaderRef p,
                                                             PlankAudioFileReaderCustomNextFunction nextFunction,
                                                             PlankAudioFileReaderCustomFreeFunction freeFunction,
                                                             PlankP ref)
@@ -3658,9 +3734,139 @@ exit:
 }
 
 
+// -- Region Functions -- //////////////////////////////////////////////////
+
+#if PLANK_APPLE
+#pragma mark Region Reader
+#endif
+
+typedef struct PlankAudioFileReaderRegion* PlankAudioFileReaderRegionRef;
+
+typedef struct PlankAudioFileReaderRegion
+{
+    PlankAudioFileReaderRef original;
+    PlankLL start;
+    PlankLL end;
+    PlankLL pos;
+} PlankAudioFileReaderRegion;
 
 
+PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original, PlankAudioFileRegionRef region)
+{
+    PlankResult result = PlankResult_OK;
+    PlankMemoryRef m;
+    PlankAudioFileReaderRegionRef audioFileRegion;
+    PlankFileRef file;
+    
+    m = pl_MemoryGlobal();
+    file = pl_AudioFileReader_GetFile (original);
+    
+    if (!file)
+    {
+        result = PlankResult_FileInvalid;
+        goto exit;
+    }
+    
+    if (!pl_File_IsPositionable (file))
+    {
+        result = PlankResult_FileSeekFailed;
+        goto exit;
+    }
+    
+    audioFileRegion = (PlankAudioFileReaderRegionRef)pl_Memory_AllocateBytes (m, sizeof (PlankAudioFileReaderRegion));
+    
+    if (audioFileRegion == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    pl_MemoryZero (audioFileRegion, sizeof (PlankAudioFileReaderRegion));
+    
+    p->peer = audioFileRegion;
+    p->format = PLANKAUDIOFILE_FORMAT_REGION;
+    
+    audioFileRegion->original = original;
+    audioFileRegion->start    = pl_AudioFileRegion_GetStartPosition (region);
+    audioFileRegion->end      = pl_AudioFileRegion_GetEndPosition (region);
+    audioFileRegion->pos      = audioFileRegion->start;
+    
+    p->readFramesFunction       = pl_AudioFileReader_Region_ReadFrames;
+    p->setFramePositionFunction = pl_AudioFileReader_Region_SetFramePosition;
+    p->getFramePositionFunction = pl_AudioFileReader_Region_GetFramePosition;
+    
+exit:
+    return result;
+}
 
+PlankResult pl_AudioFileReader_Region_Close (PlankAudioFileReaderRef p)
+{
+    PlankResult result = PlankResult_OK;
+    PlankAudioFileReaderRegionRef audioFileRegion;
+    PlankMemoryRef m;
+    
+    m = pl_MemoryGlobal();
+    audioFileRegion = (PlankAudioFileReaderRegionRef)p->peer;
+    
+    pl_Memory_Free (m, audioFileRegion);
+    p->peer = PLANK_NULL;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileReader_Region_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead)
+{
+    PlankResult result = PlankResult_OK;
+    PlankAudioFileReaderRegionRef audioFileRegion;
+    PlankLL framesRemaining;
+    int framesThisTime, framesReadLocal;
+    
+    audioFileRegion = (PlankAudioFileReaderRegionRef)p->peer;
+
+    if ((result = pl_AudioFileReader_SetFramePosition (audioFileRegion->original, audioFileRegion->pos)) != PlankResult_OK)
+        goto exit;
+    
+    framesRemaining = audioFileRegion->end - audioFileRegion->pos;
+    framesThisTime = (int)pl_MinLL (framesRemaining, (PlankLL)numFrames);
+    
+    result = pl_AudioFileReader_ReadFrames (audioFileRegion->original, framesThisTime, data, &framesReadLocal);
+    
+    audioFileRegion->pos = audioFileRegion->pos + framesReadLocal;
+    
+    if ((result == PlankResult_OK) && (framesReadLocal < numFrames))
+        result = PlankResult_FileEOF; // end of region
+        
+exit:
+    if (framesRead != PLANK_NULL)
+        *framesRead = framesReadLocal;
+
+    return result;
+}
+
+PlankResult pl_AudioFileReader_Region_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
+{
+    PlankResult result = PlankResult_OK;
+    PlankAudioFileReaderRegionRef audioFileRegion;
+    
+    audioFileRegion = (PlankAudioFileReaderRegionRef)p->peer;
+    audioFileRegion->pos = frameIndex;
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileReader_Region_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
+{
+    PlankResult result = PlankResult_OK;
+    PlankAudioFileReaderRegionRef audioFileRegion;
+    
+    audioFileRegion = (PlankAudioFileReaderRegionRef)p->peer;
+    *frameIndex = audioFileRegion->pos;
+    
+exit:
+    return result;
+}
 
 
 

@@ -105,6 +105,10 @@ PlankResult pl_AudioFileReader_OpenWithCustomNextFunction (PlankAudioFileReaderR
                                                            PlankAudioFileReaderCustomFreeFunction freeFunction,
                                                            PlankP ref);
 
+PlankResult pl_AudioFileReader_OpenWithRegion (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original, PlankAudioFileRegionRef region);
+
+PlankResult pl_AudioFileReader_OpenCopyWithoutMetaData (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original);
+
 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 

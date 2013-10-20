@@ -54,6 +54,7 @@
 #define PLANKAUDIOFILE_FORMAT_OPUS                    6
 #define PLANKAUDIOFILE_FORMAT_CAF                     7
 #define PLANKAUDIOFILE_FORMAT_W64                     8
+#define PLANKAUDIOFILE_FORMAT_REGION                 99
 #define PLANKAUDIOFILE_FORMAT_MULTI                 100
 #define PLANKAUDIOFILE_FORMAT_ARRAY                 101
 #define PLANKAUDIOFILE_FORMAT_QUEUE                 102
@@ -73,6 +74,7 @@ static inline const char* pl_PlankAudioFileGetFormatName (int format)
         case PLANKAUDIOFILE_FORMAT_OPUS:        return "Opus";
         case PLANKAUDIOFILE_FORMAT_CAF:         return "CAF";
         case PLANKAUDIOFILE_FORMAT_W64:         return "W64";
+        case PLANKAUDIOFILE_FORMAT_REGION:      return "Region";
         case PLANKAUDIOFILE_FORMAT_MULTI:       return "Multi";
         case PLANKAUDIOFILE_FORMAT_ARRAY:       return "Array";
         case PLANKAUDIOFILE_FORMAT_QUEUE:       return "Queue";
