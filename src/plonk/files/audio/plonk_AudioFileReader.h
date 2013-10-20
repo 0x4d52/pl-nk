@@ -60,6 +60,7 @@ public:
     AudioFileReaderInternal (ByteArray const& bytes, const int bufferSize, const bool readMetaData) throw();
     AudioFileReaderInternal (FilePathArray const& paths, const AudioFile::MultiFileTypes multiMode, const int bufferSize) throw();
     AudioFileReaderInternal (FilePathArray const& paths, IntVariable const& indexRef, const int bufferSize) throw();
+    AudioFileReaderInternal (AudioFileReaderArray const& audioFiles, const AudioFile::MultiFileTypes multiMode, const int bufferSize, IntVariable* indexRef = 0) throw();
     AudioFileReaderInternal (FilePathQueue const& paths, const int bufferSize) throw();
 
     ~AudioFileReaderInternal();
@@ -111,6 +112,8 @@ public:
     void* getOwner() const throw();
     bool isOwned() const throw();
     bool isReady() const throw();
+    
+    void disownPeer (PlankAudioFileReaderRef otherReader) throw();
     
     bool didHitEOF() const throw() { return hitEndOfFile; }
     bool didNumChannelsChange() const throw() { return numChannelsChanged; }
@@ -407,6 +410,11 @@ public:
 	{
 	}
     
+    AudioFileReader (AudioFileReaderArray const& audioFiles, const AudioFile::MultiFileTypes multiMode, const int bufferSize = 0, IntVariable* indexRef = 0) throw()
+	:	Base (new Internal (audioFiles, multiMode, bufferSize, indexRef))
+    {
+    }
+
     AudioFileReader (FilePathQueue const& paths, const int bufferSize = 0) throw()
     :	Base (new Internal (paths, bufferSize))
     {
@@ -709,6 +717,11 @@ public:
     bool isReady() const throw()
     {
         return getInternal()->isReady();
+    }
+    
+    void disownPeer (PlankAudioFileReaderRef otherReader) throw()
+    {
+        getInternal()->disownPeer (otherReader);
     }
     
     bool didHitEOF() const throw()

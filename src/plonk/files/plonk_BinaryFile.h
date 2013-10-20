@@ -64,7 +64,7 @@ public:
 
     ~BinaryFileInternal();
     
-    void disown (PlankFileRef fileRef) throw();
+    void disownPeer (PlankFileRef fileRef) throw();
     
     static bool setupBytes (PlankFileRef p, ByteArray const& bytes, const bool writable) throw();
     static bool setupMulti (PlankFileRef p, FilePathArray const& fileArray, const int multiMode, const bool bigEndian, IntVariable* indexRef = 0) throw();
@@ -120,9 +120,7 @@ public:
     void write (const UnsignedLongLong value) throw();
 	void write (const float value) throw();
 	void write (const double value) throw();
-    
-    void disownPeer (PlankFileRef otherFile) throw();
-    
+        
     template<class NumericalType>
     void write (NumericalArray<NumericalType> const& array) throw();
 
@@ -209,7 +207,8 @@ public:
         MultiFileArrayRandom = PLANKMULITFILE_MODE_ARRAYRANDOM,
         MultiFileArrayRandomNoRepeat = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT,
         MultiFileArrayIndexRef = PLANKMULITFILE_MODE_ARRAYINDEXREF,
-        MultiFileQueue = PLANKMULITFILE_MODE_QUEUE
+        MultiFileQueue = PLANKMULITFILE_MODE_QUEUE,
+        MultiFileCustom = PLANKMULITFILE_MODE_CUSTOM
     };
     
     /** Creates a null object. 

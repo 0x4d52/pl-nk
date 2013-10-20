@@ -95,6 +95,8 @@ PlankResult pl_AudioFileReader_OpenInternal (PlankAudioFileReaderRef p, const ch
  The AudioFileReader takes ownership of the file and zeros the incomming file object. */
 PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFileRef file, const PlankB readMetaData);
 
+PlankResult pl_AudioFileReader_OpenWithAudioFileArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int* indexRef);
+
 
 /** 
  @param p The <i>Plank AudioFileReader</i> object. 
@@ -172,9 +174,10 @@ PLANK_END_C_LINKAGE
 #if !DOXYGEN
 typedef struct PlankAudioFileReader
 {
-    PlankP peer;    
+    PlankP peer;
     PlankAudioFileFormatInfo formatInfo;
-    
+    PlankC format;
+
     PlankLL numFrames;
     PlankLL dataPosition;
     

@@ -118,7 +118,7 @@ PlankResult pl_Path_InitParent (PlankPathRef p, PlankPathRef full)
     
     parentPath[pos]  = '\0';
 
-    if ((result = pl_DynamicArray_SetSize(&p->buffer, pos + 1)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_SetSize (&p->buffer, pos + 1)) != PlankResult_OK) goto exit;
     
 exit:
     return result;

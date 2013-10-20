@@ -326,7 +326,7 @@ public:
                             RateUnitType const& rate = Math<RateUnitType>::get1(),
                             IntVariable const& loopCount = 0,
                             const int blockSizeMultiplier = 0,
-                            const int numBuffers = 8)
+                            const int numBuffers = 4)
         {
             const DoubleVariable multiplier = blockSizeMultiplier <= 0 ? 
                                               (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
@@ -354,7 +354,7 @@ public:
                                 RateUnitType const& rate = Math<RateUnitType>::get1(),
                                 IntVariable const& loopCount = 0,
                                 const int blockSizeMultiplier = 0,
-                                const int numBuffers = 8)
+                                const int numBuffers = 4)
             {
                 const DoubleVariable multiplier = blockSizeMultiplier <= 0 ?
                                                   (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :

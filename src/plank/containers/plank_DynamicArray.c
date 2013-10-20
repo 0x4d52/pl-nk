@@ -86,6 +86,8 @@ PlankResult pl_DynamicArray_InitWithItemSizeAndCapacity (PlankDynamicArrayRef p,
     PlankResult result = PlankResult_OK;
     PlankMemoryRef m;
 
+    pl_DynamicArray_Init (p);
+
     p->itemSize = itemSize;
     p->allocatedItems = initialCapacity;
     p->usedItems = 0;

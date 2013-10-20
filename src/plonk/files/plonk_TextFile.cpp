@@ -418,6 +418,7 @@ void TextFileInternal::disownPeer (PlankFileRef otherFile) throw()
 {
     pl_MemoryCopy (otherFile, getPeerRef(), sizeof (PlankFile));
     pl_MemoryZero (getPeerRef(), sizeof (PlankFile));
+    pl_File_Init (getPeerRef());
 }
 
 END_PLONK_NAMESPACE

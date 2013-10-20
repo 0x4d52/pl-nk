@@ -121,7 +121,8 @@ public:
         MultiFileArrayRandom = PLANKMULITFILE_MODE_ARRAYRANDOM,
         MultiFileArrayRandomNoRepeat = PLANKMULITFILE_MODE_ARRAYRANDOMNOREPEAT,
         MultiFileArrayIndexRef = PLANKMULITFILE_MODE_ARRAYINDEXREF,
-        MultiFileQueue = PLANKMULITFILE_MODE_QUEUE
+        MultiFileQueue = PLANKMULITFILE_MODE_QUEUE,
+        MultiFileCustom = PLANKMULITFILE_MODE_CUSTOM
     };
 
 };

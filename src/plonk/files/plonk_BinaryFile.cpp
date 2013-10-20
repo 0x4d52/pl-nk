@@ -482,7 +482,7 @@ BinaryFileInternal::~BinaryFileInternal()
     pl_File_DeInit (getPeerRef());
 }
 
-void BinaryFileInternal::disown (PlankFileRef fileRef) throw()
+void BinaryFileInternal::disownPeer (PlankFileRef fileRef) throw()
 {
     Memory::copy (fileRef, getPeerRef(), sizeof (*fileRef));
     Memory::zero (getPeerRef(), sizeof (*fileRef));
@@ -825,11 +825,11 @@ void BinaryFileInternal::write (const double value) throw()
 #endif
 }
 
-void BinaryFileInternal::disownPeer (PlankFileRef otherFile) throw()
-{
-    pl_MemoryCopy (otherFile, getPeerRef(), sizeof (PlankFile));
-    pl_MemoryZero (getPeerRef(), sizeof (PlankFile));
-}
+//void BinaryFileInternal::disownPeer (PlankFileRef otherFile) throw()
+//{
+//    pl_MemoryCopy (otherFile, getPeerRef(), sizeof (PlankFile));
+//    pl_MemoryZero (getPeerRef(), sizeof (PlankFile));
+//}
 
 ResultCode BinaryFileInternal::copy (BinaryFileInternal* source, const LongLong size) throw()
 {

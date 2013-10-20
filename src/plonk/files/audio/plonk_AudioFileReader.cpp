@@ -145,6 +145,35 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     }
 }
 
+AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderArray const& audioFiles, const AudioFile::MultiFileTypes multiMode, const int bufferSize, IntVariable* indexRef) throw()
+:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
+    numFramesPerBuffer (0),
+    newPositionOnNextRead (-1),
+    hitEndOfFile (false),
+    numChannelsChanged (false),
+    defaultNumChannels (0)
+{
+    pl_AudioFileReader_Init (getPeerRef());
+        
+    PlankDynamicArrayRef array = pl_DynamicArray_Create();
+    pl_DynamicArray_InitWithItemSizeAndSize (array, sizeof (PlankAudioFileReader), audioFiles.length(), true);
+    PlankAudioFileReader* rawArray = static_cast<PlankAudioFileReader*> (pl_DynamicArray_GetArray (array));
+    
+    for (int i = 0; i < audioFiles.length(); ++i)
+    {
+        AudioFileReader reader = audioFiles.atUnchecked (i);
+        reader.disownPeer (&rawArray[i]);
+    }
+    
+    if (indexRef)
+        nextMultiIndexRef = *indexRef;
+    
+    ResultCode result = pl_AudioFileReader_OpenWithAudioFileArray (getPeerRef(), array, true, multiMode, nextMultiIndexRef.getValuePtr());
+    
+    if (result == PlankResult_OK)
+        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+}
+
 AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue, const int bufferSize) throw()
 :   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
     numFramesPerBuffer (0),
@@ -391,6 +420,14 @@ bool AudioFileReaderInternal::isOwned() const throw()
 bool AudioFileReaderInternal::isReady() const throw()
 {
     return numFramesPerBuffer != 0;
+}
+
+void AudioFileReaderInternal::disownPeer (PlankAudioFileReaderRef otherReader) throw()
+{
+    pl_MemoryCopy (otherReader, getPeerRef(), sizeof (PlankAudioFileReader));
+    pl_MemoryZero (getPeerRef(), sizeof (PlankAudioFileReader));
+    pl_AudioFileReader_Init (getPeerRef());
+
 }
 
 END_PLONK_NAMESPACE

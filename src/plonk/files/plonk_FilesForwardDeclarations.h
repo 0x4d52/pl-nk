@@ -49,15 +49,15 @@ class AudioFile;
 class AudioFileReader;
 template<class SampleType> class AudioFileWriter;
 
-typedef ObjectArray<TextFile> TextFileArray;
-typedef ObjectArray<BinaryFile> BinaryFileArray;
+typedef ObjectArray<TextFile>        TextFileArray;
+typedef ObjectArray<BinaryFile>      BinaryFileArray;
 typedef ObjectArray<AudioFileReader> AudioFileReaderArray;
-typedef ObjectArray<FilePath> FilePathArray;
+typedef ObjectArray<FilePath>        FilePathArray;
 
-typedef LockFreeQueue<TextFile> TextFileQueue;
-typedef LockFreeQueue<BinaryFile> BinaryFileQueue;
+typedef LockFreeQueue<TextFile>        TextFileQueue;
+typedef LockFreeQueue<BinaryFile>      BinaryFileQueue;
 typedef LockFreeQueue<AudioFileReader> AudioFileReaderQueue;
-typedef LockFreeQueue<FilePath> FilePathQueue;
+typedef LockFreeQueue<FilePath>        FilePathQueue;
 
 
 #endif // PLONK_FILESFORWARDDECLARATIONS_H
