@@ -105,7 +105,13 @@ public:
         if ((channel % this->getNumChannels()) == 0)
         {
             const AudioFileReader& file = this->getInputAsAudioFileReader (IOKey::AudioFileReader);
-            this->setSampleRate (SampleRate::decide (file.getSampleRate(), this->getSampleRate()));
+
+            double fileSampleRate = file.getSampleRate();
+            
+            if (fileSampleRate <= 0.0)
+                fileSampleRate = file.getDefaultSampleRate();
+
+            this->setSampleRate (SampleRate::decide (fileSampleRate, this->getSampleRate()));
             buffer.setSize (this->getBlockSize().getValue() * file.getNumChannels(), false);
         }
         
@@ -328,8 +334,13 @@ public:
                             const int blockSizeMultiplier = 0,
                             const int numBuffers = 4)
         {
+            double fileSampleRate = file.getSampleRate();
+            
+            if (fileSampleRate <= 0.0)
+                fileSampleRate = file.getDefaultSampleRate();
+            
             const DoubleVariable multiplier = blockSizeMultiplier <= 0 ? 
-                                              (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
+                                              (DoubleVariable (fileSampleRate) / SampleRate::getDefault()).ceil() * 2.0 :
                                               DoubleVariable (blockSizeMultiplier);
             
             UnitType play = FilePlayUnit::ar (file, loopCount,
@@ -356,8 +367,13 @@ public:
                                 const int blockSizeMultiplier = 0,
                                 const int numBuffers = 4)
             {
+                double fileSampleRate = file.getSampleRate();
+                
+                if (fileSampleRate <= 0.0)
+                    fileSampleRate = file.getDefaultSampleRate();
+
                 const DoubleVariable multiplier = blockSizeMultiplier <= 0 ?
-                                                  (DoubleVariable (file.getSampleRate()) / SampleRate::getDefault()).ceil() * 2.0 :
+                                                  (DoubleVariable (fileSampleRate) / SampleRate::getDefault()).ceil() * 2.0 :
                                                   DoubleVariable (blockSizeMultiplier);
                 
                 UnitType play = FilePlayUnit::ar (file, loopCount,

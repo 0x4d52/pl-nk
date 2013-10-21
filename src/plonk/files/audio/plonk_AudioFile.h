@@ -53,7 +53,12 @@ public:
         FormatOggVorbis             = PLANKAUDIOFILE_FORMAT_OGGVORBIS,
         FormatOpus                  = PLANKAUDIOFILE_FORMAT_OPUS,
         FormatCAF                   = PLANKAUDIOFILE_FORMAT_CAF,
-        FormatW64                   = PLANKAUDIOFILE_FORMAT_W64
+        FormatW64                   = PLANKAUDIOFILE_FORMAT_W64,
+        FormatRegion                = PLANKAUDIOFILE_FORMAT_REGION,
+        FormatMulti                 = PLANKAUDIOFILE_FORMAT_MULTI,
+        FormatArray                 = PLANKAUDIOFILE_FORMAT_ARRAY,
+        FormatQueue                 = PLANKAUDIOFILE_FORMAT_QUEUE,
+        ForamtCustom                = PLANKAUDIOFILE_FORMAT_CUSTOM
     };
     
     enum EncodingFlag

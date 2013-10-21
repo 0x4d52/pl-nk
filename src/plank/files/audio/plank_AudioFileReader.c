@@ -123,14 +123,14 @@ PlankResult pl_AudioFileReader_Custom_ReadFrames (PlankAudioFileReaderRef p, con
 PlankResult pl_AudioFileReader_Custom_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Custom_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
-PlankResult pl_AudioFileReader_UpdateFormat (PlankAudioFileReaderRef p, const PlankAudioFileFormatInfo* newFormat, PlankB* frameFormatChanged);
-
 PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original, PlankAudioFileRegionRef region);
 PlankResult pl_AudioFileReader_Region_Close (PlankAudioFileReaderRef p);
 PlankResult pl_AudioFileReader_Region_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead);
 PlankResult pl_AudioFileReader_Region_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex);
 PlankResult pl_AudioFileReader_Region_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex);
 
+PlankResult pl_AudioFileReader_UpdateFormat (PlankAudioFileReaderRef p, const PlankAudioFileFormatInfo* newFormat, PlankB* frameFormatChanged);
+PlankResult pl_AudioFileReader_ApplyDefaultFormatIfInvalid (PlankAudioFileReaderRef p);
 
 #if PLANK_APPLE
 #pragma mark Generic Functions
@@ -2879,6 +2879,8 @@ PlankResult pl_AudioFileReader_Multi_Open (PlankAudioFileReaderRef p, PlankFileR
     p->setFramePositionFunction = pl_AudioFileReader_Multi_SetFramePosition;
     p->getFramePositionFunction = pl_AudioFileReader_Multi_GetFramePosition;
     
+    pl_AudioFileReader_ApplyDefaultFormatIfInvalid (p);
+
 exit:
     return result;
 }
@@ -3241,6 +3243,8 @@ PlankResult pl_AudioFileReader_Array_Open (PlankAudioFileReaderRef p, PlankDynam
     p->setFramePositionFunction = pl_AudioFileReader_Array_SetFramePosition;
     p->getFramePositionFunction = pl_AudioFileReader_Array_GetFramePosition;
     
+    pl_AudioFileReader_ApplyDefaultFormatIfInvalid (p);
+    
 exit:
     return result;
 }
@@ -3554,6 +3558,8 @@ PlankResult pl_AudioFileReader_Custom_Open (PlankAudioFileReaderRef p,
     p->setFramePositionFunction = pl_AudioFileReader_Custom_SetFramePosition;
     p->getFramePositionFunction = pl_AudioFileReader_Custom_GetFramePosition;
     
+    pl_AudioFileReader_ApplyDefaultFormatIfInvalid (p);
+    
 exit:
     return result;
 }
@@ -3691,49 +3697,6 @@ exit:
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-PlankResult pl_AudioFileReader_UpdateFormat (PlankAudioFileReaderRef p, const PlankAudioFileFormatInfo* newFormat, PlankB* frameFormatChanged)
-{
-    PlankResult result = PlankResult_OK;
-    PlankB changed;
-    
-    changed = PLANK_FALSE;
-    
-    if (p->formatInfo.encoding != newFormat->encoding)
-    {
-        changed = PLANK_TRUE;
-        goto exit;
-    }
-    
-    if (p->formatInfo.numChannels != newFormat->numChannels)
-    {
-        changed = PLANK_TRUE;
-        goto exit;
-    }
-    
-    if (p->formatInfo.bytesPerFrame != newFormat->bytesPerFrame)
-    {
-        changed = PLANK_TRUE;
-        goto exit;
-    }
-    
-    if (p->formatInfo.sampleRate != newFormat->sampleRate)
-    {
-        changed = PLANK_TRUE;
-        goto exit;
-    }
-    
-exit:
-    pl_MemoryCopy (&p->formatInfo, newFormat, sizeof (PlankAudioFileFormatInfo));
-    
-    if (frameFormatChanged != PLANK_NULL)
-        *frameFormatChanged = changed;
-    
-    return result;
-}
-
-
 // -- Region Functions -- //////////////////////////////////////////////////
 
 #if PLANK_APPLE
@@ -3791,9 +3754,13 @@ PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudi
     audioFileRegion->end      = pl_AudioFileRegion_GetEndPosition (region);
     audioFileRegion->pos      = audioFileRegion->start;
     
+    pl_AudioFileReader_UpdateFormat (p, &audioFileRegion->original->formatInfo, PLANK_NULL);
+
     p->readFramesFunction       = pl_AudioFileReader_Region_ReadFrames;
     p->setFramePositionFunction = pl_AudioFileReader_Region_SetFramePosition;
     p->getFramePositionFunction = pl_AudioFileReader_Region_GetFramePosition;
+    
+    pl_AudioFileReader_ApplyDefaultFormatIfInvalid (p);
     
 exit:
     return result;
@@ -3869,8 +3836,78 @@ exit:
 }
 
 
+////////////////////////////////////////////////////////////////////////////////
+
+PlankResult pl_AudioFileReader_UpdateFormat (PlankAudioFileReaderRef p, const PlankAudioFileFormatInfo* newFormat, PlankB* frameFormatChanged)
+{
+    PlankResult result = PlankResult_OK;
+    PlankB changed;
+    
+    changed = PLANK_FALSE;
+    
+    if (p->formatInfo.encoding != newFormat->encoding)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+    if (p->formatInfo.numChannels != newFormat->numChannels)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+    if (p->formatInfo.bytesPerFrame != newFormat->bytesPerFrame)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+    if (p->formatInfo.sampleRate != newFormat->sampleRate)
+    {
+        changed = PLANK_TRUE;
+        goto exit;
+    }
+    
+exit:
+    pl_MemoryCopy (&p->formatInfo, newFormat, sizeof (PlankAudioFileFormatInfo));
+    
+    if (frameFormatChanged != PLANK_NULL)
+        *frameFormatChanged = changed;
+    
+    return result;
+}
 
 
+PlankResult pl_AudioFileReader_ApplyDefaultFormatIfInvalid (PlankAudioFileReaderRef p)
+{
+    if (!p->formatInfo.numChannels)
+    {
+        p->formatInfo.numChannels = 1;
+    }
+    
+    if (!p->formatInfo.bitsPerSample)
+    {
+        p->formatInfo.bitsPerSample = 8;
+        p->formatInfo.bytesPerFrame = (PlankI) (((p->formatInfo.bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * p->formatInfo.numChannels / 8);
+        p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_PCM_FLAG;
+    }
+    
+    if (!p->formatInfo.bytesPerFrame)
+    {
+        p->formatInfo.bytesPerFrame = (PlankI) (((p->formatInfo.bitsPerSample + (0x00000008 - 1)) & ~(0x00000008 - 1)) * p->formatInfo.numChannels / 8);
+        p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_PCM_FLAG;
+    }
+    
+    if (!p->formatInfo.encoding)
+    {
+        p->formatInfo.encoding = PLANKAUDIOFILE_ENCODING_PCM_FLAG;
+    }
+    
+    // leave samplerate
+    
+    return PlankResult_OK;
+}
 
 
 

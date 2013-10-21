@@ -63,6 +63,7 @@ public:
     AudioFileReaderInternal (AudioFileReaderArray const& audioFiles, const AudioFile::MultiFileTypes multiMode, const int bufferSize, IntVariable* indexRef = 0) throw();
     AudioFileReaderInternal (FilePathQueue const& paths, const int bufferSize) throw();
     AudioFileReaderInternal (AudioFileReaderQueue const& audioFiles, const int bufferSize) throw();
+    AudioFileReaderInternal (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize) throw();
 
     ~AudioFileReaderInternal();
     
@@ -78,6 +79,9 @@ public:
     int getNumChannels() const throw();
     int getDefaultNumChannels() throw();
     void setDefaultNumChannels (const int numChannels) throw();
+    void setDefaultSampleRate (const double sampleRate) throw();
+    double getDefaultSampleRate() const throw();
+
     double getSampleRate() const throw();
     LongLong getNumFrames() const throw();
     LongLong getFramePosition() const throw();
@@ -145,6 +149,7 @@ private:
     bool numChannelsChanged;
     IntVariable nextMultiIndexRef;
     int defaultNumChannels;
+    double defaultSampleRate;
 };
 
 //------------------------------------------------------------------------------
@@ -181,12 +186,19 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
     bool isFloat = encoding & AudioFile::EncodingFlagFloat;
     bool isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
     bool isInterleaved = !(encoding & AudioFile::EncodingFlagNonIntervleaved);
-    
+        
     int dataIndex = 0;
-    
     const int numFailsAllowed = 3;
     int numFails = 0;
     
+    if (!numFramesPerBuffer)
+    {
+        if (!getBytesPerFrame())
+            goto exit;
+        
+        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+    }
+        
     while ((dataRemaining > 0) && 
            (result != PlankResult_FileEOF) &&
            (result != PlankResult_AudioFileFrameFormatChanged) &&
@@ -321,9 +333,15 @@ void AudioFileReaderInternal::readFrames (NumericalArray<SampleType>& data,
             isFloat = encoding & AudioFile::EncodingFlagFloat;
             isBigEndian = encoding & AudioFile::EncodingFlagBigEndian;
             isInterleaved = !(encoding & AudioFile::EncodingFlagNonIntervleaved);
+            
+            if (!getBytesPerFrame())
+                goto exit;
+            
+            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
         }
     }
     
+exit:
     if (dataIndex < dataLength)
     {
         data.setSize (dataIndex, true);
@@ -425,6 +443,37 @@ public:
     :	Base (new Internal (audioFiles, bufferSize))
     {
     }
+    
+    AudioFileReader (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize = 0) throw()
+    :	Base (new Internal (original, start, end, bufferSize))
+    {
+    }
+    
+    AudioFileReader (AudioFileReader const& original, const int start, const int end, const int bufferSize = 0) throw()
+    :	Base (new Internal (original, start, end, bufferSize))
+    {
+    }
+    
+    AudioFileReader (AudioFileReader const& original, const long start, const long end, const int bufferSize = 0) throw()
+    :	Base (new Internal (original, start, end, bufferSize))
+    {
+    }
+
+    AudioFileReader (AudioFileReader const& original, const double start, const double end, const int bufferSize = 0) throw()
+    :	Base (new Internal (original,
+                            LongLong (start * original.getSampleRate()),
+                            LongLong (end * original.getSampleRate()),
+                            bufferSize))
+    {
+    }
+    
+    AudioFileReader (AudioFileReader const& original, const float start, const float end, const int bufferSize = 0) throw()
+    :	Base (new Internal (original,
+                            LongLong (start * original.getSampleRate()),
+                            LongLong (end * original.getSampleRate()),
+                            bufferSize))
+    {
+    }
 
     /** @internal */
     explicit AudioFileReader (Internal* internalToUse) throw() 
@@ -516,13 +565,23 @@ public:
     {
         getInternal()->setDefaultNumChannels (numChannels);
     }
-    
+
     /** Get the default number of channels in the file. */
     inline int getDefaultNumChannels() const throw()
     {
         return getInternal()->getDefaultNumChannels();
     }
     
+    inline void setDefaultSampleRate (const double sampleRate) throw()
+    {
+        getInternal()->setDefaultSampleRate (sampleRate);
+    }
+
+    inline double getDefaultSampleRate() const throw()
+    {
+        return getInternal()->getDefaultSampleRate();
+    }
+
     /** Get the sample rate of the file. */
     inline double getSampleRate() const throw()
     {

@@ -121,7 +121,10 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     if (BinaryFileInternal::setupMulti (&file, fileArray, multiMode, PLANK_BIGENDIAN))
     {
         if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, false) == PlankResult_OK)
-            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        {
+            if (getBytesPerFrame() > 0)
+                numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        }
     }
 }
 
@@ -141,7 +144,10 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathArray const& fileArray
     if (BinaryFileInternal::setupMulti (&file, fileArray, AudioFile::MultiFileArrayIndexRef, PLANK_BIGENDIAN, &nextMultiIndexRef))
     {
         if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, false) == PlankResult_OK)
-            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        {
+            if (getBytesPerFrame() > 0)
+                numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        }
     }
 }
 
@@ -171,7 +177,10 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderArray const& au
     ResultCode result = pl_AudioFileReader_OpenWithAudioFileArray (getPeerRef(), array, true, multiMode, nextMultiIndexRef.getValuePtr());
     
     if (result == PlankResult_OK)
-        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+    {
+        if (getBytesPerFrame() > 0)
+            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+    }
 }
 
 AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue, const int bufferSize) throw()
@@ -189,7 +198,10 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue
     if (BinaryFileInternal::setupMulti (&file, fileQueue, PLANK_BIGENDIAN))
     {
         if (pl_AudioFileReader_OpenWithFile (getPeerRef(), &file, false) == PlankResult_OK)
-            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        {
+            if (getBytesPerFrame() > 0)
+                numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        }
     }
 }
 
@@ -225,7 +237,29 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
                                                        AudioFileReaderInternal_Custom_FreeFunction,
                                                        new AudioFileReaderQueue (audioFiles)) == PlankResult_OK)
     {
-        numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+        if (getBytesPerFrame() > 0)
+            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+    }
+}
+
+AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize) throw()
+:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
+    numFramesPerBuffer (0),
+    newPositionOnNextRead (-1),
+    hitEndOfFile (false),
+    numChannelsChanged (false),
+    defaultNumChannels (0)
+{
+    pl_AudioFileReader_Init (getPeerRef());
+    
+    PlankAudioFileRegion region;
+    pl_AudioFileRegion_Init (&region);
+    pl_AudioFileRegion_SetRegion(&region, start, end);
+    
+    if (pl_AudioFileReader_OpenWithRegion (getPeerRef(), original.getInternal()->getPeerRef(), &region) == PlankResult_OK)
+    {
+        if (getBytesPerFrame() > 0)
+            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
     }
 }
 
@@ -265,6 +299,12 @@ AudioFile::Format AudioFileReaderInternal::getFormat() const throw()
         case AudioFile::FormatAIFC:         return AudioFile::FormatAIFC;
         case AudioFile::FormatOggVorbis:    return AudioFile::FormatOggVorbis;
         case AudioFile::FormatOpus:         return AudioFile::FormatOpus;
+        case AudioFile::FormatRegion:       return AudioFile::FormatRegion;
+        case AudioFile::FormatMulti:        return AudioFile::FormatMulti;
+        case AudioFile::FormatArray:        return AudioFile::FormatArray;
+        case AudioFile::FormatQueue:        return AudioFile::FormatQueue;
+        case AudioFile::ForamtCustom:       return AudioFile::ForamtCustom;
+        
         default: return AudioFile::FormatInvalid;
     }
 }
@@ -376,6 +416,16 @@ int AudioFileReaderInternal::getDefaultNumChannels() throw()
     return defaultNumChannels;
 }
 
+void AudioFileReaderInternal::setDefaultSampleRate (const double sampleRate) throw()
+{
+    defaultSampleRate = sampleRate;
+}
+
+double AudioFileReaderInternal::getDefaultSampleRate() const throw()
+{
+    return defaultSampleRate;
+}
+
 double AudioFileReaderInternal::getSampleRate() const throw()
 {
     double value;
@@ -455,7 +505,7 @@ bool AudioFileReaderInternal::isOwned() const throw()
 
 bool AudioFileReaderInternal::isReady() const throw()
 {
-    return numFramesPerBuffer != 0;
+    return true; //numFramesPerBuffer != 0;
 }
 
 void AudioFileReaderInternal::disownPeer (PlankAudioFileReaderRef otherReader) throw()
