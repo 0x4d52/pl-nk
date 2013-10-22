@@ -97,12 +97,17 @@ PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFil
 
 PlankResult pl_AudioFileReader_OpenWithAudioFileArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int* indexRef);
 
-typedef PlankResult (*PlankAudioFileReaderCustomNextFunction)(PlankP, PlankAudioFileReaderRef*);
+typedef PlankResult (*PlankAudioFileReaderCustomNextFunction)(PlankP, PlankAudioFileReaderRef, PlankAudioFileReaderRef*);
 typedef PlankResult (*PlankAudioFileReaderCustomFreeFunction)(PlankP);
+typedef PlankResult (*PlankAudioFileReaderCustomSetFrameFunction)(PlankAudioFileReaderRef, const PlankLL frameIndex);
+typedef PlankResult (*PlankAudioFileReaderCustomGetFrameFunction)(PlankAudioFileReaderRef, PlankLL *);
+
 
 PlankResult pl_AudioFileReader_OpenWithCustomNextFunction (PlankAudioFileReaderRef p,
                                                            PlankAudioFileReaderCustomNextFunction nextFunction,
                                                            PlankAudioFileReaderCustomFreeFunction freeFunction,
+                                                           PlankAudioFileReaderCustomSetFrameFunction setFrameFunction,
+                                                           PlankAudioFileReaderCustomGetFrameFunction getFrameFunction,
                                                            PlankP ref);
 
 PlankResult pl_AudioFileReader_OpenWithRegion (PlankAudioFileReaderRef p, PlankAudioFileReaderRef original, PlankAudioFileRegionRef region);
@@ -178,10 +183,14 @@ PlankResult pl_AudioFileReader_GetFramePosition (PlankAudioFileReaderRef p, Plan
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int* framesRead);
 
+PlankAudioFileMetaDataRef pl_AudioFileReader_GetMetaData (PlankAudioFileReaderRef p);
+
 
 /** @} */
 
 PLANK_END_C_LINKAGE
+
+typedef struct PlankAudioFileReaderCustom* PlankAudioFileReaderCustomRef;
 
 #if !DOXYGEN
 typedef struct PlankAudioFileReader
@@ -199,6 +208,14 @@ typedef struct PlankAudioFileReader
     PlankP setFramePositionFunction;
     PlankP getFramePositionFunction;
 } PlankAudioFileReader;
+
+typedef struct PlankAudioFileReaderCustom
+{
+    PlankAudioFileReaderCustomNextFunction nextFunction;
+    PlankAudioFileReaderCustomFreeFunction freeFunction;
+    PlankP ref;
+    PlankAudioFileReaderRef currentAudioFile;
+} PlankAudioFileReaderCustom;
 #endif
 
 #endif // PLANK_AUDIOFILEREADER_H

@@ -40,6 +40,7 @@
 #include "plank_AudioFileMetaData.h"
 #include "plank_AudioFileRegion.h"
 #include "plank_AudioFileCuePoint.h"
+#include "../../maths/plank_Maths.h"
 
 /*
  
@@ -644,6 +645,41 @@ exit:
     return result;    
 }
 
+PlankResult pl_AudioFileMetaData_GetNextCueID (PlankAudioFileMetaDataRef p, PlankUI* cueID)
+{
+    PlankResult result = PlankResult_OK;
+    PlankUI nextCueID;
+    PlankAudioFileCuePoint* cueArray;
+    int numCues, i;
+
+    nextCueID = 1;
+    numCues = pl_DynamicArray_GetSize (&p->cuePoints);
+    cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    
+    for (i = 0; i < numCues; ++i)
+        nextCueID = pl_MaxUI (nextCueID, pl_AudioFileCuePoint_GetID (&cueArray[i])) + 1;
+    
+    *cueID = nextCueID;
+    
+exit:
+    return result;
+}
+
+PlankDynamicArrayRef pl_AudioFileMetaData_GetCuePoints (PlankAudioFileMetaDataRef p)
+{
+    return &p->cuePoints;
+}
+
+PlankDynamicArrayRef pl_AudioFileMetaData_GetRegions (PlankAudioFileMetaDataRef p)
+{
+    return &p->regions;
+}
+
+PlankDynamicArrayRef pl_AudioFileMetaData_GetLoopPoints (PlankAudioFileMetaDataRef p)
+{
+    return &p->loopPoints;
+}
+
 PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region)
 {
     PlankResult result = PlankResult_OK;
@@ -656,6 +692,75 @@ PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAu
     if ((result = pl_DynamicArray_AddItem (&p->regions, region)) != PlankResult_OK) goto exit;
     
     pl_MemoryZero (region, sizeof (PlankAudioFileRegion));
+    
+exit:
+    return result;
+}
+
+PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const PlankLL numFrames, const PlankB removeCuePoints)
+{
+    PlankAudioFileRegion region;
+    PlankResult result = PlankResult_OK;
+    PlankAudioFileCuePoint* cueArray;
+    PlankAudioFileCuePointRef regionStartCue;
+    PlankAudioFileCuePointRef regionEndCue;
+    int numCues, i;
+    PlankUI cueID;
+    PlankLL start, end;
+    
+    numCues = pl_DynamicArray_GetSize (&p->cuePoints);
+    
+    if (numCues <= 0)
+        goto exit;
+    
+    cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+    pl_AudioFileMetaData_GetNextCueID (p, &cueID);
+    
+    start = 0;
+    end = pl_AudioFileCuePoint_GetPosition (&cueArray[0]);
+    
+    pl_AudioFileRegion_Init (&region);
+    regionStartCue = pl_AudioFileRegion_GetStartCuePoint (&region);
+    regionEndCue = pl_AudioFileRegion_GetEndCuePoint (&region);
+    
+    // if the first cue is not at frame zero, make a region from zero to the first cue
+    if (end != 0)
+    {
+        pl_AudioFileCuePoint_SetPosition (regionStartCue, 0);
+        pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
+        pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
+        pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
+        pl_AudioFileMetaData_AddRegion (p, &region);
+    }
+    
+    // then regions between all the other cues, keeping labels for the region starts
+    for (i = 1; i < numCues; ++i)
+    {
+        pl_AudioFileRegion_Init (&region);
+        pl_AudioFileCuePoint_InitCopy (regionStartCue, &cueArray[i - 1]);
+        
+        end = pl_AudioFileCuePoint_GetPosition (&cueArray[i]);
+        pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
+        pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
+        pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
+        pl_AudioFileMetaData_AddRegion (p, &region);
+    }
+    
+    // if the last cue is not at the end of the file, add a region from the last cue to the end
+    if (end < numFrames)
+    {
+        pl_AudioFileRegion_Init (&region);
+        pl_AudioFileCuePoint_InitCopy (regionStartCue, &cueArray[numCues - 1]);
+        pl_AudioFileCuePoint_SetPosition (regionEndCue, numFrames);
+        pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
+        pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
+        pl_AudioFileMetaData_AddRegion (p, &region);
+    }
+    
+    if (removeCuePoints)
+    {
+        pl_AudioFileMetaDataDeInitCuePoints (&p->cuePoints);
+    }
     
 exit:
     return result;

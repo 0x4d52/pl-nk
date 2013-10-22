@@ -60,17 +60,18 @@ PlankAudioFileCuePointRef pl_AudioFileCuePoint_Create();
 PlankResult pl_AudioFileCuePoint_Destroy (PlankAudioFileCuePointRef p);
 
 PlankResult pl_AudioFileCuePoint_Init (PlankAudioFileCuePointRef p);
+PlankResult pl_AudioFileCuePoint_InitCopy (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source);
 
 PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p);
 
-PlankResult pl_AudioFileCuePoint_SetPosition (PlankAudioFileCuePointRef p, const PlankLL position);
-PlankResult pl_AudioFileCuePoint_SetID (PlankAudioFileCuePointRef p, const PlankUI cueID);
-PlankResult pl_AudioFileCuePoint_SetLabel (PlankAudioFileCuePointRef p, const char* label);
-PlankResult pl_AudioFileCuePoint_SetLabelLengthClear (PlankAudioFileCuePointRef p, const PlankL length);
-PlankResult pl_AudioFileCuePoint_SetComment (PlankAudioFileCuePointRef p, const char* comment);
-PlankResult pl_AudioFileCuePoint_SetCommentLengthClear (PlankAudioFileCuePointRef p, const PlankL length);
-PlankResult pl_AudioFileCuePoint_SetType (PlankAudioFileCuePointRef p, const int type);
-PlankResult pl_AudioFileCuePoint_SetExtra (PlankAudioFileCuePointRef p, PlankUI purpose, PlankUS country, PlankUS language, PlankUS dialect, PlankUS codePage);
+PlankResult pl_AudioFileCuePoint_SetPosition            (PlankAudioFileCuePointRef p, const PlankLL position);
+PlankResult pl_AudioFileCuePoint_SetID                  (PlankAudioFileCuePointRef p, const PlankUI cueID);
+PlankResult pl_AudioFileCuePoint_SetLabel               (PlankAudioFileCuePointRef p, const char* label);
+PlankResult pl_AudioFileCuePoint_SetLabelLengthClear    (PlankAudioFileCuePointRef p, const PlankL length);
+PlankResult pl_AudioFileCuePoint_SetComment             (PlankAudioFileCuePointRef p, const char* comment);
+PlankResult pl_AudioFileCuePoint_SetCommentLengthClear  (PlankAudioFileCuePointRef p, const PlankL length);
+PlankResult pl_AudioFileCuePoint_SetType                (PlankAudioFileCuePointRef p, const int type);
+PlankResult pl_AudioFileCuePoint_SetExtra               (PlankAudioFileCuePointRef p, PlankUI purpose, PlankUS country, PlankUS language, PlankUS dialect, PlankUS codePage);
 
 PlankLL pl_AudioFileCuePoint_GetPosition (PlankAudioFileCuePointRef p);
 PlankUI pl_AudioFileCuePoint_GetID (PlankAudioFileCuePointRef p);
@@ -81,6 +82,8 @@ char* pl_AudioFileCuePoint_GetCommentWritable (PlankAudioFileCuePointRef p);
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
 
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset);
+
+
 
 /** @} */
 

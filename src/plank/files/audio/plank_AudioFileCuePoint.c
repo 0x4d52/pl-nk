@@ -66,6 +66,38 @@ exit:
     return result;
 }
 
+PlankResult pl_AudioFileCuePoint_InitCopy (PlankAudioFileCuePointRef p, PlankAudioFileCuePointRef source)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if ((result = pl_AudioFileCuePoint_Init (p)) != PlankResult_OK)
+        goto exit;
+    
+    pl_AudioFileCuePoint_SetPosition (p, source->position);
+    pl_AudioFileCuePoint_SetID (p, source->cueID);
+    
+    if (pl_AudioFileCuePoint_GetLabel (source))
+        pl_AudioFileCuePoint_SetLabel (p, pl_AudioFileCuePoint_GetLabel (source));
+    
+    if (pl_AudioFileCuePoint_GetComment (source))
+        pl_AudioFileCuePoint_SetComment (p, pl_AudioFileCuePoint_GetComment (source));
+    
+    pl_AudioFileCuePoint_SetType (p, source->type);
+    
+    if (source->extra)
+    {
+        pl_AudioFileCuePoint_SetExtra (p,
+                                       source->extra->purpose,
+                                       source->extra->country,
+                                       source->extra->language,
+                                       source->extra->dialect,
+                                       source->extra->codePage);
+    }
+    
+exit:
+    return result;
+}
+
 PlankResult pl_AudioFileCuePoint_DeInit (PlankAudioFileCuePointRef p)
 {
     PlankResult result = PlankResult_OK;

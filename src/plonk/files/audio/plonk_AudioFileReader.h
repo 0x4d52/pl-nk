@@ -123,9 +123,10 @@ public:
     bool didHitEOF() const throw() { return hitEndOfFile; }
     bool didNumChannelsChange() const throw() { return numChannelsChanged; }
     
-private:
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
+
+private:
     ResultCode init (const char* path, const bool readMetaData) throw();
     ResultCode init (ByteArray const& bytes, const bool readMetaData) throw();
 

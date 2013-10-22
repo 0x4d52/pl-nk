@@ -157,9 +157,27 @@ PlankResult pl_AudioFileMetaData_AddCuePoint (PlankAudioFileMetaDataRef p, Plank
 PlankResult pl_AudioFileMetaData_FindCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef* cuePoint, PlankL* index);
 PlankResult pl_AudioFileMetaData_RemoveCuePointWithID (PlankAudioFileMetaDataRef p, const PlankUI cueID, PlankAudioFileCuePointRef cuePoint, PlankB* success);
 
+/** Searches the metadata for the highest numbered cue ID and returns this with 1 added. */
+PlankResult pl_AudioFileMetaData_GetNextCueID (PlankAudioFileMetaDataRef p, PlankUI* cueID);
+
+
+PlankDynamicArrayRef pl_AudioFileMetaData_GetCuePoints (PlankAudioFileMetaDataRef p);
+PlankDynamicArrayRef pl_AudioFileMetaData_GetRegions (PlankAudioFileMetaDataRef p);
+PlankDynamicArrayRef pl_AudioFileMetaData_GetLoopPoints (PlankAudioFileMetaDataRef p);
+
+
 /** Adds a region.
  Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */
 PlankResult pl_AudioFileMetaData_AddRegion (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
+
+/** Coverts cue points to regions.
+ This creates regions starting at frame zero and creating a regions between each cue point and from 
+ the last cue point to the end of the file. This requires the user to pass in the number of frames in the audio file.
+ @param p The meta data object.
+ @param numFrames The number of frames in the source audio file.
+ @param removeCuePoints A boolean flag to indicate whether these cue points should be removed fromt he metadata.
+ @return The result code for the operation. */
+PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDataRef p, const PlankLL numFrames, const PlankB removeCuePoints);
 
 /** Adds a loop.
  Copies the data from another region. The source region is zeroed on return to help avoid memory allocation/deallocation issues. */

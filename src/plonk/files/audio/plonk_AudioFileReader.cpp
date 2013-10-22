@@ -205,17 +205,25 @@ AudioFileReaderInternal::AudioFileReaderInternal (FilePathQueue const& fileQueue
     }
 }
 
-static PlankResult AudioFileReaderInternal_Custom_NextFunction (PlankP ref, PlankAudioFileReaderRef* audioFile) throw()
+static PlankResult AudioFileReaderInternal_Queue_NextFunction (PlankP ref, PlankAudioFileReaderRef currentFile, PlankAudioFileReaderRef* audioFile) throw()
 {
     AudioFileReaderQueue& queue = *static_cast<AudioFileReaderQueue*> (ref);
     AudioFileReader reader = queue.pop();
     PlankAudioFileReaderRef file = pl_AudioFileReader_CreateAndInit();
     reader.disownPeer (file);
-    *audioFile = file;
-    return PlankResult_OK;
+    *audioFile = file;    
+    
+    PlankResult result = PlankResult_OK;
+    
+    if (currentFile)
+    {
+        result = pl_AudioFileReader_Destroy (currentFile);
+    }
+    
+    return result;
 }
 
-static PlankResult AudioFileReaderInternal_Custom_FreeFunction (PlankP ref) throw()
+static PlankResult AudioFileReaderInternal_Queue_FreeFunction (PlankP ref) throw()
 {
     AudioFileReaderQueue* queue = static_cast<AudioFileReaderQueue*> (ref);
     delete queue;
@@ -233,13 +241,91 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReaderQueue const& au
     pl_AudioFileReader_Init (getPeerRef());
     
     if (pl_AudioFileReader_OpenWithCustomNextFunction (getPeerRef(),
-                                                       AudioFileReaderInternal_Custom_NextFunction,
-                                                       AudioFileReaderInternal_Custom_FreeFunction,
+                                                       AudioFileReaderInternal_Queue_NextFunction,
+                                                       AudioFileReaderInternal_Queue_FreeFunction,
+                                                       0,
+                                                       0,
                                                        new AudioFileReaderQueue (audioFiles)) == PlankResult_OK)
     {
         if (getBytesPerFrame() > 0)
             numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
     }
+}
+
+//AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize) throw()
+//:   readBuffer (Chars::withSize ((bufferSize > 0) ? bufferSize : AudioFile::DefaultBufferSize)),
+//    numFramesPerBuffer (0),
+//    newPositionOnNextRead (-1),
+//    hitEndOfFile (false),
+//    numChannelsChanged (false),
+//    defaultNumChannels (0)
+//{
+//    pl_AudioFileReader_Init (getPeerRef());
+//    
+//    PlankAudioFileRegion region;
+//    pl_AudioFileRegion_Init (&region);
+//    pl_AudioFileRegion_SetRegion(&region, start, end);
+//    
+//    if (pl_AudioFileReader_OpenWithRegion (getPeerRef(), original.getInternal()->getPeerRef(), &region) == PlankResult_OK)
+//    {
+//        if (getBytesPerFrame() > 0)
+//            numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
+//    }
+//}
+
+class AudioFileReaderRegion
+{
+public:
+    AudioFileReaderRegion() throw()
+    {
+        pl_AudioFileRegion_Init (&region);
+    }
+    
+    ~AudioFileReaderRegion()
+    {
+        pl_AudioFileRegion_DeInit (&region);
+    }
+    
+    AudioFileReader original;
+    PlankAudioFileRegion region;
+};
+
+static PlankResult AudioFileReaderInternal_Region_NextFunction (PlankP ref, PlankAudioFileReaderRef currentFile, PlankAudioFileReaderRef* audioFile) throw()
+{
+    PlankResult result = PlankResult_OK;
+    AudioFileReaderRegion& readerRegion = *static_cast<AudioFileReaderRegion*> (ref);
+    
+    if (!currentFile)
+    {
+        PlankAudioFileReaderRef file = pl_AudioFileReader_CreateAndInit();
+        result = pl_AudioFileReader_OpenWithRegion (file, readerRegion.original.getInternal()->getPeerRef(), &readerRegion.region);
+        *audioFile = (result == PlankResult_OK) ? file : (PlankAudioFileReaderRef)PLANK_NULL;
+    }
+    else
+    {
+        *audioFile = currentFile;
+    }
+    
+    return result;
+}
+
+static PlankResult AudioFileReaderInternal_Region_FreeFunction (PlankP ref) throw()
+{
+    AudioFileReaderRegion* readerRegion = static_cast<AudioFileReaderRegion*> (ref);
+    delete readerRegion;
+    return PlankResult_OK;
+}
+
+static PlankResult AudioFileReaderInternal_Region_SetFramePosition (PlankAudioFileReaderRef p, const PlankLL frameIndex)
+{
+    PlankAudioFileReaderCustomRef custom = static_cast<PlankAudioFileReaderCustomRef> (p->peer);
+    return pl_AudioFileReader_SetFramePosition (custom->currentAudioFile, frameIndex);
+}
+
+static PlankResult AudioFileReaderInternal_Region_GetFramePosition (PlankAudioFileReaderRef p, PlankLL *frameIndex)
+{
+    PlankAudioFileReaderCustomRef custom = static_cast<PlankAudioFileReaderCustomRef> (p->peer);
+    return pl_AudioFileReader_GetFramePosition (custom->currentAudioFile, frameIndex);
 }
 
 AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& original, const LongLong start, const LongLong end, const int bufferSize) throw()
@@ -252,11 +338,17 @@ AudioFileReaderInternal::AudioFileReaderInternal (AudioFileReader const& origina
 {
     pl_AudioFileReader_Init (getPeerRef());
     
-    PlankAudioFileRegion region;
-    pl_AudioFileRegion_Init (&region);
-    pl_AudioFileRegion_SetRegion(&region, start, end);
+    AudioFileReaderRegion* readerRegion = new AudioFileReaderRegion();
     
-    if (pl_AudioFileReader_OpenWithRegion (getPeerRef(), original.getInternal()->getPeerRef(), &region) == PlankResult_OK)
+    readerRegion->original = original;
+    pl_AudioFileRegion_SetRegion (&readerRegion->region, start, end);
+
+    if (pl_AudioFileReader_OpenWithCustomNextFunction (getPeerRef(),
+                                                       AudioFileReaderInternal_Region_NextFunction,
+                                                       AudioFileReaderInternal_Region_FreeFunction,
+                                                       AudioFileReaderInternal_Region_SetFramePosition,
+                                                       AudioFileReaderInternal_Region_GetFramePosition,
+                                                       readerRegion) == PlankResult_OK)
     {
         if (getBytesPerFrame() > 0)
             numFramesPerBuffer = readBuffer.length() / getBytesPerFrame();
