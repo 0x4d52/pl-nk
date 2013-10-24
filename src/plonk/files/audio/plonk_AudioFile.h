@@ -129,6 +129,14 @@ public:
         MultiFileQueue = PLANKMULITFILE_MODE_QUEUE,
         MultiFileCustom = PLANKMULITFILE_MODE_CUSTOM
     };
+    
+    enum MetaDataOption
+    {
+        DontConvertCuePointsToRegions = 0,
+        ConvertCuePointsToRegions = 1,
+        RemoveCuePoints = 2,
+        ConvertCuePointsToRegionsRemovingCuePoints = 3
+    };
 
 };
 

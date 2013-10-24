@@ -702,6 +702,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     PlankAudioFileRegion region;
     PlankResult result = PlankResult_OK;
     PlankAudioFileCuePoint* cueArray;
+    PlankAudioFileCuePointRef regionAnchorCue;
     PlankAudioFileCuePointRef regionStartCue;
     PlankAudioFileCuePointRef regionEndCue;
     int numCues, i;
@@ -720,14 +721,17 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     end = pl_AudioFileCuePoint_GetPosition (&cueArray[0]);
     
     pl_AudioFileRegion_Init (&region);
+    regionAnchorCue = pl_AudioFileRegion_GetAnchorCuePoint (&region);
     regionStartCue = pl_AudioFileRegion_GetStartCuePoint (&region);
     regionEndCue = pl_AudioFileRegion_GetEndCuePoint (&region);
     
     // if the first cue is not at frame zero, make a region from zero to the first cue
     if (end != 0)
     {
+        pl_AudioFileCuePoint_SetPosition (regionAnchorCue, 0);
         pl_AudioFileCuePoint_SetPosition (regionStartCue, 0);
         pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
+        pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
         pl_AudioFileMetaData_AddRegion (p, &region);
@@ -737,10 +741,12 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     for (i = 1; i < numCues; ++i)
     {
         pl_AudioFileRegion_Init (&region);
-        pl_AudioFileCuePoint_InitCopy (regionStartCue, &cueArray[i - 1]);
-        
-        end = pl_AudioFileCuePoint_GetPosition (&cueArray[i]);
+        pl_AudioFileCuePoint_InitCopy (regionAnchorCue, &cueArray[i - 1]);
+        start = pl_AudioFileCuePoint_GetPosition (regionAnchorCue);
+        end   = pl_AudioFileCuePoint_GetPosition (&cueArray[i]);
+        pl_AudioFileCuePoint_SetPosition (regionStartCue, start);
         pl_AudioFileCuePoint_SetPosition (regionEndCue, end);
+        pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
         pl_AudioFileMetaData_AddRegion (p, &region);
@@ -750,8 +756,12 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
     if (end < numFrames)
     {
         pl_AudioFileRegion_Init (&region);
-        pl_AudioFileCuePoint_InitCopy (regionStartCue, &cueArray[numCues - 1]);
+        pl_AudioFileCuePoint_InitCopy (regionAnchorCue, &cueArray[numCues - 1]);
+        start = pl_AudioFileCuePoint_GetPosition (regionAnchorCue);
+        end   = numFrames;
+        pl_AudioFileCuePoint_SetPosition (regionStartCue, start);
         pl_AudioFileCuePoint_SetPosition (regionEndCue, numFrames);
+        pl_AudioFileCuePoint_SetID (regionAnchorCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionStartCue, cueID++);
         pl_AudioFileCuePoint_SetID (regionEndCue, cueID++);
         pl_AudioFileMetaData_AddRegion (p, &region);

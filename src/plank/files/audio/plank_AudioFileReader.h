@@ -185,6 +185,9 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
 
 PlankAudioFileMetaDataRef pl_AudioFileReader_GetMetaData (PlankAudioFileReaderRef p);
 
+PlankResult pl_AudioFileReader_SetName (PlankAudioFileReaderRef p, const char* text);
+const char* pl_AudioFileReader_GetName (PlankAudioFileReaderRef p);
+
 
 /** @} */
 
@@ -203,6 +206,7 @@ typedef struct PlankAudioFileReader
     PlankLL dataPosition;
     
     PlankAudioFileMetaDataRef metaData;
+    PlankDynamicArray name;
     
     PlankP readFramesFunction;
     PlankP setFramePositionFunction;

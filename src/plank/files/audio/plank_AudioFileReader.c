@@ -39,6 +39,7 @@
 #include "../../core/plank_StandardHeader.h"
 #include "../../maths/plank_Maths.h"
 #include "../plank_File.h"
+#include "../plank_Path.h"
 #include "../plank_MultiFileReader.h"
 #include "../plank_IffFileReader.h"
 #include "plank_AudioFileReader.h"
@@ -171,7 +172,9 @@ PlankAudioFileReaderRef pl_AudioFileReader_Create()
 PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
-                
+    
+    pl_MemoryZero (p, sizeof (PlankAudioFileReader));
+
     p->peer                        = PLANK_NULL;
     p->format                      = PLANKAUDIOFILE_FORMAT_INVALID;
     p->formatInfo.format           = PLANKAUDIOFILE_FORMAT_INVALID;
@@ -186,7 +189,6 @@ PlankResult pl_AudioFileReader_Init (PlankAudioFileReaderRef p)
     p->formatInfo.frameDuration    = 0.f;
     p->formatInfo.quality          = 0.f;
     
-    pl_MemoryZero (p->formatInfo.channelMap, PLANKAUDIOFILE_CHANNELMAPLENGTH);
     
     p->numFrames                   = 0;
     p->dataPosition                = -1;
@@ -211,7 +213,9 @@ PlankResult pl_AudioFileReader_DeInit (PlankAudioFileReaderRef p)
     }
     
     if ((result = pl_AudioFileReader_Close (p)) != PlankResult_OK) goto exit;
-        
+    if ((result = pl_DynamicArray_DeInit (&p->name)) != PlankResult_OK) goto exit;
+
+    
     pl_MemoryZero (p, sizeof (PlankAudioFileReader));
 
 exit:
@@ -259,6 +263,7 @@ PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, 
     PlankIffID mainID;
     PlankIffFileReaderRef iff;
     int fileStreamType;
+    PlankPath path;
         
     result = PlankResult_OK;
     iff = PLANK_NULL;
@@ -299,10 +304,14 @@ PlankResult pl_AudioFileReader_OpenInternalInternal (PlankAudioFileReaderRef p, 
     // open the file as an IFF
     if (filepath)
     {
+        if ((result = pl_Path_InitPath (&path, filepath)) != PlankResult_OK) goto exit;        
+        if ((result = pl_AudioFileReader_SetName (p, pl_Path_GetLastPath (&path))) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileReader_Open (iff, filepath)) != PlankResult_OK) goto exit;
     }
     else if (file)
     {
+        if ((result = pl_Path_InitPath (&path, file->path)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileReader_SetName (p, pl_Path_GetLastPath (&path))) != PlankResult_OK) goto exit;
         if ((result = pl_IffFileReader_OpenWithFile (iff, file)) != PlankResult_OK) goto exit;
     }
     
@@ -395,7 +404,7 @@ PlankResult pl_AudioFileReader_OpenWithFile (PlankAudioFileReaderRef p, PlankFil
 
 PlankResult pl_AudioFileReader_OpenWithAudioFileArray (PlankAudioFileReaderRef p, PlankDynamicArrayRef array, PlankB ownArray, const int multiMode, int* indexRef)
 {
-    return pl_AudioFileReader_Array_Open( p, array, ownArray, multiMode, indexRef);
+    return pl_AudioFileReader_Array_Open (p, array, ownArray, multiMode, indexRef);
 }
 
 PlankResult pl_AudioFileReader_OpenWithCustomNextFunction (PlankAudioFileReaderRef p,
@@ -650,6 +659,16 @@ PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int 
 PlankAudioFileMetaDataRef pl_AudioFileReader_GetMetaData (PlankAudioFileReaderRef p)
 {
     return p->metaData;
+}
+
+PlankResult pl_AudioFileReader_SetName (PlankAudioFileReaderRef p, const char* text)
+{
+    return pl_DynamicArray_SetAsText (&p->name, text);
+}
+
+const char* pl_AudioFileReader_GetName (PlankAudioFileReaderRef p)
+{
+    return pl_DynamicArray_GetArray (&p->name);
 }
 
 // -- WAV Functions -- /////////////////////////////////////////////////////////
@@ -3742,6 +3761,7 @@ typedef struct PlankAudioFileReaderRegion* PlankAudioFileReaderRegionRef;
 typedef struct PlankAudioFileReaderRegion
 {
     PlankAudioFileReaderRef original;
+    PlankLL anchor;
     PlankLL start;
     PlankLL end;
     PlankLL pos;
@@ -3754,6 +3774,7 @@ PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudi
     PlankMemoryRef m;
     PlankAudioFileReaderRegionRef audioFileRegion;
     PlankFileRef file;
+    PlankDynamicArray name;
     
     m = pl_MemoryGlobal();
     file = pl_AudioFileReader_GetFile (original);
@@ -3784,6 +3805,7 @@ PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudi
     p->format = PLANKAUDIOFILE_FORMAT_REGION;
     
     audioFileRegion->original = original;
+    audioFileRegion->anchor   = pl_AudioFileRegion_GetAnchorPosition (region);
     audioFileRegion->start    = pl_AudioFileRegion_GetStartPosition (region);
     audioFileRegion->end      = pl_AudioFileRegion_GetEndPosition (region);
     audioFileRegion->pos      = audioFileRegion->start;
@@ -3796,6 +3818,13 @@ PlankResult pl_AudioFileReader_Region_Open (PlankAudioFileReaderRef p, PlankAudi
     
     pl_AudioFileReader_ApplyDefaultFormatIfInvalid (p);
     
+    pl_DynamicArray_Init (&name);
+    pl_DynamicArray_SetAsText (&name, pl_AudioFileReader_GetName (original));
+    pl_DynamicArray_AppendText (&name, PLANKAUDIOFILE_REGIONNAME_SEPARATOR);
+    pl_DynamicArray_AppendText (&name, pl_AudioFileRegion_GetLabel (region));
+    pl_AudioFileReader_SetName(p, pl_DynamicArray_GetArray (&name));
+    pl_DynamicArray_DeInit (&name);
+
 exit:
     return result;
 }

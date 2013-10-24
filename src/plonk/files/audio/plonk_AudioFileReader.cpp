@@ -216,9 +216,7 @@ static PlankResult AudioFileReaderInternal_Queue_NextFunction (PlankP ref, Plank
     PlankResult result = PlankResult_OK;
     
     if (currentFile)
-    {
         result = pl_AudioFileReader_Destroy (currentFile);
-    }
     
     return result;
 }
@@ -605,7 +603,52 @@ void AudioFileReaderInternal::disownPeer (PlankAudioFileReaderRef otherReader) t
     pl_MemoryCopy (otherReader, getPeerRef(), sizeof (PlankAudioFileReader));
     pl_MemoryZero (getPeerRef(), sizeof (PlankAudioFileReader));
     pl_AudioFileReader_Init (getPeerRef());
+}
 
+void AudioFileReaderInternal::setName (Text const& name) throw()
+{
+    pl_AudioFileReader_SetName(getPeerRef(), name.getArray());
+}
+
+Text AudioFileReaderInternal::getName() const throw()
+{
+    return pl_AudioFileReader_GetName (getPeerRef());
+}
+
+AudioFileReaderArray AudioFileReader::regionsFromMetaData (const int metaDataOption, const int bufferSize) throw()
+{
+    AudioFileReaderArray regionReaderArray;
+    
+    PlankAudioFileMetaDataRef metaData = pl_AudioFileReader_GetMetaData (getInternal()->getPeerRef());
+    
+    if (metaData)
+    {
+        if (metaDataOption & AudioFile::ConvertCuePointsToRegions)
+            pl_AudioFileMetaData_ConvertCuePointsToRegions (metaData, getNumFrames(), metaDataOption & AudioFile::RemoveCuePoints);
+     
+        PlankDynamicArrayRef regions = pl_AudioFileMetaData_GetRegions (metaData);
+        const int numRegions = pl_DynamicArray_GetSize (regions);
+        
+        if (numRegions > 0)
+        {
+            regionReaderArray.setSize (numRegions, false);
+            regionReaderArray.clear();
+            PlankAudioFileRegion* regionArray = static_cast<PlankAudioFileRegion*> (pl_DynamicArray_GetArray (regions));
+            
+            for (int i = 0; i < numRegions; ++i)
+            {
+                AudioFileReader reader = AudioFileReader (*this,
+                                                          pl_AudioFileRegion_GetStartPosition (&regionArray[i]),
+                                                          pl_AudioFileRegion_GetEndPosition (&regionArray[i]),
+                                                          bufferSize);
+                Text name = getName() + "#" + pl_AudioFileRegion_GetLabel(&regionArray[i]);
+                reader.setName (name);
+                regionReaderArray.add (reader);
+            }
+        }
+    }
+    
+    return regionReaderArray;
 }
 
 END_PLONK_NAMESPACE

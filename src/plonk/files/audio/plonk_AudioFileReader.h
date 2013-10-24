@@ -123,6 +123,9 @@ public:
     bool didHitEOF() const throw() { return hitEndOfFile; }
     bool didNumChannelsChange() const throw() { return numChannelsChanged; }
     
+    void setName (Text const& name) throw();
+    Text getName() const throw();
+    
     inline PlankAudioFileReaderRef getPeerRef() { return static_cast<PlankAudioFileReaderRef> (&peer); }
     inline const PlankAudioFileReaderRef getPeerRef() const { return const_cast<const PlankAudioFileReaderRef> (&peer); }
 
@@ -799,6 +802,18 @@ public:
         return getInternal()->didNumChannelsChange();
     }
     
+    AudioFileReaderArray regionsFromMetaData (const int  metaDataOption, const int bufferSize = 0) throw();
+    
+    void setName (Text const& name) throw()
+    {
+        getInternal()->setName (name);
+    }
+    
+    Text getName() const throw()
+    {
+        return getInternal()->getName();
+    }
+
 private:
     // these could be currently dangerous across threads, need to look at a safer way to open
     // a new file once one is already running...

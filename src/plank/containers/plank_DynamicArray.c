@@ -294,7 +294,13 @@ PlankResult pl_DynamicArray_SetAsText (PlankDynamicArrayRef p, const char* text)
 {
     PlankResult result = PlankResult_OK;
     PlankL length;
-        
+    
+    if (!text)
+        goto exit;
+    
+    if (text[0] == '\0')
+        goto exit;
+    
     if (p->itemSize == 0)
         pl_DynamicArray_InitWithItemSize (p, 1);
     
@@ -318,6 +324,12 @@ PlankResult pl_DynamicArray_AppendText (PlankDynamicArrayRef p, const char* text
 {
     PlankResult result = PlankResult_OK;
     PlankL length;
+    
+    if (!text)
+        goto exit;
+    
+    if (text[0] == '\0')
+        goto exit;
     
     if (p->itemSize == 0)
         pl_DynamicArray_InitWithItemSize (p, 1);
