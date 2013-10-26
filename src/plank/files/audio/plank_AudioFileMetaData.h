@@ -66,6 +66,8 @@ PlankResult pl_AudioFileMetaData_Destroy (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_Init (PlankAudioFileMetaDataRef p);
 
+PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAudioFileMetaDataRef original);
+
 PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p);
 
 PlankResult pl_AudioFileMetaData_SetEditCount (PlankAudioFileMetaDataRef p, const PlankUI count);

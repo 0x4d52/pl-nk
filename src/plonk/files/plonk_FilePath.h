@@ -193,6 +193,22 @@ public:
         return pl_Path_GetFileExtension (&this->getInternal()->peer);
     }
 
+    inline Text filenameWithoutExtension() const throw()
+    {
+        Text filename = pl_Path_GetFilename (&this->getInternal()->peer);
+        
+        for (int i = filename.length(); --i >= 0;)
+        {
+            if (filename.atUnchecked (i) == '.')
+            {
+                filename.put (i, '\0');
+                break;
+            }
+        }
+        
+        return filename;
+    }
+
     inline bool isFile() const throw()
     {
         return pl_Path_IsFile (&this->getInternal()->peer);

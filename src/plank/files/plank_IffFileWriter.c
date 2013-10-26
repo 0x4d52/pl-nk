@@ -295,6 +295,7 @@ exit:
 PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankLL startPositionInit, const char* chunkIDstr, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk)
 {
     PlankLL pos;
+    PlankIffFileWriterChunkInfoRef chunkInfo_i;
     PlankIffFileWriterChunkInfo* chunkInfos;
     PlankIffFileWriterChunkInfo* currentChunk;
     PlankResult result;
@@ -330,16 +331,18 @@ PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankLL s
         
     for (i = 0; i < numChunks; ++i)
     {
-        if (pl_IffFile_IsNullID ((PlankIffFileRef)p, &chunkInfos[i].chunkID))
+        chunkInfo_i = &chunkInfos[i];
+        
+        if (pl_IffFile_IsNullID ((PlankIffFileRef)p, &chunkInfo_i->chunkID))
             continue; // this was a deleted chunk
             
-        lastPosition = pl_MaxLL (lastPosition, chunkInfos[i].chunkPos);
+        lastPosition = pl_MaxLL (lastPosition, chunkInfo_i->chunkPos);
         
         if ((currentChunk == 0) &&
-            ((pl_IffFile_EqualIDs ((PlankIffFileRef)p, &chunkInfos[i].chunkID, &chunkID)) || ((pl_IffFile_EqualIDs ((PlankIffFileRef)p, &chunkID, pl_IffFileAnyID())))) &&
-            (chunkInfos[i].chunkPos >= startPosition))
+            ((pl_IffFile_EqualIDs ((PlankIffFileRef)p, &chunkInfo_i->chunkID, &chunkID)) || ((pl_IffFile_EqualIDs ((PlankIffFileRef)p, &chunkID, pl_IffFileAnyID())))) &&
+            (chunkInfo_i->chunkPos >= startPosition))
         {
-            currentChunk = &chunkInfos[i];
+            currentChunk = chunkInfo_i;
             
             len = currentChunk->chunkLength;
             pos = currentChunk->chunkPos;

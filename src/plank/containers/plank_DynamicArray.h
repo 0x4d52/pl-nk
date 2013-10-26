@@ -67,6 +67,9 @@ PlankDynamicArrayRef pl_DynamicArray_Create();
  @return A result code which will be PlankResult_OK if the operation was completely successful. */
 PlankResult pl_DynamicArray_Init (PlankDynamicArrayRef p);
 
+PlankResult pl_DynamicArray_InitCopy (PlankDynamicArrayRef p, PlankDynamicArrayRef original);
+
+
 /** Initialise the array.
  @param p The <i>Plank DynamicArray</i> object.
  @return A result code which will be PlankResult_OK if the operation was completely successful. */

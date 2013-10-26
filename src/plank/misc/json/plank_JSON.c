@@ -123,7 +123,7 @@ exit:
     return j;
 }
 
-PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f)
+PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f, const int flags)
 {
     PlankResult result;
     int fileMode;
@@ -157,7 +157,7 @@ PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f)
         goto exit;
     }
     
-    jerror = json_dump_callback ((json_t*)p, pl_JSONDumpCallback, f, JSON_PRESERVE_ORDER | JSON_INDENT (2));
+    jerror = json_dump_callback ((json_t*)p, pl_JSONDumpCallback, f, flags);
 
     if (jerror != 0)
     {

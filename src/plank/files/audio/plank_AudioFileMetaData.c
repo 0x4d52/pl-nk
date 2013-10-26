@@ -148,6 +148,66 @@ exit:
     return result;
 }
 
+PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAudioFileMetaDataRef original)
+{
+    PlankResult result = PlankResult_OK;
+    PlankDynamicArray* commentArray;
+    PlankDynamicArray* originalComments;
+    PlankSimpleLinkedListElementRef list;
+    PlankDynamicArrayRef block;
+    int numComments, i;
+    
+    pl_MemoryCopy (p, original, sizeof (PlankAudioFileMetaData));
+    
+    pl_SimpleLinkedList_SetFreeElementDataFunction (&p->formatSpecific, pl_AudioFileMetaDataFormatSpecificFree);
+    
+    pl_DynamicArray_Init (&p->descriptionComments);
+    pl_SimpleLinkedList_Init (&p->formatSpecific);
+
+    numComments = pl_DynamicArray_GetSize(&original->descriptionComments);
+    
+    if (numComments > 0)
+    {
+        pl_DynamicArray_InitWithItemSizeAndSize (&p->descriptionComments, sizeof (PlankDynamicArray), numComments, PLANK_TRUE);
+        commentArray = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
+        originalComments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&original->descriptionComments);
+        
+        for (i = 0; i < numComments; ++i)
+            pl_DynamicArray_InitCopy (&commentArray[i], &originalComments[i]);
+    }
+    
+    pl_DynamicArray_InitCopy (&p->originatorArtist, &original->originatorArtist);
+    pl_DynamicArray_InitCopy (&p->originatorRef, &original->originatorRef);
+    pl_DynamicArray_InitCopy (&p->originationDate, &original->originationDate);
+    pl_DynamicArray_InitCopy (&p->originationTime, &original->originationTime);
+    pl_DynamicArray_InitCopy (&p->title, &original->title);
+    pl_DynamicArray_InitCopy (&p->album, &original->album);
+    pl_DynamicArray_InitCopy (&p->genre, &original->genre);
+    pl_DynamicArray_InitCopy (&p->lyrics, &original->lyrics);
+    pl_DynamicArray_InitCopy (&p->vendor, &original->vendor);
+    pl_DynamicArray_InitCopy (&p->isrc, &original->isrc);
+    pl_DynamicArray_InitCopy (&p->art, &original->art);
+    pl_DynamicArray_InitCopy (&p->codingHistory, &original->codingHistory);
+    
+    // need to iterate these
+    pl_DynamicArray_InitCopy (&p->cuePoints, &original->cuePoints);   
+    pl_DynamicArray_InitCopy (&p->loopPoints, &original->loopPoints);
+    pl_DynamicArray_InitCopy (&p->regions, &original->regions);
+    
+    pl_SimpleLinkedList_GetFirst (&original->formatSpecific, &list);
+    
+    while (list)
+    {
+        block = pl_DynamicArray_Create();
+        pl_DynamicArray_InitCopy (block, pl_SimpleLinkedListElement_GetData (list));
+        pl_AudioFileMetaData_AddFormatSpecificBlock (p, block);
+        list = pl_SimpleLinkedListElement_GetNext (list);
+    }
+    
+exit:
+    return result;
+}
+
 static PlankResult pl_AudioFileMetaDataDeInitCuePoints (PlankDynamicArrayRef p)
 {
     PlankResult result = PlankResult_OK;

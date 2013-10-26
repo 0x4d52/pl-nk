@@ -409,6 +409,11 @@ public:
 	{
 	}
     
+    AudioFileReader (FilePath const& path, const int bufferSize, const bool readMetaData) throw()
+	:	Base (new Internal (path.fullpath().getArray(), bufferSize, readMetaData))
+	{
+	}
+    
     /** Creates an audio file reader from the given path.
      @param path        The path of the file to read.
      @param bufferSize  The buffer size to use when reading. */

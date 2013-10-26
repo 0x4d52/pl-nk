@@ -42,14 +42,14 @@
 #include "plank_File.h"
 
 #define PLANKIFFFILE_CURRENTCHUNKPOSITION   -1
-#define PLANKIFFFILE_ANYCHUNKID             -1
+//#define PLANKIFFFILE_ANYCHUNKID             -1
 #define PLANKIFFFILE_ID_FCC                  1
 #define PLANKIFFFILE_ID_GUID                 2
 
 #define PLANKIFFFILE_W64_RIFF_ID          "riff-912E-11CF-A5D6-28DB04C10000"
 #define PLANKIFFFILE_W64_LIST_ID          "list-912F-11CF-A5D6-28DB04C10000"
-#define PLANKIFFFILE_W64_JUNK_ID          "junk-ACF3-11D3-8CD1-00C04f8EDB8A"
-
+#define PLANKIFFFILE_W64_JUNK_ID          "junk-ACF3-11D3-8CD1-00C04F8EDB8A"
+#define PLANKIFFFILE_ANYCHUNKID       "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"
 
 typedef union PlankIffID
 {
@@ -142,11 +142,23 @@ exit:
 
 static inline PlankResult pl_IffFile_InitID (PlankIffFileRef p, const char* string, PlankIffID* chunkID)
 {
-    switch (p->headerInfo.idType)
+    int length;
+    
+    if (!string)
     {
-        case PLANKIFFFILE_ID_FCC:  chunkID->fcc = pl_FourCharCode (string); return PlankResult_OK;
-        case PLANKIFFFILE_ID_GUID: pl_GUID_InitString (&chunkID->guid, string); return PlankResult_OK;
-        default: return PlankResult_UnknownError;
+        pl_MemoryZero (chunkID, sizeof (PlankIffID));
+        return PlankResult_OK;
+    }
+    else
+    {
+        length = strlen (string);
+        
+        switch (length)
+        {
+            case 4:  chunkID->fcc = pl_FourCharCode (string); return PlankResult_OK;
+            case 36: pl_GUID_InitString (&chunkID->guid, string); return PlankResult_OK;
+            default: return PlankResult_UnknownError;
+        }
     }
 }
 
@@ -237,6 +249,7 @@ static inline const PlankIffID* pl_IffFileAnyID()
     
     return &any;
 }
+
 
 
 

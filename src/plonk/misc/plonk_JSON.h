@@ -114,8 +114,14 @@ public:
     
     inline ResultCode toFile (BinaryFile const& file) throw()
     {        
-        return file.canWrite() ? pl_JSON_WriteToFile (json, file.getInternal()->getPeerRef()) : PlankResult_FileWriteError;
+        return file.canWrite() ? pl_JSON_WriteToFile (json, file.getInternal()->getPeerRef(), PLANK_JSON_DEFAULTFLAGS) : PlankResult_FileWriteError;
     }
+        
+    inline ResultCode toFile (BinaryFile const& file, const int flags) throw()
+    {
+        return file.canWrite() ? pl_JSON_WriteToFile (json, file.getInternal()->getPeerRef(), flags) : PlankResult_FileWriteError;
+    }
+
     
     inline bool isEmpty() const throw() { return json == 0; }
     inline bool isInt() const throw() { return pl_JSON_IsInt (json); }

@@ -76,6 +76,33 @@ PlankResult pl_DynamicArray_Init (PlankDynamicArrayRef p)
     return PlankResult_OK;
 }
 
+PlankResult pl_DynamicArray_InitCopy (PlankDynamicArrayRef p, PlankDynamicArrayRef original)
+{
+    PlankMemoryRef m;
+    
+    pl_MemoryCopy (p, original, sizeof (PlankDynamicArray));
+    
+    m = pl_MemoryGlobal();
+    
+    if (!p->data || !p->itemSize || !p->allocatedItems)
+    {
+        p->data = PLANK_NULL;
+        return PlankResult_OK;
+    }
+    
+    p->data = pl_Memory_AllocateBytes (m, p->itemSize * p->allocatedItems);
+    
+    if (!p->data)
+    {
+        pl_MemoryZero (p, sizeof (PlankDynamicArray));
+        return PlankResult_MemoryError;
+    }
+    
+    pl_MemoryCopy (p->data, original->data, p->itemSize * p->usedItems);
+
+    return PlankResult_OK;
+}
+
 PlankResult pl_DynamicArray_InitWithItemSize (PlankDynamicArrayRef p, const PlankL itemSize)
 {
     return pl_DynamicArray_InitWithItemSizeAndCapacity (p, itemSize, PLANKDYNAMICARRAY_DEFAULTGRANULARITY);

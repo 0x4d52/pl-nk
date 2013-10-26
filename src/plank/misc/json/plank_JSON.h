@@ -55,6 +55,16 @@
 
 #define PLANK_JSON_COMPRESSIONLEVEL         9
 
+#define PLANK_JSON_INDENT(n)      (n & 0x1F)
+#define PLANK_JSON_COMPACT        0x20
+#define PLANK_JSON_ENSURE_ASCII   0x40
+#define PLANK_JSON_SORT_KEYS      0x80
+#define PLANK_JSON_PRESERVE_ORDER 0x100
+#define PLANK_JSON_ENCODE_ANY     0x200
+#define PLANK_JSON_ESCAPE_SLASH   0x400
+#define PLANK_JSON_DEFAULTFLAGS   (PLANK_JSON_PRESERVE_ORDER | PLANK_JSON_INDENT (2))
+
+
 /** Encoded binary/compressed string length.
  Encoded binary/compressed strings longer that this will be divided into chunks 
  this size and put into a JSON array. This must be a multiple of 4. */
@@ -74,7 +84,7 @@ static PlankJSONRef pl_JSON_Bool (const PlankB state);
 static PlankJSONRef pl_JSON_Null();
 
 PlankJSONRef pl_JSON_FromFile (PlankFileRef f);
-PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f);
+PlankResult pl_JSON_WriteToFile (PlankJSONRef p, PlankFileRef f, const int flags);
 
 static PlankB pl_JSON_IsObject (PlankJSONRef p);
 static PlankB pl_JSON_IsArray (PlankJSONRef p);
