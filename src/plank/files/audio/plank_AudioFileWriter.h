@@ -130,6 +130,7 @@ typedef struct PlankAudioFileWriter
     
     PlankLL numFrames;
     PlankLL dataPosition;
+    PlankLL metaDataChunkPosition;
     PlankLL headerPad;
     
     PlankAudioFileMetaDataRef metaData;

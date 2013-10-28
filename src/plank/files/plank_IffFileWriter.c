@@ -971,3 +971,25 @@ earlyExit:
     return result;
 }
 
+PlankResult pl_IffFileWriter_PurgeChunkInfos (PlankIffFileWriterRef p)
+{
+    PlankIffFileWriterChunkInfo* chunkInfos;
+    PlankResult result;
+    int numChunks, i;
+    
+    result           = PlankResult_OK;
+    numChunks        = (int)pl_DynamicArray_GetSize (&p->chunkInfos);
+    chunkInfos       = (PlankIffFileWriterChunkInfo*)pl_DynamicArray_GetArray (&p->chunkInfos);
+    
+    for (i = numChunks; --i >= 0;)
+    {
+        if (pl_IffFile_IsNullID ((PlankIffFileRef)p, &chunkInfos[i].chunkID))
+            pl_DynamicArray_RemoveItem (&p->chunkInfos, i);
+    }
+    
+    
+exit:
+    return result;
+}
+
+
