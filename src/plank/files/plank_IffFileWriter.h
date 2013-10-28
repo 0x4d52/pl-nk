@@ -109,7 +109,7 @@ PlankResult pl_IffFileWriter_WriteHeader (PlankIffFileWriterRef p);
 PlankResult pl_IffFileWriter_SeekChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const char* chunkID, PlankIffFileWriterChunkInfoRef* chunkInfo, PlankB* isLastChunk);
 PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const char* chunkID, const void* data, const PlankUI dataLength, const PlankIffFileWriterMode mode);
 PlankResult pl_IffFileWriter_RenameChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const char* oldChunkID, const char* newChunkID);
-PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const char* chunkID, const PlankLL newLength);
+PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const char* chunkID, const PlankLL newLength, const PlankB concatenateJunk);
 PlankResult pl_IffFileWriter_PurgeChunkInfos (PlankIffFileWriterRef p);
 
 

@@ -990,7 +990,7 @@ exit:
     return result;
 }
 
-static PlankResult pl_AudioFileReader_WAV_ParseChunk_LIST (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
+static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd)
 {
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
@@ -1159,7 +1159,7 @@ PlankResult pl_AudioFileReader_WAV_ParseMetaData (PlankAudioFileReaderRef p)
         else if ((readChunkID.fcc == pl_FourCharCode ("list")) ||
                  (readChunkID.fcc == pl_FourCharCode ("LIST")) )
         {
-            if ((result = pl_AudioFileReader_WAV_ParseChunk_LIST (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
+            if ((result = pl_AudioFileReader_WAV_ParseChunk_list (p, readChunkLength, readChunkEnd)) != PlankResult_OK) goto exit;
         }
         
         else if (readChunkID.fcc != iff->common.headerInfo.junkID.fcc)

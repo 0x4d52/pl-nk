@@ -557,7 +557,7 @@ exit:
     return result;
 }
 
-PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const char* chunkID, const PlankLL newLength)
+PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL startPosition, const char* chunkID, const PlankLL newLength, const PlankB concatenateJunk)
 {
     PlankIffFileWriterChunkInfo updatedChunkInfo;
     PlankIffFileWriterChunkInfo newJunkChunkInfo;
@@ -661,7 +661,7 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
             goto exit;
         }
         
-        if (pl_IffFile_EqualIDs ((PlankIffFileRef)p, &nextChunkInfo->chunkID, &p->common.headerInfo.junkID))
+        if (concatenateJunk && pl_IffFile_EqualIDs ((PlankIffFileRef)p, &nextChunkInfo->chunkID, &p->common.headerInfo.junkID))
         {
             if (chunkChange > 0)
             {
