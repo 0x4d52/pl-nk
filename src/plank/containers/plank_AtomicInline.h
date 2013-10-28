@@ -83,19 +83,6 @@ typedef struct PlankAtomicP
     volatile PlankP ptr;
 } PlankAtomicP;
 
-
-#if PLANK_APPLE && PLANK_ARM && PLANK_64BIT
-typedef struct PlankAtomicPX
-{
-    volatile PlankULL packed;
-} PlankAtomicPX;
-
-typedef struct PlankAtomicLX
-{
-    volatile PlankI value;
-    volatile PlankI extra;
-} PlankAtomicLX;
-#else
 typedef struct PlankAtomicPX
 {
     volatile PlankP ptr;
@@ -113,7 +100,6 @@ typedef struct PlankAtomicLX
     PlankThreadSpinLock lock;
 #endif    
 } PlankAtomicLX;
-#endif
 #endif
 
 static inline void pl_AtomicMemoryBarrier()
@@ -1002,7 +988,7 @@ static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP old
 #endif //PLANK_X86
 
 #if PLANK_PPC // and PLANK_APPLE
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
+static inline PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
 {
     PlankAtomicPX oldAll = { oldPtr, oldExtra, p->lock };
     PlankAtomicPX newAll = { newPtr, newExtra, p->lock };
@@ -1015,23 +1001,9 @@ static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP old
 
 #if PLANK_ARM // and PLANK_APPLE
 #if PLANK_64BIT // ARM
-#define PLANK_ARM64_PTRMASK       0x0000FFFFFFFFFFF0
-#define PLANK_ARM64_EXTRAMASKLOW  0x000000000000000F
-#define PLANK_ARM64_EXTRAMASKHIGH 0xFFFF000000000000
 
-static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
-{
-    PlankULL oldPacked, newPacked, oldPtrVal, newPtrVal;
-    
-    oldPtrVal = *(PlankLL*)oldPtr;
-    newPtrVal = *(PlankLL*)newPtr;
-    oldPacked = (oldPtrVal & PLANK_ARM64_PTRMASK) | (oldExtra & PLANK_ARM64_EXTRAMASKLOW) | (((PlankULL)oldExtra << 48));
-    newPacked = (newPtrVal & PLANK_ARM64_PTRMASK) | (newExtra & PLANK_ARM64_EXTRAMASKLOW) | (((PlankULL)newExtra << 48));
-    
-    return OSAtomicCompareAndSwap64Barrier (*(int64_t*)&oldPacked,
-                                            *(int64_t*)&newPacked,
-                                            (volatile int64_t*)p);
-}
+#error pl_AtomicPX_CompareAndSwap need to implement 128-bit CAS for this platform
+
 #endif // PLANK_64BIT
 #if PLANK_32BIT // ARM
 static inline  PlankB pl_AtomicPX_CompareAndSwap (PlankAtomicPXRef p, PlankP oldPtr, PlankL oldExtra, PlankP newPtr, PlankL newExtra)
