@@ -81,6 +81,12 @@ const char* pl_AudioFileCuePoint_GetComment (PlankAudioFileCuePointRef p);
 char* pl_AudioFileCuePoint_GetCommentWritable (PlankAudioFileCuePointRef p);
 int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p);
 
+//PlankUI pl_AudioFileCuePoint_GetLabelLength (PlankAudioFileCuePointRef p);
+//PlankUI pl_AudioFileCuePoint_GetCommentLength (PlankAudioFileCuePointRef p);
+PlankUI pl_AudioFileCuePoint_GetLabelSize (PlankAudioFileCuePointRef p);
+PlankUI pl_AudioFileCuePoint_GetCommentSize (PlankAudioFileCuePointRef p);
+
+
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset);
 
 

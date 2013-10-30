@@ -227,6 +227,27 @@ int pl_AudioFileCuePoint_GetType (PlankAudioFileCuePointRef p)
 {
     return p->type;
 }
+//
+//PlankUI pl_AudioFileCuePoint_GetLabelLength (PlankAudioFileCuePointRef p)
+//{
+//    return (PlankUI)pl_DynamicArray_GetSize (&p->label) - 1;
+//}
+//
+//PlankUI pl_AudioFileCuePoint_GetCommentLength (PlankAudioFileCuePointRef p)
+//{
+//    return (PlankUI)pl_DynamicArray_GetSize (&p->comment) - 1;
+//}
+
+PlankUI pl_AudioFileCuePoint_GetLabelSize (PlankAudioFileCuePointRef p)
+{
+    return (PlankUI)pl_DynamicArray_GetSize (&p->label);
+}
+
+PlankUI pl_AudioFileCuePoint_GetCommentSize (PlankAudioFileCuePointRef p)
+{
+    return (PlankUI)pl_DynamicArray_GetSize (&p->comment);
+}
+
 
 PlankResult pl_AudioFileCuePoint_OffsetPosition (PlankAudioFileCuePointRef p, const PlankLL offset)
 {
