@@ -132,6 +132,10 @@
 	typedef signed __int64 PlankLL;
 	typedef unsigned __int64 PlankULL;
 	typedef PlankULL PlankBits;
+
+    #define PLANK_LL_MAX  _I64_MAX 
+    #define PLANK_ULL_MAX  _UI64_MAX 
+
     #define snprintf _snprintf
     //#define strncpy _strncpy
     #define PLANK_LITTLEENDIAN  1
@@ -146,6 +150,9 @@
     typedef signed long long PlankLL;
     typedef unsigned long long PlankULL;
 	typedef PlankULL PlankBits;
+
+    #define PLANK_LL_MAX LLONG_MAX
+    #define PLANK_ULL_MAX ULLONG_MAX
 
     #if defined (__APPLE_CPP__) || defined(__APPLE_CC__)
         #define PLANK_APPLE 1
