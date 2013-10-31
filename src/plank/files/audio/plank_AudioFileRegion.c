@@ -69,6 +69,25 @@ exit:
     return result;
 }
 
+PlankResult pl_AudioFileRegion_InitCopy (PlankAudioFileRegionRef p, PlankAudioFileRegionRef original)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if ((result = pl_AudioFileRegion_Init (p)) != PlankResult_OK)
+        goto exit;
+    
+    if ((result = pl_AudioFileCuePoint_InitCopy (&p->anchor, &original->anchor)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_InitCopy (&p->start, &original->start)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileCuePoint_InitCopy (&p->end, &original->end)) != PlankResult_OK) goto exit;
+
+    p->regionType = original->regionType;
+    p->fraction   = original->fraction;
+    p->playCount  = original->playCount;
+    
+exit:
+    return result;
+}
+
 PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p)
 {
     PlankResult result = PlankResult_OK;

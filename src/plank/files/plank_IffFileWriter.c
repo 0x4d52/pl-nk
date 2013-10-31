@@ -759,31 +759,40 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
                     thisChunkInfo->chunkLength =  newLength;
                 }
                 else if (chunkChange <= (nextChunkInfo->chunkLength + chunkHeaderLength))
-                {
-                    // zero the junk header to avoid the file looking confusing during debugging
-                    if ((result = pl_File_SetPosition ((PlankFileRef)p, nextChunkInfo->chunkPos - chunkHeaderLength)) != PlankResult_OK) goto exit;
-                    if ((result = pl_File_WriteZeros  ((PlankFileRef)p, chunkHeaderLength)) != PlankResult_OK) goto exit;
-                    
-                    // expand this chunk
-                    if ((result = pl_File_SetPosition ((PlankFileRef)p, thisChunkInfo->chunkPos - p->common.headerInfo.lengthSize)) != PlankResult_OK) goto exit;
-                    if ((result = pl_IffFile_WriteChunkLength ((PlankIffFileRef)p, newLength)) != PlankResult_OK) goto exit;
-                    
-                    thisChunkInfo->chunkLength =  newLength;
-                    
+                {                    
                     if (chunkChange > nextChunkInfo->chunkLength)
                     {
                         if (((chunkChange - nextChunkInfo->chunkLength) >= p->common.headerInfo.alignment) &&
                             ((chunkChange - nextChunkInfo->chunkLength) < chunkHeaderLength))
                         {
-                            // bit of a hack in some situations... removed junk but there are extra bytes left over...
-                            thisChunkInfo->chunkLength = alignedNewLength + (chunkChange - nextChunkInfo->chunkLength);
+                            goto slowCopy; // incompatible length change
                         }
+                        
+                        // zero the junk header to avoid the file looking confusing during debugging
+                        if ((result = pl_File_SetPosition ((PlankFileRef)p, nextChunkInfo->chunkPos - chunkHeaderLength)) != PlankResult_OK) goto exit;
+                        if ((result = pl_File_WriteZeros  ((PlankFileRef)p, chunkHeaderLength)) != PlankResult_OK) goto exit;
+                        
+                        // expand this chunk
+                        if ((result = pl_File_SetPosition ((PlankFileRef)p, thisChunkInfo->chunkPos - p->common.headerInfo.lengthSize)) != PlankResult_OK) goto exit;
+                        if ((result = pl_IffFile_WriteChunkLength ((PlankIffFileRef)p, newLength)) != PlankResult_OK) goto exit;
+                        
+                        thisChunkInfo->chunkLength =  newLength;
                         
                         // null the junk chunk reference
                         pl_MemoryZero (&nextChunkInfo->chunkID, sizeof (PlankIffID));
                     }
                     else
                     {
+                        // zero the junk header to avoid the file looking confusing during debugging
+                        if ((result = pl_File_SetPosition ((PlankFileRef)p, nextChunkInfo->chunkPos - chunkHeaderLength)) != PlankResult_OK) goto exit;
+                        if ((result = pl_File_WriteZeros  ((PlankFileRef)p, chunkHeaderLength)) != PlankResult_OK) goto exit;
+                        
+                        // expand this chunk
+                        if ((result = pl_File_SetPosition ((PlankFileRef)p, thisChunkInfo->chunkPos - p->common.headerInfo.lengthSize)) != PlankResult_OK) goto exit;
+                        if ((result = pl_IffFile_WriteChunkLength ((PlankIffFileRef)p, newLength)) != PlankResult_OK) goto exit;
+                        
+                        thisChunkInfo->chunkLength =  newLength;
+
                         //..and shrink the junk
                         nextChunkInfo->chunkPos    =  thisChunkInfo->chunkPos + pl_AlignULL (thisChunkInfo->chunkLength, p->common.headerInfo.alignment) + chunkHeaderLength;
                         nextChunkInfo->chunkLength -= chunkChange;

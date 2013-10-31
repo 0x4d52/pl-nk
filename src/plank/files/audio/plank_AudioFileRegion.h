@@ -60,6 +60,7 @@ PlankAudioFileRegionRef pl_AudioFileRegion_Create();
  @param p The <i>Plank AudioFileRegion</i> object. */
 PlankResult pl_AudioFileRegion_Destroy (PlankAudioFileRegionRef p);
 PlankResult pl_AudioFileRegion_Init (PlankAudioFileRegionRef p);
+PlankResult pl_AudioFileRegion_InitCopy (PlankAudioFileRegionRef p, PlankAudioFileRegionRef original);
 PlankResult pl_AudioFileRegion_DeInit (PlankAudioFileRegionRef p);
 
 PlankAudioFileCuePointRef pl_AudioFileRegion_GetAnchorCuePoint (PlankAudioFileRegionRef p);

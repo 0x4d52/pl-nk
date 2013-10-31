@@ -151,11 +151,13 @@ exit:
 PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAudioFileMetaDataRef original)
 {
     PlankResult result = PlankResult_OK;
-    PlankDynamicArray* commentArray;
-    PlankDynamicArray* originalComments;
+    PlankDynamicArray *commentArray, *originalComments;
+    PlankAudioFileCuePoint *cueArray, *originalCues;
+    PlankAudioFileRegion *regionArray, *originalRegions;
+    PlankAudioFileRegion *loopArray, *originalLoops;
     PlankSimpleLinkedListElementRef list;
     PlankDynamicArrayRef block;
-    int numComments, i;
+    int numItems, i;
     
     pl_MemoryCopy (p, original, sizeof (PlankAudioFileMetaData));
     
@@ -163,16 +165,14 @@ PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAud
     
     pl_DynamicArray_Init (&p->descriptionComments);
     pl_SimpleLinkedList_Init (&p->formatSpecific);
-
-    numComments = pl_DynamicArray_GetSize(&original->descriptionComments);
     
-    if (numComments > 0)
+    if ((numItems = pl_DynamicArray_GetSize (&original->descriptionComments)) > 0)
     {
-        pl_DynamicArray_InitWithItemSizeAndSize (&p->descriptionComments, sizeof (PlankDynamicArray), numComments, PLANK_TRUE);
+        pl_DynamicArray_InitWithItemSizeAndSize (&p->descriptionComments, sizeof (PlankDynamicArray), numItems, PLANK_TRUE);
         commentArray = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
         originalComments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&original->descriptionComments);
         
-        for (i = 0; i < numComments; ++i)
+        for (i = 0; i < numItems; ++i)
             pl_DynamicArray_InitCopy (&commentArray[i], &originalComments[i]);
     }
     
@@ -189,11 +189,36 @@ PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAud
     pl_DynamicArray_InitCopy (&p->art, &original->art);
     pl_DynamicArray_InitCopy (&p->codingHistory, &original->codingHistory);
     
-    // need to iterate these
-    pl_DynamicArray_InitCopy (&p->cuePoints, &original->cuePoints);   
-    pl_DynamicArray_InitCopy (&p->loopPoints, &original->loopPoints);
-    pl_DynamicArray_InitCopy (&p->regions, &original->regions);
+    if ((numItems = pl_DynamicArray_GetSize (&original->cuePoints)) > 0)
+    {
+        pl_DynamicArray_InitWithItemSizeAndSize (&p->cuePoints, sizeof (PlankAudioFileCuePoint), numItems, PLANK_TRUE);
+        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&p->cuePoints);
+        originalCues = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (&original->cuePoints);
+        
+        for (i = 0; i < numItems; ++i)
+            pl_AudioFileCuePoint_InitCopy (&cueArray[i], &originalCues[i]);
+    }
     
+    if ((numItems = pl_DynamicArray_GetSize (&original->regions)) > 0)
+    {
+        pl_DynamicArray_InitWithItemSizeAndSize (&p->regions, sizeof (PlankAudioFileRegion), numItems, PLANK_TRUE);
+        regionArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&p->regions);
+        originalRegions = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&original->regions);
+        
+        for (i = 0; i < numItems; ++i)
+            pl_AudioFileRegion_InitCopy (&regionArray[i], &originalRegions[i]);
+    }
+
+    if ((numItems = pl_DynamicArray_GetSize (&original->loopPoints)) > 0)
+    {
+        pl_DynamicArray_InitWithItemSizeAndSize (&p->loopPoints, sizeof (PlankAudioFileRegion), numItems, PLANK_TRUE);
+        loopArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&p->loopPoints);
+        originalLoops = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (&original->loopPoints);
+        
+        for (i = 0; i < numItems; ++i)
+            pl_AudioFileRegion_InitCopy (&loopArray[i], &originalLoops[i]);
+    }
+        
     pl_SimpleLinkedList_GetFirst (&original->formatSpecific, &list);
     
     while (list)
