@@ -358,46 +358,5 @@ typedef struct PlankAudioFileCuePoint* PlankAudioFileCuePointRef;
 /** An opaque reference to the <i>Plank AudioFileRegion</i> object. */
 typedef struct PlankAudioFileRegion* PlankAudioFileRegionRef;
 
-//static inline PlankGUID* pl_AudioFileWAVExtensible_GetPCMGUID()
-//{
-//    static PlankGUID data;
-//    static PlankB firstTime = PLANK_TRUE;
-//    
-//    if (firstTime)
-//    {
-//        firstTime = PLANK_FALSE;
-//        pl_GUID_InitString (&data, "00000001-0000-0010-8000-00aa00389b71");
-//    }
-//    
-//    return &data;
-//}
-//
-//static inline PlankGUID* pl_AudioFileWAVExtensible_GetFloatGUID()
-//{
-//    static PlankGUID data;
-//    static PlankB firstTime = PLANK_TRUE;
-//    
-//    if (firstTime)
-//    {
-//        firstTime = PLANK_FALSE;
-//        pl_GUID_InitString (&data, "00000003-0000-0010-8000-00aa00389b71");
-//    }
-//    
-//    return &data;
-//}
-//
-//static inline PlankGUID* pl_AudioFileWAVExtensible_GetAmbisonicGUID()
-//{
-//    static PlankGUID data;
-//    static PlankB firstTime = PLANK_TRUE;
-//    
-//    if (firstTime)
-//    {
-//        firstTime = PLANK_FALSE;
-//        pl_GUID_InitString (&data, "00000001-0721-11d3-8644-c8c1ca000000");
-//    }
-//    
-//    return &data;
-//}
 
 #endif // PLANK_AUDIOFILECOMMON_H
