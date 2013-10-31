@@ -672,6 +672,7 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
                     if ((result = pl_File_SetPosition ((PlankFileRef)p, thisChunkInfo->chunkPos - p->common.headerInfo.lengthSize)) != PlankResult_OK) goto exit;
                     if ((result = pl_IffFile_WriteChunkLength ((PlankIffFileRef)p, newLength)) != PlankResult_OK) goto exit;
                     
+                    thisChunkInfo->chunkLength =  newLength;
                 }
                 else if (chunkChange <= (nextChunkInfo->chunkLength + chunkHeaderLength))
                 {
@@ -711,8 +712,9 @@ PlankResult pl_IffFileWriter_ResizeChunk (PlankIffFileWriterRef p, const PlankLL
                 else
                 {
                     // recursively concatenate junk chunks as far as we can...
-                    alignedNewLength += pl_AlignLL (nextChunkInfo->chunkLength, p->common.headerInfo.alignment) + chunkHeaderLength;
+                    alignedNewLength = thisChunkInfo->chunkLength + pl_AlignLL (nextChunkInfo->chunkLength, p->common.headerInfo.alignment) + chunkHeaderLength;
                     if ((result = pl_IffFileWriter_ResizeChunk (p, startPosition, chunkID, alignedNewLength, PLANK_TRUE)) != PlankResult_OK) goto exit;
+                    if ((result = pl_IffFileWriter_ResizeChunk (p, startPosition, chunkID, newLength, PLANK_TRUE)) != PlankResult_OK) goto exit;
                 }
             }
             else // getting smaller
