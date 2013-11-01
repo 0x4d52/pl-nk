@@ -108,7 +108,7 @@ PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
 PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDataRef p);
 PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text);
 int pl_AudioFileMetaData_GetDescriptionCommentsCount (PlankAudioFileMetaDataRef p);
-const char* pl_AudioFileMetaData_GetDescriptionComments (PlankAudioFileMetaDataRef p, const int index);
+const char* pl_AudioFileMetaData_GetDescriptionComment (PlankAudioFileMetaDataRef p, const int index);
 
 PlankResult pl_AudioFileMetaData_SetOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text);
 PlankResult pl_AudioFileMetaData_SetOriginatorRef (PlankAudioFileMetaDataRef p, const char* text);
@@ -186,6 +186,7 @@ PlankResult pl_AudioFileMetaData_ConvertCuePointsToRegions (PlankAudioFileMetaDa
 PlankResult pl_AudioFileMetaData_AddLoopPoint (PlankAudioFileMetaDataRef p, PlankAudioFileRegionRef region);
 
 PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, const char* text);
+const char* pl_AudioFileMetaData_GetCodingHistory (PlankAudioFileMetaDataRef p);
 
 
 /** Adds a format specific block of data.

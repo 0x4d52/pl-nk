@@ -457,7 +457,7 @@ int pl_AudioFileMetaData_GetDescriptionCommentsCount (PlankAudioFileMetaDataRef 
     return (int)pl_DynamicArray_GetSize (&p->descriptionComments);
 }
 
-const char* pl_AudioFileMetaData_GetCommentDescription (PlankAudioFileMetaDataRef p, const int index)
+const char* pl_AudioFileMetaData_GetDescriptionComment (PlankAudioFileMetaDataRef p, const int index)
 {
     int size;
     PlankDynamicArray* comments;
@@ -882,6 +882,11 @@ PlankResult pl_AudioFileMetaData_AddCodingHistory (PlankAudioFileMetaDataRef p, 
 {
     pl_DynamicArray_AppendTextLineCRLF (&p->codingHistory, text);
     return 0;
+}
+
+const char* pl_AudioFileMetaData_GetCodingHistory (PlankAudioFileMetaDataRef p)
+{
+    return pl_DynamicArray_GetArray (&p->codingHistory);
 }
 
 PlankResult pl_AudioFileMetaData_AddFormatSpecificBlock (PlankAudioFileMetaDataRef p, PlankDynamicArrayRef block)

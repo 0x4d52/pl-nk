@@ -843,11 +843,14 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_bext (PlankAudioFileReaderR
     if ((result = pl_AudioFileMetaData_SetUMID (p->metaData, umid)) != PlankResult_OK) goto exit;
     
     lengthRemain = chunkLength - fixedSize;
-        
-    if ((result = pl_DynamicArray_SetAsClearText (&tmp, lengthRemain)) != PlankResult_OK) goto exit;
-    if ((result = pl_File_Read ((PlankFileRef)iff, pl_DynamicArray_GetArray (&tmp), lengthRemain, PLANK_NULL)) != PlankResult_OK) goto exit;
-    if ((result = pl_AudioFileMetaData_AddCodingHistory (p->metaData, pl_DynamicArray_GetArray (&tmp))) != PlankResult_OK) goto exit;
-
+    
+    if (lengthRemain > 0)
+    {
+        if ((result = pl_DynamicArray_SetAsClearText (&tmp, lengthRemain)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_Read ((PlankFileRef)iff, pl_DynamicArray_GetArray (&tmp), lengthRemain, PLANK_NULL)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileMetaData_AddCodingHistory (p->metaData, pl_DynamicArray_GetArray (&tmp))) != PlankResult_OK) goto exit;
+    }
+    
 exit:
     pl_DynamicArray_DeInit (&tmp);
     
