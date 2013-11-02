@@ -187,6 +187,7 @@ PlankResult pl_AudioFileMetaData_InitCopy (PlankAudioFileMetaDataRef p, PlankAud
     pl_DynamicArray_InitCopy (&p->vendor, &original->vendor);
     pl_DynamicArray_InitCopy (&p->isrc, &original->isrc);
     pl_DynamicArray_InitCopy (&p->art, &original->art);
+    pl_DynamicArray_InitCopy (&p->samplerData, &original->samplerData);
     pl_DynamicArray_InitCopy (&p->codingHistory, &original->codingHistory);
     
     if ((numItems = pl_DynamicArray_GetSize (&original->cuePoints)) > 0)
@@ -299,6 +300,7 @@ PlankResult pl_AudioFileMetaData_DeInit (PlankAudioFileMetaDataRef p)
     if ((result = pl_DynamicArray_DeInit (&p->isrc)) != PlankResult_OK) goto exit;
 
     if ((result = pl_DynamicArray_DeInit (&p->art)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->samplerData)) != PlankResult_OK) goto exit;
     
     if ((result = pl_DynamicArray_DeInit (&p->codingHistory)) != PlankResult_OK) goto exit;
 
@@ -412,6 +414,11 @@ PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
 
 exit:
     return result;
+}
+
+PlankDynamicArrayRef pl_AudioFileMetaData_GetExtraSamplerData (PlankAudioFileMetaDataRef p)
+{
+    return &p->samplerData;
 }
 
 PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDataRef p)

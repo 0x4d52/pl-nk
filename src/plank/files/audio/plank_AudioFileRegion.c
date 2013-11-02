@@ -148,6 +148,11 @@ int pl_AudioFileRegion_GetType (PlankAudioFileRegionRef p)
     return p->regionType;
 }
 
+PlankUI pl_AudioFileRegion_GetOptions (PlankAudioFileRegionRef p)
+{
+    return p->regionOptions;
+}
+
 PlankUI pl_AudioFileRegion_GetFraction (PlankAudioFileRegionRef p)
 {
     return p->fraction;
@@ -203,6 +208,12 @@ PlankResult pl_AudioFileRegion_SetType (PlankAudioFileRegionRef p, const int typ
     p->start.type = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONSTART;
     p->end.type   = PLANKAUDIOFILE_CUEPOINTTYPE_REGIONEND;
     p->regionType = type;
+    return PlankResult_OK;
+}
+
+PlankResult pl_AudioFileRegion_SetOptions (PlankAudioFileRegionRef p, const PlankUI options)
+{
+    p->regionOptions = options;
     return PlankResult_OK;
 }
 

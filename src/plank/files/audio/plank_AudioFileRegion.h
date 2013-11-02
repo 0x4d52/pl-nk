@@ -72,6 +72,7 @@ PlankLL pl_AudioFileRegion_GetStartPosition (PlankAudioFileRegionRef p);
 PlankLL pl_AudioFileRegion_GetEndPosition (PlankAudioFileRegionRef p);
 PlankLL pl_AudioFileRegion_GetLength (PlankAudioFileRegionRef p);
 int pl_AudioFileRegion_GetType (PlankAudioFileRegionRef p);
+PlankUI pl_AudioFileRegion_GetOptions (PlankAudioFileRegionRef p);
 PlankUI pl_AudioFileRegion_GetFraction (PlankAudioFileRegionRef p);
 PlankUI pl_AudioFileRegion_GetPlayCount (PlankAudioFileRegionRef p);
 
@@ -85,6 +86,7 @@ PlankResult pl_AudioFileRegion_SetStartPosition (PlankAudioFileRegionRef p, cons
 PlankResult pl_AudioFileRegion_SetEndPosition (PlankAudioFileRegionRef p, const PlankLL position);
 PlankResult pl_AudioFileRegion_SetLength (PlankAudioFileRegionRef p, const PlankLL length);
 PlankResult pl_AudioFileRegion_SetType (PlankAudioFileRegionRef p, const int type);
+PlankResult pl_AudioFileRegion_SetOptions (PlankAudioFileRegionRef p, const PlankUI options);
 PlankResult pl_AudioFileRegion_SetFraction (PlankAudioFileRegionRef p, const PlankUI fraction);
 PlankResult pl_AudioFileRegion_SetPlayCount (PlankAudioFileRegionRef p, const PlankUI playCount);
 PlankResult pl_AudioFileRegion_SetLabel (PlankAudioFileRegionRef p, const char* label);
@@ -108,6 +110,7 @@ typedef struct PlankAudioFileRegion
 	PlankAudioFileCuePoint start;
     PlankAudioFileCuePoint end;
     int regionType;
+    PlankUI regionOptions;
     PlankUI fraction;
     PlankUI playCount;
 } PlankAudioFileRegion;

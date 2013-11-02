@@ -84,7 +84,7 @@ PlankResult pl_AudioFileMetaData_SetInstrumentData (PlankAudioFileMetaDataRef p,
 
 PlankResult pl_AudioFileMetaData_GetInstrumentData (PlankAudioFileMetaDataRef p,
                                                     PlankI* baseNote,
-                                                    PlankI* midiPitchFraction,
+                                                    PlankI* detune,
                                                     PlankI* gain,
                                                     PlankI* lowNote,
                                                     PlankI* highNote,
@@ -104,6 +104,9 @@ PlankResult pl_AudioFileMetaData_GetSamplerData (PlankAudioFileMetaDataRef p,
                                                  PlankUI* samplePeriod,
                                                  PlankUI* smpteFormat,
                                                  PlankUI* smpteOffset);
+
+PlankDynamicArrayRef pl_AudioFileMetaData_GetExtraSamplerData (PlankAudioFileMetaDataRef p);
+
 
 PlankResult pl_AudioFileMetaData_ClearDescriptionComments (PlankAudioFileMetaDataRef p);
 PlankResult pl_AudioFileMetaData_AddDescriptionComment (PlankAudioFileMetaDataRef p, const char* text);
@@ -226,7 +229,6 @@ typedef struct PlankAudioFileMetaData
     
     PlankUI manufacturer;
     PlankUI product;
-    PlankUI samplerData;
     PlankUI samplePeriod;
     PlankUI smpteFormat;
     PlankUI smpteOffset;
@@ -248,6 +250,7 @@ typedef struct PlankAudioFileMetaData
     PlankDynamicArray isrc;
 
     PlankDynamicArray art;
+    PlankDynamicArray samplerData;
     
     PlankI year;
     PlankI trackNum;

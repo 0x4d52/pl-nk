@@ -869,7 +869,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (PlankAudioFileRe
     iff = (PlankIffFileReaderRef)p->peer;
 
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &cueID)) != PlankResult_OK) goto exit;
-    cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
+    //    cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid // no just deal with this in AIFF
 
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &type)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &start)) != PlankResult_OK) goto exit;
@@ -884,6 +884,10 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (PlankAudioFileRe
     
     if ((result = pl_AudioFileRegion_SetRegionWithAnchor (&loop, start, end, cuePointRef->position)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileRegion_SetType (&loop, PLANKAUDIOFILE_REGIONTYPE_LOOP)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileRegion_SetOptions (&loop, type)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileRegion_SetFraction (&loop, fraction)) != PlankResult_OK) goto exit;
+    if ((result = pl_AudioFileRegion_SetPlayCount (&loop, playCount)) != PlankResult_OK) goto exit;
+
     if ((result = pl_AudioFileMetaData_AddLoopPoint (p->metaData, &loop)) != PlankResult_OK) goto exit;
     
 exit:
@@ -896,6 +900,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderR
     PlankUI manufacturer, product, samplePeriod, baseNote, detune, smpteFormat, smpteOffset, numSampleLoops, samplerData, i;
     PlankI gain, lowNote, highNote, lowVelocity, highVelocity;
     PlankIffFileReaderRef iff;
+    PlankDynamicArrayRef extraSamplerData;
     
     iff = (PlankIffFileReaderRef)p->peer;
 
@@ -908,6 +913,9 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderR
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &smpteOffset)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &numSampleLoops)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &samplerData)) != PlankResult_OK) goto exit;
+    
+    if (!samplePeriod)
+        samplePeriod = 1000000000.0 / p->formatInfo.sampleRate;
 
     if ((result = pl_AudioFileMetaData_SetSamplerData (p->metaData, manufacturer, product, samplePeriod, smpteFormat, smpteOffset)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_GetInstrumentData (p->metaData, 0, 0, &gain, &lowNote, &highNote, &lowVelocity, &highVelocity)) != PlankResult_OK) goto exit;
@@ -917,6 +925,15 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_smpl (PlankAudioFileReaderR
     for (i = 0; i < numSampleLoops; ++i)
     {
         if ((result = pl_AudioFileReader_WAV_ParseChunk_smpl_Loop (p, i)) != PlankResult_OK) goto exit;
+    }
+    
+    if (samplerData > 0)
+    {
+        extraSamplerData = pl_AudioFileMetaData_GetExtraSamplerData (p->metaData);
+        pl_DynamicArray_DeInit (extraSamplerData);
+        pl_DynamicArray_InitWithItemSizeAndSize (extraSamplerData, 1, samplerData, PLANK_TRUE);
+        
+        if ((result = pl_File_Read ((PlankFileRef)iff, pl_DynamicArray_GetArray(extraSamplerData), samplerData, PLANK_NULL)) != PlankResult_OK) goto exit;
     }
     
 exit:
@@ -962,7 +979,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_cue (PlankAudioFileReaderRe
     for (i = 0; i < numCuePoints; ++i)
     {
         if ((result = pl_File_ReadUI ((PlankFileRef)iff, &cueID)) != PlankResult_OK) goto exit;
-        cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
+        //        cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid // no just deal with this in AIFF
 
         if ((result = pl_File_ReadUI ((PlankFileRef)iff, &order)) != PlankResult_OK) goto exit;
         if ((result = pl_File_ReadUI ((PlankFileRef)iff, &chunkID)) != PlankResult_OK) goto exit;
@@ -1027,7 +1044,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderR
             // label or title
             
             if ((result = pl_File_ReadUI ((PlankFileRef)iff, &cueID)) != PlankResult_OK) goto exit;            
-            cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
+//            cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
             
             if ((result = pl_AudioFileMetaData_FindCuePointWithID (p->metaData, cueID, &cuePointRef, PLANK_NULL)) != PlankResult_OK) goto exit;
 
@@ -1044,7 +1061,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderR
             // comment
             
             if ((result = pl_File_ReadUI ((PlankFileRef)iff, &cueID)) != PlankResult_OK) goto exit;
-            cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
+//            cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
 
             if ((result = pl_AudioFileMetaData_FindCuePointWithID (p->metaData, cueID, &cuePointRef, PLANK_NULL)) != PlankResult_OK) goto exit;
             
@@ -1061,7 +1078,7 @@ static PlankResult pl_AudioFileReader_WAV_ParseChunk_list (PlankAudioFileReaderR
             // labelled text chunk, add this as a region, removing the associated cue point from the cue array
             
             if ((result = pl_File_ReadUI ((PlankFileRef)iff, &cueID)) != PlankResult_OK) goto exit;
-            cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
+//            cueID++; // offset WAV IDs by 1 using AIFF's standard that 0 is invalid
             
             if ((result = pl_AudioFileRegion_Init (&region)) != PlankResult_OK) goto exit;
             cuePointRef = pl_AudioFileRegion_GetAnchorCuePoint (&region);
