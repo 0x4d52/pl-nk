@@ -737,7 +737,12 @@ exit:
 PlankResult pl_AudioFileReader_ReadFrames (PlankAudioFileReaderRef p, const int numFrames, void* data, int *framesRead)
 {
     if (!p->readFramesFunction)
+    {
+        if (framesRead)
+            *framesRead = 0;
+        
         return PlankResult_FunctionsInvalid;
+    }
     
     return ((PlankAudioFileReaderReadFramesFunction)p->readFramesFunction)(p, numFrames, data, framesRead);
 }
@@ -1662,8 +1667,74 @@ exit:
 
 PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
 {
-    (void)p;
-    return PlankResult_OK;
+    PlankResult result = PlankResult_OK;
+    PlankLL readChunkLength, readChunkEnd, pos;
+    PlankIffID readChunkID;
+    PlankIffFileReaderRef iff;
+    PlankDynamicArrayRef block;
+    PlankC* data;
+    int bytesRead;
+    
+    iff = (PlankIffFileReaderRef)p->peer;
+    pos = iff->common.headerInfo.mainHeaderEnd;
+    
+    if ((result = pl_File_SetPosition ((PlankFileRef)iff, pos)) != PlankResult_OK) goto exit;
+    
+    while (pl_File_IsEOF ((PlankFileRef)iff) == PLANK_FALSE)
+    {
+        if ((result = pl_IffFileReader_ParseChunkHeader (iff, 0, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
+        
+        if ((readChunkID.fcc == pl_FourCharCode ("desc")) ||
+            (readChunkID.fcc == pl_FourCharCode ("data")))
+        {
+            // already done...
+            goto next;
+        }
+        else if (readChunkID.fcc == pl_FourCharCode ("mark"))
+        {
+            goto next;
+        }
+        else if (readChunkID.fcc == pl_FourCharCode ("strg"))
+        {
+            goto next;
+        }
+        else if (readChunkID.fcc == pl_FourCharCode ("chan"))
+        {
+            goto next;
+        }
+        else if (readChunkID.fcc == pl_FourCharCode ("ovvw"))
+        {
+            goto next;
+        }
+        else if (readChunkID.fcc != iff->common.headerInfo.junkID.fcc)
+        {
+            // cache others that aren't junk
+            
+            block = pl_DynamicArray_Create();
+            
+            if (block != PLANK_NULL)
+            {
+                if ((result = pl_DynamicArray_InitWithItemSizeAndSize (block, 1, readChunkLength + 8, PLANK_FALSE)) != PlankResult_OK) goto exit;
+                
+                data = (PlankC*)pl_DynamicArray_GetArray (block);
+                
+                *(PlankFourCharCode*)data = readChunkID.fcc;
+                data += 4;
+                *(PlankUI*)data = readChunkLength;
+                data += 4;
+                
+                if ((result = pl_File_Read ((PlankFileRef)iff, data, readChunkLength, &bytesRead)) != PlankResult_OK) goto exit;
+                if ((result = pl_AudioFileMetaData_AddFormatSpecificBlock (p->metaData, block)) != PlankResult_OK) goto exit;
+            }
+        }
+        
+    next:
+        if ((result = pl_File_SetPosition ((PlankFileRef)iff, readChunkEnd)) != PlankResult_OK) goto exit;
+        pos = readChunkEnd;
+    }
+    
+exit:    
+    return result;
 }
 
 PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const PlankLL chunkLength, const PlankLL chunkDataPos)
@@ -1677,7 +1748,7 @@ PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const P
     if ((result = pl_File_ReadUI ((PlankFileRef)p->peer, &numEdits)) != PlankResult_OK) goto exit;
     
     if (p->metaData)
-        pl_AudioFileMetaData_SetEditCount (p->metaData, numEdits); // don't check for error
+        pl_AudioFileMetaData_SetEditCount (p->metaData, numEdits);  // don't check for error
     
     p->dataPosition = chunkDataPos + 4;                             // plus the numEdits field
     audioDataLength = (chunkLength == -1) ? -1 : chunkLength  - 4;  // less the numEdits field
@@ -1692,7 +1763,7 @@ PlankResult pl_AudioFileReader_CAF_ParseData (PlankAudioFileReaderRef p, const P
         {
             p->numFrames = audioDataLength / p->formatInfo.bytesPerFrame;
         
-            if ((chunkLength % p->formatInfo.bytesPerFrame) != 0)
+            if ((audioDataLength % p->formatInfo.bytesPerFrame) != 0)
                 result = PlankResult_AudioFileDataChunkInvalid;
         }
     }

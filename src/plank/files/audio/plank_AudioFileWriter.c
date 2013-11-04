@@ -100,6 +100,88 @@ PlankResult pl_AudioFileWriter_W64_WriteMetaData (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_OggVorbis_WriteMetaData (PlankAudioFileWriterRef p);
 PlankResult pl_AudioFileWriter_Opus_WriteMetaData (PlankAudioFileWriterRef p);
 
+typedef struct PlankIffAudioFileWriter* PlankIffAudioFileWriterRef;
+typedef struct PlankIffAudioFileWriter
+{
+    PlankIffFileWriter iff;
+    PlankDynamicArray temp;
+} PlankIffAudioFileWriter;
+
+static PlankResult pl_IffAudioFileWriter_DeInit (PlankIffAudioFileWriterRef p)
+{
+    PlankResult result = PlankResult_OK;
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    if ((result = pl_IffFileWriter_DeInit (&p->iff)) != PlankResult_OK) goto exit;
+    if ((result = pl_DynamicArray_DeInit (&p->temp)) != PlankResult_OK) goto exit;
+    
+    pl_MemoryZero (p, sizeof (PlankIffAudioFileWriter));
+    
+exit:
+    return result;
+}
+
+static PlankResult pl_IffAudioFileWriter_Destroy (PlankIffAudioFileWriterRef p)
+{
+    PlankResult result;
+    PlankMemoryRef m;
+    
+    result = PlankResult_OK;
+    m = pl_MemoryGlobal();
+    
+    if (p == PLANK_NULL)
+    {
+        result = PlankResult_MemoryError;
+        goto exit;
+    }
+    
+    if ((result = pl_IffAudioFileWriter_DeInit (p)) != PlankResult_OK)
+        goto exit;
+    
+    result = pl_Memory_Free (m, p);
+    
+exit:
+    return result;
+}
+
+static PlankIffAudioFileWriterRef pl_IffAudioFileWriter_Create()
+{
+    PlankMemoryRef m;
+    PlankIffAudioFileWriterRef p;
+    
+    m = pl_MemoryGlobal();
+    p = (PlankIffAudioFileWriterRef)pl_Memory_AllocateBytes (m, sizeof (PlankIffAudioFileWriter));
+    
+    if (p != PLANK_NULL)
+        pl_MemoryZero (p, sizeof (PlankIffAudioFileWriter));
+    
+    return p;
+}
+
+static PlankIffAudioFileWriterRef pl_IffAudioFileWriter_CreateAndInit()
+{
+    PlankIffAudioFileWriterRef p;
+    p = pl_IffAudioFileWriter_Create();
+    
+    if (p != PLANK_NULL)
+    {
+        if (pl_IffFileWriter_Init (&p->iff) != PlankResult_OK)
+            pl_IffAudioFileWriter_Destroy (p);
+        else
+            return p;
+    }
+    
+    return PLANK_NULL;
+}
+
+
+///---
+
 
 PlankAudioFileWriterRef pl_AudioFileWriter_CreateAndInit()
 {
@@ -559,7 +641,7 @@ PlankResult pl_AudioFileWriter_Close (PlankAudioFileWriterRef p)
         case PLANKAUDIOFILE_FORMAT_AIFC:
         case PLANKAUDIOFILE_FORMAT_CAF:
         case PLANKAUDIOFILE_FORMAT_UNKNOWNIFF:
-            result = pl_IffFileWriter_Destroy ((PlankIffFileWriter*)p->peer);
+            result = pl_IffAudioFileWriter_Destroy ((PlankIffAudioFileWriter*)p->peer);
             break;
 #if PLANK_OGGVORBIS
         case PLANKAUDIOFILE_FORMAT_OGGVORBIS:
@@ -645,7 +727,7 @@ PlankResult pl_AudioFileWriter_SetHeaderPad (PlankAudioFileWriterRef p, const Pl
 static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
 {
     PlankResult result = PlankResult_OK;
-    PlankIffFileWriterRef iff;
+    PlankIffAudioFileWriterRef iff;
 
     if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
     {
@@ -691,7 +773,7 @@ static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
         
-    iff = pl_IffFileWriter_CreateAndInit();
+    iff = pl_IffAudioFileWriter_CreateAndInit();
     
     if (!iff)
     {
@@ -701,11 +783,11 @@ static PlankResult pl_AudioFileWriter_WAV_OpenInternal (PlankAudioFileWriterRef 
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_FALSE, "RIFF", "WAVE", PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenReplacing ((PlankIffFileWriterRef)iff, filepath, PLANK_FALSE, "RIFF", "WAVE", PLANKIFFFILE_ID_FCC);
     }
     else
     {
-        result = pl_IffFileWriter_OpenWithFile (iff, file, "RIFF", "WAVE", PLANKIFFFILE_ID_FCC);        
+        result = pl_IffFileWriter_OpenWithFile ((PlankIffFileWriterRef)iff, file, "RIFF", "WAVE", PLANKIFFFILE_ID_FCC);        
     }
     
     if (result != PlankResult_OK)
@@ -737,13 +819,13 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
 {
     PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
-    PlankIffFileWriterRef iff;
+    PlankIffAudioFileWriterRef iff;
     const char* fmt;
     PlankUS encoding;
     
-    iff = (PlankIffFileWriterRef)p->peer;
+    iff = (PlankIffAudioFileWriterRef)p->peer;
     
-    if ((p->formatInfo.numChannels > 2) || (iff->common.headerInfo.mainLength > 0xffffffff))
+    if ((p->formatInfo.numChannels > 2) || (iff->iff.common.headerInfo.mainLength > 0xffffffff))
         return pl_AudioFileWriter_WAVEXT_WriteHeader (p);
     
     fmt = "fmt ";
@@ -755,18 +837,18 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
         default: result = PlankResult_AudioFileInavlidType; goto exit;
     }
     
-    if ((result = pl_IffFileWriter_SeekChunk (iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+    if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
     
     if (!chunkInfo)
     {
-        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_HEADER_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, fmt, 0, PLANKAUDIOFILE_WAV_HEADER_LENGTH, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         
         if (p->headerPad > 0)
         {
-            if ((result = pl_IffFileWriter_WriteChunk (iff, 0, "JUNK", 0, p->headerPad, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+            if ((result = pl_IffFileWriter_WriteChunk ((PlankIffFileWriterRef)iff, 0, "JUNK", 0, p->headerPad, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
         }
         
-        if ((result = pl_IffFileWriter_SeekChunk (iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
+        if ((result = pl_IffFileWriter_SeekChunk ((PlankIffFileWriterRef)iff, 0, fmt, &chunkInfo, 0)) != PlankResult_OK) goto exit;
         
         p->metaDataChunkPosition = chunkInfo->chunkPos + PLANKAUDIOFILE_WAV_HEADER_LENGTH;
         p->dataPosition = p->metaDataChunkPosition + (p->headerPad > 0 ? p->headerPad + 8 : 0) + 8;
@@ -778,7 +860,7 @@ PlankResult pl_AudioFileWriter_WAV_WriteHeader (PlankAudioFileWriterRef p)
         }
     }
     
-    if ((result = pl_IffFileWriter_ResizeChunk (iff, 0, fmt, PLANKAUDIOFILE_WAV_FMT_LENGTH, PLANK_FALSE)) != PlankResult_OK) goto exit;
+    if ((result = pl_IffFileWriter_ResizeChunk ((PlankIffFileWriterRef)iff, 0, fmt, PLANKAUDIOFILE_WAV_FMT_LENGTH, PLANK_FALSE)) != PlankResult_OK) goto exit;
     
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, encoding)) != PlankResult_OK) goto exit;
     if ((result = pl_File_WriteUS ((PlankFileRef)iff, (PlankUS)p->formatInfo.numChannels)) != PlankResult_OK) goto exit;
@@ -1014,7 +1096,7 @@ exit:
 static PlankResult pl_AudioFileWriter_AIFF_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
 {
     PlankResult result = PlankResult_OK;
-    PlankIffFileWriterRef iff;
+    PlankIffAudioFileWriterRef iff;
 
     if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
     {
@@ -1052,15 +1134,15 @@ static PlankResult pl_AudioFileWriter_AIFF_OpenInternal (PlankAudioFileWriterRef
         goto exit;
     }
      
-    iff = pl_IffFileWriter_CreateAndInit();
+    iff = pl_IffAudioFileWriter_CreateAndInit();
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, "FORM", "AIFF", PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenReplacing ((PlankIffFileWriterRef)iff, filepath, PLANK_TRUE, "FORM", "AIFF", PLANKIFFFILE_ID_FCC);
     }
     else
     {
-        result = pl_IffFileWriter_OpenWithFile (iff, file, "FORM", "AIFF", PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenWithFile ((PlankIffFileWriterRef)iff, file, "FORM", "AIFF", PLANKIFFFILE_ID_FCC);
     }
     
     if (result != PlankResult_OK)
@@ -1139,7 +1221,7 @@ PlankResult pl_AudioFileWriter_AIFF_WriteFrames (PlankAudioFileWriterRef p, cons
 static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
 {
     PlankResult result = PlankResult_OK;
-    PlankIffFileWriterRef iff;
+    PlankIffAudioFileWriterRef iff;
     int mode;
     
     if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
@@ -1179,11 +1261,11 @@ static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef
         goto exit;
     }
     
-    iff = pl_IffFileWriter_CreateAndInit();
+    iff = pl_IffAudioFileWriter_CreateAndInit();
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, "FORM", "AIFC", PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenReplacing ((PlankIffFileWriterRef)iff, filepath, PLANK_TRUE, "FORM", "AIFC", PLANKIFFFILE_ID_FCC);
     }
     else
     {
@@ -1195,7 +1277,7 @@ static PlankResult pl_AudioFileWriter_AIFC_OpenInternal (PlankAudioFileWriterRef
             goto exit;
         }
 
-        result = pl_IffFileWriter_OpenWithFile (iff, file, "FORM", "AIFC", PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenWithFile ((PlankIffFileWriterRef)iff, file, "FORM", "AIFC", PLANKIFFFILE_ID_FCC);
     }
     
     if (result != PlankResult_OK)
@@ -1312,7 +1394,7 @@ PlankResult pl_AudioFileWriter_AIFC_WriteFrames (PlankAudioFileWriterRef p, cons
 static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
 {
     PlankResult result = PlankResult_OK;
-    PlankIffFileWriterRef iff;
+    PlankIffAudioFileWriterRef iff;
     int mode;
     
     if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
@@ -1352,11 +1434,11 @@ static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
     
-    iff = pl_IffFileWriter_CreateAndInit();
+    iff = pl_IffAudioFileWriter_CreateAndInit();
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_TRUE, "caff", "", PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenReplacing ((PlankIffFileWriterRef)iff, filepath, PLANK_TRUE, "caff", "", PLANKIFFFILE_ID_FCC);
     }
     else
     {
@@ -1368,7 +1450,7 @@ static PlankResult pl_AudioFileWriter_CAF_OpenInternal (PlankAudioFileWriterRef 
             goto exit;
         }
 
-        result = pl_IffFileWriter_OpenWithFile (iff, file, "caff", "", PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenWithFile ((PlankIffFileWriterRef)iff, file, "caff", "", PLANKIFFFILE_ID_FCC);
     }
     
     if (result != PlankResult_OK)
@@ -1468,7 +1550,7 @@ PlankResult pl_AudioFileWriter_CAF_WriteFrames (PlankAudioFileWriterRef p, const
 static PlankResult pl_AudioFileWriter_W64_OpenInternal (PlankAudioFileWriterRef p, const char* filepath, PlankFileRef file)
 {
     PlankResult result = PlankResult_OK;
-    PlankIffFileWriterRef iff;
+    PlankIffAudioFileWriterRef iff;
     
     if (((filepath) && (file)) || ((filepath == 0) && (file == 0)))
     {
@@ -1514,7 +1596,7 @@ static PlankResult pl_AudioFileWriter_W64_OpenInternal (PlankAudioFileWriterRef 
         goto exit;
     }
     
-    iff = pl_IffFileWriter_CreateAndInit();
+    iff = pl_IffAudioFileWriter_CreateAndInit();
     
     if (!iff)
     {
@@ -1524,11 +1606,11 @@ static PlankResult pl_AudioFileWriter_W64_OpenInternal (PlankAudioFileWriterRef 
     
     if (filepath)
     {
-        result = pl_IffFileWriter_OpenReplacing (iff, filepath, PLANK_FALSE, PLANKAUDIOFILE_W64_RIFF_ID, PLANKAUDIOFILE_W64_WAVE_ID, PLANKIFFFILE_ID_GUID);
+        result = pl_IffFileWriter_OpenReplacing ((PlankIffFileWriterRef)iff, filepath, PLANK_FALSE, PLANKAUDIOFILE_W64_RIFF_ID, PLANKAUDIOFILE_W64_WAVE_ID, PLANKIFFFILE_ID_GUID);
     }
     else
     {
-        result = pl_IffFileWriter_OpenWithFile (iff, file, PLANKAUDIOFILE_W64_RIFF_ID, PLANKAUDIOFILE_W64_WAVE_ID, PLANKIFFFILE_ID_FCC);
+        result = pl_IffFileWriter_OpenWithFile ((PlankIffFileWriterRef)iff, file, PLANKAUDIOFILE_W64_RIFF_ID, PLANKAUDIOFILE_W64_WAVE_ID, PLANKIFFFILE_ID_FCC);
     }
     
     if (result != PlankResult_OK)
