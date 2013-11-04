@@ -228,7 +228,7 @@ static PlankResult pl_IffFileReader_ParseMain (PlankIffFileReaderRef p)
     else
     {
         if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("FORM"))
-            p->common.headerInfo.junkID.fcc = pl_FourCharCode ("    "); // Iff junk ID is four spaces
+            p->common.headerInfo.junkID.fcc = pl_FourCharCode ("    "); // Iff junk ID is four spaces http://www.martinreddy.net/gfx/2d/IFF.txt
         else if (p->common.headerInfo.mainID.fcc == pl_FourCharCode ("RIFF"))
             p->common.headerInfo.junkID.fcc = pl_FourCharCode ("JUNK");
         
@@ -318,7 +318,7 @@ PlankResult pl_IffFileReader_GetMainLength (PlankIffFileReaderRef p, PlankLL* re
 
 PlankResult pl_IffFileReader_GetMainEnd (PlankIffFileReaderRef p, PlankLL* result)
 {
-    *result = (p->common.headerInfo.mainLength < 0) ? -1 : p->common.headerInfo.mainLength + p->common.headerInfo.mainHeaderEnd; // fix ?
+    *result = (p->common.headerInfo.mainLength < 0) ? -1 : p->common.headerInfo.mainLength + p->common.headerInfo.headerLength;
     return PlankResult_OK;
 }
 

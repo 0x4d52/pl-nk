@@ -2626,7 +2626,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
     PlankIffFileWriterRef iff;
     const char* smpl;
     PlankUI smplChunkSize;
-    PlankUI manufacturer, product, samplerData, samplePeriod, smpteFormat, smpteOffset;
+    PlankUI manufacturer, product, samplePeriod, smpteFormat, smpteOffset;
     PlankI baseNote, detune;
     PlankDynamicArrayRef loopPoints;
     PlankAudioFileRegion* loopArray;
@@ -2644,7 +2644,7 @@ static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterR
     if ((result = pl_AudioFileMetaData_GetSamplerData (p->metaData, &manufacturer, &product, &samplePeriod, &smpteFormat, &smpteOffset)) != PlankResult_OK) goto exit;
     if ((result = pl_AudioFileMetaData_GetInstrumentData (p->metaData, &baseNote, &detune, 0, 0, 0, 0, 0)) != PlankResult_OK) goto exit;
     
-    if ((manufacturer | product | samplerData | samplePeriod | smpteFormat | smpteOffset | numLoops) != 0)
+    if ((manufacturer | product | samplePeriod | smpteFormat | smpteOffset | numLoops) != 0)
     {
         smpl = "smpl";
         

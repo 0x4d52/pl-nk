@@ -166,7 +166,7 @@ static PlankResult pl_IffFileWriter_ParseMainInfo (PlankIffFileWriterRef p, cons
             p->common.headerInfo.junkID.fcc         = pl_FourCharCode ("free");
             p->common.headerInfo.lengthSize         = 8;
             p->common.headerInfo.mainHeaderEnd      = 4 + 2 + 2;
-            p->common.headerInfo.headerLength       = 4 + 8;
+            p->common.headerInfo.headerLength       = 4 + 4;
             p->common.headerInfo.alignment          = 2;
         }
         else
@@ -398,6 +398,7 @@ PlankResult pl_IffFileWriter_WriteChunk (PlankIffFileWriterRef p, const PlankLL 
                 
         // for 64-bit actually we don't need to seek the last chunk, just seek to the end from the main length!
         chunkStartPos = p->common.headerInfo.mainLength + p->common.headerInfo.headerLength;// - p->common.headerInfo.mainLengthOffset;
+
         chunkDataPos  = chunkStartPos + idLength + p->common.headerInfo.lengthSize;
         isLastChunk   = PLANK_TRUE;
         isNewChunk    = PLANK_TRUE;

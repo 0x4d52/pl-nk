@@ -472,7 +472,7 @@ const char* pl_AudioFileMetaData_GetDescriptionComment (PlankAudioFileMetaDataRe
     size = (int)pl_DynamicArray_GetSize (&p->descriptionComments);
     comments = (PlankDynamicArray*)pl_DynamicArray_GetArray (&p->descriptionComments);
 
-    return pl_DynamicArray_GetArray (&comments[index]);
+    return comments ? pl_DynamicArray_GetArray (&comments[index]) : 0;
 }
 
 PlankResult pl_AudioFileMetaData_SetOriginatorArtist (PlankAudioFileMetaDataRef p, const char* text)
