@@ -104,7 +104,7 @@ typedef struct PlankIffAudioFileWriter* PlankIffAudioFileWriterRef;
 typedef struct PlankIffAudioFileWriter
 {
     PlankIffFileWriter iff;
-    PlankDynamicArray temp;
+//    PlankDynamicArray temp;
 } PlankIffAudioFileWriter;
 
 static PlankResult pl_IffAudioFileWriter_DeInit (PlankIffAudioFileWriterRef p)
@@ -118,7 +118,7 @@ static PlankResult pl_IffAudioFileWriter_DeInit (PlankIffAudioFileWriterRef p)
     }
     
     if ((result = pl_IffFileWriter_DeInit (&p->iff)) != PlankResult_OK) goto exit;
-    if ((result = pl_DynamicArray_DeInit (&p->temp)) != PlankResult_OK) goto exit;
+//    if ((result = pl_DynamicArray_DeInit (&p->temp)) != PlankResult_OK) goto exit;
     
     pl_MemoryZero (p, sizeof (PlankIffAudioFileWriter));
     

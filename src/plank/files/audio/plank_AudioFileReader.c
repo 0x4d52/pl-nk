@@ -143,7 +143,7 @@ typedef struct PlankIffAudioFileReader* PlankIffAudioFileReaderRef;
 typedef struct PlankIffAudioFileReader
 {
     PlankIffFileReader iff;
-    PlankDynamicArray temp;
+//    PlankDynamicArray temp;
 } PlankIffAudioFileReader;
 
 static PlankResult pl_IffAudioFileReader_DeInit (PlankIffAudioFileReaderRef p)
@@ -157,7 +157,7 @@ static PlankResult pl_IffAudioFileReader_DeInit (PlankIffAudioFileReaderRef p)
     }
     
     if ((result = pl_IffFileReader_DeInit (&p->iff)) != PlankResult_OK) goto exit;
-    if ((result = pl_DynamicArray_DeInit (&p->temp)) != PlankResult_OK) goto exit;
+//    if ((result = pl_DynamicArray_DeInit (&p->temp)) != PlankResult_OK) goto exit;
     
     pl_MemoryZero (p, sizeof (PlankIffAudioFileReader));
     
@@ -1665,6 +1665,75 @@ exit:
     return PlankResult_OK;
 }
 
+typedef struct PlankCAFStringID {
+    
+    PlankUI  stringID;
+    PlankLL  offset;
+} PlankCAFStringID;
+
+static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
+{
+    PlankAudioFileCuePoint cuePoint;
+    PlankResult result = PlankResult_OK;
+    PlankIffFileReaderRef iff;
+    PlankCAFStringID* stringIndicesArray;
+    const char* stringsData;
+    const char* markerString;
+    PlankUI numStrings, numMarkers, i, si;
+    PlankFourCharCode markerType;
+    PlankUI smpteTimeType, markerID, channel, subSample;
+    PlankD markerPosition;
+    PlankC hours, minutes, seconds, frames;
+
+    iff = (PlankIffFileReaderRef)p->peer;
+
+    numStrings = pl_DynamicArray_GetSize (stringIndices);
+    stringIndicesArray = (PlankCAFStringID*)pl_DynamicArray_GetArray (stringIndices);
+    stringsData = (const char*)pl_DynamicArray_GetArray (strings);
+    
+    if ((result = pl_File_ReadUI ((PlankFileRef)iff, &smpteTimeType)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadUI ((PlankFileRef)iff, &numMarkers)) != PlankResult_OK) goto exit;
+
+    for (i = 0; i < numMarkers; ++i)
+    {
+        if ((result = pl_File_ReadFourCharCode ((PlankFileRef)iff, &markerType)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadD            ((PlankFileRef)iff, &markerPosition)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI           ((PlankFileRef)iff, &markerID)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadC            ((PlankFileRef)iff, &hours)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadC            ((PlankFileRef)iff, &minutes)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadC            ((PlankFileRef)iff, &seconds)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadC            ((PlankFileRef)iff, &frames)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI           ((PlankFileRef)iff, &subSample)) != PlankResult_OK) goto exit;
+        if ((result = pl_File_ReadUI           ((PlankFileRef)iff, &channel)) != PlankResult_OK) goto exit;
+        
+        markerString = 0;
+        
+        for (si = 0; si < numStrings; ++si)
+        {
+            if (stringIndicesArray[si].stringID == markerID)
+            {
+                markerString = stringsData + stringIndicesArray[si].offset;
+                break;
+            }
+        }
+        
+        if (markerType == PLANKAUDIOFILE_CAF_MARKERTYPE_GENERIC)
+        {
+            if ((result = pl_AudioFileCuePoint_Init (&cuePoint)) != PlankResult_OK) goto exit;
+            if ((result = pl_AudioFileCuePoint_SetID (&cuePoint, markerID - 1)) != PlankResult_OK) goto exit; // spec recommends nonzero but not insists like AIFF spec, might underflow
+            if ((result = pl_AudioFileCuePoint_SetPosition (&cuePoint, (PlankLL)markerPosition)) != PlankResult_OK) goto exit;
+            if ((result = pl_AudioFileCuePoint_SetType (&cuePoint, PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT)) != PlankResult_OK) goto exit;
+        
+            // maybe add smpte to cue points?
+            
+            if ((result = pl_AudioFileMetaData_AddCuePoint (p->metaData, &cuePoint)) != PlankResult_OK) goto exit;
+        }
+    }
+    
+exit:
+    return result;
+}
+
 PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
 {
     PlankResult result = PlankResult_OK;
@@ -1672,12 +1741,42 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
     PlankIffID readChunkID;
     PlankIffFileReaderRef iff;
     PlankDynamicArrayRef block;
+    PlankDynamicArray stringIndices;
+    PlankDynamicArray strings;
+    PlankCAFStringID* stringIndicesArray;
+    PlankUI stringsDataSize;
+    char* stringsData;
+    PlankUI numStrings, i;
     PlankC* data;
     int bytesRead;
     
+    pl_DynamicArray_Init (&stringIndices);
+    pl_DynamicArray_Init (&strings);
+
     iff = (PlankIffFileReaderRef)p->peer;
-    pos = iff->common.headerInfo.mainHeaderEnd;
     
+    if ((result = pl_IffFileReader_SeekChunk (iff, 0, "strg", &readChunkLength, &pos)) != PlankResult_OK) goto exit;
+    if ((result = pl_File_ReadUI ((PlankFileRef)iff, &numStrings)) != PlankResult_OK) goto exit;
+    
+    // find the strings and cache them
+    if (numStrings > 0)
+    {
+        pl_DynamicArray_InitWithItemSizeAndSize (&stringIndices, sizeof (PlankCAFStringID), numStrings, PLANK_FALSE);
+        stringIndicesArray = pl_DynamicArray_GetArray (&stringIndices);
+        
+        for (i = 0; i < numStrings; ++i)
+        {
+            if ((result = pl_File_ReadUI ((PlankFileRef)iff, &stringIndicesArray[i].stringID)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_ReadLL ((PlankFileRef)iff, &stringIndicesArray[i].offset)) != PlankResult_OK) goto exit;
+        }
+        
+        stringsDataSize = (PlankUI)(readChunkLength - 4 - (numStrings * sizeof (PlankCAFStringID)));
+        pl_DynamicArray_InitWithItemSizeAndSize (&strings, 1, stringsDataSize, PLANK_FALSE);
+        stringsData = pl_DynamicArray_GetArray (&strings);
+        if ((result = pl_File_Read ((PlankFileRef)iff, stringsData, stringsDataSize, PLANK_NULL)) != PlankResult_OK) goto exit;
+    }
+    
+    pos = iff->common.headerInfo.mainHeaderEnd;
     if ((result = pl_File_SetPosition ((PlankFileRef)iff, pos)) != PlankResult_OK) goto exit;
     
     while (pl_File_IsEOF ((PlankFileRef)iff) == PLANK_FALSE)
@@ -1685,6 +1784,7 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
         if ((result = pl_IffFileReader_ParseChunkHeader (iff, 0, &readChunkID, &readChunkLength, &readChunkEnd, &pos)) != PlankResult_OK) goto exit;
         
         if ((readChunkID.fcc == pl_FourCharCode ("desc")) ||
+            (readChunkID.fcc == pl_FourCharCode ("strg")) ||
             (readChunkID.fcc == pl_FourCharCode ("data")))
         {
             // already done...
@@ -1692,11 +1792,7 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
         }
         else if (readChunkID.fcc == pl_FourCharCode ("mark"))
         {
-            goto next;
-        }
-        else if (readChunkID.fcc == pl_FourCharCode ("strg"))
-        {
-            goto next;
+            if ((result = pl_AudioFileReader_CAF_ParseChunk_mark(p, readChunkLength, readChunkEnd, &stringIndices, &strings)) != PlankResult_OK) goto exit;
         }
         else if (readChunkID.fcc == pl_FourCharCode ("chan"))
         {
@@ -1733,7 +1829,10 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
         pos = readChunkEnd;
     }
     
-exit:    
+exit:
+    pl_DynamicArray_DeInit (&stringIndices);
+    pl_DynamicArray_DeInit (&strings);
+    
     return result;
 }
 
