@@ -1674,12 +1674,13 @@ typedef struct PlankCAFStringID {
 static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
 {
     PlankAudioFileCuePoint cuePoint;
+    PlankLL offset;
     PlankResult result = PlankResult_OK;
     PlankIffFileReaderRef iff;
     PlankCAFStringID* stringIndicesArray;
     const char* stringsData;
     const char* markerString;
-    PlankUI numStrings, numMarkers, i, si;
+    PlankUI numStrings, numMarkers, i, si, stringsDataLength;
     PlankFourCharCode markerType;
     PlankUI smpteTimeType, markerID, channel, subSample;
     PlankD markerPosition;
@@ -1690,6 +1691,7 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderR
     numStrings = pl_DynamicArray_GetSize (stringIndices);
     stringIndicesArray = (PlankCAFStringID*)pl_DynamicArray_GetArray (stringIndices);
     stringsData = (const char*)pl_DynamicArray_GetArray (strings);
+    stringsDataLength = pl_DynamicArray_GetSize (strings);
     
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &smpteTimeType)) != PlankResult_OK) goto exit;
     if ((result = pl_File_ReadUI ((PlankFileRef)iff, &numMarkers)) != PlankResult_OK) goto exit;
@@ -1712,7 +1714,8 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderR
         {
             if (stringIndicesArray[si].stringID == markerID)
             {
-                markerString = stringsData + stringIndicesArray[si].offset;
+                offset = stringIndicesArray[si].offset;
+                markerString = stringsData + offset;
                 break;
             }
         }
@@ -1723,7 +1726,12 @@ static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderR
             if ((result = pl_AudioFileCuePoint_SetID (&cuePoint, markerID - 1)) != PlankResult_OK) goto exit; // spec recommends nonzero but not insists like AIFF spec, might underflow
             if ((result = pl_AudioFileCuePoint_SetPosition (&cuePoint, (PlankLL)markerPosition)) != PlankResult_OK) goto exit;
             if ((result = pl_AudioFileCuePoint_SetType (&cuePoint, PLANKAUDIOFILE_CUEPOINTTYPE_CUEPOINT)) != PlankResult_OK) goto exit;
-        
+            
+            if (markerString)
+            {
+                if ((result = pl_AudioFileCuePoint_SetLabel (&cuePoint, markerString)) != PlankResult_OK) goto exit;
+            }
+            
             // maybe add smpte to cue points?
             
             if ((result = pl_AudioFileMetaData_AddCuePoint (p->metaData, &cuePoint)) != PlankResult_OK) goto exit;
@@ -1770,7 +1778,7 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
             if ((result = pl_File_ReadLL ((PlankFileRef)iff, &stringIndicesArray[i].offset)) != PlankResult_OK) goto exit;
         }
         
-        stringsDataSize = (PlankUI)(readChunkLength - 4 - (numStrings * sizeof (PlankCAFStringID)));
+        stringsDataSize = (PlankUI)(readChunkLength - 4 - (numStrings * (sizeof (PlankUI) + sizeof (PlankLL)))); // struct alignment issue, need to calculate raw sizes
         pl_DynamicArray_InitWithItemSizeAndSize (&strings, 1, stringsDataSize, PLANK_FALSE);
         stringsData = pl_DynamicArray_GetArray (&strings);
         if ((result = pl_File_Read ((PlankFileRef)iff, stringsData, stringsDataSize, PLANK_NULL)) != PlankResult_OK) goto exit;
@@ -1792,7 +1800,7 @@ PlankResult pl_AudioFileReader_CAF_ParseMetaData (PlankAudioFileReaderRef p)
         }
         else if (readChunkID.fcc == pl_FourCharCode ("mark"))
         {
-            if ((result = pl_AudioFileReader_CAF_ParseChunk_mark(p, readChunkLength, readChunkEnd, &stringIndices, &strings)) != PlankResult_OK) goto exit;
+            if ((result = pl_AudioFileReader_CAF_ParseChunk_mark (p, readChunkLength, readChunkEnd, &stringIndices, &strings)) != PlankResult_OK) goto exit;
         }
         else if (readChunkID.fcc == pl_FourCharCode ("chan"))
         {
