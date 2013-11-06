@@ -2640,7 +2640,6 @@ exit:
 
 static PlankResult pl_AudioFileWriter_WAV_WriteChunk_bext (PlankAudioFileWriterRef p)
 {
-//    PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
     char description [257];
@@ -2753,7 +2752,6 @@ exit:
 
 static PlankResult pl_AudioFileWriter_WAV_WriteChunk_smpl (PlankAudioFileWriterRef p)
 {
-//    PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
     const char* smpl;
@@ -2831,7 +2829,6 @@ exit:
 
 static PlankResult pl_AudioFileWriter_WAV_WriteChunk_inst (PlankAudioFileWriterRef p)
 {
-//    PlankIffFileWriterChunkInfoRef chunkInfo;
     PlankResult result = PlankResult_OK;
     PlankIffFileWriterRef iff;
     const char* inst;
@@ -3220,9 +3217,224 @@ PlankResult pl_AudioFileWriter_CAF_WritePreDataMetaData (PlankAudioFileWriterRef
     return PlankResult_OK;
 }
 
+static PlankResult pl_AudioFileWriter_CAF_WriteChunk_mark (PlankAudioFileWriterRef p, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
+{
+    PlankResult result = PlankResult_OK;
+    PlankIffFileWriterRef iff;
+    PlankDynamicArrayRef cuePoints;
+    PlankAudioFileCuePoint* cueArray;
+    PlankAudioFileCuePointRef cue;
+    PlankLL markChunkSize;
+    PlankDynamicArray chunkData;
+    PlankFile chunkStream;
+    PlankUI numCues, i;
+    const char* mark;
+    
+    if (!p->metaData)
+        goto exit;
+    
+    iff  = (PlankIffFileWriterRef)p->peer;
+    
+    cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
+    numCues    = pl_DynamicArray_GetSize (cuePoints);
+    
+    pl_File_Init (&chunkStream);
+    pl_DynamicArray_Init (&chunkData);
+    
+    if (numCues > 0)
+    {
+        mark  = "mark";
+        
+        if ((result = pl_DynamicArray_InitWithItemSizeAndCapacity (&chunkData, 1, 512)) != PlankResult_OK) goto exit;
+        
+        pl_File_OpenDynamicArray (&chunkStream, &chunkData, PLANKFILE_BINARY | PLANKFILE_READ | PLANKFILE_WRITE | PLANKFILE_BIGENDIAN);
+        
+        if ((result = pl_File_WriteUI (&chunkStream, 0)) != PlankResult_OK) goto exit; // smpte time type
+        if ((result = pl_File_WriteUI (&chunkStream, numCues)) != PlankResult_OK) goto exit;
+        
+        cueArray = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
+        
+        for (i = 0; i < numCues; ++i)
+        {
+            cue = &cueArray[i];
+            
+            if ((result = pl_File_WriteUI (&chunkStream, PLANKAUDIOFILE_CAF_MARKERTYPE_GENERIC)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteD  (&chunkStream, (PlankD)cue->position)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI (&chunkStream, cue->cueID + 1)) != PlankResult_OK) goto exit;
+            
+            // smpte time
+            if ((result = pl_File_WriteUC (&chunkStream, 0xff)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUC (&chunkStream, 0xff)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUC (&chunkStream, 0xff)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUC (&chunkStream, 0xff)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteUI (&chunkStream, 0xffffffff)) != PlankResult_OK) goto exit;
+            
+            if ((result = pl_File_WriteUI (&chunkStream, 0)) != PlankResult_OK) goto exit; // channel
+        }
+        
+        markChunkSize = pl_DynamicArray_GetSize (&chunkData);
+        
+        if ((result = pl_IffFileWriter_WriteChunk(iff, 0, mark, pl_DynamicArray_GetArray (&chunkData), markChunkSize, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+    }
+    
+exit:
+    pl_File_DeInit (&chunkStream);
+    pl_DynamicArray_DeInit (&chunkData);
+
+    return result;
+}
+
+static PlankResult pl_AudioFileWriter_CAF_WriteChunk_strg (PlankAudioFileWriterRef p, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
+{
+    PlankResult result = PlankResult_OK;
+    PlankIffFileWriterRef iff;
+    PlankCAFStringID* stringIndicesArray;
+    PlankUI stringsDataSize, numStrings, i;
+    PlankLL strgChunkSize;
+    PlankDynamicArray chunkData;
+    PlankFile chunkStream;
+    const char* stringsData;
+    const char* strg;
+    
+    if (!p->metaData)
+        goto exit;
+    
+    iff  = (PlankIffFileWriterRef)p->peer;
+    
+    pl_File_Init (&chunkStream);
+    pl_DynamicArray_Init (&chunkData);
+
+    stringIndicesArray = (PlankCAFStringID*)pl_DynamicArray_GetArray (stringIndices);
+    numStrings = pl_DynamicArray_GetSize (stringIndices);
+    
+    if (numStrings > 0)
+    {
+        strg = "strg";
+        stringsData = (const char*)pl_DynamicArray_GetArray (strings);
+        stringsDataSize = pl_DynamicArray_GetSize (strings);
+
+        // size here is only approximate and should slightly over-budget
+        if ((result = pl_DynamicArray_InitWithItemSizeAndCapacity (&chunkData, 1, stringsDataSize + numStrings * sizeof (PlankCAFStringID))) != PlankResult_OK) goto exit;
+        
+        pl_File_OpenDynamicArray (&chunkStream, &chunkData, PLANKFILE_BINARY | PLANKFILE_READ | PLANKFILE_WRITE | PLANKFILE_BIGENDIAN);
+
+        if ((result = pl_File_WriteUI (&chunkStream, numStrings)) != PlankResult_OK) goto exit;
+
+        for (i = 0; i < numStrings; ++i)
+        {
+            if ((result = pl_File_WriteUI (&chunkStream, stringIndicesArray[i].stringID)) != PlankResult_OK) goto exit;
+            if ((result = pl_File_WriteLL (&chunkStream, stringIndicesArray[i].offset)) != PlankResult_OK) goto exit;
+        }
+        
+        if ((result = pl_File_Write (&chunkStream, stringsData, stringsDataSize)) != PlankResult_OK) goto exit;
+
+        strgChunkSize = pl_DynamicArray_GetSize (&chunkData);
+
+        if ((result = pl_IffFileWriter_WriteChunk (iff, 0, strg, pl_DynamicArray_GetArray (&chunkData), strgChunkSize, PLANKIFFFILEWRITER_MODEAPPEND)) != PlankResult_OK) goto exit;
+    }
+
+exit:
+    pl_File_DeInit (&chunkStream);
+    pl_DynamicArray_DeInit (&chunkData);
+
+    return result;
+}
+
 PlankResult pl_AudioFileWriter_CAF_WritePostDataMetaData (PlankAudioFileWriterRef p)
 {
-    return PlankResult_OK;
+    PlankResult result = PlankResult_OK;
+    PlankIffFileWriterRef iff;
+    PlankDynamicArrayRef cuePoints;
+    PlankAudioFileCuePoint* cueArray;
+    PlankDynamicArrayRef regions;
+    PlankAudioFileRegion* regionArray;
+    PlankDynamicArrayRef loopPoints;
+    PlankAudioFileRegion* loopArray;
+    PlankDynamicArray stringIndices, strings;
+    PlankCAFStringID stringEntry;
+    PlankFile stringsDataStream;
+    const char* label;
+    PlankUI labelLength, numCues, numRegions, numLoops, totalCues, i;
+    
+    pl_File_Init (&stringsDataStream);
+    pl_DynamicArray_Init (&stringIndices);
+    pl_DynamicArray_Init (&strings);
+    
+    if (!p->metaData)
+        goto exit;
+    
+    iff  = (PlankIffFileWriterRef)p->peer;
+    
+    cuePoints  = pl_AudioFileMetaData_GetCuePoints (p->metaData);
+    numCues    = pl_DynamicArray_GetSize (cuePoints);
+    regions    = pl_AudioFileMetaData_GetRegions (p->metaData);
+    numRegions = pl_DynamicArray_GetSize (regions);
+    loopPoints = pl_AudioFileMetaData_GetLoopPoints (p->metaData);
+    numLoops   = pl_DynamicArray_GetSize (loopPoints);
+    totalCues  = numCues + numRegions + numLoops;
+    
+    if (totalCues > 0)
+    {
+        pl_DynamicArray_InitWithItemSizeAndCapacity (&stringIndices, sizeof (PlankCAFStringID), totalCues);
+        pl_DynamicArray_InitWithItemSizeAndCapacity (&strings, 1, 512);
+        pl_File_OpenDynamicArray (&stringsDataStream, &strings, PLANKFILE_BINARY | PLANKFILE_WRITE);
+        
+        cueArray    = (PlankAudioFileCuePoint*)pl_DynamicArray_GetArray (cuePoints);
+        regionArray = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (regions);
+        loopArray   = (PlankAudioFileRegion*)pl_DynamicArray_GetArray (loopPoints);
+        
+        for (i = 0; i < numCues; ++i)
+        {
+            if ((label = pl_AudioFileCuePoint_GetLabel (&cueArray[i])))
+            {
+                if ((labelLength = strlen (label)) > 0)
+                {
+                    stringEntry.stringID = cueArray[i].cueID + 1;
+                    pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
+                    pl_DynamicArray_AddItem (&stringIndices, &stringEntry);
+                    pl_File_Write (&stringsDataStream, label, labelLength + 1);
+                }
+            }
+        }        
+        
+        for (i = 0; i < numRegions; ++i)
+        {
+            if ((label = pl_AudioFileRegion_GetLabel (&regionArray[i])))
+            {
+                if ((labelLength = strlen (label)) > 0)
+                {
+                    stringEntry.stringID = regionArray[i].anchor.cueID + 1;
+                    pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
+                    pl_DynamicArray_AddItem (&stringIndices, &stringEntry);
+                    pl_File_Write (&stringsDataStream, label, labelLength + 1);
+                }
+            }
+        }
+        
+        for (i = 0; i < numLoops; ++i)
+        {
+            if ((label = pl_AudioFileRegion_GetLabel (&loopArray[i])))
+            {
+                if ((labelLength = strlen (label)) > 0)
+                {
+                    stringEntry.stringID = loopArray[i].anchor.cueID + 1;
+                    pl_File_GetPosition (&stringsDataStream, &stringEntry.offset);
+                    pl_DynamicArray_AddItem (&stringIndices, &stringEntry);
+                    pl_File_Write (&stringsDataStream, label, labelLength + 1);
+                }
+            }
+        }
+        
+        if ((result = pl_AudioFileWriter_CAF_WriteChunk_mark (p, &stringIndices, &strings)) != PlankResult_OK) goto exit;
+        if ((result = pl_AudioFileWriter_CAF_WriteChunk_strg (p, &stringIndices, &strings)) != PlankResult_OK) goto exit;        
+    }
+    
+exit:    
+    pl_File_DeInit (&stringsDataStream);
+    pl_DynamicArray_DeInit (&stringIndices);
+    pl_DynamicArray_DeInit (&strings);
+
+    return result;
 }
 
 PlankResult pl_AudioFileWriter_W64_WriteMetaData (PlankAudioFileWriterRef p)

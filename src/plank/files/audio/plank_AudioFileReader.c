@@ -1665,12 +1665,6 @@ exit:
     return PlankResult_OK;
 }
 
-typedef struct PlankCAFStringID {
-    
-    PlankUI  stringID;
-    PlankLL  offset;
-} PlankCAFStringID;
-
 static PlankResult pl_AudioFileReader_CAF_ParseChunk_mark (PlankAudioFileReaderRef p, const PlankUI chunkLength, const PlankLL chunkEnd, PlankDynamicArrayRef stringIndices, PlankDynamicArrayRef strings)
 {
     PlankAudioFileCuePoint cuePoint;
