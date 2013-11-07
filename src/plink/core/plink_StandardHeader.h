@@ -74,8 +74,8 @@
 
 
 #define PLINK_MAJOR_VERSION      0
-#define PLINK_MINOR_VERSION      1
-#define PLINK_BUILDNUMBER        1
+#define PLINK_MINOR_VERSION      3
+#define PLINK_BUILDNUMBER        0
 
 
 
