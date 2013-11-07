@@ -49,6 +49,7 @@ private:
     
 public:
     AudioFileMetaData& operator= (AudioFileMetaData const &other) throw();
+    void copyFrom (AudioFileMetaData const &other) throw();
 
     friend class AudioFileReaderInternal;
     template<class SampleType> friend class AudioFileWriterInternal;

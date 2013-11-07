@@ -51,14 +51,18 @@ AudioFileMetaData::~AudioFileMetaData()
 {
 }
 
-AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const& other) throw()
+void AudioFileMetaData::copyFrom (AudioFileMetaData const &other) throw()
 {
-    if (this != &other)
+    if (peer != other.peer)
     {
         pl_AudioFileMetaData_DeInit (peer);
         pl_AudioFileMetaData_InitCopy (peer, other.peer);
     }
-    
+}
+
+AudioFileMetaData& AudioFileMetaData::operator= (AudioFileMetaData const& other) throw()
+{
+    copyFrom (other);
     return *this;
 }
 
